@@ -21,6 +21,16 @@ Mods: {
 				DisplayName: Miners Sword
 				Tooltip: ""
 			}
+
+			LifeDew: {
+				DisplayName: Life Dew
+				Tooltip: ""
+			}
+
+			OddFertilizer: {
+				DisplayName: Odd Fertilizer
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
