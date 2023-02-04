@@ -1,0 +1,33 @@
+
+Mods: {
+	ExxoAvalonOrigins: {
+		Items: {
+			AeonsEternity: {
+				DisplayName: Aeons Eternity
+				Tooltip: ""
+			}
+
+			ResearchEverything: {
+				DisplayName: Research Everything
+				Tooltip: Researches everything, after you have knowledge it'll only learn modded items.
+			}
+
+			DarklightLance: {
+				DisplayName: Darklight Lance
+				Tooltip: ""
+			}
+
+			MinersSword: {
+				DisplayName: Miners Sword
+				Tooltip: ""
+			}
+		}
+
+		Projectiles: {
+			AeonBeam.DisplayName: Aeon Beam
+			AeonStar.DisplayName: Aeon Star
+			AeonExplosion.DisplayName: Aeon Explosion
+			DarklightLanceProjectile.DisplayName: Darklight Lance Projectile
+		}
+	}
+}

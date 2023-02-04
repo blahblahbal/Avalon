@@ -1,0 +1,3 @@
+displayName = Exxo Avalon Origins
+author = Blahblahbal
+version = 0.1

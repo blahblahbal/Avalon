@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "13BNRbSnFjIl/ihCjLV2KO8XTG9HmrtZoAKa3rdmRJVEtB5u1U4zgp8HEXKjcnUNZDZBD514B63kL/jlcJHr7Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Gamer\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\ExxoAvalonOrigins\\ExxoAvalonOrigins.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gamer\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}
