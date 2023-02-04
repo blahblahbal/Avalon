@@ -16,7 +16,6 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
         {
             Item.damage = 20;
             Item.autoReuse = true;
-            Item.scale = 1.2f;
             Item.rare = ItemRarityID.LightRed;
             Item.Size = new Vector2(32);
             Item.useTime = 23;
