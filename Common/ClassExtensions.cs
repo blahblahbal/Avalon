@@ -16,6 +16,15 @@ namespace ExxoAvalonOrigins.Common;
 
 public static class ClassExtensions
 {
+    public static bool InPillarZone(this Player p)
+    {
+        if (!p.ZoneTowerStardust && !p.ZoneTowerVortex && !p.ZoneTowerSolar)
+        {
+            return p.ZoneTowerNebula;
+        }
+
+        return true;
+    }
     public static void GetPointOnSwungItemPath(float spriteWidth, float spriteHeight, float normalizedPointOnPath, float itemScale, out Vector2 location, out Vector2 outwardDirection, Player player)
     {
         float num = (float)Math.Sqrt(spriteWidth * spriteWidth + spriteHeight * spriteHeight);
@@ -48,4 +57,22 @@ public static class ClassExtensions
 
         return closest;
     }
+
+    public static Rectangle GetDims(this ModTexturedType texturedType) =>
+        Main.netMode == NetmodeID.Server ? Rectangle.Empty : texturedType.GetTexture().Frame();
+
+    public static Rectangle GetDims(this ModItem modItem) =>
+        Main.netMode == NetmodeID.Server ? Rectangle.Empty : modItem.GetTexture().Frame();
+
+    public static Rectangle GetDims(this ModProjectile modProjectile) =>
+        Main.netMode == NetmodeID.Server ? Rectangle.Empty : modProjectile.GetTexture().Frame();
+
+    public static Asset<Texture2D> GetTexture(this ModTexturedType texturedType) =>
+        ModContent.Request<Texture2D>(texturedType.Texture);
+
+    public static Asset<Texture2D> GetTexture(this ModItem modItem) =>
+        ModContent.Request<Texture2D>(modItem.Texture);
+
+    public static Asset<Texture2D> GetTexture(this ModProjectile modProjectile) =>
+        ModContent.Request<Texture2D>(modProjectile.Texture);
 }

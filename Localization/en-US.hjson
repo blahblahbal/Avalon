@@ -18,7 +18,22 @@ Mods: {
 			}
 
 			MinersSword: {
-				DisplayName: Miners Sword
+				DisplayName: Miner's Sword
+				Tooltip: ""
+			}
+
+			BloodstainedHelmet: {
+				DisplayName: Bloodstained Helmet
+				Tooltip: ""
+			}
+
+			BloodstainedChestplate: {
+				DisplayName: Bloodstained Chestplate
+				Tooltip: ""
+			}
+
+			BloodstainedGreaves: {
+				DisplayName: Bloodstained Greaves
 				Tooltip: ""
 			}
 

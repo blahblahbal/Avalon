@@ -10,6 +10,8 @@ namespace ExxoAvalonOrigins.Common;
 
 public class AvalonGlobalNPC : GlobalNPC
 {
+    public static float ModSpawnRate { get; set; } = 0.25f;
+
     /// <summary>
     ///     Finds a type of NPC.
     /// </summary>
