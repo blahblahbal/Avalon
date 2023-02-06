@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using ExxoAvalonOrigins.Projectiles.Melee;
-using ExxoAvalonOrigins.Items.Materials;
+using ExxoAvalonOrigins.Items.Material;
 
 namespace ExxoAvalonOrigins.Items.Weapons.Melee.Hardmode
 {

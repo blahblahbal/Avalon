@@ -1,4 +1,4 @@
-using ExxoAvalonOrigins.Items.Materials;
+using ExxoAvalonOrigins.Items.Material.Bars;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

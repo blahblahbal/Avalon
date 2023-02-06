@@ -22,6 +22,52 @@ Mods: {
 				Tooltip: ""
 			}
 
+			MediationsFlame: {
+				DisplayName: Mediation's Flame
+				Tooltip:
+					'''
+					Tome
+					+5% magic damage, -10% mana cost
+					+60 mana
+					'''
+			}
+
+			BagofBlood: {
+				DisplayName: Bag of Blood
+				Tooltip:
+					'''
+					Blood particles cover you when you move
+					Works in the vanity slot
+					'''
+			}
+
+			BagofFire: {
+				DisplayName: Bag of Fire
+				Tooltip:
+					'''
+					Flame particles cover you when you move
+					Works in the vanity slot
+					'''
+			}
+
+			BagofShadows: {
+				DisplayName: Bag of Shadows
+				Tooltip:
+					'''
+					Shadow particles cover you when you move
+					Works in the vanity slot
+					'''
+			}
+
+			BandofSlime: {
+				DisplayName: Band of Slime
+				Tooltip:
+					'''
+					Reduces damage taken by 5% and negates fall damage
+					All tiles are slippery
+					'''
+			}
+
 			BloodstainedHelmet: {
 				DisplayName: Bloodstained Helmet
 				Tooltip: ""
@@ -50,6 +96,51 @@ Mods: {
 			DullingTotem: {
 				DisplayName: Dulling Totem
 				Tooltip: Provides life regeneration
+			}
+
+			BreezeShard: {
+				DisplayName: Breeze Shard
+				Tooltip: A fragment of flying creatures
+			}
+
+			CorruptShard: {
+				DisplayName: Corrupt Shard
+				Tooltip: A fragment of evil creatures
+			}
+
+			EarthShard: {
+				DisplayName: Earth Shard
+				Tooltip: A fragment of earthen creatures
+			}
+
+			FireShard: {
+				DisplayName: Fire Shard
+				Tooltip: A fragment of fiery creatures
+			}
+
+			FrostShard: {
+				DisplayName: Frost Shard
+				Tooltip: A fragment of icy creatures
+			}
+
+			ToxinShard: {
+				DisplayName: Toxin Shard
+				Tooltip: A fragment of jungle creatures
+			}
+
+			UndeadShard: {
+				DisplayName: Undead Shard
+				Tooltip: A fragment of undead creatures
+			}
+
+			WaterShard: {
+				DisplayName: Water Shard
+				Tooltip: A fragment of water creatures
+			}
+
+			RubybeadHerb: {
+				DisplayName: Rubybead Herb
+				Tooltip: A mystical object containing an unknown force
 			}
 
 			OsmiumBar: {

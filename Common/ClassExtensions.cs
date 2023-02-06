@@ -16,6 +16,14 @@ namespace ExxoAvalonOrigins.Common;
 
 public static class ClassExtensions
 {
+    /// <summary>
+    ///     Helper method for checking if the current item is an armor piece - used for armor prefixes.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <returns>Whether or not the item is an armor piece.</returns>
+    public static bool IsArmor(this Item item) =>
+        (item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1) && !item.vanity;
+    
     public static bool InPillarZone(this Player p)
     {
         if (!p.ZoneTowerStardust && !p.ZoneTowerVortex && !p.ZoneTowerSolar)

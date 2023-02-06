@@ -1,4 +1,4 @@
-﻿using ExxoAvalonOrigins.Items.Materials;
+﻿using ExxoAvalonOrigins.Items.Material.Bars;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,7 +23,11 @@ namespace ExxoAvalonOrigins.Items.Weapons.Ranged.PreHardmode
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ModContent.ItemType<OsmiumBar>(), 13).AddIngredient(ModContent.ItemType<DesertFeather>(), 2).AddTile(TileID.Anvils).Register();
+            CreateRecipe(1)
+                .AddIngredient(ModContent.ItemType<OsmiumBar>(), 13)
+                .AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 2)
+                .AddTile(TileID.Anvils)
+                .Register();
         }
     }
 }

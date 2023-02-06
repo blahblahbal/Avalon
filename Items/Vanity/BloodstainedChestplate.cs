@@ -11,7 +11,6 @@ class BloodstainedChestplate : ModItem
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Bloodstained Chestplate");
         Item.ResearchUnlockCount = 1;
     }
 

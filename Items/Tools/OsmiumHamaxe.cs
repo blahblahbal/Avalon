@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using ExxoAvalonOrigins.Items.Materials;
+using ExxoAvalonOrigins.Items.Material.Bars;
 
 namespace ExxoAvalonOrigins.Items.Tools
 {
@@ -35,7 +35,7 @@ namespace ExxoAvalonOrigins.Items.Tools
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ModContent.ItemType<OsmiumBar>(), 12).AddIngredient(ModContent.ItemType<DesertFeather>(), 1).AddTile(TileID.Anvils).Register();
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<OsmiumBar>(), 12).AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 1).AddTile(TileID.Anvils).Register();
         }
     }
 }

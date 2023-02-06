@@ -1,4 +1,4 @@
-﻿using ExxoAvalonOrigins.Items.Materials;
+﻿using ExxoAvalonOrigins.Items.Material;
 using System;
 using System.Collections.Generic;
 using System.Linq;

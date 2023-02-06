@@ -1,4 +1,4 @@
-﻿using ExxoAvalonOrigins.Items.Materials;
+﻿using ExxoAvalonOrigins.Items.Material.Bars;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -32,7 +32,7 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ModContent.ItemType<OsmiumBar>(), 14).AddIngredient(ModContent.ItemType<DesertFeather>(), 3).AddTile(TileID.Anvils).Register();
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<OsmiumBar>(), 14).AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 3).AddTile(TileID.Anvils).Register();
         }
     }
 }

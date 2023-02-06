@@ -1,11 +1,12 @@
+using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Materials;
+namespace ExxoAvalonOrigins.Items.Material.Shards;
 
-class DesertFeather : ModItem
+class UndeadShard : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -14,9 +15,9 @@ class DesertFeather : ModItem
 
     public override void SetDefaults()
     {
-        Item.rare = ItemRarityID.Green;
-        Item.value = Item.sellPrice(0, 0, 1, 0);
+        Item.rare = ItemRarityID.Blue;
+        Item.Size = new(20);
         Item.maxStack = 9999;
-        Item.Size = new Vector2(16);
+        Item.value = Item.sellPrice(0, 0, 6, 0);
     }
 }

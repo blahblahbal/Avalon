@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using ExxoAvalonOrigins.Items.Materials;
+using ExxoAvalonOrigins.Items.Material.Bars;
 
 namespace ExxoAvalonOrigins.Items.Armors
 {
@@ -39,7 +39,7 @@ namespace ExxoAvalonOrigins.Items.Armors
         {
             CreateRecipe(1)
                 .AddIngredient(ModContent.ItemType<OsmiumBar>(), 15)
-                .AddIngredient(ModContent.ItemType<DesertFeather>(), 4)
+                .AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 4)
                 .AddTile(TileID.Anvils).Register();
         }
     }
