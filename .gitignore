@@ -386,3 +386,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 .idea/
 *.sln.iml
+*.v2
+.vs/ExxoAvalonOrigins/v17/.suo

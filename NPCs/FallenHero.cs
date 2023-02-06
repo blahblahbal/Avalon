@@ -114,15 +114,15 @@ public class FallenHero : ModNPC
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity,
-                Mod.Find<ModGore>("FallenHeroGore1").Type, 0.9f);
+                Mod.Find<ModGore>("FallenHeroGore1").Type, 1f);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity,
-                Mod.Find<ModGore>("FallenHeroGore2").Type, 0.9f);
+                Mod.Find<ModGore>("FallenHeroGore2").Type, 1f);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity,
-                Mod.Find<ModGore>("FallenHeroGore2").Type, 0.9f);
+                Mod.Find<ModGore>("FallenHeroGore2").Type, 1f);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity,
-                Mod.Find<ModGore>("FallenHeroGore3").Type, 0.9f);
+                Mod.Find<ModGore>("FallenHeroGore3").Type, 1f);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity,
-                Mod.Find<ModGore>("FallenHeroGore3").Type, 0.9f);
+                Mod.Find<ModGore>("FallenHeroGore3").Type, 1f);
         }
     }
 

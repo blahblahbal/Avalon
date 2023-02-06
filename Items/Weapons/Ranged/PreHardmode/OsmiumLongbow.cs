@@ -19,6 +19,7 @@ namespace ExxoAvalonOrigins.Items.Weapons.Ranged.PreHardmode
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 0, 50);
             Item.knockBack = 1.4f;
+            Item.damage = 24;
         }
         public override void AddRecipes()
         {

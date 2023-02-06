@@ -118,5 +118,7 @@ Mods: {
 			AeonExplosion.DisplayName: Aeon Constellation
 			DarklightLanceProjectile.DisplayName: Darklight Lance
 		}
+
+		NPCs.FallenHero.DisplayName: Fallen Hero
 	}
 }
