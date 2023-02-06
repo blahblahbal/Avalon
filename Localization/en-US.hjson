@@ -47,6 +47,11 @@ Mods: {
 				Tooltip: Summons Plantera
 			}
 
+			DullingTotem: {
+				DisplayName: Dulling Totem
+				Tooltip: Provides life regeneration
+			}
+
 			OsmiumBar: {
 				DisplayName: Osmium Bar
 				Tooltip: ""
