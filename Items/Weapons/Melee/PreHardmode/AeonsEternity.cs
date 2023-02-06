@@ -27,7 +27,7 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
         {
             Item.CloneDefaults(ItemID.IronBroadsword);
             Item.Size = new Vector2(22);
-            Item.SetWeaponValues(36, 5, 0);
+            Item.SetWeaponValues(40, 5, 0);
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.value = Item.sellPrice(0, 1, 0, 0);
@@ -104,6 +104,7 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
                 .AddIngredient(ItemID.IceBlade)
                 .AddIngredient(ItemID.Bone,50)
                 .AddIngredient(ModContent.ItemType<MinersSword>())
+                .AddIngredient(ModContent.ItemType<OsmiumGreatsword>())
                 .AddTile(TileID.DemonAltar)
                 .Register();
         }

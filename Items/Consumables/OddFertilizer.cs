@@ -27,6 +27,7 @@ class OddFertilizer : ModItem
 
     public override bool CanUseItem(Player player)
     {
+        if(!player.ZoneJungle) return false;
         if (NPC.AnyNPCs(NPCID.Plantera)) return false;
         return true;
     }

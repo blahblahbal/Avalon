@@ -4,7 +4,7 @@ Mods: {
 		Items: {
 			AeonsEternity: {
 				DisplayName: Aeons Eternity
-				Tooltip: ""
+				Tooltip: Occasionally fires an exploding constellation.
 			}
 
 			ResearchEverything: {
@@ -29,15 +29,79 @@ Mods: {
 
 			OddFertilizer: {
 				DisplayName: Odd Fertilizer
+				Tooltip: Summons Plantera
+			}
+
+			OsmiumBar: {
+				DisplayName: Osmium Bar
+				Tooltip: ""
+			}
+
+			OsmiumOre: {
+				DisplayName: Osmium Ore
+				Tooltip: ""
+			}
+
+			DesertFeather: {
+				DisplayName: Desert Feather
+				Tooltip: ""
+			}
+
+			OsmiumPickaxe: {
+				DisplayName: Osmium Pickaxe
+				Tooltip: Can mine hellstone.
+			}
+
+			OsmiumGreatsword: {
+				DisplayName: Osmium Greatsword
+				Tooltip: ""
+			}
+
+			OsmiumHelmet: {
+				DisplayName: Osmium Helmet
+				Tooltip:
+					'''
+					12% increased ranged damage
+					Increases maximum mana by 40
+					'''
+			}
+
+			OsmiumJerkin: {
+				DisplayName: Osmium Jerkin
+				Tooltip: 12% increased melee damage and speed
+			}
+
+			OsmiumTreads: {
+				DisplayName: Osmium Treads
+				Tooltip: 12% increased magic damage
+			}
+
+			OsmiumHamaxe: {
+				DisplayName: Osmium Hamaxe
+				Tooltip: ""
+			}
+
+			OsmiumLongbow: {
+				DisplayName: Osmium Longbow
+				Tooltip: ""
+			}
+
+			OsmiumBrick: {
+				DisplayName: Osmium Brick
+				Tooltip: ""
+			}
+
+			OsmiumBrickWallItem: {
+				DisplayName: Osmium Brick Wall Item
 				Tooltip: ""
 			}
 		}
 
 		Projectiles: {
-			AeonBeam.DisplayName: Aeon Beam
-			AeonStar.DisplayName: Aeon Star
-			AeonExplosion.DisplayName: Aeon Explosion
-			DarklightLanceProjectile.DisplayName: Darklight Lance Projectile
+			AeonBeam.DisplayName: Aeon's Eternity
+			AeonStar.DisplayName: Aeon Constellation
+			AeonExplosion.DisplayName: Aeon Constellation
+			DarklightLanceProjectile.DisplayName: Darklight Lance
 		}
 	}
 }
