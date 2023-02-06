@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.sln
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -388,3 +389,7 @@ FodyWeavers.xsd
 *.sln.iml
 *.v2
 .vs/ExxoAvalonOrigins/v17/.suo
+.vs/ExxoAvalonOrigins/v17/.futdcache.v2
+.vs/ExxoAvalonOrigins/v17/.suo
+.vs/ProjectEvaluation/exxoavalonorigins.metadata.v5.2
+.vs/ProjectEvaluation/exxoavalonorigins.projects.v5.2
