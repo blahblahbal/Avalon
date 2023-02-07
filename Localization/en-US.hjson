@@ -219,26 +219,381 @@ Mods: {
 
 			AdamantiteSlimeBanner: {
 				DisplayName: Adamantite Slime Banner
-				Tooltip: 
-						'''
-						Nearby players get a bonus against: Adamantite Slime
-						'''
+				Tooltip: Nearby players get a bonus against: Adamantite Slime
 			}
 
 			BloodshotEyeBanner: {
 				DisplayName: Bloodshot Eye Banner
-				Tooltip: 
-						'''
-						Nearby players get a bonus against: Bloodshot Eye
-						'''
+				Tooltip: Nearby players get a bonus against: Bloodshot Eye
 			}
 
 			FallenHeroBanner: {
 				DisplayName: Fallen Hero Banner
-				Tooltip: 
-						'''
-						Nearby players get a bonus against: Fallen Hero
-						'''
+				Tooltip: Nearby players get a bonus against: Fallen Hero
+			}
+
+			AegisHalloworBanner: {
+				DisplayName: Aegis Hallowor Banner
+				Tooltip: ""
+			}
+
+			ArmoredHellTortoiseBanner: {
+				DisplayName: Armored Hell Tortoise Banner
+				Tooltip: ""
+			}
+
+			ArmoredWraithBanner: {
+				DisplayName: Armored Wraith Banner
+				Tooltip: ""
+			}
+
+			BactusBanner: {
+				DisplayName: Bactus Banner
+				Tooltip: ""
+			}
+
+			BismuthSlimeBanner: {
+				DisplayName: Bismuth Slime Banner
+				Tooltip: ""
+			}
+
+			BlazeBanner: {
+				DisplayName: Blaze Banner
+				Tooltip: ""
+			}
+
+			BombSkeletonBanner: {
+				DisplayName: Bomb Skeleton Banner
+				Tooltip: ""
+			}
+
+			BronzeSlimeBanner: {
+				DisplayName: Bronze Slime Banner
+				Tooltip: ""
+			}
+
+			CaesiumBruteBanner: {
+				DisplayName: Caesium Brute Banner
+				Tooltip: ""
+			}
+
+			CaesiumSeekerBanner: {
+				DisplayName: Caesium Seeker Banner
+				Tooltip: ""
+			}
+
+			CaesiumStalkerBanner: {
+				DisplayName: Caesium Stalker Banner
+				Tooltip: ""
+			}
+
+			CloudBatBanner: {
+				DisplayName: Cloud Bat Banner
+				Tooltip: ""
+			}
+
+			CobaltSlimeBanner: {
+				DisplayName: Cobalt Slime Banner
+				Tooltip: ""
+			}
+
+			CometTailBanner: {
+				DisplayName: Comet Tail Banner
+				Tooltip: ""
+			}
+
+			CopperSlimeBanner: {
+				DisplayName: Copper Slime Banner
+				Tooltip: ""
+			}
+
+			CougherBanner: {
+				DisplayName: Cougher Banner
+				Tooltip: ""
+			}
+
+			CrystalBonesBanner: {
+				DisplayName: Crystal Bones Banner
+				Tooltip: ""
+			}
+
+			CrystalSpectreBanner: {
+				DisplayName: Crystal Spectre Banner
+				Tooltip: ""
+			}
+
+			CursedFlamerBanner: {
+				DisplayName: Cursed Flamer Banner
+				Tooltip: ""
+			}
+
+			CursedMagmaSkeletonBanner: {
+				DisplayName: Cursed Magma Skeleton Banner
+				Tooltip: ""
+			}
+
+			CursedScepterBanner: {
+				DisplayName: Cursed Scepter Banner
+				Tooltip: ""
+			}
+
+			DarkMatterSlimeBanner: {
+				DisplayName: Dark Matter Slime Banner
+				Tooltip: ""
+			}
+
+			DragonflyBanner: {
+				DisplayName: Dragonfly Banner
+				Tooltip: ""
+			}
+
+			DurataniumSlimeBanner: {
+				DisplayName: Duratanium Slime Banner
+				Tooltip: ""
+			}
+
+			EctoHandBanner: {
+				DisplayName: Ecto Hand Banner
+				Tooltip: ""
+			}
+
+			EctosphereBanner: {
+				DisplayName: Ectosphere Banner
+				Tooltip: ""
+			}
+
+			EvilVultureBanner: {
+				DisplayName: Evil Vulture Banner
+				Tooltip: ""
+			}
+
+			EyeBonesBanner: {
+				DisplayName: Eye Bones Banner
+				Tooltip: ""
+			}
+
+			GargoyleBanner: {
+				DisplayName: Gargoyle Banner
+				Tooltip: ""
+			}
+
+			GoldSlimeBanner: {
+				DisplayName: Gold Slime Banner
+				Tooltip: ""
+			}
+
+			GrossyFloatBanner: {
+				DisplayName: Grossy Float Banner
+				Tooltip: ""
+			}
+
+			GuardianCorruptorBanner: {
+				DisplayName: Guardian Corruptor Banner
+				Tooltip: ""
+			}
+
+			HalloworBanner: {
+				DisplayName: Hallowor Banner
+				Tooltip: ""
+			}
+
+			HellboundLizardBanner: {
+				DisplayName: Hellbound Lizard Banner
+				Tooltip: ""
+			}
+
+			IckslimeBanner: {
+				DisplayName: Ickslime Banner
+				Tooltip: ""
+			}
+
+			ImpactWizardBanner: {
+				DisplayName: Impact Wizard Banner
+				Tooltip: ""
+			}
+
+			IrateBonesBanner: {
+				DisplayName: Irate Bones Banner
+				Tooltip: ""
+			}
+
+			IridiumSlimeBanner: {
+				DisplayName: Iridium Slime Banner
+				Tooltip: ""
+			}
+
+			IronSlimeBanner: {
+				DisplayName: Iron Slime Banner
+				Tooltip: ""
+			}
+
+			JuggernautBruteBanner: {
+				DisplayName: Juggernaut Brute Banner
+				Tooltip: ""
+			}
+
+			JuggernautSorcererBanner: {
+				DisplayName: Juggernaut Sorcerer Banner
+				Tooltip: ""
+			}
+
+			JuggernautSwordsmanBanner: {
+				DisplayName: Juggernaut Swordsman Banner
+				Tooltip: ""
+			}
+
+			LeadSlimeBanner: {
+				DisplayName: Lead Slime Banner
+				Tooltip: ""
+			}
+
+			MatterManBanner: {
+				DisplayName: Matter Man Banner
+				Tooltip: ""
+			}
+
+			MechanicalDiggerBanner: {
+				DisplayName: Mechanical Digger Banner
+				Tooltip: ""
+			}
+
+			MimeBanner: {
+				DisplayName: Mime Banner
+				Tooltip: ""
+			}
+
+			MythrilSlimeBanner: {
+				DisplayName: Mythril Slime Banner
+				Tooltip: ""
+			}
+
+			NaquadahSlimeBanner: {
+				DisplayName: Naquadah Slime Banner
+				Tooltip: ""
+			}
+
+			NickelSlimeBanner: {
+				DisplayName: Nickel Slime Banner
+				Tooltip: ""
+			}
+
+			OrichalcumSlimeBanner: {
+				DisplayName: Orichalcum Slime Banner
+				Tooltip: ""
+			}
+
+			OsmiumSlimeBanner: {
+				DisplayName: Osmium Slime Banner
+				Tooltip: ""
+			}
+
+			PalladiumSlimeBanner: {
+				DisplayName: Palladium Slime Banner
+				Tooltip: ""
+			}
+
+			PlatinumSlimeBanner: {
+				DisplayName: Platinum Slime Banner
+				Tooltip: ""
+			}
+
+			PoisonDartFrogBanner: {
+				DisplayName: Poison Dart Frog Banner
+				Tooltip: ""
+			}
+
+			PyrasiteBanner: {
+				DisplayName: Pyrasite Banner
+				Tooltip: ""
+			}
+
+			QuickCaribeBanner: {
+				DisplayName: Quick Caribe Banner
+				Tooltip: ""
+			}
+
+			RafflesiaBanner: {
+				DisplayName: Rafflesia Banner
+				Tooltip: ""
+			}
+
+			RedAegisBonesBanner: {
+				DisplayName: Red Aegis Bones Banner
+				Tooltip: ""
+			}
+
+			RhodiumSlimeBanner: {
+				DisplayName: Rhodium Slime Banner
+				Tooltip: ""
+			}
+
+			SilverSlimeBanner: {
+				DisplayName: Silver Slime Banner
+				Tooltip: ""
+			}
+
+			TinSlimeBanner: {
+				DisplayName: Tin Slime Banner
+				Tooltip: ""
+			}
+
+			TitaniumSlimeBanner: {
+				DisplayName: Titanium Slime Banner
+				Tooltip: ""
+			}
+
+			TropicalSlimeBanner: {
+				DisplayName: Tropical Slime Banner
+				Tooltip: ""
+			}
+
+			TroxiniumSlimeBanner: {
+				DisplayName: Troxinium Slime Banner
+				Tooltip: ""
+			}
+
+			TungstenSlimeBanner: {
+				DisplayName: Tungsten Slime Banner
+				Tooltip: ""
+			}
+
+			UnstableAnomalyBanner: {
+				DisplayName: Unstable Anomaly Banner
+				Tooltip: ""
+			}
+
+			UnvolanditeMiteBanner: {
+				DisplayName: Unvolandite Mite Banner
+				Tooltip: ""
+			}
+
+			ValkyrieBanner: {
+				DisplayName: Valkyrie Banner
+				Tooltip: ""
+			}
+
+			VampireHarpyBanner: {
+				DisplayName: Vampire Harpy Banner
+				Tooltip: ""
+			}
+
+			VorazylcumMiteBanner: {
+				DisplayName: Vorazylcum Mite Banner
+				Tooltip: ""
+			}
+
+			ZincSlimeBanner: {
+				DisplayName: Zinc Slime Banner
+				Tooltip: ""
+			}
+
+			BloodBarrage: {
+				DisplayName: Blood Barrage
+				Tooltip:
+					'''
+					Uses 4 life
+					Returns life on hit
+					'''
 			}
 		}
 
@@ -248,6 +603,7 @@ Mods: {
 			AeonExplosion.DisplayName: Aeon Constellation
 			DarklightLanceProjectile.DisplayName: Darklight Lance
 			BloodshotShot.DisplayName: Bloodshot Shot
+			BloodBlob.DisplayName: Blood Blob
 		}
 
 		NPCs: {
@@ -255,8 +611,6 @@ Mods: {
 			BloodshotEye.DisplayName: Bloodshot Eye
 		}
 
-		Tiles: {
-			MonsterBanner.MapEntry: Banner
-		}
+		Tiles.MonsterBanner.MapEntry: Banner
 	}
 }
