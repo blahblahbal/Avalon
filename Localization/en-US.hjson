@@ -216,6 +216,30 @@ Mods: {
 				DisplayName: Spawn Tool
 				Tooltip: ""
 			}
+
+			AdamantiteSlimeBanner: {
+				DisplayName: Adamantite Slime Banner
+				Tooltip: 
+						'''
+						Nearby players get a bonus against: Adamantite Slime
+						'''
+			}
+
+			BloodshotEyeBanner: {
+				DisplayName: Bloodshot Eye Banner
+				Tooltip: 
+						'''
+						Nearby players get a bonus against: Bloodshot Eye
+						'''
+			}
+
+			FallenHeroBanner: {
+				DisplayName: Fallen Hero Banner
+				Tooltip: 
+						'''
+						Nearby players get a bonus against: Fallen Hero
+						'''
+			}
 		}
 
 		Projectiles: {
@@ -229,6 +253,10 @@ Mods: {
 		NPCs: {
 			FallenHero.DisplayName: Fallen Hero
 			BloodshotEye.DisplayName: Bloodshot Eye
+		}
+
+		Tiles: {
+			MonsterBanner.MapEntry: Banner
 		}
 	}
 }
