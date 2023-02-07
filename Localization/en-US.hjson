@@ -598,7 +598,11 @@ Mods: {
 
 			BloodBarrage: {
 				DisplayName: Blood Barrage
-				Tooltip: Nearby players get a bonus against: Fallen Hero
+				Tooltip:
+					'''
+					Uses 4 life
+					Returns life on hit
+					'''
 			}
 		}
 
