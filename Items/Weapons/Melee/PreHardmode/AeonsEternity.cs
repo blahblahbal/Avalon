@@ -9,6 +9,7 @@ using Terraria.DataStructures;
 using Steamworks;
 using Terraria.Audio;
 using Terraria.GameContent.Drawing;
+using ExxoAvalonOrigins.Items.Material;
 
 namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
 {
@@ -102,8 +103,8 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
             CreateRecipe(1)
                 .AddIngredient(ItemID.Starfury)
                 .AddIngredient(ItemID.IceBlade)
-                .AddIngredient(ItemID.Bone,50)
                 .AddIngredient(ModContent.ItemType<MinersSword>())
+                .AddIngredient(ModContent.ItemType<DesertLongSword>())
                 .AddIngredient(ModContent.ItemType<OsmiumGreatsword>())
                 .AddTile(TileID.DemonAltar)
                 .Register();
