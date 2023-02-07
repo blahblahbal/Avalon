@@ -206,6 +206,16 @@ Mods: {
 				DisplayName: Osmium Brick Wall Item
 				Tooltip: ""
 			}
+
+			BloodshotLens: {
+				DisplayName: Bloodshot Lens
+				Tooltip: ""
+			}
+
+			SpawnTool: {
+				DisplayName: Spawn Tool
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -213,8 +223,12 @@ Mods: {
 			AeonStar.DisplayName: Aeon Constellation
 			AeonExplosion.DisplayName: Aeon Constellation
 			DarklightLanceProjectile.DisplayName: Darklight Lance
+			BloodshotShot.DisplayName: Bloodshot Shot
 		}
 
-		NPCs.FallenHero.DisplayName: Fallen Hero
+		NPCs: {
+			FallenHero.DisplayName: Fallen Hero
+			BloodshotEye.DisplayName: Bloodshot Eye
+		}
 	}
 }
