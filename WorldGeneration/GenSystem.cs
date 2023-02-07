@@ -16,13 +16,24 @@ namespace ExxoAvalonOrigins.WorldGeneration
 
             // The first step is an Ore. Most vanilla ores are generated in a step called "Shinies", so for maximum compatibility, we will also do this.
             // First, we find out which step "Shinies" is.
+
+            GenPass currentPass;
+
             int ShiniesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
 
             if (ShiniesIndex != -1)
             {
                 // Next, we insert our pass directly after the original "Shinies" pass.
                 // ExampleOrePass is a class seen bellow
-                tasks.Insert(ShiniesIndex + 1, new OsmiumPass("Adding Precious Metals", 237.4298f));
+                tasks.Insert(ShiniesIndex + 1, new OsmiumPass("Adding Osmium", 237.4298f));
+            }
+
+            int index = tasks.FindIndex(genPass => genPass.Name == "Vines");
+            if (index != -1)
+            {
+                currentPass = new Hooks.DungeonRemoveCrackedBricks();
+                tasks.Insert(index + 1, currentPass);
+                totalWeight += currentPass.Weight;
             }
         }
     }

@@ -1,6 +1,30 @@
 
 Mods: {
 	ExxoAvalonOrigins: {
+		Config: {
+			ItemHeader: Options
+
+			DungeonRevert: {
+				Label: Dungeon Generation Revert
+				Tooltip: Reverts the normal Dungeon generation to pre-1.4
+			}
+
+			VanillaTextureReplacement: {
+				Label: Vanilla Texture Replacement
+				Tooltip: Changes some vanilla textures
+			}
+
+			Renames: {
+				Label: Vanilla Item Renames
+				Tooltip: Renames some vanilla items
+			}
+
+			Screenshake: {
+				Label: No Screenshake
+				Tooltip: Disables any effects that shake the screen.
+			}
+		}
+
 		Items: {
 			AeonsEternity: {
 				DisplayName: Aeons Eternity
