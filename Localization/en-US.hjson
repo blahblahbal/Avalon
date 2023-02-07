@@ -628,6 +628,21 @@ Mods: {
 					Returns life on hit
 					'''
 			}
+
+			Beak: {
+				DisplayName: Beak
+				Tooltip: ""
+			}
+
+			DesertLongSword: {
+				DisplayName: Desert Long Sword
+				Tooltip: ""
+			}
+
+			SanguineKatana: {
+				DisplayName: Sanguine Katana
+				Tooltip: "Uses 2 life \nReturns life on hit"
+			}
 		}
 
 		Projectiles: {
@@ -637,6 +652,7 @@ Mods: {
 			DarklightLanceProjectile.DisplayName: Darklight Lance
 			BloodshotShot.DisplayName: Bloodshot Shot
 			BloodBlob.DisplayName: Blood Blob
+			DesertLongswordSandstorm.DisplayName: Desert Longsword Sandstorm
 		}
 
 		NPCs: {

@@ -104,7 +104,7 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
                 .AddIngredient(ItemID.Starfury)
                 .AddIngredient(ItemID.IceBlade)
                 .AddIngredient(ModContent.ItemType<MinersSword>())
-                .AddIngredient(ModContent.ItemType<DesertLongSword>())
+                .AddIngredient(ItemID.AntlionClaw)
                 .AddIngredient(ModContent.ItemType<OsmiumGreatsword>())
                 .AddTile(TileID.DemonAltar)
                 .Register();
