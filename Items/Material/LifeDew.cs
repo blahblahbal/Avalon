@@ -14,7 +14,7 @@ public class LifeDew : ModItem
     public override void SetDefaults()
     { 
         Item.rare = ItemRarityID.Yellow;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.value = 400000;
         Item.Size = new Vector2(24);
     }
