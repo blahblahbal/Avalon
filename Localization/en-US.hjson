@@ -641,7 +641,11 @@ Mods: {
 
 			SanguineKatana: {
 				DisplayName: Sanguine Katana
-				Tooltip: "Uses 2 life \nReturns life on hit"
+				Tooltip:
+					'''
+					Uses 2 life 
+					Returns life on hit
+					'''
 			}
 		}
 

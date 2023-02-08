@@ -286,7 +286,7 @@ public class MonsterBanner : ModTile
                 //    t = ModContent.NPCType<NPCs.RedAegisBonesHelmet>();
                 //    break;
                 case 7:
-                    t = ModContent.NPCType<NPCs.BloodshotEye>();
+                    t = ModContent.NPCType<NPCs.PreHardmode.BloodshotEye>();
                     break;
                 //case 8:
                 //    t = ModContent.NPCType<NPCs.Dragonfly>();
@@ -454,7 +454,7 @@ public class MonsterBanner : ModTile
                 //    t = ModContent.NPCType<NPCs.CursedFlamer>();
                 //    break;
                 case 69:
-                    t = ModContent.NPCType<NPCs.FallenHero>();
+                    t = ModContent.NPCType<NPCs.PreHardmode.FallenHero>();
                     break;
                 //case 70:
                 //    t = ModContent.NPCType<NPCs.QuickCaribe>();

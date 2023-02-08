@@ -10,7 +10,7 @@ using ExxoAvalonOrigins.Common;
 using ExxoAvalonOrigins.Projectiles.Hostile;
 using Terraria.Audio;
 
-namespace ExxoAvalonOrigins.NPCs;
+namespace ExxoAvalonOrigins.NPCs.PreHardmode;
 
 public class BloodshotEye : ModNPC
 {
@@ -62,16 +62,16 @@ public class BloodshotEye : ModNPC
             NPC.ai[1] = 0;
             NPC.aiStyle = 2;
             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(7, 9), 0).RotatedBy(NPC.Center.AngleTo(Main.player[NPC.target].Center)), ModContent.ProjectileType<BloodshotShot>(), NPC.damage, 0, 255);
-            for(int i = 0; i < 2; i++)
+            for (int i = 0; i < 2; i++)
             {
-                int p = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4,7), 0).RotatedBy(NPC.Center.AngleTo(Main.player[NPC.target].Center)).RotateRandom(MathHelper.Pi / 32), ModContent.ProjectileType<BloodshotShot>(), NPC.damage, 0, 255);
+                int p = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4, 7), 0).RotatedBy(NPC.Center.AngleTo(Main.player[NPC.target].Center)).RotateRandom(MathHelper.Pi / 32), ModContent.ProjectileType<BloodshotShot>(), NPC.damage, 0, 255);
                 Main.projectile[p].Size = new Vector2(8);
             }
-            SoundEngine.PlaySound(SoundID.Item17,NPC.Center);
+            SoundEngine.PlaySound(SoundID.Item17, NPC.Center);
             NPC.velocity = new Vector2(-5, 0).RotatedBy(NPC.rotation);
             if (NPC.ai[2] < 30)
             {
-                NPC.ai[2]+= 2;
+                NPC.ai[2] += 2;
             }
         }
     }
@@ -125,9 +125,9 @@ public class BloodshotEye : ModNPC
     {
         if (NPC.life <= 0)
         {
-            for(int i = 0; i < 20; i++)
+            for (int i = 0; i < 20; i++)
             {
-                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, Main.rand.NextFloat(-3,3),Main.rand.NextFloat(-3,6), 0, default, Main.rand.NextFloat(1.7f,2.3f));
+                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-3, 6), 0, default, Main.rand.NextFloat(1.7f, 2.3f));
             }
             if (Main.netMode != NetmodeID.Server)
             {

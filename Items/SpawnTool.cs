@@ -1,4 +1,4 @@
-﻿using ExxoAvalonOrigins.NPCs;
+﻿using ExxoAvalonOrigins.NPCs.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;

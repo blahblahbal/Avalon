@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -44,6 +45,10 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
             int healthSucked = 2;
             CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.DamagedFriendly, healthSucked, dramatic: false, dot: false);
             player.statLife -= healthSucked;
+            if(player.statLife <= 0)
+            {
+                player.Hurt(PlayerDeathReason.ByCustomReason($"{player.name}'s soul has been entombed within a sword."),healthSucked,1,false,true,false,-1,false);
+            }
             return true;
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)

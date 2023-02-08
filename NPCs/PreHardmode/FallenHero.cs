@@ -9,7 +9,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.NPCs;
+namespace ExxoAvalonOrigins.NPCs.PreHardmode;
 
 public class FallenHero : ModNPC
 {
@@ -65,8 +65,8 @@ public class FallenHero : ModNPC
             }
         }
 
-        if (NPC.velocity.Y != 0f || (NPC.direction == -1 && NPC.velocity.X > 0f) ||
-            (NPC.direction == 1 && NPC.velocity.X < 0f))
+        if (NPC.velocity.Y != 0f || NPC.direction == -1 && NPC.velocity.X > 0f ||
+            NPC.direction == 1 && NPC.velocity.X < 0f)
         {
             NPC.frameCounter = 0.0;
             NPC.frame.Y = frameHeight * 2;

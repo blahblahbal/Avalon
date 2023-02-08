@@ -45,7 +45,10 @@ class BloodBarrage : ModItem
         int healthSucked = 4;
         CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.DamagedFriendly, healthSucked, dramatic: false, dot: false);
         player.statLife -= healthSucked;
-
+        if (player.statLife <= 0)
+        {
+            player.Hurt(PlayerDeathReason.ByCustomReason($"{player.name} forgot their blood is necessary."), healthSucked, 1, false, true, false, -1, false);
+        }
         SoundEngine.PlaySound(note, player.Center);
 
         return true;
