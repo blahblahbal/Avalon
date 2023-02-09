@@ -107,9 +107,9 @@ public class PlacedBars : ModTile
             //    //toDrop = ModContent.ItemType<SuperhardmodeBar>();
             //    DustType = DustID.CrimtaneWeapons;
             //    break;
-            //case 16:
-            //    toDrop = ModContent.ItemType<EnchantedBar>();
-            //    break;
+            case 16:
+                toDrop = ModContent.ItemType<EnchantedBar>();
+                break;
             //case 17:
             //    //toDrop = ModContent.ItemType<BerserkerBar>();
             //    DustType = DustID.Ice_Pink;

@@ -28,12 +28,22 @@ Mods: {
 		Items: {
 			AeonsEternity: {
 				DisplayName: Aeons Eternity
-				Tooltip: Occasionally fires an exploding constellation.
+				Tooltip: Occasionally fires an exploding constellation
+			}
+
+			Sporalash: {
+				DisplayName: Sporalash
+				Tooltip: Has a chance to poison
+			}
+
+			BloodyArrow: {
+				DisplayName: Bloody Arrow
+				Tooltip: ""
 			}
 
 			ResearchEverything: {
 				DisplayName: Research Everything
-				Tooltip: Researches everything, after you have knowledge it'll only learn modded items.
+				Tooltip: Researches everything, after you have knowledge it'll only learn modded items
 			}
 
 			DarklightLance: {
@@ -174,6 +184,11 @@ Mods: {
 			RubybeadHerb: {
 				DisplayName: Rubybead Herb
 				Tooltip: A mystical object containing an unknown force
+			}
+
+			EnchantedBar: {
+				DisplayName: Enchanted Bar
+				Tooltip: ""
 			}
 
 			OsmiumBar: {
@@ -656,6 +671,8 @@ Mods: {
 			DarklightLanceProjectile.DisplayName: Darklight Lance
 			BloodshotShot.DisplayName: Bloodshot Shot
 			BloodBlob.DisplayName: Blood Blob
+			BloodyArrow.DisplayName: Bloody Arrow
+			Sporalash.DisplayName: Sporalash
 			DesertLongswordSandstorm.DisplayName: Desert Longsword Sandstorm
 		}
 
@@ -663,7 +680,13 @@ Mods: {
 			FallenHero.DisplayName: Fallen Hero
 			BloodshotEye.DisplayName: Bloodshot Eye
 		}
-
+		Buffs: {
+			Bleeding: {
+				DisplayName: "Bleeding"
+				Description: '''Losing life'''
+			}
+		}
 		Tiles.MonsterBanner.MapEntry: Banner
+		Tiles.PlacedBars.MapEntry: Placed Bar
 	}
 }

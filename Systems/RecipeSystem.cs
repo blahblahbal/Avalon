@@ -35,7 +35,7 @@ public class RecipeSystem : ModSystem
         //    ModContent.ItemType<Items.Weapons.Magic.TourmalineStaff>(),
         //    ModContent.ItemType<Items.Weapons.Magic.ZirconStaff>()
         //});
-        //RecipeGroup.RegisterGroup("Avalon:GemStaves", groupGemStaves);
+        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:GemStaves", groupGemStaves);
 
         //var groupSilverBarMagicStorage = new RecipeGroup(() => "Any Silver Bar", new int[]
         //{
@@ -99,7 +99,7 @@ public class RecipeSystem : ModSystem
         //    ItemID.RichGravestone4,
         //    ItemID.RichGravestone5
         //});
-        //RecipeGroup.RegisterGroup("Avalon:Tombstones", groupTombstones);
+        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Tombstones", groupTombstones);
 
         //RecipeGroup.RegisterGroup("MagicStorage:AnyTombstone", groupTombstones);
 
@@ -137,7 +137,7 @@ public class RecipeSystem : ModSystem
         //    ModContent.ItemType<HolyWings>(),
         //    ModContent.ItemType<EtherealWings>()
         //});
-        //RecipeGroup.RegisterGroup("Avalon:Wings", groupWings);
+        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Wings", groupWings);
         //var groupWorkBenches = new RecipeGroup(() => "Any Work Bench", new int[]
         //{
         //    ItemID.WorkBench,
@@ -180,7 +180,7 @@ public class RecipeSystem : ModSystem
         //    ModContent.ItemType<Items.Placeable.Crafting.ResistantWoodWorkBench>(),
         //    ModContent.ItemType<Items.Placeable.Crafting.VertebraeWorkBench>()
         //});
-        //RecipeGroup.RegisterGroup("Avalon:WorkBenches", groupWorkBenches);
+        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:WorkBenches", groupWorkBenches);
 
         //var groupHerbs = new RecipeGroup(() => "Any Herb", new int[]
         //{
@@ -197,7 +197,7 @@ public class RecipeSystem : ModSystem
         //    ModContent.ItemType<Holybird>(),
         //    //ModContent.ItemType<Items.TwilightPlume>(),
         //});
-        //RecipeGroup.RegisterGroup("Avalon:Herbs", groupHerbs);
+        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Herbs", groupHerbs);
 
         //var groupTier1Watch = new RecipeGroup(() => "Any Copper Watch", new int[]
         //{
@@ -205,7 +205,7 @@ public class RecipeSystem : ModSystem
         //    ItemID.TinWatch,
         //    ModContent.ItemType<BronzeWatch>()
         //});
-        //RecipeGroup.RegisterGroup("Avalon:Tier1Watch", groupTier1Watch);
+        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Tier1Watch", groupTier1Watch);
 
         //var groupTier2Watch = new RecipeGroup(() => "Any Silver Watch", new int[]
         //{
@@ -215,13 +215,13 @@ public class RecipeSystem : ModSystem
         //});
         //RecipeGroup.RegisterGroup("Avalon:Tier2Watch", groupTier2Watch);
 
-        //var groupTier3Watch = new RecipeGroup(() => "Any Gold Watch", new int[]
-        //{
-        //    ItemID.GoldWatch,
-        //    ItemID.PlatinumWatch,
-        //    ModContent.ItemType<BismuthWatch>()
-        //});
-        //RecipeGroup.RegisterGroup("Avalon:Tier3Watch", groupTier3Watch);
+        var groupTier3Watch = new RecipeGroup(() => "Any Gold Watch", new int[]
+        {
+            ItemID.GoldWatch,
+            ItemID.PlatinumWatch,
+            //ModContent.ItemType<BismuthWatch>()
+        });
+        RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Tier3Watch", groupTier3Watch);
 
         var groupGoldBar = new RecipeGroup(() => "Any Gold Bar", new int[]
         {
@@ -230,7 +230,7 @@ public class RecipeSystem : ModSystem
             //ModContent.ItemType<BismuthBar>()
         });
 
-        RecipeGroup.RegisterGroup("Avalon:GoldBar", groupGoldBar);
+        RecipeGroup.RegisterGroup("ExxoAvalonOrigins:GoldBar", groupGoldBar);
 
         //if (RecipeGroup.recipeGroupIDs.ContainsKey("IronBar"))
         //{
@@ -245,7 +245,7 @@ public class RecipeSystem : ModSystem
         //    ItemID.TinBar,
         //    ModContent.ItemType<BronzeBar>()
         //});
-        //RecipeGroup.RegisterGroup("Avalon:CopperBar", groupCopperBar);
+        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:CopperBar", groupCopperBar);
 
         //var groupSilverBar = new RecipeGroup(() => "Any Silver Bar", new int[]
         //{
@@ -253,6 +253,6 @@ public class RecipeSystem : ModSystem
         //    ItemID.TungstenBar,
         //    ModContent.ItemType<ZincBar>()
         //});
-        //RecipeGroup.RegisterGroup("Avalon:SilverBar", groupSilverBar);
+        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:SilverBar", groupSilverBar);
     }
 }

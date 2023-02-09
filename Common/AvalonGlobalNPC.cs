@@ -5,13 +5,14 @@ using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
+using ExxoAvalonOrigins.Buffs;
 
 namespace ExxoAvalonOrigins.Common;
 
 public class AvalonGlobalNPC : GlobalNPC
 {
     public static float ModSpawnRate { get; set; } = 0.25f;
-
+    public static int BleedTime = 60 * 7;
     /// <summary>
     ///     Finds a type of NPC.
     /// </summary>
@@ -344,6 +345,16 @@ public class AvalonGlobalNPC : GlobalNPC
         return result;
     }
 
+    public override void DrawEffects(NPC npc, ref Color drawColor)
+    {
+        if (npc.HasBuff<Bleeding>())
+        {
+            for (int i = 0; i < npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks; i++)
+            {
+                Dust.NewDust(npc.position, npc.width, npc.height, DustID.Blood);
+            }
+        }
+    }
     public override bool CheckDead(NPC npc)
     {
         if (npc.townNPC && npc.life <= 0)
@@ -372,35 +383,30 @@ public class AvalonGlobalNPC : GlobalNPC
                         {
                             t = ItemID.GreenCap;
                         }
-
                         break;
                     case NPCID.DyeTrader:
                         if (Main.rand.NextBool(8))
                         {
                             t = ItemID.DyeTradersScimitar;
                         }
-
                         break;
                     case NPCID.Painter:
                         if (Main.rand.NextBool(10))
                         {
                             t = ItemID.PainterPaintballGun;
                         }
-
                         break;
                     case NPCID.DD2Bartender:
                         if (Main.rand.NextBool(8))
                         {
                             t = ItemID.AleThrowingGlove;
                         }
-
                         break;
                     case NPCID.Stylist:
                         if (Main.rand.NextBool(8))
                         {
                             t = ItemID.StylistKilLaKillScissorsIWish;
                         }
-
                         break;
                     case NPCID.Clothier:
                         t = ItemID.RedHat;
@@ -411,14 +417,12 @@ public class AvalonGlobalNPC : GlobalNPC
                             t = ItemID.PartyGirlGrenade;
                             s = Main.rand.Next(30, 61);
                         }
-
                         break;
                     case NPCID.TaxCollector:
                         if (Main.rand.NextBool(8))
                         {
                             t = 3351;
                         }
-
                         break;
                     case NPCID.TravellingMerchant:
                         t = ItemID.PeddlersHat;
@@ -427,17 +431,14 @@ public class AvalonGlobalNPC : GlobalNPC
                         t = ItemID.PrincessWeapon;
                         break;
                 }
-
                 if (t > 0)
                 {
                     int a = Item.NewItem(npc.GetSource_Loot(), npc.position, 16, 16, t, s);
                     NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a);
                 }
-
                 // Main.npc[npc.whoAmI].NPCLoot();
                 SoundEngine.PlaySound(SoundID.NPCDeath1, npc.position);
             }
-
             return false;
         }
 
