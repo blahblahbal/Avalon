@@ -18,7 +18,7 @@ class Beak : ModItem
         //Item.createTile = ModContent.TileType<Tiles.Beak>();
         Item.useTime = 10;
         Item.useTurn = true;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.value = 50;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;

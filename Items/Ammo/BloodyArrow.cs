@@ -27,7 +27,7 @@ class BloodyArrow : ModItem
         Item.knockBack = 3f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.BloodyArrow>();
         Item.value = Item.sellPrice(0, 0, 0, 8);
-        Item.maxStack = 2000;
+        Item.maxStack = 9999;
         Item.height = dims.Height;
     }
     public override void AddRecipes()

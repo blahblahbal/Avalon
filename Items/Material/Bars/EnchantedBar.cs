@@ -18,7 +18,7 @@ class EnchantedBar : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.useTurn = true;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.PlacedBars>();
         Item.placeStyle = 16;

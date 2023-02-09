@@ -679,14 +679,19 @@ Mods: {
 		NPCs: {
 			FallenHero.DisplayName: Fallen Hero
 			BloodshotEye.DisplayName: Bloodshot Eye
+			OreSlime.DisplayName: Ore Slime
 		}
+
 		Buffs: {
 			Bleeding: {
-				DisplayName: "Bleeding"
-				Description: '''Losing life'''
+				DisplayName: Bleeding
+				Description: Losing life
 			}
 		}
-		Tiles.MonsterBanner.MapEntry: Banner
-		Tiles.PlacedBars.MapEntry: Placed Bar
+
+		Tiles: {
+			MonsterBanner.MapEntry: Banner
+			PlacedBars.MapEntry: Placed Bar
+		}
 	}
 }
