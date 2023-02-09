@@ -10,8 +10,6 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName.SetDefault("Sanguine Katana");
-            //Tooltip.SetDefault("Uses 2 life \nReturns life on hit");
             Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()

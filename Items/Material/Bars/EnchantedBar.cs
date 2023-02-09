@@ -1,11 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+using ExxoAvalonOrigins.Common;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ExxoAvalonOrigins.Items.Material.Bars;
 
-public class OsmiumBar : ModItem
+class EnchantedBar : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -14,22 +15,26 @@ public class OsmiumBar : ModItem
 
     public override void SetDefaults()
     {
+        Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.maxStack = 9999;
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.PlacedBars>();
-        Item.placeStyle = 4;
-        Item.rare = ItemRarityID.Orange;
-
+        Item.placeStyle = 16;
+        Item.rare = ItemRarityID.Green;
+        Item.width = dims.Width;
         Item.useTime = 10;
-        Item.value = Item.sellPrice(0, 0, 36, 0);
+        Item.value = Item.sellPrice(0, 0, 50, 0);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
-        Item.Size = new Vector2(24);
+        Item.height = dims.Height;
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Placeable.OsmiumOre>(), 4).AddTile(TileID.Furnaces).Register();
+        Recipe.Create(Type)
+            .AddIngredient(ItemID.FallenStar)
+            .AddRecipeGroup(RecipeGroupID.IronBar)
+            .AddTile(TileID.Furnaces).Register();
     }
 }
