@@ -15,7 +15,7 @@ namespace ExxoAvalonOrigins.Items.Weapons.Ranged.PreHardmode
 
         public override void SetDefaults()
         {
-            Item.DefaultToBow(17, 9f, true);
+            Item.DefaultToBow(17, 9f);
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 0, 50);
             Item.knockBack = 1.4f;
