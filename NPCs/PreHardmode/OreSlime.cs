@@ -20,7 +20,7 @@ public class OreSlime : ModNPC
     {
         WhichOre = Main.rand.Next(1,Ores.Length);
         NPC.color= OreColor[WhichOre];
-        NPC.color *= 0.3f;
+        NPC.color *= 0.5f;
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
