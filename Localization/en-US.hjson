@@ -844,6 +844,66 @@ Mods: {
 					Returns life on hit
 					'''
 			}
+
+			PandemiteBar: {
+				DisplayName: Pandemite Bar
+				Tooltip: ""
+			}
+
+			Booger: {
+				DisplayName: Booger
+				Tooltip: ""
+			}
+
+			PandemiteOre: {
+				DisplayName: Pandemite Ore
+				Tooltip: ""
+			}
+
+			YuckyBit: {
+				DisplayName: Yucky Bit
+				Tooltip: ""
+			}
+
+			ApocalyptusWood: {
+				DisplayName: Apocalyptus Wood
+				Tooltip: ""
+			}
+
+			BismuthBrick: {
+				DisplayName: Bismuth Brick
+				Tooltip: ""
+			}
+
+			BleachedEbony: {
+				DisplayName: Bleached Ebony
+				Tooltip: ""
+			}
+
+			BronzeBrick: {
+				DisplayName: Bronze Brick
+				Tooltip: ""
+			}
+
+			ChunkstoneBlock: {
+				DisplayName: Chunkstone Block
+				Tooltip: ""
+			}
+
+			Coughwood: {
+				DisplayName: Coughwood
+				Tooltip: ""
+			}
+
+			NickelBrick: {
+				DisplayName: Nickel Brick
+				Tooltip: ""
+			}
+
+			ZincBrick: {
+				DisplayName: Zinc Brick
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
