@@ -20,7 +20,7 @@ class OddFertilizer : ModItem
         Item.rare = ItemRarityID.LightRed;
         Item.useTime = 45;
         Item.useStyle = ItemUseStyleID.HoldUp;
-        Item.maxStack = 20;
+        Item.maxStack = 9999;
         Item.useAnimation = 45;
         Item.Size = new Vector2(24);
     }

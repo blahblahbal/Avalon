@@ -1,6 +1,8 @@
 
 Mods: {
 	ExxoAvalonOrigins: {
+		CommonItemTooltip.TomeMaterial: Tome Material
+
 		Config: {
 			ItemHeader: Options
 
@@ -11,7 +13,7 @@ Mods: {
 
 			VanillaTextureReplacement: {
 				Label: Vanilla Texture Replacement
-				Tooltip: Changes some vanilla textures
+				Tooltip: Changes some vanilla textures (DOES NOTHING YET)
 			}
 
 			Renames: {
@@ -21,7 +23,7 @@ Mods: {
 
 			Screenshake: {
 				Label: No Screenshake
-				Tooltip: Disables any effects that shake the screen.
+				Tooltip: Disables any effects that shake the screen. (DOES NOTHING YET)
 			}
 		}
 
@@ -31,9 +33,79 @@ Mods: {
 				Tooltip: Occasionally fires an exploding constellation
 			}
 
+			FlowerofTheJungle: {
+				DisplayName: Flower of The Jungle
+				Tooltip: ""
+			}
+
+			FrozenLyre: {
+				DisplayName: Frozen Lyre
+				Tooltip: ""
+			}
+
+			GlacierStaff: {
+				DisplayName: Glacier Staff
+				Tooltip: Shoots a fragile ball of ice
+			}
+
+			BlahsPicksawTierII: {
+				DisplayName: Blah's Picksaw (Tier II)
+				Tooltip: The user can mine at warp speed
+			}
+
+			Catalyzer: {
+				DisplayName: Catalyzer
+				Tooltip: Used to convert items to their counterparts
+			}
+
 			Sporalash: {
 				DisplayName: Sporalash
 				Tooltip: Has a chance to poison
+			}
+
+			Moonfury: {
+				DisplayName: Moonfury
+				Tooltip: ""
+			}
+
+			Boltstone: {
+				DisplayName: Boltstone
+				Tooltip: ""
+			}
+
+			Heartstone: {
+				DisplayName: Heartstone
+				Tooltip: ""
+			}
+
+			Starstone: {
+				DisplayName: Starstone
+				Tooltip: ""
+			}
+
+			Peridot: {
+				DisplayName: Peridot
+				Tooltip: ""
+			}
+
+			Tourmaline: {
+				DisplayName: Tourmaline
+				Tooltip: ""
+			}
+
+			Zircon: {
+				DisplayName: Zircon
+				Tooltip: ""
+			}
+
+			BoltstoneBrick: {
+				DisplayName: Boltstone Brick
+				Tooltip: ""
+			}
+
+			HeartstoneBrick: {
+				DisplayName: Heartstone Brick
+				Tooltip: ""
 			}
 
 			BloodyArrow: {
@@ -56,6 +128,16 @@ Mods: {
 				Tooltip: ""
 			}
 
+			PointingLaser: {
+				DisplayName: Pointing Laser
+				Tooltip:
+					'''
+					Used for crafting the Eye of Oblivion
+					Can be pointed
+					Beam changes color based on your team
+					'''
+			}
+
 			MediationsFlame: {
 				DisplayName: Mediation's Flame
 				Tooltip:
@@ -64,6 +146,66 @@ Mods: {
 					+5% magic damage, -10% mana cost
 					+60 mana
 					'''
+			}
+
+			PortablePylon: {
+				DisplayName: Portable Pylon
+				Tooltip:
+					'''
+					Teleports you to the last saved location
+					Right click to set a waypoint at your current location
+					Maximum of 1 saved location
+					'''
+			}
+
+			AmethystAmulet: {
+				DisplayName: Amethyst Amulet
+				Tooltip: 5% increased magic damage
+			}
+
+			DiamondAmulet: {
+				DisplayName: Diamond Amulet
+				Tooltip: ""
+			}
+
+			EmeraldAmulet: {
+				DisplayName: Emerald Amulet
+				Tooltip: 5% increased ranged damage
+			}
+
+			PeridotAmulet: {
+				DisplayName: Peridot Amulet
+				Tooltip: 5% increased summon damage
+			}
+
+			RubyAmulet: {
+				DisplayName: Ruby Amulet
+				Tooltip: Increases maximum life by 40
+			}
+
+			SapphireAmulet: {
+				DisplayName: Sapphire Amulet
+				Tooltip: Increases maximum mana by 40
+			}
+
+			TopazAmulet: {
+				DisplayName: Topaz Amulet
+				Tooltip: 5% increased melee damage
+			}
+
+			TourmalineAmulet: {
+				DisplayName: Tourmaline Amulet
+				Tooltip: 5% increased critical strike chance
+			}
+
+			ZirconAmulet: {
+				DisplayName: Zircon Amulet
+				Tooltip: 5% increased critical strike damage
+			}
+
+			AmuletofPower: {
+				DisplayName: Amulet of Power
+				Tooltip: Increases all stats
 			}
 
 			BagofBlood: {
@@ -184,6 +326,46 @@ Mods: {
 			RubybeadHerb: {
 				DisplayName: Rubybead Herb
 				Tooltip: A mystical object containing an unknown force
+			}
+
+			BronzeOre: {
+				DisplayName: Bronze Ore
+				Tooltip: ""
+			}
+
+			NickelOre: {
+				DisplayName: Nickel Ore
+				Tooltip: ""
+			}
+
+			ZincOre: {
+				DisplayName: Zinc Ore
+				Tooltip: ""
+			}
+
+			BismuthOre: {
+				DisplayName: Bismuth Ore
+				Tooltip: ""
+			}
+
+			BronzeBar: {
+				DisplayName: Bronze Bar
+				Tooltip: ""
+			}
+
+			NickelBar: {
+				DisplayName: Nickel Bar
+				Tooltip: ""
+			}
+
+			ZincBar: {
+				DisplayName: Zinc Bar
+				Tooltip: ""
+			}
+
+			BismuthBar: {
+				DisplayName: Bismuth Bar
+				Tooltip: ""
 			}
 
 			EnchantedBar: {
@@ -673,7 +855,12 @@ Mods: {
 			BloodBlob.DisplayName: Blood Blob
 			BloodyArrow.DisplayName: Bloody Arrow
 			Sporalash.DisplayName: Sporalash
+			Moonfury.DisplayName: Moonfury
+			GlacierBall.DisplayName: Glacier Ball
+			JungleFire.DisplayName: Jungle Fire
+			IceNote.DisplayName: Ice Note
 			DesertLongswordSandstorm.DisplayName: Desert Longsword Sandstorm
+			PointingLaser.DisplayName: Pointing Laser
 		}
 
 		NPCs: {
@@ -692,6 +879,12 @@ Mods: {
 		Tiles: {
 			MonsterBanner.MapEntry: Banner
 			PlacedBars.MapEntry: Placed Bar
+			Boltstone.MapEntry: Boltstone
+			Heartstone.MapEntry: Heartstone
+			Starstone.MapEntry: Starstone
+			Peridot.MapEntry: Peridot
+			Tourmaline.MapEntry: Tourmaline
+			Zircon.MapEntry: Zircon
 		}
 	}
 }

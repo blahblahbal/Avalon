@@ -22,12 +22,12 @@ class OsmiumBrickWallItem : ModItem
         Item.useTime = 10;
         Item.createWall = ModContent.WallType<Wall.OsmiumBrickWall>();
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.useAnimation = 15;
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<OsmiumBrick>()).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.OsmiumBrick>()).AddTile(TileID.WorkBenches).Register();
         CreateRecipe(1).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
     }
 }

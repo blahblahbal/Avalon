@@ -25,7 +25,7 @@ namespace ExxoAvalonOrigins.WorldGeneration
             {
                 // Next, we insert our pass directly after the original "Shinies" pass.
                 // ExampleOrePass is a class seen bellow
-                tasks.Insert(ShiniesIndex + 1, new OsmiumPass("Adding Osmium", 237.4298f));
+                tasks.Insert(ShiniesIndex + 1, new Passes.OreGenPreHardmode("Adding Avalon Ores", 237.4298f));
             }
 
             int index = tasks.FindIndex(genPass => genPass.Name == "Vines");
