@@ -15,7 +15,7 @@ public class OsmiumBrick : ModTile
         Main.tileBrick[Type] = true;
         Main.tileMerge[Type][TileID.WoodBlock] = true;
         Main.tileMerge[TileID.WoodBlock][Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.OsmiumBrick>();
+        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.OsmiumBrick>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.OsmiumDust>();
     }

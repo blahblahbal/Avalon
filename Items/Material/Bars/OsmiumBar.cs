@@ -30,6 +30,6 @@ public class OsmiumBar : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Placeable.OsmiumOre>(), 4).AddTile(TileID.Furnaces).Register();
+        CreateRecipe(1).AddIngredient(ModContent.ItemType<Ores.OsmiumOre>(), 4).AddTile(TileID.Furnaces).Register();
     }
 }
