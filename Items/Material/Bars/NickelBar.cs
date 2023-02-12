@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material.Bar;
+namespace ExxoAvalonOrigins.Items.Material.Bars;
 
 class NickelBar : ModItem
 {

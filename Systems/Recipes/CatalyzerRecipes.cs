@@ -1,5 +1,4 @@
 ﻿using ExxoAvalonOrigins.Items.Material;
-using ExxoAvalonOrigins.Items.Material.Bar;
 using ExxoAvalonOrigins.Items.Material.Bars;
 using ExxoAvalonOrigins.Items.Material.Ores;
 using ExxoAvalonOrigins.Items.Placeable.Tile;
