@@ -98,6 +98,21 @@ Mods: {
 				Tooltip: ""
 			}
 
+			LargePeridot: {
+				DisplayName: Large Peridot
+				Tooltip: For Capture the Gem. It drops when you die
+			}
+
+			LargeTourmaline: {
+				DisplayName: Large Tourmaline
+				Tooltip: For Capture the Gem. It drops when you die
+			}
+
+			LargeZircon: {
+				DisplayName: Large Zircon
+				Tooltip: For Capture the Gem. It drops when you die
+			}
+
 			BoltstoneBrick: {
 				DisplayName: Boltstone Brick
 				Tooltip: ""
