@@ -932,7 +932,7 @@ Mods: {
 
 			BloodyNecklace: {
 				DisplayName: Bloody Necklace
-				Tooltip: "Melee attacks inflict bleeding and 15 increased armor penetration"
+				Tooltip: Melee attacks inflict bleeding and 15 increased armor penetration
 			}
 		}
 

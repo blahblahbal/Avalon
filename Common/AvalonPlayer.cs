@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -76,6 +77,56 @@ public class AvalonPlayer : ModPlayer
             }
         }
     }
+
+    public override void PreUpdate()
+    {
+        if (Player.whoAmI == Main.myPlayer)
+        {
+            if (Player.trashItem.type == ModContent.ItemType<LargeZircon>() ||
+                Player.trashItem.type == ModContent.ItemType<LargeTourmaline>() ||
+                Player.trashItem.type == ModContent.ItemType<LargePeridot>())
+            {
+                Player.trashItem.SetDefaults();
+            }
+        }
+    }
+
+    public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+    {
+        if (Main.myPlayer == Player.whoAmI)
+        {
+            Player.trashItem.SetDefaults();
+            if (Player.difficulty == 0)
+            {
+                for (int i = 0; i < 59; i++)
+                {
+                    if (Player.inventory[i].stack > 0 &&
+                        (Player.inventory[i].type == ModContent.ItemType<LargeZircon>() ||
+                         Player.inventory[i].type == ModContent.ItemType<LargeTourmaline>() ||
+                         Player.inventory[i].type == ModContent.ItemType<LargePeridot>()))
+                    {
+                        int num = Item.NewItem(Player.GetSource_Death(), (int)Player.position.X, (int)Player.position.Y,
+                            Player.width, Player.height, Player.inventory[i].type);
+                        Main.item[num].netDefaults(Player.inventory[i].netID);
+                        Main.item[num].Prefix(Player.inventory[i].prefix);
+                        Main.item[num].stack = Player.inventory[i].stack;
+                        Main.item[num].velocity.Y = Main.rand.Next(-20, 1) * 0.2f;
+                        Main.item[num].velocity.X = Main.rand.Next(-20, 21) * 0.2f;
+                        Main.item[num].noGrabDelay = 100;
+                        Main.item[num].favorited = false;
+                        Main.item[num].newAndShiny = false;
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                        {
+                            NetMessage.SendData(MessageID.SyncItem, -1, -1, null, num);
+                        }
+
+                        Player.inventory[i].SetDefaults();
+                    }
+                }
+            }
+        }
+    }
+
     public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
     {
         if (crit)
