@@ -105,10 +105,10 @@ public class AvalonGlobalNPCInstance : GlobalNPC
             {
                 mult = 6;
             }
-            npc.lifeRegen -= mult * BleedStacks;
-            if (damage < BleedStacks)
+            npc.lifeRegen -= mult * BleedStacks * 2;
+            if (damage < BleedStacks * 2)
             {
-                damage = BleedStacks;
+                damage = BleedStacks * 2;
             }
         }
         if (Virulent)

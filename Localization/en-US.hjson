@@ -904,6 +904,16 @@ Mods: {
 				DisplayName: Zinc Brick
 				Tooltip: ""
 			}
+
+			BlackWhetstone: {
+				DisplayName: Black Whetstone
+				Tooltip: ""
+			}
+
+			BloodyWhetstone: {
+				DisplayName: Bloody Whetstone
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

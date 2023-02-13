@@ -1,4 +1,6 @@
-﻿using ExxoAvalonOrigins.Items.Material;
+﻿using ExxoAvalonOrigins.Items.Accessories;
+using ExxoAvalonOrigins.Items.Accessories.PreHardmode;
+using ExxoAvalonOrigins.Items.Material;
 using ExxoAvalonOrigins.Items.Weapons.Magic.PreHardmode;
 using ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
 using ExxoAvalonOrigins.NPCs.PreHardmode;
@@ -18,16 +20,15 @@ public class AvalonMobDrops : GlobalNPC
             npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<LifeDew>(), 1, 14, 20));
             npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ItemID.ChlorophyteOre, 1, 60, 120));
         }
-        //Blood Barrage & Katana Drops
-        if(npc.type is 489 or 490)
+        if(npc.type == NPCID.AngryBones || npc.type >= NPCID.AngryBonesBig && npc.type <= NPCID.AngryBonesBigHelmet)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BloodBarrage>(), 200, 1, 1));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SanguineKatana>(), 200, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BlackWhetstone>(), 100));
         }
-        if (npc.type == ModContent.NPCType<FallenHero>() || npc.type == ModContent.NPCType<BloodshotEye>())
-        {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BloodBarrage>(), 10, 1, 1));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SanguineKatana>(), 10, 1, 1));
-        }
+    }
+    public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+    {
+        globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(),ModContent.ItemType<BloodyWhetstone>(), 160));
+        globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<BloodBarrage>(), 160));
+        globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<SanguineKatana>(), 160));
     }
 }
