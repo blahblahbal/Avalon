@@ -907,12 +907,17 @@ Mods: {
 
 			BlackWhetstone: {
 				DisplayName: Black Whetstone
-				Tooltip: ""
+				Tooltip: Increases melee armor penetration by 10
 			}
 
 			BloodyWhetstone: {
 				DisplayName: Bloody Whetstone
-				Tooltip: ""
+				Tooltip: Melee attacks inflict bleeding
+			}
+
+			BloodyNecklace: {
+				DisplayName: Bloody Necklace
+				Tooltip: "Melee attacks inflict bleeding and 15 increased armor penetration"
 			}
 		}
 
