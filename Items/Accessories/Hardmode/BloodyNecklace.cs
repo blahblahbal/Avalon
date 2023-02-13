@@ -35,7 +35,9 @@ namespace ExxoAvalonOrigins.Items.Accessories.Hardmode
                 .AddIngredient(ModContent.ItemType<BlackWhetstone>())
                 .AddIngredient(ModContent.ItemType<BloodyWhetstone>())
                 .AddIngredient(ItemID.SharkToothNecklace)
-                .AddIngredient(ItemID.SoulofFright, 10);
+                .AddIngredient(ItemID.SoulofFright, 10)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
         }
     }
 }
