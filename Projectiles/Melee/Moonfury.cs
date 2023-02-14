@@ -6,6 +6,7 @@ using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -548,5 +549,21 @@ public class Moonfury : ModProjectile
             }
         }
         return true;
+    }
+    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    {
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(Projectile.Hitbox);
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        base.OnHitNPC(target, damage, knockback, crit);
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
+    }
+    public override void OnHitPvp(Player target, int damage, bool crit)
+    {
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(Projectile.Hitbox);
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        base.OnHitPvp(target, damage, crit);
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
     }
 }

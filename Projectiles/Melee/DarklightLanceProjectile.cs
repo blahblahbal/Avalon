@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.GameContent.Drawing;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -47,10 +49,20 @@ public class DarklightLanceProjectile : SpearTemplate
     }
     public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
     {
-        base.OnHitNPC(target, damage, knockback, crit);
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.TrueExcalibur, settings, Projectile.owner);
+        target.AddBuff(BuffID.ShadowFlame, 360);
     }
     public override void OnHitPvp(Player target, int damage, bool crit)
     {
-        base.OnHitPvp(target, damage, crit);
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.TrueExcalibur, settings, Projectile.owner);
+        target.AddBuff(BuffID.ShadowFlame, 360);
     }
 }

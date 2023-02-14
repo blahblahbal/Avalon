@@ -934,6 +934,11 @@ Mods: {
 				DisplayName: Bloody Necklace
 				Tooltip: Melee attacks inflict bleeding and 15 increased armor penetration
 			}
+
+			DesertLongsword: {
+				DisplayName: Desert Longsword
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
