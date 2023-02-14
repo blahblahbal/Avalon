@@ -1,4 +1,5 @@
 ﻿using ExxoAvalonOrigins.Items.Material;
+using ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
 using ExxoAvalonOrigins.Tiles;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,20 @@ namespace ExxoAvalonOrigins.Common;
 
 public class AvalonGlobalItem : GlobalItem
 {
+    public override void AddRecipes()
+    {
+        // --== Shimmer!!! ==--
+        ModContent.GetInstance<DesertLongsword>().CreateRecipe()
+            .AddIngredient(ItemID.AntlionClaw)
+            .AddCondition(Recipe.Condition.CorruptWorld)
+            .AddCondition(Recipe.Condition.CrimsonWorld)
+            .Register();
+        Recipe MandibleBladeTransmute = Recipe.Create(ItemID.AntlionClaw);
+        MandibleBladeTransmute.AddIngredient(ModContent.ItemType<DesertLongsword>());
+        MandibleBladeTransmute.AddCondition(Recipe.Condition.CorruptWorld);
+        MandibleBladeTransmute.AddCondition(Recipe.Condition.CrimsonWorld);
+        MandibleBladeTransmute.Register();
+    }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
         if(item.type == ItemID.PlanteraBossBag)
