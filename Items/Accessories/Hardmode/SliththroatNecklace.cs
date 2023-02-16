@@ -8,12 +8,10 @@ using Terraria.ModLoader;
 namespace ExxoAvalonOrigins.Items.Accessories.Hardmode 
 {
     [AutoloadEquip(EquipType.Neck)]
-    public class BloodyNecklace : ModItem
+    public class SliththroatNecklace : ModItem
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName.SetDefault("Bloody Whetstone");
-            //Tooltip.SetDefault("Melee attacks inflict bleeding");
             Item.ResearchUnlockCount = 1;
         }
 

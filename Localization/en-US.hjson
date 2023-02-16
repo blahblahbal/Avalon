@@ -939,6 +939,16 @@ Mods: {
 				DisplayName: Desert Longsword
 				Tooltip: ""
 			}
+
+			SliththroatNecklace: {
+				DisplayName: Sliththroat Necklace
+				Tooltip: ""
+			}
+
+			EnchantedShuriken: {
+				DisplayName: Enchanted Shuriken
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -956,6 +966,7 @@ Mods: {
 			IceNote.DisplayName: Ice Note
 			DesertLongswordSandstorm.DisplayName: Desert Longsword Sandstorm
 			PointingLaser.DisplayName: Pointing Laser
+			EnchantedShuriken.DisplayName: Enchanted Shuriken
 		}
 
 		NPCs: {

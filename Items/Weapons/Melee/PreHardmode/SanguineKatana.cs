@@ -2,7 +2,6 @@ using ExxoAvalonOrigins.Common;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using System;
-using System.Numerics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
@@ -73,15 +72,6 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
             ClassExtensions.GetPointOnSwungItemPath(60f, 60f, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
             Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * (float)player.direction * player.gravDir);
             Dust.NewDustPerfect(location2, DustID.Blood, vector2 * 2f, 100, default(Color), 0.7f + Main.rand.NextFloat() * 0.6f);
-            if (Main.rand.NextBool(20))
-            {
-                int num15 = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.Blood, player.velocity.X * 0.2f + (float)(player.direction * 3), player.velocity.Y * 0.2f, 140, default(Color), 0.7f);
-                Main.dust[num15].position = location2;
-                Main.dust[num15].fadeIn = 1.2f;
-                Main.dust[num15].noGravity = true;
-                Main.dust[num15].velocity *= 0.25f;
-                Main.dust[num15].velocity += vector2 * 5f;
-            }
         }
     }
 }
