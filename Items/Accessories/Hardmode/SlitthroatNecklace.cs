@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace ExxoAvalonOrigins.Items.Accessories.Hardmode 
 {
     [AutoloadEquip(EquipType.Neck)]
-    public class SliththroatNecklace : ModItem
+    public class SlitthroatNecklace : ModItem
     {
         public override void SetStaticDefaults()
         {

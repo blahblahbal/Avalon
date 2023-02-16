@@ -949,6 +949,11 @@ Mods: {
 				DisplayName: Enchanted Shuriken
 				Tooltip: ""
 			}
+
+			SlitthroatNecklace: {
+				DisplayName: Slitthroat Necklace
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
