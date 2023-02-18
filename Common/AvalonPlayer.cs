@@ -1,12 +1,10 @@
 ﻿using ExxoAvalonOrigins.Items.Other;
+using ExxoAvalonOrigins.Systems;
+using ExxoAvalonOrigins.Walls;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,11 +20,39 @@ public class AvalonPlayer : ModPlayer
     public bool oldAdjShimmer;
     private int gemCount;
     public bool[] OwnedLargeGems = new bool[10];
+
+    public bool shadowTele;
+    public bool teleportV;
+    public bool tpStam = true;
+    public int tpCD;
+    public bool teleportVWasTriggered;
+
     public override void ResetEffects()
     {
         MagicCritDamage = 1f;
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
+
+        Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
+    }
+
+    public override void PostUpdateEquips()
+    {
+        if (teleportV || tpStam)
+        {
+            if (tpCD > 300)
+            {
+                tpCD = 300;
+            }
+
+            tpCD++;
+        }
+
+        Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown++;
+        if (Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown > 3600)
+        {
+            Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown = 3600;
+        }
     }
 
     public override void PostUpdate()
@@ -80,6 +106,13 @@ public class AvalonPlayer : ModPlayer
 
     public override void PreUpdate()
     {
+        tpStam = !teleportV;
+        if (teleportV)
+        {
+            teleportV = false;
+            teleportVWasTriggered = true;
+        }
+
         if (Player.whoAmI == Main.myPlayer)
         {
             if (Player.trashItem.type == ModContent.ItemType<LargeZircon>() ||
@@ -178,7 +211,102 @@ public class AvalonPlayer : ModPlayer
             }
         }
     }
+    public override void ProcessTriggers(TriggersSet triggersSet)
+    {
+        if (KeybindSystem.ShadowHotkey.JustPressed && tpStam && tpCD >= 300 &&
+            Player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked)
+        {
+            int amt = 90;
+            if (Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrain)
+            {
+                amt *= (int)(Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks *
+                             Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainMult);
+            }
 
+            if (Player.GetModPlayer<AvalonStaminaPlayer>().StatStam >= amt)
+            {
+                Player.GetModPlayer<AvalonStaminaPlayer>().StatStam -= amt;
+                tpCD = 0;
+                if (Main.tile[(int)(Main.mouseX + Main.screenPosition.X) / 16,
+                        (int)(Main.mouseY + Main.screenPosition.Y) / 16].WallType !=
+                    ModContent.WallType<ImperviousBrickWallUnsafe>() &&
+                    Main.tile[(int)(Main.mouseX + Main.screenPosition.X) / 16,
+                        (int)(Main.mouseY + Main.screenPosition.Y) / 16].WallType != WallID.LihzahrdBrickUnsafe)
+                {
+                    for (int m = 0; m < 70; m++)
+                    {
+                        Dust.NewDust(Player.position, Player.width, Player.height, DustID.MagicMirror,
+                            Player.velocity.X * 0.5f, Player.velocity.Y * 0.5f, 150, default, 1.1f);
+                    }
+
+                    Player.position.X = Main.mouseX + Main.screenPosition.X;
+                    Player.position.Y = Main.mouseY + Main.screenPosition.Y;
+                    for (int n = 0; n < 70; n++)
+                    {
+                        Dust.NewDust(Player.position, Player.width, Player.height, DustID.MagicMirror, 0f, 0f, 150,
+                            default, 1.1f);
+                    }
+                }
+            }
+            else if (Player.GetModPlayer<AvalonStaminaPlayer>().StamFlower)
+            {
+                Player.GetModPlayer<AvalonStaminaPlayer>().QuickStamina(amt);
+                if (Player.GetModPlayer<AvalonStaminaPlayer>().StatStam >= amt)
+                {
+                    Player.GetModPlayer<AvalonStaminaPlayer>().StatStam -= amt;
+                    tpCD = 0;
+                    if (Main.tile[(int)(Main.mouseX + Main.screenPosition.X) / 16,
+                            (int)(Main.mouseY + Main.screenPosition.Y) / 16].WallType !=
+                        ModContent.WallType<ImperviousBrickWallUnsafe>() &&
+                        Main.tile[(int)(Main.mouseX + Main.screenPosition.X) / 16,
+                            (int)(Main.mouseY + Main.screenPosition.Y) / 16].WallType != WallID.LihzahrdBrickUnsafe &&
+                        !Main.wallDungeon[
+                            Main.tile[(int)(Main.mouseX + Main.screenPosition.X) / 16,
+                                (int)(Main.mouseY + Main.screenPosition.Y) / 16].WallType])
+                    {
+                        for (int m = 0; m < 70; m++)
+                        {
+                            Dust.NewDust(Player.position, Player.width, Player.height, DustID.MagicMirror,
+                                Player.velocity.X * 0.5f, Player.velocity.Y * 0.5f, 150, default, 1.1f);
+                        }
+
+                        Player.position.X = Main.mouseX + Main.screenPosition.X;
+                        Player.position.Y = Main.mouseY + Main.screenPosition.Y;
+                        for (int n = 0; n < 70; n++)
+                        {
+                            Dust.NewDust(Player.position, Player.width, Player.height, DustID.MagicMirror, 0f, 0f, 150,
+                                default, 1.1f);
+                        }
+                    }
+                }
+            }
+        }
+        else if (KeybindSystem.ShadowHotkey.JustPressed && (teleportV || teleportVWasTriggered) && tpCD >= 300)
+        {
+            teleportVWasTriggered = false;
+            tpCD = 0;
+            if (Main.tile[(int)(Main.mouseX + Main.screenPosition.X) / 16,
+                    (int)(Main.mouseY + Main.screenPosition.Y) / 16].WallType !=
+                ModContent.WallType<ImperviousBrickWallUnsafe>() &&
+                Main.tile[(int)(Main.mouseX + Main.screenPosition.X) / 16,
+                    (int)(Main.mouseY + Main.screenPosition.Y) / 16].WallType != WallID.LihzahrdBrickUnsafe)
+            {
+                for (int m = 0; m < 70; m++)
+                {
+                    Dust.NewDust(Player.position, Player.width, Player.height, DustID.MagicMirror,
+                        Player.velocity.X * 0.5f, Player.velocity.Y * 0.5f, 150, default, 1.1f);
+                }
+
+                Player.position.X = Main.mouseX + Main.screenPosition.X;
+                Player.position.Y = Main.mouseY + Main.screenPosition.Y;
+                for (int n = 0; n < 70; n++)
+                {
+                    Dust.NewDust(Player.position, Player.width, Player.height, DustID.MagicMirror, 0f, 0f, 150, default,
+                        1.1f);
+                }
+            }
+        }
+    }
     #region crit dmg stuff
     public int MultiplyMagicCritDamage(int dmg, float mult = 0f) // dmg = damage before crit application
     {

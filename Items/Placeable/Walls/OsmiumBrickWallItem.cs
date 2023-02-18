@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ExxoAvalonOrigins.Walls;
 
 namespace ExxoAvalonOrigins.Items.Placeable.Walls;
 
@@ -20,7 +21,7 @@ class OsmiumBrickWallItem : ModItem
         Item.Size = new Vector2(16);
         Item.useTurn = true;
         Item.useTime = 10;
-        Item.createWall = ModContent.WallType<Wall.OsmiumBrickWall>();
+        Item.createWall = ModContent.WallType<OsmiumBrickWall>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;

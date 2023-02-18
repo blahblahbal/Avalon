@@ -6,6 +6,10 @@ using Terraria.Chat;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using ExxoAvalonOrigins.Buffs;
+using ExxoAvalonOrigins.Items.Material.TomeMats;
+using Terraria.GameContent.ItemDropRules;
+using ExxoAvalonOrigins.Items.Material.Shards;
+using ExxoAvalonOrigins.Items.Consumables;
 
 namespace ExxoAvalonOrigins.Common;
 
@@ -445,4 +449,107 @@ public class AvalonGlobalNPC : GlobalNPC
         return base.CheckDead(npc);
     }
 
+    public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+    {
+        var notFromStatueCondition = new Conditions.NotFromStatue();
+        var notExpertCondition = new Conditions.NotExpert();
+
+        #region mystical tome mats
+        if (npc.type is NPCID.ManEater or NPCID.Snatcher or NPCID.AngryTrapper)
+        {
+            npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewOrb>(), 25, 1, 1, 4));
+        }
+
+        if (npc.type is NPCID.GiantTortoise or NPCID.IceTortoise or NPCID.Vulture or NPCID.FlyingFish
+            or NPCID.Unicorn)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDust>(), 15));
+        }
+
+        if (npc.type is NPCID.Harpy or NPCID.CaveBat or NPCID.GiantBat or NPCID.JungleBat)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RubybeadHerb>(), 15));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalClaw>(), 20));
+        }
+
+        if (npc.type is NPCID.Hornet or NPCID.BlackRecluse or NPCID.MossHornet or NPCID.HornetFatty
+            or NPCID.HornetHoney
+            or NPCID.HornetLeafy or NPCID.HornetSpikey or NPCID.HornetStingy or NPCID.JungleCreeper
+            or NPCID.JungleCreeperWall or NPCID.BlackRecluseWall)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<StrongVenom>(), 15));
+        }
+
+        if (npc.type is NPCID.Retinazer or NPCID.Spazmatism or NPCID.SkeletronPrime or NPCID.TheDestroyer)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ScrollofTome>(), 8));
+        }
+
+        if (npc.type is NPCID.CorruptSlime or NPCID.Gastropod or NPCID.IlluminantSlime or NPCID.ToxicSludge
+            or NPCID.Crimslime
+            or NPCID.RainbowSlime or NPCID.FloatyGross)
+        {
+            npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewofHerbs>(),
+                25, 1, 1, 4));
+        }
+        #endregion mystical tome mats
+
+        #region shards
+        if (Data.Sets.NPC.Toxic[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ToxinShard>(), 8));
+        }
+
+        if (Data.Sets.NPC.Undead[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<UndeadShard>(), 11));
+        }
+
+        if (Data.Sets.NPC.Fiery[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FireShard>(), 8));
+        }
+
+        if (Data.Sets.NPC.Watery[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WaterShard>(), 8));
+        }
+
+        if (Data.Sets.NPC.Earthen[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EarthShard>(), 12));
+        }
+
+        if (Data.Sets.NPC.Flyer[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BreezeShard>(), 13));
+        }
+
+        if (Data.Sets.NPC.Frozen[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FrostShard>(), 10));
+        }
+
+        if (Data.Sets.NPC.Wicked[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CorruptShard>(), 9));
+        }
+
+        if (Data.Sets.NPC.Arcane[npc.type])
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ArcaneShard>(), 7));
+        }
+
+        if (npc.type is NPCID.ChaosElemental or NPCID.IceElemental or NPCID.IchorSticker or NPCID.Corruptor)// ||
+           // npc.type == ModContent.NPCType<Viris>())
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDiamond>(), 6));
+        }
+        #endregion shards
+
+        if (npc.boss)
+        {
+            npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<StaminaCrystal>(), 4));
+        }
+    }
 }

@@ -1,5 +1,4 @@
-﻿using Avalon.Items.Material;
-using ExxoAvalonOrigins.Common;
+﻿using ExxoAvalonOrigins.Common;
 using ExxoAvalonOrigins.Items.Material.TomeMats;
 using Microsoft.Xna.Framework;
 using Terraria;

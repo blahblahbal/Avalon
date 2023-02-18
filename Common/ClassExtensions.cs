@@ -33,6 +33,20 @@ public static class ClassExtensions
 
         return true;
     }
+
+    /// <summary>
+    ///     A helper method to check if the given Player is touching the ground.
+    /// </summary>
+    /// <param name="player">The player.</param>
+    /// <returns>True if the player is touching the ground, false otherwise.</returns>
+    public static bool IsOnGround(this Player player) =>
+        (Main.tile[(int)(player.position.X / 16f), (int)(player.position.Y / 16f) + 3].HasTile &&
+         Main.tileSolid[
+             Main.tile[(int)(player.position.X / 16f), (int)(player.position.Y / 16f) + 3].TileType]) ||
+        (Main.tile[(int)(player.position.X / 16f) + 1, (int)(player.position.Y / 16f) + 3].HasTile &&
+         Main.tileSolid[
+             Main.tile[(int)(player.position.X / 16f) + 1, (int)(player.position.Y / 16f) + 3].TileType] &&
+         player.velocity.Y == 0f);
     public static void GetPointOnSwungItemPath(float spriteWidth, float spriteHeight, float normalizedPointOnPath, float itemScale, out Vector2 location, out Vector2 outwardDirection, Player player)
     {
         float num = (float)Math.Sqrt(spriteWidth * spriteWidth + spriteHeight * spriteHeight);

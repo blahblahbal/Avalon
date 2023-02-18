@@ -1,6 +1,22 @@
 
 Mods: {
 	ExxoAvalonOrigins: {
+		Keybinds: {
+			"Shadow Teleport.DisplayName": Shadow Teleport
+			"Stamina Sprint.DisplayName": Stamina Sprint
+			"Stamina Dash.DisplayName": Stamina Dash
+			"Toggle Quintuple Jump.DisplayName": Toggle Quintuple Jump
+			"Minion Guide.DisplayName": Minion Guide
+			"Stamina Swimming.DisplayName": Stamina Swimming
+			"Stamina Wall Sliding.DisplayName": Stamina Wall Sliding
+			"Toggle Bubble Boost.DisplayName": Toggle Bubble Boost
+			"Mode Change.DisplayName": Mode Change
+			"Activate Astral Projecting.DisplayName": Activate Astral Projecting
+			"Stamina Rocket Jump.DisplayName": Stamina Rocket Jump
+			"Quick Stamina.DisplayName": Quick Stamina
+			"Stamina Flight Time Restore.DisplayName": Stamina Flight Time Restore
+		}
+
 		CommonItemTooltip.TomeMaterial: Tome Material
 
 		Config: {
@@ -374,8 +390,8 @@ Mods: {
 					'''
 			}
 
-			TomeofTheRiverSpirits: {
-				DisplayName: Tome of The River Spirits
+			TomeoftheRiverSpirits: {
+				DisplayName: Tome of the River Spirits
 				Tooltip:
 					'''
 					Tome
@@ -417,6 +433,15 @@ Mods: {
 			AmethystAmulet: {
 				DisplayName: Amethyst Amulet
 				Tooltip: 5% increased magic damage
+			}
+
+			InertiaBoots: {
+				DisplayName: Inertia Boots
+				Tooltip:
+					'''
+					Allows infinite flight and slow fall and the wearer can run incredibly fast
+					The wearer has a chance to dodge attacks and negates fall damage
+					'''
 			}
 
 			DiamondAmulet: {
@@ -539,6 +564,11 @@ Mods: {
 				Tooltip: Provides life regeneration
 			}
 
+			ArcaneShard: {
+				DisplayName: Arcane Shard
+				Tooltip: A fragment of light creatures
+			}
+
 			BreezeShard: {
 				DisplayName: Breeze Shard
 				Tooltip: A fragment of flying creatures
@@ -631,11 +661,11 @@ Mods: {
 
 			FineLumber: {
 				DisplayName: Fine Lumber
-				Tooltip: 
-						'''
-						Lumber used for producing tomes
-						'Very fine!'
-						'''
+				Tooltip:
+					'''
+					Lumber used for producing tomes
+					'Very fine!'
+					'''
 			}
 
 			Gravel: {
@@ -650,7 +680,7 @@ Mods: {
 
 			MysteriousPage: {
 				DisplayName: Mysterious Page
-				Tooltip: 'It contains unknown symbols'
+				Tooltip: It contains unknown symbols
 			}
 
 			ScrollofTome: {
@@ -1269,6 +1299,41 @@ Mods: {
 				DisplayName: Slitthroat Necklace
 				Tooltip: ""
 			}
+
+			DragonOrb: {
+				DisplayName: Dragon Orb
+				Tooltip: ""
+			}
+
+			TomeForge: {
+				DisplayName: Tome Forge
+				Tooltip: ""
+			}
+
+			FlightTimeScroll: {
+				DisplayName: Flight Time Scroll
+				Tooltip: Unlocks stamina flight time restoration
+			}
+
+			RocketJumpScroll: {
+				DisplayName: Rocket Jump Scroll
+				Tooltip: Unlocks stamina rocket humping
+			}
+
+			TeleportScroll: {
+				DisplayName: Teleport Scroll
+				Tooltip: Unlocks stamina teleport
+			}
+
+			StaminaCrystal: {
+				DisplayName: Stamina Crystal
+				Tooltip: Permanently increases maximum stamina by 30
+			}
+
+			ChaosDust: {
+				DisplayName: Chaos Dust
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -1299,6 +1364,11 @@ Mods: {
 			Bleeding: {
 				DisplayName: Bleeding
 				Description: Losing life
+			}
+
+			StaminaDrain: {
+				DisplayName: Stamina Sickness
+				Description: Stamina usage is increased by
 			}
 		}
 

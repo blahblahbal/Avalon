@@ -13,26 +13,26 @@ public class BuffEffects : ModHook
     {
         //On_Projectile.FishingCheck_RollDropLevels += OnFishingCheckRollDropLevels;
         //CommonCode.DropItemForEachInteractingPlayerOnThePlayer += OnDropItemForEachInteractingPlayerOnThePlayer;
-        //On_Player.AddBuff += OnAddBuff;
+        On_Player.AddBuff += OnAddBuff;
         On_NPC.AddBuff += OnAddBuffNPC;
     }
 
-    /*private static void OnAddBuff(On_Player.orig_AddBuff orig, Player self, int type, int timeToAdd, bool quiet = true, bool foodHack = false)
+    private static void OnAddBuff(On_Player.orig_AddBuff orig, Player self, int type, int timeToAdd, bool quiet = true, bool foodHack = false)
     {
         for (int j = 0; j < 22; j++)
         {
             if (self.buffType[j] == type)
             {
-                if (type == ModContent.BuffType<Buffs.StaminaDrain>())
+                if (type == ModContent.BuffType<StaminaDrain>())
                 {
                     self.buffTime[j] += timeToAdd;
-                    if (self.GetModPlayer<ExxoStaminaPlayer>().StaminaDrainStacks < 5)
+                    if (self.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks < 5)
                     {
-                        self.GetModPlayer<ExxoStaminaPlayer>().StaminaDrainStacks++;
+                        self.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks++;
                     }
-                    if (self.buffTime[j] > ExxoStaminaPlayer.StaminaDrainTime)
+                    if (self.buffTime[j] > AvalonStaminaPlayer.StaminaDrainTime)
                     {
-                        self.buffTime[j] = ExxoStaminaPlayer.StaminaDrainTime;
+                        self.buffTime[j] = AvalonStaminaPlayer.StaminaDrainTime;
                         return;
                     }
                 }
@@ -40,7 +40,7 @@ public class BuffEffects : ModHook
                 {
                     self.buffTime[j] = timeToAdd;
                 }
-                if (type == ModContent.BuffType<Buffs.SkyBlessing>())
+                /*if (type == ModContent.BuffType<Buffs.SkyBlessing>())
                 {
                     self.buffTime[j] += timeToAdd;
                     if (self.GetModPlayer<ExxoBuffPlayer>().SkyStacks < 10)
@@ -76,12 +76,12 @@ public class BuffEffects : ModHook
                 else if (self.buffTime[j] < timeToAdd)
                 {
                     self.buffTime[j] = timeToAdd;
-                }
+                }*/
                 return;
             }
         }
         orig(self, type, timeToAdd, quiet, foodHack);
-    }*/
+    }
 
     private static void OnAddBuffNPC(On_NPC.orig_AddBuff orig, NPC self, int type, int time, bool quiet = false)
     {

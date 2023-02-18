@@ -103,41 +103,42 @@ public class RecipeSystem : ModSystem
 
         //RecipeGroup.RegisterGroup("MagicStorage:AnyTombstone", groupTombstones);
 
-        //var groupWings = new RecipeGroup(() => "Any Wings", new int[]
-        //{
-        //    ItemID.DemonWings,
-        //    ItemID.AngelWings,
-        //    ItemID.ButterflyWings,
-        //    ItemID.FairyWings,
-        //    ItemID.HarpyWings,
-        //    ItemID.BoneWings,
-        //    ItemID.FlameWings,
-        //    ItemID.FrozenWings,
-        //    ItemID.GhostWings,
-        //    ItemID.LeafWings,
-        //    ItemID.BatWings,
-        //    ItemID.BeeWings,
-        //    ItemID.TatteredFairyWings,
-        //    ItemID.SpookyWings,
-        //    ItemID.FestiveWings,
-        //    ItemID.BeetleWings,
-        //    ItemID.FinWings,
-        //    ItemID.FishronWings,
-        //    ItemID.WingsNebula,
-        //    ItemID.WingsSolar,
-        //    ItemID.WingsStardust,
-        //    ItemID.WingsVortex,
-        //    ItemID.FinWings,
-        //    ItemID.MothronWings,
-        //    ItemID.BetsyWings,
-        //    ItemID.SteampunkWings,
-        //    ModContent.ItemType<ContagionWings>(),
-        //    ModContent.ItemType<CrimsonWings>(),
-        //    ModContent.ItemType<CorruptionWings>(),
-        //    ModContent.ItemType<HolyWings>(),
-        //    ModContent.ItemType<EtherealWings>()
-        //});
-        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Wings", groupWings);
+        var groupWings = new RecipeGroup(() => "Any Wings", new int[]
+        {
+            ItemID.DemonWings,
+            ItemID.AngelWings,
+            ItemID.ButterflyWings,
+            ItemID.FairyWings,
+            ItemID.HarpyWings,
+            ItemID.BoneWings,
+            ItemID.FlameWings,
+            ItemID.FrozenWings,
+            ItemID.GhostWings,
+            ItemID.LeafWings,
+            ItemID.BatWings,
+            ItemID.BeeWings,
+            ItemID.TatteredFairyWings,
+            ItemID.SpookyWings,
+            ItemID.FestiveWings,
+            ItemID.BeetleWings,
+            ItemID.FinWings,
+            ItemID.FishronWings,
+            ItemID.WingsNebula,
+            ItemID.WingsSolar,
+            ItemID.WingsStardust,
+            ItemID.WingsVortex,
+            ItemID.FinWings,
+            ItemID.MothronWings,
+            ItemID.BetsyWings,
+            ItemID.SteampunkWings,
+            ItemID.RainbowWings,
+            //ModContent.ItemType<ContagionWings>(),
+            //ModContent.ItemType<CrimsonWings>(),
+            //ModContent.ItemType<CorruptionWings>(),
+            //ModContent.ItemType<HolyWings>(),
+            //ModContent.ItemType<EtherealWings>()
+        });
+        RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Wings", groupWings);
         var groupWorkBenches = new RecipeGroup(() => "Any Work Bench", new int[]
         {
             ItemID.WorkBench,

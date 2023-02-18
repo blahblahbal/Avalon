@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Wall;
+namespace ExxoAvalonOrigins.Walls;
 public class OsmiumBrickWall : ModWall
 {
     public override void SetStaticDefaults()
