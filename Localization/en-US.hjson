@@ -153,6 +153,102 @@ Mods: {
 					'''
 			}
 
+			AdventuresandMishaps: {
+				DisplayName: Adventures and Mishaps
+				Tooltip:
+					'''
+					Tome
+					+60 HP, +5% damage
+					-10% mana cost
+					'''
+			}
+
+			BurningDesire: {
+				DisplayName: Burning Desire
+				Tooltip:
+					'''
+					Tome
+					+40 HP
+					+40 mana
+					'''
+			}
+
+			ChantoftheWaterDragon: {
+				DisplayName: Chant of the Water Dragon
+				Tooltip:
+					'''
+					Tome
+					+20% magic damage
+					'''
+			}
+
+			ChristmasTome: {
+				DisplayName: Christmas Tome
+				Tooltip:
+					'''
+					Tome
+					+3% critical strike chance
+					'''
+			}
+
+			CreatorsTome: {
+				DisplayName: Creator's Tome
+				Tooltip:
+					'''
+					Tome
+					+20% damage, +5% critical strike chance, -20% mana cost
+					25% chance to not consume ammo, 10 defense, +100 HP, +100 mana
+					'''
+			}
+
+			Dominance: {
+				DisplayName: Dominance
+				Tooltip:
+					'''
+					Tome
+					+22% damage, +8% critical strike chance, -10% mana cost
+					20% chance to not consume ammo, 11 defense, +140 mana, +80 HP
+					'''
+			}
+
+			Emperor: {
+				DisplayName: Emperor
+				Tooltip:
+					'''
+					Tome
+					25% increased damage, 12% increased critical strike chance, -20% mana cost
+					30% chance to not consume ammo, 14 defense, +200 mana, +100 HP, +90 stamina
+					'''
+			}
+
+			EternitysMoon: {
+				DisplayName: Eternity's Moon
+				Tooltip:
+					'''
+					Tome
+					+20 mana, -5% mana cost
+					'''
+			}
+
+			FlankersTome: {
+				DisplayName: Flanker's Tome
+				Tooltip:
+					'''
+					Tome
+					+10% melee damage
+					'''
+			}
+
+			LoveUpandDown: {
+				DisplayName: Love Up and Down
+				Tooltip:
+					'''
+					Tome
+					+15% damage, +7% critical strike chance, -25% mana cost
+					20% chance to not consume ammo, 12 defense, +80 HP, +80 mana
+					'''
+			}
+
 			MediationsFlame: {
 				DisplayName: Mediation's Flame
 				Tooltip:
@@ -160,6 +256,151 @@ Mods: {
 					Tome
 					+5% magic damage, -10% mana cost
 					+60 mana
+					'''
+			}
+
+			MistyPeachBlossoms: {
+				DisplayName: Misty Peach Blossoms
+				Tooltip:
+					'''
+					Tome
+					+20 HP
+					+20 mana
+					'''
+			}
+
+			SceneofCarnage: {
+				DisplayName: Scene of Carnage
+				Tooltip:
+					'''
+					Tome
+					15% increased melee damage and speed
+					'''
+			}
+
+			SoutheasternPeacock: {
+				DisplayName: Southeastern Peacock
+				Tooltip:
+					'''
+					Tome
+					+3% critical strike chance, -5% mana cost
+					8% increased minion damage, 5% increased minion knockback
+					'''
+			}
+
+			TaleoftheDolt: {
+				DisplayName: Tale of the Dolt
+				Tooltip:
+					'''
+					Tome
+					+15% melee damage
+					+20 HP, +20 mana
+					'''
+			}
+
+			TaleoftheRedLotus: {
+				DisplayName: Tale of the Red Lotus
+				Tooltip:
+					'''
+					Tome
+					+5% ranged damage
+					+20 HP
+					'''
+			}
+
+			TheHeavenlyScent: {
+				DisplayName: The Heavenly Scent
+				Tooltip:
+					'''
+					Tome
+					+2 life regen
+					'''
+			}
+
+			TheOasisRemembered: {
+				DisplayName: The Oasis Remembered
+				Tooltip:
+					'''
+					Tome
+					20% increased minion damage and knockback
+					'''
+			}
+
+			ThePlumHarvest: {
+				DisplayName: The Plum Harvest
+				Tooltip:
+					'''
+					Tome
+					30% chance to not consume ammo
+					'''
+			}
+
+			TheThreeScholars: {
+				DisplayName: The Three Scholars
+				Tooltip:
+					'''
+					Tome
+					+20 defense
+					'''
+			}
+
+			TheVoidlands: {
+				DisplayName: The Voidlands
+				Tooltip:
+					'''
+					Tome
+					+15% damage, +3% critical strike chance
+					+60 HP, +40 mana
+					'''
+			}
+
+			TheWorld: {
+				DisplayName: The World
+				Tooltip:
+					'''
+					Tome
+					35% increased damage, 20% increased critical strike chance, -25% mana cost
+					30% chance to not consume ammo, 18 defense, +260 mana, +160 HP, +120 stamina
+					'''
+			}
+
+			TomeofDistance: {
+				DisplayName: Tome of Distance
+				Tooltip:
+					'''
+					Tome
+					+15% ranged damage, +40 HP, +20 mana
+					20% chance to not consume ammo
+					'''
+			}
+
+			TomeofTheRiverSpirits: {
+				DisplayName: Tome of The River Spirits
+				Tooltip:
+					'''
+					Tome
+					+15% magic and minion damage
+					-5% mana cost
+					'''
+			}
+
+			TomorrowsPhoenix: {
+				DisplayName: Tomorrow's Phoenix
+				Tooltip:
+					'''
+					Tome
+					8% increased minion damage
+					5% increased minion knockback
+					'''
+			}
+
+			UnderestimatedResolve: {
+				DisplayName: Underestimated Resolve
+				Tooltip:
+					'''
+					Tome
+					+20 HP, +5% ranged damage
+					+4 defense
 					'''
 			}
 
@@ -341,6 +582,80 @@ Mods: {
 			RubybeadHerb: {
 				DisplayName: Rubybead Herb
 				Tooltip: A mystical object containing an unknown force
+			}
+
+			DewofHerbs: {
+				DisplayName: Dew of Herbs
+				Tooltip: A mystical object containing an unknown force
+			}
+
+			DewOrb: {
+				DisplayName: Dew Orb
+				Tooltip: Substance found inside some beast's body
+			}
+
+			ElementDust: {
+				DisplayName: Element Dust
+				Tooltip: Compound of the five elements
+			}
+
+			ElementDiamond: {
+				DisplayName: Element Diamond
+				Tooltip: Compound of the five elements
+			}
+
+			MysticalClaw: {
+				DisplayName: Mystical Claw
+				Tooltip: Part of a beast's body
+			}
+
+			MysticalTotem: {
+				DisplayName: Mystical Totem
+				Tooltip: Part of a beast's body
+			}
+
+			StrongVenom: {
+				DisplayName: Strong Venom
+				Tooltip: Substance found inside some beast's body
+			}
+
+			MysticalTomePage: {
+				DisplayName: Mystical Tome Page
+				Tooltip: Used to craft tomes
+			}
+
+			CarbonSteel: {
+				DisplayName: Carbon Steel
+				Tooltip: Metal used to produce tomes
+			}
+
+			FineLumber: {
+				DisplayName: Fine Lumber
+				Tooltip: 
+						'''
+						Lumber used for producing tomes
+						'Very fine!'
+						'''
+			}
+
+			Gravel: {
+				DisplayName: Gravel
+				Tooltip: Polish used to produce tomes
+			}
+
+			Sandstone: {
+				DisplayName: Sandstone
+				Tooltip: Finish used to produce tomes
+			}
+
+			MysteriousPage: {
+				DisplayName: Mysterious Page
+				Tooltip: 'It contains unknown symbols'
+			}
+
+			ScrollofTome: {
+				DisplayName: Scroll of Tome
+				Tooltip: Vital in the creation of powerful tomes
 			}
 
 			BronzeOre: {
