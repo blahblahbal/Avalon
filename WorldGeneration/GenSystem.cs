@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -19,16 +21,23 @@ namespace ExxoAvalonOrigins.WorldGeneration
 
             GenPass currentPass;
 
-            int ShiniesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
+            int index = tasks.FindIndex(genpass => genpass.Name.Equals("Reset"));
 
-            if (ShiniesIndex != -1)
+            if (index != -1)
+            {
+                tasks.Insert(index + 1, new Passes.AvalonReset("Avalon Reset", 1000f));
+            }
+
+            index = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
+
+            if (index != -1)
             {
                 // Next, we insert our pass directly after the original "Shinies" pass.
                 // ExampleOrePass is a class seen bellow
-                tasks.Insert(ShiniesIndex + 1, new Passes.OreGenPreHardmode("Adding Avalon Ores", 237.4298f));
+                tasks.Insert(index + 1, new Passes.OreGenPreHardmode("Adding Avalon Ores", 237.4298f));
             }
 
-            int index = tasks.FindIndex(genPass => genPass.Name == "Vines");
+            index = tasks.FindIndex(genPass => genPass.Name == "Vines");
             if (index != -1)
             {
                 currentPass = new Hooks.DungeonRemoveCrackedBricks();

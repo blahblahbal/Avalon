@@ -20,23 +20,23 @@ public class StaminaDrain : ModBuff
     {
         if (stacks == 1)
         {
-            tip += "20%";
+            tip += " 20%";
         }
         else if (stacks == 2)
         {
-            tip += "40%";
+            tip += " 40%";
         }
         else if (stacks == 3)
         {
-            tip += "60%";
+            tip += " 60%";
         }
         else if (stacks == 4)
         {
-            tip += "80%";
+            tip += " 80%";
         }
         else if (stacks == 5)
         {
-            tip += "100%";
+            tip += " 100%";
         }
     }
 

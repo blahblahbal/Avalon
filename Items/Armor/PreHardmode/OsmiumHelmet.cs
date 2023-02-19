@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using ExxoAvalonOrigins.Items.Material.Bars;
 
-namespace ExxoAvalonOrigins.Items.Armors
+namespace ExxoAvalonOrigins.Items.Armor.PreHardmode
 {
     [AutoloadEquip(EquipType.Head)]
     public class OsmiumHelmet : ModItem

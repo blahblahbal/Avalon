@@ -1334,6 +1334,211 @@ Mods: {
 				DisplayName: Chaos Dust
 				Tooltip: ""
 			}
+
+			LesserStaminaPotion: {
+				DisplayName: Lesser Stamina Potion
+				Tooltip: Restores 35 stamina
+			}
+
+			StaminaPotion: {
+				DisplayName: Stamina Potion
+				Tooltip: Restores 55 stamina
+			}
+
+			GreaterStaminaPotion: {
+				DisplayName: Greater Stamina Potion
+				Tooltip: Restores 95 stamina
+			}
+
+			SuperStaminaPotion: {
+				DisplayName: Super Stamina Potion
+				Tooltip: Restores 120 stamina
+			}
+
+			BismuthChainmail: {
+				DisplayName: Bismuth Chainmail
+				Tooltip: ""
+			}
+
+			BismuthGreaves: {
+				DisplayName: Bismuth Greaves
+				Tooltip: ""
+			}
+
+			BismuthHelmet: {
+				DisplayName: Bismuth Helmet
+				Tooltip: ""
+			}
+
+			BronzeChainmail: {
+				DisplayName: Bronze Chainmail
+				Tooltip: ""
+			}
+
+			BronzeGreaves: {
+				DisplayName: Bronze Greaves
+				Tooltip: ""
+			}
+
+			BronzeHelmet: {
+				DisplayName: Bronze Helmet
+				Tooltip: ""
+			}
+
+			NickelChainmail: {
+				DisplayName: Nickel Chainmail
+				Tooltip: ""
+			}
+
+			NickelGreaves: {
+				DisplayName: Nickel Greaves
+				Tooltip: ""
+			}
+
+			NickelHelmet: {
+				DisplayName: Nickel Helmet
+				Tooltip: ""
+			}
+
+			ZincChainmail: {
+				DisplayName: Zinc Chainmail
+				Tooltip: ""
+			}
+
+			ZincGreaves: {
+				DisplayName: Zinc Greaves
+				Tooltip: ""
+			}
+
+			ZincHelmet: {
+				DisplayName: Zinc Helmet
+				Tooltip: ""
+			}
+
+			BrimstoneBlock: {
+				DisplayName: Brimstone Block
+				Tooltip: ""
+			}
+
+			BismuthAxe: {
+				DisplayName: Bismuth Axe
+				Tooltip: ""
+			}
+
+			BismuthHammer: {
+				DisplayName: Bismuth Hammer
+				Tooltip: ""
+			}
+
+			BismuthPickaxe: {
+				DisplayName: Bismuth Pickaxe
+				Tooltip: ""
+			}
+
+			BronzeAxe: {
+				DisplayName: Bronze Axe
+				Tooltip: ""
+			}
+
+			BronzeHammer: {
+				DisplayName: Bronze Hammer
+				Tooltip: ""
+			}
+
+			BronzePickaxe: {
+				DisplayName: Bronze Pickaxe
+				Tooltip: ""
+			}
+
+			NickelAxe: {
+				DisplayName: Nickel Axe
+				Tooltip: ""
+			}
+
+			NickelHammer: {
+				DisplayName: Nickel Hammer
+				Tooltip: ""
+			}
+
+			NickelPickaxe: {
+				DisplayName: Nickel Pickaxe
+				Tooltip: ""
+			}
+
+			ZincAxe: {
+				DisplayName: Zinc Axe
+				Tooltip: ""
+			}
+
+			ZincHammer: {
+				DisplayName: Zinc Hammer
+				Tooltip: ""
+			}
+
+			ZincPickaxe: {
+				DisplayName: Zinc Pickaxe
+				Tooltip: ""
+			}
+
+			BismuthBroadsword: {
+				DisplayName: Bismuth Broadsword
+				Tooltip: ""
+			}
+
+			BismuthShortsword: {
+				DisplayName: Bismuth Shortsword
+				Tooltip: ""
+			}
+
+			BronzeBroadsword: {
+				DisplayName: Bronze Broadsword
+				Tooltip: ""
+			}
+
+			BronzeShortsword: {
+				DisplayName: Bronze Shortsword
+				Tooltip: ""
+			}
+
+			NickelBroadsword: {
+				DisplayName: Nickel Broadsword
+				Tooltip: ""
+			}
+
+			NickelShortsword: {
+				DisplayName: Nickel Shortsword
+				Tooltip: ""
+			}
+
+			ZincBroadsword: {
+				DisplayName: Zinc Broadsword
+				Tooltip: ""
+			}
+
+			ZincShortsword: {
+				DisplayName: Zinc Shortsword
+				Tooltip: ""
+			}
+
+			BismuthBow: {
+				DisplayName: Bismuth Bow
+				Tooltip: ""
+			}
+
+			BronzeBow: {
+				DisplayName: Bronze Bow
+				Tooltip: ""
+			}
+
+			NickelBow: {
+				DisplayName: Nickel Bow
+				Tooltip: ""
+			}
+
+			ZincBow: {
+				DisplayName: Zinc Bow
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -1352,12 +1557,18 @@ Mods: {
 			DesertLongswordSandstorm.DisplayName: Desert Longsword Sandstorm
 			PointingLaser.DisplayName: Pointing Laser
 			EnchantedShuriken.DisplayName: Enchanted Shuriken
+			BismuthShortsword.DisplayName: Bismuth Shortsword
+			BronzeShortsword.DisplayName: Bronze Shortsword
+			NickelShortsword.DisplayName: Nickel Shortsword
+			ZincShortsword.DisplayName: Zinc Shortsword
 		}
 
 		NPCs: {
 			FallenHero.DisplayName: Fallen Hero
 			BloodshotEye.DisplayName: Bloodshot Eye
 			OreSlime.DisplayName: Ore Slime
+			Blaze.DisplayName: Blaze
+			BlazeOrb.DisplayName: Blaze Orb
 		}
 
 		Buffs: {

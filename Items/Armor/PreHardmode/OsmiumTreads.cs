@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using ExxoAvalonOrigins.Items.Material.Bars;
 
-namespace ExxoAvalonOrigins.Items.Armors
+namespace ExxoAvalonOrigins.Items.Armor.PreHardmode
 {
-    [AutoloadEquip(EquipType.Body)]
-    public class OsmiumJerkin : ModItem
+    [AutoloadEquip(EquipType.Legs)]
+    public class OsmiumTreads : ModItem
     {
         public override void SetStaticDefaults()
         {
@@ -22,14 +22,13 @@ namespace ExxoAvalonOrigins.Items.Armors
         }
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage(DamageClass.Melee) += 0.12f;
-            player.GetAttackSpeed(DamageClass.Melee) += 0.12f;
+            player.GetDamage(DamageClass.Magic) += 0.12f;
         }
         public override void AddRecipes()
         {
             CreateRecipe(1)
-                .AddIngredient(ModContent.ItemType<OsmiumBar>(), 20)
-                .AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 6)
+                .AddIngredient(ModContent.ItemType<OsmiumBar>(), 17)
+                .AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 5)
                 .AddTile(TileID.Anvils).Register();
         }
     }

@@ -11,7 +11,6 @@ namespace ExxoAvalonOrigins.Tiles;
 
 public class MonsterBanner : ModTile
 {
-    
     public override void SetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
@@ -23,6 +22,10 @@ public class MonsterBanner : ModTile
         TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.SolidBottom, TileObjectData.newTile.Width, 0);
         TileObjectData.newTile.StyleWrapLimit = 111;
+        TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+        TileObjectData.newAlternate.AnchorTop = new AnchorData(AnchorType.Platform, TileObjectData.newTile.Width, 0);
+        TileObjectData.newAlternate.DrawYOffset = -10;
+        TileObjectData.addAlternate(0);
         TileObjectData.addTile(Type);
         DustType = -1;
         TileID.Sets.DisableSmartCursor[Type] = true;
@@ -291,9 +294,9 @@ public class MonsterBanner : ModTile
                 //case 8:
                 //    t = ModContent.NPCType<NPCs.Dragonfly>();
                 //    break;
-                //case 9:
-                //    t = ModContent.NPCType<NPCs.Blaze>();
-                //    break;
+                case 9:
+                    t = ModContent.NPCType<NPCs.Hardmode.Blaze>();
+                    break;
                 //case 10:
                 //    t = ModContent.NPCType<NPCs.ArmoredHellTortoise>();
                 //    break;
