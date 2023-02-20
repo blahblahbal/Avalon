@@ -20,18 +20,30 @@ public class MonsterBanner : ModTile
         TileObjectData.newTile.Height = 3;
         TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16 };
         TileObjectData.newTile.StyleHorizontal = true;
-        TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.SolidBottom, TileObjectData.newTile.Width, 0);
+        TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.SolidBottom | AnchorType.PlanterBox, TileObjectData.newTile.Width, 0);
         TileObjectData.newTile.StyleWrapLimit = 111;
+        TileObjectData.newTile.DrawYOffset = -2;
         TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
         TileObjectData.newAlternate.AnchorTop = new AnchorData(AnchorType.Platform, TileObjectData.newTile.Width, 0);
-        TileObjectData.newAlternate.DrawYOffset = -10;
+        //TileObjectData.newAlternate.DrawYOffset = -10;
         TileObjectData.addAlternate(0);
         TileObjectData.addTile(Type);
         DustType = -1;
         TileID.Sets.DisableSmartCursor[Type] = true;
         AddMapEntry(new Color(13, 88, 130));
     }
-
+    public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
+    {
+        Tile t = Main.tile[i, j - 1];
+        if (Main.tileSolidTop[t.TileType] && (t.IsHalfBlock || t.Slope is SlopeType.SlopeUpLeft or SlopeType.SlopeUpRight or SlopeType.SlopeDownLeft or SlopeType.SlopeDownRight))
+        {
+            offsetY = 0;
+        }
+        else if ((Main.tileSolidTop[t.TileType] && !t.IsHalfBlock) || Main.tile[i, j].TileType == Type || Main.tile[i, j + 1].TileType == Type || Main.tile[i, j + 2].TileType == Type)
+        {
+            offsetY = -10;
+        }
+    }
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         int style = frameX / 18;

@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.WorldBuilding;
 using Terraria.ModLoader;
 using Terraria.IO;
+using ExxoAvalonOrigins.Common;
 
 namespace ExxoAvalonOrigins.WorldGeneration.Passes
 {
@@ -88,6 +89,19 @@ namespace ExxoAvalonOrigins.WorldGeneration.Passes
                     WorldGen.SavedOreTiers.Gold = ModContent.TileType<Tiles.Ores.BismuthOre>();
                     GenVars.gold = ModContent.TileType<Tiles.Ores.BismuthOre>();
                     GenVars.goldBar = ModContent.ItemType<Items.Material.Ores.BismuthOre>();
+                    break;
+            }
+            int rhodium = WorldGen.genRand.Next(3);
+            switch (rhodium)
+            {
+                case 0:
+                    AvalonWorld.rhodiumOre = AvalonWorld.RhodiumVariant.rhodium;
+                    break;
+                case 1:
+                    AvalonWorld.rhodiumOre = AvalonWorld.RhodiumVariant.osmium;
+                    break;
+                case 2:
+                    AvalonWorld.rhodiumOre = AvalonWorld.RhodiumVariant.iridium;
                     break;
             }
         }

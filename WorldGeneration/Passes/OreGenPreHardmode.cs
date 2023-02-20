@@ -1,4 +1,5 @@
-﻿using ExxoAvalonOrigins.Tiles.Ores;
+﻿using ExxoAvalonOrigins.Common;
+using ExxoAvalonOrigins.Tiles.Ores;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Generation;
@@ -27,10 +28,18 @@ public class OreGenPreHardmode : GenPass
         {
             WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), WorldGen.genRand.Next(2, 5), WorldGen.genRand.Next(3, 5), ModContent.TileType<Zircon>());
         }
-
+        int roiOre = ModContent.TileType<RhodiumOre>();
+        if (AvalonWorld.rhodiumOre == AvalonWorld.RhodiumVariant.osmium)
+        {
+            roiOre = ModContent.TileType<OsmiumOre>();
+        }
+        if (AvalonWorld.rhodiumOre == AvalonWorld.RhodiumVariant.iridium)
+        {
+            roiOre = ModContent.TileType<IridiumOre>();
+        }
         for (int roi = 0; roi < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); roi++)
         {
-            WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(4, 7), ModContent.TileType<OsmiumOre>());
+            WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(4, 7), roiOre);
         }
 
         #region boltstone, heartstone, and starstone

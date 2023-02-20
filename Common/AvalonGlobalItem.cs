@@ -1,11 +1,7 @@
 ﻿using ExxoAvalonOrigins.Items.Material;
 using ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
 using ExxoAvalonOrigins.Tiles;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -108,6 +104,9 @@ public class AvalonGlobalItem : GlobalItem
                 break;
             case ItemID.NightmarePickaxe:
                 item.pick = 60;
+                break;
+            case ItemID.DeathbringerPickaxe:
+                item.pick = 64;
                 break;
             #endregion miscellaneous changes
             #region ML item rebalance

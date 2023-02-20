@@ -748,9 +748,19 @@ Mods: {
 				Tooltip: ""
 			}
 
+			RhodiumPickaxe: {
+				DisplayName: Rhodium Pickaxe
+				Tooltip: Can mine Hellstone
+			}
+
 			OsmiumPickaxe: {
 				DisplayName: Osmium Pickaxe
-				Tooltip: Can mine hellstone.
+				Tooltip: Can mine Hellstone
+			}
+
+			IridiumPickaxe: {
+				DisplayName: Iridium Pickaxe
+				Tooltip: Can mine Hellstone
 			}
 
 			OsmiumGreatsword: {
@@ -795,6 +805,63 @@ Mods: {
 			OsmiumBrickWallItem: {
 				DisplayName: Osmium Brick Wall Item
 				Tooltip: ""
+			}
+
+			RhodiumHeadgear: {
+				DisplayName: Rhodium Headgear
+				Tooltip:
+					'''
+					14% increased ranged damage
+					Increases maximum mana by 40
+					'''
+			}
+
+			RhodiumPlateMail: {
+				DisplayName: Rhodium Plate Mail
+				Tooltip: 14% increased melee damage and speed
+			}
+
+			RhodiumGreaves: {
+				DisplayName: Rhodium Greaves
+				Tooltip: 14% increased magic damage
+			}
+
+			AncientTitaniumHeadgear: {
+				DisplayName: Ancient Titanium Headgear
+				Tooltip:
+					'''
+					14% increased ranged damage
+					Increases maximum mana by 40
+					'''
+			}
+
+			AncientTitaniumPlateMail: {
+				DisplayName: Ancient Titanium Plate Mail
+				Tooltip: 14% increased melee damage and speed
+			}
+
+			AncientTitaniumGreaves: {
+				DisplayName: Ancient Titanium Greaves
+				Tooltip: 14% increased magic damage
+			}
+
+			IridiumHat: {
+				DisplayName: Iridium Hat
+				Tooltip:
+					'''
+					11% increased melee damage and speed
+					11% increased ranged damage
+					'''
+			}
+
+			IridiumPlateMail: {
+				DisplayName: Iridium Plate Mail
+				Tooltip: Increases maximum mana by 40
+			}
+
+			IridiumPants: {
+				DisplayName: Iridium Pants
+				Tooltip: 11% increased magic damage
 			}
 
 			BloodshotLens: {
@@ -1537,6 +1604,66 @@ Mods: {
 
 			ZincBow: {
 				DisplayName: Zinc Bow
+				Tooltip: ""
+			}
+
+			IridiumBar: {
+				DisplayName: Iridium Bar
+				Tooltip: ""
+			}
+
+			RhodiumBar: {
+				DisplayName: Rhodium Bar
+				Tooltip: ""
+			}
+
+			IridiumOre: {
+				DisplayName: Iridium Ore
+				Tooltip: ""
+			}
+
+			RhodiumOre: {
+				DisplayName: Rhodium Ore
+				Tooltip: ""
+			}
+
+			IridiumBrick: {
+				DisplayName: Iridium Brick
+				Tooltip: ""
+			}
+
+			RhodiumBrick: {
+				DisplayName: Rhodium Brick
+				Tooltip: ""
+			}
+
+			IridiumHamaxe: {
+				DisplayName: Iridium Hamaxe
+				Tooltip: ""
+			}
+
+			RhodiumHamaxe: {
+				DisplayName: Rhodium Hamaxe
+				Tooltip: ""
+			}
+
+			IridiumGreatsword: {
+				DisplayName: Iridium Greatsword
+				Tooltip: ""
+			}
+
+			RhodiumGreatsword: {
+				DisplayName: Rhodium Greatsword
+				Tooltip: ""
+			}
+
+			IridiumLongbow: {
+				DisplayName: Iridium Longbow
+				Tooltip: ""
+			}
+
+			RhodiumLongbow: {
+				DisplayName: Rhodium Longbow
 				Tooltip: ""
 			}
 		}

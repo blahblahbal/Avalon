@@ -36,10 +36,18 @@ namespace ExxoAvalonOrigins.Common
             bismuth,
             random
         }
+        public enum RhodiumVariant
+        {
+            rhodium,
+            osmium,
+            iridium,
+            random
+        }
+
         public static CopperVariant copperOre = CopperVariant.random;
         public static IronVariant ironOre = IronVariant.random;
         public static SilverVariant silverOre = SilverVariant.random;
         public static GoldVariant goldOre = GoldVariant.random;
-
+        public static RhodiumVariant rhodiumOre = RhodiumVariant.random;
     }
 }
