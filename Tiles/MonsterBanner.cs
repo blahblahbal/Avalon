@@ -25,7 +25,7 @@ public class MonsterBanner : ModTile
         TileObjectData.newTile.DrawYOffset = -2;
         TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
         TileObjectData.newAlternate.AnchorTop = new AnchorData(AnchorType.Platform, TileObjectData.newTile.Width, 0);
-        //TileObjectData.newAlternate.DrawYOffset = -10;
+        TileObjectData.newAlternate.DrawYOffset = -10;
         TileObjectData.addAlternate(0);
         TileObjectData.addTile(Type);
         DustType = -1;
