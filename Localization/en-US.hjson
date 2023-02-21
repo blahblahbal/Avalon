@@ -1666,6 +1666,15 @@ Mods: {
 				DisplayName: Rhodium Longbow
 				Tooltip: ""
 			}
+
+			VertexOfExcalibur: {
+				DisplayName: Vertex of Excalibur
+				Tooltip:
+				'''
+				Deals more damage to enemies affected by a debuff
+				'The unification of dark and light'
+				'''
+			}
 		}
 
 		Projectiles: {
@@ -1688,6 +1697,8 @@ Mods: {
 			BronzeShortsword.DisplayName: Bronze Shortsword
 			NickelShortsword.DisplayName: Nickel Shortsword
 			ZincShortsword.DisplayName: Zinc Shortsword
+			SanguineKatanaSlash.DisplayName: Sanguine Katana 
+			VertexSlash.DisplayName: Vertex of Excalibur
 		}
 
 		NPCs: {
