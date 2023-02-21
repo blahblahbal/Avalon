@@ -34,14 +34,12 @@ public class MonsterBanner : ModTile
     }
     public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
     {
-        Tile t = Main.tile[i, j - 1];
-        if (Main.tileSolidTop[t.TileType] && (t.IsHalfBlock || t.Slope is SlopeType.SlopeUpLeft or SlopeType.SlopeUpRight or SlopeType.SlopeDownLeft or SlopeType.SlopeDownRight))
+        Tile tile = Main.tile[i, j];
+        int topLeftX = i - tile.TileFrameX / 18 % 1;
+        int topLeftY = j - tile.TileFrameY / 18 % 3;
+        if (WorldGen.IsBelowANonHammeredPlatform(topLeftX, topLeftY))
         {
-            offsetY = 0;
-        }
-        else if ((Main.tileSolidTop[t.TileType] && !t.IsHalfBlock) || Main.tile[i, j].TileType == Type || Main.tile[i, j + 1].TileType == Type || Main.tile[i, j + 2].TileType == Type)
-        {
-            offsetY = -10;
+            offsetY -= 8;
         }
     }
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
