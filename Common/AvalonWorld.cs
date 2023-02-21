@@ -54,16 +54,16 @@ namespace ExxoAvalonOrigins.Common
         public static GoldVariant goldOre = GoldVariant.random;
         public static RhodiumVariant rhodiumOre = RhodiumVariant.random;
 
-        public override void SaveWorldData(TagCompound tag)
-        {
-            tag["RhodiumVariant"] = rhodiumOre;
-        }
-        public override void LoadWorldData(TagCompound tag)
-        {
-            if (tag.ContainsKey("RhodiumVariant"))
-            {
-                rhodiumOre = tag.Get<RhodiumVariant>("RhodiumVariant");
-            }
-        }
+        //public override void SaveWorldData(TagCompound tag)
+        //{
+        //    tag["RhodiumVariant"] = rhodiumOre;
+        //}
+        //public override void LoadWorldData(TagCompound tag)
+        //{
+        //    if (tag.ContainsKey("RhodiumVariant"))
+        //    {
+        //        rhodiumOre = tag.Get<RhodiumVariant>("RhodiumVariant");
+        //    }
+        //}
     }
 }

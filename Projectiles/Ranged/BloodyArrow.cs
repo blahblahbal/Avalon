@@ -12,10 +12,7 @@ namespace ExxoAvalonOrigins.Projectiles.Ranged;
 public class BloodyArrow : ModProjectile
 {
     public float gravityTimer;
-    public override void SetStaticDefaults()
-    {
-        //DisplayName.SetDefault("Bloody Arrow");
-    }
+    
 
     public override void SetDefaults()
     {

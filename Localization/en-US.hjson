@@ -1729,6 +1729,11 @@ Mods: {
 				DisplayName: Zircon Staff
 				Tooltip: ""
 			}
+
+			Freezethrower: {
+				DisplayName: Freezethrower
+				Tooltip: Uses gel for ammo
+			}
 		}
 
 		Projectiles: {
@@ -1766,6 +1771,7 @@ Mods: {
 			PeridotBolt.DisplayName: Peridot Bolt
 			TourmalineBolt.DisplayName: Tourmaline Bolt
 			ZirconBolt.DisplayName: Zircon Bolt
+			Freezethrower.DisplayName: Freezethrower
 		}
 
 		NPCs: {
