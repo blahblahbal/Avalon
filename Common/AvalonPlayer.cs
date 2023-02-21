@@ -26,13 +26,14 @@ public class AvalonPlayer : ModPlayer
     public bool tpStam = true;
     public int tpCD;
     public bool teleportVWasTriggered;
+    public bool TrapImmune;
 
     public override void ResetEffects()
     {
         MagicCritDamage = 1f;
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
-
+        TrapImmune = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
     }
 

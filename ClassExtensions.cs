@@ -12,7 +12,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace ExxoAvalonOrigins.Common;
+namespace ExxoAvalonOrigins;
 
 public static class ClassExtensions
 {

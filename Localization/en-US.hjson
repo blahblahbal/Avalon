@@ -489,6 +489,31 @@ Mods: {
 				Tooltip: Increases all stats
 			}
 
+			BronzeWatch: {
+				DisplayName: Bronze Watch
+				Tooltip: Tells the time
+			}
+
+			ZincWatch: {
+				DisplayName: Zinc Watch
+				Tooltip: Tells the time
+			}
+
+			BismuthWatch: {
+				DisplayName: Bismuth Watch
+				Tooltip: Tells the time
+			}
+
+			SandyStormcloudinaBottle: {
+				DisplayName: Sandy Stormcloud in a Bottle
+				Tooltip: The holder can quadruple jump
+			}
+
+			GuardianBoots: {
+				DisplayName: Guardian Boots
+				Tooltip: Provides immunity to traps and knockback
+			}
+
 			BagofBlood: {
 				DisplayName: Bag of Blood
 				Tooltip:
@@ -1670,10 +1695,39 @@ Mods: {
 			VertexOfExcalibur: {
 				DisplayName: Vertex of Excalibur
 				Tooltip:
-				'''
-				Deals more damage to enemies affected by a debuff
-				'The unification of dark and light'
-				'''
+					'''
+					Deals more damage to enemies affected by a debuff
+					'The unification of dark and light'
+					'''
+			}
+
+			CrystalUnity: {
+				DisplayName: Crystal Unity
+				Tooltip:
+					'''
+					'The power of chaos vanquishes your enemies'
+					[c/C39FDD:10th Anniversary Contest Winner - FractureACBF]
+					'''
+			}
+
+			VenomSpike: {
+				DisplayName: Venom Spike
+				Tooltip: ""
+			}
+
+			PeridotStaff: {
+				DisplayName: Peridot Staff
+				Tooltip: ""
+			}
+
+			TourmalineStaff: {
+				DisplayName: Tourmaline Staff
+				Tooltip: ""
+			}
+
+			ZirconStaff: {
+				DisplayName: Zircon Staff
+				Tooltip: ""
 			}
 		}
 
@@ -1697,8 +1751,21 @@ Mods: {
 			BronzeShortsword.DisplayName: Bronze Shortsword
 			NickelShortsword.DisplayName: Nickel Shortsword
 			ZincShortsword.DisplayName: Zinc Shortsword
-			SanguineKatanaSlash.DisplayName: Sanguine Katana 
+			SanguineKatanaSlash.DisplayName: Sanguine Katana
 			VertexSlash.DisplayName: Vertex of Excalibur
+			AmberShard.DisplayName: Amber Shard
+			AmethystShard.DisplayName: Amethyst Shard
+			DiamondShard.DisplayName: Diamond Shard
+			EmeraldShard.DisplayName: Emerald Shard
+			PeridotShard.DisplayName: Peridot Shard
+			RubyShard.DisplayName: Ruby Shard
+			SapphireShard.DisplayName: Sapphire Shard
+			TopazShard.DisplayName: Topaz Shard
+			TourmalineShard.DisplayName: Tourmaline Shard
+			ZirconShard.DisplayName: Zircon Shard
+			PeridotBolt.DisplayName: Peridot Bolt
+			TourmalineBolt.DisplayName: Tourmaline Bolt
+			ZirconBolt.DisplayName: Zircon Bolt
 		}
 
 		NPCs: {
@@ -1713,6 +1780,21 @@ Mods: {
 			Bleeding: {
 				DisplayName: Bleeding
 				Description: Losing life
+			}
+
+			AmethystShardBuff: {
+				DisplayName: Defense Up
+				Description: Defense is increased by 6
+			}
+
+			RubyShardBuff: {
+				DisplayName: Armor Penetration Up
+				Description: Armor penetration is increased by 5
+			}
+
+			SapphireShardBuff: {
+				DisplayName: Magic Damage Up
+				Description: Magic damage is increased by 8%
 			}
 
 			StaminaDrain: {
