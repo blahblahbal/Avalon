@@ -1,4 +1,5 @@
 using ExxoAvalonOrigins.Common;
+using ExxoAvalonOrigins.Projectiles.Melee;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using System;
@@ -24,7 +25,6 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
             Item.scale = 1f;
             Item.DamageType = DamageClass.Melee;
             Item.autoReuse = true;
-            Item.useTurn = true;
             Item.rare = ItemRarityID.Orange;
             Item.useTime = 16;
             Item.useAnimation = 16;
@@ -32,6 +32,16 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
             Item.knockBack = 5f;
             Item.UseSound = SoundID.Item1;
             Item.value = Item.sellPrice(0, 1, 0, 0);
+            Item.shoot = ModContent.ProjectileType<SanguineKatanaSlash>();
+            Item.noMelee= true;
+            Item.shootSpeed = 16;
+        }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
+            Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1f, adjustedItemScale5);
+            NetMessage.SendData(13, -1, -1, null, player.whoAmI);
+            return false;
         }
         public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
         {
