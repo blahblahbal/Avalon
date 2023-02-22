@@ -95,13 +95,13 @@ namespace ExxoAvalonOrigins.WorldGeneration.Passes
             switch (rhodium)
             {
                 case 0:
-                    AvalonWorld.rhodiumOre = AvalonWorld.RhodiumVariant.rhodium;
+                    AvalonWorld.RhodiumOre = AvalonWorld.RhodiumVariant.Rhodium;
                     break;
                 case 1:
-                    AvalonWorld.rhodiumOre = AvalonWorld.RhodiumVariant.osmium;
+                    AvalonWorld.RhodiumOre = AvalonWorld.RhodiumVariant.Osmium;
                     break;
                 case 2:
-                    AvalonWorld.rhodiumOre = AvalonWorld.RhodiumVariant.iridium;
+                    AvalonWorld.RhodiumOre = AvalonWorld.RhodiumVariant.Iridium;
                     break;
             }
         }

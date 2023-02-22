@@ -15,6 +15,11 @@ namespace ExxoAvalonOrigins
         /// </summary>
         public static ExxoAvalonOrigins Mod { get; private set; } = ModContent.GetInstance<ExxoAvalonOrigins>();
 
+        /// <summary>
+        ///     Gets the instance of the music mod for this mod.
+        /// </summary>
+        public static readonly Mod? MusicMod = ModLoader.TryGetMod("AvalonMusic", out Mod obtainedMod) ? obtainedMod : null;
+
         public const string TextureAssetsPath = "Assets/Textures";
         internal UserInterface staminaInterface;
         internal StaminaBar staminaBar;

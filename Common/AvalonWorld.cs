@@ -10,7 +10,7 @@ using Terraria.ModLoader.IO;
 
 namespace ExxoAvalonOrigins.Common
 {
-    internal class AvalonWorld : ModSystem
+    public class AvalonWorld : ModSystem
     {
         public enum CopperVariant
         {
@@ -42,28 +42,27 @@ namespace ExxoAvalonOrigins.Common
         }
         public enum RhodiumVariant
         {
-            rhodium,
-            osmium,
-            iridium,
-            random
+            Rhodium = 0,
+            Osmium = 1,
+            Iridium = 2
         }
 
         public static CopperVariant copperOre = CopperVariant.random;
         public static IronVariant ironOre = IronVariant.random;
         public static SilverVariant silverOre = SilverVariant.random;
         public static GoldVariant goldOre = GoldVariant.random;
-        public static RhodiumVariant rhodiumOre = RhodiumVariant.random;
+        public static RhodiumVariant? RhodiumOre { get; set; }
 
-        //public override void SaveWorldData(TagCompound tag)
-        //{
-        //    tag["RhodiumVariant"] = rhodiumOre;
-        //}
-        //public override void LoadWorldData(TagCompound tag)
-        //{
-        //    if (tag.ContainsKey("RhodiumVariant"))
-        //    {
-        //        rhodiumOre = tag.Get<RhodiumVariant>("RhodiumVariant");
-        //    }
-        //}
+        public override void SaveWorldData(TagCompound tag)
+        {
+            tag["RhodiumOre"] = (byte?)RhodiumOre;
+        }
+        public override void LoadWorldData(TagCompound tag)
+        {
+            if (tag.ContainsKey("RhodiumOre"))
+            {
+                RhodiumOre = (RhodiumVariant)tag.Get<byte>("RhodiumOre");
+            }
+        }
     }
 }

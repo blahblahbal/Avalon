@@ -49,6 +49,11 @@ Mods: {
 				Tooltip: Occasionally fires an exploding constellation
 			}
 
+			TomeoftheDistantPast: {
+				DisplayName: Tome of the Distant Past
+				Tooltip: Summons a bone barrage
+			}
+
 			FlowerofTheJungle: {
 				DisplayName: Flower of The Jungle
 				Tooltip: ""
@@ -1734,6 +1739,16 @@ Mods: {
 				DisplayName: Freezethrower
 				Tooltip: Uses gel for ammo
 			}
+
+			DesertBeakBossBag: {
+				DisplayName: Treasure Bag (Desert Beak)
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			DesertBeakMask: {
+				DisplayName: Desert Beak Mask
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -1772,6 +1787,11 @@ Mods: {
 			TourmalineBolt.DisplayName: Tourmaline Bolt
 			ZirconBolt.DisplayName: Zircon Bolt
 			Freezethrower.DisplayName: Freezethrower
+			Bone1.DisplayName: Bone Rib
+			Bone2.DisplayName: Rib Cage
+			Bone3.DisplayName: Femur
+			Bone4.DisplayName: Skull
+			VultureEgg.DisplayName: Vulture Egg
 		}
 
 		NPCs: {
@@ -1780,6 +1800,7 @@ Mods: {
 			OreSlime.DisplayName: Ore Slime
 			Blaze.DisplayName: Blaze
 			BlazeOrb.DisplayName: Blaze Orb
+			DesertBeak.DisplayName: Desert Beak
 		}
 
 		Buffs: {

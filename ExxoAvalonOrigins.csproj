@@ -12,5 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Items\Placeable\Tile\" />
+    <Folder Include="NPCs\Bosses\" />
   </ItemGroup>
 </Project>

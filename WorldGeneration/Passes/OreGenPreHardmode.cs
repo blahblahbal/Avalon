@@ -29,11 +29,11 @@ public class OreGenPreHardmode : GenPass
             WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), WorldGen.genRand.Next(2, 5), WorldGen.genRand.Next(3, 5), ModContent.TileType<Zircon>());
         }
         int roiOre = ModContent.TileType<RhodiumOre>();
-        if (AvalonWorld.rhodiumOre == AvalonWorld.RhodiumVariant.osmium)
+        if (AvalonWorld.RhodiumOre == AvalonWorld.RhodiumVariant.Osmium)
         {
             roiOre = ModContent.TileType<OsmiumOre>();
         }
-        if (AvalonWorld.rhodiumOre == AvalonWorld.RhodiumVariant.iridium)
+        if (AvalonWorld.RhodiumOre == AvalonWorld.RhodiumVariant.Iridium)
         {
             roiOre = ModContent.TileType<IridiumOre>();
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using ExxoAvalonOrigins.Common;
+using ExxoAvalonOrigins.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -32,6 +34,17 @@ public static class ClassExtensions
         }
 
         return true;
+    }
+
+    public static int GetRhodiumVariantItemOre(this AvalonWorld.RhodiumVariant? rhodiumVariant)
+    {
+        return rhodiumVariant switch
+        {
+            AvalonWorld.RhodiumVariant.Osmium => ModContent.ItemType<OsmiumOre>(),
+            AvalonWorld.RhodiumVariant.Rhodium => ModContent.ItemType<RhodiumOre>(),
+            AvalonWorld.RhodiumVariant.Iridium => ModContent.ItemType<IridiumOre>(),
+            _ => -1,
+        };
     }
 
     /// <summary>
