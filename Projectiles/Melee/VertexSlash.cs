@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.GameContent.Drawing;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ExxoAvalonOrigins.Projectiles.Melee
@@ -14,9 +16,17 @@ namespace ExxoAvalonOrigins.Projectiles.Melee
     {
         public override bool PreDraw(ref Color lightColor)
         {
-            DrawSlash(Color.Wheat, Color.Yellow, Color.Gold, Color.Wheat, 0, 1f, 0f, -MathHelper.Pi / 16, -MathHelper.Pi / 16, true);
-            DrawSlash(Color.Pink,Color.Red,Color.Purple,Color.Wheat,0,0.8f,0f,-MathHelper.Pi / 16, -MathHelper.Pi / 16, false);
-            DrawSlash(new Color(120,109,204),new Color(61,58,126),new Color(27,25,57), Color.Transparent, 0, 0.6f, 0f, -MathHelper.Pi / 16, -MathHelper.Pi / 16, false);
+            DrawSlash(Color.White, Color.Black, Color.Black, Color.White, 0, 1f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, true);
+            DrawSlash(Color.Gold, Color.Purple, Color.Red, Color.Wheat, 0, 0.8f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, true);
+
+            //DrawSlash(Color.Lerp(Color.White, Color.Red, Main.masterColor), Color.Gray, Color.Lerp(Color.Black, Color.DarkRed, Main.masterColor), Color.White, 0, 1f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, true);
+
+            //DrawSlash(Color.Lerp(Color.Gold, new Color(120, 109, 204),Main.masterColor),
+            //    Color.Lerp(Color.Purple, new Color(61, 58, 126), Main.masterColor),
+            //    Color.Lerp(Color.Red, new Color(27, 25, 57), Main.masterColor), Color.Wheat, 0, 0.8f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, false);
+
+            //DrawSlash(Color.Pink,Color.Red,Color.Purple,Color.Wheat,0,0.8f,0f,-MathHelper.Pi / 16, -MathHelper.Pi / 16, false);
+            //DrawSlash(new Color(120,109,204),new Color(61,58,126),new Color(27,25,57), Color.Transparent, 0, 0.6f, 0f, -MathHelper.Pi / 16, -MathHelper.Pi / 16, false);
             return false;
         }
         public override void AI()
@@ -32,6 +42,38 @@ namespace ExxoAvalonOrigins.Projectiles.Melee
                 Projectile.position += Projectile.velocity.SafeNormalize(Vector2.Zero) * (80f * num7);
                 Projectile.scale += num7 * 0.4f;
             }
+
+            float num8 = Projectile.rotation + Main.rand.NextFloatDirection() * ((float)Math.PI / 2f) * 0.7f;
+            Vector2 vector2 = Projectile.Center + num8.ToRotationVector2() * 84f * Projectile.scale;
+            Vector2 vector3 = (num8 + Projectile.ai[0] * ((float)Math.PI / 2f)).ToRotationVector2();
+            if (Main.rand.NextFloat() * 2f < Projectile.Opacity)
+            {
+                Dust dust2 = Dust.NewDustPerfect(Projectile.Center + num8.ToRotationVector2() * (Main.rand.NextFloat() * 80f * Projectile.scale + 20f * Projectile.scale), 278, vector3 * 0.5f, 100, Color.Lerp(Color.Purple, Color.White, Main.rand.NextFloat()), 0.4f);
+                dust2.fadeIn = 0.4f + Main.rand.NextFloat() * 0.15f;
+                dust2.noGravity = true;
+            }
+            if (Main.rand.NextFloat() * 3f < Projectile.Opacity)
+            {
+                Dust.NewDustPerfect(vector2, 43, vector3 * 0.1f, 100, Color.White * Projectile.Opacity, 1.2f * Projectile.Opacity);
+            }
+        }
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            Vector2 positionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
+            ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+            particleOrchestraSettings.PositionInWorld = positionInWorld;
+            ParticleOrchestraSettings settings = particleOrchestraSettings;
+            ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.TrueExcalibur, settings, Projectile.owner);
+            ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
+        }
+        public override void OnHitPvp(Player target, int damage, bool crit)
+        {
+            Vector2 positionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
+            ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+            particleOrchestraSettings.PositionInWorld = positionInWorld;
+            ParticleOrchestraSettings settings = particleOrchestraSettings;
+            ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.TrueExcalibur, settings, Projectile.owner);
+            ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
         }
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {

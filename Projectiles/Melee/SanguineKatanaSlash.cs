@@ -16,7 +16,7 @@ namespace ExxoAvalonOrigins.Projectiles.Melee
     {
         public override bool PreDraw(ref Color lightColor)
         {
-            DrawSlash(new Color(255, 0, 0), new Color(128, 0, 0), new Color(0, 0, 0), Color.Black, 512, 1f, MathHelper.PiOver4, -MathHelper.Pi / 24, -MathHelper.Pi / 24, true);
+            DrawSlash(new Color(255, 0, 0), new Color(128, 0, 0), new Color(0, 0, 0), Color.Red * 0.2f, 512, 1f, 0, -MathHelper.Pi / 24, -MathHelper.Pi / 24, true);
             DrawSlash(new Color(255, 0, 0), new Color(128, 0, 0), new Color(0, 0, 0), Color.Black, 512, 1f, MathHelper.PiOver4, -MathHelper.Pi / 24, -MathHelper.Pi / 24, true);
             return false;
         }

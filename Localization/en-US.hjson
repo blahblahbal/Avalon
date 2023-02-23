@@ -1749,6 +1749,11 @@ Mods: {
 				DisplayName: Desert Beak Mask
 				Tooltip: ""
 			}
+
+			TheBeak: {
+				DisplayName: The Beak
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
