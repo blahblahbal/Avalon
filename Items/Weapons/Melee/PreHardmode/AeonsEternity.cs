@@ -116,6 +116,40 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode
                 .AddIngredient(ModContent.ItemType<OsmiumGreatsword>())
                 .AddTile(TileID.DemonAltar)
                 .Register();
+
+            CreateRecipe(1)
+                .AddIngredient(ItemID.Starfury)
+                .AddIngredient(ItemID.IceBlade)
+                .AddIngredient(ModContent.ItemType<MinersSword>())
+                .AddIngredient(ItemID.AntlionClaw)
+                .AddIngredient(ModContent.ItemType<RhodiumGreatsword>())
+                .AddTile(TileID.DemonAltar)
+                .Register();
+            CreateRecipe(1)
+                .AddIngredient(ItemID.Starfury)
+                .AddIngredient(ItemID.IceBlade)
+                .AddIngredient(ModContent.ItemType<MinersSword>())
+                .AddIngredient(ModContent.ItemType<DesertLongsword>())
+                .AddIngredient(ModContent.ItemType<RhodiumGreatsword>())
+                .AddTile(TileID.DemonAltar)
+                .Register();
+
+            CreateRecipe(1)
+                .AddIngredient(ItemID.Starfury)
+                .AddIngredient(ItemID.IceBlade)
+                .AddIngredient(ModContent.ItemType<MinersSword>())
+                .AddIngredient(ItemID.AntlionClaw)
+                .AddIngredient(ModContent.ItemType<IridiumGreatsword>())
+                .AddTile(TileID.DemonAltar)
+                .Register();
+            CreateRecipe(1)
+                .AddIngredient(ItemID.Starfury)
+                .AddIngredient(ItemID.IceBlade)
+                .AddIngredient(ModContent.ItemType<MinersSword>())
+                .AddIngredient(ModContent.ItemType<DesertLongsword>())
+                .AddIngredient(ModContent.ItemType<IridiumGreatsword>())
+                .AddTile(TileID.DemonAltar)
+                .Register();
         }
     }
 }
