@@ -12,7 +12,7 @@ class EnchantedShuriken : ModItem
     public override void SetStaticDefaults()
     {
         //DisplayName.SetDefault("Enchanted Shuriken");
-        //SacrificeTotal = 99;
+        //Item.ResearchUnlockCount = 99;
     }
     public override void SetDefaults()
     {

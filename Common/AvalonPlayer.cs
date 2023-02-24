@@ -1,4 +1,5 @@
-﻿using ExxoAvalonOrigins.Items.Other;
+﻿using ExxoAvalonOrigins.Buffs.AdvancedBuffs;
+using ExxoAvalonOrigins.Items.Other;
 using ExxoAvalonOrigins.Systems;
 using ExxoAvalonOrigins.Walls;
 using Microsoft.Xna.Framework;
@@ -27,6 +28,13 @@ public class AvalonPlayer : ModPlayer
     public int tpCD;
     public bool teleportVWasTriggered;
     public bool TrapImmune;
+    public bool Lucky;
+
+    public int FrameCount { get; private set; }
+    public int ShadowCooldown { get; private set; }
+    public int OldFallStart;
+    public bool AdvancedBattle;
+    public bool AdvancedCalming;
 
     public override void ResetEffects()
     {
@@ -34,6 +42,9 @@ public class AvalonPlayer : ModPlayer
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
         TrapImmune = false;
+        AdvancedBattle = false;
+        AdvancedCalming = false;
+        Lucky = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
     }
 
@@ -55,7 +66,16 @@ public class AvalonPlayer : ModPlayer
             Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown = 3600;
         }
     }
+    public void ResetShadowCooldown() => ShadowCooldown = 0;
+    public override bool CanConsumeAmmo(Item weapon, Item ammo)
+    {
+        if (Player.HasBuff<AdvAmmoReservation>() && Main.rand.NextFloat() < AdvAmmoReservation.Chance)
+        {
+            return false;
+        }
 
+        return base.CanConsumeAmmo(weapon, ammo);
+    }
     public override void PostUpdate()
     {
         // Large gem inventory checking

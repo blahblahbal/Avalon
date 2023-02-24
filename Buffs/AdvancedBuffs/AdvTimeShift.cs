@@ -1,0 +1,12 @@
+using Terraria;
+using Terraria.ModLoader;
+
+namespace ExxoAvalonOrigins.Buffs.AdvancedBuffs;
+
+public class AdvTimeShift : ModBuff
+{
+    public override void Update(Player player, ref int buffIndex)
+    {
+        Main.time--;
+    }
+}

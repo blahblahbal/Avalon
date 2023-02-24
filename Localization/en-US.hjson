@@ -1452,6 +1452,286 @@ Mods: {
 				Tooltip: Restores 120 stamina
 			}
 
+			AdvAmmoReservationPotion: {
+				DisplayName: Ammo Reservation Elixir
+				Tooltip: 30% chance to not consume ammo
+			}
+
+			AdvArcheryPotion: {
+				DisplayName: Archery Elixir
+				Tooltip: 30% increased arrow speed and damage
+			}
+
+			AdvBattlePotion: {
+				DisplayName: Battle Elixir
+				Tooltip: Increases enemy spawn rate
+			}
+
+			AdvBloodCastPotion: {
+				DisplayName: Blood Casting Elixir
+				Tooltip: Adds your max life to your max mana
+			}
+
+			AdvBuilderPotion: {
+				DisplayName: Builder Elixir
+				Tooltip: Increased placement speed and range
+			}
+
+			AdvCalmingPotion: {
+				DisplayName: Calming Elixir
+				Tooltip: Reduces enemy aggression and spawn rate
+			}
+
+			AdvCratePotion: {
+				DisplayName: Crate Elixir
+				Tooltip: Increases chance to get a crate
+			}
+
+			AdvAuraPotion: {
+				DisplayName: Aura Elixir
+				Tooltip: On-screen enemies take damage
+			}
+
+			AdvDangersensePotion: {
+				DisplayName: Dangersense Elixir
+				Tooltip: Allows you to see nearby traps
+			}
+
+			AdvEndurancePotion: {
+				DisplayName: Endurance Elixir
+				Tooltip: Reduces damage taken by 15%
+			}
+
+			AdvFeatherfallPotion: {
+				DisplayName: Featherfall Elixir
+				Tooltip: Slows falling speed
+			}
+
+			AdvFishingPotion: {
+				DisplayName: Fishing Elixir
+				Tooltip: Increases fishing skill
+			}
+
+			AdvFlipperPotion: {
+				DisplayName: Flipper Elixir
+				Tooltip: Lets you move swiftly in liquids
+			}
+
+			AdvForceFieldPotion: {
+				DisplayName: Force Field Elixir
+				Tooltip: Enables a projectile-reflecting force field
+			}
+
+			AdvFuryPotion: {
+				DisplayName: Fury Elixir
+				Tooltip: Increases critical strike damage by 30%
+			}
+
+			AdvGauntletPotion: {
+				DisplayName: Gauntlet Elixir
+				Tooltip: -10 defense, +18% melee damage
+			}
+
+			AdvGillsPotion: {
+				DisplayName: Gills Elixir
+				Tooltip: Breathe water instead of air
+			}
+
+			AdvGPSPotion: {
+				DisplayName: GPS Elixir
+				Tooltip: GPS Effect
+			}
+
+			AdvGravitationPotion: {
+				DisplayName: Gravitation Elixir
+				Tooltip: Allows the control of gravity
+			}
+
+			AdvHeartreachPotion: {
+				DisplayName: Heartreach Elixir
+				Tooltip: Increases pickup range for life hearts
+			}
+
+			AdvHunterPotion: {
+				DisplayName: Hunter Elixir
+				Tooltip: Shows the location of enemies
+			}
+
+			AdvInfernoPotion: {
+				DisplayName: Inferno Elixir
+				Tooltip: Ignites nearby enemies
+			}
+
+			AdvInvincibilityPotion: {
+				DisplayName: Invincibility Elixir
+				Tooltip: Grants invincibility
+			}
+
+			AdvInvisibilityPotion: {
+				DisplayName: Invisibility Elixir
+				Tooltip: Grants invisibility
+			}
+
+			AdvIronskinPotion: {
+				DisplayName: Ironskin Elixir
+				Tooltip: Increases defense by 12
+			}
+
+			AdvLeapingPotion: {
+				DisplayName: Leaping Elixir
+				Tooltip: Increases vertical acceleration
+			}
+
+			AdvLifeforcePotion: {
+				DisplayName: Lifeforce Elixir
+				Tooltip: Increases max life by 30%
+			}
+
+			AdvLuckPotion: {
+				DisplayName: Clover Elixir
+				Tooltip: Doubles rare drop chance
+			}
+
+			AdvMagicPowerPotion: {
+				DisplayName: Magic Power Elixir
+				Tooltip: 30% increased magic damage
+			}
+
+			AdvMagnetPotion: {
+				DisplayName: Magnet Elixir
+				Tooltip: Increases item grab range
+			}
+
+			AdvManaRegenerationPotion: {
+				DisplayName: Mana Regeneration Elixir
+				Tooltip: Increased mana regeneration
+			}
+
+			AdvMiningPotion: {
+				DisplayName: Mining Elixir
+				Tooltip: Increased mining speed
+			}
+
+			AdvNightOwlPotion: {
+				DisplayName: Night Owl Elixir
+				Tooltip: Increased night vision
+			}
+
+			AdvObsidianSkinPotion: {
+				DisplayName: Obsidian Skin Elixir
+				Tooltip: Provides immunity to lava
+			}
+
+			AdvRagePotion: {
+				DisplayName: Rage Elixir
+				Tooltip: Increases critical strike chance by 15%
+			}
+
+			AdvRegenerationPotion: {
+				DisplayName: Regeneration Elixir
+				Tooltip: Increases life regeneration
+			}
+
+			AdvRoguePotion: {
+				DisplayName: Rogue Elixir
+				Tooltip: -5% ranged damage, 25% chance to not consume ammo
+			}
+
+			AdvShadowPotion: {
+				DisplayName: Shadow Elixir
+				Tooltip: Enables teleportation to the cursor
+			}
+
+			AdvShinePotion: {
+				DisplayName: Shine Elixir
+				Tooltip: Emits an aura of light
+			}
+
+			AdvShockwavePotion: {
+				DisplayName: Shockwave Elixir
+				Tooltip: Enemies take damage when you land
+			}
+
+			AdvSonarPotion: {
+				DisplayName: Sonar Elixir
+				Tooltip: Detects hooked fish
+			}
+
+			AdvSpelunkerPotion: {
+				DisplayName: Spelunker Elixir
+				Tooltip: Shows the location of treasure and ore
+			}
+
+			AdvStarbrightPotion: {
+				DisplayName: Starbright Elixir
+				Tooltip: Fallen stars fall even more frequently
+			}
+
+			AdvStrengthPotion: {
+				DisplayName: Strength Elixir
+				Tooltip: Increases all stats
+			}
+
+			AdvSummoningPotion: {
+				DisplayName: Summoning Elixir
+				Tooltip: Increases your max number of minions
+			}
+
+			AdvSupersonicPotion: {
+				DisplayName: Supersonic Elixir
+				Tooltip: Increases movement speed to the maximum
+			}
+
+			AdvSwiftnessPotion: {
+				DisplayName: Swiftness Elixir
+				Tooltip: 50% increased movement speed
+			}
+
+			AdvThornsPotion: {
+				DisplayName: Thorns Elixir
+				Tooltip: Attackers also take full damage
+			}
+
+			AdvTimeShiftPotion: {
+				DisplayName: Time Shift Elixir
+				Tooltip: Stops time
+			}
+
+			AdvTitanPotion: {
+				DisplayName: Titan Elixir
+				Tooltip: Increases knockback
+			}
+
+			AdvTitanskinPotion: {
+				DisplayName: Titanskin Elixir
+				Tooltip: -6% damage, +20 defense
+			}
+
+			AdvVisionPotion: {
+				DisplayName: Vision Elixir
+				Tooltip: Open caves light up (Currently not functional)
+			}
+
+			AdvWarmthPotion: {
+				DisplayName: Warmth Elixir
+				Tooltip: Reduces damage from cold sources
+			}
+
+			AdvWaterWalkingPotion: {
+				DisplayName: Water Walking Elixir
+				Tooltip: Allows the ability to walk on liquids
+			}
+
+			AdvWisdomPotion: {
+				DisplayName: Wisdom Elixir
+				Tooltip: -4% magic damage, +120 mana
+			}
+
+			AdvWrathPotion: {
+				DisplayName: Wrath Elixir
+				Tooltip: Increases damage by 15%
+			}
+
 			BismuthChainmail: {
 				DisplayName: Bismuth Chainmail
 				Tooltip: ""
@@ -1754,6 +2034,131 @@ Mods: {
 				DisplayName: The Beak
 				Tooltip: ""
 			}
+
+			HerbologyBench: {
+				DisplayName: Herbology Bench
+				Tooltip: ""
+			}
+
+			LargeBarfbushSeed: {
+				DisplayName: Large Barfbush Seed
+				Tooltip: ""
+			}
+
+			LargeBarfbush: {
+				DisplayName: Large Barfbush
+				Tooltip: ""
+			}
+
+			LargeBlinkrootSeed: {
+				DisplayName: Large Blinkroot Seed
+				Tooltip: ""
+			}
+
+			LargeBlinkroot: {
+				DisplayName: Large Blinkroot
+				Tooltip: ""
+			}
+
+			LargeBloodberrySeed: {
+				DisplayName: Large Bloodberry Seed
+				Tooltip: ""
+			}
+
+			LargeBloodberry: {
+				DisplayName: Large Bloodberry
+				Tooltip: ""
+			}
+
+			LargeDaybloomSeed: {
+				DisplayName: Large Daybloom Seed
+				Tooltip: ""
+			}
+
+			LargeDaybloom: {
+				DisplayName: Large Daybloom
+				Tooltip: ""
+			}
+
+			LargeDeathweedSeed: {
+				DisplayName: Large Deathweed Seed
+				Tooltip: ""
+			}
+
+			LargeDeathweed: {
+				DisplayName: Large Deathweed
+				Tooltip: ""
+			}
+
+			LargeFireblossomSeed: {
+				DisplayName: Large Fireblossom Seed
+				Tooltip: ""
+			}
+
+			LargeFireblossom: {
+				DisplayName: Large Fireblossom
+				Tooltip: ""
+			}
+
+			LargeHolybirdSeed: {
+				DisplayName: Large Holybird Seed
+				Tooltip: ""
+			}
+
+			LargeHolybird: {
+				DisplayName: Large Holybird
+				Tooltip: ""
+			}
+
+			LargeMoonglowSeed: {
+				DisplayName: Large Moonglow Seed
+				Tooltip: ""
+			}
+
+			LargeMoonglow: {
+				DisplayName: Large Moonglow
+				Tooltip: ""
+			}
+
+			LargeShiverthornSeed: {
+				DisplayName: Large Shiverthorn Seed
+				Tooltip: ""
+			}
+
+			LargeShiverthorn: {
+				DisplayName: Large Shiverthorn
+				Tooltip: ""
+			}
+
+			LargeSweetstemSeed: {
+				DisplayName: Large Sweetstem Seed
+				Tooltip: ""
+			}
+
+			LargeSweetstem: {
+				DisplayName: Large Sweetstem
+				Tooltip: ""
+			}
+
+			LargeTwilightPlumeSeed: {
+				DisplayName: Large Twilight Plume Seed
+				Tooltip: ""
+			}
+
+			LargeTwilightPlume: {
+				DisplayName: Large Twilight Plume
+				Tooltip: ""
+			}
+
+			LargeWaterleafSeed: {
+				DisplayName: Large Waterleaf Seed
+				Tooltip: ""
+			}
+
+			LargeWaterleaf: {
+				DisplayName: Large Waterleaf
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -1832,6 +2237,286 @@ Mods: {
 			StaminaDrain: {
 				DisplayName: Stamina Sickness
 				Description: Stamina usage is increased by
+			}
+
+			AdvAmmoReservation: {
+				DisplayName: Advanced Ammo Reservation
+				Description: 30% chance to not consume ammo
+			}
+
+			AdvArchery: {
+				DisplayName: Advanced Archery
+				Description: 30% increased arrow speed and damage
+			}
+
+			AdvBattle: {
+				DisplayName: Advanced Battle
+				Description: Increased enemy spawn rate
+			}
+
+			AdvBloodCast: {
+				DisplayName: Advanced Blood Casting
+				Description: Maximum life is added to maximum mana
+			}
+
+			AdvBuilder: {
+				DisplayName: Advanced Builder
+				Description: Increased placement speed and range
+			}
+
+			AdvCalming: {
+				DisplayName: Advanced Calming
+				Description: Reduced enemy aggression
+			}
+
+			AdvCrate: {
+				DisplayName: Advanced Crate
+				Description: Greater chance of fishing up a crate
+			}
+
+			AdvCrimson: {
+				DisplayName: Advanced Aura Drain
+				Description: On-screen enemies take damage
+			}
+
+			AdvDangersense: {
+				DisplayName: Advanced Dangersense
+				Description: You can see nearby hazards
+			}
+
+			AdvEndurance: {
+				DisplayName: Advanced Endurance
+				Description: 15% reduced damage taken
+			}
+
+			AdvFeatherfall: {
+				DisplayName: Advanced Featherfall
+				Description: Press UP or DOWN to control the speed of descent
+			}
+
+			AdvFishing: {
+				DisplayName: Advanced Fishing
+				Description: Increased fishing level
+			}
+
+			AdvFlipper: {
+				DisplayName: Advanced Flipper
+				Description: Move like normal in water
+			}
+
+			AdvForceField: {
+				DisplayName: Advanced Force Field
+				Description: A force field surrounds you
+			}
+
+			AdvFury: {
+				DisplayName: Advanced Fury
+				Description: 30% increased critical strike damage
+			}
+
+			AdvGauntlet: {
+				DisplayName: Advanced Gauntlet
+				Description: -10 defense, +18% melee damage
+			}
+
+			AdvGills: {
+				DisplayName: Advanced Gills
+				Description: Breathe water instead of air
+			}
+
+			AdvGPS: {
+				DisplayName: Advanced GPS
+				Description: GPS Effect
+			}
+
+			AdvGravitation: {
+				DisplayName: Advanced Gravitation
+				Description: Press UP to reverse gravity
+			}
+
+			AdvHeartreach: {
+				DisplayName: Advanced Heartreach
+				Description: Increased heart pickup range
+			}
+
+			AdvHunter: {
+				DisplayName: Advanced Hunter
+				Description: Shows the location of enemies
+			}
+
+			AdvInferno: {
+				DisplayName: Advanced Inferno
+				Description: Nearby enemies are ignited
+			}
+
+			AdvInvincibility: {
+				DisplayName: Advanced Invincibility
+				Description: You are invincible
+			}
+
+			AdvInvisibility: {
+				DisplayName: Advanced Invisibility
+				Description: Grants invisibility
+			}
+
+			AdvIronskin: {
+				DisplayName: Advanced Ironskin
+				Description: Increases defense by 12
+			}
+
+			AdvLeaping: {
+				DisplayName: Advanced Leaping
+				Description: Vertical acceleration is increased
+			}
+
+			AdvLifeforce: {
+				DisplayName: Advanced Lifeforce
+				Description: 30% increased max life
+			}
+
+			AdvLuck: {
+				DisplayName: Advanced Clover
+				Description: Doubles rare drop chance
+			}
+
+			AdvMagicPower: {
+				DisplayName: Advanced Magic Power
+				Description: 30% increased magic damage
+			}
+
+			AdvMagnet: {
+				DisplayName: Advanced Magnet
+				Description: Item grab range is increased
+			}
+
+			AdvManaRegeneration: {
+				DisplayName: Advanced Mana Regeneration
+				Description: Increased mana regeneration
+			}
+
+			AdvMining: {
+				DisplayName: Advanced Mining
+				Description: 35% increased mining speed
+			}
+
+			AdvNightOwl: {
+				DisplayName: Advanced Night Owl
+				Description: Increased night vision
+			}
+
+			AdvObsidianSkin: {
+				DisplayName: Advanced Obsidian Skin
+				Description: Immune to lava
+			}
+
+			AdvRage: {
+				DisplayName: Advanced Rage
+				Description: 15% increased critical strike chance
+			}
+
+			AdvRegeneration: {
+				DisplayName: Advanced Regeneration
+				Description: Provides life regeneration
+			}
+
+			AdvRogue: {
+				DisplayName: Advanced Rogue
+				Description: -5% ranged damage, 25% chance to not consume ammo
+			}
+
+			AdvShadow: {
+				DisplayName: Advanced Shadows
+				Description: You can teleport to the cursor, press V
+			}
+
+			AdvShine: {
+				DisplayName: Advanced Shine
+				Description: Emitting a lot of light
+			}
+
+			AdvShockwave: {
+				DisplayName: Advanced Shockwave
+				Description: Enemies take damage when you land
+			}
+
+			AdvSonar: {
+				DisplayName: Advanced Sonar
+				Description: You can see what's biting your hook
+			}
+
+			AdvSpelunker: {
+				DisplayName: Advanced Spelunker
+				Description: Shows the location of treasure and ore
+			}
+
+			AdvStarbright: {
+				DisplayName: Advanced Starbright
+				Description: Fallen stars fall more frequently
+			}
+
+			AdvStrength: {
+				DisplayName: Advanced Strength
+				Description: Increased stats
+			}
+
+			AdvSummoning: {
+				DisplayName: Advanced Summoning
+				Description: Increased max number of minions
+			}
+
+			AdvSupersonic: {
+				DisplayName: Advanced Supersonic
+				Description: You are speedy
+			}
+
+			AdvSwiftness: {
+				DisplayName: Advanced Swiftness
+				Description: Increases movement speed by 50%
+			}
+
+			AdvThorns: {
+				DisplayName: Advanced Thorns
+				Description: Attackers also take full damage
+			}
+
+			AdvTimeShift: {
+				DisplayName: Advanced Time Shift
+				Description: Time is stopped
+			}
+
+			AdvTitan: {
+				DisplayName: Advanced Titan
+				Description: Increases knockback
+			}
+
+			AdvTitanskin: {
+				DisplayName: Advanced Titanskin
+				Description: Defense is increased by 20 and damage is reduced by 6%
+			}
+
+			AdvVision: {
+				DisplayName: Advanced Vision
+				Description: Open caves light up
+			}
+
+			AdvWarmth: {
+				DisplayName: Advanced Warmth
+				Description: Reduces damage from cold sources
+			}
+
+			AdvWaterWalking: {
+				DisplayName: Advanced Water Walking
+				Description: Press DOWN to enter water
+			}
+
+			AdvWisdom: {
+				DisplayName: Advanced Wisdom
+				Description: -4% magic damage, +120 mana
+			}
+
+			AdvWrath: {
+				DisplayName: Advanced Wrath
+				Description: 15% increased damage
 			}
 		}
 
