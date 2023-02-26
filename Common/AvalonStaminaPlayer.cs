@@ -15,6 +15,7 @@ public class AvalonStaminaPlayer : ModPlayer
 {
     public static int StaminaDrainTime = 10 * 60;
 
+    public bool EnergyCrystal;
     public int FlightRestoreCooldown = 0;
     public bool FlightRestoreUnlocked = false;
     public bool ReleaseQuickStamina;
@@ -48,7 +49,8 @@ public class AvalonStaminaPlayer : ModPlayer
     {
         StaminaDrain = false;
         StamFlower = false;
-        StaminaRegen = 1000;
+        if (EnergyCrystal) { StaminaRegen = 800; StaminaRegenCost = 800; }
+        else { StaminaRegen = 1000; StaminaRegenCost = 1000; }
     }
     public void QuickStamina(int stamNeeded = 0) // todo: make stamina flower not allow you to consume stam pots that wouldn't allow you to continue using stamina
     {
@@ -554,6 +556,7 @@ public class AvalonStaminaPlayer : ModPlayer
     public override void SaveData(TagCompound tag)
     {
         tag["ExxoAvalonOrigins:Stamina"] = StatStamMax;
+        tag["ExxoAvalonOrigins:EnergyCrystal"] = EnergyCrystal;
         tag["ExxoAvalonOrigins:RocketJumpUnlocked"] = RocketJumpUnlocked;
         tag["ExxoAvalonOrigins:TeleportUnlocked"] = TeleportUnlocked;
         tag["ExxoAvalonOrigins:SwimmingUnlocked"] = SwimmingUnlocked;
@@ -564,7 +567,11 @@ public class AvalonStaminaPlayer : ModPlayer
     {
         if (tag.ContainsKey("ExxoAvalonOrigins:Stamina"))
         {
-            StatStamMax = tag.GetAsInt("ExxoAvalonOrigins:Stamina");
+            StatStamMax = tag.GetAsInt("ExxoAvalonOrigins:EnergyCrystal");
+        }
+        if (tag.ContainsKey("ExxoAvalonOrigins:EnergyCrystal"))
+        {
+            RocketJumpUnlocked = tag.Get<bool>("ExxoAvalonOrigins:RocketJumpUnlocked");
         }
         if (tag.ContainsKey("ExxoAvalonOrigins:RocketJumpUnlocked"))
         {

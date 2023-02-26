@@ -2387,6 +2387,11 @@ Mods: {
 				DisplayName: Pulse Veil
 				Tooltip: ""
 			}
+
+			EnergyCrystal: {
+				DisplayName: Energy Crystal
+				Tooltip: "Permanantly increases stamina regeneration"
+			}
 		}
 
 		Projectiles: {
