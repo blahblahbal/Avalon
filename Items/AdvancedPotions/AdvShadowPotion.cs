@@ -26,7 +26,7 @@ class AdvShadowPotion : ModItem
         Item.width = dims.Width;
         Item.useTime = 15;
         Item.useStyle = ItemUseStyleID.DrinkLiquid;
-        Item.maxStack = 100;
+        Item.maxStack = 9999;
         Item.value = Item.sellPrice(0, 0, 4, 0);
         Item.useAnimation = 15;
         Item.height = dims.Height;

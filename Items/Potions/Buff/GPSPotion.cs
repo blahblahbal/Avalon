@@ -26,7 +26,7 @@ class GPSPotion : ModItem
         Item.useTime = 15;
         Item.value = 2000;
         Item.useStyle = ItemUseStyleID.DrinkLiquid;
-        Item.maxStack = 100;
+        Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
         Item.buffTime = 18000;

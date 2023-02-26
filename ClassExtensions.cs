@@ -25,7 +25,14 @@ public static class ClassExtensions
     /// <returns>Whether or not the item is an armor piece.</returns>
     public static bool IsArmor(this Item item) =>
         (item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1) && !item.vanity;
-    
+
+    /// <summary>
+    ///     Checks if the current player has an item in their armor/accessory slots.
+    /// </summary>
+    /// <param name="p">The player.</param>
+    /// <param name="type">The item ID to check.</param>
+    /// <returns>Whether or not the item is found.</returns>
+    public static bool HasItemInArmor(this Player p, int type) => p.armor.Any(t => type == t.type);
     public static bool InPillarZone(this Player p)
     {
         if (!p.ZoneTowerStardust && !p.ZoneTowerVortex && !p.ZoneTowerSolar)

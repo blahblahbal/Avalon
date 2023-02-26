@@ -1,10 +1,11 @@
+using ExxoAvalonOrigins.Common;
 using ExxoAvalonOrigins.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Accessories.PreHardmode;
+namespace ExxoAvalonOrigins.Items.Accessories.Vanity;
 
 internal class BagofBlood : ModItem
 {
@@ -21,7 +22,7 @@ internal class BagofBlood : ModItem
         Item.vanity = true;
         Item.value = Item.sellPrice(0, 1);
         Item.height = 20;
-        //Item.GetGlobalItem<AvalonGlobalItemInstance>().UpdateInvisibleVanity = true;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
@@ -35,10 +36,11 @@ internal class BagofBlood : ModItem
     {
         Recipe.Create(1)
             .AddIngredient(ItemID.Vertebrae, 15)
-            .AddIngredient(ItemID.Ichor, 10)
+            //.AddIngredient(ItemID.Ichor, 10)
             .AddIngredient(ItemID.CrimstoneBlock, 50)
             .AddIngredient(ModContent.ItemType<CorruptShard>(), 5)
-            .AddTile(TileID.Hellforge).Register();
+            .AddTile(TileID.Hellforge)
+            .Register();
     }
     public override void UpdateVanity(Player player)
     {

@@ -20,7 +20,7 @@ class StaminaCrystal : ModItem
         Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
         Item.useTime = 30;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.UseSound = SoundID.Item29;
         Item.value = 95000;

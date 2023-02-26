@@ -1,5 +1,7 @@
-﻿using ExxoAvalonOrigins.Items.Material;
+﻿using ExxoAvalonOrigins.Items.Accessories.PreHardmode;
+using ExxoAvalonOrigins.Items.Material;
 using ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
+using ExxoAvalonOrigins.Prefixes;
 using ExxoAvalonOrigins.Tiles;
 using System.Collections.Generic;
 using Terraria;
@@ -7,11 +9,30 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace ExxoAvalonOrigins.Common;
 
 public class AvalonGlobalItem : GlobalItem
 {
+    private static readonly List<int> nonSolidExceptions = new()
+    {
+        TileID.Cobweb,
+        TileID.LivingCursedFire,
+        TileID.LivingDemonFire,
+        TileID.LivingFire,
+        TileID.LivingFrostFire,
+        TileID.LivingIchor,
+        TileID.LivingUltrabrightFire,
+        TileID.ChimneySmoke,
+        TileID.Bubble,
+        TileID.Rope,
+        TileID.SilkRope,
+        TileID.VineRope,
+        TileID.WebRope,
+        //ModContent.TileType<LivingLightning>(),
+        //ModContent.TileType<VineRope>(),
+    };
     public override void AddRecipes()
     {
         // --== Shimmer!!! ==--
@@ -26,6 +47,53 @@ public class AvalonGlobalItem : GlobalItem
         MandibleBladeTransmute.AddCondition(Recipe.Condition.CrimsonWorld);
         MandibleBladeTransmute.Register();
     }
+
+    public override void HoldItem(Item item, Player player)
+    {
+        #region barbaric prefix logic
+        var tempItem = new Item();
+        tempItem.netDefaults(item.netID);
+        tempItem = item.Clone();
+        float kbDiff = 0f;
+        if (item.prefix == PrefixID.Superior || item.prefix == PrefixID.Savage || item.prefix == PrefixID.Bulky ||
+            item.prefix == PrefixID.Taboo || item.prefix == PrefixID.Celestial ||
+            item.prefix == ModContent.PrefixType<Horrific>())
+        {
+            kbDiff = 0.1f;
+        }
+        else if (item.prefix == PrefixID.Forceful || item.prefix == PrefixID.Strong ||
+                 item.prefix == PrefixID.Unpleasant ||
+                 item.prefix == PrefixID.Godly || item.prefix == PrefixID.Heavy || item.prefix == PrefixID.Legendary ||
+                 item.prefix == PrefixID.Intimidating || item.prefix == PrefixID.Staunch ||
+                 item.prefix == PrefixID.Unreal ||
+                 item.prefix == PrefixID.Furious || item.prefix == PrefixID.Mythical)
+        {
+            kbDiff = 0.15f;
+        }
+        else if (item.prefix == PrefixID.Broken || item.prefix == PrefixID.Weak || item.prefix == PrefixID.Shameful ||
+                 item.prefix == PrefixID.Awkward)
+        {
+            kbDiff = -0.2f;
+        }
+        else if (item.prefix == PrefixID.Nasty || item.prefix == PrefixID.Ruthless || item.prefix == PrefixID.Unhappy ||
+                 item.prefix == PrefixID.Light || item.prefix == PrefixID.Awful || item.prefix == PrefixID.Deranged ||
+                 item.prefix == ModContent.PrefixType<Excited>())
+        {
+            kbDiff = -0.1f;
+        }
+        else if (item.prefix == PrefixID.Shoddy || item.prefix == PrefixID.Terrible)
+        {
+            kbDiff = -0.15f;
+        }
+        else if (item.prefix == PrefixID.Deadly || item.prefix == PrefixID.Masterful)
+        {
+            kbDiff = 0.05f;
+        }
+
+        item.knockBack = tempItem.knockBack * (1 + kbDiff);
+        item.knockBack *= player.GetModPlayer<AvalonPlayer>().BonusKB;
+        #endregion barbaric prefix logic
+    }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
         if(item.type == ItemID.PlanteraBossBag)
@@ -36,6 +104,10 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void SetDefaults(Item item)
     {
+        if (item.IsArmor())
+        {
+            ItemID.Sets.CanGetPrefixes[item.type] = true;
+        }
         if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)
         {
             item.accessory = true;
@@ -192,6 +264,14 @@ public class AvalonGlobalItem : GlobalItem
             }
         }
 
+        if (!item.social && PrefixLoader.GetPrefix(item.prefix) is ExxoPrefix exxoPrefix)
+        {
+            if (exxoPrefix.Category is PrefixCategory.Accessory or PrefixCategory.Custom)
+            {
+                tooltips.AddRange(exxoPrefix.TooltipLines);
+            }
+        }
+
         switch (item.type)
         {
             //case ItemID.Vine:
@@ -299,4 +379,71 @@ public class AvalonGlobalItem : GlobalItem
         }
         return base.AllowPrefix(item, pre);
     }
+    public override bool? PrefixChance(Item item, int pre, UnifiedRandom rand)
+    {
+        if (item.IsArmor() && pre == -3)
+        {
+            return true;
+        }
+        if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome && (pre == -1 || pre == -3))
+        {
+            return false;
+        }
+
+        return base.PrefixChance(item, pre, rand);
+    }
+    public override bool? UseItem(Item item, Player player)
+    {
+        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer)
+        {
+            bool inrange =
+                (player.position.X / 16f) - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost -
+                player.blockRange <= Player.tileTargetX &&
+                ((player.position.X + player.width) / 16f) + Player.tileRangeX +
+                player.inventory[player.selectedItem].tileBoost - 1f + player.blockRange >= Player.tileTargetX &&
+                (player.position.Y / 16f) - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost -
+                player.blockRange <= Player.tileTargetY &&
+                ((player.position.Y + player.height) / 16f) + Player.tileRangeY +
+                player.inventory[player.selectedItem].tileBoost - 2f + player.blockRange >= Player.tileTargetY;
+            if (item.createTile > -1 &&
+                (Main.tileSolid[item.createTile] || nonSolidExceptions.Contains(item.createTile)) &&
+                (Main.tile[Player.tileTargetX, Player.tileTargetY].LiquidType != LiquidID.Lava ||
+                 player.HasItemInArmor(ModContent.ItemType<ObsidianGlove>())) &&
+                !Main.tile[Player.tileTargetX, Player.tileTargetY].HasTile && inrange)
+            {
+                bool subtractFromStack = WorldGen.PlaceTile(Player.tileTargetX, Player.tileTargetY, item.createTile);
+                if (Main.tile[Player.tileTargetX, Player.tileTargetY].HasTile &&
+                    Main.netMode != NetmodeID.SinglePlayer && subtractFromStack)
+                {
+                    NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 1, Player.tileTargetX,
+                        Player.tileTargetY, item.createTile);
+                }
+
+                if (subtractFromStack)
+                {
+                    item.stack--;
+                }
+            }
+
+            if (item.createWall > 0 && Main.tile[Player.tileTargetX, Player.tileTargetY].WallType == 0 && inrange)
+            {
+                WorldGen.PlaceWall(Player.tileTargetX, Player.tileTargetY, item.createWall);
+                if (Main.tile[Player.tileTargetX, Player.tileTargetY].WallType != 0 &&
+                    Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 3, Player.tileTargetX,
+                        Player.tileTargetY, item.createWall);
+                }
+
+                //Main.PlaySound(0, Player.tileTargetX * 16, Player.tileTargetY * 16, 1);
+                item.stack--;
+            }
+        }
+
+        return base.UseItem(item, player);
+    }
+
+    public override int ChoosePrefix(Item item, UnifiedRandom rand) => item.IsArmor()
+        ? Main.rand.Next(ExxoPrefix.ExxoCategoryPrefixes[ExxoPrefixCategory.Armor]).Type
+        : base.ChoosePrefix(item, rand);
 }

@@ -23,7 +23,7 @@ namespace ExxoAvalonOrigins.Items
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            NPC.NewNPC(NPC.GetSource_NaturalSpawn(), (int)Main.MouseWorld.X, (int)Main.MouseWorld.Y, ModContent.NPCType<OreSlime>());
+            NPC.NewNPC(NPC.GetSource_NaturalSpawn(), (int)Main.MouseWorld.X, (int)Main.MouseWorld.Y, 107);
             return false;
         }
     }

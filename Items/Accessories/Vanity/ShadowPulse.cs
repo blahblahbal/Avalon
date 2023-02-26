@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Accessories.PreHardmode;
+namespace ExxoAvalonOrigins.Items.Accessories.Vanity;
 
 class ShadowPulse : ModItem
 {
@@ -20,6 +20,7 @@ class ShadowPulse : ModItem
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 45);
         Item.height = dims.Height;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
     public override void UpdateVanity(Player player)
     {
@@ -36,7 +37,7 @@ class ShadowPulse : ModItem
     {
         CreateRecipe(1)
             .AddIngredient(ModContent.ItemType<ShadowCharm>())
-            .AddIngredient(ModContent.ItemType<PulseCharm>())
+            .AddIngredient(ModContent.ItemType<PulseVeil>())
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }

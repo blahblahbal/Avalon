@@ -24,7 +24,7 @@ class StaminaPotion : ModItem
         Item.useTime = 17;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina = 55;
         Item.useStyle = ItemUseStyleID.DrinkLiquid;
-        Item.maxStack = 50;
+        Item.maxStack = 9999;
         Item.value = 900;
         Item.useAnimation = 17;
         Item.height = dims.Height;

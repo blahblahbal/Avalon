@@ -537,11 +537,58 @@ Mods: {
 					'''
 			}
 
+			BagofFrost: {
+				DisplayName: Bag of Frost
+				Tooltip:
+					'''
+					Frostburn particles cover you when you move
+					Works in the vanity slot
+					'''
+			}
+
+			BagofHallows: {
+				DisplayName: Bag of Hallows
+				Tooltip:
+					'''
+					Hallow particles cover you when you move
+					Works in the vanity slot
+					'''
+			}
+
+			BagofIck: {
+				DisplayName: Bag of Ick
+				Tooltip:
+					'''
+					Icky particles cover you when you move
+					Works in the vanity slot
+					'''
+			}
+
 			BagofShadows: {
 				DisplayName: Bag of Shadows
 				Tooltip:
 					'''
 					Shadow particles cover you when you move
+					Works in the vanity slot
+					'''
+			}
+
+			Omnibag: {
+				DisplayName: Omnibag
+				Tooltip:
+					'''
+					A lot of particles cover you when you move
+					Works in the vanity slot
+					'''
+			}
+
+			ShadowPulseBag: {
+				DisplayName: Shadow Pulse Bag
+				Tooltip:
+					'''
+					A lot of particles cover you when you move
+					The holder has pulsing outlines
+					The holder has afterimages when moving
 					Works in the vanity slot
 					'''
 			}
@@ -1422,11 +1469,6 @@ Mods: {
 				Tooltip: ""
 			}
 
-			SliththroatNecklace: {
-				DisplayName: Sliththroat Necklace
-				Tooltip: ""
-			}
-
 			EnchantedShuriken: {
 				DisplayName: Enchanted Shuriken
 				Tooltip: ""
@@ -1434,7 +1476,29 @@ Mods: {
 
 			SlitthroatNecklace: {
 				DisplayName: Slitthroat Necklace
-				Tooltip: ""
+				Tooltip:
+					'''
+					Melee attacks inflict bleeding
+					+15 armor penetration
+					'''
+			}
+
+			CloudGlove: {
+				DisplayName: Cloud Glove
+				Tooltip:
+					'''
+					The wearer can place blocks and walls in midair
+					Works in the vanity slot
+					'''
+			}
+
+			ObsidianGlove: {
+				DisplayName: Obsidian Glove
+				Tooltip:
+					'''
+					The wearer can place blocks and walls in midair and in lava
+					Works in the vanity slot
+					'''
 			}
 
 			DragonOrb: {
@@ -2318,6 +2382,11 @@ Mods: {
 				DisplayName: Sweetstem
 				Tooltip: ""
 			}
+
+			PulseVeil: {
+				DisplayName: Pulse Veil
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -2788,6 +2857,52 @@ Mods: {
 			Peridot.MapEntry: Peridot
 			Tourmaline.MapEntry: Tourmaline
 			Zircon.MapEntry: Zircon
+		}
+
+		Prefixes: {
+			Automated.DisplayName: Automated
+			Awestruck.DisplayName: Awestruck
+			Barbaric.DisplayName: Barbaric
+			Bloated.DisplayName: Bloated
+			Bogus.DisplayName: Bogus
+			Boosted.DisplayName: Boosted
+			Busted.DisplayName: Busted
+			Colossal.DisplayName: Colossal
+			Disgusting.DisplayName: Disgusting
+			Dismal.DisplayName: Dismal
+			Drunken.DisplayName: Drunken
+			Enchanted.DisplayName: Enchanted
+			Energized.DisplayName: Energized
+			Excited.DisplayName: Excited
+			Fantastic.DisplayName: Fantastic
+			Fluidic.DisplayName: Fluidic
+			Gilded.DisplayName: Gilded
+			Glorious.DisplayName: Glorious
+			Handy.DisplayName: Handy
+			Hectic.DisplayName: Hectic
+			Horrific.DisplayName: Horrific
+			Insane.DisplayName: Insane
+			Languid.DisplayName: Languid
+			Loaded.DisplayName: Loaded
+			Lurid.DisplayName: Lurid
+			Magical.DisplayName: Magical
+			Marvelous.DisplayName: Marvelous
+			Messy.DisplayName: Messy
+			Mythic.DisplayName: Mythic
+			Needled.DisplayName: Needled
+			Overactive.DisplayName: Overactive
+			Perfect.DisplayName: Perfect
+			Phantasmal.DisplayName: Phantasmal
+			Protective.DisplayName: Protective
+			Robust.DisplayName: Robust
+			Sharpened.DisplayName: Sharpened
+			Silly.DisplayName: Silly
+			Slimy.DisplayName: Slimy
+			Stupid.DisplayName: Stupid
+			Timid.DisplayName: Timid
+			Turboshrunk.DisplayName: Turboshrunk
+			Vigorous.DisplayName: Vigorous
+			Woozy.DisplayName: Woozy
 		}
 	}
 }

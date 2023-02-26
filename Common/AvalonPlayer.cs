@@ -1,6 +1,7 @@
 ﻿using ExxoAvalonOrigins.Buffs;
 using ExxoAvalonOrigins.Buffs.AdvancedBuffs;
 using ExxoAvalonOrigins.Items.Other;
+using ExxoAvalonOrigins.Prefixes;
 using ExxoAvalonOrigins.Systems;
 using ExxoAvalonOrigins.Walls;
 using Microsoft.Xna.Framework;
@@ -19,6 +20,8 @@ public class AvalonPlayer : ModPlayer
     public float MagicCritDamage = 1f;
     public float MeleeCritDamage = 1f;
     public float RangedCritDamage = 1f;
+    public float CritDamageMult = 1f;
+
     public bool AdjShimmer;
     public bool oldAdjShimmer;
     private int gemCount;
@@ -33,6 +36,8 @@ public class AvalonPlayer : ModPlayer
     public bool Lucky;
     public bool PulseCharm;
     public bool ShadowCharm;
+    public bool CloudGlove;
+    public float BonusKB = 1f;
 
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
@@ -52,11 +57,19 @@ public class AvalonPlayer : ModPlayer
         Lucky = false;
         PulseCharm = false;
         ShadowCharm = false;
+        CritDamageMult = 1f;
+        BonusKB = 1f;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
     }
 
     public override void PostUpdateEquips()
     {
+        for (int i = 0; i <= 9; i++)
+        {
+            Item item = Player.armor[i];
+            (PrefixLoader.GetPrefix(item.prefix) as ExxoPrefix)?.UpdateOwnerPlayer(Player);
+        }
+
         if (teleportV || tpStam)
         {
             if (tpCD > 300)
@@ -354,6 +367,13 @@ public class AvalonPlayer : ModPlayer
         }
     }
     #region crit dmg stuff
+    public int MultiplyCritDamage(int dmg, float mult = 0f) // dmg = damage before crit application
+    {
+        int bonusDmg = -dmg;
+        bonusDmg += (int)(dmg * ((mult == 0f ? CritDamageMult : mult) + 1f) / 2);
+        return bonusDmg;
+    }
+
     public int MultiplyMagicCritDamage(int dmg, float mult = 0f) // dmg = damage before crit application
     {
         int bonusDmg = -dmg;
@@ -378,6 +398,7 @@ public class AvalonPlayer : ModPlayer
         MagicCritDamage += value;
         MeleeCritDamage += value;
         RangedCritDamage += value;
+        CritDamageMult += value;
     }
     #endregion crit dmg stuff
 }

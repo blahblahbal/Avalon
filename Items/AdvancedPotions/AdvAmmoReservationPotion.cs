@@ -28,7 +28,7 @@ class AdvAmmoReservationPotion : ModItem
         Item.rare = ItemRarityID.Lime;
         Item.useTime = 15;
         Item.useStyle = ItemUseStyleID.DrinkLiquid;
-        Item.maxStack = 100;
+        Item.maxStack = 9999;
         Item.value = Item.sellPrice(0, 0, 4, 0);
         Item.useAnimation = 15;
 

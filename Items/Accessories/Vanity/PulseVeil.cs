@@ -4,9 +4,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Accessories.PreHardmode;
+namespace ExxoAvalonOrigins.Items.Accessories.Vanity;
 
-class PulseCharm : ModItem
+class PulseVeil : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -20,6 +20,7 @@ class PulseCharm : ModItem
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 45);
         Item.height = dims.Height;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
     public override void UpdateVanity(Player player)
     {
