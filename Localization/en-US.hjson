@@ -2318,6 +2318,11 @@ Mods: {
 				DisplayName: Sweetstem
 				Tooltip: ""
 			}
+
+			EnergyCrystal: {
+				DisplayName: Energy Crystal
+				Tooltip: "Permanantly increases stamina regeneration"
+			}
 		}
 
 		Projectiles: {
