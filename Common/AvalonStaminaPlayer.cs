@@ -567,7 +567,11 @@ public class AvalonStaminaPlayer : ModPlayer
     {
         if (tag.ContainsKey("ExxoAvalonOrigins:Stamina"))
         {
-            StatStamMax = tag.GetAsInt("ExxoAvalonOrigins:Stamina");
+            StatStamMax = tag.GetAsInt("ExxoAvalonOrigins:EnergyCrystal");
+        }
+        if (tag.ContainsKey("ExxoAvalonOrigins:EnergyCrystal"))
+        {
+            RocketJumpUnlocked = tag.Get<bool>("ExxoAvalonOrigins:RocketJumpUnlocked");
         }
         if (tag.ContainsKey("ExxoAvalonOrigins:RocketJumpUnlocked"))
         {
