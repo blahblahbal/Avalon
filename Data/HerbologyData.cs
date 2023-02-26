@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using ExxoAvalonOrigins.Items.Placeable.Seed;
 using ExxoAvalonOrigins.Items.Placeable.Tile.LargeHerbs;
+using ExxoAvalonOrigins.Items.Potions.Buff;
 
 namespace ExxoAvalonOrigins.Data;
 
@@ -139,16 +140,16 @@ public static class HerbologyData
         ItemID.BuilderPotion, ItemID.TitanPotion, ItemID.FlipperPotion, ItemID.SummoningPotion, ItemID.TrapsightPotion,
         ItemID.AmmoReservationPotion, ItemID.LifeforcePotion, ItemID.EndurancePotion, ItemID.RagePotion,
         ItemID.InfernoPotion, ItemID.WrathPotion, ItemID.FishingPotion, ItemID.SonarPotion, ItemID.CratePotion,
-        ItemID.WarmthPotion, 
-        //ModContent.ItemType<AuraPotion>(), ModContent.ItemType<ShockwavePotion>(),
-        //ModContent.ItemType<BloodCastPotion>(), ModContent.ItemType<StarbrightPotion>(),
-        //ModContent.ItemType<VisionPotion>(), ModContent.ItemType<StrengthPotion>(), ModContent.ItemType<GPSPotion>(),
-        //ModContent.ItemType<TimeShiftPotion>(), ModContent.ItemType<ShadowPotion>(), ModContent.ItemType<RoguePotion>(),
-        //ModContent.ItemType<GauntletPotion>(), ModContent.ItemType<WisdomPotion>(),
-        //ModContent.ItemType<TitanskinPotion>(), ModContent.ItemType<InvincibilityPotion>(),
-        //ModContent.ItemType<ForceFieldPotion>(), ModContent.ItemType<FuryPotion>(),
-        //ModContent.ItemType<SupersonicPotion>(), ModContent.ItemType<LeapingPotion>(),
-        //ModContent.ItemType<MagnetPotion>(),
+        ItemID.WarmthPotion,
+        ModContent.ItemType<AuraPotion>(), ModContent.ItemType<ShockwavePotion>(),
+        ModContent.ItemType<BloodCastPotion>(), ModContent.ItemType<StarbrightPotion>(),
+        ModContent.ItemType<StrengthPotion>(), ModContent.ItemType<GPSPotion>(),
+        ModContent.ItemType<TimeShiftPotion>(), ModContent.ItemType<ShadowPotion>(), ModContent.ItemType<RoguePotion>(),
+        ModContent.ItemType<GauntletPotion>(), ModContent.ItemType<WisdomPotion>(),
+        ModContent.ItemType<TitanskinPotion>(), ModContent.ItemType<InvincibilityPotion>(),
+        ModContent.ItemType<ForceFieldPotion>(), ModContent.ItemType<FuryPotion>(),
+        ModContent.ItemType<SupersonicPotion>(), ModContent.ItemType<LeapingPotion>(),
+        ModContent.ItemType<MagnetPotion>(),
         // Magnet Potion
     };
 
@@ -204,10 +205,10 @@ public static class HerbologyData
             return amount * ElixirCost;
         }
 
-        //if (item.type == ModContent.ItemType<BlahPotion>())
-        //{
-        //    return amount * BlahPotionCost;
-        //}
+        if (item.type == ModContent.ItemType<BlahPotion>())
+        {
+            return amount * BlahPotionCost;
+        }
 
         if (RestorationIDs.Contains(item.type))
         {
@@ -222,8 +223,8 @@ public static class HerbologyData
         return 0;
     }
 
-    public static bool ItemIsPotion(Item item) => PotionIds.Contains(item.type) || ElixirIds.Contains(item.type);
-        //|| item.type == ModContent.ItemType<BlahPotion>();
+    public static bool ItemIsPotion(Item item) => PotionIds.Contains(item.type) || ElixirIds.Contains(item.type)
+        || item.type == ModContent.ItemType<BlahPotion>();
 
     public static bool ItemIsHerb(Item item) => LargeHerbSeedIdByHerbSeedId.ContainsKey(item.type) ||
                                                 LargeHerbIdByLargeHerbSeedId.ContainsValue(item.type) ||

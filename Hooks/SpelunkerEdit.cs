@@ -2,12 +2,8 @@
 using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using System;
-using System.Reflection;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
-using Terraria.ModLoader;
 
 namespace ExxoAvalonOrigins.Hooks
 {

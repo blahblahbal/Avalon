@@ -555,6 +555,31 @@ Mods: {
 					'''
 			}
 
+			PulseCharm: {
+				DisplayName: Pulse Veil
+				Tooltip: The holder has pulsing outlines
+			}
+
+			ShadowCharm: {
+				DisplayName: Shadow Charm
+				Tooltip:
+					'''
+					The holder has afterimages when moving
+					Works in the vanity slot
+					[c/C39FDD:10th Anniversary Contest Winner - QuibopWon]
+					'''
+			}
+
+			ShadowPulse: {
+				DisplayName: Shadow Pulse
+				Tooltip:
+					'''
+					The holder has pulsing outlines
+					The holder has afterimages when moving
+					Works in the vanity slot
+					'''
+			}
+
 			TeamMirror: {
 				DisplayName: Team Mirror
 				Tooltip:
@@ -1322,9 +1347,24 @@ Mods: {
 				Tooltip: ""
 			}
 
+			BottledLava: {
+				DisplayName: Bottled Lava
+				Tooltip: "'Drinking may be fatal'"
+			}
+
 			ApocalyptusWood: {
 				DisplayName: Apocalyptus Wood
 				Tooltip: ""
+			}
+
+			FakeFourLeafClover: {
+				DisplayName: Fake Four Leaf Clover
+				Tooltip: "'Aww... it's fake!'"
+			}
+
+			FourLeafClover: {
+				DisplayName: Four Leaf Clover
+				Tooltip: You are very lucky to have found this!
 			}
 
 			BismuthBrick: {
@@ -1452,6 +1492,120 @@ Mods: {
 				Tooltip: Restores 120 stamina
 			}
 
+			BloodCastPotion: {
+				DisplayName: Blood Cast Potion
+				Tooltip: Adds your max life to your max mana
+			}
+
+			AuraPotion: {
+				DisplayName: Aura Potion
+				Tooltip: On-screen enemies take damage
+			}
+
+			ForceFieldPotion: {
+				DisplayName: Force Field Potion
+				Tooltip: Enables a projectile-reflecting force field
+			}
+
+			FuryPotion: {
+				DisplayName: Fury Potion
+				Tooltip: Increases critical strike damage by 20%
+			}
+
+			GauntletPotion: {
+				DisplayName: Gauntlet Potion
+				Tooltip: -6 defense, +12% melee damage
+			}
+
+			ImmortalityPotion: {
+				DisplayName: Immortality Potion
+				Tooltip:
+					'''
+					Resurrect in place with 33% life when you are killed
+					Has a 180 second cooldown
+					'''
+			}
+
+			GPSPotion: {
+				DisplayName: GPS Potion
+				Tooltip: GPS effect
+			}
+
+			InvincibilityPotion: {
+				DisplayName: Invincibility Potion
+				Tooltip: Grants invincibility
+			}
+
+			LeapingPotion: {
+				DisplayName: Leaping Potion
+				Tooltip: Increases vertical acceleration
+			}
+
+			CloverPotion: {
+				DisplayName: Clover Potion
+				Tooltip: Doubles rare drop chance
+			}
+
+			MagnetPotion: {
+				DisplayName: Magnet Potion
+				Tooltip: Increases item grab range
+			}
+
+			RoguePotion: {
+				DisplayName: Rogue Potion
+				Tooltip: -5% ranged damage, 20% chance to not consume ammo
+			}
+
+			ShadowPotion: {
+				DisplayName: Shadow Potion
+				Tooltip: Enables teleportation to the cursor
+			}
+
+			ShockwavePotion: {
+				DisplayName: Shockwave Potion
+				Tooltip: Enemies take damage when you land
+			}
+
+			StarbrightPotion: {
+				DisplayName: Starbright Potion
+				Tooltip: Fallen stars fall even more frequently
+			}
+
+			StrengthPotion: {
+				DisplayName: Strength Potion
+				Tooltip: Increases all stats
+			}
+
+			BlahPotion: {
+				DisplayName: Blah Potion
+				Tooltip: Various effects
+			}
+
+			SupersonicPotion: {
+				DisplayName: Supersonic Potion
+				Tooltip: Increases movement speed to the maximum
+			}
+
+			TimeShiftPotion: {
+				DisplayName: Time Shift Potion
+				Tooltip: Slows time down
+			}
+
+			TitanskinPotion: {
+				DisplayName: Titanskin Potion
+				Tooltip: -8% damage, +15 defense
+			}
+
+			VisionPotion: {
+				DisplayName: Vision Potion
+				Tooltip: Open caves light up (Currently not functional)
+			}
+
+			WisdomPotion: {
+				DisplayName: Wisdom Potion
+				Tooltip: -8% magic damage, +60 mana
+			}
+
 			AdvAmmoReservationPotion: {
 				DisplayName: Ammo Reservation Elixir
 				Tooltip: 30% chance to not consume ammo
@@ -1468,7 +1622,7 @@ Mods: {
 			}
 
 			AdvBloodCastPotion: {
-				DisplayName: Blood Casting Elixir
+				DisplayName: Blood Cast Elixir
 				Tooltip: Adds your max life to your max mana
 			}
 
@@ -2159,6 +2313,11 @@ Mods: {
 				DisplayName: Large Waterleaf
 				Tooltip: ""
 			}
+
+			Sweetstem: {
+				DisplayName: Sweetstem
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -2232,6 +2391,96 @@ Mods: {
 			SapphireShardBuff: {
 				DisplayName: Magic Damage Up
 				Description: Magic damage is increased by 8%
+			}
+
+			BloodCast: {
+				DisplayName: Blood Casting
+				Description: Maximum life is added to maximum mana
+			}
+
+			CrimsonDrain: {
+				DisplayName: Aura Drain
+				Description: On-screen enemies take damage
+			}
+
+			Blah: {
+				DisplayName: Blah
+				Description: You shouldn't be affected by this
+			}
+
+			Fury: {
+				DisplayName: Fury
+				Description: 20% increased critical strike damage
+			}
+
+			Gauntlet: {
+				DisplayName: Gauntlet
+				Description: -6 defense, +12% melee damage
+			}
+
+			GPS: {
+				DisplayName: GPS
+				Description: GPS effect
+			}
+
+			ImmortalityCooldown: {
+				DisplayName: Immortality Cooldown
+				Description: You are not immortal
+			}
+
+			Leaping: {
+				DisplayName: Leaping
+				Description: Vertical acceleration is increased
+			}
+
+			Magnet: {
+				DisplayName: Magnet
+				Description: Item grab range is increased
+			}
+
+			Rogue: {
+				DisplayName: Rogue
+				Description: -3% ranged damage, 20% chance to not consume ammo
+			}
+
+			Shadows: {
+				DisplayName: Shadows
+				Description: You can teleport to the cursor, press V
+			}
+
+			Shockwave: {
+				DisplayName: Shockwave
+				Description: On-screen enemies take damage when you land
+			}
+
+			Starbright: {
+				DisplayName: Starbright
+				Description: Fallen stars fall more frequently
+			}
+
+			Strong: {
+				DisplayName: Strong
+				Description: Increased stats
+			}
+
+			Supersonic: {
+				DisplayName: Supersonic
+				Description: You are speedy
+			}
+
+			TimeShift: {
+				DisplayName: Time Shift
+				Description: Time is slowed down
+			}
+
+			Titanskin: {
+				DisplayName: Titanskin
+				Description: Defense is increased by 15 and damage is reduced by 8%
+			}
+
+			Wisdom: {
+				DisplayName: Wisdom
+				Description: -8% magic damage, +60 mana
 			}
 
 			StaminaDrain: {
@@ -2517,6 +2766,16 @@ Mods: {
 			AdvWrath: {
 				DisplayName: Advanced Wrath
 				Description: 15% increased damage
+			}
+
+			Clover: {
+				DisplayName: Clover
+				Description: Mods.ExxoAvalonOrigins.Buffs.Clover.Description
+			}
+
+			ForceField: {
+				DisplayName: Force Field
+				Description: Mods.ExxoAvalonOrigins.Buffs.ForceField.Description
 			}
 		}
 
