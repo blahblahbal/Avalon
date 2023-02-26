@@ -2390,7 +2390,7 @@ Mods: {
 
 			EnergyCrystal: {
 				DisplayName: Energy Crystal
-				Tooltip: "Permanantly increases stamina regeneration"
+				Tooltip: Permanantly increases stamina regeneration
 			}
 		}
 
