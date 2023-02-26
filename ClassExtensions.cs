@@ -36,6 +36,28 @@ public static class ClassExtensions
         return true;
     }
 
+    /// <summary>
+    ///     Used to draw float coordinates to rounded coordinates to avoid blurry rendering of textures.
+    /// </summary>
+    /// <param name="vector">The vector to convert.</param>
+    /// <returns>The rounded vector.</returns>
+    public static Vector2 ToNearestPixel(this Vector2 vector) => new((int)(vector.X + 0.5f), (int)(vector.Y + 0.5f));
+
+    public static Asset<T> VanillaLoad<T>(this Asset<T> asset) where T : class
+    {
+        try
+        {
+            if (asset.State == AssetState.NotLoaded)
+            {
+                Main.Assets.Request<Texture2D>(asset.Name, AssetRequestMode.ImmediateLoad);
+            }
+        }
+        catch (AssetLoadException e)
+        {
+        }
+
+        return asset;
+    }
     public static int GetRhodiumVariantItemOre(this AvalonWorld.RhodiumVariant? rhodiumVariant)
     {
         return rhodiumVariant switch
@@ -91,6 +113,32 @@ public static class ClassExtensions
         }
 
         return closest;
+    }
+
+    public static void Load<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TagCompound tag)
+        where TKey : notnull
+    {
+        if (tag.ContainsKey("keys") && tag.ContainsKey("values"))
+        {
+            TKey[] keys = tag.Get<TKey[]>("keys");
+            TValue[] values = tag.Get<TValue[]>("values");
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                dictionary[keys[i]] = values[i];
+            }
+        }
+    }
+
+    public static TagCompound Save<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
+       where TKey : notnull
+    {
+        TKey[] keys = dictionary.Keys.ToArray();
+        TValue[] values = dictionary.Values.ToArray();
+        var tag = new TagCompound();
+        tag.Set("keys", keys);
+        tag.Set("values", values);
+        return tag;
     }
 
     public static Rectangle GetDims(this ModTexturedType texturedType) =>

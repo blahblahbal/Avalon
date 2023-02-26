@@ -188,22 +188,22 @@ public class RecipeSystem : ModSystem
         });
         RecipeGroup.RegisterGroup("ExxoAvalonOrigins:WorkBenches", groupWorkBenches);
 
-        //var groupHerbs = new RecipeGroup(() => "Any Herb", new int[]
-        //{
-        //    ItemID.Blinkroot,
-        //    ItemID.Fireblossom,
-        //    ItemID.Deathweed,
-        //    ItemID.Shiverthorn,
-        //    ItemID.Waterleaf,
-        //    ItemID.Moonglow,
-        //    ItemID.Daybloom,
-        //    ModContent.ItemType<Bloodberry>(),
-        //    ModContent.ItemType<Sweetstem>(),
-        //    ModContent.ItemType<Barfbush>(),
-        //    ModContent.ItemType<Holybird>(),
-        //    //ModContent.ItemType<Items.TwilightPlume>(),
-        //});
-        //RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Herbs", groupHerbs);
+        var groupHerbs = new RecipeGroup(() => "Any Herb", new int[]
+        {
+            ItemID.Blinkroot,
+            ItemID.Fireblossom,
+            ItemID.Deathweed,
+            ItemID.Shiverthorn,
+            ItemID.Waterleaf,
+            ItemID.Moonglow,
+            ItemID.Daybloom,
+            //ModContent.ItemType<Bloodberry>(),
+            //ModContent.ItemType<Sweetstem>(),
+            //ModContent.ItemType<Barfbush>(),
+            //ModContent.ItemType<Holybird>(),
+            //ModContent.ItemType<Items.TwilightPlume>(),
+        });
+        RecipeGroup.RegisterGroup("ExxoAvalonOrigins:Herbs", groupHerbs);
 
         var groupTier1Watch = new RecipeGroup(() => "Any Copper Watch", new int[]
         {

@@ -1,8 +1,11 @@
-﻿using ExxoAvalonOrigins.Items.Other;
+﻿using ExxoAvalonOrigins.Buffs;
+using ExxoAvalonOrigins.Buffs.AdvancedBuffs;
+using ExxoAvalonOrigins.Items.Other;
 using ExxoAvalonOrigins.Systems;
 using ExxoAvalonOrigins.Walls;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -27,6 +30,16 @@ public class AvalonPlayer : ModPlayer
     public int tpCD;
     public bool teleportVWasTriggered;
     public bool TrapImmune;
+    public bool Lucky;
+    public bool PulseCharm;
+    public bool ShadowCharm;
+
+    public int FrameCount { get; private set; }
+    public int ShadowCooldown { get; private set; }
+    public int OldFallStart;
+    public bool AdvancedBattle;
+    public bool AdvancedCalming;
+    public int TimeSlowCounter;
 
     public override void ResetEffects()
     {
@@ -34,6 +47,11 @@ public class AvalonPlayer : ModPlayer
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
         TrapImmune = false;
+        AdvancedBattle = false;
+        AdvancedCalming = false;
+        Lucky = false;
+        PulseCharm = false;
+        ShadowCharm = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
     }
 
@@ -55,7 +73,34 @@ public class AvalonPlayer : ModPlayer
             Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown = 3600;
         }
     }
+    public void ResetShadowCooldown() => ShadowCooldown = 0;
+    public override bool CanConsumeAmmo(Item weapon, Item ammo)
+    {
+        if (Player.HasBuff<AdvAmmoReservation>() && Main.rand.NextFloat() < AdvAmmoReservation.Chance)
+        {
+            return false;
+        }
 
+        return base.CanConsumeAmmo(weapon, ammo);
+    }
+
+    public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+    {
+        if (Player.HasItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>()) && !Player.HasBuff(ModContent.BuffType<ImmortalityCooldown>()))
+        {
+            Player.statLife = Player.statLifeMax2 / 3;
+            Player.AddBuff(ModContent.BuffType<ImmortalityCooldown>(), 60 * 60 * 3);
+            int i = Player.FindItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>());
+            Player.inventory[i].stack--;
+            SoundEngine.PlaySound(SoundID.Item3, Player.position);
+            if (Player.inventory[i].stack <= 0)
+            {
+                Player.inventory[i].SetDefaults();
+            }
+            return false;
+        }
+        return true;
+    }
     public override void PostUpdate()
     {
         // Large gem inventory checking

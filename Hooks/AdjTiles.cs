@@ -50,7 +50,7 @@ internal class AdjTiles : ModHook
         {
             for (int k = num4 - Height; k < num4 + Height; k++)
             {
-                if ((Main.tile[j, k].LiquidAmount > 200 && Main.tile[j, k].LiquidType == LiquidID.Shimmer))
+                if (Main.tile[j, k].LiquidAmount > 200 && Main.tile[j, k].LiquidType == LiquidID.Shimmer)
                 {
                     self.GetModPlayer<AvalonPlayer>().AdjShimmer = true;
                 }
