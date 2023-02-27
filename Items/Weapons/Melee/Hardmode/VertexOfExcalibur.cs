@@ -23,7 +23,7 @@ namespace ExxoAvalonOrigins.Items.Weapons.Melee.Hardmode
         {
             Item.Size = new Vector2(30);
             Item.UseSound = SoundID.Item1;
-            Item.damage = 90;
+            Item.damage = 130;
             Item.autoReuse = true;
             Item.noMelee = true;
             Item.rare = ItemRarityID.Yellow;
