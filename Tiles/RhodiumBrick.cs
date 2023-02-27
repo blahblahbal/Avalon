@@ -9,7 +9,7 @@ public class RhodiumBrick : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(Color.Pink);
+        AddMapEntry(new Color(187, 99, 115));
         Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;
         Main.tileMerge[Type][TileID.WoodBlock] = true;

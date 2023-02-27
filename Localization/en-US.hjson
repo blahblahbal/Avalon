@@ -905,7 +905,7 @@ Mods: {
 			}
 
 			OsmiumBrickWallItem: {
-				DisplayName: Osmium Brick Wall Item
+				DisplayName: Osmium Brick Wall
 				Tooltip: ""
 			}
 
@@ -2162,6 +2162,11 @@ Mods: {
 
 			RhodiumBrick: {
 				DisplayName: Rhodium Brick
+				Tooltip: ""
+			}
+
+			RhodiumBrickWallItem: {
+				DisplayName: Rhodium Brick Wall
 				Tooltip: ""
 			}
 
