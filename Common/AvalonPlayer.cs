@@ -401,4 +401,26 @@ public class AvalonPlayer : ModPlayer
         CritDamageMult += value;
     }
     #endregion crit dmg stuff
+    public override void PostUpdateMiscEffects()
+    {
+        if(Player.position.Y >= (Main.maxTilesY - 300) * 16 && Main.myPlayer == Player.whoAmI)
+        {
+            int yea = (Player.position.Y >= (Main.maxTilesY - 200) * 16) ? 5 : 2;
+            for (int i = 0; i < Main.rand.Next(yea); i++)
+            {
+                Dust d = Dust.NewDustPerfect(Player.Center + new Vector2(Main.rand.Next(-1000, 1000), Main.rand.Next(-1000, 1000)), DustID.Torch, new Vector2(Main.rand.NextFloat(1f, 8f) * Main.WindForVisuals, Main.rand.NextFloat(-1f, -5f) * (System.Math.Abs(Main.WindForVisuals) + 0.5f)), 0, default, Main.rand.NextFloat(0.1f, 1.5f));
+                d.noGravity = Main.rand.NextBool(3);
+                d.noLightEmittence = true;
+            }
+        }
+        if (Player.position.Y >= (Main.maxTilesY - 200) * 16 && Main.myPlayer == Player.whoAmI)
+        {
+            for (int i = 0; i < Main.rand.Next(3); i++)
+            {
+                Dust d = Dust.NewDustPerfect(new Vector2(Player.Center.X,Main.rand.Next((Main.maxTilesY - 150) * 16, Main.maxTilesY * 16)) + new Vector2(Main.rand.Next(-1000, 1000),0), DustID.Smoke, new Vector2(Main.rand.NextFloat(1f, 8f) * Main.WindForVisuals, Main.rand.NextFloat(-1f, -5f) * (System.Math.Abs(Main.WindForVisuals) + 0.5f)), 200, Color.DarkGray, Main.rand.NextFloat(0.1f, 2f));
+                d.noGravity = Main.rand.NextBool(3);
+                d.noLightEmittence = true;
+            }
+        }
+    }
 }

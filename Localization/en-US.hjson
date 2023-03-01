@@ -2240,7 +2240,11 @@ Mods: {
 
 			Freezethrower: {
 				DisplayName: Freezethrower
-				Tooltip: Uses gel for ammo
+				Tooltip:
+					'''
+					Uses gel for ammo
+					Ignores 30 points of enemy defense
+					'''
 			}
 
 			DesertBeakBossBag: {

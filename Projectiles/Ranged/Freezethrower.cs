@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ExxoAvalonOrigins.Projectiles.Ranged;
@@ -14,6 +15,7 @@ public class Freezethrower : ModProjectile
     }
     public override void SetDefaults()
     {
+        Projectile.CloneDefaults(ProjectileID.Flames);
         Rectangle dims = this.GetDims();
         Projectile.width = dims.Width * 6 / 16;
         Projectile.height = dims.Height * 6 / 16 / Main.projFrames[Projectile.type];
@@ -23,6 +25,7 @@ public class Freezethrower : ModProjectile
         Projectile.penetrate = 4;
         Projectile.MaxUpdates = 2;
         Projectile.DamageType = DamageClass.Ranged;
+        Projectile.ArmorPenetration = 30;
     }
     public override bool PreDraw(ref Color lightColor)
     {
@@ -52,6 +55,9 @@ public class Freezethrower : ModProjectile
             color3 = new Color(95, 160, 255, 100);
             color4 = new Color(33, 125, 202, 100);
         }
+        color *= 0.2f;
+        color2 *= 0.2f;
+        color4 *= 0.2f;
         int verticalFrames = 7;
         float num7 = Utils.Remap(proj.localAI[0], num, fromMax, 1f, 0f, true);
         float num8 = Math.Min(proj.localAI[0], 20f);
@@ -126,9 +132,9 @@ public class Freezethrower : ModProjectile
         {
             short num6 = (short)ModContent.DustType<Dusts.FreezethrowerDust>();
             Dust dust = Dust.NewDustDirect(Projectile.Center + Main.rand.NextVector2Circular(60f, 60f) * Utils.Remap(Projectile.localAI[0], 0f, 72f, 0.5f, 1f), 4, 4, num6, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100);
-            if (Main.rand.Next(4) == 0)
+            dust.noGravity = true;
+            if (Main.rand.NextBool(2))
             {
-                dust.noGravity = true;
                 dust.scale *= 1f;
                 dust.velocity.X *= 1.5f;
                 dust.velocity.Y *= 1.5f;
@@ -146,8 +152,8 @@ public class Freezethrower : ModProjectile
         {
             Vector2 center = Main.player[Projectile.owner].Center;
             Vector2 vector = (Projectile.Center - center).SafeNormalize(Vector2.Zero).RotatedByRandom(0.19634954631328583) * 7f;
-            short num7 = 31;
-            Dust dust2 = Dust.NewDustDirect(Projectile.Center + Main.rand.NextVector2Circular(50f, 50f) - vector * 2f, 4, 4, num7, 0f, 0f, 150, new Color(80, 80, 80));
+            short num7 = DustID.Snow;
+            Dust dust2 = Dust.NewDustDirect(Projectile.Center + Main.rand.NextVector2Circular(50f, 50f) - vector * 2f, 4, 4, num7, 0f, 0f, 150, new Color(255, 255, 255));
             dust2.noGravity = true;
             dust2.velocity = vector;
             dust2.scale *= 1.1f + Main.rand.NextFloat() * 0.2f;
@@ -221,5 +227,10 @@ public class Freezethrower : ModProjectile
         //    Projectile.ai[0] += 1f;
         //}
         //Projectile.rotation += 0.3f * Projectile.direction;
+    }
+    public override bool OnTileCollide(Vector2 oldVelocity)
+    {
+        Projectile.velocity *= 0;
+        return false;
     }
 }
