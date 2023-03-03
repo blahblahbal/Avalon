@@ -31,6 +31,11 @@ public class AvalonClientConfig : ModConfig
     [Header("$Mods.ExxoAvalonOrigins.Config.ItemHeader")]
     [Label("$Mods.ExxoAvalonOrigins.Config.Screenshake.Label")]
     [Tooltip("$Mods.ExxoAvalonOrigins.Config.Screenshake.Tooltip")]
-    [DefaultValue(false)]
+    [DefaultValue(true)]
     public bool ScreenshakeEnabled;
+
+    [Label("$Mods.ExxoAvalonOrigins.Config.BiomeParticles.Label")]
+    [Tooltip("$Mods.ExxoAvalonOrigins.Config.BiomeParticles.Tooltip")]
+    [DefaultValue(true)]
+    public bool BiomeParticlesEnabled;
 }

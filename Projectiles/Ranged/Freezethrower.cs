@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -106,8 +107,56 @@ public class Freezethrower : ModProjectile
             }
         }
     }
+    public SoundStyle Sizzle = new SoundStyle("Terraria/Sounds/Custom/liquids_water_lava_1")
+    {
+        Type = SoundType.Sound,
+        Volume = 2f,
+        PitchVariance = 0.1f,
+        MaxInstances = 10,
+    };
     public override void AI()
     {
+        // Liquid Effects
+        if (Projectile.lavaWet)
+        {
+            SoundEngine.PlaySound(Sizzle, Projectile.Center);
+            Projectile.Kill();
+
+                Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Cloud, -Projectile.velocity.RotatedByRandom(MathHelper.TwoPi / 8) * Main.rand.NextFloat(0.1f, 0.8f) + new Vector2(0, Main.rand.NextFloat(-2f, -4f)), Main.rand.Next(128, 200), Color.Lerp(Color.White, Color.Gray, Main.rand.NextFloat(0.3f, 0.8f)), Main.rand.NextFloat(1, 2));
+                d.color.A = 0;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Gore g = Gore.NewGorePerfect(Projectile.GetSource_FromThis(), Projectile.Center, -Projectile.velocity.RotatedByRandom(MathHelper.TwoPi / 8) * Main.rand.NextFloat(0.1f, 0.8f) + new Vector2(0, Main.rand.NextFloat(-2f, -4f)), Main.rand.Next(11, 13), 1);
+                g.GetAlpha(Color.Lerp(new Color(255, 255, 255, 0), new Color(128, 128, 128, 0), Main.rand.NextFloat(0.3f, 0.8f)));
+                g.rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                g.alpha = Main.rand.Next(128, 180);
+                g.scale = Main.rand.NextFloat(0.8f, 1.2f);
+            }
+        }
+        //Uncomment for freezing of water
+        //for(int i = 0; i < 32; i++)
+        //{
+        //    for (int i2 = 0; i2 < 5; i2++)
+        //    {
+        //        Vector2 coord = Projectile.Center + new Vector2(0, i2 * 10).RotatedBy(i * (MathHelper.TwoPi / 32));
+        //        int TileCoordsX = (int)(coord.X / 16);
+        //        int TileCoordsY = (int)(coord.Y / 16); ;
+        //        if(Main.tile[TileCoordsX, TileCoordsY].LiquidType == LiquidID.Water && Main.tile[TileCoordsX, TileCoordsY].LiquidAmount > 0 && WorldGen.IsTileReplacable(TileCoordsX,TileCoordsY))
+        //        {
+        //            WorldGen.PlaceTile(TileCoordsX, TileCoordsY, TileID.IceBlock, false, false, -1);
+        //            if (Main.rand.NextBool(7))
+        //            {
+        //                Gore g = Gore.NewGorePerfect(Projectile.GetSource_FromThis(), coord, -Projectile.velocity.RotatedByRandom(MathHelper.TwoPi / 8) * Main.rand.NextFloat(0.1f, 0.8f) + new Vector2(0, Main.rand.NextFloat(-2f, -4f)), Main.rand.Next(11, 13), 1);
+        //                g.GetAlpha(Color.Lerp(new Color(255, 255, 255, 0), new Color(128, 128, 128, 0), Main.rand.NextFloat(0.3f, 0.8f)));
+        //                g.rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
+        //                g.alpha = Main.rand.Next(128, 180);
+        //                g.scale = Main.rand.NextFloat(0.8f, 1.2f);
+        //            }
+        //        }
+        //    }
+        //}
+
         Projectile.localAI[0]++;
         int num = 60;
         int num2 = 12;

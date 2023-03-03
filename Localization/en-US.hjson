@@ -38,8 +38,13 @@ Mods: {
 			}
 
 			Screenshake: {
-				Label: No Screenshake
-				Tooltip: Disables any effects that shake the screen. (DOES NOTHING YET)
+				Label: Screenshake
+				Tooltip: Enables any effects that shake the screen. (DOES NOTHING YET)
+			}
+
+			BiomeParticles: {
+				Label: Biome Particles
+				Tooltip: Enables ambient particles in some biomes.
 			}
 		}
 

@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -32,11 +33,12 @@ internal class Freezethrower : ModItem
         Item.useAnimation = 30;
         Item.ArmorPenetration = 30;
     }
-
-    public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
-        velocity = Vector2.SmoothStep(velocity.RotatedBy(-0.1f), velocity.RotatedBy(0.1f),Main.masterColor);
-        position += new Vector2(6,0).RotatedBy(velocity.ToRotation());
+        float f = 0.05f;
+        if(Main.myPlayer == player.whoAmI)
+        Projectile.NewProjectile(source, position, Vector2.SmoothStep(velocity.RotatedBy(-f), velocity.RotatedBy(f), Main.masterColor), type, damage, knockback, player.whoAmI);
+        return false;
     }
     public override Vector2? HoldoutOffset() => new Vector2(-10, 0);
 
