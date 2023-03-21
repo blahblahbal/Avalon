@@ -7,7 +7,7 @@ public class Wisdom : ModBuff
 {
     public override void Update(Player player, ref int buffIndex)
     {
-        player.statManaMax2 += 60;
-        player.GetDamage(DamageClass.Magic) -= 0.08f;
+        player.manaCost += 0.35f;
+        player.GetDamage(DamageClass.Magic) += 0.25f;
     }
 }

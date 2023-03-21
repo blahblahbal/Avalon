@@ -1665,14 +1665,9 @@ Mods: {
 				Tooltip: -8% damage, +15 defense
 			}
 
-			VisionPotion: {
-				DisplayName: Vision Potion
-				Tooltip: Open caves light up (Currently not functional)
-			}
-
 			WisdomPotion: {
 				DisplayName: Wisdom Potion
-				Tooltip: -8% magic damage, +60 mana
+				Tooltip: +25% magic damage, +35% mana cost
 			}
 
 			AdvAmmoReservationPotion: {
