@@ -426,20 +426,6 @@ public class Moonfury : ModProjectile
         return base.Colliding(projHitbox, targetHitbox);
     }
 
-    public override void ModifyDamageScaling(ref float damageScale)
-    {
-        // Flails do 20% more damage while spinning
-        if (CurrentAIState == AIState.Spinning)
-        {
-            damageScale *= 1.2f;
-        }
-        // Flails do 100% more damage while launched or retracting. This is the damage the item tooltip for flails aim to match, as this is the most common mode of attack. This is why the item has ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
-        else if (CurrentAIState == AIState.LaunchingForward || CurrentAIState == AIState.Retracting)
-        {
-            damageScale *= 2f;
-        }
-    }
-
     public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
         // Flails do a few custom things, you'll want to keep these to have the same feel as vanilla flails.
@@ -456,6 +442,17 @@ public class Moonfury : ModProjectile
         else if (CurrentAIState == AIState.Dropping)
         {
             modifiers.Knockback *= 0.5f;
+        }
+        
+        // Flails do 20% more damage while spinning
+        if (CurrentAIState == AIState.Spinning)
+        {
+            modifiers.FinalDamage *= 1.2f;
+        }
+        // Flails do 100% more damage while launched or retracting. This is the damage the item tooltip for flails aim to match, as this is the most common mode of attack. This is why the item has ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
+        else if (CurrentAIState == AIState.LaunchingForward || CurrentAIState == AIState.Retracting)
+        {
+            modifiers.FinalDamage *= 2f;
         }
         
         base.ModifyHitNPC(target, ref modifiers);

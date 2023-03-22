@@ -219,57 +219,61 @@ public class AvalonPlayer : ModPlayer
         }
     }
 
-    public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
-    {
-        if (crit)
-        {
-            damage += MultiplyMeleeCritDamage(damage);
-        }
+    /// <inheritdoc />
+    public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers) {
+        // if (modifiers.CritDamage)
+        // {
+        //     damage += MultiplyMeleeCritDamage(damage);
+        // }
     }
 
-    public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
-        if (crit)
-        {
-            if (proj.DamageType == DamageClass.Magic)
-            {
-                damage += MultiplyMagicCritDamage(damage);
-            }
-            if (proj.DamageType == DamageClass.Melee)
-            {
-                damage += MultiplyMeleeCritDamage(damage);
-            }
-            if (proj.DamageType == DamageClass.Ranged)
-            {
-                damage += MultiplyRangedCritDamage(damage);
-            }
-        }
+        // if (crit)
+        // {
+        //     if (proj.DamageType == DamageClass.Magic)
+        //     {
+        //         damage += MultiplyMagicCritDamage(damage);
+        //     }
+        //     if (proj.DamageType == DamageClass.Melee)
+        //     {
+        //         damage += MultiplyMeleeCritDamage(damage);
+        //     }
+        //     if (proj.DamageType == DamageClass.Ranged)
+        //     {
+        //         damage += MultiplyRangedCritDamage(damage);
+        //     }
+        // }
     }
-    public override void ModifyHitPvp(Item item, Player target, ref int damage, ref bool crit)
-    {
-        if (crit)
-        {
-            damage += MultiplyMeleeCritDamage(damage);
+
+    /// <inheritdoc />
+    public override void ModifyHurt(ref Player.HurtModifiers modifiers) {
+        if (!modifiers.PvP) {
+            return;
         }
+        
+        // if (crit)
+        // {
+        //     damage += MultiplyMeleeCritDamage(damage);
+        // }
+        
+        // if (modifiers.DamageSource.SourceProjectileType >= ProjectileID.None && crit)
+        // {
+        //     if (proj.DamageType == DamageClass.Magic)
+        //     {
+        //         damage += MultiplyMagicCritDamage(damage);
+        //     }
+        //     if (proj.DamageType == DamageClass.Melee)
+        //     {
+        //         damage += MultiplyMeleeCritDamage(damage);
+        //     }
+        //     if (proj.DamageType == DamageClass.Ranged)
+        //     {
+        //         damage += MultiplyRangedCritDamage(damage);
+        //     }
+        // }
     }
-    public override void ModifyHitPvpWithProj(Projectile proj, Player target, ref int damage, ref bool crit)
-    {
-        if (crit)
-        {
-            if (proj.DamageType == DamageClass.Magic)
-            {
-                damage += MultiplyMagicCritDamage(damage);
-            }
-            if (proj.DamageType == DamageClass.Melee)
-            {
-                damage += MultiplyMeleeCritDamage(damage);
-            }
-            if (proj.DamageType == DamageClass.Ranged)
-            {
-                damage += MultiplyRangedCritDamage(damage);
-            }
-        }
-    }
+    
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
         if (KeybindSystem.ShadowHotkey.JustPressed && tpStam && tpCD >= 300 &&

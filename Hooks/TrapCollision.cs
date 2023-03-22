@@ -36,7 +36,7 @@ public class TrapCollision : ModHook
         {
             int num = Main.DamageVar(90, 0f - self.luck);
             self.AddBuff(BuffID.Venom, 180);
-            self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, false, 0, true);
+            self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, 0, true);
         }
         orig(self, tileId, x, y);
     }
