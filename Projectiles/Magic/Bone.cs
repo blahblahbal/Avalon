@@ -102,7 +102,7 @@ public class Bone2 : ModProjectile
         }
         SoundEngine.PlaySound(SoundID.NPCHit2, Projectile.Center);
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         for (int i = 0; i < 2 + Main.rand.Next(2); i++)
         {

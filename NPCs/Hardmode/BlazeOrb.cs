@@ -121,7 +121,7 @@ public class BlazeOrb : ModNPC
         if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
         {
             var arg_12ED7_0 = Main.netMode;
-            NPC.StrikeNPC(999, 0f, 0, false, false);
+            NPC.StrikeNPC(new NPC.HitInfo {Damage = 999, KnockBack = 0f, HitDirection = 0});
         }
         if (NPC.timeLeft > 100)
         {

@@ -109,7 +109,7 @@ public class FallenHero : ModNPC
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersSword>(), 20));
     }
 
-    public override void HitEffect(int hitDirection, double damage)
+    public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {

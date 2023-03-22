@@ -158,8 +158,8 @@ public class AeonExplosion : ModProjectile
     {
         return false;
     }
-    public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
-        hitDirection = (target.Center.X <= Projectile.Center.X) ? -1 : 1;
+        modifiers.HitDirectionOverride = (target.Center.X <= Projectile.Center.X) ? -1 : 1;
     }
 }

@@ -34,7 +34,7 @@ public class OreSlime : ModNPC
     {
         Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, Ores[WhichOre], Main.rand.Next(10, 30));
     }
-    public override void HitEffect(int hitDirection, double damage)
+    public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life > 0)
         {
@@ -43,12 +43,12 @@ public class OreSlime : ModNPC
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.TintableDust, 0, 0, Main.rand.Next(100, 200), default, Main.rand.NextFloat(1, 1.5f));
                 Main.dust[d].color = OreColor[WhichOre] * 0.3f;
-                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1f, 4) * hitDirection, Main.rand.NextFloat(-1, -4));
+                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1f, 4) * hit.HitDirection, Main.rand.NextFloat(-1, -4));
             }
             for (int i = 0; i < 5; i++)
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, OreDusts[WhichOre], 0, 0, 0, default, Main.rand.NextFloat(0.75f, 1.5f));
-                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-0.5f, 3) * hitDirection, Main.rand.NextFloat(-1, -3));
+                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-0.5f, 3) * hit.HitDirection, Main.rand.NextFloat(-1, -3));
             }
         }
         else
@@ -57,12 +57,12 @@ public class OreSlime : ModNPC
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.TintableDust, 0, 0, Main.rand.Next(100, 200), default, Main.rand.NextFloat(1, 1.5f));
                 Main.dust[d].color = OreColor[WhichOre] * 0.3f;
-                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1.5f, 5) * hitDirection, Main.rand.NextFloat(-1, -5));
+                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1.5f, 5) * hit.HitDirection, Main.rand.NextFloat(-1, -5));
             }
             for (int i = 0; i < 1; i++)
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, OreDusts[WhichOre], 0, 0, 0, default, Main.rand.NextFloat(0.75f, 1.5f));
-                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1f, 4) * hitDirection, Main.rand.NextFloat(-1, -4));
+                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1f, 4) * hit.HitDirection, Main.rand.NextFloat(-1, -4));
             }
         }
     }

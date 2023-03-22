@@ -444,17 +444,17 @@ public class Sporalash : ModProjectile
         // Flails do a few custom things, you'll want to keep these to have the same feel as vanilla flails.
 
         // The hitDirection is always set to hit away from the player, even if the flail damages the npc while returning
-        hitDirection = (Main.player[Projectile.owner].Center.X < target.Center.X).ToDirectionInt();
+        modifiers.HitDirectionOverride = (Main.player[Projectile.owner].Center.X < target.Center.X).ToDirectionInt();
 
         // Knockback is only 25% as powerful when in spin mode
         if (CurrentAIState == AIState.Spinning)
         {
-            knockback *= 0.25f;
+            modifiers.Knockback *= 0.25f;
         }
         // Knockback is only 50% as powerful when in drop down mode
         else if (CurrentAIState == AIState.Dropping)
         {
-            knockback *= 0.5f;
+            modifiers.Knockback *= 0.5f;
         }
 
         base.ModifyHitNPC(target, ref modifiers);

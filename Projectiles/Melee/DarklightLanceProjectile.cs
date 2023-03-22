@@ -39,7 +39,7 @@ public class DarklightLanceProjectile : SpearTemplate
         Main.dust[H].velocity = Projectile.velocity * -3;
         Main.dust[H].fadeIn = Main.rand.NextFloat(0, 1.5f);
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
         particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
@@ -48,8 +48,12 @@ public class DarklightLanceProjectile : SpearTemplate
         ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.TrueExcalibur, settings, Projectile.owner);
         target.AddBuff(BuffID.ShadowFlame, 360);
     }
-    public override void OnHitPvp(Player target, int damage, bool crit)
-    {
+
+    /// <inheritdoc />
+    public override void OnHitPlayer(Player target, Player.HurtInfo info) {
+        if (!info.PvP) {
+            return;
+        }
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
         particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
         ParticleOrchestraSettings settings = particleOrchestraSettings;

@@ -86,7 +86,7 @@ public class GlacierBall : ModProjectile
         Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.oldVelocity * 0.2f, Mod.Find<ModGore>("GlacierChunk2").Type, 1.2f);
         Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.oldVelocity * 0.2f, Mod.Find<ModGore>("GlacierChunk3").Type, 1.2f);
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         if (Projectile.velocity.X != Projectile.oldVelocity.X)
         {
