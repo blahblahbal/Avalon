@@ -51,7 +51,7 @@ public class VertexSlash : EnergySlashTemplate
             Dust.NewDustPerfect(vector2, 43, vector3 * 0.1f, 100, Color.White * Projectile.Opacity, 1.2f * Projectile.Opacity);
         }
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         Vector2 positionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
@@ -60,8 +60,12 @@ public class VertexSlash : EnergySlashTemplate
         ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.TrueExcalibur, settings, Projectile.owner);
         ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
     }
-    public override void OnHitPvp(Player target, int damage, bool crit)
-    {
+    
+    public override void OnHitPlayer(Player target, Player.HurtInfo info) {
+        if (!info.PvP) {
+            return;
+        }
+        
         Vector2 positionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
         particleOrchestraSettings.PositionInWorld = positionInWorld;
@@ -69,7 +73,7 @@ public class VertexSlash : EnergySlashTemplate
         ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.TrueExcalibur, settings, Projectile.owner);
         ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
     }
-    public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
         int debuffCount = 0;
         for (int i = 0; i < target.buffType.Length; i++)
@@ -79,15 +83,15 @@ public class VertexSlash : EnergySlashTemplate
                 debuffCount++;
             }
         }
-        if (debuffCount > 0)
-        {
+        if (debuffCount > 0) {
+            
             if (target.boss)
             {
-                damage = (int)(damage * 1.2 * debuffCount);
+                modifiers.FinalDamage *= 1.2f * debuffCount;
             }
             else
             {
-                damage = (int)(damage * 1.45 * debuffCount);
+                modifiers.FinalDamage *= 1.45f * debuffCount;
             }
         }
     }

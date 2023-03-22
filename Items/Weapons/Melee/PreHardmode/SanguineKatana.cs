@@ -40,7 +40,7 @@ public class SanguineKatana : ModItem
         NetMessage.SendData(13, -1, -1, null, player.whoAmI);
         return false;
     }
-    public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+    public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {
         if(target.type != NPCID.TargetDummy)
         {

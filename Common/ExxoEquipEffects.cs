@@ -11,16 +11,16 @@ public class ExxoEquipEffects : ModPlayer
     {
         BloodyWhetstone = false;
     }
-    public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC npc, NPC.HitInfo hit, int damage)
     {
-        if (item.DamageType == DamageClass.Melee && BloodyWhetstone)
+        if (hit.DamageType == DamageClass.Melee && BloodyWhetstone)
         {
-            if (!target.HasBuff<Bleeding>())
+            if (!npc.HasBuff<Bleeding>())
             {
-                target.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks = 1;
+                npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks = 1;
             }
 
-            target.AddBuff(ModContent.BuffType<Bleeding>(), 120);
+            npc.AddBuff(ModContent.BuffType<Bleeding>(), 120);
         }
     }
 }

@@ -34,7 +34,8 @@ public class BloodyArrow : ModProjectile
     {
         gravityTimer = reader.ReadSingle();
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         //projectile.velocity *= 0f;
         //projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().bloodArrowPos = projectile.position;
@@ -49,7 +50,8 @@ public class BloodyArrow : ModProjectile
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
         return true;
     }
-    public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+
+    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
         Player player = Main.player[Projectile.owner];
         Rectangle myRect = Projectile.Hitbox;

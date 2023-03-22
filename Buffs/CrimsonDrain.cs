@@ -35,7 +35,7 @@ public class CrimsonDrain : ModBuff
             {
                 if (player.GetModPlayer<AvalonPlayer>().FrameCount % FrameInterval == 0)
                 {
-                    n.StrikeNPC(dmg + n.defense / 2, 0f, 1);
+                    n.StrikeNPC(new NPC.HitInfo {Damage = dmg + n.defense / 2, KnockBack = 0f, HitDirection = 1});
                 }
             }
         }

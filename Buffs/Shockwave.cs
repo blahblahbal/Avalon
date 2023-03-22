@@ -71,7 +71,7 @@ public class Shockwave : ModBuff
                     //    multiplier = 2;
                     //}
 
-                    N.StrikeNPC(multiplier * fall_dist, 5f, HitDir);
+                    N.StrikeNPC(new NPC.HitInfo {Damage = multiplier * fall_dist, KnockBack = 5f, HitDirection = HitDir});
                     if (Main.netMode != 0)
                     {
                         NetMessage.SendData(28, -1, -1, null, o, multiplier * fall_dist, 10f,

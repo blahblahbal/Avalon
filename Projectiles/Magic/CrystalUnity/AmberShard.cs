@@ -43,12 +43,15 @@ public class AmberShard : ModProjectile
 
         Lighting.AddLight(new Vector2((int)((Projectile.position.X + Projectile.width / 2) / 16f), (int)((Projectile.position.Y + Projectile.height / 2) / 16f)), new Color(252, 193, 45).ToVector3());
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         target.AddBuff(BuffID.OnFire, 60 * 5);
     }
-    public override void OnHitPvp(Player target, int damage, bool crit)
-    {
+    
+    public override void OnHitPlayer(Player target, Player.HurtInfo info) {
+        if (!info.PvP) {
+            return;
+        }
         target.AddBuff(BuffID.OnFire, 60 * 5);
     }
 }

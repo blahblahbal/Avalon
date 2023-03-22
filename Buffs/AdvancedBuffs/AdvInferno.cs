@@ -16,7 +16,7 @@ public class AdvInferno : ModBuff
         int num = 24;
         float num2 = 200f;
         bool flag = player.infernoCounter % 60 == 0;
-        int num3 = 10;
+        int damage = 10;
         if (player.whoAmI == Main.myPlayer)
         {
             for (int l = 0; l < 200; l++)
@@ -32,10 +32,10 @@ public class AdvInferno : ModBuff
 
                     if (flag)
                     {
-                        nPC.StrikeNPC(num3, 0f, 0);
+                        nPC.StrikeNPC(new NPC.HitInfo {Damage = damage});
                         if (Main.netMode != NetmodeID.SinglePlayer)
                         {
-                            NetMessage.SendData(MessageID.DamageNPC, -1, -1, NetworkText.Empty, l, num3);
+                            NetMessage.SendData(MessageID.DamageNPC, -1, -1, NetworkText.Empty, l, damage);
                         }
                     }
                 }
@@ -57,12 +57,12 @@ public class AdvInferno : ModBuff
 
                         if (flag)
                         {
-                            p.Hurt(PlayerDeathReason.ByPlayer(player.whoAmI), num3, 0, true);
+                            p.Hurt(PlayerDeathReason.ByPlayerItem(player.whoAmI, new Item()), damage, 0, true);
                             if (Main.netMode != NetmodeID.SinglePlayer)
                             {
                                 NetMessage.SendData(MessageID.HurtPlayer, -1, -1,
-                                    NetworkText.FromLiteral(PlayerDeathReason.ByPlayer(player.whoAmI).ToString()), m,
-                                    0f, num3, 1f);
+                                    NetworkText.FromLiteral(PlayerDeathReason.ByPlayerItem(player.whoAmI, new Item()).ToString()), m,
+                                    0f, damage, 1f);
                             }
                         }
                     }

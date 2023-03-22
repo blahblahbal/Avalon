@@ -201,9 +201,8 @@ public class Blaze : ModNPC
             Main.dust[num1226].velocity.Y *= 0.1f;
         }
 
-        if (NPC.wet && !NPC.lavaWet)
-        {
-            NPC.StrikeNPC(50, 0f, 0);
+        if (NPC.wet && !NPC.lavaWet) {
+            NPC.StrikeNPC(new NPC.HitInfo { Damage = 50, KnockBack = 0f, HitDirection = 0});
         }
 
         if (Main.netMode != NetmodeID.MultiplayerClient && !Main.player[NPC.target].dead)
@@ -247,7 +246,7 @@ public class Blaze : ModNPC
         }
     }
 
-    public override void HitEffect(int hitDirection, double damage)
+    public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life > 0)
         {

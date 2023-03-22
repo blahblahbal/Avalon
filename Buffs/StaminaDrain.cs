@@ -16,8 +16,8 @@ public class StaminaDrain : ModBuff
         BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
     }
 
-    public override void ModifyBuffTip(ref string tip, ref int rare)
-    {
+    /// <inheritdoc />
+    public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare) {
         if (stacks == 1)
         {
             tip += " 20%";

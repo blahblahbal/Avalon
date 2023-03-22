@@ -439,7 +439,7 @@ public class Sporalash : ModProjectile
         }
     }
 
-    public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
         // Flails do a few custom things, you'll want to keep these to have the same feel as vanilla flails.
 
@@ -457,7 +457,7 @@ public class Sporalash : ModProjectile
             knockback *= 0.5f;
         }
 
-        base.ModifyHitNPC(target, ref damage, ref knockback, ref crit, ref hitDirection);
+        base.ModifyHitNPC(target, ref modifiers);
     }
 
     // PreDraw is used to draw a chain and trail before the projectile is drawn normally.

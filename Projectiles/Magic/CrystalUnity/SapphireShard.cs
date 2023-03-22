@@ -43,12 +43,14 @@ public class SapphireShard : ModProjectile
 
         Lighting.AddLight(new Vector2((int)((Projectile.position.X + Projectile.width / 2) / 16f), (int)((Projectile.position.Y + Projectile.height / 2) / 16f)), new Color(13, 107, 216).ToVector3());
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         Main.LocalPlayer.AddBuff(ModContent.BuffType<Buffs.SapphireShardBuff>(), 60 * 5);
     }
-    public override void OnHitPvp(Player target, int damage, bool crit)
-    {
+    public override void OnHitPlayer(Player target, Player.HurtInfo info) {
+        if (!info.PvP) {
+            return;
+        }
         Main.LocalPlayer.AddBuff(ModContent.BuffType<Buffs.SapphireShardBuff>(), 60 * 5);
     }
 }
