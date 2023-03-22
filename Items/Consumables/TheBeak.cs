@@ -1,9 +1,9 @@
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
 
-namespace ExxoAvalonOrigins.Items.Consumables;
+namespace Avalon.Items.Consumables;
 
 class TheBeak : ModItem
 {

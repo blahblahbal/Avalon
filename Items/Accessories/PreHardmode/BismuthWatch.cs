@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Accessories.PreHardmode;
+namespace Avalon.Items.Accessories.PreHardmode;
 
 class BismuthWatch : ModItem
 {

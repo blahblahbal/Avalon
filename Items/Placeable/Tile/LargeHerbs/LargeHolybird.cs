@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Placeable.Tile.LargeHerbs;
+namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
 class LargeHolybird : ModItem
 {

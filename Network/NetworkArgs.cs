@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace ExxoAvalonOrigins.Network;
+namespace Avalon.Network;
 
 public class NetworkArgs
 {

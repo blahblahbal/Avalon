@@ -1,11 +1,11 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.Audio;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Magic.PreHardmode;
+namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
 class BloodBarrage : ModItem
 {

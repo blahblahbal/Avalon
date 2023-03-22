@@ -1,9 +1,9 @@
 using System.IO;
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Network.Handlers;
+namespace Avalon.Network.Handlers;
 
 [Autoload]
 public class SyncMouse : PacketHandler<BasicPlayerNetworkArgs>

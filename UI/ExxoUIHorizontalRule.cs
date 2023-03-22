@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 internal class ExxoUIHorizontalRule : ExxoUIElement
 {

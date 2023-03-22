@@ -1,13 +1,11 @@
-﻿using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Tiles.Ores;
-using System.Collections.Generic;
+﻿using Avalon.Common;
+using Avalon.Tiles.Ores;
 using Terraria;
-using Terraria.GameContent.Generation;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
-namespace ExxoAvalonOrigins.WorldGeneration.Passes; // Write original code challenged FAILED
+namespace Avalon.WorldGeneration.Passes; // Write original code challenged FAILED
 
 public class OreGenPreHardmode : GenPass
 {

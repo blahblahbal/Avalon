@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.AdvancedPotions;
+namespace Avalon.Items.AdvancedPotions;
 
 class AdvSpelunkerPotion : ModItem
 {

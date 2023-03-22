@@ -1,10 +1,10 @@
-﻿using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Systems;
+﻿using Avalon.Common;
+using Avalon.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Buffs;
+namespace Avalon.Buffs;
 
 public class Shadows : ModBuff
 {

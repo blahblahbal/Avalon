@@ -1,8 +1,8 @@
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
+namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 class IridiumGreatsword : ModItem
 {

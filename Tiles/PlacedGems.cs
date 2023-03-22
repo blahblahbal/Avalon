@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace ExxoAvalonOrigins.Tiles;
+namespace Avalon.Tiles;
 
 public class PlacedGems : ModTile
 {

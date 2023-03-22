@@ -1,10 +1,9 @@
-using System;
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Hooks;
+namespace Avalon.Hooks;
 
 [Autoload(Side = ModSide.Both)]
 internal class AdjTiles : ModHook

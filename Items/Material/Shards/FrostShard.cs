@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material.Shards;
+namespace Avalon.Items.Material.Shards;
 
 class FrostShard : ModItem
 {

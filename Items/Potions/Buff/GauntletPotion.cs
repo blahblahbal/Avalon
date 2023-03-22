@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Potions.Buff;
+namespace Avalon.Items.Potions.Buff;
 
 class GauntletPotion : ModItem
 {

@@ -1,9 +1,9 @@
 ﻿using System;
-using ExxoAvalonOrigins.Logic;
+using Avalon.Logic;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.UI.Elements;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public class ExxoUIScrollbar : ExxoUIAdapter<UIScrollbar>
 {

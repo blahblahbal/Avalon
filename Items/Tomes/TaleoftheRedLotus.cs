@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Common;
+using Avalon.Items.Material.TomeMats;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Material.TomeMats;
 
-namespace ExxoAvalonOrigins.Items.Tomes;
+namespace Avalon.Items.Tomes;
 
 class TaleoftheRedLotus : ModItem
 {

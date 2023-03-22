@@ -1,6 +1,6 @@
 ﻿using System;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Banners;
+using Avalon.Common;
+using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -12,7 +12,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.NPCs.Hardmode;
+namespace Avalon.NPCs.Hardmode;
 
 public class Blaze : ModNPC
 {

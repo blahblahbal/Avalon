@@ -1,10 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
+﻿using Avalon.Walls;
+using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ExxoAvalonOrigins.Walls;
 
-namespace ExxoAvalonOrigins.Items.Placeable.Walls;
+namespace Avalon.Items.Placeable.Walls;
 
 class RhodiumBrickWallItem : ModItem
 {

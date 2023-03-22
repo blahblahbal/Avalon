@@ -1,10 +1,10 @@
-﻿using ExxoAvalonOrigins.Common;
+﻿using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Accessories.PreHardmode;
+namespace Avalon.Items.Accessories.PreHardmode;
 
 class AmuletofPower : ModItem
 {

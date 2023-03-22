@@ -1,10 +1,9 @@
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
+namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 class Moonfury : ModItem
 {

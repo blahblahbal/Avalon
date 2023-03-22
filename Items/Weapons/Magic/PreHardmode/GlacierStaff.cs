@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Magic.PreHardmode;
+namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
 class GlacierStaff : ModItem
 {

@@ -1,9 +1,9 @@
-using Terraria.ModLoader;
-using ExxoAvalonOrigins.Common;
-using Terraria.ID;
+using Avalon.Common;
 using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Hooks;
+namespace Avalon.Hooks;
 
 [Autoload(Side = ModSide.Client)]
 internal class VanityAccessoryShowTooltip : ModHook

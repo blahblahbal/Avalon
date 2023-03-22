@@ -1,10 +1,8 @@
-using System;
+using Avalon.Common;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
-using ExxoAvalonOrigins.Common;
 
-namespace ExxoAvalonOrigins.Hooks;
+namespace Avalon.Hooks;
 internal class PickPower : ModHook
 {
     protected override void Apply()

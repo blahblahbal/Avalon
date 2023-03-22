@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material.Bars;
+namespace Avalon.Items.Material.Bars;
 
 public class OsmiumBar : ModItem
 {

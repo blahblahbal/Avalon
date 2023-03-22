@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI.Herbology;
+namespace Avalon.UI.Herbology;
 
 internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
 {

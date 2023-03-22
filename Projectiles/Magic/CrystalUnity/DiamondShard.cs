@@ -4,7 +4,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Projectiles.Magic.CrystalUnity;
+namespace Avalon.Projectiles.Magic.CrystalUnity;
 
 public class DiamondShard : ModProjectile
 {

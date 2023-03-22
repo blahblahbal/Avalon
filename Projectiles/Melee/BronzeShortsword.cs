@@ -1,10 +1,9 @@
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Projectiles.Melee;
+namespace Avalon.Projectiles.Melee;
 
 public class BronzeShortsword : ModProjectile
 {

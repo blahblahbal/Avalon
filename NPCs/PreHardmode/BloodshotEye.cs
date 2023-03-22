@@ -1,16 +1,16 @@
 using System;
+using Avalon.Common;
+using Avalon.Items.Material;
+using Avalon.Projectiles.Hostile;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using ExxoAvalonOrigins.Items.Material;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Projectiles.Hostile;
-using Terraria.Audio;
 
-namespace ExxoAvalonOrigins.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode;
 
 public class BloodshotEye : ModNPC
 {

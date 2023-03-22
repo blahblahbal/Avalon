@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Projectiles.Hostile;
+namespace Avalon.Projectiles.Hostile;
 
 public class VultureEgg : ModProjectile
 {

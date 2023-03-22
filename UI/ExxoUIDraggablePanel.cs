@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public class ExxoUIDraggablePanel : ExxoUIPanel
 {

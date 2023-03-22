@@ -1,6 +1,5 @@
-using ExxoAvalonOrigins.Buffs;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Systems;
+using Avalon.Buffs;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -9,7 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public class AvalonStaminaPlayer : ModPlayer
 {

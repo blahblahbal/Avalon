@@ -1,9 +1,8 @@
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Ranged.PreHardmode;
+namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
 internal class NickelBow : ModItem
 {

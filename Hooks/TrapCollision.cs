@@ -1,11 +1,10 @@
-using ExxoAvalonOrigins.Common;
-using Microsoft.Xna.Framework;
+using Avalon.Common;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Hooks;
+namespace Avalon.Hooks;
 
 [Autoload(Side = ModSide.Both)]
 public class TrapCollision : ModHook

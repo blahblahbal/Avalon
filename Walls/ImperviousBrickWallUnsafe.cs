@@ -1,10 +1,9 @@
-﻿using ExxoAvalonOrigins.Systems;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Walls;
+namespace Avalon.Walls;
 
 public class ImperviousBrickWallUnsafe : ModWall
 {

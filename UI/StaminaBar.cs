@@ -1,4 +1,4 @@
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -9,7 +9,7 @@ using Terraria.GameContent.UI.ResourceSets;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public struct PlayerStaminaStatsSnapshot
 {

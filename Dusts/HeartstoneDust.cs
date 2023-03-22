@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Dusts;
+namespace Avalon.Dusts;
 
 public class HeartstoneDust : ModDust
 {

@@ -1,12 +1,12 @@
-﻿using ExxoAvalonOrigins.Items.Material;
-using ExxoAvalonOrigins.Items.Material.Bars;
-using ExxoAvalonOrigins.Items.Material.Ores;
-using ExxoAvalonOrigins.Items.Placeable.Tile;
+﻿using Avalon.Items.Material;
+using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Ores;
+using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Systems.Recipes;
+namespace Avalon.Systems.Recipes;
 
 internal class CatalyzerRecipes : ModSystem
 {

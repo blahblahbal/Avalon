@@ -1,12 +1,10 @@
-using Terraria;
+using Avalon.Items.Material;
+using Avalon.Items.Weapons.Magic.PreHardmode;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent;
-using Terraria.GameContent.ItemDropRules;
-using ExxoAvalonOrigins.Items.Material;
-using ExxoAvalonOrigins.Items.Weapons.Magic.PreHardmode;
 
-namespace ExxoAvalonOrigins.Items.BossBags;
+namespace Avalon.Items.BossBags;
 
 public class DesertBeakBossBag : ModItem
 {

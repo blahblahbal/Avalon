@@ -1,10 +1,10 @@
-using ExxoAvalonOrigins.Items.Material.Shards;
-using ExxoAvalonOrigins.Items.Material.Bars;
+using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Shards;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Systems.Recipes;
+namespace Avalon.Systems.Recipes;
 
 public class RecipeChanger : ModSystem
 {

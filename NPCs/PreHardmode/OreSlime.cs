@@ -1,14 +1,13 @@
-﻿using ExxoAvalonOrigins.Common;
+﻿using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode;
 
 public class OreSlime : ModNPC
 {

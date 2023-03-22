@@ -1,11 +1,10 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using Terraria.DataStructures;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Magic.Hardmode;
+namespace Avalon.Items.Weapons.Magic.Hardmode;
 
 class CrystalUnity : ModItem
 {

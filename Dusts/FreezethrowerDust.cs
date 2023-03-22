@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Dusts;
+namespace Avalon.Dusts;
 
 public class FreezethrowerDust : ModDust
 {

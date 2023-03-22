@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -5,9 +6,8 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 //using Avalon.Tiles.Furniture.PurpleDungeon;
 //using Avalon.Tiles.Furniture.OrangeDungeon;
-using ExxoAvalonOrigins.Common;
 
-namespace ExxoAvalonOrigins.Hooks;
+namespace Avalon.Hooks;
 
 [Autoload(Side = ModSide.Both)]
 public class DungeonRework : ModHook

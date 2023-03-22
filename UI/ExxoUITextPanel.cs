@@ -1,6 +1,6 @@
 ﻿using Terraria.Localization;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public class ExxoUITextPanel : ExxoUIPanel
 {

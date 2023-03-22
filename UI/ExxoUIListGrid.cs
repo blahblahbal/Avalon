@@ -2,7 +2,7 @@
 using System.Linq;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public class ExxoUIListGrid : ExxoUIList
 {

@@ -1,17 +1,17 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
+﻿using Avalon.Buffs;
+using Avalon.Items.Consumables;
+using Avalon.Items.Material.Shards;
+using Avalon.Items.Material.TomeMats;
+using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
-using Terraria.Localization;
-using Microsoft.Xna.Framework;
-using ExxoAvalonOrigins.Buffs;
-using ExxoAvalonOrigins.Items.Material.TomeMats;
 using Terraria.GameContent.ItemDropRules;
-using ExxoAvalonOrigins.Items.Material.Shards;
-using ExxoAvalonOrigins.Items.Consumables;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public class AvalonGlobalNPC : GlobalNPC
 {

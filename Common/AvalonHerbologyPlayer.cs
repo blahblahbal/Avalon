@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using ExxoAvalonOrigins.Data;
+using Avalon.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public class AvalonHerbologyPlayer : ModPlayer
 {

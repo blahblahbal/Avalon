@@ -1,7 +1,7 @@
-﻿using ExxoAvalonOrigins.Common;
+﻿using Avalon.Common;
 using Terraria;
 
-namespace ExxoAvalonOrigins.Hooks;
+namespace Avalon.Hooks;
 
 public class PrefixChanges : ModHook
 {

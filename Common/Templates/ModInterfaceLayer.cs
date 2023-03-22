@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.Common.Templates;
+namespace Avalon.Common.Templates;
 
 public abstract class ModInterfaceLayer : ModType
 {

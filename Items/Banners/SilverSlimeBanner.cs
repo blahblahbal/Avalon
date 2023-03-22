@@ -1,9 +1,9 @@
-﻿using ExxoAvalonOrigins.Tiles;
+﻿using Avalon.Tiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Banners;
+namespace Avalon.Items.Banners;
 
 public class SilverSlimeBanner : ModItem
 {

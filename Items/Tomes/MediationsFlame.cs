@@ -1,10 +1,9 @@
-using ExxoAvalonOrigins.Items.Material.TomeMats;
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Tomes;
+namespace Avalon.Items.Tomes;
 
 class MediationsFlame : ModItem
 {

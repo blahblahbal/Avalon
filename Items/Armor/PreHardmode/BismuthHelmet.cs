@@ -1,10 +1,9 @@
-﻿using ExxoAvalonOrigins.Common;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Armor.PreHardmode;
+namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
 class BismuthHelmet : ModItem

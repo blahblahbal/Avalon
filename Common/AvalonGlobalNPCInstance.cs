@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public class AvalonGlobalNPCInstance : GlobalNPC
 {

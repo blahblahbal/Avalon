@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Buffs;
+namespace Avalon.Buffs;
 
 public class Shockwave : ModBuff
 {

@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace ExxoAvalonOrigins.Tiles;
+namespace Avalon.Tiles;
 
 public class MonsterBanner : ModTile
 {

@@ -1,10 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using ExxoAvalonOrigins.Common;
+﻿using Avalon.Common;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Tomes;
+namespace Avalon.Items.Tomes;
 
 class TaleoftheDolt : ModItem
 {

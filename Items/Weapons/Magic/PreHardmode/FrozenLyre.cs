@@ -1,13 +1,11 @@
-using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using ExxoAvalonOrigins.Common;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Magic.PreHardmode;
+namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
 class FrozenLyre : ModItem
 {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public class ExxoUIAttachment<THolder, TAttachment> : ExxoUIElement
     where THolder : ExxoUIElement where TAttachment : ExxoUIElement

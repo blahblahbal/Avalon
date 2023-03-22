@@ -1,8 +1,7 @@
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material;
+namespace Avalon.Items.Material;
 
 class YuckyBit : ModItem
 {

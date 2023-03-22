@@ -1,13 +1,13 @@
 ﻿using System.Globalization;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Data;
+using Avalon.Common;
+using Avalon.Data;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Localization;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI.Herbology;
+namespace Avalon.UI.Herbology;
 
 internal class HerbologyUIHerbCountAttachment : ExxoUIAttachment<ExxoUIItemSlot, ExxoUIPanelWrapper<ExxoUIList>>
 {

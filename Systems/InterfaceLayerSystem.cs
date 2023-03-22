@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using ExxoAvalonOrigins.Common.Templates;
+using Avalon.Common.Templates;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.Systems;
+namespace Avalon.Systems;
 
 public class InterfaceLayerSystem : ModSystem
 {

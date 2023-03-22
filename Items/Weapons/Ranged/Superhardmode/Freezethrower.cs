@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Ranged.Superhardmode;
+namespace Avalon.Items.Weapons.Ranged.Superhardmode;
 
 internal class Freezethrower : ModItem
 {

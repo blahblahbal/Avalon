@@ -1,11 +1,10 @@
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Material.Bars;
+using Avalon.Items.Material.Bars;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Ranged.PreHardmode;
+namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
 class EnchantedShuriken : ModItem
 {

@@ -1,4 +1,4 @@
-﻿using ExxoAvalonOrigins.Common;
+﻿using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.ObjectInteractions;
@@ -7,7 +7,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace ExxoAvalonOrigins.Tiles;
+namespace Avalon.Tiles;
 
 public class HerbologyBench : ModTile
 {

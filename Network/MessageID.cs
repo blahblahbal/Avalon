@@ -1,4 +1,4 @@
-﻿namespace ExxoAvalonOrigins.Network;
+﻿namespace Avalon.Network;
 
 public enum MessageID
 {

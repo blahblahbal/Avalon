@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ExxoAvalonOrigins.Network;
+namespace Avalon.Network;
 
 public static class NetworkManager
 {

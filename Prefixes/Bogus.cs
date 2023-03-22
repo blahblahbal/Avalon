@@ -1,8 +1,8 @@
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Prefixes;
+namespace Avalon.Prefixes;
 
 public class Bogus : ExxoPrefix
 {

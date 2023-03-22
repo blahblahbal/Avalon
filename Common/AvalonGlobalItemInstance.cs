@@ -5,7 +5,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public class AvalonGlobalItemInstance : GlobalItem
 {

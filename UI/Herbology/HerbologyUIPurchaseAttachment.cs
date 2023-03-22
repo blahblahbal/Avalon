@@ -1,12 +1,12 @@
-﻿using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Data;
+﻿using Avalon.Common;
+using Avalon.Data;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI.Herbology;
+namespace Avalon.UI.Herbology;
 
 internal class HerbologyUIPurchaseAttachment : ExxoUIAttachment<ExxoUIItemSlot, ExxoUIPanelWrapper<ExxoUIList>>
 {

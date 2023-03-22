@@ -1,12 +1,12 @@
-﻿using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Material.TomeMats;
-using ExxoAvalonOrigins.Tiles;
+﻿using Avalon.Common;
+using Avalon.Items.Material.TomeMats;
+using Avalon.Tiles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Tomes;
+namespace Avalon.Items.Tomes;
 
 internal class SoutheasternPeacock : ModItem
 {

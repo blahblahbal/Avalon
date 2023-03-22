@@ -1,11 +1,11 @@
+using Avalon.Items.Weapons.Magic.PreHardmode;
 using Terraria;
 using Terraria.ID;
+using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using Terraria.IO;
-using ExxoAvalonOrigins.Items.Weapons.Magic.PreHardmode;
 
-namespace ExxoAvalonOrigins.WorldGeneration.Passes;
+namespace Avalon.WorldGeneration.Passes;
 
 public class ReplaceChestItems : GenPass
 {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI.Herbology;
+namespace Avalon.UI.Herbology;
 
 internal class HerbologyUIPotionExchange : ExxoUIPanelWrapper<ExxoUIList>
 {

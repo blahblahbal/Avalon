@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.GameInput;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 internal class ExxoUINumberInput : ExxoUIList
 {

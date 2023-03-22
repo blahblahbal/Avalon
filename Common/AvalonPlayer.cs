@@ -1,9 +1,9 @@
-﻿using ExxoAvalonOrigins.Buffs;
-using ExxoAvalonOrigins.Buffs.AdvancedBuffs;
-using ExxoAvalonOrigins.Items.Other;
-using ExxoAvalonOrigins.Prefixes;
-using ExxoAvalonOrigins.Systems;
-using ExxoAvalonOrigins.Walls;
+﻿using Avalon.Buffs;
+using Avalon.Buffs.AdvancedBuffs;
+using Avalon.Items.Other;
+using Avalon.Prefixes;
+using Avalon.Systems;
+using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -12,7 +12,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public class AvalonPlayer : ModPlayer
 {

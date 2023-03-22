@@ -1,9 +1,9 @@
-﻿using ExxoAvalonOrigins.Items.Accessories.PreHardmode;
-using ExxoAvalonOrigins.Items.Material;
-using ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
-using ExxoAvalonOrigins.Prefixes;
-using ExxoAvalonOrigins.Tiles;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Material;
+using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Prefixes;
+using Avalon.Tiles;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -11,7 +11,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public class AvalonGlobalItem : GlobalItem
 {

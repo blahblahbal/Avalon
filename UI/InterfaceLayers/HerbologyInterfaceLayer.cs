@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Common.Templates;
-using ExxoAvalonOrigins.UI.Herbology;
+using Avalon.Common;
+using Avalon.Common.Templates;
+using Avalon.UI.Herbology;
 using Terraria;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI.InterfaceLayers;
+namespace Avalon.UI.InterfaceLayers;
 
 public class HerbologyInterfaceLayer : ModInterfaceLayer
 {

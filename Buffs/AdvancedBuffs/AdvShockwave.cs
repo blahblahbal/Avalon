@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ModLoader;
 using Terraria.ID;
+using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Buffs.AdvancedBuffs;
+namespace Avalon.Buffs.AdvancedBuffs;
 
 public class AdvShockwave : ModBuff
 {

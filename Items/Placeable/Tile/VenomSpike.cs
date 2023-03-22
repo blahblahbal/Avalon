@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Placeable.Tile;
+namespace Avalon.Items.Placeable.Tile;
 
 class VenomSpike : ModItem
 {

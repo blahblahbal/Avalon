@@ -1,15 +1,14 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using ReLogic.Content;
-using Terraria.GameContent;
-using ExxoAvalonOrigins.Common;
 
-namespace ExxoAvalonOrigins.Projectiles.Melee;
+namespace Avalon.Projectiles.Melee;
 
 public class Sporalash : ModProjectile
 {

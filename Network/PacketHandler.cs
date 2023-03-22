@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Network;
+namespace Avalon.Network;
 
 public abstract class PacketHandler<T> : IPacketHandler, ILoadable
     where T : NetworkArgs

@@ -1,7 +1,7 @@
 using System.IO;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Network;
+namespace Avalon.Network;
 
 public class MessageHandler
 {

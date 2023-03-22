@@ -1,6 +1,6 @@
 ﻿using Terraria;
 
-namespace ExxoAvalonOrigins.Prefixes;
+namespace Avalon.Prefixes;
 
 public class Protective : ExxoPrefix
 {

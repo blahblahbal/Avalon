@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material;
+namespace Avalon.Items.Material;
 
 class BottledLava : ModItem
 {

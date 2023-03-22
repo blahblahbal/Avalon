@@ -1,8 +1,8 @@
-﻿using ExxoAvalonOrigins.Common;
+﻿using Avalon.Common;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Buffs.AdvancedBuffs;
+namespace Avalon.Buffs.AdvancedBuffs;
 
 public class AdvCalming : ModBuff
 {

@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material.Ores;
+namespace Avalon.Items.Material.Ores;
 
 public class OsmiumOre : ModItem
 {

@@ -1,11 +1,11 @@
 using System;
 using System.IO;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.BossBags;
-using ExxoAvalonOrigins.Items.Material;
-using ExxoAvalonOrigins.Items.Vanity;
-using ExxoAvalonOrigins.Items.Weapons.Magic.PreHardmode;
-using ExxoAvalonOrigins.Systems;
+using Avalon.Common;
+using Avalon.Items.BossBags;
+using Avalon.Items.Material;
+using Avalon.Items.Vanity;
+using Avalon.Items.Weapons.Magic.PreHardmode;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -16,7 +16,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.NPCs.Bosses.PreHardmode;
+namespace Avalon.NPCs.Bosses.PreHardmode;
 
 [AutoloadBossHead]
 public class DesertBeak : ModNPC

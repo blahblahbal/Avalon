@@ -3,7 +3,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 internal class ExxoUIPanelButton<T> : ExxoUIPanelWrapper<T> where T : UIElement
 {

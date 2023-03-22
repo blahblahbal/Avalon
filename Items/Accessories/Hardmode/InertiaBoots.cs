@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Accessories.Hardmode;
+namespace Avalon.Items.Accessories.Hardmode;
 
 [AutoloadEquip(EquipType.Shoes, EquipType.Wings)]
 class InertiaBoots : ModItem

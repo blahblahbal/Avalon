@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material;
+namespace Avalon.Items.Material;
 
 public class LifeDew : ModItem
 {

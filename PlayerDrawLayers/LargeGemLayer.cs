@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.PlayerDrawLayers;
+namespace Avalon.PlayerDrawLayers;
 
 public class LargeGemLayer : PlayerDrawLayer
 {

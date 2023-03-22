@@ -1,7 +1,6 @@
 using Terraria.ID;
-using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Data.Sets;
+namespace Avalon.Data.Sets;
 
 public static class NPC
 {

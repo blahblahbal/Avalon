@@ -1,11 +1,11 @@
 ﻿using System.IO;
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Network;
+namespace Avalon.Network;
 
 public class CursorPosition
 {

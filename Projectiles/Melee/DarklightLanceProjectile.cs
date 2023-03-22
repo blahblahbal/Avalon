@@ -1,18 +1,10 @@
-﻿using ExxoAvalonOrigins.Common.Templates;
+﻿using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.Drawing;
-using Terraria.Graphics.Renderers;
 using Terraria.ID;
-using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Projectiles.Melee;
+namespace Avalon.Projectiles.Melee;
 
 public class DarklightLanceProjectile : SpearTemplate
 {

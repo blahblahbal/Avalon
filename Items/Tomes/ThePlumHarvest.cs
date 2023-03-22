@@ -1,10 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Common;
+using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Material.TomeMats;
 
-namespace ExxoAvalonOrigins.Items.Tomes;
+namespace Avalon.Items.Tomes;
 
 class ThePlumHarvest : ModItem
 {

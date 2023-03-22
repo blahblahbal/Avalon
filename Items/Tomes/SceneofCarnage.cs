@@ -1,11 +1,10 @@
-﻿using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Material.TomeMats;
+﻿using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Tomes;
+namespace Avalon.Items.Tomes;
 
 class SceneofCarnage : ModItem
 {

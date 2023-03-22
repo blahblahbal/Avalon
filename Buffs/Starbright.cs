@@ -1,6 +1,6 @@
 ﻿using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Buffs;
+namespace Avalon.Buffs;
 
 public class Starbright : ModBuff
 {

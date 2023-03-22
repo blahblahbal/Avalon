@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace ExxoAvalonOrigins.Network;
+namespace Avalon.Network;
 
 public interface IPacketHandler
 {

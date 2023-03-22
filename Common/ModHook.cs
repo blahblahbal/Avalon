@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public abstract class ModHook : ModType
 {

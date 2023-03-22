@@ -1,11 +1,10 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using ExxoAvalonOrigins.Common;
 
-namespace ExxoAvalonOrigins.Projectiles.Magic;
+namespace Avalon.Projectiles.Magic;
 
 public class JungleFire : ModProjectile
 {

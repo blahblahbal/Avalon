@@ -1,8 +1,7 @@
-using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Tools.PreHardmode;
+namespace Avalon.Items.Tools.PreHardmode;
 
 class BismuthHammer : ModItem
 {

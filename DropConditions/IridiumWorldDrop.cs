@@ -1,7 +1,7 @@
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Terraria.GameContent.ItemDropRules;
 
-namespace ExxoAvalonOrigins.DropConditions;
+namespace Avalon.DropConditions;
 
 public class IridiumWorldDrop : IItemDropRuleCondition, IProvideItemConditionDescription
 {

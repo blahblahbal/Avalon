@@ -1,7 +1,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
+namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 class BronzeBroadsword : ModItem
 {

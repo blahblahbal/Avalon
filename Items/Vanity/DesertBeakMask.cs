@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Vanity;
+namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
 class DesertBeakMask : ModItem

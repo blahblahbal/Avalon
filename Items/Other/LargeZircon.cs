@@ -1,11 +1,10 @@
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Other;
+namespace Avalon.Items.Other;
 
 class LargeZircon : ModItem
 {

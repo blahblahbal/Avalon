@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.GameInput;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public abstract class ExxoUIState : UIState
 {

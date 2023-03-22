@@ -1,12 +1,12 @@
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Placeable.Seed;
+using Avalon.Common;
+using Avalon.Items.Placeable.Seed;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace ExxoAvalonOrigins.Tiles;
+namespace Avalon.Tiles;
 
 public class LargeHerbsStage2 : ModTile
 {

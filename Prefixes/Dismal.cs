@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Prefixes;
+namespace Avalon.Prefixes;
 
 public class Dismal : ExxoPrefix
 {

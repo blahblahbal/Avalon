@@ -1,9 +1,8 @@
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Placeable.Tile;
+namespace Avalon.Items.Placeable.Tile;
 
 class IridiumBrick : ModItem
 {

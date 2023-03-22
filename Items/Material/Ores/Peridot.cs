@@ -1,9 +1,8 @@
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material.Ores;
+namespace Avalon.Items.Material.Ores;
 
 class Peridot : ModItem
 {

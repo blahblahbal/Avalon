@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 internal class ExxoUIItemSlot : ExxoUIImageButton
 {

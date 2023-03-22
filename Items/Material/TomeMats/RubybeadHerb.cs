@@ -1,10 +1,9 @@
-using ExxoAvalonOrigins.Common;
-using Microsoft.Xna.Framework;
+using Avalon.Common;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material.TomeMats;
+namespace Avalon.Items.Material.TomeMats;
 
 class RubybeadHerb : ModItem
 {

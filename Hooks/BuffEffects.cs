@@ -1,5 +1,5 @@
-using ExxoAvalonOrigins.Buffs;
-using ExxoAvalonOrigins.Common;
+using Avalon.Buffs;
+using Avalon.Common;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.Utilities;

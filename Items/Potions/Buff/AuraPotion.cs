@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Potions.Buff;
+namespace Avalon.Items.Potions.Buff;
 
 class AuraPotion : ModItem
 {

@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace ExxoAvalonOrigins.Items.Tools;
+namespace Avalon.Items.Tools;
 
 internal class WaypointSystem : ModSystem
 {

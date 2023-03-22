@@ -1,7 +1,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Weapons.Ranged.PreHardmode;
+namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
 class BronzeBow : ModItem
 {

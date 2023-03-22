@@ -1,12 +1,11 @@
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.PlayerDrawLayers;
+using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material;
+namespace Avalon.Items.Material;
 
 class PointingLaser : ModItem
 {

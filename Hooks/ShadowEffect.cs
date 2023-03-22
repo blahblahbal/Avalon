@@ -1,4 +1,4 @@
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Terraria;
 using Terraria.Graphics.Renderers;
 using Microsoft.Xna.Framework;

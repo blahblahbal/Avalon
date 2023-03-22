@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria.Localization;
 
-namespace ExxoAvalonOrigins.UI.Herbology;
+namespace Avalon.UI.Herbology;
 
 internal class HerbologyUIHelpAttachment : ExxoUIAttachment<ExxoUIElement, ExxoUITextPanel>
 {

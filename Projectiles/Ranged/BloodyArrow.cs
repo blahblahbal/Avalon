@@ -1,13 +1,12 @@
 using System;
 using System.IO;
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Projectiles.Ranged;
+namespace Avalon.Projectiles.Ranged;
 
 public class BloodyArrow : ModProjectile
 {

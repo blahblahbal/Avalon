@@ -1,32 +1,31 @@
-﻿using ExxoAvalonOrigins.Common;
+﻿using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
 
-namespace ExxoAvalonOrigins.Hooks
+namespace Avalon.Hooks; 
+
+public class SpelunkerEdit : ModHook
 {
-    public class SpelunkerEdit : ModHook
+    protected override void Apply()
     {
-        protected override void Apply()
-        {
-            IL_TileDrawing.DrawSingleTile += ILDrawSingleTile;
-        }
+        IL_TileDrawing.DrawSingleTile += ILDrawSingleTile;
+    }
 
-        private static void ILDrawSingleTile(ILContext il)
-        {
-            var c = new ILCursor(il);
-            if (!c.TryGotoNext(i => i.MatchLdcI4(170)))
-                return;
+    private static void ILDrawSingleTile(ILContext il)
+    {
+        var c = new ILCursor(il);
+        if (!c.TryGotoNext(i => i.MatchLdcI4(170)))
+            return;
 
-            var label = il.DefineLabel();
+        var label = il.DefineLabel();
 
-            c.Emit(OpCodes.Ldarg_1);
-            c.Emit(OpCodes.Call, typeof(Color).GetMethod("get_White"));
-            c.Emit(OpCodes.Stfld, typeof(TileDrawInfo).GetField("tileLight"));
+        c.Emit(OpCodes.Ldarg_1);
+        c.Emit(OpCodes.Call, typeof(Color).GetMethod("get_White"));
+        c.Emit(OpCodes.Stfld, typeof(TileDrawInfo).GetField("tileLight"));
 
-            c.MarkLabel(label);
-        }
+        c.MarkLabel(label);
     }
 }

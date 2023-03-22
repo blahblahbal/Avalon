@@ -1,6 +1,6 @@
 ﻿using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Buffs.AdvancedBuffs;
+namespace Avalon.Buffs.AdvancedBuffs;
 
 public class AdvArchery : ModBuff
 {

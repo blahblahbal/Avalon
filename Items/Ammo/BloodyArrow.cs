@@ -1,10 +1,9 @@
-using ExxoAvalonOrigins.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Ammo;
+namespace Avalon.Items.Ammo;
 
 class BloodyArrow : ModItem
 {

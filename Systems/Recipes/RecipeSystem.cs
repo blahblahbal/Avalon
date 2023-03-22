@@ -3,13 +3,14 @@
 //using Avalon.Items.Placeable.Bar;
 //using Avalon.Items.Placeable.Crafting;
 //using Avalon.Items.Placeable.Tile;
-using ExxoAvalonOrigins.Items.Accessories.PreHardmode;
-using ExxoAvalonOrigins.Items.Material.Bars;
+
+using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Material.Bars;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Systems.Recipes;
+namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
 {
     public override void AddRecipeGroups()

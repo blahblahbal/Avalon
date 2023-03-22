@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Gores;
+namespace Avalon.Gores;
 
 public class GlacierChunk1 : ModGore
 {

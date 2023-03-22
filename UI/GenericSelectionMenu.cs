@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
@@ -9,7 +8,7 @@ using Terraria.Localization;
 using Terraria.UI;
 using Terraria.UI.Gamepad;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public class GenericSelectionMenu : UIState
 {

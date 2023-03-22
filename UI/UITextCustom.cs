@@ -2,7 +2,7 @@
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public class UITextCustom : UIText
 {

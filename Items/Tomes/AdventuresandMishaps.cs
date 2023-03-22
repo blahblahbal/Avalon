@@ -1,12 +1,11 @@
-﻿using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Material;
-using ExxoAvalonOrigins.Items.Material.TomeMats;
+﻿using Avalon.Common;
+using Avalon.Items.Material.TomeMats;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Tomes;
+namespace Avalon.Items.Tomes;
 
 public class AdventuresandMishaps : ModItem
 {

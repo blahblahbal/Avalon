@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins;
+namespace Avalon.Common;
 
 public class AvalonMenu : ModMenu
 {

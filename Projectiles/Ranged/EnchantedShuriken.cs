@@ -1,13 +1,12 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using ExxoAvalonOrigins.Common;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace ExxoAvalonOrigins.Projectiles.Ranged;
+namespace Avalon.Projectiles.Ranged;
 
 public class EnchantedShuriken : ModProjectile
 {

@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using ExxoAvalonOrigins.Items.AdvancedPotions;
-using ExxoAvalonOrigins.Items.Potions.Other;
+using Avalon.Items.AdvancedPotions;
+using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Placeable.Tile.LargeHerbs;
+using Avalon.Items.Potions.Buff;
+using Avalon.Items.Potions.Other;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ExxoAvalonOrigins.Items.Placeable.Seed;
-using ExxoAvalonOrigins.Items.Placeable.Tile.LargeHerbs;
-using ExxoAvalonOrigins.Items.Potions.Buff;
 
-namespace ExxoAvalonOrigins.Data;
+namespace Avalon.Data;
 
 public static class HerbologyData
 {

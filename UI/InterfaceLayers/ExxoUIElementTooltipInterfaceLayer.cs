@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Common.Templates;
+using Avalon.Common.Templates;
 using Terraria;
 using Terraria.Localization;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI.InterfaceLayers;
+namespace Avalon.UI.InterfaceLayers;
 
 public class ExxoUIElementTooltipInterfaceLayer : ModInterfaceLayer
 {

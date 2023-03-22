@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Walls;
+namespace Avalon.Walls;
 public class RhodiumBrickWall : ModWall
 {
     public override void SetStaticDefaults()

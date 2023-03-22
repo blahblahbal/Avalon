@@ -1,6 +1,6 @@
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public abstract class ExxoUIAdapter<T> : ExxoUIElement where T : UIElement
 {

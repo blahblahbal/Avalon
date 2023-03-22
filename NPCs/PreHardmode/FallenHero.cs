@@ -1,7 +1,7 @@
-﻿using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Vanity;
-using ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
-using System;
+﻿using System;
+using Avalon.Common;
+using Avalon.Items.Vanity;
+using Avalon.Items.Weapons.Melee.PreHardmode;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
@@ -9,7 +9,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode;
 
 public class FallenHero : ModNPC
 {

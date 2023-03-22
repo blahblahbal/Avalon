@@ -1,15 +1,13 @@
-﻿using ExxoAvalonOrigins.Items.Accessories;
-using ExxoAvalonOrigins.Items.Accessories.PreHardmode;
-using ExxoAvalonOrigins.Items.Material;
-using ExxoAvalonOrigins.Items.Weapons.Magic.PreHardmode;
-using ExxoAvalonOrigins.Items.Weapons.Melee.PreHardmode;
-using ExxoAvalonOrigins.NPCs.PreHardmode;
+﻿using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Material;
+using Avalon.Items.Weapons.Magic.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Common;
+namespace Avalon.Common;
 
 public class AvalonMobDrops : GlobalNPC
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using Terraria.ModLoader.Config;
 
-namespace ExxoAvalonOrigins;
+namespace Avalon.Common;
 public class AvalonConfig : ModConfig
 {
     public override ConfigScope Mode => ConfigScope.ServerSide;

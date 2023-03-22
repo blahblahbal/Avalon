@@ -1,12 +1,12 @@
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Network;
-using ExxoAvalonOrigins.Network.Handlers;
+using Avalon.Common;
+using Avalon.Network;
+using Avalon.Network.Handlers;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Projectiles.Ranged;
+namespace Avalon.Projectiles.Ranged;
 
 public class PointingLaser : ModProjectile
 {

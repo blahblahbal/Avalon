@@ -1,11 +1,11 @@
 ﻿using System;
-using ExxoAvalonOrigins.Logic;
+using Avalon.Logic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public class ExxoUIContentLockPanel : ExxoUIPanel
 {

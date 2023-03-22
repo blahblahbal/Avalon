@@ -1,9 +1,8 @@
 using Microsoft.Xna.Framework;
-using ExxoAvalonOrigins.Common;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Tools.PreHardmode;
+namespace Avalon.Items.Tools.PreHardmode;
 
 class NickelAxe : ModItem
 {

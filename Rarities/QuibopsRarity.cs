@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Rarities;
+namespace Avalon.Rarities;
 
 public class QuibopsRarity : ModRarity
 {

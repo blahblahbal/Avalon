@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using ExxoAvalonOrigins.Data;
+using Avalon.Data;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI.Herbology;
+namespace Avalon.UI.Herbology;
 
 internal class HerbologyUITurnIn : ExxoUIPanelWrapper<ExxoUIList>
 {

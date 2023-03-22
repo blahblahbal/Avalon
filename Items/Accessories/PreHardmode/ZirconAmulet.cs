@@ -1,11 +1,11 @@
-﻿using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Material.Ores;
+﻿using Avalon.Common;
+using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Accessories.PreHardmode;
+namespace Avalon.Items.Accessories.PreHardmode;
 
 class ZirconAmulet : ModItem
 {

@@ -1,11 +1,11 @@
-﻿using ExxoAvalonOrigins.Items.Material;
+﻿using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Consumables;
+namespace Avalon.Items.Consumables;
 
 class OddFertilizer : ModItem
 {

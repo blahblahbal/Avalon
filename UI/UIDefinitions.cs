@@ -1,4 +1,4 @@
-﻿namespace ExxoAvalonOrigins.UI;
+﻿namespace Avalon.UI;
 
 public enum Justification
 {

@@ -1,7 +1,7 @@
 using System.Reflection;
 using Terraria;
 
-namespace ExxoAvalonOrigins.Hooks;
+namespace Avalon.Hooks;
 internal class AvalonReflection
 {
     private static FieldInfo Main_MH = null;

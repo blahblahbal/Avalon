@@ -1,11 +1,11 @@
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Items.Material.Shards;
+using Avalon.Common;
+using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Accessories.Vanity;
+namespace Avalon.Items.Accessories.Vanity;
 
 internal class BagofBlood : ModItem
 {

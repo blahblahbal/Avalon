@@ -1,12 +1,12 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Projectiles.Ranged;
+namespace Avalon.Projectiles.Ranged;
 
 public class Freezethrower : ModProjectile
 {

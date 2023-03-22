@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 internal class ExxoUINumberInputWithButtons : ExxoUIList
 {

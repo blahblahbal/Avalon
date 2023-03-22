@@ -1,11 +1,11 @@
-using ExxoAvalonOrigins.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Items.Material.TomeMats;
+namespace Avalon.Items.Material.TomeMats;
 
 class DragonOrb : ModItem
 {

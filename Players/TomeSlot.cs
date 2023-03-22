@@ -1,13 +1,12 @@
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.ModLoader;
-using Terraria.UI;
 using Terraria.ID;
-using ExxoAvalonOrigins.Common;
+using Terraria.ModLoader;
 
-namespace ExxoAvalonOrigins.Players;
+namespace Avalon.Players;
 public class TomeSlot : ModAccessorySlot
 {
     public override bool IsEnabled() => true;

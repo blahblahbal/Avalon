@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using ExxoAvalonOrigins.Common;
-using ExxoAvalonOrigins.Data;
-using ExxoAvalonOrigins.Items.Potions.Buff;
+using Avalon.Common;
+using Avalon.Data;
+using Avalon.Items.Potions.Buff;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,7 +12,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI.Herbology;
+namespace Avalon.UI.Herbology;
 
 public class HerbologyUIState : ExxoUIState
 {

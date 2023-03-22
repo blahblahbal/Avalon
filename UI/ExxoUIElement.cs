@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using ExxoAvalonOrigins.UI.InterfaceLayers;
+using Avalon.UI.InterfaceLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace ExxoAvalonOrigins.UI;
+namespace Avalon.UI;
 
 public abstract class ExxoUIElement : UIElement
 {
