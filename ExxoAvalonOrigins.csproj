@@ -6,12 +6,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Avalon</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Items\Placeable\Tile\" />
-    <Folder Include="NPCs\Bosses\" />
+    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
   </ItemGroup>
 </Project>
