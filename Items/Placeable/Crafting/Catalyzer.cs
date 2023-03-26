@@ -9,7 +9,7 @@ namespace Avalon.Items.Placeable.Crafting;
 
 internal class Catalyzer : ModItem
 {
-    public static readonly Recipe.Condition NearShimmer = new(NetworkText.FromLiteral("Needs shimmer"), (Recipe _) => Main.LocalPlayer.GetModPlayer<AvalonPlayer>().AdjShimmer);
+    public static readonly Condition NearShimmer = new("Conditions.NearShimmer", () => Main.LocalPlayer.GetModPlayer<AvalonPlayer>().AdjShimmer);
 
     public override void SetStaticDefaults()
     {
