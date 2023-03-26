@@ -39,7 +39,7 @@ public class Freezethrower : ModProjectile
         float num = 60f;
         float num2 = 12f;
         float fromMax = num + num2;
-        Texture2D value = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Projectiles/Ranged/Freezethrower").Value;
+        Texture2D value = ModContent.Request<Texture2D>("Avalon/Projectiles/Ranged/Freezethrower").Value;
         Color transparent = Color.Transparent;
         Color color = new Color(87, 85, 233, 200);
         Color color2 = new Color(116, 243, 255, 70);

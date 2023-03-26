@@ -13,7 +13,7 @@ public class TomeSlot : ModAccessorySlot
     public override bool IsHidden() => Main.EquipPage != 0;
     public override bool DrawDyeSlot => false;
     public override bool DrawVanitySlot => false;
-    public override string FunctionalTexture => "ExxoAvalonOrigins/Assets/Textures/UI/TomeSlot";
+    public override string FunctionalTexture => "Avalon/Assets/Textures/UI/TomeSlot";
     public override bool CanAcceptItem(Item checkItem, AccessorySlotType context) => checkItem.GetGlobalItem<AvalonGlobalItemInstance>().Tome;
     public override Vector2? CustomLocation
     {

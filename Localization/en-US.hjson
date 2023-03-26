@@ -1,6 +1,6 @@
 
 Mods: {
-	ExxoAvalonOrigins: {
+	Avalon: {
 		Keybinds: {
 			"Shadow Teleport.DisplayName": Shadow Teleport
 			"Stamina Sprint.DisplayName": Stamina Sprint
@@ -2853,12 +2853,12 @@ Mods: {
 
 			Clover: {
 				DisplayName: Clover
-				Description: Mods.ExxoAvalonOrigins.Buffs.Clover.Description
+				Description: Mods.Avalon.Buffs.Clover.Description
 			}
 
 			ForceField: {
 				DisplayName: Force Field
-				Description: Mods.ExxoAvalonOrigins.Buffs.ForceField.Description
+				Description: Mods.Avalon.Buffs.ForceField.Description
 			}
 		}
 
@@ -2918,9 +2918,7 @@ Mods: {
 			Vigorous.DisplayName: Vigorous
 			Woozy.DisplayName: Woozy
 		}
-		
-		Conditions: {
-		    NearShimmer: Needs shimmer
-		}
+
+		Conditions.NearShimmer: Needs shimmer
 	}
 }

@@ -28,7 +28,7 @@ class InertiaBoots : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddRecipeGroup("ExxoAvalonOrigins:Wings")
+            .AddRecipeGroup("Avalon:Wings")
             .AddIngredient(ItemID.FrostsparkBoots)
             .AddIngredient(ItemID.BlackBelt)
             .AddIngredient(ItemID.LunarBar, 2)

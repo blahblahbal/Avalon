@@ -6,14 +6,14 @@
 //using Terraria;
 //using Terraria.UI;
 
-//namespace ExxoAvalonOrigins.UI;
+//namespace Avalon.UI;
 
 //public class ExxoUIPieChart : ExxoUIElement
 //{
 //    private const int MaxData = 16;
 
 //    private static readonly Asset<Effect> PieChartEffect =
-//        ExxoAvalonOrigins.Mod.Assets.Request<Effect>("Effects/PieChart", AssetRequestMode.ImmediateLoad);
+//        Avalon.Mod.Assets.Request<Effect>("Effects/PieChart", AssetRequestMode.ImmediateLoad);
 
 //    private readonly Tuple<float, PieData>[] calculatedData = new Tuple<float, PieData>[MaxData];
 

@@ -12,8 +12,8 @@ namespace Avalon.Projectiles.Melee;
 
 public class Sporalash : ModProjectile
 {
-    private const string ChainTexturePath = "ExxoAvalonOrigins/Projectiles/Melee/Sporalash_Chain"; // The folder path to the flail chain sprite
-    private const string ChainTextureExtraPath = "ExxoAvalonOrigins/Projectiles/Melee/Sporalash_Chain";  // This texture and related code is optional and used for a unique effect
+    private const string ChainTexturePath = "Avalon/Projectiles/Melee/Sporalash_Chain"; // The folder path to the flail chain sprite
+    private const string ChainTextureExtraPath = "Avalon/Projectiles/Melee/Sporalash_Chain";  // This texture and related code is optional and used for a unique effect
 
     private enum AIState
     {

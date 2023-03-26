@@ -554,43 +554,43 @@ public class AvalonStaminaPlayer : ModPlayer
     }
     public override void SaveData(TagCompound tag)
     {
-        tag["ExxoAvalonOrigins:Stamina"] = StatStamMax;
-        tag["ExxoAvalonOrigins:RocketJumpUnlocked"] = RocketJumpUnlocked;
-        tag["ExxoAvalonOrigins:TeleportUnlocked"] = TeleportUnlocked;
-        tag["ExxoAvalonOrigins:SwimmingUnlocked"] = SwimmingUnlocked;
-        tag["ExxoAvalonOrigins:SprintUnlocked"] = SprintUnlocked;
-        tag["ExxoAvalonOrigins:FlightRestoreUnlocked"] = FlightRestoreUnlocked;
-        tag["ExxoAvalonOrigins:EnergyCrystal"] = EnergyCrystal;
+        tag["Avalon:Stamina"] = StatStamMax;
+        tag["Avalon:RocketJumpUnlocked"] = RocketJumpUnlocked;
+        tag["Avalon:TeleportUnlocked"] = TeleportUnlocked;
+        tag["Avalon:SwimmingUnlocked"] = SwimmingUnlocked;
+        tag["Avalon:SprintUnlocked"] = SprintUnlocked;
+        tag["Avalon:FlightRestoreUnlocked"] = FlightRestoreUnlocked;
+        tag["Avalon:EnergyCrystal"] = EnergyCrystal;
     }
     public override void LoadData(TagCompound tag)
     {
-        if (tag.ContainsKey("ExxoAvalonOrigins:Stamina"))
+        if (tag.ContainsKey("Avalon:Stamina"))
         {
-            StatStamMax = tag.GetAsInt("ExxoAvalonOrigins:Stamina");
+            StatStamMax = tag.GetAsInt("Avalon:Stamina");
         }
-        if (tag.ContainsKey("ExxoAvalonOrigins:RocketJumpUnlocked"))
+        if (tag.ContainsKey("Avalon:RocketJumpUnlocked"))
         {
-            RocketJumpUnlocked = tag.Get<bool>("ExxoAvalonOrigins:RocketJumpUnlocked");
+            RocketJumpUnlocked = tag.Get<bool>("Avalon:RocketJumpUnlocked");
         }
-        if (tag.ContainsKey("ExxoAvalonOrigins:TeleportUnlocked"))
+        if (tag.ContainsKey("Avalon:TeleportUnlocked"))
         {
-            TeleportUnlocked = tag.Get<bool>("ExxoAvalonOrigins:TeleportUnlocked");
+            TeleportUnlocked = tag.Get<bool>("Avalon:TeleportUnlocked");
         }
-        if (tag.ContainsKey("ExxoAvalonOrigins:SwimmingUnlocked"))
+        if (tag.ContainsKey("Avalon:SwimmingUnlocked"))
         {
-            SwimmingUnlocked = tag.Get<bool>("ExxoAvalonOrigins:SwimmingUnlocked");
+            SwimmingUnlocked = tag.Get<bool>("Avalon:SwimmingUnlocked");
         }
-        if (tag.ContainsKey("ExxoAvalonOrigins:SprintUnlocked"))
+        if (tag.ContainsKey("Avalon:SprintUnlocked"))
         {
-            SprintUnlocked = tag.Get<bool>("ExxoAvalonOrigins:SprintUnlocked");
+            SprintUnlocked = tag.Get<bool>("Avalon:SprintUnlocked");
         }
-        if (tag.ContainsKey("ExxoAvalonOrigins:FlightRestoreUnlocked"))
+        if (tag.ContainsKey("Avalon:FlightRestoreUnlocked"))
         {
-            FlightRestoreUnlocked = tag.Get<bool>("ExxoAvalonOrigins:FlightRestoreUnlocked");
+            FlightRestoreUnlocked = tag.Get<bool>("Avalon:FlightRestoreUnlocked");
         }
-        if (tag.ContainsKey("ExxoAvalonOrigins:EnergyCrystal"))
+        if (tag.ContainsKey("Avalon:EnergyCrystal"))
         {
-            EnergyCrystal = tag.Get<bool>("ExxoAvalonOrigins:EnergyCrystal");
+            EnergyCrystal = tag.Get<bool>("Avalon:EnergyCrystal");
         }
     }
     public void StaminaHealEffect(int healAmount, bool broadcast = true)

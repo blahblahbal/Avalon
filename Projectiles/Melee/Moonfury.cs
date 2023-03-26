@@ -13,8 +13,8 @@ namespace Avalon.Projectiles.Melee;
 
 public class Moonfury : ModProjectile
 {
-    private const string ChainTexturePath = "ExxoAvalonOrigins/Projectiles/Melee/Moonfury_Chain"; // The folder path to the flail chain sprite
-    private const string ChainTextureExtraPath = "ExxoAvalonOrigins/Projectiles/Melee/Moonfury_Chain";  // This texture and related code is optional and used for a unique effect
+    private const string ChainTexturePath = "Avalon/Projectiles/Melee/Moonfury_Chain"; // The folder path to the flail chain sprite
+    private const string ChainTextureExtraPath = "Avalon/Projectiles/Melee/Moonfury_Chain";  // This texture and related code is optional and used for a unique effect
 
     private enum AIState
     {

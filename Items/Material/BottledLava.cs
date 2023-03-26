@@ -24,7 +24,7 @@ class BottledLava : ModItem
         CreateRecipe(1)
             .AddIngredient(ItemID.Bottle)
             .AddIngredient(ItemID.Obsidian)
-            .AddCondition(Terraria.Recipe.Condition.NearLava)
+            .AddCondition(Terraria.Condition.NearLava)
             .Register();
     }
 }

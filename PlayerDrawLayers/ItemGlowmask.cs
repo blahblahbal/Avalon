@@ -31,7 +31,7 @@ public class PlayerUseItemGlowmask : PlayerDrawLayer
             return;
 
         Player drawPlayer = drawInfo.drawPlayer;
-        Mod mod = ModLoader.GetMod("ExxoAvalonOrigins");
+        Mod mod = ModLoader.GetMod("Avalon");
         if (!drawPlayer.HeldItem.IsAir)
         {
             Item item = drawPlayer.HeldItem;

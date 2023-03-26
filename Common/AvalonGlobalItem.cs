@@ -38,13 +38,13 @@ public class AvalonGlobalItem : GlobalItem
         // --== Shimmer!!! ==--
         ModContent.GetInstance<DesertLongsword>().CreateRecipe()
             .AddIngredient(ItemID.AntlionClaw)
-            .AddCondition(Recipe.Condition.CorruptWorld)
-            .AddCondition(Recipe.Condition.CrimsonWorld)
+            .AddCondition(Condition.CorruptWorld)
+            .AddCondition(Condition.CrimsonWorld)
             .Register();
         Recipe MandibleBladeTransmute = Recipe.Create(ItemID.AntlionClaw);
         MandibleBladeTransmute.AddIngredient(ModContent.ItemType<DesertLongsword>());
-        MandibleBladeTransmute.AddCondition(Recipe.Condition.CorruptWorld);
-        MandibleBladeTransmute.AddCondition(Recipe.Condition.CrimsonWorld);
+        MandibleBladeTransmute.AddCondition(Condition.CorruptWorld);
+        MandibleBladeTransmute.AddCondition(Condition.CrimsonWorld);
         MandibleBladeTransmute.Register();
     }
 
@@ -232,7 +232,7 @@ public class AvalonGlobalItem : GlobalItem
         {
             if (item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial)
             {
-                tooltipMat.Text = Language.GetTextValue("Mods.ExxoAvalonOrigins.CommonItemTooltip.TomeMaterial");
+                tooltipMat.Text = Language.GetTextValue("Mods.Avalon.CommonItemTooltip.TomeMaterial");
             }
         }
 

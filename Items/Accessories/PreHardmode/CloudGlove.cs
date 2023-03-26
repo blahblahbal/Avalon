@@ -39,7 +39,7 @@ internal class CloudGlove : ModItem
         CreateRecipe().AddIngredient(ItemID.Silk, 15)
             .AddIngredient(ItemID.Cloud, 25)
             .AddIngredient(ItemID.SoulofFlight, 5)
-            .AddRecipeGroup("ExxoAvalonOrigins:GoldBar", 5)
+            .AddRecipeGroup("Avalon:GoldBar", 5)
             .AddIngredient(ItemID.SunplateBlock, 10)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();

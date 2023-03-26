@@ -37,9 +37,9 @@ internal class Catalyzer : ModItem
     {
         Recipe.Create(Type)
             .AddRecipeGroup(RecipeGroupID.Wood, 20)
-            .AddRecipeGroup("ExxoAvalonOrigins:EvilBar", 5)
+            .AddRecipeGroup("Avalon:EvilBar", 5)
             .AddRecipeGroup(RecipeGroupID.IronBar, 15)
-            .AddRecipeGroup("ExxoAvalonOrigins:WorkBenches")
+            .AddRecipeGroup("Avalon:WorkBenches")
             .AddCondition(NearShimmer)
             .AddTile(TileID.Anvils)
             .Register();

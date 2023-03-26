@@ -388,7 +388,7 @@ FodyWeavers.xsd
 .idea/
 *.sln.iml
 *.v2
-.vs/ExxoAvalonOrigins/v17/.suo
-.vs/ExxoAvalonOrigins/v17/.futdcache.v2
-.vs/ProjectEvaluation/exxoavalonorigins.metadata.v5.2
-.vs/ProjectEvaluation/exxoavalonorigins.projects.v5.2
+.vs/Avalon/v17/.suo
+.vs/Avalon/v17/.futdcache.v2
+.vs/ProjectEvaluation/Avalon.metadata.v5.2
+.vs/ProjectEvaluation/Avalon.projects.v5.2

@@ -85,7 +85,7 @@ public class BloodBlob : ModProjectile
 
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Projectiles/Magic/BloodBlob").Value;
+        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Magic/BloodBlob").Value;
         int frameHeight = texture.Height / Main.projFrames[Projectile.type];
         Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
         Vector2 drawPos = Projectile.Center - Main.screenPosition;

@@ -1,4 +1,4 @@
-﻿//using ExxoAvalonOrigins.Items.Weapons.Melee.Hardmode;
+﻿//using Avalon.Items.Weapons.Melee.Hardmode;
 //using Microsoft.Xna.Framework;
 //using Microsoft.Xna.Framework.Graphics;
 //using System;
@@ -9,7 +9,7 @@
 //using Terraria.ID;
 //using Terraria.ModLoader;
 
-//namespace ExxoAvalonOrigins.Common //Gotta make the slashys have the correct color with added items ! ! !
+//namespace Avalon.Common //Gotta make the slashys have the correct color with added items ! ! !
 //{
 //    public class AvalonZenithProjectile : GlobalProjectile
 //    {

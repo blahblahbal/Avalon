@@ -112,9 +112,9 @@ class StaminaBar : UIState
     public StaminaBar()
     {
         // FOR SOME REASON THIS DOES NOT LOAD THE TEXTURES
-        staminaTexture1 = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Stamina", AssetRequestMode.ImmediateLoad).Value;
-        staminaTexture2 = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Stamina2", AssetRequestMode.ImmediateLoad).Value;
-        staminaTexture3 = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Stamina3", AssetRequestMode.ImmediateLoad).Value;
+        staminaTexture1 = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina", AssetRequestMode.ImmediateLoad).Value;
+        staminaTexture2 = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina2", AssetRequestMode.ImmediateLoad).Value;
+        staminaTexture3 = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina3", AssetRequestMode.ImmediateLoad).Value;
 
         int manaStarSpacing = 28;
         textYOffset = manaStarSpacing * 11 + 30;
@@ -122,7 +122,7 @@ class StaminaBar : UIState
         labelDimensions = FontAssets.MouseText.Value.MeasureString(labelText);
 
         Top.Set(textYOffset + labelDimensions.Y, 0);
-        Width.Set(ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Stamina").Value.Width, 0);
+        Width.Set(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width, 0);
     }
 
     #region bar style
@@ -291,12 +291,12 @@ class StaminaBar : UIState
         }
         if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars")
         {
-            panelLeft = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Panel_Left");
-            stamFillGreen = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFill_Green");
-            stamFillPurple = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFill_Purple");
-            stamFillOrange = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFill_Orange");
-            panelMiddleStam = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaPanel_Middle");
-            panelRightStam = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaPanel_Right");
+            panelLeft = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Panel_Left");
+            stamFillGreen = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Green");
+            stamFillPurple = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Purple");
+            stamFillOrange = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Orange");
+            panelMiddleStam = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaPanel_Middle");
+            panelRightStam = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaPanel_Right");
 
             PrepareFieldsBars();
             SpriteBatch sb = Main.spriteBatch;
@@ -341,19 +341,19 @@ class StaminaBar : UIState
         }
         else if (Main.ResourceSetsManager.ActiveSetKeyName == "New")
         {
-            staminaTop = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFancy_Top");
-            staminaMiddle = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFancy_Middle");
-            staminaBottom = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFancy_Bottom");
-            staminaSingle = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFancy_Single");
-            staminaFillGreenFancy = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFancy_FillGreen");
-            staminaFillPurpleFancy = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFancy_FillPurple");
-            staminaFillOrangeFancy = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/StaminaFancy_FillOrange");
+            staminaTop = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_Top");
+            staminaMiddle = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_Middle");
+            staminaBottom = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_Bottom");
+            staminaSingle = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_Single");
+            staminaFillGreenFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillGreen");
+            staminaFillPurpleFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillPurple");
+            staminaFillOrangeFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillOrange");
             PrepareFieldsFancy();
             DrawStaminaBarFancy(spriteBatch);
 
-            Left.Set(Main.screenWidth - 25 - (ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Stamina").Value.Width / 2f), 0);
+            Left.Set(Main.screenWidth - 25 - (ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width / 2f), 0);
             Height.Set(fancyStamCount * staminaTop.Value.Height, 0);
-            Width.Set(ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Stamina").Value.Width, 0);
+            Width.Set(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width, 0);
         }
         else if (Main.ResourceSetsManager.ActiveSetKeyName == "Default")
         {
@@ -458,9 +458,9 @@ class StaminaBar : UIState
                 Main.instance.MouseText(mouseText);
             }
 
-            Left.Set(Main.screenWidth - 25 - (ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Stamina").Value.Width / 2f), 0);
+            Left.Set(Main.screenWidth - 25 - (ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width / 2f), 0);
             Height.Set(barSpacing * stamBars, 0);
-            Width.Set(ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Textures/UI/Stamina").Value.Width, 0);
+            Width.Set(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width, 0);
         }
         base.DrawSelf(spriteBatch);
     }

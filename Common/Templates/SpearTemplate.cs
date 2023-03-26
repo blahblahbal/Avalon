@@ -74,7 +74,7 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
         Offset = Offset.RotatedBy(Projectile.rotation);
         Offset.X *= -Projectile.direction;
         Player player = Main.player[Projectile.owner];
-        Texture2D texture = ModContent.Request<Texture2D>("ExxoAvalonOrigins/Assets/Sparkly").Value;
+        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Assets/Sparkly").Value;
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
 

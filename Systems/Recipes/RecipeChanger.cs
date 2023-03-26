@@ -20,7 +20,7 @@ public class RecipeChanger : ModSystem
                     if (recipe.TryGetIngredient(ItemID.GoldWatch, out Item ing))
                     {
                         recipe.RemoveIngredient(ing);
-                        recipe.AddRecipeGroup("ExxoAvalonOrigins:Tier3Watch");
+                        recipe.AddRecipeGroup("Avalon:Tier3Watch");
                     }
                     if (recipe.TryGetIngredient(ItemID.PlatinumWatch, out Item ing2))
                     {
