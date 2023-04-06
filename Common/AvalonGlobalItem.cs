@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Melee.PreHardmode;
@@ -235,7 +235,13 @@ public class AvalonGlobalItem : GlobalItem
                 tooltipMat.Text = Language.GetTextValue("Mods.Avalon.CommonItemTooltip.TomeMaterial");
             }
         }
-
+        if (tooltipLine != null && (ModContent.GetInstance<AvalonConfig>().VanillaRenames || ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement))
+        {
+            if (item.type == ItemID.BloodMoonStarter)
+            {
+                tooltipLine.Text = "Bloody Amulet";
+            }
+        }
         if (tooltipLine != null && ModContent.GetInstance<AvalonConfig>().VanillaRenames)
         {
             if (item.type == ItemID.CoinGun)

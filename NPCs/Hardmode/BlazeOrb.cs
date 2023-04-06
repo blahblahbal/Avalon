@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -121,7 +121,7 @@ public class BlazeOrb : ModNPC
         if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
         {
             var arg_12ED7_0 = Main.netMode;
-            NPC.StrikeNPC(new NPC.HitInfo {Damage = 999, KnockBack = 0f, HitDirection = 0});
+            NPC.StrikeNPC(new NPC.HitInfo {Damage = 999, Knockback = 0f, HitDirection = 0});
         }
         if (NPC.timeLeft > 100)
         {

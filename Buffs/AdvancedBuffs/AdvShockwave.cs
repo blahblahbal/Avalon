@@ -72,7 +72,7 @@ public class AdvShockwave : ModBuff
                     //    multiplier = 2;
                     //}
 
-                    N.StrikeNPC(new NPC.HitInfo {Damage = multiplier * fall_dist, KnockBack = 5f, HitDirection = HitDir});
+                    N.StrikeNPC(new NPC.HitInfo {Damage = multiplier * fall_dist, Knockback = 5f, HitDirection = HitDir});
                     if (Main.netMode != NetmodeID.SinglePlayer)
                     {
                         NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, o, multiplier * fall_dist, 10f,

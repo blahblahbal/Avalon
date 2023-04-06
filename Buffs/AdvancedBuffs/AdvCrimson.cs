@@ -34,7 +34,7 @@ public class AdvCrimson : ModBuff
                 n.position.Y <= pposY + MaxDistance) //&& n.type != ModContent.NPCType<NPCs.Fly>() && n.type != ModContent.NPCType<NPCs.FlySmall>())
             {
                 if (player.GetModPlayer<AvalonPlayer>().FrameCount % FrameInterval == 0) {
-                    n.StrikeNPC(new NPC.HitInfo { Damage = dmg * 2 + n.defense / 2, KnockBack = 0, HitDirection = 1});
+                    n.StrikeNPC(new NPC.HitInfo { Damage = dmg * 2 + n.defense / 2, Knockback = 0, HitDirection = 1});
                 }
             }
         }

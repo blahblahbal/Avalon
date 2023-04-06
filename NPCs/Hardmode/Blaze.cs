@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Avalon.Common;
 using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
@@ -202,7 +202,7 @@ public class Blaze : ModNPC
         }
 
         if (NPC.wet && !NPC.lavaWet) {
-            NPC.StrikeNPC(new NPC.HitInfo { Damage = 50, KnockBack = 0f, HitDirection = 0});
+            NPC.StrikeNPC(new NPC.HitInfo { Damage = 50, Knockback = 0f, HitDirection = 0});
         }
 
         if (Main.netMode != NetmodeID.MultiplayerClient && !Main.player[NPC.target].dead)
