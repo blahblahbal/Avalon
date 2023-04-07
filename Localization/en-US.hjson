@@ -59,6 +59,11 @@ Mods: {
 				Tooltip: Summons a bone barrage
 			}
 
+			RhotukaLauncher: {
+				DisplayName: Rhotuka Launcher
+				Tooltip: Launches Rhotuka spinners
+			}
+
 			FlowerofTheJungle: {
 				DisplayName: Flower of The Jungle
 				Tooltip: ""
@@ -152,6 +157,16 @@ Mods: {
 			BloodyArrow: {
 				DisplayName: Bloody Arrow
 				Tooltip: ""
+			}
+
+			RhotukaSpinner: {
+				DisplayName: Rhotuka Spinner
+				Tooltip: Charged with power
+			}
+
+			RhotukaSpinnerScrambler: {
+				DisplayName: Rhotuka Spinner (Scrambler)
+				Tooltip: Scrambles the life, defense, and damage of a struck enemy
 			}
 
 			ResearchEverything: {
@@ -2401,6 +2416,11 @@ Mods: {
 				DisplayName: Energy Crystal
 				Tooltip: Permanantly increases stamina regeneration
 			}
+
+			AncientHeadphones: {
+				DisplayName: Ancient Headphones
+				Tooltip: "Plays old versions of various music in certain biomes"
+			}
 		}
 
 		Projectiles: {
@@ -2444,6 +2464,7 @@ Mods: {
 			Bone3.DisplayName: Femur
 			Bone4.DisplayName: Skull
 			VultureEgg.DisplayName: Vulture Egg
+			RhotukaSpinnerScrambler.DisplayName: Rhotuka Spinner Scrambler
 		}
 
 		NPCs: {
