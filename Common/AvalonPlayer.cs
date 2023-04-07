@@ -1,4 +1,4 @@
-﻿using Avalon.Buffs;
+using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Items.Other;
 using Avalon.Prefixes;
@@ -38,6 +38,7 @@ public class AvalonPlayer : ModPlayer
     public bool ShadowCharm;
     public bool CloudGlove;
     public float BonusKB = 1f;
+    public bool AncientHeadphones;
 
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
@@ -59,6 +60,7 @@ public class AvalonPlayer : ModPlayer
         ShadowCharm = false;
         CritDamageMult = 1f;
         BonusKB = 1f;
+        AncientHeadphones = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
     }
 

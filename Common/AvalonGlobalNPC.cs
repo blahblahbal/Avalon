@@ -1,4 +1,4 @@
-﻿using Avalon.Buffs;
+using Avalon.Buffs;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
@@ -34,8 +34,23 @@ public class AvalonGlobalNPC : GlobalNPC
 
         return 0;
     }
-
-
+    public static void ScrambleStats(NPC n)
+    {
+        float amount = (float)(Main.rand.NextFloat() + 0.5f + Main.rand.NextFloat() * 0.5f);
+        n.life = (int)(n.lifeMax * amount);
+        n.defDefense *= (int)(n.defense * amount);
+        n.defDamage *= (int)(n.damage * amount);
+    }
+    public override void ModifyShop(NPCShop shop)
+    {
+        if (shop.NpcType == NPCID.Merchant)
+        {
+            shop.Add(new Item(ItemID.MusicBox)
+            {
+                shopCustomPrice = 350000,
+            });
+        }
+    }
     /// <summary>
     ///  A method to choose a random Town NPC death messages.
     /// </summary>
