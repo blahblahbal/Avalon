@@ -2426,6 +2426,26 @@ Mods: {
 				Tooltip: ""
 				DisplayName: Snotgun
 			}
+
+			DartShotgun: {
+				DisplayName: Dart Shotgun
+				Tooltip: ""
+			}
+
+			AncientDartPistol: {
+				DisplayName: Ancient Dart Pistol
+				Tooltip: ""
+			}
+
+			AncientDartRifle: {
+				DisplayName: Ancient Dart Rifle
+				Tooltip: ""
+			}
+
+			AncientDartShotgun: {
+				DisplayName: Ancient Dart Shotgun
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
