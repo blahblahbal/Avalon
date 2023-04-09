@@ -2425,7 +2425,6 @@ Mods: {
 			AncientHeadphones: {
 				DisplayName: Ancient Headphones
 				Tooltip: Plays old versions of various music in certain biomes
-				Tooltip: Plays old versions of various music in certain biomes
 			}
 
 			Snotgun: {
