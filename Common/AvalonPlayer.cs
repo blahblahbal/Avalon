@@ -39,6 +39,7 @@ public class AvalonPlayer : ModPlayer
     public bool CloudGlove;
     public float BonusKB = 1f;
     public bool AncientHeadphones;
+    public bool EnchantedDie;
 
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
@@ -61,6 +62,7 @@ public class AvalonPlayer : ModPlayer
         CritDamageMult = 1f;
         BonusKB = 1f;
         AncientHeadphones = false;
+        EnchantedDie = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
     }
 

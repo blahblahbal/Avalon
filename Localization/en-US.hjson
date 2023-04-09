@@ -529,6 +529,11 @@ Mods: {
 				Tooltip: Tells the time
 			}
 
+			EnchantedDie: {
+				DisplayName: Enchanted Die
+				Tooltip: Increases damage variance
+			}
+
 			SandyStormcloudinaBottle: {
 				DisplayName: Sandy Stormcloud in a Bottle
 				Tooltip: The holder can quadruple jump
@@ -2419,7 +2424,7 @@ Mods: {
 
 			AncientHeadphones: {
 				DisplayName: Ancient Headphones
-				Tooltip: "Plays old versions of various music in certain biomes"
+				Tooltip: Plays old versions of various music in certain biomes
 			}
 		}
 

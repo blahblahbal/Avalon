@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -38,7 +38,7 @@ class Emperor : ModItem
         player.statDefense += 14;
         player.statLifeMax2 += 100;
         player.statManaMax2 += 200;
-        //player.GetModPlayer<ExxoStaminaPlayer>().StatStamMax2 += 90;
+        player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 += 90;
     }
 
     //public override void AddRecipes()

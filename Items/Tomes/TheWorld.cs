@@ -33,7 +33,7 @@ class TheWorld : ModItem
         player.statDefense += 18;
         player.statLifeMax2 += 160;
         player.statManaMax2 += 260;
-        //player.GetModPlayer<ExxoStaminaPlayer>().StatStamMax2 += 120;
+        player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 += 120;
     }
 
     public override void AddRecipes()
