@@ -2425,6 +2425,37 @@ Mods: {
 			AncientHeadphones: {
 				DisplayName: Ancient Headphones
 				Tooltip: Plays old versions of various music in certain biomes
+				Tooltip: Plays old versions of various music in certain biomes
+			}
+
+			Snotgun: {
+				Tooltip: ""
+				DisplayName: Snotgun
+			}
+
+			DartShotgun: {
+				DisplayName: Dart Shotgun
+				Tooltip: ""
+			}
+
+			AncientDartPistol: {
+				DisplayName: Ancient Dart Pistol
+				Tooltip: ""
+			}
+
+			AncientDartRifle: {
+				DisplayName: Ancient Dart Rifle
+				Tooltip: ""
+			}
+
+			AncientDartShotgun: {
+				DisplayName: Ancient Dart Shotgun
+				Tooltip: ""
+			}
+
+			Outbreak: {
+				DisplayName: Outbreak
+				Tooltip: ""
 			}
 		}
 
@@ -2945,6 +2976,9 @@ Mods: {
 			Woozy.DisplayName: Woozy
 		}
 
-		Conditions.NearShimmer: Needs shimmer
+		Conditions: {
+			NearShimmer: Needs shimmer
+			ShimmerCraft: Throw into shimmer
+		}
 	}
 }

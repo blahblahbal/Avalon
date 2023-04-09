@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using Avalon.DropConditions;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Ranged.Hardmode;
 using Avalon.Prefixes;
 using Avalon.Tiles;
 using Terraria;
@@ -37,15 +40,48 @@ public class AvalonGlobalItem : GlobalItem
     {
         // --== Shimmer!!! ==--
         ModContent.GetInstance<DesertLongsword>().CreateRecipe()
-            .AddIngredient(ItemID.AntlionClaw)
-            .AddCondition(Condition.CorruptWorld)
-            .AddCondition(Condition.CrimsonWorld)
+            .AddCustomShimmerResult(ItemID.AntlionClaw)
+            .AddCondition(ShimmerCraftCondition.ShimmerOnly)
             .Register();
         Recipe MandibleBladeTransmute = Recipe.Create(ItemID.AntlionClaw);
-        MandibleBladeTransmute.AddIngredient(ModContent.ItemType<DesertLongsword>());
-        MandibleBladeTransmute.AddCondition(Condition.CorruptWorld);
-        MandibleBladeTransmute.AddCondition(Condition.CrimsonWorld);
+        MandibleBladeTransmute.AddCustomShimmerResult(ModContent.ItemType<DesertLongsword>());
+        MandibleBladeTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
         MandibleBladeTransmute.Register();
+
+        Recipe DartRifleTransmute = Recipe.Create(ItemID.DartRifle);
+        DartRifleTransmute.AddCustomShimmerResult(ModContent.ItemType<AncientDartRifle>());
+        DartRifleTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        DartRifleTransmute.Register();
+
+        Recipe DartRifleTransmute2 = Recipe.Create(ModContent.ItemType<AncientDartRifle>());
+        DartRifleTransmute2.AddCustomShimmerResult(ItemID.DartRifle);
+        DartRifleTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        DartRifleTransmute2.Register();
+
+        Recipe DartPistolTransmute = Recipe.Create(ItemID.DartPistol);
+        DartPistolTransmute.AddCustomShimmerResult(ModContent.ItemType<AncientDartPistol>());
+        DartPistolTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        DartPistolTransmute.Register();
+
+        Recipe DartPistolTransmute2 = Recipe.Create(ModContent.ItemType<AncientDartPistol>());
+        DartPistolTransmute2.AddCustomShimmerResult(ItemID.DartPistol);
+        DartPistolTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        DartPistolTransmute2.Register();
+
+        Recipe DartShotgunTransmute = Recipe.Create(ModContent.ItemType<DartShotgun>());
+        DartShotgunTransmute.AddCustomShimmerResult(ModContent.ItemType<AncientDartShotgun>());
+        DartShotgunTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        DartShotgunTransmute.Register();
+
+        Recipe DartShotgunTransmute2 = Recipe.Create(ModContent.ItemType<AncientDartShotgun>());
+        DartShotgunTransmute2.AddCustomShimmerResult(ModContent.ItemType<DartShotgun>());
+        DartShotgunTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        DartShotgunTransmute2.Register();
+
+        Recipe EnergyCrystalTransmute = Recipe.Create(ModContent.ItemType<StaminaCrystal>());
+        EnergyCrystalTransmute.AddCustomShimmerResult(ModContent.ItemType<EnergyCrystal>());
+        EnergyCrystalTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        EnergyCrystalTransmute.Register();
     }
 
     public override void HoldItem(Item item, Player player)
