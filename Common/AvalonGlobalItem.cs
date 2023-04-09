@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Avalon.DropConditions;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Ranged.Hardmode;
@@ -76,6 +77,11 @@ public class AvalonGlobalItem : GlobalItem
         DartShotgunTransmute2.AddCustomShimmerResult(ModContent.ItemType<DartShotgun>());
         DartShotgunTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
         DartShotgunTransmute2.Register();
+
+        Recipe EnergyCrystalTransmute = Recipe.Create(ModContent.ItemType<StaminaCrystal>());
+        EnergyCrystalTransmute.AddCustomShimmerResult(ModContent.ItemType<EnergyCrystal>());
+        EnergyCrystalTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        EnergyCrystalTransmute.Register();
     }
 
     public override void HoldItem(Item item, Player player)
