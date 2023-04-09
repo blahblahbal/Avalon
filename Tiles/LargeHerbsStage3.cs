@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Avalon.Items.Placeable.Seed;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -45,10 +46,10 @@ public class LargeHerbsStage3 : ModTile
         noBreak = true;
         return true;
     }
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
+    public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int item = 0;
-        switch (frameX / 18)
+        switch (Main.tile[i, j].TileFrameX / 18)
         {
             case 0:
                 item = ModContent.ItemType<LargeDaybloomSeed>();
@@ -87,6 +88,6 @@ public class LargeHerbsStage3 : ModTile
                 item = ModContent.ItemType<LargeTwilightPlumeSeed>();
                 break;
         }
-        if (item > 0) Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 48, item);
+        yield return new Item(item);
     }
 }

@@ -2456,6 +2456,231 @@ Mods: {
 				DisplayName: Outbreak
 				Tooltip: ""
 			}
+
+			ACometHasStruckGround: {
+				DisplayName: A Comet Has Struck Ground
+				Tooltip: "'B. Harold'"
+			}
+
+			BirthofaMonster: {
+				DisplayName: Birth of a Monster
+				Tooltip: "'Sir E. Brum'"
+			}
+
+			Clash: {
+				DisplayName: Clash
+				Tooltip: "'B. Harold'"
+			}
+
+			CrossingtheTropics: {
+				DisplayName: Crossing the Tropics
+				Tooltip: "'B. Harold'"
+			}
+
+			CurseofOblivion: {
+				DisplayName: Curse of Oblivion
+				Tooltip: "'B. Harold'"
+			}
+
+			EclipseofDoom: {
+				DisplayName: Eclipse of Doom
+				Tooltip: "'B. Harold'"
+			}
+
+			EvilOuroboros: {
+				DisplayName: Evil Ouroboros
+				Tooltip: "'Sir E. Brum"
+			}
+
+			FightoftheBumblebee: {
+				DisplayName: Fight of the Bumblebee
+				Tooltip: "'Dan D. Lyon'"
+			}
+
+			FrostySpectacle: {
+				DisplayName: FrostySpectacle
+				Tooltip: "'B. Harold'"
+			}
+
+			PlanterasRage: {
+				DisplayName: Plantera's Rage
+				Tooltip: "'B. Harold'"
+			}
+
+			RingofDisgust: {
+				DisplayName: Ring of Disgust
+				Tooltip: "'B. Harold'"
+			}
+
+			RuinedCivilization: {
+				DisplayName: Ruined Civilization
+				Tooltip: "'B. Harold'"
+			}
+
+			Trespassing: {
+				DisplayName: Trespassing
+				Tooltip: "'B. Harold'"
+			}
+
+			BlueEyeoftheUniverse: {
+				DisplayName: Energized Eye of the Universe
+				Tooltip: "'It came from the outer wilds'"
+			}
+
+			EyeoftheUniverse: {
+				DisplayName: Eye of the Universe
+				Tooltip: "'The Nomai symbol for the center of the universe'"
+			}
+
+			ChunkstoneColumn: {
+				DisplayName: Chunkstone Column
+				Tooltip: ""
+			}
+
+			CrimstoneColumn: {
+				DisplayName: Crimstone Column
+				Tooltip: ""
+			}
+
+			EbonstoneColumn: {
+				DisplayName: Ebonstone Column
+				Tooltip: ""
+			}
+
+			CoughwoodChest: {
+				DisplayName: Coughwood Chest
+				Tooltip: ""
+			}
+
+			HellfireChest: {
+				DisplayName: Hellfire Chest
+				Tooltip: ""
+			}
+
+			ChunkstoneBrick: {
+				DisplayName: Chunkstone Brick
+				Tooltip: ""
+			}
+
+			ResistantWoodBeam: {
+				DisplayName: Resistant Wood Beam
+				Tooltip: ""
+			}
+
+			LibraryAltar: {
+				DisplayName: Library Altar
+				Tooltip: Used to craft the Ectoplasmic Beacon
+			}
+
+			ResistantWoodBathtub: {
+				DisplayName: Resistant Wood Bathtub
+				Tooltip: ""
+			}
+
+			ResistantWoodBed: {
+				DisplayName: Resistant Wood Bed
+				Tooltip: ""
+			}
+
+			ResistantWoodBookcase: {
+				DisplayName: Resistant Wood Bookcase
+				Tooltip: ""
+			}
+
+			ResistantWoodCandelabra: {
+				DisplayName: Resistant Wood Candelabra
+				Tooltip: ""
+			}
+
+			ResistantWoodCandle: {
+				DisplayName: Resistant Wood Candle
+				Tooltip: ""
+			}
+
+			ResistantWoodChair: {
+				DisplayName: Resistant Wood Chair
+				Tooltip: ""
+			}
+
+			ResistantWoodChandelier: {
+				DisplayName: Resistant Wood Chandelier
+				Tooltip: ""
+			}
+
+			ResistantWoodChest: {
+				DisplayName: Resistant Wood Chest
+				Tooltip: ""
+			}
+
+			ResistantWoodClock: {
+				DisplayName: Resistant Wood Clock
+				Tooltip: ""
+			}
+
+			ResistantWoodDresser: {
+				DisplayName: Resistant Wood Dresser
+				Tooltip: ""
+			}
+
+			ResistantWoodLamp: {
+				DisplayName: Resistant Wood Lamp
+				Tooltip: ""
+			}
+
+			ResistantWoodLantern: {
+				DisplayName: Resistant Wood Lantern
+				Tooltip: ""
+			}
+
+			ResistantWoodPiano: {
+				DisplayName: Resistant Wood Piano
+				Tooltip: ""
+			}
+
+			ResistantWoodPlatform: {
+				DisplayName: Resistant Wood Platform
+				Tooltip: ""
+			}
+
+			ResistantWoodSink: {
+				DisplayName: Resistant Wood Sink
+				Tooltip: ""
+			}
+
+			ResistantWoodSofa: {
+				DisplayName: Resistant Wood Sofa
+				Tooltip: ""
+			}
+
+			ResistantWoodTable: {
+				DisplayName: Resistant Wood Table
+				Tooltip: ""
+			}
+
+			ResistantWoodWorkBench: {
+				DisplayName: Resistant Wood Work Bench
+				Tooltip: Used for basic crafting
+			}
+
+			ResistantWood: {
+				DisplayName: Resistant Wood
+				Tooltip: ""
+			}
+
+			ImperviousBrick: {
+				DisplayName: Impervious Brick
+				Tooltip: ""
+			}
+
+			DevilsScythe: {
+				DisplayName: Devil's Scythe
+				Tooltip: Casts a hellfire scythe
+			}
+
+			ImperviousBrickWallItem: {
+				DisplayName: Impervious Brick Wall Item
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -2500,6 +2725,7 @@ Mods: {
 			Bone4.DisplayName: Skull
 			VultureEgg.DisplayName: Vulture Egg
 			RhotukaSpinnerScrambler.DisplayName: Rhotuka Spinner Scrambler
+			DevilScythe.DisplayName: Devil Sickle
 		}
 
 		NPCs: {
@@ -2909,12 +3135,12 @@ Mods: {
 
 			Clover: {
 				DisplayName: Clover
-				Description: Mods.Avalon.Buffs.Clover.Description
+				Description: Rare drop chance is doubled
 			}
 
 			ForceField: {
 				DisplayName: Force Field
-				Description: Mods.Avalon.Buffs.ForceField.Description
+				Description: A force field surrounds you
 			}
 		}
 
@@ -2927,6 +3153,12 @@ Mods: {
 			Peridot.MapEntry: Peridot
 			Tourmaline.MapEntry: Tourmaline
 			Zircon.MapEntry: Zircon
+			Paintings.MapEntry: Paintings
+			CoughwoodChest.MapEntry0: Coughwood Chest
+			HellfireChest.MapEntry0: Hellfire Chest
+			ResistantWoodChest.MapEntry0: Resistant Wood Chest
+			ResistantWoodDresser.MapEntry: Resistant Wood Dresser
+			ResistantSapling.MapEntry: Resistant Sapling
 		}
 
 		Prefixes: {

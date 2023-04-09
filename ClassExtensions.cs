@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalon.Common;
@@ -22,6 +22,8 @@ public static class ClassExtensions
     /// <returns>Whether or not the item is an armor piece.</returns>
     public static bool IsArmor(this Item item) =>
         (item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1) && !item.vanity;
+
+    public static void Active(this Tile t, bool a) => t.HasTile = a;
 
     /// <summary>
     ///     Checks if the current player has an item in their armor/accessory slots.

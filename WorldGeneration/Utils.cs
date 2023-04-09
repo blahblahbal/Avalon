@@ -1,10 +1,29 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ID;
 
 namespace Avalon.WorldGeneration; 
 
 public class Utils
 {
+    public static void ResetSlope(int i, int j)
+    {
+        Tile t = Main.tile[i, j];
+        t.Slope = SlopeType.Solid;
+        t.IsHalfBlock = false;
+    }
+
+    /// <summary>
+    /// Swaps two values.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="lhs">Left hand side.</param>
+    /// <param name="rhs">Right hand side.</param>
+    public static void Swap<T>(ref T lhs, ref T rhs)
+    {
+        T t = lhs;
+        lhs = rhs;
+        rhs = t;
+    }
     public static void SquareTileFrame(int i, int j, bool resetFrame = true, bool resetSlope = false, bool largeHerb = false)
     {
         if (resetSlope)

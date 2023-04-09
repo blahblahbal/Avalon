@@ -15,12 +15,12 @@ namespace Avalon.Hooks
         {
             if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().EnchantedDie)
             {
-                float num = dmg * (1f + Main.rand.Next(-1000, 1001) * 0.01f);
+                float num = dmg * (1f + Main.rand.Next(-500, 501) * 0.01f);
                 if (luck > 0f)
                 {
                     if (Main.rand.NextFloat() < luck)
                     {
-                        float num2 = dmg * (1f + Main.rand.Next(-1000, 1001) * 0.01f);
+                        float num2 = dmg * (1f + Main.rand.Next(-500, 501) * 0.01f);
                         if (num2 > num)
                         {
                             num = num2;
@@ -29,7 +29,7 @@ namespace Avalon.Hooks
                 }
                 else if (luck < 0f && Main.rand.NextFloat() < 0f - luck)
                 {
-                    float num3 = dmg * (1f + Main.rand.Next(-1000, 1001) * 0.01f);
+                    float num3 = dmg * (1f + Main.rand.Next(-500, 501) * 0.01f);
                     if (num3 < num)
                     {
                         num = num3;

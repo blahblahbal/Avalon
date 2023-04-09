@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+using Avalon.WorldGeneration.Passes;
+using System.Collections.Generic;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
-namespace Avalon.WorldGeneration; 
+namespace Avalon.WorldGeneration;
 
 public class GenSystem : ModSystem
 {
@@ -19,16 +20,34 @@ public class GenSystem : ModSystem
 
         if (index != -1)
         {
-            tasks.Insert(index + 1, new Passes.AvalonReset("Avalon Reset", 1000f));
+            tasks.Insert(index + 1, new AvalonReset("Avalon Reset", 1000f));
         }
 
         index = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
 
         if (index != -1)
         {
-            // Next, we insert our pass directly after the original "Shinies" pass.
-            // ExampleOrePass is a class seen bellow
-            tasks.Insert(index + 1, new Passes.OreGenPreHardmode("Adding Avalon Ores", 237.4298f));
+            tasks.Insert(index + 1, new OreGenPreHardmode("Adding Avalon Ores", 237.4298f));
+        }
+
+        int iceWalls = tasks.FindIndex(genPass => genPass.Name == "Cave Walls");
+        if (iceWalls != -1)
+        {
+            currentPass = new Shrines();
+            tasks.Insert(iceWalls + 1, currentPass);
+            totalWeight += currentPass.Weight;
+        }
+
+        int underworld = tasks.FindIndex(genPass => genPass.Name == "Micro Biomes");
+        if (underworld != -1)
+        {
+            currentPass = new Underworld();
+            tasks.Insert(underworld + 1, currentPass);
+            totalWeight += currentPass.Weight;
+
+            currentPass = new Ectovines();
+            tasks.Insert(underworld + 2, currentPass);
+            totalWeight += currentPass.Weight;
         }
 
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");

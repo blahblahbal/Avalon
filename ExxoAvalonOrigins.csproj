@@ -12,4 +12,7 @@
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Items\Placeable\Furniture\Coughwood\" />
+  </ItemGroup>
 </Project>

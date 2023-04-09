@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.ObjectInteractions;
@@ -45,7 +45,7 @@ public class HerbologyBench : ModTile
         player.cursorItemIconID = ModContent.ItemType<Items.Placeable.Crafting.HerbologyBench>();
     }
 
-    public override void KillMultiTile(int i, int j, int frameX, int frameY) => Item.NewItem(
-        WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 64, 32,
-        ModContent.ItemType<Items.Placeable.Crafting.HerbologyBench>());
+    //public override void KillMultiTile(int i, int j, int frameX, int frameY) => Item.NewItem(
+    //    WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 64, 32,
+    //    ModContent.ItemType<Items.Placeable.Crafting.HerbologyBench>());
 }

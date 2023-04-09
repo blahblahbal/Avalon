@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -29,10 +30,9 @@ public class PlacedGems : ModTile
         return (ushort)(Main.tile[i, j].TileFrameX / 18);
     }
 
-    public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
+    public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int toDrop = 0;
-        //Main.NewText("" + Main.tile[i, j].frameX);
         switch (Main.tile[i, j].TileFrameX / 18)
         {
             //case 0:
@@ -54,8 +54,36 @@ public class PlacedGems : ModTile
                 toDrop = ModContent.ItemType<Items.Material.Ores.Zircon>();
                 break;
         }
-        if (toDrop > 0) Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, toDrop);
+
+        yield return new Item(toDrop);
     }
+    //public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
+    //{
+    //    int toDrop = 0;
+    //    //Main.NewText("" + Main.tile[i, j].frameX);
+    //    switch (Main.tile[i, j].TileFrameX / 18)
+    //    {
+    //        //case 0:
+    //        //    toDrop = ModContent.ItemType<Items.Material.Opal>();
+    //        //    break;
+    //        //case 1:
+    //        //    toDrop = ModContent.ItemType<Items.Material.Onyx>();
+    //        //    break;
+    //        //case 2:
+    //        //    toDrop = ModContent.ItemType<Items.Material.Kunzite>();
+    //        //    break;
+    //        case 3:
+    //            toDrop = ModContent.ItemType<Items.Material.Ores.Tourmaline>();
+    //            break;
+    //        case 4:
+    //            toDrop = ModContent.ItemType<Items.Material.Ores.Peridot>();
+    //            break;
+    //        case 5:
+    //            toDrop = ModContent.ItemType<Items.Material.Ores.Zircon>();
+    //            break;
+    //    }
+    //    if (toDrop > 0) Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, toDrop);
+    //}
 
     // copy from the vanilla tileframe for placed gems
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
