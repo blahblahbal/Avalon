@@ -2446,6 +2446,11 @@ Mods: {
 				DisplayName: Ancient Dart Shotgun
 				Tooltip: ""
 			}
+
+			Outbreak: {
+				DisplayName: Outbreak
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -2965,6 +2970,9 @@ Mods: {
 			Woozy.DisplayName: Woozy
 		}
 
-		Conditions.NearShimmer: Needs shimmer
+		Conditions: {
+			NearShimmer: Needs shimmer
+			ShimmerCraft: Throw into shimmer
+		}
 	}
 }
