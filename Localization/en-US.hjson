@@ -2708,6 +2708,54 @@ Mods: {
 					Increases your max number of minions by 1
 					'''
 			}
+
+			WorldgenHelper: {
+				DisplayName: Worldgen Helper
+				Tooltip:
+                    '''
+                    Use this item to generate a pre-set structure at your location
+                    DO NOT USE IN NORMAL GAMEPLAY - IT WILL OVERWRITE BLOCKS
+                    '''
+			}
+
+			SonicScrewdriverMkI: {
+				DisplayName: Sonic Screwdriver Mk I
+				Tooltip: Reveals treasures, ores, and mobs
+			}
+
+			SonicScrewdriverMkII: {
+				DisplayName: Sonic Screwdriver Mk II
+				Tooltip:
+					'''
+					Reveals treasures, ores, and mobs
+					Tells the time
+					'''
+			}
+
+			SonicScrewdriverMkIII: {
+				DisplayName: Sonic Screwdriver Mk III
+				Tooltip:
+					'''
+					Reveals treasures, ores, and mobs
+					Tells the time
+					Can open all locks
+					'''
+			}
+
+            AmmoMagazine: {
+				DisplayName: Ammo Magazine
+				Tooltip: Immunity to Unloaded
+			}
+
+            HiddenBlade: {
+				DisplayName: Hidden Blade
+				Tooltip: Immunity to Broken Weaponry
+			}
+
+            Bayonet: {
+				DisplayName: Bayonet
+				Tooltip: Immunity to Broken Weaponry and Unloaded
+			}
 		}
 
 		Projectiles: {
@@ -2751,7 +2799,7 @@ Mods: {
 			Bone3.DisplayName: Femur
 			Bone4.DisplayName: Skull
 			VultureEgg.DisplayName: Vulture Egg
-			RhotukaSpinnerScrambler.DisplayName: Rhotuka Spinner Scrambler
+			RhotukaSpinnerScrambler.DisplayName: Rhotuka Spinner (Scrambler)
 			DevilScythe.DisplayName: Devil Sickle
 		}
 
@@ -2762,6 +2810,11 @@ Mods: {
 			Blaze.DisplayName: Blaze
 			BlazeOrb.DisplayName: Blaze Orb
 			DesertBeak.DisplayName: Desert Beak
+			Ectohand.DisplayName: Ectohand
+			Gargoyle.DisplayName: Gargoyle
+			HellboundLizard.DisplayName: Hellbound Lizard
+			EctoHand.DisplayName: Ecto Hand
+			Librarian.DisplayName: Librarian
 		}
 
 		Buffs: {
@@ -3169,6 +3222,21 @@ Mods: {
 				DisplayName: Force Field
 				Description: A force field surrounds you
 			}
+
+            Unloaded: {
+				DisplayName: Unloaded
+				Description: "You can't use ranged weapons"
+			}
+
+            BrokenWeaponry: {
+				DisplayName: Broken Weaponry
+				Description: "You can't use melee weapons"
+			}
+
+            Scrambled: {
+				DisplayName: Scrambled Stats
+				Description: Your stats are scrambled
+			}
 		}
 
 		Tiles: {
@@ -3237,6 +3305,11 @@ Mods: {
 		Conditions: {
 			NearShimmer: Needs shimmer
 			ShimmerCraft: Throw into shimmer
+		}
+
+		Biomes: {
+			Hellcastle.DisplayName: Hellcastle
+			NearHellcastle.DisplayName: Near Hellcastle
 		}
 	}
 }

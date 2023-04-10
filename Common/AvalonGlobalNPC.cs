@@ -1,8 +1,13 @@
 using Avalon.Buffs;
+using Avalon.Buffs.Debuffs;
+using Avalon.Common.Players;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
+using Avalon.NPCs.Hardmode;
+using Avalon.NPCs.TownNPCs;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
@@ -34,10 +39,14 @@ public class AvalonGlobalNPC : GlobalNPC
 
         return 0;
     }
+    /// <summary>
+    /// A method that scrambles the stats of a target enemy.
+    /// </summary>
+    /// <param name="n">The NPC to scramble.</param>
     public static void ScrambleStats(NPC n)
     {
         float amount = (float)(Main.rand.NextFloat() + 0.5f + Main.rand.NextFloat() * 0.5f);
-        n.life = (int)(n.lifeMax * amount);
+        //n.life = (int)(n.lifeMax * amount);
         n.defDefense *= (int)(n.defense * amount);
         n.defDamage *= (int)(n.damage * amount);
     }
@@ -350,15 +359,17 @@ public class AvalonGlobalNPC : GlobalNPC
             }
             if (r == 5) result += " fell into a crevasse";
             if (r == 6) result += " slipped.";
-        }
+        }*/
         else if (type == ModContent.NPCType<Librarian>())
         {
-            int r = Main.rand.Next(4);
+            int r = Main.rand.Next(6);
             if (r == 0) result += " was nuked by a full squad.";
             if (r == 1) result += " fell victim to toxic world chat.";
             if (r == 2) result += " couldn't afford grade eighteen.";
             if (r == 3) result += " was slain by a boss cone attack.";
-        }*/
+            if (r == 4) result += " was no match for Kun Kun.";
+            if (r == 5) result += "'s Visa card was declined.";
+        }
         else result += " was slain...";
 
         return result;
@@ -372,6 +383,22 @@ public class AvalonGlobalNPC : GlobalNPC
             {
                 Dust.NewDust(npc.position, npc.width, npc.height, DustID.Blood);
             }
+        }
+    }
+    public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
+    {
+        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle)
+        {
+            pool.Clear();
+            pool.Add(NPCID.Demon, 0.2f);
+            pool.Add(NPCID.RedDevil, 0.2f);
+            pool.Add(ModContent.NPCType<EctoHand>(), 0.3f);
+            pool.Add(ModContent.NPCType<HellboundLizard>(), 1f);
+            pool.Add(ModContent.NPCType<Gargoyle>(), 1f);
+            //if (ModContent.GetInstance<AvalonWorld>().SuperHardmode && Main.hardMode)
+            //{
+            //    pool.Add(ModContent.NPCType<ArmoredHellTortoise>(), 1f);
+            //}
         }
     }
     public override bool CheckDead(NPC npc)

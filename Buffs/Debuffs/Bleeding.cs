@@ -2,14 +2,12 @@ using Avalon.Common;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Buffs;
+namespace Avalon.Buffs.Debuffs;
 
 public class Bleeding : ModBuff
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Bleeding");
-        //Description.SetDefault("Losing life");
         Main.debuff[Type] = true;
     }
 

@@ -92,7 +92,7 @@ public class BloodyArrow : ModProjectile
             }
             if (Projectile.ai[0] == 0)
             {
-                target.AddBuff(ModContent.BuffType<Buffs.Bleeding>(), 8 * 60);
+                target.AddBuff(ModContent.BuffType<Buffs.Debuffs.Bleeding>(), 8 * 60);
             }
             Projectile.ai[0] = 1f;
             Projectile.ai[1] = npcIndex;

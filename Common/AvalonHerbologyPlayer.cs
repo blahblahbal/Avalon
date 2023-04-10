@@ -196,7 +196,7 @@ public class AvalonHerbologyPlayer : ModPlayer
         UpdateHerbTier();
 
         PopupText.NewText(PopupTextContext.Advanced, item, item.stack);
-        SoundEngine.PlaySound(new SoundStyle($"{nameof(ExxoAvalonOrigins)}/Sounds/Item/HerbConsume"));
+        SoundEngine.PlaySound(new SoundStyle("Avalon/Sounds/Item/HerbConsume"));
         return true;
     }
 

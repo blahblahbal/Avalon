@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Buffs;
+namespace Avalon.Buffs.Debuffs;
 
 public class ImmortalityCooldown : ModBuff
 {

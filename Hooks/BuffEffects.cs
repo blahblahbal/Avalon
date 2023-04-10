@@ -1,4 +1,5 @@
 using Avalon.Buffs;
+using Avalon.Buffs.Debuffs;
 using Avalon.Common;
 using Terraria;
 using Terraria.ModLoader;

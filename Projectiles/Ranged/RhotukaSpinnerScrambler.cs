@@ -1,3 +1,4 @@
+using Avalon.Buffs.Debuffs;
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -48,8 +49,14 @@ public class RhotukaSpinnerScrambler : ModProjectile
     }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
-        //if (!target.boss) 
-            AvalonGlobalNPC.ScrambleStats(target);
+        if (!target.boss)
+        {
+            if (!target.HasBuff(ModContent.BuffType<Scrambled>()))
+            {
+                AvalonGlobalNPC.ScrambleStats(target);
+                target.AddBuff(ModContent.BuffType<Scrambled>(), 60 * 60);
+            }
+        }
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {

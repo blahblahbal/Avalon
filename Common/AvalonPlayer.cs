@@ -1,5 +1,6 @@
 using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
+using Avalon.Buffs.Debuffs;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Other;
 using Avalon.Prefixes;
@@ -34,7 +35,7 @@ public class AvalonPlayer : ModPlayer
     public int tpCD;
     public bool teleportVWasTriggered;
     public bool TrapImmune;
-    public bool Lucky;
+    
     public bool PulseCharm;
     public bool ShadowCharm;
     public bool CloudGlove;
@@ -42,6 +43,13 @@ public class AvalonPlayer : ModPlayer
     public bool AncientHeadphones;
     public bool EnchantedDie;
     public bool MutatedStocking;
+    public bool EyeoftheGods;
+
+    #region buffs and debuffs
+    public bool BrokenWeaponry;
+    public bool Unloaded;
+    public bool Lucky;
+    #endregion
 
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }

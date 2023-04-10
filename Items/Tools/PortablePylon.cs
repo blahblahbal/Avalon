@@ -34,7 +34,7 @@ public class PortablePylon : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.LightPurple;
+        Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
         Item.useTime = 25;
         Item.useTurn = true;
@@ -43,6 +43,15 @@ public class PortablePylon : ModItem
         Item.useAnimation = 25;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item6;
+    }
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ItemID.TeleportationPotion, 3)
+            .AddIngredient(ItemID.MagicMirror)
+            .AddRecipeGroup("Avalon:EvilBar", 8)
+            .AddTile(TileID.Anvils)
+            .Register();
     }
     public override bool AltFunctionUse(Player player)
     {

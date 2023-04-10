@@ -18,6 +18,20 @@ internal class Hellcastle
         MakePath(x, y, -1);
         MakePath(x, y, 1);
 
+        // make decorative pillars on top
+        MakeBox(x, y - 6, 6, 6, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
+        MakeBox(x + 394, y - 6, 6, 6, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
+        for (int i = x; i <= x + 400; i++)
+        {
+            if (i > x + 10 && i <= x + 390)
+            {
+                if (i % 8 == 0)
+                {
+                    MakeBox(i, y - 3, 4, 3, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
+                }
+            }
+        }
+
         // large room
         MakeTunnel((int)castleBottomCenterL.X - 25, (int)castleBottomCenterL.Y - 115, Vector2.Zero, Vector2.Zero, 50);
         MakeTunnel((int)castleBottomCenterR.X + 25, (int)castleBottomCenterR.Y - 115, Vector2.Zero, Vector2.Zero, 50);
@@ -185,7 +199,7 @@ internal class Hellcastle
                     else
                     {
                         WorldGen.KillWall((int)x + i, (int)y + j);
-                        WorldGen.PlaceWall((int)x + i, (int)y + j, walltype, true);
+                        if (walltype != ushort.MaxValue) WorldGen.PlaceWall((int)x + i, (int)y + j, walltype, true);
                     }
                 }
             }

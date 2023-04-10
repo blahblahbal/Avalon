@@ -151,11 +151,27 @@ internal class Underworld : GenPass
         //    ashenRight = (Main.maxTilesX / 3) + 500;
         //}
 
-        Hellcastle.GenerateHellcastle(hellcastleOriginX, Main.maxTilesY - 350);
+        Hellcastle.GenerateHellcastle(hellcastleOriginX, Main.maxTilesY - 330);
         for (int hbx = ashenLeft; hbx < ashenRight; hbx++)
         {
             for (int hby = Main.maxTilesY - 200; hby < Main.maxTilesY - 50; hby++)
             {
+                if (Main.tile[hbx, hby].HasTile &&
+                    (Main.tile[hbx, hby].TileType == TileID.ObsidianBrick ||
+                     Main.tile[hbx, hby].TileType == TileID.HellstoneBrick))
+                {
+                    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
+                    Tile t = Main.tile[hbx, hby];
+                    t.HasTile = true;
+                }
+                if (Main.tile[hbx, hby].WallType == WallID.ObsidianBrickUnsafe ||
+                     Main.tile[hbx, hby].WallType == WallID.HellstoneBrickUnsafe)
+                {
+                    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
+                    Tile t = Main.tile[hbx, hby];
+                    t.HasTile = true;
+                    WorldGen.KillWall(hbx, hby);
+                }
                 if ((Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby - 1].HasTile) ||
                     (Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby + 1].HasTile) ||
                     (Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby].HasTile) ||
