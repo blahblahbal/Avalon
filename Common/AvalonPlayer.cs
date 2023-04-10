@@ -1,5 +1,6 @@
 using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
+using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Other;
 using Avalon.Prefixes;
 using Avalon.Systems;
@@ -40,6 +41,7 @@ public class AvalonPlayer : ModPlayer
     public float BonusKB = 1f;
     public bool AncientHeadphones;
     public bool EnchantedDie;
+    public bool MutatedStocking;
 
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
@@ -63,6 +65,7 @@ public class AvalonPlayer : ModPlayer
         BonusKB = 1f;
         AncientHeadphones = false;
         EnchantedDie = false;
+        MutatedStocking = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
     }
 
@@ -88,6 +91,22 @@ public class AvalonPlayer : ModPlayer
         if (Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown > 3600)
         {
             Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown = 3600;
+        }
+        if (MutatedStocking)
+        {
+            Player.maxRunSpeed += 0.3f;
+            Player.gravity += 0.5f;
+            Player.jumpSpeedBoost += 4f;
+            Player.jumpHeight -= 6;
+            if (Player.velocity.Y != 0)
+            {
+                Player.runAcceleration += 4f;
+                Player.maxRunSpeed += 0.3f;
+            }
+            if(Player.wingTime > 0 && Player.controlJump)
+            {
+                Player.velocity.Y += -1 * Player.gravDir;
+            }
         }
     }
     public void ResetShadowCooldown() => ShadowCooldown = 0;

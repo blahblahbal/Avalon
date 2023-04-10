@@ -2454,7 +2454,7 @@ Mods: {
 
 			Outbreak: {
 				DisplayName: Outbreak
-				Tooltip: ""
+				Tooltip: Spreads damage to enemies near the cursor
 			}
 
 			ACometHasStruckGround: {
@@ -2680,6 +2680,33 @@ Mods: {
 			ImperviousBrickWallItem: {
 				DisplayName: Impervious Brick Wall Item
 				Tooltip: ""
+			}
+
+			MutatedStocking: {
+				DisplayName: Mutated Stocking
+				Tooltip:
+					'''
+					Greatly increased air mobility
+					'Please, God, don't put it on'
+					'''
+			}
+
+			BlackFlea: {
+				DisplayName: Black Flea
+				Tooltip:
+					'''
+					Greatly increased air mobility
+					Increased summon damage and knockback
+					'''
+			}
+
+			InfectedNecklace: {
+				DisplayName: Infected Necklace
+				Tooltip:
+					'''
+					Greatly increased air mobility
+					Increases your max number of minions by 1
+					'''
 			}
 		}
 
