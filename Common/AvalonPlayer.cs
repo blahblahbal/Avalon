@@ -105,7 +105,7 @@ public class AvalonPlayer : ModPlayer
             }
             if(Player.wingTime > 0 && Player.controlJump)
             {
-                Player.velocity.Y += -1 * Player.gravDir;
+                Player.velocity.Y += -0.5f * Player.gravDir;
             }
         }
     }

@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode
 {
+    [AutoloadEquip(EquipType.Neck)]
     public class InfectedNecklace : ModItem
     {
         public override void SetDefaults()
