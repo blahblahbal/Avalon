@@ -2712,10 +2712,10 @@ Mods: {
 			WorldgenHelper: {
 				DisplayName: Worldgen Helper
 				Tooltip:
-                    '''
-                    Use this item to generate a pre-set structure at your location
-                    DO NOT USE IN NORMAL GAMEPLAY - IT WILL OVERWRITE BLOCKS
-                    '''
+					'''
+					Use this item to generate a pre-set structure at your location
+					DO NOT USE IN NORMAL GAMEPLAY - IT WILL OVERWRITE BLOCKS
+					'''
 			}
 
 			SonicScrewdriverMkI: {
@@ -2742,17 +2742,17 @@ Mods: {
 					'''
 			}
 
-            AmmoMagazine: {
+			AmmoMagazine: {
 				DisplayName: Ammo Magazine
 				Tooltip: Immunity to Unloaded
 			}
 
-            HiddenBlade: {
+			HiddenBlade: {
 				DisplayName: Hidden Blade
 				Tooltip: Immunity to Broken Weaponry
 			}
 
-            Bayonet: {
+			Bayonet: {
 				DisplayName: Bayonet
 				Tooltip: Immunity to Broken Weaponry and Unloaded
 			}
@@ -3223,17 +3223,17 @@ Mods: {
 				Description: A force field surrounds you
 			}
 
-            Unloaded: {
+			Unloaded: {
 				DisplayName: Unloaded
-				Description: "You can't use ranged weapons"
+				Description: You can't use ranged weapons
 			}
 
-            BrokenWeaponry: {
+			BrokenWeaponry: {
 				DisplayName: Broken Weaponry
-				Description: "You can't use melee weapons"
+				Description: You can't use melee weapons
 			}
 
-            Scrambled: {
+			Scrambled: {
 				DisplayName: Scrambled Stats
 				Description: Your stats are scrambled
 			}

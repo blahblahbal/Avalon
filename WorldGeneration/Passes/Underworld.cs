@@ -138,7 +138,7 @@ internal class Underworld : GenPass
         #endregion
         */
         progress.Message = "Generating Hellcastle and Phantom Overgrowth";
-        int hellcastleOriginX = (Main.maxTilesX / 2) - 100;
+        int hellcastleOriginX = (Main.maxTilesX / 2) - 200;
         int ashenLeft = hellcastleOriginX - 100;
         int ashenRight = hellcastleOriginX + 500;
         // TODO: make impervious brick pillars
@@ -156,22 +156,22 @@ internal class Underworld : GenPass
         {
             for (int hby = Main.maxTilesY - 200; hby < Main.maxTilesY - 50; hby++)
             {
-                if (Main.tile[hbx, hby].HasTile &&
-                    (Main.tile[hbx, hby].TileType == TileID.ObsidianBrick ||
-                     Main.tile[hbx, hby].TileType == TileID.HellstoneBrick))
-                {
-                    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
-                    Tile t = Main.tile[hbx, hby];
-                    t.HasTile = true;
-                }
-                if (Main.tile[hbx, hby].WallType == WallID.ObsidianBrickUnsafe ||
-                     Main.tile[hbx, hby].WallType == WallID.HellstoneBrickUnsafe)
-                {
-                    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
-                    Tile t = Main.tile[hbx, hby];
-                    t.HasTile = true;
-                    WorldGen.KillWall(hbx, hby);
-                }
+                //if (Main.tile[hbx, hby].HasTile &&
+                //    (Main.tile[hbx, hby].TileType == TileID.ObsidianBrick ||
+                //     Main.tile[hbx, hby].TileType == TileID.HellstoneBrick))
+                //{
+                //    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
+                //    Tile t = Main.tile[hbx, hby];
+                //    t.HasTile = true;
+                //}
+                //if (Main.tile[hbx, hby].WallType == WallID.ObsidianBrickUnsafe ||
+                //     Main.tile[hbx, hby].WallType == WallID.HellstoneBrickUnsafe)
+                //{
+                //    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
+                //    Tile t = Main.tile[hbx, hby];
+                //    t.HasTile = true;
+                //    WorldGen.KillWall(hbx, hby);
+                //}
                 if ((Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby - 1].HasTile) ||
                     (Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby + 1].HasTile) ||
                     (Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby].HasTile) ||

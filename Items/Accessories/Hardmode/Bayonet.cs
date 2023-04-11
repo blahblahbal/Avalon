@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Accessories;
+namespace Avalon.Items.Accessories.Hardmode;
 
 class Bayonet : ModItem
 {

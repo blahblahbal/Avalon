@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Avalon.Items.Potions.Buff;
+using System.Collections.Generic;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -31,6 +32,7 @@ internal class Hellcastle
                 }
             }
         }
+        AddPillarsInHell(x, y);
 
         // large room
         MakeTunnel((int)castleBottomCenterL.X - 25, (int)castleBottomCenterL.Y - 115, Vector2.Zero, Vector2.Zero, 50);
@@ -52,6 +54,37 @@ internal class Hellcastle
         AddDevilsScythes(x, y, 400, 150);
         MakeEntranceArea(x + 200, y + 135);
 
+    }
+
+    public static void AddPillarsInHell(int x, int y)
+    {
+        int numPillars = WorldGen.genRand.Next(10, 17);
+        List<int> pillarLocs = new();
+        int modifier = 0;
+        for (int i = 0; i < numPillars; i++)
+        {
+            pillarLocs.Add(WorldGen.genRand.Next(x + modifier, x + modifier + 10));
+            modifier += WorldGen.genRand.Next(45, 52);
+        }
+
+        for (int locsX = 0; locsX < pillarLocs.Count; locsX++)
+        {
+            int pillarWidth = WorldGen.genRand.Next(20, 36);
+            int pillarHeight = WorldGen.genRand.Next(90, 115);
+            if (pillarLocs[locsX] + pillarWidth >= x + 400)
+            {
+                continue;
+            }
+            MakeBox(pillarLocs[locsX], Main.maxTilesY - pillarHeight - 10, pillarWidth, pillarHeight, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
+            for (int i = pillarLocs[locsX] + 1; i < pillarLocs[locsX] + pillarWidth; i++)
+            {
+                for (int j = y + 150; j < Main.maxTilesY - pillarHeight - 10; j++)
+                {
+                    Main.tile[i, j].WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWall>();
+                }
+            }
+            //MakeBox(pillarLocs[locsX] + 1, y + 150, pillarWidth - 1, (Main.maxTilesY - pillarHeight - 10) - (y + 150), ushort.MaxValue, (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>());
+        }
     }
     public static void AddLibraryAltar(int x, int y)
     {
