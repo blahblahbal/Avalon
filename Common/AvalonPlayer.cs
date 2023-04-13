@@ -7,6 +7,7 @@ using Avalon.Prefixes;
 using Avalon.Systems;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -18,6 +19,29 @@ namespace Avalon.Common;
 
 public class AvalonPlayer : ModPlayer
 {
+    #region solar system vars
+    public LinkedList<int> Mercury { get; } = new();
+    public LinkedListNode<int> HandleMercury() => Mercury.AddLast(Mercury.Count);
+    public float MercuryRotation { get; set; }
+
+    public LinkedList<int> Venus { get; } = new();
+    public LinkedListNode<int> HandleVenus() => Venus.AddLast(Venus.Count);
+    public float VenusRotation { get; set; }
+
+    public LinkedList<int> Earth { get; } = new();
+    public LinkedListNode<int> HandleEarth() => Earth.AddLast(Earth.Count);
+    public float EarthRotation { get; set; }
+
+    public LinkedList<int> Mars { get; } = new();
+    public LinkedListNode<int> HandleMars() => Mars.AddLast(Mars.Count);
+    public float MarsRotation { get; set; }
+
+    public LinkedList<int> Jupiter { get; } = new();
+    public LinkedListNode<int> HandleJupiter() => Jupiter.AddLast(Jupiter.Count);
+    public float JupiterRotation { get; set; }
+    #endregion
+
+
     public Vector2 MousePosition;
     public float MagicCritDamage = 1f;
     public float MeleeCritDamage = 1f;
@@ -75,7 +99,101 @@ public class AvalonPlayer : ModPlayer
         EnchantedDie = false;
         MutatedStocking = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
+        if (Player.whoAmI == Main.myPlayer)
+        {
+            MousePosition = Main.MouseWorld;
+        }
     }
+
+
+    public override void PreUpdateBuffs()
+    {
+        MercuryRotation = (MercuryRotation % MathHelper.TwoPi) + 0.08f;
+        VenusRotation = (VenusRotation % MathHelper.TwoPi) + 0.12f;
+        EarthRotation = (EarthRotation % MathHelper.TwoPi) + 0.06f;
+        MarsRotation = (MarsRotation % MathHelper.TwoPi) + 0.07f;
+        JupiterRotation = (JupiterRotation % MathHelper.TwoPi) + 0.05f;
+    }
+    #region solar system methods
+    public LinkedListNode<int> ObtainExistingMercury(int index)
+    {
+        int diff = index + 1 - Mercury.Count;
+        if (diff > 0)
+        {
+            for (int i = 0; i < diff; i++)
+            {
+                Mercury.AddLast(Mercury.Count);
+            }
+
+            return Mercury.Last;
+        }
+
+        return Mercury.Find(index);
+    }
+
+    public LinkedListNode<int> ObtainExistingVenus(int index)
+    {
+        int diff = index + 1 - Venus.Count;
+        if (diff > 0)
+        {
+            for (int i = 0; i < diff; i++)
+            {
+                Venus.AddLast(Venus.Count);
+            }
+
+            return Venus.Last;
+        }
+
+        return Venus.Find(index);
+    }
+
+    public LinkedListNode<int> ObtainExistingEarth(int index)
+    {
+        int diff = index + 1 - Earth.Count;
+        if (diff > 0)
+        {
+            for (int i = 0; i < diff; i++)
+            {
+                Earth.AddLast(Earth.Count);
+            }
+
+            return Earth.Last;
+        }
+
+        return Earth.Find(index);
+    }
+
+    public LinkedListNode<int> ObtainExistingMars(int index)
+    {
+        int diff = index + 1 - Mars.Count;
+        if (diff > 0)
+        {
+            for (int i = 0; i < diff; i++)
+            {
+                Mars.AddLast(Mars.Count);
+            }
+
+            return Mars.Last;
+        }
+
+        return Mars.Find(index);
+    }
+    public LinkedListNode<int> ObtainExistingJupiter(int index)
+    {
+        int diff = index + 1 - Jupiter.Count;
+        if (diff > 0)
+        {
+            for (int i = 0; i < diff; i++)
+            {
+                Jupiter.AddLast(Jupiter.Count);
+            }
+
+            return Jupiter.Last;
+        }
+
+        return Jupiter.Find(index);
+    }
+    #endregion
 
     public override void PostUpdateEquips()
     {

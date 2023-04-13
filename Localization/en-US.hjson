@@ -2756,6 +2756,11 @@ Mods: {
 				DisplayName: Bayonet
 				Tooltip: Immunity to Broken Weaponry and Unloaded
 			}
+
+			SolarSystem: {
+				DisplayName: Solar System
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -2801,6 +2806,12 @@ Mods: {
 			VultureEgg.DisplayName: Vulture Egg
 			RhotukaSpinnerScrambler.DisplayName: Rhotuka Spinner (Scrambler)
 			DevilScythe.DisplayName: Devil Sickle
+			Earth.DisplayName: Earth
+			Mercury.DisplayName: Mercury
+			Sun.DisplayName: Sun
+			Venus.DisplayName: Venus
+			Jupiter.DisplayName: Jupiter
+			Mars.DisplayName: Mars
 		}
 
 		NPCs: {
