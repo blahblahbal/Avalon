@@ -3,6 +3,7 @@ using Avalon.Network;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,7 +13,7 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 public class Sun : ModProjectile
 {
     Vector2 mousePosition = Vector2.Zero;
-
+    int planetSpawnTimer = 0;
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -25,11 +26,18 @@ public class Sun : ModProjectile
         Projectile.tileCollide = false;
         Projectile.ownerHitCheck = true;
         Projectile.extraUpdates = 1;
-        Projectile.timeLeft = 600;
+        Projectile.timeLeft = 300;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
     }
-
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(planetSpawnTimer);
+    }
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        planetSpawnTimer = reader.ReadInt32();
+    }
     public override void AI()
     {
         if (Main.player[Projectile.owner].channel)
@@ -41,85 +49,119 @@ public class Sun : ModProjectile
         {
             Projectile.ai[1] = 2; // not channeling from the start, launch in direction of cursor
         }
-        if (Projectile.ai[0] == 0) // spawn planets
+        if (Projectile.ai[0] == 1) // spawn planets
         {
-            // mercury
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 1.2f),
-                Projectile.knockBack, ai0: 0, ai1: Projectile.whoAmI);
-
-            // venus
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 1.12f),
-                Projectile.knockBack, ai0: 1, ai1: Projectile.whoAmI);
-
-            // earth
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 1.04f),
-                Projectile.knockBack, ai0: 2, ai1: Projectile.whoAmI);
-
-            // mars
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.98f),
-                Projectile.knockBack, ai0: 3, ai1: Projectile.whoAmI);
-
-            // jupiter
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.9f),
-                Projectile.knockBack, ai0: 4, ai1: Projectile.whoAmI);
-
-            // saturn
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.84f),
-                Projectile.knockBack, ai0: 5, ai1: Projectile.whoAmI);
-
-            // uranus
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.77f),
-                Projectile.knockBack, ai0: 6, ai1: Projectile.whoAmI);
-
-            // neptune
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
-                Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
-
-            Projectile.ai[0] = 1;
+            planetSpawnTimer++;
+            switch (planetSpawnTimer)
+            {
+                case 50:
+                    // mercury
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                        Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 1.2f),
+                        Projectile.knockBack, ai0: 0, ai1: Projectile.whoAmI);
+                    break;
+                case 100:
+                    // venus
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                        Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 1.12f),
+                        Projectile.knockBack, ai0: 1, ai1: Projectile.whoAmI);
+                    break;
+                case 150:
+                    // earth
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                        Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 1.04f),
+                        Projectile.knockBack, ai0: 2, ai1: Projectile.whoAmI);
+                    break;
+                case 200:
+                    // mars
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                        Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.98f),
+                        Projectile.knockBack, ai0: 3, ai1: Projectile.whoAmI);
+                    break;
+                case 250:
+                    // jupiter
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                        Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.9f),
+                        Projectile.knockBack, ai0: 4, ai1: Projectile.whoAmI);
+                    break;
+                case 300:
+                    // saturn
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                        Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.84f),
+                        Projectile.knockBack, ai0: 5, ai1: Projectile.whoAmI);
+                    break;
+                case 350:
+                    // uranus
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                        Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.77f),
+                        Projectile.knockBack, ai0: 6, ai1: Projectile.whoAmI);
+                    break;
+                case 400:
+                    // neptune
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                        Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
+                        Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
+                    Projectile.ai[0] = 2;
+                    //Projectile.ai[2] = 2;
+                    planetSpawnTimer = 0;
+                    break;
+            }
         }
         if (Projectile.ai[1] == 0) // launch from player toward cursor
         {
             AvalonPlayer modPlayer = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>();
-            Vector2 mousePos = Main.MouseScreen;
+            mousePosition = Main.MouseScreen;
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
-                modPlayer.MousePosition = mousePos;
-                CursorPosition.SendPacket(mousePos, Projectile.owner);
+                modPlayer.MousePosition = mousePosition;
+                CursorPosition.SendPacket(mousePosition, Projectile.owner);
             }
             else if (Main.netMode == NetmodeID.SinglePlayer)
             {
-                modPlayer.MousePosition = mousePos;
+                modPlayer.MousePosition = mousePosition;
             }
 
-            Vector2 heading = mousePos + Main.screenPosition - Main.player[Projectile.owner].Center;
+            Vector2 heading = mousePosition + Main.screenPosition - Main.player[Projectile.owner].Center;
             heading.Normalize();
             heading *= new Vector2(5f, 5f).Length(); // multiply by speed
             Projectile.velocity = heading;
 
-            if (Vector2.Distance(Projectile.Center, mousePos + Main.screenPosition) < 20)
+            if (Vector2.Distance(Projectile.Center, mousePosition + Main.screenPosition) < 20)
             {
                 Projectile.ai[1] = 1; // lock on cursor
             }
         }
         else if (Projectile.ai[1] == 1) // if channel, lock on cursor; otherwise launch in direction of cursor
         {
-            if (!Main.player[Projectile.owner].channel)
+            if (!Main.player[Projectile.owner].channel) // not channeling, don't lock on cursor
             {
                 Projectile.ai[1] = 2;
                 return;
             }
-            else
+            else // channeling, lock on cursor
             {
-                Projectile.Center = Main.MouseScreen + Main.screenPosition;
-                mousePosition = Main.MouseScreen + Main.screenPosition;
+                if (Main.mouseLeft)
+                {
+                    mousePosition = Main.MouseScreen;
+                    Vector2 heading = mousePosition + Main.screenPosition - Main.player[Projectile.owner].Center;
+                    heading.Normalize();
+                    heading *= new Vector2(5f, 5f).Length(); // multiply by speed
+                    Projectile.velocity = heading;
+                    if (Vector2.Distance(Projectile.Center, mousePosition + Main.screenPosition) < 10)
+                    {
+                        Projectile.ai[2]++;
+                    }
+                    if (Projectile.ai[2] >= 1)
+                    {
+                        Projectile.Center = Main.MouseScreen + Main.screenPosition;
+                        mousePosition = Main.MouseScreen + Main.screenPosition;
+                        if (Projectile.ai[2] == 1)
+                        {
+                            Projectile.ai[0]++;
+                        }
+                        return;
+                    }
+                }
             }
         }
         else if (Projectile.ai[1] == 2) // after releasing mouse button, launch off in direction of cursor
@@ -135,15 +177,14 @@ public class Sun : ModProjectile
             {
                 modPlayer.MousePosition = mousePos;
             }
-            if (mousePosition != Vector2.Zero)
+            if (!Main.player[Projectile.owner].channel && Main.mouseLeftRelease)
             {
-
+                Vector2 heading = (mousePosition != Vector2.Zero ? mousePosition : mousePos + Main.screenPosition) - Main.player[Projectile.owner].Center;
+                heading.Normalize();
+                heading *= new Vector2(8f, 8f).Length(); // multiply by speed
+                Projectile.velocity = heading;
+                Projectile.ai[1] = 3;
             }
-            Vector2 heading = (mousePosition != Vector2.Zero ? mousePosition : mousePos + Main.screenPosition) - Main.player[Projectile.owner].Center;
-            heading.Normalize();
-            heading *= new Vector2(8f, 8f).Length(); // multiply by speed
-            Projectile.velocity = heading;
-            Projectile.ai[1] = 3;
         }
     }
 

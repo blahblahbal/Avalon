@@ -2759,7 +2759,7 @@ Mods: {
 
 			SolarSystem: {
 				DisplayName: Solar System
-				Tooltip: ""
+				Tooltip: "'Not to scale'"
 			}
 		}
 

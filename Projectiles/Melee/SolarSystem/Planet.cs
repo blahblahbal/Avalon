@@ -1,8 +1,10 @@
 using Avalon.Common;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee.SolarSystem;
@@ -13,22 +15,11 @@ public abstract class Planet : ModProjectile
     private LinkedListNode<int> positionNode;
     public virtual int Radius { get; set; } = 1;
 
-    //public override void SetDefaults()
-    //{
-    //    Rectangle dims = this.GetDims();
-    //    Projectile.penetrate = -1;
-    //    Projectile.width = dims.Width;
-    //    Projectile.height = dims.Height;
-    //    Projectile.aiStyle = -1;
-    //    Projectile.friendly = true;
-    //    Projectile.DamageType = DamageClass.Melee;
-    //    Projectile.tileCollide = false;
-    //    Projectile.ownerHitCheck = true;
-    //    Projectile.extraUpdates = 3;
-    //    Projectile.timeLeft = 600;
-    //    DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-    //    DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
-    //}
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 100;
+        ProjectileID.Sets.TrailingMode[Projectile.type] = 3;
+    }
     public override void SendExtraAI(BinaryWriter writer)
     {
         AvalonPlayer modPlayer = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>();
@@ -40,6 +31,24 @@ public abstract class Planet : ModProjectile
     {
         base.ReceiveExtraAI(reader);
         hostPosition = reader.ReadInt32();
+    }
+    public override bool PreDraw(ref Color lightColor)
+    {
+        Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Trail");
+        Rectangle frame = texture.Frame();
+        Vector2 frameOrigin = frame.Size() / 2f;
+        Color col = Color.White;
+        Vector2 stretchscale = new Vector2(Projectile.scale - (Vector2.Distance(Projectile.Center, Projectile.oldPosition + new Vector2(Projectile.width / 2, Projectile.height / 2)) * 0.01f), Projectile.scale + (Vector2.Distance(Projectile.Center, Projectile.oldPosition + new Vector2(Projectile.width / 2, Projectile.height / 2)) * 0.1f));
+
+
+        for (int i = 1; i < Projectile.oldPos.Length; i++)
+        {
+            Vector2 drawPos = Projectile.oldPos[i] + new Vector2(Projectile.width / 2, Projectile.height / 2) - Main.screenPosition;
+            Main.EntitySpriteDraw(texture, drawPos, frame, Color.White, Projectile.oldRot[i], frameOrigin, 1f, SpriteEffects.None, 0);
+        }
+        Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + frameOrigin, frame, Color.White, Projectile.rotation, frameOrigin, 1f, SpriteEffects.None, 0);
+
+        return true;
     }
     public override void AI()
     {

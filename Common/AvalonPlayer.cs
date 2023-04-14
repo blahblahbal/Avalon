@@ -124,7 +124,7 @@ public class AvalonPlayer : ModPlayer
         PlanetRotation[4] = (PlanetRotation[4] % MathHelper.TwoPi) + 0.05f;
         PlanetRotation[5] = (PlanetRotation[5] % MathHelper.TwoPi) + 0.03f;
         PlanetRotation[6] = (PlanetRotation[6] % MathHelper.TwoPi) + 0.042f;
-        PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.06f;
+        PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.04f;
     }
 
     public LinkedListNode<int> ObtainExistingPlanet(int index, int planetNum)
