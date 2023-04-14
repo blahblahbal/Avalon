@@ -45,42 +45,42 @@ public class Sun : ModProjectile
         {
             // mercury
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 0.8f),
+                Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 1.2f),
                 Projectile.knockBack, ai0: 0, ai1: Projectile.whoAmI);
 
             // venus
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 0.65f),
+                Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 1.12f),
                 Projectile.knockBack, ai0: 1, ai1: Projectile.whoAmI);
 
             // earth
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 0.55f),
+                Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 1.04f),
                 Projectile.knockBack, ai0: 2, ai1: Projectile.whoAmI);
 
             // mars
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.43f),
+                Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.98f),
                 Projectile.knockBack, ai0: 3, ai1: Projectile.whoAmI);
 
             // jupiter
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.4f),
+                Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.9f),
                 Projectile.knockBack, ai0: 4, ai1: Projectile.whoAmI);
 
             // saturn
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.38f),
+                Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.84f),
                 Projectile.knockBack, ai0: 5, ai1: Projectile.whoAmI);
 
             // uranus
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.33f),
+                Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.77f),
                 Projectile.knockBack, ai0: 6, ai1: Projectile.whoAmI);
 
             // neptune
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.3f),
+                Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
                 Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
 
             Projectile.ai[0] = 1;
