@@ -4,9 +4,9 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee.SolarSystem;
 
-public class Mercury : Planet
+public class Neptune : Planet
 {
-    public override int Radius { get; set; } = 30;
+    public override int Radius { get; set; } = 255;
 
     public override void SetDefaults()
     {

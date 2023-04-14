@@ -2812,6 +2812,9 @@ Mods: {
 			Venus.DisplayName: Venus
 			Jupiter.DisplayName: Jupiter
 			Mars.DisplayName: Mars
+			Saturn.DisplayName: Saturn
+			Neptune.DisplayName: Neptune
+			Uranus.DisplayName: Uranus
 		}
 
 		NPCs: {

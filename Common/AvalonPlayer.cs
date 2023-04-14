@@ -20,25 +20,34 @@ namespace Avalon.Common;
 public class AvalonPlayer : ModPlayer
 {
     #region solar system vars
-    public LinkedList<int> Mercury { get; } = new();
-    public LinkedListNode<int> HandleMercury() => Mercury.AddLast(Mercury.Count);
-    public float MercuryRotation { get; set; }
+    public LinkedList<int>[] Planets { get; } = new LinkedList<int>[8]
+    {
+        new(),
+        new(),
+        new(),
+        new(),
+        new(),
+        new(),
+        new(),
+        new()
+    };
+    public LinkedListNode<int> HandlePlanets(int index)
+    {
+        return Planets[index].AddLast(Planets[index].Count);
+    }
+    public float[] PlanetRotation { get; set; } = new float[8];
 
-    public LinkedList<int> Venus { get; } = new();
-    public LinkedListNode<int> HandleVenus() => Venus.AddLast(Venus.Count);
-    public float VenusRotation { get; set; }
-
-    public LinkedList<int> Earth { get; } = new();
-    public LinkedListNode<int> HandleEarth() => Earth.AddLast(Earth.Count);
-    public float EarthRotation { get; set; }
-
-    public LinkedList<int> Mars { get; } = new();
-    public LinkedListNode<int> HandleMars() => Mars.AddLast(Mars.Count);
-    public float MarsRotation { get; set; }
-
-    public LinkedList<int> Jupiter { get; } = new();
-    public LinkedListNode<int> HandleJupiter() => Jupiter.AddLast(Jupiter.Count);
-    public float JupiterRotation { get; set; }
+    public enum Planet
+    {
+        Mercury = 0,
+        Venus = 1,
+        Earth = 2,
+        Mars = 3,
+        Jupiter = 4,
+        Saturn = 5,
+        Uranus = 6,
+        Neptune = 7
+    }
     #endregion
 
 
@@ -108,92 +117,31 @@ public class AvalonPlayer : ModPlayer
 
     public override void PreUpdateBuffs()
     {
-        MercuryRotation = (MercuryRotation % MathHelper.TwoPi) + 0.08f;
-        VenusRotation = (VenusRotation % MathHelper.TwoPi) + 0.12f;
-        EarthRotation = (EarthRotation % MathHelper.TwoPi) + 0.06f;
-        MarsRotation = (MarsRotation % MathHelper.TwoPi) + 0.07f;
-        JupiterRotation = (JupiterRotation % MathHelper.TwoPi) + 0.05f;
+        PlanetRotation[0] = (PlanetRotation[0] % MathHelper.TwoPi) + 0.08f;
+        PlanetRotation[1] = (PlanetRotation[1] % MathHelper.TwoPi) + 0.12f;
+        PlanetRotation[2] = (PlanetRotation[2] % MathHelper.TwoPi) + 0.06f;
+        PlanetRotation[3] = (PlanetRotation[3] % MathHelper.TwoPi) + 0.07f;
+        PlanetRotation[4] = (PlanetRotation[4] % MathHelper.TwoPi) + 0.05f;
+        PlanetRotation[5] = (PlanetRotation[5] % MathHelper.TwoPi) + 0.03f;
+        PlanetRotation[6] = (PlanetRotation[6] % MathHelper.TwoPi) + 0.042f;
+        PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.06f;
     }
-    #region solar system methods
-    public LinkedListNode<int> ObtainExistingMercury(int index)
+
+    public LinkedListNode<int> ObtainExistingPlanet(int index, int planetNum)
     {
-        int diff = index + 1 - Mercury.Count;
+        int diff = index + 1 - Planets[planetNum].Count;
         if (diff > 0)
         {
             for (int i = 0; i < diff; i++)
             {
-                Mercury.AddLast(Mercury.Count);
+                Planets[planetNum].AddLast(Planets[planetNum].Count);
             }
 
-            return Mercury.Last;
+            return Planets[planetNum].Last;
         }
 
-        return Mercury.Find(index);
+        return Planets[planetNum].Find(index);
     }
-
-    public LinkedListNode<int> ObtainExistingVenus(int index)
-    {
-        int diff = index + 1 - Venus.Count;
-        if (diff > 0)
-        {
-            for (int i = 0; i < diff; i++)
-            {
-                Venus.AddLast(Venus.Count);
-            }
-
-            return Venus.Last;
-        }
-
-        return Venus.Find(index);
-    }
-
-    public LinkedListNode<int> ObtainExistingEarth(int index)
-    {
-        int diff = index + 1 - Earth.Count;
-        if (diff > 0)
-        {
-            for (int i = 0; i < diff; i++)
-            {
-                Earth.AddLast(Earth.Count);
-            }
-
-            return Earth.Last;
-        }
-
-        return Earth.Find(index);
-    }
-
-    public LinkedListNode<int> ObtainExistingMars(int index)
-    {
-        int diff = index + 1 - Mars.Count;
-        if (diff > 0)
-        {
-            for (int i = 0; i < diff; i++)
-            {
-                Mars.AddLast(Mars.Count);
-            }
-
-            return Mars.Last;
-        }
-
-        return Mars.Find(index);
-    }
-    public LinkedListNode<int> ObtainExistingJupiter(int index)
-    {
-        int diff = index + 1 - Jupiter.Count;
-        if (diff > 0)
-        {
-            for (int i = 0; i < diff; i++)
-            {
-                Jupiter.AddLast(Jupiter.Count);
-            }
-
-            return Jupiter.Last;
-        }
-
-        return Jupiter.Find(index);
-    }
-    #endregion
 
     public override void PostUpdateEquips()
     {

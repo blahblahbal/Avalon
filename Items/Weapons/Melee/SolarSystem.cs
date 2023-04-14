@@ -29,4 +29,8 @@ public class SolarSystem : ModItem
         Item.shootSpeed = 12f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.SolarSystem.Sun>();
     }
+    public override bool CanUseItem(Player player)
+    {
+        return player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.SolarSystem.Sun>()] == 0;
+    }
 }

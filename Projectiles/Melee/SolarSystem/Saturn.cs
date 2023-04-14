@@ -4,9 +4,9 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee.SolarSystem;
 
-public class Mercury : Planet
+public class Saturn : Planet
 {
-    public override int Radius { get; set; } = 30;
+    public override int Radius { get; set; } = 172;
 
     public override void SetDefaults()
     {
@@ -19,7 +19,7 @@ public class Mercury : Planet
         Projectile.DamageType = DamageClass.Melee;
         Projectile.tileCollide = false;
         Projectile.ownerHitCheck = true;
-        Projectile.extraUpdates = 1;
+        Projectile.extraUpdates = 3;
         Projectile.timeLeft = 600;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
