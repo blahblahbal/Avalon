@@ -118,13 +118,13 @@ public class AvalonPlayer : ModPlayer
     public override void PreUpdateBuffs()
     {
         PlanetRotation[0] = (PlanetRotation[0] % MathHelper.TwoPi) + 0.08f;
-        PlanetRotation[1] = (PlanetRotation[1] % MathHelper.TwoPi) + 0.12f;
+        PlanetRotation[1] = (PlanetRotation[1] % MathHelper.TwoPi) + 0.09f;
         PlanetRotation[2] = (PlanetRotation[2] % MathHelper.TwoPi) + 0.06f;
         PlanetRotation[3] = (PlanetRotation[3] % MathHelper.TwoPi) + 0.07f;
         PlanetRotation[4] = (PlanetRotation[4] % MathHelper.TwoPi) + 0.05f;
         PlanetRotation[5] = (PlanetRotation[5] % MathHelper.TwoPi) + 0.03f;
         PlanetRotation[6] = (PlanetRotation[6] % MathHelper.TwoPi) + 0.042f;
-        PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.04f;
+        PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.05f;
     }
 
     public LinkedListNode<int> ObtainExistingPlanet(int index, int planetNum)
