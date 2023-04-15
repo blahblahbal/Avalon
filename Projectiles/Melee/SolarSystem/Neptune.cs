@@ -11,7 +11,7 @@ public class Neptune : Planet
     public override string PlanetName { get; set; } = "Neptune";
     public override void SetStaticDefaults()
     {
-        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 150;
+        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 160;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 3;
     }
     public override void SetDefaults()
@@ -28,6 +28,6 @@ public class Neptune : Planet
         Projectile.extraUpdates = 1;
         Projectile.timeLeft = 300;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-        DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
+        DrawOriginOffsetY = -(int)((dims.Height / 2) - (Projectile.Size.Y / 2));
     }
 }

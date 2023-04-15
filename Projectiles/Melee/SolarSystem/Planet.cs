@@ -39,12 +39,14 @@ public abstract class Planet : ModProjectile
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
 
-        for (int i = 1; i < Projectile.oldPos.Length; i++)
+        int start = 1;
+        if (PlanetName == "Mercury") start = 3;
+        if (PlanetName == "Neptune") start = 4;
+        for (int i = start; i < Projectile.oldPos.Length; i++)
         {
             Vector2 drawPos = Projectile.oldPos[i] + new Vector2(Projectile.width / 2, Projectile.height / 2) - Main.screenPosition;
-            Main.EntitySpriteDraw(texture, drawPos, frame, Color.White, Projectile.oldRot[i], frameOrigin, 1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, drawPos, frame, Color.White, Projectile.oldRot[i] + 1.57f, frameOrigin, 1f, SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + frameOrigin, frame, Color.White, Projectile.rotation, frameOrigin, 1f, SpriteEffects.None, 0);
 
         Texture2D planetTexture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/" + PlanetName);
         Rectangle planetFrame = planetTexture.Frame();
@@ -87,7 +89,6 @@ public abstract class Planet : ModProjectile
         else if (Projectile.ai[2] == 1)
         {
             Projectile.velocity = Vector2.Normalize(Main.projectile[(int)Projectile.ai[1]].Center - player.Center) * 8f;
-            //Projectile.ai[2] = 2;
         }
     }
 }

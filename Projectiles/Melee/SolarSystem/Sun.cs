@@ -1,5 +1,3 @@
-using Avalon.Common;
-using Avalon.Network;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -15,13 +13,7 @@ public class Sun : ModProjectile
     Vector2 mousePosition = Vector2.Zero;
     int planetSpawnTimer = 0;
     int dustTimer = 0;
-    Vector2 oldpos = Vector2.Zero;
 
-    public override void SetStaticDefaults()
-    {
-        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
-        ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -37,19 +29,16 @@ public class Sun : ModProjectile
         Projectile.timeLeft = 300;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
-        oldpos = Projectile.position;
     }
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(planetSpawnTimer);
         writer.Write(dustTimer);
-        writer.WriteVector2(oldpos);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         planetSpawnTimer = reader.ReadInt32();
         dustTimer = reader.ReadInt32();
-        oldpos = reader.ReadVector2();
     }
     public override void AI()
     {
@@ -142,6 +131,7 @@ public class Sun : ModProjectile
                 float vecY = Main.mouseY + Main.screenPosition.Y;
                 mousePosition = new Vector2(vecX, vecY);
 
+                // get the inverse melee speed - yoyos do the same thing
                 float inverseMeleeSpeed = 1 / Main.player[Projectile.owner].GetTotalAttackSpeed(DamageClass.Melee);
                 float speed = (1f + inverseMeleeSpeed * 3f) / 4f;
 
@@ -164,7 +154,6 @@ public class Sun : ModProjectile
                 float vecY = Main.mouseY + Main.screenPosition.Y;
                 mousePosition = new Vector2(vecX, vecY);
                 Projectile.Center = mousePosition;
-                oldpos = Projectile.Center;
                 if (planetSpawnTimer == 0)
                 {
                     Projectile.ai[2]++;
@@ -174,10 +163,14 @@ public class Sun : ModProjectile
         }
         else if (Projectile.ai[0] == 0)
         {
+            // head away from the player
             Vector2 heading = mousePosition - Main.player[Projectile.owner].Center;
             heading.Normalize();
             heading *= new Vector2(10).Length();
             Projectile.velocity = heading;
+
+            // if the velocity's length is less than 2 (in other words, mostly still),
+            // head away from the player in the direction of the cursor
             if (Projectile.velocity.Length() < 2f)
             {
                 heading = mousePosition - Main.player[Projectile.owner].Center;
@@ -185,6 +178,8 @@ public class Sun : ModProjectile
                 heading *= new Vector2(10).Length();
                 Projectile.velocity = heading;
             }
+            // otherwise, head in the direction your cursor was heading before
+            // releasing the mouse button
             else
             {
                 Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.One) * 16;
