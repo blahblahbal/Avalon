@@ -8,7 +8,7 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 public class Earth : Planet
 {
     public override int Radius { get; set; } = 85;
-
+    public override string PlanetName { get; set; } = "Earth";
     public override void SetStaticDefaults()
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 80;

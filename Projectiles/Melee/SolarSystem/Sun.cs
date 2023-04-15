@@ -14,6 +14,7 @@ public class Sun : ModProjectile
 {
     Vector2 mousePosition = Vector2.Zero;
     int planetSpawnTimer = 0;
+    int dustTimer = 0;
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -33,13 +34,25 @@ public class Sun : ModProjectile
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(planetSpawnTimer);
+        writer.Write(dustTimer);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         planetSpawnTimer = reader.ReadInt32();
+        dustTimer = reader.ReadInt32();
     }
     public override void AI()
     {
+        dustTimer++;
+        if (dustTimer > 30)
+        {
+            int num5 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.SolarFlare, Projectile.velocity.X * 0.4f, Projectile.velocity.Y * 0.4f, 100, default(Color), 1.3f);
+            Main.dust[num5].noGravity = true;
+            Main.dust[num5].velocity.X *= Main.rand.Next(-2, 3);
+            Main.dust[num5].velocity.Y *= Main.rand.Next(-2, 3);
+            dustTimer = 0;
+        }
+
         if (Main.player[Projectile.owner].channel)
         {
             Projectile.timeLeft = 600;
@@ -222,6 +235,11 @@ public class Sun : ModProjectile
             }
         }
 
-        return true;
+        Texture2D sunTex = (Texture2D)ModContent.Request<Texture2D>(Texture);
+        Rectangle sunFrame = sunTex.Frame();
+        Vector2 sunFrameOrigin = sunFrame.Size() / 2f;
+        Main.EntitySpriteDraw(sunTex, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 1f, SpriteEffects.None, 0);
+
+        return false;
     }
 }

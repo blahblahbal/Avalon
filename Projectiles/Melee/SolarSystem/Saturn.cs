@@ -7,7 +7,8 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 
 public class Saturn : Planet
 {
-    public override int Radius { get; set; } = 172;
+    public override int Radius { get; set; } = 180;
+    public override string PlanetName { get; set; } = "Saturn";
 
     public override void SetStaticDefaults()
     {
@@ -30,5 +31,4 @@ public class Saturn : Planet
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Height / 2) - (Projectile.Size.Y / 2));
     }
-    
 }

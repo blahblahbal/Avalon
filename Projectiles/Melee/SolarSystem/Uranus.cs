@@ -7,7 +7,8 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 
 public class Uranus : Planet
 {
-    public override int Radius { get; set; } = 210;
+    public override int Radius { get; set; } = 222;
+    public override string PlanetName { get; set; } = "Uranus";
 
     public override void SetStaticDefaults()
     {

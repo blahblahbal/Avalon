@@ -8,6 +8,7 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 public class Venus : Planet
 {
     public override int Radius { get; set; } = 52;
+    public override string PlanetName { get; set; } = "Venus";
 
     public override void SetStaticDefaults()
     {
@@ -30,6 +31,5 @@ public class Venus : Planet
         Projectile.timeLeft = 300;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
-
     }
 }

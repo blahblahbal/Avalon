@@ -14,6 +14,7 @@ public abstract class Planet : ModProjectile
     private int hostPosition = -1;
     private LinkedListNode<int> positionNode;
     public virtual int Radius { get; set; } = 1;
+    public virtual string PlanetName { get; set; } = "Mercury";
 
     public override void SetStaticDefaults()
     {
@@ -37,9 +38,6 @@ public abstract class Planet : ModProjectile
         Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Trail");
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
-        Color col = Color.White;
-        Vector2 stretchscale = new Vector2(Projectile.scale - (Vector2.Distance(Projectile.Center, Projectile.oldPosition + new Vector2(Projectile.width / 2, Projectile.height / 2)) * 0.01f), Projectile.scale + (Vector2.Distance(Projectile.Center, Projectile.oldPosition + new Vector2(Projectile.width / 2, Projectile.height / 2)) * 0.1f));
-
 
         for (int i = 1; i < Projectile.oldPos.Length; i++)
         {
@@ -48,7 +46,12 @@ public abstract class Planet : ModProjectile
         }
         Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + frameOrigin, frame, Color.White, Projectile.rotation, frameOrigin, 1f, SpriteEffects.None, 0);
 
-        return true;
+        Texture2D planetTexture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/" + PlanetName);
+        Rectangle planetFrame = planetTexture.Frame();
+        Vector2 planetFrameOrigin = planetFrame.Size() / 2f;
+        Main.EntitySpriteDraw(planetTexture, Projectile.position - Main.screenPosition + planetFrameOrigin, planetFrame, Color.White, Projectile.rotation, planetFrameOrigin, 1f, SpriteEffects.None, 0);
+
+        return false;
     }
     public override void AI()
     {
