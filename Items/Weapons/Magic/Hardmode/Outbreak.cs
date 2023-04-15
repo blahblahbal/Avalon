@@ -16,7 +16,7 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
         public override void SetDefaults() 
         {
             Item.DefaultToMagicWeapon(1, 45, 6, true);
-            Item.damage = 80;
+            Item.damage = 90;
             Item.UseSound = SoundID.Item46;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

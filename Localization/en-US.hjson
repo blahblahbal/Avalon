@@ -2761,6 +2761,11 @@ Mods: {
 				DisplayName: Solar System
 				Tooltip: "'Not to scale'"
 			}
+
+			CursedFlamelash: {
+				DisplayName: Cursed Flamelash
+				Tooltip: Summons a controllable ball of cursed flames
+			}
 		}
 
 		Projectiles: {
@@ -2815,6 +2820,8 @@ Mods: {
 			Saturn.DisplayName: Saturn
 			Neptune.DisplayName: Neptune
 			Uranus.DisplayName: Uranus
+			CursedFlamelash.DisplayName: Cursed Flamelash
+			CursedFlamelashExplosion.DisplayName: Cursed Flamelash Explosion
 		}
 
 		NPCs: {
