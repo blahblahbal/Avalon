@@ -15,6 +15,13 @@ public class Sun : ModProjectile
     Vector2 mousePosition = Vector2.Zero;
     int planetSpawnTimer = 0;
     int dustTimer = 0;
+    Vector2 oldpos = Vector2.Zero;
+
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
+        ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -30,16 +37,19 @@ public class Sun : ModProjectile
         Projectile.timeLeft = 300;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
+        oldpos = Projectile.position;
     }
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(planetSpawnTimer);
         writer.Write(dustTimer);
+        writer.WriteVector2(oldpos);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         planetSpawnTimer = reader.ReadInt32();
         dustTimer = reader.ReadInt32();
+        oldpos = reader.ReadVector2();
     }
     public override void AI()
     {
@@ -55,14 +65,15 @@ public class Sun : ModProjectile
 
         if (Main.player[Projectile.owner].channel)
         {
-            Projectile.timeLeft = 600;
-            Projectile.ai[1] = 1;
+            Projectile.ai[0] = 1;
         }
         else
         {
-            Projectile.ai[1] = 2; // not channeling from the start, launch in direction of cursor
+            Projectile.ai[0] = 0; // not channeling
         }
-        if (Projectile.ai[0] == 1) // spawn planets
+
+        #region planet spawning
+        if (Projectile.ai[2] == 1) // spawn planets
         {
             planetSpawnTimer++;
             switch (planetSpawnTimer)
@@ -114,89 +125,69 @@ public class Sun : ModProjectile
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
                         Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
                         Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
-                    Projectile.ai[0] = 2;
-                    //Projectile.ai[2] = 2;
+                    Projectile.ai[2] = 2;
                     planetSpawnTimer = 0;
                     break;
             }
         }
-        if (Projectile.ai[1] == 0) // launch from player toward cursor
-        {
-            AvalonPlayer modPlayer = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>();
-            mousePosition = Main.MouseScreen;
-            if (Main.netMode == NetmodeID.MultiplayerClient)
-            {
-                modPlayer.MousePosition = mousePosition;
-                CursorPosition.SendPacket(mousePosition, Projectile.owner);
-            }
-            else if (Main.netMode == NetmodeID.SinglePlayer)
-            {
-                modPlayer.MousePosition = mousePosition;
-            }
+        #endregion
 
-            Vector2 heading = mousePosition + Main.screenPosition - Main.player[Projectile.owner].Center;
-            heading.Normalize();
-            heading *= new Vector2(5f, 5f).Length(); // multiply by speed
-            Projectile.velocity = heading;
-
-            if (Vector2.Distance(Projectile.Center, mousePosition + Main.screenPosition) < 20)
-            {
-                Projectile.ai[1] = 1; // lock on cursor
-            }
-        }
-        else if (Projectile.ai[1] == 1) // if channel, lock on cursor; otherwise launch in direction of cursor
+        if (Projectile.ai[0] == 1)
         {
-            if (!Main.player[Projectile.owner].channel) // not channeling, don't lock on cursor
+            if (Projectile.ai[1] == 0)
             {
-                Projectile.ai[1] = 2;
-                return;
-            }
-            else // channeling, lock on cursor
-            {
-                if (Main.mouseLeft)
+                Projectile.timeLeft = 300;
+                // assign the destination as the cursor
+                float vecX = Main.mouseX + Main.screenPosition.X;
+                float vecY = Main.mouseY + Main.screenPosition.Y;
+                mousePosition = new Vector2(vecX, vecY);
+
+                float inverseMeleeSpeed = 1 / Main.player[Projectile.owner].GetTotalAttackSpeed(DamageClass.Melee);
+                float speed = (1f + inverseMeleeSpeed * 3f) / 4f;
+
+                // move towards the destination
+                Vector2 heading = mousePosition - Projectile.Center;
+                heading.Normalize();
+                heading *= new Vector2(speed * 10).Length();
+                Projectile.velocity = heading;
+
+                if (Vector2.Distance(Projectile.Center, mousePosition) < 20)
                 {
-                    mousePosition = Main.MouseScreen;
-                    Vector2 heading = mousePosition + Main.screenPosition - Main.player[Projectile.owner].Center;
-                    heading.Normalize();
-                    heading *= new Vector2(5f, 5f).Length(); // multiply by speed
-                    Projectile.velocity = heading;
-                    if (Vector2.Distance(Projectile.Center, mousePosition + Main.screenPosition) < 10)
-                    {
-                        Projectile.ai[2]++;
-                    }
-                    if (Projectile.ai[2] >= 1)
-                    {
-                        Projectile.Center = Main.MouseScreen + Main.screenPosition;
-                        mousePosition = Main.MouseScreen + Main.screenPosition;
-                        if (Projectile.ai[2] == 1)
-                        {
-                            Projectile.ai[0]++;
-                        }
-                        return;
-                    }
+                    Projectile.ai[1] = 1; // lock on cursor
+                    return;
                 }
             }
+            else if (Projectile.ai[1] == 1) // sticking to cursor
+            {
+                Projectile.timeLeft = 300;
+                float vecX = Main.mouseX + Main.screenPosition.X;
+                float vecY = Main.mouseY + Main.screenPosition.Y;
+                mousePosition = new Vector2(vecX, vecY);
+                Projectile.Center = mousePosition;
+                oldpos = Projectile.Center;
+                if (planetSpawnTimer == 0)
+                {
+                    Projectile.ai[2]++;
+                }
+                return;
+            }
         }
-        else if (Projectile.ai[1] == 2) // after releasing mouse button, launch off in direction of cursor
+        else if (Projectile.ai[0] == 0)
         {
-            AvalonPlayer modPlayer = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>();
-            Vector2 mousePos = Main.MouseScreen;
-            if (Main.netMode == NetmodeID.MultiplayerClient)
+            Vector2 heading = mousePosition - Main.player[Projectile.owner].Center;
+            heading.Normalize();
+            heading *= new Vector2(10).Length();
+            Projectile.velocity = heading;
+            if (Projectile.velocity.Length() < 2f)
             {
-                modPlayer.MousePosition = mousePos;
-                CursorPosition.SendPacket(mousePos, Projectile.owner);
-            }
-            else if (Main.netMode == NetmodeID.SinglePlayer)
-            {
-                modPlayer.MousePosition = mousePos;
-            }
-            if (!Main.player[Projectile.owner].channel && Main.mouseLeftRelease)
-            {
-                Vector2 heading = (mousePosition != Vector2.Zero ? mousePosition : mousePos + Main.screenPosition) - Main.player[Projectile.owner].Center;
+                heading = mousePosition - Main.player[Projectile.owner].Center;
                 heading.Normalize();
-                heading *= new Vector2(8f, 8f).Length(); // multiply by speed
+                heading *= new Vector2(10).Length();
                 Projectile.velocity = heading;
-                Projectile.ai[1] = 3;
+            }
+            else
+            {
+                Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.One) * 16;
             }
         }
     }
