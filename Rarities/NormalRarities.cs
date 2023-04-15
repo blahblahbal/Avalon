@@ -9,7 +9,7 @@ namespace Avalon.Rarities;
 /// </summary>
 public class BlueRarity : ModRarity //12
 {
-    public override Color RarityColor => new Color(0, 0, 255);
+    public override Color RarityColor => new Color(0, 100, 255);
 
     public override int GetPrefixedRarity(int offset, float valueMult)
     {
