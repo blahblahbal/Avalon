@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -42,10 +43,18 @@ public abstract class Planet : ModProjectile
         int start = 1;
         if (PlanetName == "Mercury") start = 3;
         if (PlanetName == "Neptune") start = 4;
+        float oof = 1f;
         for (int i = start; i < Projectile.oldPos.Length; i++)
         {
+            oof -= 0.005f;
+            Color c = Color.White;
+            c *= oof;
+
+            //Main.NewText(c.A);
             Vector2 drawPos = Projectile.oldPos[i] + new Vector2(Projectile.width / 2, Projectile.height / 2) - Main.screenPosition;
-            Main.EntitySpriteDraw(texture, drawPos, frame, Color.White, Projectile.oldRot[i] + 1.57f, frameOrigin, 1f, SpriteEffects.None, 0);
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            Main.EntitySpriteDraw(texture, drawPos, frame, c, Projectile.oldRot[i] + 1.57f, frameOrigin, 1f, SpriteEffects.None, 0);
         }
 
         Texture2D planetTexture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/" + PlanetName);
