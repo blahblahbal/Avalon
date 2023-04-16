@@ -2738,7 +2738,7 @@ Mods: {
 					'''
 					Reveals treasures, ores, and mobs
 					Tells the time
-					Can open all locks
+					Can open all locks (NOT FUNCTIONAL YET)
 					'''
 			}
 

@@ -14,7 +14,7 @@ public class SolarSystem : ModItem
     {
         Item.width = 36;
         Item.height = 36;
-        Item.useStyle = 5;
+        Item.useStyle = ItemUseStyleID.Shoot;
         Item.useTime = Item.useAnimation = 40;
         Item.channel = true;
         Item.damage = 90;
@@ -32,5 +32,12 @@ public class SolarSystem : ModItem
     public override bool CanUseItem(Player player)
     {
         return player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.SolarSystem.Sun>()] == 0;
+    }
+    public override void HoldItemFrame(Player player)
+    {
+        if (player.channel)
+        {
+            player.bodyFrame.Y = player.bodyFrame.Height * 3;
+        }
     }
 }

@@ -173,6 +173,7 @@ internal class Hellcastle
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 1:
                                 if (confirmPlatforms == 0)
@@ -180,6 +181,7 @@ internal class Hellcastle
                                     tile.HasTile = false;
                                     tile.IsHalfBlock = false;
                                     tile.Slope = 0;
+                                    tile.LiquidAmount = 0;
                                 }
                                 break;
                             case 2:
@@ -187,95 +189,111 @@ internal class Hellcastle
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
                                 tile.Slope = (SlopeType)3;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 3:
                                 tile.HasTile = false;
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 4:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 5:
                                 tile.HasTile = true;
                                 tile.TileType = TileID.Ash;
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 6:
                                 tile.HasTile = true;
                                 tile.TileType = TileID.Hellstone;
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 7:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
                                 tile.Slope = (SlopeType)4;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 8:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
                                 tile.Slope = (SlopeType)3;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 9:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = true;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 10:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
                                 tile.Slope = (SlopeType)4;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 11:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.BrimstoneBlock>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 12:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
                                 tile.Slope = (SlopeType)1;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 13:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = true;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 14:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
                                 tile.Slope = (SlopeType)2;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 15:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
                                 tile.Slope = (SlopeType)1;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 16:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
                                 tile.Slope = (SlopeType)2;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 17:
                                 tile.HasTile = true;
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.UltraResistantWood>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
+                                tile.LiquidAmount = 0;
                                 break;
                             case 18:
                                 break;
@@ -394,7 +412,7 @@ internal class Hellcastle
                             tile.WallType = 0;
                             break;
                         case 1:
-                            tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>(); ;
+                            tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
                             break;
                         case 2:
                             tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWall>();
