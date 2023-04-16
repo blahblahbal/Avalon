@@ -2279,7 +2279,7 @@ Mods: {
 
 			TheBeak: {
 				DisplayName: The Beak
-				Tooltip: ""
+				Tooltip: Summons Desert Beak
 			}
 
 			HerbologyBench: {
@@ -2822,6 +2822,8 @@ Mods: {
 			Uranus.DisplayName: Uranus
 			CursedFlamelash.DisplayName: Cursed Flamelash
 			CursedFlamelashExplosion.DisplayName: Cursed Flamelash Explosion
+			DesertBeakFeather.DisplayName: Beak's Feather
+			DesertBeakSandstorm.DisplayName: Beak's Sandstorm
 		}
 
 		NPCs: {

@@ -22,6 +22,7 @@ class TheBeak : ModItem
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.useAnimation = 40;
         Item.height = 28;
+        Item.useAnimation = Item.useTime = 20;
     }
     public override void AddRecipes()
     {
