@@ -43,10 +43,9 @@ public class CursedFlamelash : ModProjectile
         if (Main.rand.NextBool(5) && Projectile.position.Distance(Projectile.oldPos[1]) > 0.2f)
         {
             Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.CursedTorch, Projectile.velocity.RotateRandom(0.4f) * Main.rand.NextFloat(0.1f,0.2f));
-            d.noGravity = !Main.rand.NextBool(3);
+            d.noGravity = true;
             d.scale = (Main.rand.NextFloat(1, 2));
             d.fadeIn = (Main.rand.NextFloat(1.5f, 2.5f));
-            d.noLight = true;
         }
 
         if (Projectile.position.Distance(Projectile.oldPos[1]) < 0.2f && Main.rand.NextBool(2))
@@ -54,7 +53,7 @@ public class CursedFlamelash : ModProjectile
             Dust d2 = Dust.NewDustPerfect(Main.rand.NextVector2FromRectangle(Projectile.Hitbox), DustID.CursedTorch, Main.rand.NextVector2Circular(1,2));
             d2.noGravity = Main.rand.NextBool(6);
             d2.scale = (Main.rand.NextFloat(2, 3));
-            d2.noLight = true;
+            //d2.noLight = true;
             if (!d2.noGravity)
             {
                 d2.scale *= 0.2f;
@@ -87,11 +86,10 @@ public class CursedFlamelash : ModProjectile
                     d.noGravity = !Main.rand.NextBool(3);
                     d.scale = (Main.rand.NextFloat(0.25f, 0.5f) * i2) - (decreaseBy * i);
                     d.fadeIn = (Main.rand.NextFloat(0.75f, 1f) * i2) - (decreaseBy * i * 2);
-                    d.noLight = true;
+                    //d.noLight = true;
                     if (!d.noGravity)
                     {
                         d.scale *= 0.5f;
-                        d.noLightEmittence= true;
                     }
                 }
             }
@@ -102,7 +100,6 @@ public class CursedFlamelash : ModProjectile
             int D = Dust.NewDust(Projectile.Center, 0, 0, DustID.CursedTorch, 0, 0, 0, default, 3);
             Main.dust[D].color = new Color(255, 255, 255, 0);
             Main.dust[D].noGravity = !Main.rand.NextBool(3);
-            Main.dust[D].noLightEmittence = true;
             Main.dust[D].fadeIn = Main.rand.NextFloat(0f, 2f);
             Main.dust[D].velocity = Main.rand.NextVector2Circular(4,6).RotatedBy(Projectile.rotation);
         }
