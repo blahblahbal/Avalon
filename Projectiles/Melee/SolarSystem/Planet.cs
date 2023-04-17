@@ -114,7 +114,6 @@ public abstract class Planet : ModProjectile
                                  (MathHelper.TwoPi / modPlayer.Planets[(int)Projectile.ai[0]].Count * positionNode.Value) +
                                  modPlayer.PlanetRotation[(int)Projectile.ai[0]]) * Radius);
             Vector2 heading = target - Projectile.Center;
-
             float multiplier = 1;
             switch ((int)Projectile.ai[0])
             {
@@ -123,27 +122,25 @@ public abstract class Planet : ModProjectile
                 case 2:
                 case 3:
                 case 4:
+                case 5:
                     multiplier = 1f;
                     break;
-                case 5:
-                    multiplier = 1.5f;
-                    break;
                 case 6:
-                    multiplier = 2.2f;
+                    multiplier = 1.8f;
                     break;
                 case 7:
-                    multiplier = 3.1f;
+                    multiplier = 2.6f;
                     break;
                 case 8:
-                    multiplier = 4f;
+                    multiplier = 3f;
                     break;
             }
 
             heading.Normalize();
-            heading *= new Vector2(2 * multiplier).Length();
-            Projectile.velocity = heading;
-            
-            if (Vector2.Distance(target, Projectile.Center) < 10)
+            heading *= new Vector2(3).Length();
+            Projectile.velocity = heading * multiplier;
+
+            if (Vector2.Distance(target, Projectile.Center) < 1)
             {
                 Projectile.ai[2] = 2;
             }

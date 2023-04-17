@@ -221,7 +221,7 @@ public class Sun : ModProjectile
                         planetSpawnTimer = 0;
                     }
                     break;
-
+                    #region old planet spawning
                     /*case 400:
                         // mercury
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
@@ -284,6 +284,7 @@ public class Sun : ModProjectile
                         Projectile.ai[2] = 2;
                         planetSpawnTimer = 0;
                         break;*/
+                    #endregion
             }
         }
         #endregion
