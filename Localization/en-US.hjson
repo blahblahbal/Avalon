@@ -2766,6 +2766,11 @@ Mods: {
 				DisplayName: Cursed Flamelash
 				Tooltip: Summons a controllable ball of cursed flames
 			}
+
+			DecorativeStaminaPotion: {
+				DisplayName: Decorative Stamina Potion
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -2838,6 +2843,7 @@ Mods: {
 			HellboundLizard.DisplayName: Hellbound Lizard
 			EctoHand.DisplayName: Ecto Hand
 			Librarian.DisplayName: Librarian
+			MineralSlime.DisplayName: Mineral Slime
 		}
 
 		Buffs: {

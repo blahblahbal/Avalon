@@ -7,13 +7,13 @@ using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.Hardmode;
 
-public class OreSlime : ModNPC
+public class MineralSlime : ModNPC
 {
-    int[] Ores = {12,699,11,700,14,701,13,702,173};
-    Color[] OreColor = { Color.Orange, Color.Tan, Color.IndianRed, Color.DarkSlateGray, Color.White, Color.DarkSeaGreen, Color.Gold, Color.PaleTurquoise, Color.DarkSlateBlue };
-    int[] OreDusts = { DustID.Copper, DustID.Tin, DustID.Iron, DustID.Lead, DustID.Silver, DustID.Tungsten, DustID.Gold, DustID.Platinum, DustID.Obsidian };
+    int[] Ores = {364,1104,365,1105,366,1106};
+    Color[] OreColor = { Color.DodgerBlue,Color.OrangeRed,Color.MediumTurquoise,Color.Magenta,Color.MediumVioletRed,Color.Gray };
+    int[] OreDusts = { DustID.Cobalt, DustID.Palladium, DustID.Mythril, DustID.Orichalcum, DustID.Adamantite, DustID.Titanium};
     int WhichOre;
     public override void OnSpawn(IEntitySource source)
     {
@@ -73,17 +73,18 @@ public class OreSlime : ModNPC
 
     public override void SetDefaults()
     {
-        NPC.damage = 20;
-        NPC.lifeMax = 250;
-        NPC.defense = 10;
+        NPC.damage = 60;
+        NPC.lifeMax = 750;
+        NPC.defense = 20;
         NPC.width = 36;
         NPC.aiStyle = 1;
         NPC.value = 1000f;
-        NPC.knockBackResist = 0.1f;
+        NPC.knockBackResist = 0.07f;
         NPC.height = 24;
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.alpha = 128;
+        NPC.scale = 1.2f;
         //Banner = NPC.type;
         //BannerItem = ModContent.ItemType<AdamantiteSlimeBanner>();
     }
@@ -92,7 +93,7 @@ public class OreSlime : ModNPC
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
             BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
-            new FlavorTextBestiaryInfoElement("Gelatinous, but filled with minerals."),
+            new FlavorTextBestiaryInfoElement("Gelatinous, but filled with ores."),
         });
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
@@ -150,7 +151,7 @@ public class OreSlime : ModNPC
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
-        spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon
+        spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon && Main.hardMode
             ? 0.00526f * AvalonGlobalNPC.ModSpawnRate
             : 0f;
 }

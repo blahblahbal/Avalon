@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -16,34 +11,39 @@ namespace Avalon.Common
     {
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
-            if (npc.netID == NPCID.BlazingWheel)
+            if (Main.expertMode)
             {
-                npc.scale *= 1.5f;
-                npc.Size *= 1.5f;
+                if (npc.netID == NPCID.BlazingWheel)
+                {
+                    npc.scale *= 1.5f;
+                    npc.Size *= 1.5f;
+                }
+                //                                    ⛧ SCARY NUMBR OMGOMG ⛧
+                if (npc.netID is 25 or 30 or 33 or 112 or 665 or 666)
+                {
+                    npc.dontTakeDamage = true;
+                }
             }
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            if(Main.rand.NextBool(5) && Main.expertMode && npc.netID is -6 or 16 or -5) 
+            if (Main.expertMode)
             {
-                target.AddBuff(BuffID.Blackout, 60 * 10);
+                if (Main.rand.NextBool(5) && Main.expertMode && npc.netID is -6 or 16 or -5)
+                {
+                    target.AddBuff(BuffID.Blackout, 60 * 10);
+                }
             }
         }
-
         public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
         {
-            #region Cursed Skull
-            if (npc.netID == NPCID.CursedSkull && npc.ai[2] is > -160 and < 100)
-            {
-                npc.ai[2] -= damageDone * 2;
-            }
-            if (npc.netID == NPCID.CursedSkull && npc.ai[2] > 100)
-            {
-                npc.ai[2] = -100;
-            }
-            #endregion Cursed Skull
+            OnHitByAnything(npc,player,hit,damageDone);
         }
         public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
+        {
+            OnHitByAnything(npc, projectile, hit, damageDone);
+        }
+        void OnHitByAnything(NPC npc, Entity attacker, NPC.HitInfo hit, int damageDone)
         {
             #region Cursed Skull
             if (npc.netID == NPCID.CursedSkull && npc.ai[2] is > -160 and < 100)
@@ -62,10 +62,6 @@ namespace Avalon.Common
             if (Main.expertMode)
             {
                 #region Slimes
-                if (npc.netID is 25 or 30 or 33)
-                {
-                    npc.dontTakeDamage = true;
-                }
                 if (npc.netID is -9 or -8 or -7 or -6 or 81 or -1 or 200 or -2 or 180 or 141) // lots of slimes
                 {
                     npc.ai[0]++;
@@ -117,11 +113,32 @@ namespace Avalon.Common
                 }
                 #endregion Cursed Skull
                 #region Meteor Head
-                if(npc.netID == NPCID.MeteorHead)
+                if(npc.netID == 23)
                 {
                     npc.position += npc.velocity * 2;
                 }
                 #endregion Meteor Head
+                #region Blazing Wheel
+                if (npc.netID == 72)
+                {
+                    npc.ReflectProjectiles(npc.Hitbox);
+                }
+                #endregion Blazing Wheel
+            }
+        }
+        public override void OnKill(NPC npc)
+        {
+            if (Main.expertMode)
+            {
+                //if (npc.netID == NPCID.SandSlime)
+                //{
+                //    for (int i = 0; i < Main.rand.Next(3, 10); i++)
+                //    {
+                //        Projectile p = Projectile.NewProjectileDirect(npc.GetSource_FromThis(), npc.Center, new Vector2(Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-12, -8)), ProjectileID.SandBallFalling, npc.damage, 0, Main.myPlayer,2f);
+                //        p.friendly = false;
+                //        p.timeLeft = 300;
+                //    }
+                //}
             }
         }
     }
