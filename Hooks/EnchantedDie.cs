@@ -8,19 +8,18 @@ namespace Avalon.Hooks
     {
         protected override void Apply()
         {
-            On_Main.DamageVar_float_float += OnDamageVarFF;
+            On_Main.DamageVar_float_int_float += OnDamageVarFIF;
         }
-
-        private static int OnDamageVarFF(On_Main.orig_DamageVar_float_float orig, float dmg, float luck = 0f)
+        private static int OnDamageVarFIF(On_Main.orig_DamageVar_float_int_float orig, float dmg, int percent, float luck)
         {
             if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().EnchantedDie)
             {
-                float num = dmg * (1f + Main.rand.Next(-500, 501) * 0.01f);
+                float num = dmg * (1f + Main.rand.Next(-45, 46) * 0.01f);
                 if (luck > 0f)
                 {
                     if (Main.rand.NextFloat() < luck)
                     {
-                        float num2 = dmg * (1f + Main.rand.Next(-500, 501) * 0.01f);
+                        float num2 = dmg * (1f + Main.rand.Next(-45, 46) * 0.01f);
                         if (num2 > num)
                         {
                             num = num2;
@@ -29,7 +28,7 @@ namespace Avalon.Hooks
                 }
                 else if (luck < 0f && Main.rand.NextFloat() < 0f - luck)
                 {
-                    float num3 = dmg * (1f + Main.rand.Next(-500, 501) * 0.01f);
+                    float num3 = dmg * (1f + Main.rand.Next(-45, 46) * 0.01f);
                     if (num3 < num)
                     {
                         num = num3;
@@ -37,7 +36,7 @@ namespace Avalon.Hooks
                 }
                 return (int)Math.Round(num);
             }
-            return orig(dmg, luck);
+            return orig(dmg, percent, luck);
         }
     }
 }

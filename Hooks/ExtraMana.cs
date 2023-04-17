@@ -74,7 +74,7 @@ public class ExtraMana : ModHook
         {
             PlayerStatsSnapshot snap = (PlayerStatsSnapshot)snapshot.GetValue(self);
             var field = typeof(FancyClassicPlayerResourcesDisplaySet).GetField("_starCount", BindingFlags.Instance | BindingFlags.NonPublic);
-            int val = snap.ManaMax / (int)(MaxManaCrystalsToDisplay * (snap.ManaMax / 100));
+            int val = snap.ManaMax / (MaxManaCrystalsToDisplay * (snap.ManaMax / 100));
             if (val > 10)
             {
                 val = RoundToNearest10(val);
