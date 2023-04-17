@@ -40,7 +40,7 @@ public abstract class Planet : ModProjectile
         Vector2 frameOrigin = frame.Size() / 2f;
 
         int start = 1;
-        if (PlanetName == "Mercury") start = 3;
+        if (PlanetName == "Mercury" || PlanetName == "Pluto") start = 3;
         if (PlanetName == "Neptune") start = 4;
         float oof = 1f;
         for (int i = start; i < Projectile.oldPos.Length; i++)
@@ -133,6 +133,9 @@ public abstract class Planet : ModProjectile
                     break;
                 case 7:
                     multiplier = 3.1f;
+                    break;
+                case 8:
+                    multiplier = 4f;
                     break;
             }
 

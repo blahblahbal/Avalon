@@ -2829,6 +2829,7 @@ Mods: {
 			CursedFlamelashExplosion.DisplayName: Cursed Flamelash Explosion
 			DesertBeakFeather.DisplayName: Beak's Feather
 			DesertBeakSandstorm.DisplayName: Beak's Sandstorm
+			Pluto.DisplayName: Pluto
 		}
 
 		NPCs: {

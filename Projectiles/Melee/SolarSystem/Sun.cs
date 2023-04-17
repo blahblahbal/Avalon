@@ -14,6 +14,7 @@ public class Sun : ModProjectile
     int planetSpawnTimer = 0;
     int dustTimer = 0;
     bool dontSnapBack;
+    bool spawnPluto;
 
     public override void SetDefaults()
     {
@@ -30,6 +31,7 @@ public class Sun : ModProjectile
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
         dontSnapBack = true;
+        spawnPluto = Main.rand.NextBool(10);
     }
     public override void SendExtraAI(BinaryWriter writer)
     {
@@ -79,55 +81,209 @@ public class Sun : ModProjectile
             switch (planetSpawnTimer)
             {
                 case 50:
-                    // mercury
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                        Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 1.2f),
-                        Projectile.knockBack, ai0: 0, ai1: Projectile.whoAmI);
+                    if (spawnPluto)
+                    {
+                        // pluto, 1 in 10 chance
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Pluto>(), (int)(Projectile.damage * 0.65f),
+                            Projectile.knockBack, ai0: 8, ai1: Projectile.whoAmI);
+                    }
+                    else
+                    {
+                        // neptune
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
+                            Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
+                    }
                     break;
                 case 100:
-                    // venus
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                        Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 1.12f),
-                        Projectile.knockBack, ai0: 1, ai1: Projectile.whoAmI);
+                    if (spawnPluto)
+                    {
+                        // neptune
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
+                            Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
+                    }
+                    else
+                    {
+                        // uranus
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.71f),
+                            Projectile.knockBack, ai0: 6, ai1: Projectile.whoAmI);
+                    }
                     break;
                 case 150:
-                    // earth
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                        Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 1.04f),
-                        Projectile.knockBack, ai0: 2, ai1: Projectile.whoAmI);
+                    if (spawnPluto)
+                    {
+                        // uranus
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.77f),
+                            Projectile.knockBack, ai0: 6, ai1: Projectile.whoAmI);
+                    }
+                    else
+                    {
+                        // saturn
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.84f),
+                            Projectile.knockBack, ai0: 5, ai1: Projectile.whoAmI);
+                    }
                     break;
                 case 200:
-                    // mars
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                        Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.98f),
-                        Projectile.knockBack, ai0: 3, ai1: Projectile.whoAmI);
+                    if (spawnPluto)
+                    {
+                        // saturn
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.84f),
+                            Projectile.knockBack, ai0: 5, ai1: Projectile.whoAmI);
+                    }
+                    else
+                    {
+                        // jupiter
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.9f),
+                            Projectile.knockBack, ai0: 4, ai1: Projectile.whoAmI);
+                    }
                     break;
                 case 250:
-                    // jupiter
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                        Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.9f),
-                        Projectile.knockBack, ai0: 4, ai1: Projectile.whoAmI);
+                    if (spawnPluto)
+                    {
+                        // jupiter
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.9f),
+                            Projectile.knockBack, ai0: 4, ai1: Projectile.whoAmI);
+                    }
+                    else
+                    {
+                        // mars
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.98f),
+                            Projectile.knockBack, ai0: 3, ai1: Projectile.whoAmI);
+                    }
                     break;
                 case 300:
-                    // saturn
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                        Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.84f),
-                        Projectile.knockBack, ai0: 5, ai1: Projectile.whoAmI);
+                    if (spawnPluto)
+                    {
+                        // mars
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.98f),
+                            Projectile.knockBack, ai0: 3, ai1: Projectile.whoAmI);
+                    }
+                    else
+                    {
+                        // earth
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 1.04f),
+                            Projectile.knockBack, ai0: 2, ai1: Projectile.whoAmI);
+                    }
                     break;
                 case 350:
-                    // uranus
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                        Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.77f),
-                        Projectile.knockBack, ai0: 6, ai1: Projectile.whoAmI);
+                    if (spawnPluto)
+                    {
+                        // earth
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 1.04f),
+                            Projectile.knockBack, ai0: 2, ai1: Projectile.whoAmI);
+                    }
+                    else
+                    {
+                        // venus
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 1.12f),
+                            Projectile.knockBack, ai0: 1, ai1: Projectile.whoAmI);
+                    }
                     break;
                 case 400:
-                    // neptune
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                        Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
-                        Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
-                    Projectile.ai[2] = 2;
-                    planetSpawnTimer = 0;
+                    if (spawnPluto)
+                    {
+                        // venus
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 1.12f),
+                            Projectile.knockBack, ai0: 1, ai1: Projectile.whoAmI);
+                    }
+                    else
+                    {
+                        // mercury
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 1.2f),
+                            Projectile.knockBack, ai0: 0, ai1: Projectile.whoAmI);
+                        Projectile.ai[2] = 2;
+                        planetSpawnTimer = 0;
+                    }
                     break;
+                case 450:
+                    if (spawnPluto)
+                    {
+                        // mercury
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 1.2f),
+                            Projectile.knockBack, ai0: 0, ai1: Projectile.whoAmI);
+                        Projectile.ai[2] = 2;
+                        planetSpawnTimer = 0;
+                    }
+                    break;
+
+                    /*case 400:
+                        // mercury
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 1.2f),
+                            Projectile.knockBack, ai0: 0, ai1: Projectile.whoAmI);
+                        break;
+                    case 100:
+                        // venus
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 1.12f),
+                            Projectile.knockBack, ai0: 1, ai1: Projectile.whoAmI);
+                        break;
+                    case 150:
+                        // earth
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 1.04f),
+                            Projectile.knockBack, ai0: 2, ai1: Projectile.whoAmI);
+                        break;
+                    case 200:
+                        // mars
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.98f),
+                            Projectile.knockBack, ai0: 3, ai1: Projectile.whoAmI);
+                        break;
+                    case 250:
+                        // jupiter
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.9f),
+                            Projectile.knockBack, ai0: 4, ai1: Projectile.whoAmI);
+                        break;
+                    case 300:
+                        // saturn
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.84f),
+                            Projectile.knockBack, ai0: 5, ai1: Projectile.whoAmI);
+                        break;
+                    case 350:
+                        // uranus
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.77f),
+                            Projectile.knockBack, ai0: 6, ai1: Projectile.whoAmI);
+                        break;
+                    case 5210:
+                        // neptune
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
+                            Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
+                        if (!spawnPluto)
+                        {
+                            Projectile.ai[2] = 2;
+                            planetSpawnTimer = 0;
+                        }
+                        break;
+                    case 450:
+                        // pluto, 1 in 10 chance
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
+                            Projectile.velocity, ModContent.ProjectileType<Pluto>(), (int)(Projectile.damage * 0.65f),
+                            Projectile.knockBack, ai0: 8, ai1: Projectile.whoAmI);
+
+                        Projectile.ai[2] = 2;
+                        planetSpawnTimer = 0;
+                        break;*/
             }
         }
         #endregion

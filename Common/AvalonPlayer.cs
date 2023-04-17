@@ -20,8 +20,9 @@ namespace Avalon.Common;
 public class AvalonPlayer : ModPlayer
 {
     #region solar system vars
-    public LinkedList<int>[] Planets { get; } = new LinkedList<int>[8]
+    public LinkedList<int>[] Planets { get; } = new LinkedList<int>[9]
     {
+        new(),
         new(),
         new(),
         new(),
@@ -35,7 +36,7 @@ public class AvalonPlayer : ModPlayer
     {
         return Planets[index].AddLast(Planets[index].Count);
     }
-    public float[] PlanetRotation { get; set; } = new float[8];
+    public float[] PlanetRotation { get; set; } = new float[9];
 
     public enum Planet
     {
@@ -125,6 +126,7 @@ public class AvalonPlayer : ModPlayer
         PlanetRotation[5] = (PlanetRotation[5] % MathHelper.TwoPi) + 0.03f;
         PlanetRotation[6] = (PlanetRotation[6] % MathHelper.TwoPi) + 0.042f;
         PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.05f;
+        PlanetRotation[8] = (PlanetRotation[8] % MathHelper.TwoPi) + 0.035f;
     }
 
     public LinkedListNode<int> ObtainExistingPlanet(int index, int planetNum)
