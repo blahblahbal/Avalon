@@ -13,6 +13,7 @@ public class Sun : ModProjectile
     Vector2 mousePosition = Vector2.Zero;
     int planetSpawnTimer = 0;
     int dustTimer = 0;
+    bool dontSnapBack;
 
     public override void SetDefaults()
     {
@@ -24,21 +25,23 @@ public class Sun : ModProjectile
         Projectile.friendly = true;
         Projectile.DamageType = DamageClass.Melee;
         Projectile.tileCollide = false;
-        Projectile.ownerHitCheck = true;
         Projectile.extraUpdates = 1;
         Projectile.timeLeft = 300;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
+        dontSnapBack = true;
     }
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(planetSpawnTimer);
         writer.Write(dustTimer);
+        writer.Write(dontSnapBack);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         planetSpawnTimer = reader.ReadInt32();
         dustTimer = reader.ReadInt32();
+        dontSnapBack = reader.ReadBoolean();
     }
     public override void AI()
     {
@@ -54,7 +57,15 @@ public class Sun : ModProjectile
 
         if (Main.player[Projectile.owner].channel)
         {
-            Projectile.ai[0] = 1;
+            if (Main.player[Projectile.owner].HeldItem.shoot == Type && dontSnapBack)
+            {
+                Projectile.ai[0] = 1;
+            }
+            else
+            {
+                dontSnapBack = false;
+                return;
+            }
         }
         else
         {

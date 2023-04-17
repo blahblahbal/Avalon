@@ -25,7 +25,6 @@ public class Mercury : Planet
         Projectile.friendly = true;
         Projectile.DamageType = DamageClass.Melee;
         Projectile.tileCollide = false;
-        Projectile.ownerHitCheck = true;
         Projectile.extraUpdates = 1;
         Projectile.timeLeft = 300;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));

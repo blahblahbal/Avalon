@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -73,9 +72,9 @@ public abstract class Planet : ModProjectile
         {
             Projectile.ai[2] = 1;
         }
-        else Projectile.timeLeft = 600;
+        else Projectile.timeLeft = 300;
 
-        if (Projectile.ai[2] == 0)
+        if (Projectile.ai[2] == 2)
         {
             // Get position in circle
             if (hostPosition == -1)
@@ -98,6 +97,53 @@ public abstract class Planet : ModProjectile
         else if (Projectile.ai[2] == 1)
         {
             Projectile.velocity = Vector2.Normalize(Main.projectile[(int)Projectile.ai[1]].Center - player.Center) * 8f;
+        }
+        else if (Projectile.ai[2] == 0)
+        {
+            if (hostPosition == -1)
+            {
+                positionNode ??= modPlayer.HandlePlanets((int)Projectile.ai[0]);
+            }
+            else
+            {
+                positionNode ??= modPlayer.ObtainExistingPlanet(hostPosition, (int)Projectile.ai[0]);
+            }
+
+            Vector2 target = Main.projectile[(int)Projectile.ai[1]].Center +
+                             (Vector2.One.RotatedBy(
+                                 (MathHelper.TwoPi / modPlayer.Planets[(int)Projectile.ai[0]].Count * positionNode.Value) +
+                                 modPlayer.PlanetRotation[(int)Projectile.ai[0]]) * Radius);
+            Vector2 heading = target - Projectile.Center;
+
+            float multiplier = 1;
+            switch ((int)Projectile.ai[0])
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    multiplier = 1f;
+                    break;
+                case 5:
+                    multiplier = 1.5f;
+                    break;
+                case 6:
+                    multiplier = 2.2f;
+                    break;
+                case 7:
+                    multiplier = 3.1f;
+                    break;
+            }
+
+            heading.Normalize();
+            heading *= new Vector2(2 * multiplier).Length();
+            Projectile.velocity = heading;
+            
+            if (Vector2.Distance(target, Projectile.Center) < 10)
+            {
+                Projectile.ai[2] = 2;
+            }
         }
     }
 }

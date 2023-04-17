@@ -19,7 +19,7 @@ namespace Avalon.Common
                     npc.Size *= 1.5f;
                 }
                 //                                    ⛧ SCARY NUMBR OMGOMG ⛧
-                if (npc.netID is 25 or 30 or 33 or 112 or 665 or 666)
+                if (npc.netID is NPCID.BurningSphere or NPCID.ChaosBall or NPCID.WaterSphere or NPCID.VileSpit or NPCID.ChaosBallTim) // making eow vile spit not destroyable is a bit much lol
                 {
                     npc.dontTakeDamage = true;
                 }
@@ -29,7 +29,7 @@ namespace Avalon.Common
         {
             if (Main.expertMode)
             {
-                if (Main.rand.NextBool(5) && Main.expertMode && npc.netID is -6 or 16 or -5)
+                if (Main.rand.NextBool(5) && Main.expertMode && npc.netID is NPCID.BlackSlime or NPCID.MotherSlime or NPCID.BabySlime)
                 {
                     target.AddBuff(BuffID.Blackout, 60 * 10);
                 }
@@ -62,7 +62,8 @@ namespace Avalon.Common
             if (Main.expertMode)
             {
                 #region Slimes
-                if (npc.netID is -9 or -8 or -7 or -6 or 81 or -1 or 200 or -2 or 180 or 141) // lots of slimes
+                if (npc.netID is NPCID.YellowSlime or NPCID.RedSlime or NPCID.PurpleSlime or NPCID.BlackSlime or
+                    NPCID.CorruptSlime or NPCID.Slimeling or NPCID.Slimer2 or NPCID.ToxicSludge or NPCID.Crimslime) // lots of slimes
                 {
                     npc.ai[0]++;
                 }
@@ -113,13 +114,13 @@ namespace Avalon.Common
                 }
                 #endregion Cursed Skull
                 #region Meteor Head
-                if(npc.netID == 23)
+                if(npc.netID == NPCID.MeteorHead)
                 {
                     npc.position += npc.velocity * 2;
                 }
                 #endregion Meteor Head
                 #region Blazing Wheel
-                if (npc.netID == 72)
+                if (npc.netID == NPCID.BlazingWheel)
                 {
                     npc.ReflectProjectiles(npc.Hitbox);
                 }
