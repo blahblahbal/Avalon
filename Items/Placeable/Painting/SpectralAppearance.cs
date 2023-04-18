@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-public class PhantasmalApparition : ModItem
+public class SpectralAppearance : ModItem
 {
     public override void SetStaticDefaults()
     {

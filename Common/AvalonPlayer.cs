@@ -69,8 +69,9 @@ public class AvalonPlayer : ModPlayer
     public bool tpStam = true;
     public int tpCD;
     public bool teleportVWasTriggered;
-    public bool TrapImmune;
     
+
+    #region accessories
     public bool PulseCharm;
     public bool ShadowCharm;
     public bool CloudGlove;
@@ -81,29 +82,35 @@ public class AvalonPlayer : ModPlayer
     public bool CrystalEdge;
     public bool MutatedStocking;
     public bool EyeoftheGods;
+    public bool TrapImmune;
+    #endregion
 
     #region buffs and debuffs
     public bool BrokenWeaponry;
     public bool Unloaded;
     public bool Lucky;
+    public bool Heartsick;
+    public bool AdvancedBattle;
+    public bool AdvancedCalming;
+    public int TimeSlowCounter;
     #endregion
 
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
     public int OldFallStart;
-    public bool AdvancedBattle;
-    public bool AdvancedCalming;
-    public int TimeSlowCounter;
-
+    
     public override void ResetEffects()
     {
         MagicCritDamage = 1f;
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
-        TrapImmune = false;
+        
         AdvancedBattle = false;
         AdvancedCalming = false;
         Lucky = false;
+        Heartsick = false;
+
+        TrapImmune = false;
         PulseCharm = false;
         ShadowCharm = false;
         CritDamageMult = 1f;

@@ -48,6 +48,11 @@ Mods: {
 		}
 
 		Items: {
+            Quack: {
+				DisplayName: Quack
+				Tooltip: 'May annoy others'
+			}
+
 			AeonsEternity: {
 				DisplayName: Aeons Eternity
 				Tooltip: Occasionally fires an exploding constellation
@@ -1628,6 +1633,11 @@ Mods: {
 				Tooltip: -6 defense, +12% melee damage
 			}
 
+			HeartsickPotion: {
+				DisplayName: Heartsick Potion
+				Tooltip: Life hearts restore 30 life instead of 20
+			}
+
 			ImmortalityPotion: {
 				DisplayName: Immortality Potion
 				Tooltip:
@@ -1660,6 +1670,11 @@ Mods: {
 			MagnetPotion: {
 				DisplayName: Magnet Potion
 				Tooltip: Increases item grab range
+			}
+
+			NinjaPotion: {
+				DisplayName: Ninja Potion
+				Tooltip: Grants a chance to dodge attacks
 			}
 
 			RoguePotion: {
@@ -2539,6 +2554,11 @@ Mods: {
 				Tooltip: "'B. Harold'"
 			}
 
+			SpectralAppearance: {
+				DisplayName: Spectral Appearance
+				Tooltip: "'B. Harold'"
+			}
+
 			Trespassing: {
 				DisplayName: Trespassing
 				Tooltip: "'B. Harold'"
@@ -2793,6 +2813,11 @@ Mods: {
 				DisplayName: Decorative Stamina Potion
 				Tooltip: ""
 			}
+
+			Quack: {
+				DisplayName: Quack
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -2918,6 +2943,11 @@ Mods: {
 			GPS: {
 				DisplayName: GPS
 				Description: GPS effect
+			}
+
+			Heartsick: {
+				DisplayName: Heartsick
+				Description: Hearts restore 30 life
 			}
 
 			ImmortalityCooldown: {
@@ -3288,6 +3318,11 @@ Mods: {
 			Scrambled: {
 				DisplayName: Scrambled Stats
 				Description: Your stats are scrambled
+			}
+
+			Ninja: {
+				DisplayName: Ninja
+				Description: You have a chance to dodge attacks
 			}
 		}
 
