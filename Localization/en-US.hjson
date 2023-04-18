@@ -1,4 +1,3 @@
-
 Mods: {
 	Avalon: {
 		Keybinds: {
@@ -532,6 +531,15 @@ Mods: {
 			SixSidedDie: {
 				DisplayName: Six-Sided Die
 				Tooltip: Increases damage variance
+			}
+
+			StaminaFlower: {
+				DisplayName: Stamina Flower
+				Tooltip:
+					'''
+					Increases maximum stamina by 90
+					Automatically uses stamina potions when needed
+					'''
 			}
 
 			LoadedDie: {
@@ -2692,7 +2700,7 @@ Mods: {
 			}
 
 			ImperviousBrickWallItem: {
-				DisplayName: Impervious Brick Wall Item
+				DisplayName: Impervious Brick Wall
 				Tooltip: ""
 			}
 

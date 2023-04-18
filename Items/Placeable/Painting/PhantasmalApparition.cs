@@ -1,15 +1,15 @@
-using Avalon.Walls;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Placeable.Walls;
+namespace Avalon.Items.Placeable.Painting;
 
-class ImperviousBrickWallItem : ModItem
+public class PhantasmalApparition : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 400;
+        Item.ResearchUnlockCount = 1;
     }
 
     public override void SetDefaults()
@@ -17,18 +17,16 @@ class ImperviousBrickWallItem : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
+        Item.rare = ItemRarityID.Cyan;
+        Item.createTile = ModContent.TileType<Tiles.Paintings>();
+        Item.placeStyle = 13;
         Item.width = dims.Width;
         Item.useTurn = true;
-        Item.useTime = 7;
-        Item.createWall = ModContent.WallType<ImperviousBrickWall>();
+        Item.useTime = 10;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
+        Item.value = Item.sellPrice(0, 0, 10, 0);
         Item.useAnimation = 15;
         Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.ImperviousBrick>()).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
     }
 }

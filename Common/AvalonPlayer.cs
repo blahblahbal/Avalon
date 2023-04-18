@@ -14,6 +14,7 @@ using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Avalon.Common;
 
@@ -148,7 +149,17 @@ public class AvalonPlayer : ModPlayer
 
         return Planets[planetNum].Find(index);
     }
-
+    public override void SaveData(TagCompound tag)
+    {
+        tag["Avalon:StatStam"] = Player.GetModPlayer<AvalonStaminaPlayer>().StatStam;
+    }
+    public override void LoadData(TagCompound tag)
+    {
+        if (tag.ContainsKey("Avalon:StatStam"))
+        {
+            Player.GetModPlayer<AvalonStaminaPlayer>().StatStam = tag.Get<int>("Avalon:StatStam");
+        }
+    }
     public override void PostUpdateEquips()
     {
         for (int i = 0; i <= 9; i++)
@@ -326,7 +337,7 @@ public class AvalonPlayer : ModPlayer
     {
         if (CrystalEdge)
         {
-            modifiers.FinalDamage += 15;
+            modifiers.FlatBonusDamage += 15;
         }
         // if (modifiers.CritDamage)
         // {
@@ -338,7 +349,7 @@ public class AvalonPlayer : ModPlayer
     {
         if (CrystalEdge)
         {
-            modifiers.FinalDamage += 15;
+            modifiers.FlatBonusDamage += 15;
         }
         // if (crit)
         // {
