@@ -75,7 +75,9 @@ public class AvalonPlayer : ModPlayer
     public bool CloudGlove;
     public float BonusKB = 1f;
     public bool AncientHeadphones;
-    public bool EnchantedDie;
+    public bool SixSidedDie;
+    public bool LoadedDie;
+    public bool CrystalEdge;
     public bool MutatedStocking;
     public bool EyeoftheGods;
 
@@ -106,8 +108,10 @@ public class AvalonPlayer : ModPlayer
         CritDamageMult = 1f;
         BonusKB = 1f;
         AncientHeadphones = false;
-        EnchantedDie = false;
+        SixSidedDie = false;
         MutatedStocking = false;
+        CrystalEdge = false;
+        LoadedDie = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
         if (Player.whoAmI == Main.myPlayer)
         {
@@ -317,9 +321,13 @@ public class AvalonPlayer : ModPlayer
             }
         }
     }
-
     /// <inheritdoc />
-    public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers) {
+    public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
+    {
+        if (CrystalEdge)
+        {
+            modifiers.FinalDamage += 15;
+        }
         // if (modifiers.CritDamage)
         // {
         //     damage += MultiplyMeleeCritDamage(damage);
@@ -328,6 +336,10 @@ public class AvalonPlayer : ModPlayer
 
     public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
+        if (CrystalEdge)
+        {
+            modifiers.FinalDamage += 15;
+        }
         // if (crit)
         // {
         //     if (proj.DamageType == DamageClass.Magic)
@@ -346,8 +358,10 @@ public class AvalonPlayer : ModPlayer
     }
 
     /// <inheritdoc />
-    public override void ModifyHurt(ref Player.HurtModifiers modifiers) {
-        if (!modifiers.PvP) {
+    public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+    {
+        if (!modifiers.PvP)
+        {
             return;
         }
         

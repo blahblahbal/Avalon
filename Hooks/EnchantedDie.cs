@@ -12,7 +12,11 @@ namespace Avalon.Hooks
         }
         private static int OnDamageVarFIF(On_Main.orig_DamageVar_float_int_float orig, float dmg, int percent, float luck)
         {
-            if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().EnchantedDie)
+            if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().LoadedDie)
+            {
+                return (int)dmg;
+            }
+            else if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().SixSidedDie)
             {
                 float num = dmg * (1f + Main.rand.Next(-45, 46) * 0.01f);
                 if (luck > 0f)

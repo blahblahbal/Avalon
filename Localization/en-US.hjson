@@ -529,9 +529,23 @@ Mods: {
 				Tooltip: Tells the time
 			}
 
-			EnchantedDie: {
-				DisplayName: Enchanted Die
+			SixSidedDie: {
+				DisplayName: Six-Sided Die
 				Tooltip: Increases damage variance
+			}
+
+			LoadedDie: {
+				DisplayName: Loaded Die
+				Tooltip:
+					'''
+					Increases damage by 15
+					Disables damage variance
+					'''
+			}
+
+			CrystalEdge: {
+				DisplayName: Crystal Edge
+				Tooltip: Increases damage by 15
 			}
 
 			SandyStormcloudinaBottle: {

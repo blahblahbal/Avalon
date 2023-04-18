@@ -1,12 +1,11 @@
 using Avalon.Common;
-using Avalon.Items.Accessories.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
-public class EnchantedDie : ModItem
+public class SixSidedDie : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -22,7 +21,7 @@ public class EnchantedDie : ModItem
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetModPlayer<AvalonPlayer>().EnchantedDie = true;
+        player.GetModPlayer<AvalonPlayer>().SixSidedDie = true;
     }
     //public override void AddRecipes()
     //{
