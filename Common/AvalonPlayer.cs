@@ -83,6 +83,8 @@ public class AvalonPlayer : ModPlayer
     public bool MutatedStocking;
     public bool EyeoftheGods;
     public bool TrapImmune;
+    public bool BenevolentWard;
+    public int WardCD;
     #endregion
 
     #region buffs and debuffs
@@ -96,6 +98,8 @@ public class AvalonPlayer : ModPlayer
     public int TimeSlowCounter;
     public bool NinjaElixir;
     public bool NinjaPotion;
+    public bool Ward;
+    public int WardCurseDOT;
     #endregion
 
     public int FrameCount { get; private set; }
@@ -126,6 +130,9 @@ public class AvalonPlayer : ModPlayer
         MutatedStocking = false;
         CrystalEdge = false;
         LoadedDie = false;
+        BenevolentWard = false;
+        Ward = false;
+
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
         if (Player.whoAmI == Main.myPlayer)
         {
@@ -243,6 +250,9 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdate()
     {
+        WardCD--;
+        if (WardCD < 0) WardCD = 0;
+
         // Large gem inventory checking
         Player.gemCount = 0;
         gemCount++;
@@ -383,6 +393,16 @@ public class AvalonPlayer : ModPlayer
 
     public override void OnHurt(Player.HurtInfo info)
     {
+        if (BenevolentWard && Main.rand.NextBool(100) && !Player.HasBuff(ModContent.BuffType<Buffs.BenevolentWard>()) &&
+            !Player.HasBuff(ModContent.BuffType<WardCurse>()))
+        {
+            Player.AddBuff(ModContent.BuffType<Buffs.BenevolentWard>(), 8 * 60);
+        }
+        if (Ward)
+        {
+            WardCurseDOT += info.Damage;
+            info.Damage = 1;
+        }
         if (Player.whoAmI == Main.myPlayer && NinjaPotion && Main.rand.NextBool(10))
         {
             Player.NinjaDodge();

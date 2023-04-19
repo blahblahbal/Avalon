@@ -449,6 +449,16 @@ Mods: {
 					'''
 			}
 
+			BenevolentWard: {
+				DisplayName: Benevolent Ward
+				Tooltip:
+					'''
+					You have a chance to absorb all damage for 8 seconds when injured
+					After 8 seconds, you will take damage over time for 20 seconds
+					45 second cooldown
+					'''
+			}
+
 			PortablePylon: {
 				DisplayName: Portable Pylon
 				Tooltip:
@@ -3344,6 +3354,16 @@ Mods: {
 				DisplayName: Advanced Ninja
 				Description: You have a higher chance to dodge attacks
 			}
+
+			BenevolentWard: {
+				DisplayName: Benevolent Ward
+				Description: You are absorbing damage
+			}
+
+			WardCurse: {
+				DisplayName: Ward Curse
+				Description: Losing life
+			}
 		}
 
 		Tiles: {
@@ -3423,7 +3443,7 @@ Mods: {
 			EvilSelection: {
 				Contagion: {
 					Title: Contagion
-					Description: The contagion description
+					Description: An infested green biome that consists of a disgusting landscape filled with vile giant bacteria
 				}
 			}
 		}
