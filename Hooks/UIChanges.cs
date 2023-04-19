@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Reflection;
 using Avalon.Common;
-using Avalon.UI;
+using Avalon.UI.Next;
+using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using Terraria;
 using Terraria.UI;
 
-namespace Avalon.Hooks; 
+namespace Avalon.Hooks;
 
-public class UIChanges : ModHook
-{
-    protected override void Apply()
-    {
+public class UIChanges : ModHook {
+    protected override void Apply() {
         On_UIElement.Remove += OnUIElementRemove;
+        On_UIElement.GetElementAt += OnUIElementGetElementAt;
         IL_UIElement.Recalculate += ILUIElementRecalculate;
     }
 
@@ -22,14 +23,11 @@ public class UIChanges : ModHook
     /// </summary>
     /// <param name="orig">Delegate that calls the original method.</param>
     /// <param name="self">The calling UIElement instance.</param>
-    private static void OnUIElementRemove(On_UIElement.orig_Remove orig, Terraria.UI.UIElement self)
-    {
-        if (self.Parent is ExxoUIElement exxoParent)
-        {
+    private static void OnUIElementRemove(On_UIElement.orig_Remove orig, UIElement self) {
+        if (self.Parent is UI.ExxoUIElement exxoParent) {
             exxoParent.ElementsForRemoval.Enqueue(self);
         }
-        else
-        {
+        else {
             orig(self);
         }
     }
@@ -38,20 +36,35 @@ public class UIChanges : ModHook
     ///     Some trickery that changes default behaviour of Recalculate to only recalculate self when element is ExxoUIElement.
     /// </summary>
     /// <param name="il">The ILContext of the original method.</param>
-    private static void ILUIElementRecalculate(ILContext il)
-    {
+    private static void ILUIElementRecalculate(ILContext il) {
         var c = new ILCursor(il);
-        c.GotoNext(i => i.MatchCallvirt(typeof(Terraria.UI.UIElement).GetMethod(
-            nameof(Terraria.UI.UIElement.RecalculateChildren),
+        c.GotoNext(i => i.MatchCallvirt(typeof(UIElement).GetMethod(
+            nameof(UIElement.RecalculateChildren),
             BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly, null, Type.EmptyTypes, null)));
         c.Index--;
 
         ILLabel label = c.DefineLabel();
 
         c.Emit(OpCodes.Ldarg_0);
-        c.EmitDelegate<Func<Terraria.UI.UIElement, bool>>(element => element is ExxoUIElement);
+        c.EmitDelegate<Func<UIElement, bool>>(element => element is UI.ExxoUIElement);
         c.Emit(OpCodes.Brtrue, label)
             .GotoNext(i => i.MatchRet())
             .MarkLabel(label);
+    }
+
+    private static UIElement? OnUIElementGetElementAt(On_UIElement.orig_GetElementAt orig, UIElement self,
+                                                      Vector2 point) {
+        if (self is ExxoToVanillaUIAdapter exxoToVanillaUIAdapter) {
+            FakeEventTarget? fakeEventTarget =
+                exxoToVanillaUIAdapter.ExxoUIElement.GetElementAt(point.ToPoint())?.FakeEventTarget;
+
+            if (fakeEventTarget != null) {
+                fakeEventTarget.Parent = self;
+            }
+
+            return fakeEventTarget;
+        }
+
+        return orig(self, point);
     }
 }
