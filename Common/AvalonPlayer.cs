@@ -192,16 +192,16 @@ public class AvalonPlayer : ModPlayer
         }
         if (MutatedStocking)
         {
-            Player.maxRunSpeed += 0.3f;
+            Player.maxRunSpeed += 0.3f; // Buggy :)
             Player.gravity += 0.5f;
             Player.jumpSpeedBoost += 4f;
             Player.jumpHeight -= 6;
-            if (Player.velocity.Y != 0)
+            if (!Player.IsOnGround())
             {
-                Player.runAcceleration += 4f;
+                Player.runAcceleration += 1f;
                 Player.maxRunSpeed += 0.3f;
             }
-            if(Player.wingTime > 0 && Player.controlJump)
+            if (Player.wingTime > 0 && Player.controlJump)
             {
                 Player.velocity.Y += -0.5f * Player.gravDir;
             }
