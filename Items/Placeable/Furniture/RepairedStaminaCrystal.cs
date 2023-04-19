@@ -1,31 +1,31 @@
 using Avalon.Items.Consumables;
-using Avalon.Items.Potions.Other;
 using Avalon.Tiles.Furniture;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture
 {
-    public class DecorativeStaminaPotion : ModItem
+    public class RepairedStaminaCrystal : ModItem
     {
         public override void SetStaticDefaults()
         {
-            Item.ResearchUnlockCount = 30;
+            Item.ResearchUnlockCount = 10;
         }
-        public override void SetDefaults() 
+        public override void SetDefaults()
         {
-            Item.CloneDefaults(ItemID.PlaceableHealingPotion);
-            Item.createTile = ModContent.TileType<PlacedStaminaPotion>();
+            Item.CloneDefaults(ItemID.RepairedManaCrystal);
+            Item.createTile = ModContent.TileType<PlacedStaminaCrystal>();
             Item.placeStyle = 0;
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddTile(TileID.HeavyWorkBench).AddIngredient(ModContent.ItemType<LesserStaminaPotion>()).Register();
+            CreateRecipe().AddCondition(Condition.InGraveyard).AddTile(TileID.HeavyWorkBench).AddIngredient(ModContent.ItemType<StaminaCrystal>()).Register();
         }
     }
 }

@@ -2823,6 +2823,11 @@ Mods: {
 				DisplayName: Decorative Stamina Potion
 				Tooltip: ""
 			}
+
+			RepairedStaminaCrystal: {
+				DisplayName: Repaired Stamina Crystal
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
