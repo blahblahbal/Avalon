@@ -1,9 +1,15 @@
-using Avalon.Buffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
+using Avalon.DropConditions;
+using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Consumables;
+using Avalon.Items.Material;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
+using Avalon.Items.Other;
+using Avalon.Items.Placeable.Painting;
+using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.TownNPCs;
 using Microsoft.Xna.Framework;
@@ -22,6 +28,10 @@ public class AvalonGlobalNPC : GlobalNPC
 {
     public static float ModSpawnRate { get; set; } = 0.25f;
     public static int BleedTime = 60 * 7;
+
+    private const int RareChance = 700;
+    private const int UncommonChance = 50;
+    private const int VeryRareChance = 1000;
     /// <summary>
     ///     Finds a type of NPC.
     /// </summary>
@@ -401,6 +411,21 @@ public class AvalonGlobalNPC : GlobalNPC
             //}
         }
     }
+
+    public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+    {
+        if (npc.type is NPCID.BloodJelly or NPCID.Unicorn or NPCID.DarkMummy or NPCID.LightMummy && Main.rand.NextBool(9))
+        {
+            target.AddBuff(ModContent.BuffType<BrokenWeaponry>(), 60 * 7);
+        }
+        if (npc.type == NPCID.Mummy || npc.type == NPCID.FungoFish || npc.type == NPCID.Clinger) // || npc.type == ModContent.NPCType<GrossyFloat>())
+        {
+            if (Main.rand.NextBool(9))
+            {
+                target.AddBuff(ModContent.BuffType<Unloaded>(), 60 * 7);
+            }
+        }
+    }
     public override bool CheckDead(NPC npc)
     {
         if (npc.townNPC && npc.life <= 0)
@@ -493,8 +518,80 @@ public class AvalonGlobalNPC : GlobalNPC
 
     public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
     {
+        var hardModeCondition = new HardmodeOnly();
         var notFromStatueCondition = new Conditions.NotFromStatue();
         var notExpertCondition = new Conditions.NotExpert();
+
+        var preHardModeCondition = new Invert(hardModeCondition);
+        //var superHardModeCondition = new Superhardmode();
+        //var hardmodePreSuperHardmodeCondition =
+        //    new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
+
+        switch (npc.type)
+        {
+            case NPCID.Unicorn:
+            case NPCID.BloodJelly:
+            case NPCID.LightMummy:
+            case NPCID.DarkMummy:
+            case NPCID.BloodMummy:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HiddenBlade>(), 50));
+                break;
+            case NPCID.Mummy:
+            case NPCID.FungoFish:
+            case NPCID.Clinger:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AmmoMagazine>(), 50));
+                break;
+            case NPCID.Duck or NPCID.Duck2 or NPCID.DuckWhite or NPCID.DuckWhite2:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Quack>(), VeryRareChance));
+                break;
+            case NPCID.EaterofSouls:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EvilOuroboros>(), RareChance));
+                break;
+            case NPCID.KingSlime:
+                npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<BandofSlime>(),
+                    3));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BirthofaMonster>(), 9));
+                break;
+            case NPCID.DialatedEye:
+                npcLoot.Add(ItemDropRule.Common(ItemID.BlackLens, 40));
+                break;
+            case NPCID.UndeadMiner:
+                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersPickaxe>(), 30));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersSword>(), 30));
+                break;
+            case NPCID.BoneSerpentHead:
+                npcLoot.Add(ItemDropRule.Common(ItemID.Sunfury, 20));
+                break;
+            case NPCID.WyvernHead:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalTotem>(), 2));
+                break;
+            case NPCID.Harpy:
+                npcLoot.Add(ItemDropRule.ByCondition(hardModeCondition, ItemID.ShinyRedBalloon, 50));
+                break;
+            case NPCID.Vulture:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Beak>(), 3));
+                break;
+            case NPCID.QueenBee:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FightoftheBumblebee>(), 8));
+                break;
+            case NPCID.EyeofCthulhu:
+                npcLoot.Add(ItemDropRule.ByCondition(
+                    preHardModeCondition,
+                    ItemID.BloodMoonStarter,
+                    10, 1, 1, 3));
+
+                //npcLoot.Add(ItemDropRule.ByCondition(
+                //    hardmodePreSuperHardmodeCondition,
+                //    ItemID.BloodMoonStarter,
+                //    100, 1, 1, 15));
+
+                //npcLoot.Add(ItemDropRule.ByCondition(
+                //    superHardModeCondition,
+                //    ItemID.BloodMoonStarter,
+                //    100, 1, 1, 7));
+
+                break;
+        }
 
         #region mystical tome mats
         if (npc.type is NPCID.ManEater or NPCID.Snatcher or NPCID.AngryTrapper)

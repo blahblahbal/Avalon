@@ -14,6 +14,7 @@ using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Avalon.Common;
 
@@ -68,46 +69,57 @@ public class AvalonPlayer : ModPlayer
     public bool tpStam = true;
     public int tpCD;
     public bool teleportVWasTriggered;
-    public bool TrapImmune;
     
+
+    #region accessories
     public bool PulseCharm;
     public bool ShadowCharm;
     public bool CloudGlove;
     public float BonusKB = 1f;
     public bool AncientHeadphones;
-    public bool EnchantedDie;
+    public bool SixSidedDie;
+    public bool LoadedDie;
+    public bool CrystalEdge;
     public bool MutatedStocking;
     public bool EyeoftheGods;
+    public bool TrapImmune;
+    #endregion
 
     #region buffs and debuffs
     public bool BrokenWeaponry;
     public bool Unloaded;
     public bool Lucky;
+    public bool Heartsick;
+    public bool AdvancedBattle;
+    public bool AdvancedCalming;
+    public int TimeSlowCounter;
     #endregion
 
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
     public int OldFallStart;
-    public bool AdvancedBattle;
-    public bool AdvancedCalming;
-    public int TimeSlowCounter;
-
+    
     public override void ResetEffects()
     {
         MagicCritDamage = 1f;
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
-        TrapImmune = false;
+        
         AdvancedBattle = false;
         AdvancedCalming = false;
         Lucky = false;
+        Heartsick = false;
+
+        TrapImmune = false;
         PulseCharm = false;
         ShadowCharm = false;
         CritDamageMult = 1f;
         BonusKB = 1f;
         AncientHeadphones = false;
-        EnchantedDie = false;
+        SixSidedDie = false;
         MutatedStocking = false;
+        CrystalEdge = false;
+        LoadedDie = false;
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
         if (Player.whoAmI == Main.myPlayer)
         {
@@ -144,7 +156,17 @@ public class AvalonPlayer : ModPlayer
 
         return Planets[planetNum].Find(index);
     }
-
+    public override void SaveData(TagCompound tag)
+    {
+        tag["Avalon:StatStam"] = Player.GetModPlayer<AvalonStaminaPlayer>().StatStam;
+    }
+    public override void LoadData(TagCompound tag)
+    {
+        if (tag.ContainsKey("Avalon:StatStam"))
+        {
+            Player.GetModPlayer<AvalonStaminaPlayer>().StatStam = tag.Get<int>("Avalon:StatStam");
+        }
+    }
     public override void PostUpdateEquips()
     {
         for (int i = 0; i <= 9; i++)
@@ -170,16 +192,16 @@ public class AvalonPlayer : ModPlayer
         }
         if (MutatedStocking)
         {
-            Player.maxRunSpeed += 0.3f;
+            Player.maxRunSpeed += 0.3f; // Buggy :)
             Player.gravity += 0.5f;
             Player.jumpSpeedBoost += 4f;
             Player.jumpHeight -= 6;
-            if (Player.velocity.Y != 0)
+            if (!Player.IsOnGround())
             {
-                Player.runAcceleration += 4f;
+                Player.runAcceleration += 1f;
                 Player.maxRunSpeed += 0.3f;
             }
-            if(Player.wingTime > 0 && Player.controlJump)
+            if (Player.wingTime > 0 && Player.controlJump)
             {
                 Player.velocity.Y += -0.5f * Player.gravDir;
             }
@@ -317,9 +339,13 @@ public class AvalonPlayer : ModPlayer
             }
         }
     }
-
     /// <inheritdoc />
-    public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers) {
+    public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
+    {
+        if (CrystalEdge)
+        {
+            modifiers.FlatBonusDamage += 15;
+        }
         // if (modifiers.CritDamage)
         // {
         //     damage += MultiplyMeleeCritDamage(damage);
@@ -328,6 +354,10 @@ public class AvalonPlayer : ModPlayer
 
     public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
+        if (CrystalEdge)
+        {
+            modifiers.FlatBonusDamage += 15;
+        }
         // if (crit)
         // {
         //     if (proj.DamageType == DamageClass.Magic)
@@ -346,8 +376,10 @@ public class AvalonPlayer : ModPlayer
     }
 
     /// <inheritdoc />
-    public override void ModifyHurt(ref Player.HurtModifiers modifiers) {
-        if (!modifiers.PvP) {
+    public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+    {
+        if (!modifiers.PvP)
+        {
             return;
         }
         
