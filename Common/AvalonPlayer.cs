@@ -90,9 +90,12 @@ public class AvalonPlayer : ModPlayer
     public bool Unloaded;
     public bool Lucky;
     public bool Heartsick;
+    public bool HeartsickElixir;
     public bool AdvancedBattle;
     public bool AdvancedCalming;
     public int TimeSlowCounter;
+    public bool NinjaElixir;
+    public bool NinjaPotion;
     #endregion
 
     public int FrameCount { get; private set; }
@@ -109,6 +112,9 @@ public class AvalonPlayer : ModPlayer
         AdvancedCalming = false;
         Lucky = false;
         Heartsick = false;
+        NinjaElixir = false;
+        NinjaPotion = false;
+        HeartsickElixir = false;
 
         TrapImmune = false;
         PulseCharm = false;
@@ -373,6 +379,20 @@ public class AvalonPlayer : ModPlayer
         //         damage += MultiplyRangedCritDamage(damage);
         //     }
         // }
+    }
+
+    public override void OnHurt(Player.HurtInfo info)
+    {
+        if (Player.whoAmI == Main.myPlayer && NinjaPotion && Main.rand.NextBool(10))
+        {
+            Player.NinjaDodge();
+            info.Damage = 0;
+        }
+        if (Player.whoAmI == Main.myPlayer && NinjaElixir && Main.rand.NextBool(15))
+        {
+            Player.NinjaDodge();
+            info.Damage = 0;
+        }
     }
 
     /// <inheritdoc />

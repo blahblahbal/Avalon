@@ -48,9 +48,9 @@ Mods: {
 		}
 
 		Items: {
-            Quack: {
+			Quack: {
 				DisplayName: Quack
-				Tooltip: 'May annoy others'
+				Tooltip: ""
 			}
 
 			AeonsEternity: {
@@ -1635,6 +1635,11 @@ Mods: {
 
 			HeartsickPotion: {
 				DisplayName: Heartsick Potion
+				Tooltip: Life hearts restore 25 life instead of 20
+			}
+
+			AdvHeartsickPotion: {
+				DisplayName: Heartsick Elixir
 				Tooltip: Life hearts restore 30 life instead of 20
 			}
 
@@ -1675,6 +1680,11 @@ Mods: {
 			NinjaPotion: {
 				DisplayName: Ninja Potion
 				Tooltip: Grants a chance to dodge attacks
+			}
+
+			AdvNinjaPotion: {
+				DisplayName: Ninja Elixir
+				Tooltip: Grants a higher chance to dodge attacks
 			}
 
 			RoguePotion: {
@@ -2813,11 +2823,6 @@ Mods: {
 				DisplayName: Decorative Stamina Potion
 				Tooltip: ""
 			}
-
-			Quack: {
-				DisplayName: Quack
-				Tooltip: ""
-			}
 		}
 
 		Projectiles: {
@@ -2947,6 +2952,11 @@ Mods: {
 
 			Heartsick: {
 				DisplayName: Heartsick
+				Description: Hearts restore 25 life
+			}
+
+			AdvHeartsick: {
+				DisplayName: Advanced Heartsick
 				Description: Hearts restore 30 life
 			}
 
@@ -3323,6 +3333,11 @@ Mods: {
 			Ninja: {
 				DisplayName: Ninja
 				Description: You have a chance to dodge attacks
+			}
+
+			AdvNinja: {
+				DisplayName: Advanced Ninja
+				Description: You have a higher chance to dodge attacks
 			}
 		}
 
