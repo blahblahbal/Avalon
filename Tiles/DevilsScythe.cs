@@ -14,6 +14,7 @@ public class DevilsScythe : ModTile
         Main.tileLavaDeath[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
         TileObjectData.addTile(Type);
+        ItemDrop = ModContent.ItemType<Items.Weapons.Magic.Hardmode.DevilsScythe>();
         Main.tileLighted[Type] = true;
         AddMapEntry(new Color(170, 48, 114));
     }

@@ -3538,7 +3538,7 @@ Mods: {
 			EvilSelection: {
 				Contagion: {
 					Title: Contagion
-					Description: An infested green biome that consists of a disgusting landscape filled with vile giant bacteria
+					Description: A vile bacterial contagion is guaranteed to be present in your world.
 				}
 			}
 		}
