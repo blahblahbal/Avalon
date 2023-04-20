@@ -2584,6 +2584,56 @@ Mods: {
 				Tooltip: "'B. Harold'"
 			}
 
+			Cottage: {
+				DisplayName: Cottage
+				Tooltip: "'R. Penguin'"
+			}
+
+			DeepBlue: {
+				DisplayName: Deep Blue
+				Tooltip: "'R. Penguin'"
+			}
+
+			DanceoftheLotus: {
+				DisplayName: Dance of the Lotus
+				Tooltip: "'R. Penguin'"
+			}
+
+			Australia: {
+				DisplayName: Australia
+				Tooltip: "'R. Penguin'"
+			}
+
+			Steep: {
+				DisplayName: Steep
+				Tooltip: "'R. Penguin'"
+			}
+
+			AncientBeast: {
+				DisplayName: Ancient Beast
+				Tooltip: "'R. Penguin'"
+			}
+
+			TheBastion: {
+				DisplayName: The Bastion
+				Tooltip: "'R. Penguin'"
+			}
+
+			Pond: {
+				DisplayName: Pond
+				Tooltip: "'R. Penguin'"
+			}
+
+			MistyNight: {
+				DisplayName: Misty Night
+				Tooltip: "'R. Penguin'"
+			}
+
+			SixtyEight: {
+				Tooltip: "'R. Penguin'"
+				DisplayName: "68"
+			}
+
 			BlueEyeoftheUniverse: {
 				DisplayName: Energized Eye of the Universe
 				Tooltip: "'It came from the outer wilds'"
