@@ -85,6 +85,8 @@ public class AvalonPlayer : ModPlayer
     public bool TrapImmune;
     public bool BenevolentWard;
     public int WardCD;
+    public bool HeartGolem;
+    public bool EtherealHeart;
     #endregion
 
     #region buffs and debuffs
@@ -132,6 +134,8 @@ public class AvalonPlayer : ModPlayer
         LoadedDie = false;
         BenevolentWard = false;
         Ward = false;
+        HeartGolem = false;
+        EtherealHeart = false;
 
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
         if (Player.whoAmI == Main.myPlayer)

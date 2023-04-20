@@ -527,6 +527,10 @@ public class AvalonGlobalNPC : GlobalNPC
         //var hardmodePreSuperHardmodeCondition =
         //    new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
 
+        int p = Player.FindClosest(npc.position, npc.width, npc.height);
+
+
+
         switch (npc.type)
         {
             case NPCID.Unicorn:

@@ -571,6 +571,21 @@ Mods: {
 				Tooltip: Increases damage by 15
 			}
 
+			SouloftheGolem: {
+				DisplayName: Soul of the Golem
+				Tooltip: Grants a 15% chance for enemies to drop a platinum heart
+			}
+
+			HeartoftheGolem: {
+				DisplayName: Heart of the Golem
+				Tooltip: Grants a 5% chance for enemies to drop a platinum heart
+			}
+
+			EtherealHeart: {
+				DisplayName: Ethereal Heart
+				Tooltip: Grants a 10% chance for enemies to drop a platinum heart
+			}
+
 			SandyStormcloudinaBottle: {
 				DisplayName: Sandy Stormcloud in a Bottle
 				Tooltip: The holder can quadruple jump
@@ -2836,6 +2851,36 @@ Mods: {
 
 			RepairedStaminaCrystal: {
 				DisplayName: Repaired Stamina Crystal
+				Tooltip: ""
+			}
+
+			GoldApple: {
+				DisplayName: Gold Apple
+				Tooltip: ""
+			}
+
+			GoldCandyCane: {
+				DisplayName: Gold Candy Cane
+				Tooltip: ""
+			}
+
+			GoldHeart: {
+				DisplayName: Gold Heart
+				Tooltip: ""
+			}
+
+			PlatinumApple: {
+				DisplayName: Platinum Apple
+				Tooltip: ""
+			}
+
+			PlatinumCandyCane: {
+				DisplayName: Platinum Candy Cane
+				Tooltip: ""
+			}
+
+			PlatinumHeart: {
+				DisplayName: Platinum Heart
 				Tooltip: ""
 			}
 		}
