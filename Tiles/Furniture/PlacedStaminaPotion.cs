@@ -53,6 +53,7 @@ namespace Avalon.Tiles.Furniture
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
+            fail = false;
             noItem = true;
             Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<LesserStaminaPotion>(), pfix: -1);
         }
