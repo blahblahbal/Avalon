@@ -3007,6 +3007,10 @@ Mods: {
 			EctoHand.DisplayName: Ecto Hand
 			Librarian.DisplayName: Librarian
 			MineralSlime.DisplayName: Mineral Slime
+			PyrasiteHead.DisplayName: Pyrasite Head
+			PyrasiteBody.DisplayName: Pyrasite Body
+			PyrasiteTail.DisplayName: Pyrasite Tail
+			Bactus.DisplayName: Bactus
 		}
 
 		Buffs: {
