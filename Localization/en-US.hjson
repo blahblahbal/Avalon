@@ -50,7 +50,28 @@ Mods: {
 		Items: {
 			Quack: {
 				DisplayName: Quack
-				Tooltip: ""
+				Tooltip:
+                    '''
+                    'May annoy others'
+                    '''
+			}
+
+			RingofArrogance: {
+				DisplayName: Ring of Arrogance
+				Tooltip:
+					'''
+					20% increased damage
+					Increases damage taken by 30%
+					'''
+			}
+
+            Boomlash: {
+				DisplayName: Boomlash
+				Tooltip: Summons a controllable exploding missile
+			}
+            PossessedFlamesaw: {
+				DisplayName: Possessed Flamesaw
+				Tooltip: Right click to shoot a tree-chopping projectile
 			}
 
 			AeonsEternity: {
@@ -2943,6 +2964,31 @@ Mods: {
 				DisplayName: Platinum Heart
 				Tooltip: ""
 			}
+
+			MoonplateBlock: {
+				DisplayName: Moonplate Block
+				Tooltip: ""
+			}
+
+			TwiliplateBlock: {
+				DisplayName: Twiliplate Block
+				Tooltip: ""
+			}
+
+			MoonWallItem: {
+				DisplayName: Moon Wall
+				Tooltip: ""
+			}
+
+			TwilightWallItem: {
+				DisplayName: Twilight Wall
+				Tooltip: ""
+			}
+
+			HellboundHalberd: {
+				DisplayName: Hellbound Halberd
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3002,6 +3048,7 @@ Mods: {
 			DesertBeakFeather.DisplayName: Beak's Feather
 			DesertBeakSandstorm.DisplayName: Beak's Sandstorm
 			Pluto.DisplayName: Pluto
+			HellboundHalberd.DisplayName: Hellbound Halberd
 		}
 
 		NPCs: {

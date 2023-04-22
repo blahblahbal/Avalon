@@ -28,8 +28,8 @@ class WorldgenHelper : ModItem
         int x = (int)player.position.X / 16;
         int y = (int)player.position.Y / 16;
 
-        WorldGeneration.Structures.Hellcastle.GenerateHellcastle(x, y);
-        
+        //WorldGeneration.Structures.Hellcastle.GenerateHellcastle(x, y);
+        Main.NewText(WorldGen.SavedOreTiers.Gold);
         
 
         return true;

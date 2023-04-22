@@ -62,19 +62,17 @@ internal class Hellcastle
 
     public static bool HasEnoughRoomForPaintingType(int x, int y, int width, int height)
     {
-        bool flag = true;
         for (int i = x; i < x + width; i++)
         {
             for (int j = y; j < y + height; j++)
             {
                 if (Main.tile[i, j].HasTile)
                 {
-                    flag = false;
-                    break;
+                    return false;
                 }
             }
         }
-        return flag;
+        return true;
     }
     /// <summary>
     /// Helper method to find if there is a tile in range.
@@ -86,7 +84,6 @@ internal class Hellcastle
     /// <returns>True if not found, false if found.</returns>
     public static bool TileNotInRange(int x, int y, int radius, ushort tileType)
     {
-        bool flag = true;
         int xMin = x - radius;
         int xMax = x + radius;
         int yMin = y - radius;
@@ -98,12 +95,26 @@ internal class Hellcastle
             {
                 if (Main.tile[i, j].TileType == tileType)
                 {
-                    flag = false;
-                    break;
+                    return false;
                 }
             }
         }
-        return flag;
+        return true;
+    }
+
+    public static bool IsThereRoomForChandelier(int x, int y)
+    {
+        for (int i = x - 1; i < x + 2; i++)
+        {
+            for (int j = y; j < y + 3; j++)
+            {
+                if (Main.tile[i, j].HasTile)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static void AddPaintings(int x, int y, int height, int width)
@@ -111,16 +122,18 @@ internal class Hellcastle
         int s1t = 0;
         int s2t = 0;
         int s3t = 0;
+        int s4t = 0;
         for (int i = x; i < x + width; i++)
         {
             for (int j = y; j < y + height; j++)
             {
-                if (WorldGen.genRand.NextBool(200))
+                if (WorldGen.genRand.NextBool(225))
                 {
                     if (s1t > 2) s1t = 0;
-                    if (s2t > 3) s2t = 0;
+                    if (s2t > 5) s2t = 0;
                     if (s3t > 3) s3t = 0;
-                    int paintingSize = WorldGen.genRand.Next(3);
+                    if (s4t > 2) s4t = 0;
+                    int paintingSize = WorldGen.genRand.Next(4);
                     int tileType;
                     if (paintingSize == 1) // 2x3
                     {
@@ -162,6 +175,12 @@ internal class Hellcastle
                                 pStyle = 1;
                                 tileType = ModContent.TileType<Tiles.Paintings3x3>();
                                 break;
+                            case 4:
+                                pStyle = 16;
+                                break;
+                            case 5:
+                                pStyle = 17;
+                                break;
                         }
                         s2t++;
                         if (HasEnoughRoomForPaintingType(i, j, 3, 3) && (TileNotInRange(i, j, 8, TileID.Painting3X3) || TileNotInRange(i, j, 7, (ushort)ModContent.TileType<Tiles.Paintings3x3>())))
@@ -191,6 +210,29 @@ internal class Hellcastle
                         if (HasEnoughRoomForPaintingType(i, j, 6, 4) && TileNotInRange(i, j, 10, (ushort)ModContent.TileType<Tiles.Paintings>()))
                         {
                             WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.Paintings>(), style: pStyle);
+                        }
+                    }
+                    if (paintingSize == 4) // 3x2
+                    {
+                        int pStyle = 0;
+                        tileType = TileID.Painting3X2;
+                        switch (s4t)
+                        {
+                            case 0:
+                                pStyle = 0;
+                                break;
+                            case 1:
+                                pStyle = 17;
+                                break;
+                            case 2:
+                                pStyle = 0;
+                                tileType = ModContent.TileType<Tiles.Paintings3x2>();
+                                break;
+                        }
+                        s4t++;
+                        if (HasEnoughRoomForPaintingType(i, j, 3, 2) && (TileNotInRange(i, j, 7, TileID.Painting3X2) || TileNotInRange(i, j, 7, (ushort)ModContent.TileType<Tiles.Paintings3x2>())))
+                        {
+                            WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
                     }
                 }
@@ -1120,13 +1162,13 @@ internal class Hellcastle
     }
     public static void GenerateSpikeTrap(int x, int y, int length)
     {
-        if(length%2 == 0)
+        if(length % 2 == 0)
         {
             length++;
         }
         for (int i = 1; i <= length; i++)
         {
-            if(!Main.tile[x + i + 2, y].HasTile || Main.tileSolidTop[Main.tile[x + i + 2, y].TileType])
+            if (!Main.tile[x + i + 2, y].HasTile || Main.tileSolidTop[Main.tile[x + i + 2, y].TileType])
             {
                 break;
             }
@@ -1134,7 +1176,7 @@ internal class Hellcastle
             {
                 break;
             }
-            if (i%2 == 0)
+            if (i % 2 == 0)
             {
                 WorldGen.PlaceTile(x + i - 1, y, ModContent.TileType<Tiles.VenomSpike>(), true, true);
                 if(!Main.tile[x, y - 1].HasTile)
@@ -1178,6 +1220,10 @@ internal class Hellcastle
                         if (WorldGen.genRand.NextBool(30) && TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()))
                         {
                             WorldGen.PlaceTile(x + i, y + j, ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>(), true, true);
+                        }
+                        if (WorldGen.genRand.NextBool(50) && IsThereRoomForChandelier(x + i, y + j) && TileNotInRange(x + i, y + j, 8, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>()))
+                        {
+                            WorldGen.PlaceTile(x + i, y + j, ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>(), true, true);
                         }
                     }
                     if (Main.tile[x + i, y + j].HasTile && !Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i - 1, y + j].HasTile && Main.tile[x + i + 1, y + j].HasTile && !Main.tile[x + i + 1, y + j - 1].HasTile && !Main.tile[x + i - 1, y + j - 1].HasTile)
@@ -1310,24 +1356,24 @@ internal class Hellcastle
 
                     // ADD LATER
 
-                    //if (loot == 0)
-                    //{
-                    //    Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Weapons.Magic.Boomlash>(), false);
-                    //    Main.chest[num2].item[0].Prefix(-1);
-                    //}
-                    //if (loot == 1)
-                    //{
-                    //    Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Accessories.GrowlingPendant>(), false);
-                    //    Main.chest[num2].item[0].Prefix(-1);
-                    //}
-                    //if (loot == 2)
-                    //{
-                    //    Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.PossessedFlamesaw>(), false);
-                    //    Main.chest[num2].item[0].Prefix(-1);
-                    //}
+                    if (loot == 0)
+                    {
+                        Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Accessories.Hardmode.RingofArrogance>(), false);
+                        Main.chest[num2].item[0].Prefix(-1);
+                    }
+                    if (loot == 1)
+                    {
+                        Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Weapons.Magic.Hardmode.Boomlash>(), false);
+                        Main.chest[num2].item[0].Prefix(-1);
+                    }
+                    if (loot == 2)
+                    {
+                        Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.PossessedFlamesaw>(), false);
+                        Main.chest[num2].item[0].Prefix(-1);
+                    }
                     Main.chest[num2].item[1].SetDefaults(ModContent.ItemType<Items.Placeable.Tile.ImperviousBrick>(), false);
                     Main.chest[num2].item[1].stack = WorldGen.genRand.Next(200, 451);
-                    int rand = WorldGen.genRand.Next(3);
+                    int rand = WorldGen.genRand.Next(4);
                     if (rand == 0)
                     {
                         Main.chest[num2].item[2].SetDefaults(ModContent.ItemType<BloodCastPotion>(), false);
@@ -1343,19 +1389,40 @@ internal class Hellcastle
                         Main.chest[num2].item[2].SetDefaults(ModContent.ItemType<CloverPotion>(), false);
                         Main.chest[num2].item[2].stack = WorldGen.genRand.Next(3) + 1;
                     }
+                    if (rand == 3)
+                    {
+                        Main.chest[num2].item[2].SetDefaults(ModContent.ItemType<NinjaPotion>(), false);
+                        Main.chest[num2].item[2].stack = WorldGen.genRand.Next(2) + 1;
+                    }
+                    int n3 = WorldGen.genRand.Next(3);
+                    if (n3 == 0)
+                    {
+                        Main.chest[num2].item[3].SetDefaults(ItemID.TrapsightPotion, false);
+                        Main.chest[num2].item[3].stack = WorldGen.genRand.Next(2) + 1;
+                    }
+                    if (n3 == 1)
+                    {
+                        Main.chest[num2].item[3].SetDefaults(ItemID.CalmingPotion, false);
+                        Main.chest[num2].item[3].stack = WorldGen.genRand.Next(2) + 2;
+                    }
+                    if (n3 == 2)
+                    {
+                        Main.chest[num2].item[3].SetDefaults(ModContent.ItemType<HeartsickPotion>(), false);
+                        Main.chest[num2].item[3].stack = WorldGen.genRand.Next(2) + 3;
+                    }
                     int n2 = WorldGen.genRand.Next(2);
                     if (n2 == 0)
                     {
-                        Main.chest[num2].item[3].SetDefaults(ItemID.LunarBar, false);
-                        Main.chest[num2].item[3].stack = WorldGen.genRand.Next(5, 11);
+                        Main.chest[num2].item[4].SetDefaults(ItemID.LunarBar, false);
+                        Main.chest[num2].item[4].stack = WorldGen.genRand.Next(5, 11);
                     }
                     if (n2 == 1)
                     {
-                        Main.chest[num2].item[3].SetDefaults(ItemID.LunarOre, false);
-                        Main.chest[num2].item[3].stack = WorldGen.genRand.Next(11, 25);
+                        Main.chest[num2].item[4].SetDefaults(ItemID.LunarOre, false);
+                        Main.chest[num2].item[4].stack = WorldGen.genRand.Next(11, 25);
                     }
-                    Main.chest[num2].item[4].SetDefaults(ItemID.GoldCoin, false);
-                    Main.chest[num2].item[4].stack = WorldGen.genRand.Next(5) + 3;
+                    Main.chest[num2].item[5].SetDefaults(ItemID.GoldCoin, false);
+                    Main.chest[num2].item[5].stack = WorldGen.genRand.Next(5) + 3;
                     return true;
                 }
                 return false;
