@@ -2660,6 +2660,11 @@ Mods: {
 				Tooltip: "'R. Penguin'"
 			}
 
+			Damned: {
+				DisplayName: Damned
+				Tooltip: "'R. Penguin'"
+			}
+
 			MistyNight: {
 				DisplayName: Misty Night
 				Tooltip: "'R. Penguin'"
@@ -2673,6 +2678,11 @@ Mods: {
 			CavernMan: {
 				Tooltip: "'R. Penguin'"
 				DisplayName: Cavern Man
+			}
+
+			Forgotten: {
+				Tooltip: "'R. Penguin'"
+				DisplayName: Forgotten
 			}
 
 			TakingFlight: {
