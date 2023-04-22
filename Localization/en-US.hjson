@@ -2649,6 +2649,16 @@ Mods: {
 				DisplayName: "68"
 			}
 
+			CavernMan: {
+				Tooltip: "'R. Penguin'"
+				DisplayName: Cavern Man
+			}
+
+			TakingFlight: {
+				Tooltip: "'R. Penguin'"
+				DisplayName: Taking Flight
+			}
+
 			BlueEyeoftheUniverse: {
 				DisplayName: Energized Eye of the Universe
 				Tooltip: "'It came from the outer wilds'"
