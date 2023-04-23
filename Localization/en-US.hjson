@@ -50,10 +50,7 @@ Mods: {
 		Items: {
 			Quack: {
 				DisplayName: Quack
-				Tooltip:
-                    '''
-                    'May annoy others'
-                    '''
+				Tooltip: "'May annoy others'"
 			}
 
 			RingofArrogance: {
@@ -65,11 +62,12 @@ Mods: {
 					'''
 			}
 
-            Boomlash: {
+			Boomlash: {
 				DisplayName: Boomlash
 				Tooltip: Summons a controllable exploding missile
 			}
-            PossessedFlamesaw: {
+
+			PossessedFlamesaw: {
 				DisplayName: Possessed Flamesaw
 				Tooltip: Right click to shoot a tree-chopping projectile
 			}
@@ -2650,6 +2648,11 @@ Mods: {
 				Tooltip: "'R. Penguin'"
 			}
 
+			BurntheWitch: {
+				DisplayName: Burn the Witch
+				Tooltip: "'R. Penguin'"
+			}
+
 			TheBastion: {
 				DisplayName: The Bastion
 				Tooltip: "'R. Penguin'"
@@ -3059,6 +3062,9 @@ Mods: {
 			DesertBeakSandstorm.DisplayName: Beak's Sandstorm
 			Pluto.DisplayName: Pluto
 			HellboundHalberd.DisplayName: Hellbound Halberd
+			Boomlash.DisplayName: Boomlash
+			PossessedFlamesaw.DisplayName: Possessed Flamesaw
+			PossessedFlamesawChop.DisplayName: Possessed Flamesaw Chop
 		}
 
 		NPCs: {

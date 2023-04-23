@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Melee;
+namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class PossessedFlamesaw : ModItem
 {
