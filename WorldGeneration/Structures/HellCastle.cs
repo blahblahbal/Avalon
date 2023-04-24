@@ -102,6 +102,38 @@ internal class Hellcastle
         return true;
     }
 
+    /// <summary>
+    /// A helper method to check if there are any painting tiles in a specific radius
+    /// </summary>
+    /// <param name="x">The X coordinate.</param>
+    /// <param name="y">The Y coordinate</param>
+    /// <param name="radius">The radius from the X and Y coordinates.</param>
+    /// <returns>True if not found, false otherwise.</returns>
+    public static bool NoPaintingsInRange(int x, int y, int radius)
+    {
+        int xMin = x - radius;
+        int xMax = x + radius;
+        int yMin = y - radius;
+        int yMax = y + radius;
+
+        for (int i = xMin; i < xMax; i++)
+        {
+            for (int j = yMin; j < yMax; j++)
+            {
+                if (Main.tile[i, j].TileType == TileID.Painting2X3 || Main.tile[i, j].TileType == TileID.Painting3X3 ||
+                    Main.tile[i, j].TileType == TileID.Painting3X2 || Main.tile[i, j].TileType == TileID.Painting6X4 ||
+                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings2x3>() ||
+                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings3x2>() ||
+                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings3x3>() ||
+                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings>())
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static bool IsThereRoomForChandelier(int x, int y)
     {
         for (int i = x - 1; i < x + 2; i++)
@@ -129,7 +161,7 @@ internal class Hellcastle
             {
                 if (WorldGen.genRand.NextBool(225))
                 {
-                    if (s1t > 2) s1t = 0;
+                    if (s1t > 3) s1t = 0;
                     if (s2t > 5) s2t = 0;
                     if (s3t > 3) s3t = 0;
                     if (s4t > 2) s4t = 0;
@@ -137,6 +169,7 @@ internal class Hellcastle
                     int tileType;
                     if (paintingSize == 1) // 2x3
                     {
+                        tileType = TileID.Painting2X3;
                         int pStyle = 0;
                         switch (s1t)
                         {
@@ -149,11 +182,15 @@ internal class Hellcastle
                             case 2:
                                 pStyle = 4;
                                 break;
+                            case 3:
+                                pStyle = 3;
+                                tileType = ModContent.TileType<Tiles.Paintings2x3>();
+                                break;
                         }
                         s1t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 2, 3) && TileNotInRange(i, j, 7, TileID.Painting2X3))
+                        if (HasEnoughRoomForPaintingType(i, j, 2, 3) && NoPaintingsInRange(i, j, 8))
                         {
-                            WorldGen.PlaceTile(i, j, TileID.Painting2X3, style: pStyle);
+                            WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
                     }
                     if (paintingSize == 2) // 3x3
@@ -180,6 +217,10 @@ internal class Hellcastle
                                 break;
                             case 5:
                                 pStyle = 17;
+                                break;
+                            case 6:
+                                pStyle = 2;
+                                tileType = ModContent.TileType<Tiles.Paintings3x3>();
                                 break;
                         }
                         s2t++;
