@@ -13,7 +13,7 @@ public class Bactus : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[NPC.type] = 4;
+        Main.npcFrameCount[NPC.type] = 8;
     }
 
     public override void SetDefaults()
@@ -194,6 +194,24 @@ public class Bactus : ModNPC
         }
         #endregion AI
 
+        //if (Main.expertMode)
+        //{
+        //    NPC.ai[2]++;
+        //    if (NPC.ai[2] == 360)
+        //    {
+        //        NPC.noTileCollide = true;
+        //    }
+        //    if (NPC.ai[2] is > 380 and < 400)
+        //    {
+        //        if (Main.rand.NextBool(3))
+        //        {
+        //            int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
+        //            Main.dust[d].noGravity = true;
+        //        }
+        //        NPC.alpha += 5;
+        //    }
+        //}
+
         if (Main.rand.NextBool(20))
         {
             Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
@@ -221,15 +239,19 @@ public class Bactus : ModNPC
     { 
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity * 0.8f, Mod.Find<ModGore>("Bactus").Type, 1f);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f,0.9f), Mod.Find<ModGore>("Bactus").Type, 1f);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Bactus2").Type, 1f);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Bactus3").Type, 1f);
             for (int i = 0; i < 10; i++)
             {
-                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, 1);
+                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-5, 3), 50, default, 1);
+                Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
             }
         }
         for (int i = 0; i < 5; i++)
         {
-            Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 0.5f), 128, default, Main.rand.NextFloat(1, 1.5f));
+            int d2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 1), 50, default, Main.rand.NextFloat(1, 1.5f));
+            Main.dust[d2].velocity += NPC.velocity * Main.rand.NextFloat(0.2f, 0.8f);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -40,7 +40,7 @@ public class AeonsEternity : ModItem
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         TimesSwung++;
-        if (TimesSwung == 6)
+        if (TimesSwung == 4)
         {
             int lastStar = -255;
             SoundEngine.PlaySound(SoundID.Item9, player.Center);
@@ -53,10 +53,10 @@ public class AeonsEternity : ModItem
             }
             TimesSwung = 0;
         }
-        if (TimesSwung is 2 or 4 or 0)
-        {
-            return true;
-        }
+        //if (TimesSwung is 2 or 4 or 0)
+        //{
+        //    return true;
+        //}
         return false;
     }
     public override void MeleeEffects(Player player, Rectangle hitbox)
