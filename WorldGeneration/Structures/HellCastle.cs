@@ -58,13 +58,28 @@ internal class Hellcastle
         AddDevilsScythes(x, y, 400, 150);
         MakeEntranceArea(x + 200, y + 135);
         AddEntranceArea(x, y + 150);
+        SmoothHellcastle(x, y, 400, 150);
     }
 
-    public static bool HasEnoughRoomForPaintingType(int x, int y, int width, int height)
+    //public static bool HasEnoughRoomForPaintingType(int x, int y, int width, int height)
+    //{
+    //    for (int i = x; i < x + width; i++)
+    //    {
+    //        for (int j = y; j < y + height; j++)
+    //        {
+    //            if (Main.tile[i, j].HasTile)
+    //            {
+    //                return false;
+    //            }
+    //        }
+    //    }
+    //    return true;
+    //}
+    public static bool HasEnoughRoomForPaintingType(int x, int y, int width, int height, int r = 1)
     {
-        for (int i = x; i < x + width; i++)
+        for (int i = x - r; i < x + width + r; i++)
         {
-            for (int j = y; j < y + height; j++)
+            for (int j = y - r; j < y + height + r; j++)
             {
                 if (Main.tile[i, j].HasTile)
                 {
@@ -133,7 +148,6 @@ internal class Hellcastle
         }
         return true;
     }
-
     public static bool IsThereRoomForChandelier(int x, int y)
     {
         for (int i = x - 1; i < x + 2; i++)
@@ -149,7 +163,7 @@ internal class Hellcastle
         return true;
     }
 
-    public static void AddPaintings(int x, int y, int height, int width)
+    public static void AddPaintings(int x, int y, int width, int height)
     {
         int s1t = 0;
         int s2t = 0;
@@ -188,7 +202,7 @@ internal class Hellcastle
                                 break;
                         }
                         s1t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 2, 3) && NoPaintingsInRange(i, j, 8))
+                        if (HasEnoughRoomForPaintingType(i, j, 2, 3) && NoPaintingsInRange(i, j, 10))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
@@ -224,7 +238,7 @@ internal class Hellcastle
                                 break;
                         }
                         s2t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 3, 3) && (TileNotInRange(i, j, 8, TileID.Painting3X3) || TileNotInRange(i, j, 7, (ushort)ModContent.TileType<Tiles.Paintings3x3>())))
+                        if (HasEnoughRoomForPaintingType(i, j, 3, 3) && NoPaintingsInRange(i, j, 10))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
@@ -248,7 +262,7 @@ internal class Hellcastle
                                 break;
                         }
                         s3t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 6, 4) && TileNotInRange(i, j, 10, (ushort)ModContent.TileType<Tiles.Paintings>()))
+                        if (HasEnoughRoomForPaintingType(i, j, 6, 4) && NoPaintingsInRange(i, j, 10))
                         {
                             WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.Paintings>(), style: pStyle);
                         }
@@ -271,7 +285,7 @@ internal class Hellcastle
                                 break;
                         }
                         s4t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 3, 2) && (TileNotInRange(i, j, 7, TileID.Painting3X2) || TileNotInRange(i, j, 7, (ushort)ModContent.TileType<Tiles.Paintings3x2>())))
+                        if (HasEnoughRoomForPaintingType(i, j, 3, 2) && NoPaintingsInRange(i, j, 10))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
@@ -399,7 +413,156 @@ internal class Hellcastle
             }
         }
     }
-
+    public static void SmoothHellcastle(int x, int y, int width, int height)
+    {
+        for (int i = x + 5; i < x + width - 5; i++)
+        {
+            for (int j = y + 5; j < y + height - 5; j++)
+            {
+                if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.ImperviousBrick>())
+                {
+                    if (Main.tile[i, j].TileType != 48 && Main.tile[i, j].TileType != 137 && Main.tile[i, j].TileType != 232 && Main.tile[i, j].TileType != 191 && Main.tile[i, j].TileType != 151 && Main.tile[i, j].TileType != 274)
+                    {
+                        if (!Main.tile[i, j - 1].HasTile && Main.tile[i - 1, j].TileType != 136 && Main.tile[i + 1, j].TileType != 136)
+                        {
+                            if (WorldGen.SolidTile(i, j))
+                            {
+                                if (!Main.tile[i - 1, j].IsHalfBlock && !Main.tile[i + 1, j].IsHalfBlock && Main.tile[i - 1, j].Slope == SlopeType.Solid && Main.tile[i + 1, j].Slope == SlopeType.Solid)
+                                {
+                                    if (WorldGen.SolidTile(i, j + 1))
+                                    {
+                                        if (!WorldGen.SolidTile(i - 1, j) && !Main.tile[i - 1, j + 1].IsHalfBlock && WorldGen.SolidTile(i - 1, j + 1) && WorldGen.SolidTile(i + 1, j) && !Main.tile[i + 1, j - 1].HasTile)
+                                        {
+                                            if (WorldGen.genRand.Next(2) == 0)
+                                            {
+                                                WorldGen.SlopeTile(i, j, 2);
+                                            }
+                                            else
+                                            {
+                                                WorldGen.PoundTile(i, j);
+                                            }
+                                        }
+                                        else if (!WorldGen.SolidTile(i + 1, j) && !Main.tile[i + 1, j + 1].IsHalfBlock && WorldGen.SolidTile(i + 1, j + 1) && WorldGen.SolidTile(i - 1, j) && !Main.tile[i - 1, j - 1].HasTile)
+                                        {
+                                            if (WorldGen.genRand.Next(2) == 0)
+                                            {
+                                                WorldGen.SlopeTile(i, j, 1);
+                                            }
+                                            else
+                                            {
+                                                WorldGen.PoundTile(i, j);
+                                            }
+                                        }
+                                        else if (WorldGen.SolidTile(i + 1, j + 1) && WorldGen.SolidTile(i - 1, j + 1) && !Main.tile[i + 1, j].HasTile && !Main.tile[i - 1, j].HasTile)
+                                        {
+                                            WorldGen.PoundTile(i, j);
+                                        }
+                                        if (WorldGen.SolidTile(i, j))
+                                        {
+                                            if (WorldGen.SolidTile(i - 1, j) && WorldGen.SolidTile(i + 1, j + 2) && !Main.tile[i + 1, j].HasTile && !Main.tile[i + 1, j + 1].HasTile && !Main.tile[i - 1, j - 1].HasTile)
+                                            {
+                                                WorldGen.KillTile(i, j);
+                                            }
+                                            else if (WorldGen.SolidTile(i + 1, j) && WorldGen.SolidTile(i - 1, j + 2) && !Main.tile[i - 1, j].HasTile && !Main.tile[i - 1, j + 1].HasTile && !Main.tile[i + 1, j - 1].HasTile)
+                                            {
+                                                WorldGen.KillTile(i, j);
+                                            }
+                                            else if (!Main.tile[i - 1, j + 1].HasTile && !Main.tile[i - 1, j].HasTile && WorldGen.SolidTile(i + 1, j) && WorldGen.SolidTile(i, j + 2))
+                                            {
+                                                if (WorldGen.genRand.Next(5) == 0)
+                                                {
+                                                    WorldGen.KillTile(i, j);
+                                                }
+                                                else if (WorldGen.genRand.Next(5) == 0)
+                                                {
+                                                    WorldGen.PoundTile(i, j);
+                                                }
+                                                else
+                                                {
+                                                    WorldGen.SlopeTile(i, j, 2);
+                                                }
+                                            }
+                                            else if (!Main.tile[i + 1, j + 1].HasTile && !Main.tile[i + 1, j].HasTile && WorldGen.SolidTile(i - 1, j) && WorldGen.SolidTile(i, j + 2))
+                                            {
+                                                if (WorldGen.genRand.Next(5) == 0)
+                                                {
+                                                    WorldGen.KillTile(i, j);
+                                                }
+                                                else if (WorldGen.genRand.Next(5) == 0)
+                                                {
+                                                    WorldGen.PoundTile(i, j);
+                                                }
+                                                else
+                                                {
+                                                    WorldGen.SlopeTile(i, j, 1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (WorldGen.SolidTile(i, j) && !Main.tile[i - 1, j].HasTile && !Main.tile[i + 1, j].HasTile)
+                                    {
+                                        WorldGen.KillTile(i, j);
+                                    }
+                                }
+                            }
+                            else if (!Main.tile[i, j].HasTile && Main.tile[i, j + 1].TileType != 151 && Main.tile[i, j + 1].TileType != 274)
+                            {
+                                if (Main.tile[i + 1, j].TileType != 190 && Main.tile[i + 1, j].TileType != 48 && Main.tile[i + 1, j].TileType != 232 && WorldGen.SolidTile(i - 1, j + 1) && WorldGen.SolidTile(i + 1, j) && !Main.tile[i - 1, j].HasTile && !Main.tile[i + 1, j - 1].HasTile)
+                                {
+                                    if (Main.tile[i + 1, j].TileType == 495)
+                                    {
+                                        WorldGen.PlaceTile(i, j, Main.tile[i + 1, j].TileType);
+                                    }
+                                    else
+                                    {
+                                        WorldGen.PlaceTile(i, j, Main.tile[i, j + 1].TileType);
+                                    }
+                                    if (WorldGen.genRand.Next(2) == 0)
+                                    {
+                                        WorldGen.SlopeTile(i, j, 2);
+                                    }
+                                    else
+                                    {
+                                        WorldGen.PoundTile(i, j);
+                                    }
+                                }
+                                if (Main.tile[i - 1, j].TileType != 190 && Main.tile[i - 1, j].TileType != 48 && Main.tile[i - 1, j].TileType != 232 && WorldGen.SolidTile(i + 1, j + 1) && WorldGen.SolidTile(i - 1, j) && !Main.tile[i + 1, j].HasTile && !Main.tile[i - 1, j - 1].HasTile)
+                                {
+                                    if (Main.tile[i - 1, j].TileType == 495)
+                                    {
+                                        WorldGen.PlaceTile(i, j, Main.tile[i - 1, j].TileType);
+                                    }
+                                    else
+                                    {
+                                        WorldGen.PlaceTile(i, j, Main.tile[i, j + 1].TileType);
+                                    }
+                                    if (WorldGen.genRand.Next(2) == 0)
+                                    {
+                                        WorldGen.SlopeTile(i, j, 1);
+                                    }
+                                    else
+                                    {
+                                        WorldGen.PoundTile(i, j);
+                                    }
+                                }
+                            }
+                        }
+                        else if (!Main.tile[i, j + 1].HasTile && WorldGen.genRand.Next(2) == 0 && WorldGen.SolidTile(i, j) && !Main.tile[i - 1, j].IsHalfBlock && !Main.tile[i + 1, j].IsHalfBlock && Main.tile[i - 1, j].Slope == SlopeType.Solid && Main.tile[i + 1, j].Slope == SlopeType.Solid && WorldGen.SolidTile(i, j - 1))
+                        {
+                            if (WorldGen.SolidTile(i - 1, j) && !WorldGen.SolidTile(i + 1, j) && WorldGen.SolidTile(i - 1, j - 1))
+                            {
+                                WorldGen.SlopeTile(i, j, 3);
+                            }
+                            else if (WorldGen.SolidTile(i + 1, j) && !WorldGen.SolidTile(i - 1, j) && WorldGen.SolidTile(i + 1, j - 1))
+                            {
+                                WorldGen.SlopeTile(i, j, 4);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     public static void AddEntranceArea(int x, int y)
     {
         #region tiles
@@ -1256,18 +1419,24 @@ internal class Hellcastle
                 }
                 else
                 {
-                    if (!Main.tile[x + i, y + j + 1].HasTile && !Main.tile[x + i, y + j].HasTile && Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i, y + j - 1].TileType != ModContent.TileType<Tiles.VenomSpike>())
+                    if (!Main.tile[x + i, y + j + 1].HasTile && !Main.tile[x + i, y + j].HasTile &&
+                        Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i, y + j - 1].TileType != ModContent.TileType<Tiles.VenomSpike>())
                     {
-                        if (WorldGen.genRand.NextBool(30) && TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()))
+                        if (WorldGen.genRand.NextBool(30) &&
+                            TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()) &&
+                            TileNotInRange(x + i, y + j, 8, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>()))
                         {
                             WorldGen.PlaceTile(x + i, y + j, ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>(), true, true);
                         }
-                        if (WorldGen.genRand.NextBool(50) && IsThereRoomForChandelier(x + i, y + j) && TileNotInRange(x + i, y + j, 8, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>()))
+                        if (WorldGen.genRand.NextBool(50) && IsThereRoomForChandelier(x + i, y + j) &&
+                            TileNotInRange(x + i, y + j, 8, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>()) &&
+                            TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()))
                         {
                             WorldGen.PlaceTile(x + i, y + j, ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>(), true, true);
                         }
                     }
-                    if (Main.tile[x + i, y + j].HasTile && !Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i - 1, y + j].HasTile && Main.tile[x + i + 1, y + j].HasTile && !Main.tile[x + i + 1, y + j - 1].HasTile && !Main.tile[x + i - 1, y + j - 1].HasTile)
+                    if (Main.tile[x + i, y + j].HasTile && !Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i - 1, y + j].HasTile &&
+                        Main.tile[x + i + 1, y + j].HasTile && !Main.tile[x + i + 1, y + j - 1].HasTile && !Main.tile[x + i - 1, y + j - 1].HasTile)
                     {
                         counter++;
                         if (counter > 10 && WorldGen.genRand.NextBool(3))
