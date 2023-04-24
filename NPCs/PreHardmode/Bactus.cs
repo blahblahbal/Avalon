@@ -223,16 +223,51 @@ public class Bactus : ModNPC
 
     public override void FindFrame(int frameHeight)
     {
-        NPC.frameCounter += 1.0;
-        if (NPC.frameCounter >= 8.0)
-        {
-            NPC.frame.Y = NPC.frame.Y + frameHeight;
-            NPC.frameCounter = 0.0;
-        }
-        if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
-        {
-            NPC.frame.Y = 0;
-        }
+        Player TargetPlayer = Main.player[NPC.target];
+        //NPC.frameCounter += 1.0;
+        //if (NPC.frameCounter >= 8.0)
+        //{
+        //    NPC.frame.Y = NPC.frame.Y + frameHeight;
+        //    NPC.frameCounter = 0.0;
+        //}
+        //if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
+        //{
+        //    NPC.frame.Y = 0;
+        //}
+
+        int NPCFrame = 0;
+        float BacPos = NPC.Center.X;
+        float playerDist = Vector2.Distance(new Vector2(NPC.Center.X, 0), new Vector2(TargetPlayer.Center.X, 0));
+
+        int D = 120;
+
+        if (playerDist < D)
+            NPCFrame = 0;
+        if (playerDist > D)
+            NPCFrame = 1;
+        if (playerDist > D * 2)
+            NPCFrame = 2;
+
+        //if (Main.rand.NextBool(20))
+        //{
+        //    NPC.frameCounter = Main.rand.Next(-3, 3);
+        //    NPC.frameCounter *= 10;
+        //}
+
+        //if (NPC.frameCounter > 0)
+        //{
+        //    NPCFrame = (int)MathHelper.Clamp(NPCFrame - 1, 0, 2);
+        //}
+        //else if (NPC.frameCounter < 0)
+        //{
+        //    NPCFrame = (int)MathHelper.Clamp(NPCFrame - 1, 0, 2);
+        //}
+
+        //if (TargetPlayer.Center.X < BacPos)
+        //    NPCFrame += 4;
+
+        NPC.frame.Y = NPCFrame * frameHeight;
+        NPC.frameCounter--;
     }
 
     public override void HitEffect(NPC.HitInfo hit)
