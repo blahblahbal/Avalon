@@ -6,6 +6,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.Bestiary;
+using Terraria.DataStructures;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -34,6 +35,25 @@ public class Bactus : ModNPC
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
         //SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
         DrawOffsetY = 10;
+    }
+    public override void OnSpawn(IEntitySource source)
+    {
+        int J = Main.rand.Next(0, 3);
+        if (J == 1)
+        {
+            NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
+            NPC.defense = (int)(NPC.defense * 0.8f);
+            NPC.scale *= 0.85f;
+            NPC.knockBackResist *= 1.2f;
+        }
+        if (J == 2)
+        {
+            NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
+            NPC.defense = (int)(NPC.defense * 1.1f);
+            NPC.scale *= 1.15f;
+            NPC.knockBackResist *= 0.9f;
+        }
+        NPC.life = NPC.lifeMax;
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
@@ -193,7 +213,6 @@ public class Bactus : ModNPC
             return;
         }
         #endregion AI
-
         //if (Main.expertMode)
         //{
         //    NPC.ai[2]++;

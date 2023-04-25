@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using Terraria.GameContent.Bestiary;
 using Avalon.Common;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.DataStructures;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -19,7 +20,6 @@ public class Viris : ModNPC
         NPCID.Sets.TrailCacheLength[NPC.type] = 5;
         NPCID.Sets.TrailingMode[NPC.type] = 7;
     }
-
     public override void SetDefaults()
     {
         NPC.damage = 40;
@@ -31,7 +31,7 @@ public class Viris : ModNPC
         NPC.value = 610f;
         NPC.Size = new Vector2(100, 120);
         NPC.scale = 1f;
-        NPC.knockBackResist = 0.2f;
+        NPC.knockBackResist = 0.6f;
         NPC.HitSound = SoundID.NPCHit18;
         NPC.DeathSound = SoundID.NPCDeath21;
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
@@ -68,19 +68,18 @@ public class Viris : ModNPC
 
         if (Target.Center.Distance(NPC.Center) < 200)
         {
-            speed = 9;
-            NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.6f;
+            speed = 7;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.1f;
         }
         else
         {
-            speed = 6;
-            NPC.velocity += NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2Circular(60, 60)) * 0.4f;
+            speed = 4;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2CircularEdge(600, 600)) * 0.05f;
         }
 
         NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
         NPC.velocity.Y = MathHelper.Clamp(NPC.velocity.Y, -speed, speed);
         #endregion AI
-        //NPC.position += NPC.velocity * 1;
         if (Main.rand.NextBool(20))
         {
             int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
