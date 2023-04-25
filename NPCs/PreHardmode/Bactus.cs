@@ -214,7 +214,8 @@ public class Bactus : ModNPC
 
         if (Main.rand.NextBool(20))
         {
-            Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
+            int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
+            Main.dust[d].noGravity = true;
         }
 
         float maxRotate = 0.2f;
@@ -263,8 +264,8 @@ public class Bactus : ModNPC
         //    NPCFrame = (int)MathHelper.Clamp(NPCFrame - 1, 0, 2);
         //}
 
-        //if (TargetPlayer.Center.X < BacPos)
-        //    NPCFrame += 4;
+        if (TargetPlayer.Center.X < BacPos)
+            NPCFrame += 4;
 
         NPC.frame.Y = NPCFrame * frameHeight;
         NPC.frameCounter--;
@@ -281,12 +282,14 @@ public class Bactus : ModNPC
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-5, 3), 50, default, 1);
                 Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
+                Main.dust[d].noGravity = true;
             }
         }
         for (int i = 0; i < 5; i++)
         {
             int d2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 1), 50, default, Main.rand.NextFloat(1, 1.5f));
             Main.dust[d2].velocity += NPC.velocity * Main.rand.NextFloat(0.2f, 0.8f);
+            Main.dust[d2].noGravity = true;
         }
     }
 }
