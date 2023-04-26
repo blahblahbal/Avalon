@@ -40,6 +40,7 @@ public class ContagionSelectionMenu : ModHook {
         IL_UIWorldCreation.MakeInfoMenu += ILMakeInfoMenu;
         IL_UIWorldCreation.ShowOptionDescription += ILShowOptionDescription;
         IL_UIWorldCreation.UpdatePreviewPlate += ILUpdatePreviewPlate;
+        IL_UIWorldCreationPreview.DrawSelf += ILPreviewDrawSelf;
         On_UIWorldCreation.SetDefaultOptions += OnSetDefaultOptions;
         On_UIWorldCreation.AddWorldEvilOptions += OnAddWorldEvilOptions;
     }
@@ -177,8 +178,38 @@ public class ContagionSelectionMenu : ModHook {
     private void ILUpdatePreviewPlate(ILContext il) {
         var c = new ILCursor(il);
 
-        c.GotoNext(i => i.MatchLdfld(typeof(UIWorldCreation).GetField("_optionEvil", BindingFlags.Instance | BindingFlags.NonPublic)!))
+        c.GotoNext(i =>
+                i.MatchLdfld(typeof(UIWorldCreation).GetField("_optionEvil",
+                    BindingFlags.Instance | BindingFlags.NonPublic)!))
             .GotoNext(MoveType.After, i => i.MatchConvU1())
             .EmitDelegate((byte value) => (byte)SelectedWorldEvil);
+    }
+
+    private void ILPreviewDrawSelf(ILContext il) {
+        var c = new ILCursor(il);
+
+        c.GotoNext(MoveType.After, i =>
+                i.MatchLdfld(typeof(UIWorldCreationPreview).GetField("_evil",
+                    BindingFlags.Instance | BindingFlags.NonPublic)!))
+            .Emit(OpCodes.Ldarg_1)
+            .Emit(OpCodes.Ldloc_1)
+            .Emit(OpCodes.Ldloc_2)
+            .EmitDelegate((byte evil, SpriteBatch spriteBatch, Vector2 position, Color color) => {
+                switch ((WorldEvilSelection)evil) {
+                    case WorldEvilSelection.Random:
+                    case WorldEvilSelection.Corruption:
+                    case WorldEvilSelection.Crimson:
+                        break;
+                    case WorldEvilSelection.Contagion:
+                        spriteBatch.Draw(Mod.Assets.Request<Texture2D>(
+                            $"{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/PreviewEvilContagion",
+                            AssetRequestMode.ImmediateLoad).Value, position, color);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(evil), evil, null);
+                }
+
+                return evil;
+            });
     }
 }
