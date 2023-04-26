@@ -54,17 +54,15 @@ public class UIChanges : ModHook {
 
     private static UIElement? OnUIElementGetElementAt(On_UIElement.orig_GetElementAt orig, UIElement self,
                                                       Vector2 point) {
-        if (self is ExxoToVanillaUIAdapter exxoToVanillaUIAdapter) {
-            FakeEventTarget? fakeEventTarget =
-                exxoToVanillaUIAdapter.ExxoUIElement.GetElementAt(point.ToPoint())?.FakeEventTarget;
-
-            if (fakeEventTarget != null) {
-                fakeEventTarget.Parent = self;
-            }
-
-            return fakeEventTarget;
+        if (self is not ExxoToVanillaUIAdapter exxoToVanillaUIAdapter) {
+            return orig(self, point);
         }
 
-        return orig(self, point);
+        ExxoUIElement? exxoTarget = exxoToVanillaUIAdapter.ExxoUIElement.GetElementAt(point.ToPoint());
+        if (exxoTarget is VanillaToExxoUIAdapter vanillaToExxoUIAdapter) {
+            return vanillaToExxoUIAdapter.VanillaElement.GetElementAt(point);
+        }
+
+        return exxoTarget != null ? new FakeEventTarget(exxoTarget) { Parent = self } : orig(self, point);
     }
 }

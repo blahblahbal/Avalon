@@ -2,6 +2,7 @@
 using Avalon.Common;
 using Avalon.UI;
 using Avalon.UI.Next;
+using Avalon.UI.Next.Enums;
 using Avalon.UI.Next.Structs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -56,7 +57,7 @@ public class ContagionSelectionMenu : ModHook {
         c.GotoNext(i => i.MatchLdstr("evil"));
 
         c.Emit(OpCodes.Ldloc_1);
-        c.Emit(OpCodes.Ldc_R4, 34f);
+        c.Emit(OpCodes.Ldc_R4, 38f);
         c.Emit(OpCodes.Add);
         c.Emit(OpCodes.Stloc_1);
     }
@@ -133,8 +134,9 @@ public class ContagionSelectionMenu : ModHook {
             DisplayMode = UI.Next.Enums.DisplayMode.Grid,
             GridCols = 2,
         };
-        var vanillaWrapper = new ExxoToVanillaUIAdapter(buttonGrid);
+        container.Append(new ExxoToVanillaUIAdapter(buttonGrid));
         buttonGrid.SnapNode = new SnapNode(tagGroup, 0);
+        buttonGrid.Gap = new UIDimension(4, ScreenUnit.Pixels);
 
         for (int i = 0; i < evilButtons.Length; i++) {
             var groupOptionButton = new ExxoUIGroupOptionButton<WorldEvilSelection>(
@@ -155,8 +157,6 @@ public class ContagionSelectionMenu : ModHook {
                 { SnapNode = new SnapNode(tagGroup, i) });
             evilButtons[i] = groupOptionButton;
         }
-
-        container.Append(vanillaWrapper);
     }
 
     private void ClickEvilOption(UIMouseEvent evt, UIElement listeningElement) {

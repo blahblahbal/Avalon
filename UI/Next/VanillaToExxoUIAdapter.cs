@@ -11,11 +11,11 @@ using Terraria.UI;
 namespace Avalon.UI.Next;
 
 public class VanillaToExxoUIAdapter : ExxoUIElement {
-    private readonly UIElement vanillaElement;
+    public readonly UIElement VanillaElement;
 
     public VanillaToExxoUIAdapter(UIElement vanillaElement) {
-        this.vanillaElement = vanillaElement;
-        UIElement lastElementTarget = this.vanillaElement;
+        VanillaElement = vanillaElement;
+        UIElement lastElementTarget = VanillaElement;
         vanillaElement.Recalculate();
 
         OnInputEvent += (_, args) => {
@@ -23,8 +23,8 @@ public class VanillaToExxoUIAdapter : ExxoUIElement {
                 return;
             }
 
-            UIElement? vanillaTarget = this.vanillaElement.GetElementAt(mouseClickEventArgs.MousePosition);
-            var mouseEvent = new UIMouseEvent(this.vanillaElement, mouseClickEventArgs.MousePosition);
+            UIElement? vanillaTarget = VanillaElement.GetElementAt(mouseClickEventArgs.MousePosition);
+            var mouseEvent = new UIMouseEvent(VanillaElement, mouseClickEventArgs.MousePosition);
             switch (mouseClickEventArgs.ButtonType) {
                 case ButtonType.LeftClick when mouseClickEventArgs.Pressed:
                     vanillaTarget.LeftMouseDown(mouseEvent);
@@ -90,19 +90,19 @@ public class VanillaToExxoUIAdapter : ExxoUIElement {
     /// <inheritdoc />
     protected override void RecalculateSelf() {
         if (Width.Unit == ScreenUnit.Auto) {
-            Width = new UIDimension(vanillaElement.GetOuterDimensions().Width, ScreenUnit.Auto);
+            Width = new UIDimension(VanillaElement.GetOuterDimensions().Width, ScreenUnit.Auto);
         }
 
         if (Height.Unit == ScreenUnit.Auto) {
-            Height = new UIDimension(vanillaElement.GetOuterDimensions().Height, ScreenUnit.Auto);
+            Height = new UIDimension(VanillaElement.GetOuterDimensions().Height, ScreenUnit.Auto);
         }
 
         base.RecalculateSelf();
-        vanillaElement.Left = StyleDimension.FromPixels(InnerBounds.X);
-        vanillaElement.Top = StyleDimension.FromPixels(InnerBounds.Y);
-        vanillaElement.Width = StyleDimension.FromPixels(InnerBounds.Width);
-        vanillaElement.Height = StyleDimension.FromPixels(InnerBounds.Height);
-        vanillaElement.Recalculate();
+        VanillaElement.Left = StyleDimension.FromPixels(InnerBounds.X);
+        VanillaElement.Top = StyleDimension.FromPixels(InnerBounds.Y);
+        VanillaElement.Width = StyleDimension.FromPixels(InnerBounds.Width);
+        VanillaElement.Height = StyleDimension.FromPixels(InnerBounds.Height);
+        VanillaElement.Recalculate();
     }
 
     /// <inheritdoc />
@@ -114,22 +114,22 @@ public class VanillaToExxoUIAdapter : ExxoUIElement {
     /// <inheritdoc />
     protected override void UpdateSelf(GameTime gameTime) {
         base.UpdateSelf(gameTime);
-        vanillaElement.Update(gameTime);
+        VanillaElement.Update(gameTime);
     }
 
     /// <inheritdoc />
     protected override void DrawSelf(SpriteBatch spriteBatch) {
         base.DrawSelf(spriteBatch);
-        vanillaElement.Draw(spriteBatch);
+        VanillaElement.Draw(spriteBatch);
     }
 
     /// <inheritdoc />
     public override bool ContainsPoint(Point point) {
-        return vanillaElement.ContainsPoint(point.ToVector2());
+        return VanillaElement.ContainsPoint(point.ToVector2());
     }
 
     /// <inheritdoc />
     public override List<SnapPoint> GetSnapPoints() {
-        return vanillaElement.GetSnapPoints();
+        return VanillaElement.GetSnapPoints();
     }
 }

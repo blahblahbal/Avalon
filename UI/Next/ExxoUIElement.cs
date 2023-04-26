@@ -40,6 +40,11 @@ public class ExxoUIElement : INotifyPropertyChanged {
         set => SetField(ref margin, value);
     }
 
+    public UIDimension Gap {
+        get => gap;
+        set => SetField(ref gap, value);
+    }
+
     public Enums.DisplayMode DisplayMode {
         get => displayMode;
         set => SetField(ref displayMode, value);
@@ -70,7 +75,6 @@ public class ExxoUIElement : INotifyPropertyChanged {
     public Rectangle InnerBounds { get; private set; }
     public ExxoUIElement? Parent { get; private set; }
     public bool Outdated { get; set; }
-    public readonly FakeEventTarget FakeEventTarget;
 
     public virtual bool ContainsPoint(Point point) {
         return InnerBounds.Contains(point);
@@ -88,10 +92,9 @@ public class ExxoUIElement : INotifyPropertyChanged {
     private int gridCols;
     private SnapNode? snapNode;
     private PositionMode positionMode;
+    private UIDimension gap;
 
     public ExxoUIElement() {
-        FakeEventTarget = new FakeEventTarget(this);
-
         Children.CollectionChanged += (_, args) => {
             if (args.OldItems != null) {
                 foreach (ExxoUIElement item in args.OldItems) {
@@ -104,6 +107,8 @@ public class ExxoUIElement : INotifyPropertyChanged {
                     item.Parent = this;
                 }
             }
+
+            Outdated = true;
         };
         PropertyChanged += (_, args) => {
             if (args.PropertyName != nameof(SnapNode)) {
@@ -153,6 +158,15 @@ public class ExxoUIElement : INotifyPropertyChanged {
         int greatestWidth = 0;
         int greatestHeight = 0;
 
+        int flexGap = Gap.Unit switch {
+            ScreenUnit.Auto => (int)Gap.Value,
+            ScreenUnit.Percent => (FlexDirection is FlexDirection.Column or FlexDirection.ColumnReverse
+                ? InnerBounds.Height
+                : InnerBounds.Width) * (int)Gap.Value,
+            ScreenUnit.Pixels => (int)Gap.Value,
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
         foreach (ExxoUIElement child in Children) {
             if (child.PositionMode != PositionMode.Relative) {
                 continue;
@@ -177,6 +191,8 @@ public class ExxoUIElement : INotifyPropertyChanged {
                 FlexDirection.RowReverse => child.OuterBounds.Width,
                 _ => throw new ArgumentOutOfRangeException(),
             };
+
+            offset += flexGap;
 
             if (child.OuterBounds.Width > greatestWidth) {
                 greatestWidth = child.OuterBounds.Width;
@@ -220,13 +236,22 @@ public class ExxoUIElement : INotifyPropertyChanged {
         int rowHeight = 0;
         int greatestWidth = 0;
 
+        int gridGap = Gap.Unit switch {
+            ScreenUnit.Auto => (int)Gap.Value,
+            ScreenUnit.Percent => InnerBounds.Width * (int)Gap.Value,
+            ScreenUnit.Pixels => (int)Gap.Value,
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
+
         foreach (ExxoUIElement child in Children) {
             if (child.PositionMode != PositionMode.Relative) {
                 continue;
             }
 
             if (gridCols > 0) {
-                child.Width = new UIDimension(100f / gridCols, ScreenUnit.Percent);
+                child.Width = new UIDimension((InnerBounds.Width - gridGap * (gridCols - 1)) / (float)gridCols,
+                    ScreenUnit.Pixels);
             }
 
             if (child.Outdated) {
@@ -234,12 +259,12 @@ public class ExxoUIElement : INotifyPropertyChanged {
             }
 
             if (offset.X + child.OuterBounds.Width > InnerBounds.Width) {
-                offset = new Point(0, offset.Y + rowHeight);
+                offset = new Point(0, offset.Y + rowHeight + gridGap);
                 rowHeight = 0;
             }
 
             child.Position = offset;
-            offset = new Point(offset.X + child.OuterBounds.Width, offset.Y);
+            offset = new Point(offset.X + child.OuterBounds.Width + gridGap, offset.Y);
 
             if (child.OuterBounds.Height > rowHeight) {
                 rowHeight = child.OuterBounds.Height;
