@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Avalon.Common;
 using Avalon.UI.Next;
 using Avalon.UI.Next.Enums;
@@ -38,6 +39,7 @@ public class ContagionSelectionMenu : ModHook {
         IL_UIWorldCreation.BuildPage += ILBuildPage;
         IL_UIWorldCreation.MakeInfoMenu += ILMakeInfoMenu;
         IL_UIWorldCreation.ShowOptionDescription += ILShowOptionDescription;
+        IL_UIWorldCreation.UpdatePreviewPlate += ILUpdatePreviewPlate;
         On_UIWorldCreation.SetDefaultOptions += OnSetDefaultOptions;
         On_UIWorldCreation.AddWorldEvilOptions += OnAddWorldEvilOptions;
     }
@@ -66,7 +68,8 @@ public class ContagionSelectionMenu : ModHook {
                                        UIElement container, float accumulatedHeight, UIElement.MouseEvent clickEvent,
                                        string tagGroup, float usableWidthPercent) {
         orig(self, new UIElement(), accumulatedHeight, clickEvent, tagGroup, usableWidthPercent);
-        AddEvilOptions(self, container, accumulatedHeight, ClickEvilOption, tagGroup, usableWidthPercent);
+        AddEvilOptions(self, container, accumulatedHeight, (evt, element) => ClickEvilOption(self, evt, element),
+            tagGroup, usableWidthPercent);
     }
 
     private void OnSetDefaultOptions(On_UIWorldCreation.orig_SetDefaultOptions orig, UIWorldCreation self) {
@@ -125,7 +128,8 @@ public class ContagionSelectionMenu : ModHook {
             Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconEvilRandom"),
             Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconEvilCorruption"),
             Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconEvilCrimson"),
-            null!,
+            Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/IconContagion",
+                AssetRequestMode.ImmediateLoad),
         };
 
         var buttonGrid = new ExxoUIElement {
@@ -158,12 +162,23 @@ public class ContagionSelectionMenu : ModHook {
         }
     }
 
-    private void ClickEvilOption(UIMouseEvent evt, UIElement listeningElement) {
+    private void ClickEvilOption(UIWorldCreation self, UIMouseEvent evt, UIElement listeningElement) {
         var groupOptionButton = (GroupOptionButton<WorldEvilSelection>)listeningElement;
 
         SelectedWorldEvil = groupOptionButton.OptionValue;
         foreach (GroupOptionButton<WorldEvilSelection> evilButton in evilButtons) {
             evilButton.SetCurrentOption(SelectedWorldEvil);
         }
+
+        typeof(UIWorldCreation).GetMethod("UpdatePreviewPlate", BindingFlags.Instance | BindingFlags.NonPublic)
+            ?.Invoke(self, Array.Empty<object>());
+    }
+
+    private void ILUpdatePreviewPlate(ILContext il) {
+        var c = new ILCursor(il);
+
+        c.GotoNext(i => i.MatchLdfld(typeof(UIWorldCreation).GetField("_optionEvil", BindingFlags.Instance | BindingFlags.NonPublic)!))
+            .GotoNext(MoveType.After, i => i.MatchConvU1())
+            .EmitDelegate((byte value) => (byte)SelectedWorldEvil);
     }
 }
