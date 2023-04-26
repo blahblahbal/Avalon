@@ -10,7 +10,6 @@ using Avalon.UI.Next.Structs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.UI;
 
 namespace Avalon.UI.Next;
 
@@ -126,6 +125,7 @@ public class ExxoUIElement : INotifyPropertyChanged {
         if (Outdated) {
             RecalculateSelf();
             PositionChildren();
+            SnapNode?.Recalculate(InnerBounds);
         }
 
         foreach (ExxoUIElement child in Children) {
@@ -360,17 +360,17 @@ public class ExxoUIElement : INotifyPropertyChanged {
         return true;
     }
 
-    public virtual List<SnapPoint> GetSnapPoints() {
-        var snapPoints = new List<SnapPoint>();
+    public virtual IEnumerable<SnapNode> GetSnapNodes() {
+        var snapNodes = new List<SnapNode>();
         if (SnapNode != null) {
-            snapPoints.Add(SnapNode.ToSnapPoint(this));
+            snapNodes.Add(SnapNode);
         }
 
         foreach (ExxoUIElement child in Children) {
-            snapPoints.AddRange(child.GetSnapPoints());
+            snapNodes.AddRange(child.GetSnapNodes());
         }
 
-        return snapPoints;
+        return snapNodes;
     }
 
     public ExxoUIElement? GetElementAt(Point point) {

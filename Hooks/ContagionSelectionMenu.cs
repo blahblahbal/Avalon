@@ -135,7 +135,6 @@ public class ContagionSelectionMenu : ModHook {
             GridCols = 2,
         };
         container.Append(new ExxoToVanillaUIAdapter(buttonGrid));
-        buttonGrid.SnapNode = new SnapNode(tagGroup, 0);
         buttonGrid.Gap = new UIDimension(4, ScreenUnit.Pixels);
 
         for (int i = 0; i < evilButtons.Length; i++) {

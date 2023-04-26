@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Avalon.UI.Next.Enums;
 using Avalon.UI.Next.Events;
 using Avalon.UI.Next.Structs;
@@ -129,7 +130,14 @@ public class VanillaToExxoUIAdapter : ExxoUIElement {
     }
 
     /// <inheritdoc />
-    public override List<SnapPoint> GetSnapPoints() {
-        return VanillaElement.GetSnapPoints();
+    public override IEnumerable<SnapNode> GetSnapNodes() {
+        var snapNodes = new List<SnapNode>();
+        if (SnapNode != null) {
+            snapNodes.Add(SnapNode);
+        }
+
+        snapNodes.AddRange(VanillaElement.GetSnapPoints().Select(sp => sp.ToSnapNode()));
+
+        return snapNodes;
     }
 }
