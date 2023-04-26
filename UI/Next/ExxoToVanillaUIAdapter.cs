@@ -137,6 +137,14 @@ public class ExxoToVanillaUIAdapter : UIElement {
                     false, false));
             }
         };
+        OnScrollWheel += (evt, _) => {
+            if (evt.Target is FakeEventTarget fakeEventTarget) {
+                fakeEventTarget.LinkedElement.InputEvent(new MouseButtonEventArgs(fakeEventTarget.LinkedElement,
+                    evt.MousePosition,
+                    ButtonType.MiddleClick,
+                    false, false, evt.ScrollWheelValue));
+            }
+        };
     }
 
     /// <inheritdoc />
