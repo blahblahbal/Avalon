@@ -58,7 +58,11 @@ namespace Avalon.Common
         }
         public override void AI(NPC npc)
         {
-            Player TargetPlayer = Main.player[npc.target];
+            Player TargetPlayer = Main.player[Main.myPlayer];
+            if (npc.target is > -1 and < 256)
+            {
+                 TargetPlayer = Main.player[npc.target];
+            }
             if (Main.expertMode)
             {
                 #region Slimes

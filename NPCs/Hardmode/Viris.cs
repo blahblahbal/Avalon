@@ -55,6 +55,13 @@ public class Viris : ModNPC
         NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
         NPC.damage = (int)(NPC.damage * 0.65f);
     }
+    public override void ModifyNPCLoot(NPCLoot npcLoot)
+    {
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2));
+
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), 5091, 1500));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), 5091, 500));
+    }
     public override void AI()
     {
         #region AI
@@ -95,15 +102,15 @@ public class Viris : ModNPC
         Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         int frameHeight = texture.Height / Main.npcFrameCount[NPC.type];
         Rectangle frame = NPC.frame;
-        Vector2 drawPos = NPC.position + new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2) - Main.screenPosition;
+        Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
         float alphaThingHackyWow = 0;
         for (int i = 4; i > 0; i--)
         {
             alphaThingHackyWow += 0.1f;
-            Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, drawPos, frame, drawColor, NPC.rotation, new Vector2(NPC.frame.Width / 2,NPC.frame.Height / 2), NPC.scale,SpriteEffects.None,0);
-        return false;
+        //Main.EntitySpriteDraw(texture, drawPos, frame, drawColor, NPC.rotation, new Vector2(NPC.frame.Width / 2,NPC.frame.Height / 2), NPC.scale,SpriteEffects.None,0);
+        return true;
     }
 
     public override void FindFrame(int frameHeight)
@@ -150,7 +157,7 @@ public class Viris : ModNPC
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris4").Type, NPC.scale);
             for (int i = 0; i < 30; i++)
             {
-                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-5, 3), 50, default, 1);
+                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-5, 3), 50, default, 2);
                 Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
                 Main.dust[d].noGravity = true;
             }

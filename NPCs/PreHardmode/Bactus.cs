@@ -43,8 +43,9 @@ public class Bactus : ModNPC
         {
             NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
             NPC.defense = (int)(NPC.defense * 0.8f);
-            NPC.scale *= 0.85f;
+            NPC.scale *= 0.9f;
             NPC.knockBackResist *= 1.2f;
+            NPC.value *= 0.8f;
         }
         if (J == 2)
         {
@@ -52,6 +53,7 @@ public class Bactus : ModNPC
             NPC.defense = (int)(NPC.defense * 1.1f);
             NPC.scale *= 1.15f;
             NPC.knockBackResist *= 0.9f;
+            NPC.value *= 1.2f;
         }
         NPC.life = NPC.lifeMax;
     }
@@ -65,6 +67,12 @@ public class Bactus : ModNPC
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2));
+
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), 5091, 1500)); // Monster Meat
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), 5091, 500));
+
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), ItemID.TentacleSpike, 525));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), ItemID.TentacleSpike, 100));
     }
     //public override float SpawnChance(NPCSpawnInfo spawnInfo)
     //{
@@ -243,60 +251,45 @@ public class Bactus : ModNPC
 
     public override void FindFrame(int frameHeight)
     {
-        Player TargetPlayer = Main.player[NPC.target];
-        //NPC.frameCounter += 1.0;
-        //if (NPC.frameCounter >= 8.0)
-        //{
-        //    NPC.frame.Y = NPC.frame.Y + frameHeight;
-        //    NPC.frameCounter = 0.0;
-        //}
-        //if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
-        //{
-        //    NPC.frame.Y = 0;
-        //}
+        //Player TargetPlayer = Main.player[NPC.target];
+        NPC.frameCounter += 1.0;
+        if (NPC.frameCounter >= 8.0)
+        {
+            NPC.frame.Y = NPC.frame.Y + frameHeight;
+            NPC.frameCounter = 0.0;
+        }
+        if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
+        {
+            NPC.frame.Y = 0;
+        }
 
-        int NPCFrame = 0;
-        float BacPos = NPC.Center.X;
-        float playerDist = Vector2.Distance(new Vector2(NPC.Center.X, 0), new Vector2(TargetPlayer.Center.X, 0));
+        //int NPCFrame = 0;
+        //float BacPos = NPC.Center.X;
+        //float playerDist = Vector2.Distance(new Vector2(NPC.Center.X, 0), new Vector2(TargetPlayer.Center.X, 0));
 
-        int D = 120;
+        //int D = 120;
 
-        if (playerDist < D)
-            NPCFrame = 0;
-        if (playerDist > D)
-            NPCFrame = 1;
-        if (playerDist > D * 2)
-            NPCFrame = 2;
+        //if (playerDist < D)
+        //    NPCFrame = 0;
+        //if (playerDist > D)
+        //    NPCFrame = 1;
+        //if (playerDist > D * 2)
+        //    NPCFrame = 2;
 
-        //if (Main.rand.NextBool(20))
-        //{
-        //    NPC.frameCounter = Main.rand.Next(-3, 3);
-        //    NPC.frameCounter *= 10;
-        //}
+        //if (TargetPlayer.Center.X < BacPos)
+        //    NPCFrame += 4;
 
-        //if (NPC.frameCounter > 0)
-        //{
-        //    NPCFrame = (int)MathHelper.Clamp(NPCFrame - 1, 0, 2);
-        //}
-        //else if (NPC.frameCounter < 0)
-        //{
-        //    NPCFrame = (int)MathHelper.Clamp(NPCFrame - 1, 0, 2);
-        //}
-
-        if (TargetPlayer.Center.X < BacPos)
-            NPCFrame += 4;
-
-        NPC.frame.Y = NPCFrame * frameHeight;
-        NPC.frameCounter--;
+        //NPC.frame.Y = NPCFrame * frameHeight;
+        //NPC.frameCounter--;
     }
 
     public override void HitEffect(NPC.HitInfo hit)
     { 
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f,0.9f), Mod.Find<ModGore>("Bactus").Type, 1f);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Bactus2").Type, 1f);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Bactus3").Type, 1f);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f,0.9f), Mod.Find<ModGore>("Bactus").Type, NPC.scale);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Bactus2").Type, NPC.scale);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Bactus3").Type, NPC.scale);
             for (int i = 0; i < 10; i++)
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-5, 3), 50, default, 1);

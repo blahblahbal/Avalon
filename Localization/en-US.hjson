@@ -3002,6 +3002,11 @@ Mods: {
 				DisplayName: Hellbound Halberd
 				Tooltip: ""
 			}
+
+			Pathogen: {
+				DisplayName: Pathogen
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3086,6 +3091,7 @@ Mods: {
 			Bactus.DisplayName: Bactus
 			Rockarolla.DisplayName: Rockarolla
 			Viris.DisplayName: Viris
+			Ickslime.DisplayName: Ickslime
 		}
 
 		Buffs: {
