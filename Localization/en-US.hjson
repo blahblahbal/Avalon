@@ -3005,7 +3005,7 @@ Mods: {
 
 			Pathogen: {
 				DisplayName: Pathogen
-				Tooltip: ""
+				Tooltip: "Blech"
 			}
 		}
 
