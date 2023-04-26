@@ -1,6 +1,5 @@
 ﻿using System;
 using Avalon.Common;
-using Avalon.UI;
 using Avalon.UI.Next;
 using Avalon.UI.Next.Enums;
 using Avalon.UI.Next.Structs;
@@ -10,6 +9,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using ReLogic.Content;
 using Terraria;
+using Terraria.GameContent.UI.Elements;
 using Terraria.GameContent.UI.States;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -30,8 +30,8 @@ public class ContagionSelectionMenu : ModHook {
 
     public WorldEvilSelection SelectedWorldEvil { get; private set; } = WorldEvilSelection.Random;
 
-    private readonly ExxoUIGroupOptionButton<WorldEvilSelection>[] evilButtons =
-        new ExxoUIGroupOptionButton<WorldEvilSelection>[Enum.GetValues<WorldEvilSelection>().Length];
+    private readonly GroupOptionButton<WorldEvilSelection>[] evilButtons =
+        new GroupOptionButton<WorldEvilSelection>[Enum.GetValues<WorldEvilSelection>().Length];
 
     /// <inheritdoc />
     protected override void Apply() {
@@ -73,7 +73,7 @@ public class ContagionSelectionMenu : ModHook {
         orig(self);
 
         SelectedWorldEvil = WorldEvilSelection.Random;
-        foreach (ExxoUIGroupOptionButton<WorldEvilSelection> evilButton in evilButtons) {
+        foreach (GroupOptionButton<WorldEvilSelection> evilButton in evilButtons) {
             evilButton.SetCurrentOption(SelectedWorldEvil);
         }
     }
@@ -90,7 +90,7 @@ public class ContagionSelectionMenu : ModHook {
         c.Emit(OpCodes.Ldloc_0); // localizedText
         c.Emit(OpCodes.Ldarg_2); // listeningElement
         c.EmitDelegate((LocalizedText localizedText, UIElement listeningElement) => {
-            if (listeningElement is ExxoUIGroupOptionButton<WorldEvilSelection> evilButton) {
+            if (listeningElement is GroupOptionButton<WorldEvilSelection> evilButton) {
                 localizedText = evilButton.Description;
             }
 
@@ -128,7 +128,7 @@ public class ContagionSelectionMenu : ModHook {
             null!,
         };
 
-        var buttonGrid = new UI.Next.ExxoUIElement {
+        var buttonGrid = new ExxoUIElement {
             Width = UIDimension.Fill,
             Position = new Point(0, (int)(accumulatedHeight + 0.5f)),
             DisplayMode = UI.Next.Enums.DisplayMode.Grid,
@@ -138,7 +138,7 @@ public class ContagionSelectionMenu : ModHook {
         buttonGrid.Gap = new UIDimension(4, ScreenUnit.Pixels);
 
         for (int i = 0; i < evilButtons.Length; i++) {
-            var groupOptionButton = new ExxoUIGroupOptionButton<WorldEvilSelection>(
+            var groupOptionButton = new UI.GroupOptionButton<WorldEvilSelection>(
                 Enum.GetValues<WorldEvilSelection>()[i],
                 titles[i],
                 descriptions[i],
@@ -159,10 +159,10 @@ public class ContagionSelectionMenu : ModHook {
     }
 
     private void ClickEvilOption(UIMouseEvent evt, UIElement listeningElement) {
-        var groupOptionButton = (ExxoUIGroupOptionButton<WorldEvilSelection>)listeningElement;
+        var groupOptionButton = (GroupOptionButton<WorldEvilSelection>)listeningElement;
 
         SelectedWorldEvil = groupOptionButton.OptionValue;
-        foreach (ExxoUIGroupOptionButton<WorldEvilSelection> evilButton in evilButtons) {
+        foreach (GroupOptionButton<WorldEvilSelection> evilButton in evilButtons) {
             evilButton.SetCurrentOption(SelectedWorldEvil);
         }
     }
