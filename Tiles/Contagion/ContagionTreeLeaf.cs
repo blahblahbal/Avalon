@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,7 +9,7 @@ public class ContagionTreeLeaf : ModGore
 
     public override void SetStaticDefaults()
     {
-
+        
         GoreID.Sets.SpecialAI[Type] = 3;
     }
 }

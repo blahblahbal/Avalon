@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,7 +9,7 @@ public class RhodiumBrickWall : ModWall
     public override void SetStaticDefaults()
     {
         Main.wallHouse[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Walls.RhodiumBrickWallItem>();
+        ItemDrop = ModContent.ItemType<Items.Placeable.Wall.RhodiumBrickWallItem>();
         AddMapEntry(new Color(79, 40, 61));
         DustType = DustID.t_LivingWood;
     }

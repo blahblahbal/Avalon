@@ -537,31 +537,31 @@ internal class Contagion : GenPass
         #region find the points for making the secondary Tunnels // BUGGY 
 
         //// Variables for how far Tunnels go and how many spawn
-        //int SecondarySpawnRadius = WorldGen.genRand.Next(15, 30); //Length of Tunnel
+        int SecondarySpawnRadius = WorldGen.genRand.Next(15, 30); //Length of Tunnel
 
-        //int SecondaryTunnelN = 1; //Amount of secondary Tunnels
+        int SecondaryTunnelN = 1; //Amount of secondary Tunnels
 
-        //float SetAngle = 0f; //Set to Angle of the Tunnel, used to prevent Secondary tunnels from spawning on top of Main tunnels
+        float SetAngle = 0f; //Set to Angle of the Tunnel, used to prevent Secondary tunnels from spawning on top of Main tunnels
 
-        //float RandSecondaryTunnelAngle = 0f; //Starting Angle for Tunnel spawn
-        ////
+        float RandSecondaryTunnelAngle = 0f; //Starting Angle for Tunnel spawn
+        //
 
-        //for (int n = 0; n < pointsToGoTo.Count; n++)
-        //{
-        //    SetAngle = (float)Math.Atan2((double)points[n].Y - (double)pointsToGoTo[n].Y, (double)points[n].X - (double)pointsToGoTo[n].X);
+        for (int n = 0; n < pointsToGoTo.Count; n++)
+        {
+            SetAngle = (float)Math.Atan2((double)points[n].Y - (double)pointsToGoTo[n].Y, (double)points[n].X - (double)pointsToGoTo[n].X);
 
-        //    for (int SecondaryTunnelCounter = 0; SecondaryTunnelCounter <= SecondaryTunnelN; SecondaryTunnelCounter++)
-        //    {
-        //        RandSecondaryTunnelAngle = MathHelper.ToRadians(WorldGen.genRand.Next((int)SetAngle + 20, (int)SetAngle + 340));
-        //        SecondarySpawnRadius = WorldGen.genRand.Next(15, 30);
+            for (int SecondaryTunnelCounter = 0; SecondaryTunnelCounter <= SecondaryTunnelN; SecondaryTunnelCounter++)
+            {
+                RandSecondaryTunnelAngle = MathHelper.ToRadians(WorldGen.genRand.Next((int)SetAngle + 20, (int)SetAngle + 340));
+                SecondarySpawnRadius = WorldGen.genRand.Next(15, 30);
 
-        //        secondCircleStartPoints.Add(pointsToGoTo[n]);
-        //        secondCircleEndpoints.Add(new Vector2(pointsToGoTo[n].X + SecondarySpawnRadius * (float)Math.Sin((double)RandSecondaryTunnelAngle), pointsToGoTo[n].Y + SecondarySpawnRadius * (float)Math.Cos((double)RandSecondaryTunnelAngle)));
+                secondCircleStartPoints.Add(pointsToGoTo[n]);
+                secondCircleEndpoints.Add(new Vector2(pointsToGoTo[n].X + SecondarySpawnRadius * (float)Math.Sin((double)RandSecondaryTunnelAngle), pointsToGoTo[n].Y + SecondarySpawnRadius * (float)Math.Cos((double)RandSecondaryTunnelAngle)));
 
-        //    }
+            }
 
-        //    SecondaryTunnelN = WorldGen.genRand.Next(1, 3);
-        //}
+            SecondaryTunnelN = WorldGen.genRand.Next(1, 3);
+        }
 
         #endregion
 

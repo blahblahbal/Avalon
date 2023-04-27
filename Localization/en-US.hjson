@@ -167,6 +167,31 @@ Mods: {
 				Tooltip: For Capture the Gem. It drops when you die
 			}
 
+			Blackberry: {
+				DisplayName: Blackberry
+				Tooltip: CommonItemTooltip.MediumStats
+			}
+
+			Mangosteen: {
+				DisplayName: Mangosteen
+				Tooltip: CommonItemTooltip.MinorStats
+			}
+
+			DarkBagel: {
+				DisplayName: Dark Bagel
+				Tooltip: CommonItemTooltip.MediumStats
+			}
+
+			Durian: {
+				DisplayName: Durian
+				Tooltip: CommonItemTooltip.MajorStats
+			}
+
+			Raspberry: {
+				DisplayName: Raspberry
+				Tooltip: CommonItemTooltip.MediumStats
+			}
+
 			BoltstoneBrick: {
 				DisplayName: Boltstone Brick
 				Tooltip: ""
@@ -3057,6 +3082,306 @@ Mods: {
 				DisplayName: Pee Shooter
 				Tooltip: ""
 			}
+
+			OrangeDungeonBathtub: {
+				DisplayName: Orange Dungeon Bathtub
+				Tooltip: ""
+			}
+
+			OrangeDungeonBed: {
+				DisplayName: Orange Dungeon Bed
+				Tooltip: ""
+			}
+
+			OrangeDungeonBookcase: {
+				DisplayName: Orange Dungeon Bookcase
+				Tooltip: ""
+			}
+
+			OrangeDungeonCandelabra: {
+				DisplayName: Orange Dungeon Candelabra
+				Tooltip: ""
+			}
+
+			OrangeDungeonCandle: {
+				DisplayName: Orange Dungeon Candle
+				Tooltip: ""
+			}
+
+			OrangeDungeonChair: {
+				DisplayName: Orange Dungeon Chair
+				Tooltip: ""
+			}
+
+			OrangeDungeonChandelier: {
+				DisplayName: Orange Dungeon Chandelier
+				Tooltip: ""
+			}
+
+			OrangeDungeonClock: {
+				DisplayName: Orange Dungeon Clock
+				Tooltip: ""
+			}
+
+			OrangeDungeonDoor: {
+				DisplayName: Orange Dungeon Door
+				Tooltip: ""
+			}
+
+			OrangeDungeonDresser: {
+				DisplayName: Orange Dungeon Dresser
+				Tooltip: ""
+			}
+
+			OrangeDungeonLamp: {
+				DisplayName: Orange Dungeon Lamp
+				Tooltip: ""
+			}
+
+			OrangeDungeonPiano: {
+				DisplayName: Orange Dungeon Piano
+				Tooltip: ""
+			}
+
+			OrangeDungeonSink: {
+				DisplayName: Orange Dungeon Sink
+				Tooltip: ""
+			}
+
+			OrangeDungeonSofa: {
+				DisplayName: Orange Dungeon Sofa
+				Tooltip: ""
+			}
+
+			OrangeDungeonTable: {
+				DisplayName: Orange Dungeon Table
+				Tooltip: ""
+			}
+
+			OrangeDungeonWorkBench: {
+				DisplayName: Orange Dungeon Work Bench
+				Tooltip: ""
+			}
+
+			PurpleDungeonBathtub: {
+				DisplayName: Purple Dungeon Bathtub
+				Tooltip: ""
+			}
+
+			PurpleDungeonBed: {
+				DisplayName: Purple Dungeon Bed
+				Tooltip: ""
+			}
+
+			PurpleDungeonBookcase: {
+				DisplayName: Purple Dungeon Bookcase
+				Tooltip: ""
+			}
+
+			PurpleDungeonCandelabra: {
+				DisplayName: Purple Dungeon Candelabra
+				Tooltip: ""
+			}
+
+			PurpleDungeonCandle: {
+				DisplayName: Purple Dungeon Candle
+				Tooltip: ""
+			}
+
+			PurpleDungeonChair: {
+				DisplayName: Purple Dungeon Chair
+				Tooltip: ""
+			}
+
+			PurpleDungeonChandelier: {
+				DisplayName: Purple Dungeon Chandelier
+				Tooltip: ""
+			}
+
+			PurpleDungeonChest: {
+				DisplayName: Purple Dungeon Chest
+				Tooltip: ""
+			}
+
+			PurpleDungeonClock: {
+				DisplayName: Purple Dungeon Clock
+				Tooltip: ""
+			}
+
+			PurpleDungeonDoor: {
+				DisplayName: Purple Dungeon Door
+				Tooltip: ""
+			}
+
+			PurpleDungeonDresser: {
+				DisplayName: Purple Dungeon Dresser
+				Tooltip: ""
+			}
+
+			PurpleDungeonLamp: {
+				DisplayName: Purple Dungeon Lamp
+				Tooltip: ""
+			}
+
+			PurpleDungeonPiano: {
+				DisplayName: Purple Dungeon Piano
+				Tooltip: ""
+			}
+
+			PurpleDungeonSink: {
+				DisplayName: Purple Dungeon Sink
+				Tooltip: ""
+			}
+
+			PurpleDungeonSofa: {
+				DisplayName: Purple Dungeon Sofa
+				Tooltip: ""
+			}
+
+			PurpleDungeonTable: {
+				DisplayName: Purple Dungeon Table
+				Tooltip: ""
+			}
+
+			PurpleDungeonWorkbench: {
+				DisplayName: Purple Dungeon Workbench
+				Tooltip: ""
+			}
+
+			AngelSculpture: {
+				DisplayName: Angel Sculpture
+				Tooltip: ""
+			}
+
+			BlueLihzahrdStatue: {
+				DisplayName: Blue Lihzahrd Statue
+				Tooltip: ""
+			}
+
+			ContagionStatue: {
+				DisplayName: Contagion Statue
+				Tooltip: ""
+			}
+
+			CrimsonStatue: {
+				DisplayName: Crimson Statue
+				Tooltip: ""
+			}
+
+			DNASculpture: {
+				DisplayName: D N A Sculpture
+				Tooltip: ""
+			}
+
+			DNAStatue: {
+				DisplayName: D N A Statue
+				Tooltip: ""
+			}
+
+			HallowStatue: {
+				DisplayName: Hallow Statue
+				Tooltip: ""
+			}
+
+			IceSculpture: {
+				DisplayName: Ice Sculpture
+				Tooltip: ""
+			}
+
+			OrangeDungeonVase: {
+				DisplayName: Orange Dungeon Vase
+				Tooltip: ""
+			}
+
+			PurpleDungeonVase: {
+				DisplayName: Purple Dungeon Vase
+				Tooltip: ""
+			}
+
+			ShellStatue: {
+				DisplayName: Shell Statue
+				Tooltip: ""
+			}
+
+			TomeStatue: {
+				DisplayName: Tome Statue
+				Tooltip: ""
+			}
+
+			TurretStatue: {
+				DisplayName: Turret Statue
+				Tooltip: ""
+			}
+
+			OrangeBrick: {
+				DisplayName: Orange Brick
+				Tooltip: ""
+			}
+
+			OrangeBrickPlatform: {
+				DisplayName: Orange Brick Platform
+				Tooltip: ""
+			}
+
+			PurpleBrick: {
+				DisplayName: Purple Brick
+				Tooltip: ""
+			}
+
+			PurpleBrickPlatform: {
+				DisplayName: Purple Brick Platform
+				Tooltip: ""
+			}
+
+			YellowBrick: {
+				DisplayName: Yellow Brick
+				Tooltip: ""
+			}
+
+			OrangeBrickWall: {
+				DisplayName: Orange Brick Wall
+				Tooltip: ""
+			}
+
+			OrangeSlabWall: {
+				DisplayName: Orange Slab Wall
+				Tooltip: ""
+			}
+
+			OrangeTiledWall: {
+				DisplayName: Orange Tiled Wall
+				Tooltip: ""
+			}
+
+			PurpleBrickWall: {
+				DisplayName: Purple Brick Wall
+				Tooltip: ""
+			}
+
+			PurpleSlabWall: {
+				DisplayName: Purple Slab Wall
+				Tooltip: ""
+			}
+
+			PurpleTiledWall: {
+				DisplayName: Purple Tiled Wall
+				Tooltip: ""
+			}
+
+			YellowBrickWall: {
+				DisplayName: Yellow Brick Wall
+				Tooltip: ""
+			}
+
+			YellowSlabWall: {
+				DisplayName: Yellow Slab Wall
+				Tooltip: ""
+			}
+
+			YellowTiledWall: {
+				DisplayName: Yellow Tiled Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3625,6 +3950,9 @@ Mods: {
 			ResistantWoodChest.MapEntry0: Resistant Wood Chest
 			ResistantWoodDresser.MapEntry: Resistant Wood Dresser
 			ResistantSapling.MapEntry: Resistant Sapling
+			OrangeDungeonDresser.MapEntry: Orange Dungeon Dresser
+			PurpleDungeonChest.MapEntry0: Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry0
+			PurpleDungeonDresser.MapEntry: Purple Dungeon Dresser
 		}
 
 		Prefixes: {
@@ -3682,6 +4010,10 @@ Mods: {
 			Hellcastle.DisplayName: Hellcastle
 			NearHellcastle.DisplayName: Near Hellcastle
 			CaesiumBlastplains.DisplayName: Caesium Blastplains
+			Contagion.DisplayName: Contagion
+			ContagionDesert.DisplayName: Contagion Desert
+			DungeonAltColors.DisplayName: Dungeon Alt Colors
+			UndergroundContagion.DisplayName: Underground Contagion
 		}
 
 		World: {

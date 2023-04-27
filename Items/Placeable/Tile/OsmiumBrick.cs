@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,6 +27,6 @@ public class OsmiumBrick : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Ores.OsmiumOre>()).AddIngredient(ItemID.StoneBlock).AddTile(TileID.Furnaces).Register();
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Walls.OsmiumBrickWallItem>(), 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.OsmiumBrickWallItem>(), 4).AddTile(TileID.WorkBenches).Register();
     }
 }

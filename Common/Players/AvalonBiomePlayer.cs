@@ -8,7 +8,7 @@ namespace Avalon.Common.Players;
 
 public class AvalonBiomePlayer : ModPlayer
 {
-    //public bool ZoneContagion => Player.InModBiome(ModContent.GetInstance<Contagion>());
+    public bool ZoneContagion => Player.InModBiome(ModContent.GetInstance<Contagion>());
     public bool ZoneCaesium => Player.InModBiome(ModContent.GetInstance<CaesiumBlastplains>());
     //public bool ZoneCrystal => Player.InModBiome(ModContent.GetInstance<CrystalMines>());
     //public bool ZoneDarkMatter => Player.InModBiome(ModContent.GetInstance<DarkMatter>());
@@ -17,10 +17,10 @@ public class AvalonBiomePlayer : ModPlayer
     //public bool ZoneSkyFortress => Player.InModBiome(ModContent.GetInstance<SkyFortress>());
     //public bool ZoneTropics => Player.InModBiome(ModContent.GetInstance<Tropics>());
     //public bool ZoneTuhrtlOutpost => Player.InModBiome(ModContent.GetInstance<TuhrtlOutpost>());
-    //public bool ZoneUndergroundContagion => Player.InModBiome(ModContent.GetInstance<UndergroundContagion>());
+    public bool ZoneUndergroundContagion => Player.InModBiome(ModContent.GetInstance<UndergroundContagion>());
     //public bool ZoneUndergroundTropics => Player.InModBiome(ModContent.GetInstance<UndergroundTropics>());
-    //public bool ZoneAltDungeon => Player.InModBiome(ModContent.GetInstance<DungeonAltColors>());
-    //public bool ZoneContagionDesert => Player.InModBiome(ModContent.GetInstance<ContagionDesert>());
+    public bool ZoneAltDungeon => Player.InModBiome(ModContent.GetInstance<DungeonAltColors>());
+    public bool ZoneContagionDesert => Player.InModBiome(ModContent.GetInstance<ContagionDesert>());
     public bool ZoneTime { get; private set; }
     public bool ZoneBlight { get; private set; }
     public bool ZoneFright { get; private set; }
@@ -35,10 +35,10 @@ public class AvalonBiomePlayer : ModPlayer
 
     public override void PostUpdate()
     {
-        //if (ZoneAltDungeon)
-        //{
-        //    Player.ZoneDungeon = true;
-        //}
+        if (ZoneAltDungeon)
+        {
+            Player.ZoneDungeon = true;
+        }
         if (ZoneHellcastle || ZoneNearHellcastle)
         {
             Player.ZoneGraveyard = true;

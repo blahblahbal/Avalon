@@ -1,6 +1,7 @@
 using System;
 using Avalon.Players;
 using Avalon.Tiles;
+using Avalon.Tiles.Contagion;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -36,16 +37,16 @@ public class BiomeTileCounts : ModSystem
     {
         HellCastleTiles = tileCounts[ModContent.TileType<ImperviousBrick>()];
 
-
-        /*Main.SceneMetrics.JungleTileCount += tileCounts[ModContent.TileType<GreenIce>()];
-        Main.SceneMetrics.SandTileCount += tileCounts[ModContent.TileType<Snotsand>()];
-        ContagionDesertTiles += tileCounts[ModContent.TileType<Snotsand>()];
         ContagionTiles = tileCounts[ModContent.TileType<Chunkstone>()] +
                          tileCounts[ModContent.TileType<HardenedSnotsand>()] +
                          tileCounts[ModContent.TileType<Snotsandstone>()] +
                          tileCounts[ModContent.TileType<Ickgrass>()] +
                          tileCounts[ModContent.TileType<Snotsand>()] +
                          tileCounts[ModContent.TileType<YellowIce>()];
+        /*Main.SceneMetrics.JungleTileCount += tileCounts[ModContent.TileType<GreenIce>()];
+        Main.SceneMetrics.SandTileCount += tileCounts[ModContent.TileType<Snotsand>()];
+        ContagionDesertTiles += tileCounts[ModContent.TileType<Snotsand>()];
+        
 
         TropicsTiles = tileCounts[ModContent.TileType<TropicalStone>()] +
                        tileCounts[ModContent.TileType<TuhrtlBrick>()] +
@@ -58,11 +59,11 @@ public class BiomeTileCounts : ModSystem
                     tileCounts[ModContent.TileType<DarkMatterSoil>()] +
                     tileCounts[ModContent.TileType<HardenedDarkSand>()] +
                     tileCounts[ModContent.TileType<Darksandstone>()] +
-                    tileCounts[ModContent.TileType<DarkMatterGrass>()];
+                    tileCounts[ModContent.TileType<DarkMatterGrass>()];*/
         DungeonAltTiles += tileCounts[ModContent.TileType<OrangeBrick>()] +
             tileCounts[ModContent.TileType<PurpleBrick>()] +
             tileCounts[ModContent.TileType<CrackedOrangeBrick>()] +
-            tileCounts[ModContent.TileType<CrackedPurpleBrick>()];*/
+            tileCounts[ModContent.TileType<CrackedPurpleBrick>()];
         CaesiumTiles = tileCounts[ModContent.TileType<BlastedStone>()];
         /*SkyFortressTiles = tileCounts[ModContent.TileType<SkyBrick>()];
         CrystalTiles = tileCounts[ModContent.TileType<CrystalStone>()];

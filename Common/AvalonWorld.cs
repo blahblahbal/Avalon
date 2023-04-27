@@ -52,7 +52,7 @@ public class AvalonWorld : ModSystem
         Iridium = 2,
     }
 
-    public int JungleX = 0;
+    private static bool crackedBrick;
 
     public WorldEvil WorldEvil;
 
@@ -458,5 +458,38 @@ public class AvalonWorld : ModSystem
 
             WorldGen.destroyObject = false;
         }
+    }
+
+    public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
+    {
+        if (tileCache.TileType != ModContent.TileType<CrackedOrangeBrick>() && tileCache.TileType != ModContent.TileType<CrackedPurpleBrick>() || Main.netMode == NetmodeID.MultiplayerClient || crackedBrick || j < Main.maxTilesY - 200)
+        {
+            return;
+        }
+        crackedBrick = true;
+        for (int k = i - 4; k <= i + 4; k++)
+        {
+            for (int l = j - 4; l <= j + 4; l++)
+            {
+                int maxValue = 15;
+                if (!WorldGen.SolidTile(k, l + 1))
+                {
+                    maxValue = 7;
+                }
+                else if (k == i && l == j - 1 && !fail)
+                {
+                    maxValue = 7;
+                }
+                if ((k != i || l != j) && Main.tile[k, l].HasTile && (Main.tile[k, l].TileType == ModContent.TileType<CrackedOrangeBrick>() || Main.tile[k, l].TileType == ModContent.TileType<CrackedPurpleBrick>()) && WorldGen.genRand.NextBool(maxValue))
+                {
+                    WorldGen.KillTile(k, l, fail: false, effectOnly: false, noItem: true);
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, k, l);
+                    }
+                }
+            }
+        }
+        crackedBrick = false;
     }
 }

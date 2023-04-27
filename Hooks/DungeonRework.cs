@@ -1,4 +1,6 @@
 using Avalon.Common;
+using Avalon.Tiles.Furniture.OrangeDungeon;
+using Avalon.Tiles.Furniture.PurpleDungeon;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -34,7 +36,7 @@ public class DungeonRemoveCrackedBricks : GenPass
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
     {
         #region uncomment later
-        /*int RandDungeonColour = (WorldGen.genRand.Next(2));
+        int RandDungeonColour = (WorldGen.genRand.Next(2));
         //RandDungeonColour = 1;
         bool otherColors = WorldGen.genRand.NextBool(2);
         if (otherColors)
@@ -362,7 +364,7 @@ public class DungeonRemoveCrackedBricks : GenPass
                     }
                 }
             }
-        }*/
+        }
         #endregion
         for (int i = 100; i < Main.maxTilesX - 100; i++)
         {
@@ -373,21 +375,21 @@ public class DungeonRemoveCrackedBricks : GenPass
                 {
                     WorldGen.KillTile(i, j);
                 }
-                //if ((Main.tile[i, j].TileType is TileID.CrackedBlueDungeonBrick or TileID.CrackedGreenDungeonBrick or TileID.CrackedPinkDungeonBrick) &&
-                //    Main.tile[i, j].HasTile && !ModContent.GetInstance<AvalonConfig>().RevertDungeonGen && otherColors)
-                //{
-                //    Tile t = Main.tile[i, j];
-                //    t.HasTile = false;
-                //    switch (RandDungeonColour)
-                //    {
-                //        case 0:
-                //            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedOrangeBrick>(), true);
-                //            break;
-                //        case 1:
-                //            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedPurpleBrick>(), true);
-                //            break;
-                //    }
-                //}
+                if ((Main.tile[i, j].TileType is TileID.CrackedBlueDungeonBrick or TileID.CrackedGreenDungeonBrick or TileID.CrackedPinkDungeonBrick) &&
+                    Main.tile[i, j].HasTile && !ModContent.GetInstance<AvalonConfig>().RevertDungeonGen && otherColors)
+                {
+                    Tile t = Main.tile[i, j];
+                    t.HasTile = false;
+                    switch (RandDungeonColour)
+                    {
+                        case 0:
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedOrangeBrick>(), true);
+                            break;
+                        case 1:
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedPurpleBrick>(), true);
+                            break;
+                    }
+                }
             }
         }
     }

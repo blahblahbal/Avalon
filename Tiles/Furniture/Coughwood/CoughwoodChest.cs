@@ -95,31 +95,6 @@ namespace Avalon.Tiles.Furniture.Coughwood
         {
             return Main.tile[i, j].TileFrameX / 36 == 1;
         }
-
-        public override bool UnlockChest(int i, int j, ref short frameXAdjustment, ref int dustType, ref bool manual)
-        {
-            if (Main.dayTime)
-            {
-                Main.NewText("The chest stubbornly refuses to open in the light of the day. Try again at night.", Color.Orange);
-                return false;
-            }
-
-            DustType = dustType;
-            return true;
-        }
-
-        public override bool LockChest(int i, int j, ref short frameXAdjustment, ref bool manual)
-        {
-            int style = TileObjectData.GetTileStyle(Main.tile[i, j]);
-            // We need to return true only if the tile style is the unlocked variant of a chest that supports locking. 
-            if (style == 0)
-            {
-                // We can check other conditions as well, such as how biome chests can't be locked until Plantera is defeated
-                return true;
-            }
-            return false;
-        }
-
         public static string MapChestName(string name, int i, int j)
         {
             int left = i;
