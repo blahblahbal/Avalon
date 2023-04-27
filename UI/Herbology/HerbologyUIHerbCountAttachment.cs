@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using Avalon.Common;
+using System.Globalization;
+using Avalon.Common.Players;
 using Avalon.Data;
 using Microsoft.Xna.Framework;
 using Terraria;

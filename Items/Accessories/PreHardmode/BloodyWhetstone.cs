@@ -1,4 +1,4 @@
-using Avalon.Common;
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -10,8 +10,6 @@ internal class BloodyWhetstone : ModItem
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Bloody Whetstone");
-        //Tooltip.SetDefault("Melee attacks inflict bleeding");
         Item.ResearchUnlockCount = 1;
     }
 
@@ -25,6 +23,6 @@ internal class BloodyWhetstone : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetModPlayer<ExxoEquipEffects>().BloodyWhetstone = true;
+        player.GetModPlayer<AvalonPlayer>().BloodyWhetstone = true;
     }
 }

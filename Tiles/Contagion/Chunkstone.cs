@@ -1,11 +1,11 @@
-﻿using Avalon.Dusts;
+using Avalon.Dusts;
 using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles;
+namespace Avalon.Tiles.Contagion;
 
 public class Chunkstone : ModTile
 {

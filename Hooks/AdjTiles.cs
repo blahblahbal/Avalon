@@ -2,6 +2,7 @@ using Avalon.Common;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Common.Players;
 
 namespace Avalon.Hooks;
 
@@ -140,4 +141,4 @@ internal class AdjTiles : ModHook
             else
                 orig(self);
         }*/
-        }
+}

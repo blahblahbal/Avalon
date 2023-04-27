@@ -1,4 +1,4 @@
-using Avalon.Common;
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

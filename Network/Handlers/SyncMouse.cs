@@ -1,5 +1,5 @@
 using System.IO;
-using Avalon.Common;
+using Avalon.Common.Players;
 using Terraria;
 using Terraria.ModLoader;
 

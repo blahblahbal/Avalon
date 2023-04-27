@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Avalon.Common;
+using Avalon.Common.Players;
 using Avalon.Data;
 using Avalon.Items.Potions.Buff;
 using Microsoft.Xna.Framework;

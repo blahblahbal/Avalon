@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Avalon.Common;
+using System.IO;
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

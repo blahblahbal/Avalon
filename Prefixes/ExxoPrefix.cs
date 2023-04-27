@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Avalon.Common;
+using Avalon.Common.Players;
 using Terraria;
 using Terraria.ModLoader;
 

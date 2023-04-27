@@ -1,4 +1,4 @@
-using Avalon.Common;
+using Avalon.Common.Players;
 using Avalon.Network;
 using Microsoft.Xna.Framework;
 using Terraria;

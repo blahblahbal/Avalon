@@ -25,6 +25,15 @@ public static class ClassExtensions
 
     public static void Active(this Tile t, bool a) => t.HasTile = a;
 
+    public static Item HasItemInArmorFindIt(this Player p, int type)
+    {
+        for (int i = 0; i < p.armor.Length; i++)
+        {
+            if (p.armor[i].type == type) return p.armor[i];
+        }
+        return null;
+    }
+
     /// <summary>
     ///     Checks if the current player has an item in their armor/accessory slots.
     /// </summary>

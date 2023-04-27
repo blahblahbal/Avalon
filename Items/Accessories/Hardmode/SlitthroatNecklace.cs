@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common.Players;
 using Avalon.Items.Accessories.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -24,7 +24,7 @@ public class SlitthroatNecklace : ModItem
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetModPlayer<ExxoEquipEffects>().BloodyWhetstone = true;
+        player.GetModPlayer<AvalonPlayer>().BloodyWhetstone = true;
         player.GetArmorPenetration(DamageClass.Melee) += 15;
     }
     public override void AddRecipes()

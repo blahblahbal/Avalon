@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace Avalon.Common;
+namespace Avalon.Common.Players;
 
 public class AvalonHerbologyPlayer : ModPlayer
 {

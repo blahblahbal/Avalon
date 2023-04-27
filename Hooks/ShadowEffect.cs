@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Players;
 using Terraria;
 using Terraria.Graphics.Renderers;
 using Microsoft.Xna.Framework;

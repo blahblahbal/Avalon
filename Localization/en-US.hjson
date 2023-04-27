@@ -2713,6 +2713,21 @@ Mods: {
 				Tooltip: ""
 			}
 
+			BandofStamina: {
+				DisplayName: Band of Stamina
+				Tooltip: Increases maximum stamina by 90
+			}
+
+			SnotOrb: {
+				DisplayName: Snot Orb
+				Tooltip: Creates a snot orb that provides light
+			}
+
+			SnotsandBlock: {
+				DisplayName: Snotsand Block
+				Tooltip: "'Disgustingly sticky!'"
+			}
+
 			CrimstoneColumn: {
 				DisplayName: Crimstone Column
 				Tooltip: ""
@@ -3022,6 +3037,26 @@ Mods: {
 				DisplayName: Blasted Stone
 				Tooltip: ""
 			}
+
+			HardenedSnotsandBlock: {
+				DisplayName: Hardened Snotsand Block
+				Tooltip: ""
+			}
+
+			SnotsandstoneBlock: {
+				DisplayName: Snotsandstone Block
+				Tooltip: ""
+			}
+
+			YellowIceBlock: {
+				DisplayName: Yellow Ice Block
+				Tooltip: ""
+			}
+
+			PeeShooter: {
+				DisplayName: Pee Shooter
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3086,6 +3121,8 @@ Mods: {
 			PossessedFlamesaw.DisplayName: Possessed Flamesaw
 			PossessedFlamesawChop.DisplayName: Possessed Flamesaw Chop
 			CaesiumGas.DisplayName: Caesium Gas
+			PeeBullet.DisplayName: Pee Bullet
+			SnotOrb.DisplayName: Snot Orb
 		}
 
 		NPCs: {
@@ -3564,7 +3601,12 @@ Mods: {
 
 			CaesiumPoison: {
 				DisplayName: Caesium Poison
-				Description: Mods.Avalon.Buffs.CaesiumPoison.Description
+				Description: You are poisoned by the Caesium
+			}
+
+			SnotOrb: {
+				DisplayName: Snot Orb
+				Description: The snot orb provides light
 			}
 		}
 

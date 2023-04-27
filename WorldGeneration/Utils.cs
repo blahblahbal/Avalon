@@ -1,8 +1,10 @@
+using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
 namespace Avalon.WorldGeneration; 
 
@@ -13,6 +15,24 @@ public class Utils
         Tile t = Main.tile[i, j];
         t.Slope = SlopeType.Solid;
         t.IsHalfBlock = false;
+    }
+
+    /// <summary>
+    /// A helper method to find the actual surface of the world.
+    /// </summary>
+    /// <param name="positionX">The x position.</param>
+    /// <returns>The surface of the world.</returns>
+    public static int TileCheck(int positionX)
+    {
+        for (int i = (int)(GenVars.worldSurfaceLow - 30); i < Main.maxTilesY; i++)
+        {
+            Tile tile = Framing.GetTileSafely(positionX, i);
+            if ((tile.TileType == TileID.Dirt || tile.TileType == TileID.ClayBlock || tile.TileType == TileID.Stone || tile.TileType == TileID.Sand || tile.TileType == ModContent.TileType<Snotsand>() /*|| tile.TileType == ModContent.TileType<Loam>() */|| tile.TileType == TileID.Mud || tile.TileType == TileID.SnowBlock || tile.TileType == TileID.IceBlock) && tile.HasTile)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 
     /// <summary>

@@ -1,4 +1,4 @@
-using Avalon.Common;
+using Avalon.Common.Players;
 using Avalon.Items.Accessories.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;

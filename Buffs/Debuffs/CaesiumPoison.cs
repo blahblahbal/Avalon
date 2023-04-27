@@ -1,9 +1,8 @@
-using Avalon.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
-using Avalon.Common;
+using Avalon.Common.Players;
 
 namespace Avalon.Buffs.Debuffs;
 

@@ -16,7 +16,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace Avalon.Common;
+namespace Avalon.Common.Players;
 
 public class AvalonPlayer : ModPlayer
 {
@@ -87,6 +87,7 @@ public class AvalonPlayer : ModPlayer
     public int WardCD;
     public bool HeartGolem;
     public bool EtherealHeart;
+    public bool BloodyWhetstone;
     #endregion
 
     #region buffs and debuffs
@@ -103,6 +104,8 @@ public class AvalonPlayer : ModPlayer
     public bool Ward;
     public int WardCurseDOT;
     public bool CaesiumPoison;
+
+    public bool SnotOrb;
     #endregion
 
     public int FrameCount { get; private set; }
@@ -138,6 +141,9 @@ public class AvalonPlayer : ModPlayer
         Ward = false;
         HeartGolem = false;
         EtherealHeart = false;
+        BloodyWhetstone = false;
+
+        SnotOrb = false;
 
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
         if (Player.whoAmI == Main.myPlayer)
@@ -395,6 +401,19 @@ public class AvalonPlayer : ModPlayer
         //         damage += MultiplyRangedCritDamage(damage);
         //     }
         // }
+    }
+
+    public override void OnHitNPC(NPC npc, NPC.HitInfo hit, int damage)
+    {
+        if (hit.DamageType == DamageClass.Melee && BloodyWhetstone)
+        {
+            if (!npc.HasBuff<Bleeding>())
+            {
+                npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks = 1;
+            }
+
+            npc.AddBuff(ModContent.BuffType<Bleeding>(), 120);
+        }
     }
 
     public override void OnHurt(Player.HurtInfo info)

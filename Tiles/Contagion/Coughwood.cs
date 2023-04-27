@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles;
+namespace Avalon.Tiles.Contagion;
 
 public class Coughwood : ModTile
 {

@@ -16,7 +16,7 @@ class Coughwood : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Coughwood>();
+        Item.createTile = ModContent.TileType<Tiles.Contagion.Coughwood>();
         Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;

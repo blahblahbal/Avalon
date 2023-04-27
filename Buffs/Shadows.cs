@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common.Players;
 using Avalon.Systems;
 using Terraria;
 using Terraria.ID;
