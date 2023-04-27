@@ -3160,7 +3160,7 @@ Mods: {
 
 			OrangeDungeonWorkBench: {
 				DisplayName: Orange Dungeon Work Bench
-				Tooltip: ""
+				Tooltip: Used for basic crafting
 			}
 
 			PurpleDungeonBathtub: {
@@ -3245,7 +3245,7 @@ Mods: {
 
 			PurpleDungeonWorkbench: {
 				DisplayName: Purple Dungeon Workbench
-				Tooltip: ""
+				Tooltip: Used for basic crafting
 			}
 
 			AngelSculpture: {
@@ -3269,12 +3269,12 @@ Mods: {
 			}
 
 			DNASculpture: {
-				DisplayName: D N A Sculpture
+				DisplayName: DNA Sculpture
 				Tooltip: ""
 			}
 
 			DNAStatue: {
-				DisplayName: D N A Statue
+				DisplayName: DNA Statue
 				Tooltip: ""
 			}
 
@@ -3444,7 +3444,7 @@ Mods: {
 			HellboundHalberd.DisplayName: Hellbound Halberd
 			Boomlash.DisplayName: Boomlash
 			PossessedFlamesaw.DisplayName: Possessed Flamesaw
-			PossessedFlamesawChop.DisplayName: Possessed Flamesaw Chop
+			PossessedFlamesawChop.DisplayName: Possessed Flamesaw
 			CaesiumGas.DisplayName: Caesium Gas
 			PeeBullet.DisplayName: Pee Bullet
 			SnotOrb.DisplayName: Snot Orb
@@ -3951,7 +3951,7 @@ Mods: {
 			ResistantWoodDresser.MapEntry: Resistant Wood Dresser
 			ResistantSapling.MapEntry: Resistant Sapling
 			OrangeDungeonDresser.MapEntry: Orange Dungeon Dresser
-			PurpleDungeonChest.MapEntry0: Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry0
+			PurpleDungeonChest.MapEntry0: Purple Dungeon Chest
 			PurpleDungeonDresser.MapEntry: Purple Dungeon Dresser
 		}
 
