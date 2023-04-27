@@ -1,90 +1,63 @@
+using Terraria.GameContent.Bestiary;
 using System;
 using Avalon.Items.Material;
+using Avalon.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent.Bestiary;
-using Terraria.DataStructures;
+using Terraria.GameContent.ItemDropRules;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.Hardmode;
 
-public class Bactus : ModNPC
+public class Cougher : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[NPC.type] = 8;
+        //DisplayName.SetDefault("Cougher");
+        Main.npcFrameCount[NPC.type] = 3;
     }
 
     public override void SetDefaults()
     {
-        NPC.damage = 23;
-        NPC.lifeMax = 50;
-        NPC.defense = 7;
+        NPC.damage = 35;
+        NPC.lifeMax = 230;
+        NPC.defense = 12;
         NPC.noGravity = true;
-        NPC.width = 40;
+        NPC.width = 28;
         NPC.aiStyle = -1;
         NPC.npcSlots = 1f;
-        NPC.value = 110f;
-        NPC.height = 44;
+        NPC.value = 510f;
+        NPC.height = 38;
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
-        NPC.knockBackResist = 0.5f;
+        NPC.knockBackResist = 0.3f;
         Banner = NPC.type;
-        BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
-        //SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
-        DrawOffsetY = 10;
-    }
-    public override void OnSpawn(IEntitySource source)
-    {
-        int J = Main.rand.Next(0, 3);
-        if (J == 1)
-        {
-            NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
-            NPC.defense = (int)(NPC.defense * 0.8f);
-            NPC.scale *= 0.9f;
-            NPC.knockBackResist *= 1.2f;
-            NPC.value *= 0.8f;
-        }
-        if (J == 2)
-        {
-            NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
-            NPC.defense = (int)(NPC.defense * 1.1f);
-            NPC.scale *= 1.15f;
-            NPC.knockBackResist *= 0.9f;
-            NPC.value *= 1.2f;
-        }
-        NPC.life = NPC.lifeMax;
+        BannerItem = ModContent.ItemType<Items.Banners.CougherBanner>();
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Bacti will swarm you if you're not careful. Watch out!")
+            new ModBiomeBestiaryInfoElement(Mod, "Contagion", "Assets/Bestiary/ContagionIcon", "Assets/Bestiary/ContagionBG", null),
+            new FlavorTextBestiaryInfoElement("Watch out for the coughing!")
         });
+    }
+    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+    {
+        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
+        NPC.damage = (int)(NPC.damage * 0.5f);
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2));
-
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), 5091, 1500)); // Monster Meat
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), 5091, 500));
-
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), ItemID.TentacleSpike, 525));
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), ItemID.TentacleSpike, 100));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2));
     }
     //public override float SpawnChance(NPCSpawnInfo spawnInfo)
     //{
-    //    if (spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion && spawnInfo.Player.ZoneOverworldHeight && !spawnInfo.Player.InPillarZone())
-    //        return 1;
-    //    return 0;
+    //    return ((spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneUndergroundContagion) &&
+    //        !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
     //}
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.65f);
-    }
     public override void AI()
     {
         #region AI
@@ -221,23 +194,6 @@ public class Bactus : ModNPC
             return;
         }
         #endregion AI
-        //if (Main.expertMode)
-        //{
-        //    NPC.ai[2]++;
-        //    if (NPC.ai[2] == 360)
-        //    {
-        //        NPC.noTileCollide = true;
-        //    }
-        //    if (NPC.ai[2] is > 380 and < 400)
-        //    {
-        //        if (Main.rand.NextBool(3))
-        //        {
-        //            int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
-        //            Main.dust[d].noGravity = true;
-        //        }
-        //        NPC.alpha += 5;
-        //    }
-        //}
 
         if (Main.rand.NextBool(20))
         {
@@ -251,7 +207,6 @@ public class Bactus : ModNPC
 
     public override void FindFrame(int frameHeight)
     {
-        //Player TargetPlayer = Main.player[NPC.target];
         NPC.frameCounter += 1.0;
         if (NPC.frameCounter >= 8.0)
         {
@@ -262,45 +217,25 @@ public class Bactus : ModNPC
         {
             NPC.frame.Y = 0;
         }
-
-        //int NPCFrame = 0;
-        //float BacPos = NPC.Center.X;
-        //float playerDist = Vector2.Distance(new Vector2(NPC.Center.X, 0), new Vector2(TargetPlayer.Center.X, 0));
-
-        //int D = 120;
-
-        //if (playerDist < D)
-        //    NPCFrame = 0;
-        //if (playerDist > D)
-        //    NPCFrame = 1;
-        //if (playerDist > D * 2)
-        //    NPCFrame = 2;
-
-        //if (TargetPlayer.Center.X < BacPos)
-        //    NPCFrame += 4;
-
-        //NPC.frame.Y = NPCFrame * frameHeight;
-        //NPC.frameCounter--;
     }
-
     public override void HitEffect(NPC.HitInfo hit)
-    { 
+    {
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f,0.9f), Mod.Find<ModGore>("Bactus").Type, NPC.scale);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Bactus2").Type, NPC.scale);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Bactus3").Type, NPC.scale);
-            for (int i = 0; i < 10; i++)
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Cougher1").Type, NPC.scale);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Cougher2").Type, NPC.scale);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Cougher3").Type, NPC.scale);
+            for (int i = 0; i < 30; i++)
             {
-                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-5, 3), 50, default, 1);
+                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-5, 3), 50, default, 1.5f);
                 Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
-                Main.dust[d].noGravity = true;
+                Main.dust[d].noGravity = !Main.rand.NextBool(3);
                 Main.dust[d].fadeIn = 1.2f;
             }
         }
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 15; i++)
         {
-            int d2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 1), 50, default, Main.rand.NextFloat(1, 1.5f));
+            int d2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 1), 50, default, Main.rand.NextFloat(1, 1.5f));
             Main.dust[d2].velocity += NPC.velocity * Main.rand.NextFloat(0.2f, 0.8f);
             Main.dust[d2].noGravity = true;
         }
