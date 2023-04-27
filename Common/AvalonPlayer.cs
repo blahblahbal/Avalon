@@ -102,6 +102,7 @@ public class AvalonPlayer : ModPlayer
     public bool NinjaPotion;
     public bool Ward;
     public int WardCurseDOT;
+    public bool CaesiumPoison;
     #endregion
 
     public int FrameCount { get; private set; }
@@ -121,6 +122,7 @@ public class AvalonPlayer : ModPlayer
         NinjaElixir = false;
         NinjaPotion = false;
         HeartsickElixir = false;
+        CaesiumPoison = false;
 
         TrapImmune = false;
         PulseCharm = false;
@@ -416,6 +418,11 @@ public class AvalonPlayer : ModPlayer
         {
             Player.NinjaDodge();
             info.Damage = 0;
+        }
+
+        if (CaesiumPoison)
+        {
+            info.Damage = (int)(info.Damage * 1.15f);
         }
     }
 

@@ -2653,6 +2653,11 @@ Mods: {
 				Tooltip: "'R. Penguin'"
 			}
 
+			JourneysBeginning: {
+				DisplayName: Journey's Beginning
+				Tooltip: "'A. Eisenmenger'"
+			}
+
 			TheBastion: {
 				DisplayName: The Bastion
 				Tooltip: "'R. Penguin'"
@@ -3005,7 +3010,17 @@ Mods: {
 
 			Pathogen: {
 				DisplayName: Pathogen
-				Tooltip: "Blech"
+				Tooltip: Blech
+			}
+
+			CaesiumOre: {
+				DisplayName: Caesium Ore
+				Tooltip: ""
+			}
+
+			BlastedStone: {
+				DisplayName: Blasted Stone
+				Tooltip: ""
 			}
 		}
 
@@ -3070,6 +3085,7 @@ Mods: {
 			Boomlash.DisplayName: Boomlash
 			PossessedFlamesaw.DisplayName: Possessed Flamesaw
 			PossessedFlamesawChop.DisplayName: Possessed Flamesaw Chop
+			CaesiumGas.DisplayName: Caesium Gas
 		}
 
 		NPCs: {
@@ -3544,6 +3560,11 @@ Mods: {
 				DisplayName: Ward Curse
 				Description: Losing life
 			}
+
+			CaesiumPoison: {
+				DisplayName: Caesium Poison
+				Description: Mods.Avalon.Buffs.CaesiumPoison.Description
+			}
 		}
 
 		Tiles: {
@@ -3617,13 +3638,14 @@ Mods: {
 		Biomes: {
 			Hellcastle.DisplayName: Hellcastle
 			NearHellcastle.DisplayName: Near Hellcastle
+			CaesiumBlastplains.DisplayName: Caesium Blastplains
 		}
 
 		World: {
 			EvilSelection: {
 				Contagion: {
 					Title: Contagion
-					Description: A vile bacterial contagion is guaranteed to be present in your world.
+					Description: Vile bacterial contagion is guaranteed to be present in your world.
 				}
 			}
 		}

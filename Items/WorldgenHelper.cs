@@ -29,8 +29,8 @@ class WorldgenHelper : ModItem
         int y = (int)player.position.Y / 16;
 
         //WorldGeneration.Structures.Hellcastle.GenerateHellcastle(x, y);
-        Main.NewText(WorldGen.SavedOreTiers.Gold);
-        
+        MakeSpike(x, y, 20, 10, 1);
+
 
         return true;
         //int xStored = x;
@@ -88,4 +88,61 @@ class WorldgenHelper : ModItem
     //    }
     //    return xStored;
     //}
+    public static void MakeSpike(int x, int y, int length, int width, int direction = 1)
+    {
+        // Store the x and y in new vars
+        int startX = x;
+        int startY = y;
+
+        int howManyTimes = 0;
+        int maxTimes = WorldGen.genRand.Next(8) + 5;
+        int modifier = 1;
+
+        if (WorldGen.genRand.NextBool())
+        {
+            modifier *= -1;
+        }
+
+        // Loop until length
+        for (int q = 0; q < length; q++)
+        {
+            // Grab the distance between the start and the current position
+            float distFromStart = Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y));
+
+            // If the distance is divisible by 4 and the width is less than 5, reduce the width
+            int w = width;
+            if ((int)distFromStart % 4 == 0 || w < 5)
+            {
+                width--;
+            }
+
+            // Make a square/circle of the tile
+            if (q < 3)
+            {
+                WorldGeneration.Utils.MakeCircle2(x, y, (int)(width * 0.67), ModContent.TileType<Tiles.Ores.CaesiumOre>(), ModContent.TileType<Tiles.CaesiumCrystal>());
+            }
+            else
+                WorldGeneration.Utils.MakeSquare(x, y, width, ModContent.TileType<Tiles.CaesiumCrystal>()); // ModContent.TileType<Tiles.Ores.CaesiumOre>());
+
+            // Make the spike go in the opposite direction after a certain amount of tiles
+            howManyTimes++;
+            if (howManyTimes % maxTimes == 0)
+            {
+                modifier *= -1;
+                howManyTimes = 0;
+                maxTimes = WorldGen.genRand.Next(8) + 5;
+            }
+            x += (WorldGen.genRand.Next(2) + 1) * modifier;
+
+            // Add a bit to the y coord to make it go up or down depending on the parameter
+            if (width > 3)
+            {
+                y += (WorldGen.genRand.Next(3) + 2) * direction;
+            }
+            else
+            {
+                y += 1 * direction;
+            }
+        }
+    }
 }

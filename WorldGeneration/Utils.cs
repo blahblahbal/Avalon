@@ -1,5 +1,8 @@
+using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.WorldGeneration; 
 
@@ -74,6 +77,156 @@ public class Utils
             for (int j = y; j < y + yr; j++)
             {
                 SquareTileFrame(i, j, true, lh);
+            }
+        }
+    }
+    public static void MakeCircle2(int x, int y, int radius, int outerType, int innerType)
+    {
+        for (int k = x - radius; k <= x + radius; k++)
+        {
+            for (int l = y - radius; l <= y + radius; l++)
+            {
+                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius && Main.tile[k, l].TileType != innerType)
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = true;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    Main.tile[k, l].TileType = (ushort)outerType;
+                    WorldGen.SquareTileFrame(k, l);
+                }
+            }
+        }
+        for (int k = x - radius; k <= x + radius; k++)
+        {
+            for (int l = y - radius; l <= y + radius; l++)
+            {
+                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius - 2)
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = true;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    Main.tile[k, l].TileType = (ushort)innerType;
+                    WorldGen.SquareTileFrame(k, l);
+                }
+            }
+        }
+    }
+    public static void MakeSquare(int x, int y, int s, int type)
+    {
+        for (int i = x - s / 2; i < x + s / 2; i++)
+        {
+            for (int j = y; j < y + s; j++)
+            {
+                if (Main.tile[i, j].TileType != TileID.WoodBlock)
+                {
+                    Tile t = Main.tile[i, j];
+                    t.HasTile = true;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    Main.tile[i, j].TileType = (ushort)type;
+                    WorldGen.SquareTileFrame(i, j);
+                }
+            }
+        }
+    }
+    public static void MakeCircle(int x, int y, int radius, int tileType, bool walls = false, int wallType = WallID.Dirt)
+    {
+        for (int k = x - (int)(radius * 0.25); k <= x + (int)(radius * 0.25); k++)
+        {
+            for (int l = y - radius; l <= y + radius; l++)
+            {
+                float dist = Vector2.Distance(new Vector2(k, l), new Vector2(x, y));
+                if (dist <= radius && dist >= (radius - 29))
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = false;
+                }
+                if ((dist <= radius && dist >= radius - 7) || (dist <= radius - 22 && dist >= radius - 29))
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = false;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    Main.tile[k, l].TileType = (ushort)tileType;
+                    WorldGen.SquareTileFrame(k, l);
+                }
+                if (walls)
+                {
+                    if (dist <= radius - 6 && dist >= radius - 23)
+                    {
+                        Main.tile[k, l].WallType = (ushort)wallType;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void OreRunner(int i, int j, double strength, int steps, ushort type, ushort typeThatCanBeReplaced)
+    {
+        double num = strength;
+        double num2 = steps;
+        Vector2 vector2D = default;
+        vector2D.X = i;
+        vector2D.Y = j;
+        Vector2 vector2D2 = default;
+        vector2D2.X = WorldGen.genRand.Next(-10, 11) * 0.1f;
+        vector2D2.Y = WorldGen.genRand.Next(-10, 11) * 0.1f;
+        while (num > 0.0 && num2 > 0.0)
+        {
+            if (vector2D.Y < 0.0 && num2 > 0.0 && type == 59)
+            {
+                num2 = 0.0;
+            }
+            num = strength * (num2 / (double)steps);
+            num2 -= 1.0;
+            int num3 = (int)(vector2D.X - num * 0.5);
+            int num4 = (int)(vector2D.X + num * 0.5);
+            int num5 = (int)(vector2D.Y - num * 0.5);
+            int num6 = (int)(vector2D.Y + num * 0.5);
+            if (num3 < 0)
+            {
+                num3 = 0;
+            }
+            if (num4 > Main.maxTilesX)
+            {
+                num4 = Main.maxTilesX;
+            }
+            if (num5 < 0)
+            {
+                num5 = 0;
+            }
+            if (num6 > Main.maxTilesY)
+            {
+                num6 = Main.maxTilesY;
+            }
+            for (int k = num3; k < num4; k++)
+            {
+                for (int l = num5; l < num6; l++)
+                {
+                    if (Math.Abs((double)k - vector2D.X) + Math.Abs((double)l - vector2D.Y) < strength * 0.5 * (1.0 + WorldGen.genRand.Next(-10, 11) * 0.015) &&
+                        Main.tile[k, l].HasTile && Main.tile[k, l].TileType == typeThatCanBeReplaced)
+                    {
+                        Main.tile[k, l].TileType = type;
+                        Main.tile[k, l].ClearBlockPaintAndCoating();
+                        SquareTileFrame(k, l);
+                        if (Main.netMode == 2)
+                        {
+                            NetMessage.SendTileSquare(-1, k, l);
+                        }
+                    }
+                }
+            }
+            vector2D += vector2D2;
+            vector2D2.X += WorldGen.genRand.Next(-10, 11) * 0.05f;
+            if (vector2D2.X > 1.0f)
+            {
+                vector2D2.X = 1.0f;
+            }
+            if (vector2D2.X < -1.0f)
+            {
+                vector2D2.X = -1.0f;
             }
         }
     }

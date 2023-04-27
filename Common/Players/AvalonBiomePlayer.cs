@@ -9,7 +9,7 @@ namespace Avalon.Common.Players;
 public class AvalonBiomePlayer : ModPlayer
 {
     //public bool ZoneContagion => Player.InModBiome(ModContent.GetInstance<Contagion>());
-    //public bool ZoneCaesium => Player.InModBiome(ModContent.GetInstance<CaesiumBlastplains>());
+    public bool ZoneCaesium => Player.InModBiome(ModContent.GetInstance<CaesiumBlastplains>());
     //public bool ZoneCrystal => Player.InModBiome(ModContent.GetInstance<CrystalMines>());
     //public bool ZoneDarkMatter => Player.InModBiome(ModContent.GetInstance<DarkMatter>());
     public bool ZoneHellcastle => Player.InModBiome(ModContent.GetInstance<Hellcastle>());

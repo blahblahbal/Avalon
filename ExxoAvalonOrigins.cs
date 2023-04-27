@@ -26,6 +26,11 @@ public class ExxoAvalonOrigins : Mod
 
     private readonly List<IReplaceAssets> assetReplacers = new();
 
+    /// <summary>
+    ///     Gets or sets the transition value for fading the caesium background in and out.
+    /// </summary>
+    public static float CaesiumTransition { get; set; }
+
     public const string TextureAssetsPath = "Assets/Textures";
     internal UserInterface staminaInterface;
     internal StaminaBar staminaBar;

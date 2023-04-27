@@ -1,6 +1,7 @@
 using Avalon.Tiles;
 using Avalon.Tiles.Ores;
 using Avalon.WorldGeneration.Structures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -15,7 +16,7 @@ internal class Underworld : GenPass
 
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
     {
-        /*progress.Message = "Generating Caesium Blastplains";
+        progress.Message = "Generating Caesium Blastplains";
         #region caesium blastplains
         //for (var i = 0; i < (int)((Main.maxTilesX * Main.maxTilesY) * 0.0008); i++)
         //{
@@ -36,13 +37,14 @@ internal class Underworld : GenPass
             {
                 if (q > caesiumXPosLeft + 5)
                 {
-                    if (WorldGen.genRand.Next(10) == 0 && Main.tile[q, z].HasTile &&
+                    if (WorldGen.genRand.NextBool(10) && Main.tile[q, z].HasTile &&
                         Main.tile[q, z].TileType == TileID.Ash)
                     {
                         WorldGen.TileRunner(q, z, WorldGen.genRand.Next(6, 8), WorldGen.genRand.Next(6, 8),
                             ModContent.TileType<BlastedStone>());
                     }
                 }
+                    
             }
         }
 
@@ -53,13 +55,16 @@ internal class Underworld : GenPass
                 //if (WorldGen.genRand.Next(20) == 0 && z >= Main.maxTilesY - 250 && z <= Main.maxTilesY - 241 && Main.tile[q, z].HasTile) Main.tile[q, z].type = (ushort)ModContent.TileType<Tiles.BlackBlaststone>();
                 //if (WorldGen.genRand.Next(10) == 0 && z >= Main.maxTilesY - 240 && z <= Main.maxTilesY - 231 && Main.tile[q, z].HasTile) Main.tile[q, z].type = (ushort)ModContent.TileType<Tiles.BlackBlaststone>();
                 //if (WorldGen.genRand.Next(5) == 0 && z >= Main.maxTilesY - 230 && z <= Main.maxTilesY - 221 && Main.tile[q, z].HasTile) Main.tile[q, z].type = (ushort)ModContent.TileType<Tiles.BlackBlaststone>();
-                if ((Main.tile[q, z].TileType == TileID.Ash || Main.tile[q, z].TileType == TileID.Hellstone) &&
+                if ((Main.tile[q, z].TileType == TileID.Ash || Main.tile[q, z].TileType == TileID.Hellstone || Main.tile[q, z].TileType == TileID.AshGrass) &&
                     Main.tile[q, z].HasTile)
                 {
                     Main.tile[q, z].TileType = (ushort)ModContent.TileType<BlastedStone>();
                 }
-
-                if (z < Main.maxTilesY - 110 && z > Main.maxTilesY - 120)
+                if (Main.tile[q, z].TileType == TileID.AshVines || Main.tile[q, z].TileType == TileID.AshPlants)
+                {
+                    WorldGen.KillTile(q, z);
+                }
+                if (z < Main.maxTilesY - 100 && z > Main.maxTilesY - 110)
                 {
                     if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
                         (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
@@ -68,19 +73,17 @@ internal class Underworld : GenPass
                     {
                         if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
                         {
-                            if (q % 20 == 0)
+                            if (q % 25 == 0)
                             {
-                                CaesiumSpike.CreateSpikeUp(q, z,
-                                    (ushort)ModContent
-                                        .TileType<CaesiumOre>()); // Structures.CaesiumSpike.CreateSpike(q, z);
-                                CaesiumSpike.CreateSpikeDown(q, z,
-                                    (ushort)ModContent.TileType<CaesiumOre>());
+                                MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+
+                                //MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
                             }
                         }
                     }
                 }
 
-                if (z < Main.maxTilesY - 170 && z > Main.maxTilesY - 180)
+                if (z < Main.maxTilesY - 200 && z > Main.maxTilesY - 210)
                 {
                     if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
                         (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
@@ -89,13 +92,11 @@ internal class Underworld : GenPass
                     {
                         if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
                         {
-                            if (q % 20 == 0)
+                            if (q % 25 == 0)
                             {
-                                CaesiumSpike.CreateSpikeUp(q, z,
-                                    (ushort)ModContent.TileType<CaesiumOre>());
-                                CaesiumSpike.CreateSpikeDown(q, z,
-                                    (ushort)ModContent
-                                        .TileType<CaesiumOre>()); // Structures.CaesiumSpike.CreateSpike(q, z);
+                                //MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+
+                                MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
                             }
                         }
                     }
@@ -113,6 +114,8 @@ internal class Underworld : GenPass
                 //        }
                 //    }
                 //}
+                if (WorldGen.genRand.NextBool(50))
+                    Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
             }
         }
 
@@ -136,7 +139,7 @@ internal class Underworld : GenPass
             }
         }
         #endregion
-        */
+
         progress.Message = "Generating Hellcastle and Phantom Overgrowth";
         int hellcastleOriginX = (Main.maxTilesX / 2) - 200;
         int ashenLeft = hellcastleOriginX - 100;
@@ -193,6 +196,64 @@ internal class Underworld : GenPass
                 {
                     WorldGen.OreRunner(hbx, hby, 4, 4, (ushort)ModContent.TileType<BrimstoneBlock>());
                 }
+            }
+        }
+    }
+
+    public static void MakeSpike(int x, int y, int length, int width, int direction = 1)
+    {
+        // Store the x and y in new vars
+        int startX = x;
+        int startY = y;
+
+        int howManyTimes = 0;
+        int maxTimes = WorldGen.genRand.Next(8) + 5;
+        int modifier = 1;
+
+        if (WorldGen.genRand.NextBool())
+        {
+            modifier *= -1;
+        }
+
+        // Loop until length
+        for (int q = 0; q < length; q++)
+        {
+            // Grab the distance between the start and the current position
+            float distFromStart = Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y));
+
+            // If the distance is divisible by 4 and the width is less than 5, reduce the width
+            int w = width;
+            if ((int)distFromStart % 4 == 0 || w < 5)
+            {
+                width--;
+            }
+
+            // Make a square/circle of the tile
+            if (q < 3)
+            {
+                Utils.MakeCircle2(x, y, (int)(width * 0.67), ModContent.TileType<CaesiumCrystal>(), ModContent.TileType<CaesiumCrystal>());
+            }
+            else
+                Utils.MakeSquare(x, y, width, ModContent.TileType<CaesiumCrystal>()); // ModContent.TileType<Tiles.Ores.CaesiumOre>());
+
+            // Make the spike go in the opposite direction after a certain amount of tiles
+            howManyTimes++;
+            if (howManyTimes % maxTimes == 0)
+            {
+                modifier *= -1;
+                howManyTimes = 0;
+                maxTimes = WorldGen.genRand.Next(8) + 5;
+            }
+            x += (WorldGen.genRand.Next(2) + 1) * modifier;
+
+            // Add a bit to the y coord to make it go up or down depending on the parameter
+            if (width > 3)
+            {
+                y += (WorldGen.genRand.Next(3) + 2) * direction;
+            }
+            else
+            {
+                y += 1 * direction;
             }
         }
     }

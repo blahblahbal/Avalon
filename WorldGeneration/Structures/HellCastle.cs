@@ -61,20 +61,6 @@ internal class Hellcastle
         SmoothHellcastle(x, y, 400, 150);
     }
 
-    //public static bool HasEnoughRoomForPaintingType(int x, int y, int width, int height)
-    //{
-    //    for (int i = x; i < x + width; i++)
-    //    {
-    //        for (int j = y; j < y + height; j++)
-    //        {
-    //            if (Main.tile[i, j].HasTile)
-    //            {
-    //                return false;
-    //            }
-    //        }
-    //    }
-    //    return true;
-    //}
     public static bool HasEnoughRoomForPaintingType(int x, int y, int width, int height, int r = 1)
     {
         for (int i = x - r; i < x + width + r; i++)
@@ -176,7 +162,7 @@ internal class Hellcastle
                 if (WorldGen.genRand.NextBool(225))
                 {
                     if (s1t > 3) s1t = 0;
-                    if (s2t > 5) s2t = 0;
+                    if (s2t > 4) s2t = 0;
                     if (s3t > 3) s3t = 0;
                     if (s4t > 2) s4t = 0;
                     int paintingSize = WorldGen.genRand.Next(4);
@@ -223,16 +209,12 @@ internal class Hellcastle
                                 pStyle = 31;
                                 break;
                             case 3:
-                                pStyle = 1;
-                                tileType = ModContent.TileType<Tiles.Paintings3x3>();
-                                break;
-                            case 4:
                                 pStyle = 16;
                                 break;
-                            case 5:
+                            case 4:
                                 pStyle = 17;
                                 break;
-                            case 6:
+                            case 5:
                                 pStyle = 2;
                                 tileType = ModContent.TileType<Tiles.Paintings3x3>();
                                 break;
@@ -294,7 +276,6 @@ internal class Hellcastle
             }
         }
     }
-    // add chandeliers
     public static void AddDecorativeWalls(int x, int y)
     {
         #region walls
@@ -397,7 +378,7 @@ internal class Hellcastle
                                     }
                                     else if (randomPainting == 2)
                                     {
-                                        randomPainting = 17;
+                                        randomPainting = 20;
                                     }
                                     else if (randomPainting == 3)
                                     {
