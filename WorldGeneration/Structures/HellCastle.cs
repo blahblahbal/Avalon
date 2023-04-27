@@ -148,7 +148,6 @@ internal class Hellcastle
         }
         return true;
     }
-
     public static void AddPaintings(int x, int y, int width, int height)
     {
         int s1t = 0;
@@ -177,7 +176,8 @@ internal class Hellcastle
                                 pStyle = 1;
                                 break;
                             case 1:
-                                pStyle = 10;
+                                pStyle = 1;
+                                tileType = ModContent.TileType<Tiles.Paintings2x3>();
                                 break;
                             case 2:
                                 pStyle = 4;
@@ -365,27 +365,6 @@ internal class Hellcastle
                                 tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
                                 break;
                             case 5:
-                                if (WorldGen.genRand.NextBool(4))
-                                {
-                                    int randomPainting = WorldGen.genRand.Next(4);
-                                    if (randomPainting == 0)
-                                    {
-                                        randomPainting = 13;
-                                    }
-                                    else if (randomPainting == 1)
-                                    {
-                                        randomPainting = 19;
-                                    }
-                                    else if (randomPainting == 2)
-                                    {
-                                        randomPainting = 20;
-                                    }
-                                    else if (randomPainting == 3)
-                                    {
-                                        randomPainting = 1;
-                                    }
-                                    WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.Paintings>(), style: randomPainting);
-                                }
                                 tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
                                 break;
                         }
@@ -910,7 +889,6 @@ internal class Hellcastle
             }
         }
     }
-
     public static void AddPillarsInHell(int x, int y)
     {
         int numPillars = WorldGen.genRand.Next(10, 17);

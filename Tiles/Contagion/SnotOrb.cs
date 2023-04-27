@@ -31,9 +31,9 @@ public class SnotOrb : ModTile
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         var brightness = Main.rand.Next(-5, 6) * 0.0025f;
-        r = 0f;
-        g = 0.9f + brightness * 2f;
-        b = 0f;
+        r = ((144f / 255f) + brightness) * 0.65f;
+        g = ((160f / 255f) + brightness) * 0.65f;
+        b = ((38f / 255f) + brightness) * 0.65f;
     }
     public override void AnimateTile(ref int frame, ref int frameCounter)
     {

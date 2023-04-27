@@ -36,7 +36,7 @@ public class Viris : ModNPC
         NPC.DeathSound = SoundID.NPCDeath21;
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
         NPC.noTileCollide = true;
-        //SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
         //DrawOffsetY = 10;
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -47,9 +47,9 @@ public class Viris : ModNPC
             new FlavorTextBestiaryInfoElement("Unimplemented")
         });
     }
-    //public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
-    //    spawnInfo.Player.GetModPlayer<Players.ExxoBiomePlayer>().ZoneUndergroundContagion && !spawnInfo.Player.ZoneDungeon && Main.hardMode
-    //        ? 0.00526f * AvalonGlobalNPC.EndoSpawnRate : 0f;
+    public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
+        spawnInfo.Player.GetModPlayer<Common.Players.AvalonBiomePlayer>().ZoneUndergroundContagion && !spawnInfo.Player.ZoneDungeon && Main.hardMode
+            ? 0.00526f : 0f;
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
         NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);

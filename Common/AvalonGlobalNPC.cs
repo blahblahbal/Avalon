@@ -11,6 +11,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Placeable.Painting;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.NPCs.Hardmode;
+using Avalon.NPCs.PreHardmode;
 using Avalon.NPCs.TownNPCs;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -409,6 +410,28 @@ public class AvalonGlobalNPC : GlobalNPC
             //{
             //    pool.Add(ModContent.NPCType<ArmoredHellTortoise>(), 1f);
             //}
+        }
+        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone()) //
+        {
+            pool.Clear();
+            pool.Add(ModContent.NPCType<Bactus>(), 1f);
+            pool.Add(ModContent.NPCType<PyrasiteHead>(), 0.1f);
+            if (Main.hardMode)
+            {
+                pool.Add(ModContent.NPCType<Cougher>(), 0.8f);
+                pool.Add(ModContent.NPCType<Ickslime>(), 0.7f);
+                if (spawnInfo.Player.ZoneRockLayerHeight)
+                {
+                    pool.Add(ModContent.NPCType<Viris>(), 1f);
+                    //pool.Add(ModContent.NPCType<GrossyFloat>(), 0.6f);
+                }
+
+                if (spawnInfo.Player.ZoneDesert)
+                {
+                    pool.Add(NPCID.DarkMummy, 0.3f);
+                    //pool.Add(ModContent.NPCType<EvilVulture>(), 0.4f);
+                }
+            }
         }
     }
 

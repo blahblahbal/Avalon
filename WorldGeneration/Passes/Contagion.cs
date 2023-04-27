@@ -229,7 +229,480 @@ internal class Contagion : GenPass
         }
     }
 
-    public void ContagionRunner(int evilBiomePosition, int qq = 0)
+    /// <summary>
+    /// Contagion generation method.
+    /// </summary>
+    /// <param name="i">The x coordinate to start the generation at.</param>
+    /// <param name="j">The y coordinate to start the generation at.</param>
+    private static void ContagionRunner(int i, int j)
+    {
+        int j2 = j;
+        int radius = WorldGen.genRand.Next(50, 61);
+        int rad2 = WorldGen.genRand.Next(20, 26);
+        j = Utils.TileCheck(i) + radius + 50;
+        Vector2 center = new Vector2(i, j);
+        List<Vector2> points = new List<Vector2>();
+        List<Vector2> pointsToGoTo = new List<Vector2>();
+        List<double> angles = new List<double>();
+        List<Vector2> outerCircles = new List<Vector2>(); // the circles at the ends of the first tunnels
+        List<Vector2> secondaryCircles = new List<Vector2>(); // the circles at the ends of the outer circles
+        List<Vector2> secondCircleStartPoints = new List<Vector2>();
+        List<Vector2> secondCircleEndpoints = new List<Vector2>();
+        List<double> secondCirclePointsAroundCircle = new List<double>();
+        List<Vector2> exclusions = new List<Vector2>();
+        List<Vector2> excludedPointsForOuterTunnels = new List<Vector2>();
+        //new List<Vector2>();
+        #region make the main circle
+        for (int k = i - radius; k <= i + radius; k++)
+        {
+            for (int l = j - radius; l <= j + radius; l++)
+            {
+                float dist = Vector2.Distance(new Vector2(k, l), new Vector2(i, j));
+                if (dist <= radius && dist >= (radius - 29))
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = false;
+                }
+                if (((dist <= radius && dist >= radius - 7) || (dist <= (float)(radius - 22) && dist >= (float)(radius - 29))) && Main.tile[k, l].TileType != (ushort)ModContent.TileType<SnotOrb>())
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = true;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    t.TileType = (ushort)ModContent.TileType<Chunkstone>();
+                }
+                if (dist <= radius - 6 && dist >= radius - 23)
+                {
+                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                }
+            }
+        }
+        #endregion
+        int radiusModifier = radius - 7; // makes the tunnels go deeper into the main circle (more subtracted means further in)
+        Vector2 posToPlaceAnotherCircle = Vector2.Zero;
+        #region find the points for making the tunnels to the outer circles
+        for (int m = 0; m < 16; m++)
+        {
+            double positionAroundCircle = (WorldGen.genRand.Next(0, 62831852) / 10000000);
+            Vector2 randPoint = new Vector2(center.X + ((int)Math.Round(radiusModifier * Math.Cos(positionAroundCircle))), center.Y + ((int)Math.Round(radiusModifier * Math.Sin(positionAroundCircle))));
+            posToPlaceAnotherCircle = randPoint;
+            Vector2 item2 = center;
+            if (randPoint.X > center.X)
+            {
+                if (randPoint.X > center.X + radius / 2)
+                {
+                    if (randPoint.Y > center.Y)
+                    {
+                        if (randPoint.Y > center.Y + radius / 2)
+                        {
+                            item2 = new Vector2(randPoint.X + 50f, randPoint.Y + 50f);
+                            if (WorldGen.genRand.Next(2) == 0)
+                            {
+                                outerCircles.Add(item2);
+                                secondaryCircles.Add(item2);
+                                excludedPointsForOuterTunnels.Add(randPoint);
+                            }
+                        }
+                        else
+                        {
+                            item2 = new Vector2(randPoint.X + 50f, randPoint.Y + 25f);
+                            if (WorldGen.genRand.Next(2) == 0)
+                            {
+                                outerCircles.Add(item2);
+                                secondaryCircles.Add(item2);
+                                excludedPointsForOuterTunnels.Add(randPoint);
+                            }
+                        }
+                    }
+                    else if (randPoint.Y < center.Y - radius / 2)
+                    {
+                        item2 = new Vector2(randPoint.X + 50f, randPoint.Y - 50f);
+                        if (WorldGen.genRand.Next(2) == 0)
+                        {
+                            outerCircles.Add(item2);
+                            secondaryCircles.Add(item2);
+                            excludedPointsForOuterTunnels.Add(randPoint);
+                        }
+                    }
+                    else
+                    {
+                        item2 = new Vector2(randPoint.X + 50f, randPoint.Y - 25f);
+                        if (WorldGen.genRand.Next(2) == 0)
+                        {
+                            outerCircles.Add(item2);
+                            secondaryCircles.Add(item2);
+                            excludedPointsForOuterTunnels.Add(randPoint);
+                        }
+                    }
+                }
+                else if (randPoint.Y > center.Y)
+                {
+                    if (randPoint.Y > center.Y + radius / 2)
+                    {
+                        item2 = new Vector2(randPoint.X + 25f, randPoint.Y + 50f);
+                        if (WorldGen.genRand.Next(2) == 0)
+                        {
+                            outerCircles.Add(item2);
+                            secondaryCircles.Add(item2);
+                            excludedPointsForOuterTunnels.Add(randPoint);
+                        }
+                    }
+                    else
+                    {
+                        item2 = new Vector2(randPoint.X + 25f, randPoint.Y + 25f);
+                        if (WorldGen.genRand.Next(2) == 0)
+                        {
+                            outerCircles.Add(item2);
+                            secondaryCircles.Add(item2);
+                            excludedPointsForOuterTunnels.Add(randPoint);
+                        }
+                    }
+                }
+                else if (randPoint.Y < center.Y - radius / 2)
+                {
+                    item2 = new Vector2(randPoint.X + 25f, randPoint.Y - 50f);
+                    if (WorldGen.genRand.Next(2) == 0)
+                    {
+                        outerCircles.Add(item2);
+                        secondaryCircles.Add(item2);
+                        excludedPointsForOuterTunnels.Add(randPoint);
+                    }
+                }
+                else
+                {
+                    item2 = new Vector2(randPoint.X + 25f, randPoint.Y - 25f);
+                    if (WorldGen.genRand.Next(2) == 0)
+                    {
+                        outerCircles.Add(item2);
+                        secondaryCircles.Add(item2);
+                        excludedPointsForOuterTunnels.Add(randPoint);
+                    }
+                }
+            }
+            else if (randPoint.X < center.X - radius / 2)
+            {
+                if (randPoint.Y > center.Y)
+                {
+                    if (randPoint.Y > center.Y + radius / 2)
+                    {
+                        item2 = new Vector2(randPoint.X - 50f, randPoint.Y + 50f);
+                        if (WorldGen.genRand.Next(2) == 0)
+                        {
+                            outerCircles.Add(item2);
+                            secondaryCircles.Add(item2);
+                            excludedPointsForOuterTunnels.Add(randPoint);
+                        }
+                    }
+                    else
+                    {
+                        item2 = new Vector2(randPoint.X - 50f, randPoint.Y + 25f);
+                        if (WorldGen.genRand.Next(2) == 0)
+                        {
+                            outerCircles.Add(item2);
+                            secondaryCircles.Add(item2);
+                            excludedPointsForOuterTunnels.Add(randPoint);
+                        }
+                    }
+                }
+                else if (randPoint.Y < center.Y - radius / 2)
+                {
+                    item2 = new Vector2(randPoint.X - 50f, randPoint.Y - 50f);
+                    if (WorldGen.genRand.Next(2) == 0)
+                    {
+                        outerCircles.Add(item2);
+                        secondaryCircles.Add(item2);
+                        excludedPointsForOuterTunnels.Add(randPoint);
+                    }
+                }
+                else
+                {
+                    item2 = new Vector2(randPoint.X - 50f, randPoint.Y - 25f);
+                    if (WorldGen.genRand.Next(2) == 0)
+                    {
+                        outerCircles.Add(item2);
+                        secondaryCircles.Add(item2);
+                        excludedPointsForOuterTunnels.Add(randPoint);
+                    }
+                }
+            }
+            else if (randPoint.Y > center.Y)
+            {
+                if (randPoint.Y > center.Y + radius / 2)
+                {
+                    item2 = new Vector2(randPoint.X - 25f, randPoint.Y + 50f);
+                    if (WorldGen.genRand.Next(2) == 0)
+                    {
+                        outerCircles.Add(item2);
+                        secondaryCircles.Add(item2);
+                        excludedPointsForOuterTunnels.Add(randPoint);
+                    }
+                }
+                else
+                {
+                    item2 = new Vector2(randPoint.X - 25f, randPoint.Y + 25f);
+                    if (WorldGen.genRand.Next(2) == 0)
+                    {
+                        outerCircles.Add(item2);
+                        secondaryCircles.Add(item2);
+                        excludedPointsForOuterTunnels.Add(randPoint);
+                    }
+                }
+            }
+            else if (randPoint.Y < center.Y - radius / 2)
+            {
+                item2 = new Vector2(randPoint.X - 25f, randPoint.Y - 50f);
+                if (WorldGen.genRand.Next(2) == 0)
+                {
+                    outerCircles.Add(item2);
+                    secondaryCircles.Add(item2);
+                    excludedPointsForOuterTunnels.Add(randPoint);
+                }
+            }
+            else
+            {
+                item2 = new Vector2(randPoint.X - 25f, randPoint.Y - 25f);
+                if (WorldGen.genRand.Next(2) == 0)
+                {
+                    outerCircles.Add(item2);
+                    secondaryCircles.Add(item2);
+                    excludedPointsForOuterTunnels.Add(randPoint);
+                }
+            }
+            points.Add(randPoint);
+            pointsToGoTo.Add(item2);
+            angles.Add(positionAroundCircle);
+        }
+        #endregion
+
+        // make outer circles
+        #region outer circles and tunnels
+        if (secondaryCircles.Count != 0)
+        {
+            for (int z = 0; z < secondaryCircles.Count; z++)
+            {
+                if (secondaryCircles[z].Y < center.Y - 10) continue;
+                int outerTunnelsRadiusMod = rad2 - 6;
+                double pointsAroundCircle2 = (WorldGen.genRand.Next(0, 62831852) / 10000000);
+                Vector2 randPointAroundCircle = new Vector2(outerCircles[z].X + ((int)Math.Round(outerTunnelsRadiusMod * Math.Cos(pointsAroundCircle2))), outerCircles[z].Y + ((int)Math.Round(outerTunnelsRadiusMod * Math.Sin(pointsAroundCircle2))));
+                for (int m = 0; m < 16; m++)
+                {
+                    Vector2 endpoint = secondaryCircles[z];
+                    #region endpoint calculation
+                    if (randPointAroundCircle.X > outerCircles[z].X)
+                    {
+                        if (randPointAroundCircle.X > outerCircles[z].X + rad2 / 2)
+                        {
+                            if (randPointAroundCircle.Y > outerCircles[z].Y)
+                            {
+                                if (randPointAroundCircle.Y > outerCircles[z].Y + rad2 / 2)
+                                {
+                                    endpoint = new Vector2(randPointAroundCircle.X + 15f, randPointAroundCircle.Y + 15f);
+                                }
+                                else
+                                {
+                                    endpoint = new Vector2(randPointAroundCircle.X + 15f, randPointAroundCircle.Y + 7f);
+                                }
+                            }
+                            else if (randPointAroundCircle.Y < outerCircles[z].Y - rad2 / 2)
+                            {
+                                endpoint = new Vector2(randPointAroundCircle.X + 15f, randPointAroundCircle.Y - 15f);
+                            }
+                            else
+                            {
+                                endpoint = new Vector2(randPointAroundCircle.X + 15f, randPointAroundCircle.Y - 7f);
+                            }
+                        }
+                        else if (randPointAroundCircle.Y > outerCircles[z].Y)
+                        {
+                            if (randPointAroundCircle.Y > outerCircles[z].Y + rad2 / 2)
+                            {
+                                endpoint = new Vector2(randPointAroundCircle.X + 7f, randPointAroundCircle.Y + 15f);
+                            }
+                            else
+                            {
+                                endpoint = new Vector2(randPointAroundCircle.X + 7f, randPointAroundCircle.Y + 7f);
+                            }
+                        }
+                        else if (randPointAroundCircle.Y < outerCircles[z].Y - rad2 / 2)
+                        {
+                            endpoint = new Vector2(randPointAroundCircle.X + 7f, randPointAroundCircle.Y - 15f);
+                        }
+                        else
+                        {
+                            endpoint = new Vector2(randPointAroundCircle.X + 7f, randPointAroundCircle.Y - 7f);
+                        }
+                    }
+                    else if (randPointAroundCircle.X < outerCircles[z].X - rad2 / 2)
+                    {
+                        if (randPointAroundCircle.Y > outerCircles[z].Y)
+                        {
+                            if (randPointAroundCircle.Y > outerCircles[z].Y + rad2 / 2)
+                            {
+                                endpoint = new Vector2(randPointAroundCircle.X - 15f, randPointAroundCircle.Y + 15f);
+                            }
+                            else
+                            {
+                                endpoint = new Vector2(randPointAroundCircle.X - 15f, randPointAroundCircle.Y + 7f);
+                            }
+                        }
+                        else if (randPointAroundCircle.Y < outerCircles[z].Y - rad2 / 2)
+                        {
+                            endpoint = new Vector2(randPointAroundCircle.X - 15f, randPointAroundCircle.Y - 15f);
+                        }
+                        else
+                        {
+                            endpoint = new Vector2(randPointAroundCircle.X - 15f, randPointAroundCircle.Y - 7f);
+                        }
+                    }
+                    else if (randPointAroundCircle.Y > outerCircles[z].Y)
+                    {
+                        if (randPointAroundCircle.Y > outerCircles[z].Y + rad2 / 2)
+                        {
+                            endpoint = new Vector2(randPointAroundCircle.X - 7f, randPointAroundCircle.Y + 15f);
+                        }
+                        else
+                        {
+                            endpoint = new Vector2(randPointAroundCircle.X - 7f, randPointAroundCircle.Y + 7f);
+                        }
+                    }
+                    else if (randPointAroundCircle.Y < outerCircles[z].Y - rad2 / 2)
+                    {
+                        endpoint = new Vector2(randPointAroundCircle.X - 7f, randPointAroundCircle.Y - 15f);
+                    }
+                    else
+                    {
+                        endpoint = new Vector2(randPointAroundCircle.X - 7f, randPointAroundCircle.Y - 7f);
+                    }
+                    #endregion
+                    secondCircleStartPoints.Add(randPointAroundCircle);
+                    secondCircleEndpoints.Add(endpoint);
+                    secondCirclePointsAroundCircle.Add(pointsAroundCircle2);
+                }
+            }
+        }
+
+        #endregion
+        // make tunnels going outwards from the main circle
+        for (int n = 0; n < points.Count; n++)
+        {
+            if (points[n].Y < center.Y - 10) continue;
+            BoreTunnel2((int)points[n].X, (int)points[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 10f, (ushort)ModContent.TileType<Chunkstone>());
+            BoreTunnel2((int)points[n].X, (int)points[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 5f, 65535);
+            MakeEndingCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 13f, (ushort)ModContent.TileType<Chunkstone>());
+            MakeCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 8f, 65535);
+        }
+        if (outerCircles.Count != 0)
+        {
+            for (int q = 0; q < outerCircles.Count; q++)
+            {
+                if (outerCircles[q].Y < center.Y - 10) continue;
+                MakeEndingCircle((int)outerCircles[q].X, (int)outerCircles[q].Y, rad2, (ushort)ModContent.TileType<Chunkstone>());
+                MakeCircle((int)outerCircles[q].X, (int)outerCircles[q].Y, rad2 - 6, 65535);
+                MakeCircle((int)outerCircles[q].X, (int)outerCircles[q].Y, rad2 - 13, (ushort)ModContent.TileType<Chunkstone>());
+                exclusions.Add(outerCircles[q]);
+            }
+        }
+        int num8 = radius - 7;
+        for (int num9 = 0; num9 < 20; num9++)
+        {
+            double d = WorldGen.genRand.Next(0, 62831852) / 10000000;
+            Vector2 vector2 = new Vector2(center.X + ((int)Math.Round(num8 * Math.Cos(d))), center.Y + ((int)Math.Round(num8 * Math.Sin(d))));
+            if (exclusions.Contains(vector2)) continue;
+            MakeCircle((int)vector2.X, (int)vector2.Y, 4f, (ushort)ModContent.TileType<Chunkstone>());
+        }
+
+        // make tunnels going outwards from the outer circles
+        for (int n = 0; n < secondCircleStartPoints.Count; n++)
+        {
+            if (excludedPointsForOuterTunnels.Count != 0 && n < excludedPointsForOuterTunnels.Count)
+                if (Vector2.Distance(excludedPointsForOuterTunnels[n], secondCircleEndpoints[n]) < 55)
+                    continue;
+            BoreTunnel2((int)secondCircleStartPoints[n].X, (int)secondCircleStartPoints[n].Y, (int)secondCircleEndpoints[n].X, (int)secondCircleEndpoints[n].Y, 7f, (ushort)ModContent.TileType<Chunkstone>());
+            BoreTunnel2((int)secondCircleStartPoints[n].X, (int)secondCircleStartPoints[n].Y, (int)secondCircleEndpoints[n].X, (int)secondCircleEndpoints[n].Y, 3f, 65535);
+            // ending circles
+            MakeCircle((int)secondCircleEndpoints[n].X, (int)secondCircleEndpoints[n].Y, 3f, 65535); // air
+            MakeEndingCircle((int)secondCircleEndpoints[n].X, (int)secondCircleEndpoints[n].Y, 5f, (ushort)ModContent.TileType<Chunkstone>()); // chunkstone
+        }
+        // fill main tunnels with air
+        for (int n = 0; n < points.Count; n++)
+        {
+            if (points[n].Y < center.Y - 10)
+            {
+                exclusions.Add(pointsToGoTo[n]);
+                continue;
+            }
+            BoreTunnel2((int)points[n].X, (int)points[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 3f, 65535);
+        }
+        // make secondary circles inner area filled
+        if (outerCircles.Count != 0)
+        {
+            for (int q = 0; q < outerCircles.Count; q++)
+            {
+                if (outerCircles[q].Y < center.Y - 10) continue;
+                MakeCircle((int)outerCircles[q].X, (int)outerCircles[q].Y, rad2 - 6, 65535);
+                MakeCircle((int)outerCircles[q].X, (int)outerCircles[q].Y, rad2 - 13, (ushort)ModContent.TileType<Chunkstone>());
+            }
+        }
+        for (int num5 = i - radius; num5 <= i + radius; num5++)
+        {
+            for (int num6 = j - radius; num6 <= j + radius; num6++)
+            {
+                float num7 = Vector2.Distance(new Vector2(num5, num6), new Vector2(i, j));
+                if (num7 < radius - 7 && num7 > radius - 22)
+                {
+                    Tile t = Main.tile[num5, num6];
+                    t.HasTile = false;
+                }
+            }
+        }
+        for (int num10 = 0; num10 < pointsToGoTo.Count; num10++)
+        {
+            if (exclusions.Contains(pointsToGoTo[num10])) continue;
+            AddSnotOrb((int)pointsToGoTo[num10].X, (int)pointsToGoTo[num10].Y);
+        }
+        for (int num10 = 0; num10 < secondCircleEndpoints.Count; num10++)
+        {
+            if (exclusions.Contains(secondCircleEndpoints[num10])) continue;
+            AddSnotOrb((int)secondCircleEndpoints[num10].X, (int)secondCircleEndpoints[num10].Y);
+        }
+        BoreTunnel2(i, j - radius - 50, i, j - radius + 7, 5, ushort.MaxValue);
+        for (int x = i - 12; x < i + 12; x++)
+        {
+            for (int y = j - radius - 50; y < j - radius + 8; y++)
+            {
+                if (x >= i + 7 || x <= i - 7)
+                {
+                    Tile t = Main.tile[x, y];
+                    t.HasTile = true;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    t.TileType = (ushort)ModContent.TileType<Chunkstone>();
+                }
+                if (x <= i + 7 && x >= i - 7)
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ChunkstoneWall>();
+                    Tile t = Main.tile[x, y];
+                    t.HasTile = false;
+                }
+            }
+        }
+        for (int x = i - 12; x < i + 12; x++)
+        {
+            for (int y = j - radius - 50; y < j - radius + 8; y++)
+            {
+                if (x == i + 9 || x == i - 9)
+                {
+                    int rn = WorldGen.genRand.Next(13, 17);
+                    if (y % rn == 0)
+                    {
+                        MakeCircle(x, y, 3, (ushort)ModContent.TileType<Chunkstone>());
+                    }
+                }
+            }
+        }
+    }
+
+    public void ContagionRunner2(int evilBiomePosition, int qq = 0)
     {
         int radius = WorldGen.genRand.Next(65, 70); //Radius for Main Circle
         int rad2 = WorldGen.genRand.Next(20, 26);

@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
+using Avalon.Common.Players;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -31,18 +32,19 @@ public class PyrasiteHead : WormHead
         NPC.DeathSound = SoundID.NPCDeath1;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.PyrasiteBanner>();
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
     }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
         NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
         NPC.damage = (int)(NPC.damage * 0.8f);
     }
-    //public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    //{
-    //    if (spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight)
-    //        return (spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight) ? 0.1f : 0f;
-    //    return 0f;
-    //}
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight)
+            return (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight) ? 0.1f : 0f;
+        return 0f;
+    }
     public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)

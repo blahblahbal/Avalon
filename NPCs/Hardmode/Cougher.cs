@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
+using Avalon.Common.Players;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -14,7 +15,6 @@ public class Cougher : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Cougher");
         Main.npcFrameCount[NPC.type] = 3;
     }
 
@@ -34,6 +34,7 @@ public class Cougher : ModNPC
         NPC.knockBackResist = 0.3f;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.CougherBanner>();
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
@@ -53,11 +54,11 @@ public class Cougher : ModNPC
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2));
     }
-    //public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    //{
-    //    return ((spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneUndergroundContagion) &&
-    //        !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
-    //}
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+        return ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
+            !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
+    }
     public override void AI()
     {
         #region AI

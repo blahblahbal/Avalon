@@ -50,7 +50,7 @@ class NinjaPotion : ModItem
         CreateRecipe(1)
             .AddIngredient(ModContent.ItemType<Material.BottledLava>())
             .AddIngredient(ItemID.Blinkroot)
-            .AddIngredient(ModContent.ItemType<Material.Ores.PandemiteOre>())
+            .AddIngredient(ModContent.ItemType<Material.Ores.BacciliteOre>())
             .AddTile(TileID.Bottles)
             .Register();
     }

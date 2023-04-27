@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.Bestiary;
 using Terraria.DataStructures;
+using Avalon.Common.Players;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -33,7 +34,7 @@ public class Bactus : ModNPC
         NPC.knockBackResist = 0.5f;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
-        //SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
         DrawOffsetY = 10;
     }
     public override void OnSpawn(IEntitySource source)
@@ -74,12 +75,12 @@ public class Bactus : ModNPC
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), ItemID.TentacleSpike, 525));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), ItemID.TentacleSpike, 100));
     }
-    //public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    //{
-    //    if (spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion && spawnInfo.Player.ZoneOverworldHeight && !spawnInfo.Player.InPillarZone())
-    //        return 1;
-    //    return 0;
-    //}
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && spawnInfo.Player.ZoneOverworldHeight && !spawnInfo.Player.InPillarZone())
+            return 1;
+        return 0;
+    }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
         NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);

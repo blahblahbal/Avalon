@@ -2,8 +2,10 @@ using System;
 using Avalon.Hooks;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile.LargeHerbs;
+using Avalon.Systems;
 using Avalon.Tiles;
 using Avalon.WorldGeneration.Enums;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -459,7 +461,27 @@ public class AvalonWorld : ModSystem
             WorldGen.destroyObject = false;
         }
     }
+    public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
+    {
+        if (Main.LocalPlayer.GetModPlayer<Players.AvalonBiomePlayer>().ZoneContagion)
+        {
+            float Strength = ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
+            Strength = Math.Min(Strength, 1f);
 
+            int sunR = backgroundColor.R;
+            int sunG = backgroundColor.G;
+            int sunB = backgroundColor.B;
+            sunR -= (int)(212f * Strength / 2 * (backgroundColor.R / 255f));
+            sunB -= (int)(255f * Strength / 2 * (backgroundColor.B / 255f));
+            sunG -= (int)(127f * Strength / 2 * (backgroundColor.G / 255f));
+            sunR = Utils.Clamp(sunR, 15, 255);
+            sunG = Utils.Clamp(sunG, 15, 255);
+            sunB = Utils.Clamp(sunB, 15, 255);
+            backgroundColor.R = (byte)sunR;
+            backgroundColor.G = (byte)sunG;
+            backgroundColor.B = (byte)sunB;
+        }
+    }
     public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
     {
         if (tileCache.TileType != ModContent.TileType<CrackedOrangeBrick>() && tileCache.TileType != ModContent.TileType<CrackedPurpleBrick>() || Main.netMode == NetmodeID.MultiplayerClient || crackedBrick || j < Main.maxTilesY - 200)

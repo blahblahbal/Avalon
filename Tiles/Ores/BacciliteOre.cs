@@ -6,11 +6,11 @@ using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Ores;
 
-public class PandemiteOre : ModTile
+public class BacciliteOre : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(Color.Olive, LanguageManager.Instance.GetText("Pandemite"));
+        AddMapEntry(Color.Olive, LanguageManager.Instance.GetText("Baccilite"));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;
@@ -19,7 +19,7 @@ public class PandemiteOre : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileOreFinderPriority[Type] = 320;
         Main.tileLighted[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Material.Ores.PandemiteOre>();
+        ItemDrop = ModContent.ItemType<Items.Material.Ores.BacciliteOre>();
         HitSound = SoundID.Tink;
         DustType = DustID.JungleSpore;
         MinPick = 55;

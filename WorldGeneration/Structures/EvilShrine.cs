@@ -34,7 +34,7 @@ class EvilShrine
                             int q = WorldGen.genRand.Next(3);
                             if (q == 0) q = ItemID.DemoniteOre;
                             if (q == 1) q = ItemID.CrimtaneOre;
-                            if (q == 2) q = ModContent.ItemType<PandemiteOre>();
+                            if (q == 2) q = ModContent.ItemType<BacciliteOre>();
                             Main.chest[num2].item[0].SetDefaults(q, false);
                             Main.chest[num2].item[0].stack = WorldGen.genRand.Next(41, 68);
                         }
@@ -261,7 +261,7 @@ class EvilShrine
                                 break;
                             case 15:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.Ores.PandemiteOre>();
+                                tile.TileType = (ushort)ModContent.TileType<Tiles.Ores.BacciliteOre>();
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = false;
                                 break;

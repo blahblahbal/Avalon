@@ -7,6 +7,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Avalon.Items.Material;
+using Avalon.Common.Players;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -61,7 +62,7 @@ public class Ickslime : ModNPC
         NPC.DeathSound = SoundID.NPCDeath1;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.IckslimeBanner>();
-        //SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
     }
     public override void OnSpawn(IEntitySource source)
     {
@@ -96,11 +97,11 @@ public class Ickslime : ModNPC
             new FlavorTextBestiaryInfoElement("Gelatinous and icky. Watch out for the large ones!")
         });
     }
-    //public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    //{
-    //    return ((spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<ExxoBiomePlayer>().ZoneUndergroundContagion) &&
-    //        !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
-    //}
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+        return ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
+            !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
+    }
 
     public override void AI()
     {

@@ -74,14 +74,14 @@ internal class CatalyzerRecipes : ModSystem
         //end wood
         //evil ores
         Recipe.Create(ItemID.DemoniteOre, 40)
-            .AddIngredient(ModContent.ItemType<PandemiteOre>(), 40)
+            .AddIngredient(ModContent.ItemType<BacciliteOre>(), 40)
             .AddTile(ModContent.TileType<Tiles.Catalyzer>()).Register();
 
         Recipe.Create(ItemID.CrimtaneOre, 40)
             .AddIngredient(ItemID.DemoniteOre, 40)
             .AddTile(ModContent.TileType<Tiles.Catalyzer>()).Register();
 
-        Recipe.Create(ModContent.ItemType<PandemiteOre>(), 40)
+        Recipe.Create(ModContent.ItemType<BacciliteOre>(), 40)
             .AddIngredient(ItemID.CrimtaneOre, 40)
             .AddTile(ModContent.TileType<Tiles.Catalyzer>()).Register();
         //end evil ores

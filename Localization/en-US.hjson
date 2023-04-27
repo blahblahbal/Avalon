@@ -3382,6 +3382,11 @@ Mods: {
 				DisplayName: Yellow Tiled Wall
 				Tooltip: ""
 			}
+
+			BacciliteOre: {
+				DisplayName: Baccilite Ore
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

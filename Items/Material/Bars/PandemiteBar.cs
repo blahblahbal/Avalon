@@ -32,7 +32,7 @@ class PandemiteBar : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Ores.PandemiteOre>(), 3)
+            .AddIngredient(ModContent.ItemType<Ores.BacciliteOre>(), 3)
             .AddTile(TileID.Furnaces)
             .Register();
     }
