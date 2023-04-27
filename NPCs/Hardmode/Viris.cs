@@ -157,9 +157,10 @@ public class Viris : ModNPC
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris4").Type, NPC.scale);
             for (int i = 0; i < 30; i++)
             {
-                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-5, 3), 50, default, 2);
+                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-4, 2), 50, default, 2);
                 Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
                 Main.dust[d].noGravity = true;
+                Main.dust[d].fadeIn = 1.2f;
             }
         }
         for (int i = 0; i < 15; i++)

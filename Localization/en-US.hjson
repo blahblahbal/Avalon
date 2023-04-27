@@ -3021,6 +3021,7 @@ Mods: {
 			BlastedStone: {
 				DisplayName: Blasted Stone
 				Tooltip: ""
+				Tooltip: Blech
 			}
 		}
 
@@ -3108,6 +3109,7 @@ Mods: {
 			Rockarolla.DisplayName: Rockarolla
 			Viris.DisplayName: Viris
 			Ickslime.DisplayName: Ickslime
+			Cougher.DisplayName: Cougher
 		}
 
 		Buffs: {
