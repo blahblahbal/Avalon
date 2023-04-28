@@ -71,17 +71,15 @@ public class Viris : ModNPC
         }
         Player Target = Main.player[NPC.target];
 
-        float speed;
+        float speed = 4;
 
-        if (Target.Center.Distance(NPC.Center) < 200)
+        if (Target.Center.Distance(NPC.Center) < 250)
         {
-            speed = 7;
-            NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.1f;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.3f;
         }
         else
         {
-            speed = 4;
-            NPC.velocity += NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2CircularEdge(600, 600)) * 0.05f;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2CircularEdge(600, 600)) * 0.1f;
         }
 
         NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
@@ -93,8 +91,8 @@ public class Viris : ModNPC
             Main.dust[d].noGravity = true;
         }
 
-        float maxRotate = 0.2f;
-        NPC.rotation = MathHelper.Clamp(NPC.velocity.X * 0.04f, -maxRotate, maxRotate);
+        float maxRotate = 0.4f;
+        NPC.rotation = MathHelper.Clamp(NPC.velocity.X * 0.06f, -maxRotate, maxRotate);
     }
 
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -107,7 +105,7 @@ public class Viris : ModNPC
         for (int i = 4; i > 0; i--)
         {
             alphaThingHackyWow += 0.1f;
-            Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R / 2, drawColor.G, 0,128) * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
         }
         //Main.EntitySpriteDraw(texture, drawPos, frame, drawColor, NPC.rotation, new Vector2(NPC.frame.Width / 2,NPC.frame.Height / 2), NPC.scale,SpriteEffects.None,0);
         return true;

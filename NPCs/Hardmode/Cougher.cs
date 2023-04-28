@@ -8,6 +8,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Avalon.Common.Players;
+using Avalon.Dusts;
+using Avalon.Projectiles.Hostile;
+using Terraria.Audio;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -30,7 +33,7 @@ public class Cougher : ModNPC
         NPC.value = 510f;
         NPC.height = 38;
         NPC.HitSound = SoundID.NPCHit1;
-        NPC.DeathSound = SoundID.NPCDeath1;
+        NPC.DeathSound = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherDeath") { Pitch = 0.3f, Volume = 0.9f, PitchVariance = 0.5f, MaxInstances = 5};
         NPC.knockBackResist = 0.3f;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.CougherBanner>();
@@ -59,147 +62,201 @@ public class Cougher : ModNPC
         return ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
             !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
     }
+    int Frame;
     public override void AI()
     {
-        #region AI
-        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
+        SoundStyle Cough = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCough")
         {
-            NPC.TargetClosest(true);
-        }
-        var vector17 = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height * 0.5f);
-        var num149 = Main.player[NPC.target].position.X + Main.player[NPC.target].width / 2;
-        var num150 = Main.player[NPC.target].position.Y + Main.player[NPC.target].height / 2;
-        num149 = (int)(num149 / 8f) * 8;
-        num150 = (int)(num150 / 8f) * 8;
-        vector17.X = (int)(vector17.X / 8f) * 8;
-        vector17.Y = (int)(vector17.Y / 8f) * 8;
-        num149 -= vector17.X;
-        num150 -= vector17.Y;
-        var num151 = (float)Math.Sqrt(num149 * num149 + num150 * num150);
-        var num152 = num151;
-        if (num151 == 0f)
+            Volume = 0.8f,
+            Pitch = 0f,
+            PitchVariance = 0.1f,
+            MaxInstances = 10,
+        };
+        if (NPC.ai[2] < 200)
         {
-            num149 = NPC.velocity.X;
-            num150 = NPC.velocity.Y;
-        }
-        else
-        {
-            num151 = 4f / num151;
-            num149 *= num151;
-            num150 *= num151;
-        }
-        if (num152 > 100f)
-        {
-            NPC.ai[0] += 1f;
-            if (NPC.ai[0] > 0f)
+            #region AI
+            if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
             {
-                NPC.velocity.Y = NPC.velocity.Y + 0.023f;
+                NPC.TargetClosest(true);
+            }
+            var vector17 = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height * 0.5f);
+            var num149 = Main.player[NPC.target].position.X + Main.player[NPC.target].width / 2;
+            var num150 = Main.player[NPC.target].position.Y + Main.player[NPC.target].height / 2;
+            num149 = (int)(num149 / 8f) * 8;
+            num150 = (int)(num150 / 8f) * 8;
+            vector17.X = (int)(vector17.X / 8f) * 8;
+            vector17.Y = (int)(vector17.Y / 8f) * 8;
+            num149 -= vector17.X;
+            num150 -= vector17.Y;
+            var num151 = (float)Math.Sqrt(num149 * num149 + num150 * num150);
+            var num152 = num151;
+            if (num151 == 0f)
+            {
+                num149 = NPC.velocity.X;
+                num150 = NPC.velocity.Y;
             }
             else
             {
-                NPC.velocity.Y = NPC.velocity.Y - 0.023f;
+                num151 = 4f / num151;
+                num149 *= num151;
+                num150 *= num151;
             }
-            if (NPC.ai[0] < -100f || NPC.ai[0] > 100f)
+            if (num152 > 100f)
             {
-                NPC.velocity.X = NPC.velocity.X + 0.023f;
+                NPC.ai[0] += 1f;
+                if (NPC.ai[0] > 0f)
+                {
+                    NPC.velocity.Y = NPC.velocity.Y + 0.023f;
+                }
+                else
+                {
+                    NPC.velocity.Y = NPC.velocity.Y - 0.023f;
+                }
+                if (NPC.ai[0] < -100f || NPC.ai[0] > 100f)
+                {
+                    NPC.velocity.X = NPC.velocity.X + 0.023f;
+                }
+                else
+                {
+                    NPC.velocity.X = NPC.velocity.X - 0.023f;
+                }
+                if (NPC.ai[0] > 200f)
+                {
+                    NPC.ai[0] = -200f;
+                }
             }
-            else
+            if (num152 < 150f)
             {
-                NPC.velocity.X = NPC.velocity.X - 0.023f;
+                NPC.velocity.X = NPC.velocity.X + num149 * 0.007f;
+                NPC.velocity.Y = NPC.velocity.Y + num150 * 0.007f;
             }
-            if (NPC.ai[0] > 200f)
+            if (Main.player[NPC.target].dead)
             {
-                NPC.ai[0] = -200f;
+                num149 = NPC.direction * 4f / 2f;
+                num150 = -4f / 2f;
             }
-        }
-        if (num152 < 150f)
-        {
-            NPC.velocity.X = NPC.velocity.X + num149 * 0.007f;
-            NPC.velocity.Y = NPC.velocity.Y + num150 * 0.007f;
-        }
-        if (Main.player[NPC.target].dead)
-        {
-            num149 = NPC.direction * 4f / 2f;
-            num150 = -4f / 2f;
-        }
-        if (NPC.velocity.X < num149)
-        {
-            NPC.velocity.X = NPC.velocity.X + 0.02f;
-            if (NPC.velocity.X < 0f && num149 > 0f)
+            if (NPC.velocity.X < num149)
             {
                 NPC.velocity.X = NPC.velocity.X + 0.02f;
+                if (NPC.velocity.X < 0f && num149 > 0f)
+                {
+                    NPC.velocity.X = NPC.velocity.X + 0.02f;
+                }
             }
-        }
-        else if (NPC.velocity.X > num149)
-        {
-            NPC.velocity.X = NPC.velocity.X - 0.02f;
-            if (NPC.velocity.X > 0f && num149 < 0f)
+            else if (NPC.velocity.X > num149)
             {
                 NPC.velocity.X = NPC.velocity.X - 0.02f;
+                if (NPC.velocity.X > 0f && num149 < 0f)
+                {
+                    NPC.velocity.X = NPC.velocity.X - 0.02f;
+                }
             }
-        }
-        if (NPC.velocity.Y < num150)
-        {
-            NPC.velocity.Y = NPC.velocity.Y + 0.02f;
-            if (NPC.velocity.Y < 0f && num150 > 0f)
+            if (NPC.velocity.Y < num150)
             {
                 NPC.velocity.Y = NPC.velocity.Y + 0.02f;
+                if (NPC.velocity.Y < 0f && num150 > 0f)
+                {
+                    NPC.velocity.Y = NPC.velocity.Y + 0.02f;
+                }
             }
-        }
-        else if (NPC.velocity.Y > num150)
-        {
-            NPC.velocity.Y = NPC.velocity.Y - 0.02f;
-            if (NPC.velocity.Y > 0f && num150 < 0f)
+            else if (NPC.velocity.Y > num150)
             {
                 NPC.velocity.Y = NPC.velocity.Y - 0.02f;
+                if (NPC.velocity.Y > 0f && num150 < 0f)
+                {
+                    NPC.velocity.Y = NPC.velocity.Y - 0.02f;
+                }
             }
+            var num157 = 0.7f;
+            if (NPC.collideX)
+            {
+                NPC.netUpdate = true;
+                NPC.velocity.X = NPC.oldVelocity.X * -num157;
+                if (NPC.direction == -1 && NPC.velocity.X > 0f && NPC.velocity.X < 2f)
+                {
+                    NPC.velocity.X = 2f;
+                }
+                if (NPC.direction == 1 && NPC.velocity.X < 0f && NPC.velocity.X > -2f)
+                {
+                    NPC.velocity.X = -2f;
+                }
+            }
+            if (NPC.collideY)
+            {
+                NPC.netUpdate = true;
+                NPC.velocity.Y = NPC.oldVelocity.Y * -num157;
+                if (NPC.velocity.Y > 0f && NPC.velocity.Y < 1.5)
+                {
+                    NPC.velocity.Y = 2f;
+                }
+                if (NPC.velocity.Y < 0f && NPC.velocity.Y > -1.5)
+                {
+                    NPC.velocity.Y = -2f;
+                }
+            }
+            if (Main.player[NPC.target].dead)
+            {
+                NPC.velocity.Y = NPC.velocity.Y - 0.02f * 2f;
+                if (NPC.timeLeft > 10)
+                {
+                    NPC.timeLeft = 10;
+                }
+            }
+            if (((NPC.velocity.X > 0f && NPC.oldVelocity.X < 0f) || (NPC.velocity.X < 0f && NPC.oldVelocity.X > 0f) || (NPC.velocity.Y > 0f && NPC.oldVelocity.Y < 0f) || (NPC.velocity.Y < 0f && NPC.oldVelocity.Y > 0f)) && !NPC.justHit)
+            {
+                NPC.netUpdate = true;
+                return;
+            }
+            #endregion AI
         }
-        var num157 = 0.7f;
-        if (NPC.collideX)
+        Player TargetPlr = Main.player[NPC.target];
+        if (TargetPlr.Center.Distance(NPC.Center) < 150 || NPC.ai[2] < 199 || NPC.ai[2] >= 200)
+            NPC.ai[2]++;
+        
+        if (NPC.ai[2] > 200)
         {
-            NPC.netUpdate = true;
-            NPC.velocity.X = NPC.oldVelocity.X * -num157;
-            if (NPC.direction == -1 && NPC.velocity.X > 0f && NPC.velocity.X < 2f)
-            {
-                NPC.velocity.X = 2f;
-            }
-            if (NPC.direction == 1 && NPC.velocity.X < 0f && NPC.velocity.X > -2f)
-            {
-                NPC.velocity.X = -2f;
-            }
+            NPC.velocity *= 0.90f;
         }
-        if (NPC.collideY)
+        if (NPC.ai[2] > 220)
         {
-            NPC.netUpdate = true;
-            NPC.velocity.Y = NPC.oldVelocity.Y * -num157;
-            if (NPC.velocity.Y > 0f && NPC.velocity.Y < 1.5)
-            {
-                NPC.velocity.Y = 2f;
-            }
-            if (NPC.velocity.Y < 0f && NPC.velocity.Y > -1.5)
-            {
-                NPC.velocity.Y = -2f;
-            }
+            Frame = 1;
+            NPC.frameCounter = 0;
         }
-        if (Main.player[NPC.target].dead)
+
+        if (NPC.ai[2] > 230)
         {
-            NPC.velocity.Y = NPC.velocity.Y - 0.02f * 2f;
-            if (NPC.timeLeft > 10)
+            Frame = 2;
+            NPC.frameCounter = 0;
+            NPC.velocity = NPC.Center.DirectionTo(TargetPlr.Center).RotatedByRandom(0.5f) * -4.5f;
+            NPC.ai[2] = 0;
+            SoundEngine.PlaySound(Cough, NPC.Center);
+            for(int i = 0;i < 20; i++)
             {
-                NPC.timeLeft = 10;
+                Vector2 ShootDirection = NPC.Center.DirectionTo(TargetPlr.Center).RotatedByRandom(0.5f) * Main.rand.NextFloat(6,3);
+                int d = Dust.NewDust(NPC.position + new Vector2(0, NPC.height / 2), NPC.width, NPC.height / 3, DustID.CorruptGibs, ShootDirection.X, ShootDirection.Y, 128, default, Main.rand.NextFloat(1, 1.5f));
+                Main.dust[d].noGravity = !Main.rand.NextBool(4);
+                if (Main.dust[d].noGravity)
+                    Main.dust[d].fadeIn = 1.5f;
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Vector2 ShootDirection = NPC.Center.DirectionTo(TargetPlr.Center).RotatedByRandom(0.5f) * Main.rand.NextFloat(6, 3);
+                int d = Dust.NewDust(NPC.position + new Vector2(0, NPC.height / 2), NPC.width, NPC.height / 3, DustID.Venom, ShootDirection.X, ShootDirection.Y, 128, default, Main.rand.NextFloat(1, 1.5f));
+                Main.dust[d].noGravity = !Main.rand.NextBool(4);
+                if (Main.dust[d].noGravity)
+                    Main.dust[d].fadeIn = 1.5f;
+            }
+            for (int i = 0; i < Main.rand.Next(3,6); i++)
+            {
+                Vector2 ShootDirection = NPC.Center.DirectionTo(TargetPlr.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(6, 3);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<Cough>(), (int)(NPC.damage * 0.6f), 0, 255);
             }
         }
-        if (((NPC.velocity.X > 0f && NPC.oldVelocity.X < 0f) || (NPC.velocity.X < 0f && NPC.oldVelocity.X > 0f) || (NPC.velocity.Y > 0f && NPC.oldVelocity.Y < 0f) || (NPC.velocity.Y < 0f && NPC.oldVelocity.Y > 0f)) && !NPC.justHit)
-        {
-            NPC.netUpdate = true;
-            return;
-        }
-        #endregion AI
 
         if (Main.rand.NextBool(20))
         {
-            int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
-            Main.dust[d].noGravity = true;
+            Dust.NewDust(NPC.position + new Vector2(0,NPC.height/2), NPC.width, NPC.height / 3, ModContent.DustType<ContagionWaterSplash>(), Main.rand.NextFloat(0, 0), Main.rand.NextFloat(0, 2), 128, default, Main.rand.NextFloat(1f, 1.3f));
+            //Main.dust[d].noGravity = true;
         }
 
         float maxRotate = 0.2f;
@@ -209,15 +266,21 @@ public class Cougher : ModNPC
     public override void FindFrame(int frameHeight)
     {
         NPC.frameCounter += 1.0;
-        if (NPC.frameCounter >= 8.0)
+        //if (NPC.frameCounter >= 8.0)
+        //{
+        //    NPC.frame.Y = NPC.frame.Y + frameHeight;
+        //    NPC.frameCounter = 0.0;
+        //}
+        if(Frame > 0 && NPC.frameCounter > 10.0)
         {
-            NPC.frame.Y = NPC.frame.Y + frameHeight;
+            Frame--;
             NPC.frameCounter = 0.0;
         }
-        if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
-        {
-            NPC.frame.Y = 0;
-        }
+        NPC.frame.Y = frameHeight * Frame;
+        //if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
+        //{
+        //    NPC.frame.Y = 0;
+        //}
     }
     public override void HitEffect(NPC.HitInfo hit)
     {

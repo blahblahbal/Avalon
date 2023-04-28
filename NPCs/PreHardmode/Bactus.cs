@@ -246,8 +246,8 @@ public class Bactus : ModNPC
             Main.dust[d].noGravity = true;
         }
 
-        float maxRotate = 0.2f;
-        NPC.rotation = MathHelper.Clamp(NPC.velocity.X * 0.04f, -maxRotate, maxRotate);
+        float maxRotate = 0.4f;
+        NPC.rotation = MathHelper.Clamp(NPC.velocity.X * 0.08f, -maxRotate, maxRotate);
     }
 
     public override void FindFrame(int frameHeight)

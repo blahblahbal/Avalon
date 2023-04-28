@@ -67,15 +67,15 @@ public class PyrasiteHead : WormHead
     public override void Init()
     {
         MinSegmentLength = 10;
-        MaxSegmentLength = 15;
+        MaxSegmentLength = 18;
 
         CommonWormInit(this);
     }
     internal static void CommonWormInit(Worm worm)
     {
         // These two properties handle the movement of the worm
-        worm.MoveSpeed = 7.5f;
-        worm.Acceleration = 0.065f;
+        worm.MoveSpeed = 9.5f;
+        worm.Acceleration = 0.075f;
     }
     public class PyrasiteBody : WormBody
     {
