@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -119,7 +116,11 @@ class WorldgenHelper : ModItem
             // Make a square/circle of the tile
             if (q < 3)
             {
-                WorldGeneration.Utils.MakeCircle2(x, y, (int)(width * 0.67), ModContent.TileType<Tiles.Ores.CaesiumOre>(), ModContent.TileType<Tiles.CaesiumCrystal>());
+                WorldGeneration.Utils.MakeCircle2(x, y, (int)(width * 0.67), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.CaesiumCrystal>());
+            }
+            else if (q == length - 1)
+            {
+                WorldGeneration.Utils.MakeSquare(x, y, (int)(width * 0.4), ModContent.TileType<Tiles.CaesiumCrystal>());
             }
             else
                 WorldGeneration.Utils.MakeSquare(x, y, width, ModContent.TileType<Tiles.CaesiumCrystal>()); // ModContent.TileType<Tiles.Ores.CaesiumOre>());

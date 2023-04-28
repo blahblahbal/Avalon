@@ -11,6 +11,7 @@ public class UndergroundContagion : ModBiome
     public override SceneEffectPriority Priority => SceneEffectPriority.BiomeHigh;
     public override string BestiaryIcon => base.BestiaryIcon;
     public override string BackgroundPath => ModContent.GetInstance<Contagion>().BackgroundPath;
+    public override ModWaterStyle WaterStyle => ModContent.Find<ModWaterStyle>("Avalon/ContagionWaterStyle");
     public override string MapBackground => BackgroundPath;
     public override int Music
     {

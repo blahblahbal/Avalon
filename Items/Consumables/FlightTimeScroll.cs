@@ -22,7 +22,7 @@ class FlightTimeScroll : ModItem
         Item.useTime = 20;
         Item.rare = ItemRarityID.Green;
         Item.useStyle = ItemUseStyleID.HoldUp;
-        Item.UseSound = new SoundStyle($"{nameof(ExxoAvalonOrigins)}/Sounds/Item/Scroll");
+        Item.UseSound = new SoundStyle("Avalon/Sounds/Item/Scroll");
         Item.useAnimation = 20;
         Item.height = dims.Height;
     }
