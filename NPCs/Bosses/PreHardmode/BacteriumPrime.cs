@@ -62,13 +62,13 @@ public class BacteriumPrime : ModNPC
     }
     Vector2 LastCollide;
     int BactusCount;
-    int MaxBacCount = 10;
+    int MaxBacCount = 8;
     public override void AI()
     {
         BactusCount = 0;
         for(int i = 0; i < Main.maxNPCs; i++)
         {
-            if (Main.npc[i].type == ModContent.NPCType<BactusMinion>())
+            if (Main.npc[i].type == ModContent.NPCType<BactusMinion>() && Main.npc[i].active)
             {
                 BactusCount++;
             }
@@ -142,7 +142,7 @@ public class BacteriumPrime : ModNPC
             }
 
             NPC.ai[0]++;
-            if (NPC.ai[0] > 100 && BactusCount < MaxBacCount)
+            if (NPC.ai[0] > 120 && BactusCount < MaxBacCount)
             {
                 NPC.ai[0] = 0;
                 NPC Summon = NPC.NewNPCDirect(NPC.GetSource_FromThis(),NPC.Center + Main.rand.NextVector2CircularEdge(1000,1000),ModContent.NPCType<BactusMinion>(),0,0,0,0,0,NPC.target);
@@ -218,7 +218,7 @@ public class BacteriumPrime : ModNPC
             }
 
             NPC.ai[0]++;
-            if (NPC.ai[0] > 80 && BactusCount < MaxBacCount)
+            if (NPC.ai[0] > 20 && BactusCount < MaxBacCount)
             {
                 NPC.ai[0] = 0;
                 NPC Summon = NPC.NewNPCDirect(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2CircularEdge(1000, 1000), ModContent.NPCType<BactusMinion>(), 0, 0, 0, 0, 0, NPC.target);
@@ -241,7 +241,7 @@ public class BacteriumPrime : ModNPC
         bool PlayerAlive = true;
         for(int i = 0; i < Main.maxPlayers; i++)
         {
-            if (Main.player[i].statLife > 0 && Main.player[i].position.Distance(NPC.position) < 16000)
+            if (!Main.player[i].dead && Main.player[i].position.Distance(NPC.position) < 16000)
             {
                 break;
                 PlayerAlive = true;

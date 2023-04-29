@@ -208,7 +208,7 @@ public class BactusMinion : ModNPC
         //    }
         //}
 
-        if (!Collision.SolidCollision(NPC.position, NPC.width, NPC.height) && NPC.alpha > 0)
+        if ((!Collision.SolidCollision(NPC.position, NPC.width, NPC.height) || NPC.noTileCollide) && NPC.alpha > 0 && Main.player[NPC.target].position.Distance(NPC.position) < 640)
         {
             NPC.noTileCollide = false;
             NPC.alpha--;
