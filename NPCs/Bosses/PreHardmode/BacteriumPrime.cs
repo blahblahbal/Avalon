@@ -45,7 +45,7 @@ public class BacteriumPrime : ModNPC
         NPC.DeathSound = SoundID.NPCDeath21;
         NPC.knockBackResist = 0f;
         DrawOffsetY = 14;
-        //Music = Avalon.MusicMod != null ? MusicLoader.GetMusicSlot(Avalon.MusicMod, "Sounds/Music/BacteriumPrime") : MusicID.Boss2;
+        Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime") : MusicID.Boss2;
         //bossBag = ModContent.ItemType<Items.BossBags.BacteriumPrimeBossBag>();
     }
 
