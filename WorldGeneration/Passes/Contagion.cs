@@ -53,6 +53,22 @@ internal class Contagion : GenPass
                 {
                     num212 = Main.maxTilesX - 285;
                 }
+                if (num211 < GenVars.evilBiomeBeachAvoidance)
+                {
+                    num211 = GenVars.evilBiomeBeachAvoidance;
+                }
+                if (num212 > Main.maxTilesX - GenVars.evilBiomeBeachAvoidance)
+                {
+                    num212 = Main.maxTilesX - GenVars.evilBiomeBeachAvoidance;
+                }
+                if (num210 < num211 + GenVars.evilBiomeAvoidanceMidFixer)
+                {
+                    num210 = num211 + GenVars.evilBiomeAvoidanceMidFixer;
+                }
+                if (num210 > num212 - GenVars.evilBiomeAvoidanceMidFixer)
+                {
+                    num210 = num212 - GenVars.evilBiomeAvoidanceMidFixer;
+                }
                 if (GenVars.dungeonSide < 0 && num211 < 400)
                 {
                     num211 = 400;
