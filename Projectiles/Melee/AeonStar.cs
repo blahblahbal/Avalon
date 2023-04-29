@@ -122,7 +122,7 @@ public class AeonStar : ModProjectile
 
         if (Main.myPlayer == Projectile.owner)
         {
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.Center,Vector2.Zero,ModContent.ProjectileType<AeonExplosion>(),Projectile.damage * 4, Projectile.knockBack * 2, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.Center,Vector2.Zero,ModContent.ProjectileType<AeonExplosion>(),Projectile.damage * 7, Projectile.knockBack * 2, Projectile.owner);
         }
     }
 }
