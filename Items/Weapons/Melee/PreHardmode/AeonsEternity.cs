@@ -46,7 +46,7 @@ public class AeonsEternity : ModItem
             SoundEngine.PlaySound(SoundID.Item9, player.Center);
             for (int i = 0; i < Main.rand.Next(4, 8); i++)
             {
-                int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(1.6f, 2.4f), ModContent.ProjectileType<AeonStar>(), damage / 4, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.time);
+                int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f), ModContent.ProjectileType<AeonStar>(), damage / 4, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.time);
                 Main.projectile[P].scale = Main.rand.NextFloat(0.9f, 1.1f);
                 Main.projectile[P].rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
                 lastStar = P;

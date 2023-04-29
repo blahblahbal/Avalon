@@ -3387,6 +3387,11 @@ Mods: {
 				DisplayName: Baccilite Ore
 				Tooltip: ""
 			}
+
+			BacciliteBar: {
+				DisplayName: Baccilite Bar
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3454,6 +3459,7 @@ Mods: {
 			PeeBullet.DisplayName: Pee Bullet
 			SnotOrb.DisplayName: Snot Orb
 			Cough.DisplayName: Cough
+			CorrosiveMucus.DisplayName: Corrosive Mucus
 		}
 
 		NPCs: {
@@ -3477,6 +3483,7 @@ Mods: {
 			Viris.DisplayName: Viris
 			Ickslime.DisplayName: Ickslime
 			Cougher.DisplayName: Cougher
+			BacteriumPrime.DisplayName: Bacterium Prime
 		}
 
 		Buffs: {

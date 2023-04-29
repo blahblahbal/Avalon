@@ -43,7 +43,7 @@ class EvilShrine
                             int q = WorldGen.genRand.Next(3);
                             if (q == 0) q = ItemID.DemoniteBar;
                             if (q == 1) q = ItemID.CrimtaneBar;
-                            if (q == 2) q = ModContent.ItemType<PandemiteBar>();
+                            if (q == 2) q = ModContent.ItemType<BacciliteBar>();
                             Main.chest[num2].item[0].SetDefaults(q, false);
                             Main.chest[num2].item[0].stack = WorldGen.genRand.Next(2, 7);
                         }

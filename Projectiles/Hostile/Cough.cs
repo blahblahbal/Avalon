@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile;
@@ -36,11 +37,14 @@ public class Cough : ModProjectile
     }
     public override bool CanHitPlayer(Player target)
     {
-        return Projectile.alpha < 230;
+        return Projectile.alpha < 210;
     }
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
-        base.OnHitPlayer(target, info);
+        if (Projectile.ai[0] == 0)
+        {
+            target.AddBuff(BuffID.Venom, 5 * 16);
+        }
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {

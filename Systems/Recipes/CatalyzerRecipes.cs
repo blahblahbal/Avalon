@@ -124,14 +124,14 @@ internal class CatalyzerRecipes : ModSystem
         //end hardmode ores
         //evil bars
         Recipe.Create(ItemID.DemoniteBar, 10)
-            .AddIngredient(ModContent.ItemType<PandemiteBar>(), 10)
+            .AddIngredient(ModContent.ItemType<BacciliteBar>(), 10)
             .AddTile(ModContent.TileType<Tiles.Catalyzer>()).Register();
 
         Recipe.Create(ItemID.CrimtaneBar, 10)
             .AddIngredient(ItemID.DemoniteBar, 10)
             .AddTile(ModContent.TileType<Tiles.Catalyzer>()).Register();
 
-        Recipe.Create(ModContent.ItemType<PandemiteBar>(), 10)
+        Recipe.Create(ModContent.ItemType<BacciliteBar>(), 10)
             .AddIngredient(ItemID.CrimtaneBar, 10)
             .AddTile(ModContent.TileType<Tiles.Catalyzer>()).Register();
         //end evil bars
