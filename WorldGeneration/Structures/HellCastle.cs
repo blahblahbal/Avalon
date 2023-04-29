@@ -10,7 +10,6 @@ namespace Avalon.WorldGeneration.Structures;
 
 internal class Hellcastle
 {
-    // NOTE TO SELF: MAKE PAINTING GEN NOT ABLE TO GEN PAINTINGS OF DIFFERENT SIZES NEAR EACH OTHER
     public static void GenerateHellcastle(int x, int y)
     {
         Vector2 castleBottomCenterL = new Vector2(x + 199, y + 150);
@@ -60,94 +59,6 @@ internal class Hellcastle
         AddEntranceArea(x, y + 150);
         SmoothHellcastle(x, y, 400, 150);
     }
-
-    public static bool HasEnoughRoomForPaintingType(int x, int y, int width, int height, int r = 1)
-    {
-        for (int i = x - r; i < x + width + r; i++)
-        {
-            for (int j = y - r; j < y + height + r; j++)
-            {
-                if (Main.tile[i, j].HasTile)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    /// <summary>
-    /// Helper method to find if there is a tile in range.
-    /// </summary>
-    /// <param name="x">X coordinate in tiles.</param>
-    /// <param name="y">Y coordinate in tiles.</param>
-    /// <param name="radius">The radius from the coordinate in which to check.</param>
-    /// <param name="tileType">The tile type of the tile.</param>
-    /// <returns>True if not found, false if found.</returns>
-    public static bool TileNotInRange(int x, int y, int radius, ushort tileType)
-    {
-        int xMin = x - radius;
-        int xMax = x + radius;
-        int yMin = y - radius;
-        int yMax = y + radius;
-
-        for (int i = xMin; i < xMax; i++)
-        {
-            for (int j = yMin; j < yMax; j++)
-            {
-                if (Main.tile[i, j].TileType == tileType)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /// <summary>
-    /// A helper method to check if there are any painting tiles in a specific radius
-    /// </summary>
-    /// <param name="x">The X coordinate.</param>
-    /// <param name="y">The Y coordinate</param>
-    /// <param name="radius">The radius from the X and Y coordinates.</param>
-    /// <returns>True if not found, false otherwise.</returns>
-    public static bool NoPaintingsInRange(int x, int y, int radius)
-    {
-        int xMin = x - radius;
-        int xMax = x + radius;
-        int yMin = y - radius;
-        int yMax = y + radius;
-
-        for (int i = xMin; i < xMax; i++)
-        {
-            for (int j = yMin; j < yMax; j++)
-            {
-                if (Main.tile[i, j].TileType == TileID.Painting2X3 || Main.tile[i, j].TileType == TileID.Painting3X3 ||
-                    Main.tile[i, j].TileType == TileID.Painting3X2 || Main.tile[i, j].TileType == TileID.Painting6X4 ||
-                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings2x3>() ||
-                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings3x2>() ||
-                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings3x3>() ||
-                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings>())
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    public static bool IsThereRoomForChandelier(int x, int y)
-    {
-        for (int i = x - 1; i < x + 2; i++)
-        {
-            for (int j = y; j < y + 3; j++)
-            {
-                if (Main.tile[i, j].HasTile)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
     public static void AddPaintings(int x, int y, int width, int height)
     {
         int s1t = 0;
@@ -188,7 +99,8 @@ internal class Hellcastle
                                 break;
                         }
                         s1t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 2, 3) && NoPaintingsInRange(i, j, 10))
+                        if (Utils.HasEnoughRoomForPaintingType(i, j, 2, 3) && Utils.NoPaintingsInRange(i, j, 10) &&
+                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 2, 3))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
@@ -220,7 +132,8 @@ internal class Hellcastle
                                 break;
                         }
                         s2t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 3, 3) && NoPaintingsInRange(i, j, 10))
+                        if (Utils.HasEnoughRoomForPaintingType(i, j, 3, 3) && Utils.NoPaintingsInRange(i, j, 10) &&
+                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 3, 3))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
@@ -244,7 +157,8 @@ internal class Hellcastle
                                 break;
                         }
                         s3t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 6, 4) && NoPaintingsInRange(i, j, 10))
+                        if (Utils.HasEnoughRoomForPaintingType(i, j, 6, 4) && Utils.NoPaintingsInRange(i, j, 10) &&
+                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 6, 4))
                         {
                             WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.Paintings>(), style: pStyle);
                         }
@@ -267,7 +181,8 @@ internal class Hellcastle
                                 break;
                         }
                         s4t++;
-                        if (HasEnoughRoomForPaintingType(i, j, 3, 2) && NoPaintingsInRange(i, j, 10))
+                        if (Utils.HasEnoughRoomForPaintingType(i, j, 3, 2) && Utils.NoPaintingsInRange(i, j, 10) &&
+                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 3, 2))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
@@ -353,16 +268,16 @@ internal class Hellcastle
                                 tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
                                 break;
                             case 1:
-                                tile.WallType = WallID.MudstoneBrick;
+                                tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallBrownUnsafe>();
                                 break;
                             case 2:
-                                tile.WallType = WallID.PearlstoneBrick;
+                                tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallWhiteUnsafe>();
                                 break;
                             case 3:
-                                tile.WallType = WallID.MudstoneBrick;
+                                tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallBrownUnsafe>();
                                 break;
                             case 4:
-                                tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
+                                tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallEctoUnsafe>();
                                 break;
                             case 5:
                                 tile.WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
@@ -680,7 +595,7 @@ internal class Hellcastle
                                 break;
                             case 6:
                                 tile.HasTile = true;
-                                tile.TileType = TileID.Hellstone;
+                                tile.TileType = TileID.Ash;
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
@@ -715,7 +630,7 @@ internal class Hellcastle
                                 break;
                             case 11:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.BrimstoneBlock>();
+                                tile.TileType = TileID.Ash;
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
@@ -889,36 +804,6 @@ internal class Hellcastle
             }
         }
     }
-    public static void AddPillarsInHell(int x, int y)
-    {
-        int numPillars = WorldGen.genRand.Next(10, 17);
-        List<int> pillarLocs = new();
-        int modifier = 0;
-        for (int i = 0; i < numPillars; i++)
-        {
-            pillarLocs.Add(WorldGen.genRand.Next(x + modifier, x + modifier + 10));
-            modifier += WorldGen.genRand.Next(45, 52);
-        }
-
-        for (int locsX = 0; locsX < pillarLocs.Count; locsX++)
-        {
-            int pillarWidth = WorldGen.genRand.Next(20, 36);
-            int pillarHeight = WorldGen.genRand.Next(90, 115);
-            if (pillarLocs[locsX] + pillarWidth >= x + 400)
-            {
-                continue;
-            }
-            MakeBox(pillarLocs[locsX], Main.maxTilesY - pillarHeight - 10, pillarWidth, pillarHeight, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
-            for (int i = pillarLocs[locsX] + 1; i < pillarLocs[locsX] + pillarWidth; i++)
-            {
-                for (int j = y + 150; j < Main.maxTilesY - pillarHeight - 10; j++)
-                {
-                    Main.tile[i, j].WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWall>();
-                }
-            }
-            //MakeBox(pillarLocs[locsX] + 1, y + 150, pillarWidth - 1, (Main.maxTilesY - pillarHeight - 10) - (y + 150), ushort.MaxValue, (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>());
-        }
-    }
     public static void AddLibraryAltar(int x, int y)
     {
         int pyramidStep = 3;
@@ -1071,9 +956,6 @@ internal class Hellcastle
             }
         }
     }
-    /// <summary>
-    /// Destroys a box of tiles.
-    /// </summary>
     public static void DestroyBox(int x, int y, int width, int height)
     {
         int a = -(width / 2);
@@ -1382,14 +1264,14 @@ internal class Hellcastle
                         Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i, y + j - 1].TileType != ModContent.TileType<Tiles.VenomSpike>())
                     {
                         if (WorldGen.genRand.NextBool(30) &&
-                            TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()) &&
-                            TileNotInRange(x + i, y + j, 8, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>()))
+                            Utils.TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()) &&
+                            Utils.TileNotInRange(x + i, y + j, 8, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>()))
                         {
                             WorldGen.PlaceTile(x + i, y + j, ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>(), true, true);
                         }
-                        if (WorldGen.genRand.NextBool(50) && IsThereRoomForChandelier(x + i, y + j) &&
-                            TileNotInRange(x + i, y + j, 8, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>()) &&
-                            TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()))
+                        if (WorldGen.genRand.NextBool(50) && Utils.IsThereRoomForChandelier(x + i, y + j) &&
+                            Utils.TileNotInRange(x + i, y + j, 8, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>()) &&
+                            Utils.TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()))
                         {
                             WorldGen.PlaceTile(x + i, y + j, ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>(), true, true);
                         }

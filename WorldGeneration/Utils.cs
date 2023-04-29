@@ -148,15 +148,17 @@ public class Utils
         {
             for (int l = y - radius; l <= y + radius; l++)
             {
-                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius)
+                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius && radius > 1)
                 {
-
-                    Tile t = Framing.GetTileSafely(k, l);
-                    t.HasTile = true;
-                    t.IsHalfBlock = false;
-                    t.Slope = SlopeType.Solid;
-                    Main.tile[k, l].TileType = (ushort)outerType;
-                    WorldGen.SquareTileFrame(k, l);
+                    if (Main.tile[k, l].TileType != innerType)
+                    {
+                        Tile t = Framing.GetTileSafely(k, l);
+                        t.HasTile = true;
+                        t.IsHalfBlock = false;
+                        t.Slope = SlopeType.Solid;
+                        Main.tile[k, l].TileType = (ushort)outerType;
+                        WorldGen.SquareTileFrame(k, l);
+                    }    
                 }
             }
         }
@@ -164,7 +166,7 @@ public class Utils
         {
             for (int l = y - radius; l <= y + radius; l++)
             {
-                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius - 2)
+                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius - 3 && radius - 3 > 1)
                 {
                     Tile t = Main.tile[k, l];
                     t.HasTile = true;
@@ -293,4 +295,110 @@ public class Utils
             }
         }
     }
+    #region hellcastle helper methods
+    public static bool HasEnoughRoomForPaintingType(int x, int y, int width, int height, int r = 1)
+    {
+        for (int i = x - r; i < x + width + r; i++)
+        {
+            for (int j = y - r; j < y + height + r; j++)
+            {
+                if (Main.tile[i, j].HasTile)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    /// <summary>
+    /// Helper method to find if there is a tile in range.
+    /// </summary>
+    /// <param name="x">X coordinate in tiles.</param>
+    /// <param name="y">Y coordinate in tiles.</param>
+    /// <param name="radius">The radius from the coordinate in which to check.</param>
+    /// <param name="tileType">The tile type of the tile.</param>
+    /// <returns>True if not found, false if found.</returns>
+    public static bool TileNotInRange(int x, int y, int radius, ushort tileType)
+    {
+        int xMin = x - radius;
+        int xMax = x + radius;
+        int yMin = y - radius;
+        int yMax = y + radius;
+
+        for (int i = xMin; i < xMax; i++)
+        {
+            for (int j = yMin; j < yMax; j++)
+            {
+                if (Main.tile[i, j].TileType == tileType)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// A helper method to check if there are any painting tiles in a specific radius
+    /// </summary>
+    /// <param name="x">The X coordinate.</param>
+    /// <param name="y">The Y coordinate</param>
+    /// <param name="radius">The radius from the X and Y coordinates.</param>
+    /// <returns>True if not found, false otherwise.</returns>
+    public static bool NoPaintingsInRange(int x, int y, int radius)
+    {
+        int xMin = x - radius;
+        int xMax = x + radius;
+        int yMin = y - radius;
+        int yMax = y + radius;
+
+        for (int i = xMin; i < xMax; i++)
+        {
+            for (int j = yMin; j < yMax; j++)
+            {
+                if (Main.tile[i, j].TileType == TileID.Painting2X3 || Main.tile[i, j].TileType == TileID.Painting3X3 ||
+                    Main.tile[i, j].TileType == TileID.Painting3X2 || Main.tile[i, j].TileType == TileID.Painting6X4 ||
+                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings2x3>() ||
+                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings3x2>() ||
+                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings3x3>() ||
+                    Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings>())
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static bool IsThereRoomForChandelier(int x, int y)
+    {
+        for (int i = x - 1; i < x + 2; i++)
+        {
+            for (int j = y; j < y + 3; j++)
+            {
+                if (Main.tile[i, j].HasTile)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static bool IsValidPlacementForPaintingInHellcastle(int x, int y, int width, int height)
+    {
+        for (int i = x; i < x + width; i++)
+        {
+            for (int j = y; j < y + height; j++)
+            {
+                if (Main.tile[i, j].WallType == ModContent.WallType<Walls.ImperviousBrickWallBrownUnsafe>() ||
+                    Main.tile[i, j].WallType == ModContent.WallType<Walls.ImperviousBrickWallEctoUnsafe>() ||
+                    Main.tile[i, j].WallType == ModContent.WallType<Walls.ImperviousBrickWallWhiteUnsafe>())
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    #endregion
 }

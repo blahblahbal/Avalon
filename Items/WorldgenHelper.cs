@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -86,23 +87,37 @@ class WorldgenHelper : ModItem
     //    }
     //    return xStored;
     //}
+
+    /// <summary>
+    /// Makes a spike at the given coordinates.
+    /// </summary>
+    /// <param name="x">The X coordinate.</param>
+    /// <param name="y">The Y coordinate.</param>
+    /// <param name="length">The height/tallness of the spike to generate.</param>
+    /// <param name="width">The width/thickness of the spike to generate.</param>
+    /// <param name="direction">The vertical direction of the spike; 1 is down, -1 is up.</param>
     public static void MakeSpike(int x, int y, int length, int width, int direction = 1)
     {
         // Store the x and y in new vars
         int startX = x;
         int startY = y;
 
+        // Define variables to determine how many tiles to travel in one direction before changing direction
         int howManyTimes = 0;
-        int maxTimes = WorldGen.genRand.Next(8) + 5;
+        int maxTimes = WorldGen.genRand.Next(4) + 2;
         int modifier = 1;
 
+        // Change direction (left/right) of the spike before generating
         if (WorldGen.genRand.NextBool())
         {
             modifier *= -1;
         }
 
+        // Initial assignment of last position
+        Vector2 lastPos = new(x, y);
+
         // Loop until length
-        for (int q = 0; q < length; q++)
+        for (int q = 1; q <= length; q++)
         {
             // Grab the distance between the start and the current position
             float distFromStart = Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y));
@@ -113,14 +128,17 @@ class WorldgenHelper : ModItem
             {
                 width--;
             }
+            
+            // Put a circle between the last point and the current
+            int betweenXPos = (int)(lastPos.X + x) / 2;
+            int betweenYPos = (int)(lastPos.Y + y) / 2;
+            WorldGeneration.Utils.MakeCircle2(betweenXPos, betweenYPos, (int)((length - q) * 0.4f), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>());
 
             // Make a square/circle of the tile
-            if (q < 3)
-            {
-                WorldGeneration.Utils.MakeCircle2(x, y, (int)(width * 0.67), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.CaesiumCrystal>());
-            }
-            else
-                WorldGeneration.Utils.MakeSquare(x, y, width, ModContent.TileType<Tiles.CaesiumCrystal>()); // ModContent.TileType<Tiles.Ores.CaesiumOre>());
+            WorldGeneration.Utils.MakeCircle2(x, y, (int)((length - q) * 0.4f), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>());
+
+            // Assign the last position to the current position
+            lastPos = new(x, y);
 
             // Make the spike go in the opposite direction after a certain amount of tiles
             howManyTimes++;
@@ -128,12 +146,14 @@ class WorldgenHelper : ModItem
             {
                 modifier *= -1;
                 howManyTimes = 0;
-                maxTimes = WorldGen.genRand.Next(8) + 5;
+                maxTimes = WorldGen.genRand.Next(4) + 2;
             }
-            x += (WorldGen.genRand.Next(2) + 1) * modifier;
+
+            // Add to the x to make the spike turn/curve in a direction
+            x += (WorldGen.genRand.Next(2) + 1) * modifier; // * (maxTimes / (WorldGen.genRand.Next(2) + 1));
 
             // Add a bit to the y coord to make it go up or down depending on the parameter
-            if (width > 3)
+            if (w > 3)
             {
                 y += (WorldGen.genRand.Next(3) + 2) * direction;
             }

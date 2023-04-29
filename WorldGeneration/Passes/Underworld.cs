@@ -73,10 +73,14 @@ internal class Underworld : GenPass
                         {
                             if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
                             {
-                                if (q % 25 == 0)
+                                if (q % 20 == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, -1);
                                     MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+                                    if (WorldGen.genRand.NextBool(3))
+                                    {
+                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), -1);
+                                    }
                                 }
                             }
                         }
@@ -91,10 +95,14 @@ internal class Underworld : GenPass
                         {
                             if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
                             {
-                                if (q % 25 == 0)
+                                if (q % 20 == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, 1);
                                     MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
+                                    if (WorldGen.genRand.NextBool(3))
+                                    {
+                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), 1);
+                                    }
                                 }
                             }
                         }
@@ -166,10 +174,14 @@ internal class Underworld : GenPass
                         {
                             if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
                             {
-                                if (q % 25 == 0)
+                                if (q % 20 == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, -1);
                                     MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+                                    if (WorldGen.genRand.NextBool(3))
+                                    {
+                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), -1);
+                                    }
                                 }
                             }
                         }
@@ -184,10 +196,14 @@ internal class Underworld : GenPass
                         {
                             if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
                             {
-                                if (q % 25 == 0)
+                                if (q % 20 == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, 1);
                                     MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
+                                    if (WorldGen.genRand.NextBool(3))
+                                    {
+                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), 1);
+                                    }
                                 }
                             }
                         }
@@ -223,7 +239,6 @@ internal class Underworld : GenPass
         int hellcastleOriginX = (Main.maxTilesX / 2) - 200;
         int ashenLeft = hellcastleOriginX - 100;
         int ashenRight = hellcastleOriginX + 500;
-        // TODO: make impervious brick pillars
 
 
         //if (Main.drunkWorld)
@@ -257,7 +272,11 @@ internal class Underworld : GenPass
                 if ((Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby - 1].HasTile) ||
                     (Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby + 1].HasTile) ||
                     (Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby].HasTile) ||
-                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby].HasTile))
+                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby].HasTile) ||
+                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby - 1].HasTile) ||
+                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby + 1].HasTile) ||
+                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby - 1].HasTile) ||
+                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby + 1].HasTile))
                 {
                     if (Main.tile[hbx, hby].TileType == TileID.Ash)
                     {
@@ -265,7 +284,7 @@ internal class Underworld : GenPass
                         Tile t = Main.tile[hbx, hby];
                         t.TileType = (ushort)ModContent.TileType<Ectograss>();
                         t.Slope = s;
-                        if (WorldGen.genRand.Next(1) == 0)
+                        if (WorldGen.genRand.NextBool(1))
                         {
                             WorldGen.GrowTree(hbx, hby - 1);
                         }
@@ -279,23 +298,36 @@ internal class Underworld : GenPass
         }
     }
 
+    /// <summary>
+    /// Makes a spike at the given coordinates.
+    /// </summary>
+    /// <param name="x">The X coordinate.</param>
+    /// <param name="y">The Y coordinate.</param>
+    /// <param name="length">The height/tallness of the spike to generate.</param>
+    /// <param name="width">The width/thickness of the spike to generate.</param>
+    /// <param name="direction">The vertical direction of the spike; 1 is down, -1 is up.</param>
     public static void MakeSpike(int x, int y, int length, int width, int direction = 1)
     {
         // Store the x and y in new vars
         int startX = x;
         int startY = y;
 
+        // Define variables to determine how many tiles to travel in one direction before changing direction
         int howManyTimes = 0;
-        int maxTimes = WorldGen.genRand.Next(8) + 5;
+        int maxTimes = WorldGen.genRand.Next(4) + 2;
         int modifier = 1;
 
+        // Change direction (left/right) of the spike before generating
         if (WorldGen.genRand.NextBool())
         {
             modifier *= -1;
         }
 
+        // Initial assignment of last position
+        Vector2 lastPos = new(x, y);
+
         // Loop until length
-        for (int q = 0; q < length; q++)
+        for (int q = 1; q <= length; q++)
         {
             // Grab the distance between the start and the current position
             float distFromStart = Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y));
@@ -307,13 +339,16 @@ internal class Underworld : GenPass
                 width--;
             }
 
+            // Put a circle between the last point and the current
+            int betweenXPos = (int)(lastPos.X + x) / 2;
+            int betweenYPos = (int)(lastPos.Y + y) / 2;
+            Utils.MakeCircle2(betweenXPos, betweenYPos, (int)((length - q) * 0.4f), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>());
+
             // Make a square/circle of the tile
-            if (q < 3)
-            {
-                Utils.MakeCircle2(x, y, (int)(width * 0.67), ModContent.TileType<CaesiumCrystal>(), ModContent.TileType<CaesiumCrystal>());
-            }
-            else
-                Utils.MakeSquare(x, y, width, ModContent.TileType<CaesiumCrystal>()); // ModContent.TileType<Tiles.Ores.CaesiumOre>());
+            Utils.MakeCircle2(x, y, (int)((length - q) * 0.4f), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>());
+
+            // Assign the last position to the current position
+            lastPos = new(x, y);
 
             // Make the spike go in the opposite direction after a certain amount of tiles
             howManyTimes++;
@@ -321,12 +356,14 @@ internal class Underworld : GenPass
             {
                 modifier *= -1;
                 howManyTimes = 0;
-                maxTimes = WorldGen.genRand.Next(8) + 5;
+                maxTimes = WorldGen.genRand.Next(4) + 2;
             }
-            x += (WorldGen.genRand.Next(2) + 1) * modifier;
+
+            // Add to the x to make the spike turn/curve in a direction
+            x += (WorldGen.genRand.Next(2) + 1) * modifier; // * (maxTimes / (WorldGen.genRand.Next(2) + 1));
 
             // Add a bit to the y coord to make it go up or down depending on the parameter
-            if (width > 3)
+            if (w > 3)
             {
                 y += (WorldGen.genRand.Next(3) + 2) * direction;
             }
