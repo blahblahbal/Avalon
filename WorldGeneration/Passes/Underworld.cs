@@ -18,10 +18,6 @@ internal class Underworld : GenPass
     {
         progress.Message = "Generating Caesium Blastplains";
         #region caesium blastplains
-        //for (var i = 0; i < (int)((Main.maxTilesX * Main.maxTilesY) * 0.0008); i++)
-        //{
-        //    WorldGen.OreRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY - 150, Main.maxTilesY), WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(3, 5), (ushort)ModContent.TileType<Tiles.CaesiumOre>());
-        //}
         int caesiumXPosLeft = Main.maxTilesX - (Main.maxTilesX / 5) - 15;
         int caesiumXPosRight = Main.maxTilesX - (Main.maxTilesX / 5);
         int caesiumMaxRight = Main.maxTilesX - 20;
@@ -31,108 +27,191 @@ internal class Underworld : GenPass
             caesiumXPosRight = Main.maxTilesX - (Main.maxTilesX / 3);
             caesiumMaxRight = Main.maxTilesX - (Main.maxTilesX / 5) + 50;
         }
-        for (int q = caesiumXPosLeft; q < caesiumXPosRight; q++)
+        if (GenVars.dungeonSide < 0 && !Main.drunkWorld)
         {
-            for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
-            {
-                if (q > caesiumXPosLeft + 5)
-                {
-                    if (WorldGen.genRand.NextBool(10) && Main.tile[q, z].HasTile &&
-                        Main.tile[q, z].TileType == TileID.Ash)
-                    {
-                        WorldGen.TileRunner(q, z, WorldGen.genRand.Next(6, 8), WorldGen.genRand.Next(6, 8),
-                            ModContent.TileType<BlastedStone>());
-                    }
-                }
-                    
-            }
-        }
+            int caesiumLeftSidePosXLeft  = Main.maxTilesX / 5;
+            int caesiumLeftSidePosXRight = Main.maxTilesX / 5 + 20;
+            int caesiumMaxLeft = 20;
 
-        for (int q = caesiumXPosRight; q < caesiumMaxRight; q++)
-        {
-            for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+            // make little blobs on the edge
+            for (int q = caesiumLeftSidePosXLeft; q < caesiumLeftSidePosXRight; q++)
             {
-                //if (WorldGen.genRand.Next(20) == 0 && z >= Main.maxTilesY - 250 && z <= Main.maxTilesY - 241 && Main.tile[q, z].HasTile) Main.tile[q, z].type = (ushort)ModContent.TileType<Tiles.BlackBlaststone>();
-                //if (WorldGen.genRand.Next(10) == 0 && z >= Main.maxTilesY - 240 && z <= Main.maxTilesY - 231 && Main.tile[q, z].HasTile) Main.tile[q, z].type = (ushort)ModContent.TileType<Tiles.BlackBlaststone>();
-                //if (WorldGen.genRand.Next(5) == 0 && z >= Main.maxTilesY - 230 && z <= Main.maxTilesY - 221 && Main.tile[q, z].HasTile) Main.tile[q, z].type = (ushort)ModContent.TileType<Tiles.BlackBlaststone>();
-                if ((Main.tile[q, z].TileType == TileID.Ash || Main.tile[q, z].TileType == TileID.Hellstone || Main.tile[q, z].TileType == TileID.AshGrass) &&
-                    Main.tile[q, z].HasTile)
+                for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
                 {
-                    Main.tile[q, z].TileType = (ushort)ModContent.TileType<BlastedStone>();
-                }
-                if (Main.tile[q, z].TileType == TileID.AshVines || Main.tile[q, z].TileType == TileID.AshPlants)
-                {
-                    WorldGen.KillTile(q, z);
-                }
-                if (z < Main.maxTilesY - 100 && z > Main.maxTilesY - 110)
-                {
-                    if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
+                    if (q > caesiumLeftSidePosXLeft - 5)
                     {
-                        if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                        if (WorldGen.genRand.NextBool(5) && Main.tile[q, z].HasTile &&
+                            Main.tile[q, z].TileType == TileID.Ash)
                         {
-                            if (q % 25 == 0)
-                            {
-                                MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+                            WorldGen.TileRunner(q, z, WorldGen.genRand.Next(12, 19), WorldGen.genRand.Next(12, 18),
+                                ModContent.TileType<BlastedStone>());
+                        }
+                    }
 
-                                //MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
+                }
+            }
+            // make the majority of the blastplains
+            for (int q = caesiumMaxLeft; q < caesiumLeftSidePosXLeft; q++)
+            {
+                for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+                {
+                    if ((Main.tile[q, z].TileType == TileID.Ash || Main.tile[q, z].TileType == TileID.Hellstone || Main.tile[q, z].TileType == TileID.AshGrass) &&
+                        Main.tile[q, z].HasTile)
+                    {
+                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<BlastedStone>();
+                    }
+                    if (Main.tile[q, z].TileType == TileID.AshVines || Main.tile[q, z].TileType == TileID.AshPlants)
+                    {
+                        WorldGen.KillTile(q, z);
+                    }
+                    if (z < Main.maxTilesY - 100 && z > Main.maxTilesY - 110)
+                    {
+                        if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
+                        {
+                            if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                            {
+                                if (q % 25 == 0)
+                                {
+                                    z = Utils.CaesiumTileCheck(q, z, -1);
+                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+                                }
+                            }
+                        }
+                    }
+
+                    if (z < Main.maxTilesY - 200 && z > Main.maxTilesY - 210)
+                    {
+                        if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
+                        {
+                            if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                            {
+                                if (q % 25 == 0)
+                                {
+                                    z = Utils.CaesiumTileCheck(q, z, 1);
+                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
+                                }
+                            }
+                        }
+                    }
+                    if (WorldGen.genRand.NextBool(50))
+                        Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
+                }
+            }
+
+            for (int q = caesiumMaxLeft; q < caesiumLeftSidePosXLeft; q++)
+            {
+                for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+                {
+                    if (q % 100 < 33 && z > Main.maxTilesY - 175)
+                    {
+                        if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
+                        {
+                            if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
+                            {
+                                Main.tile[q, z].TileType = (ushort)ModContent.TileType<LaziteGrass>();
                             }
                         }
                     }
                 }
-
-                if (z < Main.maxTilesY - 200 && z > Main.maxTilesY - 210)
+            }
+        }
+        else
+        {
+            // make little blobs on the edge
+            for (int q = caesiumXPosLeft; q < caesiumXPosRight; q++)
+            {
+                for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
                 {
-                    if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
+                    if (q > caesiumXPosLeft + 5)
                     {
-                        if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                        if (WorldGen.genRand.NextBool(5) && Main.tile[q, z].HasTile &&
+                            Main.tile[q, z].TileType == TileID.Ash)
                         {
-                            if (q % 25 == 0)
-                            {
-                                //MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+                            WorldGen.TileRunner(q, z, WorldGen.genRand.Next(12, 19), WorldGen.genRand.Next(12, 18),
+                                ModContent.TileType<BlastedStone>());
+                        }
+                    }
 
-                                MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
+                }
+            }
+            // make the majority of the blastplains
+            for (int q = caesiumXPosRight; q < caesiumMaxRight; q++)
+            {
+                for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+                {
+                    if ((Main.tile[q, z].TileType == TileID.Ash || Main.tile[q, z].TileType == TileID.Hellstone || Main.tile[q, z].TileType == TileID.AshGrass) &&
+                        Main.tile[q, z].HasTile)
+                    {
+                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<BlastedStone>();
+                    }
+                    if (Main.tile[q, z].TileType == TileID.AshVines || Main.tile[q, z].TileType == TileID.AshPlants)
+                    {
+                        WorldGen.KillTile(q, z);
+                    }
+                    if (z < Main.maxTilesY - 100 && z > Main.maxTilesY - 110)
+                    {
+                        if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
+                        {
+                            if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                            {
+                                if (q % 25 == 0)
+                                {
+                                    z = Utils.CaesiumTileCheck(q, z, -1);
+                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+                                }
                             }
                         }
                     }
-                }
-                //if (z < Main.maxTilesY - 160 && z > Main.maxTilesY - 190)
-                //{
-                //    if (Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile ||
-                //        Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile ||
-                //        Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile ||
-                //        Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile)
-                //    {
-                //        if (WorldGen.genRand.Next(40) == 0)
-                //        {
-                //            Structures.CaesiumSpike.CreateSpike(q, z);
-                //        }
-                //    }
-                //}
-                if (WorldGen.genRand.NextBool(50))
-                    Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
-            }
-        }
 
-        for (int q = Main.maxTilesX - (Main.maxTilesX / 5); q < Main.maxTilesX - 20; q++)
-        {
-            for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
-            {
-                if (q % 100 < 33 && z > Main.maxTilesY - 175)
-                {
-                    if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
-                        (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
+                    if (z < Main.maxTilesY - 200 && z > Main.maxTilesY - 210)
                     {
-                        if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
+                        if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
                         {
-                            Main.tile[q, z].TileType = (ushort)ModContent.TileType<LaziteGrass>();
+                            if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                            {
+                                if (q % 25 == 0)
+                                {
+                                    z = Utils.CaesiumTileCheck(q, z, 1);
+                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
+                                }
+                            }
+                        }
+                    }
+                    if (WorldGen.genRand.NextBool(50))
+                        Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
+                }
+            }
+
+            for (int q = caesiumXPosLeft; q < caesiumXPosRight; q++)
+            {
+                for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+                {
+                    if (q % 100 < 33 && z > Main.maxTilesY - 175)
+                    {
+                        if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
+                            (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
+                        {
+                            if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
+                            {
+                                Main.tile[q, z].TileType = (ushort)ModContent.TileType<LaziteGrass>();
+                            }
                         }
                     }
                 }

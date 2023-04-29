@@ -27,12 +27,56 @@ public class Utils
         for (int i = (int)(GenVars.worldSurfaceLow - 30); i < Main.maxTilesY; i++)
         {
             Tile tile = Framing.GetTileSafely(positionX, i);
-            if ((tile.TileType == TileID.Dirt || tile.TileType == TileID.ClayBlock || tile.TileType == TileID.Stone || tile.TileType == TileID.Sand || tile.TileType == ModContent.TileType<Snotsand>() /*|| tile.TileType == ModContent.TileType<Loam>() */|| tile.TileType == TileID.Mud || tile.TileType == TileID.SnowBlock || tile.TileType == TileID.IceBlock) && tile.HasTile)
+            if ((tile.TileType == TileID.Dirt || tile.TileType == TileID.ClayBlock || tile.TileType == TileID.Stone ||
+                tile.TileType == TileID.Sand || tile.TileType == ModContent.TileType<Snotsand>()
+                /*|| tile.TileType == ModContent.TileType<Loam>() */|| tile.TileType == TileID.Mud ||
+                tile.TileType == TileID.SnowBlock || tile.TileType == TileID.IceBlock) && tile.HasTile)
             {
                 return i;
             }
         }
         return 0;
+    }
+
+    public static int CaesiumTileCheck(int posX, int posY, int modifier = 1)
+    {
+        if (modifier == -1)
+        {
+            int q = posY;
+            for (int i = posY - 30; i < posY; i++) // ypos = maxTilesY - 170 (165)
+            {
+                Tile tile = Framing.GetTileSafely(posX, i);
+                Tile tileAbove = Framing.GetTileSafely(posX, i - 1);
+                if ((tile.TileType == ModContent.TileType<Tiles.BlastedStone>() || tile.TileType == ModContent.TileType<Tiles.LaziteGrass>())
+                    && tile.HasTile)
+                {
+                    q--;
+                }
+                else if (!tileAbove.HasTile && tile.HasTile)
+                {
+                    return q;
+                }
+            }
+        }
+        else if (modifier == 1)
+        {
+            int q = posY;
+            for (int i = posY; i < posY + 30; i++)
+            {
+                Tile tile = Framing.GetTileSafely(posX, i);
+                Tile tileBelow = Framing.GetTileSafely(posX, i + 1);
+                if ((tile.TileType == ModContent.TileType<Tiles.BlastedStone>() || tile.TileType == ModContent.TileType<Tiles.LaziteGrass>())
+                    && tile.HasTile)
+                {
+                    q++;
+                }
+                else if (!tileBelow.HasTile && tile.HasTile)
+                {
+                    return q;
+                }
+            }
+        }
+        return posY;
     }
 
     /// <summary>
@@ -106,9 +150,10 @@ public class Utils
         {
             for (int l = y - radius; l <= y + radius; l++)
             {
-                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius && Main.tile[k, l].TileType != innerType)
+                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius)
                 {
-                    Tile t = Main.tile[k, l];
+
+                    Tile t = Framing.GetTileSafely(k, l);
                     t.HasTile = true;
                     t.IsHalfBlock = false;
                     t.Slope = SlopeType.Solid;
