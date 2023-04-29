@@ -9,6 +9,7 @@ using Terraria.Audio;
 using Terraria.Chat;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
+using Avalon.NPCs.Bosses.PreHardmode;
 
 namespace Avalon.Tiles.Contagion;
 
@@ -94,7 +95,7 @@ public class SnotOrb : ModTile
                         num7 = num8;
                     }
                 }
-                //NPC.SpawnOnPlayer(plr, ModContent.NPCType<NPCs.BacteriumPrime>());
+                NPC.SpawnOnPlayer(plr, ModContent.NPCType<BacteriumPrime>());
             }
             else
             {
