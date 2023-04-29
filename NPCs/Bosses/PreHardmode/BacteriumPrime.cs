@@ -65,6 +65,7 @@ public class BacteriumPrime : ModNPC
     int MaxBacCount = 8;
     public override void AI()
     {
+        float speed = 5;
         BactusCount = 0;
         for(int i = 0; i < Main.maxNPCs; i++)
         {
@@ -79,8 +80,22 @@ public class BacteriumPrime : ModNPC
             NPC.TargetClosest(true);
         }
         Player Target = Main.player[NPC.target];
-        float speed = 5;
+
+        if (Target.dead)
+            NPC.ai[3] = 61;
+        if (NPC.ai[3] == 61)
+        {
+            NPC.velocity.Y -= 0.1f;
+            NPC.velocity.X *= 0.99f;
+            NPC.alpha++;
+        }
+
         #region Phase 1
+        if (Main.expertMode)
+            speed = 5;
+        else
+            speed = 4;
+
         if (NPC.ai[3] == 0) {
             if (NPC.noTileCollide || NPC.Center.Distance(Target.Center) > 40 * 16)
                 NPC.velocity += NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2CircularEdge(200, 200)) * 0.13f;
@@ -178,12 +193,16 @@ public class BacteriumPrime : ModNPC
             NPC.ai[2] = 0;
             //NPC.knockBackResist = 0f;
             NPC.defense -= 2;
-            //speed += 1;
             NPC.noTileCollide = true;
             SoundEngine.PlaySound(SoundID.ForceRoar);
         }
-        
+
         #region Phase 2
+        if (Main.expertMode)
+            speed = 5.5f;
+        else
+            speed = 4.5f;
+
         if (NPC.ai[3] == 60)
         {
             if (!Collision.SolidCollision(NPC.position,NPC.width,NPC.height) || NPC.ai[1] > 199)
@@ -238,27 +257,20 @@ public class BacteriumPrime : ModNPC
             }
         }
         #endregion
-        bool PlayerAlive = true;
-        for(int i = 0; i < Main.maxPlayers; i++)
-        {
-            if (!Main.player[i].dead && Main.player[i].position.Distance(NPC.position) < 16000)
-            {
-                break;
-                PlayerAlive = true;
-            }
-            else
-            {
-                PlayerAlive = false;
-            }
-        }
-        if (!PlayerAlive)
-            NPC.ai[3] = 61;
-        if (NPC.ai[3] == 61)
-        {
-            NPC.velocity.Y -= 0.1f;
-            NPC.velocity.X *= 0.99f;
-            NPC.alpha++;
-        }
+        //bool PlayerAlive = true;
+        //for(int i = 0; i < Main.maxPlayers; i++)
+        //{
+        //    if (!Main.player[i].dead && Main.player[i].position.Distance(NPC.position) < 16000)
+        //    {
+        //        break;
+        //        PlayerAlive = true;
+        //    }
+        //    else
+        //    {
+        //        PlayerAlive = false;
+        //    }
+        //}
+        //if (!PlayerAlive)
 
         if (Main.rand.NextBool(5))
         {
