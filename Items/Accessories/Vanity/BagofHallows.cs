@@ -48,8 +48,18 @@ internal class BagofHallows : ModItem
             return;
         }
 
-        int dust = Dust.NewDust(player.position, player.width + 20, player.height, DustID.Enchanted_Gold, 0f, 0f,
-            100, Color.White, 2f);
-        Main.dust[dust].noGravity = true;
+        for (int j = 0; j < 2; j++)
+        {
+            int num2 = Dust.NewDust(new Vector2(player.position.X - player.velocity.X * 2f, player.position.Y - 2f - player.velocity.Y * 2f),
+                player.width, player.height, DustID.Enchanted_Gold, 0f, 0f, 100, default, 2f);
+            Main.dust[num2].noGravity = true;
+            Main.dust[num2].noLight = true;
+            Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;
+            Main.dust[num2].velocity.Y -= player.velocity.Y * 0.5f;
+        }
+
+        //int dust = Dust.NewDust(player.position, player.width + 20, player.height, DustID.Enchanted_Gold, 0f, 0f,
+        //    100, Color.White, 2f);
+        //Main.dust[dust].noGravity = true;
     }
 }
