@@ -142,6 +142,7 @@ public class AvalonPlayer : ModPlayer
         HeartGolem = false;
         EtherealHeart = false;
         BloodyWhetstone = false;
+        CloudGlove = false;
 
         SnotOrb = false;
 
