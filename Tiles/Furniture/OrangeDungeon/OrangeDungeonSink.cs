@@ -22,9 +22,4 @@ public class OrangeDungeonSink : ModTile
         AdjTiles = new int[] { TileID.Sinks };
         DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
     }
-
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 16, ModContent.ItemType<Items.Placeable.Furniture.OrangeDungeon.OrangeDungeonSink>());
-    }
 }

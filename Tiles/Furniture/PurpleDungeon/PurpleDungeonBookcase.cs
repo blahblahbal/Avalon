@@ -22,9 +22,4 @@ public class PurpleDungeonBookcase : ModTile
         AddMapEntry(new Color(191, 142, 111));
         DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
     }
-
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 16, ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonBookcase>());
-    }
 }

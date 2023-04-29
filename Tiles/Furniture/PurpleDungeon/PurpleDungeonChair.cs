@@ -30,9 +30,4 @@ public class PurpleDungeonChair : ModTile
         AdjTiles = new int[] { TileID.Chairs };
         DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
     }
-
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 32, ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonChair>());
-    }
 }

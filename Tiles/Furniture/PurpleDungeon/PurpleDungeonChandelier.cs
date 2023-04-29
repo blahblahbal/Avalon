@@ -39,11 +39,6 @@ public class PurpleDungeonChandelier : ModTile
         }
     }
 
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 16, ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonChandelier>());
-    }
-
     public override void HitWire(int i, int j)
     {
         int x = i - Main.tile[i, j].TileFrameX / 18 % 3;

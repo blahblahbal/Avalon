@@ -22,7 +22,6 @@ public class BacteriumPrime : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Bacterium Prime");
         Main.npcFrameCount[NPC.type] = 8;
         NPCID.Sets.TrailCacheLength[NPC.type] = 12;
         NPCID.Sets.TrailingMode[NPC.type] = 7;

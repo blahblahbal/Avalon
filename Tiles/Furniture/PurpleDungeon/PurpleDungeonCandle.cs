@@ -55,11 +55,6 @@ public class PurpleDungeonCandle : ModTile
         }
     }
 
-    public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonCandle>());
-    }
-
     public override void HitWire(int i, int j)
     {
         Tile tile = Main.tile[i, j];
