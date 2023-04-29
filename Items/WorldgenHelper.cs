@@ -26,6 +26,7 @@ class WorldgenHelper : ModItem
         int y = (int)player.position.Y / 16;
 
         //WorldGeneration.Structures.Hellcastle.GenerateHellcastle(x, y);
+        y = WorldGeneration.Utils.CaesiumTileCheck(x, y);
         MakeSpike(x, y, 20, 10, 1);
 
 
@@ -117,10 +118,6 @@ class WorldgenHelper : ModItem
             if (q < 3)
             {
                 WorldGeneration.Utils.MakeCircle2(x, y, (int)(width * 0.67), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.CaesiumCrystal>());
-            }
-            else if (q == length - 1)
-            {
-                WorldGeneration.Utils.MakeSquare(x, y, (int)(width * 0.4), ModContent.TileType<Tiles.CaesiumCrystal>());
             }
             else
                 WorldGeneration.Utils.MakeSquare(x, y, width, ModContent.TileType<Tiles.CaesiumCrystal>()); // ModContent.TileType<Tiles.Ores.CaesiumOre>());

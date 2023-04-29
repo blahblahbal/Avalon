@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
-namespace Avalon.WorldGeneration; 
+namespace Avalon.WorldGeneration;
 
 public class Utils
 {
@@ -45,12 +45,11 @@ public class Utils
             int q = posY;
             for (int i = posY - 30; i < posY; i++) // ypos = maxTilesY - 170 (165)
             {
-                Tile tile = Framing.GetTileSafely(posX, i);
-                Tile tileAbove = Framing.GetTileSafely(posX, i - 1);
-                if ((tile.TileType == ModContent.TileType<Tiles.BlastedStone>() || tile.TileType == ModContent.TileType<Tiles.LaziteGrass>())
-                    && tile.HasTile)
+                Tile tile = Framing.GetTileSafely(posX, q);
+                Tile tileAbove = Framing.GetTileSafely(posX, q - 1);
+                if (!tile.HasTile)
                 {
-                    q--;
+                    q++;
                 }
                 else if (!tileAbove.HasTile && tile.HasTile)
                 {
@@ -63,12 +62,11 @@ public class Utils
             int q = posY;
             for (int i = posY; i < posY + 30; i++)
             {
-                Tile tile = Framing.GetTileSafely(posX, i);
-                Tile tileBelow = Framing.GetTileSafely(posX, i + 1);
-                if ((tile.TileType == ModContent.TileType<Tiles.BlastedStone>() || tile.TileType == ModContent.TileType<Tiles.LaziteGrass>())
-                    && tile.HasTile)
+                Tile tile = Framing.GetTileSafely(posX, q);
+                Tile tileBelow = Framing.GetTileSafely(posX, q + 1);
+                if (!tile.HasTile) // (tile.TileType == ModContent.TileType<Tiles.BlastedStone>() || tile.TileType == ModContent.TileType<Tiles.LaziteGrass>())
                 {
-                    q++;
+                    q--;
                 }
                 else if (!tileBelow.HasTile && tile.HasTile)
                 {
