@@ -3402,6 +3402,16 @@ Mods: {
 				DisplayName: Infested Carcass
 				Tooltip: Summons Bacterium Prime
 			}
+
+			RottenFlesh: {
+				DisplayName: Rotten Flesh
+				Tooltip: ""
+			}
+
+			Icicle: {
+				DisplayName: Icicle
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3472,6 +3482,7 @@ Mods: {
 			CorrosiveMucus.DisplayName: Corrosive Mucus
 			BacteriumGas.DisplayName: Bacterium Gas
 			BouncyBoogerBall.DisplayName: Bouncy Booger Ball
+			Icicle.DisplayName: Icicle
 		}
 
 		NPCs: {

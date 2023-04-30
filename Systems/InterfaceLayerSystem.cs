@@ -11,12 +11,21 @@ public class InterfaceLayerSystem : ModSystem
     /// <inheritdoc />
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
-        int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Mouse Text");
+        int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Resource Bars");
         if (staminaBarIndex != -1)
         {
             layers.Insert(staminaBarIndex, new LegacyGameInterfaceLayer("Stamina Bar", delegate
             {
                 ExxoAvalonOrigins.Mod.staminaInterface.Draw(Main.spriteBatch, Main._drawInterfaceGameTime);
+                return true;
+            }, InterfaceScaleType.UI));
+        }
+
+        if (staminaBarIndex != -1)
+        {
+            layers.Insert(staminaBarIndex, new LegacyGameInterfaceLayer("Minion Slot Counter", delegate
+            {
+                ExxoAvalonOrigins.Mod.minionSlotInterface.Draw(Main.spriteBatch, Main._drawInterfaceGameTime);
                 return true;
             }, InterfaceScaleType.UI));
         }
@@ -29,6 +38,7 @@ public class InterfaceLayerSystem : ModSystem
                     modInterfaceLayer.Update();
                 }
                 ExxoAvalonOrigins.Mod.staminaInterface.Update(Main._drawInterfaceGameTime);
+                ExxoAvalonOrigins.Mod.minionSlotInterface.Update(Main._drawInterfaceGameTime);
                 return true;
             },
             InterfaceScaleType.UI)

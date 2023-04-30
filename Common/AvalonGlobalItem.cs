@@ -44,6 +44,7 @@ public class AvalonGlobalItem : GlobalItem
             .AddCustomShimmerResult(ItemID.AntlionClaw)
             .AddCondition(ShimmerCraftCondition.ShimmerOnly)
             .Register();
+
         Recipe MandibleBladeTransmute = Recipe.Create(ItemID.AntlionClaw);
         MandibleBladeTransmute.AddCustomShimmerResult(ModContent.ItemType<DesertLongsword>());
         MandibleBladeTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
@@ -83,43 +84,6 @@ public class AvalonGlobalItem : GlobalItem
         EnergyCrystalTransmute.AddCustomShimmerResult(ModContent.ItemType<EnergyCrystal>());
         EnergyCrystalTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
         EnergyCrystalTransmute.Register();
-
-        //Boogers
-
-        Recipe BoogerVoidBag = Recipe.Create(ItemID.VoidLens);
-        BoogerVoidBag.AddIngredient(ItemID.Bone,30);
-        BoogerVoidBag.AddIngredient(ItemID.JungleSpores, 15);
-        BoogerVoidBag.AddIngredient(ModContent.ItemType<Booger>(), 30);
-        BoogerVoidBag.AddTile(TileID.DemonAltar);
-        BoogerVoidBag.Register();
-
-        Recipe BoogerVoidVault = Recipe.Create(ItemID.VoidVault);
-        BoogerVoidVault.AddIngredient(ItemID.Bone, 15);
-        BoogerVoidVault.AddIngredient(ItemID.JungleSpores, 8);
-        BoogerVoidVault.AddIngredient(ModContent.ItemType<Booger>(), 15);
-        BoogerVoidVault.AddTile(TileID.DemonAltar);
-        BoogerVoidVault.Register();
-
-        Recipe BoogerObsidianLongcoat = Recipe.Create(ItemID.ObsidianShirt);
-        BoogerObsidianLongcoat.AddIngredient(ItemID.Silk,10);
-        BoogerObsidianLongcoat.AddIngredient(ItemID.Obsidian,20);
-        BoogerObsidianLongcoat.AddIngredient(ModContent.ItemType<Booger>(), 5);
-        BoogerObsidianLongcoat.AddTile(TileID.Hellforge);
-        BoogerObsidianLongcoat.Register();
-
-        Recipe BoogerObsidianHat = Recipe.Create(ItemID.ObsidianHelm);
-        BoogerObsidianHat.AddIngredient(ItemID.Silk, 10);
-        BoogerObsidianHat.AddIngredient(ItemID.Obsidian, 20);
-        BoogerObsidianHat.AddIngredient(ModContent.ItemType<Booger>(), 5);
-        BoogerObsidianHat.AddTile(TileID.Hellforge);
-        BoogerObsidianHat.Register();
-
-        Recipe BoogerObsidianPants = Recipe.Create(ItemID.ObsidianPants);
-        BoogerObsidianPants.AddIngredient(ItemID.Silk, 10);
-        BoogerObsidianPants.AddIngredient(ItemID.Obsidian, 20);
-        BoogerObsidianPants.AddIngredient(ModContent.ItemType<Booger>(), 5);
-        BoogerObsidianPants.AddTile(TileID.Hellforge);
-        BoogerObsidianPants.Register();
     }
 
     public override void HoldItem(Item item, Player player)
