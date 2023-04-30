@@ -34,6 +34,9 @@ public class ExxoAvalonOrigins : Mod
     public const string TextureAssetsPath = "Assets/Textures";
     internal UserInterface staminaInterface;
     internal StaminaBar staminaBar;
+
+    internal UserInterface minionSlotInterface;
+    internal MinionSlotCounter minionSlotCounter;
     public override void Load()
     {
         // ----------- Server/Client ----------- //
@@ -51,6 +54,10 @@ public class ExxoAvalonOrigins : Mod
         staminaInterface = new UserInterface();
         staminaBar = new StaminaBar();
         staminaInterface.SetState(staminaBar);
+
+        minionSlotInterface = new UserInterface();
+        minionSlotCounter = new MinionSlotCounter();
+        minionSlotInterface.SetState(minionSlotCounter);
 
         if (ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement)
         {

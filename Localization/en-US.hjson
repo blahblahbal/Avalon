@@ -3413,6 +3413,12 @@ Mods: {
 			}
 		}
 
+			Icicle: {
+				DisplayName: Icicle
+				Tooltip: ""
+			}
+		}
+
 		Projectiles: {
 			AeonBeam.DisplayName: Aeon's Eternity
 			AeonStar.DisplayName: Aeon Constellation
@@ -3481,6 +3487,7 @@ Mods: {
 			CorrosiveMucus.DisplayName: Corrosive Mucus
 			BacteriumGas.DisplayName: Bacterium Gas
 			BouncyBoogerBall.DisplayName: Bouncy Booger Ball
+			Icicle.DisplayName: Icicle
 		}
 
 		NPCs: {

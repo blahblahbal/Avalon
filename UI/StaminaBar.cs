@@ -289,7 +289,9 @@ class StaminaBar : UIState
         {
             return;
         }
-        if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars")
+        if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars" ||
+            Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithText" ||
+            Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithFullText")
         {
             panelLeft = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Panel_Left");
             stamFillGreen = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Green");
@@ -339,7 +341,8 @@ class StaminaBar : UIState
             Height.Set(panelMiddleStam.Value.Height, 0);
             Width.Set(26 + stamFillGreen.Value.Width * stamSegmentsBarsCount + 6, 0);
         }
-        else if (Main.ResourceSetsManager.ActiveSetKeyName == "New")
+        else if (Main.ResourceSetsManager.ActiveSetKeyName == "New" ||
+            Main.ResourceSetsManager.ActiveSetKeyName == "NewWithText")
         {
             staminaTop = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_Top");
             staminaMiddle = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_Middle");
