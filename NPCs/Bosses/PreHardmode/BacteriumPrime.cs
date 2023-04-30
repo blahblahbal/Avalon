@@ -277,7 +277,7 @@ public class BacteriumPrime : ModNPC
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(5f,7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / 6 - (i * MathHelper.Pi / 6)),ModContent.ProjectileType<BouncyBoogerBall>(),NPC.damage / 2,0,255);
+                        int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(5f,7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / 6 - (i * MathHelper.Pi / 6)),ModContent.ProjectileType<BouncyBoogerBall>(),NPC.damage / 3,0,255);
                         Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
                         if (Main.expertMode)
                         {

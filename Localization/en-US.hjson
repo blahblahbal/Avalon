@@ -3403,19 +3403,23 @@ Mods: {
 				Tooltip: Summons Bacterium Prime
 			}
 
-			BadgeOfBacteria: {
-				DisplayName: Badge Of Bacteria
-				Tooltip: 
-                '''
-                Increases damage by 8 after being hit
-                Attackers also take damage for a short time after you are hit
-                '''
+			RottenFlesh: {
+				DisplayName: Rotten Flesh
+				Tooltip: ""
 			}
-		}
 
 			Icicle: {
 				DisplayName: Icicle
 				Tooltip: ""
+			}
+
+			BadgeOfBacteria: {
+				DisplayName: Badge Of Bacteria
+				Tooltip:
+					'''
+					               Increases damage by 8 after being hit
+					               Attackers also take damage for a short time after you are hit
+					'''
 			}
 		}
 
@@ -3984,7 +3988,7 @@ Mods: {
 
 			BacterialEndurance: {
 				DisplayName: Bacterial Endurance
-				Description: Damage and jump height increased.
+				Description: Mods.Avalon.Buffs.BacterialEndurance.Description
 			}
 		}
 
