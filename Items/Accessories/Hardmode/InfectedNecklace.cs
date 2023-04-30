@@ -21,7 +21,7 @@ namespace Avalon.Items.Accessories.Hardmode
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<AvalonPlayer>().MutatedStocking = true;
-            player.slotsMinions += 1;
+            player.maxMinions++;
         }
         public override void AddRecipes()
         {
