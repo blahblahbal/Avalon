@@ -69,7 +69,9 @@ public class AvalonPlayer : ModPlayer
     public bool tpStam = true;
     public int tpCD;
     public bool teleportVWasTriggered;
-    
+    public bool BadgeOfBacteria = false;
+    public bool BacterialEndurance;
+
 
     #region accessories
     public bool PulseCharm;
@@ -143,6 +145,8 @@ public class AvalonPlayer : ModPlayer
         EtherealHeart = false;
         BloodyWhetstone = false;
         CloudGlove = false;
+        BadgeOfBacteria = false;
+        BacterialEndurance = false;
 
         SnotOrb = false;
 
@@ -375,6 +379,10 @@ public class AvalonPlayer : ModPlayer
         {
             modifiers.FlatBonusDamage += 15;
         }
+        if (BacterialEndurance)
+        {
+            modifiers.FlatBonusDamage += 8;
+        }
         // if (modifiers.CritDamage)
         // {
         //     damage += MultiplyMeleeCritDamage(damage);
@@ -386,6 +394,10 @@ public class AvalonPlayer : ModPlayer
         if (CrystalEdge)
         {
             modifiers.FlatBonusDamage += 15;
+        }
+        if (BacterialEndurance)
+        {
+            modifiers.FlatBonusDamage += 8;
         }
         // if (crit)
         // {
@@ -443,6 +455,22 @@ public class AvalonPlayer : ModPlayer
         if (CaesiumPoison)
         {
             info.Damage = (int)(info.Damage * 1.15f);
+        }
+    }
+    public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
+    {
+
+        if (Player.whoAmI == Main.myPlayer && BadgeOfBacteria)
+        {
+            Player.AddBuff(ModContent.BuffType<BacterialEndurance>(), 6 * 60);
+        }
+    }
+    public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
+    {
+        if (Player.whoAmI == Main.myPlayer && BadgeOfBacteria)
+        {
+            Player.AddBuff(ModContent.BuffType<BacterialEndurance>(), 6 * 60);
+            npc.AddBuff(ModContent.BuffType<BacteriaInfection>(), 6 * 60);
         }
     }
 

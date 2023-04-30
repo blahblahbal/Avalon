@@ -3402,6 +3402,15 @@ Mods: {
 				DisplayName: Infested Carcass
 				Tooltip: Summons Bacterium Prime
 			}
+
+			BadgeOfBacteria: {
+				DisplayName: Badge Of Bacteria
+				Tooltip: 
+                '''
+                Increases damage by 8 after being hit
+                Attackers also take damage for a short time after you are hit
+                '''
+			}
 		}
 
 		Projectiles: {
@@ -3959,6 +3968,16 @@ Mods: {
 			SnotOrb: {
 				DisplayName: Snot Orb
 				Description: The snot orb provides light
+			}
+
+			BacteriaInfection: {
+				DisplayName: Bacteria Infection
+				Description: Mods.Avalon.Buffs.BacteriaInfection.Description
+			}
+
+			BacterialEndurance: {
+				DisplayName: Bacterial Endurance
+				Description: Damage and jump height increased.
 			}
 		}
 
