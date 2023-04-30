@@ -58,11 +58,6 @@ public class PurpleDungeonDoorClosed : ModTile
         num = 1;
     }
 
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 48, ModContent.ItemType<PurpleDungeonDoor>());
-    }
-
     public override void MouseOver(int i, int j)
     {
         var player = Main.LocalPlayer;

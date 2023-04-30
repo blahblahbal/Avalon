@@ -77,12 +77,6 @@ public class OrangeDungeonDoorOpen : ModTile
     {
         num = 1;
     }
-
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<OrangeDungeonDoor>());
-    }
-
     public override void MouseOver(int i, int j)
     {
         var player = Main.LocalPlayer;

@@ -14,7 +14,6 @@ public class CaesiumCrystal : ModTile
         Main.tileMerge[Type][ModContent.TileType<Ores.CaesiumOre>()] = true;
         Main.tileMerge[ModContent.TileType<Ores.CaesiumOre>()][Type] = true;
         Main.tileBrick[Type] = true;
-        Main.tileBlockLight[Type] = true;
         DustType = ModContent.DustType<Dusts.CaesiumDust>();
         HitSound = SoundID.Item27;
     }

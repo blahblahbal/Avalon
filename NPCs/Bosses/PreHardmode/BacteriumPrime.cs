@@ -25,8 +25,6 @@ public class BacteriumPrime : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Bacterium Prime");
-
         // Add this in for bosses that have a summon item, requires corresponding code in the item (See MinionBossSummonItem.cs)
         NPCID.Sets.MPAllowedEnemies[Type] = true;
         // Automatically group with other bosses

@@ -32,12 +32,6 @@ public class OrangeDungeonBed : ModTile
         return true;
     }
 
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 64, 32,
-            ModContent.ItemType<Items.Placeable.Furniture.OrangeDungeon.OrangeDungeonBed>());
-    }
-
     public override bool RightClick(int i, int j)
     {
         Player player = Main.LocalPlayer;

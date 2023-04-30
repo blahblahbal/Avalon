@@ -35,11 +35,6 @@ public class PurpleDungeonLamp : ModTile
         }
     }
 
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 16, ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonLamp>());
-    }
-
     public override void HitWire(int i, int j)
     {
         Tile tile = Main.tile[i, j];
