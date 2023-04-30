@@ -3392,6 +3392,16 @@ Mods: {
 				DisplayName: Baccilite Bar
 				Tooltip: ""
 			}
+
+			BacteriumPrimeBossBag: {
+				DisplayName: Treasure Bag (Bacterium Prime)
+				Tooltip: Right click to open
+			}
+
+			InfestedCarcass: {
+				DisplayName: Infested Carcass
+				Tooltip: Summons Bacterium Prime
+			}
 		}
 
 		Projectiles: {
@@ -3460,6 +3470,8 @@ Mods: {
 			SnotOrb.DisplayName: Snot Orb
 			Cough.DisplayName: Cough
 			CorrosiveMucus.DisplayName: Corrosive Mucus
+			BacteriumGas.DisplayName: Bacterium Gas
+			BouncyBoogerBall.DisplayName: Bouncy Booger Ball
 		}
 
 		NPCs: {
@@ -3485,6 +3497,7 @@ Mods: {
 			Cougher.DisplayName: Cougher
 			BacteriumPrime.DisplayName: Bacterium Prime
 			BactusMinion.DisplayName: Bactus Minion
+			Viriling.DisplayName: Viriling
 		}
 
 		Buffs: {

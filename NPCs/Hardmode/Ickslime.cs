@@ -83,6 +83,7 @@ public class Ickslime : ModNPC
             NPC.knockBackResist *= 0.9f;
             NPC.value *= 1.2f;
         }
+        NPC.Size *= NPC.scale;
         NPC.life = NPC.lifeMax;
     }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)

@@ -1,8 +1,10 @@
 using System;
+using Avalon.Common.Players;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Vanity;
+using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.Projectiles.Hostile;
 using Avalon.Systems;
@@ -10,6 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
@@ -23,9 +26,24 @@ public class BacteriumPrime : ModNPC
     public override void SetStaticDefaults()
     {
         //DisplayName.SetDefault("Bacterium Prime");
+
+        // Add this in for bosses that have a summon item, requires corresponding code in the item (See MinionBossSummonItem.cs)
+        NPCID.Sets.MPAllowedEnemies[Type] = true;
+        // Automatically group with other bosses
+        NPCID.Sets.BossBestiaryPriority.Add(Type);
+
         Main.npcFrameCount[NPC.type] = 8;
         NPCID.Sets.TrailCacheLength[NPC.type] = 12;
         NPCID.Sets.TrailingMode[NPC.type] = 7;
+
+        NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
+        {
+            SpecificallyImmuneTo = new int[]
+            {
+                    BuffID.Confused
+            }
+        };
+        NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
     }
     public override void SetDefaults()
     {
@@ -45,7 +63,8 @@ public class BacteriumPrime : ModNPC
         NPC.DeathSound = SoundID.NPCDeath21;
         NPC.knockBackResist = 0f;
         DrawOffsetY = 14;
-        Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime") : MusicID.Boss2;
+        NPC.timeLeft = 200000;
+        Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime") : MusicID.Boss5;
         //bossBag = ModContent.ItemType<Items.BossBags.BacteriumPrimeBossBag>();
     }
 
@@ -53,7 +72,7 @@ public class BacteriumPrime : ModNPC
     {
         //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacteriumPrimeTrophy>(), 10));
         //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacteriumPrimeMask>(), 10));
-        //npcLoot.Add(ItemDropRule.ByCondition(new Conditions.IsExpert(), ModContent.ItemType<BacteriumPrimeBossBag>()));
+        npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BacteriumPrimeBossBag>()));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 15, 41));
         if (!ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime)
         {
@@ -69,25 +88,29 @@ public class BacteriumPrime : ModNPC
         BactusCount = 0;
         for(int i = 0; i < Main.maxNPCs; i++)
         {
-            if (Main.npc[i].type == ModContent.NPCType<BactusMinion>() && Main.npc[i].active)
+            if (Main.npc[i].type == ModContent.NPCType<Viriling>() && Main.npc[i].active)
             {
                 BactusCount++;
             }
         }
 
-        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
+        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagion || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagionDesert || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion)
         {
-            NPC.TargetClosest(true);
+            NPC.TargetClosest(false);
         }
         Player Target = Main.player[NPC.target];
 
-        if (Target.dead)
-            NPC.ai[3] = 61;
-        if (NPC.ai[3] == 61)
+        if (Target.dead || (!Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagionDesert && !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion))
+            NPC.ai[3] = -2;
+        if (NPC.ai[3] == -2)
         {
-            NPC.velocity.Y -= 0.1f;
+            NPC.noTileCollide = true;
+            NPC.velocity.Y += 0.1f;
             NPC.velocity.X *= 0.99f;
-            NPC.alpha++;
+            if(NPC.timeLeft > 60)
+            {
+                NPC.timeLeft = 60;
+            }
         }
 
         #region Phase 1
@@ -98,10 +121,10 @@ public class BacteriumPrime : ModNPC
 
         if (NPC.ai[3] == 0) {
             if (NPC.noTileCollide || NPC.Center.Distance(Target.Center) > 40 * 16)
-                NPC.velocity += NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2CircularEdge(200, 200)) * 0.13f;
+                NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.13f;
             else
             {
-                NPC.velocity += NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2CircularEdge(200, 200)) * 0.023f;
+                NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.023f;
             }
 
             NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
@@ -147,31 +170,31 @@ public class BacteriumPrime : ModNPC
             }
             if (NPC.ai[1] > 700 * 2 && !Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
             {
-                NPC.ai[1] = -Main.rand.Next(-100, 0);
+                NPC.ai[1] = -Main.rand.Next(-100, 100);
                 NPC.noTileCollide = true;
             }
 
             if (Main.rand.NextBool(10))
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<Cough>(), NPC.damage / 3, 0, -1,1);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
             }
 
-            NPC.ai[0]++;
-            if (NPC.ai[0] > 120 && BactusCount < MaxBacCount)
-            {
-                NPC.ai[0] = 0;
-                NPC Summon = NPC.NewNPCDirect(NPC.GetSource_FromThis(),NPC.Center + Main.rand.NextVector2CircularEdge(1000,1000),ModContent.NPCType<BactusMinion>(),0,0,0,0,0,NPC.target);
-                Summon.velocity = Summon.position.DirectionTo(Target.position) * 6;
-                for(int i = 0; i < 20; i++)
-                {
-                    Dust summonDust = Dust.NewDustPerfect(Summon.Center, DustID.CorruptGibs, Main.rand.NextVector2Circular(8, 8), 128, default, 1.5f);
-                    summonDust.noGravity = true;
-                }
-            }
+            //NPC.ai[0]++;
+            //if (NPC.ai[0] > 120 && BactusCount < MaxBacCount)
+            //{
+            //    NPC.ai[0] = 0;
+            //    NPC Summon = NPC.NewNPCDirect(NPC.GetSource_FromThis(),NPC.Center + Main.rand.NextVector2CircularEdge(1000,1000),ModContent.NPCType<BactusMinion>(),0,0,0,0,0,NPC.target);
+            //    Summon.velocity = Summon.position.DirectionTo(Target.position) * 6;
+            //    for(int i = 0; i < 20; i++)
+            //    {
+            //        Dust summonDust = Dust.NewDustPerfect(Summon.Center, DustID.CorruptGibs, Main.rand.NextVector2Circular(8, 8), 128, default, 1.5f);
+            //        summonDust.noGravity = true;
+            //    }
+            //}
         }
         #endregion Phase 1
 
-        if (NPC.life <= NPC.lifeMax * 0.55f && NPC.ai[3] < 60)
+        if (NPC.life <= NPC.lifeMax * 0.6f && NPC.ai[3] < 60 && NPC.ai[3] >= 0)
         {
             NPC.alpha = (int)(MathHelper.Lerp(64, NPC.alpha, 0.9f));
             NPC.ai[3]++;
@@ -183,7 +206,7 @@ public class BacteriumPrime : ModNPC
             Main.dust[d].noGravity = true;
             if (Main.rand.NextBool(3))
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<Cough>(), NPC.damage / 3, 0, -1, 1);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
             }
         }
         if (NPC.ai[3] == 59)
@@ -192,8 +215,10 @@ public class BacteriumPrime : ModNPC
             NPC.ai[1] = 0;
             NPC.ai[2] = 0;
             //NPC.knockBackResist = 0f;
-            NPC.defense -= 2;
+            NPC.TargetClosest(false);
+            NPC.defense -= 5;
             NPC.noTileCollide = true;
+            NPC.knockBackResist += 0.1f;
             SoundEngine.PlaySound(SoundID.ForceRoar);
         }
 
@@ -209,45 +234,74 @@ public class BacteriumPrime : ModNPC
                 NPC.ai[1]++;
             if (Main.rand.NextBool(30))
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<Cough>(), NPC.damage / 3, 0, -1,1);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
             }
             if (NPC.ai[1] > 200)
             {
+                if (NPC.ai[0] == 0)
+                {
                     float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
-                    int d = Dust.NewDust(NPC.Center + new Vector2(0,120).RotatedBy(rotate), 0,0, DustID.CorruptGibs,0,0, 50, default, 2);
+                    int d = Dust.NewDust(NPC.Center + new Vector2(0, 120).RotatedBy(rotate), 0, 0, DustID.PirateStaff, 0, 0, 50, default, 2);
                     Main.dust[d].velocity = new Vector2(0, -9).RotatedBy(rotate) + NPC.velocity;
                     Main.dust[d].noGravity = true;
                     //Main.dust[d].fadeIn = 1.2f;
+                }
+                else
+                {
+                    float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                    int d = Dust.NewDust(NPC.Center + new Vector2(0, 120).RotatedBy(rotate), 0, 0, DustID.CorruptGibs, 0, 0, 50, default, 2);
+                    Main.dust[d].velocity = new Vector2(0, -9).RotatedBy(rotate) + NPC.velocity;
+                    Main.dust[d].noGravity = true;
+                }
                 NPC.velocity *= 0.94f;
             }
             if (NPC.ai[1] == 240)
             {
                 SoundEngine.PlaySound(SoundID.Item95, NPC.Center);
-                for (int i = 0; i < Main.rand.Next(4, 7); i++)
+                if (NPC.ai[0] == 0)
                 {
-                    Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(6, 3) + new Vector2(0,Main.rand.NextFloat(-4,0));
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<CorrosiveMucus>(), (int)(NPC.damage * 0.3f), 0, -1);
+                    for (int i = 0; i < Main.rand.Next(4, 7); i++)
+                    {
+                        Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(6, 3) + new Vector2(0, Main.rand.NextFloat(-4, 0));
+                        int M = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<CorrosiveMucus>(), (int)(NPC.damage * 0.3f), 0, -1);
+                        //if(Main.expertMode)
+                        //Main.projectile[M].damage = (int)(Main.projectile[M].damage * 0.5f);
+                    }
+                    //for (int i = 0; i < Main.rand.Next(3, 6); i++)
+                    //{
+                    //    Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.1f) * Main.rand.NextFloat(9, 8);
+                    //    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<BacteriumGas>(), (int)(NPC.damage * 0.2f), 0, -1,1);
+                    //}
                 }
-                for (int i = 0; i < Main.rand.Next(2, 5); i++)
+                else
                 {
-                    Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(5, 2) + new Vector2(0, Main.rand.NextFloat(-4, 0));
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<Cough>(), (int)(NPC.damage * 0.2f), 0, -1,1);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(5f,7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / 6 - (i * MathHelper.Pi / 6)),ModContent.ProjectileType<BouncyBoogerBall>(),NPC.damage / 2,0,255);
+                        Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
+                        if (Main.expertMode)
+                        {
+                            Main.projectile[P].velocity *= 1.5f;
+                            Main.projectile[P].timeLeft = (int)(Main.projectile[P].timeLeft * 1.5f);
+                        }
+                    }
                 }
-                NPC.ai[1] = 0;
+                NPC.ai[0] = Main.rand.Next(0, 2);
+                NPC.ai[1] = Main.rand.Next(-60,60);
             }
 
-            NPC.ai[0]++;
-            if (NPC.ai[0] > 20 && BactusCount < MaxBacCount)
-            {
-                NPC.ai[0] = 0;
-                NPC Summon = NPC.NewNPCDirect(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2CircularEdge(1000, 1000), ModContent.NPCType<BactusMinion>(), 0, 0, 0, 0, 0, NPC.target);
-                Summon.velocity = Summon.position.DirectionTo(Target.position) * 6;
-                for (int i = 0; i < 20; i++)
-                {
-                    Dust summonDust = Dust.NewDustPerfect(Summon.Center, DustID.CorruptGibs, Main.rand.NextVector2Circular(8, 8), 128, default, 1.5f);
-                    summonDust.noGravity = true;
-                }
-            }
+            //NPC.ai[0]++;
+            //if (NPC.ai[0] > 20 && BactusCount < MaxBacCount)
+            //{
+            //    NPC.ai[0] = 0;
+            //    NPC Summon = NPC.NewNPCDirect(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2CircularEdge(1000, 1000), ModContent.NPCType<BactusMinion>(), 0, 0, 0, 0, 0, NPC.target);
+            //    Summon.velocity = Summon.position.DirectionTo(Target.position) * 6;
+            //    for (int i = 0; i < 20; i++)
+            //    {
+            //        Dust summonDust = Dust.NewDustPerfect(Summon.Center, DustID.CorruptGibs, Main.rand.NextVector2Circular(8, 8), 128, default, 1.5f);
+            //        summonDust.noGravity = true;
+            //    }
+            //}
             //NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.26f;
             if (NPC.ai[1] < 200)
             {
@@ -280,10 +334,10 @@ public class BacteriumPrime : ModNPC
 
        
 
-        if(NPC.alpha > 255)
-        {
-            NPC.active = false;
-        }
+        //if(NPC.alpha > 255)
+        //{
+        //    NPC.active = false;
+        //}
         float maxRotate = 0.4f;
         if (NPC.ai[3] is < 1 or > 59)
         NPC.rotation = MathHelper.Clamp(NPC.velocity.X * 0.03f, -maxRotate, maxRotate);
@@ -295,9 +349,9 @@ public class BacteriumPrime : ModNPC
         Rectangle frame = NPC.frame;
         Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
         float alphaThingHackyWow = 0;
-        for (int i = 11; i > 0; i-= 2)
+        for (int i = 11; i > 0; i -= 2)
         {
-            alphaThingHackyWow += 0.05f;
+            alphaThingHackyWow += 0.03f;
             Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R / 2 * alphaThingHackyWow * (NPC.ai[3] / 120), drawColor.G, 0, 128) * alphaThingHackyWow * (NPC.ai[3] / 60), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
         }
         //Main.EntitySpriteDraw(texture, drawPos, frame, drawColor, NPC.rotation, new Vector2(NPC.frame.Width / 2,NPC.frame.Height / 2), NPC.scale,SpriteEffects.None,0);
@@ -360,7 +414,7 @@ public class BacteriumPrime : ModNPC
         if (NPC.life <= 0)
         {
             for(int i = 0; i < 8; i++)
-            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<Cough>(), NPC.damage / 3, 0, -1,1);
+            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
         }
     }
 

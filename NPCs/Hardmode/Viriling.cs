@@ -10,9 +10,9 @@ using Terraria.DataStructures;
 using Avalon.Common.Players;
 using Avalon.Items.Material.Ores;
 
-namespace Avalon.NPCs.Bosses.PreHardmode;
+namespace Avalon.NPCs.Hardmode;
 
-public class BactusMinion : ModNPC
+public class Viriling : ModNPC
 {
     public override void SetStaticDefaults()
     {
@@ -22,8 +22,8 @@ public class BactusMinion : ModNPC
     public override void SetDefaults()
     {
         NPC.damage = 23;
-        NPC.lifeMax = 32;
-        NPC.defense = 7;
+        NPC.lifeMax = 122;
+        NPC.defense = 9;
         NPC.noGravity = true;
         NPC.width = 46;
         NPC.aiStyle = -1;
@@ -41,13 +41,13 @@ public class BactusMinion : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Bacti will swarm you if you're not careful. Watch out!")
+            new FlavorTextBestiaryInfoElement("They do something I think idk I'm not a writer.")
         });
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Booger>(), 2));
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 2));
+        //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Booger>(), 2));
+        //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 2));
     }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
@@ -184,7 +184,7 @@ public class BactusMinion : ModNPC
                 NPC.timeLeft = 10;
             }
         }
-        if (((NPC.velocity.X > 0f && NPC.oldVelocity.X < 0f) || (NPC.velocity.X < 0f && NPC.oldVelocity.X > 0f) || (NPC.velocity.Y > 0f && NPC.oldVelocity.Y < 0f) || (NPC.velocity.Y < 0f && NPC.oldVelocity.Y > 0f)) && !NPC.justHit)
+        if ((NPC.velocity.X > 0f && NPC.oldVelocity.X < 0f || NPC.velocity.X < 0f && NPC.oldVelocity.X > 0f || NPC.velocity.Y > 0f && NPC.oldVelocity.Y < 0f || NPC.velocity.Y < 0f && NPC.oldVelocity.Y > 0f) && !NPC.justHit)
         {
             NPC.netUpdate = true;
             return;
@@ -208,7 +208,7 @@ public class BactusMinion : ModNPC
         //    }
         //}
 
-        if ((!Collision.SolidCollision(NPC.position, NPC.width, NPC.height) || NPC.noTileCollide) && NPC.alpha > 0 && Main.player[NPC.target].position.Distance(NPC.position) < 640)
+        if ((!Collision.SolidCollision(NPC.position, NPC.width, NPC.height) || !NPC.noTileCollide) && NPC.alpha > 0 && Main.player[NPC.target].position.Distance(NPC.position) < 640)
         {
             NPC.noTileCollide = false;
             NPC.alpha--;
@@ -259,10 +259,10 @@ public class BactusMinion : ModNPC
     }
 
     public override void HitEffect(NPC.HitInfo hit)
-    { 
+    {
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f,0.9f), Mod.Find<ModGore>("BactusMinion1").Type, NPC.scale);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("BactusMinion1").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("BactusMinion2").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("BactusMinion3").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("BactusMinion4").Type, NPC.scale);

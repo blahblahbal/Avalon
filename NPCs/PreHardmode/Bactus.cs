@@ -57,6 +57,7 @@ public class Bactus : ModNPC
             NPC.value *= 1.2f;
         }
         NPC.life = NPC.lifeMax;
+        NPC.Size *= NPC.scale;
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {

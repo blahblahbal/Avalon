@@ -57,7 +57,7 @@ public class Viris : ModNPC
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2,2,4));
 
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), 5091, 1500));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), 5091, 500));
@@ -159,6 +159,12 @@ public class Viris : ModNPC
                 Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
                 Main.dust[d].noGravity = true;
                 Main.dust[d].fadeIn = 1.2f;
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                NPC N = NPC.NewNPCDirect(NPC.GetSource_Death(), NPC.Center, ModContent.NPCType<Viriling>(), 0);
+                N.velocity = Main.rand.NextVector2Circular(5, 5);
             }
         }
         for (int i = 0; i < 15; i++)

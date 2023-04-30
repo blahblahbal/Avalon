@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile;
 
-public class Cough : ModProjectile
+public class BacteriumGas : ModProjectile
 {
     public override void SetDefaults()
     {
@@ -51,10 +51,10 @@ public class Cough : ModProjectile
     {
         return Projectile.alpha < 220;
     }
-    public override void OnHitPlayer(Player target, Player.HurtInfo info)
-    {
-        target.AddBuff(BuffID.Venom, 5 * 16);
-    }
+    //public override void OnHitPlayer(Player target, Player.HurtInfo info)
+    //{
+
+    //}
 
     public override bool PreDraw(ref Color lightColor)
     {
