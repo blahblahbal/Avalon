@@ -42,13 +42,10 @@ internal class MinionSlotCounter : UIState
         barLeft = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/SlotBarLeft", AssetRequestMode.ImmediateLoad);
         barLeftEnd = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/SlotBarLeftEnd", AssetRequestMode.ImmediateLoad);
         fillingBar = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/FillingBar", AssetRequestMode.ImmediateLoad).Value;
-        textYOffset = 200;
+        textYOffset = 10;
 
         labelDimensions = FontAssets.MouseText.Value.MeasureString(labelText);
-
-        Left.Set(Main.screenWidth - 500, 0);
-        Top.Set(textYOffset + labelDimensions.Y, 0);
-        Width.Set(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width, 0);
+        //Width.Set(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width, 0);
     }
 
     protected override void DrawSelf(SpriteBatch spriteBatch)
@@ -68,6 +65,7 @@ internal class MinionSlotCounter : UIState
             {
                 ypos = 94;
             }
+            Top.Set(ypos - 9, 0);
             DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.MouseText.Value, labelText, new Vector2((Main.screenWidth - 320 - labelDimensions.X + 15), ypos - 25), new Color(Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor), 0f, default(Vector2), 0.7f, SpriteEffects.None, 0f);
 
             Vector2 fillingPos = new Vector2(Main.screenWidth - 320, ypos);
@@ -78,6 +76,14 @@ internal class MinionSlotCounter : UIState
                 fillMod *= -1;
                 var origin = new Vector2(fillingClassic.Width / 2);
                 spriteBatch.Draw(fillingClassic, fillingPos, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
+            }
+            Left.Set(Main.screenWidth - 320 - ((fillingClassic.Width - 1) * player.maxMinions / 2), 0);
+            Height.Set(fillingClassic.Height * 1.5f, 0);
+            Width.Set(((fillingClassic.Width + 2) * player.maxMinions / 2), 0);
+            if (IsMouseHovering)
+            {
+                string mouseText = string.Format("{0}/{1}", player.numMinions, player.maxMinions);
+                Main.instance.MouseText(mouseText);
             }
         }
         if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars" ||
@@ -91,7 +97,7 @@ internal class MinionSlotCounter : UIState
             {
                 ypos = 94;
             }
-
+            Top.Set(ypos - 9, 0);
             Vector2 backTexPos = new Vector2(Main.screenWidth - 320, ypos);
             Vector2 fillingPos = new Vector2(Main.screenWidth - 320, ypos);
             for (int backTexLoop = 1; backTexLoop <= player.maxMinions; backTexLoop++)
@@ -120,6 +126,15 @@ internal class MinionSlotCounter : UIState
                 var origin = new Vector2(fillingBar.Width / 2);
                 spriteBatch.Draw(fillingBar, fillingPos, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
             }
+            int max = (int)MathHelper.Min(10, player.maxMinions);
+            Left.Set(Main.screenWidth - 320 - (fillingBar.Width - 5) * max, 0);
+            Height.Set(fillingBar.Height * (player.maxMinions > 10 ? 2 : 1), 0);
+            Width.Set((fillingBar.Width - 2) * max, 0);
+            if (IsMouseHovering)
+            {
+                string mouseText = string.Format("{0}/{1}", player.slotsMinions, player.maxMinions);
+                Main.instance.MouseText(mouseText);
+            }
         }
         if (Main.ResourceSetsManager.ActiveSetKeyName == "New" ||
             Main.ResourceSetsManager.ActiveSetKeyName == "NewWithText")
@@ -137,6 +152,7 @@ internal class MinionSlotCounter : UIState
             {
                 ypos = 94;
             }
+            Top.Set(ypos - 9, 0);
             //Vector2 pos = new Vector2(dimensions.Width, dimensions.Y);
             Vector2 backTexPos = new Vector2(Main.screenWidth - 320, ypos);
             Vector2 fillingPos = new Vector2(Main.screenWidth - 320, ypos);
@@ -187,7 +203,9 @@ internal class MinionSlotCounter : UIState
                 var origin = new Vector2(filling.Width / 2);
                 spriteBatch.Draw(filling, fillingPos, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
             }
-
+            Left.Set(Main.screenWidth - 320 - ((filling.Width + 2) * player.maxMinions / 2), 0);
+            Height.Set(filling.Height * 1.5f, 0);
+            Width.Set((filling.Width + 2) * player.maxMinions / 2, 0);
             if (IsMouseHovering)
             {
                 string mouseText = string.Format("{0}/{1}", player.slotsMinions, player.maxMinions);

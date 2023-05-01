@@ -11,7 +11,7 @@ public class InterfaceLayerSystem : ModSystem
     /// <inheritdoc />
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
-        int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Resource Bars");
+        int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Mouse Text");
         if (staminaBarIndex != -1)
         {
             layers.Insert(staminaBarIndex, new LegacyGameInterfaceLayer("Stamina Bar", delegate

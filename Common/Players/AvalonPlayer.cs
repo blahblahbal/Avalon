@@ -72,6 +72,9 @@ public class AvalonPlayer : ModPlayer
     public bool BadgeOfBacteria = false;
     public bool BacterialEndurance;
 
+    public int MaxMagicCrit;
+    public int MaxMeleeCrit;
+    public int MaxRangedCrit;
 
     #region accessories
     public bool PulseCharm;
@@ -149,6 +152,10 @@ public class AvalonPlayer : ModPlayer
         BacterialEndurance = false;
 
         SnotOrb = false;
+
+        MaxMagicCrit = 100;
+        MaxMeleeCrit = 100;
+        MaxRangedCrit = 100;
 
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
         if (Player.whoAmI == Main.myPlayer)
@@ -267,6 +274,11 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdate()
     {
+        Player.GetCritChance(DamageClass.Magic) = MathHelper.Clamp(Player.GetCritChance(DamageClass.Magic), 0, MaxMagicCrit);
+        Player.GetCritChance(DamageClass.Melee) = MathHelper.Clamp(Player.GetCritChance(DamageClass.Melee), 0, MaxMeleeCrit);
+        Player.GetCritChance(DamageClass.Ranged) = MathHelper.Clamp(Player.GetCritChance(DamageClass.Ranged), 0, MaxRangedCrit);
+
+
         WardCD--;
         if (WardCD < 0) WardCD = 0;
 
