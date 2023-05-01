@@ -38,6 +38,7 @@ public class Cough : ModProjectile
         Projectile.velocity = Projectile.velocity.RotatedByRandom(0.1f) * 0.985f;
         Projectile.rotation += MathHelper.Clamp(Projectile.velocity.Length() * 0.1f, -0.3f, 0.3f);
         Projectile.scale *= 1.003f;
+        Projectile.Resize((int)(36 * Projectile.scale), (int)(36 * Projectile.scale));
 
         //if (Main.rand.NextBool(3))
         //{

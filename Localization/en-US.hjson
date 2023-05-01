@@ -3417,9 +3417,14 @@ Mods: {
 				DisplayName: Badge Of Bacteria
 				Tooltip:
 					'''
-					               Increases damage by 8 after being hit
-					               Attackers also take damage for a short time after you are hit
+					Increases damage by 8 after being hit
+					Attackers also take damage for a short time after you are hit
 					'''
+			}
+
+			Smogscreen: {
+				DisplayName: Smogscreen
+				Tooltip: Shoots poison gas
 			}
 		}
 
@@ -3492,6 +3497,7 @@ Mods: {
 			BacteriumGas.DisplayName: Bacterium Gas
 			BouncyBoogerBall.DisplayName: Bouncy Booger Ball
 			Icicle.DisplayName: Icicle
+			Olivegas.DisplayName: Olivegas
 		}
 
 		NPCs: {

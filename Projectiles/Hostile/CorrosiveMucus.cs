@@ -56,9 +56,9 @@ public class CorrosiveMucus : ModProjectile
         Projectile.damage /= 2;
         Projectile.ai[1]++;
         SoundEngine.PlaySound(SoundID.NPCHit1, Projectile.Center);
-        Projectile.timeLeft = 24 * 60;
+        Projectile.timeLeft = 45 * 60;
         if (Main.expertMode)
-            Projectile.timeLeft += 16 * 60;
+            Projectile.timeLeft += 25 * 60;
         Projectile.Resize(32, 24);
         Projectile.velocity *= 0;
         Projectile.tileCollide = false;

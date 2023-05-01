@@ -51,7 +51,7 @@ public class BacteriumPrime : ModNPC
         NPC.boss = true;
         NPC.noTileCollide = true;
         NPC.lifeMax = 2700;
-        NPC.defense = 16;
+        NPC.defense = 12;
         NPC.noGravity = true;
         NPC.width = 120;
         NPC.aiStyle = -1;
@@ -107,7 +107,7 @@ public class BacteriumPrime : ModNPC
             NPC.noTileCollide = true;
             NPC.velocity.Y += 0.1f;
             NPC.velocity.X *= 0.99f;
-            if(NPC.timeLeft > 60)
+            if (NPC.timeLeft > 60)
             {
                 NPC.timeLeft = 60;
             }
@@ -216,9 +216,9 @@ public class BacteriumPrime : ModNPC
             NPC.ai[2] = 0;
             //NPC.knockBackResist = 0f;
             NPC.TargetClosest(false);
-            NPC.defense -= 5;
+            NPC.defense += 2;
             NPC.noTileCollide = true;
-            NPC.knockBackResist += 0.1f;
+            //NPC.knockBackResist += 0.03f;
             SoundEngine.PlaySound(SoundID.ForceRoar);
         }
 
