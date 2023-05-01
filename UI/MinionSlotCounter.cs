@@ -2,11 +2,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using ReLogic.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.UI;
@@ -16,7 +11,6 @@ namespace Avalon.UI;
 internal class MinionSlotCounter : UIState
 {
     private Asset<Texture2D> slotStart;
-    private Asset<Texture2D> slotStartUncapped;
     private Asset<Texture2D> slotBottom;
     private Asset<Texture2D> slotTop;
     private Asset<Texture2D> slotBottomEnd;
@@ -38,7 +32,6 @@ internal class MinionSlotCounter : UIState
     {
         filling = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/Filling", AssetRequestMode.ImmediateLoad).Value;
         slotStart = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/SlotStart", AssetRequestMode.ImmediateLoad);
-        slotStartUncapped = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/SlotStartUncapped", AssetRequestMode.ImmediateLoad);
         slotBottom = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/SlotBottom", AssetRequestMode.ImmediateLoad);
         slotTop = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/SlotTop", AssetRequestMode.ImmediateLoad);
         slotBottomEnd = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/MinionSlot/SlotBottomEnd", AssetRequestMode.ImmediateLoad);
@@ -77,12 +70,11 @@ internal class MinionSlotCounter : UIState
             }
             DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.MouseText.Value, labelText, new Vector2((Main.screenWidth - 320 - labelDimensions.X + 15), ypos - 25), new Color(Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor), 0f, default(Vector2), 0.7f, SpriteEffects.None, 0f);
 
-            //Vector2 pos = new Vector2(dimensions.Width, dimensions.Y);
             Vector2 fillingPos = new Vector2(Main.screenWidth - 320, ypos);
-            for (int fillingLoop = 1; fillingLoop < player.numMinions; fillingLoop++)
+            for (int fillingLoop = 0; fillingLoop < player.numMinions; fillingLoop++)
             {
 
-                if (fillingLoop > 1) fillingPos += new Vector2(-(fillingClassic.Width / 2), (fillingClassic.Height / 2) * fillMod);
+                if (fillingLoop > 0) fillingPos += new Vector2(-(fillingClassic.Width / 2), (fillingClassic.Height / 2) * fillMod);
                 fillMod *= -1;
                 var origin = new Vector2(fillingClassic.Width / 2);
                 spriteBatch.Draw(fillingClassic, fillingPos, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
@@ -121,10 +113,10 @@ internal class MinionSlotCounter : UIState
                 var origin = new Vector2(backTex.Width / 2);
                 spriteBatch.Draw(backTex, backTexPos, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
             }
-            for (int fillingTexLoop = 1; fillingTexLoop < player.numMinions; fillingTexLoop++)
+            for (int fillingTexLoop = 0; fillingTexLoop < player.numMinions; fillingTexLoop++)
             {
-                if (fillingTexLoop > 1) fillingPos += new Vector2(-(fillingBar.Width - 2), 0);
-                if (fillingTexLoop == 11) fillingPos += new Vector2((fillingBar.Width - 2) * 10, fillingBar.Height - 2);
+                if (fillingTexLoop > 0) fillingPos += new Vector2(-(fillingBar.Width - 2), 0);
+                if (fillingTexLoop == 10) fillingPos += new Vector2((fillingBar.Width - 2) * 10, fillingBar.Height - 2);
                 var origin = new Vector2(fillingBar.Width / 2);
                 spriteBatch.Draw(fillingBar, fillingPos, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
             }
@@ -133,8 +125,6 @@ internal class MinionSlotCounter : UIState
             Main.ResourceSetsManager.ActiveSetKeyName == "NewWithText")
         {
             CalculatedStyle dimensions = GetDimensions();
-            //DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.MouseText.Value, labelText, new Vector2((Main.screenWidth - 500 - labelDimensions.X + 15), textYOffset - 10), new Color(Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor), 0f, default(Vector2), 0.7f, SpriteEffects.None, 0f);
-
             var player = Main.LocalPlayer;
 
             int modifier = -1;
@@ -189,10 +179,10 @@ internal class MinionSlotCounter : UIState
                 spriteBatch.Draw(backTex, backTexPos, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
             }
 
-            for (int fillingLoop = 1; fillingLoop < player.numMinions; fillingLoop++)
+            for (int fillingLoop = 0; fillingLoop < player.numMinions; fillingLoop++)
             {
 
-                if (fillingLoop > 1) fillingPos += new Vector2(-(filling.Width / 2), (filling.Height / 2) * fillMod);
+                if (fillingLoop > 0) fillingPos += new Vector2(-(filling.Width / 2), (filling.Height / 2) * fillMod);
                 fillMod *= -1;
                 var origin = new Vector2(filling.Width / 2);
                 spriteBatch.Draw(filling, fillingPos, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
