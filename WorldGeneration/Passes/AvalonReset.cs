@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -31,7 +31,7 @@ public class AvalonReset : GenPass
             case 2:
                 WorldGen.SavedOreTiers.Copper = ModContent.TileType<Tiles.Ores.BronzeOre>();
                 GenVars.copper = ModContent.TileType<Tiles.Ores.BronzeOre>();
-                GenVars.copperBar = ModContent.ItemType<Items.Material.Ores.BronzeOre>();
+                GenVars.copperBar = ModContent.ItemType<Items.Material.Bars.BronzeBar>();
                 break;
         }
         int iron = WorldGen.genRand.Next(3);
@@ -50,7 +50,7 @@ public class AvalonReset : GenPass
             case 2:
                 WorldGen.SavedOreTiers.Iron = ModContent.TileType<Tiles.Ores.NickelOre>();
                 GenVars.iron = ModContent.TileType<Tiles.Ores.NickelOre>();
-                GenVars.ironBar = ModContent.ItemType<Items.Material.Ores.NickelOre>();
+                GenVars.ironBar = ModContent.ItemType<Items.Material.Bars.NickelBar>();
                 break;
         }
         int silver = WorldGen.genRand.Next(3);
@@ -69,7 +69,7 @@ public class AvalonReset : GenPass
             case 2:
                 WorldGen.SavedOreTiers.Silver = ModContent.TileType<Tiles.Ores.ZincOre>();
                 GenVars.silver = ModContent.TileType<Tiles.Ores.ZincOre>();
-                GenVars.silverBar = ModContent.ItemType<Items.Material.Ores.ZincOre>();
+                GenVars.silverBar = ModContent.ItemType<Items.Material.Bars.ZincBar>();
                 break;
         }
         int gold = WorldGen.genRand.Next(3);
@@ -88,7 +88,7 @@ public class AvalonReset : GenPass
             case 2:
                 WorldGen.SavedOreTiers.Gold = ModContent.TileType<Tiles.Ores.BismuthOre>();
                 GenVars.gold = ModContent.TileType<Tiles.Ores.BismuthOre>();
-                GenVars.goldBar = ModContent.ItemType<Items.Material.Ores.BismuthOre>();
+                GenVars.goldBar = ModContent.ItemType<Items.Material.Bars.BismuthBar>();
                 break;
         }
         int rhodium = WorldGen.genRand.Next(3);

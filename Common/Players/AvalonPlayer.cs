@@ -72,8 +72,17 @@ public class AvalonPlayer : ModPlayer
     public bool BadgeOfBacteria = false;
     public bool BacterialEndurance;
 
+    /// <summary>
+    /// Magic critical strike chance cap. Subtract from it to use.
+    /// </summary>
     public int MaxMagicCrit;
+    /// <summary>
+    /// Melee critical strike chance cap. Subtract from it to use.
+    /// </summary>
     public int MaxMeleeCrit;
+    /// <summary>
+    /// Ranged critical strike chance cap. Subtract from it to use.
+    /// </summary>
     public int MaxRangedCrit;
 
     #region accessories
@@ -93,6 +102,7 @@ public class AvalonPlayer : ModPlayer
     public bool HeartGolem;
     public bool EtherealHeart;
     public bool BloodyWhetstone;
+    public bool FrostGauntlet;
     #endregion
 
     #region buffs and debuffs
@@ -150,6 +160,7 @@ public class AvalonPlayer : ModPlayer
         CloudGlove = false;
         BadgeOfBacteria = false;
         BacterialEndurance = false;
+        FrostGauntlet = false;
 
         SnotOrb = false;
 
@@ -259,8 +270,8 @@ public class AvalonPlayer : ModPlayer
     {
         if (Player.HasItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>()) && !Player.HasBuff(ModContent.BuffType<ImmortalityCooldown>()))
         {
-            Player.statLife = Player.statLifeMax2 / 3;
-            Player.AddBuff(ModContent.BuffType<ImmortalityCooldown>(), 60 * 60 * 3);
+            Player.statLife = Player.statLifeMax2 / 4;
+            Player.AddBuff(ModContent.BuffType<ImmortalityCooldown>(), 60 * 60 * 5);
             int i = Player.FindItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>());
             Player.inventory[i].stack--;
             SoundEngine.PlaySound(SoundID.Item3, Player.position);
@@ -274,10 +285,77 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdate()
     {
-        Player.GetCritChance(DamageClass.Magic) = MathHelper.Clamp(Player.GetCritChance(DamageClass.Magic), 0, MaxMagicCrit);
-        Player.GetCritChance(DamageClass.Melee) = MathHelper.Clamp(Player.GetCritChance(DamageClass.Melee), 0, MaxMeleeCrit);
-        Player.GetCritChance(DamageClass.Ranged) = MathHelper.Clamp(Player.GetCritChance(DamageClass.Ranged), 0, MaxRangedCrit);
+        #region crit cap
+        for (int i = 0; i < Player.inventory.Length; i++)
+        {
+            Item curItem = Player.inventory[i];
 
+            Item storedItem = new Item();
+            storedItem.SetDefaults(curItem.type);
+
+            float cMagic = 0f;
+            float cMelee = 0f;
+            float cRanged = 0f;
+            if (storedItem.DamageType == DamageClass.Magic)
+            {
+                cMagic = storedItem.crit + Player.GetTotalCritChance(DamageClass.Magic);
+            }
+            if (storedItem.DamageType == DamageClass.Melee)
+            {
+                cMelee = storedItem.crit + Player.GetTotalCritChance(DamageClass.Melee);
+            }
+            if (storedItem.DamageType == DamageClass.Ranged)
+            {
+                cRanged = storedItem.crit + Player.GetTotalCritChance(DamageClass.Ranged);
+            }
+
+            // magic
+            if (MaxMagicCrit < 100)
+            {
+                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Magic)
+                {
+                    Player.inventory[Player.selectedItem].crit = MaxMagicCrit - (int)Player.GetCritChance(DamageClass.Magic);
+                }
+            }
+            else
+            {
+                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Magic)
+                {
+                    Player.inventory[Player.selectedItem].crit = (int)cMagic;
+                }
+            }
+            // melee
+            if (MaxMeleeCrit < 100)
+            {
+                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Melee)
+                {
+                    Player.inventory[Player.selectedItem].crit = MaxMeleeCrit - (int)Player.GetCritChance(DamageClass.Melee);
+                }
+            }
+            else
+            {
+                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Melee)
+                {
+                    Player.inventory[Player.selectedItem].crit = (int)cMelee;
+                }
+            }
+            // ranged
+            if (MaxRangedCrit < 100)
+            {
+                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Ranged)
+                {
+                    Player.inventory[Player.selectedItem].crit = MaxRangedCrit - (int)Player.GetCritChance(DamageClass.Ranged);
+                }
+            }
+            else
+            {
+                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Ranged)
+                {
+                    Player.inventory[Player.selectedItem].crit = (int)cRanged;
+                }
+            }
+        }
+        #endregion
 
         WardCD--;
         if (WardCD < 0) WardCD = 0;
@@ -438,6 +516,10 @@ public class AvalonPlayer : ModPlayer
             }
 
             npc.AddBuff(ModContent.BuffType<Bleeding>(), 120);
+        }
+        if (FrostGauntlet && hit.DamageType == DamageClass.Melee)
+        {
+            npc.AddBuff(BuffID.Frostburn, 60 * 4);
         }
     }
 

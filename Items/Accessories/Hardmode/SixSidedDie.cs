@@ -22,7 +22,7 @@ public class SixSidedDie : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().SixSidedDie = true;
-        //player.GetModPlayer<AvalonPlayer>().MaxMeleeCrit = 0; // test
+        //player.GetModPlayer<AvalonPlayer>().MaxMeleeCrit = 20; // test
     }
     //public override void AddRecipes()
     //{

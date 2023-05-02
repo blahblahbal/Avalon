@@ -62,6 +62,40 @@ Mods: {
 					'''
 			}
 
+			ApollosQuiver: {
+				DisplayName: Apollo's Quiver
+				Tooltip:
+					'''
+					20% chance to not consume arrows and 15% increased arrow damage
+					Increases arrow speed by 10% and critical strike chance by 5%
+					Increases ranged critical strike damage by 25%
+					'''
+			}
+
+			BlahsWings: {
+				DisplayName: Blah's Wings
+				Tooltip:
+					'''
+					Allows infinite flight and slow fall and negates fall damage
+					The wearer can run incredibly fast and has a chance to dodge attacks
+					Grants a 15% chance for an enemy to drop a platinum heart
+					Increases damage and critical strike chance by 7% while invincible
+					Reduces the cooldown of healing potions
+					Grants immunity to traps
+					Other various effects
+					'''
+			}
+
+			FrostGauntlet: {
+				DisplayName: Frost Gauntlet
+				Tooltip:
+					'''
+					Melee attacks inflict Frostburn and increases damage and melee speed by 12%
+					Increases knockback and puts a damage-reducing shell around the holder when below 50% life
+					Enables auto swing for melee weapons and increases the size of melee weapons
+					'''
+			}
+
 			Boomlash: {
 				DisplayName: Boomlash
 				Tooltip: Summons a controllable exploding missile
@@ -3425,6 +3459,21 @@ Mods: {
 			Smogscreen: {
 				DisplayName: Smogscreen
 				Tooltip: Shoots poison gas
+			}
+
+			BerserkerDye: {
+				DisplayName: Berserker Dye
+				Tooltip: ""
+			}
+
+			BlahDye: {
+				DisplayName: Blah Dye
+				Tooltip: ""
+			}
+
+			StoneDye: {
+				DisplayName: Stone Dye
+				Tooltip: ""
 			}
 		}
 

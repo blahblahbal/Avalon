@@ -25,8 +25,19 @@ class GuardianBoots : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ItemID.ObsidianHorseshoe).AddIngredient(ItemID.CobaltShield).AddIngredient(ItemID.Spike, 50).AddTile(TileID.TinkerersWorkbench).Register();
-        CreateRecipe(1).AddIngredient(ItemID.ObsidianShield).AddIngredient(ItemID.LuckyHorseshoe).AddIngredient(ItemID.Spike, 50).AddTile(TileID.TinkerersWorkbench).Register();
+        CreateRecipe(1)
+            .AddIngredient(ItemID.ObsidianHorseshoe)
+            .AddIngredient(ItemID.CobaltShield)
+            .AddIngredient(ItemID.Spike, 50)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+        CreateRecipe(1)
+            .AddIngredient(ItemID.ObsidianShield)
+            .AddIngredient(ItemID.LuckyHorseshoe)
+            .AddIngredient(ItemID.Spike, 50)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
