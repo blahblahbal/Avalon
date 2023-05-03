@@ -3475,6 +3475,36 @@ Mods: {
 				DisplayName: Stone Dye
 				Tooltip: ""
 			}
+
+			BrownPhaseblade: {
+				DisplayName: Brown Phaseblade
+				Tooltip: ""
+			}
+
+			CyanPhaseblade: {
+				DisplayName: Cyan Phaseblade
+				Tooltip: ""
+			}
+
+			LimePhaseblade: {
+				DisplayName: Lime Phaseblade
+				Tooltip: ""
+			}
+
+			BrownPhasesaber: {
+				DisplayName: Brown Phasesaber
+				Tooltip: ""
+			}
+
+			CyanPhasesaber: {
+				DisplayName: Cyan Phasesaber
+				Tooltip: ""
+			}
+
+			LimePhasesaber: {
+				DisplayName: Lime Phasesaber
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
