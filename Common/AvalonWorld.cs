@@ -4,6 +4,7 @@ using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile.LargeHerbs;
 using Avalon.Systems;
 using Avalon.Tiles;
+using Avalon.Tiles.Contagion;
 using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -127,6 +128,25 @@ public class AvalonWorld : ModSystem
                 num10 = Main.maxTilesY - 10;
             }
 
+            #region killing things if the block above/below isn't the necessary type
+            // kill contagion vines if block above isn't contagion grass
+            if (Main.tile[num5, num9].TileType != ModContent.TileType<Ickgrass>() && Main.tile[num5, num6].TileType == ModContent.TileType<ContagionVines>())
+            {
+                WorldGen.KillTile(num5, num6);
+            }
+            // kill contagion short grass if block below isn't contagion grass
+            if (Main.tile[num5, num6].TileType != ModContent.TileType<Ickgrass>() && Main.tile[num5, num9].TileType == ModContent.TileType<ContagionShortGrass>())
+            {
+                WorldGen.KillTile(num5, num6);
+            }
+            // kill barfbush if block below isn't contagion grass or chunkstone
+            if ((Main.tile[num5, num6].TileType != ModContent.TileType<Ickgrass>() && Main.tile[num5, num6].TileType != ModContent.TileType<Chunkstone>()) &&
+                Main.tile[num5, num9].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>())
+            {
+                WorldGen.KillTile(num5, num6);
+            }
+            #endregion
+
             #region lazite grass
             if (Main.tile[num5, num6].TileType == ModContent.TileType<LaziteGrass>())
             {
@@ -189,6 +209,166 @@ public class AvalonWorld : ModSystem
                 GrowLargeHerb(num5, num6);
             }
             #endregion large herb growth
+
+            #region contagion shortgrass/barfbush spawning
+            if (Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>())
+            {
+                int num14 = Main.tile[num5, num6].TileType;
+                if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 &&
+                    !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid &&
+                    WorldGen.genRand.NextBool(5) && num14 == ModContent.TileType<Ickgrass>())
+                {
+                    WorldGen.PlaceTile(num5, num9, ModContent.TileType<ContagionShortGrass>(), true);
+                    Main.tile[num5, num9].TileFrameX = (short)(WorldGen.genRand.Next(0, 11) * 18);
+                    if (Main.tile[num5, num9].HasTile)
+                    {
+                        Tile t = Main.tile[num5, num9];
+                        t.TileColor = Main.tile[num5, num6].TileColor;
+                    }
+
+                    if (Main.netMode == NetmodeID.Server && Main.tile[num5, num9].HasTile)
+                    {
+                        NetMessage.SendTileSquare(-1, num5, num9, 1);
+                    }
+                }
+
+                if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 && !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid && WorldGen.genRand.NextBool(num6 > Main.worldSurface ? 500 : 200) && num14 == ModContent.TileType<Ickgrass>())
+                {
+                    WorldGen.PlaceTile(num5, num9, ModContent.TileType<Tiles.Herbs.Barfbush>(), true, false, -1, 0);
+                    if (Main.tile[num5, num9].HasTile)
+                    {
+                        Tile t = Main.tile[num5, num9];
+                        t.TileColor = Main.tile[num5, num6].TileColor;
+                    }
+                    if (Main.netMode == NetmodeID.Server && Main.tile[num5, num9].HasTile)
+                    {
+                        NetMessage.SendTileSquare(-1, num5, num9, 1);
+                    }
+                }
+                bool flag2 = false;
+                for (int m = num7; m < num8; m++)
+                {
+                    for (int n = num9; n < num10; n++)
+                    {
+                        if ((num5 != m || num6 != n) && Main.tile[m, n].HasTile)
+                        {
+                            if (Main.tile[m, n].TileType == 0 || (num14 == ModContent.TileType<Ickgrass>() && Main.tile[m, n].TileType == TileID.Grass))
+                            {
+                                TileColorCache color = Main.tile[num5, num6].BlockColorAndCoating();
+                                WorldGen.SpreadGrass(m, n, 0, num14, false, color);
+                                if (num14 == ModContent.TileType<Ickgrass>())
+                                {
+                                    WorldGen.SpreadGrass(m, n, TileID.Grass, num14, false, color);
+                                }
+                                if (num14 == ModContent.TileType<Ickgrass>())
+                                {
+                                    WorldGen.SpreadGrass(m, n, TileID.HallowedGrass, num14, false, color);
+                                }
+                                if (Main.tile[m, n].TileType == num14)
+                                {
+                                    WorldGen.SquareTileFrame(m, n, true);
+                                    flag2 = true;
+                                }
+                            }
+                            if (Main.tile[m, n].TileType == 0 || (num14 == 109 && Main.tile[m, n].TileType == 2) || (num14 == 109 && Main.tile[m, n].TileType == 23) || (num14 == 109 && Main.tile[m, n].TileType == 199))
+                            {
+                                if (num14 == TileID.HallowedGrass)
+                                {
+                                    TileColorCache color = Main.tile[num5, num6].BlockColorAndCoating();
+                                    WorldGen.SpreadGrass(m, n, ModContent.TileType<Ickgrass>(), num14, false, color);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (Main.netMode == NetmodeID.Server && flag2)
+                {
+                    NetMessage.SendTileSquare(-1, num5, num6, 3);
+                }
+            }
+            #endregion contagion shortgrass/barfbush spawning
+
+            #region impvines growing
+            if ((Main.tile[num5, num6].TileType == ModContent.TileType<Ectograss>() ||
+                 Main.tile[num5, num6].TileType == ModContent.TileType<Ectovines>()) &&
+                WorldGen.genRand.NextBool(15) && !Main.tile[num5, num6 + 1].HasTile && // change back to NextBool(15)
+                Main.tile[num5, num6 + 1].LiquidType != LiquidID.Lava)
+            {
+                bool flag10 = false;
+                for (int num47 = num6; num47 > num6 - 10; num47--)
+                {
+                    if (Main.tile[num5, num47].BottomSlope)
+                    {
+                        flag10 = false;
+                        break;
+                    }
+
+                    if (Main.tile[num5, num47].HasTile &&
+                        Main.tile[num5, num47].TileType == ModContent.TileType<Ectograss>() &&
+                        !Main.tile[num5, num47].BottomSlope)
+                    {
+                        flag10 = true;
+                        break;
+                    }
+                }
+
+                if (flag10)
+                {
+                    int num48 = num5;
+                    int num49 = num6 + 1;
+                    Main.tile[num48, num49].TileType = (ushort)ModContent.TileType<Ectovines>();
+
+                    Tile t = Main.tile[num48, num49];
+                    t.HasTile = true;
+                    WorldGen.SquareTileFrame(num48, num49);
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendTileSquare(-1, num48, num49, 3);
+                    }
+                }
+            }
+            #endregion impvines
+
+            #region contagion vines growing
+            if ((Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() ||
+                 Main.tile[num5, num6].TileType == ModContent.TileType<ContagionVines>()) &&
+                WorldGen.genRand.NextBool(15) && !Main.tile[num5, num6 + 1].HasTile &&
+                Main.tile[num5, num6 + 1].LiquidType != LiquidID.Lava)
+            {
+                bool flag10 = false;
+                for (int num47 = num6; num47 > num6 - 10; num47--)
+                {
+                    if (Main.tile[num5, num47].BottomSlope)
+                    {
+                        flag10 = false;
+                        break;
+                    }
+
+                    if (Main.tile[num5, num47].HasTile &&
+                        Main.tile[num5, num47].TileType == ModContent.TileType<Ickgrass>() &&
+                        !Main.tile[num5, num47].BottomSlope)
+                    {
+                        flag10 = true;
+                        break;
+                    }
+                }
+
+                if (flag10)
+                {
+                    int num48 = num5;
+                    int num49 = num6 + 1;
+                    Main.tile[num48, num49].TileType = (ushort)ModContent.TileType<ContagionVines>();
+
+                    Tile t = Main.tile[num48, num49];
+                    t.HasTile = true;
+                    WorldGen.SquareTileFrame(num48, num49);
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendTileSquare(-1, num48, num49, 3);
+                    }
+                }
+            }
+            #endregion tropical vines
         }
     }
 

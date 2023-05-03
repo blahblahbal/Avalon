@@ -22,13 +22,14 @@ internal class Contagion : GenPass
     {
         progress.Message = "Making the world gross";
         int num208 = 0;
+        int[] positions = new int[4];
         while (num208 < Main.maxTilesX * 0.00045)
         {
             float num209 = (float)(num208 / (Main.maxTilesX * 0.00045));
             bool flag12 = false;
-            int num210 = 0;
-            int num211 = 0;
-            int num212 = 0;
+            int xCoordEvil = 0;
+            int evilLeftCoord = 0;
+            int evilRightCoord = 0;
             while (!flag12)
             {
                 int num213 = 0;
@@ -37,71 +38,82 @@ internal class Contagion : GenPass
                 int num215 = 200;
                 if (GenVars.dungeonX < Main.maxTilesX * 0.5)
                 {
-                    num210 = WorldGen.genRand.Next(600, Main.maxTilesX - 320);
+                    xCoordEvil = WorldGen.genRand.Next(600, Main.maxTilesX - 320);
                 }
                 else
                 {
-                    num210 = WorldGen.genRand.Next(320, Main.maxTilesX - 600);
+                    xCoordEvil = WorldGen.genRand.Next(320, Main.maxTilesX - 600);
                 }
-                num211 = num210 - WorldGen.genRand.Next(200) - 100;
-                num212 = num210 + WorldGen.genRand.Next(200) + 100;
-                if (num211 < 285)
+                evilLeftCoord = xCoordEvil - WorldGen.genRand.Next(200) - 100;
+                evilRightCoord = xCoordEvil + WorldGen.genRand.Next(200) + 100;
+                if (evilLeftCoord < 285)
                 {
-                    num211 = 285;
+                    evilLeftCoord = 285;
                 }
-                if (num212 > Main.maxTilesX - 285)
+                if (evilRightCoord > Main.maxTilesX - 285)
                 {
-                    num212 = Main.maxTilesX - 285;
+                    evilRightCoord = Main.maxTilesX - 285;
                 }
-                if (num211 < GenVars.evilBiomeBeachAvoidance)
+                if (evilLeftCoord < GenVars.evilBiomeBeachAvoidance)
                 {
-                    num211 = GenVars.evilBiomeBeachAvoidance;
+                    evilLeftCoord = GenVars.evilBiomeBeachAvoidance;
                 }
-                if (num212 > Main.maxTilesX - GenVars.evilBiomeBeachAvoidance)
+                if (evilRightCoord > Main.maxTilesX - GenVars.evilBiomeBeachAvoidance)
                 {
-                    num212 = Main.maxTilesX - GenVars.evilBiomeBeachAvoidance;
+                    evilRightCoord = Main.maxTilesX - GenVars.evilBiomeBeachAvoidance;
                 }
-                if (num210 < num211 + GenVars.evilBiomeAvoidanceMidFixer)
+                if (xCoordEvil < evilLeftCoord + GenVars.evilBiomeAvoidanceMidFixer)
                 {
-                    num210 = num211 + GenVars.evilBiomeAvoidanceMidFixer;
+                    xCoordEvil = evilLeftCoord + GenVars.evilBiomeAvoidanceMidFixer;
                 }
-                if (num210 > num212 - GenVars.evilBiomeAvoidanceMidFixer)
+                if (xCoordEvil > evilRightCoord - GenVars.evilBiomeAvoidanceMidFixer)
                 {
-                    num210 = num212 - GenVars.evilBiomeAvoidanceMidFixer;
+                    xCoordEvil = evilRightCoord - GenVars.evilBiomeAvoidanceMidFixer;
                 }
-                if (GenVars.dungeonSide < 0 && num211 < 400)
+                if (GenVars.dungeonSide < 0 && evilLeftCoord < 400)
                 {
-                    num211 = 400;
+                    evilLeftCoord = 400;
                 }
-                else if (GenVars.dungeonSide > 0 && num211 > Main.maxTilesX - 400)
+                else if (GenVars.dungeonSide > 0 && evilLeftCoord > Main.maxTilesX - 400)
                 {
-                    num211 = Main.maxTilesX - 400;
+                    evilLeftCoord = Main.maxTilesX - 400;
                 }
-                if (num210 > num214 - num215 && num210 < num214 + num215)
-                {
-                    flag12 = false;
-                }
-                if (num211 > num214 - num215 && num211 < num214 + num215)
+                if (evilLeftCoord < GenVars.dungeonLocation + 150 && evilRightCoord > GenVars.dungeonLocation - 150)
                 {
                     flag12 = false;
                 }
-                if (num212 > num214 - num215 && num212 < num214 + num215)
+                if (xCoordEvil > num214 - num215 && xCoordEvil < num214 + num215)
                 {
                     flag12 = false;
                 }
-                if (num210 > GenVars.UndergroundDesertLocation.X && num210 < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                if (evilLeftCoord > num214 - num215 && evilLeftCoord < num214 + num215)
                 {
                     flag12 = false;
                 }
-                if (num211 > GenVars.UndergroundDesertLocation.X && num211 < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                if (evilRightCoord > num214 - num215 && evilRightCoord < num214 + num215)
                 {
                     flag12 = false;
                 }
-                if (num212 > GenVars.UndergroundDesertLocation.X && num212 < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                if (num208 > 0)
+                {
+                    if (Math.Abs(xCoordEvil - positions[num208 - 1]) < 150)
+                    {
+                        flag12 = false;
+                    }
+                }
+                if (xCoordEvil > GenVars.UndergroundDesertLocation.X && xCoordEvil < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
                 {
                     flag12 = false;
                 }
-                for (int num216 = num211; num216 < num212; num216++)
+                if (evilLeftCoord > GenVars.UndergroundDesertLocation.X && evilLeftCoord < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                {
+                    flag12 = false;
+                }
+                if (evilRightCoord > GenVars.UndergroundDesertLocation.X && evilRightCoord < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                {
+                    flag12 = false;
+                }
+                for (int num216 = evilLeftCoord; num216 < evilRightCoord; num216++)
                 {
                     for (int num217 = 0; num217 < (int)Main.worldSurface; num217 += 5)
                     {
@@ -116,14 +128,15 @@ internal class Contagion : GenPass
                         }
                     }
                 }
-                if (num213 < 200 && GenVars.jungleOriginX > num211 && GenVars.jungleOriginX < num212)
+                if (num213 < 200 && GenVars.jungleOriginX > evilLeftCoord && GenVars.jungleOriginX < evilRightCoord)
                 {
                     num213++;
                     flag12 = false;
                 }
             }
-            ContagionRunner(num210, (int)GenVars.worldSurfaceLow - 10 + (Main.maxTilesY / 8));
-            for (int num218 = num211; num218 < num212; num218++)
+            ContagionRunner(xCoordEvil, (int)GenVars.worldSurfaceLow - 10 + (Main.maxTilesY / 8));
+            positions[num208] = xCoordEvil;
+            for (int num218 = evilLeftCoord; num218 < evilRightCoord; num218++)
             {
                 int num219 = (int)GenVars.worldSurfaceLow;
                 while (num219 < Main.worldSurface - 1.0)
@@ -133,7 +146,7 @@ internal class Contagion : GenPass
                         int num220 = num219 + WorldGen.genRand.Next(10, 14);
                         for (int num221 = num219; num221 < num220; num221++)
                         {
-                            if ((Main.tile[num218, num221].TileType == TileID.Mud || Main.tile[num218, num221].TileType == TileID.JungleGrass) && num218 >= num211 + WorldGen.genRand.Next(5) && num218 < num212 - WorldGen.genRand.Next(5))
+                            if ((Main.tile[num218, num221].TileType == TileID.Mud || Main.tile[num218, num221].TileType == TileID.JungleGrass) && num218 >= evilLeftCoord + WorldGen.genRand.Next(5) && num218 < evilRightCoord - WorldGen.genRand.Next(5))
                             {
                                 Main.tile[num218, num221].TileType = TileID.Dirt;
                             }
@@ -144,7 +157,7 @@ internal class Contagion : GenPass
                 }
             }
             double num222 = Main.worldSurface + 40.0;
-            for (int num223 = num211; num223 < num212; num223++)
+            for (int num223 = evilLeftCoord; num223 < evilRightCoord; num223++)
             {
                 num222 += WorldGen.genRand.Next(-2, 3);
                 if (num222 < Main.worldSurface + 30.0)
@@ -162,7 +175,7 @@ internal class Contagion : GenPass
                 {
                     if (Main.tile[num57, num224].HasTile)
                     {
-                        if (Main.tile[num57, num224].TileType == TileID.Sand && num57 >= num211 + WorldGen.genRand.Next(5) && num57 <= num212 - WorldGen.genRand.Next(5))
+                        if (Main.tile[num57, num224].TileType == TileID.Sand && num57 >= evilLeftCoord + WorldGen.genRand.Next(5) && num57 <= evilRightCoord - WorldGen.genRand.Next(5))
                         {
                             Main.tile[num57, num224].TileType = (ushort)ModContent.TileType<Snotsand>();
                         }
@@ -172,7 +185,7 @@ internal class Contagion : GenPass
                             WorldGen.SpreadGrass(num57, num224, 0, ModContent.TileType<Ickgrass>(), true, default);
                         }
                         flag13 = true;
-                        if (Main.tile[num57, num224].TileType == TileID.Stone && num57 >= num211 + WorldGen.genRand.Next(5) && num57 <= num212 - WorldGen.genRand.Next(5))
+                        if (Main.tile[num57, num224].TileType == TileID.Stone && num57 >= evilLeftCoord + WorldGen.genRand.Next(5) && num57 <= evilRightCoord - WorldGen.genRand.Next(5))
                         {
                             Main.tile[num57, num224].TileType = (ushort)ModContent.TileType<Chunkstone>();
                         }
@@ -205,7 +218,7 @@ internal class Contagion : GenPass
                 while (!flag14)
                 {
                     num227++;
-                    int num229 = WorldGen.genRand.Next(num211 - num228, num212 + num228);
+                    int num229 = WorldGen.genRand.Next(evilLeftCoord - num228, evilRightCoord + num228);
                     int num230 = WorldGen.genRand.Next((int)(Main.worldSurface - num228 / 2), (int)(Main.worldSurface + 100.0 + num228));
                     if (num227 > 100)
                     {

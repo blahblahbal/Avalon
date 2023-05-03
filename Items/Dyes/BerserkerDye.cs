@@ -23,7 +23,7 @@ public class BerserkerDye : ModItem
             );
         }
         
-        Item.ResearchUnlockCount = 33;
+        Item.ResearchUnlockCount = 3;
     }
 
     public override void SetDefaults()

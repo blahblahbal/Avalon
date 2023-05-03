@@ -60,7 +60,7 @@ internal class Underworld : GenPass
                     {
                         Main.tile[q, z].TileType = (ushort)ModContent.TileType<BlastedStone>();
                     }
-                    if (Main.tile[q, z].TileType == TileID.AshVines || Main.tile[q, z].TileType == TileID.AshPlants)
+                    if (Main.tile[q, z].TileType == TileID.AshVines || Main.tile[q, z].TileType == TileID.AshPlants || Main.tile[q, z].TileType == TileID.TreeAsh)
                     {
                         WorldGen.KillTile(q, z);
                     }
@@ -237,8 +237,8 @@ internal class Underworld : GenPass
 
         progress.Message = "Generating Hellcastle and Phantom Overgrowth";
         int hellcastleOriginX = (Main.maxTilesX / 2) - 200;
-        int ashenLeft = hellcastleOriginX - 100;
-        int ashenRight = hellcastleOriginX + 500;
+        int ashenLeft = hellcastleOriginX - 125;
+        int ashenRight = hellcastleOriginX + 525;
 
 
         //if (Main.drunkWorld)
@@ -290,9 +290,13 @@ internal class Underworld : GenPass
                         }
                     }
                 }
-                if (WorldGen.genRand.NextBool(70))
+                if (WorldGen.genRand.NextBool(100))
                 {
                     WorldGen.OreRunner(hbx, hby, 4, 4, (ushort)ModContent.TileType<BrimstoneBlock>());
+                }
+                if (WorldGen.genRand.NextBool(50))
+                {
+                    WorldGen.OreRunner(hbx, hby, 2, 3, TileID.Hellstone);
                 }
             }
         }

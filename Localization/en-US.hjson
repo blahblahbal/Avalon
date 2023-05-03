@@ -69,6 +69,7 @@ Mods: {
 					20% chance to not consume arrows and 15% increased arrow damage
 					Increases arrow speed by 10% and critical strike chance by 5%
 					Increases ranged critical strike damage by 25%
+					Reduces ranged critical strike chance cap by 5%
 					'''
 			}
 
@@ -2574,7 +2575,11 @@ Mods: {
 
 			AncientHeadphones: {
 				DisplayName: Ancient Headphones
-				Tooltip: Plays old versions of various music in certain biomes
+				Tooltip: 
+                    '''
+                    Plays old versions of various music in certain biomes
+                    Works in the vanity slot
+                    '''
 			}
 
 			Snotgun: {
@@ -2784,7 +2789,7 @@ Mods: {
 
 			SnotsandBlock: {
 				DisplayName: Snotsand Block
-				Tooltip: "'Disgustingly sticky!'"
+				Tooltip: "'Disgustingly sticky'"
 			}
 
 			CrimstoneColumn: {
@@ -3508,6 +3513,21 @@ Mods: {
 
 			SepsisBlock: {
 				DisplayName: Sepsis Block
+				Tooltip: ""
+			}
+
+			Barfbush: {
+				DisplayName: Barfbush
+				Tooltip: ""
+			}
+
+			BarfbushSeeds: {
+				DisplayName: Barfbush Seeds
+				Tooltip: ""
+			}
+
+			VirulentMushroom: {
+				DisplayName: Virulent Mushroom
 				Tooltip: ""
 			}
 		}

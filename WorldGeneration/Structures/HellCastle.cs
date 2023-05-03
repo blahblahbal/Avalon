@@ -55,7 +55,6 @@ internal class Hellcastle
         UnsmoothTiles(x, y, 400, 150);
         // place up to 3 devil's scythes on the shelves/platforms
         AddDevilsScythes(x, y, 400, 150);
-        MakeEntranceArea(x + 200, y + 135);
         AddEntranceArea(x, y + 150);
         SmoothHellcastle(x, y, 400, 150);
     }
@@ -852,12 +851,6 @@ internal class Hellcastle
                 }
             }
         }
-    }
-    public static void MakeEntranceArea(int x, int y)
-    {
-        MakeBox(x - 10, y + 13, 20, 25, ModContent.TileType<Tiles.ImperviousBrick>(), (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>());
-        MakeBox(x - 7, y, 14, 40, ushort.MaxValue, (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>());
-        MakeBox(x - 7, y + 34, 14, 4, ModContent.TileType<Tiles.UltraResistantWood>(), (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>());
     }
     public static void MakePath(int x, int y, int start)
     {

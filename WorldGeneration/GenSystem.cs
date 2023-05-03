@@ -39,6 +39,12 @@ public class GenSystem : ModSystem
             tasks.Insert(index + 1, new OreGenPreHardmode("Adding Avalon Ores", 237.4298f));
         }
 
+        index = tasks.FindIndex(genpass => genpass.Name.Equals("Weeds"));
+        if (index != -1)
+        {
+            tasks.Insert(index + 1, new ShortGrass("Contagion Weeds", 50f));
+        }
+
         int iceWalls = tasks.FindIndex(genPass => genPass.Name == "Cave Walls");
         if (iceWalls != -1)
         {
