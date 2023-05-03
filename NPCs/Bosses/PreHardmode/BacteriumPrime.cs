@@ -50,7 +50,7 @@ public class BacteriumPrime : ModNPC
         NPC.damage = 31;
         NPC.boss = true;
         NPC.noTileCollide = true;
-        NPC.lifeMax = 2700;
+        NPC.lifeMax = 3250;
         NPC.defense = 12;
         NPC.noGravity = true;
         NPC.width = 120;
@@ -79,20 +79,22 @@ public class BacteriumPrime : ModNPC
             ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime = true;
         }
     }
-    Vector2 LastCollide;
     int BactusCount;
     int MaxBacCount = 8;
+    const float Phase2Health = 0.6f;
+    const float Phase2part2Health = 0.3f;
+    const float Phase2part3Health = 0.15f;
     public override void AI()
     {
         float speed = 5;
-        BactusCount = 0;
-        for(int i = 0; i < Main.maxNPCs; i++)
-        {
-            if (Main.npc[i].type == ModContent.NPCType<Viriling>() && Main.npc[i].active)
-            {
-                BactusCount++;
-            }
-        }
+        //BactusCount = 0;
+        //for(int i = 0; i < Main.maxNPCs; i++)
+        //{
+        //    if (Main.npc[i].type == ModContent.NPCType<Viriling>() && Main.npc[i].active)
+        //    {
+        //        BactusCount++;
+        //    }
+        //}
 
         if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagion || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagionDesert || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion)
         {
@@ -141,17 +143,16 @@ public class BacteriumPrime : ModNPC
             if (NPC.collideX)
             {
                 NPC.velocity.X = NPC.oldVelocity.X * -1.2f;
-                LastCollide = NPC.position;
             }
             if (NPC.collideY)
             {
-                LastCollide = NPC.position;
                 NPC.velocity.Y = NPC.oldVelocity.Y * -1.2f;
             }
             if(NPC.collideX || NPC.collideY)
             {
                 if (Main.rand.NextBool(6))
                     NPC.velocity = new Vector2(Main.rand.NextFloat(speed / 2, speed), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation());
+                NPC.ai[1] += 100;
             }
             if (NPC.noTileCollide)
             {
@@ -162,19 +163,21 @@ public class BacteriumPrime : ModNPC
                 NPC.alpha = (int)(MathHelper.Lerp(0, NPC.alpha, 0.9f));
             }
 
+            if (Collision.SolidCollision(NPC.position + new Vector2(20,20),NPC.height - 10, NPC.width - 10))
+
             NPC.ai[1]++;
             if (NPC.ai[1] > 360 && !Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
             {
                 //NPC.ai[1] = 0;
                 NPC.noTileCollide = false;
             }
-            if (NPC.ai[1] > 700 * 2 && !Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
+            if (NPC.ai[1] > 700 * 2)
             {
                 NPC.ai[1] = -Main.rand.Next(-100, 100);
                 NPC.noTileCollide = true;
             }
 
-            if (Main.rand.NextBool(10))
+            if (Main.rand.NextBool(10) && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
             }
@@ -194,7 +197,7 @@ public class BacteriumPrime : ModNPC
         }
         #endregion Phase 1
 
-        if (NPC.life <= NPC.lifeMax * 0.6f && NPC.ai[3] < 60 && NPC.ai[3] >= 0)
+        if (NPC.life <= NPC.lifeMax * Phase2Health && NPC.ai[3] < 60 && NPC.ai[3] >= 0)
         {
             NPC.alpha = (int)(MathHelper.Lerp(64, NPC.alpha, 0.9f));
             NPC.ai[3]++;
@@ -204,7 +207,7 @@ public class BacteriumPrime : ModNPC
             int d = Dust.NewDust(NPC.Center + new Vector2(0, 180).RotatedBy(rotate), 0, 0, DustID.CorruptGibs, 0, 0, 50, default, 2);
             Main.dust[d].velocity = new Vector2(0, -13).RotatedBy(rotate) + NPC.velocity;
             Main.dust[d].noGravity = true;
-            if (Main.rand.NextBool(3))
+            if (Main.rand.NextBool(3) && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
             }
@@ -224,18 +227,31 @@ public class BacteriumPrime : ModNPC
 
         #region Phase 2
         if (Main.expertMode)
-            speed = 5.5f;
+            speed = 5.3f;
         else
-            speed = 4.5f;
+            speed = 4.3f;
+        if (NPC.life <= NPC.lifeMax * Phase2part2Health)
+            speed += 1.3f;
+        if (NPC.life <= NPC.lifeMax * Phase2part3Health && Main.expertMode)
+            speed += 0.3f;
 
         if (NPC.ai[3] == 60)
         {
-            if (!Collision.SolidCollision(NPC.position,NPC.width,NPC.height) || NPC.ai[1] > 199)
+            if (!Collision.SolidCollision(NPC.position, NPC.width, NPC.height) || NPC.ai[1] > 199)
+            {
+                if (NPC.ai[1] < 190 && NPC.life < Phase2part2Health)
+                    NPC.ai[1] += 4;
+                if (NPC.ai[1] < 190 && NPC.life < Phase2part3Health)
+                    NPC.ai[1]+= 4;
                 NPC.ai[1]++;
-            if (Main.rand.NextBool(30))
+            }
+
+            if (Main.rand.NextBool(30) && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
             }
+
+
             if (NPC.ai[1] > 200)
             {
                 if (NPC.ai[0] == 0)
@@ -258,36 +274,50 @@ public class BacteriumPrime : ModNPC
             if (NPC.ai[1] == 240)
             {
                 SoundEngine.PlaySound(SoundID.Item95, NPC.Center);
-                if (NPC.ai[0] == 0)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    for (int i = 0; i < Main.rand.Next(4, 7); i++)
+                    if (NPC.ai[0] == 0)
                     {
-                        Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(6, 3) + new Vector2(0, Main.rand.NextFloat(-4, 0));
-                        int M = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<CorrosiveMucus>(), (int)(NPC.damage * 0.3f), 0, -1);
-                        //if(Main.expertMode)
-                        //Main.projectile[M].damage = (int)(Main.projectile[M].damage * 0.5f);
-                    }
-                    //for (int i = 0; i < Main.rand.Next(3, 6); i++)
-                    //{
-                    //    Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.1f) * Main.rand.NextFloat(9, 8);
-                    //    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<BacteriumGas>(), (int)(NPC.damage * 0.2f), 0, -1,1);
-                    //}
-                }
-                else
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(5f,7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / 6 - (i * MathHelper.Pi / 6)),ModContent.ProjectileType<BouncyBoogerBall>(),NPC.damage / 3,0,255);
-                        Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
-                        if (Main.expertMode)
+                        for (int i = 0; i < Main.rand.Next(4, 7); i++)
                         {
-                            Main.projectile[P].velocity *= 1.5f;
-                            Main.projectile[P].timeLeft = (int)(Main.projectile[P].timeLeft * 1.5f);
+                            Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(6, 3) + new Vector2(0, Main.rand.NextFloat(-4, 0));
+                            int M = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<CorrosiveMucus>(), (int)(NPC.damage * 0.3f), 0, -1);
+                            //if(Main.expertMode)
+                            //Main.projectile[M].damage = (int)(Main.projectile[M].damage * 0.5f);
+                        }
+                        //for (int i = 0; i < Main.rand.Next(3, 6); i++)
+                        //{
+                        //    Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.1f) * Main.rand.NextFloat(9, 8);
+                        //    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<BacteriumGas>(), (int)(NPC.damage * 0.2f), 0, -1,1);
+                        //}
+                    }
+                    else
+                    {
+                        int Balls = 3;
+                        if (Main.expertMode)
+                            Balls = Main.rand.Next(3, 5);
+                        for (int i = 0; i < Balls; i++)
+                        {
+                            // Bouncy Ball
+                            int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / (Balls * 2) - (i * MathHelper.Pi / (Balls * 2))), ModContent.ProjectileType<BouncyBoogerBall>(), NPC.damage / 3, 0, 255);
+                            Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
+                            Main.projectile[P].ai[0] = Main.rand.Next(0,4);
+                            if (Main.expertMode)
+                            {
+                                if(Main.rand.NextBool())
+                                Main.projectile[P].velocity *= 1.5f;
+                                Main.projectile[P].timeLeft = (int)(Main.projectile[P].timeLeft * 1.5f);
+                            }
                         }
                     }
                 }
                 NPC.ai[0] = Main.rand.Next(3);
+                if (NPC.life >= NPC.lifeMax * Phase2part2Health)
                 NPC.ai[1] = Main.rand.Next(-60,60);
+                else
+                {
+                    NPC.ai[1] = Main.rand.Next(-20, 80);
+                }
             }
 
             //NPC.ai[0]++;

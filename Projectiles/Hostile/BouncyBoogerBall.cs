@@ -1,3 +1,5 @@
+using Avalon.Items.Material;
+using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -26,7 +28,6 @@ public class BouncyBoogerBall : ModProjectile
         Projectile.hostile = true;
         Projectile.scale = 1f;
         Projectile.tileCollide = false;
-        //Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
     }
 
     public override void AI()
@@ -59,10 +60,18 @@ public class BouncyBoogerBall : ModProjectile
             Main.dust[d].velocity *= 5;
             Main.dust[d].noGravity = true;
         }
+        //if (Projectile.ai[0] == 1)
+        //{
+        //    Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<Booger>(), Main.rand.Next(1, 3));
+        //}
+        //if (Projectile.ai[0] == 2)
+        //{
+        //    Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<BacciliteOre>(), Main.rand.Next(1, 4));
+        //}
     }
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
-        target.AddBuff(BuffID.Weak, 5 * 16);
+        target.AddBuff(BuffID.Weak, 5 * 60);
     }
 
     public override bool PreDraw(ref Color lightColor)
@@ -71,7 +80,22 @@ public class BouncyBoogerBall : ModProjectile
         int frameHeight = texture.Height / Main.projFrames[Type];
         Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+
+        //Texture2D textureBooger = ModContent.Request<Texture2D>("Avalon/Items/Material/Booger").Value;
+        //int frameHeightBooger = textureBooger.Height;
+        //Rectangle frameBooger = new Rectangle(0,0,textureBooger.Width,textureBooger.Height);
+        //Vector2 drawPosBooger = Projectile.Center - Main.screenPosition;
+        //if (Projectile.ai[0] == 1)
+        //Main.EntitySpriteDraw(textureBooger, drawPosBooger, frameBooger, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBooger.Width, frameHeightBooger) / 2, Projectile.scale, SpriteEffects.None, 0);
+
+        //Texture2D textureBaccilite = ModContent.Request<Texture2D>("Avalon/Items/Material/Ores/BacciliteOre").Value;
+        //int frameHeightBaccilite = textureBaccilite.Height;
+        //Rectangle frameBaccilite = new Rectangle(0, 0, textureBaccilite.Width, textureBaccilite.Height);
+        //Vector2 drawPosBaccilite = Projectile.Center - Main.screenPosition;
+        //if (Projectile.ai[0] == 2)
+        //    Main.EntitySpriteDraw(textureBaccilite, drawPosBaccilite, frameBaccilite, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBaccilite.Width, frameHeightBaccilite) / 2, Projectile.scale, SpriteEffects.None, 0);
+
+        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, (Main.masterColor - 0.5f) * 0.2f, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
