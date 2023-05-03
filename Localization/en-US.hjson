@@ -2575,11 +2575,11 @@ Mods: {
 
 			AncientHeadphones: {
 				DisplayName: Ancient Headphones
-				Tooltip: 
-                    '''
-                    Plays old versions of various music in certain biomes
-                    Works in the vanity slot
-                    '''
+				Tooltip:
+					'''
+					Plays old versions of various music in certain biomes
+					Works in the vanity slot
+					'''
 			}
 
 			Snotgun: {

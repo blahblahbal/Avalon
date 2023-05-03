@@ -24,7 +24,7 @@ public class PointingLaser : ModProjectile
         Projectile.MaxUpdates = 1;
         Projectile.extraUpdates = 1;
         Projectile.alpha = 255;
-        Projectile.timeLeft = 30;
+        Projectile.timeLeft = 21;
         Projectile.damage = 0;
         Projectile.penetrate = -1;
     }
@@ -77,11 +77,11 @@ public class PointingLaser : ModProjectile
             }
             #endregion
             c.A = 255;
-            Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), c, rotation + 1.57f, new Vector2(TEX.Width / 2f, linklength), 1.1f,
+            Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), c, rotation + 1.57f, new Vector2(TEX.Width / 2f, linklength), 2f,
                 SpriteEffects.None, 1f);
         }
     }
-    public override void PostDraw(Color lightColor)
+    public override bool PreDraw(ref Color lightColor)
     {
         Player p = Main.player[Projectile.owner];
         if (Projectile.ai[0] > 0)
@@ -95,98 +95,24 @@ public class PointingLaser : ModProjectile
                 DrawChain(p.Center + new Vector2(50, 0).RotatedBy(p.AngleTo(p.GetModPlayer<AvalonPlayer>().MousePosition)), p.GetModPlayer<AvalonPlayer>().MousePosition);
             }
         }
-        
-        if (false) //Main.netMode != NetmodeID.SinglePlayer)
-        {
-            if (Projectile.ai[0] > 9f)
-            {
-                if (Vector2.Distance(Projectile.position, p.position) < Vector2.Distance(p.GetModPlayer<AvalonPlayer>().MousePosition, p.position))
-                {
-                    if (Main.netMode != NetmodeID.SinglePlayer)
-                    {
-                        ModContent.GetInstance<SyncMouse>().Send(new BasicPlayerNetworkArgs(p));
-                    }
-                    for (var num617 = 0; num617 < 1; num617++)
-                    {
-                        var value12 = Projectile.position;
-                        value12 -= Projectile.velocity * num617 * 0.25f;
-                        Color c = Color.White;
-                        if (p.team == (int)Terraria.Enums.Team.Pink)
-                        {
-                            c = new Color(171, 59, 218);
-                        }
-                        else if (p.team == (int)Terraria.Enums.Team.Green)
-                        {
-                            c = Color.Green; // new Color(59, 218, 85);
-                        }
-                        else if (p.team == (int)Terraria.Enums.Team.Blue)
-                        {
-                            c = Color.Blue; // new Color(59, 149, 218);
-                        }
-                        else if (p.team == (int)Terraria.Enums.Team.Yellow)
-                        {
-                            c = Color.Yellow; // new Color(218, 183, 59);
-                        }
-                        else if (p.team == (int)Terraria.Enums.Team.Red)
-                        {
-                            c = Color.Red;
-                        }
-                        Dust d = Dust.NewDustDirect(value12, 1, 1, ModContent.DustType<Dusts.PointingDust>(), 0f, 0f, 0, c, 1f);
-                        d.velocity *= 0.2f;
-                        d.noGravity = true;
-                    }
-                }
-            }
-        }
+
+        //Player p = Main.player[Projectile.owner];
+        //Texture2D TEX = ModContent.Request<Texture2D>(Texture).Value;
+        //Vector2 Start = p.Center + new Vector2(0, 20).RotatedBy(p.AngleTo(p.GetModPlayer<AvalonPlayer>().MousePosition)) - Main.screenPosition;
+        //Vector2 End = p.GetModPlayer<AvalonPlayer>().MousePosition - Main.screenPosition;
+        //Main.spriteBatch.End();
+        //Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer);
+        //if (Vector2.Distance(Projectile.position, p.position) < Vector2.Distance(p.GetModPlayer<AvalonPlayer>().MousePosition, p.position))
+        //{
+        //    Main.EntitySpriteDraw(TEX, Start, new Rectangle(0, TEX.Height, TEX.Height, TEX.Width), new Color(255, 255, 255, 0), Start.DirectionTo(End).ToRotation(), new Vector2(0, TEX.Height / 2f), new Vector2((float)Math.Cbrt(Start.Distance(End)) * (float)Math.Cbrt(Start.Distance(End)), 5), SpriteEffects.None, 0);
+        //}
+        return false;
     }
+
     public override void AI()
     {
         Projectile.ai[0]++;
         Player p = Main.player[Projectile.owner];
         if (!p.channel) Projectile.Kill();
-        //if (Projectile.ai[0] > 9f)
-        //{
-        //    if (Vector2.Distance(Projectile.position, p.position) < Vector2.Distance(p.GetModPlayer<AvalonPlayer>().MousePosition, p.position))
-        //    {
-        //        if (Main.netMode != NetmodeID.SinglePlayer)
-        //        {
-        //            ModContent.GetInstance<SyncMouse>().Send(new BasicPlayerNetworkArgs(p));
-        //        }
-        //        for (var num617 = 0; num617 < 1; num617++)
-        //        {
-        //            var value12 = Projectile.position;
-        //            value12 -= Projectile.velocity * num617 * 0.25f;
-        //            Projectile.alpha = 255;
-        //            var num618 = ModContent.DustType<Dusts.PointingDust>();
-        //            Color c = Color.White;
-        //            if (p.team == (int)Terraria.Enums.Team.Pink)
-        //            {
-        //                c = new Color(171, 59, 218);
-        //            }
-        //            else if (p.team == (int)Terraria.Enums.Team.Green)
-        //            {
-        //                c = Color.Green; // new Color(59, 218, 85);
-        //            }
-        //            else if (p.team == (int)Terraria.Enums.Team.Blue)
-        //            {
-        //                c = Color.Blue; // new Color(59, 149, 218);
-        //            }
-        //            else if (p.team == (int)Terraria.Enums.Team.Yellow)
-        //            {
-        //                c = Color.Yellow; // new Color(218, 183, 59);
-        //            }
-        //            else if (p.team == (int)Terraria.Enums.Team.Red || Main.netMode == NetmodeID.SinglePlayer)
-        //            {
-        //                c = Color.Red; // new Color(218, 59, 59);
-        //            }
-        //            var num619 = Dust.NewDust(value12, 1, 1, num618, 0f, 0f, 0, c, 1f);
-        //            Main.dust[num619].position = value12;
-        //            Main.dust[num619].color = c;
-        //            Main.dust[num619].velocity *= 0.2f;
-        //            Main.dust[num619].noGravity = true;
-        //        }
-        //    }
-        //}
     }
-
 }
