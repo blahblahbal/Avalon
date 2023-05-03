@@ -3505,6 +3505,11 @@ Mods: {
 				DisplayName: Lime Phasesaber
 				Tooltip: ""
 			}
+
+			SepsisBlock: {
+				DisplayName: Sepsis Block
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
