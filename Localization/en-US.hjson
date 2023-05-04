@@ -3530,6 +3530,11 @@ Mods: {
 				DisplayName: Virulent Mushroom
 				Tooltip: ""
 			}
+
+			NapalmGun: {
+				DisplayName: Napalm Gun
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3602,6 +3607,7 @@ Mods: {
 			BouncyBoogerBall.DisplayName: Bouncy Booger Ball
 			Icicle.DisplayName: Icicle
 			Olivegas.DisplayName: Olivegas
+			NapalmBall.DisplayName: Napalm Ball
 		}
 
 		NPCs: {

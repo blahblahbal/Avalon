@@ -49,8 +49,10 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
                 {
                     if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < Rad && !Main.npc[i].friendly && Main.npc[i].active)
                     {
-                        Main.npc[i].SimpleStrikeNPC(Item.damage / Divide, player.direction, Main.rand.NextBool(player.GetWeaponCrit(player.HeldItem)), Item.knockBack, DamageClass.Magic, true, player.luck);
-                        for(int j = 0; j < 10; j++) 
+                        Main.npc[i].SimpleStrikeNPC((Item.damage / Divide) + (int)MathHelper.Clamp(Divide * 3,0,Item.damage), player.direction, Main.rand.NextBool(player.GetWeaponCrit(player.HeldItem)), Item.knockBack, DamageClass.Magic, true, player.luck);
+                        if (Main.rand.NextBool(3))
+                            Main.npc[i].AddBuff(BuffID.Poisoned, 600 / Divide);
+                        for (int j = 0; j < 10; j++) 
                         {
                             Dust d = Dust.NewDustPerfect(Main.npc[i].Center,DustID.Stone,Main.rand.NextVector2Circular(Main.npc[i].width, Main.npc[i].height),0,Color.Lerp(Color.OliveDrab,Color.MediumPurple,Main.rand.NextFloat()),1.5f);
                             d.velocity *= 0.1f;

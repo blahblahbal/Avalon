@@ -1,6 +1,8 @@
 using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Ranged;
@@ -18,6 +20,17 @@ public class Icicle : ModProjectile
         Projectile.DamageType = DamageClass.Ranged;
     }
 
+    public override void Kill(int timeLeft)
+    {
+        SoundEngine.PlaySound(SoundID.Item27, Projectile.Center);
+        for (int i = 0; i < 10; i++)
+        {
+            int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Ice, -Projectile.velocity.X / 3, -Projectile.velocity.Y / 3, Projectile.alpha);
+            Main.dust[d].noGravity = !Main.rand.NextBool(3);
+            if (Main.dust[d].noGravity)
+                Main.dust[d].fadeIn = 1f;
+        }
+    }
     public override void AI()
     {
         Projectile.rotation += (Math.Abs(Projectile.velocity.X) + Math.Abs(Projectile.velocity.Y)) * 0.03f * Projectile.direction;

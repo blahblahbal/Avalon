@@ -49,11 +49,9 @@ public class EnchantedShuriken : ModProjectile
             var Sparkle = Dust.NewDust(new Vector2(Projectile.Center.X, Projectile.Center.Y), 8, 8, DustID.MagicMirror, 0f, 0f, 100, default(Color), 1.25f);
             Main.dust[Sparkle].velocity *= 0.8f;
         }
-        if (Projectile.owner == Main.myPlayer)
-        {
-            int I = Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.getRect(), ModContent.ItemType<Items.Weapons.Ranged.PreHardmode.EnchantedShuriken>());
-            Main.item[I].useLimitPerAnimation = Projectile.owner;
-        }
+        int I = Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.getRect(), ModContent.ItemType<Items.Weapons.Ranged.PreHardmode.EnchantedShuriken>(), 1, true);
+        Main.item[I].useLimitPerAnimation = Projectile.owner;
+        NetMessage.SendData(MessageID.SyncItem,-1,-1,Terraria.Localization.NetworkText.Empty,I);
     }
 
     public override Color? GetAlpha(Color lightColor)
