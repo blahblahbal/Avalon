@@ -49,7 +49,7 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
                 {
                     if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < Rad && !Main.npc[i].friendly && Main.npc[i].active)
                     {
-                        Main.npc[i].SimpleStrikeNPC((Item.damage / Divide) + (int)MathHelper.Clamp(Divide * 3,0,Item.damage), player.direction, Main.rand.NextBool(player.GetWeaponCrit(player.HeldItem)), Item.knockBack, DamageClass.Magic, true, player.luck);
+                        Main.npc[i].SimpleStrikeNPC((Item.damage / Divide) + (int)MathHelper.Clamp(Divide * 3,0,Item.damage), player.direction, Main.rand.NextBool(101 - player.GetWeaponCrit(player.HeldItem)), Item.knockBack, DamageClass.Magic, true, player.luck);
                         if (Main.rand.NextBool(3))
                             Main.npc[i].AddBuff(BuffID.Poisoned, 600 / Divide);
                         for (int j = 0; j < 10; j++) 

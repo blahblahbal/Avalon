@@ -29,6 +29,7 @@ public class Ickgrass : ModTile
     {
         if (fail && !effectOnly)
         {
+            noItem = true;
             Main.tile[i, j].TileType = TileID.Dirt;
             WorldGen.SquareTileFrame(i, j);
         }

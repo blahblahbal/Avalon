@@ -130,7 +130,8 @@ public class AvalonWorld : ModSystem
 
             #region killing things if the block above/below isn't the necessary type
             // kill contagion vines if block above isn't contagion grass
-            if (Main.tile[num5, num9].TileType != ModContent.TileType<Ickgrass>() && Main.tile[num5, num6].TileType == ModContent.TileType<ContagionVines>())
+            if (!(Main.tile[num5, num9].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num9].TileType == ModContent.TileType<ContagionVines>()) &&
+                Main.tile[num5, num6].TileType == ModContent.TileType<ContagionVines>())
             {
                 WorldGen.KillTile(num5, num6);
             }
@@ -140,7 +141,7 @@ public class AvalonWorld : ModSystem
                 WorldGen.KillTile(num5, num6);
             }
             // kill barfbush if block below isn't contagion grass or chunkstone
-            if ((Main.tile[num5, num6].TileType != ModContent.TileType<Ickgrass>() && Main.tile[num5, num6].TileType != ModContent.TileType<Chunkstone>()) &&
+            if (!(Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<Chunkstone>()) &&
                 Main.tile[num5, num9].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>())
             {
                 WorldGen.KillTile(num5, num6);
