@@ -3535,6 +3535,16 @@ Mods: {
 				DisplayName: Napalm Gun
 				Tooltip: ""
 			}
+
+			EbonstoneDye: {
+				DisplayName: Ebonstone Dye
+				Tooltip: ""
+			}
+
+			CrimstoneDye: {
+				DisplayName: Crimstone Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
