@@ -3545,6 +3545,11 @@ Mods: {
 				DisplayName: Crimstone Dye
 				Tooltip: ""
 			}
+
+			ChunkstoneDye: {
+				DisplayName: Chunkstone Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

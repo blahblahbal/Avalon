@@ -16,6 +16,21 @@ float2 uImageSize1;
 float4 uLegacyArmorSourceRect;
 float2 uLegacyArmorSheetSize;
     
+struct vertexShaderStruct
+{
+    float3 pos      : POSITION0;
+    float2 texCoord : TEXCOORD0;
+};
+
+struct pixelShaderStruct
+{
+    float4 position : POSITION0;
+    float2 texCoord : TEXCOORD0;
+};
+
+float maxX = 32;
+float maxY = 32;
+
 float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLOR0
 {
     float4 color = tex2D(uImage0, coords);
@@ -23,14 +38,45 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     if (!any(color))
         return color;
 
+
+    float4 color2 = 0;
+    float2 position = coords;
+
+    for (int x = 0; x < 4; x++)
+    {
+        for (int y = 0; y < 4; y++)
+        {
+            color2 += tex2D(uImage0, position + float2(x, y));
+        }
+    }
+
+    color2 /= 2;
+
+    // start
+    //vertexShaderStruct input;
+    //pixelShaderStruct output;
+    //float2 offset = float2(0.5 / maxX, 0.5 / maxY);
+    //output.position = float4(input.pos, 1);
+    //output.texCoord = input.texCoord + offset;
+    
+    //float4 color2 = tex2D(uImage0, output.texCoord);
+    // end
+
     const float blackThreshold = 0.3;
-    const float threshold = 0.46;
-    float gray = dot(color.rgb, float3(0.2, 0.75, 0.15));
+    const float t1 = 0.33;
+
+    const float threshold = 0.4;
+    const float higherT = 0.4;
+    float gray = dot(color2.rgb, float3(0.4, 0.4, 0.4));
     color = float4(float3(gray, gray, gray), 1);
 
-    if (color.r > threshold || color.g > threshold || color.b > threshold)
+    if (color.r > higherT || color.g > higherT || color.b > higherT)
     {
-        color.rgb *= float3(0.29, 1, 0.984);
+        color.rgb *= float3(0.29, 1, 0.984) * 1.7;
+    }
+    else if (color.r > threshold || color.g > threshold || color.b > threshold)
+    {
+        color.rgb *= float3(0.29, 1, 0.984) * 1.4;
     }
     else if (color.r > blackThreshold || color.g > blackThreshold || color.b > blackThreshold)
     {
@@ -43,7 +89,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
 
     return color * sampleColor;
 }
-    
+
 technique Technique1
 {
     pass BerserkerDye
