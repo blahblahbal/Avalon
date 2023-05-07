@@ -29,7 +29,7 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
 
         public override void AddRecipes()
         {
-            Recipe.Create(Type).AddIngredient(ItemID.SlimeGun).AddIngredient(ItemID.Hellstone, 15).AddIngredient(ModContent.ItemType<FireShard>()).AddTile(TileID.Hellforge).Register();
+            Recipe.Create(Type).AddIngredient(ItemID.SlimeGun).AddIngredient(ItemID.HellstoneBar, 15).AddIngredient(ModContent.ItemType<FireShard>()).AddTile(TileID.Hellforge).Register();
         }
     }
 }

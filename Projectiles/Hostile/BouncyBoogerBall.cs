@@ -35,6 +35,11 @@ public class BouncyBoogerBall : ModProjectile
         int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, 0, 0, 128, default, 2);
         Main.dust[d].noGravity = true;
 
+        if(Projectile.velocity.Y < 8)
+        {
+            Projectile.velocity.Y += 0.1f;
+        }
+
         Projectile.frameCounter++;
         if(Projectile.frameCounter >= 10) 
         {
@@ -60,14 +65,14 @@ public class BouncyBoogerBall : ModProjectile
             Main.dust[d].velocity *= 5;
             Main.dust[d].noGravity = true;
         }
-        //if (Projectile.ai[0] == 1)
-        //{
-        //    Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<Booger>(), Main.rand.Next(1, 3));
-        //}
-        //if (Projectile.ai[0] == 2)
-        //{
-        //    Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<BacciliteOre>(), Main.rand.Next(1, 4));
-        //}
+        if (Projectile.ai[0] == 1)
+        {
+            Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<Booger>(), Main.rand.Next(1, 3));
+        }
+        if (Projectile.ai[0] == 2)
+        {
+            Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<BacciliteOre>(), Main.rand.Next(1, 4));
+        }
     }
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
@@ -81,19 +86,19 @@ public class BouncyBoogerBall : ModProjectile
         Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
 
-        //Texture2D textureBooger = ModContent.Request<Texture2D>("Avalon/Items/Material/Booger").Value;
-        //int frameHeightBooger = textureBooger.Height;
-        //Rectangle frameBooger = new Rectangle(0,0,textureBooger.Width,textureBooger.Height);
-        //Vector2 drawPosBooger = Projectile.Center - Main.screenPosition;
-        //if (Projectile.ai[0] == 1)
-        //Main.EntitySpriteDraw(textureBooger, drawPosBooger, frameBooger, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBooger.Width, frameHeightBooger) / 2, Projectile.scale, SpriteEffects.None, 0);
+        Texture2D textureBooger = ModContent.Request<Texture2D>("Avalon/Items/Material/Booger").Value;
+        int frameHeightBooger = textureBooger.Height;
+        Rectangle frameBooger = new Rectangle(0, 0, textureBooger.Width, textureBooger.Height);
+        Vector2 drawPosBooger = Projectile.Center - Main.screenPosition;
+        if (Projectile.ai[0] == 1)
+            Main.EntitySpriteDraw(textureBooger, drawPosBooger, frameBooger, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBooger.Width, frameHeightBooger) / 2, Projectile.scale, SpriteEffects.None, 0);
 
-        //Texture2D textureBaccilite = ModContent.Request<Texture2D>("Avalon/Items/Material/Ores/BacciliteOre").Value;
-        //int frameHeightBaccilite = textureBaccilite.Height;
-        //Rectangle frameBaccilite = new Rectangle(0, 0, textureBaccilite.Width, textureBaccilite.Height);
-        //Vector2 drawPosBaccilite = Projectile.Center - Main.screenPosition;
-        //if (Projectile.ai[0] == 2)
-        //    Main.EntitySpriteDraw(textureBaccilite, drawPosBaccilite, frameBaccilite, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBaccilite.Width, frameHeightBaccilite) / 2, Projectile.scale, SpriteEffects.None, 0);
+        Texture2D textureBaccilite = ModContent.Request<Texture2D>("Avalon/Items/Material/Ores/BacciliteOre").Value;
+        int frameHeightBaccilite = textureBaccilite.Height;
+        Rectangle frameBaccilite = new Rectangle(0, 0, textureBaccilite.Width, textureBaccilite.Height);
+        Vector2 drawPosBaccilite = Projectile.Center - Main.screenPosition;
+        if (Projectile.ai[0] == 2)
+            Main.EntitySpriteDraw(textureBaccilite, drawPosBaccilite, frameBaccilite, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBaccilite.Width, frameHeightBaccilite) / 2, Projectile.scale, SpriteEffects.None, 0);
 
         Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, (Main.masterColor - 0.5f) * 0.2f, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         return false;

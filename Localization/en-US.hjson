@@ -3552,6 +3552,32 @@ Mods: {
 			}
 		}
 
+			PathogenicArrow: {
+				DisplayName: Pathogenic Arrow
+				Tooltip: ""
+			}
+
+			PathogenicBullet: {
+				DisplayName: Pathogenic Bullet
+				Tooltip: ""
+			}
+
+			PathogenicDart: {
+				DisplayName: Pathogenic Dart
+				Tooltip: ""
+			}
+
+			FlaskOfPathogens: {
+				DisplayName: Flask Of Pathogens
+				Tooltip: ""
+			}
+
+			PurpleHaze: {
+				DisplayName: Purple Haze
+				Tooltip: ""
+			}
+		}
+
 		Projectiles: {
 			AeonBeam.DisplayName: Aeon's Eternity
 			AeonStar.DisplayName: Aeon Constellation
@@ -3623,6 +3649,11 @@ Mods: {
 			Icicle.DisplayName: Icicle
 			Olivegas.DisplayName: Olivegas
 			NapalmBall.DisplayName: Napalm Ball
+			PathogenicArrow.DisplayName: Pathogenic Arrow
+			PathogenicBullet.DisplayName: Pathogenic Bullet
+			PathogenicDart.DisplayName: Pathogenic Dart
+			PathogenDartTrail.DisplayName: Pathogen Dart Trail
+			PurpleHaze.DisplayName: Purple Haze
 		}
 
 		NPCs: {
@@ -4120,6 +4151,16 @@ Mods: {
 			BacterialEndurance: {
 				DisplayName: Bacterial Endurance
 				Description: Mods.Avalon.Buffs.BacterialEndurance.Description
+			}
+
+			Pathogen: {
+				DisplayName: Pathogen
+				Description: Mods.Avalon.Buffs.Pathogen.Description
+			}
+
+			ImbuePathogen: {
+				DisplayName: Imbue Pathogen
+				Description: Mods.Avalon.Buffs.ImbuePathogen.Description
 			}
 		}
 
