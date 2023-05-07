@@ -3546,6 +3546,12 @@ Mods: {
 				Tooltip: ""
 			}
 
+			ChunkstoneDye: {
+				DisplayName: Chunkstone Dye
+				Tooltip: ""
+			}
+		}
+
 			PathogenicArrow: {
 				DisplayName: Pathogenic Arrow
 				Tooltip: Increases target's debuff duration
