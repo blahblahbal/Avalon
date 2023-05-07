@@ -129,13 +129,13 @@ public class AvalonPlayer : ModPlayer
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
     public int OldFallStart;
-    
+
     public override void ResetEffects()
     {
         MagicCritDamage = 1f;
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
-        
+
         AdvancedBattle = false;
         AdvancedCalming = false;
         Lucky = false;
@@ -180,7 +180,13 @@ public class AvalonPlayer : ModPlayer
         }
     }
 
-
+    public override void PostUpdateBuffs()
+    {
+        if (Player.lifeRegen < 0 && Pathogen)
+        {
+            Player.lifeRegen = (int)(Player.lifeRegen * 1.5f);
+        }
+    }
     public override void PreUpdateBuffs()
     {
         PlanetRotation[0] = (PlanetRotation[0] % MathHelper.TwoPi) + 0.08f;
@@ -510,7 +516,6 @@ public class AvalonPlayer : ModPlayer
         //     }
         // }
     }
-
     public override void OnHitNPC(NPC npc, NPC.HitInfo hit, int damage)
     {
         if (hit.DamageType == DamageClass.Melee && BloodyWhetstone)
@@ -611,12 +616,12 @@ public class AvalonPlayer : ModPlayer
         {
             return;
         }
-        
+
         // if (crit)
         // {
         //     damage += MultiplyMeleeCritDamage(damage);
         // }
-        
+
         // if (modifiers.DamageSource.SourceProjectileType >= ProjectileID.None && crit)
         // {
         //     if (proj.DamageType == DamageClass.Magic)
@@ -633,7 +638,7 @@ public class AvalonPlayer : ModPlayer
         //     }
         // }
     }
-    
+
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
         if (KeybindSystem.ShadowHotkey.JustPressed && tpStam && tpCD >= 300 &&

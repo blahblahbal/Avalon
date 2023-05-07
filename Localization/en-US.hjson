@@ -3548,27 +3548,31 @@ Mods: {
 
 			PathogenicArrow: {
 				DisplayName: Pathogenic Arrow
-				Tooltip: ""
+				Tooltip: Increases target's debuff duration
 			}
 
 			PathogenicBullet: {
 				DisplayName: Pathogenic Bullet
-				Tooltip: ""
+				Tooltip: Increases target's debuff duration
 			}
 
 			PathogenicDart: {
 				DisplayName: Pathogenic Dart
-				Tooltip: ""
+				Tooltip: Leavses a trail of pathogenic mist
 			}
 
 			FlaskOfPathogens: {
 				DisplayName: Flask Of Pathogens
-				Tooltip: ""
+				Tooltip: Melee and Whip attacks inflict enemies with pathogen
 			}
 
 			PurpleHaze: {
 				DisplayName: Purple Haze
-				Tooltip: ""
+				Tooltip:
+					'''
+					Sprays a pathogen mist 
+					Increases target's debuff duration.
+					'''
 			}
 		}
 
@@ -3646,7 +3650,7 @@ Mods: {
 			PathogenicArrow.DisplayName: Pathogenic Arrow
 			PathogenicBullet.DisplayName: Pathogenic Bullet
 			PathogenicDart.DisplayName: Pathogenic Dart
-			PathogenDartTrail.DisplayName: Pathogen Dart Trail
+			PathogenDartTrail.DisplayName: Pathogen Dart
 			PurpleHaze.DisplayName: Purple Haze
 		}
 
@@ -4153,8 +4157,8 @@ Mods: {
 			}
 
 			ImbuePathogen: {
-				DisplayName: Imbue Pathogen
-				Description: Mods.Avalon.Buffs.ImbuePathogen.Description
+				DisplayName: Weapon Imbue: Pathogen
+				Description: Melee attacks decrease increase enemies debuff duration
 			}
 		}
 

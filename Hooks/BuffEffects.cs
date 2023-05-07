@@ -21,7 +21,7 @@ public class BuffEffects : ModHook
 
     private static void OnAddBuff(On_Player.orig_AddBuff orig, Player self, int type, int timeToAdd, bool quiet = true, bool foodHack = false)
     {
-        for (int j = 0; j < 22; j++)
+        for (int j = 0; j < 44; j++)
         {
             if (self.buffType[j] == type)
             {
@@ -41,6 +41,11 @@ public class BuffEffects : ModHook
                 else if (self.buffTime[j] < timeToAdd)
                 {
                     self.buffTime[j] = timeToAdd;
+                }
+                if (self.GetModPlayer<AvalonPlayer>().Pathogen && Main.debuff[self.buffType[j]])
+                {
+                    if (self.buffTime[j] < timeToAdd * 2)
+                        self.buffTime[j] = timeToAdd * 2;
                 }
                 /*if (type == ModContent.BuffType<Buffs.SkyBlessing>())
                 {
@@ -110,7 +115,12 @@ public class BuffEffects : ModHook
                 }
                 return;
             }
-        }
+            if (self.GetGlobalNPC<AvalonGlobalNPCInstance>().Pathogen && Main.debuff[self.buffType[j]])
+            {
+                if(self.buffTime[j] < time * 2)
+                    self.buffTime[j] = time * 2;
+            }
+    }
         orig(self, type, time, quiet);
     }
 

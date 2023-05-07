@@ -2,11 +2,32 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Rarities; 
+namespace Avalon.Rarities;
 
 /// <summary>
 /// Rarity 12. Used for post-Noob Lord stuff
 /// </summary>
+/// 
+#region buff rarity
+public class FlaskBuffNameRarity : ModRarity
+{
+    public override Color RarityColor => new Color(65, 255, 109);
+
+    public override int GetPrefixedRarity(int offset, float valueMult)
+    {
+        return Type; // no 'lower' tier to go to, so return the type of this rarity.
+    }
+}
+public class ElixrBuffNameRarity : ModRarity
+{
+    public override Color RarityColor => new Color(248, 204, 0);
+
+    public override int GetPrefixedRarity(int offset, float valueMult)
+    {
+        return Type; // no 'lower' tier to go to, so return the type of this rarity.
+    }
+}
+#endregion buff rarity
 public class BlueRarity : ModRarity //12
 {
     public override Color RarityColor => new Color(0, 100, 255);

@@ -1,5 +1,6 @@
 using Avalon.Common.Players;
 using Avalon.Dusts;
+using Avalon.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -26,5 +27,10 @@ public class ImbuePathogen : ModBuff
         //        }
         //    }
         //}
+    }
+    public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
+    {
+        rare = ModContent.RarityType<FlaskBuffNameRarity>();
+        base.ModifyBuffText(ref buffName, ref tip, ref rare);
     }
 }

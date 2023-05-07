@@ -132,5 +132,9 @@ public class AvalonGlobalNPCInstance : GlobalNPC
                 damage = 10;
             }
         }
+        if (npc.lifeRegen < 0 && Pathogen)
+        {
+            npc.lifeRegen = (int)(npc.lifeRegen * 1.5f);
+        }
     }
 }
