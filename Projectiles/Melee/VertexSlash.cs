@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,8 +10,8 @@ public class VertexSlash : EnergySlashTemplate
 {
     public override bool PreDraw(ref Color lightColor)
     {
-        DrawSlash(Color.White, Color.Black, Color.Black, Color.White, 0, 1f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, true);
-        DrawSlash(Color.Gold, Color.Purple, Color.Red, Color.Wheat, 0, 0.8f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, true);
+        DrawSlash(Color.White * 0.5f, Color.Black * 0.5f, Color.Black * 0.5f, Color.White * 0.5f, 0, 1f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, true);
+        DrawSlash(Color.Gold * 0.5f, Color.Purple * 0.5f, Color.Red * 0.5f, Color.Wheat * 0.5f, 0, 0.8f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, true);
 
         //DrawSlash(Color.Lerp(Color.White, Color.Red, Main.masterColor), Color.Gray, Color.Lerp(Color.Black, Color.DarkRed, Main.masterColor), Color.White, 0, 1f, 0f, -MathHelper.Pi / 12, -MathHelper.Pi / 16, true);
 

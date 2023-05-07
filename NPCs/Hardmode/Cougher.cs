@@ -47,11 +47,11 @@ public class Cougher : ModNPC
             new FlavorTextBestiaryInfoElement("Watch out for the coughing!")
         });
     }
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.5f);
-    }
+    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+    //{
+    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
+    //    NPC.damage = (int)(NPC.damage * 0.5f);
+    //}
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2));
@@ -241,7 +241,8 @@ public class Cougher : ModNPC
             for (int i = 0; i < 20; i++)
             {
                 Vector2 ShootDirection = NPC.Center.DirectionTo(TargetPlr.Center).RotatedByRandom(0.5f) * Main.rand.NextFloat(6, 3);
-                int d = Dust.NewDust(NPC.position + new Vector2(0, NPC.height / 2), NPC.width, NPC.height / 3, DustID.Venom, ShootDirection.X, ShootDirection.Y, 128, default, Main.rand.NextFloat(1, 1.5f));
+                int d = Dust.NewDust(NPC.position + new Vector2(0, NPC.height / 2), NPC.width, NPC.height / 3, ModContent.DustType<PathogenDust>(), ShootDirection.X, ShootDirection.Y, 128, default, Main.rand.NextFloat(1, 1.5f));
+                Main.dust[d].noLightEmittence = true;
                 Main.dust[d].noGravity = !Main.rand.NextBool(4);
                 if (Main.dust[d].noGravity)
                     Main.dust[d].fadeIn = 1.5f;

@@ -19,7 +19,7 @@ namespace Avalon.Common
                     npc.Size *= 1.5f;
                 }
                 //                                    ⛧ SCARY NUMBR OMGOMG ⛧
-                if (npc.netID is NPCID.BurningSphere or NPCID.ChaosBall or NPCID.WaterSphere or NPCID.VileSpit or NPCID.ChaosBallTim) // making eow vile spit not destroyable is a bit much lol
+                if (npc.netID is NPCID.BurningSphere or NPCID.ChaosBall or NPCID.WaterSphere or NPCID.VileSpit or NPCID.ChaosBallTim) // making eow vile spit not destroyable is a bit much lol // Was unintentional lmao
                 {
                     npc.dontTakeDamage = true;
                 }

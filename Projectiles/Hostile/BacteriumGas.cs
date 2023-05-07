@@ -66,16 +66,17 @@ public class BacteriumGas : ModProjectile
 
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-        int frameHeight = texture.Height / Main.projFrames[Type];
-        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
-        Vector2 drawPos = Projectile.Center - Main.screenPosition;
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+        ClassExtensions.DrawGas(Texture, lightColor, Projectile, 4, 6);
+        //Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
+        //int frameHeight = texture.Height / Main.projFrames[Type];
+        //Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+        //Vector2 drawPos = Projectile.Center - Main.screenPosition;
+        //Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 
-        for(int i = 0; i < 6; i++)
-        {
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(0,Projectile.width / 4 * ((float)Projectile.alpha) / 128).RotatedBy(i * (MathHelper.TwoPi) / 6), frame, lightColor * Projectile.Opacity * 0.4f, Projectile.rotation + ((float)Projectile.alpha / 128) * (i / 128), new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.FlipVertically, 0);
-        }
+        //for(int i = 0; i < 6; i++)
+        //{
+        //    Main.EntitySpriteDraw(texture, drawPos + new Vector2(0,Projectile.width / 4 * ((float)Projectile.alpha) / 128).RotatedBy(i * (MathHelper.TwoPi) / 6), frame, lightColor * Projectile.Opacity * 0.4f, Projectile.rotation + ((float)Projectile.alpha / 128) * (i / 128), new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.FlipVertically, 0);
+        //}
         return false;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)

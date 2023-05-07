@@ -28,6 +28,7 @@ public class AvalonGlobalNPCInstance : GlobalNPC
     public int SpikeTimer { get; set; }
     public bool Virulent { get; set; }
     public bool Inferno { get; set; }
+    public bool Pathogen { get; set; }
 
     public override void ResetEffects(NPC npc)
     {
@@ -37,8 +38,15 @@ public class AvalonGlobalNPCInstance : GlobalNPC
         Bleeding = false;
         Virulent = false;
         Inferno = false;
+        Pathogen = false;
         //BleedStacks = 1;
     }
+
+    //public override void DrawEffects(NPC npc, ref Color drawColor)
+    //{
+    //    if (Pathogen)
+    //        npc.color = Color.Lerp(drawColor = new Color(153, 114, 191),drawColor,0.5f);
+    //}
     public override void UpdateLifeRegen(NPC npc, ref int damage)
     {
         if (Malaria)
