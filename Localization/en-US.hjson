@@ -3550,26 +3550,25 @@ Mods: {
 				DisplayName: Chunkstone Dye
 				Tooltip: ""
 			}
-		}
 
 			PathogenicArrow: {
-				DisplayName: Pathogenic Arrow
+				DisplayName: Pathogen Arrow
 				Tooltip: Increases target's debuff duration
 			}
 
 			PathogenicBullet: {
-				DisplayName: Pathogenic Bullet
+				DisplayName: Pathogen Bullet
 				Tooltip: Increases target's debuff duration
 			}
 
 			PathogenicDart: {
-				DisplayName: Pathogenic Dart
+				DisplayName: Pathogen Dart
 				Tooltip: Leavses a trail of pathogenic mist
 			}
 
 			FlaskOfPathogens: {
-				DisplayName: Flask Of Pathogens
-				Tooltip: Melee and Whip attacks inflict enemies with pathogen
+				DisplayName: Flask of Pathogen
+				Tooltip: Melee and Whip attacks inflict enemies with Pathogen
 			}
 
 			PurpleHaze: {

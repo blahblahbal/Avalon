@@ -27,14 +27,14 @@ class FlaskOfPathogens : ModItem
 
     public override bool? UseItem(Player player)
     {
-        //for(int i = 0; i < player.buffType.Length; i++)
-        //{
-        //    if (BuffID.Sets.IsAFlaskBuff[player.buffType[i]] && player.buffType[i] != ModContent.BuffType<Buffs.ImbuePathogen>())
-        //    {
-        //        player.DelBuff(player.buffType[i]);
-        //        break;
-        //    }
-        //}
+        for (int i = 0; i < player.buffType.Length; i++)
+        {
+            if (BuffID.Sets.IsAFlaskBuff[player.buffType[i]] && player.buffType[i] != ModContent.BuffType<Buffs.ImbuePathogen>())
+            {
+                player.DelBuff(i);
+                break;
+            }
+        }
         return base.UseItem(player);
     }
     public override void AddRecipes()

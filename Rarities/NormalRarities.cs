@@ -18,7 +18,7 @@ public class FlaskBuffNameRarity : ModRarity
         return Type; // no 'lower' tier to go to, so return the type of this rarity.
     }
 }
-public class ElixrBuffNameRarity : ModRarity
+public class ElixirBuffNameRarity : ModRarity
 {
     public override Color RarityColor => new Color(248, 204, 0);
 

@@ -33,7 +33,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                 SoundEngine.PlaySound(SoundID.Item8, projectile.position);
             }
         }
-        if (!projectile.npcProj && !projectile.noEnchantments && projectile.DamageType == DamageClass.Melee)
+        if (!projectile.npcProj && !projectile.noEnchantments && (projectile.DamageType == DamageClass.Melee || ProjectileID.Sets.IsAWhip[projectile.type]))
         {
             Vector2 boxPosition = projectile.position;
             int boxWidth = projectile.width;

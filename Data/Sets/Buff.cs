@@ -6,7 +6,7 @@ namespace Avalon.Data.Sets;
 
 public static class Buffs
 {
-    public static readonly bool[] Elixr = BuffID.Sets.Factory.CreateBoolSet(
+    public static readonly bool[] Elixir = BuffID.Sets.Factory.CreateBoolSet(
         ModContent.BuffType<AdvAmmoReservation>(),
         ModContent.BuffType<AdvArchery>(),
         ModContent.BuffType<AdvBattle>(),

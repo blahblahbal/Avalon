@@ -1,9 +1,6 @@
 using Avalon.Rarities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Common
@@ -12,12 +9,26 @@ namespace Avalon.Common
     {
         public override void ModifyBuffText(int type, ref string buffName, ref string tip, ref int rare)
         {
-            if (Avalon.Data.Sets.Buffs.Elixr[type])
+            if (Avalon.Data.Sets.Buffs.Elixir[type])
             {
-                rare = ModContent.RarityType<ElixrBuffNameRarity>();
+                rare = ModContent.RarityType<ElixirBuffNameRarity>();
             }
 
             base.ModifyBuffText(type, ref buffName, ref tip, ref rare);
+        }
+        public override void Update(int type, Player player, ref int buffIndex)
+        {
+            if (player.meleeEnchant > 0)
+            {
+                for (int i = 0; i < player.buffType.Length; i++)
+                {
+                    if (BuffID.Sets.IsAFlaskBuff[player.buffType[i]] && player.buffType[i] == ModContent.BuffType<Buffs.ImbuePathogen>())
+                    {
+                        player.DelBuff(i);
+                        break;
+                    }
+                }
+            }
         }
     }
 }
