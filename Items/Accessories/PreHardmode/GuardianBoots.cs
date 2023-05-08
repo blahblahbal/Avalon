@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
+[AutoloadEquip(EquipType.Shoes)]
 class GuardianBoots : ModItem
 {
     public override void SetStaticDefaults()

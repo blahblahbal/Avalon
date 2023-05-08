@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
+[AutoloadEquip(EquipType.HandsOn)]
 internal class BandofStamina : ModItem
 {
     public override void SetStaticDefaults()
