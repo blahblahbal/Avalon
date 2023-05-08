@@ -15,7 +15,7 @@ public class PurpleHaze : ModProjectile
         Projectile.height = 36;
         Projectile.aiStyle = -1;
         Projectile.penetrate = -1;
-        Projectile.alpha = 254;
+        Projectile.alpha = 128;
         Projectile.friendly = true;
         Projectile.timeLeft = 720;
         Projectile.ignoreWater = true;
@@ -33,7 +33,7 @@ public class PurpleHaze : ModProjectile
         Projectile.ai[1]++;
         if (Projectile.ai[2] > 1)
         {
-            Projectile.alpha += 2;
+            Projectile.alpha += 1;
             if (Projectile.ai[1] % 10 == 0)
             {
                 Projectile.damage--;
@@ -62,7 +62,7 @@ public class PurpleHaze : ModProjectile
     }
     public override bool? CanHitNPC(NPC target)
     {
-        return Projectile.alpha < 220 && !target.friendly;
+        return (Projectile.alpha < 220 || Projectile.ai[2] < 1) && !target.friendly;
     }
 
     public override bool CanHitPvp(Player target)
