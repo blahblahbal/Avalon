@@ -3683,6 +3683,7 @@ Mods: {
 			BacteriumPrime.DisplayName: Bacterium Prime
 			BactusMinion.DisplayName: Bactus Minion
 			Viriling.DisplayName: Viriling
+			ContaminatedGhoul.DisplayName: Contaminated Ghoul
 		}
 
 		Buffs: {
