@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
+[AutoloadEquip(EquipType.Waist)]
 class ZincWatch : ModItem
 {
     public override void SetStaticDefaults()
@@ -13,7 +14,11 @@ class ZincWatch : ModItem
 
     public override void SetDefaults()
     {
-        Item.CloneDefaults(ItemID.SilverWatch);
+        Item.width = 24;
+        Item.height = 28;
+        Item.rare = ItemRarityID.White;
+        Item.value = Item.sellPrice(0, 0, 13, 0);
+        Item.accessory = true;
     }
     public override void AddRecipes()
     {

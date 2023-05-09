@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
+[AutoloadEquip(EquipType.Waist)]
 class BronzeWatch : ModItem
 {
     public override void SetStaticDefaults()
@@ -13,7 +14,11 @@ class BronzeWatch : ModItem
 
     public override void SetDefaults()
     {
-        Item.CloneDefaults(ItemID.TinWatch);
+        Item.width = 24;
+        Item.height = 28;
+        Item.rare = ItemRarityID.White;
+        Item.value = Item.sellPrice(0, 0, 4, 0);
+        Item.accessory = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
+[AutoloadEquip(EquipType.Waist)]
 class BismuthWatch : ModItem
 {
     public override void SetStaticDefaults()
@@ -13,7 +14,11 @@ class BismuthWatch : ModItem
 
     public override void SetDefaults()
     {
-        Item.CloneDefaults(ItemID.GoldWatch);
+        Item.width = 24;
+        Item.height = 28;
+        Item.rare = ItemRarityID.Blue;
+        Item.value = Item.sellPrice(0, 0, 25, 0);
+        Item.accessory = true;
     }
     public override void AddRecipes()
     {
