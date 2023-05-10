@@ -35,9 +35,10 @@ public class BouncyBoogerBall : ModProjectile
         int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, 0, 0, 128, default, 2);
         Main.dust[d].noGravity = true;
 
-        if(Projectile.velocity.Y < 8)
+        if(Projectile.velocity.Y < 8 && Projectile.position.Y < (Main.worldSurface * 16) + (30 * 16))
         {
             Projectile.velocity.Y += 0.1f;
+            Projectile.velocity.X *= 0.994f;
         }
 
         Projectile.frameCounter++;
@@ -67,16 +68,17 @@ public class BouncyBoogerBall : ModProjectile
         }
         if (Projectile.ai[0] == 1)
         {
-            Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<Booger>(), Main.rand.Next(1, 3));
+            Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<Booger>(), Main.rand.Next(3, 6));
         }
         if (Projectile.ai[0] == 2)
         {
-            Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<BacciliteOre>(), Main.rand.Next(1, 4));
+            Item.NewItem(Projectile.GetSource_Death(), Projectile.Hitbox, ModContent.ItemType<BacciliteOre>(), Main.rand.Next(5, 10));
         }
     }
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
         target.AddBuff(BuffID.Weak, 5 * 60);
+        Projectile.ai[0] = 0;
     }
 
     public override bool PreDraw(ref Color lightColor)
@@ -100,7 +102,7 @@ public class BouncyBoogerBall : ModProjectile
         if (Projectile.ai[0] == 2)
             Main.EntitySpriteDraw(textureBaccilite, drawPosBaccilite, frameBaccilite, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBaccilite.Width, frameHeightBaccilite) / 2, Projectile.scale, SpriteEffects.None, 0);
 
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, (Main.masterColor - 0.5f) * 0.2f, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, (Main.masterColor - 0.5f) * -0.2f, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)

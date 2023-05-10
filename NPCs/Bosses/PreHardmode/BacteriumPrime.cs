@@ -23,6 +23,18 @@ namespace Avalon.NPCs.Bosses.PreHardmode;
 [AutoloadBossHead]
 public class BacteriumPrime : ModNPC
 {
+    public static int secondStageHeadSlot = -1;
+    public override void Load()
+    {
+        secondStageHeadSlot = Mod.AddBossHeadTexture(BossHeadTexture + "_2", -1);
+    }
+    public override void BossHeadSlot(ref int index)
+    {
+        if (NPC.ai[3] == 60)
+        {
+            index = secondStageHeadSlot;
+        }
+    }
     public override void SetStaticDefaults()
     {
         //DisplayName.SetDefault("Bacterium Prime");
@@ -84,6 +96,7 @@ public class BacteriumPrime : ModNPC
     const float Phase2Health = 0.6f;
     const float Phase2part2Health = 0.3f;
     const float Phase2part3Health = 0.15f;
+    float LorR = MathHelper.PiOver4;
     public override void AI()
     {
         float speed = 5;
@@ -129,9 +142,6 @@ public class BacteriumPrime : ModNPC
                 NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.023f;
             }
 
-            NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
-            NPC.velocity.Y = MathHelper.Clamp(NPC.velocity.Y, -speed, speed);
-
             //Main.NewText(LastCollide.X + " " + LastCollide.Y);
             //if (NPC.collideY || NPC.collideX)
             //{
@@ -163,15 +173,18 @@ public class BacteriumPrime : ModNPC
                 NPC.alpha = (int)(MathHelper.Lerp(0, NPC.alpha, 0.9f));
             }
 
-            if (Collision.SolidCollision(NPC.position + new Vector2(20,20),NPC.height - 10, NPC.width - 10))
-
+            if (Collision.SolidCollision(NPC.position + new Vector2(20, 20), NPC.height - 40, NPC.width - 40) && NPC.ai[1] > 360)
+            {
+                NPC.ai[1] = -Main.rand.Next(-100, 100);
+                NPC.noTileCollide = true;
+            }
             NPC.ai[1]++;
             if (NPC.ai[1] > 360 && !Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
             {
                 //NPC.ai[1] = 0;
                 NPC.noTileCollide = false;
             }
-            if (NPC.ai[1] > 700 * 2)
+            if (NPC.ai[1] > 1400)
             {
                 NPC.ai[1] = -Main.rand.Next(-100, 100);
                 NPC.noTileCollide = true;
@@ -180,6 +193,36 @@ public class BacteriumPrime : ModNPC
             if (Main.rand.NextBool(10) && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
+            }
+
+            NPC.ai[0]++;
+            if (NPC.ai[0] > 600)
+            {
+                float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                int d = Dust.NewDust(NPC.Center + new Vector2(0, 180).RotatedBy(rotate), 0, 0, DustID.CorruptGibs, 0, 0, 50, default, 2);
+                Main.dust[d].velocity = new Vector2(0, -13).RotatedBy(rotate) + NPC.velocity;
+                Main.dust[d].noGravity = true;
+            }
+            if (NPC.ai[0] == 630)
+            {
+                if (Main.rand.NextBool())
+                {
+                    LorR *= -1;
+                }
+                NPC.ai[0] = -60;
+                NPC.velocity = NPC.Center.DirectionTo(Target.Center).RotatedBy(LorR) * MathHelper.Clamp((NPC.Center.Distance(Target.position) * 0.025f),10,60);
+                SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.position);
+            }
+            if (NPC.ai[0] < -5)
+            {
+                NPC.ai[1] = -Main.rand.Next(-100, 100);
+                NPC.noTileCollide = true;
+                speed = -NPC.ai[0];
+                NPC.velocity = NPC.velocity.RotatedBy(LorR * Main.rand.NextFloat(-0.001f,-0.025f));
+            }
+            if (NPC.ai[0] % 4 == 0 && Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] < 60)
+            {
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
             }
 
             //NPC.ai[0]++;
@@ -194,6 +237,8 @@ public class BacteriumPrime : ModNPC
             //        summonDust.noGravity = true;
             //    }
             //}
+            NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
+            NPC.velocity.Y = MathHelper.Clamp(NPC.velocity.Y, -speed, speed);
         }
         #endregion Phase 1
 
@@ -219,7 +264,7 @@ public class BacteriumPrime : ModNPC
             NPC.ai[2] = 0;
             //NPC.knockBackResist = 0f;
             NPC.TargetClosest(false);
-            NPC.defense += 2;
+            NPC.defense += 8;
             NPC.noTileCollide = true;
             //NPC.knockBackResist += 0.03f;
             SoundEngine.PlaySound(SoundID.ForceRoar);
@@ -301,7 +346,7 @@ public class BacteriumPrime : ModNPC
                             // Bouncy Ball
                             int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / (Balls * 2) - (i * MathHelper.Pi / (Balls * 2))), ModContent.ProjectileType<BouncyBoogerBall>(), NPC.damage / 3, 0, 255);
                             Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
-                            Main.projectile[P].ai[0] = Main.rand.Next(0,4);
+                            Main.projectile[P].ai[0] = Main.rand.Next(1,3);
                             if (Main.expertMode)
                             {
                                 if(Main.rand.NextBool())
@@ -384,8 +429,26 @@ public class BacteriumPrime : ModNPC
             alphaThingHackyWow += 0.03f;
             Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R / 2 * alphaThingHackyWow * (NPC.ai[3] / 120), drawColor.G, 0, 128) * alphaThingHackyWow * (NPC.ai[3] / 60), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
         }
+        
+        if (NPC.ai[0] < 0 && NPC.ai[3] == 0)
+        {
+            alphaThingHackyWow = 0;
+            for (int i = 11; i > 0; i -= 2)
+            {
+                alphaThingHackyWow += 0.07f * (NPC.ai[0] / -60);
+                Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R * alphaThingHackyWow, drawColor.G * alphaThingHackyWow, drawColor.B * alphaThingHackyWow, 128 * alphaThingHackyWow) * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+            }
+        }
         //Main.EntitySpriteDraw(texture, drawPos, frame, drawColor, NPC.rotation, new Vector2(NPC.frame.Width / 2,NPC.frame.Height / 2), NPC.scale,SpriteEffects.None,0);
         return true;
+    }
+
+    public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
+    {
+        if (Main.expertMode)
+            target.AddBuff(BuffID.Blackout, 3 * 60);
+
+        target.AddBuff(BuffID.Darkness, 5 * 60);
     }
     public override void FindFrame(int frameHeight)
     {
