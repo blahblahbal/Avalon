@@ -21,6 +21,7 @@ public class ContaminatedGhoul : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[Type] = 8;
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
     }
     public override void SetDefaults()
     {
@@ -145,16 +146,16 @@ public class ContaminatedGhoul : ModNPC
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Material.Pathogen>(), 3, 1, 3));
         npcLoot.Add(ItemDropRule.Common(ItemID.AncientCloth, 10));
     }
-    //public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-    //{
-    //    Texture2D texture = ModContent.Request<Texture2D>(Texture + "Glow").Value;
-    //    Rectangle frame = NPC.frame;
-    //    Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
-    //    SpriteEffects spriteEffects = SpriteEffects.None;
-    //    if (NPC.spriteDirection == -1)
-    //        spriteEffects = SpriteEffects.None;
-    //    else
-    //        spriteEffects = SpriteEffects.FlipHorizontally;
-    //    Main.EntitySpriteDraw(texture, drawPos, frame, new Color(200,200,200,100), NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, spriteEffects, 0);
-    //}
+    public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+    {
+        Texture2D texture = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+        Rectangle frame = NPC.frame;
+        Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
+        SpriteEffects spriteEffects = SpriteEffects.None;
+        if (NPC.spriteDirection == -1)
+            spriteEffects = SpriteEffects.None;
+        else
+            spriteEffects = SpriteEffects.FlipHorizontally;
+        Main.EntitySpriteDraw(texture, drawPos, frame, new Color(200, 200, 200, 100), NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, spriteEffects, 0);
+    }
 }
