@@ -24,8 +24,19 @@ public class ContaminatedGhoul : ModNPC
     }
     public override void SetDefaults()
     {
-        NPC.CloneDefaults(NPCID.DesertGhoulCorruption);
+        NPC.width = 24;
+        NPC.height = 44;
+        NPC.aiStyle = 3;
+        NPC.damage = 58;
+        NPC.defense = 30;
+        NPC.lifeMax = 262;
+        NPC.HitSound = SoundID.NPCHit37;
+        NPC.DeathSound = SoundID.NPCDeath40;
+        NPC.knockBackResist = 0.6f;
+        NPC.value = 650f;
+        NPC.npcSlots = 0.5f;
         AIType = NPCID.DesertGhoulCorruption;
+        AnimationType = 527;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -126,24 +137,24 @@ public class ContaminatedGhoul : ModNPC
     }
     public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
     {
-        target.AddBuff(ModContent.BuffType<Pathogen>(),7 * 60);
+        target.AddBuff(ModContent.BuffType<Pathogen>(), 7 * 60);
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ItemID.DarkShard, 15));
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Material.Pathogen>(), 3,1,3));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Material.Pathogen>(), 3, 1, 3));
         npcLoot.Add(ItemDropRule.Common(ItemID.AncientCloth, 10));
     }
-    public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-    {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture + "Glow").Value;
-        Rectangle frame = NPC.frame;
-        Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
-        SpriteEffects spriteEffects = SpriteEffects.None;
-        if (NPC.spriteDirection == -1)
-            spriteEffects = SpriteEffects.None;
-        else
-            spriteEffects = SpriteEffects.FlipHorizontally;
-        Main.EntitySpriteDraw(texture, drawPos, frame, new Color(200,200,200,100), NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, spriteEffects, 0);
-    }
+    //public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+    //{
+    //    Texture2D texture = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+    //    Rectangle frame = NPC.frame;
+    //    Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
+    //    SpriteEffects spriteEffects = SpriteEffects.None;
+    //    if (NPC.spriteDirection == -1)
+    //        spriteEffects = SpriteEffects.None;
+    //    else
+    //        spriteEffects = SpriteEffects.FlipHorizontally;
+    //    Main.EntitySpriteDraw(texture, drawPos, frame, new Color(200,200,200,100), NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, spriteEffects, 0);
+    //}
 }
