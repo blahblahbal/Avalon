@@ -22,7 +22,7 @@ public class Ickgrass : ModTile
         //TileID.Sets.SpreadUnderground[Type] = true;
         TileID.Sets.Grass[Type] = true;
         //TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
-        ItemDrop = ItemID.DirtBlock;
+        RegisterItemDrop(ItemID.DirtBlock);
     }
 
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)

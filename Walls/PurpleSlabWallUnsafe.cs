@@ -10,7 +10,7 @@ public class PurpleSlabWallUnsafe : ModWall
     public override void SetStaticDefaults()
     {
         Main.wallDungeon[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWall>();
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWall>());
         AddMapEntry(new Color(51, 36, 91));
         DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
     }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -13,7 +13,7 @@ public class VenomSpike : ModTile
         AddMapEntry(new Color(132, 65, 172), LanguageManager.Instance.GetText("Venom Spike"));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.VenomSpike>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.VenomSpike>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.BismuthDust>();
     }

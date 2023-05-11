@@ -14,7 +14,7 @@ public class ResistantWood : ModTile
         Main.tileMergeDirt[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileBrick[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ResistantWood>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ResistantWood>();
         DustType = DustID.Wraith;
     }
     public override bool CanExplode(int i, int j)

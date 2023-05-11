@@ -9,7 +9,7 @@ public class MoonWall : ModWall
     public override void SetStaticDefaults()
     {
         Main.wallHouse[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Wall.MoonWallItem>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.MoonWallItem>();
         AddMapEntry(new Color(81, 76, 98));
         DustType = ModContent.DustType<Dusts.BismuthDust>();
     }

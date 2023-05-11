@@ -12,7 +12,7 @@ public class RottenChunk : ModTile
         AddMapEntry(new Color(83, 65, 67));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ItemID.RottenChunk;
+        RegisterItemDrop(ItemID.RottenChunk);
         DustType = DustID.Bone;
     }
 }

@@ -19,7 +19,7 @@ public class BacciliteOre : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileOreFinderPriority[Type] = 320;
         Main.tileLighted[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Material.Ores.BacciliteOre>();
+        //ItemDrop = ModContent.ItemType<Items.Material.Ores.BacciliteOre>();
         HitSound = SoundID.Tink;
         DustType = DustID.JungleSpore;
         MinPick = 55;

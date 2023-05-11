@@ -15,7 +15,7 @@ public class Ectoplasm : ModTile
         Main.tileLargeFrames[Type] = 1;
         Main.tileBlockLight[Type] = true;
         Main.tileLighted[Type] = true;
-        ItemDrop = ItemID.Ectoplasm;
+        RegisterItemDrop(ItemID.Ectoplasm);
         HitSound = SoundID.NPCHit1;
         DustType = DustID.UltraBrightTorch;
     }

@@ -17,7 +17,7 @@ public class OrangeBrick : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileDungeon[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
         TileID.Sets.GeneralPlacementTiles[Type] = false;

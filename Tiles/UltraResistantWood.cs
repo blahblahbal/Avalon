@@ -14,7 +14,7 @@ public class UltraResistantWood : ModTile
         Main.tileMergeDirt[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileBrick[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ResistantWood>();
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>());
         DustType = DustID.Wraith;
         MinPick = 225;
     }

@@ -18,7 +18,7 @@ public class NickelOre : ModTile
         Main.tileOreFinderPriority[Type] = 235;
         Main.tileSpelunker[Type] = true;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Material.Ores.NickelOre>();
+        //ItemDrop = ModContent.ItemType<Items.Material.Ores.NickelOre>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.NickelDust>();
         TileID.Sets.Ore[Type] = true;

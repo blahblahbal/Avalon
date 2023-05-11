@@ -3584,6 +3584,21 @@ Mods: {
 					Increases target's debuff duration.
 					'''
 			}
+
+			SpodermanMask: {
+				DisplayName: Spoderman Mask
+				Tooltip: ""
+			}
+
+			SpodermanPants: {
+				DisplayName: Spoderman Pants
+				Tooltip: ""
+			}
+
+			SpodermanSuit: {
+				DisplayName: Spoderman Suit
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

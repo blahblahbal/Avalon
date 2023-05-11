@@ -1,4 +1,4 @@
-﻿using Avalon.Dusts;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -19,7 +19,7 @@ public class OsmiumOre : ModTile
         Main.tileOreFinderPriority[Type] = 430;
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 1150;
-        ItemDrop = ModContent.ItemType<Items.Material.Ores.OsmiumOre>();
+        //ItemDrop = ModContent.ItemType<Items.Material.Ores.OsmiumOre>();
         HitSound = SoundID.Tink;
         MinPick = 60;
         DustType = ModContent.DustType<OsmiumDust>();

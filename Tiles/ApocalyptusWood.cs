@@ -13,7 +13,7 @@ public class ApocalyptusWood : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileBrick[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>();
         DustType = ModContent.DustType<Dusts.DarkMatterWoodDust>();
     }
 }

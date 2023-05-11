@@ -1,4 +1,3 @@
-using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -17,7 +16,12 @@ public class HardenedSnotsand : ModTile
         TileID.Sets.ForAdvancedCollision.ForSandshark[Type] = true;
         TileID.Sets.CanBeClearedDuringGeneration[Type] = false;
         TileID.Sets.ChecksForMerge[Type] = true;
-        ItemDrop = ModContent.ItemType<HardenedSnotsandBlock>();
+        Common.TileMerge.MergeWith(Type, ModContent.TileType<Snotsand>());
         DustType = DustID.ScourgeOfTheCorruptor;
+    }
+    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
+    {
+        Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<Snotsand>(), false, false, false, false, resetFrame);
+        return false;
     }
 }

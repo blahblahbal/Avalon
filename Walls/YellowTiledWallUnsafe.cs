@@ -10,7 +10,7 @@ public class YellowTiledWallUnsafe : ModWall
     public override void SetStaticDefaults()
     {
         Main.wallDungeon[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>();
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>());
         AddMapEntry(new Color(60, 59, 39));
         DustType = ModContent.DustType<Dusts.YellowDungeonDust>();
     }

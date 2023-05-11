@@ -17,7 +17,7 @@ public class PurpleBrick : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileDungeon[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
         TileID.Sets.GeneralPlacementTiles[Type] = false;

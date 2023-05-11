@@ -13,7 +13,7 @@ public class Zircon : ModTile
         AddMapEntry(new Color(102, 66, 43), LanguageManager.Instance.GetText("Zircon"));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Material.Ores.Zircon>();
+        RegisterItemDrop(ModContent.ItemType<Items.Material.Ores.Zircon>());
         Main.tileMerge[TileID.Stone][Type] = true;
         Main.tileMerge[Type][TileID.Stone] = true;
         Main.tileBlockLight[Type] = true;

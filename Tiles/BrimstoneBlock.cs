@@ -14,7 +14,7 @@ public class BrimstoneBlock : ModTile
         Main.tileBlockLight[Type] = true;
         //Main.tileMerge[Type][ModContent.TileType<Ectograss>()] = true;
         //Main.tileMerge[ModContent.TileType<Ectograss>()][Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.BrimstoneBlock>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.BrimstoneBlock>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.BrimstoneDust>();
         TileID.Sets.HellSpecial[Type] = true;

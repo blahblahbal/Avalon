@@ -17,7 +17,7 @@ public class YellowBrick : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileDungeon[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.YellowBrick>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.YellowBrick>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.YellowDungeonDust>();
     }

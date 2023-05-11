@@ -12,7 +12,7 @@ public class ImperviousBrickWallUnsafe : ModWall
     {
         Main.wallHouse[Type] = false;
         AddMapEntry(new Color(51, 44, 48));
-        ItemDrop = ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>();
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>());
         DustType = DustID.Wraith;
     }
     public override void KillWall(int i, int j, ref bool fail)

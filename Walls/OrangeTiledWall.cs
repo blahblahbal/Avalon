@@ -10,7 +10,7 @@ public class OrangeTiledWall : ModWall
     public override void SetStaticDefaults()
     {
         Main.wallHouse[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWall>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWall>();
         AddMapEntry(new Color(63, 36, 24));
         DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
     }

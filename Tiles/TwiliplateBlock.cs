@@ -16,7 +16,7 @@ public class TwiliplateBlock : ModTile
         Main.tileBrick[Type] = true;
         Main.tileMerge[Type][TileID.WoodBlock] = true;
         Main.tileMerge[TileID.WoodBlock][Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.TwiliplateBlock>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.TwiliplateBlock>();
         HitSound = SoundID.Tink;
     }
 }

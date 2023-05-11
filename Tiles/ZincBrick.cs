@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,7 +18,7 @@ public class ZincBrick : ModTile
         Main.tileBrick[Type] = true;
         Main.tileMerge[Type][TileID.WoodBlock] = true;
         Main.tileMerge[TileID.WoodBlock][Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ZincBrick>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ZincBrick>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.ZincDust>();
     }

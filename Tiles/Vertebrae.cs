@@ -12,7 +12,7 @@ public class Vertebrae : ModTile
         AddMapEntry(new Color(255, 127, 127));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ItemID.Vertebrae;
+        RegisterItemDrop(ItemID.Vertebrae);
         HitSound = SoundID.NPCHit2;
         DustType = DustID.HeartCrystal;
     }

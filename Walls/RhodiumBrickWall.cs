@@ -9,7 +9,7 @@ public class RhodiumBrickWall : ModWall
     public override void SetStaticDefaults()
     {
         Main.wallHouse[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Wall.RhodiumBrickWallItem>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.RhodiumBrickWallItem>();
         AddMapEntry(new Color(79, 40, 61));
         DustType = DustID.t_LivingWood;
     }

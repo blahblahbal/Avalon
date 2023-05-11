@@ -17,7 +17,7 @@ public class Boltstone : ModTile
         Main.tileShine[Type] = 775;
         Main.tileSpelunker[Type] = true;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Material.Ores.Boltstone>();
+        //ItemDrop = ModContent.ItemType<Items.Material.Ores.Boltstone>();
         HitSound = SoundID.Tink;
         DustType = DustID.GreenTorch;
     }

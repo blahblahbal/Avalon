@@ -13,7 +13,7 @@ public class Coughwood : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileBrick[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.Coughwood>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.Coughwood>();
         DustType = ModContent.DustType<Dusts.CoughwoodDust>();
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,7 +16,7 @@ public class BismuthBrick : ModTile
         Main.tileBrick[Type] = true;
         Main.tileMerge[Type][TileID.WoodBlock] = true;
         Main.tileMerge[TileID.WoodBlock][Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.BismuthBrick>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.BismuthBrick>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.BismuthDust>();
     }

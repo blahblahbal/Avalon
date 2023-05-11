@@ -1,4 +1,4 @@
-﻿using Avalon.Systems;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -19,7 +19,7 @@ public class ImperviousBrick : ModTile
         Main.tileMerge[Type][TileID.Ash] = true;
         Main.tileMerge[Type][TileID.WoodBlock] = true;
         Main.tileMerge[TileID.WoodBlock][Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ImperviousBrick>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ImperviousBrick>();
         HitSound = SoundID.Tink;
         MinPick = 300;
         DustType = DustID.Wraith;

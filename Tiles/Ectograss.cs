@@ -21,7 +21,7 @@ public class Ectograss : ModTile
         TileID.Sets.NeedsGrassFraming[Type] = true;
         TileID.Sets.NeedsGrassFramingDirt[Type] = TileID.Ash;
         TileID.Sets.Grass[Type] = true;
-        ItemDrop = ItemID.AshBlock;
+        RegisterItemDrop(ItemID.AshBlock);
         DustType = DustID.Silt;
     }
     // still needs work lol

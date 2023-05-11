@@ -12,7 +12,7 @@ public class Tourmaline : ModTile
     {
         AddMapEntry(Color.Aqua, LanguageManager.Instance.GetText("Tourmaline"));
         Main.tileSolid[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Material.Ores.Tourmaline>();
+        RegisterItemDrop(ModContent.ItemType<Items.Material.Ores.Tourmaline>());
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;
         Main.tileMerge[Type][TileID.Stone] = true;

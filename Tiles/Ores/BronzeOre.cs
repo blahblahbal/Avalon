@@ -18,7 +18,7 @@ public class BronzeOre : ModTile
         Main.tileSpelunker[Type] = true;
         Main.tileOreFinderPriority[Type] = 215;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Material.Ores.BronzeOre>();
+        //ItemDrop = ModContent.ItemType<Items.Material.Ores.BronzeOre>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.BronzeDust>();
         TileID.Sets.Ore[Type] = true;

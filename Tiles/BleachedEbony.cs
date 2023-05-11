@@ -14,7 +14,7 @@ public class BleachedEbony : ModTile
         Main.tileMergeDirt[Type] = true;
         Main.tileBrick[Type] = true;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>();
         DustType = DustID.SnowBlock;
     }
 }

@@ -11,7 +11,7 @@ public class ImperviousBrickWall : ModWall
     {
         Main.wallHouse[Type] = true;
         AddMapEntry(new Color(51, 44, 48));
-        ItemDrop = ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>();
         DustType = DustID.Wraith;
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,7 +15,7 @@ public class RhodiumBrick : ModTile
         Main.tileMerge[Type][TileID.WoodBlock] = true;
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.RhodiumBrick>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.RhodiumBrick>();
         HitSound = SoundID.Tink;
         DustType = DustID.t_LivingWood;
     }

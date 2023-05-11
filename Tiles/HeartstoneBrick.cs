@@ -12,7 +12,7 @@ public class HeartstoneBrick : ModTile
         AddMapEntry(new Color(173, 0, 38));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.HeartstoneBrick>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.HeartstoneBrick>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.HeartstoneDust>();
     }

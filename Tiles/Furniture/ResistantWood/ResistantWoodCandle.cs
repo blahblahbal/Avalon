@@ -20,7 +20,7 @@ public class ResistantWoodCandle : ModTile
         TileObjectData.newTile.CoordinateHeights = new int[] { 20 };
         TileObjectData.newTile.DrawYOffset = -4;
         TileObjectData.addTile(Type);
-        ItemDrop = ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodCandle>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodCandle>();
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         AddMapEntry(new Color(253, 221, 3));

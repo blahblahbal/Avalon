@@ -15,7 +15,7 @@ public class SepsisBlock : ModTile
         Main.tileMergeDirt[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileBrick[Type] = true;
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.SepsisBlock>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.SepsisBlock>();
         DustType = ModContent.DustType<ContagionDust>();
         HitSound = SoundID.NPCDeath1;
     }

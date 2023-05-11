@@ -29,7 +29,7 @@ public class OrangeBrickPlatform : ModTile
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
         AddMapEntry(new Color(166, 87, 45));
-        ItemDrop = ModContent.ItemType<Items.Placeable.Tile.OrangeBrickPlatform>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.OrangeBrickPlatform>();
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.Platforms };
         DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
