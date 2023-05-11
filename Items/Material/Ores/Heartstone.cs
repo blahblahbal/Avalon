@@ -32,6 +32,6 @@ class Heartstone : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(ItemID.LifeCrystal).AddIngredient(this, 45).AddTile(TileID.Furnaces).Register();
-        Recipe.Create(Type, 45).AddIngredient(this).AddTile(TileID.Furnaces).Register();
+        Recipe.Create(Type, 45).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.Furnaces).Register();
     }
 }
