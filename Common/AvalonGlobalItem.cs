@@ -296,11 +296,35 @@ public class AvalonGlobalItem : GlobalItem
             }
             if (item.type == ItemID.BlueSolution)
             {
-                tooltipLine.Text = "Cyan Solution";
+                tooltipLine.Text = "Hallow Solution";
             }
             if (item.type == ItemID.DarkBlueSolution)
             {
-                tooltipLine.Text = "Blue Solution";
+                tooltipLine.Text = "Glowing Mushroom Solution";
+            }
+            if (item.type == ItemID.GreenSolution)
+            {
+                tooltipLine.Text = "Purity Solution";
+            }
+            if (item.type == ItemID.PurpleSolution)
+            {
+                tooltipLine.Text = "Corruption Solution";
+            }
+            if (item.type == ItemID.RedSolution)
+            {
+                tooltipLine.Text = "Crimson Solution";
+            }
+            if (item.type == ItemID.SandSolution)
+            {
+                tooltipLine.Text = "Desert Solution";
+            }
+            if (item.type == ItemID.SnowSolution)
+            {
+                tooltipLine.Text = "Snow Solution";
+            }
+            if (item.type == ItemID.DirtSolution)
+            {
+                tooltipLine.Text = "Forest Solution";
             }
             if (item.type == ItemID.FrostsparkBoots)
             {
