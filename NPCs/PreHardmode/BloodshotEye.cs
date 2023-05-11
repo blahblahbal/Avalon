@@ -88,11 +88,11 @@ public class BloodshotEye : ModNPC
         npcLoot.Add(ItemDropRule.Common(ItemID.BlackLens, 33));
     }
 
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
-        NPC.damage = (int)(NPC.damage * 0.6f);
-    }
+    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+    //{
+    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
+    //    NPC.damage = (int)(NPC.damage * 0.6f);
+    //}
 
     public override void FindFrame(int frameHeight)
     {

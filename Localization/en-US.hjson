@@ -2121,6 +2121,11 @@ Mods: {
 				Tooltip: Increases damage by 15%
 			}
 
+			NickelAnvil: {
+				DisplayName: Nickel Anvil
+				Tooltip: Used to craft items from metal bars
+			}
+
 			BismuthChainmail: {
 				DisplayName: Bismuth Chainmail
 				Tooltip: ""
@@ -4247,6 +4252,7 @@ Mods: {
 			ContagionDesert.DisplayName: Contagion Desert
 			DungeonAltColors.DisplayName: Dungeon Alt Colors
 			UndergroundContagion.DisplayName: Underground Contagion
+			AshenOvergrowth.DisplayName: Ashen Overgrowth
 		}
 
 		World: {

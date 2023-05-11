@@ -3,6 +3,7 @@ using Avalon.Players;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -33,6 +34,8 @@ public class BiomeTileCounts : ModSystem
     public int DarkMonolithTiles { get; private set; }
     public int ContagionDesertTiles { get; private set; }
 
+    public int AshenOvergrowthTiles { get; private set; }
+
     public override void TileCountsAvailable(ReadOnlySpan<int> tileCounts)
     {
         HellCastleTiles = tileCounts[ModContent.TileType<ImperviousBrick>()];
@@ -43,6 +46,9 @@ public class BiomeTileCounts : ModSystem
                          tileCounts[ModContent.TileType<Ickgrass>()] +
                          tileCounts[ModContent.TileType<Snotsand>()] +
                          tileCounts[ModContent.TileType<YellowIce>()];
+
+        AshenOvergrowthTiles = tileCounts[TileID.AshGrass] + 
+                               tileCounts[TileID.AshPlants];
         /*Main.SceneMetrics.JungleTileCount += tileCounts[ModContent.TileType<GreenIce>()];
         Main.SceneMetrics.SandTileCount += tileCounts[ModContent.TileType<Snotsand>()];
         ContagionDesertTiles += tileCounts[ModContent.TileType<Snotsand>()];
