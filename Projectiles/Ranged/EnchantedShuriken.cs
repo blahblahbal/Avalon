@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -34,24 +35,85 @@ public class EnchantedShuriken : ModProjectile
         if (Projectile.ai[0] >= 20f)
         {
             Projectile.velocity.Y = Projectile.velocity.Y + 0.4f;
-            Projectile.velocity.X = Projectile.velocity.X * 0.97f;
+            Projectile.velocity.X = Projectile.velocity.X * 0.99f;
         }
         if (Projectile.velocity.Y > 16f)
         {
             Projectile.velocity.Y = 16f;
         }
+
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Projectile.Center;
+        particleOrchestraSettings.MovementVector = Projectile.velocity * 0.5f;
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        if (Main.timeForVisualEffects % 16 == 0 && Main.timeForVisualEffects % 32 != 0)
+        {
+            ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
+        }
+        else if (Main.timeForVisualEffects % 32 == 0)
+        {
+            ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
+        }
+    }
+
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+    {
+        //if (hit.Crit && Main.myPlayer == Projectile.owner)
+        //{
+        //    ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        //    particleOrchestraSettings.PositionInWorld = Projectile.Center;
+        //    particleOrchestraSettings.MovementVector = target.velocity;
+        //    ParticleOrchestraSettings settings = particleOrchestraSettings;
+        //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.TrueExcalibur, settings, Projectile.owner);
+        //    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -6) + target.velocity, Type, Projectile.damage, Projectile.knockBack, Projectile.owner);
+        //}
+        OnHitAnything();
+    }
+    public override void OnHitPlayer(Player target, Player.HurtInfo info)
+    {
+        OnHitAnything();
+    }
+    void OnHitAnything()
+    {
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Projectile.Center;
+        particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(3, 3);
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
+        particleOrchestraSettings.PositionInWorld = Projectile.Center;
+        particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(3, 3);
+        settings = particleOrchestraSettings;
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
     }
     public override void Kill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
-        for (int i = 0; i < 15; i++)
+        //for (int i = 0; i < 15; i++)
+        //{
+        //    var Sparkle = Dust.NewDust(new Vector2(Projectile.Center.X, Projectile.Center.Y), 8, 8, DustID.RedTorch, 0f, 0f, 100, default(Color), 1.25f);
+        //    Main.dust[Sparkle].velocity *= 0.8f;
+        //}
+        for (int i = 0; i < 2; i++)
         {
-            var Sparkle = Dust.NewDust(new Vector2(Projectile.Center.X, Projectile.Center.Y), 8, 8, DustID.MagicMirror, 0f, 0f, 100, default(Color), 1.25f);
-            Main.dust[Sparkle].velocity *= 0.8f;
+            ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+            particleOrchestraSettings.PositionInWorld = Projectile.Center;
+            particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(3,3);
+            ParticleOrchestraSettings settings = particleOrchestraSettings;
+            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
+            particleOrchestraSettings.PositionInWorld = Projectile.Center;
+            particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(3, 3);
+            settings = particleOrchestraSettings;
+            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
         }
-        int I = Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.getRect(), ModContent.ItemType<Items.Weapons.Ranged.PreHardmode.EnchantedShuriken>(), 1, true);
-        Main.item[I].useLimitPerAnimation = Projectile.owner;
-        NetMessage.SendData(MessageID.SyncItem,-1,-1,Terraria.Localization.NetworkText.Empty,I);
+        //ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        //particleOrchestraSettings.PositionInWorld = Projectile.Center;
+        //particleOrchestraSettings.MovementVector = Vector2.Lerp(-Projectile.oldVelocity, Projectile.oldVelocity, Main.rand.NextFloat()) * 0.5f;
+        //ParticleOrchestraSettings settings = particleOrchestraSettings;
+        //ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
+        //particleOrchestraSettings.PositionInWorld = Projectile.Center;
+        //particleOrchestraSettings.MovementVector = Vector2.Lerp(-Projectile.oldVelocity, Projectile.oldVelocity, Main.rand.NextFloat()) * 0.5f;
+        //settings = particleOrchestraSettings;
+        //ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
     }
 
     public override Color? GetAlpha(Color lightColor)

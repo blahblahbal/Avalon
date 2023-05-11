@@ -62,8 +62,8 @@ public class BacteriumPrime : ModNPC
         NPC.damage = 31;
         NPC.boss = true;
         NPC.noTileCollide = true;
-        NPC.lifeMax = 3250;
-        NPC.defense = 12;
+        NPC.lifeMax = 3100;
+        NPC.defense = 9;
         NPC.noGravity = true;
         NPC.width = 120;
         NPC.aiStyle = -1;
@@ -215,14 +215,14 @@ public class BacteriumPrime : ModNPC
             }
             if (NPC.ai[0] < -5)
             {
-                NPC.ai[1] = -Main.rand.Next(-100, 100);
+                NPC.ai[1] = -Main.rand.Next(50, 200);
                 NPC.noTileCollide = true;
                 speed = -NPC.ai[0];
                 NPC.velocity = NPC.velocity.RotatedBy(LorR * Main.rand.NextFloat(-0.001f,-0.025f));
             }
-            if (NPC.ai[0] % 4 == 0 && Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] < 60)
+            if (NPC.ai[0] % 4 == 0 && Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] < 60 && NPC.ai[0] > 5)
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(2, 2), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
             }
 
             //NPC.ai[0]++;

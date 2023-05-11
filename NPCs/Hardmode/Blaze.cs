@@ -55,11 +55,11 @@ public class Blaze : ModNPC
         DrawOffsetY = 10;
     }
 
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
-        NPC.damage = (int)(NPC.damage * 0.62f);
-    }
+    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+    //{
+    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
+    //    NPC.damage = (int)(NPC.damage * 0.62f);
+    //}
 
     public override void PostDraw(SpriteBatch spriteBatch, Vector2 vector, Color drawColor)
     {

@@ -1,6 +1,9 @@
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -20,24 +23,43 @@ public class BacteriumGas : ModProjectile
         Projectile.ignoreWater = true;
         Projectile.hostile = true;
         Projectile.scale = 1f;
+        Projectile.tileCollide = false;
         //Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
     }
 
+    public override void OnSpawn(IEntitySource source)
+    {
+        if (Main.expertMode)
+            Projectile.damage /= 2;
+    }
     public override void AI()
     {
+        if (Projectile.ai[1] == 0 && !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
+            Projectile.tileCollide = true;
+
+        Projectile.ai[0]++;
         if (Projectile.ai[2] > 1)
-        Projectile.alpha += 1;
+        {
+            if(Projectile.ai[0] % 3 == 0 && Main.expertMode)
+            Projectile.alpha += 1;
+            else if (Projectile.ai[0] % 2 == 0 && !Main.expertMode)
+                Projectile.alpha += 1;
+            if (Projectile.alpha > 200)
+                Projectile.alpha += 4;
+        }
         else
-        Projectile.alpha -= 7;
+            Projectile.alpha -= 7;
 
         if (Projectile.alpha <= 100)
             Projectile.ai[2]++;
 
         if (Projectile.alpha == 255) Projectile.Kill();
 
-        Projectile.velocity = Projectile.velocity.RotatedByRandom(0.1f) * 0.985f;
+        Projectile.velocity = Vector2.Lerp(Projectile.velocity.RotatedByRandom(0.1f),new Vector2(1,0).RotatedBy(Projectile.velocity.ToRotation()),0.003f);
         Projectile.rotation += MathHelper.Clamp(Projectile.velocity.Length() * 0.1f, -0.3f, 0.3f);
-        Projectile.scale *= 1.003f;
+        Projectile.scale *= 1.001f;
+        if (!Collision.SolidCollision(Projectile.Center, 1, 1))
+        Lighting.AddLight(Projectile.Center, new Vector3(1, 0.8f, 0.2f) * Projectile.Opacity);
 
         //if (Main.rand.NextBool(3))
         //{
@@ -50,7 +72,7 @@ public class BacteriumGas : ModProjectile
 
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
-        if(Main.expertMode)
+        if(Main.expertMode && Main.rand.NextBool())
         target.AddBuff(BuffID.Blackout, 3 * 60);
 
         target.AddBuff(BuffID.Darkness, 5 * 60);
@@ -64,6 +86,11 @@ public class BacteriumGas : ModProjectile
 
     //}
 
+    public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+    {
+        modifiers.HitDirectionOverride = 0;
+        base.ModifyHitPlayer(target, ref modifiers);
+    }
     public override bool PreDraw(ref Color lightColor)
     {
         ClassExtensions.DrawGas(Texture, lightColor, Projectile, 4, 6);
@@ -83,6 +110,7 @@ public class BacteriumGas : ModProjectile
     {
         Projectile.velocity = oldVelocity * Main.rand.NextFloat(-0.2f,0.2f);
         Projectile.tileCollide = false;
+        Projectile.ai[1]++;
         return false;
     }
 }

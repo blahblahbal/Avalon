@@ -86,11 +86,11 @@ public class Ickslime : ModNPC
         NPC.Size *= NPC.scale;
         NPC.life = NPC.lifeMax;
     }
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
-        NPC.damage = (int)(NPC.damage * 0.45f);
-    }
+    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+    //{
+    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
+    //    NPC.damage = (int)(NPC.damage * 0.45f);
+    //}
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Avalon.Common;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Melee.PreHardmode;
@@ -44,11 +44,11 @@ public class FallenHero : ModNPC
         //BannerItem = ModContent.ItemType<FallenHeroBanner>();
     }
 
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.5f);
-    }
+    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+    //{
+    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
+    //    NPC.damage = (int)(NPC.damage * 0.5f);
+    //}
 
     public override void FindFrame(int frameHeight)
     {
