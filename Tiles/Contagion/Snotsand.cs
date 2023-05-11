@@ -25,6 +25,7 @@ public class Snotsand : ModTile
         //TileID.Sets.TouchDamageSands[Type] = 0;
         TileID.Sets.Falling[Type] = true;
         TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
+        Common.TileMerge.MergeWith(Type, ModContent.TileType<Snotsandstone>());
         //ItemDrop = ModContent.ItemType<SnotsandBlock>();
         DustType = DustID.ScourgeOfTheCorruptor;
     }
