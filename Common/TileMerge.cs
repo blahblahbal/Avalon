@@ -1,4 +1,5 @@
 using Terraria;
+using Terraria.ModLoader;
 
 namespace Avalon.Common
 {
@@ -671,6 +672,11 @@ namespace Avalon.Common
         public static void MergeWithFrame(int x, int y, int myType, int mergeType, bool forceSameDown = false, bool forceSameUp = false, bool forceSameLeft = false, bool forceSameRight = false, bool resetFrame = true)
         {
             MergeWithFrameExplicit(x, y, myType, mergeType, out _, out _, out _, out _, forceSameDown, forceSameUp, forceSameLeft, forceSameRight, resetFrame);
+
+            //if (myType == ModContent.TileType<Tiles.Contagion.Snotsandstone>())
+            //{
+            //    MergeWithFrameExplicit(x, y, myType, ModContent.TileType<Tiles.Contagion.Snotsand>(), out _, out _, out _, out _, forceSameDown, forceSameUp, forceSameLeft, forceSameRight, resetFrame);
+            //}
         }
     }
 }

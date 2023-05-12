@@ -28,7 +28,7 @@ Mods: {
 
 			VanillaTextureReplacement: {
 				Label: Vanilla Texture Replacement
-				Tooltip: Changes some vanilla textures (DOES NOTHING YET)
+				Tooltip: Changes some vanilla textures
 			}
 
 			Renames: {
@@ -127,9 +127,32 @@ Mods: {
 				Tooltip: ""
 			}
 
+			MagmafrostBolt: {
+				DisplayName: Magmafrost Bolt
+				Tooltip: Casts a superfast-moving bolt of igneonic frost
+			}
+
 			FrozenLyre: {
 				DisplayName: Frozen Lyre
 				Tooltip: ""
+			}
+
+			PhantasmalBullet: {
+				DisplayName: Phantasmal Bullet
+				Tooltip:
+					'''
+					Phases through normal tiles
+					[c/C39FDD:10th Anniversary Contest Winner - QuibopWon]
+					'''
+			}
+
+			SpectralBullet: {
+				DisplayName: Spectral Bullet
+				Tooltip:
+					'''
+					Phases through normal tiles
+					[c/C39FDD:10th Anniversary Contest Winner - QuibopWon]
+					'''
 			}
 
 			GlacierStaff: {
@@ -150,6 +173,43 @@ Mods: {
 			Sporalash: {
 				DisplayName: Sporalash
 				Tooltip: Has a chance to poison
+			}
+
+			ViruthornHelmet: {
+				DisplayName: Viruthorn Helmet
+				Tooltip: 3% increased damage
+			}
+
+			ViruthornGreaves: {
+				DisplayName: Viruthorn Greaves
+				Tooltip: 3% increased damage
+			}
+
+			PeridotRobe: {
+				DisplayName: Peridot Robe
+				Tooltip:
+					'''
+					Increases maximum mana by 120
+					Reduces mana usage by 16%
+					'''
+			}
+
+			TourmalineRobe: {
+				DisplayName: Tourmaline Robe
+				Tooltip:
+					'''
+					Increases maximum mana by 100
+					Reduces mana usage by 15%
+					'''
+			}
+
+			ZirconRobe: {
+				DisplayName: Zircon Robe
+				Tooltip:
+					'''
+					Increases maximum mana by 120
+					Reduces mana usage by 18%
+					'''
 			}
 
 			Moonfury: {
@@ -3599,6 +3659,26 @@ Mods: {
 				DisplayName: Spoderman Suit
 				Tooltip: ""
 			}
+
+			CoughwoodBreastplate: {
+				DisplayName: Coughwood Breastplate
+				Tooltip: ""
+			}
+
+			CoughwoodGreaves: {
+				DisplayName: Coughwood Greaves
+				Tooltip: ""
+			}
+
+			CoughwoodHelmet: {
+				DisplayName: Coughwood Helmet
+				Tooltip: ""
+			}
+
+			CoughwoodSword: {
+				DisplayName: Coughwood Sword
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3677,6 +3757,9 @@ Mods: {
 			PathogenicDart.DisplayName: Pathogenic Dart
 			PathogenDartTrail.DisplayName: Pathogen Dart
 			PurpleHaze.DisplayName: Purple Haze
+			MagmafrostBolt.DisplayName: Magmafrost Bolt
+			PhantasmalBullet.DisplayName: Phantasmal Bullet
+			SpectralBullet.DisplayName: Spectral Bullet
 		}
 
 		NPCs: {
@@ -4169,22 +4252,27 @@ Mods: {
 
 			BacteriaInfection: {
 				DisplayName: Bacteria Infection
-				Description: Mods.Avalon.Buffs.BacteriaInfection.Description
+				Description: Yuck!
 			}
 
 			BacterialEndurance: {
 				DisplayName: Bacterial Endurance
-				Description: Mods.Avalon.Buffs.BacterialEndurance.Description
+				Description: Thorns effect and increased damage and jump speed
 			}
 
 			Pathogen: {
 				DisplayName: Pathogen
-				Description: Mods.Avalon.Buffs.Pathogen.Description
+				Description: Increases debuff time and reduces life regen
 			}
 
 			ImbuePathogen: {
 				DisplayName: Weapon Imbue: Pathogen
 				Description: Melee attacks decrease increase enemies debuff duration
+			}
+
+			IcySlowdown: {
+				DisplayName: Icy Slowdown
+				Description: You are slow
 			}
 		}
 

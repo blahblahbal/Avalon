@@ -8,7 +8,7 @@ class Zircon : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 25;
+        Item.ResearchUnlockCount = 15;
     }
 
     public override void SetDefaults()

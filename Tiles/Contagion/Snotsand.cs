@@ -23,12 +23,18 @@ public class Snotsand : ModTile
         TileID.Sets.GeneralPlacementTiles[Type] = false;
         TileID.Sets.ChecksForMerge[Type] = true;
         //TileID.Sets.TouchDamageSands[Type] = 0;
-        TileID.Sets.Falling[Type] = true;
+        //TileID.Sets.Falling[Type] = true;
         TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
         Common.TileMerge.MergeWith(Type, ModContent.TileType<Snotsandstone>());
         //ItemDrop = ModContent.ItemType<SnotsandBlock>();
         DustType = DustID.ScourgeOfTheCorruptor;
     }
+    //public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
+    //{
+    //    //Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<Snotsandstone>(), false, false, false, false, resetFrame);
+    //    return true;
+    //}
+
     //public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     //{
     //    if (WorldGen.noTileActions)

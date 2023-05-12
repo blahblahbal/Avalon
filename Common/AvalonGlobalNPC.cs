@@ -3,6 +3,7 @@ using Avalon.Common.Players;
 using Avalon.DropConditions;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Shards;
@@ -539,11 +540,21 @@ public class AvalonGlobalNPC : GlobalNPC
         return base.CheckDead(npc);
     }
 
+    public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+    {
+        var desertPostBeakCondition = new DesertPostBeakDrop();
+
+        globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumHeadgear>(), 150));
+        globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumPlateMail>(), 150));
+        globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumGreaves>(), 150));
+    }
+
     public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
     {
         var hardModeCondition = new HardmodeOnly();
         var notFromStatueCondition = new Conditions.NotFromStatue();
         var notExpertCondition = new Conditions.NotExpert();
+        
 
         var preHardModeCondition = new Invert(hardModeCondition);
         //var superHardModeCondition = new Superhardmode();
