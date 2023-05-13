@@ -3734,6 +3734,11 @@ Mods: {
 				DisplayName: Wheezebow
 				Tooltip: ""
 			}
+
+			SanguineKabuto: {
+				DisplayName: Sanguine Kabuto
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

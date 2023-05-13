@@ -104,6 +104,8 @@ public class AvalonPlayer : ModPlayer
     public bool EtherealHeart;
     public bool BloodyWhetstone;
     public bool FrostGauntlet;
+    public bool SlimeBand;
+    public bool NoSticky;
     #endregion
 
     #region buffs and debuffs
@@ -136,6 +138,7 @@ public class AvalonPlayer : ModPlayer
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
 
+        // buffs
         AdvancedBattle = false;
         AdvancedCalming = false;
         Lucky = false;
@@ -144,7 +147,10 @@ public class AvalonPlayer : ModPlayer
         NinjaPotion = false;
         HeartsickElixir = false;
         CaesiumPoison = false;
+        Pathogen = false;
+        PathogenImbue = false;
 
+        // accessories
         TrapImmune = false;
         PulseCharm = false;
         ShadowCharm = false;
@@ -164,8 +170,8 @@ public class AvalonPlayer : ModPlayer
         BadgeOfBacteria = false;
         BacterialEndurance = false;
         FrostGauntlet = false;
-        Pathogen = false;
-        PathogenImbue = false;
+        SlimeBand = false;
+        NoSticky = false;
 
         SnotOrb = false;
 
@@ -826,5 +832,48 @@ public class AvalonPlayer : ModPlayer
         //    }
         //}
         #endregion
+    }
+    public override void PostUpdateRunSpeeds()
+    {
+        FloorVisualsAvalon(Player.velocity.Y > Player.gravity);
+    }
+    public void FloorVisualsAvalon(bool falling)
+    {
+        int num = (int)((Player.position.X + (Player.width / 2)) / 16f);
+        int num2 = (int)((Player.position.Y + Player.height) / 16f);
+        Tile? floorTile = Player.GetFloorTile(num, num2);
+        int num3 = -1;
+        if (floorTile.HasValue)
+        {
+            num3 = floorTile.Value.TileType;
+        }
+        if (num3 <= -1)
+        {
+            Player.ResetFloorFlags();
+            return;
+        }
+
+        if (num3 > -1)
+        {
+            if (num3 == 229 && !NoSticky)
+            {
+                Player.sticky = true;
+            }
+            else
+            {
+                Player.sticky = false;
+            }
+
+            if (SlimeBand) // || Player.GetModPlayer<ExxoBiomePlayer>().ZoneIceSoul)
+            {
+                Player.slippy = true;
+                Player.slippy2 = true;
+            }
+            else
+            {
+                Player.slippy = false;
+                Player.slippy2 = false;
+            }
+        }
     }
 }

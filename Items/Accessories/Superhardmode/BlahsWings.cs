@@ -46,7 +46,7 @@ internal class BlahsWings : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         //player.GetModPlayer<AvalonPlayer>().BlahWings = true;
-        //player.GetModPlayer<AvalonPlayer>().NoSticky = true;
+        player.GetModPlayer<AvalonPlayer>().NoSticky = true;
         player.pStone = true;
         player.GetModPlayer<AvalonPlayer>().TrapImmune =
             player.GetModPlayer<AvalonPlayer>().HeartGolem =

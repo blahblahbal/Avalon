@@ -10,6 +10,7 @@ using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Items.Other;
 using Avalon.Items.Placeable.Painting;
+using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
@@ -629,6 +630,13 @@ public class AvalonGlobalNPC : GlobalNPC
                 //    100, 1, 1, 7));
 
                 break;
+        }
+
+        if (npc.type is NPCID.BloodZombie or NPCID.Drippler)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SanguineKatana>(), 30));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BloodBarrage>(), 30));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Vanity.SanguineKabuto>(), 30));
         }
 
         #region mystical tome mats

@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -39,7 +40,7 @@ class InertiaBoots : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         //player.Avalon().noSticky = true;
-
+        player.GetModPlayer<AvalonPlayer>().NoSticky = true;
         player.accRunSpeed = 10.29f;
         // ADD BACK AFTER CAESIUM ARMOR ADDED
         //if (!player.GetModPlayer<ExxoEquipEffectPlayer>().CaesiumBoostActive)
