@@ -9,7 +9,7 @@ public class YellowBrick : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(79, 74, 51));//(82, 52, 156)); 94, 71, 117));
+        AddMapEntry(new Color(91, 84, 52));//(82, 52, 156)); 94, 71, 117));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileBrick[Type] = true;

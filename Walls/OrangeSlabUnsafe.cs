@@ -11,7 +11,7 @@ public class OrangeSlabUnsafe : ModWall
     {
         Main.wallDungeon[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWall>());
-        AddMapEntry(new Color(63, 36, 24));
+        AddMapEntry(new Color(79, 38, 33));
         DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
     }
 }
