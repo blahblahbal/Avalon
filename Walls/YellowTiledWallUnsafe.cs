@@ -11,7 +11,7 @@ public class YellowTiledWallUnsafe : ModWall
     {
         Main.wallDungeon[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>());
-        AddMapEntry(new Color(60, 59, 39));
+        AddMapEntry(new Color(55, 56, 36));
         DustType = ModContent.DustType<Dusts.YellowDungeonDust>();
     }
 }

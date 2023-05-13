@@ -11,7 +11,7 @@ public class YellowTiledWall : ModWall
     {
         Main.wallHouse[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>();
-        AddMapEntry(new Color(60, 59, 39));
+        AddMapEntry(new Color(55, 56, 36));
         DustType = ModContent.DustType<Dusts.YellowDungeonDust>();
     }
 }
