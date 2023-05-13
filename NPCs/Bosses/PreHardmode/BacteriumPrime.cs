@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Avalon.Common.Players;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material.Ores;
@@ -196,7 +197,7 @@ public class BacteriumPrime : ModNPC
             }
 
             NPC.ai[0]++;
-            if (NPC.ai[0] > 600)
+            if (NPC.ai[0] > 570)
             {
                 float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
                 int d = Dust.NewDust(NPC.Center + new Vector2(0, 180).RotatedBy(rotate), 0, 0, DustID.CorruptGibs, 0, 0, 50, default, 2);
@@ -209,6 +210,7 @@ public class BacteriumPrime : ModNPC
                 {
                     LorR *= -1;
                 }
+                NPC.netUpdate = true;
                 NPC.ai[0] = -60;
                 NPC.velocity = NPC.Center.DirectionTo(Target.Center).RotatedBy(LorR) * MathHelper.Clamp((NPC.Center.Distance(Target.position) * 0.025f),10,60);
                 SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.position);
@@ -385,21 +387,7 @@ public class BacteriumPrime : ModNPC
                 NPC.velocity.Y = MathHelper.Clamp(NPC.velocity.Y, -5, 5);
             }
         }
-        #endregion
-        //bool PlayerAlive = true;
-        //for(int i = 0; i < Main.maxPlayers; i++)
-        //{
-        //    if (!Main.player[i].dead && Main.player[i].position.Distance(NPC.position) < 16000)
-        //    {
-        //        break;
-        //        PlayerAlive = true;
-        //    }
-        //    else
-        //    {
-        //        PlayerAlive = false;
-        //    }
-        //}
-        //if (!PlayerAlive)
+        #endregion Phase 2
 
         if (Main.rand.NextBool(5))
         {

@@ -3679,6 +3679,11 @@ Mods: {
 				DisplayName: Coughwood Sword
 				Tooltip: ""
 			}
+
+			BacteriumPrimeMask: {
+				DisplayName: Bacterium Prime Mask
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

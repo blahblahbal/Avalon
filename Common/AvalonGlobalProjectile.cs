@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -31,6 +32,17 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             {
                 projectile.localAI[0] = 2;
                 SoundEngine.PlaySound(SoundID.Item8, projectile.position);
+            }
+        }
+        if (projectile.type == ProjectileID.PaladinsHammerFriendly)
+        {
+            if(Main.timeForVisualEffects % 2 == 0 && projectile.ai[1] != 0 && projectile.timeLeft > 3590)
+            {
+                ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+                particleOrchestraSettings.PositionInWorld = projectile.Center;
+                particleOrchestraSettings.MovementVector = projectile.velocity * 1f;
+                ParticleOrchestraSettings settings = particleOrchestraSettings;
+                ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PaladinsHammer, settings, projectile.owner);
             }
         }
         if (!projectile.npcProj && !projectile.noEnchantments && (projectile.DamageType == DamageClass.Melee || ProjectileID.Sets.IsAWhip[projectile.type]))

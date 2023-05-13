@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -50,6 +51,22 @@ public class AeonsEternity : ModItem
                 Main.projectile[P].scale = Main.rand.NextFloat(0.9f, 1.1f);
                 Main.projectile[P].rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
                 lastStar = P;
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+                particleOrchestraSettings.PositionInWorld = player.Center;
+                particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
+                ParticleOrchestraSettings settings = particleOrchestraSettings;
+                ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, player.whoAmI);
+                particleOrchestraSettings.PositionInWorld = player.Center;
+                particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
+                settings = particleOrchestraSettings;
+                ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PaladinsHammer, settings, player.whoAmI);
+                particleOrchestraSettings.PositionInWorld = player.Center;
+                particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
+                settings = particleOrchestraSettings;
+                ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, player.whoAmI);
             }
             TimesSwung = 0;
         }

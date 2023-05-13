@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -123,6 +124,20 @@ public class AeonStar : ModProjectile
         if (Main.myPlayer == Projectile.owner)
         {
             Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.Center,Vector2.Zero,ModContent.ProjectileType<AeonExplosion>(),Projectile.damage * 7, Projectile.knockBack * 2, Projectile.owner);
+        }
+        for (int i = 0; i < 2; i++)
+        {
+            ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+            particleOrchestraSettings.PositionInWorld = Projectile.Center;
+            particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
+            ParticleOrchestraSettings settings = particleOrchestraSettings;
+            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
+            particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
+            settings = particleOrchestraSettings;
+            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
+            particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
+            settings = particleOrchestraSettings;
+            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PaladinsHammer, settings, Projectile.owner);
         }
     }
 }
