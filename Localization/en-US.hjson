@@ -3497,6 +3497,16 @@ Mods: {
 				Tooltip: ""
 			}
 
+			ViruthornScalemail: {
+				DisplayName: Viruthorn Scalemail
+				Tooltip: 7% increased melee speed
+			}
+
+			GoldminePickaxe: {
+				DisplayName: Goldmine Pickaxe
+				Tooltip: Can mine Rhodium, Osmium, and Iridium
+			}
+
 			BacteriumPrimeBossBag: {
 				DisplayName: Treasure Bag (Bacterium Prime)
 				Tooltip: Right click to open
@@ -3684,6 +3694,46 @@ Mods: {
 				DisplayName: Bacterium Prime Mask
 				Tooltip: ""
 			}
+
+			AxeofSickness: {
+				DisplayName: Axe of Sickness
+				Tooltip: ""
+			}
+
+			ColdCatcher: {
+				DisplayName: Cold Catcher
+				Tooltip: ""
+			}
+
+			CoughwoodHammer: {
+				DisplayName: Coughwood Hammer
+				Tooltip: ""
+			}
+
+			MucusHammer: {
+				DisplayName: Mucus Hammer
+				Tooltip: ""
+			}
+
+			Snotsabre: {
+				DisplayName: Snotsabre
+				Tooltip: ""
+			}
+
+			TheCell: {
+				DisplayName: The Cell
+				Tooltip: ""
+			}
+
+			CoughwoodBow: {
+				DisplayName: Coughwood Bow
+				Tooltip: ""
+			}
+
+			Wheezebow: {
+				DisplayName: Wheezebow
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -3765,6 +3815,8 @@ Mods: {
 			MagmafrostBolt.DisplayName: Magmafrost Bolt
 			PhantasmalBullet.DisplayName: Phantasmal Bullet
 			SpectralBullet.DisplayName: Spectral Bullet
+			Cell.DisplayName: Cell
+			SnotlineBobber.DisplayName: Snotline Bobber
 		}
 
 		NPCs: {

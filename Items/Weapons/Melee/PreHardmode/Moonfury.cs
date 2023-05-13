@@ -49,11 +49,11 @@ class Moonfury : ModItem
             .AddIngredient(ModContent.ItemType<Sporalash>())
             .AddTile(TileID.DemonAltar).Register();
 
-        //Terraria.Recipe.Create(Type)
-        //    .AddIngredient(ItemID.BlueMoon)
-        //    .AddIngredient(ItemID.Sunfury)
-        //    .AddIngredient(ModContent.ItemType<TheCell>())
-        //    .AddIngredient(ModContent.ItemType<Sporalash>())
-        //    .AddTile(TileID.DemonAltar).Register();
+        Terraria.Recipe.Create(Type)
+            .AddIngredient(ItemID.BlueMoon)
+            .AddIngredient(ItemID.Sunfury)
+            .AddIngredient(ModContent.ItemType<TheCell>())
+            .AddIngredient(ModContent.ItemType<Sporalash>())
+            .AddTile(TileID.DemonAltar).Register();
     }
 }

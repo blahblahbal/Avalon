@@ -18,9 +18,9 @@ class ViruthornHelmet : ModItem
         Rectangle dims = this.GetDims();
         Item.defense = 6;
         Item.rare = ItemRarityID.Blue;
-        Item.width = dims.Width;
+        Item.width = 18;
+        Item.height = 18;
         Item.value = Item.sellPrice(0, 0, 54, 0);
-        Item.height = dims.Height;
     }
     public override void AddRecipes()
     {

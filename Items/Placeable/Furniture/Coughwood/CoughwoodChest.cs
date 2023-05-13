@@ -29,11 +29,11 @@ internal class CoughwoodChest : ModItem
         Item.height = dims.Height;
     }
 
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe()
-    //        .AddIngredient(ModContent.ItemType<Coughwood>(), 8)
-    //        .AddRecipeGroup("IronBar", 2)
-    //        .AddTile(TileID.WorkBenches).Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 8)
+            .AddRecipeGroup("IronBar", 2)
+            .AddTile(TileID.WorkBenches).Register();
+    }
 }

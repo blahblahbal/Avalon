@@ -29,7 +29,7 @@ class CoughwoodHelmet : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Placeable.Tile.Coughwood>(), 25)
+            .AddIngredient(ModContent.ItemType<Placeable.Tile.Coughwood>(), 20)
             .AddTile(TileID.WorkBenches)
             .Register();
     }
