@@ -30,10 +30,10 @@ class ViruthornHelmet : ModItem
             .AddTile(TileID.Anvils)
             .Register();
     }
-    //public override bool IsArmorSet(Item head, Item body, Item legs)
-    //{
-    //    return body.type == ModContent.ItemType<ViruthornScalemail>() && legs.type == ModContent.ItemType<ViruthornGreaves>();
-    //}
+    public override bool IsArmorSet(Item head, Item body, Item legs)
+    {
+        return body.type == ModContent.ItemType<ViruthornScalemail>() && legs.type == ModContent.ItemType<ViruthornGreaves>();
+    }
 
     public override void UpdateArmorSet(Player player)
     {

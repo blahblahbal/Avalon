@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using ReLogic.Content;
 using Terraria.GameContent;
+using Avalon.Dusts;
 
 namespace Avalon.Projectiles.Melee;
 
@@ -39,7 +40,7 @@ public class Cell : ModProjectile
     public override void SetStaticDefaults()
     {
         // These lines facilitate the trail drawing
-        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
+        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 9;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
     }
 
@@ -75,6 +76,12 @@ public class Cell : ModProjectile
             Projectile.Kill();
             return;
         }
+
+        Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(6,6), ModContent.DustType<ContagionWeapons>(), Projectile.velocity.RotatedByRandom(1f) * 0.2f, 128);
+        d.fadeIn = 1;
+        d.noGravity= true;
+        d.scale = 1.5f;
+
 
         Vector2 mountedCenter = player.MountedCenter;
         bool doFastThrowDust = false;
@@ -298,27 +305,27 @@ public class Cell : ModProjectile
         Projectile.ownerHitCheck = shouldOwnerHitCheck; // This prevents attempting to damage enemies without line of sight to the player. The custom Colliding code for spinning makes this necessary.
 
         // This rotation code is unique to this flail, since the sprite isn't rotationally symmetric and has tip.
-        bool freeRotation = CurrentAIState == AIState.Ricochet || CurrentAIState == AIState.Dropping;
-        if (freeRotation)
-        {
-            if (Projectile.velocity.Length() > 1f)
-                Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
-            else
-                Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
-        }
-        else
-        {
-            Vector2 vectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
-            Projectile.rotation = vectorTowardsPlayer.ToRotation() + MathHelper.PiOver2;
-        }
+        //bool freeRotation = CurrentAIState == AIState.Ricochet || CurrentAIState == AIState.Dropping;
+        //if (freeRotation)
+        //{
+        //    if (Projectile.velocity.Length() > 1f)
+        //        Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
+        //    else
+        //        Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
+        //}
+        //else
+        //{
+        //    Vector2 vectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
+        //    Projectile.rotation = vectorTowardsPlayer.ToRotation() + MathHelper.PiOver2;
+        //}
 
         // If you have a ball shaped flail, you can use this simplified rotation code instead
-        /*
+
         if (Projectile.velocity.Length() > 1f)
             Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
         else
             Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
-        */
+
 
         Projectile.timeLeft = 2; // Makes sure the flail doesn't die (good when the flail is resting on the ground)
         player.heldProj = Projectile.whoAmI;
@@ -378,10 +385,11 @@ public class Cell : ModProjectile
         if (impactIntensity > 0)
         {
             Projectile.netUpdate = true;
-            for (int i = 0; i < impactIntensity; i++)
-            {
-                Collision.HitTiles(Projectile.position, velocity, Projectile.width, Projectile.height);
-            }
+            Point scanAreaStart = Projectile.TopLeft.ToTileCoordinates();
+            Point scanAreaEnd = Projectile.BottomRight.ToTileCoordinates();
+            Projectile.CreateImpactExplosion(2, Projectile.Center, ref scanAreaStart, ref scanAreaEnd, Projectile.width, out var causedShockwaves);
+            Projectile.CreateImpactExplosion2_FlailTileCollision(Projectile.Center, causedShockwaves, Projectile.oldVelocity);
+            Projectile.position -= Projectile.oldVelocity;
 
             SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
         }
@@ -510,13 +518,15 @@ public class Cell : ModProjectile
         if (CurrentAIState == AIState.LaunchingForward)
         {
             Texture2D projectileTexture = TextureAssets.Projectile[Projectile.type].Value;
-            Vector2 drawOrigin = new Vector2(projectileTexture.Width * 0.5f, Projectile.height * 0.5f);
+            Vector2 drawOrigin = new Vector2(projectileTexture.Width * 0.5f, projectileTexture.Height * 0.5f);
             SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             for (int k = 0; k < Projectile.oldPos.Length && k < StateTimer; k++)
             {
-                Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-                Color color = Projectile.GetAlpha(lightColor) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-                Main.spriteBatch.Draw(projectileTexture, drawPos, null, color, Projectile.rotation, drawOrigin, Projectile.scale - k / (float)Projectile.oldPos.Length / 3, spriteEffects, 0f);
+                //Projectile.GetAlpha(lightColor)
+                Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(DrawOffsetX, Projectile.gfxOffY);
+                drawPos.Y -= (projectileTexture.Height / 4) - 1;
+                Color color = new Color(75,75,75,0) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+                Main.spriteBatch.Draw(projectileTexture, drawPos, null, color, Projectile.rotation, drawOrigin, (Projectile.scale + 0.1f) - k / (float)Projectile.oldPos.Length, spriteEffects, 0f);
             }
         }
         return true;
