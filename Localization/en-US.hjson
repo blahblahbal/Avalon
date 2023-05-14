@@ -3739,6 +3739,36 @@ Mods: {
 				DisplayName: Sanguine Kabuto
 				Tooltip: ""
 			}
+
+			ResistantWoodHammer: {
+				DisplayName: Resistant Wood Hammer
+				Tooltip: ""
+			}
+
+			ResistantWoodSword: {
+				DisplayName: Resistant Wood Sword
+				Tooltip: ""
+			}
+
+			ResistantWoodBow: {
+				DisplayName: Resistant Wood Bow
+				Tooltip: ""
+			}
+
+			ResistantWoodBreastplate: {
+				DisplayName: Resistant Wood Breastplate
+				Tooltip: ""
+			}
+
+			ResistantWoodGreaves: {
+				DisplayName: Resistant Wood Greaves
+				Tooltip: ""
+			}
+
+			ResistantWoodHelmet: {
+				DisplayName: Resistant Wood Helmet
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
