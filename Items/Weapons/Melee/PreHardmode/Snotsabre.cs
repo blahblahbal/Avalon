@@ -46,7 +46,7 @@ class Snotsabre : ModItem
             for (int i = 0; i < Main.npc.Length; i++)
             {
                 NPC npc = Main.npc[i];
-                if (npc.Center.Distance(target.Center) < 200 && npc.active && !npc.friendly && npc != target && !NPCID.Sets.ProjectileNPC[npc.netID])
+                if (npc.Center.Distance(target.Center) < 200 && npc.active && !npc.friendly && npc != target)
                 {
                     npc.SimpleStrikeNPC((int)(hit.Damage * 0.4f), 0, hit.Crit, 0, hit.DamageType, true, player.luck);
                     npc.AddBuff(BuffID.Poisoned, 4 * 60);
