@@ -1,4 +1,5 @@
 using Avalon.Buffs;
+using Avalon.Dusts;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -647,7 +648,7 @@ public class AvalonStaminaPlayer : ModPlayer
                     SoundEngine.PlaySound(SoundID.MaxMana);
                     for (int i = 0; i < 5; i++)
                     {
-                        int num2 = Dust.NewDust(Player.position, Player.width, Player.height, DustID.ManaRegeneration, 0f, 0f, 255, default(Color), Main.rand.Next(20, 26) * 0.1f);
+                        int num2 = Dust.NewDust(Player.position, Player.width, Player.height, ModContent.DustType<StaminaRegeneration>(), 0f, 0f, 255, default(Color), Main.rand.Next(20, 26) * 0.1f);
                         Main.dust[num2].noLight = true;
                         Main.dust[num2].noGravity = true;
                         Main.dust[num2].velocity *= 0.5f;

@@ -186,11 +186,37 @@ public class AvalonPlayer : ModPlayer
         }
     }
 
+    public bool PotionSicknessSoundPlayed;
     public override void PostUpdateBuffs()
     {
         if (Player.lifeRegen < 0 && Pathogen)
         {
             Player.lifeRegen = (int)(Player.lifeRegen * 1.5f);
+        }
+
+        if (Main.netMode != NetmodeID.MultiplayerClient)
+        {
+            int PSickness = 0;
+            for (int i = 0; i < Player.buffType.Length; i++)
+            {
+                PSickness = i;
+                if (Player.buffType[i] == BuffID.PotionSickness)
+                    break;
+            }
+            if (Player.buffTime[PSickness] == 1 && PotionSicknessSoundPlayed != true)
+            {
+                SoundEngine.PlaySound(SoundID.MaxMana);
+                for (int i = 0; i < 5; i++)
+                {
+                    int num2 = Dust.NewDust(Player.position, Player.width, Player.height, ModContent.DustType<LifeRegeneration>(), 0f, 0f, 0, default(Color), Main.rand.Next(20, 26) * 0.1f);
+                    Main.dust[num2].noLight = true;
+                    Main.dust[num2].noGravity = true;
+                    Main.dust[num2].velocity *= 0.5f;
+                }
+                PotionSicknessSoundPlayed = true;
+            }
+            if (Player.buffTime[PSickness] == 0)
+                PotionSicknessSoundPlayed = false;
         }
     }
     public override void PreUpdateBuffs()

@@ -30,6 +30,11 @@ class Wheezebow : ModItem
         Item.value = Item.sellPrice(0, 0, 36, 0);
         Item.useAnimation = 20;
     }
+
+    public override Vector2? HoldoutOffset()
+    {
+        return new Vector2(0, 0);
+    }
     public override void AddRecipes()
     {
         CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Bars.BacciliteBar>(), 9).AddTile(TileID.Anvils).Register();
