@@ -13,14 +13,14 @@ class IridiumGreatsword : ModItem
 
     public override void SetDefaults()
     {
-        Item.width = 38;
-        Item.height = 40;
+        Item.width = 34;
+        Item.height = 36;
         Item.damage = 30;
         Item.crit = 6;
         Item.rare = ItemRarityID.LightRed;
         Item.autoReuse = true;
         Item.useTurn = true;
-        Item.scale = 1.4f;
+        //Item.scale = 1.4f;
         Item.useTime = 18;
         Item.knockBack = 5.4f;
         Item.DamageType = DamageClass.Melee;
