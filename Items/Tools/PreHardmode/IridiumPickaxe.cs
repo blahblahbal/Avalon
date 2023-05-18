@@ -12,8 +12,8 @@ class IridiumPickaxe : ModItem
     }
     public override void SetDefaults()
     {
-        Item.width = 34;
-        Item.height = 36;
+        Item.width = 30;
+        Item.height = 32;
         Item.UseSound = SoundID.Item1;
         Item.damage = 15;
         Item.autoReuse = true;

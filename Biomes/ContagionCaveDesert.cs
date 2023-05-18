@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Biomes;
 
-public class ContagionDesert : ModBiome
+public class ContagionCaveDesert : ModBiome
 {
     public override SceneEffectPriority Priority => SceneEffectPriority.BiomeHigh;
     public override ModWaterStyle WaterStyle => ModContent.Find<ModWaterStyle>("Avalon/ContagionWaterStyle");
@@ -18,7 +18,7 @@ public class ContagionDesert : ModBiome
     {
         get
         {
-            return ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Contagion") : MusicID.Crimson;
+            return ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/UndergroundContagion") : MusicID.UndergroundCrimson;
         }
     }
     public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle =>
@@ -36,9 +36,8 @@ public class ContagionDesert : ModBiome
     //        return ModContent.GetInstance<ContagionUndergroundBackground>();
     //    }
     //}
-
     public override bool IsBiomeActive(Player player)
     {
-        return ModContent.GetInstance<BiomeTileCounts>().ContagionDesertTiles > 350 && player.ZoneOverworldHeight;
+        return ModContent.GetInstance<BiomeTileCounts>().ContagionDesertTiles > 350 && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight);
     }
 }

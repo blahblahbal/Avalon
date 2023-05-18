@@ -36,12 +36,13 @@ public class Viriling : ModNPC
         NPC.scale = 1f;
         NPC.alpha = 128;
         NPC.noTileCollide = true;
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("They do something I think idk I'm not a writer.")
+            new FlavorTextBestiaryInfoElement("Unfinished creatures of the Contagion, intelligent enough to avenge their parent from day one of their existance.")
         });
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)

@@ -4453,6 +4453,8 @@ Mods: {
 			DungeonAltColors.DisplayName: Dungeon Alt Colors
 			UndergroundContagion.DisplayName: Underground Contagion
 			AshenOvergrowth.DisplayName: Ashen Overgrowth
+			ContagionUndergroundDesert.DisplayName: Contagion Underground Desert
+			ContagionCaveDesert.DisplayName: Contagion Cave Desert
 		}
 
 		World: {

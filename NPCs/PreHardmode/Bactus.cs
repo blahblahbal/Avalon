@@ -34,7 +34,7 @@ public class Bactus : ModNPC
         NPC.knockBackResist = 0.5f;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
         DrawOffsetY = 10;
     }
     public override void OnSpawn(IEntitySource source)
@@ -63,7 +63,7 @@ public class Bactus : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Bacti will swarm you if you're not careful. Watch out!")
+            new FlavorTextBestiaryInfoElement("Spawned from the Contagion as a carrier of disease, it desires nothing more than to see the world rot.")
         });
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
@@ -79,7 +79,7 @@ public class Bactus : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && spawnInfo.Player.ZoneOverworldHeight && !spawnInfo.Player.InPillarZone())
+        if ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) && !spawnInfo.Player.InPillarZone())
             return 1;
         return 0;
     }

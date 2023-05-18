@@ -24,7 +24,6 @@ public class FallenHero : ModNPC
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
             BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.BloodMoon,
-            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.NightTime,
             new FlavorTextBestiaryInfoElement("A hero, fallen into blood."),
         });
 

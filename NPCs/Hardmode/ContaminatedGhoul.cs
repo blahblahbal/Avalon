@@ -34,7 +34,7 @@ public class ContaminatedGhoul : ModNPC
         NPC.npcSlots = 0.5f;
         AIType = NPCID.DesertGhoulCorruption;
         AnimationType = 527;
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionCaveDesert>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
@@ -97,7 +97,7 @@ public class ContaminatedGhoul : ModNPC
         {
             for (int num207 = 0; (double)num207 < hit.Damage / (double)NPC.lifeMax * 20.0; num207++)
             {
-                Dust.NewDust(NPC.position, NPC.width, NPC.height, 5, hit.HitDirection, -1f);
+                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, hit.HitDirection, -1f);
                 if (Main.rand.NextBool(4)&& 75 > 0)
                 {
                     Dust dust59 = Main.dust[Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PathogenDust>())];
@@ -113,7 +113,7 @@ public class ContaminatedGhoul : ModNPC
         {
             for (int num208 = 0; num208 < 20; num208++)
             {
-                Dust.NewDust(NPC.position, NPC.width, NPC.height, 5, hit.HitDirection, -1f);
+                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, hit.HitDirection, -1f);
                 if (Main.rand.NextBool(3)&& 75 > 0)
                 {
                     Dust dust60 = Main.dust[Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PathogenDust>())];

@@ -13,12 +13,12 @@ public class OsmiumGreatsword : ModItem
 
     public override void SetDefaults()
     {
-        Item.width = 36;
-        Item.height = 38;
+        Item.width = 34;
+        Item.height = 36;
         Item.damage = 28;
         Item.autoReuse = true;
         Item.useTurn = true;
-        Item.scale = 1.5f;
+        //Item.scale = 1.5f;
         Item.crit += 5;
         Item.rare = ItemRarityID.Orange;
         Item.useTime = 20;

@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tools; 
+namespace Avalon.Items.Tools.PreHardmode; 
 
 public class OsmiumPickaxe : ModItem
 {
@@ -14,8 +14,8 @@ public class OsmiumPickaxe : ModItem
 
     public override void SetDefaults()
     {
-        Item.width = 34;
-        Item.height = 38;
+        Item.width = 30;
+        Item.height = 32;
         Item.damage = 13;
         Item.autoReuse = true;
         Item.useTurn = true;

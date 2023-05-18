@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -14,6 +14,7 @@ public abstract class EnergySlashTemplate : ModProjectile
     public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.NightsEdge);
+        Projectile.penetrate = 6;
     }
     public override bool PreDraw(ref Color lightColor)
     {

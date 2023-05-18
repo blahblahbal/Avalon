@@ -1,3 +1,4 @@
+using Avalon.Biomes;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Avalon.DropConditions;
@@ -20,6 +21,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
@@ -540,7 +542,13 @@ public class AvalonGlobalNPC : GlobalNPC
 
         return base.CheckDead(npc);
     }
-
+    public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+    {
+        if(npc.netID is 529 or 533)
+        {
+            bestiaryEntry.Info.Add(new ModBiomeBestiaryInfoElement(Mod, ModContent.GetInstance<ContagionCaveDesert>().DisplayName.Value, ModContent.GetInstance<ContagionCaveDesert>().BestiaryIcon, "Assets/Bestiary/ContagionBG", null));
+        }
+    }
     public override void ModifyGlobalLoot(GlobalLoot globalLoot)
     {
         var desertPostBeakCondition = new DesertPostBeakDrop();
@@ -549,7 +557,6 @@ public class AvalonGlobalNPC : GlobalNPC
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumPlateMail>(), 150));
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumGreaves>(), 150));
     }
-
     public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
     {
         var hardModeCondition = new HardmodeOnly();

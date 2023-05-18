@@ -13,13 +13,13 @@ class IridiumHamaxe : ModItem
 
     public override void SetDefaults()
     {
-        Item.width = 36;
-        Item.height = 40;
+        Item.width = 30;
+        Item.height = 32;
         Item.damage = 20;
         Item.autoReuse = true;
         Item.hammer = 75;
         Item.useTurn = true;
-        Item.scale = 1.2f;
+        //Item.scale = 1.2f;
         Item.axe = 22;
         Item.crit += 4;
         Item.rare = ItemRarityID.LightRed;

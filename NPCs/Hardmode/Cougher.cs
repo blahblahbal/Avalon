@@ -37,14 +37,14 @@ public class Cougher : ModNPC
         NPC.knockBackResist = 0.3f;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.CougherBanner>();
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
             new ModBiomeBestiaryInfoElement(Mod, "Contagion", "Assets/Bestiary/ContagionIcon", "Assets/Bestiary/ContagionBG", null),
-            new FlavorTextBestiaryInfoElement("Watch out for the coughing!")
+            new FlavorTextBestiaryInfoElement("Coughers fly around seeking prey to coat in their poisonous breath, Their breath contains a pathogen able to completely destroy their target's immune system making it easier for the contagion to infect.")
         });
     }
     //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)

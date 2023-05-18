@@ -52,7 +52,6 @@ public class HellboundLizard : CustomFighterAI
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new ModBiomeBestiaryInfoElement(Mod, "Hellcastle", "Assets/Bestiary/HellcastleIcon", "Assets/Bestiary/HellcastleBG", null),
             new FlavorTextBestiaryInfoElement("Similar in appearance to Lihzahrds, they run about in the Hellcastle, seemingly without purpose.")
         });
     }
