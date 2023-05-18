@@ -2,6 +2,7 @@ using Avalon.Assets;
 using Avalon.Common;
 using Avalon.Hooks;
 using Avalon.UI;
+using Avalon.UI.StatDisplay;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -37,6 +38,9 @@ public class ExxoAvalonOrigins : Mod
 
     internal UserInterface minionSlotInterface;
     internal MinionSlotCounter minionSlotCounter;
+
+    //internal UserInterface statDisplayInterface;
+    //internal StatDisplayUIState statDisplay;
     public override void Load()
     {
         // ----------- Server/Client ----------- //
@@ -58,6 +62,10 @@ public class ExxoAvalonOrigins : Mod
         minionSlotInterface = new UserInterface();
         minionSlotCounter = new MinionSlotCounter();
         minionSlotInterface.SetState(minionSlotCounter);
+
+        //statDisplay = new StatDisplayUIState();
+        //statDisplayInterface = new UserInterface();
+        //statDisplayInterface.SetState(statDisplay);
 
         if (ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement)
         {

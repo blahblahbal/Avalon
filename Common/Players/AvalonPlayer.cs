@@ -73,6 +73,8 @@ public class AvalonPlayer : ModPlayer
     public bool BadgeOfBacteria = false;
     public bool BacterialEndurance;
 
+    public bool DisplayStats;
+
     /// <summary>
     /// Magic critical strike chance cap. Subtract from it to use.
     /// </summary>

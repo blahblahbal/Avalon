@@ -3769,6 +3769,11 @@ Mods: {
 				DisplayName: Resistant Wood Helmet
 				Tooltip: ""
 			}
+
+			StatDisplay: {
+				DisplayName: Stat Display
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

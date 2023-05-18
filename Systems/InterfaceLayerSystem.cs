@@ -11,6 +11,16 @@ public class InterfaceLayerSystem : ModSystem
     /// <inheritdoc />
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
+        //int invIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Radial Hotbars");
+        //if (invIndex != -1)
+        //{
+        //    layers.Insert(invIndex, new LegacyGameInterfaceLayer("Stat Display", delegate
+        //    {
+        //        ExxoAvalonOrigins.Mod.statDisplayInterface.Draw(Main.spriteBatch, Main._drawInterfaceGameTime);
+        //        return true;
+        //    }, InterfaceScaleType.UI));
+        //}
+
         int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Mouse Text");
         if (staminaBarIndex != -1)
         {
