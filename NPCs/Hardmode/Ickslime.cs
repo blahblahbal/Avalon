@@ -62,7 +62,7 @@ public class Ickslime : ModNPC
         NPC.DeathSound = SoundID.NPCDeath1;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.IckslimeBanner>();
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
     }
     public override void OnSpawn(IEntitySource source)
     {
@@ -95,7 +95,7 @@ public class Ickslime : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Gelatinous and icky. Watch out for the large ones!")
+            new FlavorTextBestiaryInfoElement("Gelatinous and icky sentient globs of mucus, Ickslimes break down their prey into material for the contagion to make new monsters.")
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

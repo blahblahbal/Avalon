@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Avalon.Common.Players;
+using Terraria.GameContent.Bestiary;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -14,6 +15,17 @@ public class PyrasiteHead : WormHead
 
     public override int TailType => ModContent.NPCType<PyrasiteTail>();
 
+    public override void SetStaticDefaults()
+    {
+        var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        {
+            CustomTexturePath = Texture + "_Bestiary",
+            Position = new Vector2(54f, 16f),
+            PortraitPositionXOverride = 10f,
+            PortraitPositionYOverride = 12f
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
+    }
     public override void SetDefaults()
     {
         NPC.damage = 15;
@@ -32,18 +44,25 @@ public class PyrasiteHead : WormHead
         NPC.DeathSound = SoundID.NPCDeath1;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.PyrasiteBanner>();
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
     }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
         NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
         NPC.damage = (int)(NPC.damage * 0.8f);
     }
+    public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+    {
+        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
+        {
+            new FlavorTextBestiaryInfoElement("Giant flat worms created by the Contagion, Enjoys feeding on pre-eaten food from the stomach of titans and other large lifeforms.")
+        });
+    }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight)
-            return (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight) ? 0.1f : 0f;
-        return 0f;
+        if ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) && !spawnInfo.Player.InPillarZone())
+            return 0.1f;
+        return 0;
     }
     public override void HitEffect(NPC.HitInfo hit)
     {

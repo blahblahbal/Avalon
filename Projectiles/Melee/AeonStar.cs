@@ -26,6 +26,7 @@ public class AeonStar : ModProjectile
         //DrawOriginOffsetX= -4;
         DrawOriginOffsetY= 2;
         DrawOffsetX = 4;
+        Projectile.extraUpdates = 1;
     }
     //public override Color? GetAlpha(Color lightColor)
     //{

@@ -78,6 +78,7 @@ public class BacteriumPrime : ModNPC
         DrawOffsetY = 14;
         NPC.timeLeft = 200000;
         Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime") : MusicID.Boss5;
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
         //bossBag = ModContent.ItemType<Items.BossBags.BacteriumPrimeBossBag>();
     }
 
@@ -222,7 +223,7 @@ public class BacteriumPrime : ModNPC
                 speed = -NPC.ai[0];
                 NPC.velocity = NPC.velocity.RotatedBy(LorR * Main.rand.NextFloat(-0.001f,-0.025f));
             }
-            if (NPC.ai[0] % 4 == 0 && Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] < 60 && NPC.ai[0] > 2)
+            if (NPC.ai[0] % 4 == 0 && Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] < 60)
             {
                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(2, 2), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
             }

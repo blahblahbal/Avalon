@@ -36,25 +36,19 @@ public class Viris : ModNPC
         NPC.DeathSound = SoundID.NPCDeath21;
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
         NPC.noTileCollide = true;
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
         //DrawOffsetY = 10;
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new ModBiomeBestiaryInfoElement(Mod, "Contagion", "Assets/Bestiary/ContagionIcon", "Assets/Bestiary/ContagionBG", null),
-            new FlavorTextBestiaryInfoElement("Unimplemented")
+            new FlavorTextBestiaryInfoElement("Giant breeders of the plague, virises use ickslime's materials to create new spawn to help spread the Contagion.")
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
         spawnInfo.Player.GetModPlayer<Common.Players.AvalonBiomePlayer>().ZoneUndergroundContagion && !spawnInfo.Player.ZoneDungeon && Main.hardMode
             ? 0.00526f : 0f;
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.65f);
-    }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2,2,4));
