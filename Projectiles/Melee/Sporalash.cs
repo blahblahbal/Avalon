@@ -40,7 +40,7 @@ public class Sporalash : ModProjectile
     public override void SetStaticDefaults()
     {
         // These lines facilitate the trail drawing
-        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
+        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
     }
 
