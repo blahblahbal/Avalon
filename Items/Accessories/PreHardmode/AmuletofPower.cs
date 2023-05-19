@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
+[AutoloadEquip(EquipType.Neck)]
 class AmuletofPower : ModItem
 {
     public override void SetStaticDefaults()

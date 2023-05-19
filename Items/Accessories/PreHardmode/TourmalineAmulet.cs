@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
+[AutoloadEquip(EquipType.Neck)]
 class TourmalineAmulet : ModItem
 {
     public override void SetStaticDefaults()
