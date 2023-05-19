@@ -24,6 +24,6 @@ public class OrangeDungeonWorkbench : ModTile
         AddMapEntry(new Color(191, 142, 111));
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.WorkBenches };
-        DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
+        DustType = -1;
     }
 }

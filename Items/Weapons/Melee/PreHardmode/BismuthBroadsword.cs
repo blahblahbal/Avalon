@@ -13,18 +13,17 @@ class BismuthBroadsword : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 24;
+        Item.height = 28;
         Item.damage = 16;
         Item.useTurn = true;
         Item.scale = 1f;
-        Item.width = dims.Width;
         Item.useTime = 18;
         Item.knockBack = 5.2f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 12000;
         Item.useAnimation = 18;
-        Item.height = dims.Height;
         Item.UseSound = SoundID.Item1;
     }
     public override void AddRecipes()

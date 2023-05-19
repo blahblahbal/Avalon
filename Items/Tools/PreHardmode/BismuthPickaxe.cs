@@ -11,7 +11,7 @@ class BismuthPickaxe : ModItem
     }
     public override void SetDefaults()
     {
-        Item.width = 28;
+        Item.width = 24;
         Item.height = 28;
         Item.UseSound = SoundID.Item1;
         Item.damage = 6;

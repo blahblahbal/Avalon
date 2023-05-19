@@ -14,17 +14,16 @@ class BismuthOre : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 12;
+        Item.height = 12;
         Item.autoReuse = true;
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.Ores.BismuthOre>();
-        Item.width = dims.Width;
         Item.useTime = 10;
         Item.useTurn = true;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.value = Item.sellPrice(0, 0, 3, 75);
         Item.useAnimation = 15;
-        Item.height = dims.Height;
     }
 }

@@ -13,11 +13,11 @@ public class VanillaItemRecipeCreator : ModSystem
 {
     public override void AddRecipes()
     {
-        //Recipe.Create(ItemID.SlimeCrown)
-        //    .AddIngredient(ModContent.ItemType<Items.Vanity.BismuthCrown>())
-        //    .AddIngredient(ItemID.Gel, 20)
-        //    .AddTile(TileID.DemonAltar)
-        //    .Register();
+        Recipe.Create(ItemID.SlimeCrown)
+            .AddIngredient(ItemID.Gel, 20)
+            .AddIngredient(ModContent.ItemType<Items.Vanity.BismuthCrown>())
+            .AddTile(TileID.DemonAltar)
+            .Register();
 
         Recipe.Create(ItemID.Aglet).AddRecipeGroup("Avalon:CopperBar").AddRecipeGroup("Wood", 6).AddTile(TileID.Anvils).Register();
         Recipe.Create(ItemID.IronskinPotion).AddIngredient(ItemID.BottledWater).AddIngredient(ItemID.Daybloom).AddIngredient(ModContent.ItemType<NickelOre>()).AddTile(TileID.Bottles).Register();

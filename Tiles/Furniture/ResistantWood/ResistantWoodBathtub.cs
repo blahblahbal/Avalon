@@ -18,6 +18,6 @@ public class ResistantWoodBathtub : ModTile
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
         AddMapEntry(new Color(144, 148, 144));
-        DustType = DustID.Wraith;
+        DustType = -1;
     }
 }

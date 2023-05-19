@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -25,7 +26,7 @@ public class PurpleDungeonChandelier : ModTile
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         Main.tileLighted[Type] = true;
         AddMapEntry(new Color(235, 166, 135));
-        DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
+        DustType = -1;
     }
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -73,5 +74,28 @@ public class PurpleDungeonChandelier : ModTile
             Wiring.SkipWire(x + 2, y + 2);
         }
         NetMessage.SendTileSquare(-1, x, y + 1, 3);
+    }
+
+    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
+        Color color = new Color(224, 104, 147, 0);
+        int frameX = Main.tile[i, j].TileFrameX;
+        int frameY = Main.tile[i, j].TileFrameY;
+        int width = 18;
+        int offsetY = 0;
+        int height = 18;
+        int offsetX = 1;
+        Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+        if (Main.drawToScreen)
+        {
+            zero = Vector2.Zero;
+        }
+        for (int k = 0; k < 7; k++)
+        {
+            float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
+            float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
+            Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/Furniture/PurpleDungeonChandelier_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+        }
     }
 }

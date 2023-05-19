@@ -23,7 +23,7 @@ public class OrangeDungeonCandle : ModTile
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         AddMapEntry(new Color(253, 221, 3));
-        DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
+        DustType = -1;
     }
 
     public override void MouseOver(int i, int j)
@@ -36,11 +36,11 @@ public class OrangeDungeonCandle : ModTile
 
     public override bool RightClick(int i, int j)
     {
-        WorldGen.KillTile(i, j);
-        if (!Main.tile[i, j].HasTile && Main.netMode != NetmodeID.SinglePlayer)
-        {
-            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, i, j);
-        }
+        Tile tile = Main.tile[i, j];
+        int topY = j - tile.TileFrameY / 18;
+        short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
+        Main.tile[i, topY].TileFrameX += frameAdjustment;
+        NetMessage.SendTileSquare(-1, i, topY + 1, 1, TileChangeType.None);
         return true;
     }
 

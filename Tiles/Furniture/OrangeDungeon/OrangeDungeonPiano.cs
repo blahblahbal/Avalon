@@ -20,6 +20,6 @@ public class OrangeDungeonPiano : ModTile
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
         AddMapEntry(new Color(191, 142, 111));
-        DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
+        DustType = -1;
     }
 }

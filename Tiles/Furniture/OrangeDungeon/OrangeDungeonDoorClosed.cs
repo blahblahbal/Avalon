@@ -45,7 +45,7 @@ public class OrangeDungeonDoorClosed : ModTile
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.ClosedDoor };
         TileID.Sets.OpenDoorID[Type] = ModContent.TileType<OrangeDungeonDoorOpen>();
-        DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
+        DustType = -1;
     }
 
     public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)

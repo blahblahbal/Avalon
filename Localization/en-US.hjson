@@ -3774,6 +3774,36 @@ Mods: {
 				DisplayName: Stat Display
 				Tooltip: ""
 			}
+
+			BismuthCrown: {
+				DisplayName: Bismuth Crown
+				Tooltip: ""
+			}
+
+			BismuthCandelabra: {
+				DisplayName: Bismuth Candelabra
+				Tooltip: ""
+			}
+
+			BismuthCandle: {
+				DisplayName: Bismuth Candle
+				Tooltip: ""
+			}
+
+			BismuthChandelier: {
+				DisplayName: Bismuth Chandelier
+				Tooltip: ""
+			}
+
+			BronzeChandelier: {
+				DisplayName: Bronze Chandelier
+				Tooltip: ""
+			}
+
+			ZincChandelier: {
+				DisplayName: Zinc Chandelier
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

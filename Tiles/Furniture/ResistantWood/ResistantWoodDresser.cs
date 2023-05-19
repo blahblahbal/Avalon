@@ -30,7 +30,7 @@ public class ResistantWoodDresser : ModTile
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
 
         AdjTiles = new int[] { TileID.Dressers };
-        DustType = DustID.Wraith;
+        DustType = -1;
 
         // Names
         AddMapEntry(new Color(200, 200, 200), CreateMapEntryName(), MapChestName);

@@ -14,7 +14,8 @@ class BismuthBar : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 20;
+        Item.height = 20;
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.maxStack = 9999;
@@ -22,12 +23,10 @@ class BismuthBar : ModItem
         Item.createTile = ModContent.TileType<Tiles.PlacedBars>();
         Item.placeStyle = 21;
         Item.rare = ItemRarityID.White;
-        Item.width = dims.Width;
         Item.useTime = 10;
         Item.value = Item.sellPrice(0, 0, 15, 0);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
-        Item.height = dims.Height;
     }
     public override void AddRecipes()
     {

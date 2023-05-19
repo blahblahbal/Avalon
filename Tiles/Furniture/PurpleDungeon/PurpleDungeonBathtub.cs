@@ -17,6 +17,6 @@ public class PurpleDungeonBathtub : ModTile
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
         AddMapEntry(new Color(144, 148, 144));
-        DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
+        DustType = -1;
     }
 }

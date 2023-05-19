@@ -18,6 +18,6 @@ public class PurpleDungeonSofa : ModTile
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
         AddMapEntry(new Color(191, 142, 111));
-        DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
+        DustType = -1;
     }
 }

@@ -33,6 +33,7 @@ namespace Avalon.Tiles.Furniture.PurpleDungeon
             TileID.Sets.FriendlyFairyCanLureTo[Type] = true;
 
             //DustType = ModContent.DustType<Sparkle>();
+			DustType = -1;
             AdjTiles = new int[] { TileID.Containers };
 
             // Other tiles with just one map entry use CreateMapEntryName() to use the default translationkey, "MapEntry"

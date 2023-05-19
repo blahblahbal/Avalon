@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -12,7 +12,8 @@ class BismuthBow : ModItem
     }
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 12;
+        Item.height = 28;
         Item.UseSound = SoundID.Item5;
         Item.damage = 11;
         Item.scale = 1f;
@@ -20,14 +21,12 @@ class BismuthBow : ModItem
         Item.useAmmo = AmmoID.Arrow;
         Item.DamageType = DamageClass.Ranged;
         Item.noMelee = true;
-        Item.width = dims.Width;
         Item.useTime = 23;
         Item.knockBack = 0f;
         Item.shoot = ProjectileID.WoodenArrowFriendly;
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = 9000;
         Item.useAnimation = 23;
-        Item.height = dims.Height;
     }
     public override void AddRecipes()
     {

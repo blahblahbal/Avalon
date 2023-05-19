@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,10 +18,9 @@ class BismuthGreaves : ModItem
     }
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 18;
+        Item.height = 18;
         Item.defense = 5;
-        Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 0, 50);
-        Item.height = dims.Height;
     }
 }

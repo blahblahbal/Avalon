@@ -23,6 +23,6 @@ public class ResistantWoodWorkBench : ModTile
         AddMapEntry(new Color(191, 142, 111));
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.WorkBenches };
-        DustType = DustID.Wraith;
+        DustType = -1;
     }
 }

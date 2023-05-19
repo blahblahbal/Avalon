@@ -11,8 +11,8 @@ class BismuthAxe : ModItem
     }
     public override void SetDefaults()
     {
-        Item.width = 28;
-        Item.height = 24;
+        Item.width = 24;
+        Item.height = 28;
         Item.UseSound = SoundID.Item1;
         Item.damage = 9;
         Item.autoReuse = true;

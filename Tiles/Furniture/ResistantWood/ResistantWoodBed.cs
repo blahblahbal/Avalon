@@ -23,7 +23,7 @@ public class ResistantWoodBed : ModTile
         AddMapEntry(new Color(191, 142, 111));
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] {TileID.Beds};
-        DustType = DustID.Wraith;
+        DustType = -1;
     }
 
     public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)

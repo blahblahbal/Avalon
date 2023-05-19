@@ -12,7 +12,7 @@ class BismuthHammer : ModItem
 
     public override void SetDefaults()
     {
-        Item.width = 28;
+        Item.width = 24;
         Item.height = 28;
         Item.damage = 11;
         Item.autoReuse = true;

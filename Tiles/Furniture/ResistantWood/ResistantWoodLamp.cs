@@ -26,7 +26,7 @@ public class ResistantWoodLamp : ModTile
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         AddMapEntry(new Color(235, 166, 135));
-        DustType = DustID.Wraith;
+        DustType = -1;
     }
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

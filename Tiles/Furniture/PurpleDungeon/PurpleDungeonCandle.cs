@@ -23,7 +23,7 @@ public class PurpleDungeonCandle : ModTile
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         AddMapEntry(new Color(253, 221, 3));
-        DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
+        DustType = -1;
     }
 
     public override void MouseOver(int i, int j)
@@ -36,11 +36,11 @@ public class PurpleDungeonCandle : ModTile
 
     public override bool RightClick(int i, int j)
     {
-        WorldGen.KillTile(i, j);
-        if (!Main.tile[i, j].HasTile && Main.netMode != NetmodeID.SinglePlayer)
-        {
-            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, i, j);
-        }
+        Tile tile = Main.tile[i, j];
+        int topY = j - tile.TileFrameY / 18;
+        short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
+        Main.tile[i, topY].TileFrameX += frameAdjustment;
+        NetMessage.SendTileSquare(-1, i, topY + 1, 1, TileChangeType.None);
         return true;
     }
 
@@ -84,7 +84,7 @@ public class PurpleDungeonCandle : ModTile
         {
             float x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/PurpleDungeonCandle_Flame").Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/Furniture/PurpleDungeonCandle_Flame").Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }

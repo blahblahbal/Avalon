@@ -29,6 +29,6 @@ public class ResistantWoodChair : ModTile
         AddMapEntry(new Color(191, 142, 111));
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.Chairs };
-        DustType = DustID.Wraith;
+        DustType = -1;
     }
 }
