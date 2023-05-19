@@ -28,6 +28,7 @@ public class BismuthChandelier : ModTile
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         Main.tileLighted[Type] = true;
         AddMapEntry(new Color(235, 166, 135));
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.BismuthChandelier>());
     }
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {

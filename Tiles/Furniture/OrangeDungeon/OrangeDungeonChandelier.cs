@@ -27,6 +27,7 @@ public class OrangeDungeonChandelier : ModTile
         Main.tileLighted[Type] = true;
         AddMapEntry(new Color(235, 166, 135));
         DustType = -1;
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.OrangeDungeon.OrangeDungeonChandelier>());
     }
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

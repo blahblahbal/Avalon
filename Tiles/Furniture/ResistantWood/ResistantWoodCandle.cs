@@ -25,6 +25,7 @@ public class ResistantWoodCandle : ModTile
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         AddMapEntry(new Color(253, 221, 3));
         DustType = -1;
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodCandle>());
     }
 
     public override void MouseOver(int i, int j)

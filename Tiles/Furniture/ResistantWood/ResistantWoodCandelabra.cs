@@ -26,6 +26,7 @@ public class ResistantWoodCandelabra : ModTile
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         AddMapEntry(new Color(253, 221, 3));
         DustType = -1;
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodCandelabra>());
     }
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

@@ -25,6 +25,7 @@ public class BismuthCandelabra : ModTile
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         AddMapEntry(new Color(253, 221, 3));
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.BismuthCandelabra>());
     }
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
