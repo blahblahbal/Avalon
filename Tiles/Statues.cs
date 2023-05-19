@@ -6,6 +6,7 @@ using Avalon.Items.Placeable.Statue;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.Enums;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
 using Terraria.IO;
@@ -25,6 +26,11 @@ public class Statues : ModTile
 
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
         TileObjectData.newTile.DrawYOffset = 2;
+        TileObjectData.newTile.StyleWrapLimit = 55;
+        TileObjectData.newTile.Direction = TileObjectDirection.PlaceLeft;
+        TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+        TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
+        TileObjectData.addAlternate(165);
         TileObjectData.addTile(Type);
         AddMapEntry(new Color(144, 148, 144), Language.GetText("MapObject.Statue"));
         AddMapEntry(new Color(175, 216, 235));
@@ -43,6 +49,7 @@ public class Statues : ModTile
             case 10:
                 return 1;
             case 3:
+            case 13:
                 return 2;
             case 6:
                 return 3;
@@ -73,7 +80,11 @@ public class Statues : ModTile
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int item = 0;
-        switch (Main.tile[i, j].TileFrameX / 36)
+        int num9 = (Main.tile[i, j].TileFrameX / 36);
+        int num10 = (Main.tile[i, j].TileFrameY / 54);
+        num10 %= 3;
+        num9 += num10 * 55;
+        switch (num9)
         {
             case 0:
                 item = ModContent.ItemType<ShellStatue>();
@@ -122,7 +133,11 @@ public class Statues : ModTile
 
     public override bool CreateDust(int i, int j, ref int type)
     {
-        switch (Main.tile[i, j].TileFrameX / 36)
+        int num9 = (Main.tile[i, j].TileFrameX / 36);
+        int num10 = (Main.tile[i, j].TileFrameY / 54);
+        num10 %= 3;
+        num9 += num10 * 55;
+        switch (num9)
         {
             case 2:
             case 9:
@@ -130,10 +145,13 @@ public class Statues : ModTile
                 Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, DustID.Ice);
                 return false;
             case 3:
-                Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, DustID.Coralstone);
+                Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.OrangeDungeonDust>());
                 return false;
             case 6:
                 Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, DustID.t_Granite);
+                return false;
+            case 13:
+                Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.PurpleDungeonDust>());
                 return false;
         }
         return base.CreateDust(i, j, ref type);
