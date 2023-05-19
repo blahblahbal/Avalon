@@ -81,16 +81,18 @@ public class Cell : ModProjectile
         d.fadeIn = 1;
         d.noGravity= true;
         d.scale = 1.5f;
+        if (Projectile.ai[0] == 0)
+        d.velocity = new Vector2(0, -2 * player.direction).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation());
 
 
         Vector2 mountedCenter = player.MountedCenter;
         bool doFastThrowDust = false;
         bool shouldOwnerHitCheck = false;
         int launchTimeLimit = 16;  // How much time the projectile can go before retracting (speed and shootTimer will set the flail's range)
-        float launchSpeed = 16f; // How fast the projectile can move
+        float launchSpeed = 14f; // How fast the projectile can move
         float maxLaunchLength = 700f; // How far the projectile's chain can stretch before being forced to retract when in launched state
-        float retractAcceleration = 5f; // How quickly the projectile will accelerate back towards the player while retracting
-        float maxRetractSpeed = 16f; // The max speed the projectile will have while retracting
+        float retractAcceleration = 3f; // How quickly the projectile will accelerate back towards the player while retracting
+        float maxRetractSpeed = 13f; // The max speed the projectile will have while retracting
         float forcedRetractAcceleration = 6f; // How quickly the projectile will accelerate back towards the player while being forced to retract
         float maxForcedRetractSpeed = 16f; // The max speed the projectile will have while being forced to retract
         float unusedRetractAcceleration = 1f;
@@ -385,10 +387,12 @@ public class Cell : ModProjectile
         if (impactIntensity > 0)
         {
             Projectile.netUpdate = true;
-            Point scanAreaStart = Projectile.TopLeft.ToTileCoordinates();
-            Point scanAreaEnd = Projectile.BottomRight.ToTileCoordinates();
-            Projectile.CreateImpactExplosion(2, Projectile.Center, ref scanAreaStart, ref scanAreaEnd, Projectile.width, out var causedShockwaves);
-            Projectile.CreateImpactExplosion2_FlailTileCollision(Projectile.Center, causedShockwaves, Projectile.oldVelocity);
+            for (int i = 0; i < impactIntensity; i++)
+            {
+                Collision.HitTiles(Projectile.position, velocity, Projectile.width, Projectile.height);
+            }
+            if (CurrentAIState == AIState.LaunchingForward)
+                Projectile.CreateImpactExplosion2_FlailTileCollision(Projectile.Center, true, Projectile.oldVelocity);
             Projectile.position -= Projectile.oldVelocity;
 
             SoundEngine.PlaySound(SoundID.Dig, Projectile.position);

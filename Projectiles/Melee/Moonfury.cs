@@ -1,4 +1,5 @@
 using System;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -65,6 +66,7 @@ public class Moonfury : ModProjectile
     public override void AI()
     {
         Player player = Main.player[Projectile.owner];
+        #region AI
         // Kill the projectile if the player dies or gets crowd controlled
         if (!player.active || player.dead || player.noItems || player.CCed || Vector2.Distance(Projectile.Center, player.Center) > 900f)
         {
@@ -84,9 +86,9 @@ public class Moonfury : ModProjectile
         float launchSpeed = 18f; // How fast the projectile can move
         float maxLaunchLength = 800f; // How far the projectile's chain can stretch before being forced to retract when in launched state
         float retractAcceleration = 5f; // How quickly the projectile will accelerate back towards the player while retracting
-        float maxRetractSpeed = 16f; // The max speed the projectile will have while retracting
+        float maxRetractSpeed = 16; // The max speed the projectile will have while retracting
         float forcedRetractAcceleration = 6f; // How quickly the projectile will accelerate back towards the player while being forced to retract
-        float maxForcedRetractSpeed = 16f; // The max speed the projectile will have while being forced to retract
+        float maxForcedRetractSpeed = maxRetractSpeed; // The max speed the projectile will have while being forced to retract
         float unusedRetractAcceleration = 1f;
         float unusedMaxRetractSpeed = 14f;
         int unusedChainLength = 60;
@@ -299,27 +301,27 @@ public class Moonfury : ModProjectile
         Projectile.ownerHitCheck = shouldOwnerHitCheck; // This prevents attempting to damage enemies without line of sight to the player. The custom Colliding code for spinning makes this necessary.
 
         // This rotation code is unique to this flail, since the sprite isn't rotationally symmetric and has tip.
-        bool freeRotation = CurrentAIState == AIState.Ricochet || CurrentAIState == AIState.Dropping;
-        if (freeRotation)
-        {
-            if (Projectile.velocity.Length() > 1f)
-                Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
-            else
-                Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
-        }
-        else
-        {
-            Vector2 vectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
-            Projectile.rotation = vectorTowardsPlayer.ToRotation() + MathHelper.PiOver2;
-        }
+        //bool freeRotation = CurrentAIState == AIState.Ricochet || CurrentAIState == AIState.Dropping;
+        //if (freeRotation)
+        //{
+        //    if (Projectile.velocity.Length() > 1f)
+        //        Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
+        //    else
+        //        Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
+        //}
+        //else
+        //{
+        //    Vector2 vectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
+        //    Projectile.rotation = vectorTowardsPlayer.ToRotation() + MathHelper.PiOver2;
+        //}
 
         // If you have a ball shaped flail, you can use this simplified rotation code instead
-        /*
+
         if (Projectile.velocity.Length() > 1f)
             Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
         else
             Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
-        */
+
 
         Projectile.timeLeft = 2; // Makes sure the flail doesn't die (good when the flail is resting on the ground)
         player.heldProj = Projectile.whoAmI;
@@ -331,10 +333,34 @@ public class Moonfury : ModProjectile
         }
         player.itemRotation = MathHelper.WrapAngle(player.itemRotation);
 
-        // Spawning dust. We spawn dust more often when in the LaunchingForward state
-        int dustRate = 15;
-        if (doFastThrowDust)
-            dustRate = 1;
+        #endregion AI
+
+        //for(int i = 0; i < 2; i++)
+        //{
+        //    if (Projectile.ai[0] != 0)
+        //    {
+        //        if (Projectile.velocity.Length() >= 1)
+        //        {
+        //            Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(0, 20 * Main.masterColor).RotatedBy(Projectile.velocity.ToRotation()).RotatedBy(i * MathHelper.Pi), DustID.ShadowbeamStaff, Projectile.velocity);
+        //            d.scale = 1.5f;
+        //            d.noGravity = true;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(10 * Main.masterColor, 0).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation()).RotatedBy(i * MathHelper.Pi), DustID.ShadowbeamStaff, Vector2.Zero);
+        //        d.velocity = new Vector2(0, -2 * player.direction).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation());
+        //        d.scale = 1.5f;
+        //        d.noGravity = true;
+        //    }
+        //}
+
+        Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(12, 12), DustID.Shadowflame, Projectile.velocity.RotatedByRandom(0.1f) * 0.7f, 128);
+        d.fadeIn = 1;
+        d.noGravity = true;
+        d.scale = 1.5f;
+        if (Projectile.ai[0] == 0)
+            d.velocity = new Vector2(0, -3 * player.direction).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation()).RotatedByRandom(0.1f);
     }
 
     public override bool OnTileCollide(Vector2 oldVelocity)
@@ -383,6 +409,9 @@ public class Moonfury : ModProjectile
             {
                 Collision.HitTiles(Projectile.position, velocity, Projectile.width, Projectile.height);
             }
+            if (CurrentAIState == AIState.LaunchingForward)
+                Projectile.CreateImpactExplosion2_FlailTileCollision(Projectile.Center, true, Projectile.oldVelocity);
+            Projectile.position -= Projectile.oldVelocity;
 
             SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
         }
@@ -535,13 +564,15 @@ public class Moonfury : ModProjectile
         if (CurrentAIState == AIState.LaunchingForward)
         {
             Texture2D projectileTexture = TextureAssets.Projectile[Projectile.type].Value;
-            Vector2 drawOrigin = new Vector2(projectileTexture.Width * 0.5f, Projectile.height * 0.5f);
+            Vector2 drawOrigin = new Vector2(projectileTexture.Width * 0.5f, projectileTexture.Height * 0.5f);
             SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             for (int k = 0; k < Projectile.oldPos.Length && k < StateTimer; k++)
             {
-                Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-                Color color = Projectile.GetAlpha(lightColor) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-                Main.spriteBatch.Draw(projectileTexture, drawPos, null, color, Projectile.rotation, drawOrigin, Projectile.scale - k / (float)Projectile.oldPos.Length / 3, spriteEffects, 0f);
+                //Projectile.GetAlpha(lightColor)
+                Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(DrawOffsetX, Projectile.gfxOffY);
+                drawPos.Y -= (projectileTexture.Height / 4) - 1;
+                Color color = new Color(55, 33, 75, 0) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+                Main.spriteBatch.Draw(projectileTexture, drawPos + new Vector2(0,2), null, color, Projectile.rotation, drawOrigin, (Projectile.scale + 0.1f) - k / (float)Projectile.oldPos.Length, spriteEffects, 0f);
             }
         }
         return true;
