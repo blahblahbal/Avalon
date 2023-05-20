@@ -1,4 +1,4 @@
-﻿using Avalon.Projectiles.Melee;
+using Avalon.Projectiles.Melee;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -14,6 +14,8 @@ public class DarklightLance : ModItem
     }
     public override void SetDefaults()
     {
+        Item.width = 24;
+        Item.height = 28;
         Item.UseSound = SoundID.Item1;
         Item.damage = 99;
         Item.noUseGraphic = true;

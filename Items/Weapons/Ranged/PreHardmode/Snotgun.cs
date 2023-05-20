@@ -10,6 +10,8 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
     {
         public override void SetDefaults()
         {
+            Item.width = 28;
+            Item.height = 10;
             Item.DefaultToRangedWeapon(7, AmmoID.Bullet, 50, 5, false);
             Item.damage = 9;
             Item.rare = 1;

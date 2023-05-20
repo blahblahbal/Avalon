@@ -14,8 +14,10 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
 {
     public class NapalmGun : ModItem
     {
-        public override void SetDefaults() 
+        public override void SetDefaults()
         {
+            Item.width = 24;
+            Item.height = 18;
             Item.DefaultToRangedWeapon(ModContent.ProjectileType<NapalmBall>(), AmmoID.Gel, 45, 8, true);
             Item.damage = 45;
             Item.knockBack = 6;

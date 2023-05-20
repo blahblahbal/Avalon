@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
+[AutoloadEquip(EquipType.Back)]
 class ApollosQuiver : ModItem
 {
     public override void SetStaticDefaults()

@@ -17,13 +17,13 @@ class PossessedFlamesaw : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 46;
+        Item.height = 16;
         Item.damage = 95;
         Item.noUseGraphic = true;
         Item.shootSpeed = 20f;
         Item.noMelee = true;
         Item.rare = ModContent.RarityType<BlueRarity>();
-        Item.width = dims.Width;
         Item.knockBack = 9f;
         Item.useTime = 15;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.PossessedFlamesaw>();
@@ -31,7 +31,6 @@ class PossessedFlamesaw : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 40, 0, 0);
         Item.useAnimation = 15;
-        Item.height = dims.Height;
         Item.UseSound = SoundID.Item1;
     }
     public override bool AltFunctionUse(Player player)

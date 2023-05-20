@@ -13,8 +13,10 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
         {
             Item.staff[Item.type] = true;
         }
-        public override void SetDefaults() 
+        public override void SetDefaults()
         {
+            Item.width = 24;
+            Item.height = 28;
             Item.DefaultToMagicWeapon(1, 45, 6, true);
             Item.damage = 90;
             Item.UseSound = SoundID.Item46;
