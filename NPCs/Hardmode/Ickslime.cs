@@ -85,6 +85,7 @@ public class Ickslime : ModNPC
         }
         NPC.Size *= NPC.scale;
         NPC.life = NPC.lifeMax;
+        NPC.netUpdate = true;
     }
     //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     //{
