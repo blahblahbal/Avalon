@@ -50,9 +50,9 @@ public class OrangeDungeonCandle : ModTile
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
         {
-            r = 0.9f;
-            g = 0.45f;
-            b = 0.6f;
+            r = 0.69f;
+            g = 0.32f;
+            b = 0.77f;
         }
     }
 
@@ -69,7 +69,7 @@ public class OrangeDungeonCandle : ModTile
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        var color = new Color(224, 104, 147, 0);
+        var color = new Color(177, 83, 198, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
