@@ -36,9 +36,7 @@ public class Bactus : ModNPC
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
         DrawOffsetY = 10;
-    }
-    public override void OnSpawn(IEntitySource source)
-    {
+
         int J = Main.rand.Next(0, 3);
         if (J == 1)
         {
@@ -58,7 +56,7 @@ public class Bactus : ModNPC
         }
         NPC.life = NPC.lifeMax;
         NPC.Size *= NPC.scale;
-        NPC.netUpdate= true;
+        NPC.netUpdate = true;
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {

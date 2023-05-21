@@ -37,6 +37,27 @@ public class Viriling : ModNPC
         NPC.alpha = 128;
         NPC.noTileCollide = true;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
+
+        int J = Main.rand.Next(0, 3);
+        if (J == 1)
+        {
+            NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
+            NPC.defense = (int)(NPC.defense * 0.8f);
+            NPC.scale *= 0.9f;
+            NPC.knockBackResist *= 1.2f;
+            NPC.value *= 0.8f;
+        }
+        if (J == 2)
+        {
+            NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
+            NPC.defense = (int)(NPC.defense * 1.1f);
+            NPC.scale *= 1.15f;
+            NPC.knockBackResist *= 0.9f;
+            NPC.value *= 1.2f;
+        }
+        NPC.life = NPC.lifeMax;
+        NPC.Size *= NPC.scale;
+        NPC.netUpdate = true;
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {

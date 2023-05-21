@@ -74,6 +74,7 @@ public class Viris : ModNPC
         else
         {
             NPC.velocity += NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2CircularEdge(600, 600)) * 0.1f;
+            NPC.netUpdate = true;
         }
 
         NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
@@ -141,24 +142,31 @@ public class Viris : ModNPC
 
     public override void HitEffect(NPC.HitInfo hit)
     { 
-        if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
+        if (NPC.life <= 0)
         {
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f,0.9f), Mod.Find<ModGore>("Viris").Type, NPC.scale);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris2").Type, NPC.scale);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris3").Type, NPC.scale);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris4").Type, NPC.scale);
-            for (int i = 0; i < 30; i++)
+            if (Main.netMode != NetmodeID.Server)
             {
-                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-4, 2), 50, default, 2);
-                Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
-                Main.dust[d].noGravity = true;
-                Main.dust[d].fadeIn = 1.2f;
+                Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris").Type, NPC.scale);
+                Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris2").Type, NPC.scale);
+                Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris3").Type, NPC.scale);
+                Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Viris4").Type, NPC.scale);
+                for (int i = 0; i < 30; i++)
+                {
+                    int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-4, 2), 50, default, 2);
+                    Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
+                    Main.dust[d].noGravity = true;
+                    Main.dust[d].fadeIn = 1.2f;
+                }
             }
-
-            for (int i = 0; i < 3; i++)
+            if (Main.netMode != 1)
             {
-                NPC N = NPC.NewNPCDirect(NPC.GetSource_Death(), NPC.Center, ModContent.NPCType<Viriling>(), 0);
-                N.velocity = Main.rand.NextVector2Circular(5, 5);
+                for (int i = 0; i < 3; i++)
+                {
+                    NPC N = NPC.NewNPCDirect(NPC.GetSource_Death(), NPC.Center, ModContent.NPCType<Viriling>(), 0);
+                    N.velocity = Main.rand.NextVector2Circular(5, 5);
+                    if (Main.netMode == 2 && NPC.whoAmI < 200)
+                        NetMessage.SendData(MessageID.SyncNPC, number: N.whoAmI);
+                }
             }
         }
         for (int i = 0; i < 15; i++)
