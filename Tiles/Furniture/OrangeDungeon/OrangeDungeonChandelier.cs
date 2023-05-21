@@ -35,9 +35,9 @@ public class OrangeDungeonChandelier : ModTile
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
         {
-            r = 0.9f;
-            g = 0.45f;
-            b = 0.6f;
+            r = 0.69f;
+            g = 0.32f;
+            b = 0.77f;
         }
     }
     public override void HitWire(int i, int j)
@@ -78,7 +78,7 @@ public class OrangeDungeonChandelier : ModTile
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(177, 83, 198, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
