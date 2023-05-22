@@ -11,7 +11,7 @@ public class CrackedPurpleBrick : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(96, 52, 151));// 166, 87, 45));
+        AddMapEntry(new Color(102, 78, 123));//(96, 52, 151));// 166, 87, 45));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileBrick[Type] = true;

@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
+using Avalon.Tiles.Furniture.YellowDungeon;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -36,7 +37,7 @@ public class DungeonRemoveCrackedBricks : GenPass
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
     {
         #region uncomment later
-        int RandDungeonColour = (WorldGen.genRand.Next(2));
+        int RandDungeonColour = (WorldGen.genRand.Next(3));
         //RandDungeonColour = 1;
         bool otherColors = WorldGen.genRand.NextBool(2);
         if (otherColors)
@@ -120,6 +121,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 Main.tile[i, j].TileType = (ushort)ModContent.TileType<PurpleBrickPlatform>();
                                 break;
+                            case 2:
+                                Main.tile[i, j].TileType = (ushort)ModContent.TileType<YellowBrickPlatform>();
+                                break;
                         }
                         Main.tile[i, j].TileFrameY = 0;
                     }
@@ -135,6 +139,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<PurpleDungeonBathtub>(), true);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<YellowDungeonBathtub>(), true);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.Beds && Main.tile[i, j].TileFrameY is >= 180 and <= 270 &&
@@ -148,6 +155,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                                 break;
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<PurpleDungeonBed>(), true);
+                                break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<YellowDungeonBed>(), true);
                                 break;
                         }
                     }
@@ -163,6 +173,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j + 3, ModContent.TileType<PurpleDungeonBookcase>(), true);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j + 3, ModContent.TileType<YellowDungeonBookcase>(), true);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.Candles && Main.tile[i, j].TileFrameY is >= 22 and <= 66 &&
@@ -176,6 +189,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                                 break;
                             case 1:
                                 WorldGen.PlaceTile(i, j, ModContent.TileType<PurpleDungeonCandle>(), true);
+                                break;
+                            case 2:
+                                WorldGen.PlaceTile(i, j, ModContent.TileType<YellowDungeonCandle>(), true);
                                 break;
                         }
                     }
@@ -191,6 +207,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i, j, ModContent.TileType<PurpleDungeonCandelabra>(), true);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i, j, ModContent.TileType<YellowDungeonCandelabra>(), true);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.Chairs && Main.tile[i, j].TileFrameY is >= 520 and <= 618 &&
@@ -204,6 +223,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                                 break;
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j + 3, ModContent.TileType<PurpleDungeonChair>(), true);
+                                break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j + 3, ModContent.TileType<YellowDungeonChair>(), true);
                                 break;
                         }
                     }
@@ -219,6 +241,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j, ModContent.TileType<PurpleDungeonChandelier>(), true);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j, ModContent.TileType<YellowDungeonChandelier>(), true);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.ClosedDoor && Main.tile[i, j].TileFrameY is >= 864 and <= 1008 &&
@@ -232,6 +257,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                                 break;
                             case 1:
                                 WorldGen.PlaceTile(i, j + 1, ModContent.TileType<PurpleDungeonDoorClosed>(), true);
+                                break;
+                            case 2:
+                                WorldGen.PlaceTile(i, j + 1, ModContent.TileType<YellowDungeonDoorClosed>(), true);
                                 break;
                         }
                     }
@@ -247,6 +275,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<PurpleDungeonDresser>(), true);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<YellowDungeonDresser>(), true);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.Lamps && Main.tile[i, j].TileFrameY is >= 1300 and <= 1440 &&
@@ -260,6 +291,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                                 break;
                             case 1:
                                 WorldGen.PlaceTile(i, j + 2, ModContent.TileType<PurpleDungeonLamp>(), true);
+                                break;
+                            case 2:
+                                WorldGen.PlaceTile(i, j + 2, ModContent.TileType<YellowDungeonLamp>(), true);
                                 break;
                         }
                     }
@@ -275,6 +309,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<PurpleDungeonPiano>(), true);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<YellowDungeonPiano>(), true);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.Sinks && Main.tile[i, j].TileFrameY is >= 380 and <= 474 &&
@@ -289,6 +326,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i, j, ModContent.TileType<PurpleDungeonSink>(), true);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i, j, ModContent.TileType<YellowDungeonSink>(), true);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.Benches && Main.tile[i, j].TileFrameX is >= 324 and <= 468 &&
@@ -302,6 +342,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                                 break;
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<PurpleDungeonSofa>(), true);
+                                break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<YellowDungeonSofa>(), true);
                                 break;
                         }
 
@@ -318,6 +361,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<PurpleDungeonTable>(), true);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i + 1, j + 1, ModContent.TileType<YellowDungeonTable>(), true);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.WorkBenches && Main.tile[i, j].TileFrameX is >= 396 and <= 486 &&
@@ -331,6 +377,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                                 break;
                             case 1:
                                 WorldGen.PlaceTile(i, j, ModContent.TileType<PurpleDungeonWorkbench>(), true);
+                                break;
+                            case 2:
+                                WorldGen.PlaceTile(i, j, ModContent.TileType<YellowDungeonWorkbench>(), true);
                                 break;
                         }
                     }
@@ -346,6 +395,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             case 1:
                                 WorldGen.PlaceTile(i, j + 2, ModContent.TileType<Tiles.Statues>(), true, style: 13);
                                 break;
+                            case 2:
+                                WorldGen.PlaceTile(i, j + 2, ModContent.TileType<Tiles.Statues>(), true, style: 14);
+                                break;
                         }
                     }
                     if (Main.tile[i, j].TileType is TileID.GrandfatherClocks && Main.tile[i, j].TileFrameX is >= 1080 and <= 1152 &&
@@ -359,6 +411,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                                 break;
                             case 1:
                                 WorldGen.PlaceTile(i, j + 4, ModContent.TileType<PurpleDungeonClock>(), true);
+                                break;
+                            case 2:
+                                WorldGen.PlaceTile(i, j + 4, ModContent.TileType<YellowDungeonClock>(), true);
                                 break;
                         }
                     }
@@ -387,6 +442,9 @@ public class DungeonRemoveCrackedBricks : GenPass
                             break;
                         case 1:
                             WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedPurpleBrick>(), true);
+                            break;
+                        case 2:
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedYellowBrick>(), true);
                             break;
                     }
                 }

@@ -3804,6 +3804,121 @@ Mods: {
 				DisplayName: Zinc Chandelier
 				Tooltip: ""
 			}
+
+			OrangeDungeonChest: {
+				DisplayName: Orange Dungeon Chest
+				Tooltip: ""
+			}
+
+			YellowDungeonBathtub: {
+				DisplayName: Yellow Dungeon Bathtub
+				Tooltip: ""
+			}
+
+			YellowDungeonBed: {
+				DisplayName: Yellow Dungeon Bed
+				Tooltip: ""
+			}
+
+			YellowDungeonBookcase: {
+				DisplayName: Yellow Dungeon Bookcase
+				Tooltip: ""
+			}
+
+			YellowDungeonCandelabra: {
+				DisplayName: Yellow Dungeon Candelabra
+				Tooltip: ""
+			}
+
+			YellowDungeonCandle: {
+				DisplayName: Yellow Dungeon Candle
+				Tooltip: ""
+			}
+
+			YellowDungeonChair: {
+				DisplayName: Yellow Dungeon Chair
+				Tooltip: ""
+			}
+
+			YellowDungeonChandelier: {
+				DisplayName: Yellow Dungeon Chandelier
+				Tooltip: ""
+			}
+
+			YellowDungeonChest: {
+				DisplayName: Yellow Dungeon Chest
+				Tooltip: ""
+			}
+
+			YellowDungeonClock: {
+				DisplayName: Yellow Dungeon Clock
+				Tooltip: ""
+			}
+
+			YellowDungeonDoor: {
+				DisplayName: Yellow Dungeon Door
+				Tooltip: ""
+			}
+
+			YellowDungeonDresser: {
+				DisplayName: Yellow Dungeon Dresser
+				Tooltip: ""
+			}
+
+			YellowDungeonLamp: {
+				DisplayName: Yellow Dungeon Lamp
+				Tooltip: ""
+			}
+
+			YellowDungeonPiano: {
+				DisplayName: Yellow Dungeon Piano
+				Tooltip: ""
+			}
+
+			YellowDungeonSink: {
+				DisplayName: Yellow Dungeon Sink
+				Tooltip: ""
+			}
+
+			YellowDungeonSofa: {
+				DisplayName: Yellow Dungeon Sofa
+				Tooltip: ""
+			}
+
+			YellowDungeonTable: {
+				DisplayName: Yellow Dungeon Table
+				Tooltip: ""
+			}
+
+			YellowDungeonWorkBench: {
+				DisplayName: Yellow Dungeon Work Bench
+				Tooltip: ""
+			}
+
+			YellowDungeonVase: {
+				DisplayName: Yellow Dungeon Vase
+				Tooltip: ""
+			}
+
+			AncientOrangeBrick: {
+				DisplayName: Ancient Orange Brick
+				Tooltip: ""
+			}
+
+			AncientPurpleBrick: {
+				DisplayName: Ancient Purple Brick
+				Tooltip: ""
+			}
+
+			AncientYellowBrick: {
+				DisplayName: Ancient Yellow Brick
+				Tooltip: ""
+			}
+
+			YellowBrickPlatform: {
+				DisplayName: Yellow Brick Platform
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4421,6 +4536,9 @@ Mods: {
 			OrangeDungeonDresser.MapEntry: Orange Dungeon Dresser
 			PurpleDungeonChest.MapEntry0: Purple Dungeon Chest
 			PurpleDungeonDresser.MapEntry: Purple Dungeon Dresser
+			OrangeDungeonChest.MapEntry0: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry0
+			YellowDungeonChest.MapEntry0: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry0
+			YellowDungeonDresser.MapEntry: Yellow Dungeon Dresser
 		}
 
 		Prefixes: {

@@ -50,6 +50,7 @@ public class Statues : ModTile
                 return 1;
             case 3:
             case 13:
+			case 14:
                 return 2;
             case 6:
                 return 3;
@@ -125,6 +126,9 @@ public class Statues : ModTile
                 break;
             case 13:
                 item = ModContent.ItemType<PurpleDungeonVase>();
+                break;
+            case 14:
+                item = ModContent.ItemType<YellowDungeonVase>();
                 break;
         }
 

@@ -22,7 +22,7 @@ class OrangeDungeonVase : ModItem
         Item.useTurn = true;
         Item.useTime = 10;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 99;
+        Item.maxStack = 9999;
         Item.value = 300;
         Item.useAnimation = 15;
         Item.height = dims.Height;
