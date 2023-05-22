@@ -3919,6 +3919,41 @@ Mods: {
 				DisplayName: Yellow Brick Platform
 				Tooltip: ""
 			}
+
+			VirulentPowder: {
+				DisplayName: Virulent Powder
+				Tooltip: ""
+			}
+
+			AncientOrangeBrickWall: {
+				DisplayName: Ancient Orange Brick Wall
+				Tooltip: ""
+			}
+
+			AncientPurpleBrickWall: {
+				DisplayName: Ancient Purple Brick Wall
+				Tooltip: ""
+			}
+
+			AncientYellowBrickWall: {
+				DisplayName: Ancient Yellow Brick Wall
+				Tooltip: ""
+			}
+
+			BismuthBrickWall: {
+				DisplayName: Bismuth Brick Wall
+				Tooltip: ""
+			}
+
+			BronzeBrickWall: {
+				DisplayName: Bronze Brick Wall
+				Tooltip: ""
+			}
+
+			ChunkstoneBrickWall: {
+				DisplayName: Chunkstone Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4002,6 +4037,7 @@ Mods: {
 			SpectralBullet.DisplayName: Spectral Bullet
 			Cell.DisplayName: Cell
 			SnotlineBobber.DisplayName: Snotline Bobber
+			VirulentPowder.DisplayName: Virulent Powder
 		}
 
 		NPCs: {

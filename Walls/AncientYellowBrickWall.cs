@@ -5,12 +5,12 @@ using Terraria.ModLoader;
 
 namespace Avalon.Walls;
 
-public class YellowBrickWall : ModWall
+public class AncientYellowBrickWall : ModWall
 {
     public override void SetStaticDefaults()
     {
         Main.wallHouse[Type] = true;
-        //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.YellowBrickWall>();
+        //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.AncientYellowBrickWall>();
         AddMapEntry(new Color(65, 61, 42));
         DustType = ModContent.DustType<Dusts.YellowDungeonDust>();
     }
