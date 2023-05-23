@@ -3954,6 +3954,26 @@ Mods: {
 				DisplayName: Chunkstone Brick Wall
 				Tooltip: ""
 			}
+
+			BronzePlating: {
+				DisplayName: Bronze Plating
+				Tooltip: ""
+			}
+
+			NickelBrickWall: {
+				DisplayName: Nickel Brick Wall
+				Tooltip: ""
+			}
+
+			ZincBrickWall: {
+				DisplayName: Zinc Brick Wall
+				Tooltip: ""
+			}
+
+			BronzePlatingWall: {
+				DisplayName: Bronze Plating Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4051,7 +4071,30 @@ Mods: {
 			Gargoyle.DisplayName: Gargoyle
 			HellboundLizard.DisplayName: Hellbound Lizard
 			EctoHand.DisplayName: Ecto Hand
-			Librarian.DisplayName: Librarian
+
+			Librarian: {
+				DisplayName: Librarian
+
+				TownNPCMood: {
+					Content: I am content.
+					NoHome: I hate not having a home.
+					FarFromHome: I am too far from home.
+					LoveSpace: I love having so much space.
+					DislikeCrowded: I dislike how crowded I am.
+					HateCrowded: I hate how crowded I am.
+					LoveBiome: I love {BiomeName}.
+					LikeBiome: I like {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LoveNPC: I love {NPCName}.
+					LikeNPC: I like {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					Princess_LovesNPC: I like {NPCName}.
+				}
+			}
+
 			MineralSlime.DisplayName: Mineral Slime
 			PyrasiteHead.DisplayName: Pyrasite Head
 			PyrasiteBody.DisplayName: Pyrasite Body
@@ -4629,16 +4672,52 @@ Mods: {
 		}
 
 		Biomes: {
-			Hellcastle.DisplayName: Hellcastle
-			NearHellcastle.DisplayName: Near Hellcastle
-			CaesiumBlastplains.DisplayName: Caesium Blastplains
-			Contagion.DisplayName: Contagion
-			ContagionDesert.DisplayName: Contagion Desert
-			DungeonAltColors.DisplayName: Dungeon Alt Colors
-			UndergroundContagion.DisplayName: Underground Contagion
-			AshenOvergrowth.DisplayName: Ashen Overgrowth
+			Hellcastle: {
+				DisplayName: Hellcastle
+				TownNPCDialogueName: the Hellcastle
+			}
+
+			NearHellcastle: {
+				DisplayName: Near Hellcastle
+				TownNPCDialogueName: the Near Hellcastle
+			}
+
+			CaesiumBlastplains: {
+				DisplayName: Caesium Blastplains
+				TownNPCDialogueName: the Caesium Blastplains
+			}
+
+			Contagion: {
+				DisplayName: Contagion
+				TownNPCDialogueName: the Contagion
+			}
+
+			ContagionDesert: {
+				DisplayName: Contagion Desert
+				TownNPCDialogueName: the Contagion Desert
+			}
+
+			DungeonAltColors: {
+				DisplayName: Dungeon Alt Colors
+				TownNPCDialogueName: the Dungeon Alt Colors
+			}
+
+			UndergroundContagion: {
+				DisplayName: Underground Contagion
+				TownNPCDialogueName: the Underground Contagion
+			}
+
+			AshenOvergrowth: {
+				DisplayName: Ashen Overgrowth
+				TownNPCDialogueName: the Ashen Overgrowth
+			}
+
 			ContagionUndergroundDesert.DisplayName: Contagion Underground Desert
-			ContagionCaveDesert.DisplayName: Contagion Cave Desert
+
+			ContagionCaveDesert: {
+				DisplayName: Contagion Cave Desert
+				TownNPCDialogueName: the Contagion Cave Desert
+			}
 		}
 
 		World: {
