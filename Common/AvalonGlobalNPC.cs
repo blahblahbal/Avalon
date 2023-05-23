@@ -37,6 +37,7 @@ public class AvalonGlobalNPC : GlobalNPC
     private const int RareChance = 700;
     private const int UncommonChance = 50;
     private const int VeryRareChance = 1000;
+
     /// <summary>
     ///     Finds a type of NPC.
     /// </summary>
@@ -562,7 +563,6 @@ public class AvalonGlobalNPC : GlobalNPC
         var hardModeCondition = new HardmodeOnly();
         var notFromStatueCondition = new Conditions.NotFromStatue();
         var notExpertCondition = new Conditions.NotExpert();
-        
 
         var preHardModeCondition = new Invert(hardModeCondition);
         //var superHardModeCondition = new Superhardmode();
@@ -570,8 +570,6 @@ public class AvalonGlobalNPC : GlobalNPC
         //    new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
 
         int p = Player.FindClosest(npc.position, npc.width, npc.height);
-
-
 
         switch (npc.type)
         {
