@@ -16,7 +16,7 @@ namespace Avalon.Hooks
         {
             if (eventID == 21)
             {
-                int i = Item.NewItem(Player.GetSource_NaturalSpawn(), Main.LocalPlayer.position, ModContent.ItemType<Items.Weapons.Melee.Hardmode.DarklightLance>());
+                int i = Item.NewItem(Player.GetSource_NaturalSpawn(), Main.LocalPlayer.position, ModContent.ItemType<Items.Weapons.Melee.Hardmode.MasterSword>(), prefixGiven: -2);
                 Main.item[i].playerIndexTheItemIsReservedFor = Main.LocalPlayer.whoAmI;
             }
             orig(eventID);

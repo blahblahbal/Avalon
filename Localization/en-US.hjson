@@ -62,6 +62,15 @@ Mods: {
 					'''
 			}
 
+			MasterSword: {
+				DisplayName: Master Sword
+				Tooltip:
+					'''
+					Shoots a beam of energy if you're at full hp
+					'The sword that seals the darkness'
+					'''
+			}
+
 			ApollosQuiver: {
 				DisplayName: Apollo's Quiver
 				Tooltip:
@@ -4058,6 +4067,7 @@ Mods: {
 			Cell.DisplayName: Cell
 			SnotlineBobber.DisplayName: Snotline Bobber
 			VirulentPowder.DisplayName: Virulent Powder
+			MasterSwordBeam.DisplayName: Master Sword Beam
 		}
 
 		NPCs: {
