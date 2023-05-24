@@ -8,6 +8,7 @@ using Avalon.Prefixes;
 using Avalon.Systems;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -53,6 +54,7 @@ public class AvalonPlayer : ModPlayer
     }
     #endregion
 
+    public bool InBossFight;
 
     public Vector2 MousePosition;
     public float MagicCritDamage = 1f;
@@ -186,6 +188,16 @@ public class AvalonPlayer : ModPlayer
         {
             MousePosition = Main.MouseWorld;
         }
+
+        for (int m = 0; m < 200; m++)
+        {
+            if (Main.npc[m].active && (Main.npc[m].boss || Main.npc[m].type == NPCID.EaterofWorldsHead || Main.npc[m].type == NPCID.EaterofWorldsBody || Main.npc[m].type == NPCID.EaterofWorldsTail) && Math.Abs(Player.Center.X - Main.npc[m].Center.X) + Math.Abs(Player.Center.Y - Main.npc[m].Center.Y) < 4000f)
+            {
+                InBossFight = true;
+                break;
+            }
+            else { InBossFight = false; }
+        }
     }
 
     public bool PotionSicknessSoundPlayed;
@@ -310,7 +322,6 @@ public class AvalonPlayer : ModPlayer
 
         return base.CanConsumeAmmo(weapon, ammo);
     }
-
     public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
     {
         if (Player.HasItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>()) && !Player.HasBuff(ModContent.BuffType<ImmortalityCooldown>()))
@@ -505,6 +516,10 @@ public class AvalonPlayer : ModPlayer
                     }
                 }
             }
+        }
+        if (!InBossFight)
+        {
+            Player.respawnTimer = (int)(Player.respawnTimer = 60 * 5);
         }
     }
     /// <inheritdoc />

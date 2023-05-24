@@ -22,8 +22,8 @@ class SnotOrb : ModItem
     {
         Item.CloneDefaults(ItemID.WispinaBottle);
         Item.shoot = ModContent.ProjectileType<Projectiles.SnotOrb>();
-        Item.buffType = ModContent.BuffType<Buffs.SnotOrb>();
-        Item.value = Item.sellPrice(0, 0, 54);
+        Item.buffType = ModContent.BuffType<Buffs.Pets.SnotOrb>();
+        Item.value = Item.sellPrice(0, 1, 50);
         Item.rare = ItemRarityID.Blue;
     }
 }

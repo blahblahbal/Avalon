@@ -3974,6 +3974,21 @@ Mods: {
 				DisplayName: Bronze Plating Wall
 				Tooltip: ""
 			}
+
+			BacteriumPrimeRelic: {
+				DisplayName: Bacterium Prime Relic
+				Tooltip: ""
+			}
+
+			BacciliteBrick: {
+				DisplayName: Baccilite Brick
+				Tooltip: ""
+			}
+
+			BacciliteBrickWall: {
+				DisplayName: Baccilite Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4679,7 +4694,7 @@ Mods: {
 
 			NearHellcastle: {
 				DisplayName: Near Hellcastle
-				TownNPCDialogueName: the Near Hellcastle
+				TownNPCDialogueName: the Phantom Gardens
 			}
 
 			CaesiumBlastplains: {
