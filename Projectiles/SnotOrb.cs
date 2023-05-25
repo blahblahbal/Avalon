@@ -147,7 +147,14 @@ public class SnotOrb : ModProjectile
 
         Projectile.ai[0] = MathHelper.Clamp(Projectile.ai[0], -40 , 40 * 3);
         Projectile.velocity = Vector2.SmoothStep(Projectile.velocity += Projectile.Center.DirectionTo(targetPos) * (Projectile.Center.Distance(targetPos) * 0.01f), Projectile.Center.DirectionTo(targetPos) * 3, 0.1f);
-
+        if(Projectile.Center.Distance(targetPos) < 10)
+        {
+            Projectile.velocity *= 0.8f;
+        }
+        if (Projectile.Center.Distance(targetPos) < 3 && Projectile.velocity.Length() < 1)
+        {
+            Projectile.velocity *= 0f;
+        }
         float MaxSpeed = MathHelper.Clamp(Projectile.Center.Distance(targetPos) * 0.05f, 6, 12);
         Projectile.velocity = Vector2.Clamp(Projectile.velocity, new Vector2(-MaxSpeed), new Vector2(MaxSpeed));
         
@@ -181,6 +188,7 @@ public class SnotOrb : ModProjectile
             Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, 0, 0, 128);
             d.noGravity = true;
             d.velocity *= 0.3f;
+            d.velocity += Projectile.velocity;
             d.fadeIn = 1.2f;
         }
     }

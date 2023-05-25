@@ -72,7 +72,7 @@ public class Blaze : ModNPC
         float num66 = Main.NPCAddHeight(NPC);
         var vector13 = new Vector2(TextureAssets.Npc[NPC.type].Width() / 2,
             TextureAssets.Npc[NPC.type].Height() / Main.npcFrameCount[NPC.type] / 2);
-        Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Assets/Textures/NPC/BlazeGlow").Value,
+        Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "Glow").Value,
             new Vector2(
                 NPC.position.X - vector.X + (NPC.width / 2) - (TextureAssets.Npc[NPC.type].Width() * NPC.scale / 2f) +
                 (vector13.X * NPC.scale),

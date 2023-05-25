@@ -59,6 +59,7 @@ public class PurpleHaze : ModProjectile
         //    Main.dust[d].fadeIn = 2f;
         //    Main.dust[d].noGravity = true;
         //}
+        Lighting.AddLight(Projectile.Center, new Vector3(0.4f, 0.2f, 0.5f) * Projectile.scale * Projectile.Opacity * 0.3f);
     }
     public override bool? CanHitNPC(NPC target)
     {
