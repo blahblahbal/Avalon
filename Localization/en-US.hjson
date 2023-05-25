@@ -4753,5 +4753,40 @@ Mods: {
 				}
 			}
 		}
+
+		Configs: {
+			AvalonClientConfig: {
+				DisplayName: Avalon Client Config
+
+				ScreenshakeEnabled: {
+					Label: "{$Mods.Avalon.Config.Screenshake.Label}"
+					Tooltip: "{$Mods.Avalon.Config.Screenshake.Tooltip}"
+				}
+
+				BiomeParticlesEnabled: {
+					Label: "{$Mods.Avalon.Config.BiomeParticles.Label}"
+					Tooltip: "{$Mods.Avalon.Config.BiomeParticles.Tooltip}"
+				}
+			}
+
+			AvalonConfig: {
+				DisplayName: Avalon Config
+
+				RevertDungeonGen: {
+					Label: "{$Mods.Avalon.Config.DungeonRevert.Label}"
+					Tooltip: "{$Mods.Avalon.Config.DungeonRevert.Tooltip}"
+				}
+
+				VanillaTextureReplacement: {
+					Label: "{$Mods.Avalon.Config.VanillaTextureReplacement.Label}"
+					Tooltip: "{$Mods.Avalon.Config.VanillaTextureReplacement.Tooltip}"
+				}
+
+				VanillaRenames: {
+					Label: "{$Mods.Avalon.Config.Renames.Label}"
+					Tooltip: "{$Mods.Avalon.Config.Renames.Tooltip}"
+				}
+			}
+		}
 	}
 }

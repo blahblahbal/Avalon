@@ -65,7 +65,7 @@ public class MasterSword : ModItem
                 velX *= velModifier;
                 velY *= velModifier;
                 Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.position.X, player.position.Y, velX, velY, ModContent.ProjectileType<MasterSwordBeam>(), Item.damage, Item.knockBack);
-                SoundEngine.PlaySound(SoundID.Item8, player.position);
+                SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/MasterSword"), player.position);
             }
             swingCounter = 0;
         }
