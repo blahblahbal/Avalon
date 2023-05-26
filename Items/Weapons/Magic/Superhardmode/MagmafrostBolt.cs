@@ -18,7 +18,6 @@ class MagmafrostBolt : ModItem
         Item.DamageType = DamageClass.Magic;
         Item.damage = 67;
         Item.autoReuse = true;
-        Item.useTurn = true;
         Item.shootSpeed = 1.3f;
         Item.mana = 10;
         Item.rare = ItemRarityID.Yellow;
@@ -32,6 +31,10 @@ class MagmafrostBolt : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item21;
+    }
+    public override Vector2? HoldoutOffset()
+    {
+        return new Vector2(6, 2);
     }
     //public override void AddRecipes()
     //{

@@ -10,6 +10,11 @@ namespace Avalon.Projectiles.Ranged;
 
 public class PhantasmalBullet : ModProjectile
 {
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
+        ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -109,15 +114,6 @@ public class PhantasmalBullet : ModProjectile
     public int maxSpeed = 15;
     public override void AI()
     {
-        if (Projectile.alpha > 0)
-        {
-            Projectile.alpha -= 2;
-        }
-        if (Projectile.alpha < 0)
-        {
-            Projectile.alpha = 0;
-        }
-
         int num = 0;
         Projectile.localAI[num]++;
         Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
@@ -126,20 +122,16 @@ public class PhantasmalBullet : ModProjectile
         Projectile.position += value * x * Main.rand.NextFloat(1f, 1.5f);
         //Projectile.position += value * x * Main.rand.NextFloat(5f, 10.5f); //exaggerated sine wave to test trail
     }
-    public override bool PreDraw(ref Color lightColor)
+    public override bool PreDraw(ref Color lightColor) // theft v2? (from enchanted shuriken)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture + "_Trail").Value;
-        Texture2D bulletTex = ModContent.Request<Texture2D>(Texture).Value;
-        Rectangle frame = texture.Frame();
-        Vector2 frameOrigin = frame.Size() / 2f;
-        Vector2 offset = new Vector2(Projectile.width / 2 - frameOrigin.X, Projectile.height - frameOrigin.Y - 4);
-        Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin + offset;
-
-        for (int i = 0; i < 3; i++)
+        Rectangle dims = this.GetDims();
+        Vector2 drawOrigin = new Vector2(Projectile.width, Projectile.height);
+        for (int k = 0; k < Projectile.oldPos.Length; k++)
         {
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(Projectile.velocity.X * -i, Projectile.velocity.Y * -i), frame, new Color(255 - 255 / 7 * i, 0, 0, 100), Projectile.rotation, frameOrigin, Projectile.scale - 0.01f * i, SpriteEffects.None, 0);
+            Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
+            Color color = new Color(255, 255, 255, 0) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+            Main.EntitySpriteDraw(Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, Projectile.scale * 0.9f, SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(bulletTex, drawPos, frame, Color.White, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
 }

@@ -57,4 +57,8 @@ class BloodBarrage : ModItem
     {
         velocity = velocity.RotatedByRandom(0.17);
     }
+    public override Vector2? HoldoutOffset()
+    {
+        return new Vector2(10, 0);
+    }
 }

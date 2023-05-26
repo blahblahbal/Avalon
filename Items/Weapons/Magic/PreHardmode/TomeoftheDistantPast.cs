@@ -52,4 +52,8 @@ class TomeoftheDistantPast : ModItem
         }
         velocity = velocity.RotatedByRandom(0.2f);
     }
+    public override Vector2? HoldoutOffset()
+    {
+        return new Vector2(6, 2);
+    }
 }

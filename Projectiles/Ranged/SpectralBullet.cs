@@ -11,6 +11,11 @@ namespace Avalon.Projectiles.Ranged;
 
 public class SpectralBullet : ModProjectile
 {
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
+        ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -112,15 +117,6 @@ public class SpectralBullet : ModProjectile
     }
     public override void AI()
     {
-        if (Projectile.alpha > 0)
-        {
-            Projectile.alpha -= 2;
-        }
-        if (Projectile.alpha < 0)
-        {
-            Projectile.alpha = 0;
-        }
-
         int num = 0;
         Projectile.localAI[num]++;
         Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
@@ -129,37 +125,16 @@ public class SpectralBullet : ModProjectile
         Projectile.position += value * x * Main.rand.NextFloat(1f, 1.5f);
         //Projectile.position += value * x * Main.rand.NextFloat(5f, 10.5f); //exaggerated sine wave to test trail
     }
-    public int alpha = 255;
-    public override bool PreDraw(ref Color lightColor)
+    public override bool PreDraw(ref Color lightColor) // theft v2? (from enchanted shuriken)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture + "_Trail").Value;
-        Texture2D bulletTex = ModContent.Request<Texture2D>(Texture).Value;
-        Rectangle frame = texture.Frame();
-        Vector2 frameOrigin = frame.Size() / 2f;
-        Vector2 offset = new Vector2(Projectile.width / 2 - frameOrigin.X, Projectile.height - frameOrigin.Y - 4);
-        Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin + offset;
-
-        for (int i = 0; i < 3; i++)
+        Rectangle dims = this.GetDims();
+        Vector2 drawOrigin = new Vector2(Projectile.width, Projectile.height);
+        for (int k = 0; k < Projectile.oldPos.Length; k++)
         {
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(Projectile.velocity.X * -i, Projectile.velocity.Y * -i), frame, new Color(255 - 255 / 7 * i, 0, 0, 100), Projectile.rotation, frameOrigin, Projectile.scale - 0.01f * i, SpriteEffects.None, 0);
+            Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
+            Color color = new Color(255, 255, 255, 0) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+            Main.EntitySpriteDraw(Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, Projectile.scale * 0.9f, SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(bulletTex, drawPos, frame, Color.White, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
-        //Texture2D texture = ModContent.Request<Texture2D>(Texture + "_Trail").Value;
-        //Texture2D bulletTex = ModContent.Request<Texture2D>(Texture).Value;
-        //Rectangle frame = texture.Frame();
-        //Vector2 drawPos = Projectile.position - Main.screenPosition;
-        //Color color = new Color(alpha, alpha, alpha, (alpha / 4) * 3);
-        //for (int i = 1; i < 4; i++)
-        //{
-        //    Main.EntitySpriteDraw(texture, drawPos + new Vector2(Projectile.velocity.X * (-i * 1), Projectile.velocity.Y * (-i * 1)), frame, (color * (1 - (i * 0.25f))) * 0.75f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 20f), Projectile.scale, SpriteEffects.None, 0);
-        //}
-        //Main.EntitySpriteDraw(texture, drawPos, frame, color, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 20f), Projectile.scale, SpriteEffects.None, 0);
-        //Main.EntitySpriteDraw(texture, drawPos, frame, color * 0.3f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 14f), Projectile.scale * 1.3f, SpriteEffects.None, 0);
-        //Main.EntitySpriteDraw(texture, drawPos, frame, color * 0.15f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 10f), Projectile.scale * 1.6f, SpriteEffects.None, 0);
-        //Vector2 vector48 = Projectile.position + new Vector2(Projectile.width, Projectile.height) / 2f + Vector2.UnitY * Projectile.gfxOffY - Main.screenPosition;
-        //Vector2 origin22 = frame.Size() / 2f;
-        //Main.EntitySpriteDraw(bulletTex, vector48, frame, Color.AliceBlue, Projectile.rotation, origin22, Projectile.scale, SpriteEffects.None, 0);
-        //return false;
     }
 }

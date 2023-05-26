@@ -37,6 +37,10 @@ class PurpleHaze : ModItem
         Item.height = dims.Height;
         Item.UseSound = gas;
     }
+    public override Vector2? HoldoutOffset()
+    {
+        return new Vector2(10, 0);
+    }
 
     public override void AddRecipes()
     {
