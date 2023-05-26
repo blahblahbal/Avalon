@@ -64,7 +64,7 @@ public class MasterSword : ModItem
                 velModifier = Item.shootSpeed / velModifier;
                 velX *= velModifier;
                 velY *= velModifier;
-                Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.position.X, player.position.Y, velX, velY, ModContent.ProjectileType<MasterSwordBeam>(), Item.damage, Item.knockBack);
+                Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center.X, player.Center.Y, velX, velY, ModContent.ProjectileType<MasterSwordBeam>(), Item.damage, Item.knockBack);
                 SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/MasterSword"), player.position);
             }
             swingCounter = 0;

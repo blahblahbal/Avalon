@@ -10,14 +10,16 @@ public class MasterSwordBeam : ModProjectile
 {
     public override void SetDefaults()
     {
-        Projectile.width = 16;
-        Projectile.height = 16;
+        Rectangle dims = this.GetDims();
+        Projectile.width = 20;
+        Projectile.height = 20;
         Projectile.aiStyle = -1;
         Projectile.DamageType = DamageClass.Melee;
         Projectile.penetrate = 1;
-        Projectile.light = 0.2f;
         Projectile.alpha = 0;
         Projectile.friendly = true;
+        DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
+        DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
     }
     public override Color? GetAlpha(Color lightColor)
     {
@@ -62,31 +64,28 @@ public class MasterSwordBeam : ModProjectile
             }
         }
 
-        Projectile.rotation += 0.4f;
+        Projectile.rotation += Projectile.direction * 0.4f;
+        if (Projectile.direction == 1)
+        {
+            Projectile.spriteDirection = 1;
+        }
+        else
+        {
+            Projectile.spriteDirection = -1;
+        }
+        Lighting.AddLight(Projectile.Center, (63 / 255f) / 3f, (214 / 255f) / 3f, 1 / 3f);
     }
     public override void Kill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-        //for (int num394 = 4; num394 < 24; num394++)
-        //{
-        //    float num395 = Projectile.oldVelocity.X * (30f / (float)num394);
-        //    float num396 = Projectile.oldVelocity.Y * (30f / (float)num394);
-        //    int num397 = Main.rand.Next(3);
-        //    if (num397 == 0)
-        //    {
-        //        num397 = 15;
-        //    }
-        //    else if (num397 == 1)
-        //    {
-        //        num397 = 57;
-        //    }
-        //    else
-        //    {
-        //        num397 = 58;
-        //    }
-        //    int num398 = Dust.NewDust(new Vector2(Projectile.position.X - num395, Projectile.position.Y - num396), 8, 8, num397, Projectile.oldVelocity.X * 0.2f, Projectile.oldVelocity.Y * 0.2f, 100, default(Color), 1.8f);
-        //    Main.dust[num398].velocity *= 1.5f;
-        //    Main.dust[num398].noGravity = true;
-        //}
+        for (int dustAmount = 4; dustAmount < 13; dustAmount++)
+        {
+            float velX = Projectile.oldVelocity.X / (float)dustAmount;
+            float velY = Projectile.oldVelocity.Y / (float)dustAmount;
+            int dustType = DustID.Vortex;
+            int dust = Dust.NewDust(new Vector2(Projectile.position.X - velX, Projectile.position.Y - velY), 8, 8, dustType, Projectile.oldVelocity.X * 0.2f, Projectile.oldVelocity.Y * 0.2f, 100, default(Color), 1.8f);
+            Main.dust[dust].velocity *= 1.5f;
+            Main.dust[dust].noGravity = true;
+        }
     }
 }
