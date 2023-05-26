@@ -26,7 +26,6 @@ public class SpectralBullet : ModProjectile
         AIType = ProjectileID.CursedBullet;
         Projectile.penetrate = 2;
         Projectile.scale = 1.2f;
-        Projectile.alpha = 255;
         Projectile.tileCollide = false;
         Projectile.timeLeft = 75;
         Projectile.DamageType = DamageClass.Ranged;
@@ -127,13 +126,14 @@ public class SpectralBullet : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor) // theft v2? (from enchanted shuriken)
     {
+        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         Rectangle dims = this.GetDims();
         Vector2 drawOrigin = new Vector2(Projectile.width, Projectile.height);
         for (int k = 0; k < Projectile.oldPos.Length; k++)
         {
             Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-            Color color = new Color(255, 255, 255, 0) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-            Main.EntitySpriteDraw(Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, Projectile.scale * 0.9f, SpriteEffects.None, 0);
+            Color color = new Color(180, 180, 180, 50) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+            Main.EntitySpriteDraw(texture, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, Projectile.scale * 0.9f, SpriteEffects.None, 0);
         }
         return false;
     }
