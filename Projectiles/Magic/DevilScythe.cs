@@ -13,8 +13,7 @@ public class DevilScythe : ModProjectile
         Rectangle dims = this.GetDims();
         Projectile.width = 48;
         Projectile.height = 48;
-        Projectile.alpha = 100;
-        Projectile.light = 0.5f;
+        Projectile.alpha = 50;
         Projectile.aiStyle = -1;
         Projectile.friendly = true;
         Projectile.penetrate = 4;
@@ -22,13 +21,18 @@ public class DevilScythe : ModProjectile
         Projectile.scale = 0.9f;
         Projectile.DamageType = DamageClass.Magic;
     }
-    public override bool OnTileCollide(Vector2 oldVelocity)
+    public override void Kill(int timeLeft)
     {
-        SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
-        int num234 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, Projectile.velocity.X, Projectile.velocity.Y, 100, default(Color), 1.7f);
-        Main.dust[num234].noGravity = true;
-        Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, Projectile.velocity.X, Projectile.velocity.Y, 100, default(Color), 1f);
-        return true;
+        SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+        for (int dustAmount = 0; dustAmount < 30; dustAmount++)
+        {
+            int dust = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Flare, Projectile.velocity.X, Projectile.velocity.Y, 100, default(Color), 1.7f);
+            Main.dust[dust].noGravity = true;
+            Main.dust[dust].velocity *= 1.1f;
+            int dust2 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Flare, Projectile.velocity.X, Projectile.velocity.Y, 100);
+            Main.dust[dust2].noGravity = true;
+            Main.dust[dust2].velocity *= 1.2f;
+        }
     }
     public override void AI()
     {
@@ -53,5 +57,12 @@ public class DevilScythe : ModProjectile
                 Main.dust[num307].noGravity = true;
             }
         }
+    }
+
+    public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+    {
+        width = Projectile.width - 36;
+        height = Projectile.height - 36;
+        return true;
     }
 }
