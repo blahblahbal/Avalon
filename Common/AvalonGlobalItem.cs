@@ -14,6 +14,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using Avalon.Common.Players;
+using Avalon.Items.Pets;
 
 namespace Avalon.Common;
 
@@ -84,6 +85,16 @@ public class AvalonGlobalItem : GlobalItem
         EnergyCrystalTransmute.AddCustomShimmerResult(ModContent.ItemType<EnergyCrystal>());
         EnergyCrystalTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
         EnergyCrystalTransmute.Register();
+
+        Recipe MagicLanternTransmute = Recipe.Create(ModContent.ItemType<ArgusLantern>());
+        MagicLanternTransmute.AddCustomShimmerResult(ItemID.MagicLantern);
+        MagicLanternTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        MagicLanternTransmute.Register();
+
+        Recipe MagicLanternTransmute2 = Recipe.Create(ItemID.MagicLantern);
+        MagicLanternTransmute2.AddCustomShimmerResult(ModContent.ItemType<ArgusLantern>());
+        MagicLanternTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        MagicLanternTransmute2.Register();
     }
 
     public override void HoldItem(Item item, Player player)

@@ -3998,6 +3998,151 @@ Mods: {
 				DisplayName: Baccilite Brick Wall
 				Tooltip: ""
 			}
+
+			ArgusLantern: {
+				DisplayName: Argus Lantern
+				Tooltip: Exsposes nearby traps
+			}
+
+			CoughwoodBathtub: {
+				DisplayName: Coughwood Bathtub
+				Tooltip: ""
+			}
+
+			CoughwoodBed: {
+				DisplayName: Coughwood Bed
+				Tooltip: ""
+			}
+
+			CoughwoodBookcase: {
+				DisplayName: Coughwood Bookcase
+				Tooltip: ""
+			}
+
+			CoughwoodCandelabra: {
+				DisplayName: Coughwood Candelabra
+				Tooltip: ""
+			}
+
+			CoughwoodCandle: {
+				DisplayName: Coughwood Candle
+				Tooltip: ""
+			}
+
+			CoughwoodChair: {
+				DisplayName: Coughwood Chair
+				Tooltip: ""
+			}
+
+			CoughwoodChandelier: {
+				DisplayName: Coughwood Chandelier
+				Tooltip: ""
+			}
+
+			CoughwoodClock: {
+				DisplayName: Coughwood Clock
+				Tooltip: ""
+			}
+
+			CoughwoodDoor: {
+				DisplayName: Coughwood Door
+				Tooltip: ""
+			}
+
+			CoughwoodDresser: {
+				DisplayName: Coughwood Dresser
+				Tooltip: ""
+			}
+
+			CoughwoodLamp: {
+				DisplayName: Coughwood Lamp
+				Tooltip: ""
+			}
+
+			CoughwoodLantern: {
+				DisplayName: Coughwood Lantern
+				Tooltip: ""
+			}
+
+			CoughwoodPiano: {
+				DisplayName: Coughwood Piano
+				Tooltip: ""
+			}
+
+			CoughwoodPlatform: {
+				DisplayName: Coughwood Platform
+				Tooltip: ""
+			}
+
+			CoughwoodSink: {
+				DisplayName: Coughwood Sink
+				Tooltip: ""
+			}
+
+			CoughwoodSofa: {
+				DisplayName: Coughwood Sofa
+				Tooltip: ""
+			}
+
+			CoughwoodTable: {
+				DisplayName: Coughwood Table
+				Tooltip: ""
+			}
+
+			CoughwoodToilet: {
+				DisplayName: Coughwood Toilet
+				Tooltip: ""
+			}
+
+			CoughwoodWorkBench: {
+				DisplayName: Coughwood Work Bench
+				Tooltip: ""
+			}
+
+			OrangeDungeonToilet: {
+				DisplayName: Orange Dungeon Toilet
+				Tooltip: ""
+			}
+
+			PurpleDungeonToilet: {
+				DisplayName: Purple Dungeon Toilet
+				Tooltip: ""
+			}
+
+			ResistantWoodDoor: {
+				DisplayName: Resistant Wood Door
+				Tooltip: ""
+			}
+
+			ResistantWoodToilet: {
+				DisplayName: Resistant Wood Toilet
+				Tooltip: ""
+			}
+
+			YellowDungeonToilet: {
+				DisplayName: Yellow Dungeon Toilet
+				Tooltip: ""
+			}
+
+			Blahtue: {
+				DisplayName: Blahtue
+				Tooltip: ""
+			}
+
+			CoughwoodFence: {
+				DisplayName: Coughwood Fence
+				Tooltip: ""
+			}
+
+			CoughwoodWall: {
+				DisplayName: Coughwood Wall
+				Tooltip: ""
+			}
+
+			ResistantWoodWall: {
+				DisplayName: Resistant Wood Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4083,6 +4228,7 @@ Mods: {
 			SnotlineBobber.DisplayName: Snotline Bobber
 			VirulentPowder.DisplayName: Virulent Powder
 			MasterSwordBeam.DisplayName: Master Sword Beam
+			ArgusLantern.DisplayName: Argus Lantern
 		}
 
 		NPCs: {
@@ -4620,6 +4766,11 @@ Mods: {
 				DisplayName: Icy Slowdown
 				Description: You are slow
 			}
+
+			ArgusLantern: {
+				DisplayName: Argus Lantern
+				Description: An enchanted lantern is keeping you out of harm's way
+			}
 		}
 
 		Tiles: {
@@ -4643,6 +4794,7 @@ Mods: {
 			OrangeDungeonChest.MapEntry0: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry0
 			YellowDungeonChest.MapEntry0: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry0
 			YellowDungeonDresser.MapEntry: Yellow Dungeon Dresser
+			CoughwoodDresser.MapEntry: Coughwood Dresser
 		}
 
 		Prefixes: {
