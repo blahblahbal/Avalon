@@ -21,7 +21,7 @@ class MoonWallItem : ModItem
         Item.useTime = 7;
         Item.createWall = ModContent.WallType<Avalon.Walls.MoonWall>();
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }

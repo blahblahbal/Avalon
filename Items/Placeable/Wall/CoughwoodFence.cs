@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class TwilightWallItem : ModItem
+class CoughwoodFence : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -18,8 +18,8 @@ class TwilightWallItem : ModItem
         Item.consumable = true;
         Item.width = dims.Width;
         Item.useTurn = true;
-        Item.useTime = 7;
-        Item.createWall = ModContent.WallType<Avalon.Walls.TwilightWall>();
+        Item.useTime = 10;
+        Item.createWall = ModContent.WallType<Avalon.Walls.CoughwoodFence>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;
@@ -27,7 +27,7 @@ class TwilightWallItem : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.TwiliplateBlock>()).AddTile(TileID.WorkBenches).Register();
-        Terraria.Recipe.Create(ModContent.ItemType<Tile.TwiliplateBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.Coughwood>()).AddTile(TileID.WorkBenches).Register();
+        Terraria.Recipe.Create(ModContent.ItemType<Tile.Coughwood>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
     }
 }
