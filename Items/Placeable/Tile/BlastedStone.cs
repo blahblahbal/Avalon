@@ -21,7 +21,7 @@ public class BlastedStone : ModItem
         Item.useTime = 10;
         Item.useTurn = true;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }

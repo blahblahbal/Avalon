@@ -25,7 +25,7 @@ class TomeForge : ModItem
         Item.useTurn = true;
         Item.useTime = 10;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 99;
+        Item.maxStack = 9999;
         Item.value = Item.sellPrice(0, 1);
         Item.useAnimation = 15;
         Item.height = dims.Height;

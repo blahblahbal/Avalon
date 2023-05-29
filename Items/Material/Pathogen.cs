@@ -18,7 +18,7 @@ class Pathogen : ModItem
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.value = 4500;
         Item.height = dims.Height;
     }

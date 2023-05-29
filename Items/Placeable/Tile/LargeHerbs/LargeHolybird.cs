@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,7 +22,7 @@ class LargeHolybird : ModItem
         Item.useTurn = true;
         Item.useTime = 10;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }

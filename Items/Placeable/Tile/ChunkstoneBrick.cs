@@ -21,7 +21,7 @@ public class ChunkstoneBrick : ModItem
         Item.useTime = 10;
         Item.createTile = ModContent.TileType<Tiles.ChunkstoneBrick>();
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 999;
+        Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,7 +23,7 @@ class HerbologyBench : ModItem
         Item.useTurn = true;
         Item.useTime = 10;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 99;
+        Item.maxStack = 9999;
         Item.value = Item.sellPrice(0, 0, 20);
         Item.useAnimation = 15;
         Item.height = dims.Height;
