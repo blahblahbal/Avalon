@@ -14,19 +14,18 @@ class BlueEyeoftheUniverse : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 50;
+        Item.height = 36;
         Item.autoReuse = true;
         Item.consumable = true;
         Item.rare = ModContent.RarityType<Rarities.MagentaRarity>();
         Item.createTile = ModContent.TileType<Tiles.EyeoftheUniverse>();
         Item.placeStyle = 1;
-        Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.value = Item.sellPrice(0, 0, 10, 0);
         Item.useAnimation = 15;
-        Item.height = dims.Height;
     }
 }

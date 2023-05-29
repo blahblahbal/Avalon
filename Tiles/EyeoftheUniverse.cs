@@ -27,6 +27,13 @@ public class EyeoftheUniverse : ModTile
         TileID.Sets.DisableSmartCursor[Type] = true;
         AddMapEntry(new Color(120, 85, 60));
     }
+    public override void NearbyEffects(int i, int j, bool closer)
+    {
+        if (Main.tile[i, j].TileFrameY >= 163 && Main.tile[i, j].TileFrameX <= 322)
+        {
+            Lighting.AddLight(new Vector2(i * 16, j * 16), new Vector3(0.043f, 0.11f, 0.19f));
+        }
+    }
 
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
@@ -43,17 +50,17 @@ public class EyeoftheUniverse : ModTile
             Color.White);
     }
 
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        int item = 0;
-        switch (frameY / 160)
-        {
-            case 0: item = ModContent.ItemType<Items.Placeable.Painting.EyeoftheUniverse>(); break;
-            case 1: item = ModContent.ItemType<Items.Placeable.Painting.BlueEyeoftheUniverse>(); break;
-        }
-        if (item > 0)
-        {
-            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 48, 48, item);
-        }
-    }
+    // public override void KillMultiTile(int i, int j, int frameX, int frameY)
+    // {
+        // int item = 0;
+        // switch (frameY / 160)
+        // {
+            // case 0: item = ModContent.ItemType<Items.Placeable.Painting.EyeoftheUniverse>(); break;
+            // case 1: item = ModContent.ItemType<Items.Placeable.Painting.BlueEyeoftheUniverse>(); break;
+        // }
+        // if (item > 0)
+        // {
+            // Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 48, 48, item);
+        // }
+    // }
 }
