@@ -4143,6 +4143,11 @@ Mods: {
 				DisplayName: Resistant Wood Wall
 				Tooltip: ""
 			}
+
+			ResistantWoodFence: {
+				DisplayName: Resistant Wood Fence
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

@@ -62,7 +62,7 @@ public class HellboundLizard : CustomFighterAI
     }
     public override Color? GetAlpha(Color lightColor)
     {
-        return new Color(255, 255, 255);
+        return lightColor;
     }
     public override void FindFrame(int frameHeight)
     {

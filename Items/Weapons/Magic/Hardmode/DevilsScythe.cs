@@ -15,7 +15,7 @@ class DevilsScythe : ModItem
     {
         Item.UseSound = SoundID.Item8;
         Item.DamageType = DamageClass.Magic;
-        Item.damage = 61;
+        Item.damage = 190;
         Item.autoReuse = true;
         Item.scale = 0.9f;
         Item.shootSpeed = 1.2f;
