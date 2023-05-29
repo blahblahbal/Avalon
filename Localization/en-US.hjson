@@ -2811,6 +2811,11 @@ Mods: {
 				Tooltip: "'R. Penguin'"
 			}
 
+			ElectrostaticDischarge: {
+				DisplayName: Electrostatic Discharge
+				Tooltip: "'R. Penguin'"
+			}
+
 			MistyNight: {
 				DisplayName: Misty Night
 				Tooltip: "'R. Penguin'"
@@ -2834,6 +2839,16 @@ Mods: {
 			TakingFlight: {
 				Tooltip: "'R. Penguin'"
 				DisplayName: Taking Flight
+			}
+
+			ThoughPoppiesGrow: {
+				Tooltip: "'R. Penguin'"
+				DisplayName: Though Poppies Grow
+			}
+
+			WyvernSlayer: {
+				Tooltip: "'R. Penguin'"
+				DisplayName: Wyvern Slayer
 			}
 
 			BlueEyeoftheUniverse: {

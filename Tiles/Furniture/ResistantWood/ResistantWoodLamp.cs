@@ -35,9 +35,9 @@ public class ResistantWoodLamp : ModTile
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
         {
-            r = 1f;
-            g = 0.95f;
-            b = 0.65f;
+            r = 1f / 1.5f;
+            g = 0.95f / 1.75f;
+            b = 0.65f / 1.75f;
         }
     }
 

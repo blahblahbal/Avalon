@@ -71,12 +71,12 @@ internal class Hellcastle
                 if (WorldGen.genRand.NextBool(225))
                 {
                     if (s1t > 3) s1t = 0;
-                    if (s2t > 4) s2t = 0;
-                    if (s3t > 3) s3t = 0;
-                    if (s4t > 2) s4t = 0;
+                    if (s2t > 5) s2t = 0;
+                    if (s3t > 4) s3t = 0;
+                    if (s4t > 4) s4t = 0;
                     int paintingSize = WorldGen.genRand.Next(4);
                     int tileType;
-                    if (paintingSize == 1) // 2x3
+                    if (paintingSize == 0) // 2x3
                     {
                         tileType = TileID.Painting2X3;
                         int pStyle = 0;
@@ -104,29 +104,30 @@ internal class Hellcastle
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
                     }
-                    if (paintingSize == 2) // 3x3
+                    if (paintingSize == 1) // 3x3
                     {
                         tileType = TileID.Painting3X3;
                         int pStyle = 0;
                         switch (s2t)
                         {
                             case 0:
-                                pStyle = 65;
-                                break;
-                            case 1:
                                 pStyle = 71;
                                 break;
-                            case 2:
+                            case 1:
                                 pStyle = 31;
                                 break;
-                            case 3:
+                            case 2:
                                 pStyle = 16;
                                 break;
-                            case 4:
+                            case 3:
                                 pStyle = 17;
                                 break;
-                            case 5:
+                            case 4:
                                 pStyle = 2;
+                                tileType = ModContent.TileType<Tiles.Paintings3x3>();
+                                break;
+                            case 5:
+                                pStyle = 3;
                                 tileType = ModContent.TileType<Tiles.Paintings3x3>();
                                 break;
                         }
@@ -137,7 +138,7 @@ internal class Hellcastle
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
                     }
-                    if (paintingSize == 3) // 6x4
+                    if (paintingSize == 2) // 6x4
                     {
                         int pStyle = 0;
                         switch (s3t)
@@ -146,13 +147,16 @@ internal class Hellcastle
                                 pStyle = 1;
                                 break;
                             case 1:
-                                pStyle = 15;
+                                pStyle = 13;
                                 break;
                             case 2:
                                 pStyle = 16;
                                 break;
                             case 3:
-                                pStyle = 18;
+                                pStyle = 19;
+                                break;
+                            case 4:
+                                pStyle = 20;
                                 break;
                         }
                         s3t++;
@@ -162,7 +166,7 @@ internal class Hellcastle
                             WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.Paintings>(), style: pStyle);
                         }
                     }
-                    if (paintingSize == 4) // 3x2
+                    if (paintingSize == 3) // 3x2
                     {
                         int pStyle = 0;
                         tileType = TileID.Painting3X2;
@@ -176,6 +180,14 @@ internal class Hellcastle
                                 break;
                             case 2:
                                 pStyle = 0;
+                                tileType = ModContent.TileType<Tiles.Paintings3x2>();
+                                break;
+                            case 3:
+                                pStyle = 1;
+                                tileType = ModContent.TileType<Tiles.Paintings3x2>();
+                                break;
+                            case 4:
+                                pStyle = 2;
                                 tileType = ModContent.TileType<Tiles.Paintings3x2>();
                                 break;
                         }
