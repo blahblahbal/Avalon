@@ -13,5 +13,6 @@ public class ResistantWoodFence : ModWall
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.ResistantWoodFence>();
         AddMapEntry(new Color(25, 25, 25));
         DustType = DustID.Wraith;
+        Main.wallLight[Type] = true;
     }
 }

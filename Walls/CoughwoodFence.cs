@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -12,5 +12,6 @@ public class CoughwoodFence : ModWall
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.CoughwoodFence>();
         AddMapEntry(new Color(106, 116, 90));
         DustType = ModContent.DustType<Dusts.CoughwoodDust>();
+        Main.wallLight[Type] = true;
     }
 }

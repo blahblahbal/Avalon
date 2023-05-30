@@ -18,9 +18,9 @@ class RhodiumBrickWallItem : ModItem
         Item.autoReuse = true;
         Item.consumable = true;
         Item.rare = ItemRarityID.White;
-        Item.Size = new Vector2(16);
+        Item.Size = new Vector2(12);
         Item.useTurn = true;
-        Item.useTime = 10;
+        Item.useTime = 7;
         Item.createWall = ModContent.WallType<RhodiumBrickWall>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;

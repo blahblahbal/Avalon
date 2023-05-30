@@ -1,11 +1,10 @@
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class OrangeTiledWall : ModItem
+class NickelFence : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -19,14 +18,14 @@ class OrangeTiledWall : ModItem
         Item.consumable = true;
         Item.useTurn = true;
         Item.useTime = 7;
-        Item.createWall = ModContent.WallType<Walls.OrangeTiledWall>();
+        Item.createWall = ModContent.WallType<Walls.NickelFence>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.OrangeBrick>()).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.OrangeBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(4).AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>()).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(1).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
     }
 }

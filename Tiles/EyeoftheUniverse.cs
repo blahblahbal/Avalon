@@ -23,13 +23,12 @@ public class EyeoftheUniverse : ModTile
         };
         TileObjectData.newTile.AnchorWall = true;
         TileObjectData.addTile(Type);
-        DustType = 7;
         TileID.Sets.DisableSmartCursor[Type] = true;
         AddMapEntry(new Color(120, 85, 60));
     }
     public override void NearbyEffects(int i, int j, bool closer)
     {
-        if (Main.tile[i, j].TileFrameY >= 163 && Main.tile[i, j].TileFrameX <= 322)
+        if (Main.tile[i, j].TileFrameY >= 161 && Main.tile[i, j].TileFrameX <= 322)
         {
             Lighting.AddLight(new Vector2(i * 16, j * 16), new Vector3(0.043f, 0.11f, 0.19f));
         }
@@ -50,17 +49,23 @@ public class EyeoftheUniverse : ModTile
             Color.White);
     }
 
-    // public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    // {
-        // int item = 0;
-        // switch (frameY / 160)
-        // {
-            // case 0: item = ModContent.ItemType<Items.Placeable.Painting.EyeoftheUniverse>(); break;
-            // case 1: item = ModContent.ItemType<Items.Placeable.Painting.BlueEyeoftheUniverse>(); break;
-        // }
-        // if (item > 0)
-        // {
-            // Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 48, 48, item);
-        // }
-    // }
+    public override bool CreateDust(int i, int j, ref int type)
+    {
+        if (Main.rand.NextBool(5))
+        {
+            switch (Main.tile[i, j].TileFrameY / 160)
+            {
+                case 0:
+                    Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, DustID.WoodFurniture);
+                    return false;
+                case 1:
+                    if (Main.rand.NextBool(2))
+                    {
+                        Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, DustID.MagicMirror);
+                    }
+                    return false;
+            }
+        }
+        return false;
+    }
 }

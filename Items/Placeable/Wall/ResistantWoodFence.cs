@@ -13,17 +13,15 @@ class ResistantWoodFence : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.Size = new Vector2(12);
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.width = dims.Width;
         Item.useTurn = true;
-        Item.useTime = 10;
+        Item.useTime = 7;
         Item.createWall = ModContent.WallType<Avalon.Walls.ResistantWoodFence>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;
-        Item.height = dims.Height;
     }
     public override void AddRecipes()
     {
