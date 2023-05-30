@@ -4163,6 +4163,11 @@ Mods: {
 				DisplayName: Resistant Wood Fence
 				Tooltip: ""
 			}
+
+			StarstoneBrick: {
+				DisplayName: Starstone Brick
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
