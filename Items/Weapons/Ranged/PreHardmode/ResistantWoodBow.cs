@@ -18,5 +18,12 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
         {
             return new Vector2(6, 0);
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>(), 10)
+                .AddTile(TileID.WorkBenches).Register();
+        }
     }
 }

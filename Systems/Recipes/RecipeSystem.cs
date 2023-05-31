@@ -15,15 +15,15 @@ public class RecipeSystem : ModSystem
 {
     public override void AddRecipeGroups()
     {
-        //if (RecipeGroup.recipeGroupIDs.ContainsKey("Wood"))
-        //{
-        //    int index = RecipeGroup.recipeGroupIDs["Wood"];
-        //    RecipeGroup group0 = RecipeGroup.recipeGroups[index];
-        //    group0.ValidItems.Add(ModContent.ItemType<ApocalyptusWood>());
-        //    group0.ValidItems.Add(ModContent.ItemType<Coughwood>());
-        //    group0.ValidItems.Add(ModContent.ItemType<BleachedEbony>());
-        //    group0.ValidItems.Add(ModContent.ItemType<ResistantWood>());
-        //}
+        if (RecipeGroup.recipeGroupIDs.ContainsKey("Wood"))
+        {
+            int index = RecipeGroup.recipeGroupIDs["Wood"];
+            RecipeGroup group0 = RecipeGroup.recipeGroups[index];
+            group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>());
+            group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.Coughwood>());
+            group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>());
+            group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>());
+        }
 
         var groupGemStaves = new RecipeGroup(() => "Any Gem Staff", new int[]
         {

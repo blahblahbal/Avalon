@@ -26,4 +26,12 @@ class BleachedEbonyBookcase : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 20)
+            .AddIngredient(ItemID.Book, 10)
+            .AddTile(TileID.Sawmill).Register();
+    }
 }

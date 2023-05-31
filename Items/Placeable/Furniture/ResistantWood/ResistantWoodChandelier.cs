@@ -26,4 +26,13 @@ class ResistantWoodChandelier : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 4)
+            .AddIngredient(ItemID.Torch, 4)
+            .AddIngredient(ItemID.Chain)
+            .AddTile(TileID.Anvils).Register();
+    }
 }

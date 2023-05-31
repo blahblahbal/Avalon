@@ -26,4 +26,12 @@ class BleachedEbonyLamp : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ItemID.Torch)
+            .AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 3)
+            .AddTile(TileID.WorkBenches).Register();
+    }
 }

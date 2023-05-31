@@ -26,4 +26,12 @@ class BleachedEbonyCandle : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 4)
+            .AddIngredient(ItemID.Torch)
+            .AddTile(TileID.Sawmill).Register();
+    }
 }

@@ -26,4 +26,13 @@ class CoughwoodClock : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddRecipeGroup("IronBar", 3)
+            .AddIngredient(ItemID.Glass, 6)
+            .AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 10)
+            .AddTile(TileID.Sawmill).Register();
+    }
 }

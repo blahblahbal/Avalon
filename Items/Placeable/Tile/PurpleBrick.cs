@@ -25,10 +25,4 @@ class PurpleBrick : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
-    /* public override void AddRecipes()
-    {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.PurpleBrickWall>(), 4).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.PurpleSlabWall>(), 4).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.PurpleTiledWall>(), 4).AddTile(TileID.WorkBenches).Register();
-    } */
 }

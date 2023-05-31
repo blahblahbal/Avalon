@@ -26,7 +26,7 @@ class PurpleBrickWall : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.PurpleBrick>()).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.PurpleBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.PurpleBrick>()).AddTile(TileID.HeavyWorkBench).Register();
+        Recipe.Create(ModContent.ItemType<Tile.PurpleBrick>()).AddIngredient(this, 4).AddTile(TileID.HeavyWorkBench).Register();
     }
 }

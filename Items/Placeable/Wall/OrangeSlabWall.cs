@@ -26,7 +26,7 @@ class OrangeSlabWall : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.OrangeBrick>()).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.OrangeBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.OrangeBrick>()).AddTile(TileID.HeavyWorkBench).Register();
+        Recipe.Create(ModContent.ItemType<Tile.OrangeBrick>()).AddIngredient(this, 4).AddTile(TileID.HeavyWorkBench).Register();
     }
 }

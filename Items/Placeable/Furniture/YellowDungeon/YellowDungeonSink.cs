@@ -26,4 +26,12 @@ public class YellowDungeonSink : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.YellowBrick>(), 6)
+            .AddIngredient(ItemID.WaterBucket)
+            .AddTile(TileID.WorkBenches).Register();
+    }
 }

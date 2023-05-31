@@ -26,4 +26,12 @@ class BleachedEbonySofa : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 5)
+            .AddIngredient(ItemID.Silk, 2)
+            .AddTile(TileID.Sawmill).Register();
+    }
 }

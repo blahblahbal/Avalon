@@ -25,4 +25,11 @@ class ResistantWoodToilet : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 6)
+            .AddTile(TileID.Sawmill).Register();
+    }
 }

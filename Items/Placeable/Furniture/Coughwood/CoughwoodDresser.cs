@@ -26,4 +26,11 @@ class CoughwoodDresser : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 16)
+            .AddTile(TileID.Sawmill).Register();
+    }
 }
