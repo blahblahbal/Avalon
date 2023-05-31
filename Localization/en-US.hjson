@@ -4168,6 +4168,11 @@ Mods: {
 				DisplayName: Starstone Brick
 				Tooltip: ""
 			}
+
+			NickelFence: {
+				DisplayName: Nickel Fence
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

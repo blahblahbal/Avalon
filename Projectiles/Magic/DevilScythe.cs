@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent.Drawing;
 
 namespace Avalon.Projectiles.Magic;
 
@@ -22,7 +23,7 @@ public class DevilScythe : ModProjectile
         Projectile.alpha = 512;
         Projectile.aiStyle = -1;
         Projectile.friendly = true;
-        Projectile.penetrate = 4;
+        Projectile.penetrate = 3;
         Projectile.tileCollide = true;
         Projectile.scale = 0.9f;
         Projectile.DamageType = DamageClass.Magic;
@@ -31,7 +32,7 @@ public class DevilScythe : ModProjectile
     public override void Kill(int timeLeft)
     {
         Projectile.oldVelocity *= 0.5f;
-        SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+        SoundEngine.PlaySound(SoundID.Item40, Projectile.position);
         for (int dustAmount = 0; dustAmount < 30; dustAmount++)
         {
             Dust d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.DesertTorch, 0f, 0f, 0, default(Color), 1f);
@@ -50,8 +51,46 @@ public class DevilScythe : ModProjectile
         }
     }
 
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+    {
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.AshTreeShake, settings, Projectile.owner);
+        target.AddBuff(BuffID.OnFire3, 60 * 5);
+    }
+    public override void OnHitPlayer(Player target, Player.HurtInfo info)
+    {
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.AshTreeShake, settings, Projectile.owner);
+        target.AddBuff(BuffID.OnFire3, 60 * 5);
+    }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
+        SoundEngine.PlaySound(SoundID.Item10,Projectile.Center);
+
+        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(Projectile.Hitbox);
+        ParticleOrchestraSettings settings = particleOrchestraSettings;
+        ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.AshTreeShake, settings, Projectile.owner);
+
+        for (int dustAmount = 0; dustAmount < 6; dustAmount++)
+        {
+            Dust d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.DesertTorch, 0f, 0f, 0, default(Color), 2);
+            d.noGravity = true;
+            d.velocity = -Projectile.oldVelocity.RotatedByRandom(1) * Main.rand.NextFloat(0.2f, 1f);
+            d.noLightEmittence = true;
+        }
+        for (int dustAmount = 0; dustAmount < 2; dustAmount++)
+        {
+            Dust d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.BoneTorch, 0f, 0f, 0, default(Color), 2);
+            d.noGravity = true;
+            d.velocity = -Projectile.oldVelocity.RotatedByRandom(1) * Main.rand.NextFloat(0.2f, 0.8f);
+            d.noLightEmittence = true;
+        }
+
         if (Projectile.velocity.X != oldVelocity.X)
         {
             Projectile.velocity.X = -oldVelocity.X;
@@ -65,29 +104,32 @@ public class DevilScythe : ModProjectile
     }
     public override void AI()
     {
-        Projectile.rotation += Projectile.direction * 0.2f;
+        Projectile.rotation += Projectile.direction * 0.02f * Projectile.velocity.Length();
         Projectile.ai[0] += 1f;
         if (Projectile.ai[0] <= 120f)
         {
             Projectile.alpha = (int)MathHelper.Clamp(Projectile.alpha - 10, -255, 255);
         }
-        Projectile.velocity *= 1.04f;
-        Dust d2 = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.DesertTorch, 0f, 0f, 0, default(Color), Projectile.Opacity);
-        d2.noGravity = true;
-        d2.velocity = Projectile.velocity;
-        d2.noLightEmittence = Main.rand.NextBool();
-
-        if (Main.rand.NextBool(3))
+        Projectile.velocity += Vector2.Normalize(Projectile.velocity) * 0.14f;
+        if (Projectile.timeLeft % 3 == 0)
         {
-            Dust d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.BoneTorch, 0f, 0f, 0, default(Color), Projectile.Opacity * 0.8f);
-            d.noGravity = true;
-            d.velocity = Projectile.velocity;
-            d.noLightEmittence = Main.rand.NextBool();
+            Dust d2 = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.DesertTorch, 0f, 0f, 0, default(Color), Projectile.Opacity);
+            d2.noGravity = true;
+            d2.velocity = Projectile.velocity * 0.5f;
+            d2.noLightEmittence = Main.rand.NextBool();
+
+            if (Main.rand.NextBool(3))
+            {
+                Dust d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.BoneTorch, 0f, 0f, 0, default(Color), Projectile.Opacity * 0.8f);
+                d.noGravity = true;
+                d.velocity = Projectile.velocity * 0.5f;
+                d.noLightEmittence = Main.rand.NextBool();
+            }
         }
 
         if (Projectile.ai[1] == 0)
         {
-            Projectile.ai[2] = ClassExtensions.FindClosestNPC(Projectile, 400, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly && Collision.CanHit(npc, Projectile));
+            Projectile.ai[2] = ClassExtensions.FindClosestNPC(Projectile, 400, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly || !Collision.CanHit(npc, Projectile));
         }
 
         int targetNPC = (int)(Projectile.ai[2]);
@@ -101,13 +143,14 @@ public class DevilScythe : ModProjectile
             else
             {
                 Projectile.ai[1] = 1;
-                Projectile.velocity += Projectile.Center.DirectionTo(Main.npc[targetNPC].Center) * 0.02f * Projectile.velocity.Length();
+                Projectile.velocity += Projectile.Center.DirectionTo(Main.npc[targetNPC].Center) * 0.005f * Projectile.velocity.Length();
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.DirectionTo(Main.npc[targetNPC].Center) * Projectile.velocity.Length(), 0.03f);
+                //Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.DirectionTo(Main.npc[targetNPC].Center) * Projectile.velocity.Length(), 0.03f);
             }
         }
         if(Projectile.velocity.Length() >= 10)
         {
-            Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 10;
+            Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 12;
         }
     }
 
@@ -116,11 +159,16 @@ public class DevilScythe : ModProjectile
         Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         int frameHeight = texture.Height / Main.projFrames[Projectile.type];
         Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
-
-        for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type]; i++)
+        int length = ProjectileID.Sets.TrailCacheLength[Projectile.type];
+        for (int i = 1; i < length; i++)
         {
-            Main.EntitySpriteDraw(texture, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255, 255, 255, 0) * ((float)(8 - i) / 8f) * Projectile.Opacity * 0.5f, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            //float multiply = ((float)(length - i) / length) * Projectile.Opacity * 0.2f;
+            float multiply = (float)(length - i) / length * 0.5f;
+            Main.EntitySpriteDraw(texture, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255, 255, 255, 0) * multiply, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            multiply = (float)(length - i - ((float)i - 0.5f)) / length * 0.5f;
+            Main.EntitySpriteDraw(texture, Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[i - 1],0.5f) - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255, 255, 255, 0) * multiply, MathHelper.Lerp(Projectile.oldRot[i], Projectile.oldRot[i - 1],0.5f), new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         }
+
         Main.EntitySpriteDraw(texture, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255,255,255, 25) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
