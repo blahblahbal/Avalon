@@ -65,6 +65,7 @@ public class CoughwoodDoorOpen : ModTile
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.OpenDoor };
         TileID.Sets.CloseDoorID[Type] = ModContent.TileType<CoughwoodDoorClosed>();
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodDoor>());
         DustType = -1;
     }
 

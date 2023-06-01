@@ -65,6 +65,7 @@ public class PurpleDungeonDoorOpen : ModTile
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.OpenDoor };
         TileID.Sets.CloseDoorID[Type] = ModContent.TileType<PurpleDungeonDoorClosed>();
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonDoor>());
         DustType = -1;
     }
 

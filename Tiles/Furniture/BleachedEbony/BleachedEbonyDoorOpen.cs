@@ -65,6 +65,7 @@ public class BleachedEbonyDoorOpen : ModTile
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.OpenDoor };
         TileID.Sets.CloseDoorID[Type] = ModContent.TileType<BleachedEbonyDoorClosed>();
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyDoor>());
         DustType = -1;
     }
 

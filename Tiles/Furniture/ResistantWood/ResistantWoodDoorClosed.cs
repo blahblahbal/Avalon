@@ -45,6 +45,7 @@ public class ResistantWoodDoorClosed : ModTile
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.ClosedDoor };
         TileID.Sets.OpenDoorID[Type] = ModContent.TileType<ResistantWoodDoorOpen>();
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodDoor>());
         DustType = -1;
     }
 
