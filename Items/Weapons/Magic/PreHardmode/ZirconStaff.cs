@@ -35,8 +35,8 @@ class ZirconStaff : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Material.Ores.Zircon>(), 15)
-            .AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>(), 8)
+            .AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>(), 10)
+            .AddIngredient(ModContent.ItemType<Material.Ores.Zircon>(), 8)
             .AddTile(TileID.Anvils)
             .Register();
     }

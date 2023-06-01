@@ -26,4 +26,12 @@ class BismuthCandelabra : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>(), 5)
+            .AddIngredient(ItemID.Torch, 3)
+            .AddTile(TileID.WorkBenches).Register();
+    }
 }

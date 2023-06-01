@@ -27,6 +27,6 @@ class RhodiumBrick : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Ores.RhodiumOre>()).AddIngredient(ItemID.StoneBlock).AddTile(TileID.Furnaces).Register();
+        CreateRecipe(5).AddIngredient(ItemID.StoneBlock,5).AddIngredient(ModContent.ItemType<Material.Ores.RhodiumOre>()).AddTile(TileID.Furnaces).Register();
     }
 }

@@ -25,4 +25,13 @@ class BronzeChandelier : ModItem
         Item.value = 3750;
         Item.useAnimation = 15;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.Bars.BronzeBar>(), 4)
+            .AddIngredient(ItemID.Torch, 4)
+            .AddIngredient(ItemID.Chain)
+            .AddTile(TileID.Anvils).Register();
+    }
 }

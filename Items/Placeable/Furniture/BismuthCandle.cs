@@ -30,6 +30,14 @@ class BismuthCandle : ModItem
         Item.height = dims.Height;
     }
 
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>())
+            .AddIngredient(ItemID.Torch)
+            .AddTile(TileID.WorkBenches).Register();
+    }
+
     //This whole section is just copied from the vanilla code for gold/platinum candles, is it possible to just reuse the vanilla code instead?
     public override void HoldItem(Player player)
     {

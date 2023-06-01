@@ -44,7 +44,7 @@ class PurpleHaze : ModItem
 
     public override void AddRecipes()
     {
-        Recipe.Create(Type).AddIngredient(ItemID.SpellTome).AddIngredient(ItemID.SoulofNight, 15).AddIngredient(ModContent.ItemType<Pathogen>(),20).AddTile(TileID.Bookcases).Register();
+        Recipe.Create(Type).AddIngredient(ItemID.SpellTome).AddIngredient(ModContent.ItemType<Pathogen>(),20).AddIngredient(ItemID.SoulofNight, 15).AddTile(TileID.Bookcases).Register();
     }
     //public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     //{
