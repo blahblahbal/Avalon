@@ -4288,6 +4288,36 @@ Mods: {
 				Tooltip: ""
 				DisplayName: Bleached Ebony Beam
 			}
+
+			BleachedEbonyBreastplate: {
+				DisplayName: Bleached Ebony Breastplate
+				Tooltip: ""
+			}
+
+			BleachedEbonyGreaves: {
+				DisplayName: Bleached Ebony Greaves
+				Tooltip: ""
+			}
+
+			BleachedEbonyHelmet: {
+				DisplayName: Bleached Ebony Helmet
+				Tooltip: ""
+			}
+
+			BleachedEbonyHammer: {
+				DisplayName: Bleached Ebony Hammer
+				Tooltip: ""
+			}
+
+			BleachedEbonySword: {
+				DisplayName: Bleached Ebony Sword
+				Tooltip: ""
+			}
+
+			BleachedEbonyBow: {
+				DisplayName: Bleached Ebony Bow
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

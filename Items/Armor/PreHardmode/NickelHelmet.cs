@@ -32,7 +32,7 @@ class NickelHelmet : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "+2 defense";
+        player.setBonus = "2 defense";
         player.statDefense += 2;
     }
 }

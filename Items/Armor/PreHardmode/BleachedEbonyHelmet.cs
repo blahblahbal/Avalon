@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class CoughwoodHelmet : ModItem
+class BleachedEbonyHelmet : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -15,21 +15,19 @@ class CoughwoodHelmet : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
-        Item.defense = 2;
-        Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 0, 2, 0);
-        Item.height = dims.Height;
+        Item.width = 18;
+        Item.height = 18;
+        Item.defense = 1;
     }
 
     public override bool IsArmorSet(Item head, Item body, Item legs)
     {
-        return body.type == ModContent.ItemType<CoughwoodBreastplate>() && legs.type == ModContent.ItemType<CoughwoodGreaves>();
+        return body.type == ModContent.ItemType<BleachedEbonyBreastplate>() && legs.type == ModContent.ItemType<BleachedEbonyGreaves>();
     }
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Placeable.Tile.Coughwood>(), 20)
+            .AddIngredient(ModContent.ItemType<Placeable.Tile.BleachedEbony>(), 20)
             .AddTile(TileID.WorkBenches)
             .Register();
     }

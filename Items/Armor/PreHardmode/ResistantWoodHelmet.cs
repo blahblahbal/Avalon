@@ -25,7 +25,7 @@ namespace Avalon.Items.Armor.PreHardmode
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "+10% increased armor penetration and damage reduction";
+            player.setBonus = "10% increased armor penetration and damage reduction";
             player.endurance += 0.1f;
             player.GetArmorPenetration(DamageClass.Generic) += 0.1f;
         }
