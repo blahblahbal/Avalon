@@ -34,7 +34,7 @@ internal class BagofShadows : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(1)
+        Recipe.Create(Type)
             .AddIngredient(ItemID.DemoniteBar, 15)
             //.AddIngredient(ItemID.CursedFlame, 5)
             .AddIngredient(ItemID.EbonstoneBlock, 50)

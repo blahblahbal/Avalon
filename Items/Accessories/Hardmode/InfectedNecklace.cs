@@ -25,7 +25,7 @@ namespace Avalon.Items.Accessories.Hardmode
         }
         public override void AddRecipes()
         {
-            Recipe.Create(1)
+            Recipe.Create(Type)
                 .AddIngredient(ModContent.ItemType<MutatedStocking>())
                 .AddIngredient(ItemID.PygmyNecklace)
                 .AddTile(TileID.TinkerersWorkbench)

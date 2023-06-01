@@ -34,7 +34,7 @@ internal class BagofBlood : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(1)
+        Recipe.Create(Type)
             .AddIngredient(ItemID.Vertebrae, 15)
             //.AddIngredient(ItemID.Ichor, 10)
             .AddIngredient(ItemID.CrimstoneBlock, 50)

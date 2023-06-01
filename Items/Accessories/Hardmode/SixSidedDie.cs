@@ -26,7 +26,7 @@ public class SixSidedDie : ModItem
     }
     //public override void AddRecipes()
     //{
-    //    Recipe.Create(1)
+    //    Recipe.Create(Type)
     //        .AddIngredient(ModContent.ItemType<BlackWhetstone>())
     //        .AddIngredient(ModContent.ItemType<BloodyWhetstone>())
     //        .AddIngredient(ItemID.SharkToothNecklace)

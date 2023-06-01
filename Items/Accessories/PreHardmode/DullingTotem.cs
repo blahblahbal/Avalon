@@ -23,7 +23,7 @@ class DullingTotem : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(1)
+        Recipe.Create(Type)
             .AddIngredient(ItemID.Shackle, 6)
             .AddIngredient(ItemID.BandofRegeneration)
             .AddTile(TileID.Anvils).Register();

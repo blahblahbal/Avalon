@@ -20,6 +20,9 @@ public class VanillaItemRecipeCreator : ModSystem
             .Register();
 
         Recipe.Create(ItemID.Aglet).AddRecipeGroup("Avalon:CopperBar").AddRecipeGroup("Wood", 6).AddTile(TileID.Anvils).Register();
+        Recipe.Create(ItemID.PoisonedKnife, 50).AddIngredient(ItemID.ThrowingKnife, 50).AddIngredient(ModContent.ItemType<VirulentPowder>()).Register();
+        Recipe.Create(ItemID.MonsterLasagna).AddIngredient(ModContent.ItemType<YuckyBit>(), 8).AddTile(TileID.CookingPots).Register();
+        Recipe.Create(ItemID.MechanicalWorm).AddIngredient(ModContent.ItemType<YuckyBit>(), 6).AddRecipeGroup("IronBar", 5).AddIngredient(ItemID.SoulofNight, 6).AddTile(TileID.MythrilAnvil).Register();
         Recipe.Create(ItemID.IronskinPotion).AddIngredient(ItemID.BottledWater).AddIngredient(ItemID.Daybloom).AddIngredient(ModContent.ItemType<NickelOre>()).AddTile(TileID.Bottles).Register();
         Recipe.Create(ItemID.SpelunkerPotion).AddIngredient(ItemID.BottledWater).AddIngredient(ItemID.Blinkroot).AddIngredient(ItemID.Moonglow).AddIngredient(ModContent.ItemType<BismuthOre>()).AddTile(TileID.Bottles).Register();
         Recipe.Create(ItemID.PeaceCandle).AddIngredient(ModContent.ItemType<Items.Material.Bars.BismuthBar>(), 2).AddIngredient(ItemID.PinkTorch).AddTile(TileID.WorkBenches).Register();

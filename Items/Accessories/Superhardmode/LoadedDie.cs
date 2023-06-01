@@ -26,7 +26,7 @@ public class LoadedDie : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(1)
+        Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Hardmode.SixSidedDie>())
             .AddIngredient(ModContent.ItemType<CrystalEdge>())
             .AddTile(TileID.MythrilAnvil)

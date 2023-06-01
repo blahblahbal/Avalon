@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Common.Players;
+using Avalon.Items.Material;
 
 namespace Avalon.Items.Consumables;
 
@@ -58,5 +59,13 @@ class InfestedCarcass : ModItem
         }
 
         return true;
+    }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+			.AddIngredient(ModContent.ItemType<VirulentPowder>(), 30)
+			.AddIngredient(ModContent.ItemType<YuckyBit>(), 15)
+			.AddTile(TileID.DemonAltar).Register();
     }
 }

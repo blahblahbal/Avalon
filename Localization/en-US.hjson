@@ -3946,7 +3946,7 @@ Mods: {
 
 			VirulentPowder: {
 				DisplayName: Virulent Powder
-				Tooltip: ""
+				Tooltip: "Spreads the Contagion"
 			}
 
 			AncientOrangeBrickWall: {
@@ -4972,12 +4972,12 @@ Mods: {
 			OrangeDungeonDresser.MapEntry: Orange Dungeon Dresser
 			PurpleDungeonChest.MapEntry0: Purple Dungeon Chest
 			PurpleDungeonDresser.MapEntry: Purple Dungeon Dresser
-			OrangeDungeonChest.MapEntry0: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry0
-			YellowDungeonChest.MapEntry0: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry0
+			OrangeDungeonChest.MapEntry0: Orange Dungeon Chest
+			YellowDungeonChest.MapEntry0: Yellow Dungeon Chest
 			YellowDungeonDresser.MapEntry: Yellow Dungeon Dresser
 			CoughwoodDresser.MapEntry: Coughwood Dresser
 			BleachedEbonyDresser.MapEntry: Bleached Ebony Dresser
-			BleachedEbonyChest.MapEntry0: Mods.Avalon.Tiles.BleachedEbonyChest.MapEntry0
+			BleachedEbonyChest.MapEntry0: Bleached Ebony Chest
 		}
 
 		Prefixes: {

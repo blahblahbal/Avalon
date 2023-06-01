@@ -34,7 +34,7 @@ internal class BagofFire : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(1)
+        Recipe.Create(Type)
             .AddIngredient(ItemID.Fireblossom, 15)
             .AddIngredient(ItemID.HellstoneBar, 10)
             .AddIngredient(ItemID.AshBlock, 50)
