@@ -25,4 +25,12 @@ class CoughwoodLantern : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 6)
+            .AddIngredient(ItemID.Torch)
+            .AddTile(TileID.WorkBenches).Register();
+    }
 }

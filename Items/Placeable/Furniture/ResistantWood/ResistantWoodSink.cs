@@ -26,4 +26,12 @@ public class ResistantWoodSink : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 6)
+            .AddIngredient(ItemID.WaterBucket)
+            .AddTile(TileID.WorkBenches).Register();
+    }
 }

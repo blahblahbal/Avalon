@@ -13,5 +13,12 @@ namespace Avalon.Items.Tools.PreHardmode
             Item.useTime += 2;
             Item.damage += 2;
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>(), 8)
+                .AddTile(TileID.WorkBenches).Register();
+        }
     }
 }

@@ -25,4 +25,13 @@ class BismuthChandelier : ModItem
         Item.value = 30000;
         Item.useAnimation = 15;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>(), 4)
+            .AddIngredient(ItemID.Torch, 4)
+            .AddIngredient(ItemID.Chain)
+            .AddTile(TileID.Anvils).Register();
+    }
 }

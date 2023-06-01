@@ -34,8 +34,8 @@ class TourmalineStaff : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>(), 15)
-            .AddIngredient(ModContent.ItemType<Material.Bars.BronzeBar>(), 8)
+            .AddIngredient(ModContent.ItemType<Material.Bars.BronzeBar>(), 10)
+            .AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>(), 8)
             .AddTile(TileID.Anvils)
             .Register();
     }

@@ -35,8 +35,8 @@ class PeridotStaff : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Material.Ores.Peridot>(), 15)
-            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 8)
+            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 10)
+            .AddIngredient(ModContent.ItemType<Material.Ores.Peridot>(), 8)
             .AddTile(TileID.Anvils)
             .Register();
     }

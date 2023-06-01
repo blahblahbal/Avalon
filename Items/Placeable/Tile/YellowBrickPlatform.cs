@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -25,5 +26,11 @@ class YellowBrickPlatform : ModItem
         Item.value = 300;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+    }
+	
+    public override void AddRecipes()
+    {
+        CreateRecipe(2).AddIngredient(ModContent.ItemType<Tile.YellowBrick>()).Register();
+        Recipe.Create(ModContent.ItemType<Tile.YellowBrick>()).AddIngredient(this, 2).Register();
     }
 }

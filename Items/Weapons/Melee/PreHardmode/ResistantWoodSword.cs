@@ -11,5 +11,12 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode
             Item.useAnimation += 3;
             Item.damage += 2;
         }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>(), 7)
+                .AddTile(TileID.WorkBenches).Register();
+        }
     }
 }

@@ -25,10 +25,11 @@ public class ChunkstoneBrick : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
-
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe(1).AddIngredient(ModContent.ItemType<ChunkstoneBlock>()).AddIngredient(ItemID.StoneBlock).AddTile(TileID.Furnaces).Register();
-    //    CreateRecipe(1).AddIngredient(ModContent.ItemType<Items.Placeable.Wall.ChunkstoneBrickWall>(), 4).AddTile(TileID.WorkBenches).Register();
-    //}
+    public override void AddRecipes()
+    {
+        Terraria.Recipe.Create(Type)
+            .AddIngredient(ModContent.ItemType<ChunkstoneBlock>(),2)
+            .AddTile(TileID.Furnaces)
+            .Register();
+    }
 }

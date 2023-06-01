@@ -32,7 +32,7 @@ class ZincHelmet : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "+3 defense";
+        player.setBonus = "3 defense";
         player.statDefense += 3;
     }
 }

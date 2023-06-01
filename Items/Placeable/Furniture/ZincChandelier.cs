@@ -25,4 +25,13 @@ class ZincChandelier : ModItem
         Item.value = 15000;
         Item.useAnimation = 15;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 4)
+            .AddIngredient(ItemID.Torch, 4)
+            .AddIngredient(ItemID.Chain)
+            .AddTile(TileID.Anvils).Register();
+    }
 }

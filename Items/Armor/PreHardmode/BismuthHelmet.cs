@@ -31,7 +31,7 @@ class BismuthHelmet : ModItem
     }
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "+4 defense";
+        player.setBonus = "4 defense";
         player.statDefense += 4;
     }
 }

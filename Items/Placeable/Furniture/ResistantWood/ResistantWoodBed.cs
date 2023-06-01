@@ -26,4 +26,12 @@ class ResistantWoodBed : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 15)
+            .AddIngredient(ItemID.Silk, 5)
+            .AddTile(TileID.Sawmill).Register();
+    }
 }

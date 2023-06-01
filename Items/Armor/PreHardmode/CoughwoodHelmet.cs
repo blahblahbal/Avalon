@@ -35,7 +35,7 @@ class CoughwoodHelmet : ModItem
     }
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "+1 defense";
+        player.setBonus = "1 defense";
         player.statDefense++;
     }
 }

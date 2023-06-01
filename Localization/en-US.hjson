@@ -4173,6 +4173,151 @@ Mods: {
 				DisplayName: Nickel Fence
 				Tooltip: ""
 			}
+
+			BleachedEbonyWall: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Wall
+			}
+
+			BleachedEbonyFence: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Fence
+			}
+
+			BleachedEbonyWorkBench: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Work Bench
+			}
+
+			BleachedEbonyToilet: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Toilet
+			}
+
+			BleachedEbonyTable: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Table
+			}
+
+			BleachedEbonySofa: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Sofa
+			}
+
+			BleachedEbonySink: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Sink
+			}
+
+			BleachedEbonyPlatform: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Platform
+			}
+
+			BleachedEbonyPiano: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Piano
+			}
+
+			BleachedEbonyLantern: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Lantern
+			}
+
+			BleachedEbonyLamp: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Lamp
+			}
+
+			BleachedEbonyDresser: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Dresser
+			}
+
+			BleachedEbonyDoor: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Door
+			}
+
+			BleachedEbonyClock: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Clock
+			}
+
+			BleachedEbonyChest: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Chest
+			}
+
+			BleachedEbonyChandelier: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Chandelier
+			}
+
+			BleachedEbonyChair: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Chair
+			}
+
+			BleachedEbonyCandle: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Candle
+			}
+
+			BleachedEbonyCandelabra: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Candelabra
+			}
+
+			BleachedEbonyBookcase: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Bookcase
+			}
+
+			BleachedEbonyBed: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Bed
+			}
+
+			BleachedEbonyBathtub: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Bathtub
+			}
+
+			BleachedEbonyBeam: {
+				Tooltip: ""
+				DisplayName: Bleached Ebony Beam
+			}
+
+			BleachedEbonyBreastplate: {
+				DisplayName: Bleached Ebony Breastplate
+				Tooltip: ""
+			}
+
+			BleachedEbonyGreaves: {
+				DisplayName: Bleached Ebony Greaves
+				Tooltip: ""
+			}
+
+			BleachedEbonyHelmet: {
+				DisplayName: Bleached Ebony Helmet
+				Tooltip: ""
+			}
+
+			BleachedEbonyHammer: {
+				DisplayName: Bleached Ebony Hammer
+				Tooltip: ""
+			}
+
+			BleachedEbonySword: {
+				DisplayName: Bleached Ebony Sword
+				Tooltip: ""
+			}
+
+			BleachedEbonyBow: {
+				DisplayName: Bleached Ebony Bow
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4826,6 +4971,8 @@ Mods: {
 			YellowDungeonChest.MapEntry0: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry0
 			YellowDungeonDresser.MapEntry: Yellow Dungeon Dresser
 			CoughwoodDresser.MapEntry: Coughwood Dresser
+			BleachedEbonyDresser.MapEntry: Bleached Ebony Dresser
+			BleachedEbonyChest.MapEntry0: Mods.Avalon.Tiles.BleachedEbonyChest.MapEntry0
 		}
 
 		Prefixes: {

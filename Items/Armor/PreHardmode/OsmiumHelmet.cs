@@ -27,7 +27,7 @@ public class OsmiumHelmet : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "+5 defense";
+        player.setBonus = "5 defense";
         player.statDefense += 5;
     }
     public override void UpdateEquip(Player player)
