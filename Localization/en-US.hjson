@@ -4309,6 +4309,7 @@ Mods: {
 			BactusMinion.DisplayName: Bactus Minion
 			Viriling.DisplayName: Viriling
 			ContaminatedGhoul.DisplayName: Contaminated Ghoul
+			ViralMummy.DisplayName: Viral Mummy
 		}
 
 		Buffs: {

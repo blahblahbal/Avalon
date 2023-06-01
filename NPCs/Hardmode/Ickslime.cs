@@ -30,7 +30,7 @@ public class Ickslime : ModNPC
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ItemID.Gel, 1,5,10));
-        npcLoot.Add(ItemDropRule.Common(ItemID.Vitamins, 90));
+        npcLoot.Add(ItemDropRule.StatusImmunityItem(ItemID.Vitamins, 90));
 
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), 5091, 1500));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), 5091, 500));

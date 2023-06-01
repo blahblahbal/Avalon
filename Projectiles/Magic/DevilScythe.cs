@@ -54,7 +54,7 @@ public class DevilScythe : ModProjectile
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
-        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
+        particleOrchestraSettings.PositionInWorld = target.Hitbox.ClosestPointInRect(Projectile.Center);
         ParticleOrchestraSettings settings = particleOrchestraSettings;
         ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.AshTreeShake, settings, Projectile.owner);
         target.AddBuff(BuffID.OnFire3, 60 * 5);
@@ -62,7 +62,7 @@ public class DevilScythe : ModProjectile
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
-        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
+        particleOrchestraSettings.PositionInWorld = target.Hitbox.ClosestPointInRect(Projectile.Center);
         ParticleOrchestraSettings settings = particleOrchestraSettings;
         ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.AshTreeShake, settings, Projectile.owner);
         target.AddBuff(BuffID.OnFire3, 60 * 5);
@@ -72,7 +72,7 @@ public class DevilScythe : ModProjectile
         SoundEngine.PlaySound(SoundID.Item10,Projectile.Center);
 
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
-        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(Projectile.Hitbox);
+        particleOrchestraSettings.PositionInWorld = Projectile.Center + Vector2.Normalize(oldVelocity) * 10;
         ParticleOrchestraSettings settings = particleOrchestraSettings;
         ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.AshTreeShake, settings, Projectile.owner);
 
