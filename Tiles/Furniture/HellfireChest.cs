@@ -19,8 +19,6 @@ public class HellfireChest : ModTile
         // Properties
         Main.tileSpelunker[Type] = true;
         Main.tileContainer[Type] = true;
-        Main.tileShine2[Type] = true;
-        Main.tileShine[Type] = 1200;
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
         Main.tileOreFinderPriority[Type] = 500;

@@ -3946,7 +3946,7 @@ Mods: {
 
 			VirulentPowder: {
 				DisplayName: Virulent Powder
-				Tooltip: "Spreads the Contagion"
+				Tooltip: Spreads the Contagion
 			}
 
 			AncientOrangeBrickWall: {
