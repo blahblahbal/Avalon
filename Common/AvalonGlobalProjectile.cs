@@ -3,6 +3,7 @@ using Avalon.Common.Players;
 using Avalon.Dusts;
 using Avalon.Items.Accessories.Hardmode;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -88,7 +89,6 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             }
         }
     }
-
     public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
     {
         if (!projectile.npcProj && !projectile.noEnchantments && projectile.DamageType == DamageClass.Melee)
@@ -103,5 +103,38 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             }
         }
             base.OnHitNPC(projectile, target, hit, damageDone);
+    }
+
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[44] = 6;
+        ProjectileID.Sets.TrailingMode[44] = 2;
+        ProjectileID.Sets.TrailCacheLength[45] = 6;
+        ProjectileID.Sets.TrailingMode[45] = 2;
+    }
+    public override bool PreDraw(Projectile projectile, ref Color lightColor)
+    {
+        if ((ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement))
+        {
+            if (projectile.type is 45 or 44) // Demon Scythes
+            {
+                float rotationMultiplier = 0.7f;
+
+                Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/Projectiles/DemonScythe").Value;
+                int frameHeight = texture.Height;
+                Rectangle frame = new Rectangle(0, frameHeight * projectile.frame, texture.Width, frameHeight);
+                int length = ProjectileID.Sets.TrailCacheLength[projectile.type];
+                for (int i = 0; i < length; i++)
+                {
+                    //float multiply = ((float)(length - i) / length) * projectile.Opacity * 0.2f;
+                    float multiply = (float)(length - i) / length * 0.5f;
+                    Main.EntitySpriteDraw(texture, projectile.oldPos[i] - Main.screenPosition + (projectile.Size / 2f), frame, new Color(128, 128, 255, 0) * multiply, projectile.oldRot[i] * rotationMultiplier, new Vector2(texture.Width, frameHeight) / 2, projectile.scale, SpriteEffects.None, 0);
+                }
+
+                Main.EntitySpriteDraw(texture, projectile.position - Main.screenPosition + (projectile.Size / 2f), frame, new Color(128, 128, 255, 25) * 0.7f, projectile.rotation * rotationMultiplier, new Vector2(texture.Width, frameHeight) / 2, projectile.scale, SpriteEffects.None, 0);
+                return false;
+            }
+        }
+        return base.PreDraw(projectile, ref lightColor);
     }
 }

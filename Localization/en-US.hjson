@@ -4318,6 +4318,11 @@ Mods: {
 				DisplayName: Bleached Ebony Bow
 				Tooltip: ""
 			}
+
+			ViralMummyBanner: {
+				DisplayName: Viral Mummy Banner
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

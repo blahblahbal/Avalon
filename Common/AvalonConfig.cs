@@ -34,8 +34,8 @@ public class AvalonClientConfig : ModConfig
     [DefaultValue(true)]
     public bool ScreenshakeEnabled;
 
-    [Label("$Mods.Avalon.Config.BiomeParticles.Label")]
-    [Tooltip("$Mods.Avalon.Config.BiomeParticles.Tooltip")]
-    [DefaultValue(true)]
-    public bool BiomeParticlesEnabled;
+    //[Label("$Mods.Avalon.Config.BiomeParticles.Label")]
+    //[Tooltip("$Mods.Avalon.Config.BiomeParticles.Tooltip")]
+    //[DefaultValue(true)]
+    //public bool BiomeParticlesEnabled;
 }

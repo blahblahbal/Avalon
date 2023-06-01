@@ -23,6 +23,7 @@ public class ViralMummy : ModNPC
         NPC.CloneDefaults(NPCID.DarkMummy);
         AIType = NPCID.DarkMummy;
         AnimationType = NPCID.DarkMummy;
+        BannerItem = ModContent.ItemType<Items.Banners.ViralMummyBanner>();
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionCaveDesert>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)

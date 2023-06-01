@@ -1,3 +1,4 @@
+using Avalon.NPCs.Hardmode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -493,6 +494,9 @@ public class MonsterBanner : ModTile
                 //case 77:
                 //    t = ModContent.NPCType<NPCs.TropicalSlime>();
                 //    break;
+                case 78:
+                    t = ModContent.NPCType<ViralMummy>();
+                    break;
                 default:
                     t = 0;
                     return;
