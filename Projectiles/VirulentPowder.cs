@@ -6,6 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent.Drawing;
+using Avalon.Common;
 
 namespace Avalon.Projectiles;
 
@@ -36,7 +37,52 @@ public class VirulentPowder : ModProjectile
                 dust7.noGravity = true;
             }
         }
-        bool flag4 = Main.myPlayer == Projectile.owner;
+        bool flag34 = Main.myPlayer == Projectile.owner;
+
+        int num988 = (int)(Projectile.position.X / 16f) - 1;
+        int num999 = (int)((Projectile.position.X + (float)Projectile.width) / 16f) + 2;
+        int num1010 = (int)(Projectile.position.Y / 16f) - 1;
+        int num1021 = (int)((Projectile.position.Y + (float)Projectile.height) / 16f) + 2;
+        if (num988 < 0)
+        {
+            num988 = 0;
+        }
+        if (num999 > Main.maxTilesX)
+        {
+            num999 = Main.maxTilesX;
+        }
+        if (num1010 < 0)
+        {
+            num1010 = 0;
+        }
+        if (num1021 > Main.maxTilesY)
+        {
+            num1021 = Main.maxTilesY;
+        }
+        Vector2 vector57 = default(Vector2);
+        for (int num1032 = num988; num1032 < num999; num1032++)
+        {
+            for (int num1043 = num1010; num1043 < num1021; num1043++)
+            {
+                vector57.X = num1032 * 16;
+                vector57.Y = num1043 * 16;
+                if (!(Projectile.position.X + Projectile.width > vector57.X) || !(Projectile.position.X < vector57.X + 16f) || !(Projectile.position.Y + Projectile.height > vector57.Y) || !(Projectile.position.Y < vector57.Y + 16f))
+                {
+                    continue;
+                }
+                AvalonWorld.ConvertFromThings(num1032, num1043, 2);
+                Tile tile = Main.tile[num1032, num1043];
+                if (tile.TileType >= 0 && tile.TileType < TileID.Count && TileID.Sets.CommonSapling[tile.TileType])
+                {
+                    if (Main.remixWorld && num1043 >= (int)Main.worldSurface - 1 && num1043 < Main.maxTilesY - 20)
+                    {
+                        WorldGen.AttemptToGrowTreeFromSapling(num1032, num1043, underground: false);
+                    }
+                    WorldGen.AttemptToGrowTreeFromSapling(num1032, num1043, num1043 > (int)Main.worldSurface - 1);
+                }
+            }
+        }
+
         //if (flag4)
         //{
         //    int num92 = (int)(Entity.position.X / 16f) - 1;

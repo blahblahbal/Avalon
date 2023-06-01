@@ -695,4 +695,175 @@ public class AvalonWorld : ModSystem
         }
         crackedBrick = false;
     }
+
+    public static void ConvertFromThings(int x, int y, int convert, bool tileframe = true)
+    {
+        Tile tile = Main.tile[x, y];
+        int type = tile.TileType;
+        int wall = tile.WallType;
+        if (!WorldGen.InWorld(x, y, 1))
+        {
+            return;
+        }
+        // convert from contagion to purity
+        if (convert == 0)
+        {
+            if (Main.tile[x, y] != null)
+            {
+                if (wall == ModContent.WallType<Walls.ContagionGrassWall>())
+                {
+                    Main.tile[x, y].WallType = WallID.GrassUnsafe;
+                }
+                else if (wall == ModContent.WallType<Walls.ChunkstoneWall>())
+                {
+                    Main.tile[x, y].WallType = WallID.Stone;
+                }
+            }
+            if (Main.tile[x, y] != null)
+            {
+                if (type == ModContent.TileType<Ickgrass>())
+                {
+                    tile.TileType = TileID.Grass;
+                }
+                else if (type == ModContent.TileType<YellowIce>())
+                {
+                    tile.TileType = TileID.IceBlock;
+                }
+                else if (type == ModContent.TileType<Snotsand>())
+                {
+                    tile.TileType = TileID.Sand;
+                }
+                else if (type == ModContent.TileType<Chunkstone>())
+                {
+                    tile.TileType = TileID.Stone;
+                }
+                else if (type == ModContent.TileType<Snotsandstone>())
+                {
+                    tile.TileType = TileID.Sandstone;
+                }
+                else if (type == ModContent.TileType<HardenedSnotsand>())
+                {
+                    tile.TileType = TileID.HardenedSand;
+                }
+                //else if (type == ModContent.TileType<ContagionShortGrass>())
+                //{
+                //    tile.type = TileID.Plants;
+                //}
+                //if (TileID.Sets.Conversion.Grass[type] || type == 0)
+                //{
+                //    WorldGen.SquareTileFrame(x, y);
+                //}
+            }
+        }
+        if (convert == 1)
+        {
+            if (Main.tile[x, y] != null)
+            {
+                if (wall == ModContent.WallType<Walls.ContagionGrassWall>() || wall == WallID.CrimsonGrassUnsafe || wall == WallID.CorruptGrassUnsafe || wall == WallID.HallowedGrassUnsafe)
+                {
+                    Main.tile[x, y].WallType = WallID.JungleUnsafe;
+                }
+                else if (wall == WallID.DirtUnsafe)
+                {
+                    Main.tile[x, y].WallType = WallID.MudUnsafe;
+                }
+            }
+            if (Main.tile[x, y] != null)
+            {
+                if (type == ModContent.TileType<Ickgrass>() || type == TileID.CrimsonGrass || type == TileID.CorruptGrass || type == TileID.Grass || type == TileID.HallowedGrass)
+                {
+                    tile.TileType = TileID.JungleGrass;
+                }
+                else if (type == TileID.Dirt)
+                {
+                    tile.TileType = TileID.Mud;
+                }
+                else if (type == ModContent.TileType<Snotsand>() || type == TileID.Sand || type == TileID.Crimsand || type == TileID.Ebonsand || type == TileID.Pearlsand)
+                {
+                    tile.TileType = TileID.Sand;
+                }
+                else if (type == ModContent.TileType<Chunkstone>() || type == TileID.Pearlstone || type == TileID.Crimstone || type == TileID.Ebonstone)
+                {
+                    tile.TileType = TileID.Stone;
+                }
+                else if (type == ModContent.TileType<Snotsandstone>() || type == TileID.HallowSandstone || type == TileID.CrimsonSandstone || type == TileID.CorruptSandstone)
+                {
+                    tile.TileType = TileID.Sandstone;
+                }
+                else if (type == ModContent.TileType<HardenedSnotsand>() || type == TileID.HallowHardenedSand || type == TileID.CrimsonHardenedSand || type == TileID.CorruptHardenedSand)
+                {
+                    tile.TileType = TileID.HardenedSand;
+                }
+                //else if (type == ModContent.TileType<YellowIce>() || type == TileID.HallowedIce || type == TileID.FleshIce || type == TileID.CorruptIce || type == TileID.IceBlock)
+                //{
+                //    tile.type = (ushort)ModContent.TileType<GreenIce>();
+                //}
+                //if (TileID.Sets.Conversion.Grass[type] || type == 0)
+                //{
+                //    WorldGen.SquareTileFrame(x, y);
+                //}
+            }
+        }
+        // contagion from things
+        if (convert == 2)
+        {
+            if (Main.tile[x, y] != null)
+            {
+                if (WallID.Sets.Conversion.Grass[wall])
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ContagionGrassWall>();
+                }
+                else if (WallID.Sets.Conversion.Stone[wall])
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ChunkstoneWall>();
+                }
+            }
+            if (Main.tile[x, y] != null)
+            {
+                if (TileID.Sets.Conversion.Grass[type] && type != ModContent.TileType<Ickgrass>())
+                {
+                    tile.TileType = (ushort)ModContent.TileType<Ickgrass>();
+                }
+                else if (TileID.Sets.Conversion.Ice[type] && type != ModContent.TileType<YellowIce>())
+                {
+                    tile.TileType = (ushort)ModContent.TileType<YellowIce>();
+                }
+                else if (TileID.Sets.Conversion.Sand[type] && type != ModContent.TileType<Snotsand>())
+                {
+                    tile.TileType = (ushort)ModContent.TileType<Snotsand>();
+                }
+                else if (TileID.Sets.Conversion.Stone[type] && type != ModContent.TileType<Chunkstone>())
+                {
+                    tile.TileType = (ushort)ModContent.TileType<Chunkstone>();
+                }
+                else if (TileID.Sets.Conversion.Sandstone[type] && type != ModContent.TileType<Snotsandstone>())
+                {
+                    tile.TileType = (ushort)ModContent.TileType<Snotsandstone>();
+                }
+                else if (TileID.Sets.Conversion.HardenedSand[type] && type != ModContent.TileType<HardenedSnotsand>())
+                {
+                    tile.TileType = (ushort)ModContent.TileType<HardenedSnotsand>();
+                }
+                //else if (type == ModContent.TileType<ContagionShortGrass>())
+                //{
+                //    tile.type = TileID.Plants;
+                //}
+                //if (TileID.Sets.Conversion.Grass[type] || type == 0)
+                //{
+                //    WorldGen.SquareTileFrame(x, y);
+                //}
+            }
+        }
+        //if (tileframe)
+        //{
+        //    if (Main.netMode == NetmodeID.SinglePlayer)
+        //    {
+        //        WorldGen.SquareTileFrame(x, y);
+        //    }
+        //    else if (Main.netMode == NetmodeID.Server)
+        //    {
+        //        NetMessage.SendTileSquare(-1, x, y, 1);
+        //    }
+        //}
+    }
 }

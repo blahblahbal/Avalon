@@ -25,6 +25,33 @@ internal class AvalonGlobalProjectile : GlobalProjectile
         }
         return base.PreAI(projectile);
     }
+
+    public override void PostAI(Projectile projectile)
+    {
+        if ((projectile.type != 10 && projectile.type != 145 /* && projectile.type != ModContent.ProjectileType<Projectiles.LimeSolution>()*/) || projectile.owner != Main.myPlayer)
+        {
+            return;
+        }
+        int num = (int)(projectile.Center.X / 16f);
+        int num2 = (int)(projectile.Center.Y / 16f);
+        bool flag = projectile.type == 10;
+        for (int i = num - 1; i <= num + 1; i++)
+        {
+            for (int j = num2 - 1; j <= num2 + 1; j++)
+            {
+                if (projectile.type == ProjectileID.PureSpray || projectile.type == ProjectileID.PurificationPowder)
+                {
+                    AvalonWorld.ConvertFromThings(i, j, 0, !flag);
+                }
+                //if (projectile.type == ModContent.ProjectileType<Projectiles.LimeSolution>())
+                //{
+                //    AvalonWorld.ConvertFromThings(i, j, 1, !flag);
+                //}
+                NetMessage.SendTileSquare(-1, i, j, 1, 1);
+            }
+        }
+    }
+
     public override void AI(Projectile projectile)
     {
         if (projectile.type == ProjectileID.TerraBlade2)
