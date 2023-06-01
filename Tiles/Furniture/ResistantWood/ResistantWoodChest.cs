@@ -38,7 +38,7 @@ public class ResistantWoodChest : ModTile
 
         // Other tiles with just one map entry use CreateMapEntryName() to use the default translationkey, "MapEntry"
         // Since ExampleChest needs multiple, we register our own MapEntry keys
-        AddMapEntry(new Color(200, 200, 200), this.GetLocalization("MapEntry0"), MapChestName);
+        AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
 
         // Placement
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);

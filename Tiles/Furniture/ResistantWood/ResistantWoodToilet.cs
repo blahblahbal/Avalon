@@ -21,7 +21,7 @@ namespace Avalon.Tiles.Furniture.ResistantWood
             // Properties
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;
-            Main.tileLavaDeath[Type] = true;
+            Main.tileLavaDeath[Type] = false;
             TileID.Sets.HasOutlines[Type] = true;
             TileID.Sets.CanBeSatOnForNPCs[Type] = true; // Facilitates calling ModifySittingTargetInfo for NPCs
             TileID.Sets.CanBeSatOnForPlayers[Type] = true; // Facilitates calling ModifySittingTargetInfo for Players
@@ -33,7 +33,7 @@ namespace Avalon.Tiles.Furniture.ResistantWood
             AdjTiles = new int[] { TileID.Toilets }; // Condider adding TileID.Chairs to AdjTiles to mirror "(regular) Toilet" and "Golden Toilet" behavior for crafting stations
 
             // Names
-            AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.Toilet"));
+            AddMapEntry(new Color(191, 142, 111), Language.GetText("MapObject.Toilet"));
 
             // Placement
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);

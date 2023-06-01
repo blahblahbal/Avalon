@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -12,18 +13,17 @@ public class BleachedEbonyCandle : ModTile
     public override void SetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
-        Main.tileLavaDeath[Type] = false;
+        Main.tileLavaDeath[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.StyleOnTable1x1);
         TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.StyleWrapLimit = 36;
-        TileObjectData.newTile.LavaDeath = false;
         TileObjectData.newTile.CoordinateHeights = new int[] { 20 };
         TileObjectData.newTile.DrawYOffset = -4;
         TileObjectData.addTile(Type);
         //ItemDrop = ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyCandle>();
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-        AddMapEntry(new Color(253, 221, 3));
+        AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Candle"));
         DustType = -1;
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyCandle>());
     }

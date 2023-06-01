@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -20,7 +21,7 @@ public class ResistantWoodPiano : ModTile
         TileObjectData.newTile.LavaDeath = false;
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-        AddMapEntry(new Color(191, 142, 111));
+        AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Piano"));
         DustType = -1;
     }
 }

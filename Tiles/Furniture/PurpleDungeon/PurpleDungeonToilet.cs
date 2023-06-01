@@ -33,7 +33,7 @@ namespace Avalon.Tiles.Furniture.PurpleDungeon
             AdjTiles = new int[] { TileID.Toilets }; // Condider adding TileID.Chairs to AdjTiles to mirror "(regular) Toilet" and "Golden Toilet" behavior for crafting stations
 
             // Names
-            AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.Toilet"));
+            AddMapEntry(new Color(191, 142, 111), Language.GetText("MapObject.Toilet"));
 
             // Placement
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);

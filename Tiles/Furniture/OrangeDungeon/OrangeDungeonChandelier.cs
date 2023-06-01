@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -25,7 +26,7 @@ public class OrangeDungeonChandelier : ModTile
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         Main.tileLighted[Type] = true;
-        AddMapEntry(new Color(235, 166, 135));
+        AddMapEntry(new Color(235, 166, 135), Language.GetText("MapObject.Chandelier"));
         DustType = -1;
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.OrangeDungeon.OrangeDungeonChandelier>());
     }

@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -14,7 +15,7 @@ public class CoughwoodClock : ModTile
     {
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
-        Main.tileLavaDeath[Type] = false;
+        Main.tileLavaDeath[Type] = true;
         TileID.Sets.HasOutlines[Type] = true;
         TileID.Sets.Clock[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
@@ -29,7 +30,7 @@ public class CoughwoodClock : ModTile
         };
         TileObjectData.newTile.Origin = new Point16(0, 4);
         TileObjectData.addTile(Type);
-        AddMapEntry(new Color(191, 142, 111));
+        AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.GrandfatherClock"));
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.GrandfatherClocks };
         DustType = -1;

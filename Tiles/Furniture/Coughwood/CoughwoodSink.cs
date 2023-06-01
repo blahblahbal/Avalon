@@ -13,10 +13,9 @@ public class CoughwoodSink : ModTile
     {
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
-        Main.tileLavaDeath[Type] = false;
+        Main.tileLavaDeath[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
         TileObjectData.newTile.CoordinateHeights = new int[] { 16, 18 };
-        TileObjectData.newTile.LavaDeath = false;
         TileObjectData.addTile(Type);
         AddMapEntry(new Color(191, 142, 111), Language.GetText("MapObject.Sink"));
         TileID.Sets.DisableSmartCursor[Type] = true;

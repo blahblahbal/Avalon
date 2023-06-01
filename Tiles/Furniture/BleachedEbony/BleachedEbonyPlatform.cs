@@ -16,7 +16,7 @@ public class BleachedEbonyPlatform : ModTile
         Main.tileSolid[Type] = true;
         Main.tileNoAttach[Type] = true;
         Main.tileTable[Type] = true;
-        Main.tileLavaDeath[Type] = false;
+        Main.tileLavaDeath[Type] = true;
         TileID.Sets.Platforms[Type] = true;
         TileObjectData.newTile.CoordinateHeights = new[] { 16 };
         TileObjectData.newTile.CoordinateWidth = 16;
@@ -25,7 +25,6 @@ public class BleachedEbonyPlatform : ModTile
         TileObjectData.newTile.StyleMultiplier = 27;
         TileObjectData.newTile.StyleWrapLimit = 27;
         TileObjectData.newTile.UsesCustomCanPlace = false;
-        TileObjectData.newTile.LavaDeath = false;
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
         AddMapEntry(new Color(191, 142, 111));

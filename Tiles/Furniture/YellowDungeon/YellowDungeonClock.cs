@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -29,7 +30,7 @@ public class YellowDungeonClock : ModTile
         };
         TileObjectData.newTile.Origin = new Point16(0, 4);
         TileObjectData.addTile(Type);
-        AddMapEntry(new Color(191, 142, 111));
+        AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.GrandfatherClock"));
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.GrandfatherClocks };
         DustType = -1;

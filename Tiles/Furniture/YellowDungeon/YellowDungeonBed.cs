@@ -19,11 +19,11 @@ public class YellowDungeonBed : ModTile
         TileID.Sets.CanBeSleptIn[Type] = true;
         TileID.Sets.IsValidSpawnPoint[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style4x2);
-        TileObjectData.newTile.CoordinateHeights = new[] {16, 18};
+        TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
         TileObjectData.addTile(Type);
-        AddMapEntry(new Color(191, 142, 111));
+        AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Bed"));
         TileID.Sets.DisableSmartCursor[Type] = true;
-        AdjTiles = new int[] {TileID.Beds};
+        AdjTiles = new int[] { TileID.Beds };
         DustType = -1;
     }
 
@@ -74,8 +74,21 @@ public class YellowDungeonBed : ModTile
     public override void MouseOver(int i, int j)
     {
         Player player = Main.LocalPlayer;
-        player.noThrow = 2;
-        player.cursorItemIconEnabled = true;
-        player.cursorItemIconID = ModContent.ItemType<Items.Placeable.Furniture.YellowDungeon.YellowDungeonBed>();
+
+        if (!Player.IsHoveringOverABottomSideOfABed(i, j))
+        {
+            if (player.IsWithinSnappngRangeToTile(i, j, PlayerSleepingHelper.BedSleepingMaxDistance))
+            { // Match condition in RightClick. Interaction should only show if clicking it does something
+                player.noThrow = 2;
+                player.cursorItemIconEnabled = true;
+                player.cursorItemIconID = ItemID.SleepingIcon;
+            }
+        }
+        else
+        {
+            player.noThrow = 2;
+            player.cursorItemIconEnabled = true;
+            player.cursorItemIconID = ModContent.ItemType<Items.Placeable.Furniture.YellowDungeon.YellowDungeonBed>();
+        }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -14,7 +15,7 @@ public class CoughwoodChandelier : ModTile
     {
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
-        Main.tileLavaDeath[Type] = false;
+        Main.tileLavaDeath[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);
         TileObjectData.newTile.Height = 3;
         TileObjectData.newTile.Width = 3;
@@ -22,13 +23,11 @@ public class CoughwoodChandelier : ModTile
         TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.StyleWrapLimit = 111;
         TileObjectData.newTile.Origin = new Point16(1, 0);
-        TileObjectData.newTile.LavaDeath = false;
         TileObjectData.addTile(Type);
         DustType = -1;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         Main.tileLighted[Type] = true;
-        AddMapEntry(new Color(235, 166, 135));
-        DustType = -1;
+        AddMapEntry(new Color(235, 166, 135), Language.GetText("MapObject.Chandelier"));
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodChandelier>());
     }
 

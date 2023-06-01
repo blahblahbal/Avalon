@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -27,7 +28,7 @@ public class BismuthChandelier : ModTile
         DustType = -1;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         Main.tileLighted[Type] = true;
-        AddMapEntry(new Color(235, 166, 135));
+        AddMapEntry(new Color(235, 166, 135), Language.GetText("MapObject.Chandelier"));
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.BismuthChandelier>());
     }
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -16,7 +17,7 @@ public class OrangeDungeonBathtub : ModTile
         TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
         TileObjectData.addTile(Type);
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-        AddMapEntry(new Color(144, 148, 144));
+        AddMapEntry(new Color(144, 148, 144), Language.GetText("ItemName.Bathtub"));
         DustType = -1;
     }
 }

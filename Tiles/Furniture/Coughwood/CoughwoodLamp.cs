@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -13,20 +14,18 @@ public class CoughwoodLamp : ModTile
     public override void SetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
-        Main.tileLavaDeath[Type] = false;
+        Main.tileLavaDeath[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);
         TileObjectData.newTile.Height = 3;
         TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16 };
         TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.StyleWrapLimit = 36;
         TileObjectData.newTile.Origin = new Point16(0, 2);
-        TileObjectData.newTile.LavaDeath = false;
         TileObjectData.addTile(Type);
-        DustType = 7;
+        DustType = -1;
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-        AddMapEntry(new Color(235, 166, 135));
-        DustType = -1;
+        AddMapEntry(new Color(253, 221, 3), Language.GetText("MapObject.FloorLamp"));
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodLamp>());
     }
 

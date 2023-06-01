@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -24,8 +25,7 @@ public class ResistantWoodLantern : ModTile
         DustType = -1;
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-        AddMapEntry(new Color(251, 235, 127));
-        DustType = -1;
+        AddMapEntry(new Color(251, 235, 127), Language.GetText("MapObject.Lantern"));
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodLantern>());
     }
 

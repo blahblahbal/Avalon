@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -22,7 +23,7 @@ public class YellowDungeonCandle : ModTile
         DustType = 7;
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-        AddMapEntry(new Color(253, 221, 3));
+        AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Candle"));
         DustType = -1;
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.YellowDungeon.YellowDungeonCandle>());
     }

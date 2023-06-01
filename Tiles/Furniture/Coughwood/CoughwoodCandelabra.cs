@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -12,20 +13,18 @@ public class CoughwoodCandelabra : ModTile
     public override void SetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
-        Main.tileLavaDeath[Type] = false;
+        Main.tileLavaDeath[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
         TileObjectData.newTile.StyleHorizontal = true;
         //TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.Table, TileObjectData.newTile.Width, 0);
         TileObjectData.newTile.StyleWrapLimit = 36;
         TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
-        TileObjectData.newTile.LavaDeath = false;
         TileObjectData.newTile.DrawYOffset = 2;
         TileObjectData.addTile(Type);
-        DustType = 7;
+        DustType = -1;
         Main.tileLighted[Type] = true;
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-        AddMapEntry(new Color(253, 221, 3));
-        DustType = -1;
+        AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Candelabra"));
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodCandelabra>());
     }
 
