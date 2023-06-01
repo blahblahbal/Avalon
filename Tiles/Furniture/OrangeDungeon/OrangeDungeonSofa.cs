@@ -19,7 +19,7 @@ public class OrangeDungeonSofa : ModTile
         Main.tileNoAttach[Type] = true;
         Main.tileLavaDeath[Type] = true;
         TileID.Sets.HasOutlines[Type] = true;
-        TileID.Sets.CanBeSatOnForNPCs[Type] = true; // Facilitates calling ModifySittingTargetInfo for NPCs
+        TileID.Sets.CanBeSatOnForNPCs[Type] = false; // Facilitates calling ModifySittingTargetInfo for NPCs
         TileID.Sets.CanBeSatOnForPlayers[Type] = true; // Facilitates calling ModifySittingTargetInfo for Players
 
         AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
@@ -45,17 +45,17 @@ public class OrangeDungeonSofa : ModTile
         {
             if (tile.TileFrameX == 0)
             {
-                info.DirectionOffset = info.RestingEntity is Player ? -1 : 2; // Default to 6 for players, 2 for NPCs
+                info.DirectionOffset = info.RestingEntity is Player ? -1 : 4; // Default to 6 for players, 2 for NPCs
                 info.VisualOffset = new Vector2(5, 0); // Defaults to (0,0)
             }
             if (tile.TileFrameX == 18)
             {
-                info.DirectionOffset = info.RestingEntity is Player ? -1 : 2;
+                info.DirectionOffset = info.RestingEntity is Player ? -1 : 0;
                 info.VisualOffset = new Vector2(1, 0);
             }
             if (tile.TileFrameX == 36)
             {
-                info.DirectionOffset = info.RestingEntity is Player ? -1 : 2;
+                info.DirectionOffset = info.RestingEntity is Player ? -1 : -6;
                 info.VisualOffset = new Vector2(-3, 0);
             }
             info.TargetDirection = 1; // Facing right if sat down on while facing right, left otherwise
@@ -64,7 +64,7 @@ public class OrangeDungeonSofa : ModTile
         {
             if (tile.TileFrameX == 0)
             {
-                info.DirectionOffset = info.RestingEntity is Player ? 1 : 2;
+                info.DirectionOffset = info.RestingEntity is Player ? 1 : -4;
                 info.VisualOffset = new Vector2(-3, 0);
             }
             if (tile.TileFrameX == 18)
@@ -74,7 +74,7 @@ public class OrangeDungeonSofa : ModTile
             }
             if (tile.TileFrameX == 36)
             {
-                info.DirectionOffset = info.RestingEntity is Player ? 1 : 2;
+                info.DirectionOffset = info.RestingEntity is Player ? 1 : 6;
                 info.VisualOffset = new Vector2(5, 0);
             }
             info.TargetDirection = -1;
