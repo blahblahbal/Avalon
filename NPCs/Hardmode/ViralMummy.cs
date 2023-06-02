@@ -17,6 +17,13 @@ public class ViralMummy : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.DarkMummy];
+
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        {
+            // Influences how the NPC looks in the Bestiary
+            Velocity = 0.5f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
     }
     public override void SetDefaults()
     {
@@ -24,7 +31,7 @@ public class ViralMummy : ModNPC
         AIType = NPCID.DarkMummy;
         AnimationType = NPCID.DarkMummy;
         BannerItem = ModContent.ItemType<Items.Banners.ViralMummyBanner>();
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionCaveDesert>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionDesert>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {

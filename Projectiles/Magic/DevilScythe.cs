@@ -110,7 +110,7 @@ public class DevilScythe : ModProjectile
         {
             Projectile.alpha = (int)MathHelper.Clamp(Projectile.alpha - 10, -255, 255);
         }
-        Projectile.velocity += Vector2.Normalize(Projectile.velocity) * 0.14f;
+        Projectile.velocity += Vector2.Normalize(Projectile.velocity) * 0.08f;
         if (Projectile.timeLeft % 3 == 0)
         {
             Dust d2 = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.DesertTorch, 0f, 0f, 0, default(Color), Projectile.Opacity);

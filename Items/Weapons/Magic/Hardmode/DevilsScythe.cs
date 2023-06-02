@@ -18,7 +18,7 @@ class DevilsScythe : ModItem
         Item.damage = 350;
         Item.autoReuse = true;
         Item.scale = 0.9f;
-        Item.shootSpeed = 1.2f;
+        Item.shootSpeed = 0.2f;
         Item.mana = 16;
         Item.rare = ItemRarityID.Purple;
         Item.noMelee = true;

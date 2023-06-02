@@ -17,7 +17,12 @@ public class ContaminatedGhoul : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[Type] = 8;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0);
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        {
+            // Influences how the NPC looks in the Bestiary
+            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
     }
     public override void SetDefaults()
     {
@@ -33,7 +38,7 @@ public class ContaminatedGhoul : ModNPC
         NPC.value = 650f;
         NPC.npcSlots = 0.5f;
         AIType = NPCID.DesertGhoulCorruption;
-        AnimationType = 527;
+        AnimationType = NPCID.DesertGhoulCorruption;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionCaveDesert>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -54,41 +59,6 @@ public class ContaminatedGhoul : ModNPC
                 SoundEngine.PlaySound(SoundID.Zombie55,NPC.position);
             else
                 SoundEngine.PlaySound(SoundID.Zombie56, NPC.position);
-        }
-    }
-    public override void FindFrame(int frameHeight)
-    {
-        if (NPC.velocity.Y == 0f)
-        {
-            if (NPC.direction != 0)
-            {
-                NPC.spriteDirection = NPC.direction;
-            }
-            if (NPC.velocity.X == 0f)
-            {
-                NPC.frame.Y = 0;
-                NPC.frameCounter = 0.0;
-            }
-            if (NPC.frame.Y <= frameHeight)
-            {
-                NPC.frame.Y = frameHeight * 2;
-            }
-            NPC.frameCounter += Math.Abs(NPC.velocity.X);
-            NPC.frameCounter += 1.0;
-            if (NPC.frameCounter > 9.0)
-            {
-                NPC.frame.Y += frameHeight;
-                NPC.frameCounter = 0.0;
-            }
-            if (NPC.frame.Y / frameHeight >= Main.npcFrameCount[Type])
-            {
-                NPC.frame.Y = frameHeight * 2;
-            }
-        }
-        else
-        {
-            NPC.frame.Y = frameHeight;
-            NPC.frameCounter = 0.0;
         }
     }
     public override void HitEffect(NPC.HitInfo hit)
