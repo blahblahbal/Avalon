@@ -25,4 +25,10 @@ class PurpleBrick : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddCustomShimmerResult(ModContent.ItemType<Ancient.AncientPurpleBrick>())
+            .Register();
+    }
 }

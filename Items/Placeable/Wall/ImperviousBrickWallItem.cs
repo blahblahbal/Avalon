@@ -27,7 +27,20 @@ class ImperviousBrickWallItem : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.ImperviousBrick>()).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.ImperviousBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+			
+        CreateRecipe(4)
+			.AddIngredient(ModContent.ItemType<Tile.ImperviousBrick>())
+			.AddTile(TileID.HeavyWorkBench)
+            .DisableDecraft()
+            .Register();
+
+        CreateRecipe()
+            .AddCustomShimmerResult(ModContent.ItemType<ImperviousBrickWallUnsafe>())
+            .Register();
+			
+        Recipe.Create(ModContent.ItemType<Tile.ImperviousBrick>())
+			.AddIngredient(this, 4)
+			.AddTile(TileID.HeavyWorkBench)
+			.Register();
     }
 }

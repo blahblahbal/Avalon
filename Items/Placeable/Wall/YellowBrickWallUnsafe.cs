@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class AncientOrangeBrickWall : ModItem
+class YellowBrickWallUnsafe : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -19,16 +19,9 @@ class AncientOrangeBrickWall : ModItem
         Item.consumable = true;
         Item.useTurn = true;
         Item.useTime = 7;
-        Item.createWall = ModContent.WallType<Walls.AncientOrangeBrickWall>();
+        Item.createWall = ModContent.WallType<Walls.YellowBrickUnsafe>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;
-    }
-    public override void AddRecipes()
-    {
-        CreateRecipe(4)
-            .AddIngredient(ModContent.ItemType<Tile.Ancient.AncientOrangeBrick>())
-            .AddTile(TileID.WorkBenches)
-            .Register();
     }
 }

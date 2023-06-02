@@ -3026,6 +3026,11 @@ Mods: {
 				Tooltip: ""
 			}
 
+			ImperviousBrickWallUnsafe: {
+				DisplayName: Cursed Impervious Brick Wall
+				Tooltip: ""
+			}
+
 			MutatedStocking: {
 				DisplayName: Mutated Stocking
 				Tooltip:
@@ -4321,6 +4326,66 @@ Mods: {
 
 			ViralMummyBanner: {
 				DisplayName: Viral Mummy Banner
+				Tooltip: ""
+			}
+
+			CrackedOrangeBrick: {
+				DisplayName: Cracked Orange Brick
+				Tooltip: ""
+			}
+
+			CrackedPurpleBrick: {
+				DisplayName: Cracked Purple Brick
+				Tooltip: ""
+			}
+
+			CrackedYellowBrick: {
+				DisplayName: Cracked Yellow Brick
+				Tooltip: ""
+			}
+
+			OrangeBrickWallUnsafe: {
+				DisplayName: Cursed Orange Brick Wall
+				Tooltip: ""
+			}
+
+			OrangeSlabWallUnsafe: {
+				DisplayName: Cursed Orange Slab Wall
+				Tooltip: ""
+			}
+
+			OrangeTiledWallUnsafe: {
+				DisplayName: Cursed Orange Tiled Wall
+				Tooltip: ""
+			}
+
+			PurpleBrickWallUnsafe: {
+				DisplayName: Cursed Purple Brick Wall
+				Tooltip: ""
+			}
+
+			PurpleSlabWallUnsafe: {
+				DisplayName: Cursed Purple Slab Wall
+				Tooltip: ""
+			}
+
+			PurpleTiledWallUnsafe: {
+				DisplayName: Cursed Purple Tiled Wall
+				Tooltip: ""
+			}
+
+			YellowBrickWallUnsafe: {
+				DisplayName: Cursed Yellow Brick Wall
+				Tooltip: ""
+			}
+
+			YellowSlabWallUnsafe: {
+				DisplayName: Cursed Yellow Slab Wall
+				Tooltip: ""
+			}
+
+			YellowTiledWallUnsafe: {
+				DisplayName: Cursed Yellow Tiled Wall
 				Tooltip: ""
 			}
 		}

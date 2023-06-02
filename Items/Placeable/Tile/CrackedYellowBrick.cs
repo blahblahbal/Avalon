@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class OrangeBrick : ModItem
+class CrackedYellowBrick : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -16,7 +16,7 @@ class OrangeBrick : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.OrangeBrick>();
+        Item.createTile = ModContent.TileType<Tiles.YellowBrick>();
         Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;
@@ -25,10 +25,10 @@ class OrangeBrick : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
-    public override void AddRecipes()
+    /* public override void AddRecipes()
     {
-        CreateRecipe()
-            .AddCustomShimmerResult(ModContent.ItemType<Ancient.AncientOrangeBrick>())
-            .Register();
-    }
+        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.YellowBrickWall>(), 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.YellowSlabWall>(), 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.YellowTiledWall>(), 4).AddTile(TileID.WorkBenches).Register();
+    } */
 }

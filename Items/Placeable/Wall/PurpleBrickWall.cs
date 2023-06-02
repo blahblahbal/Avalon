@@ -26,7 +26,19 @@ class PurpleBrickWall : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.PurpleBrick>()).AddTile(TileID.HeavyWorkBench).Register();
-        Recipe.Create(ModContent.ItemType<Tile.PurpleBrick>()).AddIngredient(this, 4).AddTile(TileID.HeavyWorkBench).Register();
+        CreateRecipe(4)
+			.AddIngredient(ModContent.ItemType<Tile.PurpleBrick>())
+			.AddTile(TileID.HeavyWorkBench)
+            .DisableDecraft()
+            .Register();
+
+        CreateRecipe()
+            .AddCustomShimmerResult(ModContent.ItemType<PurpleBrickWallUnsafe>())
+            .Register();
+			
+        Recipe.Create(ModContent.ItemType<Tile.PurpleBrick>())
+			.AddIngredient(this, 4)
+			.AddTile(TileID.HeavyWorkBench)
+			.Register();
     }
 }

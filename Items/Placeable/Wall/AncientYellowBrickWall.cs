@@ -26,7 +26,9 @@ class AncientYellowBrickWall : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.Ancient.AncientYellowBrick>()).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.Ancient.AncientYellowBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(4)
+            .AddIngredient(ModContent.ItemType<Tile.Ancient.AncientYellowBrick>())
+            .AddTile(TileID.WorkBenches)
+            .Register();
     }
 }

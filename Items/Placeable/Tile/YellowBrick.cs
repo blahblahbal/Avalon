@@ -25,10 +25,10 @@ class YellowBrick : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
-    /* public override void AddRecipes()
+    public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.YellowBrickWall>(), 4).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.YellowSlabWall>(), 4).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.YellowTiledWall>(), 4).AddTile(TileID.WorkBenches).Register();
-    } */
+        CreateRecipe()
+            .AddCustomShimmerResult(ModContent.ItemType<Ancient.AncientYellowBrick>())
+            .Register();
+    }
 }
