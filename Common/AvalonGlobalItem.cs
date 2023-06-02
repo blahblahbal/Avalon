@@ -41,62 +41,36 @@ public class AvalonGlobalItem : GlobalItem
     public override void AddRecipes()
     {
         // --== Shimmer!!! ==--
-        ModContent.GetInstance<DesertLongsword>().CreateRecipe()
-            .AddCustomShimmerResult(ItemID.AntlionClaw)
-            .AddCondition(ShimmerCraftCondition.ShimmerOnly)
-            .Register();
 
-        Recipe MandibleBladeTransmute = Recipe.Create(ItemID.AntlionClaw);
-        MandibleBladeTransmute.AddCustomShimmerResult(ModContent.ItemType<DesertLongsword>());
-        MandibleBladeTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        MandibleBladeTransmute.Register();
+        ShimmerTransmuteBothWays(ItemID.AntlionClaw, ModContent.ItemType<DesertLongsword>());
 
-        Recipe DartRifleTransmute = Recipe.Create(ItemID.DartRifle);
-        DartRifleTransmute.AddCustomShimmerResult(ModContent.ItemType<AncientDartRifle>());
-        DartRifleTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        DartRifleTransmute.Register();
+        ShimmerTransmuteBothWays(ItemID.DartRifle, ModContent.ItemType<AncientDartRifle>());
+        ShimmerTransmuteBothWays(ItemID.DartPistol, ModContent.ItemType<AncientDartPistol>());
+        ShimmerTransmuteBothWays(ModContent.ItemType<DartShotgun>(), ModContent.ItemType<AncientDartShotgun>());
 
-        Recipe DartRifleTransmute2 = Recipe.Create(ModContent.ItemType<AncientDartRifle>());
-        DartRifleTransmute2.AddCustomShimmerResult(ItemID.DartRifle);
-        DartRifleTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        DartRifleTransmute2.Register();
+        ShimmerTransmuteBothWays(ModContent.ItemType<ArgusLantern>(), ItemID.MagicLantern);
 
-        Recipe DartPistolTransmute = Recipe.Create(ItemID.DartPistol);
-        DartPistolTransmute.AddCustomShimmerResult(ModContent.ItemType<AncientDartPistol>());
-        DartPistolTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        DartPistolTransmute.Register();
-
-        Recipe DartPistolTransmute2 = Recipe.Create(ModContent.ItemType<AncientDartPistol>());
-        DartPistolTransmute2.AddCustomShimmerResult(ItemID.DartPistol);
-        DartPistolTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        DartPistolTransmute2.Register();
-
-        Recipe DartShotgunTransmute = Recipe.Create(ModContent.ItemType<DartShotgun>());
-        DartShotgunTransmute.AddCustomShimmerResult(ModContent.ItemType<AncientDartShotgun>());
-        DartShotgunTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        DartShotgunTransmute.Register();
-
-        Recipe DartShotgunTransmute2 = Recipe.Create(ModContent.ItemType<AncientDartShotgun>());
-        DartShotgunTransmute2.AddCustomShimmerResult(ModContent.ItemType<DartShotgun>());
-        DartShotgunTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        DartShotgunTransmute2.Register();
-
-        Recipe EnergyCrystalTransmute = Recipe.Create(ModContent.ItemType<StaminaCrystal>());
-        EnergyCrystalTransmute.AddCustomShimmerResult(ModContent.ItemType<EnergyCrystal>());
-        EnergyCrystalTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        EnergyCrystalTransmute.Register();
-
-        Recipe MagicLanternTransmute = Recipe.Create(ModContent.ItemType<ArgusLantern>());
-        MagicLanternTransmute.AddCustomShimmerResult(ItemID.MagicLantern);
-        MagicLanternTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        MagicLanternTransmute.Register();
-
-        Recipe MagicLanternTransmute2 = Recipe.Create(ItemID.MagicLantern);
-        MagicLanternTransmute2.AddCustomShimmerResult(ModContent.ItemType<ArgusLantern>());
-        MagicLanternTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        MagicLanternTransmute2.Register();
+        ShimmerTransmute(ModContent.ItemType<StaminaCrystal>(), ModContent.ItemType<EnergyCrystal>());
     }
 
+    public void ShimmerTransmute(int From, int To)
+    {
+        Recipe ShimmerTransmute = Recipe.Create(From);
+        ShimmerTransmute.AddCustomShimmerResult(To);
+        ShimmerTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        ShimmerTransmute.Register();
+    }
+    public void ShimmerTransmuteBothWays(int From, int To)
+    {
+        Recipe ShimmerTransmute = Recipe.Create(From);
+        ShimmerTransmute.AddCustomShimmerResult(To);
+        ShimmerTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        ShimmerTransmute.Register();
+        Recipe ShimmerTransmute2 = Recipe.Create(To);
+        ShimmerTransmute2.AddCustomShimmerResult(From);
+        ShimmerTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
+        ShimmerTransmute2.Register();
+    }
     public override void HoldItem(Item item, Player player)
     {
         #region barbaric prefix logic

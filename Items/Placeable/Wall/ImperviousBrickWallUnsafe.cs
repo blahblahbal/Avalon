@@ -20,7 +20,7 @@ class ImperviousBrickWallUnsafe : ModItem
         Item.consumable = true;
         Item.useTurn = true;
         Item.useTime = 7;
-        Item.createWall = ModContent.WallType<ImperviousBrickWallUnsafe>();
+        Item.createWall = ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;
