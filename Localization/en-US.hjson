@@ -3028,7 +3028,7 @@ Mods: {
 
 			ImperviousBrickWallUnsafe: {
 				DisplayName: Cursed Impervious Brick Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Hellcastle wall that will spawn monsters"
 			}
 
 			MutatedStocking: {
@@ -4346,47 +4346,47 @@ Mods: {
 
 			OrangeBrickWallUnsafe: {
 				DisplayName: Cursed Orange Brick Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 
 			OrangeSlabWallUnsafe: {
 				DisplayName: Cursed Orange Slab Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 
 			OrangeTiledWallUnsafe: {
 				DisplayName: Cursed Orange Tiled Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 
 			PurpleBrickWallUnsafe: {
 				DisplayName: Cursed Purple Brick Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 
 			PurpleSlabWallUnsafe: {
 				DisplayName: Cursed Purple Slab Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 
 			PurpleTiledWallUnsafe: {
 				DisplayName: Cursed Purple Tiled Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 
 			YellowBrickWallUnsafe: {
 				DisplayName: Cursed Yellow Brick Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 
 			YellowSlabWallUnsafe: {
 				DisplayName: Cursed Yellow Slab Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 
 			YellowTiledWallUnsafe: {
 				DisplayName: Cursed Yellow Tiled Wall
-				Tooltip: ""
+				Tooltip: "A cursed segment of Dungeon wall that will spawn monsters"
 			}
 		}
 

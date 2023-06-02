@@ -1,4 +1,3 @@
-using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +10,7 @@ class ImperviousBrickWallUnsafe : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 400;
+        ItemID.Sets.DrawUnsafeIndicator[Type] = true;
     }
 
     public override void SetDefaults()
@@ -20,7 +20,7 @@ class ImperviousBrickWallUnsafe : ModItem
         Item.consumable = true;
         Item.useTurn = true;
         Item.useTime = 7;
-        Item.createWall = ModContent.WallType<ImperviousBrickWallUnsafe>();
+        Item.createWall = ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;
