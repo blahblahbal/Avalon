@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -24,11 +25,5 @@ class OrangeBrick : ModItem
         Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddCustomShimmerResult(ModContent.ItemType<Ancient.AncientOrangeBrick>())
-            .Register();
     }
 }

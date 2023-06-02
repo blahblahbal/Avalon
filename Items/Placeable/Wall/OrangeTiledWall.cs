@@ -31,14 +31,11 @@ class OrangeTiledWall : ModItem
 			.AddTile(TileID.HeavyWorkBench)
             .DisableDecraft()
             .Register();
-
-        CreateRecipe()
-            .AddCustomShimmerResult(ModContent.ItemType<OrangeTiledWallUnsafe>())
-            .Register();
 			
         Recipe.Create(ModContent.ItemType<Tile.OrangeBrick>())
 			.AddIngredient(this, 4)
 			.AddTile(TileID.HeavyWorkBench)
-			.Register();
+            .DisableDecraft()
+            .Register();
     }
 }

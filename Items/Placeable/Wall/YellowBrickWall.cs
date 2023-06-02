@@ -31,14 +31,11 @@ class YellowBrickWall : ModItem
 			.AddTile(TileID.HeavyWorkBench)
             .DisableDecraft()
             .Register();
-
-        CreateRecipe()
-            .AddCustomShimmerResult(ModContent.ItemType<YellowBrickWallUnsafe>())
-            .Register();
 			
         Recipe.Create(ModContent.ItemType<Tile.YellowBrick>())
 			.AddIngredient(this, 4)
 			.AddTile(TileID.HeavyWorkBench)
-			.Register();
+            .DisableDecraft()
+            .Register();
     }
 }

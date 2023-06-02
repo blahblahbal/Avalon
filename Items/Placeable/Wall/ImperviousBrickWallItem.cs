@@ -33,14 +33,11 @@ class ImperviousBrickWallItem : ModItem
 			.AddTile(TileID.HeavyWorkBench)
             .DisableDecraft()
             .Register();
-
-        CreateRecipe()
-            .AddCustomShimmerResult(ModContent.ItemType<ImperviousBrickWallUnsafe>())
-            .Register();
 			
         Recipe.Create(ModContent.ItemType<Tile.ImperviousBrick>())
 			.AddIngredient(this, 4)
 			.AddTile(TileID.HeavyWorkBench)
-			.Register();
+            .DisableDecraft()
+            .Register();
     }
 }

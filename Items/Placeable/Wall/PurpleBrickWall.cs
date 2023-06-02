@@ -31,14 +31,11 @@ class PurpleBrickWall : ModItem
 			.AddTile(TileID.HeavyWorkBench)
             .DisableDecraft()
             .Register();
-
-        CreateRecipe()
-            .AddCustomShimmerResult(ModContent.ItemType<PurpleBrickWallUnsafe>())
-            .Register();
 			
         Recipe.Create(ModContent.ItemType<Tile.PurpleBrick>())
 			.AddIngredient(this, 4)
 			.AddTile(TileID.HeavyWorkBench)
-			.Register();
+            .DisableDecraft()
+            .Register();
     }
 }

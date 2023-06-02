@@ -30,7 +30,13 @@ class YellowBrickPlatform : ModItem
 	
     public override void AddRecipes()
     {
-        CreateRecipe(2).AddIngredient(ModContent.ItemType<Tile.YellowBrick>()).Register();
-        Recipe.Create(ModContent.ItemType<Tile.YellowBrick>()).AddIngredient(this, 2).Register();
+        CreateRecipe(2)
+            .AddIngredient(ModContent.ItemType<Tile.YellowBrick>())
+            .Register();
+
+        Recipe.Create(ModContent.ItemType<Tile.YellowBrick>())
+            .AddIngredient(this, 2)
+            .DisableDecraft()
+            .Register();
     }
 }

@@ -30,7 +30,13 @@ class PurpleBrickPlatform : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(2).AddIngredient(ModContent.ItemType<Tile.PurpleBrick>()).Register();
-        Recipe.Create(ModContent.ItemType<Tile.PurpleBrick>()).AddIngredient(this, 2).Register();
+        CreateRecipe(2)
+            .AddIngredient(ModContent.ItemType<Tile.PurpleBrick>())
+            .Register();
+
+        Recipe.Create(ModContent.ItemType<Tile.PurpleBrick>())
+            .AddIngredient(this, 2)
+            .DisableDecraft()
+            .Register();
     }
 }

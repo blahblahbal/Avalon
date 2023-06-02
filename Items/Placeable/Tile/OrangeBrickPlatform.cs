@@ -30,7 +30,13 @@ class OrangeBrickPlatform : ModItem
 	
     public override void AddRecipes()
     {
-        CreateRecipe(2).AddIngredient(ModContent.ItemType<Tile.OrangeBrick>()).Register();
-        Recipe.Create(ModContent.ItemType<Tile.OrangeBrick>()).AddIngredient(this, 2).Register();
+        CreateRecipe(2)
+            .AddIngredient(ModContent.ItemType<Tile.OrangeBrick>())
+            .Register();
+
+        Recipe.Create(ModContent.ItemType<Tile.OrangeBrick>())
+            .AddIngredient(this, 2)
+            .DisableDecraft()
+            .Register();
     }
 }

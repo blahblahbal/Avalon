@@ -273,27 +273,27 @@ Mods: {
 
 			Blackberry: {
 				DisplayName: Blackberry
-				Tooltip: CommonItemTooltip.MediumStats
+				Tooltip: "{$CommonItemTooltip.MediumStats}"
 			}
 
 			Mangosteen: {
 				DisplayName: Mangosteen
-				Tooltip: CommonItemTooltip.MinorStats
+				Tooltip: "{$CommonItemTooltip.MinorStats}"
 			}
 
 			DarkBagel: {
 				DisplayName: Dark Bagel
-				Tooltip: CommonItemTooltip.MediumStats
+				Tooltip: "{$CommonItemTooltip.MediumStats}"
 			}
 
 			Durian: {
 				DisplayName: Durian
-				Tooltip: CommonItemTooltip.MajorStats
+				Tooltip: "{$CommonItemTooltip.MajorStats}"
 			}
 
 			Raspberry: {
 				DisplayName: Raspberry
-				Tooltip: CommonItemTooltip.MediumStats
+				Tooltip: "{$CommonItemTooltip.MediumStats}"
 			}
 
 			BoltstoneBrick: {
@@ -3003,7 +3003,7 @@ Mods: {
 
 			ResistantWoodWorkBench: {
 				DisplayName: Resistant Wood Work Bench
-				Tooltip: Used for basic crafting
+				Tooltip: ""
 			}
 
 			ResistantWood: {

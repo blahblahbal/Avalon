@@ -51,6 +51,22 @@ public class AvalonGlobalItem : GlobalItem
         ShimmerTransmuteBothWays(ModContent.ItemType<ArgusLantern>(), ItemID.MagicLantern);
 
         ShimmerTransmute(ModContent.ItemType<StaminaCrystal>(), ModContent.ItemType<EnergyCrystal>());
+
+        //Dungeon bricks
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.YellowBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientYellowBrick>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWallUnsafe>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWallUnsafe>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWallUnsafe>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWallUnsafe>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWallUnsafe>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWallUnsafe>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowBrickWallUnsafe>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowSlabWallUnsafe>());
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowTiledWallUnsafe>());
+
+        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>(), ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>());
     }
 
     public void ShimmerTransmute(int From, int To)

@@ -16,10 +16,8 @@ public class Blahtue : ModTile
         Main.tileFrameImportant[Type] = true;
         Main.tileObsidianKill[Type] = true;
 
-        TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
-        TileObjectData.newTile.StyleWrapLimit = 75;
-        TileObjectData.newTile.CoordinateWidth = 24;
-        TileObjectData.newTile.CoordinatePadding = 2;
+        TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
+        TileObjectData.newTile.StyleWrapLimit = 52;
         TileObjectData.newTile.Height = 4;
         TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16, 18 };
         TileObjectData.newTile.Direction = TileObjectDirection.PlaceLeft;
@@ -35,15 +33,11 @@ public class Blahtue : ModTile
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int item = 0;
-        int num9 = (Main.tile[i, j].TileFrameX / 44);
-        int num10 = (Main.tile[i, j].TileFrameY / 74);
-        num10 %= 3;
-        num9 += num10 * 75;
+        int num9 = (Main.tile[i, j].TileFrameY / 74);
         switch (num9)
         {
             case 0:
             case 1:
-            case 2:
                 item = ModContent.ItemType<Items.Placeable.Statue.Blahtue>();
                 break;
         }
