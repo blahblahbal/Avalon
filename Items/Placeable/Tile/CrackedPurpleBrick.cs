@@ -16,7 +16,7 @@ class CrackedPurpleBrick : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.PurpleBrick>();
+        Item.createTile = ModContent.TileType<Tiles.CrackedPurpleBrick>();
         Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;

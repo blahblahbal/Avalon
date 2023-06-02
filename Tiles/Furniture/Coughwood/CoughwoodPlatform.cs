@@ -31,7 +31,7 @@ public class CoughwoodPlatform : ModTile
         //ItemDrop = ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodPlatform>();
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.Platforms };
-        DustType = DustID.Wraith;
+        DustType = ModContent.DustType<Dusts.CoughwoodDust>();
     }
 
     public override void PostSetDefaults()

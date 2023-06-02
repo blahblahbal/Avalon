@@ -31,7 +31,7 @@ public class BleachedEbonyPlatform : ModTile
         //ItemDrop = ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyPlatform>();
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.Platforms };
-        DustType = DustID.Wraith;
+        DustType = DustID.SnowBlock;
     }
 
     public override void PostSetDefaults()
