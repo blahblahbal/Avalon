@@ -16,7 +16,7 @@ class CrackedYellowBrick : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.YellowBrick>();
+        Item.createTile = ModContent.TileType<Tiles.CrackedYellowBrick>();
         Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;

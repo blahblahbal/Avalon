@@ -11,6 +11,6 @@ public class BleachedEbonyBeam : ModTile
         AddMapEntry(new Color(235, 166, 135));
         //ItemDrop = ModContent.ItemType<Items.Placeable.Beam.BleachedEbonyBeam>();
         TileID.Sets.IsBeam[Type] = true;
-        DustType = DustID.Snow;
+        DustType = DustID.SnowBlock;
     }
 }
