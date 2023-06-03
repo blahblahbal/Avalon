@@ -4403,6 +4403,31 @@ Mods: {
 				DisplayName: Zircon Gem Lock
 				Tooltip: ""
 			}
+
+			BrownTorch: {
+				DisplayName: Brown Torch
+				Tooltip: ""
+			}
+
+			ContagionTorch: {
+				DisplayName: Contagion Torch
+				Tooltip: ""
+			}
+
+			CyanTorch: {
+				DisplayName: Cyan Torch
+				Tooltip: ""
+			}
+
+			LimeTorch: {
+				DisplayName: Lime Torch
+				Tooltip: ""
+			}
+
+			PathogenTorch: {
+				DisplayName: Pathogen Torch
+				Tooltip: Can be placed in water
+			}
 		}
 
 		Projectiles: {
