@@ -4021,7 +4021,7 @@ Mods: {
 
 			ArgusLantern: {
 				DisplayName: Argus Lantern
-				Tooltip: Exsposes nearby traps
+				Tooltip: Exposes nearby traps
 			}
 
 			CoughwoodBathtub: {
@@ -4387,6 +4387,21 @@ Mods: {
 			YellowTiledWallUnsafe: {
 				DisplayName: Cursed Yellow Tiled Wall
 				Tooltip: A cursed segment of Dungeon wall that will spawn monsters
+			}
+
+			PeridotGemLock: {
+				DisplayName: Peridot Gem Lock
+				Tooltip: ""
+			}
+
+			TourmalineGemLock: {
+				DisplayName: Tourmaline Gem Lock
+				Tooltip: ""
+			}
+
+			ZirconGemLock: {
+				DisplayName: Zircon Gem Lock
+				Tooltip: ""
 			}
 		}
 
@@ -5043,6 +5058,12 @@ Mods: {
 			CoughwoodDresser.MapEntry: Coughwood Dresser
 			BleachedEbonyDresser.MapEntry: Bleached Ebony Dresser
 			BleachedEbonyChest.MapEntry0: Bleached Ebony Chest
+
+			GemLocks: {
+				MapEntry0: Peridot Gem Lock
+				MapEntry1: Tourmaline Gem Lock
+				MapEntry2: Zircon Gem Lock
+			}
 		}
 
 		Prefixes: {

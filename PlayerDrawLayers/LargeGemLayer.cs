@@ -100,17 +100,17 @@ public class LargeGemLayer : PlayerDrawLayer
                         {
                             case 7:
                                 texture2D4 = ModContent.GetModItem(ModContent.ItemType<Items.Other.LargeZircon>()).GetTexture().Value;
-                                num31 *= 1.5f;
+                                num31 *= 1.25f;
                                 break;
 
                             case 8:
                                 texture2D4 = ModContent.GetModItem(ModContent.ItemType<Items.Other.LargeTourmaline>()).GetTexture().Value;
-                                num31 *= 1.5f;
+                                num31 *= 1.25f;
                                 break;
 
                             case 9:
                                 texture2D4 = ModContent.GetModItem(ModContent.ItemType<Items.Other.LargePeridot>()).GetTexture().Value;
-                                num31 *= 1.5f;
+                                num31 *= 1.25f;
                                 break;
                         }
                     }
