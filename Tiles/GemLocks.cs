@@ -236,27 +236,26 @@ public class GemLocks : ModTile
     }
     public override bool CreateDust(int i, int j, ref int type)
     {
-        switch (Main.tile[i, j].TileFrameX / 54)
+        if (Main.tile[i, j].TileFrameY > 54)
         {
-            case 0:
-                var dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.PeridotDust>(), 0, 0, 100, default, 0.6f);
-                Main.dust[dust].noLightEmittence = true;
-                Main.dust[dust].noLight = true;
-                return false;
-            case 1:
-                dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.TourmalineDust>(), 0, 0, 100, default, 0.6f);
-                Main.dust[dust].noLightEmittence = true;
-                Main.dust[dust].noLight = true;
-                return false;
-            case 2:
-                dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.ZirconDust>(), 0, 0, 100, default, 0.6f);
-                Main.dust[dust].noLightEmittence = true;
-                Main.dust[dust].noLight = true;
-                return false;
-        }
-        if (Main.tile[i, j].TileFrameY < 54)
-        {
-            type = -1;
+            switch (Main.tile[i, j].TileFrameX / 54)
+            {
+                case 0:
+                    var dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.PeridotDust>(), 0, 0, 100, default, 0.6f);
+                    Main.dust[dust].noLightEmittence = true;
+                    Main.dust[dust].noLight = true;
+                    return false;
+                case 1:
+                    dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.TourmalineDust>(), 0, 0, 100, default, 0.6f);
+                    Main.dust[dust].noLightEmittence = true;
+                    Main.dust[dust].noLight = true;
+                    return false;
+                case 2:
+                    dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.ZirconDust>(), 0, 0, 100, default, 0.6f);
+                    Main.dust[dust].noLightEmittence = true;
+                    Main.dust[dust].noLight = true;
+                    return false;
+            }
         }
         return false;
     }
