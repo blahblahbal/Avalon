@@ -15,6 +15,7 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Avalon.Common.Players;
 using Avalon.Items.Pets;
+using Avalon.Items.Placeable.Tile;
 
 namespace Avalon.Common;
 
@@ -67,6 +68,10 @@ public class AvalonGlobalItem : GlobalItem
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowTiledWallUnsafe>());
 
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>(), ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>());
+
+        Recipe.Create(ItemID.DesertTorch, 3).AddIngredient(ItemID.Torch, 3).AddIngredient(ModContent.ItemType<HardenedSnotsandBlock>());
+
+        Recipe.Create(ItemID.IceTorch, 3).AddIngredient(ItemID.Torch, 3).AddIngredient(ModContent.ItemType<YellowIceBlock>());
     }
 
     public void ShimmerTransmute(int From, int To)
