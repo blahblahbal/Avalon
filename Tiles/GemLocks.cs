@@ -239,14 +239,20 @@ public class GemLocks : ModTile
         switch (Main.tile[i, j].TileFrameX / 54)
         {
             case 0:
-                type = ModContent.DustType<Dusts.PeridotDust>();
-                break;
+                var dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.PeridotDust>(), 0, 0, 100, default, 0.6f);
+                Main.dust[dust].noLightEmittence = true;
+                Main.dust[dust].noLight = true;
+                return false;
             case 1:
-                type = ModContent.DustType<Dusts.TourmalineDust>();
-                break;
+                dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.TourmalineDust>(), 0, 0, 100, default, 0.6f);
+                Main.dust[dust].noLightEmittence = true;
+                Main.dust[dust].noLight = true;
+                return false;
             case 2:
-                type = ModContent.DustType<Dusts.ZirconDust>();
-                break;
+                dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.ZirconDust>(), 0, 0, 100, default, 0.6f);
+                Main.dust[dust].noLightEmittence = true;
+                Main.dust[dust].noLight = true;
+                return false;
         }
         if (Main.tile[i, j].TileFrameY < 54)
         {
