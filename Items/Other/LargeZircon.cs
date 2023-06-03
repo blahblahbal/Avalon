@@ -27,6 +27,10 @@ class LargeZircon : ModItem
             .AddTile(TileID.Anvils)
             .Register();
     }
+    public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+    {
+        return false;
+    }
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
         Texture2D itemTexture = Item.ModItem.GetTexture().Value;
