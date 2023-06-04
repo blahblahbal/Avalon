@@ -16,8 +16,4 @@ class GoblinDagger : ModItem
         Item.value = Item.sellPrice(0, 0, 50, 0);
         Item.rare = ItemRarityID.Green;
     }
-    public override void AddRecipes()
-    {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>(), 7).AddTile(TileID.Anvils).Register();
-    }
 }
