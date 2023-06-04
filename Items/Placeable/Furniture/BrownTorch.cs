@@ -29,19 +29,20 @@ class BrownTorch : ModItem
     {
         if (Main.rand.NextBool(player.itemAnimation > 0 ? 10 : 20))
         {
-            Dust d = Dust.NewDustDirect(new Vector2(player.itemLocation.X + (player.direction == 1 ? 6 : -16), player.itemLocation.Y - 14f * player.gravDir), 4, 4, DustID.WhiteTorch, 0, 0, 128, default, Main.rand.NextFloat(0.5f, 1));
+            Dust d = Dust.NewDustDirect(new Vector2(player.itemLocation.X + (player.direction == 1 ? 6 : -16), player.itemLocation.Y - 14f * player.gravDir), 4, 4, DustID.WhiteTorch, 0, 0, 128, new Color(255, 214, 179, 128), Main.rand.NextFloat(0.5f, 1));
+            d.noLightEmittence = true; //temporary until unique dust
             d.velocity.Y = Main.rand.NextFloat(-0.5f, -2);
             d.velocity.X *= 0.2f;
         }
         Vector2 position = player.RotatedRelativePoint(new Vector2(player.itemLocation.X + 12f * player.direction + player.velocity.X, player.itemLocation.Y - 14f + player.velocity.Y), true);
-        Lighting.AddLight(position, 1.51372552f, 1.16078436f, 0.9254902f);
+        Lighting.AddLight(position, 1.1f, 0.8f, 0.4f);
     }
 
     public override void PostUpdate()
     {
         if (!Item.wet)
         {
-            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1.51372552f, 1.16078436f, 0.9254902f);
+            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1.1f, 0.8f, 0.4f);
         }
     }
 }

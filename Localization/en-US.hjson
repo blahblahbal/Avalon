@@ -4428,6 +4428,101 @@ Mods: {
 				DisplayName: Pathogen Torch
 				Tooltip: Can be placed in water
 			}
+
+			AmberChest: {
+				DisplayName: Amber Chest
+				Tooltip: ""
+			}
+
+			AmethystChest: {
+				DisplayName: Amethyst Chest
+				Tooltip: ""
+			}
+
+			DiamondChest: {
+				DisplayName: Diamond Chest
+				Tooltip: ""
+			}
+
+			EmeraldChest: {
+				DisplayName: Emerald Chest
+				Tooltip: ""
+			}
+
+			PeridotChest: {
+				DisplayName: Peridot Chest
+				Tooltip: ""
+			}
+
+			RubyChest: {
+				DisplayName: Ruby Chest
+				Tooltip: ""
+			}
+
+			SapphireChest: {
+				DisplayName: Sapphire Chest
+				Tooltip: ""
+			}
+
+			TopazChest: {
+				DisplayName: Topaz Chest
+				Tooltip: ""
+			}
+
+			TourmalineChest: {
+				DisplayName: Tourmaline Chest
+				Tooltip: ""
+			}
+
+			ZirconChest: {
+				DisplayName: Zircon Chest
+				Tooltip: ""
+			}
+
+			PeridotGemsparkBlock: {
+				DisplayName: Peridot Gemspark Block
+				Tooltip: ""
+			}
+
+			TourmalineGemsparkBlock: {
+				DisplayName: Tourmaline Gemspark Block
+				Tooltip: ""
+			}
+
+			ZirconGemsparkBlock: {
+				DisplayName: Zircon Gemspark Block
+				Tooltip: ""
+			}
+
+			PeridotGemsparkWall: {
+				DisplayName: Peridot Gemspark Wall
+				Tooltip: ""
+			}
+
+			PeridotGemsparkWallOff: {
+				DisplayName: Offline Peridot Gemspark Wall
+				Tooltip: ""
+			}
+
+			TourmalineGemsparkWall: {
+				DisplayName: Tourmaline Gemspark Wall
+				Tooltip: ""
+			}
+
+			TourmalineGemsparkWallOff: {
+				DisplayName: Offline Tourmaline Gemspark Wall
+				Tooltip: ""
+			}
+
+			ZirconGemsparkWall: {
+				DisplayName: Zircon Gemspark Wall
+				Tooltip: ""
+			}
+
+			ZirconGemsparkWallOff: {
+				DisplayName: Offline Zircon Gemspark Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5089,6 +5184,17 @@ Mods: {
 				MapEntry1: Tourmaline Gem Lock
 				MapEntry2: Zircon Gem Lock
 			}
+
+			AmberChest.MapEntry0: Amber Chest
+			AmethystChest.MapEntry0: Amethyst Chest
+			DiamondChest.MapEntry0: Diamond Chest
+			EmeraldChest.MapEntry0: Emerald Chest
+			PeridotChest.MapEntry0: Peridot Chest
+			RubyChest.MapEntry0: Ruby Chest
+			SapphireChest.MapEntry0: Sapphire Chest
+			TopazChest.MapEntry0: Topaz Chest
+			TourmalineChest.MapEntry0: Tourmaline Chest
+			ZirconChest.MapEntry0: Zircon Chest
 		}
 
 		Prefixes: {
