@@ -986,6 +986,39 @@ namespace Avalon.Common.Templates
             NetMessage.SendTileSquare(-1, x, y + 1, 2);
         }
     }
+    public abstract class LanternTemplate : FurnitureTemplate
+    {
+        public override void SetStaticDefaults()
+        {
+            Main.tileFrameImportant[Type] = true;
+            Main.tileNoAttach[Type] = true;
+            Main.tileLavaDeath[Type] = LavaDeath;
+            TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);
+            TileObjectData.newTile.Height = 2;
+            TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
+            TileObjectData.newTile.StyleHorizontal = true;
+            TileObjectData.newTile.StyleWrapLimit = 111;
+            TileObjectData.addTile(Type);
+            DustType = Dust;
+            Main.tileLighted[Type] = true;
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            AddMapEntry(new Color(251, 235, 127), Language.GetText("MapObject.Lantern"));
+            RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodLantern>());
+        }
+
+        public override void HitWire(int i, int j)
+        {
+            Tile tile = Main.tile[i, j];
+            int topY = j - tile.TileFrameY / 18 % 2;
+            short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
+            Main.tile[i, topY].TileFrameX += frameAdjustment;
+            Main.tile[i, topY + 1].TileFrameX += frameAdjustment;
+            Wiring.SkipWire(i, topY);
+            Wiring.SkipWire(i, topY + 1);
+            NetMessage.SendTileSquare(-1, i, topY + 1, 2, TileChangeType.None);
+        }
+    }
+
     public abstract class BookcaseTemplate : FurnitureTemplate
     {
         public override void SetStaticDefaults()

@@ -688,6 +688,14 @@ public class AvalonPlayer : ModPlayer
         // }
     }
 
+    public override void OnHitAnything(float x, float y, Entity victim)
+    {
+        if (victim is NPC && Player.HasBuff(ModContent.BuffType<Blah>()))
+        {
+            NPC n = (NPC)victim;
+            n.AddBuff(BuffID.Midas, 60 * 3);
+        }
+    }
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
         if (KeybindSystem.ShadowHotkey.JustPressed && tpStam && tpCD >= 300 &&
