@@ -11,7 +11,6 @@ public class BrownStainedGlass : ModWall
         Main.wallHouse[Type] = true;
         Main.wallBlend[Type] = ModContent.WallType<BrownStainedGlass>();
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.BrownStainedGlass>();
-        AddMapEntry(new Color(76, 74, 72));
         DustType = ModContent.DustType<Dusts.ZirconDust>();
     }
 }
