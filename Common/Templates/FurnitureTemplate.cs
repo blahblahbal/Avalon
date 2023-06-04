@@ -19,6 +19,7 @@ namespace Avalon.Common.Templates
         public virtual int Dust => -1;
         public virtual int DropItem => 0;
         public virtual bool LavaDeath => true;
+        public virtual bool WaterDeath => true;
     }
     public abstract class BathtubTemplate : FurnitureTemplate
     {
@@ -28,6 +29,7 @@ namespace Avalon.Common.Templates
             Main.tileLavaDeath[Type] = LavaDeath;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style4x2); //this style already takes care of direction for us
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
             AddMapEntry(new Color(144, 148, 144), Language.GetText("ItemName.Bathtub"));
@@ -45,6 +47,7 @@ namespace Avalon.Common.Templates
             TileID.Sets.IsValidSpawnPoint[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style4x2);
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Bed"));
             TileID.Sets.DisableSmartCursor[Type] = true;
@@ -371,7 +374,7 @@ namespace Avalon.Common.Templates
             TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile, 1, 0);
             TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, 1, 0);
             TileObjectData.newTile.UsesCustomCanPlace = true;
-            TileObjectData.newTile.LavaDeath = true;
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16 };
             TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.CoordinatePadding = 2;
@@ -450,7 +453,7 @@ namespace Avalon.Common.Templates
             TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile, TileObjectData.newTile.Width, 0);
             TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, TileObjectData.newTile.Width, 0);
             TileObjectData.newTile.UsesCustomCanPlace = true;
-            TileObjectData.newTile.LavaDeath = true;
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16 };
             TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.CoordinatePadding = 2;
@@ -490,12 +493,13 @@ namespace Avalon.Common.Templates
     public abstract class ChestTemplate : FurnitureTemplate
     {
         public virtual bool Shiny => false;
+        public virtual int ShinyFrequency => 1200; //Doubt it'll ever need to be changed, just in case tbh
         public override void SetStaticDefaults()
         {
             if (Shiny)
             {
                 Main.tileShine2[Type] = true;
-                Main.tileShine[Type] = 1200;
+                Main.tileShine[Type] = ShinyFrequency;
             }
             // Properties
             Main.tileSpelunker[Type] = true;
@@ -746,6 +750,7 @@ namespace Avalon.Common.Templates
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.StyleWrapLimit = 111;
             TileObjectData.newTile.Origin = new Point16(1, 0);
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
             Main.tileLighted[Type] = true;
@@ -820,6 +825,8 @@ namespace Avalon.Common.Templates
             TileObjectData.newTile.StyleWrapLimit = 2;
             TileObjectData.newTile.StyleMultiplier = 2;
             TileObjectData.newTile.StyleHorizontal = true;
+
+            TileObjectData.newTile.LavaDeath = LavaDeath;
 
             TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
             TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
@@ -900,6 +907,7 @@ namespace Avalon.Common.Templates
             TileObjectData.newTile.StyleWrapLimit = 36;
             TileObjectData.newTile.CoordinateHeights = new int[] { 20 };
             TileObjectData.newTile.DrawYOffset = -4;
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             Main.tileLighted[Type] = true;
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
@@ -946,6 +954,7 @@ namespace Avalon.Common.Templates
             //TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.Table, TileObjectData.newTile.Width, 0);
             TileObjectData.newTile.StyleWrapLimit = 36;
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             Main.tileLighted[Type] = true;
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
@@ -996,6 +1005,7 @@ namespace Avalon.Common.Templates
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.StyleWrapLimit = 111;
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             DustType = Dust;
             Main.tileLighted[Type] = true;
@@ -1033,6 +1043,7 @@ namespace Avalon.Common.Templates
 
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4);
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16, 16 };
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
 
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
@@ -1058,6 +1069,7 @@ namespace Avalon.Common.Templates
             // Placement
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);
             TileObjectData.newTile.CoordinateHeights = new[] { 18 };
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
 
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
@@ -1097,6 +1109,8 @@ namespace Avalon.Common.Templates
             TileObjectData.newTile.StyleWrapLimit = 2;
             TileObjectData.newTile.StyleMultiplier = 2;
             TileObjectData.newTile.StyleHorizontal = true;
+
+            TileObjectData.newTile.LavaDeath = LavaDeath;
 
             TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
             TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
@@ -1340,6 +1354,7 @@ namespace Avalon.Common.Templates
             Main.tileLavaDeath[Type] = LavaDeath;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 18 };
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(191, 142, 111), Language.GetText("MapObject.Sink"));
             TileID.Sets.DisableSmartCursor[Type] = true;
@@ -1358,6 +1373,7 @@ namespace Avalon.Common.Templates
             Main.tileLavaDeath[Type] = LavaDeath;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
             AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Piano"));
@@ -1370,11 +1386,14 @@ namespace Avalon.Common.Templates
         {
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = LavaDeath;
+            Main.tileWaterDeath[Type] = WaterDeath;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);
             TileObjectData.newTile.Height = 3;
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16 };
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.StyleWrapLimit = 36;
+            TileObjectData.newTile.LavaDeath = LavaDeath;
+            TileObjectData.newTile.WaterDeath = WaterDeath;
             TileObjectData.addTile(Type);
             Main.tileLighted[Type] = true;
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
@@ -1416,6 +1435,7 @@ namespace Avalon.Common.Templates
             16
             };
             TileObjectData.newTile.Origin = new Point16(0, 4);
+            TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.GrandfatherClock"));
             TileID.Sets.DisableSmartCursor[Type] = true;

@@ -61,6 +61,7 @@ public abstract class ModTorch : ModTile
         if (Main.rand.NextBool(100) && Main.tile[i, j].TileFrameX < 66)
         {
             Dust d = Dust.NewDustDirect(new Vector2(i * 16,j * 16) + new Vector2(6,-6), 0, 0, DustType, 0, 0, 128, default, Main.rand.NextFloat(0.5f, 1));
+            d.noLightEmittence = true; //temporary until unique dust
             d.velocity.Y = Main.rand.NextFloat(-0.5f, -2);
             d.velocity.X *= 0.2f;
             d.noGravity = NoDustGravity;

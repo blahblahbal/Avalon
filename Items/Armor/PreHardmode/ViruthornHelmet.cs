@@ -26,7 +26,7 @@ class ViruthornHelmet : ModItem
     {
         CreateRecipe(1)
             .AddIngredient(ModContent.ItemType<Material.Bars.BacciliteBar>(), 15)
-            .AddIngredient(ModContent.ItemType<Material.Booger>(), 5)
+            .AddIngredient(ModContent.ItemType<Material.Booger>(), 8)
             .AddTile(TileID.Anvils)
             .Register();
     }

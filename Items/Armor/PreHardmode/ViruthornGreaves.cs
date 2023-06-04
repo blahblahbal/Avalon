@@ -25,8 +25,8 @@ class ViruthornGreaves : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Material.Bars.BacciliteBar>(), 10)
-            .AddIngredient(ModContent.ItemType<Material.Booger>(), 5)
+            .AddIngredient(ModContent.ItemType<Material.Bars.BacciliteBar>(), 20)
+            .AddIngredient(ModContent.ItemType<Material.Booger>(), 10)
             .AddTile(TileID.Anvils)
             .Register();
     }

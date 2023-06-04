@@ -24,7 +24,7 @@ class ViruthornScalemail : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Bars.BacciliteBar>(), 20).AddIngredient(ModContent.ItemType<Material.Booger>(), 5).AddTile(TileID.Anvils).Register();
+        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Bars.BacciliteBar>(), 25).AddIngredient(ModContent.ItemType<Material.Booger>(), 15).AddTile(TileID.Anvils).Register();
     }
     public override void UpdateEquip(Player player)
     {

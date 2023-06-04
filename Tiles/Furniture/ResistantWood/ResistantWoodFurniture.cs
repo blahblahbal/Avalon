@@ -9,17 +9,25 @@ using Terraria.ObjectData;
 
 namespace Avalon.Tiles.Furniture.ResistantWood;
 
-public class ResistantWoodBathtub : BathtubTemplate { }
+public class ResistantWoodBathtub : BathtubTemplate
+{
+    public override bool LavaDeath => false;
+}
 
 public class ResistantWoodBed : BedTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodBed>();
 }
 
-public class ResistantWoodBookcase : BookcaseTemplate { }
+public class ResistantWoodBookcase : BookcaseTemplate
+{
+    public override bool LavaDeath => false;
+}
 
 public class ResistantWoodCandelabra : CandelabraTemplate
 {
+    public override bool LavaDeath => false;
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
@@ -57,6 +65,7 @@ public class ResistantWoodCandelabra : CandelabraTemplate
 
 public class ResistantWoodCandle : CandleTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodCandle>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -95,11 +104,13 @@ public class ResistantWoodCandle : CandleTemplate
 
 public class ResistantWoodChair : ChairTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodChair>();
 }
 
 public class ResistantWoodChandelier : ChandelierTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodChandelier>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -138,6 +149,7 @@ public class ResistantWoodChandelier : ChandelierTemplate
 
 public class ResistantWoodChest : ChestTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodChest>();
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
@@ -158,26 +170,31 @@ public class ResistantWoodChest : ChestTemplate
 
 public class ResistantWoodClock : ClockTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodClock>();
 }
 
 public class ResistantWoodDoorClosed : ClosedDoorTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodDoor>();
 }
 
 public class ResistantWoodDoorOpen : OpenDoorTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodDoor>();
 }
 
 public class ResistantWoodDresser : DresserTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodDresser>();
 }
 
 public class ResistantWoodLamp : LampTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodLamp>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -216,6 +233,7 @@ public class ResistantWoodLamp : LampTemplate
 
 public class ResistantWoodLantern : LanternTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodLantern>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -252,25 +270,40 @@ public class ResistantWoodLantern : LanternTemplate
     }
 }
 
-public class ResistantWoodPiano : PianoTemplate { }
+public class ResistantWoodPiano : PianoTemplate
+{
+    public override bool LavaDeath => false;
+}
 
 public class ResistantWoodPlatform : PlatformTemplate
 {
+    public override bool LavaDeath => false;
     public override int Dust => DustID.Wraith;
 }
 
-public class ResistantWoodSink : SinkTemplate { }
+public class ResistantWoodSink : SinkTemplate
+{
+    public override bool LavaDeath => false;
+}
 
 public class ResistantWoodSofa : SofaTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodSofa>();
 }
 
-public class ResistantWoodTable : TableTemplate { }
+public class ResistantWoodTable : TableTemplate
+{
+    public override bool LavaDeath => false;
+}
 
 public class ResistantWoodToilet : ToiletTemplate
 {
+    public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodToilet>();
 }
 
-public class ResistantWoodWorkBench : WorkbenchTemplate { }
+public class ResistantWoodWorkBench : WorkbenchTemplate
+{
+    public override bool LavaDeath => false;
+}

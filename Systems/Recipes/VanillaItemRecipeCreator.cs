@@ -32,10 +32,11 @@ public class VanillaItemRecipeCreator : ModSystem
             Recipe.Create(ItemID.Starfury).AddIngredient(ItemID.GoldBroadsword).AddIngredient(ItemID.MeteoriteBar, 10).AddIngredient(ItemID.FallenStar, 20).AddTile(TileID.Anvils).Register();
             Recipe.Create(ItemID.Starfury).AddIngredient(ItemID.PlatinumBroadsword).AddIngredient(ItemID.MeteoriteBar, 10).AddIngredient(ItemID.FallenStar, 20).AddTile(TileID.Anvils).Register();
             Recipe.Create(ItemID.Starfury).AddIngredient(ModContent.ItemType<BismuthBroadsword>()).AddIngredient(ItemID.MeteoriteBar, 10).AddIngredient(ItemID.FallenStar, 20).AddTile(TileID.Anvils).Register();
+            Recipe.Create(ItemID.CoffinMinecart).AddRecipeGroup("IronBar", 5).AddRecipeGroup("Wood", 10).AddIngredient(ModContent.ItemType<YuckyBit>(), 10).AddTile(TileID.Anvils).AddCondition(condition: Condition.InGraveyard).Register();
         #endregion Anvils
 
         #region Hardmode Anvils
-            Recipe.Create(ItemID.MechanicalWorm).AddIngredient(ModContent.ItemType<YuckyBit>(), 6).AddRecipeGroup("IronBar", 5).AddIngredient(ItemID.SoulofNight, 6).AddTile(TileID.MythrilAnvil).Register();
+        Recipe.Create(ItemID.MechanicalWorm).AddIngredient(ModContent.ItemType<YuckyBit>(), 6).AddRecipeGroup("IronBar", 5).AddIngredient(ItemID.SoulofNight, 6).AddTile(TileID.MythrilAnvil).Register();
             //Recipe.Create(ItemID.LihzahrdPowerCell).AddIngredient(ModContent.ItemType<SolariumStar>(), 5).AddIngredient(ItemID.LihzahrdBrick, 10).AddTile(TileID.MythrilAnvil).Register();
         #endregion Hardmode Anvils
 
@@ -44,8 +45,8 @@ public class VanillaItemRecipeCreator : ModSystem
         #endregion Furnace
 
         #region Hellforge
-            Recipe.Create(ItemID.ObsidianShirt).AddIngredient(ItemID.Silk, 10).AddIngredient(ItemID.Obsidian, 20).AddIngredient(ModContent.ItemType<Booger>(), 5).AddTile(TileID.Hellforge).Register();
             Recipe.Create(ItemID.ObsidianHelm).AddIngredient(ItemID.Silk, 10).AddIngredient(ItemID.Obsidian, 20).AddIngredient(ModContent.ItemType<Booger>(), 5).AddTile(TileID.Hellforge).Register();
+            Recipe.Create(ItemID.ObsidianShirt).AddIngredient(ItemID.Silk, 10).AddIngredient(ItemID.Obsidian, 20).AddIngredient(ModContent.ItemType<Booger>(), 10).AddTile(TileID.Hellforge).Register();
             Recipe.Create(ItemID.ObsidianPants).AddIngredient(ItemID.Silk, 10).AddIngredient(ItemID.Obsidian, 20).AddIngredient(ModContent.ItemType<Booger>(), 5).AddTile(TileID.Hellforge).Register();
         #endregion Hellforge
 
