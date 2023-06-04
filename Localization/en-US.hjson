@@ -4523,6 +4523,21 @@ Mods: {
 				DisplayName: Offline Zircon Gemspark Wall
 				Tooltip: ""
 			}
+
+			BrownStainedGlass: {
+				DisplayName: Brown Stained Glass
+				Tooltip: ""
+			}
+
+			CyanStainedGlass: {
+				DisplayName: Cyan Stained Glass
+				Tooltip: ""
+			}
+
+			LimeStainedGlass: {
+				DisplayName: Lime Stained Glass
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

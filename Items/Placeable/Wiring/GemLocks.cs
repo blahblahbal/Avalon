@@ -29,6 +29,14 @@ public class PeridotGemLock : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.Ores.Peridot>(), 5)
+            .AddIngredient(ItemID.StoneBlock, 10)
+            .AddTile(TileID.HeavyWorkBench)
+            .Register();
+    }
 }
 
 public class TourmalineGemLock : ModItem
@@ -54,6 +62,14 @@ public class TourmalineGemLock : ModItem
         Item.value = Item.sellPrice(0, 0, 1, 0);
         Item.useAnimation = 15;
         Item.height = dims.Height;
+    }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>(), 5)
+            .AddIngredient(ItemID.StoneBlock, 10)
+            .AddTile(TileID.HeavyWorkBench)
+            .Register();
     }
 }
 
@@ -81,5 +97,13 @@ public class ZirconGemLock : ModItem
         Item.value = Item.sellPrice(0, 0, 1, 0);
         Item.useAnimation = 15;
         Item.height = dims.Height;
+    }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.Ores.Zircon>(), 5)
+            .AddIngredient(ItemID.StoneBlock, 10)
+            .AddTile(TileID.HeavyWorkBench)
+            .Register();
     }
 }
