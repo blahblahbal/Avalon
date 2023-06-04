@@ -635,6 +635,9 @@ public class AvalonGlobalNPC : GlobalNPC
                 //    100, 1, 1, 7));
 
                 break;
+            case NPCID.GoblinThief:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoblinDagger>(), 100));
+                break;
         }
 
         if (npc.type is NPCID.BloodZombie or NPCID.Drippler)

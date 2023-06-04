@@ -4538,6 +4538,11 @@ Mods: {
 				DisplayName: Lime Stained Glass
 				Tooltip: ""
 			}
+
+			GoblinDagger: {
+				DisplayName: Goblin Dagger
+				Tooltip: Slain enemies drop more money
+			}
 		}
 
 		Projectiles: {
@@ -4624,6 +4629,7 @@ Mods: {
 			VirulentPowder.DisplayName: Virulent Powder
 			MasterSwordBeam.DisplayName: Master Sword Beam
 			ArgusLantern.DisplayName: Argus Lantern
+			GoblinDagger.DisplayName: Goblin Dagger
 		}
 
 		NPCs: {

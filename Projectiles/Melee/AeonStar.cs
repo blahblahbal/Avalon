@@ -1,11 +1,13 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Humanizer.In;
 
 namespace Avalon.Projectiles.Melee;
 
@@ -44,6 +46,10 @@ public class AeonStar : ModProjectile
         Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
+        for(int i = 0; i < 4; i++)
+        {
+            Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition + new Vector2(0, (float)Math.Sin(Main.GlobalTimeWrappedHourly * MathHelper.TwoPi / 8f) * 5).RotatedBy(i * MathHelper.PiOver2 + (Main.timeForVisualEffects * 0.03f)), frame, new Color(255, 255, 255, 64) * 0.2f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
+        }
         Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition, frame, new Color(255, 255, 255, 64), Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
         return false;
     }
