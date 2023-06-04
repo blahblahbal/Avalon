@@ -59,10 +59,10 @@ public class AeonsEternity : ModItem
                 particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
                 ParticleOrchestraSettings settings = particleOrchestraSettings;
                 ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, player.whoAmI);
-                particleOrchestraSettings.PositionInWorld = player.Center;
-                particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
-                settings = particleOrchestraSettings;
-                ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PaladinsHammer, settings, player.whoAmI);
+                //particleOrchestraSettings.PositionInWorld = player.Center;
+                //particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
+                //settings = particleOrchestraSettings;
+                //ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PaladinsHammer, settings, player.whoAmI);
                 particleOrchestraSettings.PositionInWorld = player.Center;
                 particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
                 settings = particleOrchestraSettings;

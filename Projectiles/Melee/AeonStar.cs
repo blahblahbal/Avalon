@@ -90,6 +90,7 @@ public class AeonStar : ModProjectile
         //}
         Projectile.velocity *= 0.95f;
         Projectile.rotation += Projectile.velocity.Length() / 30;
+        Projectile.rotation += 0.01f;
 
         if (Projectile.ai[1] > 30)
         {
@@ -143,8 +144,8 @@ public class AeonStar : ModProjectile
             settings = particleOrchestraSettings;
             ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
             particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
-            settings = particleOrchestraSettings;
-            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PaladinsHammer, settings, Projectile.owner);
+            //settings = particleOrchestraSettings;
+            //ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PaladinsHammer, settings, Projectile.owner);
         }
     }
 }

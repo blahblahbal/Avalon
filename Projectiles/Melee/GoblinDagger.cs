@@ -38,7 +38,7 @@ public class GoblinDagger : ModProjectile
         }
         if (target.life < 0)
         {
-            target.value *= Main.rand.Next(3, 60);
+            target.value *= Main.rand.Next(1.5f, 3f);
             if (hit.Crit)
             {
                 target.value *= 2;
