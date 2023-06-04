@@ -38,8 +38,8 @@ public class BleachedEbonyCandelabra : CandelabraTemplate
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 0;
-        int height = 16;
+        int offsetY = 2;
+        int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -76,8 +76,8 @@ public class BleachedEbonyCandle : CandleTemplate
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 0;
-        int height = 16;
+        int offsetY = -4;
+        int height = 20;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -119,7 +119,7 @@ public class BleachedEbonyChandelier : ChandelierTemplate
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
         int offsetY = 0;
-        int height = 16;
+        int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -196,7 +196,7 @@ public class BleachedEbonyLamp : LampTemplate
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
         int offsetY = 0;
-        int height = 16;
+        int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)

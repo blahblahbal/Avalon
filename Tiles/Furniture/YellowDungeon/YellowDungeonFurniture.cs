@@ -75,8 +75,8 @@ public class YellowDungeonCandle : CandleTemplate
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 2;
-        int height = 18;
+        int offsetY = -4;
+        int height = 20;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -118,7 +118,7 @@ public class YellowDungeonChandelier : ChandelierTemplate
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 2;
+        int offsetY = 0;
         int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
@@ -196,7 +196,7 @@ public class YellowDungeonLamp : LampTemplate
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 2;
+        int offsetY = 0;
         int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
