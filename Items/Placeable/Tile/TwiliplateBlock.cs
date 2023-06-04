@@ -27,9 +27,10 @@ class TwiliplateBlock : ModItem
     }
     public override void AddRecipes()
     {
-        Terraria.Recipe.Create(Type, 2)
+        Terraria.Recipe.Create(Type, 25)
+            .AddIngredient(ItemID.StoneBlock, 25)
+            .AddIngredient(ItemID.FallenStar)
             .AddIngredient(ModContent.ItemType<Material.Ores.BismuthOre>())
-            .AddIngredient(ItemID.Cloud)
-            .AddTile(TileID.Furnaces).Register();
+            .AddTile(TileID.SkyMill).Register(); //Change when alt added :)
     }
 }

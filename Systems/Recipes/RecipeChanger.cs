@@ -37,6 +37,37 @@ public class RecipeChanger : ModSystem
                     }
                     break;
                 }
+                case ItemID.SunplateBlock:
+                {
+                    recipe.AddIngredient(ItemID.GoldOre, 1);
+                    break;
+                }
+                case ItemID.Magiluminescence:
+                {
+                    if (recipe.TryGetIngredient(ItemID.DemoniteBar, out Item ing))
+                    {
+                        recipe.RemoveIngredient(ing);
+                        recipe.AddRecipeGroup("Avalon:EvilBar", 12);
+                    }
+                    if (recipe.TryGetIngredient(ItemID.CrimtaneBar, out Item ing2))
+                    {
+                        recipe.DisableRecipe();
+                    }
+                    break;
+                }
+                case ItemID.ShadowCandle:
+                {
+                    if (recipe.TryGetIngredient(ItemID.DemoniteBar, out Item ing))
+                    {
+                        recipe.RemoveIngredient(ing);
+                        recipe.AddRecipeGroup("Avalon:EvilBar", 3);
+                    }
+                    if (recipe.TryGetIngredient(ItemID.CrimtaneBar, out Item ing2))
+                    {
+                        recipe.DisableRecipe();
+                    }
+                    break;
+                }
                 //case ItemID.AnkhCharm:
                 //{
                 //    recipe.AddIngredient(ModContent.ItemType<Items.Accessories.Bayonet>());

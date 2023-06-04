@@ -4543,6 +4543,11 @@ Mods: {
 				DisplayName: Goblin Dagger
 				Tooltip: Slain enemies drop more money
 			}
+
+			ZincBullet: {
+				DisplayName: Zinc Bullet
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

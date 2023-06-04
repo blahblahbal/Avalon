@@ -242,7 +242,7 @@ public class RecipeSystem : ModSystem
         {
             ItemID.DemoniteBar,
             ItemID.CrimtaneBar,
-            //ModContent.ItemType<PandemiteBar>()
+            ModContent.ItemType<BacciliteBar>()
         });
         RecipeGroup.RegisterGroup("Avalon:EvilBar", groupEvilBar);
 

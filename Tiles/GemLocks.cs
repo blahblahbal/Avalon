@@ -165,6 +165,7 @@ public class GemLocks : ModTile
                 else
                 {
                     player.ConsumeItem(num30);
+                    ToggleGemLock(i, j, on: true);
                     NetMessage.SendData(MessageID.GemLockToggle, -1, -1, null, i, j, 1f);
                 }
             }
@@ -177,6 +178,7 @@ public class GemLocks : ModTile
                 }
                 else
                 {
+                    ToggleGemLock(i, j, on: false);
                     NetMessage.SendData(MessageID.GemLockToggle, -1, -1, null, i, j);
                 }
             }
@@ -184,10 +186,10 @@ public class GemLocks : ModTile
 
         return true;
     }
-    public static void HitSwitch(int i, int j)
+    public static void HitSwitch(int i, int j) //Does not sync with multiplayer
     {
         SoundEngine.PlaySound(SoundID.Mech, new Vector2(i * 16 + 16, j * 16 + 16));
-        Wiring.TripWire(i, j, 3, 3);
+        Wiring.TripWire(i, j, 3, 3); //I THINK this is what isn't syncing properly?
     }
 
     public static void ToggleGemLock(int i, int j, bool on)
@@ -227,7 +229,8 @@ public class GemLocks : ModTile
         }
         if (num != -1 && flag)
         {
-            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, num);
+            int item1 = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, num);
+            NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item1, 1f);
         }
         WorldGen.SquareTileFrame(i, j);
         NetMessage.SendTileSquare(-1, i - num3, j - num4, 3, 3);

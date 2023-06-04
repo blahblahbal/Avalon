@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -25,7 +26,7 @@ class NickelFence : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>()).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(4).AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>()).AddTile(TileID.Anvils).Register();
+        Recipe.Create(ModContent.ItemType<Material.Bars.NickelBar>()).AddIngredient(this, 4).AddTile(TileID.Anvils).Register();
     }
 }

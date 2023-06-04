@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -255,7 +256,7 @@ public class ResistantWoodPiano : PianoTemplate { }
 
 public class ResistantWoodPlatform : PlatformTemplate
 {
-    public override int Dust => ModContent.DustType<Dusts.ResistantWoodDust>();
+    public override int Dust => DustID.Wraith;
 }
 
 public class ResistantWoodSink : SinkTemplate { }

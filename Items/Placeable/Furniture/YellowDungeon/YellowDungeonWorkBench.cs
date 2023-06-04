@@ -16,7 +16,7 @@ class YellowDungeonWorkBench : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.YellowDungeon.YellowDungeonWorkbench>();
+        Item.createTile = ModContent.TileType<Tiles.Furniture.YellowDungeon.YellowDungeonWorkBench>();
         Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;
