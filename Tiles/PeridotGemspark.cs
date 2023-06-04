@@ -10,7 +10,7 @@ public class PeridotGemspark : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(143, 255, 92));
+        AddMapEntry(new Color(162, 255, 95));
         Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;
         Main.tileLighted[Type] = true;
@@ -68,7 +68,7 @@ public class PeridotGemsparkOff : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(73, 108, 23));
+        AddMapEntry(new Color(80, 108, 23));
         Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;
         TileID.Sets.AllBlocksWithSmoothBordersToResolveHalfBlockIssue[Type] = true;

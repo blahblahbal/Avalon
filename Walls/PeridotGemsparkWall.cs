@@ -13,7 +13,7 @@ public class PeridotGemsparkWall : ModWall
         Main.wallLight[Type] = true;
         Main.wallBlend[Type] = ModContent.WallType<PeridotGemsparkWall>();
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.PeridotGemsparkWall>();
-        AddMapEntry(new Color(143, 255, 92));
+        AddMapEntry(new Color(162, 255, 95));
         DustType = ModContent.DustType<Dusts.PeridotDust>();
     }
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -30,7 +30,7 @@ public class PeridotGemsparkWallOff : ModWall
         Main.wallHouse[Type] = true;
         Main.wallBlend[Type] = ModContent.WallType<PeridotGemsparkWallOff>();
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.PeridotGemsparkWall>();
-        AddMapEntry(new Color(73, 108, 23));
+        AddMapEntry(new Color(80, 108, 23));
         DustType = ModContent.DustType<Dusts.PeridotDust>();
     }
 }
