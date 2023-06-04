@@ -3,43 +3,42 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace Avalon.Tiles.Furniture.BleachedEbony;
+namespace Avalon.Tiles.Furniture.Coughwood;
 
-public class BleachedEbonyBathtub : BathtubTemplate { }
+public class CoughwoodBathtub : BathtubTemplate { }
 
-public class BleachedEbonyBed : BedTemplate
+public class CoughwoodBed : BedTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyBed>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodBed>();
 }
 
-public class BleachedEbonyBookcase : BookcaseTemplate { }
+public class CoughwoodBookcase : BookcaseTemplate { }
 
-public class BleachedEbonyCandelabra : CandelabraTemplate
+public class CoughwoodCandelabra : CandelabraTemplate
 {
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
         {
-            r = 1f;
-            g = 0.95f;
-            b = 0.65f;
+            r = 0.77f;
+            g = 0.67f;
+            b = 0.42f;
         }
     }
 
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(198, 171, 108, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 0;
-        int height = 16;
+        int offsetY = 2;
+        int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -55,29 +54,29 @@ public class BleachedEbonyCandelabra : CandelabraTemplate
     }
 }
 
-public class BleachedEbonyCandle : CandleTemplate 
+public class CoughwoodCandle : CandleTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyCandle>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodCandle>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
         {
-            r = 1f;
-            g = 0.95f;
-            b = 0.65f;
+            r = 0.77f;
+            g = 0.67f;
+            b = 0.42f;
         }
     }
 
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(198, 171, 108, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 0;
-        int height = 16;
+        int offsetY = 2;
+        int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -93,33 +92,34 @@ public class BleachedEbonyCandle : CandleTemplate
     }
 }
 
-public class BleachedEbonyChair : ChairTemplate
+public class CoughwoodChair : ChairTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyChair>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodChair>();
 }
 
-public class BleachedEbonyChandelier : ChandelierTemplate
+public class CoughwoodChandelier : ChandelierTemplate
 {
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodChandelier>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
         {
-            r = 1f;
-            g = 0.95f;
-            b = 0.65f;
+            r = 0.77f;
+            g = 0.67f;
+            b = 0.42f;
         }
     }
 
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(198, 171, 108, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 0;
-        int height = 16;
+        int offsetY = 2;
+        int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -135,68 +135,69 @@ public class BleachedEbonyChandelier : ChandelierTemplate
     }
 }
 
-public class BleachedEbonyChest : ChestTemplate
+public class CoughwoodChest : ChestTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyChest>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodChest>();
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         Tile tile = Main.tile[i, j];
         int style = TileObjectData.GetTileStyle(tile);
         if (style == 0)
         {
-            yield return new Item(ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyChest>());
+            yield return new Item(ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodChest>());
         }
         if (style == 1)
         {
             // Style 1 is ExampleChest when locked. We want that tile style to drop the ExampleChest item as well. Use the Chest Lock item to lock this chest.
             // No item places ExampleChest in the locked style, so the automatic item drop is unknown, this is why GetItemDrops is necessary in this situation.
-            yield return new Item(ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyChest>());
+            yield return new Item(ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodChest>());
         }
     }
 }
 
-public class BleachedEbonyClock : ClockTemplate
+public class CoughwoodClock : ClockTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyClock>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodClock>();
 }
 
-public class BleachedEbonyDoorClosed : ClosedDoorTemplate
+public class CoughwoodDoorClosed : ClosedDoorTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyDoor>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodDoor>();
 }
 
-public class BleachedEbonyDoorOpen : OpenDoorTemplate
+public class CoughwoodDoorOpen : OpenDoorTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyDoor>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodDoor>();
 }
 
-public class BleachedEbonyDresser : DresserTemplate
+public class CoughwoodDresser : DresserTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyDresser>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodDresser>();
 }
 
-public class BleachedEbonyLamp : LampTemplate
+public class CoughwoodLamp : LampTemplate
 {
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodLamp>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
         {
-            r = 1f;
-            g = 0.95f;
-            b = 0.65f;
+            r = 0.77f;
+            g = 0.67f;
+            b = 0.42f;
         }
     }
 
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(198, 171, 108, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 0;
-        int height = 16;
+        int offsetY = 2;
+        int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -212,28 +213,29 @@ public class BleachedEbonyLamp : LampTemplate
     }
 }
 
-public class BleachedEbonyLantern : LanternTemplate 
+public class CoughwoodLantern : LanternTemplate
 {
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodLantern>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
         {
-            r = 1f;
-            g = 0.95f;
-            b = 0.65f;
+            r = 0.77f;
+            g = 0.67f;
+            b = 0.42f;
         }
     }
 
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(198, 171, 108, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
-        int offsetY = 0;
-        int height = 16;
+        int offsetY = 2;
+        int height = 18;
         int offsetX = 1;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
@@ -249,26 +251,25 @@ public class BleachedEbonyLantern : LanternTemplate
     }
 }
 
-public class BleachedEbonyPiano : PianoTemplate { }
+public class CoughwoodPiano : PianoTemplate { }
 
-public class BleachedEbonySink : SinkTemplate { }
-
-public class BleachedEbonySofa : SofaTemplate
+public class CoughwoodPlatform : PlatformTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonySofa>();
+    public override int Dust => ModContent.DustType<Dusts.CoughwoodDust>();
 }
 
-public class BleachedEbonyTable : TableTemplate { }
+public class CoughwoodSink : SinkTemplate { }
 
-public class BleachedEbonyToilet : ToiletTemplate
+public class CoughwoodSofa : SofaTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyToilet>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodSofa>();
 }
 
-public class BleachedEbonyWorkBench : WorkbenchTemplate { }
+public class CoughwoodTable : TableTemplate { }
 
-public class BleachedEbonyPlatform : PlatformTemplate 
+public class CoughwoodToilet : ToiletTemplate
 {
-    public override int Dust => DustID.SnowBlock;
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodToilet>();
 }
 
+public class CoughwoodWorkBench : WorkbenchTemplate { }

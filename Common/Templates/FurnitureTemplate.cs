@@ -8,8 +8,6 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Avalon.Items.Placeable.Furniture.OrangeDungeon;
-using Avalon.Tiles.Furniture.OrangeDungeon;
 using Terraria.Enums;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
@@ -1018,7 +1016,6 @@ namespace Avalon.Common.Templates
             NetMessage.SendTileSquare(-1, i, topY + 1, 2, TileChangeType.None);
         }
     }
-
     public abstract class BookcaseTemplate : FurnitureTemplate
     {
         public override void SetStaticDefaults()
