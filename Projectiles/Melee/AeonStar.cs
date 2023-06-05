@@ -7,7 +7,6 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Humanizer.In;
 
 namespace Avalon.Projectiles.Melee;
 
@@ -44,13 +43,15 @@ public class AeonStar : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
-        Rectangle frame = texture.Frame();
+        int frameHeight = texture.Height / Main.projFrames[Projectile.type];
+        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
         Vector2 frameOrigin = frame.Size() / 2f;
-        for(int i = 0; i < 4; i++)
+        Color color = Color.Lerp(new Color(255,255,255,0), new Color(128, 128, 128, 64), Projectile.ai[1] * 0.03f);
+        for(int i = 0; i < 6; i++)
         {
-            Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition + new Vector2(0, (float)Math.Sin(Main.GlobalTimeWrappedHourly * MathHelper.TwoPi / 8f) * 5).RotatedBy(i * MathHelper.PiOver2 + (Main.timeForVisualEffects * 0.03f)), frame, new Color(255, 255, 255, 64) * 0.2f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
+            Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition + new Vector2(0, (float)Math.Sin(Main.GlobalTimeWrappedHourly * MathHelper.TwoPi / 12f) * 4).RotatedBy(i * MathHelper.PiOver2 + (Main.timeForVisualEffects * 0.03f)), frame, color * 0.2f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
         }
-        Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition, frame, new Color(255, 255, 255, 64), Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
+        Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition, frame, color, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
         return false;
     }
     public override void AI()
@@ -90,7 +91,8 @@ public class AeonStar : ModProjectile
         //}
         Projectile.velocity *= 0.95f;
         Projectile.rotation += Projectile.velocity.Length() / 30;
-        Projectile.rotation += 0.01f;
+        Projectile.rotation += 0.007f;
+
 
         if (Projectile.ai[1] > 30)
         {
@@ -119,21 +121,31 @@ public class AeonStar : ModProjectile
     {
         SoundEngine.PlaySound(SoundID.Item110, Projectile.Center);
 
-        for(int i = 0; i < 30; i++)
+        //for (int i = 0; i < 30; i++)
+        //{
+        //    int D = Dust.NewDust(Projectile.Center, 0, 0, DustID.UnusedWhiteBluePurple, 0, 0, 0, default, 3);
+        //    Main.dust[D].color = new Color(255, 255, 255, 0);
+        //    Main.dust[D].noGravity = !Main.rand.NextBool(5);
+        //    Main.dust[D].noLightEmittence = true;
+        //    Main.dust[D].fadeIn = Main.rand.NextFloat(0f, 2f);
+        //    Main.dust[D].velocity = new Vector2(Main.rand.NextFloat(2, 5), 0).RotatedBy(MathHelper.Pi / 15 * i);
+        //}
+
+        for (int i = 0; i < 30; i++)
         {
-            int D = Dust.NewDust(Projectile.Center, 0, 0, DustID.UnusedWhiteBluePurple, 0, 0, 0, default, 3);
+            int D = Dust.NewDust(Projectile.Center, 0, 0, DustID.GoldCoin, 0, 0, 0, default, 3);
             Main.dust[D].color = new Color(255, 255, 255, 0);
-            Main.dust[D].noGravity = !Main.rand.NextBool(5);
+            Main.dust[D].noGravity = true;
             Main.dust[D].noLightEmittence = true;
-            Main.dust[D].fadeIn = Main.rand.NextFloat(0f, 2f);
-            Main.dust[D].velocity = new Vector2(Main.rand.NextFloat(2, 5), 0).RotatedBy(MathHelper.Pi / 15 * i);
+            Main.dust[D].fadeIn = Main.rand.NextFloat(0.5f, 1.5f);
+            Main.dust[D].velocity = new Vector2(Main.rand.NextFloat(3, 8), 0).RotatedBy(MathHelper.Pi / 15 * i);
         }
 
         if (Main.myPlayer == Projectile.owner)
         {
             Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.Center,Vector2.Zero,ModContent.ProjectileType<AeonExplosion>(),Projectile.damage * 7, Projectile.knockBack * 2, Projectile.owner);
         }
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 1; i++)
         {
             ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
             particleOrchestraSettings.PositionInWorld = Projectile.Center;
@@ -143,9 +155,8 @@ public class AeonStar : ModProjectile
             particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
             settings = particleOrchestraSettings;
             ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
-            particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
-            //settings = particleOrchestraSettings;
-            //ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PaladinsHammer, settings, Projectile.owner);
+            particleOrchestraSettings.MovementVector = Vector2.Zero;
+            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.Excalibur, settings, Projectile.owner);
         }
     }
 }

@@ -18,13 +18,13 @@ public class SanguineKatana : ModItem
     {
         Item.width = 34;
         Item.height = 36;
-        Item.damage = 24;
+        Item.damage = 30;
         Item.scale = 1f;
         Item.DamageType = DamageClass.Melee;
         Item.autoReuse = true;
         Item.rare = ItemRarityID.Orange;
-        Item.useTime = 16;
-        Item.useAnimation = 16;
+        Item.useTime = 24;
+        Item.useAnimation = 24;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.knockBack = 5f;
         Item.UseSound = SoundID.Item1;
@@ -36,25 +36,25 @@ public class SanguineKatana : ModItem
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
-        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1f, adjustedItemScale5);
+        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1f, adjustedItemScale5 * 1.3f);
         NetMessage.SendData(13, -1, -1, null, player.whoAmI);
         return false;
     }
     public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {
-        if(target.type != NPCID.TargetDummy)
-        {
-            int healAmount = Main.rand.Next(4) + 2;
-            player.HealEffect(healAmount, true);
-            player.statLife += healAmount;
-        }
-        for(int i = 0; i < 15; i++)
-        {
-            int num15 = Dust.NewDust(Main.rand.NextVector2FromRectangle(target.Hitbox),0,0, DustID.Blood, 0,0, 140, default(Color), 2f);
-            Main.dust[num15].fadeIn = 1.2f;
-            Main.dust[num15].noGravity = true;
-            Main.dust[num15].velocity = Main.rand.NextVector2Circular(6, 6);
-        }
+        //if(target.type != NPCID.TargetDummy)
+        //{
+        //    int healAmount = Main.rand.Next(2,3);
+        //    player.HealEffect(healAmount, true);
+        //    player.statLife += healAmount;
+        //}
+        //for(int i = 0; i < 15; i++)
+        //{
+        //    int num15 = Dust.NewDust(Main.rand.NextVector2FromRectangle(target.Hitbox),0,0, DustID.Blood, 0,0, 140, default(Color), 2f);
+        //    Main.dust[num15].fadeIn = 1.2f;
+        //    Main.dust[num15].noGravity = true;
+        //    Main.dust[num15].velocity = Main.rand.NextVector2Circular(6, 6);
+        //}
     }
     public override bool? UseItem(Player player)
     {

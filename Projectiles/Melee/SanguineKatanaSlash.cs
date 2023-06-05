@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,8 +12,9 @@ public class SanguineKatanaSlash : EnergySlashTemplate
 {
     public override bool PreDraw(ref Color lightColor)
     {
+        DrawSlash(Color.Black, Color.Black, Color.Red, Color.Black, 512, 1f, MathHelper.PiOver4, -MathHelper.Pi / 24, -MathHelper.Pi / 24, false);
         DrawSlash(new Color(255, 0, 0), new Color(128, 0, 0), new Color(0, 0, 0), Color.Red * 0.2f, 512, 1f, 0, -MathHelper.Pi / 24, -MathHelper.Pi / 24, true);
-        DrawSlash(new Color(255, 0, 0), new Color(128, 0, 0), new Color(0, 0, 0), Color.Black, 512, 1f, MathHelper.PiOver4, -MathHelper.Pi / 24, -MathHelper.Pi / 24, true);
+        //DrawSlash(new Color(255, 0, 0), new Color(128, 0, 0), new Color(0, 0, 0), Color.Black, 512, 1f, MathHelper.PiOver4, -MathHelper.Pi / 12, -MathHelper.Pi / 24, true);
         return false;
     }
     public override void AI()
@@ -23,19 +24,29 @@ public class SanguineKatanaSlash : EnergySlashTemplate
         Vector2 vector3 = (num8 + Projectile.ai[0] * ((float)Math.PI / 2f)).ToRotationVector2();
         if (Main.rand.NextFloat() * 0.5f < Projectile.Opacity)
         {
-            Dust dust2 = Dust.NewDustPerfect(Projectile.Center + num8.ToRotationVector2() * (Main.rand.NextFloat() * 80f * Projectile.scale + 20f * Projectile.scale), DustID.Blood, vector3 * 3f, 100, Color.Lerp(Color.Gold, Color.White, Main.rand.NextFloat() * 0.3f), 1f);
+            Dust dust2 = Dust.NewDustPerfect(Projectile.Center + num8.ToRotationVector2() * (Main.rand.NextFloat() * 80f * Projectile.scale + 20f * Projectile.scale), DustID.Blood, vector3 * 3f, 100, default, 1f);
+            dust2.fadeIn = 0.4f + Main.rand.NextFloat() * 0.5f;
+            dust2.noGravity = true;
+        }
+        if (Main.rand.NextFloat() * 0.5f < Projectile.Opacity)
+        {
+            Dust dust2 = Dust.NewDustPerfect(Projectile.Center + num8.ToRotationVector2() * (Main.rand.NextFloat() * 80f * Projectile.scale + 20f * Projectile.scale), DustID.RedTorch, vector3 * 3f, 254, default, 1f);
             dust2.fadeIn = 0.4f + Main.rand.NextFloat() * 0.15f;
             dust2.noGravity = true;
         }
     }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
-        Player player = Main.player[Projectile.owner];
-        if (target.type != NPCID.TargetDummy)
+        if (Projectile.penetrate < 90)
         {
-            int healAmount = Main.rand.Next(4) + 2;
-            player.HealEffect(healAmount, true);
-            player.statLife += healAmount;
+            Player player = Main.player[Projectile.owner];
+            if (target.type != NPCID.TargetDummy)
+            {
+                int healAmount = Main.rand.Next(2, 3);
+                player.HealEffect(healAmount, true);
+                player.statLife += healAmount;
+                Projectile.penetrate = 100;
+            }
         }
         for (int i = 0; i < 15; i++)
         {
