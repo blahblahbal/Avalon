@@ -234,4 +234,4 @@ public class PurpleDungeonToilet : ToiletTemplate
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonToilet>();
 }
 
-public class PurpleDungeonWorkBench : WorkbenchTemplate { }
+public class PurpleDungeonWorkbench : WorkbenchTemplate { }

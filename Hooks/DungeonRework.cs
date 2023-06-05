@@ -373,13 +373,13 @@ public class DungeonRemoveCrackedBricks : GenPass
                         switch (RandDungeonColour)
                         {
                             case 0:
-                                WorldGen.PlaceTile(i, j, ModContent.TileType<OrangeDungeonWorkBench>(), true);
+                                WorldGen.PlaceTile(i, j, ModContent.TileType<OrangeDungeonWorkbench>(), true);
                                 break;
                             case 1:
-                                WorldGen.PlaceTile(i, j, ModContent.TileType<PurpleDungeonWorkBench>(), true);
+                                WorldGen.PlaceTile(i, j, ModContent.TileType<PurpleDungeonWorkbench>(), true);
                                 break;
                             case 2:
-                                WorldGen.PlaceTile(i, j, ModContent.TileType<YellowDungeonWorkBench>(), true);
+                                WorldGen.PlaceTile(i, j, ModContent.TileType<YellowDungeonWorkbench>(), true);
                                 break;
                         }
                     }
