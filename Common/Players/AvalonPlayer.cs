@@ -129,6 +129,8 @@ public class AvalonPlayer : ModPlayer
     public bool PathogenImbue;
     public bool Pathogen;
 
+    public bool hungryMinion;
+
     public bool SnotOrb;
     #endregion
 
@@ -153,6 +155,7 @@ public class AvalonPlayer : ModPlayer
         CaesiumPoison = false;
         Pathogen = false;
         PathogenImbue = false;
+        hungryMinion = false;
 
         // accessories
         TrapImmune = false;

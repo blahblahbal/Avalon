@@ -4548,6 +4548,11 @@ Mods: {
 				DisplayName: Zinc Bullet
 				Tooltip: ""
 			}
+
+			HungryStaff: {
+				DisplayName: Hungry Staff
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4635,6 +4640,7 @@ Mods: {
 			MasterSwordBeam.DisplayName: Master Sword Beam
 			ArgusLantern.DisplayName: Argus Lantern
 			GoblinDagger.DisplayName: Goblin Dagger
+			HungrySummon.DisplayName: Hungry
 		}
 
 		NPCs: {
@@ -5177,6 +5183,11 @@ Mods: {
 			ArgusLantern: {
 				DisplayName: Argus Lantern
 				Description: An enchanted lantern is keeping you out of harm's way
+			}
+
+			Hungry: {
+				DisplayName: Hungry
+				Description: The hungry will fight for you
 			}
 		}
 
