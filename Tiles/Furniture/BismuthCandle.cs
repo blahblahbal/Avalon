@@ -1,50 +1,14 @@
+using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
 
 namespace Avalon.Tiles.Furniture;
 
-public class BismuthCandle : ModTile
+public class BismuthCandle : CandleTemplate
 {
-    public override void SetStaticDefaults()
-    {
-        Main.tileFrameImportant[Type] = true;
-        Main.tileLavaDeath[Type] = false;
-        TileObjectData.newTile.CopyFrom(TileObjectData.StyleOnTable1x1);
-        TileObjectData.newTile.StyleHorizontal = true;
-        TileObjectData.newTile.StyleWrapLimit = 36;
-        TileObjectData.newTile.LavaDeath = false;
-        TileObjectData.newTile.CoordinateHeights = new int[] { 20 };
-        TileObjectData.newTile.DrawYOffset = -4;
-        TileObjectData.addTile(Type);
-        Main.tileLighted[Type] = true;
-        AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-        AddMapEntry(new Color(253, 221, 3));
-        DustType = -1;
-        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.BismuthCandle>());
-    }
-
-    public override void MouseOver(int i, int j)
-    {
-        Player player = Main.player[Main.myPlayer];
-        player.noThrow = 2;
-        player.cursorItemIconEnabled = true;
-        player.cursorItemIconID = ModContent.ItemType<Items.Placeable.Furniture.BismuthCandle>();
-    }
-
-    public override bool RightClick(int i, int j)
-    {
-        Tile tile = Main.tile[i, j];
-        int topY = j - tile.TileFrameY / 18;
-        short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
-        Main.tile[i, topY].TileFrameX += frameAdjustment;
-        NetMessage.SendTileSquare(-1, i, topY + 1, 1, TileChangeType.None);
-        return true;
-    }
-
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BismuthCandle>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
@@ -55,17 +19,6 @@ public class BismuthCandle : ModTile
             b = 0.65f;
         }
     }
-
-    public override void HitWire(int i, int j)
-    {
-        Tile tile = Main.tile[i, j];
-        int topY = j - tile.TileFrameY / 18;
-        short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
-        Main.tile[i, topY].TileFrameX += frameAdjustment;
-        Wiring.SkipWire(i, topY);
-        NetMessage.SendTileSquare(-1, i, topY + 1, 1, TileChangeType.None);
-    }
-
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
@@ -85,7 +38,7 @@ public class BismuthCandle : ModTile
         {
             float x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/Furniture/BismuthCandle_Flame").Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
