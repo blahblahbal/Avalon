@@ -791,7 +791,15 @@ namespace Avalon.Common.Templates
                 Wiring.SkipWire(x + 2, y + 1);
                 Wiring.SkipWire(x + 2, y + 2);
             }
+            NetMessage.SendTileSquare(-1, x, y, 3);
             NetMessage.SendTileSquare(-1, x, y + 1, 3);
+            NetMessage.SendTileSquare(-1, x, y + 2, 3);
+            NetMessage.SendTileSquare(-1, x + 1, y, 3);
+            NetMessage.SendTileSquare(-1, x + 1, y + 1, 3);
+            NetMessage.SendTileSquare(-1, x + 1, y + 2, 3);
+            NetMessage.SendTileSquare(-1, x + 2, y, 3);
+            NetMessage.SendTileSquare(-1, x + 2, y + 1, 3);
+            NetMessage.SendTileSquare(-1, x + 2, y + 2, 3);
         }
     }
     public abstract class ChairTemplate : FurnitureTemplate
@@ -923,14 +931,13 @@ namespace Avalon.Common.Templates
             player.cursorItemIconEnabled = true;
             player.cursorItemIconID = DropItem;
         }
-
         public override bool RightClick(int i, int j)
         {
             Tile tile = Main.tile[i, j];
             int topY = j - tile.TileFrameY / 18;
             short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
             Main.tile[i, topY].TileFrameX += frameAdjustment;
-            NetMessage.SendTileSquare(-1, i, topY + 1, 1, TileChangeType.None);
+            NetMessage.SendTileSquare(-1, i, topY, 1);
             return true;
         }
         public override void HitWire(int i, int j)
@@ -939,8 +946,7 @@ namespace Avalon.Common.Templates
             int topY = j - tile.TileFrameY / 18;
             short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
             Main.tile[i, topY].TileFrameX += frameAdjustment;
-            Wiring.SkipWire(i, topY);
-            NetMessage.SendTileSquare(-1, i, topY + 1, 1, TileChangeType.None);
+            NetMessage.SendTileSquare(-1, i, topY, 1);
         }
     }
     public abstract class CandelabraTemplate : FurnitureTemplate
@@ -990,7 +996,10 @@ namespace Avalon.Common.Templates
                 Wiring.SkipWire(x + 1, y);
                 Wiring.SkipWire(x + 1, y + 1);
             }
+            NetMessage.SendTileSquare(-1, x, y, 2);
             NetMessage.SendTileSquare(-1, x, y + 1, 2);
+            NetMessage.SendTileSquare(-1, x + 1, y, 2);
+            NetMessage.SendTileSquare(-1, x + 1, y + 1, 2);
         }
     }
     public abstract class LanternTemplate : FurnitureTemplate
