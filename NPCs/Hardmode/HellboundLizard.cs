@@ -85,7 +85,7 @@ public class HellboundLizard : CustomFighterAI
             {
                 NPC.frameCounter += Math.Abs(NPC.velocity.X) * 2f;
                 NPC.frameCounter += 1.0;
-                if (NPC.frameCounter > 6.0)
+                if (NPC.frameCounter > 10.0)
                 {
                     NPC.frame.Y = NPC.frame.Y + frameHeight;
                     NPC.frameCounter = 0.0;
