@@ -48,6 +48,11 @@ Mods: {
 		}
 
 		Items: {
+			BookcaseTeleporter: {
+				DisplayName: Bookcase Teleporter
+				Tooltip: "'What a great way to hide a teleporter'"
+			}
+
 			Quack: {
 				DisplayName: Quack
 				Tooltip: "'May annoy others'"

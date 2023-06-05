@@ -781,25 +781,38 @@ namespace Avalon.Common.Templates
             }
             if (Wiring.running)
             {
-                Wiring.SkipWire(x, y);
-                Wiring.SkipWire(x, y + 1);
-                Wiring.SkipWire(x, y + 2);
-                Wiring.SkipWire(x + 1, y);
-                Wiring.SkipWire(x + 1, y + 1);
-                Wiring.SkipWire(x + 1, y + 2);
-                Wiring.SkipWire(x + 2, y);
-                Wiring.SkipWire(x + 2, y + 1);
-                Wiring.SkipWire(x + 2, y + 2);
+                for (int q = 0; q < 3; q++)
+                {
+                    for (int z = 0; z < 3; z++)
+                    {
+                        Wiring.SkipWire(x + q, y + z);
+                    }
+                }
+                //Wiring.SkipWire(x, y);
+                //Wiring.SkipWire(x, y + 1);
+                //Wiring.SkipWire(x, y + 2);
+                //Wiring.SkipWire(x + 1, y);
+                //Wiring.SkipWire(x + 1, y + 1);
+                //Wiring.SkipWire(x + 1, y + 2);
+                //Wiring.SkipWire(x + 2, y);
+                //Wiring.SkipWire(x + 2, y + 1);
+                //Wiring.SkipWire(x + 2, y + 2);
             }
-            NetMessage.SendTileSquare(-1, x, y, 3);
-            NetMessage.SendTileSquare(-1, x, y + 1, 3);
-            NetMessage.SendTileSquare(-1, x, y + 2, 3);
-            NetMessage.SendTileSquare(-1, x + 1, y, 3);
-            NetMessage.SendTileSquare(-1, x + 1, y + 1, 3);
-            NetMessage.SendTileSquare(-1, x + 1, y + 2, 3);
-            NetMessage.SendTileSquare(-1, x + 2, y, 3);
-            NetMessage.SendTileSquare(-1, x + 2, y + 1, 3);
-            NetMessage.SendTileSquare(-1, x + 2, y + 2, 3);
+            for (int q = 0; q < 3; q++)
+            {
+                for (int z = 0; z < 3; z++)
+                {
+                    NetMessage.SendTileSquare(-1, x + q, y + z, 3);
+                }
+            }
+            //NetMessage.SendTileSquare(-1, x, y + 1, 3);
+            //NetMessage.SendTileSquare(-1, x, y + 2, 3);
+            //NetMessage.SendTileSquare(-1, x + 1, y, 3);
+            //NetMessage.SendTileSquare(-1, x + 1, y + 1, 3);
+            //NetMessage.SendTileSquare(-1, x + 1, y + 2, 3);
+            //NetMessage.SendTileSquare(-1, x + 2, y, 3);
+            //NetMessage.SendTileSquare(-1, x + 2, y + 1, 3);
+            //NetMessage.SendTileSquare(-1, x + 2, y + 2, 3);
         }
     }
     public abstract class ChairTemplate : FurnitureTemplate

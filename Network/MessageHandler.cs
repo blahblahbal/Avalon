@@ -26,12 +26,12 @@ public class MessageHandler
             //case MessageID.SyncTime:
             //    SyncTime.HandlePacket(reader, fromWho);
             //    break;
-            //case MessageID.SyncWiring:
-            //    SyncWiring.HandlePacket(reader, fromWho);
-            //    break;
+            case MessageID.SyncWiring:
+                SyncWiring.HandlePacket(reader, fromWho);
+                break;
             //case MessageID.StaminaHeal:
-            //    StaminaHeal.HandlePacket(reader, fromWho);
-            //    break;
+                //    StaminaHeal.HandlePacket(reader, fromWho);
+                //    break;
         }
     }
 }
