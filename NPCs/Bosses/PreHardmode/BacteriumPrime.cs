@@ -3,6 +3,7 @@ using System.IO;
 using Avalon.Common.Players;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material.Ores;
+using Avalon.Items.Placeable.Furniture;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Vanity;
 using Avalon.NPCs.Hardmode;
@@ -88,6 +89,7 @@ public class BacteriumPrime : ModNPC
         //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacteriumPrimeMask>(), 10));
         npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BacteriumPrimeBossBag>()));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 15, 41));
+        npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BacteriumPrimeRelic>()));
         if (!ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime)
         {
             ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime = true;

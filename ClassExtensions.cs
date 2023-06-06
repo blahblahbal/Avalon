@@ -158,6 +158,14 @@ public static class ClassExtensions
         }
     }
 
+    public static Color CycleThroughColors(Color[] Colors, int Rate)
+    {
+        float fade = (Main.GameUpdateCount % Rate) / (float)Rate;
+        int index = (int)((Main.GameUpdateCount / (float)Rate) % Colors.Length);
+        int nextIndex = (index + 1) % Colors.Length;
+
+        return Color.Lerp(Colors[index], Colors[nextIndex], fade);
+    }
     public static TagCompound Save<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
        where TKey : notnull
     {

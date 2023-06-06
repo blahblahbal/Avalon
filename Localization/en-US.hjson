@@ -4568,6 +4568,16 @@ Mods: {
 				DisplayName: Pathogen Campfire
 				Tooltip: Life regen is increased when near a campfire
 			}
+
+			ClearCutter: {
+				DisplayName: Clear Cutter
+				Tooltip: "Stars rain down on hit enemies"
+			}
+
+			CrystalTomahawk: {
+				DisplayName: Crystal Tomahawk
+				Tooltip: "Shatters on impact"
+			}
 		}
 
 		Projectiles: {
@@ -4656,6 +4666,8 @@ Mods: {
 			ArgusLantern.DisplayName: Argus Lantern
 			GoblinDagger.DisplayName: Goblin Dagger
 			HungrySummon.DisplayName: Hungry
+			ClearCutterSlash.DisplayName: Clear Cutter Slash
+			CrystalTomahawk.DisplayName: Crystal Tomahawk
 		}
 
 		NPCs: {
