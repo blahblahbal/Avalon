@@ -72,7 +72,7 @@ namespace Avalon.Hooks
             int p = Player.FindClosest(new Vector2(X, Y), Width, Height);
             if (p != -1)
             {
-                if (Type == ItemID.Heart)
+                if (Type == ItemID.Heart && source is not EntitySource_TileBreak && source is not EntitySource_Wiring)
                 {
                     if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((int)((Main.player[p].statLifeMax2 - 400) / 5), 21) == 20)
                     {
@@ -97,7 +97,7 @@ namespace Avalon.Hooks
                         else Type = ModContent.ItemType<GoldHeart>();
                     }
                 }
-                if (Type == ItemID.CandyApple)
+                if (Type == ItemID.CandyApple && source is not EntitySource_TileBreak && source is not EntitySource_Wiring)
                 {
                     if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((int)((Main.player[p].statLifeMax2 - 400) / 5), 21) == 20)
                     {
@@ -122,7 +122,7 @@ namespace Avalon.Hooks
                         else Type = ModContent.ItemType<GoldApple>();
                     }
                 }
-                if (Type == ItemID.CandyCane)
+                if (Type == ItemID.CandyCane && source is not EntitySource_TileBreak && source is not EntitySource_Wiring)
                 {
                     if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((int)((Main.player[p].statLifeMax2 - 400) / 5), 21) == 20)
                     {
