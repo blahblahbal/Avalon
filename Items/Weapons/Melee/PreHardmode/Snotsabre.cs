@@ -1,8 +1,11 @@
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,19 +21,19 @@ class Snotsabre : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item1;
-        Item.damage = 17;
+        Item.damage = 32;
         Item.autoReuse = true;
         Item.useTurn = true;
-        //Item.scale = 1.1f;
+        Item.scale = 1.1f;
         Item.rare = ItemRarityID.Blue;
         Item.width = 24;
         Item.height = 28;
-        Item.useTime = 20;
+        Item.useTime = 30;
         Item.knockBack = 3f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 0, 36, 0);
-        Item.useAnimation = 20;
+        Item.useAnimation = 30;
     }
     bool hasHit;
 
@@ -43,25 +46,42 @@ class Snotsabre : ModItem
     {
         if (!hasHit)
         {
-            for (int i = 0; i < Main.npc.Length; i++)
+            //int j = 0;
+            //for (int i = 0; i < Main.npc.Length; i++)
+            //{
+            //    NPC npc = Main.npc[i];
+            //    if (npc.Center.Distance(target.Center) < 200 && npc.active && !npc.friendly && npc != target)
+            //    {
+            //        npc.SimpleStrikeNPC((int)(hit.Damage * 0.4f), 0, hit.Crit, 0, hit.DamageType, true, player.luck);
+            //        npc.AddBuff(BuffID.Poisoned, 4 * 60);
+            //        DustLine(Main.rand.NextVector2FromRectangle(target.Hitbox),Main.rand.NextVector2FromRectangle(npc.Hitbox));
+            //    }
+            //    j++;
+            //    if (j > 10)
+            //        break;
+            //}
+            List<int> AlreadyHit = new List<int> { };
+            for(int i = 0; i < 10; i++)
             {
-                NPC npc = Main.npc[i];
-                if (npc.Center.Distance(target.Center) < 200 && npc.active && !npc.friendly && npc != target)
+                int npc = ClassExtensions.FindClosestNPC(target, 200, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly || AlreadyHit.Contains(npc.whoAmI) || npc.whoAmI == target.whoAmI || !Collision.CanHit(npc, target));
+                if(npc != -1)
                 {
-                    npc.SimpleStrikeNPC((int)(hit.Damage * 0.4f), 0, hit.Crit, 0, hit.DamageType, true, player.luck);
-                    npc.AddBuff(BuffID.Poisoned, 4 * 60);
-                    DustLine(Main.rand.NextVector2FromRectangle(target.Hitbox),Main.rand.NextVector2FromRectangle(npc.Hitbox));
+                    Main.npc[npc].SimpleStrikeNPC((int)(hit.Damage * 0.4f), 0, hit.Crit, 0, hit.DamageType, true, player.luck);
+                    Main.npc[npc].AddBuff(BuffID.Poisoned, 4 * 60);
+                    DustLine(Main.rand.NextVector2FromRectangle(target.Hitbox), Main.rand.NextVector2FromRectangle(Main.npc[npc].Hitbox));
+                    AlreadyHit.Add(npc);
                 }
             }
+            AlreadyHit.Clear();
         }
         target.AddBuff(BuffID.Poisoned, 8 * 60);
         hasHit = true;
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 15; i++)
         {
             Dust d = Dust.NewDustDirect(target.Center, 0, 0, ModContent.DustType<ContagionWeapons>(), 0, 0, 128);
             d.velocity *= 3;
-            d.scale = 1.5f;
-            d.noGravity = !Main.rand.NextBool(5);
+            d.scale = 1f;
+            d.noGravity = true;
         }
     }
     public void DustLine(Vector2 start, Vector2 end)
@@ -78,7 +98,7 @@ class Snotsabre : ModItem
             Dust d = Dust.NewDustDirect(end,0,0, ModContent.DustType<ContagionWeapons>(), 0, 0, 128);
             d.velocity *= 2;
             d.scale = 1.5f;
-            d.noGravity = !Main.rand.NextBool(5);
+            d.noGravity = true;
         }
     }
     public override void MeleeEffects(Player player, Rectangle hitbox)
