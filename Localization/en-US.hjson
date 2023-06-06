@@ -4558,6 +4558,16 @@ Mods: {
 				DisplayName: Hungry Staff
 				Tooltip: ""
 			}
+
+			ContagionCampfire: {
+				DisplayName: Contagion Campfire
+				Tooltip: Life regen is increased when near a campfire
+			}
+
+			PathogenCampfire: {
+				DisplayName: Pathogen Campfire
+				Tooltip: Life regen is increased when near a campfire
+			}
 		}
 
 		Projectiles: {

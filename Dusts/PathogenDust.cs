@@ -18,6 +18,10 @@ public class PathogenDust : ModDust
             Vector3 light = new Vector3(0.32f,0.2f,0.5f) * dust.scale * 1.5f;
             Lighting.AddLight(dust.position, light);
         }
+        if (!dust.noGravity)
+        {
+            dust.scale -= 0.02f;
+        }
         return false;
     }
 }

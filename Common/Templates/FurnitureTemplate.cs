@@ -1033,7 +1033,7 @@ namespace Avalon.Common.Templates
             Main.tileLighted[Type] = true;
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
             AddMapEntry(new Color(251, 235, 127), Language.GetText("MapObject.Lantern"));
-            RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodLantern>());
+            RegisterItemDrop(DropItem);
         }
 
         public override void HitWire(int i, int j)

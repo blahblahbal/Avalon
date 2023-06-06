@@ -177,6 +177,7 @@ public class BleachedEbonyDresser : DresserTemplate
 
 public class BleachedEbonyLamp : LampTemplate
 {
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BleachedEbony.BleachedEbonyLamp>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];

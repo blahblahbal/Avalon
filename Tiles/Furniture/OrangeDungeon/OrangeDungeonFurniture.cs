@@ -19,6 +19,7 @@ public class OrangeDungeonBookcase : BookcaseTemplate { }
 
 public class OrangeDungeonCandelabra : CandelabraTemplate
 {
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.OrangeDungeon.OrangeDungeonCandelabra>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];

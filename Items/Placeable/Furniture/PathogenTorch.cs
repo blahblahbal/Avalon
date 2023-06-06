@@ -40,4 +40,9 @@ class PathogenTorch : ModItem
         Vector2 position = player.RotatedRelativePoint(new Vector2(player.itemLocation.X + 12f * player.direction + player.velocity.X, player.itemLocation.Y - 14f + player.velocity.Y), true);
         Lighting.AddLight(position, 0.5f, 0, 2f);
     }
+
+    public override void PostUpdate()
+    {
+        Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 0.5f, 0, 2f);
+    }
 }
