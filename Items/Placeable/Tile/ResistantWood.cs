@@ -9,6 +9,7 @@ class ResistantWood : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 100;
+        ItemID.Sets.IsLavaImmuneRegardlessOfRarity[Type] = true;
     }
 
     public override void SetDefaults()

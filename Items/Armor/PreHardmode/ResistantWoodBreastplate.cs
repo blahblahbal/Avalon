@@ -8,6 +8,10 @@ namespace Avalon.Items.Armor.PreHardmode
     [AutoloadEquip(EquipType.Body)]
     public class ResistantWoodBreastplate : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.IsLavaImmuneRegardlessOfRarity[Type] = true;
+        }
         public override void SetDefaults()
         {
             Item.defense = 3;

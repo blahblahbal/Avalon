@@ -14,18 +14,18 @@ class ContagionWaterFountain : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 26;
+        Item.height = 36;
         Item.autoReuse = true;
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.Furniture.WaterFountains>();
         Item.placeStyle = 0;
-        Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
-        Item.value = Item.buyPrice(0, 0, 80, 0);
+        Item.value = Item.buyPrice(0, 4, 0, 0);
         Item.useAnimation = 15;
-        Item.height = dims.Height;
+        Item.rare = ItemRarityID.Blue;
     }
 }

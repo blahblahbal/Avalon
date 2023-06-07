@@ -5,6 +5,10 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode
 {
     public class ResistantWoodSword : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.IsLavaImmuneRegardlessOfRarity[Type] = true;
+        }
         public override void SetDefaults()
         {
             Item.CloneDefaults(ItemID.AshWoodSword);

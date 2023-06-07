@@ -6,6 +6,10 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
 {
     public class ResistantWoodBow : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.IsLavaImmuneRegardlessOfRarity[Type] = true;
+        }
         public override void SetDefaults()
         {
             Item.CloneDefaults(ItemID.AshWoodBow);

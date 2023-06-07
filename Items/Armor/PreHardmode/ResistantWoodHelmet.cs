@@ -9,6 +9,10 @@ namespace Avalon.Items.Armor.PreHardmode
     [AutoloadEquip(EquipType.Head)]
     public class ResistantWoodHelmet : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.IsLavaImmuneRegardlessOfRarity[Type] = true;
+        }
         public override void SetDefaults() 
         {
             Item.defense = 3;
