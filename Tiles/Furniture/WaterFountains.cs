@@ -103,11 +103,8 @@ namespace Avalon.Tiles.Furniture
 
         public override void AnimateTile(ref int frame, ref int frameCounter)
         {
-            if (++frameCounter >= 4)
-            {
-                frameCounter = 0;
-                frame = ++frame % 6;
-            }
+            frame = Main.tileFrame[TileID.WaterFountain];
+            frameCounter = Main.tileFrameCounter[TileID.WaterFountain];
         }
         public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
         {
