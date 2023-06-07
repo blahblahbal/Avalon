@@ -66,29 +66,52 @@ namespace Avalon.Projectiles.Ranged
         public override void Kill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item27, Projectile.position);
-            int[] Dusts = { DustID.BlueCrystalShard, DustID.PinkCrystalShard, DustID.PurpleCrystalShard, DustID.IceTorch, DustID.HallowedTorch, DustID.WhiteTorch };
-            for (int i = 0; i < 20; i++)
+            int[] Dusts = { DustID.BlueCrystalShard, DustID.PinkCrystalShard, DustID.PurpleCrystalShard};
+            int[] DustsGlow = { DustID.IceTorch, DustID.HallowedTorch, DustID.WhiteTorch };
+            for (int i = 0; i < 10; i++)
             {
-                Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), Dusts[Main.rand.Next(6)], Main.rand.NextVector2Circular(12, 12), 64, default, 1f);
+                Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), DustsGlow[Main.rand.Next(3)], Main.rand.NextVector2Circular(12, 12), 64, default, 1f);
                 dust2.fadeIn = Main.rand.NextFloat(0, 1);
                 dust2.noGravity = true;
                 //dust2.velocity += -Projectile.oldVelocity;
             }
-            if(Main.myPlayer == Projectile.owner)
+            for (int i = 0; i < 10; i++)
+            {
+                Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), Dusts[Main.rand.Next(3)], Main.rand.NextVector2Circular(12, 12), 64, default, 1f);
+                dust2.fadeIn = Main.rand.NextFloat(0, 1);
+                dust2.noGravity = !Main.rand.NextBool(5);
+            }
+            if (Main.myPlayer == Projectile.owner)
             {
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage / 2, 0, Projectile.owner);
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            int[] Dusts = { DustID.BlueCrystalShard, DustID.PinkCrystalShard, DustID.PurpleCrystalShard, DustID.IceTorch, DustID.HallowedTorch, DustID.WhiteTorch };
+            int[] DustsGlow = {DustID.IceTorch, DustID.HallowedTorch, DustID.WhiteTorch };
+            int[] Dusts = { DustID.BlueCrystalShard, DustID.PinkCrystalShard, DustID.PurpleCrystalShard };
             for (int i = 0; i < 10; i++)
             {
-                Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), Dusts[Main.rand.Next(6)], Main.rand.NextVector2Circular(9, 9), 64, default, 1f);
+                Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), DustsGlow[Main.rand.Next(3)], Main.rand.NextVector2Circular(12, 12), 64, default, 1f);
                 dust2.fadeIn = Main.rand.NextFloat(0, 1);
                 dust2.noGravity = true;
                 dust2.velocity += -Projectile.oldVelocity * 0.5f;
+                //dust2.velocity += -Projectile.oldVelocity;
             }
+            for (int i = 0; i < 10; i++)
+            {
+                Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), Dusts[Main.rand.Next(3)], Main.rand.NextVector2Circular(12, 12), 64, default, 1f);
+                dust2.fadeIn = Main.rand.NextFloat(0, 1);
+                dust2.noGravity = !Main.rand.NextBool(5);
+                dust2.velocity += -Projectile.oldVelocity * 0.5f;
+            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), DustsGlow[Main.rand.Next(3)], Main.rand.NextVector2Circular(9, 9), 64, default, 1f);
+            //    dust2.fadeIn = Main.rand.NextFloat(0, 1);
+            //    dust2.noGravity = true;
+            //    dust2.velocity += -Projectile.oldVelocity * 0.5f;
+            //}
             //SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
 
             //if (Projectile.velocity.X != oldVelocity.X)
