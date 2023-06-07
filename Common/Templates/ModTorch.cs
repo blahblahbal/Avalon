@@ -251,7 +251,11 @@ public abstract class ModCampfire : SpecialLight
 
     public override void NearbyEffects(int i, int j, bool closer)
     {
-        Main.SceneMetrics.HasCampfire = true;
+        Tile tile = Main.tile[i, j];
+        if (tile.TileFrameY < 36)
+        {
+            Main.SceneMetrics.HasCampfire = true;
+        }
     }
 
     public override void MouseOver(int i, int j)

@@ -14,6 +14,8 @@ public class Contagion : ModBiome
     public override string BestiaryIcon => base.BestiaryIcon;
     public override string BackgroundPath => base.BackgroundPath;
     public override string MapBackground => BackgroundPath;
+    public override int BiomeTorchItemType => ModContent.ItemType<Items.Placeable.Furniture.ContagionTorch>();
+    public override int BiomeCampfireItemType => ModContent.ItemType<Items.Placeable.Furniture.ContagionCampfire>();
     public override int Music
     {
         get

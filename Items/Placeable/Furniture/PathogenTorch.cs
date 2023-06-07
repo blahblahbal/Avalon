@@ -14,6 +14,9 @@ class PathogenTorch : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 100;
+        ItemID.Sets.SingleUseInGamepad[Type] = true;
+        ItemID.Sets.Torches[Type] = true;
+        ItemID.Sets.WaterTorches[Type] = true;
     }
 
     public override void SetDefaults()
