@@ -4571,12 +4571,12 @@ Mods: {
 
 			ClearCutter: {
 				DisplayName: Clear Cutter
-				Tooltip: "Stars rain down on hit enemies"
+				Tooltip: Stars rain down on hit enemies
 			}
 
 			CrystalTomahawk: {
 				DisplayName: Crystal Tomahawk
-				Tooltip: "Shatters on impact"
+				Tooltip: Shatters on impact
 			}
 		}
 

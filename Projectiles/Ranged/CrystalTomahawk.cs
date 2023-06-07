@@ -1,5 +1,6 @@
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -9,6 +10,11 @@ namespace Avalon.Projectiles.Ranged
 {
     public class CrystalTomahawk : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+        }
         public override void SetDefaults()
         {
             Projectile.Size = new Vector2(36);
@@ -18,6 +24,7 @@ namespace Avalon.Projectiles.Ranged
             Projectile.hostile = false;
             Projectile.usesLocalNPCImmunity= true;
             Projectile.localNPCHitCooldown = 60;
+            Projectile.DamageType = DamageClass.Ranged;
         }
         public override void AI()
         {
@@ -42,7 +49,7 @@ namespace Avalon.Projectiles.Ranged
             Projectile.ai[0]++;
             if (Projectile.ai[0] > 40)
             {
-                Projectile.velocity.X *= 0.99f;
+                Projectile.velocity.X *= 0.96f;
                 if (Projectile.velocity.Y < 24)
                 {
                     Projectile.velocity.Y += 0.3f;
@@ -95,6 +102,27 @@ namespace Avalon.Projectiles.Ranged
 
             //Projectile.penetrate--;
             return true;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
+            int frameHeight = texture.Height / Main.projFrames[Projectile.type];
+            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+            int length = ProjectileID.Sets.TrailCacheLength[Projectile.type];
+
+            Main.EntitySpriteDraw(texture, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, Color.Lerp(lightColor, Color.White, 0.5f) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+
+            Color[] Colors = { Color.LightSkyBlue, Color.Magenta, Color.White, Color.Magenta };
+            Color Color1 = ClassExtensions.CycleThroughColors(Colors, 60) * 0.3f;
+            Color1.A = 64;
+
+            for (int i = 1; i < length; i++)
+            {
+                float multiply = (float)(length - i) / length;
+                Main.EntitySpriteDraw(texture, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, Color1 * multiply, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            }
+           
+            return false;
         }
     }
 }

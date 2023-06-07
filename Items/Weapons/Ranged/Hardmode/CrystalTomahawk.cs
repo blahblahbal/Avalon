@@ -20,7 +20,7 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode
             Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.CrystalTomahawk>();
             Item.consumable = true;
             Item.shootSpeed = 17;
-            Item.damage = 23;
+            Item.damage = 55;
             Item.maxStack = 9999;
         }
         public override void AddRecipes()

@@ -59,10 +59,12 @@ public class ClearCutterSlash : EnergySlashTemplate
             settings.MovementVector = Vector2.Zero;
             float rand = Main.rand.NextFloat(-0.5f, 0.5f);
             int Dist = Main.rand.Next(-1000, -600);
-
-            settings.PositionInWorld = target.Center + new Vector2(0, Dist).RotatedBy(rand);
-            ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.Excalibur, settings);
-            Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), settings.PositionInWorld, new Vector2(0, 30).RotatedBy(rand), ProjectileID.StarCloakStar, (int)(Projectile.damage * 0.6f), Projectile.knockBack, Projectile.owner, 0, target.position.Y);
+            if (Main.myPlayer == Projectile.owner)
+            {
+                settings.PositionInWorld = Main.MouseWorld + new Vector2(0, Dist).RotatedBy(rand);
+                ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.Excalibur, settings);
+                Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), settings.PositionInWorld, new Vector2(0, 30).RotatedBy(rand), ProjectileID.StarCloakStar, (int)(Projectile.damage * 0.4f), Projectile.knockBack, Projectile.owner, 0, target.position.Y);
+            }
         }
     }
 }
