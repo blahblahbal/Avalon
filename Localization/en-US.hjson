@@ -4578,6 +4578,11 @@ Mods: {
 				DisplayName: Crystal Tomahawk
 				Tooltip: Shatters on impact
 			}
+
+			ContagionWaterFountain: {
+				DisplayName: Contagion Water Fountain
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
