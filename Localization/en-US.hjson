@@ -4578,6 +4578,31 @@ Mods: {
 				DisplayName: Crystal Tomahawk
 				Tooltip: Shatters on impact
 			}
+
+			CrystalMinesKey: {
+				DisplayName: Crystal Mines Key
+				Tooltip: ""
+			}
+
+			CrystalPillar: {
+				DisplayName: Crystal Pillar
+				Tooltip: ""
+			}
+
+			CrystalMinesChest: {
+				DisplayName: Crystal Mines Chest
+				Tooltip: ""
+			}
+
+			CrystalStoneBlock: {
+				DisplayName: Crystal Stone Block
+				Tooltip: ""
+			}
+
+			GiantCrystalShard: {
+				DisplayName: Giant Crystal Shard
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5242,6 +5267,11 @@ Mods: {
 			CoughwoodDresser.MapEntry: Coughwood Dresser
 			BleachedEbonyDresser.MapEntry: Bleached Ebony Dresser
 			BleachedEbonyChest.MapEntry0: Bleached Ebony Chest
+
+			CrystalMinesChest: {
+				MapEntry0: Crystal Mines Chest
+				MapEntry1: Locked Crystal Mines Chest
+			}
 
 			GemLocks: {
 				MapEntry0: Peridot Gem Lock

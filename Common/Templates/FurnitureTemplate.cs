@@ -494,6 +494,8 @@ namespace Avalon.Common.Templates
     {
         public virtual bool Shiny => false;
         public virtual int ShinyFrequency => 1200; //Doubt it'll ever need to be changed, just in case tbh
+        protected virtual bool CanBeLocked => false;
+        protected virtual int ChestKeyItemId => ItemID.None;
         public override void SetStaticDefaults()
         {
             if (Shiny)
@@ -650,7 +652,7 @@ namespace Avalon.Common.Templates
             }
 
             bool isLocked = Chest.IsLocked(left, top);
-            if (Main.netMode == NetmodeID.MultiplayerClient)// && !isLocked)
+            if (Main.netMode == NetmodeID.MultiplayerClient && !isLocked)
             {
                 if (left == player.chestX && top == player.chestY && player.chest != -1)
                 {
@@ -662,6 +664,14 @@ namespace Avalon.Common.Templates
                 {
                     NetMessage.SendData(MessageID.RequestChestOpen, -1, -1, null, left, top);
                     Main.stackSplit = 600;
+                }
+            }
+            else if (isLocked)
+            {
+                if (player.ConsumeItem(ChestKeyItemId) && Chest.Unlock(left, top) &&
+                    Main.netMode == NetmodeID.MultiplayerClient)
+                {
+                    NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1f, left, top);
                 }
             }
             else
@@ -717,6 +727,10 @@ namespace Avalon.Common.Templates
                 if (player.cursorItemIconText == defaultName)
                 {
                     player.cursorItemIconID = DropItem;
+                    if (Main.tile[left, top].TileFrameX / 36 == 1)
+                    {
+                        player.cursorItemIconID = ChestKeyItemId;
+                    }
                     player.cursorItemIconText = "";
                 }
             }

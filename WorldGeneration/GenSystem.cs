@@ -1,3 +1,4 @@
+using Avalon.World.Passes;
 using Avalon.WorldGeneration.Enums;
 using Avalon.WorldGeneration.Passes;
 using System.Collections.Generic;
@@ -75,6 +76,10 @@ public class GenSystem : ModSystem
             {
                 tasks.Insert(index + 2, new ContagionVines("Contagion Vines", 25f));
             }
+
+            currentPass = new CrystalMinesPass();
+            tasks.Insert(index + 4, currentPass);
+            totalWeight += currentPass.Weight;
         }
     }
 }
