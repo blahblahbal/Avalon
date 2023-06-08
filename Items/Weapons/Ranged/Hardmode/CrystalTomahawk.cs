@@ -26,6 +26,7 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode
             Item.shootSpeed = 17;
             Item.damage = 55;
             Item.maxStack = 9999;
+            Item.knockBack = 5;
         }
         public override void AddRecipes()
         {

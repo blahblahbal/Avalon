@@ -194,7 +194,7 @@ public class BacteriumPrime : ModNPC
                 NPC.noTileCollide = true;
             }
 
-            if (Main.rand.NextBool(10) && Main.netMode != NetmodeID.MultiplayerClient)
+            if (Main.rand.NextBool(20) && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
             }

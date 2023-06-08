@@ -128,6 +128,7 @@ namespace Avalon.Projectiles.Ranged
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            Texture2D textureTrail = ModContent.Request<Texture2D>(Texture + "_Trail").Value;
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             int frameHeight = texture.Height / Main.projFrames[Projectile.type];
             Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
@@ -140,7 +141,7 @@ namespace Avalon.Projectiles.Ranged
             for (int i = 1; i < length; i++)
             {
                 float multiply = (float)(length - i) / length;
-                Main.EntitySpriteDraw(texture, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, Color1 * multiply, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);
+                Main.EntitySpriteDraw(textureTrail, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, Color1 * multiply, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);
             }
 
             Main.EntitySpriteDraw(texture, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, Color.Lerp(lightColor, Color.White, 0.5f) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);

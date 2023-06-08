@@ -175,7 +175,7 @@ public class AeonExplosion : ModProjectile
         Projectile.usesLocalNPCImmunity = true;
         Projectile.localNPCHitCooldown = 21;
         Projectile.tileCollide = false;
-        Projectile.timeLeft = 20;
+        Projectile.timeLeft = 1;
     }
     public override void OnSpawn(IEntitySource source)
     {
