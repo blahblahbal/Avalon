@@ -132,19 +132,19 @@ namespace Avalon.Projectiles.Ranged
             int frameHeight = texture.Height / Main.projFrames[Projectile.type];
             Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
             int length = ProjectileID.Sets.TrailCacheLength[Projectile.type];
-
-            Main.EntitySpriteDraw(texture, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, Color.Lerp(lightColor, Color.White, 0.5f) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
-
+            SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Color[] Colors = { Color.LightSkyBlue, Color.Magenta, Color.White, Color.Magenta };
-            Color Color1 = ClassExtensions.CycleThroughColors(Colors, 60) * 0.3f;
+            Color Color1 = ClassExtensions.CycleThroughColors(Colors, 60) * 0.5f;
             Color1.A = 64;
 
             for (int i = 1; i < length; i++)
             {
                 float multiply = (float)(length - i) / length;
-                Main.EntitySpriteDraw(texture, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, Color1 * multiply, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, Color1 * multiply, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);
             }
-           
+
+            Main.EntitySpriteDraw(texture, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, Color.Lerp(lightColor, Color.White, 0.5f) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);
+
             return false;
         }
     }

@@ -7,6 +7,10 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode
 {
     public class CrystalTomahawk : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 2000;
+        }
         public override void SetDefaults()
         {
             Item.Size = new Vector2(16);

@@ -1,4 +1,4 @@
-﻿using Avalon.Projectiles.Melee;
+using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -13,6 +13,11 @@ public class VertexOfExcalibur : ModItem
     {
         //"Deals more damage to enemies affected by a debuff\n'The unification of dark and light'"
         Item.ResearchUnlockCount = 1;
+    }
+
+    public override bool MeleePrefix()
+    {
+        return true;
     }
     public override void SetDefaults()
     {
