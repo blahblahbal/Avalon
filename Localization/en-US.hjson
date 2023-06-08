@@ -4608,10 +4608,14 @@ Mods: {
 				DisplayName: Iridium Brick Wall
 				Tooltip: ""
 			}
-		}
 
 			GiantCrystalShard: {
 				DisplayName: Giant Crystal Shard
+				Tooltip: ""
+			}
+
+			SepsisBlockWall: {
+				DisplayName: Sepsis Block Wall
 				Tooltip: ""
 			}
 		}

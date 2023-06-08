@@ -13,5 +13,6 @@ public class CyanStainedGlass : ModWall
         Main.wallBlend[Type] = ModContent.WallType<CyanStainedGlass>();
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.CyanStainedGlass>();
         DustType = ModContent.DustType<Dusts.TourmalineDust>();
+        HitSound = SoundID.Shatter;
     }
 }

@@ -20,5 +20,6 @@ public class YellowBrick : ModTile
         //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.YellowBrick>();
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.YellowDungeonDust>();
+        TileID.Sets.GeneralPlacementTiles[Type] = false;
     }
 }
