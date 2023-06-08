@@ -12,6 +12,9 @@ public class OsmiumBrick : ModTile
         AddMapEntry(new Color(0, 148, 255));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
+        Main.tileShine2[Type] = true;
+        Main.tileShine[Type] = 2700;
+        Main.tileBlockLight[Type] = true;
         Main.tileBrick[Type] = true;
         Main.tileMerge[Type][TileID.WoodBlock] = true;
         Main.tileMerge[TileID.WoodBlock][Type] = true;

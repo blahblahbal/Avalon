@@ -4599,6 +4599,17 @@ Mods: {
 				Tooltip: ""
 			}
 
+			ContagionWaterFountain: {
+				DisplayName: Contagion Water Fountain
+				Tooltip: ""
+			}
+
+			IridiumBrickWallItem: {
+				DisplayName: Iridium Brick Wall
+				Tooltip: ""
+			}
+		}
+
 			GiantCrystalShard: {
 				DisplayName: Giant Crystal Shard
 				Tooltip: ""

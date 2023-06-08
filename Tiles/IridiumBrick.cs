@@ -13,7 +13,7 @@ public class IridiumBrick : ModTile
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;
-        Main.tileShine[Type] = 1900;
+        Main.tileShine[Type] = 4000;
         Main.tileBlockLight[Type] = true;
         Main.tileBrick[Type] = true;
         Main.tileMerge[Type][TileID.WoodBlock] = true;

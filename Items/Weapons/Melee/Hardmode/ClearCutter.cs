@@ -18,6 +18,10 @@ public class ClearCutter : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
+    public override bool MeleePrefix()
+    {
+        return true;
+    }
     public override void SetDefaults()
     {
         Item.Size = new Vector2(54);

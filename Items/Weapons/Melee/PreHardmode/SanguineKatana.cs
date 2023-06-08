@@ -14,6 +14,11 @@ public class SanguineKatana : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
+
+    public override bool MeleePrefix()
+    {
+        return true;
+    }
     public override void SetDefaults()
     {
         Item.width = 34;
