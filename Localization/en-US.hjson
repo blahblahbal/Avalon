@@ -4583,6 +4583,11 @@ Mods: {
 				DisplayName: Contagion Water Fountain
 				Tooltip: ""
 			}
+
+			IridiumBrickWallItem: {
+				DisplayName: Iridium Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
