@@ -18,7 +18,6 @@ internal class VanityAccessoryShowTooltip : ModHook
         {
             item.social = false;
         }
-        int yea;
-        orig(item, ref yoyoLogo, ref researchLine, oldKB, ref numLines, toolTipLine, preFixLine, badPreFixLine, toolTipNames,out yea);
+        orig(item, ref yoyoLogo, ref researchLine, oldKB, ref numLines, toolTipLine, preFixLine, badPreFixLine, toolTipNames);
     }
 }
