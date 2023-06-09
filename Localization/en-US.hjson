@@ -832,7 +832,7 @@ Mods: {
 					'''
 			}
 
-			PulseCharm: {
+			PulseVeil: {
 				DisplayName: Pulse Veil
 				Tooltip: The holder has pulsing outlines
 			}
@@ -2639,11 +2639,6 @@ Mods: {
 
 			Sweetstem: {
 				DisplayName: Sweetstem
-				Tooltip: ""
-			}
-
-			PulseVeil: {
-				DisplayName: Pulse Veil
 				Tooltip: ""
 			}
 
@@ -4616,6 +4611,36 @@ Mods: {
 
 			SepsisBlockWall: {
 				DisplayName: Sepsis Block Wall
+				Tooltip: ""
+			}
+
+			ZirconStoneWall: {
+				DisplayName: Zircon Stone Wall
+				Tooltip: ""
+			}
+
+			PeridotStoneWall: {
+				DisplayName: Peridot Stone Wall
+				Tooltip: ""
+			}
+
+			TourmalineStoneWall: {
+				DisplayName: Tourmaline Stone Wall
+				Tooltip: ""
+			}
+
+			PeridotStoneBlock: {
+				DisplayName: Peridot Stone Block
+				Tooltip: ""
+			}
+
+			TourmalineStoneBlock: {
+				DisplayName: Tourmaline Stone Block
+				Tooltip: ""
+			}
+
+			ZirconStoneBlock: {
+				DisplayName: Zircon Stone Block
 				Tooltip: ""
 			}
 		}
