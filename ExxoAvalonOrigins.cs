@@ -94,6 +94,12 @@ public class ExxoAvalonOrigins : Mod
             Assets.Request<Texture2D>("Assets/Vanilla/Items/ShroomiteDiggingClaws"));
         itemReplacer.ReplaceAsset(ItemID.BloodMoonStarter,
             Assets.Request<Texture2D>("Assets/Vanilla/Items/BloodyAmulet"));
+        itemReplacer.ReplaceAsset(ItemID.PulseBow,
+            Assets.Request<Texture2D>("Assets/Vanilla/Items/PulseBow"));
+        itemReplacer.ReplaceAsset(ItemID.Bell,
+            Assets.Request<Texture2D>("Assets/Vanilla/Items/Bell"));
+        itemReplacer.ReplaceAsset(ItemID.FairyBell,
+            Assets.Request<Texture2D>("Assets/Vanilla/Items/FairyBell"));
 
         var tileReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Tile);
         assetReplacers.Add(tileReplacer);
