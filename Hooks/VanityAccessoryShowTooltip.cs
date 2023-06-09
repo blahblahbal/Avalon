@@ -12,12 +12,12 @@ internal class VanityAccessoryShowTooltip : ModHook
     {
         //On_Main.MouseText_DrawItemTooltip_GetLinesInfo += OnMouseText_DrawItemTooltip_GetLinesInfo;
     }
-    public static void OnMouseText_DrawItemTooltip_GetLinesInfo(On_Main.orig_MouseText_DrawItemTooltip_GetLinesInfo orig, Item item, ref int yoyoLogo, ref int researchLine, float oldKB, ref int numLines, string[] toolTipLine, bool[] preFixLine, bool[] badPreFixLine, string[] toolTipNames)
+    public static void OnMouseText_DrawItemTooltip_GetLinesInfo(On_Main.orig_MouseText_DrawItemTooltip_GetLinesInfo orig, Item item, ref int yoyoLogo, ref int researchLine, float oldKB, ref int numLines, string[] toolTipLine, bool[] preFixLine, bool[] badPreFixLine, string[] toolTipNames, ref int preFixLineIndex)
     {
         if (item.social && (item.type == ItemID.HighTestFishingLine || item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity))//item.type == ModContent.ItemType<Items.Accessories.ShadowRing>()
         {
             item.social = false;
         }
-        orig(item, ref yoyoLogo, ref researchLine, oldKB, ref numLines, toolTipLine, preFixLine, badPreFixLine, toolTipNames);
+        orig(item, ref yoyoLogo, ref researchLine, oldKB, ref numLines, toolTipLine, preFixLine, badPreFixLine, toolTipNames, out preFixLineIndex);
     }
 }
