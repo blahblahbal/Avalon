@@ -94,6 +94,12 @@ public class ExxoAvalonOrigins : Mod
             Assets.Request<Texture2D>("Assets/Vanilla/Items/ShroomiteDiggingClaws"));
         itemReplacer.ReplaceAsset(ItemID.BloodMoonStarter,
             Assets.Request<Texture2D>("Assets/Vanilla/Items/BloodyAmulet"));
+        itemReplacer.ReplaceAsset(ItemID.PulseBow,
+            Assets.Request<Texture2D>("Assets/Vanilla/Items/PulseBow"));
+        itemReplacer.ReplaceAsset(ItemID.Bell,
+            Assets.Request<Texture2D>("Assets/Vanilla/Items/Bell"));
+        itemReplacer.ReplaceAsset(ItemID.FairyBell,
+            Assets.Request<Texture2D>("Assets/Vanilla/Items/FairyBell"));
 
         var tileReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Tile);
         assetReplacers.Add(tileReplacer);
@@ -107,5 +113,12 @@ public class ExxoAvalonOrigins : Mod
         var projectileReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Projectile);
         assetReplacers.Add(projectileReplacer);
         projectileReplacer.ReplaceAsset(ProjectileID.MagicDagger, Assets.Request<Texture2D>("Assets/Vanilla/Items/MagicDagger"));
+
+        var npcReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Npc);
+        assetReplacers.Add(npcReplacer);
+        npcReplacer.ReplaceAsset(NPCID.BlueSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/Slime"));
+        npcReplacer.ReplaceAsset(NPCID.MotherSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/MotherSlime"));
+        npcReplacer.ReplaceAsset(NPCID.DungeonSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/DungeonSlime"));
+        npcReplacer.ReplaceAsset(NPCID.IlluminantSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/IlluminantSlime"));
     }
 }
