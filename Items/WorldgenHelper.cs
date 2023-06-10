@@ -27,8 +27,9 @@ class WorldgenHelper : ModItem
         int y = (int)player.position.Y / 16;
 
         //WorldGeneration.Structures.Hellcastle.GenerateHellcastle(x, y);
-        y = WorldGeneration.Utils.CaesiumTileCheck(x, y);
-        MakeSpike(x, y, 20, 10, 1);
+        //y = WorldGeneration.Utils.CaesiumTileCheck(x, y);
+        //MakeSpike(x, y, 20, 10, 1);
+        WorldGeneration.Passes.Contagion.ContagionRunner3(x, y);
 
 
         return true;

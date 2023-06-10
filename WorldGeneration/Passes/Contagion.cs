@@ -258,6 +258,109 @@ internal class Contagion : GenPass
         }
     }
 
+    private static bool IsAngleTooClose(int angle1, List<int> angle2)
+    {
+        foreach (int q in angle2)
+        {
+            for (int i = 0; i < 45; i++)
+            {
+                if (q + i > angle1 && q - i < angle1)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void ContagionRunner3(int i, int j)
+    {
+        int j2 = j;
+        int radius = WorldGen.genRand.Next(40, 51);
+        int radMod = radius - 10;
+        int rad2 = WorldGen.genRand.Next(20, 26);
+        int rad3 = WorldGen.genRand.Next(90, 106);
+        j = Utils.TileCheck(i) + radius + 50;
+
+        Vector2 center = new Vector2(i, j);
+        List<Vector2> points = new List<Vector2>();
+        List<Vector2> pointsForHollow = new List<Vector2>();
+        List<Vector3> pointsToGoTo = new List<Vector3>();
+
+        #region make the main circle
+        for (int k = i - radius; k <= i + radius; k++)
+        {
+            for (int l = j - radius; l <= j + radius; l++)
+            {
+                float dist = Vector2.Distance(new Vector2(k, l), new Vector2(i, j));
+                if (dist <= radius && dist >= (radius - 29))
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = false;
+                }
+                if (((dist <= radius && dist >= radius - 7) || (dist <= (float)(radius - 22) && dist >= (float)(radius - 29))) && Main.tile[k, l].TileType != (ushort)ModContent.TileType<SnotOrb>())
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = true;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    t.TileType = (ushort)ModContent.TileType<Chunkstone>();
+                }
+                if (dist <= radius - 6 && dist >= radius - 23)
+                {
+                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                }
+            }
+        }
+        #endregion
+
+        #region add endpoints to the paths
+        List<int> prevAngles = new List<int>();
+        for (int m = 0; m < 4; m++)
+        {
+            int angle = WorldGen.genRand.Next(360);
+            while (IsAngleTooClose(angle, prevAngles))
+            {
+                angle = WorldGen.genRand.Next(360);
+            }
+            Main.NewText(angle);
+            float posX = (float)(center.X + rad3 * Math.Cos(angle));
+            float posY = (float)(center.Y + rad3 * Math.Sin(angle));
+            float posX2 = (float)(center.X + radius * Math.Cos(angle));
+            float posY2 = (float)(center.Y + radius * Math.Sin(angle));
+
+            float posXHollow = (float)(center.X + radMod * Math.Cos(angle));
+            float posYHollow = (float)(center.Y + radMod * Math.Sin(angle));
+            pointsToGoTo.Add(new Vector3(posX, posY, WorldGen.genRand.NextBool(2) ? 1 : 0));
+            points.Add(new Vector2(posX2, posY2));
+            pointsForHollow.Add(new Vector2(posXHollow, posYHollow));
+            prevAngles.Add(angle);
+        }
+        #endregion
+
+        #region tunnels from main ring to outer rings
+        for (int n = 0; n < points.Count; n++)
+        {
+            BoreTunnel2((int)points[n].X, (int)points[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 8f, (ushort)ModContent.TileType<Chunkstone>());
+            BoreTunnel2((int)points[n].X, (int)points[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 3f, 65535);
+            MakeEndingCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 13f, (ushort)ModContent.TileType<Chunkstone>());
+            MakeCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 8f, 65535);
+        }
+        #endregion
+
+
+
+        for (int n = 0; n < points.Count; n++)
+        {
+            //if (points[n].Y < center.Y - 10)
+            //{
+            //    exclusions.Add(pointsToGoTo[n]);
+            //    continue;
+            //}
+            BoreTunnelOriginal((int)pointsForHollow[n].X, (int)pointsForHollow[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 4f, 65535);
+        }
+    }
+
     /// <summary>
     /// Contagion generation method.
     /// </summary>
@@ -1544,6 +1647,43 @@ internal class Contagion : GenPass
             }
 
 
+        }
+    }
+
+    public static void BoreTunnelOriginal(int x0, int y0, int x1, int y1, float r, ushort type)
+    {
+        bool flag = Math.Abs(y1 - y0) > Math.Abs(x1 - x0);
+        if (flag)
+        {
+            Utils.Swap<int>(ref x0, ref y0);
+            Utils.Swap<int>(ref x1, ref y1);
+        }
+        if (x0 > x1)
+        {
+            Utils.Swap<int>(ref x0, ref x1);
+            Utils.Swap<int>(ref y0, ref y1);
+        }
+        int num = x1 - x0;
+        int num2 = Math.Abs(y1 - y0);
+        int num3 = num / 2;
+        int num4 = (y0 < y1) ? 1 : -1;
+        int num5 = y0;
+        for (int i = x0; i <= x1; i++)
+        {
+            if (flag)
+            {
+                MakeCircle(num5, i, r, type);
+            }
+            else
+            {
+                MakeCircle(i, num5, r, type);
+            }
+            num3 -= num2;
+            if (num3 < 0)
+            {
+                num5 += num4;
+                num3 += num;
+            }
         }
     }
 
