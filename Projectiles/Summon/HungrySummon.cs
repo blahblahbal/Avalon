@@ -1,8 +1,11 @@
 using System;
+using System.Runtime.CompilerServices;
 using Avalon.Buffs.Minions;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Humanizer.In;
@@ -41,7 +44,7 @@ public class HungrySummon : ModProjectile
         Projectile.penetrate = -1;
         Projectile.timeLeft = 5;
         Projectile.minion = true;
-        Projectile.minionSlots = 1;
+        Projectile.minionSlots = 1f;
         Projectile.tileCollide = false;
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
@@ -92,6 +95,7 @@ public class HungrySummon : ModProjectile
         {
             if (!Main.npc[(int)Projectile.ai[1]].active)
             {
+                Projectile.velocity = Main.rand.NextVector2Circular(7, 7);
                 Projectile.ai[2] = 0;
                 Projectile.ai[1] = -1;
             }
@@ -101,17 +105,18 @@ public class HungrySummon : ModProjectile
         Projectile.ai[0]++;
 
         bool TargetingEnemy;
-        int TargetNPC = ClassExtensions.FindClosestNPC(Projectile, 2000, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly);
+        int TargetNPC = ClassExtensions.FindClosestNPC(Projectile, 700, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly || !Collision.CanHitLine(player.position, player.width, player.height,npc.position,npc.width,npc.height));
 
         if (TargetNPC != -1)
         {
             TargetingEnemy = true;
-            TargetPos = Main.npc[TargetNPC].Center;
+            TargetPos = Main.npc[TargetNPC].Center + new Vector2(0, -10 + (float)(Projectile.minionPos * Math.Sin(Projectile.ai[0]))).RotatedBy(Projectile.ai[0] * 0.1f * (Projectile.minionPos * 0.7f + 1));
         }
         else
         {
             TargetingEnemy = false;
-            TargetPos = player.Center + new Vector2(0, -50);
+            //TargetPos = player.Center + new Vector2(0, -30 + (Projectile.minionPos * -10)); // stacked above
+            TargetPos = player.Center + new Vector2(0, -30 + (float)(Projectile.minionPos * Math.Sin(Projectile.ai[0]))).RotatedBy(Projectile.ai[0] * 0.1f * (Projectile.minionPos * 0.1f + 1));
         }
         if (player.HasMinionAttackTargetNPC)
         {
@@ -128,16 +133,25 @@ public class HungrySummon : ModProjectile
             }
             else if (TargetingEnemy)
             {
-                Projectile.velocity = Vector2.SmoothStep(Projectile.velocity + Projectile.Center.DirectionTo(TargetPos) * 0.3f, Projectile.Center.DirectionTo(TargetPos) * Projectile.velocity.Length(), 0.3f);
+                Projectile.velocity = Vector2.SmoothStep(Projectile.velocity + Projectile.Center.DirectionTo(TargetPos) * 0.2f, Projectile.Center.DirectionTo(TargetPos) * Projectile.velocity.Length(), 0.3f);
             }
-            if (Projectile.position.Distance(player.position) > 5000)
-            {
-                Projectile.Center = player.Center;
-            }
+            //for(int i = 0; i < Main.maxProjectiles; i++)
+            //{
+            //    if (Projectile.Hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active && Main.projectile[i].type == Type)
+            //    {
+            //        Projectile.position -= Projectile.Center.DirectionTo(Main.projectile[i].Center) * 2;
+            //        Main.projectile[i].position -= Main.projectile[i].Center.DirectionTo(Projectile.Center) * 2;
+            //    }
+            //}
+            //if (Projectile.position.Distance(player.position) > 5000)
+            //{
+            //    Projectile.Center = player.Center;
+            //}
 
             if (Projectile.velocity.Length() >= 7f)
             {
-                Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 7f;
+                //Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 7f;
+                Projectile.velocity = Vector2.Lerp(Vector2.Normalize(Projectile.velocity) * 7f, Projectile.velocity, 0.9f);
             }
             if (Projectile.velocity.Length() <= 2)
             {
@@ -146,7 +160,7 @@ public class HungrySummon : ModProjectile
         }
         else if (Projectile.ai[1] != -1)//Biting
         {
-            if (Main.npc[(int)Projectile.ai[1]].active && Main.npc[(int)Projectile.ai[1]].Distance(Projectile.Center) < 100) 
+            if (Main.npc[(int)Projectile.ai[1]].active && Main.npc[(int)Projectile.ai[1]].Hitbox.Intersects(Projectile.Hitbox)) 
             {
                 Dust d2 = Dust.NewDustPerfect(Projectile.Center + new Vector2(2).RotatedBy(Projectile.rotation),DustID.Blood);
                 d2.velocity = Projectile.velocity.RotatedByRandom(1) * Main.rand.NextFloat(-6f,-1f);
@@ -163,6 +177,10 @@ public class HungrySummon : ModProjectile
                 Projectile.ai[2] = 0;
             }
         }
+        if (Projectile.Center.Distance(player.Center) > 700)
+        {
+            Projectile.Center = player.Center + Projectile.Center.DirectionFrom(player.Center) * 700;
+        }
     }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
@@ -176,16 +194,32 @@ public class HungrySummon : ModProjectile
     {
         return Projectile.ai[2] == 0;
     }
-    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+    public void DrawChain(Vector2 start, Vector2 end, Color color)
     {
-        //for (int npcIndex = 0; npcIndex < 200; npcIndex++)
-        //{
-        //    NPC npc = Main.npc[npcIndex];
-        //    if (Projectile.Hitbox.Intersects(npc.Hitbox) && !npc.friendly)
-        //    {
-        //        Projectile.position = Projectile.position + npc.velocity;
-        //        Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 0.4f;
-        //    }
-        //}
+        start -= Main.screenPosition;
+        end -= Main.screenPosition;
+        Texture2D TEX = TextureAssets.Chain12.Value;
+        int linklength = TEX.Height;
+        Vector2 chain = end - start;
+
+        float length = (float)chain.Length();
+        int numlinks = (int)Math.Ceiling(length / linklength);
+        Vector2[] links = new Vector2[numlinks];
+        float rotation = (float)Math.Atan2(chain.Y, chain.X);
+        Projectile P = Projectile;
+        Player Pr = Main.player[P.owner];
+        Player MyPr = Main.player[Main.myPlayer];
+        for (int i = 0; i < numlinks; i++)
+        {
+            links[i] = start + chain / numlinks * i;
+            
+            Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), color, rotation + 1.57f, new Vector2(TEX.Width / 2f, linklength), 1f,
+                SpriteEffects.None, 1f);
+        }
+    }
+    public override bool PreDraw(ref Color lightColor)
+    {
+        DrawChain(Main.player[Projectile.owner].Center, Projectile.Center, lightColor);
+        return base.PreDraw(ref lightColor);
     }
 }
