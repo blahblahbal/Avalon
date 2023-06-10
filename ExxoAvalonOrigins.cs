@@ -59,9 +59,9 @@ public class ExxoAvalonOrigins : Mod
         staminaBar = new StaminaBar();
         staminaInterface.SetState(staminaBar);
 
-        minionSlotInterface = new UserInterface();
-        minionSlotCounter = new MinionSlotCounter();
-        minionSlotInterface.SetState(minionSlotCounter);
+        //minionSlotInterface = new UserInterface();
+        //minionSlotCounter = new MinionSlotCounter();
+        //minionSlotInterface.SetState(minionSlotCounter);
 
         //statDisplay = new StatDisplayUIState();
         //statDisplayInterface = new UserInterface();

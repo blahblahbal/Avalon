@@ -33,6 +33,7 @@ class ElementDust : ModItem
         {
             int num28 = Dust.NewDust(Item.position, Item.width, Item.height, DustID.UltraBrightTorch, 0f, 0f, 200, Item.color);
             Main.dust[num28].velocity *= 0.3f;
+            Main.dust[num28].velocity.Y--;
             Main.dust[num28].scale *= 0.5f;
             Main.dust[num28].noGravity = true;
         }
