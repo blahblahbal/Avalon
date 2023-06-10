@@ -14,7 +14,8 @@ class Moonfury : ModItem
     }
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 30;
+        Item.height = 10;
         Item.UseSound = SoundID.Item1;
         Item.damage = 35;
         Item.noUseGraphic = true;
@@ -23,7 +24,6 @@ class Moonfury : ModItem
         Item.shootSpeed = 12f;
         Item.noMelee = true;
         Item.rare = ItemRarityID.Orange;
-        Item.width = dims.Width;
         Item.useTime = 42;
         Item.knockBack = 6.75f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Moonfury>();
@@ -31,7 +31,6 @@ class Moonfury : ModItem
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = 54000;
         Item.useAnimation = 42;
-        Item.height = dims.Height;
     }
     public override void AddRecipes()
     {

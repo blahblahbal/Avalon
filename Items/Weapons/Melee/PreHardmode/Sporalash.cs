@@ -16,7 +16,8 @@ class Sporalash : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 30;
+        Item.height = 10;
         Item.damage = 26;
         Item.noUseGraphic = true;
         Item.channel = true;
@@ -24,7 +25,6 @@ class Sporalash : ModItem
         Item.shootSpeed = 10f;
         Item.noMelee = true;
         Item.rare = ItemRarityID.Orange;
-        Item.width = dims.Width;
         Item.useTime = 46;
         Item.knockBack = 6.75f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Sporalash>();
@@ -32,7 +32,6 @@ class Sporalash : ModItem
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = 27000;
         Item.useAnimation = 46;
-        Item.height = dims.Height;
     }
     public override void AddRecipes()
     {

@@ -4643,6 +4643,21 @@ Mods: {
 				DisplayName: Zircon Stone Block
 				Tooltip: ""
 			}
+
+			BismuthBarbedNet: {
+				DisplayName: Bismuth Barbed Net
+				Tooltip: "'Doesn't harm critters... Probably.'"
+			}
+
+			GoldBarbedNet: {
+				DisplayName: Gold Barbed Net
+				Tooltip: "'Doesn't harm critters... Probably.'"
+			}
+
+			PlatinumBarbedNet: {
+				DisplayName: Platinum Barbed Net
+				Tooltip: "'Doesn't harm critters... Probably.'"
+			}
 		}
 
 		Projectiles: {

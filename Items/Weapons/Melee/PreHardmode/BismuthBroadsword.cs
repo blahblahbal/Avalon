@@ -19,7 +19,7 @@ class BismuthBroadsword : ModItem
         Item.useTurn = true;
         Item.scale = 1f;
         Item.useTime = 18;
-        Item.knockBack = 5.2f;
+        Item.knockBack = 6.5f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 12000;
