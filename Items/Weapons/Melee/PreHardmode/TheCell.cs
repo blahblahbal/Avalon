@@ -14,7 +14,8 @@ class TheCell : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 30;
+        Item.height = 10;
         Item.UseSound = SoundID.Item1;
         Item.damage = 18;
         Item.noUseGraphic = true;
@@ -23,8 +24,6 @@ class TheCell : ModItem
         Item.shootSpeed = 12f;
         Item.rare = ItemRarityID.Blue;
         Item.noMelee = true;
-        Item.width = 30;
-        Item.height = 10;
         Item.useTime = 45;
         Item.knockBack = 6.5f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Cell>();

@@ -17,7 +17,7 @@ class MinersSword : ModItem
         Item.damage = 20;
         Item.autoReuse = true;
         Item.rare = ItemRarityID.LightRed;
-        Item.Size = new Vector2(32);
+        Item.Size = new Vector2(28);
         Item.useTime = 23;
         Item.knockBack = 5.5f;
         Item.DamageType = DamageClass.Melee;
