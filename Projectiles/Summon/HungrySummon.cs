@@ -105,7 +105,7 @@ public class HungrySummon : ModProjectile
         Projectile.ai[0]++;
 
         bool TargetingEnemy;
-        int TargetNPC = ClassExtensions.FindClosestNPC(Projectile, 700, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly || !Collision.CanHitLine(player.position, player.width, player.height,npc.position,npc.width,npc.height));
+        int TargetNPC = ClassExtensions.FindClosestNPC(Projectile, 700, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly || npc.Distance(player.Center) > 1000);
 
         if (TargetNPC != -1)
         {
@@ -177,10 +177,10 @@ public class HungrySummon : ModProjectile
                 Projectile.ai[2] = 0;
             }
         }
-        if (Projectile.Center.Distance(player.Center) > 700)
-        {
-            Projectile.Center = player.Center + Projectile.Center.DirectionFrom(player.Center) * 700;
-        }
+        //if (Projectile.Center.Distance(player.Center) > 700)
+        //{
+        //    Projectile.Center = player.Center + Projectile.Center.DirectionFrom(player.Center) * 700;
+        //}
     }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
@@ -219,7 +219,7 @@ public class HungrySummon : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        DrawChain(Main.player[Projectile.owner].Center, Projectile.Center, lightColor);
+        //DrawChain(Main.player[Projectile.owner].Center, Projectile.Center, lightColor);
         return base.PreDraw(ref lightColor);
     }
 }
