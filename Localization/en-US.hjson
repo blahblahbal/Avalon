@@ -4658,6 +4658,31 @@ Mods: {
 				DisplayName: Platinum Barbed Net
 				Tooltip: "'Doesn't harm critters... Probably.'"
 			}
+
+			ChunkstoneWall: {
+				DisplayName: Chunkstone Wall
+				Tooltip: ""
+			}
+
+			ContagionBoilWall: {
+				DisplayName: Contagion Boil Wall
+				Tooltip: ""
+			}
+
+			ContagionCystWall: {
+				DisplayName: Contagion Cyst Wall
+				Tooltip: ""
+			}
+
+			ContagionLumpWall: {
+				DisplayName: Contagion Lump Wall
+				Tooltip: ""
+			}
+
+			ContagionMouldWall: {
+				DisplayName: Contagion Mould Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

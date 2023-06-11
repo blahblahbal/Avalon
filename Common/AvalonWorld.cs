@@ -714,9 +714,25 @@ public class AvalonWorld : ModSystem
                 {
                     Main.tile[x, y].WallType = WallID.GrassUnsafe;
                 }
-                else if (wall == ModContent.WallType<Walls.ChunkstoneWall>())
+                else if (wall == ModContent.WallType<Walls.ChunkstoneWall>() || wall == ModContent.WallType<Walls.ChunkstoneWallSafe>())
                 {
                     Main.tile[x, y].WallType = WallID.Stone;
+                }
+                else if (wall == ModContent.WallType<Walls.ContagionLumpWallUnsafe>() || wall == ModContent.WallType<Walls.ContagionLumpWall>())
+                {
+                    Main.tile[x, y].WallType = WallID.RocksUnsafe1;
+                }
+                else if (wall == ModContent.WallType<Walls.ContagionMouldWallUnsafe>() || wall == ModContent.WallType<Walls.ContagionMouldWall>())
+                {
+                    Main.tile[x, y].WallType = WallID.RocksUnsafe2;
+                }
+                else if (wall == ModContent.WallType<Walls.ContagionCystWallUnsafe>() || wall == ModContent.WallType<Walls.ContagionCystWall>())
+                {
+                    Main.tile[x, y].WallType = WallID.RocksUnsafe3;
+                }
+                else if (wall == ModContent.WallType<Walls.ContagionBoilWallUnsafe>() || wall == ModContent.WallType<Walls.ContagionBoilWall>())
+                {
+                    Main.tile[x, y].WallType = WallID.RocksUnsafe4;
                 }
             }
             if (Main.tile[x, y] != null)
@@ -816,6 +832,22 @@ public class AvalonWorld : ModSystem
                 else if (WallID.Sets.Conversion.Stone[wall])
                 {
                     Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ChunkstoneWall>();
+                }
+                else if (WallID.Sets.Conversion.NewWall1[wall])
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ContagionLumpWallUnsafe>();
+                }
+                else if (WallID.Sets.Conversion.NewWall2[wall])
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ContagionMouldWallUnsafe>();
+                }
+                else if (WallID.Sets.Conversion.NewWall3[wall])
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ContagionCystWallUnsafe>();
+                }
+                else if (WallID.Sets.Conversion.NewWall4[wall])
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ContagionBoilWallUnsafe>();
                 }
             }
             if (Main.tile[x, y] != null)
