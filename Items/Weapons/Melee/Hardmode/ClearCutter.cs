@@ -2,6 +2,7 @@ using Avalon.Common.Players;
 using Avalon.Network;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
+using Mono.Cecil;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -33,6 +34,7 @@ public class ClearCutter : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useTurn = false;
         Item.value = Item.sellPrice(0, 9, 63, 0);
+        Item.shootsEveryUse = true;
 
         Item.noMelee = true;
         Item.damage = 90;

@@ -37,6 +37,7 @@ public class SanguineKatana : ModItem
         Item.shoot = ModContent.ProjectileType<SanguineKatanaSlash>();
         Item.noMelee= true;
         Item.shootSpeed = 16;
+        Item.shootsEveryUse = true;
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {

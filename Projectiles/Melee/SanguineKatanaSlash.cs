@@ -12,8 +12,8 @@ public class SanguineKatanaSlash : EnergySlashTemplate
 {
     public override bool PreDraw(ref Color lightColor)
     {
-        DrawSlash(Color.Black, Color.Black, Color.Red, Color.Black, 512, 1f, MathHelper.PiOver4, -MathHelper.Pi / 24, -MathHelper.Pi / 24, false);
-        DrawSlash(new Color(255, 0, 0), new Color(128, 0, 0), new Color(0, 0, 0), Color.Red * 0.2f, 512, 1f, 0, -MathHelper.Pi / 24, -MathHelper.Pi / 24, true);
+        DrawSlash(Color.Black * 0.2f, Color.Black * 0.2f, Color.Red * 0.2f, Color.Black * 0.5f, 512, 1f, MathHelper.PiOver4, -0.2f, 0, false);
+        DrawSlash(new Color(255, 0, 0) * 0.6f, new Color(128, 0, 0) * 0.5f, new Color(0, 0, 0) * 0.5f, Color.Red * 0.2f, 512, 1f, 0, -0.2f, 0, true);
         //DrawSlash(new Color(255, 0, 0), new Color(128, 0, 0), new Color(0, 0, 0), Color.Black, 512, 1f, MathHelper.PiOver4, -MathHelper.Pi / 12, -MathHelper.Pi / 24, true);
         return false;
     }
@@ -72,8 +72,6 @@ public class SanguineKatanaSlash : EnergySlashTemplate
         {
             Main.EntitySpriteDraw(value, drawpos, null, color, (float)Math.PI / 2f + rotation, origin, vector, dir);
             Main.EntitySpriteDraw(value, drawpos, null, color, 0f + rotation, origin, vector2, dir);
-            Main.EntitySpriteDraw(value, drawpos, null, color2, (float)Math.PI / 2f + rotation, origin, vector * 0.6f, dir);
-            Main.EntitySpriteDraw(value, drawpos, null, color2, 0f + rotation, origin, vector2 * 0.6f, dir);
         }
     }
 }

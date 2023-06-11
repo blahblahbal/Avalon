@@ -35,14 +35,14 @@ public class VertexOfExcalibur : ModItem
         Item.useAnimation = 18;
         Item.shoot = ModContent.ProjectileType<VertexSlash>();
         Item.shootSpeed = 16;
+        Item.shootsEveryUse = true;
     }
-
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
 
         float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
-        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, 0, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax, adjustedItemScale5 * 1f);
-        Projectile.NewProjectile(source, player.MountedCenter, velocity, type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir * 0.08f, 30, adjustedItemScale5 * 1.2f);
+        Projectile.NewProjectile(source, player.MountedCenter, velocity, type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir * 0.08f, 30, adjustedItemScale5 * 1.1f);
+        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, 0, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax, adjustedItemScale5 * 1.1f);
         NetMessage.SendData(13, -1, -1, null, player.whoAmI);
         return false;
     }

@@ -37,7 +37,6 @@ public class AeonsEternity : ModItem
         Item.shootSpeed = 8f;
         Item.shoot = ModContent.ProjectileType<AeonBeam>();
     }
-    int TimesSwung = 0;
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         //TimesSwung++;
