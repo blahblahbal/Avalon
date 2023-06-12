@@ -13,13 +13,16 @@ public class VertexSlash : EnergySlashTemplate
     {
         if (Math.Abs(Projectile.ai[0]) > 0.2f)
         {
-            DrawSlash(Color.White * 0.7f, Color.Black * 0.7f, Color.Black * 0.7f, Color.White * 0.2f, 0, 1f, 0f, -MathHelper.Pi / 12, 0, true);
-            DrawSlash(Color.Gold * 0.7f, Color.Purple * 0.7f, Color.Red * 0.7f, Color.Wheat * 0.2f, 0, 0.8f, 0f, -MathHelper.Pi / 12, 0, false);
+            DrawSlash(new Color(255, 255, 255, 0) * 0.7f, new Color(0, 0, 0, 200) * 0.6f, new Color(0, 0, 0, 200) * 0.5f, new Color(255, 255, 255, 0) * 0.2f, 0, 1f, 0.78f, -MathHelper.Pi / 12, 0, true);
+
+            DrawSlash(new Color(255,215,64,64) * 0.9f, new Color(200,0,180,64) * 0.9f, new Color(255, 128, 0, 128) * 1f, Color.Wheat * 0.2f, 0, 0.8f, 0, -MathHelper.Pi / 12, 0, true);
         }
         else
         {
-            DrawSlash(Color.White * 0.5f, Color.Black * 0.5f, Color.Black * 0.5f, Color.White * 0.2f, 0, 1f, 0f, -MathHelper.Pi / 12, 0, true);
-            DrawSlash(Color.Gold * 0.5f, Color.Purple * 0.5f, Color.Red * 0.5f, Color.Wheat * 0.2f, 0, 0.8f, 0f, -MathHelper.Pi / 12, 0, false);
+            float num = Projectile.localAI[0] / Projectile.ai[1];
+
+            //DrawSlash(new Color(255,255,255,0) * 0.5f, new Color(0, 0, 0, 255) * 0.5f, new Color(0, 0, 0, 200) * 0.5f, new Color(255, 255, 255, 0) * 0.2f, 0, 1f, 0f, 0, 0, true);
+            DrawSlash(new Color(255, 255, 255, 0) * 0.5f * num, new Color(0, 0, 0, 255) * 0.5f * num, new Color(0, 0, 0, 200) * 0.5f * num, new Color(255, 255, 255, 0) * 0.5f, 0, 1f, 0f, 0, 0, true);
         }
         //if (Math.Abs(Projectile.ai[0]) > 0.2f)
         //{
@@ -39,8 +42,8 @@ public class VertexSlash : EnergySlashTemplate
                 
             Projectile.rotation += (float)Math.PI * 4f * num2 * 10f * num;
             float num7 = Utils.Remap(Projectile.localAI[0], 10f, Projectile.ai[1] - 5f, 0f, 1f);
-            Projectile.position += Projectile.velocity.SafeNormalize(Vector2.Zero) * (80f * num7);
-            Projectile.scale += num7 * 0.6f;
+            Projectile.position += Projectile.velocity.SafeNormalize(Vector2.Zero) * (120f * num7);
+            Projectile.scale += num7 * 0.7f;
         }
         else
         {

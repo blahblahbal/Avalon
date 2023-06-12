@@ -5,6 +5,9 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
+using System;
+using System.Runtime.CompilerServices;
+using Terraria.WorldBuilding;
 
 namespace Avalon.Tiles.CrystalMines;
 
@@ -43,11 +46,12 @@ public class CrystalStone : ModTile
     {
         if (Main.rand.NextBool(7000))
         {
-            int num162 = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.CrystalDust>(), 0f, 0f, 0, default,
+            int num162 = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.CrystalDust>(), 0f, 0f, 128, default,
                 0.75f);
             Main.dust[num162].noGravity = true;
-            Main.dust[num162].velocity *= 0.8f;
-            Main.dust[num162].scale *= 1.5f;
+            Main.dust[num162].velocity *= 0.1f;
+            Main.dust[num162].fadeIn = 1f;
+            //Main.dust[num162].scale;
         }
     }
     public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawInfo)
@@ -97,7 +101,21 @@ public class CrystalStone : ModTile
             }
             Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
             Rectangle frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
-            Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/CrystalMines/CrystalStone_Glow").Value, pos, frame, Color.White);
+            //Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/CrystalMines/CrystalStone_Glow").Value, pos, frame, Color.White);
+
+            float lerp = (float)Math.Sin((Main.timeForVisualEffects + (i * 8)) * 0.008f);
+            float colorMultiply = Math.Abs(Math.Clamp(Main.player[Main.myPlayer].Center.Distance(new Vector2(i * 16, j * 16)) * 0.003f, 0.2f, 0.8f) - 1);
+
+            Color color = Color.Lerp(Color.White * colorMultiply, Lighting.GetColor(i, j), lerp);
+            color.A = 0;
+           
+            for(int r = 0; r < 8; r++)
+            {
+                Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/CrystalMines/CrystalStone_Glow").Value, pos + new Vector2(0,Math.Clamp(-lerp,0,1) * 2).RotatedBy((MathHelper.PiOver4 * r) + (0.01f * Main.timeForVisualEffects)), frame, color * 0.2f);
+            
+            }
+            color.A = 0;
+            Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/CrystalMines/CrystalStone_Glow").Value, pos, frame, color);
         }
     }
 }

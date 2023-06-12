@@ -8,8 +8,8 @@ public class CrystalDust : ModDust
 {
     public override bool Update(Dust dust)
     {
-        dust.scale *= -1.6f;
-        var lightFade = (dust.scale > 1 ? 1 : dust.scale);
+        dust.scale -= 0.055f;
+        var lightFade = (dust.scale > 1 ? 1 : dust.scale) * 0.4f;
         Lighting.AddLight((int)(dust.position.X / 16f), (int)(dust.position.Y / 16f), 0.737f * lightFade, 0.466f * lightFade, 0.968f * lightFade);
         return true;
     }
