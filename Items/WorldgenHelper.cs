@@ -31,7 +31,7 @@ class WorldgenHelper : ModItem
         //MakeSpike(x, y, 20, 10, 1);
         WorldGeneration.Passes.Contagion.ContagionRunner3(x, y);
 
-
+        Main.NewText(x);
         return true;
         //int xStored = x;
         //List<int> l = new List<int>()

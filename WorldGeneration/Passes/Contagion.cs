@@ -262,13 +262,13 @@ internal class Contagion : GenPass
     {
         foreach (int q in angle2)
         {
-            for (int i = 0; i < 45; i++)
-            {
-                if (q + i > angle1 && q - i < angle1)
+            //for (int i = 0; i < 45; i++)
+            //{
+                if (q + 45 > angle1 && q - 45 < angle1)
                 {
                     return true;
                 }
-            }
+            //}
         }
         return false;
     }
@@ -319,11 +319,14 @@ internal class Contagion : GenPass
         for (int m = 0; m < 4; m++)
         {
             int angle = WorldGen.genRand.Next(360);
-            while (IsAngleTooClose(angle, prevAngles))
+            //Main.NewText(angle);
+            while (angle > 225 && angle < 315) // IsAngleTooClose(angle, prevAngles)
             {
                 angle = WorldGen.genRand.Next(360);
+                //Main.NewText(angle);
             }
-            Main.NewText(angle);
+            //Main.NewText(angle);
+            angle = 90;
             float posX = (float)(center.X + rad3 * Math.Cos(angle));
             float posY = (float)(center.Y + rad3 * Math.Sin(angle));
             float posX2 = (float)(center.X + radius * Math.Cos(angle));
