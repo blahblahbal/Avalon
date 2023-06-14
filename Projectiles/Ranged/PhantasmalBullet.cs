@@ -41,7 +41,7 @@ public class PhantasmalBullet : ModProjectile
     {
         for (int i = 0; i < 15; i++)
         {
-            int d = Dust.NewDust(Projectile.position, 8, 8, DustID.VampireHeal);
+            int d = Dust.NewDust(Projectile.position, 8, 8, DustID.TheDestroyer);
             Main.dust[d].noGravity = true;
             Main.dust[d].velocity *= 1.5f;
             Main.dust[d].scale *= 0.7f;
@@ -51,7 +51,7 @@ public class PhantasmalBullet : ModProjectile
     {
         for (int i = 0; i < 15; i++)
         {
-            int d = Dust.NewDust(Projectile.position, 8, 8, DustID.VampireHeal);
+            int d = Dust.NewDust(Projectile.position, 8, 8, DustID.TheDestroyer);
             Main.dust[d].noGravity = true;
             Main.dust[d].velocity *= 1.5f;
             Main.dust[d].scale *= 0.7f;

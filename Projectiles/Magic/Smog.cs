@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Magic;
 
-public class Olivegas : ModProjectile
+public class Smog : ModProjectile
 {
     public override void SetDefaults()
     {

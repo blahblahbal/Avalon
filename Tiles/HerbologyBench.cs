@@ -21,6 +21,7 @@ public class HerbologyBench : ModTile
         AddMapEntry(new Color(153, 77, 86), LanguageManager.Instance.GetText("Herbology Bench"));
         AdjTiles = new int[] { TileID.Bottles };
         TileID.Sets.DisableSmartCursor[Type] = true;
+        DustType = DustID.WoodFurniture;
     }
 
     public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) => true;

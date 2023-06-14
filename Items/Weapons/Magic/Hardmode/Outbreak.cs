@@ -20,6 +20,8 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
             Item.DefaultToMagicWeapon(1, 45, 6, true);
             Item.damage = 90;
             Item.UseSound = SoundID.Item46;
+            Item.rare = ItemRarityID.Pink;
+            Item.value = Item.sellPrice(0,8);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

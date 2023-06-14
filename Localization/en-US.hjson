@@ -4551,7 +4551,7 @@ Mods: {
 
 			HungryStaff: {
 				DisplayName: Hungry Staff
-				Tooltip: ""
+				Tooltip: Summons a hungry to fight for you
 			}
 
 			ContagionCampfire: {
@@ -4580,7 +4580,7 @@ Mods: {
 			}
 
 			CrystalPillar: {
-				DisplayName: Crystal Pillar
+				DisplayName: Crystal Stone Pillar
 				Tooltip: ""
 			}
 
@@ -4591,6 +4591,11 @@ Mods: {
 
 			CrystalStoneBlock: {
 				DisplayName: Crystal Stone Block
+				Tooltip: ""
+			}
+
+			CrystalStoneDoor: {
+				DisplayName: Crystal Stone Door
 				Tooltip: ""
 			}
 
@@ -4683,6 +4688,11 @@ Mods: {
 				DisplayName: Contagion Mould Wall
 				Tooltip: ""
 			}
+
+			ChaosTome: {
+				DisplayName: Chaos Tome
+				Tooltip: Casts a chaos bolt
+			}
 		}
 
 		Projectiles: {
@@ -4773,6 +4783,8 @@ Mods: {
 			HungrySummon.DisplayName: Hungry
 			ClearCutterSlash.DisplayName: Clear Cutter Slash
 			CrystalTomahawk.DisplayName: Crystal Tomahawk
+			ChaosBolt.DisplayName: Chaos Bolt
+			Smog.DisplayName: Smog
 		}
 
 		NPCs: {
@@ -5369,6 +5381,7 @@ Mods: {
 			TopazChest.MapEntry0: Topaz Chest
 			TourmalineChest.MapEntry0: Tourmaline Chest
 			ZirconChest.MapEntry0: Zircon Chest
+			GiantCrystalShard.MapEntry: Giant Crystal Shard
 		}
 
 		Prefixes: {

@@ -45,7 +45,7 @@ public class HungrySummon : ModProjectile
         Projectile.timeLeft = 5;
         Projectile.minion = true;
         Projectile.minionSlots = 1f;
-        Projectile.tileCollide = false;
+        Projectile.tileCollide = true;
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
         Projectile.usesLocalNPCImmunity= true;
@@ -56,6 +56,14 @@ public class HungrySummon : ModProjectile
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
+        if(Projectile.oldVelocity.X != Projectile.velocity.X)
+        {
+            Projectile.velocity.X = -Projectile.oldVelocity.X * 0.6f; 
+        }
+        if (Projectile.oldVelocity.Y != Projectile.velocity.Y)
+        {
+            Projectile.velocity.Y = -Projectile.oldVelocity.Y * 0.6f;
+        }
         return false;
     }
     public override void AI()
@@ -106,6 +114,14 @@ public class HungrySummon : ModProjectile
 
         bool TargetingEnemy;
         int TargetNPC = ClassExtensions.FindClosestNPC(Projectile, 700, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly || npc.Distance(player.Center) > 1000);
+        if ((Collision.SolidCollision(Projectile.Center - new Vector2(8), 8, 8) && Collision.SolidCollision(Projectile.position - new Vector2(32), Projectile.width + 32, Projectile.height + 32)) || Projectile.position.Distance(Projectile.oldPosition) < 1.7f)
+        {
+            Projectile.tileCollide = false;
+        }
+        else
+        {
+            Projectile.tileCollide = true;
+        }
 
         if (TargetNPC != -1)
         {
@@ -117,6 +133,10 @@ public class HungrySummon : ModProjectile
             TargetingEnemy = false;
             //TargetPos = player.Center + new Vector2(0, -30 + (Projectile.minionPos * -10)); // stacked above
             TargetPos = player.Center + new Vector2(0, -30 + (float)(Projectile.minionPos * Math.Sin(Projectile.ai[0]))).RotatedBy(Projectile.ai[0] * 0.1f * (Projectile.minionPos * 0.1f + 1));
+            if(Projectile.position.Distance(player.position) > 500)
+            {
+                Projectile.tileCollide = false;
+            }
         }
         if (player.HasMinionAttackTargetNPC)
         {
@@ -162,7 +182,7 @@ public class HungrySummon : ModProjectile
         {
             if (Main.npc[(int)Projectile.ai[1]].active && Main.npc[(int)Projectile.ai[1]].Hitbox.Intersects(Projectile.Hitbox)) 
             {
-                Dust d2 = Dust.NewDustPerfect(Projectile.Center + new Vector2(2).RotatedBy(Projectile.rotation),DustID.Blood);
+                Dust d2 = Dust.NewDustPerfect(Projectile.Center + new Vector2(-14,0).RotatedBy(Projectile.rotation),DustID.Blood);
                 d2.velocity = Projectile.velocity.RotatedByRandom(1) * Main.rand.NextFloat(-6f,-1f);
                 d2.noGravity = Main.rand.NextBool();
                 d2.fadeIn = 1;
@@ -189,6 +209,12 @@ public class HungrySummon : ModProjectile
             Projectile.ai[2] = 1;
         }
         Projectile.velocity = Projectile.Center.DirectionTo(target.Center);
+    }
+
+    public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+    {
+        fallThrough = true;
+        return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
     }
     public override bool ShouldUpdatePosition()
     {
