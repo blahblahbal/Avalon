@@ -133,7 +133,7 @@ public class SpectralBullet : ModProjectile
         {
             Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
             Color color = new Color(180, 180, 180, 50) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-            Main.EntitySpriteDraw(texture, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, Projectile.scale * 0.9f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, new Vector2(0.9f * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length), 0.9f) * Projectile.scale, SpriteEffects.None, 0);
         }
         return false;
     }

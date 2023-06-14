@@ -119,6 +119,7 @@ public class ExxoAvalonOrigins : Mod
         npcReplacer.ReplaceAsset(NPCID.BlueSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/Slime"));
         npcReplacer.ReplaceAsset(NPCID.MotherSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/MotherSlime"));
         npcReplacer.ReplaceAsset(NPCID.DungeonSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/DungeonSlime"));
+        npcReplacer.ReplaceAsset(NPCID.SlimeSpiked, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/SpikedSlime"));
         npcReplacer.ReplaceAsset(NPCID.IlluminantSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/IlluminantSlime"));
     }
 }

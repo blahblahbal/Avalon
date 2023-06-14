@@ -121,7 +121,7 @@ public class PhantasmalBullet : ModProjectile
         Projectile.position += value * x * Main.rand.NextFloat(1f, 1.5f);
         //Projectile.position += value * x * Main.rand.NextFloat(5f, 10.5f); //exaggerated sine wave to test trail
     }
-    public override bool PreDraw(ref Color lightColor) // theft v2? (from enchanted shuriken)
+    public override bool PreDraw(ref Color lightColor) // theft v3? (from enchanted SpectralBullet)
     {
         Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         Rectangle dims = this.GetDims();
@@ -129,8 +129,8 @@ public class PhantasmalBullet : ModProjectile
         for (int k = 0; k < Projectile.oldPos.Length; k++)
         {
             Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-            Color color = new Color(255, 255, 255, 50) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-            Main.EntitySpriteDraw(texture, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, Projectile.scale * 0.9f, SpriteEffects.None, 0);
+            Color color = new Color(180, 180, 180, 50) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+            Main.EntitySpriteDraw(texture, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, new Vector2(0.9f * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length), 0.9f) * Projectile.scale, SpriteEffects.None, 0);
         }
         return false;
     }
