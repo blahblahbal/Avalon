@@ -15,8 +15,8 @@ public class Peridot : ModTile
         RegisterItemDrop(ModContent.ItemType<Items.Material.Ores.Peridot>());
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;
-        Main.tileMerge[Type][TileID.Stone] = true;
-        Main.tileMerge[TileID.Stone][Type] = true;
+        Main.tileStone[Type] = true;
+        Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 900;
         HitSound = SoundID.Tink;

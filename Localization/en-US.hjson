@@ -4580,7 +4580,7 @@ Mods: {
 			}
 
 			CrystalPillar: {
-				DisplayName: Crystal Pillar
+				DisplayName: Crystal Stone Pillar
 				Tooltip: ""
 			}
 
@@ -4591,6 +4591,11 @@ Mods: {
 
 			CrystalStoneBlock: {
 				DisplayName: Crystal Stone Block
+				Tooltip: ""
+			}
+
+			CrystalStoneDoor: {
+				DisplayName: Crystal Stone Door
 				Tooltip: ""
 			}
 

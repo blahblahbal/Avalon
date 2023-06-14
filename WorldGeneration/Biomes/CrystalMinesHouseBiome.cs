@@ -424,7 +424,7 @@ public class CrystalMinesHouseBiome : MicroBiome
         foreach (Point item2 in list3)
         {
             WorldUtils.Gen(item2, new Shapes.Rectangle(1, 3), new Actions.ClearTile(frameNeighbors: true));
-            WorldGen.PlaceTile(item2.X, item2.Y, ModContent.TileType<Tiles.CrystalMines.ClosedCrystalDoor>(), true, true, -1, 0);
+            WorldGen.PlaceTile(item2.X, item2.Y, ModContent.TileType<Tiles.CrystalMines.CrystalStoneDoorClosed>(), true, true, -1, 0);
             WorldGeneration.Utils.SquareTileFrameArea(item2.X, item2.Y, 2);
         }
         foreach (Point item19 in list5)
