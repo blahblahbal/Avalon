@@ -42,18 +42,18 @@ public class EnchantedShuriken : ModProjectile
             Projectile.velocity.Y = 16f;
         }
 
-        ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
-        particleOrchestraSettings.PositionInWorld = Projectile.Center;
-        particleOrchestraSettings.MovementVector = Projectile.velocity * 0.5f;
-        ParticleOrchestraSettings settings = particleOrchestraSettings;
-        if (Main.timeForVisualEffects % 16 == 0 && Main.timeForVisualEffects % 32 != 0)
-        {
-            ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
-        }
-        else if (Main.timeForVisualEffects % 32 == 0)
-        {
-            ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
-        }
+        //ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        //particleOrchestraSettings.PositionInWorld = Projectile.Center;
+        //particleOrchestraSettings.MovementVector = Projectile.velocity * 0.5f;
+        //ParticleOrchestraSettings settings = particleOrchestraSettings;
+        //if (Main.timeForVisualEffects % 16 == 0 && Main.timeForVisualEffects % 32 != 0)
+        //{
+        //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
+        //}
+        //else if (Main.timeForVisualEffects % 32 == 0)
+        //{
+        //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
+        //}
     }
 
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

@@ -4551,7 +4551,7 @@ Mods: {
 
 			HungryStaff: {
 				DisplayName: Hungry Staff
-				Tooltip: ""
+				Tooltip: Summons a hungry to fight for you
 			}
 
 			ContagionCampfire: {
@@ -4688,6 +4688,11 @@ Mods: {
 				DisplayName: Contagion Mould Wall
 				Tooltip: ""
 			}
+
+			ChaosTome: {
+				DisplayName: Chaos Tome
+				Tooltip: "Casts a chaos bolt"
+			}
 		}
 
 		Projectiles: {
@@ -4778,6 +4783,8 @@ Mods: {
 			HungrySummon.DisplayName: Hungry
 			ClearCutterSlash.DisplayName: Clear Cutter Slash
 			CrystalTomahawk.DisplayName: Crystal Tomahawk
+			ChaosBolt.DisplayName: Chaos Bolt
+			Smog.DisplayName: Smog
 		}
 
 		NPCs: {
