@@ -27,4 +27,8 @@ class ChaosTome : ModItem
         Item.useAnimation = 25;
         Item.height = dims.Height;
     }
+    public override Vector2? HoldoutOffset()
+    {
+        return new Vector2(10, 0);
+    }
 }

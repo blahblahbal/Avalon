@@ -4691,7 +4691,7 @@ Mods: {
 
 			ChaosTome: {
 				DisplayName: Chaos Tome
-				Tooltip: "Casts a chaos bolt"
+				Tooltip: Casts a chaos bolt
 			}
 		}
 
