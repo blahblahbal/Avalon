@@ -262,15 +262,20 @@ internal class Contagion : GenPass
     {
         foreach (int q in angle2)
         {
-            //for (int i = 0; i < 45; i++)
-            //{
-                if (q + 45 > angle1 && q - 45 < angle1)
-                {
-                    return true;
-                }
-            //}
+            if (q + 45 > angle1 && q - 45 < angle1)
+            {
+                return true;
+            }
         }
         return false;
+    }
+
+    public static bool IsBetween(float a, float b, float targetAngle, float maxDist = (float)Math.PI * 0.5f)
+    {
+        //const float maxDistance = (float)Math.PI * 0.5f; // 90 degrees
+
+        return Math.Abs(MathHelper.WrapAngle(a - targetAngle)) < maxDist
+            && Math.Abs(MathHelper.WrapAngle(b - targetAngle)) < maxDist;
     }
 
     public static void ContagionRunner3(int i, int j)
@@ -282,10 +287,20 @@ internal class Contagion : GenPass
         int rad3 = WorldGen.genRand.Next(90, 106);
         j = Utils.TileCheck(i) + radius + 50;
 
-        Vector2 center = new Vector2(i, j);
-        List<Vector2> points = new List<Vector2>();
-        List<Vector2> pointsForHollow = new List<Vector2>();
-        List<Vector3> pointsToGoTo = new List<Vector3>();
+        Vector2 center = new(i, j);
+        List<Vector2> points = new();
+        List<Vector2> pointsForHollow = new();
+        List<Vector4> pointsToGoTo = new();
+
+        #region secondary tunnel vars
+        List<Vector3> secondaryTunnelCenters = new();
+        List<Vector2> secondaryTunnelEnds = new();
+        List<Vector2> secondTunnelStarts = new();
+        List<Vector2> secondaryTunnelHollows = new();
+        int radiusForSecondaryTunnels = WorldGen.genRand.Next(10, 14);
+        int radModForSecondaryTunnels = radiusForSecondaryTunnels - 10;
+        int rad3ForSecondTunnels = WorldGen.genRand.Next(70, 92);
+        #endregion
 
         #region make the main circle
         for (int k = i - radius; k <= i + radius; k++)
@@ -318,15 +333,30 @@ internal class Contagion : GenPass
         List<int> prevAngles = new List<int>();
         for (int m = 0; m < 4; m++)
         {
-            int angle = WorldGen.genRand.Next(360);
-            //Main.NewText(angle);
-            while (angle > 225 && angle < 315) // IsAngleTooClose(angle, prevAngles)
+            //int angle = WorldGen.genRand.Next(360);
+
+
+            //int distanceApart = WorldGen.genRand.Next(50, 100);
+            //int maxDistBetween = 10;
+
+            //float angle = (float)(Math.PI / 180) * (WorldGen.genRand.Next((m + 1) * distanceApart, (m + 1) * distanceApart + maxDistBetween / 2) + 315);
+            int angleDegrees = WorldGen.genRand.Next(270) + 315;
+            //while (IsAngleTooClose(angleDegrees, prevAngles))
+            //{
+            //    angleDegrees = WorldGen.genRand.Next(270) + 315;
+            //}
+
+            for (int z = 0; z < 10; z++)
             {
-                angle = WorldGen.genRand.Next(360);
-                //Main.NewText(angle);
+                if (IsAngleTooClose(angleDegrees, prevAngles))
+                {
+                    angleDegrees = WorldGen.genRand.Next(270) + 315;
+                }
+                else break;
             }
-            //Main.NewText(angle);
-            angle = 90;
+
+            float angle = (float)(Math.PI / 180) * angleDegrees;
+
             float posX = (float)(center.X + rad3 * Math.Cos(angle));
             float posY = (float)(center.Y + rad3 * Math.Sin(angle));
             float posX2 = (float)(center.X + radius * Math.Cos(angle));
@@ -334,10 +364,10 @@ internal class Contagion : GenPass
 
             float posXHollow = (float)(center.X + radMod * Math.Cos(angle));
             float posYHollow = (float)(center.Y + radMod * Math.Sin(angle));
-            pointsToGoTo.Add(new Vector3(posX, posY, WorldGen.genRand.NextBool(2) ? 1 : 0));
+            pointsToGoTo.Add(new Vector4(posX, posY, WorldGen.genRand.NextBool(2) ? 1 : 0, angle));
             points.Add(new Vector2(posX2, posY2));
             pointsForHollow.Add(new Vector2(posXHollow, posYHollow));
-            prevAngles.Add(angle);
+            prevAngles.Add(angleDegrees);
         }
         #endregion
 
@@ -346,20 +376,90 @@ internal class Contagion : GenPass
         {
             BoreTunnel2((int)points[n].X, (int)points[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 8f, (ushort)ModContent.TileType<Chunkstone>());
             BoreTunnel2((int)points[n].X, (int)points[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 3f, 65535);
-            MakeEndingCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 13f, (ushort)ModContent.TileType<Chunkstone>());
-            MakeCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 8f, 65535);
+            if (pointsToGoTo[n].Z == 1)
+            {
+                MakeEndingCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 20f, (ushort)ModContent.TileType<Chunkstone>());
+                MakeCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 15f, 65535);
+                secondaryTunnelCenters.Add(new Vector3(pointsToGoTo[n].X, pointsToGoTo[n].Y, pointsToGoTo[n].W));
+            }
+            else
+            {
+                MakeEndingCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 13f, (ushort)ModContent.TileType<Chunkstone>());
+                MakeCircle((int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 8f, 65535);
+            }
+            
         }
         #endregion
 
+        #region tunnels from secondary circles outwards
+        List<int> prevAnglesSecondary = new();
+        foreach (Vector3 v in secondaryTunnelCenters)
+        {
+            for (int k = 0; k < 3; k++)
+            {
+                int distanceApart = WorldGen.genRand.Next(30, 70);
+                int maxDistBetween = 10;
 
+                //int angleDegrees = WorldGen.genRand.Next((k + 1) * distanceApart, (k + 1) * distanceApart + maxDistBetween / 2) + 315;
+                int ang = (int)MathHelper.ToDegrees(v.Z) + 180;
+                if (ang >= 360) ang -= 360;
 
+                int angleDegrees = WorldGen.genRand.Next(ang) + ang + 45;
+
+                for (int z = 0; z < 10; z++)
+                {
+                    if (IsAngleTooClose(angleDegrees, prevAnglesSecondary))
+                    {
+                        angleDegrees = WorldGen.genRand.Next(ang) + ang + 45;
+                    }
+                    else break;
+                }
+                //while (IsAngleTooClose(angleDegrees, prevAnglesSecondary))
+                //{
+                //    angleDegrees = WorldGen.genRand.Next(ang) + ang + 45;
+                //}
+
+                float angle = (float)(Math.PI / 180) * angleDegrees;
+
+                //if (IsBetween(MathHelper.ToRadians(ang - 20), MathHelper.ToRadians(ang + 20), angle, MathHelper.ToRadians(40)))
+                //{
+                    
+                //}
+                //float angle = (float)(Math.PI / 180) * (WorldGen.genRand.Next(270) + 315);
+                float posX = (float)(v.X + rad3ForSecondTunnels * Math.Cos(angle));
+                float posY = (float)(v.Y + rad3ForSecondTunnels * Math.Sin(angle));
+                float posX2 = (float)(v.X + radiusForSecondaryTunnels * Math.Cos(angle));
+                float posY2 = (float)(v.Y + radiusForSecondaryTunnels * Math.Sin(angle));
+
+                float posXHollow = (float)(v.X + radModForSecondaryTunnels * Math.Cos(angle));
+                float posYHollow = (float)(v.Y + radModForSecondaryTunnels * Math.Sin(angle));
+                secondaryTunnelEnds.Add(new Vector2(posX, posY));
+                secondTunnelStarts.Add(new Vector2(posX2, posY2));
+                secondaryTunnelHollows.Add(new Vector2(posXHollow, posYHollow));
+                prevAnglesSecondary.Add(angleDegrees);
+            }
+        }
+        #endregion
+
+        for (int q = 0; q < secondTunnelStarts.Count; q++)
+        {
+            if (secondaryTunnelEnds[q].Y > j)
+            {
+                BoreTunnel2((int)secondTunnelStarts[q].X, (int)secondTunnelStarts[q].Y, (int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 7f, (ushort)ModContent.TileType<Chunkstone>());
+                BoreTunnel2((int)secondTunnelStarts[q].X, (int)secondTunnelStarts[q].Y, (int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 2f, 65535);
+                MakeEndingCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 13f, (ushort)ModContent.TileType<Chunkstone>());
+                MakeCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 8f, 65535);
+            }
+        }
+        for (int n = 0; n < secondTunnelStarts.Count; n++)
+        {
+            if (secondaryTunnelEnds[n].Y > j)
+            {
+                BoreTunnelOriginal((int)secondaryTunnelHollows[n].X, (int)secondaryTunnelHollows[n].Y, (int)secondaryTunnelEnds[n].X, (int)secondaryTunnelEnds[n].Y, 6f, 65535);
+            }
+        }
         for (int n = 0; n < points.Count; n++)
         {
-            //if (points[n].Y < center.Y - 10)
-            //{
-            //    exclusions.Add(pointsToGoTo[n]);
-            //    continue;
-            //}
             BoreTunnelOriginal((int)pointsForHollow[n].X, (int)pointsForHollow[n].Y, (int)pointsToGoTo[n].X, (int)pointsToGoTo[n].Y, 4f, 65535);
         }
     }
