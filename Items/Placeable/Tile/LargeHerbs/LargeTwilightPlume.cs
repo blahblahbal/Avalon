@@ -16,7 +16,7 @@ class LargeTwilightPlume : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.LargeHerbsStage4>();
+        Item.createTile = ModContent.TileType<Tiles.Herbs.LargeHerbsStage4>();
         Item.placeStyle = 11;
         Item.width = dims.Width;
         Item.useTurn = true;

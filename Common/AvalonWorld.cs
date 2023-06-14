@@ -5,6 +5,7 @@ using Avalon.Items.Placeable.Tile.LargeHerbs;
 using Avalon.Systems;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Herbs;
 using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -584,6 +585,9 @@ public class AvalonWorld : ModSystem
                     case 10:
                         item = ModContent.ItemType<LargeHolybirdSeed>();
                         break;
+                    case 11:
+                        item = ModContent.ItemType<LargeTwilightPlumeSeed>();
+                        break;
                 } // 3710 through 3719 are the seeds
 
                 if (item > 0)
@@ -628,6 +632,9 @@ public class AvalonWorld : ModSystem
                         break;
                     case 10:
                         item = ModContent.ItemType<LargeHolybird>();
+                        break;
+                    case 11:
+                        item = ModContent.ItemType<LargeTwilightPlume>();
                         break;
                 }
 

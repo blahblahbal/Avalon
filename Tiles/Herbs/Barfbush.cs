@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Metadata;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -29,9 +30,14 @@ public class Barfbush : ModTile
     public override void SetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
+        Main.tileObsidianKill[Type] = true;
         Main.tileCut[Type] = true;
         Main.tileNoFail[Type] = true;
-        Main.tileSpelunker[Type] = true;
+        TileID.Sets.ReplaceTileBreakUp[Type] = true;
+        TileID.Sets.IgnoredInHouseScore[Type] = true;
+        TileID.Sets.IgnoredByGrowingSaplings[Type] = true;
+        TileMaterials.SetForTileId(Type, TileMaterials._materialsByName["Plant"]);
+        //Main.tileSpelunker[Type] = true;
         AddMapEntry(new Color(0, 200, 50), LanguageManager.Instance.GetText("Barfbush"));
         HitSound = SoundID.Grass;
         TileObjectData.newTile.CopyFrom(TileObjectData.StyleAlch);
@@ -49,6 +55,14 @@ public class Barfbush : ModTile
         };
 
         TileObjectData.addTile(Type);
+        DustType = 2;
+    }
+    public override bool IsTileSpelunkable(int i, int j)
+    {
+        PlantStage stage = GetStage(i, j);
+
+        // Only glow if the herb is grown
+        return stage == PlantStage.Grown;
     }
     public override bool CanPlace(int i, int j)
     {
@@ -72,7 +86,11 @@ public class Barfbush : ModTile
 
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<BarfbushSeeds>(), Main.rand.Next(2) + 1);
+        PlantStage stage = GetStage(i, j);
+        if (stage == PlantStage.Grown)
+        {
+            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<BarfbushSeeds>(), Main.rand.Next(2) + 1);
+        }
     }
     //public override bool Drop(int i, int j)
     //{

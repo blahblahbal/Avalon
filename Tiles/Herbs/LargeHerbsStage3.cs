@@ -3,11 +3,12 @@ using Avalon.Items.Placeable.Seed;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace Avalon.Tiles;
+namespace Avalon.Tiles.Herbs;
 
 public class LargeHerbsStage3 : ModTile
 {
@@ -39,6 +40,43 @@ public class LargeHerbsStage3 : ModTile
     public override ushort GetMapOption(int i, int j)
     {
         return (ushort)(Main.tile[i, j].TileFrameX / 18);
+    }
+    public override bool CreateDust(int i, int j, ref int type)
+    {
+        switch (Main.tile[i, j].TileFrameX / 18)
+        {
+            case 0:
+            case 1:
+            case 9:
+                type = DustID.GrassBlades;
+                break;
+            case 2:
+                type = DustID.WoodFurniture;
+                break;
+            case 3:
+                type = DustID.CorruptPlants;
+                break;
+            case 4:
+            case 11:
+                type = DustID.SeaOatsOasis;
+                break;
+            case 5:
+                type = DustID.Torch;
+                break;
+            case 6:
+                type = DustID.Shiverthorn;
+                break;
+            case 7:
+                type = DustID.CrimsonPlants;
+                break;
+            case 8:
+                type = DustID.GoldCritter_LessOutline;
+                break;
+            case 10:
+                type = DustID.HallowedPlants;
+                break;
+        }
+        return base.CreateDust(i, j, ref type);
     }
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     {

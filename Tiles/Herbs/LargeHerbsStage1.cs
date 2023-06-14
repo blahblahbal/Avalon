@@ -3,13 +3,16 @@ using Avalon.Items.Placeable.Seed;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.Enums;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace Avalon.Tiles;
+namespace Avalon.Tiles.Herbs;
 
-public class LargeHerbsStage2 : ModTile
+public class LargeHerbsStage1 : ModTile
 {
     public override void SetStaticDefaults()
     {
@@ -19,8 +22,8 @@ public class LargeHerbsStage2 : ModTile
         TileObjectData.newTile.CoordinateWidth = 16;
         TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16 };
         TileObjectData.newTile.CoordinatePadding = 2;
-        TileObjectData.newTile.DrawYOffset = 2;
         TileObjectData.newTile.StyleHorizontal = true;
+        TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
         TileObjectData.addTile(Type);
         Main.tileFrameImportant[Type] = true;
         AddMapEntry(new Color(246, 197, 26), LanguageManager.Instance.GetText("Growing Large Daybloom"));
@@ -39,6 +42,47 @@ public class LargeHerbsStage2 : ModTile
     public override ushort GetMapOption(int i, int j)
     {
         return (ushort)(Main.tile[i, j].TileFrameX / 18);
+    }
+    public override bool CreateDust(int i, int j, ref int type)
+    {
+        if (Main.tile[i, j].TileFrameY > 34)
+        {
+            switch (Main.tile[i, j].TileFrameX / 18)
+            {
+                case 0:
+                case 1:
+                case 9:
+                    type = DustID.GrassBlades;
+                    break;
+                case 2:
+                    type = DustID.WoodFurniture;
+                    break;
+                case 3:
+                    type = DustID.CorruptPlants;
+                    break;
+                case 4:
+                case 11:
+                    type = DustID.SeaOatsOasis;
+                    break;
+                case 5:
+                    type = DustID.Torch;
+                    break;
+                case 6:
+                    type = DustID.Shiverthorn;
+                    break;
+                case 7:
+                    type = DustID.CrimsonPlants;
+                    break;
+                case 8:
+                    type = DustID.GoldCritter_LessOutline;
+                    break;
+                case 10:
+                    type = DustID.HallowedPlants;
+                    break;
+            }
+            return base.CreateDust(i, j, ref type);
+        }
+        return false;
     }
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     {

@@ -1,6 +1,8 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -13,11 +15,16 @@ public class GiantCrystalShard : ModTile
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
         Main.tileLavaDeath[Type] = false;
+        Main.tileLighted[Type] = true;
+        Main.tileShine2[Type] = true;
+        Main.tileShine[Type] = 1200;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
         TileObjectData.newTile.CoordinateHeights = new[] {16, 16};
+        TileObjectData.newTile.DrawYOffset = 2;
         TileObjectData.addTile(Type);
-        AddMapEntry(new Color(85, 37, 134));
+        AddMapEntry(new Color(14, 100, 91), CreateMapEntryName());
         HitSound = SoundID.Item27;
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.GiantCrystalShard>());
     }
 
     //public override void NumDust(int i, int j, bool fail, ref int num)
@@ -31,47 +38,60 @@ public class GiantCrystalShard : ModTile
         switch (Main.tile[i, j].TileFrameY / 36)
         {
             case 0:
-                type = DustID.PurpleCrystalShard;
+                type = DustID.IceTorch;
                 break;
             case 1:
-                type = DustID.BlueCrystalShard;
+                type = DustID.GreenTorch;
                 break;
             case 2:
-                type = DustID.PinkCrystalShard;
+                type = DustID.BlueTorch;
                 break;
         }
-
         return true;
-    }
-
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 16,
-            ModContent.ItemType<Items.Placeable.Tile.GiantCrystalShard>());
     }
 
     public override void PlaceInWorld(int i, int j, Item item)
     {
         short f = (short)(Main.rand.Next(3) * 36);
-        Main.tile[i - 1, j - 1].TileFrameY = f;
         Main.tile[i, j - 1].TileFrameY = f;
-        Main.tile[i - 1, j].TileFrameY = (short)(f + 18);
+        Main.tile[i + 1, j - 1].TileFrameY = f;
         Main.tile[i, j].TileFrameY = (short)(f + 18);
+        Main.tile[i + 1, j].TileFrameY = (short)(f + 18);
     }
 
-    public override void NearbyEffects(int i, int j, bool closer)
+    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         if (Main.tile[i, j].TileFrameY < 36)
         {
-            Lighting.AddLight(new Vector2(i * 16, j * 16), 83 / 255, 38 / 255, 131 / 255);
+            r = 0;
+            g = 74 / 255f;
+            b = 122 / 255f;
         }
         else if (Main.tile[i, j].TileFrameY < 72)
         {
-            Lighting.AddLight(new Vector2(i * 16, j * 16), 0, 74 / 255, 122 / 255);
+            r = 0;
+            g = 140 / 255f;
+            b = 56 / 255f;
         }
         else
         {
-            Lighting.AddLight(new Vector2(i * 16, j * 16), 152 / 255, 12 / 255, 121 / 255);
+            r = 30 / 255f;
+            g = 12 / 255f;
+            b = 140 / 255f;
         }
+    }
+
+    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        Tile tile = Main.tile[i, j];
+        var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+        if (Main.drawToScreen)
+        {
+            zero = Vector2.Zero;
+        }
+
+        Vector2 pos = new Vector2(i * 16, j * 16 + 2) + zero - Main.screenPosition;
+        var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
+        Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/CrystalMines/GiantCrystalShard").Value, pos, frame, new Color(175, 175, 175, 175));
     }
 }

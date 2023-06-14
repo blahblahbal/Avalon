@@ -5369,6 +5369,7 @@ Mods: {
 			TopazChest.MapEntry0: Topaz Chest
 			TourmalineChest.MapEntry0: Tourmaline Chest
 			ZirconChest.MapEntry0: Zircon Chest
+			GiantCrystalShard.MapEntry: Giant Crystal Shard
 		}
 
 		Prefixes: {

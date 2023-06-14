@@ -8,6 +8,7 @@ class BarfbushSeeds : ModItem
 {
     public override void SetStaticDefaults()
     {
+        ItemID.Sets.DisableAutomaticPlaceableDrop[Type] = true;
         Item.ResearchUnlockCount = 25;
     }
 
@@ -18,6 +19,7 @@ class BarfbushSeeds : ModItem
         Item.createTile = ModContent.TileType<Tiles.Herbs.Barfbush>();
         Item.placeStyle = 0;
         Item.width = dims.Width;
+        Item.autoReuse = true;
         Item.useTurn = true;
         Item.useTime = 10;
         Item.useStyle = ItemUseStyleID.Swing;
