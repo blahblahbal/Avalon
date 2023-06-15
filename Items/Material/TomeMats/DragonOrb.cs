@@ -19,7 +19,7 @@ class DragonOrb : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.LightRed;
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 0, 2, 0);
         Item.maxStack = 9999;

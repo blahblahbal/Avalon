@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common;
 using Avalon.Items.Material.TomeMats;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -17,7 +17,7 @@ class FlankersTome : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Orange;
+        Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
         Item.value = 15000;
         Item.height = dims.Height;

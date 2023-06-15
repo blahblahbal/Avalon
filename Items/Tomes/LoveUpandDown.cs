@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -16,7 +16,7 @@ public class LoveUpandDown : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Lime;
+        Item.rare = ItemRarityID.Pink;
         Item.width = dims.Width;
         Item.value = 150000;
         Item.height = dims.Height;

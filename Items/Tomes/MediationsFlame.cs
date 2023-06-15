@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Items.Material.TomeMats;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,7 +15,7 @@ class MediationsFlame : ModItem
 
     public override void SetDefaults()
     {
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Green;
         Item.Size = new(30);
         Item.value = 5000;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
@@ -30,8 +31,12 @@ class MediationsFlame : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.DirtBlock)
+            .AddIngredient(ModContent.ItemType<RubybeadHerb>(), 5)
+            .AddIngredient(ModContent.ItemType<FineLumber>(), 20)
+            .AddIngredient(ItemID.FallenStar, 25)
+            .AddIngredient(ItemID.MeteoriteBar, 10)
+            .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
+            .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
-        //CreateRecipe(1).AddIngredient(ModContent.ItemType<RubybeadHerb>(), 5).AddIngredient(ModContent.ItemType<FineLumber>(), 20).AddIngredient(ItemID.FallenStar, 25).AddIngredient(ItemID.MeteoriteBar, 10).AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2).AddTile(ModContent.TileType<Tiles.TomeForge>()).Register();
     }
 }

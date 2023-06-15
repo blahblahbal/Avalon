@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -16,7 +16,7 @@ class TaleoftheDolt : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Pink;
+        Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
         Item.value = 15000;
         Item.height = dims.Height;

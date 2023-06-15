@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Tiles;
 using Microsoft.Xna.Framework;
@@ -18,7 +18,7 @@ internal class SoutheasternPeacock : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.LightPurple;
+        Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 0, 40);
         Item.height = dims.Height;

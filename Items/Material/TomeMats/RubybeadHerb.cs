@@ -14,7 +14,7 @@ class RubybeadHerb : ModItem
 
     public override void SetDefaults()
     {
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.Blue;
         Item.Size = new(20);
         Item.value = Item.sellPrice(0, 0, 2, 0);
         Item.maxStack = 9999;
