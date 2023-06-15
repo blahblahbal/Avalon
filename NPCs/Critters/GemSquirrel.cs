@@ -58,14 +58,49 @@ public class PeridotSquirrel : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
-        if (spawnInfo.Player.ZoneUnderworldHeight && spawnInfo.PlayerInTown && Main.rand.NextBool(35))
+        int spawnRangeX = (int)((double)(NPC.sWidth / 16) * 0.7);
+        int spawnRangeY = (int)((double)(NPC.sHeight / 16) * 0.7);
+        for (int l = 0; l < 255; l++)
         {
-            return 1f;
+            int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
+            int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
+            int num4 = Main.rand.Next(num16, num17);
+            if (Main.raining && num4 <= Main.UnderworldLayer)
+            {
+                if ((double)num4 >= Main.rockLayer && Main.rand.NextBool(35))
+                {
+                    return 1f;
+                }
+            }
+            else if (num4 > Main.UnderworldLayer)
+            {
+                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)
+                {
+                    if (Main.rand.NextBool(28))
+                    {
+                        return 1f;
+                    }
+                }
+            }
+            else if (Main.remixWorld)
+            {
+                if ((double)num4 < Main.rockLayer && (double)num4 > Main.worldSurface)
+                {
+                    if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    {
+                        if (Main.rand.NextBool(35))
+                        {
+                            return 1f;
+                        }
+                    }
+                }
+            }
+            else if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer && Main.rand.NextBool(35))
+            {
+                return 1f;
+            }
         }
-        else
-        {
-            return 0;
-        }
+        return 0;
     }
     public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
@@ -140,14 +175,49 @@ public class TourmalineSquirrel : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
-        if (spawnInfo.Player.ZoneUnderworldHeight && spawnInfo.PlayerInTown && Main.rand.NextBool(20))
+        int spawnRangeX = (int)((double)(NPC.sWidth / 16) * 0.7);
+        int spawnRangeY = (int)((double)(NPC.sHeight / 16) * 0.7);
+        for (int l = 0; l < 255; l++)
         {
-            return 1f;
+            int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
+            int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
+            int num4 = Main.rand.Next(num16, num17);
+            if (Main.raining && num4 <= Main.UnderworldLayer)
+            {
+                if ((double)num4 >= Main.rockLayer && Main.rand.NextBool(20))
+                {
+                    return 1f;
+                }
+            }
+            else if (num4 > Main.UnderworldLayer)
+            {
+                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)
+                {
+                    if (Main.rand.NextBool(16))
+                    {
+                        return 1f;
+                    }
+                }
+            }
+            else if (Main.remixWorld)
+            {
+                if ((double)num4 < Main.rockLayer && (double)num4 > Main.worldSurface)
+                {
+                    if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    {
+                        if (Main.rand.NextBool(20))
+                        {
+                            return 1f;
+                        }
+                    }
+                }
+            }
+            else if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer && Main.rand.NextBool(20))
+            {
+                return 1f;
+            }
         }
-        else
-        {
-            return 0;
-        }
+        return 0;
     }
     public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
@@ -222,14 +292,49 @@ public class ZirconSquirrel : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
-        if (spawnInfo.Player.ZoneUnderworldHeight && spawnInfo.PlayerInTown && Main.rand.NextBool(100))
+        int spawnRangeX = (int)((double)(NPC.sWidth / 16) * 0.7);
+        int spawnRangeY = (int)((double)(NPC.sHeight / 16) * 0.7);
+        for (int l = 0; l < 255; l++)
         {
-            return 1f;
+            int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
+            int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
+            int num4 = Main.rand.Next(num16, num17);
+            if (Main.raining && num4 <= Main.UnderworldLayer)
+            {
+                if ((double)num4 >= Main.rockLayer && Main.rand.NextBool(100))
+                {
+                    return 1f;
+                }
+            }
+            else if (num4 > Main.UnderworldLayer)
+            {
+                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)
+                {
+                    if (Main.rand.NextBool(80))
+                    {
+                        return 1f;
+                    }
+                }
+            }
+            else if (Main.remixWorld)
+            {
+                if ((double)num4 < Main.rockLayer && (double)num4 > Main.worldSurface)
+                {
+                    if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    {
+                        if (Main.rand.NextBool(100))
+                        {
+                            return 1f;
+                        }
+                    }
+                }
+            }
+            else if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer && Main.rand.NextBool(100))
+            {
+                return 1f;
+            }
         }
-        else
-        {
-            return 0;
-        }
+        return 0;
     }
     public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
