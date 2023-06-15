@@ -559,7 +559,6 @@ public class AvalonGlobalNPC : GlobalNPC
                     effects = SpriteEffects.FlipHorizontally;
                 }
                 Color color = Lighting.GetColor((int)(npc.position.X / 16), (int)(npc.position.Y / 16)) * 0.08f;
-                color.A = 0;
                 float num66 = Main.NPCAddHeight(npc);
                 var vector13 = new Vector2(TextureAssets.Npc[npc.type].Width() / 2,
                     TextureAssets.Npc[npc.type].Height() / Main.npcFrameCount[npc.type] / 2);
@@ -574,7 +573,6 @@ public class AvalonGlobalNPC : GlobalNPC
                     effects = SpriteEffects.FlipHorizontally;
                 }
                 Color color = Lighting.GetColor((int)(npc.position.X / 16), (int)(npc.position.Y / 16)) * 0.3f;
-                color.A = 0;
                 float num66 = Main.NPCAddHeight(npc);
                 var vector13 = new Vector2(TextureAssets.Npc[npc.type].Width() / 2,
                     TextureAssets.Npc[npc.type].Height() / Main.npcFrameCount[npc.type] / 2);
@@ -589,7 +587,6 @@ public class AvalonGlobalNPC : GlobalNPC
                     effects = SpriteEffects.FlipHorizontally;
                 }
                 Color color = Lighting.GetColor((int)(npc.position.X / 16), (int)(npc.position.Y / 16)) * 0.3f;
-                color.A = 0;
                 float num66 = Main.NPCAddHeight(npc);
                 var vector13 = new Vector2(TextureAssets.Npc[npc.type].Width() / 2,
                     TextureAssets.Npc[npc.type].Height() / Main.npcFrameCount[npc.type] / 2);
@@ -604,7 +601,6 @@ public class AvalonGlobalNPC : GlobalNPC
                     effects = SpriteEffects.FlipHorizontally;
                 }
                 Color color = Lighting.GetColor((int)(npc.position.X / 16), (int)(npc.position.Y / 16)) * 0.5f;
-                color.A = 0;
                 float num66 = Main.NPCAddHeight(npc);
                 var vector13 = new Vector2(TextureAssets.Npc[npc.type].Width() / 2,
                     TextureAssets.Npc[npc.type].Height() / Main.npcFrameCount[npc.type] / 2);
