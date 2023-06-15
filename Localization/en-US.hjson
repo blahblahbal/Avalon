@@ -4693,6 +4693,36 @@ Mods: {
 				DisplayName: Chaos Tome
 				Tooltip: Casts a chaos bolt
 			}
+
+			PeridotBunny: {
+				DisplayName: Peridot Bunny
+				Tooltip: ""
+			}
+
+			TourmalineBunny: {
+				DisplayName: Tourmaline Bunny
+				Tooltip: ""
+			}
+
+			ZirconBunny: {
+				DisplayName: Zircon Bunny
+				Tooltip: ""
+			}
+
+			PeridotSquirrel: {
+				DisplayName: Peridot Squirrel
+				Tooltip: ""
+			}
+
+			TourmalineSquirrel: {
+				DisplayName: Tourmaline Squirrel
+				Tooltip: ""
+			}
+
+			ZirconSquirrel: {
+				DisplayName: Zircon Squirrel
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4836,6 +4866,12 @@ Mods: {
 			Viriling.DisplayName: Viriling
 			ContaminatedGhoul.DisplayName: Contaminated Ghoul
 			ViralMummy.DisplayName: Viral Mummy
+			PeridotBunny.DisplayName: Peridot Bunny
+			TourmalineBunny.DisplayName: Tourmaline Bunny
+			ZirconBunny.DisplayName: Zircon Bunny
+			PeridotSquirrel.DisplayName: Peridot Squirrel
+			TourmalineSquirrel.DisplayName: Tourmaline Squirrel
+			ZirconSquirrel.DisplayName: Zircon Squirrel
 		}
 
 		Buffs: {
