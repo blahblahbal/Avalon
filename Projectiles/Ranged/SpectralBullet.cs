@@ -82,7 +82,7 @@ public class SpectralBullet : ModProjectile
             Projectile.Center = Projectile.position;
         }
 
-        SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/NPC_Killed_6") with { Volume = 0.5f, Pitch = -0.5f }, Projectile.position);
+        SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/NPC_Killed_6") with { Volume = 0.5f, Pitch = -0.5f, PitchVariance = 0.2f }, Projectile.position);
         for (int i = 0; i < 10; i++)
         {
             Dust dust = Dust.NewDustDirect(Projectile.position - Projectile.velocity, Projectile.width, Projectile.height, ModContent.DustType<Dusts.SoulofFlight>(), 0, 0, 100, Color.Black, 0.8f);

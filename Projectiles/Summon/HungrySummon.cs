@@ -5,6 +5,7 @@ using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -42,7 +43,7 @@ public class HungrySummon : ModProjectile
         Projectile.width = 24;
         Projectile.height = 24;
         Projectile.penetrate = -1;
-        Projectile.timeLeft = 5;
+        Projectile.timeLeft = 2;
         Projectile.minion = true;
         Projectile.minionSlots = 1f;
         Projectile.tileCollide = true;
@@ -75,7 +76,7 @@ public class HungrySummon : ModProjectile
             {
                 player.ClearBuff(ModContent.BuffType<Hungry>());
             }
-            if (player.HasBuff(ModContent.BuffType<Hungry>()))
+            if (player.HasBuff(ModContent.BuffType<Hungry>()) && Projectile.timeLeft <= 2)
             {
                 Projectile.timeLeft = 2;
             }
@@ -123,7 +124,7 @@ public class HungrySummon : ModProjectile
             Projectile.tileCollide = true;
         }
 
-        if (TargetNPC != -1)
+        if (TargetNPC != -1 && Projectile.timeLeft <= 2)
         {
             TargetingEnemy = true;
             TargetPos = Main.npc[TargetNPC].Center + new Vector2(0, -10 + (float)(Projectile.minionPos * Math.Sin(Projectile.ai[0]))).RotatedBy(Projectile.ai[0] * 0.1f * (Projectile.minionPos * 0.7f + 1));
@@ -144,6 +145,21 @@ public class HungrySummon : ModProjectile
             TargetingEnemy = true;
             TargetPos = Main.npc[TargetNPC].Center;
         }
+
+        if(Projectile.timeLeft == 3)
+        {
+            SoundEngine.PlaySound(SoundID.NPCDeath12);
+
+            for (int i = 0; i < 30; i++)
+            {
+                Dust d2 = Dust.NewDustPerfect(Projectile.Center + new Vector2(-14, 0).RotatedBy(Projectile.rotation), DustID.Blood);
+                d2.velocity = Vector2.Normalize(Projectile.velocity).RotatedByRandom(1) * Main.rand.NextFloat(4f, 6f);
+                d2.noGravity = Main.rand.NextBool(5);
+                d2.fadeIn = 1;
+            }
+        }
+
+        if (Projectile.ai[2] == 0)
         Projectile.ai[1] = TargetNPC;
         if (Projectile.ai[2] == 0)
         {
@@ -208,9 +224,21 @@ public class HungrySummon : ModProjectile
         {
             Projectile.ai[2] = 1;
         }
+        if (Main.rand.NextBool(30))
+        {
+            Projectile.ai[2] = 0;
+            Projectile.timeLeft = 60;
+        }
         Projectile.velocity = Projectile.Center.DirectionTo(target.Center);
     }
 
+    public override bool? CanHitNPC(NPC target)
+    {
+        if (Projectile.timeLeft <= 2 && target.whoAmI == Projectile.ai[1])
+            return base.CanHitNPC(target);
+        else
+            return false;
+    }
     public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
     {
         fallThrough = true;

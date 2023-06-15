@@ -80,24 +80,23 @@ public class PhantasmalBullet : ModProjectile
             Projectile.Center = Projectile.position;
         }
 
-        SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/NPC_Killed_6") with { Volume = 0.5f, Pitch = -0.5f }, Projectile.position);
-        for (int i = 0; i < 10; i++)
+        SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/NPC_Killed_6") with { Volume = 0.5f, Pitch = -0.3f, PitchVariance = 0.2f}, Projectile.position);
+        for (int i = 0; i < 6; i++)
         {
-            Dust dust = Dust.NewDustDirect(Projectile.position - Projectile.velocity, Projectile.width, Projectile.height, DustID.VampireHeal, 0, 0, 100, Color.Black, 0.8f);
+            Dust dust = Dust.NewDustDirect(Projectile.position - Projectile.velocity, Projectile.width, Projectile.height, DustID.TheDestroyer, 0, 0, 100, Color.Black, 0.8f);
             dust.noGravity = true;
             dust.velocity *= 1.5f;
-            dust.scale *= 0.7f;
-            Dust.NewDustDirect(Projectile.position - Projectile.velocity, Projectile.width, Projectile.height, DustID.VampireHeal, 0f, 0f, 100, Color.Black, 0.5f);
+            Dust dust2 = Dust.NewDustDirect(Projectile.position - Projectile.velocity, Projectile.width, Projectile.height, DustID.TheDestroyer, 0f, 0f, 100, Color.Black, 0.5f);
+            dust2.noGravity = Main.rand.NextBool(3);
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 6; i++)
         {
-            int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.VampireHeal, 0f, 0f, 100, default(Color), 3f);
+            int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.TheDestroyer, 0f, 0f, 100, default(Color), 0.7f);
             Main.dust[dustIndex].noGravity = true;
             Main.dust[dustIndex].velocity *= 1.5f;
-            Main.dust[dustIndex].scale *= 0.7f;
-            dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.VampireHeal, 0f, 0f, 100, default(Color), 2f);
-            Main.dust[dustIndex].velocity *= 1.5f;
-            Main.dust[dustIndex].scale *= 0.7f;
+            Main.dust[dustIndex].fadeIn = Main.rand.NextFloat(0,1.5f);
+            int dustIndex2 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.TheDestroyer, 0f, 0f, 100, default(Color), 0.8f);
+            Main.dust[dustIndex2].velocity *= 1.5f;
         }
 
         Projectile.position.X += Projectile.width / 2;

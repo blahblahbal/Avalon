@@ -39,6 +39,11 @@ public class AvalonGlobalItem : GlobalItem
         //ModContent.TileType<LivingLightning>(),
         //ModContent.TileType<VineRope>(),
     };
+
+    public override void SetStaticDefaults()
+    {
+        Item.staff[ItemID.Vilethorn] = true;
+    }
     public override void AddRecipes()
     {
         // --== Shimmer!!! ==--
@@ -223,6 +228,9 @@ public class AvalonGlobalItem : GlobalItem
                 break;
             case ItemID.DeathbringerPickaxe:
                 item.pick = 64;
+                break;
+            case ItemID.Vilethorn:
+                item.useStyle = 5;
                 break;
             #endregion miscellaneous changes
             #region ML item rebalance
