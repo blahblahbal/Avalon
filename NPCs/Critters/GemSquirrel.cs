@@ -53,7 +53,8 @@ public class PeridotSquirrel : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("GemSquirrel"))
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemSquirrel"))
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
@@ -170,7 +171,8 @@ public class TourmalineSquirrel : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("GemSquirrel"))
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemSquirrel"))
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
@@ -287,7 +289,8 @@ public class ZirconSquirrel : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("GemSquirrel"))
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemSquirrel"))
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
