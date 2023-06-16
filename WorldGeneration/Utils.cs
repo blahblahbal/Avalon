@@ -16,6 +16,76 @@ public class Utils
         t.Slope = SlopeType.Solid;
         t.IsHalfBlock = false;
     }
+    public static void PlaceContagionTight(int x, int y)
+    {
+        if (Main.tile[x, y].LiquidType != LiquidID.Shimmer)
+        {
+            PlaceUncheckedStalactite(x, y, WorldGen.genRand.NextBool(2), WorldGen.genRand.Next(3));
+            if (Main.tile[x, y].TileType == ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>())
+            {
+                WorldGen.CheckTight(x, y);
+            }
+        }
+    }
+    public static void PlaceUncheckedStalactite(int x, int y, bool preferSmall, int variation)
+    {
+        ushort type = 165;
+        variation = Terraria.Utils.Clamp(variation, 0, 2);
+        if (WorldGen.SolidTile(x, y - 1) && !Main.tile[x, y].HasTile && !Main.tile[x, y + 1].HasTile)
+        {
+            if (Main.tile[x, y - 1].TileType == ModContent.TileType<Chunkstone>())
+            {
+                if (preferSmall)
+                {
+                    int num12 = variation * 18;
+                    Tile t = Main.tile[x, y];
+                    t.TileType = type;
+                    t.HasTile = true;
+                    t.TileFrameX = (short)num12;
+                    t.TileFrameY = 72;
+                }
+                else
+                {
+                    int num15 = variation * 18;
+                    Tile t = Main.tile[x, y];
+                    t.HasTile = true;
+                    t.TileFrameX = (short)num15;
+                    t.TileFrameY = 0;
+                    t = Main.tile[x, y + 1];
+                    t.HasTile = true;
+                    t.TileFrameX = (short)num15;
+                    t.TileFrameY = 18;
+                }
+            }
+        }
+        else
+        {
+            if (Main.tile[x, y + 1].TileType == ModContent.TileType<Chunkstone>())
+            {
+                if (preferSmall)
+                {
+                    int num5 = 54 + variation * 18;
+                    Tile t = Main.tile[x, y];
+                    t.TileType = type;
+                    t.HasTile = true;
+                    t.TileFrameX = (short)num5;
+                    t.TileFrameY = 90;
+                }
+                else
+                {
+                    int num6 = 54 + variation * 18;
+                    Tile t = Main.tile[x, y - 1];
+                    t.HasTile = true;
+                    t.TileFrameX = (short)num6;
+                    t.TileFrameY = 36;
+                    t = Main.tile[x, y];
+                    t.HasTile = true;
+                    t.TileFrameX = (short)num6;
+                    t.TileFrameY = 54;
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// A helper method to find the actual surface of the world.
@@ -32,7 +102,7 @@ public class Utils
                 /*|| tile.TileType == ModContent.TileType<Loam>() */|| tile.TileType == TileID.Mud ||
                 tile.TileType == TileID.SnowBlock || tile.TileType == TileID.IceBlock) && tile.HasTile)
             {
-                return i;
+                return i - 3;
             }
         }
         return 0;

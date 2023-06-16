@@ -27,6 +27,7 @@ public class Saturn : Planet
         Projectile.tileCollide = false;
         Projectile.extraUpdates = 3;
         Projectile.timeLeft = 300;
+        Projectile.ignoreWater = true;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Height / 2) - (Projectile.Size.Y / 2));
     }

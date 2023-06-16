@@ -54,6 +54,14 @@ public class GenSystem : ModSystem
             totalWeight += currentPass.Weight;
         }
 
+        //int stalac = tasks.FindIndex(genPass => genPass.Name == "Stalac");
+        //if (stalac != -1)
+        //{
+        //    currentPass = new ContagionStalactgmites();
+        //    tasks.Insert(stalac + 1, currentPass);
+        //    totalWeight += currentPass.Weight;
+        //}
+
         int underworld = tasks.FindIndex(genPass => genPass.Name == "Micro Biomes");
         if (underworld != -1)
         {

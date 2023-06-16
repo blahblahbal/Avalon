@@ -134,7 +134,7 @@ internal class Contagion : GenPass
                     flag12 = false;
                 }
             }
-            ContagionRunner(xCoordEvil, (int)GenVars.worldSurfaceLow - 10 + (Main.maxTilesY / 8));
+            ContagionRunner3(xCoordEvil, (int)GenVars.worldSurfaceLow - 10 + (Main.maxTilesY / 8));
             positions[num208] = xCoordEvil;
             for (int num218 = evilLeftCoord; num218 < evilRightCoord; num218++)
             {
@@ -368,8 +368,8 @@ internal class Contagion : GenPass
 
         for (int n = 0; n < innerCircleEnds.Count; n++)
         {
-            BoreTunnelFred((int)innerCircleStarts[n].X, (int)innerCircleStarts[n].Y, (int)innerCircleEnds[n].X, (int)innerCircleEnds[n].Y, 7f, (ushort)ModContent.TileType<Chunkstone>());
-            BoreTunnelFred((int)innerCircleStarts[n].X, (int)innerCircleStarts[n].Y, (int)innerCircleEnds[n].X, (int)innerCircleEnds[n].Y, 3f, 65535);
+            BoreTunnelFred((int)innerCircleStarts[n].X, (int)innerCircleStarts[n].Y, (int)innerCircleEnds[n].X, (int)innerCircleEnds[n].Y, 6f, (ushort)ModContent.TileType<Chunkstone>());
+            BoreTunnelFred((int)innerCircleStarts[n].X, (int)innerCircleStarts[n].Y, (int)innerCircleEnds[n].X, (int)innerCircleEnds[n].Y, 2f, 65535);
 
             if (innerCircleStarts[n].Z == 1)
             {
