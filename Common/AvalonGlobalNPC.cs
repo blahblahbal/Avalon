@@ -546,69 +546,6 @@ public class AvalonGlobalNPC : GlobalNPC
 
         return base.CheckDead(npc);
     }
-    public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-    {
-        if ((ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement))
-        {
-            if (npc.type is 1 || npc.type is >= -10 and <= -3) // slimes
-            {
-                Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/NPCs/Slime").Value;
-                SpriteEffects effects = SpriteEffects.None;
-                if (npc.spriteDirection == 1)
-                {
-                    effects = SpriteEffects.FlipHorizontally;
-                }
-                Color color = Lighting.GetColor((int)(npc.position.X / 16), (int)(npc.position.Y / 16)) * 0.08f;
-                float num66 = Main.NPCAddHeight(npc);
-                var vector13 = new Vector2(TextureAssets.Npc[npc.type].Width() / 2,
-                    TextureAssets.Npc[npc.type].Height() / Main.npcFrameCount[npc.type] / 2);
-                Main.spriteBatch.Draw(texture, new Vector2(npc.position.X - screenPos.X + (npc.width / 2) - (TextureAssets.Npc[npc.type].Width() * npc.scale / 2f) + (vector13.X * npc.scale), npc.position.Y - Main.screenPosition.Y + npc.height - (TextureAssets.Npc[npc.type].Height() * npc.scale / Main.npcFrameCount[npc.type]) + 4f + (vector13.Y * npc.scale) + num66), npc.frame, color, npc.rotation, vector13, npc.scale, effects, 0f);
-            }
-            if (npc.type == NPCID.MotherSlime) // mother slime
-            {
-                Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/NPCs/MotherSlime").Value;
-                SpriteEffects effects = SpriteEffects.None;
-                if (npc.spriteDirection == 1)
-                {
-                    effects = SpriteEffects.FlipHorizontally;
-                }
-                Color color = Lighting.GetColor((int)(npc.position.X / 16), (int)(npc.position.Y / 16)) * 0.3f;
-                float num66 = Main.NPCAddHeight(npc);
-                var vector13 = new Vector2(TextureAssets.Npc[npc.type].Width() / 2,
-                    TextureAssets.Npc[npc.type].Height() / Main.npcFrameCount[npc.type] / 2);
-                Main.spriteBatch.Draw(texture, new Vector2(npc.position.X - screenPos.X + (npc.width / 2) - (TextureAssets.Npc[npc.type].Width() * npc.scale / 2f) + (vector13.X * npc.scale), npc.position.Y - Main.screenPosition.Y + npc.height - (TextureAssets.Npc[npc.type].Height() * npc.scale / Main.npcFrameCount[npc.type]) + 4f + (vector13.Y * npc.scale) + num66), npc.frame, color, npc.rotation, vector13, npc.scale, effects, 0f);
-            }
-            if (npc.type is 1 || npc.type is >= -10 and <= -3) // slimes
-            {
-                Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/NPCs/Slime").Value;
-                SpriteEffects effects = SpriteEffects.None;
-                if (npc.spriteDirection == 1)
-                {
-                    effects = SpriteEffects.FlipHorizontally;
-                }
-                Color color = Lighting.GetColor((int)(npc.position.X / 16), (int)(npc.position.Y / 16)) * 0.3f;
-                float num66 = Main.NPCAddHeight(npc);
-                var vector13 = new Vector2(TextureAssets.Npc[npc.type].Width() / 2,
-                    TextureAssets.Npc[npc.type].Height() / Main.npcFrameCount[npc.type] / 2);
-                Main.spriteBatch.Draw(texture, new Vector2(npc.position.X - screenPos.X + (npc.width / 2) - (TextureAssets.Npc[npc.type].Width() * npc.scale / 2f) + (vector13.X * npc.scale), npc.position.Y - Main.screenPosition.Y + npc.height - (TextureAssets.Npc[npc.type].Height() * npc.scale / Main.npcFrameCount[npc.type]) + 4f + (vector13.Y * npc.scale) + num66), npc.frame, color, npc.rotation, vector13, npc.scale, effects, 0f);
-            }
-            if (npc.type == NPCID.SlimeSpiked)
-            {
-                Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/NPCs/SpikedSlimeWhite").Value;
-                SpriteEffects effects = SpriteEffects.None;
-                if (npc.spriteDirection == 1)
-                {
-                    effects = SpriteEffects.FlipHorizontally;
-                }
-                Color color = Lighting.GetColor((int)(npc.position.X / 16), (int)(npc.position.Y / 16)) * 0.5f;
-                float num66 = Main.NPCAddHeight(npc);
-                var vector13 = new Vector2(TextureAssets.Npc[npc.type].Width() / 2,
-                    TextureAssets.Npc[npc.type].Height() / Main.npcFrameCount[npc.type] / 2);
-                Main.spriteBatch.Draw(texture, new Vector2(npc.position.X - screenPos.X + (npc.width / 2) - (TextureAssets.Npc[npc.type].Width() * npc.scale / 2f) + (vector13.X * npc.scale), npc.position.Y - Main.screenPosition.Y + npc.height - (TextureAssets.Npc[npc.type].Height() * npc.scale / Main.npcFrameCount[npc.type]) + 4f + (vector13.Y * npc.scale) + num66), npc.frame, color, npc.rotation, vector13, npc.scale, effects, 0f);
-            }
-        }
-        base.PostDraw(npc, spriteBatch, screenPos, drawColor);
-    }
     public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         if(npc.netID is 529 or 533)
