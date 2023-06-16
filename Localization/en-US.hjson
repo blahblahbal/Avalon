@@ -4723,6 +4723,36 @@ Mods: {
 				DisplayName: Zircon Squirrel
 				Tooltip: ""
 			}
+
+			PeridotBunnyCage: {
+				DisplayName: Peridot Bunny Cage
+				Tooltip: ""
+			}
+
+			TourmalineBunnyCage: {
+				DisplayName: Tourmaline Bunny Cage
+				Tooltip: ""
+			}
+
+			ZirconBunnyCage: {
+				DisplayName: Zircon Bunny Cage
+				Tooltip: ""
+			}
+
+			PeridotSquirrelCage: {
+				DisplayName: Peridot Squirrel Cage
+				Tooltip: ""
+			}
+
+			TourmalineSquirrelCage: {
+				DisplayName: Tourmaline Squirrel Cage
+				Tooltip: ""
+			}
+
+			ZirconSquirrelCage: {
+				DisplayName: Zircon Squirrel Cage
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5418,6 +5448,12 @@ Mods: {
 			TourmalineChest.MapEntry0: Tourmaline Chest
 			ZirconChest.MapEntry0: Zircon Chest
 			GiantCrystalShard.MapEntry: Giant Crystal Shard
+			PeridotBunnyCage.MapEntry: Peridot Bunny Cage
+			TourmalineBunnyCage.MapEntry: Tourmaline Bunny Cage
+			ZirconBunnyCage.MapEntry: Zircon Bunny Cage
+			PeridotSquirrelCage.MapEntry: Peridot Squirrel Cage
+			TourmalineSquirrelCage.MapEntry: Tourmaline Squirrel Cage
+			ZirconSquirrelCage.MapEntry: Zircon Squirrel Cage
 		}
 
 		Prefixes: {
