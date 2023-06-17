@@ -20,7 +20,12 @@ class WorldgenHelper : ModItem
         Item.height = dims.Height;
         //item.UseSound = mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/Scroll");
     }
-
+    public static float Distance(Vector2 a, Vector2 b)
+    {
+        float diff_x = a.X - b.X;
+        float diff_y = a.Y - b.Y;
+        return (float)Math.Sqrt(diff_x * diff_x + diff_y * diff_y);
+    }
     public override bool? UseItem(Player player)
     {
         int x = (int)player.position.X / 16;
@@ -29,8 +34,8 @@ class WorldgenHelper : ModItem
         //WorldGeneration.Structures.Hellcastle.GenerateHellcastle(x, y);
         //y = WorldGeneration.Utils.CaesiumTileCheck(x, y);
         //MakeSpike(x, y, 20, 10, 1);
-        WorldGeneration.Passes.Contagion.ContagionRunner3(x, y);
-
+        WorldGeneration.Passes.Contagion.ContagionRunner(x, y);
+        //WorldGeneration.Passes.Contagion.MakeOval(x, y, 10, 20, ModContent.TileType<Tiles.Contagion.Chunkstone>());
         return true;
         //int xStored = x;
         //List<int> l = new List<int>()

@@ -16,6 +16,14 @@ public class Utils
         t.Slope = SlopeType.Solid;
         t.IsHalfBlock = false;
     }
+
+    public static bool IsInsideEllipse(int x, int y, Vector2 center, int xRadius, int yRadius)
+    {
+        float dx = x - center.X;
+        float dy = y - center.Y;
+        return (dx * dx) / (xRadius * xRadius) + (dy * dy) / (yRadius * yRadius) <= 1;
+    }
+
     public static void PlaceContagionTight(int x, int y)
     {
         if (Main.tile[x, y].LiquidType != LiquidID.Shimmer)
