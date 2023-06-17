@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Common.Players;
+using Terraria.GameContent;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -18,6 +19,14 @@ public class EctoHand : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 1;
+        NPCID.Sets.SpecialSpawningRules.Add(ModContent.NPCType<EctoHand>(), 0);
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        {
+            // Influences how the NPC looks in the Bestiary
+            Position = new Vector2(4f, -6f),
+            Rotation = (float)Math.PI * 3f / 4f
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
     }
     public override void SetDefaults()
     {
@@ -58,32 +67,52 @@ public class EctoHand : ModNPC
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 v, Color drawColor)
     {
-        Vector2 vector7 = new Vector2(NPC.Center.X, NPC.Center.Y);
-        float num29 = NPC.ai[1] - vector7.X;
-        float num30 = NPC.ai[2] - vector7.Y;
+        Vector2 start = NPC.Center;
+        Vector2 end = new Vector2(NPC.ai[1], NPC.ai[2]);
+        start -= Main.screenPosition;
+        end -= Main.screenPosition;
+        Texture2D TEX = Mod.Assets.Request<Texture2D>("NPCs/Hardmode/EctoArm1").Value;
+        int linklength = TEX.Height;
+        Vector2 chain = end - start;
 
-        float rotation7 = (float)Math.Atan2((double)num30, (double)num29) - 1.57f;
-        bool flag8 = true;
-        while (flag8)
+        float length = (float)chain.Length();
+        int numlinks = (int)Math.Ceiling(length / linklength);
+        Vector2[] links = new Vector2[numlinks];
+        float rotation = (float)Math.Atan2(chain.Y, chain.X);
+        int chainVariant = 1;
+        for (int i = 0; i < numlinks; i++)
         {
-            float num31 = (float)Math.Sqrt((double)(num29 * num29 + num30 * num30));
-            if (num31 < 16f)
+            links[i] = start + chain / numlinks * i;
+            string TEXTURE;
+            if (chainVariant % 3 == 0 || chainVariant % 4 == 0)
             {
-                flag8 = false;
+                TEXTURE = "NPCs/Hardmode/EctoArm2";
             }
             else
             {
-                num31 = 16f / num31;
-                num29 *= num31;
-                num30 *= num31;
-                vector7.X += num29;
-                vector7.Y += num30;
-                num29 = NPC.ai[1] - vector7.X;
-                num30 = NPC.ai[2] - vector7.Y;
-
-                Color color7 = Lighting.GetColor((int)vector7.X / 16, (int)(vector7.Y / 16f));
-                Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("NPCs/Hardmode/EctoArm").Value, new Vector2(vector7.X - v.X, vector7.Y - v.Y), new Rectangle?(new Rectangle(0, 0, Mod.Assets.Request<Texture2D>("NPCs/Hardmode/EctoArm").Value.Width, Mod.Assets.Request<Texture2D>("NPCs/Hardmode/EctoArm").Value.Height)), Color.White, rotation7, new Vector2(Mod.Assets.Request<Texture2D>("NPCs/Hardmode/EctoArm").Value.Width * 0.5f, Mod.Assets.Request<Texture2D>("NPCs/Hardmode/EctoArm").Value.Height * 0.5f), 1f, SpriteEffects.None, 0f);
+                TEXTURE = "NPCs/Hardmode/EctoArm1";
             }
+            if (chainVariant % 2 == 0)
+            {
+                TEX = Mod.Assets.Request<Texture2D>(TEXTURE).Value;
+            }
+            else
+            {
+                TEX = Mod.Assets.Request<Texture2D>(TEXTURE + "B").Value;
+            }
+            Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), Color.White, rotation + 1.57f, new Vector2(TEX.Width / 2, TEX.Height), 1f,
+                SpriteEffects.None, 1f);
+            chainVariant++;
+            if (chainVariant > 4)
+            {
+                chainVariant = 1;
+            }
+        }
+        if (NPC.IsABestiaryIconDummy)
+        {
+            Texture2D bestiaryTex = Mod.Assets.Request<Texture2D>("NPCs/Hardmode/EctoHand_Bestiary").Value;
+            Main.spriteBatch.Draw(bestiaryTex, NPC.Center - new Vector2(70f, -70f), new Rectangle(0, 0, bestiaryTex.Width, bestiaryTex.Height), Color.White, MathHelper.TwoPi / 8, new Vector2(bestiaryTex.Width / 2, bestiaryTex.Height), 1f, SpriteEffects.None, 1f);
+            return false;
         }
         return true;
     }
@@ -157,6 +186,22 @@ public class EctoHand : ModNPC
             if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.25f;
         }
         Vector2 vector6 = new Vector2(NPC.Center.X - NPC.ai[1], NPC.Center.Y - NPC.ai[1]);
-        NPC.rotation = ((float)Math.Atan2(Main.player[NPC.target].Center.Y - (double)NPC.Center.Y, Main.player[NPC.target].Center.X - (double)NPC.Center.X) + 3.14f) * 1f + ((float)Math.Atan2((double)NPC.velocity.Y, (double)NPC.velocity.X)) * 0.1f;
+        //NPC.rotation = ((float)Math.Atan2(Main.player[NPC.target].Center.Y - (double)NPC.Center.Y, Main.player[NPC.target].Center.X - (double)NPC.Center.X) + 3.14f) * 1f + ((float)Math.Atan2((double)NPC.velocity.Y, (double)NPC.velocity.X)) * 0.1f;
+
+        //make the fucking wrist rotation look like a wrist JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO JEO
+        NPC.rotation = NPC.Center.DirectionTo(Main.player[NPC.target].Center).ToRotation() + MathHelper.Pi;
+
+        if (Main.rand.NextBool(15))
+        {
+            int num1225 = Dust.NewDust(NPC.Center + new Vector2(Main.rand.NextFloat(0, NPC.Center.Distance(new Vector2(NPC.ai[1], NPC.ai[2]))), 0).RotatedBy(NPC.Center.DirectionTo(new Vector2(NPC.ai[1], NPC.ai[2])).ToRotation()), (int)(NPC.width * 0.1f),
+                (int)(NPC.height * 0.1f), DustID.HallowSpray, 0, 0, 150, NPC.color, 0.85f);
+            Main.dust[num1225].noGravity = true;
+            Main.dust[num1225].velocity *= 0.95f;
+            int num1226 = Dust.NewDust(NPC.Center, NPC.width,
+                (int)(NPC.height * 0.1f), DustID.HallowSpray, 0, 0, 150, NPC.color, 0.75f);
+            Main.dust[num1226].noGravity = true;
+            Main.dust[num1226].velocity *= 0.95f;
+        }
+        Lighting.AddLight(NPC.Center, 14f / 255f, 80f / 255f, 100f / 255f);
     }
 }

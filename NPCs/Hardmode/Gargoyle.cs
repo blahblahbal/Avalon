@@ -16,6 +16,12 @@ public class Gargoyle : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 5;
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        {
+            // Influences how the NPC looks in the Bestiary
+            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         NPCID.Sets.DebuffImmunitySets[Type] = new NPCDebuffImmunityData
         {
             ImmuneToAllBuffsThatAreNotWhips = true,
@@ -201,6 +207,10 @@ public class Gargoyle : ModNPC
     {
         NPC.spriteDirection = NPC.direction;
         NPC.rotation = NPC.velocity.X * 0.1f;
+        if (NPC.IsABestiaryIconDummy)
+        {
+            NPC.rotation = 0;
+        }
         if (NPC.velocity.X == 0f && NPC.velocity.Y == 0f)
         {
             NPC.frame.Y = 0;
