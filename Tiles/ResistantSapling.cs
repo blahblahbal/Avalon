@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -49,7 +50,7 @@ public class ResistantSapling : ModTile
         TileID.Sets.SwaysInWindBasic[Type] = true;
         TileMaterials.SetForTileId(Type, TileMaterials._materialsByName["Plant"]); // Make this tile interact with golf balls in the same way other plants do
 
-        DustType = DustID.Wraith;
+        DustType = ModContent.DustType<ResistantWoodDust>();
 
         AdjTiles = new int[] { TileID.Saplings };
     }

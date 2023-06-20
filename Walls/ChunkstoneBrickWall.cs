@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -11,6 +11,6 @@ public class ChunkstoneBrickWall : ModWall
         Main.wallHouse[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.ChunkstoneBrickWall>();
         AddMapEntry(new Color(67, 83, 61));
-        DustType = ModContent.DustType<Dusts.ContagionDust>();
+        DustType = ModContent.DustType<Dusts.ChunkstoneBrickDust>();
     }
 }

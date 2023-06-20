@@ -28,4 +28,8 @@ public class CrackedOrangeBrick : ModTile
         if (!fail) AvalonWorld.ShatterCrackedBricks(i, j, Main.tile[i, j], true);
         SoundEngine.PlaySound(SoundID.Item127, new(i * 16, j * 16));
     }
+    public override bool CanDrop(int i, int j)
+    {
+        return false;
+    }
 }

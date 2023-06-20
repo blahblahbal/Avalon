@@ -3,6 +3,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Dusts;
 
-public class HeartstoneDust : ModDust
+public class StarstoneDust : ModDust
 {
 }

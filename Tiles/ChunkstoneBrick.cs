@@ -18,6 +18,6 @@ public class ChunkstoneBrick : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ChunkstoneBrick>();
         HitSound = SoundID.Tink;
-        DustType = ModContent.DustType<Dusts.ContagionDust>();
+        DustType = ModContent.DustType<Dusts.ChunkstoneBrickDust>();
     }
 }

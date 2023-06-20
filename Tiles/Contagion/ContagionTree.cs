@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -21,6 +22,11 @@ public class ContagionTree : ModTree
     public override void SetStaticDefaults()
     {
         GrowsOnTileId = new int[1] { ModContent.TileType<Ickgrass>() };
+    }
+
+    public override int CreateDust()
+    {
+        return ModContent.DustType<CoughwoodDust>();
     }
 
     public override Asset<Texture2D> GetTexture()

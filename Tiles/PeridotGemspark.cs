@@ -74,7 +74,7 @@ public class PeridotGemsparkOff : ModTile
         TileID.Sets.AllBlocksWithSmoothBordersToResolveHalfBlockIssue[Type] = true;
         TileID.Sets.ForcedDirtMerging[Type] = true;
         TileID.Sets.GemsparkFramingTypes[Type] = Type;
-        //RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.PeridotGemsparkBlock>());
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.PeridotGemsparkBlock>());
         HitSound = SoundID.Dig;
     }
     public override bool CreateDust(int i, int j, ref int type)

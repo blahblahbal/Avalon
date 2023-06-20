@@ -13,6 +13,7 @@ public class Paintings : ModTile
     {
         Main.tileFrameImportant[Type] = true;
         Main.tileLavaDeath[Type] = true;
+        Main.tileSpelunker[Type] = true;
         TileID.Sets.FramesOnKillWall[Type] = true; // Necessary since Style3x3Wall uses AnchorWall
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3Wall);
         TileObjectData.newTile.Width = 6;

@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
@@ -23,6 +24,11 @@ namespace Avalon.Tiles
         {
             // Makes Example Tree grow on ExampleBlock
             GrowsOnTileId = new int[1] { ModContent.TileType<Ectograss>() };
+        }
+
+        public override int CreateDust()
+        {
+            return ModContent.DustType<ResistantWoodDust>();
         }
 
         // This is the primary texture for the trunk. Branches and foliage use different settings.

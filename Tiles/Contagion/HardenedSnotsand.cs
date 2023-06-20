@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -17,7 +18,7 @@ public class HardenedSnotsand : ModTile
         TileID.Sets.CanBeClearedDuringGeneration[Type] = false;
         TileID.Sets.ChecksForMerge[Type] = true;
         Common.TileMerge.MergeWith(Type, ModContent.TileType<Snotsand>());
-        DustType = DustID.ScourgeOfTheCorruptor;
+        DustType = ModContent.DustType<ContagionDust>();
     }
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     {

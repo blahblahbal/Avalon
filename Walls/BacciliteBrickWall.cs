@@ -12,7 +12,7 @@ public class BacciliteBrickWall : ModWall
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.BismuthBrickWall>();
         AddMapEntry(new Color(51, 66, 55));
         Main.wallLight[Type] = true;
-        DustType = ModContent.DustType<Dusts.ContagionDust>();
+        DustType = ModContent.DustType<Dusts.ChunkstoneBrickDust>();
     }
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {

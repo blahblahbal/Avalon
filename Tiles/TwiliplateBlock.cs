@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -18,5 +19,6 @@ public class TwiliplateBlock : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.TwiliplateBlock>();
         HitSound = SoundID.Tink;
+        DustType = ModContent.DustType<BismuthDust>();
     }
 }

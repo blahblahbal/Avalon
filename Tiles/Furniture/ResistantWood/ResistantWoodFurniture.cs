@@ -1,9 +1,9 @@
 using Avalon.Common.Templates;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -278,7 +278,7 @@ public class ResistantWoodPiano : PianoTemplate
 public class ResistantWoodPlatform : PlatformTemplate
 {
     public override bool LavaDeath => false;
-    public override int Dust => DustID.Wraith;
+    public override int Dust => ModContent.DustType<ResistantWoodDust>();
 }
 
 public class ResistantWoodSink : SinkTemplate

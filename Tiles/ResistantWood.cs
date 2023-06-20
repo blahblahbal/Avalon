@@ -1,6 +1,6 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Tiles;
@@ -15,7 +15,7 @@ public class ResistantWood : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileBrick[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.ResistantWood>();
-        DustType = DustID.Wraith;
+        DustType = ModContent.DustType<ResistantWoodDust>();
     }
     public override bool CanExplode(int i, int j)
     {

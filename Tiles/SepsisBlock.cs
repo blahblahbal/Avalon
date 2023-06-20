@@ -16,7 +16,7 @@ public class SepsisBlock : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileBrick[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.SepsisBlock>();
-        DustType = ModContent.DustType<ContagionDust>();
+        DustType = DustID.BrownMoss;
         HitSound = SoundID.NPCDeath1;
     }
 }

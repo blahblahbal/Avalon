@@ -18,7 +18,7 @@ public class BacciliteBrick : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         Main.tileLighted[Type] = true;
         HitSound = SoundID.Tink;
-        DustType = ModContent.DustType<Dusts.ContagionDust>();
+        DustType = ModContent.DustType<Dusts.ChunkstoneBrickDust>();
     }
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {

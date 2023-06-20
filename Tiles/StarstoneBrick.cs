@@ -14,6 +14,6 @@ public class StarstoneBrick : ModTile
         Main.tileBlockLight[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.StarstoneBrick>();
         HitSound = SoundID.Tink;
-        DustType = DustID.BlueTorch;
+        DustType = ModContent.DustType<Dusts.StarstoneDust>();
     }
 }

@@ -12,6 +12,6 @@ public class SepsisBlockWall : ModWall
         Main.wallHouse[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.SepsisBlockWall>();
         AddMapEntry(new Color(75, 79, 46));
-        DustType = ModContent.DustType<Dusts.ContagionDust>();
+        DustType = DustID.BrownMoss;
     }
 }

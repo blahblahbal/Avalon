@@ -1,6 +1,6 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Tiles;
@@ -15,6 +15,6 @@ public class BleachedEbony : ModTile
         Main.tileBrick[Type] = true;
         Main.tileBlockLight[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>();
-        DustType = DustID.SnowBlock;
+        DustType = ModContent.DustType<BleachedEbonyDust>();
     }
 }

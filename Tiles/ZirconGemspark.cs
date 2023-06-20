@@ -74,7 +74,7 @@ public class ZirconGemsparkOff : ModTile
         TileID.Sets.AllBlocksWithSmoothBordersToResolveHalfBlockIssue[Type] = true;
         TileID.Sets.ForcedDirtMerging[Type] = true;
         TileID.Sets.GemsparkFramingTypes[Type] = Type;
-        //RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.ZirconGemsparkBlock>());
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.ZirconGemsparkBlock>());
         HitSound = SoundID.Dig;
     }
     public override bool CreateDust(int i, int j, ref int type)

@@ -1,9 +1,9 @@
 using Avalon.Common.Templates;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -270,6 +270,6 @@ public class BleachedEbonyWorkBench : WorkbenchTemplate { }
 
 public class BleachedEbonyPlatform : PlatformTemplate 
 {
-    public override int Dust => DustID.SnowBlock;
+    public override int Dust => ModContent.DustType<BleachedEbonyDust>();
 }
 

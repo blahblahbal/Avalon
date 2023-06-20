@@ -1,8 +1,7 @@
-using Terraria;
 using Terraria.ModLoader;
 
 namespace Avalon.Dusts;
 
-public class HeartstoneDust : ModDust
+public class YellowIceDust : ModDust
 {
 }
