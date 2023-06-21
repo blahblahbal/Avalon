@@ -33,7 +33,8 @@ public class VirulentPowder : ModProjectile
             int num90 = 30;
             for (int num91 = 0; num91 < num90; num91++)
             {
-                Dust dust7 = Main.dust[Dust.NewDust(Entity.position, Entity.width, Entity.height, dustType, Entity.velocity.X, Entity.velocity.Y, 50)];
+                float randVel = Main.rand.NextFloat(1f, 2f);
+                Dust dust7 = Main.dust[Dust.NewDust(Entity.position, Entity.width, Entity.height, dustType, Entity.velocity.X * randVel, Entity.velocity.Y * randVel, 50)];
                 dust7.noGravity = true;
             }
         }
