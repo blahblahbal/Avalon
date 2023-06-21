@@ -4753,6 +4753,21 @@ Mods: {
 				DisplayName: Zircon Squirrel Cage
 				Tooltip: ""
 			}
+
+			HangingBarfbush: {
+				DisplayName: Hanging Barfbush
+				Tooltip: ""
+			}
+
+			HardenedSnotsandWall: {
+				DisplayName: Hardened Snotsand Wall
+				Tooltip: ""
+			}
+
+			SnotsandstoneWall: {
+				DisplayName: Snotsandstone Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

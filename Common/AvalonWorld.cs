@@ -741,6 +741,14 @@ public class AvalonWorld : ModSystem
                 {
                     Main.tile[x, y].WallType = WallID.RocksUnsafe4;
                 }
+                else if (wall == ModContent.WallType<Walls.HardenedSnotsandWallUnsafe>() || wall == ModContent.WallType<Walls.HardenedSnotsandWall>())
+                {
+                    Main.tile[x, y].WallType = WallID.HardenedSand;
+                }
+                else if (wall == ModContent.WallType<Walls.SnotsandstoneWallUnsafe>() || wall == ModContent.WallType<Walls.SnotsandstoneWall>())
+                {
+                    Main.tile[x, y].WallType = WallID.Sandstone;
+                }
             }
             if (Main.tile[x, y] != null)
             {
@@ -855,6 +863,14 @@ public class AvalonWorld : ModSystem
                 else if (WallID.Sets.Conversion.NewWall4[wall])
                 {
                     Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.ContagionBoilWallUnsafe>();
+                }
+                else if (WallID.Sets.Conversion.HardenedSand[wall])
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.HardenedSnotsandWallUnsafe>();
+                }
+                else if (WallID.Sets.Conversion.Sandstone[wall])
+                {
+                    Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.SnotsandstoneWallUnsafe>();
                 }
             }
             if (Main.tile[x, y] != null)

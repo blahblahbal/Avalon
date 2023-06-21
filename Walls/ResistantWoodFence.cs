@@ -1,6 +1,7 @@
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Walls;
@@ -14,5 +15,7 @@ public class ResistantWoodFence : ModWall
         AddMapEntry(new Color(25, 25, 25));
         DustType = ModContent.DustType<ResistantWoodDust>();
         Main.wallLight[Type] = true;
+        WallID.Sets.AllowsWind[Type] = true;
+        WallID.Sets.AllowsPlantsToGrow[Type] = true;
     }
 }
