@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using Avalon.Hooks;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile.LargeHerbs;
@@ -8,10 +12,17 @@ using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Herbs;
 using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
+using Terraria.GameContent.UI.Elements;
+using Terraria.GameContent.UI.States;
 using Terraria.ID;
+using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.UI;
+using Terraria.Utilities;
 
 namespace Avalon.Common;
 
@@ -70,6 +81,24 @@ public class AvalonWorld : ModSystem
     {
         tag["RhodiumOre"] = (byte?)RhodiumOre;
         tag["WorldEvil"] = (byte)WorldEvil;
+        AvalonConfig config = ModContent.GetInstance<AvalonConfig>();
+        Dictionary<string, AvalonConfig.WorldDataValues> tempDict = config.GetWorldData();
+        AvalonConfig.WorldDataValues worldData;
+
+        if (WorldEvil == WorldEvil.Contagion)
+        {
+            worldData.contagion = true;
+        }
+        else
+        {
+            worldData.contagion = false;
+        }
+
+        string path = Path.ChangeExtension(Main.worldPathName, ".twld");
+        tempDict[path] = worldData;
+        config.SetWorldData(tempDict);
+
+        AvalonConfig.Save(config);
     }
 
     public override void LoadWorldData(TagCompound tag)
@@ -920,5 +949,242 @@ public class AvalonWorld : ModSystem
         //        NetMessage.SendTileSquare(-1, x, y, 1);
         //    }
         //}
+    }
+    public override void Load()
+    {
+        Terraria.GameContent.UI.States.On_UIWorldSelect.UpdateWorldsList += On_UIWorldSelect_UpdateWorldsList;
+    }
+
+    public override void Unload()
+    {
+        Terraria.GameContent.UI.States.On_UIWorldSelect.UpdateWorldsList -= On_UIWorldSelect_UpdateWorldsList;
+    }
+
+    private void On_UIWorldSelect_UpdateWorldsList(Terraria.GameContent.UI.States.On_UIWorldSelect.orig_UpdateWorldsList orig, Terraria.GameContent.UI.States.UIWorldSelect self)
+    {
+        orig(self);
+
+        UIList WorldList = (UIList)typeof(UIWorldSelect).GetField("_worldList", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(self);
+        foreach (var item in WorldList)
+        {
+            if (item is UIWorldListItem)
+            {
+                UIElement _WorldIcon = (UIElement)typeof(UIWorldListItem).GetField("_worldIcon", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(item);
+                //_WorldIcon = GetIconElement();
+
+                UIElement WorldIcon = (UIElement)typeof(UIWorldListItem).GetField("_worldIcon", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(item);
+                WorldFileData Data = (WorldFileData)typeof(AWorldListItem).GetField("_data", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(item);
+
+                var path = Path.ChangeExtension(Data.Path, ".twld");
+
+                AvalonConfig config = ModContent.GetInstance<AvalonConfig>();
+                Dictionary<string, AvalonConfig.WorldDataValues> tempDict = config.GetWorldData();
+
+                if (!tempDict.ContainsKey(path))
+                {
+                    byte[] buf = FileUtilities.ReadAllBytes(path, Data.IsCloudSave);
+                    var stream = new MemoryStream(buf);
+                    var tag = TagIO.FromStream(stream);
+                    bool containsMod = false;
+
+                    if (tag.ContainsKey("modData"))
+                    {
+                        foreach (TagCompound modDataTag in tag.GetList<TagCompound>("modData").Skip(2))
+                        {
+                            if (modDataTag.Get<string>("mod") == ModContent.GetInstance<AvalonConfig>().Mod.Name)
+                            {
+                                TagCompound dataTag = modDataTag.Get<TagCompound>("data");
+                                AvalonConfig.WorldDataValues worldData;
+
+                                worldData.contagion = dataTag.Get<bool>("ExxoAvalonOrigins:WorldEvil.Contagion"); //Have no idea how the contagion is saved in the .tmod file. replace if this isn't correct
+                                tempDict[path] = worldData;
+
+                                containsMod = true;
+
+                                break;
+                            }
+                        }
+
+                        if (!containsMod)
+                        {
+                            AvalonConfig.WorldDataValues worldData;
+
+                            worldData.contagion = false;
+                            tempDict[path] = worldData;
+                        }
+
+                        config.SetWorldData(tempDict);
+                        AvalonConfig.Save(config);
+                    }
+                }
+
+                #region RegularSeedIcon
+                if (tempDict[path].contagion && !Data.RemixWorld && !Data.DrunkWorld && !Data.Anniversary && !Data.DontStarve && !Data.ForTheWorthy && !Data.ZenithWorld && !Data.NotTheBees && !Data.NoTrapsWorld)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay")) //the altlib textures arent in the mod anymore, you'll need to restore them and put their paths here. The full icons require IL editing to add which i am not capable of
+                    {
+                        Top = new StyleDimension(0f, 0f),
+                        Left = new StyleDimension(0f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.Append(element);
+                }
+                #endregion
+
+                #region AnniversarySeedIcon
+                if (tempDict[path].contagion && !Data.RemixWorld && !Data.DrunkWorld && Data.Anniversary && !Data.DontStarve && !Data.ForTheWorthy && !Data.ZenithWorld && !Data.NotTheBees && !Data.NoTrapsWorld)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_Anniversary"))
+                    {
+                        Top = new StyleDimension(0f, 0f),
+                        Left = new StyleDimension(0f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.Append(element);
+                }
+                #endregion
+
+                #region DontStarveSeedIcon
+                if (tempDict[path].contagion && !Data.RemixWorld && !Data.DrunkWorld && !Data.Anniversary && Data.DontStarve && !Data.ForTheWorthy && !Data.ZenithWorld && !Data.NotTheBees && !Data.NoTrapsWorld)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_DST"))
+                    {
+                        Top = new StyleDimension(0f, 0f),
+                        Left = new StyleDimension(0f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.Append(element);
+                }
+                #endregion
+
+                #region DrunkSeedIcon
+                if (tempDict[path].contagion && !Data.RemixWorld && Data.DrunkWorld && !Data.Anniversary && !Data.DontStarve && !Data.ForTheWorthy && !Data.ZenithWorld && !Data.NotTheBees && !Data.NoTrapsWorld)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay"))
+                    {
+                        Top = new StyleDimension(0f, 0f),
+                        Left = new StyleDimension(0f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.Append(element);
+                }
+                #endregion
+
+                #region FTWSeedIcon
+                if (tempDict[path].contagion && !Data.RemixWorld && !Data.DrunkWorld && !Data.Anniversary && !Data.DontStarve && Data.ForTheWorthy && !Data.ZenithWorld && !Data.NotTheBees && !Data.NoTrapsWorld)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_FTW"))
+                    {
+                        Top = new StyleDimension(0f, 0f),
+                        Left = new StyleDimension(0f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.Append(element);
+                }
+                #endregion
+
+                #region NotTheBeesSeedIcon
+                if (tempDict[path].contagion && !Data.RemixWorld && !Data.DrunkWorld && !Data.Anniversary && !Data.DontStarve && !Data.ForTheWorthy && !Data.ZenithWorld && Data.NotTheBees && !Data.NoTrapsWorld)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_NotTheBees"))
+                    {
+                        Top = new StyleDimension(0f, 0f),
+                        Left = new StyleDimension(0f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.Append(element);
+                }
+                #endregion
+
+                #region NoTrapsSeedIcon
+                if (tempDict[path].contagion && !Data.RemixWorld && !Data.DrunkWorld && !Data.Anniversary && !Data.DontStarve && !Data.ForTheWorthy && !Data.ZenithWorld && !Data.NotTheBees && Data.NoTrapsWorld && Data.IsHardMode)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay")) //This should have the same if not similar texture to the normal one
+                    {
+                        Top = new StyleDimension(0f, 0f),
+                        Left = new StyleDimension(0f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.Append(element);
+                }
+                #endregion
+
+                #region RemixSeedIcon
+                if (tempDict[path].contagion && Data.RemixWorld && !Data.DrunkWorld && !Data.Anniversary && !Data.DontStarve && !Data.ForTheWorthy && !Data.ZenithWorld && !Data.NotTheBees && !Data.NoTrapsWorld)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_Remix"))
+                    {
+                        Top = new StyleDimension(0f, 0f),
+                        Left = new StyleDimension(0f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.Append(element);
+                }
+                #endregion
+
+                #region EverythingSeedIcon
+                if (tempDict[path].contagion && Data.RemixWorld && Data.DrunkWorld)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    Asset<Texture2D> obj = ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_Everything", (AssetRequestMode)1); //the everything seed is a mess in 1.4.4 and most likely needs an IL to work properly. This texture would be an overlay version of the whole sprite sheet
+                    UIImageFramed uIImageFramed = new UIImageFramed(obj, obj.Frame(7, 16));
+                    uIImageFramed.Left = new StyleDimension(0f, 0f);
+                    uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+                    worldIcon.Append(uIImageFramed);
+                }
+                #endregion
+            }
+        }
+    }
+
+    //the following is the animating of the icon, this is synced with the normal animation because ima goober that cant IL or reflect properly for the life of me
+    protected UIElement GetIconElement()
+    {
+        WorldFileData Data = (WorldFileData)typeof(AWorldListItem).GetField("_data", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(null);
+        if (Data.DrunkWorld && Data.RemixWorld)
+        {
+            Asset<Texture2D> obj = ModContent.Request<Texture2D>("Path/for/regular/tree/icon/overlayEverything");
+            UIImageFramed uIImageFramed = new UIImageFramed(obj, obj.Frame(7, 16));
+            uIImageFramed.Left = new StyleDimension(4f, 0f);
+            uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+            return uIImageFramed;
+        }
+        return null;
+    }
+
+    protected int _glitchFrameCounter;
+
+    protected int _glitchFrame;
+
+    protected int _glitchVariation;
+
+    private void UpdateGlitchAnimation(UIElement affectedElement)
+    {
+        _ = _glitchFrame;
+        int minValue = 3;
+        int num = 3;
+        if (_glitchFrame == 0)
+        {
+            minValue = 15;
+            num = 120;
+        }
+        if (++_glitchFrameCounter >= Main.rand.Next(minValue, num + 1))
+        {
+            _glitchFrameCounter = 0;
+            _glitchFrame = (_glitchFrame + 1) % 16;
+            if ((_glitchFrame == 4 || _glitchFrame == 8 || _glitchFrame == 12) && Main.rand.Next(3) == 0)
+            {
+                _glitchVariation = Main.rand.Next(7);
+            }
+        }
+        (affectedElement as UIImageFramed).SetFrame(7, 16, _glitchVariation, _glitchFrame, 0, 0);
     }
 }
