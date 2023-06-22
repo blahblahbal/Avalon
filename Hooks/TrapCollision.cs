@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Players;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -20,7 +21,7 @@ public class TrapCollision : ModHook
     {
         if (player.GetModPlayer<AvalonPlayer>().TrapImmune)
         {
-            if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>())
+            if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
             {
                 return false;
             }
@@ -29,6 +30,18 @@ public class TrapCollision : ModHook
         {
             return true;
         }
+        //doesn't work, always returns false
+        //if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
+        //{
+        //    if (player.velocity == Vector2.Zero)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
         return orig(type, i, j, player);
     }
     private static void OnApplyTouchDamage(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)

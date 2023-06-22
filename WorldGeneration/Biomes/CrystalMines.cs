@@ -446,16 +446,26 @@ internal class CrystalMines
                     WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrystalMines.CrystalColumn>(), true);
                 }
                 #endregion pillars
-                if (!Main.tile[i, j].HasTile && Main.tile[i, j - 1].HasTile && Main.tile[i, j - 1].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>() ||
-                    !Main.tile[i, j].HasTile && Main.tile[i, j + 1].HasTile && Main.tile[i, j + 1].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>() ||
-                    !Main.tile[i, j].HasTile && Main.tile[i - 1, j].HasTile && Main.tile[i - 1, j].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>() ||
-                    !Main.tile[i, j].HasTile && Main.tile[i + 1, j].HasTile && Main.tile[i + 1, j].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>())
+                //if (!Main.tile[i, j].HasTile && Main.tile[i, j - 1].HasTile && Main.tile[i, j - 1].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>() ||
+                //    !Main.tile[i, j].HasTile && Main.tile[i, j + 1].HasTile && Main.tile[i, j + 1].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>() ||
+                //    !Main.tile[i, j].HasTile && Main.tile[i - 1, j].HasTile && Main.tile[i - 1, j].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>() ||
+                //    !Main.tile[i, j].HasTile && Main.tile[i + 1, j].HasTile && Main.tile[i + 1, j].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>())
+                //{
+                //    if (Main.tile[i, j].TileType != TileID.Crystals)
+                //    {
+                //        if (WorldGen.genRand.NextBool(8))
+                //        {
+                //            WorldGen.PlaceTile(i, j, TileID.Crystals, style: WorldGen.genRand.Next(3));
+                //        }
+                //    }
+                //}
+                if (!Main.tile[i, j].HasTile && Main.tile[i, j + 1].HasTile && Main.tile[i, j + 1].TileType == ModContent.TileType<Tiles.CrystalMines.CrystalStone>())
                 {
-                    if (Main.tile[i, j].TileType != TileID.Crystals)
+                    if (Main.tile[i, j].TileType != ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
                     {
                         if (WorldGen.genRand.NextBool(8))
                         {
-                            WorldGen.PlaceTile(i, j, TileID.Crystals, style: WorldGen.genRand.Next(3));
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrystalMines.ShatterShards>(), style: WorldGen.genRand.Next(3));
                         }
                     }
                 }
