@@ -1151,7 +1151,7 @@ public class AvalonWorld : ModSystem
         WorldFileData Data = (WorldFileData)typeof(AWorldListItem).GetField("_data", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(null);
         if (Data.DrunkWorld && Data.RemixWorld)
         {
-            Asset<Texture2D> obj = ModContent.Request<Texture2D>("Path/for/regular/tree/icon/overlayEverything");
+            Asset<Texture2D> obj = ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_Everything");
             UIImageFramed uIImageFramed = new UIImageFramed(obj, obj.Frame(7, 16));
             uIImageFramed.Left = new StyleDimension(4f, 0f);
             uIImageFramed.OnUpdate += UpdateGlitchAnimation;
