@@ -96,7 +96,7 @@ public class Librarian : ModNPC
             return;
         }
         // Create gore when the NPC is killed.
-        if (NPC.life == 0 && Main.netMode != NetmodeID.Server)
+        if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
             // Retrieve the gore types. This NPC has shimmer and party variants for head, arm, and leg gore. (12 total gores)
             string variant = "";

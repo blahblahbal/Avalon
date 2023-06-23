@@ -465,7 +465,6 @@ public class AvalonGlobalNPC : GlobalNPC
             {
                 Main.NewText(npc.FullName + TownDeathMsg(npc.type), new Color(178, 0, 90));
                 npc.life = 0;
-                npc.HitEffect();
                 npc.active = false;
                 npc.NPCLoot();
                 SoundEngine.PlaySound(SoundID.NPCDeath1, npc.position);
