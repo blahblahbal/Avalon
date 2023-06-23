@@ -35,11 +35,11 @@ public class TrapCollision : ModHook
         //{
         //    if (player.velocity == Vector2.Zero)
         //    {
-        //        return true;
+        //        return false;
         //    }
         //    else
         //    {
-        //        return false;
+        //        return true;
         //    }
         //}
         return orig(type, i, j, player);

@@ -35,10 +35,11 @@ public class ShatterShards : ModTile
     {
         return true;
     }
-    public override void WalkDust(ref int dustType, ref bool makeDust, ref Color color)
-    {
-        dustType = ModContent.DustType<ShatterShardDust>();
-        makeDust = true;
-        base.WalkDust(ref dustType, ref makeDust, ref color);
-    }
+    //Doesn't work cause it's not a solid tile
+    //public override void WalkDust(ref int dustType, ref bool makeDust, ref Color color)
+    //{
+    //    dustType = ModContent.DustType<ShatterShardDust>();
+    //    makeDust = true;
+    //    base.WalkDust(ref dustType, ref makeDust, ref color);
+    //}
 }

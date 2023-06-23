@@ -4,7 +4,9 @@ using Avalon.Items.Material;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Items.Placeable.Crafting;
 using Avalon.Systems;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
 using Terraria.ID;
@@ -16,6 +18,13 @@ namespace Avalon.NPCs.TownNPCs;
 [AutoloadHead]
 public class Librarian : ModNPC
 {
+    private static int ShimmerHeadIndex;
+    private static Profiles.StackedNPCProfile NPCProfile;
+    public override void Load()
+    {
+        // Adds our Shimmer Head to the NPCHeadLoader.
+        ShimmerHeadIndex = Mod.AddNPCHeadTexture(Type, Texture + "_Shimmer_Head");
+    }
     public const string ShopName = "Shop";
     public override void SetStaticDefaults()
     {
@@ -23,9 +32,11 @@ public class Librarian : ModNPC
         NPCID.Sets.ExtraFramesCount[NPC.type] = 9;
         NPCID.Sets.AttackFrameCount[NPC.type] = 4;
         NPCID.Sets.DangerDetectRange[NPC.type] = 600;
-        NPCID.Sets.AttackType[NPC.type] = 0;
+        NPCID.Sets.AttackType[NPC.type] = 1;
         NPCID.Sets.AttackTime[NPC.type] = 50;
         NPCID.Sets.AttackAverageChance[NPC.type] = 10;
+        NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
+        NPCID.Sets.ShimmerTownTransform[Type] = true;
 
         var drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0) {Velocity = 1f};
 
@@ -38,6 +49,15 @@ public class Librarian : ModNPC
             .SetNPCAffection(NPCID.DyeTrader, AffectionLevel.Love)
             .SetNPCAffection(NPCID.Guide, AffectionLevel.Like)
             .SetNPCAffection(NPCID.WitchDoctor, AffectionLevel.Hate);
+
+        NPCProfile = new Profiles.StackedNPCProfile(
+                new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture)),
+                new Profiles.DefaultNPCProfile(Texture + "_Shimmer", ShimmerHeadIndex)
+            );
+    }
+    public override ITownNPCProfile TownNPCProfile()
+    {
+        return NPCProfile;
     }
 
     public override void SetDefaults()
@@ -64,6 +84,43 @@ public class Librarian : ModNPC
             BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface, new FlavorTextBestiaryInfoElement(
                 "The Librarian fled his homeland when mysterious otherwordly beings invaded. He seems to be much happier here.")
         });
+    }
+    public override void HitEffect(NPC.HitInfo hit)
+    {
+        if (NPC.life > 0)
+        {
+            for (int numDust = 0; (double)numDust < NPC.life / (double)NPC.lifeMax * 100.0; numDust++)
+            {
+                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, hit.HitDirection, -1f);
+            }
+            return;
+        }
+        // Create gore when the NPC is killed.
+        if (NPC.life == 0 && Main.netMode != NetmodeID.Server)
+        {
+            // Retrieve the gore types. This NPC has shimmer and party variants for head, arm, and leg gore. (12 total gores)
+            string variant = "";
+            if (NPC.IsShimmerVariant) variant += "_Shimmer";
+            int hatGore = NPC.GetPartyHatGore();
+            int headGore = Mod.Find<ModGore>($"{Name}_Head{variant}").Type;
+            int armGore = Mod.Find<ModGore>($"{Name}_Arm{variant}").Type;
+            int legGore = Mod.Find<ModGore>($"{Name}_Leg{variant}").Type;
+
+            // Spawn the gores. The positions of the arms and legs are lowered for a more natural look.
+            if (hatGore > 0)
+            {
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, hatGore);
+            }
+            Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headGore, 1f);
+            Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
+            Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
+            Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
+            Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
+            for (int numDust = 0; numDust < 50; numDust++)
+            {
+                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, 2.5f * (float)hit.HitDirection, -2.5f);
+            }
+        }
     }
 
     public override List<string> SetNPCNameList()
