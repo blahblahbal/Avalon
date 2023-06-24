@@ -156,6 +156,7 @@ public class AvalonWorld : ModSystem
             int num8 = num5 + 2;
             int num9 = num6 - 1;
             int num10 = num6 + 2;
+            int num11 = num6 + 1;
             if (num7 < 10)
             {
                 num7 = 10;
@@ -184,13 +185,13 @@ public class AvalonWorld : ModSystem
                 WorldGen.KillTile(num5, num6);
             }
             // kill contagion short grass if block below isn't contagion grass
-            if ((Main.tile[num5, num6].TileType != ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType != ModContent.TileType<ContagionJungleGrass>()) && Main.tile[num5, num9].TileType == ModContent.TileType<ContagionShortGrass>())
+            if (!(Main.tile[num5, num11].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num11].TileType == ModContent.TileType<ContagionJungleGrass>()) && Main.tile[num5, num6].TileType == ModContent.TileType<ContagionShortGrass>())
             {
                 WorldGen.KillTile(num5, num6);
             }
             // kill barfbush if block below isn't contagion grass or chunkstone
-            if (!(Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<Chunkstone>()) &&
-                Main.tile[num5, num9].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>())
+            if (!(Main.tile[num5, num11].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num11].TileType == ModContent.TileType<ContagionJungleGrass>() || Main.tile[num5, num11].TileType == ModContent.TileType<Chunkstone>()) &&
+                Main.tile[num5, num6].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>())
             {
                 WorldGen.KillTile(num5, num6);
             }
