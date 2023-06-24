@@ -12,6 +12,10 @@ public class ContagionShortGrass : ModTile
 {
     public override void SetStaticDefaults()
     {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        TileID.Sets.ReplaceTileBreakUp[Type] = true;
+        TileID.Sets.SwaysInWindBasic[Type] = true;
+        TileID.Sets.DrawFlipMode[Type] = 1;
         Main.tileCut[Type] = true;
         Main.tileSolid[Type] = false;
         Main.tileNoAttach[Type] = true;

@@ -806,13 +806,49 @@ public class AvalonWorld : ModSystem
             }
             if (Main.tile[x, y] != null)
             {
+                Tile tileUp = Main.tile[x, y - 1];
+                int typeUp = tileUp.TileType;
+                Tile tileDown = Main.tile[x, y + 1];
+                int typeDown = tileDown.TileType;
                 if (type == ModContent.TileType<Ickgrass>())
                 {
                     tile.TileType = TileID.Grass;
+                    if (typeDown == ModContent.TileType<ContagionVines>())
+                    {
+                        for (int downVar = 1; typeDown == ModContent.TileType<ContagionVines>() && !Main.tileSolid[typeDown]; downVar++)
+                        {
+                            Tile tileDownVar = Main.tile[x, y + downVar];
+                            int typeDownVar = tileDownVar.TileType;
+                            if (typeDownVar == ModContent.TileType<ContagionVines>())
+                            {
+                                tileDownVar.TileType = TileID.Vines;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
                 }
                 if (type == ModContent.TileType<ContagionJungleGrass>())
                 {
                     tile.TileType = TileID.JungleGrass;
+                    if (typeDown == ModContent.TileType<ContagionVines>())
+                    {
+                        for (int downVar = 1; typeDown == ModContent.TileType<ContagionVines>() && !Main.tileSolid[typeDown]; downVar++)
+                        {
+                            Tile tileDownVar = Main.tile[x, y + downVar];
+                            int typeDownVar = tileDownVar.TileType;
+                            if (typeDownVar == ModContent.TileType<ContagionVines>())
+                            {
+                                tileDownVar.TileType = TileID.JungleVines;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
                 }
                 else if (type == ModContent.TileType<YellowIce>())
                 {
@@ -834,10 +870,10 @@ public class AvalonWorld : ModSystem
                 {
                     tile.TileType = TileID.HardenedSand;
                 }
-                //else if (type == ModContent.TileType<ContagionShortGrass>())
-                //{
-                //    tile.type = TileID.Plants;
-                //}
+                else if (type == ModContent.TileType<ContagionShortGrass>())
+                {
+                    tile.TileType = TileID.Plants;
+                }
                 //if (TileID.Sets.Conversion.Grass[type] || type == 0)
                 //{
                 //    WorldGen.SquareTileFrame(x, y);
@@ -933,13 +969,57 @@ public class AvalonWorld : ModSystem
             }
             if (Main.tile[x, y] != null)
             {
+                Tile tileUp = Main.tile[x, y - 1];
+                int typeUp = tileUp.TileType;
+                Tile tileDown = Main.tile[x, y + 1];
+                int typeDown = tileDown.TileType;
                 if (TileID.Sets.Conversion.Grass[type] && type != ModContent.TileType<Ickgrass>())
                 {
                     tile.TileType = (ushort)ModContent.TileType<Ickgrass>();
+                    if (typeUp == TileID.Plants || typeUp == TileID.Plants2 || typeUp == TileID.CorruptPlants || typeUp == TileID.CrimsonPlants || typeUp == TileID.HallowedPlants || typeUp == TileID.HallowedPlants2 || typeUp == TileID.JunglePlants || typeUp == TileID.JunglePlants2)
+                    {
+                        tileUp.TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
+                    }
+                    if (TileID.Sets.IsVine[typeDown] && typeDown != ModContent.TileType<ContagionVines>())
+                    {
+                        for (int downVar = 1; TileID.Sets.IsVine[typeDown] && !Main.tileSolid[typeDown]; downVar++)
+                        {
+                            Tile tileDownVar = Main.tile[x, y + downVar];
+                            int typeDownVar = tileDownVar.TileType;
+                            if (TileID.Sets.IsVine[typeDownVar] && typeDownVar != ModContent.TileType<ContagionVines>())
+                            {
+                            tileDownVar.TileType = (ushort)ModContent.TileType<ContagionVines>();
+                            }
+                            else
+                            {
+                                break;
+                            }    
+                        }
+                    }
                 }
                 if (TileID.Sets.Conversion.JungleGrass[type] && type != ModContent.TileType<ContagionJungleGrass>())
                 {
                     tile.TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
+                    if (typeUp == TileID.Plants || typeUp == TileID.Plants2 || typeUp == TileID.CorruptPlants || typeUp == TileID.CrimsonPlants || typeUp == TileID.HallowedPlants || typeUp == TileID.HallowedPlants2 || typeUp == TileID.JunglePlants || typeUp == TileID.JunglePlants2)
+                    {
+                        tileUp.TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
+                    }
+                    if (TileID.Sets.IsVine[typeDown] && typeDown != ModContent.TileType<ContagionVines>())
+                    {
+                        for (int downVar = 1; TileID.Sets.IsVine[typeDown] && !Main.tileSolid[typeDown]; downVar++)
+                        {
+                            Tile tileDownVar = Main.tile[x, y + downVar];
+                            int typeDownVar = tileDownVar.TileType;
+                            if (TileID.Sets.IsVine[typeDownVar] && typeDownVar != ModContent.TileType<ContagionVines>())
+                            {
+                                tileDownVar.TileType = (ushort)ModContent.TileType<ContagionVines>();
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
                 }
                 else if (TileID.Sets.Conversion.Ice[type] && type != ModContent.TileType<YellowIce>())
                 {
@@ -961,10 +1041,18 @@ public class AvalonWorld : ModSystem
                 {
                     tile.TileType = (ushort)ModContent.TileType<HardenedSnotsand>();
                 }
-                //else if (type == ModContent.TileType<ContagionShortGrass>())
-                //{
-                //    tile.type = TileID.Plants;
-                //}
+                else if (type == TileID.Plants || type == TileID.Plants2 || type == TileID.CorruptPlants || type == TileID.CrimsonPlants || type == TileID.HallowedPlants || type == TileID.HallowedPlants2 || type == TileID.JunglePlants || type == TileID.JunglePlants2)
+                {
+                    tile.TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
+                    if (TileID.Sets.Conversion.Grass[typeDown] && typeDown != ModContent.TileType<Ickgrass>())
+                    {
+                        tileDown.TileType = (ushort)ModContent.TileType<Ickgrass>();
+                    }
+                    if (TileID.Sets.Conversion.JungleGrass[typeDown] && typeDown != ModContent.TileType<Ickgrass>())
+                    {
+                        tileDown.TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
+                    }
+                }
                 //if (TileID.Sets.Conversion.Grass[type] || type == 0)
                 //{
                 //    WorldGen.SquareTileFrame(x, y);

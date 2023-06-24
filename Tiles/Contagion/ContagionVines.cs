@@ -9,6 +9,11 @@ public class ContagionVines : ModTile
 {
     public override void SetStaticDefaults()
     {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        TileID.Sets.IsVine[Type] = true;
+        TileID.Sets.ReplaceTileBreakDown[Type] = true;
+        TileID.Sets.VineThreads[Type] = true;
+        TileID.Sets.DrawFlipMode[Type] = 1;
         Main.tileCut[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileLavaDeath[Type] = true;
@@ -27,6 +32,10 @@ public class ContagionVines : ModTile
         {
             WorldGen.KillTile(i, j + 1);
         }
+    }
+    public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
+    {
+        offsetY = -4;
     }
 
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)

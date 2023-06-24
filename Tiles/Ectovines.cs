@@ -9,6 +9,11 @@ public class Ectovines : ModTile
 {
     public override void SetStaticDefaults()
     {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        TileID.Sets.IsVine[Type] = true;
+        TileID.Sets.ReplaceTileBreakDown[Type] = true;
+        TileID.Sets.VineThreads[Type] = true;
+        TileID.Sets.DrawFlipMode[Type] = 1;
         Main.tileCut[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileLavaDeath[Type] = false;
@@ -20,6 +25,10 @@ public class Ectovines : ModTile
         TileID.Sets.IsVine[Type] = true;
         TileID.Sets.VineThreads[Type] = true;
         AddMapEntry(new Color(18, 176, 229));
+    }
+    public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
+    {
+        offsetY = -4;
     }
 
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
