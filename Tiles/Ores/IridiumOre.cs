@@ -10,7 +10,7 @@ public class IridiumOre : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(146, 167, 123), LanguageManager.Instance.GetText("Iridium"));
+        AddMapEntry(new Color(158, 178, 108), LanguageManager.Instance.GetText("Iridium"));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;

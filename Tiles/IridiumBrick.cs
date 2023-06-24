@@ -9,7 +9,7 @@ public class IridiumBrick : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(146, 167, 123));
+        AddMapEntry(new Color(158, 178, 108));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;

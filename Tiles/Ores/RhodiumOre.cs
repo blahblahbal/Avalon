@@ -11,7 +11,7 @@ public class RhodiumOre : ModTile
     public override void SetStaticDefaults()
     {
         MineResist = 2f;
-        AddMapEntry(new Color(142, 91, 91), LanguageManager.Instance.GetText("Rhodium"));
+        AddMapEntry(new Color(187, 99, 115), LanguageManager.Instance.GetText("Rhodium"));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileBlockLight[Type] = true;
