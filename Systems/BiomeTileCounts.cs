@@ -44,6 +44,7 @@ public class BiomeTileCounts : ModSystem
                          tileCounts[ModContent.TileType<HardenedSnotsand>()] +
                          tileCounts[ModContent.TileType<Snotsandstone>()] +
                          tileCounts[ModContent.TileType<Ickgrass>()] +
+                         tileCounts[ModContent.TileType<ContagionJungleGrass>()] +
                          tileCounts[ModContent.TileType<Snotsand>()] +
                          tileCounts[ModContent.TileType<YellowIce>()];
 

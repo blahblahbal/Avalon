@@ -26,7 +26,11 @@ public class ContagionSapling : ModTile
         TileObjectData.newTile.CoordinateHeights = new int[2] { 16, 18 };
         TileObjectData.newTile.CoordinateWidth = 16;
         TileObjectData.newTile.CoordinatePadding = 2;
-        TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<Ickgrass>() };
+        TileObjectData.newTile.AnchorValidTiles = new int[]
+            {
+                ModContent.TileType<Ickgrass>(),
+                ModContent.TileType<ContagionJungleGrass>()
+            };
         TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.DrawFlipHorizontal = true;
         TileObjectData.newTile.WaterPlacement = LiquidPlacement.NotAllowed;

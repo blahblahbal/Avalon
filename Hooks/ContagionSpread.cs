@@ -41,7 +41,7 @@ namespace Avalon.Hooks
                 bool num = false;
                 int wall = Main.tile[i, j].WallType;
                 int type = Main.tile[i, j].TileType;
-                if ((wall == ModContent.WallType<ChunkstoneWall>() || wall == ModContent.WallType<ContagionLumpWallUnsafe>() || wall == ModContent.WallType<ContagionMouldWallUnsafe>() || wall == ModContent.WallType<ContagionBoilWallUnsafe>() || wall == ModContent.WallType<ContagionCystWallUnsafe>() || wall == ModContent.WallType<ContagionGrassWall>() || wall == ModContent.WallType<HardenedSnotsandWallUnsafe>() || wall == ModContent.WallType<SnotsandstoneWallUnsafe>()) || (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionShortGrass>() || type == ModContent.TileType<ContagionVines>() || type == ModContent.TileType<Snotsand>() || type == ModContent.TileType<Chunkstone>() || type == ModContent.TileType<YellowIce>() || type == ModContent.TileType<HardenedSnotsand>() || type == ModContent.TileType<Snotsandstone>()))
+                if ((wall == ModContent.WallType<ChunkstoneWall>() || wall == ModContent.WallType<ContagionLumpWallUnsafe>() || wall == ModContent.WallType<ContagionMouldWallUnsafe>() || wall == ModContent.WallType<ContagionBoilWallUnsafe>() || wall == ModContent.WallType<ContagionCystWallUnsafe>() || wall == ModContent.WallType<ContagionGrassWall>() || wall == ModContent.WallType<HardenedSnotsandWallUnsafe>() || wall == ModContent.WallType<SnotsandstoneWallUnsafe>()) || (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionJungleGrass>() || type == ModContent.TileType<ContagionShortGrass>() || type == ModContent.TileType<ContagionVines>() || type == ModContent.TileType<Snotsand>() || type == ModContent.TileType<Chunkstone>() || type == ModContent.TileType<YellowIce>() || type == ModContent.TileType<HardenedSnotsand>() || type == ModContent.TileType<Snotsandstone>()))
                 {
                     num = true;
                 }
@@ -61,7 +61,7 @@ namespace Avalon.Hooks
                             for (int num5 = j - wallDist; num5 < j + wallDist; num5++)
                             {
                                 int type2 = Main.tile[num4, num5].TileType;
-                                if (Main.tile[num4, num5].HasTile && (type2 == ModContent.TileType<Ickgrass>() || type2 == ModContent.TileType<ContagionShortGrass>() || type2 == ModContent.TileType<ContagionVines>() || type2 == ModContent.TileType<Snotsand>() || type2 == ModContent.TileType<Chunkstone>() || type2 == ModContent.TileType<YellowIce>() || type2 == ModContent.TileType<HardenedSnotsand>() || type2 == ModContent.TileType<Snotsandstone>()))
+                                if (Main.tile[num4, num5].HasTile && (type2 == ModContent.TileType<Ickgrass>() || type2 == ModContent.TileType<ContagionJungleGrass>() || type2 == ModContent.TileType<ContagionShortGrass>() || type2 == ModContent.TileType<ContagionVines>() || type2 == ModContent.TileType<Snotsand>() || type2 == ModContent.TileType<Chunkstone>() || type2 == ModContent.TileType<YellowIce>() || type2 == ModContent.TileType<HardenedSnotsand>() || type2 == ModContent.TileType<Snotsandstone>()))
                                 {
                                     flag = true;
                                     break;
@@ -109,7 +109,7 @@ namespace Avalon.Hooks
             orig.Invoke(i, j, checkNPCSpawns, wallDist);
             if (WorldGen.AllowedToSpreadInfections)
             {
-                if (Main.tile[i, j].WallType == ModContent.WallType<ContagionGrassWall>() || (Main.tile[i, j].TileType == ModContent.TileType<Ickgrass>() && Main.tile[i, j].HasTile))
+                if (Main.tile[i, j].WallType == ModContent.WallType<ContagionGrassWall>() || ((Main.tile[i, j].TileType == ModContent.TileType<Ickgrass>() || Main.tile[i, j].TileType == ModContent.TileType<ContagionJungleGrass>()) && Main.tile[i, j].HasTile))
                 {
                     int num30 = i + WorldGen.genRand.Next(-2, 3);
                     int num31 = j + WorldGen.genRand.Next(-2, 3);
@@ -123,7 +123,7 @@ namespace Avalon.Hooks
                                 if (Main.tile[num32, num33].HasTile)
                                 {
                                     int type6 = Main.tile[num32, num33].TileType;
-                                    if (type6 == ModContent.TileType<Ickgrass>() || type6 == ModContent.TileType<ContagionShortGrass>() || type6 == ModContent.TileType<ContagionVines>() || type6 == ModContent.TileType<Snotsand>() || type6 == ModContent.TileType<Chunkstone>() || type6 == ModContent.TileType<YellowIce>() || type6 == ModContent.TileType<HardenedSnotsand>() || type6 == ModContent.TileType<Snotsandstone>())
+                                    if (type6 == ModContent.TileType<Ickgrass>() || type6 == ModContent.TileType<ContagionJungleGrass>() || type6 == ModContent.TileType<ContagionShortGrass>() || type6 == ModContent.TileType<ContagionVines>() || type6 == ModContent.TileType<Snotsand>() || type6 == ModContent.TileType<Chunkstone>() || type6 == ModContent.TileType<YellowIce>() || type6 == ModContent.TileType<HardenedSnotsand>() || type6 == ModContent.TileType<Snotsandstone>())
                                     {
                                         flag4 = true;
                                         break;
@@ -149,7 +149,7 @@ namespace Avalon.Hooks
             orig.Invoke(i, j, checkNPCSpawns, wallDist);
             if (WorldGen.AllowedToSpreadInfections)
             {
-                if (Main.tile[i, j].WallType == ModContent.WallType<ContagionGrassWall>() || (Main.tile[i, j].TileType == ModContent.TileType<Ickgrass>() && Main.tile[i, j].HasTile))
+                if (Main.tile[i, j].WallType == ModContent.WallType<ContagionGrassWall>() || ((Main.tile[i, j].TileType == ModContent.TileType<Ickgrass>() || Main.tile[i, j].TileType == ModContent.TileType<ContagionJungleGrass>()) && Main.tile[i, j].HasTile))
                 {
                     int num30 = i + WorldGen.genRand.Next(-2, 3);
                     int num31 = j + WorldGen.genRand.Next(-2, 3);
@@ -163,7 +163,7 @@ namespace Avalon.Hooks
                                 if (Main.tile[num32, num33].HasTile)
                                 {
                                     int type6 = Main.tile[num32, num33].TileType;
-                                    if (type6 == ModContent.TileType<Ickgrass>() || type6 == ModContent.TileType<ContagionShortGrass>() || type6 == ModContent.TileType<ContagionVines>() || type6 == ModContent.TileType<Snotsand>() || type6 == ModContent.TileType<Chunkstone>() || type6 == ModContent.TileType<YellowIce>() || type6 == ModContent.TileType<HardenedSnotsand>() || type6 == ModContent.TileType<Snotsandstone>())
+                                    if (type6 == ModContent.TileType<Ickgrass>() || type6 == ModContent.TileType<ContagionJungleGrass>() || type6 == ModContent.TileType<ContagionShortGrass>() || type6 == ModContent.TileType<ContagionVines>() || type6 == ModContent.TileType<Snotsand>() || type6 == ModContent.TileType<Chunkstone>() || type6 == ModContent.TileType<YellowIce>() || type6 == ModContent.TileType<HardenedSnotsand>() || type6 == ModContent.TileType<Snotsandstone>())
                                     {
                                         flag4 = true;
                                         break;
@@ -192,7 +192,7 @@ namespace Avalon.Hooks
                 int type = Main.tile[i, j].TileType;
                 if ((NPC.downedPlantBoss && WorldGen.genRand.Next(2) == 0) || WorldGen.AllowedToSpreadInfections)
                 {
-                    if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionShortGrass>() || type == ModContent.TileType<ContagionVines>() || type == ModContent.TileType<Snotsand>() || type == ModContent.TileType<Chunkstone>() || type == ModContent.TileType<YellowIce>() || type == ModContent.TileType<HardenedSnotsand>() || type == ModContent.TileType<Snotsandstone>())
+                    if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionJungleGrass>() || type == ModContent.TileType<ContagionShortGrass>() || type == ModContent.TileType<ContagionVines>() || type == ModContent.TileType<Snotsand>() || type == ModContent.TileType<Chunkstone>() || type == ModContent.TileType<YellowIce>() || type == ModContent.TileType<HardenedSnotsand>() || type == ModContent.TileType<Snotsandstone>())
                     {
                         bool flag4 = true;
                         while (flag4)
@@ -214,26 +214,26 @@ namespace Avalon.Hooks
                                 WorldGen.SquareTileFrame(num15, num16);
                                 NetMessage.SendTileSquare(-1, num15, num16);
                             }
-                            if (Main.tile[num15, num16].TileType == 59)
+                            if (Main.tile[num15, num16].TileType == 60)
                             {
                                 if (WorldGen.genRand.Next(2) == 0)
                                 {
                                     flag4 = true;
                                 }
-                                Main.tile[num15, num16].TileType = TileID.Dirt;
+                                Main.tile[num15, num16].TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
                                 WorldGen.SquareTileFrame(num15, num16);
                                 NetMessage.SendTileSquare(-1, num15, num16);
                             }
-                            /*if (Main.tile[num15, num16].TileType == 60)
-                            {
-                                if (WorldGen.genRand.Next(2) == 0)
-                                {
-                                    flag4 = true;
-                                }
-                                Main.tile[num15, num16].TileType = (ushort)ModContent.TileType<Ickjunglegrass>();
-                                WorldGen.SquareTileFrame(num15, num16);
-                                NetMessage.SendTileSquare(-1, num15, num16);
-                            }*/
+                            //if (Main.tile[num15, num16].TileType == 59)
+                            //{
+                            //    if (WorldGen.genRand.Next(2) == 0)
+                            //    {
+                            //        flag4 = true;
+                            //    }
+                            //    Main.tile[num15, num16].TileType = TileID.Dirt;
+                            //    WorldGen.SquareTileFrame(num15, num16);
+                            //    NetMessage.SendTileSquare(-1, num15, num16);
+                            //}
                             else if (Main.tile[num15, num16].TileType == 1 || Main.tileMoss[Main.tile[num15, num16].TileType])
                             {
                                 if (WorldGen.genRand.Next(2) == 0)

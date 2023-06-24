@@ -38,7 +38,7 @@ public class ContagionVines : ModTile
             type = tileAbove.TileType;
         }
 
-        if (type == ModContent.TileType<Ickgrass>() || type == Type)
+        if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionJungleGrass>() || type == Type)
         {
             return true;
         }
@@ -60,7 +60,7 @@ public class ContagionVines : ModTile
                 {
                     break;
                 }
-                else if (!testTile.HasTile || testTile.TileType != ModContent.TileType<Ickgrass>())
+                else if (!testTile.HasTile || testTile.TileType != ModContent.TileType<Ickgrass>() || testTile.TileType != ModContent.TileType<ContagionJungleGrass>())
                 {
                     yTest--;
                     continue;

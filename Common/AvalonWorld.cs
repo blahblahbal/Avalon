@@ -178,18 +178,18 @@ public class AvalonWorld : ModSystem
 
             #region killing things if the block above/below isn't the necessary type
             // kill contagion vines if block above isn't contagion grass
-            if (!(Main.tile[num5, num9].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num9].TileType == ModContent.TileType<ContagionVines>()) &&
+            if (!(Main.tile[num5, num9].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num9].TileType == ModContent.TileType<ContagionJungleGrass>() || Main.tile[num5, num9].TileType == ModContent.TileType<ContagionVines>()) &&
                 Main.tile[num5, num6].TileType == ModContent.TileType<ContagionVines>())
             {
                 WorldGen.KillTile(num5, num6);
             }
             // kill contagion short grass if block below isn't contagion grass
-            if (Main.tile[num5, num6].TileType != ModContent.TileType<Ickgrass>() && Main.tile[num5, num9].TileType == ModContent.TileType<ContagionShortGrass>())
+            if ((Main.tile[num5, num6].TileType != ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType != ModContent.TileType<ContagionJungleGrass>()) && Main.tile[num5, num9].TileType == ModContent.TileType<ContagionShortGrass>())
             {
                 WorldGen.KillTile(num5, num6);
             }
             // kill barfbush if block below isn't contagion grass or chunkstone
-            if (!(Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<Chunkstone>()) &&
+            if (!(Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<Chunkstone>()) &&
                 Main.tile[num5, num9].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>())
             {
                 WorldGen.KillTile(num5, num6);
@@ -260,12 +260,12 @@ public class AvalonWorld : ModSystem
             #endregion large herb growth
 
             #region contagion shortgrass/barfbush spawning
-            if (Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>())
+            if (Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>())
             {
                 int num14 = Main.tile[num5, num6].TileType;
                 if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 &&
                     !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid &&
-                    WorldGen.genRand.NextBool(5) && num14 == ModContent.TileType<Ickgrass>())
+                    WorldGen.genRand.NextBool(5) && (num14 == ModContent.TileType<Ickgrass>() || num14 == ModContent.TileType<ContagionJungleGrass>()))
                 {
                     WorldGen.PlaceTile(num5, num9, ModContent.TileType<ContagionShortGrass>(), true);
                     Main.tile[num5, num9].TileFrameX = (short)(WorldGen.genRand.Next(0, 11) * 18);
@@ -281,7 +281,7 @@ public class AvalonWorld : ModSystem
                     }
                 }
 
-                if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 && !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid && WorldGen.genRand.NextBool(num6 > Main.worldSurface ? 500 : 200) && num14 == ModContent.TileType<Ickgrass>())
+                if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 && !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid && WorldGen.genRand.NextBool(num6 > Main.worldSurface ? 500 : 200) && (num14 == ModContent.TileType<Ickgrass>() || num14 == ModContent.TileType<ContagionJungleGrass>()))
                 {
                     WorldGen.PlaceTile(num5, num9, ModContent.TileType<Tiles.Herbs.Barfbush>(), true, false, -1, 0);
                     if (Main.tile[num5, num9].HasTile)
@@ -301,19 +301,23 @@ public class AvalonWorld : ModSystem
                     {
                         if ((num5 != m || num6 != n) && Main.tile[m, n].HasTile)
                         {
-                            if (Main.tile[m, n].TileType == 0 || (num14 == ModContent.TileType<Ickgrass>() && Main.tile[m, n].TileType == TileID.Grass))
+                            if (Main.tile[m, n].TileType == 0 || ((num14 == ModContent.TileType<Ickgrass>() || num14 == ModContent.TileType<ContagionJungleGrass>()) && Main.tile[m, n].TileType == TileID.Grass))
                             {
                                 TileColorCache color = Main.tile[num5, num6].BlockColorAndCoating();
                                 WorldGen.SpreadGrass(m, n, 0, num14, false, color);
-                                if (num14 == ModContent.TileType<Ickgrass>())
+                                if (num14 == ModContent.TileType<Ickgrass>() || num14 == ModContent.TileType<ContagionJungleGrass>())
                                 {
-                                    WorldGen.SpreadGrass(m, n, TileID.Grass, num14, false, color);
+                                    WorldGen.SpreadGrass(m, n, TileID.Grass, ModContent.TileType<Ickgrass>(), false, color);
                                 }
-                                if (num14 == ModContent.TileType<Ickgrass>())
+                                if (num14 == ModContent.TileType<Ickgrass>() || num14 == ModContent.TileType<ContagionJungleGrass>())
                                 {
-                                    WorldGen.SpreadGrass(m, n, TileID.HallowedGrass, num14, false, color);
+                                    WorldGen.SpreadGrass(m, n, TileID.JungleGrass, ModContent.TileType<ContagionJungleGrass>(), false, color);
                                 }
-                                if (Main.tile[m, n].TileType == num14)
+                                if (num14 == ModContent.TileType<Ickgrass>() || num14 == ModContent.TileType<ContagionJungleGrass>())
+                                {
+                                    WorldGen.SpreadGrass(m, n, TileID.HallowedGrass, ModContent.TileType<Ickgrass>(), false, color);
+                                }
+                                if (Main.tile[m, n].TileType == ModContent.TileType<Ickgrass>() || Main.tile[m, n].TileType == ModContent.TileType<ContagionJungleGrass>())
                                 {
                                     WorldGen.SquareTileFrame(m, n, true);
                                     flag2 = true;
@@ -380,6 +384,7 @@ public class AvalonWorld : ModSystem
 
             #region contagion vines growing
             if ((Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() ||
+                 Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>() ||
                  Main.tile[num5, num6].TileType == ModContent.TileType<ContagionVines>()) &&
                 WorldGen.genRand.NextBool(15) && !Main.tile[num5, num6 + 1].HasTile &&
                 Main.tile[num5, num6 + 1].LiquidType != LiquidID.Lava)
@@ -394,7 +399,8 @@ public class AvalonWorld : ModSystem
                     }
 
                     if (Main.tile[num5, num47].HasTile &&
-                        Main.tile[num5, num47].TileType == ModContent.TileType<Ickgrass>() &&
+                        (Main.tile[num5, num47].TileType == ModContent.TileType<Ickgrass>() ||
+                         Main.tile[num5, num47].TileType == ModContent.TileType<ContagionJungleGrass>()) &&
                         !Main.tile[num5, num47].BottomSlope)
                     {
                         flag10 = true;
@@ -803,6 +809,10 @@ public class AvalonWorld : ModSystem
                 {
                     tile.TileType = TileID.Grass;
                 }
+                if (type == ModContent.TileType<ContagionJungleGrass>())
+                {
+                    tile.TileType = TileID.JungleGrass;
+                }
                 else if (type == ModContent.TileType<YellowIce>())
                 {
                     tile.TileType = TileID.IceBlock;
@@ -848,7 +858,7 @@ public class AvalonWorld : ModSystem
             }
             if (Main.tile[x, y] != null)
             {
-                if (type == ModContent.TileType<Ickgrass>() || type == TileID.CrimsonGrass || type == TileID.CorruptGrass || type == TileID.Grass || type == TileID.HallowedGrass)
+                if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionJungleGrass>() || type == TileID.CrimsonGrass || type == TileID.CrimsonJungleGrass || type == TileID.CorruptGrass || type == TileID.CorruptJungleGrass || type == TileID.Grass || type == TileID.HallowedGrass)
                 {
                     tile.TileType = TileID.JungleGrass;
                 }
@@ -926,6 +936,10 @@ public class AvalonWorld : ModSystem
                 {
                     tile.TileType = (ushort)ModContent.TileType<Ickgrass>();
                 }
+                if (TileID.Sets.Conversion.JungleGrass[type] && type != ModContent.TileType<ContagionJungleGrass>())
+                {
+                    tile.TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
+                }
                 else if (TileID.Sets.Conversion.Ice[type] && type != ModContent.TileType<YellowIce>())
                 {
                     tile.TileType = (ushort)ModContent.TileType<YellowIce>();
@@ -997,6 +1011,7 @@ public class AvalonWorld : ModSystem
         WorldGen.totalSolid2 +=
             WorldGen.tileCounts[ModContent.TileType<Chunkstone>()] +
             WorldGen.tileCounts[ModContent.TileType<Ickgrass>()] +
+            WorldGen.tileCounts[ModContent.TileType<ContagionJungleGrass>()] +
             WorldGen.tileCounts[ModContent.TileType<Snotsand>()] +
             WorldGen.tileCounts[ModContent.TileType<YellowIce>()] +
             WorldGen.tileCounts[ModContent.TileType<Snotsandstone>()] +
@@ -1080,6 +1095,7 @@ public class AvalonWorld : ModSystem
         ContagionCountCollection = new List<int> {
                 ModContent.TileType<Chunkstone>(),
                 ModContent.TileType<Ickgrass>(),
+                ModContent.TileType<ContagionJungleGrass>(),
                 ModContent.TileType<Snotsand>(),
                 ModContent.TileType<YellowIce>(),
                 ModContent.TileType<Snotsandstone>(),

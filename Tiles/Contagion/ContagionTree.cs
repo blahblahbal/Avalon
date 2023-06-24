@@ -21,7 +21,11 @@ public class ContagionTree : ModTree
 
     public override void SetStaticDefaults()
     {
-        GrowsOnTileId = new int[1] { ModContent.TileType<Ickgrass>() };
+        GrowsOnTileId = new int[]
+            {
+                ModContent.TileType<Ickgrass>(),
+                ModContent.TileType<ContagionJungleGrass>()
+            };
     }
 
     public override int CreateDust()

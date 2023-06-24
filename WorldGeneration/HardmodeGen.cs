@@ -255,7 +255,7 @@ public class HardmodeGen : ModSystem
                     }
                     else if (Main.tile[m, n].TileType == 661 || Main.tile[m, n].TileType == 662 || Main.tile[m, n].TileType == 60)
                     {
-                        Main.tile[m, n].TileType = 60; //Jungle Grass, put contagion jungle grass here when done
+                        Main.tile[m, n].TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
                         WorldGen.SquareTileFrame(m, n); 
                     }
                     else if (Main.tile[m, n].TileType == 23 || Main.tile[m, n].TileType == 199)
