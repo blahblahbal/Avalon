@@ -24,6 +24,11 @@ public class VirulentPowder : ModProjectile
         Projectile.ignoreWater = true;
     }
 
+    public override bool? CanCutTiles()
+    {
+        return false;
+    }
+
     public override void AI()
     {
         if (Projectile.ai[1] <= 1f)
