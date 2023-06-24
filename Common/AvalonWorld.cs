@@ -77,6 +77,19 @@ public class AvalonWorld : ModSystem
     public static GoldVariant GoldOre = GoldVariant.Random;
     public static RhodiumVariant? RhodiumOre { get; set; }
 
+    public static int totalSick; //Amount of Tiles 
+    public static int totalSick2; //Amount of tiles calculated again
+    public static byte tSick; //Percent of world is infected
+    public static int[] NewTileCounts = new int[TileLoader.TileCount]; //to account for all new modded tiles and not just the vanilla tile amount
+
+    public override void OnWorldUnload() //Here we reset the numbers for the calculations to make sure they dont carry over to other worlds
+    {
+        totalSick = 0;
+        totalSick2 = 0;
+        tSick = 0;
+        //Im not too fimiliar how contagion world tags work but imo it would be best if it was reset in an OnWorldUnload and OnWorldLoad somewhere
+    }
+
     public override void SaveWorldData(TagCompound tag)
     {
         tag["RhodiumOre"] = (byte?)RhodiumOre;
@@ -109,6 +122,11 @@ public class AvalonWorld : ModSystem
         }
 
         WorldEvil = (WorldEvil)(tag.Get<byte?>("WorldEvil") ?? WorldGen.WorldGenParam_Evil);
+
+        for (var i = 0; i < Main.tile.Width; ++i)
+            for (var j = 0; j < Main.tile.Height; ++j)
+                if (ContagionCountCollection.Contains(Main.tile[i, j].TileType)) //Better calculations, this is only loaded when the world is loaded
+                    totalSick2++;                                                //to make sure that the world doesn't lag when calculating normally
     }
 
     /// <inheritdoc />
@@ -953,13 +971,124 @@ public class AvalonWorld : ModSystem
     public override void Load()
     {
         Terraria.GameContent.UI.States.On_UIWorldSelect.UpdateWorldsList += On_UIWorldSelect_UpdateWorldsList;
+        On_WorldGen.CountTiles += On_WorldGen_CountTiles;
+        On_WorldGen.AddUpAlignmentCounts += On_WorldGen_AddUpAlignmentCounts;
     }
 
     public override void Unload()
     {
         Terraria.GameContent.UI.States.On_UIWorldSelect.UpdateWorldsList -= On_UIWorldSelect_UpdateWorldsList;
+        On_WorldGen.CountTiles -= On_WorldGen_CountTiles;
+        On_WorldGen.AddUpAlignmentCounts -= On_WorldGen_AddUpAlignmentCounts;
     }
 
+    #region World%Calculations
+    private void On_WorldGen_AddUpAlignmentCounts(On_WorldGen.orig_AddUpAlignmentCounts orig, bool clearCounts)
+    {
+        orig.Invoke(clearCounts);
+        if (clearCounts)
+        {
+            totalSick2 = 0;
+        }
+        /*for (int i = 0; i < ContagionCountCollection.Count; i++) {
+            totalSick2 += WorldGen.tileCounts[ContagionCountCollection[i]]; //Vanilla's way of calulating the tiles, we dont use this due to falws 
+        }*/
+
+        WorldGen.totalSolid2 +=
+            WorldGen.tileCounts[ModContent.TileType<Chunkstone>()] +
+            WorldGen.tileCounts[ModContent.TileType<Ickgrass>()] +
+            WorldGen.tileCounts[ModContent.TileType<Snotsand>()] +
+            WorldGen.tileCounts[ModContent.TileType<YellowIce>()] +
+            WorldGen.tileCounts[ModContent.TileType<Snotsandstone>()] +
+            WorldGen.tileCounts[ModContent.TileType<HardenedSnotsand>()];
+
+        Array.Clear(WorldGen.tileCounts, 0, WorldGen.tileCounts.Length);
+    }
+
+    private void On_WorldGen_CountTiles(On_WorldGen.orig_CountTiles orig, int X)
+    {
+        orig.Invoke(X);
+        if (X == 0)
+        {
+            totalSick = totalSick2;
+            tSick = (byte)Math.Round((double)totalSick / (double)WorldGen.totalSolid * 100.0);
+            if (tSick == 0 && totalSick > 0)
+            {
+                tSick = 1;
+            }
+            if (Main.netMode == 2)
+            {
+                NetMessage.SendData(MessageID.TileCounts);
+            }
+            totalSick2 = 0;
+        }
+        ushort num = 0;
+        ushort num2 = 0;
+        int num3 = 0;
+        int num4 = 0;
+        int num5 = 0;
+        do
+        {
+            int num6;
+            int num7;
+            if (num4 == 0)
+            {
+                num6 = 0;
+                num5 = (int)(Main.worldSurface + 1.0);
+                num7 = 5;
+            }
+            else
+            {
+                num6 = num5;
+                num5 = Main.maxTilesY;
+                num7 = 1;
+            }
+            for (int i = num6; i < num5; i++)
+            {
+                Tile tile = Main.tile[X, i];
+                if (tile == null)
+                {
+                    Tile TILE = Main.tile[X, i];
+                    tile = (TILE = new Tile());
+                }
+                num = tile.TileType;
+                if (num != 0 || tile.HasTile)
+                {
+                    if (num == num2)
+                    {
+                        num3 += num7;
+                        continue;
+                    }
+                    NewTileCounts[num2] += num3;
+                    num2 = num;
+                    num3 = num7;
+                }
+            }
+            NewTileCounts[num2] += num3;
+            num3 = 0;
+            num4++;
+        }
+        while (num4 < 2);
+        WorldGen.AddUpAlignmentCounts();
+    }
+
+    public static List<int> ContagionCountCollection; //Our own TileID.Sets for the tiles that are counted towards world %
+                                                      //Note: (MUST HAVE THE SAME TILES AS On_WorldGen_AddUpAlignmentCounts SOLID TILE ADD UP SECTION!!!)
+
+    public override void PostSetupContent()
+    {
+        ContagionCountCollection = new List<int> {
+                ModContent.TileType<Chunkstone>(),
+                ModContent.TileType<Ickgrass>(),
+                ModContent.TileType<Snotsand>(),
+                ModContent.TileType<YellowIce>(),
+                ModContent.TileType<Snotsandstone>(),
+                ModContent.TileType<HardenedSnotsand>()
+            };
+    }
+    #endregion
+
+    #region WorldIconOverlay
     private void On_UIWorldSelect_UpdateWorldsList(Terraria.GameContent.UI.States.On_UIWorldSelect.orig_UpdateWorldsList orig, Terraria.GameContent.UI.States.UIWorldSelect self)
     {
         orig(self);
@@ -1187,4 +1316,5 @@ public class AvalonWorld : ModSystem
         }
         (affectedElement as UIImageFramed).SetFrame(7, 16, _glitchVariation, _glitchFrame, 0, 0);
     }
+    #endregion
 }

@@ -5580,6 +5580,17 @@ Mods: {
 			}
 		}
 
+		DryadSpecialText: {
+			WorldStatusAll: "{0} is {1}% hallow, {2}% corrupt, {3}% crimson, and {4}% contagion."
+			WorldStatusHallowCorruptSick: "{0} is {1}% hallow, {2}% corrupt, and {3}% contagion."
+			WorldStatusHallowCrimsonSick: "{0} is {1}% hallow, {2}% confected, and {3}% crimson."
+			WorldStatusCorruptCrimsonSick: "{0} is {1}% corrupt, {2}% crimson, and {3}% contagion."
+			WorldStatusCorruptSick: "{0} is {1}% corrupt and {2}% contagion."
+			WorldStatusCrimsonSick: "{0} is {1}% crimson and {2}% contagion."
+			WorldStatusHallowSick: "{0} is {1}% hallow and {2}% contagion."
+			WorldStatusSick: "{0} is {1}% contagion."
+		}
+
 		Configs: {
 			AvalonClientConfig: {
 				DisplayName: Avalon Client Config

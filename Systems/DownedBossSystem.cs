@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -85,6 +85,8 @@ public class DownedBossSystem : ModSystem
             [7] = DownedArmageddon
         };
         writer.Write(flags);
+
+        writer.Write(Common.AvalonWorld.tSick); //Putting this here since NetSend and NetRecieve are never used anywhere else
     }
 
     public override void NetReceive(BinaryReader reader)
@@ -98,5 +100,7 @@ public class DownedBossSystem : ModSystem
         DownedOblivion = flags[5];
         DownedKingSting = flags[6];
         DownedArmageddon = flags[7];
+
+        Common.AvalonWorld.tSick = reader.ReadByte();
     }
 }
