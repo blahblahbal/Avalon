@@ -20,7 +20,6 @@ public class ContagionJungleGrass : ModTile
         //TileID.Sets.DoesntPlaceWithTileReplacement[Type] = true;
         //TileID.Sets.SpreadOverground[Type] = true;
         //TileID.Sets.SpreadUnderground[Type] = true;
-        TileID.Sets.Grass[Type] = true;
         //TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
         RegisterItemDrop(ItemID.MudBlock);
     }

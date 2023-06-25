@@ -23,6 +23,12 @@ public class VirulentPowder : ModProjectile
         Projectile.alpha = 255;
         Projectile.ignoreWater = true;
     }
+    public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+    {
+        width = Projectile.width + 32;
+        height = Projectile.height + 32;
+        return true;
+    }
 
     public override bool? CanCutTiles()
     {
@@ -38,7 +44,7 @@ public class VirulentPowder : ModProjectile
             int num90 = 30;
             for (int num91 = 0; num91 < num90; num91++)
             {
-                float randVel = Main.rand.NextFloat(1f, 2f);
+                float randVel = Main.rand.NextFloat(1f, 1.75f);
                 Dust dust7 = Main.dust[Dust.NewDust(Entity.position, Entity.width, Entity.height, dustType, Entity.velocity.X * randVel, Entity.velocity.Y * randVel, 50)];
                 dust7.noGravity = true;
             }
@@ -72,7 +78,7 @@ public class VirulentPowder : ModProjectile
             {
                 vector57.X = num1032 * 16;
                 vector57.Y = num1043 * 16;
-                if (!(Projectile.position.X + Projectile.width > vector57.X) || !(Projectile.position.X < vector57.X + 16f) || !(Projectile.position.Y + Projectile.height > vector57.Y) || !(Projectile.position.Y < vector57.Y + 16f))
+                if (!(Projectile.position.X + (Projectile.width + 32) > vector57.X) || !(Projectile.position.X - (Projectile.width + 32) < vector57.X + 16f) || !(Projectile.position.Y + (Projectile.height + 32) > vector57.Y) || !(Projectile.position.Y - (Projectile.height + 32) < vector57.Y + 16f))
                 {
                     continue;
                 }
