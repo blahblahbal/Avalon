@@ -9,6 +9,7 @@ using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
 using Avalon.Particles;
+using Avalon.Projectiles.Melee;
 
 namespace Avalon.Projectiles.Magic;
 
@@ -168,27 +169,30 @@ public class Boomlash : ModProjectile
     public override void Kill(int timeLeft)
     {
         ParticleSystem.AddParticle(new ExplosionParticle(), Projectile.Center, Vector2.Zero, default,Main.rand.NextFloat(MathHelper.TwoPi),Main.rand.NextFloat(0.9f,1.2f));
-        if (Projectile.penetrate == 1)
+        //if (Projectile.penetrate == 1)
+        //{
+        //    Projectile.maxPenetrate = -1;
+        //    Projectile.penetrate = -1;
+
+        //    int explosionArea = 60;
+        //    Vector2 oldSize = Projectile.Size;
+        //    Projectile.position = Projectile.Center;
+        //    Projectile.Size += new Vector2(explosionArea);
+        //    Projectile.Center = Projectile.position;
+
+        //    Projectile.tileCollide = false;
+        //    Projectile.velocity *= 0.01f;
+        //    Projectile.Damage();
+        //    Projectile.scale = 0.01f;
+
+        //    Projectile.position = Projectile.Center;
+        //    Projectile.Size = new Vector2(10);
+        //    Projectile.Center = Projectile.position;
+        //}
+        if (Main.myPlayer == Projectile.owner)
         {
-            Projectile.maxPenetrate = -1;
-            Projectile.penetrate = -1;
-
-            int explosionArea = 60;
-            Vector2 oldSize = Projectile.Size;
-            Projectile.position = Projectile.Center;
-            Projectile.Size += new Vector2(explosionArea);
-            Projectile.Center = Projectile.position;
-
-            Projectile.tileCollide = false;
-            Projectile.velocity *= 0.01f;
-            Projectile.Damage();
-            Projectile.scale = 0.01f;
-
-            Projectile.position = Projectile.Center;
-            Projectile.Size = new Vector2(10);
-            Projectile.Center = Projectile.position;
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
         }
-
         SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode, Projectile.position);
 
         for (int i = 0; i < 10; i++)
