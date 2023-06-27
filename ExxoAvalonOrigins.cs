@@ -10,6 +10,12 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.Graphics;
+using static Terraria.Graphics.FinalFractalHelper;
+using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.Hardmode;
+using Microsoft.Xna.Framework;
+using System.Reflection;
 
 namespace Avalon;
 
@@ -43,6 +49,23 @@ public class ExxoAvalonOrigins : Mod
     //internal StatDisplayUIState statDisplay;
     public override void Load()
     {
+        //Additional swords to the zenith's projectiles with both their texture, size and trail color
+        var fractalProfiles = (Dictionary<int, FinalFractalProfile>)typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+
+        fractalProfiles.Add(ItemID.GoldBroadsword, new FinalFractalProfile(50f, new Color(203, 179, 73))); //Add the Gold Broadsword with a gold trail at 50f the size, would reccomend to look at the dictionary that we are reflecting before adding any swords to know what size and trail color to do
+        fractalProfiles.Add(ItemID.PlatinumBroadsword, new FinalFractalProfile(50f, new Color(181, 194, 217)));
+        fractalProfiles.Add(ModContent.ItemType<BismuthBroadsword>(), new FinalFractalProfile(50f, new Color(199, 157, 216)));
+        fractalProfiles.Add(ItemID.IceBlade, new FinalFractalProfile(48f, new Color(54, 232, 252)));
+        fractalProfiles.Add(ItemID.AntlionClaw, new FinalFractalProfile(40f, new Color(233, 174, 78)));
+        fractalProfiles.Add(ModContent.ItemType<DesertLongsword>(), new FinalFractalProfile(48f, new Color(220, 214, 137)));
+        fractalProfiles.Add(ModContent.ItemType<MinersSword>(), new FinalFractalProfile(40f, new Color(51, 235, 203)));
+        fractalProfiles.Add(ModContent.ItemType<IridiumGreatsword>(), new FinalFractalProfile(70f, new Color(165, 209, 148)));
+        fractalProfiles.Add(ModContent.ItemType<OsmiumGreatsword>(), new FinalFractalProfile(70f, new Color(43, 186, 217)));
+        fractalProfiles.Add(ModContent.ItemType<RhodiumGreatsword>(), new FinalFractalProfile(70f, new Color(176, 42, 82)));
+        fractalProfiles.Add(ModContent.ItemType<AeonsEternity>(), new FinalFractalProfile(50f, new Color(0, 155, 251)));
+        fractalProfiles.Add(ModContent.ItemType<Snotsabre>(), new FinalFractalProfile(70f, new Color(115, 159, 109)));
+        fractalProfiles.Add(ModContent.ItemType<VertexOfExcalibur>(), new FinalFractalProfile(80f, new Color(120, 109, 204)));
+
         // ----------- Server/Client ----------- //
         while (ModHook.RegisteredHooks.TryDequeue(out ModHook? hook))
         {
@@ -74,6 +97,22 @@ public class ExxoAvalonOrigins : Mod
     }
     public override void Unload()
     {
+        var fractalProfiles = (Dictionary<int, FinalFractalProfile>)typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+
+        fractalProfiles.Remove(ItemID.GoldBroadsword);
+        fractalProfiles.Remove(ItemID.PlatinumBroadsword);
+        fractalProfiles.Remove(ModContent.ItemType<BismuthBroadsword>());
+        fractalProfiles.Remove(ItemID.IceBlade);
+        fractalProfiles.Remove(ItemID.AntlionClaw);
+        fractalProfiles.Remove(ModContent.ItemType<DesertLongsword>());
+        fractalProfiles.Remove(ModContent.ItemType<MinersSword>());
+        fractalProfiles.Remove(ModContent.ItemType<IridiumGreatsword>());
+        fractalProfiles.Remove(ModContent.ItemType<OsmiumGreatsword>());
+        fractalProfiles.Remove(ModContent.ItemType<RhodiumGreatsword>());
+        fractalProfiles.Remove(ModContent.ItemType<AeonsEternity>());
+        fractalProfiles.Remove(ModContent.ItemType<Snotsabre>());
+        fractalProfiles.Remove(ModContent.ItemType<VertexOfExcalibur>());
+
         Mod = null;
         AvalonReflection.Unload();
     }
