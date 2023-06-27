@@ -35,23 +35,23 @@ public class AvalonMenu : ModMenu
         }
     }
 
-    int WhatMusic = MusicID.MenuMusic;
+    //int WhatMusic = MusicID.MenuMusic;
 
-    int[] MusicChoices =
-    {
-        MusicID.MenuMusic,
-        MusicID.ConsoleMenu,
-        MusicID.Title
-    };
-    public override void OnSelected()
-    {
-        WhatMusic = MusicChoices[Main.rand.Next(3)];
-        if (DateTime.Now.Month == 4 && DateTime.Now.Day == 1)
-        {
-            WhatMusic = MusicID.Hell;
-        }
-    }
-    public override int Music => WhatMusic;
+    //int[] MusicChoices =
+    //{
+    //    MusicID.MenuMusic,
+    //    MusicID.ConsoleMenu,
+    //    MusicID.Title
+    //};
+    //public override void OnSelected()
+    //{
+    //    WhatMusic = MusicChoices[Main.rand.Next(3)];
+    //    if (DateTime.Now.Month == 4 && DateTime.Now.Day == 1)
+    //    {
+    //        WhatMusic = MusicID.Hell;
+    //    }
+    //}
+    //public override int Music => WhatMusic;
     public override void Load()
     {
         base.Load();

@@ -41,8 +41,8 @@ public class VertexOfExcalibur : ModItem
     {
 
         float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
-        Projectile.NewProjectile(source, player.MountedCenter, velocity, type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir * 0.08f, 30, adjustedItemScale5 * 1.1f);
-        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, 0, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax, adjustedItemScale5 * 1.1f);
+        Projectile.NewProjectile(source, player.MountedCenter, velocity, type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir * 0.08f, 40, adjustedItemScale5 * 1.3f);
+        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, 0, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax, adjustedItemScale5 * 1.4f);
         NetMessage.SendData(13, -1, -1, null, player.whoAmI);
         return false;
     }

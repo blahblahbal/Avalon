@@ -1,3 +1,4 @@
+using Avalon.Particles;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -85,9 +86,12 @@ namespace Avalon.Projectiles.Ranged
             {
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage / 2, 0, Projectile.owner);
             }
+            if (Projectile.ai[1] == 0)
+            ParticleSystem.AddParticle(new CrystalSparkle(), Projectile.Center + Vector2.Normalize(Projectile.velocity) * 20f, Vector2.Zero, default);
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
+            Projectile.ai[1] = 1;
             int[] DustsGlow = {DustID.IceTorch, DustID.HallowedTorch, DustID.WhiteTorch };
             int[] Dusts = { DustID.BlueCrystalShard, DustID.PinkCrystalShard, DustID.PurpleCrystalShard };
             for (int i = 0; i < 10; i++)
