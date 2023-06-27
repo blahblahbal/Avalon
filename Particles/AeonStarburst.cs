@@ -39,7 +39,7 @@ namespace Avalon.Particles
             Vector2 DrawPos = Position - Main.screenPosition;
             for (int i = 0; i < 5; i++)
             {
-                spriteBatch.Draw(texture, DrawPos, frame, Color.Lerp(new Color(255, 255, 128, 0), new Color(128, 255, 255, 0),(float)TimeInWorld / 20f) * 0.3f, i * 1.25664f, frameOrigin, new Vector2(1.9f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.2f) * 2f), SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, DrawPos, frame, Color.Lerp(new Color(255, 255, 128, 0), new Color(128, 255, 255, 0),(float)TimeInWorld / 20f) * 0.5f, i * 1.25664f, frameOrigin, new Vector2(1.9f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.2f) * 2f), SpriteEffects.None, 0);
 
                 spriteBatch.Draw(texture, DrawPos, frame, new Color(255,255,255,0) * 0.2f, i * 1.25664f, frameOrigin, new Vector2(1.5f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.2f) * 1.7f), SpriteEffects.None, 0);
 
