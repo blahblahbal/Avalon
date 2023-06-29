@@ -13,16 +13,23 @@ public class VertexSlash : EnergySlashTemplate
     {
         if (Math.Abs(Projectile.ai[0]) > 0.2f)
         {
-            DrawSlash(new Color(255, 255, 255, 0) * 0.7f, new Color(0, 0, 0, 200) * 0.6f, new Color(0, 0, 0, 200) * 0.5f, new Color(255, 255, 255, 0) * 0.2f, 0, 1f, 0.78f, -MathHelper.Pi / 12, 0, true);
+            DrawSlash(new Color(255, 255, 255, 0) * 0.7f, new Color(0, 0, 0, 200) * 0.6f, new Color(0, 0, 0, 200) * 0.5f, new Color(255, 255, 255, 0) * 0.2f, 0, 1f, 0.78f, -MathHelper.Pi / 24, 0, true);
 
-            DrawSlash(new Color(255,215,64,64) * 0.9f, new Color(200,0,180,64) * 0.9f, new Color(255, 128, 0, 128) * 1f, Color.Wheat * 0.2f, 0, 0.8f, 0, -MathHelper.Pi / 12, 0, true);
+            DrawSlash(new Color(255,215,64,255), new Color(200,0,180,200), new Color(255, 128, 0, 200), Color.Wheat * 0.2f, 0, 0.8f, 0, -MathHelper.Pi / 24, 0, true);
+
+            DrawSlash(new Color(255, 255, 255, 0) * 0.2f, new Color(255, 255, 255, 0) * 0.2f, new Color(255, 255, 255, 0) * 0.1f, new Color(255, 255, 255, 0) * 0.2f, 0, 0.8f, 0.78f, -MathHelper.Pi / 6, 0, true);
         }
         else
         {
-            float num = Projectile.localAI[0] / Projectile.ai[1];
+            //float num = Projectile.localAI[0] / Projectile.ai[1];
+            //DrawSlash(new Color(0, 0, 0, 255), new Color(0, 0, 0, 200), new Color(0, 0, 0, 200), new Color(0, 0, 0, 128), 128, 1f, 0.78f, -MathHelper.Pi / 6, 0, true);
+            //DrawSlash(new Color(0, 0, 0, 255), new Color(0, 0, 0, 200), new Color(0, 0, 0, 200), new Color(0, 0, 0, 128), 128, 1.1f, 0f, -MathHelper.Pi / 6, 0, true);
 
-            //DrawSlash(new Color(255,255,255,0) * 0.5f, new Color(0, 0, 0, 255) * 0.5f, new Color(0, 0, 0, 200) * 0.5f, new Color(255, 255, 255, 0) * 0.2f, 0, 1f, 0f, 0, 0, true);
-            DrawSlash(new Color(255, 255, 255, 0) * 0.5f * num, new Color(0, 0, 0, 255) * 0.5f * num, new Color(0, 0, 0, 200) * 0.5f * num, new Color(255, 255, 255, 0) * 0.5f, 0, 1f, 0f, 0, 0, true);
+            DrawSlash(new Color(255, 255, 255, 0) * 0.7f, new Color(0, 0, 0, 200) * 0.6f, new Color(0, 0, 0, 200) * 0.5f, new Color(255, 255, 255, 0) * 0.2f, 0, 1f, 0.78f, -MathHelper.Pi / 24, 0, true);
+
+            DrawSlash(new Color(255, 215, 64, 255), new Color(200, 0, 180, 200), new Color(255, 128, 0, 200), Color.Wheat * 0.2f, 0, 0.8f, 0, -MathHelper.Pi / 24, 0, true);
+
+            DrawSlash(new Color(255, 255, 255, 0) * 0.2f, new Color(255, 255, 255, 0) * 0.2f, new Color(255, 255, 255, 0) * 0.1f, new Color(255, 255, 255, 0) * 0.2f, 0, 0.8f, 0.78f, -MathHelper.Pi / 6, 0, true);
         }
         //if (Math.Abs(Projectile.ai[0]) > 0.2f)
         //{
@@ -40,9 +47,9 @@ public class VertexSlash : EnergySlashTemplate
         if (Math.Abs(num2) < 0.2f)
         {
                 
-            Projectile.rotation += (float)Math.PI * 4f * num2 * 10f * num;
+            Projectile.rotation += (float)Math.PI * 6f * num2 * 10f * num;
             float num7 = Utils.Remap(Projectile.localAI[0], 10f, Projectile.ai[1] - 5f, 0f, 1f);
-            Projectile.position += Projectile.velocity.SafeNormalize(Vector2.Zero) * (120f * num7);
+            Projectile.position += Projectile.velocity.SafeNormalize(Vector2.Zero) * (240 * num7);
             Projectile.scale += num7 * 0.7f;
         }
         else

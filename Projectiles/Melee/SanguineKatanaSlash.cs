@@ -1,8 +1,10 @@
 using System;
 using Avalon.Common.Templates;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 
@@ -48,13 +50,16 @@ public class SanguineKatanaSlash : EnergySlashTemplate
                 Projectile.penetrate = 100;
             }
         }
-        for (int i = 0; i < 15; i++)
-        {
-            int num15 = Dust.NewDust(Main.rand.NextVector2FromRectangle(target.Hitbox), 0, 0, DustID.Blood, 0, 0, 140, default(Color), 2f);
-            Main.dust[num15].fadeIn = 1.2f;
-            Main.dust[num15].noGravity = true;
-            Main.dust[num15].velocity = Main.rand.NextVector2Circular(6, 6);
-        }
+        //for (int i = 0; i < 15; i++)
+        //{
+        //    int num15 = Dust.NewDust(Main.rand.NextVector2FromRectangle(target.Hitbox), 0, 0, DustID.Blood, 0, 0, 140, default(Color), 2f);
+        //    Main.dust[num15].fadeIn = 1.2f;
+        //    Main.dust[num15].noGravity = true;
+        //    Main.dust[num15].velocity = Main.rand.NextVector2Circular(6, 6);
+        //}
+        Vector2 vector = Main.rand.NextVector2FromRectangle(target.Hitbox);
+        SoundEngine.PlaySound(SoundID.NPCHit1,target.position);
+        ParticleSystem.AddParticle(new SanguineCuts(), vector - new Vector2(0,24), new Vector2(Main.rand.NextFloat(-0.5f,0.5f),1), default,Main.rand.Next(12,24));
     }
     public override void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawpos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness)
     {

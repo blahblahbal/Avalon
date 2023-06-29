@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Avalon.Common.Templates;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -23,7 +24,7 @@ public class ClearCutterSlash : EnergySlashTemplate
         Color Color1 = ClassExtensions.CycleThroughColors(Colors,60) * 0.3f;
         Color1.A = 64;
         DrawSlash(Color1, Color1 * 0.8f, Color1 * 0.6f, Color.Lerp(Color1,Color.White,0.5f), 0, 1.1f, 0, -0.2f, -0.3f, true);
-        DrawSlash(Color1, Color1 * 0.3f, Color.Transparent, Color.Lerp(Color1, Color.White, 0.5f), 0, 0.9f, 0, -0.2f, -0.3f, false);
+        DrawSlash(Color1, Color1 * 0.3f, Color.Transparent,Color.Transparent, 0, 0.9f, 0, -0.2f, -0.3f, false);
 
         return false;
     }
@@ -54,6 +55,7 @@ public class ClearCutterSlash : EnergySlashTemplate
         //    settings.MovementVector = Main.rand.NextVector2Circular(6, 6);
         //    ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.SilverBulletSparkle, settings);
         //}
+        ParticleSystem.AddParticle(new CrystalSparkle(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, default);
         for (int i = 0; i < Main.rand.Next(1, 3); i++)
         {
             settings.MovementVector = Vector2.Zero;
@@ -62,7 +64,8 @@ public class ClearCutterSlash : EnergySlashTemplate
             if (Main.myPlayer == Projectile.owner)
             {
                 settings.PositionInWorld = Main.MouseWorld + new Vector2(0, Dist).RotatedBy(rand);
-                ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.Excalibur, settings);
+                //ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.Excalibur, settings);
+                ParticleSystem.AddParticle(new CrystalSparkle(), settings.PositionInWorld, Vector2.Zero, default,1);
                 Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), settings.PositionInWorld, new Vector2(0, 30).RotatedBy(rand), ProjectileID.StarCloakStar, (int)(Projectile.damage * 0.4f), Projectile.knockBack, Projectile.owner, 0, target.position.Y);
             }
         }

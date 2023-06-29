@@ -1601,6 +1601,7 @@ Mods: {
 					'''
 					Uses 2 life 
 					Returns life on hit
+					'There will be blood!'
 					'''
 			}
 

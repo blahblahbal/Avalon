@@ -8,6 +8,8 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
+using Avalon.Particles;
+using Avalon.Projectiles.Melee;
 
 namespace Avalon.Projectiles.Magic;
 
@@ -21,18 +23,20 @@ public class Boomlash : ModProjectile
     }
     public override void SetDefaults()
     {
-        Projectile.width = 10;
-        Projectile.height = 10;
-        Projectile.friendly = true;
-        Projectile.light = 0.8f;
+        Projectile.CloneDefaults(ProjectileID.Flamelash);
+        //Projectile.width = 10;
+        //Projectile.height = 10;
+        //Projectile.friendly = true;
+        //Projectile.light = 0.8f;
         Projectile.DamageType = DamageClass.Magic;
         DrawOriginOffsetY = -6;
         Projectile.extraUpdates = 1;
+        Projectile.penetrate = 1;
     }
     public override bool PreDraw(ref Color lightColor)
     {
         //Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
-        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Sparkly").Value;
+        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/SparklySingleEnd").Value;
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
 
@@ -51,7 +55,7 @@ public class Boomlash : ModProjectile
             Vector2 drawPos = Projectile.oldPos[i] - Main.screenPosition + new Vector2(Projectile.width / 2);
             //int col = (int)(128 - (i * 16) * Projectile.Opacity);
             //Main.EntitySpriteDraw(texture, drawPos, frame, new Color(col / i, col / i, col, 0), Projectile.oldRot[i], frameOrigin, Projectile.scale, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(texture, drawPos + Main.rand.NextVector2Circular(i / 2,i / 2), frame, new Color(col.R, col.G - (i * 8), col.B, 0) * (1 - (i * 0.04f)), Projectile.oldRot[i] + Main.rand.NextFloat(-i * 0.01f,i * 0.01f), frameOrigin, new Vector2(stretchscale.X - (i * 0.05f), stretchscale.Y * Main.rand.NextFloat(0.1f,0.05f) * Vector2.Distance(Projectile.oldPos[i], Projectile.oldPos[i+1]) - (i * 0.05f)), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, drawPos + Main.rand.NextVector2Circular(i / 2,i / 2), frame, new Color(col.R, col.G - (i * 8), col.B, 0) * (1 - (i * 0.04f)), Projectile.oldRot[i] + Main.rand.NextFloat(-i * 0.01f,i * 0.01f), frameOrigin, new Vector2(stretchscale.X - (i * 0.05f), (stretchscale.Y * Main.rand.NextFloat(0.1f,0.05f) * Vector2.Distance(Projectile.oldPos[i], Projectile.oldPos[i+1]) - (i * 0.05f)) * 0.7f), SpriteEffects.None, 0);
         }
         
         Main.EntitySpriteDraw(texture2, Projectile.Center - Main.screenPosition, frame2, new Color(255,0,0,0), Projectile.rotation, frameOrigin2, stretchscale * 0.8f, SpriteEffects.None, 0);
@@ -63,127 +67,148 @@ public class Boomlash : ModProjectile
 
     public override void OnSpawn(IEntitySource source)
     {
-        for(int k = 0; k < Projectile.oldPos.Length; k++)
-        {
-            Projectile.oldPos[k] = Projectile.position;
-        }
+        //for(int k = 0; k < Projectile.oldPos.Length; k++)
+        //{
+        //    Projectile.oldPos[k] = Projectile.position;
+        //}
     }
     public override void AI()
     {
+        if (Projectile.ai[2] == 0)
+        {
+            for (int k = 0; k < Projectile.oldPos.Length; k++)
+            {
+                Projectile.oldPos[k] = Projectile.position;
+            }
+            Projectile.ai[2]++;
+        }
         //if (Projectile.soundDelay == 0 && Math.Abs(Projectile.velocity.X) + Math.Abs(Projectile.velocity.Y) > 2f)
         //{
         //    Projectile.soundDelay = 50;
         //    SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath, Projectile.position);
         //}
-        if (Main.rand.NextBool(3) && Projectile.velocity != Vector2.Zero)
+        if (Projectile.position.Distance(Projectile.oldPosition) > 1f)
         {
-            int dusty = Dust.NewDust(Projectile.position + new Vector2(0,-20).RotatedBy(Projectile.rotation), 0, 0, DustID.InfernoFork);
-            Main.dust[dusty].noGravity = true;
-            Main.dust[dusty].velocity = Projectile.velocity * -0.6f;
-            Main.dust[dusty].scale = 1f;
-        }
-        if (Main.rand.NextBool(6))
-        {
-            int dusty = Dust.NewDust(Projectile.position + new Vector2(0, -20).RotatedBy(Projectile.rotation), 0, 0, DustID.Smoke);
-            Main.dust[dusty].noGravity = true;
-            Main.dust[dusty].scale = 1f;
-            Main.dust[dusty].alpha = 128;
-        }
-
-        if (Main.myPlayer == Projectile.owner && Projectile.ai[0] == 0f)
-        {
-
-            Player player = Main.player[Projectile.owner];
-            if (player.channel)
+            if (Main.rand.NextBool(3) && Projectile.velocity != Vector2.Zero)
             {
-                float maxDistance = 18f;
-                Vector2 vectorToCursor = Main.MouseWorld - Projectile.Center;
-                float distanceToCursor = vectorToCursor.Length();
-
-                if (distanceToCursor > maxDistance)
-                {
-                    distanceToCursor = maxDistance / distanceToCursor;
-                    vectorToCursor *= distanceToCursor;
-                }
-
-                int velocityXBy1000 = (int)(vectorToCursor.X * 1000f);
-                int oldVelocityXBy1000 = (int)(Projectile.velocity.X * 1000f);
-                int velocityYBy1000 = (int)(vectorToCursor.Y * 1000f);
-                int oldVelocityYBy1000 = (int)(Projectile.velocity.Y * 1000f);
-
-                if (velocityXBy1000 != oldVelocityXBy1000 || velocityYBy1000 != oldVelocityYBy1000)
-                {
-                    Projectile.netUpdate = true;
-                }
-
-                Projectile.velocity = vectorToCursor;
-
+                int dusty = Dust.NewDust(Projectile.Center, 0, 0, DustID.InfernoFork);
+                Main.dust[dusty].noGravity = true;
+                Main.dust[dusty].velocity = Projectile.velocity * -0.6f;
+                Main.dust[dusty].scale = 1f;
             }
-            else if (Projectile.ai[0] == 0f)
+            if (Main.rand.NextBool(6))
             {
-
-                Projectile.netUpdate = true;
-
-                float maxDistance = 14f;
-                Vector2 vectorToCursor = Main.MouseWorld - Projectile.Center;
-                float distanceToCursor = vectorToCursor.Length();
-
-                if (distanceToCursor == 0f)
-                {
-                    vectorToCursor = Projectile.Center - player.Center;
-                    distanceToCursor = vectorToCursor.Length();
-                }
-
-                distanceToCursor = maxDistance / distanceToCursor;
-                vectorToCursor *= distanceToCursor;
-
-                Projectile.velocity = vectorToCursor;
-
-                if (Projectile.velocity == Vector2.Zero)
-                {
-                    Projectile.Kill();
-                }
-
-                Projectile.ai[0] = 1f;
+                int dusty = Dust.NewDust(Projectile.Center, 0, 0, DustID.Smoke);
+                Main.dust[dusty].noGravity = true;
+                Main.dust[dusty].scale = 1f;
+                Main.dust[dusty].alpha = 128;
             }
         }
-
         if (Projectile.velocity != Vector2.Zero)
         {
             Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.PiOver2;
         }
+        //if (Main.myPlayer == Projectile.owner && Projectile.ai[0] == 0f)
+        //{
+
+        //    Player player = Main.player[Projectile.owner];
+        //    if (player.channel)
+        //    {
+        //        float maxDistance = 18f;
+        //        Vector2 vectorToCursor = Main.MouseWorld - Projectile.Center;
+        //        float distanceToCursor = vectorToCursor.Length();
+
+        //        if (distanceToCursor > maxDistance)
+        //        {
+        //            distanceToCursor = maxDistance / distanceToCursor;
+        //            vectorToCursor *= distanceToCursor;
+        //        }
+
+        //        int velocityXBy1000 = (int)(vectorToCursor.X * 1000f);
+        //        int oldVelocityXBy1000 = (int)(Projectile.velocity.X * 1000f);
+        //        int velocityYBy1000 = (int)(vectorToCursor.Y * 1000f);
+        //        int oldVelocityYBy1000 = (int)(Projectile.velocity.Y * 1000f);
+
+        //        if (velocityXBy1000 != oldVelocityXBy1000 || velocityYBy1000 != oldVelocityYBy1000)
+        //        {
+        //            Projectile.netUpdate = true;
+        //        }
+
+        //        Projectile.velocity = vectorToCursor;
+
+        //    }
+        //    else if (Projectile.ai[0] == 0f)
+        //    {
+
+        //        Projectile.netUpdate = true;
+
+        //        float maxDistance = 14f;
+        //        Vector2 vectorToCursor = Main.MouseWorld - Projectile.Center;
+        //        float distanceToCursor = vectorToCursor.Length();
+
+        //        if (distanceToCursor == 0f)
+        //        {
+        //            vectorToCursor = Projectile.Center - player.Center;
+        //            distanceToCursor = vectorToCursor.Length();
+        //        }
+
+        //        distanceToCursor = maxDistance / distanceToCursor;
+        //        vectorToCursor *= distanceToCursor;
+
+        //        Projectile.velocity = vectorToCursor;
+
+        //        if (Projectile.velocity == Vector2.Zero)
+        //        {
+        //            Projectile.Kill();
+        //        }
+
+        //        Projectile.ai[0] = 1f;
+        //    }
+        //}
     }
     public override void Kill(int timeLeft)
     {
-        if (Projectile.penetrate == 1)
+        ParticleSystem.AddParticle(new ExplosionParticle(), Projectile.Center, Vector2.Zero, default,Main.rand.NextFloat(MathHelper.TwoPi),Main.rand.NextFloat(0.9f,1.2f));
+        //if (Projectile.penetrate == 1)
+        //{
+        //    Projectile.maxPenetrate = -1;
+        //    Projectile.penetrate = -1;
+
+        //    int explosionArea = 60;
+        //    Vector2 oldSize = Projectile.Size;
+        //    Projectile.position = Projectile.Center;
+        //    Projectile.Size += new Vector2(explosionArea);
+        //    Projectile.Center = Projectile.position;
+
+        //    Projectile.tileCollide = false;
+        //    Projectile.velocity *= 0.01f;
+        //    Projectile.Damage();
+        //    Projectile.scale = 0.01f;
+
+        //    Projectile.position = Projectile.Center;
+        //    Projectile.Size = new Vector2(10);
+        //    Projectile.Center = Projectile.position;
+        //}
+        if (Main.myPlayer == Projectile.owner)
         {
-            Projectile.maxPenetrate = -1;
-            Projectile.penetrate = -1;
-
-            int explosionArea = 60;
-            Vector2 oldSize = Projectile.Size;
-            Projectile.position = Projectile.Center;
-            Projectile.Size += new Vector2(explosionArea);
-            Projectile.Center = Projectile.position;
-
-            Projectile.tileCollide = false;
-            Projectile.velocity *= 0.01f;
-            Projectile.Damage();
-            Projectile.scale = 0.01f;
-
-            Projectile.position = Projectile.Center;
-            Projectile.Size = new Vector2(10);
-            Projectile.Center = Projectile.position;
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
         }
-
         SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode, Projectile.position);
 
+        for (int i = 0; i < 10; i++)
+        {
+            int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0, 0, 0, default, 2f);
+            Main.dust[d].velocity = Main.rand.NextVector2Circular(6,6);
+            Main.dust[d].noGravity = true;
+            Main.dust[d].fadeIn = 2.3f;
+            Main.dust[d].customData = 0;
+        }
         for (int i = 0; i < 20; i++)
         {
             int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0, 0, 0, default, 2f);
-            Main.dust[d].velocity = Main.rand.NextVector2Circular(6, 6);
-            Main.dust[d].noGravity = true;
-            Main.dust[d].fadeIn = 2.3f;
+            Main.dust[d].velocity = Main.rand.NextVector2Circular(5, 5);
+            Main.dust[d].fadeIn = Main.rand.NextFloat(1,2);
+            Main.dust[d].customData = 0;
         }
         for (int i = 0; i < 20; i++)
         {

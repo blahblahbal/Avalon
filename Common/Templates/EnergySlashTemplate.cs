@@ -14,7 +14,7 @@ public abstract class EnergySlashTemplate : ModProjectile
     public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.NightsEdge);
-        Projectile.penetrate = 6;
+        Projectile.penetrate = 3;
     }
     public override bool PreDraw(ref Color lightColor)
     {
@@ -40,7 +40,7 @@ public abstract class EnergySlashTemplate : ModProjectile
         Color color = backColor;
         Color color2 = middleColor;
         Color color3 = frontColor;
-        Color color4 = Color.White * num3 * 0.5f;
+        Color color4 = white * num3 * 0.5f;
         color4.A = (byte)((float)(int)color4.A * (1f - fromValue));
         Color color5 = color4 * fromValue * 0.5f;
         color5.G = (byte)((float)(int)color5.G * fromValue);
@@ -52,9 +52,10 @@ public abstract class EnergySlashTemplate : ModProjectile
         //Main.spriteBatch.Draw(val.Value, vector, rectangle, color2 * fromValue * num3 * 0.5f, proj.rotation, origin, num * num4, effects, 0f);
 
         Main.spriteBatch.Draw(val.Value, vector, rectangle, color * fromValue * num3, proj.rotation + rotationOffset, origin, num, effects, 0f);
-        Main.spriteBatch.Draw(val.Value, vector, rectangle, color5 * 0.15f, proj.rotation + splay + rotationOffset, origin, num, effects, 0f);
+        Main.spriteBatch.Draw(val.Value, vector, rectangle, color5 * 0.3f, proj.rotation + splay + rotationOffset, origin, num, effects, 0f);
         Main.spriteBatch.Draw(val.Value, vector, rectangle, color3 * fromValue * num3 * 0.3f, proj.rotation + (splay * 2) + rotationOffset, origin, num, effects, 0f);
         Main.spriteBatch.Draw(val.Value, vector, rectangle, color2 * fromValue * num3 * 0.5f, proj.rotation + (splay * 4) + rotationOffset, origin, num * num4, effects, 0f);
+
 
         Main.spriteBatch.Draw(val.Value, vector, val.Frame(1, 4, 0, 3), white * 0.6f * num3, proj.rotation + rotationOffset + proj.ai[0] * 0.01f, origin, num, effects, 0f);
         Main.spriteBatch.Draw(val.Value, vector, val.Frame(1, 4, 0, 3), white * 0.5f * num3, proj.rotation + rotationOffset + proj.ai[0] * -0.05f, origin, num * 0.8f, effects, 0f);

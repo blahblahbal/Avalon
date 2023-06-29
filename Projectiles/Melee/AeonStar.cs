@@ -1,3 +1,4 @@
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -145,19 +146,20 @@ public class AeonStar : ModProjectile
         {
             Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.Center,Vector2.Zero,ModContent.ProjectileType<AeonExplosion>(),Projectile.damage * 7, Projectile.knockBack * 2, Projectile.owner);
         }
-        for (int i = 0; i < 1; i++)
-        {
-            ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
-            particleOrchestraSettings.PositionInWorld = Projectile.Center;
-            particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
-            ParticleOrchestraSettings settings = particleOrchestraSettings;
-            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
-            particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
-            settings = particleOrchestraSettings;
-            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
-            particleOrchestraSettings.MovementVector = Vector2.Zero;
-            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.Excalibur, settings, Projectile.owner);
-        }
+        //for (int i = 0; i < 1; i++)
+        //{
+        //    ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        //    particleOrchestraSettings.PositionInWorld = Projectile.Center;
+        //    particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
+        //    ParticleOrchestraSettings settings = particleOrchestraSettings;
+        //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.StardustPunch, settings, Projectile.owner);
+        //    particleOrchestraSettings.MovementVector = Main.rand.NextVector2Circular(7, 7);
+        //    settings = particleOrchestraSettings;
+        //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
+        //    particleOrchestraSettings.MovementVector = Vector2.Zero;
+        //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.Excalibur, settings, Projectile.owner);
+        //}
+        ParticleSystem.AddParticle(new AeonStarburst(), Projectile.Center, Vector2.Zero, default);
     }
 }
 
