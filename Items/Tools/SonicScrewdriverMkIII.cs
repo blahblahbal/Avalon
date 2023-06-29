@@ -1,3 +1,5 @@
+using Avalon.Common.Players;
+using Avalon.Network;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -25,6 +27,54 @@ class SonicScrewdriverMkIII : ModItem
         Item.scale = 0.7f;
         Item.UseSound = new SoundStyle($"{nameof(Avalon)}/Sounds/Item/SonicScrewdriver");
     }
+
+    public override bool AltFunctionUse(Player player)
+    {
+        return true;
+    }
+
+    public override bool? UseItem(Player player)
+    {
+        //if (player.altFunctionUse == 2)
+        if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl))
+        {
+            Vector2 mousePos = Main.MouseScreen + Main.screenPosition;
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+            {
+                player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
+                CursorPosition.SendPacket(mousePos, player.whoAmI);
+            }
+            else if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
+            }
+            Point c = mousePos.ToTileCoordinates();
+
+            if (Main.tile[c.X, c.Y].TileType == TileID.Containers)
+            {
+                int xpos;
+                for (xpos = (int)(Main.tile[c.X, c.Y].TileFrameX / 18); xpos > 1; xpos -= 2)
+                {
+                }
+                xpos = Player.tileTargetX - xpos;
+                int ypos = Player.tileTargetY - (int)(Main.tile[c.X, c.Y].TileFrameY / 18);
+
+                if (Chest.IsLocked(xpos, ypos))
+                {
+                    Chest.Unlock(xpos, ypos);
+                }
+                else
+                {
+                    Chest.Lock(xpos, ypos);
+                }
+            }
+
+            
+            
+        }
+        return true;
+    }
+
     //public override void AddRecipes()
     //{
     //    Recipe.Create(Type)
