@@ -30,18 +30,17 @@ public class TrapCollision : ModHook
         {
             return true;
         }
-        //doesn't work, always returns false
-        //if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
-        //{
-        //    if (player.velocity == Vector2.Zero)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
+        if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
+        {
+            if (player.afkCounter > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         return orig(type, i, j, player);
     }
     private static void OnApplyTouchDamage(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)
