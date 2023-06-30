@@ -203,6 +203,15 @@ public class AvalonPlayer : ModPlayer
         }
     }
 
+    public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+    {
+        if(Pathogen)
+        {
+            g -= 0.3f;
+            r -= 0.1f;
+        }
+    }
+
     public bool PotionSicknessSoundPlayed;
     public override void PostUpdateBuffs()
     {
