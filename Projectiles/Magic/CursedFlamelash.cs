@@ -99,11 +99,11 @@ public class CursedFlamelash : ModProjectile
 
         for (int i = 0; i < 30; i++)
         {
-            int D = Dust.NewDust(Projectile.Center, 0, 0, DustID.CursedTorch, 0, 0, 0, default, 3);
-            Main.dust[D].color = new Color(255, 255, 255, 0);
-            Main.dust[D].noGravity = !Main.rand.NextBool(3);
-            Main.dust[D].fadeIn = Main.rand.NextFloat(0f, 2f);
-            Main.dust[D].velocity = Main.rand.NextVector2Circular(4,6).RotatedBy(Projectile.rotation);
+            Dust D = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.CursedTorch, 0, 0, 0, default, 3);
+            D.color = new Color(255, 255, 255, 0);
+            D.noGravity = !Main.rand.NextBool(3);
+            D.fadeIn = Main.rand.NextFloat(0f, 2f);
+            D.velocity = Main.rand.NextVector2Circular(4,6).RotatedBy(Projectile.rotation);
         }
         if (Main.myPlayer == Projectile.owner)
         {

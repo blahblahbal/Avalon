@@ -4861,6 +4861,7 @@ Mods: {
 			CrystalTomahawk.DisplayName: Crystal Tomahawk
 			ChaosBolt.DisplayName: Chaos Bolt
 			Smog.DisplayName: Smog
+			GiantSnowflake.DisplayName: Giant Snowflake
 		}
 
 		NPCs: {
