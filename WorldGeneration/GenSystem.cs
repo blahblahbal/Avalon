@@ -40,6 +40,12 @@ public class GenSystem : ModSystem
             tasks.Insert(index + 1, new OreGenPreHardmode("Adding Avalon Ores", 237.4298f));
         }
 
+        //index = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Islands"));
+        //if (index != -1)
+        //{
+        //    tasks.Insert(index + 1, new SkyClouds());
+        //}
+
         index = tasks.FindIndex(genpass => genpass.Name.Equals("Weeds"));
         if (index != -1)
         {
@@ -72,6 +78,8 @@ public class GenSystem : ModSystem
             currentPass = new Ectovines();
             tasks.Insert(underworld + 2, currentPass);
             totalWeight += currentPass.Weight;
+
+            tasks.Insert(underworld + 3, new SkyClouds());
         }
 
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");

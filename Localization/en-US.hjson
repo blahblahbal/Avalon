@@ -640,6 +640,15 @@ Mods: {
 					'''
 			}
 
+			InertiaBootsSlower: {
+				DisplayName: Inertia Boots (Slower)
+				Tooltip:
+					'''
+					Allows infinite flight and slow fall and the wearer can run pretty fast
+					The wearer has a chance to dodge attacks and negates fall damage
+					'''
+			}
+
 			DiamondAmulet: {
 				DisplayName: Diamond Amulet
 				Tooltip: ""
@@ -4773,6 +4782,21 @@ Mods: {
 				DisplayName: Snotsandstone Wall
 				Tooltip: ""
 			}
+
+			PlatinumChest: {
+				DisplayName: Platinum Chest
+				Tooltip: ""
+			}
+
+			SkyBrick: {
+				DisplayName: Sky Brick
+				Tooltip: ""
+			}
+
+			SkyBrickWall: {
+				DisplayName: Sky Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5478,6 +5502,7 @@ Mods: {
 			PeridotSquirrelCage.MapEntry: Peridot Squirrel Cage
 			TourmalineSquirrelCage.MapEntry: Tourmaline Squirrel Cage
 			ZirconSquirrelCage.MapEntry: Zircon Squirrel Cage
+			PlatinumChest.MapEntry0: Mods.Avalon.Tiles.PlatinumChest.MapEntry0
 		}
 
 		Prefixes: {
@@ -5577,6 +5602,11 @@ Mods: {
 			ContagionCaveDesert: {
 				DisplayName: Contagion Cave Desert
 				TownNPCDialogueName: the Contagion Cave Desert
+			}
+
+			SkyFortress: {
+				DisplayName: Sky Fortress
+				TownNPCDialogueName: the Sky Fortress
 			}
 		}
 

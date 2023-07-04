@@ -188,10 +188,6 @@ public class AvalonPlayer : ModPlayer
         MaxRangedCrit = 100;
 
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
-        //if (Player.whoAmI == Main.myPlayer)
-        //{
-        //    MousePosition = Main.MouseWorld;
-        //}
 
         for (int m = 0; m < 200; m++)
         {
@@ -204,19 +200,17 @@ public class AvalonPlayer : ModPlayer
         }
     }
 
-    internal void HandleMousePosition(BinaryReader reader)
+    internal void HandleMouseCursor(BinaryReader reader)
     {
         MousePosition = reader.ReadVector2();
         if (Main.netMode == NetmodeID.Server)
-        {
-            SyncMousePosition(server: true);
-        }
+            SyncMouseCursor(server: true);
     }
 
-    public void SyncMousePosition(bool server)
+    public void SyncMouseCursor(bool server)
     {
         ModPacket packet = Mod.GetPacket();
-        packet.Write(37);
+        packet.Write((int)Network.MessageID.CursorPosition);
         packet.Write(Player.whoAmI);
         packet.WriteVector2(MousePosition);
         Player.SendPacket(packet, server);
@@ -276,7 +270,6 @@ public class AvalonPlayer : ModPlayer
         PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.05f;
         PlanetRotation[8] = (PlanetRotation[8] % MathHelper.TwoPi) + 0.035f;
     }
-
     public LinkedListNode<int> ObtainExistingPlanet(int index, int planetNum)
     {
         int diff = index + 1 - Planets[planetNum].Count;
@@ -496,6 +489,22 @@ public class AvalonPlayer : ModPlayer
 
     public override void PreUpdate()
     {
+        if (Player.GetModPlayer<AvalonBiomePlayer>().ZoneSkyFortress)
+        {
+            float num39 = Main.maxTilesX / 4200;
+            num39 *= num39;
+            float gravity = (float)((double)(Player.position.Y / 16f - (60f + 10f * num39)) / (Main.worldSurface / 6.0));
+            if ((double)gravity < 0.25)
+            {
+                gravity = 0.25f;
+            }
+            if (gravity > 1f)
+            {
+                gravity = 1f;
+            }
+            Player.gravity /= gravity;
+        }
+
         if (Player.whoAmI == Main.myPlayer)
         {
             MousePosition = Main.MouseWorld;
@@ -922,7 +931,7 @@ public class AvalonPlayer : ModPlayer
 
         if (Player.whoAmI == Main.myPlayer && Main.netMode == NetmodeID.MultiplayerClient)
         {
-            SyncMousePosition(server: false);
+            SyncMouseCursor(server: false);
         }
     }
     public override void PostUpdateRunSpeeds()

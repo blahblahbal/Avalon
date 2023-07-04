@@ -23,7 +23,7 @@ public class MessageHandler
             //    ShadowTeleport.HandlePacket(reader, fromWho);
             //    break;
             case MessageID.CursorPosition:
-                Main.player[reader.ReadInt32()].GetModPlayer<AvalonPlayer>().HandleMousePosition(reader);
+                Main.player[reader.ReadInt32()].GetModPlayer<AvalonPlayer>().HandleMouseCursor(reader);
                 break;
             //case MessageID.SyncTime:
             //    SyncTime.HandlePacket(reader, fromWho);

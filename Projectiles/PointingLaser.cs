@@ -1,6 +1,4 @@
 using Avalon.Common.Players;
-using Avalon.Network;
-using Avalon.Network.Handlers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -99,27 +97,9 @@ public class PointingLaser : ModProjectile
             //}
             if (Vector2.Distance(Projectile.position, p.position) < Vector2.Distance(p.GetModPlayer<AvalonPlayer>().MousePosition, p.position))
             {
-                
-
-                //if (Main.netMode != NetmodeID.SinglePlayer)
-                //{
-                //    ModContent.GetInstance<SyncMouse>().Send(new BasicPlayerNetworkArgs(p));
-
-                //}
                 DrawChain(p.Center + new Vector2(50, 0).RotatedBy(p.AngleTo(p.GetModPlayer<AvalonPlayer>().MousePosition)), p.GetModPlayer<AvalonPlayer>().MousePosition);
             }
         }
-
-        //Player p = Main.player[Projectile.owner];
-        //Texture2D TEX = ModContent.Request<Texture2D>(Texture).Value;
-        //Vector2 Start = p.Center + new Vector2(0, 20).RotatedBy(p.AngleTo(p.GetModPlayer<AvalonPlayer>().MousePosition)) - Main.screenPosition;
-        //Vector2 End = p.GetModPlayer<AvalonPlayer>().MousePosition - Main.screenPosition;
-        //Main.spriteBatch.End();
-        //Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer);
-        //if (Vector2.Distance(Projectile.position, p.position) < Vector2.Distance(p.GetModPlayer<AvalonPlayer>().MousePosition, p.position))
-        //{
-        //    Main.EntitySpriteDraw(TEX, Start, new Rectangle(0, TEX.Height, TEX.Height, TEX.Width), new Color(255, 255, 255, 0), Start.DirectionTo(End).ToRotation(), new Vector2(0, TEX.Height / 2f), new Vector2((float)Math.Cbrt(Start.Distance(End)) * (float)Math.Cbrt(Start.Distance(End)), 5), SpriteEffects.None, 0);
-        //}
         return false;
     }
 

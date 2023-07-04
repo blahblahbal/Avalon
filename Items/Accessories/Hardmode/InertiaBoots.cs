@@ -35,6 +35,11 @@ class InertiaBoots : ModItem
             .AddIngredient(ItemID.LunarBar, 2)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
+
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<InertiaBootsSlower>())
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

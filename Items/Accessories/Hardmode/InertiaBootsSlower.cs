@@ -29,10 +29,7 @@ class InertiaBootsSlower : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddRecipeGroup("Avalon:Wings")
-            .AddIngredient(ItemID.FrostsparkBoots)
-            .AddIngredient(ItemID.BlackBelt)
-            .AddIngredient(ItemID.LunarBar, 2)
+            .AddIngredient(ModContent.ItemType<InertiaBoots>())
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }

@@ -524,6 +524,54 @@ public class Utils
             GetCMXCoord(xCoord, y, xLength, ylength, ref xCoord);
         }
     }
+
+    /// <summary>
+    /// Helper method to shift the Sky Fortress to the left/right if there are tiles/liquid/walls in the way.
+    /// </summary>
+    /// <param name="x">The X coordinate of the Sky Fortress origin point.</param>
+    /// <param name="y">The Y coordinate of the Sky Fortress origin point.</param>
+    /// <param name="xLength">The width of the Sky Fortress.</param>
+    /// <param name="ylength">The height of the Sky Fortress.</param>
+    /// <param name="xCoord">The X coordinate of the Sky Fortress origin point, passed in again to be modified (the original X coordinate needs to remain the same I think).</param>
+    public static void GetSkyFortressXCoord(int x, int y, int xLength, int ylength, ref int xCoord)
+    {
+        bool leftSideActive = false;
+        bool rightSideActive = false;
+        for (int i = y; i < y + ylength; i++)
+        {
+            if (Main.tile[x, i].HasTile || Main.tile[x, i].LiquidAmount > 0 || Main.tile[x, i].WallType > 0)
+            {
+                leftSideActive = true;
+                break;
+            }
+        }
+        for (int i = y; i < y + ylength; i++)
+        {
+            if (Main.tile[x + xLength, i].HasTile || Main.tile[x + xLength, i].LiquidAmount > 0 || Main.tile[x + xLength, i].WallType > 0)
+            {
+                rightSideActive = true;
+                break;
+            }
+        }
+        if (leftSideActive || rightSideActive)
+        {
+            if (xCoord > Main.maxTilesX / 2)
+                xCoord--;
+            else xCoord++;
+            if (xCoord == Main.maxTilesX / 2) return;
+            if (xCoord < 100)
+            {
+                xCoord = 100;
+                return;
+            }
+            if (xCoord > Main.maxTilesX - 100)
+            {
+                xCoord = Main.maxTilesX - 100;
+                return;
+            }
+            GetSkyFortressXCoord(xCoord, y, xLength, ylength, ref xCoord);
+        }
+    }
     public static void TileRunnerCrystalMines(int i, int j, double strength, int steps, int type, bool addTile = false, float speedX = 0f, float speedY = 0f, bool noYChange = false, bool overRide = true, int ignoreTileType = -1)
     {
         if (WorldGen.drunkWorldGen)
