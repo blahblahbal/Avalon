@@ -113,7 +113,11 @@ Mods: {
 
 			Boomlash: {
 				DisplayName: Boomlash
-				Tooltip: Summons a controllable exploding missile
+				Tooltip:
+					'''
+					Summons a controllable exploding missile
+					'The true magic missile'
+					'''
 			}
 
 			PossessedFlamesaw: {
@@ -1126,7 +1130,7 @@ Mods: {
 
 			OsmiumLongbow: {
 				DisplayName: Osmium Longbow
-				Tooltip: ""
+				Tooltip: Arrows gain extra pierce and velocity when fully drawn
 			}
 
 			OsmiumBrick: {
@@ -2443,12 +2447,12 @@ Mods: {
 
 			IridiumLongbow: {
 				DisplayName: Iridium Longbow
-				Tooltip: ""
+				Tooltip: Arrows gain extra pierce and velocity when fully drawn
 			}
 
 			RhodiumLongbow: {
 				DisplayName: Rhodium Longbow
-				Tooltip: ""
+				Tooltip: Arrows gain extra pierce and velocity when fully drawn
 			}
 
 			VertexOfExcalibur: {
@@ -4862,6 +4866,9 @@ Mods: {
 			ChaosBolt.DisplayName: Chaos Bolt
 			Smog.DisplayName: Smog
 			GiantSnowflake.DisplayName: Giant Snowflake
+			RhodiumLongbowHeld.DisplayName: Rhodium Longbow Held
+			IridiumLongbowHeld.DisplayName: Iridium Longbow Held
+			OsmiumLongbowHeld.DisplayName: Osmium Longbow Held
 		}
 
 		NPCs: {

@@ -1,3 +1,4 @@
+using Avalon.Buffs.Debuffs;
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -55,6 +56,8 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
                     {
                         int DPS = Main.npc[i].SimpleStrikeNPC((Item.damage / Divide) + (int)MathHelper.Clamp(Divide * 3,0,Item.damage), player.direction, Main.rand.NextBool(101 - player.GetWeaponCrit(player.HeldItem)), Item.knockBack, DamageClass.Magic, true, player.luck);
                         player.addDPS(DPS);
+                        if (Main.rand.NextBool(5))
+                            Main.npc[i].AddBuff(ModContent.BuffType<Pathogen>(), 600 / Divide);
                         if (Main.rand.NextBool(3))
                             Main.npc[i].AddBuff(BuffID.Poisoned, 600 / Divide);
                         for (int j = 0; j < 10; j++) 
