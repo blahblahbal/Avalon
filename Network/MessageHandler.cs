@@ -1,4 +1,6 @@
+using Avalon.Common.Players;
 using System.IO;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Avalon.Network;
@@ -21,7 +23,7 @@ public class MessageHandler
             //    ShadowTeleport.HandlePacket(reader, fromWho);
             //    break;
             case MessageID.CursorPosition:
-                CursorPosition.HandlePacket(reader, fromWho);
+                Main.player[reader.ReadInt32()].GetModPlayer<AvalonPlayer>().HandleMousePosition(reader);
                 break;
             //case MessageID.SyncTime:
             //    SyncTime.HandlePacket(reader, fromWho);

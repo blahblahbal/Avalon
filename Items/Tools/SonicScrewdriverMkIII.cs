@@ -38,17 +38,17 @@ class SonicScrewdriverMkIII : ModItem
         //if (player.altFunctionUse == 2)
         if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl))
         {
-            Vector2 mousePos = Main.MouseScreen + Main.screenPosition;
-            if (Main.netMode == NetmodeID.MultiplayerClient)
-            {
-                player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
-                CursorPosition.SendPacket(mousePos, player.whoAmI);
-            }
-            else if (Main.netMode == NetmodeID.SinglePlayer)
-            {
-                player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
-            }
-            Point c = mousePos.ToTileCoordinates();
+            //Vector2 mousePos = Main.MouseScreen + Main.screenPosition;
+            //if (Main.netMode == NetmodeID.MultiplayerClient)
+            //{
+            //    player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
+            //    CursorPosition.SendPacket(mousePos, player.whoAmI);
+            //}
+            //else if (Main.netMode == NetmodeID.SinglePlayer)
+            //{
+            //    player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
+            //}
+            Point c = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 
             if (Main.tile[c.X, c.Y].TileType == TileID.Containers)
             {
@@ -62,15 +62,20 @@ class SonicScrewdriverMkIII : ModItem
                 if (Chest.IsLocked(xpos, ypos))
                 {
                     Chest.Unlock(xpos, ypos);
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, 1, xpos, ypos);
+                    }
                 }
                 else
                 {
                     Chest.Lock(xpos, ypos);
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, 3, xpos, ypos);
+                    }
                 }
             }
-
-            
-            
         }
         return true;
     }

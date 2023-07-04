@@ -10,6 +10,7 @@ using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -187,10 +188,10 @@ public class AvalonPlayer : ModPlayer
         MaxRangedCrit = 100;
 
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
-        if (Player.whoAmI == Main.myPlayer)
-        {
-            MousePosition = Main.MouseWorld;
-        }
+        //if (Player.whoAmI == Main.myPlayer)
+        //{
+        //    MousePosition = Main.MouseWorld;
+        //}
 
         for (int m = 0; m < 200; m++)
         {
@@ -201,6 +202,24 @@ public class AvalonPlayer : ModPlayer
             }
             else { InBossFight = false; }
         }
+    }
+
+    internal void HandleMousePosition(BinaryReader reader)
+    {
+        MousePosition = reader.ReadVector2();
+        if (Main.netMode == NetmodeID.Server)
+        {
+            SyncMousePosition(server: true);
+        }
+    }
+
+    public void SyncMousePosition(bool server)
+    {
+        ModPacket packet = Mod.GetPacket();
+        packet.Write(37);
+        packet.Write(Player.whoAmI);
+        packet.WriteVector2(MousePosition);
+        Player.SendPacket(packet, server);
     }
 
     public bool PotionSicknessSoundPlayed;
@@ -468,6 +487,11 @@ public class AvalonPlayer : ModPlayer
 
     public override void PreUpdate()
     {
+        if (Player.whoAmI == Main.myPlayer)
+        {
+            MousePosition = Main.MouseWorld;
+        }
+
         tpStam = !teleportV;
         if (teleportV)
         {
@@ -886,6 +910,11 @@ public class AvalonPlayer : ModPlayer
         //    }
         //}
         #endregion
+
+        if (Player.whoAmI == Main.myPlayer && Main.netMode == NetmodeID.MultiplayerClient)
+        {
+            SyncMousePosition(server: false);
+        }
     }
     public override void PostUpdateRunSpeeds()
     {

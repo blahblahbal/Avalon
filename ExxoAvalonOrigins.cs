@@ -16,6 +16,7 @@ using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Microsoft.Xna.Framework;
 using System.Reflection;
+using System.IO;
 
 namespace Avalon;
 
@@ -160,5 +161,10 @@ public class ExxoAvalonOrigins : Mod
         npcReplacer.ReplaceAsset(NPCID.DungeonSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/DungeonSlime"));
         npcReplacer.ReplaceAsset(NPCID.SlimeSpiked, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/SpikedSlime"));
         npcReplacer.ReplaceAsset(NPCID.IlluminantSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/IlluminantSlime"));
+    }
+
+    public override void HandlePacket(BinaryReader reader, int whoAmI)
+    {
+        Network.MessageHandler.HandlePacket(reader, whoAmI);
     }
 }

@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -297,7 +298,7 @@ public class Sun : ModProjectile
                 // assign the destination as the cursor
                 float vecX = Main.mouseX + Main.screenPosition.X;
                 float vecY = Main.mouseY + Main.screenPosition.Y;
-                mousePosition = new Vector2(vecX, vecY);
+                mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition; // new Vector2(vecX, vecY);
 
                 // get the inverse melee speed - yoyos do the same thing
                 float inverseMeleeSpeed = 1 / Main.player[Projectile.owner].GetTotalAttackSpeed(DamageClass.Melee);
@@ -320,7 +321,7 @@ public class Sun : ModProjectile
                 Projectile.timeLeft = 300;
                 float vecX = Main.mouseX + Main.screenPosition.X;
                 float vecY = Main.mouseY + Main.screenPosition.Y;
-                mousePosition = new Vector2(vecX, vecY);
+                mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition; // new Vector2(vecX, vecY);
                 Projectile.Center = mousePosition;
                 if (planetSpawnTimer == 0)
                 {

@@ -34,6 +34,18 @@ public static class ClassExtensions
         return null;
     }
 
+    public static void SendPacket(this Player p, ModPacket packet, bool server)
+    {
+        if (!server)
+        {
+            packet.Send();
+        }
+        else
+        {
+            packet.Send(-1, p.whoAmI);
+        }
+    }
+
     /// <summary>
     ///     Checks if the current player has an item in their armor/accessory slots.
     /// </summary>
