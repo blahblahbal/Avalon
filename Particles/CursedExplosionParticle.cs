@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Particles
 {
-    public class ExplosionParticle : Particle
+    public class CursedExplosionParticle : Particle
     {
         int Frame;
         public override void Update()
@@ -26,7 +26,7 @@ namespace Avalon.Particles
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Assets/Textures/FlameExplosion");
+            Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Assets/Textures/CursedExplosion");
             Texture2D texture2 = (Texture2D)ModContent.Request<Texture2D>("Avalon/Assets/Textures/WhiteExplosion");
             int frameHeight = texture.Height / 7;
             Rectangle frame = new Rectangle(0, frameHeight * Frame, texture.Width, frameHeight);
@@ -35,12 +35,7 @@ namespace Avalon.Particles
 
             float muliply = ((32 - TimeInWorld) / 28);
 
-            for (int i = 0; i < 8; i++)
-            {
-                spriteBatch.Draw(texture, DrawPos + new Vector2(0,TimeInWorld * 0.1f).RotatedBy(i * MathHelper.PiOver4), frame, Color.Gray * 0.3f, AI1, frameOrigin, AI2, SpriteEffects.None, 0);
-            }
-
-            spriteBatch.Draw(texture, DrawPos, frame, new Color(255,255,255,200), AI1, frameOrigin, AI2, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, new Color(255,255,255,128), AI1, frameOrigin, AI2, SpriteEffects.None, 0);
 
             for (int i = 0; i < 8; i++)
             {

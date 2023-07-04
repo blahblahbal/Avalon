@@ -27,6 +27,8 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode
             Item.damage = 55;
             Item.maxStack = 9999;
             Item.knockBack = 5;
+            Item.autoReuse = true;
+            Item.DamageType = DamageClass.Ranged;
         }
         public override void AddRecipes()
         {

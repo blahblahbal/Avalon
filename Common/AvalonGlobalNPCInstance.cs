@@ -42,11 +42,14 @@ public class AvalonGlobalNPCInstance : GlobalNPC
         //BleedStacks = 1;
     }
 
-    //public override void DrawEffects(NPC npc, ref Color drawColor)
-    //{
-    //    if (Pathogen)
-    //        npc.color = Color.Lerp(drawColor = new Color(153, 114, 191),drawColor,0.5f);
-    //}
+    public override void DrawEffects(NPC npc, ref Color drawColor)
+    {
+        if (Pathogen)
+        {
+            drawColor.G = (byte)MathHelper.Clamp(drawColor.G - 76,0,255);
+            drawColor.R = (byte)MathHelper.Clamp(drawColor.R - 25,0,255);
+        }
+    }
     public override void UpdateLifeRegen(NPC npc, ref int damage)
     {
         if (Malaria)
@@ -134,6 +137,7 @@ public class AvalonGlobalNPCInstance : GlobalNPC
         }
         if (npc.lifeRegen < 0 && Pathogen)
         {
+            damage = (int)(damage * 1.5f);
             npc.lifeRegen = (int)(npc.lifeRegen * 1.5f);
         }
     }

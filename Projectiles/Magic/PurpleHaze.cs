@@ -87,8 +87,7 @@ public class PurpleHaze : ModProjectile
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
-        Projectile.velocity = oldVelocity * Main.rand.NextFloat(-0.2f,0.2f);
-        Projectile.tileCollide = false;
+        Projectile.velocity = Projectile.oldVelocity * 0.7f;
         return false;
     }
 }

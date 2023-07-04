@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.DataStructures;
 using Terraria.Audio;
+using Avalon.Particles;
 
 namespace Avalon.Projectiles.Magic;
 
@@ -74,6 +75,7 @@ public class CursedFlamelash : ModProjectile
 
     public override void Kill(int timeLeft)
     {
+        ParticleSystem.AddParticle(new CursedExplosionParticle(), Projectile.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f));
         SoundEngine.PlaySound(SoundID.Item14,Projectile.Center);
         float decreaseBy = 0.05f;
         for(int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type] / 2; i++)
@@ -97,11 +99,11 @@ public class CursedFlamelash : ModProjectile
 
         for (int i = 0; i < 30; i++)
         {
-            int D = Dust.NewDust(Projectile.Center, 0, 0, DustID.CursedTorch, 0, 0, 0, default, 3);
-            Main.dust[D].color = new Color(255, 255, 255, 0);
-            Main.dust[D].noGravity = !Main.rand.NextBool(3);
-            Main.dust[D].fadeIn = Main.rand.NextFloat(0f, 2f);
-            Main.dust[D].velocity = Main.rand.NextVector2Circular(4,6).RotatedBy(Projectile.rotation);
+            Dust D = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.CursedTorch, 0, 0, 0, default, 3);
+            D.color = new Color(255, 255, 255, 0);
+            D.noGravity = !Main.rand.NextBool(3);
+            D.fadeIn = Main.rand.NextFloat(0f, 2f);
+            D.velocity = Main.rand.NextVector2Circular(4,6).RotatedBy(Projectile.rotation);
         }
         if (Main.myPlayer == Projectile.owner)
         {
@@ -122,7 +124,7 @@ public class CursedFlamelash : ModProjectile
 
         //Main.EntitySpriteDraw(texture, drawPos, frame, Color.White, Rot, new Vector2(texture.Width, frameHeight) / 2, new Vector2(Projectile.scale,MathHelper.Clamp(Projectile.velocity.Length() * 0.2f,Projectile.scale,Projectile.scale * 2f)), SpriteEffects.None, 0);
         //The line above stretches the flame with speed
-        Main.EntitySpriteDraw(texture, drawPos, frame, Color.White, Rot, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture, drawPos, frame, new Color(230,255,0,0), Rot, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 
         return false;
     }
