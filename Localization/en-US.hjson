@@ -5502,7 +5502,7 @@ Mods: {
 			PeridotSquirrelCage.MapEntry: Peridot Squirrel Cage
 			TourmalineSquirrelCage.MapEntry: Tourmaline Squirrel Cage
 			ZirconSquirrelCage.MapEntry: Zircon Squirrel Cage
-			PlatinumChest.MapEntry0: Mods.Avalon.Tiles.PlatinumChest.MapEntry0
+			PlatinumChest.MapEntry0: Platinum Chest
 		}
 
 		Prefixes: {
