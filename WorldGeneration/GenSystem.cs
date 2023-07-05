@@ -40,12 +40,6 @@ public class GenSystem : ModSystem
             tasks.Insert(index + 1, new OreGenPreHardmode("Adding Avalon Ores", 237.4298f));
         }
 
-        //index = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Islands"));
-        //if (index != -1)
-        //{
-        //    tasks.Insert(index + 1, new SkyClouds());
-        //}
-
         index = tasks.FindIndex(genpass => genpass.Name.Equals("Weeds"));
         if (index != -1)
         {
@@ -92,10 +86,10 @@ public class GenSystem : ModSystem
             {
                 tasks.Insert(index + 2, new ContagionVines("Contagion Vines", 25f));
             }
-
-            currentPass = new CrystalMinesPass();
-            tasks.Insert(index + 4, currentPass);
-            totalWeight += currentPass.Weight;
+            
+            //currentPass = new CrystalMinesPass();
+            //tasks.Insert(index + 4, currentPass);
+            //totalWeight += currentPass.Weight;
         }
     }
 }

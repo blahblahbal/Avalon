@@ -28,11 +28,6 @@ class SonicScrewdriverMkIII : ModItem
         Item.UseSound = new SoundStyle($"{nameof(Avalon)}/Sounds/Item/SonicScrewdriver");
     }
 
-    public override bool AltFunctionUse(Player player)
-    {
-        return true;
-    }
-
     public override bool? UseItem(Player player)
     {
         //if (player.altFunctionUse == 2)

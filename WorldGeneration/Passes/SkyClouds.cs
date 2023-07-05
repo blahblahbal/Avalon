@@ -1,4 +1,5 @@
 using Avalon.World.Structures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -15,15 +16,15 @@ namespace Avalon.WorldGeneration.Passes
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
             int x = Main.maxTilesX / 2 - 100;
-            int y = 41;
-            if (Main.maxTilesY == 1800)
-            {
-                y = 51;
-            }
-            if (Main.maxTilesY == 2400)
-            {
-                y = 61;
-            }
+            int y = GetYOffset(Main.maxTilesY);
+            //if (Main.maxTilesY == 1800)
+            //{
+            //    y = 51;
+            //}
+            //if (Main.maxTilesY == 2400)
+            //{
+            //    y = 61;
+            //}
             if (Main.rand.NextBool(2))
             {
                 x = Main.maxTilesX - (Main.maxTilesX / 3);
@@ -44,16 +45,34 @@ namespace Avalon.WorldGeneration.Passes
                 MakeCloud(xcoord, ycoord);
             }
             //int ypos = (int)((float)(Main.maxTilesY / 1200) * 2 + 1);
+        }
 
-            
+        public static int GetYOffset(int maxTilesY)
+        {
+            // Calculate the Y offset based on world size
+            int smallWorldMaxY = 4200;
+            int mediumWorldMaxY = 6400;
+            int largeWorldMaxY = 8400;
 
-            
+            int smallWorldOffset = 41;
+            int mediumWorldOffset = 51;
+            int largeWorldOffset = 61;
+
+            if (maxTilesY <= smallWorldMaxY)
+                return smallWorldOffset;
+            else if (maxTilesY >= largeWorldMaxY)
+                return largeWorldOffset;
+            else
+            {
+                float percentage = (float)(maxTilesY - smallWorldMaxY) / (largeWorldMaxY - smallWorldMaxY);
+                int yOffset = (int)MathHelper.Lerp(smallWorldOffset, largeWorldOffset, percentage);
+                return yOffset;
+            }
         }
 
         #region clouds
         public static void MakeCloud(int x, int y)
         {
-
             GrowWall(x, y, WallID.Cloud, 4);
             GrowFragile(x, y, TileID.Cloud, 3);
             GrowWall(x, y - 3, WallID.Cloud, 8);
@@ -144,7 +163,7 @@ namespace Avalon.WorldGeneration.Passes
         }
         public static void GrowFragile(int x, int y, ushort type, int rounds)
         {
-            int growth = Main.rand.Next(256);
+            int growth = WorldGen.genRand.Next(256);
 
             for (int i = 0; i < 9; i++)
             {
@@ -153,7 +172,7 @@ namespace Avalon.WorldGeneration.Passes
                 if ((tgro & growth) == tgro)
                 {
                     int tx = (x + j - 1);
-                    int ty = (int)(y + (i / 3) - 1);
+                    int ty = y + (i / 3) - 1;
 
                     if (!Main.tile[tx, ty].HasTile)
                     {
@@ -181,7 +200,7 @@ namespace Avalon.WorldGeneration.Passes
                 if ((tgro & growth) == tgro)
                 {
                     int tx = (x + j - 1);
-                    int ty = (int)(y + (i / 3) - 1);
+                    int ty = y + (i / 3) - 1;
 
                     if (Main.tile[tx, ty].WallType == 0)
                     {
