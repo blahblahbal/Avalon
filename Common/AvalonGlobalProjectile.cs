@@ -73,7 +73,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                 ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PaladinsHammer, settings, projectile.owner);
             }
         }
-        if (!projectile.npcProj && !projectile.noEnchantments && (projectile.DamageType == DamageClass.Melee || ProjectileID.Sets.IsAWhip[projectile.type]))
+        if (!projectile.npcProj && !projectile.noEnchantments && !projectile.noEnchantmentVisuals && (projectile.DamageType == DamageClass.Melee || ProjectileID.Sets.IsAWhip[projectile.type]))
         {
             Vector2 boxPosition = projectile.position;
             int boxWidth = projectile.width;
@@ -120,11 +120,11 @@ internal class AvalonGlobalProjectile : GlobalProjectile
     {
         if (!projectile.npcProj && !projectile.noEnchantments && projectile.DamageType == DamageClass.Melee)
         {
-            if (Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().FrostGauntlet && hit.DamageType == DamageClass.Melee)
+            if (Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().FrostGauntlet && hit.DamageType == DamageClass.Melee && !Main.projectile[projectile.type].noEnchantments)
             {
                 target.AddBuff(BuffID.Frostburn2, 60 * 4);
             }
-            if (Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().PathogenImbue && hit.DamageType == DamageClass.Melee)
+            if (Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().PathogenImbue && hit.DamageType == DamageClass.Melee && !Main.projectile[projectile.type].noEnchantments)
             {
                 target.AddBuff(ModContent.BuffType<Pathogen>(), 60 * Main.rand.Next(3, 7));
             }

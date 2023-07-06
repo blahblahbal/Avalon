@@ -22,7 +22,7 @@ class ZincBullet : ModItem
         Item.width = dims.Width;
         Item.knockBack = 3f;
         Item.shoot = ProjectileID.Bullet;
-        Item.maxStack = 2000;
+        Item.maxStack = 9999;
         Item.value = 15;
         Item.height = dims.Height;
     }
