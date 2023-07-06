@@ -4797,6 +4797,21 @@ Mods: {
 				DisplayName: Sky Brick Wall
 				Tooltip: ""
 			}
+
+			Longbone: {
+				DisplayName: Longbone
+				Tooltip: ""
+			}
+
+			MoonlightLongbow: {
+				DisplayName: Moonlight Longbow
+				Tooltip: ""
+			}
+
+			Moonforce: {
+				DisplayName: Moonforce
+				Tooltip: Empowers your arrows with lunar energy
+			}
 		}
 
 		Projectiles: {
@@ -4893,6 +4908,9 @@ Mods: {
 			RhodiumLongbowHeld.DisplayName: Rhodium Longbow Held
 			IridiumLongbowHeld.DisplayName: Iridium Longbow Held
 			OsmiumLongbowHeld.DisplayName: Osmium Longbow Held
+			LongboneHeld.DisplayName: Longbone Held
+			MoonlightLongbowHeld.DisplayName: Moonlight Longbow Held
+			MoonforceHeld.DisplayName: Moonforce Held
 		}
 
 		NPCs: {

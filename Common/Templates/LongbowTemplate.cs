@@ -29,9 +29,9 @@ namespace Avalon.Common.Templates
             Projectile.tileCollide = false;
             Projectile.DamageType = DamageClass.Ranged;
         }
-        float Power;
+        public static float Power;
         bool Notified;
-        float FullGlow;
+        public static float FullPowerGlow;
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
@@ -52,7 +52,6 @@ namespace Avalon.Common.Templates
                 player.SetDummyItemTime(20);
                 if (player.whoAmI == Main.myPlayer)
                 {
-                    SoundEngine.PlaySound(shootSound);
                     Projectile.velocity = player.Center.DirectionTo(Main.MouseWorld);
                     player.direction = Main.MouseWorld.X < player.Center.X ? -1 : 1;
                 }
@@ -66,6 +65,8 @@ namespace Avalon.Common.Templates
                     Shoot(Projectile.GetSource_FromThis(), player.Center, Projectile.velocity * player.HeldItem.shootSpeed * Power, ammo, (int)(Projectile.damage * (0.1f + (Power * 1.9f))), Projectile.knockBack * (0.5f + Power),Power);
                     //Projectile.NewProjectile(Projectile.GetSource_FromThis(),player.Center,Projectile.velocity * player.HeldItem.shootSpeed * Power,ammo,(int)(Projectile.damage * (0.1f + Power)),Projectile.knockBack * (0.5f + Power), player.whoAmI);
                 }
+                if(Projectile.timeLeft == 19)
+                SoundEngine.PlaySound(shootSound, Projectile.Center);
             }
             Vector2 vector = Vector2.Normalize(Projectile.velocity) * HowFarShouldTheBowBeHeldFromPlayer;
             Projectile.Center = player.Center + new Vector2(vector.X, vector.Y * 0.9f);
@@ -75,10 +76,10 @@ namespace Avalon.Common.Templates
             if(Power == 1 && !Notified && player.whoAmI == Main.myPlayer)
             {
                 Notified = true;
-                FullGlow = 1;
+                FullPowerGlow = 1;
                 SoundEngine.PlaySound(SoundID.MaxMana);
             }
-            FullGlow -= 0.05f;
+            FullPowerGlow -= 0.05f;
             // Arrow light
             Vector2 drawPos = Projectile.Center + new Vector2((Projectile.frame * -2) + 8, 0).RotatedBy(Projectile.rotation);
             Projectile AmmoProj = new Projectile();
@@ -126,13 +127,13 @@ namespace Avalon.Common.Templates
         public override bool PreDraw(ref Color lightColor)
         {
             DefaultBowDraw(lightColor, Vector2.Zero);
-            if(FullGlow > 0 && Main.myPlayer == Projectile.owner)
+            if(FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
             {
-                DefaultBowDraw(new Color(200,255,235,0) * FullGlow,Vector2.Zero);
+                DefaultBowDraw(new Color(200,255,235,0) * FullPowerGlow,Vector2.Zero);
             }
             if (Main.player[Projectile.owner].channel)
             {
-                DrawArrow(lightColor);
+                DrawArrow(lightColor,Vector2.Zero);
             }
             return false;
         }
@@ -148,18 +149,18 @@ namespace Avalon.Common.Templates
             //No stretch
             //Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, Flip, 0);
         }
-        public void DrawArrow(Color lightColor, float rotationOffset = 0)
+        public void DrawArrow(Color lightColor, Vector2 Offset)
         {
+            Offset.Y *= Projectile.spriteDirection;
             int ammo = (int)Projectile.ai[0];
             Projectile AmmoProj = new Projectile();
             AmmoProj.type = ammo;
-
             SpriteEffects Flip = Projectile.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             Texture2D texture = TextureAssets.Projectile[ammo].Value;
             int frameHeight = texture.Height / Main.projFrames[ammo];
             Rectangle frame = new Rectangle(0, frameHeight * 0, texture.Width, frameHeight);
-            Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -3) + 8, 0).RotatedBy(Projectile.rotation + rotationOffset);
-            Main.EntitySpriteDraw(texture, drawPos, frame, AmmoProj.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2 + rotationOffset, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -3) + 8 + Offset.X, Offset.Y).RotatedBy(Projectile.rotation);
+            Main.EntitySpriteDraw(texture, drawPos, frame, AmmoProj.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         }
         public override bool ShouldUpdatePosition()
         {
