@@ -31,7 +31,7 @@ namespace Avalon.Projectiles.Ranged.Held
             DefaultBowDraw(lightColor, Vector2.Zero);
             if (FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
             {
-                DefaultBowDraw(new Color(200, 255, 235, 0) * FullPowerGlow, Vector2.Zero);
+                DefaultBowDraw(NotificationColor * FullPowerGlow, Vector2.Zero);
             }
             if (Main.player[Projectile.owner].channel)
             {

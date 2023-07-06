@@ -51,14 +51,16 @@ namespace Avalon.Projectiles.Ranged.Held
             DefaultBowDraw(new Color(200,200,200,128), Vector2.Zero);
             if (FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
             {
-                DefaultBowDraw(new Color(200, 255, 235, 0) * FullPowerGlow, Vector2.Zero);
+                DefaultBowDraw(NotificationColor * FullPowerGlow, Vector2.Zero);
             }
             if (Main.player[Projectile.owner].channel)
             {
                 DrawArrow(lightColor, new Vector2(0,-1));
                 for (int i = 0; i < 4; i++)
                 {
-                    DrawArrow(new Color(64, 0, 255, 0) * Power, new Vector2(0, -1) + new Vector2(Power * 3,0).RotatedBy((i * MathHelper.PiOver2) + Main.timeForVisualEffects * 0.1f));
+                    Color arrowColor = Color.Lerp(Color.Blue, Color.Red, Main.masterColor) * 0.6f;
+                    arrowColor.A = 0;
+                    DrawArrow(arrowColor * Power, new Vector2(0, -1) + new Vector2(Power * 2,0).RotatedBy((i * MathHelper.PiOver2) + Main.timeForVisualEffects * 0.1f));
                 }
             }
             return false;

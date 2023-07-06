@@ -1,5 +1,7 @@
+using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Utilities;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -11,11 +13,12 @@ namespace Avalon.Common.Templates
 {
     public abstract class LongbowTemplate : ModProjectile
     {
+        public static Color NotificationColor = new Color(128, 128, 128, 0);
         public override bool? CanHitNPC(NPC target) => false;
         public override bool CanHitPlayer(Player target) => false;
         public override bool CanHitPvp(Player target) => false;
 
-        public virtual SoundStyle shootSound => SoundID.Item5;
+        public virtual SoundStyle shootSound => new SoundStyle("Avalon/Sounds/Item/LongbowShot") {Pitch = 0.2f, Volume = 0.7f};
         public virtual float HowFarShouldTheBowBeHeldFromPlayer => 25;
         public override void SetDefaults()
         {
@@ -36,6 +39,7 @@ namespace Avalon.Common.Templates
         {
             Main.projFrames[Type] = 4;
         }
+        SlotId BowPullSound = SlotId.Invalid;
         public override void AI()
         {
             MoveHands();
@@ -43,6 +47,20 @@ namespace Avalon.Common.Templates
             Projectile.spriteDirection = player.direction;
             int ammo = (int)Projectile.ai[0];
             player.heldProj = Projectile.whoAmI;
+            if (Projectile.ai[1] == 0)
+            {
+                SoundStyle PullSound = new SoundStyle("Avalon/Sounds/Item/LongbowPull")
+                {
+                    Volume = 0.3f,
+                    Pitch = -(float)(player.itemAnimationMax * 0.012f),
+                    MaxInstances = 2,
+                };
+                BowPullSound = SoundEngine.PlaySound(PullSound, Projectile.position);
+            }
+            if ((!player.channel || Notified) && SoundEngine.TryGetActiveSound(BowPullSound, out ActiveSound sound) && sound != null && sound.IsPlaying)
+            {
+                sound.Volume = 0;
+            }
             if (player.channel)
             {
                 Projectile.ai[1]++;
@@ -129,7 +147,7 @@ namespace Avalon.Common.Templates
             DefaultBowDraw(lightColor, Vector2.Zero);
             if(FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
             {
-                DefaultBowDraw(new Color(200,255,235,0) * FullPowerGlow,Vector2.Zero);
+                DefaultBowDraw(NotificationColor * FullPowerGlow,Vector2.Zero);
             }
             if (Main.player[Projectile.owner].channel)
             {

@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -31,7 +32,7 @@ class TomeoftheDistantPast : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
-    public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         switch (Main.rand.Next(4))
         {
@@ -50,7 +51,8 @@ class TomeoftheDistantPast : ModItem
                 type = ModContent.ProjectileType<Projectiles.Magic.Bone4>();
                 break;
         }
-        velocity = velocity.RotatedByRandom(0.2f);
+        Projectile.NewProjectile(source, position, velocity.RotatedByRandom(0.2f), type, damage, knockback, player.whoAmI);
+        return false;
     }
     public override Vector2? HoldoutOffset()
     {
