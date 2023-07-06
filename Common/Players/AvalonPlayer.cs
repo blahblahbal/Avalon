@@ -610,24 +610,24 @@ public class AvalonPlayer : ModPlayer
         //     }
         // }
     }
-    public override void OnHitNPC(NPC npc, NPC.HitInfo hit, int damage)
+    public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
     {
-        if (hit.DamageType == DamageClass.Melee && BloodyWhetstone)
+        if (BloodyWhetstone)
         {
-            if (!npc.HasBuff<Bleeding>())
+            if (!target.HasBuff<Bleeding>())
             {
-                npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks = 1;
+                target.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks = 1;
             }
 
-            npc.AddBuff(ModContent.BuffType<Bleeding>(), 120);
+            target.AddBuff(ModContent.BuffType<Bleeding>(), 120);
         }
-        if (FrostGauntlet && hit.DamageType == DamageClass.Melee)
+        if (FrostGauntlet)
         {
-            npc.AddBuff(BuffID.Frostburn2, 60 * 4);
+            target.AddBuff(BuffID.Frostburn2, 60 * 4);
         }
-        if (PathogenImbue && hit.DamageType == DamageClass.Melee)
+        if (PathogenImbue)
         {
-            npc.AddBuff(ModContent.BuffType<Pathogen>(), 60 * Main.rand.Next(3, 7));
+            target.AddBuff(ModContent.BuffType<Pathogen>(), 60 * Main.rand.Next(3, 7));
         }
     }
     public override void MeleeEffects(Item item, Rectangle hitbox)

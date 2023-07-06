@@ -86,6 +86,13 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                     EmitAvalonEnchants(r.TopLeft(), r.Width, r.Height, projectile);
                 }
             }
+            else if (ProjectileID.Sets.IsAWhip[projectile.type])
+            {
+                projectile.WhipPointsForCollision.Clear();
+                Projectile.FillWhipControlPoints(projectile, projectile.WhipPointsForCollision);
+                Vector2 vector = projectile.WhipPointsForCollision[projectile.WhipPointsForCollision.Count - 1];
+                EmitAvalonEnchants(new Vector2(vector.X - (float)(projectile.width / 2), vector.Y - (float)(projectile.height / 2)), projectile.width, projectile.height, projectile);
+            }
             else
             {
                 EmitAvalonEnchants(boxPosition, boxWidth, boxHeight, projectile);
@@ -118,13 +125,13 @@ internal class AvalonGlobalProjectile : GlobalProjectile
     }
     public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
     {
-        if (!projectile.npcProj && !projectile.noEnchantments && projectile.DamageType == DamageClass.Melee)
+        if (!projectile.npcProj && !projectile.noEnchantments && (projectile.DamageType == DamageClass.Melee || ProjectileID.Sets.IsAWhip[projectile.type]))
         {
-            if (Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().FrostGauntlet && hit.DamageType == DamageClass.Melee && !Main.projectile[projectile.type].noEnchantments)
+            if (Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().FrostGauntlet)
             {
                 target.AddBuff(BuffID.Frostburn2, 60 * 4);
             }
-            if (Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().PathogenImbue && hit.DamageType == DamageClass.Melee && !Main.projectile[projectile.type].noEnchantments)
+            if (Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().PathogenImbue)
             {
                 target.AddBuff(ModContent.BuffType<Pathogen>(), 60 * Main.rand.Next(3, 7));
             }
