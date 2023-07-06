@@ -81,11 +81,17 @@ namespace Avalon.Projectiles.Ranged.Held
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ParticleSystem.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default,(projectile.width * 2f) / 128f);
+            if (Moonlight)
+            {
+                ParticleSystem.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
+            }
         }
         public override void OnHitPlayer(Projectile projectile, Player target, Player.HurtInfo info)
         {
-            ParticleSystem.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
+            if (Moonlight)
+            {
+                ParticleSystem.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
+            }
         }
         public override void Kill(Projectile projectile, int timeLeft)
         {

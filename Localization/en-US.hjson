@@ -4812,6 +4812,11 @@ Mods: {
 				DisplayName: Moonforce
 				Tooltip: Empowers your arrows with lunar energy
 			}
+
+			Longbow: {
+				DisplayName: Longbow
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4911,6 +4916,7 @@ Mods: {
 			LongboneHeld.DisplayName: Longbone Held
 			MoonlightLongbowHeld.DisplayName: Moonlight Longbow Held
 			MoonforceHeld.DisplayName: Moonforce Held
+			LongbowHeld.DisplayName: Longbow Held
 		}
 
 		NPCs: {

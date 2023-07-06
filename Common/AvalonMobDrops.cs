@@ -1,4 +1,4 @@
-﻿using Avalon.DropConditions;
+using Avalon.DropConditions;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Armor.PreHardmode;
@@ -11,6 +11,7 @@ using Avalon.Items.Placeable.Painting;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -38,6 +39,10 @@ public class AvalonMobDrops : GlobalNPC
         if(npc.type == NPCID.AngryBones || npc.type >= NPCID.AngryBonesBig && npc.type <= NPCID.AngryBonesBigHelmet)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BlackWhetstone>(), 100));
+        }
+        if(npc.type == NPCID.GoblinArcher)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Longbow>(),75));
         }
         if(npc.type == NPCID.SpikedIceSlime || npc.type == NPCID.IceGolem || npc.type == NPCID.IcyMerman)
         {

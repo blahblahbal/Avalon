@@ -40,4 +40,10 @@ public class Moonforce : ModItem
         Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<MoonforceHeld>(), damage, knockback, player.whoAmI, type);
         return false;
     }
+    public override void AddRecipes()
+    {
+        Recipe.Create(Type).AddTile(TileID.DemonAltar).AddIngredient(ModContent.ItemType<RhodiumLongbow>()).AddIngredient(ModContent.ItemType<Longbone>()).AddIngredient(ModContent.ItemType<Longbow>()).Register();
+        Recipe.Create(Type).AddTile(TileID.DemonAltar).AddIngredient(ModContent.ItemType<OsmiumLongbow>()).AddIngredient(ModContent.ItemType<Longbone>()).AddIngredient(ModContent.ItemType<Longbow>()).Register();
+        Recipe.Create(Type).AddTile(TileID.DemonAltar).AddIngredient(ModContent.ItemType<IridiumLongbow>()).AddIngredient(ModContent.ItemType<Longbone>()).AddIngredient(ModContent.ItemType<Longbow>()).Register();
+    }
 }
