@@ -162,10 +162,10 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                 {
                     //float multiply = ((float)(length - i) / length) * projectile.Opacity * 0.2f;
                     float multiply = (float)(length - i) / length * 0.5f;
-                    Main.EntitySpriteDraw(texture, projectile.oldPos[i] - Main.screenPosition + (projectile.Size / 2f), frame, new Color(128, 128, 255, 0) * multiply, projectile.oldRot[i] * rotationMultiplier, new Vector2(texture.Width, frameHeight) / 2, projectile.scale, SpriteEffects.None, 0);
+                    Main.EntitySpriteDraw(texture, projectile.oldPos[i] - Main.screenPosition + (projectile.Size / 2f), frame, new Color(128, 128, 255, 128) * multiply, projectile.oldRot[i] * rotationMultiplier, new Vector2(texture.Width, frameHeight) / 2, projectile.scale, SpriteEffects.None, 0);
                 }
 
-                Main.EntitySpriteDraw(texture, projectile.position - Main.screenPosition + (projectile.Size / 2f), frame, new Color(128, 128, 255, 25) * 0.7f, projectile.rotation * rotationMultiplier, new Vector2(texture.Width, frameHeight) / 2, projectile.scale, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture, projectile.position - Main.screenPosition + (projectile.Size / 2f), frame, new Color(255, 255, 255, 175) * 0.7f, projectile.rotation * rotationMultiplier, new Vector2(texture.Width, frameHeight) / 2, projectile.scale, SpriteEffects.None, 0);
                 return false;
             }
         }

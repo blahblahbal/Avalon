@@ -52,7 +52,7 @@ namespace Avalon.Common.Templates
                 SoundStyle PullSound = new SoundStyle("Avalon/Sounds/Item/LongbowPull")
                 {
                     Volume = 0.3f,
-                    Pitch = -(float)(player.itemAnimationMax * 0.012f),
+                    Pitch = -(float)(player.itemAnimationMax * 0.015f),
                     MaxInstances = 2,
                 };
                 BowPullSound = SoundEngine.PlaySound(PullSound, Projectile.position);
@@ -162,6 +162,7 @@ namespace Avalon.Common.Templates
             int frameHeight = texture.Height / Main.projFrames[Projectile.type];
             Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
             Vector2 drawPos = Projectile.Center - Main.screenPosition + Offset;
+            drawPos.Y += Main.player[Projectile.owner].gfxOffY;
             //Stretch 
             Main.EntitySpriteDraw(texture, drawPos - new Vector2(Projectile.frame,0).RotatedBy(Projectile.rotation), frame, lightColor, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, new Vector2(1 + (Projectile.frame * 0.06f),1) * Projectile.scale * Scale, Flip, 0);
             //No stretch
@@ -178,6 +179,7 @@ namespace Avalon.Common.Templates
             int frameHeight = texture.Height / Main.projFrames[ammo];
             Rectangle frame = new Rectangle(0, frameHeight * 0, texture.Width, frameHeight);
             Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -3) + 8 + Offset.X, Offset.Y).RotatedBy(Projectile.rotation);
+            drawPos.Y += Main.player[Projectile.owner].gfxOffY;
             Main.EntitySpriteDraw(texture, drawPos, frame, AmmoProj.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         }
         public override bool ShouldUpdatePosition()
