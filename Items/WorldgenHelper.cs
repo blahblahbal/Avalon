@@ -32,8 +32,8 @@ class WorldgenHelper : ModItem
         int x = (int)Main.MouseWorld.X / 16;
         int y = (int)Main.MouseWorld.Y / 16;
 
-        if(player.ItemAnimationJustStarted)
-        SkyClouds.MakeCloud(x, y);
+        if (player.ItemAnimationJustStarted)
+            SkyClouds.MakeCloud(x, y);
 
         return false;
     }

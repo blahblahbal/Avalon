@@ -104,8 +104,9 @@ namespace Avalon.WorldGeneration.Passes
                 float startingWidth = maxWidth - height * widthMultiply;
                 for (float width = -startingWidth; width < startingWidth; width += 0.5f)
                 {
-                    //Utils.MakeCircleNormal (x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)height + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(5, 7), (ushort)tileType, WallID.Cloud);
-                    Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(5, 7), tileType, tileType);
+                    int TILEFUCKABLE = tileType;
+                    if (height > maxWidth / 3) TILEFUCKABLE = TileID.Dirt;
+                    Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(5, 7), TILEFUCKABLE, TILEFUCKABLE);
                 }
             }
 
