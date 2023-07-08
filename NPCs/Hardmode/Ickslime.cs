@@ -63,27 +63,6 @@ public class Ickslime : ModNPC
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.IckslimeBanner>();
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
-
-        int J = Main.rand.Next(0, 3);
-        if (J == 1)
-        {
-            NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
-            NPC.defense = (int)(NPC.defense * 0.8f);
-            NPC.scale *= 0.85f;
-            NPC.knockBackResist *= 1.2f;
-            NPC.value *= 0.8f;
-        }
-        if (J == 2)
-        {
-            NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
-            NPC.defense = (int)(NPC.defense * 1.1f);
-            NPC.scale *= 1.15f;
-            NPC.knockBackResist *= 0.9f;
-            NPC.value *= 1.2f;
-        }
-        NPC.Size *= NPC.scale;
-        NPC.life = NPC.lifeMax;
-        NPC.netUpdate = true;
     }
     //public override void OnSpawn(IEntitySource source)
     //{
@@ -122,9 +101,33 @@ public class Ickslime : ModNPC
         return ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
             !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
     }
-
+    bool spawned;
     public override void AI()
     {
+        if (!spawned)
+        {
+            spawned = true;
+            int J = Main.rand.Next(0, 3);
+            if (J == 1)
+            {
+                NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
+                NPC.defense = (int)(NPC.defense * 0.8f);
+                NPC.scale *= 0.85f;
+                NPC.knockBackResist *= 1.2f;
+                NPC.value *= 0.8f;
+            }
+            if (J == 2)
+            {
+                NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
+                NPC.defense = (int)(NPC.defense * 1.1f);
+                NPC.scale *= 1.15f;
+                NPC.knockBackResist *= 0.9f;
+                NPC.value *= 1.2f;
+            }
+            NPC.Size *= NPC.scale;
+            NPC.life = NPC.lifeMax;
+            NPC.netUpdate = true;
+        }
         if (Main.expertMode)
             NPC.ai[1]++;
     }

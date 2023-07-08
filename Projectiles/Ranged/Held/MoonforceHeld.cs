@@ -15,7 +15,6 @@ namespace Avalon.Projectiles.Ranged.Held
 {
     public class MoonforceHeld : LongbowTemplate
     {
-        public override SoundStyle shootSound => SoundID.Item102;
         public override void PostAI()
         {
             if (Main.player[Projectile.owner].channel)
@@ -29,6 +28,7 @@ namespace Avalon.Projectiles.Ranged.Held
         }
         public override void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)
         {
+            SoundEngine.PlaySound(SoundID.Item14,Projectile.position);
             float ScaleMod = 1 + (Power * 5);
             Projectile P = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Projectile.owner);
             if (Power > 0.3f)
@@ -80,7 +80,17 @@ namespace Avalon.Projectiles.Ranged.Held
             }
             return base.TileCollideStyle(projectile, ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-
+        public override void PostAI(Projectile projectile)
+        {
+            if (Moonlight && Main.rand.NextBool(projectile.width / 16))
+            {
+                Dust d = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, Main.rand.Next(DustID.CorruptTorch, DustID.JungleTorch));
+                d.velocity = projectile.velocity.RotatedByRandom(0.1f) * 0.5f * (projectile.extraUpdates + 1);
+                d.scale = MathHelper.Clamp(projectile.width / 30, 0.2f, 100);
+                d.fadeIn = 1;
+                d.noGravity = true;
+            }
+        }
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Moonlight)
