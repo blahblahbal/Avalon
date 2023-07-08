@@ -71,7 +71,7 @@ Mods: {
 				DisplayName: Master Sword
 				Tooltip:
 					'''
-					Shoots a beam of energy if you're at full hp
+					Shoots a beam of energy if you're healthy
 					'The sword that seals the darkness'
 					'''
 			}

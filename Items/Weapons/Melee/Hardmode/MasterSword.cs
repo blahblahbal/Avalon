@@ -37,10 +37,11 @@ public class MasterSword : ModItem
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
-        if (player.statLife == player.statLifeMax2)
+        if (player.statLife >= player.statLifeMax2 * 0.80f)
         {
             SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/MasterSword"), player.position);
-            return true;
+            Projectile.NewProjectile(source, position, velocity, type, (int)(damage * 1.3f), knockback, player.whoAmI);
+            return false;
         }
         return false;
         //if (player.statLife == player.statLifeMax2)
