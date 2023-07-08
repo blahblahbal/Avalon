@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
+using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
 namespace Avalon.WorldGeneration.Passes
@@ -40,11 +41,32 @@ namespace Avalon.WorldGeneration.Passes
             for (int amount = 0; amount < Amount_Of_Spawns3; amount++)
             {
                 xcoord = WorldGen.genRand.Next(30, Main.maxTilesX - 30);
-                if (xcoord > x - 230 && xcoord < x + 230) continue;
+                if (xcoord > x - 20 && xcoord < x + 230) continue;
                 ycoord = WorldGen.genRand.Next(50, 150);
                 MakeCloud(xcoord, ycoord);
             }
             //int ypos = (int)((float)(Main.maxTilesY / 1200) * 2 + 1);
+        }
+
+        public static bool CheckTilesInRange(int x, int y, int radius)
+        {
+            bool flag = true;
+            for (int i = x - radius; i < x + radius; i++)
+            {
+                for (int j = y - radius; j < y + radius; j++)
+                {
+                    if (Main.tile[i, j].HasTile &&
+                        (Main.tile[i, j].TileType == TileID.Dirt || Main.tile[i, j].TileType == TileID.Grass ||
+                        Main.tile[i, j].TileType == TileID.Trees || Main.tile[i, j].TileType == TileID.Sunplate ||
+                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.MoonplateBlock>() ||
+                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.TwiliplateBlock>()))
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+            return flag;
         }
 
         public static int GetYOffset(int maxTilesY)
@@ -73,6 +95,10 @@ namespace Avalon.WorldGeneration.Passes
         #region clouds
         public static void MakeCloud(int x, int y)
         {
+            if (!CheckTilesInRange(x, y, 8))
+            {
+                return;
+            }
             GrowWall(x, y, WallID.Cloud, 4);
             GrowFragile(x, y, TileID.Cloud, 3);
             GrowWall(x, y - 3, WallID.Cloud, 8);
