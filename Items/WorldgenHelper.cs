@@ -34,7 +34,10 @@ class WorldgenHelper : ModItem
         //WorldGeneration.Structures.Hellcastle.GenerateHellcastle(x, y);
         //y = WorldGeneration.Utils.CaesiumTileCheck(x, y);
         //MakeSpike(x, y, 20, 10, 1);
-        WorldGeneration.Passes.Contagion.ContagionRunner(x, y);
+        //WorldGeneration.Passes.SkyClouds.GrowCloudIsland(x, y, 20, 10);
+        GrowFragile(x, y, TileID.Cloud, 40);
+        
+        //WorldGeneration.Passes.Contagion.ContagionRunner(x, y);
         //WorldGeneration.Passes.Contagion.MakeOval(x, y, 10, 20, ModContent.TileType<Tiles.Contagion.Chunkstone>());
         return true;
         //int xStored = x;
@@ -57,6 +60,52 @@ class WorldgenHelper : ModItem
         //World.Structures.CaesiumSpike.CreateSpikeUp((int)player.position.X / 16, (int)player.position.Y / 16, (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>());
         //World.Structures.IceShrine.Generate((int)player.position.X / 16, (int)player.position.Y / 16);
     }
+    public static void GrowCloud(int x, int y)
+    {
+        GrowFragile(x, y, TileID.Cloud, 40);
+        for (int i = x; i < x + 40; i++)
+        {
+            for (int j = y; j < y + 40; j++)
+            {
+                if (Main.tile[i, j].TileType == TileID.Cloud &&
+                    !Main.tile[i, j + 1].HasTile)
+                {
+                    Main.tile[i, j].TileType = TileID.RainCloud;
+                }
+            }
+        }
+    }
+
+    public static void GrowFragile(int x, int y, ushort type, int rounds)
+    {
+        int growth = WorldGen.genRand.Next(256);
+
+        for (int i = 0; i < 18; i++)
+        {
+            int j = i % 3;
+            int tgro = 1 << i;
+            if ((tgro & growth) == tgro)
+            {
+                int tx = (x + j - 1);
+                int ty = y + (i / 3) - 1;
+
+                if (!Main.tile[tx, ty].HasTile)
+                {
+                    Tile t = Main.tile[tx, ty];
+                    t.HasTile = true;
+                    t.TileType = type;
+                    WorldGen.SquareTileFrame(tx, ty);
+                    if (rounds > 0)
+                    {
+                        GrowFragile(tx, ty, type, rounds - 1);
+                    }
+                }
+            }
+        }
+        WorldGen.SquareTileFrame(x, y);
+    }
+
+
     //public static void GetXCoord(int x, int y, int ylength, ref int xCoord)
     //{
     //    bool leftSideActive = false;
@@ -92,6 +141,8 @@ class WorldgenHelper : ModItem
     //    }
     //    return xStored;
     //}
+
+
 
     /// <summary>
     /// Makes a spike at the given coordinates.

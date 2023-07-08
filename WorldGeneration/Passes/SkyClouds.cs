@@ -1,5 +1,6 @@
 using Avalon.World.Structures;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -95,10 +96,10 @@ namespace Avalon.WorldGeneration.Passes
         #region clouds
         public static void MakeCloud(int x, int y)
         {
-            if (!CheckTilesInRange(x, y, 8))
-            {
-                return;
-            }
+            //if (!CheckTilesInRange(x, y, 8))
+            //{
+            //    return;
+            //}
             GrowWall(x, y, WallID.Cloud, 4);
             GrowFragile(x, y, TileID.Cloud, 3);
             GrowWall(x, y - 3, WallID.Cloud, 8);
@@ -187,6 +188,63 @@ namespace Avalon.WorldGeneration.Passes
                 GrowFragile(i + 2, j, TileID.Cloud, 5);
             }
         }
+
+        public static void GenerateParabola(int x, int y, int width, int height)
+        {
+            int startX = x; // Adjust the starting X-coordinate of the parabola
+            int startY = y; // Adjust the starting Y-coordinate of the parabola
+            int parabolaWidth = width; // Adjust the width of the parabola
+
+            for (int q = 0; q < parabolaWidth; q++)
+            {
+                int z = (int)(startY - (0.1f * Math.Pow(q - startX, 1.5))); // Adjust the coefficient to control the shape of the parabola
+
+                // Place the tile
+                //Utils.MakeCircle(startX + q, z, 5, TileID.Cloud, false, WallID.Cloud);
+                WorldGen.PlaceTile(startX + q, z, TileID.Cloud); // Change the tile ID to the desired tile
+
+                // Place additional tiles to create the parabolic shape
+                for (int i = 1; i <= 3; i++)
+                {
+                    //Utils.MakeCircle(startX + q, z + i, 5, TileID.Cloud, false, WallID.Cloud);
+                    WorldGen.PlaceTile(startX + q, z + i, TileID.Cloud); // Change the tile ID to the desired tile
+                }
+            }
+
+            //int width = Main.maxTilesX;
+            //int height = Main.maxTilesY / 2; // Adjust the height of the parabola
+
+            //int xCenter = width / 2;
+            //int yCenter = y + height / 2;
+
+            //for (int q = x; q < x + width; q++)
+            //{
+            //    int z = (int)(yCenter + (0.1f * Math.Pow(q - xCenter, 2))); // Adjust the coefficient to control the shape of the parabola
+
+            //    // Place the tile
+            //    Utils.MakeCircle(q, z, 5, TileID.Cloud, false, WallID.Cloud);
+
+            //    //WorldGen.PlaceTile(q, z, TileID.Dirt); // Change the tile ID to the desired tile
+
+            //    // Place additional tiles to create the parabolic shape
+            //    for (int i = 1; i <= 3; i++)
+            //    {
+            //        Utils.MakeCircle(q, z + i, 5, TileID.Cloud, false, WallID.Cloud);
+            //        //WorldGen.PlaceTile(q, z + i, TileID.Dirt); // Change the tile ID to the desired tile
+            //    }
+            //}
+        }
+
+        public static void GrowCloudIsland(int x, int y, int width, int height)
+        {
+            for (int i = x + 4; i < x + width - 4; i++)
+            {
+                Utils.MakeCircleNormal(i, y + height / 2, height / 2, TileID.Dirt);
+            }
+
+            GenerateParabola(x, y, width, height);
+        }
+
         public static void GrowFragile(int x, int y, ushort type, int rounds)
         {
             int growth = WorldGen.genRand.Next(256);

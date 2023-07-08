@@ -220,6 +220,28 @@ public class Utils
             }
         }
     }
+    public static void MakeCircleNormal(int x, int y, int r, ushort tileType, ushort wallType = 0)
+    {
+        for (int k = x - r; k <= x + r; k++)
+        {
+            for (int l = y - r; l <= y + r; l++)
+            {
+                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < r)
+                {
+                    Tile t = Framing.GetTileSafely(k, l);
+                    t.HasTile = true;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    Main.tile[k, l].TileType = tileType;
+                    WorldGen.SquareTileFrame(k, l);
+                }
+                if (wallType != 0)
+                {
+                    Main.tile[k, l].WallType = wallType;
+                }
+            }
+        }
+    }
     public static void MakeCircle2(int x, int y, int radius, int outerType, int innerType)
     {
         for (int k = x - radius; k <= x + radius; k++)
