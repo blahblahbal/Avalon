@@ -38,12 +38,12 @@ namespace Avalon.WorldGeneration.Passes
 
             int xcoord;
             int ycoord;
-            int Amount_Of_Spawns3 = 200 + Main.maxTilesY / 10;
+            int Amount_Of_Spawns3 = 5 + Main.maxTilesY / 10;
             for (int amount = 0; amount < Amount_Of_Spawns3; amount++)
             {
-                xcoord = WorldGen.genRand.Next(30, Main.maxTilesX - 30);
-                if (xcoord > x - 20 && xcoord < x + 230) continue;
-                ycoord = WorldGen.genRand.Next(50, 150);
+                xcoord = WorldGen.genRand.Next(300, Main.maxTilesX - 300);
+                if (xcoord > x - 220 && xcoord < x + 379) continue;
+                ycoord = WorldGen.genRand.Next(100, 200);
                 MakeCloud(xcoord, ycoord);
             }
             //int ypos = (int)((float)(Main.maxTilesY / 1200) * 2 + 1);
@@ -96,85 +96,100 @@ namespace Avalon.WorldGeneration.Passes
         #region clouds
         public static void MakeCloud(int x, int y)
         {
+            int tileType = (x > 1500 && x < Main.maxTilesX - 1500) ? TileID.Cloud : TileID.RainCloud;
+            int maxWidth = WorldGen.genRand.Next(10, 30);
+            float widthMultiply = WorldGen.genRand.NextFloat(1, 3);
+            for (float height = 0; height < maxWidth; height += WorldGen.genRand.NextFloat(0.5f, 1f))
+            {
+                float startingWidth = maxWidth - height * widthMultiply;
+                for (float width = -startingWidth; width < startingWidth; width += 0.5f)
+                {
+                    //Utils.MakeCircleNormal (x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)height + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(5, 7), (ushort)tileType, WallID.Cloud);
+                    Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(5, 7), tileType, tileType);
+                }
+            }
+
+            #region classic
             //if (!CheckTilesInRange(x, y, 8))
             //{
             //    return;
             //}
-            GrowWall(x, y, WallID.Cloud, 4);
-            GrowFragile(x, y, TileID.Cloud, 3);
-            GrowWall(x, y - 3, WallID.Cloud, 8);
-            GrowFragile(x, y - 2, TileID.Cloud, 7);
-            GrowWall(x + 2, y, WallID.Cloud, 4);
-            GrowFragile(x + 1, y, TileID.Cloud, 3);
-            GrowWall(x + 1, y, WallID.Cloud, 5);
-            GrowFragile(x, y, TileID.Cloud, 4);
-            GrowWall(x - 2, y, WallID.Cloud, 4);
-            GrowFragile(x - 1, y, TileID.Cloud, 3);
-            GrowWall(x - 1, y, WallID.Cloud, 5);
-            GrowFragile(x, y, TileID.Cloud, 4);
-            GrowWall(x + 4, y, WallID.Cloud, 3);
-            GrowFragile(x + 3, y, TileID.Cloud, 2);
-            GrowWall(x - 4, y, WallID.Cloud, 3);
-            GrowFragile(x - 3, y, TileID.Cloud, 2);
+            //GrowWall(x, y, WallID.Cloud, 4);
+            //GrowFragile(x, y, TileID.Cloud, 3);
+            //GrowWall(x, y - 3, WallID.Cloud, 8);
+            //GrowFragile(x, y - 2, TileID.Cloud, 7);
+            //GrowWall(x + 2, y, WallID.Cloud, 4);
+            //GrowFragile(x + 1, y, TileID.Cloud, 3);
+            //GrowWall(x + 1, y, WallID.Cloud, 5);
+            //GrowFragile(x, y, TileID.Cloud, 4);
+            //GrowWall(x - 2, y, WallID.Cloud, 4);
+            //GrowFragile(x - 1, y, TileID.Cloud, 3);
+            //GrowWall(x - 1, y, WallID.Cloud, 5);
+            //GrowFragile(x, y, TileID.Cloud, 4);
+            //GrowWall(x + 4, y, WallID.Cloud, 3);
+            //GrowFragile(x + 3, y, TileID.Cloud, 2);
+            //GrowWall(x - 4, y, WallID.Cloud, 3);
+            //GrowFragile(x - 3, y, TileID.Cloud, 2);
 
-            /* GrowWall(x,y,WallID.Cloud, 4);
-            GrowWall(x,y-3,WallID.Cloud, 8);
-            GrowWall(x+2,y,WallID.Cloud, 4);
-            GrowWall(x+1,y,WallID.Cloud, 5);
-            GrowWall(x-2,y,WallID.Cloud, 4);
-            GrowWall(x-1,y,WallID.Cloud, 5);
-            GrowWall(x+4,y,WallID.Cloud, 3);
-            GrowWall(x-4,y,WallID.Cloud, 3); */
+            ///* GrowWall(x,y,WallID.Cloud, 4);
+            //GrowWall(x,y-3,WallID.Cloud, 8);
+            //GrowWall(x+2,y,WallID.Cloud, 4);
+            //GrowWall(x+1,y,WallID.Cloud, 5);
+            //GrowWall(x-2,y,WallID.Cloud, 4);
+            //GrowWall(x-1,y,WallID.Cloud, 5);
+            //GrowWall(x+4,y,WallID.Cloud, 3);
+            //GrowWall(x-4,y,WallID.Cloud, 3); */
 
 
-            x += 6;
-            y -= 6;
+            //x += 6;
+            //y -= 6;
 
-            GrowWall(x, y, WallID.Cloud, 4);
-            GrowFragile(x, y, TileID.Cloud, 3);
-            GrowWall(x, y - 3, WallID.Cloud, 8);
-            GrowFragile(x, y - 2, TileID.Cloud, 7);
-            GrowWall(x + 2, y, WallID.Cloud, 4);
-            GrowFragile(x + 1, y, TileID.Cloud, 3);
-            GrowWall(x + 1, y, WallID.Cloud, 5);
-            GrowFragile(x, y, TileID.Cloud, 4);
-            GrowWall(x - 2, y, WallID.Cloud, 4);
-            GrowFragile(x - 1, y, TileID.Cloud, 3);
-            GrowWall(x - 1, y, WallID.Cloud, 5);
-            GrowFragile(x, y, TileID.Cloud, 4);
-            GrowWall(x + 4, y, WallID.Cloud, 3);
-            GrowFragile(x + 3, y, TileID.Cloud, 2);
-            GrowWall(x - 4, y, WallID.Cloud, 3);
-            GrowFragile(x - 3, y, TileID.Cloud, 2);
+            //GrowWall(x, y, WallID.Cloud, 4);
+            //GrowFragile(x, y, TileID.Cloud, 3);
+            //GrowWall(x, y - 3, WallID.Cloud, 8);
+            //GrowFragile(x, y - 2, TileID.Cloud, 7);
+            //GrowWall(x + 2, y, WallID.Cloud, 4);
+            //GrowFragile(x + 1, y, TileID.Cloud, 3);
+            //GrowWall(x + 1, y, WallID.Cloud, 5);
+            //GrowFragile(x, y, TileID.Cloud, 4);
+            //GrowWall(x - 2, y, WallID.Cloud, 4);
+            //GrowFragile(x - 1, y, TileID.Cloud, 3);
+            //GrowWall(x - 1, y, WallID.Cloud, 5);
+            //GrowFragile(x, y, TileID.Cloud, 4);
+            //GrowWall(x + 4, y, WallID.Cloud, 3);
+            //GrowFragile(x + 3, y, TileID.Cloud, 2);
+            //GrowWall(x - 4, y, WallID.Cloud, 3);
+            //GrowFragile(x - 3, y, TileID.Cloud, 2);
 
-            /* GrowWall(x,y,WallID.Cloud, 4);
-            GrowWall(x,y-3,WallID.Cloud, 8);
-            GrowWall(x+2,y,WallID.Cloud, 4);
-            GrowWall(x+1,y,WallID.Cloud, 5);
-            GrowWall(x-2,y,WallID.Cloud, 4);
-            GrowWall(x-1,y,WallID.Cloud, 5);
-            GrowWall(x+4,y,WallID.Cloud, 3);
-            GrowWall(x-4,y,WallID.Cloud, 3); */
+            ///* GrowWall(x,y,WallID.Cloud, 4);
+            //GrowWall(x,y-3,WallID.Cloud, 8);
+            //GrowWall(x+2,y,WallID.Cloud, 4);
+            //GrowWall(x+1,y,WallID.Cloud, 5);
+            //GrowWall(x-2,y,WallID.Cloud, 4);
+            //GrowWall(x-1,y,WallID.Cloud, 5);
+            //GrowWall(x+4,y,WallID.Cloud, 3);
+            //GrowWall(x-4,y,WallID.Cloud, 3); */
 
-            y += 6;
-            x += 6;
+            //y += 6;
+            //x += 6;
 
-            GrowWall(x, y, WallID.Cloud, 4);
-            GrowFragile(x, y, TileID.Cloud, 3);
-            GrowWall(x, y - 3, WallID.Cloud, 8);
-            GrowFragile(x, y - 2, TileID.Cloud, 7);
-            GrowWall(x + 2, y, WallID.Cloud, 4);
-            GrowFragile(x + 1, y, TileID.Cloud, 3);
-            GrowWall(x + 1, y, WallID.Cloud, 5);
-            GrowFragile(x, y, TileID.Cloud, 4);
-            GrowWall(x - 2, y, WallID.Cloud, 4);
-            GrowFragile(x - 1, y, TileID.Cloud, 3);
-            GrowWall(x - 1, y, WallID.Cloud, 5);
-            GrowFragile(x, y, TileID.Cloud, 4);
-            GrowWall(x + 4, y, WallID.Cloud, 3);
-            GrowFragile(x + 3, y, TileID.Cloud, 2);
-            GrowWall(x - 4, y, WallID.Cloud, 3);
-            GrowFragile(x - 3, y, TileID.Cloud, 2);
+            //GrowWall(x, y, WallID.Cloud, 4);
+            //GrowFragile(x, y, TileID.Cloud, 3);
+            //GrowWall(x, y - 3, WallID.Cloud, 8);
+            //GrowFragile(x, y - 2, TileID.Cloud, 7);
+            //GrowWall(x + 2, y, WallID.Cloud, 4);
+            //GrowFragile(x + 1, y, TileID.Cloud, 3);
+            //GrowWall(x + 1, y, WallID.Cloud, 5);
+            //GrowFragile(x, y, TileID.Cloud, 4);
+            //GrowWall(x - 2, y, WallID.Cloud, 4);
+            //GrowFragile(x - 1, y, TileID.Cloud, 3);
+            //GrowWall(x - 1, y, WallID.Cloud, 5);
+            //GrowFragile(x, y, TileID.Cloud, 4);
+            //GrowWall(x + 4, y, WallID.Cloud, 3);
+            //GrowFragile(x + 3, y, TileID.Cloud, 2);
+            //GrowWall(x - 4, y, WallID.Cloud, 3);
+            //GrowFragile(x - 3, y, TileID.Cloud, 2);
+            #endregion classic
         }
 
         public static void CloudPlatform()

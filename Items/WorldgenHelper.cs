@@ -1,3 +1,4 @@
+using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -28,37 +29,13 @@ class WorldgenHelper : ModItem
     }
     public override bool? UseItem(Player player)
     {
-        int x = (int)player.position.X / 16;
-        int y = (int)player.position.Y / 16;
+        int x = (int)Main.MouseWorld.X / 16;
+        int y = (int)Main.MouseWorld.Y / 16;
 
-        //WorldGeneration.Structures.Hellcastle.GenerateHellcastle(x, y);
-        //y = WorldGeneration.Utils.CaesiumTileCheck(x, y);
-        //MakeSpike(x, y, 20, 10, 1);
-        //WorldGeneration.Passes.SkyClouds.GrowCloudIsland(x, y, 20, 10);
-        GrowFragile(x, y, TileID.Cloud, 40);
-        
-        //WorldGeneration.Passes.Contagion.ContagionRunner(x, y);
-        //WorldGeneration.Passes.Contagion.MakeOval(x, y, 10, 20, ModContent.TileType<Tiles.Contagion.Chunkstone>());
-        return true;
-        //int xStored = x;
-        //List<int> l = new List<int>()
-        //{
-        //    ModContent.TileType<Tiles.Nest>(),
-        //    ModContent.TileType<Tiles.Loamstone>(),
-        //    ModContent.TileType<Tiles.BismuthBrick>(),
-        //    TileID.IridescentBrick,
-        //};
-        //World.Utils.GetSkyFortressXCoord(x, y, 5, 5, ref xStored);
-        //World.Utils.GetXCoordGeneric(x, y, 5, 5, ref xStored, l, true, true);
-        //World.Utils.MakeSquareTemp(x, y);
-        //Main.hardMode = false;
-        //World.Passes.HallowedAltars.Generate();
-        //NPC.SetEventFlagCleared(ref ModContent.GetInstance<DownedBossSystem>().DownedArmageddon, -1);
-        //Task.Run(AvalonWorld.GenerateSkyFortress);
-        //ModContent.GetInstance<AvalonWorld>().GenerateCrystalMines();
-        //World.Tests.MakeZigZag(x, y, TileID.Titanium, WallID.Wood);
-        //World.Structures.CaesiumSpike.CreateSpikeUp((int)player.position.X / 16, (int)player.position.Y / 16, (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>());
-        //World.Structures.IceShrine.Generate((int)player.position.X / 16, (int)player.position.Y / 16);
+        if(player.ItemAnimationJustStarted)
+        SkyClouds.MakeCloud(x, y);
+
+        return false;
     }
     public static void GrowCloud(int x, int y)
     {

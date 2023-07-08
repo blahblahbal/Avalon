@@ -226,19 +226,19 @@ public class Utils
         {
             for (int l = y - r; l <= y + r; l++)
             {
-                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < r)
-                {
-                    Tile t = Framing.GetTileSafely(k, l);
-                    t.HasTile = true;
-                    t.IsHalfBlock = false;
-                    t.Slope = SlopeType.Solid;
-                    Main.tile[k, l].TileType = tileType;
-                    WorldGen.SquareTileFrame(k, l);
-                }
-                if (wallType != 0)
-                {
-                    Main.tile[k, l].WallType = wallType;
-                }
+                    if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < r)
+                    {
+                        Tile t = Framing.GetTileSafely(k, l);
+                        t.HasTile = true;
+                        t.IsHalfBlock = false;
+                        t.Slope = SlopeType.Solid;
+                        Main.tile[k, l].TileType = tileType;
+                        WorldGen.SquareTileFrame(k, l);
+                    }
+                    if (wallType != 0 && k > 0 && l > 0)
+                    {
+                        Main.tile[k, l].WallType = wallType;
+                    }
             }
         }
     }
@@ -250,15 +250,18 @@ public class Utils
             {
                 if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius && radius > 1)
                 {
-                    if (Main.tile[k, l].TileType != innerType)
+                    if (k > 0 && l > 0)
                     {
-                        Tile t = Framing.GetTileSafely(k, l);
-                        t.HasTile = true;
-                        t.IsHalfBlock = false;
-                        t.Slope = SlopeType.Solid;
-                        Main.tile[k, l].TileType = (ushort)outerType;
-                        WorldGen.SquareTileFrame(k, l);
-                    }    
+                        if (Main.tile[k, l].TileType != innerType)
+                        {
+                            Tile t = Framing.GetTileSafely(k, l);
+                            t.HasTile = true;
+                            t.IsHalfBlock = false;
+                            t.Slope = SlopeType.Solid;
+                            Main.tile[k, l].TileType = (ushort)outerType;
+                            WorldGen.SquareTileFrame(k, l);
+                        }
+                    }
                 }
             }
         }
@@ -268,12 +271,15 @@ public class Utils
             {
                 if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius - 3 && radius - 3 > 1)
                 {
-                    Tile t = Main.tile[k, l];
-                    t.HasTile = true;
-                    t.IsHalfBlock = false;
-                    t.Slope = SlopeType.Solid;
-                    Main.tile[k, l].TileType = (ushort)innerType;
-                    WorldGen.SquareTileFrame(k, l);
+                    if (k > 0 && l > 0)
+                    {
+                        Tile t = Main.tile[k, l];
+                        t.HasTile = true;
+                        t.IsHalfBlock = false;
+                        t.Slope = SlopeType.Solid;
+                        Main.tile[k, l].TileType = (ushort)innerType;
+                        WorldGen.SquareTileFrame(k, l);
+                    }
                 }
             }
         }
