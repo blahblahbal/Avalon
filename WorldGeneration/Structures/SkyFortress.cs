@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.World.Structures;
+namespace Avalon.WorldGeneration.Structures;
 
 public class SkyFortress
 {

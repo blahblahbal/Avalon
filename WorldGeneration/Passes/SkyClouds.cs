@@ -1,4 +1,3 @@
-using Avalon.World.Structures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -9,10 +8,9 @@ using Terraria.WorldBuilding;
 
 namespace Avalon.WorldGeneration.Passes
 {
-    internal class SkyClouds : GenPass
+    internal class SkyFortress : GenPass
     {
-        public static int DistanceFromSideOfWorldWhereRaincloudsEnd = Main.maxTilesX / 5;
-        public SkyClouds() : base("Avalon Sky", 20f)
+        public SkyFortress() : base("Avalon Sky Fortress", 20f)
         {
         }
 
@@ -35,40 +33,21 @@ namespace Avalon.WorldGeneration.Passes
 
 
             Utils.GetSkyFortressXCoord(x, y, 209, 158, ref x);
-            SkyFortress.Generate(x, y);
+            Structures.SkyFortress.Generate(x, y);
 
-            int xcoord;
-            int ycoord;
-            int Amount_Of_Spawns3 = 10 + Main.maxTilesY / 10;
-            for (int amount = 0; amount < Amount_Of_Spawns3; amount++)
-            {
-                xcoord = WorldGen.genRand.Next(90, Main.maxTilesX - 90);
-                if (xcoord > x - 220 && xcoord < x + 379) continue;
-                ycoord = WorldGen.genRand.Next(100, 200);
-                MakeCloud(xcoord, ycoord);
-            }
-            //int ypos = (int)((float)(Main.maxTilesY / 1200) * 2 + 1);
-        }
 
-        public static bool CheckTilesInRange(int x, int y, int radius)
-        {
-            bool flag = true;
-            for (int i = x - radius; i < x + radius; i++)
+            for (int xPos = 20; xPos < Main.maxTilesX - 20; xPos++)
             {
-                for (int j = y - radius; j < y + radius; j++)
+                for (int yPos = 40; yPos < 200; yPos++)
                 {
-                    if (Main.tile[i, j].HasTile &&
-                        (Main.tile[i, j].TileType == TileID.Dirt || Main.tile[i, j].TileType == TileID.Grass ||
-                        Main.tile[i, j].TileType == TileID.Trees || Main.tile[i, j].TileType == TileID.Sunplate ||
-                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.MoonplateBlock>() ||
-                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.TwiliplateBlock>()))
-                    {
-                        flag = false;
-                        break;
-                    }
+                    if (Main.tile[xPos, yPos].TileType == TileID.JungleGrass) Main.tile[xPos, yPos].TileType = TileID.Grass;
+                    if (Main.tile[xPos, yPos].TileType == TileID.Mud) Main.tile[xPos, yPos].TileType = TileID.Dirt;
+                    if (Main.tile[xPos, yPos].TileType == TileID.JunglePlants) Main.tile[xPos, yPos].TileType = TileID.Plants;
+                    if (Main.tile[xPos, yPos].TileType == TileID.JunglePlants2) Main.tile[xPos, yPos].TileType = TileID.Plants2;
+                    if (Main.tile[xPos, yPos].TileType == TileID.JunglePlants) Main.tile[xPos, yPos].TileType = TileID.Plants;
+                    if (Main.tile[xPos, yPos].TileType == TileID.PlantDetritus) WorldGen.KillTile(xPos, yPos);
                 }
             }
-            return flag;
         }
 
         public static int GetYOffset(int maxTilesY)
@@ -93,15 +72,130 @@ namespace Avalon.WorldGeneration.Passes
                 return yOffset;
             }
         }
+    }
+
+    internal class SkyClouds : GenPass
+    {
+        public static int DistanceFromSideOfWorldWhereRaincloudsEnd = Main.maxTilesX / 5;
+        public SkyClouds() : base("Avalon Sky", 20f)
+        {
+        }
+
+        protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
+        {
+            int x = Main.maxTilesX / 2 - 100;
+
+            int xcoord;
+            int ycoord;
+            int Amount_Of_Spawns3 = 10 + Main.maxTilesY / 10;
+            for (int amount = 0; amount < Amount_Of_Spawns3; amount++)
+            {
+                xcoord = WorldGen.genRand.Next(300, Main.maxTilesX - 300);
+                if (xcoord > x - 220 && xcoord < x + 379) continue;
+                ycoord = WorldGen.genRand.Next(100, 200);
+                MakeCloud(xcoord, ycoord);
+            }
+
+            /*for (int xPos = 20; xPos < Main.maxTilesX - 20; xPos++)
+            {
+                for (int yPos = 40; yPos < GenVars.worldSurfaceLow; yPos++)
+                {
+                    if (yPos >= Main.maxTilesY)
+                    {
+                        yPos = Main.maxTilesY - 2;
+                    }
+                    if ((Main.tile[xPos, yPos].HasTile && !Main.tile[xPos, yPos - 1].HasTile && Main.tile[xPos, yPos].TileType == TileID.Dirt) ||
+                        (Main.tile[xPos, yPos].HasTile && !Main.tile[xPos, yPos + 1].HasTile && Main.tile[xPos, yPos].TileType == TileID.Dirt) ||
+                        (Main.tile[xPos, yPos].HasTile && !Main.tile[xPos - 1, yPos].HasTile && Main.tile[xPos, yPos].TileType == TileID.Dirt) ||
+                        (Main.tile[xPos, yPos].HasTile && !Main.tile[xPos + 1, yPos].HasTile && Main.tile[xPos, yPos].TileType == TileID.Dirt) ||
+                        (Main.tile[xPos, yPos].HasTile && !Main.tile[xPos - 1, yPos - 1].HasTile && Main.tile[xPos, yPos].TileType == TileID.Dirt) ||
+                        (Main.tile[xPos, yPos].HasTile && !Main.tile[xPos - 1, yPos + 1].HasTile && Main.tile[xPos, yPos].TileType == TileID.Dirt) ||
+                        (Main.tile[xPos, yPos].HasTile && !Main.tile[xPos + 1, yPos - 1].HasTile && Main.tile[xPos, yPos].TileType == TileID.Dirt) ||
+                        (Main.tile[xPos, yPos].HasTile && !Main.tile[xPos + 1, yPos + 1].HasTile && Main.tile[xPos, yPos].TileType == TileID.Dirt))
+                    {
+                        Tile t = Main.tile[xPos, yPos];
+                        t.HasTile = true;
+                        t.TileType = TileID.Grass;
+                    }
+                    //if (Main.tile[xPos - 1, yPos].HasTile && Main.tile[xPos - 1, yPos].TileType == 0 &&
+                    //    Main.tile[xPos + 1, yPos].HasTile && Main.tile[xPos + 1, yPos].TileType == 0 &&
+                    //    Main.tile[xPos, yPos - 1].HasTile && Main.tile[xPos, yPos - 1].TileType == 0 &&
+                    //    Main.tile[xPos, yPos + 1].HasTile && Main.tile[xPos, yPos + 1].TileType == 0)
+                    //{
+                    //    Tile t = Main.tile[xPos, yPos];
+                    //    t.HasTile = true;
+                    //    t.TileType = TileID.Grass;
+                    //}
+                }
+            }*/
+
+            //double num948 = Main.maxTilesX * Main.maxTilesY * 0.002;
+            //for (int num949 = 0; num949 < num948; num949++)
+            //{
+            //    int xPos = WorldGen.genRand.Next(1, Main.maxTilesX - 1);
+            //    int yPos = WorldGen.genRand.Next((int)GenVars.worldSurfaceLow, (int)GenVars.worldSurfaceHigh);
+            //    if (yPos >= Main.maxTilesY)
+            //    {
+            //        yPos = Main.maxTilesY - 2;
+            //    }
+            //    if (Main.tile[xPos - 1, yPos].HasTile && Main.tile[xPos - 1, yPos].TileType == 0 &&
+            //        Main.tile[xPos + 1, yPos].HasTile && Main.tile[xPos + 1, yPos].TileType == 0 &&
+            //        Main.tile[xPos, yPos - 1].HasTile && Main.tile[xPos, yPos - 1].TileType == 0 &&
+            //        Main.tile[xPos, yPos + 1].HasTile && Main.tile[xPos, yPos + 1].TileType == 0)
+            //    {
+            //        Tile t = Main.tile[xPos, yPos];
+            //        t.HasTile = true;
+            //        t.TileType = TileID.Grass;
+            //    }
+            //    xPos = WorldGen.genRand.Next(1, Main.maxTilesX - 1);
+            //    yPos = WorldGen.genRand.Next(0, (int)GenVars.worldSurfaceLow);
+            //    if (yPos >= Main.maxTilesY)
+            //    {
+            //        yPos = Main.maxTilesY - 2;
+            //    }
+            //    if (Main.tile[xPos - 1, yPos].HasTile && Main.tile[xPos - 1, yPos].TileType == 0 &&
+            //        Main.tile[xPos + 1, yPos].HasTile && Main.tile[xPos + 1, yPos].TileType == 0 &&
+            //        Main.tile[xPos, yPos - 1].HasTile && Main.tile[xPos, yPos - 1].TileType == 0 &&
+            //        Main.tile[xPos, yPos + 1].HasTile && Main.tile[xPos, yPos + 1].TileType == 0)
+            //    {
+            //        Tile t = Main.tile[xPos, yPos];
+            //        t.HasTile = true;
+            //        t.TileType = TileID.Grass;
+            //    }
+            //}
+
+            //int ypos = (int)((float)(Main.maxTilesY / 1200) * 2 + 1);
+        }
+
+        public static bool CheckTilesInRange(int x, int y, int radius)
+        {
+            bool flag = true;
+            for (int i = x - radius; i < x + radius; i++)
+            {
+                for (int j = y - radius; j < y + radius; j++)
+                {
+                    if (Main.tile[i, j].HasTile &&
+                        (Main.tile[i, j].TileType == TileID.Dirt || Main.tile[i, j].TileType == TileID.Grass ||
+                        Main.tile[i, j].TileType == TileID.Trees || Main.tile[i, j].TileType == TileID.Sunplate ||
+                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.MoonplateBlock>() ||
+                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.TwiliplateBlock>()))
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+            return flag;
+        }
 
         #region clouds
         public static void MakeCloud(int x, int y)
         {
             int tileType = (x > DistanceFromSideOfWorldWhereRaincloudsEnd && x < Main.maxTilesX - DistanceFromSideOfWorldWhereRaincloudsEnd) ? TileID.Cloud : TileID.RainCloud;
             int maxWidth = WorldGen.genRand.Next(4, 15);
-            bool Island = Main.rand.NextBool(1);
+            bool Island = Main.rand.NextBool(2);
             bool BigCloud = false;
-            if (Main.rand.NextBool(1))
+            if (Main.rand.NextBool(7))
             {
                 BigCloud = true;
                 maxWidth = WorldGen.genRand.Next(20, 25);
@@ -117,8 +211,7 @@ namespace Avalon.WorldGeneration.Passes
                     {
                         Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 1) + WorldGen.genRand.Next(-13, -10), WorldGen.genRand.Next(6, 9), TileID.Dirt, TileID.Dirt);
                     }
-                    else
-                    Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(4, 7), tileType, tileType);
+                    else Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(4, 7), tileType, tileType);
                 }
             }
 

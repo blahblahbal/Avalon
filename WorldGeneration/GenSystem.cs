@@ -15,10 +15,15 @@ public class GenSystem : ModSystem
         GenPass currentPass;
 
         int index = tasks.FindIndex(genpass => genpass.Name.Equals("Reset"));
-
         if (index != -1)
         {
             tasks.Insert(index + 1, new AvalonReset("Avalon Reset", 1000f));
+        }
+
+        index = tasks.FindIndex(genpass => genpass.Name.Equals("Generate Ice Biome"));
+        if (index != -1)
+        {
+            tasks.Insert(index + 1, new SkyClouds());
         }
 
         int evil = WorldGen.WorldGenParam_Evil;
@@ -73,7 +78,8 @@ public class GenSystem : ModSystem
             tasks.Insert(underworld + 2, currentPass);
             totalWeight += currentPass.Weight;
 
-            tasks.Insert(underworld + 3, new SkyClouds());
+            //tasks.Insert(underworld + 3, new SkyClouds());
+            tasks.Insert(underworld + 4, new SkyFortress());
         }
 
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");
