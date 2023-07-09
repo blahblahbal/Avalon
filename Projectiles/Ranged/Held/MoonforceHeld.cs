@@ -2,7 +2,6 @@ using Avalon.Common.Templates;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Steamworks;
 using System;
 using Terraria;
 using Terraria.Audio;

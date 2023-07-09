@@ -11,6 +11,7 @@ namespace Avalon.WorldGeneration.Passes
 {
     internal class SkyClouds : GenPass
     {
+        public static int DistanceFromSideOfWorldWhereRaincloudsEnd = Main.maxTilesX / 5;
         public SkyClouds() : base("Avalon Sky", 20f)
         {
         }
@@ -96,10 +97,13 @@ namespace Avalon.WorldGeneration.Passes
         #region clouds
         public static void MakeCloud(int x, int y)
         {
-            int tileType = (x > 1500 && x < Main.maxTilesX - 1500) ? TileID.Cloud : TileID.RainCloud;
+            int tileType = (x > DistanceFromSideOfWorldWhereRaincloudsEnd && x < Main.maxTilesX - DistanceFromSideOfWorldWhereRaincloudsEnd) ? TileID.Cloud : TileID.RainCloud;
             int maxWidth = WorldGen.genRand.Next(4, 15);
-            if (Main.rand.NextBool(10))
+            bool Island = Main.rand.NextBool(1);
+            bool BigCloud = false;
+            if (Main.rand.NextBool(1))
             {
+                BigCloud = true;
                 maxWidth = WorldGen.genRand.Next(20, 25);
             }
             float widthMultiply = WorldGen.genRand.NextFloat(1, 3);
@@ -108,9 +112,13 @@ namespace Avalon.WorldGeneration.Passes
                 float startingWidth = maxWidth - height * widthMultiply;
                 for (float width = -startingWidth; width < startingWidth; width += 0.5f)
                 {
-                    int TILEFUCKABLE = tileType;
-                    //if (height > maxWidth / 3) TILEFUCKABLE = TileID.Dirt;
-                    Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(4, 7), TILEFUCKABLE, TILEFUCKABLE);
+                    //int TILEFUCKABLE = tileType;
+                    if (height > maxWidth / 3 && Island && BigCloud)
+                    {
+                        Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 1) + WorldGen.genRand.Next(-13, -10), WorldGen.genRand.Next(6, 9), TileID.Dirt, TileID.Dirt);
+                    }
+                    else
+                    Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(4, 7), tileType, tileType);
                 }
             }
 

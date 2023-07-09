@@ -67,9 +67,16 @@ namespace Avalon.Common
             {
                 #region Slimes
                 if (npc.netID is NPCID.YellowSlime or NPCID.RedSlime or NPCID.PurpleSlime or NPCID.BlackSlime or
-                    NPCID.CorruptSlime or NPCID.Slimeling or NPCID.Slimer2 or NPCID.ToxicSludge or NPCID.Crimslime) // lots of slimes
+                    NPCID.CorruptSlime or NPCID.Slimeling or NPCID.Slimer2 or NPCID.ToxicSludge or NPCID.Crimslime or NPCID.BabySlime) // lots of slimes
                 {
                     npc.ai[0]++;
+                }
+                if(npc.aiStyle == NPCAIStyleID.Slime)
+                {
+                    if (npc.life <= npc.lifeMax / 3)
+                    {
+                        npc.ai[0]+= 1;
+                    }
                 }
                 #endregion Slimes
                 #region Cursed Skull
