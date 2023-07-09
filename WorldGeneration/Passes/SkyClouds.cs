@@ -38,10 +38,10 @@ namespace Avalon.WorldGeneration.Passes
 
             int xcoord;
             int ycoord;
-            int Amount_Of_Spawns3 = 5 + Main.maxTilesY / 10;
+            int Amount_Of_Spawns3 = 10 + Main.maxTilesY / 10;
             for (int amount = 0; amount < Amount_Of_Spawns3; amount++)
             {
-                xcoord = WorldGen.genRand.Next(300, Main.maxTilesX - 300);
+                xcoord = WorldGen.genRand.Next(90, Main.maxTilesX - 90);
                 if (xcoord > x - 220 && xcoord < x + 379) continue;
                 ycoord = WorldGen.genRand.Next(100, 200);
                 MakeCloud(xcoord, ycoord);
@@ -97,7 +97,11 @@ namespace Avalon.WorldGeneration.Passes
         public static void MakeCloud(int x, int y)
         {
             int tileType = (x > 1500 && x < Main.maxTilesX - 1500) ? TileID.Cloud : TileID.RainCloud;
-            int maxWidth = WorldGen.genRand.Next(10, 30);
+            int maxWidth = WorldGen.genRand.Next(4, 15);
+            if (Main.rand.NextBool(10))
+            {
+                maxWidth = WorldGen.genRand.Next(20, 25);
+            }
             float widthMultiply = WorldGen.genRand.NextFloat(1, 3);
             for (float height = 0; height < maxWidth; height += WorldGen.genRand.NextFloat(0.5f, 1f))
             {
@@ -105,8 +109,8 @@ namespace Avalon.WorldGeneration.Passes
                 for (float width = -startingWidth; width < startingWidth; width += 0.5f)
                 {
                     int TILEFUCKABLE = tileType;
-                    if (height > maxWidth / 3) TILEFUCKABLE = TileID.Dirt;
-                    Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(5, 7), TILEFUCKABLE, TILEFUCKABLE);
+                    //if (height > maxWidth / 3) TILEFUCKABLE = TileID.Dirt;
+                    Utils.MakeCircle2(x + (int)(width * height) + WorldGen.genRand.Next(-7, 7), y - (int)(height * 2) + WorldGen.genRand.Next(-4, 4), WorldGen.genRand.Next(4, 7), TILEFUCKABLE, TILEFUCKABLE);
                 }
             }
 
