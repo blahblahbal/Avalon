@@ -4817,6 +4817,11 @@ Mods: {
 				DisplayName: Longbow
 				Tooltip: ""
 			}
+
+			BondrewdHelmet: {
+				DisplayName: Novel's Helmet
+				Tooltip: May your journey overflow with curses and blessings
+			}
 		}
 
 		Projectiles: {
