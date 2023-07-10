@@ -1043,7 +1043,26 @@ public class AvalonWorld : ModSystem
                 }
                 else if (type == TileID.Plants || type == TileID.Plants2 || type == TileID.CorruptPlants || type == TileID.CrimsonPlants || type == TileID.HallowedPlants || type == TileID.HallowedPlants2 || type == TileID.JunglePlants || type == TileID.JunglePlants2)
                 {
-                    tile.TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
+                    if ((tile.TileFrameX > 144 && tile.TileFrameX < 162 || tile.TileFrameX % 414 > 144 && tile.TileFrameX % 414 < 162) && type != TileID.CrimsonPlants)
+                    {
+                        tile.TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
+                        tile.TileFrameX %= 414 - 18;
+                    }
+                    else if (tile.TileFrameX % 414 == 144 && type == TileID.CrimsonPlants)
+                    {
+                        tile.TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
+                        tile.TileFrameX %= 414 - 18;
+                    }
+                    else if (tile.TileFrameX % 414 == 270 && type == TileID.CrimsonPlants)
+                    {
+                        tile.TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
+                        tile.TileFrameX = 144;
+                    }
+                    else
+                    {
+                        tile.TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
+                        tile.TileFrameX %= 414;
+                    }
                     if (TileID.Sets.Conversion.Grass[typeDown] && typeDown != ModContent.TileType<Ickgrass>())
                     {
                         tileDown.TileType = (ushort)ModContent.TileType<Ickgrass>();
