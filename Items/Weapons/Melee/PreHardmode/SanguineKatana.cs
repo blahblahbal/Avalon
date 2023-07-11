@@ -69,7 +69,7 @@ public class SanguineKatana : ModItem
         player.statLife -= healthSucked;
         if(player.statLife <= 0)
         {
-            player.Hurt(PlayerDeathReason.ByCustomReason($"{player.name}'s soul has been entombed within a sword."),healthSucked,1,false,true,-1,false);
+            player.Hurt(PlayerDeathReason.ByCustomReason($"{player.name}'s soul has been entombed within a sword."), healthSucked, 1, false, true, -1, false);
         }
         return true;
     }

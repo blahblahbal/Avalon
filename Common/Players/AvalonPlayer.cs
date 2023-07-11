@@ -129,8 +129,9 @@ public class AvalonPlayer : ModPlayer
     public bool CaesiumPoison;
     public bool PathogenImbue;
     public bool Pathogen;
+    public bool BloodCasting;
 
-    public bool hungryMinion;
+    public bool HungryMinion;
 
     public bool SnotOrb;
     #endregion
@@ -156,7 +157,8 @@ public class AvalonPlayer : ModPlayer
         CaesiumPoison = false;
         Pathogen = false;
         PathogenImbue = false;
-        hungryMinion = false;
+        HungryMinion = false;
+        BloodCasting = false;
 
         // accessories
         TrapImmune = false;
@@ -216,6 +218,19 @@ public class AvalonPlayer : ModPlayer
         Player.SendPacket(packet, server);
     }
 
+    public override void OnConsumeMana(Item item, int manaConsumed)
+    {
+        if (BloodCasting)
+        {
+            int hp = manaConsumed / 3;
+            Player.statLife -= hp;
+            CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.DamagedFriendly, hp);
+            if (Player.statLife <= 0)
+            {
+                Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} had their heart in the wrong place."), 1, 0);
+            }
+        }
+    }
     public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
     {
         if(Pathogen)

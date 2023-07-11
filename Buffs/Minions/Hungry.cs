@@ -19,9 +19,9 @@ public class Hungry : ModBuff
     {
         if (player.ownedProjectileCounts[ModContent.ProjectileType<HungrySummon>()] > 0)
         {
-            player.GetModPlayer<AvalonPlayer>().hungryMinion = true;
+            player.GetModPlayer<AvalonPlayer>().HungryMinion = true;
         }
-        if (!player.GetModPlayer<AvalonPlayer>().hungryMinion)
+        if (!player.GetModPlayer<AvalonPlayer>().HungryMinion)
         {
             player.DelBuff(buffIndex);
             buffIndex--;
