@@ -32,6 +32,8 @@ class WorldgenHelper : ModItem
         int x = (int)Main.MouseWorld.X / 16;
         int y = (int)Main.MouseWorld.Y / 16;
 
+
+        //WorldGeneration.Utils.MakeSquare(x, y, 10, ModContent.TileType<Tiles.Ores.PrimordialOre>());
         if (player.ItemAnimationJustStarted)
             SkyClouds.MakeCloud(x, y);
 
