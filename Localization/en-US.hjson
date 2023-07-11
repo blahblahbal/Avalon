@@ -1803,10 +1803,10 @@ Mods: {
 			BloodCastPotion: {
 				DisplayName: Blood Cast Potion
 				Tooltip:
-                    '''
-                    Adds your max life to your max mana
-                    You lose 1/3 mana cost in life
-                    '''
+					'''
+					Adds your max life to your max mana
+					You lose 1/3 mana cost in life
+					'''
 			}
 
 			AuraPotion: {
@@ -4829,6 +4829,11 @@ Mods: {
 
 			QuantumClaymore: {
 				DisplayName: Quantum Claymore
+				Tooltip: ""
+			}
+
+			SonicHat: {
+				DisplayName: Sonic Hat
 				Tooltip: ""
 			}
 		}
