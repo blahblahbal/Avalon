@@ -11,6 +11,7 @@ namespace Avalon.Items.Vanity
         {
             Item.value = Item.sellPrice(0, 1, 20);
             Item.rare = ItemRarityID.Orange;
+            Item.vanity= true;
         }
     }
 }
