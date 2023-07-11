@@ -4822,6 +4822,11 @@ Mods: {
 				DisplayName: Novel's Helmet
 				Tooltip: May your journey overflow with curses and blessings
 			}
+
+			QuantumClaymore: {
+				DisplayName: Quantum Claymore
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4922,6 +4927,8 @@ Mods: {
 			MoonlightLongbowHeld.DisplayName: Moonlight Longbow Held
 			MoonforceHeld.DisplayName: Moonforce Held
 			LongbowHeld.DisplayName: Longbow Held
+			QuantumBeam.DisplayName: Quantum Beam
+			QuantumBeam2.DisplayName: Quantum Beam2
 		}
 
 		NPCs: {

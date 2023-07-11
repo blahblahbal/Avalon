@@ -75,7 +75,7 @@ namespace Avalon.Common
                 {
                     if (npc.life <= npc.lifeMax / 3)
                     {
-                        npc.ai[0]+= 2;
+                        npc.ai[0]++;
                     }
                 }
                 #endregion Slimes
