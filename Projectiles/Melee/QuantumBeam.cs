@@ -87,7 +87,7 @@ public class QuantumBeam : ModProjectile
                 D.fadeIn = Main.rand.NextFloat(0, 1);
                 D.velocity = Vector2.Normalize(Projectile.velocity).RotatedByRandom(0.3f) * Main.rand.NextFloat(1, 6);
             }
-            Projectile.extraUpdates++;
+            //Projectile.extraUpdates++;
             Projectile.penetrate = 1;
         }
         if (Projectile.ai[1] > 40)
