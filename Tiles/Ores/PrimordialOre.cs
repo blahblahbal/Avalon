@@ -228,10 +228,11 @@ public class PrimordialOre : ModTile
         AddMapEntry(new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB), LanguageManager.Instance.GetText("Primordial Ore"));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
+        Main.tileLighted[Type] = true;
         Main.tileSpelunker[Type] = true;
         Main.tileOreFinderPriority[Type] = 815;
         HitSound = SoundID.Tink;
-        DustType = DustID.Stone;
+        DustType = DustID.ShimmerSpark;
     }
 
     public override bool CanExplode(int i, int j)
@@ -259,7 +260,26 @@ public class PrimordialOre : ModTile
         }
         Color[] RainbowColors = {Color.Red,Color.Yellow,Color.Lime,Color.Cyan,Color.Blue,Color.Magenta};
         Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors,100,i * 10 + j * 10);
+
+        spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default(Vector2), 1f, SpriteEffects.None, 0f) ;
+
+        Skittles = Color.Lerp(Color.Black,Main.DiscoColor,(float)Math.Sin((Main.timeForVisualEffects * 0.02f) + i / 10f - j / 20f)) * 1f;
+        //Skittles = Color.Lerp(Color.Black, Skittles, Lighting.Brightness(i, j) * 2f);
+        Skittles.A = 0;
         spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+    }
+
+    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+    {
+        Color[] RainbowColors = { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
+        Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors, 100, i * 10 + j * 10);
+
+        Skittles = Color.Lerp(Skittles, new Color(Skittles.R + Main.DiscoColor.R, Skittles.G + Main.DiscoColor.G, Skittles.B + Main.DiscoColor.B), (float)Math.Sin((Main.timeForVisualEffects * 0.02f) + i / 10f - j / 20f)) * 1f;
+
+        Skittles *= 0.9f;
+        r = Skittles.R / 255f;
+        g = Skittles.G / 255f;
+        b = Skittles.B / 255f;
     }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
