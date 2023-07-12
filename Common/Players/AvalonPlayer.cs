@@ -6,16 +6,19 @@ using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Other;
 using Avalon.Prefixes;
 using Avalon.Systems;
+using Avalon.Tiles.Ores;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.Map;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -450,6 +453,13 @@ public class AvalonPlayer : ModPlayer
                 }
             }
         }
+        #endregion
+
+        #region MapColors
+        //Color[] ColorLookup = (Color[])typeof(MapHelper).GetField("colorLookup", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+        //ushort TilePosition = (ushort)typeof(MapHelper).GetField("tilePosition", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+
+        //ColorLookup[TilePosition + ModContent.TileType<PrimordialOre>()] = Main.DiscoColor;
         #endregion
 
         WardCD--;

@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
@@ -256,9 +257,10 @@ public class PrimordialOre : ModTile
         {
             zero = Vector2.Zero;
         }
-        spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB), 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+        Color[] RainbowColors = {Color.Red,Color.Yellow,Color.Lime,Color.Cyan,Color.Blue,Color.Magenta};
+        Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors,100,i * 10 + j * 10);
+        spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
     }
-
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int itemType = 0;

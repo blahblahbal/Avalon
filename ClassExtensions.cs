@@ -170,10 +170,10 @@ public static class ClassExtensions
         }
     }
 
-    public static Color CycleThroughColors(Color[] Colors, int Rate)
+    public static Color CycleThroughColors(Color[] Colors, int Rate, float Offset = 0)
     {
-        float fade = (Main.GameUpdateCount % Rate) / (float)Rate;
-        int index = (int)((Main.GameUpdateCount / (float)Rate) % Colors.Length);
+        float fade = ((Main.GameUpdateCount + Offset) % Rate) / (float)Rate;
+        int index = (int)(((Main.GameUpdateCount + Offset) / (float)Rate) % Colors.Length);
         int nextIndex = (index + 1) % Colors.Length;
 
         return Color.Lerp(Colors[index], Colors[nextIndex], fade);
