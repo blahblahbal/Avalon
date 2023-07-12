@@ -225,7 +225,25 @@ public class PrimordialOre : ModTile
 
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB), LanguageManager.Instance.GetText("Primordial Ore"));
+        //array[627][0] = new Color(255, 76, 76);
+        //array[627][1] = new Color(255, 195, 76);
+        //array[627][2] = new Color(195, 255, 76);
+        //array[627][3] = new Color(76, 255, 76);
+        //array[627][4] = new Color(76, 255, 195);
+        //array[627][5] = new Color(76, 195, 255);
+        //array[627][6] = new Color(77, 76, 255);
+        //array[627][7] = new Color(196, 76, 255);
+        //array[627][8] = new Color(255, 76, 195);
+
+        AddMapEntry(new Color(255, 76, 76), LanguageManager.Instance.GetText("Primordial Ore")); // new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB)
+        AddMapEntry(new Color(255, 195, 76), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(195, 255, 76), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(76, 255, 76), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(76, 255, 195), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(76, 195, 255), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(77, 76, 255), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(196, 76, 255), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(255, 76, 195), LanguageManager.Instance.GetText("Primordial Ore"));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileLighted[Type] = true;
@@ -233,6 +251,11 @@ public class PrimordialOre : ModTile
         Main.tileOreFinderPriority[Type] = 815;
         HitSound = SoundID.Tink;
         DustType = DustID.ShimmerSpark;
+    }
+
+    public override ushort GetMapOption(int i, int j)
+    {
+        return (ushort)((i + j) % 9);
     }
 
     public override bool CanExplode(int i, int j)

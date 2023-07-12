@@ -32,6 +32,8 @@ public class ExxoAvalonOrigins : Mod
     /// </summary>
     public static readonly Mod? MusicMod = ModLoader.TryGetMod("AvalonMusic", out Mod obtainedMod) ? obtainedMod : null;
 
+    public static Color LastDiscoRGB;
+
     private readonly List<IReplaceAssets> assetReplacers = new();
 
     /// <summary>

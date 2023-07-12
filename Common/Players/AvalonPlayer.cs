@@ -456,10 +456,14 @@ public class AvalonPlayer : ModPlayer
         #endregion
 
         #region MapColors
-        //Color[] ColorLookup = (Color[])typeof(MapHelper).GetField("colorLookup", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
-        //ushort TilePosition = (ushort)typeof(MapHelper).GetField("tilePosition", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+        Color[] ColorLookup = (Color[])typeof(MapHelper).GetField("colorLookup", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+        ushort TilePosition = (ushort)typeof(MapHelper).GetField("tilePosition", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
 
-        //ColorLookup[TilePosition + ModContent.TileType<PrimordialOre>()] = Main.DiscoColor;
+
+
+
+        //ColorLookup[TilePosition + ModContent.TileType<PrimordialOre>()] = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
+        //Main.Map.
         #endregion
 
         WardCD--;
