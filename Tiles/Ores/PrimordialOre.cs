@@ -13,6 +13,8 @@ namespace Avalon.Tiles.Ores;
 
 public class PrimordialOre : ModTile
 {
+    public static Color[] RainbowColors = { Color.Red, Color.Brown, Color.GreenYellow, Color.Cyan, Color.Navy, Color.Magenta, Color.MistyRose, Color.Yellow, Color.Cyan, Color.BlueViolet, Color.Pink };
+
     public static int[] NoRequirement = new int[]
     {
         ItemID.CopperOre,
@@ -281,7 +283,7 @@ public class PrimordialOre : ModTile
         {
             zero = Vector2.Zero;
         }
-        Color[] RainbowColors = {Color.Red,Color.Yellow,Color.Lime,Color.Cyan,Color.Blue,Color.Magenta};
+        //Color[] RainbowColors = { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
         Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors,100,i * 10 + j * 10);
 
         spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default(Vector2), 1f, SpriteEffects.None, 0f) ;
@@ -294,7 +296,7 @@ public class PrimordialOre : ModTile
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
-        Color[] RainbowColors = { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
+        //Color[] RainbowColors = { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
         Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors, 100, i * 10 + j * 10);
 
         Skittles = Color.Lerp(Skittles, new Color(Skittles.R + Main.DiscoColor.R, Skittles.G + Main.DiscoColor.G, Skittles.B + Main.DiscoColor.B), (float)Math.Sin((Main.timeForVisualEffects * 0.02f) + i / 10f - j / 20f)) * 1f;
