@@ -1,3 +1,4 @@
+using Avalon.NPCs.Bosses.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -38,6 +39,18 @@ public class CorrosiveMucus : ModProjectile
         }
         //Lighting.AddLight(Projectile.Center, 0.3f, 0.35f, 0f);
         Lighting.AddLight(Projectile.Center, 0.3f, 0.3f, 0.2f);
+        bool KillFast = true;
+        for(int i = 0; i < Main.npc.Length; i++)
+        {
+            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<BacteriumPrime>())
+            {
+                KillFast = false;
+            }
+        }
+        if (KillFast)
+        {
+            Projectile.timeLeft -= 120;
+        }
     }
 
     public override void OnHitPlayer(Player target, Player.HurtInfo info)

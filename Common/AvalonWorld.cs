@@ -705,9 +705,10 @@ public class AvalonWorld : ModSystem
     }
     public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
     {
-        if (Main.LocalPlayer.GetModPlayer<Players.AvalonBiomePlayer>().ZoneContagion)
-        {
-            float Strength = ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
+        //if (Main.LocalPlayer.GetModPlayer<Players.AvalonBiomePlayer>().ZoneContagion)
+        //{
+            float Strength = (float)ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
+            //Main.NewText(Strength);
             Strength = Math.Min(Strength, 1f);
 
             int sunR = backgroundColor.R;
@@ -722,7 +723,7 @@ public class AvalonWorld : ModSystem
             backgroundColor.R = (byte)sunR;
             backgroundColor.G = (byte)sunG;
             backgroundColor.B = (byte)sunB;
-        }
+        //}
     }
     public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
     {
