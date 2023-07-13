@@ -146,9 +146,9 @@ internal class Contagion : GenPass
                         int num220 = num219 + WorldGen.genRand.Next(10, 14);
                         for (int num221 = num219; num221 < num220; num221++)
                         {
-                            if ((Main.tile[num218, num221].TileType == TileID.Mud || Main.tile[num218, num221].TileType == TileID.JungleGrass) && num218 >= evilLeftCoord + WorldGen.genRand.Next(5) && num218 < evilRightCoord - WorldGen.genRand.Next(5))
+                            if (Main.tile[num218, num221].TileType == TileID.JungleGrass && num218 >= evilLeftCoord + WorldGen.genRand.Next(5) && num218 < evilRightCoord - WorldGen.genRand.Next(5))
                             {
-                                Main.tile[num218, num221].TileType = TileID.Dirt;
+                                Main.tile[num218, num221].TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
                             }
                         }
                         break;

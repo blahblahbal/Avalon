@@ -237,15 +237,15 @@ public class PrimordialOre : ModTile
         //array[627][7] = new Color(196, 76, 255);
         //array[627][8] = new Color(255, 76, 195);
 
-        AddMapEntry(new Color(255, 76, 76), LanguageManager.Instance.GetText("Primordial Ore")); // new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB)
-        AddMapEntry(new Color(255, 195, 76), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(195, 255, 76), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(76, 255, 76), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(76, 255, 195), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(76, 195, 255), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(77, 76, 255), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(196, 76, 255), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(255, 76, 195), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(255, 0, 0), LanguageManager.Instance.GetText("Primordial Ore")); // new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB)
+        AddMapEntry(new Color(255, 128, 0), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(255, 255, 0), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(0, 255, 0), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(0, 255, 255), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(0, 128, 255), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(0, 0, 255), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(128, 0, 255), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(255, 0, 255), LanguageManager.Instance.GetText("Primordial Ore"));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileLighted[Type] = true;

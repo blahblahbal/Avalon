@@ -705,25 +705,21 @@ public class AvalonWorld : ModSystem
     }
     public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
     {
-        //if (Main.LocalPlayer.GetModPlayer<Players.AvalonBiomePlayer>().ZoneContagion)
-        //{
-            float Strength = (float)ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
-            //Main.NewText(Strength);
-            Strength = Math.Min(Strength, 1f);
+        float Strength = (float)ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
+        Strength = Math.Min(Strength, 1f);
 
-            int sunR = backgroundColor.R;
-            int sunG = backgroundColor.G;
-            int sunB = backgroundColor.B;
-            sunR -= (int)(212f * Strength / 2 * (backgroundColor.R / 255f));
-            sunB -= (int)(255f * Strength / 2 * (backgroundColor.B / 255f));
-            sunG -= (int)(127f * Strength / 2 * (backgroundColor.G / 255f));
-            sunR = Utils.Clamp(sunR, 15, 255);
-            sunG = Utils.Clamp(sunG, 15, 255);
-            sunB = Utils.Clamp(sunB, 15, 255);
-            backgroundColor.R = (byte)sunR;
-            backgroundColor.G = (byte)sunG;
-            backgroundColor.B = (byte)sunB;
-        //}
+        int sunR = backgroundColor.R;
+        int sunG = backgroundColor.G;
+        int sunB = backgroundColor.B;
+        sunR -= (int)(212f * Strength / 2 * (backgroundColor.R / 255f));
+        sunB -= (int)(255f * Strength / 2 * (backgroundColor.B / 255f));
+        sunG -= (int)(127f * Strength / 2 * (backgroundColor.G / 255f));
+        sunR = Utils.Clamp(sunR, 15, 255);
+        sunG = Utils.Clamp(sunG, 15, 255);
+        sunB = Utils.Clamp(sunB, 15, 255);
+        backgroundColor.R = (byte)sunR;
+        backgroundColor.G = (byte)sunG;
+        backgroundColor.B = (byte)sunB;
     }
     public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
     {

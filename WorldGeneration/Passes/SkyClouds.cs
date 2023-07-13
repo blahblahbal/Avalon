@@ -90,7 +90,7 @@ namespace Avalon.WorldGeneration.Passes
             int Amount_Of_Spawns3 = 10 + Main.maxTilesY / 10;
             for (int amount = 0; amount < Amount_Of_Spawns3; amount++)
             {
-                xcoord = WorldGen.genRand.Next(300, Main.maxTilesX - 300);
+                xcoord = WorldGen.genRand.Next(330, Main.maxTilesX - 330);
                 if (xcoord > x - 220 && xcoord < x + 379) continue;
                 ycoord = WorldGen.genRand.Next(100, 200);
                 MakeCloud(xcoord, ycoord);
