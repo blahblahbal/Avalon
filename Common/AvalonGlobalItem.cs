@@ -58,6 +58,10 @@ public class AvalonGlobalItem : GlobalItem
 
         ShimmerTransmute(ModContent.ItemType<StaminaCrystal>(), ModContent.ItemType<EnergyCrystal>());
 
+        ShimmerTransmute(ModContent.ItemType<Items.Material.Ores.Zircon>(), ModContent.ItemType<Items.Material.Ores.Peridot>());
+        ShimmerTransmute(ModContent.ItemType<Items.Material.Ores.Peridot>(), ModContent.ItemType<Items.Material.Ores.Tourmaline>());
+        ShimmerTransmute(ModContent.ItemType<Items.Material.Ores.Tourmaline>(), ItemID.Diamond);
+
         //Dungeon bricks
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>());
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>());

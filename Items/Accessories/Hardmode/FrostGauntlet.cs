@@ -40,7 +40,6 @@ class FrostGauntlet : ModItem
         player.kbGlove = true;
         player.GetAttackSpeed(DamageClass.Melee) += 0.12f;
         player.GetDamage(DamageClass.Melee) += 0.12f;
-        player.GetDamage(DamageClass.Ranged) += 0.12f;
         player.frostArmor = true;
         player.autoReuseGlove = true;
         player.meleeScaleGlove = true;

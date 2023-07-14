@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -21,5 +22,9 @@ public class PurpleBrick : ModTile
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
         TileID.Sets.GeneralPlacementTiles[Type] = false;
+    }
+    public override IEnumerable<Item> GetItemDrops(int i, int j)
+    {
+        yield return new Item(ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>());
     }
 }

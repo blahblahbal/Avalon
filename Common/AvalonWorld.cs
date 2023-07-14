@@ -15,10 +15,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.Chat;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameContent.UI.States;
 using Terraria.ID;
 using Terraria.IO;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.UI;
@@ -428,6 +430,29 @@ public class AvalonWorld : ModSystem
         }
     }
 
+    public static void GenerateSulphur()
+    {
+        Main.rand ??= new UnifiedRandom((int)DateTime.Now.Ticks);
+
+        for (int a = 0; a < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); a++)
+        {
+            int x = Main.rand.Next(100, Main.maxTilesX - 100);
+            int y = Main.rand.Next((int)Main.rockLayer, Main.maxTilesY - 150);
+            WorldGen.OreRunner(x, y, Main.rand.Next(3, 6), Main.rand.Next(3, 5),
+                (ushort)ModContent.TileType<Tiles.Ores.SulphurOre>());
+        }
+
+        if (Main.netMode == NetmodeID.SinglePlayer)
+        {
+            Main.NewText("The underground smells like rotten eggs...", 210, 183, 4);
+        }
+        else if (Main.netMode == NetmodeID.Server)
+        {
+            ChatHelper.BroadcastChatMessage(
+                NetworkText.FromLiteral("The underground smells like rotten eggs..."),
+                new Color(210, 183, 4));
+        }
+    }
     public static void GrowLargeHerb(int x, int y)
     {
         if (Main.tile[x, y].HasTile)

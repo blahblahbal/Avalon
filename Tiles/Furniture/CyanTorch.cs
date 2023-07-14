@@ -10,6 +10,6 @@ namespace Avalon.Tiles.Furniture
     {
         public override Vector3 LightColor => new Vector3(0, 1f, 1f);
         public override int TorchItem => ModContent.ItemType<Items.Placeable.Furniture.CyanTorch>();
-        public override int dustType => DustID.IceTorch;
+        public override int dustType => ModContent.DustType<CyanTorchDust>();
     }
 }
