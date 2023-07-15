@@ -75,18 +75,22 @@ public abstract class ModTorch : SpecialLight
 
     public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
     {
-        if (Main.rand.NextBool(100) && Main.tile[i, j].TileFrameX < 66)
+        if (Main.rand.NextBool(40) && Main.tile[i, j].TileFrameX < 66)
         {
-            Dust d = Dust.NewDustDirect(new Vector2(i * 16,j * 16) + new Vector2(6,-6), 0, 0, dustType, 0, 0, 128, default, Main.rand.NextFloat(0.5f, 1));
-            d.noLightEmittence = true; //temporary until unique dust
-            d.velocity.Y = Main.rand.NextFloat(-0.5f, -2);
-            d.velocity.X *= 0.2f;
-            d.noGravity = NoDustGravity;
+            Dust d = Dust.NewDustDirect(new Vector2(i * 16,j * 16) + new Vector2(6,-6), 0, 0, dustType, 0, 0, 100, default, Main.rand.NextFloat(0.5f, 1));
+            if (!Main.rand.NextBool(3))
+            {
+                d.noGravity = NoDustGravity;
+            }
+            d.noLightEmittence = true;
+            d.velocity *= 0.3f;
+            d.velocity.Y -= 1.5f;
+            d.noGravity = false;
         }
     }
     public override void NumDust(int i, int j, bool fail, ref int num)
     {
-        num = Main.rand.Next(1, 3);
+        num = Main.rand.Next(10, 15);
     }
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

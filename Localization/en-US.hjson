@@ -4836,6 +4836,26 @@ Mods: {
 				DisplayName: Sonic Hat
 				Tooltip: ""
 			}
+
+			Sulphur: {
+				DisplayName: Sulphur
+				Tooltip: ""
+			}
+
+			PeridotHook: {
+				DisplayName: Peridot Hook
+				Tooltip: ""
+			}
+
+			TourmalineHook: {
+				DisplayName: Tourmaline Hook
+				Tooltip: ""
+			}
+
+			ZirconHook: {
+				DisplayName: Zircon Hook
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -4938,6 +4958,9 @@ Mods: {
 			LongbowHeld.DisplayName: Longbow Held
 			QuantumBeam.DisplayName: Quantum Beam
 			QuantumBeam2.DisplayName: Quantum Beam2
+			PeridotHook.DisplayName: Peridot Hook
+			TourmalineHook.DisplayName: Tourmaline Hook
+			ZirconHook.DisplayName: Zircon Hook
 		}
 
 		NPCs: {

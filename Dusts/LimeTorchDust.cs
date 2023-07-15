@@ -6,21 +6,29 @@ namespace Avalon.Dusts;
 
 public class LimeTorchDust : ModDust
 {
+    public override void OnSpawn(Dust dust)
+    {
+        dust.color = Color.White;
+        dust.velocity.Y = (float)Main.rand.Next(-10, 6) * 0.1f;
+        dust.velocity.X *= 0.3f;
+        dust.scale *= 0.7f;
+    }
     public override bool MidUpdate(Dust dust)
     {
-        dust.rotation += -dust.velocity.X * 0.3f;
-        dust.scale += 0.02f;
-        dust.alpha += 2;
-
+        dust.velocity.Y -= 0.1f;
+        if (!dust.noGravity)
+        {
+            dust.velocity.Y += 0.05f;
+        }
         if (!dust.noLightEmittence)
         {
             Vector3 light = new Vector3(0.714f, 1f, 0) * dust.scale * 1.5f;
             Lighting.AddLight(dust.position, light);
         }
-        if (!dust.noGravity)
-        {
-            dust.scale -= 0.02f;
-        }
         return false;
+    }
+    public override Color? GetAlpha(Dust dust, Color lightColor)
+    {
+        return new Color(0.714f * 255, 1f * 255, 0, 25);
     }
 }
