@@ -121,7 +121,7 @@ Mods: {
 			}
 
 			ShadowShellphone: {
-				DisplayName: Shadow Shellphone (Spawn)
+				DisplayName: Shadow Phone (Spawn)
 				Tooltip:
 					'''
 					Displays everything
@@ -131,7 +131,7 @@ Mods: {
 			}
 
 			ShadowShellphoneOcean: {
-				DisplayName: Shadow Shellphone (Oceans)
+				DisplayName: Shadow Phone (Oceans)
 				Tooltip:
 					'''
 					Displays everything
@@ -141,7 +141,7 @@ Mods: {
 			}
 
 			ShadowShellphoneHell: {
-				DisplayName: Shadow Shellphone (Underworld)
+				DisplayName: Shadow Phone (Underworld)
 				Tooltip:
 					'''
 					Displays everything
@@ -151,7 +151,7 @@ Mods: {
 			}
 
 			ShadowShellphoneJungleTropics: {
-				DisplayName: Shadow Shellphone (Jungle)
+				DisplayName: Shadow Phone (Jungle)
 				Tooltip:
 					'''
 					Displays everything
@@ -161,7 +161,7 @@ Mods: {
 			}
 
 			ShadowShellphoneRandom: {
-				DisplayName: Shadow Shellphone (Random)
+				DisplayName: Shadow Phone (Random)
 				Tooltip:
 					'''
 					Displays everything
@@ -171,7 +171,7 @@ Mods: {
 			}
 
 			ShadowShellphoneHome: {
-				DisplayName: Shadow Shellphone (Home)
+				DisplayName: Shadow Phone (Home)
 				Tooltip:
 					'''
 					Displays everything
@@ -181,7 +181,7 @@ Mods: {
 			}
 
 			ShadowShellphoneDungeon: {
-				DisplayName: Shadow Shellphone (Dungeon)
+				DisplayName: Shadow Phone (Dungeon)
 				Tooltip:
 					'''
 					Displays everything
