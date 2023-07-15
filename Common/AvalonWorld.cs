@@ -730,21 +730,25 @@ public class AvalonWorld : ModSystem
     }
     public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
     {
-        float Strength = (float)ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
-        Strength = Math.Min(Strength, 1f);
+        float ContagionStrength = (float)ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
+        ContagionStrength = Math.Min(ContagionStrength, 1f);
 
         int sunR = backgroundColor.R;
         int sunG = backgroundColor.G;
         int sunB = backgroundColor.B;
-        sunR -= (int)(212f * Strength / 2 * (backgroundColor.R / 255f));
-        sunB -= (int)(255f * Strength / 2 * (backgroundColor.B / 255f));
-        sunG -= (int)(127f * Strength / 2 * (backgroundColor.G / 255f));
+        sunR -= (int)(212f * ContagionStrength / 2 * (backgroundColor.R / 255f));
+        sunB -= (int)(255f * ContagionStrength / 2 * (backgroundColor.B / 255f));
+        sunG -= (int)(127f * ContagionStrength / 2 * (backgroundColor.G / 255f));
         sunR = Utils.Clamp(sunR, 15, 255);
         sunG = Utils.Clamp(sunG, 15, 255);
         sunB = Utils.Clamp(sunB, 15, 255);
         backgroundColor.R = (byte)sunR;
         backgroundColor.G = (byte)sunG;
         backgroundColor.B = (byte)sunB;
+
+        tileColor.R -= (byte)(212f * ContagionStrength / 2.2f * (backgroundColor.R / 255f) * 1.6f);
+        tileColor.G -= (byte)(212f * ContagionStrength / 2.4f * (backgroundColor.R / 255f) * 1.5f);
+        tileColor.B -= (byte)(212f * ContagionStrength / 1.8f * (backgroundColor.R / 255f) * 1.8f);
     }
     public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
     {

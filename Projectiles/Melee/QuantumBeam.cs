@@ -67,6 +67,11 @@ public class QuantumBeam : ModProjectile
     public override void AI()
     {
         Projectile.ai[1]++;
+        if (Projectile.ai[1] < -1 && Projectile.ai[2] == 0)
+        {
+            Projectile.ai[2]++;
+            ParticleSystem.AddParticle(new QuantumPortal(), Projectile.Center, default, default);
+        }
         if (Projectile.ai[1] == -1)
         {
             int NPC = ClassExtensions.FindClosestNPC(Projectile, 400, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly || !Collision.CanHit(npc, Projectile));
@@ -161,7 +166,7 @@ public class QuantumBeam : ModProjectile
         if (hit.Crit)
         {
             Vector2 SwordSpawn = Projectile.Center + Main.rand.NextVector2Circular(300, 300);
-            ParticleSystem.AddParticle(new QuantumPortal(), SwordSpawn, default, default);
+            //ParticleSystem.AddParticle(new QuantumPortal(), SwordSpawn, default, default);
             Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), SwordSpawn, SwordSpawn.DirectionTo(target.Center) * (Projectile.velocity.Length() * Main.rand.NextFloat(1.1f,1.3f)), ModContent.ProjectileType<Projectiles.Melee.QuantumBeam>(), (int)(Projectile.damage * 0.6f), Projectile.knockBack, Projectile.owner, 0, Main.rand.Next(-20, -10));
         }
     }

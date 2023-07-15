@@ -76,7 +76,7 @@ public class QuantumClaymore : ModItem
     public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {
         Vector2 SwordSpawn = player.position - new Vector2(Main.rand.Next(60, 180) * player.direction, Main.rand.Next(-75, 75));
-        ParticleSystem.AddParticle(new QuantumPortal(), SwordSpawn, default, default);
+        //ParticleSystem.AddParticle(new QuantumPortal(), SwordSpawn, default, default);
         Projectile P = Projectile.NewProjectileDirect(player.GetSource_FromThis(), SwordSpawn, SwordSpawn.DirectionTo(target.Center) * (Item.shootSpeed * Main.rand.NextFloat(1.2f, 1.6f)), ModContent.ProjectileType<Projectiles.Melee.QuantumBeam>(), (int)(Item.damage * 0.6f), Item.knockBack * 0.1f, player.whoAmI,0, Main.rand.Next(-20, -10));
         target.AddBuff(BuffID.ShadowFlame, 300);
     }

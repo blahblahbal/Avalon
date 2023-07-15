@@ -27,6 +27,7 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             const int Rad = 100;
+            const int AttackRad = 130;
             Vector2 AttackPosition = Main.MouseWorld;
             for (int j = 0; j < 30; j++)
             {
@@ -43,7 +44,7 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
             int Divide = 0;
             for(int i = 0; i < Main.npc.Length; i++)
             {
-                if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < Rad && !Main.npc[i].friendly && Main.npc[i].active)
+                if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < AttackRad && !Main.npc[i].friendly && Main.npc[i].active)
                 {
                     Divide++;
                 }
@@ -52,7 +53,7 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
             {
                 for (int i = 0; i < Main.npc.Length; i++)
                 {
-                    if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < Rad && !Main.npc[i].friendly && Main.npc[i].active)
+                    if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < AttackRad && !Main.npc[i].friendly && Main.npc[i].active)
                     {
                         int DPS = Main.npc[i].SimpleStrikeNPC((Item.damage / Divide) + (int)MathHelper.Clamp(Divide * 3,0,Item.damage), player.direction, Main.rand.NextBool(101 - player.GetWeaponCrit(player.HeldItem)), Item.knockBack, DamageClass.Magic, true, player.luck);
                         player.addDPS(DPS);

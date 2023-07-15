@@ -1,6 +1,7 @@
 using System;
 using Avalon.Common;
 using Avalon.Items.Banners;
+using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -82,7 +83,11 @@ public class Blaze : ModNPC
             NPC.scale, effects, 0f);
     }
 
-    public override void ModifyNPCLoot(NPCLoot loot) => loot.Add(ItemDropRule.Common(ItemID.Hellstone, 10, 1, 6));
+    public override void ModifyNPCLoot(NPCLoot loot)
+    {
+        loot.Add(ItemDropRule.Common(ItemID.Hellstone, 80, 1, 6));
+        loot.Add(ItemDropRule.Common(ModContent.ItemType<BrimstoneBlock>(), 80, 8, 24));
+    }
 
     public override void AI()
     {
@@ -191,6 +196,7 @@ public class Blaze : ModNPC
                 (int)(NPC.height * 0.5f), DustID.Torch, NPC.velocity.X, 2f, 75, NPC.color, NPC.scale);
             Main.dust[num1225].velocity.X *= 0.5f;
             Main.dust[num1225].velocity.Y *= 0.1f;
+            Main.dust[num1225].customData = 0;
         }
 
         if (Main.rand.NextBool(40))
@@ -213,7 +219,7 @@ public class Blaze : ModNPC
             }
 
             NPC.localAI[0] += 1f;
-            if (NPC.localAI[0] == 180f)
+            if (NPC.localAI[0] is 180 or 200 or 220)
             {
                 if (Collision.CanHit(NPC.position, NPC.width, NPC.height, Main.player[NPC.target].position,
                         Main.player[NPC.target].width, Main.player[NPC.target].height))
@@ -221,9 +227,11 @@ public class Blaze : ModNPC
                     NPC.NewNPC(NPC.GetSource_FromAI(), (int)(NPC.position.X + (NPC.width / 2) + NPC.velocity.X),
                         (int)(NPC.position.Y + (NPC.height / 2) + NPC.velocity.Y), ModContent.NPCType<BlazeOrb>());
                 }
-
-                NPC.localAI[0] = 0f;
                 NPC.localAI[1] = 0f;
+                if (NPC.localAI[0] == 220)
+                {
+                    NPC.localAI[0] = 0f;
+                }
             }
         }
 

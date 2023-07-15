@@ -108,7 +108,6 @@ namespace Avalon.Particles
         public float AI2;
         public float AI3;
         public bool Active = true;
-        public byte Type;
         public Color Color;
         public virtual void Update()
         {

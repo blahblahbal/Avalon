@@ -52,7 +52,6 @@ public class CorrosiveMucus : ModProjectile
             Projectile.timeLeft -= 120;
         }
     }
-
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
         target.AddBuff(BuffID.Poisoned, 5 * 60);
