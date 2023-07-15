@@ -19,26 +19,29 @@ public class TrapCollision : ModHook
 
     private static bool OnCanTileHurt(On_Collision.orig_CanTileHurt orig, ushort type, int i, int j, Player player)
     {
-        if (player.GetModPlayer<AvalonPlayer>().TrapImmune)
+        if (player != null)
         {
-            if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
+            if (player.GetModPlayer<AvalonPlayer>().TrapImmune)
             {
-                return false;
+                if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
+                {
+                    return false;
+                }
             }
-        }
-        else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && type == ModContent.TileType<Tiles.VenomSpike>())
-        {
-            return true;
-        }
-        if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
-        {
-            if (player.afkCounter > 0)
-            {
-                return false;
-            }
-            else
+            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && type == ModContent.TileType<Tiles.VenomSpike>())
             {
                 return true;
+            }
+            if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
+            {
+                if (player.afkCounter > 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
         return orig(type, i, j, player);

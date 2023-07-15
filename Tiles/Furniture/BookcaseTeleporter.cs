@@ -51,7 +51,7 @@ public class BookcaseTeleporter : ModTile
                             (Main.tile[tileC.X + 1, tileC.Y + 3].HasTile && Main.tile[tileC.X + 1, tileC.Y + 3].TileType == Type))
                         {
                             NetMessage.SendTileSquare(-1, i, j);
-                            Network.SyncWiring.SendPacket(q.whoAmI, i, j);
+                            Network.SyncWiring.SendPacket(q.whoAmI, i, j, 0);
                         }
                     }
                 }

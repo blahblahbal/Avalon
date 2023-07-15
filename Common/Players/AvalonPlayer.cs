@@ -534,10 +534,12 @@ public class AvalonPlayer : ModPlayer
             Player.gravity /= gravity;
         }
 
+        #region mouseposition
         if (Player.whoAmI == Main.myPlayer)
         {
             MousePosition = Main.MouseWorld;
         }
+        #endregion
 
         tpStam = !teleportV;
         if (teleportV)

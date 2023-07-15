@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.World.Passes;
 using Avalon.WorldGeneration.Enums;
 using Avalon.WorldGeneration.Passes;
@@ -10,6 +11,11 @@ namespace Avalon.WorldGeneration;
 
 public class GenSystem : ModSystem
 {
+    public override void PostWorldGen()
+    {
+        AvalonWorld.JungleLocationX = GenVars.JungleX;
+        AvalonWorld.DungeonLocationX = Main.dungeonX;
+    }
     public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
     {
         GenPass currentPass;

@@ -120,6 +120,76 @@ Mods: {
 					'''
 			}
 
+			ShadowShellphone: {
+				DisplayName: Shadow Shellphone (Spawn)
+				Tooltip:
+					'''
+					Displays everything
+					Allows you to return to spawn at will
+					Right click to change destination
+					'''
+			}
+
+			ShadowShellphoneOcean: {
+				DisplayName: Shadow Shellphone (Oceans)
+				Tooltip:
+					'''
+					Displays everything
+					Allows you to teleport to the oceans
+					Right click to change destination
+					'''
+			}
+
+			ShadowShellphoneHell: {
+				DisplayName: Shadow Shellphone (Underworld)
+				Tooltip:
+					'''
+					Displays everything
+					Allows you to teleport to the Underworld
+					Right click to change destination
+					'''
+			}
+
+			ShadowShellphoneJungleTropics: {
+				DisplayName: Shadow Shellphone (Jungle)
+				Tooltip:
+					'''
+					Displays everything
+					Allows you to teleport to the Jungle or Tropics
+					Right click to change destination
+					'''
+			}
+
+			ShadowShellphoneRandom: {
+				DisplayName: Shadow Shellphone (Random)
+				Tooltip:
+					'''
+					Displays everything
+					Allows you to teleport to random locations
+					Right click to change destination
+					'''
+			}
+
+			ShadowShellphoneHome: {
+				DisplayName: Shadow Shellphone (Home)
+				Tooltip:
+					'''
+					Displays everything
+					Allows you to return home at will
+					Right click to change destination
+					'''
+			}
+
+			ShadowShellphoneDungeon: {
+				DisplayName: Shadow Shellphone (Dungeon)
+				Tooltip:
+					'''
+					Displays everything
+					Allows you to teleport to the Dungeon
+					Right click to change destination
+					'''
+			}
+
 			PossessedFlamesaw: {
 				DisplayName: Possessed Flamesaw
 				Tooltip: Right click to shoot a tree-chopping projectile

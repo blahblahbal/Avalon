@@ -73,6 +73,9 @@ public class AvalonWorld : ModSystem
 
     public WorldEvil WorldEvil;
 
+    public static int DungeonLocationX;
+    public static int JungleLocationX;
+
     public static CopperVariant CopperOre = CopperVariant.Random;
     public static IronVariant IronOre = IronVariant.Random;
     public static SilverVariant SilverOre = SilverVariant.Random;
@@ -114,10 +117,23 @@ public class AvalonWorld : ModSystem
         config.SetWorldData(tempDict);
 
         AvalonConfig.Save(config);
+
+        tag["Avalon:DungeonX"] = DungeonLocationX;
+        tag["Avalon:JungleX"] = JungleLocationX;
     }
 
     public override void LoadWorldData(TagCompound tag)
     {
+        if (tag.ContainsKey("Avalon:DungeonX"))
+        {
+            DungeonLocationX = tag.GetAsInt("Avalon:DungeonX");
+        }
+
+        if (tag.ContainsKey("Avalon:JungleX"))
+        {
+            JungleLocationX = tag.GetAsInt("Avalon:JungleX");
+        }
+
         if (tag.ContainsKey("RhodiumOre"))
         {
             RhodiumOre = (RhodiumVariant)tag.Get<byte>("RhodiumOre");
@@ -129,6 +145,8 @@ public class AvalonWorld : ModSystem
             for (var j = 0; j < Main.tile.Height; ++j)
                 if (ContagionCountCollection.Contains(Main.tile[i, j].TileType)) //Better calculations, this is only loaded when the world is loaded
                     totalSick2++;                                                //to make sure that the world doesn't lag when calculating normally
+
+
     }
 
     /// <inheritdoc />

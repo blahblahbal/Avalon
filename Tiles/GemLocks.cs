@@ -186,7 +186,7 @@ public class GemLocks : ModTile
 
         return true;
     }
-    public static void HitSwitch(int i, int j) //Does not sync with multiplayer
+    public static void HitSwitch(int i, int j)
     {
         SoundEngine.PlaySound(SoundID.Mech, new Vector2(i * 16 + 16, j * 16 + 16));
         Wiring.TripWire(i, j, 3, 3); //I THINK this is what isn't syncing properly?
