@@ -155,11 +155,8 @@ public class Moonfury : ModProjectile
                         StateTimer = 0f;
                         Projectile.netUpdate = true;
                         Projectile.velocity *= 0.2f;
-                        // This is where Drippler Crippler spawns its projectile
-                        /*
                         if (Main.myPlayer == Projectile.owner)
-                            Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, Projectile.velocity, 928, Projectile.damage, Projectile.knockBack, Main.myPlayer);
-                        */
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<MoonfuryBlade>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, 0, Projectile.velocity.X, Projectile.velocity.Y);
                         break;
                     }
                     if (shouldSwitchToRetracting)
@@ -168,6 +165,8 @@ public class Moonfury : ModProjectile
                         StateTimer = 0f;
                         Projectile.netUpdate = true;
                         Projectile.velocity *= 0.3f;
+                        if (Main.myPlayer == Projectile.owner)
+                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<MoonfuryBlade>(), Projectile.damage, Projectile.knockBack, Main.myPlayer,0,Projectile.velocity.X,Projectile.velocity.Y);
                         // This is also where Drippler Crippler spawns its projectile, see above code.
                     }
                     player.ChangeDir((player.Center.X < Projectile.Center.X).ToDirectionInt());
@@ -299,27 +298,27 @@ public class Moonfury : ModProjectile
         Projectile.spriteDirection = Projectile.direction;
         Projectile.ownerHitCheck = shouldOwnerHitCheck; // This prevents attempting to damage enemies without line of sight to the player. The custom Colliding code for spinning makes this necessary.
 
-        // This rotation code is unique to this flail, since the sprite isn't rotationally symmetric and has tip.
-        //bool freeRotation = CurrentAIState == AIState.Ricochet || CurrentAIState == AIState.Dropping;
-        //if (freeRotation)
-        //{
-        //    if (Projectile.velocity.Length() > 1f)
-        //        Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
-        //    else
-        //        Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
-        //}
-        //else
-        //{
-        //    Vector2 vectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
-        //    Projectile.rotation = vectorTowardsPlayer.ToRotation() + MathHelper.PiOver2;
-        //}
+        //This rotation code is unique to this flail, since the sprite isn't rotationally symmetric and has tip.
+        bool freeRotation = CurrentAIState == AIState.Ricochet || CurrentAIState == AIState.Dropping;
+        if (freeRotation)
+        {
+            if (Projectile.velocity.Length() > 1f)
+                Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
+            else
+                Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
+        }
+        else
+        {
+            Vector2 vectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
+            Projectile.rotation = vectorTowardsPlayer.ToRotation() + MathHelper.PiOver2;
+        }
 
         // If you have a ball shaped flail, you can use this simplified rotation code instead
 
-        if (Projectile.velocity.Length() > 1f)
-            Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
-        else
-            Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
+        //if (Projectile.velocity.Length() > 1f)
+        //    Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
+        //else
+        //    Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
 
 
         Projectile.timeLeft = 2; // Makes sure the flail doesn't die (good when the flail is resting on the ground)
@@ -591,11 +590,14 @@ public class Moonfury : ModProjectile
         ParticleOrchestraSettings settings = particleOrchestraSettings;
         base.OnHitNPC(target, hit, damageDone);
         ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
+
+        target.AddBuff(BuffID.ShadowFlame, 120);
     }
 
-    /// <inheritdoc />
-    public override void OnHitPlayer(Player target, Player.HurtInfo info) {
-        if (!info.PvP) {
+    public override void OnHitPlayer(Player target, Player.HurtInfo info)
+    {
+        if (!info.PvP)
+        {
             return;
         }
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
