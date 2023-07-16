@@ -30,15 +30,6 @@ public class InterfaceLayerSystem : ModSystem
                 return true;
             }, InterfaceScaleType.UI));
         }
-
-        //if (staminaBarIndex != -1)
-        //{
-        //    layers.Insert(staminaBarIndex, new LegacyGameInterfaceLayer("Minion Slot Counter", delegate
-        //    {
-        //        ExxoAvalonOrigins.Mod.minionSlotInterface.Draw(Main.spriteBatch, Main._drawInterfaceGameTime);
-        //        return true;
-        //    }, InterfaceScaleType.UI));
-        //}
         layers.Insert(0, new LegacyGameInterfaceLayer(
             $"{Mod.DisplayName}: Update Interfaces",
             delegate
@@ -48,7 +39,6 @@ public class InterfaceLayerSystem : ModSystem
                     modInterfaceLayer.Update();
                 }
                 ExxoAvalonOrigins.Mod.staminaInterface.Update(Main._drawInterfaceGameTime);
-                //ExxoAvalonOrigins.Mod.minionSlotInterface.Update(Main._drawInterfaceGameTime);
                 return true;
             },
             InterfaceScaleType.UI)

@@ -45,9 +45,6 @@ public class ExxoAvalonOrigins : Mod
     internal UserInterface staminaInterface;
     internal StaminaBar staminaBar;
 
-    internal UserInterface minionSlotInterface;
-    internal MinionSlotCounter minionSlotCounter;
-
     //internal UserInterface statDisplayInterface;
     //internal StatDisplayUIState statDisplay;
     public override void Load()

@@ -13,6 +13,7 @@ class ShadowShellphone : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
 
     public override void SetDefaults()
@@ -27,7 +28,10 @@ class ShadowShellphone : ModItem
         Item.useAnimation = 30;
         Item.height = dims.Height;
     }
-
+    public override void RightClick(Player player)
+    {
+        Item.SetDefaults(ModContent.ItemType<ShadowShellphoneHome>());
+    }
     public override bool? UseItem(Player player)
     {
         if (player.altFunctionUse == 2)
@@ -62,6 +66,7 @@ class ShadowShellphoneDungeon : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override string Texture => ModContent.GetInstance<ShadowShellphone>().Texture;
     public override void SetDefaults()
@@ -75,6 +80,10 @@ class ShadowShellphoneDungeon : ModItem
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.useAnimation = 30;
         Item.height = dims.Height;
+    }
+    public override void RightClick(Player player)
+    {
+        Item.SetDefaults(ModContent.ItemType<ShadowShellphoneJungleTropics>());
     }
     public override bool AltFunctionUse(Player player)
     {
@@ -97,7 +106,6 @@ class ShadowShellphoneDungeon : ModItem
 
     public void DungeonPort(Player player)
     {
-        //Vector2 newPos2 = new Vector2(Main.dungeonX, Main.dungeonY - 2.5f) * 16;
         bool canSpawn = false;
         int num = Main.dungeonX;
         Main.NewText(num);
@@ -163,6 +171,7 @@ class ShadowShellphoneOcean : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override string Texture => ModContent.GetInstance<ShadowShellphone>().Texture;
     public override void SetDefaults()
@@ -176,6 +185,11 @@ class ShadowShellphoneOcean : ModItem
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.useAnimation = 30;
         Item.height = dims.Height;
+    }
+
+    public override void RightClick(Player player)
+    {
+        Item.SetDefaults(ModContent.ItemType<ShadowShellphoneHell>());
     }
 
     public override bool? UseItem(Player player)
@@ -210,6 +224,7 @@ class ShadowShellphoneHell : ModItem
 {
     public override void SetStaticDefaults()
     {
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
         Item.ResearchUnlockCount = 1;
     }
     public override string Texture => ModContent.GetInstance<ShadowShellphone>().Texture;
@@ -243,7 +258,10 @@ class ShadowShellphoneHell : ModItem
         }
         return true;
     }
-
+    public override void RightClick(Player player)
+    {
+        Item.SetDefaults(ModContent.ItemType<ShadowShellphoneRandom>());
+    }
     public override void UpdateInventory(Player player)
     {
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
@@ -259,6 +277,7 @@ class ShadowShellphoneJungleTropics : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override string Texture => ModContent.GetInstance<ShadowShellphone>().Texture;
     public override void SetDefaults()
@@ -273,7 +292,10 @@ class ShadowShellphoneJungleTropics : ModItem
         Item.useAnimation = 30;
         Item.height = dims.Height;
     }
-
+    public override void RightClick(Player player)
+    {
+        Item.SetDefaults(ModContent.ItemType<ShadowShellphoneOcean>());
+    }
     public override bool? UseItem(Player player)
     {
         if (player.altFunctionUse == 2)
@@ -359,6 +381,7 @@ class ShadowShellphoneRandom : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override string Texture => ModContent.GetInstance<ShadowShellphone>().Texture;
     public override void SetDefaults()
@@ -376,6 +399,10 @@ class ShadowShellphoneRandom : ModItem
     public override bool AltFunctionUse(Player player)
     {
         return true;
+    }
+    public override void RightClick(Player player)
+    {
+        Item.SetDefaults(ModContent.ItemType<ShadowShellphone>());
     }
     public override bool? UseItem(Player player)
     {
@@ -407,6 +434,7 @@ class ShadowShellphoneHome : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override string Texture => ModContent.GetInstance<ShadowShellphone>().Texture;
     public override void SetDefaults()
@@ -477,7 +505,10 @@ class ShadowShellphoneHome : ModItem
         }
         return true;
     }
-
+    public override void RightClick(Player player)
+    {
+        Item.SetDefaults(ModContent.ItemType<ShadowShellphoneDungeon>());
+    }
     public override void UpdateInventory(Player player)
     {
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
