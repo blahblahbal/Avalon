@@ -45,29 +45,61 @@ class SonicScrewdriverMkIII : ModItem
             //}
             Point c = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 
-            if (Main.tile[c.X, c.Y].TileType == TileID.Containers)
+            if (Main.tile[c.X, c.Y].TileType == ModContent.TileType<Tiles.Furniture.LockedChests>())
             {
                 int xpos;
                 for (xpos = (int)(Main.tile[c.X, c.Y].TileFrameX / 18); xpos > 1; xpos -= 2)
                 {
                 }
                 xpos = Player.tileTargetX - xpos;
-                int ypos = Player.tileTargetY - (int)(Main.tile[c.X, c.Y].TileFrameY / 18);
+                int ypos = Player.tileTargetY - (Main.tile[c.X, c.Y].TileFrameY / 18);
+
+                Tiles.Furniture.LockedChests.Unlock(xpos, ypos);
+
+                //Chest.Unlock(xpos, ypos);
+                //if (Main.netMode == NetmodeID.MultiplayerClient)
+                //{
+                //    NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1, xpos, ypos);
+                //}
+            }
+            else if (Main.tile[c.X, c.Y].TileType == TileID.Containers)
+            {
+                int xpos;
+                for (xpos = (int)(Main.tile[c.X, c.Y].TileFrameX / 18); xpos > 1; xpos -= 2)
+                {
+                }
+                xpos = Player.tileTargetX - xpos;
+                int ypos = Player.tileTargetY - (Main.tile[c.X, c.Y].TileFrameY / 18);
 
                 if (Chest.IsLocked(xpos, ypos))
                 {
                     Chest.Unlock(xpos, ypos);
                     if (Main.netMode == NetmodeID.MultiplayerClient)
                     {
-                        NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, 1, xpos, ypos);
+                        NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1, xpos, ypos);
                     }
                 }
                 else
                 {
-                    Chest.Lock(xpos, ypos);
-                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    if (Main.tile[xpos, ypos].TileFrameX == 0)
                     {
-                        NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, 3, xpos, ypos);
+                        Tiles.Furniture.LockedChests.Lock(xpos, ypos);
+                    }
+                    else if (Main.tile[xpos, ypos].TileFrameX == 396)
+                    {
+                        Tiles.Furniture.LockedChests.Lock(xpos, ypos);
+                    }
+                    else if (Main.tile[xpos, ypos].TileFrameX == 432)
+                    {
+                        Tiles.Furniture.LockedChests.Lock(xpos, ypos);
+                    }
+                    else
+                    {
+                        Chest.Lock(xpos, ypos);
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                        {
+                            NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3, xpos, ypos);
+                        }
                     }
                 }
             }

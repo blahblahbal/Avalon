@@ -3175,7 +3175,8 @@ Mods: {
 					'''
 					Reveals treasures, ores, and mobs
 					Tells the time
-					Can open all locks (NOT FUNCTIONAL YET)
+					Can lock and unlock chests
+                    Hold LEFT CTRL and click on chests
 					'''
 			}
 
@@ -5598,24 +5599,63 @@ Mods: {
 			Tourmaline.MapEntry: Tourmaline
 			Zircon.MapEntry: Zircon
 			Paintings.MapEntry: Paintings
-			CoughwoodChest.MapEntry0: Coughwood Chest
-			HellfireChest.MapEntry0: Hellfire Chest
-			ResistantWoodChest.MapEntry0: Resistant Wood Chest
+
+			CoughwoodChest: {
+				MapEntry0: Coughwood Chest
+				MapEntry1: Mods.Avalon.Tiles.CoughwoodChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.CoughwoodChest.MapEntry2
+			}
+
+			HellfireChest: {
+				MapEntry0: Hellfire Chest
+				MapEntry1: Mods.Avalon.Tiles.HellfireChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.HellfireChest.MapEntry2
+			}
+
+			ResistantWoodChest: {
+				MapEntry0: Resistant Wood Chest
+				MapEntry1: Mods.Avalon.Tiles.ResistantWoodChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.ResistantWoodChest.MapEntry2
+			}
+
 			ResistantWoodDresser.MapEntry: Resistant Wood Dresser
 			ResistantSapling.MapEntry: Resistant Sapling
 			OrangeDungeonDresser.MapEntry: Orange Dungeon Dresser
-			PurpleDungeonChest.MapEntry0: Purple Dungeon Chest
+
+			PurpleDungeonChest: {
+				MapEntry0: Purple Dungeon Chest
+				MapEntry1: Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry2
+			}
+
 			PurpleDungeonDresser.MapEntry: Purple Dungeon Dresser
-			OrangeDungeonChest.MapEntry0: Orange Dungeon Chest
-			YellowDungeonChest.MapEntry0: Yellow Dungeon Chest
+
+			OrangeDungeonChest: {
+				MapEntry0: Orange Dungeon Chest
+				MapEntry1: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry2
+			}
+
+			YellowDungeonChest: {
+				MapEntry0: Yellow Dungeon Chest
+				MapEntry1: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry2
+			}
+
 			YellowDungeonDresser.MapEntry: Yellow Dungeon Dresser
 			CoughwoodDresser.MapEntry: Coughwood Dresser
 			BleachedEbonyDresser.MapEntry: Bleached Ebony Dresser
-			BleachedEbonyChest.MapEntry0: Bleached Ebony Chest
+
+			BleachedEbonyChest: {
+				MapEntry0: Bleached Ebony Chest
+				MapEntry1: Mods.Avalon.Tiles.BleachedEbonyChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.BleachedEbonyChest.MapEntry2
+			}
 
 			CrystalMinesChest: {
 				MapEntry0: Crystal Mines Chest
 				MapEntry1: Locked Crystal Mines Chest
+				MapEntry2: Mods.Avalon.Tiles.CrystalMinesChest.MapEntry2
 			}
 
 			GemLocks: {
@@ -5624,16 +5664,66 @@ Mods: {
 				MapEntry2: Zircon Gem Lock
 			}
 
-			AmberChest.MapEntry0: Amber Chest
-			AmethystChest.MapEntry0: Amethyst Chest
-			DiamondChest.MapEntry0: Diamond Chest
-			EmeraldChest.MapEntry0: Emerald Chest
-			PeridotChest.MapEntry0: Peridot Chest
-			RubyChest.MapEntry0: Ruby Chest
-			SapphireChest.MapEntry0: Sapphire Chest
-			TopazChest.MapEntry0: Topaz Chest
-			TourmalineChest.MapEntry0: Tourmaline Chest
-			ZirconChest.MapEntry0: Zircon Chest
+			AmberChest: {
+				MapEntry0: Amber Chest
+				MapEntry1: Mods.Avalon.Tiles.AmberChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.AmberChest.MapEntry2
+			}
+
+			AmethystChest: {
+				MapEntry0: Amethyst Chest
+				MapEntry1: Mods.Avalon.Tiles.AmethystChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.AmethystChest.MapEntry2
+			}
+
+			DiamondChest: {
+				MapEntry0: Diamond Chest
+				MapEntry1: Mods.Avalon.Tiles.DiamondChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.DiamondChest.MapEntry2
+			}
+
+			EmeraldChest: {
+				MapEntry0: Emerald Chest
+				MapEntry1: Mods.Avalon.Tiles.EmeraldChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.EmeraldChest.MapEntry2
+			}
+
+			PeridotChest: {
+				MapEntry0: Peridot Chest
+				MapEntry1: Mods.Avalon.Tiles.PeridotChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.PeridotChest.MapEntry2
+			}
+
+			RubyChest: {
+				MapEntry0: Ruby Chest
+				MapEntry1: Mods.Avalon.Tiles.RubyChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.RubyChest.MapEntry2
+			}
+
+			SapphireChest: {
+				MapEntry0: Sapphire Chest
+				MapEntry1: Mods.Avalon.Tiles.SapphireChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.SapphireChest.MapEntry2
+			}
+
+			TopazChest: {
+				MapEntry0: Topaz Chest
+				MapEntry1: Mods.Avalon.Tiles.TopazChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.TopazChest.MapEntry2
+			}
+
+			TourmalineChest: {
+				MapEntry0: Tourmaline Chest
+				MapEntry1: Mods.Avalon.Tiles.TourmalineChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.TourmalineChest.MapEntry2
+			}
+
+			ZirconChest: {
+				MapEntry0: Zircon Chest
+				MapEntry1: Mods.Avalon.Tiles.ZirconChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.ZirconChest.MapEntry2
+			}
+
 			GiantCrystalShard.MapEntry: Giant Crystal Shard
 			PeridotBunnyCage.MapEntry: Peridot Bunny Cage
 			TourmalineBunnyCage.MapEntry: Tourmaline Bunny Cage
@@ -5641,7 +5731,18 @@ Mods: {
 			PeridotSquirrelCage.MapEntry: Peridot Squirrel Cage
 			TourmalineSquirrelCage.MapEntry: Tourmaline Squirrel Cage
 			ZirconSquirrelCage.MapEntry: Zircon Squirrel Cage
-			PlatinumChest.MapEntry0: Platinum Chest
+
+			PlatinumChest: {
+				MapEntry0: Platinum Chest
+				MapEntry1: Mods.Avalon.Tiles.PlatinumChest.MapEntry1
+				MapEntry2: Mods.Avalon.Tiles.PlatinumChest.MapEntry2
+			}
+
+			LockedChests: {
+				MapEntry0: Locked Chests
+				MapEntry1: Locked Chests
+				MapEntry2: Locked Chests
+			}
 		}
 
 		Prefixes: {

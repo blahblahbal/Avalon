@@ -496,6 +496,7 @@ namespace Avalon.Common.Templates
         public virtual int ShinyFrequency => 1200; //Doubt it'll ever need to be changed, just in case tbh
         protected virtual bool CanBeLocked => false;
         protected virtual int ChestKeyItemId => ItemID.None;
+        public virtual bool CanBeUnlockedNormally => true;
         public override void SetStaticDefaults()
         {
             if (Shiny)
@@ -524,6 +525,8 @@ namespace Avalon.Common.Templates
             // Other tiles with just one map entry use CreateMapEntryName() to use the default translationkey, "MapEntry"
             // Since ExampleChest needs multiple, we register our own MapEntry keys
             AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry1"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry2"), MapChestName);
 
             // Placement
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
@@ -666,7 +669,7 @@ namespace Avalon.Common.Templates
                     Main.stackSplit = 600;
                 }
             }
-            else if (isLocked)
+            else if (isLocked && CanBeUnlockedNormally)
             {
                 if (player.ConsumeItem(ChestKeyItemId) && Chest.Unlock(left, top) &&
                     Main.netMode == NetmodeID.MultiplayerClient)
@@ -674,7 +677,7 @@ namespace Avalon.Common.Templates
                     NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1f, left, top);
                 }
             }
-            else
+            else if (!isLocked)
             {
                 int chest = Chest.FindChest(left, top);
                 if (chest != -1)
