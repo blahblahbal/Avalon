@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Common;
@@ -52,6 +53,11 @@ public class AvalonGlobalNPCInstance : GlobalNPC
     }
     public override void UpdateLifeRegen(NPC npc, ref int damage)
     {
+        if(npc.type == NPCID.WallofFlesh && npc.life < 500)
+        {
+            npc.lifeRegen -= 100;
+            damage = 50;
+        }
         if (Malaria)
         {
             if (npc.lifeRegen > 0)

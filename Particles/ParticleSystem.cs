@@ -19,6 +19,13 @@ namespace Avalon.Particles
             Particles = new List<Particle>(MaxParticles);
             On_Main.DrawCapture += On_Main_DrawCapture;
             On_Main.DrawDust += On_Main_DrawDust;
+            On_Main.Draw += On_Main_Draw;
+        }
+
+        private void On_Main_Draw(On_Main.orig_Draw orig, Main self, GameTime gameTime)
+        {
+            orig.Invoke(self, gameTime);
+            DrawParticles(true);
         }
 
         private void On_Main_DrawDust(On_Main.orig_DrawDust orig, Main self)
@@ -36,6 +43,7 @@ namespace Avalon.Particles
             Particles.Clear();
             On_Main.DrawCapture -= On_Main_DrawCapture;
             On_Main.DrawDust -= On_Main_DrawDust;
+            On_Main.Draw -= On_Main_Draw;
         }
         public override void PostUpdateDusts()
         {
@@ -56,7 +64,7 @@ namespace Avalon.Particles
                 }
             }
         }
-        public static void DrawParticles()
+        public static void DrawParticles(bool FrontLayer = false)
         {
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
@@ -65,7 +73,7 @@ namespace Avalon.Particles
             for (int i = 0; i < Particles.Count; i++)
             {
                 Particle particle = Particles.ElementAt(i);
-                if (particle.Active)
+                if (particle.Active && particle.FrontLayer == FrontLayer)
                 {
                     particle.Draw(spriteBatch);
                 }
@@ -109,6 +117,7 @@ namespace Avalon.Particles
         public float AI3;
         public bool Active = true;
         public Color Color;
+        public bool FrontLayer;
         public virtual void Update()
         {
             //TimeInWorld++;
