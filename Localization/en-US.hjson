@@ -4926,6 +4926,11 @@ Mods: {
 				DisplayName: Zircon Hook
 				Tooltip: ""
 			}
+
+			DesertGambler: {
+				DisplayName: Desert Gambler
+				Tooltip: Ranged powers increase over time while below 20% life
+			}
 		}
 
 		Projectiles: {
@@ -5032,6 +5037,7 @@ Mods: {
 			TourmalineHook.DisplayName: Tourmaline Hook
 			ZirconHook.DisplayName: Zircon Hook
 			MoonfuryBlade.DisplayName: Moonfury Blade
+			SandSlash.DisplayName: Sand Slash
 		}
 
 		NPCs: {
@@ -5585,6 +5591,11 @@ Mods: {
 			Hungry: {
 				DisplayName: Hungry
 				Description: The hungry will fight for you
+			}
+
+			Deadeye: {
+				DisplayName: Deadeye
+				Description: Ranged powers are increasing
 			}
 		}
 
