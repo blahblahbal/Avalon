@@ -45,8 +45,8 @@ namespace Avalon.Particles
             Vector2 DrawPos = Position - Main.screenPosition;
             spriteBatch.Draw(texture, DrawPos, frame, Color1, 0f, frameOrigin, new Vector2(1.4f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.20f) * 2f), SpriteEffects.None, 0);
             spriteBatch.Draw(texture, DrawPos, frame, new Color(255,255,255,0) * 0.3f, 0f, frameOrigin, new Vector2(1.4f, (float)Math.Sin((float)(TimeInWorld + 1) * 0.20f) * 2f) * 0.7f, SpriteEffects.None, 0);
-            spriteBatch.Draw(texture, DrawPos, frame, Color1, MathHelper.PiOver2, frameOrigin, new Vector2(1f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.16f) * (AI1 + 1)), SpriteEffects.None, 0);
-            spriteBatch.Draw(texture, DrawPos, frame, new Color(255, 255, 255, 0) * 0.3f, MathHelper.PiOver2, frameOrigin, new Vector2(1, (float)Math.Sin((float)(TimeInWorld + 1) * 0.2f) * (AI1 + 1)) * 0.7f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, Color1, MathHelper.PiOver2, frameOrigin, new Vector2(1f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.16f) * (ai1 + 1)), SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, new Color(255, 255, 255, 0) * 0.3f, MathHelper.PiOver2, frameOrigin, new Vector2(1, (float)Math.Sin((float)(TimeInWorld + 1) * 0.2f) * (ai1 + 1)) * 0.7f, SpriteEffects.None, 0);
         }
     }
 }

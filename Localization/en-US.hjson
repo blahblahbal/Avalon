@@ -411,8 +411,12 @@ Mods: {
 			}
 
 			MinersSword: {
-				DisplayName: Miner's Sword
-				Tooltip: ""
+                DisplayName: Miner's Sword
+                Tooltip:
+                '''
+                Builds up power when not swung
+                Falling increases critical strike chance
+                '''
 			}
 
 			PointingLaser: {
@@ -3176,7 +3180,7 @@ Mods: {
 					Reveals treasures, ores, and mobs
 					Tells the time
 					Can lock and unlock chests
-                    Hold LEFT CTRL and click on chests
+					               Hold LEFT CTRL and click on chests
 					'''
 			}
 
@@ -4932,6 +4936,15 @@ Mods: {
 				DisplayName: Desert Gambler
 				Tooltip: Ranged powers increase over time while below 20% life
 			}
+
+			LotusLeech: {
+				DisplayName: Leeching Lotus
+				Tooltip:
+                '''
+                Steals mana from nearby enemies
+                various debuffs are applied if there are no enemies in range
+                '''
+			}
 		}
 
 		Projectiles: {
@@ -5039,6 +5052,7 @@ Mods: {
 			ZirconHook.DisplayName: Zircon Hook
 			MoonfuryBlade.DisplayName: Moonfury Blade
 			SandSlash.DisplayName: Sand Slash
+			LotusLeechHeal.DisplayName: Lotus Leech Heal
 		}
 
 		NPCs: {

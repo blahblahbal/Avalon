@@ -26,6 +26,14 @@ namespace Avalon.Common
         {
             if(npc.life <= 0)
             {
+                SoundStyle ExplodyOverlapEdition = new SoundStyle("Terraria/Sounds/Item_14")
+                {
+                    Volume = Main.rand.NextFloat(2f, 3),
+                    PitchVariance = 1f,
+                    MaxInstances = 50,
+                };
+                SoundEngine.PlaySound(ExplodyOverlapEdition, npc.position);
+                ParticleSystem.AddParticle(new ExplosionParticle(), npc.Center, default, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(3.9f, 4.2f));
                 ParticleSystem.AddParticle(new ScreenFlash(), npc.Center, default, Color.OrangeRed);
                 ParticleSystem.AddParticle(new ScreenFlash(), npc.Center, default, Color.White);
             }
@@ -82,13 +90,13 @@ namespace Avalon.Common
     {
         public override void OnSpawn()
         {
-            AI1 = 1;
+            ai1 = 1;
             FrontLayer = true;
         }
         public override void Update()
         {
             TimeInWorld++;
-            AI1 -= 0.01f;
+            ai1 -= 0.01f;
 
             if (TimeInWorld <= 0)
                 Active = false;
@@ -97,7 +105,7 @@ namespace Avalon.Common
         public override void Draw(SpriteBatch spriteBatch)
         {
             Color.A = 0;
-            Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(-2, -2, Main.screenWidth + 4, Main.screenHeight + 4), new Rectangle(0, 0, 1, 1), Color * AI1);
+            Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(-2, -2, Main.screenWidth + 4, Main.screenHeight + 4), new Rectangle(0, 0, 1, 1), Color * ai1);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Avalon.Particles
             {
                 Active = false;
             }
-            AI2 += 0.01f;
+            ai2 += 0.01f;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -35,11 +35,11 @@ namespace Avalon.Particles
 
             float muliply = ((32 - TimeInWorld) / 28);
 
-            spriteBatch.Draw(texture, DrawPos, frame, new Color(255,255,255,128), AI1, frameOrigin, AI2, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, new Color(255,255,255,128), ai1, frameOrigin, ai2, SpriteEffects.None, 0);
 
             for (int i = 0; i < 8; i++)
             {
-                spriteBatch.Draw(texture2, DrawPos + new Vector2(0, TimeInWorld * 0.2f).RotatedBy(i * MathHelper.PiOver4), frame, new Color(255, 255, 255, 0) * muliply, AI1, frameOrigin, AI2, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture2, DrawPos + new Vector2(0, TimeInWorld * 0.2f).RotatedBy(i * MathHelper.PiOver4), frame, new Color(255, 255, 255, 0) * muliply, ai1, frameOrigin, ai2, SpriteEffects.None, 0);
             }
         }
     }

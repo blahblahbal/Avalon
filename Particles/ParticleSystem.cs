@@ -100,9 +100,9 @@ namespace Avalon.Particles
             Particles.Last().Position = position;
             Particles.Last().Velocity = velocity;
             Particles.Last().Color = color;
-            Particles.Last().AI1 = AI1;
-            Particles.Last().AI2 = AI2;
-            Particles.Last().AI3 = AI3;
+            Particles.Last().ai1 = AI1;
+            Particles.Last().ai2 = AI2;
+            Particles.Last().ai3 = AI3;
 
             return Particles.Last();
         }
@@ -112,9 +112,9 @@ namespace Avalon.Particles
         public Vector2 Position;
         public Vector2 Velocity;
         public int TimeInWorld;
-        public float AI1;
-        public float AI2;
-        public float AI3;
+        public float ai1;
+        public float ai2;
+        public float ai3;
         public bool Active = true;
         public Color Color;
         public bool FrontLayer;

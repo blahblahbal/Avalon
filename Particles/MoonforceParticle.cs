@@ -31,10 +31,10 @@ namespace Avalon.Particles
             Vector2 frameOrigin = frame.Size() / 2f;
             Vector2 DrawPos = Position - Main.screenPosition;
             float Rotation = Velocity.ToRotation();
-            spriteBatch.Draw(texture, DrawPos, frame, Color1, Rotation, frameOrigin, new Vector2(1f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.20f) * 2f) * AI1 * 1.2f, SpriteEffects.None, 0);
-            spriteBatch.Draw(texture, DrawPos, frame, new Color(255,255,255,0) * 0.3f, Rotation, frameOrigin, new Vector2(1.4f, (float)Math.Sin((float)(TimeInWorld + 1) * 0.20f) * 2f) * AI1 * 0.8f, SpriteEffects.None, 0);
-            spriteBatch.Draw(texture, DrawPos, frame, Color1, Rotation + MathHelper.PiOver2, frameOrigin, new Vector2(1f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.16f)) * AI1, SpriteEffects.None, 0);
-            spriteBatch.Draw(texture, DrawPos, frame, new Color(255, 255, 255, 0) * 0.3f, Rotation + MathHelper.PiOver2, frameOrigin, new Vector2(1, (float)Math.Sin((float)(TimeInWorld + 1) * 0.2f)) * AI1 * 0.8f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, Color1, Rotation, frameOrigin, new Vector2(1f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.20f) * 2f) * ai1 * 1.2f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, new Color(255,255,255,0) * 0.3f, Rotation, frameOrigin, new Vector2(1.4f, (float)Math.Sin((float)(TimeInWorld + 1) * 0.20f) * 2f) * ai1 * 0.8f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, Color1, Rotation + MathHelper.PiOver2, frameOrigin, new Vector2(1f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.16f)) * ai1, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, new Color(255, 255, 255, 0) * 0.3f, Rotation + MathHelper.PiOver2, frameOrigin, new Vector2(1, (float)Math.Sin((float)(TimeInWorld + 1) * 0.2f)) * ai1 * 0.8f, SpriteEffects.None, 0);
         }
     }
 }
