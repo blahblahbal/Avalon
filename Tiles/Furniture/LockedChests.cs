@@ -39,8 +39,15 @@ namespace Avalon.Tiles.Furniture
             // Other tiles with just one map entry use CreateMapEntryName() to use the default translationkey, "MapEntry"
             // Since ExampleChest needs multiple, we register our own MapEntry keys
             AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry1"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry2"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
             // Placement
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.newTile.Origin = new Point16(0, 1);
@@ -64,17 +71,38 @@ namespace Avalon.Tiles.Furniture
             Tile tile = Main.tile[i, j];
             int style = TileObjectData.GetTileStyle(tile);
             int type = 0;
-            if (style == 0)
+            switch (style)
             {
-                type = ItemID.IceChest;
-            }
-            if (style == 1)
-            {
-                type = ItemID.Chest;
-            }
-            if (style == 2)
-            {
-                type = ItemID.LivingWoodChest;
+                case 0:
+                    type = ItemID.IceChest;
+                    break;
+                case 1:
+                    type = ItemID.Chest;
+                    break;
+                case 2:
+                    type = ItemID.LivingWoodChest;
+                    break;
+                case 3:
+                    type = ItemID.EbonwoodChest;
+                    break;
+                case 4:
+                    type = ItemID.RichMahoganyChest;
+                    break;
+                case 5:
+                    type = ItemID.PearlwoodChest;
+                    break;
+                case 6:
+                    type = ItemID.IvyChest;
+                    break;
+                case 7:
+                    type = ItemID.SkywareChest;
+                    break;
+                case 8:
+                    type = ItemID.ShadewoodChest;
+                    break;
+                case 9:
+                    type = ItemID.WebCoveredChest;
+                    break;
             }
             if (type > 0)
             {
@@ -168,6 +196,38 @@ namespace Avalon.Tiles.Furniture
                     }
                 }
             }
+            else if (tileSafely.TileFrameX >= 108 && tileSafely.TileFrameX <= 216)
+            {
+                for (int i = X; i <= X + 1; i++)
+                {
+                    for (int j = Y; j <= Y + 1; j++)
+                    {
+                        Tile tileSafely2 = Framing.GetTileSafely(i, j);
+                        tileSafely2.TileType = TileID.Containers;
+                        tileSafely2.TileFrameX += 4 * 36;
+                        for (int k = 0; k < 4; k++)
+                        {
+                            Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, type);
+                        }
+                    }
+                }
+            }
+            else if (tileSafely.TileFrameX >= 252 && tileSafely.TileFrameX <= 324)
+            {
+                for (int i = X; i <= X + 1; i++)
+                {
+                    for (int j = Y; j <= Y + 1; j++)
+                    {
+                        Tile tileSafely2 = Framing.GetTileSafely(i, j);
+                        tileSafely2.TileType = TileID.Containers;
+                        tileSafely2.TileFrameX += 6 * 36;
+                        for (int k = 0; k < 4; k++)
+                        {
+                            Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, type);
+                        }
+                    }
+                }
+            }
             return true;
         }
 
@@ -205,7 +265,7 @@ namespace Avalon.Tiles.Furniture
                     {
                         Tile tileSafely2 = Framing.GetTileSafely(i, j);
                         tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-                        tileSafely2.TileFrameX -= 396;
+                        tileSafely2.TileFrameX -= 11 * 36;
                     }
                 }
             }
@@ -217,11 +277,34 @@ namespace Avalon.Tiles.Furniture
                     {
                         Tile tileSafely2 = Framing.GetTileSafely(i, j);
                         tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-                        tileSafely2.TileFrameX -= 360;
+                        tileSafely2.TileFrameX -= 10 * 36;
                     }
                 }
             }
-            //SoundEngine.PlaySound(SoundID.Unlock, new(X * 16, Y * 16));
+            else if (tileSafely.TileFrameX >= 252 && tileSafely.TileFrameX <= 360)
+            {
+                for (int i = X; i <= X + 1; i++)
+                {
+                    for (int j = Y; j <= Y + 1; j++)
+                    {
+                        Tile tileSafely2 = Framing.GetTileSafely(i, j);
+                        tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
+                        tileSafely2.TileFrameX -= 4 * 36;
+                    }
+                }
+            }
+            else if (tileSafely.TileFrameX >= 468 && tileSafely.TileFrameX <= 540)
+            {
+                for (int i = X; i <= X + 1; i++)
+                {
+                    for (int j = Y; j <= Y + 1; j++)
+                    {
+                        Tile tileSafely2 = Framing.GetTileSafely(i, j);
+                        tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
+                        tileSafely2.TileFrameX -= 6 * 36;
+                    }
+                }
+            }
             return true;
         }
     }

@@ -31,7 +31,10 @@ public class MessageHandler
             case MessageID.SyncWiring:
                 SyncWiring.HandlePacket(reader, fromWho);
                 break;
-            //case MessageID.StaminaHeal:
+            case MessageID.SyncLockUnlock:
+                SyncLockUnlock.HandlePacket(reader, fromWho);
+                break;
+                //case MessageID.StaminaHeal:
                 //    StaminaHeal.HandlePacket(reader, fromWho);
                 //    break;
         }

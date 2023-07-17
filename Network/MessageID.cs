@@ -1,4 +1,4 @@
-﻿namespace Avalon.Network;
+namespace Avalon.Network;
 
 public enum MessageID
 {
@@ -6,5 +6,6 @@ public enum MessageID
     CursorPosition = 1,
     SyncTime = 2,
     SyncWiring = 3,
-    StaminaHeal = 4
+    StaminaHeal = 4,
+    SyncLockUnlock = 5
 }

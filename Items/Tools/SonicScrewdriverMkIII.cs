@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ObjectData;
 
 namespace Avalon.Items.Tools;
 
@@ -55,7 +56,11 @@ class SonicScrewdriverMkIII : ModItem
                 int ypos = Player.tileTargetY - (Main.tile[c.X, c.Y].TileFrameY / 18);
 
                 Tiles.Furniture.LockedChests.Unlock(xpos, ypos);
-
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    NetMessage.SendTileSquare(-1, xpos, ypos);
+                    SyncLockUnlock.SendPacket(1, xpos, ypos);
+                }
                 //Chest.Unlock(xpos, ypos);
                 //if (Main.netMode == NetmodeID.MultiplayerClient)
                 //{
@@ -81,17 +86,16 @@ class SonicScrewdriverMkIII : ModItem
                 }
                 else
                 {
-                    if (Main.tile[xpos, ypos].TileFrameX == 0)
+                    Tile tile = Main.tile[xpos, ypos];
+                    int style = TileObjectData.GetTileStyle(tile);
+                    if (style == 0 || style >= 7 && style <= 15)
                     {
                         Tiles.Furniture.LockedChests.Lock(xpos, ypos);
-                    }
-                    else if (Main.tile[xpos, ypos].TileFrameX == 396)
-                    {
-                        Tiles.Furniture.LockedChests.Lock(xpos, ypos);
-                    }
-                    else if (Main.tile[xpos, ypos].TileFrameX == 432)
-                    {
-                        Tiles.Furniture.LockedChests.Lock(xpos, ypos);
+                        if (Main.netMode != NetmodeID.SinglePlayer)
+                        {
+                            NetMessage.SendTileSquare(-1, xpos, ypos);
+                            SyncLockUnlock.SendPacket(0, xpos, ypos);
+                        }
                     }
                     else
                     {
