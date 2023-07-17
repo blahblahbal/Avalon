@@ -48,15 +48,15 @@ public class Moonfury : ModProjectile
     {
         Rectangle dims = this.GetDims();
         Projectile.netImportant = true; // This ensures that the projectile is synced when other players join the world.
-        Projectile.width = 26; // The width of your projectile
-        Projectile.height = 26; // The height of your projectile
+        Projectile.width = 40; // The width of your projectile
+        Projectile.height = 40; // The height of your projectile
         Projectile.friendly = true; // Deals damage to enemies
         Projectile.penetrate = -1; // Infinite pierce
         Projectile.DamageType = DamageClass.Melee; // Deals melee damage
         Projectile.usesLocalNPCImmunity = true; // Used for hit cooldown changes in the ai hook
         Projectile.localNPCHitCooldown = 10; // This facilitates custom hit cooldown logic
-        DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-        DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
+        //DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
+        //DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
 
         // Vanilla flails all use aiStyle 15, but the code isn't customizable so an adaption of that aiStyle is used in the AI method
     }
@@ -575,10 +575,10 @@ public class Moonfury : ModProjectile
             for (int k = 0; k < Projectile.oldPos.Length && k < StateTimer; k++)
             {
                 //Projectile.GetAlpha(lightColor)
-                Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(DrawOffsetX, Projectile.gfxOffY);
+                Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + (drawOrigin * 1.5f); //+ new Vector2(DrawOffsetX, Projectile.gfxOffY);
                 drawPos.Y -= (projectileTexture.Height / 4) - 1;
                 Color color = new Color(55, 33, 75, 0) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-                Main.spriteBatch.Draw(projectileTexture, drawPos + new Vector2(0, 2), null, color, Projectile.rotation, drawOrigin, (Projectile.scale + 0.1f) - k / (float)Projectile.oldPos.Length, spriteEffects, 0f);
+                Main.spriteBatch.Draw(projectileTexture, drawPos + Vector2.Normalize(Projectile.velocity) * 8, null, color, Projectile.rotation, drawOrigin, ((Projectile.scale + 0.1f) - k / (float)Projectile.oldPos.Length) * 1.4f, spriteEffects, 0f);
             }
         }
         return true;
@@ -586,7 +586,7 @@ public class Moonfury : ModProjectile
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
-        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(Projectile.Hitbox);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
         ParticleOrchestraSettings settings = particleOrchestraSettings;
         base.OnHitNPC(target, hit, damageDone);
         ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);
@@ -601,7 +601,7 @@ public class Moonfury : ModProjectile
             return;
         }
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
-        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(Projectile.Hitbox);
+        particleOrchestraSettings.PositionInWorld = Main.rand.NextVector2FromRectangle(target.Hitbox);
         ParticleOrchestraSettings settings = particleOrchestraSettings;
         base.OnHitPlayer(target, info);
         ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.NightsEdge, settings, Projectile.owner);

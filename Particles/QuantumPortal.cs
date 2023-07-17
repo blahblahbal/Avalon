@@ -17,13 +17,13 @@ namespace Avalon.Particles
 
             if(TimeInWorld <= 20)
             {
-                AI1 += 0.05f;
+                ai1 += 0.05f;
             }
             if (TimeInWorld >= 30)
             {
-                AI1 -= 0.03f;
+                ai1 -= 0.03f;
             }
-            if(TimeInWorld > 1 && AI1 < 0)
+            if(TimeInWorld > 1 && ai1 < 0)
             {
                 Active = false;
             }
@@ -38,9 +38,9 @@ namespace Avalon.Particles
 
             for (int i = 0; i < 4; i++)
             {
-                spriteBatch.Draw(texture, DrawPos, frame, Color.Lerp(new Color(255, 0, 0, 64), new Color(128, 0, 255, 64), i * 0.25f), TimeInWorld * 0.1f + i * 0.5f, frameOrigin, AI1 * (1.1f + (i * 0.1f)), SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, DrawPos, frame, Color.Lerp(new Color(255, 0, 0, 64), new Color(128, 0, 255, 64), i * 0.25f), TimeInWorld * 0.1f + i * 0.5f, frameOrigin, ai1 * (1.1f + (i * 0.1f)), SpriteEffects.None, 0);
             }
-            spriteBatch.Draw(texture, DrawPos, frame, Color.Lerp(new Color(255, 64, 255), new Color(128, 64, 255), Main.masterColor), TimeInWorld * 0.1f, frameOrigin, AI1, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, DrawPos, frame, Color.Lerp(new Color(255, 64, 255), new Color(128, 64, 255), Main.masterColor), TimeInWorld * 0.1f, frameOrigin, ai1, SpriteEffects.None, 0);
         }
     }
 }
