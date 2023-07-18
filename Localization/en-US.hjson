@@ -5094,7 +5094,7 @@ Mods: {
 
 			CompressedExtractinationBlock: {
 				DisplayName: Compressed Extractination Block
-				Tooltip: ""
+				Tooltip: "'Stick it in the Extractinator!'"
 			}
 		}
 
