@@ -5091,6 +5091,11 @@ Mods: {
 				DisplayName: Medlar Medley
 				Tooltip: ""
 			}
+
+			CompressedExtractinationBlock: {
+				DisplayName: Compressed Extractination Block
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

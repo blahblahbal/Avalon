@@ -101,6 +101,15 @@ internal class CatalyzerRecipes : ModSystem
             .AddIngredient(ItemID.CrimtaneOre, 40)
             .AddIngredient(ModContent.ItemType<Sulphur>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>()).Register();
+
+        //Recipe.Create(ItemID.CobaltOre, 20)
+        //    .AddIngredient(ItemID.PalladiumOre, 20)
+        //    .AddIngredient(ModContent.ItemType<Sulphur>())
+        //    .AddCondition(Condition.DownedMechBossAny)
+        //    .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+        //    .Register();
+
+
         //end evil ores
         //hardmode ores
         /*Recipe.Create(ItemID.CobaltOre, 20)

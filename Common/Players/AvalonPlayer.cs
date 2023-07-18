@@ -493,7 +493,7 @@ public class AvalonPlayer : ModPlayer
         }
         #endregion
 
-        #region MapColors
+        #region MapColors (leaving this here as a reference for how to reflection)
         Color[] ColorLookup = (Color[])typeof(MapHelper).GetField("colorLookup", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
         ushort TilePosition = (ushort)typeof(MapHelper).GetField("tilePosition", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
 
