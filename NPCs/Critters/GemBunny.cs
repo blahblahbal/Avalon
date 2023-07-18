@@ -1,15 +1,11 @@
-using Avalon.Buffs.Debuffs;
 using Avalon.Dusts;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -60,23 +56,23 @@ public class PeridotBunny : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
-        int spawnRangeX = (int)((double)(NPC.sWidth / 16) * 0.7);
-        int spawnRangeY = (int)((double)(NPC.sHeight / 16) * 0.7);
+        int spawnRangeX = (int)(NPC.sWidth / 16 * 0.7);
+        int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
         for (int l = 0; l < 255; l++)
         {
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer)
+            if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
             {
-                if ((double)num4 >= Main.rockLayer && Main.rand.NextBool(35))
+                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                 {
                     return 1f;
                 }
             }
             else if (num4 > Main.UnderworldLayer)
             {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)
+                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
                 {
                     if (Main.rand.NextBool(28))
                     {
@@ -86,20 +82,23 @@ public class PeridotBunny : ModNPC
             }
             else if (Main.remixWorld)
             {
-                if ((double)num4 < Main.rockLayer && (double)num4 > Main.worldSurface)
+                if (num4 < Main.rockLayer && num4 > Main.worldSurface)
                 {
-                    if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
                     {
-                        if (Main.rand.NextBool(35))
+                        if (Main.rand.NextBool(28))
                         {
                             return 1f;
                         }
                     }
                 }
             }
-            else if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer && Main.rand.NextBool(35))
+            else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
             {
-                return 1f;
+                if (Main.rand.NextBool(28))
+                {
+                    return 1f;
+                }
             }
         }
         return 0;
@@ -179,25 +178,25 @@ public class TourmalineBunny : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
-        int spawnRangeX = (int)((double)(NPC.sWidth / 16) * 0.7);
-        int spawnRangeY = (int)((double)(NPC.sHeight / 16) * 0.7);
+        int spawnRangeX = (int)(NPC.sWidth / 16 * 0.7);
+        int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
         for (int l = 0; l < 255; l++)
         {
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer)
+            if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
             {
-                if ((double)num4 >= Main.rockLayer && Main.rand.NextBool(20))
+                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                 {
                     return 1f;
                 }
             }
             else if (num4 > Main.UnderworldLayer)
             {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)
+                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
                 {
-                    if (Main.rand.NextBool(16))
+                    if (Main.rand.NextBool(28))
                     {
                         return 1f;
                     }
@@ -205,20 +204,23 @@ public class TourmalineBunny : ModNPC
             }
             else if (Main.remixWorld)
             {
-                if ((double)num4 < Main.rockLayer && (double)num4 > Main.worldSurface)
+                if (num4 < Main.rockLayer && num4 > Main.worldSurface)
                 {
-                    if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
                     {
-                        if (Main.rand.NextBool(20))
+                        if (Main.rand.NextBool(28))
                         {
                             return 1f;
                         }
                     }
                 }
             }
-            else if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer && Main.rand.NextBool(20))
+            else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
             {
-                return 1f;
+                if (Main.rand.NextBool(28))
+                {
+                    return 1f;
+                }
             }
         }
         return 0;
@@ -298,25 +300,25 @@ public class ZirconBunny : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
-        int spawnRangeX = (int)((double)(NPC.sWidth / 16) * 0.7);
-        int spawnRangeY = (int)((double)(NPC.sHeight / 16) * 0.7);
+        int spawnRangeX = (int)(NPC.sWidth / 16 * 0.7);
+        int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
         for (int l = 0; l < 255; l++)
         {
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer)
+            if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
             {
-                if ((double)num4 >= Main.rockLayer && Main.rand.NextBool(100))
+                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                 {
                     return 1f;
                 }
             }
             else if (num4 > Main.UnderworldLayer)
             {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)
+                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
                 {
-                    if (Main.rand.NextBool(80))
+                    if (Main.rand.NextBool(28))
                     {
                         return 1f;
                     }
@@ -324,20 +326,23 @@ public class ZirconBunny : ModNPC
             }
             else if (Main.remixWorld)
             {
-                if ((double)num4 < Main.rockLayer && (double)num4 > Main.worldSurface)
+                if (num4 < Main.rockLayer && num4 > Main.worldSurface)
                 {
-                    if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
                     {
-                        if (Main.rand.NextBool(100))
+                        if (Main.rand.NextBool(28))
                         {
                             return 1f;
                         }
                     }
                 }
             }
-            else if ((double)num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer && Main.rand.NextBool(100))
+            else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
             {
-                return 1f;
+                if (Main.rand.NextBool(28))
+                {
+                    return 1f;
+                }
             }
         }
         return 0;

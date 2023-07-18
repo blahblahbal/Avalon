@@ -364,6 +364,44 @@ public class AvalonPlayer : ModPlayer
 
         return base.CanConsumeAmmo(weapon, ammo);
     }
+
+    public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
+    {
+        int bait = attempt.playerFishingConditions.BaitItemType;
+        int power = attempt.playerFishingConditions.BaitPower + attempt.playerFishingConditions.PolePower;
+        int questFish = attempt.questFish;
+        int poolSize = attempt.waterTilesCount;
+        bool water = !attempt.inHoney && !attempt.inLava;
+        bool lava = attempt.inLava;
+
+        Point point = Player.Center.ToTileCoordinates();
+        if ((Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
+            attempt.uncommon && questFish == ModContent.ItemType<Items.Fish.Quest.Snotpiranha>())
+        {
+            itemDrop = ModContent.ItemType<Items.Fish.Quest.Snotpiranha>();
+            return;
+        }
+        if (water)
+        {
+            if (attempt.uncommon && (Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion))
+            {
+                int r = Main.rand.Next(3);
+                if (r == 0)
+                {
+                    itemDrop = ModContent.ItemType<Items.Fish.Ickfish>();
+                }
+                if (r == 1)
+                {
+                    itemDrop = ModContent.ItemType<Items.Fish.NauSeaFish>();
+                }
+                else if (r == 2)
+                {
+                    itemDrop = ModContent.ItemType<Items.Fish.SicklyTrout>();
+                }
+            }
+        }
+    }
+
     public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
     {
         if (Player.HasItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>()) && !Player.HasBuff(ModContent.BuffType<ImmortalityCooldown>()))

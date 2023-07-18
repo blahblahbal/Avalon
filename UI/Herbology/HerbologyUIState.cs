@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -59,12 +60,12 @@ public class HerbologyUIState : ExxoUIState
             ContentVAlign = UIAlign.Center,
         };
         mainContainer.Append(titleRow);
-        var titleText = new ExxoUITextPanel("Herbology Bench", 0.8f, true);
+        var titleText = new ExxoUITextPanel(Language.GetTextValue("Mods.Avalon.Herbology.BenchName"), 0.8f, true);
         titleRow.Append(titleText);
 
         helpToggle =
             new ExxoUIImageButtonToggle(Main.Assets.Request<Texture2D>("Images/UI/ButtonRename"),
-                Color.White * 0.7f, Color.White) { Scale = 2, Tooltip = "Help" };
+                Color.White * 0.7f, Color.White) { Scale = 2, Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Help") };
         titleRow.Append(helpToggle);
         helpToggle.OnToggle += (_, args) =>
         {
@@ -72,7 +73,7 @@ public class HerbologyUIState : ExxoUIState
             helpToggle.MouseOver(new UIMouseEvent(helpToggle, UserInterface.ActiveInstance.MousePosition));
         };
         helpAttachment.Register(helpToggle,
-            "When this button is active, hovering over elements provides a description of their purpose");
+            Language.GetTextValue("Mods.Avalon.Herbology.HelpToggle"));
 
         var herbContainer = new ExxoUIPanelWrapper<ExxoUIList>(new ExxoUIList());
         herbContainer.Width.Set(0, 1);
@@ -81,18 +82,18 @@ public class HerbologyUIState : ExxoUIState
 
         stats = new HerbologyUIStats();
         herbContainer.InnerElement.Append(stats);
-        helpAttachment.Register(stats, "A list of herbology stats relating to the player");
-        helpAttachment.Register(stats.RankTitleText, "Title of the current herbology tier");
-        helpAttachment.Register(stats.HerbTierText, "Current herbology tier");
-        helpAttachment.Register(stats.HerbTotalContainer, "Herb credits used to purchase seeds in the herb exchange");
+        helpAttachment.Register(stats, Language.GetTextValue("Mods.Avalon.Herbology.Stats.Description"));
+        helpAttachment.Register(stats.RankTitleText, Language.GetTextValue("Mods.Avalon.Herbology.Stats.RankTitle"));
+        helpAttachment.Register(stats.HerbTierText, Language.GetTextValue("Mods.Avalon.Herbology.Stats.CurrentTier"));
+        helpAttachment.Register(stats.HerbTotalContainer, Language.GetTextValue("Mods.Avalon.Herbology.Stats.HerbTotal"));
         helpAttachment.Register(stats.PotionTotalContainer,
-            "Potion credits used to purchase potions and elixirs in the potion exchange");
+            Language.GetTextValue("Mods.Avalon.Herbology.Stats.PotionTotal"));
 
         turnIn = new HerbologyUITurnIn();
         herbContainer.InnerElement.Append(turnIn);
-        helpAttachment.Register(turnIn, "Turn in herbs and potions in exchange for credits");
-        helpAttachment.Register(turnIn.ItemSlot, "Place items here to be exchanged for credits");
-        helpAttachment.Register(turnIn.Button, "Converts the current items in the item slot into credits");
+        helpAttachment.Register(turnIn, Language.GetTextValue("Mods.Avalon.Herbology.TurnIn.Description"));
+        helpAttachment.Register(turnIn.ItemSlot, Language.GetTextValue("Mods.Avalon.Herbology.TurnIn.ItemSlot"));
+        helpAttachment.Register(turnIn.Button, Language.GetTextValue("Mods.Avalon.Herbology.TurnIn.Button"));
 
         turnIn.Button.OnLeftClick += delegate
         {
@@ -111,9 +112,9 @@ public class HerbologyUIState : ExxoUIState
 
         herbExchange = new HerbologyUIHerbExchange();
         herbContainer.InnerElement.Append(herbExchange, new ExxoUIList.ElementParams(true, false));
-        helpAttachment.Register(herbExchange, "Purchase herbs - each herb's exchange unlocks after 50 collected");
-        helpAttachment.Register(herbExchange.Toggle, "Toggle listing between seeds and large seeds");
-        helpAttachment.Register(herbExchange.Grid, "Select an item to purchase");
+        helpAttachment.Register(herbExchange, Language.GetTextValue("Mods.Avalon.Herbology.HerbExchange.Description"));
+        helpAttachment.Register(herbExchange.Toggle, Language.GetTextValue("Mods.Avalon.Herbology.HerbExchange.Toggle"));
+        helpAttachment.Register(herbExchange.Grid, Language.GetTextValue("Mods.Avalon.Herbology.HerbExchange.Grid"));
 
         herbExchange.Toggle.OnToggle += (_, args) => RefreshHerbList(args.Toggled);
         herbExchange.Scrollbar.OnViewPositionChanged += delegate
@@ -125,7 +126,7 @@ public class HerbologyUIState : ExxoUIState
         Append(new ExxoUIContentLockPanel(herbExchange.Toggle,
             () => Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Tier >=
                   AvalonHerbologyPlayer.HerbTier.Apprentice,
-            $"Content locked: Must be Herbology {AvalonHerbologyPlayer.HerbTier.Apprentice}"));
+            Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Title") + Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Apprentice")));
 
         var potionContainer = new ExxoUIPanelWrapper<ExxoUIList>(new ExxoUIList());
         potionContainer.Width.Set(0, 1);
@@ -134,9 +135,9 @@ public class HerbologyUIState : ExxoUIState
 
         potionExchange = new HerbologyUIPotionExchange();
         potionContainer.InnerElement.Append(potionExchange, new ExxoUIList.ElementParams(true, false));
-        helpAttachment.Register(potionExchange, "Purchase potions using potion credits");
-        helpAttachment.Register(potionExchange.Toggle, "Toggle listing between potions and elixirs");
-        helpAttachment.Register(potionExchange.Grid, "Select an item to purchase");
+        helpAttachment.Register(potionExchange, Language.GetTextValue("Mods.Avalon.Herbology.PotionExchange.Description"));
+        helpAttachment.Register(potionExchange.Toggle, Language.GetTextValue("Mods.Avalon.Herbology.PotionExchange.Toggle"));
+        helpAttachment.Register(potionExchange.Grid, Language.GetTextValue("Mods.Avalon.Herbology.PotionExchange.Grid"));
 
         potionExchange.Toggle.OnToggle += (_, args) => RefreshPotionList(args.Toggled);
         potionExchange.Scrollbar.OnViewPositionChanged += delegate
@@ -148,17 +149,17 @@ public class HerbologyUIState : ExxoUIState
         var potionLock = new ExxoUIContentLockPanel(potionExchange,
             () => Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Tier >=
                   AvalonHerbologyPlayer.HerbTier.Expert,
-            $"Content locked: Must be Herbology {AvalonHerbologyPlayer.HerbTier.Expert}");
+            Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Title") + Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Expert"));
         Append(potionLock);
         potionLock.OnLockStatusChanged += (_, args) => potionExchange.Scrollbar.Active = !args.Locked;
 
         purchaseAttachment = new HerbologyUIPurchaseAttachment();
         Append(purchaseAttachment);
         helpAttachment.Register(purchaseAttachment.NumberInputWithButtons,
-            "Select amount of the selected item to purchase");
+            Language.GetTextValue("Mods.Avalon.Herbology.Purchase.NumberInput"));
         helpAttachment.Register(purchaseAttachment.DifferenceContainer,
-            "How the following purchase will affect your token balance");
-        helpAttachment.Register(purchaseAttachment.Button, "Click to purchase items");
+            Language.GetTextValue("Mods.Avalon.Herbology.Purchase.Difference"));
+        helpAttachment.Register(purchaseAttachment.Button, Language.GetTextValue("Mods.Avalon.Herbology.Purchase.Button"));
 
         purchaseAttachment.NumberInputWithButtons.NumberInput.OnKeyboardUpdate += (_, args) =>
         {
@@ -193,7 +194,7 @@ public class HerbologyUIState : ExxoUIState
         herbCountAttachment = new HerbologyUIHerbCountAttachment();
         Append(herbCountAttachment);
         helpAttachment.Register(herbCountAttachment.AttachmentElement,
-            "The amount of herbs of that type available, needed to purchase large herb seeds");
+            Language.GetTextValue("Mods.Avalon.Herbology.HerbCount.Attachment"));
 
         Append(helpAttachment);
 

@@ -16,7 +16,7 @@ namespace Avalon.Tiles.Furniture
 
         protected override bool CanBeLocked => base.CanBeLocked;
         public override int Dust => DustID.Stone;
-        protected override int ChestKeyItemId => ModContent.ItemType<Items.Tools.SonicScrewdriverMkIII>();
+        protected override int ChestKeyItemId => ItemID.GoldenKey;
         public override bool CanBeUnlockedNormally => false;
         public override void SetStaticDefaults()
         {
@@ -109,29 +109,6 @@ namespace Avalon.Tiles.Furniture
                 yield return new Item(type);
             }
         }
-
-        //public override bool UnlockChest(int i, int j, ref short frameXAdjustment, ref int dustType, ref bool manual)
-        //{
-        //    if (Main.tile[i, j].TileFrameX == 0)
-        //    {
-        //        frameXAdjustment = -(11 * 36);
-        //        Main.tile[i, j].TileType = TileID.Containers;
-        //        return true;
-        //    }
-        //    else if (Main.tile[i, j].TileFrameX == 36)
-        //    {
-        //        frameXAdjustment = -36;
-        //        Main.tile[i, j].TileType = TileID.Containers;
-        //        return true;
-        //    }
-        //    else if (Main.tile[i, j].TileFrameX == 72)
-        //    {
-        //        frameXAdjustment = 10 * 36;
-        //        Main.tile[i, j].TileType = TileID.Containers;
-        //        return true;
-        //    }
-        //    return false;
-        //}
 
         public static bool Unlock(int X, int Y)
         {

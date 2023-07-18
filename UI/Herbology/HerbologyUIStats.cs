@@ -3,6 +3,7 @@ using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Localization;
 using Terraria.UI;
 
 namespace Avalon.UI.Herbology;
@@ -27,7 +28,7 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         HerbTierText = new ExxoUITextPanel("");
         InnerElement.Append(HerbTierText);
 
-        HerbTotalContainer = new ExxoUIPanelWrapper<ExxoUIList>(new ExxoUIList()) { Tooltip = "Herb credits" };
+        HerbTotalContainer = new ExxoUIPanelWrapper<ExxoUIList>(new ExxoUIList()) { Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Credits.Herb") };
         HerbTotalContainer.InnerElement.Direction = Direction.Horizontal;
         HerbTotalContainer.InnerElement.FitHeightToContent = true;
         HerbTotalContainer.InnerElement.FitWidthToContent = true;
@@ -44,7 +45,7 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         herbTotalText = new ExxoUIText("");
         HerbTotalContainer.InnerElement.Append(herbTotalText);
 
-        PotionTotalContainer = new ExxoUIPanelWrapper<ExxoUIList>(new ExxoUIList()) { Tooltip = "Potion credits" };
+        PotionTotalContainer = new ExxoUIPanelWrapper<ExxoUIList>(new ExxoUIList()) { Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Credits.Potion") };
         PotionTotalContainer.InnerElement.Direction = Direction.Horizontal;
         PotionTotalContainer.InnerElement.FitHeightToContent = true;
         PotionTotalContainer.InnerElement.FitWidthToContent = true;

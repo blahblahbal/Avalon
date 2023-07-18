@@ -36,19 +36,19 @@ public class AvalonGlobalItemInstance : GlobalItem
         {
             if (item.knockBack is > 0f and < 1.5f)
             {
-                lineKnockback.Text = "Puny knockback";
+                lineKnockback.Text = Language.GetTextValue("Mods.Avalon.Knockback.Puny");
             }
             if (item.knockBack > 15f)
             {
-                lineKnockback.Text = "Absurd knockback";
+                lineKnockback.Text = Language.GetTextValue("Mods.Avalon.Knockback.Absurd");
             }
             if (item.knockBack > 17f)
             {
-                lineKnockback.Text = "Ridiculous knockback";
+                lineKnockback.Text = Language.GetTextValue("Mods.Avalon.Knockback.Ridiculous");
             }
             if (item.knockBack > 19f)
             {
-                lineKnockback.Text = "Godly knockback";
+                lineKnockback.Text = Language.GetTextValue("Mods.Avalon.Knockback.Godly");
             }
             if (item.type == ItemID.BatBat)
             {
@@ -65,11 +65,11 @@ public class AvalonGlobalItemInstance : GlobalItem
         }
         if (item.useAnimation <= 5f)
         {
-            lineSpeed.Text = "Lightning speed";
+            lineSpeed.Text = Language.GetTextValue("Mods.Avalon.Speed.Lightning");
         }
         if (item.useAnimation >= 58f)
         {
-            lineSpeed.Text = "Slowpoke speed";
+            lineSpeed.Text = Language.GetTextValue("Mods.Avalon.Speed.Slowpoke");
         }
     }
     public override bool? PrefixChance(Item item, int pre, UnifiedRandom rand)

@@ -31,19 +31,8 @@ class SonicScrewdriverMkIII : ModItem
 
     public override bool? UseItem(Player player)
     {
-        //if (player.altFunctionUse == 2)
         if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl))
         {
-            //Vector2 mousePos = Main.MouseScreen + Main.screenPosition;
-            //if (Main.netMode == NetmodeID.MultiplayerClient)
-            //{
-            //    player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
-            //    CursorPosition.SendPacket(mousePos, player.whoAmI);
-            //}
-            //else if (Main.netMode == NetmodeID.SinglePlayer)
-            //{
-            //    player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
-            //}
             Point c = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 
             if (Main.tile[c.X, c.Y].TileType == ModContent.TileType<Tiles.Furniture.LockedChests>())
@@ -58,14 +47,9 @@ class SonicScrewdriverMkIII : ModItem
                 Tiles.Furniture.LockedChests.Unlock(xpos, ypos);
                 if (Main.netMode != NetmodeID.SinglePlayer)
                 {
-                    NetMessage.SendTileSquare(-1, xpos, ypos);
                     SyncLockUnlock.SendPacket(1, xpos, ypos);
+                    NetMessage.SendTileSquare(-1, xpos, ypos);
                 }
-                //Chest.Unlock(xpos, ypos);
-                //if (Main.netMode == NetmodeID.MultiplayerClient)
-                //{
-                //    NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1, xpos, ypos);
-                //}
             }
             else if (Main.tile[c.X, c.Y].TileType == TileID.Containers)
             {
@@ -93,8 +77,8 @@ class SonicScrewdriverMkIII : ModItem
                         Tiles.Furniture.LockedChests.Lock(xpos, ypos);
                         if (Main.netMode != NetmodeID.SinglePlayer)
                         {
-                            NetMessage.SendTileSquare(-1, xpos, ypos);
                             SyncLockUnlock.SendPacket(0, xpos, ypos);
+                            NetMessage.SendTileSquare(-1, xpos, ypos);
                         }
                     }
                     else

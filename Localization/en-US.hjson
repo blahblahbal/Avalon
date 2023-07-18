@@ -18,6 +18,69 @@ Mods: {
 
 		CommonItemTooltip.TomeMaterial: Tome Material
 
+		Herbology: {
+			BenchName: Herbology Bench
+			Help: Help
+			HelpToggle: When this button is active, hovering over elements provides a description of their purpose
+
+			Stats: {
+				Description: A list of herbology stats relating to the player
+				RankTitle: Title of the current herbology tier
+				CurrentTier: Current herbology tier
+				HerbTotal: Herb credits used to purchase seeds in the herb exchange
+				PotionTotal: Potion credits used to purchase potions and elixirs in the potion exchange
+			}
+
+			TurnIn: {
+				Description: Turn in herbs and potions in exchange for credits
+				ItemSlot: Place items here to be exchanged for credits
+				Button: Converts the current items in the item slot into credits
+			}
+
+			HerbExchange: {
+				Description: Purchase herbs - each herb's exchange unlocks after 50 collected
+				Toggle: Toggle listing between seeds and large seeds
+				Grid: Select an item to purchase
+			}
+
+			PotionExchange: {
+				Description: Purchase potions using potion credits
+				Toggle: Toggle listing between potions and elixirs
+				Grid: Select an item to purchase
+			}
+
+			Purchase: {
+				NumberInput: Select amount of the selected item to purchase
+				Difference: How the following purchase will affect your token balance
+				Button: Click to purchase items
+			}
+
+			HerbCount.Attachment: The amount of herbs of that type available, needed to purchase large herb seeds
+
+			ContentLocked: {
+				Title: "Content locked. Must be "
+				Apprentice: Herbology Apprentice
+				Expert: Herbology Expert
+			}
+
+			Credits: {
+				Herb: Herb credits
+				Potion: Potion credits
+			}
+		}
+
+		Knockback: {
+			Puny: Puny knockback
+			Absurd: Absurd knockback
+			Ridiculous: Ridiculous knockback
+			Godly: Godly knockback
+		}
+
+		Speed: {
+			Lightning: Lightning speed
+			Slowpoke: Slowpoke speed
+		}
+
 		Config: {
 			ItemHeader: Options
 
@@ -120,7 +183,7 @@ Mods: {
 					'''
 			}
 
-			ShadowShellphone: {
+			ShadowPhone: {
 				DisplayName: Shadow Phone (Spawn)
 				Tooltip:
 					'''
@@ -130,7 +193,7 @@ Mods: {
 					'''
 			}
 
-			ShadowShellphoneOcean: {
+			ShadowPhoneOcean: {
 				DisplayName: Shadow Phone (Oceans)
 				Tooltip:
 					'''
@@ -140,7 +203,7 @@ Mods: {
 					'''
 			}
 
-			ShadowShellphoneHell: {
+			ShadowPhoneHell: {
 				DisplayName: Shadow Phone (Underworld)
 				Tooltip:
 					'''
@@ -150,7 +213,7 @@ Mods: {
 					'''
 			}
 
-			ShadowShellphoneJungleTropics: {
+			ShadowPhoneJungleTropics: {
 				DisplayName: Shadow Phone (Jungle)
 				Tooltip:
 					'''
@@ -160,7 +223,7 @@ Mods: {
 					'''
 			}
 
-			ShadowShellphoneRandom: {
+			ShadowPhoneRandom: {
 				DisplayName: Shadow Phone (Random)
 				Tooltip:
 					'''
@@ -170,7 +233,7 @@ Mods: {
 					'''
 			}
 
-			ShadowShellphoneHome: {
+			ShadowPhoneHome: {
 				DisplayName: Shadow Phone (Home)
 				Tooltip:
 					'''
@@ -180,7 +243,7 @@ Mods: {
 					'''
 			}
 
-			ShadowShellphoneDungeon: {
+			ShadowPhoneDungeon: {
 				DisplayName: Shadow Phone (Dungeon)
 				Tooltip:
 					'''
@@ -4964,10 +5027,10 @@ Mods: {
 			CaesiumPike: {
 				DisplayName: Caesium Pike
 				Tooltip:
-                '''
-                Explodes on hit
-                Poke!
-                '''
+					'''
+					Explodes on hit
+					Poke!
+					'''
 			}
 
 			CaesiumScimitar: {
@@ -4988,15 +5051,45 @@ Mods: {
 			CaesiumPlateMail: {
 				DisplayName: Caesium Plate Mail
 				Tooltip:
-                '''
-                5% increased melee critical strike chance
-                Melee attacks inflict fire damage"
-                '''
+					'''
+					5% increased melee critical strike chance
+					Melee attacks inflict fire damage"
+					'''
 			}
 
 			CaesiumCrossbow: {
 				DisplayName: Caesium Crossbow
 				Tooltip: Converts wooden arrows into hellfire arrows
+			}
+
+			Ickfish: {
+				DisplayName: Ickfish
+				Tooltip: ""
+			}
+
+			NauSeaFish: {
+				DisplayName: Nau Sea Fish
+				Tooltip: ""
+			}
+
+			Snotpiranha: {
+				DisplayName: Snotpiranha
+				Tooltip: ""
+			}
+
+			SicklyTrout: {
+				DisplayName: Sickly Trout
+				Tooltip: ""
+			}
+
+			Medlar: {
+				DisplayName: Medlar
+				Tooltip: ""
+			}
+
+			MedlarMedley: {
+				DisplayName: Medlar Medley
+				Tooltip: ""
 			}
 		}
 
@@ -5692,57 +5785,29 @@ Mods: {
 			Zircon.MapEntry: Zircon
 			Paintings.MapEntry: Paintings
 
-			CoughwoodChest: {
-				MapEntry0: Coughwood Chest
-				MapEntry1: Mods.Avalon.Tiles.CoughwoodChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.CoughwoodChest.MapEntry2
+			PlacedGems: {
+				Opal: Opal
+				Onyx: Onyx
+				Kunzite: Kunzite
+				Tourmaline: Tourmaline
+				Peridot: Peridot
+				Zircon: Zircon
 			}
 
-			HellfireChest: {
-				MapEntry0: Hellfire Chest
-				MapEntry1: Mods.Avalon.Tiles.HellfireChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.HellfireChest.MapEntry2
-			}
-
-			ResistantWoodChest: {
-				MapEntry0: Resistant Wood Chest
-				MapEntry1: Mods.Avalon.Tiles.ResistantWoodChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.ResistantWoodChest.MapEntry2
-			}
-
+			CoughwoodChest.MapEntry0: Coughwood Chest
+			HellfireChest.MapEntry0: Hellfire Chest
+			ResistantWoodChest.MapEntry0: Resistant Wood Chest
 			ResistantWoodDresser.MapEntry: Resistant Wood Dresser
 			ResistantSapling.MapEntry: Resistant Sapling
 			OrangeDungeonDresser.MapEntry: Orange Dungeon Dresser
-
-			PurpleDungeonChest: {
-				MapEntry0: Purple Dungeon Chest
-				MapEntry1: Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry2
-			}
-
+			PurpleDungeonChest.MapEntry0: Purple Dungeon Chest
 			PurpleDungeonDresser.MapEntry: Purple Dungeon Dresser
-
-			OrangeDungeonChest: {
-				MapEntry0: Orange Dungeon Chest
-				MapEntry1: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry2
-			}
-
-			YellowDungeonChest: {
-				MapEntry0: Yellow Dungeon Chest
-				MapEntry1: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry2
-			}
-
+			OrangeDungeonChest.MapEntry0: Orange Dungeon Chest
+			YellowDungeonChest.MapEntry0: Yellow Dungeon Chest
 			YellowDungeonDresser.MapEntry: Yellow Dungeon Dresser
 			CoughwoodDresser.MapEntry: Coughwood Dresser
 			BleachedEbonyDresser.MapEntry: Bleached Ebony Dresser
-
-			BleachedEbonyChest: {
-				MapEntry0: Bleached Ebony Chest
-				MapEntry1: Mods.Avalon.Tiles.BleachedEbonyChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.BleachedEbonyChest.MapEntry2
-			}
+			BleachedEbonyChest.MapEntry0: Bleached Ebony Chest
 
 			CrystalMinesChest: {
 				MapEntry0: Crystal Mines Chest
@@ -5756,66 +5821,16 @@ Mods: {
 				MapEntry2: Zircon Gem Lock
 			}
 
-			AmberChest: {
-				MapEntry0: Amber Chest
-				MapEntry1: Mods.Avalon.Tiles.AmberChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.AmberChest.MapEntry2
-			}
-
-			AmethystChest: {
-				MapEntry0: Amethyst Chest
-				MapEntry1: Mods.Avalon.Tiles.AmethystChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.AmethystChest.MapEntry2
-			}
-
-			DiamondChest: {
-				MapEntry0: Diamond Chest
-				MapEntry1: Mods.Avalon.Tiles.DiamondChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.DiamondChest.MapEntry2
-			}
-
-			EmeraldChest: {
-				MapEntry0: Emerald Chest
-				MapEntry1: Mods.Avalon.Tiles.EmeraldChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.EmeraldChest.MapEntry2
-			}
-
-			PeridotChest: {
-				MapEntry0: Peridot Chest
-				MapEntry1: Mods.Avalon.Tiles.PeridotChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.PeridotChest.MapEntry2
-			}
-
-			RubyChest: {
-				MapEntry0: Ruby Chest
-				MapEntry1: Mods.Avalon.Tiles.RubyChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.RubyChest.MapEntry2
-			}
-
-			SapphireChest: {
-				MapEntry0: Sapphire Chest
-				MapEntry1: Mods.Avalon.Tiles.SapphireChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.SapphireChest.MapEntry2
-			}
-
-			TopazChest: {
-				MapEntry0: Topaz Chest
-				MapEntry1: Mods.Avalon.Tiles.TopazChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.TopazChest.MapEntry2
-			}
-
-			TourmalineChest: {
-				MapEntry0: Tourmaline Chest
-				MapEntry1: Mods.Avalon.Tiles.TourmalineChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.TourmalineChest.MapEntry2
-			}
-
-			ZirconChest: {
-				MapEntry0: Zircon Chest
-				MapEntry1: Mods.Avalon.Tiles.ZirconChest.MapEntry1
-				MapEntry2: Mods.Avalon.Tiles.ZirconChest.MapEntry2
-			}
-
+			AmberChest.MapEntry0: Amber Chest
+			AmethystChest.MapEntry0: Amethyst Chest
+			DiamondChest.MapEntry0: Diamond Chest
+			EmeraldChest.MapEntry0: Emerald Chest
+			PeridotChest.MapEntry0: Peridot Chest
+			RubyChest.MapEntry0: Ruby Chest
+			SapphireChest.MapEntry0: Sapphire Chest
+			TopazChest.MapEntry0: Topaz Chest
+			TourmalineChest.MapEntry0: Tourmaline Chest
+			ZirconChest.MapEntry0: Zircon Chest
 			GiantCrystalShard.MapEntry: Giant Crystal Shard
 			PeridotBunnyCage.MapEntry: Peridot Bunny Cage
 			TourmalineBunnyCage.MapEntry: Tourmaline Bunny Cage

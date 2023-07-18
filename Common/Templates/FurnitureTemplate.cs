@@ -730,7 +730,7 @@ namespace Avalon.Common.Templates
                 if (player.cursorItemIconText == defaultName)
                 {
                     player.cursorItemIconID = DropItem;
-                    if (Main.tile[left, top].TileFrameX / 36 == 1)
+                    if (Main.tile[left, top].TileFrameX / 36 == 1 || !CanBeUnlockedNormally)
                     {
                         player.cursorItemIconID = ChestKeyItemId;
                     }

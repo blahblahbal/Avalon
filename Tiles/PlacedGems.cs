@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using Microsoft.Xna.Framework;
+using Terraria.Localization;
 
 namespace Avalon.Tiles;
 
@@ -22,6 +24,12 @@ public class PlacedGems : ModTile
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 500;
         Main.tileSpelunker[Type] = true;
+        AddMapEntry(new Color(86, 239, 255), this.GetLocalization("Opal"));
+        AddMapEntry(new Color(61, 56, 65), this.GetLocalization("Onyx"));
+        AddMapEntry(new Color(251, 66, 146), this.GetLocalization("Kunzite"));
+        AddMapEntry(new Color(22, 212, 198), this.GetLocalization("Tourmaline"));
+        AddMapEntry(new Color(0, 237, 14), this.GetLocalization("Peridot"));
+        AddMapEntry(new Color(198, 168, 130), this.GetLocalization("Zircon"));
     }
 
     // selects the map entry depending on the frameX
