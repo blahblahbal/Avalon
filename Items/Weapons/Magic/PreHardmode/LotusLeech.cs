@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
+using Avalon.Buffs.Debuffs;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode
 {
@@ -62,9 +63,9 @@ namespace Avalon.Items.Weapons.Magic.PreHardmode
                 player.CheckMana(25, true);
                 player.manaRegenDelay = 100;
                 player.AddBuff(BuffID.ManaSickness, 60 * 5);
-
-                int[] Debuffs = new int[] { BuffID.Slow, BuffID.WitheredArmor, BuffID.WitheredWeapon, BuffID.Blackout};
-                player.AddBuff(Debuffs[Main.rand.Next(Debuffs.Length)], 60 * 4);
+                player.AddBuff(ModContent.BuffType<LotusCurse>(), 60 * 7);
+                //int[] Debuffs = new int[] { BuffID.Slow, BuffID.WitheredArmor, BuffID.WitheredWeapon, BuffID.Blackout};
+                //player.AddBuff(Debuffs[Main.rand.Next(Debuffs.Length)], 60 * 4);
 
                 for (float j = 0; j < MathHelper.TwoPi; j += MathHelper.TwoPi / 32f)
                 {

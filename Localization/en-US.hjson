@@ -4942,8 +4942,53 @@ Mods: {
 				Tooltip:
 					'''
 					Steals mana from nearby enemies
-					various debuffs are applied if there are no enemies in range
+					Abilities are reduced if there are no enemies in range
 					'''
+			}
+
+			CaesiumBar: {
+				DisplayName: Caesium Bar
+				Tooltip: ""
+			}
+
+			CaesiumForge: {
+				DisplayName: Caesium Forge
+				Tooltip: ""
+			}
+
+			CaesiumMace: {
+				DisplayName: Caesium Mace
+				Tooltip: ""
+			}
+
+			CaesiumPike: {
+				DisplayName: Caesium Pike
+				Tooltip: ""
+			}
+
+			CaesiumScimitar: {
+				DisplayName: Caesium Scimitar
+				Tooltip: ""
+			}
+
+			CaesiumGalea: {
+				DisplayName: Caesium Galea
+				Tooltip: ""
+			}
+
+			CaesiumGreaves: {
+				DisplayName: Caesium Greaves
+				Tooltip: ""
+			}
+
+			CaesiumPlateMail: {
+				DisplayName: Caesium Plate Mail
+				Tooltip: ""
+			}
+
+			CaesiumCrossbow: {
+				DisplayName: Caesium Crossbow
+				Tooltip: ""
 			}
 		}
 
@@ -5053,6 +5098,10 @@ Mods: {
 			MoonfuryBlade.DisplayName: Moonfury Blade
 			SandSlash.DisplayName: Sand Slash
 			LotusLeechHeal.DisplayName: Lotus Leech Heal
+			CaesiumExplosion.DisplayName: Caesium Explosion
+			CaesiumFlail.DisplayName: Caesium Flail
+			CaesiumPike.DisplayName: Caesium Pike
+			CaesiumMace.DisplayName: Caesium Mace
 		}
 
 		NPCs: {
@@ -5611,6 +5660,16 @@ Mods: {
 			Deadeye: {
 				DisplayName: Deadeye
 				Description: Ranged powers are increasing
+			}
+
+			LotusCurse: {
+				DisplayName: Lotus Curse
+				Description: Abilities have been reduced
+			}
+
+			CaesiumBoostingStance: {
+				DisplayName: Caesium Boosting Stance
+				Description: Mods.Avalon.Buffs.CaesiumBoostingStance.Description
 			}
 		}
 
