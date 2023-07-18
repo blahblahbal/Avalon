@@ -4953,42 +4953,50 @@ Mods: {
 
 			CaesiumForge: {
 				DisplayName: Caesium Forge
-				Tooltip: ""
+				Tooltip: Used to smelt high-end ore
 			}
 
 			CaesiumMace: {
 				DisplayName: Caesium Mace
-				Tooltip: ""
+				Tooltip: Explodes on hit
 			}
 
 			CaesiumPike: {
 				DisplayName: Caesium Pike
-				Tooltip: ""
+				Tooltip:
+                '''
+                Explodes on hit
+                Poke!
+                '''
 			}
 
 			CaesiumScimitar: {
 				DisplayName: Caesium Scimitar
-				Tooltip: ""
+				Tooltip: Explodes on hit
 			}
 
 			CaesiumGalea: {
 				DisplayName: Caesium Galea
-				Tooltip: ""
+				Tooltip: 8% increased melee damage
 			}
 
 			CaesiumGreaves: {
 				DisplayName: Caesium Greaves
-				Tooltip: ""
+				Tooltip: 15% increased melee and movement speed
 			}
 
 			CaesiumPlateMail: {
 				DisplayName: Caesium Plate Mail
-				Tooltip: ""
+				Tooltip:
+                '''
+                5% increased melee critical strike chance
+                Melee attacks inflict fire damage"
+                '''
 			}
 
 			CaesiumCrossbow: {
 				DisplayName: Caesium Crossbow
-				Tooltip: ""
+				Tooltip: Converts wooden arrows into hellfire arrows
 			}
 		}
 
@@ -5669,7 +5677,7 @@ Mods: {
 
 			CaesiumBoostingStance: {
 				DisplayName: Caesium Boosting Stance
-				Description: Mods.Avalon.Buffs.CaesiumBoostingStance.Description
+				Description: Movement speed is traded for endurance
 			}
 		}
 
