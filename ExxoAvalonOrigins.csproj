@@ -10,10 +10,15 @@
     <RootNamespace>Avalon</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="DrawMagics\**" />
+    <Compile Remove="DrawMagics\**" />
+    <EmbeddedResource Remove="DrawMagics\**" />
+    <None Remove="DrawMagics\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DrawMagics\" />
     <Folder Include="Items\Placeable\Furniture\Coughwood\" />
   </ItemGroup>
 </Project>

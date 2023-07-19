@@ -5096,6 +5096,61 @@ Mods: {
 				DisplayName: Compressed Extractination Block
 				Tooltip: "'Stick it in the Extractinator!'"
 			}
+
+			Bloodberry: {
+				DisplayName: Bloodberry
+				Tooltip: ""
+			}
+
+			BloodberrySeeds: {
+				DisplayName: Bloodberry Seeds
+				Tooltip: ""
+			}
+
+			Holybird: {
+				DisplayName: Holybird
+				Tooltip: ""
+			}
+
+			HolybirdSeeds: {
+				DisplayName: Holybird Seeds
+				Tooltip: ""
+			}
+
+			SweetstemSeeds: {
+				DisplayName: Sweetstem Seeds
+				Tooltip: ""
+			}
+
+			TwilightPlume: {
+				DisplayName: Twilight Plume
+				Tooltip: ""
+			}
+
+			TwilightPlumeSeeds: {
+				DisplayName: Twilight Plume Seeds
+				Tooltip: ""
+			}
+
+			BarfbushPlanterBox: {
+				DisplayName: Barfbush Planter Box
+				Tooltip: ""
+			}
+
+			HolybirdPlanterBox: {
+				DisplayName: Holybird Planter Box
+				Tooltip: ""
+			}
+
+			SweetstemPlanterBox: {
+				DisplayName: Sweetstem Planter Box
+				Tooltip: ""
+			}
+
+			TwilightPlumePlanterBox: {
+				DisplayName: Twilight Plume Planter Box
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

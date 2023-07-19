@@ -197,6 +197,20 @@ public class AvalonWorld : ModSystem
                 num10 = Main.maxTilesY - 10;
             }
 
+            #region planter box grass growth
+            if (Main.tile[num5, num6].TileType == ModContent.TileType<PlanterBoxes>())
+            {
+                if (!Main.tile[num5, num9].HasTile && WorldGen.genRand.NextBool(2))
+                {
+                    WorldGen.PlaceTile(num5, num9, 3, mute: true);
+                    if (Main.netMode == 2 && Main.tile[num5, num9].HasTile)
+                    {
+                        NetMessage.SendTileSquare(-1, num5, num9);
+                    }
+                }
+            }
+            #endregion
+
             #region killing things if the block above/below isn't the necessary type
             // kill contagion vines if block above isn't contagion grass
             if (!(Main.tile[num5, num9].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num9].TileType == ModContent.TileType<ContagionJungleGrass>() || Main.tile[num5, num9].TileType == ModContent.TileType<ContagionVines>()) &&

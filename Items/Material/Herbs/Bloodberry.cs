@@ -1,9 +1,9 @@
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Material;
+namespace Avalon.Items.Material.Herbs;
 
-class Sweetstem : ModItem
+class Bloodberry : ModItem
 {
     public override void SetStaticDefaults()
     {

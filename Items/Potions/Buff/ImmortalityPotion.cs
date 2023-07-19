@@ -26,6 +26,12 @@ class ImmortalityPotion : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ModContent.ItemType<Material.Sweetstem>()).AddIngredient(ItemID.Blinkroot).AddIngredient(ItemID.SpecularFish).AddTile(TileID.Bottles).Register();
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Material.Herbs.Sweetstem>())
+            .AddIngredient(ItemID.Blinkroot)
+            .AddIngredient(ItemID.SpecularFish)
+            .AddTile(TileID.Bottles)
+            .Register();
     }
 }

@@ -32,6 +32,12 @@ class WisdomPotion : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ModContent.ItemType<Material.Sweetstem>()).AddIngredient(ItemID.Waterleaf).AddIngredient(ItemID.Moonglow).AddIngredient(ItemID.FallenStar, 2).AddTile(TileID.Bottles).Register();
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Material.Herbs.Sweetstem>())
+            .AddIngredient(ItemID.Waterleaf).AddIngredient(ItemID.Moonglow)
+            .AddIngredient(ItemID.FallenStar, 2)
+            .AddTile(TileID.Bottles)
+            .Register();
     }
 }

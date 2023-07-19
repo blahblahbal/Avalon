@@ -32,7 +32,20 @@ class TitanskinPotion : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ModContent.ItemType<Material.Ores.RhodiumOre>()).AddIngredient(ModContent.ItemType<Material.Sweetstem>()).AddIngredient(ItemID.SoulofMight).AddTile(TileID.Bottles).Register();
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ModContent.ItemType<Material.Ores.OsmiumOre>()).AddIngredient(ModContent.ItemType<Material.Sweetstem>()).AddIngredient(ItemID.SoulofMight).AddTile(TileID.Bottles).Register();
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Material.Ores.RhodiumOre>())
+            .AddIngredient(ModContent.ItemType<Material.Herbs.Sweetstem>())
+            .AddIngredient(ItemID.SoulofMight)
+            .AddTile(TileID.Bottles)
+            .Register();
+
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Material.Ores.OsmiumOre>())
+            .AddIngredient(ModContent.ItemType<Material.Herbs.Sweetstem>())
+            .AddIngredient(ItemID.SoulofMight)
+            .AddTile(TileID.Bottles)
+            .Register();
     }
 }
