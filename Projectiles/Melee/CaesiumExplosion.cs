@@ -52,6 +52,10 @@ public class CaesiumExplosion : ModProjectile
         }
         Lighting.AddLight(Projectile.position, new Vector3(0, MathHelper.Lerp(1f, 0f, Projectile.ai[0] / (3 * 7)), 0));
     }
+    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+    {
+        modifiers.HitDirectionOverride = Projectile.Center.X <= Main.player[Projectile.owner].Center.X ? -1 : 1;
+    }
     public override void OnSpawn(IEntitySource source)
     {
         Projectile.rotation = Main.rand.NextFloat(MathHelper.Pi, -MathHelper.Pi);
