@@ -25,6 +25,22 @@ public static class ClassExtensions
 
     public static void Active(this Tile t, bool a) => t.HasTile = a;
 
+    public static void AttemptToConvertNPCToContagion(this NPC n)
+    {
+        if (n.type == NPCID.Bunny)
+        {
+            n.Transform(ModContent.NPCType<NPCs.Critters.ContaminatedBunny>());
+        }
+        if (n.type == NPCID.Goldfish)
+        {
+            n.Transform(ModContent.NPCType<NPCs.Critters.ContaminatedGoldfish>());
+        }
+        if (n.type == NPCID.Penguin)
+        {
+            n.Transform(ModContent.NPCType<NPCs.Critters.ContaminatedPenguin>());
+        }
+    }
+
     public static Item HasItemInArmorFindIt(this Player p, int type)
     {
         for (int i = 0; i < p.armor.Length; i++)

@@ -135,20 +135,19 @@ public class VirulentPowder : ModProjectile
 
         //Copied from Projectile.cs, for converting NPCs
 
-        //if ((type == 11 || type == 463) && Main.netMode != 1)
-        //{
-        //    bool crimson = type == 463;
-        //    for (int num47 = 0; num47 < 200; num47++)
-        //    {
-        //        if (Main.npc[num47].active)
-        //        {
-        //            Rectangle value2 = new Rectangle((int)Main.npc[num47].position.X, (int)Main.npc[num47].position.Y, Main.npc[num47].width, Main.npc[num47].height);
-        //            if (rectangle.Intersects(value2))
-        //            {
-        //                Main.npc[num47].AttemptToConvertNPCToEvil(crimson);
-        //            }
-        //        }
-        //    }
-        //}
+        if (Main.netMode != NetmodeID.MultiplayerClient)
+        {
+            for (int num47 = 0; num47 < 200; num47++)
+            {
+                if (Main.npc[num47].active)
+                {
+                    Rectangle value2 = new Rectangle((int)Main.npc[num47].position.X, (int)Main.npc[num47].position.Y, Main.npc[num47].width, Main.npc[num47].height);
+                    if (new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, Projectile.width, Projectile.height).Intersects(value2))
+                    {
+                        Main.npc[num47].AttemptToConvertNPCToContagion();
+                    }
+                }
+            }
+        }
     }
 }
