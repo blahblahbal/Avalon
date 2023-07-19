@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using System.Reflection;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -49,6 +50,13 @@ class CompressedExtractinationBlock : ModItem
                 Main.tile[Player.tileTargetX, Player.tileTargetY].TileType == TileID.ChlorophyteExtractinator) && inrange)
 			{
                 MethodInfo? dynMethod = typeof(Player).GetMethod("ExtractinatorUse", BindingFlags.NonPublic | BindingFlags.Instance);
+                SoundEngine.PlaySound(SoundID.Grab);
+                float mult = 1f;
+                if (Main.tile[Player.tileTargetX, Player.tileTargetY].TileType == TileID.ChlorophyteExtractinator)
+                {
+                    mult *= 0.33f;
+                }
+                player.ApplyItemTime(Item, mult);
                 for (int i = 0; i < 100; i++)
 				{
                     if (dynMethod != null)

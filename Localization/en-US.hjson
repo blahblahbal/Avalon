@@ -5265,6 +5265,9 @@ Mods: {
 			PeridotSquirrel.DisplayName: Peridot Squirrel
 			TourmalineSquirrel.DisplayName: Tourmaline Squirrel
 			ZirconSquirrel.DisplayName: Zircon Squirrel
+			ContaminatedBunny.DisplayName: Contaminated Bunny
+			ContaminatedGoldfish.DisplayName: Contaminated Goldfish
+			ContaminatedPenguin.DisplayName: Contaminated Penguin
 		}
 
 		Buffs: {

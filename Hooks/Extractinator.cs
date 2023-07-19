@@ -15,21 +15,21 @@ namespace Avalon.Hooks
         {
             if (itemType is ItemID.TinOre or ItemID.CopperOre)
             {
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(2))
                 {
                     itemType = ModContent.ItemType<Items.Material.Ores.BronzeOre>();
                 }
             }
             else if (itemType is ItemID.IronOre or ItemID.LeadOre)
             {
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(2))
                 {
                     itemType = ModContent.ItemType<Items.Material.Ores.NickelOre>();
                 }
             }
             else if (itemType is ItemID.SilverOre or ItemID.TungstenOre)
             {
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(2))
                 {
                     itemType = ModContent.ItemType<Items.Material.Ores.ZincOre>();
                 }
@@ -37,7 +37,7 @@ namespace Avalon.Hooks
             else if (itemType is ItemID.GoldOre or ItemID.PlatinumOre)
             {
                 int rn = Main.rand.Next(4);
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(2))
                 {
                     if (rn == 0)
                     {
@@ -59,7 +59,7 @@ namespace Avalon.Hooks
             }
             else if (itemType is ItemID.Topaz or ItemID.Ruby or ItemID.Amethyst or ItemID.Diamond or ItemID.Emerald or ItemID.Sapphire)
             {
-                if (Main.rand.NextBool(4))
+                if (Main.rand.NextBool(3))
                 {
                     switch (Main.rand.Next(6))
                     {

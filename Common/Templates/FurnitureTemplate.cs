@@ -677,6 +677,15 @@ namespace Avalon.Common.Templates
                     NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1f, left, top);
                 }
             }
+            else if (!CanBeUnlockedNormally && isLocked)
+            {
+                if (player.ConsumeItem(ChestKeyItemId) && Tiles.Furniture.LockedChests.Unlock(left, top) &&
+                    Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    Network.SyncLockUnlock.SendPacket(1, left, top);
+                    NetMessage.SendTileSquare(-1, left, top);
+                }
+            }
             else if (!isLocked)
             {
                 int chest = Chest.FindChest(left, top);
