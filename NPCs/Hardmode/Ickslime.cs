@@ -184,14 +184,14 @@ public class Ickslime : ModNPC
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.TintableDust, 0, 0, 175, default, Main.rand.NextFloat(1, 1.2f));
                 Main.dust[d].color = new Color(215, 225, 162);
-                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1.5f, 5) * hit.HitDirection, Main.rand.NextFloat(-1, -5));
+                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1.5f, 5) * MathHelper.Clamp(NPC.velocity.X,-1,1), Main.rand.NextFloat(-1, -5));
             }
         }
         for (int i = 0; i < 15; i++)
         {
             int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.TintableDust, 0, 0, 175, default, Main.rand.NextFloat(1, 1.2f));
             Main.dust[d].color = new Color(215,225,162);
-            Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1.3f, 4) * hit.HitDirection, Main.rand.NextFloat(-1, -3));
+            Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1.3f, 4) * MathHelper.Clamp(NPC.velocity.X, -1, 1), Main.rand.NextFloat(-1, -3));
         }
     }
 }

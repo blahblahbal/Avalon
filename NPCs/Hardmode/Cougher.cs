@@ -20,7 +20,20 @@ public class Cougher : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 3;
     }
-
+    static SoundStyle Cough = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCough")
+    {
+        Volume = 0.8f,
+        Pitch = 0f,
+        PitchVariance = 0.1f,
+        MaxInstances = 10,
+    };
+    static SoundStyle CoughSpecial = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCoughSpecial")
+    {
+        Volume = 0.8f,
+        Pitch = 0f,
+        PitchVariance = 0.1f,
+        MaxInstances = 10,
+    };
     public override void SetDefaults()
     {
         NPC.damage = 35;
@@ -65,13 +78,6 @@ public class Cougher : ModNPC
     int Frame;
     public override void AI()
     {
-        SoundStyle Cough = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCough")
-        {
-            Volume = 0.8f,
-            Pitch = 0f,
-            PitchVariance = 0.1f,
-            MaxInstances = 10,
-        };
         if (NPC.ai[2] < 200)
         {
             #region AI
@@ -79,6 +85,7 @@ public class Cougher : ModNPC
             {
                 NPC.TargetClosest(true);
             }
+            float speed = 2;
             var vector17 = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height * 0.5f);
             var num149 = Main.player[NPC.target].position.X + Main.player[NPC.target].width / 2;
             var num150 = Main.player[NPC.target].position.Y + Main.player[NPC.target].height / 2;
@@ -103,22 +110,22 @@ public class Cougher : ModNPC
             }
             if (num152 > 100f)
             {
-                NPC.ai[0] += 1f;
+                NPC.ai[0] += 2f;
                 if (NPC.ai[0] > 0f)
                 {
-                    NPC.velocity.Y = NPC.velocity.Y + 0.023f;
+                    NPC.velocity.Y = NPC.velocity.Y + (speed * 0.023f);
                 }
                 else
                 {
-                    NPC.velocity.Y = NPC.velocity.Y - 0.023f;
+                    NPC.velocity.Y = NPC.velocity.Y - (speed * 0.023f);
                 }
                 if (NPC.ai[0] < -100f || NPC.ai[0] > 100f)
                 {
-                    NPC.velocity.X = NPC.velocity.X + 0.023f;
+                    NPC.velocity.X = NPC.velocity.X + (speed * 0.023f);
                 }
                 else
                 {
-                    NPC.velocity.X = NPC.velocity.X - 0.023f;
+                    NPC.velocity.X = NPC.velocity.X - (speed * 0.023f);
                 }
                 if (NPC.ai[0] > 200f)
                 {
@@ -127,8 +134,8 @@ public class Cougher : ModNPC
             }
             if (num152 < 150f)
             {
-                NPC.velocity.X = NPC.velocity.X + num149 * 0.007f;
-                NPC.velocity.Y = NPC.velocity.Y + num150 * 0.007f;
+                NPC.velocity.X = NPC.velocity.X + num149 * (speed * 0.007f);
+                NPC.velocity.Y = NPC.velocity.Y + num150 * (speed * 0.007f);
             }
             if (Main.player[NPC.target].dead)
             {
@@ -137,34 +144,34 @@ public class Cougher : ModNPC
             }
             if (NPC.velocity.X < num149)
             {
-                NPC.velocity.X = NPC.velocity.X + 0.02f;
+                NPC.velocity.X = NPC.velocity.X + (speed * 0.02f);
                 if (NPC.velocity.X < 0f && num149 > 0f)
                 {
-                    NPC.velocity.X = NPC.velocity.X + 0.02f;
+                    NPC.velocity.X = NPC.velocity.X + (speed * 0.02f);
                 }
             }
             else if (NPC.velocity.X > num149)
             {
-                NPC.velocity.X = NPC.velocity.X - 0.02f;
+                NPC.velocity.X = NPC.velocity.X - (speed * 0.02f);
                 if (NPC.velocity.X > 0f && num149 < 0f)
                 {
-                    NPC.velocity.X = NPC.velocity.X - 0.02f;
+                    NPC.velocity.X = NPC.velocity.X - (speed * 0.02f);
                 }
             }
             if (NPC.velocity.Y < num150)
             {
-                NPC.velocity.Y = NPC.velocity.Y + 0.02f;
+                NPC.velocity.Y = NPC.velocity.Y + (speed * 0.02f);
                 if (NPC.velocity.Y < 0f && num150 > 0f)
                 {
-                    NPC.velocity.Y = NPC.velocity.Y + 0.02f;
+                    NPC.velocity.Y = NPC.velocity.Y + (speed * 0.02f);
                 }
             }
             else if (NPC.velocity.Y > num150)
             {
-                NPC.velocity.Y = NPC.velocity.Y - 0.02f;
+                NPC.velocity.Y = NPC.velocity.Y - (speed * 0.02f);
                 if (NPC.velocity.Y > 0f && num150 < 0f)
                 {
-                    NPC.velocity.Y = NPC.velocity.Y - 0.02f;
+                    NPC.velocity.Y = NPC.velocity.Y - (speed * 0.02f);
                 }
             }
             var num157 = 0.7f;
@@ -229,8 +236,11 @@ public class Cougher : ModNPC
             NPC.frameCounter = 0;
             NPC.velocity = NPC.Center.DirectionTo(TargetPlr.Center).RotatedByRandom(0.5f) * -4.5f;
             NPC.ai[2] = 0;
-            SoundEngine.PlaySound(Cough, NPC.Center);
-            for(int i = 0;i < 20; i++)
+            if (Main.rand.NextBool(300))
+                SoundEngine.PlaySound(CoughSpecial, NPC.Center);
+            else
+                SoundEngine.PlaySound(Cough, NPC.Center);
+            for (int i = 0;i < 20; i++)
             {
                 Vector2 ShootDirection = NPC.Center.DirectionTo(TargetPlr.Center).RotatedByRandom(0.5f) * Main.rand.NextFloat(6,3);
                 int d = Dust.NewDust(NPC.position + new Vector2(0, NPC.height / 2), NPC.width, NPC.height / 3, DustID.CorruptGibs, ShootDirection.X, ShootDirection.Y, 128, default, Main.rand.NextFloat(1, 1.5f));
@@ -260,7 +270,7 @@ public class Cougher : ModNPC
             //Main.dust[d].noGravity = true;
         }
 
-        float maxRotate = 0.2f;
+        float maxRotate = 0.4f;
         NPC.rotation = MathHelper.Clamp(NPC.velocity.X * 0.04f, -maxRotate, maxRotate);
     }
 
@@ -285,6 +295,7 @@ public class Cougher : ModNPC
     }
     public override void HitEffect(NPC.HitInfo hit)
     {
+        NPC.ai[0] = 0;
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Cougher1").Type, NPC.scale);
