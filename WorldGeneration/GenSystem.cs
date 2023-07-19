@@ -1,5 +1,4 @@
 using Avalon.Common;
-using Avalon.World.Passes;
 using Avalon.WorldGeneration.Enums;
 using Avalon.WorldGeneration.Passes;
 using System.Collections.Generic;
@@ -26,11 +25,11 @@ public class GenSystem : ModSystem
             tasks.Insert(index + 1, new AvalonReset("Avalon Reset", 1000f));
         }
 
-        index = tasks.FindIndex(genpass => genpass.Name.Equals("Generate Ice Biome"));
-        if (index != -1)
-        {
-            tasks.Insert(index + 1, new SkyClouds());
-        }
+        //index = tasks.FindIndex(genpass => genpass.Name.Equals("Generate Ice Biome"));
+        //if (index != -1)
+        //{
+        //    tasks.Insert(index + 1, new SkyClouds());
+        //}
 
         int evil = WorldGen.WorldGenParam_Evil;
         if (evil == (int)WorldEvil.Contagion)
@@ -84,8 +83,8 @@ public class GenSystem : ModSystem
             tasks.Insert(underworld + 2, currentPass);
             totalWeight += currentPass.Weight;
 
-            //tasks.Insert(underworld + 3, new SkyClouds());
-            tasks.Insert(underworld + 4, new SkyFortress());
+            // uncomment when sky fortress becomes a thing
+            //tasks.Insert(underworld + 4, new SkyFortress());
         }
 
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");
