@@ -4967,7 +4967,13 @@ Mods: {
 
 			QuantumClaymore: {
 				DisplayName: Quantum Claymore
-				Tooltip: ""
+				Tooltip: 
+                '''
+                'Tear through time to rip apart your foes'
+                Fires a piercing quantum beam
+                True melee strikes summon extra non-piercing beams
+                [c/C39FDD:10th Anniversary Contest Winner - Waasephi]
+                '''
 			}
 
 			SonicHat: {

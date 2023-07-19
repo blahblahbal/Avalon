@@ -298,6 +298,8 @@ internal class Contagion : GenPass
         int rad2 = WorldGen.genRand.Next(20, 26);
         int rad3 = WorldGen.genRand.Next(105, 121);
 
+        ushort chunkstone = (ushort)ModContent.TileType<Chunkstone>();
+
         // Shift the Y coord down to the world surface
         j = Utils.TileCheck(i) + radius + 50;
 
@@ -389,7 +391,7 @@ internal class Contagion : GenPass
         // Make the tunnels
         for (int n = 0; n < innerCircleEnds.Count; n++)
         {
-            BoreWavyTunnel((int)innerCircleStarts[n].X, (int)innerCircleStarts[n].Y, (int)innerCircleEnds[n].X, (int)innerCircleEnds[n].Y, 50, 4, 6, (ushort)ModContent.TileType<Chunkstone>());
+            BoreWavyTunnel((int)innerCircleStarts[n].X, (int)innerCircleStarts[n].Y, (int)innerCircleEnds[n].X, (int)innerCircleEnds[n].Y, 50, 4, 6, chunkstone);
             BoreWavyTunnel((int)innerCircleStarts[n].X, (int)innerCircleStarts[n].Y, (int)innerCircleEnds[n].X, (int)innerCircleEnds[n].Y, 50, 4, 2, 65535);
 
             // Check if the Z field is 1, and if it is, make this a point to add a secondary tunnel to
@@ -430,6 +432,8 @@ internal class Contagion : GenPass
                 float posX = (float)(v.X + 2 * Math.Cos(angle));
                 float posY = (float)(v.Y + 2 * Math.Sin(angle));
 
+                MakeCircle((int)posX, (int)posY, 10, chunkstone);
+                MakeCircle((int)posX, (int)posY, 5, 65535);
                 AddSepsisCell((int)posX, (int)posY);
 
                 if (WorldGen.genRand.NextBool(2)) break;
@@ -462,12 +466,12 @@ internal class Contagion : GenPass
             float posY = (float)(center.Y + (rad3 + WorldGen.genRand.Next(-7, 8)) * Math.Sin(angle));
 
             // Start point calc
-            float posX2 = (float)(center.X + (radius + WorldGen.genRand.Next(-7, 8)) * Math.Cos(angle));
-            float posY2 = (float)(center.Y + (radius + WorldGen.genRand.Next(-7, 8)) * Math.Sin(angle));
+            float posX2 = (float)(center.X + (radMod + WorldGen.genRand.Next(-7, 8)) * Math.Cos(angle));
+            float posY2 = (float)(center.Y + (radMod + WorldGen.genRand.Next(-7, 8)) * Math.Sin(angle));
 
             // Hollow tunnel calc 
-            float posXHollow = (float)(center.X + (radMod + WorldGen.genRand.Next(-7, 8)) * Math.Cos(angle));
-            float posYHollow = (float)(center.Y + (radMod + WorldGen.genRand.Next(-7, 8)) * Math.Sin(angle));
+            float posXHollow = (float)(center.X + (radius + WorldGen.genRand.Next(-7, 8)) * Math.Cos(angle));
+            float posYHollow = (float)(center.Y + (radius + WorldGen.genRand.Next(-7, 8)) * Math.Sin(angle));
 
             // The size of the end circle
             float size;
@@ -498,33 +502,34 @@ internal class Contagion : GenPass
         #region tunnels from main ring to outer rings
         for (int n = 0; n < points.Count; n++)
         {
-            BoreWavyTunnel((int)points[n].X, (int)points[n].Y, (int)endpoints[n][0], (int)endpoints[n][1], 50, 4, 10, (ushort)ModContent.TileType<Chunkstone>());
+            BoreWavyTunnel((int)points[n].X, (int)points[n].Y, (int)endpoints[n][0], (int)endpoints[n][1], 50, 4, 10, chunkstone);
             BoreWavyTunnel((int)points[n].X, (int)points[n].Y, (int)endpoints[n][0], (int)endpoints[n][1], 50, 4, 4, 65535);
 
             // if the endpoint will be the start to a secondary tunnel
             if (endpoints[n][2] == 1)
             {
-                MakeEndingCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4], (ushort)ModContent.TileType<Chunkstone>());
+                MakeEndingCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4], chunkstone);
                 MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 5, 65535);
                 secondaryTunnelCenters.Add(new Vector3(endpoints[n][0], endpoints[n][1], endpoints[n][3]));
 
                 if (endpoints[n][4] >= 19 && endpoints[n][4] <= 20)
                 {
-                    MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 12, (ushort)ModContent.TileType<Chunkstone>(), true);
+                    MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 12, chunkstone, true);
                 }
                 else if (endpoints[n][4] < 23)
                 {
-                    MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 13, (ushort)ModContent.TileType<Chunkstone>(), true);
+                    MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 13, chunkstone, true);
                     MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 18, 65535);
                 }
             }
             else
             {
-                MakeEndingCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4], (ushort)ModContent.TileType<Chunkstone>());
+                MakeEndingCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4], chunkstone);
                 MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 5, 65535);
 
                 AddSepsisCell((int)endpoints[n][0], (int)endpoints[n][1]);
             }
+            BoreWavyTunnel((int)points[n].X, (int)points[n].Y, (int)endpoints[n][0], (int)endpoints[n][1], 50, 4, 4, 65535);
         }
         #endregion
 
@@ -574,20 +579,20 @@ internal class Contagion : GenPass
         {
             if (secondaryTunnelEnds[q].Y > j)
             {
-                BoreWavyTunnel((int)secondTunnelStarts[q].X, (int)secondTunnelStarts[q].Y, (int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 50, 4, 9, (ushort)ModContent.TileType<Chunkstone>());
+                BoreWavyTunnel((int)secondTunnelStarts[q].X, (int)secondTunnelStarts[q].Y, (int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 50, 4, 9, chunkstone);
                 BoreWavyTunnel((int)secondTunnelStarts[q].X, (int)secondTunnelStarts[q].Y, (int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 50, 4, 3, 65535);
-                MakeEndingCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, secondaryTunnelEnds[q].Z, (ushort)ModContent.TileType<Chunkstone>());
+                MakeEndingCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, secondaryTunnelEnds[q].Z, chunkstone);
                 if (secondaryTunnelEnds[q].Z >= 10)
                 {
                     MakeCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 8f, 65535);
                 }
                 else if (secondaryTunnelEnds[q].Z > 12)
                 {
-                    MakeCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 6f, (ushort)ModContent.TileType<Chunkstone>(), true);
+                    MakeCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 6f, chunkstone, true);
                 }
                 else if (secondaryTunnelEnds[q].Z > 15)
                 {
-                    MakeCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 7f, (ushort)ModContent.TileType<Chunkstone>(), true);
+                    MakeCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 7f, chunkstone, true);
                     MakeCircle((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y, 4f, 65535);
                 }
                 AddSepsisCell((int)secondaryTunnelEnds[q].X, (int)secondaryTunnelEnds[q].Y);
@@ -603,7 +608,7 @@ internal class Contagion : GenPass
         #endregion
         for (int n = 0; n < points.Count; n++)
         {
-            BoreWavyTunnel((int)pointsForHollow[n].X, (int)pointsForHollow[n].Y, (int)endpoints[n][0], (int)endpoints[n][1], 50, 4, 3, 65535);
+            //BoreWavyTunnel((int)pointsForHollow[n].X, (int)pointsForHollow[n].Y, (int)endpoints[n][0], (int)endpoints[n][1], 50, 4, 3, 65535);
         }
 
         for (int n = 0; n < points.Count; n++)
@@ -612,11 +617,11 @@ internal class Contagion : GenPass
             {
                 if (endpoints[n][4] >= 19 && endpoints[n][4] <= 20)
                 {
-                    MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 12, (ushort)ModContent.TileType<Chunkstone>(), true);
+                    MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 12, chunkstone, true);
                 }
                 else if (endpoints[n][4] < 23)
                 {
-                    MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 13, (ushort)ModContent.TileType<Chunkstone>(), true);
+                    MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 13, chunkstone, true);
                     MakeCircle((int)endpoints[n][0], (int)endpoints[n][1], endpoints[n][4] - 18, 65535);
                     AddSepsisCell((int)endpoints[n][0], (int)endpoints[n][1]);
                 }
@@ -636,15 +641,6 @@ internal class Contagion : GenPass
                 {
                     MakeCircle(x + offsetX, y, circleSize, (ushort)ModContent.TileType<Chunkstone>());
                 }
-                
-                //if (x >= i + min || x <= i - max)
-                //{
-                //    Tile t = Main.tile[x, y];
-                //    t.HasTile = true;
-                //    t.IsHalfBlock = false;
-                //    t.Slope = SlopeType.Solid;
-                //    t.TileType = (ushort)ModContent.TileType<Chunkstone>();
-                //}
                 if (x <= i + min && x >= i - max)
                 {
                     Tile t = Main.tile[x, y];
@@ -653,20 +649,6 @@ internal class Contagion : GenPass
                 }
             }
         }
-        //for (int x = i - 12; x < i + 12; x++)
-        //{
-        //    for (int y = j - radius - 50; y < j - radius + 8; y++)
-        //    {
-        //        if (x == i + 9 || x == i - 9)
-        //        {
-        //            int rn = WorldGen.genRand.Next(13, 17);
-        //            if (y % rn == 0)
-        //            {
-        //                MakeOval(x, y, 4, 8, (ushort)ModContent.TileType<Chunkstone>());
-        //            }
-        //        }
-        //    }
-        //}
     }
 
     public static void MakeOval(int x, int y, int xRadius, int yRadius, int type)
@@ -715,6 +697,18 @@ internal class Contagion : GenPass
         }
     }
 
+    /// <summary>
+    /// Helper method to generate a sinewave-like tunnel between 2 points. 
+    /// Uses the MakeCircle method to generate the tunnel.
+    /// </summary>
+    /// <param name="startX">The starting X coordinate.</param>
+    /// <param name="startY">The starting Y coordinate.</param>
+    /// <param name="endX">The ending X coordinate.</param>
+    /// <param name="endY">The ending Y coordinate.</param>
+    /// <param name="wavelength">The wavelength of the wave.</param>
+    /// <param name="amplitude">The amiplitude of the wave.</param>
+    /// <param name="radius">The radius of the tunnel.</param>
+    /// <param name="type">The tile type to place.</param>
     public static void BoreWavyTunnel(int startX, int startY, int endX, int endY, int wavelength, float amplitude, int radius, ushort type)
     {
         float length = Vector2.Distance(new Vector2(startX, startY), new Vector2(endX, endY));
