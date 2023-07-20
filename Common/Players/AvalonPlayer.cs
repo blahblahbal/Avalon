@@ -242,7 +242,14 @@ public class AvalonPlayer : ModPlayer
             r -= 0.1f;
         }
     }
-
+    public override void GetDyeTraderReward(List<int> rewardPool)
+    {
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.HighVisDye>());
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.EbonstoneDye>());
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.CrimstoneDye>());
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.ChunkstoneDye>());
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.StoneDye>());
+    }
     public bool PotionSicknessSoundPlayed;
     public override void PostUpdateBuffs()
     {
