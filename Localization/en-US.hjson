@@ -5003,7 +5003,7 @@ Mods: {
 
 			DesertGambler: {
 				DisplayName: Desert Gambler
-				Tooltip: Ranged powers increase over time while below 20% life
+				Tooltip: Ranged abilities increase over time while below 20% life
 			}
 
 			LotusLeech: {
@@ -5074,7 +5074,7 @@ Mods: {
 			}
 
 			NauSeaFish: {
-				DisplayName: Nau Sea Fish
+				DisplayName: Nau-Sea Fish
 				Tooltip: ""
 			}
 
@@ -5090,12 +5090,12 @@ Mods: {
 
 			Medlar: {
 				DisplayName: Medlar
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.MediumStats}"
 			}
 
 			MedlarMedley: {
 				DisplayName: Medlar Medley
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.MediumStats}"
 			}
 
 			CompressedExtractinationBlock: {
@@ -5819,7 +5819,7 @@ Mods: {
 
 			CaesiumPoison: {
 				DisplayName: Caesium Poison
-				Description: You are poisoned by the Caesium
+				Description: You are poisoned by the caesium
 			}
 
 			SnotOrb: {
@@ -5864,7 +5864,7 @@ Mods: {
 
 			Deadeye: {
 				DisplayName: Deadeye
-				Description: Ranged powers are increasing
+				Description: Ranged abilities are increasing
 			}
 
 			LotusCurse: {
