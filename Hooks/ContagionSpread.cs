@@ -1,11 +1,5 @@
 using Avalon.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Avalon.Walls;
@@ -187,7 +181,7 @@ namespace Avalon.Hooks
         private void On_WorldGen_hardUpdateWorld(On_WorldGen.orig_hardUpdateWorld orig, int i, int j)
         {
             orig.Invoke(i, j);
-            if (Main.hardMode || !Main.tile[i, j].IsActuated)
+            if (Main.hardMode)
             {
                 int type = Main.tile[i, j].TileType;
                 if ((NPC.downedPlantBoss && WorldGen.genRand.Next(2) == 0) || WorldGen.AllowedToSpreadInfections)

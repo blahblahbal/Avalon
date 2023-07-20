@@ -38,7 +38,6 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     if (!any(color))
         return color;
 
-
     float4 color2 = 0;
     float2 position = coords;
 
