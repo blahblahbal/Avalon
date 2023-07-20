@@ -64,14 +64,14 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 uv : TEXCOORD) : COLOR
 
         finalColor.rgb = clamp(finalColor.rgb, 0.5, 1);
         
-        finalColor.rgb += float3(0.3, 0, 0.4);
+        finalColor.rgb += float3(0.1, 0, 0.15);
         
         return finalColor * sampleColor;
     }
     else
     {
-        color.rgb = float3(brightness * 1.2, brightness * 1.05, brightness * 1.2);
-        color.rgb *= sin(uTime * 2 + gradientCoords.x * uDirection * 16) * 0.2 + 0.9;
+        color.rgb = lerp(float3(0, 0.5, 0.4) * brightness, float3(1, 1, 1), brightness);
+        //color.rgb *= sin(uTime * 2 + gradientCoords.x * uDirection * 16) * 0.2 + 0.9;
         return color * sampleColor;
     }
 }
