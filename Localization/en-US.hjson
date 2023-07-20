@@ -5157,6 +5157,11 @@ Mods: {
 				DisplayName: Twilight Plume Planter Box
 				Tooltip: ""
 			}
+
+			ShimmerDye: {
+				DisplayName: Shimmer Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
