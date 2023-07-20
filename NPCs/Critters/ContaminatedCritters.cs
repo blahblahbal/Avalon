@@ -59,7 +59,7 @@ public class ContaminatedGoldfish : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[Type] = 7;
+        Main.npcFrameCount[Type] = 6;
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
         {
             // Influences how the NPC looks in the Bestiary
