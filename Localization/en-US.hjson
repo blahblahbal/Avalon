@@ -5182,6 +5182,16 @@ Mods: {
 				DisplayName: Aetherium Dye
 				Tooltip: ""
 			}
+
+			ContagionCrate: {
+				DisplayName: Contagion Crate
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			PlagueCrate: {
+				DisplayName: Plague Crate
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
 		}
 
 		Projectiles: {
@@ -5942,6 +5952,8 @@ Mods: {
 				$parentVal: MapEntry0: Locked Chests
 				MapEntry0: Mods.Avalon.Tiles.LockedChests.MapEntry0
 			}
+
+			Crates.MapEntry: Crates
 		}
 
 		Prefixes: {

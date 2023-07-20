@@ -390,20 +390,39 @@ public class AvalonPlayer : ModPlayer
         }
         if (water)
         {
+            if (attempt.crate && (Player.InModBiome<Biomes.Contagion>() || Player.InModBiome<Biomes.UndergroundContagion>()))
+            {
+                if (!attempt.veryrare && !attempt.legendary && attempt.rare && Main.rand.NextBool())
+                {
+                    if (Main.hardMode)
+                    {
+                        itemDrop = ModContent.ItemType<Items.Consumables.PlagueCrate>();
+                        return;
+                    }
+                    else
+                    {
+                        itemDrop = ModContent.ItemType<Items.Consumables.ContagionCrate>();
+                        return;
+                    }
+                }
+            }
             if (attempt.uncommon && (Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion))
             {
                 int r = Main.rand.Next(3);
                 if (r == 0)
                 {
                     itemDrop = ModContent.ItemType<Items.Fish.Ickfish>();
+                    return;
                 }
-                if (r == 1)
+                else if (r == 1)
                 {
                     itemDrop = ModContent.ItemType<Items.Fish.NauSeaFish>();
+                    return;
                 }
                 else if (r == 2)
                 {
                     itemDrop = ModContent.ItemType<Items.Fish.SicklyTrout>();
+                    return;
                 }
             }
         }
