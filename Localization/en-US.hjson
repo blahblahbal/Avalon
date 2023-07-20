@@ -5167,6 +5167,21 @@ Mods: {
 				DisplayName: Hi-Vis Dye
 				Tooltip: ""
 			}
+
+			UnvolanditePhaseDye: {
+				DisplayName: Unvolandite Phase Dye
+				Tooltip: ""
+			}
+
+			VorazylcumPhaseDye: {
+				DisplayName: Vorazylcum Phase Dye
+				Tooltip: ""
+			}
+
+			AetheriumDye: {
+				DisplayName: Aetherium Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
