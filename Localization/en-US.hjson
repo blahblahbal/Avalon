@@ -5162,6 +5162,11 @@ Mods: {
 				DisplayName: Shimmer Dye
 				Tooltip: ""
 			}
+
+			HighVisDye: {
+				DisplayName: Hi-Vis Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
