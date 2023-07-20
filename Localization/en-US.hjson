@@ -5157,6 +5157,11 @@ Mods: {
 				DisplayName: Twilight Plume Planter Box
 				Tooltip: ""
 			}
+
+			HighVisDye: {
+				DisplayName: Hi-Vis Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
