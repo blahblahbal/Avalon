@@ -15,7 +15,7 @@ namespace Avalon.Common
     {
         public override void PostUpdate()
         {
-            if (Player.whoAmI == Main.myPlayer)
+            if (Player.whoAmI == Main.myPlayer && ModContent.GetInstance<AvalonClientConfig>().BiomeParticlesEnabled)
             {
                 if (Player.position.Y > (Main.UnderworldLayer - 100) * 16)
                 {

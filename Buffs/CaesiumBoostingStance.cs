@@ -15,5 +15,6 @@ public class CaesiumBoostingStance : ModBuff
         player.endurance += 0.2f;
         player.accRunSpeed *= 0.3f;
         player.maxRunSpeed *= 0.3f;
+        player.GetAttackSpeed(DamageClass.Melee) *= 1.1f;
     }
 }
