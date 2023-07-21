@@ -12,10 +12,7 @@ class ScrollofTome : ModItem
     {
         Item.ResearchUnlockCount = 2;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Material;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

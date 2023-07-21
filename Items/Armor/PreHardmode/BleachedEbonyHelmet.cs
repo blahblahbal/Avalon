@@ -19,10 +19,7 @@ class BleachedEbonyHelmet : ModItem
         Item.height = 18;
         Item.defense = 1;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Headgear;
-    }
+
     public override bool IsArmorSet(Item head, Item body, Item legs)
     {
         return body.type == ModContent.ItemType<BleachedEbonyBreastplate>() && legs.type == ModContent.ItemType<BleachedEbonyGreaves>();

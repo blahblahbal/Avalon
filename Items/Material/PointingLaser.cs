@@ -14,10 +14,7 @@ class PointingLaser : ModItem
         Item.ResearchUnlockCount = 25;
         Item.staff[Item.type] = true;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Material;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

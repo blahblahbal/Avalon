@@ -12,10 +12,7 @@ internal class CrystalMinesKey : ModItem
         //Tooltip.SetDefault("Opens a Crystal Mines Chest");
         Item.ResearchUnlockCount = 1;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Keys;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

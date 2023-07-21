@@ -17,10 +17,6 @@ class PathogenicDart : ModItem
         Item.CloneDefaults(ItemID.CursedDart);
         Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.PathogenicDart>();
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Ammo;
-    }
     public override void AddRecipes()
     {
         CreateRecipe(100).AddIngredient(ModContent.ItemType<Pathogen>()).Register();

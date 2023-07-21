@@ -24,10 +24,6 @@ class ObsidianGlove : ModItem
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
-    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().CloudGlove = true;

@@ -16,10 +16,6 @@ class AdvObsidianSkinPotion : ModItem
             new Color(132, 116, 199)
         };
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

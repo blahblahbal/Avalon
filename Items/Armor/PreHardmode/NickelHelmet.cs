@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,10 +12,7 @@ class NickelHelmet : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Headgear;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

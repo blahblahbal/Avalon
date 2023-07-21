@@ -12,10 +12,7 @@ class BleachedEbonyGreaves : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Pants;
-    }
+
     public override void SetDefaults()
     {
         Item.width = 18;

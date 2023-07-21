@@ -14,10 +14,7 @@ class AdvRoguePotion : ModItem
             Color.Red
         };
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

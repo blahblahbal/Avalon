@@ -20,10 +20,7 @@ internal class BloodyWhetstone : ModItem
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 3);
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
-    }
+
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().BloodyWhetstone = true;

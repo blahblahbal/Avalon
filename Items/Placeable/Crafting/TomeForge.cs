@@ -13,10 +13,7 @@ class TomeForge : ModItem
         //Tooltip.SetDefault("Used to craft Mystical Tomes");
         Item.ResearchUnlockCount = 1;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.CraftingObjects;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -202,26 +202,8 @@ public class AvalonWorld : ModSystem
             {
                 if (!Main.tile[num5, num9].HasTile && WorldGen.genRand.NextBool(2))
                 {
-                    Tile tile = Main.tile[num5, num9];
-                    tile.HasTile = true;
-                    tile.TileType = TileID.Plants;
-                    int style = WorldGen.genRand.NextFromList<int>(6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 24, 27, 30, 33, 36, 39, 42);
-                    switch (style)
-                    {
-                        case 21:
-                        case 24:
-                        case 27:
-                        case 30:
-                        case 33:
-                        case 36:
-                        case 39:
-                        case 42:
-                            style += WorldGen.genRand.Next(3);
-                            break;
-                    }
-                    tile.TileFrameX = (short)(style * 18);
-                    //WorldGen.PlaceTile(num5, num9, 3, mute: true);
-                    if (Main.netMode == NetmodeID.Server && Main.tile[num5, num9].HasTile)
+                    WorldGen.PlaceTile(num5, num9, 3, mute: true);
+                    if (Main.netMode == 2 && Main.tile[num5, num9].HasTile)
                     {
                         NetMessage.SendTileSquare(-1, num5, num9);
                     }

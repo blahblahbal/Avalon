@@ -22,10 +22,7 @@ class AncientTitaniumHeadgear : ModItem
         Item.value = 100000;
         Item.height = dims.Height;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Headgear;
-    }
+
     public override bool IsArmorSet(Item head, Item body, Item legs)
     {
         return (body.type == ModContent.ItemType<AncientTitaniumPlateMail>() || body.type == ModContent.ItemType<RhodiumPlateMail>()) &&

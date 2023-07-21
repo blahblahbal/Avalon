@@ -16,10 +16,7 @@ class AdvNightOwlPotion : ModItem
             new Color(189, 255, 73)
         };
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

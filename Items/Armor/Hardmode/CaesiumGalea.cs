@@ -13,12 +13,12 @@ namespace Avalon.Items.Armor.Hardmode;
 [AutoloadEquip(EquipType.Head)]
 class CaesiumGalea : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //DisplayName.SetDefault("Caesium Galea");
-        //Tooltip.SetDefault("8% increased melee damage");
-        Item.ResearchUnlockCount = 1;
-    }
+    //public override void SetStaticDefaults()
+    //{
+    //    DisplayName.SetDefault("Caesium Galea");
+    //    Tooltip.SetDefault("8% increased melee damage");
+    //    SacrificeTotal = 1;
+    //}
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -27,10 +27,6 @@ class CaesiumGalea : ModItem
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 10, 0, 0);
         Item.height = dims.Height;
-    }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Headgear;
     }
     public override bool IsArmorSet(Item head, Item body, Item legs)
     {

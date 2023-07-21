@@ -20,10 +20,7 @@ public class Raspberry : ModItem
         };
         ItemID.Sets.IsFood[Type] = true;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Food;
-    }
+
     public override void SetDefaults()
     {
         // DefaultToFood sets all of the food related item defaults such as the buff type, buff duration, use sound, and animation time.

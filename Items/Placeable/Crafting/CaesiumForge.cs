@@ -13,14 +13,7 @@ class CaesiumForge : ModItem
     //    //DisplayName.SetDefault("Caesium Forge");
     //    //Tooltip.SetDefault("Used to smelt high-end ore");
     //}
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.CraftingObjects;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

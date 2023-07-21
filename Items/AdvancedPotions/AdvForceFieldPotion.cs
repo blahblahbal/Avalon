@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,10 +11,7 @@ class AdvForceFieldPotion : ModItem
     {
         Item.ResearchUnlockCount = 30;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

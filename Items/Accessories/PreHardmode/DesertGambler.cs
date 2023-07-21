@@ -25,10 +25,6 @@ class DesertGambler : ModItem
         Item.expert= true;
         Item.accessory = true;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
-    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         if (player.statLife <= player.statLifeMax2 * 0.2f)

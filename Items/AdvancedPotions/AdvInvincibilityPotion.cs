@@ -15,10 +15,7 @@ class AdvInvincibilityPotion : ModItem
             Color.Purple
         };
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

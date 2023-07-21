@@ -20,10 +20,7 @@ class BismuthHelmet : ModItem
         Item.defense = 5;
         Item.value = Item.sellPrice(0, 0, 40);
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Headgear;
-    }
+
     public override bool IsArmorSet(Item head, Item body, Item legs)
     {
         return body.type == ModContent.ItemType<BismuthChainmail>() && legs.type == ModContent.ItemType<BismuthGreaves>();

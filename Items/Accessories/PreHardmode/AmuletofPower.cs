@@ -24,10 +24,7 @@ class AmuletofPower : ModItem
         Item.height = dims.Height;
         Item.defense = 3;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
-    }
+
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetDamage(DamageClass.Generic) += 0.07f;

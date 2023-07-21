@@ -16,10 +16,7 @@ class AdvSpelunkerPotion : ModItem
             new Color(250, 213, 64)
         };
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

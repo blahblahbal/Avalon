@@ -25,10 +25,6 @@ class AncientHeadphones : ModItem
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
-    }
     public override void AddRecipes()
     {
         CreateRecipe(1)

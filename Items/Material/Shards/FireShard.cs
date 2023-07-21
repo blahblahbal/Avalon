@@ -1,4 +1,4 @@
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,10 +10,7 @@ class FireShard : ModItem
     {
         Item.ResearchUnlockCount = 25;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Material;
-    }
+
     public override void SetDefaults()
     {
         Item.rare = ItemRarityID.LightRed;

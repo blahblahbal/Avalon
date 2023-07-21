@@ -12,10 +12,7 @@ class AdvShockwavePotion : ModItem
         Item.ResearchUnlockCount = 30;
         ItemID.Sets.DrinkParticleColors[Type] = new Color[2] { Color.Brown, Color.Green };
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

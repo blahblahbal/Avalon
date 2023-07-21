@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Fish;
@@ -10,10 +9,7 @@ class Ickfish : ModItem
     {
         Item.ResearchUnlockCount = 3;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Fish;
-    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

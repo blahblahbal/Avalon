@@ -11,6 +11,7 @@ namespace Avalon.Tiles
     {
         public override void SetStaticDefaults()
         {
+            Main.tileLighted[Type] = true;
             Main.tileFrameImportant[Type] = true;
             Main.tileSolidTop[Type] = true;
             Main.tileSolid[Type] = true;
@@ -103,6 +104,10 @@ namespace Avalon.Tiles
                     break;
             }
             yield return new Item(toDrop);
+        }
+        public override void PostSetDefaults()
+        {
+            Main.tileNoSunLight[Type] = false;
         }
     }
 }

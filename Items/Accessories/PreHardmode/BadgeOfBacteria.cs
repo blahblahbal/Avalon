@@ -2,7 +2,6 @@ using Avalon.Common.Players;
 using Avalon.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
@@ -24,10 +23,7 @@ public class BadgeOfBacteria : ModItem
         Item.height = dims.Height;
         Item.expert = true;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
-    }
+
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().BadgeOfBacteria = true;

@@ -20,10 +20,7 @@ public class MedlarMedley : ModItem
         };
         ItemID.Sets.IsFood[Type] = true;
     }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Food;
-    }
+
     public override void AddRecipes()
     {
         CreateRecipe()
