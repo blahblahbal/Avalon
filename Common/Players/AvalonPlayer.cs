@@ -459,13 +459,17 @@ public class AvalonPlayer : ModPlayer
         {
             if (Main.rand.NextBool(5))
             {
-                Item.NewItem(Player.GetSource_DropAsItem(), proj.Hitbox, ModContent.ItemType<SkyInsignia>());
+                int it = Item.NewItem(Player.GetSource_DropAsItem(), proj.Hitbox, ModContent.ItemType<SkyInsignia>());
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, it);
+                }
             }
         }
     }
     public void LevelUpSkyBlessing()
     {
-        Player.AddBuff(ModContent.BuffType<Buffs.SkyBlessing>(), 60 * 7);
+        Player.AddBuff(ModContent.BuffType<SkyBlessing>(), 60 * 7);
     }
 
     public override void PostUpdate()

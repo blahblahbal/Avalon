@@ -15,12 +15,12 @@ public class SkyBlessing : ModBuff
         {
             tip += (stacks * 4) + "%";
         }
-        else tip += "25%";
+        else tip += "45%";
     }
 
     public override void Update(Player player, ref int buffIndex)
     {
-        player.GetModPlayer<AvalonPlayer>().SkyBlessing = true;
+        //player.GetModPlayer<AvalonPlayer>().SkyBlessing = true;
         stacks = player.GetModPlayer<AvalonPlayer>().SkyStacks;
         if (player.buffTime[buffIndex] == 0)
         {

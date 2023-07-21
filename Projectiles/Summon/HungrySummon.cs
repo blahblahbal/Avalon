@@ -39,6 +39,7 @@ public class HungrySummon : ModProjectile
         //AIType = ProjectileID.Spazmamini;
         Projectile.aiStyle = -1;
         Rectangle dims = this.GetDims();
+        Projectile.DamageType = DamageClass.Summon;
         Projectile.netImportant = true;
         Projectile.width = 24;
         Projectile.height = 24;
