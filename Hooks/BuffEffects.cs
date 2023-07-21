@@ -42,6 +42,24 @@ public class BuffEffects : ModHook
                 {
                     self.buffTime[j] = timeToAdd;
                 }
+                if (type == ModContent.BuffType<SkyBlessing>())
+                {
+                    self.buffTime[j] += timeToAdd;
+                    if (self.GetModPlayer<AvalonPlayer>().SkyStacks < 10)
+                    {
+                        self.GetModPlayer<AvalonPlayer>().SkyStacks++;
+                    }
+                    else self.GetModPlayer<AvalonPlayer>().SkyStacks = 10;
+                    if (self.buffTime[j] > 60 * 7)
+                    {
+                        self.buffTime[j] = 60 * 7;
+                        return;
+                    }
+                }
+                else if (self.buffTime[j] < timeToAdd)
+                {
+                    self.buffTime[j] = timeToAdd;
+                }
                 if (self.GetModPlayer<AvalonPlayer>().Pathogen && Main.debuff[self.buffType[j]])
                 {
                     if (self.buffTime[j] < timeToAdd * 2)

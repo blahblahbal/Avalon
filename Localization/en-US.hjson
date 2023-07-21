@@ -35,6 +35,13 @@ Mods: {
 			}
 		}
 
+		SetBonuses.Aeroforce:
+			'''
+			Blessing of the Sky
+			Increases your max number of minions by 1
+			Grants a chance for a Sky Insignia to drop when your minions damage an enemy
+			'''
+
 		TooltipEdits: {
 			EvilPickaxe: Can mine Rhodium, Osmium, and Iridium
 			FishingLine:
@@ -55,21 +62,16 @@ Mods: {
 					'''
 			}
 
-			PickaxeAxe: {
-				PartOne: 
-                '''
-                'Not to be confused with a hamdrill'
-                Can mine Chlorophyte, Xanthophyte, and Caesium Ore
+			PickaxeAxe.PartOne:
 				'''
-			}
-
-			Drax: {
-				PartOne: 
-                '''
-                'Not to be confused with a picksaw'
-                Can mine Chlorophyte, Xanthophyte, and Caesium Ore
+				'Not to be confused with a hamdrill'
+				Can mine Chlorophyte, Xanthophyte, and Caesium Ore
 				'''
-			}
+			Drax.PartOne:
+				'''
+				'Not to be confused with a picksaw'
+				Can mine Chlorophyte, Xanthophyte, and Caesium Ore
+				'''
 		}
 
 		Herbology: {
@@ -234,6 +236,36 @@ Mods: {
 					'''
 					Summons a controllable exploding missile
 					'The true magic missile'
+					'''
+			}
+
+			AeroforceGuardia: {
+				DisplayName: Aeroforce Guardia
+				Tooltip:
+					'''
+					6% increased minion damage
+					Increases your max number of minions by 1
+					[c/C39FDD:10th Anniversary Contest Winner - Crabby]
+					'''
+			}
+
+			AeroforceProtector: {
+				DisplayName: Aeroforce Protector
+				Tooltip:
+					'''
+					10% increased minion damage
+					Increases your max number of minions by 1
+					[c/C39FDD:10th Anniversary Contest Winner - Crabby]
+					'''
+			}
+
+			AeroforceLeggings: {
+				DisplayName: Aeroforce Leggings
+				Tooltip:
+					'''
+					4% increased minion damage
+					20% increased movement acceleration and jump speed
+					[c/C39FDD:10th Anniversary Contest Winner - Crabby]
 					'''
 			}
 
@@ -5246,6 +5278,11 @@ Mods: {
 				DisplayName: Plague Crate
 				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
 			}
+
+			SkyInsignia: {
+				DisplayName: Sky Insignia
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5421,6 +5458,11 @@ Mods: {
 		}
 
 		Buffs: {
+			SkyBlessing: {
+				DisplayName: Blessing of the Sky
+				Description: "Minion damage is increased by "
+			}
+
 			Bleeding: {
 				DisplayName: Bleeding
 				Description: Losing life

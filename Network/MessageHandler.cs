@@ -19,9 +19,6 @@ public class MessageHandler
         MessageID id = (MessageID)reader.ReadInt32();
         switch (id)
         {
-            //case MessageID.ShadowTeleport:
-            //    ShadowTeleport.HandlePacket(reader, fromWho);
-            //    break;
             case MessageID.CursorPosition:
                 Main.player[reader.ReadInt32()].GetModPlayer<AvalonPlayer>().HandleMouseCursor(reader);
                 break;
@@ -34,9 +31,12 @@ public class MessageHandler
             case MessageID.SyncLockUnlock:
                 SyncLockUnlock.HandlePacket(reader, fromWho);
                 break;
-                //case MessageID.StaminaHeal:
-                //    StaminaHeal.HandlePacket(reader, fromWho);
-                //    break;
+            case MessageID.SyncSkyBlessing:
+                SyncSkyBlessing.HandlePacket(reader, fromWho);
+                break;
+            //case MessageID.StaminaHeal:
+            //    StaminaHeal.HandlePacket(reader, fromWho);
+            //    break;
         }
     }
 }

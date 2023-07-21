@@ -94,6 +94,11 @@ public class AvalonPlayer : ModPlayer
     /// </summary>
     public int MaxRangedCrit;
 
+    #region armor sets
+    public bool SkyBlessing;
+    public int SkyStacks;
+    #endregion
+
     #region accessories
     public bool PulseCharm;
     public bool ShadowCharm;
@@ -185,6 +190,9 @@ public class AvalonPlayer : ModPlayer
         FrostGauntlet = false;
         SlimeBand = false;
         NoSticky = false;
+
+        // armor sets
+        SkyBlessing = false;
 
         SnotOrb = false;
 
@@ -445,8 +453,35 @@ public class AvalonPlayer : ModPlayer
         }
         return true;
     }
+    public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+    {
+        if (hit.DamageType == DamageClass.Summon && SkyBlessing)
+        {
+            if (Main.rand.NextBool(5))
+            {
+                Item.NewItem(Player.GetSource_DropAsItem(), proj.Hitbox, ModContent.ItemType<SkyInsignia>());
+            }
+        }
+    }
+    public void LevelUpSkyBlessing()
+    {
+        Player.AddBuff(ModContent.BuffType<Buffs.SkyBlessing>(), 60 * 7);
+    }
+
     public override void PostUpdate()
     {
+        if (SkyBlessing)
+        {
+            if (SkyStacks < 10)
+            {
+                Player.GetDamage(DamageClass.Summon) += 0.04f * SkyStacks;
+            }
+            else
+            {
+                Player.GetDamage(DamageClass.Summon) += 0.45f;
+            }
+        }
+
         #region crit cap
         for (int i = 0; i < Player.inventory.Length; i++)
         {

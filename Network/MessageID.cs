@@ -7,5 +7,6 @@ public enum MessageID
     SyncTime = 2,
     SyncWiring = 3,
     StaminaHeal = 4,
-    SyncLockUnlock = 5
+    SyncLockUnlock = 5,
+    SyncSkyBlessing = 6
 }
