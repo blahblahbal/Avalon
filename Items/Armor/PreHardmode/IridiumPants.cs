@@ -17,7 +17,7 @@ class IridiumPants : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.defense = 8;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 0, 9, 75);
         Item.height = dims.Height;

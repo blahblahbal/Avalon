@@ -17,7 +17,7 @@ internal class IridiumHat : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.defense = 7;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 1, 20);
         Item.height = dims.Height;
