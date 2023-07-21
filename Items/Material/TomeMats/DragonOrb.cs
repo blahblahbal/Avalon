@@ -26,7 +26,10 @@ class DragonOrb : ModItem
         Item.height = 26;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial = true;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.CraftedTomeMats;
+    }
     public override void AddRecipes()
     {
         CreateRecipe(1)

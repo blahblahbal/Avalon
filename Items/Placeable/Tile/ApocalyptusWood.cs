@@ -10,7 +10,10 @@ class ApocalyptusWood : ModItem
     {
         Item.ResearchUnlockCount = 100;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Wood;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

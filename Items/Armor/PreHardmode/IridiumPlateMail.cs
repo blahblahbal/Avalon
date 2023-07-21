@@ -17,7 +17,7 @@ class IridiumPlateMail : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.defense = 9;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 1, 40, 0);
         Item.height = dims.Height;

@@ -3,6 +3,7 @@ using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace Avalon.Items.Tomes;
 
@@ -12,7 +13,10 @@ class TheWorld : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.Tomes;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
