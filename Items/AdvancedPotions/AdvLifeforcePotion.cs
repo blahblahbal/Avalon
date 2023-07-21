@@ -16,7 +16,10 @@ class AdvLifeforcePotion : ModItem
             new Color(136, 9, 0)
         };
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

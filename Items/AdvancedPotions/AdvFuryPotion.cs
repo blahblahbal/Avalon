@@ -12,7 +12,10 @@ class AdvFuryPotion : ModItem
         Item.ResearchUnlockCount = 30;
         ItemID.Sets.DrinkParticleColors[Type] = new Color[1] { Color.Lime };
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

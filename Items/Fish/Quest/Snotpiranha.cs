@@ -22,6 +22,10 @@ class Snotpiranha : ModItem
         Item.rare = ItemRarityID.Quest;
         Item.uniqueStack = true;
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.FishingQuestFish;
+    }
     public override bool IsQuestFish()
     {
         return true;

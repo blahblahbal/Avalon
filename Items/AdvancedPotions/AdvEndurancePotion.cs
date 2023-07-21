@@ -16,7 +16,10 @@ class AdvEndurancePotion : ModItem
             new Color(63, 62, 58)
         };
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

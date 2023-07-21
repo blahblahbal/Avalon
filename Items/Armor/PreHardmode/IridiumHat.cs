@@ -22,7 +22,10 @@ internal class IridiumHat : ModItem
         Item.value = Item.sellPrice(0, 1, 20);
         Item.height = dims.Height;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Headgear;
+    }
     public override bool IsArmorSet(Item head, Item body, Item legs)
     {
         return body.type == ModContent.ItemType<IridiumPlateMail>() && legs.type == ModContent.ItemType<IridiumPants>();

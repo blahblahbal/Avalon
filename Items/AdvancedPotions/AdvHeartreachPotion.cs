@@ -16,7 +16,10 @@ class AdvHeartreachPotion : ModItem
             new Color(250, 64, 188)
         };
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -10,7 +10,10 @@ class BleachedEbonyCandle : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.PlacableObjects;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

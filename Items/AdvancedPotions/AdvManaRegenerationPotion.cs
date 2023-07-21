@@ -16,7 +16,10 @@ class AdvManaRegenerationPotion : ModItem
             new Color(255, 144, 210)
         };
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BuffPotion;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

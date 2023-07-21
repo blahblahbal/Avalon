@@ -19,6 +19,10 @@ public class SixSidedDie : ModItem
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 6);
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().SixSidedDie = true;

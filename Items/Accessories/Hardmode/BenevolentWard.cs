@@ -31,6 +31,10 @@ class BenevolentWard : ModItem
             .AddTile(TileID.LunarCraftingStation)
             .Register();
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().BenevolentWard = true;

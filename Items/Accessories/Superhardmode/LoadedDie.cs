@@ -24,6 +24,10 @@ public class LoadedDie : ModItem
         player.GetModPlayer<AvalonPlayer>().LoadedDie = true;
         player.GetModPlayer<AvalonPlayer>().CrystalEdge = true;
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void AddRecipes()
     {
         Recipe.Create(Type)

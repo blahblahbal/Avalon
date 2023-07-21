@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
@@ -20,7 +21,10 @@ class RingofArrogance : ModItem
         Item.value = Item.sellPrice(0, 4);
         Item.height = dims.Height;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetDamage(DamageClass.Generic) += 0.2f;

@@ -25,6 +25,10 @@ class BronzeWatch : ModItem
     {
         if (player.accWatch < 1) player.accWatch = 1;
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void AddRecipes()
     {
         CreateRecipe(1)

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +11,10 @@ class ZincGreaves : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
+    }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Pants;
     }
     public override void AddRecipes()
     {

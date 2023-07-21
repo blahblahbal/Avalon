@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -21,6 +21,10 @@ class SapphireAmulet : ModItem
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 30);
         Item.height = dims.Height;
+    }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

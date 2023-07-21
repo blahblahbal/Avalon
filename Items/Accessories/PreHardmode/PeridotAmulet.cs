@@ -22,6 +22,10 @@ class PeridotAmulet : ModItem
         Item.value = Item.sellPrice(0, 0, 70);
         Item.height = dims.Height;
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

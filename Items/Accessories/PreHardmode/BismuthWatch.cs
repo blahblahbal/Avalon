@@ -28,6 +28,10 @@ class BismuthWatch : ModItem
             .AddTile(TileID.Tables)
             .AddTile(TileID.Chairs).Register();
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         if (player.accWatch < 3) player.accWatch = 3;

@@ -23,6 +23,10 @@ class ShadowPulse : ModItem
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void UpdateVanity(Player player)
     {
         player.GetModPlayer<AvalonPlayer>().PulseCharm = true;

@@ -26,7 +26,10 @@ public class ShimmerDye : ModItem
 
         Item.ResearchUnlockCount = 3;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Dye;
+    }
     public override void SetDefaults()
     {
         // Item.dye will already be assigned to this item prior to SetDefaults because of the above GameShaders.Armor.BindShader code in Load().

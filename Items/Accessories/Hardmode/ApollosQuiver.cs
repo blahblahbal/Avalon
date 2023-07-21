@@ -23,6 +23,10 @@ class ApollosQuiver : ModItem
         Item.value = Item.sellPrice(0, 7);
         Item.height = dims.Height;
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void AddRecipes()
     {
         Recipe.Create(Type)

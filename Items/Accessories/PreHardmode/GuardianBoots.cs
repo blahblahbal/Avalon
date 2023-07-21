@@ -24,6 +24,10 @@ class GuardianBoots : ModItem
         Item.value = Item.sellPrice(0, 1, 44, 0);
         Item.height = dims.Height;
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void AddRecipes()
     {
         CreateRecipe(1)

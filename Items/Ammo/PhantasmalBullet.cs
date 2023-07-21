@@ -11,7 +11,10 @@ class PhantasmalBullet : ModItem
     {
         Item.ResearchUnlockCount = 99;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Ammo;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

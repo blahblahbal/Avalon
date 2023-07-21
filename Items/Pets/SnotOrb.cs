@@ -11,6 +11,10 @@ class SnotOrb : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.LightPet;
+    }
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {
         if (player.whoAmI == Main.myPlayer && player.itemTime == 0)

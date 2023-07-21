@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -22,6 +22,10 @@ class DiamondAmulet : ModItem
         Item.value = Item.sellPrice(0, 0, 50);
         Item.height = dims.Height;
         Item.defense = 5;
+    }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
     }
     public override void AddRecipes()
     {

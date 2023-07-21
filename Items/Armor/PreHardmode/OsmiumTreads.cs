@@ -1,4 +1,4 @@
-﻿using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Bars;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -12,6 +12,10 @@ public class OsmiumTreads : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
+    }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Pants;
     }
     public override void SetDefaults()
     {

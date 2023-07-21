@@ -10,7 +10,10 @@ class Beak : ModItem
     {
         Item.ResearchUnlockCount = 25;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Material;
+    }
     public override void SetDefaults()
     {
         Item.autoReuse = true;

@@ -12,7 +12,10 @@ class RhodiumHeadgear : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Headgear;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

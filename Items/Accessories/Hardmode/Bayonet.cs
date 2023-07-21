@@ -29,6 +29,10 @@ class Bayonet : ModItem
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.Accessories;
+    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.BrokenWeaponry>()] = true;
