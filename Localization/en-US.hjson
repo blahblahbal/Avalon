@@ -18,6 +18,60 @@ Mods: {
 
 		CommonItemTooltip.TomeMaterial: Tome Material
 
+		VanillaItemRenames: {
+			CoinGun: Spend Shot
+			PurpleMucus: Purple Mucus
+			BloodyAmulet: Bloody Amulet
+
+			Solutions: {
+				Hallow: Hallow Solution
+				Mushrooms: Glowing Mushroom Solution
+				Purity: Purity Solution
+				Corruption: Corruption Solution
+				Crimson: Crimson Solution
+				Desert: Desert Solution
+				Snow: Snow Solution
+				Forest: Forest Solution
+			}
+		}
+
+		TooltipEdits: {
+			EvilPickaxe: Can mine Rhodium, Osmium, and Iridium
+			FishingLine:
+				'''
+				Fishing line will never break
+				Works in the vanity slot
+				'''
+			Blowpipes: For use with Blowpipes
+			TempleKey: Opens the lihzahrd temple door
+			PoisonDart: For use with Blowpipes and Blowgun
+
+			CoinGun: {
+				PartOne: Uses coins for ammo
+				PartTwo:
+					'''
+					Higher valued coins do more damage
+					'Knocks some cents into your enemies'
+					'''
+			}
+
+			PickaxeAxe: {
+				PartOne: 
+                '''
+                'Not to be confused with a hamdrill'
+                Can mine Chlorophyte, Xanthophyte, and Caesium Ore
+				'''
+			}
+
+			Drax: {
+				PartOne: 
+                '''
+                'Not to be confused with a picksaw'
+                Can mine Chlorophyte, Xanthophyte, and Caesium Ore
+				'''
+			}
+		}
+
 		Herbology: {
 			BenchName: Herbology Bench
 			Help: Help

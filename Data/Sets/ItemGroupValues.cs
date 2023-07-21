@@ -13,6 +13,6 @@ namespace Avalon.Data.Sets
         public const short HardmodeBars = 10510;
         public const short SuperHardmodeBars = 10515;
         public const short Shards = 10495;
-
+        public const short VanityBags = 625;
     }
 }

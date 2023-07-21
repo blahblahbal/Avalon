@@ -295,18 +295,18 @@ public class AvalonGlobalItem : GlobalItem
         {
             if (item.type == ItemID.BloodMoonStarter)
             {
-                tooltipLine.Text = "Bloody Amulet";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.BloodyAmulet");
             }
         }
         if (tooltipLine != null && ModContent.GetInstance<AvalonConfig>().VanillaRenames)
         {
             if (item.type == ItemID.CoinGun)
             {
-                tooltipLine.Text = "Spend Shot";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.CoinGun");
             }
             if (item.type == ItemID.PurpleMucos)
             {
-                tooltipLine.Text = "Purple Mucus";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.PurpleMucus");
             }
             if (item.type == ItemID.HighTestFishingLine)
             {
@@ -314,35 +314,35 @@ public class AvalonGlobalItem : GlobalItem
             }
             if (item.type == ItemID.BlueSolution)
             {
-                tooltipLine.Text = "Hallow Solution";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Hallow");
             }
             if (item.type == ItemID.DarkBlueSolution)
             {
-                tooltipLine.Text = "Glowing Mushroom Solution";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Mushrooms");
             }
             if (item.type == ItemID.GreenSolution)
             {
-                tooltipLine.Text = "Purity Solution";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Purity");
             }
             if (item.type == ItemID.PurpleSolution)
             {
-                tooltipLine.Text = "Corruption Solution";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Corruption");
             }
             if (item.type == ItemID.RedSolution)
             {
-                tooltipLine.Text = "Crimson Solution";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Crimson");
             }
             if (item.type == ItemID.SandSolution)
             {
-                tooltipLine.Text = "Desert Solution";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Desert");
             }
             if (item.type == ItemID.SnowSolution)
             {
-                tooltipLine.Text = "Snow Solution";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Snow");
             }
             if (item.type == ItemID.DirtSolution)
             {
-                tooltipLine.Text = "Forest Solution";
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Forest");
             }
             if (item.type == ItemID.FrostsparkBoots)
             {
@@ -369,7 +369,7 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     if (tooltip.Name == "Tooltip0")
                     {
-                        tooltip.Text = "Can mine Rhodium, Osmium, and Iridium";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.EvilPickaxe");
                     }
                 }
                 break;
@@ -378,7 +378,7 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     if (tooltip.Name == "Tooltip0")
                     {
-                        tooltip.Text = "Fishing line will never break\nWorks in the vanity slot";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.FishingLine");
                     }
                 }
                 break;
@@ -387,7 +387,7 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     if (tooltip.Name == "Tooltip0")
                     {
-                        tooltip.Text = "For use with Blowpipes";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.Blowpipes");
                     }
                 }
                 break;
@@ -396,7 +396,7 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     if (tooltip.Name == "Tooltip0")
                     {
-                        tooltip.Text = "Opens the lihzahrd temple door";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.TempleKey");
                     }
                 }
                 break;
@@ -405,7 +405,7 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     if (tooltip.Name == "Tooltip1")
                     {
-                        tooltip.Text = "For use with Blowpipes and Blowgun";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.PoisonDart");
                     }
                 }
                 break;
@@ -414,11 +414,11 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     if (tooltip.Name == "Tooltip0")
                     {
-                        tooltip.Text = "Uses coins for ammo - Higher valued coins do more damage";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.CoinGun.PartOne");
                     }
                     if (tooltip.Name == "Tooltip1")
                     {
-                        tooltip.Text = "'Knocks some cents into your enemies'";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.CoinGun.PartTwo");
                     }
                 }
                 break;
@@ -427,11 +427,11 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     if (tooltip.Name == "Tooltip0")
                     {
-                        tooltip.Text = "'Not to be confused with a hamdrill'";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.PickaxeAxe.PartOne");
                     }
                     if (tooltip.Name == "Tooltip1")
                     {
-                        tooltip.Text = "Can mine Chlorophyte, Xanthophyte, and Caesium Ore";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.PickaxeAxe.PartTwo");
                     }
                 }
                 break;
@@ -440,11 +440,11 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     if (tooltip.Name == "Tooltip0")
                     {
-                        tooltip.Text = "'Not to be confused with a picksaw'";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.Drax.PartOne");
                     }
                     if (tooltip.Name == "Tooltip1")
                     {
-                        tooltip.Text = "Can mine Chlorophyte, Xanthophyte, and Caesium Ore";
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.Drax.PartTwo");
                     }
                 }
                 break;

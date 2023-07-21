@@ -14,12 +14,12 @@ class InfestedCarcass : ModItem
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Infested Carcass");
-        //Tooltip.SetDefault("Summons Bacterium Prime");
-        //SacrificeTotal = 3;
         Item.ResearchUnlockCount = 3;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BossSpawners;
+    }
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.WormFood);

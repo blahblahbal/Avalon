@@ -11,7 +11,10 @@ class TheBeak : ModItem
     {
         Item.ResearchUnlockCount = 3;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.BossSpawners;
+    }
     public override void SetDefaults()
     {
         //Rectangle dims = this.GetDims();
