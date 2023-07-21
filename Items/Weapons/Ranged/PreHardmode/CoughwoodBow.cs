@@ -24,12 +24,12 @@ class CoughwoodBow : ModItem
         Item.rare = ItemRarityID.White;
         Item.width = 12;
         Item.height = 28;
-        Item.useTime = 20;
+        Item.useTime = 27;
         Item.knockBack = 0f;
         Item.shoot = ProjectileID.WoodenArrowFriendly;
         Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = Item.sellPrice(0, 0, 10, 0);
-        Item.useAnimation = 20;
+        Item.value = Item.sellPrice(0, 0, 0, 20);
+        Item.useAnimation = 27;
     }
     public override void AddRecipes()
     {

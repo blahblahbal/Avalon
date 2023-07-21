@@ -12,6 +12,6 @@ public class GlacierChunk1 : ModGore
     }
     public override Color? GetAlpha(Gore gore, Color lightColor)
     {
-        return new Color(255, 255, 255, 200);
+        return Color.White * (gore.timeLeft > 200f ? 200f / 255f : gore.timeLeft / 255f);
     }
 }
