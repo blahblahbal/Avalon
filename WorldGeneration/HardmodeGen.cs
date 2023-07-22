@@ -12,6 +12,7 @@ using System;
 using ReLogic.Utilities;
 using Avalon.Walls;
 using Avalon.Tiles.Contagion;
+using Avalon.Common;
 
 namespace Avalon.WorldGeneration;
 
@@ -19,8 +20,8 @@ public class HardmodeGen : ModSystem
 {
     public override void ModifyHardmodeTasks(List<GenPass> list)
     {
-        int evil = WorldGen.WorldGenParam_Evil;
-        if (evil == (int)WorldEvil.Contagion)
+        WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
+        if (evil == WorldEvil.Contagion)
         {
             int index2 = list.FindIndex(genpass => genpass.Name.Equals("Hardmode Good"));
             if (index2 != -1)

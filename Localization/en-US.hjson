@@ -5428,7 +5428,7 @@ Mods: {
 					HateCrowded: I can't concentrate. Please, quiet these people down.
 					LoveBiome: "{BiomeName} is so green! I love it."
 					LikeBiome: "{BiomeName} is super lush. I'd love to live here all the time."
-					DislikeBiome: "This place reminds me too much of home, before the invasions. I don't want to see this..."
+					DislikeBiome: This place reminds me too much of home, before the invasions. I don't want to see this...
 					HateBiome: I hate {BiomeName}.
 					LoveNPC: "{NPCName} is amazing! He doesn't charge an arm and a leg for pigments."
 					LikeNPC: I like {NPCName}.
