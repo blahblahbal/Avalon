@@ -5283,6 +5283,11 @@ Mods: {
 				DisplayName: Sky Insignia
 				Tooltip: ""
 			}
+
+			DarkMatterMonolith: {
+				DisplayName: Dark Matter Monolith
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -6154,6 +6159,11 @@ Mods: {
 			SkyFortress: {
 				DisplayName: Sky Fortress
 				TownNPCDialogueName: the Sky Fortress
+			}
+
+			DarkMatter: {
+				DisplayName: Dark Matter
+				TownNPCDialogueName: the Dark Matter
 			}
 		}
 

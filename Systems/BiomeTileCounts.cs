@@ -12,6 +12,7 @@ namespace Avalon.Systems;
 public class BiomeTileCounts : ModSystem
 {
     public const int DarkMatterTilesHardLimit = 250000;
+    
     public int WorldDarkMatterTiles;
     public int ContagionTiles { get; private set; }
     public int TropicsTiles { get; private set; }
@@ -47,7 +48,7 @@ public class BiomeTileCounts : ModSystem
                          tileCounts[ModContent.TileType<ContagionJungleGrass>()] +
                          tileCounts[ModContent.TileType<Snotsand>()] +
                          tileCounts[ModContent.TileType<YellowIce>()];
-
+        DarkMonolithTiles = tileCounts[ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>()];
         AshenOvergrowthTiles = tileCounts[TileID.AshGrass] + 
                                tileCounts[TileID.AshPlants];
         /*Main.SceneMetrics.JungleTileCount += tileCounts[ModContent.TileType<GreenIce>()];

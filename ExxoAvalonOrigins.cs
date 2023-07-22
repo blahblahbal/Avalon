@@ -17,6 +17,9 @@ using Avalon.Items.Weapons.Melee.Hardmode;
 using Microsoft.Xna.Framework;
 using System.Reflection;
 using System.IO;
+using ReLogic.Content;
+using Terraria.Graphics.Effects;
+using Avalon.Effects;
 
 namespace Avalon;
 
@@ -94,6 +97,12 @@ public class ExxoAvalonOrigins : Mod
         {
             ReplaceVanillaTextures();
         }
+        Asset<Effect> shader =
+            ModContent.Request<Effect>("Avalon/Effects/DarkMatterSkyShader", AssetRequestMode.ImmediateLoad);
+        SkyManager.Instance["Avalon:DarkMatter"] = new DarkMatterSky();
+        Filters.Scene["Avalon:DarkMatter"] = new Filter(
+            new DarkMatterScreenShader(new Ref<Effect>(shader.Value), "DarkMatterSky")
+                .UseColor(0.18f, 0.08f, 0.24f), EffectPriority.VeryHigh);
     }
     public override void Unload()
     {

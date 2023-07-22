@@ -58,6 +58,10 @@ public class AvalonPlayer : ModPlayer
     }
     #endregion
 
+    
+    public bool DarkMatterMonolith { get; set; }
+    public int DarkMatterTimeOut = 20;
+
     public bool InBossFight;
 
     public Vector2 MousePosition;
@@ -150,6 +154,11 @@ public class AvalonPlayer : ModPlayer
 
     public override void ResetEffects()
     {
+
+        if (DarkMatterTimeOut-- < 0)
+        {
+            DarkMatterMonolith = false;
+        }
         MagicCritDamage = 1f;
         MeleeCritDamage = 1f;
         RangedCritDamage = 1f;
