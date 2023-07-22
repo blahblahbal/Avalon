@@ -245,7 +245,7 @@ public class DarkMatterSky : CustomSky
 
     public override Color OnTileColor(Color inColor)
     {
-        return inColor; // new Color(126, 71, 107) * 0.55f;
+        return new Color(126, 71, 107) * 0.55f;
     }
 
 }

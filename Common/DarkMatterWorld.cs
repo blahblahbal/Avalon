@@ -2,10 +2,6 @@ using Avalon.Common.Players;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -15,7 +11,7 @@ namespace Avalon.Common
     {
         public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
         {
-            float DarkMatterStrength = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith && MonolithTilesInRange(Main.LocalPlayer) ? ModContent.GetInstance<BiomeTileCounts>().DarkMonolithTiles / 1 : 0;
+            float DarkMatterStrength = 0; // Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith && MonolithTilesInRange(Main.LocalPlayer) ? ModContent.GetInstance<BiomeTileCounts>().DarkMonolithTiles / 1 : 0;
             if (MonolithTilesInRange(Main.LocalPlayer))
             {
                 DarkMatterStrength = 1f;
@@ -33,9 +29,17 @@ namespace Avalon.Common
             backgroundColor.R = (byte)sunR;
             backgroundColor.G = (byte)sunG;
             backgroundColor.B = (byte)sunB;
-            tileColor.R -= (byte)(126f * DarkMatterStrength / 2.2f * (backgroundColor.R / 255f) * 1.6f);
-            tileColor.G -= (byte)(71f * DarkMatterStrength / 2.4f * (backgroundColor.G / 255f) * 1.5f);
-            tileColor.B -= (byte)(107f * DarkMatterStrength / 1.8f * (backgroundColor.B / 255f) * 1.8f);
+
+            tileColor.R -= (byte)(126f * DarkMatterStrength / 1.5f * (backgroundColor.R / 255f) * 1.5f);
+            tileColor.G -= (byte)(71f * DarkMatterStrength / 1.5f * (backgroundColor.G / 255f) * 1.5f);
+            tileColor.B -= (byte)(107f * DarkMatterStrength / 1.5f * (backgroundColor.B / 255f) * 1.5f);
+        }
+        public override void ModifyLightingBrightness(ref float scale)
+        {
+            if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith)
+            {
+                scale = 0.8f;
+            }
         }
         public static bool MonolithTilesInRange(Player p)
         {
@@ -46,7 +50,7 @@ namespace Avalon.Common
                 for (int j = point.Y - 200; j < point.Y + 200; j++)
                 {
                     Tile t = Framing.GetTileSafely(i, j);
-                    if (t.TileType == ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>())
+                    if (t.TileType == ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>() && t.TileFrameX >= 36)
                     {
                         return true;
                     }

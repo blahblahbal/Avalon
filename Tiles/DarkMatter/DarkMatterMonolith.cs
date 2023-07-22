@@ -3,6 +3,7 @@ using Avalon.Dusts;
 using Avalon.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -41,6 +42,11 @@ public class DarkMatterMonolith : ModTile
             Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith = true;
             Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterTimeOut = 2;
         }
+    }
+
+    public override IEnumerable<Item> GetItemDrops(int i, int j)
+    {
+        yield return new Item(ModContent.ItemType<Items.Placeable.Tile.DarkMatterMonolith>());
     }
 
     public override void AnimateTile(ref int frame, ref int frameCounter)
