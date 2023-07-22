@@ -11,7 +11,10 @@ class Boltstone : ModItem
     {
         Item.ResearchUnlockCount = 100;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.Gems;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

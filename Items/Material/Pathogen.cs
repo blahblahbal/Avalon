@@ -9,11 +9,12 @@ class Pathogen : ModItem
 {
     public override void SetStaticDefaults()
     {
-        //Tooltip.SetDefault("'Blech'");
-        //SacrificeTotal = 25;
         Item.ResearchUnlockCount = 25;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.Contagion;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

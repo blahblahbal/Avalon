@@ -14,7 +14,10 @@ class SuperStaminaPotion : ModItem
         Item.ResearchUnlockCount = 30;
         ItemID.Sets.DrinkParticleColors[Type] = new Color[1] { Color.Green };
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.StaminaPotions;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

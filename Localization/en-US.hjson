@@ -5071,7 +5071,7 @@ Mods: {
 
 			Sulphur: {
 				DisplayName: Sulphur
-				Tooltip: ""
+				Tooltip: Used at the catalyzer to exchange various items
 			}
 
 			PeridotHook: {

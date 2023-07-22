@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.Audio;
+using Terraria.ID;
 
 namespace Avalon.Items.Other;
 
@@ -11,7 +12,10 @@ class Quack : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = ContentSamples.CreativeHelper.ItemGroup.EverythingElse;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

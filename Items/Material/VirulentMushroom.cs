@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
@@ -9,7 +10,10 @@ class VirulentMushroom : ModItem
     {
         Item.ResearchUnlockCount = 25;
     }
-
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.Contagion;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

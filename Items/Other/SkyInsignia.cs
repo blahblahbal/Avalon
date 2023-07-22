@@ -10,11 +10,19 @@ namespace Avalon.Items.Other;
 
 class SkyInsignia : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.ItemNoGravity[Type] = true;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Item.width = dims.Width;
         Item.height = dims.Height;
+    }
+    public override void GrabRange(Player player, ref int grabRange)
+    {
+        grabRange = 78;
     }
     public override bool CanPickup(Player player)
     {
