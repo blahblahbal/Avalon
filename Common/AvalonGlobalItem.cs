@@ -82,7 +82,78 @@ public class AvalonGlobalItem : GlobalItem
 
         Recipe.Create(ItemID.IceTorch, 3).AddIngredient(ItemID.Torch, 3).AddIngredient(ModContent.ItemType<YellowIceBlock>());
     }
-
+    public override void ExtractinatorUse(int extractType, int extractinatorBlockType, ref int resultType, ref int resultStack)
+    {
+        if (extractType == 0 || extractType == ItemID.DesertFossil)
+        {
+            if (Main.rand.NextBool(3))
+            {
+                resultStack = 1;
+                if (Main.rand.NextBool(20))
+                {
+                    resultStack += Main.rand.Next(0, 2);
+                }
+                if (Main.rand.NextBool(30))
+                {
+                    resultStack += Main.rand.Next(0, 3);
+                }
+                if (Main.rand.NextBool(40))
+                {
+                    resultStack += Main.rand.Next(0, 4);
+                }
+                if (Main.rand.NextBool(50))
+                {
+                    resultStack += Main.rand.Next(0, 5);
+                }
+                if (Main.rand.NextBool(60))
+                {
+                    resultStack += Main.rand.Next(0, 6);
+                }
+                switch (Main.rand.Next(13))
+                {
+                    case 0:
+                        resultType = ModContent.ItemType<Items.Material.Ores.BronzeOre>();
+                        break;
+                    case 1:
+                        resultType = ModContent.ItemType<Items.Material.Ores.NickelOre>();
+                        break;
+                    case 2:
+                        resultType = ModContent.ItemType<Items.Material.Ores.ZincOre>();
+                        break;
+                    case 3:
+                        resultType = ModContent.ItemType<Items.Material.Ores.BismuthOre>();
+                        break;
+                    case 4:
+                        resultType = ModContent.ItemType<Items.Material.Ores.RhodiumOre>();
+                        break;
+                    case 5:
+                        resultType = ModContent.ItemType<Items.Material.Ores.OsmiumOre>();
+                        break;
+                    case 6:
+                        resultType = ModContent.ItemType<Items.Material.Ores.IridiumOre>();
+                        break;
+                    case 7:
+                        resultType = ModContent.ItemType<Items.Material.Ores.Tourmaline>();
+                        break;
+                    case 8:
+                        resultType = ModContent.ItemType<Items.Material.Ores.Peridot>();
+                        break;
+                    case 9:
+                        resultType = ModContent.ItemType<Items.Material.Ores.Zircon>();
+                        break;
+                    case 10:
+                        resultType = ModContent.ItemType<Items.Material.Ores.Heartstone>();
+                        break;
+                    case 11:
+                        resultType = ModContent.ItemType<Items.Material.Ores.Starstone>();
+                        break;
+                    case 12:
+                        resultType = ModContent.ItemType<Items.Material.Ores.Boltstone>();
+                        break;
+                }
+            }
+        }
+    }
     public void ShimmerTransmute(int From, int To)
     {
         Recipe ShimmerTransmute = Recipe.Create(From);
@@ -363,6 +434,24 @@ public class AvalonGlobalItem : GlobalItem
             //case ItemID.Vine:
             //    tooltips.Add(new TooltipLine(Mod, "Rope", "Can be climbed on"));
             //    break;
+            case ItemID.IceBlade:
+                foreach (TooltipLine tooltip in tooltips)
+                {
+                    if (tooltip.Name == "Tooltip0")
+                    {
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.IceBlade");
+                    }
+                }
+                break;
+            case ItemID.Frostbrand:
+                foreach (TooltipLine tooltip in tooltips)
+                {
+                    if (tooltip.Name == "Tooltip0")
+                    {
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.Frostbrand");
+                    }
+                }
+                break;
             case ItemID.DeathbringerPickaxe:
             case ItemID.NightmarePickaxe:
                 foreach (TooltipLine tooltip in tooltips)

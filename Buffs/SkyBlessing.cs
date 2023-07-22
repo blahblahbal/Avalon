@@ -22,9 +22,10 @@ public class SkyBlessing : ModBuff
     {
         //player.GetModPlayer<AvalonPlayer>().SkyBlessing = true;
         stacks = player.GetModPlayer<AvalonPlayer>().SkyStacks;
-        if (player.buffTime[buffIndex] == 0)
+        if (player.buffTime[buffIndex] == 1)
         {
             player.GetModPlayer<AvalonPlayer>().SkyStacks = 1;
+            stacks = 1;
         }
     }
 }

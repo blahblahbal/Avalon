@@ -100,7 +100,7 @@ public class AvalonPlayer : ModPlayer
 
     #region armor sets
     public bool SkyBlessing;
-    public int SkyStacks;
+    public int SkyStacks = 1;
     #endregion
 
     #region accessories

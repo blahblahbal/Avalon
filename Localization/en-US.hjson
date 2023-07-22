@@ -52,6 +52,8 @@ Mods: {
 			Blowpipes: For use with Blowpipes
 			TempleKey: Opens the lihzahrd temple door
 			PoisonDart: For use with Blowpipes and Blowgun
+			IceBlade: Shoots a giant snowflake
+			Frostbrand: Shoots a spread of giant snowflakes
 
 			CoinGun: {
 				PartOne: Uses coins for ammo
@@ -5418,20 +5420,20 @@ Mods: {
 				DisplayName: Librarian
 
 				TownNPCMood: {
-					Content: I am content.
-					NoHome: I hate not having a home.
-					FarFromHome: I am too far from home.
-					LoveSpace: I love having so much space.
-					DislikeCrowded: I dislike how crowded I am.
-					HateCrowded: I hate how crowded I am.
-					LoveBiome: I love {BiomeName}.
-					LikeBiome: I like {BiomeName}.
-					DislikeBiome: I dislike {BiomeName}.
+					Content: I'm feeling great. Thank you for providing this wonderful house for me.
+					NoHome: I would very much like a house, all these monsters remind me of my homeland.
+					FarFromHome: Could you please take me back to my house?
+					LoveSpace: The space here is very wide.
+					DislikeCrowded: There are too many people around. I can't strategize my next boss nuke!
+					HateCrowded: I can't concentrate. Please, quiet these people down.
+					LoveBiome: "{BiomeName} is so green! I love it."
+					LikeBiome: "{BiomeName} is super lush. I'd love to live here all the time."
+					DislikeBiome: "This place reminds me too much of home, before the invasions. I don't want to see this..."
 					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
+					LoveNPC: "{NPCName} is amazing! He doesn't charge an arm and a leg for pigments."
 					LikeNPC: I like {NPCName}.
 					DislikeNPC: I dislike {NPCName}.
-					HateNPC: I hate {NPCName}.
+					HateNPC: "{NPCName} gives me the chills. He reminds me of the monsters that invaded."
 					LikeNPC_Princess: I like {NPCName}.
 					Princess_LovesNPC: I like {NPCName}.
 				}
@@ -5460,6 +5462,8 @@ Mods: {
 			ContaminatedBunny.DisplayName: Contaminated Bunny
 			ContaminatedGoldfish.DisplayName: Contaminated Goldfish
 			ContaminatedPenguin.DisplayName: Contaminated Penguin
+			BaskingSpewer.DisplayName: Basking Spewer
+			GreenPigron.DisplayName: Pigron
 		}
 
 		Buffs: {
