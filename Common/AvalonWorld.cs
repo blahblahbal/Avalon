@@ -97,8 +97,8 @@ public class AvalonWorld : ModSystem
 
     public override void SaveWorldData(TagCompound tag)
     {
-        tag["RhodiumOre"] = (byte?)RhodiumOre;
-        tag["WorldEvil"] = (byte)WorldEvil;
+        tag["Avalon:RhodiumOre"] = (byte?)RhodiumOre;
+        tag["Avalon:WorldEvil"] = (byte)WorldEvil;
         AvalonConfig config = ModContent.GetInstance<AvalonConfig>();
         Dictionary<string, AvalonConfig.WorldDataValues> tempDict = config.GetWorldData();
         AvalonConfig.WorldDataValues worldData;
@@ -134,12 +134,17 @@ public class AvalonWorld : ModSystem
             JungleLocationX = tag.GetAsInt("Avalon:JungleX");
         }
 
+        if (tag.ContainsKey("Avalon:RhodiumOre"))
+        {
+            RhodiumOre = (RhodiumVariant)tag.Get<byte>("Avalon:RhodiumOre");
+        }
+
         if (tag.ContainsKey("RhodiumOre"))
         {
             RhodiumOre = (RhodiumVariant)tag.Get<byte>("RhodiumOre");
         }
 
-        WorldEvil = (WorldEvil)(tag.Get<byte?>("WorldEvil") ?? WorldGen.WorldGenParam_Evil);
+        WorldEvil = (WorldEvil)(tag.Get<byte?>("Avalon:WorldEvil") ?? WorldGen.WorldGenParam_Evil);
 
         for (var i = 0; i < Main.tile.Width; ++i)
             for (var j = 0; j < Main.tile.Height; ++j)

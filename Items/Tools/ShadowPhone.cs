@@ -356,6 +356,10 @@ class ShadowPhoneJungleTropics : ModItem
     {
         bool canSpawn = false;
         int num = AvalonWorld.JungleLocationX;
+        if (AvalonWorld.JungleLocationX == 0)
+        {
+            num = Main.maxTilesX - Main.dungeonX;
+        }
         Main.NewText(num);
         int num2 = 100;
         int num3 = num2 / 2;
