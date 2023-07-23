@@ -58,7 +58,7 @@ public class AvalonGlobalNPC : GlobalNPC
 
         return 0;
     }
-
+    
     public override void OnKill(NPC npc)
     {
         if (npc.type == NPCID.SkeletronHead && !NPC.downedBoss3)
@@ -463,6 +463,56 @@ public class AvalonGlobalNPC : GlobalNPC
             if (Main.rand.NextBool(9))
             {
                 target.AddBuff(ModContent.BuffType<Unloaded>(), 60 * 7);
+            }
+        }
+    }
+    public static bool SpikeCollision2(Vector2 Position, int Width, int Height)
+    {
+        int LowX = (int)((Position.X - 2f) / 16f); // - Radius;
+        int HighX = (int)((Position.X + (float)Width) / 16f); // + Radius;
+        int LowY = (int)((Position.Y - 2f) / 16f); // - Radius;
+        int HighY = (int)((Position.Y + (float)Height) / 16f); // + Radius;
+        if (LowX < 0)
+        {
+            LowX = 0;
+        }
+        if (HighX > Main.maxTilesX)
+        {
+            HighX = Main.maxTilesX;
+        }
+        if (LowY < 0)
+        {
+            LowY = 0;
+        }
+        if (HighY > Main.maxTilesY)
+        {
+            HighY = Main.maxTilesY;
+        }
+        for (int i = LowX; i <= HighX; i++)
+        {
+            for (int j = LowY; j <= HighY; j++)
+            {
+                if (Main.tile[i, j] != null && Main.tile[i, j].HasTile && (Main.tile[i, j].TileType == ModContent.TileType<Tiles.DemonSpikescale>() || Main.tile[i, j].TileType == ModContent.TileType<Tiles.BloodiedSpike>() || Main.tile[i, j].TileType == ModContent.TileType<Tiles.NastySpike>()))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public override void PostAI(NPC npc)
+    {
+        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SpikeTimer++;
+        if (npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SpikeTimer >= 60)
+        {
+            if (!npc.townNPC && npc.lifeMax > 5 && !npc.dontTakeDamage && !npc.noTileCollide && SpikeCollision2(npc.position, npc.width, npc.height))
+            {
+                NPC.HitInfo hit = new NPC.HitInfo();
+                hit.Damage = 30 + (int)(npc.defense / 2);
+                hit.HitDirection = 0;
+                hit.Knockback = 0;
+                npc.StrikeNPC(hit);
+                npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SpikeTimer = 0;
             }
         }
     }

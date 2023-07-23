@@ -375,6 +375,10 @@ public class AvalonGlobalItem : GlobalItem
             {
                 tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.CoinGun");
             }
+            if (item.type == ItemID.FieryGreatsword)
+            {
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.FieryGreatsword");
+            }
             if (item.type == ItemID.PurpleMucos)
             {
                 tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.PurpleMucus");

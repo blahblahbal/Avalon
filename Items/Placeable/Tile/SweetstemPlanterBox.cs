@@ -14,6 +14,6 @@ class SweetstemPlanterBox : ModItem
     {
         Item.CloneDefaults(ItemID.BlinkrootPlanterBox);
         Item.createTile = ModContent.TileType<Tiles.PlanterBoxes>();
-        Item.placeStyle = 0;
+        Item.placeStyle = 3;
     }
 }

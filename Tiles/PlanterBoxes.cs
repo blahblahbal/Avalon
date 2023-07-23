@@ -16,18 +16,15 @@ namespace Avalon.Tiles
             Main.tileSolidTop[Type] = true;
             Main.tileSolid[Type] = true;
             Main.tileNoAttach[Type] = true;
-            Main.tileLavaDeath[Type] = true;
+            Main.tileLavaDeath[Type] = false;
             TileID.Sets.IgnoresNearbyHalfbricksWhenDrawn[Type] = true;
-            //TileObjectData.newTile.CoordinateHeights = new int[] { 16 };
-            //TileObjectData.newTile.CoordinateWidth = 16;
-            //TileObjectData.newTile.CoordinatePadding = 2;
-            //TileObjectData.newTile.StyleHorizontal = false;
-            //TileObjectData.newTile.StyleMultiplier = 4;
-            //TileObjectData.newTile.StyleWrapLimit = 4;
-            //TileObjectData.newTile.UsesCustomCanPlace = false;
-            
-            //TileObjectData.newTile.LavaDeath = true;
-            //TileObjectData.addTile(Type);
+            TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
+            TileObjectData.newTile.CoordinateHeights = new int[] { 16 };
+            TileObjectData.newTile.CoordinateWidth = 16;
+            TileObjectData.newTile.CoordinatePadding = 2;
+            TileObjectData.newTile.StyleHorizontal = false;
+            TileObjectData.newTile.LavaDeath = false;
+            TileObjectData.addTile(Type);
             AddMapEntry(new Color(191, 142, 111));
             TileID.Sets.DisableSmartCursor[Type] = true;
             AdjTiles = new int[] { TileID.PlanterBox };
@@ -37,7 +34,7 @@ namespace Avalon.Tiles
         public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
         {
             Tile tile = Main.tile[i, j];
-            int num = tile.TileType;
+            int tType = tile.TileType;
             Rectangle rectangle = new Rectangle(-1, -1, 0, 0);
             Tile tile23 = Main.tile[i - 1, j];
             if (tile23 == null)
@@ -65,15 +62,15 @@ namespace Avalon.Tiles
                 {
                     num23 = -1;
                 }
-                if (num23 == num && num12 == num)
+                if (num23 == tType && num12 == tType)
                 {
                     rectangle.X = 18;
                 }
-                else if (num23 == num && num12 != num)
+                else if (num23 == tType && num12 != tType)
                 {
                     rectangle.X = 36;
                 }
-                else if (num23 != num && num12 == num)
+                else if (num23 != tType && num12 == tType)
                 {
                     rectangle.X = 0;
                 }

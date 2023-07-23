@@ -12,10 +12,10 @@ public class IslandHouse : ModHook
 {
     protected override void Apply()
     {
-        IL_WorldGen.IslandHouse += BlahIsBad;
+        IL_WorldGen.IslandHouse += IL_IslandHouse;
     }
 
-    private void BlahIsBad(ILContext il)
+    private void IL_IslandHouse(ILContext il)
     {
         ILCursor c = new(il);
         try

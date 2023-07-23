@@ -11,7 +11,7 @@ public class CaesiumForge : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(76, 255, 0), LanguageManager.Instance.GetText("Caesium Forge"));
+        AddMapEntry(new Color(76, 255, 0), Language.GetText("Mods.Avalon.Tiles.CaesiumForge.MapEntry0"));
         Main.tileFrameImportant[Type] = true;
         AnimationFrameHeight = 36;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
@@ -24,19 +24,11 @@ public class CaesiumForge : ModTile
 
     public override void AnimateTile(ref int frame, ref int frameCounter)
     {
-        frameCounter++;
-        if (frameCounter > 4)
+        if (++frameCounter > 3)
         {
             frameCounter = 0;
-            frame++;
-            if (frame > 3) frame = 0;
+            if (++frame > 3) frame = 0;
         }
-        //frame = Main.tileFrame[TileID.AdamantiteForge];
-    }
-
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 48, 32, ModContent.ItemType<Items.Placeable.Crafting.CaesiumForge>());
     }
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {

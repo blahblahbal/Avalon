@@ -1,14 +1,10 @@
-Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on content while keeping to a generally vanilla feel. As of now, there are:
-- Over 1200 items
-- Over 100 NPCs, including 7 bosses and 2 town NPCs (plans for more eventually)
-- Several new structures, including Ice Shrines, the Evil Shrine, the Temple of the Observer, the Hellcastle, and the Sky Fortress
+Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on content while keeping to a generally vanilla feel. For this Pre-hardmode patch, there are:
+- Several new structures, including the Ice Shrine, the Lava Shrine, and the Evil Shrine.
 - A new world evil, the Contagion, which is an alternate to the Corruption and Crimson
-- Plans for the Tropics, an alternate to the Jungle, which will be complete with alternates to everything the Jungle has to offer
-- Superhardmode, which is currently unfinished, and is after Hardmode - activated after killing the Wall of Steel, it will increase enemy health, damage, and defense, as well as add several new enemies to the spawnpool
-- Plans for a new final boss, fought after the end of Superhardmode, Ultrablivion
-- A stamina mechanic, which is completely optional, but allows you to do things such as rocket jumping, teleporting, dashing, sprinting, wall climbing, and swimming without the need for an accessory
+- A stamina mechanic, which is completely optional, but allows you to do things such as rocket jumping, teleporting, dashing, and sprinting without the need for an accessory
 - Several new prefixes (including some for armor only)
 - Mystical Tomes, which are similar to accessories, but only grant stat boosts
+- And some other various things
 
 
 
@@ -16,9 +12,7 @@ Credits:
 imkSushi for starting the porting work
 Liburia for help with UI
 The tModLoader team for tModLoader, and for ExampleMod, which was a lot of help in everything
-The Tremor team for some generic code from their opensource mod
 Jopojelly for help with the code and also for Cheat Sheet
-0x0ade for his TerrariaHooks mod - it enables several major features
 Fox for some code
 Ghasttear for a lot of code
 Optical Starline for quite a bit of code

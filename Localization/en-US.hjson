@@ -22,6 +22,7 @@ Mods: {
 			CoinGun: Spend Shot
 			PurpleMucus: Purple Mucus
 			BloodyAmulet: Bloody Amulet
+			FieryGreatsword: Volcanic Greatsword
 
 			Solutions: {
 				Hallow: Hallow Solution
@@ -5290,6 +5291,71 @@ Mods: {
 				DisplayName: Dark Matter Monolith
 				Tooltip: ""
 			}
+
+			CrimsonAltar: {
+				DisplayName: Crimson Altar
+				Tooltip: ""
+			}
+
+			DemonAltar: {
+				DisplayName: Demon Altar
+				Tooltip: ""
+			}
+
+			IckyAltar: {
+				DisplayName: Icky Altar
+				Tooltip: ""
+			}
+
+			FallenStarBlock: {
+				DisplayName: Fallen Star Block
+				Tooltip: ""
+			}
+
+			BloodiedSpike: {
+				DisplayName: Bloodied Spike
+				Tooltip: ""
+			}
+
+			DemonSpikeScale: {
+				DisplayName: Demon Spike Scale
+				Tooltip: ""
+			}
+
+			NastySpike: {
+				DisplayName: Nasty Spike
+				Tooltip: ""
+			}
+
+			BacteriumPrimeTrophy: {
+				DisplayName: Bacterium Prime Trophy
+				Tooltip: ""
+			}
+
+			EchoDye: {
+				DisplayName: Echo Dye
+				Tooltip: ""
+			}
+
+			UnderwearBody: {
+				DisplayName: Underwear Body
+				Tooltip: ""
+			}
+
+			UnderwearFemale: {
+				DisplayName: Underwear Female
+				Tooltip: ""
+			}
+
+			UnderwearMale: {
+				DisplayName: Underwear Male
+				Tooltip: ""
+			}
+
+			LavaDye: {
+				DisplayName: Lava Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5984,6 +6050,7 @@ Mods: {
 		}
 
 		Tiles: {
+			CaesiumForge.MapEntry: Caesium Forge
 			MonsterBanner.MapEntry: Banner
 			PlacedBars.MapEntry: Placed Bar
 			Boltstone.MapEntry: Boltstone
@@ -6050,12 +6117,12 @@ Mods: {
 
 			PlatinumChest: {
 				$parentVal: MapEntry0: Platinum Chest
-				MapEntry0: Mods.Avalon.Tiles.PlatinumChest.MapEntry0
+				MapEntry0: Platinum Chest
 			}
 
 			LockedChests: {
-				$parentVal: MapEntry0: Locked Chests
-				MapEntry0: Mods.Avalon.Tiles.LockedChests.MapEntry0
+				$parentVal: MapEntry0: Locked Chest
+				MapEntry0: Locked Chest
 			}
 
 			Crates.MapEntry: Crates
@@ -6140,7 +6207,7 @@ Mods: {
 
 			DungeonAltColors: {
 				DisplayName: Dungeon Alt Colors
-				TownNPCDialogueName: the Dungeon Alt Colors
+				TownNPCDialogueName: the Dungeon
 			}
 
 			UndergroundContagion: {

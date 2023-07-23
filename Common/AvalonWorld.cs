@@ -94,7 +94,6 @@ public class AvalonWorld : ModSystem
         tSick = 0;
         //Im not too fimiliar how contagion world tags work but imo it would be best if it was reset in an OnWorldUnload and OnWorldLoad somewhere
     }
-
     public override void SaveWorldData(TagCompound tag)
     {
         tag["Avalon:RhodiumOre"] = (byte?)RhodiumOre;
@@ -118,17 +117,11 @@ public class AvalonWorld : ModSystem
 
         AvalonConfig.Save(config);
 
-        tag["Avalon:DungeonX"] = DungeonLocationX;
         tag["Avalon:JungleX"] = JungleLocationX;
     }
 
     public override void LoadWorldData(TagCompound tag)
     {
-        if (tag.ContainsKey("Avalon:DungeonX"))
-        {
-            DungeonLocationX = tag.GetAsInt("Avalon:DungeonX");
-        }
-
         if (tag.ContainsKey("Avalon:JungleX"))
         {
             JungleLocationX = tag.GetAsInt("Avalon:JungleX");
@@ -153,7 +146,10 @@ public class AvalonWorld : ModSystem
 
 
     }
-
+    public override void PreUpdateWorld()
+    {
+        Main.tileSolidTop[ModContent.TileType<FallenStarTile>()] = Main.dayTime;
+    }
     /// <inheritdoc />
     public override void PreWorldGen()
     {
@@ -171,7 +167,6 @@ public class AvalonWorld : ModSystem
     public override void PostUpdateWorld()
     {
         float num2 = 3E-05f * (float)WorldGen.GetWorldUpdateRate();
-
         // float num3 = 1.5E-05f * (float)Main.worldRate;
         for (int num4 = 0; num4 < Main.maxTilesX * Main.maxTilesY * num2; num4++)
         {
@@ -201,7 +196,7 @@ public class AvalonWorld : ModSystem
             {
                 num10 = Main.maxTilesY - 10;
             }
-
+            
             #region planter box grass growth
             if (Main.tile[num5, num6].TileType == ModContent.TileType<PlanterBoxes>())
             {

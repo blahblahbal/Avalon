@@ -38,7 +38,7 @@ class ShadowPhone : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.SetDefaults(ModContent.ItemType<ShadowPhoneHome>());
@@ -46,16 +46,8 @@ class ShadowPhone : ModItem
     }
     public override bool? UseItem(Player player)
     {
-        if (player.altFunctionUse == 2)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, player.position);
-            Item.SetDefaults(ModContent.ItemType<ShadowPhoneHome>());
-        }
-        else
-        {
-            player.Shellphone_Spawn();
-            SoundEngine.PlaySound(SoundID.Item6, player.position);
-        }
+        player.Shellphone_Spawn();
+        SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
 
@@ -99,7 +91,7 @@ class ShadowPhoneDungeon : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.SetDefaults(ModContent.ItemType<ShadowPhoneJungleTropics>());
@@ -107,16 +99,8 @@ class ShadowPhoneDungeon : ModItem
     }
     public override bool? UseItem(Player player)
     {
-        if (player.altFunctionUse == 2)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, player.position);
-            Item.SetDefaults(ModContent.ItemType<ShadowPhoneJungleTropics>());
-        }
-        else
-        {
-            DungeonPort(player);
-            SoundEngine.PlaySound(SoundID.Item6, player.position);
-        }
+        DungeonPort(player);
+        SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
 
@@ -212,7 +196,7 @@ class ShadowPhoneOcean : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.SetDefaults(ModContent.ItemType<ShadowPhoneHell>());
@@ -220,16 +204,8 @@ class ShadowPhoneOcean : ModItem
     }
     public override bool? UseItem(Player player)
     {
-        if (player.altFunctionUse == 2)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, player.position);
-            Item.SetDefaults(ModContent.ItemType<ShadowPhoneHell>());
-        }
-        else
-        {
-            player.MagicConch();
-            SoundEngine.PlaySound(SoundID.Item6, player.position);
-        }
+        player.MagicConch();
+        SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
     public override void UpdateInventory(Player player)
@@ -272,7 +248,7 @@ class ShadowPhoneHell : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.SetDefaults(ModContent.ItemType<ShadowPhoneRandom>());
@@ -280,16 +256,8 @@ class ShadowPhoneHell : ModItem
     }
     public override bool? UseItem(Player player)
     {
-        if (player.altFunctionUse == 2)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, player.position);
-            Item.SetDefaults(ModContent.ItemType<ShadowPhoneRandom>());
-        }
-        else
-        {
-            player.DemonConch();
-            SoundEngine.PlaySound(SoundID.Item6, player.position);
-        }
+        player.DemonConch();
+        SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
     public override void UpdateInventory(Player player)
@@ -346,7 +314,7 @@ class ShadowPhoneJungleTropics : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.SetDefaults(ModContent.ItemType<ShadowPhoneOcean>());
@@ -360,15 +328,14 @@ class ShadowPhoneJungleTropics : ModItem
         {
             num = Main.maxTilesX - Main.dungeonX;
         }
-        Main.NewText(num);
         int num2 = 100;
         int num3 = num2 / 2;
-        int teleportStartY = 250;
-        int teleportRangeY = 80;
+        int teleportStartY = 300;
+        int teleportRangeY = 50;
         Player.RandomTeleportationAttemptSettings settings = new Player.RandomTeleportationAttemptSettings
         {
             mostlySolidFloor = true,
-            avoidAnyLiquid = true,
+            avoidAnyLiquid = false,
             avoidLava = true,
             avoidHurtTiles = true,
             avoidWalls = true,
@@ -448,7 +415,7 @@ class ShadowPhoneRandom : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.SetDefaults(ModContent.ItemType<ShadowPhone>());
@@ -456,16 +423,8 @@ class ShadowPhoneRandom : ModItem
     }
     public override bool? UseItem(Player player)
     {
-        if (player.altFunctionUse == 2)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, player.position);
-            Item.SetDefaults(ModContent.ItemType<ShadowPhone>());
-        }
-        else
-        {
-            player.TeleportationPotion();
-            SoundEngine.PlaySound(SoundID.Item6, player.position);
-        }
+        player.TeleportationPotion();
+        SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
 
@@ -498,6 +457,10 @@ class ShadowPhoneHome : ModItem
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.useAnimation = 30;
         Item.height = dims.Height;
+    }
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = 0;
     }
     public override bool CanRightClick()
     {
@@ -548,21 +511,13 @@ class ShadowPhoneHome : ModItem
     }
     public override bool? UseItem(Player player)
     {
-        if (player.altFunctionUse == 2)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, player.position);
-            Item.SetDefaults(ModContent.ItemType<ShadowPhoneDungeon>());
-        }
-        else
-        {
-            player.Spawn(PlayerSpawnContext.RecallFromItem);
-            SoundEngine.PlaySound(SoundID.Item6, player.position);
-        }
+        player.Spawn(PlayerSpawnContext.RecallFromItem);
+        SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.SetDefaults(ModContent.ItemType<ShadowPhoneDungeon>());
