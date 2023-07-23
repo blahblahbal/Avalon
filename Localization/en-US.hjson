@@ -5290,6 +5290,11 @@ Mods: {
 				DisplayName: Dark Matter Monolith
 				Tooltip: ""
 			}
+
+			ObsidianGlaive: {
+				DisplayName: Obsidian Glaive
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5402,6 +5407,7 @@ Mods: {
 			CaesiumFlail.DisplayName: Caesium Flail
 			CaesiumPike.DisplayName: Caesium Pike
 			CaesiumMace.DisplayName: Caesium Mace
+			ObsidianGlaive.DisplayName: Obsidian Glaive
 		}
 
 		NPCs: {

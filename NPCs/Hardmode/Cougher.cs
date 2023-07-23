@@ -29,9 +29,9 @@ public class Cougher : ModNPC
     };
     static SoundStyle CoughSpecial = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCoughSpecial")
     {
-        Volume = 0.8f,
+        Volume = 1f,
         Pitch = 0f,
-        PitchVariance = 0.1f,
+        PitchVariance = 0f,
         MaxInstances = 10,
     };
     public override void SetDefaults()
@@ -271,7 +271,7 @@ public class Cougher : ModNPC
         }
 
         float maxRotate = 0.4f;
-        NPC.rotation = MathHelper.Clamp(NPC.velocity.X * 0.04f, -maxRotate, maxRotate);
+        NPC.rotation = MathHelper.Clamp((NPC.position.X - NPC.oldPosition.X) * 0.1f, -maxRotate, maxRotate);
     }
 
     public override void FindFrame(int frameHeight)
