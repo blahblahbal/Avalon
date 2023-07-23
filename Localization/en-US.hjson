@@ -5317,6 +5317,12 @@ Mods: {
 				Tooltip: ""
 			}
 
+			ObsidianGlaive: {
+				DisplayName: Obsidian Glaive
+				Tooltip: ""
+			}
+		}
+
 			DemonSpikeScale: {
 				DisplayName: Demon Spike Scale
 				Tooltip: ""
@@ -5468,6 +5474,7 @@ Mods: {
 			CaesiumFlail.DisplayName: Caesium Flail
 			CaesiumPike.DisplayName: Caesium Pike
 			CaesiumMace.DisplayName: Caesium Mace
+			ObsidianGlaive.DisplayName: Obsidian Glaive
 		}
 
 		NPCs: {
