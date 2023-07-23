@@ -25,6 +25,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.UI;
 using Terraria.Utilities;
+using Terraria.GameContent;
 
 namespace Avalon.Common;
 
@@ -93,6 +94,15 @@ public class AvalonWorld : ModSystem
         totalSick2 = 0;
         tSick = 0;
         //Im not too fimiliar how contagion world tags work but imo it would be best if it was reset in an OnWorldUnload and OnWorldLoad somewhere
+    }
+    public override void PostAddRecipes()
+    {
+        //ItemTrader t = new ItemTrader();
+        //if (t.TryGetTradeOption(new() { type = ItemID.PlatinumBar, stack = 1 }, out var option))
+        //{
+        //    option.GivingItemStack = ModContent.ItemType<Items.Material.Bars.BismuthBar>();
+        //}
+        ItemTrader.ChlorophyteExtractinator = Hooks.Extractinator.CreateAvalonChlorophyteExtractinator();
     }
     public override void SaveWorldData(TagCompound tag)
     {
