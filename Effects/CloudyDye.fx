@@ -27,8 +27,8 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     
     float2 cloudCoords2 = (coords * uImageSize0 - uSourceRect.xy * 0.3) / float2(uImageSize1.x, uImageSize1.y);
     float cloud2 = tex2D(uImage1, cloudCoords2 + float2(sin(uTime * 0.01) * 4, sin(uTime * 0.005) * 2));
-    float4 color2 = tex2D(uImage0, coords + float2(((cloud * 10) - 5) / uImageSize0.x, 0));
-    color.rgb += color2 * cloud2 * 0.5;
+    float4 color2 = tex2D(uImage0, coords + float2(((cloud * 10) - 5) / uImageSize0.x, ((cloud * 5) - 2.5) / uImageSize0.y));
+    color.rgb += color2 * cloud2 * 0.8;
         
         
     if (!any(color))

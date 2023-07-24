@@ -1,4 +1,4 @@
-using Avalon.Rarities;
+using Avalon.Items.Material;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
@@ -8,19 +8,19 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Dyes;
 
-public class CursedFlameDye : ModItem
+public class PathogenDye : ModItem
 {
     public override void SetStaticDefaults()
     {
         // Avoid loading assets on dedicated servers. They don't use graphics cards.
         if (!Main.dedServ)
         {
-            // The following code creates an effect (shader) reference and associates it with this item's type Id.
+            // The following code creates an effect (shader) reference and associates it with this item's type ID.
             GameShaders.Armor.BindShader(
                 Item.type,
                 new ArmorShaderData(
-                    new Ref<Effect>(Mod.Assets.Request<Effect>("Effects/CursedFlameDye", AssetRequestMode.ImmediateLoad)
-                        .Value), "CursedFlameDye").UseImage("Images/Misc/Perlin") // Be sure to update the effect path and pass name here.
+                    new Ref<Effect>(Mod.Assets.Request<Effect>("Effects/PathogenDye", AssetRequestMode.ImmediateLoad)
+                        .Value), "PathogenDye").UseImage("Images/DSTNoise") // Be sure to update the effect path and pass name here.
             );
         }
 
@@ -40,8 +40,8 @@ public class CursedFlameDye : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(2)
-            .AddIngredient(ItemID.BottledWater, 2)
-            .AddIngredient(ItemID.CursedFlame)
+            .AddIngredient(ItemID.BottledWater,2)
+            .AddIngredient(ModContent.ItemType<Pathogen>())
             .AddTile(TileID.DyeVat)
             .Register();
     }
