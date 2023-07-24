@@ -14,7 +14,7 @@ public class CloudyDye : ModItem
         // Avoid loading assets on dedicated servers. They don't use graphics cards.
         if (!Main.dedServ)
         {
-            // The following code creates an effect (shader) reference and associates it with this item's type Id.
+            // The following code creates an effect (shader) reference and associates it with this item's type ID.
             GameShaders.Armor.BindShader(
                 Item.type,
                 new ArmorShaderData(
@@ -35,5 +35,13 @@ public class CloudyDye : ModItem
         Item.CloneDefaults(ItemID.GelDye);
         Item.rare = ItemRarityID.Orange;
         Item.dye = dye;
+    }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ItemID.BottledWater)
+            .AddIngredient(ItemID.Cloud)
+            .AddTile(TileID.DyeVat)
+            .Register();
     }
 }

@@ -268,7 +268,6 @@ public class AvalonPlayer : ModPlayer
         rewardPool.Add(ModContent.ItemType<Items.Dyes.StoneDye>());
         rewardPool.Add(ModContent.ItemType<Items.Dyes.AquaDye>());
         rewardPool.Add(ModContent.ItemType<Items.Dyes.LavaDye>());
-        rewardPool.Add(ModContent.ItemType<Items.Dyes.CloudyDye>());
     }
     public bool PotionSicknessSoundPlayed;
     public override void PostUpdateBuffs()

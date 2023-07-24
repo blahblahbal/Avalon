@@ -36,24 +36,70 @@ public abstract class Planet : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Trail");
+        float scale = 1f;
+        Color planetColor = Color.White;
+        switch (PlanetName)
+        {
+            case "Mercury":
+                scale = 0.37f;
+                //planetColor = new Color(206, 143, 90);
+                break;
+            case "Venus":
+                scale = 0.75f;
+                planetColor = new Color(222, 186, 135);
+                break;
+            case "Earth":
+                scale = 0.75f;
+                planetColor = new Color(86, 212, 251);
+                break;
+            case "Mars":
+                scale = 0.6f;
+                planetColor = new Color(214, 74, 61);
+                break;
+            case "Jupiter":
+                scale = 2.5f;
+                planetColor = new Color(206, 143, 90);
+                break;
+            case "Saturn":
+                scale = 1.8f;
+                planetColor = new Color(228, 197, 138);
+                break;
+            case "Uranus":
+                scale = 1.3f;
+                planetColor = new Color(57, 116, 186);
+                break;
+            case "Neptune":
+                scale = 1.4f;
+                planetColor = new Color(64, 106, 255);
+                break;
+            case "Pluto":
+                scale = 0.37f;
+                planetColor = new Color(234, 219, 198);
+                break;
+        }
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
 
         int start = 1;
         if (PlanetName == "Mercury" || PlanetName == "Pluto") start = 3;
-        if (PlanetName == "Neptune") start = 4;
+        if (PlanetName == "Neptune" || PlanetName == "Uranus") start = 4;
         float oof = 1f;
         for (int i = start; i < Projectile.oldPos.Length; i++)
         {
+            if (PlanetName == "Jupiter")
+            {
+               
+            }
+            scale *= 0.98f;
             oof -= 0.005f;
-            Color c = Color.White;
+            Color c = planetColor;
             c *= oof;
 
             //Main.NewText(c.A);
             Vector2 drawPos = Projectile.oldPos[i] + new Vector2(Projectile.width / 2, Projectile.height / 2) - Main.screenPosition;
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-            Main.EntitySpriteDraw(texture, drawPos, frame, c, Projectile.oldRot[i] + 1.57f, frameOrigin, 1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, drawPos, frame, c, Projectile.oldRot[i] + 1.57f, frameOrigin, scale, SpriteEffects.None, 0);
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
         }

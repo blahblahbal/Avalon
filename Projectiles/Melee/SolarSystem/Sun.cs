@@ -319,8 +319,7 @@ public class Sun : ModProjectile
             else if (Projectile.ai[1] == 1) // sticking to cursor
             {
                 Projectile.timeLeft = 300;
-                float vecX = Main.mouseX + Main.screenPosition.X;
-                float vecY = Main.mouseY + Main.screenPosition.Y;
+
                 mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition; // new Vector2(vecX, vecY);
                 Projectile.Center = mousePosition;
                 if (planetSpawnTimer == 0)
