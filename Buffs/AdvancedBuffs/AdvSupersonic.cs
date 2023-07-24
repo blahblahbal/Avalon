@@ -1,3 +1,5 @@
+using Avalon.Common.Players;
+using Avalon.Items.Armor.Hardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -9,7 +11,7 @@ public class AdvSupersonic : ModBuff
 {
     public override void Update(Player player, ref int buffIndex)
     {
-        if (true) //!player.GetModPlayer<AvalonPlayer>().CaesiumBoostActive)
+        if (!player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
         {
             player.accRunSpeed = 18.29f;
         }
@@ -17,7 +19,7 @@ public class AdvSupersonic : ModBuff
         {
             player.accRunSpeed = 7f;
         }
-        if (!player.vortexStealthActive)// && !player.GetModPlayer<AvalonPlayer>().CaesiumBoostActive)
+        if (!player.vortexStealthActive && !player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
         {
             if (player.controlLeft)
             {

@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.Items.Armor.Hardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -40,14 +41,14 @@ class InertiaBootsSlower : ModItem
         player.GetModPlayer<AvalonPlayer>().NoSticky = true;
         player.accRunSpeed = 8.29f;
         // ADD BACK AFTER CAESIUM ARMOR ADDED
-        //if (!player.GetModPlayer<ExxoEquipEffectPlayer>().CaesiumBoostActive)
-        //{
-        //    player.accRunSpeed = 10.29f;
-        //}
-        //else
-        //{
-        //    player.accRunSpeed = 5f;
-        //}
+        if (!player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
+        {
+            player.accRunSpeed = 10.29f;
+        }
+        else
+        {
+            player.accRunSpeed = 5f;
+        }
         player.rocketBoots = 3;
         player.noFallDmg = true;
         player.blackBelt = true;
@@ -91,7 +92,7 @@ class InertiaBootsSlower : ModItem
         //}
 
         // ADD BACK AFTER CAESIUM ADDED
-        if (!player.vortexStealthActive) // && !player.GetModPlayer<ExxoEquipEffectPlayer>().CaesiumBoostActive)
+        if (!player.vortexStealthActive && !player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
         {
             if (player.controlLeft)
             {

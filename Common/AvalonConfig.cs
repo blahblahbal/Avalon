@@ -53,11 +53,6 @@ public class AvalonClientConfig : ModConfig
 {
     public override ConfigScope Mode => ConfigScope.ClientSide;
     [Header("$Mods.Avalon.Config.ItemHeader")]
-    [Label("$Mods.Avalon.Config.Screenshake.Label")]
-    [Tooltip("$Mods.Avalon.Config.Screenshake.Tooltip")]
-    [DefaultValue(true)]
-    public bool ScreenshakeEnabled;
-
     [Label("$Mods.Avalon.Config.BiomeParticles.Label")]
     [Tooltip("$Mods.Avalon.Config.BiomeParticles.Tooltip")]
     [DefaultValue(true)]

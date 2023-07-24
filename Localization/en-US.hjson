@@ -158,11 +158,6 @@ Mods: {
 				Tooltip: Renames some vanilla items
 			}
 
-			Screenshake: {
-				Label: Screenshake
-				Tooltip: Enables any effects that shake the screen. (DOES NOTHING YET)
-			}
-
 			BiomeParticles: {
 				Label: Biome Particles
 				Tooltip: Enables ambient particles in some biomes.
