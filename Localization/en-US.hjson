@@ -5361,6 +5361,16 @@ Mods: {
 				DisplayName: Lava Dye
 				Tooltip: ""
 			}
+
+			AquaDye: {
+				DisplayName: Aqua Dye
+				Tooltip: ""
+			}
+
+			CloudyDye: {
+				DisplayName: Cloudy Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

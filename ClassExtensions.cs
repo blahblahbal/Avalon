@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Avalon.Common;
+using Avalon.Hooks;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -24,7 +27,12 @@ public static class ClassExtensions
         (item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1) && !item.vanity;
 
     public static void Active(this Tile t, bool a) => t.HasTile = a;
-
+    public static ArmorShaderData UseModdedImage(this ArmorShaderData data, string path)
+    {
+        AvalonReflection.PATH = path;
+        AvalonReflection.ASD_uImage = ModContent.Request<Texture2D>("Avalon/Assets/Shaders/" + path);
+        return data;
+    }
     public static void AttemptToConvertNPCToContagion(this NPC n)
     {
         if (n.type == NPCID.Bunny)
