@@ -150,7 +150,7 @@ Mods: {
 
 			VanillaTextureReplacement: {
 				Label: Vanilla Texture Replacement
-				Tooltip: Changes some vanilla textures
+				Tooltip: Changes some vanilla textures (Does not work if DragonLens is enabled!)
 			}
 
 			Renames: {
