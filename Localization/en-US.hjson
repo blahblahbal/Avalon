@@ -5294,22 +5294,22 @@ Mods: {
 
 			CrimsonAltar: {
 				DisplayName: Crimson Altar
-				Tooltip: ""
+				Tooltip: The spirit of Cthulhu guards this altar
 			}
 
 			DemonAltar: {
 				DisplayName: Demon Altar
-				Tooltip: ""
+				Tooltip: The spirit of Cthulhu guards this altar
 			}
 
 			IckyAltar: {
 				DisplayName: Icky Altar
-				Tooltip: ""
+				Tooltip: The spirit of Cthulhu guards this altar
 			}
 
 			FallenStarBlock: {
 				DisplayName: Fallen Star Block
-				Tooltip: ""
+				Tooltip: Only solid at night
 			}
 
 			BloodiedSpike: {
@@ -5323,7 +5323,7 @@ Mods: {
 			}
 
 			DemonSpikeScale: {
-				DisplayName: Demon Spike Scale
+				DisplayName: Demon Spikescale
 				Tooltip: ""
 			}
 

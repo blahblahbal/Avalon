@@ -13,7 +13,6 @@ public class GenSystem : ModSystem
     public override void PostWorldGen()
     {
         AvalonWorld.JungleLocationX = GenVars.JungleX;
-        AvalonWorld.DungeonLocationX = Main.dungeonX;
     }
     public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
     {
@@ -41,7 +40,6 @@ public class GenSystem : ModSystem
                 tasks[index] = new Contagion("Contagion", 80f);
             }
         }
-
 
         index = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
 
@@ -72,20 +70,21 @@ public class GenSystem : ModSystem
         //    totalWeight += currentPass.Weight;
         //}
 
-        int underworld = tasks.FindIndex(genPass => genPass.Name == "Micro Biomes");
-        if (underworld != -1)
-        {
-            currentPass = new Underworld();
-            tasks.Insert(underworld + 1, currentPass);
-            totalWeight += currentPass.Weight;
+        // uncomment when hm update releases
+        //int underworld = tasks.FindIndex(genPass => genPass.Name == "Micro Biomes");
+        //if (underworld != -1)
+        //{
+        //    currentPass = new Underworld();
+        //    tasks.Insert(underworld + 1, currentPass);
+        //    totalWeight += currentPass.Weight;
 
-            currentPass = new Ectovines();
-            tasks.Insert(underworld + 2, currentPass);
-            totalWeight += currentPass.Weight;
+        //    currentPass = new Ectovines();
+        //    tasks.Insert(underworld + 2, currentPass);
+        //    totalWeight += currentPass.Weight;
 
-            // uncomment when sky fortress becomes a thing
-            //tasks.Insert(underworld + 4, new SkyFortress());
-        }
+        //    // uncomment when sky fortress becomes a thing
+        //    //tasks.Insert(underworld + 4, new SkyFortress());
+        //}
 
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");
         if (index != -1)
