@@ -5371,6 +5371,16 @@ Mods: {
 				DisplayName: Cloudy Dye
 				Tooltip: ""
 			}
+
+			BlurDye: {
+				DisplayName: Blur Dye
+				Tooltip: ""
+			}
+
+			CursedFlameDye: {
+				DisplayName: Cursed Flame Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
