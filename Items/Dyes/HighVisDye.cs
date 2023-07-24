@@ -34,7 +34,7 @@ public class HighVisDye : ModItem
         int dye = Item.dye;
 
         Item.CloneDefaults(ItemID.GelDye);
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.LightRed;
         Item.dye = dye;
     }
 }

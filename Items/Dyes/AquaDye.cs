@@ -14,12 +14,12 @@ public class AquaDye : ModItem
         // Avoid loading assets on dedicated servers. They don't use graphics cards.
         if (!Main.dedServ)
         {
-            // The following code creates an effect (shader) reference and associates it with this item's type Id.
+            // The following code creates an effect (shader) reference and associates it with this item's type ID.
             GameShaders.Armor.BindShader(
                 Item.type,
                 new ArmorShaderData(
                     new Ref<Effect>(Mod.Assets.Request<Effect>("Effects/AquaDye", AssetRequestMode.ImmediateLoad)
-                        .Value), "AquaDye").UseImage("Images/Misc/Perlin") // Be sure to update the effect path and pass name here.
+                        .Value), "AquaDye").UseImage(ModContent.Request<Texture2D>("Avalon/Assets/Shaders/AquaDye"))
             );
         }
 
@@ -33,7 +33,7 @@ public class AquaDye : ModItem
         int dye = Item.dye;
 
         Item.CloneDefaults(ItemID.GelDye);
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.Green;
         Item.dye = dye;
     }
 }

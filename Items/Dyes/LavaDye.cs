@@ -33,7 +33,7 @@ public class LavaDye : ModItem
         int dye = Item.dye;
 
         Item.CloneDefaults(ItemID.GelDye);
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.Orange;
         Item.dye = dye;
     }
 }
