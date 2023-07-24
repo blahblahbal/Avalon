@@ -25,7 +25,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     
     float brightness = dot(color.rgb, float3(0.5, 0.5, 0.5)) * (1.8 + (sin(uTime * 10) * 0.2));
     brightness *= (cloud.r + 1) * frameY;
-    color.rgb = lerp(float3(0, 0.4, 0), float3(0.7, 1, 0), brightness);
+    color.rgb = lerp(float3(0, 0.1, 0), float3(0.7, 1, 0), brightness);
     
     color.rgb *= color.a;
     color -= tex2D(uImage0, coords + float2(cloud.r / uImageSize0.x * 2, cloud.r / uImageSize0.y * 6)) * 0.3 * frameY;
