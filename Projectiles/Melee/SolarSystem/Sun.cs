@@ -357,6 +357,7 @@ public class Sun : ModProjectile
 
     public override bool PreDraw(ref Color lightColor)
     {
+        Projectile.rotation += 0.01f;
         var texture = Mod.Assets.Request<Texture2D>("Projectiles/Melee/SolarSystem/SolarSystem_Chain");
 
         var position = Projectile.Center;
