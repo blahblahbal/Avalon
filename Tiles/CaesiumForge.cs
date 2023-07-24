@@ -20,6 +20,7 @@ public class CaesiumForge : ModTile
         TileObjectData.addTile(Type);
         Main.tileLighted[Type] = true;
         AdjTiles = new int[] { TileID.AdamantiteForge, TileID.Hellforge, TileID.Furnaces };
+        DustType = ModContent.DustType<Dusts.CaesiumDust>();
     }
 
     public override void AnimateTile(ref int frame, ref int frameCounter)
@@ -27,7 +28,7 @@ public class CaesiumForge : ModTile
         if (++frameCounter > 3)
         {
             frameCounter = 0;
-            if (++frame > 3) frame = 0;
+            if (++frame > 5) frame = 0;
         }
     }
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -38,9 +39,9 @@ public class CaesiumForge : ModTile
     }
     public override void NearbyEffects(int i, int j, bool closer)
     {
-        if (Main.rand.NextBool(40))
+        if (Main.rand.NextBool(20) && Main.tile[i, j].TileFrameX == 18 && Main.tile[i, j].TileFrameY == 18)
         {
-            int num56 = Dust.NewDust(new Vector2(i * 16 - 4, j * 16 - 6), 8, 6, DustID.Torch, 0f, 0f, 100, default, 1f);
+            int num56 = Dust.NewDust(new Vector2(i * 16 - 3, j * 16 - 5), 18, 6, DustID.Torch, 0f, 0f, 100, default, 1f);
             if (!Main.rand.NextBool(3))
             {
                 Main.dust[num56].noGravity = true;

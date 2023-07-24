@@ -5381,6 +5381,21 @@ Mods: {
 				DisplayName: Cursed Flame Dye
 				Tooltip: ""
 			}
+
+			ContagionSeeds: {
+				DisplayName: Contagion Seeds
+				Tooltip: ""
+			}
+
+			EctograssSeeds: {
+				DisplayName: Ectograss Seeds
+				Tooltip: ""
+			}
+
+			LaziteGrassSeeds: {
+				DisplayName: Lazite Grass Seeds
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
