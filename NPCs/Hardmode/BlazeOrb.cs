@@ -11,7 +11,7 @@ public class BlazeOrb : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[NPC.type] = 1;
+        Main.npcFrameCount[NPC.type] = 4;
 
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
         {
@@ -23,20 +23,37 @@ public class BlazeOrb : ModNPC
     public override void SetDefaults()
     {
         NPC.damage = 65;
-        NPC.scale = 0.9f;
+        NPC.scale = 1f;
         NPC.noTileCollide = true;
         NPC.lifeMax = 1;
         NPC.defense = 0;
         NPC.noGravity = true;
-        NPC.alpha = 80;
-        NPC.width = 16;
+        NPC.width = 20;
         NPC.aiStyle = -1;
-        NPC.height = 16;
+        NPC.height = 20;
         NPC.HitSound = SoundID.NPCHit3;
         NPC.DeathSound = SoundID.NPCDeath3;
         NPC.knockBackResist = 0f;
+        DrawOffsetY = 8f;
     }
+    public override Color? GetAlpha(Color drawColor)
+    {
+        return Color.White;
+    }
+    public override void FindFrame(int frameHeight)
+    {
+        NPC.frameCounter += 1.0;
+        if (NPC.frameCounter >= 6.0)
+        {
+            NPC.frame.Y = NPC.frame.Y + frameHeight;
+            NPC.frameCounter = 0.0;
+        }
 
+        if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
+        {
+            NPC.frame.Y = 0;
+        }
+    }
     public override void AI()
     {
         if (NPC.target == 255)
@@ -135,11 +152,11 @@ public class BlazeOrb : ModNPC
         }
         for (var num292 = 0; num292 < 2; num292++)
         {
-            var num302 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y + 2f), NPC.width, NPC.height, DustID.Torch, NPC.velocity.X * 0.1f, NPC.velocity.Y * 0.1f, 80, default(Color), 1.3f);
+            var num302 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y + 2f), NPC.width, NPC.height, DustID.Torch, NPC.velocity.X * 0.1f, NPC.velocity.Y * 0.1f, 80, default(Color), 1.8f);
             Main.dust[num302].velocity *= 0.3f;
             Main.dust[num302].noGravity = true;
         }
-        NPC.rotation += 0.4f * NPC.direction;
+        NPC.rotation = NPC.velocity.ToRotation() - MathHelper.PiOver2;
         return;
     }
 }

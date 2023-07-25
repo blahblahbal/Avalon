@@ -263,24 +263,25 @@ public class Blaze : ModNPC
             var rectangle = new Rectangle((int)NPC.position.X, (int)(NPC.position.Y + ((NPC.height - NPC.width) / 2)),
                 NPC.width, NPC.width);
             int num8 = 50;
-            float num9 = 0.4f;
             for (int i = 1; i <= num8; i++)
             {
-                int num10 = Dust.NewDust(NPC.position, rectangle.Width, rectangle.Height, DustID.Torch, 0f, 0f, 100,
+                if (Main.rand.NextBool(3))
+                {
+                    int num10 = Dust.NewDust(NPC.position, rectangle.Width, rectangle.Height, DustID.Torch, 0f, 0f, 100,
                     default, 2f);
-                Main.dust[num10].noGravity = true;
-                Main.dust[num10].velocity.X = num9 * (Main.dust[num10].position.X - (NPC.position.X + (NPC.width / 2)));
-                Main.dust[num10].velocity.Y =
-                    num9 * (Main.dust[num10].position.Y - (NPC.position.Y + (NPC.height / 2)));
+                    Main.dust[num10].noGravity = true;
+                    Main.dust[num10].velocity = Main.rand.NextVector2Circular(6f, 6f);
+                }
             }
 
             for (int j = 1; j <= num8; j++)
             {
-                int num11 = Dust.NewDust(NPC.position, rectangle.Width, rectangle.Height, DustID.Wraith, 0f, 0f, 100);
-                Main.dust[num11].noGravity = true;
-                Main.dust[num11].velocity.X = num9 * (Main.dust[num11].position.X - (NPC.position.X + (NPC.width / 2)));
-                Main.dust[num11].velocity.Y =
-                    num9 * (Main.dust[num11].position.Y - (NPC.position.Y + (NPC.height / 2)));
+                if (Main.rand.NextBool(2))
+                {
+                    int num11 = Dust.NewDust(NPC.position, rectangle.Width, rectangle.Height, DustID.Wraith, 0f, 0f, 100, default, 1.4f);
+                    Main.dust[num11].noGravity = true;
+                    Main.dust[num11].velocity = Main.rand.NextVector2Circular(8f, 8f);
+                }
             }
         }
     }
