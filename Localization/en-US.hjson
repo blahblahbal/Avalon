@@ -37,36 +37,36 @@ Mods: {
 		}
 
 		SetBonuses: {
-            Aeroforce:
-			'''
-			Blessing of the Sky
-			Increases your max number of minions by 1
-			Grants a chance for a Sky Insignia to drop when your minions damage an enemy
-			'''
-            Caesium:
-            '''
-            Increased stats
-            Double tap {0} to activate Caesium Boosting stance
-            This stance reduces movement speed and increases damage and damage reduction
-            '''
-            Rhodium: 9% increased damage
-            Bismuth: 4 defense
-            OneDef: 1 defense
-            TwoDef: 2 defense
-            ThreeDef: 3 defense
-            Iridium: 9% increased critical strike chance
-            Osmium: 5 defense
-            Robe1: 10% increased magic critical strike chance
-            Robe2: Increases maximum mana by 60
-            ResistantWood: 10 armor penetration and reduces damage taken by 10%
-            Viruthorn: 10% increased critical strike chance
-        }
+			Aeroforce:
+				'''
+				Blessing of the Sky
+				Increases your max number of minions by 1
+				Grants a chance for a Sky Insignia to drop when your minions damage an enemy
+				'''
+			Caesium:
+				'''
+				Increased stats
+				Double tap {0} to activate Caesium Boosting stance
+				This stance reduces movement speed and increases damage and damage reduction
+				'''
+			Rhodium: 9% increased damage
+			Bismuth: 4 defense
+			OneDef: 1 defense
+			TwoDef: 2 defense
+			ThreeDef: 3 defense
+			Iridium: 9% increased critical strike chance
+			Osmium: 5 defense
+			Robe1: 10% increased magic critical strike chance
+			Robe2: Increases maximum mana by 60
+			ResistantWood: 10 armor penetration and reduces damage taken by 10%
+			Viruthorn: 10% increased critical strike chance
+		}
 
-        PrefixTooltips: {
-            Ammo: 5% chance to save ammo
-            Money: 5% increased money drops
-            StamRegen: Increased stamina regeneration
-        }
+		PrefixTooltips: {
+			Ammo: 5% chance to save ammo
+			Money: 5% increased money drops
+			StamRegen: Increased stamina regeneration
+		}
 
 		TooltipEdits: {
 			EvilPickaxe: Can mine Rhodium, Osmium, and Iridium
@@ -6246,6 +6246,7 @@ Mods: {
 			Greedy.DisplayName: Greedy
 			Hoarding.DisplayName: Hoarding
 			Sturdy.DisplayName: Sturdy
+			Motivated.DisplayName: Motivated
 		}
 
 		Conditions: {
