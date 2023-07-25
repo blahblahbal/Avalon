@@ -100,8 +100,7 @@ Mods: {
 				'Not to be confused with a picksaw'
 				Can mine Chlorophyte, Xanthophyte, and Caesium Ore
 				'''
-
-            MandibleBlade: Throws sand that confuses your enemies
+			MandibleBlade: Throws sand that confuses your enemies
 		}
 
 		Herbology: {
@@ -5404,6 +5403,11 @@ Mods: {
 				DisplayName: Pathogen Dye
 				Tooltip: ""
 			}
+
+			ContagionToken: {
+				DisplayName: Contagion Token
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -6317,7 +6321,7 @@ Mods: {
 
 				BiomeParticlesEnabled: {
 					Label: Biome Particles
-				    Tooltip: Enables ambient particles in some biomes.
+					Tooltip: Enables ambient particles in some biomes.
 				}
 			}
 
@@ -6326,19 +6330,21 @@ Mods: {
 
 				RevertDungeonGen: {
 					Label: Dungeon Generation Revert
-				    Tooltip: Reverts the normal Dungeon generation to pre-1.4
+					Tooltip: Reverts the normal Dungeon generation to pre-1.4
 				}
 
 				VanillaTextureReplacement: {
 					Label: Vanilla Texture Replacement
-				    Tooltip: Changes some vanilla textures (Does not work if DragonLens is enabled!)
+					Tooltip: Changes some vanilla textures (Does not work if DragonLens is enabled!)
 				}
 
 				VanillaRenames: {
 					Label: Vanilla Item Renames
-				    Tooltip: Renames some vanilla items
+					Tooltip: Renames some vanilla items
 				}
 			}
 		}
+
+		Config.ItemHeader: Biome Particles Enabled Header
 	}
 }

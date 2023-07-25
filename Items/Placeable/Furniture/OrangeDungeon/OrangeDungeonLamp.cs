@@ -26,4 +26,12 @@ class OrangeDungeonLamp : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ItemID.Torch)
+            .AddIngredient(ModContent.ItemType<Tile.OrangeBrick>(), 3)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+    }
 }

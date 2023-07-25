@@ -25,4 +25,12 @@ class OrangeDungeonBed : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Tile.OrangeBrick>(), 15)
+            .AddIngredient(ItemID.Silk, 5)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+    }
 }

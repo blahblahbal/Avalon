@@ -26,4 +26,13 @@ class PurpleDungeonPiano : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Tile.PurpleBrick>(), 15)
+            .AddIngredient(ItemID.Bone, 4)
+            .AddIngredient(ItemID.Book)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+    }
 }

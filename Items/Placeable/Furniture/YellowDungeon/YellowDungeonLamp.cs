@@ -26,4 +26,12 @@ class YellowDungeonLamp : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ItemID.Torch)
+            .AddIngredient(ModContent.ItemType<Tile.YellowBrick>(), 3)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+    }
 }

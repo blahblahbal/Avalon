@@ -26,4 +26,12 @@ class OrangeDungeonBookcase : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Tile.OrangeBrick>(), 20)
+            .AddIngredient(ItemID.Book, 10)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+    }
 }

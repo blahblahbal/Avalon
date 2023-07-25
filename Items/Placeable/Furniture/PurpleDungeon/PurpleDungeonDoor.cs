@@ -25,4 +25,11 @@ class PurpleDungeonDoor : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Tile.PurpleBrick>(), 6)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+    }
 }

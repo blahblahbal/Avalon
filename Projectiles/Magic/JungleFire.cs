@@ -52,12 +52,10 @@ public class JungleFire : ModProjectile
             {
                 var num158 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.RuneWizard, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default(Color), 2f);
                 Main.dust[num158].noGravity = true;
-                var dust15 = Main.dust[num158];
-                dust15.velocity.X = dust15.velocity.X * 0.3f;
-                var dust16 = Main.dust[num158];
-                dust16.velocity.Y = dust16.velocity.Y * 0.3f;
+                Main.dust[num158].velocity *= 0.3f;
             }
         }
+        Projectile.ai[1]++;
         if (Projectile.ai[1] >= 20f)
         {
             Projectile.velocity.Y = Projectile.velocity.Y + 0.2f;
