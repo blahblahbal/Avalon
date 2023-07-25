@@ -16,6 +16,7 @@ using Terraria.Utilities;
 using Avalon.Common.Players;
 using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Tile;
+using Avalon.Items.Material.Herbs;
 
 namespace Avalon.Common;
 
@@ -220,7 +221,7 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
-        if(item.type == ItemID.PlanteraBossBag)
+        if (item.type == ItemID.PlanteraBossBag)
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeDew>(), 1, 10, 17));
             itemLoot.Add(ItemDropRule.Common(ItemID.ChlorophyteOre, 1, 75, 130));
@@ -305,7 +306,7 @@ public class AvalonGlobalItem : GlobalItem
                 item.pick = 64;
                 break;
             case ItemID.Vilethorn:
-                item.useStyle = 5;
+                item.useStyle = ItemUseStyleID.Shoot;
                 break;
             #endregion miscellaneous changes
             #region ML item rebalance
@@ -483,6 +484,15 @@ public class AvalonGlobalItem : GlobalItem
                     if (tooltip.Name == "Tooltip0")
                     {
                         tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.IceBlade");
+                    }
+                }
+                break;
+            case ItemID.AntlionClaw:
+                foreach (TooltipLine tooltip in tooltips)
+                {
+                    if (tooltip.Name == "Tooltip0")
+                    {
+                        tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.MandibleBlade");
                     }
                 }
                 break;

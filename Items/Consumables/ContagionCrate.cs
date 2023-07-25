@@ -37,9 +37,9 @@ public class ContagionCrate : ModItem
     {
         int[] themedDrops = new int[] {
             ModContent.ItemType<Accessories.PreHardmode.BandofStamina>(),
-            ModContent.ItemType<Weapons.Ranged.PreHardmode.Snotgun>(),
+            ModContent.ItemType<Weapons.Ranged.PreHardmode.Blunderblight>(),
             ModContent.ItemType<Weapons.Magic.PreHardmode.Smogscreen>(),
-            ModContent.ItemType<Pets.SnotOrb>(),
+            ModContent.ItemType<Pets.SepticCell>(),
             //ModContent.ItemType<Weapons.Melee.PreHardmode.PotentialContagionBoomerang>(),
         };
         itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, themedDrops));

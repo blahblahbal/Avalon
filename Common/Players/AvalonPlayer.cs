@@ -244,7 +244,6 @@ public class AvalonPlayer : ModPlayer
         packet.WriteVector2(MousePosition);
         Player.SendPacket(packet, server);
     }
-
     public override void OnConsumeMana(Item item, int manaConsumed)
     {
         if (BloodCasting)

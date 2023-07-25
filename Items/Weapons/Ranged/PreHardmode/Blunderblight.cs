@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode
 {
-    public class Snotgun : ModItem
+    public class Blunderblight : ModItem
     {
         public override void SetDefaults()
         {
@@ -14,7 +14,7 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
             Item.height = 10;
             Item.DefaultToRangedWeapon(7, AmmoID.Bullet, 50, 5, false);
             Item.damage = 9;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1, 50, 0);
             Item.UseSound = SoundID.Item36;
         }

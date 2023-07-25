@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Pets;
 
-class SnotOrb : ModItem
+class SepticCell : ModItem
 {
     public override void SetStaticDefaults()
     {

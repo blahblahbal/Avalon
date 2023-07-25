@@ -100,6 +100,8 @@ Mods: {
 				'Not to be confused with a picksaw'
 				Can mine Chlorophyte, Xanthophyte, and Caesium Ore
 				'''
+
+            MandibleBlade: Throws sand that confuses your enemies
 		}
 
 		Herbology: {
@@ -163,30 +165,6 @@ Mods: {
 		Speed: {
 			Lightning: Lightning speed
 			Slowpoke: Slowpoke speed
-		}
-
-		Config: {
-			ItemHeader: Options
-
-			DungeonRevert: {
-				Label: Dungeon Generation Revert
-				Tooltip: Reverts the normal Dungeon generation to pre-1.4
-			}
-
-			VanillaTextureReplacement: {
-				Label: Vanilla Texture Replacement
-				Tooltip: Changes some vanilla textures (Does not work if DragonLens is enabled!)
-			}
-
-			Renames: {
-				Label: Vanilla Item Renames
-				Tooltip: Renames some vanilla items
-			}
-
-			BiomeParticles: {
-				Label: Biome Particles
-				Tooltip: Enables ambient particles in some biomes.
-			}
 		}
 
 		Items: {
@@ -1851,7 +1829,7 @@ Mods: {
 
 			DesertLongSword: {
 				DisplayName: Desert Long Sword
-				Tooltip: ""
+				Tooltip: Throws sand that confuses your enemies
 			}
 
 			SanguineKatana: {
@@ -2920,7 +2898,7 @@ Mods: {
 					'''
 			}
 
-			Snotgun: {
+			Blunderblight: {
 				Tooltip: ""
 				DisplayName: Blunderblight
 			}
@@ -3135,9 +3113,9 @@ Mods: {
 				Tooltip: Increases maximum stamina by 90
 			}
 
-			SnotOrb: {
-				DisplayName: Snot Orb
-				Tooltip: Creates a snot orb that provides light
+			SepticCell: {
+				DisplayName: Septic Cell
+				Tooltip: Creates a septic cell that provides light
 			}
 
 			SnotsandBlock: {
@@ -6337,14 +6315,9 @@ Mods: {
 			AvalonClientConfig: {
 				DisplayName: Avalon Client Config
 
-				ScreenshakeEnabled: {
-					Label: "{$Mods.Avalon.Config.Screenshake.Label}"
-					Tooltip: "{$Mods.Avalon.Config.Screenshake.Tooltip}"
-				}
-
 				BiomeParticlesEnabled: {
-					Label: "{$Mods.Avalon.Config.BiomeParticles.Label}"
-					Tooltip: "{$Mods.Avalon.Config.BiomeParticles.Tooltip}"
+					Label: Biome Particles
+				    Tooltip: Enables ambient particles in some biomes.
 				}
 			}
 
@@ -6352,18 +6325,18 @@ Mods: {
 				DisplayName: Avalon Config
 
 				RevertDungeonGen: {
-					Label: "{$Mods.Avalon.Config.DungeonRevert.Label}"
-					Tooltip: "{$Mods.Avalon.Config.DungeonRevert.Tooltip}"
+					Label: Dungeon Generation Revert
+				    Tooltip: Reverts the normal Dungeon generation to pre-1.4
 				}
 
 				VanillaTextureReplacement: {
-					Label: "{$Mods.Avalon.Config.VanillaTextureReplacement.Label}"
-					Tooltip: "{$Mods.Avalon.Config.VanillaTextureReplacement.Tooltip}"
+					Label: Vanilla Texture Replacement
+				    Tooltip: Changes some vanilla textures (Does not work if DragonLens is enabled!)
 				}
 
 				VanillaRenames: {
-					Label: "{$Mods.Avalon.Config.Renames.Label}"
-					Tooltip: "{$Mods.Avalon.Config.Renames.Tooltip}"
+					Label: Vanilla Item Renames
+				    Tooltip: Renames some vanilla items
 				}
 			}
 		}
