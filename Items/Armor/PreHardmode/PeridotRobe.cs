@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Armor.PreHardmode;
@@ -44,12 +45,12 @@ class PeridotRobe : ModItem
     {
         if (player.head == 14)
         {
-            player.setBonus = "10% increased magic critical strike chance";
+            player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.PeridotRobe1");
             player.GetCritChance(DamageClass.Magic) += 10;
         }
         else if (player.head == 159)
         {
-            player.setBonus = "Increases maximum mana by 60";
+            player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.PeridotRobe2");
             player.statManaMax2 += 60;
         }
     }

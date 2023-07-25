@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Armor.PreHardmode;
@@ -30,7 +31,7 @@ internal class IridiumHat : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "9% increased critical strike chance";
+        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Iridium");
         player.GetCritChance<GenericDamageClass>() += 9;
     }
 

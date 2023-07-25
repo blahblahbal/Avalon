@@ -93,6 +93,7 @@ public abstract class ExxoPrefix : ModPrefix
 
         BasicDifference(lines, "PrefixAccEndurance", "damage taken", -(modifiedPlayer.endurance - origPlayer.endurance),
             true);
+
         BasicDifference(lines, "PrefixAccMaxMana", "mana", modifiedPlayer.statManaMax2 - origPlayer.statManaMax2);
         BasicDifference(lines, "PrefixAccMoveSpeed", "movement speed", modifiedPlayer.moveSpeed - origPlayer.moveSpeed);
         BasicDifference(lines, "PrefixAccDefense", "defense", modifiedPlayer.statDefense - origPlayer.statDefense);

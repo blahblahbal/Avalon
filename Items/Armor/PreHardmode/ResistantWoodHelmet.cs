@@ -2,6 +2,7 @@ using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Armor.PreHardmode
@@ -29,7 +30,7 @@ namespace Avalon.Items.Armor.PreHardmode
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "10% increased armor penetration and damage reduction";
+            player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.ResistantWood");
             player.endurance += 0.1f;
             player.GetArmorPenetration(DamageClass.Generic) += 0.1f;
         }

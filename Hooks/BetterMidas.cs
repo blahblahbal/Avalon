@@ -1,6 +1,8 @@
 using Avalon.Common;
+using Avalon.Common.Players;
 using System;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace Avalon.Hooks;
 
@@ -23,6 +25,19 @@ internal class BetterMidas : ModHook
         for (int i = 0; i < num2; i++)
         {
             float finalMoney = npc.value;
+            if (closestPlayer.GetModPlayer<AvalonPlayer>().GreedyPrefix)
+            {
+                int amtOfAcc = 0;
+                for (int slot = 3; slot <= 9; slot++)
+                {
+                    if (closestPlayer.armor[slot].prefix == ModContent.PrefixType<Prefixes.Greedy>())
+                    {
+                        amtOfAcc++;
+                    }
+                }
+                //add for shm accessory slot later
+                finalMoney *= 1f + (amtOfAcc * 0.05f);
+            }
             if (npc.midas)
             {
                 int asdf = Main.rand.Next(8000);

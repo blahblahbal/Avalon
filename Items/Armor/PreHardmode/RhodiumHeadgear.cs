@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Armor.PreHardmode;
@@ -34,7 +35,7 @@ class RhodiumHeadgear : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "9% increased damage";
+        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Rhodium");
         player.GetDamage(DamageClass.Generic) += 0.09f;
     }
 

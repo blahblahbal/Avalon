@@ -49,9 +49,7 @@ class CaesiumGalea : ModItem
     }
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "Increased stats\nDouble tap " + Language.GetTextValue(Main.ReversedUpDownArmorSetBonuses ? "Key.UP" : "Key.DOWN") +
-            " to activate Caesium Boosting stance\n" +
-            "This stance reduces movement speed and increases damage reduction";
+        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Caesium", Language.GetTextValue(Main.ReversedUpDownArmorSetBonuses ? "Key.UP" : "Key.DOWN"));
         player.GetDamage(DamageClass.Melee) += 0.05f;
         player.statDefense += 4;
         player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoost = true;

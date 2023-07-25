@@ -1,7 +1,8 @@
-﻿using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Bars;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Armor.PreHardmode; 
@@ -27,7 +28,7 @@ public class OsmiumHelmet : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "5 defense";
+        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Osmium");
         player.statDefense += 5;
     }
     public override void UpdateEquip(Player player)

@@ -354,6 +354,45 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips.RemoveAt(tooltips.FindIndex(x => x.Name == "Equipable" && x.Mod == "Terraria"));
             }
         }
+        if (item.accessory && !item.social)
+        {
+            if (item.prefix == ModContent.PrefixType<Hoarding>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccAmmo", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Ammo"))
+                    {
+                        IsModifier = true
+                    });
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Greedy>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMoney", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Money"))
+                    {
+                        IsModifier = true
+                    });
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Motivated>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccStamRegen", Language.GetTextValue("Mods.Avalon.PrefixTooltips.StamRegen"))
+                    {
+                        IsModifier = true
+                    });
+                }
+            }
+        }
 
         if (tooltipMat != null)
         {

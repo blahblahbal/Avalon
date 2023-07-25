@@ -148,6 +148,10 @@ public class AvalonPlayer : ModPlayer
     public bool SnotOrb;
     #endregion
 
+    #region accessory prefixes
+    public bool GreedyPrefix;
+    public bool HoardingPrefix;
+    #endregion
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
     public int OldFallStart;
@@ -202,6 +206,9 @@ public class AvalonPlayer : ModPlayer
 
         // armor sets
         SkyBlessing = false;
+
+        GreedyPrefix = false;
+        HoardingPrefix = false;
 
         SnotOrb = false;
 
@@ -387,10 +394,24 @@ public class AvalonPlayer : ModPlayer
         {
             return false;
         }
+        if (HoardingPrefix)
+        {
+            int amtOfAcc = 0;
+            for (int slot = 3; slot <= 9; slot++)
+            {
+                if (Player.armor[slot].prefix == ModContent.PrefixType<Hoarding>())
+                {
+                    amtOfAcc++;
+                }
+            }
+            if (Main.rand.NextFloat() < amtOfAcc * 0.05f)
+            {
+                return false;
+            }
+        }
 
         return base.CanConsumeAmmo(weapon, ammo);
     }
-
     public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
     {
         int bait = attempt.playerFishingConditions.BaitItemType;

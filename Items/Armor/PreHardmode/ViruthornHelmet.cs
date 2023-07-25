@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Armor.PreHardmode;
@@ -37,7 +38,7 @@ class ViruthornHelmet : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "10% increased critical strike chance";
+        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Viruthorn");
         player.GetCritChance(DamageClass.Generic) += 10;
     }
 

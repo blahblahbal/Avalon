@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Armor.PreHardmode;
@@ -32,7 +33,7 @@ class ZincHelmet : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "3 defense";
+        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.ThreeDef");
         player.statDefense += 3;
     }
 }
