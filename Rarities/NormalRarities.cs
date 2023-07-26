@@ -4,10 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Rarities;
 
-/// <summary>
-/// Rarity 12. Used for post-Noob Lord stuff
-/// </summary>
-/// 
+
 #region buff rarity
 public class FlaskBuffNameRarity : ModRarity
 {
@@ -28,6 +25,10 @@ public class ElixirBuffNameRarity : ModRarity
     }
 }
 #endregion buff rarity
+/// <summary>
+/// Rarity 12. Used for post-Noob Lord stuff
+/// </summary>
+/// 
 public class BlueRarity : ModRarity //12
 {
     public override Color RarityColor => new Color(0, 100, 255);

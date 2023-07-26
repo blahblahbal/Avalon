@@ -5408,6 +5408,11 @@ Mods: {
 				DisplayName: Contagion Token
 				Tooltip: ""
 			}
+
+			PhantomWispDye: {
+				DisplayName: Phantom Wisp Dye
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
