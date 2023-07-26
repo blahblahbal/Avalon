@@ -1,3 +1,4 @@
+using Avalon.Items.Material.Shards;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using System;
@@ -38,7 +39,7 @@ public class QuantumClaymore : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(Type)
-            .AddIngredient(ItemID.HallowedBar, 10) // Replace with corrupted bar later
+            .AddIngredient(ModContent.ItemType<CorruptShard>(), 10) // Replace with corrupted bar later
             .AddIngredient(ItemID.HallowedBar, 10)
             .AddIngredient(ItemID.Ectoplasm, 20)
             .AddTile(TileID.MythrilAnvil)
