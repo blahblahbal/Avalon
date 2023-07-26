@@ -98,6 +98,8 @@ public class AvalonPlayer : ModPlayer
     /// </summary>
     public int MaxRangedCrit;
 
+    public int DeathCounter = 0;
+
     #region armor sets
     public bool SkyBlessing;
     public int SkyStacks = 1;
@@ -235,7 +237,6 @@ public class AvalonPlayer : ModPlayer
         if (Main.netMode == NetmodeID.Server)
             SyncMouseCursor(server: true);
     }
-
     public void SyncMouseCursor(bool server)
     {
         ModPacket packet = Mod.GetPacket();
@@ -274,6 +275,7 @@ public class AvalonPlayer : ModPlayer
         rewardPool.Add(ModContent.ItemType<Items.Dyes.StoneDye>());
         rewardPool.Add(ModContent.ItemType<Items.Dyes.AquaDye>());
         rewardPool.Add(ModContent.ItemType<Items.Dyes.LavaDye>());
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.PhantomWispDye>());
     }
     public bool PotionSicknessSoundPlayed;
     public override void PostUpdateBuffs()
@@ -338,6 +340,7 @@ public class AvalonPlayer : ModPlayer
     public override void SaveData(TagCompound tag)
     {
         tag["Avalon:StatStam"] = Player.GetModPlayer<AvalonStaminaPlayer>().StatStam;
+        tag["Avalon:DeathCounter"] = DeathCounter;
     }
     public override void LoadData(TagCompound tag)
     {
@@ -345,6 +348,11 @@ public class AvalonPlayer : ModPlayer
         {
             Player.GetModPlayer<AvalonStaminaPlayer>().StatStam = tag.Get<int>("Avalon:StatStam");
         }
+        if (tag.ContainsKey("Avalon:DeathCounter"))
+        {
+            DeathCounter = tag.Get<int>("Avalon:DeathCounter");
+        }
+        else DeathCounter = 0;
     }
     public override void PostUpdateEquips()
     {
@@ -482,6 +490,7 @@ public class AvalonPlayer : ModPlayer
             }
             return false;
         }
+        DeathCounter++;
         return true;
     }
     public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
