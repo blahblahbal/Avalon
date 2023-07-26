@@ -23,7 +23,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     {
     
         float2 cloudCoords = (coords * uImageSize0 - uSourceRect.xy) / float2(uImageSize1.x * 0.1, uImageSize1.y);
-        float cloud = tex2D(uImage1, cloudCoords - float2(0, uTime * 0.2));
+        float cloud = tex2D(uImage1, cloudCoords - float2(0, uTime * 0.1));
     
         color.rgb += (color * cloud * 2) - 0.7;
         
