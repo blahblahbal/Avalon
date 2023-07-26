@@ -97,11 +97,6 @@ public class AvalonWorld : ModSystem
     }
     public override void PostAddRecipes()
     {
-        //ItemTrader t = new ItemTrader();
-        //if (t.TryGetTradeOption(new() { type = ItemID.PlatinumBar, stack = 1 }, out var option))
-        //{
-        //    option.GivingItemStack = ModContent.ItemType<Items.Material.Bars.BismuthBar>();
-        //}
         ItemTrader.ChlorophyteExtractinator = Hooks.Extractinator.CreateAvalonChlorophyteExtractinator();
     }
     public override void SaveWorldData(TagCompound tag)

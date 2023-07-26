@@ -5428,6 +5428,11 @@ Mods: {
 				DisplayName: Reflective Rhodium Dye
 				Tooltip: ""
 			}
+
+			TourmalineGemcorn: {
+				DisplayName: Tourmaline Gemcorn
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
