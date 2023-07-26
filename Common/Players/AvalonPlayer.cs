@@ -276,6 +276,9 @@ public class AvalonPlayer : ModPlayer
         rewardPool.Add(ModContent.ItemType<Items.Dyes.AquaDye>());
         rewardPool.Add(ModContent.ItemType<Items.Dyes.LavaDye>());
         rewardPool.Add(ModContent.ItemType<Items.Dyes.PhantomWispDye>());
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.ReflectiveRhodiumDye>());
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.ReflectiveOsmiumDye>());
+        rewardPool.Add(ModContent.ItemType<Items.Dyes.ReflectiveIridiumDye>());
     }
     public bool PotionSicknessSoundPlayed;
     public override void PostUpdateBuffs()
