@@ -5521,6 +5521,7 @@ Mods: {
 			CaesiumPike.DisplayName: Caesium Pike
 			CaesiumMace.DisplayName: Caesium Mace
 			ObsidianGlaive.DisplayName: Obsidian Glaive
+			CrystalUnityShard.DisplayName: Crystal Unity Shard
 		}
 
 		NPCs: {

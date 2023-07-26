@@ -33,7 +33,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
         
         color.rgb = lerp(tex2D(uImage0, coords + float2(cloud / uImageSize0.x, cloud / uImageSize0.y)).rgb * sampleColor.rgb, lerp(float3(0.6, 0.3, 0), float3(1, 0.67, 0.2), clamp(bright, -1, 2)), cloud + 0.3);
         
-        return color;
+        return color * sampleColor.a;
     }
     else
     {
