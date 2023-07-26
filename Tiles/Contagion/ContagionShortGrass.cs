@@ -1,5 +1,6 @@
 using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Enums;
 using Terraria.ID;
@@ -16,6 +17,7 @@ public class ContagionShortGrass : ModTile
         TileID.Sets.ReplaceTileBreakUp[Type] = true;
         TileID.Sets.SwaysInWindBasic[Type] = true;
         TileID.Sets.DrawFlipMode[Type] = 1;
+        TileID.Sets.SlowlyDiesInWater[Type] = true;
         Main.tileCut[Type] = true;
         Main.tileSolid[Type] = false;
         Main.tileNoAttach[Type] = true;
@@ -40,7 +42,7 @@ public class ContagionShortGrass : ModTile
 
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
-        if (Main.tile[i, j].TileFrameX / 18 == 10)
+        if (Main.tile[i, j].TileFrameX / 18 == 8)
         {
             Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<VirulentMushroom>());
         }
@@ -48,6 +50,12 @@ public class ContagionShortGrass : ModTile
     public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
     {
         offsetY = 2;
+    }
+    public override void SetSpriteEffects(int i, int j, ref SpriteEffects spriteEffects)
+    {
+        //Flips the sprite if x coord is odd. Makes the tile more interesting
+        if (i % 2 == 1)
+            spriteEffects = SpriteEffects.FlipHorizontally;
     }
     //public override void PlaceInWorld(int i, int j, Item item)
     //{

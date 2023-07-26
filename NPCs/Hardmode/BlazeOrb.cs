@@ -2,6 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,6 +19,13 @@ public class BlazeOrb : ModNPC
             Hide = true // Hides this NPC from the Bestiary, useful for multi-part NPCs whom you only want one entry.
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
+        NPCID.Sets.DebuffImmunitySets.Add(Type, new NPCDebuffImmunityData
+        {
+            SpecificallyImmuneTo = new int[]
+            {
+                BuffID.OnFire, BuffID.OnFire3,BuffID.CursedInferno,BuffID.ShadowFlame
+            }
+        });
     }
 
     public override void SetDefaults()
@@ -38,7 +46,7 @@ public class BlazeOrb : ModNPC
     }
     public override Color? GetAlpha(Color drawColor)
     {
-        return Color.White;
+        return new Color(255,255,255,64);
     }
     public override void FindFrame(int frameHeight)
     {
@@ -67,6 +75,7 @@ public class BlazeOrb : ModNPC
             num282 = num279 / num282;
             NPC.velocity.X = num280 * num282;
             NPC.velocity.Y = num281 * num282;
+            NPC.velocity *= 2;
         }
         NPC.ai[0] += 1f;
         if (NPC.ai[0] > 3f)
@@ -150,10 +159,10 @@ public class BlazeOrb : ModNPC
         {
             NPC.timeLeft = 100;
         }
-        for (var num292 = 0; num292 < 2; num292++)
+        if (Main.rand.NextBool(3))
         {
-            var num302 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y + 2f), NPC.width, NPC.height, DustID.Torch, NPC.velocity.X * 0.1f, NPC.velocity.Y * 0.1f, 80, default(Color), 1.8f);
-            Main.dust[num302].velocity *= 0.3f;
+            var num302 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y + 2f), NPC.width, NPC.height, DustID.Torch, NPC.velocity.X, NPC.velocity.Y, 80, default(Color), 1.8f);
+            Main.dust[num302].velocity = NPC.velocity;
             Main.dust[num302].noGravity = true;
         }
         NPC.rotation = NPC.velocity.ToRotation() - MathHelper.PiOver2;

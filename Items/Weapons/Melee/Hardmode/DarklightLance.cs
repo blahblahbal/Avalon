@@ -8,6 +8,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class DarklightLance : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;

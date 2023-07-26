@@ -73,14 +73,14 @@ public class Blaze : ModNPC
         float num66 = Main.NPCAddHeight(NPC);
         var vector13 = new Vector2(TextureAssets.Npc[NPC.type].Width() / 2,
             TextureAssets.Npc[NPC.type].Height() / Main.npcFrameCount[NPC.type] / 2);
-        Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "Glow").Value,
-            new Vector2(
-                NPC.position.X - vector.X + (NPC.width / 2) - (TextureAssets.Npc[NPC.type].Width() * NPC.scale / 2f) +
-                (vector13.X * NPC.scale),
-                NPC.position.Y - Main.screenPosition.Y + NPC.height -
-                (TextureAssets.Npc[NPC.type].Height() * NPC.scale / Main.npcFrameCount[NPC.type]) + 4f +
-                (vector13.Y * NPC.scale) + num66), NPC.frame, new Color(200, 200, 200, 0), NPC.rotation, vector13,
-            NPC.scale, effects, 0f);
+        float glow = ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.5f + 0.5f);
+        for (int i = 0; i < 4; i++)
+        {
+            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "Glow").Value,
+                new Vector2(NPC.position.X - vector.X + (NPC.width / 2) - (TextureAssets.Npc[NPC.type].Width() * NPC.scale / 2f) + (vector13.X * NPC.scale), NPC.position.Y - Main.screenPosition.Y + NPC.height - (TextureAssets.Npc[NPC.type].Height() * NPC.scale / Main.npcFrameCount[NPC.type]) + 4f +(vector13.Y * NPC.scale) + num66) + new Vector2(0,2 * glow).RotatedBy(i * MathHelper.PiOver2)
+                , NPC.frame, new Color(200, 200, 200, 0) * glow * 0.3f, NPC.rotation, vector13,
+                NPC.scale, effects, 0f);
+        }
     }
 
     public override void ModifyNPCLoot(NPCLoot loot)
@@ -209,6 +209,17 @@ public class Blaze : ModNPC
 
         if (NPC.wet && !NPC.lavaWet) {
             NPC.StrikeNPC(new NPC.HitInfo { Damage = 50, Knockback = 0f, HitDirection = 0});
+        }
+
+        if (NPC.localAI[0] is > 130 and < 180)
+        {
+            float rotation = Main.rand.NextFloat(0,MathHelper.TwoPi);
+            Dust d = Dust.NewDustPerfect(NPC.Center + new Vector2(30,0).RotatedBy(rotation), DustID.Torch, new Vector2(-3,0).RotatedBy(rotation));
+            d.noGravity = true;
+            d.velocity += NPC.velocity;
+            d.position += NPC.velocity;
+            d.scale *= 2;
+
         }
 
         if (Main.netMode != NetmodeID.MultiplayerClient && !Main.player[NPC.target].dead)

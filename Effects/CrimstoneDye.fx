@@ -92,7 +92,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
         color.rgb *= float3(0.239, 0.078, 0.078) * 1.2;
     }
 
-    return color * sampleColor;
+    return color * sampleColor * tex2D(uImage0, coords).a;
 }
     
 technique Technique1

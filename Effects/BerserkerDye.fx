@@ -64,20 +64,16 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     const float blackThreshold = 0.3;
     const float t1 = 0.33;
 
-    const float threshold = 0.4;
+    //const float threshold = 0.4;
     const float higherT = 0.4;
     float gray = dot(color2.rgb, float3(0.4, 0.4, 0.4));
-    color = float4(float3(gray, gray, gray), 1);
-
-    if (color.r > higherT || color.g > higherT || color.b > higherT)
+    color.rgb = float3(gray, gray, gray);
+    
+    if (gray.r > higherT)
     {
         color.rgb *= float3(0.29, 1, 0.984) * 1.7;
     }
-    else if (color.r > threshold || color.g > threshold || color.b > threshold)
-    {
-        color.rgb *= float3(0.29, 1, 0.984) * 1.4;
-    }
-    else if (color.r > blackThreshold || color.g > blackThreshold || color.b > blackThreshold)
+    else if (gray.r > blackThreshold)
     {
         color.rgb *= float3(0.957, 0.266, 0.474) * 1.7;
     }
@@ -86,7 +82,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
         color.rgb *= float3(0.957, 0.266, 0.474) * 1.2;
     }
 
-    return color * sampleColor;
+    return color * sampleColor * tex2D(uImage0, coords).a;
 }
 
 technique Technique1
