@@ -19,7 +19,7 @@ public class LavaDye : ModItem
                 Item.type,
                 new ArmorShaderData(
                     new Ref<Effect>(Mod.Assets.Request<Effect>("Effects/LavaDye", AssetRequestMode.ImmediateLoad)
-                        .Value), "LavaDye").UseImage("Images/Misc/Perlin") // Be sure to update the effect path and pass name here.
+                        .Value), "LavaDye").UseImage(ModContent.Request<Texture2D>("Avalon/Assets/Shaders/Noise")) // Be sure to update the effect path and pass name here.
             );
         }
 

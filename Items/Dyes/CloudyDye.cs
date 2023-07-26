@@ -19,7 +19,7 @@ public class CloudyDye : ModItem
                 Item.type,
                 new ArmorShaderData(
                     new Ref<Effect>(Mod.Assets.Request<Effect>("Effects/CloudyDye", AssetRequestMode.ImmediateLoad)
-                        .Value), "CloudyDye").UseImage("Images/Misc/Perlin") // Be sure to update the effect path and pass name here.
+                        .Value), "CloudyDye").UseImage(ModContent.Request<Texture2D>("Avalon/Assets/Shaders/Noise")) // Be sure to update the effect path and pass name here.
             );
         }
 

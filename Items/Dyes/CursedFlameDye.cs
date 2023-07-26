@@ -20,7 +20,7 @@ public class CursedFlameDye : ModItem
                 Item.type,
                 new ArmorShaderData(
                     new Ref<Effect>(Mod.Assets.Request<Effect>("Effects/CursedFlameDye", AssetRequestMode.ImmediateLoad)
-                        .Value), "CursedFlameDye").UseImage("Images/Misc/Perlin") // Be sure to update the effect path and pass name here.
+                        .Value), "CursedFlameDye").UseImage(ModContent.Request<Texture2D>("Avalon/Assets/Shaders/Noise")) // Be sure to update the effect path and pass name here.
             );
         }
 

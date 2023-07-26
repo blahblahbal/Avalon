@@ -28,7 +28,7 @@ class CrystalUnity : ModItem
         Item.width = dims.Width;
         Item.useTime = 11;
         Item.knockBack = 0f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Magic.CrystalUnity.AmberShard>();
+        Item.shoot = ModContent.ProjectileType<CrystalUnityShard>();
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = 505000;
         Item.useAnimation = 11;
@@ -51,7 +51,7 @@ class CrystalUnity : ModItem
         for (int spread = 0; spread < 3; spread++)
         {
             int dmg = Item.damage;
-            if (x == ModContent.ProjectileType<Projectiles.Magic.CrystalUnity.ZirconShard>()) dmg = (int)(dmg * 2.5f);
+            if (x == 10) dmg = (int)(dmg * 2.5f);
             Projectile.NewProjectile(source, position,velocity * Main.rand.NextFloat(0.8f,1.2f), ModContent.ProjectileType<CrystalUnityShard>(), (int)player.GetDamage(DamageClass.Magic).ApplyTo(dmg), knockback, player.whoAmI, Main.rand.NextFloat() - 0.5f, 0f,x);
         }
         return false;
