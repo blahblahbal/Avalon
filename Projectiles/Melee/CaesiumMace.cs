@@ -87,7 +87,7 @@ namespace Avalon.Projectiles.Melee
             }
 
             Vector2 mountedCenter = player.MountedCenter;
-            bool doFastThrowDust = false;
+            //bool doFastThrowDust = false;
             bool shouldOwnerHitCheck = false;
             int launchTimeLimit = 20;  // How much time the projectile can go before retracting (speed and shootTimer will set the flail's range)
             float launchSpeed = 24f; // How fast the projectile can move
@@ -154,7 +154,7 @@ namespace Avalon.Projectiles.Melee
                     }
                 case AIState.LaunchingForward:
                     {
-                        doFastThrowDust = true;
+                        //doFastThrowDust = true;
                         bool shouldSwitchToRetracting = StateTimer++ >= launchTimeLimit;
                         shouldSwitchToRetracting |= Projectile.Distance(mountedCenter) >= maxLaunchLength;
                         if (player.controlUseItem) // If the player clicks, transition to the Dropping state

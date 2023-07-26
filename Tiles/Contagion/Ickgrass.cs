@@ -15,6 +15,8 @@ public class Ickgrass : ModTile
         Main.tileBlockLight[Type] = true;
         TileID.Sets.Conversion.Grass[Type] = true;
         TileID.Sets.Conversion.MergesWithDirtInASpecialWay[Type] = true;
+        TileID.Sets.SpreadOverground[Type] = true;
+        TileID.Sets.SpreadUnderground[Type] = true;
         //TileID.Sets.ResetsHalfBrickPlacementAttempt[Type] = false;
         //TileID.Sets.CanBeDugByShovel[Type] = true;
         //TileID.Sets.DoesntPlaceWithTileReplacement[Type] = true;

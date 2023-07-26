@@ -90,7 +90,7 @@ namespace Avalon.Hooks
                 if (num6.HasValue && Main.tile[num2, num3].WallType != num6.Value)
                 {
                     Main.tile[num2, num3].WallType = num6.Value;
-                    if (Main.netMode == 2)
+                    if (Main.netMode == NetmodeID.Server)
                     {
                         NetMessage.SendTileSquare(-1, num2, num3);
                     }
@@ -128,7 +128,7 @@ namespace Avalon.Hooks
                         if (flag4)
                         {
                             Main.tile[num30, num31].WallType = (ushort)ModContent.WallType<ContagionGrassWall>();
-                            if (Main.netMode == 2)
+                            if (Main.netMode == NetmodeID.Server)
                             {
                                 NetMessage.SendTileSquare(-1, num30, num31);
                             }
@@ -168,7 +168,7 @@ namespace Avalon.Hooks
                         if (flag4)
                         {
                             Main.tile[num30, num31].WallType = (ushort)ModContent.WallType<ContagionGrassWall>();
-                            if (Main.netMode == 2)
+                            if (Main.netMode == NetmodeID.Server)
                             {
                                 NetMessage.SendTileSquare(-1, num30, num31);
                             }
@@ -184,7 +184,7 @@ namespace Avalon.Hooks
             if (Main.hardMode)
             {
                 int type = Main.tile[i, j].TileType;
-                if ((NPC.downedPlantBoss && WorldGen.genRand.Next(2) == 0) || WorldGen.AllowedToSpreadInfections)
+                if ((NPC.downedPlantBoss && WorldGen.genRand.NextBool(2)) || WorldGen.AllowedToSpreadInfections)
                 {
                     if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionJungleGrass>() || type == ModContent.TileType<ContagionShortGrass>() || type == ModContent.TileType<ContagionVines>() || type == ModContent.TileType<Snotsand>() || type == ModContent.TileType<Chunkstone>() || type == ModContent.TileType<YellowIce>() || type == ModContent.TileType<HardenedSnotsand>() || type == ModContent.TileType<Snotsandstone>())
                     {
@@ -200,7 +200,7 @@ namespace Avalon.Hooks
                             }
                             if (Main.tile[num15, num16].TileType == 2)
                             {
-                                if (WorldGen.genRand.Next(2) == 0)
+                                if (WorldGen.genRand.NextBool(2))
                                 {
                                     flag4 = true;
                                 }
@@ -210,7 +210,7 @@ namespace Avalon.Hooks
                             }
                             if (Main.tile[num15, num16].TileType == 60)
                             {
-                                if (WorldGen.genRand.Next(2) == 0)
+                                if (WorldGen.genRand.NextBool(2))
                                 {
                                     flag4 = true;
                                 }
@@ -230,7 +230,7 @@ namespace Avalon.Hooks
                             //}
                             else if (Main.tile[num15, num16].TileType == 1 || Main.tileMoss[Main.tile[num15, num16].TileType])
                             {
-                                if (WorldGen.genRand.Next(2) == 0)
+                                if (WorldGen.genRand.NextBool(2))
                                 {
                                     flag4 = true;
                                 }
@@ -240,7 +240,7 @@ namespace Avalon.Hooks
                             }
                             else if (Main.tile[num15, num16].TileType == 53)
                             {
-                                if (WorldGen.genRand.Next(2) == 0)
+                                if (WorldGen.genRand.NextBool(2))
                                 {
                                     flag4 = true;
                                 }
@@ -250,7 +250,7 @@ namespace Avalon.Hooks
                             }
                             else if (Main.tile[num15, num16].TileType == 396)
                             {
-                                if (WorldGen.genRand.Next(2) == 0)
+                                if (WorldGen.genRand.NextBool(2))
                                 {
                                     flag4 = true;
                                 }
@@ -260,7 +260,7 @@ namespace Avalon.Hooks
                             }
                             else if (Main.tile[num15, num16].TileType == 397)
                             {
-                                if (WorldGen.genRand.Next(2) == 0)
+                                if (WorldGen.genRand.NextBool(2))
                                 {
                                     flag4 = true;
                                 }
@@ -270,7 +270,7 @@ namespace Avalon.Hooks
                             }
                             else if (Main.tile[num15, num16].TileType == 161)
                             {
-                                if (WorldGen.genRand.Next(2) == 0)
+                                if (WorldGen.genRand.NextBool(2))
                                 {
                                     flag4 = true;
                                 }

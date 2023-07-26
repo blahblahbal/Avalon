@@ -206,7 +206,22 @@ public class AvalonWorld : ModSystem
             {
                 num10 = Main.maxTilesY - 10;
             }
-            
+
+            if (TileID.Sets.SpreadOverground[Main.tile[num5, num6].TileType])
+            {
+                int type = Main.tile[num5, num6].TileType;
+                if ((type == ModContent.TileType<ContagionThornyBushes>()) && WorldGen.genRand.NextBool(3))
+                {
+                    WorldGen.GrowSpike(num5, num6, (ushort)ModContent.TileType<ContagionThornyBushes>(), (ushort)ModContent.TileType<Ickgrass>());
+                }
+                else if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 &&
+                    !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid &&
+                    WorldGen.genRand.NextBool(10) && (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionJungleGrass>()))
+                {
+                    WorldGen.PlaceTile(num5, num9, ModContent.TileType<ContagionThornyBushes>(), mute: true);
+                }
+            }
+
             #region planter box grass growth
             if (Main.tile[num5, num6].TileType == ModContent.TileType<PlanterBoxes>())
             {
@@ -323,7 +338,7 @@ public class AvalonWorld : ModSystem
             #endregion large herb growth
 
             #region contagion shortgrass/barfbush spawning
-            if (Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>())
+            if (false) //Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>())
             {
                 int num14 = Main.tile[num5, num6].TileType;
                 if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 &&
@@ -1519,7 +1534,7 @@ public class AvalonWorld : ModSystem
         {
             _glitchFrameCounter = 0;
             _glitchFrame = (_glitchFrame + 1) % 16;
-            if ((_glitchFrame == 4 || _glitchFrame == 8 || _glitchFrame == 12) && Main.rand.Next(3) == 0)
+            if ((_glitchFrame == 4 || _glitchFrame == 8 || _glitchFrame == 12) && Main.rand.NextBool(3))
             {
                 _glitchVariation = Main.rand.Next(7);
             }
