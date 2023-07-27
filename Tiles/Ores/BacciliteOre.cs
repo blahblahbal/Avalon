@@ -1,5 +1,8 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -21,11 +24,22 @@ public class BacciliteOre : ModTile
         Main.tileLighted[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Material.Ores.BacciliteOre>();
         HitSound = SoundID.Tink;
-        DustType = DustID.JungleSpore;
+        DustType = ModContent.DustType<ContagionWeapons>();
         MinPick = 55;
         TileID.Sets.Ore[Type] = true;
     }
-
+    public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
+    {
+        if (Main.rand.NextBool(60))
+        {
+            Dust d = Dust.NewDustDirect(new Vector2(i, j) * 16, 16, 16, DustType, 0, 0, 128);
+            d.noGravity = true;
+            d.scale *= 0.1f;
+            d.velocity *= 0.1f;
+            d.fadeIn = Main.rand.NextFloat(0.5f,1.3f);
+            d.velocity.Y += 0.4f;
+        }
+    }
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         r = 0.18f;

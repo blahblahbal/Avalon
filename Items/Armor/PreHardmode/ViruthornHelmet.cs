@@ -1,6 +1,7 @@
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -53,6 +54,7 @@ class ViruthornHelmet : ModItem
             d.velocity *= 0.1f;
             d.fadeIn = 1;
             d.velocity += player.velocity + new Vector2(0,0.4f);
+            d.shader = GameShaders.Armor.GetShaderFromItemId(player.dye[Main.rand.Next(3)].type);
         }
     }
     public override void UpdateEquip(Player player)
