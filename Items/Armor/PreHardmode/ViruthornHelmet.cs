@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -41,7 +42,19 @@ class ViruthornHelmet : ModItem
         player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Viruthorn");
         player.GetCritChance(DamageClass.Generic) += 10;
     }
-
+    public override void UpdateVanitySet(Player player)
+    {
+        if (Main.rand.NextBool(7))
+        {
+            Dust d = Dust.NewDustDirect(player.position, player.width, player.height, ModContent.DustType<ContagionWeapons>());
+            d.noGravity = true;
+            d.scale *= 0.1f;
+            d.alpha = 128;
+            d.velocity *= 0.1f;
+            d.fadeIn = 1;
+            d.velocity += player.velocity + new Vector2(0,0.4f);
+        }
+    }
     public override void UpdateEquip(Player player)
     {
         player.GetDamage(DamageClass.Generic) += 0.03f;
