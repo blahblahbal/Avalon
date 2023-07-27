@@ -16,6 +16,7 @@ class WorldgenHelper : ModItem
         Item.width = dims.Width;
         Item.maxStack = 1;
         Item.useAnimation = Item.useTime = 30;
+        //Item.createTile = ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 0;
         Item.height = dims.Height;
@@ -34,8 +35,8 @@ class WorldgenHelper : ModItem
 
 
 
-        if (player.ItemAnimationJustStarted)
-            Contagion.ContagionRunner(x, y); //BoreWavyTunnel(x, y, x + 100, y, 50, 4, (ushort)ModContent.TileType<Tiles.Ores.Boltstone>(), 10);
+        //if (player.ItemAnimationJustStarted)
+        //    Contagion.ContagionRunner(x, y); //BoreWavyTunnel(x, y, x + 100, y, 50, 4, (ushort)ModContent.TileType<Tiles.Ores.Boltstone>(), 10);
         //    SkyClouds.MakeCloud(x, y);
             //WorldGeneration.Utils.MakeSquare(x, y, 10, ModContent.TileType<Tiles.Ores.PrimordialOre>());
 

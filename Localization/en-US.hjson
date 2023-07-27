@@ -5433,6 +5433,16 @@ Mods: {
 				DisplayName: Tourmaline Gemcorn
 				Tooltip: ""
 			}
+
+			PeridotGemcorn: {
+				DisplayName: Peridot Gemcorn
+				Tooltip: ""
+			}
+
+			ZirconGemcorn: {
+				DisplayName: Zircon Gemcorn
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

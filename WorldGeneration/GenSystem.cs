@@ -62,13 +62,16 @@ public class GenSystem : ModSystem
             totalWeight += currentPass.Weight;
         }
 
-        //int stalac = tasks.FindIndex(genPass => genPass.Name == "Stalac");
-        //if (stalac != -1)
-        //{
-        //    currentPass = new ContagionStalactgmites();
-        //    tasks.Insert(stalac + 1, currentPass);
-        //    totalWeight += currentPass.Weight;
-        //}
+        int stalac = tasks.FindIndex(genPass => genPass.Name == "Stalac");
+        if (stalac != -1)
+        {
+            //currentPass = new ContagionStalactgmites();
+            //tasks.Insert(stalac + 1, currentPass);
+            //totalWeight += currentPass.Weight;
+            currentPass = new GemTreePass();
+            tasks.Insert(stalac + 2, currentPass);
+            totalWeight += currentPass.Weight;
+        }
 
         // uncomment when hm update releases
         //int underworld = tasks.FindIndex(genPass => genPass.Name == "Micro Biomes");

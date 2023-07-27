@@ -41,7 +41,7 @@ public class PeridotSapling : ModTile
 
     public override void RandomUpdate(int i, int j)
     {
-        if (WorldGen.genRand.Next(20) == 0)
+        if (WorldGen.genRand.NextBool(20))
         {
             bool flag = WorldGen.PlayerLOS(i, j);
             if (WorldGen.GrowTree(i, j) && flag)

@@ -29,7 +29,7 @@ public class Utils
         if (Main.tile[x, y].LiquidType != LiquidID.Shimmer)
         {
             PlaceUncheckedStalactite(x, y, WorldGen.genRand.NextBool(2), WorldGen.genRand.Next(3));
-            if (Main.tile[x, y].TileType == ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>())
+            if (Main.tile[x, y].TileType == ModContent.TileType<ContagionStalactgmites>())
             {
                 WorldGen.CheckTight(x, y);
             }
@@ -37,7 +37,7 @@ public class Utils
     }
     public static void PlaceUncheckedStalactite(int x, int y, bool preferSmall, int variation)
     {
-        ushort type = 165;
+        ushort type = (ushort)ModContent.TileType<ContagionStalactgmites>();
         variation = Terraria.Utils.Clamp(variation, 0, 2);
         if (WorldGen.SolidTile(x, y - 1) && !Main.tile[x, y].HasTile && !Main.tile[x, y + 1].HasTile)
         {
@@ -66,7 +66,7 @@ public class Utils
                 }
             }
         }
-        else
+        else if (WorldGen.SolidTile(x, y + 1) && !Main.tile[x, y].HasTile && !Main.tile[x, y - 1].HasTile)
         {
             if (Main.tile[x, y + 1].TileType == ModContent.TileType<Chunkstone>())
             {
