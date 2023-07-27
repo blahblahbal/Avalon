@@ -33,7 +33,7 @@ public class PeridotTree : ModTree
 
     public override int CreateDust()
     {
-        return ModContent.DustType<CoughwoodDust>();
+        return ModContent.DustType<PeridotDust>();
     }
     public override Asset<Texture2D> GetTexture()
     {
@@ -96,6 +96,6 @@ public class PeridotTree : ModTree
         //    Item.NewItem(WorldGen.GetItemSource_FromTreeShake(x, y), new Vector2(x, y) * 16, ModContent.ItemType<Items.Food.Durian>());
         //    return false;
         //}
-        return true;
+        return false;
     }
 }

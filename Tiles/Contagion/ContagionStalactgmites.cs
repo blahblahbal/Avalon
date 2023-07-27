@@ -14,17 +14,12 @@ public class ContagionStalactgmites : ModTile
     public override void SetStaticDefaults()
     {
         Main.tileSolid[Type] = false;
-        Main.tileNoAttach[Type] = true;
         Main.tileNoFail[Type] = true;
         Main.tileFrameImportant[Type] = true;
-        //TileObjectData.newTile.CopyFrom(TileObjectData.Style1xX);
-        //TileObjectData.newTile.Height = 2;
-        //TileObjectData.newTile.Width = 1;
-        //TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16, 16, 16, 16 };
-        //TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<Chunkstone>() };
-        //TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile, TileObjectData.newTile.Width, 0);
-        //TileObjectData.newTile.StyleHorizontal = true;
-        //TileObjectData.addTile(Type);
+        Main.tileObsidianKill[Type] = true;
+        TileID.Sets.BreakableWhenPlacing[Type] = true;
+        Main.tileMerge[ModContent.TileType<Chunkstone>()][Type] = true;
+        Main.tileMerge[Type][ModContent.TileType<Chunkstone>()] = true;
         DustType = ModContent.DustType<Dusts.ContagionDust>();
         AddMapEntry(new Color(133, 150, 39));
     }
@@ -40,10 +35,85 @@ public class ContagionStalactgmites : ModTile
             offsetY = 2;
         }
     }
+    //LEAVE THIS HERE just in case we need it later lol
+    //public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
+    //{
+    //    //WorldGen.CheckTight(i, j);
+    //    Tile tAbove = Framing.GetTileSafely(i, j - 1);
+    //    Tile tBelow = Framing.GetTileSafely(i, j + 1);
+    //    Tile tUpRight = Framing.GetTileSafely(i + 1, j - 1);
+    //    Tile tUpLeft = Framing.GetTileSafely(i - 1, j - 1);
+    //    Tile tDownRight = Framing.GetTileSafely(i + 1, j + 1);
+    //    Tile tDownLeft = Framing.GetTileSafely(i - 1, j + 1);
+    //    Tile tUp2 = Framing.GetTileSafely(i, j - 2);
+    //    Tile tDown2 = Framing.GetTileSafely(i, j + 2);
 
-    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
-    {
-        WorldGen.CheckTight(i, j);
-        return false;
-    }
+    //    Tile tUp2Left = Framing.GetTileSafely(i - 1, j - 2);
+    //    Tile tUp2Right = Framing.GetTileSafely(i + 1, j - 2);
+
+    //    Tile tUpLeft2 = Framing.GetTileSafely(i - 2, j - 1);
+    //    Tile tUpRight2 = Framing.GetTileSafely(i + 2, j - 1);
+    //    ushort chunk = (ushort)ModContent.TileType<Chunkstone>();
+    //    ushort dirt = TileID.Dirt;
+    //    if (tAbove.TileType == chunk && tAbove.HasTile)
+    //    {
+    //        if (tUpRight.TileType == dirt && tUpRight.HasTile)
+    //        {
+    //            if (!tUp2.HasTile)
+    //            {
+    //                if (tUpLeft.HasTile)
+    //                {
+    //                    // up 2 inactive, up-right dirt, up-left dirt
+    //                    if (tUpLeft.TileType == dirt)
+    //                    {
+    //                        tAbove.TileFrameX = (short)(18 * WorldGen.genRand.Next(7, 10));
+    //                        tAbove.TileFrameY = 0;
+    //                        if (tUpLeft2.HasTile)
+    //                        {
+    //                            tUpLeft.TileFrameX = 216;
+    //                            tUpLeft.TileFrameY = (short)(18 * WorldGen.genRand.Next(3));
+    //                        }
+    //                        else
+    //                        {
+    //                            tUpLeft.TileFrameX = (short)(18 * WorldGen.genRand.Next(9, 12));
+    //                            tUpLeft.TileFrameY = 54;
+    //                        }
+    //                    }
+    //                    // up 2 inactive, up-right dirt, up-left stone tile
+    //                    else if (TileID.Sets.Stone[tUpLeft.TileType])
+    //                    {
+
+    //                        tAbove.TileFrameX = (short)(18 * WorldGen.genRand.Next(3, 6));
+    //                        tAbove.TileFrameY = 198;
+    //                        if (tUpLeft2.HasTile)
+    //                        {
+    //                            tUpLeft.TileFrameX = 216;
+    //                            tUpLeft.TileFrameY = (short)(18 * WorldGen.genRand.Next(3));
+    //                        }
+    //                        else
+    //                        {
+    //                            tUpLeft.TileFrameX = (short)(18 * WorldGen.genRand.Next(10, 13));
+    //                            tUpLeft.TileFrameY = 54;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            else
+    //            {
+    //                if (tUpLeft.HasTile)
+    //                {
+    //                    if (tUpLeft.TileType == dirt)
+    //                    {
+    //                        //tAbove.TileFrameX = ;
+    //                    }
+    //                    else if (tUpLeft.TileType == chunk)
+    //                    {
+
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //    return false;
+    //}
 }

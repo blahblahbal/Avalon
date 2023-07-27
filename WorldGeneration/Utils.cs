@@ -29,10 +29,10 @@ public class Utils
         if (Main.tile[x, y].LiquidType != LiquidID.Shimmer)
         {
             PlaceUncheckedStalactite(x, y, WorldGen.genRand.NextBool(2), WorldGen.genRand.Next(3));
-            if (Main.tile[x, y].TileType == ModContent.TileType<ContagionStalactgmites>())
-            {
-                WorldGen.CheckTight(x, y);
-            }
+            //if (Main.tile[x, y].TileType == ModContent.TileType<ContagionStalactgmites>())
+            //{
+            //    WorldGen.CheckTight(x, y);
+            //}
         }
     }
     public static void PlaceUncheckedStalactite(int x, int y, bool preferSmall, int variation)
@@ -47,8 +47,7 @@ public class Utils
                 {
                     int num12 = variation * 18;
                     Tile t = Main.tile[x, y];
-                    t.TileType = type;
-                    t.HasTile = true;
+                    WorldGen.PlaceTile(x, y, type);
                     t.TileFrameX = (short)num12;
                     t.TileFrameY = 72;
                 }
@@ -57,10 +56,12 @@ public class Utils
                     int num15 = variation * 18;
                     Tile t = Main.tile[x, y];
                     t.HasTile = true;
+                    t.TileType = type;
                     t.TileFrameX = (short)num15;
                     t.TileFrameY = 0;
                     t = Main.tile[x, y + 1];
                     t.HasTile = true;
+                    t.TileType = type;
                     t.TileFrameX = (short)num15;
                     t.TileFrameY = 18;
                 }
@@ -72,7 +73,7 @@ public class Utils
             {
                 if (preferSmall)
                 {
-                    int num5 = 54 + variation * 18;
+                    int num5 = variation * 18;
                     Tile t = Main.tile[x, y];
                     t.TileType = type;
                     t.HasTile = true;
@@ -81,13 +82,15 @@ public class Utils
                 }
                 else
                 {
-                    int num6 = 54 + variation * 18;
+                    int num6 = variation * 18;
                     Tile t = Main.tile[x, y - 1];
                     t.HasTile = true;
+                    t.TileType = type;
                     t.TileFrameX = (short)num6;
                     t.TileFrameY = 36;
                     t = Main.tile[x, y];
                     t.HasTile = true;
+                    t.TileType = type;
                     t.TileFrameX = (short)num6;
                     t.TileFrameY = 54;
                 }

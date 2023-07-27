@@ -604,8 +604,10 @@ public class AvalonPlayer : ModPlayer
         #region MapColors (leaving this here as a reference for how to reflection)
         //Color[] ColorLookup = (Color[])typeof(MapHelper).GetField("colorLookup", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
         //ushort TilePosition = (ushort)typeof(MapHelper).GetField("tilePosition", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
-        //ColorLookup[TilePosition + ModContent.TileType<PrimordialOre>()] = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
-        //Main.Map.
+
+
+        //ColorLookup[TilePosition + ModContent.TileType<Tiles.GemTrees.PeridotTree>()] = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
+        ////Main.Map.
         #endregion
 
         WardCD--;

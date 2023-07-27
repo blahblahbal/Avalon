@@ -18,7 +18,7 @@ namespace Avalon.WorldGeneration.Passes
             {
                 for (int num20 = (int)Main.worldSurface; num20 < Main.maxTilesY - 20; num20++)
                 {
-                    if ((Main.tenthAnniversaryWorld || WorldGen.drunkWorldGen || WorldGen.genRand.NextBool(50)) && Main.tile[num19, num20 - 1].LiquidAmount == 0)
+                    if ((Main.tenthAnniversaryWorld || WorldGen.drunkWorldGen || WorldGen.genRand.NextBool(5)) && Main.tile[num19, num20 - 1].LiquidAmount == 0)
                     {
                         int num21 = WorldGen.genRand.Next(3);
                         int treeTileType = 0;
@@ -34,10 +34,14 @@ namespace Avalon.WorldGeneration.Passes
                                 treeTileType = ModContent.TileType<Tiles.GemTrees.ZirconSapling>();
                                 break;
                         }
-                        WorldGen.PlaceTile(num19, num20, treeTileType, true);
-                        if (!WorldGen.GrowTree(num19, num20))
+                        if (!Main.tile[num19, num20].HasTile)
                         {
-                            WorldGen.KillTile(num19, num20);
+                            WorldGen.PlaceTile(num19, num20, treeTileType, true);
+                            if (!WorldGen.GrowTree(num19, num20) && (Main.tile[num19, num20].TileType == ModContent.TileType<Tiles.GemTrees.TourmalineSapling>() ||
+                                Main.tile[num19, num20].TileType == ModContent.TileType<Tiles.GemTrees.PeridotSapling>() || Main.tile[num19, num20].TileType == ModContent.TileType<Tiles.GemTrees.ZirconSapling>()))
+                            {
+                                WorldGen.KillTile(num19, num20);
+                            }
                         }
                     }
                 }

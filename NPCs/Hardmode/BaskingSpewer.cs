@@ -38,6 +38,7 @@ public class BaskingSpewer : ModNPC
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.value = 400f;
         NPC.npcSlots = 0.5f;
+        NPC.noTileCollide = true;
         AIType = NPCID.SandsharkCorrupt;
         AnimationType = NPCID.SandsharkCorrupt;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionDesert>().Type };

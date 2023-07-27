@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.Enums;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,7 +15,6 @@ public class ZirconTree : ModTree
 {
     private int xCoord = 0;
     private int yCoord = 0;
-
     public override TreePaintingSettings TreeShaderSettings => new TreePaintingSettings
     {
         UseSpecialGroups = true,
@@ -33,7 +33,7 @@ public class ZirconTree : ModTree
 
     public override int CreateDust()
     {
-        return ModContent.DustType<CoughwoodDust>();
+        return ModContent.DustType<ZirconDust>();
     }
     public override Asset<Texture2D> GetTexture()
     {
@@ -96,6 +96,6 @@ public class ZirconTree : ModTree
         //    Item.NewItem(WorldGen.GetItemSource_FromTreeShake(x, y), new Vector2(x, y) * 16, ModContent.ItemType<Items.Food.Durian>());
         //    return false;
         //}
-        return true;
+        return false;
     }
 }

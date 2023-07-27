@@ -3,6 +3,7 @@ using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System.Reflection;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -14,7 +15,7 @@ public class TourmalineTree : ModTree
 {
     private int xCoord = 0;
     private int yCoord = 0;
-
+   
     public override TreePaintingSettings TreeShaderSettings => new TreePaintingSettings
     {
         UseSpecialGroups = true,
@@ -25,6 +26,7 @@ public class TourmalineTree : ModTree
     };
     public override void SetStaticDefaults()
     {
+        //PlantTileId = 583;
         GrowsOnTileId = new int[]
         {
             TileID.Stone
@@ -33,7 +35,7 @@ public class TourmalineTree : ModTree
 
     public override int CreateDust()
     {
-        return ModContent.DustType<CoughwoodDust>();
+        return ModContent.DustType<TourmalineDust>();
     }
     public override Asset<Texture2D> GetTexture()
     {
@@ -97,6 +99,6 @@ public class TourmalineTree : ModTree
         //    Item.NewItem(WorldGen.GetItemSource_FromTreeShake(x, y), new Vector2(x, y) * 16, ModContent.ItemType<Items.Food.Durian>());
         //    return false;
         //}
-        return true;
+        return false;
     }
 }

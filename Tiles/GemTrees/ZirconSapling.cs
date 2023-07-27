@@ -33,15 +33,14 @@ public class ZirconSapling : ModTile
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.newTile.RandomStyleRange = 3;
         TileObjectData.addTile(Type);
-        //TileID.Sets.TreeSapling[Type] = true;
         AddMapEntry(new Color(200, 200, 200));
-        DustType = ModContent.DustType<Dusts.ContagionDust>();
+        DustType = ModContent.DustType<Dusts.ZirconDust>();
         AdjTiles = new int[1] { TileID.Saplings };
     }
 
     public override void RandomUpdate(int i, int j)
     {
-        if (WorldGen.genRand.Next(20) == 0)
+        if (WorldGen.genRand.NextBool(20))
         {
             bool flag = WorldGen.PlayerLOS(i, j);
             if (WorldGen.GrowTree(i, j) && flag)
