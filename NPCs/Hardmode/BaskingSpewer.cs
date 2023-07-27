@@ -39,6 +39,7 @@ public class BaskingSpewer : ModNPC
         NPC.value = 400f;
         NPC.npcSlots = 0.5f;
         NPC.noTileCollide = true;
+        NPC.behindTiles = true;
         AIType = NPCID.SandsharkCorrupt;
         AnimationType = NPCID.SandsharkCorrupt;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionDesert>().Type };
