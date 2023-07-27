@@ -379,24 +379,25 @@ public class AvalonStaminaPlayer : ModPlayer
             StaminaRegenCount = 0;
             if (StaminaCooldown >= 10)
             {
-                int amt = 1;
-                if (StaminaDrain)
-                {
-                    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-                }
+                Player.ConsumeStamina(1);
+                //int amt = 1;
+                //if (StaminaDrain)
+                //{
+                //    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+                //}
 
-                if (StatStam >= amt)
-                {
-                    StatStam -= amt;
-                }
-                else if (StamFlower)
-                {
-                    QuickStamina();
-                    if (StatStam >= amt)
-                    {
-                        StatStam -= amt;
-                    }
-                }
+                //if (StatStam >= amt)
+                //{
+                //    StatStam -= amt;
+                //}
+                //else if (StamFlower)
+                //{
+                //    QuickStamina();
+                //    if (StatStam >= amt)
+                //    {
+                //        StatStam -= amt;
+                //    }
+                //}
 
                 if (StatStam <= 0)
                 {

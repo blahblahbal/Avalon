@@ -66,6 +66,24 @@ public class PeridotTree : ModTree
 
     public override bool CanDropAcorn()
     {
+        //if (xCoord != 0 && yCoord != 0)
+        //{
+        //    int dropItem = ItemID.StoneBlock;
+        //    if (Main.rand.NextBool(10))
+        //    {
+        //        dropItem = ModContent.ItemType<Items.Material.Ores.Peridot>();
+        //    }
+        //    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, dropItem, WorldGen.genRand.Next(2) + 1);
+        //    if (Main.rand.NextBool(2))
+        //    {
+        //        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ModContent.ItemType<Items.Placeable.Tile.PeridotGemcorn>(), WorldGen.genRand.Next(2) + 1);
+        //    }
+        //    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ItemID.StoneBlock, WorldGen.genRand.Next(7, 20));
+        //}
+        return false;
+    }
+    public override int DropWood()
+    {
         if (xCoord != 0 && yCoord != 0)
         {
             int dropItem = ItemID.StoneBlock;
@@ -74,16 +92,11 @@ public class PeridotTree : ModTree
                 dropItem = ModContent.ItemType<Items.Material.Ores.Peridot>();
             }
             Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, dropItem, WorldGen.genRand.Next(2) + 1);
-            if (Main.rand.NextBool(2))
+            if (Main.rand.NextBool(4))
             {
-                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ModContent.ItemType<Items.Placeable.Tile.PeridotGemcorn>(), WorldGen.genRand.Next(2) + 1);
+                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ModContent.ItemType<Items.Placeable.Tile.PeridotGemcorn>(), WorldGen.genRand.Next(2));
             }
-            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ItemID.StoneBlock, WorldGen.genRand.Next(7, 40));
         }
-        return false;
-    }
-    public override int DropWood()
-    {
         return ItemID.None;
     }
 

@@ -177,6 +177,11 @@ Mods: {
 				Tooltip: "'May annoy others'"
 			}
 
+			NerveNumbNecklace: {
+				DisplayName: Nerve Numb Necklace
+				Tooltip: Consumes stamina to reduce debuff time
+			}
+
 			RingofArrogance: {
 				DisplayName: Ring of Arrogance
 				Tooltip:
@@ -5441,6 +5446,11 @@ Mods: {
 
 			ZirconGemcorn: {
 				DisplayName: Zircon Gemcorn
+				Tooltip: ""
+			}
+
+			RocketinaBottle: {
+				DisplayName: Rocketina Bottle
 				Tooltip: ""
 			}
 		}

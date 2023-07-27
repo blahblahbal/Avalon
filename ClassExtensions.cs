@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Avalon.Common;
+using Avalon.Common.Players;
 using Avalon.Hooks;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
@@ -28,6 +29,26 @@ public static class ClassExtensions
 
     public static void Active(this Tile t, bool a) => t.HasTile = a;
 
+    public static void ConsumeStamina(this Player p, int amt)
+    {
+        if (p.GetModPlayer<AvalonStaminaPlayer>().StaminaDrain)
+        {
+            amt *= (int)(p.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks * p.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainMult);
+        }
+
+        if (p.GetModPlayer<AvalonStaminaPlayer>().StatStam >= amt)
+        {
+            p.GetModPlayer<AvalonStaminaPlayer>().StatStam -= amt;
+        }
+        else if (p.GetModPlayer<AvalonStaminaPlayer>().StamFlower)
+        {
+            p.GetModPlayer<AvalonStaminaPlayer>().QuickStamina();
+            if (p.GetModPlayer<AvalonStaminaPlayer>().StatStam >= amt)
+            {
+                p.GetModPlayer<AvalonStaminaPlayer>().StatStam -= amt;
+            }
+        }
+    }
     public static void AttemptToConvertNPCToContagion(this NPC n)
     {
         if (n.type == NPCID.Bunny)

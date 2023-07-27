@@ -9,7 +9,7 @@ class TourmalineGemcorn : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 100;
+        Item.ResearchUnlockCount = 5;
     }
 
     public override void SetDefaults()

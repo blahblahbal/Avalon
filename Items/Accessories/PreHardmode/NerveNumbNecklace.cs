@@ -6,6 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
+[AutoloadEquip(EquipType.Neck)]
 class NerveNumbNecklace : ModItem
 {
     public override void SetDefaults()
@@ -29,7 +30,7 @@ class NerveNumbNecklace : ModItem
                 }
                 if (player.buffTime[i] % 7 == 0)
                 {
-                    player.GetModPlayer<AvalonStaminaPlayer>().StatStam = (int)MathHelper.Clamp(player.GetModPlayer<AvalonStaminaPlayer>().StatStam - 1, 0, int.MaxValue);
+                    player.ConsumeStamina(1);
                     player.GetModPlayer<AvalonStaminaPlayer>().StamRegenDelay = 60;
                 }
             }

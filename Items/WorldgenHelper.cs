@@ -36,8 +36,13 @@ class WorldgenHelper : ModItem
 
 
         //if (player.ItemAnimationJustStarted)
-        //    Contagion.ContagionRunner(x, y); //BoreWavyTunnel(x, y, x + 100, y, 50, 4, (ushort)ModContent.TileType<Tiles.Ores.Boltstone>(), 10);
-        //    SkyClouds.MakeCloud(x, y);
+        //{
+        //    WorldGen.PlaceTile(x, y, ModContent.TileType<Tiles.GemTrees.ZirconSapling>());
+        //    WorldGen.GrowTree(x, y);
+        //}
+            
+            //    Contagion.ContagionRunner(x, y); //BoreWavyTunnel(x, y, x + 100, y, 50, 4, (ushort)ModContent.TileType<Tiles.Ores.Boltstone>(), 10);
+            //    SkyClouds.MakeCloud(x, y);
             //WorldGeneration.Utils.MakeSquare(x, y, 10, ModContent.TileType<Tiles.Ores.PrimordialOre>());
 
         return false;

@@ -6,18 +6,29 @@ using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using static Terraria.WorldGen;
 
 namespace Avalon.Tiles.GemTrees;
 
 public class TourmalineSapling : ModTile
 {
+    public static GrowTreeSettings GemTree_Tourmaline = new GrowTreeSettings
+    {
+        GroundTest = GemTreeGroundTest,
+        WallTest = GemTreeWallTest,
+        TreeHeightMax = 12,
+        TreeHeightMin = 7,
+        TreeTileType = 5,
+        TreeTopPaddingNeeded = 4,
+        SaplingTileType = (ushort)ModContent.TileType<TourmalineSapling>()
+    };
     public override void SetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
         Main.tileLavaDeath[Type] = true;
         TileID.Sets.CommonSapling[Type] = true;
-        TileID.Sets.TreeSapling[Type] = true;
+        //TileID.Sets.TreeSapling[Type] = true;
         TileObjectData.newTile.Width = 1;
         TileObjectData.newTile.Height = 2;
         TileObjectData.newTile.Origin = new Point16(0, 1);
@@ -26,7 +37,7 @@ public class TourmalineSapling : ModTile
         TileObjectData.newTile.CoordinateHeights = new int[2] { 16, 18 };
         TileObjectData.newTile.CoordinateWidth = 16;
         TileObjectData.newTile.CoordinatePadding = 2;
-        TileObjectData.newTile.AnchorValidTiles = new int[1] { TileID.Stone };
+        TileObjectData.newTile.AnchorValidTiles = new int[16] { 1, 25, 117, 203, 182, 180, 179, 381, 183, 181, 534, 536, 539, 625, 627, ModContent.TileType<Contagion.Chunkstone>() };
         TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.DrawFlipHorizontal = true;
         TileObjectData.newTile.WaterPlacement = LiquidPlacement.NotAllowed;
@@ -49,7 +60,6 @@ public class TourmalineSapling : ModTile
             }
         }
     }
-
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects effects)
     {
         if (i % 2 == 1)

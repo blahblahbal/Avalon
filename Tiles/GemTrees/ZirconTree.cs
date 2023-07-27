@@ -51,7 +51,6 @@ public class ZirconTree : ModTree
         topTextureFrameHeight = 96;
         // This is where fancy code could go, but let's save that for an advanced example
     }
-
     // Branch Textures
     public override Asset<Texture2D> GetBranchTextures()
     {
@@ -66,6 +65,24 @@ public class ZirconTree : ModTree
 
     public override bool CanDropAcorn()
     {
+        //if (xCoord != 0 && yCoord != 0)
+        //{
+        //    int dropItem = ItemID.StoneBlock;
+        //    if (Main.rand.NextBool(10))
+        //    {
+        //        dropItem = ModContent.ItemType<Items.Material.Ores.Zircon>();
+        //    }
+        //    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, dropItem, WorldGen.genRand.Next(2) + 1);
+        //    if (Main.rand.NextBool(2))
+        //    {
+        //        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ModContent.ItemType<Items.Placeable.Tile.ZirconGemcorn>(), WorldGen.genRand.Next(2) + 1);
+        //    }
+        //    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ItemID.StoneBlock, WorldGen.genRand.Next(7, 40));
+        //}
+        return false;
+    }
+    public override int DropWood()
+    {
         if (xCoord != 0 && yCoord != 0)
         {
             int dropItem = ItemID.StoneBlock;
@@ -74,16 +91,11 @@ public class ZirconTree : ModTree
                 dropItem = ModContent.ItemType<Items.Material.Ores.Zircon>();
             }
             Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, dropItem, WorldGen.genRand.Next(2) + 1);
-            if (Main.rand.NextBool(2))
+            if (Main.rand.NextBool(4))
             {
-                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ModContent.ItemType<Items.Placeable.Tile.ZirconGemcorn>(), WorldGen.genRand.Next(2) + 1);
+                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ModContent.ItemType<Items.Placeable.Tile.ZirconGemcorn>(), WorldGen.genRand.Next(2));
             }
-            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(xCoord, yCoord), xCoord * 16, yCoord * 16, 8, 8, ItemID.StoneBlock, WorldGen.genRand.Next(7, 40));
         }
-        return false;
-    }
-    public override int DropWood()
-    {
         return ItemID.None;
     }
 

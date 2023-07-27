@@ -17,7 +17,7 @@ public class SnotOrb : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(144, 160, 38), LanguageManager.Instance.GetText("Snot Orb"));
+        AddMapEntry(new Color(144, 160, 38), LanguageManager.Instance.GetText("Sepsis Cell"));
         Main.tileFrameImportant[Type] = true;
         AnimationFrameHeight = 36;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3Wall);
