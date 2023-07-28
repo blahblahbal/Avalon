@@ -391,9 +391,14 @@ public class Sun : ModProjectile
         }
 
         Texture2D sunTex = (Texture2D)ModContent.Request<Texture2D>(Texture);
+        Texture2D backTex = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Sun_Back");
         Rectangle sunFrame = sunTex.Frame();
         Vector2 sunFrameOrigin = sunFrame.Size() / 2f;
-        Main.EntitySpriteDraw(sunTex, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 1f, SpriteEffects.None, 0);
+        Rectangle backFrame = backTex.Frame();
+        Vector2 backFrameOrigin = backFrame.Size() / 2f;
+        Main.EntitySpriteDraw(sunTex, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 0.9f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(backTex, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(180, 180, 180, 180), Projectile.rotation, backFrameOrigin, 1f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(backTex, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(70, 70, 70, 70), Projectile.rotation + MathHelper.PiOver4 / 2, backFrameOrigin, 1.5f, SpriteEffects.None, 0);
 
         return false;
     }
