@@ -5,7 +5,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile; 
+namespace Avalon.Projectiles.Hostile.bacteriumPrime;
 
 public class CorrosiveMucus : ModProjectile
 {
@@ -19,12 +19,12 @@ public class CorrosiveMucus : ModProjectile
     }
     public override void AI()
     {
-        if(Projectile.tileCollide)
-        Projectile.velocity.Y += 0.05f;
+        if (Projectile.tileCollide)
+            Projectile.velocity.Y += 0.05f;
 
         if (Projectile.ai[1] == 0)
         {
-            int D2 = Dust.NewDust(Projectile.Center + new Vector2(0,-4), 0, 0, DustID.PirateStaff, Projectile.velocity.X, Projectile.velocity.Y);
+            int D2 = Dust.NewDust(Projectile.Center + new Vector2(0, -4), 0, 0, DustID.PirateStaff, Projectile.velocity.X, Projectile.velocity.Y);
             Main.dust[D2].noGravity = true;
             Main.dust[D2].velocity = Projectile.velocity * 0.5f;
             Main.dust[D2].scale = 1.5f;
@@ -40,7 +40,7 @@ public class CorrosiveMucus : ModProjectile
         //Lighting.AddLight(Projectile.Center, 0.3f, 0.35f, 0f);
         Lighting.AddLight(Projectile.Center, 0.3f, 0.3f, 0.2f);
         bool KillFast = true;
-        for(int i = 0; i < Main.npc.Length; i++)
+        for (int i = 0; i < Main.npc.Length; i++)
         {
             if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<BacteriumPrime>())
             {

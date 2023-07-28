@@ -1,6 +1,8 @@
 using System;
 using System.IO;
+using Avalon.Biomes;
 using Avalon.Common.Players;
+using Avalon.Dusts;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Placeable.Furniture;
@@ -9,7 +11,7 @@ using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Vanity;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
-using Avalon.Projectiles.Hostile;
+using Avalon.Projectiles.Hostile.bacteriumPrime;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,6 +24,13 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
+public class ContagionLenient : ModBiome
+{
+    public override bool IsBiomeActive(Player player)
+    {
+        return ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > 75;
+    }
+}
 
 [AutoloadBossHead]
 public class BacteriumPrime : ModNPC
@@ -96,31 +105,21 @@ public class BacteriumPrime : ModNPC
             ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime = true;
         }
     }
-    int BactusCount;
-    int MaxBacCount = 8;
     const float Phase2Health = 0.6f;
     const float Phase2part2Health = 0.3f;
     const float Phase2part3Health = 0.15f;
     float LorR = MathHelper.PiOver4;
     public override void AI()
     {
-        float speed = 5;
-        //BactusCount = 0;
-        //for(int i = 0; i < Main.maxNPCs; i++)
-        //{
-        //    if (Main.npc[i].type == ModContent.NPCType<Viriling>() && Main.npc[i].active)
-        //    {
-        //        BactusCount++;
-        //    }
-        //}
+        float speed;
 
-        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagion || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagionDesert || !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion)
+        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].InModBiome(ModContent.GetInstance<ContagionLenient>()))
         {
             NPC.TargetClosest(false);
         }
         Player Target = Main.player[NPC.target];
 
-        if (Target.dead || (!Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneContagionDesert && !Main.player[NPC.target].GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion))
+        if (Target.dead || (!Main.player[NPC.target].InModBiome(ModContent.GetInstance<ContagionLenient>())))
             NPC.ai[3] = -2;
         if (NPC.ai[3] == -2)
         {
@@ -302,6 +301,14 @@ public class BacteriumPrime : ModNPC
                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
             }
 
+            int MushroomCount = 0;
+            for (int i = 0; i < Main.projectile.Length; i++)
+            {
+                if (Main.projectile[i].type == ModContent.ProjectileType<MushroomWall>() || Main.projectile[i].type == ModContent.ProjectileType<SporeSeed>())
+                {
+                    MushroomCount++;
+                }
+            }
 
             if (NPC.ai[1] > 200)
             {
@@ -312,6 +319,13 @@ public class BacteriumPrime : ModNPC
                     Main.dust[d].velocity = new Vector2(0, -9).RotatedBy(rotate) + NPC.velocity;
                     Main.dust[d].noGravity = true;
                     //Main.dust[d].fadeIn = 1.2f;
+                }
+                else if(MushroomCount < 2 && NPC.position.Y < Main.worldSurface * 16 + 30 * 16 && Main.rand.NextBool())
+                {
+                    float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                    int d = Dust.NewDust(NPC.Center + new Vector2(0, 120).RotatedBy(rotate), 0, 0, ModContent.DustType<ContagionWeapons>(), 0, 0, 50, default, 2);
+                    Main.dust[d].velocity = new Vector2(0, -9).RotatedBy(rotate) + NPC.velocity;
+                    Main.dust[d].noGravity = true;
                 }
                 else
                 {
@@ -341,6 +355,11 @@ public class BacteriumPrime : ModNPC
                         //    Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.1f) * Main.rand.NextFloat(9, 8);
                         //    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<BacteriumGas>(), (int)(NPC.damage * 0.2f), 0, -1,1);
                         //}
+                    }
+                    else if(MushroomCount < 2 && NPC.position.Y < Main.worldSurface * 16 + 30 * 16)
+                    {
+                        Projectile P = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation()), ModContent.ProjectileType<SporeSeed>(), NPC.damage / 3, 0, 255);
+                        P.ai[0] = Target.Center.X;
                     }
                     else
                     {

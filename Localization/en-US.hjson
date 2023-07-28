@@ -5567,6 +5567,8 @@ Mods: {
 			CaesiumMace.DisplayName: Caesium Mace
 			ObsidianGlaive.DisplayName: Obsidian Glaive
 			CrystalUnityShard.DisplayName: Crystal Unity Shard
+			MushroomWall.DisplayName: Mushroom Wall
+			SporeSeed.DisplayName: Spore Seed
 		}
 
 		NPCs: {
@@ -6338,6 +6340,11 @@ Mods: {
 			DarkMatter: {
 				DisplayName: Dark Matter
 				TownNPCDialogueName: the Dark Matter
+			}
+
+			ContagionLenient: {
+				DisplayName: Contagion Lenient
+				TownNPCDialogueName: the Contagion Lenient
 			}
 		}
 

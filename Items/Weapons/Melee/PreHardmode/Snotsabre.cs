@@ -66,7 +66,8 @@ class Snotsabre : ModItem
                 int npc = ClassExtensions.FindClosestNPC(target, 200, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly || AlreadyHit.Contains(npc.whoAmI) || npc.whoAmI == target.whoAmI || !Collision.CanHit(npc, target));
                 if(npc != -1)
                 {
-                    Main.npc[npc].SimpleStrikeNPC((int)(hit.Damage * 0.4f), 0, hit.Crit, 0, hit.DamageType, true, player.luck);
+                    int dmg = Main.npc[npc].SimpleStrikeNPC((int)(hit.Damage * 0.4f), 0, hit.Crit, 0, hit.DamageType, true, player.luck);
+                    player.addDPS(dmg);
                     Main.npc[npc].AddBuff(BuffID.Poisoned, 4 * 60);
                     DustLine(Main.rand.NextVector2FromRectangle(target.Hitbox), Main.rand.NextVector2FromRectangle(Main.npc[npc].Hitbox));
                     AlreadyHit.Add(npc);

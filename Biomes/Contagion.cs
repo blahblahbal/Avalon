@@ -55,3 +55,5 @@ public class Contagion : ModBiome
         //return player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion && !player.ZoneDirtLayerHeight && !player.ZoneRockLayerHeight;
     }
 }
+
+
