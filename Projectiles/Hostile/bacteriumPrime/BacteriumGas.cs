@@ -7,7 +7,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile;
+namespace Avalon.Projectiles.Hostile.bacteriumPrime;
 
 public class BacteriumGas : ModProjectile
 {
@@ -40,8 +40,8 @@ public class BacteriumGas : ModProjectile
         Projectile.ai[0]++;
         if (Projectile.ai[2] > 1)
         {
-            if(Projectile.ai[0] % 3 == 0 && Main.expertMode)
-            Projectile.alpha += 1;
+            if (Projectile.ai[0] % 3 == 0 && Main.expertMode)
+                Projectile.alpha += 1;
             else if (Projectile.ai[0] % 2 == 0 && !Main.expertMode)
                 Projectile.alpha += 1;
             if (Projectile.alpha > 200)
@@ -55,11 +55,11 @@ public class BacteriumGas : ModProjectile
 
         if (Projectile.alpha == 255) Projectile.Kill();
 
-        Projectile.velocity = Vector2.Lerp(Projectile.velocity.RotatedByRandom(0.1f),new Vector2(1,0).RotatedBy(Projectile.velocity.ToRotation()),0.003f);
+        Projectile.velocity = Vector2.Lerp(Projectile.velocity.RotatedByRandom(0.1f), new Vector2(1, 0).RotatedBy(Projectile.velocity.ToRotation()), 0.003f);
         Projectile.rotation += MathHelper.Clamp(Projectile.velocity.Length() * 0.1f, -0.3f, 0.3f);
         Projectile.scale *= 1.001f;
         if (!Collision.SolidCollision(Projectile.Center, 1, 1))
-        Lighting.AddLight(Projectile.Center, new Vector3(1, 0.8f, 0.2f) * Projectile.Opacity);
+            Lighting.AddLight(Projectile.Center, new Vector3(1, 0.8f, 0.2f) * Projectile.Opacity);
 
         //if (Main.rand.NextBool(3))
         //{
@@ -72,8 +72,8 @@ public class BacteriumGas : ModProjectile
 
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
-        if(Main.expertMode && Main.rand.NextBool())
-        target.AddBuff(BuffID.Blackout, 3 * 60);
+        if (Main.expertMode && Main.rand.NextBool())
+            target.AddBuff(BuffID.Blackout, 3 * 60);
 
         target.AddBuff(BuffID.Darkness, 5 * 60);
     }
@@ -108,7 +108,7 @@ public class BacteriumGas : ModProjectile
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
-        Projectile.velocity = oldVelocity * Main.rand.NextFloat(-0.2f,0.2f);
+        Projectile.velocity = oldVelocity * Main.rand.NextFloat(-0.2f, 0.2f);
         Projectile.tileCollide = false;
         Projectile.ai[1]++;
         return false;

@@ -7,7 +7,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile;
+namespace Avalon.Projectiles.Hostile.bacteriumPrime;
 
 public class BouncyBoogerBall : ModProjectile
 {
@@ -35,19 +35,19 @@ public class BouncyBoogerBall : ModProjectile
         int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, 0, 0, 128, default, 2);
         Main.dust[d].noGravity = true;
 
-        if(Projectile.velocity.Y < 8 && Projectile.position.Y < (Main.worldSurface * 16) + (30 * 16))
+        if (Projectile.velocity.Y < 8 && Projectile.position.Y < Main.worldSurface * 16 + 30 * 16)
         {
             Projectile.velocity.Y += 0.1f;
             Projectile.velocity.X *= 0.994f;
         }
 
         Projectile.frameCounter++;
-        if(Projectile.frameCounter >= 10) 
+        if (Projectile.frameCounter >= 10)
         {
             Projectile.frameCounter = 0;
             Projectile.frame++;
         }
-        if(Projectile.frame > 3)
+        if (Projectile.frame > 3)
         {
             Projectile.frame = 0;
         }
@@ -60,7 +60,7 @@ public class BouncyBoogerBall : ModProjectile
     public override void Kill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.NPCDeath1, Projectile.Center);
-        for (int i = 0; i< 10; i++) 
+        for (int i = 0; i < 10; i++)
         {
             int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, 0, 0, 128, default, 2);
             Main.dust[d].velocity *= 5;
@@ -108,7 +108,7 @@ public class BouncyBoogerBall : ModProjectile
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
         SoundEngine.PlaySound(SoundID.NPCHit1, Projectile.Center);
-        if(Projectile.velocity.X != Projectile.oldVelocity.X)
+        if (Projectile.velocity.X != Projectile.oldVelocity.X)
             Projectile.velocity.X = -Projectile.oldVelocity.X;
         if (Projectile.velocity.Y != Projectile.oldVelocity.Y)
             Projectile.velocity.Y = -Projectile.oldVelocity.Y;

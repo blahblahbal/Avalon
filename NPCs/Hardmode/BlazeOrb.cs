@@ -94,62 +94,62 @@ public class BlazeOrb : ModNPC
                 Main.dust[num286].noGravity = true;
             }
         }
-        //if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height) && Main.netMode != NetmodeID.MultiplayerClient)
-        //{
-        //    var num287 = (int)(NPC.position.X + NPC.width / 2) / 16;
-        //    var num288 = (int)(NPC.position.Y + NPC.height / 2) / 16;
-        //    var num289 = 8;
-        //    for (var num290 = num287 - num289; num290 <= num287 + num289; num290++)
-        //    {
-        //        for (var num291 = num288 - num289; num291 < num288 + num289; num291++)
-        //        {
-        //            if (Math.Abs(num290 - num287) + Math.Abs(num291 - num288) < num289 * 0.5)
-        //            {
-        //                var tile = Main.tile[num290, num291];
-        //                if (tile.TileType == TileID.Ash)
-        //                {
-        //                    if (Main.rand.NextBool(3))
-        //                    {
-        //                        Main.tile[num290, num291].TileType = TileID.Hellstone;
-        //                    }
-        //                    else
-        //                    {
-        //                        Main.tile[num290, num291].TileType = (ushort)ModContent.TileType<Tiles.BrimstoneBlock>();
-        //                    }
-        //                    WorldGen.SquareTileFrame(num290, num291, true);
-        //                    if (Main.netMode == NetmodeID.Server)
-        //                    {
-        //                        NetMessage.SendTileSquare(-1, num290, num291, 1);
-        //                    }
-        //                }
-        //                //else if (tile.TileType == TileID.Hellstone)
-        //                //{
-        //                //    if (Main.rand.Next(5) == 0 && ModContent.GetInstance<AvalonWorld>().SuperHardmode && Main.hardMode)
-        //                //    {
-        //                //        Main.tile[num290, num291].TileType = (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>();
-        //                //    }
-        //                //    WorldGen.SquareTileFrame(num290, num291);
-        //                //    if (Main.netMode == NetmodeID.Server)
-        //                //    {
-        //                //        NetMessage.SendTileSquare(-1, num290, num291, 1);
-        //                //    }
-        //                //}
-        //                else if (tile.TileType == TileID.Obsidian)
-        //                {
-        //                    if (Main.rand.NextBool(10))
-        //                    {
-        //                        Main.tile[num290, num291].TileType = TileID.Hellstone;
-        //                    }
-        //                    WorldGen.SquareTileFrame(num290, num291);
-        //                    if (Main.netMode == NetmodeID.Server)
-        //                    {
-        //                        NetMessage.SendTileSquare(-1, num290, num291, 1);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height) && Main.netMode != NetmodeID.MultiplayerClient)
+        {
+            var num287 = (int)(NPC.position.X + NPC.width / 2) / 16;
+            var num288 = (int)(NPC.position.Y + NPC.height / 2) / 16;
+            var num289 = 8;
+            for (var num290 = num287 - num289; num290 <= num287 + num289; num290++)
+            {
+                for (var num291 = num288 - num289; num291 < num288 + num289; num291++)
+                {
+                    if (Math.Abs(num290 - num287) + Math.Abs(num291 - num288) < num289 * 0.5)
+                    {
+                        var tile = Main.tile[num290, num291];
+                        if (tile.TileType == TileID.Ash)
+                        {
+                            if (Main.rand.NextBool(3))
+                            {
+                                Main.tile[num290, num291].TileType = TileID.Hellstone;
+                            }
+                            else
+                            {
+                                Main.tile[num290, num291].TileType = (ushort)ModContent.TileType<Tiles.BrimstoneBlock>();
+                            }
+                            WorldGen.SquareTileFrame(num290, num291, true);
+                            if (Main.netMode == NetmodeID.Server)
+                            {
+                                NetMessage.SendTileSquare(-1, num290, num291, 1);
+                            }
+                        }
+                        //else if (tile.TileType == TileID.Hellstone)
+                        //{
+                        //    if (Main.rand.Next(5) == 0 && ModContent.GetInstance<AvalonWorld>().SuperHardmode && Main.hardMode)
+                        //    {
+                        //        Main.tile[num290, num291].TileType = (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>();
+                        //    }
+                        //    WorldGen.SquareTileFrame(num290, num291);
+                        //    if (Main.netMode == NetmodeID.Server)
+                        //    {
+                        //        NetMessage.SendTileSquare(-1, num290, num291, 1);
+                        //    }
+                        //}
+                        else if (tile.TileType == TileID.Obsidian)
+                        {
+                            if (Main.rand.NextBool(10))
+                            {
+                                Main.tile[num290, num291].TileType = TileID.Hellstone;
+                            }
+                            WorldGen.SquareTileFrame(num290, num291);
+                            if (Main.netMode == NetmodeID.Server)
+                            {
+                                NetMessage.SendTileSquare(-1, num290, num291, 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
         {
             var arg_12ED7_0 = Main.netMode;

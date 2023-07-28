@@ -156,6 +156,8 @@ public class Viris : ModNPC
                     Main.dust[d].velocity += NPC.velocity * Main.rand.NextFloat(0.6f, 1f);
                     Main.dust[d].noGravity = true;
                     Main.dust[d].fadeIn = 1.2f;
+                    if(i % 6 == 0)
+                    Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.2f) * Main.rand.NextFloat(-0.2f, 0.9f), GoreID.MaggotZombieMaggotPieces, NPC.scale);
                 }
             }
             if (Main.netMode != 1)
@@ -164,6 +166,14 @@ public class Viris : ModNPC
                 {
                     NPC N = NPC.NewNPCDirect(NPC.GetSource_Death(), NPC.Center, ModContent.NPCType<Viriling>(), 0);
                     N.velocity = Main.rand.NextVector2Circular(5, 5);
+                    if (Main.netMode == 2 && NPC.whoAmI < 200)
+                        NetMessage.SendData(MessageID.SyncNPC, number: N.whoAmI);
+                }
+                for (int i = 0; i < Main.rand.Next(3,14); i++)
+                {
+                    NPC N = NPC.NewNPCDirect(NPC.GetSource_Death(), NPC.Center, NPCID.Maggot, 0);
+                    N.velocity = Main.rand.NextVector2Circular(5, 5);
+                    N.dontTakeDamageFromHostiles= true;
                     if (Main.netMode == 2 && NPC.whoAmI < 200)
                         NetMessage.SendData(MessageID.SyncNPC, number: N.whoAmI);
                 }

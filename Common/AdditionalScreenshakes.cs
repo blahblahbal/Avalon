@@ -13,7 +13,7 @@ namespace Avalon.Common
         public override bool InstancePerEntity => base.InstancePerEntity;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return entity.netID <= 5455 && entity.DamageType == DamageClass.Ranged;
+            return entity.netID <= 5455;
         }
 
         public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
@@ -21,6 +21,14 @@ namespace Avalon.Common
             if (item.UseSound == SoundID.Item36 || item.UseSound == SoundID.Item38)
             {
                 UseStyles.ShotgunStyle(player, 0.1f, 3f, 3f);
+            }
+            else if(item.UseSound == SoundID.Item11)
+            {
+                UseStyles.ShotgunStyle(player, 0.01f, 3f, 0.1f);
+            }
+            else if (item.UseSound == SoundID.Item41)
+            {
+                UseStyles.ShotgunStyle(player, 0.015f, 3f, 0.15f);
             }
         }
     }
