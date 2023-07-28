@@ -33,7 +33,7 @@ public class PeridotTree : ModTree
 
     public override int CreateDust()
     {
-        return ModContent.DustType<PeridotDust>();
+        return DustID.Stone;
     }
     public override Asset<Texture2D> GetTexture()
     {

@@ -65,9 +65,9 @@ public class GenSystem : ModSystem
         int stalac = tasks.FindIndex(genPass => genPass.Name == "Remove Broken Traps");
         if (stalac != -1)
         {
-            currentPass = new GemTreePass();
-            tasks.Insert(stalac + 2, currentPass);
-            totalWeight += currentPass.Weight;
+            //currentPass = new GemTreePass();
+            //tasks.Insert(stalac + 2, currentPass);
+            //totalWeight += currentPass.Weight;
             currentPass = new ContagionStalactgmites();
             tasks.Insert(stalac + 1, currentPass);
             totalWeight += currentPass.Weight;

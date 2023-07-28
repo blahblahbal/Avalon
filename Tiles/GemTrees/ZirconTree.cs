@@ -3,6 +3,7 @@ using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System.Reflection;
 using Terraria;
 using Terraria.Enums;
 using Terraria.GameContent;
@@ -25,6 +26,8 @@ public class ZirconTree : ModTree
     };
     public override void SetStaticDefaults()
     {
+        //var field = typeof(ModTree).GetProperty("<PlantTileId>k__BackingField", BindingFlags.Instance | BindingFlags.Public);
+        //field.SetValue(this, 584);
         GrowsOnTileId = new int[]
         {
             TileID.Stone
@@ -33,7 +36,7 @@ public class ZirconTree : ModTree
 
     public override int CreateDust()
     {
-        return ModContent.DustType<ZirconDust>();
+        return DustID.Stone;
     }
     public override Asset<Texture2D> GetTexture()
     {

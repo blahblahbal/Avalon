@@ -26,22 +26,19 @@ public class TourmalineTree : ModTree
     };
     public override void SetStaticDefaults()
     {
-        //PlantTileId = 583;
         GrowsOnTileId = new int[]
         {
             TileID.Stone
         };
     }
-
     public override int CreateDust()
     {
-        return ModContent.DustType<TourmalineDust>();
+        return DustID.Stone;
     }
     public override Asset<Texture2D> GetTexture()
     {
         return ModContent.Request<Texture2D>("Avalon/Tiles/GemTrees/TourmalineTree");
     }
-    //public override int TreeLeaf() => ModContent.Find<ModGore>("Avalon/ContagionTreeLeaf").Type;
     public override int SaplingGrowthType(ref int style)
     {
         style = 0;

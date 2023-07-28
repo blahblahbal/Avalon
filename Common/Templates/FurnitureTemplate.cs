@@ -427,6 +427,10 @@ namespace Avalon.Common.Templates
         {
             num = 1;
         }
+        public override bool Slope(int i, int j)
+        {
+            return false;
+        }
         public override void MouseOver(int i, int j)
         {
             var player = Main.LocalPlayer;
@@ -481,6 +485,10 @@ namespace Avalon.Common.Templates
         public override void NumDust(int i, int j, bool fail, ref int num)
         {
             num = 1;
+        }
+        public override bool Slope(int i, int j)
+        {
+            return false;
         }
         public override void MouseOver(int i, int j)
         {
