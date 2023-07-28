@@ -5453,6 +5453,11 @@ Mods: {
 				DisplayName: Rocketina Bottle
 				Tooltip: ""
 			}
+
+			LivingLightningBlock: {
+				DisplayName: Living Lightning Block
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

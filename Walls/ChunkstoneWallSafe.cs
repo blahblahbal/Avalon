@@ -9,7 +9,7 @@ public class ChunkstoneWallSafe : ModWall
 {
     public override void SetStaticDefaults()
     {
-        WallID.Sets.Conversion.Stone[Type] = true;
+        //WallID.Sets.Conversion.Stone[Type] = true;
         Main.wallHouse[Type] = true;
         AddMapEntry(new Color(34, 44, 25));
         DustType = ModContent.DustType<Dusts.ContagionDust>();

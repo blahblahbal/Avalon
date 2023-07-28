@@ -1,11 +1,7 @@
-using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
 
 namespace Avalon.Tiles.Contagion;
 
@@ -21,7 +17,7 @@ public class ContagionStalactgmites : ModTile
         Main.tileMerge[ModContent.TileType<Chunkstone>()][Type] = true;
         Main.tileMerge[Type][ModContent.TileType<Chunkstone>()] = true;
         DustType = ModContent.DustType<Dusts.ContagionDust>();
-        AddMapEntry(new Color(133, 150, 39));
+        AddMapEntry(new Color(70, 79, 60));
     }
     public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
     {
