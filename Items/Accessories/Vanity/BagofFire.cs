@@ -2,6 +2,7 @@ using Avalon.Common;
 using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -59,6 +60,12 @@ internal class BagofFire : ModItem
             Main.dust[num2].noLight = true;
             Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;
             Main.dust[num2].velocity.Y -= player.velocity.Y * 0.5f;
+            int t = player.HasItemInArmorReturnIndex(Type);
+            if (t > 10) t -= 10;
+            if (t > 0)
+            {
+                Main.dust[num2].shader = GameShaders.Armor.GetShaderFromItemId(player.dye[t].type);
+            }
         }
 
         //int dust = Dust.NewDust(player.position, player.width + 20, player.height + 20, DustID.Torch, 0f, 0f, 100,

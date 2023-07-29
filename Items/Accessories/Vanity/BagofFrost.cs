@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Graphics.Shaders;
 
 namespace Avalon.Items.Accessories.Vanity;
 
@@ -51,6 +52,12 @@ internal class BagofFrost : ModItem
             Main.dust[num2].noLight = true;
             Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;
             Main.dust[num2].velocity.Y -= player.velocity.Y * 0.5f;
+            int t = player.HasItemInArmorReturnIndex(Type);
+            if (t > 10) t -= 10;
+            if (t > 0)
+            {
+                Main.dust[num2].shader = GameShaders.Armor.GetShaderFromItemId(player.dye[t].type);
+            }
         }
 
         if (Main.rand.NextBool(3))
@@ -61,6 +68,12 @@ internal class BagofFrost : ModItem
             Main.dust[num2].noLight = true;
             Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;
             Main.dust[num2].velocity.Y -= player.velocity.Y * 0.5f;
+            int t = player.HasItemInArmorReturnIndex(Type);
+            if (t > 10) t -= 10;
+            if (t > 0)
+            {
+                Main.dust[num2].shader = GameShaders.Armor.GetShaderFromItemId(player.dye[t].type);
+            }
         }
     }
 }

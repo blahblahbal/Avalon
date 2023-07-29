@@ -73,6 +73,14 @@ public static class ClassExtensions
         }
         return null;
     }
+    public static int HasItemInArmorReturnIndex(this Player p, int type)
+    {
+        for (int i = 0; i < p.armor.Length; i++)
+        {
+            if (p.armor[i].type == type) return i;
+        }
+        return -1;
+    }
 
     public static void SendPacket(this Player p, ModPacket packet, bool server)
     {

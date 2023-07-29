@@ -360,35 +360,84 @@ public class Sun : ModProjectile
         Projectile.rotation += 0.01f;
         var texture = Mod.Assets.Request<Texture2D>("Projectiles/Melee/SolarSystem/SolarSystem_Chain");
 
-        var position = Projectile.Center;
-        var mountedCenter = Main.player[Projectile.owner].MountedCenter;
-        var sourceRectangle = new Rectangle?();
+        Vector2 start = Projectile.Center;
+        var end = Main.player[Projectile.owner].MountedCenter;
+        start -= Main.screenPosition;
+        end -= Main.screenPosition;
+
+        Texture2D TEX = Mod.Assets.Request<Texture2D>("Projectiles/Melee/SolarSystem/SolarSystem_Chain").Value;
+        int linklength = TEX.Height;
+        Vector2 chain = end - start;
+
         var origin = new Vector2(texture.Value.Width * 0.5f, texture.Value.Height * 0.5f);
-        float num1 = texture.Value.Height;
-        var vector2_4 = mountedCenter - position;
-        var rotation = (float)Math.Atan2(vector2_4.Y, vector2_4.X) - 1.57f;
-        var flag = true;
-        if (float.IsNaN(position.X) && float.IsNaN(position.Y))
-            flag = false;
-        if (float.IsNaN(vector2_4.X) && float.IsNaN(vector2_4.Y))
-            flag = false;
-        while (flag)
+        float length = (float)chain.Length();
+        int numlinks = (int)Math.Ceiling(length / linklength);
+        Vector2[] links = new Vector2[numlinks];
+        float rotation = (float)Math.Atan2(chain.Y, chain.X);
+        int chainVariant = 1;
+
+        for (int i = 0; i < numlinks; i++)
         {
-            if (vector2_4.Length() < num1 + 1.0)
+            links[i] = start + chain / numlinks * i;
+            string TEXTURE;
+            if (chainVariant % 3 == 0)
             {
-                flag = false;
+                TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain3";
+            }
+            else if (chainVariant % 2 == 0)
+            {
+                TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain2";
+            }    
+            else
+            {
+                TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain";
+            }
+            if (chainVariant % 2 == 0)
+            {
+                TEX = Mod.Assets.Request<Texture2D>(TEXTURE).Value;
             }
             else
             {
-                var vector2_1 = vector2_4;
-                vector2_1.Normalize();
-                position += vector2_1 * num1;
-                vector2_4 = mountedCenter - position;
-                var color2 = Lighting.GetColor((int)position.X / 16, (int)(position.Y / 16.0));
-                color2 = Projectile.GetAlpha(color2);
-                Main.EntitySpriteDraw(texture.Value, position - Main.screenPosition, sourceRectangle, color2, rotation, origin, 1f, SpriteEffects.None, 0);
+                TEX = Mod.Assets.Request<Texture2D>(TEXTURE).Value;
+            }
+            Main.spriteBatch.Draw(TEX, links[i], new Rectangle?(), Color.White, rotation + 1.57f, origin, 1f,
+                SpriteEffects.None, 1f);
+            chainVariant++;
+            if (chainVariant > 3)
+            {
+                chainVariant = 1;
             }
         }
+
+        //var position = Projectile.Center;
+        //var mountedCenter = Main.player[Projectile.owner].MountedCenter;
+        //var sourceRectangle = new Rectangle?();
+        //var origin = new Vector2(texture.Value.Width * 0.5f, texture.Value.Height * 0.5f);
+        //float num1 = texture.Value.Height;
+        //var vector2_4 = mountedCenter - position;
+        //var rotation = (float)Math.Atan2(vector2_4.Y, vector2_4.X) - 1.57f;
+        //var flag = true;
+        //if (float.IsNaN(position.X) && float.IsNaN(position.Y))
+        //    flag = false;
+        //if (float.IsNaN(vector2_4.X) && float.IsNaN(vector2_4.Y))
+        //    flag = false;
+        //while (flag)
+        //{
+        //    if (vector2_4.Length() < num1 + 1.0)
+        //    {
+        //        flag = false;
+        //    }
+        //    else
+        //    {
+        //        var vector2_1 = vector2_4;
+        //        vector2_1.Normalize();
+        //        position += vector2_1 * num1;
+        //        vector2_4 = mountedCenter - position;
+        //        var color2 = Lighting.GetColor((int)position.X / 16, (int)(position.Y / 16.0));
+        //        color2 = Projectile.GetAlpha(color2);
+        //        Main.EntitySpriteDraw(texture.Value, position - Main.screenPosition, sourceRectangle, color2, rotation, origin, 1f, SpriteEffects.None, 0);
+        //    }
+        //}
 
         Texture2D sunTex = (Texture2D)ModContent.Request<Texture2D>(Texture);
         Texture2D backTex = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Sun_Back");

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Graphics.Shaders;
 
 namespace Avalon.Items.Accessories.Vanity;
 
@@ -60,6 +61,12 @@ internal class BagofIck : ModItem
             Main.dust[num2].noLight = true;
             Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;
             Main.dust[num2].velocity.Y -= player.velocity.Y * 0.5f;
+            int t = player.HasItemInArmorReturnIndex(Type);
+            if (t > 10) t -= 10;
+            if (t > 0)
+            {
+                Main.dust[num2].shader = GameShaders.Armor.GetShaderFromItemId(player.dye[t].type);
+            }
 
             num2 = Dust.NewDust(new Vector2(player.position.X - player.velocity.X * 2f, player.position.Y - 2f - player.velocity.Y * 2f),
                 player.width, player.height, DustID.CorruptGibs, 0f, 0f, 100, default, 1.5f);
@@ -67,6 +74,12 @@ internal class BagofIck : ModItem
             Main.dust[num2].noLight = true;
             Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;
             Main.dust[num2].velocity.Y -= player.velocity.Y * 0.5f;
+            t = player.HasItemInArmorReturnIndex(Type);
+            if (t > 10) t -= 10;
+            if (t > 0)
+            {
+                Main.dust[num2].shader = GameShaders.Armor.GetShaderFromItemId(player.dye[t].type);
+            }
         }
 
         //int dust1 = Dust.NewDust(player.position, player.width - 20, player.height, DustID.CorruptGibs, 0f, 0f, 100,
