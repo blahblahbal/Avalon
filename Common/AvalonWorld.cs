@@ -333,7 +333,7 @@ public class AvalonWorld : ModSystem
             #endregion large herb growth
 
             #region contagion shortgrass/barfbush spawning
-            if (false) //Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>())
+            if (Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>())
             {
                 int num14 = Main.tile[num5, num6].TileType;
                 if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 &&

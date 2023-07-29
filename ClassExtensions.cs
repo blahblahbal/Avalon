@@ -5,6 +5,7 @@ using System.Reflection;
 using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Hooks;
+using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -117,7 +118,32 @@ public static class ClassExtensions
     /// <param name="vector">The vector to convert.</param>
     /// <returns>The rounded vector.</returns>
     public static Vector2 ToNearestPixel(this Vector2 vector) => new((int)(vector.X + 0.5f), (int)(vector.Y + 0.5f));
+    
+    /// <summary>
+    ///     Helper method for Vampire Teeth and Blah's Knives life steal.
+    /// </summary>
+    /// <param name="p">The player.</param>
+    /// <param name="dmg">The damage to use in the life steal calculation.</param>
+    /// <param name="position">The position to spawn the life steal projectile at.</param>
+    public static void VampireHeal(this Player p, int dmg, Vector2 position)
+    {
+        float num = dmg * 0.075f;
+        if ((int)num == 0)
+        {
+            return;
+        }
 
+        if (p.lifeSteal <= 0f)
+        {
+            return;
+        }
+
+        p.lifeSteal -= num;
+        int num2 = p.whoAmI;
+        Projectile.NewProjectile(
+            p.GetSource_Accessory(new Item(ModContent.ItemType<VampireTeeth>())),
+            position.X, position.Y, 0f, 0f, ProjectileID.VampireHeal, 0, 0f, p.whoAmI, num2, num);
+    }
     public static Asset<T> VanillaLoad<T>(this Asset<T> asset) where T : class
     {
         try

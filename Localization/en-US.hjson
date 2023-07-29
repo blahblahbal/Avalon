@@ -167,6 +167,58 @@ Mods: {
 		}
 
 		Items: {
+			TacticalBlahncher: {
+				DisplayName: Tactical Blahncher
+				Tooltip:
+					'''
+					Launches homing blahckets
+					75% chance to not consume ammo
+					Blahckets will not destroy tiles
+					'''
+			}
+
+			BlahStaff: {
+				DisplayName: Blah Staff
+				Tooltip:
+					'''
+					Summons blah meteors that rain from the sky
+					Meteors rain stars that explode into fire
+					'''
+			}
+
+			BlahsKnives: {
+				DisplayName: Blah's Knives
+				Tooltip: Rapidly throws lifestealing daggers that seek out targets and compound damage upon hits
+			}
+
+			ShellHammer: {
+				DisplayName: Shell Hammer
+				Tooltip: Lobs shells
+			}
+
+			FreezeBolt: {
+				DisplayName: Freeze Bolt
+				Tooltip: Casts a fast-moving bolt of ice
+			}
+
+			VampireTeeth: {
+				DisplayName: Vampire Teeth
+				Tooltip:
+					'''
+					Grants the ability for true melee attacks to lifesteal
+					Less effective against bosses
+					'''
+			}
+
+			DroneSwarm: {
+				DisplayName: Drone Swarm
+				Tooltip:
+					'''
+					Casts a spread of nine homing drones
+					'Thousands of bright yellow...!'
+					'''
+			}
+
 			BookcaseTeleporter: {
 				DisplayName: Bookcase Teleporter
 				Tooltip: "'What a great way to hide a teleporter'"
@@ -5458,6 +5510,11 @@ Mods: {
 				DisplayName: Living Lightning Block
 				Tooltip: ""
 			}
+
+			BlahsEnergyBlade: {
+				DisplayName: Blahs Energy Blade
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5574,6 +5631,16 @@ Mods: {
 			CrystalUnityShard.DisplayName: Crystal Unity Shard
 			MushroomWall.DisplayName: Mushroom Wall
 			SporeSeed.DisplayName: Spore Seed
+			BlahFire.DisplayName: Blah Fire
+			BlahKnife.DisplayName: Blah Knife
+			BlahKnifeSplit.DisplayName: Blah Knife Split
+			BlahMeteor.DisplayName: Blah Meteor
+			BlahStar.DisplayName: Blah Star
+			Drone.DisplayName: Drone
+			FreezeBolt.DisplayName: Freeze Bolt
+			BlahBeam.DisplayName: Blah Beam
+			Shell.DisplayName: Shell
+			Blahcket.DisplayName: Blahcket
 		}
 
 		NPCs: {

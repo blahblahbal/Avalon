@@ -125,6 +125,7 @@ public class AvalonPlayer : ModPlayer
     public bool FrostGauntlet;
     public bool SlimeBand;
     public bool NoSticky;
+    public bool VampireTeeth;
     #endregion
 
     #region buffs and debuffs
@@ -205,6 +206,7 @@ public class AvalonPlayer : ModPlayer
         FrostGauntlet = false;
         SlimeBand = false;
         NoSticky = false;
+        VampireTeeth = false;
 
         // armor sets
         SkyBlessing = false;
@@ -787,6 +789,17 @@ public class AvalonPlayer : ModPlayer
     }
     public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
     {
+        if (VampireTeeth && item.DamageType == DamageClass.Melee)
+        {
+            if (target.boss)
+            {
+                Player.VampireHeal(hit.Damage / 2, target.Center);
+            }
+            else
+            {
+                Player.VampireHeal(hit.Damage, target.Center);
+            }
+        }
         if (BloodyWhetstone)
         {
             if (!target.HasBuff<Bleeding>())
