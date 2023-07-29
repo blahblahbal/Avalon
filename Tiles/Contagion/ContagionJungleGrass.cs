@@ -15,6 +15,7 @@ public class ContagionJungleGrass : ModTile
         Main.tileBlockLight[Type] = true;
         TileID.Sets.Conversion.JungleGrass[Type] = true;
         TileID.Sets.Conversion.MergesWithDirtInASpecialWay[Type] = true;
+        TileID.Sets.CanBeDugByShovel[Type] = true;
         //TileID.Sets.ResetsHalfBrickPlacementAttempt[Type] = false;
         //TileID.Sets.CanBeDugByShovel[Type] = true;
         //TileID.Sets.DoesntPlaceWithTileReplacement[Type] = true;

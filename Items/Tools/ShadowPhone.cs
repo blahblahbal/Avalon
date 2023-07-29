@@ -108,7 +108,6 @@ class ShadowPhoneDungeon : ModItem
     {
         bool canSpawn = false;
         int num = Main.dungeonX;
-        Main.NewText(num);
         int num2 = 100;
         int num3 = num2 / 2;
         int teleportStartY = Main.dungeonY - 3;

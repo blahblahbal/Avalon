@@ -20,6 +20,7 @@ public class Ectograss : ModTile
         Main.tileLighted[Type] = true;
         TileID.Sets.NeedsGrassFraming[Type] = true;
         TileID.Sets.NeedsGrassFramingDirt[Type] = TileID.Ash;
+        TileID.Sets.CanBeDugByShovel[Type] = true;
         TileID.Sets.Grass[Type] = true;
         RegisterItemDrop(ItemID.AshBlock);
         DustType = DustID.Silt;

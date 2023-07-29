@@ -5515,6 +5515,39 @@ Mods: {
 				DisplayName: Blahs Energy Blade
 				Tooltip: ""
 			}
+
+			PortablePylonMkIIPoint1: {
+				DisplayName: Portable Pylon Mk II (Waypoint 1)
+				Tooltip:
+					'''
+					Teleports you to a saved location
+					Right click to set a waypoint at your current location
+					Maximum of 3 saved locations
+					Right click in your inventory to change waypoints
+					'''
+			}
+
+			PortablePylonMkIIPoint2: {
+				DisplayName: Portable Pylon Mk II (Waypoint 2)
+				Tooltip:
+					'''
+					Teleports you to a saved location
+					Right click to set a waypoint at your current location
+					Maximum of 3 saved locations
+					Right click in your inventory to change waypoints
+					'''
+			}
+
+			PortablePylonMkIIPoint3: {
+				DisplayName: Portable Pylon Mk II (Waypoint 3)
+				Tooltip:
+					'''
+					Teleports you to a saved location
+					Right click to set a waypoint at your current location
+					Maximum of 3 saved locations
+					Right click in your inventory to change waypoints
+					'''
+			}
 		}
 
 		Projectiles: {

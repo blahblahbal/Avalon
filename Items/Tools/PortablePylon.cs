@@ -16,17 +16,15 @@ internal class WaypointSystem : ModSystem
     }
     public override void SaveWorldData(TagCompound tag)
     {
-        tag["savedLocation"] = savedLocation;
+        tag["Avalon:PPSavedLocation"] = savedLocation;
     }
     public override void LoadWorldData(TagCompound tag)
     {
-        savedLocation = tag.Get<Vector2>("savedLocation");
+        savedLocation = tag.Get<Vector2>("Avalon:PPSavedLocation");
     }
 }
 public class PortablePylon : ModItem
 {
-    public List<Vector2> savedLocations = new List<Vector2>();
-    public List<int> WorldIDs = new List<int>();
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
@@ -38,7 +36,7 @@ public class PortablePylon : ModItem
         Item.width = dims.Width;
         Item.useTime = 25;
         Item.useTurn = true;
-        Item.value = Item.sellPrice(0, 2, 0, 0);
+        Item.value = Item.sellPrice(0, 2);
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.useAnimation = 25;
         Item.height = dims.Height;
@@ -47,9 +45,9 @@ public class PortablePylon : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.TeleportationPotion, 3)
+            .AddIngredient(ItemID.PotionOfReturn, 5)
             .AddIngredient(ItemID.MagicMirror)
-            .AddRecipeGroup("Avalon:EvilBar", 8)
+            .AddIngredient(ItemID.HellstoneBar, 8)
             .AddTile(TileID.Anvils)
             .Register();
     }
@@ -62,7 +60,7 @@ public class PortablePylon : ModItem
         if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
         {
             WaypointSystem.savedLocation = player.Center + new Vector2(0, -15);
-            Main.NewText("Set waypoint to current location.");
+            Main.NewText("Set waypoint to current location");
         }
         else
         {

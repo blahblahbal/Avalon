@@ -1,3 +1,27 @@
+imkSushi for starting the porting work
+Liburia for help with UI
+The tModLoader team for tModLoader, and for ExampleMod, which was a lot of help in everything
+Jopojelly for help with the code and also for Cheat Sheet
+Fox for some code
+Ghasttear for a lot of code
+Optical Starline for quite a bit of code
+Lion8cake for some code
+Comentdude for some code
+GreenTea for some code
+TerrorPenguin for many sprites
+Blasfah for many sprites, and some code
+Jace for many potion sprites
+PhilCo for some sprites
+Dragonfly for the Tome sprites, and some others
+Yuyu for many sprites
+Jeo for some sprites and code
+The Avalon composers, Ennway, FatCat, Fuyuki, Ace, Marlilo, and musicman for, well, the music obviously
+All the beta testers for general help with testing the mod
+Relxs, Hadiros, and Lion8cake for assisting with the Sky Fortress construction
+
+
+
+
 Bubbles.ogg from https://freesound.org/people/Avaruusnuija/sounds/476618/
 	License link: http://creativecommons.org/licenses/by/3.0/
 
@@ -11,4 +35,3 @@ MasterSword.ogg shortened/edited from https://freesound.org/people/jobro/sounds/
 	License link: http://creativecommons.org/licenses/by/3.0/
 
 Both Longbow sounds from https://www.epidemicsound.com/music/featured/
-	
