@@ -36,7 +36,7 @@ public class MushroomWall : ModProjectile
     {
         if (Projectile.height < 40 * 20)
         {
-            Projectile.height += 1;
+            Projectile.height++;
             Projectile.position.Y -= 1;
         }
 
@@ -67,7 +67,7 @@ public class MushroomWall : ModProjectile
         Vector2 drawPosBottom = Projectile.Bottom - Main.screenPosition;
         Main.EntitySpriteDraw(textureBottom, drawPosBottom, frame, Lighting.GetColor((drawPosBottom + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Width / 2, texture.Height), 1f, SpriteEffects.None, 0);
 
-        Vector2 drawPosTop = Projectile.Top - Main.screenPosition;
+        Vector2 drawPosTop = Projectile.Top - Main.screenPosition + new Vector2(0,-16);
         Main.EntitySpriteDraw(textureTop, drawPosTop, frameTop, Lighting.GetColor((drawPosTop + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Width / 2, 0), 1f, SpriteEffects.None, 0);
         return false;
     }
