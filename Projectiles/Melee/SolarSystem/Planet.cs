@@ -144,7 +144,8 @@ public abstract class Planet : ModProjectile
         }
         else if (Projectile.ai[2] == 1)
         {
-            Projectile.velocity = Vector2.Normalize(Main.projectile[(int)Projectile.ai[1]].Center - player.Center) * 8f;
+            float speed = Main.rand.NextFloat(6.5f, 10f);
+            Projectile.velocity = Vector2.Normalize(Main.projectile[(int)Projectile.ai[1]].Center - player.Center) * speed;
         }
         else if (Projectile.ai[2] == 0)
         {

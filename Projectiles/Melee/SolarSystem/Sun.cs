@@ -16,6 +16,8 @@ public class Sun : ModProjectile
     int dustTimer = 0;
     bool dontSnapBack;
     bool spawnPluto;
+    bool spawnedGores;
+    int goreIndex;
 
     public override void SetDefaults()
     {
@@ -320,8 +322,10 @@ public class Sun : ModProjectile
             {
                 Projectile.timeLeft = 300;
 
+                
                 mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition; // new Vector2(vecX, vecY);
-                Projectile.Center = mousePosition;
+                Projectile.velocity = Projectile.Center.DirectionTo(mousePosition) * 8.5f;
+                //Projectile.Center = mousePosition;
                 if (planetSpawnTimer == 0)
                 {
                     Projectile.ai[2]++;
@@ -380,17 +384,25 @@ public class Sun : ModProjectile
         {
             links[i] = start + chain / numlinks * i;
             string TEXTURE;
+            string GORE;
+            string GORE2;
             if (chainVariant % 3 == 0)
             {
                 TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain3";
+                GORE = "SolarSystem3";
+                GORE2 = "SolarSystem4";
             }
             else if (chainVariant % 2 == 0)
             {
                 TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain2";
-            }    
+                GORE = "SolarSystem5";
+                GORE2 = "SolarSystem6";
+            }
             else
             {
                 TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain";
+                GORE = "SolarSystem1";
+                GORE2 = "SolarSystem2";
             }
             if (chainVariant % 2 == 0)
             {
@@ -400,8 +412,22 @@ public class Sun : ModProjectile
             {
                 TEX = Mod.Assets.Request<Texture2D>(TEXTURE).Value;
             }
-            Main.spriteBatch.Draw(TEX, links[i], new Rectangle?(), Color.White, rotation + 1.57f, origin, 1f,
-                SpriteEffects.None, 1f);
+            if (Projectile.ai[0] != 0)
+            {
+                Main.spriteBatch.Draw(TEX, links[i], new Rectangle?(), Color.White, rotation + 1.57f, origin, 1f,
+                    SpriteEffects.None, 1f);
+            }
+            else
+            {
+                
+                if (goreIndex == i)
+                {
+                    Gore.NewGore(Projectile.GetSource_FromThis(), links[i] + Main.screenPosition, Vector2.Zero, Mod.Find<ModGore>(GORE).Type);
+                    Gore.NewGore(Projectile.GetSource_FromThis(), links[i] + Main.screenPosition, Vector2.Zero, Mod.Find<ModGore>(GORE2).Type);
+                }
+                goreIndex++;
+            }
+            
             chainVariant++;
             if (chainVariant > 3)
             {
