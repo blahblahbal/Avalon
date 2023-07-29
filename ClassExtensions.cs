@@ -30,6 +30,23 @@ public static class ClassExtensions
 
     public static void Active(this Tile t, bool a) => t.HasTile = a;
 
+    public static Vector2 ClampToCircle(Vector2 center, float radius, Vector2 pos)
+    {
+        // Calculate the offset vector from the center of the circle to our position
+        Vector2 offset = pos - center;
+        // Calculate the linear distance of this offset vector
+        float distance = offset.Length();
+        if (radius < distance)
+        {
+            // If the distance is more than our radius we need to clamp
+            // Calculate the direction to our position
+            Vector2 direction = offset / distance;
+            // Calculate our new position using the direction to our old position and our radius
+            pos = center + direction * radius;
+            return pos;
+        }
+        return pos;
+    }
     public static void ConsumeStamina(this Player p, int amt)
     {
         if (p.GetModPlayer<AvalonStaminaPlayer>().StaminaDrain)

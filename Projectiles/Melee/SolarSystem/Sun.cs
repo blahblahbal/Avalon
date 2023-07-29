@@ -16,7 +16,6 @@ public class Sun : ModProjectile
     int dustTimer = 0;
     bool dontSnapBack;
     bool spawnPluto;
-    bool spawnedGores;
     int goreIndex;
 
     public override void SetDefaults()
@@ -224,70 +223,6 @@ public class Sun : ModProjectile
                         planetSpawnTimer = 0;
                     }
                     break;
-                    #region old planet spawning
-                    /*case 400:
-                        // mercury
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Mercury>(), (int)(Projectile.damage * 1.2f),
-                            Projectile.knockBack, ai0: 0, ai1: Projectile.whoAmI);
-                        break;
-                    case 100:
-                        // venus
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Venus>(), (int)(Projectile.damage * 1.12f),
-                            Projectile.knockBack, ai0: 1, ai1: Projectile.whoAmI);
-                        break;
-                    case 150:
-                        // earth
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Earth>(), (int)(Projectile.damage * 1.04f),
-                            Projectile.knockBack, ai0: 2, ai1: Projectile.whoAmI);
-                        break;
-                    case 200:
-                        // mars
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Mars>(), (int)(Projectile.damage * 0.98f),
-                            Projectile.knockBack, ai0: 3, ai1: Projectile.whoAmI);
-                        break;
-                    case 250:
-                        // jupiter
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Jupiter>(), (int)(Projectile.damage * 0.9f),
-                            Projectile.knockBack, ai0: 4, ai1: Projectile.whoAmI);
-                        break;
-                    case 300:
-                        // saturn
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Saturn>(), (int)(Projectile.damage * 0.84f),
-                            Projectile.knockBack, ai0: 5, ai1: Projectile.whoAmI);
-                        break;
-                    case 350:
-                        // uranus
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Uranus>(), (int)(Projectile.damage * 0.77f),
-                            Projectile.knockBack, ai0: 6, ai1: Projectile.whoAmI);
-                        break;
-                    case 5210:
-                        // neptune
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Neptune>(), (int)(Projectile.damage * 0.71f),
-                            Projectile.knockBack, ai0: 7, ai1: Projectile.whoAmI);
-                        if (!spawnPluto)
-                        {
-                            Projectile.ai[2] = 2;
-                            planetSpawnTimer = 0;
-                        }
-                        break;
-                    case 450:
-                        // pluto, 1 in 10 chance
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
-                            Projectile.velocity, ModContent.ProjectileType<Pluto>(), (int)(Projectile.damage * 0.65f),
-                            Projectile.knockBack, ai0: 8, ai1: Projectile.whoAmI);
-
-                        Projectile.ai[2] = 2;
-                        planetSpawnTimer = 0;
-                        break;*/
-                    #endregion
             }
         }
         #endregion
@@ -300,7 +235,7 @@ public class Sun : ModProjectile
                 // assign the destination as the cursor
                 float vecX = Main.mouseX + Main.screenPosition.X;
                 float vecY = Main.mouseY + Main.screenPosition.Y;
-                mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition; // new Vector2(vecX, vecY);
+                mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition;
 
                 // get the inverse melee speed - yoyos do the same thing
                 float inverseMeleeSpeed = 1 / Main.player[Projectile.owner].GetTotalAttackSpeed(DamageClass.Melee);
@@ -312,7 +247,11 @@ public class Sun : ModProjectile
                 heading *= new Vector2(speed * 10).Length();
                 Projectile.velocity = heading;
 
-                if (Vector2.Distance(Projectile.Center, mousePosition) < 20)
+                Projectile.Center = ClassExtensions.ClampToCircle(Main.player[Projectile.owner].Center, 16 * 30, Projectile.Center);
+
+                Vector2 dist = Projectile.Center - mousePosition;
+
+                if (Vector2.Distance(Projectile.Center, mousePosition) < 1 || Vector2.Distance(dist, mousePosition) > 1)
                 {
                     Projectile.ai[1] = 1; // lock on cursor
                     return;
@@ -325,6 +264,7 @@ public class Sun : ModProjectile
                 
                 mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition; // new Vector2(vecX, vecY);
                 Projectile.velocity = Projectile.Center.DirectionTo(mousePosition) * 8.5f;
+                Projectile.Center = ClassExtensions.ClampToCircle(Main.player[Projectile.owner].Center, 16 * 30, Projectile.Center);
                 //Projectile.Center = mousePosition;
                 if (planetSpawnTimer == 0)
                 {
