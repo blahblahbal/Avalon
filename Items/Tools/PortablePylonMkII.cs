@@ -54,7 +54,7 @@ public class PortablePylonMkIIPoint1 : ModItem
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<PortablePylon>())
             .AddIngredient(ItemID.SpectreBar, 10)
-            .AddIngredient(ItemID.SoulofSight, 5)
+            .AddIngredient(ItemID.BeetleHusk, 4)
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }

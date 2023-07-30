@@ -39,7 +39,16 @@ public class RecipeChanger : ModSystem
                 }
                 case ItemID.SunplateBlock:
                 {
-                    recipe.AddIngredient(ItemID.GoldOre, 1);
+                    recipe.AddIngredient(ItemID.GoldOre);
+                    break;
+                }
+                case ItemID.ShroomiteBar:
+                {
+                    if (recipe.TryGetIngredient(ItemID.GlowingMushroom, out Item ing))
+                    {
+                        recipe.RemoveIngredient(ing);
+                        recipe.AddIngredient(ItemID.GlowingMushroom, 10);
+                    }
                     break;
                 }
                 case ItemID.Magiluminescence:
