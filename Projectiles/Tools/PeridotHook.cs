@@ -55,7 +55,6 @@ public class PeridotHook : ModProjectile
     {
         return 420f; // Main.player[Projectile.owner].GetModPlayer<Players.ExxoPlayer>().HookBonus ? 675f : 540f;
     }
-
     public override void NumGrappleHooks(Player player, ref int numHooks)
     {
         numHooks = 1;

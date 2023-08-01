@@ -103,6 +103,8 @@ public class AvalonPlayer : ModPlayer
     #region armor sets
     public bool SkyBlessing;
     public int SkyStacks = 1;
+    public bool OreDupe;
+    public bool HookBonus;
     #endregion
 
     #region accessories
@@ -210,6 +212,8 @@ public class AvalonPlayer : ModPlayer
 
         // armor sets
         SkyBlessing = false;
+        OreDupe = false;
+        HookBonus = false;
 
         GreedyPrefix = false;
         HoardingPrefix = false;

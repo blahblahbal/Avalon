@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Avalon.Items.Placeable.Furniture;
 using Avalon.Items.Placeable.Statue;
 using Microsoft.Xna.Framework;
 using Terraria;

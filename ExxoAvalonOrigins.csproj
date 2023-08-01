@@ -20,5 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Items\Placeable\Furniture\Coughwood\" />
+    <Folder Include="Mounts\" />
   </ItemGroup>
 </Project>

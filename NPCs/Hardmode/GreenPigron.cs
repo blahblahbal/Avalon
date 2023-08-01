@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
@@ -49,10 +50,21 @@ public class GreenPigron : ModNPC
         }
         else
         {
-            //Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("GreenPigron1").Type, NPC.scale);
-            //Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("GreenPigron2").Type, NPC.scale);
-            //Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("GreenPigron3").Type, NPC.scale);
-            //Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("GreenPigron4").Type, NPC.scale);
+            for (int num689 = 0; num689 < 10; num689++)
+            {
+                int num690 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Cloud, 0f, 0f, 0, default, 1.5f);
+                Dust dust103 = Main.dust[num690];
+                Dust dust190 = dust103;
+                dust190.velocity *= 2f;
+                Main.dust[num690].noGravity = true;
+            }
+            for (int num685 = 0; num685 < 4; num685++)
+            {
+                int num686 = Gore.NewGore(NPC.GetSource_Death(), new Vector2(NPC.position.X, NPC.position.Y + NPC.height / 2 - 10f), new Vector2(hit.HitDirection, 0f), 99, NPC.scale);
+                Gore gore10 = Main.gore[num686];
+                Gore gore32 = gore10;
+                gore32.velocity *= 0.3f;
+            }
         }
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)

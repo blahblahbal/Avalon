@@ -15,6 +15,8 @@ namespace Avalon.Common;
 
 internal class AvalonGlobalProjectile : GlobalProjectile
 {
+    private bool extendHook = false;
+    private bool extendHookFlag = false;
     public override bool PreAI(Projectile projectile)
     {
         if (projectile.type == ProjectileID.TerraBlade2 && projectile.localAI[0] == 0)
@@ -22,6 +24,85 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             projectile.localAI[0] = 1;
             SoundEngine.PlaySound(SoundID.Item8, projectile.position);
             return true;
+        }
+        if (projectile.aiStyle == 7)
+        {
+            Vector2 mountedCenter = Main.player[projectile.owner].MountedCenter;
+            float xpos = mountedCenter.X - projectile.Center.X;
+            float ypos = mountedCenter.Y - projectile.Center.Y;
+            float distance = (float)Math.Sqrt(xpos * xpos + ypos * ypos);
+            float distMod = 1f;
+            if (!Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus && projectile.ai[2] < 14)
+            {
+                distMod = 1.25f;
+                extendHook = true;
+            }
+            if (projectile.ai[0] == 1 && projectile.ai[2] < 14)
+            {
+                //distance
+
+                //if ((distance > 300f * distMod - 300f && projectile.type == 13) || (distance > 400f * distMod - 400f && projectile.type == 32) ||
+                //   (distance > 440f * distMod - 440f && projectile.type == 73) || (distance > 440f * distMod - 440f && projectile.type == 74) ||
+                //   (distance > 375f * distMod - 375f && projectile.type == 165) || (distance > 350f * distMod - 350f && projectile.type == 256) ||
+                //   (distance > 500f * distMod - 500f && projectile.type == 315) || (distance > 550f * distMod - 550f && projectile.type == 322) ||
+                //   (distance > 400f * distMod - 400f && projectile.type == 331) || (distance > 550f * distMod - 550f && projectile.type == 332) ||
+                //   (distance > 400f * distMod - 400f && projectile.type == 372) || (distance > 300f * distMod - 300f && projectile.type == 396) ||
+                //   (distance > 550f * distMod - 550f && projectile.type >= 646 && projectile.type <= 649) ||
+                //   (distance > 600f * distMod - 600f && projectile.type == 652) || (distance > 300f * distMod - 300f && projectile.type == 865) ||
+                //   (distance > 500f * distMod - 500f && projectile.type == 935) ||
+                //   (distance > 480f * distMod - 480f && projectile.type >= 486 && projectile.type <= 489) ||
+                //   (distance > 500f * distMod - 500f && projectile.type == 446))
+                //{
+                //    projectile.ai[0] = 1f;
+                //}
+                if ((distance > 300f * distMod && projectile.type == 13) || (distance > 400f * distMod && projectile.type == 32) ||
+                    (distance > 440f * distMod && projectile.type == 73) || (distance > 440f * distMod && projectile.type == 74) ||
+                    (distance > 375f * distMod && projectile.type == 165) || (distance > 350f * distMod && projectile.type == 256) ||
+                    (distance > 500f * distMod && projectile.type == 315) || (distance > 550f * distMod && projectile.type == 322) ||
+                    (distance > 400f * distMod && projectile.type == 331) || (distance > 550f * distMod && projectile.type == 332) ||
+                    (distance > 400f * distMod && projectile.type == 372) || (distance > 300f * distMod && projectile.type == 396) ||
+                    (distance > 550f * distMod && projectile.type >= 646 && projectile.type <= 649) ||
+                    (distance > 600f * distMod && projectile.type == 652) || (distance > 300f * distMod && projectile.type == 865) ||
+                    (distance > 500f * distMod && projectile.type == 935) ||
+                    (distance > 480f * distMod && projectile.type >= 486 && projectile.type <= 489) ||
+                    (distance > 500f * distMod && projectile.type == 446))
+                {
+                    if (extendHook)
+                    {
+                        projectile.ai[0] = 0;
+                        projectile.ai[2]++;
+                    }
+                    else projectile.ai[0] = 1;
+                }
+                else if (projectile.type >= 230 && projectile.type <= 235)
+                {
+                    int num18 = 300 + (projectile.type - 230) * 30;
+                    //num18 = (int)(num18 * distMod - num18);
+                    num18 = (int)(num18 * distMod);
+                    if (distance > (float)num18)
+                    {
+                        if (extendHook)
+                        {
+                            projectile.ai[0] = 0;
+                            projectile.ai[2]++;
+                        }
+                        else projectile.ai[0] = 1;
+                    }
+                }
+                else if (projectile.type == 753)
+                {
+                    int num19 = (int)(420 * distMod - 420);
+                    if (distance > num19)
+                    {
+                        if (extendHook)
+                        {
+                            projectile.ai[0] = 0;
+                            projectile.ai[2]++;
+                        }
+                        else projectile.ai[0] = 1;
+                    }
+                }
+            }
         }
         return base.PreAI(projectile);
     }
@@ -51,7 +132,13 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             }
         }
     }
+    //public override void UseGrapple(Player player, ref int type)
+    //{
+    //    if (ProjectileID.Sets.SingleGrappleHook[type])
+    //    {
 
+    //    }
+    //}
     public override void AI(Projectile projectile)
     {
         if (projectile.type == ProjectileID.TerraBlade2)

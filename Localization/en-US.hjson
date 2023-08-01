@@ -60,6 +60,7 @@ Mods: {
 			Robe2: Increases maximum mana by 60
 			ResistantWood: 10 armor penetration and reduces damage taken by 10%
 			Viruthorn: 10% increased critical strike chance
+			Earthsplitter: Ore blocks have a 33% chance to drop double ore
 		}
 
 		PrefixTooltips: {
@@ -167,6 +168,35 @@ Mods: {
 		}
 
 		Items: {
+			EarthsplitterHelm: {
+				DisplayName: Earthsplitter Helm
+				Tooltip:
+					'''
+					Shine potion effect
+					[c/C39FDD:10th Anniversary Contest Winner - Crispy]
+					'''
+			}
+
+			EarthsplitterChestpiece: {
+				DisplayName: Earthsplitter Chestpiece
+				Tooltip:
+					'''
+					Night Owl potion effect
+					Grappling hooks have 50% increased range
+					[c/C39FDD:10th Anniversary Contest Winner - Crispy]
+					'''
+			}
+
+			EarthsplitterLeggings: {
+				DisplayName: Earthsplitter Leggings
+				Tooltip:
+					'''
+					Increases jump height
+					               15% increased mining speed
+					[c/C39FDD:10th Anniversary Contest Winner - Crispy]
+					'''
+			}
+
 			TacticalBlahncher: {
 				DisplayName: Tactical Blahncher
 				Tooltip:
@@ -5548,6 +5578,221 @@ Mods: {
 					Right click in your inventory to change waypoints
 					'''
 			}
+
+			TetanusChakram: {
+				DisplayName: Tetanus Chakram
+				Tooltip: ""
+			}
+
+			PeridotMinecart: {
+				DisplayName: Peridot Minecart
+				Tooltip: ""
+			}
+
+			ArchaicJuggernautStatue: {
+				DisplayName: Archaic Juggernaut Statue
+				Tooltip: ""
+			}
+
+			FleshyTendril: {
+				DisplayName: Fleshy Tendril
+				Tooltip: ""
+			}
+
+			AdamantiteChunk: {
+				DisplayName: Adamantite Chunk
+				Tooltip: ""
+			}
+
+			BacciliteChunk: {
+				DisplayName: Baccilite Chunk
+				Tooltip: ""
+			}
+
+			BismuthChunk: {
+				DisplayName: Bismuth Chunk
+				Tooltip: ""
+			}
+
+			BronzeChunk: {
+				DisplayName: Bronze Chunk
+				Tooltip: ""
+			}
+
+			CaesiumChunk: {
+				DisplayName: Caesium Chunk
+				Tooltip: ""
+			}
+
+			ChlorophyteChunk: {
+				DisplayName: Chlorophyte Chunk
+				Tooltip: ""
+			}
+
+			CobaltChunk: {
+				DisplayName: Cobalt Chunk
+				Tooltip: ""
+			}
+
+			CopperChunk: {
+				DisplayName: Copper Chunk
+				Tooltip: ""
+			}
+
+			CrimtaneChunk: {
+				DisplayName: Crimtane Chunk
+				Tooltip: ""
+			}
+
+			DemoniteChunk: {
+				DisplayName: Demonite Chunk
+				Tooltip: ""
+			}
+
+			DurataniumChunk: {
+				DisplayName: Duratanium Chunk
+				Tooltip: ""
+			}
+
+			FeroziumChunk: {
+				DisplayName: Ferozium Chunk
+				Tooltip: ""
+			}
+
+			GoldChunk: {
+				DisplayName: Gold Chunk
+				Tooltip: ""
+			}
+
+			HallowedChunk: {
+				DisplayName: Hallowed Chunk
+				Tooltip: ""
+			}
+
+			HellstoneChunk: {
+				DisplayName: Hellstone Chunk
+				Tooltip: ""
+			}
+
+			HydrolythChunk: {
+				DisplayName: Hydrolyth Chunk
+				Tooltip: ""
+			}
+
+			IridiumChunk: {
+				DisplayName: Iridium Chunk
+				Tooltip: ""
+			}
+
+			IronChunk: {
+				DisplayName: Iron Chunk
+				Tooltip: ""
+			}
+
+			LeadChunk: {
+				DisplayName: Lead Chunk
+				Tooltip: ""
+			}
+
+			MythrilChunk: {
+				DisplayName: Mythril Chunk
+				Tooltip: ""
+			}
+
+			NaquadahChunk: {
+				DisplayName: Naquadah Chunk
+				Tooltip: ""
+			}
+
+			NickelChunk: {
+				DisplayName: Nickel Chunk
+				Tooltip: ""
+			}
+
+			OrichalcumChunk: {
+				DisplayName: Orichalcum Chunk
+				Tooltip: ""
+			}
+
+			OsmiumChunk: {
+				DisplayName: Osmium Chunk
+				Tooltip: ""
+			}
+
+			PalladiumChunk: {
+				DisplayName: Palladium Chunk
+				Tooltip: ""
+			}
+
+			PlatinumChunk: {
+				DisplayName: Platinum Chunk
+				Tooltip: ""
+			}
+
+			PyroscoricChunk: {
+				DisplayName: Pyroscoric Chunk
+				Tooltip: ""
+			}
+
+			RhodiumChunk: {
+				DisplayName: Rhodium Chunk
+				Tooltip: ""
+			}
+
+			ShroomiteChunk: {
+				DisplayName: Shroomite Chunk
+				Tooltip: ""
+			}
+
+			SilverChunk: {
+				DisplayName: Silver Chunk
+				Tooltip: ""
+			}
+
+			TinChunk: {
+				DisplayName: Tin Chunk
+				Tooltip: ""
+			}
+
+			TitaniumChunk: {
+				DisplayName: Titanium Chunk
+				Tooltip: ""
+			}
+
+			TritanoriumChunk: {
+				DisplayName: Tritanorium Chunk
+				Tooltip: ""
+			}
+
+			TroxiniumChunk: {
+				DisplayName: Troxinium Chunk
+				Tooltip: ""
+			}
+
+			TungstenChunk: {
+				DisplayName: Tungsten Chunk
+				Tooltip: ""
+			}
+
+			UnvolanditeChunk: {
+				DisplayName: Unvolandite Chunk
+				Tooltip: ""
+			}
+
+			VorazylcumChunk: {
+				DisplayName: Vorazylcum Chunk
+				Tooltip: ""
+			}
+
+			XanthophyteChunk: {
+				DisplayName: Xanthophyte Chunk
+				Tooltip: ""
+			}
+
+			ZincChunk: {
+				DisplayName: Zinc Chunk
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5674,6 +5919,7 @@ Mods: {
 			BlahBeam.DisplayName: Blah Beam
 			Shell.DisplayName: Shell
 			Blahcket.DisplayName: Blahcket
+			TetanusChakram.DisplayName: Tetanus Chakram
 		}
 
 		NPCs: {
