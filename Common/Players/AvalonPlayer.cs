@@ -160,7 +160,6 @@ public class AvalonPlayer : ModPlayer
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
     public int OldFallStart;
-
     public override void ResetEffects()
     {
 

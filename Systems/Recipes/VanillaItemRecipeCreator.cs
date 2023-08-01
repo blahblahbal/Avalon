@@ -75,6 +75,18 @@ public class VanillaItemRecipeCreator : ModSystem
         Recipe.Create(ItemID.Extractinator).AddRecipeGroup("IronBar", 30).AddIngredient(ItemID.Glass, 5).AddIngredient(ItemID.Wire, 20).AddIngredient(ItemID.Timer1Second).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.HermesBoots).AddIngredient(ItemID.OldShoe).AddIngredient(ItemID.SwiftnessPotion, 2).AddIngredient(ItemID.Cloud, 60).AddIngredient(ModContent.ItemType<BreezeShard>(), 2).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.RodofDiscord).AddIngredient(ModContent.ItemType<ChaosDust>(), 45).AddIngredient(ItemID.SoulofLight, 25).AddIngredient(ItemID.Diamond, 10).AddIngredient(ItemID.SoulofMight).AddIngredient(ItemID.SoulofFright).AddIngredient(ItemID.SoulofSight).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.WarriorEmblem).AddIngredient(ItemID.RangerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.WarriorEmblem).AddIngredient(ItemID.SorcererEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.WarriorEmblem).AddIngredient(ItemID.SummonerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.RangerEmblem).AddIngredient(ItemID.WarriorEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.RangerEmblem).AddIngredient(ItemID.SorcererEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.RangerEmblem).AddIngredient(ItemID.SummonerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.SorcererEmblem).AddIngredient(ItemID.WarriorEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.SorcererEmblem).AddIngredient(ItemID.RangerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.SorcererEmblem).AddIngredient(ItemID.SummonerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.WarriorEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.RangerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.SorcererEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         #endregion
 
         #region Bottles

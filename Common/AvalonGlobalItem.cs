@@ -45,6 +45,7 @@ public class AvalonGlobalItem : GlobalItem
     {
         Item.staff[ItemID.Vilethorn] = true;
     }
+
     public override void AddRecipes()
     {
         // --== Shimmer!!! ==--
@@ -225,6 +226,10 @@ public class AvalonGlobalItem : GlobalItem
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeDew>(), 1, 10, 17));
             itemLoot.Add(ItemDropRule.Common(ItemID.ChlorophyteOre, 1, 75, 130));
+        }
+        if (item.type == ItemID.WallOfFleshBossBag)
+        {
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<FleshyTendril>(), 1, 25, 36));
         }
     }
     public override void SetDefaults(Item item)

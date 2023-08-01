@@ -612,6 +612,17 @@ public class AvalonGlobalNPC : GlobalNPC
             bestiaryEntry.Info.Add(new ModBiomeBestiaryInfoElement(Mod, ModContent.GetInstance<ContagionCaveDesert>().DisplayName.Value, ModContent.GetInstance<ContagionCaveDesert>().BestiaryIcon, "Assets/Bestiary/ContagionBG", null));
         }
     }
+
+    public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+    {
+        var notExpertCondition = new Conditions.NotExpert();
+        switch (npc.type)
+        {
+            case NPCID.WallofFlesh:
+                npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<FleshyTendril>(), 1, 13, 19));
+                break;
+        }
+    }
     public override void ModifyGlobalLoot(GlobalLoot globalLoot)
     {
         var desertPostBeakCondition = new DesertPostBeakDrop();
