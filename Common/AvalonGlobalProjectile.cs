@@ -15,8 +15,7 @@ namespace Avalon.Common;
 
 internal class AvalonGlobalProjectile : GlobalProjectile
 {
-    private bool extendHook = false;
-    private bool extendHookFlag = false;
+    
     public override bool PreAI(Projectile projectile)
     {
         if (projectile.type == ProjectileID.TerraBlade2 && projectile.localAI[0] == 0)
@@ -35,7 +34,6 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             if (!Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus && projectile.ai[2] < 14)
             {
                 distMod = 1.25f;
-                extendHook = true;
             }
             if (projectile.ai[0] == 1 && projectile.ai[2] < 14)
             {
@@ -67,26 +65,25 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                     (distance > 480f * distMod && projectile.type >= 486 && projectile.type <= 489) ||
                     (distance > 500f * distMod && projectile.type == 446))
                 {
-                    if (extendHook)
+                    projectile.ai[0] = 0;
+                    projectile.ai[2]++;
+                    if (projectile.ai[2] >= 14)
                     {
-                        projectile.ai[0] = 0;
-                        projectile.ai[2]++;
+                        projectile.ai[0] = 1;
                     }
-                    else projectile.ai[0] = 1;
                 }
                 else if (projectile.type >= 230 && projectile.type <= 235)
                 {
                     int num18 = 300 + (projectile.type - 230) * 30;
-                    //num18 = (int)(num18 * distMod - num18);
                     num18 = (int)(num18 * distMod);
                     if (distance > (float)num18)
                     {
-                        if (extendHook)
+                        projectile.ai[0] = 0;
+                        projectile.ai[2]++;
+                        if (projectile.ai[2] >= 14)
                         {
-                            projectile.ai[0] = 0;
-                            projectile.ai[2]++;
+                            projectile.ai[0] = 1;
                         }
-                        else projectile.ai[0] = 1;
                     }
                 }
                 else if (projectile.type == 753)
@@ -94,12 +91,12 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                     int num19 = (int)(420 * distMod - 420);
                     if (distance > num19)
                     {
-                        if (extendHook)
+                        projectile.ai[0] = 0;
+                        projectile.ai[2]++;
+                        if (projectile.ai[2] >= 14)
                         {
-                            projectile.ai[0] = 0;
-                            projectile.ai[2]++;
+                            projectile.ai[0] = 1;
                         }
-                        else projectile.ai[0] = 1;
                     }
                 }
             }
