@@ -11,7 +11,7 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Common; 
+namespace Avalon.Common;
 
 internal class AvalonGlobalProjectile : GlobalProjectile
 {
@@ -31,39 +31,24 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             float ypos = mountedCenter.Y - projectile.Center.Y;
             float distance = (float)Math.Sqrt(xpos * xpos + ypos * ypos);
             float distMod = 1f;
+            // for some reason checking if NOT the hookbonus bool works; also the 14 is arbitrary but ends up working to be 50% boost for each hook
             if (!Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus && projectile.ai[2] < 14)
             {
                 distMod = 1.25f;
             }
             if (projectile.ai[0] == 1 && projectile.ai[2] < 14)
             {
-                //distance
-
-                //if ((distance > 300f * distMod - 300f && projectile.type == 13) || (distance > 400f * distMod - 400f && projectile.type == 32) ||
-                //   (distance > 440f * distMod - 440f && projectile.type == 73) || (distance > 440f * distMod - 440f && projectile.type == 74) ||
-                //   (distance > 375f * distMod - 375f && projectile.type == 165) || (distance > 350f * distMod - 350f && projectile.type == 256) ||
-                //   (distance > 500f * distMod - 500f && projectile.type == 315) || (distance > 550f * distMod - 550f && projectile.type == 322) ||
-                //   (distance > 400f * distMod - 400f && projectile.type == 331) || (distance > 550f * distMod - 550f && projectile.type == 332) ||
-                //   (distance > 400f * distMod - 400f && projectile.type == 372) || (distance > 300f * distMod - 300f && projectile.type == 396) ||
-                //   (distance > 550f * distMod - 550f && projectile.type >= 646 && projectile.type <= 649) ||
-                //   (distance > 600f * distMod - 600f && projectile.type == 652) || (distance > 300f * distMod - 300f && projectile.type == 865) ||
-                //   (distance > 500f * distMod - 500f && projectile.type == 935) ||
-                //   (distance > 480f * distMod - 480f && projectile.type >= 486 && projectile.type <= 489) ||
-                //   (distance > 500f * distMod - 500f && projectile.type == 446))
-                //{
-                //    projectile.ai[0] = 1f;
-                //}
-                if ((distance > 300f * distMod && projectile.type == 13) || (distance > 400f * distMod && projectile.type == 32) ||
-                    (distance > 440f * distMod && projectile.type == 73) || (distance > 440f * distMod && projectile.type == 74) ||
-                    (distance > 375f * distMod && projectile.type == 165) || (distance > 350f * distMod && projectile.type == 256) ||
-                    (distance > 500f * distMod && projectile.type == 315) || (distance > 550f * distMod && projectile.type == 322) ||
-                    (distance > 400f * distMod && projectile.type == 331) || (distance > 550f * distMod && projectile.type == 332) ||
-                    (distance > 400f * distMod && projectile.type == 372) || (distance > 300f * distMod && projectile.type == 396) ||
-                    (distance > 550f * distMod && projectile.type >= 646 && projectile.type <= 649) ||
-                    (distance > 600f * distMod && projectile.type == 652) || (distance > 300f * distMod && projectile.type == 865) ||
-                    (distance > 500f * distMod && projectile.type == 935) ||
-                    (distance > 480f * distMod && projectile.type >= 486 && projectile.type <= 489) ||
-                    (distance > 500f * distMod && projectile.type == 446))
+                if ((distance > 300f * distMod && projectile.type == ProjectileID.Hook) || (distance > 400f * distMod && projectile.type == ProjectileID.IvyWhip) ||
+                    (distance > 440f * distMod && projectile.type == ProjectileID.DualHookBlue) || (distance > 440f * distMod && projectile.type == ProjectileID.DualHookRed) ||
+                    (distance > 375f * distMod && projectile.type == ProjectileID.Web) || (distance > 350f * distMod && projectile.type == ProjectileID.SkeletronHand) ||
+                    (distance > 500f * distMod && projectile.type == ProjectileID.BatHook) || (distance > 550f * distMod && projectile.type == ProjectileID.WoodHook) ||
+                    (distance > 400f * distMod && projectile.type == ProjectileID.CandyCaneHook) || (distance > 550f * distMod && projectile.type == ProjectileID.ChristmasHook) ||
+                    (distance > 400f * distMod && projectile.type == ProjectileID.FishHook) || (distance > 300f * distMod && projectile.type == ProjectileID.SlimeHook) ||
+                    (distance > 550f * distMod && projectile.type >= ProjectileID.LunarHookSolar && projectile.type <= ProjectileID.LunarHookStardust) ||
+                    (distance > 600f * distMod && projectile.type == ProjectileID.StaticHook) || (distance > 300f * distMod && projectile.type == ProjectileID.SquirrelHook) ||
+                    (distance > 500f * distMod && projectile.type == ProjectileID.QueenSlimeHook) ||
+                    (distance > 480f * distMod && projectile.type >= ProjectileID.TendonHook && projectile.type <= ProjectileID.WormHook) ||
+                    (distance > 500f * distMod && projectile.type == ProjectileID.AntiGravityHook))
                 {
                     projectile.ai[0] = 0;
                     projectile.ai[2]++;
@@ -72,7 +57,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                         projectile.ai[0] = 1;
                     }
                 }
-                else if (projectile.type >= 230 && projectile.type <= 235)
+                else if (projectile.type >= ProjectileID.GemHookAmethyst && projectile.type <= ProjectileID.GemHookDiamond)
                 {
                     int num18 = 300 + (projectile.type - 230) * 30;
                     num18 = (int)(num18 * distMod);
@@ -86,7 +71,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                         }
                     }
                 }
-                else if (projectile.type == 753)
+                else if (projectile.type == ProjectileID.AmberHook)
                 {
                     int num19 = (int)(420 * distMod - 420);
                     if (distance > num19)

@@ -1,4 +1,5 @@
 using System;
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -52,7 +53,7 @@ public class ZirconHook : ModProjectile
 
     public override float GrappleRange()
     {
-        return 440f; // Main.player[Projectile.owner].GetModPlayer<Players.ExxoPlayer>().HookBonus ? 750f : 600f;
+        return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 440f * 1.5f : 440f;
     }
 
     public override void NumGrappleHooks(Player player, ref int numHooks)
