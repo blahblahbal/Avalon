@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -8,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace Avalon.Items.Tools;
+namespace Avalon.Items.Tools.Hardmode;
 
 internal class WaypointSystemMkII : ModSystem
 {

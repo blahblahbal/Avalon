@@ -5793,6 +5793,16 @@ Mods: {
 				DisplayName: Zinc Chunk
 				Tooltip: ""
 			}
+
+			InfectionHook: {
+				DisplayName: Infection Hook
+				Tooltip: ""
+			}
+
+			HemorrhagingHalberd: {
+				DisplayName: Hemorrhaging Halberd
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5920,6 +5930,8 @@ Mods: {
 			Shell.DisplayName: Shell
 			Blahcket.DisplayName: Blahcket
 			TetanusChakram.DisplayName: Tetanus Chakram
+			HemorrhagingHalberd.DisplayName: Hemorrhaging Halberd
+			InfectionHook.DisplayName: Infection Hook
 		}
 
 		NPCs: {
@@ -5982,6 +5994,7 @@ Mods: {
 			ContaminatedPenguin.DisplayName: Contaminated Penguin
 			BaskingSpewer.DisplayName: Basking Spewer
 			GreenPigron.DisplayName: Pigron
+			ContagionMimic.DisplayName: Contagion Mimic
 		}
 
 		Buffs: {
