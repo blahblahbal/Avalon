@@ -1,3 +1,4 @@
+using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Shards;
 using Terraria;
@@ -40,6 +41,11 @@ public class RecipeChanger : ModSystem
                 case ItemID.SunplateBlock:
                 {
                     recipe.AddIngredient(ItemID.GoldOre);
+                    break;
+                }
+                case ItemID.HandOfCreation:
+                {
+                    recipe.AddIngredient(ModContent.ItemType<ObsidianGlove>());
                     break;
                 }
                 case ItemID.ShroomiteBar:

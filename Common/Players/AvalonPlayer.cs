@@ -128,6 +128,7 @@ public class AvalonPlayer : ModPlayer
     public bool SlimeBand;
     public bool NoSticky;
     public bool VampireTeeth;
+    public bool ObsidianGlove;
     #endregion
 
     #region buffs and debuffs
@@ -208,6 +209,7 @@ public class AvalonPlayer : ModPlayer
         SlimeBand = false;
         NoSticky = false;
         VampireTeeth = false;
+        ObsidianGlove = false;
 
         // armor sets
         SkyBlessing = false;

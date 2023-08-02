@@ -197,6 +197,38 @@ Mods: {
 					'''
 			}
 
+			TombMirror: {
+				DisplayName: Tomb Mirror
+				Tooltip:
+					'''
+					Use to return to where you last died
+					'Gazing into the mirror, you see yourself in a past life'
+					'''
+			}
+
+			Timechanger: {
+				DisplayName: Timechanger
+				Tooltip:
+					'''
+					Changes the time from night to day or from day to night
+					               Has a chance to trigger a Blood Moon or Solar Eclipse if conditions are right
+					'''
+			}
+
+			Moonphaser: {
+				DisplayName: Moonphaser
+				Tooltip:
+					'''
+					Changes the phases of the Moon
+					               Has a chance to trigger a Blood Moon if night
+					'''
+			}
+
+			Rainbringer: {
+				DisplayName: Rainbringer
+				Tooltip: Toggles rain on or off
+			}
+
 			TacticalBlahncher: {
 				DisplayName: Tactical Blahncher
 				Tooltip:
@@ -5932,6 +5964,9 @@ Mods: {
 			TetanusChakram.DisplayName: Tetanus Chakram
 			HemorrhagingHalberd.DisplayName: Hemorrhaging Halberd
 			InfectionHook.DisplayName: Infection Hook
+			Moonphaser.DisplayName: Moonphaser
+			Rainbringer.DisplayName: Rainbringer
+			Timechanger.DisplayName: Timechanger
 		}
 
 		NPCs: {

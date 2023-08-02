@@ -1,4 +1,4 @@
-﻿using Avalon.Common;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -8,12 +8,15 @@ using Terraria.GameContent.Drawing;
 
 namespace Avalon.Hooks;
 
-public class SpelunkerEdit : ModHook {
-    protected override void Apply() {
+public class SpelunkerEdit : ModHook
+{
+    protected override void Apply()
+    {
         IL_TileDrawing.DrawSingleTile += ILDrawSingleTile;
     }
 
-    private static void ILDrawSingleTile(ILContext il) {
+    private static void ILDrawSingleTile(ILContext il)
+    {
         const string tileLightFieldName = "tileLight";
         var cursor = new ILCursor(il);
 

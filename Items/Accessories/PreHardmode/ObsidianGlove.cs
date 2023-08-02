@@ -20,17 +20,19 @@ class ObsidianGlove : ModItem
         Item.rare = ItemRarityID.Lime;
         Item.width = dims.Width;
         Item.accessory = true;
-        Item.value = Item.sellPrice(0, 2, 0, 0);
+        Item.value = Item.sellPrice(0, 2);
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().CloudGlove = true;
+        player.GetModPlayer<AvalonPlayer>().ObsidianGlove = true;
     }
     public override void UpdateVanity(Player player)
     {
         player.GetModPlayer<AvalonPlayer>().CloudGlove = true;
+        player.GetModPlayer<AvalonPlayer>().ObsidianGlove = true;
     }
     public override void AddRecipes()
     {

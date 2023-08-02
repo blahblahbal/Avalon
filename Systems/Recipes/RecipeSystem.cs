@@ -1,11 +1,12 @@
-//using Avalon.Items.Accessories;
-//using Avalon.Items.Material;
-//using Avalon.Items.Placeable.Bar;
-//using Avalon.Items.Placeable.Crafting;
-//using Avalon.Items.Placeable.Tile;
-
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Herbs;
+using Avalon.Items.Placeable.Furniture.BleachedEbony;
+using Avalon.Items.Placeable.Furniture.Coughwood;
+using Avalon.Items.Placeable.Furniture.OrangeDungeon;
+using Avalon.Items.Placeable.Furniture.PurpleDungeon;
+using Avalon.Items.Placeable.Furniture.ResistantWood;
+using Avalon.Items.Placeable.Furniture.YellowDungeon;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -88,21 +89,21 @@ public class RecipeSystem : ModSystem
         //});
         //RecipeGroup.RegisterGroup("MagicStorage:AnyDemonAltar", groupDemonAltarMagicStorage);
 
-        //var groupTombstones = new RecipeGroup(() => "Any Tombstone", new int[]
-        //{
-        //    ItemID.Gravestone,
-        //    ItemID.Tombstone,
-        //    ItemID.CrossGraveMarker,
-        //    ItemID.Obelisk,
-        //    ItemID.Headstone,
-        //    ItemID.GraveMarker,
-        //    ItemID.RichGravestone1,
-        //    ItemID.RichGravestone2,
-        //    ItemID.RichGravestone3,
-        //    ItemID.RichGravestone4,
-        //    ItemID.RichGravestone5
-        //});
-        //RecipeGroup.RegisterGroup("Avalon:Tombstones", groupTombstones);
+        var groupTombstones = new RecipeGroup(() => "Any Tombstone", new int[]
+        {
+            ItemID.Gravestone,
+            ItemID.Tombstone,
+            ItemID.CrossGraveMarker,
+            ItemID.Obelisk,
+            ItemID.Headstone,
+            ItemID.GraveMarker,
+            ItemID.RichGravestone1,
+            ItemID.RichGravestone2,
+            ItemID.RichGravestone3,
+            ItemID.RichGravestone4,
+            ItemID.RichGravestone5
+        });
+        RecipeGroup.RegisterGroup("Avalon:Tombstones", groupTombstones);
 
         //RecipeGroup.RegisterGroup("MagicStorage:AnyTombstone", groupTombstones);
 
@@ -180,11 +181,14 @@ public class RecipeSystem : ModSystem
             ItemID.AshWoodWorkbench,
             ItemID.BalloonWorkbench,
             ItemID.CoralWorkbench,
-            //ModContent.ItemType<Items.Placeable.Crafting.CoughwoodWorkBench>(),
+            ModContent.ItemType<CoughwoodWorkBench>(),
+            ModContent.ItemType<BleachedEbonyWorkBench>(),
             //ModContent.ItemType<Items.Placeable.Crafting.DarkSlimeWorkBench>(),
             //ModContent.ItemType<Items.Placeable.Crafting.HeartstoneWorkBench>(),
-            //ModContent.ItemType<Items.Placeable.Crafting.OrangeDungeonWorkBench>(),
-            //ModContent.ItemType<Items.Placeable.Crafting.ResistantWoodWorkBench>(),
+            ModContent.ItemType<OrangeDungeonWorkBench>(),
+            ModContent.ItemType<PurpleDungeonWorkbench>(),
+            ModContent.ItemType<YellowDungeonWorkBench>(),
+            ModContent.ItemType<ResistantWoodWorkBench>(),
             //ModContent.ItemType<Items.Placeable.Crafting.VertebraeWorkBench>()
         });
         RecipeGroup.RegisterGroup("Avalon:WorkBenches", groupWorkBenches);
@@ -198,10 +202,10 @@ public class RecipeSystem : ModSystem
             ItemID.Waterleaf,
             ItemID.Moonglow,
             ItemID.Daybloom,
-            //ModContent.ItemType<Bloodberry>(),
-            //ModContent.ItemType<Sweetstem>(),
-            //ModContent.ItemType<Barfbush>(),
-            //ModContent.ItemType<Holybird>(),
+            ModContent.ItemType<Bloodberry>(),
+            ModContent.ItemType<Sweetstem>(),
+            ModContent.ItemType<Barfbush>(),
+            ModContent.ItemType<Holybird>(),
             //ModContent.ItemType<Items.TwilightPlume>(),
         });
         RecipeGroup.RegisterGroup("Avalon:Herbs", groupHerbs);

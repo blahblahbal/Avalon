@@ -37,7 +37,7 @@ public class AvalonGlobalItem : GlobalItem
         TileID.SilkRope,
         TileID.VineRope,
         TileID.WebRope,
-        //ModContent.TileType<LivingLightning>(),
+        ModContent.TileType<LivingLightning>(),
         //ModContent.TileType<VineRope>(),
     };
 
@@ -629,19 +629,20 @@ public class AvalonGlobalItem : GlobalItem
     {
         if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer)
         {
-            bool inrange =
-                (player.position.X / 16f) - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost -
-                player.blockRange <= Player.tileTargetX &&
-                ((player.position.X + player.width) / 16f) + Player.tileRangeX +
-                player.inventory[player.selectedItem].tileBoost - 1f + player.blockRange >= Player.tileTargetX &&
-                (player.position.Y / 16f) - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost -
-                player.blockRange <= Player.tileTargetY &&
-                ((player.position.Y + player.height) / 16f) + Player.tileRangeY +
-                player.inventory[player.selectedItem].tileBoost - 2f + player.blockRange >= Player.tileTargetY;
+            bool inrange = player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple);
+            //bool inrange =
+            //    (player.position.X / 16f) - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost -
+            //    player.blockRange <= Player.tileTargetX &&
+            //    ((player.position.X + player.width) / 16f) + Player.tileRangeX +
+            //    player.inventory[player.selectedItem].tileBoost - 1f + player.blockRange >= Player.tileTargetX &&
+            //    (player.position.Y / 16f) - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost -
+            //    player.blockRange <= Player.tileTargetY &&
+            //    ((player.position.Y + player.height) / 16f) + Player.tileRangeY +
+            //    player.inventory[player.selectedItem].tileBoost - 2f + player.blockRange >= Player.tileTargetY;
             if (item.createTile > -1 &&
                 (Main.tileSolid[item.createTile] || nonSolidExceptions.Contains(item.createTile)) &&
                 (Main.tile[Player.tileTargetX, Player.tileTargetY].LiquidType != LiquidID.Lava ||
-                 player.HasItemInArmor(ModContent.ItemType<ObsidianGlove>())) &&
+                 player.GetModPlayer<AvalonPlayer>().ObsidianGlove) &&
                 !Main.tile[Player.tileTargetX, Player.tileTargetY].HasTile && inrange)
             {
                 bool subtractFromStack = WorldGen.PlaceTile(Player.tileTargetX, Player.tileTargetY, item.createTile);
