@@ -23,7 +23,12 @@ namespace Avalon.Hooks
             ILCursor c = new(il);
             if (c.TryGotoNext(i => i.MatchCall<Tile>("lava")))
             {
-
+                //c.EmitDelegate<Func<Tile, NPC, bool>>((t, n) =>
+                //{
+                //    if (t.LiquidType == LiquidID.Lava)
+                //        return false;
+                //    return true;
+                //});
             }
         }
     }
