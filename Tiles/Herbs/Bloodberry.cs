@@ -26,7 +26,7 @@ public class Bloodberry : ModTile
         TileObjectData.newTile.CopyFrom(TileObjectData.StyleAlch);
         TileObjectData.newTile.AnchorValidTiles = new int[]
         {
-            TileID.CrimsonPlants,
+            TileID.CrimsonGrass,
             TileID.Crimstone
         };
         TileObjectData.newTile.AnchorAlternateTiles = new int[]

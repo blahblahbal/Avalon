@@ -171,6 +171,9 @@ public class AvalonWorld : ModSystem
 
     public override void PostUpdateWorld()
     {
+        // these 2 (num12 and 13) are used for herb spawning; if I revert a change we'll need them
+        int num12 = 151;
+        int num13 = (int)Utils.Lerp(num12, num12 * 2.8, Utils.Clamp(Main.maxTilesX / 4200.0 - 1.0, 0.0, 1.0));
         float num2 = 3E-05f * (float)WorldGen.GetWorldUpdateRate();
         // float num3 = 1.5E-05f * (float)Main.worldRate;
         for (int num4 = 0; num4 < Main.maxTilesX * Main.maxTilesY * num2; num4++)
@@ -202,6 +205,7 @@ public class AvalonWorld : ModSystem
                 num10 = Main.maxTilesY - 10;
             }
 
+            #region contagion thorny bushes
             if (TileID.Sets.SpreadOverground[Main.tile[num5, num6].TileType])
             {
                 int type = Main.tile[num5, num6].TileType;
@@ -216,6 +220,25 @@ public class AvalonWorld : ModSystem
                     WorldGen.PlaceTile(num5, num9, ModContent.TileType<ContagionThornyBushes>(), mute: true);
                 }
             }
+            #endregion
+
+            #region bloodberry and holybird spawning
+            if (Main.tile[num5, num9].TileType == TileID.ImmatureHerbs && Main.tile[num5, num9].HasTile && Main.tile[num5, num9].TileFrameX == 54 &&
+                (Main.tile[num5, num6].TileType == TileID.CrimsonGrass || Main.tile[num5, num6].TileType == TileID.Crimstone))
+            {
+                Tile t = Main.tile[num5, num9];
+                t.TileType = (ushort)ModContent.TileType<Bloodberry>();
+                t.TileFrameX = 0;
+            }
+
+            if (Main.tile[num5, num9].TileType == TileID.ImmatureHerbs && Main.tile[num5, num9].HasTile && Main.tile[num5, num9].TileFrameX == 0 &&
+                Main.tile[num5, num6].TileType == TileID.HallowedGrass)
+            {
+                Tile t = Main.tile[num5, num9];
+                t.TileType = (ushort)ModContent.TileType<Holybird>();
+                t.TileFrameX = 0;
+            }
+            #endregion
 
             #region planter box grass growth
             if (Main.tile[num5, num6].TileType == ModContent.TileType<PlanterBoxes>())
@@ -263,7 +286,7 @@ public class AvalonWorld : ModSystem
             }
             // kill barfbush if block below isn't contagion grass or chunkstone
             if (!(Main.tile[num5, num11].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num11].TileType == ModContent.TileType<ContagionJungleGrass>() || Main.tile[num5, num11].TileType == ModContent.TileType<Chunkstone>()) &&
-                Main.tile[num5, num6].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>())
+                Main.tile[num5, num6].TileType == ModContent.TileType<Barfbush>())
             {
                 WorldGen.KillTile(num5, num6);
             }
@@ -321,7 +344,7 @@ public class AvalonWorld : ModSystem
                     NetMessage.SendTileSquare(-1, num5, num6, 3);
                 }
             }
-            #endregion lazite grass
+            #endregion
 
             #region large herb growth
             if (Main.tile[num5, num6].TileType == (ushort)ModContent.TileType<LargeHerbsStage1>() ||
@@ -330,7 +353,41 @@ public class AvalonWorld : ModSystem
             {
                 GrowLargeHerb(num5, num6);
             }
-            #endregion large herb growth
+            #endregion
+
+            #region impgrass
+            if (Main.tile[num5, num6].TileType == ModContent.TileType<Ectograss>())
+            {
+                int num14 = Main.tile[num5, num6].TileType;
+                bool flag2 = false;
+                for (int m = num7; m < num8; m++)
+                {
+                    for (int n = num9; n < num10; n++)
+                    {
+                        if ((num5 != m || num6 != n) && Main.tile[m, n].HasTile)
+                        {
+                            if (Main.tile[m, n].TileType == TileID.Ash)
+                            {
+                                TileColorCache color = Main.tile[num5, num6].BlockColorAndCoating();
+                                WorldGen.SpreadGrass(m, n, TileID.Ash, ModContent.TileType<Ectograss>(), false,
+                                    color);
+                            }
+
+                            if (Main.tile[m, n].TileType == num14)
+                            {
+                                WorldGen.SquareTileFrame(m, n);
+                                flag2 = true;
+                            }
+                        }
+                    }
+                }
+
+                if (Main.netMode == NetmodeID.Server && flag2)
+                {
+                    NetMessage.SendTileSquare(-1, num5, num6, 3);
+                }
+            }
+            #endregion
 
             #region contagion shortgrass/barfbush spawning
             if (Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num6].TileType == ModContent.TileType<ContagionJungleGrass>())
@@ -356,7 +413,7 @@ public class AvalonWorld : ModSystem
 
                 if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 && !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid && WorldGen.genRand.NextBool(num6 > Main.worldSurface ? 500 : 200) && (num14 == ModContent.TileType<Ickgrass>() || num14 == ModContent.TileType<ContagionJungleGrass>()))
                 {
-                    WorldGen.PlaceTile(num5, num9, ModContent.TileType<Tiles.Herbs.Barfbush>(), true, false, -1, 0);
+                    WorldGen.PlaceTile(num5, num9, ModContent.TileType<Barfbush>(), true, false, -1, 0);
                     if (Main.tile[num5, num9].HasTile)
                     {
                         Tile t = Main.tile[num5, num9];
@@ -412,9 +469,9 @@ public class AvalonWorld : ModSystem
                     NetMessage.SendTileSquare(-1, num5, num6, 3);
                 }
             }
-            #endregion contagion shortgrass/barfbush spawning
+            #endregion
 
-            #region impvines growing
+            #region ectovines growing
             if ((Main.tile[num5, num6].TileType == ModContent.TileType<Ectograss>() ||
                  Main.tile[num5, num6].TileType == ModContent.TileType<Ectovines>()) &&
                 WorldGen.genRand.NextBool(15) && !Main.tile[num5, num6 + 1].HasTile && // change back to NextBool(15)
@@ -453,7 +510,7 @@ public class AvalonWorld : ModSystem
                     }
                 }
             }
-            #endregion impvines
+            #endregion
 
             #region contagion vines growing
             if ((Main.tile[num5, num6].TileType == ModContent.TileType<Ickgrass>() ||
@@ -496,7 +553,7 @@ public class AvalonWorld : ModSystem
                     }
                 }
             }
-            #endregion tropical vines
+            #endregion
         }
     }
 

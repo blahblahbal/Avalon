@@ -185,7 +185,7 @@ public class Librarian : ModNPC
                 return
                     "When the Changelings took over the Western Steppes, I fled to this land. I already like it better.";
             case 9:
-                return "Wait, you get loot after defeating a boss more than once per day?";
+                return "Wait, you get loot after defeating a boss more than once per day?!";
             case 10:
                 return
                     "It's very strange to not see fairies flying around everyone. Why don't you buy one from me?"; // add genie pets

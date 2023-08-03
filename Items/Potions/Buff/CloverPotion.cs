@@ -1,3 +1,4 @@
+using Avalon.Items.Material.Herbs;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -32,9 +33,22 @@ class CloverPotion : ModItem
         Item.UseSound = SoundID.Item3;
     }
 
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.FakeFourLeafClover>()).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ModContent.ItemType<Material.Holybird>()).AddIngredient(ItemID.Fireblossom).AddTile(TileID.Bottles).Register();
-    //    CreateRecipe(20).AddIngredient(ModContent.ItemType<Material.FourLeafClover>()).AddIngredient(ModContent.ItemType<Material.BottledLava>(), 20).AddIngredient(ModContent.ItemType<Material.Holybird>(), 20).AddIngredient(ItemID.Fireblossom, 20).AddTile(TileID.Bottles).Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.FakeFourLeafClover>())
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Holybird>())
+            .AddIngredient(ItemID.Fireblossom)
+            .AddTile(TileID.Bottles)
+            .Register();
+
+        CreateRecipe(20)
+            .AddIngredient(ModContent.ItemType<Material.FourLeafClover>())
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>(), 20)
+            .AddIngredient(ModContent.ItemType<Holybird>(), 20)
+            .AddIngredient(ItemID.Fireblossom, 20)
+            .AddTile(TileID.Bottles)
+            .Register();
+    }
 }
