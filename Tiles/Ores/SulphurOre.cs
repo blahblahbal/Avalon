@@ -11,6 +11,7 @@ public class SulphurOre : ModTile
     public override void SetStaticDefaults()
     {
         AddMapEntry(new Color(218, 216, 114), LanguageManager.Instance.GetText("Sulphur"));
+        TileID.Sets.Ore[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;

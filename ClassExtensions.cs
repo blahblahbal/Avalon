@@ -35,9 +35,8 @@ public static class ClassExtensions
     /// </summary>
     /// <param name="p">The tile coordinates as a Point.</param>
     /// <param name="type">The tile type to veinmine.</param>
-    public static void VeinMine(Point p, int type)
+    public static void VeinMine(Point p, int type, int maxTiles = 500)
     {
-        int maxTiles = 50;
         int tiles = 0;
 
         Tile tile = Framing.GetTileSafely(p);
@@ -50,7 +49,7 @@ public static class ClassExtensions
         points = AddValidNeighbors(points, p);
 
         int index = 0;
-        while (points.Count > 0 && tiles < maxTiles)
+        while (points.Count > 0 && tiles < maxTiles && index < points.Count)
         {
             List<Point> tilePos = points[index];
             foreach (Point a in tilePos)
@@ -81,7 +80,7 @@ public static class ClassExtensions
         points = AddValidNeighbors(points, p);
 
         int index = 0;
-        while (points.Count > 0 && tiles < maxTiles)
+        while (points.Count > 0 && tiles < maxTiles && index < points.Count)
         {
             List<Point> tilePos = points[index];
             foreach (Point a in tilePos)

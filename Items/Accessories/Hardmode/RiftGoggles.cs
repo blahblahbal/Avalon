@@ -1,7 +1,6 @@
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Ores;
-using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -13,8 +12,6 @@ class RiftGoggles : ModItem
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Rift Goggles");
-        //Tooltip.SetDefault("Allows you to see rifts into another world");
         Item.ResearchUnlockCount = 1;
     }
 

@@ -8,6 +8,19 @@ namespace Avalon.Common;
 
 public class AvalonGlobalTile : GlobalTile
 {
+    public override void SetStaticDefaults()
+    {
+        int[] spelunkers = { TileID.Crimtane, TileID.Meteorite, TileID.Obsidian, TileID.Hellstone };
+        int[] ores = { TileID.Topaz, TileID.Ruby, TileID.Amethyst, TileID.Diamond, TileID.Emerald, TileID.Sapphire, TileID.AmberStoneBlock };
+        foreach (int tile in spelunkers)
+        {
+            Main.tileSpelunker[tile] = true;
+        }
+        foreach(int tile in ores)
+        {
+            TileID.Sets.Ore[tile] = true;
+        }
+    }
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
         if (Main.player[Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16)].GetModPlayer<AvalonPlayer>().OreDupe && TileID.Sets.Ore[Main.tile[i, j].TileType])

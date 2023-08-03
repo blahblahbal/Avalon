@@ -218,6 +218,7 @@ public class Rift : ModNPC
         {
             Point tile = NPC.Center.ToTileCoordinates();
 
+            #region copper
             if (Main.tile[tile.X, tile.Y].TileType == TileID.Copper)
             {
                 ClassExtensions.RiftReplace(tile, TileID.Copper, TileID.Tin);
@@ -230,7 +231,8 @@ public class Rift : ModNPC
             {
                 ClassExtensions.RiftReplace(tile, ModContent.TileType<Tiles.Ores.BronzeOre>(), TileID.Copper);
             }
-
+            #endregion
+            #region iron
             if (Main.tile[tile.X, tile.Y].TileType == TileID.Iron)
             {
                 ClassExtensions.RiftReplace(tile, TileID.Iron, TileID.Lead);
@@ -243,7 +245,8 @@ public class Rift : ModNPC
             {
                 ClassExtensions.RiftReplace(tile, ModContent.TileType<Tiles.Ores.NickelOre>(), TileID.Iron);
             }
-
+            #endregion
+            #region silver
             if (Main.tile[tile.X, tile.Y].TileType == TileID.Silver)
             {
                 ClassExtensions.RiftReplace(tile, TileID.Silver, TileID.Tungsten);
@@ -256,7 +259,8 @@ public class Rift : ModNPC
             {
                 ClassExtensions.RiftReplace(tile, ModContent.TileType<Tiles.Ores.ZincOre>(), TileID.Silver);
             }
-
+            #endregion
+            #region gold
             if (Main.tile[tile.X, tile.Y].TileType == TileID.Gold)
             {
                 ClassExtensions.RiftReplace(tile, TileID.Gold, TileID.Platinum);
@@ -269,7 +273,8 @@ public class Rift : ModNPC
             {
                 ClassExtensions.RiftReplace(tile, ModContent.TileType<Tiles.Ores.BismuthOre>(), TileID.Gold);
             }
-
+            #endregion
+            #region rhodium
             if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.RhodiumOre>())
             {
                 ClassExtensions.RiftReplace(tile, ModContent.TileType<Tiles.Ores.RhodiumOre>(), ModContent.TileType<Tiles.Ores.OsmiumOre>());
@@ -282,129 +287,36 @@ public class Rift : ModNPC
             {
                 ClassExtensions.RiftReplace(tile, ModContent.TileType<Tiles.Ores.IridiumOre>(), ModContent.TileType<Tiles.Ores.RhodiumOre>());
             }
-
-            for (int x = tile.X - 10; x < tile.X + 10; x++)
+            #endregion
+            #region evil
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Demonite)
             {
-                for (int y = tile.Y - 10; y < tile.Y + 10; y++)
-                {
-
-                    //#region phm ore tier 1
-                    //if (Main.tile[x, y].TileType == TileID.Copper && !copperDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = TileID.Tin;
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    copperDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //if (Main.tile[x, y].TileType == TileID.Tin && !copperDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Ores.BronzeOre>();
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    copperDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //if (Main.tile[x, y].TileType == (ushort)ModContent.TileType<Tiles.Ores.BronzeOre>() && !copperDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = TileID.Copper;
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    copperDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //#endregion
-                    //#region phm ore tier 2
-                    //if (Main.tile[x, y].TileType == TileID.Iron && !ironDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = TileID.Lead;
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    ironDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //if (Main.tile[x, y].TileType == TileID.Lead && !ironDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Ores.NickelOre>();
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    ironDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //if (Main.tile[x, y].TileType == (ushort)ModContent.TileType<Tiles.Ores.NickelOre>() && !ironDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = TileID.Iron;
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    ironDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //#endregion
-                    //#region phm ore tier 3
-                    //if (Main.tile[x, y].TileType == TileID.Silver && !silverDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = TileID.Tungsten;
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    silverDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //if (Main.tile[x, y].TileType == TileID.Tungsten && !silverDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Ores.ZincOre>();
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    silverDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //if (Main.tile[x, y].TileType == (ushort)ModContent.TileType<Tiles.Ores.ZincOre>() && !silverDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = TileID.Silver;
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    silverDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //#endregion
-                    //#region phm ore tier 4
-                    //if (Main.tile[x, y].TileType == TileID.Gold && !goldDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = TileID.Platinum;
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    goldDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //if (Main.tile[x, y].TileType == TileID.Platinum && !goldDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Ores.BismuthOre>();
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    goldDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //if (Main.tile[x, y].TileType == (ushort)ModContent.TileType<Tiles.Ores.BismuthOre>() && !goldDone[x - (tile.X - 10), y - (tile.Y - 10)])
-                    //{
-                    //    Main.tile[x, y].TileType = TileID.Gold;
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    goldDone[x - (tile.X - 10), y - (tile.Y - 10)] = true;
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //}
-                    //#endregion
-                    //#region phm ore tier 5
-                    //if (Main.tile[x, y].TileType == (ushort)ModContent.TileType<Tiles.Ores.RhodiumOre>())
-                    //{
-                    //    Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Ores.OsmiumOre>();
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //    continue;
-                    //}
-                    //if (Main.tile[x, y].TileType == (ushort)ModContent.TileType<Tiles.Ores.OsmiumOre>())
-                    //{
-                    //    Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Ores.IridiumOre>();
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //    continue;
-                    //}
-                    //if (Main.tile[x, y].TileType == (ushort)ModContent.TileType<Tiles.Ores.IridiumOre>())
-                    //{
-                    //    Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Ores.RhodiumOre>();
-                    //    WorldGen.SquareTileFrame(x, y);
-                    //    if (Main.netMode == NetmodeID.Server) NetMessage.SendTileSquare(-1, x, y, 2);
-                    //    continue;
-                    //}
-                    //#endregion
-                }
+                ClassExtensions.RiftReplace(tile, TileID.Demonite, TileID.Crimtane);
             }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Crimtane)
+            {
+                ClassExtensions.RiftReplace(tile, TileID.Crimtane, ModContent.TileType<Tiles.Ores.BacciliteOre>());
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BacciliteOre>())
+            {
+                ClassExtensions.RiftReplace(tile, ModContent.TileType<Tiles.Ores.BacciliteOre>(), TileID.Demonite);
+            }
+            #endregion
+
+            #region cobalt (do later)
+            //if (Main.tile[tile.X, tile.Y].TileType == TileID.Cobalt)
+            //{
+            //    ClassExtensions.RiftReplace(tile, TileID.Cobalt, TileID.Palladium);
+            //}
+            //else if (Main.tile[tile.X, tile.Y].TileType == TileID.Palladium)
+            //{
+            //    ClassExtensions.RiftReplace(tile, TileID.Palladium, TileID.Cobalt); //ClassExtensions.RiftReplace(tile, TileID.Palladium, ModContent.TileType<Tiles.Ores.DurataniumOre>());
+            //}
+            //else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.DurataniumOre>())
+            //{
+            //    ClassExtensions.RiftReplace(tile, ModContent.TileType<Tiles.Ores.DurataniumOre>(), TileID.Cobalt);
+            //}
+            #endregion
             NPC.ai[1] = 4;
         }
         if (NPC.ai[0] >= 200) NPC.active = false;

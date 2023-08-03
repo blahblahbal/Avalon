@@ -11,6 +11,7 @@ public class Heartstone : ModTile
     public override void SetStaticDefaults()
     {
         AddMapEntry(new Color(217, 2, 55), LanguageManager.Instance.GetText("Heartstone"));
+        TileID.Sets.Ore[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileBlockLight[Type] = true;

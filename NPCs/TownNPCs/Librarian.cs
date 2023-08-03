@@ -131,14 +131,18 @@ public class Librarian : ModNPC
             "Rob",
             "Nasard",
             "Helafrin",
-            "Ganjarule",
-            "Ryugrei",
+            "Heleghir",
+            "Kevin",
             "Baysh",
-            "Encanes",
+            "Mars",
             "Dato",
             "Callumn",
             "Alkaido",
-            "Harry"
+            "Harry",
+            "Flish",
+            "Ryugrei",
+            "Krayvuss",
+            "Halo"
         };
     }
 

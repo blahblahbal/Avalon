@@ -5840,6 +5840,38 @@ Mods: {
 				DisplayName: Rift Goggles
 				Tooltip: Allows you to see rifts into another world
 			}
+
+			AccelerationPickaxe: {
+				DisplayName: Acceleration Pickaxe (Normal)
+				Tooltip:
+					'''
+					Vein mines ores
+					Right click to change to speed mode
+					'''
+			}
+
+			AccelerationPickaxeSpeed: {
+				DisplayName: Acceleration Drill (Speed)
+				Tooltip:
+					'''
+					Mines in a 3x3 area
+					Right click to change to normal mode
+					'''
+			}
+
+			AccelerationDrill: {
+				DisplayName: Acceleration Drill (Normal)
+				Tooltip:
+					'''
+					Vein mines ores
+					Right click to change to speed mode
+					'''
+			}
+
+			AccelerationDrillSpeed: {
+				DisplayName: Acceleration Drill Speed
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -5972,6 +6004,7 @@ Mods: {
 			Moonphaser.DisplayName: Moonphaser
 			Rainbringer.DisplayName: Rainbringer
 			Timechanger.DisplayName: Timechanger
+			AccelerationDrill.DisplayName: Acceleration Drill
 		}
 
 		NPCs: {
