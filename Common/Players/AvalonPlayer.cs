@@ -129,6 +129,7 @@ public class AvalonPlayer : ModPlayer
     public bool NoSticky;
     public bool VampireTeeth;
     public bool ObsidianGlove;
+    public bool RiftGoggles;
     #endregion
 
     #region buffs and debuffs
@@ -210,6 +211,7 @@ public class AvalonPlayer : ModPlayer
         NoSticky = false;
         VampireTeeth = false;
         ObsidianGlove = false;
+        RiftGoggles = false;
 
         // armor sets
         SkyBlessing = false;
@@ -524,6 +526,100 @@ public class AvalonPlayer : ModPlayer
 
     public override void PostUpdate()
     {
+        #region rift goggles
+        // mobs
+        if (Player.ZoneCrimson || Player.ZoneCorrupt || Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion)
+        {
+            if (Main.rand.NextBool(5000) && RiftGoggles)
+            {
+                Vector2 pposTile2 = Player.position + new Vector2(Main.rand.Next(-20 * 16, 21 * 16), Main.rand.Next(-20 * 16, 21 * 16));
+                Point pt = pposTile2.ToTileCoordinates();
+                if (!Main.tile[pt.X, pt.Y].HasTile)
+                {
+                    int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16, pt.Y * 16, ModContent.NPCType<NPCs.Rift>(), 0);
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, proj);
+                    }
+
+                    for (int i = 0; i < 20; i++)
+                    {
+                        int num893 = Dust.NewDust(Main.npc[proj].position, Main.npc[proj].width, Main.npc[proj].height, DustID.Enchanted_Pink, 0f, 0f, 0, default, 1f);
+                        Main.dust[num893].velocity *= 2f;
+                        Main.dust[num893].scale = 0.9f;
+                        Main.dust[num893].noGravity = true;
+                        Main.dust[num893].fadeIn = 3f;
+                    }
+                }
+            }
+        }
+        // ores
+        if (RiftGoggles && Main.rand.NextBool(2000))
+        {
+            if (Player.ZoneRockLayerHeight)
+            {
+                Vector2 pposTile2 = Player.position + new Vector2(Main.rand.Next(-50 * 16, 50 * 16), Main.rand.Next(-35 * 16, 35 * 16));
+                Point pt = pposTile2.ToTileCoordinates();
+                for (int q = 0; q < 50; q++)
+                {
+                    if (!TileID.Sets.Ore[Main.tile[pt.X, pt.Y].TileType])
+                    {
+                        pposTile2 = Player.position + new Vector2(Main.rand.Next(-50 * 16, 50 * 16), Main.rand.Next(-35 * 16, 35 * 16));
+                        pt = pposTile2.ToTileCoordinates();
+                    }
+                    else break;
+                }
+                if (TileID.Sets.Ore[Main.tile[pt.X, pt.Y].TileType])
+                {
+                    int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, ModContent.NPCType<NPCs.Rift>(), ai1: 1);
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, proj);
+                    }
+                    for (int i = 0; i < 20; i++)
+                    {
+                        int num893 = Dust.NewDust(Main.npc[proj].position, Main.npc[proj].width, Main.npc[proj].height, DustID.Enchanted_Pink, 0f, 0f, 0, default, 1f);
+                        Main.dust[num893].velocity *= 2f;
+                        Main.dust[num893].scale = 0.9f;
+                        Main.dust[num893].noGravity = true;
+                        Main.dust[num893].fadeIn = 3f;
+                    }
+                }
+            }
+        }
+        // fishing
+        /*if (Player.ZoneCrimson || Player.ZoneCorrupt || Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion)
+        {
+            if (Main.rand.NextBool(15) && RiftGoggles)
+            {
+                Vector2 pposTile2 = Player.position + new Vector2(Main.rand.Next(-30 * 16, 21 * 16), Main.rand.Next(-30 * 16, 21 * 16));
+                Point pt = pposTile2.ToTileCoordinates();
+                //can spawn underwater if there's an overhang, needs to be fixed
+                if (Main.tile[pt.X, pt.Y].LiquidType == LiquidID.Water && Main.tile[pt.X, pt.Y].LiquidAmount > 100 &&
+                    Main.tile[pt.X, pt.Y - 3].LiquidAmount == 0 && Main.tile[pt.X, pt.Y - 2].LiquidAmount > 1) //  && (!Main.tile[pt.X, pt.Y - 3].HasTile || Main.tile[pt.X, pt.Y - 3].HasUnactuatedTile)
+                {
+                    if (ClassExtensions.CanSpawnFishingRift(new Vector2(pt.X * 16, pt.Y * 16), ModContent.NPCType<NPCs.FishingRift>(), 16 * 20))
+                    {
+                        int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16, pt.Y * 16, ModContent.NPCType<NPCs.FishingRift>(), 0);
+                        if (Main.netMode == NetmodeID.Server)
+                        {
+                            NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, proj);
+                        }
+
+                        for (int i = 0; i < 20; i++)
+                        {
+                            int num893 = Dust.NewDust(Main.npc[proj].position, Main.npc[proj].width, Main.npc[proj].height, DustID.Enchanted_Pink, 0f, 0f, 0, default, 1f);
+                            Main.dust[num893].velocity *= 2f;
+                            Main.dust[num893].scale = 0.9f;
+                            Main.dust[num893].noGravity = true;
+                            Main.dust[num893].fadeIn = 3f;
+                        }
+                    }
+                }
+            }
+        }*/
+        #endregion rift goggles
+
         if (SkyBlessing)
         {
             if (SkyStacks < 10)

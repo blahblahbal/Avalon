@@ -20,6 +20,86 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
+
+    public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
+    {
+        p.Add(new List<Point>()
+        {
+            start + new Point(0, -1), start + new Point(0, 1), start + new Point(-1, 0), start + new Point(1, 0)
+        });
+
+        return p;
+    }
+    /// <summary>
+    /// Harvests an area using a veinminer algorithm.
+    /// </summary>
+    /// <param name="p">The tile coordinates as a Point.</param>
+    /// <param name="type">The tile type to veinmine.</param>
+    public static void VeinMine(Point p, int type)
+    {
+        int maxTiles = 50;
+        int tiles = 0;
+
+        Tile tile = Framing.GetTileSafely(p);
+        if (!tile.HasTile || tile.TileType != type)
+        {
+            return;
+        }
+
+        List<List<Point>> points = new List<List<Point>>();
+        points = AddValidNeighbors(points, p);
+
+        int index = 0;
+        while (points.Count > 0 && tiles < maxTiles)
+        {
+            List<Point> tilePos = points[index];
+            foreach (Point a in tilePos)
+            {
+                Tile t = Framing.GetTileSafely(a.X, a.Y);
+                if (t.HasTile && t.TileType == type)
+                {
+                    WorldGen.KillTile(a.X, a.Y);
+                    tiles++;
+                    AddValidNeighbors(points, a);
+                }
+            }
+            index++;
+        }
+    }
+
+    public static void RiftReplace(Point p, int type, int replace, int maxTiles = 500)
+    {
+        int tiles = 0;
+
+        Tile tile = Framing.GetTileSafely(p);
+        if (!tile.HasTile || tile.TileType != type)
+        {
+            return;
+        }
+
+        List<List<Point>> points = new List<List<Point>>();
+        points = AddValidNeighbors(points, p);
+
+        int index = 0;
+        while (points.Count > 0 && tiles < maxTiles)
+        {
+            List<Point> tilePos = points[index];
+            foreach (Point a in tilePos)
+            {
+                Tile t = Framing.GetTileSafely(a.X, a.Y);
+                if (t.HasTile && t.TileType == type)
+                {
+                    Tile q = Framing.GetTileSafely(a.X, a.Y);
+                    q.TileType = (ushort)replace;
+                    WorldGen.SquareTileFrame(a.X, a.Y);
+                    tiles++;
+                    AddValidNeighbors(points, a);
+                }
+            }
+            index++;
+        }
+    }
+
     /// <summary>
     ///     Helper method for checking if the current item is an armor piece - used for armor prefixes.
     /// </summary>

@@ -5835,6 +5835,11 @@ Mods: {
 				DisplayName: Hemorrhaging Halberd
 				Tooltip: ""
 			}
+
+			RiftGoggles: {
+				DisplayName: Rift Goggles
+				Tooltip: Allows you to see rifts into another world
+			}
 		}
 
 		Projectiles: {
@@ -6030,6 +6035,7 @@ Mods: {
 			BaskingSpewer.DisplayName: Basking Spewer
 			GreenPigron.DisplayName: Pigron
 			ContagionMimic.DisplayName: Contagion Mimic
+			Rift.DisplayName: Rift
 		}
 
 		Buffs: {
