@@ -17,6 +17,10 @@ using Avalon.Common.Players;
 using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Material.Herbs;
+using Avalon.Items.Tools.Superhardmode;
+using Terraria.Audio;
+using Avalon.Items.Tools;
+using Avalon.Items.Tools.Hardmode;
 
 namespace Avalon.Common;
 
@@ -45,7 +49,97 @@ public class AvalonGlobalItem : GlobalItem
     {
         Item.staff[ItemID.Vilethorn] = true;
     }
-
+    public override bool CanRightClick(Item item)
+    {
+        if (Main.mouseRightRelease && Main.mouseRight)
+        {
+            if (item.type == ModContent.ItemType<AccelerationPickaxe>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<AccelerationPickaxeSpeed>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<AccelerationPickaxeSpeed>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<AccelerationPickaxe>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<AccelerationDrill>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<AccelerationDrillSpeed>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<AccelerationDrillSpeed>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<AccelerationDrill>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<ShadowPhone>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<ShadowPhoneHome>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<ShadowPhoneDungeon>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<ShadowPhoneDungeon>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<ShadowPhoneJungleTropics>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<ShadowPhoneJungleTropics>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<ShadowPhoneOcean>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<ShadowPhoneOcean>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<ShadowPhoneHell>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<ShadowPhoneHell>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<ShadowPhoneRandom>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<ShadowPhoneRandom>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<ShadowPhone>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<PortablePylonMkIIPoint1>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint2>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<PortablePylonMkIIPoint2>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint3>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<PortablePylonMkIIPoint3>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint1>());
+                return false;
+            }
+        }
+        return base.CanRightClick(item);
+    }
     public override void AddRecipes()
     {
         // --== Shimmer!!! ==--

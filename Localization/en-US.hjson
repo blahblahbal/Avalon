@@ -6005,6 +6005,8 @@ Mods: {
 			Rainbringer.DisplayName: Rainbringer
 			Timechanger.DisplayName: Timechanger
 			AccelerationDrill.DisplayName: Acceleration Drill
+			StasisRifleHeld.DisplayName: Stasis Rifle Held
+			StasisShot.DisplayName: Stasis Shot
 		}
 
 		NPCs: {

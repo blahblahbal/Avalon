@@ -60,15 +60,6 @@ public class PortablePylonMkIIPoint1 : ModItem
     {
         return true;
     }
-    public override bool CanRightClick()
-    {
-        if (Main.mouseRightRelease && Main.mouseRight)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-            Item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint2>());
-        }
-        return false;
-    }
     public override void OnCreated(ItemCreationContext context)
     {
         if (WaypointSystem.savedLocation != Vector2.Zero)
@@ -147,15 +138,6 @@ public class PortablePylonMkIIPoint2 : ModItem
     {
         return true;
     }
-    public override bool CanRightClick()
-    {
-        if (Main.mouseRightRelease && Main.mouseRight)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-            Item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint3>());
-        }
-        return false;
-    }
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {
         if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
@@ -225,15 +207,6 @@ public class PortablePylonMkIIPoint3 : ModItem
     public override bool AltFunctionUse(Player player)
     {
         return true;
-    }
-    public override bool CanRightClick()
-    {
-        if (Main.mouseRightRelease && Main.mouseRight)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-            Item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint1>());
-        }
-        return false;
     }
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {

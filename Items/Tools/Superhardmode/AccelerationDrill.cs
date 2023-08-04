@@ -41,17 +41,6 @@ public class AccelerationDrill : ModItem
         Item.useAnimation = 9;
         Item.height = dims.Height;
     }
-
-    public override bool CanRightClick()
-    {
-        if (Main.mouseRightRelease && Main.mouseRight)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-            Item.ChangeItemType(ModContent.ItemType<AccelerationDrillSpeed>());
-        }
-        return false;
-    }
-
     public override void HoldItem(Player player)
     {
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
@@ -104,15 +93,6 @@ public class AccelerationDrillSpeed : ModItem
         Item.value = 1016000;
         Item.useAnimation = 9;
         Item.height = dims.Height;
-    }
-    public override bool CanRightClick()
-    {
-        if (Main.mouseRightRelease && Main.mouseRight)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-            Item.ChangeItemType(ModContent.ItemType<AccelerationDrill>());
-        }
-        return false;
     }
     public override void HoldItem(Player player)
     {

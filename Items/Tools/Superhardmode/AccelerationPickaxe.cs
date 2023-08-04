@@ -16,15 +16,6 @@ public class AccelerationPickaxe : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
-    public override bool CanRightClick()
-    {
-        if (Main.mouseRightRelease && Main.mouseRight)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-            Item.ChangeItemType(ModContent.ItemType<AccelerationPickaxeSpeed>());
-        }
-        return false;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -33,7 +24,6 @@ public class AccelerationPickaxe : ModItem
         Item.scale = 1f;
         Item.pick = 400;
         Item.rare = ModContent.RarityType<Rarities.DarkGreenRarity>();
-        Item.noMelee = true;
         Item.width = dims.Width;
         Item.useTime = 12;
         Item.knockBack = 2f;
@@ -85,15 +75,6 @@ public class AccelerationPickaxeSpeed : ModItem
     {
         Item.ResearchUnlockCount = 1;
     }
-    public override bool CanRightClick()
-    {
-        if (Main.mouseRightRelease && Main.mouseRight)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-            Item.ChangeItemType(ModContent.ItemType<AccelerationPickaxe>());
-        }
-        return false;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -102,7 +83,6 @@ public class AccelerationPickaxeSpeed : ModItem
         Item.scale = 1f;
         Item.pick = 400;
         Item.rare = ModContent.RarityType<Rarities.DarkGreenRarity>();
-        Item.noMelee = true;
         Item.width = dims.Width;
         Item.useTime = 12;
         Item.knockBack = 2f;
