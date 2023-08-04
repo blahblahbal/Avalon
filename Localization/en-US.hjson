@@ -5564,7 +5564,7 @@ Mods: {
 			}
 
 			RocketinaBottle: {
-				DisplayName: Rocketina Bottle
+				DisplayName: Rocket in a Bottle
 				Tooltip: ""
 			}
 
@@ -5574,7 +5574,7 @@ Mods: {
 			}
 
 			BlahsEnergyBlade: {
-				DisplayName: Blahs Energy Blade
+				DisplayName: Blah's Energy Blade
 				Tooltip: ""
 			}
 
@@ -5869,8 +5869,12 @@ Mods: {
 			}
 
 			AccelerationDrillSpeed: {
-				DisplayName: Acceleration Drill Speed
-				Tooltip: ""
+				DisplayName: Acceleration Drill (Speed)
+				Tooltip:
+					'''
+					Mines in a 3x3 area
+					Right click to change to normal mode
+					'''
 			}
 
 			OreRift: {
@@ -5895,6 +5899,11 @@ Mods: {
 			FleshPants: {
 				DisplayName: Flesh Pants
 				Tooltip: Increases your max number of minions by 2
+			}
+
+			VisionPotion: {
+				DisplayName: Vision Potion
+				Tooltip: Open caves light up
 			}
 		}
 
@@ -6551,6 +6560,11 @@ Mods: {
 			WardCurse: {
 				DisplayName: Ward Curse
 				Description: Losing life
+			}
+
+			Vision: {
+				DisplayName: Vision
+				Description: Open caves are lit up
 			}
 
 			CaesiumPoison: {

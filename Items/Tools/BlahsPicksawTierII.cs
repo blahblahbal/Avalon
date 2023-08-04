@@ -29,9 +29,9 @@ class BlahsPicksawTierII : ModItem
         Item.useTime = 6;
         Item.knockBack = 5.5f;
         Item.DamageType = DamageClass.Melee;
-        Item.tileBoost += 8;
+        Item.tileBoost += 16;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = 5016000;
+        Item.value = Item.sellPrice(gold: 50);
         Item.useAnimation = 6;
         if (!Main.dedServ)
         {

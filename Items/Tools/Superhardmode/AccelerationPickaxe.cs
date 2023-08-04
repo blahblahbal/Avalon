@@ -7,6 +7,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Terraria.Audio;
+using Avalon.Common.Players;
 
 namespace Avalon.Items.Tools.Superhardmode;
 
@@ -118,9 +119,10 @@ public class AccelerationPickaxeSpeed : ModItem
         {
             if (player.position.X / 16f - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetX && (player.position.X + player.width) / 16f + Player.tileRangeX + player.inventory[player.selectedItem].tileBoost - 1f >= Player.tileTargetX && player.position.Y / 16f - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetY && (player.position.Y + player.height) / 16f + Player.tileRangeY + player.inventory[player.selectedItem].tileBoost - 2f >= Player.tileTargetY)
             {
-                for (int x = Player.tileTargetX - 1; x <= Player.tileTargetX + 1; x++)
+                Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+                for (int x = p.X - 1; x <= p.X + 1; x++)
                 {
-                    for (int y = Player.tileTargetY - 1; y <= Player.tileTargetY + 1; y++)
+                    for (int y = p.Y - 1; y <= p.Y + 1; y++)
                     {
                         if (Main.tile[x, y].HasTile && !Main.tileHammer[Main.tile[x, y].TileType] && !Main.tileAxe[Main.tile[x, y].TileType])
                         {

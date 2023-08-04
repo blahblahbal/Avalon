@@ -140,7 +140,8 @@ public static class HerbologyData
         ModContent.ItemType<StarbrightPotion>(), ModContent.ItemType<StrengthPotion>(), ItemID.SummoningPotion,
         ModContent.ItemType<SupersonicPotion>(), ItemID.SwiftnessPotion, ItemID.ThornsPotion,
         ModContent.ItemType<TimeShiftPotion>(), ItemID.TitanPotion, ModContent.ItemType<TitanskinPotion>(),
-        ItemID.WarmthPotion, ItemID.WaterWalkingPotion, ModContent.ItemType<WisdomPotion>(), ItemID.WrathPotion
+        ModContent.ItemType<VisionPotion>(), ItemID.WarmthPotion, ItemID.WaterWalkingPotion,
+        ModContent.ItemType<WisdomPotion>(), ItemID.WrathPotion
         // Magnet Potion
     };
 

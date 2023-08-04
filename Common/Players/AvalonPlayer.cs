@@ -149,6 +149,7 @@ public class AvalonPlayer : ModPlayer
     public bool PathogenImbue;
     public bool Pathogen;
     public bool BloodCasting;
+    public bool Vision;
 
     public bool HungryMinion;
 
@@ -186,6 +187,7 @@ public class AvalonPlayer : ModPlayer
         PathogenImbue = false;
         HungryMinion = false;
         BloodCasting = false;
+        Vision = false;
 
         // accessories
         TrapImmune = false;
