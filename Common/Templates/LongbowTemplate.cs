@@ -14,9 +14,10 @@ namespace Avalon.Common.Templates
     public abstract class LongbowTemplate : ModProjectile
     {
         public static Color NotificationColor = new Color(128, 128, 128, 0);
-        public override bool? CanHitNPC(NPC target) => false;
-        public override bool CanHitPlayer(Player target) => false;
-        public override bool CanHitPvp(Player target) => false;
+        public override bool? CanDamage()
+        {
+            return false;
+        }
 
         public virtual SoundStyle shootSound => new SoundStyle("Avalon/Sounds/Item/LongbowShot") { Pitch = 0.2f, Volume = 0.7f };
         public virtual float HowFarShouldTheBowBeHeldFromPlayer => 25;
@@ -152,7 +153,7 @@ namespace Avalon.Common.Templates
                 CompositeArm = Player.CompositeArmStretchAmount.None;
                 Projectile.frame = 0;
             }
-            player.SetCompositeArmFront(true, CompositeArm, new Vector2(player.Center.X + player.direction * -6, player.Center.Y).DirectionTo(ProjPosition).ToRotation() + RotationOffset);
+            player.SetCompositeArmFront(true, CompositeArm, new Vector2(player.Center.X + player.direction * -6, player.Center.Y).DirectionTo(ProjPosition + player.velocity).ToRotation() + RotationOffset);
         }
         public override bool PreDraw(ref Color lightColor)
         {
