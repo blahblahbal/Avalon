@@ -556,7 +556,7 @@ public class AvalonPlayer : ModPlayer
             }
         }
         // ores
-        if (RiftGoggles && Main.rand.NextBool(10))
+        if (RiftGoggles && Main.rand.NextBool(1000))
         {
             if (Player.ZoneRockLayerHeight)
             {

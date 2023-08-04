@@ -5905,6 +5905,56 @@ Mods: {
 				DisplayName: Vision Potion
 				Tooltip: Open caves light up
 			}
+
+			MusicBoxArmageddonSlime: {
+				DisplayName: Music Box (Armageddon Slime)
+				Tooltip: ""
+			}
+
+			MusicBoxBacteriumPrime: {
+				DisplayName: Music Box (Bacterium Prime)
+				Tooltip: ""
+			}
+
+			MusicBoxContagion: {
+				DisplayName: Music Box (Contagion)
+				Tooltip: ""
+			}
+
+			MusicBoxDarkMatter: {
+				DisplayName: Music Box (Dark Matter)
+				Tooltip: ""
+			}
+
+			MusicBoxDesertBeak: {
+				DisplayName: Music Box (Desert Beak)
+				Tooltip: ""
+			}
+
+			MusicBoxHellCastle: {
+				DisplayName: Music Box (Hellcastle)
+				Tooltip: ""
+			}
+
+			MusicBoxPhantasm: {
+				DisplayName: Music Box (Phantasm)
+				Tooltip: ""
+			}
+
+			MusicBoxTuhrtlOutpost: {
+				DisplayName: Music Box (Tuhrtl Outpost)
+				Tooltip: ""
+			}
+
+			MusicBoxUndergroundContagion: {
+				DisplayName: Music Box (Underground Contagion)
+				Tooltip: ""
+			}
+
+			MusicBoxSkyFortress: {
+				DisplayName: Music Box (Sky Fortress)
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
