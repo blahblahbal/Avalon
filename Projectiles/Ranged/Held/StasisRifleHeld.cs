@@ -69,7 +69,7 @@ namespace Avalon.Projectiles.Ranged.Held
                         d.velocity += Projectile.velocity * 3;
                         d.noGravity = true;
                     }
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center + Projectile.velocity * 40 + new Vector2(0,-4), Projectile.velocity * player.HeldItem.shootSpeed, ModContent.ProjectileType<StasisShot>(), (Projectile.damage * Power) + 1, Projectile.knockBack, Projectile.owner);
+                    //Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center + Projectile.velocity * 40 + new Vector2(0,-4), Projectile.velocity * player.HeldItem.shootSpeed, ModContent.ProjectileType<StasisShot>(), (Projectile.damage * Power) + 1, Projectile.knockBack, Projectile.owner);
                 }
             }
             Projectile.rotation = Projectile.velocity.ToRotation();
