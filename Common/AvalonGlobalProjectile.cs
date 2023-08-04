@@ -88,7 +88,6 @@ internal class AvalonGlobalProjectile : GlobalProjectile
         }
         return base.PreAI(projectile);
     }
-
     public override void PostAI(Projectile projectile)
     {
         if ((projectile.type != 10 && projectile.type != 145 /* && projectile.type != ModContent.ProjectileType<Projectiles.LimeSolution>()*/) || projectile.owner != Main.myPlayer)

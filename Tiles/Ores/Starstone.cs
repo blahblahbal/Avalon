@@ -12,6 +12,7 @@ public class Starstone : ModTile
     public override void SetStaticDefaults()
     {
         AddMapEntry(starstoneColor, LanguageManager.Instance.GetText("Starstone"));
+        TileID.Sets.Ore[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 775;

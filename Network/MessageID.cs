@@ -8,5 +8,6 @@ public enum MessageID
     SyncWiring = 3,
     StaminaHeal = 4,
     SyncLockUnlock = 5,
-    SyncSkyBlessing = 6
+    SyncSkyBlessing = 6,
+    SyncParticle = 7
 }

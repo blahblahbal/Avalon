@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.Particles;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
@@ -34,9 +35,12 @@ public class MessageHandler
             case MessageID.SyncSkyBlessing:
                 SyncSkyBlessing.HandlePacket(reader, fromWho);
                 break;
-            //case MessageID.StaminaHeal:
-            //    StaminaHeal.HandlePacket(reader, fromWho);
-            //    break;
+            case MessageID.SyncParticle:
+                SyncParticles.HandlePacket(reader, fromWho);
+                break;
+                //case MessageID.StaminaHeal:
+                //    StaminaHeal.HandlePacket(reader, fromWho);
+                //    break;
         }
     }
 }

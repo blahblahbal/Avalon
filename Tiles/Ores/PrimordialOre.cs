@@ -227,16 +227,7 @@ public class PrimordialOre : ModTile
 
     public override void SetStaticDefaults()
     {
-        //array[627][0] = new Color(255, 76, 76);
-        //array[627][1] = new Color(255, 195, 76);
-        //array[627][2] = new Color(195, 255, 76);
-        //array[627][3] = new Color(76, 255, 76);
-        //array[627][4] = new Color(76, 255, 195);
-        //array[627][5] = new Color(76, 195, 255);
-        //array[627][6] = new Color(77, 76, 255);
-        //array[627][7] = new Color(196, 76, 255);
-        //array[627][8] = new Color(255, 76, 195);
-
+        TileID.Sets.Ore[Type] = true;
         AddMapEntry(new Color(255, 0, 0), LanguageManager.Instance.GetText("Primordial Ore")); // new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB)
         AddMapEntry(new Color(255, 128, 0), LanguageManager.Instance.GetText("Primordial Ore"));
         AddMapEntry(new Color(255, 255, 0), LanguageManager.Instance.GetText("Primordial Ore"));

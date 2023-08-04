@@ -27,6 +27,7 @@ public class Rift : ModNPC
         NPC.damage = 0;
         NPC.lifeMax = 100;
         NPC.dontTakeDamage = true;
+        NPC.alpha = 255;
         NPC.defense = 0;
         NPC.aiStyle = -1;
         NPC.value = 0;

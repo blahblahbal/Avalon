@@ -14,6 +14,13 @@ namespace Avalon.Particles
     {
         static List<Particle> Particles;
         static int MaxParticles = 3000;
+
+        public enum ParticleType
+        {
+            SanguineCuts = 0,
+            CrystalSparkle = 1
+        }
+
         public override void Load()
         {
             Particles = new List<Particle>(MaxParticles);

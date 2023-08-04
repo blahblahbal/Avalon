@@ -5851,7 +5851,7 @@ Mods: {
 			}
 
 			AccelerationPickaxeSpeed: {
-				DisplayName: Acceleration Drill (Speed)
+				DisplayName: Acceleration Pickaxe (Speed)
 				Tooltip:
 					'''
 					Mines in a 3x3 area

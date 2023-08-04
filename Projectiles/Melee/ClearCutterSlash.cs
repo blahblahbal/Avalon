@@ -42,6 +42,7 @@ public class ClearCutterSlash : EnergySlashTemplate
         }
         Projectile.ai[2] += 0.02f;
     }
+    
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         ParticleOrchestraSettings settings = new ParticleOrchestraSettings();
@@ -55,7 +56,9 @@ public class ClearCutterSlash : EnergySlashTemplate
         //    settings.MovementVector = Main.rand.NextVector2Circular(6, 6);
         //    ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.SilverBulletSparkle, settings);
         //}
-        ParticleSystem.AddParticle(new CrystalSparkle(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, default);
+        Vector2 positionslansdglag = Main.rand.NextVector2FromRectangle(target.Hitbox);
+        ParticleSystem.AddParticle(new CrystalSparkle(), positionslansdglag, Vector2.Zero, default);
+        Network.SyncParticles.SendPacket(ParticleSystem.ParticleType.CrystalSparkle, positionslansdglag, Vector2.Zero, default);
         for (int i = 0; i < Main.rand.Next(1, 3); i++)
         {
             settings.MovementVector = Vector2.Zero;

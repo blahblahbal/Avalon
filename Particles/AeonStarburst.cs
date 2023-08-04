@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 namespace Avalon.Particles
 {
     public class AeonStarburst : Particle
-    { 
+    {
         public override void Update()
         {
             TimeInWorld++;
