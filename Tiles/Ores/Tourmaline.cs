@@ -20,8 +20,9 @@ public class Tourmaline : ModTile
         Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 900;
+        Main.tileMerge[Type][TileID.Mud] = true;
+        Main.tileMerge[TileID.Mud][Type] = true;
         HitSound = SoundID.Tink;
-        //MinPick = 55;
         DustType = DustID.Stone;
     }
 }

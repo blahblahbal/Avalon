@@ -17,5 +17,7 @@ public class SulphurOre : ModTile
         Main.tileSpelunker[Type] = true;
         HitSound = SoundID.Tink;
         DustType = DustID.Enchanted_Gold;
+        Main.tileMerge[Type][TileID.Mud] = true;
+        Main.tileMerge[TileID.Mud][Type] = true;
     }
 }

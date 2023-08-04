@@ -554,7 +554,7 @@ public class AvalonPlayer : ModPlayer
             }
         }
         // ores
-        if (RiftGoggles && Main.rand.NextBool(2000))
+        if (RiftGoggles && Main.rand.NextBool(10))
         {
             if (Player.ZoneRockLayerHeight)
             {
@@ -562,28 +562,37 @@ public class AvalonPlayer : ModPlayer
                 Point pt = pposTile2.ToTileCoordinates();
                 for (int q = 0; q < 50; q++)
                 {
-                    if (!TileID.Sets.Ore[Main.tile[pt.X, pt.Y].TileType])
+                    if (!Data.Sets.Tile.RiftOres[Main.tile[pt.X, pt.Y].TileType])
                     {
                         pposTile2 = Player.position + new Vector2(Main.rand.Next(-50 * 16, 50 * 16), Main.rand.Next(-35 * 16, 35 * 16));
                         pt = pposTile2.ToTileCoordinates();
                     }
                     else break;
                 }
-                if (TileID.Sets.Ore[Main.tile[pt.X, pt.Y].TileType])
+                if (Data.Sets.Tile.RiftOres[Main.tile[pt.X, pt.Y].TileType])
                 {
-                    int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, ModContent.NPCType<NPCs.Rift>(), ai1: 1);
+                    int rift = Item.NewItem(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, 8, 8, ModContent.ItemType<Items.OreRift>());
+                    Main.item[rift].instanced = true;
+                    Main.item[rift].playerIndexTheItemIsReservedFor = Player.whoAmI;
+                    Main.item[rift].keepTime = 600;
+                    Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
                     if (Main.netMode == NetmodeID.Server)
                     {
-                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, proj);
+                        NetMessage.SendData(MessageID.SyncItem, -1, -1, null, rift);
                     }
-                    for (int i = 0; i < 20; i++)
-                    {
-                        int num893 = Dust.NewDust(Main.npc[proj].position, Main.npc[proj].width, Main.npc[proj].height, DustID.Enchanted_Pink, 0f, 0f, 0, default, 1f);
-                        Main.dust[num893].velocity *= 2f;
-                        Main.dust[num893].scale = 0.9f;
-                        Main.dust[num893].noGravity = true;
-                        Main.dust[num893].fadeIn = 3f;
-                    }
+                    //int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, ModContent.NPCType<NPCs.Rift>(), ai1: 1);
+                    //if (Main.netMode == NetmodeID.Server)
+                    //{
+                    //    NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, proj);
+                    //}
+                    //for (int i = 0; i < 20; i++)
+                    //{
+                    //    int num893 = Dust.NewDust(Main.item[rift].position, Main.item[rift].width, Main.item[rift].height, DustID.Enchanted_Pink, 0f, 0f, 0, default, 1f);
+                    //    Main.dust[num893].velocity *= 2f;
+                    //    Main.dust[num893].scale = 0.9f;
+                    //    Main.dust[num893].noGravity = true;
+                    //    Main.dust[num893].fadeIn = 3f;
+                    //}
                 }
             }
         }

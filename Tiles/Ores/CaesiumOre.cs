@@ -18,7 +18,6 @@ public class CaesiumOre : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;
         Main.tileOreFinderPriority[Type] = 720;
-        //ItemDrop = ModContent.ItemType<Items.Material.Ores.CaesiumOre>();
         HitSound = SoundID.Tink;
         MinPick = 200;
         DustType = ModContent.DustType<CaesiumDust>();

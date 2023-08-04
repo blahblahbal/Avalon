@@ -21,7 +21,8 @@ public class Zircon : ModTile
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 900;
         HitSound = SoundID.Tink;
-        //MinPick = 55;
+        Main.tileMerge[Type][TileID.Mud] = true;
+        Main.tileMerge[TileID.Mud][Type] = true;
         DustType = DustID.Stone;
     }
 }

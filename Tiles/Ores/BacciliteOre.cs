@@ -22,7 +22,8 @@ public class BacciliteOre : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileOreFinderPriority[Type] = 320;
         Main.tileLighted[Type] = true;
-        //ItemDrop = ModContent.ItemType<Items.Material.Ores.BacciliteOre>();
+        Main.tileMerge[Type][TileID.Mud] = true;
+        Main.tileMerge[TileID.Mud][Type] = true;
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<ContagionWeapons>();
         MinPick = 55;

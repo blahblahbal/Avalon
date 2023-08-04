@@ -14,6 +14,8 @@ public class Peridot : ModTile
         Main.tileSolid[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Material.Ores.Peridot>());
         TileID.Sets.Ore[Type] = true;
+        Main.tileMerge[Type][TileID.Mud] = true;
+        Main.tileMerge[TileID.Mud][Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;
         Main.tileStone[Type] = true;
@@ -21,7 +23,6 @@ public class Peridot : ModTile
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 900;
         HitSound = SoundID.Tink;
-        //MinPick = 55;
         DustType = DustID.Grass;
     }
 }

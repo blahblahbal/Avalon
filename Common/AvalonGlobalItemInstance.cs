@@ -15,6 +15,7 @@ public class AvalonGlobalItemInstance : GlobalItem
     public bool WasWiring { get; set; }
     public bool TomeMaterial { get; set; }
     public bool WorksInVanity { get; set; }
+    public int RiftTimeLeft { get; set; }
 
     public override GlobalItem Clone(Item item, Item itemClone)
     {
@@ -24,6 +25,7 @@ public class AvalonGlobalItemInstance : GlobalItem
         clone.Tome = Tome;
         clone.TomeMaterial = TomeMaterial;
         clone.WorksInVanity = WorksInVanity;
+        clone.RiftTimeLeft = RiftTimeLeft;
         return clone;
     }
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

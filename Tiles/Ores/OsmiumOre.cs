@@ -19,7 +19,8 @@ public class OsmiumOre : ModTile
         Main.tileOreFinderPriority[Type] = 430;
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 1150;
-        //ItemDrop = ModContent.ItemType<Items.Material.Ores.OsmiumOre>();
+        Main.tileMerge[Type][TileID.Mud] = true;
+        Main.tileMerge[TileID.Mud][Type] = true;
         HitSound = SoundID.Tink;
         MinPick = 60;
         DustType = ModContent.DustType<OsmiumDust>();

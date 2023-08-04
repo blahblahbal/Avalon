@@ -5872,6 +5872,30 @@ Mods: {
 				DisplayName: Acceleration Drill Speed
 				Tooltip: ""
 			}
+
+			OreRift: {
+				DisplayName: Ore Rift
+				Tooltip: ""
+			}
+
+			FleshCap: {
+				DisplayName: Flesh Cap
+				Tooltip: 10% increased minion damage
+			}
+
+			FleshWrappings: {
+				DisplayName: Flesh Wrappings
+				Tooltip:
+					'''
+					9% increased minion knockback
+					10% increased movement speed
+					'''
+			}
+
+			FleshPants: {
+				DisplayName: Flesh Pants
+				Tooltip: Increases your max number of minions by 2
+			}
 		}
 
 		Projectiles: {

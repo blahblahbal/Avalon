@@ -58,6 +58,10 @@ public static class ClassExtensions
                 if (t.HasTile && t.TileType == type)
                 {
                     WorldGen.KillTile(a.X, a.Y);
+                    if (Main.netMode != NetmodeID.SinglePlayer)
+                    {
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 20, a.X, a.Y);
+                    }
                     tiles++;
                     AddValidNeighbors(points, a);
                 }
@@ -91,6 +95,10 @@ public static class ClassExtensions
                     Tile q = Framing.GetTileSafely(a.X, a.Y);
                     q.TileType = (ushort)replace;
                     WorldGen.SquareTileFrame(a.X, a.Y);
+                    if (Main.netMode != NetmodeID.SinglePlayer)
+                    {
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 21, a.X, a.Y, replace);
+                    }
                     tiles++;
                     AddValidNeighbors(points, a);
                 }

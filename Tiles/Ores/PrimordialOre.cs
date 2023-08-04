@@ -244,6 +244,8 @@ public class PrimordialOre : ModTile
         Main.tileOreFinderPriority[Type] = 815;
         HitSound = SoundID.Tink;
         DustType = DustID.ShimmerSpark;
+        Main.tileMerge[Type][TileID.Mud] = true;
+        Main.tileMerge[TileID.Mud][Type] = true;
     }
 
     public override ushort GetMapOption(int i, int j)
