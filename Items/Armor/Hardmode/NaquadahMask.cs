@@ -12,7 +12,6 @@ class NaquadahMask : ModItem
 {
     public override void SetStaticDefaults()
     {
-        //Tooltip.SetDefault("8% increased melee damage and speed\nEnemies are more likely to target you");
         Item.ResearchUnlockCount = 1;
     }
 

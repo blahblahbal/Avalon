@@ -1,4 +1,14 @@
 Mods: {
+	BiomeTitles: {
+		Title: {
+			Avalon: {
+				PhantomGardens: Phantom Gardens
+				Hellcastle: Hellcastle
+				Contagion: Contagion
+			}
+		}
+	}
+
 	Avalon: {
 		Keybinds: {
 			"Shadow Teleport.DisplayName": Shadow Teleport

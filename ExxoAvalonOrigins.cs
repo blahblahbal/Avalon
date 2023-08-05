@@ -20,6 +20,7 @@ using System.IO;
 using ReLogic.Content;
 using Terraria.Graphics.Effects;
 using Avalon.Effects;
+using System;
 
 namespace Avalon;
 
@@ -36,6 +37,8 @@ public class ExxoAvalonOrigins : Mod
     ///     Gets the instance of the music mod for this mod.
     /// </summary>
     public static readonly Mod? MusicMod = ModLoader.TryGetMod("AvalonMusic", out Mod obtainedMod) ? obtainedMod : null;
+
+    public static HellcastleFogSystem hellcastleFog = new HellcastleFogSystem();
 
     /// <summary>
     ///     Gets the instance of the Tokens mod.
@@ -183,6 +186,60 @@ public class ExxoAvalonOrigins : Mod
         npcReplacer.ReplaceAsset(NPCID.DungeonSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/DungeonSlime"));
         npcReplacer.ReplaceAsset(NPCID.SlimeSpiked, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/SpikedSlime"));
         npcReplacer.ReplaceAsset(NPCID.IlluminantSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/IlluminantSlime"));
+    }
+
+    public void BTitlesHook_SetupBiomeCheckers(out Func<Player, string> miniBiomeChecker, out Func<Player, string> biomeChecker)
+    {
+        miniBiomeChecker = player => {
+            
+
+            return "";
+        };
+        biomeChecker = player => {
+            if (player.InModBiome<Biomes.NearHellcastle>()) return "PhantomGardens";
+            if (player.InModBiome<Biomes.Hellcastle>()) return "Hellcastle";
+            if (player.InModBiome<Biomes.Contagion>()) return "Contagion";
+
+            return "";
+        };
+    }
+
+    public dynamic BTitlesHook_GetBiome(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return new
+                {
+                    Key = "PhantomGardens",
+                    Title = "Phantom Gardens",
+                    SubTitle = "Avalon",
+                    Icon = ModContent.Request<Texture2D>("Avalon/Biomes/Hellcastle_Icon").Value,
+                    TitleColor = new Color(35, 200, 254),
+                    TitleStroke = new Color(13, 77, 113),
+                };
+            case 1:
+                return new
+                {
+                    Key = "Hellcastle",
+                    Title = "Hellcastle",
+                    SubTitle = "Avalon",
+                    Icon = ModContent.Request<Texture2D>("Avalon/Biomes/Hellcastle_Icon").Value,
+                    TitleColor = Color.LightGray
+                };
+            case 2:
+                return new
+                {
+                    Key = "Contagion",
+                    Title = "Contagion",
+                    SubTitle = "Avalon",
+                    TitleColor = new Color(191, 212, 52),
+                    TitleStroke = new Color(39, 29, 22),
+                    Icon = ModContent.Request<Texture2D>("Avalon/Biomes/Contagion_Icon").Value,
+                };
+            default:
+                return null;
+        }
     }
 
     public override void HandlePacket(BinaryReader reader, int whoAmI)

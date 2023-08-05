@@ -39,10 +39,10 @@ public class AvalonBiomePlayer : ModPlayer
         {
             Player.ZoneDungeon = true;
         }
-        if (ZoneHellcastle || ZoneNearHellcastle)
-        {
-            Player.ZoneGraveyard = true;
-        }
+        //if (ZoneHellcastle || ZoneNearHellcastle)
+        //{
+        //    Player.ZoneGraveyard = true;
+        //}
         //if (ZoneContagionDesert)
         //{
         //    Player.ZoneDesert = true;
