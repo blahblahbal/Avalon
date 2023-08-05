@@ -13,6 +13,7 @@ public class OsmiumOre : ModTile
     {
         MineResist = 2f;
         AddMapEntry(new Color(0, 148, 255), LanguageManager.Instance.GetText("Osmium"));
+        Data.Sets.Tile.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;

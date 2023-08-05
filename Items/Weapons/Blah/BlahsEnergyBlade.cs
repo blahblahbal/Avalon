@@ -30,7 +30,7 @@ class BlahsEnergyBlade : ModItem
         Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
         Item.useTime = 14;
         Item.knockBack = 20f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Melee.BlahBeam>();
+        Item.shoot = ModContent.ProjectileType<Projectiles.Melee.BlahEnergySlash>();
         Item.UseSound = SoundID.Item1;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
@@ -68,13 +68,16 @@ class BlahsEnergyBlade : ModItem
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
-        for (int num194 = 0; num194 < 3; num194++)
+        float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
+        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 0.9f, adjustedItemScale5);
+        NetMessage.SendData(13, -1, -1, null, player.whoAmI);
+        for (int num194 = 0; num194 < 4; num194++)
         {
             float num195 = velocity.X;
             float num196 = velocity.Y;
             num195 += Main.rand.Next(-40, 41) * 0.05f;
             num196 += Main.rand.Next(-40, 41) * 0.05f;
-            Projectile.NewProjectile(source, position.X, position.Y, num195, num196, type, damage, knockback, player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(source, position.X, position.Y, num195, num196, ModContent.ProjectileType<Projectiles.Melee.BlahBeam>(), damage, knockback, player.whoAmI, 0f, 0f);
         }
         return false;
     }

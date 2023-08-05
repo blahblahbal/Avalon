@@ -18,6 +18,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.Map;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -105,6 +106,13 @@ public class AvalonPlayer : ModPlayer
     public int SkyStacks = 1;
     public bool OreDupe;
     public bool HookBonus;
+    public bool AuraThorns;
+    public bool DefDebuff;
+    public bool HyperMelee;
+    public bool HyperMagic;
+    public bool HyperRanged;
+    public int HyperBar;
+    public bool AmmoCost85;
     #endregion
 
     #region accessories
@@ -219,6 +227,12 @@ public class AvalonPlayer : ModPlayer
         SkyBlessing = false;
         OreDupe = false;
         HookBonus = false;
+        AuraThorns = false;
+        DefDebuff = false;
+        HyperMagic = false;
+        HyperMelee = false;
+        HyperRanged = false;
+        AmmoCost85 = false;
 
         GreedyPrefix = false;
         HoardingPrefix = false;
@@ -412,6 +426,10 @@ public class AvalonPlayer : ModPlayer
     public override bool CanConsumeAmmo(Item weapon, Item ammo)
     {
         if (Player.HasBuff<AdvAmmoReservation>() && Main.rand.NextFloat() < AdvAmmoReservation.Chance)
+        {
+            return false;
+        }
+        if (AmmoCost85 && Main.rand.Next(100) < 15)
         {
             return false;
         }
@@ -859,6 +877,18 @@ public class AvalonPlayer : ModPlayer
     /// <inheritdoc />
     public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
     {
+        if (HyperMelee)
+        {
+            HyperBar++;
+            if (HyperBar > 15 && HyperBar <= 25)
+            {
+                modifiers.SetCrit();
+                if (HyperBar == 25)
+                {
+                    HyperBar = 0;
+                }
+            }
+        }
         if (CrystalEdge)
         {
             modifiers.FlatBonusDamage += 15;
@@ -875,6 +905,43 @@ public class AvalonPlayer : ModPlayer
 
     public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
+        if (HyperMelee && proj.DamageType == DamageClass.Melee)
+        {
+            HyperBar++;
+            if (HyperBar > 15 && HyperBar <= 25)
+            {
+                modifiers.SetCrit();
+                if (HyperBar == 25)
+                {
+                    HyperBar = 0;
+                }
+            }
+        }
+        if (HyperRanged && proj.DamageType == DamageClass.Ranged)
+        {
+            HyperBar++;
+            if (HyperBar > 15 && HyperBar <= 25)
+            {
+                modifiers.SetCrit();
+                if (HyperBar == 25)
+                {
+                    HyperBar = 0;
+                }
+            }
+        }
+        if (HyperMagic && proj.DamageType == DamageClass.Magic)
+        {
+            HyperBar++;
+            if (HyperBar > 15 && HyperBar <= 25)
+            {
+                modifiers.SetCrit();
+                if (HyperBar == 25)
+                {
+                    HyperBar = 0;
+                }
+            }
+        }
+
         if (CrystalEdge)
         {
             modifiers.FlatBonusDamage += 15;
@@ -1000,6 +1067,34 @@ public class AvalonPlayer : ModPlayer
         {
             Player.AddBuff(ModContent.BuffType<BacterialEndurance>(), 6 * 60);
             npc.AddBuff(ModContent.BuffType<BacteriaInfection>(), 6 * 60);
+        }
+
+        if (AuraThorns && !Player.immune && !npc.dontTakeDamage)
+        {
+            int x = (int)Player.position.X;
+            int y = (int)Player.position.Y;
+            foreach (NPC N2 in Main.npc)
+            {
+                if (N2.position.X >= x - 620 && N2.position.X <= x + 620 && N2.position.Y >= y - 620 &&
+                    N2.position.Y <= y + 620)
+                {
+                    if (!N2.active || N2.dontTakeDamage || N2.townNPC || N2.life < 1 || N2.boss ||
+                        N2.realLife >= 0) //|| N2.type == ModContent.NPCType<NPCs.Juggernaut>())
+                    {
+                        continue;
+                    }
+                    NPC.HitInfo dmg = new NPC.HitInfo();
+                    dmg.Damage = hurtInfo.Damage;
+                    dmg.Knockback = 5f;
+                    dmg.HitDirection = 1;
+                    N2.StrikeNPC(dmg);
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.SendData(MessageID.DamageNPC, -1, -1, NetworkText.Empty, N2.whoAmI,
+                            hurtInfo.Damage);
+                    }
+                }
+            }
         }
     }
 

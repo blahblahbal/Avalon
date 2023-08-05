@@ -14,6 +14,7 @@ public class BacciliteOre : ModTile
     public override void SetStaticDefaults()
     {
         AddMapEntry(Color.Olive, LanguageManager.Instance.GetText("Baccilite"));
+        Data.Sets.Tile.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;

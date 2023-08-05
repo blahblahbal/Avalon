@@ -36,6 +36,18 @@ Mods: {
 			}
 		}
 
+		Altars: {
+			Cobalt: Your world has been blessed with Cobalt!
+			Palladium: Your world has been blessed with Palladium!
+			Duratanium: Your world has been blessed with Duratanium!
+			Mythril: Your world has been blessed with Mythril!
+			Orichalcum: Your world has been blessed with Orichalcum!
+			Naquadah: Your world has been blessed with Naquadah!
+			Adamantite: Your world has been blessed with Adamantite!
+			Titanium: Your world has been blessed with Titanium!
+			Troxinium: Your world has been blessed with Troxinium!
+		}
+
 		SetBonuses: {
 			Aeroforce:
 				'''
@@ -61,6 +73,26 @@ Mods: {
 			ResistantWood: 10 armor penetration and reduces damage taken by 10%
 			Viruthorn: 10% increased critical strike chance
 			Earthsplitter: Ore blocks have a 33% chance to drop double ore
+			Duratanium: Defense is increased by 12 while you are affected by a debuff
+			Naquadah: Nearby enemies take damage when you are damaged
+
+			Troxinium: {
+				Magic:
+					'''
+					Hyper Damage
+					Hit mobs 15 times to trigger magic crits for 10 hits
+					'''
+				Melee:
+					'''
+					Hyper Damage
+					Hit mobs 15 times to trigger melee crits for 10 hits
+					'''
+				Ranged:
+					'''
+					Hyper Damage
+					Hit mobs 15 times to trigger ranged crits for 10 hits
+					'''
+			}
 		}
 
 		PrefixTooltips: {
@@ -5955,6 +5987,258 @@ Mods: {
 				DisplayName: Music Box (Sky Fortress)
 				Tooltip: ""
 			}
+
+			NaquadahBreastplate: {
+				DisplayName: Naquadah Breastplate
+				Tooltip: 6% increased damage
+			}
+
+			NaquadahHeadguard: {
+				DisplayName: Naquadah Headguard
+				Tooltip:
+					'''
+					7% increased ranged damage
+					10% chance to not consume ammo
+					'''
+			}
+
+			NaquadahHood: {
+				DisplayName: Naquadah Hood
+				Tooltip:
+					'''
+					8% increased magic damage
+					7% decreased mana usage
+					'''
+			}
+
+			NaquadahMask: {
+				DisplayName: Naquadah Mask
+				Tooltip:
+					'''
+					8% increased melee damage and speed
+					Enemies are more likely to target you
+					'''
+			}
+
+			NaquadahShinguards: {
+				DisplayName: Naquadah Shinguards
+				Tooltip: 6% increased movement speed
+			}
+
+			DurataniumBar: {
+				DisplayName: Duratanium Bar
+				Tooltip: ""
+			}
+
+			NaquadahBar: {
+				DisplayName: Naquadah Bar
+				Tooltip: ""
+			}
+
+			TroxiniumBar: {
+				DisplayName: Troxinium Bar
+				Tooltip: ""
+			}
+
+			DurataniumOre: {
+				DisplayName: Duratanium Ore
+				Tooltip: ""
+			}
+
+			NaquadahOre: {
+				DisplayName: Naquadah Ore
+				Tooltip: ""
+			}
+
+			TroxiniumOre: {
+				DisplayName: Troxinium Ore
+				Tooltip: ""
+			}
+
+			NaquadahAnvil: {
+				DisplayName: Naquadah Anvil
+				Tooltip: ""
+			}
+
+			TroxiniumForge: {
+				DisplayName: Troxinium Forge
+				Tooltip: ""
+			}
+
+			DurataniumChainsaw: {
+				DisplayName: Duratanium Chainsaw
+				Tooltip: ""
+			}
+
+			DurataniumDrill: {
+				DisplayName: Duratanium Drill
+				Tooltip: Can mine Mythril, Orichalcum, and Naquadah
+			}
+
+			DurataniumPickaxe: {
+				DisplayName: Duratanium Pickaxe
+				Tooltip: Can mine Mythril, Orichalcum, and Naquadah
+			}
+
+			DurataniumWaraxe: {
+				DisplayName: Duratanium Waraxe
+				Tooltip: ""
+			}
+
+			NaquadahChainsaw: {
+				DisplayName: Naquadah Chainsaw
+				Tooltip: ""
+			}
+
+			NaquadahDrill: {
+				DisplayName: Naquadah Drill
+				Tooltip: Can mine Adamantite, Titanium, and Troxinium
+			}
+
+			NaquadahGreataxe: {
+				DisplayName: Naquadah Greataxe
+				Tooltip: ""
+			}
+
+			NaquadahPickaxe: {
+				DisplayName: Naquadah Pickaxe
+				Tooltip: Can mine Adamantite, Titanium, and Troxinium
+			}
+
+			TroxiniumChainsaw: {
+				DisplayName: Troxinium Chainsaw
+				Tooltip: ""
+			}
+
+			TroxiniumDrill: {
+				DisplayName: Troxinium Drill
+				Tooltip: ""
+			}
+
+			TroxiniumPickaxe: {
+				DisplayName: Troxinium Pickaxe
+				Tooltip: ""
+			}
+
+			TroxiniumWaraxe: {
+				DisplayName: Troxinium Waraxe
+				Tooltip: ""
+			}
+
+			DurataniumGlaive: {
+				DisplayName: Duratanium Glaive
+				Tooltip: ""
+			}
+
+			DurataniumSword: {
+				DisplayName: Duratanium Sword
+				Tooltip: ""
+			}
+
+			NaquadahLance: {
+				DisplayName: Naquadah Lance
+				Tooltip: ""
+			}
+
+			NaquadahSword: {
+				DisplayName: Naquadah Sword
+				Tooltip: ""
+			}
+
+			TroxiniumSpear: {
+				DisplayName: Troxinium Spear
+				Tooltip: ""
+			}
+
+			TroxiniumSword: {
+				DisplayName: Troxinium Sword
+				Tooltip: ""
+			}
+
+			DurataniumRepeater: {
+				DisplayName: Duratanium Repeater
+				Tooltip: ""
+			}
+
+			NaquadahRepeater: {
+				DisplayName: Naquadah Repeater
+				Tooltip: ""
+			}
+
+			TroxiniumRepeater: {
+				DisplayName: Troxinium Repeater
+				Tooltip: ""
+			}
+
+			DurataniumChainmail: {
+				DisplayName: Duratanium Chainmail
+				Tooltip: 5% increased damage
+			}
+
+			DurataniumGreaves: {
+				DisplayName: Duratanium Greaves
+				Tooltip: 5% increased movement speed
+			}
+
+			DurataniumHeadgear: {
+				DisplayName: Duratanium Headgear
+				Tooltip:
+					'''
+					6% increased magic damage
+					5% decreased mana usage
+					'''
+			}
+
+			DurataniumHeadpiece: {
+				DisplayName: Duratanium Headpiece
+				Tooltip: 7% increased ranged damage
+			}
+
+			DurataniumHelmet: {
+				DisplayName: Duratanium Helmet
+				Tooltip:
+					'''
+					5% increased melee damage and speed
+					Enemies are more likely to target you
+					'''
+			}
+
+			TroxiniumBodyarmor: {
+				DisplayName: Troxinium Bodyarmor
+				Tooltip: 8% increased damage
+			}
+
+			TroxiniumCuisses: {
+				DisplayName: Troxinium Cuisses
+				Tooltip: 5% increased critical strike chance
+			}
+
+			TroxiniumHat: {
+				DisplayName: Troxinium Hat
+				Tooltip:
+					'''
+					10% increased magic damage
+					15% decreased mana usage
+					'''
+			}
+
+			TroxiniumHeadpiece: {
+				DisplayName: Troxinium Headpiece
+				Tooltip:
+					'''
+					9% increased ranged damage
+					15% chance to not consume ammo
+					'''
+			}
+
+			TroxiniumHelmet: {
+				DisplayName: Troxinium Helmet
+				Tooltip:
+					'''
+					11% increased melee damage and speed
+					Enemies are more likely to target you
+					'''
+			}
 		}
 
 		Projectiles: {
@@ -6090,6 +6374,16 @@ Mods: {
 			AccelerationDrill.DisplayName: Acceleration Drill
 			StasisRifleHeld.DisplayName: Stasis Rifle Held
 			StasisShot.DisplayName: Stasis Shot
+			DurataniumGlaive.DisplayName: Duratanium Glaive
+			NaquadahLance.DisplayName: Naquadah Lance
+			TroxiniumSpear.DisplayName: Troxinium Spear
+			DurataniumChainsaw.DisplayName: Duratanium Chainsaw
+			DurataniumDrill.DisplayName: Duratanium Drill
+			NaquadahChainsaw.DisplayName: Naquadah Chainsaw
+			NaquadahDrill.DisplayName: Naquadah Drill
+			TroxiniumChainsaw.DisplayName: Troxinium Chainsaw
+			TroxiniumDrill.DisplayName: Troxinium Drill
+			BlahEnergySlash.DisplayName: Blah Energy Slash
 		}
 
 		NPCs: {

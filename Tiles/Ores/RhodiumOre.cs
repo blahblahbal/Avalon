@@ -12,6 +12,7 @@ public class RhodiumOre : ModTile
     {
         MineResist = 2f;
         AddMapEntry(new Color(187, 99, 115), LanguageManager.Instance.GetText("Rhodium"));
+        Data.Sets.Tile.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileBlockLight[Type] = true;

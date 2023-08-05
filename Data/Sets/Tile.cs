@@ -15,27 +15,34 @@ namespace Avalon.Data.Sets
             TileID.LivingUltrabrightFire, (ushort)ModContent.TileType<LivingLightning>()
         };
 
-        public static Dictionary<int, bool> RiftOres = new Dictionary<int, bool>
-        {
-            { TileID.Copper, true },
-            { TileID.Tin, true },
-            { ModContent.TileType<BronzeOre>(), true },
-            { TileID.Iron, true },
-            { TileID.Lead, true },
-            { ModContent.TileType<NickelOre>(), true },
-            { TileID.Silver, true },
-            { TileID.Tungsten, true },
-            { ModContent.TileType<ZincOre>(), true },
-            { TileID.Gold, true },
-            { TileID.Platinum, true },
-            { ModContent.TileType<BismuthOre>(), true },
-            { TileID.Demonite, true },
-            { TileID.Crimtane, true },
-            { ModContent.TileType<BacciliteOre>(), true },
-            { ModContent.TileType<RhodiumOre>(), true },
-            { ModContent.TileType<OsmiumOre>(), true },
-            { ModContent.TileType<IridiumOre>(), true },
-        };
+        public static SetFactory Factory = new SetFactory(TileLoader.TileCount);
+
+        public static bool[] RiftOres = Factory.CreateBoolSet(TileID.Copper, TileID.Tin,
+            TileID.Iron, TileID.Lead, TileID.Silver, TileID.Tungsten, TileID.Gold, TileID.Platinum,
+            TileID.Demonite, TileID.Crimtane, TileID.Cobalt, TileID.Palladium, TileID.Mythril, TileID.Orichalcum,
+            TileID.Adamantite, TileID.Titanium);
+
+        //public static Dictionary<int, bool> RiftOres = new Dictionary<int, bool>
+        //{
+        //    { TileID.Copper, true },
+        //    { TileID.Tin, true },
+        //    { ModContent.TileType<BronzeOre>(), true },
+        //    { TileID.Iron, true },
+        //    { TileID.Lead, true },
+        //    { ModContent.TileType<NickelOre>(), true },
+        //    { TileID.Silver, true },
+        //    { TileID.Tungsten, true },
+        //    { ModContent.TileType<ZincOre>(), true },
+        //    { TileID.Gold, true },
+        //    { TileID.Platinum, true },
+        //    { ModContent.TileType<BismuthOre>(), true },
+        //    { TileID.Demonite, true },
+        //    { TileID.Crimtane, true },
+        //    { ModContent.TileType<BacciliteOre>(), true },
+        //    { ModContent.TileType<RhodiumOre>(), true },
+        //    { ModContent.TileType<OsmiumOre>(), true },
+        //    { ModContent.TileType<IridiumOre>(), true },
+        //};
 
         public static readonly Dictionary<int, int> OresToChunks = new Dictionary<int, int>
         {
