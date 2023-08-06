@@ -368,6 +368,7 @@ public class Moonfury : ModProjectile
                 d2.velocity = new Vector2(0, -5 * player.direction).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation()).RotatedByRandom(0.1f);
             }
         }
+        Projectile.rotation = Projectile.Center.DirectionTo(player.Center).ToRotation() + MathHelper.PiOver2;
     }
 
     public override bool OnTileCollide(Vector2 oldVelocity)
