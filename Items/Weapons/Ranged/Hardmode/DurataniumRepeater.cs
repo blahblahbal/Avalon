@@ -14,7 +14,7 @@ class DurataniumRepeater : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item5;
-        Item.damage = 31;
+        Item.damage = 39;
         Item.autoReuse = true;
         Item.useAmmo = AmmoID.Arrow;
         Item.shootSpeed = 10.5f;

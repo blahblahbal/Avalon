@@ -14,7 +14,7 @@ class DurataniumGlaive : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item1;
-        Item.damage = 31;
+        Item.damage = 44;
         Item.noUseGraphic = true;
         Item.scale = 1.1f;
         Item.shootSpeed = 5f;

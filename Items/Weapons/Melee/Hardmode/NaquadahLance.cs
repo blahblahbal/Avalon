@@ -16,7 +16,7 @@ class NaquadahLance : ModItem
         Item.width = 36;
         Item.height = 38;
         Item.UseSound = SoundID.Item1;
-        Item.damage = 35;
+        Item.damage = 47;
         Item.noUseGraphic = true;
         Item.scale = 1.1f;
         Item.shootSpeed = 5f;

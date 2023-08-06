@@ -80,6 +80,12 @@ public class AvalonGlobalItem : GlobalItem
             if (item.type == ModContent.ItemType<ShadowPhone>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<ShadowPhoneSurface>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<ShadowPhoneSurface>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
                 item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
                 return false;
             }

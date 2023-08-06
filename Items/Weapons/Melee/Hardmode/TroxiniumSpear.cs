@@ -17,7 +17,7 @@ class TroxiniumSpear : ModItem
         Item.width = 36;
         Item.height = 40;
         Item.UseSound = SoundID.Item1;
-        Item.damage = 41;
+        Item.damage = 50;
         Item.noUseGraphic = true;
         Item.scale = 1.1f;
         Item.shootSpeed = 5f;

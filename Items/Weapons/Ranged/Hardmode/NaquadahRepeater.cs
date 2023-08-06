@@ -14,7 +14,7 @@ class NaquadahRepeater : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 36;
+        Item.damage = 41;
         Item.autoReuse = true;
         Item.useAmmo = AmmoID.Arrow;
         Item.shootSpeed = 10.5f;

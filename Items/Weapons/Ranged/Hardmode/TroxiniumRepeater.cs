@@ -18,7 +18,7 @@ public class TroxiniumRepeater : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item5;
-        Item.damage = 42;
+        Item.damage = 44;
         Item.autoReuse = true;
         Item.useAmmo = AmmoID.Arrow;
         Item.shootSpeed = 10.5f;

@@ -18,7 +18,7 @@ public class TroxiniumSword : ModItem
         Item.width = 36;
         Item.height = 40;
         Item.UseSound = SoundID.Item1;
-        Item.damage = 54;
+        Item.damage = 63;
         Item.useTurn = true;
         Item.autoReuse = true;
         Item.scale = 1.3f;

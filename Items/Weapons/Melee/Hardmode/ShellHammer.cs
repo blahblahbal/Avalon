@@ -24,11 +24,11 @@ public class ShellHammer : ModItem
         Item.rare = ItemRarityID.Lime;
         Item.UseSound = SoundID.Item1;
         Item.useStyle = Item.maxStack = 1;
-        Item.useTime = 75;
+        Item.useTime = 50;
         Item.useAnimation = 35;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Shell>();
         Item.shootSpeed = 7f;
-        Item.damage = 87;
+        Item.damage = 98;
         Item.value = Item.sellPrice(0, 6, 20);
     }
     public override void UseStyle(Player player, Rectangle heldItemFrame)
@@ -37,7 +37,7 @@ public class ShellHammer : ModItem
     }
     public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
     {
-        velocity.Y -= 5f;
+        velocity.Y -= 3f;
     }
     public override void AddRecipes()
     {

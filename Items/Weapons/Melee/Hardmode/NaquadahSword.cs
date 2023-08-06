@@ -16,7 +16,7 @@ class NaquadahSword : ModItem
     {
         Item.width = 36;
         Item.height = 38;
-        Item.damage = 43;
+        Item.damage = 55;
         Item.useTurn = true;
         Item.scale = 1f;
         Item.autoReuse = true;

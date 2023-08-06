@@ -32,7 +32,7 @@ class ShadowPhone : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
-            Item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
+            Item.ChangeItemType(ModContent.ItemType<ShadowPhoneSurface>());
         }
     }
     public override bool? UseItem(Player player)
@@ -40,6 +40,80 @@ class ShadowPhone : ModItem
         player.Shellphone_Spawn();
         SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
+    }
+
+    public override void UpdateInventory(Player player)
+    {
+        player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
+            player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
+        player.accWatch = 3;
+        player.accDepthMeter = 1;
+        player.accCompass = 1;
+    }
+}
+
+class ShadowPhoneSurface : ModItem
+{
+    public override void SetStaticDefaults()
+    {
+        Item.ResearchUnlockCount = 1;
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+    }
+
+    public override void SetDefaults()
+    {
+        Rectangle dims = this.GetDims();
+        Item.rare = ItemRarityID.Red;
+        Item.width = dims.Width;
+        Item.useTime = 30;
+        Item.useTurn = true;
+        Item.value = 500000;
+        Item.useStyle = ItemUseStyleID.HoldUp;
+        Item.useAnimation = 30;
+        Item.height = dims.Height;
+    }
+    public override void HoldItem(Player player)
+    {
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        {
+            SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            Item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
+        }
+    }
+    public override bool? UseItem(Player player)
+    {
+        TeleportToSurface(player);
+        SoundEngine.PlaySound(SoundID.Item6, player.position);
+        return true;
+    }
+
+    public void TeleportToSurface(Player p)
+    {
+        //p.noFallDmg = true;
+        float xpos = p.position.X;
+        float ypos = (float)(Main.worldSurface / 2f) * 16f;
+        if (!Main.tile[(int)(xpos / 16f), (int)(ypos / 16f) + 3].HasTile)
+        {
+            while (!Main.tile[(int)(xpos / 16f), (int)(ypos / 16f) + 4].HasTile)
+            {
+                ypos += 16f;
+            }
+        }
+        else
+        {
+            while (Main.tile[(int)(xpos / 16f), (int)(ypos / 16f) + 4].HasTile)
+            {
+                ypos -= 16f;
+            }
+        }
+        Vector2 newPos = new(xpos, ypos);
+        p.Teleport(newPos, 7);
+        p.velocity = Vector2.Zero;
+        if (Main.netMode == NetmodeID.Server)
+        {
+            RemoteClient.CheckSection(p.whoAmI, p.position);
+            NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, p.whoAmI, newPos.X, newPos.Y, 7);
+        }
     }
 
     public override void UpdateInventory(Player player)

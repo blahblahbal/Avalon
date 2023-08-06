@@ -15,7 +15,7 @@ class DurataniumSword : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 40;
+        Item.damage = 45;
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.scale = 1f;
