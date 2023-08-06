@@ -31,6 +31,11 @@ class NaquadahRepeater : ModItem
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item5;
     }
+
+    public override Vector2? HoldoutOffset()
+    {
+        return new Vector2(-6,0);
+    }
     public override void AddRecipes()
     {
         Terraria.Recipe.Create(Type)

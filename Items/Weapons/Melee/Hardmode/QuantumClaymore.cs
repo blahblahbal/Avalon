@@ -71,8 +71,7 @@ public class QuantumClaymore : ModItem
     }
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {
-        player.itemLocation = Vector2.Lerp(player.itemLocation, player.Center, 0.5f);
-        base.UseStyle(player, heldItemFrame);
+        player.itemLocation = Vector2.Lerp(player.itemLocation, player.MountedCenter, 0.5f);
     }
     public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {

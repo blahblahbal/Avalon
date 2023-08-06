@@ -18,7 +18,8 @@ public class ShellHammer : ModItem
         Item.width = 40;
         Item.height = 42;
         Item.knockBack = 12f;
-        Item.useTurn = Item.autoReuse = true;
+        Item.useTurn = false;
+        Item.autoReuse = true;
         Item.DamageType = DamageClass.Melee;
         Item.rare = ItemRarityID.Lime;
         Item.UseSound = SoundID.Item1;
@@ -30,9 +31,13 @@ public class ShellHammer : ModItem
         Item.damage = 87;
         Item.value = Item.sellPrice(0, 6, 20);
     }
+    public override void UseStyle(Player player, Rectangle heldItemFrame)
+    {
+        player.itemLocation = Vector2.Lerp(player.itemLocation, player.MountedCenter, 0.5f);
+    }
     public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
     {
-        velocity.Y = -5f;
+        velocity.Y -= 5f;
     }
     public override void AddRecipes()
     {

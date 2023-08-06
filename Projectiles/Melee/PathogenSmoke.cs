@@ -20,7 +20,7 @@ public class PathogenSmoke : ModProjectile
         Projectile.timeLeft = 720;
         Projectile.ignoreWater = true;
         Projectile.hostile = false;
-        Projectile.scale = 0.8f;
+        Projectile.scale = 1f;
         Projectile.extraUpdates = 1;
         Projectile.DamageType = DamageClass.Melee;
         Projectile.usesLocalNPCImmunity = true;
@@ -49,7 +49,7 @@ public class PathogenSmoke : ModProjectile
 
         Projectile.velocity = Projectile.velocity.RotatedByRandom(0.05f) * 0.99f;
         Projectile.rotation += MathHelper.Clamp(Projectile.velocity.Length() * 0.03f, -0.3f, 0.3f);
-        Projectile.scale += 0.001f;
+        Projectile.scale += 0.005f;
         Projectile.Resize((int)(32 * Projectile.scale), (int)(32 * Projectile.scale));
 
         //if (Main.rand.NextBool(3))

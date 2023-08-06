@@ -15,6 +15,8 @@ public class HemorrhagingHalberd : SpearTemplate2
     public override void SetDefaults()
     {
         base.SetDefaults();
+        Projectile.usesLocalNPCImmunity = true;
+        Projectile.localNPCHitCooldown = -1;
     }
     protected override float HoldoutRangeMax => 140;
     protected override float HoldoutRangeMin => 40;

@@ -19,8 +19,8 @@ class HemorrhagingHalberd : ModItem
         Item.shootSpeed = 4f;
         Item.rare = ItemRarityID.LightRed;
         Item.noMelee = true;
-        Item.useTime = 25;
-        Item.useAnimation = 25;
+        Item.useTime = 35;
+        Item.useAnimation = 35;
         Item.knockBack = 4.5f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.HemorrhagingHalberd>();
         Item.DamageType = DamageClass.Melee;
@@ -33,7 +33,7 @@ class HemorrhagingHalberd : ModItem
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         float RotationAmount = 0.4f;
-        Projectile.NewProjectile(source, position, velocity.RotatedBy(RotationAmount * -player.direction), type, damage, knockback, player.whoAmI, 0, 0, RotationAmount * 2);
+        Projectile.NewProjectile(source, position, velocity.RotatedBy(RotationAmount * -player.direction), type, damage / 2, knockback, player.whoAmI, 0, 0, RotationAmount * 2);
         return false;
     }
     public override bool CanUseItem(Player player)
