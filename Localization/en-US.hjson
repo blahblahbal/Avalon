@@ -6394,6 +6394,7 @@ Mods: {
 			TroxiniumChainsaw.DisplayName: Troxinium Chainsaw
 			TroxiniumDrill.DisplayName: Troxinium Drill
 			BlahEnergySlash.DisplayName: Blah Energy Slash
+			PathogenSmoke.DisplayName: Pathogen Smoke
 		}
 
 		NPCs: {

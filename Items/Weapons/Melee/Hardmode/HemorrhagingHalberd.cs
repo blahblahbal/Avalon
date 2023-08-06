@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,6 +28,13 @@ class HemorrhagingHalberd : ModItem
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = Item.sellPrice(0, 3);
         Item.UseSound = SoundID.Item1;
+    }
+
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    {
+        float RotationAmount = 0.4f;
+        Projectile.NewProjectile(source, position, velocity.RotatedBy(RotationAmount * -player.direction), type, damage, knockback, player.whoAmI, 0, 0, RotationAmount * 2);
+        return false;
     }
     public override bool CanUseItem(Player player)
     {

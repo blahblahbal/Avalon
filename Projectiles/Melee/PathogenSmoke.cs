@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Magic;
+namespace Avalon.Projectiles.Melee;
 
-public class PurpleHaze : ModProjectile
+public class PathogenSmoke : ModProjectile
 {
     public override void SetDefaults()
     {
@@ -20,9 +20,9 @@ public class PurpleHaze : ModProjectile
         Projectile.timeLeft = 720;
         Projectile.ignoreWater = true;
         Projectile.hostile = false;
-        Projectile.scale = 0.4f;
+        Projectile.scale = 0.8f;
         Projectile.extraUpdates = 1;
-        Projectile.DamageType = DamageClass.Magic;
+        Projectile.DamageType = DamageClass.Melee;
         Projectile.usesLocalNPCImmunity = true;
         Projectile.localNPCHitCooldown = -1;
         //Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
@@ -47,9 +47,9 @@ public class PurpleHaze : ModProjectile
 
         if (Projectile.alpha == 255) Projectile.Kill();
 
-        Projectile.velocity = Projectile.velocity.RotatedByRandom(0.1f) * 0.985f;
+        Projectile.velocity = Projectile.velocity.RotatedByRandom(0.05f) * 0.99f;
         Projectile.rotation += MathHelper.Clamp(Projectile.velocity.Length() * 0.03f, -0.3f, 0.3f);
-        Projectile.scale += 0.03f;
+        Projectile.scale += 0.001f;
         Projectile.Resize((int)(32 * Projectile.scale), (int)(32 * Projectile.scale));
 
         //if (Main.rand.NextBool(3))
@@ -87,7 +87,7 @@ public class PurpleHaze : ModProjectile
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
-        Projectile.velocity = Projectile.oldVelocity * 0.7f;
+        Projectile.velocity = Projectile.oldVelocity * 0.3f;
         return false;
     }
 }
