@@ -446,7 +446,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to the surface
-					Your horizontal position will remain the same
+					Horizontal position will remain the same
 					Right click to change destination
 					'''
 			}

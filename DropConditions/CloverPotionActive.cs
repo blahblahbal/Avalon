@@ -22,6 +22,6 @@ public class CloverPotionActive : IItemDropRuleCondition, IProvideItemConditionD
 
     public string GetConditionDescription()
     {
-        return null;
+        return "Clover Potion active";
     }
 }

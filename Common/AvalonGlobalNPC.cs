@@ -616,12 +616,95 @@ public class AvalonGlobalNPC : GlobalNPC
     public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
     {
         var notExpertCondition = new Conditions.NotExpert();
+
         switch (npc.type)
         {
             case NPCID.WallofFlesh:
                 npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<FleshyTendril>(), 1, 13, 19));
                 break;
         }
+        if (npc.type is 104 or 102 or 269 or 270 or 271 or 272)
+        {
+            LeadingConditionRule AdhesiveBandage = new LeadingConditionRule(new CloverPotionActive());
+            AdhesiveBandage.OnSuccess(ItemDropRule.StatusImmunityItem(885, 50), true);
+            AdhesiveBandage.OnFailedConditions(ItemDropRule.StatusImmunityItem(885, 100));
+            npcLoot.Add(AdhesiveBandage);
+        }
+        if (npc.type is 77 or 273 or 274 or 275 or 276)
+        {
+            LeadingConditionRule ArmorPolish = new LeadingConditionRule(new CloverPotionActive());
+            ArmorPolish.OnSuccess(ItemDropRule.StatusImmunityItem(886, 50), true);
+            ArmorPolish.OnFailedConditions(ItemDropRule.StatusImmunityItem(886, 100));
+            npcLoot.Add(ArmorPolish);
+        }
+        if (npc.type is 141 or 176 or 42 or 231 or 232 or 233 or 234 or 235)
+        {
+            LeadingConditionRule Bezoar = new LeadingConditionRule(new CloverPotionActive());
+            Bezoar.OnSuccess(ItemDropRule.StatusImmunityItem(887, 50), true);
+            Bezoar.OnFailedConditions(ItemDropRule.StatusImmunityItem(887, 100));
+            npcLoot.Add(Bezoar);
+        }
+        if (npc.type is 81 or 79 or 183 or 630)
+        {
+            LeadingConditionRule Blindfold = new LeadingConditionRule(new CloverPotionActive());
+            Blindfold.OnSuccess(ItemDropRule.StatusImmunityItem(888, 50), true);
+            Blindfold.OnFailedConditions(ItemDropRule.StatusImmunityItem(888, 100));
+            npcLoot.Add(Blindfold);
+        }
+        if (npc.type is 78 or 82 or 75)
+        {
+            LeadingConditionRule FastClock = new LeadingConditionRule(new CloverPotionActive());
+            FastClock.OnSuccess(ItemDropRule.StatusImmunityItem(889, 50), true);
+            FastClock.OnFailedConditions(ItemDropRule.StatusImmunityItem(889, 100));
+            npcLoot.Add(FastClock);
+        }
+        if (npc.type is 103 or 75 or 79 or 630)
+        {
+            LeadingConditionRule Megaphone = new LeadingConditionRule(new CloverPotionActive());
+            Megaphone.OnSuccess(ItemDropRule.StatusImmunityItem(890, 50), true);
+            Megaphone.OnFailedConditions(ItemDropRule.StatusImmunityItem(890, 100));
+            npcLoot.Add(Megaphone);
+        }
+        if (npc.type is 34 or 83 or 84 or 179 or 289)
+        {
+            LeadingConditionRule Nazar = new LeadingConditionRule(new CloverPotionActive());
+            Nazar.OnSuccess(ItemDropRule.StatusImmunityItem(891, 50), true);
+            Nazar.OnFailedConditions(ItemDropRule.StatusImmunityItem(891, 100));
+            npcLoot.Add(Nazar);
+        }
+        if (npc.type is 94 or 182)
+        {
+            LeadingConditionRule Vitamins = new LeadingConditionRule(new CloverPotionActive());
+            Vitamins.OnSuccess(ItemDropRule.StatusImmunityItem(892, 50), true);
+            Vitamins.OnFailedConditions(ItemDropRule.StatusImmunityItem(892, 100));
+            npcLoot.Add(Vitamins);
+        }
+        if (npc.type is 93 or 109 or 80)
+        {
+            LeadingConditionRule TrifoldMap = new LeadingConditionRule(new CloverPotionActive());
+            TrifoldMap.OnSuccess(ItemDropRule.StatusImmunityItem(893, 50), true);
+            TrifoldMap.OnFailedConditions(ItemDropRule.StatusImmunityItem(893, 100));
+            npcLoot.Add(TrifoldMap);
+        }
+        if (npc.type is NPCID.BloodJelly or NPCID.Unicorn or NPCID.DarkMummy or NPCID.LightMummy)
+        {
+            LeadingConditionRule HiddenBlade = new LeadingConditionRule(new CloverPotionActive());
+            HiddenBlade.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<HiddenBlade>(), 50), true);
+            HiddenBlade.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<HiddenBlade>(), 100));
+            npcLoot.Add(HiddenBlade);
+        }
+        if (npc.type == NPCID.Mummy || npc.type == NPCID.FungoFish || npc.type == NPCID.Clinger)
+        {
+            LeadingConditionRule AmmoMagazine = new LeadingConditionRule(new CloverPotionActive());
+            AmmoMagazine.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 50), true);
+            AmmoMagazine.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 100));
+            npcLoot.Add(AmmoMagazine);
+        }
+        //greek extinguisher
+        //if (npc.type == NPCID.Clinger || npc.type == NPCID.Spazmatism) // || npc.type == ModContent.NPCType<CursedFlamer>())
+        //{
+        //    npcLoot.Add(CloverPotionActive.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<>(), 25)).OnFailedRoll(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 50)));
+        //}
     }
     public override void ModifyGlobalLoot(GlobalLoot globalLoot)
     {
@@ -631,6 +714,8 @@ public class AvalonGlobalNPC : GlobalNPC
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumHeadgear>(), 150));
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumPlateMail>(), 150));
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumGreaves>(), 150));
+
+        
 
         globalLoot.RemoveWhere(
             rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.JungleKey);
