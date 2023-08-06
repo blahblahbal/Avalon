@@ -71,8 +71,8 @@ namespace Avalon.Common.Templates
                 player.SetDummyItemTime(20);
                 if (player.whoAmI == Main.myPlayer)
                 {
-                    Projectile.velocity = player.Center.DirectionTo(Main.MouseWorld);
-                    player.direction = Main.MouseWorld.X < player.Center.X ? -1 : 1;
+                    Projectile.velocity = player.MountedCenter.DirectionTo(Main.MouseWorld);
+                    player.direction = Main.MouseWorld.X < player.MountedCenter.X ? -1 : 1;
                 }
             }
             else
@@ -81,14 +81,14 @@ namespace Avalon.Common.Templates
                     Power = 0.05f;
                 if (Main.myPlayer == Projectile.owner && Projectile.timeLeft == 19)
                 {
-                    Shoot(Projectile.GetSource_FromThis(), player.Center, Projectile.velocity * player.HeldItem.shootSpeed * Power, ammo, (int)(Projectile.damage * (0.1f + (Power * 1.9f))), Projectile.knockBack * (0.5f + Power), Power);
-                    //Projectile.NewProjectile(Projectile.GetSource_FromThis(),player.Center,Projectile.velocity * player.HeldItem.shootSpeed * Power,ammo,(int)(Projectile.damage * (0.1f + Power)),Projectile.knockBack * (0.5f + Power), player.whoAmI);
+                    Shoot(Projectile.GetSource_FromThis(), player.MountedCenter, Projectile.velocity * player.HeldItem.shootSpeed * Power, ammo, (int)(Projectile.damage * (0.1f + (Power * 1.9f))), Projectile.knockBack * (0.5f + Power), Power);
+                    //Projectile.NewProjectile(Projectile.GetSource_FromThis(),player.MountedCenter,Projectile.velocity * player.HeldItem.shootSpeed * Power,ammo,(int)(Projectile.damage * (0.1f + Power)),Projectile.knockBack * (0.5f + Power), player.whoAmI);
                 }
                 if (Projectile.timeLeft == 19)
                     SoundEngine.PlaySound(shootSound, Projectile.Center);
             }
             Vector2 vector = Vector2.Normalize(Projectile.velocity) * HowFarShouldTheBowBeHeldFromPlayer;
-            Projectile.Center = player.Center + new Vector2(vector.X, vector.Y * 0.9f);
+            Projectile.Center = player.MountedCenter + new Vector2(vector.X, vector.Y * 0.9f);
             Projectile.position.X -= player.direction * 6;
             Projectile.rotation = Projectile.velocity.ToRotation();
 
@@ -121,10 +121,10 @@ namespace Avalon.Common.Templates
             if (player.gravDir < 0)
             {
                 Vector2 vector = Vector2.Normalize(Projectile.velocity) * HowFarShouldTheBowBeHeldFromPlayer;
-                ProjPosition = player.Center + new Vector2(vector.X, vector.Y * -0.9f);
+                ProjPosition = player.MountedCenter + new Vector2(vector.X, vector.Y * -0.9f);
             }
 
-            player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, new Vector2(player.Center.X + player.direction * 6, player.Center.Y).DirectionTo(ProjPosition + player.velocity).ToRotation() + RotationOffset);
+            player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, new Vector2(player.MountedCenter.X + player.direction * 6, player.MountedCenter.Y).DirectionTo(ProjPosition + player.velocity).ToRotation() + RotationOffset);
             if (player.channel)
             {
                 if (Power < 0.33)
@@ -153,7 +153,7 @@ namespace Avalon.Common.Templates
                 CompositeArm = Player.CompositeArmStretchAmount.None;
                 Projectile.frame = 0;
             }
-            player.SetCompositeArmFront(true, CompositeArm, new Vector2(player.Center.X + player.direction * -6, player.Center.Y).DirectionTo(ProjPosition + player.velocity).ToRotation() + RotationOffset);
+            player.SetCompositeArmFront(true, CompositeArm, new Vector2(player.MountedCenter.X + player.direction * -6, player.MountedCenter.Y).DirectionTo(ProjPosition + player.velocity).ToRotation() + RotationOffset);
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -181,7 +181,7 @@ namespace Avalon.Common.Templates
             //No stretch
             //Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, Flip, 0);
         }
-        public void DrawArrow(Color lightColor, Vector2 Offset)
+        public void DrawArrow(Color lightColor, Vector2 Offset, bool OverwriteGetAlphaOfArrow = false)
         {
             Offset.Y *= Projectile.spriteDirection;
             int ammo = (int)Projectile.ai[0];
@@ -193,7 +193,10 @@ namespace Avalon.Common.Templates
             Rectangle frame = new Rectangle(0, frameHeight * 0, texture.Width, frameHeight);
             Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -3) + 8 + Offset.X, Offset.Y).RotatedBy(Projectile.rotation);
             drawPos.Y += Main.player[Projectile.owner].gfxOffY;
-            Main.EntitySpriteDraw(texture, drawPos, frame, AmmoProj.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            if(!OverwriteGetAlphaOfArrow)
+                Main.EntitySpriteDraw(texture, drawPos, frame, AmmoProj.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            else
+                Main.EntitySpriteDraw(texture, drawPos, frame,lightColor, Projectile.rotation + MathHelper.PiOver2, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         }
         public override bool ShouldUpdatePosition()
         {

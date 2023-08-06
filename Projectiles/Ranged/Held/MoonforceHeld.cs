@@ -59,7 +59,7 @@ namespace Avalon.Projectiles.Ranged.Held
                 {
                     Color arrowColor = Color.Lerp(Color.Blue, Color.Red, Main.masterColor) * 0.6f;
                     arrowColor.A = 0;
-                    DrawArrow(arrowColor * Power, new Vector2(0, -1) + new Vector2(Power * 2,0).RotatedBy((i * MathHelper.PiOver2) + Main.timeForVisualEffects * 0.1f));
+                    DrawArrow(arrowColor * Power, new Vector2(0, -1) + new Vector2(Power * 2,0).RotatedBy((i * MathHelper.PiOver2) + Main.timeForVisualEffects * 0.1f),true);
                 }
             }
             return false;
