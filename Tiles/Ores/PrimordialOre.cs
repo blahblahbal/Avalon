@@ -13,7 +13,7 @@ namespace Avalon.Tiles.Ores;
 
 public class PrimordialOre : ModTile
 {
-    public static Color[] RainbowColors = { Color.Red, Color.Brown, Color.GreenYellow, Color.Cyan, Color.Navy, Color.Magenta, Color.MistyRose, Color.Yellow, Color.Cyan, Color.BlueViolet, Color.Pink };
+    private static Color[] RainbowColors = { Color.Red, Color.Brown, Color.GreenYellow, Color.Cyan, Color.Navy, Color.Magenta, Color.MistyRose, Color.Yellow, Color.Cyan, Color.BlueViolet, Color.Pink };
 
     //public static int[] NoRequirement = new int[]
     //{
@@ -277,14 +277,14 @@ public class PrimordialOre : ModTile
             zero = Vector2.Zero;
         }
         //Color[] RainbowColors = { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
-        Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors,100,i * 10 + j * 10);
+        Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors, 100, i * 10 + j * 10);
 
-        spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default(Vector2), 1f, SpriteEffects.None, 0f) ;
+        spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default, 1f, SpriteEffects.None, 0f) ;
 
-        Skittles = Color.Lerp(Color.Black,Main.DiscoColor,(float)Math.Sin((Main.timeForVisualEffects * 0.02f) + i / 10f - j / 20f)) * 1f;
+        Skittles = Color.Lerp(Color.Black, Main.DiscoColor, (float)Math.Sin((Main.timeForVisualEffects * 0.02f) + i / 10f - j / 20f)) * 1f;
         //Skittles = Color.Lerp(Color.Black, Skittles, Lighting.Brightness(i, j) * 2f);
         Skittles.A = 0;
-        spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+        spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default, 1f, SpriteEffects.None, 0f);
     }
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -465,13 +465,13 @@ public class PrimordialOre : ModTile
             ItemID.Hellstone,
             ItemID.CobaltOre,
             ItemID.PalladiumOre,
-            //ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
+            ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
             ItemID.MythrilOre,
             ItemID.OrichalcumOre,
-            //ModContent.ItemType<Items.Material.Ores.NaquadahOre>(),
+            ModContent.ItemType<Items.Material.Ores.NaquadahOre>(),
             ItemID.AdamantiteOre,
             ItemID.TitaniumOre,
-            //ModContent.ItemType<Items.Material.Ores.TroxiniumOre>(),
+            ModContent.ItemType<Items.Material.Ores.TroxiniumOre>(),
         };
         int[] Power200 = new int[]
         {
@@ -498,13 +498,13 @@ public class PrimordialOre : ModTile
             ItemID.Hellstone,
             ItemID.CobaltOre,
             ItemID.PalladiumOre,
-            //ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
+            ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
             ItemID.MythrilOre,
             ItemID.OrichalcumOre,
-            //ModContent.ItemType<Items.Material.Ores.NaquadahOre>(),
+            ModContent.ItemType<Items.Material.Ores.NaquadahOre>(),
             ItemID.AdamantiteOre,
             ItemID.TitaniumOre,
-            //ModContent.ItemType<Items.Material.Ores.TroxiniumOre>(),
+            ModContent.ItemType<Items.Material.Ores.TroxiniumOre>(),
             ItemID.ChlorophyteOre,
             //ModContent.ItemType<Items.Material.Ores.XanthophyteOre>(),
             ModContent.ItemType<Items.Material.Ores.CaesiumOre>(),

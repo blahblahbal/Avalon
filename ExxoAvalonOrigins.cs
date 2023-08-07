@@ -112,7 +112,7 @@ public class ExxoAvalonOrigins : Mod
     }
     public override void Unload()
     {
-        var fractalProfiles = (Dictionary<int, FinalFractalProfile>)typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+        var fractalProfiles = (Dictionary<int, FinalFractalProfile>?)typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
 
         fractalProfiles.Remove(ItemID.GoldBroadsword);
         fractalProfiles.Remove(ItemID.PlatinumBroadsword);
@@ -155,6 +155,8 @@ public class ExxoAvalonOrigins : Mod
         itemReplacer.ReplaceAsset(ItemID.HallowedSeeds, Assets.Request<Texture2D>("Assets/Vanilla/Items/HallowedSeeds"));
         itemReplacer.ReplaceAsset(ItemID.CorruptSeeds, Assets.Request<Texture2D>("Assets/Vanilla/Items/CorruptSeeds"));
         itemReplacer.ReplaceAsset(ItemID.CrimsonSeeds, Assets.Request<Texture2D>("Assets/Vanilla/Items/CrimsonSeeds"));
+        itemReplacer.ReplaceAsset(ItemID.CrimtaneBar, Assets.Request<Texture2D>("Assets/Vanilla/Items/CrimtaneBar"));
+        itemReplacer.ReplaceAsset(ItemID.HellstoneBar, Assets.Request<Texture2D>("Assets/Vanilla/Items/HellstoneBar"));
         itemReplacer.ReplaceAsset(ItemID.ShroomiteDiggingClaw,
             Assets.Request<Texture2D>("Assets/Vanilla/Items/ShroomiteDiggingClaws"));
         itemReplacer.ReplaceAsset(ItemID.BloodMoonStarter,

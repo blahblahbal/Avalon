@@ -23,9 +23,15 @@ public class BlahEnergySlash : EnergySlashTemplate
         Color[] Colors = { new Color(255, 66, 0), new Color(249, 201, 77), new Color(247, 255, 177), new Color(216, 131, 0) };
         Color Color1 = ClassExtensions.CycleThroughColors(Colors, 60) * 0.3f;
         Color1.A = 64;
-        DrawSlash(Color1, Color1 * 0.8f, Color1 * 0.6f, Color.Lerp(Color1, Color.White, 0.5f), 0, 1.1f, 0, -0.2f, -0.3f, true);
         //DrawSlash(Color1, Color1 * 0.8f, Color1 * 0.6f, Color.Lerp(Color1, Color.White, 0.5f), 0, 1.1f, 0, -0.2f, -0.3f, true);
-        DrawSlash(Color1, Color1 * 0.3f, Color1 * 0.6f, Color.Lerp(Color1, new Color(255, 66, 0), 0.5f), 0, 0.9f, 0, -0.2f, -0.3f, false);
+        ////DrawSlash(Color1, Color1 * 0.8f, Color1 * 0.6f, Color.Lerp(Color1, Color.White, 0.5f), 0, 1.1f, 0, -0.2f, -0.3f, true);
+        //DrawSlash(Color1, Color1 * 0.3f, Color1 * 0.6f, Color.Lerp(Color1, new Color(255, 66, 0), 0.5f), 0, 0.9f, 0, -0.2f, -0.3f, false);
+
+        DrawSlash(Color1, Color1 * 0.8f, Color1 * 0.6f, Color.Lerp(Color1, Color.White, 0.5f), 0, 1f, 0.78f, -MathHelper.Pi / 24, 0, true);
+
+        DrawSlash(Color1, Color1 * 0.3f, Color1 * 0.6f, Color.Lerp(Color1, new Color(255, 66, 0), 0.5f), 0, 0.8f, 0, -MathHelper.Pi / 24, 0, true);
+
+        DrawSlash(Color1, Color1 * 0.8f, Color1 * 0.6f, Color.Lerp(Color1, Color.White, 0.5f), 0, 0.8f, 0.78f, -MathHelper.Pi / 6, 0, true);
 
         return false;
     }

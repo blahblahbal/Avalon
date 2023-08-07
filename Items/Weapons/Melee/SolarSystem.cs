@@ -17,7 +17,7 @@ public class SolarSystem : ModItem
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.useTime = Item.useAnimation = 40;
         Item.channel = true;
-        Item.damage = 90;
+        Item.damage = 200;
         Item.knockBack = 8;
         Item.scale = 1.1f;
         Item.UseSound = SoundID.Item1;

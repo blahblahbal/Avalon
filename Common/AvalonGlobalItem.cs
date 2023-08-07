@@ -460,6 +460,59 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips.RemoveAt(tooltips.FindIndex(x => x.Name == "Equipable" && x.Mod == "Terraria"));
             }
         }
+        if (item.IsArmor() && !item.social)
+        {
+            if (item.prefix == ModContent.PrefixType<Busted>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "-1 defense")
+                    {
+                        IsModifier = true,
+                        IsModifierBad = true
+                    });
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Loaded>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+1 defense")
+                    {
+                        IsModifier = true
+                    });
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Protective>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+2 defense")
+                    {
+                        IsModifier = true
+                    });
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Disgusting>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "-2 defense")
+                    {
+                        IsModifier = true,
+                        IsModifierBad = true
+                    });
+                }
+            }
+        }
         if (item.accessory && !item.social)
         {
             if (item.prefix == ModContent.PrefixType<Hoarding>())
