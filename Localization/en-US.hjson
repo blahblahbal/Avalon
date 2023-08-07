@@ -6260,6 +6260,26 @@ Mods: {
 					Enemies are more likely to target you
 					'''
 			}
+
+			FalseTreasureMap: {
+				DisplayName: False Treasure Map
+				Tooltip: Cancels a Pirate Invasion
+			}
+
+			GoblinRetreatOrder: {
+				DisplayName: Goblin Retreat Order
+				Tooltip: Cancels a Goblin Invasion
+			}
+
+			TourmalineMinecart: {
+				DisplayName: Tourmaline Minecart
+				Tooltip: ""
+			}
+
+			ZirconMinecart: {
+				DisplayName: Zircon Minecart
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

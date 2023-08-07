@@ -24,9 +24,9 @@ class SandyStormcloudinaBottle : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.hasJumpOption_Cloud = true;
-        player.hasJumpOption_Blizzard = true;
-        player.hasJumpOption_Sandstorm = true;
+        player.GetJumpState<CloudInABottleJump>().Enable();
+        player.GetJumpState<BlizzardInABottleJump>().Enable();
+        player.GetJumpState<SandstormInABottleJump>().Enable();
     }
     public override void AddRecipes()
     {

@@ -59,7 +59,8 @@ public class AvalonPlayer : ModPlayer
     }
     #endregion
 
-    
+    public byte FartTimer = 0;
+    public int RocketDustTimer = 0;
     public bool DarkMatterMonolith { get; set; }
     public int DarkMatterTimeOut = 20;
 
@@ -546,6 +547,37 @@ public class AvalonPlayer : ModPlayer
 
     public override void PostUpdate()
     {
+        if (RocketDustTimer > 0)
+        {
+            if (Player.velocity.Y < 0)
+            {
+                for (int x = 0; x < 5; x++)
+                {
+                    int d = Dust.NewDust(new Vector2(Player.Center.X, Player.position.Y + Player.height), 10, 10,
+                        DustID.Smoke);
+                }
+            }
+            RocketDustTimer--;
+        }
+
+        if (Player.GetJumpState<FartInAJarJump>().Active)
+        {
+            FartTimer++;
+            if (FartTimer == 1)
+            {
+                Item fart = Player.HasItemInArmorFindIt(ItemID.FartinaJar);
+                if (fart != null)
+                {
+                    if (fart.prefix == PrefixID.Violent)
+                    {
+                        if (Player.Male) SoundEngine.PlaySound(in SoundID.PlayerHit, Player.position);
+                        else SoundEngine.PlaySound(in SoundID.FemaleHit, Player.position);
+                    }
+                }
+            }
+        }
+        else FartTimer = 0;
+
         #region rift goggles
         // mobs
         if (Player.ZoneCrimson || Player.ZoneCorrupt || Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion)

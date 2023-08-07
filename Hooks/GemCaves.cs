@@ -23,12 +23,12 @@ namespace Avalon.Hooks
         private static void OnGemCave(On_WorldGen.orig_gemCave orig, int x, int y)
         {
             WorldGen.countTiles(x, y);
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 9; i++)
             {
                 Gem[i] = false;
             }
             Gem[WorldGen.genRand.Next(9)] = true;
-            for (int j = 0; j < 6; j++)
+            for (int j = 0; j < 9; j++)
             {
                 if (WorldGen.genRand.NextBool(9))
                 {

@@ -7,14 +7,14 @@ using static Terraria.Mount;
 
 namespace Avalon.Mounts;
 
-internal class PeridotGemcart : ModMount
+internal class ZirconGemcart : ModMount
 {
     public override void SetStaticDefaults()
     {
         MountID.Sets.Cart[Type] = true;
         MountID.Sets.FacePlayersVelocity[Type] = true;
 
-        SetAsMinecart(MountData, ModContent.BuffType<Buffs.PeridotGemcartBuff>(), MountData.frontTexture);
+        SetAsMinecart(MountData, ModContent.BuffType<Buffs.ZirconGemcartBuff>(), MountData.frontTexture);
 
         // Change properties on MountData here further, for example:
         MountData.spawnDust = 21;
@@ -34,7 +34,7 @@ internal class PeridotGemcart : ModMount
             Vector2 directionOffset = new Vector2(0f, 10f) * player.Directions;
             Vector2 position = player.Center + directionOffset + randomOffset;
             position = player.RotatedRelativePoint(position);
-            Dust dust = Dust.NewDustPerfect(position, ModContent.DustType<Dusts.PeridotDust>());
+            Dust dust = Dust.NewDustPerfect(position, ModContent.DustType<Dusts.ZirconDust>());
             dust.noGravity = true;
             dust.fadeIn = 0.6f;
             dust.scale = 0.4f;
