@@ -88,6 +88,20 @@ public class AvalonGlobalNPC : GlobalNPC
                 shopCustomPrice = 350000,
             });
         }
+        if (shop.NpcType == NPCID.Pirate && NPC.downedPirates)
+        {
+            shop.Add(new Item(ModContent.ItemType<FalseTreasureMap>())
+            {
+                shopCustomPrice = Item.buyPrice(0, 4),
+            });
+        }
+        if (shop.NpcType == NPCID.GoblinTinkerer && NPC.downedGoblins)
+        {
+            shop.Add(new Item(ModContent.ItemType<GoblinRetreatOrder>())
+            {
+                shopCustomPrice = Item.buyPrice(0, 4),
+            });
+        }
     }
     /// <summary>
     ///  A method to choose a random Town NPC death messages.

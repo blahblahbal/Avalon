@@ -1,6 +1,3 @@
-using Avalon.Items.Material;
-using Avalon.Items.Material.Bars;
-using Avalon.Items.Weapons.Melee;
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,8 +20,7 @@ class BlahsEnergyBlade : ModItem
         Item.width = 50;
         Item.height = 54;
         Item.damage = 250;
-        Item.autoReuse = true;
-        Item.useTurn = true;
+        Item.autoReuse = Item.noMelee = Item.useTurn = Item.shootsEveryUse = true;
         Item.scale = 1.2f;
         Item.shootSpeed = 14f;
         Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
@@ -34,7 +30,7 @@ class BlahsEnergyBlade : ModItem
         Item.UseSound = SoundID.Item1;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = Item.sellPrice(3, 0, 0, 0);
+        Item.value = Item.sellPrice(0, 25, 0, 0);
         Item.useAnimation = 14;
         if (!Main.dedServ)
         {
@@ -44,6 +40,10 @@ class BlahsEnergyBlade : ModItem
     public override Color? GetAlpha(Color lightColor)
     {
         return new Color(255, 255, 255, 255);
+    }
+    public override void UseStyle(Player player, Rectangle heldItemFrame)
+    {
+        player.itemLocation = Vector2.Lerp(player.itemLocation, player.MountedCenter, 0.5f);
     }
     //public override void AddRecipes()
     //{
@@ -68,7 +68,7 @@ class BlahsEnergyBlade : ModItem
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
-        float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
+        float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem) * 1.4f;
         Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 0.9f, adjustedItemScale5);
         NetMessage.SendData(13, -1, -1, null, player.whoAmI);
         for (int num194 = 0; num194 < 4; num194++)
