@@ -26,4 +26,9 @@ public class YellowIce : ModTile
         TileID.Sets.ChecksForMerge[Type] = true;
         TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
     }
+    public override bool IsTileBiomeSightable(int i, int j, ref Color sightColor)
+    {
+        sightColor = ExxoAvalonOrigins.ContagionBiomeSightColor;
+        return true;
+    }
 }

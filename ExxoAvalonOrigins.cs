@@ -26,6 +26,7 @@ namespace Avalon;
 
 public class ExxoAvalonOrigins : Mod
 {
+    public static Color ContagionBiomeSightColor = new Color(170, 255, 0);
     /// <summary>
     ///     Gets reference to the main instance of the mod.
     /// </summary>
