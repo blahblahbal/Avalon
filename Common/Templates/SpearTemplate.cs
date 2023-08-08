@@ -21,7 +21,7 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
     public override void AI()
     {
         Player player = Main.player[Projectile.owner]; // Since we access the owner player instance so much, it's useful to create a helper local variable for this
-        int duration = player.itemAnimationMax; // Define the duration the projectile will exist in frames
+        int duration = (int)(player.itemAnimationMax * 1.3f); // Define the duration the projectile will exist in frames
 
         player.heldProj = Projectile.whoAmI; // Update the player's held projectile id
 
@@ -63,7 +63,7 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
             // If sprite is facing right, rotate 135 degrees
             Projectile.rotation += MathHelper.ToRadians(135f);
         }
-        if(Projectile.timeLeft <= duration * 0.25f)
+        if(Projectile.timeLeft <= duration * 0.3f)
         {
             Projectile.timeLeft = 0;
             player.SetDummyItemTime(0);

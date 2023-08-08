@@ -20,8 +20,8 @@ class BlahsEnergyBlade : ModItem
         Item.width = 50;
         Item.height = 54;
         Item.damage = 250;
-        Item.autoReuse = Item.noMelee = Item.useTurn = Item.shootsEveryUse = true;
-        Item.scale = 1.2f;
+        Item.autoReuse = Item.noMelee = Item.shootsEveryUse = true;
+        //Item.scale = 1.2f;
         Item.shootSpeed = 14f;
         Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
         Item.useTime = 14;
@@ -69,7 +69,7 @@ class BlahsEnergyBlade : ModItem
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem) * 1.4f;
-        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 0.9f, adjustedItemScale5);
+        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1.2f, adjustedItemScale5 * 1.4f);
         NetMessage.SendData(13, -1, -1, null, player.whoAmI);
         for (int num194 = 0; num194 < 4; num194++)
         {

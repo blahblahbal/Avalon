@@ -21,8 +21,8 @@ class DurataniumGlaive : ModItem
         Item.rare = ItemRarityID.LightRed;
         Item.noMelee = true;
         Item.width = dims.Width;
-        Item.useTime = 22;
-        Item.useAnimation = 22;
+        Item.useTime = 26;
+        Item.useAnimation = 26;
         Item.knockBack = 5.1f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.DurataniumGlaive>();
         Item.DamageType = DamageClass.Melee;

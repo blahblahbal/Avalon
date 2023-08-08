@@ -1,11 +1,15 @@
+using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee;
 
-public class TroxiniumSpear : ModProjectile
+public class TroxiniumSpear : SpearTemplate
 {
     public override void SetDefaults()
     {
@@ -20,55 +24,39 @@ public class TroxiniumSpear : ModProjectile
         Projectile.ownerHitCheck = true;
         Projectile.DamageType = DamageClass.Melee;
     }
-    public float movementFactor
-    {
-        get => Projectile.ai[0];
-        set => Projectile.ai[0] = value;
-    }
-    public override void AI()
-    {
-        Player projOwner = Main.player[Projectile.owner];
-        Vector2 ownerMountedCenter = projOwner.RotatedRelativePoint(projOwner.MountedCenter, true);
-        Projectile.direction = projOwner.direction;
-        projOwner.heldProj = Projectile.whoAmI;
-        projOwner.itemTime = projOwner.itemAnimation;
-        Projectile.position.X = ownerMountedCenter.X - (float)(Projectile.width / 2);
-        Projectile.position.Y = ownerMountedCenter.Y - (float)(Projectile.height / 2);
-        if (!projOwner.frozen)
-        {
-            if (movementFactor == 0f)
-            {
-                movementFactor = 3f;
-                Projectile.netUpdate = true;
-            }
-            if (projOwner.itemAnimation < projOwner.itemAnimationMax / 3)
-            {
-                movementFactor -= 2.4f;
-            }
-            else
-            {
-                movementFactor += 2.1f;
-            }
-        }
-        Projectile.position += Projectile.velocity * movementFactor;
-        if (projOwner.itemAnimation == 0)
-        {
-            Projectile.Kill();
-        }
-        Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.ToRadians(135f);
-        if (Projectile.spriteDirection == -1)
-        {
-            Projectile.rotation -= MathHelper.ToRadians(90f);
-        }
-    }
-
+    protected override float HoldoutRangeMax => 180;
+    protected override float HoldoutRangeMin => 40;
     public override void PostDraw(Color lightColor)
     {
+        SpriteEffects dir = SpriteEffects.None;
+        float num = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + 2.355f;
+        Texture2D val = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
         Player player = Main.player[Projectile.owner];
-        Texture2D texture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-        Vector2 drawOrigin = new Vector2(0, 0) + (Projectile.spriteDirection != 1 ? new Vector2(48, 0) : Vector2.Zero);
-        Vector2 drawPos = Projectile.Center - Main.screenPosition;
-        Color color = Color.White;
-        Main.EntitySpriteDraw(texture, drawPos, null, Projectile.GetAlpha(color), Projectile.rotation, drawOrigin, Projectile.scale, Projectile.spriteDirection != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+        Rectangle value = val.Frame();
+        Rectangle rect = Projectile.getRect();
+        Vector2 vector = Vector2.Zero;
+        if (player.direction > 0)
+        {
+            dir = SpriteEffects.FlipHorizontally;
+            vector.X = val.Width;
+            num -= (float)Math.PI / 2f;
+        }
+        if (player.gravDir == -1f)
+        {
+            if (Projectile.direction == 1)
+            {
+                dir = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
+                vector = new Vector2(val.Width, val.Height);
+                num -= (float)Math.PI / 2f;
+            }
+            else if (Projectile.direction == -1)
+            {
+                dir = SpriteEffects.FlipVertically;
+                vector = new Vector2(0f, val.Height);
+                num += (float)Math.PI / 2f;
+            }
+        }
+        Vector2 vector2 = Projectile.Center + new Vector2(0f, Projectile.gfxOffY);
+        Main.EntitySpriteDraw(val, vector2 - Main.screenPosition, value, Projectile.GetAlpha(Color.White), num, vector, Projectile.scale, dir);
     }
 }
