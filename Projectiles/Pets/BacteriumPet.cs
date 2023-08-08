@@ -158,9 +158,13 @@ public class BacteriumPet : ModProjectile
         {
             if (++Projectile.frameCounter % 5 == 0)
             {
+                if (Projectile.frame < 7)
+                {
+                    Projectile.frame = 7;
+                }
                 if (++Projectile.frame > 12)
                 {
-                    Projectile.frame = 6;
+                    Projectile.frame = 7;
                 }
                 eyeCounter = Projectile.frameCounter / 5;
                 if (eyeCounter > 5)
