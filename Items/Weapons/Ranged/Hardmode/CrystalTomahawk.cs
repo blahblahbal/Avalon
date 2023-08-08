@@ -24,7 +24,7 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode
             Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.CrystalTomahawk>();
             Item.consumable = true;
             Item.shootSpeed = 17;
-            Item.damage = 55;
+            Item.damage = 44;
             Item.maxStack = 9999;
             Item.knockBack = 5;
             Item.autoReuse = true;

@@ -84,7 +84,11 @@ namespace Avalon.Projectiles.Ranged
             }
             if (Main.myPlayer == Projectile.owner)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage / 2, 0, Projectile.owner);
+                for(int i = 0; i < 4; i++)
+                {
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(14,14) * Main.rand.NextFloat(0.3f,1f), ProjectileID.CrystalShard, Projectile.damage / 4, 0, Projectile.owner);
+                }
+                //Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage / 2, 0, Projectile.owner);
             }
             if (Projectile.ai[1] == 0)
             ParticleSystem.AddParticle(new CrystalSparkle(), Projectile.Center + Vector2.Normalize(Projectile.velocity) * 20f, Vector2.Zero, default);
