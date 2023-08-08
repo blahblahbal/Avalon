@@ -83,11 +83,11 @@ public class RecipeChanger : ModSystem
                     }
                     break;
                 }
-                //case ItemID.AnkhCharm:
-                //{
-                //    recipe.AddIngredient(ModContent.ItemType<Items.Accessories.Bayonet>());
-                //    break;
-                //}
+                case ItemID.AnkhCharm:
+                {
+                    recipe.AddIngredient(ModContent.ItemType<Items.Accessories.Hardmode.Bayonet>());
+                    break;
+                }
                 //case ItemID.FrostHelmet:
                 //{
                 //    if (recipe.TryGetIngredient(ItemID.AdamantiteBar, out Item ing))
