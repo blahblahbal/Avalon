@@ -253,7 +253,7 @@ Mods: {
 				Tooltip:
 					'''
 					Changes the time from night to day or from day to night
-					               Has a chance to trigger a Blood Moon or Solar Eclipse if conditions are right
+					Has a chance to trigger a Blood Moon or Solar Eclipse if conditions are right
 					'''
 			}
 
@@ -262,7 +262,7 @@ Mods: {
 				Tooltip:
 					'''
 					Changes the phases of the Moon
-					               Has a chance to trigger a Blood Moon if night
+					Has a chance to trigger a Blood Moon if night
 					'''
 			}
 
@@ -6280,6 +6280,15 @@ Mods: {
 				DisplayName: Zircon Minecart
 				Tooltip: ""
 			}
+
+			PetriDish: {
+				DisplayName: Petri Dish
+				Tooltip:
+                '''
+                Summons a baby Bacterium Prime
+                Master
+                '''
+			}
 		}
 
 		Projectiles: {
@@ -6426,6 +6435,7 @@ Mods: {
 			TroxiniumDrill.DisplayName: Troxinium Drill
 			BlahEnergySlash.DisplayName: Blah Energy Slash
 			PathogenSmoke.DisplayName: Pathogen Smoke
+			BacteriumPet.DisplayName: Bacterium Pet
 		}
 
 		NPCs: {
@@ -7011,6 +7021,11 @@ Mods: {
 			CaesiumBoostingStance: {
 				DisplayName: Caesium Boosting Stance
 				Description: Movement speed is traded for endurance
+			}
+
+			Bacterium: {
+				DisplayName: Bacterium
+				Description: Mods.Avalon.Buffs.Bacterium.Description
 			}
 		}
 

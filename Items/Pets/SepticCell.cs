@@ -21,7 +21,7 @@ class SepticCell : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.WispinaBottle);
-        Item.shoot = ModContent.ProjectileType<Projectiles.SnotOrb>();
+        Item.shoot = ModContent.ProjectileType<Projectiles.Pets.SnotOrb>();
         Item.buffType = ModContent.BuffType<Buffs.Pets.SnotOrb>();
         Item.value = Item.sellPrice(0, 1, 50);
         Item.rare = ItemRarityID.Blue;

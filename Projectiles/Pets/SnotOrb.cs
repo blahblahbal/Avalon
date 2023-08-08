@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles;
+namespace Avalon.Projectiles.Pets;
 
 public class SnotOrb : ModProjectile
 {

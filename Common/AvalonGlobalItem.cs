@@ -344,12 +344,8 @@ public class AvalonGlobalItem : GlobalItem
         }
         switch (item.type)
         {
-            case ItemID.MagicMirror:
-            case ItemID.IceMirror:
             case ItemID.CellPhone:
             case ItemID.Shellphone:
-            case ItemID.MagicConch:
-            case ItemID.DemonConch:
             case ItemID.ShellphoneHell:
             case ItemID.ShellphoneOcean:
             case ItemID.ShellphoneSpawn:

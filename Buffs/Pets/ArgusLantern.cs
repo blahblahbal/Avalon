@@ -14,6 +14,6 @@ public class ArgusLantern : ModBuff
     public override void Update(Player player, ref int buffIndex)
     {
         bool unused = false;
-        player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<Projectiles.ArgusLantern>());
+        player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, ModContent.ProjectileType<Projectiles.Pets.ArgusLantern>());
     }
 }

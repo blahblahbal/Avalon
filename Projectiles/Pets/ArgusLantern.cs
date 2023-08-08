@@ -8,7 +8,7 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles;
+namespace Avalon.Projectiles.Pets;
 
 public class ArgusLantern : ModProjectile
 {
