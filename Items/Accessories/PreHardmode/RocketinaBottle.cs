@@ -28,17 +28,6 @@ public class RocketinaBottle : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetJumpState<RocketBottleJump>().Enable();
-        //if (player.GetJumpState<RocketBottleJump>().Active)
-        //{
-        //    if (player.velocity.Y < 0)
-        //    {
-        //        for (int x = 0; x < 5; x++)
-        //        {
-        //            int d = Dust.NewDust(new Vector2(player.Center.X, player.position.Y + player.height), 10, 10,
-        //                DustID.Smoke);
-        //        }
-        //    }
-        //}
     }
 
     //public override void AddRecipes()
@@ -86,7 +75,7 @@ public class RocketBottleJump : ExtraJump
 
         offsetY -= 16;
 
-        player.GetModPlayer<AvalonPlayer>().RocketDustTimer = 200;
+        player.GetModPlayer<AvalonPlayer>().RocketDustTimer = 28;
 
         int num6 = Gore.NewGore(player.GetSource_FromThis(),
             new Vector2(player.position.X + (player.width / 2) - 16f,
@@ -107,8 +96,44 @@ public class RocketBottleJump : ExtraJump
         Main.gore[num6].velocity.X = (Main.gore[num6].velocity.X * 0.1f) - (player.velocity.X * 0.1f);
         Main.gore[num6].velocity.Y = (Main.gore[num6].velocity.Y * 0.1f) - (player.velocity.Y * 0.05f);
 
+        for (int i = 0; i < 10; i++)
+        {
+            int d = Dust.NewDust(player.position, player.width, player.height, DustID.Torch, 0, 0, 0, default, 2f);
+            Main.dust[d].velocity = Main.rand.NextVector2Circular(6, 6);
+            Main.dust[d].noGravity = true;
+            Main.dust[d].fadeIn = 2.3f;
+            Main.dust[d].customData = 0;
+        }
+        for (int i = 0; i < 20; i++)
+        {
+            int d = Dust.NewDust(player.position, player.width, player.height, DustID.Torch, 0, 0, 0, default, 2f);
+            Main.dust[d].velocity = Main.rand.NextVector2Circular(5, 5) / 3f;
+            Main.dust[d].fadeIn = Main.rand.NextFloat(1, 2);
+            Main.dust[d].customData = 0;
+        }
+        for (int i = 0; i < 20; i++)
+        {
+            int d = Dust.NewDust(player.position, player.width, player.height, DustID.Smoke, 0, 0, 0, default, 1.4f);
+            Main.dust[d].velocity = Main.rand.NextVector2Circular(10, 6) + new Vector2(-3, 0).RotatedBy(player.velocity.ToRotation());
+            Main.dust[d].noGravity = !Main.rand.NextBool(10);
+        }
+        for (int i = 0; i < 7; i++)
+        {
+            int d = Dust.NewDust(player.position, player.width, player.height, DustID.SolarFlare, 0, 0, 0, default, 1.4f);
+            //Main.dust[d].color = Color.Red;
+            Main.dust[d].velocity = (Main.rand.NextVector2Circular(10, 6) + new Vector2(-5, 0).RotatedBy(player.velocity.ToRotation())) / 3f;
+            Main.dust[d].noGravity = true;
+        }
+        for (int i = 0; i < 9; i++)
+        {
+            Vector2 vel = player.velocity / 20f;
+            int g = Gore.NewGore(player.GetSource_FromThis(), new Vector2(player.Center.X - 10, player.position.Y + player.height), Main.rand.NextVector2Circular(10, 6) / 3f + new Vector2(-1, 0).RotatedBy(vel.ToRotation()), Main.rand.Next(61, 63), 0.8f);
+            Main.gore[g].alpha = 128;
+        }
+
         SoundEngine.PlaySound(SoundID.Item11, player.Center);
-        player.velocity.Y -= player.gravDir * 16.5f;
+        SoundEngine.PlaySound(SoundID.Item14, player.Center);
+        player.velocity.Y -= player.gravDir * 11f;
 
         //SpawnCloudPoof(player, player.Top + new Vector2(-16f, offsetY));
         //SpawnCloudPoof(player, player.position + new Vector2(-36f, offsetY));

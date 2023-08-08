@@ -553,8 +553,11 @@ public class AvalonPlayer : ModPlayer
             {
                 for (int x = 0; x < 5; x++)
                 {
-                    int d = Dust.NewDust(new Vector2(Player.Center.X, Player.position.Y + Player.height), 10, 10,
+                    int d = Dust.NewDust(new Vector2(Player.Center.X - 10, Player.position.Y + Player.height), 10, 10,
                         DustID.Smoke);
+                    Main.dust[d].position.X += Main.rand.NextFloat();
+                    Main.dust[d].velocity.X *= 0.1f;
+                    Main.dust[d].velocity.Y += 0.5f;
                 }
             }
             RocketDustTimer--;
