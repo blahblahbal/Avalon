@@ -20,11 +20,11 @@ public class Blaze : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 4;
-        var debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new[] { BuffID.Confused, BuffID.OnFire },
-        };
-        NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
     }
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>

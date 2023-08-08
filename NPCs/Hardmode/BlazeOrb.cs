@@ -19,13 +19,7 @@ public class BlazeOrb : ModNPC
             Hide = true // Hides this NPC from the Bestiary, useful for multi-part NPCs whom you only want one entry.
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
-        NPCID.Sets.DebuffImmunitySets.Add(Type, new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new int[]
-            {
-                BuffID.OnFire, BuffID.OnFire3,BuffID.CursedInferno,BuffID.ShadowFlame
-            }
-        });
+        NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
     }
 
     public override void SetDefaults()

@@ -22,11 +22,7 @@ public class Gargoyle : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        NPCID.Sets.DebuffImmunitySets[Type] = new NPCDebuffImmunityData
-        {
-            ImmuneToAllBuffsThatAreNotWhips = true,
-            ImmuneToWhips = true,
-        };
+        NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
     }
     public override void SetDefaults()
     {

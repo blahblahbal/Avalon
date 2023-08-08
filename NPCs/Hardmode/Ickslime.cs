@@ -17,15 +17,8 @@ public class Ickslime : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 2;
-        NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new int[]
-            {
-                BuffID.Confused,
-                BuffID.Poisoned
-            }
-        };
-        NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
     }
 
     public override void ModifyNPCLoot(NPCLoot npcLoot)

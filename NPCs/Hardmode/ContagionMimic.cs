@@ -24,11 +24,10 @@ public class ContagionMimic : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        var debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new[] { BuffID.Confused, BuffID.OnFire, BuffID.OnFire3, BuffID.Poisoned },
-        };
-        NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
     }
     public override void SetDefaults()
     {

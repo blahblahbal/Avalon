@@ -24,7 +24,7 @@ public class DesertBeak : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 3;
-        NPCID.Sets.DebuffImmunitySets[Type] = new NPCDebuffImmunityData { SpecificallyImmuneTo = new[] { /*ModContent.BuffType<Frozen>(),*/ BuffID.Confused } };
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }
     private enum Phase
     {

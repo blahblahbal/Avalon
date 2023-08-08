@@ -24,14 +24,7 @@ public class PeridotSquirrel : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new int[]
-            {
-                    BuffID.Confused
-            }
-        };
-        NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         NPCID.Sets.TakesDamageFromHostilesWithoutBeingFriendly[Type] = true;
         NPCID.Sets.TownCritter[Type] = true;
         NPCID.Sets.CountsAsCritter[Type] = true;
@@ -148,14 +141,7 @@ public class TourmalineSquirrel : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new int[]
-            {
-                    BuffID.Confused
-            }
-        };
-        NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         NPCID.Sets.TakesDamageFromHostilesWithoutBeingFriendly[Type] = true;
         NPCID.Sets.TownCritter[Type] = true;
         NPCID.Sets.CountsAsCritter[Type] = true;
@@ -272,14 +258,7 @@ public class ZirconSquirrel : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new int[]
-            {
-                    BuffID.Confused
-            }
-        };
-        NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         NPCID.Sets.TakesDamageFromHostilesWithoutBeingFriendly[Type] = true;
         NPCID.Sets.TownCritter[Type] = true;
         NPCID.Sets.CountsAsCritter[Type] = true;

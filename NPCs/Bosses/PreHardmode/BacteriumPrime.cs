@@ -60,14 +60,7 @@ public class BacteriumPrime : ModNPC
         NPCID.Sets.TrailCacheLength[NPC.type] = 12;
         NPCID.Sets.TrailingMode[NPC.type] = 7;
 
-        NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new int[]
-            {
-                    BuffID.Confused
-            }
-        };
-        NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }
     public override void SetDefaults()
     {

@@ -20,29 +20,33 @@ namespace Avalon.Common
 
         public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
         {
-            if (item.useAmmo == AmmoID.Rocket)
+            Main.NewText(item.netID,Main.DiscoColor);
+            if (item.netID <= 5455)
             {
-                UseStyles.ShotgunStyle(player, 0.02f, 3f, 0.3f);
-            }
-            else if(item.type == ItemID.Xenopopper)
-            {
-                UseStyles.ShotgunStyle(player, 0.020f, -2f, 0);
-            }
-            else if (item.UseSound == SoundID.Item36 || item.UseSound == SoundID.Item38)
-            {
-                UseStyles.ShotgunStyle(player, 0.1f, 3f, 3f);
-            }
-            else if(item.UseSound == SoundID.Item11 || item.type == ItemID.DartPistol || item.type == ItemID.DartRifle)
-            {
-                UseStyles.ShotgunStyle(player, 0.01f, 3f, 0.2f);
-            }
-            else if (item.UseSound == SoundID.Item41)
-            {
-                UseStyles.ShotgunStyle(player, 0.015f, 3f, 0.3f);
-            }
-            else if(item.useAmmo == AmmoID.Bullet && item.type != ItemID.ClockworkAssaultRifle)
-            {
-                UseStyles.ShotgunStyle(player, 0.010f, 2f, 0.3f);
+                if (item.useAmmo == AmmoID.Rocket)
+                {
+                    UseStyles.ShotgunStyle(player, 0.02f, 3f, 0.3f);
+                }
+                else if (item.type == ItemID.Xenopopper)
+                {
+                    UseStyles.ShotgunStyle(player, 0.020f, -2f, 0);
+                }
+                else if (item.UseSound == SoundID.Item36 || item.UseSound == SoundID.Item38)
+                {
+                    UseStyles.ShotgunStyle(player, 0.1f, 3f, 3f);
+                }
+                else if (item.UseSound == SoundID.Item11 || item.type == ItemID.DartPistol || item.type == ItemID.DartRifle)
+                {
+                    UseStyles.ShotgunStyle(player, 0.01f, 3f, 0.2f);
+                }
+                else if (item.UseSound == SoundID.Item41)
+                {
+                    UseStyles.ShotgunStyle(player, 0.015f, 3f, 0.3f);
+                }
+                else if (item.useAmmo == AmmoID.Bullet && item.type != ItemID.ClockworkAssaultRifle)
+                {
+                    UseStyles.ShotgunStyle(player, 0.010f, 2f, 0.3f);
+                }
             }
         }
         public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)

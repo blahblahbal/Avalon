@@ -18,14 +18,7 @@ public class BaskingSpewer : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new int[]
-    {
-                BuffID.Confused
-    }
-        };
-        NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }
     public override void SetDefaults()
     {

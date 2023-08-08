@@ -21,15 +21,11 @@ public class HellboundLizard : CustomFighterAI
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-        {
-            SpecificallyImmuneTo = new int[]
-            {
-                BuffID.Confused,
-                BuffID.OnFire
-            }
-        };
-        NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
+        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
     }
     public override float MaxMoveSpeed { get; set; } = 3f;
     public override float Acceleration { get; set; } = 0.25f;
