@@ -20,7 +20,6 @@ namespace Avalon.Common
 
         public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
         {
-            Main.NewText(item.netID,Main.DiscoColor);
             if (item.netID <= 5455)
             {
                 if (item.useAmmo == AmmoID.Rocket)
