@@ -9,6 +9,11 @@ namespace Avalon.Tiles.Contagion;
 
 public class Chunkstone : ModTile
 {
+    public override bool IsTileBiomeSightable(int i, int j, ref Color sightColor)
+    {
+        sightColor = ExxoAvalonOrigins.ContagionBiomeSightColor;
+        return true;
+    }
     public override void SetStaticDefaults()
     {
         AddMapEntry(new Color(48, 53, 42));

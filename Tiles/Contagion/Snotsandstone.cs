@@ -29,4 +29,9 @@ public class Snotsandstone : ModTile
         Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<HardenedSnotsand>(), false, false, false, false, resetFrame);
         return false;
     }
+    public override bool IsTileBiomeSightable(int i, int j, ref Color sightColor)
+    {
+        sightColor = ExxoAvalonOrigins.ContagionBiomeSightColor;
+        return true;
+    }
 }

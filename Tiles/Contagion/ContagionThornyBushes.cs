@@ -9,6 +9,11 @@ namespace Avalon.Tiles.Contagion;
 
 public class ContagionThornyBushes : ModTile
 {
+    public override bool IsTileBiomeSightable(int i, int j, ref Color sightColor)
+    {
+        sightColor = ExxoAvalonOrigins.ContagionBiomeSightColor;
+        return true;
+    }
     public override void SetStaticDefaults()
     {
         Main.tileNoFail[Type] = true;

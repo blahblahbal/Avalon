@@ -7,6 +7,11 @@ namespace Avalon.Tiles.Contagion;
 
 public class ContagionJungleGrass : ModTile
 {
+    public override bool IsTileBiomeSightable(int i, int j, ref Color sightColor)
+    {
+        sightColor = ExxoAvalonOrigins.ContagionBiomeSightColor;
+        return true;
+    }
     public override void SetStaticDefaults()
     {
         AddMapEntry(new Color(147, 166, 42));

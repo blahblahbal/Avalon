@@ -8,6 +8,11 @@ namespace Avalon.Tiles.Contagion;
 
 public class HardenedSnotsand : ModTile
 {
+    public override bool IsTileBiomeSightable(int i, int j, ref Color sightColor)
+    {
+        sightColor = ExxoAvalonOrigins.ContagionBiomeSightColor;
+        return true;
+    }
     public override void SetStaticDefaults()
     {
         AddMapEntry(new Color(64, 78, 59));
