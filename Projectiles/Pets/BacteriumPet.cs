@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,9 +11,10 @@ namespace Avalon.Projectiles.Pets;
 
 public class BacteriumPet : ModProjectile
 {
+    public int eyeCounter = 0;
     public override void SetStaticDefaults()
     {
-        Main.projFrames[Projectile.type] = 6;
+        Main.projFrames[Projectile.type] = 13;
         Main.projPet[Projectile.type] = true;
     }
 
@@ -19,7 +22,7 @@ public class BacteriumPet : ModProjectile
     {
         Rectangle dims = this.GetDims();
         Projectile.netImportant = true;
-        Projectile.width = 36;
+        Projectile.width = 32;
         Projectile.height = 40;
         Projectile.aiStyle = -1;
         Projectile.penetrate = -1;
@@ -34,57 +37,6 @@ public class BacteriumPet : ModProjectile
     }
     public override void AI()
     {
-        /*Player player = Main.player[Projectile.owner];
-
-        // If the player is no longer active (online) - deactivate (remove) the projectile.
-        if (!player.active)
-        {
-            Projectile.active = false;
-            return;
-        }
-
-        // Keep the projectile disappearing as long as the player isn't dead and has the pet buff.
-        if (!player.dead && player.HasBuff(ModContent.BuffType<Buffs.Pets.Bacterium>()))
-        {
-            Projectile.timeLeft = 2;
-        }
-
-        Vector2 targetPos = player.Center + new Vector2(0, 40) + new Vector2(player.velocity.X, player.velocity.Y);
-
-        //Projectile.ai[0] = MathHelper.Clamp(Projectile.ai[0], -40 , 40 * 3);
-        Projectile.velocity = Vector2.SmoothStep(Projectile.velocity += Projectile.Center.DirectionTo(targetPos) * (Projectile.Center.Distance(targetPos) * 0.01f), Projectile.Center.DirectionTo(targetPos) * 3, 0.1f);
-        if(Projectile.Center.Distance(targetPos) < 10)
-        {
-            Projectile.velocity *= 0.8f;
-        }
-        if (Projectile.Center.Distance(targetPos) < 3 && Projectile.velocity.Length() < 1)
-        {
-            Projectile.velocity *= 0f;
-        }
-        float MaxSpeed = MathHelper.Clamp(Projectile.Center.Distance(targetPos) * 0.05f, 6, 12);
-        Projectile.velocity = Vector2.Clamp(Projectile.velocity, new Vector2(-MaxSpeed), new Vector2(MaxSpeed));
-        
-        if(Projectile.Center.Distance(targetPos) < 100)
-        {
-            Projectile.velocity *= 0.95f;
-        }
-        
-        if (Projectile.Center.Distance(player.Center) > 1000)
-            Projectile.Center = player.Center;
-
-        Projectile.rotation = Projectile.velocity.X * 0.06f;
-
-        // This part is for the pulsing effect
-        if (Projectile.ai[2] == 0)
-            Projectile.ai[2] = 0.05f;
-
-        if (Projectile.ai[1] > 1 || Projectile.ai[1] < 0)
-            Projectile.ai[2] *= -1;
-
-        Projectile.ai[1] += Projectile.ai[2];
-
-        Projectile.scale = MathHelper.SmoothStep(0.95f, 1.05f, Projectile.ai[1]);
-
         if (Main.rand.NextBool(10))
         {
             Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, 0, 0, 128);
@@ -92,8 +44,7 @@ public class BacteriumPet : ModProjectile
             d.velocity *= 0.3f;
             d.velocity += Projectile.velocity;
             d.fadeIn = 1.2f;
-        }*/
-
+        }
         float num190 = 0.1f;
         Projectile.tileCollide = false;
         int num2 = 300;
@@ -106,7 +57,7 @@ public class BacteriumPet : ModProjectile
         bool num202 = num35 > num57;
         if (num35 < num2 && Main.player[Projectile.owner].velocity.Y == 0f && Projectile.position.Y + Projectile.height <= Main.player[Projectile.owner].position.Y + Main.player[Projectile.owner].height && !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
         {
-            Projectile.ai[1] = 0f;
+            //Projectile.ai[1] = 0f;
             if (Projectile.velocity.Y < -6f)
             {
                 Projectile.velocity.Y = -6f;
@@ -203,23 +154,103 @@ public class BacteriumPet : ModProjectile
             }
         }
 
-
-        Projectile.ai[0]++;
-        if (Projectile.ai[0] >= 100 && Projectile.ai[0] <= 150)
+        if (Projectile.velocity.X > 0)
         {
-            if (++Projectile.frameCounter >= 5)
+            if (++Projectile.frameCounter % 5 == 0)
             {
-                if (++Projectile.frame > 5)
+                if (++Projectile.frame > 12)
                 {
-                    Projectile.frame = 0;
+                    Projectile.frame = 6;
                 }
-                Projectile.frameCounter = 0;
-            }
-            if (Projectile.ai[0] == 150)
-            {
-                Projectile.ai[0] = 0;
+                eyeCounter = Projectile.frameCounter / 5;
+                if (eyeCounter > 5)
+                {
+                    eyeCounter = 0;
+                }
+                Projectile.ai[0]++;
+                if (Projectile.ai[0] >= 20 && Projectile.ai[0] <= 30)
+                {
+                    if (Projectile.frameCounter >= 30)
+                    {
+                        Projectile.frameCounter = 0;
+                    }
+                    if (Projectile.ai[0] == 30)
+                    {
+                        Projectile.ai[0] = 0;
+                    }
+                }
             }
         }
-        else Projectile.frame = 0;
+        else if (Projectile.velocity.X < 0)
+        {
+            if (++Projectile.frameCounter % 5 == 0)
+            {
+                if (++Projectile.frame > 6)
+                {
+                    Projectile.frame = 1;
+                }
+                eyeCounter = Projectile.frameCounter / 5;
+                if (eyeCounter > 5)
+                {
+                    eyeCounter = 0;
+                }
+                Projectile.ai[0]++;
+                if (Projectile.ai[0] >= 20 && Projectile.ai[0] <= 30)
+                {
+                    if (Projectile.frameCounter >= 20)
+                    {
+                        Projectile.frameCounter = 0;
+                    }
+                    if (Projectile.ai[0] == 30)
+                    {
+                        Projectile.ai[0] = 0;
+                    }
+                }
+            }
+        }
+        else
+        {
+            Projectile.frame = 0;
+            eyeCounter = 0;
+        }
+    }
+    public override bool PreDraw(ref Color lightColor)
+    {
+        Texture2D texture = ModContent.Request<Texture2D>(Texture + "Eye").Value;
+        Texture2D texBack = ModContent.Request<Texture2D>(Texture).Value;
+
+        Color c = new Color(lightColor.R, lightColor.G, lightColor.B, 255);
+
+        float num138 = (texture.Width - Projectile.width) * 0.5f + Projectile.width * 0.5f;
+        SpriteEffects dir = SpriteEffects.None;
+        if (Projectile.spriteDirection == -1)
+        {
+            dir = SpriteEffects.FlipHorizontally;
+        }
+        float num140 = Projectile.velocity.X * 0.5f;
+        float num141 = Projectile.velocity.Y * 0.5f;
+        Color alpha = Projectile.GetAlpha(c);
+        int num143 = texture.Height / 6;
+        int y11 = num143 * eyeCounter;
+        int main = num143 * Projectile.frame;
+
+        Main.EntitySpriteDraw(texBack, new Vector2(Projectile.position.X - Main.screenPosition.X + num138 + (float)1 - num140,
+           Projectile.position.Y - Main.screenPosition.Y + (float)(Projectile.height / 2) + Projectile.gfxOffY - num141),
+           (Rectangle?)new Rectangle(0, main, texture.Width, num143), alpha, Projectile.rotation,
+           new Vector2(num138 + 1, (float)(Projectile.height / 2)), Projectile.scale, dir, 0f);
+
+        Main.EntitySpriteDraw(texture, new Vector2(Projectile.position.X - Main.screenPosition.X + num138 + (float)1 - num140,
+            Projectile.position.Y - Main.screenPosition.Y + (float)(Projectile.height / 2) + Projectile.gfxOffY - num141),
+            (Rectangle?)new Rectangle(0, y11, texture.Width, num143), alpha, Projectile.rotation,
+            new Vector2(num138 + 1, (float)(Projectile.height / 2)), Projectile.scale, dir, 0f);
+        return false;
+    }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(eyeCounter);
+    }
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        eyeCounter = reader.ReadInt32();
     }
 }
