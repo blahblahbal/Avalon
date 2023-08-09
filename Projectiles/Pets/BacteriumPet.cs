@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Avalon.Buffs.Pets;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,7 +27,7 @@ public class BacteriumPet : ModProjectile
         Projectile.height = 40;
         Projectile.aiStyle = -1;
         Projectile.penetrate = -1;
-        Projectile.timeLeft *= 5;
+        Projectile.timeLeft = 2;
         Projectile.tileCollide = false;
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
@@ -37,6 +38,9 @@ public class BacteriumPet : ModProjectile
     }
     public override void AI()
     {
+        if (Main.player[Projectile.owner].HasBuff(ModContent.BuffType<Bacterium>()))
+            Projectile.timeLeft = 2;
+
         if (Main.rand.NextBool(10))
         {
             Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, 0, 0, 128);
