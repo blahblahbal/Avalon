@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -29,6 +30,13 @@ public static class ClassExtensions
         });
 
         return p;
+    }
+
+    public static Vector2 LengthClamp(this Vector2 vector,float max, float min = 0)
+    {
+        if (vector.Length() > max) return Vector2.Normalize(vector) * max;
+        else if (vector.Length() < min) return Vector2.Normalize(vector) * min;
+        else return vector;
     }
     /// <summary>
     /// Harvests an area using a veinminer algorithm.
