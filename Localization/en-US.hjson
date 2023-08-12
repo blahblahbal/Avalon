@@ -6289,6 +6289,16 @@ Mods: {
 					Master
 					'''
 			}
+
+			SkyBrickPlatform: {
+				DisplayName: Sky Brick Platform
+				Tooltip: ""
+			}
+
+			SkyBrickColumn: {
+				DisplayName: Sky Brick Column
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
