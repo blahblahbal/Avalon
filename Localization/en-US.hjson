@@ -733,11 +733,7 @@ Mods: {
 
 			MinersSword: {
 				DisplayName: Miner's Sword
-				Tooltip:
-					'''
-					Builds up power when not swung
-					Falling increases critical strike chance
-					'''
+				Tooltip: ""
 			}
 
 			PointingLaser: {
@@ -6510,6 +6506,7 @@ Mods: {
 			GreenPigron.DisplayName: Pigron
 			ContagionMimic.DisplayName: Contagion Mimic
 			Rift.DisplayName: Rift
+			DesertTalon.DisplayName: Desert Talon
 		}
 
 		Buffs: {
