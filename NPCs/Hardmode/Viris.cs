@@ -43,7 +43,7 @@ public class Viris : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Giant breeders of the plague, virises use ickslime's materials to create new spawn to help spread the Contagion.")
+            new FlavorTextBestiaryInfoElement("Giant breeders of the plague, Virises use Ickslimes' materials to create new spawn to help spread the Contagion.")
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>

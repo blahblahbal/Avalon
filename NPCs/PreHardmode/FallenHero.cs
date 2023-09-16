@@ -1,5 +1,6 @@
 using System;
 using Avalon.Common;
+using Avalon.Items.Banners;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Terraria;
@@ -44,8 +45,8 @@ public class FallenHero : ModNPC
         NPC.knockBackResist = 0.5f;
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath2;
-        //Banner = NPC.type;
-        //BannerItem = ModContent.ItemType<FallenHeroBanner>();
+        Banner = NPC.type;
+        BannerItem = ModContent.ItemType<FallenHeroBanner>();
     }
 
     //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)

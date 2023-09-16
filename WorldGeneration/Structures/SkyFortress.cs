@@ -792,7 +792,7 @@ public class SkyFortress
                             case 28:
                             case 49:
                             case 50:
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.PearlstoneColumn>();
+                                tile.TileType = (ushort)ModContent.TileType<Tiles.SkyBrickColumn>();
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = false;
                                 tile.HasTile = true;
@@ -895,7 +895,7 @@ public class SkyFortress
                             case 30:
                                 if (confirmPlatforms == 0)
                                     tile.HasTile = false;
-                                WorldGen.PlaceTile(k, l, 19, true, true, -1, 3);
+                                WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.Furniture.SkyBrick.SkyBrickPlatform>(), true, true, -1, 0);
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = false;
                                 break;
@@ -911,7 +911,7 @@ public class SkyFortress
                             case 32:
                                 if (confirmPlatforms == 0)
                                     tile.HasTile = false;
-                                WorldGen.PlaceTile(k, l, 19, true, true, -1, 0);
+                                WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.Furniture.SkyBrick.SkyBrickPlatform>(), true, true, -1, 0);
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = false;
                                 break;
