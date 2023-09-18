@@ -83,11 +83,15 @@ public class DesertBeak : ModNPC
     byte phase1Egg = 1;
     byte phase2Transition = 2;
     byte phase2Circle = 3;
+    byte phase2Dash = 4;
+    byte phase2Grab = 5;
+    byte phase2Egg = 6;
     float FlapMultiplier = 1;
     bool Storming;
     bool Pulsing;
     int afterImageTimer;
     float pulseTimer;
+    float delay;
     public override void AI()
     {
         //Main.NewText("[" + $"{NPC.ai[0]}" + "]" + "[" + $"{NPC.ai[1]}" + "]" + "[" + $"{NPC.ai[2]}" + "]" + " phase: " + $"{phase}", Main.DiscoColor);
@@ -191,8 +195,10 @@ public class DesertBeak : ModNPC
             if (NPC.ai[1] == 260)
             {
                 NPC.ai[1] = Main.rand.Next(-60, 60);
+                int dmg = 44;
+                if (Main.masterMode) dmg = 38;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4,4), 3), ModContent.ProjectileType<VultureEgg>(), 44, 1);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4,4), 3), ModContent.ProjectileType<VultureEgg>(), dmg, 1);
                 NPC.netUpdate = true;
             }
             if (NPC.ai[0] > 1000)
@@ -207,14 +213,14 @@ public class DesertBeak : ModNPC
     }
     public void PhaseTwo(Player Target)
     {
-        if (phase <= phase1Egg) 
+        if (phase <= phase1Egg)
         {
             phase = phase2Transition;
             NPC.ai[0] = 0;
             NPC.ai[1] = 0;
             NPC.netUpdate = true;
         }
-        else if(phase == phase2Transition)
+        else if (phase == phase2Transition)
         {
             NPC.ai[0]++;
             NPC.velocity *= 0.98f;
@@ -242,7 +248,7 @@ public class DesertBeak : ModNPC
                 NPC.netUpdate = true;
             }
         }
-        else if(phase == phase2Circle)
+        else if (phase == phase2Circle)
         {
             NPC.ai[0]++;
             NPC.ai[2]++;
@@ -272,6 +278,106 @@ public class DesertBeak : ModNPC
             else
             {
                 NPC.ai[2] = Main.rand.Next(-100, 0);
+                NPC.ai[3]++;
+            }
+            if (NPC.ai[3] >= 4)
+            {
+                phase = phase2Dash;
+                NPC.ai[0] = 0;
+                NPC.ai[3] = 0;
+            }
+        }
+        else if (phase == phase2Dash)
+        {
+            NPC.ai[0]++;
+            if (NPC.ai[0] % 90 == 0)
+            {
+                afterImageTimer = 30;
+                NPC.velocity = NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2Circular(30, 30)) * 12 * (NPC.ai[0] * 0.001f + 1);
+                NPC.velocity *= 0.98f;
+                //bool withinRange = Vector2.Distance(new Vector2(NPC.Center.X, NPC.position.Y + NPC.height), new Vector2(Target.Center.X, Target.position.Y)) < 150;
+                
+                NPC.ai[0] = 0;
+            }
+            if (Target.getRect().Intersects(NPC.getRect()))
+            {
+                Target.velocity.X = NPC.velocity.X;
+                phase = phase2Grab;
+                NPC.ai[1] = 0;
+                return;
+            }
+
+        }
+        else if (phase == phase2Grab)
+        {
+            int grabOffset = (int)NPC.Center.Y + 50;
+            NPC.velocity.X *= 0.97f;
+            NPC.ai[1]++;
+            delay++;
+            if (NPC.ai[1] < 70)
+            {
+                Target.velocity.X = NPC.velocity.X;
+                NPC.height *= (int)1.5;
+                if (delay == 30)
+                {
+                    NPC.damage = 8;
+                    delay = 0;
+                }
+                NPC.velocity.Y = -12;
+                Target.Center = new Vector2(NPC.Center.X, grabOffset);
+
+            }
+            else if (NPC.ai[1] >= 70 && NPC.ai[1] < 105)
+            {
+                Target.velocity.Y += 0.1f;
+                NPC.velocity.Y += 0.1f;
+                delay = 0;
+            }
+            if (NPC.ai[1] >= 150)
+            {
+                
+                
+                if (NPC.ai[1] < 250)
+                {
+                    afterImageTimer = 30;
+                    NPC.velocity = NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2Circular(30, 30)) * 12 * (NPC.ai[1] * 0.001f + 1);
+                }
+                else if (NPC.ai[1] == 250)
+                {
+                    NPC.ai[1] = -1;
+                    phase = phase2Egg;
+                    delay = 0;
+                }
+            }
+        }
+
+        else if (phase == phase2Egg)
+        {
+            NPC.ai[0]++;
+            NPC.ai[1]++;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0, -100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f;
+            NPC.velocity = NPC.velocity.LengthClamp(8);
+
+            if (NPC.ai[1] > 200)
+            {
+                NPC.velocity *= 0.9f;
+            }
+            if (NPC.ai[1] == 260)
+            {
+                NPC.ai[1] = Main.rand.Next(-60, 60);
+                int dmg = 44;
+                if (Main.masterMode) dmg = 38;
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4, 4), 3), ModContent.ProjectileType<VultureEgg>(), dmg, 1);
+                NPC.netUpdate = true;
+            }
+            if (NPC.ai[0] > 500)
+            {
+                NPC.ai[1] = -1;
+                NPC.ai[0] = 0;
+                phase = phase2Circle;
+                NPC.TargetClosest();
+                NPC.netUpdate = true;
             }
         }
     }

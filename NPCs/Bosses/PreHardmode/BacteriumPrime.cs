@@ -89,11 +89,11 @@ public class BacteriumPrime : ModNPC
     {
         if (!NPC.downedBoss2)
         {
-            NPC.downedBoss2 = true;
+            NPC.SetEventFlagCleared(ref NPC.downedBoss2, -1);
         }
         if (!ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime)
         {
-            ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime = true;
+            NPC.SetEventFlagCleared(ref ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime, -1);
         }
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
