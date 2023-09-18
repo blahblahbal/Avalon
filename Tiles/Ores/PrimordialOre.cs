@@ -8,6 +8,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
 namespace Avalon.Tiles.Ores;
 
@@ -277,7 +278,7 @@ public class PrimordialOre : ModTile
             zero = Vector2.Zero;
         }
         //Color[] RainbowColors = { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
-        Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors, 100, i * 10 + j * 10);
+        Color Skittles = GetRainbow(i, j);
 
         spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default, 1f, SpriteEffects.None, 0f) ;
 
@@ -286,11 +287,19 @@ public class PrimordialOre : ModTile
         Skittles.A = 0;
         spriteBatch.Draw(texture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Skittles, 0f, default, 1f, SpriteEffects.None, 0f);
     }
-
+    static Color GetRainbow(int i, int j)
+    {
+        //if (WorldGen.currentWorldSeed == "for the worthy" || Terraria.WorldGen.currentWorldSeed == "fortheworthy")
+        //{
+        //    return Color.Lerp(Color.Red, new Color(16, 16, 16), (float)Math.Sin(Main.timeForVisualEffects * 0.05f + i * 0.2) + (float)Math.Cos(Main.timeForVisualEffects * 0.03f + j * 0.2f));
+        //}
+        //else
+            return ClassExtensions.CycleThroughColors(RainbowColors, 100, i * 10 + j * 10);
+    } 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         //Color[] RainbowColors = { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
-        Color Skittles = ClassExtensions.CycleThroughColors(RainbowColors, 100, i * 10 + j * 10);
+        Color Skittles = GetRainbow(i, j);
 
         Skittles = Color.Lerp(Skittles, new Color(Skittles.R + Main.DiscoColor.R, Skittles.G + Main.DiscoColor.G, Skittles.B + Main.DiscoColor.B), (float)Math.Sin((Main.timeForVisualEffects * 0.02f) + i / 10f - j / 20f)) * 1f;
 
