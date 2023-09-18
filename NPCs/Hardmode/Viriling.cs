@@ -42,7 +42,7 @@ public class Viriling : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Unfinished creatures of the Contagion, intelligent enough to avenge their parent from day one of their existance.")
+            new FlavorTextBestiaryInfoElement("Unfinished creatures of the Contagion, intelligent enough to avenge their parent from day one of their existence.")
         });
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)

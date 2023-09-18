@@ -1,4 +1,6 @@
+using Avalon.Items.Placeable.Furniture;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -25,5 +27,17 @@ class YellowIceBlock : ModItem
         Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+    }
+    public override void AddRecipes()
+    {
+        Recipe.Create(ItemID.IceTorch, 3)
+            .AddIngredient(ItemID.Torch, 3)
+            .AddIngredient(this)
+            .Register();
+
+        Recipe.Create(ModContent.ItemType<ContagionTorch>(), 3)
+            .AddIngredient(ItemID.Torch, 3)
+            .AddIngredient(this)
+            .Register();
     }
 }

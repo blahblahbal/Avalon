@@ -1,5 +1,6 @@
 using System;
 using Avalon.Common;
+using Avalon.Items.Banners;
 using Avalon.Items.Material;
 using Avalon.Projectiles.Hostile;
 using Microsoft.Xna.Framework;
@@ -32,8 +33,8 @@ public class BloodshotEye : ModNPC
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath6;
         NPC.buffImmune[BuffID.Confused] = true;
-        //Banner = NPC.type;
-        //BannerItem = ModContent.ItemType<BloodshotEyeBanner>();
+        Banner = NPC.type;
+        BannerItem = ModContent.ItemType<BloodshotEyeBanner>();
     }
     public override void AI()
     {
@@ -61,10 +62,10 @@ public class BloodshotEye : ModNPC
             NPC.ai[0] = NPC.ai[2] * 10;
             NPC.ai[1] = 0;
             NPC.aiStyle = 2;
-            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(7, 9), 0).RotatedBy(NPC.Center.AngleTo(Main.player[NPC.target].Center)), ModContent.ProjectileType<BloodshotShot>(), NPC.damage, 0, 255);
+            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(7, 9), 0).RotatedBy(NPC.Center.AngleTo(Main.player[NPC.target].Center)), ModContent.ProjectileType<BloodshotShot>(), 18, 0, 255);
             for (int i = 0; i < 2; i++)
             {
-                int p = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4, 7), 0).RotatedBy(NPC.Center.AngleTo(Main.player[NPC.target].Center)).RotateRandom(MathHelper.Pi / 32), ModContent.ProjectileType<BloodshotShot>(), NPC.damage, 0, 255);
+                int p = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4, 7), 0).RotatedBy(NPC.Center.AngleTo(Main.player[NPC.target].Center)).RotateRandom(MathHelper.Pi / 32), ModContent.ProjectileType<BloodshotShot>(), 18, 0, 255);
                 Main.projectile[p].Size = new Vector2(8);
             }
             SoundEngine.PlaySound(SoundID.Item17, NPC.Center);

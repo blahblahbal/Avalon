@@ -34,7 +34,8 @@ public class Viris : ModNPC
         NPC.knockBackResist = 0.6f;
         NPC.HitSound = SoundID.NPCHit18;
         NPC.DeathSound = SoundID.NPCDeath21;
-        BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
+        //Banner = NPC.type;
+        //BannerItem = ModContent.ItemType<Items.Banners.VirisBanner>();
         NPC.noTileCollide = true;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
         //DrawOffsetY = 10;
@@ -43,7 +44,7 @@ public class Viris : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Giant breeders of the plague, virises use ickslime's materials to create new spawn to help spread the Contagion.")
+            new FlavorTextBestiaryInfoElement("Giant breeders of the plague, Virises use Ickslimes' materials to create new spawn to help spread the Contagion.")
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
