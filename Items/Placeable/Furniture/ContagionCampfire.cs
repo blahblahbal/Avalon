@@ -19,12 +19,12 @@ class ContagionCampfire : ModItem
         Item.autoReuse = true;
         Item.maxStack = 9999;
         Item.consumable = true;
-        Item.createTile = (ModContent.TileType<Tiles.Furniture.ContagionCampfire>());
+        Item.createTile = ModContent.TileType<Tiles.Furniture.ContagionCampfire>();
         Item.width = 12;
         Item.height = 12;
     }
     public override void AddRecipes()
     {
-        CreateRecipe(33).AddRecipeGroup("Wood", 10).AddIngredient(ModContent.ItemType<ContagionTorch>(), 5).Register();
+        CreateRecipe(1).AddRecipeGroup("Wood", 10).AddIngredient(ModContent.ItemType<ContagionTorch>(), 5).Register();
     }
 }

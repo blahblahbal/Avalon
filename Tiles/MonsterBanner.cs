@@ -78,7 +78,7 @@ public class MonsterBanner : ModTile
                 //    t = ModContent.NPCType<NPCs.Dragonfly>();
                 //    break;
                 case 9:
-                    t = ModContent.NPCType<NPCs.Hardmode.Blaze>();
+                    t = ModContent.NPCType<Blaze>();
                     break;
                 //case 10:
                 //    t = ModContent.NPCType<NPCs.ArmoredHellTortoise>();
@@ -92,9 +92,9 @@ public class MonsterBanner : ModTile
                 //case 15:
                 //    t = ModContent.NPCType<NPCs.Cougher>();
                 //    break;
-                //case 16:
-                //    t = ModContent.NPCType<NPCs.Bactus>();
-                //    break;
+                case 16:
+                    t = ModContent.NPCType<NPCs.PreHardmode.Bactus>();
+                    break;
                 //case 17:
                 //    t = ModContent.NPCType<NPCs.Ickslime>();
                 //    break;
@@ -200,9 +200,9 @@ public class MonsterBanner : ModTile
                 //case 55:
                 //    t = ModContent.NPCType<NPCs.CursedScepter>();
                 //    break;
-                //case 56:
-                //    t = ModContent.NPCType<NPCs.EctoHand>();
-                //    break;
+                case 56:
+                    t = ModContent.NPCType<EctoHand>();
+                    break;
                 //case 57:
                 //    t = ModContent.NPCType<NPCs.CloudBat>();
                 //    break;

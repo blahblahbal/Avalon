@@ -85,7 +85,17 @@ public class BacteriumPrime : ModNPC
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
         //bossBag = ModContent.ItemType<Items.BossBags.BacteriumPrimeBossBag>();
     }
-
+    public override void OnKill()
+    {
+        if (!NPC.downedBoss2)
+        {
+            NPC.downedBoss2 = true;
+        }
+        if (!ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime)
+        {
+            ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime = true;
+        }
+    }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacteriumPrimeTrophy>(), 10));
@@ -93,10 +103,6 @@ public class BacteriumPrime : ModNPC
         npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BacteriumPrimeBossBag>()));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 15, 41));
         npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BacteriumPrimeRelic>()));
-        if (!ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime)
-        {
-            ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime = true;
-        }
     }
     const float Phase2Health = 0.6f;
     const float Phase2part2Health = 0.3f;

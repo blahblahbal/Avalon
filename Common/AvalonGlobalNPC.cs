@@ -11,6 +11,7 @@ using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Items.Other;
 using Avalon.Items.Placeable.Painting;
+using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Potions.Other;
 using Avalon.Items.Tokens;
 using Avalon.Items.Weapons.Magic.PreHardmode;
@@ -101,6 +102,15 @@ public class AvalonGlobalNPC : GlobalNPC
             {
                 shopCustomPrice = Item.buyPrice(0, 4),
             });
+        }
+        if (shop.NpcType == NPCID.Dryad && ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion)
+        {
+            if (shop.TryGetEntry(ItemID.CorruptSeeds, out NPCShop.Entry entry))
+            {
+                shop.InsertBefore(entry, new Item(ModContent.ItemType<ContagionSeeds>()), Condition.BloodMoon);
+                entry.Disable();
+            }
+            
         }
     }
     /// <summary>

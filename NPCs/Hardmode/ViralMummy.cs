@@ -30,6 +30,7 @@ public class ViralMummy : ModNPC
         NPC.CloneDefaults(NPCID.DarkMummy);
         AIType = NPCID.DarkMummy;
         AnimationType = NPCID.DarkMummy;
+        Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.ViralMummyBanner>();
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionDesert>().Type };
     }

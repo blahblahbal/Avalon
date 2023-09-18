@@ -52,9 +52,12 @@ public class SnotOrb : ModTile
     {
         if (Main.netMode != NetmodeID.MultiplayerClient && !WorldGen.noTileActions)
         {
-            if (WorldGen.genRand.NextBool(2))
+            if (NPC.downedBoss2)
             {
-                WorldGen.spawnMeteor = true;
+                if (WorldGen.genRand.NextBool(2))
+                {
+                    WorldGen.spawnMeteor = true;
+                }
             }
             int num3 = Main.rand.Next(4);
             if (!WorldGen.shadowOrbSmashed)
