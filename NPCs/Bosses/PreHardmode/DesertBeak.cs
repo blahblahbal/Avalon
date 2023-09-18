@@ -1,10 +1,12 @@
 using System;
 using System.IO;
+using System.Net.Http.Headers;
 using Avalon.Common;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;
+using Avalon.Projectiles.Hostile.DesertBeak;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,64 +25,39 @@ public class DesertBeak : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[NPC.type] = 3;
+        Main.npcFrameCount[NPC.type] = 8;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
-    }
-    private enum Phase
-    {
-        Spawn,
-        Grab,
-        Dive,
-        Minion_and_Projectile,
-        ProjectileCircle,
-        SandStormProjectile,
-        TripleShotProjectileTwo,
-        DivePhaseTwo
-    }
-    Phase modePartOne = Phase.Spawn;
-    public float ModeTimer
-    {
-        get => NPC.ai[0];
-        set => NPC.ai[0] = value;
-    }
-    public float DiveTimer
-    {
-        get => NPC.ai[1];
-        set => NPC.ai[1] = value;
+        NPCID.Sets.TrailCacheLength[Type] = 16;
+        NPCID.Sets.TrailingMode[Type] = 7;
     }
     public override void SetDefaults()
     {
         NPC.TargetClosest();
-        Player player = Main.player[NPC.target];
-
         NPC.damage = 65;
         NPC.boss = true;
         NPC.noTileCollide = true;
         NPC.lifeMax = 3650;
         NPC.defense = 30;
         NPC.noGravity = true;
-        NPC.width = 130;
+        NPC.width = 64;
         NPC.aiStyle = -1;
         NPC.npcSlots = 100f;
         NPC.value = 50000f;
         NPC.timeLeft = 22500;
-        NPC.height = 78;
+        NPC.height = 64;
         NPC.knockBackResist = 0f;
         NPC.HitSound = SoundID.NPCHit28;
         NPC.DeathSound = SoundID.NPCDeath31;
         Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeak") : MusicID.Boss4;
-        NPC.Center = player.Center + new Vector2(300, -600);
-        NPC.scale = 1.3f;
-        DiveTimer = 0;
-
+        NPC.scale = 1f;
+        phase = 0;
+        FlapMultiplier = 1;
     }
-
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.66f * bossAdjustment);
-        NPC.damage = (int)(NPC.damage * 0.58f);
-    }
-
+    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+    //{
+    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.66f * bossAdjustment);
+    //    NPC.damage = (int)(NPC.damage * 0.58f);
+    //}
     public override void OnKill()
     {
         Terraria.GameContent.Events.Sandstorm.StopSandstorm();
@@ -89,7 +66,6 @@ public class DesertBeak : ModNPC
             NPC.SetEventFlagCleared(ref ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak, -1);
         }
     }
-
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ItemID.SandBlock, 1, 22, 55));
@@ -102,769 +78,232 @@ public class DesertBeak : ModNPC
             ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<TomeoftheDistantPast>(), 3));
         npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<DesertBeakBossBag>()));
     }
-    int winddir, grabOffset, divecount, divemax, eggcount, eggtotal;
-    float posoffset, heightoffset, dashVelocity, delay, maxTime, diveDelay, acceleration, playerMovementCounter, oldPlayerPos;
-    bool istotheRight, isLastDive, eggDrop, afterImage, verticalDive;
-    bool genDiveMax = true;
-    Vector2 direction;
-    public override void SendExtraAI(BinaryWriter writer)
-    {
-        writer.Write(heightoffset);
-        writer.Write(posoffset);
-        writer.Write(dashVelocity);
-        writer.Write(divemax);
-        writer.Write(isLastDive);
-        writer.Write(eggcount);
-        writer.Write(eggtotal);
-        writer.Write(eggDrop);
-        writer.Write(afterImage);
-
-    }
-    public override void ReceiveExtraAI(BinaryReader reader)
-    {
-        heightoffset = reader.ReadInt32();
-        posoffset = reader.ReadInt32();
-        dashVelocity = reader.ReadInt32();
-        divemax = reader.ReadInt32();
-        isLastDive = reader.ReadBoolean();
-        eggcount = reader.ReadInt32();
-        eggtotal = reader.ReadInt32();
-        eggDrop = reader.ReadBoolean();
-        afterImage = reader.ReadBoolean();
-    }
-
+    byte phase;
+    byte phase1Feather = 0;
+    byte phase1Egg = 1;
+    byte phase2Transition = 2;
+    byte phase2Circle = 3;
+    float FlapMultiplier = 1;
+    bool Storming;
+    bool Pulsing;
+    int afterImageTimer;
+    float pulseTimer;
     public override void AI()
     {
+        //Main.NewText("[" + $"{NPC.ai[0]}" + "]" + "[" + $"{NPC.ai[1]}" + "]" + "[" + $"{NPC.ai[2]}" + "]" + " phase: " + $"{phase}", Main.DiscoColor);
 
-        afterImage = true;
-
-        Player player = Main.player[NPC.target];
-        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].active)
+        if (pulseTimer < MathHelper.Pi && Pulsing)
         {
-            NPC.TargetClosest();
-        }
-        if (Main.player[NPC.target].dead)
-        {
-            Terraria.GameContent.Events.Sandstorm.StopSandstorm();
-            NPC.velocity.Y -= 0.04f;
-            if (NPC.timeLeft > 10)
-            {
-                NPC.timeLeft = 10;
-                return;
-            }
-        }
-        istotheRight = NPC.Center.X > player.Center.X;
-        NPC.dontTakeDamage = NPC.alpha > 200;
-        if (NPC.life >= (int)NPC.lifeMax * 0.45f && !Main.player[NPC.target].dead)
-        {
-            // spawning
-            if (modePartOne == Phase.Spawn)
-            {
-                NPC.TargetClosest();
-                NPC.spriteDirection = NPC.direction;
-                //NPC.rotation = NPC.velocity.X * 0.1f;
-                NPC.velocity = NPC.DirectionTo(player.Center + new Vector2(0, -300));
-                ModeTimer++;
-                if (ModeTimer > 100)
-                {
-                    NPC.alpha += 20;
-                }
-                if (ModeTimer >= 150)
-                {
-                    ModeTimer = 0;
-                    DiveTimer = 0;
-                    eggcount = 1;
-                    modePartOne = Phase.Dive;
-                    NPC.netUpdate = true;
-                    SoundEngine.PlaySound(SoundID.NPCHit28, NPC.position);
-                    NPC.velocity = new Vector2(0, 0);
-                    NPC.Center = player.Center + new Vector2(-500, -500);
-                    //dive = Main.rand.Next(3);
-
-                }
-            }
-            if (modePartOne == Phase.Dive)
-            {
-                NPC.TargetClosest(false);
-                NPC.damage = 0;
-                NPC.alpha = 0;
-                if (genDiveMax) divemax = Main.rand.Next(2, 4);//Boolean so it only gens a divemax once per Dive;
-                                                               //Checks if the amount of dives has reached the randomly generated maximum amount, isLastDive is used throughout the funtion to determine if egg projectiles will be spawned
-                                                               //Splits the time variable into equal parts depending on the amount of projectiles and returns true at equidistant points;
-                if (DiveTimer == 0)//This is where all of the pre-dive calculations are set
-                {
-                    eggtotal = Main.rand.Next(3, 6);
-                    posoffset = -1500 + Main.rand.Next(-100, 100);
-                    dashVelocity = 7;//Base velocity
-                    if (istotheRight == true)
-                    {
-                        posoffset *= -1;//Checks if the NPC is to the right of the player and changes the Velocity and Horizontal offset accordingly.
-                        dashVelocity *= -1;
-                    }
-                    heightoffset = player.Center.Y - (600 - Main.rand.NextFloat(-20, 40));//Randomly generates heights for the swoops, changing the values to be more in the postive range inscreases the general depth.
-                    isLastDive = divecount == divemax;
-                    if (isLastDive)
-                    {
-                        heightoffset += 100;//Ofsetting because the egg-dropping dive is more linear than the normal one
-                        posoffset *= 0.5f;//NPC doesnt show up on screen if posoffset isnt halved during the egg dropping swoop 
-                        dashVelocity += 5;
-                        maxTime = 270;
-                        diveDelay = 0f;
-                        eggcount = 1;
-                    }
-                    else
-                    {
-                        diveDelay = Main.rand.Next(0, 100);
-                        maxTime = 150 + diveDelay;
-                        acceleration = Main.rand.NextFloat(0.15f, 0.19f);
-                        oldPlayerPos = player.Center.X;
-                    }
-                    if (playerMovementCounter >= 480)
-                    {
-                        verticalDive = true;
-                        oldPlayerPos = 0f;
-                        playerMovementCounter = 0;
-                    }
-                    Vector2 neededstartpos = new Vector2(player.Center.X + posoffset, heightoffset);//Uses the offsets to generate a needed position so that horizontal position of minimum == player horizontal position
-                    if (!verticalDive) NPC.Center = neededstartpos;//Need to somehow implement a velocity so the NPC smoothly travels to the point instead of teleporting
-                    else
-                    {
-                        Main.NewText("Desert Beak easily spots " + player.name + " due to them not moving!");
-                        float dist = (float)Math.Tan(MathHelper.ToRadians(45)) * 500;
-                        NPC.Center = player.Center + new Vector2(istotheRight ? dist : -dist, -500);
-                        direction = NPC.DirectionTo(player.Center);
-                    }
-                    NPC.netUpdate = true;
-
-                }
-                eggDrop = isLastDive && DiveTimer == (Math.Floor(((double)(maxTime * 0.5f) / eggtotal) * eggcount));
-
-                if (DiveTimer >= 0 && DiveTimer <= maxTime)
-                {
-                    NPC.spriteDirection = NPC.velocity.X < 0 ? -1 : 1;//Manually setting the Sprite direction using the horizontal velocity instead of the direction due to the wonkiness of the shape
-                    if (!isLastDive && !verticalDive)
-                    {
-                        if (DiveTimer < maxTime / 2)
-                        {
-                            dashVelocity += NPC.velocity.X <= 0 ? acceleration * -1 : acceleration; //Acelleration for first half of the arc, switches depending on direction;
-                        }
-                        else if (DiveTimer >= maxTime / 2)
-                        {
-                            dashVelocity += NPC.velocity.X <= 0 ? acceleration : acceleration * -1;//Same as that^ except its switched around;
-                        }
-                    }
-                    if (verticalDive)
-                    {
-                        NPC.damage = 75;
-                        NPC.velocity = direction * 20;
-                    }
-                    if (eggDrop)
-                    {
-                        SoundEngine.PlaySound(SoundID.Item5, NPC.position);
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 5).RotatedByRandom(5), ModContent.ProjectileType<Projectiles.Hostile.VultureEgg>(), 30, 0, player.whoAmI);//Generate projectile
-                        eggcount++;
-                    }
-                    if (oldPlayerPos == player.Center.X)
-                    {
-                        playerMovementCounter++;
-                    }
-                    else
-                    {
-                        playerMovementCounter = 0;
-                    }
-                    oldPlayerPos = player.Center.X;
-                    int heightmodifier = isLastDive ? 2 : 10;//Both heightmodifier and periodmodifier are modifiers for the lower cosine function depending on which type of swoop is done;The higher the height modifer the taller the waves
-                    double periodmodifier = isLastDive ? MathHelper.PiOver2 * 3 : 1;//The Higher the periodmodifier value the more narrower the wavelengths
-                    if (!verticalDive) NPC.velocity = new Vector2(dashVelocity, (float)Math.Cos(MathHelper.ToRadians(DiveTimer * (float)periodmodifier)) * heightmodifier);// Time is used as the X value for the cosine function as it simulates degrees.
-
-                    if (NPC.velocity.X > 0) NPC.rotation = NPC.velocity.ToRotation();
-                    else NPC.rotation = NPC.velocity.ToRotation() + (float)Math.PI;
-
-                    if (Vector2.Distance(NPC.Center, player.Center) < 50 && !verticalDive)
-                    {//Homemade hill-billy collision function used to detect if the two npcs touch each other.
-                        player.velocity.X = NPC.velocity.X;
-                        modePartOne = Phase.Grab;
-                        verticalDive = false;
-                    }
-                    DiveTimer++;
-                    NPC.netUpdate = true;
-                }
-                else if (DiveTimer >= maxTime)
-                {
-                    verticalDive = false;
-                    DiveTimer = 0;
-                    genDiveMax = false;
-                    divecount++;
-                    if (isLastDive == true)
-                    {
-                        genDiveMax = true;
-                        divecount = 0;
-                        modePartOne = Phase.Minion_and_Projectile;
-                    }
-
-                }
-            }
-            if (modePartOne == Phase.Grab)
-            {
-                grabOffset = (int)NPC.Center.Y + 50;
-                NPC.velocity.X *= 0.97f;//increasing the value increases the time taken for the npc to slow down, 0.97 seems to be the sweet spot
-                ModeTimer++;
-                delay++;
-                if (ModeTimer < 100)
-                {
-                    player.velocity.X = NPC.velocity.X;
-                    NPC.height *= (int)1.5;
-                    if (delay == 30)
-                    {
-                        NPC.damage = 8;
-                        delay = 0;
-                    }
-                    NPC.velocity.Y = -10;
-                    player.Center = new Vector2(NPC.Center.X, grabOffset);
-
-                }
-                else if (ModeTimer >= 100 && ModeTimer < 125)
-                {
-                    player.velocity.Y += 0.1f;
-                    NPC.velocity.Y += 0.1f;
-                    delay = 0;
-                }
-                if (ModeTimer >= 225)
-                {
-                    ModeTimer = 0;
-                    istotheRight = true;
-                    DiveTimer = 0;
-                    modePartOne = Phase.Dive;
-                    isLastDive = false;
-                    delay = 0;
-
-                }
-                NPC.netUpdate = true;
-            }
-            if (modePartOne == Phase.Minion_and_Projectile)
-            {//UNFINISHED
-                NPC.TargetClosest();
-                NPC.spriteDirection = NPC.direction;
-
-                if (player.position.X < NPC.position.X)
-                {
-                    if (NPC.velocity.X > -8) NPC.velocity.X -= 0.22f;
-                }
-                if (player.position.X > NPC.position.X)
-                {
-                    if (NPC.velocity.X < 8) NPC.velocity.X += 0.22f;
-                }
-                if (player.position.Y < NPC.position.Y + 300)
-                {
-                    if (NPC.velocity.Y < 0)
-                    {
-                        if (NPC.velocity.Y > -4) NPC.velocity.Y -= 0.8f;
-                    }
-                    else NPC.velocity.Y -= 0.6f;
-                    if (NPC.velocity.Y < -4) NPC.velocity.Y = -4;
-                }
-                if (player.position.Y > NPC.position.Y + 300)
-                {
-                    if (NPC.velocity.Y > 0)
-                    {
-                        if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.8f;
-                    }
-                    else NPC.velocity.Y += 0.6f;
-                    if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
-                }
-
-                //if (NPC.velocity.X < 0) NPC.rotation = NPC.velocity.ToRotation() + (float)Math.PI;
-                //else NPC.rotation = NPC.velocity.ToRotation();
-                //Vector2 perturbed = Vector2.Distance(NPC.Center, player.Center) >= 150 ? Vector2.One * 6 : Vector2.One;
-                //direction = NPC.DirectionTo(player.Center);
-                //NPC.velocity = Vector2.Distance(NPC.Center, player.Center) >= 300 ? direction * 12 : perturbed * direction;
-
-                ModeTimer++;
-                NPC.ai[2]++;
-                if (NPC.ai[2] > 90)
-                {
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Normalize(NPC.Center - player.Center) * 7f,
-                        ModContent.ProjectileType<Projectiles.Hostile.DesertBeakFeather>(), 42, 3f);
-                    NPC.ai[2] = 0;
-                }
-                if (ModeTimer > 400)
-                {
-                    modePartOne = Phase.Dive;
-                    ModeTimer = 0;
-                }
-                /*ModeTimer +=2;
-                if(ModeTimer < 200)
-                {
-                NPC.velocity = NPC.DirectionTo(player.Center + new Vector2(300, -300))*10;
-                }*/
-            }
+            pulseTimer += 0.08f;
         }
         else
         {
-
-            //NPC.alpha = 250;
-            //placeholder so boss doesnt despawn
-            Terraria.GameContent.Events.Sandstorm.StartSandstorm();
-            NPC.TargetClosest();
-            if (ModeTimer < 500)
-            {
-                NPC.spriteDirection = NPC.direction;
-
-                if (player.position.X < NPC.position.X)
-                {
-                    if (NPC.velocity.X > -8) NPC.velocity.X -= 0.22f;
-                }
-                if (player.position.X > NPC.position.X)
-                {
-                    if (NPC.velocity.X < 8) NPC.velocity.X += 0.22f;
-                }
-                if (player.position.Y < NPC.position.Y + 300)
-                {
-                    if (NPC.velocity.Y < 0)
-                    {
-                        if (NPC.velocity.Y > -4) NPC.velocity.Y -= 0.8f;
-                    }
-                    else NPC.velocity.Y -= 0.6f;
-                    if (NPC.velocity.Y < -4) NPC.velocity.Y = -4;
-                }
-                if (player.position.Y > NPC.position.Y + 300)
-                {
-                    if (NPC.velocity.Y > 0)
-                    {
-                        if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.8f;
-                    }
-                    else NPC.velocity.Y += 0.6f;
-                    if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
-                }
-            }
-            ModeTimer++;
-            if (ModeTimer < 200)
-            {
-                modePartOne = Phase.ProjectileCircle;
-            }
-            else if (ModeTimer >= 200 && ModeTimer <= 440)
-            {
-                modePartOne = Phase.SandStormProjectile;
-            }
-            else if (ModeTimer > 440 && ModeTimer < 500)
-            {
-                modePartOne = Phase.TripleShotProjectileTwo;
-            }
-            else if (ModeTimer >= 500 && ModeTimer < 760)
-            {
-                modePartOne = Phase.DivePhaseTwo;
-            }
-            else ModeTimer = 0;
-
-            if (modePartOne == Phase.ProjectileCircle)
-            {
-                if (ModeTimer % (Main.expertMode || Main.masterMode ? 50 : 100) == 0)
-                {
-                    Vector2 targetPosition = player.position;
-                    Vector2 position = NPC.Center;
-                    Vector2 direction = targetPosition - position;
-                    position += Vector2.Normalize(direction) * 5f;
-                    Vector2 perturbedSpeed = direction * 0.2f;
-
-                    int NumProjectiles = (Main.expertMode || Main.masterMode) ? 30 : 20;
-                    float rotation = MathHelper.ToRadians(180);
-
-                    for (int i = 0; i < NumProjectiles; i++)
-                    {
-                        Vector2 newVelocity = perturbedSpeed.RotatedBy(MathHelper.Lerp(-rotation, rotation, i / (NumProjectiles - 1f)));
-
-                        int dmg = 30;
-                        if (Main.expertMode) dmg = 22;
-                        if (Main.masterMode) dmg = 16;
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, newVelocity * 0.1f, ModContent.ProjectileType<Projectiles.Hostile.DesertBeakFeather>(), dmg, 0, player.whoAmI);
-                    }
-                }
-            }
-            else if (modePartOne == Phase.SandStormProjectile)
-            {
-                if ((ModeTimer - 200) % 60 == 0)
-                {
-                    float speed = (Main.expertMode || Main.masterMode ? 14f : 11f);
-                    if (NPC.Center.X > player.Center.X)
-                    {
-                        Vector2 position = NPC.Center;
-                        const int NumProjectiles = 1;
-
-                        for (int i = 0; i < NumProjectiles; i++)
-                        {
-                            Projectile p = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, Vector2.Normalize(player.Center - NPC.Center) * speed, ModContent.ProjectileType<Projectiles.Hostile.DesertBeakSandstorm>(), 10, 10, player.whoAmI);
-                        }
-                    }
-                    else
-                    {
-                        Vector2 position = NPC.Center;
-                        const int NumProjectiles = 1;
-
-                        for (int i = 0; i < NumProjectiles; i++)
-                        {
-                            Projectile p = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, Vector2.Normalize(player.Center - NPC.Center) * speed, ModContent.ProjectileType<Projectiles.Hostile.DesertBeakSandstorm>(), 10, 10, player.whoAmI);
-                        }
-                    }
-
-                    SoundEngine.PlaySound(SoundID.Item82, NPC.position);
-                }
-            }
-            else if (modePartOne == Phase.TripleShotProjectileTwo)
-            {
-                if (ModeTimer % 40 == 0)
-                {
-                    SoundEngine.PlaySound(SoundID.Item64, NPC.position);
-
-                    Vector2 targetPosition = player.position;
-                    Vector2 position = NPC.Center;
-                    Vector2 direction = targetPosition - position;
-                    position += Vector2.Normalize(direction) * 2f;
-                    Vector2 perturbedSpeed = direction * 0.27f;
-
-                    const int NumProjectiles = 3;
-                    float rotation = MathHelper.ToRadians(Main.rand.Next(15, 35));
-
-                    for (int i = 0; i < NumProjectiles; i++)
-                    {
-                        Vector2 newVelocity = perturbedSpeed.RotatedBy(MathHelper.Lerp(-rotation, rotation, i / (NumProjectiles - 1f)));
-
-                        int dmg = 30;
-                        if (Main.expertMode) dmg = 22;
-                        if (Main.masterMode) dmg = 16;
-                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, newVelocity * 0.1f, ModContent.ProjectileType<Projectiles.Hostile.DesertBeakFeather>(), dmg, 0, player.whoAmI);
-                    }
-                }
-            }
-            else if (modePartOne == Phase.DivePhaseTwo)
-            {
-                NPC.TargetClosest(false);
-                NPC.damage = 0;
-                NPC.alpha = 0;
-                if (genDiveMax) divemax = Main.rand.Next(4, 7);//Boolean so it only gens a divemax once per Dive;
-                                                               //Checks if the amount of dives has reached the randomly generated maximum amount, isLastDive is used throughout the funtion to determine if egg projectiles will be spawned
-                                                               //Splits the time variable into equal parts depending on the amount of projectiles and returns true at equidistant points;
-                if (DiveTimer == 0)//This is where all of the pre-dive calculations are set
-                {
-                    eggtotal = Main.rand.Next(3, 6);
-                    posoffset = -1500 + Main.rand.Next(-100, 100);
-                    dashVelocity = 10;//Base velocity
-                    if (istotheRight == true)
-                    {
-                        posoffset *= -1;//Checks if the NPC is to the right of the player and changes the Velocity and Horizontal offset accordingly.
-                        dashVelocity *= -1;
-                    }
-                    heightoffset = player.Center.Y - (600 - Main.rand.NextFloat(-20, 40));//Randomly generates heights for the swoops, changing the values to be more in the postive range inscreases the general depth.
-                    isLastDive = divecount == divemax;
-                    if (isLastDive)
-                    {
-                        heightoffset += 100;//Ofsetting because the egg-dropping dive is more linear than the normal one
-                        posoffset *= 0.5f;//NPC doesnt show up on screen if posoffset isnt halved during the egg dropping swoop 
-                        dashVelocity += 5;
-                        maxTime = 270;
-                        diveDelay = 0f;
-                        eggcount = 1;
-                    }
-                    else
-                    {
-                        diveDelay = Main.rand.Next(0, 100);
-                        maxTime = 150 + diveDelay;
-                        acceleration = Main.rand.NextFloat(0.15f, 0.19f);
-                        oldPlayerPos = player.Center.X;
-                    }
-                    if (playerMovementCounter >= 480)
-                    {
-                        verticalDive = true;
-                        oldPlayerPos = 0f;
-                        playerMovementCounter = 0;
-                    }
-                    Vector2 neededstartpos = new Vector2(player.Center.X + posoffset, heightoffset);//Uses the offsets to generate a needed position so that horizontal position of minimum == player horizontal position
-                    if (!verticalDive) NPC.Center = neededstartpos;//Need to somehow implement a velocity so the NPC smoothly travels to the point instead of teleporting
-                    else
-                    {
-                        Main.NewText("Desert Beak easily spots " + player.name + " due to them not moving!");
-                        float dist = (float)Math.Tan(MathHelper.ToRadians(45)) * 500;
-                        NPC.Center = player.Center + new Vector2(istotheRight ? dist : -dist, -500);
-                        direction = NPC.DirectionTo(player.Center);
-                    }
-                    NPC.netUpdate = true;
-
-                }
-                eggDrop = isLastDive && DiveTimer == (Math.Floor(((double)(maxTime * 0.5f) / eggtotal) * eggcount));
-
-                if (DiveTimer >= 0 && DiveTimer <= maxTime)
-                {
-                    NPC.spriteDirection = NPC.velocity.X < 0 ? -1 : 1;//Manually setting the Sprite direction using the horizontal velocity instead of the direction due to the wonkiness of the shape
-                    if (!isLastDive && !verticalDive)
-                    {
-                        if (DiveTimer < maxTime / 2)
-                        {
-                            dashVelocity += NPC.velocity.X <= 0 ? acceleration * -1 : acceleration; //Acelleration for first half of the arc, switches depending on direction;
-                        }
-                        else if (DiveTimer >= maxTime / 2)
-                        {
-                            dashVelocity += NPC.velocity.X <= 0 ? acceleration : acceleration * -1;//Same as that^ except its switched around;
-                        }
-                    }
-                    if (verticalDive)
-                    {
-                        NPC.damage = 75;
-                        NPC.velocity = direction * 20;
-                    }
-                    if (eggDrop)
-                    {
-                        SoundEngine.PlaySound(SoundID.Item5, NPC.position);
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 5).RotatedByRandom(5), ModContent.ProjectileType<Projectiles.Hostile.VultureEgg>(), 30, 0, player.whoAmI);//Generate projectile
-                        eggcount++;
-                    }
-                    if (oldPlayerPos == player.Center.X)
-                    {
-                        playerMovementCounter++;
-                    }
-                    else
-                    {
-                        playerMovementCounter = 0;
-                    }
-                    oldPlayerPos = player.Center.X;
-                    int heightmodifier = isLastDive ? 2 : 10;//Both heightmodifier and periodmodifier are modifiers for the lower cosine function depending on which type of swoop is done;The higher the height modifer the taller the waves
-                    double periodmodifier = isLastDive ? MathHelper.PiOver2 * 3 : 1;//The Higher the periodmodifier value the more narrower the wavelengths
-                    if (!verticalDive) NPC.velocity = new Vector2(dashVelocity, (float)Math.Cos(MathHelper.ToRadians(DiveTimer * (float)periodmodifier)) * heightmodifier);// Time is used as the X value for the cosine function as it simulates degrees.
-
-                    if (NPC.velocity.X > 0) NPC.rotation = NPC.velocity.ToRotation();
-                    else NPC.rotation = NPC.velocity.ToRotation() + (float)Math.PI;
-                    DiveTimer++;
-                    NPC.netUpdate = true;
-                }
-                else if (DiveTimer >= maxTime)
-                {
-                    verticalDive = false;
-                    DiveTimer = 0;
-                    genDiveMax = false;
-                    divecount++;
-                    if (isLastDive == true)
-                    {
-                        genDiveMax = true;
-                        divecount = 0;
-                    }
-
-                }
-            }
-
-            /*NPC.damage = 0;
-            NPC.TargetClosest();
-            //When at this stage the boss whips up strong winds pushing the player in whatever direction the wind blows
-            Terraria.GameContent.Events.Sandstorm.StartSandstorm();
-            if (!transformed)
-            {
-                Main.NewText("The wind is growing stronger and is kicking up a lot of sand.", Color.SandyBrown);
-                transformed = true;
-                mode = 0;
-                NPC.velocity = new Vector2(0, 0);
-                divetimer = 0;
-                modetimer = 0;
-                
-            }
-            //Main.NewText(mode);
-            switch (mode)
-            {
-                case 0:
-
-                    target = player.Center + new Vector2(Main.rand.Next(-100, 100), Main.rand.Next(-250, -150));
-                    posStored = target;
-                    NPC.spriteDirection = NPC.direction;
-                    NPC.rotation = NPC.velocity.X * 0.1f;
-                    NPC.velocity *= 0f;
-                    no_teleport = 1;
-                    mode = 3;
-                    //Main.NewText(no_teleport);
-                    //if (no_teleport >= 57)
-                    //{
-                    //    mode = 1;
-                    //}
-                    return;
-                case 3:
-                    no_teleport++;
-                    NPC.velocity *= 0f;
-                    NPC.velocity = NPC.DirectionTo(target) * 8;
-                    if (no_teleport >= 48)
-                    {
-                        mode = 1;
-                    }
-                    return;
-                case 4:
-
-
-                    NPC.velocity *= 0.95f;
-                    break;
-                case 1:
-                    // Quickly dashes to a random location above the player and fires a spread of 3 feathers
-                    NPC.spriteDirection = NPC.direction;
-                    NPC.rotation = 0;
-                    //NPC.velocity *= 0f;
-                    if (no_teleport <= 12)
-                    {
-                        NPC.velocity = Vector2.Zero;
-                        //NPC.velocity *= 0f;
-                        no_teleport = 0;
-                        //no_teleport++;
-                        if (teleports == ((Main.expertMode || Main.masterMode) ? 4 : 9))
-                        {
-                            SoundEngine.PlaySound(SoundID.NPCHit28, NPC.position);
-
-                            Vector2 targetPosition = Main.player[NPC.target].position;
-                            Vector2 position = NPC.Center;
-                            Vector2 target = Main.player[NPC.target].Center;
-                            Vector2 direction = targetPosition - position;
-                            position += Vector2.Normalize(direction) * 2f;
-                            Vector2 perturbedSpeed = direction * 0.2f;
-
-                            int NumProjectiles = (Main.expertMode || Main.masterMode) ? 30 : 20;
-                            float rotation = MathHelper.ToRadians(180);
-
-                            for (int i = 0; i < NumProjectiles; i++)
-                            {
-                                Vector2 newVelocity = perturbedSpeed.RotatedBy(MathHelper.Lerp(-rotation, rotation, i / (NumProjectiles - 1f)));
-
-                                int dmg = 30;
-                                if (Main.expertMode) dmg = 22;
-                                if (Main.masterMode) dmg = 16;
-                                Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, newVelocity * 0.1f, ModContent.ProjectileType<Projectiles.Hostile.DesertBeakFeather>(), dmg, 0, player.whoAmI);
-                            }
-                        }
-                        else
-                        {
-                            SoundEngine.PlaySound(SoundID.Item64, NPC.position);
-
-                            Vector2 targetPosition = Main.player[NPC.target].position;
-                            Vector2 position = NPC.Center;
-                            Vector2 target = Main.player[NPC.target].Center;
-                            Vector2 direction = targetPosition - position;
-                            position += Vector2.Normalize(direction) * 2f;
-                            Vector2 perturbedSpeed = direction * 0.27f;
-
-                            const int NumProjectiles = 3;
-                            float rotation = MathHelper.ToRadians(Main.rand.Next(15, 35));
-
-                            for (int i = 0; i < NumProjectiles; i++)
-                            {
-                                Vector2 newVelocity = perturbedSpeed.RotatedBy(MathHelper.Lerp(-rotation, rotation, i / (NumProjectiles - 1f)));
-
-                                int dmg = 30;
-                                if (Main.expertMode) dmg = 22;
-                                if (Main.masterMode) dmg = 16;
-                                Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, newVelocity * 0.1f, ModContent.ProjectileType<Projectiles.Hostile.DesertBeakFeather>(), dmg, 0, player.whoAmI);
-                            }
-                        }
-                        teleports++;
-
-                        if(teleports == ((Main.expertMode || Main.masterMode) ? 5 : 10))
-                        {
-                            mode = 2;
-                            no_teleport = 0;
-                            //return;
-                        }
-                        else
-                        {
-                            mode = 0;
-                            //return;
-                        }
-                    }
-                    else
-                    {
-                        if (Vector2.Distance(target, NPC.position) > 0)
-                        {
-                            //NPC.velocity = NPC.DirectionTo(target) * 25;
-                            afterImage = true;
-                        }
-                        //NPC.velocity *= 0f;
-                        no_teleport--;
-                    }
-                    break;
-                case 2:
-                    NPC.spriteDirection = NPC.direction;
-                    if (NPC.Center.X > player.Center.X)
-                    {
-                        NPC.velocity = NPC.DirectionTo(player.Center + new Vector2(250, 0)) * 3;
-                    }
-                    else
-                    {
-                        NPC.velocity = NPC.DirectionTo(player.Center - new Vector2(250, 0)) * 3;
-                    }
-
-                    NPC.alpha = 0;
-                    modetimer++;
-                    divetimer++;
-
-                    if (divetimer >= (Main.expertMode || Main.masterMode ? 110 : 150))
-                    {
-                        float speed = (Main.expertMode || Main.masterMode ? 14f : 11f);
-                        if (NPC.Center.X > player.Center.X)
-                        {
-                            Vector2 position = NPC.Center;
-                            const int NumProjectiles = 1;
-
-                            for (int i = 0; i < NumProjectiles; i++)
-                            {
-                                Projectile p = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, new Vector2(-speed, 0), ModContent.ProjectileType<Projectiles.Hostile.DesertBeakSandstorm>(), 30, 10, player.whoAmI);
-                            }
-                        }
-                        else
-                        {
-                            Vector2 position = NPC.Center;
-                            const int NumProjectiles = 1;
-
-                            for (int i = 0; i < NumProjectiles; i++)
-                            {
-                                Projectile p = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, new Vector2(speed, 0), ModContent.ProjectileType<Projectiles.Hostile.DesertBeakSandstorm>(), 30, 10, player.whoAmI);
-                            }
-                        }
-
-                        SoundEngine.PlaySound(SoundID.Item82, NPC.position);
-
-                        divetimer = 0;
-                    }
-
-                    if (modetimer >= (Main.expertMode || Main.masterMode ? 450 : 600))
-                    {
-                        modetimer = 0;
-                        mode = 0;
-                        divetimer = 0;
-                        teleports = 0;
-                        no_teleport = 0;
-                    }
-                    break;
-            }*/
+            pulseTimer = 0;
+            Pulsing = false;
         }
+
+        afterImageTimer--;
+        DrawOffsetY = 50;
+
+        NPC.spriteDirection = NPC.direction = NPC.velocity.X > 0 ? 1 : -1;
+        NPC.rotation = NPC.velocity.X * 0.05f;
+
+        if (Storming)
+        {
+            Terraria.GameContent.Events.Sandstorm.TimeLeft = 60;
+        }
+
+        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].InModBiome(ModContent.GetInstance<ContagionLenient>()))
+        {
+            NPC.TargetClosest(false);
+        }
+        Player Target = Main.player[NPC.target];
+        if (Target.dead) 
+        {
+            phase = 255;
+        }
+        if(phase == 255)
+        {
+            NPC.timeLeft = 0;
+            NPC.velocity.Y -= 0.2f;
+            NPC.alpha += 2;
+        }
+        else if (NPC.life > (int)(NPC.lifeMax * 0.6f))
+        {
+            PhaseOne(Target);
+        }
+        else
+        {
+            PhaseTwo(Target);
+        }
+        //Main.NewText(NPC.ai[1], Main.DiscoColor);
     }
-
-    public override void FindFrame(int frameHeight)
+    public void PhaseOne(Player Target)
     {
-        if (NPC.velocity == Vector2.Zero || modePartOne == Phase.Dive)
+        if (phase == phase1Feather)
         {
-            NPC.frame.Y = 0;
-            NPC.frameCounter = 0.0;
-        }
-        else
-        {
-            NPC.frameCounter++;
-            if (NPC.frameCounter < 10.0)
+            NPC.ai[0]++;
+
+            if (NPC.ai[0] < 150)
             {
-                NPC.frame.Y = frameHeight;
-            }
-            else if (NPC.frameCounter >= 10 && NPC.frameCounter < 12)
-            {
-                NPC.frame.Y = frameHeight * 2;
+                NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-50)) * 0.1f;
+                NPC.velocity = NPC.velocity.LengthClamp(5);
             }
             else
             {
-                if (NPC.frameCounter >= 20.0)
+                if (NPC.ai[0] % 50 == 0)
                 {
-                    NPC.frameCounter = 0.0;
+                    if (NPC.ai[0] > 50 * 3.1f + 150)
+                    {
+                        int Feathers = Main.rand.Next(10, 14);
+                        for (int i = 0; i < Feathers; i++)
+                        {
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 8).RotatedBy((MathHelper.TwoPi / Feathers) * Main.rand.NextFloat(0.9f, 1.1f) * i) * Main.rand.NextFloat(0.8f, 1.1f), ModContent.ProjectileType<DesertBeakFeather>(), 15, 1, -1, 0, 0, Main.rand.Next(10));
+                        }
+                        NPC.ai[0] = -85;
+                        NPC.ai[1]++;
+                        if (NPC.ai[1] > 2)
+                        {
+                            NPC.ai[1] = 0;
+                            phase = phase1Egg;
+                            NPC.TargetClosest();
+                            NPC.netUpdate = true;
+                        }
+                    }
+                    afterImageTimer = 30;
+                    NPC.velocity = NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2Circular(30, 30)) * 12 * (NPC.ai[0] * 0.001f + 1);
                 }
+                NPC.velocity *= 0.98f;
             }
+        }
+        else if(phase == phase1Egg)
+        {
+            NPC.ai[0]++;
+            NPC.ai[1]++;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f;
+            NPC.velocity = NPC.velocity.LengthClamp(8);
 
+            if (NPC.ai[1] > 200)
+            {
+                NPC.velocity *= 0.9f;
+            }
+            if (NPC.ai[1] == 260)
+            {
+                NPC.ai[1] = Main.rand.Next(-60, 60);
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4,4), 3), ModContent.ProjectileType<VultureEgg>(), 44, 1);
+                NPC.netUpdate = true;
+            }
+            if (NPC.ai[0] > 1000)
+            {
+                NPC.ai[1] = 0;
+                NPC.ai[0] = 0;
+                phase = phase1Feather;
+                NPC.TargetClosest();
+                NPC.netUpdate = true;
+            }
         }
     }
+    public void PhaseTwo(Player Target)
+    {
+        if (phase <= phase1Egg) 
+        {
+            phase = phase2Transition;
+            NPC.ai[0] = 0;
+            NPC.ai[1] = 0;
+            NPC.netUpdate = true;
+        }
+        else if(phase == phase2Transition)
+        {
+            NPC.ai[0]++;
+            NPC.velocity *= 0.98f;
 
+            if (NPC.ai[0] == 50)
+            {
+                Pulsing = true;
+                SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.position);
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Terraria.GameContent.Events.Sandstorm.StartSandstorm();
+                    Storming = true;
+                }
+            }
+            FlapMultiplier = 2;
+            if (NPC.ai[0] > 100)
+            {
+                pulseTimer = 0;
+                phase = phase2Circle;
+                NPC.ai[0] = 0;
+                NPC.ai[1] = -1;
+                NPC.TargetClosest();
+                FlapMultiplier = 1;
+                NPC.defense = (int)(NPC.defense * 0.666f);
+                NPC.netUpdate = true;
+            }
+        }
+        else if(phase == phase2Circle)
+        {
+            NPC.ai[0]++;
+            NPC.ai[2]++;
+            float CircleDistance = (int)(Math.Floor(NPC.ai[0] * 0.001f)) % 2 == 0 ? 300 : 100;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center + Vector2.One.RotatedBy(NPC.ai[0] * 0.02) * CircleDistance * NPC.ai[1]) * 0.3f;
+            NPC.velocity = NPC.velocity.LengthClamp(10);
+
+            if (CircleDistance > 100)
+            {
+                if (NPC.ai[2] == 100)
+                {
+                    Pulsing = true;
+                }
+                else if (NPC.ai[2] > 130)
+                {
+                    int Feathers = Main.rand.Next(7, 10);
+                    for (int i = 0; i < Feathers; i++)
+                    {
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 8).RotatedBy((MathHelper.TwoPi / Feathers) * Main.rand.NextFloat(0.9f, 1.1f) * i) * Main.rand.NextFloat(0.8f, 1.1f), ModContent.ProjectileType<DesertBeakFeather>(), 15, 1, -1, 0, 0, Main.rand.Next(10));
+                    }
+                    NPC.ai[2] = Main.rand.Next(-100, 0);
+                    NPC.netUpdate = true;
+                    NPC.ai[1] *= Main.rand.NextBool() ? 1 : -1;
+                }
+            }
+            else
+            {
+                NPC.ai[2] = Main.rand.Next(-100, 0);
+            }
+        }
+    }
+    public override void FindFrame(int frameHeight)
+    {
+        if (afterImageTimer <= 0)
+            NPC.frameCounter += 1.0 + MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), -0.3f, 1.7f) * FlapMultiplier;
+        else
+            NPC.frameCounter += 1.0 + MathHelper.Lerp(MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), -0.3f, 2), MathHelper.Clamp(NPC.velocity.Length() * 0.3f, 0, 2),MathHelper.Clamp(afterImageTimer * 0.1f,0,1)) * FlapMultiplier;
+
+        if (NPC.frameCounter > 5.0)
+        {
+            NPC.frameCounter = 0.0;
+            NPC.frame.Y = NPC.frame.Y + frameHeight;
+        }
+        if (NPC.frame.Y > frameHeight * 7)
+        {
+            NPC.frame.Y = 0;
+        }
+    }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(phase);
+        writer.Write(afterImageTimer);
+        writer.Write(Storming);
+    }
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        phase = reader.ReadByte();
+        afterImageTimer = reader.ReadInt16();
+        Storming = reader.ReadBoolean();
+    }
     public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
@@ -877,27 +316,37 @@ public class DesertBeak : ModNPC
                 0.9f);
         }
     }
-    public override bool PreDraw(SpriteBatch spriteBatch, Vector2 v, Color lightColor) // Not flipping? Not sure why it's not
+    public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        if (afterImage)
+        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
+        int frameHeight = texture.Height / Main.npcFrameCount[NPC.type];
+        Rectangle frame = NPC.frame;
+        Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
+        if (afterImageTimer > 0)
         {
-            Vector2 drawOrigin = TextureAssets.Npc[NPC.type].Size() / new Vector2(2, (Main.npcFrameCount[NPC.type] * 2));
-
-            SpriteEffects spriteEffect;
-            if (NPC.spriteDirection == 1)
-                spriteEffect = SpriteEffects.FlipHorizontally;
-            else
-                spriteEffect = SpriteEffects.None;
-
-            for (int i = 0; i < NPC.oldPos.Length; i++)
+            float alphaThingHackyWow = 0;
+            for (int i = 8; i > 0; i--)
             {
-                Vector2 drawPos = NPC.oldPos[i] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
-                Color color = NPC.GetAlpha(lightColor) * ((float)(NPC.oldPos.Length - i) / NPC.oldPos.Length);
-                spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, drawPos, NPC.frame, color, NPC.rotation, drawOrigin, NPC.scale, spriteEffect, 0f);
+                alphaThingHackyWow += 0.07f;
+                Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow * MathHelper.Clamp(afterImageTimer * 0.05f,0,1), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+            }
+        }
+        if (phase > phase1Egg)
+        {
+            float alphaThingHackyWow = 0;
+            for (int i = 8; i > 0; i-= 2)
+            {
+                alphaThingHackyWow += 0.07f;
+                Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+            }
+        }
+        if (pulseTimer is > 0 and < MathHelper.Pi)
+        {
+            for (int i = 4; i > 0; i--)
+            {
+                Main.EntitySpriteDraw(texture, drawPos + new Vector2(0, (float)Math.Sin(pulseTimer) * 8).RotatedBy(MathHelper.PiOver2 * i), frame, drawColor * (float)Math.Sin(pulseTimer) * 0.7f, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
             }
         }
         return true;
     }
-
-
 }

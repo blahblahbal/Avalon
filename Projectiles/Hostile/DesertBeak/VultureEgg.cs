@@ -1,45 +1,48 @@
+using Avalon.NPCs.Bosses.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile;
+namespace Avalon.Projectiles.Hostile.DesertBeak;
 
 public class VultureEgg : ModProjectile
 {
     public override void SetDefaults()
     {
-        Projectile.width = 22;
-        Projectile.height = 24;
+        Projectile.width = 32;
+        Projectile.height = 32;
         Projectile.aiStyle = -1;
         Projectile.tileCollide = true;
         Projectile.friendly = false;
         Projectile.hostile = true;
-        Projectile.timeLeft = 100;
+        Projectile.timeLeft = 500;
         Projectile.light = 1f;
         Projectile.penetrate = -1;
         Projectile.DamageType = DamageClass.Ranged;
         Projectile.ignoreWater = true;
-        Projectile.scale = 1.6f;
+        Projectile.scale = 1f;
+        DrawOriginOffsetY -= 5;
         //Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
-        if (Projectile.ai[0] < 2)
+        if (Projectile.velocity.X != oldVelocity.X)
         {
-            Projectile.ai[0]++;
-            if (Projectile.velocity.X != oldVelocity.X)
-            {
-                Projectile.velocity.X = oldVelocity.X * -0.75f;
-            }
-            if (Projectile.velocity.Y != oldVelocity.Y && oldVelocity.Y > 1.5)
-            {
-                Projectile.velocity.Y = oldVelocity.Y * -0.7f;
-            }
+            Projectile.velocity.X = oldVelocity.X * -0.95f;
         }
-        else Projectile.Kill();
+        if (Projectile.velocity.Y != oldVelocity.Y)
+        {
+            Projectile.velocity.Y = oldVelocity.Y * -0.95f;
+        }
+        SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
         return false;
+    }
+    public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+    {
+        fallThrough = Main.rand.NextBool();
+        return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
     }
     public override void Kill(int timeLeft)
     {
@@ -98,7 +101,7 @@ public class VultureEgg : ModProjectile
         Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
         Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
 
-        NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.position.X, (int)Projectile.position.Y, NPCID.Vulture);
+        NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.position.X, (int)Projectile.position.Y, ModContent.NPCType<DesertTalon>());
     }
     public override void AI()
     {
@@ -106,7 +109,7 @@ public class VultureEgg : ModProjectile
         {
             Projectile.velocity.X *= 0.94f;
         }
-        Projectile.rotation += Projectile.velocity.X * 0.1f;
+        Projectile.rotation += Projectile.velocity.X * 0.05f;
         Projectile.velocity.Y += 0.2f;
     }
 }
