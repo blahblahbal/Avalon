@@ -3225,6 +3225,11 @@ Mods: {
 				Tooltip: "'R. Penguin'"
 			}
 
+			MirrorMirror: {
+				DisplayName: Mirror, Mirror
+				Tooltip: "'R. Penguin'"
+			}
+
 			MistyNight: {
 				DisplayName: Misty Night
 				Tooltip: "'R. Penguin'"
@@ -3243,6 +3248,11 @@ Mods: {
 			Forgotten: {
 				Tooltip: "'R. Penguin'"
 				DisplayName: Forgotten
+			}
+
+			Rotting: {
+				Tooltip: "'R. Penguin'"
+				DisplayName: Rotting
 			}
 
 			TakingFlight: {

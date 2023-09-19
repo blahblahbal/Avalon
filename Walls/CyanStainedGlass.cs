@@ -9,6 +9,7 @@ public class CyanStainedGlass : ModWall
 {
     public override void SetStaticDefaults()
     {
+        WallID.Sets.Transparent[Type] = true;
         Main.wallHouse[Type] = true;
         Main.wallBlend[Type] = ModContent.WallType<CyanStainedGlass>();
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.CyanStainedGlass>();
