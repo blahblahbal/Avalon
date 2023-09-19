@@ -5242,7 +5242,7 @@ Mods: {
 
 			SonicHat: {
 				DisplayName: Sonic Hat
-				Tooltip: ""
+				Tooltip: "'Gotta go fast'"
 			}
 
 			Sulphur: {
@@ -6304,6 +6304,16 @@ Mods: {
 			SkyBrickColumn: {
 				DisplayName: Sky Brick Column
 				Tooltip: ""
+			}
+
+			SonicShoes: {
+				DisplayName: Sonic Shoes
+				Tooltip: "'Gotta go fast'"
+			}
+
+			SonicShirt: {
+				DisplayName: Sonic Shirt
+				Tooltip: "'Gotta go fast'"
 			}
 		}
 

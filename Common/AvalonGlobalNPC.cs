@@ -640,6 +640,11 @@ public class AvalonGlobalNPC : GlobalNPC
     public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
     {
         var notExpertCondition = new Conditions.NotExpert();
+        var contagionCondition = new IsContagion();
+        var corruptionCondition = new Conditions.IsCorruptionAndNotExpert();
+        var crimsonNotExpert = new Conditions.IsCrimsonAndNotExpert();
+
+        var contagionNotExpert = new Combine(true, null, notExpertCondition, contagionCondition);
 
         switch (npc.type)
         {
@@ -723,6 +728,27 @@ public class AvalonGlobalNPC : GlobalNPC
             AmmoMagazine.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 50), true);
             AmmoMagazine.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 100));
             npcLoot.Add(AmmoMagazine);
+        }
+
+        if (npc.type == NPCID.EyeofCthulhu)
+        {
+            npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.DemoniteOre);
+            npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CorruptSeeds);
+
+            LeadingConditionRule contagionRule = new LeadingConditionRule(contagionNotExpert);
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Items.Material.Ores.BacciliteOre>(), 1, 30, 90));
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
+            npcLoot.Add(contagionRule);
+
+            LeadingConditionRule corruptionRule = new LeadingConditionRule(corruptionCondition);
+            corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
+            corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
+            npcLoot.Add(corruptionRule);
+
+            //LeadingConditionRule crimsonRule = new LeadingConditionRule(crimsonNotExpert);
+            //crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
+            //crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
+            //npcLoot.Add(crimsonRule);
         }
         //greek extinguisher
         //if (npc.type == NPCID.Clinger || npc.type == NPCID.Spazmatism) // || npc.type == ModContent.NPCType<CursedFlamer>())
