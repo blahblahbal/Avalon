@@ -21,6 +21,9 @@ using Avalon.Items.Tools.Superhardmode;
 using Terraria.Audio;
 using Avalon.Items.Tools;
 using Avalon.Items.Tools.Hardmode;
+using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Material.Ores;
+using Avalon.Items.Ammo;
 
 namespace Avalon.Common;
 
@@ -330,6 +333,32 @@ public class AvalonGlobalItem : GlobalItem
         if (item.type == ItemID.WallOfFleshBossBag)
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<FleshyTendril>(), 1, 25, 36));
+        }
+        if (item.type == ItemID.EyeOfCthulhuBossBag)
+        {
+            var contagionCondition = new IsContagion();
+            var corruptionCondition = new Conditions.IsCorruption();
+            var crimson = new Conditions.IsCrimson();
+            var corruptionNotContagion = new Combine(true, null, new Invert(contagionCondition), corruptionCondition);
+
+            itemLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.DemoniteOre);
+            itemLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CorruptSeeds);
+            itemLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.UnholyArrow);
+
+            LeadingConditionRule contagionRule = new LeadingConditionRule(contagionCondition);
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
+            itemLoot.Add(contagionRule);
+
+            LeadingConditionRule corruptionRule = new LeadingConditionRule(corruptionNotContagion);
+            corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
+            corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
+            corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.UnholyArrow, 1, 20, 50));
+            itemLoot.Add(corruptionRule);
+
+            LeadingConditionRule crimsonRule = new LeadingConditionRule(crimson);
+            crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
+            itemLoot.Add(crimsonRule);
         }
     }
     public override void SetDefaults(Item item)

@@ -4,6 +4,7 @@ using Avalon.Common.Players;
 using Avalon.DropConditions;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Ammo;
 using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
@@ -643,9 +644,8 @@ public class AvalonGlobalNPC : GlobalNPC
         var contagionCondition = new IsContagion();
         var corruptionCondition = new Conditions.IsCorruptionAndNotExpert();
         var crimsonNotExpert = new Conditions.IsCrimsonAndNotExpert();
-
         var contagionNotExpert = new Combine(true, null, notExpertCondition, contagionCondition);
-
+        var corruptionNotContagion = new Combine(true, null, new Invert(contagionNotExpert), corruptionCondition);
         switch (npc.type)
         {
             case NPCID.WallofFlesh:
@@ -734,16 +734,22 @@ public class AvalonGlobalNPC : GlobalNPC
         {
             npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.DemoniteOre);
             npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CorruptSeeds);
+            npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.UnholyArrow);
 
             LeadingConditionRule contagionRule = new LeadingConditionRule(contagionNotExpert);
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Items.Material.Ores.BacciliteOre>(), 1, 30, 90));
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
             npcLoot.Add(contagionRule);
 
-            LeadingConditionRule corruptionRule = new LeadingConditionRule(corruptionCondition);
+            LeadingConditionRule corruptionRule = new LeadingConditionRule(corruptionNotContagion);
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
+            corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.UnholyArrow, 1, 20, 50));
             npcLoot.Add(corruptionRule);
+
+            LeadingConditionRule crimsonRule = new LeadingConditionRule(crimsonNotExpert);
+            crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
+            npcLoot.Add(crimsonRule);
 
             //LeadingConditionRule crimsonRule = new LeadingConditionRule(crimsonNotExpert);
             //crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));

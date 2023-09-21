@@ -37,7 +37,7 @@ public class ContagionTree : ModTree
     {
         return ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/ContagionTree");
     }
-    //public override int TreeLeaf() => ModContent.Find<ModGore>("Avalon/ContagionTreeLeaf").Type;
+    public override int TreeLeaf() => ModContent.Find<ModGore>("Avalon/ContagionTreeLeaf").Type;
     public override int SaplingGrowthType(ref int style)
     {
         style = 0;

@@ -33,8 +33,8 @@ public class BacteriumPrimeBossBag : ModItem
 
     public override void ModifyItemLoot(ItemLoot itemLoot)
     {
-        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 43));
-        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Booger>(), 1, 10, 21));
+        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 80, 111));
+        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Booger>(), 1, 20, 40));
         itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BadgeOfBacteria>(), 1));
     }
 }

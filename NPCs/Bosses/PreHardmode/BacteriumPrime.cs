@@ -4,6 +4,7 @@ using Avalon.Biomes;
 using Avalon.Common.Players;
 using Avalon.Dusts;
 using Avalon.Items.BossBags;
+using Avalon.Items.Material;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Placeable.Furniture;
 using Avalon.Items.Placeable.Tile;
@@ -102,6 +103,7 @@ public class BacteriumPrime : ModNPC
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacteriumPrimeMask>(), 7));
         npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BacteriumPrimeBossBag>()));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 15, 41));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<Booger>(), 1, 12, 17));
         npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BacteriumPrimeRelic>()));
     }
     const float Phase2Health = 0.6f;
