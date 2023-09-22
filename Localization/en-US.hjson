@@ -7052,7 +7052,7 @@ Mods: {
 
 			Bacterium: {
 				DisplayName: Bacterium
-				Description: Mods.Avalon.Buffs.Bacterium.Description
+				Description: A baby Bacterium Prime is following you
 			}
 		}
 

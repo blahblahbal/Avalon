@@ -49,4 +49,7 @@ public class AvalonClientConfig : ModConfig
     [Header("$Mods.Avalon.Config.ItemHeader")]
     [DefaultValue(true)]
     public bool BiomeParticlesEnabled;
+
+    [DefaultValue(true)]
+    public bool AdditionalScreenshakes;
 }
