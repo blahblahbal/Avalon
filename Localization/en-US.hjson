@@ -6315,6 +6315,41 @@ Mods: {
 				DisplayName: Sonic Shirt
 				Tooltip: "'Gotta go fast'"
 			}
+
+			WildMushroomBed: {
+				DisplayName: Wild Mushroom Bed
+				Tooltip: ""
+			}
+
+			WildMushroomBookcase: {
+				DisplayName: Wild Mushroom Bookcase
+				Tooltip: ""
+			}
+
+			WildMushroomChair: {
+				DisplayName: Wild Mushroom Chair
+				Tooltip: ""
+			}
+
+			WildMushroomClock: {
+				DisplayName: Wild Mushroom Clock
+				Tooltip: ""
+			}
+
+			WildMushroomLamp: {
+				DisplayName: Wild Mushroom Lamp
+				Tooltip: ""
+			}
+
+			WildMushroomSofa: {
+				DisplayName: Wild Mushroom Sofa
+				Tooltip: ""
+			}
+
+			WildMushroomTable: {
+				DisplayName: Wild Mushroom Table
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -7281,6 +7316,11 @@ Mods: {
 				BiomeParticlesEnabled: {
 					Label: Biome Particles
 					Tooltip: Enables ambient particles in some biomes.
+				}
+
+				AdditionalScreenshakes: {
+					Label: Additional Screenshakes
+					Tooltip: ""
 				}
 			}
 
