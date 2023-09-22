@@ -33,10 +33,11 @@ class WorldgenHelper : ModItem
         int x = (int)Main.MouseWorld.X / 16;
         int y = (int)Main.MouseWorld.Y / 16;
 
-
-
         if (player.ItemAnimationJustStarted)
-            ClassExtensions.VeinMine(new Point(x, y), TileID.Copper);
+            WorldGeneration.Structures.SkyFortress.Generate(x, y);
+
+            //if (player.ItemAnimationJustStarted)
+            //    ClassExtensions.VeinMine(new Point(x, y), TileID.Copper);
             //{
             //    WorldGen.PlaceTile(x, y, ModContent.TileType<Tiles.GemTrees.ZirconSapling>());
             //    WorldGen.GrowTree(x, y);

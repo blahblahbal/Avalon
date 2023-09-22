@@ -29,7 +29,7 @@ class TeamMirror : ModItem
     {
         CreateRecipe(1)
             .AddIngredient(ItemID.MagicMirror)
-            .AddRecipeGroup("Avalon:GoldBar", 10)
+            .AddIngredient(ItemID.WormholePotion, 5)
             .AddIngredient(ModContent.ItemType<Material.BloodshotLens>(), 4)
             .AddTile(TileID.Anvils)
             .Register();
