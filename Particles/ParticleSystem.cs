@@ -56,7 +56,7 @@ namespace Avalon.Particles
         {
             for(int i = 0; i < Particles.Count; i++)
             {
-                Particle particle = Particles.ElementAt(i);
+                Particle particle = Particles[i];
                 if (particle.Active)
                 {
                     if (particle.TimeInWorld == 0)
@@ -67,7 +67,7 @@ namespace Avalon.Particles
                 }
                 else
                 {
-                    Particles.Remove(Particles.ElementAt(i));
+                    Particles.Remove(Particles[i]);
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace Avalon.Particles
 
             for (int i = 0; i < Particles.Count; i++)
             {
-                Particle particle = Particles.ElementAt(i);
+                Particle particle = Particles[i];
                 if (particle.Active && particle.FrontLayer == FrontLayer)
                 {
                     particle.Draw(spriteBatch);
@@ -88,7 +88,7 @@ namespace Avalon.Particles
 
             for (int i = 0; i < Particles.Count; i++)
             {
-                Particle particle = Particles.ElementAt(i);
+                Particle particle = Particles[i];
                 if (particle.Active)
                 {
                     particle.PostDraw(spriteBatch);
