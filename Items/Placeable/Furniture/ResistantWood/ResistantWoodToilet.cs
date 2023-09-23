@@ -31,6 +31,7 @@ class ResistantWoodToilet : ModItem
     {
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 6)
-            .AddTile(TileID.Sawmill).Register();
+            .AddTile(TileID.Sawmill)
+            .Register();
     }
 }

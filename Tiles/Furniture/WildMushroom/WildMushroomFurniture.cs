@@ -9,9 +9,9 @@ using Terraria.ObjectData;
 
 namespace Avalon.Tiles.Furniture.WildMushroom;
 
-//public class WildMushroomBathtub : BathtubTemplate
-//{
-//}
+public class WildMushroomBathtub : BathtubTemplate
+{
+}
 
 public class WildMushroomBed : BedTemplate
 {
@@ -106,7 +106,6 @@ public class WildMushroomClock : ClockTemplate
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomClock>();
 }
 
-/*
 public class WildMushroomChandelier : ChandelierTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomChandelier>();
@@ -144,6 +143,9 @@ public class WildMushroomChandelier : ChandelierTemplate
         }
     }
 }
+
+/*
+
 
 public class WildMushroomChest : ChestTemplate
 {
@@ -258,19 +260,23 @@ public class WildMushroomLantern : LanternTemplate
     }
 }
 
-public class WildMushroomPiano : PianoTemplate
-{
-}
+
 
 public class WildMushroomPlatform : PlatformTemplate
 {
     public override int Dust => ModContent.DustType<WildMushroomDust>();
 }
 
+
+*/
+
+public class WildMushroomPiano : PianoTemplate
+{
+}
+
 public class WildMushroomSink : SinkTemplate
 {
 }
-*/
 public class WildMushroomSofa : SofaTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomSofa>();
@@ -280,11 +286,11 @@ public class WildMushroomTable : TableTemplate
 {
 }
 
-//public class WildMushroomToilet : ToiletTemplate
-//{
-//    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomToilet>();
-//}
+public class WildMushroomToilet : ToiletTemplate
+{
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomToilet>();
+}
 
-//public class WildMushroomWorkBench : WorkbenchTemplate
-//{
-//}
+public class WildMushroomWorkBench : WorkbenchTemplate
+{
+}

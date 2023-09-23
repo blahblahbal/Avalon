@@ -6350,6 +6350,36 @@ Mods: {
 				DisplayName: Wild Mushroom Table
 				Tooltip: ""
 			}
+
+			WildMushroomToilet: {
+				DisplayName: Wild Mushroom Toilet
+				Tooltip: ""
+			}
+
+			WildMushroomWorkBench: {
+				DisplayName: Wild Mushroom Work Bench
+				Tooltip: ""
+			}
+
+			WildMushroomBathtub: {
+				DisplayName: Wild Mushroom Bathtub
+				Tooltip: ""
+			}
+
+			WildMushroomChandelier: {
+				DisplayName: Wild Mushroom Chandelier
+				Tooltip: ""
+			}
+
+			WildMushroomPiano: {
+				DisplayName: Wild Mushroom Piano
+				Tooltip: ""
+			}
+
+			WildMushroomSink: {
+				DisplayName: Wild Mushroom Sink
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {

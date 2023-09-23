@@ -905,7 +905,7 @@ public class SkyFortress
                                     tile.HasTile = false;
                                     tile.Slope = SlopeType.Solid;
                                     tile.IsHalfBlock = false;
-                                    //WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.BookcaseTeleporter>(), true, true, -1, 0);
+                                    WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.Furniture.BookcaseTeleporter>(), true, true, -1, 0);
                                 }
                                 break;
                             case 32:
@@ -1093,7 +1093,7 @@ public class SkyFortress
                             case 58:
                                 if (confirmPlatforms == 0)
                                     tile.HasTile = false;
-                                WorldGen.PlaceTile(k, l, 19, true, true, -1, 10);
+                                WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.Furniture.SkyBrick.SkyBrickPlatform>(), true, true, -1, 0);
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = false;
                                 break;
