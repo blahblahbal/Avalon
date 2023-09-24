@@ -441,6 +441,20 @@ public class AvalonGlobalNPC : GlobalNPC
     }
     public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
     {
+        if (spawnInfo.Player.InModBiome<ContagionCaveDesert>())
+        {
+            pool.Add(NPCID.DesertBeast, 0.3f);
+            pool.Add(NPCID.DesertLamiaDark, 0.45f);
+            pool.Add(NPCID.DesertDjinn, 0.45f);
+            pool.Add(NPCID.DuneSplicerHead, 0.2f);
+            pool.Add(NPCID.DesertScorpionWalk, 0.35f);
+            pool.Add(NPCID.DesertBeast, 0.15f);
+            pool.Add(NPCID.Antlion, 0.55f);
+            pool.Add(NPCID.WalkingAntlion, 0.35f);
+            pool.Add(NPCID.GiantWalkingAntlion, 0.05f);
+            pool.Add(NPCID.GiantFlyingAntlion, 0.05f);
+            pool.Add(NPCID.FlyingAntlion, 0.35f);
+        }
         if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle)
         {
             pool.Clear();

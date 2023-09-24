@@ -37,6 +37,10 @@ public class BaskingSpewer : ModNPC
         AnimationType = NPCID.SandsharkCorrupt;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionDesert>().Type };
     }
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+        return spawnInfo.Player.InModBiome<Biomes.ContagionDesert>() && Main.hardMode ? 0.2f : 0f;
+    }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]

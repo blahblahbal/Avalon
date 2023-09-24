@@ -279,6 +279,20 @@ public class AvalonWorld : ModSystem
             {
                 WorldGen.KillTile(num5, num6);
             }
+            //// kill contagion stalac if the block above isn't chunkstone
+            //if (Main.tile[num5, num9].TileType != ModContent.TileType<Chunkstone>() &&
+            //    Main.tile[num5, num6].TileType == ModContent.TileType<ContagionStalactgmites>() &&
+            //    (Main.tile[num5, num6].TileFrameY == 0 || Main.tile[num5, num6].TileFrameY == 72))
+            //{
+            //    WorldGen.KillTile(num5, num6);
+            //}
+            //// kill contagion stalac if the block below isn't chunkstone
+            //if (Main.tile[num5, num11].TileType != ModContent.TileType<Chunkstone>() &&
+            //    Main.tile[num5, num6].TileType == ModContent.TileType<ContagionStalactgmites>() &&
+            //    (Main.tile[num5, num6].TileFrameY == 54 || Main.tile[num5, num6].TileFrameY == 90))
+            //{
+            //    WorldGen.KillTile(num5, num6);
+            //}
             // kill contagion short grass if block below isn't contagion grass
             if (!(Main.tile[num5, num11].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num5, num11].TileType == ModContent.TileType<ContagionJungleGrass>()) && Main.tile[num5, num6].TileType == ModContent.TileType<ContagionShortGrass>())
             {
