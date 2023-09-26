@@ -2,7 +2,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ExampleMod.Content.Tiles
+namespace Avalon.Tiles.Contagion
 {
     public class ContagionTreeLeaf : ModGore
     {
