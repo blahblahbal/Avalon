@@ -6592,6 +6592,7 @@ Mods: {
 			ContagionMimic.DisplayName: Contagion Mimic
 			Rift.DisplayName: Rift
 			DesertTalon.DisplayName: Desert Talon
+			BoneFish.DisplayName: Bone Fish
 		}
 
 		Buffs: {

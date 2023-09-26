@@ -26,6 +26,7 @@ using Terraria.ModLoader.IO;
 using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.GameContent;
+using Avalon.NPCs.PreHardmode;
 
 namespace Avalon.Common;
 
@@ -204,6 +205,24 @@ public class AvalonWorld : ModSystem
             {
                 num10 = Main.maxTilesY - 10;
             }
+
+            #region bone fish spawning
+            for (int i = 0; i < 255; i++)
+            {
+                Player p = Main.player[i];
+                if (p.active && !p.dead)
+                {
+                    float dist = Vector2.Distance(p.position, new Vector2(num5, num6) * 16);
+                    if (p.ZoneUnderworldHeight && dist > Main.screenWidth / 2 && dist < Main.screenWidth)
+                    {
+                        if (Main.tile[num5, num6].LiquidType == LiquidID.Lava && Main.tile[num5, num6].LiquidAmount > 70 && Main.rand.NextBool(10))
+                        {
+                            NPC.NewNPC(p.GetSource_Misc(""), num5 * 16, num6 * 16, ModContent.NPCType<BoneFish>());
+                        }
+                    }
+                }
+            }
+            #endregion
 
             #region contagion thorny bushes
             if (TileID.Sets.SpreadOverground[Main.tile[num5, num6].TileType])
