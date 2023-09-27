@@ -20,7 +20,7 @@ namespace Avalon.Common
         }
         public override bool PreDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-            if (NPC.downedPlantBoss)
+            if (!NPC.downedPlantBoss)
             {
                 Texture2D tex = TextureAssets.Item[item.type].Value;
                 int offset = -1;
@@ -29,14 +29,14 @@ namespace Avalon.Common
                 for (int i = 0; i < 8; i++)
                 {
                     Vector2 vec = new Vector2(0, 2).RotatedBy(Main.timeForVisualEffects * 0.05f + (MathHelper.PiOver4 * i)) * 1.1f;
-                    spriteBatch.Draw(tex, position + new Vector2(0, offset + -Math.Abs(vec.Y * 0.5f)) + new Vector2(vec.X, vec.Y * 1.5f), frame, Color.Lerp(new Color(255, 0, 0, 0), new Color(255, 0, 255, 0), (float)Math.Sin(Main.timeForVisualEffects * 0.04f) * 0.5f + 0.5f) * 0.2f, 0, origin, scale, SpriteEffects.None, 0);
+                    spriteBatch.Draw(tex, position + new Vector2(0, offset + -Math.Abs(vec.Y * 0.5f)) + new Vector2(vec.X, vec.Y * 1.5f), frame, Color.Lerp(new Color(255, 0, 0, 0), new Color(255, 0, 255, 0), (float)Math.Sin(Main.timeForVisualEffects * 0.04f) * 0.5f + 0.5f) * 0.3f, 0, origin, scale, SpriteEffects.None, 0);
                 }
             }
             return base.PreDrawInInventory(item, spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
         public override bool PreDrawInWorld(Item item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
-            if (NPC.downedPlantBoss)
+            if (!NPC.downedPlantBoss)
             {
                 Texture2D tex = TextureAssets.Item[item.type].Value;
                 int offset = -4;
