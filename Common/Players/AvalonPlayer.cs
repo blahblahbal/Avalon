@@ -139,6 +139,7 @@ public class AvalonPlayer : ModPlayer
     public bool VampireTeeth;
     public bool ObsidianGlove;
     public bool RiftGoggles;
+    public bool InertiaBoots;
     #endregion
 
     #region buffs and debuffs
@@ -223,6 +224,7 @@ public class AvalonPlayer : ModPlayer
         VampireTeeth = false;
         ObsidianGlove = false;
         RiftGoggles = false;
+        InertiaBoots = false;
 
         // armor sets
         SkyBlessing = false;
@@ -385,6 +387,7 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdateEquips()
     {
+
         for (int i = 0; i <= 9; i++)
         {
             Item item = Player.armor[i];
@@ -547,6 +550,35 @@ public class AvalonPlayer : ModPlayer
 
     public override void PostUpdate()
     {
+        if (InertiaBoots)
+        {
+            if (Player.velocity.X is > 6f or < -6f)
+            {
+                int dustType = DustID.Cloud;
+                bool superSonic = false;
+
+
+                //Main.NewText(EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SonicHat", EquipType.Head));
+                if ((Player.dye[0].type == ItemID.YellowDye || Player.dye[0].type == ItemID.BrightYellowDye) && Player.head == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SonicHat", EquipType.Head) &&
+                    (Player.dye[1].type == ItemID.YellowDye || Player.dye[1].type == ItemID.BrightYellowDye) && Player.body == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SonicShirt", EquipType.Body) &&
+                    (Player.dye[2].type == ItemID.YellowDye || Player.dye[2].type == ItemID.BrightYellowDye) && Player.legs == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SonicShoes", EquipType.Legs))
+                {
+                    superSonic = true;
+                    dustType = DustID.HallowedWeapons;
+                }
+                var newColor = default(Color);
+                var num = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, dustType, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 100, newColor, 2f);
+                Main.dust[num].noGravity = true;
+                if (superSonic)
+                {
+                    var newColor2 = default(Color);
+                    var num2 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, 285, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 100, newColor2, 0.7f);
+                    Main.dust[num2].noGravity = true;
+                    Main.dust[num2].velocity *= Main.rand.NextFloat() * 2;
+                }
+            }
+        }
+
         if (RocketDustTimer > 0)
         {
             if (Player.velocity.Y < 0)

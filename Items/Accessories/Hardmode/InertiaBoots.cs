@@ -63,7 +63,7 @@ class InertiaBoots : ModItem
         player.iceSkate = true;
         player.wingTime = 1000;
         player.empressBrooch = true;
-        //player.Avalon().inertiaBoots = true;
+        player.GetModPlayer<AvalonPlayer>().InertiaBoots = true;
         //if (player.controlUp && player.controlJump)
         //{
         //    player.velocity.Y = player.velocity.Y - 0.3f * player.gravDir;
@@ -124,12 +124,6 @@ class InertiaBoots : ModItem
                     player.velocity.X += player.vortexStealthActive ? 0.04f : 0.29f;
                 }
             }
-        }
-        if (player.velocity.X is > 6f or < -6f)
-        {
-            var newColor = default(Color);
-            var num = Dust.NewDust(new Vector2(player.position.X, player.position.Y), player.width, player.height, DustID.Cloud, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 100, newColor, 2f);
-            Main.dust[num].noGravity = true;
         }
     }
 }

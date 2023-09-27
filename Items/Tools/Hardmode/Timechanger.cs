@@ -36,4 +36,8 @@ class Timechanger : ModItem
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }
+    public override void UpdateInventory(Player player)
+    {
+        player.accWatch = 3;
+    }
 }

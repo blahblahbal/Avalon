@@ -215,7 +215,7 @@ public class AvalonWorld : ModSystem
                     float dist = Vector2.Distance(p.position, new Vector2(num5, num6) * 16);
                     if (p.ZoneUnderworldHeight && dist > Main.screenWidth / 2 && dist < Main.screenWidth)
                     {
-                        if (Main.tile[num5, num6].LiquidType == LiquidID.Lava && Main.tile[num5, num6].LiquidAmount > 70 && Main.rand.NextBool(10))
+                        if (Main.tile[num5, num6].LiquidType == LiquidID.Lava && Main.tile[num5, num6].LiquidAmount > 70 && Main.rand.NextBool(AvalonReflection.NPC_spawnRate / 40))
                         {
                             NPC.NewNPC(p.GetSource_Misc(""), num5 * 16, num6 * 16, ModContent.NPCType<BoneFish>());
                         }

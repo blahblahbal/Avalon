@@ -15,6 +15,7 @@ using Avalon.Items.Placeable.Painting;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Potions.Other;
 using Avalon.Items.Tokens;
+using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.NPCs.Hardmode;
@@ -665,6 +666,16 @@ public class AvalonGlobalNPC : GlobalNPC
             case NPCID.WallofFlesh:
                 npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<FleshyTendril>(), 1, 13, 19));
                 break;
+            case NPCID.TheDestroyer:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SonicHat>(), 25, 1, 1));
+                break;
+            case NPCID.Retinazer:
+            case NPCID.Spazmatism:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SonicShirt>(), 25, 1, 1));
+                break;
+            case NPCID.SkeletronPrime:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SonicShoes>(), 25, 1, 1));
+                break;
         }
         if (npc.type is 104 or 102 or 269 or 270 or 271 or 272)
         {
@@ -770,6 +781,7 @@ public class AvalonGlobalNPC : GlobalNPC
             //crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
             //npcLoot.Add(crimsonRule);
         }
+
         //greek extinguisher
         //if (npc.type == NPCID.Clinger || npc.type == NPCID.Spazmatism) // || npc.type == ModContent.NPCType<CursedFlamer>())
         //{
