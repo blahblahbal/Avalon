@@ -38,16 +38,21 @@ namespace Avalon.Tiles.Furniture
 
             // Other tiles with just one map entry use CreateMapEntryName() to use the default translationkey, "MapEntry"
             // Since ExampleChest needs multiple, we register our own MapEntry keys
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            for (int i = 0; i < 27; i++)
+            {
+                AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            }
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+            //AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
             // Placement
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.newTile.Origin = new Point16(0, 1);
@@ -189,7 +194,7 @@ namespace Avalon.Tiles.Furniture
                     }
                 }
             }
-            else if (tileSafely.TileFrameX >= 252 && tileSafely.TileFrameX <= 324)
+            else if (tileSafely.TileFrameX >= 252 && tileSafely.TileFrameX <= 360)
             {
                 for (int i = X; i <= X + 1; i++)
                 {
@@ -205,6 +210,23 @@ namespace Avalon.Tiles.Furniture
                     }
                 }
             }
+            else if (tileSafely.TileFrameX == 936)
+            {
+                for (int i = X; i <= X + 1; i++)
+                {
+                    for (int j = Y; j <= Y + 1; j++)
+                    {
+                        Tile tileSafely2 = Framing.GetTileSafely(i, j);
+                        tileSafely2.TileType = TileID.Containers;
+                        tileSafely2.TileFrameX += 22 * 36;
+                        for (int k = 0; k < 4; k++)
+                        {
+                            Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, type);
+                        }
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -270,7 +292,7 @@ namespace Avalon.Tiles.Furniture
                     }
                 }
             }
-            else if (tileSafely.TileFrameX >= 468 && tileSafely.TileFrameX <= 540)
+            else if (tileSafely.TileFrameX >= 468 && tileSafely.TileFrameX <= 576)
             {
                 for (int i = X; i <= X + 1; i++)
                 {
@@ -279,6 +301,18 @@ namespace Avalon.Tiles.Furniture
                         Tile tileSafely2 = Framing.GetTileSafely(i, j);
                         tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
                         tileSafely2.TileFrameX -= 6 * 36;
+                    }
+                }
+            }
+            else if (tileSafely.TileFrameX == 1728)
+            {
+                for (int i = X; i <= X + 1; i++)
+                {
+                    for (int j = Y; j <= Y + 1; j++)
+                    {
+                        Tile tileSafely2 = Framing.GetTileSafely(i, j);
+                        tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
+                        tileSafely2.TileFrameX -= 22 * 36;
                     }
                 }
             }

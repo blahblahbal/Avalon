@@ -62,17 +62,27 @@ class SonicScrewdriverMkIII : ModItem
 
                 if (Chest.IsLocked(xpos, ypos))
                 {
+                    bool returnflag = false;
+                    if (!NPC.downedPlantBoss)
+                    {
+                        returnflag = true;
+                        NPC.downedPlantBoss = true;
+                    }
                     Chest.Unlock(xpos, ypos);
                     if (Main.netMode == NetmodeID.MultiplayerClient)
                     {
                         NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1, xpos, ypos);
+                    }
+                    if (returnflag)
+                    {
+                        NPC.downedPlantBoss = false;
                     }
                 }
                 else
                 {
                     Tile tile = Main.tile[xpos, ypos];
                     int style = TileObjectData.GetTileStyle(tile);
-                    if (style == 0 || style >= 7 && style <= 15)
+                    if (style == 0 || style >= 7 && style <= 16 || style == 48)
                     {
                         Tiles.Furniture.LockedChests.Lock(xpos, ypos);
                         if (Main.netMode != NetmodeID.SinglePlayer)
@@ -83,10 +93,20 @@ class SonicScrewdriverMkIII : ModItem
                     }
                     else
                     {
+                        bool returnflag = false;
+                        if (!NPC.downedPlantBoss)
+                        {
+                            returnflag = true;
+                            NPC.downedPlantBoss = true;
+                        }
                         Chest.Lock(xpos, ypos);
                         if (Main.netMode == NetmodeID.MultiplayerClient)
                         {
                             NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3, xpos, ypos);
+                        }
+                        if (returnflag)
+                        {
+                            NPC.downedPlantBoss = false;
                         }
                     }
                 }
