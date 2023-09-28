@@ -6380,6 +6380,26 @@ Mods: {
 				DisplayName: Wild Mushroom Sink
 				Tooltip: ""
 			}
+
+			GreekExtinguisher: {
+				DisplayName: Greek Extinguisher
+				Tooltip: Immunity to Cursed Inferno
+			}
+
+			NuclearExtinguisher: {
+				DisplayName: Nuclear Extinguisher
+				Tooltip: Immunity to Blackout and Cursed Inferno
+			}
+
+			SixHundredWattLightbulb: {
+				DisplayName: 600 Watt Lightbulb
+				Tooltip: Immunity to Blackout
+			}
+
+			MinersPickaxe: {
+				DisplayName: Miner's Pickaxe
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -6593,6 +6613,7 @@ Mods: {
 			Rift.DisplayName: Rift
 			DesertTalon.DisplayName: Desert Talon
 			BoneFish.DisplayName: Bone Fish
+			CursedFlamer.DisplayName: Cursed Flamer
 		}
 
 		Buffs: {

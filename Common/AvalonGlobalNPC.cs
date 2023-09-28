@@ -2,6 +2,7 @@ using Avalon.Biomes;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Avalon.DropConditions;
+using Avalon.Items.Accessories;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Ammo;
@@ -661,6 +662,14 @@ public class AvalonGlobalNPC : GlobalNPC
         var crimsonNotExpert = new Conditions.IsCrimsonAndNotExpert();
         var contagionNotExpert = new Combine(true, null, notExpertCondition, contagionCondition);
         var corruptionNotContagion = new Combine(true, null, new Invert(contagionNotExpert), corruptionCondition);
+
+        var hardModeCondition = new HardmodeOnly();
+        var notFromStatueCondition = new Conditions.NotFromStatue();
+        var preHardModeCondition = new Invert(hardModeCondition);
+        //    var superHardModeCondition = new Superhardmode();
+        //    var hardmodePreSuperHardmodeCondition =
+        //        new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
+
         switch (npc.type)
         {
             case NPCID.WallofFlesh:
@@ -676,71 +685,118 @@ public class AvalonGlobalNPC : GlobalNPC
             case NPCID.SkeletronPrime:
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SonicShoes>(), 25, 1, 1));
                 break;
+            case NPCID.Duck or NPCID.Duck2 or NPCID.DuckWhite or NPCID.DuckWhite2:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Quack>(), VeryRareChance));
+                break;
+            case NPCID.EaterofSouls:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EvilOuroboros>(), RareChance));
+                break;
+            case NPCID.KingSlime:
+                npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<BandofSlime>(), 3));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BirthofaMonster>(), 9));
+                break;
+            case NPCID.DialatedEye:
+                npcLoot.Add(ItemDropRule.Common(ItemID.BlackLens, 40));
+                break;
+            case NPCID.UndeadMiner:
+                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersPickaxe>(), 30));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersSword>(), 30));
+                break;
+            case NPCID.WyvernHead:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalTotem>(), 2));
+                break;
+            case NPCID.Harpy:
+                npcLoot.Add(ItemDropRule.ByCondition(hardModeCondition, ItemID.ShinyRedBalloon, 50));
+                break;
+            case NPCID.Vulture:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Beak>(), 3));
+                break;
+            case NPCID.QueenBee:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FightoftheBumblebee>(), 8));
+                break;
+            case NPCID.EyeofCthulhu:
+                npcLoot.Add(ItemDropRule.ByCondition(
+                    preHardModeCondition,
+                    ItemID.BloodMoonStarter,
+                    10, 1, 1, 3));
+
+                //npcLoot.Add(ItemDropRule.ByCondition(
+                //    hardmodePreSuperHardmodeCondition,
+                //    ItemID.BloodMoonStarter,
+                //    100, 1, 1, 15));
+
+                //npcLoot.Add(ItemDropRule.ByCondition(
+                //    superHardModeCondition,
+                //    ItemID.BloodMoonStarter,
+                //    100, 1, 1, 7));
+
+                break;
         }
-        if (npc.type is 104 or 102 or 269 or 270 or 271 or 272)
+        if (npc.type is NPCID.Werewolf or NPCID.AnglerFish or NPCID.RustyArmoredBonesAxe or
+            NPCID.RustyArmoredBonesFlail or NPCID.RustyArmoredBonesSword or NPCID.RustyArmoredBonesSwordNoArmor)
         {
             LeadingConditionRule AdhesiveBandage = new LeadingConditionRule(new CloverPotionActive());
             AdhesiveBandage.OnSuccess(ItemDropRule.StatusImmunityItem(885, 50), true);
             AdhesiveBandage.OnFailedConditions(ItemDropRule.StatusImmunityItem(885, 100));
             npcLoot.Add(AdhesiveBandage);
         }
-        if (npc.type is 77 or 273 or 274 or 275 or 276)
+        if (npc.type is NPCID.ArmoredSkeleton or NPCID.BlueArmoredBones or NPCID.BlueArmoredBonesMace or NPCID.BlueArmoredBonesNoPants or NPCID.BlueArmoredBonesSword)
         {
             LeadingConditionRule ArmorPolish = new LeadingConditionRule(new CloverPotionActive());
             ArmorPolish.OnSuccess(ItemDropRule.StatusImmunityItem(886, 50), true);
             ArmorPolish.OnFailedConditions(ItemDropRule.StatusImmunityItem(886, 100));
             npcLoot.Add(ArmorPolish);
         }
-        if (npc.type is 141 or 176 or 42 or 231 or 232 or 233 or 234 or 235)
+        if (npc.type is NPCID.ToxicSludge or NPCID.MossHornet or NPCID.Hornet or NPCID.HornetFatty or NPCID.HornetHoney or NPCID.HornetLeafy or NPCID.HornetSpikey or NPCID.HornetStingy)
         {
             LeadingConditionRule Bezoar = new LeadingConditionRule(new CloverPotionActive());
             Bezoar.OnSuccess(ItemDropRule.StatusImmunityItem(887, 50), true);
             Bezoar.OnFailedConditions(ItemDropRule.StatusImmunityItem(887, 100));
             npcLoot.Add(Bezoar);
         }
-        if (npc.type is 81 or 79 or 183 or 630)
+        if (npc.type is NPCID.CorruptSlime or NPCID.DarkMummy or NPCID.Crimslime or NPCID.BloodMummy)
         {
             LeadingConditionRule Blindfold = new LeadingConditionRule(new CloverPotionActive());
             Blindfold.OnSuccess(ItemDropRule.StatusImmunityItem(888, 50), true);
             Blindfold.OnFailedConditions(ItemDropRule.StatusImmunityItem(888, 100));
             npcLoot.Add(Blindfold);
         }
-        if (npc.type is 78 or 82 or 75)
+        if (npc.type is NPCID.Mummy or NPCID.Wraith or NPCID.Pixie)
         {
             LeadingConditionRule FastClock = new LeadingConditionRule(new CloverPotionActive());
             FastClock.OnSuccess(ItemDropRule.StatusImmunityItem(889, 50), true);
             FastClock.OnFailedConditions(ItemDropRule.StatusImmunityItem(889, 100));
             npcLoot.Add(FastClock);
         }
-        if (npc.type is 103 or 75 or 79 or 630)
+        if (npc.type is NPCID.GreenJellyfish or NPCID.Pixie or NPCID.DarkMummy or NPCID.BloodMummy)
         {
             LeadingConditionRule Megaphone = new LeadingConditionRule(new CloverPotionActive());
             Megaphone.OnSuccess(ItemDropRule.StatusImmunityItem(890, 50), true);
             Megaphone.OnFailedConditions(ItemDropRule.StatusImmunityItem(890, 100));
             npcLoot.Add(Megaphone);
         }
-        if (npc.type is 34 or 83 or 84 or 179 or 289)
+        if (npc.type is NPCID.CursedSkull or NPCID.CursedHammer or NPCID.EnchantedSword or NPCID.CrimsonAxe or NPCID.GiantCursedSkull)
         {
             LeadingConditionRule Nazar = new LeadingConditionRule(new CloverPotionActive());
             Nazar.OnSuccess(ItemDropRule.StatusImmunityItem(891, 50), true);
             Nazar.OnFailedConditions(ItemDropRule.StatusImmunityItem(891, 100));
             npcLoot.Add(Nazar);
         }
-        if (npc.type is 94 or 182)
+        if (npc.type is NPCID.Corruptor or NPCID.FloatyGross)
         {
             LeadingConditionRule Vitamins = new LeadingConditionRule(new CloverPotionActive());
             Vitamins.OnSuccess(ItemDropRule.StatusImmunityItem(892, 50), true);
             Vitamins.OnFailedConditions(ItemDropRule.StatusImmunityItem(892, 100));
             npcLoot.Add(Vitamins);
         }
-        if (npc.type is 93 or 109 or 80)
+        if (npc.type is NPCID.GiantBat or NPCID.Clown or NPCID.LightMummy)
         {
             LeadingConditionRule TrifoldMap = new LeadingConditionRule(new CloverPotionActive());
             TrifoldMap.OnSuccess(ItemDropRule.StatusImmunityItem(893, 50), true);
             TrifoldMap.OnFailedConditions(ItemDropRule.StatusImmunityItem(893, 100));
             npcLoot.Add(TrifoldMap);
         }
-        if (npc.type is NPCID.BloodJelly or NPCID.Unicorn or NPCID.DarkMummy or NPCID.LightMummy)
+        if (npc.type is NPCID.BloodJelly or NPCID.Unicorn or NPCID.DarkMummy or NPCID.LightMummy or NPCID.BloodMummy)
         {
             LeadingConditionRule HiddenBlade = new LeadingConditionRule(new CloverPotionActive());
             HiddenBlade.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<HiddenBlade>(), 50), true);
@@ -753,6 +809,23 @@ public class AvalonGlobalNPC : GlobalNPC
             AmmoMagazine.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 50), true);
             AmmoMagazine.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 100));
             npcLoot.Add(AmmoMagazine);
+        }
+        //greek extinguisher
+        if (npc.type == NPCID.Clinger || npc.type == NPCID.Spazmatism || npc.type == ModContent.NPCType<CursedFlamer>())
+        {
+            LeadingConditionRule GreekExtinguisher = new LeadingConditionRule(new CloverPotionActive());
+            GreekExtinguisher.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GreekExtinguisher>(), 25), true);
+            GreekExtinguisher.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GreekExtinguisher>(), 50));
+            npcLoot.Add(GreekExtinguisher);
+        }
+
+        //600 watt lightbulb
+        if (npc.type == NPCID.RaggedCaster || npc.type == NPCID.RaggedCasterOpenCoat) // || npc.type == ModContent.NPCType<DarkMatterSlime>())
+        {
+            LeadingConditionRule SixHundredWattLightbulb = new LeadingConditionRule(new CloverPotionActive());
+            SixHundredWattLightbulb.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<SixHundredWattLightbulb>(), 25), true);
+            SixHundredWattLightbulb.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<SixHundredWattLightbulb>(), 50));
+            npcLoot.Add(SixHundredWattLightbulb);
         }
 
         if (npc.type == NPCID.EyeofCthulhu)
@@ -782,11 +855,54 @@ public class AvalonGlobalNPC : GlobalNPC
             //npcLoot.Add(crimsonRule);
         }
 
-        //greek extinguisher
-        //if (npc.type == NPCID.Clinger || npc.type == NPCID.Spazmatism) // || npc.type == ModContent.NPCType<CursedFlamer>())
-        //{
-        //    npcLoot.Add(CloverPotionActive.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<>(), 25)).OnFailedRoll(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 50)));
-        //}
+        #region mystical tome mats
+        if (npc.type is NPCID.ManEater or NPCID.Snatcher or NPCID.AngryTrapper)
+        {
+            npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewOrb>(), 25, 1, 1, 4));
+        }
+
+        if (npc.type is NPCID.GiantTortoise or NPCID.IceTortoise or NPCID.Vulture or NPCID.FlyingFish
+            or NPCID.Unicorn)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDust>(), 15));
+        }
+
+        if (npc.type is NPCID.Harpy or NPCID.CaveBat or NPCID.GiantBat or NPCID.JungleBat)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RubybeadHerb>(), 15));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalClaw>(), 20));
+        }
+
+        if (npc.type is NPCID.Hornet or NPCID.BlackRecluse or NPCID.MossHornet or NPCID.HornetFatty
+            or NPCID.HornetHoney
+            or NPCID.HornetLeafy or NPCID.HornetSpikey or NPCID.HornetStingy or NPCID.JungleCreeper
+            or NPCID.JungleCreeperWall or NPCID.BlackRecluseWall)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<StrongVenom>(), 15));
+        }
+
+        if (npc.type is NPCID.Retinazer or NPCID.Spazmatism or NPCID.SkeletronPrime or NPCID.TheDestroyer)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ScrollofTome>(), 8));
+        }
+
+        if (npc.type is NPCID.CorruptSlime or NPCID.Gastropod or NPCID.IlluminantSlime or NPCID.ToxicSludge or NPCID.Crimslime
+            or NPCID.RainbowSlime or NPCID.FloatyGross)
+        {
+            npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewofHerbs>(),
+                25, 1, 1, 4));
+        }
+        if (npc.type is NPCID.ChaosElemental or NPCID.IceElemental or NPCID.IchorSticker or NPCID.Corruptor ||
+            npc.type == ModContent.NPCType<Viris>())
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDiamond>(), 6));
+        }
+        #endregion mystical tome mats
+
+        if (npc.boss)
+        {
+            npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<StaminaCrystal>(), 4));
+        }
     }
     public override void ModifyGlobalLoot(GlobalLoot globalLoot)
     {
@@ -885,67 +1001,9 @@ public class AvalonGlobalNPC : GlobalNPC
 
     //    switch (npc.type)
     //    {
-    //        case NPCID.Unicorn:
-    //        case NPCID.BloodJelly:
-    //        case NPCID.LightMummy:
-    //        case NPCID.DarkMummy:
-    //        case NPCID.BloodMummy:
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HiddenBlade>(), 50));
-    //            break;
-    //        case NPCID.Mummy:
-    //        case NPCID.FungoFish:
-    //        case NPCID.Clinger:
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AmmoMagazine>(), 50));
-    //            break;
-    //        case NPCID.Duck or NPCID.Duck2 or NPCID.DuckWhite or NPCID.DuckWhite2:
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Quack>(), VeryRareChance));
-    //            break;
-    //        case NPCID.EaterofSouls:
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EvilOuroboros>(), RareChance));
-    //            break;
-    //        case NPCID.KingSlime:
-    //            npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<BandofSlime>(),
-    //                3));
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BirthofaMonster>(), 9));
-    //            break;
-    //        case NPCID.DialatedEye:
-    //            npcLoot.Add(ItemDropRule.Common(ItemID.BlackLens, 40));
-    //            break;
-    //        case NPCID.UndeadMiner:
-    //            //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersPickaxe>(), 30));
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersSword>(), 30));
-    //            break;
+    
     //        case NPCID.BoneSerpentHead:
     //            npcLoot.Add(ItemDropRule.Common(ItemID.Sunfury, 20));
-    //            break;
-    //        case NPCID.WyvernHead:
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalTotem>(), 2));
-    //            break;
-    //        case NPCID.Harpy:
-    //            npcLoot.Add(ItemDropRule.ByCondition(hardModeCondition, ItemID.ShinyRedBalloon, 50));
-    //            break;
-    //        case NPCID.Vulture:
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Beak>(), 3));
-    //            break;
-    //        case NPCID.QueenBee:
-    //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FightoftheBumblebee>(), 8));
-    //            break;
-    //        case NPCID.EyeofCthulhu:
-    //            npcLoot.Add(ItemDropRule.ByCondition(
-    //                preHardModeCondition,
-    //                ItemID.BloodMoonStarter,
-    //                10, 1, 1, 3));
-
-    //            //npcLoot.Add(ItemDropRule.ByCondition(
-    //            //    hardmodePreSuperHardmodeCondition,
-    //            //    ItemID.BloodMoonStarter,
-    //            //    100, 1, 1, 15));
-
-    //            //npcLoot.Add(ItemDropRule.ByCondition(
-    //            //    superHardModeCondition,
-    //            //    ItemID.BloodMoonStarter,
-    //            //    100, 1, 1, 7));
-
     //            break;
     //        case NPCID.GoblinThief:
     //            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoblinDagger>(), 100));
@@ -958,46 +1016,6 @@ public class AvalonGlobalNPC : GlobalNPC
     //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BloodBarrage>(), 30));
     //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Vanity.SanguineKabuto>(), 30));
     //    }
-
-    //    #region mystical tome mats
-    //    if (npc.type is NPCID.ManEater or NPCID.Snatcher or NPCID.AngryTrapper)
-    //    {
-    //        npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewOrb>(), 25, 1, 1, 4));
-    //    }
-
-    //    if (npc.type is NPCID.GiantTortoise or NPCID.IceTortoise or NPCID.Vulture or NPCID.FlyingFish
-    //        or NPCID.Unicorn)
-    //    {
-    //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDust>(), 15));
-    //    }
-
-    //    if (npc.type is NPCID.Harpy or NPCID.CaveBat or NPCID.GiantBat or NPCID.JungleBat)
-    //    {
-    //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RubybeadHerb>(), 15));
-    //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalClaw>(), 20));
-    //    }
-
-    //    if (npc.type is NPCID.Hornet or NPCID.BlackRecluse or NPCID.MossHornet or NPCID.HornetFatty
-    //        or NPCID.HornetHoney
-    //        or NPCID.HornetLeafy or NPCID.HornetSpikey or NPCID.HornetStingy or NPCID.JungleCreeper
-    //        or NPCID.JungleCreeperWall or NPCID.BlackRecluseWall)
-    //    {
-    //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<StrongVenom>(), 15));
-    //    }
-
-    //    if (npc.type is NPCID.Retinazer or NPCID.Spazmatism or NPCID.SkeletronPrime or NPCID.TheDestroyer)
-    //    {
-    //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ScrollofTome>(), 8));
-    //    }
-
-    //    if (npc.type is NPCID.CorruptSlime or NPCID.Gastropod or NPCID.IlluminantSlime or NPCID.ToxicSludge
-    //        or NPCID.Crimslime
-    //        or NPCID.RainbowSlime or NPCID.FloatyGross)
-    //    {
-    //        npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewofHerbs>(),
-    //            25, 1, 1, 4));
-    //    }
-    //    #endregion mystical tome mats
 
     //    #region shards
     //    if (Data.Sets.NPC.Toxic[npc.type])
@@ -1045,17 +1063,10 @@ public class AvalonGlobalNPC : GlobalNPC
     //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ArcaneShard>(), 7));
     //    }
 
-    //    if (npc.type is NPCID.ChaosElemental or NPCID.IceElemental or NPCID.IchorSticker or NPCID.Corruptor)// ||
-    //        npc.type == ModContent.NPCType<Viris>())
-    //    {
-    //        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDiamond>(), 6));
-    //    }
+
     //    #endregion shards
 
-    //    if (npc.boss)
-    //    {
-    //        npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<StaminaCrystal>(), 4));
-    //    }
+
     //}
     #endregion commented out incase i missed something
 }
