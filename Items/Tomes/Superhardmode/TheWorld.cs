@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.Superhardmode;
 
 class TheWorld : ModItem
 {

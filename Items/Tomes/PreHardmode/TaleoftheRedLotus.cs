@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
 class TaleoftheRedLotus : ModItem
 {
@@ -36,11 +36,11 @@ class TaleoftheRedLotus : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<DewOrb>(), 6)
+            .AddIngredient(ModContent.ItemType<DewOrb>(), 3)
             .AddIngredient(ModContent.ItemType<CarbonSteel>(), 5)
             .AddIngredient(ModContent.ItemType<Sandstone>(), 10)
             .AddIngredient(ItemID.FallenStar, 15)
-            .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 4)
+            .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
     }

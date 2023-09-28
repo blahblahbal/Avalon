@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-class TomorrowsPhoenix : ModItem
+class ChristmasTome : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -20,27 +20,28 @@ class TomorrowsPhoenix : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 0, 10);
+        Item.value = 15000;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Summon) += 0.08f;
-        player.GetKnockback(DamageClass.Summon) += 0.05f;
+        player.GetCritChance(DamageClass.Magic) += 3;
+        player.GetCritChance(DamageClass.Melee) += 3;
+        player.GetCritChance(DamageClass.Ranged) += 3;
+        player.GetCritChance(DamageClass.Throwing) += 3;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.Gel, 100)
-            .AddIngredient(ModContent.ItemType<StrongVenom>(), 5)
-            .AddIngredient(ItemID.FallenStar, 20)
-            .AddIngredient(ModContent.ItemType<MysticalClaw>(), 4)
-            .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
+            .AddIngredient(ModContent.ItemType<MysticalClaw>(), 3)
+            .AddIngredient(ModContent.ItemType<Sandstone>(), 5)
+            .AddIngredient(ModContent.ItemType<DewOrb>(), 3)
+            .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
     }

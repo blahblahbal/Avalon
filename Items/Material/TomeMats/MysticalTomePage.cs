@@ -29,7 +29,7 @@ class MysticalTomePage : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.FallenStar, 2)
+            .AddIngredient(ItemID.FallenStar)
             .AddRecipeGroup(RecipeGroupID.IronBar)
             .AddRecipeGroup(RecipeGroupID.Wood, 3)
             .AddTile(ModContent.TileType<Tiles.TomeForge>())

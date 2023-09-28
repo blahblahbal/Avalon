@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-public class AdventuresandMishaps : ModItem
+class TomeoftheRiverSpirits : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -22,30 +22,25 @@ public class AdventuresandMishaps : ModItem
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.value = 20000;
+        Item.value = 15000;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.statLifeMax2 += 60;
-        player.GetDamage(DamageClass.Magic) += 0.05f;
-        player.GetDamage(DamageClass.Summon) += 0.05f;
-        player.GetDamage(DamageClass.Melee) += 0.05f;
-        player.GetDamage(DamageClass.Ranged) += 0.05f;
-        player.GetDamage(DamageClass.Throwing) += 0.05f;
-        player.manaCost -= 0.1f;
+        player.GetDamage(DamageClass.Magic) += 0.15f;
+        player.GetDamage(DamageClass.Summon) += 0.15f;
+        player.manaCost -= 0.05f;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.LifeCrystal, 2)
-            .AddIngredient(ModContent.ItemType<FineLumber>(), 10)
-            .AddIngredient(ModContent.ItemType<CarbonSteel>(), 5)
-            .AddIngredient(ModContent.ItemType<RubybeadHerb>(), 10)
-            .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
+            .AddIngredient(ModContent.ItemType<MediationsFlame>())
+            .AddIngredient(ModContent.ItemType<EternitysMoon>())
+            .AddIngredient(ItemID.FallenStar, 15)
+            .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
     }

@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.Superhardmode;
 
 class Emperor : ModItem
 {

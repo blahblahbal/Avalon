@@ -1,13 +1,12 @@
 using Avalon.Common;
 using Avalon.Items.Material.TomeMats;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-class BurningDesire : ModItem
+class MediationsFlame : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -19,27 +18,27 @@ class BurningDesire : ModItem
     }
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Blue;
-        Item.width = dims.Width;
-        Item.value = 15000;
-        Item.height = dims.Height;
+        Item.rare = ItemRarityID.Green;
+        Item.Size = new(30);
+        Item.value = 5000;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.statLifeMax2 += 40;
-        player.statManaMax2 += 40;
+        player.GetDamage(DamageClass.Magic) += 0.05f;
+        player.manaCost -= 0.1f;
+        player.statManaMax2 += 60;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Gravel>(), 7)
             .AddIngredient(ModContent.ItemType<RubybeadHerb>(), 3)
-            .AddIngredient(ItemID.LifeCrystal)
-            .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 4)
+            .AddIngredient(ModContent.ItemType<FineLumber>(), 15)
+            .AddIngredient(ItemID.FallenStar, 15)
+            .AddIngredient(ItemID.MeteoriteBar, 10)
+            .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
     }

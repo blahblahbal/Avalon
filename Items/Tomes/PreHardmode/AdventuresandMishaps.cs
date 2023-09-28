@@ -1,14 +1,13 @@
 using Avalon.Common;
 using Avalon.Items.Material.TomeMats;
-using Avalon.Tiles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-internal class SoutheasternPeacock : ModItem
+public class AdventuresandMishaps : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -23,27 +22,31 @@ internal class SoutheasternPeacock : ModItem
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 0, 40);
+        Item.value = 20000;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetCritChance(DamageClass.Melee) += 3;
-        player.GetCritChance(DamageClass.Ranged) += 3;
-        player.GetCritChance(DamageClass.Throwing) += 3;
-        player.GetCritChance(DamageClass.Magic) += 3;
-        player.GetKnockback(DamageClass.Summon) += 0.05f;
-        player.GetDamage(DamageClass.Summon) += 0.08f;
+        player.statLifeMax2 += 60;
+        player.GetDamage(DamageClass.Magic) += 0.05f;
+        player.GetDamage(DamageClass.Summon) += 0.05f;
+        player.GetDamage(DamageClass.Melee) += 0.05f;
+        player.GetDamage(DamageClass.Ranged) += 0.05f;
+        player.GetDamage(DamageClass.Throwing) += 0.05f;
+        player.manaCost -= 0.1f;
     }
 
     public override void AddRecipes()
     {
-        CreateRecipe().AddIngredient(ModContent.ItemType<TomorrowsPhoenix>())
-            .AddIngredient(ModContent.ItemType<ChristmasTome>())
-            .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
-            .AddTile(ModContent.TileType<TomeForge>())
+        CreateRecipe(1)
+            .AddIngredient(ItemID.LifeCrystal, 2)
+            .AddIngredient(ModContent.ItemType<FineLumber>(), 10)
+            .AddIngredient(ModContent.ItemType<CarbonSteel>(), 5)
+            .AddIngredient(ModContent.ItemType<RubybeadHerb>(), 3)
+            .AddIngredient(ModContent.ItemType<MysticalTomePage>())
+            .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
     }
 }

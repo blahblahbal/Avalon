@@ -4,9 +4,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.Superhardmode;
 
-class TaleoftheDolt : ModItem
+class SceneofCarnage : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -19,26 +19,28 @@ class TaleoftheDolt : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.Yellow;
         Item.width = dims.Width;
-        Item.value = 15000;
+        Item.value = Item.sellPrice(0, 0, 40);
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
+        player.GetAttackSpeed(DamageClass.Melee) += 0.15f;
         player.GetDamage(DamageClass.Melee) += 0.15f;
-        player.statLifeMax2 += 20;
-        player.statManaMax2 += 20;
     }
 
-    public override void AddRecipes()
-    {
-        CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<FlankersTome>())
-            .AddIngredient(ModContent.ItemType<MistyPeachBlossoms>())
-            .AddTile(ModContent.TileType<Tiles.TomeForge>())
-            .Register();
-    }
+    //public override void AddRecipes()
+    //{
+    //    CreateRecipe(1)
+    //        .AddIngredient(ModContent.ItemType<DragonOrb>())
+    //        .AddIngredient(ModContent.ItemType<BerserkerBar>(), 25)
+    //        .AddIngredient(ModContent.ItemType<SoulofBlight>(), 10)
+    //        .AddIngredient(ModContent.ItemType<DarkMatterGel>(), 100)
+    //        .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 3)
+    //        .AddTile(ModContent.TileType<Tiles.TomeForge>())
+    //        .Register();
+    //}
 }

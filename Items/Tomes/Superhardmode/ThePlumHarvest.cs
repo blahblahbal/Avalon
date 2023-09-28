@@ -1,12 +1,11 @@
 using Avalon.Common;
 using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.Superhardmode;
 
-class ChantoftheWaterDragon : ModItem
+class ThePlumHarvest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -26,19 +25,16 @@ class ChantoftheWaterDragon : ModItem
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
-    public override void UpdateAccessory(Player player, bool hideVisual)
-    {
-        player.GetDamage(DamageClass.Magic) += 0.2f;
-    }
+    //Update Accs not needed - ammo done in ModPlayer
 
     //public override void AddRecipes()
     //{
     //    CreateRecipe(1)
     //        .AddIngredient(ModContent.ItemType<DragonOrb>())
-    //        .AddIngredient(ModContent.ItemType<OblivionBar>(), 25)
-    //        .AddIngredient(ModContent.ItemType<SoulofBlight>(), 30)
-    //        .AddIngredient(ItemID.FallenStar, 100)
-    //        .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 5)
+    //        .AddIngredient(ModContent.ItemType<Opal>(), 50)
+    //        .AddIngredient(ModContent.ItemType<SoulofBlight>(), 10)
+    //        .AddIngredient(ItemID.ShroomiteBar, 12)
+    //        .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 3)
     //        .AddTile(ModContent.TileType<Tiles.TomeForge>())
     //        .Register();
     //}

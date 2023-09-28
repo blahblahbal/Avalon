@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -23,5 +24,6 @@ class MysticalClaw : ModItem
         Item.value = Item.sellPrice(0, 0, 2, 0);
         Item.maxStack = 9999;
         Item.height = dims.Height;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial = true;
     }
 }

@@ -641,7 +641,7 @@ public class AvalonPlayer : ModPlayer
             }
         }
         // ores
-        if (RiftGoggles && Main.rand.NextBool(1000))
+        if (RiftGoggles && Main.rand.NextBool(5000))
         {
             if (Player.ZoneRockLayerHeight)
             {
@@ -658,6 +658,9 @@ public class AvalonPlayer : ModPlayer
                 }
                 if (Data.Sets.Tile.RiftOres[Main.tile[pt.X, pt.Y].TileType])
                 {
+                    Tile t = Main.tile[pt.X, pt.Y];
+                    t.LiquidType = LiquidID.Honey;
+                    t.LiquidAmount = 54;
                     int rift = Item.NewItem(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, 8, 8, ModContent.ItemType<Items.OreRift>());
                     Main.item[rift].instanced = true;
                     Main.item[rift].playerIndexTheItemIsReservedFor = Player.whoAmI;
@@ -667,6 +670,7 @@ public class AvalonPlayer : ModPlayer
                     {
                         NetMessage.SendData(MessageID.SyncItem, -1, -1, null, rift);
                     }
+
                     //int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, ModContent.NPCType<NPCs.Rift>(), ai1: 1);
                     //if (Main.netMode == NetmodeID.Server)
                     //{

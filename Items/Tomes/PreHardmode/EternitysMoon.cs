@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-class FlankersTome : ModItem
+class EternitysMoon : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -29,15 +29,16 @@ class FlankersTome : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Melee) += 0.1f;
+        player.statManaMax2 += 20;
+        player.manaCost -= 0.05f;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<StrongVenom>(), 3)
-            .AddIngredient(ModContent.ItemType<FineLumber>(), 50)
-            .AddIngredient(ModContent.ItemType<RubybeadHerb>())
+            .AddIngredient(ItemID.FallenStar, 10)
+            .AddIngredient(ModContent.ItemType<Gravel>(), 10)
+            .AddIngredient(ModContent.ItemType<MysticalClaw>(), 3)
             .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();

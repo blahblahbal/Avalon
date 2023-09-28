@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-class MistyPeachBlossoms : ModItem
+class UnderestimatedResolve : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -20,9 +20,9 @@ class MistyPeachBlossoms : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.value = 15000;
+        Item.value = 20000;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
@@ -30,16 +30,17 @@ class MistyPeachBlossoms : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.statLifeMax2 += 20;
-        player.statManaMax2 += 20;
+        player.GetDamage(DamageClass.Ranged) += 0.05f;
+        player.statDefense += 4;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<StrongVenom>(), 2)
-            .AddIngredient(ModContent.ItemType<FineLumber>(), 20)
-            .AddIngredient(ItemID.FallenStar, 10)
-            .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
+            .AddIngredient(ModContent.ItemType<Sandstone>(), 10)
+            .AddIngredient(ModContent.ItemType<ElementDust>(), 3)
+            .AddIngredient(ModContent.ItemType<MysticalClaw>(), 3)
+            .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
     }

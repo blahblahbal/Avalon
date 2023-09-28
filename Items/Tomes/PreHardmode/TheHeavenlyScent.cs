@@ -1,12 +1,13 @@
 using Avalon.Common;
 using Avalon.Items.Material.TomeMats;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-class MediationsFlame : ModItem
+class TheHeavenlyScent : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -18,27 +19,26 @@ class MediationsFlame : ModItem
     }
     public override void SetDefaults()
     {
+        Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Green;
-        Item.Size = new(30);
-        Item.value = 5000;
+        Item.width = dims.Width;
+        Item.value = 150000;
+        Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Magic) += 0.05f;
-        player.manaCost -= 0.1f;
-        player.statManaMax2 += 60;
+        player.lifeRegen += 2;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<RubybeadHerb>(), 5)
-            .AddIngredient(ModContent.ItemType<FineLumber>(), 20)
-            .AddIngredient(ItemID.FallenStar, 25)
-            .AddIngredient(ItemID.MeteoriteBar, 10)
-            .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
+            .AddIngredient(ModContent.ItemType<RubybeadHerb>(), 3)
+            .AddIngredient(ModContent.ItemType<Sandstone>(), 3)
+            .AddIngredient(ItemID.BandofRegeneration)
+            .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
     }

@@ -4,9 +4,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-class TheOasisRemembered : ModItem
+class TaleoftheDolt : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -19,27 +19,26 @@ class TheOasisRemembered : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Yellow;
+        Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 0, 40);
+        Item.value = 15000;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Summon) += 0.2f;
-        player.GetKnockback(DamageClass.Summon) += 0.2f;
+        player.GetDamage(DamageClass.Melee) += 0.15f;
+        player.statLifeMax2 += 20;
+        player.statManaMax2 += 20;
     }
 
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe(1)
-    //        .AddIngredient(ModContent.ItemType<DragonOrb>())
-    //        .AddIngredient(ModContent.ItemType<HydrolythBar>(), 25)
-    //        .AddIngredient(ModContent.ItemType<SoulofBlight>(), 10)
-    //        .AddIngredient(ModContent.ItemType<MysticalTomePage>(), 5)
-    //        .AddTile(ModContent.TileType<Tiles.TomeForge>())
-    //        .Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<FlankersTome>())
+            .AddIngredient(ModContent.ItemType<MistyPeachBlossoms>())
+            .AddTile(ModContent.TileType<Tiles.TomeForge>())
+            .Register();
+    }
 }

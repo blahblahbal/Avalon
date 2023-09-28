@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-class TomeoftheRiverSpirits : ModItem
+class TomorrowsPhoenix : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -20,26 +20,26 @@ class TomeoftheRiverSpirits : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
-        Item.value = 15000;
+        Item.value = Item.sellPrice(0, 0, 10);
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Magic) += 0.15f;
-        player.GetDamage(DamageClass.Summon) += 0.15f;
-        player.manaCost -= 0.05f;
+        player.GetDamage(DamageClass.Summon) += 0.08f;
+        player.GetKnockback(DamageClass.Summon) += 0.05f;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<MediationsFlame>())
-            .AddIngredient(ModContent.ItemType<EternitysMoon>())
-            .AddIngredient(ItemID.FallenStar, 20)
+            .AddIngredient(ItemID.Gel, 75)
+            .AddIngredient(ModContent.ItemType<StrongVenom>(), 3)
+            .AddIngredient(ItemID.FallenStar, 15)
+            .AddIngredient(ModContent.ItemType<MysticalClaw>(), 3)
             .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();

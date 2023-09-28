@@ -3,8 +3,10 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Items.Tomes.PreHardmode;
+using Avalon.Items.Material.TomeMats;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.Hardmode;
 
 class CreatorsTome : ModItem
 {
@@ -43,17 +45,17 @@ class CreatorsTome : ModItem
         player.statManaMax2 += 100;
     }
 
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe(1)
-    //        .AddIngredient(ModContent.ItemType<DragonOrb>())
-    //        .AddIngredient(ModContent.ItemType<TheVoidlands>())
-    //        .AddIngredient(ModContent.ItemType<ScrollofTome>(), 2)
-    //        .AddIngredient(ModContent.ItemType<FineLumber>(), 5)
-    //        .AddIngredient(ModContent.ItemType<Gravel>(), 10)
-    //        .AddIngredient(ModContent.ItemType<Sandstone>(), 20)
-    //        .AddIngredient(ModContent.ItemType<CarbonSteel>(), 15)
-    //        .AddTile(ModContent.TileType<Tiles.TomeForge>())
-    //        .Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<DragonOrb>())
+            .AddIngredient(ModContent.ItemType<TheVoidlands>())
+            .AddIngredient(ModContent.ItemType<ScrollofTome>(), 2)
+            .AddIngredient(ModContent.ItemType<FineLumber>(), 15)
+            .AddIngredient(ModContent.ItemType<Gravel>(), 15)
+            .AddIngredient(ModContent.ItemType<Sandstone>(), 15)
+            .AddIngredient(ModContent.ItemType<CarbonSteel>(), 15)
+            .AddTile(ModContent.TileType<Tiles.TomeForge>())
+            .Register();
+    }
 }

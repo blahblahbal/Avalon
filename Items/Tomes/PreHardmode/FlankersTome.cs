@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.PreHardmode;
 
-class TomeofDistance : ModItem
+class FlankersTome : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -20,7 +20,7 @@ class TomeofDistance : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
         Item.value = 15000;
         Item.height = dims.Height;
@@ -29,16 +29,15 @@ class TomeofDistance : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Ranged) += 0.15f;
-        player.statLifeMax2 += 40;
-        player.statManaMax2 += 20;
+        player.GetDamage(DamageClass.Melee) += 0.1f;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<MistyPeachBlossoms>())
-            .AddIngredient(ModContent.ItemType<TaleoftheRedLotus>())
+            .AddIngredient(ModContent.ItemType<StrongVenom>(), 3)
+            .AddIngredient(ModContent.ItemType<FineLumber>(), 35)
+            .AddIngredient(ModContent.ItemType<RubybeadHerb>(), 3)
             .AddIngredient(ModContent.ItemType<MysticalTomePage>())
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();

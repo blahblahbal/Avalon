@@ -3,8 +3,10 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Items.Tomes.PreHardmode;
+using Avalon.Items.Material.TomeMats;
 
-namespace Avalon.Items.Tomes;
+namespace Avalon.Items.Tomes.Hardmode;
 
 public class LoveUpandDown : ModItem
 {
@@ -43,18 +45,18 @@ public class LoveUpandDown : ModItem
         player.statManaMax2 += 80;
     }
 
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe(1)
-    //        .AddIngredient(ModContent.ItemType<DragonOrb>())
-    //        .AddIngredient(ModContent.ItemType<AdventuresandMishaps>())
-    //        .AddIngredient(ModContent.ItemType<ScrollofTome>(), 3)
-    //        .AddIngredient(ModContent.ItemType<FineLumber>(), 10)
-    //        .AddIngredient(ModContent.ItemType<Gravel>(), 15)
-    //        .AddIngredient(ModContent.ItemType<Sandstone>(), 20)
-    //        .AddIngredient(ModContent.ItemType<CarbonSteel>(), 20)
-    //        .AddIngredient(ModContent.ItemType<MysteriousPage>(), 5)
-    //        .AddTile(ModContent.TileType<Tiles.TomeForge>())
-    //        .Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<DragonOrb>())
+            .AddIngredient(ModContent.ItemType<AdventuresandMishaps>())
+            .AddIngredient(ModContent.ItemType<ScrollofTome>(), 2)
+            .AddIngredient(ModContent.ItemType<FineLumber>(), 15)
+            .AddIngredient(ModContent.ItemType<Gravel>(), 15)
+            .AddIngredient(ModContent.ItemType<Sandstone>(), 15)
+            .AddIngredient(ModContent.ItemType<CarbonSteel>(), 15)
+            .AddIngredient(ModContent.ItemType<MysteriousPage>(), 4)
+            .AddTile(ModContent.TileType<Tiles.TomeForge>())
+            .Register();
+    }
 }
