@@ -99,7 +99,7 @@ class RiftGogglesPlayer : ModPlayer
             }
         }
         // ores
-        if (Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Main.rand.NextBool(50000))
+        if (Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Main.rand.NextBool(1000))
         {
             if (Player.ZoneRockLayerHeight)
             {
@@ -297,6 +297,93 @@ public class OreRift : ModItem
     {
         Point tile = Item.Center.ToTileCoordinates();
 
+        if (Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft == 250)
+        {
+            #region copper
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Copper)
+            {
+                Honeyify(tile, TileID.Copper);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Tin)
+            {
+                Honeyify(tile, TileID.Tin);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BronzeOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.BronzeOre>());
+            }
+            #endregion
+            #region iron
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Iron)
+            {
+                Honeyify(tile, TileID.Iron);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Lead)
+            {
+                Honeyify(tile, TileID.Lead);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.NickelOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.NickelOre>());
+            }
+            #endregion
+            #region silver
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Silver)
+            {
+                Honeyify(tile, TileID.Silver);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Tungsten)
+            {
+                Honeyify(tile, TileID.Tungsten);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.ZincOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.ZincOre>());
+            }
+            #endregion
+            #region gold
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Gold)
+            {
+                Honeyify(tile, TileID.Gold);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Platinum)
+            {
+                Honeyify(tile, TileID.Platinum);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BismuthOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.BismuthOre>());
+            }
+            #endregion
+            #region rhodium
+            if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.RhodiumOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.RhodiumOre>());
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.OsmiumOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.OsmiumOre>());
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.IridiumOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.IridiumOre>());
+            }
+            #endregion
+            #region evil
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Demonite)
+            {
+                Honeyify(tile, TileID.Demonite);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Crimtane)
+            {
+                Honeyify(tile, TileID.Crimtane);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BacciliteOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.BacciliteOre>());
+            }
+            #endregion
+        }
         if (Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft == 150)
         {
             #region copper
@@ -399,10 +486,44 @@ public class OreRift : ModItem
 
         return p;
     }
-    public static void RiftReplace(Point p, int type, int replace, int maxTiles = 500)
+
+    public static void Honeyify(Point p, int type, int maxTiles = 500)
     {
         int tiles = 0;
+
+        Tile tile = Framing.GetTileSafely(p);
+        if (!tile.HasTile || tile.TileType != type)
+        {
+            return;
+        }
+
+        List<List<Point>> points = new List<List<Point>>();
+        points = AddValidNeighbors(points, p);
+
+        int index = 0;
         
+        while (points.Count > 0 && tiles < maxTiles && index < points.Count)
+        {
+            List<Point> tilePos = points[index];
+            foreach (Point a in tilePos)
+            {
+                Tile t = Framing.GetTileSafely(a.X, a.Y);
+                if (t.HasTile && t.TileType == type && t.LiquidAmount == 0)
+                {
+                    t.LiquidAmount = 54;
+                    t.LiquidType = LiquidID.Honey;
+                    tiles++;
+                    AddValidNeighbors(points, a);
+                }
+                
+            }
+            index++;
+        }
+    }
+
+    public static void RiftReplace(Point p, int type, int replace, bool honeyify = false, int maxTiles = 500)
+    {
+        int tiles = 0;
 
         Tile tile = Framing.GetTileSafely(p);
         if (!tile.HasTile || tile.TileType != type)
@@ -417,14 +538,10 @@ public class OreRift : ModItem
         while (points.Count > 0 && tiles < maxTiles && index < points.Count)
         {
             List<Point> tilePos = points[index];
+
             foreach (Point a in tilePos)
             {
                 Tile t = Framing.GetTileSafely(a.X, a.Y);
-                if (t.HasTile && t.TileType == type)
-                {
-                    t.LiquidAmount = 54;
-                    t.LiquidType = LiquidID.Honey;
-                }
                 if (t.HasTile && t.TileType == type && t.LiquidType == LiquidID.Honey)
                 {
                     Tile q = Framing.GetTileSafely(a.X, a.Y);
