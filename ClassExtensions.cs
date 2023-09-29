@@ -37,6 +37,15 @@ public static class ClassExtensions
         else if (vector.Length() < min) return Vector2.Normalize(vector) * min;
         else return vector;
     }
+    //public static bool AnyOreRiftsInRange(int x, int y, Item )
+    //{
+    //    for (int i = 0; i < 400; i++)
+    //    {
+    //        if (Main.item[i].type == ModContent.ItemType<Items.OreRift>() && Vector2.Distance(Main.item[i].position, 
+    //    }
+    //}
+
+
     /// <summary>
     /// Harvests an area using a veinminer algorithm.
     /// </summary>
@@ -80,6 +89,7 @@ public static class ClassExtensions
     public static void RiftReplace(Point p, int type, int replace, int maxTiles = 500)
     {
         int tiles = 0;
+        int tilesH = 0;
 
         Tile tile = Framing.GetTileSafely(p);
         if (!tile.HasTile || tile.TileType != type)
@@ -89,6 +99,29 @@ public static class ClassExtensions
 
         List<List<Point>> points = new List<List<Point>>();
         points = AddValidNeighbors(points, p);
+
+        List<List<Point>> pointsH = new List<List<Point>>();
+        pointsH = AddValidNeighbors(pointsH, p);
+
+        int indexH = 0;
+        while (pointsH.Count > 0 && tilesH < maxTiles && indexH < pointsH.Count)
+        {
+            List<Point> tilePos = pointsH[indexH];
+            foreach (Point a in tilePos)
+            {
+                Tile t = Framing.GetTileSafely(a.X, a.Y);
+                if (t.HasTile && t.TileType == type)
+                {
+                    t.LiquidType = LiquidID.Honey;
+                    t.LiquidAmount = 54;
+                    tilesH++;
+                    AddValidNeighbors(pointsH, a);
+                    
+                }
+            }
+            indexH++;
+        }
+        Main.NewText(indexH);
 
         int index = 0;
         while (points.Count > 0 && tiles < maxTiles && index < points.Count)

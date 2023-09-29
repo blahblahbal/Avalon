@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
 using System;
@@ -34,7 +35,17 @@ class WorldgenHelper : ModItem
         int y = (int)Main.MouseWorld.Y / 16;
 
         if (player.ItemAnimationJustStarted)
-            WorldGeneration.Structures.SkyFortress.Generate(x, y);
+        {
+            //Tile t = Main.tile[x, y];
+            //t.LiquidType = LiquidID.Honey;
+            //t.LiquidAmount = 54;
+
+            //Items.Accessories.Hardmode.OreRift.HoneyPlace(new Point(x, y), Main.tile[x, y].TileType);
+            int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
+            Main.item[rift].velocity *= 0f;
+            Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
+        }
+            //WorldGeneration.Structures.SkyFortress.Generate(x, y);
 
             //if (player.ItemAnimationJustStarted)
             //    ClassExtensions.VeinMine(new Point(x, y), TileID.Copper);

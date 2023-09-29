@@ -5937,7 +5937,7 @@ Mods: {
 			}
 
 			OreRift: {
-				DisplayName: Ore Rift
+				DisplayName: ""
 				Tooltip: ""
 			}
 
