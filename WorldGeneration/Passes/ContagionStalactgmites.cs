@@ -65,7 +65,7 @@ namespace Avalon.WorldGeneration.Passes
                         {
                             //Tile t = Main.tile[num19, num22 - 1];
                             //t.Slope = SlopeType.Solid;
-                            Utils.PlaceContagionTight(num19, num22);
+                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>());
                             //WorldGen.PlaceObject(num19, num22, ModContent.TileType<Tiles.Contagion.ContagionStalactites>(), style: WorldGen.genRand.Next(6));
                         }
 
@@ -76,7 +76,7 @@ namespace Avalon.WorldGeneration.Passes
                         {
                             //Tile t = Main.tile[num19, num22 + 1];
                             //t.Slope = SlopeType.Solid;
-                            Utils.PlaceContagionTight(num19, num22);
+                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>());
                             //WorldGen.PlaceObject(num19, num22, ModContent.TileType<Tiles.Contagion.ContagionStalagmites>(), style: WorldGen.genRand.Next(6));
                         }
                         //Utils.PlaceContagionTight(num19, num22);

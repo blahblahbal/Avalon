@@ -1,3 +1,4 @@
+using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using System;
@@ -24,24 +25,23 @@ public class Utils
         return (dx * dx) / (xRadius * xRadius) + (dy * dy) / (yRadius * yRadius) <= 1;
     }
 
-    public static void PlaceContagionTight(int x, int y)
+    public static void PlaceCustomTight(int x, int y, ushort type)
     {
         if (Main.tile[x, y].LiquidType != LiquidID.Shimmer)
         {
-            PlaceUncheckedStalactite(x, y, WorldGen.genRand.NextBool(2), WorldGen.genRand.Next(3));
+            PlaceUncheckedStalactite(x, y, WorldGen.genRand.NextBool(2), WorldGen.genRand.Next(3), type);
             //if (Main.tile[x, y].TileType == ModContent.TileType<ContagionStalactgmites>())
             //{
             //    WorldGen.CheckTight(x, y);
             //}
         }
     }
-    public static void PlaceUncheckedStalactite(int x, int y, bool preferSmall, int variation)
+    public static void PlaceUncheckedStalactite(int x, int y, bool preferSmall, int variation, ushort type)
     {
-        ushort type = (ushort)ModContent.TileType<ContagionStalactgmites>();
         variation = Terraria.Utils.Clamp(variation, 0, 2);
         if (WorldGen.SolidTile(x, y - 1) && !Main.tile[x, y].HasTile && !Main.tile[x, y + 1].HasTile)
         {
-            if (Main.tile[x, y - 1].TileType == ModContent.TileType<Chunkstone>())
+            if (Main.tile[x, y - 1].TileType == ModContent.TileType<Chunkstone>() || Main.tile[x, y - 1].TileType == ModContent.TileType<BlastedStone>())
             {
                 if (preferSmall)
                 {
@@ -69,7 +69,7 @@ public class Utils
         }
         else if (WorldGen.SolidTile(x, y + 1) && !Main.tile[x, y].HasTile && !Main.tile[x, y - 1].HasTile)
         {
-            if (Main.tile[x, y + 1].TileType == ModContent.TileType<Chunkstone>())
+            if (Main.tile[x, y + 1].TileType == ModContent.TileType<Chunkstone>() || Main.tile[x, y + 1].TileType == ModContent.TileType<BlastedStone>())
             {
                 if (preferSmall)
                 {
@@ -541,7 +541,8 @@ public class Utils
         if (leftSideActive || rightSideActive)
         {
             if (xCoord > Main.maxTilesX / 2) xCoord--;
-            else xCoord++;
+            else if (xCoord < Main.maxTilesX / 2) xCoord++;
+            else return;
             if (xCoord < 100)
             {
                 xCoord = 100;

@@ -36,11 +36,9 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-            //Tile t = Main.tile[x, y];
-            //t.LiquidType = LiquidID.Honey;
-            //t.LiquidAmount = 54;
+            //WorldGen.ShimmerMakeBiome(x, y);
+            //WorldGeneration.Structures.LavaOcean.LavaOceanTemps(x, y);
 
-            //Items.Accessories.Hardmode.OreRift.HoneyPlace(new Point(x, y), Main.tile[x, y].TileType);
             int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
             Main.item[rift].velocity *= 0f;
             Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;

@@ -18,6 +18,14 @@ class LavaShrine
         ushort LB = TileID.HellstoneBrick;
         ushort MO = (ushort)ModContent.TileType<Tiles.BrimstoneBlock>();
         ushort backWall = WallID.ObsidianBackEcho;
+
+        for (int q = x; q < x + 44; q++)
+        {
+            for (int z = y; z < y + 23; z++)
+            {
+                Main.tile[q, z].LiquidAmount = 0;
+            }
+        }
         WorldGen.PlaceTile(x + 2, y, LB, forced: true);
         WorldGen.PlaceTile(x + 5, y, LB, forced: true);
         WorldGen.PlaceTile(x + 6, y, LB, forced: true);

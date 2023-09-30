@@ -540,6 +540,18 @@ public class AvalonGlobalItem : GlobalItem
         }
         if (item.accessory && !item.social)
         {
+            if (item.prefix == ModContent.PrefixType<Enchanted>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+1 defense")
+                    {
+                        IsModifier = true
+                    });
+                }
+            }
             if (item.prefix == ModContent.PrefixType<Hoarding>())
             {
                 int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))

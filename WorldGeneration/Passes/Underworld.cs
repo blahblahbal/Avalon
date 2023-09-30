@@ -76,10 +76,10 @@ internal class Underworld : GenPass
                                 if (q % 20 == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, -1);
-                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
                                     if (WorldGen.genRand.NextBool(3))
                                     {
-                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), -1);
+                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
                                     }
                                 }
                             }
@@ -98,10 +98,10 @@ internal class Underworld : GenPass
                                 if (q % 20 == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, 1);
-                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
+                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
                                     if (WorldGen.genRand.NextBool(3))
                                     {
-                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), 1);
+                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
                                     }
                                 }
                             }
@@ -177,10 +177,10 @@ internal class Underworld : GenPass
                                 if (q % 20 == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, -1);
-                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), -1);
+                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
                                     if (WorldGen.genRand.NextBool(3))
                                     {
-                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), -1);
+                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
                                     }
                                 }
                             }
@@ -199,10 +199,10 @@ internal class Underworld : GenPass
                                 if (q % 20 == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, 1);
-                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), 1);
+                                    MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
                                     if (WorldGen.genRand.NextBool(3))
                                     {
-                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), 1);
+                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
                                     }
                                 }
                             }
@@ -310,7 +310,7 @@ internal class Underworld : GenPass
     /// <param name="length">The height/tallness of the spike to generate.</param>
     /// <param name="width">The width/thickness of the spike to generate.</param>
     /// <param name="direction">The vertical direction of the spike; 1 is down, -1 is up.</param>
-    public static void MakeSpike(int x, int y, int length, int width, int direction = 1)
+    public static void MakeSpike(int x, int y, int length, int width, ushort centerType, ushort borderType, int direction = 1)
     {
         // Store the x and y in new vars
         int startX = x;
@@ -346,10 +346,10 @@ internal class Underworld : GenPass
             // Put a circle between the last point and the current
             int betweenXPos = (int)(lastPos.X + x) / 2;
             int betweenYPos = (int)(lastPos.Y + y) / 2;
-            Utils.MakeCircle2(betweenXPos, betweenYPos, (int)((length - q) * 0.4f), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>());
+            Utils.MakeCircle2(betweenXPos, betweenYPos, (int)((length - q) * 0.4f), borderType, centerType);
 
             // Make a square/circle of the tile
-            Utils.MakeCircle2(x, y, (int)((length - q) * 0.4f), ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>());
+            Utils.MakeCircle2(x, y, (int)((length - q) * 0.4f), borderType, centerType);
 
             // Assign the last position to the current position
             lastPos = new(x, y);
