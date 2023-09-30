@@ -99,7 +99,7 @@ class RiftGogglesPlayer : ModPlayer
             }
         }
         // ores
-        if (Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Main.rand.NextBool(1000))
+        if (Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Main.rand.NextBool(2500))
         {
             if (Player.ZoneRockLayerHeight)
             {
