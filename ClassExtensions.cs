@@ -89,7 +89,6 @@ public static class ClassExtensions
     public static void RiftReplace(Point p, int type, int replace, int maxTiles = 500)
     {
         int tiles = 0;
-        int tilesH = 0;
 
         Tile tile = Framing.GetTileSafely(p);
         if (!tile.HasTile || tile.TileType != type)
@@ -99,29 +98,6 @@ public static class ClassExtensions
 
         List<List<Point>> points = new List<List<Point>>();
         points = AddValidNeighbors(points, p);
-
-        List<List<Point>> pointsH = new List<List<Point>>();
-        pointsH = AddValidNeighbors(pointsH, p);
-
-        int indexH = 0;
-        while (pointsH.Count > 0 && tilesH < maxTiles && indexH < pointsH.Count)
-        {
-            List<Point> tilePos = pointsH[indexH];
-            foreach (Point a in tilePos)
-            {
-                Tile t = Framing.GetTileSafely(a.X, a.Y);
-                if (t.HasTile && t.TileType == type)
-                {
-                    t.LiquidType = LiquidID.Honey;
-                    t.LiquidAmount = 54;
-                    tilesH++;
-                    AddValidNeighbors(pointsH, a);
-                    
-                }
-            }
-            indexH++;
-        }
-        Main.NewText(indexH);
 
         int index = 0;
         while (points.Count > 0 && tiles < maxTiles && index < points.Count)
@@ -133,11 +109,18 @@ public static class ClassExtensions
                 if (t.HasTile && t.TileType == type)
                 {
                     Tile q = Framing.GetTileSafely(a.X, a.Y);
-                    q.TileType = (ushort)replace;
-                    WorldGen.SquareTileFrame(a.X, a.Y);
-                    if (Main.netMode != NetmodeID.SinglePlayer)
+                    if (replace == ushort.MaxValue)
                     {
-                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 21, a.X, a.Y, replace);
+                        q.HasTile = false;
+                    }
+                    else
+                    {
+                        q.TileType = (ushort)replace;
+                        WorldGen.SquareTileFrame(a.X, a.Y);
+                        if (Main.netMode != NetmodeID.SinglePlayer)
+                        {
+                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 21, a.X, a.Y, replace);
+                        }
                     }
                     tiles++;
                     AddValidNeighbors(points, a);

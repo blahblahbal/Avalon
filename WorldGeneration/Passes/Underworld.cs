@@ -50,6 +50,22 @@ internal class Underworld : GenPass
 
                 }
             }
+
+            // shave some stuff off the bottom layer of hell
+            for (int q = caesiumMaxLeft; q < caesiumLeftSidePosXLeft; q++)
+            {
+                for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+                {
+                    if (q % 6 == 0 && z > Main.maxTilesY - 140 && z < Main.maxTilesY - 120)
+                    {
+                        Utils.TileRunnerSpecial(q, z, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(20, 30), -2);
+                    }
+                    if (z > Main.maxTilesY - 115 && z < Main.maxTilesY - 95)
+                    {
+                        Main.tile[q, z].LiquidAmount = 0;
+                    }
+                }
+            }
             // make the majority of the blastplains
             for (int q = caesiumMaxLeft; q < caesiumLeftSidePosXLeft; q++)
             {
@@ -64,6 +80,9 @@ internal class Underworld : GenPass
                     {
                         WorldGen.KillTile(q, z);
                     }
+
+                    
+
                     if (z < Main.maxTilesY - 100 && z > Main.maxTilesY - 110)
                     {
                         if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
@@ -71,7 +90,7 @@ internal class Underworld : GenPass
                             (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
                             (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
                         {
-                            if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                            if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
                             {
                                 if (q % 20 == 0)
                                 {
@@ -93,7 +112,7 @@ internal class Underworld : GenPass
                             (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
                             (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
                         {
-                            if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                            if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
                             {
                                 if (q % 20 == 0)
                                 {
@@ -151,6 +170,23 @@ internal class Underworld : GenPass
 
                 }
             }
+
+            // shave some stuff off the bottom layer of hell
+            for (int q = caesiumXPosRight; q < caesiumMaxRight; q++)
+            {
+                for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+                {
+                    if (q % 6 == 0 && z > Main.maxTilesY - 140 && z < Main.maxTilesY - 120)
+                    {
+                        Utils.TileRunnerSpecial(q, z, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(20, 30), -2);
+                    }
+                    if (z > Main.maxTilesY - 115 && z < Main.maxTilesY - 95)
+                    {
+                        Main.tile[q, z].LiquidAmount = 0;
+                    }
+                }
+            }
+
             // make the majority of the blastplains
             for (int q = caesiumXPosRight; q < caesiumMaxRight; q++)
             {
@@ -172,7 +208,7 @@ internal class Underworld : GenPass
                             (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
                             (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
                         {
-                            if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                            if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
                             {
                                 if (q % 20 == 0)
                                 {
@@ -194,7 +230,7 @@ internal class Underworld : GenPass
                             (Main.tile[q, z].HasTile && !Main.tile[q - 1, z].HasTile) ||
                             (Main.tile[q, z].HasTile && !Main.tile[q + 1, z].HasTile))
                         {
-                            if (Main.tile[q, z].TileType != ModContent.TileType<CaesiumOre>())
+                            if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
                             {
                                 if (q % 20 == 0)
                                 {
@@ -346,10 +382,12 @@ internal class Underworld : GenPass
             // Put a circle between the last point and the current
             int betweenXPos = (int)(lastPos.X + x) / 2;
             int betweenYPos = (int)(lastPos.Y + y) / 2;
-            Utils.MakeCircle2(betweenXPos, betweenYPos, (int)((length - q) * 0.4f), borderType, centerType);
+
+            // weird, centerType and borderType are swapped
+            Utils.MakeCircle2(betweenXPos, betweenYPos, (int)((length - q) * 0.4f), centerType, borderType);
 
             // Make a square/circle of the tile
-            Utils.MakeCircle2(x, y, (int)((length - q) * 0.4f), borderType, centerType);
+            Utils.MakeCircle2(x, y, (int)((length - q) * 0.4f), centerType, borderType);
 
             // Assign the last position to the current position
             lastPos = new(x, y);

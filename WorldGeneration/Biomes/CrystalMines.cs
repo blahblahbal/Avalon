@@ -47,14 +47,14 @@ internal class CrystalMines
                 {
                     if (j % 12 == 0)
                     {
-                        WorldGeneration.Utils.TileRunnerCrystalMines(i, j, WorldGen.genRand.Next(35, 45), WorldGen.genRand.Next(35, 45), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
+                        WorldGeneration.Utils.TileRunnerSpecial(i, j, WorldGen.genRand.Next(35, 45), WorldGen.genRand.Next(35, 45), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
                     }
                 }
                 if (j == origin.Y || j == origin.Y + height - 1)
                 {
                     if (i % 12 == 0)
                     {
-                        WorldGeneration.Utils.TileRunnerCrystalMines(i, j, WorldGen.genRand.Next(35, 45), WorldGen.genRand.Next(35, 45), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
+                        WorldGeneration.Utils.TileRunnerSpecial(i, j, WorldGen.genRand.Next(35, 45), WorldGen.genRand.Next(35, 45), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
                     }
                 }
             }

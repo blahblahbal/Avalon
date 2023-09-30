@@ -13,9 +13,8 @@ internal class Shrines : GenPass
 {
     public Shrines() : base("Avalon Shrines", 20f) { }
 
-    private static bool IsTooClose(int x, List<Point> positions, int minDistance = 100)
+    private static bool IsTooClose(int x, List<Point> positions, int minDistance = 400)
     {
-        minDistance = 300;
         foreach (Point q in positions)
         {
             if (Math.Abs(x - q.X) < minDistance)
@@ -92,16 +91,16 @@ internal class Shrines : GenPass
 
             int xCoord = WorldGen.genRand.Next(xmin, xmax);
             int yCoord = WorldGen.genRand.Next(ymin, ymax);
-            for (int q = 0; q < 15; q++)
+            for (int q = 0; q < 50; q++)
             {
-                if (IsTooClose(xCoord, lastPos))
+                if (IsTooClose(xCoord, lastPos) || (xCoord > Main.maxTilesX / 2 - 250 && xCoord < Main.maxTilesX / 2 + 250))
                 {
                     xCoord = WorldGen.genRand.Next(xmin, xmax);
                 }
                 else break;
             }
 
-            Point point = new(xCoord, yCoord); //WorldGen.RandomRectanglePoint(xmin, ymin, xmax, ymax);
+            Point point = new(xCoord, yCoord);
             Utils.GetCMXCoord(point.X, point.Y, 120, 110, ref point.X);
 
             if (Structures.LavaOcean.GenerateLavaOcean(point.X, point.Y))
@@ -111,6 +110,7 @@ internal class Shrines : GenPass
                     Structures.LavaShrine.AddLavaShrine(point.X - 22, point.Y + 2);
                     placedShrine = true;
                 }
+                GenVars.structures.AddProtectedStructure(new Rectangle(xCoord - 75, yCoord - 50, 150, 100));
                 lastPos.Add(point);
                 num614++;
             }
@@ -124,49 +124,35 @@ internal class Shrines : GenPass
             // causes making cave walls freeze somehow (MIGHT HAVE FIXED THIS (NOPE))
             while (noTiles.Contains(Main.tile[x10, y6].TileType) || noWalls.Contains(Main.tile[x10, y6].WallType))
             {
-                if (x10 == Main.maxTilesX / 2)
-                {
-                    break;
-                }
                 if (x10 > (Main.maxTilesX / 2))
                     x10--;
-                else
+                else if (x10 < Main.maxTilesX / 2)
                     x10++;
-                //if (x10 >= Main.maxTilesX / 2 - 10 && x10 <= Main.maxTilesX / 2 + 10)
-                //    break;
+                else break;
             }
             while (noTiles.Contains(Main.tile[x10 + 30, y6].TileType) || noWalls.Contains(Main.tile[x10 + 30, y6].WallType))
             {
-                if (x10 == Main.maxTilesX / 2)
-                {
-                    break;
-                }
                 if (x10 > (Main.maxTilesX / 2))
                     x10--;
-                else
+                else if (x10 < Main.maxTilesX / 2)
                     x10++;
+                else break;
             }
             while (noTiles.Contains(Main.tile[x10, y6 + 20].TileType) || noWalls.Contains(Main.tile[x10, y6 + 20].WallType))
             {
-                if (x10 == Main.maxTilesX / 2)
-                {
-                    break;
-                }
                 if (x10 > (Main.maxTilesX / 2))
                     x10--;
-                else
+                else if (x10 < Main.maxTilesX / 2)
                     x10++;
+                else break;
             }
             while (noTiles.Contains(Main.tile[x10 + 30, y6 + 20].TileType) || noWalls.Contains(Main.tile[x10 + 30, y6 + 20].WallType))
             {
-                if (x10 == Main.maxTilesX / 2)
-                {
-                    break;
-                }
                 if (x10 > (Main.maxTilesX / 2))
                     x10--;
-                else
+                else if (x10 < Main.maxTilesX / 2)
                     x10++;
+                else break;
             }
             if (q == 0) Structures.IceShrine.Generate(x10, y6);
             else if (q == 1) Structures.EvilShrine.GenerateEvilShrine(x10, y6);

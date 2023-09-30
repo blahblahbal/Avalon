@@ -618,7 +618,7 @@ class LavaShrine
 
         WorldGen.PlaceTile(x + 43, y + 12, 4, true, true, -1, 2);
         WorldGen.PlaceTile(x + 1, y + 12, 4, true, true, -1, 2);
-        //WorldGen.SquareTileFrameArea(x, y, 44);
+        Utils.SquareTileFrameArea(x, y, 44);
         AddLavaChest(x + 5, y + 15, 0, false, 1);
         AddLavaChest(x + 40, y + 17, 0, false, 1);
     }

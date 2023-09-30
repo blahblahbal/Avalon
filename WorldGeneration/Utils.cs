@@ -201,6 +201,7 @@ public class Utils
         {
             for (int j = y - r; j < y + r; j++)
             {
+                Main.tile[i, j].LiquidAmount = 0;
                 SquareTileFrame(i, j, true, lh);
             }
         }
@@ -604,7 +605,22 @@ public class Utils
             GetSkyFortressXCoord(xCoord, y, xLength, ylength, ref xCoord);
         }
     }
-    public static void TileRunnerCrystalMines(int i, int j, double strength, int steps, int type, bool addTile = false, float speedX = 0f, float speedY = 0f, bool noYChange = false, bool overRide = true, int ignoreTileType = -1)
+
+    /// <summary>
+    /// This method is used for both the Crystal Mines and the Caesium Blastplains. 
+    /// </summary>
+    /// <param name="i"></param>
+    /// <param name="j"></param>
+    /// <param name="strength"></param>
+    /// <param name="steps"></param>
+    /// <param name="type"></param>
+    /// <param name="addTile"></param>
+    /// <param name="speedX"></param>
+    /// <param name="speedY"></param>
+    /// <param name="noYChange"></param>
+    /// <param name="overRide"></param>
+    /// <param name="ignoreTileType"></param>
+    public static void TileRunnerSpecial(int i, int j, double strength, int steps, int type, bool addTile = false, float speedX = 0f, float speedY = 0f, bool noYChange = false, bool overRide = true, int ignoreTileType = -1)
     {
         if (WorldGen.drunkWorldGen)
         {
@@ -632,7 +648,7 @@ public class Utils
         bool flag = type == 368;
         bool flag2 = type == 367;
         bool lava = false;
-        if (WorldGen.getGoodWorldGen && WorldGen.genRand.NextBool(4))
+        if (WorldGen.getGoodWorldGen && WorldGen.genRand.NextBool(4) || type == -2)
         {
             lava = true;
         }
@@ -698,11 +714,13 @@ public class Utils
                             Tile t = Main.tile[k, l];
                             if (lava)
                             {
-                                t.LiquidType = LiquidID.Lava;
+                                t.LiquidType = LiquidID.Water;
+                                t.LiquidAmount = 0;
                             }
                             if (l > GenVars.lavaLine)
                             {
-                                t.LiquidType = LiquidID.Lava;
+                                t.LiquidType = LiquidID.Water;
+                                t.LiquidAmount = 0;
                             }
                         }
                         Tile t2 = Main.tile[k, l];
