@@ -40,7 +40,7 @@ namespace Avalon.WorldGeneration.Structures
             num12 *= 1.05 - WorldGen.genRand.NextDouble() * 0.1;
             num18 *= 1.05 - WorldGen.genRand.NextDouble() * 0.1;
             num19 *= 1.0 - WorldGen.genRand.NextDouble() * 0.1;
-            int biomeWidth = WorldGen.genRand.Next(105, 125);
+            int biomeWidth = WorldGen.genRand.Next(125, 140); // 105, 125
             int num21 = (int)(biomeWidth * num19);
             int num22 = (int)(biomeWidth * num12);
             int num23 = WorldGen.genRand.Next(9, 13);

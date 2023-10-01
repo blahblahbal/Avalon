@@ -6614,6 +6614,7 @@ Mods: {
 			DesertTalon.DisplayName: Desert Talon
 			BoneFish.DisplayName: Bone Fish
 			CursedFlamer.DisplayName: Cursed Flamer
+			MobRift.DisplayName: ""
 		}
 
 		Buffs: {

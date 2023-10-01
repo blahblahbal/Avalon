@@ -36,12 +36,13 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
+
             //WorldGen.ShimmerMakeBiome(x, y);
-            //WorldGeneration.Structures.LavaOcean.LavaOceanTemps(x, y);
-            //WorldGeneration.Structures.LavaShrine.NewLavaShrine(x, y);
-            //int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
-            //Main.item[rift].velocity *= 0f;
-            //Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
+            //WorldGeneration.Structures.LavaOcean.GenerateLavaOcean(x, y);
+            //WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
+            int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
+            Main.item[rift].velocity *= 0f;
+            Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
         }
             //WorldGeneration.Structures.SkyFortress.Generate(x, y);
 

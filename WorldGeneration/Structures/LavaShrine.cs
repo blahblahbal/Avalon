@@ -1,7 +1,3 @@
-using Avalon.Items.Accessories;
-using Avalon.Items.Potions;
-using Avalon.Items.Placeable.Seed;
-using Avalon.Items.Weapons.Ranged;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -97,8 +93,8 @@ class LavaShrine
                 {0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0},
                 {0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
                 {0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
-                {0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,2,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
-                {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,2,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
+                {0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,3,4,3,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
+                {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,3,4,3,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
@@ -106,7 +102,7 @@ class LavaShrine
 
         for (int q = x; q < x + 57; q++)
         {
-            for (int z = y; z < y + 27; z++)
+            for (int z = y; z < y + 18; z++)
             {
                 Main.tile[q, z].LiquidAmount = 0;
             }
@@ -282,14 +278,24 @@ class LavaShrine
                             break;
                         case 1:
                             tile.WallType = WallID.LavaUnsafe3;
+                            tile.LiquidAmount = 0;
                             break;
                         case 2:
+                            tile.WallType = WallID.Lavafall;
+                            tile.LiquidAmount = 0;
+                            break;
+                        case 3:
+                            tile.WallType = WallID.LavaUnsafe3;
+                            break;
+                        case 4:
                             tile.WallType = WallID.Lavafall;
                             break;
                     }
                 }
             }
         }
+
+        Utils.SquareTileFrameArea(x, y, 57, 27);
     }
 
     public static void AddLavaShrine(int x, int y)
@@ -905,8 +911,6 @@ class LavaShrine
 
     public static bool AddLavaChest(int i, int j, int contain = 0, bool notNearOtherChests = false, int Style = -1)
     {
-        //if (WorldGen.genRand == null)
-        //    WorldGen.genRand = new Random((int)DateTime.Now.Ticks);
         int k = j;
         while (k < Main.maxTilesY)
         {
