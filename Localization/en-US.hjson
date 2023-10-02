@@ -6403,7 +6403,7 @@ Mods: {
 
 			RejuvenationPotion: {
 				DisplayName: Rejuvenation Potion
-				Tooltip: ""
+				Tooltip: Heals 150 life over 5 seconds
 			}
 		}
 
@@ -7150,7 +7150,7 @@ Mods: {
 
 			Rejuvenation: {
 				DisplayName: Rejuvenation
-				Description: Mods.Avalon.Buffs.Rejuvenation.Description
+				Description: Healing life
 			}
 		}
 
