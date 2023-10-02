@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,7 +16,13 @@ namespace Avalon.Common;
 
 internal class AvalonGlobalProjectile : GlobalProjectile
 {
-    
+    public override void OnSpawn(Projectile projectile, IEntitySource source)
+    {
+        if (source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.HasBuff(BuffID.Cursed))
+        {
+            projectile.Kill();
+        }
+    }
     public override bool PreAI(Projectile projectile)
     {
         if (projectile.type == ProjectileID.TerraBlade2 && projectile.localAI[0] == 0)

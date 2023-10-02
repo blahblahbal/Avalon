@@ -1,9 +1,5 @@
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,8 +22,6 @@ namespace Avalon.WorldGeneration.Structures
             MakeOval(x, y, xRad, yRad, TileID.Stone);
 
             MakeOval(x, y, xRad - thickness, yRad - thickness, ushort.MaxValue);
-
-            
         }
 
         public static bool GenerateLavaOcean(int X, int Y)
@@ -46,7 +40,7 @@ namespace Avalon.WorldGeneration.Structures
             num12 *= 1.05 - WorldGen.genRand.NextDouble() * 0.1;
             num18 *= 1.05 - WorldGen.genRand.NextDouble() * 0.1;
             num19 *= 1.0 - WorldGen.genRand.NextDouble() * 0.1;
-            int biomeWidth = WorldGen.genRand.Next(105, 125);
+            int biomeWidth = WorldGen.genRand.Next(125, 140); // 105, 125
             int num21 = (int)(biomeWidth * num19);
             int num22 = (int)(biomeWidth * num12);
             int num23 = WorldGen.genRand.Next(9, 13);

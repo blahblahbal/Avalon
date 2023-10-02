@@ -51,12 +51,41 @@ public class AvalonGlobalNPCInstance : GlobalNPC
             drawColor.R = (byte)MathHelper.Clamp(drawColor.R - 25,0,255);
         }
     }
+    public override void PostAI(NPC npc)
+    {
+        if (npc.HasBuff(BuffID.BrokenArmor))
+        {
+            npc.defense /= 2;
+        }
+        if (npc.HasBuff(BuffID.Slow))
+        {
+            npc.position += npc.velocity * -0.3f;
+        }
+        if (npc.HasBuff(BuffID.Chilled))
+        {
+            npc.position += npc.velocity * -0.35f;
+        }
+    }
     public override void UpdateLifeRegen(NPC npc, ref int damage)
     {
         if(npc.type == NPCID.WallofFlesh && npc.life < 500)
         {
             npc.lifeRegen -= 100;
             damage = 50;
+        }
+        if (npc.HasBuff(BuffID.Electrified))
+        {
+            if (npc.lifeRegen > 0)
+            {
+                npc.lifeRegen = 0;
+            }
+            npc.lifeRegen -= 8;
+            if (npc.velocity != Vector2.Zero)
+                npc.lifeRegen -= 40;
+            if (damage < 4)
+            {
+                damage = 4;
+            }
         }
         if (Malaria)
         {

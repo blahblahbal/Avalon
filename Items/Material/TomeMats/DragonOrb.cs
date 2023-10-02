@@ -13,6 +13,7 @@ class DragonOrb : ModItem
     {
         Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 8));
         ItemID.Sets.ItemNoGravity[Item.type] = true;
+        ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         Item.ResearchUnlockCount = 2;
     }
 

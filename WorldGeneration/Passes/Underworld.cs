@@ -80,9 +80,7 @@ internal class Underworld : GenPass
                     {
                         WorldGen.KillTile(q, z);
                     }
-
-                    
-
+                    // up spikes
                     if (z < Main.maxTilesY - 100 && z > Main.maxTilesY - 110)
                     {
                         if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
@@ -92,20 +90,21 @@ internal class Underworld : GenPass
                         {
                             if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
                             {
-                                if (q % 20 == 0)
+                                if (q % WorldGen.genRand.Next(30, 45) == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, -1);
+                                    z += WorldGen.genRand.Next(12);
                                     MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
-                                    if (WorldGen.genRand.NextBool(3))
-                                    {
-                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
-                                    }
+                                    //if (WorldGen.genRand.NextBool(3))
+                                    //{
+                                    //    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
+                                    //}
                                 }
                             }
                         }
                     }
-
-                    if (z < Main.maxTilesY - 200 && z > Main.maxTilesY - 210)
+                    // down spikes
+                    if (z < Main.maxTilesY - 185 && z > Main.maxTilesY - 195)
                     {
                         if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
                             (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
@@ -114,14 +113,14 @@ internal class Underworld : GenPass
                         {
                             if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
                             {
-                                if (q % 20 == 0)
+                                if (q % WorldGen.genRand.Next(10, 15) == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, 1);
                                     MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
-                                    if (WorldGen.genRand.NextBool(3))
-                                    {
-                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
-                                    }
+                                    //if (WorldGen.genRand.NextBool(3))
+                                    //{
+                                    //    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
+                                    //}
                                 }
                             }
                         }
@@ -201,6 +200,7 @@ internal class Underworld : GenPass
                     {
                         WorldGen.KillTile(q, z);
                     }
+                    // up spikes
                     if (z < Main.maxTilesY - 100 && z > Main.maxTilesY - 110)
                     {
                         if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
@@ -210,20 +210,21 @@ internal class Underworld : GenPass
                         {
                             if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
                             {
-                                if (q % 20 == 0)
+                                if (q % WorldGen.genRand.Next(30, 45) == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, -1);
+                                    z += WorldGen.genRand.Next(12);
                                     MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
-                                    if (WorldGen.genRand.NextBool(3))
-                                    {
-                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
-                                    }
+                                    //if (WorldGen.genRand.NextBool(3))
+                                    //{
+                                    //    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
+                                    //}
                                 }
                             }
                         }
                     }
-
-                    if (z < Main.maxTilesY - 200 && z > Main.maxTilesY - 210)
+                    // down spikes
+                    if (z < Main.maxTilesY - 185 && z > Main.maxTilesY - 195)
                     {
                         if ((Main.tile[q, z].HasTile && !Main.tile[q, z - 1].HasTile) ||
                             (Main.tile[q, z].HasTile && !Main.tile[q, z + 1].HasTile) ||
@@ -232,14 +233,15 @@ internal class Underworld : GenPass
                         {
                             if (Main.tile[q, z].TileType == ModContent.TileType<BlastedStone>())
                             {
-                                if (q % 20 == 0)
+                                if (q % WorldGen.genRand.Next(10, 15) == 0)
                                 {
                                     z = Utils.CaesiumTileCheck(q, z, 1);
+                                    // 15, 22 / 8, 13
                                     MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
-                                    if (WorldGen.genRand.NextBool(3))
-                                    {
-                                        MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
-                                    }
+                                    //if (WorldGen.genRand.NextBool(3))
+                                    //{
+                                    //    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
+                                    //}
                                 }
                             }
                         }

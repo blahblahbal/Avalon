@@ -20,7 +20,7 @@ namespace Avalon.Hooks
 
         private void On_WorldGen_TileRunner(On_WorldGen.orig_TileRunner orig, int i, int j, double strength, int steps, int type, bool addTile, double speedX, double speedY, bool noYChange, bool overRide, int ignoreTileType)
         {
-            if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && type == TileID.Demonite)
+            if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && (type == TileID.Demonite || type == TileID.Crimtane))
             {
                 type = ModContent.TileType<BacciliteOre>();
             }

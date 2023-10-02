@@ -201,7 +201,7 @@ public class Utils
         {
             for (int j = y - r; j < y + r; j++)
             {
-                Main.tile[i, j].LiquidAmount = 0;
+                //Main.tile[i, j].LiquidAmount = 0;
                 SquareTileFrame(i, j, true, lh);
             }
         }

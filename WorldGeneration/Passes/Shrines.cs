@@ -107,7 +107,7 @@ internal class Shrines : GenPass
             {
                 if (!placedShrine)
                 {
-                    Structures.LavaShrine.AddLavaShrine(point.X - 22, point.Y + 2);
+                    Structures.LavaShrine.NewLavaShrine(point.X - 29, point.Y - 12);
                     placedShrine = true;
                 }
                 GenVars.structures.AddProtectedStructure(new Rectangle(xCoord - 75, yCoord - 50, 150, 100));

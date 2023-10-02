@@ -33,20 +33,23 @@ public class Chunkstone : ModTile
     }
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
-        if (Main.tile[i, j - 1].TileType == ModContent.TileType<ContagionStalactgmites>())
+        if (!fail && !effectOnly)
         {
-            WorldGen.KillTile(i, j - 1);
-            if (Main.tile[i, j - 2].TileType == ModContent.TileType<ContagionStalactgmites>())
+            if (Main.tile[i, j - 1].TileType == ModContent.TileType<ContagionStalactgmites>())
             {
-                WorldGen.KillTile(i, j - 2);
+                WorldGen.KillTile(i, j - 1);
+                if (Main.tile[i, j - 2].TileType == ModContent.TileType<ContagionStalactgmites>())
+                {
+                    WorldGen.KillTile(i, j - 2);
+                }
             }
-        }
-        if (Main.tile[i, j + 1].TileType == ModContent.TileType<ContagionStalactgmites>())
-        {
-            WorldGen.KillTile(i, j + 1);
-            if (Main.tile[i, j + 2].TileType == ModContent.TileType<ContagionStalactgmites>())
+            if (Main.tile[i, j + 1].TileType == ModContent.TileType<ContagionStalactgmites>())
             {
-                WorldGen.KillTile(i, j + 2);
+                WorldGen.KillTile(i, j + 1);
+                if (Main.tile[i, j + 2].TileType == ModContent.TileType<ContagionStalactgmites>())
+                {
+                    WorldGen.KillTile(i, j + 2);
+                }
             }
         }
     }

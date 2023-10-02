@@ -6,6 +6,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using System.Collections.Generic;
+using Terraria.DataStructures;
+using Avalon.Items.Material;
+using Avalon.Items.Material.Ores;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
@@ -33,35 +36,36 @@ class RiftGoggles : ModItem
 
     public override void AddRecipes()
     {
-        //CreateRecipe(1)
-        //    .AddIngredient(ItemID.Goggles)
-        //    .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
-        //    .AddIngredient(ItemID.JungleSpores, 10)
-        //    .AddIngredient(ItemID.CursedFlame, 15)
-        //    .AddIngredient(ItemID.SoulofNight, 10)
-        //    .AddIngredient(ModContent.ItemType<Sulphur>(), 20)
-        //    .AddTile(TileID.DemonAltar)
-        //    .Register();
+        CreateRecipe(1)
+            .AddIngredient(ItemID.Goggles)
+            .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
+            .AddIngredient(ItemID.JungleSpores, 10)
+            .AddIngredient(ItemID.CursedFlame, 15)
+            .AddIngredient(ItemID.SoulofNight, 10)
+            .AddIngredient(ModContent.ItemType<Sulphur>(), 20)
+            .AddTile(TileID.DemonAltar)
+            .Register();
 
-        //CreateRecipe(1)
-        //    .AddIngredient(ItemID.Goggles)
-        //    .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
-        //    .AddIngredient(ItemID.JungleSpores, 10)
-        //    .AddIngredient(ItemID.Ichor, 15)
-        //    .AddIngredient(ItemID.SoulofNight, 10)
-        //    .AddIngredient(ModContent.ItemType<Sulphur>(), 20)
-        //    .AddTile(TileID.DemonAltar)
-        //    .Register();
+        CreateRecipe(1)
+            .AddIngredient(ItemID.Goggles)
+            .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
+            .AddIngredient(ItemID.JungleSpores, 10)
+            .AddIngredient(ItemID.Ichor, 15)
+            .AddIngredient(ItemID.SoulofNight, 10)
+            .AddIngredient(ModContent.ItemType<Sulphur>(), 20)
+            .AddTile(TileID.DemonAltar)
+            .Register();
 
-        //CreateRecipe(1)
-        //    .AddIngredient(ItemID.Goggles)
-        //    .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
-        //    .AddIngredient(ItemID.JungleSpores, 10)
-        //    .AddIngredient(ModContent.ItemType<Pathogen>(), 15)
-        //    .AddIngredient(ItemID.SoulofNight, 10)
-        //    .AddIngredient(ModContent.ItemType<Sulphur>(), 20)
-        //    .AddTile(TileID.DemonAltar)
-        //    .Register();
+        CreateRecipe(1)
+            .AddIngredient(ItemID.Goggles)
+            .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
+            .AddIngredient(ItemID.JungleSpores, 10)
+            .AddIngredient(ModContent.ItemType<Pathogen>(), 15)
+            .AddIngredient(ItemID.SoulofNight, 10)
+            .AddIngredient(ModContent.ItemType<Sulphur>(), 20)
+            .AddTile(TileID.DemonAltar)
+            .Register();
+
         //CreateRecipe(1).AddIngredient(ItemID.Goggles).AddIngredient(ModContent.ItemType<BloodshotLens>(), 2).AddIngredient(ModContent.ItemType<TropicalShroomCap>(), 10).AddIngredient(ItemID.CursedFlame, 15).AddIngredient(ItemID.SoulofNight, 10).AddIngredient(ModContent.ItemType<Sulphur>(), 20).AddTile(TileID.DemonAltar).Register();
         //CreateRecipe(1).AddIngredient(ItemID.Goggles).AddIngredient(ModContent.ItemType<BloodshotLens>(), 2).AddIngredient(ModContent.ItemType<TropicalShroomCap>(), 10).AddIngredient(ItemID.Ichor, 15).AddIngredient(ItemID.SoulofNight, 10).AddIngredient(ModContent.ItemType<Sulphur>(), 20).AddTile(TileID.DemonAltar).Register();
         //CreateRecipe(1).AddIngredient(ItemID.Goggles).AddIngredient(ModContent.ItemType<BloodshotLens>(), 2).AddIngredient(ModContent.ItemType<TropicalShroomCap>(), 10).AddIngredient(ModContent.ItemType<Pathogen>(), 15).AddIngredient(ItemID.SoulofNight, 10).AddIngredient(ModContent.ItemType<Sulphur>(), 20).AddTile(TileID.DemonAltar).Register();
@@ -75,13 +79,13 @@ class RiftGogglesPlayer : ModPlayer
         // mobs
         if (Player.ZoneCrimson || Player.ZoneCorrupt || Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion)
         {
-            if (Main.rand.NextBool(5000) && Player.GetModPlayer<AvalonPlayer>().RiftGoggles)
+            if (Main.rand.NextBool(4000) && Player.GetModPlayer<AvalonPlayer>().RiftGoggles)
             {
                 Vector2 pposTile2 = Player.position + new Vector2(Main.rand.Next(-20 * 16, 21 * 16), Main.rand.Next(-20 * 16, 21 * 16));
                 Point pt = pposTile2.ToTileCoordinates();
                 if (!Main.tile[pt.X, pt.Y].HasTile)
                 {
-                    int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16, pt.Y * 16, ModContent.NPCType<NPCs.Rift>(), 0);
+                    int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16, pt.Y * 16, ModContent.NPCType<NPCs.MobRift>(), 0);
                     if (Main.netMode == NetmodeID.Server)
                     {
                         NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, proj);
@@ -98,8 +102,36 @@ class RiftGogglesPlayer : ModPlayer
                 }
             }
         }
+        if (ExxoAvalonOrigins.Confection != null)
+        {
+            if (Player.ZoneHallow || Player.InModBiome(ExxoAvalonOrigins.Confection.Find<ModBiome>("ConfectionBiome")))
+            {
+                if (Main.rand.NextBool(4000) && Player.GetModPlayer<AvalonPlayer>().RiftGoggles)
+                {
+                    Vector2 pposTile2 = Player.position + new Vector2(Main.rand.Next(-20 * 16, 21 * 16), Main.rand.Next(-20 * 16, 21 * 16));
+                    Point pt = pposTile2.ToTileCoordinates();
+                    if (!Main.tile[pt.X, pt.Y].HasTile)
+                    {
+                        int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16, pt.Y * 16, ModContent.NPCType<NPCs.MobRift>(), ai1: 1);
+                        if (Main.netMode == NetmodeID.Server)
+                        {
+                            NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, proj);
+                        }
+
+                        for (int i = 0; i < 20; i++)
+                        {
+                            int num893 = Dust.NewDust(Main.npc[proj].position, Main.npc[proj].width, Main.npc[proj].height, DustID.Enchanted_Pink, 0f, 0f, 0, default, 1f);
+                            Main.dust[num893].velocity *= 2f;
+                            Main.dust[num893].scale = 0.9f;
+                            Main.dust[num893].noGravity = true;
+                            Main.dust[num893].fadeIn = 3f;
+                        }
+                    }
+                }
+            }
+        }
         // ores
-        if (Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Main.rand.NextBool(1000))
+        if (Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Main.rand.NextBool(3200))
         {
             if (Player.ZoneRockLayerHeight)
             {
@@ -120,7 +152,6 @@ class RiftGogglesPlayer : ModPlayer
                     t.LiquidType = LiquidID.Honey;
                     t.LiquidAmount = 54;
                     int rift = Item.NewItem(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, 8, 8, ModContent.ItemType<OreRift>());
-                    Main.item[rift].instanced = true;
                     Main.item[rift].playerIndexTheItemIsReservedFor = Player.whoAmI;
                     Main.item[rift].keepTime = 600;
                     Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
@@ -128,20 +159,6 @@ class RiftGogglesPlayer : ModPlayer
                     {
                         NetMessage.SendData(MessageID.SyncItem, -1, -1, null, rift);
                     }
-
-                    //int proj = NPC.NewNPC(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, ModContent.NPCType<NPCs.Rift>(), ai1: 1);
-                    //if (Main.netMode == NetmodeID.Server)
-                    //{
-                    //    NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, proj);
-                    //}
-                    //for (int i = 0; i < 20; i++)
-                    //{
-                    //    int num893 = Dust.NewDust(Main.item[rift].position, Main.item[rift].width, Main.item[rift].height, DustID.Enchanted_Pink, 0f, 0f, 0, default, 1f);
-                    //    Main.dust[num893].velocity *= 2f;
-                    //    Main.dust[num893].scale = 0.9f;
-                    //    Main.dust[num893].noGravity = true;
-                    //    Main.dust[num893].fadeIn = 3f;
-                    //}
                 }
             }
         }
@@ -179,7 +196,6 @@ class RiftGogglesPlayer : ModPlayer
         #endregion rift goggles
     }
 }
-
 class RiftGogglesGlobalTile : GlobalTile
 {
     public override void PostDraw(int i, int j, int type, SpriteBatch spriteBatch)
@@ -278,7 +294,6 @@ class RiftGogglesGlobalTile : GlobalTile
         }
     }
 }
-
 public class OreRift : ModItem
 {
     public override void SetStaticDefaults()
@@ -287,7 +302,9 @@ public class OreRift : ModItem
     }
     public override void SetDefaults()
     {
-        Item.CloneDefaults(ItemID.Heart);
+        Item.width = 28;
+        Item.height = 28;
+        Item.alpha = 120;
     }
     public override bool CanPickup(Player player)
     {
@@ -296,7 +313,14 @@ public class OreRift : ModItem
     public override void PostUpdate()
     {
         Point tile = Item.Center.ToTileCoordinates();
-
+        if (Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft > 260)
+        {
+            Item.alpha -= 3;
+        }
+        if (Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft < 150)
+        {
+            Item.alpha += 5;
+        }
         if (Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft == 250)
         {
             #region copper
@@ -381,6 +405,48 @@ public class OreRift : ModItem
             else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BacciliteOre>())
             {
                 Honeyify(tile, ModContent.TileType<Tiles.Ores.BacciliteOre>());
+            }
+            #endregion
+            #region cobalt
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Cobalt)
+            {
+                Honeyify(tile, TileID.Cobalt);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Palladium)
+            {
+                Honeyify(tile, TileID.Palladium);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.DurataniumOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.DurataniumOre>());
+            }
+            #endregion
+            #region mythril
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Mythril)
+            {
+                Honeyify(tile, TileID.Mythril);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Orichalcum)
+            {
+                Honeyify(tile, TileID.Orichalcum);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.NaquadahOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.NaquadahOre>());
+            }
+            #endregion
+            #region adamantite
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Adamantite)
+            {
+                Honeyify(tile, TileID.Adamantite);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Titanium)
+            {
+                Honeyify(tile, TileID.Titanium);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.TroxiniumOre>())
+            {
+                Honeyify(tile, ModContent.TileType<Tiles.Ores.TroxiniumOre>());
             }
             #endregion
         }
@@ -470,6 +536,48 @@ public class OreRift : ModItem
                 RiftReplace(tile, ModContent.TileType<Tiles.Ores.BacciliteOre>(), TileID.Demonite);
             }
             #endregion
+            #region cobalt
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Cobalt)
+            {
+                RiftReplace(tile, TileID.Cobalt, TileID.Palladium);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Palladium)
+            {
+                RiftReplace(tile, TileID.Palladium, ModContent.TileType<Tiles.Ores.DurataniumOre>());
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.DurataniumOre>())
+            {
+                RiftReplace(tile, ModContent.TileType<Tiles.Ores.DurataniumOre>(), TileID.Cobalt);
+            }
+            #endregion
+            #region mythril
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Mythril)
+            {
+                RiftReplace(tile, TileID.Mythril, TileID.Orichalcum);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Orichalcum)
+            {
+                RiftReplace(tile, TileID.Orichalcum, ModContent.TileType<Tiles.Ores.NaquadahOre>());
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.NaquadahOre>())
+            {
+                RiftReplace(tile, ModContent.TileType<Tiles.Ores.NaquadahOre>(), TileID.Mythril);
+            }
+            #endregion
+            #region adamantite
+            if (Main.tile[tile.X, tile.Y].TileType == TileID.Adamantite)
+            {
+                RiftReplace(tile, TileID.Adamantite, TileID.Titanium);
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == TileID.Titanium)
+            {
+                RiftReplace(tile, TileID.Titanium, ModContent.TileType<Tiles.Ores.TroxiniumOre>());
+            }
+            else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.TroxiniumOre>())
+            {
+                RiftReplace(tile, ModContent.TileType<Tiles.Ores.TroxiniumOre>(), TileID.Adamantite);
+            }
+            #endregion
         }
         Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft--;
         if (Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft == 0)
@@ -487,7 +595,7 @@ public class OreRift : ModItem
         return p;
     }
 
-    public static void Honeyify(Point p, int type, int maxTiles = 500)
+    public static void Honeyify(Point p, int type, int maxTiles = 600)
     {
         int tiles = 0;
 
@@ -521,7 +629,7 @@ public class OreRift : ModItem
         }
     }
 
-    public static void RiftReplace(Point p, int type, int replace, bool honeyify = false, int maxTiles = 500)
+    public static void RiftReplace(Point p, int type, int replace, bool honeyify = false, int maxTiles = 600)
     {
         int tiles = 0;
 

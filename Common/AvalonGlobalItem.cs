@@ -280,47 +280,47 @@ public class AvalonGlobalItem : GlobalItem
     public override void HoldItem(Item item, Player player)
     {
         #region barbaric prefix logic
-        var tempItem = new Item();
-        tempItem.netDefaults(item.netID);
-        tempItem = item.Clone();
-        float kbDiff = 0f;
-        if (item.prefix == PrefixID.Superior || item.prefix == PrefixID.Savage || item.prefix == PrefixID.Bulky ||
-            item.prefix == PrefixID.Taboo || item.prefix == PrefixID.Celestial ||
-            item.prefix == ModContent.PrefixType<Horrific>())
-        {
-            kbDiff = 0.1f;
-        }
-        else if (item.prefix == PrefixID.Forceful || item.prefix == PrefixID.Strong ||
-                 item.prefix == PrefixID.Unpleasant ||
-                 item.prefix == PrefixID.Godly || item.prefix == PrefixID.Heavy || item.prefix == PrefixID.Legendary ||
-                 item.prefix == PrefixID.Intimidating || item.prefix == PrefixID.Staunch ||
-                 item.prefix == PrefixID.Unreal ||
-                 item.prefix == PrefixID.Furious || item.prefix == PrefixID.Mythical)
-        {
-            kbDiff = 0.15f;
-        }
-        else if (item.prefix == PrefixID.Broken || item.prefix == PrefixID.Weak || item.prefix == PrefixID.Shameful ||
-                 item.prefix == PrefixID.Awkward)
-        {
-            kbDiff = -0.2f;
-        }
-        else if (item.prefix == PrefixID.Nasty || item.prefix == PrefixID.Ruthless || item.prefix == PrefixID.Unhappy ||
-                 item.prefix == PrefixID.Light || item.prefix == PrefixID.Awful || item.prefix == PrefixID.Deranged ||
-                 item.prefix == ModContent.PrefixType<Excited>())
-        {
-            kbDiff = -0.1f;
-        }
-        else if (item.prefix == PrefixID.Shoddy || item.prefix == PrefixID.Terrible)
-        {
-            kbDiff = -0.15f;
-        }
-        else if (item.prefix == PrefixID.Deadly || item.prefix == PrefixID.Masterful)
-        {
-            kbDiff = 0.05f;
-        }
+        //var tempItem = new Item();
+        //tempItem.netDefaults(item.netID);
+        //tempItem = item.Clone();
+        //float kbDiff = 0f;
+        //if (item.prefix == PrefixID.Superior || item.prefix == PrefixID.Savage || item.prefix == PrefixID.Bulky ||
+        //    item.prefix == PrefixID.Taboo || item.prefix == PrefixID.Celestial ||
+        //    item.prefix == ModContent.PrefixType<Horrific>())
+        //{
+        //    kbDiff = 0.1f;
+        //}
+        //else if (item.prefix == PrefixID.Forceful || item.prefix == PrefixID.Strong ||
+        //         item.prefix == PrefixID.Unpleasant ||
+        //         item.prefix == PrefixID.Godly || item.prefix == PrefixID.Heavy || item.prefix == PrefixID.Legendary ||
+        //         item.prefix == PrefixID.Intimidating || item.prefix == PrefixID.Staunch ||
+        //         item.prefix == PrefixID.Unreal ||
+        //         item.prefix == PrefixID.Furious || item.prefix == PrefixID.Mythical)
+        //{
+        //    kbDiff = 0.15f;
+        //}
+        //else if (item.prefix == PrefixID.Broken || item.prefix == PrefixID.Weak || item.prefix == PrefixID.Shameful ||
+        //         item.prefix == PrefixID.Awkward)
+        //{
+        //    kbDiff = -0.2f;
+        //}
+        //else if (item.prefix == PrefixID.Nasty || item.prefix == PrefixID.Ruthless || item.prefix == PrefixID.Unhappy ||
+        //         item.prefix == PrefixID.Light || item.prefix == PrefixID.Awful || item.prefix == PrefixID.Deranged ||
+        //         item.prefix == ModContent.PrefixType<Excited>())
+        //{
+        //    kbDiff = -0.1f;
+        //}
+        //else if (item.prefix == PrefixID.Shoddy || item.prefix == PrefixID.Terrible)
+        //{
+        //    kbDiff = -0.15f;
+        //}
+        //else if (item.prefix == PrefixID.Deadly || item.prefix == PrefixID.Masterful)
+        //{
+        //    kbDiff = 0.05f;
+        //}
 
-        item.knockBack = tempItem.knockBack * (1 + kbDiff);
-        item.knockBack *= player.GetModPlayer<AvalonPlayer>().BonusKB;
+        //item.knockBack = tempItem.knockBack * (1 + kbDiff);
+        //item.knockBack *= player.GetModPlayer<AvalonPlayer>().BonusKB;
         #endregion barbaric prefix logic
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)

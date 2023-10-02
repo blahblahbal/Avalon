@@ -5,6 +5,7 @@ using Avalon.DropConditions;
 using Avalon.Items.Accessories;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Accessories.Vanity;
 using Avalon.Items.Ammo;
 using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
@@ -28,6 +29,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
@@ -90,6 +92,13 @@ public class AvalonGlobalNPC : GlobalNPC
             shop.Add(new Item(ItemID.MusicBox)
             {
                 shopCustomPrice = 350000,
+            });
+        }
+        if (shop.NpcType == NPCID.PartyGirl)
+        {
+            shop.Add(new Item(ModContent.ItemType<AncientHeadphones>())
+            {
+                shopCustomPrice = Item.buyPrice(gold: 12),
             });
         }
         if (shop.NpcType == NPCID.Pirate && NPC.downedPirates)
@@ -430,7 +439,13 @@ public class AvalonGlobalNPC : GlobalNPC
 
         return result;
     }
-
+    public override void OnSpawn(NPC npc, IEntitySource source)
+    {
+        if (source is EntitySource_Parent parent && parent.Entity is NPC npc2 && npc2.HasBuff(BuffID.Cursed))
+        {
+            npc.active = false;
+        }
+    }
     public override void DrawEffects(NPC npc, ref Color drawColor)
     {
         if (npc.HasBuff<Bleeding>())
