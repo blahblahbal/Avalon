@@ -6400,6 +6400,11 @@ Mods: {
 				DisplayName: Miner's Pickaxe
 				Tooltip: ""
 			}
+
+			RejuvenationPotion: {
+				DisplayName: Rejuvenation Potion
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -7140,6 +7145,11 @@ Mods: {
 			Bacterium: {
 				DisplayName: Bacterium
 				Description: A baby Bacterium Prime is following you
+			}
+
+			Rejuvenation: {
+				DisplayName: Rejuvenation
+				Description: Mods.Avalon.Buffs.Rejuvenation.Description
 			}
 		}
 

@@ -22,7 +22,7 @@ class NerveNumbNecklace : ModItem
     {
         for (int i = 0; i < player.buffTime.Length; i++)
         {
-            if (Main.debuff[player.buffType[i]] && player.GetModPlayer<AvalonStaminaPlayer>().StatStam > 0 && !BuffID.Sets.NurseCannotRemoveDebuff[player.buffType[i]])
+            if (Main.debuff[player.buffType[i]] && player.GetModPlayer<AvalonStaminaPlayer>().StatStam > 0 && !BuffID.Sets.NurseCannotRemoveDebuff[player.buffType[i]] && player.buffType[i] != BuffID.Tipsy)
             {
                 if (player.buffTime[i] % 3 == 0)
                 {
