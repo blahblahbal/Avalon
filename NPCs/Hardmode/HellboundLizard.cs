@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Avalon.NPCs.Template;
 using Avalon.Common.Players;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -54,7 +55,7 @@ public class HellboundLizard : CustomFighterAI
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Similar in appearance to Lihzahrds, they run about in the Hellcastle, seemingly without purpose.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.HellboundLizard"))
         });
     }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Avalon.Items.Material;
 using Avalon.Common.Players;
 using System;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -87,7 +88,7 @@ public class Ickslime : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Gelatinous and icky sentient globs of mucus, Ickslimes break down their prey into material for the contagion to make new monsters.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Ickslime"))
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

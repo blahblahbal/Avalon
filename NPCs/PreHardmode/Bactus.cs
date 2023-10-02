@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using Terraria.GameContent.Bestiary;
 using Terraria.DataStructures;
 using Avalon.Common.Players;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -40,7 +41,7 @@ public class Bactus : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Spawned from the Contagion as a carrier of disease, it desires nothing more than to see the world rot.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Bactus"))
         });
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)

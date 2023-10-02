@@ -10,6 +10,27 @@ Mods: {
 	}
 
 	Avalon: {
+		Bestiary: {
+			BaskingSpewer: In ancient times, a saltwater river once ran through the desert. These powerful creatures evolved to survive in the now dry sand.
+			Blaze: This hellish creature is quite vulnerable to water. Thankfully, no water exists in its natural environment, so it thrives.
+			ContagionMimic: Sometimes, when a Mimic falls ill, instead of recovering fully, they turn into this monster. They can be birthed from ordinary chests by force.
+			ContaminatedGhoul: Ghouls plagued by the Contagion slobber infectious drool that weakens their victim's immune system.
+			Cougher: Coughers fly around seeking prey to coat in their poisonous breath, Their breath contains a pathogen able to completely destroy their target's immune system making it easier for the contagion to infect.
+			EctoHand: They reach out, as if to touch their lost life. Or maybe they just want to give you a high-five?
+			Gargoyle: Made of stone, they resemble mythical creatures. They guard the Hellcastle and its treasures.
+			GreenPigron: This elusive dragon-pig hybrid has excellent stealth capabilities despite its rotund figure. It is uncertain how they came to exist.
+			HellboundLizard: Similar in appearance to Lihzahrds, they run about in the Hellcastle, seemingly without purpose.
+			Ickslime: Gelatinous and icky sentient globs of mucus, Ickslimes break down their prey into material for the contagion to make new monsters.
+			ViralMummy: With the sands transmogrified by outside forces, those put to rest in the desert, whether good or evil, now rise to maim and kill.
+			Viriling: Unfinished creatures of the Contagion, intelligent enough to avenge their parent from day one of their existence.
+			Viris: Giant breeders of the plague, Virises use Ickslimes' materials to create new spawn to help spread the Contagion.
+			Bactus: Spawned from the Contagion as a carrier of disease, it desires nothing more than to see the world rot.
+			BloodshotEye: The bloodiest of eyes, this creature exists in a state of fear. Its veins may rupture at any time.
+			BoneFish: This skeleton of a fish pesters anyone who enters the lava in the Underworld. Be careful if you ever need to explore under the lava's surface.
+			FallenHero: A hero, fallen into blood. It roams aimlessly on nights of a Blood Moon.
+			Pyrasite: Giant flat worms created by the Contagion, these creatures enjoy feeding on pre-eaten food from the stomach of titans and other large lifeforms.
+		}
+
 		Keybinds: {
 			"Shadow Teleport.DisplayName": Shadow Teleport
 			"Stamina Sprint.DisplayName": Stamina Sprint
@@ -81,7 +102,7 @@ Mods: {
 			Robe1: 10% increased magic critical strike chance
 			Robe2: Increases maximum mana by 60
 			ResistantWood: 10 armor penetration and reduces damage taken by 10%
-			Viruthorn: 10% increased critical strike chance
+			Viruthorn: 10% increased attack speed
 			Earthsplitter: Ore blocks have a 33% chance to drop double ore
 			Duratanium: Defense is increased by 12 while you are affected by a debuff
 			Naquadah: Nearby enemies take damage when you are damaged
@@ -6405,6 +6426,11 @@ Mods: {
 				DisplayName: Rejuvenation Potion
 				Tooltip: Heals 150 life over 5 seconds
 			}
+
+			CougherMask: {
+				DisplayName: Cougher Mask
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -6552,6 +6578,7 @@ Mods: {
 			BlahEnergySlash.DisplayName: Blah Energy Slash
 			PathogenSmoke.DisplayName: Pathogen Smoke
 			BacteriumPet.DisplayName: Bacterium Pet
+			PlayerCough.DisplayName: Player Cough
 		}
 
 		NPCs: {

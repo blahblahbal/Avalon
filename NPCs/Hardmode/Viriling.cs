@@ -9,6 +9,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.DataStructures;
 using Avalon.Common.Players;
 using Avalon.Items.Material.Ores;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -42,7 +43,7 @@ public class Viriling : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Unfinished creatures of the Contagion, intelligent enough to avenge their parent from day one of their existence.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Viriling"))
         });
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)

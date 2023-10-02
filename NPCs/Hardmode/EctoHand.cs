@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Common.Players;
 using Terraria.GameContent;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -52,7 +53,7 @@ public class EctoHand : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("They reach out, as if to touch their lost life. Or maybe they just want to give you a high-five?")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.EctoHand"))
         });
     }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)

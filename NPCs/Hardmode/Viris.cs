@@ -9,6 +9,7 @@ using Terraria.GameContent.Bestiary;
 using Avalon.Common;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -44,7 +45,7 @@ public class Viris : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Giant breeders of the plague, Virises use Ickslimes' materials to create new spawn to help spread the Contagion.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Viris"))
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>

@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Avalon.Common.Players;
 using Terraria.GameContent.Bestiary;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -55,7 +56,7 @@ public class PyrasiteHead : WormHead
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Giant flat worms created by the Contagion, Enjoys feeding on pre-eaten food from the stomach of titans and other large lifeforms.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Pyrasite"))
         });
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)

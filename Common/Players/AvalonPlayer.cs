@@ -116,6 +116,8 @@ public class AvalonPlayer : ModPlayer
     public bool AmmoCost85;
     #endregion
 
+    public bool CougherMask;
+
     #region accessories
     public bool PulseCharm;
     public bool ShadowCharm;
@@ -239,6 +241,7 @@ public class AvalonPlayer : ModPlayer
 
         GreedyPrefix = false;
         HoardingPrefix = false;
+        CougherMask = false;
 
         SnotOrb = false;
 
@@ -550,6 +553,12 @@ public class AvalonPlayer : ModPlayer
 
     public override void PostUpdate()
     {
+        if (CougherMask && Player.PlayerDoublePressedSetBonusActivateKey())
+        {
+            int proj = Projectile.NewProjectile(Player.GetSource_Accessory(new Item(ModContent.ItemType<Items.Armor.Hardmode.CougherMask>())),
+                Player.Center, new Vector2(3) * Player.direction, ModContent.ProjectileType<Projectiles.PlayerCough>(), 0, 0);
+        }
+
         if (InertiaBoots)
         {
             if (Player.velocity.X is > 6f or < -6f)

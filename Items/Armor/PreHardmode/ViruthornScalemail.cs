@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -28,6 +29,6 @@ class ViruthornScalemail : ModItem
     }
     public override void UpdateEquip(Player player)
     {
-        player.GetAttackSpeed(DamageClass.Melee) += 0.07f;
+        player.GetModPlayer<AvalonPlayer>().AllCritDamage(0.07f);
     }
 }

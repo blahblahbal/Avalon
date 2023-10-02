@@ -11,6 +11,7 @@ using Avalon.Common.Players;
 using Avalon.Dusts;
 using Avalon.Projectiles.Hostile;
 using Terraria.Audio;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -57,7 +58,7 @@ public class Cougher : ModNPC
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
             new ModBiomeBestiaryInfoElement(Mod, "Contagion", "Assets/Bestiary/ContagionIcon", "Assets/Bestiary/ContagionBG", null),
-            new FlavorTextBestiaryInfoElement("Coughers fly around seeking prey to coat in their poisonous breath, Their breath contains a pathogen able to completely destroy their target's immune system making it easier for the contagion to infect.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Cougher"))
         });
     }
     //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
