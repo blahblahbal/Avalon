@@ -595,7 +595,7 @@ public class OreRift : ModItem
         return p;
     }
 
-    public static void Honeyify(Point p, int type, int maxTiles = 500)
+    public static void Honeyify(Point p, int type, int maxTiles = 600)
     {
         int tiles = 0;
 
@@ -629,7 +629,7 @@ public class OreRift : ModItem
         }
     }
 
-    public static void RiftReplace(Point p, int type, int replace, bool honeyify = false, int maxTiles = 500)
+    public static void RiftReplace(Point p, int type, int replace, bool honeyify = false, int maxTiles = 600)
     {
         int tiles = 0;
 

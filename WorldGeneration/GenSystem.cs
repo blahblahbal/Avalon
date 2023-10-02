@@ -39,6 +39,11 @@ public class GenSystem : ModSystem
                 // Replace corruption task with contagion task
                 tasks[index] = new Contagion("Contagion", 80f);
             }
+            index = tasks.FindIndex(genpass => genpass.Name.Equals("Altars"));
+            if (index != -1)
+            {
+                tasks[index] = new IckyAltars();
+            }
         }
 
         index = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
