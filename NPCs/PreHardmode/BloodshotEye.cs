@@ -10,6 +10,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -80,7 +81,7 @@ public class BloodshotEye : ModNPC
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
             BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.BloodMoon,
-            new FlavorTextBestiaryInfoElement("The bloodiest of eyes, this creature exists in a state of fear."),
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.BloodshotEye")),
         });
 
     public override void ModifyNPCLoot(NPCLoot npcLoot)

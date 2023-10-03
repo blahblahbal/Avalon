@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Avalon.Common.Players;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -47,7 +48,7 @@ public class Gargoyle : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Made of stone, they resemble mythical creatures. They guard the Hellcastle and its treasures.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Gargoyle"))
         });
     }
     public override bool? CanFallThroughPlatforms()

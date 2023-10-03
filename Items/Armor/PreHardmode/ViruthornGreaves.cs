@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -32,6 +33,6 @@ class ViruthornGreaves : ModItem
     }
     public override void UpdateEquip(Player player)
     {
-        player.GetDamage(DamageClass.Generic) += 0.03f;
+        player.GetModPlayer<AvalonPlayer>().AllCritDamage(0.07f);
     }
 }

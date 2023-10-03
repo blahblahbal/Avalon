@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -41,7 +42,7 @@ class ViruthornHelmet : ModItem
     public override void UpdateArmorSet(Player player)
     {
         player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Viruthorn");
-        player.GetCritChance(DamageClass.Generic) += 10;
+        player.GetAttackSpeed(DamageClass.Generic) -= 0.1f;
     }
     public override void UpdateVanitySet(Player player)
     {
@@ -59,6 +60,6 @@ class ViruthornHelmet : ModItem
     }
     public override void UpdateEquip(Player player)
     {
-        player.GetDamage(DamageClass.Generic) += 0.03f;
+        player.GetModPlayer<AvalonPlayer>().AllCritDamage(0.07f);
     }
 }

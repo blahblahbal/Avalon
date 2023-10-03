@@ -9,6 +9,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Hardmode;
@@ -40,7 +41,7 @@ public class ContagionMimic : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Sometimes, when a Mimic falls ill, instead of recovering fully, they turn into this monster. They can be birthed from ordinary chests by force.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.ContagionMimic"))
         });
     }
     public override void HitEffect(NPC.HitInfo hit)

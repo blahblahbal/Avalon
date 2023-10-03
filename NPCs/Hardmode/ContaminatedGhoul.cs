@@ -8,6 +8,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Hardmode;
@@ -51,7 +52,7 @@ public class ContaminatedGhoul : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("Ghouls plagued by the Contagion slobber infectious drool that weakens their victim's immune system.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.ContaminatedGhoul"))
         });
     }
     public override void PostAI()
