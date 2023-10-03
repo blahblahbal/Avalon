@@ -6403,7 +6403,7 @@ Mods: {
 
 			RejuvenationPotion: {
 				DisplayName: Rejuvenation Potion
-				Tooltip: Heals 150 life over 5 seconds
+				Tooltip: Heals 150 life over 30 seconds
 			}
 		}
 
@@ -7413,6 +7413,7 @@ Mods: {
 			BacteriumPrimeEmote.Command: bacteriumprime
 			ContagionEmote.Command: contagion
 			DesertBeakEmote.Command: desertbeak
+			StaminaEmote.Command: staminapotion
 		}
 	}
 }
