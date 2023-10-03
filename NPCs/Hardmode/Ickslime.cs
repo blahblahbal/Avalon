@@ -1,4 +1,3 @@
-using Avalon.Players;
 using Terraria.GameContent.Bestiary;
 using Terraria;
 using Terraria.ID;

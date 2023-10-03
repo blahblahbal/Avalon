@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Avalon.Players;
 using Terraria.Localization;
 using System.Collections.Generic;
 using Avalon.Items.Material.Bars;

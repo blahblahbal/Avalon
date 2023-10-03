@@ -41,7 +41,12 @@ public class VanillaItemRecipeCreator : ModSystem
         #endregion
 
         #region Furnace
-        Recipe.Create(ItemID.MagicMirror).AddIngredient(ItemID.Glass, 10).AddIngredient(ModContent.ItemType<BismuthBar>(), 8).AddIngredient(ItemID.Diamond, 3).AddTile(TileID.Furnaces).Register();
+        Recipe.Create(ItemID.MagicMirror)
+            .AddIngredient(ItemID.Glass, 20)
+            .AddRecipeGroup(RecipeGroupID.IronBar, 5)
+            .AddIngredient(ItemID.RecallPotion, 3)
+            .AddTile(TileID.Furnaces)
+            .Register();
         #endregion
 
         #region Hellforge

@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -39,5 +40,12 @@ class StaminaCrystal : ModItem
         player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 += 30;
         player.GetModPlayer<AvalonStaminaPlayer>().StatStam += 30;
         return true;
+    }
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Boltstone>(), 25)
+            .AddTile(TileID.Furnaces)
+            .Register();
     }
 }

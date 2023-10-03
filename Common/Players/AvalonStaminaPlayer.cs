@@ -44,6 +44,7 @@ public class AvalonStaminaPlayer : ModPlayer
 
     public bool SwimmingUnlocked;
     public bool TeleportUnlocked;
+    public bool RollDodgeUnlocked;
 
     public override void ResetEffects()
     {
@@ -285,91 +286,6 @@ public class AvalonStaminaPlayer : ModPlayer
     }
     public override void PostUpdateRunSpeeds()
     {
-        // rocket jump
-        if (ActivateRocketJump && RocketJumpUnlocked)
-        {
-            if (Player.controlUp && Player.releaseUp)
-            {
-                if (Player.IsOnGround())
-                {
-                    int amt = 70;
-                    if (StaminaDrain)
-                    {
-                        amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-                    }
-
-                    if (StatStam >= amt)
-                    {
-                        StatStam -= amt;
-                        float yDestination = Player.position.Y - 360f;
-                        int num6 = Gore.NewGore(Player.GetSource_FromThis(),
-                            new Vector2(Player.position.X + (Player.width / 2) - 16f,
-                                Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
-                            new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
-                        Main.gore[num6].velocity.X = (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
-                        Main.gore[num6].velocity.Y = (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
-                        num6 = Gore.NewGore(Player.GetSource_FromThis(),
-                            new Vector2(Player.position.X - 36f,
-                                Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
-                            new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
-                        Main.gore[num6].velocity.X = (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
-                        Main.gore[num6].velocity.Y = (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
-                        num6 = Gore.NewGore(Player.GetSource_FromThis(),
-                            new Vector2(Player.position.X + Player.width + 4f,
-                                Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
-                            new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
-                        Main.gore[num6].velocity.X = (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
-                        Main.gore[num6].velocity.Y = (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
-                        SoundEngine.PlaySound(SoundID.Item11, Player.Center);
-                        Player.velocity.Y -= 16.5f;
-                    }
-                    else if (StamFlower)
-                    {
-                        QuickStamina(amt);
-                        if (StatStam >= amt)
-                        {
-                            StatStam -= amt;
-                            float yDestination = Player.position.Y - 360f;
-                            int num6 = Gore.NewGore(Player.GetSource_FromThis(),
-                                new Vector2(Player.position.X + (Player.width / 2) - 16f,
-                                    Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
-                                new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
-                            Main.gore[num6].velocity.X =
-                                (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
-                            Main.gore[num6].velocity.Y =
-                                (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
-                            num6 = Gore.NewGore(Player.GetSource_FromThis(),
-                                new Vector2(Player.position.X - 36f,
-                                    Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
-                                new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
-                            Main.gore[num6].velocity.X =
-                                (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
-                            Main.gore[num6].velocity.Y =
-                                (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
-                            num6 = Gore.NewGore(Player.GetSource_FromThis(),
-                                new Vector2(Player.position.X + Player.width + 4f,
-                                    Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
-                                new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
-                            Main.gore[num6].velocity.X =
-                                (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
-                            Main.gore[num6].velocity.Y =
-                                (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
-                            SoundEngine.PlaySound(SoundID.Item11, Player.Center);
-                            Player.velocity.Y -= 16.5f;
-                        }
-                    }
-                }
-            }
-
-            if (Player.velocity.Y < 0)
-            {
-                for (int x = 0; x < 5; x++)
-                {
-                    int d = Dust.NewDust(new Vector2(Player.Center.X, Player.position.Y + Player.height), 10, 10,
-                        DustID.Smoke);
-                }
-            }
-        }
         // swimming
         if (Player.wet && Player.velocity != Vector2.Zero && !Player.accMerman && ActivateSwim &&
             SwimmingUnlocked)

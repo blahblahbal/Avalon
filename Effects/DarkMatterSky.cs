@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Avalon.Players;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

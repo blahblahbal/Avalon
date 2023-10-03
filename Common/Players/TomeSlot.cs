@@ -6,7 +6,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Players;
+namespace Avalon.Common.Players;
 public class TomeSlot : ModAccessorySlot
 {
     public override bool IsEnabled() => true;

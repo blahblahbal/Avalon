@@ -1,5 +1,4 @@
 using Avalon.Backgrounds;
-using Avalon.Players;
 using Avalon.Systems;
 using Terraria;
 using Terraria.ID;

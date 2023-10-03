@@ -1,6 +1,5 @@
 using Avalon.Common.Players;
 using Avalon.Items.Material;
-using Avalon.Players;
 using Avalon.Rarities;
 using Avalon.Tiles;
 using Microsoft.Xna.Framework;

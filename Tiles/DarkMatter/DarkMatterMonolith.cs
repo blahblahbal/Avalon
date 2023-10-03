@@ -1,6 +1,5 @@
 using Avalon.Common.Players;
 using Avalon.Dusts;
-using Avalon.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;

@@ -29,6 +29,7 @@ Mods: {
 			BoneFish: This skeleton of a fish pesters anyone who enters the lava in the Underworld. Be careful if you ever need to explore under the lava's surface.
 			FallenHero: A hero, fallen into blood. It roams aimlessly on nights of a Blood Moon.
 			Pyrasite: Giant flat worms created by the Contagion, these creatures enjoy feeding on pre-eaten food from the stomach of titans and other large lifeforms.
+			BacteriumPrime: This giant eye of Contagion never ceases, never truly closes. Those who fall to its gaze will be just as felled by its plague.
 		}
 
 		Keybinds: {
@@ -607,12 +608,12 @@ Mods: {
 
 			ViruthornHelmet: {
 				DisplayName: Viruthorn Helmet
-				Tooltip: 3% increased damage
+				Tooltip: 7% increased critical strike damage
 			}
 
 			ViruthornGreaves: {
 				DisplayName: Viruthorn Greaves
-				Tooltip: 3% increased damage
+				Tooltip: 7% increased critical strike damage
 			}
 
 			PeridotRobe: {
@@ -3969,7 +3970,7 @@ Mods: {
 
 			ViruthornScalemail: {
 				DisplayName: Viruthorn Scalemail
-				Tooltip: 7% increased melee speed
+				Tooltip: 7% increased critical strike damage
 			}
 
 			GoldminePickaxe: {
@@ -6431,6 +6432,11 @@ Mods: {
 				DisplayName: Cougher Mask
 				Tooltip: ""
 			}
+
+			Shurikerang: {
+				DisplayName: Shurikerang
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -6579,6 +6585,7 @@ Mods: {
 			PathogenSmoke.DisplayName: Pathogen Smoke
 			BacteriumPet.DisplayName: Bacterium Pet
 			PlayerCough.DisplayName: Player Cough
+			Shurikerang.DisplayName: Shurikerang
 		}
 
 		NPCs: {

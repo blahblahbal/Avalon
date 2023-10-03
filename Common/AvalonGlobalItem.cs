@@ -338,27 +338,37 @@ public class AvalonGlobalItem : GlobalItem
         {
             var contagionCondition = new IsContagion();
             var corruptionCondition = new Conditions.IsCorruption();
-            var crimson = new Conditions.IsCrimson();
+            var crimson = new CrimsonNotContagion();
             var corruptionNotContagion = new Combine(true, null, new Invert(contagionCondition), corruptionCondition);
 
+            // remove corruption loot
             itemLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.DemoniteOre);
             itemLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CorruptSeeds);
             itemLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.UnholyArrow);
 
-            LeadingConditionRule contagionRule = new LeadingConditionRule(contagionCondition);
-            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
-            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
-            itemLoot.Add(contagionRule);
+            // remove crimson loot
+            itemLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CrimtaneOre);
+            itemLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CrimsonSeeds);
 
+            // add corruption loot back
             LeadingConditionRule corruptionRule = new LeadingConditionRule(corruptionNotContagion);
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.UnholyArrow, 1, 20, 50));
             itemLoot.Add(corruptionRule);
 
+            // add crimson loot back
             LeadingConditionRule crimsonRule = new LeadingConditionRule(crimson);
+            crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
+            crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
             crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
             itemLoot.Add(crimsonRule);
+
+            // add contagion loot
+            LeadingConditionRule contagionRule = new LeadingConditionRule(contagionCondition);
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
+            itemLoot.Add(contagionRule);
         }
     }
     public override void SetDefaults(Item item)

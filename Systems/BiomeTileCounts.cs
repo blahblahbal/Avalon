@@ -1,5 +1,4 @@
 using System;
-using Avalon.Players;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Terraria;

@@ -10,6 +10,7 @@ using Avalon.Items.Ammo;
 using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
+using Avalon.Items.Material.Ores;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Items.Other;
@@ -674,7 +675,7 @@ public class AvalonGlobalNPC : GlobalNPC
         var notExpertCondition = new Conditions.NotExpert();
         var contagionCondition = new IsContagion();
         var corruptionCondition = new Conditions.IsCorruptionAndNotExpert();
-        var crimsonNotExpert = new Conditions.IsCrimsonAndNotExpert();
+        var crimsonNotExpert = new Combine(true, null, notExpertCondition, new CrimsonNotContagion());
         var contagionNotExpert = new Combine(true, null, notExpertCondition, contagionCondition);
         var corruptionNotContagion = new Combine(true, null, new Invert(contagionNotExpert), corruptionCondition);
 
@@ -845,29 +846,34 @@ public class AvalonGlobalNPC : GlobalNPC
 
         if (npc.type == NPCID.EyeofCthulhu)
         {
+            // remove corruption loot
             npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.DemoniteOre);
             npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CorruptSeeds);
             npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.UnholyArrow);
 
-            LeadingConditionRule contagionRule = new LeadingConditionRule(contagionNotExpert);
-            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Items.Material.Ores.BacciliteOre>(), 1, 30, 90));
-            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
-            npcLoot.Add(contagionRule);
+            // remove crimson loot
+            npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CrimtaneOre);
+            npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CrimsonSeeds);
 
+            // add corruption loot back
             LeadingConditionRule corruptionRule = new LeadingConditionRule(corruptionNotContagion);
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.UnholyArrow, 1, 20, 50));
             npcLoot.Add(corruptionRule);
 
+            // add crimson loot back
             LeadingConditionRule crimsonRule = new LeadingConditionRule(crimsonNotExpert);
+            crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
+            crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
             crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
             npcLoot.Add(crimsonRule);
 
-            //LeadingConditionRule crimsonRule = new LeadingConditionRule(crimsonNotExpert);
-            //crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
-            //crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
-            //npcLoot.Add(crimsonRule);
+            // add contagion loot
+            LeadingConditionRule contagionRule = new LeadingConditionRule(contagionCondition);
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
+            npcLoot.Add(contagionRule);
         }
 
         #region mystical tome mats

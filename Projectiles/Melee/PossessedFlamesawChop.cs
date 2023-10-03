@@ -21,7 +21,16 @@ public class PossessedFlamesawChop : ModProjectile
         Projectile.DamageType = DamageClass.Melee;
         Projectile.MaxUpdates = 1;
     }
-
+    public override bool OnTileCollide(Vector2 oldVelocity)
+    {
+        int num34 = 10;
+        int num35 = 10;
+        Vector2 vector7 = new Vector2(Projectile.position.X + Projectile.width / 2 - num34 / 2, Projectile.position.Y + Projectile.height / 2 - num35 / 2);
+        Projectile.velocity = Collision.TileCollision(vector7, Projectile.velocity, num34, num35, true, true, 1);
+        Projectile.ai[0] = 1f;
+        SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
+        return false;
+    }
     public override void AI()
     {
         if (Projectile.soundDelay == 0)

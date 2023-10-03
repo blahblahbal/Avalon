@@ -21,7 +21,7 @@ class Snotsabre : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item1;
-        Item.damage = 32;
+        Item.damage = 24;
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.scale = 1.1f;

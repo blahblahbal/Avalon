@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Avalon.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;

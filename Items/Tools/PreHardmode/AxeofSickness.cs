@@ -24,13 +24,13 @@ class AxeofSickness : ModItem
         //Item.scale = 1.2f;
         Item.axe = 15;
         Item.rare = ItemRarityID.Blue;
-        Item.useTime = 34;
+        Item.useTime = 25;
         Item.knockBack = 6f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 0, 36, 0);
         Item.UseSound = SoundID.Item1;
-        Item.useAnimation = 34;
+        Item.useAnimation = 25;
     }
     public override void MeleeEffects(Player player, Rectangle hitbox)
     {

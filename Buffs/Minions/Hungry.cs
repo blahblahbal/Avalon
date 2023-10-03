@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Avalon.Players;
 using Avalon.Projectiles.Summon;
 using Terraria;
 using Terraria.ModLoader;

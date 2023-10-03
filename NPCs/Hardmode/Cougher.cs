@@ -1,7 +1,6 @@
 using Terraria.GameContent.Bestiary;
 using System;
 using Avalon.Items.Material;
-using Avalon.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

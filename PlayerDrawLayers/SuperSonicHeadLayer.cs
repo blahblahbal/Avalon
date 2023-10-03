@@ -1,6 +1,5 @@
 using System;
 using Avalon.Items.Armor;
-using Avalon.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
