@@ -166,6 +166,7 @@ public class AvalonHerbologyPlayer : ModPlayer
 
         int potionAddition = 0;
 
+        
         if (HerbologyData.PotionIds.Contains(item.type))
         {
             potionAddition = HerbologyData.PotionSellPrice;
@@ -179,13 +180,17 @@ public class AvalonHerbologyPlayer : ModPlayer
         //    potionAddition = HerbologyData.BlahPotionSellPrice;
         //}
 
-        if (HerbologyData.RestorationIDs.Contains(item.type))
+        if (item.type is ItemID.HealingPotion or ItemID.ManaPotion)
+        {
+            potionAddition = 1;
+        }
+        else if (HerbologyData.RestorationIDs.Contains(item.type) && item.type != ItemID.HealingPotion && item.type != ItemID.ManaPotion)
         {
             potionAddition = HerbologyData.RestorationPotionCost;
         }
         if (HerbologyData.SuperRestorationIDs.Contains(item.type))
         {
-            potionAddition = HerbologyData.RestorationPotionCost * 2;
+            potionAddition = HerbologyData.RestorationPotionCost * 3;
         }
 
         if (potionAddition > 0)

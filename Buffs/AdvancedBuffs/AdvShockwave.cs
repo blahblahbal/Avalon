@@ -9,18 +9,48 @@ namespace Avalon.Buffs.AdvancedBuffs;
 
 public class AdvShockwave : ModBuff
 {
+    private int fallStart_old = -1;
     public override void Update(Player player, ref int buffIndex)
     {
+        if (Main.rand.NextBool(50))
+        {
+            int D = Dust.NewDust(player.position, player.width, player.height, 9, (player.velocity.X * 0.2f) + (player.direction * 3), player.velocity.Y * 1.2f, 60, new Color(), 1f);
+            Main.dust[D].noGravity = true;
+            Main.dust[D].velocity.X *= 1.2f;
+            Main.dust[D].velocity.X *= 1.2f;
+        }
+        if (Main.rand.NextBool(50))
+        {
+            int D2 = Dust.NewDust(player.position, player.width, player.height, 9, (player.velocity.X * 0.2f) + (player.direction * 3), player.velocity.Y * 1.2f, 60, new Color(), 1f);
+            Main.dust[D2].noGravity = true;
+            Main.dust[D2].velocity.X *= -1.2f;
+            Main.dust[D2].velocity.X *= 1.2f;
+        }
+        if (Main.rand.NextBool(50))
+        {
+            int D3 = Dust.NewDust(player.position, player.width, player.height, 9, (player.velocity.X * 0.2f) + (player.direction * 3), player.velocity.Y * 1.2f, 60, new Color(), 1f);
+            Main.dust[D3].noGravity = true;
+            Main.dust[D3].velocity.X *= 1.2f;
+            Main.dust[D3].velocity.X *= -1.2f;
+        }
+        if (Main.rand.NextBool(50))
+        {
+            int D4 = Dust.NewDust(player.position, player.width, player.height, 9, (player.velocity.X * 0.2f) + (player.direction * 3), player.velocity.Y * 1.2f, 60, new Color(), 1f);
+            Main.dust[D4].noGravity = true;
+            Main.dust[D4].velocity.X *= -1.2f;
+            Main.dust[D4].velocity.X *= -1.2f;
+        }
+
         int sw = Main.screenWidth;
         int sh = Main.screenHeight;
         int sx = (int)Main.screenPosition.X;
         int sy = (int)Main.screenPosition.Y;
 
+        if (fallStart_old == -1) fallStart_old = player.fallStart;
         int fall_dist = 0;
         if (player.velocity.Y == 0f) // detect landing from a fall
         {
-            fall_dist = (int)(((int)(player.position.Y / 16f) - player.GetModPlayer<AvalonPlayer>().OldFallStart) *
-                              player.gravDir);
+            fall_dist = (int)(((int)(player.position.Y / 16f) - fallStart_old) * player.gravDir);
         }
 
         Vector2 p_pos = player.position + (new Vector2(player.width, player.height) / 2f);
@@ -42,8 +72,7 @@ public class AdvShockwave : ModBuff
                     list.Add(N);
                 }
 
-                var n_pos = new Vector2(N.position.X + (N.width * 0.5f),
-                    N.position.Y + (N.height * 0.5f)); // NPC location
+                var n_pos = new Vector2(N.position.X + (N.width * 0.5f), N.position.Y + (N.height * 0.5f)); // NPC location
                 int HitDir = -1;
                 if (n_pos.X > p_pos.X)
                 {
@@ -54,7 +83,7 @@ public class AdvShockwave : ModBuff
                 {
                     // on screen
                     numOfNPCs++;
-                    int multiplier = 2;
+                    int multiplier = 5;
                     //if (player.GetModPlayer<AvalonPlayer>().EarthInsignia && Main.hardMode)
                     //{
                     //    multiplier = 6;
@@ -75,17 +104,12 @@ public class AdvShockwave : ModBuff
                     N.StrikeNPC(new NPC.HitInfo {Damage = multiplier * fall_dist, Knockback = 5f, HitDirection = HitDir});
                     if (Main.netMode != NetmodeID.SinglePlayer)
                     {
-                        NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, o, multiplier * fall_dist, 10f,
-                            HitDir); // for multiplayer support
-                    }
-
-                    if (player.IsOnGround() && numOfNPCs == list.Count - 1)
-                    {
-                        break;
+                        NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, o, multiplier * fall_dist, 10f, HitDir); // for multiplayer support
                     }
                     // optionally add debuff here
                 } // END on screen
             } // END iterate through NPCs
         } // END just fell
+        fallStart_old = player.fallStart;
     }
 }

@@ -291,6 +291,12 @@ public class AvalonPlayer : ModPlayer
     }
     public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
     {
+        if (Player.HasBuff(ModContent.BuffType<Shockwave>()) || Player.HasBuff(ModContent.BuffType<AdvShockwave>()))
+        {
+            r *= 0.7372f;
+            g *= 0.5176f;
+            b *= 0.3686f;
+        }
         if(Pathogen)
         {
             g -= 0.3f;

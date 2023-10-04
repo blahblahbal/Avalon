@@ -18,7 +18,7 @@ public class PeridotBunny : ModNPC
     {
         Main.npcFrameCount[Type] = 7;
         Main.npcCatchable[Type] = true;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         
         {
             // Influences how the NPC looks in the Bestiary
@@ -53,31 +53,44 @@ public class PeridotBunny : ModNPC
         int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
         for (int l = 0; l < 255; l++)
         {
+            bool spawnThing = false;
+            if (Main.player[l].Center.Y / 16f > (float)Main.UnderworldLayer && (!Main.remixWorld || !((double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0) || !((double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)))
+            {
+                int chance = 10;
+                if (Main.player[l].townNPCs == 1f)
+                {
+                    chance = 10;
+                }
+                else if (Main.player[l].townNPCs == 2f)
+                {
+                    chance = 5;
+                }
+                else if (Main.player[l].townNPCs >= 3f)
+                {
+                    chance = 3;
+                }
+                if (Main.rand.NextBool(chance))
+                {
+                    spawnThing = true;
+                }
+            }
+
+
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
+            if (spawnThing)
             {
-                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
+                if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
                 {
-                    return 1f;
-                }
-            }
-            else if (num4 > Main.UnderworldLayer)
-            {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
-                {
-                    if (Main.rand.NextBool(28))
+                    if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                     {
                         return 1f;
                     }
                 }
-            }
-            else if (Main.remixWorld)
-            {
-                if (num4 < Main.rockLayer && num4 > Main.worldSurface)
+                else if (num4 > Main.UnderworldLayer)
                 {
-                    if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
                     {
                         if (Main.rand.NextBool(28))
                         {
@@ -85,12 +98,25 @@ public class PeridotBunny : ModNPC
                         }
                     }
                 }
-            }
-            else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
-            {
-                if (Main.rand.NextBool(28))
+                else if (Main.remixWorld)
                 {
-                    return 1f;
+                    if (num4 < Main.rockLayer && num4 > Main.worldSurface)
+                    {
+                        if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                        {
+                            if (Main.rand.NextBool(28))
+                            {
+                                return 1f;
+                            }
+                        }
+                    }
+                }
+                else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                {
+                    if (Main.rand.NextBool(28))
+                    {
+                        return 1f;
+                    }
                 }
             }
         }
@@ -134,7 +160,7 @@ public class TourmalineBunny : ModNPC
     {
         Main.npcFrameCount[Type] = 7;
         Main.npcCatchable[Type] = true;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
@@ -168,31 +194,44 @@ public class TourmalineBunny : ModNPC
         int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
         for (int l = 0; l < 255; l++)
         {
+            bool spawnThing = false;
+            if (Main.player[l].Center.Y / 16f > (float)Main.UnderworldLayer && (!Main.remixWorld || !((double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0) || !((double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)))
+            {
+                int chance = 10;
+                if (Main.player[l].townNPCs == 1f)
+                {
+                    chance = 10;
+                }
+                else if (Main.player[l].townNPCs == 2f)
+                {
+                    chance = 5;
+                }
+                else if (Main.player[l].townNPCs >= 3f)
+                {
+                    chance = 3;
+                }
+                if (Main.rand.NextBool(chance))
+                {
+                    spawnThing = true;
+                }
+            }
+
+
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
+            if (spawnThing)
             {
-                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
+                if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
                 {
-                    return 1f;
-                }
-            }
-            else if (num4 > Main.UnderworldLayer)
-            {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
-                {
-                    if (Main.rand.NextBool(28))
+                    if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                     {
                         return 1f;
                     }
                 }
-            }
-            else if (Main.remixWorld)
-            {
-                if (num4 < Main.rockLayer && num4 > Main.worldSurface)
+                else if (num4 > Main.UnderworldLayer)
                 {
-                    if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
                     {
                         if (Main.rand.NextBool(28))
                         {
@@ -200,12 +239,25 @@ public class TourmalineBunny : ModNPC
                         }
                     }
                 }
-            }
-            else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
-            {
-                if (Main.rand.NextBool(28))
+                else if (Main.remixWorld)
                 {
-                    return 1f;
+                    if (num4 < Main.rockLayer && num4 > Main.worldSurface)
+                    {
+                        if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                        {
+                            if (Main.rand.NextBool(28))
+                            {
+                                return 1f;
+                            }
+                        }
+                    }
+                }
+                else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                {
+                    if (Main.rand.NextBool(28))
+                    {
+                        return 1f;
+                    }
                 }
             }
         }
@@ -249,7 +301,7 @@ public class ZirconBunny : ModNPC
     {
         Main.npcFrameCount[Type] = 7;
         Main.npcCatchable[Type] = true;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
@@ -281,33 +333,47 @@ public class ZirconBunny : ModNPC
     {
         int spawnRangeX = (int)(NPC.sWidth / 16 * 0.7);
         int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
+        
         for (int l = 0; l < 255; l++)
         {
+            bool spawnThing = false;
+            if (Main.player[l].Center.Y / 16f > (float)Main.UnderworldLayer && (!Main.remixWorld || !((double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0) || !((double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)))
+            {
+                int chance = 10;
+                if (Main.player[l].townNPCs == 1f)
+                {
+                    chance = 10;
+                }
+                else if (Main.player[l].townNPCs == 2f)
+                {
+                    chance = 5;
+                }
+                else if (Main.player[l].townNPCs >= 3f)
+                {
+                    chance = 3;
+                }
+                if (Main.rand.NextBool(chance))
+                {
+                    spawnThing = true;
+                }
+            }
+
+
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
+            if (spawnThing)
             {
-                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
+                if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
                 {
-                    return 1f;
-                }
-            }
-            else if (num4 > Main.UnderworldLayer)
-            {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
-                {
-                    if (Main.rand.NextBool(28))
+                    if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                     {
                         return 1f;
                     }
                 }
-            }
-            else if (Main.remixWorld)
-            {
-                if (num4 < Main.rockLayer && num4 > Main.worldSurface)
+                else if (num4 > Main.UnderworldLayer)
                 {
-                    if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                    if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
                     {
                         if (Main.rand.NextBool(28))
                         {
@@ -315,12 +381,25 @@ public class ZirconBunny : ModNPC
                         }
                     }
                 }
-            }
-            else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
-            {
-                if (Main.rand.NextBool(28))
+                else if (Main.remixWorld)
                 {
-                    return 1f;
+                    if (num4 < Main.rockLayer && num4 > Main.worldSurface)
+                    {
+                        if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                        {
+                            if (Main.rand.NextBool(28))
+                            {
+                                return 1f;
+                            }
+                        }
+                    }
+                }
+                else if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
+                {
+                    if (Main.rand.NextBool(28))
+                    {
+                        return 1f;
+                    }
                 }
             }
         }

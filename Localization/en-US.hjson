@@ -6425,11 +6425,11 @@ Mods: {
 
 			RejuvenationPotion: {
 				DisplayName: Rejuvenation Potion
-				Tooltip: 
-                '''
-                Heals 150 life over 30 seconds
-                Effect is cancelled when hit
-                '''
+				Tooltip:
+					'''
+					Heals 150 life over 30 seconds
+					Effect is cancelled when hit
+					'''
 			}
 
 			CougherMask: {
@@ -6439,6 +6439,11 @@ Mods: {
 
 			Shurikerang: {
 				DisplayName: Shurikerang
+				Tooltip: ""
+			}
+
+			SackofToys: {
+				DisplayName: Sackof Toys
 				Tooltip: ""
 			}
 		}
@@ -6590,6 +6595,12 @@ Mods: {
 			BacteriumPet.DisplayName: Bacterium Pet
 			PlayerCough.DisplayName: Player Cough
 			Shurikerang.DisplayName: Shurikerang
+			Die.DisplayName: Die
+			Lego.DisplayName: Lego
+			Vase.DisplayName: Vase
+			Doll.DisplayName: Doll
+			SackofToys.DisplayName: Sackof Toys
+			Table.DisplayName: Table
 		}
 
 		NPCs: {

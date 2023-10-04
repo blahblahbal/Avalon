@@ -31,7 +31,7 @@ public static class HerbologyData
     public const int PotionCost = 3;
 
     public const int PotionSellPrice = 1;
-    public const int RestorationPotionCost = 5;
+    public const int RestorationPotionCost = 2;
 
     public static readonly int[] ElixirIds =
     {

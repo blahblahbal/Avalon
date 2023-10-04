@@ -18,7 +18,7 @@ public class PeridotSquirrel : ModNPC
     {
         Main.npcFrameCount[Type] = 6;
         Main.npcCatchable[Type] = true;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
@@ -46,41 +46,64 @@ public class PeridotSquirrel : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemSquirrel"))
         });
     }
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
         int spawnRangeX = (int)(NPC.sWidth / 16 * 0.7);
         int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
         for (int l = 0; l < 255; l++)
         {
+            bool spawnThing = false;
+            if (Main.player[l].Center.Y / 16f > (float)Main.UnderworldLayer && (!Main.remixWorld || !((double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0) || !((double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)))
+            {
+                int chance = 10;
+                if (Main.player[l].townNPCs == 1f)
+                {
+                    chance = 10;
+                }
+                else if (Main.player[l].townNPCs == 2f)
+                {
+                    chance = 5;
+                }
+                else if (Main.player[l].townNPCs >= 3f)
+                {
+                    chance = 3;
+                }
+                if (Main.rand.NextBool(chance))
+                {
+                    spawnThing = true;
+                }
+            }
+
+
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer)
+            if (spawnThing)
             {
-                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
+                if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
                 {
-                    return 1f;
-                }
-            }
-            else if (num4 > Main.UnderworldLayer)
-            {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
-                {
-                    if (Main.rand.NextBool(28))
+                    if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                     {
                         return 1f;
                     }
                 }
-            }
-            else if (Main.rand.NextBool(3))
-            {
-                if (Main.remixWorld)
+                else if (num4 > Main.UnderworldLayer)
+                {
+                    if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
+                    {
+                        if (Main.rand.NextBool(28))
+                        {
+                            return 1f;
+                        }
+                    }
+                }
+                else if (Main.remixWorld)
                 {
                     if (num4 < Main.rockLayer && num4 > Main.worldSurface)
                     {
                         if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
                         {
-                            if (Main.rand.NextBool(35))
+                            if (Main.rand.NextBool(28))
                             {
                                 return 1f;
                             }
@@ -135,7 +158,7 @@ public class TourmalineSquirrel : ModNPC
     {
         Main.npcFrameCount[Type] = 6;
         Main.npcCatchable[Type] = true;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
@@ -163,41 +186,64 @@ public class TourmalineSquirrel : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemSquirrel"))
         });
     }
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
         int spawnRangeX = (int)(NPC.sWidth / 16 * 0.7);
         int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
         for (int l = 0; l < 255; l++)
         {
+            bool spawnThing = false;
+            if (Main.player[l].Center.Y / 16f > (float)Main.UnderworldLayer && (!Main.remixWorld || !((double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0) || !((double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)))
+            {
+                int chance = 10;
+                if (Main.player[l].townNPCs == 1f)
+                {
+                    chance = 10;
+                }
+                else if (Main.player[l].townNPCs == 2f)
+                {
+                    chance = 5;
+                }
+                else if (Main.player[l].townNPCs >= 3f)
+                {
+                    chance = 3;
+                }
+                if (Main.rand.NextBool(chance))
+                {
+                    spawnThing = true;
+                }
+            }
+
+
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer)
+            if (spawnThing)
             {
-                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
+                if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
                 {
-                    return 1f;
-                }
-            }
-            else if (num4 > Main.UnderworldLayer)
-            {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
-                {
-                    if (Main.rand.NextBool(28))
+                    if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                     {
                         return 1f;
                     }
                 }
-            }
-            else if (Main.rand.NextBool(3))
-            {
-                if (Main.remixWorld)
+                else if (num4 > Main.UnderworldLayer)
+                {
+                    if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
+                    {
+                        if (Main.rand.NextBool(28))
+                        {
+                            return 1f;
+                        }
+                    }
+                }
+                else if (Main.remixWorld)
                 {
                     if (num4 < Main.rockLayer && num4 > Main.worldSurface)
                     {
                         if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
                         {
-                            if (Main.rand.NextBool(35))
+                            if (Main.rand.NextBool(28))
                             {
                                 return 1f;
                             }
@@ -252,7 +298,7 @@ public class ZirconSquirrel : ModNPC
     {
         Main.npcFrameCount[Type] = 6;
         Main.npcCatchable[Type] = true;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
@@ -280,41 +326,64 @@ public class ZirconSquirrel : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemSquirrel"))
         });
     }
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    public override float SpawnChance(NPCSpawnInfo spawnInfo) //possibly incomplete, needs special rules for special seeds?
     {
         int spawnRangeX = (int)(NPC.sWidth / 16 * 0.7);
         int spawnRangeY = (int)(NPC.sHeight / 16 * 0.7);
         for (int l = 0; l < 255; l++)
         {
+            bool spawnThing = false;
+            if (Main.player[l].Center.Y / 16f > (float)Main.UnderworldLayer && (!Main.remixWorld || !((double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0) || !((double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)))
+            {
+                int chance = 10;
+                if (Main.player[l].townNPCs == 1f)
+                {
+                    chance = 10;
+                }
+                else if (Main.player[l].townNPCs == 2f)
+                {
+                    chance = 5;
+                }
+                else if (Main.player[l].townNPCs >= 3f)
+                {
+                    chance = 3;
+                }
+                if (Main.rand.NextBool(chance))
+                {
+                    spawnThing = true;
+                }
+            }
+
+
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
             int num4 = Main.rand.Next(num16, num17);
-            if (Main.raining && num4 <= Main.UnderworldLayer)
+            if (spawnThing)
             {
-                if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
+                if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
                 {
-                    return 1f;
-                }
-            }
-            else if (num4 > Main.UnderworldLayer)
-            {
-                if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
-                {
-                    if (Main.rand.NextBool(28))
+                    if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
                     {
                         return 1f;
                     }
                 }
-            }
-            else if (Main.rand.NextBool(3))
-            {
-                if (Main.remixWorld)
+                else if (num4 > Main.UnderworldLayer)
+                {
+                    if (Main.remixWorld && (double)(Main.player[l].Center.X / 16f) > Main.maxTilesX * 0.39 + 50.0 && (double)(Main.player[l].Center.X / 16f) < Main.maxTilesX * 0.61)
+                    {
+                        if (Main.rand.NextBool(28))
+                        {
+                            return 1f;
+                        }
+                    }
+                }
+                else if (Main.remixWorld)
                 {
                     if (num4 < Main.rockLayer && num4 > Main.worldSurface)
                     {
                         if (num4 >= Main.rockLayer && num4 <= Main.UnderworldLayer)
                         {
-                            if (Main.rand.NextBool(35))
+                            if (Main.rand.NextBool(28))
                             {
                                 return 1f;
                             }
