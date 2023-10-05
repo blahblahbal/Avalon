@@ -34,7 +34,6 @@ public class Table : ModProjectile
     
     public override void AI()
     {
-        Projectile.rotation = Projectile.velocity.ToRotation() / 2;
         Projectile.ai[0]++;
         if (Projectile.ai[0] > 5)
         {

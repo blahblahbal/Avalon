@@ -34,6 +34,6 @@ public class Doll : ModProjectile
     
     public override void AI()
     {
-        Projectile.rotation = Projectile.velocity.ToRotation() / 2;
+        Projectile.rotation = Projectile.velocity.ToRotation();
     }
 }

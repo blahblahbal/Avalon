@@ -15,9 +15,11 @@ namespace Avalon.Data.Sets
             TileID.LivingUltrabrightFire, (ushort)ModContent.TileType<LivingLightning>()
         };
 
-        public static SetFactory Factory = new SetFactory(TileLoader.TileCount);
+        public static readonly bool[] Chunkstone = TileID.Sets.Factory.CreateBoolSet(
+            ModContent.TileType<Tiles.Contagion.Chunkstone>()
+        );
 
-        public static bool[] RiftOres = Factory.CreateBoolSet(TileID.Copper, TileID.Tin,
+        public static bool[] RiftOres = TileID.Sets.Factory.CreateBoolSet(TileID.Copper, TileID.Tin,
             TileID.Iron, TileID.Lead, TileID.Silver, TileID.Tungsten, TileID.Gold, TileID.Platinum,
             TileID.Demonite, TileID.Crimtane, TileID.Cobalt, TileID.Palladium, TileID.Mythril, TileID.Orichalcum,
             TileID.Adamantite, TileID.Titanium);

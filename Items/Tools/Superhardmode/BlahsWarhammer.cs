@@ -5,34 +5,28 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tools;
+namespace Avalon.Items.Tools.Superhardmode;
 
-class BlahsPicksawTierII : ModItem
+class BlahsWarhammer : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
-        Item.width = 34;
-        Item.height = 38;
-        Item.damage = 55;
+        Item.width = 44;
+        Item.height = 48;
         Item.UseSound = SoundID.Item1;
+        Item.damage = 120;
         Item.autoReuse = true;
+        Item.hammer = 250;
         Item.useTurn = true;
         Item.scale = 1.15f;
-        Item.axe = 60;
-        Item.pick = 700;
         Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
-        Item.useTime = 6;
-        Item.knockBack = 5.5f;
+        Item.useTime = 9;
+        Item.knockBack = 20f;
         Item.DamageType = DamageClass.Melee;
-        Item.tileBoost += 16;
+        Item.tileBoost += 6;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = Item.sellPrice(gold: 50);
-        Item.useAnimation = 6;
+        Item.value = 1016000;
+        Item.useAnimation = 9;
         if (!Main.dedServ)
         {
             Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
@@ -42,7 +36,7 @@ class BlahsPicksawTierII : ModItem
     {
         if (player.inventory[player.selectedItem].type == Item.type)
         {
-            player.pickSpeed -= 0.75f;
+            player.wallSpeed += 0.5f;
         }
     }
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)

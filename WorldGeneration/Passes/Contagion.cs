@@ -20,19 +20,68 @@ internal class Contagion : GenPass
     }
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
     {
-        progress.Message = "Making the world gross";
-        int num208 = 0;
-        int[] positions = new int[4];
-        while (num208 < Main.maxTilesX * 0.00045)
+        int jungleXMax = Main.maxTilesX;
+        int jungleXMin = 0;
+        int iceXMax = Main.maxTilesX;
+        int iceXMin = 0;
+        for (int tileXCoord = 0; tileXCoord < Main.maxTilesX; tileXCoord++)
         {
-            float num209 = (float)(num208 / (Main.maxTilesX * 0.00045));
+            for (int tileYCoord = 0; (double)tileYCoord < Main.worldSurface; tileYCoord++)
+            {
+                if (Main.tile[tileXCoord, tileYCoord].HasTile)
+                {
+                    if (Main.tile[tileXCoord, tileYCoord].TileType == TileID.JungleGrass)
+                    {
+                        if (tileXCoord < jungleXMax)
+                        {
+                            jungleXMax = tileXCoord;
+                        }
+                        if (tileXCoord > jungleXMin)
+                        {
+                            jungleXMin = tileXCoord;
+                        }
+                    }
+                    else if (Main.tile[tileXCoord, tileYCoord].TileType == TileID.SnowBlock || Main.tile[tileXCoord, tileYCoord].TileType == TileID.IceBlock)
+                    {
+                        if (tileXCoord < iceXMax)
+                        {
+                            iceXMax = tileXCoord;
+                        }
+                        if (tileXCoord > iceXMin)
+                        {
+                            iceXMin = tileXCoord;
+                        }
+                    }
+                }
+            }
+        }
+        int buffer = 10;
+        jungleXMax -= buffer;
+        jungleXMin += buffer;
+        iceXMax -= buffer;
+        iceXMin += buffer;
+
+        progress.Message = "Making the world gross";
+        double num766 = Main.maxTilesX * 0.00045;
+        if (WorldGen.remixWorldGen)
+        {
+            num766 *= 2.0;
+        }
+        int[] positions = new int[4];
+        for (int num767 = 0; num767 < num766; num767++)
+        {
+            int num768 = iceXMax;
+            int num769 = iceXMin;
+            int num770 = jungleXMax;
+            int num771 = jungleXMin;
+
+            float num209 = (float)(num767 / num766);
             bool flag12 = false;
             int xCoordEvil = 0;
             int evilLeftCoord = 0;
             int evilRightCoord = 0;
             while (!flag12)
             {
-                int num213 = 0;
                 flag12 = true;
                 int num214 = Main.maxTilesX / 2;
                 int num215 = 200;
@@ -94,25 +143,45 @@ internal class Contagion : GenPass
                 {
                     flag12 = false;
                 }
-                if (num208 > 0)
+                if (num767 > 0)
                 {
-                    if (Math.Abs(xCoordEvil - positions[num208 - 1]) < 150)
+                    if (Math.Abs(xCoordEvil - positions[num767 - 1]) < 150)
                     {
                         flag12 = false;
                     }
                 }
-                if (xCoordEvil > GenVars.UndergroundDesertLocation.X && xCoordEvil < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                #region ug desert avoidance
+                if (!WorldGen.remixWorldGen)
                 {
-                    flag12 = false;
+                    if (!WorldGen.tenthAnniversaryWorldGen)
+                    {
+                        if (xCoordEvil > num214 - num215 && xCoordEvil < num214 + num215)
+                        {
+                            flag12 = false;
+                        }
+                        if (evilLeftCoord > num214 - num215 && evilLeftCoord < num214 + num215)
+                        {
+                            flag12 = false;
+                        }
+                        if (evilRightCoord > num214 - num215 && evilRightCoord < num214 + num215)
+                        {
+                            flag12 = false;
+                        }
+                    }
+                    if (xCoordEvil > GenVars.UndergroundDesertLocation.X && xCoordEvil < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                    {
+                        flag12 = false;
+                    }
+                    if (evilLeftCoord > GenVars.UndergroundDesertLocation.X && evilLeftCoord < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                    {
+                        flag12 = false;
+                    }
+                    if (evilRightCoord > GenVars.UndergroundDesertLocation.X && evilRightCoord < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
+                    {
+                        flag12 = false;
+                    }
                 }
-                if (evilLeftCoord > GenVars.UndergroundDesertLocation.X && evilLeftCoord < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
-                {
-                    flag12 = false;
-                }
-                if (evilRightCoord > GenVars.UndergroundDesertLocation.X && evilRightCoord < GenVars.UndergroundDesertLocation.X + GenVars.UndergroundDesertLocation.Width)
-                {
-                    flag12 = false;
-                }
+                #endregion
                 for (int num216 = evilLeftCoord; num216 < evilRightCoord; num216++)
                 {
                     for (int num217 = 0; num217 < (int)Main.worldSurface; num217 += 5)
@@ -128,14 +197,23 @@ internal class Contagion : GenPass
                         }
                     }
                 }
-                if (num213 < 200 && GenVars.jungleOriginX > evilLeftCoord && GenVars.jungleOriginX < evilRightCoord)
+                #region jungle avoidance
+                if (evilLeftCoord < num769 && evilRightCoord > num768)
                 {
-                    num213++;
+                    num768++;
+                    num769--;
                     flag12 = false;
                 }
+                if (evilLeftCoord < num771 && evilRightCoord > num770)
+                {
+                    num770++;
+                    num771--;
+                    flag12 = false;
+                }
+                #endregion
             }
             ContagionRunner(xCoordEvil, (int)GenVars.worldSurfaceLow - 10 + (Main.maxTilesY / 8));
-            positions[num208] = xCoordEvil;
+            positions[num767] = xCoordEvil;
             for (int num218 = evilLeftCoord; num218 < evilRightCoord; num218++)
             {
                 int num219 = (int)GenVars.worldSurfaceLow;
@@ -254,7 +332,6 @@ internal class Contagion : GenPass
                     }
                 }
             }
-            num208++;
         }
     }
 

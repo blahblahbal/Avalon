@@ -6443,7 +6443,12 @@ Mods: {
 			}
 
 			SackofToys: {
-				DisplayName: Sackof Toys
+				DisplayName: Sack of Toys
+				Tooltip: ""
+			}
+
+			BlahsWarhammer: {
+				DisplayName: Blah's Warhammer
 				Tooltip: ""
 			}
 		}
@@ -6599,7 +6604,7 @@ Mods: {
 			Lego.DisplayName: Lego
 			Vase.DisplayName: Vase
 			Doll.DisplayName: Doll
-			SackofToys.DisplayName: Sackof Toys
+			SackofToys.DisplayName: Sack of Toys
 			Table.DisplayName: Table
 		}
 
