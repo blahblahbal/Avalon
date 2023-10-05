@@ -79,7 +79,7 @@ class RiftGogglesPlayer : ModPlayer
         // mobs
         if (Player.ZoneCrimson || Player.ZoneCorrupt || Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion)
         {
-            if (Main.rand.NextBool(4000) && Player.GetModPlayer<AvalonPlayer>().RiftGoggles)
+            if (Main.rand.NextBool(5500) && Player.GetModPlayer<AvalonPlayer>().RiftGoggles)
             {
                 Vector2 pposTile2 = Player.position + new Vector2(Main.rand.Next(-20 * 16, 21 * 16), Main.rand.Next(-20 * 16, 21 * 16));
                 Point pt = pposTile2.ToTileCoordinates();
@@ -106,7 +106,7 @@ class RiftGogglesPlayer : ModPlayer
         {
             if (Player.ZoneHallow || Player.InModBiome(ExxoAvalonOrigins.Confection.Find<ModBiome>("ConfectionBiome")))
             {
-                if (Main.rand.NextBool(4000) && Player.GetModPlayer<AvalonPlayer>().RiftGoggles)
+                if (Main.rand.NextBool(5500) && Player.GetModPlayer<AvalonPlayer>().RiftGoggles)
                 {
                     Vector2 pposTile2 = Player.position + new Vector2(Main.rand.Next(-20 * 16, 21 * 16), Main.rand.Next(-20 * 16, 21 * 16));
                     Point pt = pposTile2.ToTileCoordinates();

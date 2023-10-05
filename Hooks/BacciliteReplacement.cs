@@ -18,6 +18,15 @@ namespace Avalon.Hooks
         {
             On_WorldGen.TileRunner += On_WorldGen_TileRunner;
             IL_WorldGen.ShimmerMakeBiome += AddShimmerAlternativeChecks;
+            IL_WorldGen.badOceanCaveTiles += IL_WorldGen_badOceanCaveTiles;
+        }
+
+        private void IL_WorldGen_badOceanCaveTiles(ILContext il)
+        {
+            Utilities.AddAlternativeIdChecks(il, TileID.Ebonstone, id => Data.Sets.Tile.Chunkstone[id]);
+            Utilities.AddAlternativeIdChecks(il, TileID.DemonAltar, id => Data.Sets.Tile.Altar[id]);
+            Utilities.AddAlternativeIdChecks(il, TileID.ShadowOrbs, id => Data.Sets.Tile.Orb[id]);
+            Utilities.AddAlternativeIdChecks(il, WallID.EbonstoneUnsafe, id => Data.Sets.Wall.Chunkstone[id]);
         }
 
         public static void AddShimmerAlternativeChecks(ILContext il) =>

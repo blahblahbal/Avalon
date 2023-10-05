@@ -19,6 +19,14 @@ namespace Avalon.Data.Sets
             ModContent.TileType<Tiles.Contagion.Chunkstone>()
         );
 
+        public static readonly bool[] Altar = TileID.Sets.Factory.CreateBoolSet(
+            ModContent.TileType<Tiles.Contagion.IckyAltar>()
+        );
+
+        public static readonly bool[] Orb = TileID.Sets.Factory.CreateBoolSet(
+            ModContent.TileType<Tiles.Contagion.SnotOrb>()
+        );
+
         public static bool[] RiftOres = TileID.Sets.Factory.CreateBoolSet(TileID.Copper, TileID.Tin,
             TileID.Iron, TileID.Lead, TileID.Silver, TileID.Tungsten, TileID.Gold, TileID.Platinum,
             TileID.Demonite, TileID.Crimtane, TileID.Cobalt, TileID.Palladium, TileID.Mythril, TileID.Orichalcum,

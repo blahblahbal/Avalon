@@ -117,6 +117,7 @@ public class AvalonPlayer : ModPlayer
     #endregion
 
     public bool CougherMask;
+    public int CoughCooldown = 60 * 30;
 
     #region accessories
     public bool PulseCharm;
@@ -142,6 +143,10 @@ public class AvalonPlayer : ModPlayer
     public bool ObsidianGlove;
     public bool RiftGoggles;
     public bool InertiaBoots;
+    public bool HideVarefolk;
+    public const string LavaMermanName = "LavaMerman";
+    public bool AccLavaMerman;
+    private bool lavaMerman;
     #endregion
 
     #region buffs and debuffs
@@ -227,6 +232,8 @@ public class AvalonPlayer : ModPlayer
         ObsidianGlove = false;
         RiftGoggles = false;
         InertiaBoots = false;
+        HideVarefolk = false;
+        AccLavaMerman = false;
 
         // armor sets
         SkyBlessing = false;
@@ -261,7 +268,23 @@ public class AvalonPlayer : ModPlayer
             else { InBossFight = false; }
         }
     }
+    public override void Load()
+    {
+        if (Main.netMode == NetmodeID.Server)
+        {
+            return;
+        }
 
+        EquipLoader.AddEquipTexture(
+            Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Head", EquipType.Head,
+            null, LavaMermanName);
+        EquipLoader.AddEquipTexture(
+            Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Body", EquipType.Body,
+            null, LavaMermanName);
+        EquipLoader.AddEquipTexture(
+            Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Legs", EquipType.Legs,
+            null, LavaMermanName);
+    }
     internal void HandleMouseCursor(BinaryReader reader)
     {
         MousePosition = reader.ReadVector2();
@@ -291,6 +314,12 @@ public class AvalonPlayer : ModPlayer
     }
     public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
     {
+        if (lavaMerman)
+        {
+            Player.head = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Head);
+            Player.body = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Body);
+            Player.legs = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Legs);
+        }
         if (Player.HasBuff(ModContent.BuffType<Shockwave>()) || Player.HasBuff(ModContent.BuffType<AdvShockwave>()))
         {
             r *= 0.7372f;
@@ -396,6 +425,11 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdateEquips()
     {
+        if (AccLavaMerman && !HideVarefolk && Collision.LavaCollision(Player.position, Player.width, Player.height))
+        {
+            lavaMerman = true;
+            Player.merman = true;
+        }
 
         for (int i = 0; i <= 9; i++)
         {
@@ -559,11 +593,8 @@ public class AvalonPlayer : ModPlayer
 
     public override void PostUpdate()
     {
-        if (CougherMask && Player.PlayerDoublePressedSetBonusActivateKey())
-        {
-            int proj = Projectile.NewProjectile(Player.GetSource_Accessory(new Item(ModContent.ItemType<Items.Armor.Hardmode.CougherMask>())),
-                Player.Center, new Vector2(3) * Player.direction, ModContent.ProjectileType<Projectiles.PlayerCough>(), 0, 0);
-        }
+        CoughCooldown--;
+        if (CoughCooldown < 0) CoughCooldown = 0;
 
         if (InertiaBoots)
         {
@@ -572,8 +603,6 @@ public class AvalonPlayer : ModPlayer
                 int dustType = DustID.Cloud;
                 bool superSonic = false;
 
-
-                //Main.NewText(EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SonicHat", EquipType.Head));
                 if ((Player.dye[0].type == ItemID.YellowDye || Player.dye[0].type == ItemID.BrightYellowDye) && Player.head == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SonicHat", EquipType.Head) &&
                     (Player.dye[1].type == ItemID.YellowDye || Player.dye[1].type == ItemID.BrightYellowDye) && Player.body == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SonicShirt", EquipType.Body) &&
                     (Player.dye[2].type == ItemID.YellowDye || Player.dye[2].type == ItemID.BrightYellowDye) && Player.legs == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SonicShoes", EquipType.Legs))

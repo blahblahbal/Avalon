@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -39,6 +40,20 @@ public class Ectovines : ModTile
             WorldGen.KillTile(i, j + 1);
         }
     }
+
+    public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        bool intoRenderTargets = true;
+        bool flag = intoRenderTargets || Main.LightingEveryFrame;
+
+        if (Main.tile[i, j].TileFrameX % 18 == 0 && Main.tile[i, j].TileFrameY % 54 == 0 && flag)
+        {
+            Main.instance.TilesRenderer.CrawlToTopOfVineAndAddSpecialPoint(j, i);
+        }
+
+        return false;
+    }
+
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         r = 35f / 255f;

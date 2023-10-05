@@ -792,6 +792,18 @@ namespace Avalon.Common.Templates
             DustType = Dust;
             RegisterItemDrop(DropItem);
         }
+        public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
+        {
+            bool intoRenderTargets = true;
+            bool flag = intoRenderTargets || Main.LightingEveryFrame;
+
+            if (Main.tile[i, j].TileFrameX % 54 == 0 && Main.tile[i, j].TileFrameY % 54 == 0 && flag)
+            {
+                Main.instance.TilesRenderer.AddSpecialPoint(i, j, 5);
+            }
+
+            return false;
+        }
         public override void HitWire(int i, int j)
         {
             int x = i - Main.tile[i, j].TileFrameX / 18 % 3;

@@ -19,6 +19,15 @@ internal class Hellcastle
         MakePath(x, y, -1);
         MakePath(x, y, 1);
 
+        for (int q = x + 194; q < x + 206; q++)
+        {
+            for (int z = y + 139; z < y + 150; z++)
+            {
+                WorldGen.KillTile(q, z);
+                Main.tile[q, z].WallType = (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>();
+            }
+        }
+
         // make decorative pillars on top
         MakeBox(x, y - 6, 6, 6, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
         MakeBox(x + 394, y - 6, 6, 6, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);

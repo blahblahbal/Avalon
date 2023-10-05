@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
@@ -48,6 +49,13 @@ public class BacteriumPrime : ModNPC
             index = secondStageHeadSlot;
         }
     }
+    public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+    {
+        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
+        {
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.BacteriumPrime"))
+        });
+    }
     public override void SetStaticDefaults()
     {
         //DisplayName.SetDefault("Bacterium Prime");
@@ -56,6 +64,14 @@ public class BacteriumPrime : ModNPC
         NPCID.Sets.MPAllowedEnemies[Type] = true;
         // Automatically group with other bosses
         NPCID.Sets.BossBestiaryPriority.Add(Type);
+
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+        {
+            PortraitScale = 0.7f,
+            PortraitPositionYOverride = -14,
+            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 
         Main.npcFrameCount[NPC.type] = 8;
         NPCID.Sets.TrailCacheLength[NPC.type] = 12;
@@ -83,7 +99,7 @@ public class BacteriumPrime : ModNPC
         DrawOffsetY = 14;
         NPC.timeLeft = 200000;
         Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime") : MusicID.Boss5;
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Contagion>().Type, ModContent.GetInstance<UndergroundContagion>().Type };
         //bossBag = ModContent.ItemType<Items.BossBags.BacteriumPrimeBossBag>();
     }
     public override void OnKill()

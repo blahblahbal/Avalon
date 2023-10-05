@@ -11,6 +11,7 @@ using Avalon.Dusts;
 using Avalon.Projectiles.Hostile;
 using Terraria.Audio;
 using Terraria.Localization;
+using Avalon.Items.Armor.Hardmode;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -69,6 +70,7 @@ public class Cougher : ModNPC
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CougherMask>(), 150));
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {

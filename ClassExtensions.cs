@@ -344,7 +344,7 @@ public static class ClassExtensions
         return closest;
     }
 
-    public static void DrawGas(String Texture, Color color, Projectile projectile, float spread, int iterations)
+    public static void DrawGas(string Texture, Color color, Projectile projectile, float spread, int iterations)
     {
         Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         int frameHeight = texture.Height / Main.projFrames[projectile.type];

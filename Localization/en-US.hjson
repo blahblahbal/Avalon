@@ -10,6 +10,14 @@ Mods: {
 	}
 
 	Avalon: {
+		CougherMask.Tooltip:
+			'''
+			Double tap {0} to cough on your enemies
+			Coughing decreases the duration of all debuffs you currently have
+			The cough transfers your debuffs to any enemy it hits
+			30 second cooldown
+			'''
+
 		Bestiary: {
 			BaskingSpewer: In ancient times, a saltwater river once ran through the desert. These powerful creatures evolved to survive in the now dry sand.
 			Blaze: This hellish creature is quite vulnerable to water. Thankfully, no water exists in its natural environment, so it thrives.
@@ -30,6 +38,7 @@ Mods: {
 			FallenHero: A hero, fallen into blood. It roams aimlessly on nights of a Blood Moon.
 			Pyrasite: Giant flat worms created by the Contagion, these creatures enjoy feeding on pre-eaten food from the stomach of titans and other large lifeforms.
 			BacteriumPrime: This giant eye of Contagion never ceases, never truly closes. Those who fall to its gaze will be just as felled by its plague.
+			DesertBeak: The guardian of the desert, this large vulture summons its smaller brethren to assist it in battle. It lifts prey up with its talons, then drops them to fall to their doom.
 		}
 
 		Keybinds: {
@@ -5127,7 +5136,7 @@ Mods: {
 			}
 
 			ContagionMouldWall: {
-				DisplayName: Contagion Mould Wall
+				DisplayName: Contagion Mold Wall
 				Tooltip: ""
 			}
 
@@ -6449,6 +6458,90 @@ Mods: {
 
 			BlahsWarhammer: {
 				DisplayName: Blah's Warhammer
+				Tooltip: You shouldn't have this
+			}
+
+			DesertBeakTrophy: {
+				DisplayName: Desert Beak Trophy
+				Tooltip: ""
+			}
+
+			OxygenTank: {
+				DisplayName: Oxygen Tank
+				Tooltip: Immunity to Suffocation
+			}
+
+			Vortex: {
+				DisplayName: Vortex
+				Tooltip: Immunity to On Fire!
+			}
+
+			GoldenShield: {
+				DisplayName: Golden Shield
+				Tooltip: Immunity to Ichor
+			}
+
+			ReflexCharm: {
+				DisplayName: Reflex Charm
+				Tooltip: Grants the holder a chance to reflect projectiles
+			}
+
+			ReflexShield: {
+				DisplayName: Reflex Shield
+				Tooltip:
+					'''
+					The holder will reflect most projectiles
+					Grants immunity to most debuffs
+					Grants immunity to fire blocks and knockback
+					'''
+			}
+
+			SummonerScroll: {
+				DisplayName: Summoner Scroll
+				Tooltip:
+					'''
+					17% increased minion damage
+					Increases your max number of minions by 1
+					'''
+			}
+
+			PygmyShield: {
+				DisplayName: Pygmy Shield
+				Tooltip:
+					'''
+					Increases your max number of minions by 1
+					Grants immunity to knockback
+					'''
+			}
+
+			DionysusAmulet: {
+				DisplayName: Dionysus Amulet
+				Tooltip:
+					'''
+					Increases your max number of minions by 2
+					8% increased minion damage
+					Increases armor penetration by 5
+					'''
+			}
+
+			HadesCross: {
+				DisplayName: Hades' Cross
+				Tooltip: Turns the holder into varefolk upon entering lava
+			}
+
+			BestialBand: {
+				DisplayName: Bestial Band
+				Tooltip:
+					'''
+					Turns the holder into merfolk upon entering water
+					Turns the holder into varefolk upon entering lava
+					Turns the holder into a werewolf at night
+					Minor increase to all stats
+					'''
+			}
+
+			ContagionGrassWall: {
+				DisplayName: Contagion Grass Wall
 				Tooltip: ""
 			}
 		}

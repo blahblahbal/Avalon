@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -42,7 +43,18 @@ public class ContagionVines : ModTile
     {
         offsetY = -4;
     }
+    public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        bool intoRenderTargets = true;
+        bool flag = intoRenderTargets || Main.LightingEveryFrame;
 
+        if (Main.tile[i, j].TileFrameX % 18 == 0 && Main.tile[i, j].TileFrameY % 54 == 0 && flag)
+        {
+            Main.instance.TilesRenderer.CrawlToTopOfVineAndAddSpecialPoint(j, i);
+        }
+
+        return false;
+    }
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     {
         Tile tileAbove = Framing.GetTileSafely(i, j - 1);

@@ -101,7 +101,11 @@ internal class Shrines : GenPass
             }
 
             Point point = new(xCoord, yCoord);
-            Utils.GetCMXCoord(point.X, point.Y, 120, 110, ref point.X);
+            int xtemp = point.X - 60;
+
+            Utils.GetCMXCoord(xtemp, point.Y - 65, 120, 110, ref xtemp);
+
+            point.X = xtemp + 60;
 
             if (Structures.LavaOcean.GenerateLavaOcean(point.X, point.Y))
             {

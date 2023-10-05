@@ -10,11 +10,6 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 public class RocketinaBottle : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
