@@ -6544,6 +6544,15 @@ Mods: {
 				DisplayName: Contagion Grass Wall
 				Tooltip: ""
 			}
+
+			ThePill: {
+				DisplayName: The Pill
+				Tooltip:
+					'''
+					Increases healing potion effectiveness 50% and potion sickness duration by 20%
+					Decreases debuff time by 20%
+					'''
+			}
 		}
 
 		Projectiles: {

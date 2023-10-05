@@ -147,6 +147,7 @@ public class AvalonPlayer : ModPlayer
     public const string LavaMermanName = "LavaMerman";
     public bool AccLavaMerman;
     private bool lavaMerman;
+    public bool ThePill;
     #endregion
 
     #region buffs and debuffs
@@ -234,6 +235,7 @@ public class AvalonPlayer : ModPlayer
         InertiaBoots = false;
         HideVarefolk = false;
         AccLavaMerman = false;
+        ThePill = false;
 
         // armor sets
         SkyBlessing = false;

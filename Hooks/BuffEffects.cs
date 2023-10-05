@@ -65,6 +65,11 @@ public class BuffEffects : ModHook
                     if (self.buffTime[j] < timeToAdd * 2)
                         self.buffTime[j] = timeToAdd * 2;
                 }
+                else if (self.GetModPlayer<AvalonPlayer>().ThePill && Main.debuff[self.buffType[j]])
+                {
+                    if (self.buffTime[j] < timeToAdd * 0.8f)
+                        self.buffTime[j] = (int)(timeToAdd * 0.8f);
+                }
                 /*if (type == ModContent.BuffType<Buffs.SkyBlessing>())
                 {
                     self.buffTime[j] += timeToAdd;
