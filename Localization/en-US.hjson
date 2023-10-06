@@ -6550,11 +6550,10 @@ Mods: {
 				Tooltip:
 					'''
 					Increases healing potion effectiveness by 50%
-                    Increases potion sickness duration by 20%
+					Increases potion sickness duration by 20%
 					Decreases debuff time by 20%
 					'''
 			}
-		}
 
 			IntelligenceBoots: {
 				DisplayName: Intelligence Boots
@@ -6563,7 +6562,12 @@ Mods: {
 
 			GastropodStaff: {
 				DisplayName: Gastropod Staff
-				Tooltip: Summons a mini gastropod
+				Tooltip: Summons a gastropod to fight for you
+			}
+
+			EyeoftheGods: {
+				DisplayName: Eyeofthe Gods
+				Tooltip: ""
 			}
 		}
 
@@ -6759,9 +6763,9 @@ Mods: {
 			}
 
 			MineralSlime.DisplayName: Mineral Slime
-			PyrasiteHead.DisplayName: Pyrasite Head
-			PyrasiteBody.DisplayName: Pyrasite Body
-			PyrasiteTail.DisplayName: Pyrasite Tail
+			PyrasiteHead.DisplayName: Pyrasite
+			PyrasiteBody.DisplayName: Pyrasite
+			PyrasiteTail.DisplayName: Pyrasite
 			Bactus.DisplayName: Bactus
 			Rockarolla.DisplayName: Rockarolla
 			Viris.DisplayName: Viris

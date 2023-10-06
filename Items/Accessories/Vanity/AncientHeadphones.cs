@@ -25,7 +25,7 @@ class AncientHeadphones : ModItem
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
-    public override void AddRecipes()
+    /*public override void AddRecipes()
     {
         CreateRecipe(1)
             .AddIngredient(ItemID.MusicBox)
@@ -33,7 +33,7 @@ class AncientHeadphones : ModItem
             .AddIngredient(ItemID.FallenStar, 10)
             .AddTile(TileID.Anvils)
             .Register();
-    }
+    }*/
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().AncientHeadphones = true;
