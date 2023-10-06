@@ -6544,6 +6544,16 @@ Mods: {
 				DisplayName: Contagion Grass Wall
 				Tooltip: ""
 			}
+
+			IntelligenceBoots: {
+				DisplayName: Intelligence Boots
+				Tooltip: Makes you VERY intelligent :D
+			}
+
+			GastropodStaff: {
+				DisplayName: Gastropod Staff
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -6699,6 +6709,7 @@ Mods: {
 			Doll.DisplayName: Doll
 			SackofToys.DisplayName: Sack of Toys
 			Table.DisplayName: Table
+			GastrominiSummon.DisplayName: Gastromini Summon
 		}
 
 		NPCs: {
@@ -7298,6 +7309,11 @@ Mods: {
 			Rejuvenation: {
 				DisplayName: Rejuvenation
 				Description: Healing life
+			}
+
+			Gastropod: {
+				DisplayName: Gastropod
+				Description: Mods.Avalon.Buffs.Gastropod.Description
 			}
 		}
 

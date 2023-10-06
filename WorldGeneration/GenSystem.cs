@@ -89,13 +89,13 @@ public class GenSystem : ModSystem
         int underworld = tasks.FindIndex(genPass => genPass.Name == "Micro Biomes");
         if (underworld != -1)
         {
-            currentPass = new Underworld();
-            tasks.Insert(underworld + 1, currentPass);
-            totalWeight += currentPass.Weight;
+            //currentPass = new Underworld();
+            //tasks.Insert(underworld + 1, currentPass);
+            //totalWeight += currentPass.Weight;
 
-            currentPass = new Ectovines();
-            tasks.Insert(underworld + 2, currentPass);
-            totalWeight += currentPass.Weight;
+            //currentPass = new Ectovines();
+            //tasks.Insert(underworld + 2, currentPass);
+            //totalWeight += currentPass.Weight;
 
             // uncomment when sky fortress becomes a thing
             //tasks.Insert(underworld + 4, new SkyFortress());

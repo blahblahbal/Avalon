@@ -169,6 +169,7 @@ public class AvalonPlayer : ModPlayer
     public bool Vision;
 
     public bool HungryMinion;
+    public bool GastroMinion;
 
     public bool SnotOrb;
     #endregion
@@ -203,6 +204,7 @@ public class AvalonPlayer : ModPlayer
         Pathogen = false;
         PathogenImbue = false;
         HungryMinion = false;
+        GastroMinion = false;
         BloodCasting = false;
         Vision = false;
 

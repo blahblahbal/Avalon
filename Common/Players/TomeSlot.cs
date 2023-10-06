@@ -19,27 +19,27 @@ public class TomeSlot : ModAccessorySlot
     {
         get
         {
-            int top = Hooks.AvalonReflection.Main_mH + 174;
+            int top = Hooks.AvalonReflection.Main_mH + 174 + 47;
             Rectangle r = new(0, 0, (int)(TextureAssets.InventoryBack.Width() * Main.inventoryScale), (int)(TextureAssets.InventoryBack.Height() * Main.inventoryScale));
             r.Y = top + 5 * 47 + 7;
 
             Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47 - 47, r.Top);
             if (Main.mapStyle is 0 or 2)
             {
-                p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47 - 47, 362 + 54);
+                p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47 - 47, r.Top /*362 + 54*/);
             }
             return p;
         }
     }
     public override bool PreDraw(AccessorySlotType context, Item item, Vector2 position, bool isHovered)
     {
-        int top = Hooks.AvalonReflection.Main_mH + 174;
+        int top = Hooks.AvalonReflection.Main_mH + 174 + 47;
         Rectangle r = new(0, 0, (int)(TextureAssets.InventoryBack.Width() * Main.inventoryScale), (int)(TextureAssets.InventoryBack.Height() * Main.inventoryScale));
         r.Y = top + 5 * 47 + 7;
         Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47 - 47, r.Top);
         if (Main.mapStyle is 0 or 2)
         {
-            p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47 - 47, 362 + 54);
+            p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47 - 47, r.Top /*362 + 54*/);
         }
 
         int cX = TextureAssets.InventoryBack3.Value.Width / 2;
