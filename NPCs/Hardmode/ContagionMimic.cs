@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Melee.Hardmode;
@@ -75,7 +76,7 @@ public class ContagionMimic : ModNPC
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.OneFromOptions(1, ModContent.ItemType<HemorrhagingHalberd>(), ModContent.ItemType<InfectionHook>(),
-            ModContent.ItemType<DartShotgun>(), ModContent.ItemType<Outbreak>()));
+            ModContent.ItemType<DartShotgun>(), ModContent.ItemType<Outbreak>(), ModContent.ItemType<ThePill>()));
         npcLoot.Add(ItemDropRule.Common(ItemID.GreaterHealingPotion, 1, 5, 10));
         npcLoot.Add(ItemDropRule.Common(ItemID.GreaterManaPotion, 1, 5, 15));
     }
