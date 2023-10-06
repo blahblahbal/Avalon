@@ -6549,7 +6549,8 @@ Mods: {
 				DisplayName: The Pill
 				Tooltip:
 					'''
-					Increases healing potion effectiveness 50% and potion sickness duration by 20%
+					Increases healing potion effectiveness by 50%
+                    Increases potion sickness duration by 20%
 					Decreases debuff time by 20%
 					'''
 			}
@@ -6562,7 +6563,7 @@ Mods: {
 
 			GastropodStaff: {
 				DisplayName: Gastropod Staff
-				Tooltip: ""
+				Tooltip: Summons a mini gastropod
 			}
 		}
 
