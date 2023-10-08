@@ -40,7 +40,7 @@ public class MonsterBanner : ModTile
         int topLeftY = j - tile.TileFrameY / 18 % 3;
         if (WorldGen.IsBelowANonHammeredPlatform(topLeftX, topLeftY))
         {
-            offsetY -= 8;
+            offsetY -= -2;
         }
     }
     public override void NearbyEffects(int i, int j, bool closer)

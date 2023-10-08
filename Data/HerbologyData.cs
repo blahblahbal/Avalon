@@ -43,7 +43,7 @@ public static class HerbologyData
         ModContent.ItemType<AdvForceFieldPotion>(), ModContent.ItemType<AdvFuryPotion>(),
         ModContent.ItemType<AdvGauntletPotion>(), ModContent.ItemType<AdvGillsPotion>(), ModContent.ItemType<AdvGPSPotion>(),
         ModContent.ItemType<AdvGravitationPotion>(), ModContent.ItemType<AdvHeartreachPotion>(), ModContent.ItemType<AdvHeartsickPotion>(),
-        ModContent.ItemType<AdvHunterPotion>(), ModContent.ItemType<AdvInfernoPotion>(), ModContent.ItemType<AdvInvincibilityPotion>(),
+        ModContent.ItemType<AdvHunterPotion>(), ModContent.ItemType<AdvInfernoPotion>(), /*ModContent.ItemType<AdvInvincibilityPotion>(),*/
         ModContent.ItemType<AdvInvisibilityPotion>(), ModContent.ItemType<AdvIronskinPotion>(), ModContent.ItemType<AdvLeapingPotion>(),
         ModContent.ItemType<AdvLifeforcePotion>(), ModContent.ItemType<AdvMagicPowerPotion>(), ModContent.ItemType<AdvMagnetPotion>(),
         ModContent.ItemType<AdvManaRegenerationPotion>(), ModContent.ItemType<AdvMiningPotion>(), ModContent.ItemType<AdvNightOwlPotion>(),
@@ -130,7 +130,7 @@ public static class HerbologyData
         ModContent.ItemType<ForceFieldPotion>(), ModContent.ItemType<FuryPotion>(),
         ModContent.ItemType<GauntletPotion>(), ItemID.GillsPotion, ModContent.ItemType<GPSPotion>(),
         ItemID.GravitationPotion, ItemID.HeartreachPotion, ModContent.ItemType<HeartsickPotion>(),
-        ItemID.HunterPotion, ItemID.InfernoPotion, ModContent.ItemType<InvincibilityPotion>(),
+        ItemID.HunterPotion, ItemID.InfernoPotion, /*ModContent.ItemType<InvincibilityPotion>(),*/
         ItemID.InvisibilityPotion, ItemID.IronskinPotion, ModContent.ItemType<LeapingPotion>(),
         ItemID.LifeforcePotion, ItemID.MagicPowerPotion, ModContent.ItemType<MagnetPotion>(),
         ItemID.ManaRegenerationPotion, ItemID.MiningPotion, ItemID.NightOwlPotion,

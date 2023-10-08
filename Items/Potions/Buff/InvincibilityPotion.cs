@@ -1,4 +1,7 @@
+using Avalon.Common.Players;
+using Avalon.Items.Accessories.Hardmode;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -24,7 +27,15 @@ class InvincibilityPotion : ModItem
         Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
-        Item.buffTime = 600;
+        Item.potion = true;
         Item.UseSound = SoundID.Item3;
+        Item.potionDelay = 60 * 30;
+        Item.healLife = 25;
+    }
+    public override bool? UseItem(Player player)
+    {
+        player.immune = true;
+        player.immuneTime = (int)(80 * (player.GetModPlayer<AvalonPlayer>().ThePill ? ThePill.LifeBonusAmount : 1));
+        return base.UseItem(player);
     }
 }

@@ -2277,7 +2277,11 @@ Mods: {
 
 			InvincibilityPotion: {
 				DisplayName: Invincibility Potion
-				Tooltip: Grants invincibility
+				Tooltip:
+					'''
+					Grants immunity frames
+					Reduced potion cooldown
+					'''
 			}
 
 			LeapingPotion: {

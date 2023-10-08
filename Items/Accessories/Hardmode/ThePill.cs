@@ -9,6 +9,7 @@ namespace Avalon.Items.Accessories.Hardmode
 {
     public class ThePill : ModItem
     {
+        public const float LifeBonusAmount = 1.5f;
         public override void SetDefaults()
         {
             Item.CloneDefaults(ItemID.PutridScent);
@@ -23,13 +24,13 @@ namespace Avalon.Items.Accessories.Hardmode
     {
         public override void GetHealLife(Item item, Player player, bool quickHeal, ref int healValue)
         {
-            if (player.GetModPlayer<AvalonPlayer>().ThePill) healValue = (int)(healValue * 1.5f);
+            if (player.GetModPlayer<AvalonPlayer>().ThePill) healValue = (int)(healValue * ThePill.LifeBonusAmount);
         }
         public override bool? UseItem(Item item, Player player)
         {
             if (player.GetModPlayer<AvalonPlayer>().ThePill && item.buffType == ModContent.BuffType<Rejuvenation>())
             {
-                player.buffTime[player.FindBuffIndex(ModContent.BuffType<Rejuvenation>())] = (int)(player.buffTime[player.FindBuffIndex(ModContent.BuffType<Rejuvenation>())] * 1.5f);
+                player.buffTime[player.FindBuffIndex(ModContent.BuffType<Rejuvenation>())] = (int)(player.buffTime[player.FindBuffIndex(ModContent.BuffType<Rejuvenation>())] * ThePill.LifeBonusAmount);
             }
             return base.UseItem(item, player);
         }
