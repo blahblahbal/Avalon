@@ -84,17 +84,6 @@ public class PointingLaser : ModProjectile
         Player p = Main.player[Projectile.owner];
         if (Projectile.ai[0] > 0)
         {
-            //Vector2 mousePos = Main.MouseScreen + Main.screenPosition;
-            //if (Main.netMode == NetmodeID.MultiplayerClient)
-            //{
-            //    p.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
-            //    CursorPosition.SendPacket(mousePos, p.whoAmI);
-            //    ModContent.GetInstance<SyncMouse>().Send(new BasicPlayerNetworkArgs(p));
-            //}
-            //else if (Main.netMode == NetmodeID.SinglePlayer)
-            //{
-            //    p.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
-            //}
             if (Vector2.Distance(Projectile.position, p.position) < Vector2.Distance(p.GetModPlayer<AvalonPlayer>().MousePosition, p.position))
             {
                 DrawChain(p.Center + new Vector2(50, 0).RotatedBy(p.AngleTo(p.GetModPlayer<AvalonPlayer>().MousePosition)), p.GetModPlayer<AvalonPlayer>().MousePosition);

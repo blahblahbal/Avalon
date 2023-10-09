@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Items.Accessories.Info;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -41,9 +42,10 @@ class ShadowPhone : ModItem
         SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
-
-    public override void UpdateInventory(Player player)
+    public override void UpdateInfoAccessory(Player player)
     {
+        player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
+        player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
@@ -116,8 +118,10 @@ class ShadowPhoneSurface : ModItem
         }
     }
 
-    public override void UpdateInventory(Player player)
+    public override void UpdateInfoAccessory(Player player)
     {
+        player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
+        player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
@@ -211,8 +215,10 @@ class ShadowPhoneDungeon : ModItem
         }
     }
 
-    public override void UpdateInventory(Player player)
+    public override void UpdateInfoAccessory(Player player)
     {
+        player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
+        player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
@@ -254,8 +260,10 @@ class ShadowPhoneOcean : ModItem
         SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
-    public override void UpdateInventory(Player player)
+    public override void UpdateInfoAccessory(Player player)
     {
+        player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
+        player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
@@ -297,8 +305,10 @@ class ShadowPhoneHell : ModItem
         SoundEngine.PlaySound(SoundID.Item6, player.position);
         return true;
     }
-    public override void UpdateInventory(Player player)
+    public override void UpdateInfoAccessory(Player player)
     {
+        player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
+        player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
@@ -395,8 +405,10 @@ class ShadowPhoneJungleTropics : ModItem
         }
     }
 
-    public override void UpdateInventory(Player player)
+    public override void UpdateInfoAccessory(Player player)
     {
+        player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
+        player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
@@ -439,8 +451,10 @@ class ShadowPhoneRandom : ModItem
         return true;
     }
 
-    public override void UpdateInventory(Player player)
+    public override void UpdateInfoAccessory(Player player)
     {
+        player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
+        player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
@@ -477,6 +491,7 @@ class ShadowPhoneHome : ModItem
     {
         Recipe.Create(Type)
             .AddIngredient(ItemID.Shellphone)
+            .AddIngredient(ModContent.ItemType<EyeoftheGods>())
             .AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
@@ -486,6 +501,7 @@ class ShadowPhoneHome : ModItem
 
         Recipe.Create(Type)
             .AddIngredient(ItemID.ShellphoneSpawn)
+            .AddIngredient(ModContent.ItemType<EyeoftheGods>())
             .AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
@@ -495,6 +511,7 @@ class ShadowPhoneHome : ModItem
 
         Recipe.Create(Type)
             .AddIngredient(ItemID.ShellphoneOcean)
+            .AddIngredient(ModContent.ItemType<EyeoftheGods>())
             .AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
@@ -504,6 +521,7 @@ class ShadowPhoneHome : ModItem
 
         Recipe.Create(Type)
             .AddIngredient(ItemID.ShellphoneHell)
+            .AddIngredient(ModContent.ItemType<EyeoftheGods>())
             .AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
@@ -525,8 +543,10 @@ class ShadowPhoneHome : ModItem
             Item.ChangeItemType(ModContent.ItemType<ShadowPhoneDungeon>());
         }
     }
-    public override void UpdateInventory(Player player)
+    public override void UpdateInfoAccessory(Player player)
     {
+        player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
+        player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
