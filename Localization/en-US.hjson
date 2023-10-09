@@ -6573,12 +6573,19 @@ Mods: {
 				DisplayName: Eye of the Gods
 				Tooltip: Displays the damage and defense of enemies
 			}
+
+			PocketStation: {
+				DisplayName: Pocket Station
+				Tooltip: Allows the use of crafting stations stored in your Piggy Bank
+			}
 		}
 
-        InfoDisplays.EyeoftheGodsDefInfoDisplay.DisplayName: Enemy defense
-        InfoDisplays.EyeoftheGodsDmgInfoDisplay.DisplayName: Enemy damage
-		
-        Projectiles: {
+		InfoDisplays: {
+			EyeoftheGodsDefInfoDisplay.DisplayName: Enemy defense
+			EyeoftheGodsDmgInfoDisplay.DisplayName: Enemy damage
+		}
+
+		Projectiles: {
 			AeonBeam.DisplayName: Aeon's Eternity
 			AeonStar.DisplayName: Aeon Constellation
 			AeonExplosion.DisplayName: Aeon Constellation

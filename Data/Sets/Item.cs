@@ -1,4 +1,5 @@
 using Avalon.Items.Material.Herbs;
+using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,5 +20,7 @@ namespace Avalon.Data.Sets
             ModContent.ItemType<SweetstemSeeds>(),
             ModContent.ItemType<HolybirdSeeds>(),
             ModContent.ItemType<TwilightPlumeSeeds>());
+
+        public static List<int> CraftingStationsItemID = new List<int>();
     }
 }
