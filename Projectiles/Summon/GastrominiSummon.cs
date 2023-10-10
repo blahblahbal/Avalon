@@ -27,6 +27,7 @@ public class GastrominiSummon : ModProjectile
         Projectile.tileCollide = false;
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
+        Projectile.aiStyle = -1;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
@@ -49,7 +50,7 @@ public class GastrominiSummon : ModProjectile
         var num820 = 0.05f;
         for (var num821 = 0; num821 < 1000; num821++)
         {
-            if (num821 != Projectile.whoAmI && Main.projectile[num821].active && Main.projectile[num821].owner == Projectile.owner && (Main.projectile[num821].type == 387 || Main.projectile[num821].type == 388 || Main.projectile[num821].type == 485 || Main.projectile[num821].type == 498) && Math.Abs(Projectile.position.X - Main.projectile[num821].position.X) + Math.Abs(Projectile.position.Y - Main.projectile[num821].position.Y) < Projectile.width)
+            if (num821 != Projectile.whoAmI && Main.projectile[num821].active && Main.projectile[num821].owner == Projectile.owner && Math.Abs(Projectile.position.X - Main.projectile[num821].position.X) + Math.Abs(Projectile.position.Y - Main.projectile[num821].position.Y) < Projectile.width)
             {
                 if (Projectile.position.X < Main.projectile[num821].position.X)
                 {
@@ -176,11 +177,11 @@ public class GastrominiSummon : ModProjectile
             {
                 Projectile.frame = 2;
             }
-            else if (Projectile.localAI[0] <= 6)
+            else if (Projectile.localAI[0] <= 8)
             {
                 Projectile.frame = 3;
             }
-            else if (Projectile.localAI[0] <= 8)
+            else if (Projectile.localAI[0] <= 12)
             {
                 Projectile.frame = 4;
             }
@@ -194,29 +195,28 @@ public class GastrominiSummon : ModProjectile
         {
             Projectile.ai[1] += Main.rand.Next(1, 4);
         }
-        if (Projectile.ai[1] > 90f && Projectile.type == ModContent.ProjectileType<GastrominiSummon>())
+        if (Projectile.ai[1] > 90f)
         {
             Projectile.ai[1] = 0f;
             Projectile.netUpdate = true;
         }
         if (Projectile.ai[0] == 0f)
         {
-            if (Projectile.type == ModContent.ProjectileType<GastrominiSummon>())
+            var scaleFactor7 = 8f;
+            int num832 = ProjectileID.MiniRetinaLaser;
+            if (flag32 && Projectile.ai[1] == 0f)
             {
-                var scaleFactor7 = 8f;
-                int num832 = ProjectileID.MiniRetinaLaser;
-                if (flag32 && Projectile.ai[1] == 0f)
+                Projectile.ai[1] += 1f;
+                Projectile.localAI[0] = 1;
+                if (Main.myPlayer == Projectile.owner && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, vector57, 0, 0))
                 {
-                    Projectile.ai[1] += 1f;
-                    if (Main.myPlayer == Projectile.owner && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, vector57, 0, 0))
-                    {
-                        var value24 = vector57 - Projectile.Center;
-                        value24.Normalize();
-                        value24 *= scaleFactor7;
-                        var num833 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, value24.X, value24.Y, num832, (int)(Projectile.damage * 0.8f), 0f, Main.myPlayer, 0f, 0f);
-                        Main.projectile[num833].timeLeft = 300;
-                        Projectile.netUpdate = true;
-                    }
+                    Projectile.spriteDirection = -(int)((vector57.X - Projectile.Center.X) / Math.Abs(vector57.X - Projectile.Center.X));
+                    var value24 = vector57 - Projectile.Center;
+                    value24.Normalize();
+                    value24 *= scaleFactor7;
+                    var num833 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, value24.X, value24.Y, num832, (int)(Projectile.damage * 1.5f), 0f, Main.myPlayer, 0f, 0f);
+                    Main.projectile[num833].timeLeft = 300;
+                    Projectile.netUpdate = true;
                 }
             }
         }

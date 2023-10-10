@@ -7342,7 +7342,7 @@ Mods: {
 
 			Gastropod: {
 				DisplayName: Gastropod
-				Description: Mods.Avalon.Buffs.Gastropod.Description
+				Description: The gastropod will fight for you
 			}
 		}
 
