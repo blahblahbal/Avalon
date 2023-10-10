@@ -6442,6 +6442,7 @@ Mods: {
 					'''
 					Heals 150 life over 30 seconds
 					Effect is cancelled when hit
+                    Heals 225 life over 45 seconds if you have The Pill equipped
 					'''
 			}
 
@@ -6576,7 +6577,7 @@ Mods: {
 
 			PocketStation: {
 				DisplayName: Pocket Station
-				Tooltip: Allows the use of crafting stations stored in your Piggy Bank, Safe, Defender's Forge, and Void Bag
+				Tooltip: Allows the use of crafting stations stored in any of your inventories
 			}
 
 			BacchusBoots: {
@@ -6642,7 +6643,7 @@ Mods: {
 			}
 
 			SurgicalMask: {
-				DisplayName: SurgicalMask
+				DisplayName: Surgical Mask
 				Tooltip: Immunity to Pathogen
 			}
 		}

@@ -41,7 +41,7 @@ class WorldgenHelper : ModItem
             //WorldGen.ShimmerMakeBiome(x, y);
             //Underworld.MakeSpike2(x, y, (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>(), ln, lx);
             //Underworld.MakeSpike2(x, y - 1, (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>(), ln, lx);
-            WorldGeneration.Structures.LavaOcean.Generate(x, y);
+            //WorldGeneration.Structures.LavaOcean.MakeLavaLake(x, y);
             //WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
             //int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
             //Main.item[rift].velocity *= 0f;

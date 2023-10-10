@@ -482,6 +482,17 @@ public class AvalonGlobalItem : GlobalItem
         TooltipLine? tooltipLine = tooltips.Find(x => x.Name == "ItemName" && x.Mod == "Terraria");
         TooltipLine? tooltipMat = tooltips.Find(x => x.Name == "Material" && x.Mod == "Terraria");
         TooltipLine? tooltipEquip = tooltips.Find(x => x.Name == "Equipable" && x.Mod == "Terraria");
+        TooltipLine? healLife = tooltips.Find(x => x.Name == "HealLife" && x.Mod == "Terraria");
+        if (healLife != null)
+        {
+            if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().ThePill)
+            {
+                if (int.TryParse(healLife.Text.Substring(9).Replace(" life", ""), out var life))
+                {
+                    healLife.Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(life * Items.Accessories.Hardmode.ThePill.LifeBonusAmount));
+                }
+            }
+        }
         if (tooltipEquip != null)
         {
             if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)

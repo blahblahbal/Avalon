@@ -19,6 +19,16 @@ internal class AdjTiles : ModHook
     {
         if (self.GetModPlayer<AvalonPlayer>().PocketBench)
         {
+            for (int o = 0; o < 50; o++)
+            {
+                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.inventory[o].type))
+                {
+                    if (!self.adjTile[self.inventory[o].createTile])
+                    {
+                        self.adjTile[self.inventory[o].createTile] = true;
+                    }
+                }
+            }
             for (int o = 0; o < self.bank.item.Length; o++)
             {
                 if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank.item[o].type))
