@@ -6807,6 +6807,10 @@ Mods: {
 			SackofToys.DisplayName: Sack of Toys
 			Table.DisplayName: Table
 			GastrominiSummon.DisplayName: Gastromini Summon
+			GastrominiSummon1.DisplayName: Gastromini Summon
+			GastrominiSummon2.DisplayName: Gastromini Summon
+			GastrominiSummon3.DisplayName: Gastromini Summon
+			GastrominiSummon0.DisplayName: Gastromini Summon
 		}
 
 		NPCs: {

@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Summon;
 
-public class GastrominiSummon : ModProjectile
+public abstract class GastrominiSummon : ModProjectile
 {
     public override void SetStaticDefaults()
     {
@@ -222,3 +222,9 @@ public class GastrominiSummon : ModProjectile
         }
     }
 }
+
+
+public class GastrominiSummon0 : GastrominiSummon { }
+public class GastrominiSummon1 : GastrominiSummon { }
+public class GastrominiSummon2 : GastrominiSummon { }
+public class GastrominiSummon3 : GastrominiSummon { }

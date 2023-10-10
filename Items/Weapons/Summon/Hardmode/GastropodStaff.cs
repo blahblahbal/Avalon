@@ -20,7 +20,7 @@ class GastropodStaff : ModItem
         Item.width = dims.Width;
         Item.useTime = 30;
         Item.knockBack = 4.5f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Summon.GastrominiSummon>();
+        Item.shoot = ModContent.ProjectileType<Projectiles.Summon.GastrominiSummon0>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 1, 0, 0);
         Item.useAnimation = 30;
@@ -39,6 +39,21 @@ class GastropodStaff : ModItem
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
+        switch (Main.rand.Next(4))
+        {
+            case 0:
+                type = Item.shoot;
+                break;
+            case 1:
+                type = ModContent.ProjectileType<Projectiles.Summon.GastrominiSummon1>();
+                break;
+            case 2:
+                type = ModContent.ProjectileType<Projectiles.Summon.GastrominiSummon2>();
+                break;
+            case 3:
+                type = ModContent.ProjectileType<Projectiles.Summon.GastrominiSummon3>();
+                break;
+        }
         float posX = (float)Main.mouseX + Main.screenPosition.X;
         float posY = (float)Main.mouseY + Main.screenPosition.Y;
         Projectile.NewProjectile(source, posX, posY, 0f, 0f, type, damage, knockback, player.whoAmI, 0f, 0f);
