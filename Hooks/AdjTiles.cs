@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Common.Players;
+using System;
 
 namespace Avalon.Hooks;
 
@@ -12,27 +13,42 @@ internal class AdjTiles : ModHook
     protected override void Apply()
     {
         On_Player.AdjTiles += OnAdjTiles;
-        //On_Player.AdjTiles += OnAdjTilesPocketBench;
+        On_Player.AdjTiles += OnAdjTilesPocketBench;
     }
-    //private static void OnAdjTilesPocketBench(On_Player.orig_AdjTiles orig, Player self)
-    //{
-    //    if (Array.Exists(self.bank.item, element => Data.Sets.Item.Stations.Contains(element.createTile)) && self.GetModPlayer<ExxoEquipEffectPlayer>().PocketBench)
-    //    {
-    //        for (int o = 0; o < self.bank.item.Length; o++)
-    //        {
-    //            if (self.bank.item[o].createTile > -1)
-    //            {
-    //                if (!self.adjTile[self.bank.item[o].createTile])
-    //                {
-    //                    self.adjTile[self.bank.item[o].createTile] = true;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    else
-    //        orig(self);
-
-    //}
+    private static void OnAdjTilesPocketBench(On_Player.orig_AdjTiles orig, Player self)
+    {
+        if (self.GetModPlayer<AvalonPlayer>().PocketBench)
+        {
+            for (int o = 0; o < self.bank.item.Length; o++)
+            {
+                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank.item[o].type))
+                {
+                    if (!self.adjTile[self.bank.item[o].createTile])
+                    {
+                        self.adjTile[self.bank.item[o].createTile] = true;
+                    }
+                }
+            }
+            Recipe.FindRecipes();
+        }
+        else orig.Invoke(self);
+        //if (Array.Exists(self.bank.item, element => Data.Sets.Item.CraftingStationsItemID.Contains(element.type)) && self.GetModPlayer<AvalonPlayer>().PocketBench)
+        //{
+            
+        //    for (int o = 0; o < self.bank.item.Length; o++)
+        //    {
+        //        if (self.bank.item[o].createTile > -1)
+        //        {
+        //            if (!self.adjTile[self.bank.item[o].createTile])
+        //            {
+        //                self.adjTile[self.bank.item[o].createTile] = true;
+        //            }
+        //        }
+        //    }
+        //}
+        //else
+        //    orig(self);
+    }
     private static void OnAdjTiles(On_Player.orig_AdjTiles orig, Player self)
     {
         int Width = 4;

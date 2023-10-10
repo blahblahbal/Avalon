@@ -24,6 +24,8 @@ using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Ammo;
+using Avalon.Network;
+using Microsoft.Xna.Framework;
 
 namespace Avalon.Common;
 
@@ -279,49 +281,41 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void HoldItem(Item item, Player player)
     {
-        #region barbaric prefix logic
-        //var tempItem = new Item();
-        //tempItem.netDefaults(item.netID);
-        //tempItem = item.Clone();
-        //float kbDiff = 0f;
-        //if (item.prefix == PrefixID.Superior || item.prefix == PrefixID.Savage || item.prefix == PrefixID.Bulky ||
-        //    item.prefix == PrefixID.Taboo || item.prefix == PrefixID.Celestial ||
-        //    item.prefix == ModContent.PrefixType<Horrific>())
-        //{
-        //    kbDiff = 0.1f;
-        //}
-        //else if (item.prefix == PrefixID.Forceful || item.prefix == PrefixID.Strong ||
-        //         item.prefix == PrefixID.Unpleasant ||
-        //         item.prefix == PrefixID.Godly || item.prefix == PrefixID.Heavy || item.prefix == PrefixID.Legendary ||
-        //         item.prefix == PrefixID.Intimidating || item.prefix == PrefixID.Staunch ||
-        //         item.prefix == PrefixID.Unreal ||
-        //         item.prefix == PrefixID.Furious || item.prefix == PrefixID.Mythical)
-        //{
-        //    kbDiff = 0.15f;
-        //}
-        //else if (item.prefix == PrefixID.Broken || item.prefix == PrefixID.Weak || item.prefix == PrefixID.Shameful ||
-        //         item.prefix == PrefixID.Awkward)
-        //{
-        //    kbDiff = -0.2f;
-        //}
-        //else if (item.prefix == PrefixID.Nasty || item.prefix == PrefixID.Ruthless || item.prefix == PrefixID.Unhappy ||
-        //         item.prefix == PrefixID.Light || item.prefix == PrefixID.Awful || item.prefix == PrefixID.Deranged ||
-        //         item.prefix == ModContent.PrefixType<Excited>())
-        //{
-        //    kbDiff = -0.1f;
-        //}
-        //else if (item.prefix == PrefixID.Shoddy || item.prefix == PrefixID.Terrible)
-        //{
-        //    kbDiff = -0.15f;
-        //}
-        //else if (item.prefix == PrefixID.Deadly || item.prefix == PrefixID.Masterful)
-        //{
-        //    kbDiff = 0.05f;
-        //}
+        #region herb seed block swap
+        if (Data.Sets.Item.HerbSeeds[item.type])
+        {
+            Point mpTile = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 
-        //item.knockBack = tempItem.knockBack * (1 + kbDiff);
-        //item.knockBack *= player.GetModPlayer<AvalonPlayer>().BonusKB;
-        #endregion barbaric prefix logic
+            if ((Main.tile[mpTile.X, mpTile.Y].TileType == TileID.BloomingHerbs ||
+                 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>() &&
+                  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
+                 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Bloodberry>() &&
+                  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
+                 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Sweetstem>() &&
+                  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
+                 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Holybird>() &&
+                  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36)) &&
+                (Main.tile[mpTile.X, mpTile.Y + 1].TileType == TileID.ClayPot ||
+                 Main.tile[mpTile.X, mpTile.Y + 1].TileType == TileID.PlanterBox ||
+                 Main.tile[mpTile.X, mpTile.Y + 1].TileType == ModContent.TileType<PlanterBoxes>()) && Main.mouseLeft)
+            {
+                WorldGen.KillTile(mpTile.X, mpTile.Y);
+                if (!Main.tile[mpTile.X, mpTile.Y].HasTile && Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 0, mpTile.X, mpTile.Y);
+                }
+
+                WorldGen.PlaceTile(mpTile.X, mpTile.Y, item.createTile, style: item.placeStyle);
+                if (Main.tile[mpTile.X, mpTile.Y].HasTile && Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 1, mpTile.X, mpTile.Y,
+                        item.createTile, item.placeStyle);
+                }
+
+                item.stack--;
+            }
+        }
+        #endregion herb seed block swap
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {

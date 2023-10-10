@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Avalon.Common;
+using Avalon.Items.Accessories.Info;
 using Avalon.Items.Material;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Items.Placeable.Crafting;
@@ -281,6 +282,11 @@ public class Librarian : ModNPC
         {
             shopCustomPrice = 35000
         }, Condition.DownedPlantera, Condition.Hardmode);
+
+        shop.Add(new Item(ModContent.ItemType<EyeoftheGods>())
+        {
+            shopCustomPrice = 100000
+        }, Condition.DownedCultist, Condition.Hardmode);
 
         shop.Register();
     }

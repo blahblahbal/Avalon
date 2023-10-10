@@ -13,7 +13,26 @@ public class RecipeChanger : ModSystem
     {
         for (int i = 0; i < Recipe.numRecipes; i++)
         {
+            
+
             Recipe recipe = Main.recipe[i];
+
+            #region pocket workbench adding stations
+            if (recipe.requiredTile.Count > 0)
+            {
+                for (int j = 0; j < recipe.requiredTile.Count; j++)
+                {
+                    if (recipe.requiredTile[j] != -1)
+                    {
+                        if (!Data.Sets.Tile.CraftingStations.Contains(recipe.requiredTile[j]))
+                        {
+                            Data.Sets.Tile.CraftingStations.Add(recipe.requiredTile[j]);
+                        }
+                    }
+                }
+            }
+            #endregion
+
             switch (recipe.createItem.type)
             {
                 case ItemID.GPS:
@@ -233,6 +252,14 @@ public class RecipeChanger : ModSystem
                     recipe.AddIngredient(ModContent.ItemType<FireShard>());
                     break;
                 }
+            }
+        }
+
+        for (int i = 0; i < ItemLoader.ItemCount; i++)
+        {
+            if (Data.Sets.Tile.CraftingStations.Contains(ContentSamples.ItemsByType[i].createTile))
+            {
+                Data.Sets.Item.CraftingStationsItemID.Add(ContentSamples.ItemsByType[i].type);
             }
         }
     }

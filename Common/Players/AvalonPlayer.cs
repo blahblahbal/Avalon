@@ -148,6 +148,7 @@ public class AvalonPlayer : ModPlayer
     public bool AccLavaMerman;
     private bool lavaMerman;
     public bool ThePill;
+    public bool PocketBench;
     #endregion
 
     #region buffs and debuffs
@@ -238,6 +239,7 @@ public class AvalonPlayer : ModPlayer
         HideVarefolk = false;
         AccLavaMerman = false;
         ThePill = false;
+        PocketBench = false;
 
         // armor sets
         SkyBlessing = false;

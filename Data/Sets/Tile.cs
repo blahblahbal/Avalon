@@ -32,6 +32,8 @@ namespace Avalon.Data.Sets
             TileID.Demonite, TileID.Crimtane, TileID.Cobalt, TileID.Palladium, TileID.Mythril, TileID.Orichalcum,
             TileID.Adamantite, TileID.Titanium);
 
+        public static List<int> CraftingStations = new List<int>();
+
         //public static Dictionary<int, bool> RiftOres = new Dictionary<int, bool>
         //{
         //    { TileID.Copper, true },
