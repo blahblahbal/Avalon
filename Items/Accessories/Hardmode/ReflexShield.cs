@@ -1,4 +1,4 @@
-using System.Linq;
+using Avalon.Items.Accessories.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -27,6 +27,7 @@ class ReflexShield : ModItem
             .AddIngredient(ModContent.ItemType<GoldenShield>())
             .AddIngredient(ModContent.ItemType<OxygenTank>())
             .AddIngredient(ModContent.ItemType<Vortex>())
+            .AddIngredient(ModContent.ItemType<SurgicalMask>())
             .AddIngredient(ModContent.ItemType<NuclearExtinguisher>())
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
@@ -52,6 +53,9 @@ class ReflexShield : ModItem
         player.buffImmune[BuffID.Blackout] = true;
         player.buffImmune[BuffID.CursedInferno] = true;
         player.buffImmune[BuffID.Stoned] = true;
+        player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Pathogen>()] = true;
+        player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Unloaded>()] = true;
+        player.buffImmune[ModContent.BuffType<Buffs.Debuffs.BrokenWeaponry>()] = true;
         var playerWS = new Rectangle((int)player.Center.X - 32, (int)player.Center.Y - 32, 64, 64);
         foreach (Projectile Pr in Main.projectile)
         {

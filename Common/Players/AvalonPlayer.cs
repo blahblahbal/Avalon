@@ -149,6 +149,7 @@ public class AvalonPlayer : ModPlayer
     public bool ThePill;
     public bool PocketBench;
     public bool ChaosCharm;
+    public bool Reflex;
     #endregion
 
     #region buffs and debuffs
@@ -240,6 +241,8 @@ public class AvalonPlayer : ModPlayer
         ThePill = false;
         PocketBench = false;
         ChaosCharm = false;
+        Reflex = false;
+        lavaMerman = false;
 
         // armor sets
         SkyBlessing = false;
@@ -1060,8 +1063,24 @@ public class AvalonPlayer : ModPlayer
             info.Damage = (int)(info.Damage * 1.15f);
         }
     }
+    public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
+    {
+        //if (!proj.friendly && !proj.bobber && !Data.Sets.Projectile.DontReflect[proj.type] && Reflex)
+        //{
+        //    if (Main.rand.NextBool(1) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
+        //    {
+
+        //        modifiers.HitDirectionOverride = 0;
+        //        modifiers.SetMaxDamage(1);
+        //        proj.hostile = false;
+        //        proj.friendly = true;
+        //        proj.velocity *= -1;
+        //    }
+        //}
+    }
     public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
     {
+        
 
         if (Player.whoAmI == Main.myPlayer && BadgeOfBacteria)
         {
@@ -1070,6 +1089,16 @@ public class AvalonPlayer : ModPlayer
     }
     public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
     {
+        if (!npc.friendly && npc.aiStyle == 9)
+        {
+            if (Main.rand.NextBool(1) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
+            {
+                hurtInfo.Damage = 1;
+                npc.friendly = true;
+                npc.velocity *= -1;
+            }
+        }
+
         if (Player.whoAmI == Main.myPlayer && BadgeOfBacteria)
         {
             Player.AddBuff(ModContent.BuffType<BacterialEndurance>(), 6 * 60);

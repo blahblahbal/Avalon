@@ -29,6 +29,36 @@ internal class AdjTiles : ModHook
                     }
                 }
             }
+            for (int o = 0; o < self.bank2.item.Length; o++)
+            {
+                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank2.item[o].type))
+                {
+                    if (!self.adjTile[self.bank2.item[o].createTile])
+                    {
+                        self.adjTile[self.bank2.item[o].createTile] = true;
+                    }
+                }
+            }
+            for (int o = 0; o < self.bank3.item.Length; o++)
+            {
+                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank3.item[o].type))
+                {
+                    if (!self.adjTile[self.bank3.item[o].createTile])
+                    {
+                        self.adjTile[self.bank3.item[o].createTile] = true;
+                    }
+                }
+            }
+            for (int o = 0; o < self.bank4.item.Length; o++)
+            {
+                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank4.item[o].type))
+                {
+                    if (!self.adjTile[self.bank4.item[o].createTile])
+                    {
+                        self.adjTile[self.bank4.item[o].createTile] = true;
+                    }
+                }
+            }
             Recipe.FindRecipes();
         }
         else orig.Invoke(self);

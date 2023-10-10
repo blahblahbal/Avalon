@@ -6576,24 +6576,74 @@ Mods: {
 
 			PocketStation: {
 				DisplayName: Pocket Station
-				Tooltip: Allows the use of crafting stations stored in your Piggy Bank
+				Tooltip: Allows the use of crafting stations stored in your Piggy Bank, Safe, Defender's Forge, and Void Bag
 			}
 
-            BacchusBoots: {
+			BacchusBoots: {
 				DisplayName: Bacchus Boots
 				Tooltip:
-                '''
-                Increases your max number of minions by 2
-                Increases your max number of sentries by 1
-                8% increased minion damage
-                Increases armor penetration by 5
-                Provides immunity to traps, knockback, fire blocks, and fall damage
-                '''
+					'''
+					Increases your max number of minions by 2
+					Increases your max number of sentries by 1
+					8% increased minion damage
+					Increases armor penetration by 5
+					Provides immunity to traps, knockback, fire blocks, and fall damage
+					'''
 			}
 
-            ChaosCharm: {
+			ChaosCharm: {
 				DisplayName: Chaos Charm
 				Tooltip: Critical strike chance increases as your health drops
+			}
+
+			ChaosCrystal: {
+				DisplayName: Chaos Crystal
+				Tooltip: 35% increased critical strike damage
+			}
+
+			ChaosEmblem: {
+				DisplayName: Chaos Emblem
+				Tooltip:
+					'''
+					30% increased critical strike damage
+					10% increased damage
+					'''
+			}
+
+			ChaosEye: {
+				DisplayName: Chaos Eye
+				Tooltip:
+					'''
+					Critical strike chance increases as your health drops
+					8% increased critical strike chance
+					'''
+			}
+
+			HellsteelEmblem: {
+				DisplayName: Hellsteel Emblem
+				Tooltip:
+					'''
+					30% increased critical strike damage
+					15% increased damage
+					Provides immunity to traps
+					'''
+			}
+
+			ChaoticDestroyerEye: {
+				DisplayName: Chaotic Destroyer Eye
+				Tooltip:
+					'''
+					20% increased critical strike damage
+					10% increased damage
+					8% increased critical strike chance
+					Critical strike chance increases as your health drops
+					Provides immunity to traps
+					'''
+			}
+
+			SurgicalMask: {
+				DisplayName: SurgicalMask
+				Tooltip: Immunity to Pathogen
 			}
 		}
 

@@ -1,7 +1,6 @@
 using Terraria;
 using Avalon.Common;
 using Terraria.ModLoader;
-using Terraria.ID;
 
 namespace Avalon.Hooks
 {
