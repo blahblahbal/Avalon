@@ -105,6 +105,7 @@ public class DesertBeak : ModNPC
     int afterImageTimer;
     float pulseTimer;
     float delay;
+    bool enraged = false;
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
@@ -117,6 +118,21 @@ public class DesertBeak : ModNPC
     public override void AI()
     {
         //Main.NewText("[" + $"{NPC.ai[0]}" + "]" + "[" + $"{NPC.ai[1]}" + "]" + "[" + $"{NPC.ai[2]}" + "]" + " phase: " + $"{phase}", Main.DiscoColor);
+
+        float enragedModifier = 1f;
+        if (Main.player[NPC.target].ZoneDesert || Main.player[NPC.target].ZoneUndergroundDesert)
+        {
+            enraged = false;
+        }
+        else
+        {
+            enraged = true;
+        }
+
+        if (enraged)
+        {
+            enragedModifier = 1.7f;
+        }
 
         if (pulseTimer < MathHelper.Pi && Pulsing)
         {
@@ -139,16 +155,16 @@ public class DesertBeak : ModNPC
             Terraria.GameContent.Events.Sandstorm.TimeLeft = 60;
         }
 
-        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].InModBiome(ModContent.GetInstance<ContagionLenient>()))
+        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
         {
             NPC.TargetClosest(false);
         }
         Player Target = Main.player[NPC.target];
-        if (Target.dead) 
+        if (Target.dead)
         {
             phase = 255;
         }
-        if(phase == 255)
+        if (phase == 255)
         {
             NPC.timeLeft = 0;
             NPC.velocity.Y -= 0.2f;
@@ -156,15 +172,15 @@ public class DesertBeak : ModNPC
         }
         else if (NPC.life > (int)(NPC.lifeMax * 0.6f))
         {
-            PhaseOne(Target);
+            PhaseOne(Target, enragedModifier);
         }
         else
         {
-            PhaseTwo(Target);
+            PhaseTwo(Target, enragedModifier);
         }
         //Main.NewText(NPC.ai[1], Main.DiscoColor);
     }
-    public void PhaseOne(Player Target)
+    public void PhaseOne(Player Target, float modifier)
     {
         if (phase == phase1Feather)
         {
@@ -172,7 +188,7 @@ public class DesertBeak : ModNPC
 
             if (NPC.ai[0] < 150)
             {
-                NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-50)) * 0.1f;
+                NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-50)) * 0.1f * modifier;
                 NPC.velocity = NPC.velocity.LengthClamp(5);
             }
             else
@@ -185,7 +201,7 @@ public class DesertBeak : ModNPC
                         for (int i = 0; i < Feathers; i++)
                         {
                             if (Main.netMode != NetmodeID.MultiplayerClient)
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 8).RotatedBy((MathHelper.TwoPi / Feathers) * Main.rand.NextFloat(0.9f, 1.1f) * i) * Main.rand.NextFloat(0.8f, 1.1f), ModContent.ProjectileType<DesertBeakFeather>(), 15, 1, -1, 0, 0, Main.rand.Next(10));
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 8).RotatedBy((MathHelper.TwoPi / Feathers) * Main.rand.NextFloat(0.9f, 1.1f) * i) * Main.rand.NextFloat(0.8f, 1.1f), ModContent.ProjectileType<DesertBeakFeather>(), (int)(15 * modifier), 1, -1, 0, 0, Main.rand.Next(10));
                         }
                         NPC.ai[0] = -85;
                         NPC.ai[1]++;
@@ -207,7 +223,7 @@ public class DesertBeak : ModNPC
         {
             NPC.ai[0]++;
             NPC.ai[1]++;
-            NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f * modifier;
             NPC.velocity = NPC.velocity.LengthClamp(8);
 
             if (NPC.ai[1] > 200)
@@ -220,7 +236,7 @@ public class DesertBeak : ModNPC
                 int dmg = 44;
                 if (Main.masterMode) dmg = 38;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4,4), 3), ModContent.ProjectileType<VultureEgg>(), dmg, 1);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4,4), 3), ModContent.ProjectileType<VultureEgg>(), (int)(dmg * modifier), 1);
                 NPC.netUpdate = true;
             }
             if (NPC.ai[0] > 1000)
@@ -233,7 +249,7 @@ public class DesertBeak : ModNPC
             }
         }
     }
-    public void PhaseTwo(Player Target)
+    public void PhaseTwo(Player Target, float modifier)
     {
         if (phase <= phase1Egg)
         {
@@ -275,7 +291,7 @@ public class DesertBeak : ModNPC
             NPC.ai[0]++;
             NPC.ai[2]++;
             float CircleDistance = (int)(Math.Floor(NPC.ai[0] * 0.001f)) % 2 == 0 ? 300 : 100;
-            NPC.velocity += NPC.Center.DirectionTo(Target.Center + Vector2.One.RotatedBy(NPC.ai[0] * 0.02) * CircleDistance * NPC.ai[1]) * 0.3f;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center + Vector2.One.RotatedBy(NPC.ai[0] * 0.02) * CircleDistance * NPC.ai[1]) * 0.3f * modifier;
             NPC.velocity = NPC.velocity.LengthClamp(10);
 
             if (CircleDistance > 100)
@@ -290,7 +306,7 @@ public class DesertBeak : ModNPC
                     for (int i = 0; i < Feathers; i++)
                     {
                         if (Main.netMode != NetmodeID.MultiplayerClient)
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 8).RotatedBy((MathHelper.TwoPi / Feathers) * Main.rand.NextFloat(0.9f, 1.1f) * i) * Main.rand.NextFloat(0.8f, 1.1f), ModContent.ProjectileType<DesertBeakFeather>(), 15, 1, -1, 0, 0, Main.rand.Next(10));
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 8).RotatedBy((MathHelper.TwoPi / Feathers) * Main.rand.NextFloat(0.9f, 1.1f) * i) * Main.rand.NextFloat(0.8f, 1.1f), ModContent.ProjectileType<DesertBeakFeather>(), (int)(15 * modifier), 1, -1, 0, 0, Main.rand.Next(10));
                     }
                     NPC.ai[2] = Main.rand.Next(-100, 0);
                     NPC.netUpdate = true;
@@ -315,7 +331,7 @@ public class DesertBeak : ModNPC
             if (NPC.ai[0] % 90 == 0)
             {
                 afterImageTimer = 30;
-                NPC.velocity = NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2Circular(30, 30)) * 12 * (NPC.ai[0] * 0.001f + 1);
+                NPC.velocity = NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2Circular(30, 30)) * 12 * (NPC.ai[0] * 0.001f + 1) * modifier;
                 NPC.velocity *= 0.98f;
                 //bool withinRange = Vector2.Distance(new Vector2(NPC.Center.X, NPC.position.Y + NPC.height), new Vector2(Target.Center.X, Target.position.Y)) < 150;
                 
@@ -377,7 +393,7 @@ public class DesertBeak : ModNPC
         {
             NPC.ai[0]++;
             NPC.ai[1]++;
-            NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0, -100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f;
+            NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0, -100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f * modifier;
             NPC.velocity = NPC.velocity.LengthClamp(8);
 
             if (NPC.ai[1] > 200)
@@ -390,7 +406,7 @@ public class DesertBeak : ModNPC
                 int dmg = 44;
                 if (Main.masterMode) dmg = 38;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4, 4), 3), ModContent.ProjectileType<VultureEgg>(), dmg, 1);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4, 4), 3), ModContent.ProjectileType<VultureEgg>(), (int)(dmg * modifier), 1);
                 NPC.netUpdate = true;
             }
             if (NPC.ai[0] > 500)
@@ -425,12 +441,14 @@ public class DesertBeak : ModNPC
         writer.Write(phase);
         writer.Write(afterImageTimer);
         writer.Write(Storming);
+        writer.Write(enraged);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         phase = reader.ReadByte();
         afterImageTimer = reader.ReadInt16();
         Storming = reader.ReadBoolean();
+        enraged = reader.ReadBoolean();
     }
     public override void HitEffect(NPC.HitInfo hit)
     {

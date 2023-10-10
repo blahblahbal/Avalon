@@ -111,7 +111,7 @@ class EyeoftheGodsDefInfoDisplay : InfoDisplay
             else
             {
                 displayColor = InactiveInfoTextColor;
-                info = "No enemy to display";
+                info = "No info to display";
             }
             
             //Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex = -1;
@@ -119,7 +119,7 @@ class EyeoftheGodsDefInfoDisplay : InfoDisplay
         else
         {
             displayColor = InactiveInfoTextColor;
-            info = "No enemy to display";
+            info = "No info to display";
         }
         return info;
     }
@@ -155,13 +155,13 @@ class EyeoftheGodsDmgInfoDisplay : InfoDisplay
             else
             {
                 displayColor = InactiveInfoTextColor;
-                info = "No enemy to display";
+                info = "No info to display";
             }
         }
         else
         {
             displayColor = InactiveInfoTextColor;
-            info = "No enemy to display";
+            info = "No info to display";
         }
         return info;
     }
