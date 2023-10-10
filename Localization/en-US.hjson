@@ -6578,6 +6578,23 @@ Mods: {
 				DisplayName: Pocket Station
 				Tooltip: Allows the use of crafting stations stored in your Piggy Bank
 			}
+
+            BacchusBoots: {
+				DisplayName: Bacchus Boots
+				Tooltip:
+                '''
+                Increases your max number of minions by 2
+                Increases your max number of sentries by 1
+                8% increased minion damage
+                Increases armor penetration by 5
+                Provides immunity to traps, knockback, fire blocks, and fall damage
+                '''
+			}
+
+            ChaosCharm: {
+				DisplayName: Chaos Charm
+				Tooltip: Critical strike chance increases as your health drops
+			}
 		}
 
 		InfoDisplays: {

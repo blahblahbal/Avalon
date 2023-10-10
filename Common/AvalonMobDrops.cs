@@ -65,6 +65,10 @@ public class AvalonMobDrops : GlobalNPC
 
         switch (npc.type)
         {
+            case NPCID.ChaosElemental:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChaosDust>(), 7, 2, 4));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChaosCharm>(), 30));
+                break;
             case NPCID.WallofFlesh:
                 npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<FleshyTendril>(), 1, 13, 19));
                 break;

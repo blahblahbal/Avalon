@@ -128,7 +128,6 @@ public class AvalonPlayer : ModPlayer
     public bool SixSidedDie;
     public bool LoadedDie;
     public bool CrystalEdge;
-    public bool MutatedStocking;
     public bool EyeoftheGods;
     public bool TrapImmune;
     public bool BenevolentWard;
@@ -149,6 +148,7 @@ public class AvalonPlayer : ModPlayer
     private bool lavaMerman;
     public bool ThePill;
     public bool PocketBench;
+    public bool ChaosCharm;
     #endregion
 
     #region buffs and debuffs
@@ -218,7 +218,6 @@ public class AvalonPlayer : ModPlayer
         BonusKB = 1f;
         AncientHeadphones = false;
         SixSidedDie = false;
-        MutatedStocking = false;
         CrystalEdge = false;
         LoadedDie = false;
         BenevolentWard = false;
@@ -240,6 +239,7 @@ public class AvalonPlayer : ModPlayer
         AccLavaMerman = false;
         ThePill = false;
         PocketBench = false;
+        ChaosCharm = false;
 
         // armor sets
         SkyBlessing = false;
@@ -431,6 +431,15 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdateEquips()
     {
+        #region chaos charm
+        if (ChaosCharm)
+        {
+            int modCrit = 2 * (int)Math.Floor((Player.statLifeMax2 - (double)Player.statLife) /
+                Player.statLifeMax2 * 10.0);
+            Player.GetCritChance(DamageClass.Generic) += modCrit;
+        }
+        #endregion chaos charm
+
         if (AccLavaMerman && !HideVarefolk && Collision.LavaCollision(Player.position, Player.width, Player.height))
         {
             lavaMerman = true;
@@ -457,22 +466,6 @@ public class AvalonPlayer : ModPlayer
         if (Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown > 3600)
         {
             Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown = 3600;
-        }
-        if (MutatedStocking)
-        {
-            Player.maxRunSpeed += 0.3f; // Buggy :)
-            Player.gravity += 0.5f;
-            Player.jumpSpeedBoost += 4f;
-            Player.jumpHeight -= 6;
-            if (!Player.IsOnGround())
-            {
-                Player.runAcceleration += 1f;
-                Player.maxRunSpeed += 0.3f;
-            }
-            if (Player.wingTime > 0 && Player.controlJump)
-            {
-                Player.velocity.Y += -0.5f * Player.gravDir;
-            }
         }
     }
     public void ResetShadowCooldown() => ShadowCooldown = 0;
