@@ -14,6 +14,7 @@ namespace Avalon.Buffs;
 public class Shockwave : ModBuff
 {
     private int fallStart_old = -1;
+
     public override void Update(Player player, ref int buffIndex)
     {
 
@@ -64,7 +65,7 @@ public class Shockwave : ModBuff
                 // iterate through NPCs
                 NPC N = Main.npc[o];
                 var list = new List<NPC>();
-                if (!N.active || N.dontTakeDamage || N.friendly || N.life < 1)
+                if (!N.active || N.dontTakeDamage || N.friendly || N.life < 1 || N.type == NPCID.TargetDummy)
                 {
                     continue;
                 }
@@ -109,7 +110,8 @@ public class Shockwave : ModBuff
                     //}
 
                     int dmg = N.StrikeNPC(new NPC.HitInfo {Damage = (int)(multiplier * fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1)) * 2, Knockback = fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1) * 2.7f, HitDirection = HitDir});
-                    if (Main.netMode != 0)
+                    player.addDPS(dmg);
+                    if (Main.netMode != NetmodeID.SinglePlayer)
                     {
                         NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, o, dmg, 10f, HitDir); // for multiplayer support
                     }

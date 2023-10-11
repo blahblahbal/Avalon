@@ -1,9 +1,34 @@
-Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on content while keeping to a generally vanilla feel. For this Pre-hardmode patch, there are:
-- Several new structures, including the Ice Shrine, the Lava Shrine, and the Evil Shrine.
+Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on content while keeping to a generally vanilla feel. In this Pre-hardmode release, there are:
+- Several new structures, including the Ice Shrine, the Lava Shrine, and the Evil Shrine
 - A new world evil, the Contagion, which is an alternate to the Corruption and Crimson
-- A stamina mechanic, which is completely optional, but allows you to do things such as rocket jumping, teleporting, dashing, and sprinting without the need for an accessory
+- A stamina mechanic, which is completely optional, but allows you to do things such as teleporting and sprinting without the need for an accessory
 - Several new prefixes (including some for armor only)
 - Mystical Tomes, which are similar to accessories, but only grant stat boosts
 - And some other various things
 
+
+Avalon started out as a tConfig mod over 10 years ago, and is now finally available for tModLoader!
+
 Discord link: https://discord.gg/rtm99Uq
+
+
+Credits:
+
+imkSushi for starting the porting work
+Fox for some code
+Ghasttear for a lot of code
+Optical Starline for quite a bit of code
+Lion8cake for some code
+Comentdude for some code
+GreenTea for some code
+Jeo for some sprites and a lot of code
+Blasfah for many sprites, and some code
+TerrorPenguin for many sprites
+Fred for some sprites
+Jace for many potion sprites
+PhilCo for some sprites
+Dragonfly for the Tome sprites, and some others
+Yuyu for many sprites
+The Avalon composers, Ennway, FatCat, Mioqu, Ace, Marlilo, and musicman for, well, the music obviously
+All the beta testers and discord members for general help with testing the mod
+Relxs, Hadiros, and Lion8cake for assisting with the Sky Fortress construction

@@ -22,7 +22,7 @@ public class AvalonMenu : ModMenu
             {
                 return Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/EAOLogoAprilFools");
             }
-            return Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/ExxoAvalonLogo");
+            return Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/ExxoAvalonLogoContagion");
         }
     }
 

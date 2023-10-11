@@ -24,7 +24,7 @@ namespace Avalon.Hooks
             {
                 if (itemToPickUp.type == ItemID.Heart || itemToPickUp.type == ItemID.CandyApple || itemToPickUp.type == ItemID.CandyCane)
                 {
-                    SoundEngine.PlaySound(SoundID.Item7, self.position);
+                    SoundEngine.PlaySound(SoundID.Grab, self.position);
                     int amt = 25;
                     if (self.GetModPlayer<AvalonPlayer>().HeartsickElixir) amt = 30;
                     self.Heal(amt);
@@ -32,7 +32,7 @@ namespace Avalon.Hooks
                 }
                 if (itemToPickUp.type == ModContent.ItemType<GoldHeart>() || itemToPickUp.type == ModContent.ItemType<GoldApple>() || itemToPickUp.type == ModContent.ItemType<GoldCandyCane>())
                 {
-                    SoundEngine.PlaySound(SoundID.Item7, self.position);
+                    SoundEngine.PlaySound(SoundID.Grab, self.position);
                     int amt = 40;
                     if (self.GetModPlayer<AvalonPlayer>().HeartsickElixir) amt = 45;
                     self.Heal(amt);
@@ -40,7 +40,7 @@ namespace Avalon.Hooks
                 }
                 if (itemToPickUp.type == ModContent.ItemType<PlatinumHeart>() || itemToPickUp.type == ModContent.ItemType<PlatinumApple>() || itemToPickUp.type == ModContent.ItemType<PlatinumCandyCane>())
                 {
-                    SoundEngine.PlaySound(SoundID.Item7, self.position);
+                    SoundEngine.PlaySound(SoundID.Grab, self.position);
                     int amt = 57;
                     if (self.GetModPlayer<AvalonPlayer>().HeartsickElixir) amt = 60;
                     self.Heal(amt);
@@ -51,13 +51,13 @@ namespace Avalon.Hooks
             {
                 if (itemToPickUp.type == ModContent.ItemType<GoldHeart>() || itemToPickUp.type == ModContent.ItemType<GoldApple>() || itemToPickUp.type == ModContent.ItemType<GoldCandyCane>())
                 {
-                    SoundEngine.PlaySound(SoundID.Item7, self.position);
+                    SoundEngine.PlaySound(SoundID.Grab, self.position);
                     self.Heal(35);
                     itemToPickUp = new Item();
                 }
                 if (itemToPickUp.type == ModContent.ItemType<PlatinumHeart>() || itemToPickUp.type == ModContent.ItemType<PlatinumApple>() || itemToPickUp.type == ModContent.ItemType<PlatinumCandyCane>())
                 {
-                    SoundEngine.PlaySound(SoundID.Item7, self.position);
+                    SoundEngine.PlaySound(SoundID.Grab, self.position);
                     self.Heal(50);
                     itemToPickUp = new Item();
                 }
