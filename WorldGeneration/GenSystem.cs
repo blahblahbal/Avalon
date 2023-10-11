@@ -57,6 +57,7 @@ public class GenSystem : ModSystem
         if (index != -1)
         {
             tasks.Insert(index + 1, new ShortGrass("Contagion Weeds", 50f));
+            tasks.Insert(index + 2, new ReplaceChestItems());
         }
 
         int iceWalls = tasks.FindIndex(genPass => genPass.Name == "Cave Walls");

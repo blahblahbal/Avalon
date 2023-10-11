@@ -1,4 +1,6 @@
+using Avalon.Common;
 using Avalon.Items.Weapons.Magic.PreHardmode;
+using Avalon.Items.Weapons.Melee.Hardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -39,6 +41,14 @@ public class ReplaceChestItems : GenPass
                         i.SetDefaults(ModContent.ItemType<FrozenLyre>());
                         i.Prefix(-1);
                     }
+                    //if (i != null && ModContent.GetInstance<AvalonWorld>().WorldEvil == Enums.WorldEvil.Contagion)
+                    //{
+                    //    if (i.type == ItemID.ScourgeoftheCorruptor)
+                    //    {
+                    //        i.SetDefaults(ModContent.ItemType<VirulentScythe>());
+                    //        i.Prefix(-1);
+                    //    }
+                    //}
                     //if (i != null && i.type == ItemID.EnchantedBoomerang)
                     //{
                     //    i.SetDefaults(ModContent.ItemType<EnchantedBar>());

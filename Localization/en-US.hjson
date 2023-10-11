@@ -10,6 +10,7 @@ Mods: {
 	}
 
 	Avalon: {
+		ContagionKey.AfterPlantera: Unlocks a Contagion Chest in the dungeon
 		CougherMask.Tooltip:
 			'''
 			Double tap {0} to cough on your enemies
@@ -6647,11 +6648,6 @@ Mods: {
 				Tooltip: Immunity to Pathogen
 			}
 
-			PaladinGreaves: {
-				DisplayName: Paladin Greaves
-				Tooltip: ""
-			}
-
 			PaladinHelm: {
 				DisplayName: Paladin Helm
 				Tooltip: ""
@@ -6659,6 +6655,26 @@ Mods: {
 
 			PaladinPlate: {
 				DisplayName: Paladin Plate
+				Tooltip: ""
+			}
+
+			PaladinGreaves: {
+				DisplayName: Paladin Greaves
+				Tooltip: ""
+			}
+
+			VirulentScythe: {
+				DisplayName: Virulent Scythe
+				Tooltip: Throws a scythe that releases toxic gas clouds
+			}
+
+			ContagionKey: {
+				DisplayName: Contagion Key
+				Tooltip: ""
+			}
+
+			ContagionChest: {
+				DisplayName: Contagion Chest
 				Tooltip: ""
 			}
 		}
@@ -6826,6 +6842,11 @@ Mods: {
 			GastrominiSummon2.DisplayName: Gastromini Summon
 			GastrominiSummon3.DisplayName: Gastromini Summon
 			GastrominiSummon0.DisplayName: Gastromini Summon
+			VirulentCloud.DisplayName: Virulent Cloud
+			VirulentCloudSmall.DisplayName: Virulent Cloud Small
+			VirulentCloudSmallWeak.DisplayName: Virulent Cloud Small Weak
+			VirulentCloudWeak.DisplayName: Virulent Cloud Weak
+			VirulentScythe.DisplayName: Virulent Scythe
 		}
 
 		NPCs: {
@@ -7510,6 +7531,11 @@ Mods: {
 			}
 
 			Crates.MapEntry: Crates
+
+			ContagionChest: {
+				MapEntry0: Contagion Chest
+				MapEntry1: Locked Contagion Chest
+			}
 		}
 
 		Prefixes: {
