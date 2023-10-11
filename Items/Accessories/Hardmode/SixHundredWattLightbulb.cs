@@ -12,6 +12,10 @@ class SixHundredWattLightbulb : ModItem
         Item.ResearchUnlockCount = 1;
     }
 
+    public override Color? GetAlpha(Color lightColor)
+    {
+        return Color.White;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -21,7 +25,10 @@ class SixHundredWattLightbulb : ModItem
         Item.value = 100000;
         Item.height = dims.Height;
     }
-
+    public override void Update(ref float gravity, ref float maxFallSpeed)
+    {
+        Lighting.AddLight(Item.position, 1, 0.8f, 0.5f);
+    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.buffImmune[BuffID.Blackout] = true;
