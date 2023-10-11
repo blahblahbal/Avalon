@@ -46,7 +46,10 @@ public class AvalonMobDrops : GlobalNPC
         //    var hardmodePreSuperHardmodeCondition =
         //        new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
 
-
+        if (npc.type is NPCID.Paladin)
+        {
+            npcLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(10, ModContent.ItemType<PaladinHelm>(), ModContent.ItemType<PaladinPlate>(), ModContent.ItemType<PaladinGreaves>()));
+        }
         if (npc.type is NPCID.Corruptor or NPCID.IchorSticker or NPCID.ChaosElemental or NPCID.IceElemental
             or NPCID.AngryNimbus or NPCID.GiantTortoise or NPCID.RedDevil)
         {
