@@ -19,6 +19,7 @@ public class BloodshotEye : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 3;
+        Data.Sets.NPC.Flyer[NPC.type] = true;
     }
 
     public override void SetDefaults()

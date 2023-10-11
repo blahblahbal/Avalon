@@ -21,13 +21,14 @@ public class EctoHand : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 1;
         NPCID.Sets.SpecialSpawningRules.Add(ModContent.NPCType<EctoHand>(), 0);
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary
             Position = new Vector2(4f, -6f),
             Rotation = (float)Math.PI * 3f / 4f
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+        Data.Sets.NPC.Undead[NPC.type] = true;
     }
     public override void SetDefaults()
     {

@@ -30,6 +30,7 @@ public class ContagionMimic : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+        Data.Sets.NPC.Wicked[NPC.type] = true;
     }
     public override void SetDefaults()
     {

@@ -19,6 +19,7 @@ public class Ickslime : ModNPC
         Main.npcFrameCount[NPC.type] = 2;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+        Data.Sets.NPC.Wicked[NPC.type] = true;
     }
 
     public override void ModifyNPCLoot(NPCLoot npcLoot)

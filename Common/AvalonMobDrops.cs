@@ -72,6 +72,10 @@ public class AvalonMobDrops : GlobalNPC
         {
             npcLoot.Add(ItemDropRule.StatusImmunityItem(ItemID.HandWarmer, 100));
         }
+        if (Data.Sets.NPC.Undead[npc.type])
+        {
+            ItemDropRule.ByCondition(hardModeCondition, ModContent.ItemType<SoullessLocket>(), 550);
+        }
 
         switch (npc.type)
         {

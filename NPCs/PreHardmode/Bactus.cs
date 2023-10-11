@@ -17,6 +17,7 @@ public class Bactus : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 8;
+        Data.Sets.NPC.Wicked[NPC.type] = true;
     }
     public override void SetDefaults()
     {

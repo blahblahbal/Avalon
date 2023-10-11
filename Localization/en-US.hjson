@@ -40,7 +40,9 @@ Mods: {
 			Pyrasite: Giant flat worms created by the Contagion, these creatures enjoy feeding on pre-eaten food from the stomach of titans and other large lifeforms.
 			BacteriumPrime: This giant eye of Contagion never ceases, never truly closes. Those who fall to its gaze will be just as felled by its plague.
 			DesertBeak: The guardian of the desert, this large vulture summons its smaller brethren to assist it in battle. It lifts prey up with its talons, then drops them to fall to their doom.
-		}
+		    IrateBones: These Angry Bones have donned a set of armor to further fuel their wrath.
+            CursedScepter: Enchanted through the malevolence of the Dungeon, weapons like this cut intruders down to size.
+        }
 
 		Keybinds: {
 			"Shadow Teleport.DisplayName": Shadow Teleport
@@ -6675,6 +6677,41 @@ Mods: {
 
 			ContagionChest: {
 				DisplayName: Contagion Chest
+				Tooltip: ""
+			}
+
+			RestorationBand: {
+				DisplayName: Restoration Band
+				Tooltip: Provides life, mana, and stamina regeneration
+			}
+
+			RingofReplenishment: {
+				DisplayName: Ring of Replenishment
+				Tooltip:
+					'''
+					Automatically use mana and stamina potions when needed
+					Increases maximum stamina by 60
+					Reduces the cooldown of healing potions
+					Provides life, mana, and stamina regeneration
+					'''
+			}
+
+			ThornedHeartAmulet: {
+				DisplayName: Thorned Heart Amulet
+				Tooltip: Damage increases as your health drops
+			}
+
+			SoullessLocket: {
+				DisplayName: Soulless Locket
+				Tooltip:
+					'''
+					Provides 20 defense against undead monsters
+					You are immune to any undead monsters that would do less than 1 damage
+					'''
+			}
+
+			ThornHeartAmulet: {
+				DisplayName: Thorn Heart Amulet
 				Tooltip: ""
 			}
 		}

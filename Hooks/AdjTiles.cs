@@ -116,6 +116,7 @@ internal class AdjTiles : ModHook
         {
             Recipe.FindRecipes();
         }
+        Recipe.FindRecipes();
         orig(self);
     }
             /*if ((self.GetModPlayer<ExxoEquipEffectPlayer>().GoblinToolbelt ||

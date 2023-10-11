@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -117,6 +118,10 @@ public class ContaminatedPenguin : ModNPC
     //        new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemBunny"))
     //    });
     //}
+    public override void ModifyNPCLoot(NPCLoot npcLoot)
+    {
+        npcLoot.Add(ItemDropRule.OneFromOptions(50, ItemID.PedguinHat, ItemID.PedguinShirt, ItemID.PedguinPants));
+    }
     public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life > 0)

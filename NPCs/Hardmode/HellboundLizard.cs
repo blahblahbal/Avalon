@@ -16,7 +16,7 @@ public class HellboundLizard : CustomFighterAI
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 16;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
@@ -27,6 +27,7 @@ public class HellboundLizard : CustomFighterAI
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
+        Data.Sets.NPC.Fiery[NPC.type] = true;
     }
     public override float MaxMoveSpeed { get; set; } = 3f;
     public override float Acceleration { get; set; } = 0.25f;

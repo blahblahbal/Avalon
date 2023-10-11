@@ -1,4 +1,5 @@
 using Avalon.NPCs.Hardmode;
+using Avalon.NPCs.PreHardmode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -72,7 +73,7 @@ public class MonsterBanner : ModTile
                 //    t = ModContent.NPCType<NPCs.RedAegisBonesHelmet>();
                 //    break;
                 case 7:
-                    t = ModContent.NPCType<NPCs.PreHardmode.BloodshotEye>();
+                    t = ModContent.NPCType<BloodshotEye>();
                     break;
                 //case 8:
                 //    t = ModContent.NPCType<NPCs.Dragonfly>();
@@ -89,15 +90,15 @@ public class MonsterBanner : ModTile
                 //case 14:
                 //    t = ModContent.NPCType<NPCs.MechanicalDiggerHead>();
                 //    break;
-                //case 15:
-                //    t = ModContent.NPCType<NPCs.Cougher>();
-                //    break;
-                case 16:
-                    t = ModContent.NPCType<NPCs.PreHardmode.Bactus>();
+                case 15:
+                    t = ModContent.NPCType<Cougher>();
                     break;
-                //case 17:
-                //    t = ModContent.NPCType<NPCs.Ickslime>();
-                //    break;
+                case 16:
+                    t = ModContent.NPCType<Bactus>();
+                    break;
+                case 17:
+                    t = ModContent.NPCType<Ickslime>();
+                    break;
                 //case 18:
                 //    t = ModContent.NPCType<NPCs.GrossyFloat>();
                 //    break;
@@ -194,12 +195,12 @@ public class MonsterBanner : ModTile
                 //case 49:
                 //    t = ModContent.NPCType<NPCs.Hallowor>();
                 //    break;
-                //case 51:
-                //    t = ModContent.NPCType<NPCs.IrateBones>();
-                //    break;
-                //case 55:
-                //    t = ModContent.NPCType<NPCs.CursedScepter>();
-                //    break;
+                case 51:
+                    t = ModContent.NPCType<IrateBones>();
+                    break;
+                case 55:
+                    t = ModContent.NPCType<CursedScepter>();
+                    break;
                 case 56:
                     t = ModContent.NPCType<EctoHand>();
                     break;
@@ -236,11 +237,11 @@ public class MonsterBanner : ModTile
                 //case 67:
                 //    t = ModContent.NPCType<NPCs.CrystalSpectre>();
                 //    break;
-                //case 68:
-                //    t = ModContent.NPCType<NPCs.CursedFlamer>();
-                //    break;
+                case 68:
+                    t = ModContent.NPCType<CursedFlamer>();
+                    break;
                 case 69:
-                    t = ModContent.NPCType<NPCs.PreHardmode.FallenHero>();
+                    t = ModContent.NPCType<FallenHero>();
                     break;
                 //case 70:
                 //    t = ModContent.NPCType<NPCs.QuickCaribe>();
@@ -268,6 +269,12 @@ public class MonsterBanner : ModTile
                 //    break;
                 case 78:
                     t = ModContent.NPCType<ViralMummy>();
+                    break;
+                case 79:
+                    t = ModContent.NPCType<Viris>();
+                    break;
+                case 80:
+                    t = ModContent.NPCType<BoneFish>();
                     break;
                 default:
                     t = 0;

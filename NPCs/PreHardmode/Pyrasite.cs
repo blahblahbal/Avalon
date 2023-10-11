@@ -18,7 +18,7 @@ public class PyrasiteHead : WormHead
 
     public override void SetStaticDefaults()
     {
-        var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+        var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             CustomTexturePath = Texture + "_Bestiary",
             Position = new Vector2(54f, 16f),
@@ -26,6 +26,7 @@ public class PyrasiteHead : WormHead
             PortraitPositionYOverride = 12f
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
+        Data.Sets.NPC.Wicked[NPC.type] = true;
     }
     public override void SetDefaults()
     {

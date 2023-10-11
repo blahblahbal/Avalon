@@ -20,6 +20,7 @@ public class Viris : ModNPC
         Main.npcFrameCount[NPC.type] = 8;
         NPCID.Sets.TrailCacheLength[NPC.type] = 5;
         NPCID.Sets.TrailingMode[NPC.type] = 7;
+        Data.Sets.NPC.Wicked[NPC.type] = true;
     }
     public override void SetDefaults()
     {
@@ -35,8 +36,8 @@ public class Viris : ModNPC
         NPC.knockBackResist = 0.6f;
         NPC.HitSound = SoundID.NPCHit18;
         NPC.DeathSound = SoundID.NPCDeath21;
-        //Banner = NPC.type;
-        //BannerItem = ModContent.ItemType<Items.Banners.VirisBanner>();
+        Banner = NPC.type;
+        BannerItem = ModContent.ItemType<Items.Banners.VirisBanner>();
         NPC.noTileCollide = true;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
         //DrawOffsetY = 10;
@@ -50,7 +51,7 @@ public class Viris : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
         spawnInfo.Player.GetModPlayer<Common.Players.AvalonBiomePlayer>().ZoneUndergroundContagion && !spawnInfo.Player.ZoneDungeon && Main.hardMode
-            ? 0.00526f : 0f;
+            ? 0.6f : 0f;
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2,2,4));

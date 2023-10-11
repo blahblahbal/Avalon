@@ -69,6 +69,7 @@ public class OreSlime : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 2;
+        Data.Sets.NPC.Earthen[NPC.type] = true;
     }
 
     public override void SetDefaults()
@@ -151,6 +152,6 @@ public class OreSlime : ModNPC
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
         spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon
-            ? 0.00526f * AvalonGlobalNPC.ModSpawnRate
+            ? 0.3f * AvalonGlobalNPC.ModSpawnRate
             : 0f;
 }

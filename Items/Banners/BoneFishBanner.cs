@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Banners;
 
-public class ViralMummyBanner : ModItem
+public class BoneFishBanner : ModItem
 {
     // The tooltip for this item is automatically assigned from .lang files
     public override void SetDefaults()
@@ -20,8 +20,8 @@ public class ViralMummyBanner : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.consumable = true;
         Item.rare = ItemRarityID.Blue;
-        Item.value = Item.buyPrice(0, 0, 10, 0);
+        Item.value = Item.buyPrice(0, 0, 10);
         Item.createTile = ModContent.TileType<MonsterBanner>();
-        Item.placeStyle = 78;
+        Item.placeStyle = 80;
     }
 }

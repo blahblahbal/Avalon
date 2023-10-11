@@ -20,6 +20,7 @@ public class Cougher : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 3;
+        Data.Sets.NPC.Wicked[NPC.type] = true;
     }
     static SoundStyle Cough = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCough")
     {

@@ -69,6 +69,7 @@ public class MineralSlime : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 2;
+        Data.Sets.NPC.Earthen[NPC.type] = true;
     }
 
     public override void SetDefaults()
@@ -95,11 +96,11 @@ public class MineralSlime : ModNPC
             BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
             new FlavorTextBestiaryInfoElement("Gelatinous, but filled with ores."),
         });
-    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    //{
-    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
-    //    NPC.damage = (int)(NPC.damage * 0.45f);
-    //}
+    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+    {
+        NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
+        NPC.damage = (int)(NPC.damage * 0.45f);
+    }
     public override void FindFrame(int frameHeight)
     {
         int num2 = 0;
@@ -152,6 +153,6 @@ public class MineralSlime : ModNPC
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
         spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon && Main.hardMode
-            ? 0.00526f * AvalonGlobalNPC.ModSpawnRate
+            ? 0.3f * AvalonGlobalNPC.ModSpawnRate
             : 0f;
 }

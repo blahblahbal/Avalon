@@ -14,12 +14,24 @@ public static class NPC
         NPCID.IlluminantBat,
         NPCID.IlluminantSlime,
         NPCID.PigronHallow,
-        NPCID.RainbowSlime);
-        //ModContent.NPCType<Mime>());
+        NPCID.RainbowSlime,
+        NPCID.DesertGhoulHallow,
+        NPCID.SandsharkHallow,
+        NPCID.DesertLamiaLight);
 
     public static readonly bool[] Earthen = NPCID.Sets.Factory.CreateBoolSet(
-        NPCID.GiantWormHead, NPCID.MotherSlime, NPCID.ManEater, NPCID.CaveBat, NPCID.Snatcher, NPCID.Antlion,
-        NPCID.GiantBat, NPCID.DiggerHead, NPCID.GiantTortoise, NPCID.WallCreeper, NPCID.WallCreeperWall);
+        NPCID.GiantWormHead,
+        NPCID.MotherSlime,
+        NPCID.ManEater,
+        NPCID.CaveBat,
+        NPCID.Snatcher,
+        NPCID.Antlion,
+        NPCID.GiantBat,
+        NPCID.DiggerHead,
+        NPCID.GiantTortoise,
+        NPCID.WallCreeper,
+        NPCID.WallCreeperWall,
+        NPCID.BlackRecluse);
 
     public static readonly bool[] Fiery = NPCID.Sets.Factory.CreateBoolSet(
         NPCID.FireImp,
@@ -29,7 +41,6 @@ public static class NPC
         NPCID.VoodooDemon,
         NPCID.Lavabat,
         NPCID.RedDevil);
-    //ModContent.NPCType<Blaze>(),
     //ModContent.NPCType<ArmoredHellTortoise>());
 
     public static readonly bool[] Flyer = NPCID.Sets.Factory.CreateBoolSet(
@@ -50,7 +61,8 @@ public static class NPC
         NPCID.Moth,
         NPCID.FlyingFish,
         NPCID.FlyingSnake,
-        NPCID.AngryNimbus);
+        NPCID.AngryNimbus,
+        NPCID.Drippler);
         //ModContent.NPCType<VampireHarpy>(),
         //ModContent.NPCType<Dragonfly>());
 
@@ -140,7 +152,9 @@ public static class NPC
         NPCID.HornetLeafy,
         NPCID.HornetSpikey,
         NPCID.HornetStingy,
-        NPCID.JungleCreeper);
+        NPCID.JungleCreeper,
+        NPCID.DesertScorpionWalk,
+        NPCID.DesertScorpionWall);
 
     public static readonly bool[] Undead = NPCID.Sets.Factory.CreateBoolSet(
         NPCID.Zombie,
@@ -184,7 +198,29 @@ public static class NPC
         NPCID.SkeletonAstonaut,
         NPCID.SkeletonAlien,
         NPCID.ZombieXmas,
-        NPCID.ZombieSweater);
+        NPCID.ZombieSweater,
+        NPCID.ArmedZombie,
+        NPCID.ArmedTorchZombie,
+        NPCID.ArmedZombieCenx,
+        NPCID.ArmedZombieEskimo,
+        NPCID.ArmedZombiePincussion,
+        NPCID.ArmedZombieSlimed,
+        NPCID.ArmedZombieSwamp,
+        NPCID.ArmedZombieTwiggy,
+        NPCID.BoneThrowingSkeleton,
+        NPCID.BoneThrowingSkeleton2,
+        NPCID.BoneThrowingSkeleton3,
+        NPCID.BoneThrowingSkeleton4,
+        NPCID.GreekSkeleton,
+        NPCID.BloodZombie,
+        NPCID.TheBride,
+        NPCID.ZombieMerman,
+        NPCID.TorchZombie,
+        NPCID.BloodMummy,
+        NPCID.DarkMummy,
+        NPCID.LightMummy,
+        NPCID.MaggotZombie,
+        NPCID.SporeSkeleton);
 
     public static readonly bool[] Watery = NPCID.Sets.Factory.CreateBoolSet(
         NPCID.Piranha,
@@ -222,15 +258,14 @@ public static class NPC
         NPCID.BloodCrawlerWall,
         NPCID.BloodFeeder,
         NPCID.BloodJelly,
-        NPCID.IchorSticker);
+        NPCID.IchorSticker,
+        NPCID.BigMimicCorruption,
+        NPCID.BigMimicCrimson,
+        NPCID.DesertGhoulCorruption,
+        NPCID.DesertGhoulCrimson,
+        NPCID.SandsharkCorrupt,
+        NPCID.SandsharkCrimson,
+        NPCID.BloodMummy,
+        NPCID.DesertLamiaDark);
         //ModContent.NPCType<GuardianCorruptor>(),
-        //ModContent.NPCType<Bactus>(),
-        //ModContent.NPCType<Cougher>(),
-        //ModContent.NPCType<PyrasiteHead>(),
-        //ModContent.NPCType<PyrasiteBody>(),
-        //ModContent.NPCType<PyrasiteTail>(),
-        //ModContent.NPCType<Viris>(),
-        //ModContent.NPCType<Ickslime>(),
-        //ModContent.NPCType<Pigron>(),
-        //ModContent.NPCType<GrossyFloat>());
 }

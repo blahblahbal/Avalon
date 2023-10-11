@@ -150,6 +150,7 @@ public class AvalonPlayer : ModPlayer
     public bool PocketBench;
     public bool ChaosCharm;
     public bool Reflex;
+    public bool UndeadImmune;
     #endregion
 
     #region buffs and debuffs
@@ -243,6 +244,7 @@ public class AvalonPlayer : ModPlayer
         ChaosCharm = false;
         Reflex = false;
         lavaMerman = false;
+        UndeadImmune = false;
 
         // armor sets
         SkyBlessing = false;
@@ -1133,7 +1135,32 @@ public class AvalonPlayer : ModPlayer
             }
         }
     }
-
+    public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)
+    {
+        if (UndeadImmune)
+        {
+            NPC N = Main.npc[damageSource.SourceNPCIndex];
+            if (Data.Sets.NPC.Undead[N.type])
+            {
+                if (N.damage - ((Player.statDefense / 2) - 10) <= 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return base.ImmuneTo(damageSource, cooldownCounter, dodgeable);
+    }
+    public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
+    {
+        if (UndeadImmune)
+        {
+            int dmgPlaceholder = npc.damage;
+            if (Data.Sets.NPC.Undead[npc.type])
+            {
+                modifiers.SetMaxDamage(dmgPlaceholder - ((Player.statDefense / 2) + 10));
+            }
+        }
+    }
     /// <inheritdoc />
     public override void ModifyHurt(ref Player.HurtModifiers modifiers)
     {
