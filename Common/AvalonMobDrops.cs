@@ -12,6 +12,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Placeable.Painting;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Tokens;
+using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
@@ -45,6 +46,15 @@ public class AvalonMobDrops : GlobalNPC
         //    var hardmodePreSuperHardmodeCondition =
         //        new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
 
+        if (npc.type is NPCID.Paladin)
+        {
+            npcLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(10, ModContent.ItemType<PaladinHelm>(), ModContent.ItemType<PaladinPlate>(), ModContent.ItemType<PaladinGreaves>()));
+        }
+        if (npc.type is NPCID.Corruptor or NPCID.IchorSticker or NPCID.ChaosElemental or NPCID.IceElemental
+            or NPCID.AngryNimbus or NPCID.GiantTortoise or NPCID.RedDevil)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChaosCrystal>(), 100));
+        }
         if (npc.type == NPCID.Plantera)
         {
             npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<LifeDew>(), 1, 14, 20));
@@ -65,6 +75,10 @@ public class AvalonMobDrops : GlobalNPC
 
         switch (npc.type)
         {
+            case NPCID.ChaosElemental:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChaosDust>(), 7, 2, 4));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChaosCharm>(), 30));
+                break;
             case NPCID.WallofFlesh:
                 npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<FleshyTendril>(), 1, 13, 19));
                 break;
@@ -92,7 +106,7 @@ public class AvalonMobDrops : GlobalNPC
                 npcLoot.Add(ItemDropRule.Common(ItemID.BlackLens, 40));
                 break;
             case NPCID.UndeadMiner:
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersPickaxe>(), 30));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersPickaxe>(), 30));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersSword>(), 30));
                 break;
             case NPCID.WyvernHead:
@@ -233,7 +247,14 @@ public class AvalonMobDrops : GlobalNPC
             Vortex.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<Vortex>(), 100));
             npcLoot.Add(Vortex);
         }
-
+        //surgical mask
+        if (npc.type == ModContent.NPCType<Cougher>() || npc.type == ModContent.NPCType<ContaminatedGhoul>())
+        {
+            LeadingConditionRule SurgicalMask = new LeadingConditionRule(new CloverPotionActive());
+            SurgicalMask.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<SurgicalMask>(), 50), true);
+            SurgicalMask.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<SurgicalMask>(), 100));
+            npcLoot.Add(SurgicalMask);
+        }
         //golden shield
         if (npc.type is NPCID.IchorSticker)
         {

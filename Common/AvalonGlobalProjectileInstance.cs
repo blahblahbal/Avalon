@@ -5,5 +5,7 @@ namespace Avalon.Common
     internal class AvalonGlobalProjectileInstance : GlobalProjectile
     {
         public override bool InstancePerEntity => true;
+
+        public bool ReflectRunOnce;
     }
 }

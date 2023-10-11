@@ -340,6 +340,66 @@ internal class Underworld : GenPass
         }
     }
 
+    public static void MakeSpike2(int x, int y, ushort type, int lengthMin, int lengthMax)
+    {
+        int xmin = (int)(x) - WorldGen.genRand.Next(-15, 1) - 5;
+        int xmax = (int)(x) + WorldGen.genRand.Next(0, 16);
+        int m = xmin;
+        int num8 = 0;
+        
+        for (; m < xmax; m += WorldGen.genRand.Next(8, 12))
+        {
+            int ystart = y - 3;
+            while (!Main.tile[m, ystart].HasTile)
+            {
+                ystart--;
+            }
+            ystart -= 4;
+            int num10 = WorldGen.genRand.Next(4, 8);
+            int num11 = WorldGen.genRand.Next(5, 10);
+
+            int n = m - num10;
+            while (num10 > 0)
+            {
+                for (n = m - num10; n < m + num10; n++)
+                {
+                    Tile t = Main.tile[n, ystart];
+                    t.HasTile = true;
+                    t.TileType = type;
+                }
+                num8++;
+                if (WorldGen.genRand.Next(3) < num8)
+                {
+                    num8 = 0;
+                    num10--;
+                    m += WorldGen.genRand.Next(-1, 2);
+                }
+                if (num11 <= 0)
+                {
+                    num10--;
+                }
+                num11--;
+                ystart++;
+            }
+            n -= WorldGen.genRand.Next(1, 3);
+            Tile t0 = Main.tile[n, ystart - 3];
+            Tile t1 = Main.tile[n, ystart - 2];
+            Tile t2 = Main.tile[n, ystart - 1];
+            Tile t3 = Main.tile[n, ystart];
+            t0.HasTile = true;
+            t0.TileType = type;
+            t1.HasTile = true;
+            t1.TileType = type;
+            t2.HasTile = true;
+            t2.TileType = type;
+            t3.HasTile = true;
+            t3.TileType = type;
+            WorldGen.SquareTileFrame(n, ystart - 2);
+            WorldGen.SquareTileFrame(n, ystart - 1);
+            WorldGen.SquareTileFrame(n, ystart);
+        }
+    }
+
     /// <summary>
     /// Makes a spike at the given coordinates.
     /// </summary>

@@ -99,7 +99,10 @@ public class SnotOrb : ModTile
                         num7 = num8;
                     }
                 }
-                NPC.SpawnOnPlayer(plr, ModContent.NPCType<BacteriumPrime>());
+                if (!NPC.AnyNPCs(ModContent.NPCType<BacteriumPrime>()))
+                {
+                    NPC.SpawnOnPlayer(plr, ModContent.NPCType<BacteriumPrime>());
+                }
             }
             else
             {

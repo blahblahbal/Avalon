@@ -19,6 +19,7 @@ public class DungeonRework : ModHook
     {
         On_WorldGen.DungeonPitTrap += OnDungeonPitTrap;
     }
+
     public override bool IsLoadingEnabled(Mod mod)
     {
         return ModContent.GetInstance<AvalonConfig>().RevertDungeonGen;
@@ -26,6 +27,23 @@ public class DungeonRework : ModHook
     private static bool OnDungeonPitTrap(On_WorldGen.orig_DungeonPitTrap orig, int i, int j, ushort tileType, int wallType)
     {
         return true;
+    }
+}
+public class DungeonContagionChest : ModHook
+{
+    protected override void Apply()
+    {
+        On_WorldGen.AddBuriedChest_int_int_int_bool_int_bool_ushort += On_WorldGen_AddBuriedChest_int_int_int_bool_int_bool_ushort;
+    }
+    private bool On_WorldGen_AddBuriedChest_int_int_int_bool_int_bool_ushort(On_WorldGen.orig_AddBuriedChest_int_int_int_bool_int_bool_ushort orig, int i, int j, int contain, bool notNearOtherChests, int Style, bool trySlope, ushort chestTileType)
+    {
+        if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && contain == ItemID.ScourgeoftheCorruptor)
+        {
+            contain = ModContent.ItemType<Items.Weapons.Melee.Hardmode.VirulentScythe>();
+            Style = 1;
+            chestTileType = (ushort)ModContent.TileType<Tiles.Contagion.ContagionChest>();
+        }
+        return orig(i, j, contain, notNearOtherChests, Style, trySlope, chestTileType);
     }
 }
 public class DungeonRemoveCrackedBricks : GenPass

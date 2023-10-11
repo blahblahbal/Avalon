@@ -10,6 +10,7 @@ Mods: {
 	}
 
 	Avalon: {
+		ContagionKey.AfterPlantera: Unlocks a Contagion Chest in the dungeon
 		CougherMask.Tooltip:
 			'''
 			Double tap {0} to cough on your enemies
@@ -6442,6 +6443,7 @@ Mods: {
 					'''
 					Heals 150 life over 30 seconds
 					Effect is cancelled when hit
+					               Heals 225 life over 45 seconds if you have The Pill equipped
 					'''
 			}
 
@@ -6576,7 +6578,104 @@ Mods: {
 
 			PocketStation: {
 				DisplayName: Pocket Station
-				Tooltip: Allows the use of crafting stations stored in your Piggy Bank
+				Tooltip: Allows the use of crafting stations stored in any of your inventories
+			}
+
+			BacchusBoots: {
+				DisplayName: Bacchus Boots
+				Tooltip:
+					'''
+					Increases your max number of minions by 2
+					Increases your max number of sentries by 1
+					8% increased minion damage
+					Increases armor penetration by 5
+					Provides immunity to traps, knockback, fire blocks, and fall damage
+					'''
+			}
+
+			ChaosCharm: {
+				DisplayName: Chaos Charm
+				Tooltip: Critical strike chance increases as your health drops
+			}
+
+			ChaosCrystal: {
+				DisplayName: Chaos Crystal
+				Tooltip: 35% increased critical strike damage
+			}
+
+			ChaosEmblem: {
+				DisplayName: Chaos Emblem
+				Tooltip:
+					'''
+					30% increased critical strike damage
+					10% increased damage
+					'''
+			}
+
+			ChaosEye: {
+				DisplayName: Chaos Eye
+				Tooltip:
+					'''
+					Critical strike chance increases as your health drops
+					8% increased critical strike chance
+					'''
+			}
+
+			HellsteelEmblem: {
+				DisplayName: Hellsteel Emblem
+				Tooltip:
+					'''
+					30% increased critical strike damage
+					15% increased damage
+					Provides immunity to traps
+					'''
+			}
+
+			ChaoticDestroyerEye: {
+				DisplayName: Chaotic Destroyer Eye
+				Tooltip:
+					'''
+					20% increased critical strike damage
+					10% increased damage
+					8% increased critical strike chance
+					Critical strike chance increases as your health drops
+					Provides immunity to traps
+					'''
+			}
+
+			SurgicalMask: {
+				DisplayName: Surgical Mask
+				Tooltip: Immunity to Pathogen
+			}
+
+			PaladinHelm: {
+				DisplayName: Paladin Helm
+				Tooltip: ""
+			}
+
+			PaladinPlate: {
+				DisplayName: Paladin Plate
+				Tooltip: ""
+			}
+
+			PaladinGreaves: {
+				DisplayName: Paladin Greaves
+				Tooltip: ""
+			}
+
+			VirulentScythe: {
+				DisplayName: Virulent Scythe
+				Tooltip: Throws a scythe that releases toxic gas clouds
+			}
+
+			ContagionKey: {
+				DisplayName: Contagion Key
+				Tooltip: ""
+			}
+
+			ContagionChest: {
+				DisplayName: Contagion Chest
+				Tooltip: ""
 			}
 		}
 
@@ -6739,6 +6838,15 @@ Mods: {
 			SackofToys.DisplayName: Sack of Toys
 			Table.DisplayName: Table
 			GastrominiSummon.DisplayName: Gastromini Summon
+			GastrominiSummon1.DisplayName: Gastromini Summon
+			GastrominiSummon2.DisplayName: Gastromini Summon
+			GastrominiSummon3.DisplayName: Gastromini Summon
+			GastrominiSummon0.DisplayName: Gastromini Summon
+			VirulentCloud.DisplayName: Virulent Cloud
+			VirulentCloudSmall.DisplayName: Virulent Cloud Small
+			VirulentCloudSmallWeak.DisplayName: Virulent Cloud Small Weak
+			VirulentCloudWeak.DisplayName: Virulent Cloud Weak
+			VirulentScythe.DisplayName: Virulent Scythe
 		}
 
 		NPCs: {
@@ -7342,7 +7450,7 @@ Mods: {
 
 			Gastropod: {
 				DisplayName: Gastropod
-				Description: Mods.Avalon.Buffs.Gastropod.Description
+				Description: The gastropod will fight for you
 			}
 		}
 
@@ -7423,6 +7531,11 @@ Mods: {
 			}
 
 			Crates.MapEntry: Crates
+
+			ContagionChest: {
+				MapEntry0: Contagion Chest
+				MapEntry1: Locked Contagion Chest
+			}
 		}
 
 		Prefixes: {

@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,8 +10,13 @@ namespace Avalon.Items.Vanity
     {
         public override void SetDefaults()
         {
-            Item.value = Item.sellPrice(0, 1, 20);
-            Item.rare = ItemRarityID.Orange;
+            //https://cdn.discordapp.com/attachments/1083705573528326204/1161441714163163246/Mosquitio.mp4
+            Rectangle dims = this.GetDims();
+            Item.rare = ItemRarityID.Blue;
+            Item.width = dims.Width;
+            Item.vanity = true;
+            Item.value = Item.sellPrice(0, 0, 50);
+            Item.height = dims.Height;
         }
         public override void AddRecipes()
         {

@@ -1,7 +1,6 @@
 using Terraria;
 using Avalon.Common;
 using Terraria.ModLoader;
-using Terraria.ID;
 
 namespace Avalon.Hooks
 {
@@ -16,6 +15,7 @@ namespace Avalon.Hooks
             if (t != null)
             {
                 if (t.TileType == ModContent.TileType<Tiles.Furniture.LockedChests>()) return true;
+                if (t.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>() && t.TileFrameX > 34) return true;
             }
             return orig(i, j, t);
         }

@@ -8,20 +8,361 @@ namespace Avalon.WorldGeneration.Structures
 {
     internal class LavaOcean
     {
+        // old heartstone gen code, maybe could be useful
+        public static void Generate2(int i, int j)
+        {
+            double num = (double)WorldGen.genRand.Next(50, 75);
+            double num2 = num;
+            float num3 = (float)WorldGen.genRand.Next(50, 75);
+            if (WorldGen.genRand.NextBool(5))
+            {
+                num *= 1.5;
+                num2 *= 1.5;
+                num3 *= 1.2f;
+            }
+            Vector2 value;
+            value.X = (float)i;
+            value.Y = (float)j - num3 * 0.3f;
+            Vector2 value2;
+            value2.X = (float)WorldGen.genRand.Next(-5, 6) * 0.1f;
+            value2.Y = (float)WorldGen.genRand.Next(-10, -5) * 0.1f;
+            while (num > 0.0 && num3 > 0f)
+            {
+                num -= (double)WorldGen.genRand.Next(3);
+                num3 -= 1f;
+                int num4 = (int)((double)value.X - num * 0.5);
+                int num5 = (int)((double)value.X + num * 0.5);
+                int num6 = (int)((double)value.Y - num * 0.5);
+                int num7 = (int)((double)value.Y + num * 0.5);
+                if (num4 < 0)
+                {
+                    num4 = 0;
+                }
+                if (num5 > Main.maxTilesX)
+                {
+                    num5 = Main.maxTilesX;
+                }
+                if (num6 < 0)
+                {
+                    num6 = 0;
+                }
+                if (num7 > Main.maxTilesY)
+                {
+                    num7 = Main.maxTilesY;
+                }
+                num2 = num * (double)WorldGen.genRand.Next(200, 400) * 0.01;
+                for (int k = num4; k < num5; k++)
+                {
+                    for (int l = num6; l < num7; l++)
+                    {
+                        float num8 = Math.Abs((float)k - value.X);
+                        float num9 = Math.Abs(((float)l - value.Y) * 2.3f);
+                        double num10 = Math.Sqrt((double)(num8 * num8 + num9 * num9));
+                        if (num10 < num2 * 0.4)
+                        {
+                            if ((double)l < (double)value.Y + num2 * 0.02)
+                            {
+                                if (Main.tile[k, l].TileType != ModContent.TileType<Tiles.BlastedStone>())
+                                {
+                                    Tile t2 = Main.tile[k, l];
+                                    t2.HasTile = false;
+                                }
+                            }
+                            else
+                            {
+                                Tile t2 = Main.tile[k, l];
+                                t2.TileType = (ushort)ModContent.TileType<Tiles.BlastedStone>();
+                            }
+                            Tile t = Main.tile[k, l];
+                            t.LiquidAmount = 0;
+                            t.LiquidType = LiquidID.Water;
+                        }
+                    }
+                }
+                value += value2;
+                value.X += value2.X;
+                value2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                value2.Y -= (float)WorldGen.genRand.Next(11) * 0.05f;
+                if ((double)value2.X > -0.5 && (double)value2.X < 0.5)
+                {
+                    if (value2.X < 0f)
+                    {
+                        value2.X = -0.5f;
+                    }
+                    else
+                    {
+                        value2.X = 0.5f;
+                    }
+                }
+                if (value2.X > 2f)
+                {
+                    value2.X = 1f;
+                }
+                if (value2.X < -2f)
+                {
+                    value2.X = -1f;
+                }
+                if (value2.Y > 1f)
+                {
+                    value2.Y = 1f;
+                }
+                if (value2.Y < -1f)
+                {
+                    value2.Y = -1f;
+                }
+                for (int m = 0; m < 2; m++)
+                {
+                    int num11 = (int)value.X + WorldGen.genRand.Next(-20, 20);
+                    int num12 = (int)value.Y + WorldGen.genRand.Next(0, 20);
+                    while (!Main.tile[num11, num12].HasTile && Main.tile[num11, num12].TileType != ModContent.TileType<Tiles.BlastedStone>())
+                    {
+                        num11 = (int)value.X + WorldGen.genRand.Next(-10, 10);
+                        num12 = (int)value.Y + WorldGen.genRand.Next(0, 10);
+                    }
+                    int num13 = WorldGen.genRand.Next(7, 10);
+                    int num14 = WorldGen.genRand.Next(7, 10);
+                    WorldGen.TileRunner(num11, num12, (double)num13, num14, ModContent.TileType<Tiles.BlastedStone>(), true, 0f, 2f, true, true);
+                    if (WorldGen.genRand.Next(3) == 0)
+                    {
+                        WorldGen.TileRunner(num11, num12, (double)(num13 - 3), num14 - 3, -1, false, 0f, 2f, true, true);
+                    }
+                }
+            }
+        }
+        // old ice biome (1.1 avalon) gen code, maybe could be useful
+        public static void MakeLavaLake(int x, int y)
+        {
+            int xsave = x;
+            int ysave = y;
+            ushort stone = (ushort)ModContent.TileType<Tiles.BlastedStone>();
+            if (x < 30) x = 30;
+            if (x > Main.maxTilesX - 30) x = Main.maxTilesX - 30;
+            if (y < (int)Main.rockLayer) y = (int)Main.rockLayer;
+            if (y > Main.maxTilesY - 200) y = Main.maxTilesY - 200;
+            /*for (int stuff = 100; stuff < y; stuff++)
+            {
+                Main.tile[x, stuff].type = stone;
+                WorldGen.SquareTileFrame(x, stuff);
+            }*/
+            int thing = 0;
+            while (thing < 9)
+            {
+                GrowLava(x, y, stone, 3);
+                GrowLava(x, y - 2, stone, 7);
+                GrowLava(x + 1, y, stone, 3);
+                GrowLava(x, y, stone, 4);
+                GrowLava(x - 1, y, stone, 3);
+                GrowLava(x, y, stone, 4);
+                GrowLava(x + 3, y, stone, 2);
+                GrowLava(x - 3, y, stone, 2);
+
+                GrowLava(x + 2, y - 1, stone, 8);
+                GrowLava(x - 1, y + 2, stone, 9);
+                GrowLava(x + 1, y, stone, 8);
+                GrowLava(x + 3, y - 3, stone, 6);
+                GrowLava(x - 2, y, stone, 9);
+                GrowLava(x - 4, y + 2, stone, 8);
+                GrowLava(x - 3, y + 1, stone, 5);
+                GrowLava(x - 3, y - 1, stone, 5);
+
+                GrowLava(x + 5, y - 2, stone, 9);
+                GrowLava(x - 4, y + 1, stone, 10);
+                GrowLava(x + 2, y - 1, stone, 7);
+                GrowLava(x + 3, y - 2, stone, 8);
+                GrowLava(x, y + 3, stone, 9);
+                GrowLava(x - 3, y + 2, stone, 8);
+                GrowLava(x - 3, y + 2, stone, 6);
+                GrowLava(x - 3, y - 2, stone, 6);
+
+                switch (thing)
+                {
+                    case 0:
+                        x += 6;
+                        y -= 6;
+                        break;
+                    case 1:
+                        x += 6;
+                        y += 6;
+                        break;
+                    case 2:
+                        x -= 6;
+                        y += 6;
+                        break;
+                    case 3:
+                        x -= 6;
+                        y -= 6;
+                        break;
+                    case 4:
+                        x = xsave + 18;
+                        y = ysave - 12;
+                        break;
+                    case 5:
+                        x += 6;
+                        y += 6;
+                        break;
+                    case 6:
+                        x -= 6;
+                        y += 6;
+                        break;
+                    case 7:
+                        x -= 6;
+                        y -= 6;
+                        break;
+                    default:
+                        break;
+                }
+                thing++;
+            }
+        }
+        public static void GrowLava(int x, int y, ushort type, int rounds, bool lava = false)
+        {
+            int growth = WorldGen.genRand.Next(256);
+
+            for (int i = 0; i < 9; i++)
+            {
+                int j = i % 3;
+                int tgro = 1 << i;
+                if ((tgro & growth) == tgro)
+                {
+                    int tx = (x + j - 1);
+                    int ty = y + (i / 3) - 1;
+
+                    
+
+                    if (Main.tile[tx, ty].HasTile)
+                    {
+                        Tile t = Main.tile[tx, ty];
+                        t.HasTile = true;
+                        t.TileType = type;
+                        WorldGen.SquareTileFrame(tx, ty);
+                        if (rounds > 0)
+                        {
+                            GrowLava2(tx, ty, type, rounds - 1);
+                        }
+                    }
+                }
+            }
+            WorldGen.SquareTileFrame(x, y);
+        }
+        public static void GrowLava2(int x, int y, ushort type, int rounds, bool lava = false)
+        {
+            int growth = WorldGen.genRand.Next(256);
+
+            for (int i = 0; i < 9; i++)
+            {
+                int j = i % 3;
+                int tgro = 1 << i;
+                if ((tgro & growth) == tgro)
+                {
+                    int tx = (x + j - 1);
+                    int ty = y + (i / 3) - 1;
+
+
+
+                    if (!Main.tile[tx, ty].HasTile)
+                    {
+                        Tile t = Main.tile[tx, ty];
+                        t.HasTile = true;
+                        t.TileType = type;
+                        WorldGen.SquareTileFrame(tx, ty);
+                        if (rounds > 0)
+                        {
+                            GrowLava2(tx, ty, type, rounds - 1);
+                        }
+                    }
+                }
+            }
+            WorldGen.SquareTileFrame(x, y);
+        }
+
         public static void Generate(int x, int y)
         {
+            ushort tileStone = (ushort)ModContent.TileType<Tiles.BlastedStone>();
+
             int xRad = WorldGen.genRand.Next(50, 60);
-            int yRad = WorldGen.genRand.Next(20, 35);
-            int thickness = WorldGen.genRand.Next(5, 11);
+            int yRad = WorldGen.genRand.Next(30, 40);
+            int thickness = WorldGen.genRand.Next(12, 20);
 
             if (WorldGen.genRand.NextBool(3))
             {
                 xRad += WorldGen.genRand.Next(5, 12);
             }
 
-            MakeOval(x, y, xRad, yRad, TileID.Stone);
+            //change the tiles
+            MakeOval(x, y, xRad + 20, yRad + 20, tileStone, true);
 
-            MakeOval(x, y, xRad - thickness, yRad - thickness, ushort.MaxValue);
+            // add the air
+            MakeOval(x, y, xRad, yRad, ushort.MaxValue);
+
+            // add the lava
+            MakeOval(x, y, xRad - thickness, yRad - thickness, ushort.MaxValue, lava: true);
+
+            double num19 = 0.3;
+            num19 *= 1.0 - WorldGen.genRand.NextDouble() * 0.1;
+
+            int num24 = (int)(x - xRad * num19) - WorldGen.genRand.Next(-15, 1) - 5;
+            int num2 = (int)(x + xRad * num19) + WorldGen.genRand.Next(0, 16);
+            int m = num24;
+            int num8 = 0;
+            for (; m < num2; m += WorldGen.genRand.Next(12, 16))
+            {
+                int num9 = y - 3;
+                while (!Main.tile[m, num9].HasTile)
+                {
+                    num9--;
+                }
+                num9 -= 4;
+                int num10 = WorldGen.genRand.Next(5, 10);
+                int num11 = WorldGen.genRand.Next(5, 10);
+                int n = m - num10;
+                while (num10 > 0)
+                {
+                    for (n = m - num10; n < m + num10; n++)
+                    {
+                        Tile t = Main.tile[n, num9];
+                        t.HasTile = true;
+                        t.TileType = tileStone;
+                    }
+                    num8++;
+                    if (WorldGen.genRand.Next(3) < num8)
+                    {
+                        num8 = 0;
+                        num10--;
+                        m += WorldGen.genRand.Next(-1, 2);
+                    }
+                    if (num11 <= 0)
+                    {
+                        num10--;
+                    }
+                    num11--;
+                    num9++;
+                }
+                n -= WorldGen.genRand.Next(1, 3);
+                Tile t1 = Main.tile[n, num9 - 2];
+                Tile t2 = Main.tile[n, num9 - 1];
+                Tile t3 = Main.tile[n, num9];
+                t1.HasTile = true;
+                t1.TileType = tileStone;
+                t2.HasTile = true;
+                t2.TileType = tileStone;
+                t3.HasTile = true;
+                t3.TileType = tileStone;
+                WorldGen.SquareTileFrame(n, num9 - 2);
+                WorldGen.SquareTileFrame(n, num9 - 1);
+                WorldGen.SquareTileFrame(n, num9);
+                if (WorldGen.genRand.NextBool(2))
+                {
+                    Tile t4 = Main.tile[n, num9 + 1];
+                    t4.HasTile = true;
+                    t4.TileType = tileStone;
+                    WorldGen.SquareTileFrame(n, num9 + 1);
+                    Utils.PlaceCustomTight(n, num9 + 2, (ushort)ModContent.TileType<Tiles.BlastedStalac>());
+                }
+                else
+                {
+                    Utils.PlaceCustomTight(n, num9 + 1, (ushort)ModContent.TileType<Tiles.BlastedStalac>());
+                }
+            }
         }
 
         public static bool GenerateLavaOcean(int X, int Y)
@@ -276,8 +617,16 @@ namespace Avalon.WorldGeneration.Structures
             }
         }
 
+        private static bool IsNearEllipseBorder(int x, int y, int centerX, int centerY, int radiusX, int radiusY, int borderThickness)
+        {
+            float dx = x - centerX;
+            float dy = y - centerY;
+            float ellipseValue = (dx * dx) / (radiusX * radiusX) + (dy * dy) / (radiusY * radiusY);
 
-        public static void MakeOval(int x, int y, int xRadius, int yRadius, int type)
+            // Check if the tile is within the specified border thickness from the ellipse's border
+            return ellipseValue >= 1 - (borderThickness / (float)radiusX);
+        }
+        public static void MakeOval(int x, int y, int xRadius, int yRadius, int type, bool replaceTiles = false, bool lava = false)
         {
             int xmin = x - xRadius;
             int ymin = y - yRadius;
@@ -289,38 +638,66 @@ namespace Avalon.WorldGeneration.Structures
                 {
                     if (Utils.IsInsideEllipse(i, j, new Vector2(x, y), xRadius, yRadius))
                     {
-                        if (type == 65535)
+                        Tile q = Main.tile[i, j];
+                        q.WallType = 0;
+                        //q.LiquidAmount = 0;
+                        if (lava)
+                        {
+                            Tile t = Main.tile[i, j];
+                            t.LiquidAmount = 254;
+                            t.LiquidType = LiquidID.Lava;
+                            //WorldGen.SquareTileFrame(i, j);
+                            t.WallType = WallID.ObsidianBackUnsafe;
+                        }
+                        else if (type == 65535)
                         {
                             Tile t = Main.tile[i, j];
                             t.HasTile = false;
                             WorldGen.SquareTileFrame(i, j);
                             t.WallType = WallID.ObsidianBackUnsafe;
-                            if (j > y + 3)
-                            {
-                                t.LiquidAmount = 255;
-                                t.LiquidType = LiquidID.Lava;
-                            }
-                            if (j < y - yRadius / 3)
-                            {
-                                if (i % 7 == 0)
-                                    MakeStalac(i, j, WorldGen.genRand.Next(3, 5), WorldGen.genRand.Next(3, 5), TileID.Stone, TileID.Stone, 1);
-                            }
                         }
                         else
                         {
-                            Tile t = Main.tile[i, j];
-                            t.HasTile = true;
-                            t.TileType = (ushort)type;
-                            //if (Utils.IsInsideEllipse(i, j, new Vector2(x, y), xRadius - 1, yRadius - 1))
-                            //{
-                            //    t.WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
-                            //}
-
+                            if (replaceTiles && j < y + 10)
+                            {
+                                Tile tile = Main.tile[i, j];
+                                if (tile.HasTile && Main.tileSolid[tile.TileType] && !Main.tileSolidTop[tile.TileType])
+                                {
+                                    tile.TileType = (ushort)type;
+                                    tile.Slope = SlopeType.Solid;
+                                    tile.IsHalfBlock = false;
+                                    WorldGen.SquareTileFrame(i, j);
+                                }
+                                else
+                                {
+                                    tile.WallType = WallID.ObsidianBackUnsafe;
+                                }
+                            }
+                            else
+                            {
+                                Tile t = Main.tile[i, j];
+                                t.HasTile = true;
+                                t.Slope = SlopeType.Solid;
+                                t.IsHalfBlock = false;
+                                t.TileType = (ushort)type;
+                                WorldGen.SquareTileFrame(i, j);
+                            }
                             WorldGen.SquareTileFrame(i, j);
                         }
                     }
                 }
             }
+            //for (int i = xmin - 10; i < xmax + 11; i++)
+            //{
+            //    for(int j = ymin - 10; j < ymax + 11; j++)
+            //    {
+            //        if (IsNearEllipseBorder(i, j, x, y, xRadius, yRadius, 1))
+            //        {
+            //            if (i % 5 == 0 || j % 5 == 0)
+            //                WorldGen.TileRunner(i, j, WorldGen.genRand.Next(5, 9), WorldGen.genRand.Next(5, 9), type);
+            //        }
+            //    }
+            //}
         }
     }
 }

@@ -1,4 +1,6 @@
 using System.Linq;
+using Avalon.Common;
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.Creative;
@@ -29,14 +31,22 @@ internal class ReflexCharm : ModItem
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
+        player.GetModPlayer<AvalonPlayer>().Reflex = true;
         var playerWS = new Rectangle((int)player.Center.X - 32, (int)player.Center.Y - 32, 64, 64);
+
         foreach (Projectile Pr in Main.projectile)
         {
             if (!Pr.friendly && !Pr.bobber && !Data.Sets.Projectile.DontReflect[Pr.type])
             {
                 var proj2 = new Rectangle((int)Pr.position.X, (int)Pr.position.Y, Pr.width, Pr.height);
+                if (proj2.Intersects(player.getRect()) && !Pr.GetGlobalProjectile<AvalonGlobalProjectileInstance>().ReflectRunOnce)
+                {
+                    Pr.GetGlobalProjectile<AvalonGlobalProjectileInstance>().ReflectRunOnce = true;
+                    continue;
+                }
                 bool reflect = false, check = false;
                 int rn = Main.rand.Next(4);
+                if (rn != 0) continue;
                 if (rn == 0)
                 {
                     if (proj2.Intersects(playerWS) && !reflect)
@@ -48,7 +58,6 @@ internal class ReflexCharm : ModItem
                 {
                     check = true;
                 }
-
                 if (reflect && !check)
                 {
                     for (int thingy = 0; thingy < 5; thingy++)

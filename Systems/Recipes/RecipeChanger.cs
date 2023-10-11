@@ -13,8 +13,6 @@ public class RecipeChanger : ModSystem
     {
         for (int i = 0; i < Recipe.numRecipes; i++)
         {
-            
-
             Recipe recipe = Main.recipe[i];
 
             #region pocket workbench adding stations
@@ -255,6 +253,7 @@ public class RecipeChanger : ModSystem
             }
         }
 
+        #region pocket station adding station item ids
         for (int i = 0; i < ItemLoader.ItemCount; i++)
         {
             if (Data.Sets.Tile.CraftingStations.Contains(ContentSamples.ItemsByType[i].createTile))
@@ -262,5 +261,6 @@ public class RecipeChanger : ModSystem
                 Data.Sets.Item.CraftingStationsItemID.Add(ContentSamples.ItemsByType[i].type);
             }
         }
+        #endregion
     }
 }
