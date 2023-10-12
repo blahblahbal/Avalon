@@ -37,6 +37,14 @@ public class Ickgrass : ModTile
     {
         if (fail && !effectOnly)
         {
+            if (Main.tile[i, j - 1].TileType == ModContent.TileType<ContagionShortGrass>())
+            {
+                WorldGen.KillTile(i, j - 1);
+            }
+            if (Main.tile[i, j + 1].TileType == ModContent.TileType<ContagionVines>())
+            {
+                WorldGen.KillTile(i, j + 1);
+            }
             noItem = true;
             Main.tile[i, j].TileType = TileID.Dirt;
             WorldGen.SquareTileFrame(i, j);

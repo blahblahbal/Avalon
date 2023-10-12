@@ -31,17 +31,18 @@ public class ContagionShortGrass : ModTile
         Main.tileWaterDeath[Type] = true;
         Main.tileFrameImportant[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
-        TileObjectData.newTile.AnchorValidTiles = new int[]
-        {
-            ModContent.TileType<Ickgrass>(),
-            ModContent.TileType<ContagionJungleGrass>()
-        };
+        //TileObjectData.newTile.AnchorValidTiles = new int[]
+        //{
+        //    ModContent.TileType<Ickgrass>(),
+        //    ModContent.TileType<ContagionJungleGrass>()
+        //};
         TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.WaterPlacement = LiquidPlacement.NotAllowed;
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.addTile(Type);
         DustType = ModContent.DustType<Dusts.ContagionDust>();
         HitSound = SoundID.Grass;
+        Data.Sets.Tile.Conversion.ShortGrass[Type] = true;
         AddMapEntry(new Color(133, 150, 39));
     }
 

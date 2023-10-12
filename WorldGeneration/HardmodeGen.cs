@@ -41,21 +41,22 @@ public class HardmodeGen : ModSystem
 
     private static void HardmodeContagion(GenerationProgress progres, GameConfiguration configurations)
     {
+        AvalonWorld.StopStalacAndGrassFromBreakingUponHardmodeGeneration = true;
         WorldGen.IsGeneratingHardMode = true;
         WorldGen.TryProtectingSpawnedItems();
         if (Main.rand == null)
         {
             Main.rand = new UnifiedRandom((int)DateTime.Now.Ticks);
         }
-        double num = (double)WorldGen.genRand.Next(300, 400) * 0.001;
-        double num2 = (double)WorldGen.genRand.Next(200, 300) * 0.001;
-        int num3 = (int)((double)Main.maxTilesX * num);
-        int num4 = (int)((double)Main.maxTilesX * (1.0 - num));
+        double num = WorldGen.genRand.Next(300, 400) * 0.001;
+        double num2 = WorldGen.genRand.Next(200, 300) * 0.001;
+        int num3 = (int)(Main.maxTilesX * num);
+        int num4 = (int)(Main.maxTilesX * (1.0 - num));
         int num5 = 1;
-        if (WorldGen.genRand.Next(2) == 0)
+        if (WorldGen.genRand.NextBool(2))
         {
-            num4 = (int)((double)Main.maxTilesX * num);
-            num3 = (int)((double)Main.maxTilesX * (1.0 - num));
+            num4 = (int)(Main.maxTilesX * num);
+            num3 = (int)(Main.maxTilesX * (1.0 - num));
             num5 = -1;
         }
         int num6 = 1;
@@ -67,20 +68,20 @@ public class HardmodeGen : ModSystem
         {
             if (num4 < num3)
             {
-                num4 = (int)((double)Main.maxTilesX * num2);
+                num4 = (int)(Main.maxTilesX * num2);
             }
             else
             {
-                num3 = (int)((double)Main.maxTilesX * num2);
+                num3 = (int)(Main.maxTilesX * num2);
             }
         }
         else if (num4 > num3)
         {
-            num4 = (int)((double)Main.maxTilesX * (1.0 - num2));
+            num4 = (int)(Main.maxTilesX * (1.0 - num2));
         }
         else
         {
-            num3 = (int)((double)Main.maxTilesX * (1.0 - num2));
+            num3 = (int)(Main.maxTilesX * (1.0 - num2));
         }
         if (!Main.remixWorld)
         {
@@ -128,6 +129,7 @@ public class HardmodeGen : ModSystem
         {
             Netplay.ResetSections();
         }
+        AvalonWorld.StopStalacAndGrassFromBreakingUponHardmodeGeneration = false;
         WorldGen.UndoSpawnedItemProtection();
         WorldGen.IsGeneratingHardMode = false;
     }
@@ -139,7 +141,7 @@ public class HardmodeGen : ModSystem
         {
             for (int l = 20; l < Main.maxTilesY - 20; l++)
             {
-                if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == 225)
+                if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == TileID.Hive)
                 {
                     num++;
                 }
@@ -229,56 +231,82 @@ public class HardmodeGen : ModSystem
                     {
                         Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionBoilWallUnsafe>();
                     }
-                    if (flag && Main.tile[m, n].TileType == 225)
+
+                    // TEST
+                    //if (Main.tile[m, n].TileType == TileID.Stalactite && (Main.tile[m, n].TileFrameX >= 54 && Main.tile[m, n].TileFrameX <= 90 || Main.tile[m, n].TileFrameX >= 216 && Main.tile[m, n].TileFrameX <= 360))
+                    //{
+                    //    if (Main.tile[m, n].TileFrameX >= 54 && Main.tile[m, n].TileFrameX <= 90)
+                    //    {
+                    //        Main.tile[m, n].TileFrameX -= 54;
+                    //    }
+                    //    if (Main.tile[m, n].TileFrameX >= 216 && Main.tile[m, n].TileFrameX <= 252)
+                    //    {
+                    //        Main.tile[m, n].TileFrameX -= 216;
+                    //    }
+                    //    if (Main.tile[m, n].TileFrameX >= 270 && Main.tile[m, n].TileFrameX <= 306)
+                    //    {
+                    //        Main.tile[m, n].TileFrameX -= 270;
+                    //    }
+                    //    if (Main.tile[m, n].TileFrameX >= 324 && Main.tile[m, n].TileFrameX <= 360)
+                    //    {
+                    //        Main.tile[m, n].TileFrameX -= 324;
+                    //    }
+                    //    Main.tile[m, n].TileType = (ushort)ModContent.TileType<ContagionStalactgmites>();
+                    //}
+
+                    int type = Main.tile[m, n].TileType;
+
+                    if (Data.Sets.Tile.Conversion.Vines[type])
+                    {
+                        Main.tile[m, n].TileType = (ushort)ModContent.TileType<ContagionVines>();
+                    }
+                    if (flag && Main.tile[m, n].TileType == TileID.Hive)
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Chunkstone>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (flag && Main.tile[m, n].TileType == 230)
+                    else if (flag && Main.tile[m, n].TileType == TileID.CrispyHoneyBlock)
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<HardenedSnotsand>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (Main.tile[m, n].TileType == 2)
+                    else if (TileID.Sets.Conversion.Grass[type])
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Ickgrass>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (Main.tile[m, n].TileType == 1 || Main.tile[m, n].TileType == 25 || Main.tile[m, n].TileType == 203)
+                    else if (TileID.Sets.Conversion.Stone[type])
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Chunkstone>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (Main.tile[m, n].TileType == 53 || Main.tile[m, n].TileType == 123 || Main.tile[m, n].TileType == 112 || Main.tile[m, n].TileType == 234)
+                    else if (TileID.Sets.Conversion.Sand[type])
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Snotsand>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (Main.tile[m, n].TileType == 661 || Main.tile[m, n].TileType == 662 || Main.tile[m, n].TileType == 60)
+                    else if (TileID.Sets.Conversion.JungleGrass[type])
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
                         WorldGen.SquareTileFrame(m, n); 
                     }
-                    else if (Main.tile[m, n].TileType == 23 || Main.tile[m, n].TileType == 199)
-                    {
-                        Main.tile[m, n].TileType = (ushort)ModContent.TileType<Ickgrass>();
-                        WorldGen.SquareTileFrame(m, n);
-                    }
-                    else if (Main.tile[m, n].TileType == 161 || Main.tile[m, n].TileType == 163 || Main.tile[m, n].TileType == 200)
+                    else if (TileID.Sets.Conversion.Ice[type])
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<YellowIce>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (Main.tile[m, n].TileType == 396)
+                    else if (TileID.Sets.Conversion.HardenedSand[type])
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<HardenedSnotsand>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (Main.tile[m, n].TileType == 397)
+                    else if (TileID.Sets.Conversion.Sandstone[type])
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Snotsandstone>();
                         WorldGen.SquareTileFrame(m, n);
                     }
+                    
+                    
                 }
             }
             val += val2;

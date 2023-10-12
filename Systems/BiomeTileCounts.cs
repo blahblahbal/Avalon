@@ -50,12 +50,14 @@ public class BiomeTileCounts : ModSystem
         DarkMonolithTiles = tileCounts[ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>()];
         AshenOvergrowthTiles = tileCounts[TileID.AshGrass] + 
                                tileCounts[TileID.AshPlants];
-        /*Main.SceneMetrics.JungleTileCount += tileCounts[ModContent.TileType<GreenIce>()];
+
+        Main.SceneMetrics.JungleTileCount += tileCounts[ModContent.TileType<GreenIce>()];
+        Main.SceneMetrics.SnowTileCount += tileCounts[ModContent.TileType<GreenIce>()];
         Main.SceneMetrics.SandTileCount += tileCounts[ModContent.TileType<Snotsand>()];
-        ContagionDesertTiles += tileCounts[ModContent.TileType<Snotsand>()];
+        //ContagionDesertTiles += tileCounts[ModContent.TileType<Snotsand>()];
         
 
-        TropicsTiles = tileCounts[ModContent.TileType<TropicalStone>()] +
+        /*TropicsTiles = tileCounts[ModContent.TileType<TropicalStone>()] +
                        tileCounts[ModContent.TileType<TuhrtlBrick>()] +
                        tileCounts[ModContent.TileType<Loam>()] +
                        tileCounts[ModContent.TileType<TropicalGrass>()];

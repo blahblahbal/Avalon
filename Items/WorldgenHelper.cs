@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Tiles.Contagion;
 using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
 using System;
@@ -36,8 +37,16 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-            int ln = Main.rand.Next(3, 5);
-            int lx = Main.rand.Next(7, 10);
+            for (int i = x - 10; i < x + 10; i++)
+            {
+                for (int j = y - 10; j < y + 10; j++)
+                {
+                    if (Main.tile[i, j].TileType == TileID.Stalactite)
+                    {
+                        Main.tile[i, j].TileType = (ushort)ModContent.TileType<ContagionStalactgmites>();
+                    }
+                }
+            }
             //WorldGen.ShimmerMakeBiome(x, y);
             //Underworld.MakeSpike2(x, y, (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>(), ln, lx);
             //Underworld.MakeSpike2(x, y - 1, (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>(), ln, lx);

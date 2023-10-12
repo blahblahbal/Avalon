@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Dusts;
 using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
@@ -26,7 +27,6 @@ public class Chunkstone : ModTile
         TileID.Sets.GeneralPlacementTiles[Type] = false;
         TileID.Sets.Stone[Type] = true;
         TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
-        //ItemDrop = ModContent.ItemType<ChunkstoneBlock>();
         HitSound = SoundID.Tink;
         MinPick = 60;
         DustType = ModContent.DustType<ContagionDust>();

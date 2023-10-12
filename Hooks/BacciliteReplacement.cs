@@ -14,6 +14,12 @@ namespace Avalon.Hooks
             On_WorldGen.TileRunner += On_WorldGen_TileRunner;
             IL_WorldGen.ShimmerMakeBiome += AddShimmerAlternativeChecks;
             IL_WorldGen.badOceanCaveTiles += IL_WorldGen_badOceanCaveTiles;
+            IL_WorldGen.GERunner += IL_WorldGen_GERunner;
+        }
+
+        private void IL_WorldGen_GERunner(ILContext il)
+        {
+            Utilities.AddAlternativeIdChecks(il, TileID.Crimstone, id => Data.Sets.Tile.Chunkstone[id]);
         }
 
         private void IL_WorldGen_badOceanCaveTiles(ILContext il)

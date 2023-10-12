@@ -27,7 +27,7 @@ public class ContagionVines : ModTile
         Main.tileNoAttach[Type] = true;
         HitSound = SoundID.Grass;
         DustType = ModContent.DustType<Dusts.ContagionDust>();
-
+        Data.Sets.Tile.Conversion.Vines[Type] = true;
         AddMapEntry(new Color(117, 131, 37));
     }
 

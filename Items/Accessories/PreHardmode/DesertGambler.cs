@@ -11,7 +11,6 @@ class DesertGambler : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         //ArmorIDs.Head.Sets.IsTallHat[Item.headSlot] = true;
     }
     public override void SetDefaults()
@@ -22,7 +21,7 @@ class DesertGambler : ModItem
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 2);
         Item.height = dims.Height;
-        Item.expert= true;
+        Item.expert = true;
         Item.accessory = true;
     }
     public override void UpdateAccessory(Player player, bool hideVisual)

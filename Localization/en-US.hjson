@@ -6734,6 +6734,29 @@ Mods: {
 				DisplayName: Viris Banner
 				Tooltip: ""
 			}
+
+			JungleSolution: {
+				DisplayName: Jungle Solution
+				Tooltip:
+					'''
+					Used by the Clentaminator
+					Spreads the Jungle
+					'''
+			}
+
+			ContagionSolution: {
+				DisplayName: Contagion Solution
+				Tooltip:
+					'''
+					Used by the Clentaminator
+					Spreads the Contagion
+					'''
+			}
+
+			GreenIceBlock: {
+				DisplayName: Green Ice Block
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -6904,6 +6927,8 @@ Mods: {
 			VirulentCloudSmallWeak.DisplayName: Virulent Cloud Small Weak
 			VirulentCloudWeak.DisplayName: Virulent Cloud Weak
 			VirulentScythe.DisplayName: Virulent Scythe
+			ContagionSpray.DisplayName: Contagion Spray
+			JungleSpray.DisplayName: Jungle Spray
 		}
 
 		NPCs: {
