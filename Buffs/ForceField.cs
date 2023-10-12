@@ -27,10 +27,7 @@ public class ForceField : ModBuff
 
                     Pr.hostile = false;
                     Pr.friendly = true;
-                    Projectile expr_605_cp_0 = Pr;
-                    expr_605_cp_0.velocity.X = expr_605_cp_0.velocity.X * -1f;
-                    Projectile expr_61D_cp_0 = Pr;
-                    expr_61D_cp_0.velocity.Y = expr_61D_cp_0.velocity.Y * -1f;
+                    Pr.velocity *= -1;
                 }
             }
         }
@@ -51,10 +48,7 @@ public class ForceField : ModBuff
                     }
 
                     nPC.friendly = true;
-                    NPC expr_721_cp_0 = nPC;
-                    expr_721_cp_0.velocity.X = expr_721_cp_0.velocity.X * -1f;
-                    NPC expr_739_cp_0 = nPC;
-                    expr_739_cp_0.velocity.Y = expr_739_cp_0.velocity.Y * -1f;
+                    nPC.velocity *= -1;
                 }
             }
         }

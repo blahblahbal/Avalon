@@ -39,6 +39,10 @@ class FlaskOfPathogens : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(Type).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Pathogen>(),2).AddTile(TileID.ImbuingStation).Register();
+        CreateRecipe()
+            .AddIngredient(ItemID.BottledWater)
+            .AddIngredient(ModContent.ItemType<Pathogen>(), 2)
+            .AddTile(TileID.ImbuingStation)
+            .Register();
     }
 }

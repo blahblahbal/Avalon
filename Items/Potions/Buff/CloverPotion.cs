@@ -24,10 +24,10 @@ class CloverPotion : ModItem
         Item.consumable = true;
         Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.useTime = 15;
+        Item.useTime = 17;
         Item.useStyle = ItemUseStyleID.DrinkLiquid;
         Item.maxStack = 9999;
-        Item.useAnimation = 15;
+        Item.useAnimation = 17;
         Item.height = dims.Height;
         Item.buffTime = 108000;
         Item.UseSound = SoundID.Item3;
@@ -35,7 +35,7 @@ class CloverPotion : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<Material.FakeFourLeafClover>())
             .AddIngredient(ModContent.ItemType<Material.BottledLava>())
             .AddIngredient(ModContent.ItemType<Holybird>())

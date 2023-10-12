@@ -83,6 +83,11 @@ public class HungrySummon : ModProjectile
             }
         }
 
+        if (Vector2.Distance(Projectile.position, player.position) > 5000)
+        {
+            Projectile.position = player.position;
+        }
+
         if (Projectile.timeLeft != 5 && Main.rand.NextBool(3))
         {
             Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(10, 0).RotatedBy(Projectile.rotation) + Main.rand.NextVector2Circular(3, 3), DustID.Blood);

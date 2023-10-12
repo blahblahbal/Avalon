@@ -28,10 +28,10 @@ class BlahPotion : ModItem
         Item.consumable = false;
         Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
         Item.width = dims.Width;
-        Item.useTime = 15;
+        Item.useTime = 17;
         Item.useStyle = ItemUseStyleID.DrinkLiquid;
         Item.maxStack = 1;
-        Item.useAnimation = 15;
+        Item.useAnimation = 17;
         Item.height = dims.Height;
         Item.buffTime = 5 * 60 * 60 * 60; // 5 hours
     }

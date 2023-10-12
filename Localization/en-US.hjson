@@ -11,6 +11,20 @@ Mods: {
 
 	Avalon: {
 		ContagionKey.AfterPlantera: Unlocks a Contagion Chest in the dungeon
+
+		RejuvenationPotion: {
+			NoThePill:
+				'''
+				Heals 150 life over 30 seconds
+				Effect is cancelled when hit
+				'''
+			ThePill:
+				'''
+				Heals 225 life over 45 seconds
+				Effect is cancelled when hit
+				'''
+		}
+
 		CougherMask.Tooltip:
 			'''
 			Double tap {0} to cough on your enemies
@@ -6442,12 +6456,7 @@ Mods: {
 
 			RejuvenationPotion: {
 				DisplayName: Rejuvenation Potion
-				Tooltip:
-					'''
-					Heals 150 life over 30 seconds
-					Effect is cancelled when hit
-					               Heals 225 life over 45 seconds if you have The Pill equipped
-					'''
+				Tooltip: ""
 			}
 
 			CougherMask: {

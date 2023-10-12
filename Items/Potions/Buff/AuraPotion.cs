@@ -1,3 +1,4 @@
+using Avalon.Items.Material.Herbs;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -23,19 +24,36 @@ class AuraPotion : ModItem
         Item.consumable = true;
         Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.useTime = 15;
+        Item.useTime = 17;
         Item.useStyle = ItemUseStyleID.DrinkLiquid;
         Item.maxStack = 9999;
-        Item.value = Item.sellPrice(0, 0, 3, 0);
-        Item.useAnimation = 15;
+        Item.value = Item.sellPrice(0, 0, 3);
+        Item.useAnimation = 17;
         Item.height = dims.Height;
         Item.buffTime = 18000;
         Item.UseSound = SoundID.Item3;
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ItemID.Deathweed).AddIngredient(ItemID.Spike).AddTile(TileID.Bottles).Register();
-        //CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ModContent.ItemType<Material.Barfbush>()).AddIngredient(ItemID.Spike).AddTile(TileID.Bottles).Register();
-        //CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ModContent.ItemType<Material.Bloodberry>()).AddIngredient(ItemID.Spike).AddTile(TileID.Bottles).Register();
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ItemID.Deathweed)
+            .AddIngredient(ItemID.Spike)
+            .AddTile(TileID.Bottles)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Barfbush>())
+            .AddIngredient(ItemID.Spike)
+            .AddTile(TileID.Bottles)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Bloodberry>())
+            .AddIngredient(ItemID.Spike)
+            .AddTile(TileID.Bottles)
+            .Register();
     }
 }

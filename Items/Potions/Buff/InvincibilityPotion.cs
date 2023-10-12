@@ -22,14 +22,14 @@ class InvincibilityPotion : ModItem
         Item.consumable = true;
         Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.useTime = 15;
-        Item.useStyle = ItemUseStyleID.EatFood;
+        Item.useTime = 17;
+        Item.useStyle = ItemUseStyleID.DrinkLiquid;
         Item.maxStack = 9999;
-        Item.useAnimation = 15;
+        Item.useAnimation = 17;
         Item.height = dims.Height;
         Item.potion = true;
         Item.UseSound = SoundID.Item3;
-        Item.potionDelay = 60 * 30;
+        //Item.potionDelay = 60 * 30;
         Item.healLife = 25;
     }
     public override bool? UseItem(Player player)

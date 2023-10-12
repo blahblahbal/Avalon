@@ -26,6 +26,7 @@ using Avalon.Items.Material.Ores;
 using Avalon.Items.Ammo;
 using Avalon.Network;
 using Microsoft.Xna.Framework;
+using Avalon.Items.Potions.Buff;
 
 namespace Avalon.Common;
 
@@ -483,6 +484,7 @@ public class AvalonGlobalItem : GlobalItem
         TooltipLine? tooltipMat = tooltips.Find(x => x.Name == "Material" && x.Mod == "Terraria");
         TooltipLine? tooltipEquip = tooltips.Find(x => x.Name == "Equipable" && x.Mod == "Terraria");
         TooltipLine? healLife = tooltips.Find(x => x.Name == "HealLife" && x.Mod == "Terraria");
+        TooltipLine? buffTime = tooltips.Find(x => x.Name == "BuffTime" && x.Mod == "Terraria");
         if (healLife != null)
         {
             if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().ThePill)
@@ -493,6 +495,13 @@ public class AvalonGlobalItem : GlobalItem
                 }
             }
         }
+        //if (buffTime != null)
+        //{
+        //    if (item.type == ModContent.ItemType<RejuvenationPotion>())
+        //    {
+        //        tooltips.Remove(buffTime);
+        //    }
+        //}
         if (tooltipEquip != null)
         {
             if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)

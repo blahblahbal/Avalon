@@ -172,6 +172,7 @@ public class AvalonPlayer : ModPlayer
     public bool Pathogen;
     public bool BloodCasting;
     public bool Vision;
+    public float ForceFieldRotation;
 
     public bool HungryMinion;
     public bool GastroMinion;
@@ -430,11 +431,6 @@ public class AvalonPlayer : ModPlayer
         {
             Player.GetModPlayer<AvalonStaminaPlayer>().StatStam = tag.Get<int>("Avalon:StatStam");
         }
-        if (tag.ContainsKey("Avalon:DeathCounter"))
-        {
-            DeathCounter = tag.Get<int>("Avalon:DeathCounter");
-        }
-        else DeathCounter = 0;
     }
     public override void PostUpdateEquips()
     {
@@ -575,7 +571,6 @@ public class AvalonPlayer : ModPlayer
             }
             return false;
         }
-        DeathCounter++;
         return true;
     }
     public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)

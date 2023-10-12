@@ -22,11 +22,11 @@ class VisionPotion : ModItem
         Item.consumable = true;
         Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.useTime = 15;
+        Item.useTime = 17;
         Item.value = 2000;
         Item.useStyle = ItemUseStyleID.DrinkLiquid;
         Item.maxStack = 9999;
-        Item.useAnimation = 15;
+        Item.useAnimation = 17;
         Item.height = dims.Height;
         Item.buffTime = 5400;
         Item.UseSound = SoundID.Item3;

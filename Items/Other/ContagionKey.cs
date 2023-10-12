@@ -23,15 +23,16 @@ internal class ContagionKey : ModItem
     }
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
+        int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name)) && tt.Name.Equals("Tooltip0"));
         if (!NPC.downedPlantBoss)
         {
             var thing = new TooltipLine(Mod, "Tooltip0", Language.GetTextValue("LegacyTooltip.59"));
-            tooltips.Add(thing);
+            tooltips.Insert(index, thing);
         }
         else
         {
             var thing = new TooltipLine(Mod, "Tooltip0", Language.GetTextValue("Mods.Avalon.ContagionKey.AfterPlantera"));
-            tooltips.Add(thing);
+            tooltips.Insert(index, thing);
         }
     }
     //public override void AddRecipes()
