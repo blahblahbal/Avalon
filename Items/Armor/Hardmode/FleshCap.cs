@@ -1,6 +1,8 @@
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Armor.Hardmode;
@@ -36,8 +38,8 @@ class FleshCap : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "Hungry minions can be summoned up to 10";
-        //player.Avalon().FleshArmor = true;
+        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Flesh");
+        player.GetModPlayer<AvalonPlayer>().FleshArmor = true;
     }
 
     public override void UpdateEquip(Player player)

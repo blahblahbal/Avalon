@@ -1,4 +1,5 @@
 using Avalon.Buffs.Minions;
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -37,16 +38,18 @@ class HungryStaff : ModItem
         Item.UseSound = SoundID.Item44;
         Item.buffType = ModContent.BuffType<Hungry>();
     }
-    // public override void AddRecipes()
-    // {
-    // CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.FleshyTendril>(), 14).AddTile(TileID.Anvils).Register();
-    // }
     public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
     {
         // Here you can change where the minion is spawned. Most vanilla minions spawn at the cursor position
         position = Main.MouseWorld;
     }
-
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.FleshyTendril>(), 14)
+            .AddTile(TileID.Anvils)
+            .Register();
+    }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         // This is needed so the buff that keeps your minion alive and allows you to despawn it properly applies
@@ -55,6 +58,10 @@ class HungryStaff : ModItem
         // Minions have to be spawned manually, then have originalDamage assigned to the damage of the summon item
         var projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Main.myPlayer);
         projectile.originalDamage = Item.damage;
+        if (player.GetModPlayer<AvalonPlayer>().FleshArmor)
+        {
+            projectile.minionSlots = 0.25f;
+        }
 
         // Since we spawned the projectile manually already, we do not need the game to spawn it for ourselves anymore, so return false
         return false;

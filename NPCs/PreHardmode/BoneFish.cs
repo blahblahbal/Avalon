@@ -40,8 +40,8 @@ public class BoneFish : ModNPC
         NPC.HitSound = SoundID.NPCHit2;
         NPC.DeathSound = SoundID.NPCDeath2;
         NPC.buffImmune[BuffID.Confused] = true;
-        //Banner = NPC.type;
-        //BannerItem = ModContent.ItemType<BloodshotEyeBanner>();
+        Banner = NPC.type;
+        BannerItem = ModContent.ItemType<BoneFishBanner>();
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]

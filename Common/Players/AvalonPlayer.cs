@@ -114,6 +114,7 @@ public class AvalonPlayer : ModPlayer
     public bool HyperRanged;
     public int HyperBar;
     public bool AmmoCost85;
+    public bool FleshArmor;
     #endregion
 
     public bool CougherMask;
@@ -256,6 +257,7 @@ public class AvalonPlayer : ModPlayer
         HyperMelee = false;
         HyperRanged = false;
         AmmoCost85 = false;
+        FleshArmor = false;
 
         GreedyPrefix = false;
         HoardingPrefix = false;

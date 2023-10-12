@@ -362,6 +362,7 @@ public class AvalonMobDrops : GlobalNPC
     {
         var desertPostBeakCondition = new DesertPostBeakDrop();
         var contagionCondition = new ZoneContagion();
+        var soulCondition = new UndergroundContagionCondition();
 
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumHeadgear>(), 150));
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumPlateMail>(), 150));
@@ -408,12 +409,18 @@ public class AvalonMobDrops : GlobalNPC
         DesertKeyRule.OnSuccess(new ItemDropWithConditionRule(ItemID.DungeonDesertKey, 1250, 1, 1, new Conditions.DesertKeyCondition()), true);
         DesertKeyRule.OnFailedConditions(new ItemDropWithConditionRule(ItemID.DungeonDesertKey, 2500, 1, 1, new Conditions.DesertKeyCondition()), true);
 
+        LeadingConditionRule ContagionKeyRule = new LeadingConditionRule(new CloverPotionActive());
+        ContagionKeyRule.OnSuccess(new ItemDropWithConditionRule(ModContent.ItemType<ContagionKey>(), 1250, 1, 1, new ContagionKeyCondition()), true);
+        ContagionKeyRule.OnFailedConditions(new ItemDropWithConditionRule(ModContent.ItemType<ContagionKey>(), 2500, 1, 1, new ContagionKeyCondition()), true);
+
         globalLoot.Add(FrozenKeyRule);
         globalLoot.Add(JungleKeyRule);
         globalLoot.Add(CorruptKeyRule);
         globalLoot.Add(HallowKeyRule);
         globalLoot.Add(CrimsonKeyRule);
         globalLoot.Add(DesertKeyRule);
+
+        globalLoot.Add(ItemDropRule.ByCondition(soulCondition, ItemID.SoulofNight, 5));
 
         if (ExxoAvalonOrigins.Tokens != null)
         {

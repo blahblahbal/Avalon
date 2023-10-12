@@ -40,9 +40,9 @@ Mods: {
 			Pyrasite: Giant flat worms created by the Contagion, these creatures enjoy feeding on pre-eaten food from the stomach of titans and other large lifeforms.
 			BacteriumPrime: This giant eye of Contagion never ceases, never truly closes. Those who fall to its gaze will be just as felled by its plague.
 			DesertBeak: The guardian of the desert, this large vulture summons its smaller brethren to assist it in battle. It lifts prey up with its talons, then drops them to fall to their doom.
-		    IrateBones: These Angry Bones have donned a set of armor to further fuel their wrath.
-            CursedScepter: Enchanted through the malevolence of the Dungeon, weapons like this cut intruders down to size.
-        }
+			IrateBones: These Angry Bones have donned a set of armor to further fuel their wrath.
+			CursedScepter: Enchanted through the malevolence of the Dungeon, weapons like this cut intruders down to size.
+		}
 
 		Keybinds: {
 			"Shadow Teleport.DisplayName": Shadow Teleport
@@ -119,6 +119,7 @@ Mods: {
 			Earthsplitter: Ore blocks have a 33% chance to drop double ore
 			Duratanium: Defense is increased by 12 while you are affected by a debuff
 			Naquadah: Nearby enemies take damage when you are damaged
+			Flesh: Hungry minions can be summoned up to 12
 
 			Troxinium: {
 				Magic:
@@ -6714,6 +6715,16 @@ Mods: {
 				DisplayName: Thorn Heart Amulet
 				Tooltip: ""
 			}
+
+			BoneFishBanner: {
+				DisplayName: Bone Fish Banner
+				Tooltip: ""
+			}
+
+			VirisBanner: {
+				DisplayName: Viris Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -6952,6 +6963,8 @@ Mods: {
 			BoneFish.DisplayName: Bone Fish
 			CursedFlamer.DisplayName: Cursed Flamer
 			MobRift.DisplayName: ""
+			CursedScepter.DisplayName: Cursed Scepter
+			IrateBones.DisplayName: Irate Bones
 		}
 
 		Buffs: {
