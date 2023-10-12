@@ -24,14 +24,14 @@ public class CaesiumPoison : ModBuff
         if (timer % 6 == 0)
         {
             int amt = 3;
-            //if (player.GetModPlayer<ExxoEquipEffectPlayer>().DuraShield)
-            //{
-            //    amt = 2;
-            //}
-            //else if (player.GetModPlayer<ExxoEquipEffectPlayer>().DuraOmegaShield)
-            //{
-            //    amt = 1;
-            //}
+            if (player.GetModPlayer<AvalonPlayer>().DuraShield)
+            {
+                amt = 2;
+            }
+            else if (player.GetModPlayer<AvalonPlayer>().DuraOmegaShield)
+            {
+                amt = 1;
+            }
             player.statLife -= amt;
             CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
             if (player.statLife <= 0)

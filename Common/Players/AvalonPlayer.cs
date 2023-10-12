@@ -152,6 +152,12 @@ public class AvalonPlayer : ModPlayer
     public bool ChaosCharm;
     public bool Reflex;
     public bool UndeadImmune;
+    public bool CobShield;
+    public bool PallShield;
+    public bool DuraShield;
+    public bool CobOmegaShield;
+    public bool PallOmegaShield;
+    public bool DuraOmegaShield;
     #endregion
 
     #region buffs and debuffs
@@ -247,6 +253,12 @@ public class AvalonPlayer : ModPlayer
         Reflex = false;
         lavaMerman = false;
         UndeadImmune = false;
+        CobShield = false;
+        PallShield = false;
+        DuraShield = false;
+        CobOmegaShield = false;
+        PallOmegaShield = false;
+        DuraOmegaShield = false;
 
         // armor sets
         SkyBlessing = false;
@@ -361,6 +373,30 @@ public class AvalonPlayer : ModPlayer
         rewardPool.Add(ModContent.ItemType<Items.Dyes.ReflectiveIridiumDye>());
     }
     public bool PotionSicknessSoundPlayed;
+    public override void PostHurt(Player.HurtInfo info)
+    {
+        if (Player.whoAmI == Main.myPlayer && CobShield)
+        {
+            int time = 300;
+            if (CobOmegaShield)
+            {
+                time = 600;
+            }
+
+            Player.AddBuff(BuffID.Ironskin, time);
+        }
+        if (Player.whoAmI == Main.myPlayer && PallShield)
+        {
+            int hpHealed = 5;
+            if (PallOmegaShield)
+            {
+                hpHealed = 10;
+            }
+
+            Player.statLife += hpHealed;
+            Player.HealEffect(hpHealed);
+        }
+    }
     public override void PostUpdateBuffs()
     {
         if (Player.lifeRegen < 0 && Pathogen)
