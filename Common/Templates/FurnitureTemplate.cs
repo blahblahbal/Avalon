@@ -1603,7 +1603,7 @@ namespace Avalon.Common.Templates
             TileObjectData.newTile.LavaDeath = LavaDeath;
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
-            AddMapEntry(new Color(166, 87, 45));
+            AddMapEntry(new Color(191, 142, 111));
             //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.OrangeBrickPlatform>();
             TileID.Sets.DisableSmartCursor[Type] = true;
             AdjTiles = new int[] { TileID.Platforms };
