@@ -25,7 +25,13 @@ public class AvalonGlobalTile : GlobalTile
             TileID.Sets.Ore[tile] = true;
         }
     }
-
+    public override void FloorVisuals(int type, Player player)
+    {
+        if (type == 229 && player.GetModPlayer<AvalonPlayer>().NoSticky)
+        {
+            player.sticky = false;
+        }
+    }
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
         int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);

@@ -441,6 +441,72 @@ public class AvalonPlayer : ModPlayer
         PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.05f;
         PlanetRotation[8] = (PlanetRotation[8] % MathHelper.TwoPi) + 0.035f;
     }
+    public override void UpdateBadLifeRegen()
+    {
+        if (DuraShield)
+        {
+            if (Player.poisoned)
+            {
+                int add = 1;
+                if (DuraOmegaShield) add = 2;
+                Player.lifeRegen += add;
+            }
+            if (Player.onFire)
+            {
+                int add = 2;
+                if (DuraOmegaShield) add = 4;
+                Player.lifeRegen += add;
+            }
+            if (Player.venom)
+            {
+                int add = 7;
+                if (DuraOmegaShield) add = 15;
+                Player.lifeRegen += add;
+            }
+            if (Player.onFire3)
+            {
+                int add = 2;
+                if (DuraOmegaShield) add = 4;
+                Player.lifeRegen += add;
+            }
+            if (Player.onFrostBurn)
+            {
+                int add = 4;
+                if (DuraOmegaShield) add = 8;
+                Player.lifeRegen += add;
+            }
+            if (Player.onFrostBurn2)
+            {
+                int add = 4;
+                if (DuraOmegaShield) add = 8;
+                Player.lifeRegen += add;
+            }
+            if (Player.onFire2)
+            {
+                int add = 6;
+                if (DuraOmegaShield) add = 12;
+                Player.lifeRegen += add;
+            }
+            if (Player.burned)
+            {
+                int add = 15;
+                if (DuraOmegaShield) add = 30;
+                Player.lifeRegen += add;
+            }
+            if (Player.electrified)
+            {
+                int add = 2;
+                if (DuraOmegaShield) add = 4;
+                Player.lifeRegen += add;
+                if (Player.controlLeft || Player.controlRight)
+                {
+                    add = 8;
+                    if (DuraOmegaShield) add = 16;
+                    Player.lifeRegen += add;
+                }
+            }
+        }
+    }
     public LinkedListNode<int> ObtainExistingPlanet(int index, int planetNum)
     {
         int diff = index + 1 - Planets[planetNum].Count;
@@ -1447,15 +1513,6 @@ public class AvalonPlayer : ModPlayer
 
         if (num3 > -1)
         {
-            if (num3 == 229 && !NoSticky)
-            {
-                Player.sticky = true;
-            }
-            else
-            {
-                Player.sticky = false;
-            }
-
             if (SlimeBand) // || Player.GetModPlayer<ExxoBiomePlayer>().ZoneIceSoul)
             {
                 Player.slippy = true;

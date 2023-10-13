@@ -37,7 +37,7 @@ namespace Avalon.Hooks
                             color.G = b2;
                         }
                         color.A = Main.mouseTextColor;
-                        if (!Main.gamePaused && Main.rand.NextBool(100))
+                        if (!Main.gamePaused && Main.rand.NextBool(200))
                         {
                             int num28 = Dust.NewDust(new Vector2(j * 16, i * 16), 16, 16, DustID.TreasureSparkle, 0f, 0f, 150, Color.White, 0.3f);
                             Main.dust[num28].fadeIn = 1f;

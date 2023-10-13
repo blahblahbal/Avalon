@@ -78,13 +78,6 @@ public class GenSystem : ModSystem
             tasks.Insert(stalac + 1, currentPass);
             totalWeight += currentPass.Weight;
         }
-        //stalac = tasks.FindIndex(genPass => genPass.Name == "Remove Broken Traps");
-        //if (stalac != -1)
-        //{
-        //    currentPass = new ContagionStalactgmites();
-        //    tasks.Insert(stalac + 1, currentPass);
-        //    totalWeight += currentPass.Weight;
-        //}
 
         // uncomment when hm update releases
         int underworld = tasks.FindIndex(genPass => genPass.Name == "Micro Biomes");

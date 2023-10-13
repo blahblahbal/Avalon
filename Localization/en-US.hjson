@@ -6758,46 +6758,46 @@ Mods: {
 				Tooltip: ""
 			}
 
-            CobaltCrossShield: {
+			CobaltCrossShield: {
 				DisplayName: Cobalt Cross Shield
 				Tooltip: Increases defense when struck
 			}
 
-            CobaltOmegaShield: {
+			CobaltOmegaShield: {
 				DisplayName: Cobalt Omega Shield
 				Tooltip:
-                '''
-                Greatly increases defense and regenerates life when struck
-                Slows the effects of damage over time debuffs
-                '''
+					'''
+					Greatly increases defense and regenerates life when struck
+					Slows the effects of damage over time debuffs
+					'''
 			}
-            
-            PalladiumCrossShield: {
+
+			PalladiumCrossShield: {
 				DisplayName: Palladium Cross Shield
 				Tooltip: Regenerates health when struck
 			}
 
-            PalladiumOmegaShield: {
+			PalladiumOmegaShield: {
 				DisplayName: Palladium Omega Shield
 				Tooltip:
-                '''
-                Quickly regenerates life and increases defense when struck
-                Slows the effects of damage over time debuffs
-                '''
+					'''
+					Quickly regenerates life and increases defense when struck
+					Slows the effects of damage over time debuffs
+					'''
 			}
 
-            DurataniumCrossShield: {
+			DurataniumCrossShield: {
 				DisplayName: Duratanium Cross Shield
 				Tooltip: Slows the effects of damage over time debuffs
 			}
 
-            DurataniumOmegaShield: {
+			DurataniumOmegaShield: {
 				DisplayName: Duratanium Omega Shield
 				Tooltip:
-                '''
-                Increases defense and regenerates life when struck
-                Greatly slows the effects of damage over time debuffs
-                '''
+					'''
+					Increases defense and regenerates life when struck
+					Greatly slows the effects of damage over time debuffs
+					'''
 			}
 		}
 
