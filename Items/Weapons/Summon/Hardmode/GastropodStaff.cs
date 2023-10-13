@@ -22,10 +22,11 @@ class GastropodStaff : ModItem
         Item.knockBack = 4.5f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Summon.GastrominiSummon0>();
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = Item.sellPrice(0, 1, 0, 0);
+        Item.value = Item.sellPrice(0, 1);
         Item.useAnimation = 30;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item44;
+        Item.buffType = ModContent.BuffType<Buffs.Minions.Gastropod>();
     }
     public override void AddRecipes()
     {
@@ -37,8 +38,16 @@ class GastropodStaff : ModItem
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }
+    public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+    {
+        // Here you can change where the minion is spawned. Most vanilla minions spawn at the cursor position
+        position = Main.MouseWorld;
+    }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
+        // This is needed so the buff that keeps your minion alive and allows you to despawn it properly applies
+        player.AddBuff(Item.buffType, 2);
+
         switch (Main.rand.Next(4))
         {
             case 0:
@@ -54,9 +63,12 @@ class GastropodStaff : ModItem
                 type = ModContent.ProjectileType<Projectiles.Summon.GastrominiSummon3>();
                 break;
         }
-        float posX = (float)Main.mouseX + Main.screenPosition.X;
-        float posY = (float)Main.mouseY + Main.screenPosition.Y;
-        Projectile.NewProjectile(source, posX, posY, 0f, 0f, type, damage, knockback, player.whoAmI, 0f, 0f);
+
+        // Minions have to be spawned manually, then have originalDamage assigned to the damage of the summon item
+        var projectile = Projectile.NewProjectileDirect(source, position, Vector2.Zero, type, damage, knockback, Main.myPlayer);
+        projectile.originalDamage = Item.damage;
+
+        // Since we spawned the projectile manually already, we do not need the game to spawn it for ourselves anymore, so return false
         return false;
     }
 }

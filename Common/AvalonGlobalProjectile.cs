@@ -23,6 +23,25 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             projectile.Kill();
         }
     }
+
+    public override bool CanHitPlayer(Projectile projectile, Player target)
+    {
+        if (target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.PoisonDartTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.SpearTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.FlamesTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.FlamethrowerTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.SpikyBallTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.GeyserTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.Boulder ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.BouncyBoulder ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.MiniBoulder ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.LifeCrystalBoulder)
+        {
+            return false;
+        }
+        return base.CanHitPlayer(projectile, target);
+    }
+
     public override bool PreAI(Projectile projectile)
     {
         if (projectile.type == ProjectileID.TerraBlade2 && projectile.localAI[0] == 0)
@@ -223,7 +242,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
     }
     public override bool PreDraw(Projectile projectile, ref Color lightColor)
     {
-        if ((ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement))
+        if (ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement)
         {
             if (projectile.type is 45 or 44) // Demon Scythes
             {

@@ -6799,6 +6799,21 @@ Mods: {
 					Greatly slows the effects of damage over time debuffs
 					'''
 			}
+
+			Breakdawn: {
+				DisplayName: Breakdawn
+				Tooltip: "'With each swing the dawn breaks'"
+			}
+
+			Blueshift: {
+				DisplayName: Blueshift
+				Tooltip: ""
+			}
+
+			JungleHammer: {
+				DisplayName: Jungle Hammer
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -6959,15 +6974,15 @@ Mods: {
 			Doll.DisplayName: Doll
 			SackofToys.DisplayName: Sack of Toys
 			Table.DisplayName: Table
-			GastrominiSummon.DisplayName: Gastromini Summon
-			GastrominiSummon1.DisplayName: Gastromini Summon
-			GastrominiSummon2.DisplayName: Gastromini Summon
-			GastrominiSummon3.DisplayName: Gastromini Summon
-			GastrominiSummon0.DisplayName: Gastromini Summon
+			GastrominiSummon.DisplayName: Gastromini
+			GastrominiSummon1.DisplayName: Gastromini
+			GastrominiSummon2.DisplayName: Gastromini
+			GastrominiSummon3.DisplayName: Gastromini
+			GastrominiSummon0.DisplayName: Gastromini
 			VirulentCloud.DisplayName: Virulent Cloud
-			VirulentCloudSmall.DisplayName: Virulent Cloud Small
-			VirulentCloudSmallWeak.DisplayName: Virulent Cloud Small Weak
-			VirulentCloudWeak.DisplayName: Virulent Cloud Weak
+			VirulentCloudSmall.DisplayName: Virulent Cloud
+			VirulentCloudSmallWeak.DisplayName: Virulent Cloud
+			VirulentCloudWeak.DisplayName: Virulent Cloud
 			VirulentScythe.DisplayName: Virulent Scythe
 			ContagionSpray.DisplayName: Contagion Spray
 			JungleSpray.DisplayName: Jungle Spray

@@ -16,7 +16,10 @@ public class Gastropod : ModBuff
 
     public override void Update(Player player, ref int buffIndex)
     {
-        if (player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon>()] > 0)
+        if (player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon2>()] > 0 ||
+            player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon3>()] > 0 ||
+            player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon1>()] > 0 ||
+            player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon0>()] > 0)
         {
             player.GetModPlayer<AvalonPlayer>().GastroMinion = true;
         }

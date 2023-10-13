@@ -66,5 +66,4 @@ class HungryStaff : ModItem
         // Since we spawned the projectile manually already, we do not need the game to spawn it for ourselves anymore, so return false
         return false;
     }
-
 }

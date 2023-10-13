@@ -21,7 +21,7 @@ class SackofToys : ModItem
         Item.mana = 11;
         Item.rare = ItemRarityID.LightRed;
         Item.width = dims.Width;
-        Item.useTime = 5;
+        Item.useTime = 20;
         Item.knockBack = 1.5f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.SackofToys.SackofToys>();
         Item.useStyle = ItemUseStyleID.Shoot;

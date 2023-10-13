@@ -12,6 +12,10 @@ public abstract class GastrominiSummon : ModProjectile
     public override void SetStaticDefaults()
     {
         Main.projFrames[Projectile.type] = 5;
+        Main.projPet[Projectile.type] = true; // Denotes that this projectile is a pet or minion
+
+        ProjectileID.Sets.MinionSacrificable[Projectile.type] = true; // This is needed so your minion can properly spawn when summoned and replaced when other minions are summoned
+        ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
     }
 
     public override void SetDefaults()
@@ -21,13 +25,18 @@ public abstract class GastrominiSummon : ModProjectile
         Projectile.width = 22;
         Projectile.height = 36;
         Projectile.penetrate = -1;
-        Projectile.timeLeft *= 5;
+        Projectile.timeLeft = 2;
         Projectile.minion = true;
-        Projectile.minionSlots = 0.25f;
+        Projectile.minionSlots = 1f;
         Projectile.tileCollide = false;
+        Projectile.DamageType = DamageClass.Summon;
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
         Projectile.aiStyle = -1;
+    }
+    public override bool? CanCutTiles()
+    {
+        return false;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
@@ -35,18 +44,16 @@ public abstract class GastrominiSummon : ModProjectile
     }
     public override void AI()
     {
-        Main.player[Projectile.owner].AddBuff(ModContent.BuffType<Buffs.Minions.Gastropod>(), 3600);
-        if (Projectile.type == ModContent.ProjectileType<GastrominiSummon>())
+        Player player = Main.player[Projectile.owner];
+        if (Main.player[Projectile.owner].dead)
         {
-            if (Main.player[Projectile.owner].dead)
-            {
-                Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().GastroMinion = false;
-            }
-            if (Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().GastroMinion)
-            {
-                Projectile.timeLeft = 2;
-            }
+            player.ClearBuff(ModContent.BuffType<Buffs.Minions.Gastropod>());
         }
+        if (player.HasBuff(ModContent.BuffType<Buffs.Minions.Gastropod>()) && Projectile.timeLeft <= 2)
+        {
+            Projectile.timeLeft = 2;
+        }
+
         var num820 = 0.05f;
         for (var num821 = 0; num821 < 1000; num821++)
         {
@@ -83,7 +90,7 @@ public abstract class GastrominiSummon : ModProjectile
             if (nPC5.active && !nPC5.dontTakeDamage && !nPC5.friendly && nPC5.lifeMax > 5)
             {
                 var num824 = Vector2.Distance(nPC5.Center, Projectile.Center);
-                if (((Vector2.Distance(Projectile.Center, vector57) > num824 && num824 < num822) || !flag32) && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, nPC5.position, nPC5.width, nPC5.height))
+                if (((Vector2.Distance(Projectile.Center, vector57) > num824 && num824 < num822)) && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, nPC5.position, nPC5.width, nPC5.height))
                 {
                     num822 = num824;
                     vector57 = nPC5.Center;

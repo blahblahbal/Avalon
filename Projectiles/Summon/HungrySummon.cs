@@ -60,7 +60,7 @@ public class HungrySummon : ModProjectile
     {
         if(Projectile.oldVelocity.X != Projectile.velocity.X)
         {
-            Projectile.velocity.X = -Projectile.oldVelocity.X * 0.6f; 
+            Projectile.velocity.X = -Projectile.oldVelocity.X * 0.6f;
         }
         if (Projectile.oldVelocity.Y != Projectile.velocity.Y)
         {
@@ -152,7 +152,7 @@ public class HungrySummon : ModProjectile
             TargetPos = Main.npc[TargetNPC].Center;
         }
 
-        if(Projectile.timeLeft == 3)
+        if (Projectile.timeLeft == 3)
         {
             SoundEngine.PlaySound(SoundID.NPCDeath12);
 
