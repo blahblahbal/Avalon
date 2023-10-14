@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using Avalon.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -117,10 +115,16 @@ namespace Avalon.Common.Players
             ModContent.ItemType<Items.MusicBoxes.MusicBoxUndergroundContagion>()
         };
 
+        public static Dictionary<int, int> TracksByItemID = new Dictionary<int, int>
+        {
+        };
+        public static Dictionary<int, int> TracksByMusicID = new Dictionary<int, int>
+        {
+        };
+
         public bool DisplayJukeboxInterface { get; set; }
         public int JukeboxX { get; set; }
         public int JukeboxY { get; set; }
-        public string CurrentlyPlayingTrackName = "";
         public bool PlayingATrack = false;
         public int PlayingATrackID { get; set; }
 
@@ -154,17 +158,14 @@ namespace Avalon.Common.Players
         }
         public override void SaveData(TagCompound tag)
         {
-            tag["Avalon:CurrentTrack"] = CurrentlyPlayingTrackName;
+            tag["Avalon:CurrentTrackID"] = PlayingATrackID;
         }
         public override void LoadData(TagCompound tag)
         {
-            if (tag.ContainsKey("Avalon:CurrentTrack"))
+            if (tag.ContainsKey("Avalon:CurrentTrackID"))
             {
-                CurrentlyPlayingTrackName = tag.Get<string>("Avalon:CurrentTrack");
+                PlayingATrackID = tag.Get<int>("Avalon:CurrentTrackID");
             }
         }
-
-
-
     }
 }

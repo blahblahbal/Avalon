@@ -70,6 +70,7 @@ internal class JukeboxUIState : ExxoUIState
         {
             Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = false;
             Main.NewText(Language.GetTextValue("Mods.Avalon.Jukebox.StoppedPlaying"));
+            SoundEngine.PlaySound(SoundID.Item37);
         };
 
         RefreshTrackList();
@@ -103,9 +104,7 @@ internal class JukeboxUIState : ExxoUIState
     private void RefreshTrackList()
     {
         interFace?.Grid.Clear();
-
-        //interFace?.Grid.RemoveAllChildren();
-        //interFace?.Grid.Clear();
+        // vanilla tracks
         foreach (int i in AvalonJukeboxPlayer.JukeboxTracks)
         {
             var jukeboxTrack = new ExxoUIItemSlot(TextureAssets.InventoryBack7, i);
@@ -120,88 +119,20 @@ internal class JukeboxUIState : ExxoUIState
             };
             interFace?.Grid.Append(jukeboxTrack);
         }
-        if (ExxoAvalonOrigins.MusicMod != null)
+        // modded tracks
+        foreach (int i in AvalonJukeboxPlayer.TracksByItemID.Keys)
         {
-            foreach (int i in AvalonJukeboxPlayer.AvalonTracks)
+            var jukeboxTrack = new ExxoUIItemSlot(TextureAssets.InventoryBack7, i);
+            jukeboxTrack.OnLeftClick += (_, listeningElement) =>
             {
-                var jukeboxTrack = new ExxoUIItemSlot(TextureAssets.InventoryBack7, i);
-                jukeboxTrack.OnLeftClick += (_, listeningElement) =>
-                {
-                    string str = Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying");
-                    if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxArmageddonSlime>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/ArmageddonSlime");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxArmageddonSlime.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxBacteriumPrime>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxBacteriumPrime.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxContagion>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Contagion");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxContagion.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxDarkMatter>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DarkMatter");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxDarkMatter.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeak>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeak");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxDesertBeak.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxHellCastle>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Hellcastle");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxHellCastle.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxPhantasm>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Phantasm");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxPhantasm.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxSkyFortress>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/SkyFortress");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxSkyFortress.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxTuhrtlOutpost>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/TuhrtlOutpost");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxTuhrtlOutpost.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    else if (i == ModContent.ItemType<Items.MusicBoxes.MusicBoxUndergroundContagion>())
-                    {
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                        Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/UndergroundContagion");
-                        str += Language.GetTextValue("Mods.Avalon.Items.MusicBoxUndergroundContagion.DisplayName")
-                            .Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
-                    }
-                    Main.NewText(str);
-                };
-                interFace?.Grid.Append(jukeboxTrack);
-            }
-        }    
+                Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
+                Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = AvalonJukeboxPlayer.TracksByItemID[i];
+
+                Main.NewText(Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
+                    Lang.GetItemName(AvalonJukeboxPlayer.TracksByMusicID[AvalonJukeboxPlayer.TracksByItemID[i]])
+                    .ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", ""));
+            };
+            interFace?.Grid.Append(jukeboxTrack);
+        }
     }
 }

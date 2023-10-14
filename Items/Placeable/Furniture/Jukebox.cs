@@ -25,9 +25,9 @@ public class Jukebox : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.MusicBox, 3)
-            .AddRecipeGroup("Avalon:GoldBar", 20)
-            .AddIngredient(ItemID.FallenStar, 25)
+            .AddRecipeGroup("Avalon:MusicBoxes", 3)
+            .AddRecipeGroup("Avalon:GoldBar", 15)
+            .AddIngredient(ItemID.FallenStar, 20)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }

@@ -11,6 +11,8 @@ using Avalon.Items.Placeable.Furniture.YellowDungeon;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Common.Players;
+using System.Collections.Generic;
 
 namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
@@ -26,6 +28,13 @@ public class RecipeSystem : ModSystem
             group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>());
             group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>());
         }
+
+        List<int> boxesList = AvalonJukeboxPlayer.JukeboxTracks;
+        boxesList.AddRange(AvalonJukeboxPlayer.AvalonTracks);
+        int[] boxes = boxesList.ToArray();
+
+        var groupMusicBoxes = new RecipeGroup(() => "Any Music Box", boxes);
+        RecipeGroup.RegisterGroup("Avalon:MusicBoxes", groupMusicBoxes);
 
         var groupGemStaves = new RecipeGroup(() => "Any Gem Staff", new int[]
         {

@@ -1,6 +1,10 @@
+using Avalon.Common.Players;
+using Avalon.Hooks;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Shards;
+using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -262,5 +266,23 @@ public class RecipeChanger : ModSystem
             }
         }
         #endregion
+
+
+        Dictionary<int, int> MusicLoader_ItemToMusic = (Dictionary<int, int>)typeof(MusicLoader).GetField("itemToMusic", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+
+        for (int musicID = 0; musicID < MusicLoader.MusicCount; musicID++)
+        {
+            for (int itemID = 0; itemID < ItemLoader.ItemCount; itemID++)
+            {
+                if (MusicLoader_ItemToMusic.ContainsKey(itemID))
+                {
+                    if (MusicLoader_ItemToMusic[itemID] == musicID)
+                    {
+                        AvalonJukeboxPlayer.TracksByItemID.Add(itemID, musicID);
+                        AvalonJukeboxPlayer.TracksByMusicID.Add(musicID, itemID);
+                    }
+                }
+            }
+        }
     }
 }
