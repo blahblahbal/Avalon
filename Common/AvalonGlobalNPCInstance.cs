@@ -31,6 +31,7 @@ public class AvalonGlobalNPCInstance : GlobalNPC
     public bool Inferno { get; set; }
     public bool Pathogen { get; set; }
     public bool ShowStats { get; set; }
+    public bool Wormed { get; set; }
 
     public override void ResetEffects(NPC npc)
     {
@@ -41,6 +42,7 @@ public class AvalonGlobalNPCInstance : GlobalNPC
         Virulent = false;
         Inferno = false;
         Pathogen = false;
+        Wormed = false;
         //BleedStacks = 1;
     }
 
@@ -83,6 +85,19 @@ public class AvalonGlobalNPCInstance : GlobalNPC
             npc.lifeRegen -= 8;
             if (npc.velocity != Vector2.Zero)
                 npc.lifeRegen -= 40;
+            if (damage < 4)
+            {
+                damage = 4;
+            }
+        }
+        if (Wormed)
+        {
+            if (npc.lifeRegen > 0)
+            {
+                npc.lifeRegen = 0;
+            }
+
+            npc.lifeRegen -= 16;
             if (damage < 4)
             {
                 damage = 4;

@@ -6826,6 +6826,11 @@ Mods: {
 				DisplayName: Jukebox
 				Tooltip: Used to play tunes
 			}
+
+			AnchorWhipworm: {
+				DisplayName: Anchor Whipworm
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -6998,6 +7003,8 @@ Mods: {
 			VirulentScythe.DisplayName: Virulent Scythe
 			ContagionSpray.DisplayName: Contagion Spray
 			JungleSpray.DisplayName: Jungle Spray
+			AnchorWhipwormProjectile.DisplayName: Anchor Whipworm Projectile
+			Worm.DisplayName: Worm
 		}
 
 		NPCs: {
@@ -7609,6 +7616,11 @@ Mods: {
 			CoughCooldown: {
 				DisplayName: Cough Cooldown
 				Description: It is surprisingly difficult to cough
+			}
+
+			Wormed: {
+				DisplayName: Wormed
+				Description: Mods.Avalon.Buffs.Wormed.Description
 			}
 		}
 

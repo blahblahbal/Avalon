@@ -34,17 +34,6 @@ public class BloodyArrow : ModProjectile
     {
         gravityTimer = reader.ReadSingle();
     }
-    
-    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-    {
-        //projectile.velocity *= 0f;
-        //projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().bloodArrowPos = projectile.position;
-        //if (Projectile.ai[0] == 0) target.AddBuff(ModContent.BuffType<Buffs.Bleeding>(), 8 * 60);
-        //if (target.GetGlobalNPC<AvalonGlobalNPCInstance>().bleedStacks < 3)
-        //{
-        //    target.GetGlobalNPC<AvalonGlobalNPCInstance>().bleedStacks++;
-        //}
-    }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
