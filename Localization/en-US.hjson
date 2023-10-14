@@ -195,6 +195,8 @@ Mods: {
 			MandibleBlade: Throws sand that confuses your enemies
 		}
 
+		Jukebox.Name: Jukebox
+
 		Herbology: {
 			BenchName: Herbology Bench
 			Help: Help
@@ -6812,6 +6814,16 @@ Mods: {
 
 			JungleHammer: {
 				DisplayName: Jungle Hammer
+				Tooltip: ""
+			}
+
+			STOP: {
+				DisplayName: S T O P
+				Tooltip: ""
+			}
+
+			Jukebox: {
+				DisplayName: Jukebox
 				Tooltip: ""
 			}
 		}
