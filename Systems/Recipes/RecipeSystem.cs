@@ -1,6 +1,7 @@
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Herbs;
+using Avalon.Items.Placeable.Crafting;
 using Avalon.Items.Placeable.Furniture.BleachedEbony;
 using Avalon.Items.Placeable.Furniture.Coughwood;
 using Avalon.Items.Placeable.Furniture.OrangeDungeon;
@@ -41,53 +42,53 @@ public class RecipeSystem : ModSystem
         });
         RecipeGroup.RegisterGroup("Avalon:GemStaves", groupGemStaves);
 
-        //var groupSilverBarMagicStorage = new RecipeGroup(() => "Any Silver Bar", new int[]
-        //{
-        //    ItemID.SilverBar,
-        //    ItemID.TungstenBar,
-        //    ModContent.ItemType<ZincBar>()
-        //});
-        //RecipeGroup.RegisterGroup("MagicStorage:AnySilverBar", groupSilverBarMagicStorage);
+        var groupSilverBarMagicStorage = new RecipeGroup(() => "Any Silver Bar", new int[]
+        {
+            ItemID.SilverBar,
+            ItemID.TungstenBar,
+            ModContent.ItemType<ZincBar>()
+        });
+        RecipeGroup.RegisterGroup("MagicStorage:AnySilverBar", groupSilverBarMagicStorage);
 
-        //var groupMythrilBarMagicStorage = new RecipeGroup(() => "Any Mythril Bar", new int[]
-        //{
-        //    ItemID.MythrilBar,
-        //    ItemID.OrichalcumBar,
-        //    ModContent.ItemType<NaquadahBar>()
-        //});
-        //RecipeGroup.RegisterGroup("MagicStorage:AnyMythrilBar", groupMythrilBarMagicStorage);
+        var groupMythrilBarMagicStorage = new RecipeGroup(() => "Any Mythril Bar", new int[]
+        {
+            ItemID.MythrilBar,
+            ItemID.OrichalcumBar,
+            ModContent.ItemType<NaquadahBar>()
+        });
+        RecipeGroup.RegisterGroup("MagicStorage:AnyMythrilBar", groupMythrilBarMagicStorage);
 
-        //var groupHMAnvilMagicStorage = new RecipeGroup(() => "Any Mythril Anvil", new int[]
-        //{
-        //    ItemID.MythrilAnvil,
-        //    ItemID.OrichalcumAnvil,
-        //    ModContent.ItemType<NaquadahAnvil>()
-        //});
-        //RecipeGroup.RegisterGroup("MagicStorage:AnyHmAnvil", groupHMAnvilMagicStorage);
+        var groupHMAnvilMagicStorage = new RecipeGroup(() => "Any Mythril Anvil", new int[]
+        {
+            ItemID.MythrilAnvil,
+            ItemID.OrichalcumAnvil,
+            ModContent.ItemType<NaquadahAnvil>()
+        });
+        RecipeGroup.RegisterGroup("MagicStorage:AnyHmAnvil", groupHMAnvilMagicStorage);
 
-        //var groupHMFurnaceMagicStorage = new RecipeGroup(() => "Any Adamantite Forge", new int[]
-        //{
-        //    ItemID.AdamantiteForge,
-        //    ItemID.TitaniumForge,
-        //    ModContent.ItemType<TroxiniumForge>()
-        //});
-        //RecipeGroup.RegisterGroup("MagicStorage:AnyHmFurnace", groupHMFurnaceMagicStorage);
+        var groupHMFurnaceMagicStorage = new RecipeGroup(() => "Any Adamantite Forge", new int[]
+        {
+            ItemID.AdamantiteForge,
+            ItemID.TitaniumForge,
+            ModContent.ItemType<TroxiniumForge>()
+        });
+        RecipeGroup.RegisterGroup("MagicStorage:AnyHmFurnace", groupHMFurnaceMagicStorage);
 
-        //var groupDemoniteBarMagicStorage = new RecipeGroup(() => "Any Demonite Bar", new int[]
-        //{
-        //    ItemID.DemoniteBar,
-        //    ItemID.CrimtaneBar,
-        //    ModContent.ItemType<PandemiteBar>()
-        //});
-        //RecipeGroup.RegisterGroup("MagicStorage:AnyDemoniteBar", groupDemoniteBarMagicStorage);
+        var groupDemoniteBarMagicStorage = new RecipeGroup(() => "Any Demonite Bar", new int[]
+        {
+            ItemID.DemoniteBar,
+            ItemID.CrimtaneBar,
+            ModContent.ItemType<BacciliteBar>()
+        });
+        RecipeGroup.RegisterGroup("MagicStorage:AnyDemoniteBar", groupDemoniteBarMagicStorage);
 
-        //var groupDemonAltarMagicStorage = new RecipeGroup(() => "Any Demon Altar", new int[]
-        //{
-        //    ModContent.ItemType<DemonAltar>(),
-        //    ModContent.ItemType<CrimsonAltar>(),
-        //    ModContent.ItemType<IckyAltar>()
-        //});
-        //RecipeGroup.RegisterGroup("MagicStorage:AnyDemonAltar", groupDemonAltarMagicStorage);
+        var groupDemonAltarMagicStorage = new RecipeGroup(() => "Any Demon Altar", new int[]
+        {
+            ModContent.ItemType<DemonAltar>(),
+            ModContent.ItemType<CrimsonAltar>(),
+            ModContent.ItemType<IckyAltar>()
+        });
+        RecipeGroup.RegisterGroup("MagicStorage:AnyDemonAltar", groupDemonAltarMagicStorage);
 
         var groupTombstones = new RecipeGroup(() => "Any Tombstone", new int[]
         {

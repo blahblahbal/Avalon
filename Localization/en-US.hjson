@@ -195,7 +195,12 @@ Mods: {
 			MandibleBlade: Throws sand that confuses your enemies
 		}
 
-		Jukebox.Name: Jukebox
+		Jukebox: {
+			Name: Jukebox
+			NowPlaying: "Now playing: "
+			Stop: Stop playing
+			StoppedPlaying: Stopped playing tunes
+		}
 
 		Herbology: {
 			BenchName: Herbology Bench
@@ -6817,14 +6822,9 @@ Mods: {
 				Tooltip: ""
 			}
 
-			STOP: {
-				DisplayName: S T O P
-				Tooltip: ""
-			}
-
 			Jukebox: {
 				DisplayName: Jukebox
-				Tooltip: ""
+				Tooltip: Used to play tunes
 			}
 		}
 

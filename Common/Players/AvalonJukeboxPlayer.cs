@@ -45,11 +45,11 @@ namespace Avalon.Common.Players
             ItemID.MusicBoxAltUnderground,
             ItemID.MusicBoxFrostMoon,
             ItemID.MusicBoxUndergroundCrimson,
-            ItemID.MusicBoxTowers,
+            ItemID.MusicBoxLunarBoss,
+            ItemID.MusicBoxMartians,
             ItemID.MusicBoxPirates,
             ItemID.MusicBoxHell,
-            ItemID.MusicBoxMartians,
-            ItemID.MusicBoxLunarBoss,
+            ItemID.MusicBoxTowers,
             ItemID.MusicBoxGoblins,
             ItemID.MusicBoxSandstorm,
             ItemID.MusicBoxDD2,
@@ -101,7 +101,20 @@ namespace Avalon.Common.Players
             ItemID.MusicBoxCredits,
             ItemID.MusicBoxDeerclops,
             ItemID.MusicBoxShimmer,
-            ModContent.ItemType<Items.Other.STOP>(),
+        };
+
+        public static List<int> AvalonTracks = new List<int>
+        {
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxArmageddonSlime>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxBacteriumPrime>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxContagion>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxDarkMatter>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeak>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxHellCastle>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxPhantasm>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxSkyFortress>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxTuhrtlOutpost>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxUndergroundContagion>()
         };
 
         public bool DisplayJukeboxInterface { get; set; }

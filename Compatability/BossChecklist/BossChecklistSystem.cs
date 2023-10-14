@@ -31,6 +31,21 @@ namespace Avalon.Compatability.BossChecklist
                     // Other optional arguments as needed...
                 }
             );
+
+            bossChecklist.Call(
+                "LogBoss",
+                Mod,
+                nameof(DesertBeak),
+                6f,
+                () => ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak,
+                ModContent.NPCType<DesertBeak>(),
+                new Dictionary<string, object>()
+                {
+                    ["spawnItems"] = ModContent.ItemType<TheBeak>(),
+                    ["collectibles"] = new List<int> { ModContent.ItemType<DesertBeakMask>(), ModContent.ItemType<DesertBeakTrophy>() } //, ModContent.ItemType<BacteriumPrimeRelic>() }
+                    // Other optional arguments as needed...
+                }
+            );
         }
     }
 }

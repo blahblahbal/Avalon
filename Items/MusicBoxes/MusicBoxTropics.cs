@@ -10,8 +10,8 @@ class MusicBoxTropics : ModItem
     {
         ItemID.Sets.CanGetPrefixes[Type] = false;
         Item.ResearchUnlockCount = 1;
-        if (ExxoAvalonOrigins.MusicMod != null)
-            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Tropics"), ModContent.ItemType<MusicBoxTropics>(), ModContent.TileType<Tiles.MusicBoxes>(), 180);
+        //if (ExxoAvalonOrigins.MusicMod != null)
+        //    MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Tropics"), ModContent.ItemType<MusicBoxTropics>(), ModContent.TileType<Tiles.MusicBoxes>(), 180);
     }
 
     public override void SetDefaults()
