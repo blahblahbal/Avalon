@@ -7605,6 +7605,11 @@ Mods: {
 				DisplayName: Gastropod
 				Description: The gastropod will fight for you
 			}
+
+			CoughCooldown: {
+				DisplayName: Cough Cooldown
+				Description: It is surprisingly difficult to cough
+			}
 		}
 
 		Tiles: {

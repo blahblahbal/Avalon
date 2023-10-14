@@ -15,25 +15,38 @@ namespace Avalon.Projectiles
             Projectile.damage = 0;
             Projectile.friendly = true;
             Projectile.timeLeft = 900;
+            Projectile.tileCollide = false;
+            Projectile.scale = 0.75f;
+            Projectile.alpha = 128;
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            ClassExtensions.DrawGas(Texture, lightColor, Projectile, -3, 8);
+            ClassExtensions.DrawGas(Texture, lightColor * 0.8f, Projectile, 4, 6);
             return false;
         }
         public override void AI()
         {
-            Projectile.ai[0]++;
             Projectile.ai[1]++;
-            if (Projectile.ai[0] > 15)
+            if (Projectile.ai[2] > 1)
             {
-                Projectile.velocity.Y += 0.05f;
-                Projectile.ai[0] = 0;
+                Projectile.alpha += 1;
+                if (Projectile.ai[1] % 10 == 0)
+                {
+                    Projectile.damage--;
+                }
             }
-            if (Projectile.ai[1] % 10 == 0)
-            {
-                Projectile.velocity.X *= 0.95f;
-            }
+            else
+                Projectile.alpha -= 3;
+
+            if (Projectile.alpha <= 100)
+                Projectile.ai[2]++;
+
+            if (Projectile.alpha == 255) Projectile.Kill();
+
+            Projectile.velocity = Projectile.velocity.RotatedByRandom(0.1f) * 0.985f;
+            Projectile.rotation += MathHelper.Clamp(Projectile.velocity.Length() * 0.03f, -0.6f, 0.6f);
+            Projectile.scale += 0.01f;
+            Projectile.Resize((int)(32 * Projectile.scale), (int)(32 * Projectile.scale));
 
             bool[] decreaseDebuffTime = new bool[Main.player[Projectile.owner].buffType.Length];
             for (int i = 0; i < Main.npc.Length; i++)

@@ -118,7 +118,6 @@ public class AvalonPlayer : ModPlayer
     #endregion
 
     public bool CougherMask;
-    public int CoughCooldown = 60 * 30;
 
     #region accessories
     public bool PulseCharm;
@@ -179,6 +178,7 @@ public class AvalonPlayer : ModPlayer
     public bool BloodCasting;
     public bool Vision;
     public float ForceFieldRotation;
+    public bool CoughCooldown;
 
     public bool HungryMinion;
     public bool GastroMinion;
@@ -195,7 +195,7 @@ public class AvalonPlayer : ModPlayer
     public int OldFallStart;
     public override void ResetEffects()
     {
-
+        CoughCooldown = false;
         if (DarkMatterTimeOut-- < 0)
         {
             DarkMatterMonolith = false;
@@ -696,8 +696,6 @@ public class AvalonPlayer : ModPlayer
 
     public override void PostUpdate()
     {
-        CoughCooldown--;
-        if (CoughCooldown < 0) CoughCooldown = 0;
 
         if (InertiaBoots)
         {

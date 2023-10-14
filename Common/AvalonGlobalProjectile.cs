@@ -27,11 +27,16 @@ internal class AvalonGlobalProjectile : GlobalProjectile
     public override bool CanHitPlayer(Projectile projectile, Player target)
     {
         if (target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.PoisonDartTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.VenomDartTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.GasTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.Explosives ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.Landmine ||
             target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.SpearTrap ||
             target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.FlamesTrap ||
             target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.FlamethrowerTrap ||
             target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.SpikyBallTrap ||
             target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.GeyserTrap ||
+            target.GetModPlayer<AvalonPlayer>().TrapImmune && ProjectileID.Sets.IsAGravestone[projectile.type] ||
             target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.Boulder ||
             target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.BouncyBoulder ||
             target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.MiniBoulder ||

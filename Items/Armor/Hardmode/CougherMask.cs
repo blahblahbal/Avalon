@@ -1,3 +1,4 @@
+using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ class CougherMask : ModItem
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 2);
         Item.height = dims.Height;
+        Item.defense = 8;
     }
     public override void ModifyTooltips(List<TooltipLine> tooltips)
     {
@@ -35,7 +37,7 @@ class CougherMask : ModItem
     public override void UpdateEquip(Player player)
     {
         player.GetModPlayer<AvalonPlayer>().CougherMask = true;
-        if (player.PlayerDoublePressedSetBonusActivateKey() && player.GetModPlayer<AvalonPlayer>().CoughCooldown == 0)
+        if (player.PlayerDoublePressedSetBonusActivateKey() && !player.GetModPlayer<AvalonPlayer>().CoughCooldown)
         {
             if (Main.rand.NextBool(300))
             {
@@ -57,9 +59,11 @@ class CougherMask : ModItem
                     MaxInstances = 10,
                 }, player.Center);
             }
+            Vector2 CoughSpawnPoint = player.MountedCenter;
             int proj = Projectile.NewProjectile(player.GetSource_Accessory(Item),
-                player.Center, new Vector2(3, 0) * player.direction, ModContent.ProjectileType<Projectiles.PlayerCough>(), 0, 0, player.whoAmI);
-            player.GetModPlayer<AvalonPlayer>().CoughCooldown = 1800;
+                CoughSpawnPoint, CoughSpawnPoint.DirectionTo(Main.MouseWorld) * new Vector2(6,3), ModContent.ProjectileType<Projectiles.PlayerCough>(), 0, 0, player.whoAmI);
+            player.AddBuff(ModContent.BuffType<CoughCooldown>(),1800);
+            //player.GetModPlayer<AvalonPlayer>().CoughCooldown = 1800 / 30;
         }
     }
 }

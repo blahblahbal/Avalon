@@ -21,7 +21,8 @@ public class HungrySummon : ModProjectile
         Main.projPet[Projectile.type] = true; // Denotes that this projectile is a pet or minion
 
         ProjectileID.Sets.MinionSacrificable[Projectile.type] = true; // This is needed so your minion can properly spawn when summoned and replaced when other minions are summoned
-        ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
+                                                                      //ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
+        ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
     }
     public override bool? CanCutTiles()
     {
@@ -71,16 +72,13 @@ public class HungrySummon : ModProjectile
     public override void AI()
     {
         Player player = Main.player[Projectile.owner];
-        if (Projectile.type == ModContent.ProjectileType<HungrySummon>())
+        if (Main.player[Projectile.owner].dead)
         {
-            if (Main.player[Projectile.owner].dead)
-            {
-                player.ClearBuff(ModContent.BuffType<Hungry>());
-            }
-            if (player.HasBuff(ModContent.BuffType<Hungry>()) && Projectile.timeLeft <= 2)
-            {
-                Projectile.timeLeft = 2;
-            }
+            player.ClearBuff(ModContent.BuffType<Hungry>());
+        }
+        if (player.HasBuff(ModContent.BuffType<Hungry>()) && Projectile.timeLeft <= 2)
+        {
+            Projectile.timeLeft = 2;
         }
 
         if (Vector2.Distance(Projectile.position, player.position) > 5000)
