@@ -1,18 +1,18 @@
-using Avalon.WorldGeneration.Enums;
-using System.Collections.Generic;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.WorldBuilding;
-using Terraria.ID;
-using Microsoft.Xna.Framework;
-using Terraria.GameContent.Generation;
-using Terraria.Utilities;
-using Terraria.IO;
 using System;
-using ReLogic.Utilities;
-using Avalon.Walls;
-using Avalon.Tiles.Contagion;
+using System.Collections.Generic;
 using Avalon.Common;
+using Avalon.Tiles.Contagion;
+using Avalon.Walls;
+using Avalon.WorldGeneration.Enums;
+using Microsoft.Xna.Framework;
+using ReLogic.Utilities;
+using Terraria;
+using Terraria.GameContent.Generation;
+using Terraria.ID;
+using Terraria.IO;
+using Terraria.ModLoader;
+using Terraria.Utilities;
+using Terraria.WorldBuilding;
 
 namespace Avalon.WorldGeneration;
 
@@ -256,7 +256,7 @@ public class HardmodeGen : ModSystem
 
                     int type = Main.tile[m, n].TileType;
 
-                    if (Data.Sets.Tile.Conversion.Vines[type])
+                    if (TileID.Sets.IsVine[type])
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<ContagionVines>();
                     }

@@ -39,19 +39,8 @@ namespace Avalon.Data.Sets
             TileID.HallowedPlants,
             TileID.JunglePlants
             );
-
-            public static bool[] Vines = TileID.Sets.Factory.CreateBoolSet(
-                TileID.Vines,
-                TileID.VineFlowers,
-                TileID.CorruptVines,
-                TileID.CrimsonVines,
-                TileID.HallowedVines,
-                TileID.JungleVines
-                );
         }
-
         
-
         public static bool[] RiftOres = TileID.Sets.Factory.CreateBoolSet(TileID.Copper, TileID.Tin,
             TileID.Iron, TileID.Lead, TileID.Silver, TileID.Tungsten, TileID.Gold, TileID.Platinum,
             TileID.Demonite, TileID.Crimtane, TileID.Cobalt, TileID.Palladium, TileID.Mythril, TileID.Orichalcum,

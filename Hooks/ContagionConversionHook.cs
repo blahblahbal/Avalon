@@ -1,5 +1,7 @@
 using Avalon.Common;
 using Avalon.Tiles.Contagion;
+using Avalon.WorldGeneration.Helpers;
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Terraria;
 using Terraria.ID;
@@ -8,20 +10,68 @@ using Tile = Avalon.Data.Sets.Tile;
 
 namespace Avalon.Hooks;
 
-internal class ContagionStalac : ModHook
+internal class ContagionConversionHook : ModHook
 {
     protected override void Apply()
     {
         On_WorldGen.GetDesiredStalagtiteStyle += On_WorldGen_GetDesiredStalactiteStyle;
+        
         IL_WorldGen.PaintTheSand += IL_AddStalacCheck;
         IL_WorldGen.PlaceTile += IL_AddStalacCheck;
         IL_WorldGen.PlaceTight += IL_AddStalacCheck;
-        IL_WorldGen.TileFrame += IL_AddStalacCheck;
         IL_WorldGen.BlockBelowMakesSandFall += IL_AddStalacCheck;
+        
+        IL_WorldGen.TileFrame += IL_AddStalacCheck;
+        IL_WorldGen.TileFrame += IL_WorldGen_TileFrame;
+        
         IL_WorldGen.UpdateWorld_OvergroundTile += IL_AddStalacCheck;
+        On_WorldGen.UpdateWorld_OvergroundTile += On_WorldGen_UpdateWorld_OvergroundTile;
+        
         IL_WorldGen.UpdateWorld_UndergroundTile += IL_AddStalacCheck;
+        On_WorldGen.UpdateWorld_UndergroundTile += On_WorldGen_UpdateWorld_UndergroundTile;
+        
         IL_WorldGen.ReplaceTile_EliminateNaturalExtras += IL_AddStalacCheck;
         On_WorldGen.IsFitToPlaceFlowerIn += On_WorldGen_IsFitToPlaceFlowerIn;
+    }
+
+    private static void IL_WorldGen_TileFrame(ILContext il)
+    {
+        var cursor = new ILCursor(il);
+
+        cursor.GotoNext(MoveType.Before, i => i.MatchStloc(121));
+        cursor.Emit(OpCodes.Ldloc, 84); // up
+        cursor.EmitDelegate((ushort origValue, int up) =>
+        {
+            if (up == ModContent.TileType<ContagionVines>() || up == ModContent.TileType<ContagionJungleGrass>() || up == ModContent.TileType<Ickgrass>())
+            {
+                return (ushort)ModContent.TileType<ContagionVines>();
+            }
+            return origValue;
+        });
+
+        cursor.GotoNext(MoveType.Before, i => i.MatchStloc(122));
+        cursor.Emit(OpCodes.Ldloc, 3); // num
+        cursor.Emit(OpCodes.Ldloc, 84); // up
+        cursor.EmitDelegate((bool origValue, int num, int up) =>
+        {
+            if (num == ModContent.TileType<ContagionVines>() && up != ModContent.TileType<ContagionJungleGrass>() && up != ModContent.TileType<Ickgrass>())
+            {
+                return true;
+            }
+            return origValue;
+        });
+    }
+
+    private void On_WorldGen_UpdateWorld_OvergroundTile(On_WorldGen.orig_UpdateWorld_OvergroundTile orig, int x, int y, bool checkNPCSpawns, int wallDist)
+    {
+        orig(x, y, checkNPCSpawns, wallDist);
+        VineHelper.VineRandomUpdate(x, y, 20, 60);
+    }
+
+    private void On_WorldGen_UpdateWorld_UndergroundTile(On_WorldGen.orig_UpdateWorld_UndergroundTile orig, int x, int y, bool checkNPCSpawns, int wallDist)
+    {
+        orig(x, y, checkNPCSpawns, wallDist);
+        VineHelper.VineRandomUpdate(x, y, 7, 70);
     }
 
     private static bool On_WorldGen_IsFitToPlaceFlowerIn(On_WorldGen.orig_IsFitToPlaceFlowerIn orig, int x, int y, int typeAttemptedToPlace)
