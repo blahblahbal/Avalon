@@ -59,6 +59,38 @@ public class AvalonPlayer : ModPlayer
     }
     #endregion
 
+    #region reflector
+    public LinkedList<int> Reflectors { get; } = new();
+    public float ReflectorStaffRotation { get; set; }
+    public LinkedListNode<int> HandleReflectorSummon() => Reflectors.AddLast(Reflectors.Count);
+    public void RemoveReflectorSummon(LinkedListNode<int> linkedListNode)
+    {
+        LinkedListNode<int> nextNode = linkedListNode.Next;
+        while (nextNode != null)
+        {
+            nextNode.Value--;
+            nextNode = nextNode.Next;
+        }
+
+        Reflectors.Remove(linkedListNode);
+    }
+    public LinkedListNode<int> ObtainExistingReflectorSummon(int index)
+    {
+        int diff = index + 1 - Reflectors.Count;
+        if (diff > 0)
+        {
+            for (int i = 0; i < diff; i++)
+            {
+                Reflectors.AddLast(Reflectors.Count);
+            }
+
+            return Reflectors.Last;
+        }
+
+        return Reflectors.Find(index);
+    }
+    #endregion
+
     public byte FartTimer = 0;
     public int RocketDustTimer = 0;
     public bool DarkMatterMonolith { get; set; }
@@ -438,6 +470,8 @@ public class AvalonPlayer : ModPlayer
         PlanetRotation[6] = (PlanetRotation[6] % MathHelper.TwoPi) + 0.042f;
         PlanetRotation[7] = (PlanetRotation[7] % MathHelper.TwoPi) + 0.05f;
         PlanetRotation[8] = (PlanetRotation[8] % MathHelper.TwoPi) + 0.035f;
+
+        ReflectorStaffRotation = (ReflectorStaffRotation % MathHelper.TwoPi) + 0.01f;
     }
     public override void UpdateBadLifeRegen()
     {

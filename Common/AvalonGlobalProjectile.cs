@@ -23,7 +23,27 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             projectile.Kill();
         }
     }
+    public static int FindClosestHostile(Vector2 pos, float dist)
+    {
+        int closest = -1;
+        float last = dist;
+        for (int i = 0; i < Main.projectile.Length; i++)
+        {
+            Projectile p = Main.projectile[i];
+            if (!p.active || !p.hostile)
+            {
+                continue;
+            }
 
+            if (Vector2.Distance(pos, p.Center) < last)
+            {
+                last = Vector2.Distance(pos, p.Center);
+                closest = i;
+            }
+        }
+
+        return closest;
+    }
     public override bool CanHitPlayer(Projectile projectile, Player target)
     {
         if (target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.PoisonDartTrap ||

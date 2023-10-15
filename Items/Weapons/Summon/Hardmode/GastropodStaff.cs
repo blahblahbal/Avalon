@@ -31,10 +31,10 @@ class GastropodStaff : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.HallowedBar, 14)
+            .AddIngredient(ItemID.CrystalShard, 30)
             .AddIngredient(ItemID.Gel, 100)
             .AddIngredient(ItemID.SoulofLight, 20)
-            .AddIngredient(ItemID.SoulofNight, 5)
+            .AddIngredient(ItemID.PixieDust, 20)
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }
