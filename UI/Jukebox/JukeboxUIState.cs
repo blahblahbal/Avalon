@@ -119,7 +119,7 @@ internal class JukeboxUIState : ExxoUIState
             };
             interFace?.Grid.Append(jukeboxTrack);
         }
-        
+
         // modded tracks
         foreach (int i in AvalonJukeboxPlayer.TracksByItemID.Keys)
         {

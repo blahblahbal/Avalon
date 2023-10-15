@@ -112,7 +112,8 @@ namespace Avalon.Common.Players
             ModContent.ItemType<Items.MusicBoxes.MusicBoxPhantasm>(),
             ModContent.ItemType<Items.MusicBoxes.MusicBoxSkyFortress>(),
             ModContent.ItemType<Items.MusicBoxes.MusicBoxTuhrtlOutpost>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxUndergroundContagion>()
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxUndergroundContagion>(),
+            ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeakOtherworldly>(),
         };
 
         public static Dictionary<int, int> TracksByItemID = new Dictionary<int, int>

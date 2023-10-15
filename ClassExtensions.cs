@@ -26,6 +26,13 @@ public static class ClassExtensions
 
         return p;
     }
+
+    public static bool DownedAllButOneMechBoss()
+    {
+        return NPC.downedMechBoss1 && NPC.downedMechBoss2 && !NPC.downedMechBoss3 ||
+            NPC.downedMechBoss1 && !NPC.downedMechBoss2 && NPC.downedMechBoss3 ||
+            !NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3;
+    }
     public static Vector2 LengthClamp(this Vector2 vector,float max, float min = 0)
     {
         if (vector.Length() > max) return Vector2.Normalize(vector) * max;

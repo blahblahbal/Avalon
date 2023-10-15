@@ -37,6 +37,6 @@ public class StatDisplayUIThing : ExxoUIPanelWrapper<ExxoUIList>
                                      " Magic crit damage: " + player.GetModPlayer<AvalonPlayer>().MagicCritDamage + "%\n" +
                                      " Melee crit damage: " + player.GetModPlayer<AvalonPlayer>().MeleeCritDamage + "%\n" +
                                      "Ranged crit damage: " + player.GetModPlayer<AvalonPlayer>().RangedCritDamage + "%\n" +
-                                     "            Deaths: " + player.GetModPlayer<AvalonPlayer>().DeathCounter);
+                                     "Deaths to monsters: " + player.numberOfDeathsPVE);
     }
 }

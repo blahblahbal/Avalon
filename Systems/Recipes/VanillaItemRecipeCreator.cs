@@ -57,6 +57,13 @@ public class VanillaItemRecipeCreator : ModSystem
         Recipe.Create(ItemID.ObsidianPants).AddIngredient(ItemID.Silk, 10).AddIngredient(ItemID.Obsidian, 20).AddIngredient(ModContent.ItemType<Booger>(), 5).AddTile(TileID.Hellforge).Register();
         #endregion
 
+        #region Hardmode Furnace
+        Recipe.Create(ItemID.HallowedBar)
+            .AddIngredient(ModContent.ItemType<HallowedOre>(), 5)
+            .AddTile(TileID.AdamantiteForge)
+            .Register();
+        #endregion
+
         #region Workbenches
         Recipe.Create(ItemID.FlinxStaff).AddIngredient(ItemID.FlinxFur, 6).AddIngredient(ModContent.ItemType<BismuthBar>(), 10).AddTile(TileID.WorkBenches).Register();
         Recipe.Create(ItemID.PeaceCandle).AddIngredient(ModContent.ItemType<BismuthBar>(), 2).AddIngredient(ItemID.PinkTorch).AddTile(TileID.WorkBenches).Register();

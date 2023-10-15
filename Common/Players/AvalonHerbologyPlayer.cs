@@ -237,44 +237,44 @@ public class AvalonHerbologyPlayer : ModPlayer
     /// <inheritdoc />
     public override void SaveData(TagCompound tag)
     {
-        tag["Tier"] = (int)Tier;
-        tag["HerbTotal"] = HerbTotal;
-        tag["PotionTotal"] = PotionTotal;
-        tag["HerbCounts"] = HerbCounts.Save();
-        tag["HerbExchangeUnlocked"] = HerbExchangeUnlocked.Save();
+        tag["Avalon:Tier"] = (int)Tier;
+        tag["Avalon:HerbTotal"] = HerbTotal;
+        tag["Avalon:PotionTotal"] = PotionTotal;
+        tag["Avalon:HerbCounts"] = HerbCounts.Save();
+        tag["Avalon:HerbExchangeUnlocked"] = HerbExchangeUnlocked.Save();
     }
 
     /// <inheritdoc />
     public override void LoadData(TagCompound tag)
     {
-        if (tag.ContainsKey("Tier"))
+        if (tag.ContainsKey("Avalon:Tier"))
         {
-            Tier = (HerbTier)tag.GetAsInt("Tier");
+            Tier = (HerbTier)tag.GetAsInt("Avalon:Tier");
         }
-        if (tag.ContainsKey("HerbTotal"))
+        if (tag.ContainsKey("Avalon:HerbTotal"))
         {
-            HerbTotal = tag.GetAsInt("HerbTotal");
+            HerbTotal = tag.GetAsInt("Avalon:HerbTotal");
         }
-        if (tag.ContainsKey("PotionTotal"))
+        if (tag.ContainsKey("Avalon:PotionTotal"))
         {
-            PotionTotal = tag.GetAsInt("PotionTotal");
+            PotionTotal = tag.GetAsInt("Avalon:PotionTotal");
         }
-        if (tag.ContainsKey("HerbCounts"))
+        if (tag.ContainsKey("Avalon:HerbCounts"))
         {
             try
             {
-                HerbCounts.Load(tag.Get<TagCompound>("HerbCounts"));
+                HerbCounts.Load(tag.Get<TagCompound>("Avalon:HerbCounts"));
             }
             catch
             {
                 HerbCounts = new Dictionary<int, int>();
             }
         }
-        if (tag.ContainsKey("HerbExchangeUnlocked"))
+        if (tag.ContainsKey("Avalon:HerbExchangeUnlocked"))
         {
             try
             {
-                HerbExchangeUnlocked.Load(tag.Get<TagCompound>("HerbExchangeUnlocked"));
+                HerbExchangeUnlocked.Load(tag.Get<TagCompound>("Avalon:HerbExchangeUnlocked"));
             }
             catch
             {

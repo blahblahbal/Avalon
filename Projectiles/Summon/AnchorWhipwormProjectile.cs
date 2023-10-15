@@ -20,7 +20,7 @@ namespace Avalon.Projectiles.Summon
         {
             // This method quickly sets the whip's properties.
             Projectile.DefaultToWhip();
-
+            Projectile.width = 40;
             // use these to change from the vanilla defaults
             // Projectile.WhipSettings.Segments = 20;
             // Projectile.WhipSettings.RangeMultiplier = 1f;
@@ -42,25 +42,7 @@ namespace Avalon.Projectiles.Summon
         // If you remove this, also remove Item.channel = true from the item's SetDefaults.
         public override bool PreAI()
         {
-            Player owner = Main.player[Projectile.owner];
-
-            // Like other whips, this whip updates twice per frame (Projectile.extraUpdates = 1), so 120 is equal to 1 second.
-            if (!owner.channel || ChargeTime >= 120)
-            {
-                return true; // Let the vanilla whip AI run.
-            }
-
-            if (++ChargeTime % 12 == 0) // 1 segment per 12 ticks of charge.
-                Projectile.WhipSettings.Segments++;
-
-            // Increase range up to 2x for full charge.
-            Projectile.WhipSettings.RangeMultiplier += 1 / 120f;
-
-            // Reset the animation and item timer while charging.
-            owner.itemAnimation = owner.itemAnimationMax;
-            owner.itemTime = owner.itemTimeMax;
-
-            return false; // Prevent the vanilla whip AI from running.
+            return true; // Prevent the vanilla whip AI from running.
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -71,7 +53,21 @@ namespace Avalon.Projectiles.Summon
             Main.player[Projectile.owner].MinionAttackTargetNPC = target.whoAmI;
             Projectile.damage = (int)(Projectile.damage * 0.5f); // Multihit penalty. Decrease the damage the more enemies the whip hits.
         }
-
+        public override void PostAI()
+        {
+            Player player = Main.player[Projectile.owner];
+            List<Vector2> list = new List<Vector2>();
+            Projectile.FillWhipControlPoints(Projectile, list);
+            int randomSegment = Main.rand.Next(10, Projectile.WhipSettings.Segments);
+            if (Vector2.Distance(list[randomSegment], player.position) < 60)
+                return;
+            if (Main.rand.NextBool(3))
+            {
+                Vector2 speed = list[randomSegment].DirectionFrom(list[randomSegment - 1]).RotatedByRandom(0.3) * 5;
+                int d = Dust.NewDust(list[Projectile.WhipSettings.Segments], 0, 0, ModContent.DustType<Dusts.AnchorWormDust>(), speed.X, speed.Y, Scale: 0.85f);
+                Main.dust[d].alpha = 128;
+            }
+        }
         // This method draws a line between all points of the whip, in case there's empty space between the sprites.
         private void DrawLine(List<Vector2> list)
         {
@@ -80,13 +76,13 @@ namespace Avalon.Projectiles.Summon
             Vector2 origin = new Vector2(frame.Width / 2, 2);
 
             Vector2 pos = list[0];
-            for (int i = 0; i < list.Count - 1; i++)
+            for (int i = 0; i < list.Count - 2; i++)
             {
                 Vector2 element = list[i];
                 Vector2 diff = list[i + 1] - element;
 
                 float rotation = diff.ToRotation() - MathHelper.PiOver2;
-                Color color = Lighting.GetColor(element.ToTileCoordinates(), Color.White);
+                Color color = Lighting.GetColor(element.ToTileCoordinates(), new Color(109, 72, 182));
                 Vector2 scale = new Vector2(1, (diff.Length() + 2) / frame.Height);
 
                 Main.EntitySpriteDraw(texture, pos - Main.screenPosition, frame, color, rotation, origin, scale, SpriteEffects.None, 0);
@@ -118,8 +114,8 @@ namespace Avalon.Projectiles.Summon
             {
                 // These two values are set to suit this projectile's sprite, but won't necessarily work for your own.
                 // You can change them if they don't!
-                Rectangle frame = new Rectangle(0, 0, 12, 28); // The size of the Handle (measured in pixels)
-                Vector2 origin = new Vector2(5, 8); // Offset for where the player's hand will start measured from the top left of the image.
+                Rectangle frame = new Rectangle(0, 0, 40, 30); // The size of the Handle (measured in pixels)
+                Vector2 origin = new Vector2(20, 15); // Offset for where the player's hand will start measured from the top left of the image.
                 float scale = 1;
 
                 // These statements determine what part of the spritesheet to draw for the current segment.
@@ -127,7 +123,7 @@ namespace Avalon.Projectiles.Summon
                 if (i == list.Count - 2)
                 {
                     // This is the head of the whip. You need to measure the sprite to figure out these values.
-                    frame.Y = 0; // Distance from the top of the sprite to the start of the frame.
+                    frame.Y = 64; // Distance from the top of the sprite to the start of the frame.
                     frame.Height = 22; // Height of the frame.
 
                     // For a more impactful look, this scales the tip of the whip up when fully extended, and down when curled up.
@@ -144,20 +140,21 @@ namespace Avalon.Projectiles.Summon
                 else if (i > 1)
                 {
                     // Second Segment
-                    frame.Y = 30;
+                    frame.Y = 40;
                     frame.Height = 16;
+                    //frame.Width = 40;
                 }
                 else if (i > 0)
                 {
                     // First Segment
-                    frame.Y = 60;
+                    frame.Y = 2;
                     frame.Height = 28;
                 }
 
                 Vector2 element = list[i];
                 Vector2 diff = list[i + 1] - element;
 
-                float rotation = diff.ToRotation(); // - MathHelper.PiOver2; // This projectile's sprite faces down, so PiOver2 is used to correct rotation.
+                float rotation = diff.ToRotation() - MathHelper.PiOver2; // This projectile's sprite faces down, so PiOver2 is used to correct rotation.
                 Color color = Lighting.GetColor(element.ToTileCoordinates());
 
                 Main.EntitySpriteDraw(texture, pos - Main.screenPosition, frame, color, rotation, origin, scale, flip, 0);

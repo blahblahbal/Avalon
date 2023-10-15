@@ -100,8 +100,6 @@ public class AvalonPlayer : ModPlayer
     /// </summary>
     public int MaxRangedCrit;
 
-    public int DeathCounter = 0;
-
     #region armor sets
     public bool SkyBlessing;
     public int SkyStacks = 1;
@@ -525,7 +523,6 @@ public class AvalonPlayer : ModPlayer
     public override void SaveData(TagCompound tag)
     {
         tag["Avalon:StatStam"] = Player.GetModPlayer<AvalonStaminaPlayer>().StatStam;
-        tag["Avalon:DeathCounter"] = DeathCounter;
     }
     public override void LoadData(TagCompound tag)
     {
@@ -635,6 +632,11 @@ public class AvalonPlayer : ModPlayer
                         return;
                     }
                 }
+            }
+            if (attempt.legendary && Main.hardMode && (Player.InModBiome<Biomes.Contagion>() || Player.InModBiome<Biomes.UndergroundContagion>()) && Main.rand.NextBool(2))
+            {
+                itemDrop = ModContent.ItemType<Items.Weapons.Summon.Whips.AnchorWhipworm>();
+                return;
             }
             if (attempt.uncommon && (Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion))
             {

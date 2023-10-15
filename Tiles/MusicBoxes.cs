@@ -63,6 +63,9 @@ public class MusicBoxes : ModTile
             case 10:
                 item = ModContent.ItemType<Items.MusicBoxes.MusicBoxSkyFortress>();
                 break;
+            case 11:
+                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeakOtherworldly>();
+                break;
         }
         yield return new Item(item);
     }
@@ -181,6 +184,9 @@ public class MusicBoxes : ModTile
                 break;
             case 10:
                 item = ModContent.ItemType<Items.MusicBoxes.MusicBoxSkyFortress>();
+                break;
+            case 11:
+                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeakOtherworldly>();
                 break;
         }
         Player player = Main.LocalPlayer;

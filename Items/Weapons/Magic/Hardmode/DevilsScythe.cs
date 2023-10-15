@@ -6,16 +6,11 @@ namespace Avalon.Items.Weapons.Magic.Hardmode;
 
 class DevilsScythe : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.UseSound = SoundID.Item8;
         Item.DamageType = DamageClass.Magic;
-        Item.damage = 350;
+        Item.damage = 150;
         Item.autoReuse = true;
         Item.scale = 0.9f;
         Item.shootSpeed = 0.2f;

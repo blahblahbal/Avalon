@@ -14,7 +14,7 @@ public class AnchorWhipworm : ModItem
     {
         // This method quickly sets the whip's properties.
         // Mouse over to see its parameters.
-        Item.DefaultToWhip(ModContent.ProjectileType<AnchorWhipwormProjectile>(), 20, 2, 4);
+        Item.DefaultToWhip(ModContent.ProjectileType<AnchorWhipwormProjectile>(), 32, 2, 8, 42);
         Item.rare = ItemRarityID.Pink;
         Item.value = Item.sellPrice(gold: 4);
     }

@@ -25,6 +25,29 @@ Mods: {
 				'''
 		}
 
+		DeathText: {
+			Fell_1: "{0} made a satisfying SPLAT when they hit the ground."
+			Fell_2: "{0} took a leap of faith..."
+			Fell_3: "{0}, gravity sucks, y'know?"
+			Fell_4: "{0} dreamt of flying."
+			Fell_5: "{0} is literally six feet under."
+			Fell_6: "{0}'s parachute was just a backpack."
+			Fell_7: "{0} got splattered all over {1}."
+			Drowning_1: "{0} blub blub blub..."
+			Drowning_2: "{0} thought they could breathe water."
+			Drowning_3: "{0} asphyxiated."
+			Lava_1: "{0} took a bath in a lake of fire."
+			Lava_2: "{0} became a charcoal briquette."
+			Lava_3: "{0} is HOT HOT HOT."
+			Petrified_1: "{0} was stoned."
+			Electrocution_1: "{0} got zzzzapped."
+			Electrocution_2: "{0} had an electrifying personality."
+			Generic_1: "{0} was tickled to smithereens"
+			Generic_2: "{0} was reduced to a fine paste"
+			Generic_3: "{0} became a tombstone dispenser"
+			Generic_4: "{0}.exe has stopped working. Program was closed"
+		}
+
 		CougherMask.Tooltip:
 			'''
 			Double tap {0} to cough on your enemies
@@ -6050,6 +6073,11 @@ Mods: {
 				Tooltip: ""
 			}
 
+			MusicBoxDesertBeakOtherworldly: {
+				DisplayName: Otherworldly Music Box (Desert Beak)
+				Tooltip: ""
+			}
+
 			MusicBoxHellCastle: {
 				DisplayName: Music Box (Hellcastle)
 				Tooltip: ""
@@ -6834,6 +6862,11 @@ Mods: {
 
 			HallowedOre: {
 				DisplayName: Hallowed Ore
+				Tooltip: ""
+			}
+
+			HallowedBrick: {
+				DisplayName: Hallowed Brick
 				Tooltip: ""
 			}
 		}

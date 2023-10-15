@@ -79,7 +79,7 @@ public class AvalonGlobalNPC : GlobalNPC
         }
         if (npc.type is NPCID.TheDestroyer or NPCID.Retinazer or NPCID.Spazmatism or NPCID.SkeletronPrime)
         {
-            if (!NPC.downedMechBossAny)
+            if (ClassExtensions.DownedAllButOneMechBoss())
             {
                 if ((npc.type == NPCID.Spazmatism && NPC.AnyNPCs(NPCID.Retinazer)) || (npc.type == NPCID.Retinazer && NPC.AnyNPCs(NPCID.Spazmatism)))
                 {
@@ -373,7 +373,7 @@ public class AvalonGlobalNPC : GlobalNPC
         }
         else if (type == NPCID.Cyborg)
         {
-            int r = Main.rand.Next(7);
+            int r = Main.rand.Next(8);
             if (r == 0) result += " was assimilated.";
             if (r == 1) result += "'s mechanisms were damaged beyond repair.";
             if (r == 2) result += " was crushed.";
@@ -381,6 +381,7 @@ public class AvalonGlobalNPC : GlobalNPC
             if (r == 4) result += "'s implants were ripped out.";
             if (r == 5) result += " short-circuited.";
             if (r == 6) result += " malfunctioned.";
+            if (r == 7) result += " encountered a glitch in his systems.";
         }
         else if (type == NPCID.Painter)
         {

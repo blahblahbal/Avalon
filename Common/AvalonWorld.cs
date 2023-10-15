@@ -1219,13 +1219,13 @@ public class AvalonWorld : ModSystem
         int xloc = -100 + Main.maxTilesX - 100;
         int yloc = -(int)num5 + Main.maxTilesY - 200;
         int sum = xloc * yloc;
-        int amount = (sum / 10000) * 10;
+        int amount = (sum / 10000) * 5;
         for (int zz = 0; zz < amount; zz++)
         {
             int i2 = WorldGen.genRand.Next(100, Main.maxTilesX - 100);
             double num6 = Main.rockLayer;
             int j2 = WorldGen.genRand.Next((int)num6, Main.maxTilesY - 200);
-            WorldGen.OreRunner(i2, j2, WorldGen.genRand.Next(WorldGen.genRand.Next(5, 9), WorldGen.genRand.Next(6, 10)), WorldGen.genRand.Next(WorldGen.genRand.Next(5, 9), WorldGen.genRand.Next(6, 10)), (ushort)ModContent.TileType<Tiles.Ores.HallowedOre>());
+            WorldGen.OreRunner(i2, j2, WorldGen.genRand.Next(5, 9), WorldGen.genRand.Next(6, 10), (ushort)ModContent.TileType<Tiles.Ores.HallowedOre>());
         }
         if (Main.netMode == NetmodeID.SinglePlayer)
         {
