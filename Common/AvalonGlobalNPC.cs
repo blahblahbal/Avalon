@@ -77,6 +77,17 @@ public class AvalonGlobalNPC : GlobalNPC
         {
             AvalonWorld.GenerateSulphur();
         }
+        if (npc.type is NPCID.TheDestroyer or NPCID.Retinazer or NPCID.Spazmatism or NPCID.SkeletronPrime)
+        {
+            if (!NPC.downedMechBossAny)
+            {
+                if ((npc.type == NPCID.Spazmatism && NPC.AnyNPCs(NPCID.Retinazer)) || (npc.type == NPCID.Retinazer && NPC.AnyNPCs(NPCID.Spazmatism)))
+                {
+                    return;
+                }
+                AvalonWorld.GenerateHallowedOre();
+            }
+        }
     }
 
     /// <summary>

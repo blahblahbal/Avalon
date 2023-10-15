@@ -27,6 +27,7 @@ using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.GameContent;
 using Avalon.NPCs.PreHardmode;
+using Terraria.Audio;
 
 namespace Avalon.Common;
 
@@ -763,6 +764,99 @@ public class AvalonWorld : ModSystem
             }
             #endregion
         }
+        #region more fallen stars
+        if (!Main.dayTime && Main.player[Main.myPlayer].HasBuff(ModContent.BuffType<Buffs.AdvancedBuffs.AdvStarbright>()) || Main.player[Main.myPlayer].HasBuff(ModContent.BuffType<Buffs.Starbright>()))
+        {
+            float num66 = Main.maxTilesX / 4200;
+            if (Main.rand.Next(4000) < 10f * num66)
+            {
+                int num67 = 12;
+                int num68 = Main.rand.Next(Main.maxTilesX - 50) + 100;
+                num68 *= 16;
+                int num69 = Main.rand.Next((int)(Main.maxTilesY * 0.05));
+                num69 *= 16;
+                var vector = new Vector2(num68, num69);
+                float num70 = Main.rand.Next(-100, 101);
+                float num71 = Main.rand.Next(200) + 100;
+                float num72 = (float)Math.Sqrt(num70 * num70 + num71 * num71);
+                num72 = num67 / num72;
+                num70 *= num72;
+                num71 *= num72;
+                Projectile.NewProjectile(Projectile.GetSource_None(), vector.X, vector.Y, num70, num71, ProjectileID.FallingStar, 1000, 10f, Main.myPlayer);
+            }
+        }
+        if (!Main.dayTime && Main.player[Main.myPlayer].HasBuff(ModContent.BuffType<Buffs.AdvancedBuffs.AdvStarbright>()))
+        {
+            float num66 = Main.maxTilesX / 4200;
+            if (Main.rand.Next(4000) < 10f * num66)
+            {
+                int num67 = 12;
+                int num68 = Main.rand.Next(Main.maxTilesX - 50) + 100;
+                num68 *= 16;
+                int num69 = Main.rand.Next((int)(Main.maxTilesY * 0.05));
+                num69 *= 16;
+                var vector = new Vector2(num68, num69);
+                float num70 = Main.rand.Next(-100, 101);
+                float num71 = Main.rand.Next(200) + 100;
+                float num72 = (float)Math.Sqrt(num70 * num70 + num71 * num71);
+                num72 = num67 / num72;
+                num70 *= num72;
+                num71 *= num72;
+                Projectile.NewProjectile(Projectile.GetSource_None(), vector.X, vector.Y, num70, num71, ProjectileID.FallingStar, 1000, 10f, Main.myPlayer);
+            }
+        }
+        if (!Main.dayTime && Main.bloodMoon)
+        {
+            float num66 = Main.maxTilesX / 4200;
+            if (Main.rand.Next(9000) < 10f * num66)
+            {
+                int num67 = 12;
+                int num68 = Main.rand.Next(Main.maxTilesX - 50) + 100;
+                num68 *= 16;
+                int num69 = Main.rand.Next((int)(Main.maxTilesY * 0.05));
+                num69 *= 16;
+                var vector = new Vector2(num68, num69);
+                float num70 = Main.rand.Next(-100, 101);
+                float num71 = Main.rand.Next(200) + 100;
+                float num72 = (float)Math.Sqrt(num70 * num70 + num71 * num71);
+                num72 = num67 / num72;
+                num70 *= num72;
+                num71 *= num72;
+                Projectile.NewProjectile(Projectile.GetSource_None(), vector.X, vector.Y, num70, num71, ProjectileID.FallingStar, 1000, 10f, Main.myPlayer);
+            }
+        }
+        #endregion
+
+        #region npc collision
+        /*for (int thing = 0; thing < Main.npc.Length; thing++)
+        {
+            NPC npc1 = Main.npc[thing];
+            if ((npc1.type == NPCID.Corruptor || npc1.type == ModContent.NPCType<NPCs.GuardianCorruptor>()) && npc1.active)
+            {
+                for (int thing2 = 0; thing2 < Main.npc.Length; thing2++)
+                {
+                    NPC npc2 = Main.npc[thing2];
+                    if ((npc2.type == ModContent.NPCType<NPCs.Hallowor>() || npc2.type == ModContent.NPCType<NPCs.AegisHallowor>()) && npc2.active)
+                    {
+                        int radius;
+                        string text;
+                        if (npc1.type == NPCID.Corruptor && npc2.type == ModContent.NPCType<NPCs.Hallowor>())
+                        {
+                            radius = 2;
+                            text = "Dark and light have been obliterated...";
+                            MakeOblivionOre(npc1, npc2, text, radius);
+                        }
+                        else if (npc1.type == ModContent.NPCType<NPCs.GuardianCorruptor>() && npc2.type == ModContent.NPCType<NPCs.AegisHallowor>())
+                        {
+                            radius = 3;
+                            text = "Dark and light have been eliminated...";
+                            MakeOblivionOre(npc1, npc2, text, radius);
+                        }
+                    }
+                }
+            }
+        }*/
+        #endregion
     }
 
     public static void GenerateSulphur()
@@ -1117,7 +1211,31 @@ public class AvalonWorld : ModSystem
         }
         crackedBrick = false;
     }
+    public static void GenerateHallowedOre()
+    {
+        Main.rand ??= new UnifiedRandom((int)DateTime.Now.Ticks);
 
+        double num5 = Main.rockLayer;
+        int xloc = -100 + Main.maxTilesX - 100;
+        int yloc = -(int)num5 + Main.maxTilesY - 200;
+        int sum = xloc * yloc;
+        int amount = (sum / 10000) * 10;
+        for (int zz = 0; zz < amount; zz++)
+        {
+            int i2 = WorldGen.genRand.Next(100, Main.maxTilesX - 100);
+            double num6 = Main.rockLayer;
+            int j2 = WorldGen.genRand.Next((int)num6, Main.maxTilesY - 200);
+            WorldGen.OreRunner(i2, j2, WorldGen.genRand.Next(WorldGen.genRand.Next(5, 9), WorldGen.genRand.Next(6, 10)), WorldGen.genRand.Next(WorldGen.genRand.Next(5, 9), WorldGen.genRand.Next(6, 10)), (ushort)ModContent.TileType<Tiles.Ores.HallowedOre>());
+        }
+        if (Main.netMode == NetmodeID.SinglePlayer)
+        {
+            Main.NewText("Your world has been blessed with Hallowed Ore!", 220, 170, 0);
+        }
+        else if (Main.netMode == NetmodeID.Server)
+        {
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Your world has been blessed with Hallowed Ore!"), new Color(220, 170, 0));
+        }
+    }
     public static void ConvertFromThings(int x, int y, int convert, bool tileframe = true)
     {
         Tile tile = Main.tile[x, y];
@@ -1559,6 +1677,30 @@ public class AvalonWorld : ModSystem
     public static List<int> ContagionCountCollection; //Our own TileID.Sets for the tiles that are counted towards world %
                                                       //Note: (MUST HAVE THE SAME TILES AS On_WorldGen_AddUpAlignmentCounts SOLID TILE ADD UP SECTION!!!)
 
+    public void MakeOblivionOre(NPC npc1, NPC npc2, string text, int radius)
+    {
+        if (Collision.CheckAABBvAABBCollision(npc1.Center, new Vector2(npc1.width, npc1.height), npc2.Center, new Vector2(npc2.width, npc2.height)))
+        {
+            //WorldGeneration.Utils.MakeCircle((int)(npc1.position.X / 16f), (int)(npc1.position.Y / 16f), radius, ModContent.TileType<Tiles.Ores.OblivionOre>());
+            npc1.life = 0;
+            npc1.NPCLoot();
+            npc1.active = false;
+            SoundEngine.PlaySound(npc1.DeathSound, npc1.position);
+            npc2.life = 0;
+            npc2.NPCLoot();
+            npc2.active = false;
+            SoundEngine.PlaySound(npc2.DeathSound, npc2.position);
+            var color = new Color(135, 78, 0);
+            if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                Main.NewText(text, color);
+            }
+            else if (Main.netMode == NetmodeID.Server)
+            {
+                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(text), color);
+            }
+        }
+    }
     public override void PostSetupContent()
     {
         ContagionCountCollection = new List<int> {

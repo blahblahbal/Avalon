@@ -337,7 +337,24 @@ public class Utils
             }
         }
     }
-
+    public static void MakeCircle(int x, int y, int radius, int tileType)
+    {
+        for (int k = x - radius; k <= x + radius; k++)
+        {
+            for (int l = y - radius; l <= y + radius; l++)
+            {
+                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) <= radius)
+                {
+                    Tile t = Main.tile[k, l];
+                    t.HasTile = false;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    Main.tile[k, l].TileType = (ushort)tileType;
+                    WorldGen.SquareTileFrame(k, l);
+                }
+            }
+        }
+    }
     public static void OreRunner(int i, int j, double strength, int steps, ushort type, ushort typeThatCanBeReplaced)
     {
         double num = strength;

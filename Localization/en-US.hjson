@@ -6831,6 +6831,11 @@ Mods: {
 				DisplayName: Anchor Whipworm
 				Tooltip: ""
 			}
+
+			HallowedOre: {
+				DisplayName: Hallowed Ore
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

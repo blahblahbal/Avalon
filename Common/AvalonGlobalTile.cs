@@ -42,11 +42,16 @@ public class AvalonGlobalTile : GlobalTile
                 if (Data.Sets.Tile.OresToChunks.ContainsKey(Main.tile[i, j].TileType))
                 {
                     int drop = Data.Sets.Tile.OresToChunks[Main.tile[i, j].TileType];
+                    int stack = 1;
                     if (Main.rand.NextBool(3))
                     {
-                        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, drop);
+                        stack = 2;
                     }
-                    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, drop);
+                    int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, drop, stack);
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
+                    }
                     noItem = true;
                 }
             }
@@ -60,7 +65,7 @@ public class AvalonGlobalTile : GlobalTile
                 int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<FourLeafClover>(), 1, false, 0);
                 if (Main.netMode == NetmodeID.Server)
                 {
-                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.FromLiteral(""), a, 0f, 0f, 0f, 0);
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
                     Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
                 }
             }
@@ -69,7 +74,7 @@ public class AvalonGlobalTile : GlobalTile
                 int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<FakeFourLeafClover>(), 1, false, 0);
                 if (Main.netMode == NetmodeID.Server)
                 {
-                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.FromLiteral(""), a, 0f, 0f, 0f, 0);
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
                     Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
                 }
             }

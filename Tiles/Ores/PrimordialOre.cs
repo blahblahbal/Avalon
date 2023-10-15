@@ -247,6 +247,7 @@ public class PrimordialOre : ModTile
         DustType = DustID.ShimmerSpark;
         Main.tileMerge[Type][TileID.Mud] = true;
         Main.tileMerge[TileID.Mud][Type] = true;
+        MineResist = 3f;
     }
 
     public override ushort GetMapOption(int i, int j)
@@ -417,7 +418,7 @@ public class PrimordialOre : ModTile
             ItemID.Hellstone,
             ItemID.CobaltOre,
             ItemID.PalladiumOre,
-            //ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
+            ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
         };
         int[] Power110 = new int[]
         {
@@ -444,10 +445,10 @@ public class PrimordialOre : ModTile
             ItemID.Hellstone,
             ItemID.CobaltOre,
             ItemID.PalladiumOre,
-            //ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
+            ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
             ItemID.MythrilOre,
             ItemID.OrichalcumOre,
-            //ModContent.ItemType<Items.Material.Ores.NaquadahOre>(),
+            ModContent.ItemType<Items.Material.Ores.NaquadahOre>(),
         };
         int[] Power150 = new int[]
         {
