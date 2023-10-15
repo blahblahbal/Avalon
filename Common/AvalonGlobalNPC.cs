@@ -1,43 +1,23 @@
 using Avalon.Biomes;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
-using Avalon.DropConditions;
-using Avalon.Items.Accessories;
-using Avalon.Items.Accessories.Hardmode;
-using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Accessories.Vanity;
-using Avalon.Items.Ammo;
-using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
-using Avalon.Items.Material.Ores;
-using Avalon.Items.Material.Shards;
-using Avalon.Items.Material.TomeMats;
-using Avalon.Items.Other;
-using Avalon.Items.Placeable.Painting;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Placeable.Wall;
-using Avalon.Items.Potions.Other;
-using Avalon.Items.Tokens;
-using Avalon.Items.Vanity;
-using Avalon.Items.Weapons.Magic.PreHardmode;
-using Avalon.Items.Weapons.Melee.PreHardmode;
-using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.NPCs.TownNPCs;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -48,10 +28,6 @@ public class AvalonGlobalNPC : GlobalNPC
 {
     public static float ModSpawnRate { get; set; } = 0.25f;
     public static int BleedTime = 60 * 7;
-
-    private const int RareChance = 700;
-    private const int UncommonChance = 50;
-    private const int VeryRareChance = 1000;
 
     /// <summary>
     ///     Finds a type of NPC.
@@ -86,6 +62,17 @@ public class AvalonGlobalNPC : GlobalNPC
                     return;
                 }
                 AvalonWorld.GenerateHallowedOre();
+            }
+        }
+        if (npc.type == NPCID.MoonLordCore && !NPC.downedMoonlord)
+        {
+            if (Main.netMode == 0)
+            {
+                Main.NewText(Language.GetTextValue("Mods.Avalon.BossDefeatedBlurbs.MoonLord"), 50, 255, 130);
+            }
+            else if (Main.netMode == 2)
+            {
+                ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.BossDefeatedBlurbs.MoonLord"), new Color(50, 255, 130));
             }
         }
     }

@@ -1229,11 +1229,11 @@ public class AvalonWorld : ModSystem
         }
         if (Main.netMode == NetmodeID.SinglePlayer)
         {
-            Main.NewText("Your world has been blessed with Hallowed Ore!", 220, 170, 0);
+            Main.NewText(Language.GetTextValue("Mods.Avalon.Altars.Hallowed"), 220, 170, 0);
         }
         else if (Main.netMode == NetmodeID.Server)
         {
-            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Your world has been blessed with Hallowed Ore!"), new Color(220, 170, 0));
+            ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.Altars.Hallowed"), new Color(220, 170, 0));
         }
     }
     public static void ConvertFromThings(int x, int y, int convert, bool tileframe = true)

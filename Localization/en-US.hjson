@@ -48,6 +48,12 @@ Mods: {
 			Generic_4: "{0}.exe has stopped working. Program was closed"
 		}
 
+        BossDefeatedBlurbs: {
+            MoonLord: Screams are emanating from the library...
+            WallofSteel: The ancient souls have been disturbed!
+            Phantasm: The spirits are stirring in the depths!
+        }
+
 		CougherMask.Tooltip:
 			'''
 			Double tap {0} to cough on your enemies
@@ -127,6 +133,11 @@ Mods: {
 			Adamantite: Your world has been blessed with Adamantite!
 			Titanium: Your world has been blessed with Titanium!
 			Troxinium: Your world has been blessed with Troxinium!
+            Hallowed: Your world has been glorified by the Hallow!
+            Corrupted: "Your world has been desecrated by the "
+            Corruption: Corruption!
+            Crimson: Crimson!
+            Contagion: Contagion!
 		}
 
 		SetBonuses: {
@@ -6905,6 +6916,15 @@ Mods: {
                 '''
                 35% increased damage
                 11% increased critical strike chance
+                '''
+			}
+
+            NobleSlimeBand: {
+				DisplayName: Noble Slime Band
+				Tooltip:
+                '''
+                Reduces damage taken by 5% and negates fall damage
+                Provides immunity to slimes
                 '''
 			}
 		}

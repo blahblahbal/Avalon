@@ -1275,7 +1275,7 @@ public class AvalonPlayer : ModPlayer
             NPC N = Main.npc[damageSource.SourceNPCIndex];
             if (Data.Sets.NPC.Undead[N.type])
             {
-                if (N.damage - ((Player.statDefense / 2) - 10) <= 0)
+                if (N.damage - ((Player.statDefense / 2) + 10) <= 0)
                 {
                     return true;
                 }
