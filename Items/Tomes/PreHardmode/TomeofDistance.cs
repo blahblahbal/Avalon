@@ -25,6 +25,7 @@ class TomeofDistance : ModItem
         Item.value = 15000;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 2;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

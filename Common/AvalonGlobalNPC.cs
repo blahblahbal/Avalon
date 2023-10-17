@@ -585,12 +585,24 @@ public class AvalonGlobalNPC : GlobalNPC
         {
             target.AddBuff(ModContent.BuffType<BrokenWeaponry>(), 60 * 7);
         }
-        if (npc.type == NPCID.Mummy || npc.type == NPCID.FungoFish || npc.type == NPCID.Clinger) // || npc.type == ModContent.NPCType<GrossyFloat>())
+        if (npc.type == NPCID.Mummy || npc.type == NPCID.FungoFish || npc.type == NPCID.Clinger)
         {
             if (Main.rand.NextBool(9))
             {
                 target.AddBuff(ModContent.BuffType<Unloaded>(), 60 * 7);
             }
+        }
+        if (npc.type is NPCID.AngryTrapper && Main.rand.NextBool(15))
+        {
+            target.AddBuff(ModContent.BuffType<CurseofDelirium>(), 60 * 60);
+        }
+        if (npc.type is NPCID.IlluminantBat or NPCID.IlluminantSlime && Main.rand.NextBool(6))
+        {
+            target.AddBuff(ModContent.BuffType<CurseofDelirium>(), 60 * 15);
+        }
+        if ((npc.type is NPCID.EnchantedSword or NPCID.CursedHammer or NPCID.CrimsonAxe || npc.type == ModContent.NPCType<InfectedPickaxe>()) && Main.rand.NextBool(5))
+        {
+            target.AddBuff(ModContent.BuffType<CurseofDelirium>(), 60 * 60);
         }
     }
     public static bool SpikeCollision2(Vector2 Position, int Width, int Height)

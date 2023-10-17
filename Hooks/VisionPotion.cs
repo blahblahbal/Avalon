@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Hooks
 {
@@ -39,10 +40,11 @@ namespace Avalon.Hooks
                         color.A = Main.mouseTextColor;
                         if (!Main.gamePaused && Main.rand.NextBool(200))
                         {
-                            int num28 = Dust.NewDust(new Vector2(j * 16, i * 16), 16, 16, DustID.TreasureSparkle, 0f, 0f, 150, Color.White, 0.3f);
+                            int num28 = Dust.NewDust(new Vector2(j * 16, i * 16), 16, 16, ModContent.DustType<Dusts.VisionPotion>(), 0f, 0f, 150, Color.LightBlue, 0.1f);
                             Main.dust[num28].fadeIn = 1f;
                             Main.dust[num28].velocity *= 0.1f;
                             Main.dust[num28].noLight = true;
+                            Main.dust[num28].noGravity = true;
                         }
                     }
                 }

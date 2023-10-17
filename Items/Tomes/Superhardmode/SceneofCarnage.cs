@@ -24,6 +24,7 @@ class SceneofCarnage : ModItem
         Item.value = Item.sellPrice(0, 0, 40);
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 5;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

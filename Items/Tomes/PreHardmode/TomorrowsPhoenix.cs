@@ -25,6 +25,7 @@ class TomorrowsPhoenix : ModItem
         Item.value = Item.sellPrice(0, 0, 10);
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 1;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

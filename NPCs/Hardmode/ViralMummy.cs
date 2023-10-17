@@ -6,6 +6,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using Avalon.Buffs.Debuffs;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -93,6 +94,10 @@ public class ViralMummy : ModNPC
         if (Main.rand.NextBool(4))
         {
             target.AddBuff(BuffID.Darkness, 15 * 60);
+        }
+        if (Main.rand.NextBool(9))
+        {
+            target.AddBuff(ModContent.BuffType<BrokenWeaponry>(), 60 * 7);
         }
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)

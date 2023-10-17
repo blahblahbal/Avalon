@@ -56,7 +56,7 @@ public class BaskingSpewer : ModNPC
         {
             return;
         }
-        else
+        else if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
             Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("SpewerHead").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("SpewerBody").Type, NPC.scale);

@@ -163,5 +163,5 @@ public abstract class ExxoPrefix : ModPrefix
 public enum ExxoPrefixCategory
 {
     None = 0,
-    Armor = 1,
+    Armor = 1
 }

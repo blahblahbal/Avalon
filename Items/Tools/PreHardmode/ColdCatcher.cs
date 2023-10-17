@@ -25,7 +25,7 @@ internal class ColdCatcher : ModItem
         Item.fishingPole = 25;
         Item.shoot = ModContent.ProjectileType<SnotlineBobber>();
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = Item.sellPrice(0, 40);
+        Item.value = Item.sellPrice(0, 2, 80);
         Item.useAnimation = 8;
     }
     public override void AddRecipes()

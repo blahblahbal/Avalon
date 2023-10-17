@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -139,6 +140,16 @@ public static class ClassExtensions
     /// <returns>Whether or not the item is an armor piece.</returns>
     public static bool IsArmor(this Item item) =>
         (item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1) && !item.vanity;
+
+    /// <summary>
+    /// Helper method to check if the current item is a tool - used for tool prefixes.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <returns>Whether or not the item is a tool.</returns>
+    public static bool IsTool(this Item item)
+    {
+        return item.pick > 0 || item.axe > 0 || item.hammer > 0;
+    }
 
     public static void Active(this Tile t, bool a) => t.HasTile = a;
 
@@ -298,7 +309,17 @@ public static class ClassExtensions
             _ => -1,
         };
     }
-
+    /// <summary>
+    /// Extension to hide something from displaying in the Bestiary.
+    /// </summary>
+    /// <param name="itemDropRule"></param>
+    /// <returns></returns>
+    public static LeadingConditionRule HideFromBestiary(this IItemDropRule itemDropRule)
+    {
+        var conditionRule = new LeadingConditionRule(new Conditions.NeverTrue());
+        conditionRule.OnFailedConditions(itemDropRule, true);
+        return conditionRule;
+    }
     /// <summary>
     ///     A helper method to check if the given Player is touching the ground.
     /// </summary>

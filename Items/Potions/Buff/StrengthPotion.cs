@@ -33,6 +33,25 @@ class StrengthPotion : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.BottledLava>()).AddIngredient(ItemID.TitaniumBar).AddIngredient(ItemID.Diamond).AddTile(TileID.Bottles).Register();
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ItemID.AdamantiteBar)
+            .AddIngredient(ItemID.Diamond)
+            .AddTile(TileID.Bottles)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ItemID.TitaniumBar)
+            .AddIngredient(ItemID.Diamond)
+            .AddTile(TileID.Bottles)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>())
+            .AddIngredient(ItemID.Diamond)
+            .AddTile(TileID.Bottles)
+            .Register();
     }
 }

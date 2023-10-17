@@ -28,7 +28,16 @@ class VisionPotion : ModItem
         Item.maxStack = 9999;
         Item.useAnimation = 17;
         Item.height = dims.Height;
-        Item.buffTime = 5400;
+        Item.buffTime = 3600 * 4;
         Item.UseSound = SoundID.Item3;
+    }
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+           .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+           .AddIngredient(ItemID.Ruby)
+           .AddIngredient(ItemID.Moonglow)
+           .AddTile(TileID.Bottles)
+           .Register();
     }
 }

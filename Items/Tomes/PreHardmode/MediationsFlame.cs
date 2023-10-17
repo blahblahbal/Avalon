@@ -22,6 +22,7 @@ class MediationsFlame : ModItem
         Item.Size = new(30);
         Item.value = 5000;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 1;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

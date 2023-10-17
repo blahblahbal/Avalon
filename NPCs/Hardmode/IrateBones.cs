@@ -39,7 +39,7 @@ public class IrateBones : ModNPC
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
             BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon,
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.CursedScepter")),
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.IrateBones")),
         });
 
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)

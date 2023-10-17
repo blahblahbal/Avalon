@@ -391,6 +391,12 @@ public class AvalonGlobalItem : GlobalItem
         }
         switch (item.type)
         {
+            case ItemID.GravitationPotion:
+                item.buffTime = 3600 * 6;
+                break;
+            case ItemID.MagicPowerPotion:
+                item.buffTime = 3600 * 5;
+                break;
             case ItemID.CellPhone:
             case ItemID.Shellphone:
             case ItemID.ShellphoneHell:
@@ -502,24 +508,48 @@ public class AvalonGlobalItem : GlobalItem
         {
             if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().ThePill)
             {
-                if (int.TryParse(healLife.Text.Substring(9).Replace(" life", ""), out var life))
+                if (int.TryParse(healLife.Text.Substring(9).Replace(" life", ""), out var life)) // DOES NOT WORK IN OTHER LANGUAGES
                 {
                     healLife.Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(life * Items.Accessories.Hardmode.ThePill.LifeBonusAmount));
                 }
             }
         }
-        //if (buffTime != null)
-        //{
-        //    if (item.type == ModContent.ItemType<RejuvenationPotion>())
-        //    {
-        //        tooltips.Remove(buffTime);
-        //    }
-        //}
         if (tooltipEquip != null)
         {
             if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)
             {
                 tooltips.RemoveAt(tooltips.FindIndex(x => x.Name == "Equipable" && x.Mod == "Terraria"));
+            }
+        }
+        if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)
+        {
+            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                && tt.Name.Equals("ItemName"));
+            if (index != -1)
+            {
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "TomeTooltip", NetworkText.FromKey("Mods.Avalon.CommonItemTooltip.Tome").ToString()));
+                tooltips.Insert(index + 2, new TooltipLine(Mod, "TomeGradeTooltip", NetworkText.FromKey("Mods.Avalon.CommonItemTooltip.TomeGrade") + " " + item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade));
+            }
+        }
+        if (item.IsTool())
+        {
+            if (item.prefix == ModContent.PrefixType<Efficient>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixTool", "Increased mining efficiency")
+                    {
+                        IsModifier = true
+                    });
+                }
+                index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && tt.Name.Equals("PrefixSpeed"));
+                if (index != -1)
+                {
+                    tooltips.RemoveAt(index);
+                }
             }
         }
         if (item.IsArmor() && !item.social)

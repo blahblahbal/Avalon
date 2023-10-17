@@ -46,13 +46,13 @@ public class MineralSlime : ModNPC
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         WhichOre = reader.ReadInt32();
-        NPC.color = reader.ReadRGB(); // maybe won't work
+        NPC.color = reader.ReadRGB();
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
         float rotate = MathHelper.SmoothStep(0.1f, -0.1f, Main.masterColor);
         Texture2D oreTexture;
-        if (Ores[WhichOre] > Main.maxItems)
+        if (Ores[WhichOre] > ItemID.Count)
         {
             if (Ores[WhichOre] == ModContent.ItemType<Items.Material.Ores.DurataniumOre>())
             {

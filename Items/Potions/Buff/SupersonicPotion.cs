@@ -31,15 +31,15 @@ class SupersonicPotion : ModItem
         Item.buffTime = 6 * 3600;
         Item.UseSound = SoundID.Item3;
     }
-    //public override void AddRecipes()
-    //{
-    //    Recipe.Create(Type)
-    //        .AddIngredient(ModContent.ItemType<Material.Holybird>())
-    //        .AddIngredient(ItemID.Cobweb, 5)
-    //        .AddIngredient(ItemID.Cloud)
-    //        .AddIngredient(ModContent.ItemType<Material.LifeDew>())
-    //        .AddIngredient(ModContent.ItemType<Material.BottledLava>())
-    //        .AddTile(TileID.Bottles)
-    //        .Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.BottledLava>())
+            .AddIngredient(ModContent.ItemType<Material.Herbs.Holybird>())
+            .AddIngredient(ItemID.Cobweb, 5)
+            .AddIngredient(ItemID.Cloud)
+            .AddIngredient(ModContent.ItemType<Material.LifeDew>())
+            .AddTile(TileID.Bottles)
+            .Register();
+    }
 }

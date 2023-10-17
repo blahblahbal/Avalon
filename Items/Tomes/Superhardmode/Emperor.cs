@@ -25,6 +25,7 @@ class Emperor : ModItem
         Item.value = 250000;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 7;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

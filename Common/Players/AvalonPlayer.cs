@@ -132,6 +132,8 @@ public class AvalonPlayer : ModPlayer
     /// </summary>
     public int MaxRangedCrit;
 
+
+
     #region armor sets
     public bool SkyBlessing;
     public int SkyStacks = 1;
@@ -187,6 +189,8 @@ public class AvalonPlayer : ModPlayer
     public bool CobOmegaShield;
     public bool PallOmegaShield;
     public bool DuraOmegaShield;
+    public bool DesertGamblerVisible;
+    public bool ShadowRing;
     #endregion
 
     #region buffs and debuffs
@@ -209,6 +213,8 @@ public class AvalonPlayer : ModPlayer
     public bool Vision;
     public float ForceFieldRotation;
     public bool CoughCooldown;
+    public int DeliriumCount;
+
 
     public bool HungryMinion;
     public bool GastroMinion;
@@ -220,11 +226,17 @@ public class AvalonPlayer : ModPlayer
     public bool GreedyPrefix;
     public bool HoardingPrefix;
     #endregion
+
+    #region tool prefixes
+    public int EfficiencyPrefix;
+    #endregion
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
     public int OldFallStart;
     public override void ResetEffects()
     {
+        EfficiencyPrefix = 0;
+
         CoughCooldown = false;
         if (DarkMatterTimeOut-- < 0)
         {
@@ -289,6 +301,7 @@ public class AvalonPlayer : ModPlayer
         CobOmegaShield = false;
         PallOmegaShield = false;
         DuraOmegaShield = false;
+        ShadowRing = false;
 
         // armor sets
         SkyBlessing = false;
@@ -386,6 +399,10 @@ public class AvalonPlayer : ModPlayer
         {
             g -= 0.3f;
             r -= 0.1f;
+        }
+        if (ShadowRing)
+        {
+            r = g = b = a = 1;
         }
     }
     public override void GetDyeTraderReward(List<int> rewardPool)

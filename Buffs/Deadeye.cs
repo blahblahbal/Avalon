@@ -34,7 +34,7 @@ public class DeadeyePlayer : ModPlayer
     }
     public override float UseSpeedMultiplier(Item item)
     {
-        if(item.DamageType == DamageClass.Ranged)
+        if (item.DamageType == DamageClass.Ranged)
         {
             return 1 + (DeadeyeTimer * 0.5f);
         }

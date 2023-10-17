@@ -25,6 +25,7 @@ class TheHeavenlyScent : ModItem
         Item.value = 150000;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 1;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

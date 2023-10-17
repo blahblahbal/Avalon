@@ -103,7 +103,11 @@ Mods: {
 			"Stamina Flight Time Restore.DisplayName": Stamina Flight Time Restore
 		}
 
-		CommonItemTooltip.TomeMaterial: Tome Material
+		CommonItemTooltip: {
+			TomeMaterial: Tome Material
+			Tome: Tome
+			TomeGrade: Grade
+		}
 
 		VanillaItemRenames: {
 			CoinGun: Spend Shot
@@ -840,7 +844,6 @@ Mods: {
 				DisplayName: Adventures and Mishaps
 				Tooltip:
 					'''
-					Tome
 					+60 HP, +5% damage
 					-10% mana cost
 					'''
@@ -850,7 +853,6 @@ Mods: {
 				DisplayName: Burning Desire
 				Tooltip:
 					'''
-					Tome
 					+40 HP
 					+40 mana
 					'''
@@ -858,27 +860,18 @@ Mods: {
 
 			ChantoftheWaterDragon: {
 				DisplayName: Chant of the Water Dragon
-				Tooltip:
-					'''
-					Tome
-					+20% magic damage
-					'''
+				Tooltip: +20% magic damage
 			}
 
 			ChristmasTome: {
 				DisplayName: Christmas Tome
-				Tooltip:
-					'''
-					Tome
-					+3% critical strike chance
-					'''
+				Tooltip: +3% critical strike chance
 			}
 
 			CreatorsTome: {
 				DisplayName: Creator's Tome
 				Tooltip:
 					'''
-					Tome
 					+20% damage, +5% critical strike chance, -20% mana cost
 					25% chance to not consume ammo, 10 defense, +100 HP, +100 mana
 					'''
@@ -888,7 +881,6 @@ Mods: {
 				DisplayName: Dominance
 				Tooltip:
 					'''
-					Tome
 					+22% damage, +8% critical strike chance, -10% mana cost
 					20% chance to not consume ammo, 11 defense, +140 mana, +80 HP
 					'''
@@ -898,7 +890,6 @@ Mods: {
 				DisplayName: Emperor
 				Tooltip:
 					'''
-					Tome
 					25% increased damage, 12% increased critical strike chance, -20% mana cost
 					30% chance to not consume ammo, 14 defense, +200 mana, +100 HP, +90 stamina
 					'''
@@ -906,27 +897,18 @@ Mods: {
 
 			EternitysMoon: {
 				DisplayName: Eternity's Moon
-				Tooltip:
-					'''
-					Tome
-					+20 mana, -5% mana cost
-					'''
+				Tooltip: +20 mana, -5% mana cost
 			}
 
 			FlankersTome: {
 				DisplayName: Flanker's Tome
-				Tooltip:
-					'''
-					Tome
-					+10% melee damage
-					'''
+				Tooltip: +10% melee damage
 			}
 
 			LoveUpandDown: {
 				DisplayName: Love Up and Down
 				Tooltip:
 					'''
-					Tome
 					+15% damage, +7% critical strike chance, -25% mana cost
 					20% chance to not consume ammo, 12 defense, +80 HP, +80 mana
 					'''
@@ -936,7 +918,6 @@ Mods: {
 				DisplayName: Mediation's Flame
 				Tooltip:
 					'''
-					Tome
 					+5% magic damage, -10% mana cost
 					+60 mana
 					'''
@@ -946,7 +927,6 @@ Mods: {
 				DisplayName: Misty Peach Blossoms
 				Tooltip:
 					'''
-					Tome
 					+20 HP
 					+20 mana
 					'''
@@ -954,18 +934,13 @@ Mods: {
 
 			SceneofCarnage: {
 				DisplayName: Scene of Carnage
-				Tooltip:
-					'''
-					Tome
-					15% increased melee damage and speed
-					'''
+				Tooltip: 15% increased melee damage and speed
 			}
 
 			SoutheasternPeacock: {
 				DisplayName: Southeastern Peacock
 				Tooltip:
 					'''
-					Tome
 					+3% critical strike chance, -5% mana cost
 					8% increased minion damage, 5% increased minion knockback
 					'''
@@ -975,7 +950,6 @@ Mods: {
 				DisplayName: Tale of the Dolt
 				Tooltip:
 					'''
-					Tome
 					+15% melee damage
 					+20 HP, +20 mana
 					'''
@@ -985,7 +959,6 @@ Mods: {
 				DisplayName: Tale of the Red Lotus
 				Tooltip:
 					'''
-					Tome
 					+5% ranged damage
 					+20 HP
 					'''
@@ -993,45 +966,28 @@ Mods: {
 
 			TheHeavenlyScent: {
 				DisplayName: The Heavenly Scent
-				Tooltip:
-					'''
-					Tome
-					+2 life regen
-					'''
+				Tooltip: +2 life regen
 			}
 
 			TheOasisRemembered: {
 				DisplayName: The Oasis Remembered
-				Tooltip:
-					'''
-					Tome
-					20% increased minion damage and knockback
-					'''
+				Tooltip: 20% increased minion damage and knockback
 			}
 
 			ThePlumHarvest: {
 				DisplayName: The Plum Harvest
-				Tooltip:
-					'''
-					Tome
-					30% chance to not consume ammo
-					'''
+				Tooltip: 30% chance to not consume ammo
 			}
 
 			TheThreeScholars: {
 				DisplayName: The Three Scholars
-				Tooltip:
-					'''
-					Tome
-					+20 defense
-					'''
+				Tooltip: +20 defense
 			}
 
 			TheVoidlands: {
 				DisplayName: The Voidlands
 				Tooltip:
 					'''
-					Tome
 					+15% damage, +3% critical strike chance
 					+60 HP, +40 mana
 					'''
@@ -1041,7 +997,6 @@ Mods: {
 				DisplayName: The World
 				Tooltip:
 					'''
-					Tome
 					35% increased damage, 20% increased critical strike chance, -25% mana cost
 					30% chance to not consume ammo, 18 defense, +260 mana, +160 HP, +120 stamina
 					'''
@@ -1051,7 +1006,6 @@ Mods: {
 				DisplayName: Tome of Distance
 				Tooltip:
 					'''
-					Tome
 					+15% ranged damage, +40 HP, +20 mana
 					20% chance to not consume ammo
 					'''
@@ -1061,7 +1015,6 @@ Mods: {
 				DisplayName: Tome of the River Spirits
 				Tooltip:
 					'''
-					Tome
 					+15% magic and minion damage
 					-5% mana cost
 					'''
@@ -1071,7 +1024,6 @@ Mods: {
 				DisplayName: Tomorrow's Phoenix
 				Tooltip:
 					'''
-					Tome
 					8% increased minion damage
 					5% increased minion knockback
 					'''
@@ -1081,7 +1033,6 @@ Mods: {
 				DisplayName: Underestimated Resolve
 				Tooltip:
 					'''
-					Tome
 					+20 HP, +5% ranged damage
 					+4 defense
 					'''
@@ -5361,7 +5312,7 @@ Mods: {
 
 			DesertGambler: {
 				DisplayName: Desert Gambler
-				Tooltip: Ranged abilities increase over time while below 20% life
+				Tooltip: Ranged abilities increase over time while below 33% life
 			}
 
 			LotusLeech: {
@@ -6950,55 +6901,60 @@ Mods: {
 			BundleofBalloons: {
 				DisplayName: Bundle of Balloons
 				Tooltip:
-                '''
-                Allows the holder to quadruple jump
-                Increases jump height
-                '''
+					'''
+					Allows the holder to quadruple jump
+					Increases jump height
+					'''
 			}
 
 			BundleofHorseshoeBalloons: {
 				DisplayName: Bundle of Horseshoe Balloons
 				Tooltip:
-                '''
-                Allows the holder to quadruple jump
-                Increases jump height and negates fall damage
-                '''
+					'''
+					Allows the holder to quadruple jump
+					Increases jump height and negates fall damage
+					'''
 			}
 
 			MegaBundleofBalloons: {
 				DisplayName: Mega Bundle of Balloons
 				Tooltip:
-                '''
-                Allows the holder to septuple jump
-                Increases jump height
-                '''
+					'''
+					Allows the holder to septuple jump
+					Increases jump height
+					'''
 			}
 
 			MegaBundleofHorseshoeBalloons: {
 				DisplayName: Mega Bundle of Horseshoe Balloons
 				Tooltip:
-                '''
-                Allows the holder to septuple jump
-                Increases jump height and negates fall damage
-                '''
+					'''
+					Allows the holder to septuple jump
+					Increases jump height and negates fall damage
+					'''
 			}
 
 			RocketHorseshoeBalloon: {
 				DisplayName: Rocket Horseshoe Balloon
 				Tooltip:
-                '''
-                Allows the holder to double jump
-                Increases jump height and negates fall damage
-                '''
+					'''
+					Allows the holder to double jump
+					Increases jump height and negates fall damage
+					'''
 			}
 
 			RocketinaBalloon: {
 				DisplayName: Rocket in a Balloon
 				Tooltip:
-                '''
-                Allows the holder to double jump
-                Increases jump height
-                '''
+					'''
+					Allows the holder to double jump
+					Increases jump height
+					'''
+			}
+
+			ShadowRing: {
+				DisplayName: Shadow Ring
+				Tooltip: ""
 			}
 		}
 
@@ -7247,6 +7203,7 @@ Mods: {
 			MobRift.DisplayName: ""
 			CursedScepter.DisplayName: Cursed Scepter
 			IrateBones.DisplayName: Irate Bones
+			InfectedPickaxe.DisplayName: Infected Pickaxe
 		}
 
 		Buffs: {
@@ -7716,8 +7673,8 @@ Mods: {
 			}
 
 			SnotOrb: {
-				DisplayName: Snot Orb
-				Description: The snot orb provides light
+				DisplayName: Sepsis Cell
+				Description: The Sepsis Cell provides light
 			}
 
 			BacteriaInfection: {
@@ -7798,6 +7755,11 @@ Mods: {
 			Reflector: {
 				DisplayName: Reflector
 				Description: The mirrors will reflect projectiles
+			}
+
+			CurseofDelirium: {
+				DisplayName: Curse of Delirium
+				Description: Experiencing random bouts of confusion
 			}
 		}
 
@@ -7933,6 +7895,7 @@ Mods: {
 			Hoarding.DisplayName: Hoarding
 			Sturdy.DisplayName: Sturdy
 			Motivated.DisplayName: Motivated
+			Efficient.DisplayName: Efficient
 		}
 
 		Conditions: {
