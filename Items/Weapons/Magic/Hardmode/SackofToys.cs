@@ -37,7 +37,16 @@ class SackofToys : ModItem
         int r = Main.rand.Next(5);
         if (r == 0)
         {
-            Projectile.NewProjectile(source, position, velocity * 2, ModContent.ProjectileType<Projectiles.Magic.SackofToys.Lego>(), damage, knockback);
+            switch (Main.rand.Next(2))
+            {
+                case 0:
+                    type = ModContent.ProjectileType<Projectiles.Magic.SackofToys.Lego>();
+                    break;
+                case 1:
+                    type = ModContent.ProjectileType<Projectiles.Magic.SackofToys.Marble>();
+                    break;
+            }
+            Projectile.NewProjectile(source, position, velocity * 2, type, damage, knockback);
         }
         if (r == 1)
         {
@@ -53,7 +62,16 @@ class SackofToys : ModItem
         }
         if (r == 4)
         {
-            Projectile.NewProjectile(source, position, velocity * 0.4f, ModContent.ProjectileType<Projectiles.Magic.SackofToys.Table>(), damage, knockback);
+            switch (Main.rand.Next(2))
+            {
+                case 0:
+                    type = ModContent.ProjectileType<Projectiles.Magic.SackofToys.Table>();
+                    break;
+                case 1:
+                    type = ModContent.ProjectileType<Projectiles.Magic.SackofToys.RockingHorse>();
+                    break;
+            }
+            Projectile.NewProjectile(source, position, velocity * 0.4f, type, damage, knockback);
         }
         if (r == 5)
         {

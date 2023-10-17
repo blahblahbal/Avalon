@@ -6,12 +6,12 @@ using Terraria.Audio;
 
 namespace Avalon.Projectiles.Magic.SackofToys;
 
-public class Doll : ModProjectile
+public class RockingHorse : ModProjectile
 {
     public override void SetDefaults()
     {
-        Projectile.width = 28;
-        Projectile.height = 32;
+        Projectile.width = 42;
+        Projectile.height = 36;
         Projectile.aiStyle = 1;
         Projectile.DamageType = DamageClass.Ranged;
         Projectile.penetrate = -1;
@@ -34,6 +34,11 @@ public class Doll : ModProjectile
     
     public override void AI()
     {
-        Projectile.rotation = Projectile.velocity.ToRotation();
+        Projectile.ai[0]++;
+        if (Projectile.ai[0] > 5)
+        {
+            Projectile.velocity.Y += 0.3f;
+            Projectile.ai[0] = 0;
+        }
     }
 }

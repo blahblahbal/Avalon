@@ -7121,6 +7121,8 @@ Mods: {
 			AnchorWhipwormProjectile.DisplayName: Anchor Whipworm Projectile
 			Worm.DisplayName: Worm
 			Reflector.DisplayName: Reflector
+			Marble.DisplayName: Marble
+			RockingHorse.DisplayName: Rocking Horse
 		}
 
 		NPCs: {

@@ -7,11 +7,11 @@ using Terraria.DataStructures;
 
 namespace Avalon.Projectiles.Magic.SackofToys;
 
-public class Die : ModProjectile
+public class Marble : ModProjectile
 {
     public override void SetStaticDefaults()
     {
-        Main.projFrames[Projectile.type] = 2;
+        Main.projFrames[Projectile.type] = 3;
     }
     public override void SetDefaults()
     {
@@ -26,35 +26,29 @@ public class Die : ModProjectile
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-        Projectile.ai[2]++;
-        if (Projectile.ai[2] >= 4f)
+        if (Projectile.velocity.X != oldVelocity.X)
         {
-            Projectile.position += Projectile.velocity;
-            Projectile.Kill();
+            Projectile.velocity.X = -oldVelocity.X;
         }
-        else
+        if (Projectile.velocity.Y != oldVelocity.Y)
         {
-            if (Projectile.velocity.Y != oldVelocity.Y)
-            {
-                Projectile.velocity.Y = -oldVelocity.Y;
-            }
-            if (Projectile.velocity.X != oldVelocity.X)
-            {
-                Projectile.velocity.X = -oldVelocity.X;
-            }
+            Projectile.velocity.Y = 0f;
         }
         return false;
     }
 
     public override void OnSpawn(IEntitySource source)
     {
-        switch (Main.rand.Next(2))
+        switch (Main.rand.Next(3))
         {
             case 0:
                 Projectile.frame = 0;
                 break;
             case 1:
                 Projectile.frame = 1;
+                break;
+            case 2:
+                Projectile.frame = 2;
                 break;
 
         }

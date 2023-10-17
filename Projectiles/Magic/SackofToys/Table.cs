@@ -10,8 +10,8 @@ public class Table : ModProjectile
 {
     public override void SetDefaults()
     {
-        Projectile.width = 80;
-        Projectile.height = 96;
+        Projectile.width = 42;
+        Projectile.height = 36;
         Projectile.aiStyle = 1;
         Projectile.DamageType = DamageClass.Ranged;
         Projectile.penetrate = -1;
