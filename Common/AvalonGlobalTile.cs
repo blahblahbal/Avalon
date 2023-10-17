@@ -55,6 +55,10 @@ public class AvalonGlobalTile : GlobalTile
                     noItem = true;
                 }
             }
+            if (type == ModContent.TileType<Tiles.UltraResistantWood>() && Main.player[pid].inventory[Main.player[pid].selectedItem].axe < 40)
+            {
+                fail = true;
+            }
         }
         
         // four leaf clover drops

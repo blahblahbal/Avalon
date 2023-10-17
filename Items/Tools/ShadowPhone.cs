@@ -30,7 +30,7 @@ class ShadowPhone : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<ShadowPhoneSurface>());
@@ -76,7 +76,7 @@ class ShadowPhoneSurface : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
@@ -151,7 +151,7 @@ class ShadowPhoneDungeon : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<ShadowPhoneJungleTropics>());
@@ -248,7 +248,7 @@ class ShadowPhoneOcean : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<ShadowPhoneHell>());
@@ -293,7 +293,7 @@ class ShadowPhoneHell : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<ShadowPhoneRandom>());
@@ -344,7 +344,7 @@ class ShadowPhoneJungleTropics : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<ShadowPhoneOcean>());
@@ -438,7 +438,7 @@ class ShadowPhoneRandom : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<ShadowPhone>());
@@ -537,7 +537,7 @@ class ShadowPhoneHome : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<ShadowPhoneDungeon>());

@@ -50,7 +50,7 @@ public class AccelerationPickaxe : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<AccelerationPickaxeSpeed>());
@@ -110,12 +110,12 @@ public class AccelerationPickaxeSpeed : ModItem
 
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<AccelerationPickaxe>());
         }
-        if (player.controlUseItem)
+        if (player.controlUseItem && player.whoAmI == Main.myPlayer)
         {
             if (player.position.X / 16f - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetX && (player.position.X + player.width) / 16f + Player.tileRangeX + player.inventory[player.selectedItem].tileBoost - 1f >= Player.tileTargetX && player.position.Y / 16f - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetY && (player.position.Y + player.height) / 16f + Player.tileRangeY + player.inventory[player.selectedItem].tileBoost - 2f >= Player.tileTargetY)
             {

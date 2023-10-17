@@ -27,6 +27,7 @@ using Avalon.Items.Ammo;
 using Avalon.Network;
 using Microsoft.Xna.Framework;
 using Avalon.Items.Potions.Buff;
+using Avalon.Items.Tools.PreHardmode;
 
 namespace Avalon.Common;
 
@@ -59,6 +60,18 @@ public class AvalonGlobalItem : GlobalItem
     {
         if (Main.mouseRightRelease && Main.mouseRight)
         {
+            if (item.type == ModContent.ItemType<Breakdawn>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<Breakdawn3x3>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<Breakdawn3x3>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<Breakdawn>());
+                return false;
+            }
             if (item.type == ModContent.ItemType<AccelerationPickaxe>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);

@@ -48,11 +48,11 @@ Mods: {
 			Generic_4: "{0}.exe has stopped working. Program was closed"
 		}
 
-        BossDefeatedBlurbs: {
-            MoonLord: Screams are emanating from the library...
-            WallofSteel: The ancient souls have been disturbed!
-            Phantasm: The spirits are stirring in the depths!
-        }
+		BossDefeatedBlurbs: {
+			MoonLord: Screams are emanating from the library...
+			WallofSteel: The ancient souls have been disturbed!
+			Phantasm: The spirits are stirring in the depths!
+		}
 
 		CougherMask.Tooltip:
 			'''
@@ -133,11 +133,11 @@ Mods: {
 			Adamantite: Your world has been blessed with Adamantite!
 			Titanium: Your world has been blessed with Titanium!
 			Troxinium: Your world has been blessed with Troxinium!
-            Hallowed: Your world has been glorified by the Hallow!
-            Corrupted: "Your world has been desecrated by the "
-            Corruption: Corruption!
-            Crimson: Crimson!
-            Contagion: Contagion!
+			Hallowed: Your world has been glorified by the Hallow!
+			Corrupted: "Your world has been desecrated by the "
+			Corruption: Corruption!
+			Crimson: Crimson!
+			Contagion: Contagion!
 		}
 
 		SetBonuses: {
@@ -6847,13 +6847,17 @@ Mods: {
 			}
 
 			Breakdawn: {
-				DisplayName: Breakdawn
-				Tooltip: "'With each swing the dawn breaks'"
+				DisplayName: Breakdawn (Normal)
+				Tooltip:
+					'''
+					Right click to change to speed mode
+					'With each swing the dawn breaks'
+					'''
 			}
 
 			Blueshift: {
 				DisplayName: Blueshift
-				Tooltip: ""
+				Tooltip: Mining speed increases as you mine
 			}
 
 			JungleHammer: {
@@ -6883,49 +6887,64 @@ Mods: {
 
 			ReflectorStaff: {
 				DisplayName: Reflector Staff
-				Tooltip: 
-                '''
-                Summons mirrors to reflect hostile projectiles
-                Reflected projectiles deal 3 times their original damage
-                '''
+				Tooltip:
+					'''
+					Summons mirrors to reflect hostile projectiles
+					Reflected projectiles deal 3 times their original damage
+					'''
 			}
 
 			BlahsCuisses: {
 				DisplayName: Blah's Cuisses
 				Tooltip:
-                '''
-                Melee weapons have a chance to instantly kill your non-boss enemies
-                Ranged projectiles have a chance to split in two
-                Teleportation to the cursor is enabled
-                '''
+					'''
+					Melee weapons have a chance to instantly kill your non-boss enemies
+					Ranged projectiles have a chance to split in two
+					Teleportation to the cursor is enabled
+					'''
 			}
 
 			BlahsHauberk: {
 				DisplayName: Blah's Hauberk
 				Tooltip:
-                '''
-                30% decreased mana usage
-                Increases your max number of minions by 12
-                Increases maximum mana by 800
-                '''
+					'''
+					30% decreased mana usage
+					Increases your max number of minions by 12
+					Increases maximum mana by 800
+					'''
 			}
 
 			BlahsHeadguard: {
 				DisplayName: Blah's Headguard
 				Tooltip:
-                '''
-                35% increased damage
-                11% increased critical strike chance
-                '''
+					'''
+					35% increased damage
+					11% increased critical strike chance
+					'''
 			}
 
-            NobleSlimeBand: {
+			NobleSlimeBand: {
 				DisplayName: Noble Slime Band
 				Tooltip:
-                '''
-                Reduces damage taken by 5% and negates fall damage
-                Provides immunity to slimes
-                '''
+					'''
+					Reduces damage taken by 5% and negates fall damage
+					Provides immunity to slimes
+					'''
+			}
+
+			Breakdawn3x3: {
+				DisplayName: Breakdawn (Speed)
+				Tooltip:
+					'''
+					Breaks walls and trees in a 3x3 area
+					Right click to change to normal mode
+					'With each swing the dawn breaks'
+					'''
+			}
+
+			SapphirePickaxe: {
+				DisplayName: Sapphire Pickaxe
+				Tooltip: Mining speed increases as you mine
 			}
 		}
 

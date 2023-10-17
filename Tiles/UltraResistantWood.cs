@@ -16,9 +16,14 @@ public class UltraResistantWood : ModTile
         Main.tileBrick[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>());
         DustType = ModContent.DustType<ResistantWoodDust>();
-        MinPick = 225;
+        //MinPick = 225;
+        Main.tileAxe[Type] = true;
     }
     public override bool CanExplode(int i, int j)
+    {
+        return false;
+    }
+    public override bool Slope(int i, int j)
     {
         return false;
     }
