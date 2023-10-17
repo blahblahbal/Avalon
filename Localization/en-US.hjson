@@ -6004,7 +6004,7 @@ Mods: {
 			}
 
 			AccelerationPickaxeSpeed: {
-				DisplayName: Acceleration Pickaxe (Speed)
+				DisplayName: Acceleration Pickaxe (Area)
 				Tooltip:
 					'''
 					Mines in a 3x3 area
@@ -6022,7 +6022,7 @@ Mods: {
 			}
 
 			AccelerationDrillSpeed: {
-				DisplayName: Acceleration Drill (Speed)
+				DisplayName: Acceleration Drill (Area)
 				Tooltip:
 					'''
 					Mines in a 3x3 area
@@ -6933,7 +6933,7 @@ Mods: {
 			}
 
 			Breakdawn3x3: {
-				DisplayName: Breakdawn (Speed)
+				DisplayName: Breakdawn (Area)
 				Tooltip:
 					'''
 					Breaks walls and trees in a 3x3 area
@@ -6945,6 +6945,60 @@ Mods: {
 			SapphirePickaxe: {
 				DisplayName: Sapphire Pickaxe
 				Tooltip: Mining speed increases as you mine
+			}
+
+			BundleofBalloons: {
+				DisplayName: Bundle of Balloons
+				Tooltip:
+                '''
+                Allows the holder to quadruple jump
+                Increases jump height
+                '''
+			}
+
+			BundleofHorseshoeBalloons: {
+				DisplayName: Bundle of Horseshoe Balloons
+				Tooltip:
+                '''
+                Allows the holder to quadruple jump
+                Increases jump height and negates fall damage
+                '''
+			}
+
+			MegaBundleofBalloons: {
+				DisplayName: Mega Bundle of Balloons
+				Tooltip:
+                '''
+                Allows the holder to septuple jump
+                Increases jump height
+                '''
+			}
+
+			MegaBundleofHorseshoeBalloons: {
+				DisplayName: Mega Bundle of Horseshoe Balloons
+				Tooltip:
+                '''
+                Allows the holder to septuple jump
+                Increases jump height and negates fall damage
+                '''
+			}
+
+			RocketHorseshoeBalloon: {
+				DisplayName: Rocket Horseshoe Balloon
+				Tooltip:
+                '''
+                Allows the holder to double jump
+                Increases jump height and negates fall damage
+                '''
+			}
+
+			RocketinaBalloon: {
+				DisplayName: Rocket in a Balloon
+				Tooltip:
+                '''
+                Allows the holder to double jump
+                Increases jump height
+                '''
 			}
 		}
 

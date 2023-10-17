@@ -265,23 +265,29 @@ public class DeathMessages : ModHook
                     case 4:
                         result = NetworkText.FromKey("DeathText.Slain", deadPlayerName);
                         break;
+                    case 5:
+                        result = NetworkText.FromKey("DeathText.Petrified_" + (Main.rand.Next(4) + 1), deadPlayerName);
+                        break;
                     case 6:
                         result = NetworkText.FromKey("DeathText.Stabbed", deadPlayerName);
                         break;
                     case 7:
-                        result = NetworkText.FromKey("DeathText.Suffocated", deadPlayerName);
+                        result = NetworkText.FromKey("DeathText.Suffocated_" + (Main.rand.Next(2) + 1), deadPlayerName);
                         break;
                     case 8:
-                        result = NetworkText.FromKey("DeathText.Burned", deadPlayerName);
+                        result = NetworkText.FromKey("DeathText.Burned_" + (Main.rand.Next(4) + 1), deadPlayerName);
                         break;
                     case 9:
                         result = NetworkText.FromKey("DeathText.Poisoned", deadPlayerName);
+                        break;
+                    case 10:
+                        result = NetworkText.FromKey("DeathText.Electrocuted_" + (Main.rand.Next(4) + 1), deadPlayerName);
                         break;
                     case 11:
                         result = NetworkText.FromKey("DeathText.TriedToEscape", deadPlayerName);
                         break;
                     case 12:
-                        result = NetworkText.FromKey("DeathText.WasLicked", deadPlayerName);
+                        result = NetworkText.FromKey("DeathText.WasLicked_" + (Main.rand.Next(2) + 1), deadPlayerName);
                         break;
                     case 13:
                         result = NetworkText.FromKey("DeathText.Teleport_1", deadPlayerName);
@@ -299,7 +305,7 @@ public class DeathMessages : ModHook
                         result = NetworkText.FromKey("DeathText.DiedInTheDark", deadPlayerName);
                         break;
                     case 18:
-                        result = NetworkText.FromKey("DeathText.Starved", deadPlayerName);
+                        result = NetworkText.FromKey("DeathText.Starved_" + (Main.rand.Next(3) + 1), deadPlayerName);
                         break;
                     case 19:
                         result = NetworkText.FromKey("DeathText.Space_" + (Main.rand.Next(5) + 1), deadPlayerName, Main.worldName);

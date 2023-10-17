@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Avalon.Items.AdvancedPotions;
+using Avalon.Items.Material.Herbs;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile.LargeHerbs;
 using Avalon.Items.Potions.Buff;

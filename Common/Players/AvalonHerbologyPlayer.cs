@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Avalon.Data;
+using Avalon.Items.Material.Herbs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -28,7 +29,11 @@ public class AvalonHerbologyPlayer : ModPlayer
         { ItemID.Deathweed, false },
         { ItemID.Waterleaf, false },
         { ItemID.Fireblossom, false },
-        { ItemID.Shiverthorn, false }
+        { ItemID.Shiverthorn, false },
+        //{ ModContent.ItemType<Bloodberry>(), false },
+        //{ ModContent.ItemType<Sweetstem>(), false },
+        //{ ModContent.ItemType<Barfbush>(), false },
+        //{ ModContent.ItemType<Holybird>(), false },
     };
     public HerbTier Tier { get; private set; }
     public int HerbTotal { get; private set; }
@@ -286,7 +291,11 @@ public class AvalonHerbologyPlayer : ModPlayer
                     { ItemID.Deathweed, false },
                     { ItemID.Waterleaf, false },
                     { ItemID.Fireblossom, false },
-                    { ItemID.Shiverthorn, false }
+                    { ItemID.Shiverthorn, false },
+                    //{ ModContent.ItemType<Bloodberry>(), false },
+                    //{ ModContent.ItemType<Sweetstem>(), false },
+                    //{ ModContent.ItemType<Barfbush>(), false },
+                    //{ ModContent.ItemType<Holybird>(), false }
                 };
             }
         }

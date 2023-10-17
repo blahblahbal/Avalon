@@ -30,6 +30,7 @@ class EnchantedShuriken : ModItem
         Item.value = 30;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+        Item.UseSound = SoundID.Item1;
     }
     float real;
     public override bool GrabStyle(Player player)

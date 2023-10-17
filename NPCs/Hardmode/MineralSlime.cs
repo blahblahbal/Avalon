@@ -1,8 +1,10 @@
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.IO;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,9 +13,24 @@ namespace Avalon.NPCs.Hardmode;
 
 public class MineralSlime : ModNPC
 {
-    int[] Ores = {364,1104,365,1105,366,1106};
-    Color[] OreColor = { Color.DodgerBlue,Color.OrangeRed,Color.MediumTurquoise,Color.Magenta,Color.MediumVioletRed,Color.Gray };
-    int[] OreDusts = { DustID.Cobalt, DustID.Palladium, DustID.Mythril, DustID.Orichalcum, DustID.Adamantite, DustID.Titanium};
+    int[] Ores =
+    { 
+        ItemID.CobaltOre, ItemID.PalladiumOre, ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
+        ItemID.MythrilOre, ItemID.OrichalcumOre, ModContent.ItemType<Items.Material.Ores.NaquadahOre>(),
+        ItemID.AdamantiteOre, ItemID.TitaniumOre, ModContent.ItemType<Items.Material.Ores.TroxiniumOre>()
+    };
+    Color[] OreColor =
+    {
+        new Color(61, 164, 196), new Color(240, 91, 51), new Color(147, 83, 119),
+        new Color(157, 210, 144), new Color(248, 113, 227), new Color(94, 199, 197),
+        new Color(225, 85, 152), new Color(190, 187, 220), new Color(214, 191, 43)
+    };
+    int[] OreDusts =
+    {
+        DustID.Cobalt, DustID.Palladium, ModContent.DustType<Dusts.DurataniumDust>(),
+        DustID.Mythril, DustID.Orichalcum, ModContent.DustType<Dusts.NaquadahDust>(),
+        DustID.Adamantite, DustID.Titanium, ModContent.DustType<Dusts.TroxiniumDust>()
+    };
     int WhichOre;
     public override void OnSpawn(IEntitySource source)
     {
@@ -21,10 +38,38 @@ public class MineralSlime : ModNPC
         NPC.color= OreColor[WhichOre];
         NPC.color *= 0.5f;
     }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(WhichOre);
+        writer.WriteRGB(NPC.color);
+    }
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        WhichOre = reader.ReadInt32();
+        NPC.color = reader.ReadRGB(); // maybe won't work
+    }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
         float rotate = MathHelper.SmoothStep(0.1f, -0.1f, Main.masterColor);
-        Texture2D oreTexture = (Texture2D)ModContent.Request<Texture2D>($"Terraria/Images/Item_{Ores[WhichOre]}");
+        Texture2D oreTexture;
+        if (Ores[WhichOre] > Main.maxItems)
+        {
+            if (Ores[WhichOre] == ModContent.ItemType<Items.Material.Ores.DurataniumOre>())
+            {
+                oreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.DurataniumOre>().Texture).Value;
+            }
+            else if (Ores[WhichOre] == ModContent.ItemType<Items.Material.Ores.NaquadahOre>())
+            {
+                oreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.NaquadahOre>().Texture).Value;
+            }
+            else if (Ores[WhichOre] == ModContent.ItemType<Items.Material.Ores.TroxiniumOre>())
+            {
+                oreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.TroxiniumOre>().Texture).Value;
+            }
+            else oreTexture = TextureAssets.Item[ItemID.CopperOre].Value; // will never get here but VS is stupid
+        }
+        else
+            oreTexture = TextureAssets.Item[Ores[WhichOre]].Value;
         Rectangle frame = oreTexture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
         Main.EntitySpriteDraw(oreTexture, NPC.Center - Main.screenPosition + new Vector2(0, NPC.frame.Y * -0.05f), frame, drawColor, NPC.rotation + rotate, frameOrigin, NPC.scale, SpriteEffects.None);

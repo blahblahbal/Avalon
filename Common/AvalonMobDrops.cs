@@ -294,7 +294,7 @@ public class AvalonMobDrops : GlobalNPC
             npcLoot.Add(crimsonRule);
 
             // add contagion loot
-            LeadingConditionRule contagionRule = new LeadingConditionRule(contagionCondition);
+            LeadingConditionRule contagionRule = new LeadingConditionRule(contagionNotExpert);
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
             npcLoot.Add(contagionRule);

@@ -17,6 +17,7 @@ public class HallowedOre : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;
         Main.tileOreFinderPriority[Type] = 690;
+        Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 1150;
         HitSound = SoundID.Tink;

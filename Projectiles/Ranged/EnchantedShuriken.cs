@@ -20,8 +20,8 @@ public class EnchantedShuriken : ModProjectile
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width;
-        Projectile.height = dims.Height / Main.projFrames[Projectile.type];
+        Projectile.width = 18;
+        Projectile.height = 18;
         Projectile.aiStyle = -1;
         Projectile.friendly = true;
         Projectile.penetrate = 6;

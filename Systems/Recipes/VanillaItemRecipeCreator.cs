@@ -9,6 +9,7 @@ using Avalon.Items.Material.Bars;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Items.Material.Herbs;
 using Avalon.Items.Tools.PreHardmode;
+using Avalon.Items.Accessories.PreHardmode;
 
 namespace Avalon.Systems.Recipes;
 
@@ -102,6 +103,7 @@ public class VanillaItemRecipeCreator : ModSystem
         Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.WarriorEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.RangerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.SorcererEmblem).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.BundleofBalloons).AddIngredient(ModContent.ItemType<SandyStormcloudinaBottle>()).AddIngredient(ItemID.ShinyRedBalloon, 3).AddTile(TileID.TinkerersWorkbench).Register();
         #endregion
 
         #region Bottles
