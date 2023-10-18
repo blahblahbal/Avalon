@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -32,8 +33,9 @@ class BlahsHauberk : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = "Melee and Ranged Stealth, Go Berserk, Rosebuds, Spectrum Speed, Attackers also take double full damage, and Spectre Heal";
-        //player.Avalon().doubleDamage = player.ghostHeal = player.Avalon().ghostSilence = player.Avalon().meleeStealth = player.shroomiteStealth = true;
-        //player.Avalon().spectrumSpeed = player.Avalon().goBerserk = player.Avalon().roseMagic = true;
+        player.setBonus = "Shroomite stealth, Go Berserk, Rosebuds, Spectrum Speed, Attackers also take double full damage, and Spectre Heal";
+        player.GetModPlayer<AvalonPlayer>().DoubleDamage = player.ghostHeal = player.shroomiteStealth = true;
+        player.GetModPlayer<AvalonPlayer>().SpectrumSpeed = player.GetModPlayer<AvalonPlayer>().GoBerserk = true;
+        player.GetModPlayer<AvalonPlayer>().RoseMagic = player.GetModPlayer<AvalonPlayer>().ShadowCharm = true;
     }
 }

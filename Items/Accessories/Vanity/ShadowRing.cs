@@ -10,12 +10,6 @@ namespace Avalon.Items.Accessories.Vanity;
 
 class ShadowRing : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //DisplayName.SetDefault("Shadow Ring");
-        //Tooltip.SetDefault("Negates visual cloaking from stealth armors\nWorks in the vanity slot");
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -24,14 +18,15 @@ class ShadowRing : ModItem
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 5, 0, 0);
         Item.height = dims.Height;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
-    //public override void AddRecipes()
-    //{
-    //    Recipe.Create(Type)
-    //        .AddIngredient(ItemID.ShroomiteBar, 5)
-    //        .AddIngredient(ModContent.ItemType<Material.Ores.Onyx>(), 2)
-    //        .AddTile(TileID.MythrilAnvil).Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ItemID.ShroomiteBar, 12)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
+    }
     public override void UpdateVanity(Player player)
     {
         player.GetModPlayer<AvalonPlayer>().ShadowRing = true;
@@ -45,7 +40,6 @@ public class ShadowRingHook : ModHook
 {
     protected override void Apply()
     {
-        On_PlayerDrawSet.BoringSetup_2 += On_PlayerDrawSet_BoringSetup_2;
         On_PlayerDrawSet.BoringSetup_End += On_PlayerDrawSet_BoringSetup_End;
     }
 
@@ -55,36 +49,30 @@ public class ShadowRingHook : ModHook
         {
             if (self.drawPlayer.shroomiteStealth || self.drawPlayer.setVortex)
             {
-                self.colorArmorHead = Color.White;
-                self.colorArmorBody = Color.White;
-                self.colorArmorLegs = Color.White;
-                self.colorEyeWhites = Color.White;
-                self.colorEyes = self.drawPlayer.eyeColor;
-                self.colorHair = self.drawPlayer.hairColor;
-                self.colorHead = self.drawPlayer.skinColor;
-                self.colorBodySkin = self.drawPlayer.skinColor;
-                self.colorShirt = self.drawPlayer.shirtColor;
-                self.colorUnderShirt = self.drawPlayer.underShirtColor;
-                self.colorPants = self.drawPlayer.pantsColor;
-                self.colorShoes = self.drawPlayer.shoeColor;
-                self.colorLegs = self.drawPlayer.skinColor;
+                self.colorArmorHead = ColorValue(self, Color.White);
+                self.colorArmorBody = ColorValue(self, Color.White);
+                self.colorArmorLegs = ColorValue(self, Color.White);
+                self.colorEyeWhites = ColorValue(self, Color.White);
+                self.colorEyes = ColorValue(self, self.drawPlayer.eyeColor);
+                self.colorHair = ColorValue(self, self.drawPlayer.hairColor);
+                self.colorHead = ColorValue(self, self.drawPlayer.skinColor);
+                self.colorBodySkin = ColorValue(self, self.drawPlayer.skinColor);
+                self.colorShirt = ColorValue(self, self.drawPlayer.shirtColor);
+                self.colorUnderShirt = ColorValue(self, self.drawPlayer.underShirtColor);
+                self.colorPants = ColorValue(self, self.drawPlayer.pantsColor);
+                self.colorShoes = ColorValue(self, self.drawPlayer.shoeColor);
+                self.colorLegs = ColorValue(self, self.drawPlayer.skinColor);
                 self.colorMount = Color.White;
-                self.headGlowColor = Color.White;
-                self.bodyGlowColor = Color.White;
-                self.armGlowColor = Color.White;
-                self.legsGlowColor = Color.White;
+                self.headGlowColor = Color.Transparent;
+                self.bodyGlowColor = Color.Transparent;
+                self.armGlowColor = Color.Transparent;
+                self.legsGlowColor = Color.Transparent;
             }
         }
         orig.Invoke(ref self);
     }
-
-    private void On_PlayerDrawSet_BoringSetup_2(On_PlayerDrawSet.orig_BoringSetup_2 orig, ref PlayerDrawSet self, Player player, System.Collections.Generic.List<DrawData> drawData, System.Collections.Generic.List<int> dust, System.Collections.Generic.List<int> gore, Vector2 drawPosition, float shadowOpacity, float rotation, Vector2 rotationOrigin)
+    private Color ColorValue(PlayerDrawSet pds, Color c)
     {
-        //if (player.GetModPlayer<AvalonPlayer>().ShadowRing)
-        //{
-        //    if (player.shroomiteStealth || player.setVortex) return;
-        //}
-        orig.Invoke(ref self, player, drawData, dust, gore, drawPosition, shadowOpacity, rotation, rotationOrigin);
+        return pds.drawPlayer.GetImmuneAlphaPure(Lighting.GetColorClamped((int)(pds.Position.X + pds.drawPlayer.width * 0.5) / 16, (int)(pds.Position.Y + pds.drawPlayer.height * 0.75) / 16, c), pds.shadow);
     }
-
 }

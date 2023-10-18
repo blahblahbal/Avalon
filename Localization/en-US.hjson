@@ -145,6 +145,15 @@ Mods: {
 		}
 
 		SetBonuses: {
+			BlahTier2: Shroomite stealth, Go Berserk, Rosebuds, Spectrum Speed, Attackers also take double full damage, and Spectre Heal
+			Revenant: Enemies within 15 tiles have reduced defense
+			Ancient:
+				'''
+				Ancient costs 50% less mana
+				Double tap {0} to activate Ranger's Wrath status
+				True melee hits have a chance to grant you a short period of invincibility
+				(Unimplemented summoner bonus)
+				'''
 			Aeroforce:
 				'''
 				Blessing of the Sky
@@ -645,7 +654,7 @@ Mods: {
 				Tooltip:
 					'''
 					Phases through normal tiles
-					[c/C39FDD:10th Anniversary Contest Winner - QuibopWon]
+					[c/C39FDD:10th Anniversary Contest Winner - quibop]
 					'''
 			}
 
@@ -654,7 +663,7 @@ Mods: {
 				Tooltip:
 					'''
 					Phases through normal tiles
-					[c/C39FDD:10th Anniversary Contest Winner - QuibopWon]
+					[c/C39FDD:10th Anniversary Contest Winner - quibop]
 					'''
 			}
 
@@ -1288,7 +1297,7 @@ Mods: {
 					'''
 					The holder has afterimages when moving
 					Works in the vanity slot
-					[c/C39FDD:10th Anniversary Contest Winner - QuibopWon]
+					[c/C39FDD:10th Anniversary Contest Winner - quibop]
 					'''
 			}
 
@@ -6962,21 +6971,94 @@ Mods: {
 
 			ShadowRing: {
 				DisplayName: Shadow Ring
-				Tooltip: ""
+				Tooltip:
+					'''
+					Negates visual cloaking from stealth armors
+					Works in the vanity slot
+					'''
 			}
 
 			TerrorPenguinsEarpiece: {
-				DisplayName: Terror Penguins Earpiece
+				DisplayName: TerrorPenguin's Earpiece
 				Tooltip: ""
 			}
 
 			TerrorPenguinsHeels: {
-				DisplayName: Terror Penguins Heels
+				DisplayName: TerrorPenguin's Heels
 				Tooltip: ""
 			}
 
 			TerrorPenguinsOnepiece: {
-				DisplayName: Terror Penguins One-piece
+				DisplayName: TerrorPenguin's One-piece
+				Tooltip: ""
+			}
+
+			AncientBodyplate: {
+				DisplayName: Ancient Bodyplate
+				Tooltip:
+					'''
+					Enemies are more likely to target you
+					Minion knockback is increased by 10%
+					'''
+			}
+
+			AncientHeadpiece: {
+				DisplayName: Ancient Headpiece
+				Tooltip:
+					'''
+					23% increased damage
+					6% increased critical strike chance
+					'''
+			}
+
+			AncientLeggings: {
+				DisplayName: Ancient Leggings
+				Tooltip:
+					'''
+					Increases your max number of minions by 6
+					Increases maximum mana by 100
+					'''
+			}
+
+			Ancient: {
+				DisplayName: Ancient
+				Tooltip: Casts a sandstorm
+			}
+
+			RevenantChestplate: {
+				DisplayName: Revenant Chestplate
+				Tooltip:
+					'''
+					4% increased melee damage
+					3% increased melee speed
+					'''
+			}
+
+			RevenantGreaves: {
+				DisplayName: Revenant Greaves
+				Tooltip:
+					'''
+					4% increased melee damage
+					3% increased melee speed
+					'''
+			}
+
+			RevenantHelm: {
+				DisplayName: Revenant Helm
+				Tooltip:
+					'''
+					4% increased melee damage
+					3% increased melee speed
+					'''
+			}
+
+			GhostintheMachine: {
+				DisplayName: Ghost in the Machine
+				Tooltip: ""
+			}
+
+			Rosebud: {
+				DisplayName: Rosebud
 				Tooltip: ""
 			}
 		}
@@ -7151,11 +7233,14 @@ Mods: {
 			VirulentScythe.DisplayName: Virulent Scythe
 			ContagionSpray.DisplayName: Contagion Spray
 			JungleSpray.DisplayName: Jungle Spray
-			AnchorWhipwormProjectile.DisplayName: Anchor Whipworm Projectile
+			AnchorWhipwormProjectile.DisplayName: Anchor Whipworm
 			Worm.DisplayName: Worm
 			Reflector.DisplayName: Reflector
 			Marble.DisplayName: Marble
 			RockingHorse.DisplayName: Rocking Horse
+			AncientSandstorm.DisplayName: Ancient
+			AncientSandy.DisplayName: Ancient
+			SandyExplosion.DisplayName: Sandy Explosion
 		}
 
 		NPCs: {
@@ -7783,6 +7868,20 @@ Mods: {
 			CurseofDelirium: {
 				DisplayName: Curse of Delirium
 				Description: Experiencing random bouts of confusion
+			}
+
+			Berserk: {
+				DisplayName: Berserk!
+				Description:
+					'''
+					True melee hits deal 150% critical strike damage
+					Projectile melee hits deal 80% damage
+					'''
+			}
+
+			SpectrumBlur: {
+				DisplayName: Spectrum Blur
+				Description: Mods.Avalon.Buffs.SpectrumBlur.Description
 			}
 		}
 

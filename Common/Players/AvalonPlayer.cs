@@ -5,6 +5,7 @@ using Avalon.Dusts;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Other;
 using Avalon.Prefixes;
+using Avalon.Projectiles;
 using Avalon.Systems;
 using Avalon.Tiles.Ores;
 using Avalon.Walls;
@@ -110,7 +111,7 @@ public class AvalonPlayer : ModPlayer
     public bool[] OwnedLargeGems = new bool[10];
 
     public bool shadowTele;
-    public bool teleportV;
+    public bool TeleportV;
     public bool tpStam = true;
     public int tpCD;
     public bool teleportVWasTriggered;
@@ -147,9 +148,27 @@ public class AvalonPlayer : ModPlayer
     public int HyperBar;
     public bool AmmoCost85;
     public bool FleshArmor;
+    public bool ZombieArmor;
+
+    public bool AncientLessCost;
+    public bool AncientGunslinger;
+    public bool AncientMinionGuide;
+    public bool AncientSandVortex;
+    public bool AncientRangedBonus;
+    public bool AncientRangedBonusActive;
+
+    public bool OblivionKill;
+    public bool BlahArmor;
+    public bool DoubleDamage;
+    public bool GoBerserk;
+    public bool SpectrumSpeed;
+    public bool RoseMagic;
+    public int RoseMagicCooldown;
+    public bool SplitProj;
     #endregion
 
     public bool CougherMask;
+    private int[] doubleTapTimer = new int[2];
 
     #region accessories
     public bool PulseCharm;
@@ -214,7 +233,7 @@ public class AvalonPlayer : ModPlayer
     public float ForceFieldRotation;
     public bool CoughCooldown;
     public int DeliriumCount;
-
+    public bool Berserk;
 
     public bool HungryMinion;
     public bool GastroMinion;
@@ -261,6 +280,7 @@ public class AvalonPlayer : ModPlayer
         GastroMinion = false;
         BloodCasting = false;
         Vision = false;
+        Berserk = false;
 
         // accessories
         TrapImmune = false;
@@ -314,9 +334,24 @@ public class AvalonPlayer : ModPlayer
         HyperRanged = false;
         AmmoCost85 = false;
         FleshArmor = false;
+        ZombieArmor = false;
+        AncientLessCost = false;
+        AncientGunslinger = false;
+        AncientMinionGuide = false;
+        AncientSandVortex = false;
+        AncientRangedBonus = false;
+        OblivionKill = false;
+        DoubleDamage = false;
+        SpectrumSpeed = false;
+        RoseMagic = false;
+        SplitProj = false;
+        TeleportV = false;
 
+        // prefixes
         GreedyPrefix = false;
         HoardingPrefix = false;
+
+
         CougherMask = false;
 
         SnotOrb = false;
@@ -584,6 +619,41 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdateEquips()
     {
+        #region double tap keys
+        for (int m = 0; m < 2; m++)
+        {
+            doubleTapTimer[m]--;
+            if (doubleTapTimer[m] < 0)
+            {
+                doubleTapTimer[m] = 0;
+            }
+        }
+        for (int m = 0; m < 2; m++)
+        {
+            bool keyPressedAndReleased = false;
+            switch (m)
+            {
+                case 0:
+                    keyPressedAndReleased = Player.controlDown && Player.releaseDown;
+                    break;
+                case 1:
+                    keyPressedAndReleased = Player.controlUp && Player.releaseUp;
+                    break;
+            }
+            if (keyPressedAndReleased)
+            {
+                if (doubleTapTimer[m] > 0)
+                {
+                    KeyDoubleTap(m);
+                }
+                else
+                {
+                    doubleTapTimer[m] = 15;
+                }
+            }
+        }
+        #endregion
+
         #region chaos charm
         if (ChaosCharm)
         {
@@ -605,7 +675,7 @@ public class AvalonPlayer : ModPlayer
             (PrefixLoader.GetPrefix(item.prefix) as ExxoPrefix)?.UpdateOwnerPlayer(Player);
         }
 
-        if (teleportV || tpStam)
+        if (TeleportV || tpStam)
         {
             if (tpCD > 300)
             {
@@ -730,6 +800,20 @@ public class AvalonPlayer : ModPlayer
     }
     public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
     {
+        if (RoseMagic && proj.DamageType == DamageClass.Magic && Main.rand.NextBool(8) && RoseMagicCooldown <= 0 && target.lifeMax > 5 && target.type != NPCID.TargetDummy)
+        {
+            int num36 = Item.NewItem(Player.GetSource_OnHit(target), (int)target.position.X,
+                (int)target.position.Y, target.width, target.height, ModContent.ItemType<Rosebud>());
+            Main.item[num36].velocity.Y = Main.rand.Next(-20, 1) * 0.2f;
+            Main.item[num36].velocity.X = Main.rand.Next(10, 31) * 0.2f * Player.direction;
+            RoseMagicCooldown = 20;
+        }
+
+        if (target.life <= 0 && AncientRangedBonusActive && proj.owner == Main.myPlayer && proj.DamageType == DamageClass.Ranged)
+        {
+            Projectile.NewProjectile(Player.GetSource_OnHit(target), target.position, Vector2.Zero,
+                ModContent.ProjectileType<SandyExplosion>(), hit.Damage * 2, hit.Knockback);
+        }
         if (hit.DamageType == DamageClass.Summon && SkyBlessing)
         {
             if (Main.rand.NextBool(5))
@@ -749,7 +833,15 @@ public class AvalonPlayer : ModPlayer
 
     public override void PostUpdate()
     {
-
+        if (AncientRangedBonusActive)
+        {
+            Player.GetDamage(DamageClass.Ranged) += 0.15f;
+            Player.GetCritChance(DamageClass.Ranged) += 10;
+            RangedCritDamage += 0.6f;
+            MaxRangedCrit -= 15;
+            Player.endurance -= 0.075f;
+            Player.statDefense /= 2;
+        }
         if (InertiaBoots)
         {
             if (Player.velocity.X is > 6f or < -6f)
@@ -952,6 +1044,10 @@ public class AvalonPlayer : ModPlayer
                 }
             }
         }
+        if (!AncientRangedBonus)
+        {
+            AncientRangedBonusActive = false;
+        }
     }
 
     public override void PreUpdate()
@@ -979,10 +1075,10 @@ public class AvalonPlayer : ModPlayer
         }
         #endregion
 
-        tpStam = !teleportV;
-        if (teleportV)
+        tpStam = !TeleportV;
+        if (TeleportV)
         {
-            teleportV = false;
+            TeleportV = false;
             teleportVWasTriggered = true;
         }
 
@@ -1039,6 +1135,10 @@ public class AvalonPlayer : ModPlayer
     /// <inheritdoc />
     public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
     {
+        if (ZombieArmor && Vector2.Distance(Player.Center, target.Center) < 15 * 16)
+        {
+            modifiers.FlatBonusDamage += 5;
+        }
         if (HyperMelee)
         {
             HyperBar++;
@@ -1067,6 +1167,14 @@ public class AvalonPlayer : ModPlayer
 
     public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
+        //if (ZombieArmor && Vector2.Distance(Player.Center, target.Center) < 15 * 16)
+        //{
+        //    modifiers.FlatBonusDamage += 5;
+        //}
+        if (Berserk && proj.DamageType == DamageClass.Melee)
+        {
+            modifiers.SourceDamage *= 0.6f;
+        }
         if (HyperMelee && proj.DamageType == DamageClass.Melee)
         {
             HyperBar++;
@@ -1130,6 +1238,22 @@ public class AvalonPlayer : ModPlayer
     }
     public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
     {
+        if (Berserk)
+        {
+            MeleeCritDamage += 1.5f;
+            MaxMeleeCrit -= 20;
+        }
+
+        if (OblivionKill && Main.rand.NextBool(35) && !target.boss)
+        {
+            target.life = 0;
+            target.active = false;
+            target.NPCLoot();
+        }
+        if (AncientSandVortex && Main.rand.NextBool(10) && item.DamageType == DamageClass.Melee)
+        {
+            Player.immuneTime = 120;
+        }
         if (VampireTeeth && item.DamageType == DamageClass.Melee)
         {
             if (target.boss)
@@ -1241,6 +1365,21 @@ public class AvalonPlayer : ModPlayer
     }
     public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
     {
+        if (DoubleDamage && !Player.immune && !npc.dontTakeDamage)
+        {
+            int HitDir = -1;
+            if (npc.position.X > Player.position.X)
+            {
+                HitDir = 1;
+            }
+            npc.StrikeNPC(new NPC.HitInfo
+            {
+                Damage = npc.damage * 2,
+                Knockback = 0,
+                HitDirection = HitDir
+            });
+        }
+
         if (!npc.friendly && npc.aiStyle == 9)
         {
             if (Main.rand.NextBool(1) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
@@ -1419,7 +1558,7 @@ public class AvalonPlayer : ModPlayer
                 }
             }
         }
-        else if (KeybindSystem.ShadowHotkey.JustPressed && (teleportV || teleportVWasTriggered) && tpCD >= 300)
+        else if (KeybindSystem.ShadowHotkey.JustPressed && (TeleportV || teleportVWasTriggered) && tpCD >= 300)
         {
             teleportVWasTriggered = false;
             tpCD = 0;
@@ -1543,6 +1682,47 @@ public class AvalonPlayer : ModPlayer
         //}
         #endregion
 
+        if (RoseMagic)
+        {
+            if (RoseMagicCooldown > 0)
+            {
+                RoseMagicCooldown--;
+            }
+            else
+            {
+                RoseMagicCooldown = 0;
+            }
+        }
+
+        if (SpectrumSpeed)
+        {
+            float damagePercent;
+            float maxSpeed;
+
+            if (NoSticky)
+            {
+                maxSpeed = 10f;
+            }
+            else
+            {
+                maxSpeed = Player.maxRunSpeed;
+            }
+
+            damagePercent = (-25f * (Math.Abs(Player.velocity.X) / maxSpeed)) + 25f;
+
+            if (damagePercent < 0)
+            {
+                damagePercent = 0;
+            }
+
+            if (Math.Abs(Player.velocity.X) >= maxSpeed)
+            {
+                Player.AddBuff(ModContent.BuffType<SpectrumBlur>(), 5);
+            }
+
+            Player.GetDamage(DamageClass.Ranged) += damagePercent / 100f;
+        }
+
         if (Player.whoAmI == Main.myPlayer && Main.netMode == NetmodeID.MultiplayerClient)
         {
             SyncMouseCursor(server: false);
@@ -1580,6 +1760,30 @@ public class AvalonPlayer : ModPlayer
                 Player.slippy = false;
                 Player.slippy2 = false;
             }
+        }
+    }
+    public void KeyDoubleTap(int keyDir)
+    {
+        int num = 0;
+        if (Main.ReversedUpDownArmorSetBonuses)
+        {
+            num = 1;
+        }
+        if (keyDir != num)
+        {
+            return;
+        }
+        //if (FrenzyStance && !Player.mount.Active)
+        //{
+        //    FrenzyStanceActive = !FrenzyStanceActive;
+        //}
+        //if (CaesiumBoost && !Player.mount.Active)
+        //{
+        //    CaesiumBoostActive = !CaesiumBoostActive;
+        //}
+        if (AncientRangedBonusActive && !Player.mount.Active)
+        {
+            AncientRangedBonusActive = !AncientRangedBonusActive;
         }
     }
 }

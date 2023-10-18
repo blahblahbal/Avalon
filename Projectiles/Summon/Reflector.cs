@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System;
 
 namespace Avalon.Projectiles.Summon;
 
@@ -16,6 +17,7 @@ public class Reflector : ModProjectile
     private int hostPosition = -1;
     private LinkedListNode<int> positionNode;
     private int deactivateTimer;
+    private int goUpDownTimer;
     public override void SetStaticDefaults()
     {
         Main.projFrames[Projectile.type] = 20;
@@ -55,6 +57,7 @@ public class Reflector : ModProjectile
         positionNode ??= summonPlayer.HandleReflectorSummon();
         writer.Write(positionNode.Value);
         writer.Write(deactivateTimer);
+        writer.Write(goUpDownTimer);
     }
 
     public override void ReceiveExtraAI(BinaryReader reader)
@@ -62,6 +65,7 @@ public class Reflector : ModProjectile
         base.ReceiveExtraAI(reader);
         hostPosition = reader.ReadInt32();
         deactivateTimer = reader.ReadInt32();
+        goUpDownTimer = reader.ReadInt32();
     }
 
     public override void OnKill(int timeLeft)
@@ -76,6 +80,7 @@ public class Reflector : ModProjectile
         {
             Projectile.frame = 10;
         }
+        // if you have only 1 mirror
         else if (Main.player[Projectile.owner].ownedProjectileCounts[Type] == 1)
         {
             if (Projectile.ai[2] -60 < - 55)
@@ -96,19 +101,19 @@ public class Reflector : ModProjectile
             }
             else if (Projectile.ai[2] - 60 < 20)
             {
-                Projectile.frame = 19;
+                Projectile.frame = 0;
             }
             else if (Projectile.ai[2] - 60 < 40)
             {
-                Projectile.frame = 18;
+                Projectile.frame = 19;
             }
             else if (Projectile.ai[2] - 60 < 55)
             {
-                Projectile.frame = 17;
+                Projectile.frame = 18;
             }
             else if (Projectile.ai[2] - 60 < 60)
             {
-                Projectile.frame = 16;
+                Projectile.frame = 17;
             }
         }
         else
@@ -173,7 +178,7 @@ public class Reflector : ModProjectile
                 {
                     targ.hostile = false;
                     targ.friendly = true;
-                    targ.damage *= 3; // (int)MathHelper.Clamp(targ.damage, targ.damage * 3, 150);
+                    targ.damage *= 3;
                     targ.velocity *= -1f;
                     deactivateTimer = 0;
                 }
@@ -189,7 +194,7 @@ public class Reflector : ModProjectile
                 }
                 else
                 {
-                    Projectile.ai[2] += 2f;
+                    Projectile.ai[2] += 2;
                 }
             }    
             else if (Projectile.ai[1] == 1)
@@ -200,7 +205,7 @@ public class Reflector : ModProjectile
                 }
                 else
                 {
-                    Projectile.ai[2] -= 2f;
+                    Projectile.ai[2] -= 2;
                 }
             }
             if (Projectile.ai[2] == 120)
@@ -211,7 +216,17 @@ public class Reflector : ModProjectile
             {
                 Projectile.ai[1] = 0;
             }
-            Projectile.Center = player.position - new Vector2(Projectile.ai[2] - 60, 80);
+            if (Projectile.ai[2] - 60 > 0)
+            {
+                goUpDownTimer = (int)(Projectile.ai[2] - 60) * -Math.Sign(Projectile.ai[2] - 60);
+            }
+            else
+            {
+                goUpDownTimer = (int)(Projectile.ai[2] - 60);
+            }
+
+            //uncomment goUpDownTimer to do the thing
+            Projectile.Center = player.position - new Vector2(Projectile.ai[2] - 60, 80); // + goUpDownTimer);
         }
         else
         {

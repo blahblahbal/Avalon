@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -23,10 +24,10 @@ class BlahsCuisses : ModItem
         Item.value = Item.sellPrice(2, 0, 0, 0);
         Item.height = dims.Height;
     }
-    //public override void UpdateEquip(Player player)
-    //{
-    //    player.GetModPlayer<ExxoEquipEffectPlayer>().OblivionKill = true;
-    //    player.Avalon().splitProj = true;
-    //    player.Avalon().teleportV = true;
-    //}
+    public override void UpdateEquip(Player player)
+    {
+        player.GetModPlayer<AvalonPlayer>().OblivionKill = true;
+        player.GetModPlayer<AvalonPlayer>().SplitProj = true;
+        player.GetModPlayer<AvalonPlayer>().TeleportV = true;
+    }
 }
