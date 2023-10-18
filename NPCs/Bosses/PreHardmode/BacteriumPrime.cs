@@ -81,7 +81,7 @@ public class BacteriumPrime : ModNPC
     }
     public override void SetDefaults()
     {
-        NPC.damage = 31;
+        NPC.damage = 27;
         NPC.boss = true;
         NPC.noTileCollide = true;
         NPC.lifeMax = 3100;
@@ -128,6 +128,7 @@ public class BacteriumPrime : ModNPC
     float LorR = MathHelper.PiOver4;
     public override void AI()
     {
+        int projDmg = 8;
         float speed;
 
         if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].InModBiome(ModContent.GetInstance<ContagionLenient>()))
@@ -213,7 +214,7 @@ public class BacteriumPrime : ModNPC
 
             if (Main.rand.NextBool(20) && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), projDmg, 0, -1,1);
             }
 
             NPC.ai[0]++;
@@ -244,7 +245,7 @@ public class BacteriumPrime : ModNPC
             }
             if (NPC.ai[0] % 4 == 0 && Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] < 60)
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(2, 2), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(2, 2), ModContent.ProjectileType<BacteriumGas>(), projDmg, 0, -1, 1);
             }
 
             //NPC.ai[0]++;
@@ -276,7 +277,7 @@ public class BacteriumPrime : ModNPC
             Main.dust[d].noGravity = true;
             if (Main.rand.NextBool(3) && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<BacteriumGas>(), projDmg, 0, -1, 1);
             }
         }
         if (NPC.ai[3] == 59)
@@ -315,7 +316,7 @@ public class BacteriumPrime : ModNPC
 
             if (Main.rand.NextBool(30) && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1,1);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), projDmg, 0, -1,1);
             }
 
             int MushroomCount = 0;
@@ -375,7 +376,7 @@ public class BacteriumPrime : ModNPC
                     }
                     else if(MushroomCount < 2 && NPC.position.Y < Main.worldSurface * 16 + 30 * 16)
                     {
-                        Projectile P = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation()), ModContent.ProjectileType<SporeSeed>(), NPC.damage / 3, 0, 255);
+                        Projectile P = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation()), ModContent.ProjectileType<SporeSeed>(), projDmg, 0, 255);
                         P.ai[0] = Target.Center.X;
                     }
                     else
@@ -386,7 +387,7 @@ public class BacteriumPrime : ModNPC
                         for (int i = 0; i < Balls; i++)
                         {
                             // Bouncy Ball
-                            int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / (Balls * 2) - (i * MathHelper.Pi / (Balls * 2))), ModContent.ProjectileType<BouncyBoogerBall>(), NPC.damage / 3, 0, 255);
+                            int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / (Balls * 2) - (i * MathHelper.Pi / (Balls * 2))), ModContent.ProjectileType<BouncyBoogerBall>(), projDmg, 0, 255);
                             Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
                             Main.projectile[P].ai[0] = Main.rand.Next(1,3);
                             if (Main.expertMode)
