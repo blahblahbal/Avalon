@@ -72,9 +72,44 @@ public class Reflector : ModProjectile
     public override void AI()
     {
         Projectile.frameCounter++;
-        if (deactivateTimer < 180)
+        if (deactivateTimer < 300)
         {
             Projectile.frame = 10;
+        }
+        else if (Main.player[Projectile.owner].ownedProjectileCounts[Type] == 1)
+        {
+            if (Projectile.ai[2] -60 < - 55)
+            {
+                Projectile.frame = 3;
+            }
+            else if (Projectile.ai[2] - 60 < -40)
+            {
+                Projectile.frame = 2;
+            }
+            else if (Projectile.ai[2] - 60 < -20)
+            {
+                Projectile.frame = 1;
+            }
+            else if (Projectile.ai[2] - 60 < 0)
+            {
+                Projectile.frame = 0;
+            }
+            else if (Projectile.ai[2] - 60 < 20)
+            {
+                Projectile.frame = 19;
+            }
+            else if (Projectile.ai[2] - 60 < 40)
+            {
+                Projectile.frame = 18;
+            }
+            else if (Projectile.ai[2] - 60 < 55)
+            {
+                Projectile.frame = 17;
+            }
+            else if (Projectile.ai[2] - 60 < 60)
+            {
+                Projectile.frame = 16;
+            }
         }
         else
         {
@@ -125,7 +160,7 @@ public class Reflector : ModProjectile
             positionNode ??= modPlayer.ObtainExistingReflectorSummon(hostPosition);
         }
         deactivateTimer++;
-        int closest = AvalonGlobalProjectile.FindClosestHostile(Projectile.Center, 240f);
+        int closest = AvalonGlobalProjectile.FindClosestHostile(Projectile.Center, 540f); // 240
         if (closest != -1 && deactivateTimer >= 300)
         {
             Projectile targ = Main.projectile[closest];
@@ -143,6 +178,40 @@ public class Reflector : ModProjectile
                     deactivateTimer = 0;
                 }
             }
+        }
+        else if (Main.player[Projectile.owner].ownedProjectileCounts[Type] == 1)
+        {
+            if (Projectile.ai[1] == 0)
+            {
+                if (Projectile.ai[2] < 10 || Projectile.ai[2] > 110)
+                {
+                    Projectile.ai[2]++;
+                }
+                else
+                {
+                    Projectile.ai[2] += 2f;
+                }
+            }    
+            else if (Projectile.ai[1] == 1)
+            {
+                if (Projectile.ai[2] < 10 || Projectile.ai[2] > 110)
+                {
+                    Projectile.ai[2]--;
+                }
+                else
+                {
+                    Projectile.ai[2] -= 2f;
+                }
+            }
+            if (Projectile.ai[2] == 120)
+            {
+                Projectile.ai[1] = 1;
+            }
+            if (Projectile.ai[2] == 0)
+            {
+                Projectile.ai[1] = 0;
+            }
+            Projectile.Center = player.position - new Vector2(Projectile.ai[2] - 60, 80);
         }
         else
         {

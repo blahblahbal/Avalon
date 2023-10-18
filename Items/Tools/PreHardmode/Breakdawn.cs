@@ -1,11 +1,17 @@
+using Avalon.Common;
 using Avalon.Common.Players;
+using Avalon.Hooks;
 using Microsoft.Xna.Framework;
+using MonoMod.Cil;
+using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
@@ -33,7 +39,7 @@ public class Breakdawn : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.TheBreaker)
             .AddIngredient(ModContent.ItemType<Blueshift>())
-            .AddIngredient(ModContent.ItemType<JungleHammer>())
+            .AddIngredient(ItemID.AcornAxe)
             .AddIngredient(ItemID.MoltenHamaxe)
             .AddTile(TileID.DemonAltar)
             .Register();
@@ -41,7 +47,7 @@ public class Breakdawn : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.FleshGrinder)
             .AddIngredient(ModContent.ItemType<Blueshift>())
-            .AddIngredient(ModContent.ItemType<JungleHammer>())
+            .AddIngredient(ItemID.AcornAxe)
             .AddIngredient(ItemID.MoltenHamaxe)
             .AddTile(TileID.DemonAltar)
             .Register();
@@ -49,7 +55,7 @@ public class Breakdawn : ModItem
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<MucusHammer>())
             .AddIngredient(ModContent.ItemType<Blueshift>())
-            .AddIngredient(ModContent.ItemType<JungleHammer>())
+            .AddIngredient(ItemID.AcornAxe)
             .AddIngredient(ItemID.MoltenHamaxe)
             .AddTile(TileID.DemonAltar)
             .Register();
@@ -61,6 +67,27 @@ public class Breakdawn : ModItem
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<Breakdawn3x3>());
         }
+    }
+    //public override bool? UseItem(Player player)
+    //{
+
+
+    //    MethodInfo tryReplantingTree = typeof(Player).GetMethod("TryReplantingTree",
+    //            BindingFlags.NonPublic | BindingFlags.Static);
+    //    tryReplantingTree.Invoke(player, new object[] { (int)player.GetModPlayer<AvalonPlayer>().MousePosition.X, (int)player.GetModPlayer<AvalonPlayer>().MousePosition.Y });
+    //}
+}
+public class BreakdawnAxeHook : ModHook
+{
+    protected override void Apply()
+    {
+        IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool;
+    }
+
+    private void IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool(ILContext il)
+    {
+        Utilities.AddAlternativeIdChecks(il, (ushort)ItemID.AcornAxe, id => Data.Sets.Item.Breakdawn[id]);
+        //ItemID.Sets.Factory.CreateBoolSet(ModContent.ItemType<Breakdawn>())[id]);
     }
 }
 public class Breakdawn3x3 : ModItem
