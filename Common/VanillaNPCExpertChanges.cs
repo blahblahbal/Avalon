@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
+using Avalon.NPCs.Hardmode;
 
 namespace Avalon.Common
 {
@@ -56,6 +57,21 @@ namespace Avalon.Common
             }
             #endregion Cursed Skull
         }
+        public static void SlimeJumpSpeedIncrase(NPC npc, float bonus)
+        {
+            if (!npc.collideY)
+            {
+
+                if (npc.life <= npc.lifeMax / 3)
+                {
+                    bonus += 0.2f;
+                }
+                if (npc.localAI[3] == 0)
+                    npc.velocity.Y *= bonus;
+                npc.localAI[3]++;
+            }
+            else npc.localAI[3] = 0;
+        }
         public override void AI(NPC npc)
         {
             Player TargetPlayer = Main.player[Main.myPlayer];
@@ -69,13 +85,20 @@ namespace Avalon.Common
                 if (npc.netID is NPCID.YellowSlime or NPCID.RedSlime or NPCID.PurpleSlime or NPCID.BlackSlime or
                     NPCID.CorruptSlime or NPCID.Slimeling or NPCID.Slimer2 or NPCID.ToxicSludge or NPCID.Crimslime or NPCID.BabySlime) // lots of slimes
                 {
-                    npc.ai[0]++;
+                    if(npc.collideY)
+                        npc.ai[0]++;
                 }
+
+                if(npc.netID is NPCID.CorruptSlime or NPCID.Slimeling or NPCID.Slimer2 or NPCID.ToxicSludge or NPCID.Crimslime or NPCID.RainbowSlime)
+                {
+                    SlimeJumpSpeedIncrase(npc, 1.3f);
+                }
+
                 if(npc.aiStyle == NPCAIStyleID.Slime)
                 {
-                    if (npc.life <= npc.lifeMax / 3)
+                    if (npc.life <= npc.lifeMax / 3 && npc.collideY)
                     {
-                        npc.ai[0]++;
+                            npc.ai[0]++;
                     }
                 }
                 #endregion Slimes

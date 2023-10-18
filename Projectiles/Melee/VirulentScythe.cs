@@ -1,5 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee;
@@ -78,6 +80,7 @@ public class VirulentScythe : ModProjectile
         {
             Projectile.velocity.Y = -oldVelocity.Y;
         }
+        SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
         return false;
     }
 }
