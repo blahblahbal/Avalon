@@ -6536,7 +6536,7 @@ Mods: {
 					Increases your max number of minions by 2
 					8% increased minion damage
 					Increases armor penetration by 5
-                    Grants immunity to knockback
+					Grants immunity to knockback
 					'''
 			}
 
@@ -6962,6 +6962,21 @@ Mods: {
 
 			ShadowRing: {
 				DisplayName: Shadow Ring
+				Tooltip: ""
+			}
+
+			TerrorPenguinsEarpiece: {
+				DisplayName: Terror Penguins Earpiece
+				Tooltip: ""
+			}
+
+			TerrorPenguinsHeels: {
+				DisplayName: Terror Penguins Heels
+				Tooltip: ""
+			}
+
+			TerrorPenguinsOnepiece: {
+				DisplayName: Terror Penguins One-piece
 				Tooltip: ""
 			}
 		}
