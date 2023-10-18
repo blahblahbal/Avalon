@@ -26,6 +26,7 @@ class ChaoticDestroyerEye : ModItem
         player.GetModPlayer<AvalonPlayer>().ChaosCharm = true;
         player.GetCritChance(DamageClass.Generic) += 8;
         player.GetModPlayer<AvalonPlayer>().TrapImmune = true;
+        player.GetModPlayer<AvalonPlayer>().AllMaxCrit(3);
     }
     public override void AddRecipes()
     {

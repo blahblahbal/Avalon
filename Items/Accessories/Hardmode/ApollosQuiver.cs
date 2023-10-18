@@ -37,6 +37,6 @@ class ApollosQuiver : ModItem
         player.arrowDamage += 0.15f;
         player.GetCritChance(DamageClass.Ranged) += 5;
         player.GetModPlayer<AvalonPlayer>().RangedCritDamage += 0.25f;
-        //player.GetModPlayer<AvalonPlayer>().MaxRangedCrit -= 15;
+        player.GetModPlayer<AvalonPlayer>().MaxRangedCrit -= 5;
     }
 }

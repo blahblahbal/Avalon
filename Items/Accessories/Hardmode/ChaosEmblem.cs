@@ -22,6 +22,7 @@ class ChaosEmblem : ModItem
     {
         player.GetModPlayer<AvalonPlayer>().AllCritDamage(0.3f);
         player.GetDamage(DamageClass.Generic) += 0.1f;
+        player.GetModPlayer<AvalonPlayer>().AllMaxCrit(8);
     }
     public override void AddRecipes()
     {

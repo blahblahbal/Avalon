@@ -24,6 +24,7 @@ class DionysusAmulet : ModItem
         player.maxMinions += 2;
         player.GetDamage(DamageClass.Summon) += 0.08f;
         player.GetArmorPenetration(DamageClass.Generic) += 5;
+        player.noKnockback = true;
     }
 
     public override void AddRecipes()

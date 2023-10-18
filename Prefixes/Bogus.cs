@@ -13,7 +13,8 @@ public class Bogus : ExxoPrefix
 
     public override void UpdateOwnerPlayer(Player player)
     {
-        player.GetModPlayer<AvalonPlayer>().AllCritDamage(0.06f);
+        player.GetModPlayer<AvalonPlayer>().AllCritDamage(0.04f);
+        player.GetModPlayer<AvalonPlayer>().AllMaxCrit(1);
         player.GetCritChance(DamageClass.Generic) += 2;
     }
 }

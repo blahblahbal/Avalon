@@ -122,15 +122,15 @@ public class AvalonPlayer : ModPlayer
     /// <summary>
     /// Magic critical strike chance cap. Subtract from it to use.
     /// </summary>
-    //public int MaxMagicCrit;
+    public int MaxMagicCrit;
     /// <summary>
     /// Melee critical strike chance cap. Subtract from it to use.
     /// </summary>
-    //public int MaxMeleeCrit;
+    public int MaxMeleeCrit;
     /// <summary>
     /// Ranged critical strike chance cap. Subtract from it to use.
     /// </summary>
-    //public int MaxRangedCrit;
+    public int MaxRangedCrit;
 
 
 
@@ -321,9 +321,9 @@ public class AvalonPlayer : ModPlayer
 
         SnotOrb = false;
 
-        //MaxMagicCrit = 100;
-        //MaxMeleeCrit = 100;
-        //MaxRangedCrit = 100;
+        MaxMagicCrit = 100;
+        MaxMeleeCrit = 100;
+        MaxRangedCrit = 100;
 
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
 
@@ -850,46 +850,46 @@ public class AvalonPlayer : ModPlayer
             // magic
             if (MaxMagicCrit < 100)
             {
-                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Magic)
+                if (Player.inventory[i].DamageType == DamageClass.Magic)
                 {
-                    Player.inventory[Player.selectedItem].crit = MaxMagicCrit - (int)Player.GetCritChance(DamageClass.Magic);
+                    Player.inventory[i].crit = MaxMagicCrit - (int)Player.GetTotalCritChance(DamageClass.Magic);
                 }
             }
             else
             {
-                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Magic)
+                if (Player.inventory[i].DamageType == DamageClass.Magic)
                 {
-                    Player.inventory[Player.selectedItem].crit = (int)cMagic;
+                    Player.inventory[i].crit = (int)cMagic;
                 }
             }
             // melee
             if (MaxMeleeCrit < 100)
             {
-                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Melee)
+                if (Player.inventory[i].DamageType == DamageClass.Melee)
                 {
-                    Player.inventory[Player.selectedItem].crit = MaxMeleeCrit - (int)Player.GetCritChance(DamageClass.Melee);
+                    Player.inventory[i].crit = MaxMeleeCrit - (int)Player.GetTotalCritChance(DamageClass.Melee);
                 }
             }
             else
             {
-                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Melee)
+                if (Player.inventory[i].DamageType == DamageClass.Melee)
                 {
-                    Player.inventory[Player.selectedItem].crit = (int)cMelee;
+                    Player.inventory[i].crit = (int)cMelee;
                 }
             }
             // ranged
             if (MaxRangedCrit < 100)
             {
-                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Ranged)
+                if (Player.inventory[i].DamageType == DamageClass.Ranged)
                 {
-                    Player.inventory[Player.selectedItem].crit = MaxRangedCrit - (int)Player.GetCritChance(DamageClass.Ranged);
+                    Player.inventory[i].crit = MaxRangedCrit - (int)Player.GetTotalCritChance(DamageClass.Ranged);
                 }
             }
             else
             {
-                if (Player.inventory[Player.selectedItem].DamageType == DamageClass.Ranged)
+                if (Player.inventory[i].DamageType == DamageClass.Ranged)
                 {
-                    Player.inventory[Player.selectedItem].crit = (int)cRanged;
+                    Player.inventory[i].crit = (int)cRanged;
                 }
             }
         }*/
@@ -1478,6 +1478,12 @@ public class AvalonPlayer : ModPlayer
         MeleeCritDamage += value;
         RangedCritDamage += value;
         CritDamageMult += value;
+    }
+    public void AllMaxCrit(int value)
+    {
+        MaxMagicCrit -= value;
+        MaxMeleeCrit -= value;
+        MaxRangedCrit -= value;
     }
     #endregion crit dmg stuff
     public override void PostUpdateMiscEffects()

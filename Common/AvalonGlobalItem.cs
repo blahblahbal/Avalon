@@ -282,6 +282,78 @@ public class AvalonGlobalItem : GlobalItem
         ShimmerTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
         ShimmerTransmute.Register();
     }
+    public override void ModifyWeaponCrit(Item item, Player player, ref float crit)
+    {
+        Item curItem = item;
+
+        Item storedItem = new Item();
+        storedItem.SetDefaults(curItem.type);
+
+        float cMagic = 0f;
+        float cMelee = 0f;
+        float cRanged = 0f;
+        if (storedItem.DamageType == DamageClass.Magic)
+        {
+            cMagic = item.crit + player.GetTotalCritChance(DamageClass.Magic);
+        }
+        if (storedItem.DamageType == DamageClass.Melee)
+        {
+            cMelee = item.crit + player.GetTotalCritChance(DamageClass.Melee);
+        }
+        if (storedItem.DamageType == DamageClass.Ranged)
+        {
+            cRanged = item.crit + player.GetTotalCritChance(DamageClass.Ranged);
+        }
+
+        // magic
+        if (player.GetModPlayer<AvalonPlayer>().MaxMagicCrit < 100)
+        {
+            if (item.CountsAsClass(DamageClass.Magic))
+            {
+                if (crit > player.GetModPlayer<AvalonPlayer>().MaxMagicCrit)
+                    crit = player.GetModPlayer<AvalonPlayer>().MaxMagicCrit;
+            }
+        }
+        else
+        {
+            if (item.DamageType == DamageClass.Magic)
+            {
+                crit = (int)cMagic;
+            }
+        }
+        // melee
+        if (player.GetModPlayer<AvalonPlayer>().MaxMeleeCrit < 100)
+        {
+            if (item.CountsAsClass(DamageClass.Melee))
+            {
+                if (crit > player.GetModPlayer<AvalonPlayer>().MaxMeleeCrit)
+                    crit = player.GetModPlayer<AvalonPlayer>().MaxMeleeCrit;
+            }
+        }
+        else
+        {
+            if (item.DamageType == DamageClass.Melee)
+            {
+                crit = (int)cMelee;
+            }
+        }
+        // ranged
+        if (player.GetModPlayer<AvalonPlayer>().MaxRangedCrit < 100)
+        {
+            if (item.CountsAsClass(DamageClass.Ranged))
+            {
+                if (crit > player.GetModPlayer<AvalonPlayer>().MaxRangedCrit)
+                    crit = player.GetModPlayer<AvalonPlayer>().MaxRangedCrit;
+            }
+        }
+        else
+        {
+            if (item.DamageType == DamageClass.Ranged)
+            {
+                crit = (int)cRanged;
+            }
+        }
+    }
     public void ShimmerTransmuteBothWays(int From, int To)
     {
         Recipe ShimmerTransmute = Recipe.Create(From);

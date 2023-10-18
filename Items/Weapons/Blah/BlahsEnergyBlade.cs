@@ -31,6 +31,7 @@ class BlahsEnergyBlade : ModItem
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 25, 0, 0);
+        Item.crit = 10;
         Item.useAnimation = 14;
         if (!Main.dedServ)
         {

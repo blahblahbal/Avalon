@@ -6536,6 +6536,7 @@ Mods: {
 					Increases your max number of minions by 2
 					8% increased minion damage
 					Increases armor penetration by 5
+                    Grants immunity to knockback
 					'''
 			}
 
@@ -6609,7 +6610,11 @@ Mods: {
 
 			ChaosCrystal: {
 				DisplayName: Chaos Crystal
-				Tooltip: 35% increased critical strike damage
+				Tooltip:
+					'''
+					35% increased critical strike damage
+					Reduces critical strike chance cap by 10%
+					'''
 			}
 
 			ChaosEmblem: {
@@ -6618,6 +6623,7 @@ Mods: {
 					'''
 					30% increased critical strike damage
 					10% increased damage
+					Reduces critical strike chance cap by 8%
 					'''
 			}
 
@@ -6637,6 +6643,7 @@ Mods: {
 					30% increased critical strike damage
 					15% increased damage
 					Provides immunity to traps
+					Reduces critical strike chance cap by 8%
 					'''
 			}
 
@@ -6649,6 +6656,7 @@ Mods: {
 					8% increased critical strike chance
 					Critical strike chance increases as your health drops
 					Provides immunity to traps
+					Reduces critical strike chance cap by 3%
 					'''
 			}
 
