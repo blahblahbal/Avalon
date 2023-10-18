@@ -7875,7 +7875,7 @@ Mods: {
 				Description:
 					'''
 					True melee hits deal 150% critical strike damage
-					Projectile melee hits deal 80% damage
+					Projectile melee hits deal 60% damage
 					'''
 			}
 
