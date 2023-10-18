@@ -7,11 +7,6 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 public class BadgeOfBacteria : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Increases damage by 8 after being hit\nAttackers also take damage for a short time after you are hit");
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

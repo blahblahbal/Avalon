@@ -7,13 +7,8 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
-//[AutoloadEquip(EquipType.Head)]
 class DesertGambler : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //ArmorIDs.Head.Sets.IsTallHat[Item.headSlot] = true;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

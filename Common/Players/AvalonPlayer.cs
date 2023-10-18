@@ -122,15 +122,15 @@ public class AvalonPlayer : ModPlayer
     /// <summary>
     /// Magic critical strike chance cap. Subtract from it to use.
     /// </summary>
-    public int MaxMagicCrit;
+    //public int MaxMagicCrit;
     /// <summary>
     /// Melee critical strike chance cap. Subtract from it to use.
     /// </summary>
-    public int MaxMeleeCrit;
+    //public int MaxMeleeCrit;
     /// <summary>
     /// Ranged critical strike chance cap. Subtract from it to use.
     /// </summary>
-    public int MaxRangedCrit;
+    //public int MaxRangedCrit;
 
 
 
@@ -321,9 +321,9 @@ public class AvalonPlayer : ModPlayer
 
         SnotOrb = false;
 
-        MaxMagicCrit = 100;
-        MaxMeleeCrit = 100;
-        MaxRangedCrit = 100;
+        //MaxMagicCrit = 100;
+        //MaxMeleeCrit = 100;
+        //MaxRangedCrit = 100;
 
         Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
 
@@ -824,7 +824,7 @@ public class AvalonPlayer : ModPlayer
         }
 
         #region crit cap
-        for (int i = 0; i < Player.inventory.Length; i++)
+        /*for (int i = 0; i < Player.inventory.Length; i++)
         {
             Item curItem = Player.inventory[i];
 
@@ -892,7 +892,7 @@ public class AvalonPlayer : ModPlayer
                     Player.inventory[Player.selectedItem].crit = (int)cRanged;
                 }
             }
-        }
+        }*/
         #endregion
 
         #region MapColors (leaving this here as a reference for how to reflection)

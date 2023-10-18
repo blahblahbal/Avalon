@@ -144,9 +144,7 @@ public class BaskingSpewer : ModNPC
                 pt = vec4.ToTileCoordinates();
                 tileSafely7 = Framing.GetTileSafely(pt);
                 bool flag15 = tileSafely7.HasUnactuatedTile && (TileID.Sets.Conversion.Sand[tileSafely7.TileType] || TileID.Sets.Conversion.Sandstone[tileSafely7.TileType] || TileID.Sets.Conversion.HardenedSand[tileSafely7.TileType]);
-                Tile tileSafely0 = Framing.GetTileSafely(NPC.Center.ToTileCoordinates() + new Point(0, 3));
-                bool flag1010 = tileSafely0.HasUnactuatedTile && (TileID.Sets.Conversion.Sand[tileSafely0.TileType] || TileID.Sets.Conversion.Sandstone[tileSafely0.TileType] || TileID.Sets.Conversion.HardenedSand[tileSafely0.TileType]);
-                if (flag15 || flag1010)
+                if (flag15)
                 {
                     NPC.noTileCollide = true;
                 }
