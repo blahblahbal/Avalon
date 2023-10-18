@@ -14,7 +14,7 @@ class BlahsHeadguard : ModItem
         Item.defense = 100;
         Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(2);
+        Item.value = Item.sellPrice(0, 40);
         Item.height = dims.Height;
     }
     public override void UpdateEquip(Player player)

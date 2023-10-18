@@ -25,7 +25,7 @@ public class ReflectorStaff : ModItem
         Item.knockBack = 8.5f;
         Item.rare = ItemRarityID.Cyan;
         Item.DamageType = DamageClass.Summon;
-        Item.mana = 30;
+        Item.mana = 10;
     }
     public override bool CanUseItem(Player player)
     {

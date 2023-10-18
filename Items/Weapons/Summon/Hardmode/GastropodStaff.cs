@@ -14,7 +14,7 @@ class GastropodStaff : ModItem
         Item.DamageType = DamageClass.Summon;
         Item.damage = 40;
         Item.shootSpeed = 14f;
-        Item.mana = 13;
+        Item.mana = 10;
         Item.noMelee = true;
         Item.rare = ItemRarityID.Pink;
         Item.width = dims.Width;

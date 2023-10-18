@@ -7881,7 +7881,7 @@ Mods: {
 
 			SpectrumBlur: {
 				DisplayName: Spectrum Blur
-				Description: Mods.Avalon.Buffs.SpectrumBlur.Description
+				Description: 10% chance to dodge an attack
 			}
 		}
 

@@ -24,7 +24,7 @@ class HungryStaff : ModItem
         Item.DamageType = DamageClass.Summon;
         Item.damage = 27;
         Item.shootSpeed = 14f;
-        Item.mana = 15;
+        Item.mana = 10;
         Item.noMelee = true;
         Item.rare = ItemRarityID.LightRed;
         Item.width = dims.Width;

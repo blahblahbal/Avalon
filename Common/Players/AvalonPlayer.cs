@@ -1453,6 +1453,11 @@ public class AvalonPlayer : ModPlayer
     /// <inheritdoc />
     public override void ModifyHurt(ref Player.HurtModifiers modifiers)
     {
+        if (Player.HasBuff<SpectrumBlur>() && Player.whoAmI == Main.myPlayer && Main.rand.NextBool(10))
+        {
+            SpectrumDodge();
+            return;
+        }
         if (!modifiers.PvP)
         {
             return;
@@ -1701,7 +1706,7 @@ public class AvalonPlayer : ModPlayer
 
             if (NoSticky)
             {
-                maxSpeed = 10f;
+                maxSpeed = 5f;
             }
             else
             {
@@ -1715,7 +1720,7 @@ public class AvalonPlayer : ModPlayer
                 damagePercent = 0;
             }
 
-            if (Math.Abs(Player.velocity.X) >= maxSpeed)
+            if (Math.Abs(Player.velocity.X) >= maxSpeed || Player.velocity.Y < 0f)
             {
                 Player.AddBuff(ModContent.BuffType<SpectrumBlur>(), 5);
             }
@@ -1784,6 +1789,29 @@ public class AvalonPlayer : ModPlayer
         if (AncientRangedBonusActive && !Player.mount.Active)
         {
             AncientRangedBonusActive = !AncientRangedBonusActive;
+        }
+    }
+    private void SpectrumDodge()
+    {
+        Player.immune = true;
+        if (Player.longInvince)
+        {
+            Player.immuneTime = 60;
+        }
+        else
+        {
+            Player.immuneTime = 30;
+        }
+
+        SoundEngine.PlaySound(new SoundStyle("Avalon/Sounds/Item/SpectrumDodge"), Player.position);
+        for (int i = 0; i < Player.hurtCooldowns.Length; i++)
+        {
+            Player.hurtCooldowns[i] = Player.immuneTime;
+        }
+
+        if (Player.whoAmI == Main.myPlayer)
+        {
+            NetMessage.SendData(Terraria.ID.MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
         }
     }
 }
