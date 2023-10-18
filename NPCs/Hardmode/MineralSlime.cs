@@ -32,6 +32,11 @@ public class MineralSlime : ModNPC
         DustID.Adamantite, DustID.Titanium, ModContent.DustType<Dusts.TroxiniumDust>()
     };
     int WhichOre;
+    public override void AI()
+    {
+        VanillaNPCExpertChanges.SlimeJumpSpeedIncrase(NPC, 1.2f);
+        NPC.ai[0]++;
+    }
     public override void OnSpawn(IEntitySource source)
     {
         WhichOre = Main.rand.Next(0,Ores.Length);
@@ -122,15 +127,15 @@ public class MineralSlime : ModNPC
         NPC.damage = 60;
         NPC.lifeMax = 750;
         NPC.defense = 20;
-        NPC.width = 36;
+        NPC.width = 52;
         NPC.aiStyle = 1;
         NPC.value = 1000f;
         NPC.knockBackResist = 0.07f;
-        NPC.height = 24;
+        NPC.height = 32;
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.alpha = 128;
-        NPC.scale = 1.2f;
+        NPC.scale = 1f;
         //Banner = NPC.type;
         //BannerItem = ModContent.ItemType<AdamantiteSlimeBanner>();
     }

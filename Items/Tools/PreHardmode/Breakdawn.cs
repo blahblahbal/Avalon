@@ -65,7 +65,6 @@ public class Breakdawn : ModItem
 }
 public class Breakdawn3x3 : ModItem
 {
-    public override string Texture => ModContent.GetInstance<Breakdawn>().Texture;
     public override void SetDefaults()
     {
         Item.width = 44;
