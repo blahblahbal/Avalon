@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria.Enums;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Avalon.Tiles.Furniture
 {
@@ -44,6 +45,18 @@ namespace Avalon.Tiles.Furniture
             {
                 offsetY -= 8;
             }
+        }
+        public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
+        {
+            bool intoRenderTargets = true;
+            bool flag = intoRenderTargets || Main.LightingEveryFrame;
+
+            if (Main.tile[i, j].TileFrameX % 36 == 0 && Main.tile[i, j].TileFrameY % 54 == 0 && flag)
+            {
+                Main.instance.TilesRenderer.AddSpecialPoint(i, j, 5);
+            }
+
+            return false;
         }
     }
 }
