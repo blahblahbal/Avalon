@@ -21,18 +21,6 @@ internal class AvalonGlobalProjectile : GlobalProjectile
         {
             projectile.Kill();
         }
-        if (projectile.owner < 255 && Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().SplitProj && Main.rand.NextBool(7))
-        {
-            for (int num122 = 0; num122 < 2; num122++)
-            {
-                float num123 = projectile.velocity.X;
-                float num124 = projectile.velocity.Y;
-                num123 += Main.rand.Next(-30, 31) * 0.05f;
-                num124 += Main.rand.Next(-30, 31) * 0.05f;
-                Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.position.X, projectile.position.Y, num123, num124, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, projectile.ai[0], projectile.ai[1], projectile.ai[2]);
-            }
-            projectile.Kill();
-        }
     }
     public static int FindClosestHostile(Vector2 pos, float dist)
     {

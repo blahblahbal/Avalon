@@ -1,5 +1,6 @@
 using Avalon.Buffs;
 using Avalon.Dusts;
+using Avalon.Items.Armor.Hardmode;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -19,7 +20,6 @@ public class AvalonStaminaPlayer : ModPlayer
     public int FlightRestoreCooldown = 0;
     public bool FlightRestoreUnlocked = false;
     public bool ReleaseQuickStamina;
-    public bool RocketJumpUnlocked = false;
     public bool SprintUnlocked = false;
     public bool StamFlower = false;
     public bool StaminaDrain = false;
@@ -296,24 +296,24 @@ public class AvalonStaminaPlayer : ModPlayer
             if (StaminaCooldown >= 10)
             {
                 Player.ConsumeStamina(1);
-                //int amt = 1;
-                //if (StaminaDrain)
-                //{
-                //    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-                //}
+                int amt = 1;
+                if (StaminaDrain)
+                {
+                    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+                }
 
-                //if (StatStam >= amt)
-                //{
-                //    StatStam -= amt;
-                //}
-                //else if (StamFlower)
-                //{
-                //    QuickStamina();
-                //    if (StatStam >= amt)
-                //    {
-                //        StatStam -= amt;
-                //    }
-                //}
+                if (StatStam >= amt)
+                {
+                    StatStam -= amt;
+                }
+                else if (StamFlower)
+                {
+                    QuickStamina();
+                    if (StatStam >= amt)
+                    {
+                        StatStam -= amt;
+                    }
+                }
 
                 if (StatStam <= 0)
                 {
@@ -330,38 +330,37 @@ public class AvalonStaminaPlayer : ModPlayer
             }
         }
         // sprinting
-        /*if (ActivateSprint)
+        if (ActivateSprint)
         {
             if ((Player.controlRight || Player.controlLeft) && Player.velocity.X != 0f)
             {
                 bool flag17 = true;
                 StaminaSprintCooldown++;
-                Player.GetModPlayer<AvalonStaminaPlayer>().StaminaRegenCount = 0;
+                StaminaRegenCount = 0;
                 if (StaminaSprintCooldown >= 30)
                 {
                     int amt = 10;
-                    if (Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrain)
+                    if (StaminaDrain)
                     {
-                        amt *= (int)(Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks *
-                                     Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainMult);
+                        amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
                     }
 
-                    if (Player.GetModPlayer<AvalonStaminaPlayer>().StatStam >= amt)
+                    if (StatStam >= amt)
                     {
-                        Player.GetModPlayer<AvalonStaminaPlayer>().StatStam -= amt;
+                        StatStam -= amt;
                     }
-                    else if (Player.GetModPlayer<AvalonStaminaPlayer>().StamFlower)
+                    else if (StamFlower)
                     {
-                        Player.GetModPlayer<AvalonStaminaPlayer>().QuickStamina();
-                        if (Player.GetModPlayer<AvalonStaminaPlayer>().StatStam >= amt)
+                        QuickStamina();
+                        if (StatStam >= amt)
                         {
-                            Player.GetModPlayer<AvalonStaminaPlayer>().StatStam -= amt;
+                            StatStam -= amt;
                         }
                     }
 
-                    if (Player.GetModPlayer<AvalonStaminaPlayer>().StatStam <= 0)
+                    if (StatStam <= 0)
                     {
-                        Player.GetModPlayer<AvalonStaminaPlayer>().StatStam = 0;
+                        StatStam = 0;
                         flag17 = false;
                     }
 
@@ -375,58 +374,73 @@ public class AvalonStaminaPlayer : ModPlayer
                         !Player.HasItemInArmor(ItemID.LightningBoots) &&
                         !Player.HasItemInArmor(ItemID.FrostsparkBoots) &&
                         !Player.HasItemInArmor(ItemID.SailfishBoots) &&
-                        !Player.GetModPlayer<ExxoEquipEffectPlayer>().InertiaBoots && !Player.GetModPlayer<ExxoEquipEffectPlayer>().BlahWings)
+                        !Player.GetModPlayer<AvalonPlayer>().InertiaBoots && !Player.GetModPlayer<AvalonPlayer>().BlahWings)
                     {
                         Player.accRunSpeed = 6f;
                     }
                     else if (!Player.HasItemInArmor(ItemID.LightningBoots) &&
                              !Player.HasItemInArmor(ItemID.FrostsparkBoots) &&
-                             !Player.GetModPlayer<ExxoEquipEffectPlayer>().InertiaBoots && !Player.GetModPlayer<ExxoEquipEffectPlayer>().BlahWings)
+                             !Player.GetModPlayer<AvalonPlayer>().InertiaBoots && !Player.GetModPlayer<AvalonPlayer>().BlahWings)
                     {
                         Player.accRunSpeed = 6.75f;
                     }
-                    else if (!Player.GetModPlayer<ExxoEquipEffectPlayer>().InertiaBoots && !Player.GetModPlayer<ExxoEquipEffectPlayer>().BlahWings)
+                    else if (!Player.GetModPlayer<AvalonPlayer>().InertiaBoots && !Player.GetModPlayer<AvalonPlayer>().BlahWings)
                     {
-                        Player.accRunSpeed = 10.29f;
-                        if ((Player.velocity.X < 4f && Player.controlRight) ||
-                            (Player.velocity.X > -4f && Player.controlLeft))
+                        if (!Player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
                         {
-                            Player.velocity.X = Player.velocity.X + (Player.controlRight ? 0.31f : -0.31f);
+                            Player.accRunSpeed = 10.29f;
                         }
-                        else if ((Player.velocity.X < 8f && Player.controlRight) ||
-                                 (Player.velocity.X > -8f && Player.controlLeft))
+                        else
                         {
-                            Player.velocity.X = Player.velocity.X + (Player.controlRight ? 0.29f : -0.29f);
+                            Player.accRunSpeed = 4.5f;
+                        }
+                        if (!Player.vortexStealthActive && !Player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
+                        {
+                            if ((Player.velocity.X < 4f && Player.controlRight) ||
+                                (Player.velocity.X > -4f && Player.controlLeft))
+                            {
+                                Player.velocity.X = Player.velocity.X + (Player.controlRight ? 0.31f : -0.31f);
+                            }
+                            else if ((Player.velocity.X < 8f && Player.controlRight) ||
+                                     (Player.velocity.X > -8f && Player.controlLeft))
+                            {
+                                Player.velocity.X = Player.velocity.X + (Player.controlRight ? 0.29f : -0.29f);
+                            }
                         }
                     }
                     else
                     {
-                        Player.accRunSpeed = 14.29f;
-                        if ((Player.velocity.X < 5f && Player.controlRight) ||
-                            (Player.velocity.X > -5f && Player.controlLeft))
+                        if (!Player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
                         {
-                            Player.velocity.X = Player.velocity.X + (Player.controlRight ? 0.41f : -0.41f);
+                            Player.accRunSpeed = 14.29f;
                         }
-                        else if ((Player.velocity.X < 14f && Player.controlRight) ||
-                                 (Player.velocity.X > -14f && Player.controlLeft))
+                        else
                         {
-                            Player.velocity.X = Player.velocity.X + (Player.controlRight ? 0.39f : -0.39f);
+                            Player.accRunSpeed = 6f;
+                        }
+                        if (!Player.vortexStealthActive && !Player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
+                        {
+                            if ((Player.velocity.X < 5f && Player.controlRight) ||
+                                (Player.velocity.X > -5f && Player.controlLeft))
+                            {
+                                Player.velocity.X = Player.velocity.X + (Player.controlRight ? 0.41f : -0.41f);
+                            }
+                            else if ((Player.velocity.X < 14f && Player.controlRight) ||
+                                     (Player.velocity.X > -14f && Player.controlLeft))
+                            {
+                                Player.velocity.X = Player.velocity.X + (Player.controlRight ? 0.39f : -0.39f);
+                            }
                         }
                     }
                 }
             }
-        }*/
+        }
     }
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
         if (KeybindSystem.QuickStaminaHotkey.JustPressed)
         {
             QuickStamina();
-        }
-        if (KeybindSystem.RocketJumpHotkey.JustPressed && RocketJumpUnlocked)
-        {
-            ActivateRocketJump = !ActivateRocketJump;
-            Main.NewText(!ActivateRocketJump ? "Rocket Jump Off" : "Rocket Jump On");
         }
 
         if (KeybindSystem.SprintHotkey.JustPressed && SprintUnlocked)
@@ -473,7 +487,6 @@ public class AvalonStaminaPlayer : ModPlayer
     public override void SaveData(TagCompound tag)
     {
         tag["Avalon:Stamina"] = StatStamMax;
-        tag["Avalon:RocketJumpUnlocked"] = RocketJumpUnlocked;
         tag["Avalon:TeleportUnlocked"] = TeleportUnlocked;
         tag["Avalon:SwimmingUnlocked"] = SwimmingUnlocked;
         tag["Avalon:SprintUnlocked"] = SprintUnlocked;
@@ -485,10 +498,6 @@ public class AvalonStaminaPlayer : ModPlayer
         if (tag.ContainsKey("Avalon:Stamina"))
         {
             StatStamMax = tag.GetAsInt("Avalon:Stamina");
-        }
-        if (tag.ContainsKey("Avalon:RocketJumpUnlocked"))
-        {
-            RocketJumpUnlocked = tag.Get<bool>("Avalon:RocketJumpUnlocked");
         }
         if (tag.ContainsKey("Avalon:TeleportUnlocked"))
         {

@@ -211,6 +211,10 @@ public class AvalonPlayer : ModPlayer
     public bool DuraOmegaShield;
     public bool DesertGamblerVisible;
     public bool ShadowRing;
+    public bool BlahWings;
+    public int bubbleCD;
+    public bool BubbleBoost;
+    public bool CrystalSkull;
     #endregion
 
     #region buffs and debuffs
@@ -324,6 +328,9 @@ public class AvalonPlayer : ModPlayer
         PallOmegaShield = false;
         DuraOmegaShield = false;
         ShadowRing = false;
+        BlahWings = false;
+        BubbleBoost = false;
+        CrystalSkull = false;
 
         // armor sets
         SkyBlessing = false;
@@ -626,6 +633,33 @@ public class AvalonPlayer : ModPlayer
             Player.GetModPlayer<AvalonStaminaPlayer>().StatStam = tag.Get<int>("Avalon:StatStam");
         }
     }
+    /// <summary>
+    /// Keep the player in the bounds of the world.
+    /// </summary>
+    /// <param name="pos"></param>
+    public static void StayInBounds(Vector2 pos)
+    {
+        if (pos.X > Main.maxTilesX - 100)
+        {
+            pos.X = Main.maxTilesX - 100;
+        }
+
+        if (pos.X < 100f)
+        {
+            pos.X = 100f;
+        }
+
+        if (pos.Y > Main.maxTilesY)
+        {
+            pos.Y = Main.maxTilesY;
+        }
+
+        if (pos.Y < 100f)
+        {
+            pos.Y = 100f;
+        }
+    }
+
     public override void PostUpdateEquips()
     {
         #region double tap keys
@@ -671,6 +705,131 @@ public class AvalonPlayer : ModPlayer
             Player.GetCritChance(DamageClass.Generic) += modCrit;
         }
         #endregion chaos charm
+
+        #region bubble boost
+        if (BubbleBoost && !Player.IsOnGround() && !Player.releaseJump)// &&
+            //!NPC.AnyNPCs(ModContent.NPCType<Bosses.Superhardmode.ArmageddonSlime>()))
+        {
+            #region bubble timer and spawn bubble gores/sound
+            bubbleCD++;
+            if (bubbleCD == 20)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    int g1 = Gore.NewGore(Player.GetSource_FromThis(),
+                        Player.Center + new Vector2(Main.rand.Next(-32, 33), Main.rand.Next(-32, 33)), Player.velocity,
+                        Mod.Find<ModGore>("Bubble").Type);
+                    SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/Bubbles"),
+                        Player.position);
+                }
+            }
+
+            if (bubbleCD == 30)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    int g1 = Gore.NewGore(Player.GetSource_FromThis(),
+                        Player.Center + new Vector2(Main.rand.Next(-32, 33), Main.rand.Next(-32, 33)), Player.velocity,
+                        Mod.Find<ModGore>("LargeBubble").Type);
+                }
+            }
+
+            if (bubbleCD == 40)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    int g1 = Gore.NewGore(Player.GetSource_FromThis(),
+                        Player.Center + new Vector2(Main.rand.Next(-32, 33), Main.rand.Next(-32, 33)), Player.velocity,
+                        Mod.Find<ModGore>("SmallBubble").Type);
+                }
+
+                bubbleCD = 0;
+            }
+            #endregion bubble timer and spawn bubble gores/sound
+
+            #region down
+            if (Player.controlDown && Player.controlJump)
+            {
+                Player.wingsLogic = 0;
+                Player.rocketBoots = 0;
+                if (Player.controlLeft)
+                {
+                    Player.velocity.X = -15f;
+                }
+                else if (Player.controlRight)
+                {
+                    Player.velocity.X = 15f;
+                }
+                else
+                {
+                    Player.velocity.X = 0f;
+                }
+
+                Player.velocity.Y = 15f;
+                //bubbleBoostActive = true;
+            }
+            #endregion down
+            #region up
+            else if (Player.controlUp && Player.controlJump)
+            {
+                Player.wingsLogic = 0;
+                Player.rocketBoots = 0;
+                if (Player.controlLeft)
+                {
+                    Player.velocity.X = -15f;
+                }
+                else if (Player.controlRight)
+                {
+                    Player.velocity.X = 15f;
+                }
+                else
+                {
+                    Player.velocity.X = 0f;
+                }
+
+                Player.velocity.Y = -15f;
+                //bubbleBoostActive = true;
+            }
+            #endregion up
+            #region left
+            else if (Player.controlLeft && Player.controlJump)
+            {
+                Player.velocity.X = -15f;
+                Player.wingsLogic = 0;
+                Player.rocketBoots = 0;
+                if (Player.gravDir == 1f && Player.velocity.Y > -Player.gravity)
+                {
+                    Player.velocity.Y = -(Player.gravity + 1E-06f);
+                }
+                else if (Player.gravDir == -1f && Player.velocity.Y < Player.gravity)
+                {
+                    Player.velocity.Y = Player.gravity + 1E-06f;
+                }
+                //bubbleBoostActive = true;
+            }
+            #endregion left
+            #region right
+            else if (Player.controlRight && Player.controlJump)
+            {
+                Player.velocity.X = 15f;
+                Player.wingsLogic = 0;
+                Player.rocketBoots = 0;
+                if (Player.gravDir == 1f && Player.velocity.Y > -Player.gravity)
+                {
+                    Player.velocity.Y = -(Player.gravity + 1E-06f);
+                }
+                else if (Player.gravDir == -1f && Player.velocity.Y < Player.gravity)
+                {
+                    Player.velocity.Y = Player.gravity + 1E-06f;
+                }
+
+                //bubbleBoostActive = true;
+            }
+            #endregion right
+
+            StayInBounds(Player.position);
+        }
+        #endregion bubble boost
 
         if (AccLavaMerman && !HideVarefolk && Collision.LavaCollision(Player.position, Player.width, Player.height))
         {
@@ -1352,11 +1511,9 @@ public class AvalonPlayer : ModPlayer
     {
         //if (!proj.friendly && !proj.bobber && !Data.Sets.Projectile.DontReflect[proj.type] && Reflex)
         //{
-        //    if (Main.rand.NextBool(1) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
+        //    if (Main.rand.NextBool(4) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
         //    {
-
-        //        modifiers.HitDirectionOverride = 0;
-        //        modifiers.SetMaxDamage(1);
+        //        proj.GetGlobalProjectile<AvalonGlobalProjectileInstance>().Reflect = true;
         //        proj.hostile = false;
         //        proj.friendly = true;
         //        proj.velocity *= -1;
@@ -1443,6 +1600,36 @@ public class AvalonPlayer : ModPlayer
                 if (N.damage - ((Player.statDefense / 2) + 10) <= 0)
                 {
                     return true;
+                }
+            }
+        }
+        if (Reflex)
+        {
+            if (damageSource.SourceProjectileLocalIndex > -1)
+            {
+                Projectile proj = Main.projectile[damageSource.SourceProjectileLocalIndex];
+                if (!proj.friendly && !proj.bobber && !Data.Sets.Projectile.DontReflect[proj.type])
+                {
+                    if (Main.rand.NextBool(3) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
+                    {
+                        proj.hostile = false;
+                        proj.friendly = true;
+                        proj.velocity *= -1;
+                        return true;
+                    }
+                }
+            }
+            if (damageSource.SourceNPCIndex > -1)
+            {
+                NPC npc = Main.npc[damageSource.SourceNPCIndex];
+                if (!npc.friendly && npc.aiStyle == 9)
+                {
+                    if (Main.rand.NextBool(3) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
+                    {
+                        npc.friendly = true;
+                        npc.velocity *= -1;
+                        return true;
+                    }
                 }
             }
         }

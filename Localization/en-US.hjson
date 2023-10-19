@@ -2211,6 +2211,11 @@ Mods: {
 				Tooltip: Unlocks stamina teleport
 			}
 
+			SprintScroll: {
+				DisplayName: Sprint Scroll
+				Tooltip: Unlocks stamina sprinting
+			}
+
 			StaminaCrystal: {
 				DisplayName: Stamina Crystal
 				Tooltip: Permanently increases maximum stamina by 30
@@ -7054,12 +7059,27 @@ Mods: {
 
 			GhostintheMachine: {
 				DisplayName: Ghost in the Machine
-				Tooltip: ""
+				Tooltip: "'OoOoo spooky'"
 			}
 
 			Rosebud: {
 				DisplayName: Rosebud
 				Tooltip: ""
+			}
+
+			BubbleBoost: {
+				DisplayName: Bubble Boost
+				Tooltip:
+					'''
+					Allows the holder to bubble boost
+					Hold JUMP and a directional key to fly
+					'A relic of starbound times past'
+					'''
+			}
+
+			SwimmingScroll: {
+				DisplayName: Swimming Scroll
+				Tooltip: Unlocks stamina swimming
 			}
 		}
 

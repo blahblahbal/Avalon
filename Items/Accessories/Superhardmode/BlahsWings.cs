@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.Items.Armor.Hardmode;
 using Avalon.Items.Material;
 using Avalon.Rarities;
 using Avalon.Tiles;
@@ -44,7 +45,8 @@ internal class BlahsWings : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        //player.GetModPlayer<AvalonPlayer>().BlahWings = true;
+        player.GetModPlayer<AvalonPlayer>().BlahWings = true;
+        //player.GetModPlayer<AvalonPlayer>().BubbleBoost = true;
         player.GetModPlayer<AvalonPlayer>().NoSticky = true;
         player.pStone = true;
         player.GetModPlayer<AvalonPlayer>().TrapImmune =
@@ -61,14 +63,14 @@ internal class BlahsWings : ModItem
 
         player.accRunSpeed = 10.29f;
         // add back later
-        //if (!player.GetModPlayer<ExxoEquipEffectPlayer>().CaesiumBoostActive)
-        //{
-        //    player.accRunSpeed = 10.29f;
-        //}
-        //else
-        //{
-        //    player.accRunSpeed = 5f;
-        //}
+        if (!player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
+        {
+            player.accRunSpeed = 10.29f;
+        }
+        else
+        {
+            player.accRunSpeed = 5f;
+        }
         player.rocketBoots = 2;
         player.GetAttackSpeed(DamageClass.Melee) += 0.15f;
         player.noFallDmg = true;
@@ -111,7 +113,7 @@ internal class BlahsWings : ModItem
                 }
             }
         }
-        if (!player.vortexStealthActive) //&& !player.GetModPlayer<ExxoEquipEffectPlayer>().CaesiumBoostActive)
+        if (!player.vortexStealthActive && !player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
         {
             if (player.controlLeft)
             {

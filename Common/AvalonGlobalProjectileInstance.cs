@@ -1,3 +1,4 @@
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Avalon.Common
@@ -5,7 +6,9 @@ namespace Avalon.Common
     internal class AvalonGlobalProjectileInstance : GlobalProjectile
     {
         public override bool InstancePerEntity => true;
-
-        public bool ReflectRunOnce;
+        public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)
+        {
+            return true;
+        }
     }
 }

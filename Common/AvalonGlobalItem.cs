@@ -28,6 +28,7 @@ using Avalon.Network;
 using Microsoft.Xna.Framework;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tools.PreHardmode;
+using Terraria.DataStructures;
 
 namespace Avalon.Common;
 
@@ -559,6 +560,22 @@ public class AvalonGlobalItem : GlobalItem
                 break;
             #endregion ML item rebalance
         }
+    }
+    public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    {
+        if (player.GetModPlayer<AvalonPlayer>().SplitProj && Main.rand.NextBool(7) && item.DamageType == DamageClass.Ranged && item.useAmmo > 0)
+        {
+            for (int num122 = 0; num122 < 2; num122++)
+            {
+                float num123 = velocity.X;
+                float num124 = velocity.Y;
+                num123 += Main.rand.Next(-30, 31) * 0.05f;
+                num124 += Main.rand.Next(-30, 31) * 0.05f;
+                Projectile.NewProjectile(player.GetSource_FromThis(), position.X, position.Y, num123, num124, type, damage, knockback, player.whoAmI);
+            }
+            return false;
+        }
+        return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
     }
     public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)
     {
