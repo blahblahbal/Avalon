@@ -143,7 +143,7 @@ public class QuantumBeam : ModProjectile
     {
         SoundEngine.PlaySound(StarSoundReal, Projectile.position);
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         for (int i = 0; i <= 20; i++)
         {

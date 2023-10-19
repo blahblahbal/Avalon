@@ -118,7 +118,7 @@ public class AeonStar : ModProjectile
             Projectile.Kill();
         }
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Item110, Projectile.Center);
 

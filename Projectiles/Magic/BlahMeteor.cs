@@ -24,7 +24,7 @@ public class BlahMeteor : ModProjectile
         Lighting.AddLight(Projectile.position, 249 / 255, 201 / 255, 77 / 255);
         return true;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
         Projectile.position.X = Projectile.position.X + Projectile.width / 2;

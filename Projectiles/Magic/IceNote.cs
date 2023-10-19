@@ -73,7 +73,7 @@ public class IceNote : ModProjectile
         PitchVariance = 0f,
         MaxInstances = 10,
     };
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(Icenote, Projectile.Center);
 

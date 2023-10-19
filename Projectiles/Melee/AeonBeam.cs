@@ -31,7 +31,7 @@ public class AeonBeam : ModProjectile
     public override void AI()
     {
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
         particleOrchestraSettings.PositionInWorld = Projectile.Center;

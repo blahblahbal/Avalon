@@ -60,7 +60,7 @@ public class Shell : ModProjectile
         Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         for(int i = 0; i < 30; i++)
         {

@@ -19,7 +19,7 @@ public class Blahcket : ModProjectile
         Projectile.alpha = 0;
         Projectile.friendly = true;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
         Projectile.position.X = Projectile.position.X + (float)(Projectile.width / 2);
@@ -129,7 +129,7 @@ public class Blahcket : ModProjectile
                     Dust expr_62DD_cp_0 = Main.dust[num130];
                     expr_62DD_cp_0.position.Y = expr_62DD_cp_0.position.Y - num128;
                 }
-                if (Main.rand.Next(5) == 0)
+                if (Main.rand.NextBool(5))
                 {
                     int num131 = 4;
                     int num132 = Dust.NewDust(new Vector2(Projectile.position.X + (float)num131, Projectile.position.Y + (float)num131), Projectile.width - num131 * 2, Projectile.height - num131 * 2, DustID.Smoke, 0f, 0f, 100, default(Color), 0.6f);

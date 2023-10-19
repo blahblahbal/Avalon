@@ -90,7 +90,7 @@ namespace Avalon.Common.VanillaWeaponReworks
             }
             Projectile.velocity.X += Main.windSpeedCurrent * 0.03f;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item27, Projectile.position);
             for(int i = 0; i < 7; i++)

@@ -47,7 +47,7 @@ public class Bone1 : ModProjectile
         Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         for (int i = 0; i < 4; i++)
         {
@@ -94,7 +94,7 @@ public class Bone2 : ModProjectile
         Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         for (int i = 0; i < 4; i++)
         {
@@ -180,7 +180,7 @@ public class Bone3 : ModProjectile
         Main.EntitySpriteDraw(texture, new Vector2(drawPos.X - 9, drawPos.Y - 8), frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         for (int i = 0; i < 10; i++)
         {
@@ -248,7 +248,7 @@ public class Bone4 : ModProjectile
         SoundEngine.PlaySound(SoundID.NPCHit2, Projectile.Center);
         return false;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         for (int i = 0; i < 4; i++)
         {

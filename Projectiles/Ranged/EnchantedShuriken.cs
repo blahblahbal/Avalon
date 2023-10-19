@@ -85,7 +85,7 @@ public class EnchantedShuriken : ModProjectile
         settings = particleOrchestraSettings;
         ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PrincessWeapon, settings, Projectile.owner);
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
         //for (int i = 0; i < 15; i++)

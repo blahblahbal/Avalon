@@ -56,7 +56,6 @@ public class ZirconGemspark : ModTile
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         Tile tile = Main.tile[i, j];
-        Texture2D texture;
         Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
         if (Main.drawToScreen)
         {

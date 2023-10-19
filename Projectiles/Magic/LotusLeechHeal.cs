@@ -76,7 +76,7 @@ public class LotusLeechHeal : ModProjectile
         Lighting.AddLight(new Vector2((int)((Projectile.position.X + Projectile.width / 2) / 16f), (int)((Projectile.position.Y + Projectile.height / 2) / 16f)), color.ToVector3());
     }
 
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
     }
 }

@@ -50,7 +50,6 @@ public class MonsterBanner : ModTile
         {
             Player player = Main.LocalPlayer;
             int style = Main.tile[i, j].TileFrameX / 18;
-            string type;
             int t = 1;
             switch (style)
             {

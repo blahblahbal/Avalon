@@ -71,7 +71,7 @@ public class MushroomWall : ModProjectile
         Main.EntitySpriteDraw(textureTop, drawPosTop, frameTop, Lighting.GetColor((drawPosTop + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Width / 2, 0), 1f, SpriteEffects.None, 0);
         return false;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.NPCDeath1, Projectile.position);
         for(int i = 0; i < Projectile.height; i++)

@@ -79,7 +79,7 @@ public class GlacierBall : ModProjectile
         }
         return false;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Item27, Projectile.position);
         Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.oldVelocity * 0.2f, Mod.Find<ModGore>("GlacierChunk1").Type, 1.2f);

@@ -22,7 +22,7 @@ internal class IntelligenceBoots : ModItem
             player.GetModPlayer<IntBootsPlayer>().Boots = true;
             player.GetModPlayer<IntBootsPlayer>().BootsCount--;
         }
-        else if (Main.rand.NextBool(1))
+        else if (Main.rand.NextBool(30))
         {
             player.GetModPlayer<IntBootsPlayer>().BootsCount = Main.rand.Next(100, 150);
         }

@@ -23,7 +23,7 @@ public class BlahStar : ModProjectile
         Lighting.AddLight(Projectile.position, 249 / 255, 201 / 255, 77 / 255);
         return true;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
         for (int i = 0; i < 2; i++)

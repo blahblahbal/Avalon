@@ -39,7 +39,7 @@ public class Librarian : ModNPC
         NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
         NPCID.Sets.ShimmerTownTransform[Type] = true;
 
-        var drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0) {Velocity = 1f};
+        var drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers() {Velocity = 1f};
 
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
 
@@ -149,12 +149,12 @@ public class Librarian : ModNPC
 
     public override string GetChat()
     {
-        if (!Main.dayTime && Main.hardMode && Main.rand.Next(5) == 0)
+        if (!Main.dayTime && Main.hardMode && Main.rand.NextBool(5))
         {
             return "My home is fraught with Wraiths. I'm deathly afraid of them; please keep them away.";
         }
 
-        if (NPC.AnyNPCs(NPCID.DyeTrader) && Main.rand.Next(6) == 0)
+        if (NPC.AnyNPCs(NPCID.DyeTrader) && Main.rand.NextBool(6))
         {
             return "Wow, " + Main.npc[AvalonGlobalNPC.FindATypeOfNPC(NPCID.DyeTrader)].GivenName +
                    "'s services are free? Where I'm from, you have to pay an arm and a leg to dye clothes...";

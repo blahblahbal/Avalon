@@ -72,7 +72,7 @@ public class CursedFlamelash : ModProjectile
         }
     }
 
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         ParticleSystem.AddParticle(new CursedExplosionParticle(), Projectile.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f));
         SoundEngine.PlaySound(SoundID.Item14,Projectile.Center);

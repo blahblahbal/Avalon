@@ -64,7 +64,7 @@ namespace Avalon.Projectiles.Ranged
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item27, Projectile.position);
             int[] Dusts = { DustID.BlueCrystalShard, DustID.PinkCrystalShard, DustID.PurpleCrystalShard};

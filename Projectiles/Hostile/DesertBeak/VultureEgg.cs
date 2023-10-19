@@ -44,7 +44,7 @@ public class VultureEgg : ModProjectile
         fallThrough = Main.rand.NextBool();
         return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         if (Projectile.penetrate == 1)
         {

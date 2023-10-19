@@ -104,7 +104,7 @@ namespace Avalon.Projectiles.Ranged.Held
                 ParticleSystem.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
             }
         }
-        public override void Kill(Projectile projectile, int timeLeft)
+        public override void OnKill(Projectile projectile, int timeLeft)
         {
             if (Moonlight)
             {

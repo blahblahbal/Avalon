@@ -51,7 +51,7 @@ public class SporeSeed : ModProjectile
         width = 1;
         return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.NPCDeath1, Projectile.Center);
         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Bottom - new Vector2(0, 29), Vector2.Zero, ModContent.ProjectileType<MushroomWall>(), Projectile.damage * 2, 0, 255);

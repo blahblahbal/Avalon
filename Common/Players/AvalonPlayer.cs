@@ -871,7 +871,7 @@ public class AvalonPlayer : ModPlayer
                 if (superSonic)
                 {
                     var newColor2 = default(Color);
-                    var num2 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, 285, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 100, newColor2, 0.7f);
+                    var num2 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, DustID.GolfPaticle, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 100, newColor2, 0.7f);
                     Main.dust[num2].noGravity = true;
                     Main.dust[num2].velocity *= Main.rand.NextFloat() * 2;
                 }

@@ -75,7 +75,7 @@ public class MasterSwordBeam : ModProjectile
         }
         Lighting.AddLight(Projectile.Center, (63 / 255f) / 3f, (214 / 255f) / 3f, 1 / 3f);
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
         for (int dustAmount = 4; dustAmount < 13; dustAmount++)

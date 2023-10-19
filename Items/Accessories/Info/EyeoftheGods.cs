@@ -28,7 +28,6 @@ class EyeoftheGodsPlayer : ModPlayer
     public bool DefenseDisplay;
     public bool DamageDisplay;
 
-    public bool NPCJustHit;
     public int DisplayTimer;
     public int NPCIndex = -1;
 

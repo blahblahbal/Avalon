@@ -105,7 +105,7 @@ public class BloodBlob : ModProjectile
         hitbox.Height += size;
     }
 
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.NPCDeath9, Projectile.position);
         /*for (int num237 = 0; num237 < 20; num237++)

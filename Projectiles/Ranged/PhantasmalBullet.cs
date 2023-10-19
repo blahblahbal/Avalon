@@ -57,7 +57,7 @@ public class PhantasmalBullet : ModProjectile
             Main.dust[d].scale *= 0.7f;
         }
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         if (Projectile.penetrate == 1)
         {

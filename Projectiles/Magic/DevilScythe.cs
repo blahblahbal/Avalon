@@ -29,7 +29,7 @@ public class DevilScythe : ModProjectile
         Projectile.DamageType = DamageClass.Magic;
         Projectile.extraUpdates = 1;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         Projectile.oldVelocity *= 0.5f;
         SoundEngine.PlaySound(SoundID.Item40, Projectile.position);
