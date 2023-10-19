@@ -36,5 +36,10 @@ public class HadesCross : ModItem
             .AddIngredient(ItemID.SoulofFright, 6)
             .AddTile(TileID.TinkerersWorkbench).Register();
     }
+    public override void UpdateVanity(Player player)
+    {
+        player.GetModPlayer<AvalonPlayer>().HideVarefolk = false;
+        player.GetModPlayer<AvalonPlayer>().ForceVarefolk = true;
+    }
     public override bool IsVanitySet(int head, int body, int legs) => true;
 }

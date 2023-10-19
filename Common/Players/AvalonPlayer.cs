@@ -196,7 +196,8 @@ public class AvalonPlayer : ModPlayer
     public bool HideVarefolk;
     public const string LavaMermanName = "LavaMerman";
     public bool AccLavaMerman;
-    private bool lavaMerman;
+    public bool lavaMerman;
+    public bool ForceVarefolk;
     public bool ThePill;
     public bool PocketBench;
     public bool ChaosCharm;
@@ -309,6 +310,7 @@ public class AvalonPlayer : ModPlayer
         InertiaBoots = false;
         HideVarefolk = false;
         AccLavaMerman = false;
+        ForceVarefolk = false;
         ThePill = false;
         PocketBench = false;
         ChaosCharm = false;
@@ -421,7 +423,7 @@ public class AvalonPlayer : ModPlayer
     }
     public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
     {
-        if (lavaMerman)
+        if (lavaMerman || ForceVarefolk)
         {
             Player.head = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Head);
             Player.body = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Body);
@@ -445,10 +447,6 @@ public class AvalonPlayer : ModPlayer
         {
             g -= 0.3f;
             r -= 0.1f;
-        }
-        if (ShadowRing)
-        {
-            r = g = b = a = 1;
         }
     }
     public override void GetDyeTraderReward(List<int> rewardPool)

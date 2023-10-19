@@ -24,6 +24,7 @@ class ShadowRing : ModItem
     {
         CreateRecipe()
             .AddIngredient(ItemID.ShroomiteBar, 12)
+            .AddIngredient(ItemID.Diamond, 4)
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }
