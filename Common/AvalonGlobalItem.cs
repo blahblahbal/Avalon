@@ -464,6 +464,11 @@ public class AvalonGlobalItem : GlobalItem
         }
         switch (item.type)
         {
+            case ItemID.CactusHelmet:
+            case ItemID.CactusBreastplate:
+            case ItemID.CactusLeggings:
+                item.defense = 2;
+                break;
             case ItemID.GravitationPotion:
                 item.buffTime = 3600 * 6;
                 break;
@@ -547,7 +552,7 @@ public class AvalonGlobalItem : GlobalItem
                 item.damage = 85;
                 break;
             case ItemID.LastPrism:
-                item.damage = 72;
+                item.damage = 68;
                 break;
             case ItemID.Terrarian:
                 item.damage = 144;
@@ -556,7 +561,10 @@ public class AvalonGlobalItem : GlobalItem
                 item.damage = 75;
                 break;
             case ItemID.RainbowCrystalStaff:
-                item.damage = 120;
+                item.damage = 115;
+                break;
+            case ItemID.MoonlordTurretStaff:
+                item.damage = 85;
                 break;
             #endregion ML item rebalance
         }
@@ -593,14 +601,11 @@ public class AvalonGlobalItem : GlobalItem
         TooltipLine? tooltipEquip = tooltips.Find(x => x.Name == "Equipable" && x.Mod == "Terraria");
         TooltipLine? healLife = tooltips.Find(x => x.Name == "HealLife" && x.Mod == "Terraria");
         TooltipLine? buffTime = tooltips.Find(x => x.Name == "BuffTime" && x.Mod == "Terraria");
-        if (healLife != null)
+        if (healLife != null && item.healLife > 0)
         {
             if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().ThePill)
             {
-                if (int.TryParse(healLife.Text.Substring(9).Replace(" life", ""), out var life)) // DOES NOT WORK IN OTHER LANGUAGES
-                {
-                    healLife.Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(life * Items.Accessories.Hardmode.ThePill.LifeBonusAmount));
-                }
+                healLife.Text = Language.GetTextValue("CommonItemTooltip.RestoresLife", (int)(item.healLife * Items.Accessories.Hardmode.ThePill.LifeBonusAmount));
             }
         }
         if (tooltipEquip != null)
