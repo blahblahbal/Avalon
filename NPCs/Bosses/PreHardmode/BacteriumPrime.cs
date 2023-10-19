@@ -374,10 +374,14 @@ public class BacteriumPrime : ModNPC
                         //    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<BacteriumGas>(), (int)(NPC.damage * 0.2f), 0, -1,1);
                         //}
                     }
-                    else if(MushroomCount < 2 && NPC.position.Y < Main.worldSurface * 16 + 30 * 16)
+                    else if (MushroomCount < 2 && NPC.position.Y < Main.worldSurface * 16 + 30 * 16)
                     {
-                        Projectile P = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation()), ModContent.ProjectileType<SporeSeed>(), projDmg, 0, 255);
-                        P.ai[0] = Target.Center.X;
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center,
+                                new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation()),
+                                ModContent.ProjectileType<SporeSeed>(), projDmg, 0, 255, Target.Center.X);
+                        }
                     }
                     else
                     {
@@ -387,14 +391,19 @@ public class BacteriumPrime : ModNPC
                         for (int i = 0; i < Balls; i++)
                         {
                             // Bouncy Ball
-                            int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / (Balls * 2) - (i * MathHelper.Pi / (Balls * 2))), ModContent.ProjectileType<BouncyBoogerBall>(), projDmg, 0, 255);
-                            Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
-                            Main.projectile[P].ai[0] = Main.rand.Next(1,3);
-                            if (Main.expertMode)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
-                                if(Main.rand.NextBool())
-                                Main.projectile[P].velocity *= 1.5f;
-                                Main.projectile[P].timeLeft = (int)(Main.projectile[P].timeLeft * 1.5f);
+                                int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / (Balls * 2) - (i * MathHelper.Pi / (Balls * 2))), ModContent.ProjectileType<BouncyBoogerBall>(), projDmg, 0, 255);
+                                Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
+                                Main.projectile[P].ai[0] = Main.rand.Next(1, 3);
+                                if (Main.expertMode)
+                                {
+                                    if (Main.rand.NextBool())
+                                    {
+                                        Main.projectile[P].velocity *= 1.5f;
+                                        Main.projectile[P].timeLeft = (int)(Main.projectile[P].timeLeft * 1.5f);
+                                    }
+                                }
                             }
                         }
                     }
