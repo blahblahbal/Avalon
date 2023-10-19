@@ -383,6 +383,9 @@ public class AvalonPlayer : ModPlayer
             Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Head", EquipType.Head,
             null, LavaMermanName);
         EquipLoader.AddEquipTexture(
+            Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Female_Head", EquipType.Head,
+            null, LavaMermanName + "_Female");
+        EquipLoader.AddEquipTexture(
             Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Body", EquipType.Body,
             null, LavaMermanName);
         EquipLoader.AddEquipTexture(
@@ -423,6 +426,14 @@ public class AvalonPlayer : ModPlayer
             Player.head = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Head);
             Player.body = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Body);
             Player.legs = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Legs);
+            ArmorIDs.Head.Sets.DrawHead[Player.head] = false;
+            ArmorIDs.Body.Sets.HidesTopSkin[Player.body] = true;
+            ArmorIDs.Body.Sets.HidesArms[Player.body] = true;
+            ArmorIDs.Legs.Sets.HidesBottomSkin[Player.legs] = true;
+            if (!Player.Male)
+            {
+                Player.head = EquipLoader.GetEquipSlot(Mod, LavaMermanName + "_Female", EquipType.Head);
+            }
         }
         if (Player.HasBuff(ModContent.BuffType<Shockwave>()) || Player.HasBuff(ModContent.BuffType<AdvShockwave>()))
         {
