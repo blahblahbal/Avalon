@@ -371,7 +371,7 @@ public class AvalonWorld : ModSystem
             {
                 num8 = Main.maxTilesX - 10;
             }
-
+            
             if (num9 < 10)
             {
                 num9 = 10;
@@ -386,7 +386,7 @@ public class AvalonWorld : ModSystem
             for (int i = 0; i < 255; i++)
             {
                 Player p = Main.player[i];
-                if (p.active && !p.dead)
+                if (p.active && !p.dead && p.lavaWet)
                 {
                     float dist = Vector2.Distance(p.position, new Vector2(num5, num6) * 16);
                     if (p.ZoneUnderworldHeight && dist > Main.screenWidth / 2 && dist < Main.screenWidth && AvalonReflection.NPC_spawnRate >= 60)

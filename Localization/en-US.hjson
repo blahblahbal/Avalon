@@ -10,6 +10,7 @@ Mods: {
 	}
 
 	Avalon: {
+		Potions: Potions
 		ContagionKey.AfterPlantera: Unlocks a Contagion Chest in the dungeon
 
 		RejuvenationPotion: {

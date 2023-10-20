@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace Avalon.Hooks;
 internal class AvalonReflection

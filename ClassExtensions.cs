@@ -27,7 +27,10 @@ public static class ClassExtensions
 
         return p;
     }
-
+    public static bool IsPotion(this Item i)
+    {
+        return i.healLife > 0 || i.healMana > 0 || i.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina > 0;
+    }
     public static bool DownedAllButOneMechBoss()
     {
         return NPC.downedMechBoss1 && NPC.downedMechBoss2 && !NPC.downedMechBoss3 ||
