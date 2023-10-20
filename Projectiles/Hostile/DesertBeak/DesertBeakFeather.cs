@@ -13,7 +13,7 @@ public class DesertBeakFeather : ModProjectile
     {
         Rectangle dims = this.GetDims();
         Projectile.width = dims.Width;
-        Projectile.height = dims.Height / Main.projFrames[Projectile.type];
+        Projectile.height = dims.Width;
         Projectile.aiStyle = 1;
         AIType = ProjectileID.Bullet;
         Projectile.tileCollide = false;

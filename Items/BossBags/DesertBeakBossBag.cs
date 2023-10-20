@@ -1,5 +1,6 @@
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Magic.PreHardmode;
+using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -35,6 +36,7 @@ public class DesertBeakBossBag : ModItem
         itemLoot.Add(ItemDropRule.Common(ItemID.SandBlock, 1, 22, 55));
         itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DesertFeather>(), 1, 18, 24));
         itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TomeoftheDistantPast>(), 3));
+        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EggCannon>(), 3));
 
         itemLoot.Add(ItemDropRule.ByCondition(new DropConditions.RhodiumWorldDrop(), ModContent.ItemType<Material.Ores.RhodiumOre>(), 2, 40, 61));
         itemLoot.Add(ItemDropRule.ByCondition(new DropConditions.OsmiumWorldDrop(), ModContent.ItemType<Material.Ores.OsmiumOre>(), 2, 40, 61));
