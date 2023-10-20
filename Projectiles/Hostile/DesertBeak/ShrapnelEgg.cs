@@ -1,6 +1,5 @@
 using Avalon.NPCs.Bosses.PreHardmode;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -8,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile.DesertBeak;
 
-public class VultureEgg : ModProjectile
+public class ShrapnelEgg : VultureEgg
 {
     public override void SetDefaults()
     {
@@ -26,25 +25,7 @@ public class VultureEgg : ModProjectile
         DrawOriginOffsetY -= 5;
         //Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
     }
-    public override bool OnTileCollide(Vector2 oldVelocity)
-    {
-        if (Projectile.velocity.X != oldVelocity.X)
-        {
-            Projectile.velocity.X = oldVelocity.X * -0.95f;
-        }
-        if (Projectile.velocity.Y != oldVelocity.Y)
-        {
-            Projectile.velocity.Y = oldVelocity.Y * -0.95f;
-        }
-        SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
-        return false;
-    }
-    public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-    {
-        fallThrough = Main.rand.NextBool();
-        return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-    }
-    public override void OnKill(int timeLeft)
+    public override void Kill(int timeLeft)
     {
         if (Projectile.penetrate == 1)
         {
@@ -71,7 +52,7 @@ public class VultureEgg : ModProjectile
 
         for (int i = 0; i < 20; i++)
         {
-            int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0, 0, 0, default, 2f);
+            int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DesertTorch, 0, 0, 0, default, 2f);
             Main.dust[d].velocity = Main.rand.NextVector2Circular(6, 6);
             Main.dust[d].noGravity = true;
             Main.dust[d].fadeIn = 2.3f;
@@ -94,27 +75,20 @@ public class VultureEgg : ModProjectile
             int g = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(10, 6) + new Vector2(-1, 0).RotatedBy(Projectile.velocity.ToRotation()), Main.rand.Next(61, 63), 0.8f);
             Main.gore[g].alpha = 128;
         }
+        Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(12, 12) * Main.rand.NextFloat(0.8f, 1.3f), Mod.Find<ModGore>("VultureShell3").Type, 1);
+        Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(12, 12) * Main.rand.NextFloat(0.8f, 1.3f), Mod.Find<ModGore>("VultureShell4").Type, 1);
 
-        Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(12,12) * Main.rand.NextFloat(0.8f,1.3f), Mod.Find<ModGore>("VultureShell1").Type, 1);
-        Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(12, 12) * Main.rand.NextFloat(0.8f, 1.3f), Mod.Find<ModGore>("VultureShell2").Type, 1);
         Projectile.position.X = Projectile.position.X + (float)(Projectile.width / 2);
         Projectile.position.Y = Projectile.position.Y + (float)(Projectile.height / 2);
         Projectile.width = 10;
         Projectile.height = 10;
         Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
         Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
-
-        NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.position.X, (int)Projectile.position.Y, ModContent.NPCType<DesertTalon>());
-    }
-    public override void AI()
-    {
-        if (Projectile.velocity.Y == 0f)
+        Projectile.ai[0] = Main.rand.Next(8, 12);
+        Projectile.netUpdate = true;
+        for(int i = 0; i < Projectile.ai[0]; i++)
         {
-            Projectile.velocity.X *= 0.94f;
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, Main.rand.NextFloat(7,9)).RotatedBy((MathHelper.TwoPi / Projectile.ai[0]) * i).RotatedByRandom(0.4f), ModContent.ProjectileType<EggShrapnel>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
         }
-        Projectile.rotation += Projectile.velocity.X * 0.05f;
-        Projectile.velocity.Y += 0.2f;
-        Projectile.ai[2] += 0.04f;
-        Projectile.scale = 1 + (float)Math.Sin(Math.Pow(Projectile.ai[2],2)) * 0.1f;
     }
 }

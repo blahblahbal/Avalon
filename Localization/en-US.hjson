@@ -7082,6 +7082,11 @@ Mods: {
 				DisplayName: Swimming Scroll
 				Tooltip: Unlocks stamina swimming
 			}
+
+			EggCannon: {
+				DisplayName: Egg Cannon
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7262,6 +7267,10 @@ Mods: {
 			AncientSandstorm.DisplayName: Ancient
 			AncientSandy.DisplayName: Ancient
 			SandyExplosion.DisplayName: Sandy Explosion
+			EggShrapnel.DisplayName: Egg Shrapnel
+			ShrapnelEgg.DisplayName: Shrapnel Egg
+			ExplosiveEgg.DisplayName: Explosive Egg
+			ExplosiveEggShrapnel.DisplayName: Explosive Egg Shrapnel
 		}
 
 		NPCs: {

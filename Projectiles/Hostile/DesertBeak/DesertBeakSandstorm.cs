@@ -15,7 +15,7 @@ public class DesertBeakSandstorm : ModProjectile
     public override void SetDefaults()
     {
         Projectile.width = 60;
-        Projectile.height = 200;
+        Projectile.height = 300;
         Projectile.aiStyle = -1;
         Projectile.tileCollide = false;
         Projectile.friendly = false;

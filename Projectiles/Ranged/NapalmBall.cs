@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System.Runtime.Intrinsics.X86;
+using Avalon.Particles;
 
 namespace Avalon.Projectiles.Ranged
 {
@@ -21,7 +22,6 @@ namespace Avalon.Projectiles.Ranged
             Projectile.hide = false;
             Projectile.aiStyle = -1;
             Projectile.Size = new Vector2(16);
-            Projectile.light = 0;
             Projectile.penetrate = -1;
             Projectile.alpha = 255;
             Projectile.usesLocalNPCImmunity= true;
@@ -82,6 +82,7 @@ namespace Avalon.Projectiles.Ranged
             target.AddBuff(BuffID.OnFire3, 160);
             if (Projectile.ai[1] == 0)
             {
+                ParticleSystem.AddParticle(new ExplosionParticle(), Projectile.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(1.3f, 1.6f));
                 Projectile.ai[2] = target.whoAmI;
                 Projectile.hide = true;
                 Projectile.ai[1] = 2;
@@ -110,6 +111,7 @@ namespace Avalon.Projectiles.Ranged
             Projectile.velocity *= 0;
             Projectile.tileCollide = false;
             Projectile.alpha = 256;
+            ParticleSystem.AddParticle(new ExplosionParticle(), Projectile.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(1.3f, 1.6f));
             return false;
         }
     }
