@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using System.Net.Http.Headers;
 using Avalon.Common;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material;
+using Avalon.Items.Placeable.Trophy.Relics;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;
@@ -93,6 +93,7 @@ public class DesertBeak : ModNPC
         npcLoot.Add(
             ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<EggCannon>(), 3));
         npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<DesertBeakBossBag>()));
+        npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<DesertBeakRelic>()));
     }
 
     byte phase;
@@ -356,7 +357,7 @@ public class DesertBeak : ModNPC
             if ((NPC.velocity.Y >= 0 && NPC.position.DirectionFrom(NPC.oldPosition).Y < 0 || NPC.velocity.Y <= 0 && NPC.position.DirectionFrom(NPC.oldPosition).Y > 0) && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (NPC.ai[0] > 60)
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(6 * (Target.Center.X > NPC.Center.X ? 1 : -1), NPC.Center.DirectionTo(Target.Center).Y * 2),ModContent.ProjectileType<DesertBeakSandstorm>(),20,1);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(6 * (Target.Center.X > NPC.Center.X ? 1 : -1), NPC.Center.DirectionTo(Target.Center).Y * 2), ModContent.ProjectileType<DesertBeakSandstorm>(), 20, 1);
             }
 
             if (NPC.ai[0] >= 60 * 10)
@@ -492,7 +493,7 @@ public class DesertBeak : ModNPC
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         phase = reader.ReadByte();
-        afterImageTimer = reader.ReadInt16();
+        afterImageTimer = reader.ReadInt32();
         Storming = reader.ReadBoolean();
         enraged = reader.ReadBoolean();
     }

@@ -7,7 +7,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile.bacteriumPrime;
+namespace Avalon.Projectiles.Hostile.BacteriumPrime;
 
 public class BacteriumGas : ModProjectile
 {

@@ -29,6 +29,7 @@ class ReflexShield : ModItem
             .AddIngredient(ModContent.ItemType<OxygenTank>())
             .AddIngredient(ModContent.ItemType<Vortex>())
             .AddIngredient(ModContent.ItemType<SurgicalMask>())
+            .AddIngredient(ModContent.ItemType<Windshield>())
             .AddIngredient(ModContent.ItemType<NuclearExtinguisher>())
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
@@ -54,6 +55,7 @@ class ReflexShield : ModItem
         player.buffImmune[BuffID.Blackout] = true;
         player.buffImmune[BuffID.CursedInferno] = true;
         player.buffImmune[BuffID.Stoned] = true;
+        player.buffImmune[BuffID.WindPushed] = true;
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Pathogen>()] = true;
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Unloaded>()] = true;
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.BrokenWeaponry>()] = true;

@@ -44,7 +44,7 @@ public class AccelerationDrill : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<AccelerationDrillSpeed>());
@@ -97,7 +97,7 @@ public class AccelerationDrillSpeed : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<AccelerationDrill>());

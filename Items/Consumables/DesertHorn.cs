@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class TheBeak : ModItem
+class DesertHorn : ModItem
 {
     public override void SetStaticDefaults()
     {

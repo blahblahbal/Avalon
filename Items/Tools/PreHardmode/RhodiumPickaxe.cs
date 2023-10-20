@@ -1,4 +1,4 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -31,7 +31,11 @@ class RhodiumPickaxe : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Bars.RhodiumBar>(), 13).AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 2).AddTile(TileID.Anvils).Register();
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.Bars.RhodiumBar>(), 13)
+            .AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 2)
+            .AddTile(TileID.Anvils)
+            .Register();
     }
     public override void HoldItem(Player player)
     {

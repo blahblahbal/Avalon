@@ -14,76 +14,77 @@ public class DeathMessages : ModHook
         On_Lang.orig_CreateDeathMessage orig, string deadPlayerName, int plr = -1, int npc = -1, int proj = -1,
         int other = -1, int projType = 0, int plrItemType = 0)
     {
-        NetworkText networkText = NetworkText.Empty;
-        NetworkText networkText2 = NetworkText.Empty;
-        NetworkText networkText3 = NetworkText.Empty;
-        NetworkText networkText4 = NetworkText.Empty;
+        NetworkText projName = NetworkText.Empty;
+        NetworkText hostileNPCName = NetworkText.Empty;
+        NetworkText pvpPlayerName = NetworkText.Empty;
+        NetworkText pvpPlayerItemName = NetworkText.Empty;
         if (proj >= 0)
         {
-            networkText = NetworkText.FromKey(Lang.GetProjectileName(projType).Key);
+            projName = NetworkText.FromKey(Lang.GetProjectileName(projType).Key);
         }
 
         if (npc >= 0)
         {
-            networkText2 = Main.npc[npc].GetGivenOrTypeNetName();
+            hostileNPCName = Main.npc[npc].GetGivenOrTypeNetName();
         }
 
         if (plr >= 0 && plr < 255)
         {
-            networkText3 = NetworkText.FromLiteral(Main.player[plr].name);
+            pvpPlayerName = NetworkText.FromLiteral(Main.player[plr].name);
         }
 
         if (plrItemType >= 0)
         {
-            networkText4 = NetworkText.FromKey(Lang.GetItemName(plrItemType).Key);
+            pvpPlayerItemName = NetworkText.FromKey(Lang.GetItemName(plrItemType).Key);
         }
 
-        bool flag = networkText != NetworkText.Empty;
+        bool flag = projName != NetworkText.Empty;
         bool flag2 = plr >= 0 && plr < 255;
-        bool flag3 = networkText2 != NetworkText.Empty;
+        bool flag3 = hostileNPCName != NetworkText.Empty;
         NetworkText result = NetworkText.Empty;
         NetworkText empty = NetworkText.Empty;
         empty = NetworkText.FromKey(Language.RandomFromCategory("DeathTextGeneric").Key, deadPlayerName,
             Main.worldName);
-        if (Main.rand.NextBool(4))
+        if (Main.rand.NextBool(6))
         {
-            int msg = Main.rand.Next(4);
-            if (msg == 0)
+            int msg = Main.rand.Next(10) + 1;
+            switch (msg)
             {
-                empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_1", deadPlayerName);
-            }
-            if (msg == 1)
-            {
-                empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_2", deadPlayerName);
-            }
-            if (msg == 2)
-            {
-                empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_3", deadPlayerName);
-            }
-            if (msg == 3)
-            {
-                empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_4", deadPlayerName);
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 9:
+                case 10:
+                    empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_" + msg, deadPlayerName);
+                    break;
+                case 8:
+                    empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_" + msg, deadPlayerName, Main.worldName);
+                    break;
             }
         }
 
         if (flag2)
         {
-            result = NetworkText.FromKey("DeathSource.Player", empty, networkText3, flag ? networkText : networkText4);
+            result = NetworkText.FromKey("DeathSource.Player", empty, pvpPlayerName, flag ? projName : pvpPlayerItemName);
         }
         else if (flag3)
         {
-            result = NetworkText.FromKey("DeathSource.NPC", empty, networkText2);
+            result = NetworkText.FromKey("DeathSource.NPC", empty, hostileNPCName);
         }
         else if (flag)
         {
-            result = NetworkText.FromKey("DeathSource.Projectile", empty, networkText);
+            result = NetworkText.FromKey("DeathSource.Projectile", empty, projName);
         }
         else
         {
             #region falling
             if (other == 0)
             {
-                switch (Main.rand.Next(16) + 1)
+                switch (Main.rand.Next(19) + 1)
                 {
                     case 1:
                         result = NetworkText.FromKey("DeathText.Fell_1", deadPlayerName);
@@ -133,6 +134,15 @@ public class DeathMessages : ModHook
                     case 16:
                         result = NetworkText.FromKey("DeathText.Fell_9", deadPlayerName);
                         break;
+                    case 17:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Fell_8", deadPlayerName);
+                        break;
+                    case 18:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Fell_9", deadPlayerName);
+                        break;
+                    case 19:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Fell_10", deadPlayerName);
+                        break;
                 }
             }
             #endregion falling
@@ -177,7 +187,7 @@ public class DeathMessages : ModHook
             #region lava
             else if (other == 2)
             {
-                switch (Main.rand.Next(8) + 1)
+                switch (Main.rand.Next(10) + 1)
                 {
                     case 1:
                         result = NetworkText.FromKey("DeathText.Lava_1", deadPlayerName);
@@ -202,6 +212,12 @@ public class DeathMessages : ModHook
                         break;
                     case 8:
                         result = NetworkText.FromKey("DeathText.Lava_5", deadPlayerName);
+                        break;
+                    case 9:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Lava_4", deadPlayerName);
+                        break;
+                    case 10:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Lava_5", deadPlayerName);
                         break;
                 }
             }
@@ -265,9 +281,6 @@ public class DeathMessages : ModHook
                     case 4:
                         result = NetworkText.FromKey("DeathText.Slain", deadPlayerName);
                         break;
-                    case 5:
-                        result = NetworkText.FromKey("DeathText.Petrified_" + (Main.rand.Next(4) + 1), deadPlayerName);
-                        break;
                     case 6:
                         result = NetworkText.FromKey("DeathText.Stabbed", deadPlayerName);
                         break;
@@ -279,9 +292,6 @@ public class DeathMessages : ModHook
                         break;
                     case 9:
                         result = NetworkText.FromKey("DeathText.Poisoned", deadPlayerName);
-                        break;
-                    case 10:
-                        result = NetworkText.FromKey("DeathText.Electrocuted_" + (Main.rand.Next(4) + 1), deadPlayerName);
                         break;
                     case 11:
                         result = NetworkText.FromKey("DeathText.TriedToEscape", deadPlayerName);

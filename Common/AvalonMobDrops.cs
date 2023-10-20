@@ -40,6 +40,8 @@ public class AvalonMobDrops : GlobalNPC
         var contagionNotExpert = new Combine(true, null, notExpertCondition, contagionCondition);
         var corruptionNotContagion = new Combine(true, null, new Invert(contagionNotExpert), corruptionCondition);
 
+        var sandstormCondition = new SandstormCondition();
+
         var hardModeCondition = new HardmodeOnly();
         var notFromStatueCondition = new Conditions.NotFromStatue();
         var preHardModeCondition = new Invert(hardModeCondition);
@@ -153,6 +155,7 @@ public class AvalonMobDrops : GlobalNPC
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoblinDagger>(), 100));
                 break;
         }
+        //adhesive bandage
         if (npc.type is NPCID.Werewolf or NPCID.AnglerFish or NPCID.RustyArmoredBonesAxe or
             NPCID.RustyArmoredBonesFlail or NPCID.RustyArmoredBonesSword or NPCID.RustyArmoredBonesSwordNoArmor)
         {
@@ -161,6 +164,7 @@ public class AvalonMobDrops : GlobalNPC
             AdhesiveBandage.OnFailedConditions(ItemDropRule.StatusImmunityItem(885, 100));
             npcLoot.Add(AdhesiveBandage);
         }
+        //armor polish
         if (npc.type is NPCID.ArmoredSkeleton or NPCID.BlueArmoredBones or NPCID.BlueArmoredBonesMace or NPCID.BlueArmoredBonesNoPants or NPCID.BlueArmoredBonesSword)
         {
             LeadingConditionRule ArmorPolish = new LeadingConditionRule(new CloverPotionActive());
@@ -168,6 +172,7 @@ public class AvalonMobDrops : GlobalNPC
             ArmorPolish.OnFailedConditions(ItemDropRule.StatusImmunityItem(886, 100));
             npcLoot.Add(ArmorPolish);
         }
+        //bezoar
         if (npc.type is NPCID.ToxicSludge or NPCID.MossHornet or NPCID.Hornet or NPCID.HornetFatty or NPCID.HornetHoney or NPCID.HornetLeafy or NPCID.HornetSpikey or NPCID.HornetStingy)
         {
             LeadingConditionRule Bezoar = new LeadingConditionRule(new CloverPotionActive());
@@ -175,6 +180,7 @@ public class AvalonMobDrops : GlobalNPC
             Bezoar.OnFailedConditions(ItemDropRule.StatusImmunityItem(887, 100));
             npcLoot.Add(Bezoar);
         }
+        //blindfold
         if (npc.type is NPCID.CorruptSlime or NPCID.DarkMummy or NPCID.Crimslime or NPCID.BloodMummy)
         {
             LeadingConditionRule Blindfold = new LeadingConditionRule(new CloverPotionActive());
@@ -182,6 +188,7 @@ public class AvalonMobDrops : GlobalNPC
             Blindfold.OnFailedConditions(ItemDropRule.StatusImmunityItem(888, 100));
             npcLoot.Add(Blindfold);
         }
+        //fast clock
         if (npc.type is NPCID.Mummy or NPCID.Wraith or NPCID.Pixie)
         {
             LeadingConditionRule FastClock = new LeadingConditionRule(new CloverPotionActive());
@@ -189,6 +196,7 @@ public class AvalonMobDrops : GlobalNPC
             FastClock.OnFailedConditions(ItemDropRule.StatusImmunityItem(889, 100));
             npcLoot.Add(FastClock);
         }
+        //megaphone
         if (npc.type is NPCID.GreenJellyfish or NPCID.Pixie or NPCID.DarkMummy or NPCID.BloodMummy)
         {
             LeadingConditionRule Megaphone = new LeadingConditionRule(new CloverPotionActive());
@@ -196,6 +204,7 @@ public class AvalonMobDrops : GlobalNPC
             Megaphone.OnFailedConditions(ItemDropRule.StatusImmunityItem(890, 100));
             npcLoot.Add(Megaphone);
         }
+        //nazar
         if (npc.type is NPCID.CursedSkull or NPCID.CursedHammer or NPCID.EnchantedSword or NPCID.CrimsonAxe or NPCID.GiantCursedSkull)
         {
             LeadingConditionRule Nazar = new LeadingConditionRule(new CloverPotionActive());
@@ -203,6 +212,7 @@ public class AvalonMobDrops : GlobalNPC
             Nazar.OnFailedConditions(ItemDropRule.StatusImmunityItem(891, 100));
             npcLoot.Add(Nazar);
         }
+        //vitamins
         if (npc.type is NPCID.Corruptor or NPCID.FloatyGross)
         {
             LeadingConditionRule Vitamins = new LeadingConditionRule(new CloverPotionActive());
@@ -210,6 +220,7 @@ public class AvalonMobDrops : GlobalNPC
             Vitamins.OnFailedConditions(ItemDropRule.StatusImmunityItem(892, 100));
             npcLoot.Add(Vitamins);
         }
+        //trifold map
         if (npc.type is NPCID.GiantBat or NPCID.Clown or NPCID.LightMummy)
         {
             LeadingConditionRule TrifoldMap = new LeadingConditionRule(new CloverPotionActive());
@@ -217,6 +228,7 @@ public class AvalonMobDrops : GlobalNPC
             TrifoldMap.OnFailedConditions(ItemDropRule.StatusImmunityItem(893, 100));
             npcLoot.Add(TrifoldMap);
         }
+        //hidden blade
         if (npc.type is NPCID.BloodJelly or NPCID.Unicorn or NPCID.DarkMummy or NPCID.LightMummy or NPCID.BloodMummy || npc.type == ModContent.NPCType<ViralMummy>())
         {
             LeadingConditionRule HiddenBlade = new LeadingConditionRule(new CloverPotionActive());
@@ -224,6 +236,7 @@ public class AvalonMobDrops : GlobalNPC
             HiddenBlade.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<HiddenBlade>(), 100));
             npcLoot.Add(HiddenBlade);
         }
+        //ammo magazine
         if (npc.type == NPCID.Mummy || npc.type == NPCID.FungoFish || npc.type == NPCID.Clinger)
         {
             LeadingConditionRule AmmoMagazine = new LeadingConditionRule(new CloverPotionActive());
@@ -274,6 +287,13 @@ public class AvalonMobDrops : GlobalNPC
             GoldenShield.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GoldenShield>(), 70));
             npcLoot.Add(GoldenShield);
         }
+        //windshield
+        if (npc.type is NPCID.DuneSplicerHead or NPCID.Tumbleweed or NPCID.WalkingAntlion or NPCID.FlyingAntlion or
+            NPCID.SandElemental or NPCID.SandShark or NPCID.SandsharkCorrupt or NPCID.SandsharkCrimson or
+            NPCID.SandsharkHallow)
+        {
+            npcLoot.Add(ItemDropRule.ByCondition(sandstormCondition, ModContent.ItemType<Windshield>(), 75));
+        }
 
         if (npc.type == NPCID.EyeofCthulhu)
         {
@@ -291,6 +311,7 @@ public class AvalonMobDrops : GlobalNPC
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.UnholyArrow, 1, 20, 50));
+            corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
             npcLoot.Add(corruptionRule);
 
             // add crimson loot back
@@ -298,12 +319,14 @@ public class AvalonMobDrops : GlobalNPC
             crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
             crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
             crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
+            crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
             npcLoot.Add(crimsonRule);
 
             // add contagion loot
             LeadingConditionRule contagionRule = new LeadingConditionRule(contagionNotExpert);
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
+            contagionRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
             npcLoot.Add(contagionRule);
         }
 

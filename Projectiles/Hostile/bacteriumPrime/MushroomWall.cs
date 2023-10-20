@@ -1,7 +1,4 @@
 using Avalon.Data.Sets;
-using Avalon.Items.Material;
-using Avalon.Items.Material.Ores;
-using Avalon.NPCs.Bosses.PreHardmode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,7 +7,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile.bacteriumPrime;
+namespace Avalon.Projectiles.Hostile.BacteriumPrime;
 
 public class MushroomWall : ModProjectile
 {
@@ -43,7 +40,7 @@ public class MushroomWall : ModProjectile
         bool KillFast = true;
         for (int i = 0; i < Main.npc.Length; i++)
         {
-            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<BacteriumPrime>())
+            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<NPCs.Bosses.PreHardmode.BacteriumPrime>())
             {
                 KillFast = false;
             }

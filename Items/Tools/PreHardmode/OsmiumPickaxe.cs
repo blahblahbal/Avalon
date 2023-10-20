@@ -1,4 +1,4 @@
-﻿using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Bars;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -32,11 +32,15 @@ public class OsmiumPickaxe : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<OsmiumBar>(), 13).AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 2).AddTile(TileID.Anvils).Register();
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<OsmiumBar>(), 13)
+            .AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 2)
+            .AddTile(TileID.Anvils)
+            .Register();
     }
     public override void HoldItem(Player player)
     {
-        if (player.inventory[player.selectedItem].type == Mod.Find<ModItem>("OsmiumPickaxe").Type)
+        if (player.inventory[player.selectedItem].type == Type)
         {
             player.pickSpeed -= 0.5f;
         }

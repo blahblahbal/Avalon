@@ -8,7 +8,7 @@ public class Rejuvenation : ModBuff
 {
     public override void Update(Player player, ref int buffIndex)
     {
-        if (player.buffTime[buffIndex] % 30 == 0)
+        if (player.buffTime[buffIndex] % 15 == 0)
         {
             player.Heal(5);
         }

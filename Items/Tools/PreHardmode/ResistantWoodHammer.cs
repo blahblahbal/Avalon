@@ -22,7 +22,8 @@ namespace Avalon.Items.Tools.PreHardmode
         {
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>(), 8)
-                .AddTile(TileID.WorkBenches).Register();
+                .AddTile(TileID.WorkBenches)
+                .Register();
         }
     }
 }

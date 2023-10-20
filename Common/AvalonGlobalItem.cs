@@ -73,6 +73,18 @@ public class AvalonGlobalItem : GlobalItem
                 item.ChangeItemType(ModContent.ItemType<Breakdawn>());
                 return false;
             }
+            if (item.type == ModContent.ItemType<PickaxeofDusk>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<PickaxeofDusk3x3>());
+                return false;
+            }
+            if (item.type == ModContent.ItemType<PickaxeofDusk3x3>())
+            {
+                SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                item.ChangeItemType(ModContent.ItemType<PickaxeofDusk>());
+                return false;
+            }
             if (item.type == ModContent.ItemType<AccelerationPickaxe>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
@@ -436,6 +448,7 @@ public class AvalonGlobalItem : GlobalItem
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
             corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.UnholyArrow, 1, 20, 50));
+            corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
             itemLoot.Add(corruptionRule);
 
             // add crimson loot back
@@ -443,12 +456,14 @@ public class AvalonGlobalItem : GlobalItem
             crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
             crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
             crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
+            crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
             itemLoot.Add(crimsonRule);
 
             // add contagion loot
             LeadingConditionRule contagionRule = new LeadingConditionRule(contagionCondition);
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
+            contagionRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
             itemLoot.Add(contagionRule);
         }
     }

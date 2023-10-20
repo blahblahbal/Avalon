@@ -1,9 +1,5 @@
-using Avalon.Common;
 using Avalon.Common.Players;
-using Avalon.Hooks;
 using Microsoft.Xna.Framework;
-using MonoMod.Cil;
-using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
 using Terraria.Audio;
@@ -11,7 +7,6 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.WorldBuilding;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
@@ -25,14 +20,14 @@ public class Breakdawn : ModItem
         Item.damage = 26;
         Item.autoReuse = true;
         Item.hammer = 70;
-        Item.axe = 22;
+        Item.axe = 32;
         Item.useTime = 24;
         Item.knockBack = 3f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.rare = ItemRarityID.Orange;
         Item.value = 27000;
-        Item.useAnimation = 20;
+        Item.useAnimation = 24;
     }
     public override void AddRecipes()
     {
@@ -62,33 +57,111 @@ public class Breakdawn : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             Item.ChangeItemType(ModContent.ItemType<Breakdawn3x3>());
         }
+        if (player.whoAmI == Main.myPlayer && player.ItemAnimationJustStarted)
+        {
+            Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+            int tileType = Main.tile[tilePosPoint.X, tilePosPoint.Y].TileType;
+            int dmgAmt = (int)(Item.axe * 1.2f);
+            if (Main.tileAxe[tileType])
+            {
+                if (!WorldGen.CanKillTile(tilePosPoint.X, tilePosPoint.Y))
+                {
+                    dmgAmt = 0;
+                }
+                Main.NewText(player.hitTile.AddDamage(tileType, dmgAmt));
+                if (player.hitTile.AddDamage(tileType, dmgAmt) >= 100)
+                {
+                    MethodInfo clearCache = typeof(Player).GetMethod("ClearMiningCacheAt", BindingFlags.NonPublic | BindingFlags.Instance);
+                    clearCache.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y, 1 });
+
+                    MethodInfo bottomOfTree = typeof(Player).GetMethod("IsBottomOfTreeTrunkNoRoots", BindingFlags.NonPublic | BindingFlags.Instance);
+                    bool flag = (bool)bottomOfTree.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y });
+
+                    // kill the tile, with mp support
+                    WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y);
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y);
+                    }
+
+                    // replant the sapling
+                    if (flag)
+                    {
+                        MethodInfo tryReplantingTree = typeof(Player).GetMethod("TryReplantingTree", BindingFlags.NonPublic | BindingFlags.Instance);
+                        tryReplantingTree.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y });
+                    }
+                    player.hitTile.Clear(tileType);
+                }
+                else
+                {
+                    WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y, fail: true);
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y, 1f);
+                    }
+                }
+                if (dmgAmt != 0)
+                {
+                    player.hitTile.Prune();
+                }
+                player.ApplyItemTime(Item);
+            }
+        }
+    }
+
+    private void ClearMiningCacheAt(Player p, int x, int y, int hitTileCacheType)
+    {
+        p.hitReplace.TryClearingAndPruning(x, y, 1);
+        p.hitTile.TryClearingAndPruning(x, y, 1);
     }
     //public override bool? UseItem(Player player)
     //{
+    //    if (player.whoAmI == Main.myPlayer && player.controlUseItem)
+    //    {
+    //        Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+    //        int tileType = Main.tile[tilePosPoint.X, tilePosPoint.Y].TileType;
+    //        int dmgAmt = (int)(Item.axe / 2 * 1.2f);
+    //        if (Main.tileAxe[tileType])
+    //        {
+    //            if (player.hitTile.AddDamage(tileType, dmgAmt) >= 100)
+    //            {
+    //                MethodInfo clearCache = typeof(Player).GetMethod("ClearMiningCacheAt", BindingFlags.NonPublic | BindingFlags.Instance);
+    //                clearCache.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y, 1 });
 
-
-    //    MethodInfo tryReplantingTree = typeof(Player).GetMethod("TryReplantingTree",
-    //            BindingFlags.NonPublic | BindingFlags.Static);
-    //    tryReplantingTree.Invoke(player, new object[] { (int)player.GetModPlayer<AvalonPlayer>().MousePosition.X, (int)player.GetModPlayer<AvalonPlayer>().MousePosition.Y });
+    //                MethodInfo bottomOfTree = typeof(Player).GetMethod("IsBottomOfTreeTrunkNoRoots", BindingFlags.NonPublic | BindingFlags.Instance);
+    //                bool flag = (bool)bottomOfTree.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y });
+    //                WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y);
+    //                if (Main.netMode == NetmodeID.MultiplayerClient)
+    //                {
+    //                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y);
+    //                }
+    //                if (flag)
+    //                {
+    //                    MethodInfo tryReplantingTree = typeof(Player).GetMethod("TryReplantingTree", BindingFlags.NonPublic | BindingFlags.Instance);
+    //                    tryReplantingTree.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y });
+    //                }
+    //            }
+    //            else
+    //            {
+    //                WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y, fail: true);
+    //                if (Main.netMode == NetmodeID.MultiplayerClient)
+    //                {
+    //                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y, 1f);
+    //                }
+    //            }
+    //            if (dmgAmt != 0)
+    //            {
+    //                player.hitTile.Prune();
+    //            }
+    //        }
+    //    }
+    //    return null;
     //}
-}
-public class BreakdawnAxeHook : ModHook
-{
-    protected override void Apply()
-    {
-        IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool;
-    }
-
-    private void IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool(ILContext il)
-    {
-        Utilities.AddAlternativeIdChecks(il, (ushort)ItemID.AcornAxe, id => Data.Sets.Item.Breakdawn[id]);
-        //ItemID.Sets.Factory.CreateBoolSet(ModContent.ItemType<Breakdawn>())[id]);
-    }
 }
 public class Breakdawn3x3 : ModItem
 {
@@ -107,7 +180,7 @@ public class Breakdawn3x3 : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.rare = ItemRarityID.Orange;
         Item.value = 27000;
-        Item.useAnimation = 20;
+        Item.useAnimation = 24;
     }
 
     public override void HoldItem(Player player)

@@ -53,7 +53,7 @@ class RejuvenationPotion : ModItem
     }
     public override bool? UseItem(Player player)
     {
-        player.AddBuff(ModContent.BuffType<Rejuvenation>(), 60 * 30);
+        player.AddBuff(ModContent.BuffType<Rejuvenation>(), 60 * 15);
         return true;
     }
     public override void AddRecipes()

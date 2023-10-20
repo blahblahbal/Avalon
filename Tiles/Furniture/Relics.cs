@@ -17,7 +17,7 @@ namespace Avalon.Tiles.Furniture
         public const int FrameWidth = 18 * 3;
         public const int FrameHeight = 18 * 4;
         public const int HorizontalFrames = 1;
-        public const int VerticalFrames = 1; // Optional: Increase this number to match the amount of relics you have on your extra sheet, if you choose to use the Item.placeStyle approach
+        public const int VerticalFrames = 2; // Optional: Increase this number to match the amount of relics you have on your extra sheet, if you choose to use the Item.placeStyle approach
 
         public Asset<Texture2D> RelicTexture;
 

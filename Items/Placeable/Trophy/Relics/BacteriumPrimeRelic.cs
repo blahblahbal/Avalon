@@ -1,13 +1,7 @@
-using Avalon.Tiles.Furniture;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Placeable.Furniture
+namespace Avalon.Items.Placeable.Trophy.Relics
 {
     public class BacteriumPrimeRelic : ModItem
     {
@@ -15,7 +9,7 @@ namespace Avalon.Items.Placeable.Furniture
         {
             Item.CloneDefaults(ItemID.EyeofCthulhuMasterTrophy);
             Item.placeStyle = 0;
-            Item.createTile = ModContent.TileType<Relics>();
+            Item.createTile = ModContent.TileType<Tiles.Furniture.Relics>();
         }
     }
 }

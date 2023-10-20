@@ -30,7 +30,7 @@ class IridiumPickaxe : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (player.inventory[player.selectedItem].type == Mod.Find<ModItem>("IridiumPickaxe").Type)
+        if (player.inventory[player.selectedItem].type == Type)
         {
             player.pickSpeed -= 0.5f;
         }

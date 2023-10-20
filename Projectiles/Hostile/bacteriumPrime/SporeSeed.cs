@@ -4,7 +4,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile.bacteriumPrime;
+namespace Avalon.Projectiles.Hostile.BacteriumPrime;
 
 public class SporeSeed : ModProjectile
 {
