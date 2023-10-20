@@ -24,20 +24,20 @@ public class PotionSlotInterfaceLayer : ModInterfaceLayer
     /// <inheritdoc />
     public override void Update()
     {
-        if (Main.playerInventory &&
-            slotInterface?.CurrentState == null)
+        if (false) //Main.playerInventory &&
+            //slotInterface?.CurrentState == null)
         {
             slotInterface?.SetState(potionSlotState);
             typeof(UserInterface)
                 .GetField("_clickDisabledTimeRemaining", BindingFlags.NonPublic | BindingFlags.Instance)
                 ?.SetValue(slotInterface, 0);
         }
-        else if (!Main.playerInventory &&
-                 slotInterface?.CurrentState != null)
-        {
-            slotInterface?.SetState(null);
-        }
-
+        //else if (!Main.playerInventory &&
+        //         slotInterface?.CurrentState != null)
+        //{
+        //    slotInterface?.SetState(null);
+        //}
+        return;
         slotInterface?.Update(Main._drawInterfaceGameTime);
     }
 
