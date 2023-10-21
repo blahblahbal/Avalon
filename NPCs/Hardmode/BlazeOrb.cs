@@ -1,4 +1,5 @@
 using System;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -34,7 +35,7 @@ public class BlazeOrb : ModNPC
         NPC.aiStyle = -1;
         NPC.height = 20;
         NPC.HitSound = SoundID.NPCHit3;
-        NPC.DeathSound = SoundID.NPCDeath3;
+        NPC.DeathSound = SoundID.NPCDeath14;
         NPC.knockBackResist = 0f;
         DrawOffsetY = 8f;
     }
@@ -90,6 +91,16 @@ public class BlazeOrb : ModNPC
         }
         if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height) && Main.netMode != NetmodeID.MultiplayerClient)
         {
+            ParticleSystem.AddParticle(new ExplosionParticle(), NPC.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f));
+
+            for(int i = 0; i < 20; i++)
+            {
+                Dust d = Dust.NewDustPerfect(NPC.Center, DustID.Torch, Main.rand.NextVector2Circular(12, 12));
+                //d.customData = 0;
+                d.noGravity = true;
+                d.fadeIn = Main.rand.NextFloat(2);
+            }
+
             var num287 = (int)(NPC.position.X + NPC.width / 2) / 16;
             var num288 = (int)(NPC.position.Y + NPC.height / 2) / 16;
             var num289 = 8;

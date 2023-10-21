@@ -447,7 +447,7 @@ public class DesertBeak : ModNPC
                         howManyBirds++;
                 }
                 int eggType = (howManyBirds <= 5) ? ModContent.ProjectileType<VultureEgg>() : ModContent.ProjectileType<ShrapnelEgg>();
-                Main.NewText(howManyBirds, Main.DiscoColor);
+                //Main.NewText(howManyBirds, Main.DiscoColor);
 
                 NPC.ai[1] = Main.rand.Next(-60, 60);
                 int dmg = 44;
