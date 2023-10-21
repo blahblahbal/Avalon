@@ -337,7 +337,7 @@ public class Utils
             }
         }
     }
-    public static void MakeCircle(int x, int y, int radius, int tileType)
+    public static void MakeOblivionOreCircle(int x, int y, int radius, int tileType)
     {
         for (int k = x - radius; k <= x + radius; k++)
         {
@@ -346,11 +346,15 @@ public class Utils
                 if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) <= radius)
                 {
                     Tile t = Main.tile[k, l];
-                    t.HasTile = false;
+                    t.HasTile = true;
                     t.IsHalfBlock = false;
                     t.Slope = SlopeType.Solid;
                     Main.tile[k, l].TileType = (ushort)tileType;
                     WorldGen.SquareTileFrame(k, l);
+                    if (Main.netMode != NetmodeID.SinglePlayer)
+                    {
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, k, l, tileType);
+                    }
                 }
             }
         }

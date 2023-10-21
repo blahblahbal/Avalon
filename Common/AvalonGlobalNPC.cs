@@ -516,6 +516,7 @@ public class AvalonGlobalNPC : GlobalNPC
             npc.active = false;
         }
     }
+
     public override void DrawEffects(NPC npc, ref Color drawColor)
     {
         if (npc.HasBuff<Bleeding>())
@@ -578,7 +579,14 @@ public class AvalonGlobalNPC : GlobalNPC
             }
         }
     }
-
+    public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
+    {
+        if (player.InModBiome<Contagion>())
+        {
+            spawnRate = (int)(spawnRate * 0.65f);
+            maxSpawns = (int)(maxSpawns * 1.3f);
+        }
+    }
     public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
     {
         if (npc.type is NPCID.BloodJelly or NPCID.Unicorn or NPCID.DarkMummy or NPCID.LightMummy && Main.rand.NextBool(9))

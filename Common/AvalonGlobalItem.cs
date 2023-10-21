@@ -630,6 +630,14 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips.RemoveAt(tooltips.FindIndex(x => x.Name == "Equipable" && x.Mod == "Terraria"));
             }
         }
+        if (item.type == ModContent.ItemType<VomitWater>() || item.type is ItemID.BloodWater or ItemID.UnholyWater or ItemID.HolyWater)
+        {
+            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") && tt.Name.Equals("CritChance")));
+            if (index != -1)
+            {
+                tooltips.RemoveAt(index);
+            }
+        }
         if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)
         {
             int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
@@ -648,7 +656,7 @@ public class AvalonGlobalItem : GlobalItem
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip")));
                 if (index != -1)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixTool", "Increased mining efficiency")
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixTool", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Efficiency"))
                     {
                         IsModifier = true
                     });

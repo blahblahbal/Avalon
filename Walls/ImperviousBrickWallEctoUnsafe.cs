@@ -1,3 +1,4 @@
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -12,5 +13,10 @@ public class ImperviousBrickWallEctoUnsafe : ModWall
         Main.wallHouse[Type] = false;
         AddMapEntry(new Color(27, 194, 254));
         DustType = DustID.DungeonSpirit;
+        Data.Sets.Wall.Hellcastle[Type] = true;
+    }
+    public override void KillWall(int i, int j, ref bool fail)
+    {
+        if (!ModContent.GetInstance<DownedBossSystem>().DownedPhantasm) fail = true;
     }
 }

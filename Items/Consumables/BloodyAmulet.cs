@@ -7,6 +7,10 @@ namespace Avalon.Items.Consumables;
 
 class BloodyAmulet : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        Item.ResearchUnlockCount = 3;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

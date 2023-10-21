@@ -654,34 +654,34 @@ public class AvalonWorld : ModSystem
         #endregion
 
         #region npc collision
-        /*for (int thing = 0; thing < Main.npc.Length; thing++)
+        for (int thing = 0; thing < Main.npc.Length; thing++)
         {
             NPC npc1 = Main.npc[thing];
-            if ((npc1.type == NPCID.Corruptor || npc1.type == ModContent.NPCType<NPCs.GuardianCorruptor>()) && npc1.active)
+            if ((npc1.type == NPCID.Corruptor /*|| npc1.type == ModContent.NPCType<NPCs.GuardianCorruptor>()*/) && npc1.active)
             {
                 for (int thing2 = 0; thing2 < Main.npc.Length; thing2++)
                 {
                     NPC npc2 = Main.npc[thing2];
-                    if ((npc2.type == ModContent.NPCType<NPCs.Hallowor>() || npc2.type == ModContent.NPCType<NPCs.AegisHallowor>()) && npc2.active)
+                    if ((npc2.type == ModContent.NPCType<NPCs.Hardmode.Hallowor>() /*|| npc2.type == ModContent.NPCType<NPCs.AegisHallowor>()*/) && npc2.active)
                     {
                         int radius;
                         string text;
-                        if (npc1.type == NPCID.Corruptor && npc2.type == ModContent.NPCType<NPCs.Hallowor>())
+                        if (npc1.type == NPCID.Corruptor && npc2.type == ModContent.NPCType<NPCs.Hardmode.Hallowor>())
                         {
                             radius = 2;
                             text = "Dark and light have been obliterated...";
                             MakeOblivionOre(npc1, npc2, text, radius);
                         }
-                        else if (npc1.type == ModContent.NPCType<NPCs.GuardianCorruptor>() && npc2.type == ModContent.NPCType<NPCs.AegisHallowor>())
-                        {
-                            radius = 3;
-                            text = "Dark and light have been eliminated...";
-                            MakeOblivionOre(npc1, npc2, text, radius);
-                        }
+                        //else if (npc1.type == ModContent.NPCType<NPCs.GuardianCorruptor>() && npc2.type == ModContent.NPCType<NPCs.AegisHallowor>())
+                        //{
+                        //    radius = 3;
+                        //    text = "Dark and light have been eliminated...";
+                        //    MakeOblivionOre(npc1, npc2, text, radius);
+                        //}
                     }
                 }
             }
-        }*/
+        }
         #endregion
     }
 
@@ -1507,7 +1507,7 @@ public class AvalonWorld : ModSystem
     {
         if (Collision.CheckAABBvAABBCollision(npc1.Center, new Vector2(npc1.width, npc1.height), npc2.Center, new Vector2(npc2.width, npc2.height)))
         {
-            //WorldGeneration.Utils.MakeCircle((int)(npc1.position.X / 16f), (int)(npc1.position.Y / 16f), radius, ModContent.TileType<Tiles.Ores.OblivionOre>());
+            //WorldGeneration.Utils.MakeOblivionOreCircle((int)(npc1.position.X / 16f), (int)(npc1.position.Y / 16f), radius, ModContent.TileType<Tiles.Ores.CaesiumOre>()); // oblivion ore
             npc1.life = 0;
             npc1.NPCLoot();
             npc1.active = false;

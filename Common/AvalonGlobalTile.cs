@@ -32,6 +32,55 @@ public class AvalonGlobalTile : GlobalTile
             player.sticky = false;
         }
     }
+    public override void Drop(int i, int j, int type)
+    {
+        int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
+        // four leaf clover drops
+        if (type is TileID.CorruptPlants or TileID.JunglePlants or TileID.JunglePlants2 or TileID.CrimsonPlants or TileID.Plants or TileID.Plants2 ||
+            type == ModContent.TileType<Tiles.Contagion.ContagionShortGrass>())
+        {
+            bool doRealCloverDrop = false;
+            bool doFakeCloverDrop = false;
+            int realChance = 8000;
+            int fakeChance = 500;
+            if (pid >= 0)
+            {
+                Player p = Main.player[pid];
+                if (p.RollLuck(realChance) < 1)
+                {
+                    doRealCloverDrop = true;
+                }
+                else if (p.RollLuck(fakeChance) < 1)
+                {
+                    doFakeCloverDrop = true;
+                }
+            }
+            else
+            {
+                doRealCloverDrop = Main.rand.NextBool(realChance);
+                doFakeCloverDrop = Main.rand.NextBool(fakeChance);
+            }
+
+            if (doRealCloverDrop)
+            {
+                int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<FourLeafClover>(), 1, false, 0);
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
+                    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
+                }
+            }
+            else if (doFakeCloverDrop)
+            {
+                int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<FakeFourLeafClover>(), 1, false, 0);
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
+                    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
+                }
+            }
+        }
+    }
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
         int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
@@ -58,29 +107,6 @@ public class AvalonGlobalTile : GlobalTile
             if (type == ModContent.TileType<Tiles.UltraResistantWood>() && Main.player[pid].inventory[Main.player[pid].selectedItem].axe < 40)
             {
                 fail = true;
-            }
-        }
-        
-        // four leaf clover drops
-        if (type is TileID.CorruptPlants or TileID.JunglePlants or TileID.JunglePlants2 or TileID.CrimsonPlants or TileID.Plants or TileID.Plants2 || type == ModContent.TileType<Tiles.Contagion.ContagionShortGrass>())
-        {
-            if (Main.rand.NextBool(8000))
-            {
-                int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<FourLeafClover>(), 1, false, 0);
-                if (Main.netMode == NetmodeID.Server)
-                {
-                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
-                    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
-                }
-            }
-            else if (Main.rand.NextBool(500))
-            {
-                int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<FakeFourLeafClover>(), 1, false, 0);
-                if (Main.netMode == NetmodeID.Server)
-                {
-                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
-                    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
-                }
             }
         }
     }

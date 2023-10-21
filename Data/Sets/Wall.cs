@@ -8,5 +8,7 @@ namespace Avalon.Data.Sets
         public static readonly bool[] Chunkstone = WallID.Sets.Factory.CreateBoolSet(
             ModContent.WallType<Walls.ChunkstoneWall>()
         );
+
+        public static readonly bool[] Hellcastle = WallID.Sets.Factory.CreateBoolSet();
     }
 }

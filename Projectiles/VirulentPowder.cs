@@ -1,12 +1,7 @@
-using System;
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent.Drawing;
-using Avalon.Common;
 
 namespace Avalon.Projectiles;
 
@@ -82,7 +77,7 @@ public class VirulentPowder : ModProjectile
                 {
                     continue;
                 }
-                AvalonWorld.ConvertFromThings(num1032, num1043, 2);
+                WorldGeneration.Helpers.ConversionHelper.ConvertToContagion(num1032, num1043, 2);
                 Tile tile = Main.tile[num1032, num1043];
                 if (tile.TileType >= 0 && tile.TileType < TileID.Count && TileID.Sets.CommonSapling[tile.TileType])
                 {
@@ -94,47 +89,7 @@ public class VirulentPowder : ModProjectile
                 }
             }
         }
-
-        //if (flag4)
-        //{
-        //    int num92 = (int)(Entity.position.X / 16f) - 1;
-        //    int num93 = (int)((Entity.position.X + (float)Entity.width) / 16f) + 2;
-        //    int num94 = (int)(Entity.position.Y / 16f) - 1;
-        //    int num95 = (int)((Entity.position.Y + (float)Entity.height) / 16f) + 2;
-        //    if (num92 < 0)
-        //    {
-        //        num92 = 0;
-        //    }
-        //    if (num93 > Main.maxTilesX)
-        //    {
-        //        num93 = Main.maxTilesX;
-        //    }
-        //    if (num94 < 0)
-        //    {
-        //        num94 = 0;
-        //    }
-        //    if (num95 > Main.maxTilesY)
-        //    {
-        //        num95 = Main.maxTilesY;
-        //    }
-        //    Vector2 vector15 = default(Vector2);
-        //    for (int num96 = num92; num96 < num93; num96++)
-        //    {
-        //        for (int num97 = num94; num97 < num95; num97++)
-        //        {
-        //            vector15.X = num96 * 16;
-        //            vector15.Y = num97 * 16;
-        //            if (!(Entity.position.X + (float)Entity.width > vector15.X) || !(Entity.position.X < vector15.X + 16f) || !(Entity.position.Y + (float)Entity.height > vector15.Y) || !(Entity.position.Y < vector15.Y + 16f) || !Main.tile[num96, num97].HasTile);
-        //            {
-        //                continue;
-        //            }
-        //                WorldGen.Convert(num96, num97, 4, 1);
-        //        }
-        //    }
-        //}
-
         //Copied from Projectile.cs, for converting NPCs
-
         if (Main.netMode != NetmodeID.MultiplayerClient)
         {
             for (int num47 = 0; num47 < 200; num47++)

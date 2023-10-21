@@ -26,10 +26,11 @@ public class DesertGamblerHook : ModHook
             (drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk) ||
             drawinfo.drawPlayer.head > 0)
         {
-            goto thing;
+            orig.Invoke(ref drawinfo);
+            return;
         }
         if (drawinfo.drawPlayer.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) &&
-            drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().DesertGamblerVisible)
+            drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().DesertGamblerVisible && drawinfo.drawPlayer.head == 0)
         {
             MethodInfo dynMethod = typeof(Terraria.DataStructures.PlayerDrawLayers).GetMethod("DrawPlayer_21_Head_TheFace",
                 BindingFlags.NonPublic | BindingFlags.Static);
@@ -43,15 +44,14 @@ public class DesertGamblerHook : ModHook
             
             return;
         }
-        thing:
         orig.Invoke(ref drawinfo);
     }
 
     private void On_PlayerDrawLayers_DrawPlayer_01_BackHair(On_PlayerDrawLayers.orig_DrawPlayer_01_BackHair orig, ref PlayerDrawSet drawinfo)
     {
-        if (drawinfo.drawPlayer.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) && !drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman)
+        if (drawinfo.drawPlayer.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) && drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().DesertGamblerVisible && !drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman)
         {
-            drawinfo.hatHair = true;
+            //drawinfo.hatHair = true;
         }
         orig.Invoke(ref drawinfo);
     }

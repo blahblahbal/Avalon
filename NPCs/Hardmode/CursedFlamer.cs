@@ -15,7 +15,7 @@ public class CursedFlamer : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[NPC.type] = 2;
+        Main.npcFrameCount[NPC.type] = 3;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
@@ -27,17 +27,17 @@ public class CursedFlamer : ModNPC
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
             BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
-            new FlavorTextBestiaryInfoElement("Shoots cursed fireballs when in range.")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.CursedFlamer"))
         });
     }
     public override void SetDefaults()
     {
         NPC.npcSlots = 1;
-        NPC.width = 46;
-        NPC.height = 90;
+        NPC.width = 60;
+        NPC.height = 66;
         NPC.aiStyle = -1;
         NPC.timeLeft = 1750;
-        //animationType = 75;
+        AnimationType = NPCID.Corruptor;
         NPC.damage = 50;
         NPC.defense = 35;
         NPC.HitSound = SoundID.NPCHit1;
@@ -60,23 +60,42 @@ public class CursedFlamer : ModNPC
         NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
         NPC.damage = (int)(NPC.damage * 0.5f);
     }
-    public override void FindFrame(int frameHeight)
-    {
-        NPC.frameCounter++;
-        if (NPC.frameCounter >= 8.0)
-        {
-            NPC.frame.Y = NPC.frame.Y + frameHeight;
-            NPC.frameCounter = 0.0;
-        }
-        if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
-        {
-            NPC.frame.Y = 0;
-        }
-    }
+    //public override void FindFrame(int frameHeight)
+    //{
+        //NPC.frameCounter++;
+        //if (NPC.frameCounter < 6)
+        //{
+        //    NPC.frame.Y = 0;
+        //}
+        //if (NPC.frameCounter < 12)
+        //{
+        //    NPC.frame.Y = frameHeight;
+        //}
+        //if (NPC.frameCounter < 18)
+        //{
+        //    NPC.frame.Y = frameHeight * 2;
+        //}
+        //if (NPC.frameCounter < 24)
+        //{
+        //    NPC.frame.Y = frameHeight;
+        //}
+        
+
+        //NPC.frameCounter++;
+        //if (NPC.frameCounter >= 8.0)
+        //{
+        //    NPC.frame.Y = NPC.frame.Y + frameHeight;
+        //    NPC.frameCounter = 0.0;
+        //}
+        //if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
+        //{
+        //    NPC.frame.Y = 0;
+        //}
+    //}
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ItemID.CursedFlame, 3));
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GreekExtinguisher>(), 40));
+        npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GreekExtinguisher>(), 40));
     }
     public Vector2 RotateAboutOrigin(Vector2 point, Vector2 origin, float rotation)
     {

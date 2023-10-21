@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Avalon.Walls;
@@ -118,6 +118,14 @@ public static class ConversionHelper
             WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(x, y, tileType);
 
         Main.tile[x, y].TileType = (ushort)tileType;
+        if (tileType == ModContent.TileType<Ickgrass>() && Main.tile[x, y - 1].TileType == TileID.Pumpkins)
+        {
+            WorldGen.KillTile(x, y - 1);
+            if (!Main.tile[x, y - 1].HasTile && Main.netMode != NetmodeID.SinglePlayer)
+            {
+                NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, x, y - 1);
+            }
+        }
         WorldGen.SquareTileFrame(x, y);
         NetMessage.SendTileSquare(-1, x, y);
 

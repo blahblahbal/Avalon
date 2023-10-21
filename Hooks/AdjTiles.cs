@@ -13,7 +13,7 @@ internal class AdjTiles : ModHook
     protected override void Apply()
     {
         On_Player.AdjTiles += OnAdjTiles;
-        On_Player.AdjTiles += OnAdjTilesPocketBench;
+        //On_Player.AdjTiles += OnAdjTilesPocketBench;
     }
     private static void OnAdjTilesPocketBench(On_Player.orig_AdjTiles orig, Player self)
     {

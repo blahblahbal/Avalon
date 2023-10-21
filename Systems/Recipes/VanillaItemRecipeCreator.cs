@@ -39,7 +39,23 @@ public class VanillaItemRecipeCreator : ModSystem
         #endregion
 
         #region Hardmode Anvil
-        Recipe.Create(ItemID.MechanicalWorm).AddIngredient(ModContent.ItemType<YuckyBit>(), 6).AddRecipeGroup("IronBar", 5).AddIngredient(ItemID.SoulofNight, 6).AddTile(TileID.MythrilAnvil).Register();
+        Recipe.Create(ItemID.MechanicalWorm)
+            .AddIngredient(ModContent.ItemType<YuckyBit>(), 6)
+            .AddRecipeGroup("IronBar", 5)
+            .AddIngredient(ItemID.SoulofNight, 6)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
+
+        Recipe.Create(ItemID.RodofDiscord)
+            .AddIngredient(ModContent.ItemType<RodofCoalescence>())
+            .AddIngredient(ModContent.ItemType<ChaosDust>(), 40)
+            .AddIngredient(ItemID.SoulofLight, 25)
+            .AddIngredient(ItemID.Diamond, 10)
+            .AddIngredient(ItemID.SoulofFright)
+            .AddIngredient(ItemID.SoulofMight)
+            .AddIngredient(ItemID.SoulofSight)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
             //Recipe.Create(ItemID.LihzahrdPowerCell).AddIngredient(ModContent.ItemType<SolariumStar>(), 5).AddIngredient(ItemID.LihzahrdBrick, 10).AddTile(TileID.MythrilAnvil).Register();
         #endregion
 

@@ -19,8 +19,8 @@ public class RecipeChanger : ModSystem
         {
             Recipe recipe = Main.recipe[i];
 
-            #region pocket workbench adding stations
-            if (recipe.requiredTile.Count > 0)
+            #region pocket workbench adding stations (BREAKS WHEN UNLOADING THE MOD)
+            /*if (recipe.requiredTile.Count > 0)
             {
                 for (int j = 0; j < recipe.requiredTile.Count; j++)
                 {
@@ -32,7 +32,7 @@ public class RecipeChanger : ModSystem
                         }
                     }
                 }
-            }
+            }*/
             #endregion
 
             switch (recipe.createItem.type)
@@ -257,14 +257,14 @@ public class RecipeChanger : ModSystem
             }
         }
 
-        #region pocket station adding station item ids
-        for (int i = 0; i < ItemLoader.ItemCount; i++)
-        {
-            if (Data.Sets.Tile.CraftingStations.Contains(ContentSamples.ItemsByType[i].createTile))
-            {
-                Data.Sets.Item.CraftingStationsItemID.Add(ContentSamples.ItemsByType[i].type);
-            }
-        }
+        #region pocket station adding station item ids (BREAKS WHEN UNLOADING THE MOD)
+        //for (int i = 0; i < ItemLoader.ItemCount; i++)
+        //{
+        //    if (Data.Sets.Tile.CraftingStations.Contains(ContentSamples.ItemsByType[i].createTile))
+        //    {
+        //        Data.Sets.Item.CraftingStationsItemID.Add(ContentSamples.ItemsByType[i].type);
+        //    }
+        //}
         #endregion
 
 

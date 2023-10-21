@@ -109,11 +109,12 @@ public class Shockwave : ModBuff
                     //    multiplier = 2;
                     //}
 
-                    int dmg = N.StrikeNPC(new NPC.HitInfo {Damage = (int)(multiplier * fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1)) * 2, Knockback = fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1) * 2.7f, HitDirection = HitDir});
+                    NPC.HitInfo h = new NPC.HitInfo { Damage = (int)(multiplier * fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1)) * 2, Knockback = fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1) * 2.7f, HitDirection = HitDir };
+                    int dmg = N.StrikeNPC(h);
                     player.addDPS(dmg);
                     if (Main.netMode != NetmodeID.SinglePlayer)
                     {
-                        NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, o, dmg, 10f, HitDir); // for multiplayer support
+                        NetMessage.SendStrikeNPC(N, h);
                     }
 
                     

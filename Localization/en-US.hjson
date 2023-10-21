@@ -104,6 +104,8 @@ Mods: {
 			DesertBeak: The guardian of the desert, this large vulture summons its smaller brethren to assist it in battle. It lifts prey up with its talons, then drops them to fall to their doom.
 			IrateBones: These Angry Bones have donned a set of armor to further fuel their wrath.
 			CursedScepter: Enchanted through the malevolence of the Dungeon, weapons like this cut intruders down to size.
+			CursedFlamer: Cousins of the Corruptor, these malevolent creatures shoot cursed flames at anyone who dares to intrude into the Corruption.
+			Hallowor: A guardian of light, this being spits a substance that purifies the world.
 		}
 
 		Keybinds: {
@@ -224,6 +226,7 @@ Mods: {
 			Ammo: 5% chance to save ammo
 			Money: 5% increased money drops
 			StamRegen: Increased stamina regeneration
+			Efficiency: Increased mining efficiency
 		}
 
 		TooltipEdits: {
@@ -6842,8 +6845,8 @@ Mods: {
 				DisplayName: Breakdawn (Normal)
 				Tooltip:
 					'''
-					Right click to change to area mode
 					Automatically replants acorns after chopping trees
+					Right click to change to area mode
 					'With each swing the dawn breaks'
 					'''
 			}
@@ -7138,12 +7141,26 @@ Mods: {
 
 			AbsoluteEmptiness: {
 				DisplayName: Absolute Emptiness
-				Tooltip: ""
+				Tooltip: "'Waasephi'"
 			}
 
 			BloodyAmulet: {
 				DisplayName: Bloody Amulet
 				Tooltip: Summons the Blood Moon
+			}
+
+			VomitWater: {
+				DisplayName: Vomit Water
+				Tooltip: Spreads the Contagion to some blocks
+			}
+
+			RodofCoalescence: {
+				DisplayName: Rod of Coalescence
+				Tooltip:
+					'''
+					Teleports you to the position of the mouse
+					Causes the coalesced state
+					'''
 			}
 		}
 
@@ -7331,6 +7348,7 @@ Mods: {
 			ExplosiveEggShrapnel.DisplayName: Explosive Egg Shrapnel
 			Noxious.DisplayName: Noxious
 			BloodyAmulet.DisplayName: Bloody Amulet
+			VomitWater.DisplayName: Vomit Water
 		}
 
 		NPCs: {
@@ -7402,6 +7420,8 @@ Mods: {
 			CursedScepter.DisplayName: Cursed Scepter
 			IrateBones.DisplayName: Irate Bones
 			InfectedPickaxe.DisplayName: Infected Pickaxe
+			Hallowor.DisplayName: Hallowor
+			HallowSpit.DisplayName: Hallow Spit
 		}
 
 		Buffs: {
@@ -7972,6 +7992,16 @@ Mods: {
 			SpectrumBlur: {
 				DisplayName: Spectrum Blur
 				Description: 10% chance to dodge an attack
+			}
+
+			PixieHalloworBuff: {
+				DisplayName: Pixie Hallowor Buff
+				Description: Mods.Avalon.Buffs.PixieHalloworBuff.Description
+			}
+
+			Coalesced: {
+				DisplayName: Coalesced State
+				Description: You cannot use a Rod of Coalescence
 			}
 		}
 
