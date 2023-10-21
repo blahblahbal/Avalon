@@ -13,77 +13,40 @@ public static class ConversionHelper
 {
     public static void ConvertToJungle(int i, int j, int size = 4)
     {
-        for (var k = i - size; k <= i + size; k++)
+        for (var x = i - size; x <= i + size; x++)
         {
-            for (var l = j - size; l <= j + size; l++)
+            for (var y = j - size; y <= j + size; y++)
             {
-                if (!WorldGen.InWorld(k, l, 1) || Math.Abs(k - i) + Math.Abs(l - j) >= Math.Sqrt(size * size + size * size))
+                if (!WorldGen.InWorld(x, y, 1) || Math.Abs(x - i) + Math.Abs(y - j) >= Math.Sqrt(size * size + size * size))
                     continue;
 
-                int type = Main.tile[k, l].TileType;
-                int wall = Main.tile[k, l].WallType;
+                if (Main.tile[x, y].TileType > TileLoader.TileCount || Main.tile[x, y].WallType > WallLoader.WallCount)
+                    continue;
 
-                if (WallID.Sets.Conversion.Grass[wall])
-                {
-                    Main.tile[k, l].WallType = WallID.JungleUnsafe;
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
-                else if (WallID.Sets.Conversion.Dirt[wall])
-                {
-                    Main.tile[k, l].WallType = WallID.MudUnsafe;
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
+                // Walls
+                _ = ConvertWall(x, y, type => WallID.Sets.Conversion.Grass[type], WallID.JungleUnsafe) ||
+                    ConvertWall(x, y, type => WallID.Sets.Conversion.Dirt[type], WallID.MudUnsafe);
 
-                if (TileID.Sets.Conversion.Stone[type])
-                {
-                    Main.tile[k, l].TileType = TileID.Stone;
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
-                else if (TileID.Sets.Conversion.Grass[type])
-                {
-                    Main.tile[k, l].TileType = TileID.JungleGrass;
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
-                else if (TileID.Sets.Conversion.Ice[type])
-                {
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<GreenIce>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
-                else if (TileID.Sets.Conversion.Sand[type])
-                {
-                    Main.tile[k, l].TileType = TileID.Sand;
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
-                else if (TileID.Sets.Conversion.Sandstone[type])
-                {
-                    Main.tile[k, l].TileType = TileID.Sandstone;
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
-                else if (TileID.Sets.Conversion.HardenedSand[type])
-                {
-                    Main.tile[k, l].TileType = TileID.HardenedSand;
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
-                else if (Tile.Conversion.ShortGrass[type])
-                {
-                    Main.tile[k, l].TileType = TileID.JunglePlants;
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
-                }
+                // Tiles
+                _ = ConvertTile(x, y, type => TileID.Sets.Conversion.Stone[type], TileID.Stone) ||
+                    ConvertTile(x, y, type => TileID.Sets.Conversion.Grass[type], TileID.JungleGrass) ||
+                    ConvertTile<GreenIce>(x, y, type => TileID.Sets.Conversion.Ice[type]) ||
+                    ConvertTile(x, y, type => TileID.Sets.Conversion.Sand[type], TileID.Sand) ||
+                    ConvertTile(x, y, type => TileID.Sets.Conversion.HardenedSand[type], TileID.HardenedSand, false) ||
+                    ConvertTile(x, y, type => TileID.Sets.Conversion.Sandstone[type], TileID.Sandstone, false);
 
-                if (type is TileID.Plants2 or TileID.HallowedPlants2)
+                // TODO: This isn't how plants should be converted
+                if (Tile.Conversion.ShortGrass[Main.tile[x, y].TileType])
                 {
-                    Main.tile[k, l].TileType = TileID.JunglePlants2;
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l, 1);
+                    Main.tile[x, y].TileType = TileID.JunglePlants;
+                    WorldGen.SquareTileFrame(x, y);
+                    NetMessage.SendTileSquare(-1, x, y, 1);
+                }
+                else if (Main.tile[x, y].TileType is TileID.Plants2 or TileID.HallowedPlants2)
+                {
+                    Main.tile[x, y].TileType = TileID.JunglePlants2;
+                    WorldGen.SquareTileFrame(x, y);
+                    NetMessage.SendTileSquare(-1, x, y, 1);
                 }
             }
         }
@@ -124,27 +87,37 @@ public static class ConversionHelper
         }
     }
 
-    private static bool ConvertWall<T>(int x, int y, Func<int, bool> validTypePredicate) where T : ModWall
+    private static bool ConvertWall<TWall>(int x, int y, Func<int, bool> validTypePredicate) where TWall : ModWall
     {
-        if (!validTypePredicate(Main.tile[x, y].WallType) || Main.tile[x, y].WallType == ModContent.WallType<T>())
+        return ConvertWall(x, y, validTypePredicate, ModContent.WallType<TWall>());
+    }
+
+    private static bool ConvertWall(int x, int y, Func<int, bool> validTypePredicate, int wallType)
+    {
+        if (!validTypePredicate(Main.tile[x, y].WallType) || Main.tile[x, y].WallType == wallType)
             return false;
 
-        Main.tile[x, y].WallType = (ushort)ModContent.WallType<T>();
+        Main.tile[x, y].WallType = (ushort)wallType;
         WorldGen.SquareWallFrame(x, y);
         NetMessage.SendTileSquare(-1, x, y);
 
         return true;
     }
 
-    private static bool ConvertTile<T>(int x, int y, Func<int, bool> validTypePredicate, bool tryKillTreeAbove = true) where T : ModTile
+    private static bool ConvertTile<TTile>(int x, int y, Func<int, bool> validTypePredicate, bool tryKillTreeAbove = true) where TTile : ModTile
     {
-        if (!validTypePredicate(Main.tile[x, y].TileType) || Main.tile[x, y].TileType == ModContent.TileType<T>())
+        return ConvertTile(x, y, validTypePredicate, ModContent.TileType<TTile>(), tryKillTreeAbove);
+    }
+
+    private static bool ConvertTile(int x, int y, Func<int, bool> validTypePredicate, int tileType, bool tryKillTreeAbove = true)
+    {
+        if (!validTypePredicate(Main.tile[x, y].TileType) || Main.tile[x, y].TileType == tileType)
             return false;
 
         if (tryKillTreeAbove)
-            WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(x, y, ModContent.TileType<T>());
+            WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(x, y, tileType);
 
-        Main.tile[x, y].TileType = (ushort)ModContent.TileType<T>();
+        Main.tile[x, y].TileType = (ushort)tileType;
         WorldGen.SquareTileFrame(x, y);
         NetMessage.SendTileSquare(-1, x, y);
 
