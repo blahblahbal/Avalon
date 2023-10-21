@@ -37,4 +37,29 @@ public class ContagionVines : ModTile
         }
         return false;
     }
+
+    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
+    {
+        var tile = Main.tile[i, j];
+        var tileAbove = Framing.GetTileSafely(i, j - 1);
+
+        int up;
+        if (!tileAbove.HasUnactuatedTile)
+            up = -1;
+        else if (!tileAbove.BottomSlope)
+            up = tileAbove.TileType;
+        else
+            up = -1;
+
+        if (up != tile.TileType && tile.TileType == ModContent.TileType<ContagionVines>() && !CanGrowFromTile(up))
+            WorldGen.KillTile(i, j);
+
+        return false;
+    }
+
+    public static bool CanGrowFromTile(int tileType)
+    {
+        return tileType == ModContent.TileType<Ickgrass>() ||
+               tileType == ModContent.TileType<ContagionJungleGrass>();
+    }
 }

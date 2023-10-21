@@ -1,6 +1,5 @@
 using Avalon.Dusts;
 using Avalon.Items.Material;
-using Avalon.WorldGeneration.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -55,10 +54,7 @@ public class ContagionShortGrass : ModTile
 
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     {
-        if (noBreak)
-            return false;
-
-        PlantsHelper.WorldGenPlantCheck(i, j);
+        WorldGen.PlantCheck(i, j);
         return false;
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Avalon.Common;
 using Avalon.Tiles.Contagion;
 using Avalon.WorldGeneration.Helpers;
@@ -100,42 +99,29 @@ internal class ContagionConversionHook : ModHook
     {
         var cursor = new ILCursor(il);
 
-        // Add vine condition for add
+        // Add vine condition for conversion
         cursor.GotoNext(MoveType.Before, i => i.MatchStloc(121));
         cursor.Emit(OpCodes.Ldloc, 84); // up
         cursor.EmitDelegate((ushort origValue, int up) =>
         {
-            if (up == ModContent.TileType<ContagionVines>() || up == ModContent.TileType<ContagionJungleGrass>() || up == ModContent.TileType<Ickgrass>())
+            if (up == ModContent.TileType<ContagionVines>() || ContagionVines.CanGrowFromTile(up))
             {
                 return (ushort)ModContent.TileType<ContagionVines>();
             }
             return origValue;
         });
-
-        // Add vine condition for kill
-        cursor.GotoNext(MoveType.Before, i => i.MatchStloc(122));
-        cursor.Emit(OpCodes.Ldloc, 3); // num
-        cursor.Emit(OpCodes.Ldloc, 84); // up
-        cursor.EmitDelegate((bool origValue, int num, int up) =>
-        {
-            if (num == ModContent.TileType<ContagionVines>() && up != ModContent.TileType<ContagionJungleGrass>() && up != ModContent.TileType<Ickgrass>())
-            {
-                return true;
-            }
-            return origValue;
-        });
     }
 
-    private void On_WorldGen_UpdateWorld_OvergroundTile(On_WorldGen.orig_UpdateWorld_OvergroundTile orig, int x, int y, bool checkNPCSpawns, int wallDist)
+    private static void On_WorldGen_UpdateWorld_OvergroundTile(On_WorldGen.orig_UpdateWorld_OvergroundTile orig, int x, int y, bool checkNPCSpawns, int wallDist)
     {
         orig(x, y, checkNPCSpawns, wallDist);
-        VineHelper.VineRandomUpdate(x, y, 20, 60);
+        VinesHelper.VinesRandomUpdate<ContagionVines>(x, y, 20, 60, ContagionVines.CanGrowFromTile);
     }
 
-    private void On_WorldGen_UpdateWorld_UndergroundTile(On_WorldGen.orig_UpdateWorld_UndergroundTile orig, int x, int y, bool checkNPCSpawns, int wallDist)
+    private static void On_WorldGen_UpdateWorld_UndergroundTile(On_WorldGen.orig_UpdateWorld_UndergroundTile orig, int x, int y, bool checkNPCSpawns, int wallDist)
     {
         orig(x, y, checkNPCSpawns, wallDist);
-        VineHelper.VineRandomUpdate(x, y, 7, 70);
+        VinesHelper.VinesRandomUpdate<ContagionVines>(x, y, 7, 70, ContagionVines.CanGrowFromTile);
     }
 
     private static bool On_WorldGen_IsFitToPlaceFlowerIn(On_WorldGen.orig_IsFitToPlaceFlowerIn orig, int x, int y, int typeAttemptedToPlace)
