@@ -110,6 +110,19 @@ internal class ContagionConversionHook : ModHook
             }
             return origValue;
         });
+        
+        // Add vine condition for kill
+        cursor.GotoNext(MoveType.Before, i => i.MatchStloc(122));
+        cursor.Emit(OpCodes.Ldloc, 3); // num
+        cursor.Emit(OpCodes.Ldloc, 84); // up
+        cursor.EmitDelegate((bool origValue, int num, int up) =>
+        {
+            if (num == ModContent.TileType<ContagionVines>() && up != ModContent.TileType<ContagionJungleGrass>() && up != ModContent.TileType<Ickgrass>())
+            {
+                return true;
+            }
+            return origValue;
+        });
     }
 
     private static void On_WorldGen_UpdateWorld_OvergroundTile(On_WorldGen.orig_UpdateWorld_OvergroundTile orig, int x, int y, bool checkNPCSpawns, int wallDist)
