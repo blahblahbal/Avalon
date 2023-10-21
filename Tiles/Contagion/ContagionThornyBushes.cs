@@ -1,9 +1,8 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
 
 namespace Avalon.Tiles.Contagion;
 
@@ -20,6 +19,7 @@ public class ContagionThornyBushes : ModTile
         Main.tileCut[Type] = true;
         Main.tileLavaDeath[Type] = true;
         Main.tileBlockLight[Type] = true;
+        TileID.Sets.Conversion.Thorn[Type] = true;
         TileID.Sets.TileCutIgnore.IgnoreDontHurtNature[Type] = true;
         TileID.Sets.GetsDestroyedForMeteors[Type] = true;
         TileID.Sets.TouchDamageDestroyTile[Type] = true;
@@ -34,7 +34,7 @@ public class ContagionThornyBushes : ModTile
         //TileObjectData.addTile(Type);
         HitSound = SoundID.Grass;
         AddMapEntry(new Color(155, 174, 50));
-        DustType = ModContent.DustType<Dusts.ContagionDust>();
+        DustType = ModContent.DustType<ContagionDust>();
     }
 
     //public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)

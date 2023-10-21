@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using Avalon.Items.OreChunks;
 using Avalon.Tiles;
+using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Ores;
-using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,20 +17,18 @@ namespace Avalon.Data.Sets
         };
 
         public static readonly bool[] Chunkstone = TileID.Sets.Factory.CreateBoolSet(
-            ModContent.TileType<Tiles.Contagion.Chunkstone>()
+            ModContent.TileType<Chunkstone>()
         );
 
         public static readonly bool[] Altar = TileID.Sets.Factory.CreateBoolSet(
-            ModContent.TileType<Tiles.Contagion.IckyAltar>()
+            ModContent.TileType<IckyAltar>()
         );
 
         public static readonly bool[] Orb = TileID.Sets.Factory.CreateBoolSet(
-            ModContent.TileType<Tiles.Contagion.SnotOrb>()
+            ModContent.TileType<SnotOrb>()
         );
 
-        public static readonly bool[] Stalac = TileID.Sets.Factory.CreateBoolSet(
-            ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>()
-        );
+        public static readonly HashSet<int> Stalac = new(){ModContent.TileType<ContagionStalactgmites>()};
 
         public class Conversion
         {
@@ -40,19 +39,8 @@ namespace Avalon.Data.Sets
             TileID.HallowedPlants,
             TileID.JunglePlants
             );
-
-            public static bool[] Vines = TileID.Sets.Factory.CreateBoolSet(
-                TileID.Vines,
-                TileID.VineFlowers,
-                TileID.CorruptVines,
-                TileID.CrimsonVines,
-                TileID.HallowedVines,
-                TileID.JungleVines
-                );
         }
-
         
-
         public static bool[] RiftOres = TileID.Sets.Factory.CreateBoolSet(TileID.Copper, TileID.Tin,
             TileID.Iron, TileID.Lead, TileID.Silver, TileID.Tungsten, TileID.Gold, TileID.Platinum,
             TileID.Demonite, TileID.Crimtane, TileID.Cobalt, TileID.Palladium, TileID.Mythril, TileID.Orichalcum,
