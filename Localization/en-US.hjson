@@ -6843,6 +6843,7 @@ Mods: {
 				Tooltip:
 					'''
 					Right click to change to area mode
+					Automatically replants acorns after chopping trees
 					'With each swing the dawn breaks'
 					'''
 			}
@@ -7134,6 +7135,16 @@ Mods: {
 				DisplayName: Noxious
 				Tooltip: ""
 			}
+
+			AbsoluteEmptiness: {
+				DisplayName: Absolute Emptiness
+				Tooltip: ""
+			}
+
+			BloodyAmulet: {
+				DisplayName: Bloody Amulet
+				Tooltip: Summons the Blood Moon
+			}
 		}
 
 		InfoDisplays: {
@@ -7319,6 +7330,7 @@ Mods: {
 			ExplosiveEgg.DisplayName: Explosive Egg
 			ExplosiveEggShrapnel.DisplayName: Explosive Egg Shrapnel
 			Noxious.DisplayName: Noxious
+			BloodyAmulet.DisplayName: Bloody Amulet
 		}
 
 		NPCs: {

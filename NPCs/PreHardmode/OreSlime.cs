@@ -47,7 +47,7 @@ public class OreSlime : ModNPC
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(WhichOre);
-        writer.WriteRGB(NPC.color);
+        writer.WriteRGB(OreColor[WhichOre] * 0.5f);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
@@ -93,7 +93,6 @@ public class OreSlime : ModNPC
     {
         if (NPC.life > 0)
         {
-
             for (int i = 0; i < 7; i++)
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.TintableDust, 0, 0, Main.rand.Next(100, 200), default, Main.rand.NextFloat(1, 1.5f));

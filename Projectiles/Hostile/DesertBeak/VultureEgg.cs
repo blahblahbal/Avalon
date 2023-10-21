@@ -4,6 +4,7 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile.DesertBeak;
@@ -97,14 +98,18 @@ public class VultureEgg : ModProjectile
 
         Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(12,12) * Main.rand.NextFloat(0.8f,1.3f), Mod.Find<ModGore>("VultureShell1").Type, 1);
         Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(12, 12) * Main.rand.NextFloat(0.8f, 1.3f), Mod.Find<ModGore>("VultureShell2").Type, 1);
-        Projectile.position.X = Projectile.position.X + (float)(Projectile.width / 2);
-        Projectile.position.Y = Projectile.position.Y + (float)(Projectile.height / 2);
+        Projectile.position.X = Projectile.position.X + Projectile.width / 2;
+        Projectile.position.Y = Projectile.position.Y + Projectile.height / 2;
         Projectile.width = 10;
         Projectile.height = 10;
-        Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
-        Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
+        Projectile.position.X = Projectile.position.X - Projectile.width / 2;
+        Projectile.position.Y = Projectile.position.Y - Projectile.height / 2;
 
-        NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.position.X, (int)Projectile.position.Y, ModContent.NPCType<DesertTalon>());
+        if (Main.netMode != NetmodeID.MultiplayerClient)
+        {
+            int npc = NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.position.X, (int)Projectile.position.Y, ModContent.NPCType<DesertTalon>());
+            NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, npc);
+        }
     }
     public override void AI()
     {

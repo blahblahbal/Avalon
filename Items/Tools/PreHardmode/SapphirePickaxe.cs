@@ -15,7 +15,7 @@ class SapphirePickaxe : ModItem
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.crit += 5;
-        Item.pick = 80;
+        Item.pick = 68;
         Item.rare = ItemRarityID.Green;
         Item.useTime = 20;
         Item.knockBack = 2f;
