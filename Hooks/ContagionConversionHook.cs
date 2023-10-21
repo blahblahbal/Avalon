@@ -1,3 +1,4 @@
+using System;
 using Avalon.Common;
 using Avalon.Tiles.Contagion;
 using Avalon.WorldGeneration.Helpers;
@@ -15,6 +16,8 @@ internal class ContagionConversionHook : ModHook
     protected override void Apply()
     {
         On_WorldGen.GetDesiredStalagtiteStyle += On_WorldGen_GetDesiredStalactiteStyle;
+
+        IL_WorldGen.PlantCheck += IL_WorldGen_PlantCheck;
         
         IL_WorldGen.PaintTheSand += IL_AddStalacCheck;
         IL_WorldGen.PlaceTile += IL_AddStalacCheck;
@@ -34,10 +37,70 @@ internal class ContagionConversionHook : ModHook
         On_WorldGen.IsFitToPlaceFlowerIn += On_WorldGen_IsFitToPlaceFlowerIn;
     }
 
+    private static void IL_WorldGen_PlantCheck(ILContext il)
+    {
+        var cursor = new ILCursor(il);
+        const int belowTileTypeLocation = 0;
+        const int tileTypeLocation = 1;
+        const int xArg = 0;
+        const int yArg = 1;
+        
+        // Extend check for whether or not a plant check is required
+        ILLabel exitBranchLabel = null!;
+        cursor.GotoNext(MoveType.Before, i => i.MatchLdcI4(662), i => i.MatchBneUn(out exitBranchLabel!));
+
+        cursor.GotoNext(MoveType.Before, i => i.MatchLdcI4(637), i => i.MatchBneUn(out _));
+        cursor.Emit(OpCodes.Ldloc, belowTileTypeLocation);
+        cursor.EmitDelegate((int tileType, int belowTileType) => tileType != ModContent.TileType<ContagionShortGrass>() ||
+                                                                 belowTileType == ModContent.TileType<ContagionJungleGrass>() ||
+                                                                 belowTileType == ModContent.TileType<Ickgrass>());
+        // If false then break out of && chain
+        cursor.Emit(OpCodes.Brfalse, exitBranchLabel);
+        // If true then continue, push tile type back on stack
+        cursor.Emit(OpCodes.Ldloc, tileTypeLocation);
+
+        // Check isMushroom
+        cursor.GotoNext(MoveType.Before, i => i.MatchStloc(2));
+        cursor.Emit(OpCodes.Ldloc, tileTypeLocation);
+        cursor.Emit(OpCodes.Ldarg, xArg);
+        cursor.Emit(OpCodes.Ldarg, yArg);
+        cursor.EmitDelegate((bool origValue, int tileType, int x, int y) =>
+        {
+            if (tileType == ModContent.TileType<ContagionShortGrass>() && Main.tile[x, y].TileFrameX == ContagionShortGrass.MushroomFrameX)
+                return true;
+
+            return origValue;
+        });
+
+        // Assign tile type if is contagion
+        var continueDefaultCheckLabel = cursor.DefineLabel();
+        cursor.GotoNext(MoveType.Before, i => i.MatchLdcI4(109), i => i.MatchBgt(out _));
+        cursor.EmitDelegate((int belowTileType) => belowTileType == ModContent.TileType<Ickgrass>() || belowTileType == ModContent.TileType<ContagionJungleGrass>());
+        cursor.Emit(OpCodes.Brfalse, continueDefaultCheckLabel);
+        cursor.EmitDelegate(ModContent.TileType<ContagionShortGrass>);
+        cursor.Emit(OpCodes.Stloc, tileTypeLocation);
+        cursor.MarkLabel(continueDefaultCheckLabel);
+        cursor.Emit(OpCodes.Ldloc, 0);
+        
+        // Assign mushroom if is mushroom
+        cursor.GotoNext(MoveType.After, i => i.MatchLdcI4(144), i => i.MatchStindI2());
+        cursor.Emit(OpCodes.Ldloc, tileTypeLocation);
+        cursor.Emit(OpCodes.Ldarg, xArg);
+        cursor.Emit(OpCodes.Ldarg, yArg);
+        cursor.EmitDelegate((int tileType, int x, int y) =>
+        {
+            if (tileType == ModContent.TileType<ContagionShortGrass>())
+            {
+                Main.tile[x, y].TileFrameX = ContagionShortGrass.MushroomFrameX;
+            }
+        });
+    }
+
     private static void IL_WorldGen_TileFrame(ILContext il)
     {
         var cursor = new ILCursor(il);
 
+        // Add vine condition for add
         cursor.GotoNext(MoveType.Before, i => i.MatchStloc(121));
         cursor.Emit(OpCodes.Ldloc, 84); // up
         cursor.EmitDelegate((ushort origValue, int up) =>
@@ -49,6 +112,7 @@ internal class ContagionConversionHook : ModHook
             return origValue;
         });
 
+        // Add vine condition for kill
         cursor.GotoNext(MoveType.Before, i => i.MatchStloc(122));
         cursor.Emit(OpCodes.Ldloc, 3); // num
         cursor.Emit(OpCodes.Ldloc, 84); // up

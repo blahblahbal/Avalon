@@ -91,144 +91,63 @@ public static class ConversionHelper
 
     public static void ConvertToContagion(int i, int j, int size = 4)
     {
-        for (var k = i - size; k <= i + size; k++)
+        for (var x = i - size; x <= i + size; x++)
         {
-            for (var l = j - size; l <= j + size; l++)
+            for (var y = j - size; y <= j + size; y++)
             {
-                if (!WorldGen.InWorld(k, l, 1) || Math.Abs(k - i) + Math.Abs(l - j) >= Math.Sqrt(size * size + size * size))
+                if (!WorldGen.InWorld(x, y, 1) || Math.Abs(x - i) + Math.Abs(y - j) >= Math.Sqrt(size * size + size * size))
                     continue;
 
-                int type = Main.tile[k, l].TileType;
-                int wall = Main.tile[k, l].WallType;
-
-                if (type > TileLoader.TileCount || wall > WallLoader.WallCount)
+                if (Main.tile[x, y].TileType > TileLoader.TileCount || Main.tile[x, y].WallType > WallLoader.WallCount)
                     continue;
 
                 // Walls
-                if (WallID.Sets.Conversion.Grass[wall] && wall != ModContent.WallType<ContagionGrassWall>())
-                {
-                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<ContagionGrassWall>();
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (WallID.Sets.Conversion.Stone[wall] && wall != ModContent.WallType<ChunkstoneWall>())
-                {
-                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (WallID.Sets.Conversion.HardenedSand[wall] && wall != ModContent.WallType<HardenedSnotsandWallUnsafe>())
-                {
-                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<HardenedSnotsandWallUnsafe>();
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (WallID.Sets.Conversion.Sandstone[wall] && wall != ModContent.WallType<SnotsandstoneWallUnsafe>())
-                {
-                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<SnotsandstoneWallUnsafe>();
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (WallID.Sets.Conversion.NewWall1[wall] && wall != ModContent.WallType<ContagionLumpWall>())
-                {
-                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<ContagionLumpWall>();
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (WallID.Sets.Conversion.NewWall2[wall] && wall != ModContent.WallType<ContagionMouldWall>())
-                {
-                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<ContagionMouldWall>();
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (WallID.Sets.Conversion.NewWall3[wall] && wall != ModContent.WallType<ContagionCystWallUnsafe>())
-                {
-                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<ContagionCystWallUnsafe>();
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (WallID.Sets.Conversion.NewWall4[wall] && wall != ModContent.WallType<ContagionBoilWall>())
-                {
-                    Main.tile[k, l].WallType = (ushort)ModContent.WallType<ContagionBoilWall>();
-                    WorldGen.SquareWallFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
+                _ = ConvertWall<ContagionGrassWall>(x, y, type => WallID.Sets.Conversion.Grass[type]) ||
+                    ConvertWall<ChunkstoneWall>(x, y, type => WallID.Sets.Conversion.Stone[type]) ||
+                    ConvertWall<HardenedSnotsandWallUnsafe>(x, y, type => WallID.Sets.Conversion.HardenedSand[type]) ||
+                    ConvertWall<SnotsandstoneWallUnsafe>(x, y, type => WallID.Sets.Conversion.Sandstone[type]) ||
+                    ConvertWall<ContagionLumpWall>(x, y, type => WallID.Sets.Conversion.NewWall1[type]) ||
+                    ConvertWall<ContagionMouldWall>(x, y, type => WallID.Sets.Conversion.NewWall2[type]) ||
+                    ConvertWall<ContagionCystWallUnsafe>(x, y, type => WallID.Sets.Conversion.NewWall3[type]) ||
+                    ConvertWall<ContagionBoilWall>(x, y, type => WallID.Sets.Conversion.NewWall4[type]);
 
                 // Tiles
-                if ((Main.tileMoss[type] || TileID.Sets.Conversion.Stone[type]) && type != ModContent.TileType<Chunkstone>())
-                {
-                    WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(k, l, ModContent.TileType<Chunkstone>());
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<Chunkstone>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (TileID.Sets.Conversion.JungleGrass[type] && type != ModContent.TileType<ContagionJungleGrass>())
-                {
-                    WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(k, l, ModContent.TileType<ContagionJungleGrass>());
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (TileID.Sets.Conversion.Grass[type] && type != ModContent.TileType<Ickgrass>())
-                {
-                    WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(k, l, ModContent.TileType<Ickgrass>());
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<Ickgrass>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (TileID.Sets.Conversion.Ice[type] && type != ModContent.TileType<YellowIce>())
-                {
-                    WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(k, l, ModContent.TileType<YellowIce>());
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<YellowIce>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (TileID.Sets.Conversion.Sand[type] && type != ModContent.TileType<Snotsandstone>())
-                {
-                    WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(k, l, ModContent.TileType<Snotsandstone>());
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<Snotsandstone>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (TileID.Sets.Conversion.HardenedSand[type] && type != ModContent.TileType<HardenedSnotsand>())
-                {
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<HardenedSnotsand>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (TileID.Sets.Conversion.Sandstone[type] && type != ModContent.TileType<Snotsandstone>())
-                {
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<Snotsandstone>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-                else if (TileID.Sets.Conversion.Thorn[type] && type != ModContent.TileType<ContagionThornyBushes>())
-                {
-                    Main.tile[k, l].TileType = (ushort)ModContent.TileType<ContagionThornyBushes>();
-                    WorldGen.SquareTileFrame(k, l);
-                    NetMessage.SendTileSquare(-1, k, l);
-                }
-
-                // if (Tile.Conversion.Vines[type])
-                // {
-                //     Main.tile[k, l].TileType = (ushort)ModContent.TileType<ContagionVines>();
-                //     WorldGen.SquareTileFrame(k, l);
-                //     NetMessage.SendTileSquare(-1, k, l, 1);
-                // }
-                // else if (Tile.Conversion.ShortGrass[type])
-                // {
-                //     Main.tile[k, l].TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
-                //     WorldGen.SquareTileFrame(k, l);
-                //     NetMessage.SendTileSquare(-1, k, l, 1);
-                // }
-                //
-                // if (type is TileID.Plants2 or TileID.HallowedPlants2)
-                // {
-                //     Main.tile[k, l].TileType = (ushort)ModContent.TileType<ContagionShortGrass>();
-                //     WorldGen.SquareTileFrame(k, l);
-                //     NetMessage.SendTileSquare(-1, k, l, 1);
-                // }
+                _ = ConvertTile<Chunkstone>(x, y, type => Main.tileMoss[type] || TileID.Sets.Conversion.Stone[type]) ||
+                    ConvertTile<ContagionJungleGrass>(x, y, type => TileID.Sets.Conversion.JungleGrass[type]) ||
+                    ConvertTile<Ickgrass>(x, y, type => TileID.Sets.Conversion.Grass[type]) ||
+                    ConvertTile<YellowIce>(x, y, type => TileID.Sets.Conversion.Ice[type]) ||
+                    ConvertTile<Snotsand>(x, y, type => TileID.Sets.Conversion.Sand[type]) ||
+                    ConvertTile<HardenedSnotsand>(x, y, type => TileID.Sets.Conversion.HardenedSand[type], false) ||
+                    ConvertTile<Snotsandstone>(x, y, type => TileID.Sets.Conversion.Sandstone[type], false) ||
+                    ConvertTile<ContagionThornyBushes>(x, y, type => TileID.Sets.Conversion.Thorn[type], false);
             }
         }
+    }
+
+    private static bool ConvertWall<T>(int x, int y, Func<int, bool> validTypePredicate) where T : ModWall
+    {
+        if (!validTypePredicate(Main.tile[x, y].WallType) || Main.tile[x, y].WallType == ModContent.WallType<T>())
+            return false;
+
+        Main.tile[x, y].WallType = (ushort)ModContent.WallType<T>();
+        WorldGen.SquareWallFrame(x, y);
+        NetMessage.SendTileSquare(-1, x, y);
+
+        return true;
+    }
+
+    private static bool ConvertTile<T>(int x, int y, Func<int, bool> validTypePredicate, bool tryKillTreeAbove = true) where T : ModTile
+    {
+        if (!validTypePredicate(Main.tile[x, y].TileType) || Main.tile[x, y].TileType == ModContent.TileType<T>())
+            return false;
+
+        if (tryKillTreeAbove)
+            WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(x, y, ModContent.TileType<T>());
+
+        Main.tile[x, y].TileType = (ushort)ModContent.TileType<T>();
+        WorldGen.SquareTileFrame(x, y);
+        NetMessage.SendTileSquare(-1, x, y);
+
+        return true;
     }
 }

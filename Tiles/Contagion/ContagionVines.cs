@@ -35,6 +35,6 @@ public class ContagionVines : ModTile
         {
             Main.instance.TilesRenderer.CrawlToTopOfVineAndAddSpecialPoint(j, i);
         }
-        return base.PreDraw(i, j, spriteBatch);
+        return false;
     }
 }
