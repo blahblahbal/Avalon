@@ -790,58 +790,58 @@ public class AvalonGlobalItem : GlobalItem
         }
         if (tooltipLine != null && ModContent.GetInstance<AvalonConfig>().VanillaRenames)
         {
-            if (item.type == ItemID.CoinGun)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.CoinGun");
-            }
-            if (item.type == ItemID.FieryGreatsword)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.FieryGreatsword");
-            }
-            if (item.type == ItemID.PurpleMucos)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.PurpleMucus");
-            }
-            if (item.type == ItemID.HighTestFishingLine)
-            {
-                tooltipLine.Text = tooltipLine.Text.Replace("Test", "Tensile");
-            }
-            if (item.type == ItemID.BlueSolution)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Hallow");
-            }
-            if (item.type == ItemID.DarkBlueSolution)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Mushrooms");
-            }
-            if (item.type == ItemID.GreenSolution)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Purity");
-            }
-            if (item.type == ItemID.PurpleSolution)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Corruption");
-            }
-            if (item.type == ItemID.RedSolution)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Crimson");
-            }
-            if (item.type == ItemID.SandSolution)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Desert");
-            }
-            if (item.type == ItemID.SnowSolution)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Snow");
-            }
-            if (item.type == ItemID.DirtSolution)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Forest");
-            }
-            if (item.type == ItemID.FrostsparkBoots)
-            {
-                tooltipLine.Text = tooltipLine.Text.Replace("Frostspark", "Sparkfrost");
-            }
+            //if (item.type == ItemID.CoinGun)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.CoinGun");
+            //}
+            //if (item.type == ItemID.FieryGreatsword)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.FieryGreatsword");
+            //}
+            //if (item.type == ItemID.PurpleMucos)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.PurpleMucus");
+            //}
+            //if (item.type == ItemID.HighTestFishingLine)
+            //{
+            //    tooltipLine.Text = tooltipLine.Text.Replace("Test", "Tensile");
+            //}
+            //if (item.type == ItemID.BlueSolution)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Hallow");
+            //}
+            //if (item.type == ItemID.DarkBlueSolution)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Mushrooms");
+            //}
+            //if (item.type == ItemID.GreenSolution)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Purity");
+            //}
+            //if (item.type == ItemID.PurpleSolution)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Corruption");
+            //}
+            //if (item.type == ItemID.RedSolution)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Crimson");
+            //}
+            //if (item.type == ItemID.SandSolution)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Desert");
+            //}
+            //if (item.type == ItemID.SnowSolution)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Snow");
+            //}
+            //if (item.type == ItemID.DirtSolution)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.Solutions.Forest");
+            //}
+            //if (item.type == ItemID.FrostsparkBoots)
+            //{
+            //    tooltipLine.Text = tooltipLine.Text.Replace("Frostspark", "Sparkfrost");
+            //}
         }
 
         if (!item.social && PrefixLoader.GetPrefix(item.prefix) is ExxoPrefix exxoPrefix)
