@@ -27,9 +27,13 @@ public class EggShrapnel : ModProjectile
     {
         if (Main.rand.NextBool(3))
         {
-            Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
+            Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.DesertTorch);
             d.noGravity = true;
             d.velocity = Projectile.velocity * 0.5f;
+            d.scale = Main.rand.NextFloat(2);
         }
+
+        if (Projectile.timeLeft <= 30)
+            Projectile.alpha += 255 / 30;
     }
 }

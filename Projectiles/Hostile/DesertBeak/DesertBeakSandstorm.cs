@@ -23,12 +23,15 @@ public class DesertBeakSandstorm : ModProjectile
         Projectile.timeLeft = 540;
         Projectile.penetrate = -1;
         Projectile.ignoreWater = true;
+        Projectile.alpha = 255;
         //Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
     }
     public override void AI()
     {
         Projectile.rotation += 0.1f;
         Projectile.ai[0]++;
+        if (Projectile.alpha > -64)
+            Projectile.alpha-= 8;
     }
     public override bool PreDraw(ref Color lightColor)
     {
@@ -44,7 +47,7 @@ public class DesertBeakSandstorm : ModProjectile
                 Vector2 drawPos = Projectile.Bottom - Main.screenPosition + new Vector2(j * 4).RotatedBy(i * MathHelper.PiOver2 + Main.timeForVisualEffects * 0.1f);
                 opacity = MathHelper.Clamp(opacity + 0.01f, 0, 1);
                 scale = MathHelper.Clamp(scale + 0.03f, 0, 1.1f);
-                Color color = j == 0 ? Color.Goldenrod * opacity : new Color(255, 255, 255, 0) * opacity * 0.6f;
+                Color color = j == 0 ? Color.Goldenrod * opacity : new Color(255, 255, 255, 128) * opacity * 0.8f;
                 Main.EntitySpriteDraw(texture, drawPos + new Vector2(0, i * -heightDivision), frame, color * Projectile.Opacity, Projectile.rotation + MathHelper.PiOver4 * i * -0.1f * Projectile.direction, new Vector2(texture.Width, texture.Height) / 2, scale - (j * 0.1f), SpriteEffects.None, 0);
             }
         }

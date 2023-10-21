@@ -35,14 +35,26 @@ namespace Avalon.NPCs.Bosses.PreHardmode
             {
                 NPC.noTileCollide = false;
             }
+            if (Main.player[NPC.target].dead)
+                NPC.TargetClosest();
+            if (Main.player[NPC.target].dead)
+                NPC.ai[3] = 1;
 
-            NPC.ai[2]++;
+            if (NPC.ai[3] != 0)
+            {
+                NPC.velocity.Y -= 0.5f;
+                NPC.alpha++;
+                if(NPC.alpha > 255)
+                    NPC.active = false;
+            }
+
+                NPC.ai[2]++;
 
             if (NPC.ai[2] > 200)
             {
                 NPC.velocity *= 0.9f;
             }
-            if (NPC.ai[2] > 240)
+            if (NPC.ai[2] > 240 && !Main.player[NPC.target].dead)
             {
                 NPC.velocity = NPC.Center.DirectionTo(Main.player[NPC.target].Center) * 12;
                 NPC.ai[2] = Main.rand.Next(-100, 100);

@@ -56,6 +56,11 @@ class RejuvenationPotion : ModItem
         player.AddBuff(ModContent.BuffType<Rejuvenation>(), 60 * 15);
         return true;
     }
+    public override void GetHealLife(Player player, bool quickHeal, ref int healValue)
+    {
+        player.AddBuff(ModContent.BuffType<Rejuvenation>(), 60 * 15);
+        base.GetHealLife(player, quickHeal, ref healValue);
+    }
     public override void AddRecipes()
     {
         CreateRecipe(1)

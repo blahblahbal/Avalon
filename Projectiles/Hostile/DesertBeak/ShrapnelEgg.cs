@@ -1,5 +1,6 @@
 using Avalon.NPCs.Bosses.PreHardmode;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -7,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile.DesertBeak;
 
-public class ShrapnelEgg : VultureEgg
+public class ShrapnelEgg : ModProjectile
 {
     public override void SetDefaults()
     {
@@ -25,7 +26,36 @@ public class ShrapnelEgg : VultureEgg
         DrawOriginOffsetY -= 5;
         //Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
     }
-    public override void Kill(int timeLeft)
+    public override bool OnTileCollide(Vector2 oldVelocity)
+    {
+        if (Projectile.velocity.X != oldVelocity.X)
+        {
+            Projectile.velocity.X = oldVelocity.X * -0.95f;
+        }
+        if (Projectile.velocity.Y != oldVelocity.Y)
+        {
+            Projectile.velocity.Y = oldVelocity.Y * -0.95f;
+        }
+        SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
+        return false;
+    }
+    public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+    {
+        fallThrough = Main.rand.NextBool();
+        return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+    }
+    public override void AI()
+    {
+        if (Projectile.velocity.Y == 0f)
+        {
+            Projectile.velocity.X *= 0.94f;
+        }
+        Projectile.rotation += Projectile.velocity.X * 0.05f;
+        Projectile.velocity.Y += 0.2f;
+        Projectile.ai[2] += 0.04f;
+        Projectile.scale = 1 + (float)Math.Sin(Math.Pow(Projectile.ai[2], 2)) * 0.1f;
+    }
+    public override void OnKill(int timeLeft)
     {
         if (Projectile.penetrate == 1)
         {
