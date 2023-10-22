@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using System.Reflection;
@@ -113,12 +114,6 @@ public class Breakdawn : ModItem
             }
         }
     }
-
-    private void ClearMiningCacheAt(Player p, int x, int y, int hitTileCacheType)
-    {
-        p.hitReplace.TryClearingAndPruning(x, y, 1);
-        p.hitTile.TryClearingAndPruning(x, y, 1);
-    }
     //public override bool? UseItem(Player player)
     //{
     //    if (player.whoAmI == Main.myPlayer && player.controlUseItem)
@@ -162,6 +157,18 @@ public class Breakdawn : ModItem
     //    }
     //    return null;
     //}
+}
+public class BreakdawnHook : ModHook
+{
+    protected override void Apply()
+    {
+        IL_WorldGen.KillTile_GetItemDrops += IL_WorldGen_KillTile_GetItemDrops;
+    }
+
+    private void IL_WorldGen_KillTile_GetItemDrops(MonoMod.Cil.ILContext il)
+    {
+        Hooks.Utilities.AddAlternativeIdChecks(il, (ushort)ItemID.AcornAxe, id => ItemID.Sets.Factory.CreateBoolSet(ModContent.ItemType<Breakdawn>())[id]);
+    }
 }
 public class Breakdawn3x3 : ModItem
 {

@@ -381,7 +381,7 @@ public class AvalonGlobalItem : GlobalItem
     public override void HoldItem(Item item, Player player)
     {
         #region herb seed block swap
-        if (Data.Sets.Item.HerbSeeds[item.type])
+        /*if (Data.Sets.Item.HerbSeeds[item.type])
         {
             Point mpTile = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 
@@ -413,7 +413,7 @@ public class AvalonGlobalItem : GlobalItem
 
                 item.stack--;
             }
-        }
+        }*/
         #endregion herb seed block swap
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)

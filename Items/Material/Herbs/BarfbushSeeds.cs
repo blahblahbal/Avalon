@@ -9,6 +9,7 @@ class BarfbushSeeds : ModItem
     public override void SetStaticDefaults()
     {
         ItemID.Sets.DisableAutomaticPlaceableDrop[Type] = true;
+
         Item.ResearchUnlockCount = 25;
     }
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)

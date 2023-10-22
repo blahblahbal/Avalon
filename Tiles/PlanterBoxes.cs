@@ -29,6 +29,7 @@ namespace Avalon.Tiles
             TileID.Sets.DisableSmartCursor[Type] = true;
             AdjTiles = new int[] { TileID.PlanterBox };
             DustType = DustID.Dirt;
+            Data.Sets.Tile.SuitableForPlantingHerbs[Type] = true;
         }
 
         public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)

@@ -1,19 +1,19 @@
 ItemName: {
-    DarkBlueSolution: Mushroom Solution
-    BlueSolution: Hallow Solution
-    GreenSolution: Purity Solution
-    PurpleSolution: Corruption Solution
-    RedSolution: Crimson Solution
-    SandSolution: Desert Solution
-    SnowSolution: Snow Solution
-    DirtSolution: Forest Solution
-    FrostsparkBoots: Sparkfrost Boots
-    PurpleMucos: Purple Mucus
-    CoinGun: Spend Shot
-    HighTestFishingLine: High Tensile Fishing Line
-    Volcano: Volcanic Greatsword
-
+	DarkBlueSolution: Mushroom Solution
+	BlueSolution: Hallow Solution
+	GreenSolution: Purity Solution
+	PurpleSolution: Corruption Solution
+	RedSolution: Crimson Solution
+	SandSolution: Desert Solution
+	SnowSolution: Snow Solution
+	DirtSolution: Forest Solution
+	FrostsparkBoots: Sparkfrost Boots
+	PurpleMucos: Purple Mucus
+	CoinGun: Spend Shot
+	HighTestFishingLine: High Tensile Fishing Line
+	Volcano: Volcanic Greatsword
 }
+
 Mods: {
 	BiomeTitles: {
 		Title: {

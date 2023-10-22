@@ -1,3 +1,5 @@
+using Avalon.Items.Material.Herbs;
+using Avalon.Items.Tools.PreHardmode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -42,8 +44,8 @@ public class Holybird : ModTile
     }
     public override bool CanPlace(int i, int j)
     {
-        return (Main.tile[i, j + 1].TileType == TileID.ClayPot || Main.tile[i, j + 1].TileType == TileID.PlanterBox) &&
-               (!Main.tile[i, j].HasTile || Main.tile[i, j].TileType == TileID.Plants);
+        return Data.Sets.Tile.SuitableForPlantingHerbs[Main.tile[i, j + 1].TileType] &&
+               (!Main.tile[i, j].HasTile || Main.tile[i, j].TileType == TileID.Plants || Main.tile[i, j].TileType == Type);
     }
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects spriteEffects)
     {
@@ -55,18 +57,35 @@ public class Holybird : ModTile
     {
         PlantStage stage = GetStage(i, j);
 
-        if (stage == PlantStage.Grown)
+        if (stage == PlantStage.Blooming)
         {
-            yield return new Item(ModContent.ItemType<Items.Material.Herbs.Holybird>());
+            Player p = ClassExtensions.GetPlayerForTile(i, j);
+            int dropItemStack = 1;
+            if (p.HeldItem.type == ItemID.StaffofRegrowth || p.HeldItem.type == ItemID.AcornAxe)
+            {
+                dropItemStack = Main.rand.Next(2) + 1;
+            }
+            yield return new Item(ModContent.ItemType<Items.Material.Herbs.Holybird>(), dropItemStack);
         }
     }
 
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
+        Player p = ClassExtensions.GetPlayerForTile(i, j);
+        int secondaryItemStack = Main.rand.Next(3) + 1;
         PlantStage stage = GetStage(i, j);
-        if (stage == PlantStage.Grown)
+        bool flag = p.HeldItem.type == ItemID.StaffofRegrowth || p.HeldItem.type == ItemID.AcornAxe;
+        if (flag && stage == PlantStage.Mature)
         {
-            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<Items.Material.Herbs.HolybirdSeeds>(), Main.rand.Next(2) + 1);
+            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<HolybirdSeeds>(), secondaryItemStack);
+        }
+        if (stage == PlantStage.Blooming)
+        {
+            if (flag)
+            {
+                secondaryItemStack = Main.rand.Next(5) + 1;
+            }
+            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i, j).ToWorldCoordinates(), ModContent.ItemType<HolybirdSeeds>(), secondaryItemStack);
         }
     }
 
@@ -81,7 +100,7 @@ public class Holybird : ModTile
             if (Main.netMode != NetmodeID.SinglePlayer)
                 NetMessage.SendTileSquare(-1, i, j, 1);
         }
-        if (stage == PlantStage.Growing)
+        if (stage == PlantStage.Mature)
         {
             if (Main.rand.Next(12) == 0)
             {
@@ -101,6 +120,20 @@ public class Holybird : ModTile
         //    if (Main.netMode != NetmodeID.SinglePlayer)
         //        NetMessage.SendTileSquare(-1, i, j, 1);
         //}
+    }
+
+    public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        bool intoRenderTargets = true;
+        bool flag = intoRenderTargets || Main.LightingEveryFrame;
+
+        if (Main.tile[i, j].TileFrameX > 18 && flag)
+        {
+            Main.instance.TilesRenderer.AddSpecialPoint(i, j, 3);
+            return false;
+        }
+
+        return true;
     }
 
     //A method to quickly get the current stage of the herb

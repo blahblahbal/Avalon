@@ -29,7 +29,7 @@ namespace Avalon.Hooks
         {
             self.RegisterToItem(3093, new HerbBagDropsItemDropRule(313, 314, 315, 317, 316, 318, 2358, 307, 308, 309, 311, 310, 312, 2357,
                 ModContent.ItemType<Barfbush>(), ModContent.ItemType<BarfbushSeeds>(), ModContent.ItemType<Bloodberry>(), ModContent.ItemType<BloodberrySeeds>(),
-                ModContent.ItemType<Holybird>(), ModContent.ItemType<HolybirdSeeds>(), ModContent.ItemType<Sweetstem>(), ModContent.ItemType<SweetstemSeeds>()));
+                ModContent.ItemType<Sweetstem>(), ModContent.ItemType<SweetstemSeeds>()));
         }
     }
 }

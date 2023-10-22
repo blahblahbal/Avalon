@@ -22,7 +22,7 @@ class BloodyAmulet : ModItem
         Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.useStyle = ItemUseStyleID.HoldUp;
-        Item.UseSound = SoundID.Item29;
+        Item.UseSound = SoundID.Item4;
         Item.shoot = ModContent.ProjectileType<Projectiles.Tools.BloodyAmulet>();
         Item.value = 0;
     }
