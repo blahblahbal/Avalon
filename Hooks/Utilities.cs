@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Mono.Cecil.Cil;
@@ -18,14 +19,34 @@ public static class Utilities
     /// <typeparam name="TInstance">The type of the instance that the field belongs to.</typeparam>
     /// <typeparam name="TResult">The type of the property or field.</typeparam>
     /// <returns>A delegate that provides the property or field value when supplied with an instance.</returns>
-    public static Func<TInstance, TResult> CreateInstancePropertyOrFieldReaderDelegate<TInstance, TResult>(
-        string fieldName)
+    public static Func<TInstance, TResult> CreateInstancePropertyOrFieldReaderDelegate<TInstance, TResult>(string fieldName)
     {
-        ParameterExpression instanceParameter = Expression.Parameter(typeof(TInstance));
-        return Expression
-            .Lambda<Func<TInstance, TResult>>(
-                Expression.PropertyOrField(instanceParameter, fieldName),
-                instanceParameter).Compile();
+        var instanceParameter = Expression.Parameter(typeof(TInstance));
+        return Expression.Lambda<Func<TInstance, TResult>>(Expression.PropertyOrField(instanceParameter, fieldName), instanceParameter).Compile();
+    }
+
+    public static TDelegate CacheInstanceMethod<TDelegate>(MethodInfo methodInfo)
+    {
+        var parameterInfos = methodInfo.GetParameters();
+        var delegateParameterInfos = typeof(TDelegate).GetMethod("Invoke")!.GetParameters();
+
+        var parameterExpressions = delegateParameterInfos.Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
+        var expressions = parameterExpressions[1..].Select((p, i) => delegateParameterInfos[i].ParameterType == parameterInfos[i].ParameterType ? p as Expression : Expression.Convert(p, parameterInfos[i].ParameterType));
+
+        var methodCallExpression = Expression.Call(parameterExpressions[0], methodInfo, expressions);
+        return Expression.Lambda<TDelegate>(methodCallExpression, parameterExpressions).Compile();
+    }
+
+    public static TDelegate CacheStaticMethod<TDelegate>(MethodInfo methodInfo)
+    {
+        var parameterInfos = methodInfo.GetParameters();
+        var delegateParameterInfos = typeof(TDelegate).GetMethod("Invoke")!.GetParameters();
+
+        var parameterExpressions = delegateParameterInfos.Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
+        var expressions = parameterExpressions.Select((p, i) => delegateParameterInfos[i].ParameterType == parameterInfos[i].ParameterType ? p as Expression : Expression.Convert(p, parameterInfos[i].ParameterType));
+
+        var methodCallExpression = Expression.Call(methodInfo, expressions);
+        return Expression.Lambda<TDelegate>(methodCallExpression, parameterExpressions).Compile();
     }
 
     public static void OutputIL(ILContext il)
