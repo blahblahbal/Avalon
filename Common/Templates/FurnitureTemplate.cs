@@ -10,6 +10,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using System.Collections.Generic;
+using Avalon.Reflection;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Avalon.Common.Templates

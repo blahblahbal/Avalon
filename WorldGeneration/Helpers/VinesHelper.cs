@@ -1,4 +1,5 @@
 ﻿using System;
+using Avalon.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,7 +14,7 @@ public static class VinesHelper
         if (!Main.tile[x, y].HasUnactuatedTile ||
             Main.tile[x, y].TileType != ModContent.TileType<TVines>() &&
             !canGrowFromTile(Main.tile[x, y].TileType) ||
-            !WorldGenHelper.WorldGenGrowMoreVines(x, y))
+            !WorldGenHelper.GrowMoreVines(x, y))
         {
             return;
         }

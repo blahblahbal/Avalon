@@ -1,26 +1,27 @@
-using Avalon.Assets;
-using Avalon.Common;
-using Avalon.Hooks;
-using Avalon.UI;
-using Avalon.UI.StatDisplay;
-using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using Avalon.Assets;
+using Avalon.Biomes;
+using Avalon.Common;
+using Avalon.Effects;
+using Avalon.Hooks;
+using Avalon.Items.Weapons.Melee.Hardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Network;
+using Avalon.UI;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Graphics;
+using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
-using Terraria.Graphics;
 using static Terraria.Graphics.FinalFractalHelper;
-using Avalon.Items.Weapons.Melee.PreHardmode;
-using Avalon.Items.Weapons.Melee.Hardmode;
-using Microsoft.Xna.Framework;
-using System.Reflection;
-using System.IO;
-using ReLogic.Content;
-using Terraria.Graphics.Effects;
-using Avalon.Effects;
-using System;
 
 namespace Avalon;
 
@@ -63,15 +64,14 @@ public class ExxoAvalonOrigins : Mod
     public const string TextureAssetsPath = "Assets/Textures";
     internal UserInterface staminaInterface;
     internal StaminaBar staminaBar;
+    private static readonly Func<Dictionary<int, FinalFractalProfile>> getFinalFractalHelperFractalProfiles = Reflection.Utilities.CreateFieldReader<Dictionary<int, FinalFractalProfile>>(typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.Static | BindingFlags.NonPublic)!);
 
     //internal UserInterface statDisplayInterface;
     //internal StatDisplayUIState statDisplay;
     public override void Load()
     {
-        AvalonWindUtilities.Load();
-
         //Additional swords to the zenith's projectiles with both their texture, size and trail color
-        var fractalProfiles = (Dictionary<int, FinalFractalProfile>)typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+        var fractalProfiles = getFinalFractalHelperFractalProfiles();
 
         fractalProfiles.Add(ItemID.GoldBroadsword, new FinalFractalProfile(50f, new Color(203, 179, 73))); //Add the Gold Broadsword with a gold trail at 50f the size, would reccomend to look at the dictionary that we are reflecting before adding any swords to know what size and trail color to do
         fractalProfiles.Add(ItemID.PlatinumBroadsword, new FinalFractalProfile(50f, new Color(181, 194, 217)));
@@ -92,7 +92,6 @@ public class ExxoAvalonOrigins : Mod
         {
             hook.ApplyHook();
         }
-        AvalonReflection.Init();
         if (Main.netMode == NetmodeID.Server)
         {
             return;
@@ -120,9 +119,7 @@ public class ExxoAvalonOrigins : Mod
     }
     public override void Unload()
     {
-        AvalonWindUtilities.Unload();
-
-        var fractalProfiles = (Dictionary<int, FinalFractalProfile>?)typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+        var fractalProfiles = getFinalFractalHelperFractalProfiles();
 
         fractalProfiles.Remove(ItemID.GoldBroadsword);
         fractalProfiles.Remove(ItemID.PlatinumBroadsword);
@@ -143,8 +140,7 @@ public class ExxoAvalonOrigins : Mod
             assetReplacer.RestoreAssets();
         }
         
-        Mod = null;
-        AvalonReflection.Unload();
+        Mod = null!;
     }
     private void ReplaceVanillaTextures()
     {
@@ -213,9 +209,9 @@ public class ExxoAvalonOrigins : Mod
             return "";
         };
         biomeChecker = player => {
-            if (player.InModBiome<Biomes.NearHellcastle>()) return "PhantomGardens";
-            if (player.InModBiome<Biomes.Hellcastle>()) return "Hellcastle";
-            if (player.InModBiome<Biomes.Contagion>()) return "Contagion";
+            if (player.InModBiome<NearHellcastle>()) return "PhantomGardens";
+            if (player.InModBiome<Hellcastle>()) return "Hellcastle";
+            if (player.InModBiome<Contagion>()) return "Contagion";
 
             return "";
         };
@@ -259,63 +255,5 @@ public class ExxoAvalonOrigins : Mod
         }
     }
 
-    public override void HandlePacket(BinaryReader reader, int whoAmI)
-    {
-        Network.MessageHandler.HandlePacket(reader, whoAmI);
-    }
-}
-
-public static class AvalonWindUtilities
-{
-    public static void Load()
-    {
-        _addSpecialPointSpecialPositions = typeof(Terraria.GameContent.Drawing.TileDrawing).GetField("_specialPositions", BindingFlags.NonPublic | BindingFlags.Instance);
-        _addSpecialPointSpecialsCount = typeof(Terraria.GameContent.Drawing.TileDrawing).GetField("_specialsCount", BindingFlags.NonPublic | BindingFlags.Instance);
-        _addVineRootPositions = typeof(Terraria.GameContent.Drawing.TileDrawing).GetField("_vineRootsPositions", BindingFlags.NonPublic | BindingFlags.Instance);
-    }
-
-    public static void Unload()
-    {
-        _addSpecialPointSpecialPositions = null;
-        _addSpecialPointSpecialsCount = null;
-        _addVineRootPositions = null;
-    }
-
-    public static FieldInfo _addSpecialPointSpecialPositions;
-    public static FieldInfo _addSpecialPointSpecialsCount;
-    public static FieldInfo _addVineRootPositions;
-
-    public static void AddSpecialPoint(this Terraria.GameContent.Drawing.TileDrawing tileDrawing, int x, int y, int type)
-    {
-        if (_addSpecialPointSpecialPositions.GetValue(tileDrawing) is Point[][] _specialPositions)
-        {
-            if (_addSpecialPointSpecialsCount.GetValue(tileDrawing) is int[] _specialsCount)
-            {
-                _specialPositions[type][_specialsCount[type]++] = new Point(x, y);
-            }
-        }
-    }
-
-    public static void CrawlToTopOfVineAndAddSpecialPoint(this Terraria.GameContent.Drawing.TileDrawing tileDrawing, int j, int i)
-    {
-        if (_addVineRootPositions.GetValue(tileDrawing) is List<Point> _vineRootsPositions)
-        {
-            int y = j;
-            for (int num = j - 1; num > 0; num--)
-            {
-                Tile tile = Main.tile[i, num];
-                if (WorldGen.SolidTile(i, num) || !tile.HasTile)
-                {
-                    y = num + 1;
-                    break;
-                }
-            }
-            Point item = new(i, y);
-            if (!_vineRootsPositions.Contains(item))
-            {
-                _vineRootsPositions.Add(item);
-                Main.instance.TilesRenderer.AddSpecialPoint(i, y, 6);
-            }
-        }
-    }
+    public override void HandlePacket(BinaryReader reader, int whoAmI) => MessageHandler.HandlePacket(reader, whoAmI);
 }
