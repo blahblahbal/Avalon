@@ -7,6 +7,7 @@ using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.PlayerDrawLayers;
@@ -18,30 +19,33 @@ public class DesertGamblerHook : ModHook
         On_PlayerDrawLayers.DrawPlayer_01_BackHair += On_PlayerDrawLayers_DrawPlayer_01_BackHair;
         On_PlayerDrawLayers.DrawPlayer_21_Head += On_PlayerDrawLayers_DrawPlayer_21_Head;
     }
-
     private void On_PlayerDrawLayers_DrawPlayer_21_Head(On_PlayerDrawLayers.orig_DrawPlayer_21_Head orig, ref PlayerDrawSet drawinfo)
     {
-        if ((drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.hideMerman) ||
+        Player p = drawinfo.drawPlayer;
+        /*((drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.hideMerman) ||
             (drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.hideWolf) ||
             (drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk) ||
-            drawinfo.drawPlayer.head > 0)
+            drawinfo.drawPlayer.forceMerman || drawinfo.drawPlayer.forceWerewolf || drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().ForceVarefolk)*/
+        if ((drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.hideMerman) ||
+            (drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.hideWolf) ||
+            (drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk))
         {
             orig.Invoke(ref drawinfo);
             return;
         }
-        if (drawinfo.drawPlayer.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) &&
-            drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().DesertGamblerVisible && drawinfo.drawPlayer.head == 0)
+        if (p.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) &&
+            p.GetModPlayer<AvalonPlayer>().DesertGamblerVisible && p.head == -1)
         {
             MethodInfo dynMethod = typeof(Terraria.DataStructures.PlayerDrawLayers).GetMethod("DrawPlayer_21_Head_TheFace",
                 BindingFlags.NonPublic | BindingFlags.Static);
             dynMethod.Invoke(null, new object[] { drawinfo });
-            Vector2 vector = new(-drawinfo.drawPlayer.bodyFrame.Width / 2 + drawinfo.drawPlayer.width / 2, drawinfo.drawPlayer.height - drawinfo.drawPlayer.bodyFrame.Height + 4);
-            Vector2 position = (drawinfo.Position - Main.screenPosition + vector).Floor() + drawinfo.drawPlayer.headPosition + drawinfo.headVect;
-            position += drawinfo.hairOffset;
-            DrawData item13 = new DrawData(TextureAssets.PlayerHairAlt[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
-            item13.shader = drawinfo.hairDyePacked;
-            drawinfo.DrawDataCache.Add(item13);
-            
+            //Vector2 vector = new(-p.bodyFrame.Width / 2 + p.width / 2, p.height - p.bodyFrame.Height + 4);
+            //Vector2 position = (drawinfo.Position - Main.screenPosition + vector).Floor() + p.headPosition + drawinfo.headVect;
+            //position += drawinfo.hairOffset;
+            //DrawData item13 = new DrawData(TextureAssets.PlayerHairAlt[p.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, p.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
+            //item13.shader = drawinfo.hairDyePacked;
+            //drawinfo.DrawDataCache.Add(item13);
+
             return;
         }
         orig.Invoke(ref drawinfo);
@@ -49,9 +53,19 @@ public class DesertGamblerHook : ModHook
 
     private void On_PlayerDrawLayers_DrawPlayer_01_BackHair(On_PlayerDrawLayers.orig_DrawPlayer_01_BackHair orig, ref PlayerDrawSet drawinfo)
     {
-        if (drawinfo.drawPlayer.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) && drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().DesertGamblerVisible && !drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman)
+        Player p = drawinfo.drawPlayer;
+        if (drawinfo.drawPlayer.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) && drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().DesertGamblerVisible &&
+            !drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && p.head == -1)
         {
+            return;
+            //Vector2 vector = new(-p.bodyFrame.Width / 2 + p.width / 2, p.height - p.bodyFrame.Height + 4);
+            //Vector2 position = (drawinfo.Position - Main.screenPosition + vector).Floor() + p.headPosition + drawinfo.headVect;
+            //position += drawinfo.hairOffset;
+            //DrawData item2 = new DrawData(TextureAssets.PlayerHairAlt[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
+            //item2.shader = drawinfo.hairDyePacked;
             //drawinfo.hatHair = true;
+            //drawinfo.DrawDataCache.Add(item2);
+            //return;
         }
         orig.Invoke(ref drawinfo);
     }

@@ -133,7 +133,7 @@ public class AvalonPlayer : ModPlayer
     /// </summary>
     public int MaxRangedCrit;
 
-
+    public List<int> revertHeads = new List<int>();
 
     #region armor sets
     public bool SkyBlessing;
@@ -433,9 +433,16 @@ public class AvalonPlayer : ModPlayer
         if (lavaMerman || ForceVarefolk)
         {
             if (ForceVarefolk) Player.forceMerman = true;
+            if (Player.head > 0 && ArmorIDs.Head.Sets.DrawHatHair[Player.head])
+            {
+                revertHeads.Add(Player.head);
+            }
+            ArmorIDs.Head.Sets.DrawHatHair[Player.head] = false;
             Player.head = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Head);
             Player.body = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Body);
             Player.legs = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Legs);
+            ArmorIDs.Head.Sets.DrawHatHair[Player.head] = false;
+            ArmorIDs.Head.Sets.DrawFullHair[Player.head] = false;
             ArmorIDs.Head.Sets.DrawHead[Player.head] = false;
             ArmorIDs.Body.Sets.HidesTopSkin[Player.body] = true;
             ArmorIDs.Body.Sets.HidesArms[Player.body] = true;
@@ -443,6 +450,17 @@ public class AvalonPlayer : ModPlayer
             if (!Player.Male)
             {
                 Player.head = EquipLoader.GetEquipSlot(Mod, LavaMermanName + "_Female", EquipType.Head);
+            }
+        }
+        else
+        {
+            if (revertHeads.Count > 0)
+            {
+                foreach (int i in revertHeads)
+                {
+                    ArmorIDs.Head.Sets.DrawHatHair[i] = true;
+                }
+                revertHeads.Clear();
             }
         }
         if (Player.HasBuff(ModContent.BuffType<Shockwave>()) || Player.HasBuff(ModContent.BuffType<AdvShockwave>()))
