@@ -64,13 +64,14 @@ public class ExxoAvalonOrigins : Mod
     public const string TextureAssetsPath = "Assets/Textures";
     internal UserInterface staminaInterface;
     internal StaminaBar staminaBar;
+    private static readonly Func<Dictionary<int, FinalFractalProfile>> getFinalFractalHelperFractalProfiles = Utilities.CreateFieldReader<Dictionary<int, FinalFractalProfile>>(typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.Static | BindingFlags.NonPublic)!);
 
     //internal UserInterface statDisplayInterface;
     //internal StatDisplayUIState statDisplay;
     public override void Load()
     {
         //Additional swords to the zenith's projectiles with both their texture, size and trail color
-        var fractalProfiles = (Dictionary<int, FinalFractalProfile>)typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+        var fractalProfiles = getFinalFractalHelperFractalProfiles();
 
         fractalProfiles.Add(ItemID.GoldBroadsword, new FinalFractalProfile(50f, new Color(203, 179, 73))); //Add the Gold Broadsword with a gold trail at 50f the size, would reccomend to look at the dictionary that we are reflecting before adding any swords to know what size and trail color to do
         fractalProfiles.Add(ItemID.PlatinumBroadsword, new FinalFractalProfile(50f, new Color(181, 194, 217)));
@@ -119,7 +120,7 @@ public class ExxoAvalonOrigins : Mod
     }
     public override void Unload()
     {
-        var fractalProfiles = (Dictionary<int, FinalFractalProfile>?)typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+        var fractalProfiles = getFinalFractalHelperFractalProfiles();
 
         fractalProfiles.Remove(ItemID.GoldBroadsword);
         fractalProfiles.Remove(ItemID.PlatinumBroadsword);

@@ -11,19 +11,22 @@ namespace Avalon.Hooks;
 
 public static class Utilities
 {
-    /// <summary>
-    ///     Creates a delegate for reading instance property or field values that is faster than a reflection implementation,
-    ///     this should only be used to create a cached expression as the compilation is expensive.
-    /// </summary>
-    /// <param name="fieldName">The name of the property or field.</param>
-    /// <typeparam name="TInstance">The type of the instance that the field belongs to.</typeparam>
-    /// <typeparam name="TResult">The type of the property or field.</typeparam>
-    /// <returns>A delegate that provides the property or field value when supplied with an instance.</returns>
-    public static Func<TInstance, TResult> CreateInstancePropertyOrFieldReaderDelegate<TInstance, TResult>(string fieldName)
+    public static Func<TResult> CreatePropertyReader<TInstance, TResult>(PropertyInfo propertyInfo)
     {
         var instanceParameter = Expression.Parameter(typeof(TInstance));
-        return Expression.Lambda<Func<TInstance, TResult>>(Expression.PropertyOrField(instanceParameter, fieldName), instanceParameter).Compile();
+        return Expression.Lambda<Func<TResult>>(Expression.Property(instanceParameter, propertyInfo), instanceParameter).Compile();
     }
+
+    public static Func<TResult> CreatePropertyReader<TResult>(PropertyInfo propertyInfo) => Expression.Lambda<Func<TResult>>(Expression.Property(null, propertyInfo)).Compile();
+
+    public static Func<TResult> CreateFieldReader<TInstance, TResult>(FieldInfo fieldInfo)
+    {
+        var instanceParameter = Expression.Parameter(typeof(TInstance));
+        return Expression.Lambda<Func<TResult>>(Expression.Field(instanceParameter, fieldInfo), instanceParameter).Compile();
+    }
+
+    public static Func<TResult> CreateFieldReader<TResult>(FieldInfo fieldInfo) => Expression.Lambda<Func<TResult>>(Expression.Field(null, fieldInfo)).Compile();
+    
 
     public static TDelegate CacheInstanceMethod<TDelegate>(MethodInfo methodInfo)
     {
