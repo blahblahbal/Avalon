@@ -92,7 +92,6 @@ public class ExxoAvalonOrigins : Mod
         {
             hook.ApplyHook();
         }
-        AvalonReflection.Init();
         if (Main.netMode == NetmodeID.Server)
         {
             return;
@@ -141,8 +140,7 @@ public class ExxoAvalonOrigins : Mod
             assetReplacer.RestoreAssets();
         }
         
-        Mod = null;
-        AvalonReflection.Unload();
+        Mod = null!;
     }
     private void ReplaceVanillaTextures()
     {
