@@ -177,7 +177,7 @@ public class Breakdawn3x3 : ModItem
         Item.damage = 26;
         Item.autoReuse = true;
         Item.hammer = 70;
-        Item.axe = 22;
+        Item.axe = 32;
         Item.useTime = 24;
         Item.knockBack = 3f;
         Item.DamageType = DamageClass.Melee;

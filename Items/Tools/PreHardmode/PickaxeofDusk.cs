@@ -18,8 +18,7 @@ public class PickaxeofDusk : ModItem
         Item.UseSound = SoundID.Item1;
         Item.damage = 12;
         Item.autoReuse = true;
-        Item.hammer = 70;
-        Item.axe = 22;
+        Item.pick = 100;
         Item.useTime = 15;
         Item.knockBack = 0.5f;
         Item.DamageType = DamageClass.Melee;
@@ -74,17 +73,16 @@ public class PickaxeofDusk3x3 : ModItem
         Item.width = 44;
         Item.height = 44;
         Item.UseSound = SoundID.Item1;
-        Item.damage = 26;
+        Item.damage = 12;
         Item.autoReuse = true;
-        Item.hammer = 70;
-        Item.axe = 22;
-        Item.useTime = 24;
-        Item.knockBack = 3f;
+        Item.pick = 100;
+        Item.useTime = 15;
+        Item.knockBack = 0.5f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.rare = ItemRarityID.Orange;
         Item.value = 27000;
-        Item.useAnimation = 20;
+        Item.useAnimation = 15;
     }
 
     public override void HoldItem(Player player)

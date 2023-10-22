@@ -1,15 +1,9 @@
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
-using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -90,13 +84,17 @@ namespace Avalon.Common
     {
         public override void OnSpawn()
         {
-            ai1 = 1;
             FrontLayer = true;
         }
         public override void Update()
         {
             TimeInWorld++;
-            ai1 -= 0.01f;
+
+            if (TimeInWorld < 20)
+            {
+                ai1 += 0.07f;
+            }
+            else ai1 -= 0.04f;
 
             if (TimeInWorld <= 0)
                 Active = false;

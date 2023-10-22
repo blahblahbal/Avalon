@@ -31,7 +31,7 @@ class RodofCoalescence : ModItem
         Vector2 position = player.getRect().TopLeft();
         for (int num20 = 0; num20 < 5; num20++)
         {
-            Dust obj8 = Dust.NewDustDirect(position, player.getRect().Width, player.getRect().Height + 24, DustID.Water);
+            Dust obj8 = Dust.NewDustDirect(position, player.getRect().Width, player.getRect().Height + 24, Dust.dustWater());
             obj8.velocity.Y *= 0f;
             obj8.velocity.Y -= 3.5f;
             obj8.velocity.X *= 1.5f;
