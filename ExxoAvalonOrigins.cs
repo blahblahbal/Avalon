@@ -138,6 +138,11 @@ public class ExxoAvalonOrigins : Mod
         fractalProfiles.Remove(ModContent.ItemType<Snotsabre>());
         fractalProfiles.Remove(ModContent.ItemType<VertexOfExcalibur>());
 
+        foreach (var assetReplacer in assetReplacers)
+        {
+            assetReplacer.RestoreAssets();
+        }
+        
         Mod = null;
         AvalonReflection.Unload();
     }
