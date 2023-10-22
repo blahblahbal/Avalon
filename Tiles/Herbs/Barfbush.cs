@@ -5,6 +5,7 @@ using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using Avalon.Reflection;
 using Terraria;
 using Terraria.GameContent.Metadata;
 using Terraria.ID;

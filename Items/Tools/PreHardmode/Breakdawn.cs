@@ -2,6 +2,7 @@ using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using System.Reflection;
+using Avalon.Reflection;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -77,11 +78,8 @@ public class Breakdawn : ModItem
                 Main.NewText(player.hitTile.AddDamage(tileType, dmgAmt));
                 if (player.hitTile.AddDamage(tileType, dmgAmt) >= 100)
                 {
-                    MethodInfo clearCache = typeof(Player).GetMethod("ClearMiningCacheAt", BindingFlags.NonPublic | BindingFlags.Instance);
-                    clearCache.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y, 1 });
-
-                    MethodInfo bottomOfTree = typeof(Player).GetMethod("IsBottomOfTreeTrunkNoRoots", BindingFlags.NonPublic | BindingFlags.Instance);
-                    bool flag = (bool)bottomOfTree.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y });
+                    player.ClearMiningCacheAt(tilePosPoint.X, tilePosPoint.Y, 1);
+                    bool flag = player.IsBottomOfTreeTrunkNoRoots(tilePosPoint.X, tilePosPoint.Y);
 
                     // kill the tile, with mp support
                     WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y);
@@ -93,8 +91,7 @@ public class Breakdawn : ModItem
                     // replant the sapling
                     if (flag)
                     {
-                        MethodInfo tryReplantingTree = typeof(Player).GetMethod("TryReplantingTree", BindingFlags.NonPublic | BindingFlags.Instance);
-                        tryReplantingTree.Invoke(player, new object[] { tilePosPoint.X, tilePosPoint.Y });
+                        player.TryReplantingTree(tilePosPoint.X, tilePosPoint.Y);
                     }
                     player.hitTile.Clear(tileType);
                 }

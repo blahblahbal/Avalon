@@ -64,7 +64,7 @@ public class ExxoAvalonOrigins : Mod
     public const string TextureAssetsPath = "Assets/Textures";
     internal UserInterface staminaInterface;
     internal StaminaBar staminaBar;
-    private static readonly Func<Dictionary<int, FinalFractalProfile>> getFinalFractalHelperFractalProfiles = Utilities.CreateFieldReader<Dictionary<int, FinalFractalProfile>>(typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.Static | BindingFlags.NonPublic)!);
+    private static readonly Func<Dictionary<int, FinalFractalProfile>> getFinalFractalHelperFractalProfiles = Reflection.Utilities.CreateFieldReader<Dictionary<int, FinalFractalProfile>>(typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.Static | BindingFlags.NonPublic)!);
 
     //internal UserInterface statDisplayInterface;
     //internal StatDisplayUIState statDisplay;

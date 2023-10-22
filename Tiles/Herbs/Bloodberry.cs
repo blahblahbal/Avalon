@@ -3,6 +3,7 @@ using Avalon.Items.Tools.PreHardmode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using Avalon.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

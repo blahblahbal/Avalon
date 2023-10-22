@@ -447,13 +447,4 @@ public static class ClassExtensions
 
     public static Asset<Texture2D> GetTexture(this ModProjectile modProjectile) =>
         ModContent.Request<Texture2D>(modProjectile.Texture);
-    
-    private delegate void TileDrawingAddSpecialPointDelegate(TileDrawing self, int x, int y, object type);
-    private static readonly TileDrawingAddSpecialPointDelegate TileDrawingAddSpecialPoint = Utilities.CacheInstanceMethod<TileDrawingAddSpecialPointDelegate>(typeof(TileDrawing).GetMethod("AddSpecialPoint", BindingFlags.Instance | BindingFlags.NonPublic)!);
-    private static readonly Type TileCounterTypeType = typeof(TileDrawing).GetNestedType("TileCounterType", BindingFlags.NonPublic)!;
-    public static void AddSpecialPoint(this TileDrawing tileDrawing, int x, int y, int type) => TileDrawingAddSpecialPoint(tileDrawing, x, y, Enum.ToObject(TileCounterTypeType, type));
-
-    private delegate void TileDrawingCrawlToTopOfVineAndAddSpecialPointDelegate(TileDrawing self, int j, int i);
-    private static readonly TileDrawingCrawlToTopOfVineAndAddSpecialPointDelegate TileDrawingCrawlToTopOfVineAndAddSpecialPoint = Utilities.CacheInstanceMethod<TileDrawingCrawlToTopOfVineAndAddSpecialPointDelegate>(typeof(TileDrawing).GetMethod("CrawlToTopOfVineAndAddSpecialPoint", BindingFlags.Instance | BindingFlags.NonPublic)!);
-    public static void CrawlToTopOfVineAndAddSpecialPoint(this TileDrawing tileDrawing, int j, int i) => TileDrawingCrawlToTopOfVineAndAddSpecialPoint(tileDrawing, j, i);
 }
