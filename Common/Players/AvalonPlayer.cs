@@ -432,6 +432,7 @@ public class AvalonPlayer : ModPlayer
     {
         if (lavaMerman || ForceVarefolk)
         {
+            if (ForceVarefolk) Player.forceMerman = true;
             Player.head = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Head);
             Player.body = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Body);
             Player.legs = EquipLoader.GetEquipSlot(Mod, LavaMermanName, EquipType.Legs);
