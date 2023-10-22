@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -20,12 +21,11 @@ class DesertHorn : ModItem
         //Rectangle dims = this.GetDims();
         Item.consumable = true;
         Item.width = 32;
-        Item.useTime = 40;
         Item.maxStack = 9999;
+        Item.channel = true;
         Item.useStyle = ItemUseStyleID.HoldUp;
-        Item.useAnimation = 40;
         Item.height = 28;
-        Item.useAnimation = Item.useTime = 20;
+        Item.useAnimation = Item.useTime = 180;
     }
     public override void AddRecipes()
     {
@@ -37,13 +37,13 @@ class DesertHorn : ModItem
     }
     public override bool CanUseItem(Player player)
     {
-        return !NPC.AnyNPCs(ModContent.NPCType<NPCs.Bosses.PreHardmode.DesertBeak>()) && player.ZoneDesert;
+        return !NPC.AnyNPCs(ModContent.NPCType<NPCs.Bosses.PreHardmode.DesertBeak>()) && player.ZoneDesert && Main.dayTime;
     }
 
     public override bool? UseItem(Player player)
     {
-        NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<NPCs.Bosses.PreHardmode.DesertBeak>());
-        SoundEngine.PlaySound(SoundID.Roar, player.position);
+        player.GetModPlayer<AvalonPlayer>().DesertBeakSpawnTimer = 60 * 3;
+        SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/DesertHorn"), player.position);
         return true;
     }
 }

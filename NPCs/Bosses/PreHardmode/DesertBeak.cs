@@ -165,7 +165,7 @@ public class DesertBeak : ModNPC
             NPC.TargetClosest(false);
         }
         Player Target = Main.player[NPC.target];
-        if (Target.dead)
+        if (Target.dead || !Main.dayTime)
         {
             phase = 255;
         }
