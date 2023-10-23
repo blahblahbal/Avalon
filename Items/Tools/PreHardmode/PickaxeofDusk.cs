@@ -101,7 +101,8 @@ public class PickaxeofDusk3x3 : ModItem
                 {
                     for (int y = p.Y - 1; y <= p.Y + 1; y++)
                     {
-                        if (Main.tile[x, y].HasTile && !Main.tileHammer[Main.tile[x, y].TileType] && !Main.tileAxe[Main.tile[x, y].TileType])
+                        if (ClassExtensions.GetTileMinPick(Main.tile[x, y]) <= Item.pick && Main.tile[x, y].HasTile &&
+                            !Main.tileHammer[Main.tile[x, y].TileType] && !Main.tileAxe[Main.tile[x, y].TileType])
                         {
                             if (!TileID.Sets.BasicChest[Main.tile[x, y].TileType])
                             {

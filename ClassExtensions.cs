@@ -21,15 +21,7 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
-    public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
-    {
-        p.Add(new List<Point>()
-        {
-            start + new Point(0, -1), start + new Point(0, 1), start + new Point(-1, 0), start + new Point(1, 0)
-        });
-
-        return p;
-    }
+    
     public static bool IsPotion(this Item i)
     {
         return i.healLife > 0 || i.healMana > 0 || i.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina > 0;
@@ -58,7 +50,15 @@ public static class ClassExtensions
     //        if (Main.item[i].type == ModContent.ItemType<Items.OreRift>() && Vector2.Distance(Main.item[i].position, 
     //    }
     //}
+    public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
+    {
+        p.Add(new List<Point>()
+        {
+            start + new Point(0, -1), start + new Point(0, 1), start + new Point(-1, 0), start + new Point(1, 0)
+        });
 
+        return p;
+    }
 
     /// <summary>
     /// Harvests an area using a veinminer algorithm.
@@ -143,7 +143,59 @@ public static class ClassExtensions
             index++;
         }
     }
-
+    public static int GetTileMinPick(Tile tile)
+    {
+        int type = tile.TileType;
+        if (type > 692)
+        {
+            ModTile modTile = TileLoader.GetTile(type);
+            if (modTile != null)
+            {
+                return modTile.MinPick;
+            }
+        }
+        else
+        {
+            if (type == TileID.Traps)
+            {
+                if (tile.TileFrameY / 18 - 1 <= 3)
+                {
+                    return 210;
+                }
+            }
+            switch (type)
+            {
+                case TileID.LihzahrdBrick:
+                case TileID.LihzahrdAltar:
+                    return 210;
+                case TileID.Chlorophyte:
+                    return 200;
+                case TileID.Adamantite:
+                case TileID.Titanium:
+                    return 150;
+                case TileID.Mythril:
+                case TileID.Orichalcum:
+                    return 110;
+                case TileID.Cobalt:
+                case TileID.Palladium:
+                    return 100;
+                case TileID.Hellstone:
+                    return 70;
+                case TileID.Ebonstone:
+                case TileID.Crimstone:
+                case TileID.Pearlstone:
+                case TileID.Hellforge:
+                    return 65;
+                case TileID.Demonite:
+                case TileID.Crimtane:
+                case TileID.Obsidian:
+                    return 55;
+                case TileID.Meteorite:
+                    return 50;
+            }
+        }
+        return 0;
+    }
     /// <summary>
     ///     Helper method for checking if the current item is an armor piece - used for armor prefixes.
     /// </summary>
