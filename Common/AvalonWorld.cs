@@ -172,6 +172,7 @@ public class AvalonWorld : ModSystem
         };
 
         WorldGen.WorldGenParam_Evil = (int)WorldEvil;
+        WorldGen.crimson = WorldEvil == WorldEvil.Crimson;
     }
     public override void PostUpdateWorld()
     {
