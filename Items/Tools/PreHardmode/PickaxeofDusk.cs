@@ -26,6 +26,7 @@ public class PickaxeofDusk : ModItem
         Item.rare = ItemRarityID.Orange;
         Item.value = 27000;
         Item.useAnimation = 15;
+        Item.useTurn = true;
     }
     public override void AddRecipes()
     {
@@ -75,7 +76,8 @@ public class PickaxeofDusk3x3 : ModItem
         Item.UseSound = SoundID.Item1;
         Item.damage = 12;
         Item.autoReuse = true;
-        Item.pick = 100;
+        //Item.pick = 100;
+        Item.useTurn = true;
         Item.useTime = 15;
         Item.knockBack = 0.5f;
         Item.DamageType = DamageClass.Melee;
@@ -101,7 +103,7 @@ public class PickaxeofDusk3x3 : ModItem
                 {
                     for (int y = p.Y - 1; y <= p.Y + 1; y++)
                     {
-                        if (ClassExtensions.GetTileMinPick(Main.tile[x, y]) <= Item.pick && Main.tile[x, y].HasTile &&
+                        if (ClassExtensions.GetTileMinPick(Main.tile[x, y]) <= 100 && Main.tile[x, y].HasTile &&
                             !Main.tileHammer[Main.tile[x, y].TileType] && !Main.tileAxe[Main.tile[x, y].TileType])
                         {
                             if (!TileID.Sets.BasicChest[Main.tile[x, y].TileType])

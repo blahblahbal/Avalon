@@ -714,6 +714,12 @@ public class AvalonPlayer : ModPlayer
     }
     public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
     {
+        if (DesertGamblerVisible && Player.head <= 0)
+        {
+            Player.head = EquipLoader.GetEquipSlot(Mod, "DesertGambler", EquipType.Head);
+            ArmorIDs.Head.Sets.DrawHatHair[Player.head] = true;
+            ArmorIDs.Head.Sets.IsTallHat[Player.head] = true;
+        }
         if (lavaMerman || ForceVarefolk)
         {
             if (ForceVarefolk) Player.forceMerman = true;

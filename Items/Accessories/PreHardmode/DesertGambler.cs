@@ -9,6 +9,29 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 class DesertGambler : ModItem
 {
+    public override void Load()
+    {
+        if (Main.netMode == NetmodeID.Server)
+            return;
+        EquipLoader.AddEquipTexture(Mod, $"{Texture}_{EquipType.Head}", EquipType.Head, this);
+
+
+    }
+    private void SetupDrawing()
+    {
+        // Since the equipment textures weren't loaded on the server, we can't have this code running server-side
+        if (Main.netMode == NetmodeID.Server)
+            return;
+        int equipSlotHead = EquipLoader.GetEquipSlot(Mod, Name, EquipType.Head);
+        ArmorIDs.Head.Sets.DrawHead[equipSlotHead] = true;
+        ArmorIDs.Head.Sets.IsTallHat[equipSlotHead] = true;
+        ArmorIDs.Head.Sets.DrawHatHair[equipSlotHead] = true;
+    }
+    public override void SetStaticDefaults()
+    {
+        SetupDrawing();
+    }
+
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

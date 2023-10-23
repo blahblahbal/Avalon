@@ -11,65 +11,6 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.PlayerDrawLayers;
-
-public class DesertGamblerHook : ModHook
-{
-    protected override void Apply()
-    {
-        On_PlayerDrawLayers.DrawPlayer_01_BackHair += On_PlayerDrawLayers_DrawPlayer_01_BackHair;
-        On_PlayerDrawLayers.DrawPlayer_21_Head += On_PlayerDrawLayers_DrawPlayer_21_Head;
-    }
-    private void On_PlayerDrawLayers_DrawPlayer_21_Head(On_PlayerDrawLayers.orig_DrawPlayer_21_Head orig, ref PlayerDrawSet drawinfo)
-    {
-        Player p = drawinfo.drawPlayer;
-        /*((drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.hideMerman) ||
-            (drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.hideWolf) ||
-            (drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk) ||
-            drawinfo.drawPlayer.forceMerman || drawinfo.drawPlayer.forceWerewolf || drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().ForceVarefolk)*/
-        if ((drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.hideMerman) ||
-            (drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.hideWolf) ||
-            (drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk))
-        {
-            orig.Invoke(ref drawinfo);
-            return;
-        }
-        if (p.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) &&
-            p.GetModPlayer<AvalonPlayer>().DesertGamblerVisible && p.head == -1)
-        {
-            MethodInfo dynMethod = typeof(Terraria.DataStructures.PlayerDrawLayers).GetMethod("DrawPlayer_21_Head_TheFace",
-                BindingFlags.NonPublic | BindingFlags.Static);
-            dynMethod.Invoke(null, new object[] { drawinfo });
-            //Vector2 vector = new(-p.bodyFrame.Width / 2 + p.width / 2, p.height - p.bodyFrame.Height + 4);
-            //Vector2 position = (drawinfo.Position - Main.screenPosition + vector).Floor() + p.headPosition + drawinfo.headVect;
-            //position += drawinfo.hairOffset;
-            //DrawData item13 = new DrawData(TextureAssets.PlayerHairAlt[p.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, p.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
-            //item13.shader = drawinfo.hairDyePacked;
-            //drawinfo.DrawDataCache.Add(item13);
-
-            return;
-        }
-        orig.Invoke(ref drawinfo);
-    }
-
-    private void On_PlayerDrawLayers_DrawPlayer_01_BackHair(On_PlayerDrawLayers.orig_DrawPlayer_01_BackHair orig, ref PlayerDrawSet drawinfo)
-    {
-        Player p = drawinfo.drawPlayer;
-        if (drawinfo.drawPlayer.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) && drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().DesertGamblerVisible &&
-            !drawinfo.drawPlayer.merman && !drawinfo.drawPlayer.wereWolf && !drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && p.head == -1)
-        {
-            return;
-            //Vector2 vector = new(-p.bodyFrame.Width / 2 + p.width / 2, p.height - p.bodyFrame.Height + 4);
-            //Vector2 position = (drawinfo.Position - Main.screenPosition + vector).Floor() + p.headPosition + drawinfo.headVect;
-            //position += drawinfo.hairOffset;
-            //DrawData item2 = new DrawData(TextureAssets.PlayerHairAlt[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
-            //item2.shader = drawinfo.hairDyePacked;
-            //drawinfo.hatHair = true;
-            //drawinfo.DrawDataCache.Add(item2);
-            //return;
-        }
-        orig.Invoke(ref drawinfo);
-    }
-}
 public class DesertGamblerHeadLayer : PlayerDrawLayer
 {
     public override bool IsHeadLayer => true;
@@ -80,7 +21,7 @@ public class DesertGamblerHeadLayer : PlayerDrawLayer
 
     protected override void Draw(ref PlayerDrawSet drawInfo)
     {
-        if (drawInfo.shadow != 0f || drawInfo.drawPlayer.head > 0 ||
+        if (drawInfo.shadow != 0f ||
             (drawInfo.drawPlayer.merman && !drawInfo.drawPlayer.hideMerman) ||
             (drawInfo.drawPlayer.wereWolf && !drawInfo.drawPlayer.hideWolf) ||
             (drawInfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawInfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk))
@@ -90,7 +31,7 @@ public class DesertGamblerHeadLayer : PlayerDrawLayer
 
         Player p = drawInfo.drawPlayer;
         var helmoffset = drawInfo.helmetOffset;
-        if (p.HasItemInArmor(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>()) && p.GetModPlayer<AvalonPlayer>().DesertGamblerVisible)
+        if (p.head == EquipLoader.GetEquipSlot(Mod, "DesertGambler", EquipType.Head))
         {
             if (p.GetModPlayer<DeadeyePlayer>().Deadeye)
             {
@@ -103,14 +44,11 @@ public class DesertGamblerHeadLayer : PlayerDrawLayer
                     drawInfo.drawPlayer.bodyFrame, c, drawInfo.drawPlayer.headRotation, drawInfo.headVect, 1f, drawInfo.playerEffect);
                 drawInfo.DrawDataCache.Add(glow);
             }
-
-
-
-            DrawData value = new DrawData(Mod.Assets.Request<Texture2D>("Items/Accessories/PreHardmode/DesertGambler_Head").Value,
+            DrawData value = new DrawData(Mod.Assets.Request<Texture2D>("Items/Accessories/PreHardmode/DesertGambler_Head_Real").Value,
                 helmoffset + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - drawInfo.drawPlayer.bodyFrame.Width / 2 + drawInfo.drawPlayer.width / 2),
                 (int)(drawInfo.Position.Y - Main.screenPosition.Y + drawInfo.drawPlayer.height - drawInfo.drawPlayer.bodyFrame.Height + 4f)) - new Vector2(0, 2) + drawInfo.drawPlayer.headPosition + drawInfo.headVect,
                 drawInfo.drawPlayer.bodyFrame, drawInfo.colorArmorHead, drawInfo.drawPlayer.headRotation, drawInfo.headVect, 1f, drawInfo.playerEffect);
-            value.shader = drawInfo.cFace;
+            value.shader = drawInfo.cHead;
             drawInfo.DrawDataCache.Add(value);
         }
     }
