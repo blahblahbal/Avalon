@@ -17,17 +17,17 @@ public class DesertGamblerHeadLayer : PlayerDrawLayer
 
     protected override void Draw(ref PlayerDrawSet drawInfo)
     {
-        if (drawInfo.shadow != 0f ||
-            (drawInfo.drawPlayer.merman && !drawInfo.drawPlayer.hideMerman) ||
-            (drawInfo.drawPlayer.wereWolf && !drawInfo.drawPlayer.hideWolf) ||
-            (drawInfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawInfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk))
+        if (drawInfo.shadow != 0f)
+            //(drawInfo.drawPlayer.merman && !drawInfo.drawPlayer.hideMerman) ||
+            //(drawInfo.drawPlayer.wereWolf && !drawInfo.drawPlayer.hideWolf) ||
+            //(drawInfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawInfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk))
         {
             return;
         }
 
         Player p = drawInfo.drawPlayer;
         var helmoffset = drawInfo.helmetOffset;
-        if (p.head == EquipLoader.GetEquipSlot(Mod, "DesertGambler", EquipType.Head))
+        if (p.head == EquipLoader.GetEquipSlot(Mod, "DesertGambler", EquipType.Head) && (p.GetModPlayer<AvalonPlayer>().DesertGambler && p.GetModPlayer<AvalonPlayer>().DesertGamblerVisible || p.GetModPlayer<AvalonPlayer>().ForceGambler))
         {
             if (p.GetModPlayer<DeadeyePlayer>().Deadeye)
             {

@@ -217,6 +217,8 @@ public class AvalonPlayer : ModPlayer
     public int bubbleCD;
     public bool BubbleBoost;
     public bool CrystalSkull;
+    public bool DesertGambler;
+    public bool ForceGambler;
     #endregion
 
     #region buffs and debuffs
@@ -359,6 +361,8 @@ public class AvalonPlayer : ModPlayer
         BlahWings = false;
         BubbleBoost = false;
         CrystalSkull = false;
+        DesertGambler = false;
+        ForceGambler = false;
 
         // armor sets
         SkyBlessing = false;
@@ -714,7 +718,7 @@ public class AvalonPlayer : ModPlayer
     }
     public override void FrameEffects()
     {
-        if (DesertGamblerVisible && Player.head <= 0)
+        if ((DesertGamblerVisible && DesertGambler || ForceGambler) && Player.head <= 0)
         {
             Player.head = EquipLoader.GetEquipSlot(Mod, "DesertGambler", EquipType.Head);
             ArmorIDs.Head.Sets.DrawHatHair[Player.head] = true;

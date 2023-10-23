@@ -46,7 +46,12 @@ class DesertGambler : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().DesertGamblerVisible = !hideVisual;
+        player.GetModPlayer<AvalonPlayer>().DesertGambler = true;
         if (player.statLife <= player.statLifeMax2 * 0.33f)
             player.AddBuff(ModContent.BuffType<Deadeye>(), 2);
+    }
+    public override void UpdateVanity(Player player)
+    {
+        player.GetModPlayer<AvalonPlayer>().ForceGambler = true;
     }
 }
