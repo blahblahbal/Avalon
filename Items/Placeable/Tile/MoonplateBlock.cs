@@ -27,10 +27,11 @@ class MoonplateBlock : ModItem
     }
     public override void AddRecipes()
     {
-        Terraria.Recipe.Create(Type, 25)
-            .AddIngredient(ItemID.StoneBlock, 25)
+        CreateRecipe(40)
             .AddIngredient(ItemID.FallenStar)
+            .AddIngredient(ItemID.StoneBlock, 40)
             .AddIngredient(ItemID.PlatinumOre)
-            .AddTile(TileID.SkyMill).Register(); //Change when alt added :)
+            .AddTile(TileID.SkyMill)
+            .Register(); //Change when alt added :)
     }
 }

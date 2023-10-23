@@ -27,7 +27,8 @@ public class DesertGamblerHeadLayer : PlayerDrawLayer
 
         Player p = drawInfo.drawPlayer;
         var helmoffset = drawInfo.helmetOffset;
-        if (p.head == EquipLoader.GetEquipSlot(Mod, "DesertGambler", EquipType.Head) && (p.GetModPlayer<AvalonPlayer>().DesertGambler && p.GetModPlayer<AvalonPlayer>().DesertGamblerVisible || p.GetModPlayer<AvalonPlayer>().ForceGambler))
+        if (p.head == EquipLoader.GetEquipSlot(Mod, "DesertGambler", EquipType.Head) &&
+            (p.GetModPlayer<AvalonPlayer>().DesertGambler && p.GetModPlayer<AvalonPlayer>().DesertGamblerVisible || p.GetModPlayer<AvalonPlayer>().ForceGambler))
         {
             if (p.GetModPlayer<DeadeyePlayer>().Deadeye)
             {

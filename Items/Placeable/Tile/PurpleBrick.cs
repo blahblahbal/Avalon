@@ -25,4 +25,13 @@ class PurpleBrick : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ItemID.StoneBlock)
+            .AddIngredient(ItemID.Bone, 2)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+    }
 }

@@ -156,7 +156,12 @@ public class VanillaItemRecipeCreator : ModSystem
         #endregion
 
         #region Loom
-        Recipe.Create(ItemID.FlinxFurCoat).AddIngredient(ItemID.Silk, 10).AddIngredient(ItemID.FlinxFur, 8).AddIngredient(ModContent.ItemType<BismuthBar>(), 8).AddTile(TileID.Loom).Register();
+        Recipe.Create(ItemID.FlinxFurCoat)
+            .AddIngredient(ItemID.Silk, 10)
+            .AddIngredient(ItemID.FlinxFur, 8)
+            .AddIngredient(ModContent.ItemType<BismuthBar>(), 8)
+            .AddTile(TileID.Loom)
+            .Register();
         #endregion
 
         #region Ice Machine
@@ -541,6 +546,26 @@ public class VanillaItemRecipeCreator : ModSystem
         Recipe.Create(ItemID.ObsidianWorkBench)
             .AddIngredient(ItemID.Obsidian, 10)
             .AddIngredient(ItemID.Hellstone, 2)
+            .Register();
+        #endregion
+
+        #region Bone Welder
+        Recipe.Create(ItemID.PinkBrick)
+            .AddIngredient(ItemID.StoneBlock)
+            .AddIngredient(ItemID.Bone, 2)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+
+        Recipe.Create(ItemID.GreenBrick)
+            .AddIngredient(ItemID.StoneBlock)
+            .AddIngredient(ItemID.Bone, 2)
+            .AddTile(TileID.BoneWelder)
+            .Register();
+
+        Recipe.Create(ItemID.BlueBrick)
+            .AddIngredient(ItemID.StoneBlock)
+            .AddIngredient(ItemID.Bone, 2)
+            .AddTile(TileID.BoneWelder)
             .Register();
         #endregion
     }
