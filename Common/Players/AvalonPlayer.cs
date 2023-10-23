@@ -712,7 +712,7 @@ public class AvalonPlayer : ModPlayer
             }
         }
     }
-    public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+    public override void FrameEffects()
     {
         if (DesertGamblerVisible && Player.head <= 0)
         {
@@ -720,6 +720,10 @@ public class AvalonPlayer : ModPlayer
             ArmorIDs.Head.Sets.DrawHatHair[Player.head] = true;
             ArmorIDs.Head.Sets.IsTallHat[Player.head] = true;
         }
+    }
+    public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+    {
+        
         if (lavaMerman || ForceVarefolk)
         {
             if (ForceVarefolk) Player.forceMerman = true;

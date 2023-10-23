@@ -86,15 +86,9 @@ public class PickaxeofDusk3x3 : ModItem
         Item.value = 27000;
         Item.useAnimation = 15;
     }
-
-    public override void HoldItem(Player player)
+    public override bool? UseItem(Player player)
     {
-        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
-        {
-            SoundEngine.PlaySound(SoundID.Unlock, player.position);
-            Item.ChangeItemType(ModContent.ItemType<PickaxeofDusk>());
-        }
-        if (player.controlUseItem)
+        if (player.whoAmI == Main.myPlayer && player.ItemAnimationJustStarted)
         {
             if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
             {
@@ -103,21 +97,46 @@ public class PickaxeofDusk3x3 : ModItem
                 {
                     for (int y = p.Y - 1; y <= p.Y + 1; y++)
                     {
-                        if (ClassExtensions.GetTileMinPick(Main.tile[x, y]) <= 100 && Main.tile[x, y].HasTile &&
-                            !Main.tileHammer[Main.tile[x, y].TileType] && !Main.tileAxe[Main.tile[x, y].TileType])
-                        {
-                            if (!TileID.Sets.BasicChest[Main.tile[x, y].TileType])
-                            {
-                                WorldGen.KillTile(x, y);
-                                if (Main.netMode != NetmodeID.SinglePlayer)
-                                {
-                                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, NetworkText.Empty, 0, x, y);
-                                }
-                            }
-                        }
+                        player.PickTile(x, y, 100);
                     }
                 }
             }
         }
+        return null;
+    }
+    public override void HoldItem(Player player)
+    {
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+        {
+            SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            Item.ChangeItemType(ModContent.ItemType<PickaxeofDusk>());
+        }
+        //if (player.ItemAnimationJustStarted)
+        //{
+        //    if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+        //    {
+        //        Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+        //        for (int x = p.X - 1; x <= p.X + 1; x++)
+        //        {
+        //            for (int y = p.Y - 1; y <= p.Y + 1; y++)
+        //            {
+        //                player.PickTile(x, y, 100);
+        //                //if (ClassExtensions.GetTileMinPick(Main.tile[x, y]) <= 100 && Main.tile[x, y].HasTile &&
+        //                //    !Main.tileHammer[Main.tile[x, y].TileType] && !Main.tileAxe[Main.tile[x, y].TileType])
+        //                //{
+        //                //    if (!TileID.Sets.BasicChest[Main.tile[x, y].TileType])
+        //                //    {
+        //                //        WorldGen.KillTile(x, y);
+        //                //        if (Main.netMode != NetmodeID.SinglePlayer)
+        //                //        {
+        //                //            NetMessage.SendData(MessageID.TileManipulation, -1, -1, NetworkText.Empty, 0, x, y);
+        //                //        }
+        //                //    }
+        //                //}
+        //            }
+        //        }
+        //    }
+        //    player.ApplyItemTime(Item);
+        //}
     }
 }
