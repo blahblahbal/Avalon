@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class TwilightWallItem : ModItem
+class DuskplateWall : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -18,14 +18,14 @@ class TwilightWallItem : ModItem
         Item.consumable = true;
         Item.useTurn = true;
         Item.useTime = 7;
-        Item.createWall = ModContent.WallType<Avalon.Walls.TwilightWall>();
+        Item.createWall = ModContent.WallType<Walls.TwilightWall>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;
     }
     public override void AddRecipes()
     {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.TwiliplateBlock>()).AddTile(TileID.WorkBenches).Register();
-        Terraria.Recipe.Create(ModContent.ItemType<Tile.TwiliplateBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.DuskplateBlock>()).AddTile(TileID.WorkBenches).Register();
+        Terraria.Recipe.Create(ModContent.ItemType<Tile.DuskplateBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
     }
 }

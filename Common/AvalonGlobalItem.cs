@@ -55,6 +55,24 @@ public class AvalonGlobalItem : GlobalItem
 
     public override void SetStaticDefaults()
     {
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BismuthOre>()] = ItemID.PlatinumOre;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.ChlorophyteOre] = ModContent.ItemType<TroxiniumOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<TroxiniumOre>()] = ItemID.TitaniumOre;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.AdamantiteOre] = ModContent.ItemType<NaquadahOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<NaquadahOre>()] = ItemID.OrichalcumOre;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.MythrilOre] = ModContent.ItemType<DurataniumOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<DurataniumOre>()] = ItemID.PalladiumOre;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.CobaltOre] = ModContent.ItemType<IridiumOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<IridiumOre>()] = ModContent.ItemType<OsmiumOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<OsmiumOre>()] = ModContent.ItemType<RhodiumOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<RhodiumOre>()] = ModContent.ItemType<BismuthOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BismuthOre>()] = ItemID.PlatinumOre;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.GoldOre] = ModContent.ItemType<ZincOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ZincOre>()] = ItemID.TungstenOre;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.SilverOre] = ModContent.ItemType<NickelOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<NickelOre>()] = ItemID.LeadOre;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.IronOre] = ModContent.ItemType<BronzeOre>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BronzeOre>()] = ItemID.TinOre;
         Item.staff[ItemID.Vilethorn] = true;
     }
     public override bool CanRightClick(Item item)

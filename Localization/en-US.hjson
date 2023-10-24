@@ -3678,18 +3678,18 @@ Mods: {
 				Tooltip: ""
 			}
 
-			TwiliplateBlock: {
-				DisplayName: Twiliplate Block
+			DuskplateBlock: {
+				DisplayName: Duskplate Block
 				Tooltip: ""
 			}
 
 			MoonWallItem: {
-				DisplayName: Moon Wall
+				DisplayName: Moonplate Wall
 				Tooltip: ""
 			}
 
-			TwilightWallItem: {
-				DisplayName: Twilight Wall
+			DuskplateWall: {
+				DisplayName: Duskplate Wall
 				Tooltip: ""
 			}
 
@@ -6876,6 +6876,7 @@ Mods: {
 				DisplayName: Pickaxe of Dusk (Area)
 				Tooltip:
 					'''
+					100% pickaxe power
 					Mines in a 3x3 area
 					Right click to change to normal mode
 					'''
@@ -8159,6 +8160,7 @@ Mods: {
 		Conditions: {
 			NearShimmer: Needs shimmer
 			ShimmerCraft: Throw into shimmer
+			Never: Mods.Avalon.Conditions.Never
 		}
 
 		Biomes: {

@@ -9,13 +9,6 @@ namespace Avalon.Items.Placeable.Crafting;
 
 internal class Catalyzer : ModItem
 {
-    public static readonly Condition NearShimmer = new("Conditions.NearShimmer", () => Main.LocalPlayer.GetModPlayer<AvalonPlayer>().AdjShimmer);
-
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -40,7 +33,7 @@ internal class Catalyzer : ModItem
             .AddRecipeGroup("Avalon:EvilBar", 5)
             .AddRecipeGroup(RecipeGroupID.IronBar, 15)
             .AddRecipeGroup("Avalon:WorkBenches")
-            .AddCondition(NearShimmer)
+            .AddCondition(Condition.NearShimmer)
             .AddTile(TileID.Anvils)
             .Register();
     }

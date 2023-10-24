@@ -60,7 +60,7 @@ internal class CloudGlove : ModItem
             .AddIngredient(ItemID.Cloud, 25)
             .AddIngredient(ItemID.SoulofFlight, 5)
             .AddRecipeGroup("Avalon:GoldBar", 5)
-            .AddIngredient(ModContent.ItemType<Placeable.Tile.TwiliplateBlock>(), 10)
+            .AddIngredient(ModContent.ItemType<Placeable.Tile.DuskplateBlock>(), 10)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }

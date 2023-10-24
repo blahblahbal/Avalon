@@ -12,8 +12,8 @@ internal class AdjTiles : ModHook
 {
     protected override void Apply()
     {
-        On_Player.AdjTiles += OnAdjTiles;
-        //On_Player.AdjTiles += OnAdjTilesPocketBench;
+        //On_Player.AdjTiles += OnAdjTiles;
+        On_Player.AdjTiles += OnAdjTilesPocketBench;
     }
     private static void OnAdjTilesPocketBench(On_Player.orig_AdjTiles orig, Player self)
     {
@@ -72,22 +72,6 @@ internal class AdjTiles : ModHook
             Recipe.FindRecipes();
         }
         else orig.Invoke(self);
-        //if (Array.Exists(self.bank.item, element => Data.Sets.Item.CraftingStationsItemID.Contains(element.type)) && self.GetModPlayer<AvalonPlayer>().PocketBench)
-        //{
-            
-        //    for (int o = 0; o < self.bank.item.Length; o++)
-        //    {
-        //        if (self.bank.item[o].createTile > -1)
-        //        {
-        //            if (!self.adjTile[self.bank.item[o].createTile])
-        //            {
-        //                self.adjTile[self.bank.item[o].createTile] = true;
-        //            }
-        //        }
-        //    }
-        //}
-        //else
-        //    orig(self);
     }
     private static void OnAdjTiles(On_Player.orig_AdjTiles orig, Player self)
     {
