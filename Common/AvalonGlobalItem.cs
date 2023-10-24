@@ -406,6 +406,22 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void HoldItem(Item item, Player player)
     {
+        if (item.prefix > 0)
+        {
+            Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+            Tile t = Framing.GetTileSafely(p);
+            if (t.TileType == TileID.Extractinator || t.TileType == TileID.ChlorophyteExtractinator)
+            {
+                player.noThrow = 2;
+                player.cursorItemIconEnabled = true;
+                player.cursorItemIconID = item.type;
+                if (Main.mouseRight && Main.mouseRightRelease)
+                {
+                    SoundEngine.PlaySound(SoundID.Item37);
+                    item.SetDefaults(item.type);
+                }
+            }
+        }
         #region herb seed block swap
         /*if (Data.Sets.Item.HerbSeeds[item.type])
         {
@@ -662,6 +678,22 @@ public class AvalonGlobalItem : GlobalItem
             if (index != -1)
             {
                 tooltips.RemoveAt(index);
+            }
+        }
+        if (item.type is ItemID.Extractinator)
+        {
+            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0")));
+            if (index != -1)
+            {
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
+            }
+        }
+        if (item.type is ItemID.ChlorophyteExtractinator)
+        {
+            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip2")));
+            if (index != -1)
+            {
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip2", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
             }
         }
         if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)

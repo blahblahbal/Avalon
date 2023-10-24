@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Summon.PreHardmode;
+namespace Avalon.Items.Weapons.Summon.Hardmode;
 
 class HungryStaff : ModItem
 {
@@ -60,7 +60,7 @@ class HungryStaff : ModItem
         projectile.originalDamage = Item.damage;
         if (player.GetModPlayer<AvalonPlayer>().FleshArmor)
         {
-            projectile.minionSlots = 0.25f;
+            projectile.minionSlots = 0.5f;
         }
 
         // Since we spawned the projectile manually already, we do not need the game to spawn it for ourselves anymore, so return false

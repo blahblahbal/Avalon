@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Items\Placeable\Furniture\Coughwood\" />
+    <Folder Include="Items\Weapons\Summon\PreHardmode\" />
     <Folder Include="Mounts\" />
   </ItemGroup>
 </Project>

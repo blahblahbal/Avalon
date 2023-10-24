@@ -217,7 +217,7 @@ Mods: {
 			Earthsplitter: Ore blocks have a 33% chance to drop double ore
 			Duratanium: Defense is increased by 12 while you are affected by a debuff
 			Naquadah: Nearby enemies take damage when you are damaged
-			Flesh: Hungry minions can be summoned up to 12
+			Flesh: Hungry minions can be summoned up to 8
 
 			Troxinium: {
 				Magic:
@@ -257,6 +257,7 @@ Mods: {
 			PoisonDart: For use with Blowpipes and Blowgun
 			IceBlade: Shoots a giant snowflake
 			Frostbrand: Shoots a spread of giant snowflakes
+			Extractinator: Right click with a prefixed item while on your hotbar to remove the prefix
 
 			CoinGun: {
 				PartOne: Uses coins for ammo
