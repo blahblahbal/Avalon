@@ -26,7 +26,72 @@ public static class ClassExtensions
     {
         return i.healLife > 0 || i.healMana > 0 || i.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina > 0;
     }
-
+    public static void DropCoinsProperly(float num7, int i, int j)
+    {
+        while ((int)num7 > 0)
+        {
+            if (num7 > 1000000f)
+            {
+                int num8 = (int)(num7 / 1000000f);
+                if (num8 > 50 && Main.rand.NextBool(2))
+                {
+                    num8 /= Main.rand.Next(3) + 1;
+                }
+                if (Main.rand.NextBool(2))
+                {
+                    num8 /= Main.rand.Next(3) + 1;
+                }
+                num7 -= 1000000 * num8;
+                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.PlatinumCoin, num8);
+                continue;
+            }
+            if (num7 > 10000f)
+            {
+                int num9 = (int)(num7 / 10000f);
+                if (num9 > 50 && Main.rand.NextBool(2))
+                {
+                    num9 /= Main.rand.Next(3) + 1;
+                }
+                if (Main.rand.NextBool(2))
+                {
+                    num9 /= Main.rand.Next(3) + 1;
+                }
+                num7 -= 10000 * num9;
+                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.GoldCoin, num9);
+                continue;
+            }
+            if (num7 > 100f)
+            {
+                int num10 = (int)(num7 / 100f);
+                if (num10 > 50 && Main.rand.NextBool(2))
+                {
+                    num10 /= Main.rand.Next(3) + 1;
+                }
+                if (Main.rand.NextBool(2))
+                {
+                    num10 /= Main.rand.Next(3) + 1;
+                }
+                num7 -= 100 * num10;
+                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.SilverCoin, num10);
+                continue;
+            }
+            int num11 = (int)num7;
+            if (num11 > 50 && Main.rand.NextBool(2))
+            {
+                num11 /= Main.rand.Next(3) + 1;
+            }
+            if (Main.rand.NextBool(2))
+            {
+                num11 /= Main.rand.Next(4) + 1;
+            }
+            if (num11 < 1)
+            {
+                num11 = 1;
+            }
+            num7 -= num11;
+            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.CopperCoin, num11);
+        }
+    }
     public static Player GetPlayerForTile(int x, int y)
     {
         return Main.player[Player.FindClosest(new Vector2(x, y) * 16f, 16, 16)];

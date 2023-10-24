@@ -406,22 +406,35 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void HoldItem(Item item, Player player)
     {
+        #region extractinator prefix removal
         if (item.prefix > 0)
         {
             Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
             Tile t = Framing.GetTileSafely(p);
-            if (t.TileType == TileID.Extractinator || t.TileType == TileID.ChlorophyteExtractinator)
+            if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple) &&
+                (t.TileType == TileID.Extractinator || t.TileType == TileID.ChlorophyteExtractinator))
             {
                 player.noThrow = 2;
                 player.cursorItemIconEnabled = true;
                 player.cursorItemIconID = item.type;
                 if (Main.mouseRight && Main.mouseRightRelease)
                 {
+                    Item item2 = new Item();
+                    item2.SetDefaults(item.type);
+                    if (item2.value < item.value)
+                    {
+                        int money = (int)(item.value / 4 * Main.rand.NextFloat(0.5f, 1.5f)) / 5;
+                        ClassExtensions.DropCoinsProperly(money, (int)player.position.X, (int)player.position.Y);
+                    }
                     SoundEngine.PlaySound(SoundID.Item37);
+                    bool favorited = item.favorited;
                     item.SetDefaults(item.type);
+                    item.favorited = favorited;
                 }
             }
         }
+        #endregion
+
         #region herb seed block swap
         /*if (Data.Sets.Item.HerbSeeds[item.type])
         {

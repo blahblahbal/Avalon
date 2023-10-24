@@ -222,18 +222,18 @@ Mods: {
 			Troxinium: {
 				Magic:
 					'''
-					Hyper Damage
-					Hit mobs 15 times to trigger magic crits for 10 hits
+					Hitting enemies 15 times guarantees magic crits for the next 10 hits
+					               Effect scales down relative to critical strike damage
 					'''
 				Melee:
 					'''
-					Hyper Damage
-					Hit mobs 15 times to trigger melee crits for 10 hits
+					Hitting enemies 15 times guarantees melee crits for the next 10 hits
+					               Effect scales down relative to critical strike damage
 					'''
 				Ranged:
 					'''
-					Hyper Damage
-					Hit mobs 15 times to trigger ranged crits for 10 hits
+					Hitting enemies 15 times guarantees ranged crits for the next 10 hits
+					               Effect scales down relative to critical strike damage
 					'''
 			}
 		}

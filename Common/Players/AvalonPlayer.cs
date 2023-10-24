@@ -1361,13 +1361,35 @@ public class AvalonPlayer : ModPlayer
         {
             modifiers.FlatBonusDamage += 5;
         }
+        //if (HyperMelee)
+        //{
+        //    HyperBar++;
+        //    if (HyperBar > 15 && HyperBar <= 25)
+        //    {
+        //        modifiers.SetCrit();
+        //        if (HyperBar == 25)
+        //        {
+        //            HyperBar = 0;
+        //        }
+        //    }
+        //}
         if (HyperMelee)
         {
             HyperBar++;
-            if (HyperBar > 15 && HyperBar <= 25)
+            float Start = 15 * (1 + ((100 - MaxMeleeCrit) / 100));
+            float Mult = MaxMeleeCrit / 100;
+            float End = Start + 10 * Mult;
+            Start = (float)Math.Round(Start);
+            End = (float)Math.Round(End);
+            int Difference = (int)(End - Start);
+            if (Difference < 5)
+            {
+                Difference = 5;
+            }
+            if (HyperBar > Start && HyperBar <= Start + Difference)
             {
                 modifiers.SetCrit();
-                if (HyperBar == 25)
+                if (HyperBar == Start + Difference)
                 {
                     HyperBar = 0;
                 }
@@ -1396,42 +1418,75 @@ public class AvalonPlayer : ModPlayer
         {
             modifiers.SourceDamage *= 0.6f;
         }
-        if (HyperMelee && proj.DamageType == DamageClass.Melee)
+
+        #region Troxinium armor Hyper Damage
+        if (HyperMelee)
         {
             HyperBar++;
-            if (HyperBar > 15 && HyperBar <= 25)
+            float Start = 15 * (1 + ((100 - MaxMeleeCrit) / 100));
+            float Mult = MaxMeleeCrit / 100;
+            float End = Start + 10 * Mult;
+            Start = (float)Math.Round(Start);
+            End = (float)Math.Round(End);
+            int Difference = (int)(End - Start);
+            if (Difference < 5)
+            {
+                Difference = 5;
+            }
+            if (HyperBar > Start && HyperBar <= Start + Difference)
             {
                 modifiers.SetCrit();
-                if (HyperBar == 25)
+                if (HyperBar == Start + Difference)
                 {
                     HyperBar = 0;
                 }
             }
         }
-        if (HyperRanged && proj.DamageType == DamageClass.Ranged)
+        if (HyperRanged)
         {
             HyperBar++;
-            if (HyperBar > 15 && HyperBar <= 25)
+            float Start = 15 * (1 + ((100 - MaxRangedCrit) / 100));
+            float Mult = MaxRangedCrit / 100;
+            float End = Start + 10 * Mult;
+            Start = (float)Math.Round(Start);
+            End = (float)Math.Round(End);
+            int Difference = (int)(End - Start);
+            if (Difference < 5)
+            {
+                Difference = 5;
+            }
+            if (HyperBar > Start && HyperBar <= Start + Difference)
             {
                 modifiers.SetCrit();
-                if (HyperBar == 25)
+                if (HyperBar == Start + Difference)
                 {
                     HyperBar = 0;
                 }
             }
         }
-        if (HyperMagic && proj.DamageType == DamageClass.Magic)
+        if (HyperMagic)
         {
             HyperBar++;
-            if (HyperBar > 15 && HyperBar <= 25)
+            float Start = 15 * (1 + ((100 - MaxMagicCrit) / 100));
+            float Mult = MaxMagicCrit / 100;
+            float End = Start + 10 * Mult;
+            Start = (float)Math.Round(Start);
+            End = (float)Math.Round(End);
+            int Difference = (int)(End - Start);
+            if (Difference < 5)
+            {
+                Difference = 5;
+            }
+            if (HyperBar > Start && HyperBar <= Start + Difference)
             {
                 modifiers.SetCrit();
-                if (HyperBar == 25)
+                if (HyperBar == Start + Difference)
                 {
                     HyperBar = 0;
                 }
             }
         }
+        #endregion
 
         if (CrystalEdge)
         {
