@@ -7179,6 +7179,16 @@ Mods: {
 					Causes the coalesced state
 					'''
 			}
+
+			BlastedStoneWall: {
+				DisplayName: Blasted Stone Wall
+				Tooltip: ""
+			}
+
+			CrystalStoneWall: {
+				DisplayName: Crystal Stone Wall
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
