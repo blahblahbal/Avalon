@@ -53,7 +53,6 @@ class RodofCoalescence : ModItem
     }
     public bool TeleportPlayer(Player player)
     {
-        Point possibleTileCoords = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
         Vector2 pointPosition = player.GetModPlayer<AvalonPlayer>().MousePosition;
         if (player.gravDir == 1f)
         {
@@ -73,7 +72,7 @@ class RodofCoalescence : ModItem
             return false;
         }
         player.Teleport(pointPosition, 5);
-        NetMessage.SendData(65, -1, -1, null, 0, player.whoAmI, pointPosition.X, pointPosition.Y, 1);
+        NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, pointPosition.X, pointPosition.Y, 1);
         return true;
 
     }
@@ -87,14 +86,16 @@ class RodofCoalescence : ModItem
         if (num > 15 * 16)
         {
             float num4 = (15 * 16) / num;
+            
             if (num3 > num4)
             {
                 num3 = num4;
+                
             }
         }
         if (num2 > 15 * 16)
         {
-            float num5 = (15 * 16) / num;
+            float num5 = (15 * 16) / num2;
             if (num3 > num5)
             {
                 num3 = num5;

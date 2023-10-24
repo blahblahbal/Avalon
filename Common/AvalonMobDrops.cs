@@ -82,6 +82,12 @@ public class AvalonMobDrops : GlobalNPC
 
         switch (npc.type)
         {
+            case NPCID.Hellbat:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BondrewdHelmet>(), 50));
+                break;
+            case NPCID.DarkCaster:
+                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<RodofCoalescence>(), 200, 175));
+                break;
             case NPCID.GoblinSorcerer:
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChaosTome>(), 40));
                 break;

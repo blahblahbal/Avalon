@@ -31,7 +31,7 @@ public class GenSystem : ModSystem
         //}
 
         int evil = WorldGen.WorldGenParam_Evil;
-        if (evil == (int)WorldEvil.Contagion)
+        if (evil == (int)WorldEvil.Contagion && !Main.zenithWorld)
         {
             index = tasks.FindIndex(genpass => genpass.Name.Equals("Corruption"));
             if (index != -1)
@@ -105,7 +105,7 @@ public class GenSystem : ModSystem
             currentPass = new Hooks.DungeonRemoveCrackedBricks();
             tasks.Insert(index + 1, currentPass);
             totalWeight += currentPass.Weight;
-            if (evil == (int)WorldEvil.Contagion)
+            if (evil == (int)WorldEvil.Contagion && !Main.zenithWorld)
             {
                 tasks.Insert(index + 2, new ContagionVines("Contagion Vines", 25f));
             }
