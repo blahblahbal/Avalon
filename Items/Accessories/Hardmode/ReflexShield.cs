@@ -59,6 +59,6 @@ class ReflexShield : ModItem
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Pathogen>()] = true;
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Unloaded>()] = true;
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.BrokenWeaponry>()] = true;
-        player.GetModPlayer<AvalonPlayer>().Reflex = true;
+        player.GetModPlayer<AvalonPlayer>().ReflexShield = true;
     }
 }

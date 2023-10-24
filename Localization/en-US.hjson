@@ -6550,14 +6550,14 @@ Mods: {
 
 			ReflexCharm: {
 				DisplayName: Reflex Charm
-				Tooltip: Grants the holder a chance to reflect projectiles
+				Tooltip: Grants the holder a 25% chance to reflect projectiles
 			}
 
 			ReflexShield: {
 				DisplayName: Reflex Shield
 				Tooltip:
 					'''
-					The holder will reflect most projectiles
+					Grants the holder a 50% chance to reflect projectiles
 					Grants immunity to most debuffs
 					Grants immunity to fire blocks and knockback
 					'''
@@ -7189,6 +7189,21 @@ Mods: {
 				DisplayName: Crystal Stone Wall
 				Tooltip: ""
 			}
+
+			AshWall: {
+				DisplayName: Ash Wall
+				Tooltip: ""
+			}
+
+			HallowedThorn: {
+				DisplayName: Hallowed Thorn
+				Tooltip: Summons a splitting hallow thorn
+			}
+
+			EnergyRevolver: {
+				DisplayName: Energy Revolver
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7376,6 +7391,8 @@ Mods: {
 			Noxious.DisplayName: Noxious
 			BloodyAmulet.DisplayName: Bloody Amulet
 			VomitWater.DisplayName: Vomit Water
+			HallowedThorn.DisplayName: Hallowed Thorn
+			HallowedThornEnd.DisplayName: Hallowed Thorn
 		}
 
 		NPCs: {

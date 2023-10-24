@@ -14,11 +14,6 @@ namespace Avalon.Items.Accessories.Hardmode;
 
 class RiftGoggles : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -36,7 +31,7 @@ class RiftGoggles : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ItemID.Goggles)
             .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
             .AddIngredient(ItemID.JungleSpores, 10)
@@ -46,7 +41,7 @@ class RiftGoggles : ModItem
             .AddTile(TileID.DemonAltar)
             .Register();
 
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ItemID.Goggles)
             .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
             .AddIngredient(ItemID.JungleSpores, 10)
@@ -56,7 +51,7 @@ class RiftGoggles : ModItem
             .AddTile(TileID.DemonAltar)
             .Register();
 
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ItemID.Goggles)
             .AddIngredient(ModContent.ItemType<BloodshotLens>(), 2)
             .AddIngredient(ItemID.JungleSpores, 10)
@@ -204,7 +199,7 @@ class RiftGogglesGlobalTile : GlobalTile
         {
             return;
         }
-        if (Main.tile[i, j].LiquidAmount >= 0 && Main.tile[i, j].LiquidType == LiquidID.Honey)
+        if (Main.tile[i, j].HasTile && Main.tile[i, j].LiquidAmount >= 0 && Main.tile[i, j].LiquidType == LiquidID.Honey)
         {
             if (Main.tile[i, j].LiquidAmount == 0)
             {

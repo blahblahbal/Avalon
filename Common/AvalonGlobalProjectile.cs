@@ -289,4 +289,21 @@ internal class AvalonGlobalProjectile : GlobalProjectile
         }
         return base.PreDraw(projectile, ref lightColor);
     }
+    public static Vector2 RotateAboutOrigin(Vector2 point, float rotation)
+    {
+        if (rotation < 0f)
+        {
+            rotation += 12.566371f;
+        }
+
+        Vector2 value = point;
+        if (value == Vector2.Zero)
+        {
+            return point;
+        }
+
+        float num = (float)Math.Atan2(value.Y, value.X);
+        num += rotation;
+        return value.Length() * new Vector2((float)Math.Cos(num), (float)Math.Sin(num));
+    }
 }

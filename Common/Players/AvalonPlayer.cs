@@ -204,6 +204,7 @@ public class AvalonPlayer : ModPlayer
     public bool PocketBench;
     public bool ChaosCharm;
     public bool Reflex;
+    public bool ReflexShield;
     public bool UndeadImmune;
     public bool CobShield;
     public bool PallShield;
@@ -349,6 +350,7 @@ public class AvalonPlayer : ModPlayer
         PocketBench = false;
         ChaosCharm = false;
         Reflex = false;
+        ReflexShield = false;
         lavaMerman = false;
         UndeadImmune = false;
         CobShield = false;
@@ -1290,15 +1292,15 @@ public class AvalonPlayer : ModPlayer
             });
         }
 
-        if (!npc.friendly && npc.aiStyle == 9)
-        {
-            if (Main.rand.NextBool(1) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
-            {
-                hurtInfo.Damage = 1;
-                npc.friendly = true;
-                npc.velocity *= -1;
-            }
-        }
+        //if (!npc.friendly && npc.aiStyle == 9)
+        //{
+        //    if (Main.rand.NextBool(4) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
+        //    {
+        //        hurtInfo.Damage = 1;
+        //        npc.friendly = true;
+        //        npc.velocity *= -1;
+        //    }
+        //}
 
         if (Player.whoAmI == Main.myPlayer && BadgeOfBacteria)
         {
@@ -1531,7 +1533,7 @@ public class AvalonPlayer : ModPlayer
                 Projectile proj = Main.projectile[damageSource.SourceProjectileLocalIndex];
                 if (!proj.friendly && !proj.bobber && !Data.Sets.Projectile.DontReflect[proj.type])
                 {
-                    if (Main.rand.NextBool(3) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
+                    if (Main.rand.NextBool(4))
                     {
                         proj.hostile = false;
                         proj.friendly = true;
@@ -1545,7 +1547,37 @@ public class AvalonPlayer : ModPlayer
                 NPC npc = Main.npc[damageSource.SourceNPCIndex];
                 if (!npc.friendly && npc.aiStyle == 9)
                 {
-                    if (Main.rand.NextBool(3) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
+                    if (Main.rand.NextBool(4))
+                    {
+                        npc.friendly = true;
+                        npc.velocity *= -1;
+                        return true;
+                    }
+                }
+            }
+        }
+        if (ReflexShield)
+        {
+            if (damageSource.SourceProjectileLocalIndex > -1)
+            {
+                Projectile proj = Main.projectile[damageSource.SourceProjectileLocalIndex];
+                if (!proj.friendly && !proj.bobber && !Data.Sets.Projectile.DontReflect[proj.type])
+                {
+                    if (Main.rand.NextBool(2))
+                    {
+                        proj.hostile = false;
+                        proj.friendly = true;
+                        proj.velocity *= -1;
+                        return true;
+                    }
+                }
+            }
+            if (damageSource.SourceNPCIndex > -1)
+            {
+                NPC npc = Main.npc[damageSource.SourceNPCIndex];
+                if (!npc.friendly && npc.aiStyle == 9)
+                {
+                    if (Main.rand.NextBool(2))
                     {
                         npc.friendly = true;
                         npc.velocity *= -1;
