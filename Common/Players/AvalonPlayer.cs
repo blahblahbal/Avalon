@@ -297,9 +297,9 @@ public class AvalonPlayer : ModPlayer
         {
             DarkMatterMonolith = false;
         }
-        MagicCritDamage = 1f;
-        MeleeCritDamage = 1f;
-        RangedCritDamage = 1f;
+        MagicCritDamage = 0f;
+        MeleeCritDamage = 0f;
+        RangedCritDamage = 0f;
 
         // buffs
         AdvancedBattle = false;
@@ -1403,10 +1403,10 @@ public class AvalonPlayer : ModPlayer
         {
             modifiers.FlatBonusDamage += 8;
         }
-        // if (modifiers.CritDamage)
-        // {
-        //     damage += MultiplyMeleeCritDamage(damage);
-        // }
+        if (item.DamageType == DamageClass.Melee)
+        {
+            modifiers.CritDamage += MeleeCritDamage;
+        }
     }
     public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
@@ -1496,21 +1496,18 @@ public class AvalonPlayer : ModPlayer
         {
             modifiers.FlatBonusDamage += 8;
         }
-        // if (crit)
-        // {
-        //     if (proj.DamageType == DamageClass.Magic)
-        //     {
-        //         damage += MultiplyMagicCritDamage(damage);
-        //     }
-        //     if (proj.DamageType == DamageClass.Melee)
-        //     {
-        //         damage += MultiplyMeleeCritDamage(damage);
-        //     }
-        //     if (proj.DamageType == DamageClass.Ranged)
-        //     {
-        //         damage += MultiplyRangedCritDamage(damage);
-        //     }
-        // }
+        if (proj.DamageType == DamageClass.Melee)
+        {
+            modifiers.CritDamage += MeleeCritDamage;
+        }
+        if (proj.DamageType == DamageClass.Magic)
+        {
+            modifiers.CritDamage += MagicCritDamage;
+        }
+        if (proj.DamageType == DamageClass.Ranged)
+        {
+            modifiers.CritDamage += RangedCritDamage;
+        }
     }
     public override void MeleeEffects(Item item, Rectangle hitbox)
     {
