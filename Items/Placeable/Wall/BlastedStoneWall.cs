@@ -28,6 +28,6 @@ public class BlastedStoneWall : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.BlastedStone>()).AddCondition(Condition.InGraveyard).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.BlastedStone>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        Recipe.Create(ModContent.ItemType<Tile.BlastedStone>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
     }
 }

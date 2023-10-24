@@ -28,6 +28,6 @@ public class CrystalStoneWall : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.CrystalStoneBlock>()).AddCondition(Condition.InGraveyard).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.CrystalStoneBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        Recipe.Create(ModContent.ItemType<Tile.CrystalStoneBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
     }
 }

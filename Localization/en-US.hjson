@@ -8170,7 +8170,6 @@ Mods: {
 		Conditions: {
 			NearShimmer: Needs shimmer
 			ShimmerCraft: Throw into shimmer
-			Never: Mods.Avalon.Conditions.Never
 		}
 
 		Biomes: {

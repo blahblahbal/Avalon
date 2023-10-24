@@ -25,4 +25,11 @@ class CrackedPurpleBrick : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe(2)
+            .AddIngredient(ModContent.ItemType<PurpleBrick>())
+            .AddTile(TileID.HeavyWorkBench)
+            .Register();
+    }
 }

@@ -25,10 +25,11 @@ class CrackedOrangeBrick : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
-    /* public override void AddRecipes()
+    public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.OrangeBrickWall>(), 4).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.OrangeSlabWall>(), 4).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(ModContent.ItemType<Wall.OrangeTiledWall>(), 4).AddTile(TileID.WorkBenches).Register();
-    } */
+        CreateRecipe(2)
+            .AddIngredient(ModContent.ItemType<OrangeBrick>())
+            .AddTile(TileID.HeavyWorkBench)
+            .Register();
+    }
 }

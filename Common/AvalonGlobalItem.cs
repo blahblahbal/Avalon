@@ -73,6 +73,14 @@ public class AvalonGlobalItem : GlobalItem
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<NickelOre>()] = ItemID.LeadOre;
         ItemID.Sets.ShimmerTransformToItem[ItemID.IronOre] = ModContent.ItemType<BronzeOre>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BronzeOre>()] = ItemID.TinOre;
+
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>()] = ItemID.Wood;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Coughwood>()] = ItemID.Wood;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>()] = ItemID.Wood;
+
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.YellowBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientYellowBrick>();
         Item.staff[ItemID.Vilethorn] = true;
     }
     public override bool CanRightClick(Item item)

@@ -28,6 +28,6 @@ public class SnotsandstoneWall : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.SnotsandstoneBlock>()).AddCondition(Condition.InGraveyard).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.SnotsandstoneBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        Recipe.Create(ModContent.ItemType<Tile.SnotsandstoneBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
     }
 }
