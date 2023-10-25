@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Terraria;
 
 namespace Avalon.Reflection;
@@ -9,7 +9,13 @@ public static class PlayerHelper
     private static readonly ClearMiningCacheAtDelegate CachedClearMiningCacheAt =
         Utilities.CacheInstanceMethod<ClearMiningCacheAtDelegate>(typeof(Player).GetMethod("ClearMiningCacheAt", BindingFlags.Instance | BindingFlags.NonPublic)!);
     public static void ClearMiningCacheAt(this Player player, int x, int y, int hitTileCacheType) => CachedClearMiningCacheAt(player, x, y, hitTileCacheType);
-    
+
+
+    private delegate void TryFloatingOnWaterDelegate(Player self);
+    private static readonly TryFloatingOnWaterDelegate CachedTryFloatingOnWater =
+        Utilities.CacheInstanceMethod<TryFloatingOnWaterDelegate>(typeof(Player).GetMethod("TryFloatingInFluid", BindingFlags.Instance | BindingFlags.NonPublic)!);
+    public static void TryFloatingInFluid(this Player player) => CachedTryFloatingOnWater(player);
+
     private delegate bool IsBottomOfTreeTrunkNoRootsDelegate(Player self, int x, int y);
     private static readonly IsBottomOfTreeTrunkNoRootsDelegate CachedIsBottomOfTreeTrunkNoRoots =
         Utilities.CacheInstanceMethod<IsBottomOfTreeTrunkNoRootsDelegate>(typeof(Player).GetMethod("IsBottomOfTreeTrunkNoRoots", BindingFlags.Instance | BindingFlags.NonPublic)!);

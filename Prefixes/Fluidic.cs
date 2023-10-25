@@ -1,4 +1,5 @@
-﻿using Terraria;
+using Avalon.Common.Players;
+using Terraria;
 
 namespace Avalon.Prefixes;
 
@@ -12,6 +13,6 @@ public class Fluidic : ExxoPrefix
     public override void UpdateOwnerPlayer(Player player)
     {
         player.moveSpeed += 0.05f;
-        player.ignoreWater = true;
+        player.GetModPlayer<AvalonPlayer>().FluidicModifier += 0.25f;
     }
 }

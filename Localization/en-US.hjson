@@ -223,17 +223,17 @@ Mods: {
 				Magic:
 					'''
 					Hitting enemies 15 times guarantees magic crits for the next 10 hits
-					               Effect scales down relative to critical strike damage
+Effect scales down relative to critical strike damage
 					'''
 				Melee:
 					'''
 					Hitting enemies 15 times guarantees melee crits for the next 10 hits
-					               Effect scales down relative to critical strike damage
+Effect scales down relative to critical strike damage
 					'''
 				Ranged:
 					'''
 					Hitting enemies 15 times guarantees ranged crits for the next 10 hits
-					               Effect scales down relative to critical strike damage
+Effect scales down relative to critical strike damage
 					'''
 			}
 		}
@@ -243,6 +243,25 @@ Mods: {
 			Money: 5% increased money drops
 			StamRegen: Increased stamina regeneration
 			Efficiency: Increased mining efficiency
+			Damage: damage
+			Size: size
+			Knockback: knockback
+			Speed: speed
+			Velocity: velocity
+			ManaCost: mana cost
+			CritDamage: critical strike damage
+			CritChance: critical strike chance
+			AttackSpeed: speed
+			ArmorPenetration: armor penetration
+			DamageTaken: damage taken
+			Mana: mana
+			MovementSpeed: movement speed
+			Defense: defense
+			PlacementRange: placement range
+			TileSpeed: tile placement speed
+			WallSpeed: wall placement speed
+			Fluidic: increased mobility in liquids
+			Stinky: You smell awful
 		}
 
 		TooltipEdits: {
@@ -7395,6 +7414,7 @@ Mods: {
 			HallowedThorn.DisplayName: Hallowed Thorn
 			HallowedThornEnd.DisplayName: Hallowed Thorn
 			SnotsandBall.DisplayName: Snotsand
+			ColdCatcherBobber.DisplayName: Cold Catcher Bobber
 		}
 
 		NPCs: {

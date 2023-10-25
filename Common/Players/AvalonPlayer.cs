@@ -251,13 +251,11 @@ public class AvalonPlayer : ModPlayer
     public bool SnotOrb;
     #endregion
 
-    #region accessory prefixes
+    #region prefixes
     public bool GreedyPrefix;
     public bool HoardingPrefix;
-    #endregion
-
-    #region tool prefixes
     public int EfficiencyPrefix;
+    public float FluidicModifier;
     #endregion
     public int FrameCount { get; private set; }
     public int ShadowCooldown { get; private set; }
@@ -393,6 +391,7 @@ public class AvalonPlayer : ModPlayer
         // prefixes
         GreedyPrefix = false;
         HoardingPrefix = false;
+        FluidicModifier = 0f;
 
 
         CougherMask = false;

@@ -748,7 +748,7 @@ public class AvalonGlobalItem : GlobalItem
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
                 if (index != -1)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "-1 defense")
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "-1 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
                     {
                         IsModifier = true,
                         IsModifierBad = true
@@ -761,7 +761,7 @@ public class AvalonGlobalItem : GlobalItem
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
                 if (index != -1)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+1 defense")
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+1 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
                     {
                         IsModifier = true
                     });
@@ -773,7 +773,7 @@ public class AvalonGlobalItem : GlobalItem
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
                 if (index != -1)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+2 defense")
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+2 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
                     {
                         IsModifier = true
                     });
@@ -785,7 +785,7 @@ public class AvalonGlobalItem : GlobalItem
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
                 if (index != -1)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "-2 defense")
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "-2 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
                     {
                         IsModifier = true,
                         IsModifierBad = true
@@ -801,7 +801,19 @@ public class AvalonGlobalItem : GlobalItem
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
                 if (index != -1)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+1 defense")
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+1 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
+                    {
+                        IsModifier = true
+                    });
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Lurid>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+                if (index != -1)
+                {
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+3 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
                     {
                         IsModifier = true
                     });
