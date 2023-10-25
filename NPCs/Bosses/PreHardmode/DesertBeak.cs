@@ -468,10 +468,12 @@ public class DesertBeak : ModNPC
     }
     public override void FindFrame(int frameHeight)
     {
+        int frameAdd = 1;
+
         if (afterImageTimer <= 0)
-            NPC.frameCounter += 1.0 + MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), -0.3f, 1.7f) * FlapMultiplier;
+            NPC.frameCounter += frameAdd + MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), -0.3f, 1.7f) * FlapMultiplier;
         else
-            NPC.frameCounter += 1.0 + MathHelper.Lerp(MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), -0.3f, 2), MathHelper.Clamp(NPC.velocity.Length() * 0.3f, 0, 2),MathHelper.Clamp(afterImageTimer * 0.1f,0,1)) * FlapMultiplier;
+            NPC.frameCounter += frameAdd + MathHelper.Lerp(MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), -0.3f, 2), MathHelper.Clamp(NPC.velocity.Length() * 0.3f, 0, 2), MathHelper.Clamp(afterImageTimer * 0.1f, 0, 1)) * FlapMultiplier;
 
         if (NPC.frameCounter > 5.0)
         {

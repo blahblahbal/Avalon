@@ -122,6 +122,9 @@ Mods: {
 			CursedScepter: Enchanted through the malevolence of the Dungeon, weapons like this cut intruders down to size.
 			CursedFlamer: Cousins of the Corruptor, these malevolent creatures shoot cursed flames at anyone who dares to intrude into the Corruption.
 			Hallowor: A guardian of light, this being spits a substance that purifies the world.
+			ContaminatedGoldfish: Goldfish mutate and become violent when exposed to a Blood Moon, allowing the Contagion to take hold of them.
+			ContaminatedPenguin: During a Blood Moon, the normally docile penguins fall under the hostile influence of the Contagion.
+			ContaminatedBunny: Bunnies are pure beings that normally cannot be afflicted by the Contagion, but will succumb under the effects of a Blood Moon.
 		}
 
 		Keybinds: {
@@ -223,17 +226,17 @@ Mods: {
 				Magic:
 					'''
 					Hitting enemies 15 times guarantees magic crits for the next 10 hits
-Effect scales down relative to critical strike damage
+					Effect scales down relative to critical strike damage
 					'''
 				Melee:
 					'''
 					Hitting enemies 15 times guarantees melee crits for the next 10 hits
-Effect scales down relative to critical strike damage
+					Effect scales down relative to critical strike damage
 					'''
 				Ranged:
 					'''
 					Hitting enemies 15 times guarantees ranged crits for the next 10 hits
-Effect scales down relative to critical strike damage
+					Effect scales down relative to critical strike damage
 					'''
 			}
 		}

@@ -1,8 +1,10 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Critters;
@@ -12,12 +14,6 @@ public class ContaminatedBunny : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[Type] = 7;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
-        {
-            // Influences how the NPC looks in the Bestiary
-            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
-        };
-        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }
     public override void SetDefaults()
@@ -26,14 +22,14 @@ public class ContaminatedBunny : ModNPC
         AnimationType = NPCID.CorruptBunny;
         AIType = NPCID.CorruptBunny;
     }
-    //public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-    //{
-    //    bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-    //    {
-    //        BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
-    //        new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemBunny"))
-    //    });
-    //}
+    public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+    {
+        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
+        {
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.BloodMoon,
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.ContaminatedBunny"))
+        });
+    }
     public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life > 0)
@@ -54,12 +50,6 @@ public class ContaminatedGoldfish : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[Type] = 6;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
-        {
-            // Influences how the NPC looks in the Bestiary
-            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
-        };
-        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }
     public override void SetDefaults()
@@ -68,14 +58,14 @@ public class ContaminatedGoldfish : ModNPC
         AnimationType = NPCID.CorruptGoldfish;
         AIType = NPCID.CorruptGoldfish;
     }
-    //public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-    //{
-    //    bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-    //    {
-    //        BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
-    //        new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemBunny"))
-    //    });
-    //}
+    public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+    {
+        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
+        {
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.BloodMoon,
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.ContaminatedGoldfish"))
+        });
+    }
     public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life > 0)
@@ -96,12 +86,6 @@ public class ContaminatedPenguin : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[Type] = 12;
-        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
-        {
-            // Influences how the NPC looks in the Bestiary
-            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
-        };
-        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }
     public override void SetDefaults()
@@ -110,14 +94,14 @@ public class ContaminatedPenguin : ModNPC
         AnimationType = NPCID.CorruptPenguin;
         AIType = NPCID.CorruptPenguin;
     }
-    //public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-    //{
-    //    bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-    //    {
-    //        BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
-    //        new FlavorTextBestiaryInfoElement(Language.GetTextValue("CommonBestiaryFlavor.GemBunny"))
-    //    });
-    //}
+    public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+    {
+        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
+        {
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.BloodMoon,
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.ContaminatedPenguin"))
+        });
+    }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.OneFromOptions(50, ItemID.PedguinHat, ItemID.PedguinShirt, ItemID.PedguinPants));

@@ -39,9 +39,6 @@ public class Librarian : ModNPC
         NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
         NPCID.Sets.ShimmerTownTransform[Type] = true;
 
-        var drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers() {Velocity = 1f};
-
-        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
 
         NPC.Happiness
             .SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
