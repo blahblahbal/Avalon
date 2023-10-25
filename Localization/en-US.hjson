@@ -3395,7 +3395,7 @@ Mods: {
 
 			SnotsandBlock: {
 				DisplayName: Snotsand Block
-				Tooltip: "'Disgustingly sticky'"
+				Tooltip: ""
 			}
 
 			CrimstoneColumn: {
@@ -7292,7 +7292,7 @@ Mods: {
 			PhantasmalBullet.DisplayName: Phantasmal Bullet
 			SpectralBullet.DisplayName: Spectral Bullet
 			Cell.DisplayName: Cell
-			SnotlineBobber.DisplayName: Snotline Bobber
+			SnotlineBobber.DisplayName: Cold Catcher Bobber
 			VirulentPowder.DisplayName: Virulent Powder
 			MasterSwordBeam.DisplayName: Master Sword Beam
 			ArgusLantern.DisplayName: Argus Lantern
@@ -7394,6 +7394,7 @@ Mods: {
 			VomitWater.DisplayName: Vomit Water
 			HallowedThorn.DisplayName: Hallowed Thorn
 			HallowedThornEnd.DisplayName: Hallowed Thorn
+			SnotsandBall.DisplayName: Snotsand
 		}
 
 		NPCs: {

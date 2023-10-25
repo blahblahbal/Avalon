@@ -23,7 +23,7 @@ internal class ColdCatcher : ModItem
         Item.rare = ItemRarityID.Blue;
         Item.useTime = 8;
         Item.fishingPole = 25;
-        Item.shoot = ModContent.ProjectileType<SnotlineBobber>();
+        Item.shoot = ModContent.ProjectileType<ColdCatcherBobber>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 2, 80);
         Item.useAnimation = 8;

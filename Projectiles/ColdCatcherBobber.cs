@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles;
 
-public class SnotlineBobber : ModProjectile
+public class ColdCatcherBobber : ModProjectile
 {
     public override void SetStaticDefaults()
     {
