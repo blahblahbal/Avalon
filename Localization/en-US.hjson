@@ -7424,6 +7424,7 @@ Mods: {
 			SnotsandBall.DisplayName: Snotsand
 			ColdCatcherBobber.DisplayName: Cold Catcher Bobber
 			IckyArrow.DisplayName: Icky Arrow
+			EnergyLaser.DisplayName: Energy Laser
 		}
 
 		NPCs: {
@@ -8162,6 +8163,8 @@ Mods: {
 				MapEntry0: Contagion Chest
 				MapEntry1: Locked Contagion Chest
 			}
+
+			ContagionPot.MapEntry: Pot
 		}
 
 		Prefixes: {

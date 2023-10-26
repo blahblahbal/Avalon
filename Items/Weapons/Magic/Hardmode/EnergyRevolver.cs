@@ -20,7 +20,7 @@ class EnergyRevolver : ModItem
         Item.width = dims.Width;
         Item.knockBack = 2f;
         Item.useTime = 6;
-        Item.shoot = ProjectileID.GreenLaser;
+        Item.shoot = ModContent.ProjectileType<Projectiles.Magic.EnergyLaser>();
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = Item.sellPrice(0, 4);
         Item.useAnimation = 6;

@@ -15,6 +15,19 @@ namespace Avalon.Hooks
             IL_WorldGen.ShimmerMakeBiome += AddShimmerAlternativeChecks;
             IL_WorldGen.badOceanCaveTiles += IL_WorldGen_badOceanCaveTiles;
             IL_WorldGen.GERunner += IL_WorldGen_GERunner;
+            On_WorldGen.PlacePot += On_WorldGen_PlacePot;
+        }
+
+        private bool On_WorldGen_PlacePot(On_WorldGen.orig_PlacePot orig, int x, int y, ushort type, int style)
+        {
+            if (Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Contagion.Chunkstone>() ||
+                Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Contagion.Snotsand>() ||
+                Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Contagion.Ickgrass>())
+            {
+                style = 0;
+                type = (ushort)ModContent.TileType<Tiles.Contagion.ContagionPot>();
+            }
+            return orig.Invoke(x, y, type, style);
         }
 
         private void IL_WorldGen_GERunner(ILContext il)

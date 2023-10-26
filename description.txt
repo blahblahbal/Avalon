@@ -17,7 +17,7 @@ Credits:
 imkSushi for starting the porting work
 Fox for some code
 Ghasttear for a lot of code
-Optical Starline for quite a bit of code
+Optical Starline for some code
 Lion8cake for some code
 Comentdude for some code
 GreenTea for some code

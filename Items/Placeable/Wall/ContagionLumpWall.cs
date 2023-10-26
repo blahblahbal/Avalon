@@ -28,6 +28,6 @@ public class ContagionLumpWall : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.ChunkstoneBlock>()).AddCondition(Condition.InGraveyard).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ModContent.ItemType<Tile.ChunkstoneBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        Recipe.Create(ModContent.ItemType<Tile.ChunkstoneBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
     }
 }

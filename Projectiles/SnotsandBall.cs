@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -44,6 +45,15 @@ public class SnotsandBall : ModProjectile
             if (t.IsHalfBlock && Projectile.velocity.Y > 0f && Math.Abs(Projectile.velocity.Y) > Math.Abs(Projectile.velocity.X))
             {
                 t = Main.tile[p.X, --p.Y];
+            }
+            if (Main.tileCut[t.TileType])
+            {
+                WorldGen.KillTile(p.X, p.Y);
+            }
+            if (!Main.tileSolid[t.TileType])
+            {
+                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(p.X, p.Y), p.X * 16, p.Y * 16, 16, 16, ModContent.ItemType<Items.Placeable.Tile.SnotsandBlock>());
+                SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
             }
             if (!t.HasTile && t.TileType != TileID.MinecartTrack)
             {
