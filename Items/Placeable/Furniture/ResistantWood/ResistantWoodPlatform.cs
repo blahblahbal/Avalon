@@ -35,6 +35,6 @@ class ResistantWoodPlatform : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(2).AddIngredient(ModContent.ItemType<Tile.ResistantWood>()).Register();
-        Recipe.Create(ModContent.ItemType<Tile.ResistantWood>()).AddIngredient(this, 2).Register();
+        Recipe.Create(ModContent.ItemType<Tile.ResistantWood>()).AddIngredient(this, 2).DisableDecraft().Register();
     }
 }
