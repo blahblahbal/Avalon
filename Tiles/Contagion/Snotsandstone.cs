@@ -24,7 +24,6 @@ public class Snotsandstone : ModTile
     }
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     {
-        //Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<Snotsand>(), false, false, false, false, true);
         Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<HardenedSnotsand>(), false, false, false, false, true);
         return false;
     }
