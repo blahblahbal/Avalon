@@ -27,6 +27,6 @@ class ResistantWoodFence : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.ResistantWood>()).AddTile(TileID.WorkBenches).Register();
-        Terraria.Recipe.Create(ModContent.ItemType<Tile.ResistantWood>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+        Terraria.Recipe.Create(ModContent.ItemType<Tile.ResistantWood>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
     }
 }

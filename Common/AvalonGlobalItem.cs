@@ -77,6 +77,7 @@ public class AvalonGlobalItem : GlobalItem
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>()] = ItemID.Wood;
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Coughwood>()] = ItemID.Wood;
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>()] = ItemID.Wood;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ResistantWood>()] = ItemID.Wood;
 
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>();
