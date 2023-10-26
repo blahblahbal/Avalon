@@ -44,7 +44,7 @@ public class Snotsand : ModTile
         if (j < Main.maxTilesY && !Main.tile[i, j + 1].HasTile)
         {
             Main.tile[i, j].Get<TileWallWireStateData>().HasTile = false;
-            Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16f + 8f, j * 16f + 8f), Vector2.Zero, ModContent.ProjectileType<Projectiles.SnotsandBall>(), 15, 0f, 255);
+            int num = Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16f + 8f, j * 16f + 8f), new Vector2(0f, 0.41f), ModContent.ProjectileType<Projectiles.SnotsandBall>(), 15, 0f, 255);
             WorldGen.SquareTileFrame(i, j);
             return false;
         }

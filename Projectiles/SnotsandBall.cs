@@ -9,6 +9,10 @@ namespace Avalon.Projectiles;
 
 public class SnotsandBall : ModProjectile
 {
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.FallingBlockDoesNotFallThroughPlatforms[Projectile.type] = true;
+    }
     public override void SetDefaults()
     {
         Projectile.knockBack = 6f;
@@ -27,7 +31,7 @@ public class SnotsandBall : ModProjectile
             int i = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<Dusts.SnotsandDust>(), 0f, Projectile.velocity.Y * 0.5f);
             Main.dust[i].velocity.X *= 0.2f;
         }
-        Projectile.velocity.Y += 0.2f;
+        Projectile.velocity.Y += 0.41f;
         Projectile.rotation += 0.1f;
         if (Projectile.velocity.Y > 10f)
         {
@@ -61,6 +65,12 @@ public class SnotsandBall : ModProjectile
                 WorldGen.SquareTileFrame(p.X, p.Y);
             }
         }
+    }
+
+    public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+    {
+        fallThrough = !ProjectileID.Sets.FallingBlockDoesNotFallThroughPlatforms[Projectile.type];
+        return true;
     }
     public override bool? CanDamage() => Projectile.localAI[1] != -1f;
 }
