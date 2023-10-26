@@ -1,4 +1,4 @@
-﻿using Avalon.Items.Material;
+using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -27,9 +27,7 @@ class OddFertilizer : ModItem
 
     public override bool CanUseItem(Player player)
     {
-        if(!player.ZoneJungle) return false;
-        if (NPC.AnyNPCs(NPCID.Plantera)) return false;
-        return true;
+        return player.ZoneJungle && !NPC.AnyNPCs(NPCID.Plantera);
     }
 
     public override bool? UseItem(Player player)
@@ -46,6 +44,7 @@ class OddFertilizer : ModItem
             .AddIngredient(ItemID.JungleSpores, 15)
             .AddIngredient(ItemID.SoulofMight, 5)
             .AddIngredient(ItemID.SoulofFright, 5)
-            .AddTile(TileID.MythrilAnvil);
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
     }
 }

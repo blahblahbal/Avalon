@@ -57,7 +57,13 @@ public class SnotsandBall : ModProjectile
             }
             if (!t.HasTile && t.TileType != TileID.MinecartTrack)
             {
-                WorldGen.PlaceTile(p.X, p.Y, ModContent.TileType<Tiles.Contagion.Snotsand>());
+                Tile tBelow = Main.tile[p.X, p.Y + 1];
+                if (tBelow.Slope != SlopeType.Solid)
+                {
+                    tBelow.Slope = SlopeType.Solid;
+                }
+                if (tBelow.IsHalfBlock) tBelow.IsHalfBlock = false;
+                WorldGen.PlaceTile(p.X, p.Y, ModContent.TileType<Tiles.Contagion.Snotsand>(), forced: true);
                 WorldGen.SquareTileFrame(p.X, p.Y);
             }
         }

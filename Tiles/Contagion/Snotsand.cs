@@ -1,5 +1,6 @@
 using Avalon.Dusts;
 using Avalon.Items.Placeable.Tile;
+using Avalon.Reflection;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -30,7 +31,7 @@ public class Snotsand : ModTile
         TileID.Sets.ChecksForMerge[Type] = true;
         TileID.Sets.Falling[Type] = true;
         TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
-        Common.TileMerge.MergeWith(Type, ModContent.TileType<Snotsandstone>());
+        Common.TileMerge.DesertMerge(Type);
         DustType = ModContent.DustType<SnotsandDust>();
     }
     //public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
@@ -41,13 +42,20 @@ public class Snotsand : ModTile
 
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     {
+        Tile tile = Main.tile[i, j];
+        Tile tileAbove = Main.tile[i, j - 1];
+        Tile tileBelow = Main.tile[i, j + 1];
         if (j < Main.maxTilesY && !Main.tile[i, j + 1].HasTile)
         {
-            Main.tile[i, j].Get<TileWallWireStateData>().HasTile = false;
-            Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16f + 8f, j * 16f + 8f), Vector2.Zero, ModContent.ProjectileType<Projectiles.SnotsandBall>(), 15, 0f, 255);
-            WorldGen.SquareTileFrame(i, j);
-            return false;
+            WorldGenHelper.SpawnFallingBlockProjectile(i, j, tile, tileAbove, tileBelow, Type);
         }
+        //if (j < Main.maxTilesY && !Main.tile[i, j + 1].HasTile)
+        //{
+        //    Main.tile[i, j].Get<TileWallWireStateData>().HasTile = false;
+        //    Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16f + 8f, j * 16f + 8f), new(0, 0.41f), ModContent.ProjectileType<Projectiles.SnotsandBall>(), 15, 0f, 255);
+        //    WorldGen.SquareTileFrame(i, j);
+        //    return false;
+        //}
         return true;
     }
     public override bool HasWalkDust() => Main.rand.NextBool(3);

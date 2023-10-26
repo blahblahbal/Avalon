@@ -1,4 +1,5 @@
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Common
@@ -37,7 +38,26 @@ namespace Avalon.Common
                 Main.tileMerge[type2][type1] = merge;
             }
         }
-
+        public static void DesertMerge(int type)
+        {
+            MergeWith(type, TileID.Sand);
+            MergeWith(type, TileID.Ebonsand);
+            MergeWith(type, TileID.Crimsand);
+            MergeWith(type, ModContent.TileType<Tiles.Contagion.Snotsand>());
+            MergeWith(type, TileID.Pearlsand);
+            MergeWith(type, TileID.Sandstone);
+            MergeWith(type, TileID.CorruptSandstone);
+            MergeWith(type, TileID.CrimsonSandstone);
+            MergeWith(type, TileID.HallowSandstone);
+            MergeWith(type, ModContent.TileType<Tiles.Contagion.Snotsandstone>());
+            MergeWith(type, TileID.HardenedSand);
+            MergeWith(type, TileID.CorruptHardenedSand);
+            MergeWith(type, TileID.CrimsonHardenedSand);
+            MergeWith(type, TileID.HallowHardenedSand);
+            MergeWith(type, ModContent.TileType<Tiles.Contagion.HardenedSnotsand>());
+            MergeWith(type, TileID.DesertFossil);
+            MergeWith(type, TileID.FossilOre);
+        }
         private static void SetFrame(int x, int y, int frameX, int frameY)
         {
             Tile tile = Main.tile[x, y];

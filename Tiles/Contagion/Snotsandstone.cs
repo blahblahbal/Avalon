@@ -19,14 +19,13 @@ public class Snotsandstone : ModTile
         TileID.Sets.isDesertBiomeSand[Type] = true;
         TileID.Sets.CanBeClearedDuringGeneration[Type] = false;
         TileID.Sets.ChecksForMerge[Type] = true;
-        Common.TileMerge.MergeWith(Type, ModContent.TileType<Snotsand>());
-        Common.TileMerge.MergeWith(Type, ModContent.TileType<HardenedSnotsand>());
+        Common.TileMerge.DesertMerge(Type);
         DustType = ModContent.DustType<ContagionDust>();
     }
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
     {
-        //Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<Snotsand>(), false, false, false, false, resetFrame);
-        Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<HardenedSnotsand>(), false, false, false, false, resetFrame);
+        //Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<Snotsand>(), false, false, false, false, true);
+        Common.TileMerge.MergeWithFrame(i, j, Type, ModContent.TileType<HardenedSnotsand>(), false, false, false, false, true);
         return false;
     }
     public override bool IsTileBiomeSightable(int i, int j, ref Color sightColor)

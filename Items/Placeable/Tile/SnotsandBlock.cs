@@ -17,6 +17,8 @@ class SnotsandBlock : ModItem
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.Contagion.Snotsand>();
         Item.width = dims.Width;
+        Item.ammo = AmmoID.Sand;
+        Item.notAmmo = true;
         Item.useTurn = true;
         Item.useTime = 10;
         Item.scale = 1f;
