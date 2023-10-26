@@ -38,7 +38,7 @@ public class ExplosiveEgg : ModProjectile
             Projectile.velocity.X *= 0.99f;
         }
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         if (Projectile.ai[2] == 1)
         {

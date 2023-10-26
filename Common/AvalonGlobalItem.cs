@@ -518,6 +518,7 @@ public class AvalonGlobalItem : GlobalItem
             LeadingConditionRule contagionRule = new LeadingConditionRule(contagionCondition);
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
             contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
+            contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<IckyArrow>(), 1, 20, 50));
             contagionRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
             itemLoot.Add(contagionRule);
         }

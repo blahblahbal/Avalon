@@ -7227,6 +7227,11 @@ Mods: {
 				DisplayName: Energy Revolver
 				Tooltip: ""
 			}
+
+			IckyArrow: {
+				DisplayName: Icky Arrow
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7418,6 +7423,7 @@ Mods: {
 			HallowedThornEnd.DisplayName: Hallowed Thorn
 			SnotsandBall.DisplayName: Snotsand
 			ColdCatcherBobber.DisplayName: Cold Catcher Bobber
+			IckyArrow.DisplayName: Icky Arrow
 		}
 
 		NPCs: {
