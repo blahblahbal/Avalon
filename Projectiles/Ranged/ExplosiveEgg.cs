@@ -1,10 +1,12 @@
 using System;
+using Avalon.Common;
 using Avalon.Projectiles.Hostile.DesertBeak;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.Drawing;
+using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -40,6 +42,12 @@ public class ExplosiveEgg : ModProjectile
     }
     public override void OnKill(int timeLeft)
     {
+        if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+        {
+            PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Circular(1, 1), 12, 15f, 15, 1200f, Projectile.Name);
+            Main.instance.CameraModifiers.Add(modifier);
+        }
+
         if (Projectile.ai[2] == 1)
         {
             for (int i = 0; i < 8; i++)

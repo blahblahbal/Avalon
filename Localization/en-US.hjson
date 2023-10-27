@@ -5326,7 +5326,8 @@ Mods: {
 
 			Longbone: {
 				DisplayName: Longbone
-				Tooltip: ""
+				Tooltip:
+                "causes bouncy aquaflame balls to explode from your arrows on impact"
 			}
 
 			MoonlightLongbow: {
@@ -7425,6 +7426,7 @@ Mods: {
 			ColdCatcherBobber.DisplayName: Cold Catcher Bobber
 			IckyArrow.DisplayName: Icky Arrow
 			EnergyLaser.DisplayName: Energy Laser
+			LongboneCurse.DisplayName: Longbone Curse
 		}
 
 		NPCs: {
