@@ -5326,8 +5326,7 @@ Mods: {
 
 			Longbone: {
 				DisplayName: Longbone
-				Tooltip:
-                "causes bouncy aquaflame balls to explode from your arrows on impact"
+				Tooltip: Bouncy aquaflame balls explode from your arrows on impact
 			}
 
 			MoonlightLongbow: {
