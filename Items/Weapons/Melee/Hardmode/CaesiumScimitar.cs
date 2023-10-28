@@ -9,12 +9,6 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class CaesiumScimitar : ModItem
 {
-    //public override void SetStaticDefaults()
-    //{
-    //    DisplayName.SetDefault("Caesium Scimitar");
-    //    Tooltip.SetDefault("Explodes foes on hit");
-    //    SacrificeTotal = 1;
-    //}
     public override void SetDefaults()
     {
         Item.width = 36;

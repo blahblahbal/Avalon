@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,12 +7,6 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 class BlackWhetstone : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //DisplayName.SetDefault("Black Whetstone");
-        //Tooltip.SetDefault("Increases melee armor penetration by 10");
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Item.Size = new Vector2(16);

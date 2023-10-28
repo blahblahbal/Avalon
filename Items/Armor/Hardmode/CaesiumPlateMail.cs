@@ -9,13 +9,6 @@ namespace Avalon.Items.Armor.Hardmode;
 [AutoloadEquip(EquipType.Body)]
 class CaesiumPlateMail : ModItem
 {
-    //public override void SetStaticDefaults()
-    //{
-    //    DisplayName.SetDefault("Caesium Plate Mail");
-    //    Tooltip.SetDefault("5% increased melee critical strike chance\nMelee attacks inflict On Fire!");
-    //    SacrificeTotal = 1;
-    //}
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

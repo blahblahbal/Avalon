@@ -12,11 +12,6 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Head)]
 class ViruthornHelmet : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

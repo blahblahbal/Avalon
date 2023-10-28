@@ -6,12 +6,6 @@ namespace Avalon.Items.Tools.Hardmode;
 
 class DurataniumDrill : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Can mine Mythril, Orichalcum, and Naquadah");
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

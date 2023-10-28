@@ -12,12 +12,6 @@ namespace Avalon.Items.Armor.Hardmode;
 [AutoloadEquip(EquipType.Head)]
 class CaesiumGalea : ModItem
 {
-    //public override void SetStaticDefaults()
-    //{
-    //    DisplayName.SetDefault("Caesium Galea");
-    //    Tooltip.SetDefault("8% increased melee damage");
-    //    SacrificeTotal = 1;
-    //}
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

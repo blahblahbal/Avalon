@@ -11,7 +11,6 @@ class TerrorPenguinsEarpiece : ModItem
     public override void SetStaticDefaults()
     {
         ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
-        Item.ResearchUnlockCount = 1;
     }
 
     public override void SetDefaults()

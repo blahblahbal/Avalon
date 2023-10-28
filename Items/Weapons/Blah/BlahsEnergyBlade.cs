@@ -10,11 +10,6 @@ namespace Avalon.Items.Weapons.Blah;
 
 class BlahsEnergyBlade : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.width = 50;

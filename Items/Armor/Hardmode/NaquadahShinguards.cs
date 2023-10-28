@@ -8,12 +8,6 @@ namespace Avalon.Items.Armor.Hardmode;
 [AutoloadEquip(EquipType.Legs)]
 class NaquadahShinguards : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("6% increased movement speed");
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

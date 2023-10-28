@@ -5,10 +5,6 @@ namespace Avalon.Items.Tools.PreHardmode;
 
 class BronzeAxe : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.TinAxe);

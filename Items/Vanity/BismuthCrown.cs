@@ -10,7 +10,6 @@ class BismuthCrown : ModItem
     public override void SetStaticDefaults()
     {
         ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
-        Item.ResearchUnlockCount = 1;
     }
 
     public override void SetDefaults()

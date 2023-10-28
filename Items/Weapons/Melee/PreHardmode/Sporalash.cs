@@ -8,9 +8,6 @@ class Sporalash : ModItem
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Sporalash");
-        //Tooltip.SetDefault("Has a chance to poison");
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
     }
 

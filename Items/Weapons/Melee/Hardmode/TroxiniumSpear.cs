@@ -8,10 +8,6 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class TroxiniumSpear : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Item.width = 36;

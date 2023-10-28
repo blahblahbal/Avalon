@@ -9,10 +9,6 @@ namespace Avalon.Items.Tools.PreHardmode;
 
 class MucusHammer : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

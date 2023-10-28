@@ -7,11 +7,6 @@ namespace Avalon.Items.Tools.PreHardmode;
 
 public class TombMirror : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.maxStack = 1;

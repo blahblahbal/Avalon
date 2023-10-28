@@ -9,10 +9,6 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class HellboundHalberd : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Item.width = 24;

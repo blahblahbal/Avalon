@@ -1,4 +1,4 @@
-﻿using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Bars;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,11 +6,6 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 public class OsmiumGreatsword : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.width = 34;

@@ -1,12 +1,11 @@
-using Avalon.Items.Accessories;
-//using Avalon.Items.Fish;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Material.Bars;
-using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Items.Accessories.Vanity;
+using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Fish;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -60,10 +59,10 @@ class EvilShrine
                         }
                         else if (rand >= 31 && rand <= 40)
                         {
-                            int q = WorldGen.genRand.Next(2); // 3
+                            int q = WorldGen.genRand.Next(3);
                             if (q == 0) q = ItemID.Ebonkoi;
                             if (q == 1) q = ItemID.Hemopiranha;
-                            //if (q == 2) q = ModContent.ItemType<Ickfish>();
+                            if (q == 2) q = ModContent.ItemType<Ickfish>();
                             Main.chest[num2].item[1].SetDefaults(q, false);
                             Main.chest[num2].item[1].stack = WorldGen.genRand.Next(4, 8);
                         }
@@ -80,10 +79,10 @@ class EvilShrine
                         }
                         else if (rand2 >= 21 && rand2 <= 26)
                         {
-                            int q = WorldGen.genRand.Next(2); // 3
+                            int q = WorldGen.genRand.Next(3);
                             if (q == 0) q = ItemID.BandofStarpower;
                             if (q == 1) q = ItemID.PanicNecklace;
-                            //if (q == 2) q = ModContent.ItemType<BandofStamina>();
+                            if (q == 2) q = ModContent.ItemType<BandofStamina>();
                             Main.chest[num2].item[2].SetDefaults(q, false);
                             Main.chest[num2].item[2].Prefix(-1);
                         }
@@ -118,8 +117,8 @@ class EvilShrine
             {0,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,0},
             {0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0},
             {0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0},
-            {0,0,1,1,1,1,2,2,2,1,1,1,1,3,3,0,0,0,0,0,3,3,1,1,1,1,2,2,2,1,1,1,1,0,0},
-            {0,0,0,1,1,1,1,1,1,1,15,15,15,3,3,3,3,3,3,3,3,3,15,15,15,1,1,1,1,1,1,1,0,0,0},
+            {0,0,1,1,1,1,2,2,2,1,1,1,1,3,3,3,3,3,3,3,3,3,1,1,1,1,2,2,2,1,1,1,1,0,0},
+            {0,0,0,1,1,1,1,1,1,1,15,15,15,3,3,3,4,4,4,3,3,3,15,15,15,1,1,1,1,1,1,1,0,0,0},
             {0,0,0,0,1,1,1,1,1,1,1,3,3,3,3,3,4,4,4,3,3,3,3,3,1,1,1,1,1,1,1,0,0,0,0},
             {0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,3,3,5,6,6,6,6,7,6,6,6,6,6,7,6,6,6,6,5,3,3,0,0,0,0,0,0,0},

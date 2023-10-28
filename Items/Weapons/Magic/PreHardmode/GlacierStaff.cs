@@ -9,7 +9,6 @@ class GlacierStaff : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         Item.staff[Item.type] = true;
     }
     public override void SetDefaults()

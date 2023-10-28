@@ -10,7 +10,6 @@ class DroneSwarm : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         Item.staff[Type] = true;
     }
     public override Vector2? HoldoutOrigin() => new Vector2(10f, 10f);

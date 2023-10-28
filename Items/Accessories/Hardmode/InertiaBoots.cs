@@ -1,6 +1,5 @@
 using Avalon.Common.Players;
 using Avalon.Items.Armor.Hardmode;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -13,7 +12,6 @@ class InertiaBoots : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(1000, 9f, 1.2f, true);
     }
 
@@ -29,7 +27,7 @@ class InertiaBoots : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddRecipeGroup("Avalon:Wings")
             .AddIngredient(ItemID.FrostsparkBoots)
             .AddIngredient(ItemID.BlackBelt)
@@ -37,7 +35,7 @@ class InertiaBoots : ModItem
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
 
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<InertiaBootsSlower>())
             .AddTile(TileID.TinkerersWorkbench)
             .Register();

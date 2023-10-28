@@ -6,10 +6,6 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class DurataniumGlaive : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

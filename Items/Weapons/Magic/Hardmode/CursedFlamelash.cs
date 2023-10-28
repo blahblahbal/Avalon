@@ -9,13 +9,6 @@ namespace Avalon.Items.Weapons.Magic.Hardmode;
 
 class CursedFlamelash : ModItem
 {
-    //public override void SetStaticDefaults()
-    //{
-    //    DisplayName.SetDefault("Cursed Flamelash");
-    //    Tooltip.SetDefault("Summons a controllable ball of cursed fire");
-    //    SacrificeTotal = 1;
-    //}
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

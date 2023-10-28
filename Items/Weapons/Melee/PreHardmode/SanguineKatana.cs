@@ -10,11 +10,6 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 public class SanguineKatana : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override bool MeleePrefix()
     {
         return true;

@@ -10,11 +10,6 @@ namespace Avalon.Items.Armor.Hardmode;
 [AutoloadEquip(EquipType.Head)]
 class NaquadahMask : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

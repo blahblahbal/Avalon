@@ -7,11 +7,6 @@ namespace Avalon.Items.Accessories.PreHardmode;
 [AutoloadEquip(EquipType.Waist)]
 class BronzeWatch : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.width = 24;

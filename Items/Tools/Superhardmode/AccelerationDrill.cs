@@ -13,11 +13,6 @@ namespace Avalon.Items.Tools.Superhardmode;
 
 public class AccelerationDrill : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -66,11 +61,6 @@ public class AccelerationDrill : ModItem
 public class AccelerationDrillSpeed : ModItem
 {
     public override string Texture => ModContent.GetInstance<AccelerationDrill>().Texture;
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -12,7 +12,6 @@ class ShadowPhone : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
 
@@ -58,7 +57,6 @@ class ShadowPhoneSurface : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
 
@@ -134,7 +132,6 @@ class ShadowPhoneDungeon : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override void SetDefaults()
@@ -231,7 +228,6 @@ class ShadowPhoneOcean : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override void SetDefaults()
@@ -277,7 +273,6 @@ class ShadowPhoneHell : ModItem
     public override void SetStaticDefaults()
     {
         ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-        Item.ResearchUnlockCount = 1;
     }
     public override void SetDefaults()
     {
@@ -321,7 +316,6 @@ class ShadowPhoneJungleTropics : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override void SetDefaults()
@@ -421,7 +415,6 @@ class ShadowPhoneRandom : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
     public override void SetDefaults()
@@ -467,7 +460,6 @@ class ShadowPhoneHome : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
     }
 

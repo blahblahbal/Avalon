@@ -8,10 +8,6 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Legs)]
 class BismuthGreaves : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void AddRecipes()
     {
         CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>(), 25).AddTile(TileID.Anvils).Register();

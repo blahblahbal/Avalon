@@ -10,10 +10,6 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 public class QuantumClaymore : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("'Tear through time to rip apart your foes'\nFires a piercing quantum beam\nTrue melee strikes summon extra non-piercing beams\n[c/C39FDD:10th Anniversary Contest Winner - Waasephi]");
-    }
     public override void SetDefaults()
     {
         Item.width = 40;

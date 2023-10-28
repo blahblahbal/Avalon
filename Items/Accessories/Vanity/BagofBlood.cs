@@ -10,11 +10,6 @@ namespace Avalon.Items.Accessories.Vanity;
 
 internal class BagofBlood : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.rare = ItemRarityID.Green;

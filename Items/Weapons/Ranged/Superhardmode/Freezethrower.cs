@@ -8,11 +8,6 @@ namespace Avalon.Items.Weapons.Ranged.Superhardmode;
 
 internal class Freezethrower : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.width = 42;

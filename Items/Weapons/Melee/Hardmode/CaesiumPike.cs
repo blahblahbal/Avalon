@@ -7,12 +7,6 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class CaesiumPike : ModItem
 {
-    //public override void SetStaticDefaults()
-    //{
-    //    DisplayName.SetDefault("Caesium Pike");
-    //    Tooltip.SetDefault("Explodes with each hit\n'Poke!'");
-    //    SacrificeTotal = 1;
-    //}
     public override void SetDefaults()
     {
         Item.width = 38;

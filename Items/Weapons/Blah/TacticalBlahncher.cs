@@ -14,11 +14,6 @@ namespace Avalon.Items.Weapons.Blah;
 
 internal class TacticalBlahncher : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -9,11 +9,6 @@ namespace Avalon.Items.Accessories.Hardmode;
 [AutoloadEquip(EquipType.Back)]
 class ApollosQuiver : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -8,12 +8,6 @@ namespace Avalon.Items.Tools.Hardmode;
 
 class TroxiniumDrill : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Can mine Ferozium");
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

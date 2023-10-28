@@ -12,7 +12,6 @@ public class BlahStaff : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         Item.staff[Item.type] = true;
     }
 

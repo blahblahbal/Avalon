@@ -14,10 +14,6 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 public class MasterSword : ModItem
 {
     int swingCounter = 0;
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Item.Size = new Vector2(54);

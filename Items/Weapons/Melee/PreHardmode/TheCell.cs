@@ -8,7 +8,6 @@ class TheCell : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
     }
 

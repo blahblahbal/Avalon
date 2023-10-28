@@ -8,11 +8,6 @@ namespace Avalon.Items.Armor.Superhardmode;
 [AutoloadEquip(EquipType.Body)]
 class AeroforceProtector : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

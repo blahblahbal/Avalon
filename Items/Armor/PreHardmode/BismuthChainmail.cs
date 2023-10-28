@@ -8,10 +8,6 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Body)]
 class BismuthChainmail : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void AddRecipes()
     {
         CreateRecipe(1)

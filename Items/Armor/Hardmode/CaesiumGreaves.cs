@@ -9,13 +9,6 @@ namespace Avalon.Items.Armor.Hardmode;
 [AutoloadEquip(EquipType.Legs)]
 class CaesiumGreaves : ModItem
 {
-    //public override void SetStaticDefaults()
-    //{
-    //    DisplayName.SetDefault("Caesium Greaves");
-    //    Tooltip.SetDefault("15% increased melee and movement speed");
-    //    SacrificeTotal = 1;
-    //}
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

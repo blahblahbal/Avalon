@@ -7,11 +7,6 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 class CoughwoodSword : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

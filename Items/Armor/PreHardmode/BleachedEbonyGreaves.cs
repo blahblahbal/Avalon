@@ -8,11 +8,6 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Legs)]
 class BleachedEbonyGreaves : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.width = 18;

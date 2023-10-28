@@ -18,7 +18,6 @@ class WorldgenHelper : ModItem
         Item.width = dims.Width;
         Item.maxStack = 1;
         Item.useAnimation = Item.useTime = 30;
-        //Item.createTile = ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 0;
         Item.height = dims.Height;
@@ -37,39 +36,19 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-            //for (int i = x - 10; i < x + 10; i++)
-            //{
-            //    for (int j = y - 10; j < y + 10; j++)
-            //    {
-            //        if (Main.tile[i, j].TileType == TileID.Stalactite)
-            //        {
-            //            Main.tile[i, j].TileType = (ushort)ModContent.TileType<ContagionStalactgmites>();
-            //        }
-            //    }
-            //}
-            //WorldGen.ShimmerMakeBiome(x, y);
-            //Underworld.MakeSpike2(x, y, (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>(), ln, lx);
-            //Underworld.MakeSpike2(x, y - 1, (ushort)ModContent.TileType<Tiles.Ores.CaesiumOre>(), ln, lx);
+            WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
+
+
+
             //WorldGeneration.Structures.LavaOcean.MakeLavaLake(x, y);
             //WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
-            int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
-            Main.item[rift].velocity *= 0f;
-            Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
+
+
+            //int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
+            //Main.item[rift].velocity *= 0f;
+            //Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
         }
-            //WorldGeneration.Structures.SkyFortress.Generate(x, y);
-
-            //if (player.ItemAnimationJustStarted)
-            //    ClassExtensions.VeinMine(new Point(x, y), TileID.Copper);
-            //{
-            //    WorldGen.PlaceTile(x, y, ModContent.TileType<Tiles.GemTrees.ZirconSapling>());
-            //    WorldGen.GrowTree(x, y);
-            //}
-
-            //    Contagion.ContagionRunner(x, y); //BoreWavyTunnel(x, y, x + 100, y, 50, 4, (ushort)ModContent.TileType<Tiles.Ores.Boltstone>(), 10);
-            //    SkyClouds.MakeCloud(x, y);
-            //WorldGeneration.Utils.MakeSquare(x, y, 10, ModContent.TileType<Tiles.Ores.PrimordialOre>());
-
-            return false;
+        return false;
     }
     public static void GrowCloud(int x, int y)
     {

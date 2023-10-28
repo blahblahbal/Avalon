@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,10 +8,6 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Legs)]
 class ZincGreaves : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void AddRecipes()
     {
         CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 20).AddTile(TileID.Anvils).Register();

@@ -10,11 +10,6 @@ namespace Avalon.Items.Accessories.Hardmode;
 [AutoloadEquip(EquipType.Neck)]
 public class SlitthroatNecklace : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.rare = ItemRarityID.Pink;

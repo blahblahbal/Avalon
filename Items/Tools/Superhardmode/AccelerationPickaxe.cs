@@ -13,10 +13,6 @@ namespace Avalon.Items.Tools.Superhardmode;
 
 public class AccelerationPickaxe : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -72,10 +68,6 @@ public class AccelerationPickaxe : ModItem
 public class AccelerationPickaxeSpeed : ModItem
 {
     public override string Texture => ModContent.GetInstance<AccelerationPickaxe>().Texture;
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

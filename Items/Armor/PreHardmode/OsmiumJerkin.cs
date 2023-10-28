@@ -1,4 +1,4 @@
-﻿using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Bars;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -9,10 +9,6 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Body)]
 public class OsmiumJerkin : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Item.defense = 8;

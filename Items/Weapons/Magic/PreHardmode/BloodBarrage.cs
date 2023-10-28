@@ -9,12 +9,6 @@ namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
 class BloodBarrage : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //DisplayName.SetDefault("Blood Barrage");
-        //Tooltip.SetDefault("Uses 4 life\nReturns life on hit");
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Item.DamageType = DamageClass.Magic;

@@ -7,11 +7,6 @@ namespace Avalon.Items.Accessories.Hardmode;
 
 class SixHundredWattLightbulb : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override Color? GetAlpha(Color lightColor)
     {
         return Color.White;

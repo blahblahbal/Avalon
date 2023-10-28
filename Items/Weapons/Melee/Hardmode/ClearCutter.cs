@@ -15,10 +15,6 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 public class ClearCutter : ModItem
 {
     int swingCounter = 0;
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override bool MeleePrefix()
     {
         return true;

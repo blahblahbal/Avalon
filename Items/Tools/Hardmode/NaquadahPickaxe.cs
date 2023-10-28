@@ -7,12 +7,6 @@ namespace Avalon.Items.Tools.Hardmode;
 
 class NaquadahPickaxe : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Can mine Adamantite, Titanium, and Troxinium");
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -37,7 +37,7 @@ class InertiaBootsSlower : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        //player.Avalon().noSticky = true;
+        player.GetModPlayer<AvalonPlayer>().NoSticky = true;
         player.GetModPlayer<AvalonPlayer>().NoSticky = true;
         player.accRunSpeed = 8.29f;
         // ADD BACK AFTER CAESIUM ARMOR ADDED

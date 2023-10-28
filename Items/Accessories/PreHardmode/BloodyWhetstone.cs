@@ -8,11 +8,6 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 internal class BloodyWhetstone : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.rare = ItemRarityID.LightRed;

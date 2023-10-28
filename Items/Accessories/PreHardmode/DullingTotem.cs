@@ -6,11 +6,6 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 class DullingTotem : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.lifeRegen = 2;

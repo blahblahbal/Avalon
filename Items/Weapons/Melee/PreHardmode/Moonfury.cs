@@ -9,7 +9,6 @@ class Moonfury : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
     }
     public override void SetDefaults()

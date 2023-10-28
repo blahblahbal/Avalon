@@ -8,11 +8,6 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
 class EnchantedShuriken : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //DisplayName.SetDefault("Enchanted Shuriken");
-        //Item.ResearchUnlockCount = 99;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

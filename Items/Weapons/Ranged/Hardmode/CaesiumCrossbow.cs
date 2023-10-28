@@ -8,12 +8,6 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode;
 
 class CaesiumCrossbow : ModItem
 {
-    //public override void SetStaticDefaults()
-    //{
-    //    DisplayName.SetDefault("Caesium Crossbow");
-    //    Tooltip.SetDefault("Converts wooden arrows into hellfire arrows");
-    //    SacrificeTotal = 1;
-    //}
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

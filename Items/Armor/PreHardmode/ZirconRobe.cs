@@ -9,10 +9,6 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Body)]
 class ZirconRobe : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void Load()
     {
         if (Main.netMode == NetmodeID.Server) return;

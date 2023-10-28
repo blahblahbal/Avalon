@@ -24,7 +24,7 @@ namespace Avalon.Hooks
                 Item item = self.ChooseAmmo(sItem);
                 if (item.type == ModContent.ItemType<SnotsandBlock>())
                 {
-                    projToShoot = ModContent.ProjectileType<SnotsandBall>();
+                    projToShoot = ModContent.ProjectileType<SnotsandSandgunProjectile>();
                     totalDamage += 5;
                 }
             }

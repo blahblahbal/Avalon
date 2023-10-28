@@ -7232,6 +7232,11 @@ Mods: {
 				DisplayName: Icky Arrow
 				Tooltip: ""
 			}
+
+			NestBlock: {
+				DisplayName: Nest Block
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7426,6 +7431,7 @@ Mods: {
 			IckyArrow.DisplayName: Icky Arrow
 			EnergyLaser.DisplayName: Energy Laser
 			LongboneCurse.DisplayName: Longbone Curse
+			SnotsandSandgunProjectile.DisplayName: Sandgun
 		}
 
 		NPCs: {

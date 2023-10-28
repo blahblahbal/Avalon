@@ -14,11 +14,6 @@ public class StasisRifle : ModItem
     {
         return false;
     }
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.width = 14;

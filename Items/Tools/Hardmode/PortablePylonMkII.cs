@@ -29,11 +29,6 @@ internal class WaypointSystemMkII : ModSystem
 }
 public class PortablePylonMkIIPoint1 : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-    
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -116,11 +111,6 @@ public class PortablePylonMkIIPoint1 : ModItem
 
 public class PortablePylonMkIIPoint2 : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -186,11 +176,6 @@ public class PortablePylonMkIIPoint2 : ModItem
 
 public class PortablePylonMkIIPoint3 : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

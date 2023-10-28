@@ -1,4 +1,4 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,11 +6,6 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 internal class BandofSlime : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.rare = ItemRarityID.Blue;

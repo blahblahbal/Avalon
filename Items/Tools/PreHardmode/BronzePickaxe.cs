@@ -5,10 +5,6 @@ namespace Avalon.Items.Tools.PreHardmode;
 
 public class BronzePickaxe : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.TinPickaxe);

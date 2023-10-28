@@ -11,7 +11,6 @@ internal class BismuthBarbedNet : ModItem
     {
         ItemID.Sets.CatchingTool[Item.type] = true;
         ItemID.Sets.LavaproofCatchingTool[Item.type] = true;
-        Item.ResearchUnlockCount = 1;
     }
 
     public override void SetDefaults()

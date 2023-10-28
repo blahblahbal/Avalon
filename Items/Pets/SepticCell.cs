@@ -7,10 +7,6 @@ namespace Avalon.Items.Pets;
 
 class SepticCell : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {
         if (player.whoAmI == Main.myPlayer && player.itemTime == 0)

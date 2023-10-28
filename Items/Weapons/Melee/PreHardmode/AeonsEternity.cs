@@ -12,11 +12,6 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 public class AeonsEternity : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override Color? GetAlpha(Color lightColor)
     {
         return new Color(255, 255, 255, 128);

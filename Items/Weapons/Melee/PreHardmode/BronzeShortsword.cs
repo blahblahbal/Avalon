@@ -5,11 +5,6 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 class BronzeShortsword : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.TinShortsword);

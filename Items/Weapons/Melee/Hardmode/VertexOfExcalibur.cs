@@ -9,12 +9,6 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class VertexOfExcalibur : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //"Deals more damage to enemies affected by a debuff\n'The unification of dark and light'"
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override bool MeleePrefix()
     {
         return true;
