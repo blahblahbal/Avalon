@@ -20,7 +20,7 @@ namespace Avalon.Common
 
         public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
         {
-            if (item.netID <= 5455 && ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+            if (item.netID <= 5455)
             {
                 if (item.useAmmo == AmmoID.Rocket)
                 {
@@ -36,33 +36,33 @@ namespace Avalon.Common
                 }
                 else if (item.UseSound == SoundID.Item11 || item.type == ItemID.DartPistol || item.type == ItemID.DartRifle)
                 {
-                    UseStyles.ShotgunStyle(player, 0.01f, 3f, 0.2f);
+                    UseStyles.ShotgunStyle(player, 0.01f, 3f, 0f);
                 }
                 else if (item.UseSound == SoundID.Item41)
                 {
-                    UseStyles.ShotgunStyle(player, 0.015f, 3f, 0.3f);
+                    UseStyles.ShotgunStyle(player, 0.015f, 3f, 0f);
                 }
                 else if (item.useAmmo == AmmoID.Bullet && item.type != ItemID.ClockworkAssaultRifle)
                 {
-                    UseStyles.ShotgunStyle(player, 0.010f, 2f, 0.3f);
+                    UseStyles.ShotgunStyle(player, 0.010f, 2f, 0f);
                 }
             }
         }
         public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (player.whoAmI == Main.myPlayer && ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
-            {
-                PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 1f, 3f, 15, 300f, player.name);
-                Main.instance.CameraModifiers.Add(modifier);
-            }
+            //if (player.whoAmI == Main.myPlayer && ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+            //{
+            //    PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 1f, 3f, 15, 300f, player.name);
+            //    Main.instance.CameraModifiers.Add(modifier);
+            //}
         }
         public override void OnHitPvp(Item item, Player player, Player target, Player.HurtInfo hurtInfo)
         {
-            if (player.whoAmI == Main.myPlayer && ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
-            {
-                PunchCameraModifier modifier = new PunchCameraModifier(target.MountedCenter, Main.rand.NextVector2Circular(1, 1), 1f, 3f, 15, 300f, player.name);
-                Main.instance.CameraModifiers.Add(modifier);
-            }
+            //if (player.whoAmI == Main.myPlayer && ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+            //{
+            //    PunchCameraModifier modifier = new PunchCameraModifier(target.MountedCenter, Main.rand.NextVector2Circular(1, 1), 1f, 3f, 15, 300f, player.name);
+            //    Main.instance.CameraModifiers.Add(modifier);
+            //}
         }
     }
     public class AddScreenshakeToVanillaProjectiles : GlobalProjectile
@@ -77,25 +77,25 @@ namespace Avalon.Common
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
-            {
-                if (Main.player[projectile.owner].whoAmI == Main.myPlayer && (projectile.DamageType == DamageClass.Melee || projectile.DamageType == DamageClass.SummonMeleeSpeed))
-                {
-                    PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 1f, 3f, 15, 300f, Main.player[projectile.owner].name);
-                    Main.instance.CameraModifiers.Add(modifier);
-                }
-            }
+            //if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+            //{
+            //    if (Main.player[projectile.owner].whoAmI == Main.myPlayer && (projectile.DamageType == DamageClass.Melee || projectile.DamageType == DamageClass.SummonMeleeSpeed))
+            //    {
+            //        PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 1f, 3f, 15, 300f, Main.player[projectile.owner].name);
+            //        Main.instance.CameraModifiers.Add(modifier);
+            //    }
+            //}
         }
         public override void OnHitPlayer(Projectile projectile, Player target, Player.HurtInfo info)
         {
-            if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
-            {
-                if (Main.player[projectile.owner].whoAmI == Main.myPlayer && (projectile.DamageType == DamageClass.Melee || projectile.DamageType == DamageClass.SummonMeleeSpeed))
-                {
-                    PunchCameraModifier modifier = new PunchCameraModifier(target.MountedCenter, Main.rand.NextVector2Circular(1, 1), 1f, 3f, 15, 300f, Main.player[projectile.owner].name);
-                    Main.instance.CameraModifiers.Add(modifier);
-                }
-            }
+            //if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+            //{
+            //    if (Main.player[projectile.owner].whoAmI == Main.myPlayer && (projectile.DamageType == DamageClass.Melee || projectile.DamageType == DamageClass.SummonMeleeSpeed))
+            //    {
+            //        PunchCameraModifier modifier = new PunchCameraModifier(target.MountedCenter, Main.rand.NextVector2Circular(1, 1), 1f, 3f, 15, 300f, Main.player[projectile.owner].name);
+            //        Main.instance.CameraModifiers.Add(modifier);
+            //    }
+            //}
                 
         }
         public override void OnSpawn(Projectile projectile, IEntitySource source)

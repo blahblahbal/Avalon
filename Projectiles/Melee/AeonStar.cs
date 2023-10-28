@@ -159,7 +159,17 @@ public class AeonStar : ModProjectile
         //    particleOrchestraSettings.MovementVector = Vector2.Zero;
         //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.Excalibur, settings, Projectile.owner);
         //}
-        ParticleSystem.AddParticle(new AeonStarburst(), Projectile.Center, Vector2.Zero, default);
+
+        Projectile lastStar = (Projectile.ai[0] != -255) ? Main.projectile[(int)Projectile.ai[0]] : Projectile;
+        if (!lastStar.active)
+        {
+            lastStar = Projectile;
+        }
+        ParticleSystem.AddParticle(new AeonStarburst(), Projectile.Center, Vector2.Zero, Color.Yellow,Projectile.rotation,2);
+        if(lastStar == Projectile)
+        {
+            ParticleSystem.AddParticle(new AeonStarburst(), Projectile.Center, Vector2.Zero, Color.Red, Projectile.rotation + MathHelper.Pi,3);
+        }
     }
 }
 

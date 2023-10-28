@@ -52,7 +52,7 @@ public class DesertBeak : ModNPC
         NPC.lifeMax = 3650;
         NPC.defense = 30;
         NPC.noGravity = true;
-        NPC.width = 64;
+        NPC.width = 128;
         NPC.aiStyle = -1;
         NPC.npcSlots = 100f;
         NPC.value = 50000f;

@@ -1,4 +1,5 @@
 using System;
+using Avalon.Particles;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -31,6 +32,14 @@ public class AeonsEternity : ModItem
         Item.DamageType = DamageClass.Melee;
         Item.shootSpeed = 8f;
         Item.shoot = ModContent.ProjectileType<AeonBeam>();
+    }
+    public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+    {
+        ParticleSystem.AddParticle(new AeonStarburst(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, Color.Cyan, Main.rand.NextFloat(MathHelper.TwoPi), 1.5f);
+    }
+    public override void OnHitPvp(Player player, Player target, Player.HurtInfo hurtInfo)
+    {
+        ParticleSystem.AddParticle(new AeonStarburst(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, Color.Cyan, Main.rand.NextFloat(MathHelper.TwoPi), 1.5f);
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
