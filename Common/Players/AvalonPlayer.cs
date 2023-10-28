@@ -18,6 +18,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameInput;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.Map;
@@ -535,7 +536,8 @@ public class AvalonPlayer : ModPlayer
                     dustType = DustID.HallowedWeapons;
                 }
                 var newColor = default(Color);
-                var num = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, dustType, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 100, newColor, 2f);
+                var num = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, dustType, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 100, newColor, 1.55f);
+                Main.dust[num].shader = GameShaders.Armor.GetSecondaryShader(Player.cShoe, Player);
                 Main.dust[num].noGravity = true;
                 if (superSonic)
                 {
