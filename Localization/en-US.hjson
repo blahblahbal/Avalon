@@ -7161,7 +7161,7 @@ Mods: {
 
 			Windshield: {
 				DisplayName: Windshield
-				Tooltip: ""
+				Tooltip: Immunity to Mighty Winds
 			}
 
 			DesertBeakRelic: {
@@ -7240,7 +7240,7 @@ Mods: {
 
 			GaseousTsunamiRocketinaJar: {
 				DisplayName: Gaseous Tsunami Rocket in a Jar
-				Tooltip: ""
+				Tooltip: Allows the holder to quadruple jump
 			}
 		}
 
