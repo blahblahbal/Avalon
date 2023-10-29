@@ -36,9 +36,7 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-            WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
-
-
+            //WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
 
             //WorldGeneration.Structures.LavaOcean.MakeLavaLake(x, y);
             //WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
