@@ -7237,6 +7237,11 @@ Mods: {
 				DisplayName: Nest Block
 				Tooltip: ""
 			}
+
+			GaseousTsunamiRocketinaJar: {
+				DisplayName: Gaseous Tsunami Rocketina Jar
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

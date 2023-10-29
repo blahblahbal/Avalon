@@ -73,7 +73,7 @@ internal class Shrines : GenPass
             WallID.IceBrick
         };
 
-        int amtOfBiomes = (int)((float)(Main.maxTilesX / 4200) * 2 + 1);
+        /*int amtOfBiomes = (int)((float)(Main.maxTilesX / 4200) * 2 + 1);
         float num613 = (Main.maxTilesX - 250) / amtOfBiomes;
         int num614 = 0;
 
@@ -118,9 +118,9 @@ internal class Shrines : GenPass
                 lastPos.Add(point);
                 num614++;
             }
-        }
+        }*/
 
-        for (int q = 0; q < 2; q++)
+        for (int q = 0; q < 3; q++)
         {
             var x10 = WorldGen.genRand.Next(200, Main.maxTilesX - 200);
             var y6 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY - 300);
@@ -160,7 +160,7 @@ internal class Shrines : GenPass
             }
             if (q == 0) Structures.IceShrine.Generate(x10, y6);
             else if (q == 1) Structures.EvilShrine.GenerateEvilShrine(x10, y6);
-            //else if (q == 2) Structures.LavaShrine.AddLavaShrine(x10, y6);
+            else if (q == 2) Structures.LavaShrine.NewLavaShrine(x10, y6);
         }
     }
 }
