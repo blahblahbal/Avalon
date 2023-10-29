@@ -27,7 +27,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     //float cloud = tex2D(uImage1, cloudCoords + float2((sin(uTime * 0.05) * 0.5) + 0.5, sin(uTime * 0.005) * 1)) + tex2D(uImage1, cloudCoords2 + float2((sin(uTime * 0.05) * 0.5) + 0.5, sin(uTime * 0.005) * 1));
     
     float cloud = tex2D(uImage1, cloudCoords + float2(uTime * 0.04, uTime * 0.01)) + tex2D(uImage1, cloudCoords2 + float2(uTime * 0.03, uTime * 0.01));
-    float cloud2 = tex2D(uImage1, cloudCoords + float2(uTime * 0.01, uTime * 0.02)) + tex2D(uImage1, cloudCoords2 + float2(uTime * 0.02, uTime * 0.03) + cloud);
+    //float cloud2 = tex2D(uImage1, cloudCoords + float2(uTime * 0.01, uTime * 0.02)) + tex2D(uImage1, cloudCoords2 + float2(uTime * 0.02, uTime * 0.03) + cloud);
     
     if ((cloud <= 0.93 && cloud >= 0.88) || (cloud <= 0.73 && cloud >= 0.68) || (cloud <= 0.53 && cloud >= 0.48) || (cloud <= 0.33 && cloud >= 0.28) || (cloud <= 0.13 && cloud >= 0.08))
     {

@@ -22,12 +22,13 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     
     if (!any(color))
         return color;
-    float2 cloudCoords2 = ((coords * uImageSize0 - uSourceRect.xy * 0.5) / float2(uImageSize1.x, uImageSize1.y)) + 0.5;
+    float2 cloudCoords2 = ((coords * uImageSize0 - uSourceRect.xy) / float2(uImageSize1.x * 0.8, uImageSize1.y)) + 0.5;
     float2 cloudCoords = ((coords * uImageSize0 - uSourceRect.xy) / float2(uImageSize1.x, uImageSize1.y) * 0.5) + 0.5;
-    float cloud = tex2D(uImage1, cloudCoords + float2((sin(uTime * 0.05) * 0.5) + 0.5, sin(uTime * 0.005) * 1)) + tex2D(uImage1, cloudCoords2 + float2((sin(uTime * 0.05) * 0.5) + 0.5, sin(uTime * 0.005) * 1));
     
+    float cloud = tex2D(uImage1, cloudCoords + float2(uTime * 0.01, uTime * 0.005)) + tex2D(uImage1, cloudCoords2 + float2(uTime * 0.01, uTime * 0.005));
+
     float gray = dot(color.rgb, float3(0.2, 0.75, 0.15));
-    color = float4(float3(gray, gray, gray), 1);
+    color = float4(float3(gray, gray, gray), color.a);
     
     const float t0 = 0.05;
     const float t1 = 0.2;
