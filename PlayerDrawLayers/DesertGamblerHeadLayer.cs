@@ -45,7 +45,10 @@ public class DesertGamblerHeadLayer : PlayerDrawLayer
                 helmoffset + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - drawInfo.drawPlayer.bodyFrame.Width / 2 + drawInfo.drawPlayer.width / 2),
                 (int)(drawInfo.Position.Y - Main.screenPosition.Y + drawInfo.drawPlayer.height - drawInfo.drawPlayer.bodyFrame.Height + 4f)) - new Vector2(0, 2) + drawInfo.drawPlayer.headPosition + drawInfo.headVect,
                 drawInfo.drawPlayer.bodyFrame, drawInfo.colorArmorHead, drawInfo.drawPlayer.headRotation, drawInfo.headVect, 1f, drawInfo.playerEffect);
-            value.shader = drawInfo.cHead;
+
+            int index = p.HasItemInArmorReturnIndex(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>());
+            if (index >= 10) index -= 10;
+            if (index > -1) value.shader = p.dye[index].dye;
             drawInfo.DrawDataCache.Add(value);
         }
     }
