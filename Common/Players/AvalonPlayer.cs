@@ -536,7 +536,7 @@ public class AvalonPlayer : ModPlayer
                     dustType = DustID.HallowedWeapons;
                 }
                 var newColor = default(Color);
-                var num = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, dustType, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 100, newColor, 1.55f);
+                var num = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, dustType, Main.rand.Next(-5, 5), Main.rand.Next(-5, 5), 50, newColor, 1.55f);
                 Main.dust[num].shader = GameShaders.Armor.GetSecondaryShader(Player.cShoe, Player);
                 Main.dust[num].noGravity = true;
                 if (superSonic)

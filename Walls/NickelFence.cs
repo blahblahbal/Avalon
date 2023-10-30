@@ -11,7 +11,7 @@ public class NickelFence : ModWall
     {
         Main.wallHouse[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.NickelFence>();
-        AddMapEntry(new Color(52, 78, 85));
+        //AddMapEntry(new Color(52, 78, 85));
         DustType = ModContent.DustType<Dusts.NickelDust>();
         Main.wallLight[Type] = true;
         WallID.Sets.AllowsWind[Type] = true;
