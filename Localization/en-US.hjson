@@ -7242,6 +7242,11 @@ Mods: {
 				DisplayName: Gaseous Tsunami Rocket in a Jar
 				Tooltip: Allows the holder to quadruple jump
 			}
+
+			BasaltPillar: {
+				DisplayName: Basalt Pillar
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
