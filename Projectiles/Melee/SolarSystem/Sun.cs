@@ -89,6 +89,10 @@ public class Sun : ModProjectile
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
                             Projectile.velocity, ModContent.ProjectileType<Pluto>(), (int)(Projectile.damage * 0.65f),
                             Projectile.knockBack, ai0: 8, ai1: Projectile.whoAmI);
+                        if (ExxoAvalonOrigins.Achievements != null)
+                        {
+                            ExxoAvalonOrigins.Achievements.Call("Event", "SolarSystemPluto");
+                        }
                     }
                     else
                     {

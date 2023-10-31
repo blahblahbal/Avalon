@@ -26,6 +26,53 @@ Mods: {
 	}
 
 	Avalon: {
+		Achievements: {
+			TheFiveSword: {
+				Name: The Five Sword
+				Description: Craft Aeon's Eternity.
+			}
+
+			Boosted: {
+				Name: Boosted!
+				Description: Use a Stamina Crystal to increase your Stamina.
+			}
+
+			LuckyStiff: {
+				Name: Lucky Stiff
+				Description: Obtain a real Four Leaf Clover from breaking tall grass.
+			}
+
+			SolarSystemPluto: {
+				Name: Wait, It's Not a Planet?!
+				Description: Have Pluto show up when using the Solar System.
+			}
+
+			FalseAlarm: {
+				Name: False Alarm!
+				Description: Cancel an invasion by using either a False Treasure Map or a Goblin Retreat Order.
+			}
+
+			Safe: {
+				Name: Safe!
+				Description: Craft Guardian Boots.
+			}
+
+			Rock: {
+				Name: Vandalism
+				Description: Throw a Rock at glass to smash it into pieces.
+			}
+
+            Hellcastle: {
+				Name: Wall of Flesh's House?
+				Description: Break through the entrance to the Hellcastle, home of Phantasm.
+			}
+
+            DesertBeak: {
+				Name: Watch the talons!
+				Description: Defeat the overseer of the Desert, Desert Beak.
+			}
+		}
+
 		Potions: Potions
 		ContagionKey.AfterPlantera: Unlocks a Contagion Chest in the dungeon
 
@@ -7247,6 +7294,16 @@ Mods: {
 				DisplayName: Basalt Pillar
 				Tooltip: ""
 			}
+
+			Rock: {
+				DisplayName: Rock
+				Tooltip:
+					'''
+					Used for crafting the Eye of Oblivion
+					Throwable
+					'Don't throw it at a window!'
+					'''
+			}
 		}
 
 		InfoDisplays: {
@@ -7442,6 +7499,7 @@ Mods: {
 			EnergyLaser.DisplayName: Energy Laser
 			LongboneCurse.DisplayName: Longbone Curse
 			SnotsandSandgunProjectile.DisplayName: Sandgun
+			ThrowingRock.DisplayName: Throwing Rock
 		}
 
 		NPCs: {

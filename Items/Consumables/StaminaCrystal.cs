@@ -2,6 +2,7 @@ using Avalon.Common.Players;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Achievements;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -39,6 +40,10 @@ class StaminaCrystal : ModItem
         player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax += 30;
         player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 += 30;
         player.GetModPlayer<AvalonStaminaPlayer>().StatStam += 30;
+        if (ExxoAvalonOrigins.Achievements != null)
+        {
+            ExxoAvalonOrigins.Achievements.Call("Event", "UseStaminaCrystal");
+        }
         return true;
     }
     public override void AddRecipes()

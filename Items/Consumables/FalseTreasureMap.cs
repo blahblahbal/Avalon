@@ -35,6 +35,10 @@ class FalseTreasureMap : ModItem
     public override bool? UseItem(Player player)
     {
         Main.invasionSize = 0;
+        if (ExxoAvalonOrigins.Achievements != null)
+        {
+            ExxoAvalonOrigins.Achievements.Call("Event", "FalseAlarm");
+        }
         SoundEngine.PlaySound(SoundID.Roar, player.position);
         return true;
     }
