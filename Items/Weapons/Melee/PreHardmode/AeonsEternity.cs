@@ -27,7 +27,8 @@ public class AeonsEternity : ModItem
         Item.value = Item.sellPrice(0, 1, 0, 0);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.autoReuse = true;
-        Item.useTurn = false;
+        //Item.useTurn = true;
+        Item.useTurnOnAnimationStart = true;
         Item.rare = ItemRarityID.Pink;
         Item.DamageType = DamageClass.Melee;
         Item.shootSpeed = 8f;

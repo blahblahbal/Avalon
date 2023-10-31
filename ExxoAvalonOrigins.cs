@@ -144,17 +144,16 @@ public class ExxoAvalonOrigins : Mod
     }
     private void ReplaceVanillaTextures()
     {
-        if (DragonLens != null)
-        {
-            return;
-        }
+        //if (DragonLens != null)
+        //{
+        //    return;
+        //}
         var itemReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Item);
         assetReplacers.Add(itemReplacer);
         itemReplacer.ReplaceAsset(ItemID.HallowedKey, Assets.Request<Texture2D>("Assets/Vanilla/Items/HallowedKey"));
         itemReplacer.ReplaceAsset(ItemID.MagicDagger, Assets.Request<Texture2D>("Assets/Vanilla/Items/MagicDagger"));
         itemReplacer.ReplaceAsset(ItemID.PaladinBanner, Assets.Request<Texture2D>("Assets/Vanilla/Items/PaladinBanner"));
-        itemReplacer.ReplaceAsset(ItemID.PossessedArmorBanner,
-            Assets.Request<Texture2D>("Assets/Vanilla/Items/PossessedArmorBanner"));
+        itemReplacer.ReplaceAsset(ItemID.PossessedArmorBanner, Assets.Request<Texture2D>("Assets/Vanilla/Items/PossessedArmorBanner"));
         itemReplacer.ReplaceAsset(ItemID.BoneLeeBanner, Assets.Request<Texture2D>("Assets/Vanilla/Items/BoneLeeBanner"));
         itemReplacer.ReplaceAsset(ItemID.AngryTrapperBanner, Assets.Request<Texture2D>("Assets/Vanilla/Items/AngryTrapperBanner"));
         itemReplacer.ReplaceAsset(ItemID.Deathweed, Assets.Request<Texture2D>("Assets/Vanilla/Items/Deathweed"));
@@ -168,16 +167,12 @@ public class ExxoAvalonOrigins : Mod
         itemReplacer.ReplaceAsset(ItemID.CrimsonSeeds, Assets.Request<Texture2D>("Assets/Vanilla/Items/CrimsonSeeds"));
         itemReplacer.ReplaceAsset(ItemID.CrimtaneBar, Assets.Request<Texture2D>("Assets/Vanilla/Items/CrimtaneBar"));
         itemReplacer.ReplaceAsset(ItemID.HellstoneBar, Assets.Request<Texture2D>("Assets/Vanilla/Items/HellstoneBar"));
-        itemReplacer.ReplaceAsset(ItemID.ShroomiteDiggingClaw,
-            Assets.Request<Texture2D>("Assets/Vanilla/Items/ShroomiteDiggingClaws"));
-        itemReplacer.ReplaceAsset(ItemID.BloodMoonStarter,
-            Assets.Request<Texture2D>("Assets/Vanilla/Items/BloodyAmulet"));
-        itemReplacer.ReplaceAsset(ItemID.PulseBow,
-            Assets.Request<Texture2D>("Assets/Vanilla/Items/PulseBow"));
-        itemReplacer.ReplaceAsset(ItemID.Bell,
-            Assets.Request<Texture2D>("Assets/Vanilla/Items/Bell"));
-        itemReplacer.ReplaceAsset(ItemID.FairyBell,
-            Assets.Request<Texture2D>("Assets/Vanilla/Items/FairyBell"));
+        itemReplacer.ReplaceAsset(ItemID.ShroomiteDiggingClaw, Assets.Request<Texture2D>("Assets/Vanilla/Items/ShroomiteDiggingClaws"));
+        itemReplacer.ReplaceAsset(ItemID.BloodMoonStarter, Assets.Request<Texture2D>("Assets/Vanilla/Items/BloodyAmulet"));
+        itemReplacer.ReplaceAsset(ItemID.PulseBow, Assets.Request<Texture2D>("Assets/Vanilla/Items/PulseBow"));
+        itemReplacer.ReplaceAsset(ItemID.Bell, Assets.Request<Texture2D>("Assets/Vanilla/Items/Bell"));
+        itemReplacer.ReplaceAsset(ItemID.FairyBell, Assets.Request<Texture2D>("Assets/Vanilla/Items/FairyBell"));
+        itemReplacer.ReplaceAsset(ItemID.TerraBlade, Assets.Request<Texture2D>("Assets/Vanilla/Items/Terrablade"));
 
         var tileReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Tile);
         assetReplacers.Add(tileReplacer);

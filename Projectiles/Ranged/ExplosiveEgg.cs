@@ -44,7 +44,7 @@ public class ExplosiveEgg : ModProjectile
     {
         if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
         {
-            PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Circular(1, 1), 12, 15f, 15, 1200f, Projectile.Name);
+            PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Circular(1, 1), 7, 15f, 15, 800f, Projectile.Name);
             Main.instance.CameraModifiers.Add(modifier);
         }
 
