@@ -62,17 +62,17 @@ Mods: {
 				Description: Throw a Rock at glass to smash it into pieces.
 			}
 
-            Hellcastle: {
+			Hellcastle: {
 				Name: Wall of Flesh's House?
 				Description: Break through the entrance to the Hellcastle, home of Phantasm.
 			}
 
-            DesertBeak: {
+			DesertBeak: {
 				Name: Watch the talons!
 				Description: Defeat the overseer of the Desert, Desert Beak.
 			}
 
-            BacteriumPrime: {
+			BacteriumPrime: {
 				Name: Sulfonamided
 				Description: Defeat the Contagion's biggest threat - Bacterium Prime.
 			}
@@ -7309,6 +7309,21 @@ Mods: {
 					'Don't throw it at a window!'
 					'''
 			}
+
+			BasaltBlock: {
+				DisplayName: Basalt Block
+				Tooltip: ""
+			}
+
+			BasaltPillarWall: {
+				DisplayName: Basalt Pillar Wall
+				Tooltip: ""
+			}
+
+			TrueAeonsEternity: {
+				DisplayName: True Aeons Eternity
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7505,6 +7520,7 @@ Mods: {
 			LongboneCurse.DisplayName: Longbone Curse
 			SnotsandSandgunProjectile.DisplayName: Sandgun
 			ThrowingRock.DisplayName: Throwing Rock
+			TrueAeonStar.DisplayName: True Aeon Star
 		}
 
 		NPCs: {

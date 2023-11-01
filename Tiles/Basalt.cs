@@ -11,8 +11,9 @@ public class Basalt : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(162, 255, 95));
+        AddMapEntry(new Color(39, 40, 42));
         Main.tileSolid[Type] = true;
+        Main.tileBlockLight[Type] = true;
         TileID.Sets.ForcedDirtMerging[Type] = true;
         HitSound = SoundID.Tink;
         DustType = DustID.Wraith;

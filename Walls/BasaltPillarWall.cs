@@ -10,7 +10,7 @@ public class BasaltPillarWall : ModWall
     public override void SetStaticDefaults()
     {
         Main.wallHouse[Type] = true;
-        AddMapEntry(new Color(10, 10, 10));
+        AddMapEntry(new Color(25, 25, 25));
         DustType = DustID.Wraith;
     }
 }
