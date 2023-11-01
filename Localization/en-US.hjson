@@ -71,6 +71,11 @@ Mods: {
 				Name: Watch the talons!
 				Description: Defeat the overseer of the Desert, Desert Beak.
 			}
+
+            BacteriumPrime: {
+				Name: Sulfonamided
+				Description: Defeat the Contagion's biggest threat - Bacterium Prime.
+			}
 		}
 
 		Potions: Potions
@@ -92,7 +97,7 @@ Mods: {
 		BossChecklist: {
 			SpawnInfo: {
 				BacteriumPrime: Use an [i:Avalon/InfestedCarcass] in the Contagion.
-				DesertBeak: Use [i:Avalon/ColossalTalon] in the Desert.
+				DesertBeak: Use [i:Avalon/DesertHorn] in the Desert.
 			}
 		}
 
