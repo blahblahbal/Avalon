@@ -506,6 +506,16 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdate()
     {
+        if (Player.HasItem(ItemID.LargeRuby) && Player.HasItem(ItemID.LargeAmber) && Player.HasItem(ItemID.LargeTopaz) && Player.HasItem(ModContent.ItemType<LargePeridot>()) &&
+            Player.HasItem(ItemID.LargeEmerald) && Player.HasItem(ModContent.ItemType<LargeTourmaline>()) && Player.HasItem(ItemID.LargeSapphire) && Player.HasItem(ItemID.LargeAmethyst) &&
+            Player.HasItem(ItemID.LargeDiamond) && Player.HasItem(ModContent.ItemType<LargeZircon>()))
+        {
+            ExxoAvalonOrigins.Achievements?.Call("Event", "HaveAllLargeGems");
+        }
+        if (Player.position.Y / 16 - Player.fallStart >= Main.maxTilesY / 3 * 2)
+        {
+            ExxoAvalonOrigins.Achievements?.Call("Event", "Hellevator");
+        }
         DesertBeakSpawnTimer--;
         if (DesertBeakSpawnTimer == 0)
         {

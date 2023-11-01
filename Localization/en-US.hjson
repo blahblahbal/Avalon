@@ -76,6 +76,21 @@ Mods: {
 				Name: Sulfonamided
 				Description: Defeat the Contagion's biggest threat - Bacterium Prime.
 			}
+
+			Gems: {
+				Name: Massive Gems
+				Description: Have every Large Gem in your inventory at the same time.
+			}
+
+			Fatality: {
+				Name: Fatality...
+				Description: Drink Bottled Lava and suffer the consequences.
+			}
+
+			Hellevator: {
+				Name: Look Out Below
+				Description: Fall all the way from the surface to the Underworld without touching the ground.
+			}
 		}
 
 		Potions: Potions

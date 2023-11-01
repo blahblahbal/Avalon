@@ -25,6 +25,9 @@ namespace Avalon.Compatability.Achievements
             ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Rock", AchievementCategory.Slayer, "Avalon/Assets/Textures/Achievements/Rock", null, false, false, 3.5f, new string[] { "Event_BreakGlassWithRock" });
             ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Hellcastle", AchievementCategory.Explorer, "Avalon/Assets/Textures/Achievements/WoFsHouse", null, false, false, 37f, new string[] { "Mine_" + ModContent.TileType<UltraResistantWood>() });
             ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "DesertBeak", AchievementCategory.Slayer, "Avalon/Assets/Textures/Achievements/DesertBeak", null, false, false, 7.5f, new string[] { "Kill_" + ModContent.NPCType<NPCs.Bosses.PreHardmode.DesertBeak>() });
+            ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Fatality", AchievementCategory.Slayer, "Avalon/Assets/Textures/Achievements/Fatality", null, false, false, 5f, new string[] { "Event_DrinkBottledLava" });
+            ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Gems", AchievementCategory.Collector, "Avalon/Assets/Textures/Achievements/Gems", null, false, false, 10f, new string[] { "Event_HaveAllLargeGems" });
+            ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Hellevator", AchievementCategory.Explorer, "Avalon/Assets/Textures/Achievements/Hellevator", null, false, false, 12f, new string[] { "Event_Hellevator" });
         }
     }
 }
