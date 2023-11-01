@@ -82,6 +82,16 @@ public class AeonsEternity : ModItem
     }
     public override void MeleeEffects(Player player, Rectangle hitbox)
     {
+
+        ClassExtensions.GetPointOnSwungItemPath(60f, 60f, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
+        Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * (float)player.direction * player.gravDir);
+        int num15 = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.GemDiamond, player.velocity.X * 0.2f + (float)(player.direction * 3), player.velocity.Y * 0.2f, 140, default(Color), 0.7f);
+        Main.dust[num15].position = location2;
+        //Main.dust[num15].fadeIn = 1.2f;
+        Main.dust[num15].noGravity = true;
+        Main.dust[num15].velocity *= 0.25f;
+        Main.dust[num15].velocity += vector2 * 5f;
+
         //if (Main.rand.NextBool(2))
         //{
         //    int num208 = Main.rand.Next(3);
@@ -114,20 +124,20 @@ public class AeonsEternity : ModItem
         //        }
         //    }
         //}
-        if (player.itemTime % 4 == 0)
-        {
-            int type = Main.rand.Next(2);
-            ClassExtensions.GetPointOnSwungItemPath(60f, 60f, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
-            Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * (float)player.direction * player.gravDir);
-            ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
-            particleOrchestraSettings.PositionInWorld = location2;
-            particleOrchestraSettings.MovementVector = Vector2.Zero;
-            ParticleOrchestraSettings settings = particleOrchestraSettings;
-            if (type == 0)
-                ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, player.whoAmI);
-            else
-                ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, player.whoAmI);
-        }
+        //if (player.itemTime % 2 == 0)
+        //{
+        //    //int type = Main.rand.Next(2);
+        //    //ClassExtensions.GetPointOnSwungItemPath(60f, 60f, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
+        //    //Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * (float)player.direction * player.gravDir);
+        //    //ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
+        //    //particleOrchestraSettings.PositionInWorld = location2;
+        //    //particleOrchestraSettings.MovementVector = Vector2.Zero;
+        //    //ParticleOrchestraSettings settings = particleOrchestraSettings;
+        //    //if (type == 0)
+        //    //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, player.whoAmI);
+        //    //else
+        //    //    ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, player.whoAmI);
+        //}
     }
     public override void AddRecipes()
     {
