@@ -21,6 +21,17 @@ namespace Avalon.Projectiles.Summon
             Projectile.localNPCHitCooldown = 20;
             Projectile.timeLeft = 60 * 7;
         }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(target.whoAmI == Projectile.ai[0])
+                return base.CanHitNPC(target);
+            else
+                return false;
+        }
+        public override bool CanHitPvp(Player target)
+        {
+            return false;
+        }
         public override void AI()
         {
             NPC target = Main.npc[(int)Projectile.ai[0]];

@@ -6984,7 +6984,11 @@ Mods: {
 
 			AnchorWhipworm: {
 				DisplayName: Anchor Whipworm
-				Tooltip: ""
+				Tooltip:
+                '''
+                Your summons will focus struck enemies
+                Sticks damaging anchorworms in your enemies
+                '''
 			}
 
 			HallowedOre: {
@@ -7536,6 +7540,7 @@ Mods: {
 			SnotsandSandgunProjectile.DisplayName: Sandgun
 			ThrowingRock.DisplayName: Throwing Rock
 			TrueAeonStar.DisplayName: True Aeon Star
+			AnchorWorm.DisplayName: Anchor Worm
 		}
 
 		NPCs: {
