@@ -22,8 +22,8 @@ namespace Avalon.Projectiles.Summon
             Projectile.DefaultToWhip();
             Projectile.width = 40;
             // use these to change from the vanilla defaults
-            // Projectile.WhipSettings.Segments = 20;
-            // Projectile.WhipSettings.RangeMultiplier = 1f;
+             Projectile.WhipSettings.Segments = 30;
+             Projectile.WhipSettings.RangeMultiplier = 0.53f;
         }
 
         private float Timer
@@ -48,10 +48,18 @@ namespace Avalon.Projectiles.Summon
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<Buffs.Debuffs.Pathogen>(), 240);
-            Point r = WorldGen.RandomRectanglePoint(new Rectangle((int)target.position.X, (int)target.position.Y, target.width, target.height));
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), r.ToVector2(), Vector2.Zero, ModContent.ProjectileType<Worm>(), Projectile.damage, 0, Projectile.owner);
+            Projectile.localAI[2] = 0;
+            for (int i = 0; i < Main.projectile.Length; i++)
+            {
+                if (Main.projectile[i].type == ModContent.ProjectileType<AnchorWorm>() && Main.projectile[i].active && Main.projectile[i].ai[0] == target.whoAmI)
+                {
+                    Projectile.localAI[2]++;
+                }
+            }
+            if (Projectile.localAI[2] < 5)
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, target.Center.DirectionTo(Main.player[Projectile.owner].Center).RotatedByRandom(0.4f), ModContent.ProjectileType<AnchorWorm>(), (int)Main.player[Projectile.owner].GetTotalDamage(DamageClass.Summon).ApplyTo(20), 0, Projectile.owner,target.whoAmI);
             Main.player[Projectile.owner].MinionAttackTargetNPC = target.whoAmI;
-            Projectile.damage = (int)(Projectile.damage * 0.5f); // Multihit penalty. Decrease the damage the more enemies the whip hits.
+            Projectile.damage = (int)(Projectile.damage * 0.9f); // Multihit penalty. Decrease the damage the more enemies the whip hits.
         }
         public override void PostAI()
         {
@@ -129,7 +137,7 @@ namespace Avalon.Projectiles.Summon
                     // For a more impactful look, this scales the tip of the whip up when fully extended, and down when curled up.
                     Projectile.GetWhipSettings(Projectile, out float timeToFlyOut, out int _, out float _);
                     float t = Timer / timeToFlyOut;
-                    scale = MathHelper.Lerp(0.5f, 1.5f, Utils.GetLerpValue(0.1f, 0.7f, t, true) * Utils.GetLerpValue(0.9f, 0.7f, t, true));
+                    scale = MathHelper.Lerp(0.5f, 1.2f, Utils.GetLerpValue(0.1f, 0.7f, t, true) * Utils.GetLerpValue(0.9f, 0.7f, t, true));
                 }
                 //else if (i > 10)
                 //{
@@ -137,14 +145,14 @@ namespace Avalon.Projectiles.Summon
                 //    frame.Y = 58;
                 //    frame.Height = 16;
                 //}
-                else if (i > 1)
+                else if (i > 0)
                 {
                     // Second Segment
                     frame.Y = 40;
                     frame.Height = 16;
                     //frame.Width = 40;
                 }
-                else if (i > 0)
+                else if (i == 0)
                 {
                     // First Segment
                     frame.Y = 2;

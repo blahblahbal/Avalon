@@ -13,6 +13,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class TrueAeonsEternity : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override Color? GetAlpha(Color lightColor)
     {
         return new Color(255, 255, 255, 128);
