@@ -43,8 +43,8 @@ public class VertexOfExcalibur : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(Type)
-            .AddIngredient(ItemID.NightsEdge)
-            .AddIngredient(ItemID.Excalibur)
+            .AddIngredient(ItemID.TrueNightsEdge)
+            .AddIngredient(ItemID.TrueExcalibur)
             .AddIngredient(ItemID.BrokenHeroSword)
             .AddIngredient(ItemID.DarkShard)
             .AddIngredient(ItemID.LightShard)

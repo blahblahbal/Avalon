@@ -20,7 +20,7 @@ public abstract class EnergySlashTemplate : ModProjectile
     {
         return false;
     }
-    public virtual void DrawSlash(Color backColor, Color middleColor, Color frontColor, Color white, int sparkleAlpha, float VisualScaleMultiplier, float sparkleRotation, float splay, float rotationOffset, bool sparkle)
+    public virtual void DrawSlash(Color backColor, Color middleColor, Color frontColor, Color white, int sparkleAlpha, float VisualScaleMultiplier, float sparkleRotation, float splay, float rotationOffset, bool sparkle, bool fullBright = false)
     {
         splay *= Main.player[Projectile.owner].direction;
         rotationOffset *= Main.player[Projectile.owner].direction;
@@ -35,7 +35,11 @@ public abstract class EnergySlashTemplate : ModProjectile
         float num2 = proj.localAI[0] / proj.ai[1];
         float num3 = Utils.Remap(num2, 0f, 0.6f, 0f, 1f) * Utils.Remap(num2, 0.6f, 1f, 1f, 0f);
         float num4 = 0.975f;
-        float fromValue = Lighting.GetColor(proj.Center.ToTileCoordinates()).ToVector3().Length() / (float)Math.Sqrt(3.0);
+        float fromValue;
+        if (!fullBright)
+            fromValue = Lighting.GetColor(proj.Center.ToTileCoordinates()).ToVector3().Length() / (float)Math.Sqrt(3.0);
+        else
+            fromValue = 1;
         fromValue = Utils.Remap(fromValue, 0.2f, 1f, 0f, 1f);
         Color color = backColor;
         Color color2 = middleColor;

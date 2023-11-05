@@ -6985,10 +6985,10 @@ Mods: {
 			AnchorWhipworm: {
 				DisplayName: Anchor Whipworm
 				Tooltip:
-                '''
-                Your summons will focus struck enemies
-                Sticks damaging anchorworms in your enemies
-                '''
+					'''
+					Your summons will focus struck enemies
+					Sticks damaging anchorworms in your enemies
+					'''
 			}
 
 			HallowedOre: {
@@ -7343,6 +7343,11 @@ Mods: {
 				DisplayName: True Aeons Eternity
 				Tooltip: ""
 			}
+
+			SoulEdge: {
+				DisplayName: Soul Edge
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7541,6 +7546,7 @@ Mods: {
 			ThrowingRock.DisplayName: Throwing Rock
 			TrueAeonStar.DisplayName: True Aeon Star
 			AnchorWorm.DisplayName: Anchor Worm
+			SoulSlash.DisplayName: Soul Slash
 		}
 
 		NPCs: {
