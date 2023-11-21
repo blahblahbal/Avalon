@@ -7547,6 +7547,8 @@ Mods: {
 			TrueAeonStar.DisplayName: True Aeon Star
 			AnchorWorm.DisplayName: Anchor Worm
 			SoulSlash.DisplayName: Soul Slash
+			DarkMatterSpike.DisplayName: Dark Matter Spike
+			DarkMatterSpikeSpawner.DisplayName: Dark Matter Spike Spawner
 		}
 
 		NPCs: {
@@ -7620,6 +7622,10 @@ Mods: {
 			InfectedPickaxe.DisplayName: Infected Pickaxe
 			Hallowor.DisplayName: Hallowor
 			HallowSpit.DisplayName: Hallow Spit
+			ArmageddonSlime.DisplayName: Armageddon Slime
+			DarkMatterSlime.DisplayName: Dark Matter Slime
+			DarkMatterSlimer.DisplayName: Dark Matter Slimer
+			DarkMotherSlime.DisplayName: Dark Mother Slime
 		}
 
 		Buffs: {

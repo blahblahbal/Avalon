@@ -44,6 +44,7 @@ class OddFertilizer : ModItem
             .AddIngredient(ItemID.JungleSpores, 15)
             .AddIngredient(ItemID.SoulofMight, 5)
             .AddIngredient(ItemID.SoulofFright, 5)
+            .AddIngredient(ItemID.SoulofSight, 5)
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }
