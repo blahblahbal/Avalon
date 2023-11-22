@@ -7348,6 +7348,11 @@ Mods: {
 				DisplayName: Soul Edge
 				Tooltip: ""
 			}
+
+			ArmageddonSlimeBossBag: {
+				DisplayName: Armageddon Slime Boss Bag
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

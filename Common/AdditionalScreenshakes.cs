@@ -132,11 +132,6 @@ namespace Avalon.Common
                     PunchCameraModifier modifier = new PunchCameraModifier(projectile.Center, Main.rand.NextVector2Circular(1, 1), 12, 10f, 15, 300f, projectile.Name);
                     Main.instance.CameraModifiers.Add(modifier);
                 }
-                else if (projectile.type == ProjectileID.Xenopopper)
-                {
-                    PunchCameraModifier modifier = new PunchCameraModifier(projectile.Center, Main.rand.NextVector2Circular(1, 1), 1, 10f, 5, 300f, projectile.Name);
-                    Main.instance.CameraModifiers.Add(modifier);
-                }
             }
         }
     }
