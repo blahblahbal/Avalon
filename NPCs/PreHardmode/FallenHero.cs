@@ -124,6 +124,24 @@ public class FallenHero : ModNPC
                 Mod.Find<ModGore>("FallenHeroGore3").Type, 1f);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity,
                 Mod.Find<ModGore>("FallenHeroGore3").Type, 1f);
+
+            for (int i = 0; i < 30; i++)
+            {
+                Dust d = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.Blood);
+                d.velocity += NPC.velocity.RotatedByRandom(1);
+                d.velocity *= 1.6f;
+                d.scale = 2;
+                d.noGravity = Main.rand.NextBool(3);
+                d.fadeIn = Main.rand.NextFloat(1);
+            }
+        }
+        for (int i = 0; i < hit.Damage; i++)
+        {
+            Dust d = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.Blood);
+            d.velocity += NPC.velocity.RotatedByRandom(1);
+            d.noGravity = Main.rand.NextBool(3);
+            d.fadeIn = Main.rand.NextFloat(1);
+            d.velocity.X += hit.HitDirection;
         }
     }
 

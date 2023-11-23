@@ -2269,12 +2269,12 @@ Mods: {
 
 			BloodyWhetstone: {
 				DisplayName: Bloody Whetstone
-				Tooltip: Melee attacks inflict bleeding
+				Tooltip: Melee attacks inflict lacerated
 			}
 
 			BloodyNecklace: {
 				DisplayName: Bloody Necklace
-				Tooltip: Melee attacks inflict bleeding and 15 increased armor penetration
+				Tooltip: Melee attacks inflict lacerated and 15 increased armor penetration
 			}
 
 			DesertLongsword: {
@@ -2291,7 +2291,7 @@ Mods: {
 				DisplayName: Slitthroat Necklace
 				Tooltip:
 					'''
-					Melee attacks inflict bleeding
+					Melee attacks inflict lacerated
 					+15 armor penetration
 					'''
 			}
@@ -7639,9 +7639,9 @@ Mods: {
 				Description: "Minion damage is increased by "
 			}
 
-			Bleeding: {
-				DisplayName: Bleeding
-				Description: Losing life
+			Lacerated: {
+				DisplayName: Lacerated
+				Description: Losing blood
 			}
 
 			AmethystShardBuff: {

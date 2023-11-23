@@ -9,9 +9,9 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 {
     public override bool InstancePerEntity => true;
     public bool AstigSpawned { get; set; }
-    public int BleedStacks { get; set; } = 1;
-    public bool Bleeding { get; set; }
-    public bool IsBleedingHMBleed { get; set; }
+    public int LacerateStacks { get; set; } = 1;
+    public bool Lacerated { get; set; }
+    public bool IsLaceratedHM { get; set; }
     public int BreathCd { get; set; } = 45;
     public bool DlBreath { get; set; }
     public bool Electrified { get; set; }
@@ -38,7 +38,7 @@ public class AvalonGlobalNPCInstance : GlobalNPC
         NecroticDrain = false;
         Malaria = false;
         Electrified = false;
-        Bleeding = false;
+        Lacerated = false;
         Virulent = false;
         Inferno = false;
         Pathogen = false;
@@ -156,21 +156,21 @@ public class AvalonGlobalNPCInstance : GlobalNPC
                 damage = 6;
             }
         }
-        if (Bleeding)
+        if (Lacerated)
         {
             if (npc.lifeRegen > 0)
             {
                 npc.lifeRegen = 0;
             }
             int mult = 4;
-            if (IsBleedingHMBleed)
+            if (IsLaceratedHM)
             {
                 mult = 6;
             }
-            npc.lifeRegen -= mult * BleedStacks * 2;
-            if (damage < BleedStacks * 2)
+            npc.lifeRegen -= mult * LacerateStacks * 2;
+            if (damage < LacerateStacks * 2)
             {
-                damage = BleedStacks * 2;
+                damage = LacerateStacks * 2;
             }
         }
         if (Virulent)

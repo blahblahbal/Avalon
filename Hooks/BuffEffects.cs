@@ -119,12 +119,12 @@ public class BuffEffects : ModHook
         {
             if (self.buffType[j] == type)
             {
-                if (type == ModContent.BuffType<Bleeding>())
+                if (type == ModContent.BuffType<Lacerated>())
                 {
                     self.buffTime[j] += time;
-                    if (self.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks < 3)
+                    if (self.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks < 3)
                     {
-                        self.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks++;
+                        self.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks++;
                     }
                     if (self.buffTime[j] > AvalonGlobalNPC.BleedTime)
                     {

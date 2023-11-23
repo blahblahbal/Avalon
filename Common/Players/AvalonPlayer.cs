@@ -1242,12 +1242,12 @@ public class AvalonPlayer : ModPlayer
         }
         if (BloodyWhetstone)
         {
-            if (!target.HasBuff<Bleeding>())
+            if (!target.HasBuff<Lacerated>())
             {
-                target.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks = 1;
+                target.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks = 1;
             }
 
-            target.AddBuff(ModContent.BuffType<Bleeding>(), 120);
+            target.AddBuff(ModContent.BuffType<Lacerated>(), 120);
         }
         if (FrostGauntlet)
         {
