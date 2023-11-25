@@ -25,10 +25,17 @@ public class DarkeningInk : ModProjectile
 
         if (!Main.player[(int)Projectile.ai[0]].dead)
         {
-            Projectile.velocity.X += MathHelper.Clamp(Main.player[(int)Projectile.ai[0]].position.X - Projectile.position.X,-0.03f,0.03f);
+            float MaxVelocity = 0.05f;
+            Projectile.velocity.X += MathHelper.Clamp(Main.player[(int)Projectile.ai[0]].position.X - Projectile.position.X, -MaxVelocity, MaxVelocity);
+            //if (Main.expertMode)
+            //{
+            //    Projectile.velocity += Projectile.Center.DirectionTo(Main.player[(int)Projectile.ai[0]].Center) * new Vector2(0.2f,0.03f);
+            //    if (Projectile.velocity.Y > 3)
+            //        Projectile.velocity.Y = 3;
+            //}
         }
     }
-    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+    public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
         target.AddBuff(BuffID.Blackout, 60 * 5);
     }

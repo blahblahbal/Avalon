@@ -7554,6 +7554,7 @@ Mods: {
 			SoulSlash.DisplayName: Soul Slash
 			DarkMatterSpike.DisplayName: Dark Matter Spike
 			DarkMatterSpikeSpawner.DisplayName: Dark Matter Spike Spawner
+			DarkeningInk.DisplayName: Darkening Ink
 		}
 
 		NPCs: {
@@ -7631,6 +7632,7 @@ Mods: {
 			DarkMatterSlime.DisplayName: Dark Matter Slime
 			DarkMatterSlimer.DisplayName: Dark Matter Slimer
 			DarkMotherSlime.DisplayName: Dark Mother Slime
+			Shadlopod.DisplayName: Shadlopod
 		}
 
 		Buffs: {

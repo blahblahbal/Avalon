@@ -38,7 +38,6 @@ class EnergyRevolver : ModItem
         Item.height = dims.Height;
         Item.UseSound = LaserNoise;
     }
-
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {
         UseStyles.gunStyle(player,0,2);
