@@ -49,8 +49,8 @@ public class Shadlopod : ModNPC
             NPC.ai[0] = 1;
             for (int i = 32; i < 700; i += 4)
             {
-                Main.LocalPlayer.position = NPC.position;
-                Main.NewText(i, Color.Wheat);
+                //Main.LocalPlayer.position = NPC.position;
+                //Main.NewText(i, Color.Wheat);
                 if (Collision.SolidCollision(NPC.Center + new Vector2(0, -i), NPC.width, NPC.height))
                 {
                     NPC.position.Y = new Vector2(0, NPC.position.Y + -i + 16).ToTileCoordinates().Y * 16;
