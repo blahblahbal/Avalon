@@ -95,6 +95,7 @@ public class Shadlopod : ModNPC
         }
         else
         {
+            NPC.TargetClosest();
             NPC.rotation = NPC.velocity.X * -0.1f;
             if(NPC.gfxOffY != 2)
             {
