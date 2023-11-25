@@ -192,6 +192,7 @@ Mods: {
 			ContaminatedGoldfish: Goldfish mutate and become violent when exposed to a Blood Moon, allowing the Contagion to take hold of them.
 			ContaminatedPenguin: During a Blood Moon, the normally docile penguins fall under the hostile influence of the Contagion.
 			ContaminatedBunny: Bunnies are pure beings that normally cannot be afflicted by the Contagion, but will succumb under the effects of a Blood Moon.
+			Shadlopod: The devious creatures blend themselves into the ebonstone ceilings of the corruption and take pleasure in watching their pray panic when they take their vision away.
 		}
 
 		Keybinds: {

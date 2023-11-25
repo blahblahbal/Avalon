@@ -106,8 +106,9 @@ public class Shadlopod : ModNPC
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.BloodMoon,
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.BloodshotEye")),
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
+            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundCorruption,
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Shadlopod")),
         });
 
     public override void ModifyNPCLoot(NPCLoot npcLoot)
