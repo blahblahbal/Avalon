@@ -7354,6 +7354,16 @@ Mods: {
 				DisplayName: Armageddon Slime Boss Bag
 				Tooltip: ""
 			}
+
+			BloodstainedEye: {
+				DisplayName: Bloodstained Eye
+				Tooltip: ""
+			}
+
+			GlassEye: {
+				DisplayName: Glass Eye
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7556,6 +7566,8 @@ Mods: {
 			DarkMatterSpike.DisplayName: Dark Matter Spike
 			DarkMatterSpikeSpawner.DisplayName: Dark Matter Spike Spawner
 			DarkeningInk.DisplayName: Darkening Ink
+			BloodyTear.DisplayName: Bloody Tear
+			Tear.DisplayName: Tear
 		}
 
 		NPCs: {
