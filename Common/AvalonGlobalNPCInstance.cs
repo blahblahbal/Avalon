@@ -69,6 +69,17 @@ public class AvalonGlobalNPCInstance : GlobalNPC
             npc.position += npc.velocity * -0.35f;
         }
     }
+    public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
+    {
+        if(Pathogen && npc.ichor)
+        {
+            modifiers.ArmorPenetration += 7;
+        }
+        if (Pathogen && npc.betsysCurse)
+        {
+            modifiers.ArmorPenetration += 20;
+        }
+    }
     public override void UpdateLifeRegen(NPC npc, ref int damage)
     {
         if(npc.type == NPCID.WallofFlesh && npc.life < 500)

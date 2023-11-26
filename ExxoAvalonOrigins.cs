@@ -205,6 +205,7 @@ public class ExxoAvalonOrigins : Mod
         npcReplacer.ReplaceAsset(NPCID.IceSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/IceSlime"));
         npcReplacer.ReplaceAsset(NPCID.SpikedIceSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/SpikedIceSlime"));
         npcReplacer.ReplaceAsset(NPCID.SpikedJungleSlime, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/SpikedJungleSlime"));
+        npcReplacer.ReplaceAsset(NPCID.WindyBalloon, Assets.Request<Texture2D>("Assets/Vanilla/NPCs/BalloonSlime"));
     }
 
     public void BTitlesHook_SetupBiomeCheckers(out Func<Player, string> miniBiomeChecker, out Func<Player, string> biomeChecker)

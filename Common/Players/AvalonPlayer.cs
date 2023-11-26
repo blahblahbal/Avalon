@@ -435,6 +435,26 @@ public class AvalonPlayer : ModPlayer
         {
             Player.lifeRegen = (int)(Player.lifeRegen * 1.5f);
         }
+        if(Pathogen && Player.ichor)
+        {
+            Player.statDefense -= 7;
+        }
+        if (Pathogen && Player.tipsy)
+        {
+            Player.statDefense -= 2;
+        }
+        if(Pathogen && Player.HasBuff(BuffID.Weak))
+        {
+            Player.statDefense -= 2;
+        }
+        if (Pathogen && Player.brokenArmor)
+        {
+            Player.statDefense *= 0.75f;
+        }
+        if (Pathogen && Player.witheredArmor)
+        {
+            Player.statDefense *= 0.75f;
+        }
 
         if (Main.netMode != NetmodeID.MultiplayerClient)
         {
