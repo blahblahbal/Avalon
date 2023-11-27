@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Buffs.Debuffs;
 
-public class Bleeding : ModBuff
+public class Lacerated : ModBuff
 {
     public override void SetStaticDefaults()
     {
@@ -13,8 +13,8 @@ public class Bleeding : ModBuff
 
     public override void Update(NPC npc, ref int buffIndex)
     {
-        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Bleeding = true;
-        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().IsBleedingHMBleed = false;
+        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Lacerated = true;
+        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().IsLaceratedHM = false;
         if (npc.lifeRegen > 0)
         {
             npc.lifeRegen = 0;
@@ -25,18 +25,18 @@ public class Bleeding : ModBuff
         {
             mult = 6;
         }
-        npc.lifeRegen -= mult * npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks;
+        npc.lifeRegen -= mult * npc.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks;
         if (npc.buffTime[buffIndex] == 0)
         {
-            npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks = 1;
+            npc.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks = 1;
         }
     }
 
     public override bool ReApply(NPC npc, int time, int buffIndex)
     {
-        if (npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks < 3)
+        if (npc.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks < 3)
         {
-            npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks++;
+            npc.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks++;
         }
 
         return false;

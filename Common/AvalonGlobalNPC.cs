@@ -519,9 +519,9 @@ public class AvalonGlobalNPC : GlobalNPC
 
     public override void DrawEffects(NPC npc, ref Color drawColor)
     {
-        if (npc.HasBuff<Bleeding>())
+        if (npc.HasBuff<Lacerated>())
         {
-            for (int i = 0; i < npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BleedStacks; i++)
+            for (int i = 0; i < npc.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks; i++)
             {
                 Dust.NewDust(npc.position, npc.width, npc.height, DustID.Blood);
             }

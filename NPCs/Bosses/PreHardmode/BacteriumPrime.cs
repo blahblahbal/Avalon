@@ -361,7 +361,7 @@ public class BacteriumPrime : ModNPC
                 {
                     if (NPC.ai[0] == 0)
                     {
-                        for (int i = 0; i < Main.rand.Next(4, 7); i++)
+                        for (int i = 0; i < Main.rand.Next(2, 4); i++)
                         {
                             Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(6, 3) + new Vector2(0, Main.rand.NextFloat(-4, 0));
                             int M = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<CorrosiveMucus>(), (int)(NPC.damage * 0.3f), 0, -1);

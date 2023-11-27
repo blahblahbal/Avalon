@@ -192,6 +192,7 @@ Mods: {
 			ContaminatedGoldfish: Goldfish mutate and become violent when exposed to a Blood Moon, allowing the Contagion to take hold of them.
 			ContaminatedPenguin: During a Blood Moon, the normally docile penguins fall under the hostile influence of the Contagion.
 			ContaminatedBunny: Bunnies are pure beings that normally cannot be afflicted by the Contagion, but will succumb under the effects of a Blood Moon.
+			Shadlopod: The devious creatures blend themselves into the ebonstone ceilings of the corruption and take pleasure in watching their prey panic when they take their vision away.
 		}
 
 		Keybinds: {
@@ -2269,12 +2270,12 @@ Mods: {
 
 			BloodyWhetstone: {
 				DisplayName: Bloody Whetstone
-				Tooltip: Melee attacks inflict bleeding
+				Tooltip: Melee attacks inflict lacerated
 			}
 
 			BloodyNecklace: {
 				DisplayName: Bloody Necklace
-				Tooltip: Melee attacks inflict bleeding and 15 increased armor penetration
+				Tooltip: Melee attacks inflict lacerated and 15 increased armor penetration
 			}
 
 			DesertLongsword: {
@@ -2291,7 +2292,7 @@ Mods: {
 				DisplayName: Slitthroat Necklace
 				Tooltip:
 					'''
-					Melee attacks inflict bleeding
+					Melee attacks inflict lacerated
 					+15 armor penetration
 					'''
 			}
@@ -7353,6 +7354,16 @@ Mods: {
 				DisplayName: Armageddon Slime Boss Bag
 				Tooltip: ""
 			}
+
+			BloodstainedEye: {
+				DisplayName: Bloodstained Eye
+				Tooltip: ""
+			}
+
+			GlassEye: {
+				DisplayName: Glass Eye
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7554,6 +7565,9 @@ Mods: {
 			SoulSlash.DisplayName: Soul Slash
 			DarkMatterSpike.DisplayName: Dark Matter Spike
 			DarkMatterSpikeSpawner.DisplayName: Dark Matter Spike Spawner
+			DarkeningInk.DisplayName: Darkening Ink
+			BloodyTear.DisplayName: Bloody Tear
+			Tear.DisplayName: Tear
 		}
 
 		NPCs: {
@@ -7631,6 +7645,7 @@ Mods: {
 			DarkMatterSlime.DisplayName: Dark Matter Slime
 			DarkMatterSlimer.DisplayName: Dark Matter Slimer
 			DarkMotherSlime.DisplayName: Dark Mother Slime
+			Shadlopod.DisplayName: Shadlopod
 		}
 
 		Buffs: {
@@ -7639,9 +7654,9 @@ Mods: {
 				Description: "Minion damage is increased by "
 			}
 
-			Bleeding: {
-				DisplayName: Bleeding
-				Description: Losing life
+			Lacerated: {
+				DisplayName: Lacerated
+				Description: Losing blood
 			}
 
 			AmethystShardBuff: {

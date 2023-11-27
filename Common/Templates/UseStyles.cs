@@ -12,7 +12,7 @@ namespace Avalon.Common.Templates
 {
     public class UseStyles
     {
-        public static void ShotgunStyle(Player player, float rotation = 0.1f, float backwardsMovement = 3f, float screenshakeIntensity = 3f)
+        public static void gunStyle(Player player, float rotation = 0.1f, float backwardsMovement = 3f, float screenshakeIntensity = 0f)
         {
             //Texture2D GunTex = TextureAssets.Item[player.HeldItem.type].Value;
             //if (player.ItemAnimationJustStarted)

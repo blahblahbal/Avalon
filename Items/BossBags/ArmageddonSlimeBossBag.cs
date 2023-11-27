@@ -1,14 +1,10 @@
-using Avalon.Items.Material;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent.ItemDropRules;
-using Avalon.Items.Material.Ores;
-using Avalon.Items.Accessories.PreHardmode;
 
 namespace Avalon.Items.BossBags;
 
-public class BacteriumPrimeBossBag : ModItem
+public class ArmageddonSlimeBossBag : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -26,8 +22,6 @@ public class BacteriumPrimeBossBag : ModItem
     }
     public override void ModifyItemLoot(ItemLoot itemLoot)
     {
-        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 80, 111));
-        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Booger>(), 1, 20, 40));
-        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BadgeOfBacteria>(), 1));
+        //itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DarkMatterSoilBlock>(), 1, 100, 211));
     }
 }
