@@ -7364,6 +7364,15 @@ Mods: {
 				DisplayName: Glass Eye
 				Tooltip: ""
 			}
+
+			Starstorm: {
+				DisplayName: Starstorm
+				Tooltip:
+                '''
+                Causes stars to rain from the sky
+                More stars fall the closer you are to the cursor
+                '''
+			}
 		}
 
 		InfoDisplays: {
