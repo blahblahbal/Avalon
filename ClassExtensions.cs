@@ -546,7 +546,10 @@ public static class ClassExtensions
         tag.Set("values", values);
         return tag;
     }
-
+    public static bool IsTrueMeleeProjectile(this Projectile projectile)
+    {
+        return projectile.DamageType == DamageClass.Melee && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.NightsEdge || projectile.type == ProjectileID.Terragrim || projectile.type == ProjectileID.Arkhalis);
+    }
     public static Rectangle GetDims(this ModTexturedType texturedType) =>
         Main.netMode == NetmodeID.Server ? Rectangle.Empty : texturedType.GetTexture().Frame();
 

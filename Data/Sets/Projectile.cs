@@ -1,4 +1,6 @@
+using Avalon.Projectiles.Melee;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets;
 
@@ -58,4 +60,7 @@ public static class Projectile
         ProjectileID.UFOLaser,
         ProjectileID.MiniSharkron,
         ProjectileID.StardustCellMinionShot);
+
+    public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
+        ModContent.ProjectileType<MarrowMasher>());
 }

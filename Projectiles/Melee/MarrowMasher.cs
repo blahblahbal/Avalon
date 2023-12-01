@@ -39,7 +39,7 @@ public class MarrowMasher : ModProjectile
     public Vector2 swingRadius = Vector2.Zero;
     public bool firstFrame = true;
     public float swordVel;
-    public float speed = MathF.PI * 3f;
+    public float speed = MathF.PI * 1.2f;
     public float posY;
     public override void AI()
     {
@@ -76,7 +76,7 @@ public class MarrowMasher : ModProjectile
     }
     public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
     {
-        if (targetHitbox.Intersects(projHitbox) || targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter,Projectile.Center.Distance(player.Center),Projectile.rotation,MathHelper.Pi / 16))
+        if (targetHitbox.Intersects(projHitbox) || targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter,Projectile.Center.Distance(player.Center),Projectile.rotation - (45 * (MathHelper.Pi / 180)), MathHelper.Pi / 16))
         {
             return true;
         }

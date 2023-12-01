@@ -8,7 +8,7 @@ namespace Avalon.Common
     {
         public override void ModifyHitNPC(Item item, Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (item.DamageType == DamageClass.Melee && item.shoot == ItemID.None)
+            if (item.DamageType == DamageClass.Melee)
             {
                 modifiers.ArmorPenetration += 15;
             }
@@ -18,7 +18,7 @@ namespace Avalon.Common
     {
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.DamageType == DamageClass.Melee && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.type == ProjectileID.Terragrim || projectile.type == ProjectileID.Arkhalis))
+            if (projectile.IsTrueMeleeProjectile())
             {
                 modifiers.ArmorPenetration += 15;
             }

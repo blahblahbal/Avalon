@@ -7376,7 +7376,7 @@ Mods: {
 
 			MarrowMasher: {
 				DisplayName: Marrow Masher
-				Tooltip: "Critic hits have more knockback"
+				Tooltip: Critic hits have more knockback
 			}
 		}
 
