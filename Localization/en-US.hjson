@@ -3676,14 +3676,14 @@ Mods: {
 
 			SonicScrewdriverMkI: {
 				DisplayName: Sonic Screwdriver Mk I
-				Tooltip: Reveals treasures, ores, and mobs
+				Tooltip: Reveals treasures, ores, and enemies
 			}
 
 			SonicScrewdriverMkII: {
 				DisplayName: Sonic Screwdriver Mk II
 				Tooltip:
 					'''
-					Reveals treasures, ores, and mobs
+					Reveals treasures, ores, and enemies
 					Tells the time
 					'''
 			}
@@ -3692,7 +3692,7 @@ Mods: {
 				DisplayName: Sonic Screwdriver Mk III
 				Tooltip:
 					'''
-					Reveals treasures, ores, and mobs
+					Reveals treasures, ores, and enemies
 					Tells the time
 					Can lock and unlock chests
 					Hold LEFT CTRL and click on chests
@@ -7376,7 +7376,7 @@ Mods: {
 
 			MarrowMasher: {
 				DisplayName: Marrow Masher
-				Tooltip: ""
+				Tooltip: "Critic hits have more knockback"
 			}
 		}
 
