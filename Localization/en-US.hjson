@@ -7368,10 +7368,15 @@ Mods: {
 			Starstorm: {
 				DisplayName: Starstorm
 				Tooltip:
-                '''
-                Causes stars to rain from the sky
-                More stars fall the closer you are to the cursor
-                '''
+					'''
+					Causes stars to rain from the sky
+					More stars fall the closer you are to the cursor
+					'''
+			}
+
+			MarrowMasher: {
+				DisplayName: Marrow Masher
+				Tooltip: ""
 			}
 		}
 
@@ -7577,6 +7582,7 @@ Mods: {
 			DarkeningInk.DisplayName: Darkening Ink
 			BloodyTear.DisplayName: Bloody Tear
 			Tear.DisplayName: Tear
+			MarrowMasher.DisplayName: Marrow Masher
 		}
 
 		NPCs: {
