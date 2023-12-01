@@ -74,6 +74,14 @@ public class MarrowMasher : ModProjectile
         Projectile.rotation = Vector2.Normalize(Projectile.Center - HandPosition).ToRotation() + (45 * (MathHelper.Pi / 180));
         player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi);
     }
+    public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+    {
+        if (targetHitbox.Intersects(projHitbox) || targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter,Projectile.Center.Distance(player.Center),Projectile.rotation,MathHelper.Pi / 16))
+        {
+            return true;
+        }
+        return false;
+    }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         if (hit.Crit)
