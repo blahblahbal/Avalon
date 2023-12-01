@@ -180,6 +180,10 @@ public class ExxoAvalonOrigins : Mod
         itemReplacer.ReplaceAsset(ItemID.TerraBlade, Assets.Request<Texture2D>("Assets/Vanilla/Items/Terrablade"));
         itemReplacer.ReplaceAsset(ItemID.TheHorsemansBlade, Assets.Request<Texture2D>("Assets/Vanilla/Items/HorsemansBlade"));
         itemReplacer.ReplaceAsset(ItemID.TrueExcalibur, Assets.Request<Texture2D>("Assets/Vanilla/Items/TrueExcalibur"));
+        itemReplacer.ReplaceAsset(ItemID.CandyCornRifle, Assets.Request<Texture2D>("Assets/Vanilla/Items/CandyCornRifle"));
+        itemReplacer.ReplaceAsset(ItemID.BouncyBomb, Assets.Request<Texture2D>("Assets/Vanilla/Items/BouncyBomb"));
+        itemReplacer.ReplaceAsset(ItemID.BouncyGrenade, Assets.Request<Texture2D>("Assets/Vanilla/Items/BouncyGrenade"));
+        itemReplacer.ReplaceAsset(ItemID.BatScepter, Assets.Request<Texture2D>("Assets/Vanilla/Items/BatScepter"));
 
         var tileReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Tile);
         assetReplacers.Add(tileReplacer);
@@ -193,6 +197,8 @@ public class ExxoAvalonOrigins : Mod
         var projectileReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Projectile);
         assetReplacers.Add(projectileReplacer);
         projectileReplacer.ReplaceAsset(ProjectileID.MagicDagger, Assets.Request<Texture2D>("Assets/Vanilla/Items/MagicDagger"));
+        projectileReplacer.ReplaceAsset(ProjectileID.BouncyBomb, Assets.Request<Texture2D>("Assets/Vanilla/Items/BouncyBomb"));
+        projectileReplacer.ReplaceAsset(ProjectileID.BouncyGrenade, Assets.Request<Texture2D>("Assets/Vanilla/Items/BouncyGrenade"));
 
         var npcReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Npc);
         assetReplacers.Add(npcReplacer);
