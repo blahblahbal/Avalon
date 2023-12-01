@@ -10,6 +10,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class Starstorm : ModItem
 {
+    public override Color? GetAlpha(Color lightColor)
+    {
+        return new Color(255, 255, 255, 128);
+    }
     public override void SetDefaults()
     {
         Item.width = 16;

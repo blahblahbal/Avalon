@@ -66,6 +66,7 @@ public class AvalonMobDrops : GlobalNPC
         if (npc.type == NPCID.AngryBones || npc.type >= NPCID.AngryBonesBig && npc.type <= NPCID.AngryBonesBigHelmet)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BlackWhetstone>(), 100));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MarrowMasher>(), 100));
         }
         if (npc.type == NPCID.GoblinArcher)
         {
