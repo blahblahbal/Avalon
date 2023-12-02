@@ -26,7 +26,7 @@ class CraniumCrusher : ModItem
         Item.scale = 1.35f;
         Item.crit = 6;
         Item.shootSpeed = 6f; //so the knockback works properly
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.Yellow;
         Item.noUseGraphic = true;
         Item.noMelee = true;
         Item.width = dims.Width;

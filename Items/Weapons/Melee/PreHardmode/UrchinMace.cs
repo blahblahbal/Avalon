@@ -26,7 +26,7 @@ class UrchinMace : ModItem
         Item.scale = 1.1f;
         Item.crit = 6;
         Item.shootSpeed = 6f; //so the knockback works properly
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.Blue;
         Item.noUseGraphic = true;
         Item.noMelee = true;
         Item.width = dims.Width;
