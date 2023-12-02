@@ -7386,15 +7386,15 @@ Mods: {
 			CraniumCrusher: {
 				DisplayName: Cranium Crusher
 				Tooltip:
-                '''
-                Ignores 15 points of enemy defence
-                Ciritcal hits break enemy armor
-                '''
+					'''
+					Ignores 15 points of enemy defence
+					Ciritcal hits break enemy armor
+					'''
 			}
 
 			UrchinMace: {
-				DisplayName: Urchin Mace
-				Tooltip: "Has a chance to poison enemies"
+				DisplayName: Urchin Uppercutter
+				Tooltip: Has a chance to poison enemies
 			}
 		}
 
@@ -7602,7 +7602,7 @@ Mods: {
 			Tear.DisplayName: Tear
 			MarrowMasher.DisplayName: Marrow Masher
 			CraniumCrusher.DisplayName: Cranium Crusher
-			UrchinMace.DisplayName: Urchin Mace
+			UrchinMace.DisplayName: Urchin Uppercutter
 		}
 
 		NPCs: {
