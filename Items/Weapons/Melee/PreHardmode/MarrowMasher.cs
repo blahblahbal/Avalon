@@ -20,7 +20,7 @@ class MarrowMasher : ModItem
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item1;
         Item.DamageType = DamageClass.Melee;
-        Item.damage = 35;
+        Item.damage = 58;
         Item.autoReuse = true;
         Item.scale = 1.25f;
         Item.crit = 6;
@@ -30,11 +30,12 @@ class MarrowMasher : ModItem
         Item.noMelee = true;
         Item.width = dims.Width;
         Item.height = dims.Height;
-        Item.useTime = Item.useAnimation = 40;
+        Item.useTime = Item.useAnimation = 30;
         Item.knockBack = 6.5f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.MarrowMasher>();
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = Item.sellPrice(0, 0, 40, 0);
+        Item.ArmorPenetration += 15;
     }
     public override bool MeleePrefix()
     {

@@ -1,7 +1,11 @@
 using Avalon.Common;
+using Avalon.Data.Sets;
 using Avalon.Items.Material.TomeMats;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -24,6 +28,18 @@ class TaleoftheRedLotus : ModItem
         Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 1;
     }
 
+    public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+    {
+        Texture2D tex = (Texture2D)ModContent.Request<Texture2D>(Texture + "Glow");
+        spriteBatch.Draw(tex, position + new Vector2(-3), new Rectangle(0,0,tex.Width,tex.Height), new Color(255, 255, 255, 0) * (float)(Math.Sin(Main.timeForVisualEffects * 0.03f) * 0.2f + 0.8f), 0, origin, scale, SpriteEffects.None,0);
+        return base.PreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+    }
+    public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+    {
+        Texture2D tex = (Texture2D)ModContent.Request<Texture2D>(Texture + "Glow");
+        spriteBatch.Draw(tex, Item.position + new Vector2(-4) + tex.Size() / 2 - Main.screenPosition, new Rectangle(0, 0, tex.Width, tex.Height), new Color(255, 255, 255, 0) * (float)(Math.Sin(Main.timeForVisualEffects * 0.03f) * 0.2f + 0.8f), rotation, tex.Size() / 2f, scale, SpriteEffects.None, 0);
+        return base.PreDrawInWorld(spriteBatch, lightColor, alphaColor, ref rotation, ref scale, whoAmI);
+    }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetDamage(DamageClass.Ranged) += 0.05f;

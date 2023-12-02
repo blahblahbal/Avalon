@@ -7376,7 +7376,11 @@ Mods: {
 
 			MarrowMasher: {
 				DisplayName: Marrow Masher
-				Tooltip: Critic hits have more knockback
+				Tooltip:
+					'''
+					Ignores 15 points of enemy defence
+					Critical hits have more knockback
+					'''
 			}
 		}
 

@@ -34,6 +34,8 @@ public class MarrowMasher : ModProjectile
         Projectile.tileCollide = false;
         Projectile.scale = 1f;
         Projectile.ownerHitCheck = true;
+        Projectile.usesLocalNPCImmunity = true;
+        Projectile.localNPCHitCooldown = -1;
         Projectile.timeLeft = SwingSpeed;
     }
     public Vector2 swingRadius = Vector2.Zero;
