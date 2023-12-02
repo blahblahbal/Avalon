@@ -7382,6 +7382,20 @@ Mods: {
 					Critical hits have more knockback
 					'''
 			}
+
+			CraniumCrusher: {
+				DisplayName: Cranium Crusher
+				Tooltip:
+                '''
+                Ignores 15 points of enemy defence
+                Ciritcal hits break enemy armor
+                '''
+			}
+
+			UrchinMace: {
+				DisplayName: Urchin Mace
+				Tooltip: "Has a chance to poison enemies"
+			}
 		}
 
 		InfoDisplays: {
@@ -7587,6 +7601,8 @@ Mods: {
 			BloodyTear.DisplayName: Bloody Tear
 			Tear.DisplayName: Tear
 			MarrowMasher.DisplayName: Marrow Masher
+			CraniumCrusher.DisplayName: Cranium Crusher
+			UrchinMace.DisplayName: Urchin Mace
 		}
 
 		NPCs: {

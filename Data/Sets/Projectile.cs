@@ -62,5 +62,7 @@ public static class Projectile
         ProjectileID.StardustCellMinionShot);
 
     public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
-        ModContent.ProjectileType<MarrowMasher>());
+        ModContent.ProjectileType<MarrowMasher>(),
+        ModContent.ProjectileType<UrchinMace>(),
+        ModContent.ProjectileType<CraniumCrusher>());
 }
