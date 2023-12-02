@@ -31,7 +31,7 @@ class TaleoftheRedLotus : ModItem
     public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
     {
         Texture2D tex = (Texture2D)ModContent.Request<Texture2D>(Texture + "Glow");
-        spriteBatch.Draw(tex, position + new Vector2(-3), new Rectangle(0,0,tex.Width,tex.Height), new Color(255, 255, 255, 0) * (float)(Math.Sin(Main.timeForVisualEffects * 0.03f) * 0.2f + 0.8f), 0, origin, scale, SpriteEffects.None,0);
+        spriteBatch.Draw(tex, position + new Vector2(-4 * scale), new Rectangle(0,0,tex.Width,tex.Height), new Color(255, 255, 255, 0) * (float)(Math.Sin(Main.timeForVisualEffects * 0.03f) * 0.2f + 0.8f), 0, origin, scale, SpriteEffects.None,0);
         return base.PreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
     }
     public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
