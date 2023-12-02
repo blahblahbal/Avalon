@@ -44,7 +44,7 @@ public static class HerbologyData
         ModContent.ItemType<AdvForceFieldPotion>(), ModContent.ItemType<AdvFuryPotion>(),
         ModContent.ItemType<AdvGauntletPotion>(), ModContent.ItemType<AdvGillsPotion>(), ModContent.ItemType<AdvGPSPotion>(),
         ModContent.ItemType<AdvGravitationPotion>(), ModContent.ItemType<AdvHeartreachPotion>(), ModContent.ItemType<AdvHeartsickPotion>(),
-        ModContent.ItemType<AdvHunterPotion>(), ModContent.ItemType<AdvInfernoPotion>(), /*ModContent.ItemType<AdvInvincibilityPotion>(),*/
+        ModContent.ItemType<AdvHunterPotion>(), ModContent.ItemType<AdvInfernoPotion>(),
         ModContent.ItemType<AdvInvisibilityPotion>(), ModContent.ItemType<AdvIronskinPotion>(), ModContent.ItemType<AdvLeapingPotion>(),
         ModContent.ItemType<AdvLifeforcePotion>(), ModContent.ItemType<AdvMagicPowerPotion>(), ModContent.ItemType<AdvMagnetPotion>(),
         ModContent.ItemType<AdvManaRegenerationPotion>(), ModContent.ItemType<AdvMiningPotion>(), ModContent.ItemType<AdvNightOwlPotion>(),
@@ -67,11 +67,11 @@ public static class HerbologyData
         { ModContent.ItemType<LargeWaterleaf>(), ItemID.Waterleaf },
         { ModContent.ItemType<LargeFireblossom>(), ItemID.Fireblossom },
         { ModContent.ItemType<LargeShiverthorn>(), ItemID.Shiverthorn },
-        //{ ModContent.ItemType<LargeBloodberry>(), ModContent.ItemType<Bloodberry>() },
-        //{ ModContent.ItemType<LargeSweetstem>(), ModContent.ItemType<Sweetstem>() },
-        //{ ModContent.ItemType<LargeBarfbush>(), ModContent.ItemType<Barfbush>() },
-        //{ ModContent.ItemType<LargeHolybird>(), ModContent.ItemType<Holybird>() },
-        //{ ModContent.ItemType<LargeTwilightPlume>(), ModContent.ItemType<TwilightPlume>() },
+        { ModContent.ItemType<LargeBloodberry>(), ModContent.ItemType<Bloodberry>() },
+        { ModContent.ItemType<LargeSweetstem>(), ModContent.ItemType<Sweetstem>() },
+        { ModContent.ItemType<LargeBarfbush>(), ModContent.ItemType<Barfbush>() },
+        { ModContent.ItemType<LargeHolybird>(), ModContent.ItemType<Holybird>() },
+        { ModContent.ItemType<LargeTwilightPlume>(), ModContent.ItemType<TwilightPlume>() },
     };
 
     public static readonly Dictionary<int, int> LargeHerbIdByLargeHerbSeedId = new()
@@ -83,11 +83,11 @@ public static class HerbologyData
         { ModContent.ItemType<LargeWaterleafSeed>(), ModContent.ItemType<LargeWaterleaf>() },
         { ModContent.ItemType<LargeFireblossomSeed>(), ModContent.ItemType<LargeFireblossom>() },
         { ModContent.ItemType<LargeShiverthornSeed>(), ModContent.ItemType<LargeShiverthorn>() },
-        //{ ModContent.ItemType<LargeBloodberrySeed>(), ModContent.ItemType<LargeBloodberry>() },
-        //{ ModContent.ItemType<LargeSweetstemSeed>(), ModContent.ItemType<LargeSweetstem>() },
-        //{ ModContent.ItemType<LargeBarfbushSeed>(), ModContent.ItemType<LargeBarfbush>() },
-        //{ ModContent.ItemType<LargeHolybirdSeed>(), ModContent.ItemType<LargeHolybird>() },
-        //{ ModContent.ItemType<LargeTwilightPlumeSeed>(), ModContent.ItemType<LargeTwilightPlume>() },
+        { ModContent.ItemType<LargeBloodberrySeed>(), ModContent.ItemType<LargeBloodberry>() },
+        { ModContent.ItemType<LargeSweetstemSeed>(), ModContent.ItemType<LargeSweetstem>() },
+        { ModContent.ItemType<LargeBarfbushSeed>(), ModContent.ItemType<LargeBarfbush>() },
+        { ModContent.ItemType<LargeHolybirdSeed>(), ModContent.ItemType<LargeHolybird>() },
+        { ModContent.ItemType<LargeTwilightPlumeSeed>(), ModContent.ItemType<LargeTwilightPlume>() },
     };
 
     public static readonly Dictionary<int, int> LargeHerbSeedIdByHerbId = new()
@@ -99,11 +99,11 @@ public static class HerbologyData
         { ItemID.Waterleaf, ModContent.ItemType<LargeWaterleafSeed>() },
         { ItemID.Fireblossom, ModContent.ItemType<LargeFireblossomSeed>() },
         { ItemID.Shiverthorn, ModContent.ItemType<LargeShiverthornSeed>() },
-        //{ ModContent.ItemType<Bloodberry>(), ModContent.ItemType<LargeBloodberrySeed>() },
-        //{ ModContent.ItemType<Sweetstem>(), ModContent.ItemType<LargeSweetstemSeed>() },
-        //{ ModContent.ItemType<Barfbush>(), ModContent.ItemType<LargeBarfbushSeed>() },
-        //{ ModContent.ItemType<Holybird>(), ModContent.ItemType<LargeHolybirdSeed>() },
-        //{ ModContent.ItemType<TwilightPlume>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
+        { ModContent.ItemType<Bloodberry>(), ModContent.ItemType<LargeBloodberrySeed>() },
+        { ModContent.ItemType<Sweetstem>(), ModContent.ItemType<LargeSweetstemSeed>() },
+        { ModContent.ItemType<Barfbush>(), ModContent.ItemType<LargeBarfbushSeed>() },
+        { ModContent.ItemType<Holybird>(), ModContent.ItemType<LargeHolybirdSeed>() },
+        { ModContent.ItemType<TwilightPlume>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
     };
 
     public static readonly Dictionary<int, int> LargeHerbSeedIdByHerbSeedId = new()
@@ -115,11 +115,11 @@ public static class HerbologyData
         { ItemID.WaterleafSeeds, ModContent.ItemType<LargeWaterleafSeed>() },
         { ItemID.FireblossomSeeds, ModContent.ItemType<LargeFireblossomSeed>() },
         { ItemID.ShiverthornSeeds, ModContent.ItemType<LargeShiverthornSeed>() },
-        //{ ModContent.ItemType<BloodberrySeeds>(), ModContent.ItemType<LargeBloodberrySeed>() },
-        //{ ModContent.ItemType<SweetstemSeeds>(), ModContent.ItemType<LargeSweetstemSeed>() },
-        //{ ModContent.ItemType<BarfbushSeeds>(), ModContent.ItemType<LargeBarfbushSeed>() },
-        //{ ModContent.ItemType<HolybirdSeeds>(), ModContent.ItemType<LargeHolybirdSeed>() },
-        //{ ModContent.ItemType<TwilightPlumeSeeds>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
+        { ModContent.ItemType<BloodberrySeeds>(), ModContent.ItemType<LargeBloodberrySeed>() },
+        { ModContent.ItemType<SweetstemSeeds>(), ModContent.ItemType<LargeSweetstemSeed>() },
+        { ModContent.ItemType<BarfbushSeeds>(), ModContent.ItemType<LargeBarfbushSeed>() },
+        { ModContent.ItemType<HolybirdSeeds>(), ModContent.ItemType<LargeHolybirdSeed>() },
+        { ModContent.ItemType<TwilightPlumeSeeds>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
     };
 
     public static readonly int[] PotionIds =
@@ -131,24 +131,23 @@ public static class HerbologyData
         ModContent.ItemType<ForceFieldPotion>(), ModContent.ItemType<FuryPotion>(),
         ModContent.ItemType<GauntletPotion>(), ItemID.GillsPotion, ModContent.ItemType<GPSPotion>(),
         ItemID.GravitationPotion, ItemID.HeartreachPotion, ModContent.ItemType<HeartsickPotion>(),
-        ItemID.HunterPotion, ItemID.InfernoPotion, /*ModContent.ItemType<InvincibilityPotion>(),*/
+        ItemID.HunterPotion, ItemID.InfernoPotion, ModContent.ItemType<InvincibilityPotion>(),
         ItemID.InvisibilityPotion, ItemID.IronskinPotion, ModContent.ItemType<LeapingPotion>(),
         ItemID.LifeforcePotion, ItemID.MagicPowerPotion, ModContent.ItemType<MagnetPotion>(),
         ItemID.ManaRegenerationPotion, ItemID.MiningPotion, ItemID.NightOwlPotion,
         ModContent.ItemType<NinjaPotion>(), ItemID.ObsidianSkinPotion, ItemID.RagePotion, ItemID.RegenerationPotion,
-        ModContent.ItemType<RoguePotion>(), ModContent.ItemType<ShadowPotion>(), ItemID.ShinePotion,
-        ModContent.ItemType<ShockwavePotion>(), ItemID.SonarPotion, ItemID.SpelunkerPotion,
+        ModContent.ItemType<RejuvenationPotion>(), ModContent.ItemType<RoguePotion>(), ModContent.ItemType<ShadowPotion>(), 
+        ItemID.ShinePotion, ModContent.ItemType<ShockwavePotion>(), ItemID.SonarPotion, ItemID.SpelunkerPotion,
         ModContent.ItemType<StarbrightPotion>(), ModContent.ItemType<StrengthPotion>(), ItemID.SummoningPotion,
         ModContent.ItemType<SupersonicPotion>(), ItemID.SwiftnessPotion, ItemID.ThornsPotion,
         ModContent.ItemType<TimeShiftPotion>(), ItemID.TitanPotion, ModContent.ItemType<TitanskinPotion>(),
         ModContent.ItemType<VisionPotion>(), ItemID.WarmthPotion, ItemID.WaterWalkingPotion,
         ModContent.ItemType<WisdomPotion>(), ItemID.WrathPotion
-        // Magnet Potion
     };
 
     public static readonly int[] SuperRestorationIDs =
     {
-        ItemID.SuperHealingPotion, ItemID.SuperManaPotion, ModContent.ItemType<SuperStaminaPotion>()//, ModContent.ItemType<SuperRestorationPotion>()
+        ItemID.SuperHealingPotion, ItemID.SuperManaPotion, ModContent.ItemType<SuperStaminaPotion>() /*, ModContent.ItemType<SuperRestorationPotion>()*/
     };
 
     public static readonly int[] RestorationIDs =
