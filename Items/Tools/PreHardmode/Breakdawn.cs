@@ -1,7 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
-using System.Reflection;
 using Avalon.Reflection;
 using Terraria;
 using Terraria.Audio;
@@ -111,6 +110,28 @@ public class Breakdawn : ModItem
             }
         }
     }
+    public override void MeleeEffects(Player player, Rectangle hitbox)
+    {
+        if (Main.rand.NextBool(5))
+            Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.Demonite, player.direction * 2, 0f, 150, default, 1.4f);
+
+        Dust dust = Dust.NewDustDirect
+        (
+            new Vector2(hitbox.X, hitbox.Y),
+            hitbox.Width,
+            hitbox.Height,
+            DustID.Shadowflame,
+            player.velocity.X * 0.2f + (player.direction * 3),
+            player.velocity.Y * 0.2f,
+            100,
+            default,
+            1.2f
+        );
+
+        dust.noGravity = true;
+        dust.velocity.X /= 2f;
+        dust.velocity.Y /= 2f;
+    }
     //public override bool? UseItem(Player player)
     //{
     //    if (player.whoAmI == Main.myPlayer && player.controlUseItem)
@@ -186,7 +207,6 @@ public class Breakdawn3x3 : ModItem
         Item.value = 27000;
         Item.useAnimation = 24;
     }
-
     public override void HoldItem(Player player)
     {
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
@@ -226,5 +246,27 @@ public class Breakdawn3x3 : ModItem
                 }
             }
         }
+    }
+    public override void MeleeEffects(Player player, Rectangle hitbox)
+    {
+        if (Main.rand.NextBool(5))
+            Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.Demonite, player.direction * 2, 0f, 150, default, 1.4f);
+
+        Dust dust = Dust.NewDustDirect
+        (
+            new Vector2(hitbox.X, hitbox.Y),
+            hitbox.Width,
+            hitbox.Height,
+            DustID.Shadowflame,
+            player.velocity.X * 0.2f + (player.direction * 3),
+            player.velocity.Y * 0.2f,
+            100,
+            default,
+            1.2f
+        );
+
+        dust.noGravity = true;
+        dust.velocity.X /= 2f;
+        dust.velocity.Y /= 2f;
     }
 }
