@@ -78,12 +78,12 @@ public class UrchinMace : ModProjectile
         player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi);
 
         Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Water_Cavern);
-        d.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(-MathHelper.PiOver2) * 3 * swordVel;
+        d.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(MathHelper.PiOver2 * player.direction) * 3 * swordVel;
         Dust d2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Water);
-        d2.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(-MathHelper.PiOver2) * 3 * swordVel;
+        d2.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(MathHelper.PiOver2 * player.direction) * 3 * swordVel;
 
         Dust d3 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Venom);
-        d3.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(-MathHelper.PiOver2) * 3 * swordVel;
+        d3.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(MathHelper.PiOver2 * player.direction) * 3 * swordVel;
         d3.alpha = 128;
         d3.noGravity = true;
     }
