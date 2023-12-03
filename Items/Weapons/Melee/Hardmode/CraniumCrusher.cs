@@ -21,7 +21,7 @@ class CraniumCrusher : ModItem
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item1;
         Item.DamageType = DamageClass.Melee;
-        Item.damage = 58;
+        Item.damage = 128;
         Item.autoReuse = true;
         Item.scale = 1.35f;
         Item.crit = 6;
