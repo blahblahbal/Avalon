@@ -12,7 +12,6 @@ public class KeybindSystem : ModSystem
     public static ModKeybind BubbleBoostHotkey { get; private set; }
     public static ModKeybind ModeChangeHotkey { get; private set; }
     public static ModKeybind AstralHotkey { get; private set; }
-    public static ModKeybind RocketJumpHotkey { get; private set; }
     public static ModKeybind QuickStaminaHotkey { get; private set; }
     public static ModKeybind FlightTimeRestoreHotkey { get; private set; }
     public static ModKeybind MinionGuidingHotkey { get; private set; }
@@ -27,7 +26,6 @@ public class KeybindSystem : ModSystem
         BubbleBoostHotkey = KeybindLoader.RegisterKeybind(Mod, "Toggle Bubble Boost", Keys.U);
         ModeChangeHotkey = KeybindLoader.RegisterKeybind(Mod, "Mode Change", Keys.N);
         AstralHotkey = KeybindLoader.RegisterKeybind(Mod, "Activate Astral Projecting", Keys.OemPipe);
-        RocketJumpHotkey = KeybindLoader.RegisterKeybind(Mod, "Stamina Rocket Jump", Keys.Z);
         QuickStaminaHotkey = KeybindLoader.RegisterKeybind(Mod, "Quick Stamina", Keys.X);
         FlightTimeRestoreHotkey = KeybindLoader.RegisterKeybind(Mod, "Stamina Flight Time Restore", Keys.G);
     }
@@ -41,7 +39,6 @@ public class KeybindSystem : ModSystem
         BubbleBoostHotkey = null;
         ModeChangeHotkey = null;
         AstralHotkey = null;
-        RocketJumpHotkey = null;
         QuickStaminaHotkey = null;
         FlightTimeRestoreHotkey = null;
         MinionGuidingHotkey = null;
