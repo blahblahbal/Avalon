@@ -30,7 +30,7 @@ public class Noxious : ModItem
         Item.noMelee = true;
         Item.noUseGraphic = true;
         Item.UseSound = SoundID.Item1;
-        Item.value = Item.sellPrice(1);
+        Item.value = Item.sellPrice(0, 1, 0, 0);
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Noxious>();
     }
 
