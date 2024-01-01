@@ -4,16 +4,16 @@ using Terraria.GameContent.ItemDropRules;
 
 namespace Avalon.DropConditions;
 
-public class IridiumWorldDrop : IItemDropRuleCondition, IProvideItemConditionDescription
+public class OsmiumWorldDropAndNotExpert : IItemDropRuleCondition, IProvideItemConditionDescription
 {
     public bool CanDrop(DropAttemptInfo info)
     {
-        return AvalonWorld.RhodiumOre == AvalonWorld.RhodiumVariant.Iridium;
+        return AvalonWorld.RhodiumOre == AvalonWorld.RhodiumVariant.Osmium && !Main.expertMode;
     }
 
     public bool CanShowItemDropInUI()
     {
-        return AvalonWorld.RhodiumOre == AvalonWorld.RhodiumVariant.Iridium;
+        return AvalonWorld.RhodiumOre == AvalonWorld.RhodiumVariant.Osmium && !Main.expertMode;
     }
 
     public string GetConditionDescription()

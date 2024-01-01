@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Terraria;
 using Terraria.GameContent.ItemDropRules;
 
 namespace Avalon.DropConditions;

@@ -21,6 +21,8 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Avalon.Items.Material.Ores;
+using Avalon.DropConditions;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 
@@ -84,14 +86,13 @@ public class DesertBeak : ModNPC
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DesertBeakTrophy>(), 10));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ItemID.SandBlock, 1, 22, 55));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<DesertBeakMask>(), 7));
-        npcLoot.Add(
-            ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<DesertFeather>(), 1, 6, 10));
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(),
-            AvalonWorld.RhodiumOre.GetRhodiumVariantItemOre(), 1, 15, 26));
-        npcLoot.Add(
-            ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<TomeoftheDistantPast>(), 3));
-        npcLoot.Add(
-            ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<EggCannon>(), 3));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<DesertFeather>(), 1, 6, 10));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<TomeoftheDistantPast>(), 3));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<EggCannon>(), 3));
+        npcLoot.Add(ItemDropRule.ByCondition(new IridiumWorldDropAndNotExpert(), ModContent.ItemType<IridiumOre>(), 1, 15, 26));
+        npcLoot.Add(ItemDropRule.ByCondition(new RhodiumWorldDropAndNotExpert(), ModContent.ItemType<RhodiumOre>(), 1, 15, 26));
+        npcLoot.Add(ItemDropRule.ByCondition(new OsmiumWorldDropAndNotExpert(), ModContent.ItemType<OsmiumOre>(), 1, 15, 26));
+
         npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<DesertBeakBossBag>()));
         npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<DesertBeakRelic>()));
     }
