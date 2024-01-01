@@ -1,11 +1,9 @@
 using Avalon.Dusts;
+using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -42,20 +40,6 @@ class Snotsabre : ModItem
     {
         if (!hasHit)
         {
-            //int j = 0;
-            //for (int i = 0; i < Main.npc.Length; i++)
-            //{
-            //    NPC npc = Main.npc[i];
-            //    if (npc.Center.Distance(target.Center) < 200 && npc.active && !npc.friendly && npc != target)
-            //    {
-            //        npc.SimpleStrikeNPC((int)(hit.Damage * 0.4f), 0, hit.Crit, 0, hit.DamageType, true, player.luck);
-            //        npc.AddBuff(BuffID.Poisoned, 4 * 60);
-            //        DustLine(Main.rand.NextVector2FromRectangle(target.Hitbox),Main.rand.NextVector2FromRectangle(npc.Hitbox));
-            //    }
-            //    j++;
-            //    if (j > 10)
-            //        break;
-            //}
             List<int> AlreadyHit = new List<int> { };
             for(int i = 0; i < 10; i++)
             {
@@ -64,14 +48,19 @@ class Snotsabre : ModItem
                 {
                     int dmg = Main.npc[npc].SimpleStrikeNPC((int)(hit.Damage * 0.4f), 0, hit.Crit, 0, hit.DamageType, true, player.luck);
                     player.addDPS(dmg);
-                    Main.npc[npc].AddBuff(BuffID.Poisoned, 4 * 60);
+                    //Main.npc[npc].AddBuff(BuffID.Poisoned, 4 * 60);
                     DustLine(Main.rand.NextVector2FromRectangle(target.Hitbox), Main.rand.NextVector2FromRectangle(Main.npc[npc].Hitbox));
                     AlreadyHit.Add(npc);
                 }
             }
             AlreadyHit.Clear();
+
+            for(int i = 0; i < 4; i++)
+            {
+                Projectile.NewProjectile(player.GetSource_ItemUse(player.HeldItem),target.Center,Main.rand.NextVector2CircularEdge(6,6),ModContent.ProjectileType<SnotsabreShot>(),Item.damage / 2,Item.knockBack / 2, player.whoAmI,target.whoAmI);
+            }
         }
-        target.AddBuff(BuffID.Poisoned, 8 * 60);
+        target.AddBuff(BuffID.Poisoned, 4 * 60);
         hasHit = true;
         for (int i = 0; i < 15; i++)
         {

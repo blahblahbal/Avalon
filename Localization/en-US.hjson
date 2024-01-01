@@ -7603,6 +7603,7 @@ Mods: {
 			MarrowMasher.DisplayName: Marrow Masher
 			CraniumCrusher.DisplayName: Cranium Crusher
 			UrchinMace.DisplayName: Urchin Uppercutter
+			SnotsabreShot.DisplayName: Snotsabre Shot
 		}
 
 		NPCs: {

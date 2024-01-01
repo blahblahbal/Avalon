@@ -10,9 +10,7 @@ public class ExplosiveEggShrapnel : EggShrapnel
 {
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width;
-        Projectile.height = dims.Width;
+        Projectile.Size = new Vector2(8);
         Projectile.aiStyle = 1;
         AIType = ProjectileID.Bullet;
         Projectile.tileCollide = true;
