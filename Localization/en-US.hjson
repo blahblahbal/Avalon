@@ -3791,7 +3791,7 @@ Mods: {
 
 			Pathogen: {
 				DisplayName: Pathogen
-				Tooltip: Blech
+				Tooltip: "'Blech'"
 			}
 
 			CaesiumOre: {
@@ -7388,7 +7388,7 @@ Mods: {
 				Tooltip:
 					'''
 					Ignores 15 points of enemy defence
-					Ciritcal hits break enemy armor
+					Critical hits break enemy armor
 					'''
 			}
 
