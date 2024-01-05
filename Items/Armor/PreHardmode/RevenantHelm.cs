@@ -11,6 +11,10 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Head)]
 class RevenantHelm : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

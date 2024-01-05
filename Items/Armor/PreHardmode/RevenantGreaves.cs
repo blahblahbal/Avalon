@@ -9,6 +9,10 @@ namespace Avalon.Items.Armor.PreHardmode;
 [AutoloadEquip(EquipType.Legs)]
 class RevenantGreaves : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

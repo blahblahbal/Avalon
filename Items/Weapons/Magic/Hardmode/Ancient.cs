@@ -52,31 +52,9 @@ class Ancient : ModItem
 
         return false;
     }
-    public override void HoldItem(Player player)
+    public override void ModifyManaCost(Player player, ref float reduce, ref float mult)
     {
-        Item ancient = Item;
-        int baseCost = 40;
         if (player.GetModPlayer<AvalonPlayer>().AncientLessCost)
-        {
-            foreach (Item item in player.inventory)
-            {
-                if (item.type == ancient.type)
-                {
-                    item.mana = 20;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            foreach (Item item in player.inventory)
-            {
-                if (item.type == ancient.type)
-                {
-                    item.mana = baseCost;
-                    break;
-                }
-            }
-        }
+            mult *= 0.5f;
     }
 }

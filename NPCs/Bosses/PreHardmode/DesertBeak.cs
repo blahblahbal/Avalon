@@ -205,11 +205,12 @@ public class DesertBeak : ModNPC
                 {
                     if (NPC.ai[0] > DashDelay * 3.1f + 150)
                     {
-                        int Feathers = Main.rand.Next(10, 14);
-                        for (int i = 0; i < Feathers; i++)
+                        SoundEngine.PlaySound(SoundID.Item7,NPC.position);
+                        int Feathers = Main.rand.Next(2, 3) * 2;
+                        for (int i = -Feathers / 2; i < Feathers / 2; i++)
                         {
                             if (Main.netMode != NetmodeID.MultiplayerClient)
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(0, 8).RotatedBy((MathHelper.TwoPi / Feathers) * Main.rand.NextFloat(0.9f, 1.1f) * i) * Main.rand.NextFloat(0.8f, 1.1f), ModContent.ProjectileType<DesertBeakFeather>(), (int)(15 * modifier), 1, -1, 0, 0, Main.rand.Next(10));
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, NPC.Center.DirectionTo(Target.Center).RotatedBy((MathHelper.Pi / 5 / Feathers) * Main.rand.NextFloat(0.9f, 1.1f) * i) * Main.rand.NextFloat(8.8f, 9.1f), ModContent.ProjectileType<DesertBeakFeather>(), (int)(15 * modifier), 1, -1, 0, 0, Main.rand.Next(10));
                         }
                         NPC.ai[0] = -85;
                         NPC.ai[1]++;
