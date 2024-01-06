@@ -7396,6 +7396,11 @@ Mods: {
 				DisplayName: Urchin Uppercutter
 				Tooltip: Has a chance to poison enemies
 			}
+
+			CrystalStoneCrystal: {
+				DisplayName: Crystal Stone Crystal
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
