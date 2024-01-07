@@ -114,6 +114,11 @@ public class Shurikerang : ModProjectile
                 }
             }
         }
+        if (Projectile.ai[2] == 0)
+        {
+            Projectile.ai[2] = Math.Sign(Projectile.velocity.X);
+        }
+        Projectile.direction = (int)Projectile.ai[2];
         Projectile.rotation += 0.4f * Projectile.direction;
     }
 }

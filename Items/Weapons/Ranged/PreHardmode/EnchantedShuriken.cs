@@ -11,7 +11,7 @@ class EnchantedShuriken : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 18;
+        Item.damage = 16;
         Item.noUseGraphic = true;
         Item.maxStack = 1;
         Item.shootSpeed = 10.5f;
@@ -19,11 +19,11 @@ class EnchantedShuriken : ModItem
         Item.rare = ItemRarityID.Green;
         Item.noMelee = true;
         Item.width = dims.Width;
-        Item.useTime = 15;
+        Item.useTime = 16;
         Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.EnchantedShuriken>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 30;
-        Item.useAnimation = 15;
+        Item.useAnimation = 16;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item1;
     }
