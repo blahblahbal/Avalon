@@ -11,6 +11,7 @@ public class Shurikerang : ModProjectile
 {
     public override void SetDefaults()
     {
+        Rectangle dims = this.GetDims();
         Projectile.width = 24;
         Projectile.height = 24;
         Projectile.aiStyle = -1;
@@ -18,6 +19,8 @@ public class Shurikerang : ModProjectile
         Projectile.penetrate = -1;
         Projectile.DamageType = DamageClass.Ranged;
         AIType = ProjectileID.EnchantedBoomerang;
+        DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
+        DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
     }
 
     public override bool OnTileCollide(Vector2 oldVelocity)
