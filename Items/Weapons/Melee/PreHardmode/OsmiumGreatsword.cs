@@ -14,7 +14,7 @@ public class OsmiumGreatsword : ModItem
         Item.autoReuse = true;
         Item.useTurn = true;
         //Item.scale = 1.5f;
-        Item.crit += 5;
+        Item.crit = 6;
         Item.rare = ItemRarityID.Orange;
         Item.useTime = 20;
         Item.knockBack = 5f;

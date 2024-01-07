@@ -15,7 +15,7 @@ class Snotsabre : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item1;
-        Item.damage = 24;
+        Item.damage = 20;
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.scale = 1.1f;
@@ -57,7 +57,7 @@ class Snotsabre : ModItem
 
             for(int i = 0; i < 4; i++)
             {
-                Projectile.NewProjectile(player.GetSource_ItemUse(player.HeldItem),target.Center,Main.rand.NextVector2CircularEdge(6,6),ModContent.ProjectileType<SnotsabreShot>(),Item.damage / 2,Item.knockBack / 2, player.whoAmI,target.whoAmI);
+                Projectile.NewProjectile(player.GetSource_ItemUse(player.HeldItem),target.Center,Main.rand.NextVector2CircularEdge(6,6),ModContent.ProjectileType<SnotsabreShot>(),Item.damage / 3,Item.knockBack / 2, player.whoAmI,target.whoAmI);
             }
         }
         target.AddBuff(BuffID.Poisoned, 4 * 60);
