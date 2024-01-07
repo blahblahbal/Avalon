@@ -9,11 +9,11 @@ class RhodiumGreatsword : ModItem
     {
         Item.width = 34;
         Item.height = 36;
-        Item.damage = 25;
+        Item.damage = 26;
         Item.autoReuse = true;
         Item.useTurn = true;
         //Item.scale = 1.5f;
-        Item.crit += 5;
+        Item.crit = 6;
         Item.rare = ItemRarityID.Orange;
         Item.useTime = 25;
         Item.knockBack = 5f;
