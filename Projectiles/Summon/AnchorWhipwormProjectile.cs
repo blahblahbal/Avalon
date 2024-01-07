@@ -57,7 +57,7 @@ namespace Avalon.Projectiles.Summon
                 }
             }
             if (Projectile.localAI[2] < 5)
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, target.Center.DirectionTo(Main.player[Projectile.owner].Center).RotatedByRandom(0.4f), ModContent.ProjectileType<AnchorWorm>(), (int)Main.player[Projectile.owner].GetTotalDamage(DamageClass.Summon).ApplyTo(20), 0, Projectile.owner,target.whoAmI);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, target.Center.DirectionTo(Main.player[Projectile.owner].Center).RotatedByRandom(0.4f), ModContent.ProjectileType<AnchorWorm>(), (int)Main.player[Projectile.owner].GetTotalDamage(DamageClass.Summon).ApplyTo(4), 0, Projectile.owner,target.whoAmI);
             Main.player[Projectile.owner].MinionAttackTargetNPC = target.whoAmI;
             Projectile.damage = (int)(Projectile.damage * 0.9f); // Multihit penalty. Decrease the damage the more enemies the whip hits.
         }
