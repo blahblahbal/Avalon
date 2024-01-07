@@ -14,7 +14,7 @@ class ObsidianGlaive : ModItem // Obisidian Glaive
     {
         Item.width = 38;
         Item.height = 40;
-        Item.damage = 25;
+        Item.damage = 23;
         Item.UseSound = SoundID.Item1;
         Item.noUseGraphic = true;
         Item.scale = 1f;

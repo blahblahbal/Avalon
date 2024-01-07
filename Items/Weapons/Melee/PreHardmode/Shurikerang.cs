@@ -10,14 +10,13 @@ class Shurikerang : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 18;
+        Item.damage = 14;
         Item.noUseGraphic = true;
         Item.scale = 1.2f;
-        Item.maxStack = 10;
         Item.shootSpeed = 12f;
         Item.DamageType = DamageClass.Melee;
         Item.noMelee = true;
-        Item.rare = ItemRarityID.Orange;
+        Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
         Item.UseSound = SoundID.Item1;
         Item.useTime = 20;
@@ -30,6 +29,6 @@ class Shurikerang : ModItem
     }
     public override bool CanUseItem(Player player)
     {
-        return player.ownedProjectileCounts[Item.shoot] < 10;
+        return player.ownedProjectileCounts[Item.shoot] < 3;
     }
 }
