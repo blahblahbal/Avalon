@@ -8,10 +8,12 @@ public class GlacierChunk3 : ModGore
 {
     public override bool Update(Gore gore)
     {
+        var lightFade = (gore.timeLeft > 255f ? 1f : gore.timeLeft / 255f);
+        Lighting.AddLight((int)(gore.position.X / 16f), (int)(gore.position.Y / 16f), 0f, (0.4f * lightFade), (0.5f * lightFade));
         return true;
     }
     public override Color? GetAlpha(Gore gore, Color lightColor)
     {
-        return Color.White * (gore.timeLeft > 200f ? 200f / 255f : gore.timeLeft / 255f);
+        return new Color(255, 255, 255, 200) * (gore.timeLeft > 255f ? 1f : gore.timeLeft / 255f);
     }
 }
