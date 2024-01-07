@@ -97,8 +97,8 @@ public class GlacierBall : ModProjectile
             Projectile.velocity.Y = -Projectile.oldVelocity.Y;
         }
         Projectile.velocity.Y *= 0.75f;
-        Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(3, 3) + Projectile.velocity * 0.5f, Mod.Find<ModGore>("GlacierShard").Type, Main.rand.NextFloat(1f, 1.5f));
-        Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(3, 3) + Projectile.velocity * 0.5f, Mod.Find<ModGore>("GlacierShard").Type, Main.rand.NextFloat(1f, 1.5f));
+        Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(3, 3) + Projectile.velocity * 0.5f, Mod.Find<ModGore>("GlacierShard" + Main.rand.Next(1, 4)).Type, Main.rand.NextFloat(1f, 1.5f));
+        Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(3, 3) + Projectile.velocity * 0.5f, Mod.Find<ModGore>("GlacierShard" + Main.rand.Next(1, 4)).Type, Main.rand.NextFloat(1f, 1.5f));
         Projectile.frame++;
     }
     public override Color? GetAlpha(Color lightColor)
