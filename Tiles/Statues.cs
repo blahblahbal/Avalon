@@ -58,15 +58,32 @@ public class Statues : ModTile
     }
     public override void HitWire(int i, int j)
     {
-        if (Main.tile[i, j].TileFrameX >= 396 && Main.tile[i, j].TileFrameX <= 430)
+        Tile tile = Main.tile[i, j];
+        int left = i;
+        int top = j;
+        if (tile.TileFrameX % 18 != 0)
         {
-            Main.tile[i, j].TileFrameX += 36;
-            WorldGen.SquareTileFrame(i, j);
+            left--;
         }
-        else if (Main.tile[i, j].TileFrameX >= 432 && Main.tile[i, j].TileFrameX <= 466)
+        if (tile.TileFrameY != 0 && tile.TileFrameY != 162)
         {
-            Main.tile[i, j].TileFrameX -= 36;
-            WorldGen.SquareTileFrame(i, j);
+            top--;
+        }
+        for (int q = left; q < left + 1; q++)
+        {
+            for (int z = top; z < top + 2; z++)
+            {
+                if (Main.tile[q, z].TileFrameX >= 396 && Main.tile[q, z].TileFrameX <= 430)
+                {
+                    Main.tile[q, z].TileFrameX += 36;
+                    WorldGen.SquareTileFrame(q, z);
+                }
+                else if (Main.tile[q, z].TileFrameX >= 432 && Main.tile[q, z].TileFrameX <= 466)
+                {
+                    Main.tile[q, z].TileFrameX -= 36;
+                    WorldGen.SquareTileFrame(q, z);
+                }
+            }
         }
     }
     public override void NearbyEffects(int i, int j, bool closer)
