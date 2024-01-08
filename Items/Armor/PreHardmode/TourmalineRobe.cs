@@ -12,10 +12,10 @@ class TourmalineRobe : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.defense = 5;
-        Item.rare = ItemRarityID.Green;
+        Item.defense = 1;
+        Item.rare = ItemRarityID.White;
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 0, 50, 0) * 3;
+        Item.value = Item.sellPrice(0, 0, 75, 0);
         Item.height = dims.Height;
     }
     public override void Load()
@@ -51,7 +51,7 @@ class TourmalineRobe : ModItem
     }
     public override void UpdateEquip(Player player)
     {
-        player.statManaMax2 += 100;
-        player.manaCost -= 0.15f;
+        player.statManaMax2 += 40;
+        player.manaCost -= 0.8f;
     }
 }

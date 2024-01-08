@@ -12,10 +12,10 @@ class PeridotRobe : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.defense = 5;
-        Item.rare = ItemRarityID.Green;
+        Item.defense = 2;
+        Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 0, 50, 0) * 4;
+        Item.value = Item.sellPrice(0, 2, 25, 0);
         Item.height = dims.Height;
     }
     public override void Load()
@@ -40,18 +40,18 @@ class PeridotRobe : ModItem
     {
         if (player.head == 14)
         {
-            player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.PeridotRobe1");
+            player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Robe1");
             player.GetCritChance(DamageClass.Magic) += 10;
         }
         else if (player.head == 159)
         {
-            player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.PeridotRobe2");
+            player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Robe2");
             player.statManaMax2 += 60;
         }
     }
     public override void UpdateEquip(Player player)
     {
-        player.statManaMax2 += 120;
-        player.manaCost -= 0.16f;
+        player.statManaMax2 += 60;
+        player.manaCost -= 0.11f;
     }
 }

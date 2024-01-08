@@ -830,8 +830,8 @@ Mods: {
 				DisplayName: Peridot Robe
 				Tooltip:
 					'''
-					Increases maximum mana by 120
-					Reduces mana usage by 16%
+					Increases maximum mana by 60
+					12% reduced mana cost
 					'''
 			}
 
@@ -839,8 +839,8 @@ Mods: {
 				DisplayName: Tourmaline Robe
 				Tooltip:
 					'''
-					Increases maximum mana by 100
-					Reduces mana usage by 15%
+					Increases maximum mana by 40
+					8% reduced mana cost
 					'''
 			}
 
@@ -848,8 +848,8 @@ Mods: {
 				DisplayName: Zircon Robe
 				Tooltip:
 					'''
-					Increases maximum mana by 120
-					Reduces mana usage by 18%
+					Increases maximum mana by 80
+					18% reduced mana cost
 					'''
 			}
 
