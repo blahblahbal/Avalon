@@ -26,6 +26,16 @@ public static class ClassExtensions
     {
         return i.healLife > 0 || i.healMana > 0 || i.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina > 0;
     }
+    public static void SkipWireMulti(int xpos, int ypos, int xLength, int yLength)
+    {
+        for (int i = xpos; i < xpos + xLength - 1; i++)
+        {
+            for (int j = ypos; j < ypos + yLength - 1; j++)
+            {
+                Wiring.SkipWire(i, j);
+            }
+        }
+    }
     public static void DropCoinsProperly(float num7, int i, int j)
     {
         while ((int)num7 > 0)
