@@ -22,10 +22,10 @@ class ZirconRobe : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.defense = 6;
+        Item.defense = 4;
         Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 0, 50, 0) * 4;
+        Item.value = Item.sellPrice(0, 3, 25, 0);
         Item.height = dims.Height;
     }
     public override void AddRecipes()
@@ -51,7 +51,7 @@ class ZirconRobe : ModItem
     }
     public override void UpdateEquip(Player player)
     {
-        player.statManaMax2 += 120;
+        player.statManaMax2 += 80;
         player.manaCost -= 0.18f;
     }
 }
