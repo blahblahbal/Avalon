@@ -11,7 +11,7 @@ namespace Avalon.Projectiles.Ranged;
 public class BloodyArrow : ModProjectile
 {
     public float gravityTimer;
-    
+    public bool sticking;
 
     public override void SetDefaults()
     {
@@ -29,15 +29,21 @@ public class BloodyArrow : ModProjectile
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(gravityTimer);
+        writer.Write(sticking);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         gravityTimer = reader.ReadSingle();
+        sticking = reader.ReadBoolean();
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
         return true;
+    }
+    public override bool? CanHitNPC(NPC target)
+    {
+        return Projectile.ai[2] == 1 ? false : base.CanHitNPC(target);
     }
 
     public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -74,25 +80,30 @@ public class BloodyArrow : ModProjectile
             {
                 continue;
             }
+            else
+            {
+                Projectile.ai[2] = 1;
+            }
             if (npc.reflectsProjectiles && Projectile.CanBeReflected())
             {
                 npc.ReflectProjectile(Projectile);
                 break;
             }
-            if (Projectile.ai[0] == 0)
+            if (!sticking)
             {
+                
                 target.AddBuff(ModContent.BuffType<Buffs.Debuffs.Lacerated>(), 8 * 60);
             }
-            Projectile.ai[0] = 1f;
+            sticking = true;
             Projectile.ai[1] = npcIndex;
             Projectile.velocity = (npc.Center - Projectile.Center) * 0.75f;
             Projectile.netUpdate = true;
-            var array2 = (Point[])(object)new Point[3]; // 5 = maximum sticking in target
+            var array2 = new Point[3]; // 5 = maximum sticking in target
             int projCount = 0;
             for (int projIndex = 0; projIndex < 1000; projIndex++)
             {
                 Projectile proj = Main.projectile[projIndex];
-                if (projIndex != Projectile.whoAmI && proj.active && proj.owner == Main.myPlayer && proj.type == Projectile.type && proj.ai[0] == 1f && proj.ai[1] == (float)npcIndex)
+                if (projIndex != Projectile.whoAmI && proj.active && proj.owner == Main.myPlayer && proj.type == Projectile.type && sticking && proj.ai[1] == npcIndex)
                 {
                     array2[projCount++] = new Point(projIndex, proj.timeLeft);
                     if (projCount >= array2.Length)
@@ -126,7 +137,7 @@ public class BloodyArrow : ModProjectile
     }
     public override void AI()
     {
-        if (Projectile.ai[0] == 1f)
+        if (sticking)
         {
             Vector2 center3 = Projectile.Center;
             Projectile.ignoreWater = true;
@@ -173,7 +184,13 @@ public class BloodyArrow : ModProjectile
             gravityTimer = 15f;
             Projectile.velocity.Y += 0.1f;
         }
-        if (Projectile.ai[0] == 0) Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + 1.57f;
+        
+        if (!sticking)
+        {
+            //Main.NewText(Projectile.velocity.X);
+            //Main.NewText(Projectile.velocity.Y);
+            Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + 1.57f;
+        }
         if (Projectile.velocity.Y > 16f)
         {
             Projectile.velocity.Y = 16f;
