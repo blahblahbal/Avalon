@@ -91,7 +91,7 @@ public class CrystalStone : ModTile
     }
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
-        if ((i + j) % 5 == 0)
+        if ((int)(Math.Sin(Math.Tan(i + j) + Math.Tan(j * 0.3f)) * 200) % 10 == 0)
         {
             Tile tile = Main.tile[i, j];
             Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
