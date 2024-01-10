@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Avalon.Items.Placeable.Statue;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
@@ -184,6 +185,21 @@ public class Statues : ModTile
                 return false;
         }
         return base.CreateDust(i, j, ref type);
+    }
+    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        Tile tile = Main.tile[i, j];
+        var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+        if (Main.drawToScreen)
+        {
+            zero = Vector2.Zero;
+        }
+        int offsetY = 2;
+
+        Vector2 pos = new Vector2(i * 16, j * 16 + offsetY) + zero - Main.screenPosition;
+        var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
+        Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/Statues_Glow").Value, pos, frame,
+            Color.White);
     }
 }
 
