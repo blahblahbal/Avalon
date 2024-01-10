@@ -21,7 +21,7 @@ namespace Avalon.Hooks
 
         private bool On_Sandstorm_ShouldSandstormDustPersist(On_Sandstorm.orig_ShouldSandstormDustPersist orig)
         {
-            if (Sandstorm.Happening && Main.LocalPlayer.ZoneSandstorm && (Main.bgStyle == 2 || Main.bgStyle == 5 || Main.bgStyle == 15))
+            if (Sandstorm.Happening && Main.LocalPlayer.InModBiome<Biomes.ContagionDesert>())
             {
                 return Main.bgDelay < 50;
             }
