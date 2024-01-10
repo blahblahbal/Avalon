@@ -72,27 +72,26 @@ public class Statues : ModTile
         while (tile.TileFrameY != 0 || tile.TileFrameY != 162)
         {
             top--;
-            if (Main.tile[left, top].TileFrameY == 0 || Main.tile[left, top].TileFrameY == 162)
+            if (Main.tile[i, top].TileFrameY == 0 || Main.tile[i, top].TileFrameY == 162)
             {
                 break;
             }
         }
         ClassExtensions.SkipWireMulti(left, top, 2, 3);
-        for (int q = left; q < left + 1; q++)
+        for (int q = left; q <= left + 1; q++)
         {
-            for (int z = top; z < top + 2; z++)
+            for (int z = top; z <= top + 2; z++)
             {
-                if (Main.tile[q, z].TileFrameX >= 432 && Main.tile[q, z].TileFrameX <= 466)
-                {
-                    Main.tile[q, z].TileFrameX -= 36;
-                    WorldGen.SquareTileFrame(q, z);
-                }
-                else if (Main.tile[q, z].TileFrameX >= 396 && Main.tile[q, z].TileFrameX <= 430)
+                if (Main.tile[q, z].TileFrameX >= 396 && Main.tile[q, z].TileFrameX <= 430)
                 {
                     Main.tile[q, z].TileFrameX += 36;
                     WorldGen.SquareTileFrame(q, z);
                 }
-                
+                else if (Main.tile[q, z].TileFrameX >= 432 && Main.tile[q, z].TileFrameX <= 466)
+                {
+                    Main.tile[q, z].TileFrameX -= 36;
+                    WorldGen.SquareTileFrame(q, z);
+                }
             }
         }
     }
