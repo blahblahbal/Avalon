@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Accessories.PreHardmode;
+namespace Avalon.Items.Accessories.Hardmode;
 
 internal class GaseousTsunamiRocketinaJar : ModItem
 {

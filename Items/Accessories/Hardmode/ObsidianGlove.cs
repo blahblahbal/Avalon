@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Accessories.PreHardmode;
+namespace Avalon.Items.Accessories.Hardmode;
 
 class ObsidianGlove : ModItem
 {

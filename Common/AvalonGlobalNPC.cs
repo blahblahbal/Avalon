@@ -1,6 +1,8 @@
 using Avalon.Biomes;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
+using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Accessories.Vanity;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
@@ -114,6 +116,13 @@ public class AvalonGlobalNPC : GlobalNPC
             shop.Add(new Item(ModContent.ItemType<FalseTreasureMap>())
             {
                 shopCustomPrice = Item.buyPrice(0, 4),
+            });
+        }
+        if (shop.NpcType == NPCID.GoblinTinkerer && Main.hardMode)
+        {
+            shop.Add(new Item(ModContent.ItemType<RocketinaBottle>())
+            {
+                shopCustomPrice = Item.buyPrice(0, 6),
             });
         }
         if (shop.NpcType == NPCID.GoblinTinkerer && NPC.downedGoblins)

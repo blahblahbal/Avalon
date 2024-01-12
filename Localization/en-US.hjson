@@ -2270,12 +2270,12 @@ Mods: {
 
 			BloodyWhetstone: {
 				DisplayName: Bloody Whetstone
-				Tooltip: Melee attacks inflict lacerated
+				Tooltip: Melee attacks inflict Lacerated
 			}
 
 			BloodyNecklace: {
 				DisplayName: Bloody Necklace
-				Tooltip: Melee attacks inflict lacerated and 15 increased armor penetration
+				Tooltip: Melee attacks inflict Lacerated and 15 increased armor penetration
 			}
 
 			DesertLongsword: {
@@ -2292,7 +2292,7 @@ Mods: {
 				DisplayName: Slitthroat Necklace
 				Tooltip:
 					'''
-					Melee attacks inflict lacerated
+					Melee attacks inflict Lacerated
 					+15 armor penetration
 					'''
 			}
@@ -4165,7 +4165,7 @@ Mods: {
 			}
 
 			BadgeOfBacteria: {
-				DisplayName: Badge Of Bacteria
+				DisplayName: Badge of Bacteria
 				Tooltip:
 					'''
 					Increases damage by 8 after being hit

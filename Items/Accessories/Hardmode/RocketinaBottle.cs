@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -6,7 +7,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Accessories.PreHardmode;
+namespace Avalon.Items.Accessories.Hardmode;
 
 public class RocketinaBottle : ModItem
 {
@@ -28,9 +29,10 @@ public class RocketinaBottle : ModItem
     //public override void AddRecipes()
     //{
     //    CreateRecipe(1)
-    //        .AddIngredient(ItemID.Amethyst, 12)
-    //        .AddIngredient(ItemID.Chain)
-    //        .AddTile(TileID.Anvils)
+    //        .AddIngredient(ItemID.HellstoneBar, 10)
+    //        .AddIngredient(ItemID.Bottle)
+    //        .AddIngredient(ModContent.ItemType<BreezeShard>(), 5)
+    //        .AddTile(TileID.TinkerersWorkbench)
     //        .Register();
     //}
 }

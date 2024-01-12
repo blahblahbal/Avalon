@@ -6,7 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Accessories.PreHardmode;
+namespace Avalon.Items.Accessories.Hardmode;
 
 public class RocketinaBalloon : ModItem
 {

@@ -3,17 +3,17 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Accessories.PreHardmode;
+namespace Avalon.Items.Accessories.Hardmode;
 
-public class BundleofBalloons : ModItem
+public class MegaBundleofBalloons : ModItem
 {
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Yellow;
+        Item.rare = ItemRarityID.Cyan;
         Item.width = dims.Width;
         Item.accessory = true;
-        Item.value = Item.sellPrice(gold: 3);
+        Item.value = Item.sellPrice(gold: 5);
         Item.height = dims.Height;
     }
 
@@ -22,21 +22,17 @@ public class BundleofBalloons : ModItem
         player.GetJumpState<RocketBottleJump>().Enable();
         player.GetJumpState<TsunamiInABottleJump>().Enable();
         player.GetJumpState<FartInAJarJump>().Enable();
+        player.GetJumpState<SandstormInABottleJump>().Enable();
+        player.GetJumpState<BlizzardInABottleJump>().Enable();
+        player.GetJumpState<CloudInABottleJump>().Enable();
         player.jumpBoost = true;
     }
 
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ModContent.ItemType<RocketinaBalloon>())
-            .AddIngredient(ItemID.SharkronBalloon)
-            .AddIngredient(ItemID.FartInABalloon)
-            .AddTile(TileID.TinkerersWorkbench)
-            .Register();
-
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<GaseousTsunamiRocketinaJar>())
-            .AddIngredient(ItemID.ShinyRedBalloon, 3)
+            .AddIngredient(ModContent.ItemType<BundleofBalloons>())
+            .AddIngredient(ItemID.BundleofBalloons)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }

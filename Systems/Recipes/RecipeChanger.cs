@@ -1,5 +1,6 @@
 using Avalon.Common.Players;
 using Avalon.Hooks;
+using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Shards;
