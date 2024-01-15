@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 using Terraria.Localization;
+using Terraria.ID;
 
 namespace Avalon.Tiles;
 
@@ -37,7 +38,37 @@ public class PlacedGems : ModTile
     {
         return (ushort)(Main.tile[i, j].TileFrameX / 18);
     }
-
+    public override bool CreateDust(int i, int j, ref int type)
+    {
+        switch (Main.tile[i, j].TileFrameX / 18)
+        {
+            //case 0:
+            //    type = ModContent.DustType<Dusts.OpalDust>();
+            //    break;
+            //case 1:
+            //    type = ModContent.DustType<Dusts.OnyxDust>();
+            //    break;
+            //case 2:
+            //    type = ModContent.DustType<Dusts.KunziteDust>();
+            //    break;
+            case 3:
+                var dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.TourmalineDust>(), 0, 0, 50, default, 0.8f);
+                Main.dust[dust].noLightEmittence = true;
+                Main.dust[dust].noLight = true;
+                return false;
+            case 4:
+                dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.PeridotDust>(), 0, 0, 50, default, 0.8f);
+                Main.dust[dust].noLightEmittence = true;
+                Main.dust[dust].noLight = true;
+                return false;
+            case 5:
+                dust = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<Dusts.ZirconDust>(), 0, 0, 50, default, 0.8f);
+                Main.dust[dust].noLightEmittence = true;
+                Main.dust[dust].noLight = true;
+                return false;
+        }
+        return false;
+    }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int toDrop = 0;

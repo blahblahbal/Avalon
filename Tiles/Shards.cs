@@ -1,6 +1,7 @@
 using Avalon.Items.Material;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Placeable.Tile;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -55,14 +56,18 @@ public class Shards : ModTile
                 type = DustID.Bone;
                 break;
             case 6:
-                type = DustID.Water;
+                type = DustID.DungeonWater;
                 break;
             case 7:
-                type = DustID.Venom;
+                type = DustID.CorruptionThorns;
                 break;
             case 8:
-                type = DustID.Ice_Pink;
-                break;
+                if (Main.rand.NextBool(2))
+                {
+                    Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, DustID.ManaRegeneration);
+                }
+                Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, DustID.Enchanted_Pink);
+                return false;
         }
         return true;
     }
