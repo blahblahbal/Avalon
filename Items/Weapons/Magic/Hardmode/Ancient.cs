@@ -16,7 +16,6 @@ class Ancient : ModItem
         Item.DamageType = DamageClass.Magic;
         Item.damage = 46;
         Item.autoReuse = true;
-        Item.useTurn = true;
         Item.shootSpeed = 10f;
         Item.crit += 2;
         Item.mana = 40;
@@ -31,6 +30,10 @@ class Ancient : ModItem
         Item.value = Item.sellPrice(0, 25, 0, 0);
         Item.useAnimation = 25;
         Item.height = dims.Height;
+    }
+    public override Vector2? HoldoutOffset()
+    {
+        return new Vector2(5, 0);
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {

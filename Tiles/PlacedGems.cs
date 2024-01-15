@@ -116,7 +116,7 @@ public class PlacedGems : ModTile
         var variation = WorldGen.genRand.Next(3) * 18;
         if (topType >= 0 && Main.tileSolid[topType] && !Main.tileSolidTop[topType])
         {
-            if (tile.TileFrameY < 0 || tile.TileFrameY > 36)
+            if (tile.TileFrameY > 0 || tile.TileFrameY < 36)
                 tile.TileFrameY = (short)variation;
         }
         else if (leftType >= 0 && Main.tileSolid[leftType] && !Main.tileSolidTop[leftType])
