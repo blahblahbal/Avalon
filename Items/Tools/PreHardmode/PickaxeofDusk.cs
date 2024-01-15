@@ -126,6 +126,12 @@ public class PickaxeofDusk3x3 : ModItem
     }
     public override void HoldItem(Player player)
     {
+        if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+        {
+            Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+            player.cursorItemIconEnabled = true;
+            player.cursorItemIconID = Type;
+        }
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);

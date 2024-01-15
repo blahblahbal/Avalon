@@ -455,6 +455,10 @@ public class AvalonPlayer : ModPlayer
         {
             Player.statDefense *= 0.75f;
         }
+        if (Pathogen && Player.slow)
+        {
+            Player.moveSpeed /= 1.5f;
+        }
 
         if (Main.netMode != NetmodeID.MultiplayerClient)
         {

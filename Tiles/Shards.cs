@@ -3,6 +3,7 @@ using Avalon.Items.Material.Shards;
 using Avalon.Items.Placeable.Tile;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -31,7 +32,40 @@ public class Shards : ModTile
     {
         return (ushort)(Main.tile[i, j].TileFrameX / 18);
     }
-
+    public override bool CreateDust(int i, int j, ref int type)
+    {
+        switch (Main.tile[i, j].TileFrameX / 18)
+        {
+            case 0:
+                type = DustID.Torch;
+                break;
+            case 1:
+                type = DustID.IceTorch;
+                break;
+            case 2:
+                type = DustID.JungleGrass;
+                break;
+            case 3:
+                type = DustID.Dirt;
+                break;
+            case 4:
+                type = DustID.Cloud;
+                break;
+            case 5:
+                type = DustID.Bone;
+                break;
+            case 6:
+                type = DustID.Water;
+                break;
+            case 7:
+                type = DustID.Venom;
+                break;
+            case 8:
+                type = DustID.Ice_Pink;
+                break;
+        }
+        return true;
+    }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int toDrop = 0;
