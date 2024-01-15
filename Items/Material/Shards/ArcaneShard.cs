@@ -18,6 +18,14 @@ class ArcaneShard : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
+        Item.autoReuse = true;
+        Item.useTurn = true;
+        Item.consumable = true;
+        Item.useTime = 10;
+        Item.useAnimation = 15;
+        Item.useStyle = ItemUseStyleID.Swing;
+        Item.createTile = ModContent.TileType<Tiles.Shards>();
+        Item.placeStyle = 8;
         Item.rare = ItemRarityID.LightPurple;
         Item.width = dims.Width;
         Item.maxStack = 9999;

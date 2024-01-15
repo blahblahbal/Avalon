@@ -32,21 +32,21 @@ namespace Avalon.Hooks
                 finalB = num4 * 0.2f;
                 if (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>())
                 {
-                    finalR *= 0.54f;
-                    finalG *= 0.29f;
-                    finalB *= 0.09f;
+                    finalR *= 1.1f;
+                    finalG *= 0.8f;
+                    finalB *= 0.4f;
                 }
                 else if (tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>())
                 {
-                    finalR *= 0.37f;
-                    finalG *= 0.5f;
-                    finalB *= 0.24f;
+                    finalR *= 0.714f;
+                    finalG *= 1f;
+                    finalB *= 0f;
                 }
                 else if (tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>())
                 {
-                    finalR *= 0.05f;
-                    finalG *= 0.59f;
-                    finalB *= 0.49f;
+                    finalR *= 0f;
+                    finalG *= 1f;
+                    finalB *= 1f;
                 }
             }
             if (lightColor.X < finalR)
@@ -82,21 +82,21 @@ namespace Avalon.Hooks
                 finalB = num8;
                 if (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>())
                 {
-                    finalR *= 0.54f;
-                    finalG *= 0.29f;
-                    finalB *= 0.09f;
+                    finalR *= 1.1f;
+                    finalG *= 0.8f;
+                    finalB *= 0.4f;
                 }
                 else if (tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>())
                 {
-                    finalR *= 0.37f;
-                    finalG *= 0.5f;
-                    finalB *= 0.24f;
+                    finalR *= 0.714f;
+                    finalG *= 1f;
+                    finalB *= 0f;
                 }
                 else if (tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>())
                 {
-                    finalR *= 0.05f;
-                    finalG *= 0.59f;
-                    finalB *= 0.49f;
+                    finalR *= 0f;
+                    finalG *= 1f;
+                    finalB *= 1f;
                 }
             }
             float num3 = 1f - Main.shimmerDarken;

@@ -16,6 +16,14 @@ class ToxinShard : ModItem
     }
     public override void SetDefaults()
     {
+        Item.autoReuse = true;
+        Item.useTurn = true;
+        Item.consumable = true;
+        Item.useTime = 10;
+        Item.useAnimation = 15;
+        Item.useStyle = ItemUseStyleID.Swing;
+        Item.createTile = ModContent.TileType<Tiles.Shards>();
+        Item.placeStyle = 2;
         Item.rare = ItemRarityID.Green;
         Item.Size = new(20);
         Item.maxStack = 9999;
