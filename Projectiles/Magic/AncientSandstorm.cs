@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Magic;
@@ -38,7 +39,7 @@ public class AncientSandstorm : ModProjectile
         //{
         //    randScale = 0.75f;
         //}
-        var dustType = 10;
+        var dustType = DustID.SandstormInABottle;
         if (Main.rand.NextBool(2))
         {
             for (var num962 = 0; num962 < 1; num962++)

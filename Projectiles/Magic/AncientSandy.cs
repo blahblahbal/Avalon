@@ -26,7 +26,7 @@ public class AncientSandy : ModProjectile
     public override void AI()
     {
         var newColor2 = default(Color);
-        var num972 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Gold, 0f, 0f, 100, newColor2, 2f);
+        var num972 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.SandstormInABottle, 0f, 0f, 100, newColor2, 2f);
         Main.dust[num972].noGravity = true;
         return;
     }
