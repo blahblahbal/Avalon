@@ -62,19 +62,19 @@ public class AncientSandstorm : ModProjectile
                     dust3_0.velocity *= 2f;
                     if (Main.rand.NextBool(5))
                     {
-                        var proj1 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), dust1_0.position.X, dust1_0.position.Y, dust1_0.velocity.X, dust1_0.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
+                        var proj1 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X, Projectile.position.Y, dust1_0.velocity.X, dust1_0.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
                         Main.projectile[proj1].timeLeft = 60;
                         Main.projectile[proj1].scale = 0.5f;
                     }
                     if (Main.rand.NextBool(5))
                     {
-                        var proj2 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), dust2_0.position.X, dust2_0.position.Y, dust2_0.velocity.X, dust2_0.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
+                        var proj2 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X, Projectile.position.Y, dust2_0.velocity.X, dust2_0.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
                         Main.projectile[proj2].timeLeft = 60;
                         Main.projectile[proj2].scale = 0.5f;
                     }
                     if (Main.rand.NextBool(5))
                     {
-                        var proj3 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), dust3_0.position.X, dust3_0.position.Y, dust3_0.velocity.X, dust3_0.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
+                        var proj3 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X, Projectile.position.Y, dust3_0.velocity.X, dust3_0.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
                         Main.projectile[proj3].timeLeft = 60;
                         Main.projectile[proj3].scale = 0.5f;
                     }
@@ -93,19 +93,19 @@ public class AncientSandstorm : ModProjectile
                 //Main.dust[dust3].scale *= randScale;
                 if (Main.rand.NextBool(5))
                 {
-                    var proj4 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), dust1_1.position.X, dust1_1.position.Y, dust1_1.velocity.X, dust1_1.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
+                    var proj4 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X, Projectile.position.Y, dust1_1.velocity.X, dust1_1.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
                     Main.projectile[proj4].timeLeft = 60;
                     Main.projectile[proj4].scale = 0.5f;
                 }
                 if (Main.rand.NextBool(5))
                 {
-                    var proj5 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), dust2_1.position.X, dust2_1.position.Y, dust2_1.velocity.X, dust2_1.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
+                    var proj5 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X, Projectile.position.Y, dust2_1.velocity.X, dust2_1.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
                     Main.projectile[proj5].timeLeft = 60;
                     Main.projectile[proj5].scale = 0.5f;
                 }
                 if (Main.rand.NextBool(5))
                 {
-                    var proj6 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), dust3_1.position.X, dust3_1.position.Y, dust3_1.velocity.X, dust3_1.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
+                    var proj6 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X, Projectile.position.Y, dust3_1.velocity.X, dust3_1.velocity.Y, ModContent.ProjectileType<AncientSandy>(), (int)(Main.player[Projectile.owner].GetDamage(DamageClass.Magic)).ApplyTo(Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].damage), Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].knockBack, Main.player[Projectile.owner].whoAmI, 0f, 0f);
                     Main.projectile[proj6].timeLeft = 60;
                     Main.projectile[proj6].scale = 0.5f;
                 }
