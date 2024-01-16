@@ -39,7 +39,7 @@ public class AncientSandstorm : ModProjectile
         //{
         //    randScale = 0.75f;
         //}
-        var dustType = DustID.SandstormInABottle;
+        var dustType = ModContent.DustType<Dusts.AncientSandDust>();
         if (Main.rand.NextBool(2))
         {
             for (var num962 = 0; num962 < 1; num962++)
