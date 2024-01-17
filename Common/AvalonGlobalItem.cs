@@ -88,6 +88,17 @@ public class AvalonGlobalItem : GlobalItem
     {
         if (Main.mouseRightRelease && Main.mouseRight)
         {
+            if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome && ModContent.GetInstance<TomeSlot>().FunctionalItem.type != 0)
+            {
+                Item tomeInSlot = new Item();
+                tomeInSlot.SetDefaults(ModContent.GetInstance<TomeSlot>().FunctionalItem.type);
+
+                ModContent.GetInstance<TomeSlot>().FunctionalItem.SetDefaults(item.type);
+                item.SetDefaults(tomeInSlot.type);
+
+                SoundEngine.PlaySound(SoundID.Grab);
+                return false;
+            }
             if (item.type == ModContent.ItemType<Breakdawn>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
