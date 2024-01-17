@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -65,7 +66,7 @@ class Peridot : ModItem
         Item.useTurn = true;
         Item.maxStack = 9999;
         Item.createTile = ModContent.TileType<Tiles.PlacedGems>();
-        Item.placeStyle = 4;
+        Item.placeStyle = 4 + 6;
         Item.consumable = true;
         Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
@@ -74,5 +75,21 @@ class Peridot : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+    }
+    public override bool? UseItem(Player player)
+    {
+        int i = Player.tileTargetX;
+        int j = Player.tileTargetY;
+        if ((WorldGen.SolidTile(i - 1, j) || WorldGen.SolidTile(i + 1, j) || WorldGen.SolidTile(i, j - 1) || WorldGen.SolidTile(i, j + 1)))
+        {
+            Item.createTile = ModContent.TileType<Tiles.Shards>();
+            Item.consumable = true;
+        }
+        else
+        {
+            Item.createTile = -1;
+            Item.consumable = false;
+        }
+        return null;
     }
 }

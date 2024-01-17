@@ -4,6 +4,7 @@ using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -20,12 +21,30 @@ public class Shards : ModTile
         TileObjectData.newTile.CoordinateHeights = new int[] { 16 };
         TileObjectData.newTile.CoordinatePadding = 2;
         TileObjectData.newTile.StyleHorizontal = true;
+        TileObjectData.newTile.AnchorWall = false;
+        TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(CanPlaceAlter, -1, 0, processedCoordinates: true);
+        TileObjectData.newTile.UsesCustomCanPlace = true;
+        TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(AfterPlacement, -1, 0, processedCoordinates: false);
         TileObjectData.addTile(Type);
         Main.tileFrameImportant[Type] = true;
         Main.tileObsidianKill[Type] = true;
         Main.tileShine2[Type] = true;
         Main.tileShine[Type] = 500;
         Main.tileSpelunker[Type] = true;
+    }
+
+    public int CanPlaceAlter(int i, int j, int type, int style, int direction, int alternate)
+    {
+        return 1;
+    }
+    public static int AfterPlacement(int i, int j, int type, int style, int direction, int alternate)
+    {
+        if (Main.netMode == NetmodeID.MultiplayerClient)
+        {
+            NetMessage.SendTileSquare(Main.myPlayer, i, j, 1, 1);
+        }
+
+        return 1;
     }
 
     // selects the map entry depending on the frameX
@@ -156,6 +175,21 @@ public class Shards : ModTile
         var bottomType = -1;
         var leftType = -1;
         var rightType = -1;
+
+        // placed shard fix
+        if (tile.TileFrameX >= 18 * 9)
+        {
+            if (WorldGen.SolidTile(i - 1, j) || WorldGen.SolidTile(i + 1, j) || WorldGen.SolidTile(i, j - 1) || WorldGen.SolidTile(i, j + 1))
+            {
+                tile.TileFrameX -= 18 * 9;
+            }
+            else
+            {
+                tile.HasTile = false;
+            }
+        }
+        // end fix
+
         if (topTile.HasTile && !topTile.BottomSlope)
             bottomType = topTile.TileType;
         if (bottomTile.HasTile && !bottomTile.IsHalfBlock && !bottomTile.TopSlope)

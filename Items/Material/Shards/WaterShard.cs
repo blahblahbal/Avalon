@@ -23,7 +23,7 @@ class WaterShard : ModItem
         Item.useAnimation = 15;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.createTile = ModContent.TileType<Tiles.Shards>();
-        Item.placeStyle = 6;
+        Item.placeStyle = 6 + 9;
         Item.rare = ItemRarityID.Orange;
         Item.Size = new(20);
         Item.maxStack = 9999;

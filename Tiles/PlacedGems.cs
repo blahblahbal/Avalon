@@ -31,6 +31,12 @@ public class PlacedGems : ModTile
         AddMapEntry(new Color(22, 212, 198), this.GetLocalization("Tourmaline"));
         AddMapEntry(new Color(0, 237, 14), this.GetLocalization("Peridot"));
         AddMapEntry(new Color(198, 168, 130), this.GetLocalization("Zircon"));
+        AddMapEntry(new Color(86, 239, 255), this.GetLocalization("Opal"));
+        AddMapEntry(new Color(61, 56, 65), this.GetLocalization("Onyx"));
+        AddMapEntry(new Color(251, 66, 146), this.GetLocalization("Kunzite"));
+        AddMapEntry(new Color(22, 212, 198), this.GetLocalization("Tourmaline"));
+        AddMapEntry(new Color(0, 237, 14), this.GetLocalization("Peridot"));
+        AddMapEntry(new Color(198, 168, 130), this.GetLocalization("Zircon"));
     }
 
     // selects the map entry depending on the frameX
@@ -136,6 +142,21 @@ public class PlacedGems : ModTile
         var bottomType = -1;
         var leftType = -1;
         var rightType = -1;
+
+        // placed gem fix
+        if (tile.TileFrameX >= 18 * 6)
+        {
+            if (WorldGen.SolidTile(i - 1, j) || WorldGen.SolidTile(i + 1, j) || WorldGen.SolidTile(i, j - 1) || WorldGen.SolidTile(i, j + 1))
+            {
+                tile.TileFrameX -= 18 * 6;
+            }
+            else
+            {
+                tile.HasTile = false;
+            }
+        }
+        // end fix
+
         if (topTile.HasTile && !topTile.BottomSlope)
             bottomType = topTile.TileType;
         if (bottomTile.HasTile && !bottomTile.IsHalfBlock && !bottomTile.TopSlope)
