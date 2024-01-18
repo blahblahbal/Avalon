@@ -36,6 +36,8 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
+            World.Biomes.CrystalMines.Place(new Point(x, y));
+
             //WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
 
             //WorldGeneration.Structures.LavaOcean.MakeLavaLake(x, y);

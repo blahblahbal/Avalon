@@ -34,9 +34,34 @@ internal class CrystalMines
         ModContent.WallType<Walls.ImperviousBrickWallUnsafe>()
     };
 
-    public static bool Place(Point origin)
+    public static bool PlaceNew(Point origin)
     {
         int width = WorldGen.genRand.Next(100, 120);
+        int height = 90;// WorldGen.genRand.Next(70, 90);
+
+        WorldGeneration.Utils.TileRunnerSpecial(origin.X - width / 4, origin.Y - height / 4, WorldGen.genRand.Next(55, 65), WorldGen.genRand.Next(55, 65), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
+        WorldGeneration.Utils.TileRunnerSpecial(origin.X + width / 4, origin.Y - height / 4, WorldGen.genRand.Next(55, 65), WorldGen.genRand.Next(55, 65), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
+        WorldGeneration.Utils.TileRunnerSpecial(origin.X - width / 4, origin.Y + height / 4, WorldGen.genRand.Next(55, 65), WorldGen.genRand.Next(55, 65), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
+        WorldGeneration.Utils.TileRunnerSpecial(origin.X + width / 4, origin.Y + height / 4, WorldGen.genRand.Next(55, 65), WorldGen.genRand.Next(55, 65), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
+
+        for (int i = origin.X - width / 2; i < origin.X + width / 2; i++)
+        {
+            for (int j = origin.Y - height / 2; j < origin.Y + height / 2; j++)
+            {
+                if (WorldGen.genRand.NextBool(200))
+                {
+                    WorldGeneration.Utils.TileRunnerSpecial(i, j, WorldGen.genRand.Next(10, 15), WorldGen.genRand.Next(10, 15), ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>());
+                }
+            }
+        }
+
+        WorldGeneration.Utils.SquareTileFrameArea(origin.X - width / 2, origin.Y - height / 2, width, height);
+        return true;
+    }
+
+    public static bool Place(Point origin)
+    {
+        int width = WorldGen.genRand.Next(250, 280);
         int height = 90;// WorldGen.genRand.Next(70, 90);
 
         for (int i = origin.X; i < origin.X + width; i++)
@@ -114,6 +139,18 @@ internal class CrystalMines
         int cap1X = origin.X + width - 7;
         int cap2X = origin.X + 7;
 
+        // place crystal stone crystals
+        //for (int i = origin.X - 10; i < origin.X + width + 10; i++)
+        //{
+        //    for (int j = origin.Y - 5; j < origin.Y + height + 5; j++)
+        //    {
+        //        if (WorldGen.genRand.NextBool(200))
+        //        {
+        //            WorldGeneration.Utils.TileRunnerSpecial(i, j, WorldGen.genRand.Next(5, 12), WorldGen.genRand.Next(15, 25), ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>());
+        //        }
+        //    }
+        //}
+
         //WorldGen.stopDrops = true;
         for (int i = origin.X; i < origin.X + width; i++)
         {
@@ -162,13 +199,14 @@ internal class CrystalMines
                 }
                 else if (tile.TileType == TileID.Cobweb)
                 {
-                    tile.TileType = (ushort)ModContent.TileType<Tiles.CrystalMines.CrystalStone>();
+                    tile.TileType = (ushort)ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>();
                     //WorldGen.KillTile(i, j, noItem: true);
                     //tile.ResetToType((ushort)ModContent.TileType<Tiles.CrystalStone>());
                 }
                 else
                 {
-                    tile.ResetToType((ushort)ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
+                    if (tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
+                        tile.ResetToType((ushort)ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
                 }
                 if (tile.WallType != WallID.LihzahrdBrickUnsafe && //tile.WallType != ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>() &&
                     !Main.wallDungeon[tile.WallType] && tile.WallType != WallID.LihzahrdBrickUnsafe)
@@ -180,6 +218,21 @@ internal class CrystalMines
                     }
                 }
 
+                // crystal stone crystals
+                if (j < origin.Y + tunnel1YPos ||
+                     j > origin.Y + tunnel1YPos + tunnelHeight && j < origin.Y + tunnel2YPos ||
+                     j > origin.Y + tunnel2YPos + tunnelHeight && j < origin.Y + tunnel3YPos ||
+                     j > origin.Y + tunnel3YPos + tunnelHeight && j < origin.Y + tunnel4YPos ||
+                     j > origin.Y + tunnel4YPos + tunnelHeight && j < origin.Y + tunnel5YPos ||
+                     j > origin.Y + tunnel5YPos + tunnelHeight)
+                {
+                    if (WorldGen.genRand.NextBool(35))
+                    {
+                        WorldGeneration.Utils.TileRunnerSpecial(i, j, WorldGen.genRand.Next(5, 12), WorldGen.genRand.Next(13, 20), ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>());
+                    }
+                }
+
+
                 #region horizontal tunnels
                 if (j >= origin.Y + tunnel1YPos && j <= origin.Y + tunnel1YPos + tunnelHeight ||
                     j >= origin.Y + tunnel2YPos && j <= origin.Y + tunnel2YPos + tunnelHeight ||
@@ -188,7 +241,7 @@ internal class CrystalMines
                     j >= origin.Y + tunnel5YPos && j <= origin.Y + tunnel5YPos + tunnelHeight)
                 {
                     WorldGen.noTileActions = true;
-                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         //WorldGen.stopDrops = true;
                         tile.HasTile = false;
@@ -199,18 +252,20 @@ internal class CrystalMines
                 }
                 #endregion horizontal tunnels
 
+                
+
                 #region wood
-                if (j == origin.Y + tunnel1YPos ||
-                    j == origin.Y + tunnel2YPos ||
-                    j == origin.Y + tunnel3YPos ||
-                    j == origin.Y + tunnel4YPos ||
-                    j == origin.Y + tunnel5YPos)
-                {
-                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
-                    {
-                        WorldGen.PlaceTile(i, j, TileID.WoodBlock, true);
-                    }
-                }
+                //if (j == origin.Y + tunnel1YPos ||
+                //    j == origin.Y + tunnel2YPos ||
+                //    j == origin.Y + tunnel3YPos ||
+                //    j == origin.Y + tunnel4YPos ||
+                //    j == origin.Y + tunnel5YPos)
+                //{
+                //    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                //    {
+                //        WorldGen.PlaceTile(i, j, TileID.WoodBlock, true);
+                //    }
+                //}
                 #endregion wood
 
                 #region vertical tunnels
@@ -218,11 +273,11 @@ internal class CrystalMines
                 if (j >= origin.Y + tunnel1YPos + tunnelHeight && j <= origin.Y + tunnel2YPos + 1 &&
                     i >= vTunnel1PosStart && i <= vTunnel1PosEnd)
                 {
-                    if (j == origin.Y + tunnel2YPos + 1 && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (j == origin.Y + tunnel2YPos + 1 && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         tile.HasTile = false;
                     }
-                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         tile.HasTile = false;
                     }
@@ -230,11 +285,11 @@ internal class CrystalMines
                 if (j >= origin.Y + tunnel2YPos + tunnelHeight && j <= origin.Y + tunnel3YPos + 1 &&
                     i >= vTunnel2PosStart && i <= vTunnel2PosEnd)
                 {
-                    if (j == origin.Y + tunnel3YPos + 1 && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (j == origin.Y + tunnel3YPos + 1 && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         tile.HasTile = false;
                     }
-                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         tile.HasTile = false;
                     }
@@ -242,11 +297,11 @@ internal class CrystalMines
                 if (j >= origin.Y + tunnel3YPos + tunnelHeight && j <= origin.Y + tunnel4YPos + 1 &&
                     i >= vTunnel3PosStart && i <= vTunnel3PosEnd)
                 {
-                    if (j == origin.Y + tunnel3YPos + tunnelHeight && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (j == origin.Y + tunnel3YPos + tunnelHeight && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         tile.HasTile = false;
                     }
-                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         tile.HasTile = false;
                     }
@@ -254,11 +309,11 @@ internal class CrystalMines
                 if (j >= origin.Y + tunnel4YPos + tunnelHeight && j <= origin.Y + tunnel5YPos + 1 &&
                     i >= vTunnel4PosStart && i <= vTunnel4PosEnd)
                 {
-                    if (j == origin.Y + tunnel4YPos + tunnelHeight && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (j == origin.Y + tunnel4YPos + tunnelHeight && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         tile.HasTile = false;
                     }
-                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick)
+                    if (!Main.tileDungeon[tile.TileType] && !Main.wallDungeon[tile.WallType] && tile.TileType != TileID.LihzahrdBrick && tile.TileType != ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>())
                     {
                         tile.HasTile = false;
                     }
