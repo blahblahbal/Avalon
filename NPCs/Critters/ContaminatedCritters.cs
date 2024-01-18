@@ -13,6 +13,13 @@ public class ContaminatedBunny : ModNPC
 {
     public override void SetStaticDefaults()
     {
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+
+        {
+            // Influences how the NPC looks in the Bestiary
+            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         Main.npcFrameCount[Type] = 7;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }
@@ -49,6 +56,15 @@ public class ContaminatedGoldfish : ModNPC
 {
     public override void SetStaticDefaults()
     {
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+
+        {
+            // Influences how the NPC looks in the Bestiary
+            Velocity = 1f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+            IsWet = true,
+            PortraitPositionYOverride = +6
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         Main.npcFrameCount[Type] = 6;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }
@@ -85,6 +101,13 @@ public class ContaminatedPenguin : ModNPC
 {
     public override void SetStaticDefaults()
     {
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+
+        {
+            // Influences how the NPC looks in the Bestiary
+            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         Main.npcFrameCount[Type] = 12;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
     }

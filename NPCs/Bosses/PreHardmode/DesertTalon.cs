@@ -15,6 +15,10 @@ namespace Avalon.NPCs.Bosses.PreHardmode
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 6;
+            NPCID.Sets.NPCBestiaryDrawModifiers bestiaryData = new NPCID.Sets.NPCBestiaryDrawModifiers() {
+				Hide = true // Hides this NPC from the bestiary
+			};
+            NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, bestiaryData);
         }
         public override void SetDefaults()
         {

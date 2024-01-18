@@ -52,6 +52,14 @@ public class Librarian : ModNPC
                 new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture)),
                 new Profiles.DefaultNPCProfile(Texture + "_Shimmer", ShimmerHeadIndex)
             );
+
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+
+        {
+            // Influences how the NPC looks in the Bestiary
+            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
     }
     public override ITownNPCProfile TownNPCProfile()
     {
