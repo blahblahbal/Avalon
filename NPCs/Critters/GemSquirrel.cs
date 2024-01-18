@@ -28,40 +28,71 @@ public abstract class GemSquirrel : ModNPC
         for (int l = 0; l < 255; l++)
         {
             bool spawnThing = false;
-            if (Main.player[l].Center.Y / 16f > (float)Main.UnderworldLayer && (!Main.remixWorld || !((double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0) || !((double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)))
+            if (!spawnInfo.Player.InPillarZone() && ((!Main.bloodMoon && !Main.pumpkinMoon && !Main.snowMoon) || Main.dayTime) && (!Main.eclipse || !Main.dayTime) && !Main.player[l].ZoneDungeon && !Main.player[l].ZoneCorrupt && !Main.player[l].ZoneCrimson && !Main.player[l].ZoneMeteor && !Main.player[l].ZoneOldOneArmy)
             {
-                int chance = 10;
-                if (Main.player[l].townNPCs == 1f)
+                if (Main.player[l].Center.Y / 16f > (float)Main.UnderworldLayer && (!Main.remixWorld || !((double)(Main.player[l].Center.X / 16f) > (double)Main.maxTilesX * 0.39 + 50.0) || !((double)(Main.player[l].Center.X / 16f) < (double)Main.maxTilesX * 0.61)))
                 {
-                    chance = 10;
+                    if (Main.player[l].townNPCs == 1f && Main.rand.NextBool(10))
+                    {
+                        spawnThing = true;
+                    }
+                    else if (Main.player[l].townNPCs == 2f && Main.rand.NextBool(5))
+                    {
+                        spawnThing = true;
+                    }
+                    else if (Main.player[l].townNPCs >= 3f && Main.rand.NextBool(3))
+                    {
+                        spawnThing = true;
+                    }
+                }
+                else if (Main.player[l].townNPCs == 1f)
+                {
+                    if (Main.player[l].ZoneGraveyard && Main.rand.NextBool(10))
+                    {
+                        spawnThing = true;
+                    }
+                    else if (Main.rand.NextBool(3))
+                    {
+                        spawnThing = true;
+                    }
                 }
                 else if (Main.player[l].townNPCs == 2f)
                 {
-                    chance = 5;
+                    if (Main.player[l].ZoneGraveyard && Main.rand.NextBool(6))
+                    {
+                        spawnThing = true;
+                    }
+                    else if (!Main.rand.NextBool(3))
+                    {
+                        spawnThing = true;
+                    }
                 }
                 else if (Main.player[l].townNPCs >= 3f)
                 {
-                    chance = 3;
-                }
-                if (Main.rand.NextBool(chance))
-                {
-                    spawnThing = true;
+                    if (Main.player[l].ZoneGraveyard && Main.rand.NextBool(3))
+                    {
+                        spawnThing = true;
+                    }
+                    else if (!Main.rand.NextBool(30))
+                    {
+                        spawnThing = true;
+                    }
                 }
             }
 
-            int num14 = (int)(Main.player[l].position.X / 16f) - spawnRangeX;
-            int num15 = (int)(Main.player[l].position.X / 16f) + spawnRangeX;
+            //int num14 = (int)(Main.player[l].position.X / 16f) - spawnRangeX;
+            //int num15 = (int)(Main.player[l].position.X / 16f) + spawnRangeX;
             int num16 = (int)(Main.player[l].position.Y / 16f) - spawnRangeX;
             int num17 = (int)(Main.player[l].position.Y / 16f) + spawnRangeY;
-            int num3 = Main.rand.Next(num14, num15);
+            //int num3 = Main.rand.Next(num14, num15);
             int num4 = Main.rand.Next(num16, num17);
-            int num52 = Main.tile[num3, num4].TileType;
+            //int num52 = Main.tile[num3, num4].TileType;
             if (spawnThing)
             {
-                if (num52 != 2 && num52 != 477 && num52 != 109 && num52 != 492 && !((double)num4 > Main.worldSurface))
-                {
-                    break;
-                }
+                //if (num52 != 2 && num52 != 477 && num52 != 109 && num52 != 492 && !((double)num4 > Main.worldSurface))
+                //{
+                //    break;
+                //}
                 if (Main.raining && num4 <= Main.UnderworldLayer && num4 >= Main.rockLayer)
                 {
                     if (num4 >= Main.rockLayer && Main.rand.NextBool(35))
