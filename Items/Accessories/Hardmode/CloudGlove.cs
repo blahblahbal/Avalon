@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Players;
+using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -35,7 +36,7 @@ internal class CloudGlove : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Silk, 15)
             .AddIngredient(ItemID.Cloud, 25)
-            .AddIngredient(ItemID.SoulofFlight, 5)
+            .AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
             .AddRecipeGroup("Avalon:GoldBar", 5)
             .AddIngredient(ItemID.SunplateBlock, 10)
             .AddTile(TileID.TinkerersWorkbench)
@@ -44,7 +45,7 @@ internal class CloudGlove : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Silk, 15)
             .AddIngredient(ItemID.Cloud, 25)
-            .AddIngredient(ItemID.SoulofFlight, 5)
+            .AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
             .AddRecipeGroup("Avalon:GoldBar", 5)
             .AddIngredient(ModContent.ItemType<Placeable.Tile.MoonplateBlock>(), 10)
             .AddTile(TileID.TinkerersWorkbench)
@@ -53,7 +54,7 @@ internal class CloudGlove : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Silk, 15)
             .AddIngredient(ItemID.Cloud, 25)
-            .AddIngredient(ItemID.SoulofFlight, 5)
+            .AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
             .AddRecipeGroup("Avalon:GoldBar", 5)
             .AddIngredient(ModContent.ItemType<Placeable.Tile.DuskplateBlock>(), 10)
             .AddTile(TileID.TinkerersWorkbench)

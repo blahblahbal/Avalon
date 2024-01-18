@@ -1490,7 +1490,7 @@ Mods: {
 			}
 
 			CorruptShard: {
-				DisplayName: Corrupt Shard
+				DisplayName: Evil Shard
 				Tooltip: A fragment of evil creatures
 			}
 
@@ -7409,10 +7409,7 @@ Mods: {
 
 			RottenApple: {
 				DisplayName: Rotten Apple
-				Tooltip: 
-                '''
-                'The bane of all doctors'
-                '''
+				Tooltip: "'The bane of all doctors'"
 			}
 		}
 

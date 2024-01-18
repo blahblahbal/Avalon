@@ -455,9 +455,16 @@ public class AvalonMobDrops : GlobalNPC
     }
     public override void ModifyGlobalLoot(GlobalLoot globalLoot)
     {
+        var hardModeCondition = new HardmodeOnly();
         var desertPostBeakCondition = new DesertPostBeakDrop();
         var contagionCondition = new ZoneContagion();
         var soulCondition = new UndergroundContagionCondition();
+
+        var zoneRockLayerCondition = new ZoneRockLayer();
+        var snowCondition = new ZoneSnow();
+        var undergroundSnow = new Combine(true, "Drops in the underground snow", snowCondition, zoneRockLayerCondition);
+        var undergroundHardmodeSnow = new Combine(true, undergroundSnow.GetConditionDescription(), undergroundSnow,
+            hardModeCondition);
 
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumHeadgear>(), 150));
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumPlateMail>(), 150));
@@ -514,6 +521,8 @@ public class AvalonMobDrops : GlobalNPC
         globalLoot.Add(HallowKeyRule);
         globalLoot.Add(CrimsonKeyRule);
         globalLoot.Add(DesertKeyRule);
+
+        globalLoot.Add(ItemDropRule.ByCondition(undergroundHardmodeSnow, ModContent.ItemType<SoulofIce>(), 10));
 
         globalLoot.Add(ItemDropRule.ByCondition(soulCondition, ItemID.SoulofNight, 5));
 

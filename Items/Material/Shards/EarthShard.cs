@@ -24,7 +24,7 @@ class EarthShard : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.createTile = ModContent.TileType<Tiles.Shards>();
         Item.placeStyle = 3 + 9;
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.Green;
         Item.Size = new(20);
         Item.maxStack = 9999;
         Item.value = Item.sellPrice(0, 0, 6, 0);

@@ -1,11 +1,10 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class ArcaneShard : ModItem
+class ElementShard : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -17,20 +16,18 @@ class ArcaneShard : ModItem
     }
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.consumable = true;
         Item.useTime = 10;
         Item.useAnimation = 15;
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.createTile = ModContent.TileType<Tiles.Shards>();
-        Item.placeStyle = 8 + 9;
-        Item.rare = ItemRarityID.Green;
-        Item.width = dims.Width;
+        Item.createTile = ModContent.TileType<Tiles.ShardsTier2>();
+        Item.placeStyle = 9 + 10;
+        Item.rare = ItemRarityID.Cyan;
+        Item.Size = new(20);
         Item.maxStack = 9999;
-        Item.value = Item.sellPrice(0, 0, 6, 0);
-        Item.height = dims.Height;
+        Item.value = Item.sellPrice(0, 0, 24, 0);
     }
     public override bool? UseItem(Player player)
     {
@@ -38,7 +35,7 @@ class ArcaneShard : ModItem
         int j = Player.tileTargetY;
         if ((WorldGen.SolidTile(i - 1, j, noDoors: true) || WorldGen.SolidTile(i + 1, j, noDoors: true) || WorldGen.SolidTile(i, j - 1) || WorldGen.SolidTile(i, j + 1)))
         {
-            Item.createTile = ModContent.TileType<Tiles.Shards>();
+            Item.createTile = ModContent.TileType<Tiles.ShardsTier2>();
             Item.consumable = true;
         }
         else
@@ -47,5 +44,20 @@ class ArcaneShard : ModItem
             Item.consumable = false;
         }
         return null;
+    }
+    public override void AddRecipes()
+    {
+        CreateRecipe(10)
+            .AddIngredient(ModContent.ItemType<BlastShard>(), 3)
+            .AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
+            .AddIngredient(ModContent.ItemType<VenomShard>(), 3)
+            .AddIngredient(ModContent.ItemType<WickedShard>(), 3)
+            .AddIngredient(ModContent.ItemType<SacredShard>(), 3)
+            .AddIngredient(ModContent.ItemType<CoreShard>(), 3)
+            .AddIngredient(ModContent.ItemType<TorrentShard>(), 3)
+            .AddIngredient(ModContent.ItemType<DemonicShard>(), 3)
+            .AddIngredient(ModContent.ItemType<FrigidShard>(), 3)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
     }
 }

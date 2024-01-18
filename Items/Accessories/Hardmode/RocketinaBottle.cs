@@ -25,16 +25,6 @@ public class RocketinaBottle : ModItem
     {
         player.GetJumpState<RocketBottleJump>().Enable();
     }
-
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe(1)
-    //        .AddIngredient(ItemID.HellstoneBar, 10)
-    //        .AddIngredient(ItemID.Bottle)
-    //        .AddIngredient(ModContent.ItemType<BreezeShard>(), 5)
-    //        .AddTile(TileID.TinkerersWorkbench)
-    //        .Register();
-    //}
 }
 public class RocketBottleJump : ExtraJump
 {
