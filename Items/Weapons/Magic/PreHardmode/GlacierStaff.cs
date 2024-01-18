@@ -1,3 +1,5 @@
+using Avalon.Items.Material.Shards;
+using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -33,5 +35,14 @@ class GlacierStaff : ModItem
     public override Color? GetAlpha(Color lightColor)
     {
         return new Color(255, 255, 255, 200);
+    }
+    public override void AddRecipes()
+    {
+        Recipe.Create(Type)
+            .AddIngredient(ItemID.IceBlock, 50)
+            .AddIngredient(ModContent.ItemType<Icicle>(), 50)
+            .AddIngredient(ItemID.FallenStar, 8)
+            .AddIngredient(ModContent.ItemType<FrostShard>(), 4)
+            .AddTile(TileID.IceMachine);
     }
 }
