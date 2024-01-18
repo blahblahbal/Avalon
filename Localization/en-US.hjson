@@ -7411,6 +7411,61 @@ Mods: {
 				DisplayName: Rotten Apple
 				Tooltip: "'The bane of all doctors'"
 			}
+
+			BlastShard: {
+				DisplayName: Blast Shard
+				Tooltip: "'A fragment of fiery creatures'"
+			}
+
+			CoreShard: {
+				DisplayName: Core Shard
+				Tooltip: "'A fragment of deep earth creatures'"
+			}
+
+			DemonicShard: {
+				DisplayName: Demonic Shard
+				Tooltip: "'A fragment of undead creatures'"
+			}
+
+			ElementShard: {
+				DisplayName: Element Shard
+				Tooltip: "'A fragment of the elements'"
+			}
+
+			FrigidShard: {
+				DisplayName: Frigid Shard
+				Tooltip: "'A fragment of icy creatures'"
+			}
+
+			SacredShard: {
+				DisplayName: Sacred Shard
+				Tooltip: "'A fragment of hallow creatures'"
+			}
+
+			TornadoShard: {
+				DisplayName: Tornado Shard
+				Tooltip: "'A fragment of flying creatures'"
+			}
+
+			TorrentShard: {
+				DisplayName: Torrent Shard
+				Tooltip: "'A fragment of water creatures'"
+			}
+
+			VenomShard: {
+				DisplayName: Venom Shard
+				Tooltip: "'A fragment of venomous creatures'"
+			}
+
+			WickedShard: {
+				DisplayName: Wicked Shard
+				Tooltip: "'A fragment of wicked creatures'"
+			}
+
+			SoulofIce: {
+				DisplayName: Soul of Ice
+				Tooltip: "'The essence of ice creatures'"
+			}
 		}
 
 		InfoDisplays: {
