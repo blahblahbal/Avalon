@@ -14,7 +14,8 @@ public class ContagionPalmTree : ModPalmTree
 
     public override void SetStaticDefaults() => GrowsOnTileId = new[] { ModContent.TileType<Snotsand>() };
 
-    public override Asset<Texture2D> GetOasisTopTextures() => Asset<Texture2D>.Empty;
+    public override Asset<Texture2D> GetOasisTopTextures() =>
+        ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Contagion/ContagionOasisTree_Tops");
 
     public override Asset<Texture2D> GetTexture() =>
         ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Contagion/ContagionPalmTree");

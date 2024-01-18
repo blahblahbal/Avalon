@@ -34,7 +34,7 @@ class RottenApple : ModItem
     {
         CreateRecipe(20)
             .AddIngredient(ItemID.Apple)
-            .AddIngredient(ModContent.ItemType<Material.Shards.UndeadShard>(), 2)
+            .AddIngredient(ModContent.ItemType<Material.Shards.UndeadShard>())
             .AddTile(TileID.WorkBenches)
             .Register();
 
