@@ -30,8 +30,18 @@ class RottenApple : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe(10).AddIngredient(ModContent.ItemType<Material.Shards.FrostShard>()).AddTile(TileID.Anvils).Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe(20)
+            .AddIngredient(ItemID.Apple)
+            .AddIngredient(ModContent.ItemType<Material.Shards.UndeadShard>(), 2)
+            .AddTile(TileID.WorkBenches)
+            .Register();
+
+        CreateRecipe(20)
+            .AddIngredient(ItemID.Apple)
+            .AddIngredient(ModContent.ItemType<Material.RottenFlesh>(), 2)
+            .AddTile(TileID.WorkBenches)
+            .Register();
+    }
 }
