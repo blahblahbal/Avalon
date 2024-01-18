@@ -7401,6 +7401,11 @@ Mods: {
 				DisplayName: Crystal Stone Crystal
 				Tooltip: ""
 			}
+
+			WoodenClub: {
+				DisplayName: Wooden Club
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7609,6 +7614,7 @@ Mods: {
 			CraniumCrusher.DisplayName: Cranium Crusher
 			UrchinMace.DisplayName: Urchin Uppercutter
 			SnotsabreShot.DisplayName: Snotsabre Shot
+			WoodenClub.DisplayName: Wooden Club
 		}
 
 		NPCs: {
