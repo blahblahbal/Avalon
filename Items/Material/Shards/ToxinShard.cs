@@ -33,7 +33,7 @@ class ToxinShard : ModItem
     {
         int i = Player.tileTargetX;
         int j = Player.tileTargetY;
-        if ((WorldGen.SolidTile(i - 1, j) || WorldGen.SolidTile(i + 1, j) || WorldGen.SolidTile(i, j - 1) || WorldGen.SolidTile(i, j + 1)))
+        if ((WorldGen.SolidTile(i - 1, j, noDoors: true) || WorldGen.SolidTile(i + 1, j, noDoors: true) || WorldGen.SolidTile(i, j - 1) || WorldGen.SolidTile(i, j + 1)))
         {
             Item.createTile = ModContent.TileType<Tiles.Shards>();
             Item.consumable = true;
