@@ -100,17 +100,17 @@ public class WoodenClub : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         Texture2D texture = ModContent.Request<Texture2D>(Texture, AssetRequestMode.ImmediateLoad).Value;
-        Texture2D after = ModContent.Request<Texture2D>(Texture + "_after", AssetRequestMode.ImmediateLoad).Value;
+        //Texture2D after = ModContent.Request<Texture2D>(Texture + "_after", AssetRequestMode.ImmediateLoad).Value;
 
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
         Vector2 offset = new Vector2(13f, -13f);
 
-        for (int i = 0; i < Projectile.oldPos.Length; i++)
-        {
-            Vector2 drawPosOld = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
-            Main.EntitySpriteDraw(after, drawPosOld, frame, Color.Black * (1 - (i * 0.25f)) * 0.25f, Projectile.oldRot[i], frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
-        }
+        //for (int i = 0; i < Projectile.oldPos.Length; i++)
+        //{
+        //    Vector2 drawPosOld = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
+        //    Main.EntitySpriteDraw(after, drawPosOld, frame, Color.Black * (1 - (i * 0.25f)) * 0.25f, Projectile.oldRot[i], frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
+        //}
         Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
 
         return false;
