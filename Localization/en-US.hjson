@@ -7378,7 +7378,7 @@ Mods: {
 				DisplayName: Marrow Masher
 				Tooltip:
 					'''
-					Ignores 15 points of enemy defence
+					Ignores 15 points of enemy defense
 					Critical hits have more knockback
 					'''
 			}
@@ -7387,7 +7387,7 @@ Mods: {
 				DisplayName: Cranium Crusher
 				Tooltip:
 					'''
-					Ignores 15 points of enemy defence
+					Ignores 15 points of enemy defense
 					Critical hits break enemy armor
 					'''
 			}
@@ -7405,6 +7405,14 @@ Mods: {
 			WoodenClub: {
 				DisplayName: Wooden Club
 				Tooltip: ""
+			}
+
+			RottenApple: {
+				DisplayName: Rotten Apple
+				Tooltip: 
+                '''
+                'The bane of all doctors'
+                '''
 			}
 		}
 
@@ -7615,6 +7623,7 @@ Mods: {
 			UrchinMace.DisplayName: Urchin Uppercutter
 			SnotsabreShot.DisplayName: Snotsabre Shot
 			WoodenClub.DisplayName: Wooden Club
+			RottenApple.DisplayName: Rotten Apple
 		}
 
 		NPCs: {
