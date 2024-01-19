@@ -26,7 +26,7 @@ public class RottenApple : ModProjectile
     }
     public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
-        if (target.type == NPCID.Nurse || target.type == NPCID.DoctorBones || target.type == NPCID.WitchDoctor)
+        if (target.type == NPCID.Nurse || target.type == NPCID.DoctorBones || target.type == NPCID.WitchDoctor || target.type == NPCID.DrManFly)
         {
             modifiers.FinalDamage *= 3f;
         }
