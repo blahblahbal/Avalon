@@ -7676,6 +7676,7 @@ Mods: {
 			SnotsabreShot.DisplayName: Snotsabre Shot
 			WoodenClub.DisplayName: Wooden Club
 			RottenApple.DisplayName: Rotten Apple
+			JunglePetal.DisplayName: Jungle Petal
 		}
 
 		NPCs: {

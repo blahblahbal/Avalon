@@ -11,18 +11,18 @@ class FlowerofTheJungle : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.DamageType = DamageClass.Magic;
-        Item.damage = 25;
+        Item.damage = 22;
         Item.shootSpeed = 5f;
         Item.mana = 16;
         Item.noMelee = true;
         Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
         Item.knockBack = 5f;
-        Item.useTime = 16;
+        Item.useTime = 42;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.JungleFire>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 0, 60, 0);
-        Item.useAnimation = 16;
+        Item.useAnimation = 42;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item1;
     }
