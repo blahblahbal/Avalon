@@ -86,6 +86,7 @@ public class JungleFire : ModProjectile
                     Dust d2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), ModContent.DustType<JunglePetalDust>(), Projectile.velocity * 0.2f, 40, default(Color), 1.5f);
                     d2.noGravity = true;
                     d2.velocity *= 0.3f;
+                    d2.rotation = Main.rand.NextFloat(-MathHelper.Pi, MathHelper.Pi);
                 }
             }
         }
