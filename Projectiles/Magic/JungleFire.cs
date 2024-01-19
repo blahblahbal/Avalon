@@ -86,7 +86,7 @@ public class JungleFire : ModProjectile
                     Dust d2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), ModContent.DustType<JunglePetalDust>(), Projectile.velocity * 0.2f, 40, default(Color), 1.5f);
                     d2.noGravity = true;
                     d2.velocity *= 0.3f;
-                    d2.rotation = Main.rand.NextFloat(-MathHelper.Pi, MathHelper.Pi);
+                    d2.rotation = Main.rand.NextFloat(MathHelper.Pi * 2);
                 }
             }
         }
@@ -102,7 +102,7 @@ public class JungleFire : ModProjectile
         }
         if (Projectile.ai[1] % 20 == 0)
         {
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(Main.rand.Next(-14, 15), Main.rand.Next(-14, 15)), Projectile.velocity * 0.2f, ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.1f, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(Main.rand.Next(-14, 15), Main.rand.Next(-14, 15)), new Vector2(Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f + 2f), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.1f, Projectile.owner);
         }
     }
 }
