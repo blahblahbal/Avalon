@@ -7466,6 +7466,11 @@ Mods: {
 				DisplayName: Soul of Ice
 				Tooltip: "'The essence of ice creatures'"
 			}
+
+			MagicGrenade: {
+				DisplayName: Magic Grenade
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7677,6 +7682,8 @@ Mods: {
 			WoodenClub.DisplayName: Wooden Club
 			RottenApple.DisplayName: Rotten Apple
 			JunglePetal.DisplayName: Jungle Petal
+			MagicGrenade.DisplayName: Magic Grenade
+			MagicGrenadeBoom.DisplayName: Magic Grenade Boom
 		}
 
 		NPCs: {
