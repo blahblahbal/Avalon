@@ -77,7 +77,7 @@ public class JungleFire : ModProjectile
             {
                 if (Main.rand.NextBool(15))
                 {
-                    var d1 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.RuneWizard, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default(Color), 1.1f);
+                    var d1 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.JungleGrass, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default(Color), 1.3f);
                     Main.dust[d1].noGravity = true;
                     Main.dust[d1].velocity *= 0.3f;
                 }
@@ -95,7 +95,7 @@ public class JungleFire : ModProjectile
         {
             Projectile.velocity.Y = Projectile.velocity.Y + 0.2f;
         }
-        Projectile.rotation += 0.3f * Projectile.direction;
+        Projectile.rotation += 0.2f * Projectile.direction;
         if (Projectile.velocity.Y > 16f)
         {
             Projectile.velocity.Y = 16f;
