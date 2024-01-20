@@ -32,7 +32,8 @@ class DesertHorn : ModItem
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Beak>(), 6)
             .AddIngredient(ItemID.SandBlock, 30)
-            .AddTile(TileID.DemonAltar)
+            .AddIngredient(ItemID.FossilOre, 10)
+            .AddTile(TileID.Hellforge)
             .Register();
     }
     public override bool CanUseItem(Player player)
