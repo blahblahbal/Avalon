@@ -21,20 +21,20 @@ public class AvalonHerbologyPlayer : ModPlayer
     }
 
     public Dictionary<int, int> HerbCounts { get; private set; } = new();
-    public Dictionary<int, bool> HerbExchangeUnlocked { get; private set; } = new()
-    {
-        { ItemID.Daybloom, false },
-        { ItemID.Moonglow, false },
-        { ItemID.Blinkroot, false },
-        { ItemID.Deathweed, false },
-        { ItemID.Waterleaf, false },
-        { ItemID.Fireblossom, false },
-        { ItemID.Shiverthorn, false },
-        //{ ModContent.ItemType<Bloodberry>(), false },
-        //{ ModContent.ItemType<Sweetstem>(), false },
-        //{ ModContent.ItemType<Barfbush>(), false },
-        //{ ModContent.ItemType<Holybird>(), false },
-    };
+    //public Dictionary<int, bool> HerbExchangeUnlocked { get; set; } = new()
+    //{
+    //    { ItemID.Daybloom, false },
+    //    { ItemID.Moonglow, false },
+    //    { ItemID.Blinkroot, false },
+    //    { ItemID.Deathweed, false },
+    //    { ItemID.Waterleaf, false },
+    //    { ItemID.Fireblossom, false },
+    //    { ItemID.Shiverthorn, false },
+          //{ ModContent.ItemType<Bloodberry>(), false },
+          //{ ModContent.ItemType<Sweetstem>(), false },
+          //{ ModContent.ItemType<Barfbush>(), false },
+          //{ ModContent.ItemType<Holybird>(), false },
+    //};
     public HerbTier Tier { get; private set; }
     public int HerbTotal { get; private set; }
     public int HerbX { get; set; }
@@ -92,7 +92,7 @@ public class AvalonHerbologyPlayer : ModPlayer
                 herbType = HerbologyData.HerbIdByLargeHerbId[HerbologyData.LargeHerbIdByLargeHerbSeedId[item.type]];
             }
 
-            if (HerbTotal < charge || !HerbExchangeUnlocked[herbType])
+            if (HerbTotal < charge) // || !HerbExchangeUnlocked[herbType])
             {
                 return false;
             }
@@ -100,7 +100,7 @@ public class AvalonHerbologyPlayer : ModPlayer
             if (chargeInventory)
             {
                 if (herbType != ItemID.None && HerbCounts.ContainsKey(herbType) &&
-                    HerbCounts[herbType] > charge && HerbExchangeUnlocked[herbType])
+                    HerbCounts[herbType] > charge) // && HerbExchangeUnlocked[herbType])
                 {
                     HerbCounts[herbType] -= charge;
                 }
@@ -163,10 +163,10 @@ public class AvalonHerbologyPlayer : ModPlayer
             HerbCounts[herbType] += herbAddition * item.stack;
             HerbTotal += herbAddition * item.stack;
 
-            if (HerbCounts[herbType] > 50)
-            {
-                HerbExchangeUnlocked[herbType] = true;
-            }
+            //if (HerbCounts[herbType] > 50)
+            //{
+            //    HerbExchangeUnlocked[herbType] = true;
+            //}
         }
 
         int potionAddition = 0;
@@ -246,9 +246,8 @@ public class AvalonHerbologyPlayer : ModPlayer
         tag["Avalon:HerbTotal"] = HerbTotal;
         tag["Avalon:PotionTotal"] = PotionTotal;
         tag["Avalon:HerbCounts"] = HerbCounts.Save();
-        tag["Avalon:HerbExchangeUnlocked"] = HerbExchangeUnlocked.Save();
+        //tag["Avalon:HerbExchangeUnlocked"] = HerbExchangeUnlocked.Save();
     }
-
     /// <inheritdoc />
     public override void LoadData(TagCompound tag)
     {
@@ -275,29 +274,30 @@ public class AvalonHerbologyPlayer : ModPlayer
                 HerbCounts = new Dictionary<int, int>();
             }
         }
-        if (tag.ContainsKey("Avalon:HerbExchangeUnlocked"))
-        {
-            try
-            {
-                HerbExchangeUnlocked.Load(tag.Get<TagCompound>("Avalon:HerbExchangeUnlocked"));
-            }
-            catch
-            {
-                HerbExchangeUnlocked = new Dictionary<int, bool>()
-                {
-                    { ItemID.Daybloom, false },
-                    { ItemID.Moonglow, false },
-                    { ItemID.Blinkroot, false },
-                    { ItemID.Deathweed, false },
-                    { ItemID.Waterleaf, false },
-                    { ItemID.Fireblossom, false },
-                    { ItemID.Shiverthorn, false },
-                    //{ ModContent.ItemType<Bloodberry>(), false },
-                    //{ ModContent.ItemType<Sweetstem>(), false },
-                    //{ ModContent.ItemType<Barfbush>(), false },
-                    //{ ModContent.ItemType<Holybird>(), false }
-                };
-            }
-        }
+        //if (tag.ContainsKey("Avalon:HerbExchangeUnlocked"))
+        //{
+        //    try
+        //    {
+        //        HerbExchangeUnlocked.Load(tag.Get<TagCompound>("Avalon:HerbExchangeUnlocked"));
+
+        //    }
+        //    catch
+        //    {
+        //        HerbExchangeUnlocked = new Dictionary<int, bool>()
+        //        {
+        //            { ItemID.Daybloom, false },
+        //            { ItemID.Moonglow, false },
+        //            { ItemID.Blinkroot, false },
+        //            { ItemID.Deathweed, false },
+        //            { ItemID.Waterleaf, false },
+        //            { ItemID.Fireblossom, false },
+        //            { ItemID.Shiverthorn, false },
+        //            { ModContent.ItemType<Bloodberry>(), false },
+        //            { ModContent.ItemType<Sweetstem>(), false },
+        //            { ModContent.ItemType<Barfbush>(), false },
+        //            { ModContent.ItemType<Holybird>(), false }
+        //        };
+        //    }
+        //}
     }
 }

@@ -131,7 +131,7 @@ internal class HerbologyUIPurchaseAttachment : ExxoUIAttachment<ExxoUIItemSlot, 
 
         if (HerbologyData.ItemIsHerb(AttachmentHolder.Item))
         {
-            if (balance - cost < 0 || !modPlayer.HerbExchangeUnlocked[herbType])
+            if (balance - cost < 0) // || !modPlayer.HerbExchangeUnlocked[herbType])
             {
                 subBalance.TextColor = Color.Red;
             }
@@ -158,7 +158,7 @@ internal class HerbologyUIPurchaseAttachment : ExxoUIAttachment<ExxoUIItemSlot, 
             {
                 herbTypeIcon.SetImage(TextureAssets.Item[herbType]);
                 subHerbCountBalance.SetText($"-{cost}");
-                if (!modPlayer.HerbCounts.ContainsKey(herbType) || modPlayer.HerbCounts[herbType] - cost < 0 || !modPlayer.HerbExchangeUnlocked[herbType])
+                if (!modPlayer.HerbCounts.ContainsKey(herbType) || modPlayer.HerbCounts[herbType] - cost < 0) // || !modPlayer.HerbExchangeUnlocked[herbType])
                 {
                     subHerbCountBalance.TextColor = Color.Red;
                 }

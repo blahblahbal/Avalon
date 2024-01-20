@@ -71,7 +71,7 @@ public static class HerbologyData
         { ModContent.ItemType<LargeSweetstem>(), ModContent.ItemType<Sweetstem>() },
         { ModContent.ItemType<LargeBarfbush>(), ModContent.ItemType<Barfbush>() },
         { ModContent.ItemType<LargeHolybird>(), ModContent.ItemType<Holybird>() },
-        { ModContent.ItemType<LargeTwilightPlume>(), ModContent.ItemType<TwilightPlume>() },
+        //{ ModContent.ItemType<LargeTwilightPlume>(), ModContent.ItemType<TwilightPlume>() },
     };
 
     public static readonly Dictionary<int, int> LargeHerbIdByLargeHerbSeedId = new()
@@ -87,7 +87,7 @@ public static class HerbologyData
         { ModContent.ItemType<LargeSweetstemSeed>(), ModContent.ItemType<LargeSweetstem>() },
         { ModContent.ItemType<LargeBarfbushSeed>(), ModContent.ItemType<LargeBarfbush>() },
         { ModContent.ItemType<LargeHolybirdSeed>(), ModContent.ItemType<LargeHolybird>() },
-        { ModContent.ItemType<LargeTwilightPlumeSeed>(), ModContent.ItemType<LargeTwilightPlume>() },
+        //{ ModContent.ItemType<LargeTwilightPlumeSeed>(), ModContent.ItemType<LargeTwilightPlume>() },
     };
 
     public static readonly Dictionary<int, int> LargeHerbSeedIdByHerbId = new()
@@ -103,7 +103,7 @@ public static class HerbologyData
         { ModContent.ItemType<Sweetstem>(), ModContent.ItemType<LargeSweetstemSeed>() },
         { ModContent.ItemType<Barfbush>(), ModContent.ItemType<LargeBarfbushSeed>() },
         { ModContent.ItemType<Holybird>(), ModContent.ItemType<LargeHolybirdSeed>() },
-        { ModContent.ItemType<TwilightPlume>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
+        //{ ModContent.ItemType<TwilightPlume>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
     };
 
     public static readonly Dictionary<int, int> LargeHerbSeedIdByHerbSeedId = new()
@@ -119,7 +119,7 @@ public static class HerbologyData
         { ModContent.ItemType<SweetstemSeeds>(), ModContent.ItemType<LargeSweetstemSeed>() },
         { ModContent.ItemType<BarfbushSeeds>(), ModContent.ItemType<LargeBarfbushSeed>() },
         { ModContent.ItemType<HolybirdSeeds>(), ModContent.ItemType<LargeHolybirdSeed>() },
-        { ModContent.ItemType<TwilightPlumeSeeds>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
+        //{ ModContent.ItemType<TwilightPlumeSeeds>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
     };
 
     public static readonly int[] PotionIds =

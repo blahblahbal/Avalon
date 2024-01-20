@@ -417,7 +417,7 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PreUpdateBuffs()
     {
-        FrameCount++;
+        FrameCount++; // aura potion
         PlanetRotation[0] = (PlanetRotation[0] % MathHelper.TwoPi) + 0.08f;
         PlanetRotation[1] = (PlanetRotation[1] % MathHelper.TwoPi) + 0.09f;
         PlanetRotation[2] = (PlanetRotation[2] % MathHelper.TwoPi) + 0.06f;
