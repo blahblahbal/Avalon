@@ -6,7 +6,11 @@ using Terraria.ID;
 namespace Avalon.Items.OreChunks;
 
 class TritanoriumChunk : ModItem
-{
+{    // remove after this is added
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 200;

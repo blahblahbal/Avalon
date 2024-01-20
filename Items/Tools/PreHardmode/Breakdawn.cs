@@ -68,13 +68,14 @@ public class Breakdawn : ModItem
             Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
             int tileType = Main.tile[tilePosPoint.X, tilePosPoint.Y].TileType;
             int dmgAmt = (int)(Item.axe * 1.2f);
-            if (Main.tileAxe[tileType])
+            bool isAxeableTile = Main.tileAxe[tileType];
+            if (isAxeableTile)
             {
                 if (!WorldGen.CanKillTile(tilePosPoint.X, tilePosPoint.Y))
                 {
                     dmgAmt = 0;
                 }
-                Main.NewText(player.hitTile.AddDamage(tileType, dmgAmt));
+                //Main.NewText(player.hitTile.AddDamage(tileType, dmgAmt));
                 if (player.hitTile.AddDamage(tileType, dmgAmt) >= 100)
                 {
                     player.ClearMiningCacheAt(tilePosPoint.X, tilePosPoint.Y, 1);
@@ -96,10 +97,21 @@ public class Breakdawn : ModItem
                 }
                 else
                 {
-                    WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y, fail: true);
-                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    if (tileType is TileID.TreeAmber or TileID.TreeAmethyst or TileID.TreeDiamond or TileID.TreeEmerald or TileID.TreeRuby or TileID.TreeSapphire or TileID.TreeTopaz)
                     {
-                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y, 1f);
+                        WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y);
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                        {
+                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y);
+                        }
+                    }
+                    else
+                    {
+                        WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y, fail: true);
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                        {
+                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y, 1f);
+                        }
                     }
                 }
                 if (dmgAmt != 0)

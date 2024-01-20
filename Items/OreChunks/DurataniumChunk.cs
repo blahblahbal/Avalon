@@ -21,11 +21,11 @@ class DurataniumChunk : ModItem
         Item.height = dims.Height;
         Item.rare = ItemRarityID.Orange;
     }
-    //public override void AddRecipes()
-    //{
-    //    Recipe.Create(ModContent.ItemType<Material.Bars.DurataniumBar>())
-    //        .AddIngredient(Type, 3)
-    //        .AddTile(TileID.WorkBenches)
-    //        .Register();
-    //}
+    public override void AddRecipes()
+    {
+        Recipe.Create(ModContent.ItemType<Material.Bars.DurataniumBar>())
+            .AddIngredient(Type, 3)
+            .AddTile(TileID.WorkBenches)
+            .Register();
+    }
 }

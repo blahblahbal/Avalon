@@ -7,6 +7,11 @@ namespace Avalon.Items.OreChunks;
 
 class PyroscoricChunk : ModItem
 {
+    // remove after this is added
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 200;

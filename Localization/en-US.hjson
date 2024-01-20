@@ -1324,7 +1324,7 @@ Mods: {
 
 			SandyStormcloudinaBottle: {
 				DisplayName: Sandy Stormcloud in a Bottle
-				Tooltip: The holder can quadruple jump
+				Tooltip: Allows the holder to quadruple jump
 			}
 
 			GuardianBoots: {
@@ -2330,11 +2330,6 @@ Mods: {
 				Tooltip: Unlocks stamina flight time restoration
 			}
 
-			RocketJumpScroll: {
-				DisplayName: Rocket Jump Scroll
-				Tooltip: Unlocks stamina rocket humping
-			}
-
 			TeleportScroll: {
 				DisplayName: Teleport Scroll
 				Tooltip: Unlocks stamina teleport
@@ -2386,7 +2381,7 @@ Mods: {
 
 			AuraPotion: {
 				DisplayName: Aura Potion
-				Tooltip: On-screen enemies take damage
+				Tooltip: Enemies within a 38-tile radius take damage
 			}
 
 			ForceFieldPotion: {
@@ -2549,7 +2544,7 @@ Mods: {
 
 			AdvAuraPotion: {
 				DisplayName: Aura Elixir
-				Tooltip: On-screen enemies take damage
+				Tooltip: Enemies within a 38-tile radius take damage
 			}
 
 			AdvDangersensePotion: {
@@ -5812,7 +5807,7 @@ Mods: {
 
 			RocketinaBottle: {
 				DisplayName: Rocket in a Bottle
-				Tooltip: ""
+				Tooltip: Allows the holder to double jump
 			}
 
 			LivingLightningBlock: {

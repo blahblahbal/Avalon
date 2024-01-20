@@ -26,11 +26,11 @@ class TroxiniumChunk : ModItem
     {
         return Color.White;
     }
-    //public override void AddRecipes()
-    //{
-    //    Recipe.Create(ModContent.ItemType<Material.Bars.TroxiniumBar>())
-    //        .AddIngredient(Type, 5)
-    //        .AddTile(TileID.WorkBenches)
-    //        .Register();
-    //}
+    public override void AddRecipes()
+    {
+        Recipe.Create(ModContent.ItemType<Material.Bars.TroxiniumBar>())
+            .AddIngredient(Type, 5)
+            .AddTile(TileID.WorkBenches)
+            .Register();
+    }
 }

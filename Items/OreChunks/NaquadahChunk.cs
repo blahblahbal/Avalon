@@ -21,11 +21,11 @@ class NaquadahChunk : ModItem
         Item.height = dims.Height;
         Item.rare = ItemRarityID.Orange;
     }
-    //public override void AddRecipes()
-    //{
-    //    Recipe.Create(ModContent.ItemType<Material.Bars.NaquadahBar>())
-    //        .AddIngredient(Type, 4)
-    //        .AddTile(TileID.WorkBenches)
-    //        .Register();
-    //}
+    public override void AddRecipes()
+    {
+        Recipe.Create(ModContent.ItemType<Material.Bars.NaquadahBar>())
+            .AddIngredient(Type, 4)
+            .AddTile(TileID.WorkBenches)
+            .Register();
+    }
 }
