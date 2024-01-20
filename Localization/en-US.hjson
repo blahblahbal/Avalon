@@ -8596,7 +8596,7 @@ Mods: {
 
 				VanillaTextureReplacement: {
 					Label: Vanilla Texture Replacement
-					Tooltip: Changes some vanilla textures (Does not work if DragonLens is enabled!)
+					Tooltip: Changes some vanilla textures
 				}
 
 				VanillaRenames: {
@@ -8613,6 +8613,7 @@ Mods: {
 			ContagionEmote.Command: contagion
 			DesertBeakEmote.Command: desertbeak
 			StaminaEmote.Command: staminapotion
+			LibrarianEmote.Command: librarian
 		}
 	}
 }
