@@ -55,7 +55,10 @@ public class ZirconHook : ModProjectile
     {
         return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 440f * 1.5f : 440f;
     }
-
+    public override void GrappleRetreatSpeed(Player player, ref float speed)
+    {
+        speed = 15f;
+    }
     public override void NumGrappleHooks(Player player, ref int numHooks)
     {
         numHooks = 1;
