@@ -56,6 +56,10 @@ public class PeridotHook : ModProjectile
     {
         return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 405f * 1.5f : 405f;
     }
+    public override void GrappleRetreatSpeed(Player player, ref float speed)
+    {
+        speed = 13.75f;
+    }
     public override void NumGrappleHooks(Player player, ref int numHooks)
     {
         numHooks = 1;

@@ -12,7 +12,7 @@ class TourmalineHook : ModItem
         Rectangle dims = this.GetDims();
         Item.noUseGraphic = true;
         Item.useTurn = true;
-        Item.shootSpeed = 16f;
+        Item.shootSpeed = 11f;
         Item.rare = ItemRarityID.Blue;
         Item.noMelee = true;
         Item.width = dims.Width;

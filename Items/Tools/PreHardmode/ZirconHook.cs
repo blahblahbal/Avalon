@@ -12,7 +12,7 @@ class ZirconHook : ModItem
         Rectangle dims = this.GetDims();
         Item.noUseGraphic = true;
         Item.useTurn = true;
-        Item.shootSpeed = 16f;
+        Item.shootSpeed = 14f;
         Item.rare = ItemRarityID.Green;
         Item.noMelee = true;
         Item.width = dims.Width;
