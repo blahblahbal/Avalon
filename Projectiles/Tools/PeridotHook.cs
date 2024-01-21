@@ -54,7 +54,7 @@ public class PeridotHook : ModProjectile
 
     public override float GrappleRange()
     {
-        return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 420f * 1.5f : 420f;
+        return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 405f * 1.5f : 405f;
     }
     public override void NumGrappleHooks(Player player, ref int numHooks)
     {

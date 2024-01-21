@@ -53,7 +53,7 @@ public class ZirconHook : ModProjectile
 
     public override float GrappleRange()
     {
-        return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 440f * 1.5f : 440f;
+        return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 480f * 1.5f : 480f;
     }
 
     public override void NumGrappleHooks(Player player, ref int numHooks)

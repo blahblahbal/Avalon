@@ -54,7 +54,7 @@ public class TourmalineHook : ModProjectile
     }
     public override float GrappleRange()
     {
-        return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 400f * 1.5f : 400f;
+        return Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().HookBonus ? 340f * 1.5f : 340f;
     }
 
     public override void NumGrappleHooks(Player player, ref int numHooks)
