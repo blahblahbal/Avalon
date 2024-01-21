@@ -44,7 +44,7 @@ public class AdvCrimson : ModBuff
             {
                 if (player.GetModPlayer<AvalonPlayer>().FrameCount % FrameInterval == 0)
                 {
-                    n.StrikeNPC(new NPC.HitInfo { Damage = dmg + (n.defense >= 100 ? 10 : (int)Math.Pow(n.defense, 0.5f)) * 2, Knockback = 0, HitDirection = 1});
+                    n.StrikeNPC(new NPC.HitInfo { Damage = dmg + (n.defense >= 100 ? 10 : (int)Math.Sqrt(n.defense)) * 2, Knockback = 0, HitDirection = 1});
                     player.GetModPlayer<AvalonPlayer>().FrameCount = 0;
                 }
             }
