@@ -2,6 +2,7 @@ using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -56,6 +57,10 @@ public class OreSlime : ModNPC
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
+        for (int i = 0; i < Ores.Length; i++)
+        {
+            Main.instance.LoadItem(Ores[i]);
+        }
         float rotate = MathHelper.SmoothStep(0.1f, -0.1f, Main.masterColor);
         Texture2D oreTexture;
         if (Ores[WhichOre] > ItemID.Count)
