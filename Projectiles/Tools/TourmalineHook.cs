@@ -10,12 +10,14 @@ namespace Avalon.Projectiles.Tools;
 
 public class TourmalineHook : ModProjectile
 {
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.SingleGrappleHook[Type] = true;
+    }
     public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.GemHookAmethyst);
     }
-
-
     public override bool PreDraw(ref Color lightColor)
     {
         var texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/TourmalineHook_Chain");

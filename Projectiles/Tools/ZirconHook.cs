@@ -10,6 +10,10 @@ namespace Avalon.Projectiles.Tools;
 
 public class ZirconHook : ModProjectile
 {
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.SingleGrappleHook[Type] = true;
+    }
     public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.GemHookDiamond);

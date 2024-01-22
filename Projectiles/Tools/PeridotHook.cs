@@ -10,6 +10,10 @@ namespace Avalon.Projectiles.Tools;
 
 public class PeridotHook : ModProjectile
 {
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.SingleGrappleHook[Type] = true;
+    }
     public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.GemHookEmerald);
