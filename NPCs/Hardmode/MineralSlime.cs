@@ -40,21 +40,42 @@ public class MineralSlime : ModNPC
     public override void OnSpawn(IEntitySource source)
     {
         WhichOre = Main.rand.Next(0,Ores.Length);
-        NPC.color= OreColor[WhichOre];
-        NPC.color *= 0.5f;
+        NPC.alpha = 90;
     }
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(WhichOre);
-        writer.WriteRGB(NPC.color);
+        writer.WriteRGB(OreColor[WhichOre]);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         WhichOre = reader.ReadInt32();
         NPC.color = reader.ReadRGB();
     }
+    public override void DrawEffects(ref Color drawColor)
+    {
+        Color lightColor = Lighting.GetColor((int)((double)NPC.position.X + (double)NPC.width * 0.5) / 16, (int)(((double)NPC.position.Y + (double)NPC.height * 0.5) / 16.0));
+        
+        // looks nicer, but has additive blending which isn't desirable
+        //int colorAvg = (OreColor[WhichOre].R + OreColor[WhichOre].G + OreColor[WhichOre].B) / 3;
+        //int colorClampR = (int)MathHelper.Clamp(OreColor[WhichOre].R, colorAvg - 80, colorAvg + 80);
+        //int colorClampG = (int)MathHelper.Clamp(OreColor[WhichOre].G, colorAvg - 80, colorAvg + 80);
+        //int colorClampB = (int)MathHelper.Clamp(OreColor[WhichOre].B, colorAvg - 80, colorAvg + 80);
+        //drawColor.R = (byte)MathHelper.Clamp(colorClampR * (lightColor.R * 1.2f) / 255f, 0, 255);
+        //drawColor.G = (byte)MathHelper.Clamp(colorClampG * (lightColor.G * 1.2f) / 255f, 0, 255);
+        //drawColor.B = (byte)MathHelper.Clamp(colorClampB * (lightColor.B * 1.2f) / 255f, 0, 255);
+        //drawColor.A = 10;
+        drawColor.R = (byte)MathHelper.Clamp(OreColor[WhichOre].R * (lightColor.R * 1.55f) / 255f, 0, 255);
+        drawColor.G = (byte)MathHelper.Clamp(OreColor[WhichOre].G * (lightColor.G * 1.55f) / 255f, 0, 255);
+        drawColor.B = (byte)MathHelper.Clamp(OreColor[WhichOre].B * (lightColor.B * 1.55f) / 255f, 0, 255);
+        drawColor.A = (byte)(NPC.alpha * lightColor.A);
+    }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
+        for (int i = 0; i < Ores.Length; i++)
+        {
+            Main.instance.LoadItem(Ores[i]);
+        }
         float rotate = MathHelper.SmoothStep(0.1f, -0.1f, Main.masterColor);
         Texture2D oreTexture;
         if (Ores[WhichOre] > ItemID.Count)

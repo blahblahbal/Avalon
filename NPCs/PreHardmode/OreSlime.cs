@@ -2,7 +2,6 @@ using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
-using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -42,18 +41,35 @@ public class OreSlime : ModNPC
     public override void OnSpawn(IEntitySource source)
     {
         WhichOre = Main.rand.Next(0, Ores.Length);
-        NPC.color = OreColor[WhichOre];
-        NPC.color *= 0.5f;
+        NPC.alpha = 100;
     }
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(WhichOre);
-        writer.WriteRGB(OreColor[WhichOre] * 0.5f);
+        writer.WriteRGB(OreColor[WhichOre]);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         WhichOre = reader.ReadInt32();
         NPC.color = reader.ReadRGB();
+    }
+    public override void DrawEffects(ref Color drawColor)
+    {
+        Color lightColor = Lighting.GetColor((int)((double)NPC.position.X + (double)NPC.width * 0.5) / 16, (int)(((double)NPC.position.Y + (double)NPC.height * 0.5) / 16.0));
+
+        // looks nicer, but has additive blending which isn't desirable
+        //int colorAvg = (OreColor[WhichOre].R + OreColor[WhichOre].G + OreColor[WhichOre].B) / 3;
+        //int colorClampR = (int)MathHelper.Clamp(OreColor[WhichOre].R, colorAvg - 60, colorAvg + 60);
+        //int colorClampG = (int)MathHelper.Clamp(OreColor[WhichOre].G, colorAvg - 60, colorAvg + 60);
+        //int colorClampB = (int)MathHelper.Clamp(OreColor[WhichOre].B, colorAvg - 60, colorAvg + 60);
+        //drawColor.R = (byte)MathHelper.Clamp(colorClampR * (lightColor.R * 1.4f) / 255f, 0, 255);
+        //drawColor.G = (byte)MathHelper.Clamp(colorClampG * (lightColor.G * 1.4f) / 255f, 0, 255);
+        //drawColor.B = (byte)MathHelper.Clamp(colorClampB * (lightColor.B * 1.4f) / 255f, 0, 255);
+        //drawColor.A = 10;
+        drawColor.R = (byte)MathHelper.Clamp(OreColor[WhichOre].R * (lightColor.R * 1.5f) / 255f, 0, 255);
+        drawColor.G = (byte)MathHelper.Clamp(OreColor[WhichOre].G * (lightColor.G * 1.5f) / 255f, 0, 255);
+        drawColor.B = (byte)MathHelper.Clamp(OreColor[WhichOre].B * (lightColor.B * 1.5f) / 255f, 0, 255);
+        drawColor.A = (byte)(NPC.alpha * lightColor.A);
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
