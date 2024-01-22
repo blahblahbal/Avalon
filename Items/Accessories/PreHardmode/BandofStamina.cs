@@ -1,5 +1,6 @@
 using Avalon.Common.Players;
 using Avalon.Items.Consumables;
+using Avalon.Items.Material.Bars;
 using Avalon.Items.Potions.Other;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -29,7 +30,7 @@ internal class BandofStamina : ModItem
     {
         Recipe.Create(Type).AddTile(TileID.WorkBenches)
             .AddIngredient(ModContent.ItemType<StaminaCrystal>(), 3)
-            .AddIngredient(ItemID.Shackle, 2)
+            .AddIngredient(ModContent.ItemType<BacciliteBar>(), 4)
             .AddIngredient(ModContent.ItemType<StaminaPotion>(), 2)
             .AddTile(TileID.TinkerersWorkbench).Register();
     }
