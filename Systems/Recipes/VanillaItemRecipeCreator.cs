@@ -572,5 +572,9 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddTile(TileID.BoneWelder)
             .Register();
         #endregion
+
+        #region Near Honey
+        Recipe.Create(ItemID.Flymeal).AddIngredient(ModContent.ItemType<BismuthBroadsword>()).AddIngredient(ItemID.Stinkbug, 5).AddCondition(Condition.NearHoney).Register();
+        #endregion
     }
 }
