@@ -989,9 +989,13 @@ public class AvalonWorld : ModSystem
         backgroundColor.G = (byte)sunG;
         backgroundColor.B = (byte)sunB;
 
-        tileColor.R -= (byte)(212f * ContagionStrength / 2.2f * (backgroundColor.R / 255f) * 1.6f);
-        tileColor.G -= (byte)(212f * ContagionStrength / 2.4f * (backgroundColor.G / 255f) * 1.5f);
-        tileColor.B -= (byte)(212f * ContagionStrength / 1.8f * (backgroundColor.B / 255f) * 1.8f);
+        int tileTint_R = (byte)(212f * ContagionStrength / 2.2f * (backgroundColor.R / 255f) * 1.6f);
+        int tileTint_G = (byte)(212f * ContagionStrength / 2.4f * (backgroundColor.G / 255f) * 1.5f);
+        int tileTint_B = (byte)(212f * ContagionStrength / 1.8f * (backgroundColor.B / 255f) * 1.8f);
+
+        tileColor.R = ((byte)(tileColor.R <= tileTint_R ? 0 : tileColor.R - tileTint_R));
+        tileColor.G = ((byte)(tileColor.G <= tileTint_G ? 0 : tileColor.G - tileTint_G));
+        tileColor.B = ((byte)(tileColor.B <= tileTint_B ? 0 : tileColor.B - tileTint_B));
     }
     public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
     {

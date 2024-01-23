@@ -11,6 +11,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -18,6 +19,14 @@ public class BloodshotEye : ModNPC
 {
     public override void SetStaticDefaults()
     {
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+
+        {
+            // Influences how the NPC looks in the Bestiary
+            PortraitPositionYOverride = -30,
+            Position = new Vector2(6f, -10f)
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         Main.npcFrameCount[NPC.type] = 3;
         Data.Sets.NPC.Flyer[NPC.type] = true;
     }

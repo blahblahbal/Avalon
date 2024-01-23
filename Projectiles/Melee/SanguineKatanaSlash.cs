@@ -42,7 +42,7 @@ public class SanguineKatanaSlash : EnergySlashTemplate
         if (Projectile.penetrate < 90)
         {
             Player player = Main.player[Projectile.owner];
-            if (target.type != NPCID.TargetDummy)
+            if (target.type != NPCID.TargetDummy && !NPCID.Sets.CountsAsCritter[target.type])
             {
                 int healAmount = Main.rand.Next(0, 3) + Main.rand.Next(1, 3) + 3;
                 player.HealEffect(healAmount, true);

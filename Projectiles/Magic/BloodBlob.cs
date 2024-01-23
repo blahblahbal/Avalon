@@ -75,7 +75,7 @@ public class BloodBlob : ModProjectile
 
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
-        if (target.type != NPCID.TargetDummy && player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
+        if (target.type != NPCID.TargetDummy && !NPCID.Sets.CountsAsCritter[target.type] && player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
         {
             int healAmount = Main.rand.Next(0, 2) + Main.rand.Next(0, 2) + 1;
             player.HealEffect(healAmount, true);
