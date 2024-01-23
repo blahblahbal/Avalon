@@ -339,15 +339,6 @@ public class AvalonMobDrops : GlobalNPC
             npcLoot.Add(contagionRule);
         }
 
-        // blood moon enemy loot
-        if (npc.type is NPCID.Drippler or NPCID.BloodZombie || npc.type == ModContent.NPCType<BloodshotEye>() || npc.type == ModContent.NPCType<FallenHero>())
-        {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BloodyWhetstone>(), 160));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BloodBarrage>(), 160));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SanguineKatana>(), 160));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SanguineKabuto>(), 160));
-        }
-
         #region tome mats
         if (npc.type is NPCID.ManEater or NPCID.Snatcher or NPCID.AngryTrapper)
         {
@@ -480,11 +471,10 @@ public class AvalonMobDrops : GlobalNPC
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumPlateMail>(), 150));
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumGreaves>(), 150));
 
-        // Moved to drop from specific mobs as test
-        //globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(),ModContent.ItemType<BloodyWhetstone>(), 160));
-        //globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<BloodBarrage>(), 160));
-        //globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<SanguineKatana>(), 160));
-        //globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<SanguineKabuto>(), 160));
+        globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<BloodyWhetstone>(), 160));
+        globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<BloodBarrage>(), 200));
+        globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<SanguineKatana>(), 200));
+        globalLoot.Add(ItemDropRule.ByCondition(new Conditions.IsBloodMoonAndNotFromStatue(), ModContent.ItemType<SanguineKabuto>(), 160));
 
         globalLoot.RemoveWhere(
             rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.JungleKey);

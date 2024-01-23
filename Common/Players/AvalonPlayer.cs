@@ -245,6 +245,7 @@ public class AvalonPlayer : ModPlayer
     public bool CoughCooldown;
     public int DeliriumCount;
     public bool Berserk;
+    public bool SanguineSacrifice;
 
     public bool HungryMinion;
     public bool GastroMinion;
@@ -316,6 +317,7 @@ public class AvalonPlayer : ModPlayer
         BloodCasting = false;
         Vision = false;
         Berserk = false;
+        SanguineSacrifice = false;
 
         // accessories
         TrapImmune = false;

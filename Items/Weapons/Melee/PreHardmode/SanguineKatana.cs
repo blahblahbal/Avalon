@@ -1,7 +1,10 @@
 using System;
+using System.Reflection;
+using Avalon.Common.Players;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,28 +21,49 @@ public class SanguineKatana : ModItem
     {
         Item.width = 34;
         Item.height = 36;
-        Item.damage = 30;
+        Item.damage = 22;
         Item.scale = 1f;
         Item.DamageType = DamageClass.Melee;
         Item.autoReuse = true;
         Item.rare = ItemRarityID.Orange;
-        Item.useTime = 24;
-        Item.useAnimation = 24;
+        Item.useTime = 26;
+        Item.useAnimation = 26;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.knockBack = 5f;
         Item.UseSound = SoundID.Item1;
         Item.value = Item.sellPrice(0, 1, 0, 0);
-        Item.shoot = ModContent.ProjectileType<SanguineKatanaSlash>();
-        Item.noMelee= true;
         Item.shootSpeed = 16;
-        Item.shootsEveryUse = true;
+        Item.shoot = ModContent.ProjectileType<SanguineKatanaSlash>();
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
-        float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
-        Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1f, adjustedItemScale5 * 1.3f);
-        NetMessage.SendData(13, -1, -1, null, player.whoAmI);
+        if (player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
+        {
+            float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
+            Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), ModContent.ProjectileType<SanguineKatanaSlash>(), (int)(damage * 1.25f), knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1f, adjustedItemScale5 * 1.3f);
+            NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI);
+        }
+        else
+        {
+            Item.noMelee = false;
+            Item.useTurn = true;
+        }
         return false;
+    }
+    public override bool CanShoot(Player player)
+    {
+        if (!player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
+        {
+            Item.noMelee = false;
+            Item.useTurn = true;
+            return false;
+        }
+        else
+        {
+            Item.noMelee = true;
+            Item.useTurn = false;
+            return true;
+        }
     }
     public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {
@@ -57,16 +81,27 @@ public class SanguineKatana : ModItem
         //    Main.dust[num15].velocity = Main.rand.NextVector2Circular(6, 6);
         //}
     }
-    public override bool? UseItem(Player player)
+    public override bool AltFunctionUse(Player player)
     {
-        int healthSucked = 2;
-        CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.DamagedFriendly, healthSucked, dramatic: false, dot: false);
-        player.statLife -= healthSucked;
-        if(player.statLife <= 0)
+        int healthSucked = 80;
+        if (/* player.statLife > 80 && */!player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
         {
-            player.Hurt(PlayerDeathReason.ByCustomReason($"{player.name}'s soul has been entombed within a sword."), healthSucked, 1, false, true, -1, false);
+            player.AddBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>(), 60 * 8);
+            SoundEngine.PlaySound(SoundID.NPCDeath1, Main.LocalPlayer.position);
+
+            CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.DamagedFriendly, healthSucked, dramatic: false, dot: false);
+            player.statLife -= healthSucked;
+            if (player.statLife <= 0)
+            {
+                player.Hurt(PlayerDeathReason.ByCustomReason($"{player.name}'s soul has been entombed within a sword."), healthSucked, 1, false, true, -1, false);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Dust.NewDustPerfect(player.MountedCenter, DustID.Blood, (player.velocity * 0.85f) + Main.rand.NextVector2Circular(2f, 1f).RotatedBy(i) + Main.rand.NextVector2Square(-3.5f, 3.5f), 100, default(Color), 0.7f + Main.rand.NextFloat() * 0.6f);
+                Dust.NewDustPerfect(player.MountedCenter, DustID.Blood, (player.velocity * 0.85f) + Main.rand.NextVector2Circular(0.5f, 0.5f).RotatedBy(i) + Main.rand.NextVector2Square(-1.5f, 1.5f), 100, default(Color), 1f + Main.rand.NextFloat() * 0.6f);
+            }
         }
-        return true;
+        return !player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>());
     }
     public override void MeleeEffects(Player player, Rectangle hitbox)
     {

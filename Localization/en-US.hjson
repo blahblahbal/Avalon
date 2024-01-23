@@ -2163,8 +2163,8 @@ Mods: {
 				DisplayName: Blood Barrage
 				Tooltip:
 					'''
-					Uses 4 life
-					Returns life on hit
+					<right> to empower with your blood 
+					Uses 80 life
 					'''
 			}
 
@@ -2182,8 +2182,8 @@ Mods: {
 				DisplayName: Sanguine Katana
 				Tooltip:
 					'''
-					Uses 2 life 
-					Returns life on hit
+					<right> to empower with your blood 
+					Uses 80 life
 					'There will be blood!'
 					'''
 			}
@@ -8337,6 +8337,11 @@ Mods: {
 			Coalesced: {
 				DisplayName: Coalesced State
 				Description: You cannot use a Rod of Coalescence
+			}
+
+			SanguineSacrifice: {
+				DisplayName: Sanguine Sacrifice
+				Description: Blood sacrifice weapons are more powerful
 			}
 		}
 
