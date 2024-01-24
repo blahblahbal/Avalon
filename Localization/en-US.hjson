@@ -8429,9 +8429,9 @@ Mods: {
 			}
 
 			ContagionPot.MapEntry: Pot
-			PeridotTree.MapEntry: Peridot Tree
-			TourmalineTree.MapEntry: Tourmaline Tree
-			ZirconTree.MapEntry: Zircon Tree
+			PeridotTree.MapEntry: Tree
+			TourmalineTree.MapEntry: Tree
+			ZirconTree.MapEntry: Tree
 		}
 
 		Prefixes: {
