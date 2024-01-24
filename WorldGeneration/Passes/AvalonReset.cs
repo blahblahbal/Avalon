@@ -5,7 +5,7 @@ using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
-namespace Avalon.WorldGeneration.Passes; 
+namespace Avalon.WorldGeneration.Passes;
 
 public class AvalonReset : GenPass
 {
