@@ -51,6 +51,10 @@ public class InfectionHook : ModProjectile
 
         return true;
     }
+    public override bool PreDrawExtras()
+    {
+        return false;
+    }
 
     public override float GrappleRange()
     {

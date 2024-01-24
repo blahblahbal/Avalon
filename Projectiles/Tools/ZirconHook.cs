@@ -25,7 +25,7 @@ public class ZirconHook : ModProjectile
         var position = Projectile.Center;
         var mountedCenter = Main.player[Projectile.owner].MountedCenter;
         var sourceRectangle = new Rectangle?();
-        var origin = new Vector2(texture.Value.Width * 0.5f, texture.Value.Height * 0.5f);
+        var origin = new Vector2(texture.Value.Width * 0.5f, texture.Value.Height + 1);
         float num1 = texture.Value.Height;
         var vector2_4 = mountedCenter - position;
         var rotation = (float)Math.Atan2(vector2_4.Y, vector2_4.X) - 1.57f;
@@ -53,6 +53,10 @@ public class ZirconHook : ModProjectile
         }
 
         return true;
+    }
+    public override bool PreDrawExtras()
+    {
+        return false;
     }
 
     public override float GrappleRange()
