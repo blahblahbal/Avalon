@@ -94,7 +94,7 @@ public class DesertBeak : ModNPC
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DesertBeakTrophy>(), 10));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ItemID.SandBlock, 1, 22, 55));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<DesertBeakMask>(), 7));
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<DesertFeather>(), 1, 6, 10));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<DesertFeather>(), 1, 9, 13));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<TomeoftheDistantPast>(), 3));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<EggCannon>(), 3));
         npcLoot.Add(ItemDropRule.ByCondition(new IridiumWorldDropAndNotExpert(), ModContent.ItemType<IridiumOre>(), 1, 15, 26));
