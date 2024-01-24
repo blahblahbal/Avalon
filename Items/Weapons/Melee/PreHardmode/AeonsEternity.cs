@@ -24,7 +24,7 @@ public class AeonsEternity : ModItem
         Item.SetWeaponValues(40, 5, 0);
         Item.useTime = 81;
         Item.useAnimation = 20;
-        Item.value = Item.sellPrice(0, 1, 0, 0);
+        Item.value = Item.sellPrice(0, 5, 0, 0);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.autoReuse = true;
         //Item.useTurn = true;

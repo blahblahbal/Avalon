@@ -7678,7 +7678,7 @@ Mods: {
 			RottenApple.DisplayName: Rotten Apple
 			JunglePetal.DisplayName: Jungle Petal
 			MagicGrenade.DisplayName: Magic Grenade
-			MagicGrenadeBoom.DisplayName: Magic Grenade Boom
+			MagicGrenadeBoom.DisplayName: Magic Grenade
 		}
 
 		NPCs: {
