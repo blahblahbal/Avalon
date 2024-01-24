@@ -24,7 +24,7 @@ public class FleshArmorTendrilsBack : PlayerDrawLayer
         }
         if (p.body == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "FleshWrappings", EquipType.Body))
         {
-            Vector2 value6 = new Vector2(0, 8);
+            Vector2 value6 = new Vector2((p.direction == 1 ? -4 : 4), 8);
             Vector2 vec4 = drawInfo.Position - Main.screenPosition + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.width / 2, drawInfo.drawPlayer.height - drawInfo.drawPlayer.bodyFrame.Height / 2) + new Vector2(0f, -4f) + value6;
             vec4 = vec4.Floor();
             DrawData item = new DrawData(Mod.Assets.Request<Texture2D>("Items/Armor/Hardmode/FleshWrappings_Tendril_Back").Value, vec4, drawInfo.drawPlayer.bodyFrame, drawInfo.colorArmorBody, drawInfo.drawPlayer.bodyRotation, drawInfo.bodyVect, 1f, drawInfo.playerEffect, 0);
@@ -51,7 +51,7 @@ public class FleshArmorTendrilsFront : PlayerDrawLayer
         }
         if (p.body == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "FleshWrappings", EquipType.Body))
         {
-            Vector2 value6 = new Vector2(0, 8);
+            Vector2 value6 = new Vector2((p.direction == 1 ? -4 : 4), 8);
             Vector2 vec4 = drawInfo.Position - Main.screenPosition + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.width / 2, drawInfo.drawPlayer.height - drawInfo.drawPlayer.bodyFrame.Height / 2) + new Vector2(0f, -4f) + value6;
             vec4 = vec4.Floor();
             DrawData item = new DrawData(Mod.Assets.Request<Texture2D>("Items/Armor/Hardmode/FleshWrappings_Tendril_Front").Value, vec4, drawInfo.drawPlayer.bodyFrame, drawInfo.colorArmorBody, drawInfo.drawPlayer.bodyRotation, drawInfo.bodyVect, 1f, drawInfo.playerEffect, 0);
