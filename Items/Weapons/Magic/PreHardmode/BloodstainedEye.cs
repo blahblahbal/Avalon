@@ -36,7 +36,7 @@ class BloodstainedEye : ModItem
         int numberProjectiles = 1 + Main.rand.Next(2);
         for (int i = 0; i < numberProjectiles; i++)
         {
-            Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(10));
+            Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(8));
             float scale = 1f - (Main.rand.NextFloat() * .3f);
             perturbedSpeed = perturbedSpeed * scale;
             Projectile.NewProjectile(source, position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockback, player.whoAmI);
