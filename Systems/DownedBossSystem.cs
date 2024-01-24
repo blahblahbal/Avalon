@@ -16,6 +16,25 @@ public class DownedBossSystem : ModSystem
     public bool DownedOblivion;
     public bool DownedPhantasm;
 
+    public override void OnWorldLoad()
+    {
+        ResetDownedFlags();
+    }
+    public override void OnWorldUnload()
+    {
+        ResetDownedFlags();
+    }
+    private void ResetDownedFlags()
+    {
+        DownedArmageddon = false;
+        DownedBacteriumPrime = false;
+        DownedDesertBeak = false;
+        DownedDragonLord = false;
+        DownedKingSting = false;
+        DownedMechasting = false;
+        DownedOblivion = false;
+        DownedPhantasm = false;
+    }
     public override void SaveWorldData(TagCompound tag)
     {
         tag["DownedBacteriumPrime"] = DownedBacteriumPrime;
@@ -27,7 +46,6 @@ public class DownedBossSystem : ModSystem
         tag["DownedKingSting"] = DownedKingSting;
         tag["DownedArmageddon"] = DownedArmageddon;
     }
-
     public override void LoadWorldData(TagCompound tag)
     {
         if (tag.ContainsKey("DownedBacteriumPrime"))
