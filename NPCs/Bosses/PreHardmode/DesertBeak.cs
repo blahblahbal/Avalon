@@ -54,12 +54,12 @@ public class DesertBeak : ModNPC
         NPC.lifeMax = 3650;
         NPC.defense = 30;
         NPC.noGravity = true;
-        NPC.width = 128;
+        NPC.width = 62;
         NPC.aiStyle = -1;
         NPC.npcSlots = 100f;
         NPC.value = 50000f;
         NPC.timeLeft = 22500;
-        NPC.height = 64;
+        NPC.height = 78;
         NPC.knockBackResist = 0f;
         NPC.HitSound = SoundID.NPCHit28;
         NPC.DeathSound = SoundID.NPCDeath31;
@@ -73,6 +73,14 @@ public class DesertBeak : ModNPC
     //    NPC.lifeMax = (int)(NPC.lifeMax * 0.66f * bossAdjustment);
     //    NPC.damage = (int)(NPC.damage * 0.58f);
     //}
+    public override void OnSpawn(IEntitySource source)
+    {
+        int leftWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai3: 1);
+        Main.npc[leftWing].realLife = NPC.whoAmI;
+
+        int rightWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai3: 2);
+        Main.npc[rightWing].realLife = NPC.whoAmI;
+    }
     public override void OnKill()
     {
         Terraria.GameContent.Events.Sandstorm.StopSandstorm();

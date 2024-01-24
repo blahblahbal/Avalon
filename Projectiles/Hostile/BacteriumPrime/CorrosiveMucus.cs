@@ -1,4 +1,5 @@
 using Avalon.NPCs.Bosses.PreHardmode;
+using Avalon.Tiles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -74,6 +75,27 @@ public class CorrosiveMucus : ModProjectile
         Projectile.Resize(32, 24);
         Projectile.velocity *= 0;
         Projectile.tileCollide = false;
+        Point p = Projectile.Center.ToTileCoordinates();
+
+        MakeBoogers(p.X, p.Y, 3);
         return false;
+    }
+    public static void MakeBoogers(int x, int y, int radius)
+    {
+        int xmin = (int)(x - radius);
+        int ymin = (int)(y - radius);
+        int xmax = (int)(x + radius);
+        int ymax = (int)(y + radius);
+
+        for (int i = xmin; i <= xmax; i++)
+        {
+            for (int j = ymin; j <= ymax; j++)
+            {
+                if (Vector2.Distance(new Vector2(i, j), new Vector2(x, y)) <= radius && WorldGen.genRand.NextBool(4) && !Main.tile[i, j].HasTile)
+                {
+                    WorldGen.PlaceTile(i, j, ModContent.TileType<Booger>());
+                }
+            }
+        }
     }
 }
