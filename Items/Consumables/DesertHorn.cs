@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -22,7 +23,6 @@ class DesertHorn : ModItem
         Item.consumable = true;
         Item.width = 32;
         Item.maxStack = 9999;
-        Item.channel = true;
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.height = 28;
         Item.useAnimation = Item.useTime = 180;
@@ -40,11 +40,30 @@ class DesertHorn : ModItem
     {
         return !NPC.AnyNPCs(ModContent.NPCType<NPCs.Bosses.PreHardmode.DesertBeak>()) && player.ZoneDesert && Main.dayTime;
     }
-
-    public override bool? UseItem(Player player)
+    public override void UseAnimation(Player player)
     {
         player.GetModPlayer<AvalonPlayer>().DesertBeakSpawnTimer = 60 * 3;
         SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/DesertHorn"), player.position);
-        return true;
     }
+    public override void HoldItem(Player player)
+    {
+        if (player.ItemAnimationEndingOrEnded)
+        {
+            player.inventory[player.selectedItem].stack--;
+            if (player.inventory[player.selectedItem].stack <= 0)
+            {
+                player.inventory[player.selectedItem].SetDefaults();
+            }
+        }
+    }
+    //public override void UseItemFrame(Player player)
+    //{
+    //    player.bodyFrame.Y = player.bodyFrame.Height * 2;
+    //}
+    //public override bool? UseItem(Player player)
+    //{
+        
+    //    //player.bodyFrame.Y = player.bodyFrame.Height * 2;
+    //    return true;
+    //}
 }
