@@ -43,6 +43,7 @@ public class WoodenClub : ModProjectile
     public float swordVel;
     public float speed = MathF.PI;
     public float posY;
+    public float scaleMult = 1.1f; // set this to same as in the item file
     public override void AI()
     {
         Vector2 toMouse = Vector2.Zero;
@@ -59,6 +60,7 @@ public class WoodenClub : ModProjectile
             swingRadius = Projectile.Center - player.MountedCenter;
             swingRadius = swingRadius.RotatedBy(toMouse.ToRotation());
             Projectile.scale = player.HeldItem.scale;
+            Projectile.Size *= (float)(player.HeldItem.scale < 1 ? 1 : 1 + player.HeldItem.scale - scaleMult); // this isn't ENTIRELY accurate, but oh well
             firstFrame = false;
         }
 
@@ -104,7 +106,7 @@ public class WoodenClub : ModProjectile
 
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
-        Vector2 offset = new Vector2(13f, -13f);
+        Vector2 offset = new Vector2((float)(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
 
         //for (int i = 0; i < Projectile.oldPos.Length; i++)
         //{
