@@ -25,6 +25,9 @@ public class GemStashes : ModTile
         TileObjectData.newTile.CoordinateHeights = new[] { 16 };
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.addTile(Type);
+        AddMapEntry(new Color(22, 212, 198), this.GetLocalization("Tourmaline"));
+        AddMapEntry(new Color(0, 237, 14), this.GetLocalization("Peridot"));
+        AddMapEntry(new Color(198, 168, 130), this.GetLocalization("Zircon"));
     }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {

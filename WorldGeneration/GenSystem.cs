@@ -74,6 +74,11 @@ public class GenSystem : ModSystem
             currentPass = new GemTreePass();
             tasks.Insert(stalac + 2, currentPass);
             totalWeight += currentPass.Weight;
+
+            currentPass = new GemStashes();
+            tasks.Insert(stalac + 3, currentPass);
+            totalWeight += currentPass.Weight;
+
             currentPass = new AvalonStalac();
             tasks.Insert(stalac + 1, currentPass);
             totalWeight += currentPass.Weight;

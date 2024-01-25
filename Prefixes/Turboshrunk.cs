@@ -11,6 +11,7 @@ public class Turboshrunk : ExxoPrefix
 
     public override bool CanRoll(Item item)
     {
+        if (item.type == ModContent.ItemType<Items.Weapons.Melee.PreHardmode.WoodenClub>()) return false;
         return item.useTime > 10;
     }
 

@@ -8433,6 +8433,12 @@ Mods: {
 			PeridotTree.MapEntry: Tree
 			TourmalineTree.MapEntry: Tree
 			ZirconTree.MapEntry: Tree
+
+			GemStashes: {
+				Tourmaline: Tourmaline
+				Peridot: Peridot
+				Zircon: Zircon
+			}
 		}
 
 		Prefixes: {

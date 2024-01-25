@@ -84,18 +84,6 @@ public class ZirconTree : ModTile
         yield return new Item(secondaryItem);
     }
 
-    public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
-    {
-        Tile tile = Main.tile[i, j];
-        if (fail)
-        {
-            if (Main.netMode != 1 && TileID.Sets.IsShakeable[tile.TileType])
-            {
-                ShakeTree(i, j); //Hevaily edited to only have gemtree shake code, look at WorldGen.ShakeTree() for all tree shaking code
-            }
-        }
-    }
-
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         spriteBatch.End();

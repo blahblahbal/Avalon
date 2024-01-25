@@ -68,7 +68,7 @@ class Peridot : ModItem
         Item.createTile = ModContent.TileType<Tiles.PlacedGems>();
         Item.placeStyle = 4 + 6;
         Item.consumable = true;
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.White;
         Item.width = dims.Width;
         Item.useTime = 10;
         Item.value = 4000;

@@ -24,7 +24,7 @@ class Tourmaline : ModItem
         Item.createTile = ModContent.TileType<Tiles.PlacedGems>();
         Item.placeStyle = 3 + 6;
         Item.consumable = true;
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.White;
         Item.width = dims.Width;
         Item.useTime = 10;
         Item.value = 3000;
