@@ -16,6 +16,7 @@ class WoodenClub : ModItem
     //    DisplayName.SetDefault("Marrow Masher");
     //    Tooltip.SetDefault("Critical strikes have increased knockback");
     //}
+    public float scaleMult = 1.1f; // set this to same as in the projectile file
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -23,7 +24,7 @@ class WoodenClub : ModItem
         Item.DamageType = DamageClass.Melee;
         Item.damage = 12;
         Item.autoReuse = false;
-        Item.scale = 1.1f;
+        Item.scale = scaleMult;
         Item.shootSpeed = 6f; //so the knockback works properly
         Item.rare = ItemRarityID.White;
         Item.noUseGraphic = true;
@@ -44,16 +45,18 @@ class WoodenClub : ModItem
     public int swing;
     public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
     {
+        Rectangle dims = this.GetDims();
+        float posMult = 1 + (dims.Height * scaleMult - 26) / 26 * 0.1f;
         velocity = Vector2.Zero;
         if (swing == 1)
         {
             swing--;
-            position = player.Center + new Vector2(0, 54f * Item.scale);
+            position = player.Center + new Vector2(0, dims.Height * Item.scale * posMult);
         }
         else
         {
             swing++;
-            position = player.Center + new Vector2(0, -54f * Item.scale);
+            position = player.Center + new Vector2(0, -dims.Height * Item.scale * posMult);
         }
     }
     public override bool CanUseItem(Player player)
