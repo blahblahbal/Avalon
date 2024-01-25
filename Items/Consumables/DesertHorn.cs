@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -20,6 +19,7 @@ class DesertHorn : ModItem
     public override void SetDefaults()
     {
         //Rectangle dims = this.GetDims();
+        Item.rare = ItemRarityID.Blue;
         Item.consumable = true;
         Item.width = 32;
         Item.maxStack = 9999;
@@ -56,14 +56,4 @@ class DesertHorn : ModItem
             }
         }
     }
-    //public override void UseItemFrame(Player player)
-    //{
-    //    player.bodyFrame.Y = player.bodyFrame.Height * 2;
-    //}
-    //public override bool? UseItem(Player player)
-    //{
-        
-    //    //player.bodyFrame.Y = player.bodyFrame.Height * 2;
-    //    return true;
-    //}
 }
