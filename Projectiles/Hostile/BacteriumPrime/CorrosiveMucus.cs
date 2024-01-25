@@ -77,7 +77,7 @@ public class CorrosiveMucus : ModProjectile
         Projectile.tileCollide = false;
         Point p = Projectile.Center.ToTileCoordinates();
 
-        MakeBoogers(p.X, p.Y, 3);
+        //MakeBoogers(p.X, p.Y, 2);
         return false;
     }
     public static void MakeBoogers(int x, int y, int radius)
@@ -91,7 +91,11 @@ public class CorrosiveMucus : ModProjectile
         {
             for (int j = ymin; j <= ymax; j++)
             {
-                if (Vector2.Distance(new Vector2(i, j), new Vector2(x, y)) <= radius && WorldGen.genRand.NextBool(4) && !Main.tile[i, j].HasTile)
+                if (Vector2.Distance(new Vector2(i, j), new Vector2(x, y)) <= radius && !Main.tile[i, j].HasTile)
+                {
+                    WorldGen.PlaceTile(i, j, ModContent.TileType<Booger>());
+                }
+                if (Vector2.Distance(new Vector2(i, j), new Vector2(x, y)) <= radius + 1 && WorldGen.genRand.NextBool(4) && !Main.tile[i, j].HasTile)
                 {
                     WorldGen.PlaceTile(i, j, ModContent.TileType<Booger>());
                 }

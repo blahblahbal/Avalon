@@ -14,9 +14,9 @@ class TetanusChakram : ModItem
     {
         Item.width = 38;
         Item.height = 40;
-        Item.damage = 25;
+        Item.damage = 27;
         Item.noUseGraphic = true;
-        Item.shootSpeed = 7f;
+        Item.shootSpeed = 7.3f;
         Item.rare = ItemRarityID.Blue;
         Item.noMelee = true;
         Item.useTime = 15;

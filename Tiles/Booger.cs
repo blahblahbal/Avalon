@@ -12,7 +12,7 @@ public class Booger : ModTile
         Main.tileSolid[Type] = false;
         Main.tileBlockLight[Type] = false;
         RegisterItemDrop(ModContent.ItemType<Items.Material.Booger>());
-        DustType = ModContent.DustType<Dusts.ContagionPowder>();
+        DustType = ModContent.DustType<Dusts.SnotsandDust>();
     }
     public override bool Slope(int i, int j)
     {
