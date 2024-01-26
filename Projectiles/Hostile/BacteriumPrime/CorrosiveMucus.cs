@@ -17,7 +17,7 @@ public class CorrosiveMucus : ModProjectile
         Projectile.aiStyle = -1;
         Projectile.Size = new Vector2(16);
         Projectile.light = 0;
-        Projectile.tileCollide = false;
+        //Projectile.tileCollide = false;
     }
     public override void AI()
     {
@@ -39,10 +39,10 @@ public class CorrosiveMucus : ModProjectile
             Main.dust[D].scale = 1.5f;
             Main.dust[D].alpha = 128;
         }
-        if (!Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
-        {
-            Projectile.tileCollide = true;
-        }
+        //if (!Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
+        //{
+        //    Projectile.tileCollide = true;
+        //}
         //Lighting.AddLight(Projectile.Center, 0.3f, 0.35f, 0f);
         Lighting.AddLight(Projectile.Center, 0.3f, 0.3f, 0.2f);
         bool KillFast = true;

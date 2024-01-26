@@ -156,7 +156,8 @@ public class BacteriumPrime : ModNPC
         else
             speed = 4;
 
-        if (NPC.ai[3] == 0) {
+        if (NPC.ai[3] == 0)
+        {
             if (NPC.noTileCollide || NPC.Center.Distance(Target.Center) > 40 * 16)
                 NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.13f;
             else
@@ -307,9 +308,9 @@ public class BacteriumPrime : ModNPC
         {
             if (!Collision.SolidCollision(NPC.position, NPC.width, NPC.height) || NPC.ai[1] > 199)
             {
-                if (NPC.ai[1] < 190 && NPC.life < Phase2part2Health)
+                if (NPC.ai[1] < 190 && NPC.life < Phase2part2Health * NPC.lifeMax)
                     NPC.ai[1] += 4;
-                if (NPC.ai[1] < 190 && NPC.life < Phase2part3Health)
+                if (NPC.ai[1] < 190 && NPC.life < Phase2part3Health * NPC.lifeMax)
                     NPC.ai[1] += 4;
                 NPC.ai[1]++;
             }
@@ -354,7 +355,7 @@ public class BacteriumPrime : ModNPC
                 }
                 NPC.velocity *= 0.94f;
             }
-            if (NPC.ai[1] == 240)
+            if (NPC.ai[1] >= 240)
             {
                 SoundEngine.PlaySound(SoundID.Item95, NPC.Center);
                 if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -410,7 +411,7 @@ public class BacteriumPrime : ModNPC
                 }
                 NPC.ai[0] = Main.rand.Next(3);
                 if (NPC.life >= NPC.lifeMax * Phase2part2Health)
-                NPC.ai[1] = Main.rand.Next(-60,60);
+                    NPC.ai[1] = Main.rand.Next(-60, 60);
                 else
                 {
                     NPC.ai[1] = Main.rand.Next(-20, 80);
@@ -432,9 +433,12 @@ public class BacteriumPrime : ModNPC
             //NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.26f;
             if (NPC.ai[1] < 200)
             {
-                NPC.velocity = Vector2.Lerp(NPC.Center.DirectionTo(Target.Center) * speed, NPC.velocity, 0.96f);
-                NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
-                NPC.velocity.Y = MathHelper.Clamp(NPC.velocity.Y, -5, 5);
+                if (Target.Center != NPC.Center)
+                {
+                    NPC.velocity = Vector2.Lerp(NPC.Center.DirectionTo(Target.Center) * speed, NPC.velocity, 0.96f);
+                    NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
+                    NPC.velocity.Y = MathHelper.Clamp(NPC.velocity.Y, -5, 5);
+                }
             }
         }
         #endregion Phase 2
@@ -445,7 +449,7 @@ public class BacteriumPrime : ModNPC
             Main.dust[d].noGravity = true;
         }
 
-       
+
 
         //if(NPC.alpha > 255)
         //{
