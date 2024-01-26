@@ -27,6 +27,6 @@ public class SulphurBlob : ModTile
     }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
-        yield return new Item(ModContent.ItemType<Sulphur>(), WorldGen.genRand.Next(4, 10));
+        yield return new Item(ModContent.ItemType<Sulphur>(), WorldGen.genRand.Next(10, 18));
     }
 }
