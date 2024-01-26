@@ -29,6 +29,8 @@ using Terraria.GameContent;
 using Avalon.NPCs.PreHardmode;
 using Avalon.Reflection;
 using Terraria.Audio;
+using Terraria.WorldBuilding;
+using Avalon.Tiles.Ores;
 
 namespace Avalon.Common;
 
@@ -677,13 +679,47 @@ public class AvalonWorld : ModSystem
     {
         Main.rand ??= new UnifiedRandom((int)DateTime.Now.Ticks);
 
-        for (int a = 0; a < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); a++)
+
+        // TODO: make it only replace SOME of the bg object blobs, instead of ALL of them of certain types
+        for (int x = 10; x < Main.maxTilesX - 10; x++)
         {
-            int x = Main.rand.Next(100, Main.maxTilesX - 100);
-            int y = Main.rand.Next((int)Main.rockLayer, Main.maxTilesY - 150);
-            WorldGen.OreRunner(x, y, Main.rand.Next(3, 6), Main.rand.Next(3, 5),
-                (ushort)ModContent.TileType<Tiles.Ores.SulphurOre>());
+            for (int y = (int)GenVars.rockLayer; y < Main.maxTilesY - 200; y++)
+            {
+                if (Main.tile[x, y].TileType == TileID.LargePiles)
+                {
+                    if (Main.tile[x, y].TileFrameX >= 324 && Main.tile[x, y].TileFrameX <= 360 || Main.tile[x, y].TileFrameX >= 702 && Main.tile[x, y].TileFrameX <= 1386)
+                    {
+                    }
+                    else
+                    {
+                        Main.tile[x, y].TileType = (ushort)ModContent.TileType<SulphurBlob>();
+
+                        if (Main.tile[x, y].TileFrameX >= 378 && Main.tile[x, y].TileFrameX <= 684)
+                        {
+                            Main.tile[x, y].TileFrameX -= 378;
+                        }
+
+                        if (Main.tile[x, y].TileFrameX >= 1404 && Main.tile[x, y].TileFrameX <= 1710)
+                        {
+                            Main.tile[x, y].TileFrameX -= 1404;
+                        }
+
+                        if (Main.tile[x, y].TileFrameX >= 1728)
+                        {
+                            Main.tile[x, y].TileFrameX -= 1728;
+                        }
+                    }
+                }
+            }
         }
+
+        //for (int a = 0; a < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); a++)
+        //{
+        //    int x = Main.rand.Next(100, Main.maxTilesX - 100);
+        //    int y = Main.rand.Next((int)Main.rockLayer, Main.maxTilesY - 150);
+        //    WorldGen.OreRunner(x, y, Main.rand.Next(3, 6), Main.rand.Next(3, 5),
+        //        (ushort)ModContent.TileType<Tiles.Ores.SulphurOre>());
+        //}
 
         if (Main.netMode == NetmodeID.SinglePlayer)
         {

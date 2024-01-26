@@ -17,4 +17,12 @@ class SpodermanMask : ModItem
         Item.value = Item.sellPrice(0, 0, 10);
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+           .AddIngredient(ItemID.Silk, 10)
+           .AddIngredient(ItemID.FireblossomSeeds, 3)
+           .AddTile(TileID.Loom)
+           .Register();
+    }
 }
