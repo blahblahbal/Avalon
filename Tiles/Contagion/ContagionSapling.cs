@@ -54,6 +54,29 @@ public class ContagionSapling : ModTile
         }
     }
 
+    public static bool AttemptToGrowContagionTreeFromSapling(int x, int y)
+    {
+        if (Main.netMode == NetmodeID.MultiplayerClient)
+        {
+            return false;
+        }
+        if (!WorldGen.InWorld(x, y, 2))
+        {
+            return false;
+        }
+        Tile tile = Main.tile[x, y];
+        if (tile == null || !tile.HasTile)
+        {
+            return false;
+        }
+        bool flag = WorldGen.PlayerLOS(x, y);
+        if (WorldGen.GrowTree(x, y) && flag)
+        {
+            WorldGen.TreeGrowFXCheck(x, y);
+        }
+        return flag;
+    }
+
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects effects)
     {
         if (i % 2 == 1)

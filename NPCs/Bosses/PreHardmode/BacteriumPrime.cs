@@ -310,7 +310,7 @@ public class BacteriumPrime : ModNPC
                 if (NPC.ai[1] < 190 && NPC.life < Phase2part2Health)
                     NPC.ai[1] += 4;
                 if (NPC.ai[1] < 190 && NPC.life < Phase2part3Health)
-                    NPC.ai[1]+= 4;
+                    NPC.ai[1] += 4;
                 NPC.ai[1]++;
             }
 

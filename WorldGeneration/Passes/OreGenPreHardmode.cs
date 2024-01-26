@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Avalon.Tiles.Ores;
 using Terraria;
+using Terraria.ID;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
@@ -16,15 +17,36 @@ public class OreGenPreHardmode : GenPass
     {
         for (int tourmaline = 0; tourmaline < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); tourmaline++)
         {
-            WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(2, 7), ModContent.TileType<Tourmaline>());
+            int xc = WorldGen.genRand.Next(0, Main.maxTilesX);
+            int yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
+            while (Main.tile[xc, yc].TileType != TileID.Stone)
+            {
+                xc = WorldGen.genRand.Next(0, Main.maxTilesX);
+                yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
+            }
+            WorldGen.TileRunner(xc, yc, WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(3, 7), ModContent.TileType<Tourmaline>());
         }
         for (int peridot = 0; peridot < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); peridot++)
         {
-            WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), WorldGen.genRand.Next(3, 5), WorldGen.genRand.Next(3, 7), ModContent.TileType<Peridot>());
+            int xc = WorldGen.genRand.Next(0, Main.maxTilesX);
+            int yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
+            while (Main.tile[xc, yc].TileType != TileID.Stone)
+            {
+                xc = WorldGen.genRand.Next(0, Main.maxTilesX);
+                yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
+            }
+            WorldGen.TileRunner(xc, yc, WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(3, 7), ModContent.TileType<Peridot>());
         }
         for (int zircon = 0; zircon < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); zircon++)
         {
-            WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), WorldGen.genRand.Next(2, 5), WorldGen.genRand.Next(3, 5), ModContent.TileType<Zircon>());
+            int xc = WorldGen.genRand.Next(0, Main.maxTilesX);
+            int yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
+            while (Main.tile[xc, yc].TileType != TileID.Stone)
+            {
+                xc = WorldGen.genRand.Next(0, Main.maxTilesX);
+                yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
+            }
+            WorldGen.TileRunner(xc, yc, WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(3, 7), ModContent.TileType<Zircon>());
         }
         int roiOre = ModContent.TileType<RhodiumOre>();
         if (AvalonWorld.RhodiumOre == AvalonWorld.RhodiumVariant.Osmium)

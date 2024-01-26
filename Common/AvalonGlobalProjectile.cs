@@ -1,6 +1,7 @@
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Avalon.Dusts;
+using Avalon.Tiles.GemTrees;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,6 +11,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.Common;
 
@@ -45,21 +47,12 @@ internal class AvalonGlobalProjectile : GlobalProjectile
     }
     public override bool CanHitPlayer(Projectile projectile, Player target)
     {
-        if (target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.PoisonDartTrap ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.VenomDartTrap ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.GasTrap ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.Explosives ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.Landmine ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.SpearTrap ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.FlamesTrap ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.FlamethrowerTrap ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.SpikyBallTrap ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.GeyserTrap ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && ProjectileID.Sets.IsAGravestone[projectile.type] ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.Boulder ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.BouncyBoulder ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.MiniBoulder ||
-            target.GetModPlayer<AvalonPlayer>().TrapImmune && projectile.type == ProjectileID.LifeCrystalBoulder)
+        if (target.GetModPlayer<AvalonPlayer>().TrapImmune && (projectile.type == ProjectileID.PoisonDartTrap || projectile.type == ProjectileID.VenomDartTrap ||
+            projectile.type == ProjectileID.GasTrap || projectile.type == ProjectileID.Explosives || projectile.type == ProjectileID.Landmine ||
+            projectile.type == ProjectileID.SpearTrap || projectile.type == ProjectileID.FlamesTrap || projectile.type == ProjectileID.FlamethrowerTrap ||
+            projectile.type == ProjectileID.SpikyBallTrap || projectile.type == ProjectileID.GeyserTrap || ProjectileID.Sets.IsAGravestone[projectile.type] ||
+            projectile.type == ProjectileID.Boulder || projectile.type == ProjectileID.BouncyBoulder || projectile.type == ProjectileID.MiniBoulder ||
+            projectile.type == ProjectileID.LifeCrystalBoulder))
         {
             return false;
         }
@@ -163,15 +156,90 @@ internal class AvalonGlobalProjectile : GlobalProjectile
             }
         }
     }
-    //public override void UseGrapple(Player player, ref int type)
-    //{
-    //    if (ProjectileID.Sets.SingleGrappleHook[type])
-    //    {
-
-    //    }
-    //}
     public override void AI(Projectile projectile)
     {
+        #region fertilizer fix
+        if (projectile.aiStyle == 6)
+        {
+            bool flag23 = projectile.type == 1019;
+            bool flag34 = Main.myPlayer == projectile.owner;
+            if (flag23)
+            {
+                flag34 = Main.netMode != NetmodeID.MultiplayerClient;
+            }
+            if (flag34 && flag23)
+            {
+                int num988 = (int)(projectile.position.X / 16f) - 1;
+                int num999 = (int)((projectile.position.X + projectile.width) / 16f) + 2;
+                int num1010 = (int)(projectile.position.Y / 16f) - 1;
+                int num1021 = (int)((projectile.position.Y + projectile.height) / 16f) + 2;
+                if (num988 < 0)
+                {
+                    num988 = 0;
+                }
+                if (num999 > Main.maxTilesX)
+                {
+                    num999 = Main.maxTilesX;
+                }
+                if (num1010 < 0)
+                {
+                    num1010 = 0;
+                }
+                if (num1021 > Main.maxTilesY)
+                {
+                    num1021 = Main.maxTilesY;
+                }
+                Vector2 vector57 = default;
+                for (int num1032 = num988; num1032 < num999; num1032++)
+                {
+                    for (int num1043 = num1010; num1043 < num1021; num1043++)
+                    {
+                        vector57.X = num1032 * 16;
+                        vector57.Y = num1043 * 16;
+                        if (!(projectile.position.X + projectile.width > vector57.X) || !(projectile.position.X < vector57.X + 16f) || !(projectile.position.Y + projectile.height > vector57.Y) || !(projectile.position.Y < vector57.Y + 16f) || !Main.tile[num1032, num1043].HasTile)
+                        {
+                            continue;
+                        }
+                        Tile tile = Main.tile[num1032, num1043];
+                        if (tile.TileType == ModContent.TileType<ContagionSapling>())
+                        {
+                            //if (Main.remixWorld && num1043 >= (int)Main.worldSurface - 1 && num1043 < Main.maxTilesY - 20)
+                            //{
+                            //    ContagionSapling.AttemptToGrowContagionTreeFromSapling(num1032, num1043);
+                            //}
+                            ContagionSapling.AttemptToGrowContagionTreeFromSapling(num1032, num1043);
+                        }
+
+                        if (tile.TileType == ModContent.TileType<TourmalineSapling>())
+                        {
+                            if (Main.remixWorld && num1043 >= (int)Main.worldSurface - 1 && num1043 < Main.maxTilesY - 20)
+                            {
+                                TourmalineSapling.AttemptToGrowTourmalineFromSapling(num1032, num1043, underground: false);
+                            }
+                            TourmalineSapling.AttemptToGrowTourmalineFromSapling(num1032, num1043, num1043 > (int)Main.worldSurface - 1);
+                        }
+                        if (tile.TileType == ModContent.TileType<PeridotSapling>())
+                        {
+                            if (Main.remixWorld && num1043 >= (int)Main.worldSurface - 1 && num1043 < Main.maxTilesY - 20)
+                            {
+                                PeridotSapling.AttemptToGrowPeridotFromSapling(num1032, num1043, underground: false);
+                            }
+                            PeridotSapling.AttemptToGrowPeridotFromSapling(num1032, num1043, num1043 > (int)Main.worldSurface - 1);
+                        }
+                        if (tile.TileType == ModContent.TileType<ZirconSapling>())
+                        {
+                            if (Main.remixWorld && num1043 >= (int)Main.worldSurface - 1 && num1043 < Main.maxTilesY - 20)
+                            {
+                                ZirconSapling.AttemptToGrowZirconFromSapling(num1032, num1043, underground: false);
+                            }
+                            ZirconSapling.AttemptToGrowZirconFromSapling(num1032, num1043, num1043 > (int)Main.worldSurface - 1);
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+        #region terra blade sound change
         if (projectile.type == ProjectileID.TerraBlade2)
         {
             if (projectile.localAI[0] == 1)
@@ -180,6 +248,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                 SoundEngine.PlaySound(SoundID.Item8, projectile.position);
             }
         }
+        #endregion
         if (projectile.type == ProjectileID.PaladinsHammerFriendly)
         {
             if(Main.timeForVisualEffects % 2 == 0 && projectile.ai[1] != 0 && projectile.timeLeft > 3590)
@@ -191,6 +260,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                 ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.PaladinsHammer, settings, projectile.owner);
             }
         }
+        #region avalon flasks
         if (!projectile.npcProj && !projectile.noEnchantments && !projectile.noEnchantmentVisuals && (projectile.DamageType == DamageClass.Melee || ProjectileID.Sets.IsAWhip[projectile.type]))
         {
             Vector2 boxPosition = projectile.position;
@@ -216,6 +286,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
                 EmitAvalonEnchants(boxPosition, boxWidth, boxHeight, projectile);
             }
         }
+        #endregion
     }
 
     public void EmitAvalonEnchants(Vector2 boxPosition, int boxWidth, int boxHeight, Projectile projectile)

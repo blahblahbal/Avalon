@@ -10,6 +10,10 @@ namespace Avalon.Items.Weapons.Magic.Hardmode;
 
 class SackofToys : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
