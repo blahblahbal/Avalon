@@ -48,7 +48,6 @@ public class AvalonGlobalNPC : GlobalNPC
 
         return 0;
     }
-    
     public override void OnKill(NPC npc)
     {
         if (npc.type == NPCID.SkeletronHead && !NPC.downedBoss3)

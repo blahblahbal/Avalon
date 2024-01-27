@@ -42,9 +42,9 @@ public class ContagionPot : ModTile
         SoundEngine.PlaySound(SoundID.NPCDeath1, new Vector2(i * 16, j * 16));
         SoundEngine.PlaySound(SoundID.Dig, new Vector2(i * 16, j * 16));
         Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, 22, 0f, 0f, 0, default, 1f);
-        Gore.NewGore(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16, j * 16), default, Mod.Find<ModGore>("ContagionPotGore1").Type);
-        Gore.NewGore(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16, j * 16), default, Mod.Find<ModGore>("ContagionPotGore2").Type);
-        Gore.NewGore(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16, j * 16), default, Mod.Find<ModGore>("ContagionPotGore3").Type);
+        Gore.NewGore(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16, j * 16), default, ModContent.GoreType<Gores.ContagionPotGore1>());
+        Gore.NewGore(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16, j * 16), default, ModContent.GoreType<Gores.ContagionPotGore2>());
+        Gore.NewGore(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i * 16, j * 16), default, ModContent.GoreType<Gores.ContagionPotGore3>());
         if (!WorldGen.gen && Main.netMode != 1)
         {
             if (WorldGen.genRand.NextBool(15))

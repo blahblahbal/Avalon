@@ -29,6 +29,8 @@ namespace Avalon.NPCs.Bosses.PreHardmode;
 [AutoloadBossHead]
 public class DesertBeak : ModNPC
 {
+    bool thing;
+    byte timer = 0;
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 8;
@@ -130,9 +132,8 @@ public class DesertBeak : ModNPC
         });
     }
     public override void AI()
-    {
+    {        
         //Main.NewText("[" + $"{NPC.ai[0]}" + "]" + "[" + $"{NPC.ai[1]}" + "]" + "[" + $"{NPC.ai[2]}" + "]" + " phase: " + $"{phase}", Main.DiscoColor);
-
         float enragedModifier = 1f;
         if (Main.player[NPC.target].ZoneDesert || Main.player[NPC.target].ZoneUndergroundDesert)
         {
@@ -192,6 +193,7 @@ public class DesertBeak : ModNPC
         {
             PhaseTwo(Target, enragedModifier);
         }
+        NPC.velocity = Vector2.Zero;
         //Main.NewText(NPC.ai[1], Main.DiscoColor);
     }
     public void PhaseOne(Player Target, float modifier)
@@ -555,5 +557,113 @@ public class DesertBeak : ModNPC
             }
         }
         return true;
+    }
+}
+
+/// <summary>
+/// Credit to Photonic0 on discord for this
+/// </summary>
+public class DesertBeakIFrames : GlobalNPC
+{
+    public override bool PreAI(NPC npc)
+    {
+        UpdateDesertBeakIFrames(npc);
+        return base.PreAI(npc);
+    }
+    static bool IsNPCTypeDesertBeak(NPC npc) => npc.type == ModContent.NPCType<DesertBeak>() || npc.type == ModContent.NPCType<DesertBeakWingNPC>();
+    static int GetAmountOfIframes(Projectile projectile)
+    {
+        if (projectile.stopsDealingDamageAfterPenetrateHits)
+            return int.MaxValue;
+        if (projectile.usesOwnerMeleeHitCD)
+            return Main.player[projectile.owner].itemAnimation;
+        if (projectile.usesIDStaticNPCImmunity)
+            return projectile.idStaticNPCHitCooldown;
+        if (projectile.usesLocalNPCImmunity)
+            return projectile.localNPCHitCooldown < 1 ? 10 : projectile.localNPCHitCooldown / projectile.MaxUpdates;
+        return 10;
+    }
+
+    public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
+    {
+        //if (IsNPCTypeDesertBeak(npc))
+        //{
+        //    int iframes = GetAmountOfIframes(projectile);
+        //    DesertBeakIFrame[projectile.whoAmI] = iframes;
+        //    if (projectile.usesOwnerMeleeHitCD)
+        //    {
+        //        Player player = Main.player[projectile.owner];
+        //        DesertBeakIFrame[Main.maxProjectiles + projectile.owner] = player.itemAnimation;
+        //        player.SetMeleeHitCooldown(npc.whoAmI, player.itemAnimation);
+        //    }
+        //}
+
+        if (IsNPCTypeDesertBeak(npc))
+        {
+            desertBeakIFrames[projectile.whoAmI] = GetAmountOfIframes(projectile);
+        }
+    }
+    static int[] desertBeakIFrames = new int[Main.maxProjectiles + Main.maxPlayers];//ok so basically the first 1000 slots are for projs and the latter 255 slots are for players
+    public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
+    {
+        if (IsNPCTypeDesertBeak(npc))
+        {
+            desertBeakIFrames[player.whoAmI + Main.maxProjectiles] = player.itemAnimation;
+        }    
+    }
+    public override bool? CanBeHitByItem(NPC npc, Player player, Item item)
+    {
+        if (!IsNPCTypeDesertBeak(npc) || (desertBeakIFrames[player.whoAmI + Main.maxProjectiles] < 1))
+            return null;
+        return false;
+    }
+    /// <summary>
+    /// THIS ASSUMES THAT YOU CHECK IF THE NPC IS A DESTROYER BEFOREHAND
+    /// </summary>
+    static bool IsDesertBeakImmuneToThis(Projectile projectile, NPC npc)
+    {
+        if (!projectile.friendly || projectile.DistanceSQ(npc.Center) > 40000)//checking distance for optimization
+            return true;
+        if (projectile.usesIDStaticNPCImmunity)
+            if (desertBeakIFrames[projectile.whoAmI] < 1 && projectile.friendly)
+            {
+                for (int i = 0; i < Main.maxNPCs; i++)
+                {
+                    if (!npc.active || !IsNPCTypeDesertBeak(Main.npc[i]))
+                        continue;
+                    if (Projectile.perIDStaticNPCImmunity[projectile.type][i] > 0)
+                        return true;
+                }
+            }
+        if (projectile.usesLocalNPCImmunity || projectile.usesOwnerMeleeHitCD || projectile.stopsDealingDamageAfterPenetrateHits)
+            return desertBeakIFrames[projectile.whoAmI] > 1;
+        for (int i = 0; i < Main.maxProjectiles; i++)//attempt at mimmicking global iframes
+        {
+            if (desertBeakIFrames[i] > 0)
+                return true;
+        }
+        return false;
+    }
+    public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
+    {
+        if (!IsNPCTypeDesertBeak(npc) || !IsDesertBeakImmuneToThis(projectile, npc))
+            return null;
+        return false;
+    }
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => IsNPCTypeDesertBeak(entity);
+    /// <summary>
+    /// CALL THIS ON PRE AI OF GLOBAL NPC
+    /// </summary>
+    static void UpdateDesertBeakIFrames(NPC npc)
+    {
+        if (npc.type == ModContent.NPCType<DesertBeak>())
+        {
+            for (int i = 0; i < desertBeakIFrames.Length; i++)
+            {
+                if (i < 1000 && !Main.projectile[i].active)
+                    desertBeakIFrames[i] = 0;
+                desertBeakIFrames[i]--;
+            }
+        }
     }
 }

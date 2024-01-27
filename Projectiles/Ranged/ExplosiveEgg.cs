@@ -56,23 +56,23 @@ public class ExplosiveEgg : ModProjectile
             }
         }
 
-            Projectile.maxPenetrate = -1;
-            Projectile.penetrate = -1;
+        Projectile.maxPenetrate = -1;
+        Projectile.penetrate = -1;
 
-            int explosionArea = 75;
-            Vector2 oldSize = Projectile.Size;
-            Projectile.position = Projectile.Center;
-            Projectile.Size += new Vector2(explosionArea);
-            Projectile.Center = Projectile.position;
+        int explosionArea = 75;
+        Vector2 oldSize = Projectile.Size;
+        Projectile.position = Projectile.Center;
+        Projectile.Size += new Vector2(explosionArea);
+        Projectile.Center = Projectile.position;
 
-            Projectile.tileCollide = false;
-            Projectile.velocity *= 0.01f;
-            Projectile.Damage();
-            Projectile.scale = 0.01f;
+        Projectile.tileCollide = false;
+        Projectile.velocity *= 0.01f;
+        Projectile.Damage();
+        Projectile.scale = 0.01f;
 
-            Projectile.position = Projectile.Center;
-            Projectile.Size = new Vector2(10);
-            Projectile.Center = Projectile.position;
+        Projectile.position = Projectile.Center;
+        Projectile.Size = new Vector2(10);
+        Projectile.Center = Projectile.position;
 
         SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
 

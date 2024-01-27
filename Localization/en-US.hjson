@@ -7466,6 +7466,11 @@ Mods: {
 				DisplayName: Magic Grenade
 				Tooltip: ""
 			}
+
+			HallowedGreatsword: {
+				DisplayName: Hallowed Greatsword
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

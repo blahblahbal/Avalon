@@ -125,10 +125,15 @@ internal class DesertBeakWingNPC : ModNPC
         {
             NPC.position.Y += -heightDiff - widthDiff * (Main.npc[NPC.realLife].velocity.X * 0.05f);
         }
+        if (NPC.life <= 0)
+        {
+            NPC.life = 0;
+            NPC.active = false;
+        }
     }
     public override void HitEffect(NPC.HitInfo hit)
     {
-        if (Main.npc[NPC.realLife].life <= 0)
+        if (Main.npc[NPC.realLife].life <= 0 || NPC.life <= 0)
         {
             NPC.life = 0;
             NPC.active = false;

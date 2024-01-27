@@ -12,6 +12,7 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Tiles.Contagion;
+using Avalon.NPCs.Bosses.PreHardmode;
 
 namespace Avalon.Common;
 

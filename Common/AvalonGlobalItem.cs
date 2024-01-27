@@ -29,6 +29,7 @@ using Microsoft.Xna.Framework;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tools.PreHardmode;
 using Terraria.DataStructures;
+using Avalon.NPCs.Bosses.PreHardmode;
 
 namespace Avalon.Common;
 

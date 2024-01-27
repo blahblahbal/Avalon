@@ -4,6 +4,7 @@ using Avalon.Buffs.Debuffs;
 using Avalon.Dusts;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Other;
+using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Projectiles;
 using Avalon.Systems;
@@ -1246,7 +1247,7 @@ public class AvalonPlayer : ModPlayer
             MaxMeleeCrit -= 20;
         }
 
-        if (OblivionKill && Main.rand.NextBool(35) && !target.boss)
+        if (OblivionKill && Main.rand.NextBool(35) && !target.boss && target.type != ModContent.NPCType<DesertBeakWingNPC>())
         {
             target.life = 0;
             target.active = false;
