@@ -47,7 +47,7 @@ class DesertHorn : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (player.ItemAnimationEndingOrEnded)
+        if (player.ItemAnimationJustStarted)
         {
             player.inventory[player.selectedItem].stack--;
             if (player.inventory[player.selectedItem].stack <= 0)
