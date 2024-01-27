@@ -306,7 +306,7 @@ public class BacteriumPrime : ModNPC
 
         if (NPC.ai[3] == 60)
         {
-            if (!Collision.SolidCollision(NPC.position, NPC.width, NPC.height) || NPC.ai[1] > 199)
+            if (!Collision.SolidCollision(NPC.position + new Vector2(NPC.width / 3, NPC.height / 3), NPC.width / 3, NPC.height / 3) || NPC.ai[1] > 199)
             {
                 if (NPC.ai[1] < 190 && NPC.life < Phase2part2Health * NPC.lifeMax)
                     NPC.ai[1] += 4;

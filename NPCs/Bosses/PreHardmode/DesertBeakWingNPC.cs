@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -59,28 +60,64 @@ internal class DesertBeakWingNPC : ModNPC
         }
         if (Main.npc[NPC.realLife].frame.Y == 2 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 9;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y;
         }
         if (Main.npc[NPC.realLife].frame.Y == 3 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y + 2;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y + 5;
         }
         if (Main.npc[NPC.realLife].frame.Y == 4 * 178)
         {
             NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 + 17;
+            if (NPC.position.X > Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X -= 5;
+            }
+            if (NPC.position.X < Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X += 5;
+            }
         }
         if (Main.npc[NPC.realLife].frame.Y == 5 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 + 7;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 + 5;
+            if (NPC.position.X > Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X -= 10;
+            }
+            if (NPC.position.X < Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X += 10;
+            }
         }
         if (Main.npc[NPC.realLife].frame.Y == 6 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 + 3;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 - 2;
+            if (NPC.position.X > Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X -= 3;
+            }
+            if (NPC.position.X < Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X += 3;
+            }
         }
         if (Main.npc[NPC.realLife].frame.Y == 7 * 178)
         {
             NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 - 5;
         }
+        // npcPosY + lengthDiffBetHorizandDiagDist
+        float heightDiff = MathF.Abs(Main.npc[NPC.realLife].Center.Y - NPC.Center.Y);
+        float widthDiff = MathF.Abs(Main.npc[NPC.realLife].Center.X - NPC.Center.X);
+        if (NPC.position.X < Main.npc[NPC.realLife].position.X)
+        {
+            NPC.position.Y += heightDiff - widthDiff * (Main.npc[NPC.realLife].velocity.X * 0.05f);
+        }
+        if (NPC.position.X > Main.npc[NPC.realLife].position.X)
+        {
+            NPC.position.Y += heightDiff - widthDiff * (-Main.npc[NPC.realLife].velocity.X * 0.05f);
+        }
+        NPC.position.Y -= 14;
     }
     public override void HitEffect(NPC.HitInfo hit)
     {
