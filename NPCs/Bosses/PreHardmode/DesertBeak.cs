@@ -51,8 +51,8 @@ public class DesertBeak : ModNPC
         NPC.damage = 45;
         NPC.boss = true;
         NPC.noTileCollide = true;
-        NPC.lifeMax = 3650;
-        NPC.defense = 30;
+        NPC.lifeMax = 4650;
+        NPC.defense = 40;
         NPC.noGravity = true;
         NPC.width = 62;
         NPC.aiStyle = -1;

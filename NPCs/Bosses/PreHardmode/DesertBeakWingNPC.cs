@@ -22,15 +22,15 @@ internal class DesertBeakWingNPC : ModNPC
         NPC.TargetClosest();
         NPC.damage = 45;
         NPC.noTileCollide = true;
-        NPC.lifeMax = 3650;
-        NPC.defense = 30;
+        NPC.lifeMax = 4650;
+        NPC.defense = 40;
         NPC.noGravity = true;
-        NPC.width = 62;
+        NPC.width = 77;
         NPC.aiStyle = -1;
         NPC.npcSlots = 100f;
         NPC.value = 50000f;
         NPC.timeLeft = 22500;
-        NPC.height = 45;
+        NPC.height = 40;
         NPC.knockBackResist = 0f;
         NPC.HitSound = SoundID.NPCHit28;
         NPC.DeathSound = SoundID.NPCDeath31;
@@ -44,7 +44,7 @@ internal class DesertBeakWingNPC : ModNPC
     {
         if (NPC.ai[3] == 1)
         {
-            NPC.position.X = Main.npc[NPC.realLife].Center.X - 62 - 31;
+            NPC.position.X = Main.npc[NPC.realLife].Center.X - 77 - 31;
         }
         else if (NPC.ai[3] == 2)
         {
@@ -52,23 +52,59 @@ internal class DesertBeakWingNPC : ModNPC
         }
         if (Main.npc[NPC.realLife].frame.Y == 0 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 - 15;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 31;
         }
         if (Main.npc[NPC.realLife].frame.Y == 1 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 - 3;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 26;
         }
         if (Main.npc[NPC.realLife].frame.Y == 2 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 12;
         }
         if (Main.npc[NPC.realLife].frame.Y == 3 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y + 5;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 7;
         }
         if (Main.npc[NPC.realLife].frame.Y == 4 * 178)
         {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 + 17;
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 22;
+            if (NPC.position.X > Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X -= 15;
+            }
+            if (NPC.position.X < Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X += 18;
+            }
+        }
+        if (Main.npc[NPC.realLife].frame.Y == 5 * 178)
+        {
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 31;
+            if (NPC.position.X > Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X -= 30;
+            }
+            if (NPC.position.X < Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X += 30;
+            }
+        }
+        if (Main.npc[NPC.realLife].frame.Y == 6 * 178)
+        {
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 34;
+            if (NPC.position.X > Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X -= 13;
+            }
+            if (NPC.position.X < Main.npc[NPC.realLife].position.X)
+            {
+                NPC.position.X += 13;
+            }
+        }
+        if (Main.npc[NPC.realLife].frame.Y == 7 * 178)
+        {
+            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 29;
             if (NPC.position.X > Main.npc[NPC.realLife].position.X)
             {
                 NPC.position.X -= 5;
@@ -78,46 +114,17 @@ internal class DesertBeakWingNPC : ModNPC
                 NPC.position.X += 5;
             }
         }
-        if (Main.npc[NPC.realLife].frame.Y == 5 * 178)
-        {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 + 5;
-            if (NPC.position.X > Main.npc[NPC.realLife].position.X)
-            {
-                NPC.position.X -= 10;
-            }
-            if (NPC.position.X < Main.npc[NPC.realLife].position.X)
-            {
-                NPC.position.X += 10;
-            }
-        }
-        if (Main.npc[NPC.realLife].frame.Y == 6 * 178)
-        {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 - 2;
-            if (NPC.position.X > Main.npc[NPC.realLife].position.X)
-            {
-                NPC.position.X -= 3;
-            }
-            if (NPC.position.X < Main.npc[NPC.realLife].position.X)
-            {
-                NPC.position.X += 3;
-            }
-        }
-        if (Main.npc[NPC.realLife].frame.Y == 7 * 178)
-        {
-            NPC.position.Y = Main.npc[NPC.realLife].Center.Y - 39 - 5;
-        }
         // npcPosY + lengthDiffBetHorizandDiagDist
-        float heightDiff = MathF.Abs(Main.npc[NPC.realLife].Center.Y - NPC.Center.Y);
-        float widthDiff = MathF.Abs(Main.npc[NPC.realLife].Center.X - NPC.Center.X);
+        float heightDiff = Main.npc[NPC.realLife].Center.Y - NPC.Center.Y;
+        float widthDiff = Main.npc[NPC.realLife].Center.X - NPC.Center.X;
         if (NPC.position.X < Main.npc[NPC.realLife].position.X)
         {
-            NPC.position.Y += heightDiff - widthDiff * (Main.npc[NPC.realLife].velocity.X * 0.05f);
+            NPC.position.Y -= heightDiff - widthDiff * (-Main.npc[NPC.realLife].velocity.X * 0.05f);
         }
         if (NPC.position.X > Main.npc[NPC.realLife].position.X)
         {
-            NPC.position.Y += heightDiff - widthDiff * (-Main.npc[NPC.realLife].velocity.X * 0.05f);
+            NPC.position.Y += -heightDiff - widthDiff * (Main.npc[NPC.realLife].velocity.X * 0.05f);
         }
-        NPC.position.Y -= 14;
     }
     public override void HitEffect(NPC.HitInfo hit)
     {
