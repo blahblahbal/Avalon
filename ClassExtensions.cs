@@ -36,6 +36,25 @@ public static class ClassExtensions
             }
         }
     }
+
+    /// <summary>
+    ///     Finds a type of NPC.
+    /// </summary>
+    /// <param name="type">The type of NPC to find.</param>
+    /// <returns>The index of the found NPC in the Main.npc[] array.</returns>
+    public static int FindATypeOfNPC(int type)
+    {
+        for (int i = 0; i < 200; i++)
+        {
+            if (type == Main.npc[i].type && Main.npc[i].active)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public static void DropCoinsProperly(float num7, int i, int j)
     {
         while ((int)num7 > 0)

@@ -23,14 +23,16 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Avalon.Items.Material.Ores;
 using Avalon.DropConditions;
+using Terraria.Chat;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 
 [AutoloadBossHead]
 public class DesertBeak : ModNPC
 {
-    bool thing;
-    byte timer = 0;
+    public int leftWing = -1;
+    public int rightWing = -1;
+    //bool spawnedWings = false;
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 8;
@@ -75,14 +77,6 @@ public class DesertBeak : ModNPC
     //    NPC.lifeMax = (int)(NPC.lifeMax * 0.66f * bossAdjustment);
     //    NPC.damage = (int)(NPC.damage * 0.58f);
     //}
-    public override void OnSpawn(IEntitySource source)
-    {
-        int leftWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai3: 1);
-        Main.npc[leftWing].realLife = NPC.whoAmI;
-
-        int rightWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai3: 2);
-        Main.npc[rightWing].realLife = NPC.whoAmI;
-    }
     public override void OnKill()
     {
         Terraria.GameContent.Events.Sandstorm.StopSandstorm();
@@ -90,6 +84,16 @@ public class DesertBeak : ModNPC
         {
             NPC.SetEventFlagCleared(ref ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak, -1);
         }
+        for (int i = 0; i < Main.npc.Length; i++)
+        {
+            if (Main.npc[i].type == ModContent.NPCType<DesertBeakWingNPC>())
+            {
+                Main.npc[i].active = false;
+                Main.npc[i].life = 0;
+                Main.npc[i].checkDead();
+            }
+        }
+        //spawnedWings = false;
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
@@ -131,8 +135,28 @@ public class DesertBeak : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.DesertBeak"))
         });
     }
+    public override void OnSpawn(IEntitySource source)
+    {
+        leftWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai1: NPC.whoAmI, ai2: 1);
+        //Main.npc[leftWing].realLife = NPC.whoAmI;
+        NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
+
+        rightWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai1: NPC.whoAmI, ai2: 2);
+        //Main.npc[rightWing].realLife = NPC.whoAmI;
+        NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
+    }
+    public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
+    {
+        Main.npc[leftWing].life -= damageDone;
+        Main.npc[rightWing].life -= damageDone;
+    }
     public override void AI()
-    {        
+    {
+        //if (NPC.life > 0)
+        //{
+        //    Main.npc[leftWing].life = NPC.life;
+        //    Main.npc[rightWing].life = NPC.life;
+        //}
         //Main.NewText("[" + $"{NPC.ai[0]}" + "]" + "[" + $"{NPC.ai[1]}" + "]" + "[" + $"{NPC.ai[2]}" + "]" + " phase: " + $"{phase}", Main.DiscoColor);
         float enragedModifier = 1f;
         if (Main.player[NPC.target].ZoneDesert || Main.player[NPC.target].ZoneUndergroundDesert)
@@ -193,7 +217,7 @@ public class DesertBeak : ModNPC
         {
             PhaseTwo(Target, enragedModifier);
         }
-        NPC.velocity = Vector2.Zero;
+        //NPC.velocity = Vector2.Zero;
         //Main.NewText(NPC.ai[1], Main.DiscoColor);
     }
     public void PhaseOne(Player Target, float modifier)
@@ -503,6 +527,8 @@ public class DesertBeak : ModNPC
         writer.Write(afterImageTimer);
         writer.Write(Storming);
         writer.Write(enraged);
+        writer.Write(leftWing);
+        writer.Write(rightWing);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
@@ -510,6 +536,8 @@ public class DesertBeak : ModNPC
         afterImageTimer = reader.ReadInt32();
         Storming = reader.ReadBoolean();
         enraged = reader.ReadBoolean();
+        leftWing = reader.ReadInt32();
+        rightWing = reader.ReadInt32();
     }
     public override void HitEffect(NPC.HitInfo hit)
     {

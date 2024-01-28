@@ -17,6 +17,7 @@ using System.IO;
 using System.Reflection;
 using Terraria;
 using Terraria.Audio;
+using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.Graphics.Shaders;
@@ -547,7 +548,16 @@ public class AvalonPlayer : ModPlayer
         DesertBeakSpawnTimer--;
         if (DesertBeakSpawnTimer == 0)
         {
-            NPC.SpawnOnPlayer(Player.whoAmI, ModContent.NPCType<NPCs.Bosses.PreHardmode.DesertBeak>());
+            NPC.SpawnOnPlayer(Player.whoAmI, ModContent.NPCType<DesertBeak>());
+
+            //NPC.NewNPC(Player.GetSource_FromThis(), (int)Player.position.X, (int)Player.position.Y, ModContent.NPCType<DesertBeak>());
+            //int db = ClassExtensions.FindATypeOfNPC(ModContent.NPCType<DesertBeak>());
+            //if (db > -1)
+            //{
+            //    ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(db.ToString()), Color.White);
+            //    ModContent.GetInstance<DesertBeak>().leftWing = NPC.NewNPC(Main.npc[db].GetSource_FromThis(), (int)Main.npc[db].position.X, (int)Main.npc[db].position.Y, ModContent.NPCType<DesertBeakWingNPC>(), Start: Player.whoAmI, ai1: db, ai2: 1);
+            //    ModContent.GetInstance<DesertBeak>().rightWing = NPC.NewNPC(Main.npc[db].GetSource_FromThis(), (int)Main.npc[db].position.X, (int)Main.npc[db].position.Y, ModContent.NPCType<DesertBeakWingNPC>(), Start: Player.whoAmI, ai1: db, ai2: 2);
+            //}
             SoundEngine.PlaySound(SoundID.Roar, Player.position);
         }
         if (AncientRangedBonusActive)
