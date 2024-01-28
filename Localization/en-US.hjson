@@ -7471,6 +7471,11 @@ Mods: {
 				DisplayName: Hallowed Greatsword
 				Tooltip: ""
 			}
+
+			GiantGravestone: {
+				DisplayName: Giant Gravestone
+				Tooltip: Creates a graveyard biome when placed
+			}
 		}
 
 		InfoDisplays: {

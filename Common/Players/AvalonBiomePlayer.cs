@@ -32,7 +32,6 @@ public class AvalonBiomePlayer : ModPlayer
     public bool ZoneHumidity { get; private set; }
     public bool ZoneDelight { get; private set; }
     public bool ZoneSight { get; private set; }
-
     public override void PostUpdate()
     {
         if (ZoneAltDungeon)

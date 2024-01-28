@@ -1,6 +1,7 @@
 using System;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Furniture;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -50,6 +51,8 @@ public class BiomeTileCounts : ModSystem
         DarkMonolithTiles = tileCounts[ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>()];
         AshenOvergrowthTiles = tileCounts[TileID.AshGrass] + 
                                tileCounts[TileID.AshPlants];
+
+        Main.SceneMetrics.GraveyardTileCount += tileCounts[ModContent.TileType<GiantGravestone>()] * 7;
 
         Main.SceneMetrics.JungleTileCount += tileCounts[ModContent.TileType<GreenIce>()];
         Main.SceneMetrics.SnowTileCount += tileCounts[ModContent.TileType<GreenIce>()];
