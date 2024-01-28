@@ -53,6 +53,9 @@ internal class DesertBeakWingNPC : ModNPC
     public override void AI()
     {
         //ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(NPC.position.ToString()), Color.White);
+
+        // aaaaaaaaaa
+
         if (NPC.ai[2] == 1)
         {
             NPC.position.X = Main.npc[(int)NPC.ai[1]].Center.X - 77 - 31;
@@ -64,120 +67,79 @@ internal class DesertBeakWingNPC : ModNPC
 
         if (Main.npc[(int)NPC.ai[1]].frame.Y == 0 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 39 - 15;
+            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 31;
         }
         if (Main.npc[(int)NPC.ai[1]].frame.Y == 1 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 39 - 3;
+            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 26;
         }
         if (Main.npc[(int)NPC.ai[1]].frame.Y == 2 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 9;
+            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 12;
         }
         if (Main.npc[(int)NPC.ai[1]].frame.Y == 3 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y + 2;
+            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 7;
         }
         if (Main.npc[(int)NPC.ai[1]].frame.Y == 4 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 39 + 17;
+            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 22;
+            if (NPC.ai[2] == 1)
+            {
+                NPC.position.X += 15;
+            }
+            else if (NPC.ai[2] == 2)
+            {
+                NPC.position.X -= 15;
+            }
         }
         if (Main.npc[(int)NPC.ai[1]].frame.Y == 5 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 39 + 7;
+            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 31;
+            if (NPC.ai[2] == 1)
+            {
+                NPC.position.X += 30;
+            }
+            else if (NPC.ai[2] == 2)
+            {
+                NPC.position.X -= 30;
+            }
         }
         if (Main.npc[(int)NPC.ai[1]].frame.Y == 6 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 39 + 3;
+            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 34;
+            if (NPC.ai[2] == 1)
+            {
+                NPC.position.X += 13;
+            }
+            else if (NPC.ai[2] == 2)
+            {
+                NPC.position.X -= 13;
+            }
         }
         if (Main.npc[(int)NPC.ai[1]].frame.Y == 7 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 39 - 5;
+            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 29;
+            if (NPC.ai[2] == 1)
+            {
+                NPC.position.X += 5;
+            }
+            else if (NPC.ai[2] == 2)
+            {
+                NPC.position.X -= 5;
+            }
         }
 
-        //if (NPC.ai[2] == 1)
-        //{
-        //    NPC.position.X = Main.npc[MainBody].Center.X - 77 - 31;
-        //}
-        //else if (NPC.ai[2] == 2)
-        //{
-        //    NPC.position.X = Main.npc[MainBody].Center.X + 31;
-        //}
-        //if (Main.npc[MainBody].frame.Y == 0 * 178)
-        //{
-        //    NPC.position.Y = Main.npc[MainBody].Center.Y - 31;
-        //}
-        //if (Main.npc[MainBody].frame.Y == 1 * 178)
-        //{
-        //    NPC.position.Y = Main.npc[MainBody].Center.Y - 26;
-        //}
-        //if (Main.npc[MainBody].frame.Y == 2 * 178)
-        //{
-        //    NPC.position.Y = Main.npc[MainBody].Center.Y - 12;
-        //}
-        //if (Main.npc[MainBody].frame.Y == 3 * 178)
-        //{
-        //    NPC.position.Y = Main.npc[MainBody].Center.Y - 7;
-        //}
-        //if (Main.npc[MainBody].frame.Y == 4 * 178)
-        //{
-        //    NPC.position.Y = Main.npc[MainBody].Center.Y - 22;
-        //    if (NPC.position.X > Main.npc[MainBody].Center.X)
-        //    {
-        //        NPC.position.X -= 15;
-        //    }
-        //    if (NPC.position.X < Main.npc[MainBody].Center.X)
-        //    {
-        //        NPC.position.X += 15;
-        //    }
-        //}
-        //if (Main.npc[MainBody].frame.Y == 5 * 178)
-        //{
-        //    NPC.position.Y = Main.npc[MainBody].Center.Y - 31;
-        //    if (NPC.position.X > Main.npc[MainBody].Center.X)
-        //    {
-        //        NPC.position.X -= 30;
-        //    }
-        //    if (NPC.position.X < Main.npc[MainBody].Center.X)
-        //    {
-        //        NPC.position.X += 30;
-        //    }
-        //}
-        //if (Main.npc[MainBody].frame.Y == 6 * 178)
-        //{
-        //    NPC.position.Y = Main.npc[MainBody].Center.Y - 34;
-        //    if (NPC.position.X > Main.npc[MainBody].Center.X)
-        //    {
-        //        NPC.position.X -= 13;
-        //    }
-        //    if (NPC.position.X < Main.npc[MainBody].Center.X)
-        //    {
-        //        NPC.position.X += 13;
-        //    }
-        //}
-        //if (Main.npc[MainBody].frame.Y == 7 * 178)
-        //{
-        //    NPC.position.Y = Main.npc[MainBody].Center.Y - 29;
-        //    if (NPC.position.X > Main.npc[MainBody].Center.X)
-        //    {
-        //        NPC.position.X -= 5;
-        //    }
-        //    if (NPC.position.X < Main.npc[MainBody].Center.X)
-        //    {
-        //        NPC.position.X += 5;
-        //    }
-        //}
-
-        //float heightDiff = Main.npc[MainBody].Center.Y - NPC.Center.Y;
-        //float widthDiff = Main.npc[MainBody].Center.X - NPC.Center.X;
-        //if (NPC.position.X < Main.npc[MainBody].Center.X)
-        //{
-        //    NPC.position.Y -= heightDiff - widthDiff * (-Main.npc[MainBody].velocity.X * 0.05f);
-        //}
-        //if (NPC.position.X > Main.npc[MainBody].Center.X)
-        //{
-        //    NPC.position.Y += -heightDiff - widthDiff * (Main.npc[MainBody].velocity.X * 0.05f);
-        //}
+        float heightDiff = Main.npc[(int)NPC.ai[1]].Center.Y - NPC.Center.Y;
+        float widthDiff = Main.npc[(int)NPC.ai[1]].Center.X - NPC.Center.X;
+        if (NPC.ai[2] == 1)
+        {
+            NPC.position.Y -= heightDiff - widthDiff * (-Main.npc[(int)NPC.ai[1]].velocity.X * 0.05f);
+        }
+        else if (NPC.ai[2] == 2)
+        {
+            NPC.position.Y += -heightDiff - widthDiff * (Main.npc[(int)NPC.ai[1]].velocity.X * 0.05f);
+        }
 
 
         ////ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(NPC.ai[1].ToString()), Color.White);

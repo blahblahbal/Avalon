@@ -506,19 +506,22 @@ public class DesertBeak : ModNPC
     {
         int frameAdd = 1;
 
-        if (afterImageTimer <= 0)
-            NPC.frameCounter += frameAdd + MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), 0.5f, 1.7f) * FlapMultiplier;
-        else
-            NPC.frameCounter += frameAdd + MathHelper.Lerp(MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), -0.3f, 2), MathHelper.Clamp(NPC.velocity.Length() * 0.3f, 0, 2), MathHelper.Clamp(afterImageTimer * 0.1f, 0, 1)) * FlapMultiplier;
+        if (Main.netMode != NetmodeID.Server)
+        {
+            if (afterImageTimer <= 0)
+                NPC.frameCounter += frameAdd + MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), 0.5f, 1.7f) * FlapMultiplier;
+            else
+                NPC.frameCounter += frameAdd + MathHelper.Lerp(MathHelper.Clamp(-NPC.velocity.Y * 0.3f + Math.Abs(NPC.velocity.X * 0.1f), -0.3f, 2), MathHelper.Clamp(NPC.velocity.Length() * 0.3f, 0, 2), MathHelper.Clamp(afterImageTimer * 0.1f, 0, 1)) * FlapMultiplier;
 
-        if (NPC.frameCounter > 5.0)
-        {
-            NPC.frameCounter = 0.0;
-            NPC.frame.Y = NPC.frame.Y + frameHeight;
-        }
-        if (NPC.frame.Y > frameHeight * 7)
-        {
-            NPC.frame.Y = 0;
+            if (NPC.frameCounter > 5.0)
+            {
+                NPC.frameCounter = 0.0;
+                NPC.frame.Y = NPC.frame.Y + frameHeight;
+            }
+            if (NPC.frame.Y > frameHeight * 7)
+            {
+                NPC.frame.Y = 0;
+            }
         }
     }
     public override void SendExtraAI(BinaryWriter writer)
