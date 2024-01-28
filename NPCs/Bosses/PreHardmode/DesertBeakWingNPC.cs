@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Chat;
 using Terraria.ID;
@@ -51,6 +50,7 @@ internal class DesertBeakWingNPC : ModNPC
         Main.npc[MainBody].life -= damageDone;
         if (Main.npc[MainBody].life <= 0)
         {
+            Main.npc[MainBody].life = 0;
             Main.npc[MainBody].checkDead();
             Main.npc[MainBody].HitEffect();
         }
@@ -60,6 +60,7 @@ internal class DesertBeakWingNPC : ModNPC
         Main.npc[MainBody].life -= damageDone;
         if (Main.npc[MainBody].life <= 0)
         {
+            Main.npc[MainBody].life = 0;
             Main.npc[MainBody].checkDead();
             Main.npc[MainBody].HitEffect();
         }

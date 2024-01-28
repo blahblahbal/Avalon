@@ -32,7 +32,6 @@ public class DesertBeak : ModNPC
 {
     public int leftWing = -1;
     public int rightWing = -1;
-    //bool spawnedWings = false;
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 8;
@@ -138,11 +137,9 @@ public class DesertBeak : ModNPC
     public override void OnSpawn(IEntitySource source)
     {
         leftWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai1: NPC.whoAmI, ai2: 1);
-        //Main.npc[leftWing].realLife = NPC.whoAmI;
         NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
 
         rightWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai1: NPC.whoAmI, ai2: 2);
-        //Main.npc[rightWing].realLife = NPC.whoAmI;
         NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
     }
     public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
@@ -173,11 +170,6 @@ public class DesertBeak : ModNPC
     }
     public override void AI()
     {
-        //if (NPC.life > 0)
-        //{
-        //    Main.npc[leftWing].life = NPC.life;
-        //    Main.npc[rightWing].life = NPC.life;
-        //}
         //Main.NewText("[" + $"{NPC.ai[0]}" + "]" + "[" + $"{NPC.ai[1]}" + "]" + "[" + $"{NPC.ai[2]}" + "]" + " phase: " + $"{phase}", Main.DiscoColor);
         float enragedModifier = 1f;
         if (Main.player[NPC.target].ZoneDesert || Main.player[NPC.target].ZoneUndergroundDesert)
@@ -238,7 +230,7 @@ public class DesertBeak : ModNPC
         {
             PhaseTwo(Target, enragedModifier);
         }
-        NPC.velocity = Vector2.Zero;
+        //NPC.velocity = Vector2.Zero;
         //Main.NewText(NPC.ai[1], Main.DiscoColor);
     }
     public void PhaseOne(Player Target, float modifier)
