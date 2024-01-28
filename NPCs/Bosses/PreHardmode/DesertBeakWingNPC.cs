@@ -48,7 +48,21 @@ internal class DesertBeakWingNPC : ModNPC
     }
     public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
     {
-        Main.npc[(int)NPC.ai[1]].life -= damageDone;
+        Main.npc[MainBody].life -= damageDone;
+        if (Main.npc[MainBody].life <= 0)
+        {
+            Main.npc[MainBody].checkDead();
+            Main.npc[MainBody].HitEffect();
+        }
+    }
+    public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone)
+    {
+        Main.npc[MainBody].life -= damageDone;
+        if (Main.npc[MainBody].life <= 0)
+        {
+            Main.npc[MainBody].checkDead();
+            Main.npc[MainBody].HitEffect();
+        }
     }
     public override void AI()
     {
@@ -58,32 +72,32 @@ internal class DesertBeakWingNPC : ModNPC
 
         if (NPC.ai[2] == 1)
         {
-            NPC.position.X = Main.npc[(int)NPC.ai[1]].Center.X - 77 - 31;
+            NPC.position.X = Main.npc[MainBody].Center.X - 77 - 31;
         }
         else if (NPC.ai[2] == 2)
         {
-            NPC.position.X = Main.npc[(int)NPC.ai[1]].Center.X + 31;
+            NPC.position.X = Main.npc[MainBody].Center.X + 31;
         }
 
-        if (Main.npc[(int)NPC.ai[1]].frame.Y == 0 * 178)
+        if (Main.npc[MainBody].frame.Y == 0 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 31;
+            NPC.position.Y = Main.npc[MainBody].Center.Y - 31;
         }
-        if (Main.npc[(int)NPC.ai[1]].frame.Y == 1 * 178)
+        if (Main.npc[MainBody].frame.Y == 1 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 26;
+            NPC.position.Y = Main.npc[MainBody].Center.Y - 26;
         }
-        if (Main.npc[(int)NPC.ai[1]].frame.Y == 2 * 178)
+        if (Main.npc[MainBody].frame.Y == 2 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 12;
+            NPC.position.Y = Main.npc[MainBody].Center.Y - 12;
         }
-        if (Main.npc[(int)NPC.ai[1]].frame.Y == 3 * 178)
+        if (Main.npc[MainBody].frame.Y == 3 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 7;
+            NPC.position.Y = Main.npc[MainBody].Center.Y - 7;
         }
-        if (Main.npc[(int)NPC.ai[1]].frame.Y == 4 * 178)
+        if (Main.npc[MainBody].frame.Y == 4 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 22;
+            NPC.position.Y = Main.npc[MainBody].Center.Y - 22;
             if (NPC.ai[2] == 1)
             {
                 NPC.position.X += 15;
@@ -93,9 +107,9 @@ internal class DesertBeakWingNPC : ModNPC
                 NPC.position.X -= 15;
             }
         }
-        if (Main.npc[(int)NPC.ai[1]].frame.Y == 5 * 178)
+        if (Main.npc[MainBody].frame.Y == 5 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 31;
+            NPC.position.Y = Main.npc[MainBody].Center.Y - 31;
             if (NPC.ai[2] == 1)
             {
                 NPC.position.X += 30;
@@ -105,9 +119,9 @@ internal class DesertBeakWingNPC : ModNPC
                 NPC.position.X -= 30;
             }
         }
-        if (Main.npc[(int)NPC.ai[1]].frame.Y == 6 * 178)
+        if (Main.npc[MainBody].frame.Y == 6 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 34;
+            NPC.position.Y = Main.npc[MainBody].Center.Y - 34;
             if (NPC.ai[2] == 1)
             {
                 NPC.position.X += 13;
@@ -117,9 +131,9 @@ internal class DesertBeakWingNPC : ModNPC
                 NPC.position.X -= 13;
             }
         }
-        if (Main.npc[(int)NPC.ai[1]].frame.Y == 7 * 178)
+        if (Main.npc[MainBody].frame.Y == 7 * 178)
         {
-            NPC.position.Y = Main.npc[(int)NPC.ai[1]].Center.Y - 29;
+            NPC.position.Y = Main.npc[MainBody].Center.Y - 29;
             if (NPC.ai[2] == 1)
             {
                 NPC.position.X += 5;
@@ -130,21 +144,17 @@ internal class DesertBeakWingNPC : ModNPC
             }
         }
 
-        float heightDiff = Main.npc[(int)NPC.ai[1]].Center.Y - NPC.Center.Y;
-        float widthDiff = Main.npc[(int)NPC.ai[1]].Center.X - NPC.Center.X;
+        float heightDiff = Main.npc[MainBody].Center.Y - NPC.Center.Y;
+        float widthDiff = Main.npc[MainBody].Center.X - NPC.Center.X;
         if (NPC.ai[2] == 1)
         {
-            NPC.position.Y -= heightDiff - widthDiff * (-Main.npc[(int)NPC.ai[1]].velocity.X * 0.05f);
+            NPC.position.Y -= heightDiff - widthDiff * (-Main.npc[MainBody].velocity.X * 0.05f);
         }
         else if (NPC.ai[2] == 2)
         {
-            NPC.position.Y += -heightDiff - widthDiff * (Main.npc[(int)NPC.ai[1]].velocity.X * 0.05f);
+            NPC.position.Y += -heightDiff - widthDiff * (Main.npc[MainBody].velocity.X * 0.05f);
         }
 
-
-        ////ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(NPC.ai[1].ToString()), Color.White);
-        ////ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(Main.npc[(int)NPC.ai[1]].position.ToString()), Color.White);
-        ////ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(Main.player[NPC.target].position.ToString()), Color.White);
         //if (NPC.life <= 0)
         //{
         //    NPC.life = 0;
@@ -153,10 +163,17 @@ internal class DesertBeakWingNPC : ModNPC
     }
     public override void HitEffect(NPC.HitInfo hit)
     {
-        if (Main.npc[(int)NPC.ai[1]].life <= 0 || NPC.life <= 0)
+        if (NPC.life <= 0)
         {
             NPC.life = 0;
             NPC.active = false;
+            NPC.checkDead();
+        }
+        if (Main.npc[MainBody].life <= 0)
+        {
+            Main.npc[MainBody].life = 0;
+            Main.npc[MainBody].active = false;
+            Main.npc[MainBody].checkDead();
         }
     }
 }

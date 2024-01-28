@@ -149,6 +149,27 @@ public class DesertBeak : ModNPC
     {
         Main.npc[leftWing].life -= damageDone;
         Main.npc[rightWing].life -= damageDone;
+        if (Main.npc[leftWing].life <= 0)
+        {
+            Main.npc[leftWing].checkDead();
+        }
+        if (Main.npc[rightWing].life <= 0)
+        {
+            Main.npc[rightWing].checkDead();
+        }
+    }
+    public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone)
+    {
+        Main.npc[leftWing].life -= damageDone;
+        Main.npc[rightWing].life -= damageDone;
+        if (Main.npc[leftWing].life <= 0)
+        {
+            Main.npc[leftWing].checkDead();
+        }
+        if (Main.npc[rightWing].life <= 0)
+        {
+            Main.npc[rightWing].checkDead();
+        }
     }
     public override void AI()
     {
@@ -217,7 +238,7 @@ public class DesertBeak : ModNPC
         {
             PhaseTwo(Target, enragedModifier);
         }
-        //NPC.velocity = Vector2.Zero;
+        NPC.velocity = Vector2.Zero;
         //Main.NewText(NPC.ai[1], Main.DiscoColor);
     }
     public void PhaseOne(Player Target, float modifier)
