@@ -7464,7 +7464,7 @@ Mods: {
 
 			MagicGrenade: {
 				DisplayName: Magic Grenade
-				Tooltip: ""
+				Tooltip: A magical explosion that will not destroy tiles
 			}
 
 			HallowedGreatsword: {
