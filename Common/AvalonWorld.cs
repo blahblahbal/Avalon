@@ -679,35 +679,37 @@ public class AvalonWorld : ModSystem
     {
         Main.rand ??= new UnifiedRandom((int)DateTime.Now.Ticks);
 
-
-        // TODO: make it only replace SOME of the bg object blobs, instead of ALL of them of certain types
         for (int x = 10; x < Main.maxTilesX - 10; x++)
         {
-            for (int y = (int)GenVars.rockLayer; y < Main.maxTilesY - 200; y++)
+            for (int y = (int)Main.rockLayer + 10; y < Main.maxTilesY - 200; y++)
             {
+                if (Main.tile[x, y].TileType == TileID.SmallPiles)
+                {
+                    // skip the top row of the tilesheet
+                    if (Main.tile[x, y].TileFrameY != 0)
+                    {
+                        // skip the frames it shouldn't replace
+                        if (Main.tile[x, y].TileFrameX >= 576 && Main.tile[x, y].TileFrameX <= 882 || Main.tile[x, y].TileFrameX >= 1116 && Main.tile[x, y].TileFrameX <= 1458 ||
+                            Main.tile[x, y].TileFrameX >= 216 && Main.tile[x, y].TileFrameX <= 306 && Main.tile[x, y].TileFrameY == 36)
+                        {
+                        }
+                        else if (WorldGen.genRand.NextBool(2))
+                        {
+                            WorldGen.KillTile(x, y);
+                            WorldGen.PlaceTile(x, y, ModContent.TileType<SmallSulphurBlob>(), true, true, style: WorldGen.genRand.Next(6));
+                        }
+                    }
+                }
                 if (Main.tile[x, y].TileType == TileID.LargePiles)
                 {
+                    // skip the frames it shouldn't replace
                     if (Main.tile[x, y].TileFrameX >= 324 && Main.tile[x, y].TileFrameX <= 360 || Main.tile[x, y].TileFrameX >= 702 && Main.tile[x, y].TileFrameX <= 1386)
                     {
                     }
-                    else
+                    else if (WorldGen.genRand.NextBool(3))
                     {
-                        Main.tile[x, y].TileType = (ushort)ModContent.TileType<SulphurBlob>();
-
-                        if (Main.tile[x, y].TileFrameX >= 378 && Main.tile[x, y].TileFrameX <= 684)
-                        {
-                            Main.tile[x, y].TileFrameX -= 378;
-                        }
-
-                        if (Main.tile[x, y].TileFrameX >= 1404 && Main.tile[x, y].TileFrameX <= 1710)
-                        {
-                            Main.tile[x, y].TileFrameX -= 1404;
-                        }
-
-                        if (Main.tile[x, y].TileFrameX >= 1728)
-                        {
-                            Main.tile[x, y].TileFrameX -= 1728;
-                        }
+                        WorldGen.KillTile(x, y);
+                        WorldGen.PlaceTile(x, y, ModContent.TileType<SulphurBlob>(), true, style: WorldGen.genRand.Next(6));
                     }
                 }
             }
