@@ -111,29 +111,6 @@ public class OrangeDungeonChandelier : ChandelierTemplate
             b = 0.77f;
         }
     }
-
-    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
-    {
-        ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(198, 171, 108, 0);
-        int frameX = Main.tile[i, j].TileFrameX;
-        int frameY = Main.tile[i, j].TileFrameY;
-        int width = 18;
-        int offsetY = 0;
-        int height = 18;
-        int offsetX = 1;
-        Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-        if (Main.drawToScreen)
-        {
-            zero = Vector2.Zero;
-        }
-        for (int k = 0; k < 7; k++)
-        {
-            float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
-            float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
-        }
-    }
 }
 
 public class OrangeDungeonChest : ChestTemplate

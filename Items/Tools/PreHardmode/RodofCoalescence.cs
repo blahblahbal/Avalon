@@ -44,7 +44,7 @@ class RodofCoalescence : ModItem
         {
             if (TeleportPlayer(player))
             {
-                //player.AddBuff(ModContent.BuffType<Buffs.Debuffs.Coalesced>(), 60 * 5);
+                player.AddBuff(ModContent.BuffType<Buffs.Debuffs.Coalesced>(), 60 * 5);
                 return true;
             }
             return false;

@@ -7477,6 +7477,101 @@ Mods: {
 				DisplayName: Giant Gravestone
 				Tooltip: Creates a graveyard biome when placed
 			}
+
+			HeartstoneBathtub: {
+				DisplayName: Heartstone Bathtub
+				Tooltip: ""
+			}
+
+			HeartstoneBed: {
+				DisplayName: Heartstone Bed
+				Tooltip: ""
+			}
+
+			HeartstoneBookcase: {
+				DisplayName: Heartstone Bookcase
+				Tooltip: ""
+			}
+
+			HeartstoneCandelabra: {
+				DisplayName: Heartstone Candelabra
+				Tooltip: ""
+			}
+
+			HeartstoneCandle: {
+				DisplayName: Heartstone Candle
+				Tooltip: ""
+			}
+
+			HeartstoneChair: {
+				DisplayName: Heartstone Chair
+				Tooltip: ""
+			}
+
+			HeartstoneChandelier: {
+				DisplayName: Heartstone Chandelier
+				Tooltip: ""
+			}
+
+			HeartstoneChest: {
+				DisplayName: Heartstone Chest
+				Tooltip: ""
+			}
+
+			HeartstoneClock: {
+				DisplayName: Heartstone Clock
+				Tooltip: ""
+			}
+
+			HeartstoneDoor: {
+				DisplayName: Heartstone Door
+				Tooltip: ""
+			}
+
+			HeartstoneDresser: {
+				DisplayName: Heartstone Dresser
+				Tooltip: ""
+			}
+
+			HeartstoneLamp: {
+				DisplayName: Heartstone Lamp
+				Tooltip: ""
+			}
+
+			HeartstoneLantern: {
+				DisplayName: Heartstone Lantern
+				Tooltip: ""
+			}
+
+			HeartstonePiano: {
+				DisplayName: Heartstone Piano
+				Tooltip: ""
+			}
+
+			HeartstoneSink: {
+				DisplayName: Heartstone Sink
+				Tooltip: ""
+			}
+
+			HeartstoneSofa: {
+				DisplayName: Heartstone Sofa
+				Tooltip: ""
+			}
+
+			HeartstoneTable: {
+				DisplayName: Heartstone Table
+				Tooltip: ""
+			}
+
+			HeartstoneWorkBench: {
+				DisplayName: Heartstone Work Bench
+				Tooltip: ""
+			}
+
+			HeartstonePlatform: {
+				DisplayName: Heartstone Platform
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8450,6 +8545,9 @@ Mods: {
 				Peridot: Peridot
 				Zircon: Zircon
 			}
+
+			HeartstoneChest.MapEntry0: Mods.Avalon.Tiles.HeartstoneChest.MapEntry0
+			HeartstoneDresser.MapEntry: Heartstone Dresser
 		}
 
 		Prefixes: {

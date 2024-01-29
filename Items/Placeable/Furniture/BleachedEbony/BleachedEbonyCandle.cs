@@ -32,6 +32,6 @@ class BleachedEbonyCandle : ModItem
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 4)
             .AddIngredient(ItemID.Torch)
-            .AddTile(TileID.Sawmill).Register();
+            .AddTile(TileID.WorkBenches).Register();
     }
 }

@@ -32,6 +32,6 @@ class CoughwoodCandle : ModItem
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 4)
             .AddIngredient(ItemID.Torch)
-            .AddTile(TileID.Sawmill).Register();
+            .AddTile(TileID.WorkBenches).Register();
     }
 }
