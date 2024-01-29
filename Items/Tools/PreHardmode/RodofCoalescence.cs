@@ -44,7 +44,7 @@ class RodofCoalescence : ModItem
         {
             if (TeleportPlayer(player))
             {
-                player.AddBuff(ModContent.BuffType<Buffs.Debuffs.Coalesced>(), 60 * 5);
+                //player.AddBuff(ModContent.BuffType<Buffs.Debuffs.Coalesced>(), 60 * 5);
                 return true;
             }
             return false;
@@ -71,8 +71,19 @@ class RodofCoalescence : ModItem
         {
             return false;
         }
-        player.Teleport(pointPosition, 5);
+        player.Teleport(pointPosition, 6);
         NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, pointPosition.X, pointPosition.Y, 1);
+        for (int num20 = 0; num20 < 75; num20++)
+        {
+            Dust obj8 = Dust.NewDustDirect(pointPosition, player.getRect().Width, player.getRect().Height + 24, DustID.Water);
+            obj8.velocity.Y *= 0f;
+            obj8.velocity.Y -= 3.5f;
+            obj8.velocity.X *= 1.5f;
+            obj8.scale = 1.2f;
+            obj8.alpha = 130;
+            obj8.noGravity = true;
+            obj8.fadeIn = 0f;
+        }
         return true;
 
     }

@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.CrystalMines;
 using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
 using System;
@@ -36,7 +37,8 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-            World.Biomes.CrystalMines.Place(new Point(x, y));
+            Crystals(x, y);
+            //World.Biomes.CrystalMines.Place(new Point(x, y));
 
             //WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
 
@@ -50,6 +52,28 @@ class WorldgenHelper : ModItem
         }
         return false;
     }
+
+    public static void Crystals(int x, int y)
+    {
+        int mult = WorldGen.genRand.Next(2, 4);
+        int pstep = 0;
+
+        for (int pyY = y; pyY <= y + mult + WorldGen.genRand.Next(1, 6); pyY++)
+        {
+            for (int pyX = x - pstep + WorldGen.genRand.Next(1, 4); pyX <= x + pstep + WorldGen.genRand.Next(1, 4); pyX++)
+            {
+                WorldGen.PlaceTile(pyX, pyY, ModContent.TileType<CrystalStoneCrystals>());
+            }
+            pstep++;
+        }
+    }
+
+
+
+
+
+
+
     public static void GrowCloud(int x, int y)
     {
         GrowFragile(x, y, TileID.Cloud, 40);

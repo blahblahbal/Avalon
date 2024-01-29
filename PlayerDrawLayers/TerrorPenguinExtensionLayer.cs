@@ -18,8 +18,7 @@ internal class TerrorPenguinExtensionLayer : PlayerDrawLayer
         }
 
         Player p = drawInfo.drawPlayer;
-        if (p.body == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "TerrorPenguinsOnepiece", EquipType.Body) &&
-            p.legs == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "TerrorPenguinsHeels", EquipType.Legs))
+        if (p.body == EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "TerrorPenguinsOnepiece", EquipType.Body))
         {
             Texture2D tex = Mod.Assets.Request<Texture2D>("Items/Vanity/TerrorPenguinsOnepiece_Extension_Legs").Value;
             if (drawInfo.isSitting)
