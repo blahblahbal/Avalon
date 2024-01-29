@@ -76,6 +76,18 @@ public class AvalonGlobalNPC : GlobalNPC
                 ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.BossDefeatedBlurbs.MoonLord"), new Color(50, 255, 130));
             }
         }
+
+        if (npc.type == NPCID.Golem && !NPC.downedGolemBoss)
+        {
+            if (Main.netMode == 0)
+            {
+                Main.NewText(Language.GetTextValue("Mods.Avalon.BossDefeatedBlurbs.Golem"), 50, 255, 130);
+            }
+            else if (Main.netMode == 2)
+            {
+                ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.BossDefeatedBlurbs.Golem"), new Color(50, 255, 130));
+            }
+        }
     }
 
     /// <summary>
