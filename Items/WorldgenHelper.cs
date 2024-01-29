@@ -12,6 +12,10 @@ namespace Avalon.Items;
 
 class WorldgenHelper : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

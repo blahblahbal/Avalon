@@ -11,6 +11,8 @@ Avalon started out as a tConfig mod over 10 years ago, and is now finally availa
 
 Discord link: https://discord.gg/rtm99Uq
 
+Report any bugs you find in #bug-reports on the discord.
+
 
 Credits:
 
@@ -32,6 +34,7 @@ Yuyu for many sprites
 The Avalon composers, Ennway, FatCat, Mioqu, Ace, Marlilo, and musicman for, well, the music obviously
 All the beta testers and discord members for general help with testing the mod
 Relxs, Hadiros, and Lion8cake for assisting with the Sky Fortress construction
+
 
 Bubbles.ogg from https://freesound.org/people/Avaruusnuija/sounds/476618/
 	License link: http://creativecommons.org/licenses/by/3.0/

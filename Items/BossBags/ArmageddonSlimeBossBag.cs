@@ -6,6 +6,10 @@ namespace Avalon.Items.BossBags;
 
 public class ArmageddonSlimeBossBag : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetStaticDefaults()
     {
         ItemID.Sets.BossBag[Type] = true;

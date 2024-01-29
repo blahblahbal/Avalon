@@ -7,6 +7,10 @@ namespace Avalon.Items.Accessories;
 
 internal class IntelligenceBoots : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Item.width = 30;

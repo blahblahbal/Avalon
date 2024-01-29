@@ -348,7 +348,7 @@ Mods: {
 			PoisonDart: For use with Blowpipes and Blowgun
 			IceBlade: Shoots a giant snowflake
 			Frostbrand: Shoots a spread of giant snowflakes
-			Extractinator: Right click with a prefixed item while on your hotbar to remove the prefix
+			Extractinator: <right> with a prefixed item while on your hotbar to remove the prefix
 
 			CoinGun: {
 				PartOne: Uses coins for ammo
@@ -669,7 +669,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to return to spawn at will
-					Right click to change destination
+					<right> to change destination
 					'''
 			}
 
@@ -680,7 +680,7 @@ Mods: {
 					Displays everything
 					Allows you to teleport to the surface
 					Horizontal position will remain the same
-					Right click to change destination
+					<right> to change destination
 					'''
 			}
 
@@ -690,7 +690,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to the oceans
-					Right click to change destination
+					<right> to change destination
 					'''
 			}
 
@@ -700,7 +700,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to the Underworld
-					Right click to change destination
+					<right> to change destination
 					'''
 			}
 
@@ -710,7 +710,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to the Jungle or Tropics
-					Right click to change destination
+					<right> to change destination
 					'''
 			}
 
@@ -720,7 +720,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to random locations
-					Right click to change destination
+					<right> to change destination
 					'''
 			}
 
@@ -730,7 +730,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to return home at will
-					Right click to change destination
+					<right> to change destination
 					'''
 			}
 
@@ -740,13 +740,13 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to the Dungeon
-					Right click to change destination
+					<right> to change destination
 					'''
 			}
 
 			PossessedFlamesaw: {
 				DisplayName: Possessed Flamesaw
-				Tooltip: Right click to shoot a tree-chopping projectile
+				Tooltip: <right> to shoot a tree-chopping projectile
 			}
 
 			AeonsEternity: {
@@ -1192,7 +1192,7 @@ Mods: {
 				Tooltip:
 					'''
 					Teleports you to the last saved location
-					Right click to set a waypoint at your current location
+					<right> to set a waypoint at your current location
 					Maximum of 1 saved location
 					'''
 			}
@@ -4142,7 +4142,7 @@ Mods: {
 
 			BacteriumPrimeBossBag: {
 				DisplayName: Treasure Bag (Bacterium Prime)
-				Tooltip: Right click to open
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
 			}
 
 			InfestedCarcass: {
@@ -5826,9 +5826,9 @@ Mods: {
 				Tooltip:
 					'''
 					Teleports you to a saved location
-					Right click to set a waypoint at your current location
+					<right> to set a waypoint at your current location
 					Maximum of 3 saved locations
-					Right click in your inventory to change waypoints
+					<right> in your inventory to change waypoints
 					'''
 			}
 
@@ -5837,9 +5837,9 @@ Mods: {
 				Tooltip:
 					'''
 					Teleports you to a saved location
-					Right click to set a waypoint at your current location
+					<right> to set a waypoint at your current location
 					Maximum of 3 saved locations
-					Right click in your inventory to change waypoints
+					<right> in your inventory to change waypoints
 					'''
 			}
 
@@ -5848,9 +5848,9 @@ Mods: {
 				Tooltip:
 					'''
 					Teleports you to a saved location
-					Right click to set a waypoint at your current location
+					<right> to set a waypoint at your current location
 					Maximum of 3 saved locations
-					Right click in your inventory to change waypoints
+					<right> in your inventory to change waypoints
 					'''
 			}
 
@@ -6089,7 +6089,7 @@ Mods: {
 				Tooltip:
 					'''
 					Vein mines ores
-					Right click to change to area mode
+					<right> to change to area mode
 					'''
 			}
 
@@ -6098,7 +6098,7 @@ Mods: {
 				Tooltip:
 					'''
 					Mines in a 3x3 area
-					Right click to change to normal mode
+					<right> to change to normal mode
 					'''
 			}
 
@@ -6107,7 +6107,7 @@ Mods: {
 				Tooltip:
 					'''
 					Vein mines ores
-					Right click to change to area mode
+					<right> to change to area mode
 					'''
 			}
 
@@ -6116,7 +6116,7 @@ Mods: {
 				Tooltip:
 					'''
 					Mines in a 3x3 area
-					Right click to change to normal mode
+					<right> to change to normal mode
 					'''
 			}
 
@@ -6949,14 +6949,14 @@ Mods: {
 				Tooltip:
 					'''
 					Automatically replants acorns after chopping trees
-					Right click to change to area mode
+					<right> to change to area mode
 					'With each swing the dawn breaks'
 					'''
 			}
 
 			PickaxeofDusk: {
 				DisplayName: Pickaxe of Dusk (Normal)
-				Tooltip: Right click to change to area mode
+				Tooltip: <right> to change to area mode
 			}
 
 			PickaxeofDusk3x3: {
@@ -6965,7 +6965,7 @@ Mods: {
 					'''
 					100% pickaxe power
 					Mines in a 3x3 area
-					Right click to change to normal mode
+					<right> to change to normal mode
 					'''
 			}
 
@@ -7050,7 +7050,7 @@ Mods: {
 				Tooltip:
 					'''
 					Breaks walls and trees in a 3x3 area
-					Right click to change to normal mode
+					<right> to change to normal mode
 					'With each swing the dawn breaks'
 					'''
 			}

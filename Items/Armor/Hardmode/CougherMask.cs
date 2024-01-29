@@ -20,6 +20,10 @@ class CougherMask : ModItem
         PitchVariance = 0.1f,
         MaxInstances = 10,
     };
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

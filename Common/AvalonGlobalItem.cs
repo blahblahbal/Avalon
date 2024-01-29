@@ -53,7 +53,6 @@ public class AvalonGlobalItem : GlobalItem
         ModContent.TileType<LivingLightning>(),
         //ModContent.TileType<VineRope>(),
     };
-
     public override void SetStaticDefaults()
     {
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BismuthOre>()] = ItemID.PlatinumOre;

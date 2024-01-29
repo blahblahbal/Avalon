@@ -8,6 +8,10 @@ namespace Avalon.Items;
 
 class StatDisplay : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

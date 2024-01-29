@@ -10,6 +10,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class PossessedFlamesaw : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Item.width = 46;

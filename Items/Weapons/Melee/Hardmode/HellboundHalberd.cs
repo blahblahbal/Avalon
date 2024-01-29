@@ -9,6 +9,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class HellboundHalberd : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Item.width = 24;

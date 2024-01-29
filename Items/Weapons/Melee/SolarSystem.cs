@@ -6,6 +6,10 @@ namespace Avalon.Items.Weapons.Melee;
 
 public class SolarSystem : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetDefaults()
     {
         Item.width = 36;
