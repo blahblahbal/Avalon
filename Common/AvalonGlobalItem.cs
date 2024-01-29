@@ -30,6 +30,7 @@ using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tools.PreHardmode;
 using Terraria.DataStructures;
 using Avalon.NPCs.Bosses.PreHardmode;
+using Avalon.Items.Placeable.Crafting;
 
 namespace Avalon.Common;
 
@@ -230,9 +231,11 @@ public class AvalonGlobalItem : GlobalItem
 
         ShimmerTransmute(ModContent.ItemType<StaminaCrystal>(), ModContent.ItemType<EnergyCrystal>());
 
-        ShimmerTransmute(ModContent.ItemType<Items.Material.Ores.Zircon>(), ModContent.ItemType<Items.Material.Ores.Peridot>());
-        ShimmerTransmute(ModContent.ItemType<Items.Material.Ores.Peridot>(), ModContent.ItemType<Items.Material.Ores.Tourmaline>());
-        ShimmerTransmute(ModContent.ItemType<Items.Material.Ores.Tourmaline>(), ItemID.Diamond);
+        ShimmerTransmute(ModContent.ItemType<UnstableCatalyzer>(), ModContent.ItemType<Items.Placeable.Crafting.Catalyzer>());
+
+        ShimmerTransmute(ModContent.ItemType<Zircon>(), ModContent.ItemType<Peridot>());
+        ShimmerTransmute(ModContent.ItemType<Peridot>(), ModContent.ItemType<Tourmaline>());
+        ShimmerTransmute(ModContent.ItemType<Tourmaline>(), ItemID.Diamond);
 
         //Dungeon bricks
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>());

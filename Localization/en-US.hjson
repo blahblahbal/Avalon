@@ -7572,6 +7572,11 @@ Mods: {
 				DisplayName: Heartstone Platform
 				Tooltip: ""
 			}
+
+			UnstableCatalyzer: {
+				DisplayName: Unstable Catalyzer
+				Tooltip: Throw into shimmer
+			}
 		}
 
 		InfoDisplays: {

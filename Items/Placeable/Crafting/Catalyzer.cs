@@ -26,15 +26,15 @@ internal class Catalyzer : ModItem
         Item.height = dims.Height;
     }
 
-    public override void AddRecipes()
-    {
-        Recipe.Create(Type)
-            .AddRecipeGroup(RecipeGroupID.Wood, 20)
-            .AddRecipeGroup("Avalon:EvilBar", 5)
-            .AddRecipeGroup(RecipeGroupID.IronBar, 15)
-            .AddRecipeGroup("Avalon:WorkBenches")
-            .AddCondition(Condition.NearShimmer)
-            .AddTile(TileID.Anvils)
-            .Register();
-    }
+    //public override void AddRecipes()
+    //{
+    //    Recipe.Create(Type)
+    //        .AddRecipeGroup(RecipeGroupID.Wood, 20)
+    //        .AddRecipeGroup("Avalon:EvilBar", 5)
+    //        .AddRecipeGroup(RecipeGroupID.IronBar, 15)
+    //        .AddRecipeGroup("Avalon:WorkBenches")
+    //        .AddCondition(Condition.NearShimmer)
+    //        .AddTile(TileID.Anvils)
+    //        .Register();
+    //}
 }
