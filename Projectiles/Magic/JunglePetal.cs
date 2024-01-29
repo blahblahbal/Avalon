@@ -20,6 +20,7 @@ public class JunglePetal : ModProjectile
         Projectile.DamageType = DamageClass.Magic;
         Projectile.tileCollide = false;
         Projectile.timeLeft = 60;
+        Projectile.scale *= 1.09f;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)((dims.Height / 2) - (Projectile.Size.Y / 2));
     }
@@ -35,5 +36,6 @@ public class JunglePetal : ModProjectile
         Projectile.velocity *= 0.975f;
         Projectile.rotation += 0.3f * Projectile.direction;
         Projectile.alpha += (int)(a * 0.05f);
+        Projectile.scale -= 0.006f;
     }
 }
