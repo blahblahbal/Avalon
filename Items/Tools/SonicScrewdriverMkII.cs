@@ -28,6 +28,9 @@ class SonicScrewdriverMkII : ModItem
             .AddIngredient(ItemID.Sapphire, 7)
             .AddIngredient(ItemID.Wire, 10)
             .AddIngredient(ItemID.GPS)
+            .AddIngredient(ItemID.SoulofMight, 4)
+            .AddIngredient(ItemID.SoulofFright, 4)
+            .AddIngredient(ItemID.SoulofSight, 4)
             .AddTile(TileID.TinkerersWorkbench).Register();
     }
 
