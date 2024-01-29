@@ -42,6 +42,9 @@ public class ContagionVines : ModTile
     public static bool CanGrowFromTile(int tileType)
     {
         return tileType == ModContent.TileType<Ickgrass>() ||
-               tileType == ModContent.TileType<ContagionJungleGrass>();
+               tileType == ModContent.TileType<ContagionJungleGrass>() ||
+               tileType == TileID.Grass || tileType == TileID.CrimsonGrass ||
+               tileType == TileID.HallowedGrass || tileType == TileID.CorruptGrass ||
+               tileType == TileID.JungleGrass || tileType == TileID.MushroomGrass;
     }
 }
