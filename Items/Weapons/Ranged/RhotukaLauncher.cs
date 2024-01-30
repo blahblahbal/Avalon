@@ -8,6 +8,10 @@ namespace Avalon.Items.Weapons.Ranged;
 
 internal class RhotukaLauncher : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
     public override void SetStaticDefaults()
     {
         Item.staff[Type] = true;

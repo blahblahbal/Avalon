@@ -7,6 +7,7 @@ using Avalon.Items.Other;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Projectiles;
+using Avalon.Projectiles.Tools;
 using Avalon.Systems;
 using Avalon.Tiles.Ores;
 using Avalon.Walls;
@@ -223,6 +224,8 @@ public class AvalonPlayer : ModPlayer
     public bool CrystalSkull;
     public bool DesertGambler;
     public bool ForceGambler;
+    public bool OilBottle;
+    public int OilBottleTimer;
     #endregion
 
     #region buffs and debuffs
@@ -368,6 +371,7 @@ public class AvalonPlayer : ModPlayer
         CrystalSkull = false;
         DesertGambler = false;
         ForceGambler = false;
+        OilBottle = false;
 
         // armor sets
         SkyBlessing = false;
@@ -535,6 +539,8 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdate()
     {
+        OilBottleTimer--;
+        if (OilBottleTimer < 0) OilBottleTimer = 0;
         if (Player.HasItem(ItemID.LargeRuby) && Player.HasItem(ItemID.LargeAmber) && Player.HasItem(ItemID.LargeTopaz) && Player.HasItem(ModContent.ItemType<LargePeridot>()) &&
             Player.HasItem(ItemID.LargeEmerald) && Player.HasItem(ModContent.ItemType<LargeTourmaline>()) && Player.HasItem(ItemID.LargeSapphire) && Player.HasItem(ItemID.LargeAmethyst) &&
             Player.HasItem(ItemID.LargeDiamond) && Player.HasItem(ModContent.ItemType<LargeZircon>()))
@@ -696,7 +702,6 @@ public class AvalonPlayer : ModPlayer
             AncientRangedBonusActive = false;
         }
     }
-
     public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
     {
         if (Player.HasItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>()) && !Player.HasBuff(ModContent.BuffType<ImmortalityCooldown>()))
@@ -840,6 +845,31 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostHurt(Player.HurtInfo info)
     {
+        if (Player.miscEquips[4].type == ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>())
+        {
+            int proj = -1;
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                if (Main.projectile[i].type == ModContent.ProjectileType<EruptionHook>() && Main.projectile[i].owner == Player.whoAmI)
+                {
+                    proj = i;
+                    break;
+                }
+            }
+            if (proj != -1)
+            {
+                PlayerDeathReason damageSource = info.DamageSource;
+                IEntitySource spawnSource = Player.GetSource_FromThis();
+                Entity entity = null;
+                if (damageSource.TryGetCausingEntity(out entity))
+                {
+                    spawnSource = Player.GetSource_OnHurt(entity);
+                }
+                int num4 = Projectile.NewProjectile(spawnSource, Player.Center.X, Player.Center.Y, 0f, 0f, ModContent.ProjectileType<EruptionHookBoom>(), (int)Player.GetTotalDamage(DamageClass.Generic).ApplyTo(35f), 15f, Main.myPlayer);
+                Main.projectile[num4].netUpdate = true;
+                Main.projectile[num4].Kill();
+            }
+        }
         if (Player.whoAmI == Main.myPlayer && CobShield)
         {
             int time = 300;

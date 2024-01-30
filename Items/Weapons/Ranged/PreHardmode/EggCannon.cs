@@ -19,6 +19,7 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
             Item.DefaultToRangedWeapon(1, AmmoID.None, 35, 16, true);
             Item.damage = 35;
             Item.rare = ItemRarityID.Green;
+            Item.useAmmo = ItemID.Grenade;
             Item.value = 27000;
             Item.UseSound = SoundID.Item61;
         }

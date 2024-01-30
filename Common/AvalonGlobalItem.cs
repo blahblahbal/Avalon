@@ -550,6 +550,9 @@ public class AvalonGlobalItem : GlobalItem
         }
         switch (item.type)
         {
+            case ItemID.Grenade:
+                item.ammo = ItemID.Grenade;
+                break;
             case ItemID.CactusHelmet:
             case ItemID.CactusBreastplate:
             case ItemID.CactusLeggings:
@@ -1100,6 +1103,14 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override bool? UseItem(Item item, Player player)
     {
+        if (player.GetModPlayer<AvalonPlayer>().OilBottle && player.whoAmI == Main.myPlayer && player.GetModPlayer<AvalonPlayer>().OilBottleTimer == 0 &&
+            player.itemAnimation > 0 && item.damage > 0)
+        {
+            player.GetModPlayer<AvalonPlayer>().OilBottleTimer = 60;
+            Vector2 center = player.Center;
+            Vector2 vector = player.DirectionTo(player.ApplyRangeCompensation(0.2f, center, Main.MouseWorld)) * 10f;
+            Projectile.NewProjectile(player.GetSource_FromThis(), center.X, center.Y, vector.X, vector.Y, ModContent.ProjectileType<Projectiles.OilBottle>(), 23, 3f, player.whoAmI);
+        }
         if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer)
         {
             bool inrange = player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple);

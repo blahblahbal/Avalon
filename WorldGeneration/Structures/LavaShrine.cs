@@ -937,11 +937,11 @@ class LavaShrine
                         int rand = WorldGen.genRand.Next(51);
                         if (rand >= 0 && rand <= 20)
                         {
-                            int r = WorldGen.genRand.Next(4);
-                            if (r == 0) r = ItemID.HellwingBow;
-                            else if (r == 1) r = ItemID.Flamelash;
-                            else if (r == 2) r = ItemID.FlowerofFire;
-                            else r = ItemID.Sunfury;
+                            int r = WorldGen.genRand.Next(2);
+                            if (r == 0) r = ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>();
+                            else if (r == 1) r = ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>();
+                            //else if (r == 2) r = ItemID.FlowerofFire;
+                            //else r = ItemID.Sunfury;
                             Main.chest[num2].item[1].SetDefaults(r, false);
                             Main.chest[num2].item[1].Prefix(-2);
                         }

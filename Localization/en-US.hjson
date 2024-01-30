@@ -7224,7 +7224,7 @@ Mods: {
 
 			EggCannon: {
 				DisplayName: Egg Cannon
-				Tooltip: ""
+				Tooltip: Uses grenades for ammo
 			}
 
 			Windshield: {
@@ -7577,6 +7577,16 @@ Mods: {
 				DisplayName: Unstable Catalyzer
 				Tooltip: Throw into shimmer
 			}
+
+			EruptionHook: {
+				DisplayName: Eruption Hook
+				Tooltip: ""
+			}
+
+			OilBottle: {
+				DisplayName: Oil Bottle
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7790,6 +7800,10 @@ Mods: {
 			JunglePetal.DisplayName: Jungle Petal
 			MagicGrenade.DisplayName: Magic Grenade
 			MagicGrenadeBoom.DisplayName: Magic Grenade
+			EruptionHook.DisplayName: Eruption Hook
+			OilBottle.DisplayName: Oil Bottle
+			OilExplosion.DisplayName: Oil Explosion
+			EruptionHookBoom.DisplayName: Eruption Hook Boom
 		}
 
 		NPCs: {
