@@ -34,7 +34,7 @@ public class HeartstoneCandelabra : CandelabraTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(198, 171, 108, 0);
+        Color color = new Color(85, 85, 85, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -72,7 +72,7 @@ public class HeartstoneCandle : CandleTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(198, 171, 108, 0);
+        Color color = new Color(85, 85, 85, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -100,7 +100,7 @@ public class HeartstoneChair : ChairTemplate
 
 public class HeartstoneChandelier : ChandelierTemplate
 {
-    public override Color FlameColor => new Color(198, 171, 108, 0);
+    public override Color FlameColor => new Color(85, 85, 85, 0);
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneChandelier>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -115,7 +115,7 @@ public class HeartstoneChandelier : ChandelierTemplate
 }
 public class HeartstoneLantern : LanternTemplate
 {
-    public override Color FlameColor => new Color(198, 171, 108, 0);
+    public override Color FlameColor => new Color(85, 85, 85, 0);
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneLantern>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -185,7 +185,7 @@ public class HeartstoneLamp : LampTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(198, 171, 108, 0);
+        Color color = new Color(85, 85, 85, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -222,9 +222,9 @@ public class HeartstoneSofa : SofaTemplate
 
 public class HeartstoneTable : TableTemplate { }
 
-//public class HeartstoneToilet : ToiletTemplate
-//{
-//    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneToilet>();
-//}
+public class HeartstoneToilet : ToiletTemplate
+{
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneToilet>();
+}
 
 public class HeartstoneWorkbench : WorkbenchTemplate { }
