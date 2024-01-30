@@ -108,6 +108,7 @@ public class WildMushroomClock : ClockTemplate
 
 public class WildMushroomChandelier : ChandelierTemplate
 {
+    public override Color FlameColor => base.FlameColor;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomChandelier>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -201,6 +202,7 @@ public class WildMushroomLamp : LampTemplate
 /*
 public class WildMushroomLantern : LanternTemplate
 {
+    public override Color FlameColor => base.FlameColor;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomLantern>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {

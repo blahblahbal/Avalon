@@ -100,6 +100,7 @@ public class HeartstoneChair : ChairTemplate
 
 public class HeartstoneChandelier : ChandelierTemplate
 {
+    public override Color FlameColor => new Color(198, 171, 108, 0);
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneChandelier>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -114,6 +115,7 @@ public class HeartstoneChandelier : ChandelierTemplate
 }
 public class HeartstoneLantern : LanternTemplate
 {
+    public override Color FlameColor => new Color(198, 171, 108, 0);
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneLantern>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {

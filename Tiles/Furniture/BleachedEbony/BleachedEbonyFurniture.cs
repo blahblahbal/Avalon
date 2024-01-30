@@ -34,7 +34,7 @@ public class BleachedEbonyCandelabra : CandelabraTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(100, 100, 100, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -72,7 +72,7 @@ public class BleachedEbonyCandle : CandleTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(100, 100, 100, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -100,6 +100,7 @@ public class BleachedEbonyChair : ChairTemplate
 
 public class BleachedEbonyChandelier : ChandelierTemplate
 {
+    public override Color FlameColor => base.FlameColor;
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
@@ -169,7 +170,7 @@ public class BleachedEbonyLamp : LampTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(224, 104, 147, 0);
+        Color color = new Color(100, 100, 100, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -190,8 +191,11 @@ public class BleachedEbonyLamp : LampTemplate
     }
 }
 
-public class BleachedEbonyLantern : LanternTemplate 
+public class BleachedEbonyLantern : LanternTemplate
 {
+    public override Color FlameColor => base.FlameColor;
+    public override float FlameJitterMultX => 0.15f * 0.5f;
+    public override float FlameJitterMultY => 0.35f * 0.5f;
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];

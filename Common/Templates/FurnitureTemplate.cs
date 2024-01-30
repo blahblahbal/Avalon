@@ -778,6 +778,9 @@ namespace Avalon.Common.Templates
     }
     public abstract class ChandelierTemplate : FurnitureTemplate
     {
+        public virtual Color FlameColor => new Color(100, 100, 100, 0);
+        public virtual float FlameJitterMultX => 0.15f;
+        public virtual float FlameJitterMultY => 0.35f;
         public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[Type] = true;
@@ -823,7 +826,6 @@ namespace Avalon.Common.Templates
             bool _isActiveAndNotPaused = (bool)typeof(TileDrawing).GetField("_isActiveAndNotPaused", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance).GetValue(Main.instance.TilesRenderer);
 
             ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)topLeftY << 32 | (long)((ulong)topLeftX));
-            Color colorFlame = new Color(224, 104, 147, 0);
 
             float windCycle = (float)typeof(TileDrawing).GetMethod("GetWindCycle", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).Invoke(Main.instance.TilesRenderer, new object[] { topLeftX, topLeftY, _sunflowerWindCounter });
             float num = windCycle;
@@ -909,9 +911,9 @@ namespace Avalon.Common.Templates
 
                         for (int q = 0; q < 7; q++)
                         {
-                            float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
-                            float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-                            spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, colorFlame, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                            float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
+                            float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
+                            spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                         }
                     }
                 }
@@ -1204,6 +1206,9 @@ namespace Avalon.Common.Templates
     }
     public abstract class LanternTemplate : FurnitureTemplate
     {
+        public virtual Color FlameColor => new Color(100, 100, 100, 0);
+        public virtual float FlameJitterMultX => 0.15f;
+        public virtual float FlameJitterMultY => 0.35f;
         public virtual bool HasFlame => true;
         public override void SetStaticDefaults()
         {
@@ -1245,7 +1250,6 @@ namespace Avalon.Common.Templates
             bool _isActiveAndNotPaused = (bool)typeof(TileDrawing).GetField("_isActiveAndNotPaused", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance).GetValue(Main.instance.TilesRenderer);
 
             ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)topLeftY << 32 | (long)((ulong)topLeftX));
-            Color colorFlame = new Color(224, 104, 147, 0);
 
             float windCycle = (float)typeof(TileDrawing).GetMethod("GetWindCycle", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).Invoke(Main.instance.TilesRenderer, new object[] { topLeftX, topLeftY, _sunflowerWindCounter });
             float num = windCycle;
@@ -1333,9 +1337,9 @@ namespace Avalon.Common.Templates
                         {
                             for (int q = 0; q < 7; q++)
                             {
-                                float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
-                                float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-                                spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, colorFlame, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                                float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
+                                float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
+                                spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                             }
                         }
                     }
