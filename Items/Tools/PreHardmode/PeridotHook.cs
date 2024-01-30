@@ -16,12 +16,12 @@ class PeridotHook : ModItem
         Item.rare = ItemRarityID.Blue;
         Item.noMelee = true;
         Item.width = dims.Width;
-        Item.useTime = 20;
+        Item.useTime = 0;
         Item.knockBack = 7f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Tools.PeridotHook>();
         Item.value = Item.sellPrice(0, 0, 54, 0);
-        Item.useStyle = ItemUseStyleID.Shoot;
-        Item.useAnimation = 20;
+        Item.useStyle = ItemUseStyleID.None;
+        Item.useAnimation = 0;
         Item.height = dims.Height;
     }
     public override void AddRecipes()

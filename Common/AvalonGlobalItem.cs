@@ -231,7 +231,7 @@ public class AvalonGlobalItem : GlobalItem
 
         ShimmerTransmute(ModContent.ItemType<StaminaCrystal>(), ModContent.ItemType<EnergyCrystal>());
 
-        ShimmerTransmute(ModContent.ItemType<UnstableCatalyzer>(), ModContent.ItemType<Items.Placeable.Crafting.Catalyzer>());
+        ShimmerTransmute(ModContent.ItemType<Items.Other.UnstableCatalyzer>(), ModContent.ItemType<Items.Placeable.Crafting.Catalyzer>());
 
         ShimmerTransmute(ModContent.ItemType<Zircon>(), ModContent.ItemType<Peridot>());
         ShimmerTransmute(ModContent.ItemType<Peridot>(), ModContent.ItemType<Tourmaline>());
@@ -660,6 +660,7 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
+        #region split projectile bonus
         if (player.GetModPlayer<AvalonPlayer>().SplitProj && Main.rand.NextBool(7) && item.DamageType == DamageClass.Ranged && item.useAmmo > 0)
         {
             for (int num122 = 0; num122 < 2; num122++)
@@ -668,10 +669,19 @@ public class AvalonGlobalItem : GlobalItem
                 float num124 = velocity.Y;
                 num123 += Main.rand.Next(-30, 31) * 0.05f;
                 num124 += Main.rand.Next(-30, 31) * 0.05f;
-                Projectile.NewProjectile(player.GetSource_FromThis(), position.X, position.Y, num123, num124, type, damage, knockback, player.whoAmI);
+                if (item.type == ModContent.ItemType<Items.Weapons.Ranged.PreHardmode.EggCannon>())
+                {
+                    Vector2 vel = new Vector2(num123, num124);
+                    Projectile.NewProjectile(source, position, vel.RotatedByRandom(0.04f), ModContent.ProjectileType<Projectiles.Ranged.ExplosiveEgg>(), damage, knockback, player.whoAmI, ai2: Main.rand.NextBool(3) ? 1 : 0);
+                }
+                else
+                {
+                    Projectile.NewProjectile(player.GetSource_FromThis(), position.X, position.Y, num123, num124, type, damage, knockback, player.whoAmI);
+                }
             }
             return false;
         }
+        #endregion
         return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
     }
     public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)

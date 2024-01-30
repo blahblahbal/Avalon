@@ -378,7 +378,7 @@ internal class Contagion : GenPass
         ushort chunkstone = (ushort)ModContent.TileType<Chunkstone>();
 
         // Shift the Y coord down to the world surface
-        j = Utils.TileCheck(i) + radius + 15;
+        j = Utils.TileCheck(i) + radius + 50;
 
         Vector2 center = new(i, j);
         List<Vector2> points = new();
@@ -517,6 +517,7 @@ internal class Contagion : GenPass
             }
         }
 
+        MakeHollowCircle(i, j, 15, 4, chunkstone);
         #endregion
 
         #region add endpoints to the paths
@@ -716,7 +717,7 @@ internal class Contagion : GenPass
                 int offsetX = WorldGen.genRand.Next(-2, 3);
                 if (x >= i + 7 || x <= i - 7)
                 {
-                    MakeCircle(x + offsetX, y + 3, circleSize, (ushort)ModContent.TileType<Chunkstone>());
+                    MakeCircle(x + offsetX, y, circleSize, (ushort)ModContent.TileType<Chunkstone>());
                 }
                 if (x <= i + min && x >= i - max)
                 {
@@ -741,6 +742,29 @@ internal class Contagion : GenPass
                             Main.tile[x, y - 3].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
                         }
                     }
+                }
+            }
+        }
+    }
+
+    public static void MakeHollowCircle(int x, int y, int r, int thickness, ushort type)
+    {
+        int num = x - r;
+        int num2 = y - r;
+        int num3 = x + r;
+        int num4 = y + r;
+        for (int i = num; i < num3 + 1; i++)
+        {
+            for (int j = num2; j < num4 + 1; j++)
+            {
+                float dist = Vector2.Distance(new Vector2(i, j), new Vector2(x, y));
+                if (dist <= r && dist > r - thickness)
+                {
+                    Main.tile[i, j].Active(true);
+                    Main.tile[i, j].TileType = type;
+                    if (dist <= r - 1 && dist > r - thickness + 1)
+                        Main.tile[i, j].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                    WorldGen.SquareTileFrame(i, j);
                 }
             }
         }

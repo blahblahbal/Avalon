@@ -3672,7 +3672,7 @@ Mods: {
 
 			SonicScrewdriverMkI: {
 				DisplayName: Sonic Screwdriver Mk I
-				Tooltip: Reveals treasures, ores, and enemies
+				Tooltip: Reveals nearby treasures, ores, and enemies
 			}
 
 			SonicScrewdriverMkII: {
@@ -7580,12 +7580,16 @@ Mods: {
 
 			EruptionHook: {
 				DisplayName: Eruption Hook
-				Tooltip: ""
+				Tooltip: Explodes and lights enemies on fire if you are hit while grappling
 			}
 
 			OilBottle: {
 				DisplayName: Oil Bottle
-				Tooltip: ""
+				Tooltip:
+					'''
+					Shoots bottles of oil at enemies while you are attacking
+					Oil bottles inflicted the Oiled debuff
+					'''
 			}
 		}
 

@@ -10,7 +10,6 @@ namespace Avalon.Projectiles.Tools;
 
 public class EruptionHook : ModProjectile
 {
-    int timer = 0;
     public override void SetStaticDefaults()
     {
         ProjectileID.Sets.SingleGrappleHook[Type] = true;
@@ -18,6 +17,8 @@ public class EruptionHook : ModProjectile
     public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.GemHookAmethyst);
+        Projectile.width = 26;
+        Projectile.height = 24;
     }
     public override bool PreDraw(ref Color lightColor)
     {

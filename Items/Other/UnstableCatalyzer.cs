@@ -5,11 +5,10 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Placeable.Crafting;
+namespace Avalon.Items.Other;
 
 internal class UnstableCatalyzer : ModItem
 {
-    public override string Texture => ModContent.GetInstance<Catalyzer>().Texture;
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

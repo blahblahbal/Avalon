@@ -19,7 +19,8 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
             Item.DefaultToRangedWeapon(1, AmmoID.None, 35, 16, true);
             Item.damage = 35;
             Item.rare = ItemRarityID.Green;
-            Item.useAmmo = ItemID.Grenade;
+            // doing this makes it add the damage of grenades lol
+            //Item.useAmmo = ItemID.Grenade;
             Item.value = 27000;
             Item.UseSound = SoundID.Item61;
         }
@@ -30,7 +31,7 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source,position,velocity.RotatedByRandom(0.04f),ModContent.ProjectileType<ExplosiveEgg>(),damage,knockback,player.whoAmI,ai2: Main.rand.NextBool(3) ? 1 : 0);
+            Projectile.NewProjectile(source, position, velocity.RotatedByRandom(0.04f), ModContent.ProjectileType<ExplosiveEgg>(), damage, knockback, player.whoAmI, ai2: Main.rand.NextBool(3) ? 1 : 0);
             return false;
         }
         public override Vector2? HoldoutOffset()
