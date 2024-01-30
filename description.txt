@@ -1,7 +1,7 @@
 Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on content while keeping to a generally vanilla feel. In this Pre-hardmode release, there are:
 - Several new structures, including the Ice Shrine, the Lava Shrine, and the Evil Shrine
 - A new world evil, the Contagion, which is an alternate to the Corruption and Crimson
-- A stamina mechanic, which is completely optional, but allows you to do things such as teleporting and sprinting without the need for an accessory
+- A stamina mechanic, which is completely optional, but allows you to do things such as teleporting and sprinting without the need for an accessory (this mechanic is currently unfinished but in a somewhat usable state)
 - Several new prefixes (including some for armor only)
 - Mystical Tomes, which are similar to accessories, but only grant stat boosts
 - And some other various things

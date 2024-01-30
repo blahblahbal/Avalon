@@ -7596,6 +7596,11 @@ Mods: {
 				DisplayName: Dungeon Wand
 				Tooltip: Places unsafe dungeon walls
 			}
+
+			HeartstoneToilet: {
+				Tooltip: ""
+				DisplayName: Heartstone Toilet
+			}
 		}
 
 		InfoDisplays: {
