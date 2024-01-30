@@ -370,15 +370,15 @@ internal class Contagion : GenPass
     public static void ContagionRunner(int i, int j)
     {
         int j2 = j;
-        int radius = WorldGen.genRand.Next(55, 60);
+        int radius = WorldGen.genRand.Next(70, 75);
         int radMod = radius - 10;
         int rad2 = WorldGen.genRand.Next(20, 26);
-        int rad3 = WorldGen.genRand.Next(105, 121);
+        int rad3 = WorldGen.genRand.Next(115, 131);
 
         ushort chunkstone = (ushort)ModContent.TileType<Chunkstone>();
 
         // Shift the Y coord down to the world surface
-        j = Utils.TileCheck(i) + radius + 50;
+        j = Utils.TileCheck(i) + radius + 15;
 
         Vector2 center = new(i, j);
         List<Vector2> points = new();
@@ -716,13 +716,31 @@ internal class Contagion : GenPass
                 int offsetX = WorldGen.genRand.Next(-2, 3);
                 if (x >= i + 7 || x <= i - 7)
                 {
-                    MakeCircle(x + offsetX, y, circleSize, (ushort)ModContent.TileType<Chunkstone>());
+                    MakeCircle(x + offsetX, y + 3, circleSize, (ushort)ModContent.TileType<Chunkstone>());
                 }
                 if (x <= i + min && x >= i - max)
                 {
                     Tile t = Main.tile[x, y];
                     t.HasTile = false;
                     t.WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                }
+                // Make the walls at the top of the entrance randomly jut out
+                if (Main.tile[x, y - 1].WallType == 0 && Main.tile[x, y].WallType == (ushort)ModContent.WallType<ChunkstoneWall>() && (y < j - radius - 45))
+                {
+                    int doubleWide = (WorldGen.genRand.NextBool() ? -1 : 1);
+                    Main.tile[x, y - 1].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                    Main.tile[x + doubleWide, y - 1].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                    if (Main.tile[x, y].TileType != (ushort)ModContent.TileType<Chunkstone>())
+                    {
+                        Main.tile[x, y - 2].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                        Main.tile[x + doubleWide, y - 2].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                        Main.tile[x + doubleWide + 1, y - 1].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                        Main.tile[x + doubleWide - 1, y - 1].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                        if (WorldGen.genRand.NextBool(2))
+                        {
+                            Main.tile[x, y - 3].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
+                        }
+                    }
                 }
             }
         }
@@ -933,7 +951,7 @@ internal class Contagion : GenPass
                         {
                             Main.tile[i, j].Active(true);
                             Main.tile[i, j].TileType = type;
-                            if (Vector2.Distance(new Vector2(i, j), new Vector2(x, y)) <= r - 1)
+                            if (Vector2.Distance(new Vector2(i, j), new Vector2(x, y)) <= r - 2)
                             {
                                 Main.tile[i, j].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
                             }
