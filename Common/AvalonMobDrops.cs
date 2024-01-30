@@ -130,9 +130,10 @@ public class AvalonMobDrops : GlobalNPC
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersPickaxe>(), 30));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersSword>(), 30));
                 break;
-            case NPCID.WyvernHead:
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalTotem>(), 2));
-                break;
+            // add back later
+            //case NPCID.WyvernHead:
+            //    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalTotem>(), 2));
+            //    break;
             case NPCID.Harpy:
                 npcLoot.Add(ItemDropRule.ByCondition(hardModeCondition, ItemID.ShinyRedBalloon, 50));
                 break;
