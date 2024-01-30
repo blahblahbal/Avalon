@@ -717,7 +717,7 @@ internal class Contagion : GenPass
                 int offsetX = WorldGen.genRand.Next(-2, 3);
                 if (x >= i + 7 || x <= i - 7)
                 {
-                    MakeCircle(x + offsetX, y, circleSize, (ushort)ModContent.TileType<Chunkstone>());
+                    MakeCircle(x + offsetX, y + 3, circleSize, (ushort)ModContent.TileType<Chunkstone>());
                 }
                 if (x <= i + min && x >= i - max)
                 {
