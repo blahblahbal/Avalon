@@ -29,7 +29,7 @@ public class Moonforce : ModItem
         Item.rare = ItemRarityID.Orange;
         Item.value = Item.sellPrice(0, 0, 50);
 
-        Item.damage = 82;
+        Item.damage = 63;
         Item.useAnimation = 77;
         Item.useTime = 77;
         Item.channel = true;
@@ -42,8 +42,25 @@ public class Moonforce : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(Type).AddTile(TileID.DemonAltar).AddIngredient(ModContent.ItemType<RhodiumLongbow>()).AddIngredient(ModContent.ItemType<Longbone>()).AddIngredient(ModContent.ItemType<Longbow>()).Register();
-        Recipe.Create(Type).AddTile(TileID.DemonAltar).AddIngredient(ModContent.ItemType<OsmiumLongbow>()).AddIngredient(ModContent.ItemType<Longbone>()).AddIngredient(ModContent.ItemType<Longbow>()).Register();
-        Recipe.Create(Type).AddTile(TileID.DemonAltar).AddIngredient(ModContent.ItemType<IridiumLongbow>()).AddIngredient(ModContent.ItemType<Longbone>()).AddIngredient(ModContent.ItemType<Longbow>()).Register();
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<RhodiumLongbow>())
+            .AddIngredient(ModContent.ItemType<Longbone>())
+            .AddIngredient(ModContent.ItemType<Longbow>())
+            .AddTile(TileID.DemonAltar)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<OsmiumLongbow>())
+            .AddIngredient(ModContent.ItemType<Longbone>())
+            .AddIngredient(ModContent.ItemType<Longbow>())
+            .AddTile(TileID.DemonAltar)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<IridiumLongbow>())
+            .AddIngredient(ModContent.ItemType<Longbone>())
+            .AddIngredient(ModContent.ItemType<Longbow>())
+            .AddTile(TileID.DemonAltar)
+            .Register();
     }
 }

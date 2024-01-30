@@ -124,7 +124,7 @@ public class RecipeChanger : ModSystem
                 }
                 case ItemID.AnkhCharm:
                 {
-                    recipe.AddIngredient(ModContent.ItemType<Items.Accessories.Hardmode.Bayonet>());
+                    recipe.AddIngredient(ModContent.ItemType<Bayonet>());
                     break;
                 }
                 //case ItemID.FrostHelmet:

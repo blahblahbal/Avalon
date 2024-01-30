@@ -1,6 +1,7 @@
 using Avalon.Items.Material.Herbs;
 using Avalon.Items.Placeable.Wall;
 using Avalon.Items.Tools.PreHardmode;
+using Avalon.Items.Weapons.Ranged.PreHardmode;
 using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -48,6 +49,15 @@ namespace Avalon.Data.Sets
             ModContent.ItemType<PurpleBrickWall>(),
             ModContent.ItemType<PurpleSlabWall>(),
             ModContent.ItemType<PurpleTiledWall>()
+            );
+
+        public static readonly bool[] Longbows = ItemID.Sets.Factory.CreateBoolSet(
+            ModContent.ItemType<Longbow>(),
+            ModContent.ItemType<Longbone>(),
+            ModContent.ItemType<RhodiumLongbow>(),
+            ModContent.ItemType<OsmiumLongbow>(),
+            ModContent.ItemType<IridiumLongbow>(),
+            ModContent.ItemType<Moonforce>()
             );
     }
 }

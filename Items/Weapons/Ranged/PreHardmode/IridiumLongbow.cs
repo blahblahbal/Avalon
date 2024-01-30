@@ -24,7 +24,7 @@ class IridiumLongbow : ModItem
         Item.rare = ItemRarityID.Orange;
         Item.value = Item.sellPrice(0, 0, 50);
 
-        Item.damage = 85;
+        Item.damage = 62;
         Item.useAnimation = 83;
         Item.useTime = 83;
         Item.channel = true;

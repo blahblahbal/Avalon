@@ -25,7 +25,7 @@ public class OsmiumLongbow : ModItem
         Item.rare = ItemRarityID.Orange;
         Item.value = Item.sellPrice(0, 0, 50);
 
-        Item.damage = 82;
+        Item.damage = 59;
         Item.useAnimation = 84;
         Item.useTime = 84;
         Item.channel = true;

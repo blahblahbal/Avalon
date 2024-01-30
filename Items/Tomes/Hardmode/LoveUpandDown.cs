@@ -52,7 +52,6 @@ public class LoveUpandDown : ModItem
             .AddIngredient(ModContent.ItemType<Gravel>(), 15)
             .AddIngredient(ModContent.ItemType<Sandstone>(), 15)
             .AddIngredient(ModContent.ItemType<CarbonSteel>(), 15)
-            .AddIngredient(ModContent.ItemType<MysteriousPage>(), 4)
             .AddTile(ModContent.TileType<Tiles.TomeForge>())
             .Register();
     }
