@@ -99,6 +99,7 @@ public class CoughwoodChair : ChairTemplate
 
 public class CoughwoodChandelier : ChandelierTemplate
 {
+    public override Color FlameColor => new Color(198, 171, 108, 0);
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodChandelier>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {

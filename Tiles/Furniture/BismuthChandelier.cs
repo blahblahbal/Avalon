@@ -8,6 +8,7 @@ namespace Avalon.Tiles.Furniture;
 
 public class BismuthChandelier : ChandelierTemplate
 {
+    public override Color FlameColor => base.FlameColor;
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];

@@ -42,7 +42,7 @@ public class ResistantWoodCandelabra : CandelabraTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(198, 171, 108, 0);
+        Color color = new Color(60, 60, 60, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -81,7 +81,7 @@ public class ResistantWoodCandle : CandleTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(198, 171, 108, 0);
+        Color color = new Color(60, 60, 60, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -110,6 +110,7 @@ public class ResistantWoodChair : ChairTemplate
 
 public class ResistantWoodChandelier : ChandelierTemplate
 {
+    public override Color FlameColor => new Color(60, 60, 60, 0);
     public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodChandelier>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -187,7 +188,7 @@ public class ResistantWoodLamp : LampTemplate
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-        Color color = new Color(198, 171, 108, 0);
+        Color color = new Color(60, 60, 60, 0);
         int frameX = Main.tile[i, j].TileFrameX;
         int frameY = Main.tile[i, j].TileFrameY;
         int width = 18;
@@ -210,6 +211,9 @@ public class ResistantWoodLamp : LampTemplate
 
 public class ResistantWoodLantern : LanternTemplate
 {
+    public override Color FlameColor => new Color(60, 60, 60, 0);
+    public override float FlameJitterMultX => 0.15f * 0.5f;
+    public override float FlameJitterMultY => 0.35f * 0.5f;
     public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodLantern>();
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
