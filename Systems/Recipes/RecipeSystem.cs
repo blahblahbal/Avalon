@@ -13,6 +13,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Common.Players;
 using System.Collections.Generic;
+using Avalon.Items.Placeable.Tile;
 
 namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
@@ -205,6 +206,17 @@ public class RecipeSystem : ModSystem
             ItemID.RichGravestone5
         });
         RecipeGroup.RegisterGroup("Avalon:Tombstones", groupTombstones);
+
+        var groupDungeonBricks = new RecipeGroup(() => "Any Dungeon Brick", new int[]
+        {
+            ItemID.PinkBrick,
+            ModContent.ItemType<OrangeBrick>(),
+            ModContent.ItemType<YellowBrick>(),
+            ItemID.GreenBrick,
+            ItemID.BlueBrick,
+            ModContent.ItemType<PurpleBrick>()
+        });
+        RecipeGroup.RegisterGroup("Avalon:DungeonBrick", groupDungeonBricks);
 
         //RecipeGroup.RegisterGroup("MagicStorage:AnyTombstone", groupTombstones);
 

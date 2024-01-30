@@ -241,15 +241,17 @@ public class AvalonGlobalItem : GlobalItem
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>());
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>());
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.YellowBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientYellowBrick>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWallUnsafe>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWallUnsafe>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWallUnsafe>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWallUnsafe>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWallUnsafe>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWallUnsafe>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowBrickWallUnsafe>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowSlabWallUnsafe>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowTiledWallUnsafe>());
+
+        // commented due to wall wand now works
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWallUnsafe>());
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWallUnsafe>());
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWallUnsafe>());
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWallUnsafe>());
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWallUnsafe>());
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWallUnsafe>());
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowBrickWallUnsafe>());
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowSlabWallUnsafe>());
+        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowTiledWallUnsafe>());
 
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>(), ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>());
 
@@ -1121,7 +1123,7 @@ public class AvalonGlobalItem : GlobalItem
             Vector2 vector = player.DirectionTo(player.ApplyRangeCompensation(0.2f, center, Main.MouseWorld)) * 10f;
             Projectile.NewProjectile(player.GetSource_FromThis(), center.X, center.Y, vector.X, vector.Y, ModContent.ProjectileType<Projectiles.OilBottle>(), 23, 3f, player.whoAmI);
         }
-        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer)
+        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft)
         {
             bool inrange = player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple);
             if (item.createTile > -1 &&
@@ -1161,7 +1163,28 @@ public class AvalonGlobalItem : GlobalItem
 
         return base.UseItem(item, player);
     }
-
+    public static int DungeonWallItemToBackwallID(int type)
+    {
+        if (type == ItemID.BlueBrickWall) return WallID.BlueDungeonUnsafe;
+        else if (type == ItemID.BlueSlabWall) return WallID.BlueDungeonSlabUnsafe;
+        else if (type == ItemID.BlueTiledWall) return WallID.BlueDungeonTileUnsafe;
+        else if (type == ItemID.GreenBrickWall) return WallID.GreenDungeonUnsafe;
+        else if (type == ItemID.GreenSlabWall) return WallID.GreenDungeonSlabUnsafe;
+        else if (type == ItemID.GreenTiledWall) return WallID.GreenDungeonTileUnsafe;
+        else if (type == ItemID.PinkBrickWall) return WallID.PinkDungeonUnsafe;
+        else if (type == ItemID.PinkSlabWall) return WallID.PinkDungeonSlabUnsafe;
+        else if (type == ItemID.PinkTiledWall) return WallID.PinkDungeonTileUnsafe;
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWall>()) return ModContent.WallType<Walls.OrangeBrickUnsafe>();
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWall>()) return ModContent.WallType<Walls.OrangeSlabUnsafe>();
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWall>()) return ModContent.WallType<Walls.OrangeTiledUnsafe>();
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWall>()) return ModContent.WallType<Walls.PurpleBrickUnsafe>();
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWall>()) return ModContent.WallType<Walls.PurpleSlabWallUnsafe>();
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWall>()) return ModContent.WallType<Walls.PurpleTiledWallUnsafe>();
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.YellowBrickWall>()) return ModContent.WallType<Walls.YellowBrickUnsafe>();
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.YellowSlabWall>()) return ModContent.WallType<Walls.YellowSlabWallUnsafe>();
+        else if (type == ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>()) return ModContent.WallType<Walls.YellowTiledWallUnsafe>();
+        return 0;
+    }
     public override int ChoosePrefix(Item item, UnifiedRandom rand) => item.IsArmor()
         ? Main.rand.Next(ExxoPrefix.ExxoCategoryPrefixes[ExxoPrefixCategory.Armor]).Type
         : base.ChoosePrefix(item, rand);

@@ -51,6 +51,17 @@ public class RecipeChanger : ModSystem
                     }
                     break;
                 }
+                case ItemID.BlueBrickWallUnsafe:
+                case ItemID.BlueSlabWallUnsafe:
+                case ItemID.BlueTiledWallUnsafe:
+                case ItemID.GreenBrickWallUnsafe:
+                case ItemID.GreenSlabWallUnsafe:
+                case ItemID.GreenTiledWallUnsafe:
+                case ItemID.PinkBrickWallUnsafe:
+                case ItemID.PinkSlabWallUnsafe:
+                case ItemID.PinkTiledWallUnsafe:
+                    recipe.DisableRecipe();
+                    break;
                 case ItemID.EnchantedBoomerang:
                 {
                     if (recipe.TryGetIngredient(ItemID.FallenStar, out Item ing))

@@ -7224,7 +7224,7 @@ Mods: {
 
 			EggCannon: {
 				DisplayName: Egg Cannon
-				Tooltip: Uses grenades for ammo
+				Tooltip: ""
 			}
 
 			Windshield: {
@@ -7590,6 +7590,11 @@ Mods: {
 					Shoots bottles of oil at enemies while you are attacking
 					Oil bottles inflicted the Oiled debuff
 					'''
+			}
+
+			DungeonWand: {
+				DisplayName: Dungeon Wand
+				Tooltip: Places unsafe dungeon walls
 			}
 		}
 
