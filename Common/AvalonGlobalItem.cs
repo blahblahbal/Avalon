@@ -510,11 +510,6 @@ public class AvalonGlobalItem : GlobalItem
             }
         }*/
         #endregion herb seed block swap
-
-        //if (Main.playerInventory && item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
-        //{
-        //    Main.EquipPage = 2;
-        //}
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
@@ -1156,7 +1151,8 @@ public class AvalonGlobalItem : GlobalItem
             Vector2 vector = player.DirectionTo(player.ApplyRangeCompensation(0.2f, center, Main.MouseWorld)) * 10f;
             Projectile.NewProjectile(player.GetSource_FromThis(), center.X, center.Y, vector.X, vector.Y, ModContent.ProjectileType<Projectiles.OilBottle>(), 23, 3f, player.whoAmI);
         }
-        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft)
+        #region cloud/obsidian glove
+        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>())
         {
             bool inrange = player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple);
             if (item.createTile > -1 &&
@@ -1193,7 +1189,7 @@ public class AvalonGlobalItem : GlobalItem
                 item.stack--;
             }
         }
-
+        #endregion
         return base.UseItem(item, player);
     }
     public static int DungeonWallItemToBackwallID(int type)
