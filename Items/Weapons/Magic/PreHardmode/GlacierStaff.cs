@@ -43,6 +43,7 @@ class GlacierStaff : ModItem
             .AddIngredient(ModContent.ItemType<Icicle>(), 50)
             .AddIngredient(ItemID.FallenStar, 8)
             .AddIngredient(ModContent.ItemType<FrostShard>(), 4)
-            .AddTile(TileID.IceMachine);
+            .AddTile(TileID.IceMachine)
+            .Register();
     }
 }
