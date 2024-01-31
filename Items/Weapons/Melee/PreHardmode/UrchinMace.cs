@@ -70,6 +70,8 @@ class UrchinMace : ModItem
             .AddIngredient(ModContent.ItemType<WaterShard>(), 2)
             .AddIngredient(ItemID.SandBlock, 25)
             .AddIngredient(ItemID.Coral, 15)
-            .AddIngredient(ItemID.ShellPileBlock, 10);
+            .AddIngredient(ItemID.ShellPileBlock, 10)
+            .AddIngredient(ItemID.SharkFin, 2)
+            .Register();
     }
 }

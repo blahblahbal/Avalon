@@ -26,8 +26,8 @@ public class SanguineKatana : ModItem
         Item.DamageType = DamageClass.Melee;
         Item.autoReuse = true;
         Item.rare = ItemRarityID.Orange;
-        Item.useTime = 26;
-        Item.useAnimation = 26;
+        Item.useTime = 24;
+        Item.useAnimation = 24;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.knockBack = 5f;
         Item.UseSound = SoundID.Item1;

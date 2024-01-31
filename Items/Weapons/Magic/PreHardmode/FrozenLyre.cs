@@ -26,7 +26,7 @@ class FrozenLyre : ModItem
         Item.width = dims.Width;
         Item.height = dims.Height;
         Item.useTime = 20;
-        Item.knockBack = 0.5f;
+        Item.knockBack = 1f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.IceNote>();
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.holdStyle = 3;
@@ -56,6 +56,7 @@ class FrozenLyre : ModItem
             .AddIngredient(ModContent.ItemType<Icicle>(), 50)
             .AddIngredient(ItemID.FallenStar, 8)
             .AddIngredient(ModContent.ItemType<FrostShard>(), 4)
-            .AddTile(TileID.IceMachine);
+            .AddTile(TileID.IceMachine)
+            .Register();
     }
 }
