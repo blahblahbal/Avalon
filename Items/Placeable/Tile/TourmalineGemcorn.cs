@@ -26,4 +26,11 @@ class TourmalineGemcorn : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ItemID.Acorn)
+            .AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>())
+            .Register();
+    }
 }

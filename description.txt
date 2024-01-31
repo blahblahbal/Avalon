@@ -6,12 +6,20 @@ Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on 
 - Mystical Tomes, which are similar to accessories, but only grant stat boosts
 - And some other various things
 
+Music Mod: https://steamcommunity.com/sharedfiles/filedetails/?id=3150771779
+
 
 Avalon started out as a tConfig mod over 10 years ago, and is now finally available for tModLoader!
 
 Discord link: https://discord.gg/rtm99Uq
 
 Report any bugs you find in #bug-reports on the discord.
+
+Updates:
+v1.0.1:
+- "Fixed" a bug that caused the server to crash when loading a world in multiplayer.
+
+
 
 
 Credits:

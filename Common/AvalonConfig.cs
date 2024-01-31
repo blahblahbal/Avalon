@@ -17,6 +17,10 @@ public class AvalonConfig : ModConfig
     [ReloadRequired]
     public bool VanillaTextureReplacement;
 
+    [DefaultValue(false)]
+    [ReloadRequired]
+    public bool ReducedRespawnTimer;
+
     [DefaultValue(true)]
     [ReloadRequired]
     public bool VanillaRenames;

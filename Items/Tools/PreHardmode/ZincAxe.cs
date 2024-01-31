@@ -29,7 +29,7 @@ class ZincAxe : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 9)
+            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 8)
             .AddRecipeGroup(RecipeGroupID.Wood, 3)
             .AddTile(TileID.Anvils)
             .Register();

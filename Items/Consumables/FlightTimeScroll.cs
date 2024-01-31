@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,34 +10,32 @@ namespace Avalon.Items.Consumables;
 
 class FlightTimeScroll : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.consumable = true;
+        Item.accessory = true;
         Item.width = dims.Width;
-        Item.useTime = 20;
         Item.rare = ItemRarityID.Green;
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.UseSound = new SoundStyle("Avalon/Sounds/Item/Scroll");
-        Item.useAnimation = 20;
         Item.height = dims.Height;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ItemID.Book).AddIngredient(ItemID.Feather, 20).AddIngredient(ItemID.SoulofFlight, 15).AddIngredient(ModContent.ItemType<StaminaCrystal>()).AddTile(TileID.Bookcases).Register();
+        CreateRecipe()
+            .AddIngredient(ItemID.Book)
+            .AddIngredient(ItemID.Feather, 20)
+            .AddIngredient(ItemID.SoulofFlight, 15)
+            .AddIngredient(ModContent.ItemType<StaminaCrystal>())
+            .AddTile(TileID.Bookcases)
+            .Register();
     }
-    public override bool CanUseItem(Player player)
+    public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        return !player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreUnlocked;
-    }
-    public override bool? UseItem(Player player)
-    {
-        player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreUnlocked = true;
-        return true;
+        if (!hideVisual)
+        {
+            player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreUnlocked = true;
+        }
     }
 }

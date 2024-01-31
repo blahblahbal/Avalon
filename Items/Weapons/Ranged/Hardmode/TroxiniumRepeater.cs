@@ -20,7 +20,7 @@ public class TroxiniumRepeater : ModItem
         Item.shootSpeed = 10.5f;
         Item.DamageType = DamageClass.Ranged;
         Item.noMelee = true;
-        Item.rare = ModContent.RarityType<Rarities.MagentaRarity>();
+        Item.rare = ItemRarityID.Pink;
         Item.width = dims.Width;
         Item.useTime = 21;
         Item.knockBack = 1.5f;

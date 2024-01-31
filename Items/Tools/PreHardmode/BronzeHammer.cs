@@ -12,7 +12,7 @@ class BronzeHammer : ModItem
     public override void AddRecipes()
     {
         Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.BronzeBar>(), 10)
+            .AddIngredient(ModContent.ItemType<Material.Bars.BronzeBar>(), 8)
             .AddRecipeGroup(RecipeGroupID.Wood, 3)
             .AddTile(TileID.Anvils)
             .Register();

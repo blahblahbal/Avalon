@@ -28,7 +28,7 @@ class ZincPickaxe : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 12)
+            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 10)
             .AddRecipeGroup(RecipeGroupID.Wood, 4)
             .AddTile(TileID.Anvils)
             .Register();

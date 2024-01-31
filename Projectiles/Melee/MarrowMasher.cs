@@ -46,6 +46,7 @@ public class MarrowMasher : ModProjectile
     public float scaleMult = 1.25f; // set this to same as in the item file
     public override void AI()
     {
+        if (player.dead) Projectile.Kill();
         Vector2 toMouse = Vector2.Zero;
         player.heldProj = Projectile.whoAmI;
 

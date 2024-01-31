@@ -27,7 +27,7 @@ class NickelPickaxe : ModItem
     public override void AddRecipes()
     {
         Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 12)
+            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 10)
             .AddRecipeGroup(RecipeGroupID.Wood, 4)
             .AddTile(TileID.Anvils)
             .Register();

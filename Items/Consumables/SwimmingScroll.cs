@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -12,14 +13,13 @@ class SwimmingScroll : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.consumable = true;
         Item.width = dims.Width;
-        Item.useTime = 20;
         Item.rare = ItemRarityID.Green;
         Item.useStyle = ItemUseStyleID.HoldUp;
-        Item.UseSound = new SoundStyle($"{nameof(Avalon)}/Sounds/Item/Scroll");
-        Item.useAnimation = 20;
+        Item.UseSound = new SoundStyle("Avalon/Sounds/Item/Scroll");
+        Item.accessory = true;
         Item.height = dims.Height;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
     }
     public override void AddRecipes()
     {
@@ -30,13 +30,11 @@ class SwimmingScroll : ModItem
             .AddTile(TileID.Bookcases)
             .Register();
     }
-    public override bool CanUseItem(Player player)
+    public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        return !player.GetModPlayer<AvalonStaminaPlayer>().SwimmingUnlocked;
-    }
-    public override bool? UseItem(Player player)
-    {
-        player.GetModPlayer<AvalonStaminaPlayer>().SwimmingUnlocked = true;
-        return true;
+        if (!hideVisual)
+        {
+            player.GetModPlayer<AvalonStaminaPlayer>().SwimmingUnlocked = true;
+        }
     }
 }

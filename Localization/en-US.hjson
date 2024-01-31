@@ -8755,10 +8755,15 @@ Mods: {
 					Label: Vanilla Item Renames
 					Tooltip: Renames some vanilla items
 				}
+
+				ReducedRespawnTimer: {
+					Label: Reduced Respawn Timer
+					Tooltip: Reduces respawn timer after death
+				}
 			}
 		}
 
-		Config.ItemHeader: Biome Particles Enabled Header
+		Config.ItemHeader: Avalon Config
 
 		Emotes: {
 			BacteriumPrimeEmote.Command: bacteriumprime

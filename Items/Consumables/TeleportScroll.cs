@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,22 +10,16 @@ namespace Avalon.Items.Consumables;
 
 class TeleportScroll : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.consumable = true;
         Item.width = dims.Width;
-        Item.useTime = 20;
         Item.rare = ItemRarityID.Green;
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.UseSound = new SoundStyle("Avalon/Sounds/Item/Scroll");
-        Item.useAnimation = 20;
+        Item.accessory = true;
         Item.height = dims.Height;
+        Item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
     }
     public override void AddRecipes()
     {
@@ -36,13 +31,20 @@ class TeleportScroll : ModItem
             .AddTile(TileID.Bookcases)
             .Register();
     }
-    public override bool CanUseItem(Player player)
+    public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        return !player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked;
+        if (!hideVisual)
+        {
+            player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked = true;
+        }
     }
-    public override bool? UseItem(Player player)
-    {
-        player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked = true;
-        return true;
-    }
+    //public override bool CanUseItem(Player player)
+    //{
+    //    return !player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked;
+    //}
+    //public override bool? UseItem(Player player)
+    //{
+    //    player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked = true;
+    //    return true;
+    //}
 }

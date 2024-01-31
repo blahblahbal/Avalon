@@ -178,6 +178,7 @@ public class AvalonWorld : ModSystem
     }
     public override void PostUpdateWorld()
     {
+        //ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral((ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion).ToString()), Color.White);
         // these 2 (num12 and 13) are used for herb spawning; if I revert a change we'll need them
         int num12 = 151;
         int num13 = (int)Utils.Lerp(num12, num12 * 2.8, Utils.Clamp(Main.maxTilesX / 4200.0 - 1.0, 0.0, 1.0));

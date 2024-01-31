@@ -161,7 +161,7 @@ public class AvalonGlobalTile : GlobalTile
     }
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
-        int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
+        /*int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
         if (pid >= 0)
         {
             if (Main.player[pid].GetModPlayer<AvalonPlayer>().OreDupe && TileID.Sets.Ore[Main.tile[i, j].TileType])
@@ -187,6 +187,6 @@ public class AvalonGlobalTile : GlobalTile
             {
                 fail = true;
             }
-        }
+        }*/
     }
 }

@@ -89,6 +89,29 @@ public class AvalonGlobalItem : GlobalItem
     {
         if (Main.mouseRightRelease && Main.mouseRight)
         {
+            if (item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
+            {
+                // if the top slot has an item and the bottom slot doesn't, put current item in bottom slot
+                if (ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != 0 && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type == 0)
+                {
+                    ModContent.GetInstance<StaminaSlot2>().FunctionalItem.SetDefaults(item.type);
+                    item.TurnToAir();
+                    SoundEngine.PlaySound(SoundID.Grab);
+                    return false;
+                }
+                // if both slots have an item, swap current item with top slot
+                else if (ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != 0 && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type != 0)
+                {
+                    Item scrollInSlot = new Item();
+                    scrollInSlot.SetDefaults(ModContent.GetInstance<StaminaSlot>().FunctionalItem.type);
+
+                    ModContent.GetInstance<StaminaSlot>().FunctionalItem.SetDefaults(item.type);
+                    item.SetDefaults(scrollInSlot.type);
+
+                    SoundEngine.PlaySound(SoundID.Grab);
+                    return false;
+                }
+            }
             if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome && ModContent.GetInstance<TomeSlot>().FunctionalItem.type != 0)
             {
                 Item tomeInSlot = new Item();
@@ -487,6 +510,11 @@ public class AvalonGlobalItem : GlobalItem
             }
         }*/
         #endregion herb seed block swap
+
+        //if (Main.playerInventory && item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
+        //{
+        //    Main.EquipPage = 2;
+        //}
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
@@ -689,6 +717,10 @@ public class AvalonGlobalItem : GlobalItem
     public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)
     {
         if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome && slot < 19 && !modded)
+        {
+            return false;
+        }
+        if (item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll && slot < 19 && !modded)
         {
             return false;
         }
@@ -1094,7 +1126,7 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override bool AllowPrefix(Item item, int pre)
     {
-        if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)
+        if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome || item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
         {
             return false;
         }
@@ -1106,7 +1138,8 @@ public class AvalonGlobalItem : GlobalItem
         {
             return true;
         }
-        if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome && (pre == -1 || pre == -3))
+        if ((item.GetGlobalItem<AvalonGlobalItemInstance>().Tome ||
+            item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll) && (pre == -1 || pre == -3))
         {
             return false;
         }

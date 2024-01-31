@@ -17,6 +17,7 @@ public class AvalonGlobalItemInstance : GlobalItem
     public bool WorksInVanity { get; set; }
     public int RiftTimeLeft { get; set; }
     public int TomeGrade { get; set; }
+    public bool StaminaScroll { get; set; }
 
     public override GlobalItem Clone(Item item, Item itemClone)
     {
@@ -28,6 +29,7 @@ public class AvalonGlobalItemInstance : GlobalItem
         clone.WorksInVanity = WorksInVanity;
         clone.RiftTimeLeft = RiftTimeLeft;
         clone.TomeGrade = TomeGrade;
+        clone.StaminaScroll = StaminaScroll;
         return clone;
     }
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -82,7 +84,8 @@ public class AvalonGlobalItemInstance : GlobalItem
         {
             return true;
         }
-        if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome && (pre == -1 || pre == -3))
+        if ((item.GetGlobalItem<AvalonGlobalItemInstance>().Tome ||
+            item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll) && (pre == -1 || pre == -3))
         {
             return false;
         }

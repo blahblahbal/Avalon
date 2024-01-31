@@ -27,7 +27,7 @@ class ZincHammer : ModItem
     public override void AddRecipes()
     {
         Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 10)
+            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 8)
             .AddRecipeGroup(RecipeGroupID.Wood, 3)
             .AddTile(TileID.Anvils)
             .Register();

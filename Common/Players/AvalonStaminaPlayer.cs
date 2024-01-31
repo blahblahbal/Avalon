@@ -52,6 +52,11 @@ public class AvalonStaminaPlayer : ModPlayer
         StamFlower = false;
         if (EnergyCrystal) { StaminaRegen = 800; StaminaRegenCost = 800; }
         else { StaminaRegen = 1000; StaminaRegenCost = 1000; }
+
+        FlightRestoreUnlocked = false;
+        TeleportUnlocked = false;
+        SprintUnlocked = false;
+        SwimmingUnlocked = false;
     }
     public void QuickStamina(int stamNeeded = 0) // todo: make stamina flower not allow you to consume stam pots that wouldn't allow you to continue using stamina
     {
@@ -287,7 +292,7 @@ public class AvalonStaminaPlayer : ModPlayer
     public override void PostUpdateRunSpeeds()
     {
         // swimming
-        if (Player.wet && Player.velocity != Vector2.Zero && !Player.accMerman && ActivateSwim &&
+        if (Player.wet && Player.velocity != Vector2.Zero && !Player.accMerman &&
             SwimmingUnlocked)
         {
             bool flag15 = true;
@@ -330,7 +335,7 @@ public class AvalonStaminaPlayer : ModPlayer
             }
         }
         // sprinting
-        if (ActivateSprint)
+        if (SprintUnlocked)
         {
             if ((Player.controlRight || Player.controlLeft) && Player.velocity.X != 0f)
             {
@@ -443,12 +448,6 @@ public class AvalonStaminaPlayer : ModPlayer
             QuickStamina();
         }
 
-        if (KeybindSystem.SprintHotkey.JustPressed && SprintUnlocked)
-        {
-            ActivateSprint = !ActivateSprint;
-            Main.NewText(!ActivateSprint ? "Sprinting Off" : "Sprinting On");
-        }
-
         if (KeybindSystem.DashHotkey.JustPressed)
         {
             StamDashKey = !StamDashKey;
@@ -487,10 +486,10 @@ public class AvalonStaminaPlayer : ModPlayer
     public override void SaveData(TagCompound tag)
     {
         tag["Avalon:Stamina"] = StatStamMax;
-        tag["Avalon:TeleportUnlocked"] = TeleportUnlocked;
-        tag["Avalon:SwimmingUnlocked"] = SwimmingUnlocked;
-        tag["Avalon:SprintUnlocked"] = SprintUnlocked;
-        tag["Avalon:FlightRestoreUnlocked"] = FlightRestoreUnlocked;
+        //tag["Avalon:TeleportUnlocked"] = TeleportUnlocked;
+        //tag["Avalon:SwimmingUnlocked"] = SwimmingUnlocked;
+        //tag["Avalon:SprintUnlocked"] = SprintUnlocked;
+        //tag["Avalon:FlightRestoreUnlocked"] = FlightRestoreUnlocked;
         tag["Avalon:EnergyCrystal"] = EnergyCrystal;
     }
     public override void LoadData(TagCompound tag)
@@ -499,22 +498,22 @@ public class AvalonStaminaPlayer : ModPlayer
         {
             StatStamMax = tag.GetAsInt("Avalon:Stamina");
         }
-        if (tag.ContainsKey("Avalon:TeleportUnlocked"))
-        {
-            TeleportUnlocked = tag.Get<bool>("Avalon:TeleportUnlocked");
-        }
-        if (tag.ContainsKey("Avalon:SwimmingUnlocked"))
-        {
-            SwimmingUnlocked = tag.Get<bool>("Avalon:SwimmingUnlocked");
-        }
-        if (tag.ContainsKey("Avalon:SprintUnlocked"))
-        {
-            SprintUnlocked = tag.Get<bool>("Avalon:SprintUnlocked");
-        }
-        if (tag.ContainsKey("Avalon:FlightRestoreUnlocked"))
-        {
-            FlightRestoreUnlocked = tag.Get<bool>("Avalon:FlightRestoreUnlocked");
-        }
+        //if (tag.ContainsKey("Avalon:TeleportUnlocked"))
+        //{
+        //    TeleportUnlocked = tag.Get<bool>("Avalon:TeleportUnlocked");
+        //}
+        //if (tag.ContainsKey("Avalon:SwimmingUnlocked"))
+        //{
+        //    SwimmingUnlocked = tag.Get<bool>("Avalon:SwimmingUnlocked");
+        //}
+        //if (tag.ContainsKey("Avalon:SprintUnlocked"))
+        //{
+        //    SprintUnlocked = tag.Get<bool>("Avalon:SprintUnlocked");
+        //}
+        //if (tag.ContainsKey("Avalon:FlightRestoreUnlocked"))
+        //{
+        //    FlightRestoreUnlocked = tag.Get<bool>("Avalon:FlightRestoreUnlocked");
+        //}
         if (tag.ContainsKey("Avalon:EnergyCrystal"))
         {
             EnergyCrystal = tag.Get<bool>("Avalon:EnergyCrystal");

@@ -27,7 +27,7 @@ class NickelHammer : ModItem
     public override void AddRecipes()
     {
         Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 10)
+            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 8)
             .AddRecipeGroup(RecipeGroupID.Wood, 3)
             .AddTile(TileID.Anvils)
             .Register();

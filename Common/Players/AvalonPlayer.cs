@@ -541,6 +541,7 @@ public class AvalonPlayer : ModPlayer
     {
         OilBottleTimer--;
         if (OilBottleTimer < 0) OilBottleTimer = 0;
+        
         if (Player.HasItem(ItemID.LargeRuby) && Player.HasItem(ItemID.LargeAmber) && Player.HasItem(ItemID.LargeTopaz) && Player.HasItem(ModContent.ItemType<LargePeridot>()) &&
             Player.HasItem(ItemID.LargeEmerald) && Player.HasItem(ModContent.ItemType<LargeTourmaline>()) && Player.HasItem(ItemID.LargeSapphire) && Player.HasItem(ItemID.LargeAmethyst) &&
             Player.HasItem(ItemID.LargeDiamond) && Player.HasItem(ModContent.ItemType<LargeZircon>()))
@@ -986,6 +987,8 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdateEquips()
     {
+
+
         #region double tap keys
         for (int m = 0; m < 2; m++)
         {
