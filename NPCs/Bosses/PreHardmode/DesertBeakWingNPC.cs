@@ -22,8 +22,8 @@ internal class DesertBeakWingNPC : ModNPC
     {
         NPC.damage = 45;
         NPC.noTileCollide = true;
-        NPC.lifeMax = 4650;
-        NPC.defense = 40;
+        NPC.lifeMax = 4150;
+        NPC.defense = 30;
         NPC.noGravity = true;
         NPC.width = 77;
         NPC.aiStyle = -1;
