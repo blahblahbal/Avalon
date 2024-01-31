@@ -7565,7 +7565,7 @@ Mods: {
 
 			HeartstoneWorkBench: {
 				DisplayName: Heartstone Work Bench
-				Tooltip: ""
+				Tooltip: Used for basic crafting
 			}
 
 			HeartstonePlatform: {
