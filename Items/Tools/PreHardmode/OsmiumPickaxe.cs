@@ -33,11 +33,4 @@ public class OsmiumPickaxe : ModItem
             .AddTile(TileID.Anvils)
             .Register();
     }
-    public override void HoldItem(Player player)
-    {
-        if (player.inventory[player.selectedItem].type == Type)
-        {
-            player.pickSpeed -= 0.5f;
-        }
-    }
 }

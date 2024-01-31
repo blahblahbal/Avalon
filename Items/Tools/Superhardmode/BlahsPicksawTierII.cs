@@ -33,13 +33,6 @@ class BlahsPicksawTierII : ModItem
             Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
         }
     }
-    public override void HoldItem(Player player)
-    {
-        if (player.inventory[player.selectedItem].type == Item.type)
-        {
-            player.pickSpeed -= 0.75f;
-        }
-    }
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
         Rectangle dims = this.GetDims();

@@ -14,7 +14,7 @@ class FrozenLyre : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        //Item.UseSound = SoundID.Item26;
+        Item.UseSound = note;
         Item.DamageType = DamageClass.Magic;
         Item.damage = 16;
         Item.autoReuse = true;
@@ -40,11 +40,6 @@ class FrozenLyre : ModItem
         PitchVariance = 0.5f,
         MaxInstances = 10,
     };
-    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-    {
-        SoundEngine.PlaySound(note, player.Center);
-        return true;
-    }
     public override Vector2? HoldoutOffset()
     {
         return new Vector2(-6, 0);

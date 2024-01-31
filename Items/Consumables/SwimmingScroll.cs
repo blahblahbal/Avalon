@@ -24,10 +24,10 @@ class SwimmingScroll : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.Book)
-            .AddIngredient(ItemID.Flipper)
+            .AddIngredient(ItemID.Leather, 2)
+            .AddIngredient(ItemID.FlipperPotion, 2)
             .AddIngredient(ModContent.ItemType<StaminaCrystal>())
-            .AddTile(TileID.Bookcases)
+            .AddTile(TileID.Loom)
             .Register();
     }
     public override void UpdateAccessory(Player player, bool hideVisual)

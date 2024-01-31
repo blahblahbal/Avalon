@@ -24,11 +24,11 @@ class FlightTimeScroll : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.Book)
+            .AddIngredient(ItemID.Leather, 2)
             .AddIngredient(ItemID.Feather, 20)
             .AddIngredient(ItemID.SoulofFlight, 15)
             .AddIngredient(ModContent.ItemType<StaminaCrystal>())
-            .AddTile(TileID.Bookcases)
+            .AddTile(TileID.Loom)
             .Register();
     }
     public override void UpdateAccessory(Player player, bool hideVisual)

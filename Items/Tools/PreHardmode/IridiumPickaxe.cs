@@ -24,13 +24,6 @@ class IridiumPickaxe : ModItem
         Item.value = Item.sellPrice(0, 1, 0, 0);
         Item.useAnimation = 15;
     }
-    public override void HoldItem(Player player)
-    {
-        if (player.inventory[player.selectedItem].type == Type)
-        {
-            player.pickSpeed -= 0.5f;
-        }
-    }
     public override void AddRecipes()
     {
         Recipe.Create(Type)

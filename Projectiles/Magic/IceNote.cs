@@ -19,6 +19,13 @@ public class IceNote : ModProjectile
         Projectile.coldDamage = true;
         DrawOriginOffsetY -= 2;
     }
+    public SoundStyle note = new SoundStyle("Terraria/Sounds/Item_26")
+    {
+        Volume = 1f,
+        Pitch = 0f,
+        PitchVariance = 0.5f,
+        MaxInstances = 10,
+    };
     public override Color? GetAlpha(Color lightColor)
     {
         return new Color(255, 255, 255, 10);

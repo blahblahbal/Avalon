@@ -7601,6 +7601,16 @@ Mods: {
 				Tooltip: ""
 				DisplayName: Heartstone Toilet
 			}
+
+			MiningScroll: {
+				DisplayName: Mining Scroll
+				Tooltip: Unlocks stamina mining speed
+			}
+
+			WallSlidingScroll: {
+				DisplayName: Wall Sliding Scroll
+				Tooltip: Unlocks stamina wall sliding
+			}
 		}
 
 		InfoDisplays: {
@@ -8482,6 +8492,11 @@ Mods: {
 			SanguineSacrifice: {
 				DisplayName: Sanguine Sacrifice
 				Description: Blood sacrifice weapons are more powerful
+			}
+
+			StaminaMining: {
+				DisplayName: Stamina Mining
+				Description: Mods.Avalon.Buffs.StaminaMining.Description
 			}
 		}
 

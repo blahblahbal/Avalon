@@ -4,6 +4,8 @@ using Avalon.Buffs.Debuffs;
 using Avalon.Dusts;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Other;
+using Avalon.Items.Tools.PreHardmode;
+using Avalon.Items.Tools.Superhardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Projectiles;
@@ -754,7 +756,7 @@ public class AvalonPlayer : ModPlayer
                 }
             }
         }
-        if (!InBossFight)
+        if (!InBossFight && ModContent.GetInstance<AvalonConfig>().ReducedRespawnTimer)
         {
             Player.respawnTimer = (int)(Player.respawnTimer = 60 * 5);
         }
@@ -846,12 +848,12 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostHurt(Player.HurtInfo info)
     {
-        if (Player.miscEquips[4].type == ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>())
+        if (Player.miscEquips[Player.miscSlotHook].type == ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>())
         {
             int proj = -1;
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
-                if (Main.projectile[i].type == ModContent.ProjectileType<EruptionHook>() && Main.projectile[i].owner == Player.whoAmI)
+                if (Main.projectile[i].type == ModContent.ProjectileType<Projectiles.Tools.EruptionHook>() && Main.projectile[i].owner == Player.whoAmI)
                 {
                     proj = i;
                     break;
@@ -987,7 +989,14 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdateEquips()
     {
-
+        if (Player.HeldItem.type == ModContent.ItemType<RhodiumPickaxe>() || Player.HeldItem.type == ModContent.ItemType<OsmiumPickaxe>() || Player.HeldItem.type == ModContent.ItemType<IridiumPickaxe>())
+        {
+            Player.pickSpeed -= 0.5f;
+        }
+        else if (Player.HeldItem.type == ModContent.ItemType<BlahsPicksawTierII>())
+        {
+            Player.pickSpeed -= 0.75f;
+        }
 
         #region double tap keys
         for (int m = 0; m < 2; m++)

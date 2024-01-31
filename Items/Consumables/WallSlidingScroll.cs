@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class SprintScroll : ModItem
+class WallSlidingScroll : ModItem
 {
     public override void SetDefaults()
     {
@@ -25,7 +25,8 @@ class SprintScroll : ModItem
     {
         CreateRecipe()
             .AddIngredient(ItemID.Leather, 2)
-            .AddIngredient(ItemID.SwiftnessPotion, 2)
+            .AddIngredient(ItemID.Rope, 20)
+            .AddIngredient(ItemID.Cobweb, 30)
             .AddIngredient(ModContent.ItemType<StaminaCrystal>())
             .AddTile(TileID.Loom)
             .Register();
@@ -34,7 +35,7 @@ class SprintScroll : ModItem
     {
         if (!hideVisual)
         {
-            player.GetModPlayer<AvalonStaminaPlayer>().SprintUnlocked = true;
+            player.GetModPlayer<AvalonStaminaPlayer>().WallSlidingUnlocked = true;
         }
     }
 }

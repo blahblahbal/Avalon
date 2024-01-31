@@ -23,12 +23,12 @@ class TeleportScroll : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1)
-            .AddIngredient(ItemID.Book)
+        CreateRecipe()
+            .AddIngredient(ItemID.Leather, 2)
             .AddIngredient(ModContent.ItemType<Material.ChaosDust>(), 15)
             .AddIngredient(ItemID.SoulofSight, 5)
             .AddIngredient(ModContent.ItemType<StaminaCrystal>())
-            .AddTile(TileID.Bookcases)
+            .AddTile(TileID.Loom)
             .Register();
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
@@ -38,13 +38,4 @@ class TeleportScroll : ModItem
             player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked = true;
         }
     }
-    //public override bool CanUseItem(Player player)
-    //{
-    //    return !player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked;
-    //}
-    //public override bool? UseItem(Player player)
-    //{
-    //    player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked = true;
-    //    return true;
-    //}
 }

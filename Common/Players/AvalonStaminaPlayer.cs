@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -34,17 +35,20 @@ public class AvalonStaminaPlayer : ModPlayer
     public int StatStamMax2;
     public byte StaminaCooldown;
     public byte StaminaSprintCooldown;
+    public byte StaminaMiningCD;
+    public byte StaminaSlidingCD;
 
 
     public bool ActivateSprint;
     public bool ActivateSwim;
     public bool ActivateSlide;
-    public bool ActivateRocketJump;
     public bool StamDashKey;
 
     public bool SwimmingUnlocked;
     public bool TeleportUnlocked;
     public bool RollDodgeUnlocked;
+    public bool MiningSpeedUnlocked;
+    public bool WallSlidingUnlocked;
 
     public override void ResetEffects()
     {
@@ -57,6 +61,8 @@ public class AvalonStaminaPlayer : ModPlayer
         TeleportUnlocked = false;
         SprintUnlocked = false;
         SwimmingUnlocked = false;
+        MiningSpeedUnlocked = false;
+        WallSlidingUnlocked = false;
     }
     public void QuickStamina(int stamNeeded = 0) // todo: make stamina flower not allow you to consume stam pots that wouldn't allow you to continue using stamina
     {
@@ -479,6 +485,238 @@ public class AvalonStaminaPlayer : ModPlayer
             }
         }
     }
+    public void WallslideMovement()
+    {
+        Player.sliding = false;
+        if (Player.slideDir == 0 || Player.spikedBoots <= 0 || Player.mount.Active || ((!Player.controlLeft || Player.slideDir != -1) && (!Player.controlRight || Player.slideDir != 1)))
+        {
+            return;
+        }
+        if (Player.spikedBoots >= 2) return;
+        bool doSliding = true;
+        StaminaSlidingCD++;
+        StaminaRegenCount = 0;
+        if (StaminaSlidingCD >= (Player.HasItemInArmor(ItemID.ClimbingClaws) || Player.HasItemInArmor(ItemID.ShoeSpikes) ? 12 : 6))
+        {
+            int amt = 1;
+            if (StaminaDrain)
+            {
+                amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+            }
+
+            if (StatStam >= amt)
+            {
+                StatStam -= amt;
+            }
+            else if (StamFlower)
+            {
+                QuickStamina();
+                if (StatStam >= amt)
+                {
+                    StatStam -= amt;
+                }
+            }
+
+            if (StatStam <= 0)
+            {
+                StatStam = 0;
+                doSliding = false;
+            }
+
+            StaminaSlidingCD = 0;
+        }
+        bool flag = false;
+        float num = Player.position.X;
+        if (Player.slideDir == 1)
+        {
+            num += Player.width;
+        }
+        num += Player.slideDir;
+        float num2 = Player.position.Y + Player.height + 1f;
+        if (Player.gravDir < 0f)
+        {
+            num2 = Player.position.Y - 1f;
+        }
+        num /= 16f;
+        num2 /= 16f;
+        if (WorldGen.SolidTile((int)num, (int)num2) && WorldGen.SolidTile((int)num, (int)num2 - 1))
+        {
+            flag = true;
+        }
+        // both
+        if (Player.spikedBoots >= 2)
+        {
+            if (!flag || ((!(Player.velocity.Y > 0f) || Player.gravDir != 1f) && (!(Player.velocity.Y < Player.gravity) || Player.gravDir != -1f)))
+            {
+                return;
+            }
+            float num3 = Player.gravity;
+            if (Player.slowFall)
+            {
+                num3 = ((!Player.TryingToHoverUp) ? (Player.gravity / 3f * Player.gravDir) : (Player.gravity / 10f * Player.gravDir));
+            }
+            Player.fallStart = (int)(Player.position.Y / 16f);
+            if ((Player.controlDown && Player.gravDir == 1f) || (Player.controlUp && Player.gravDir == -1f))
+            {
+                Player.velocity.Y = 4f * Player.gravDir;
+                int num4 = Dust.NewDust(new Vector2(Player.position.X + Player.width / 2 + (Player.width / 2 - 4) * Player.slideDir, Player.position.Y + Player.height / 2 + (Player.height / 2 - 4) * Player.gravDir), 8, 8, 31);
+                if (Player.slideDir < 0)
+                {
+                    Main.dust[num4].position.X -= 10f;
+                }
+                if (Player.gravDir < 0f)
+                {
+                    Main.dust[num4].position.Y -= 12f;
+                }
+                Dust obj = Main.dust[num4];
+                obj.velocity *= 0.1f;
+                Main.dust[num4].scale *= 1.2f;
+                Main.dust[num4].noGravity = true;
+                Main.dust[num4].shader = GameShaders.Armor.GetSecondaryShader(Player.cShoe, Player);
+            }
+            else if (Player.gravDir == -1f)
+            {
+                Player.velocity.Y = (0f - num3 + 1E-05f) * Player.gravDir;
+            }
+            else
+            {
+                Player.velocity.Y = (0f - num3 + 1E-05f) * Player.gravDir;
+            }
+            Player.sliding = true;
+        }
+        else if ((flag && Player.velocity.Y > 0.5 && Player.gravDir == 1f) || (Player.velocity.Y < -0.5 && Player.gravDir == -1f))
+        {
+            Player.fallStart = (int)(Player.position.Y / 16f);
+            if (Player.controlDown)
+            {
+                Player.velocity.Y = 4f * Player.gravDir;
+            }
+            else
+            {
+                Player.velocity.Y = 0.5f * Player.gravDir;
+            }
+            Player.sliding = true;
+            int num5 = Dust.NewDust(new Vector2(Player.position.X + Player.width / 2 + (Player.width / 2 - 4) * Player.slideDir, Player.position.Y + Player.height / 2 + (Player.height / 2 - 4) * Player.gravDir), 8, 8, 31);
+            if (Player.slideDir < 0)
+            {
+                Main.dust[num5].position.X -= 10f;
+            }
+            if (Player.gravDir < 0f)
+            {
+                Main.dust[num5].position.Y -= 12f;
+            }
+            Dust obj2 = Main.dust[num5];
+            obj2.velocity *= 0.1f;
+            Main.dust[num5].scale *= 1.2f;
+            Main.dust[num5].noGravity = true;
+            Main.dust[num5].shader = GameShaders.Armor.GetSecondaryShader(Player.cShoe, Player);
+        }
+    }
+    public override void PostUpdateEquips()
+    {
+        bool flag = false;
+        float num = Player.position.X;
+        if (Player.slideDir == 1)
+        {
+            num += Player.width;
+        }
+        num += Player.slideDir;
+        float num2 = Player.position.Y + Player.height + 1f;
+        if (Player.gravDir < 0f)
+        {
+            num2 = Player.position.Y - 1f;
+        }
+        num /= 16f;
+        num2 /= 16f;
+        if (WorldGen.SolidTile((int)num, (int)num2) && WorldGen.SolidTile((int)num, (int)num2 - 1) && Player.velocity.Y > 0)
+        {
+            flag = true;
+        }
+        if (WallSlidingUnlocked && Player.spikedBoots <= 2 && flag)
+        {
+            bool doSliding = true;
+            StaminaSlidingCD++;
+            StaminaRegenCount = 0;
+            
+            if (StaminaSlidingCD >= (Player.spikedBoots == 1 ? 12 : 6))
+            {
+                int amt = 1;
+                if (StaminaDrain)
+                {
+                    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+                }
+
+                if (StatStam >= amt)
+                {
+                    StatStam -= amt;
+                }
+                else if (StamFlower)
+                {
+                    QuickStamina();
+                    if (StatStam >= amt)
+                    {
+                        StatStam -= amt;
+                    }
+                }
+
+                if (StatStam <= 0)
+                {
+                    StatStam = 0;
+                    doSliding = false;
+                }
+
+                StaminaSlidingCD = 0;
+            }
+            if (doSliding)
+            {
+                Player.spikedBoots++;
+            }
+        }
+        if (MiningSpeedUnlocked && Player.HeldItem.pick > 0 && Player.ItemAnimationActive && Player.pickSpeed > 0.4f)
+        {
+            bool doMining = true;
+            StaminaMiningCD++;
+            StaminaRegenCount = 0;
+            if (StaminaMiningCD >= 30)
+            {
+                int amt = 5 - (int)(1 - Player.pickSpeed * 5);
+                if (StaminaDrain)
+                {
+                    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+                }
+
+                if (StatStam >= amt)
+                {
+                    StatStam -= amt;
+                }
+                else if (StamFlower)
+                {
+                    QuickStamina();
+                    if (StatStam >= amt)
+                    {
+                        StatStam -= amt;
+                    }
+                }
+
+                if (StatStam <= 0)
+                {
+                    StatStam = 0;
+                    doMining = false;
+                }
+
+                StaminaMiningCD = 0;
+            }
+
+            if (doMining)
+            {
+                Player.pickSpeed -= Player.pickSpeed * 0.15f;
+                if (Player.pickSpeed < 0.4f)
+                {
+                    Player.pickSpeed = 0.4f;
+                }
+            }
+        }
+    }
     public override void UpdateLifeRegen()
     {
         UpdateStaminaRegen();
@@ -486,10 +724,6 @@ public class AvalonStaminaPlayer : ModPlayer
     public override void SaveData(TagCompound tag)
     {
         tag["Avalon:Stamina"] = StatStamMax;
-        //tag["Avalon:TeleportUnlocked"] = TeleportUnlocked;
-        //tag["Avalon:SwimmingUnlocked"] = SwimmingUnlocked;
-        //tag["Avalon:SprintUnlocked"] = SprintUnlocked;
-        //tag["Avalon:FlightRestoreUnlocked"] = FlightRestoreUnlocked;
         tag["Avalon:EnergyCrystal"] = EnergyCrystal;
     }
     public override void LoadData(TagCompound tag)
@@ -498,22 +732,6 @@ public class AvalonStaminaPlayer : ModPlayer
         {
             StatStamMax = tag.GetAsInt("Avalon:Stamina");
         }
-        //if (tag.ContainsKey("Avalon:TeleportUnlocked"))
-        //{
-        //    TeleportUnlocked = tag.Get<bool>("Avalon:TeleportUnlocked");
-        //}
-        //if (tag.ContainsKey("Avalon:SwimmingUnlocked"))
-        //{
-        //    SwimmingUnlocked = tag.Get<bool>("Avalon:SwimmingUnlocked");
-        //}
-        //if (tag.ContainsKey("Avalon:SprintUnlocked"))
-        //{
-        //    SprintUnlocked = tag.Get<bool>("Avalon:SprintUnlocked");
-        //}
-        //if (tag.ContainsKey("Avalon:FlightRestoreUnlocked"))
-        //{
-        //    FlightRestoreUnlocked = tag.Get<bool>("Avalon:FlightRestoreUnlocked");
-        //}
         if (tag.ContainsKey("Avalon:EnergyCrystal"))
         {
             EnergyCrystal = tag.Get<bool>("Avalon:EnergyCrystal");
@@ -522,7 +740,7 @@ public class AvalonStaminaPlayer : ModPlayer
     public void StaminaHealEffect(int healAmount, bool broadcast = true)
     {
         CombatText.NewText(Player.getRect(), new Color(5, 200, 255, 255), string.Concat(healAmount), false, false);
-        if (broadcast && Main.netMode == 1 && Player.whoAmI == Main.myPlayer)
+        if (broadcast && Main.netMode == NetmodeID.MultiplayerClient && Player.whoAmI == Main.myPlayer)
         {
             ModPacket packet = Network.MessageHandler.GetPacket(Network.MessageID.StaminaHeal);
             packet.Write(Player.whoAmI);
