@@ -21,7 +21,7 @@ public class WoodenClub : ModProjectile
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
     }
     public Player player => Main.player[Projectile.owner];
-    public int SwingSpeed = 55;
+    public int SwingSpeed = 255;
     public override void SetDefaults()
     {
         Projectile.width = 26;
@@ -52,29 +52,37 @@ public class WoodenClub : ModProjectile
 
         if (firstFrame)
         {
-            SwingSpeed = player.HeldItem.useAnimation;
-            Projectile.timeLeft = SwingSpeed;
+            Projectile.timeLeft = player.HeldItem.useAnimation;
 
             toMouse = Vector2.Normalize(Main.MouseWorld - player.MountedCenter) * player.direction;
             posY = player.Center.Y - Projectile.Center.Y;
             posY = MathF.Sign(posY);
             swingRadius = Projectile.Center - player.MountedCenter;
-            swingRadius = swingRadius.RotatedBy(toMouse.ToRotation());
-            Projectile.scale = player.HeldItem.scale;
+            swingRadius = swingRadius.RotatedBy(toMouse.ToRotation()) * MathF.Pow(0.997f, 21f);
+            Projectile.scale = player.HeldItem.scale * MathF.Pow(0.997f, 21f);
             Projectile.Size *= (float)(player.HeldItem.scale < 1 ? 1 : 1 + player.HeldItem.scale - scaleMult); // this isn't ENTIRELY accurate, but oh well
             firstFrame = false;
         }
+        if (Projectile.timeLeft > 34)
+        {
+            Projectile.scale /= 0.997f;
+            swingRadius /= 0.997f;
+        }
+        if (Projectile.timeLeft > player.HeldItem.useAnimation - 40 && SwingSpeed > player.HeldItem.useAnimation)
+        {
+            SwingSpeed -= (int)(10 - Math.Sqrt(Projectile.timeLeft)) * 5;
+        }
 
-        swingRadius = swingRadius.RotatedBy(speed * swordVel / SwingSpeed * player.direction * posY);
+        swingRadius = swingRadius.RotatedBy(speed * swordVel / player.HeldItem.useAnimation * player.direction * posY);
 
         if (Projectile.timeLeft < 20)
         {
-            Projectile.scale *= 0.997f;
-            swingRadius *= 0.997f;
+            Projectile.scale *= 0.996f;
+            swingRadius *= 0.996f;
         }
 
-        swordVel = MathHelper.Lerp(0f, 2f, Projectile.timeLeft / (float)SwingSpeed);
-        Vector2 HandPosition = player.MountedCenter + new Vector2(player.direction * -4f,0);
+        swordVel = MathHelper.Lerp(0f, 2.4f, Projectile.timeLeft / (float)SwingSpeed);
+        Vector2 HandPosition = player.MountedCenter + new Vector2(player.direction * -4f, 0);
         Projectile.Center = swingRadius + HandPosition;
 
         Projectile.rotation = Vector2.Normalize(Projectile.Center - HandPosition).ToRotation() + (45 * (MathHelper.Pi / 180));
@@ -82,7 +90,7 @@ public class WoodenClub : ModProjectile
     }
     public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
     {
-        if (targetHitbox.Intersects(projHitbox) || targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter,Projectile.Center.Distance(player.Center),Projectile.rotation - (45 * (MathHelper.Pi / 180)), MathHelper.Pi / 16))
+        if (targetHitbox.Intersects(projHitbox) || targetHitbox.IntersectsConeSlowMoreAccurate(player.MountedCenter, Projectile.Center.Distance(player.Center), Projectile.rotation - (45 * (MathHelper.Pi / 180)), MathHelper.Pi / 16))
         {
             return true;
         }
