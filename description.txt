@@ -16,10 +16,7 @@ Discord link: https://discord.gg/rtm99Uq
 Report any bugs you find in #bug-reports on the discord.
 
 Updates:
-v1.0.1:
-- "Fixed" a bug that caused the server to crash when loading a world in multiplayer.
-
-
+Check the change notes section for patch notes.
 
 
 Credits:
