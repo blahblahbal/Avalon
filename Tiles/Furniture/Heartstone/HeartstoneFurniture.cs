@@ -217,6 +217,7 @@ public class HeartstoneSink : SinkTemplate { }
 
 public class HeartstoneSofa : SofaTemplate
 {
+    public override float SittingHeight => 1;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneSofa>();
 }
 
