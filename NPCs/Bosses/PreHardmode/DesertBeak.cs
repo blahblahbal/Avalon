@@ -64,8 +64,8 @@ public class DesertBeak : ModNPC
         NPC.timeLeft = 22500;
         NPC.height = 78;
         NPC.knockBackResist = 0f;
-        NPC.HitSound = SoundID.NPCHit28;
-        NPC.DeathSound = SoundID.NPCDeath31;
+        NPC.HitSound = new SoundStyle("Terraria/Sounds/NPC_Hit_28") { Pitch = -0.09f };
+        NPC.DeathSound = new SoundStyle("Terraria/Sounds/NPC_Killed_31") { Pitch = -0.09f };
         Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeak") : MusicID.Boss4;
         NPC.scale = 1f;
         phase = 0;

@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.ID;
 using Terraria.Localization;
@@ -32,8 +33,8 @@ internal class DesertBeakWingNPC : ModNPC
         NPC.timeLeft = 22500;
         NPC.height = 40;
         NPC.knockBackResist = 0f;
-        NPC.HitSound = SoundID.NPCHit28;
-        NPC.DeathSound = SoundID.NPCDeath31;
+        NPC.HitSound = new SoundStyle("Terraria/Sounds/NPC_Hit_28") { Pitch = -0.1f };
+        NPC.DeathSound = new SoundStyle("Terraria/Sounds/NPC_Killed_31") { Pitch = -0.1f };
         NPC.scale = 1f;
     }
     public int MainBody

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,6 +28,8 @@ namespace Avalon.NPCs.Bosses.PreHardmode
             AnimationType = NPCID.Vulture;
             NPC.noTileCollide = true;
             NPC.aiStyle = NPCAIStyleID.DemonEye;
+            NPC.HitSound = new SoundStyle("Terraria/Sounds/NPC_Hit_28") { Pitch = 0.16f, Volume = 0.5f };
+            NPC.DeathSound = new SoundStyle("Terraria/Sounds/NPC_Killed_31") { Pitch = 0.16f, Volume = 0.5f };
         }
 
         public override bool? CanFallThroughPlatforms()
