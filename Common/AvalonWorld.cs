@@ -1438,6 +1438,13 @@ public class AvalonWorld : ModSystem
             DrawWorldSelectItemOverlay(self, spriteBatch);
         };
     }
+    public override void Unload()
+    {
+        On_UIWorldListItem.DrawSelf -= (orig, self, spriteBatch) => {
+            orig(self, spriteBatch);
+            DrawWorldSelectItemOverlay(self, spriteBatch);
+        };
+    }
 
     #region World%Calculations
     private void On_WorldGen_AddUpAlignmentCounts(On_WorldGen.orig_AddUpAlignmentCounts orig, bool clearCounts)
@@ -1577,7 +1584,7 @@ public class AvalonWorld : ModSystem
         bool data = uiItem.Data.TryGetHeaderData(ModContent.GetInstance<AvalonWorld>(), out var _data);
         UIElement WorldIcon = (UIElement)typeof(UIWorldListItem).GetField("_worldIcon", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(uiItem);
         WorldFileData Data = (WorldFileData)typeof(AWorldListItem).GetField("_data", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(uiItem);
-
+        WorldIcon.RemoveAllChildren();
         if (data)
         {
             #region RegularSeedIcon
