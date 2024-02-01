@@ -256,6 +256,8 @@ public class AvalonGlobalItem : GlobalItem
 
         ShimmerTransmute(ModContent.ItemType<Items.Other.UnstableCatalyzer>(), ModContent.ItemType<Items.Placeable.Crafting.Catalyzer>());
 
+        ShimmerTransmute(ModContent.ItemType<Items.Other.ContagionKey>(), ModContent.ItemType<Items.Placeable.Furniture.ContagionChest>());
+
         ShimmerTransmute(ModContent.ItemType<Zircon>(), ModContent.ItemType<Peridot>());
         ShimmerTransmute(ModContent.ItemType<Peridot>(), ModContent.ItemType<Tourmaline>());
         ShimmerTransmute(ModContent.ItemType<Tourmaline>(), ItemID.Diamond);

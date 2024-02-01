@@ -778,7 +778,6 @@ public class AvalonGlobalNPC : GlobalNPC
             bestiaryEntry.Info.Add(new ModBiomeBestiaryInfoElement(Mod, ModContent.GetInstance<ContagionCaveDesert>().DisplayName.Value, ModContent.GetInstance<ContagionCaveDesert>().BestiaryIcon, "Assets/Bestiary/ContagionBG", null));
         }
     }
-
     #region commented out incase i missed something
     //public override void ModifyGlobalLoot(GlobalLoot globalLoot)
     //{
@@ -803,7 +802,7 @@ public class AvalonGlobalNPC : GlobalNPC
 
     //    switch (npc.type)
     //    {
-    
+
     //        case NPCID.BoneSerpentHead:
     //            npcLoot.Add(ItemDropRule.Common(ItemID.Sunfury, 20));
     //            break;

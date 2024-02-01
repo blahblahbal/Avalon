@@ -15,6 +15,7 @@ using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tokens;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Vanity;
+using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
@@ -84,6 +85,9 @@ public class AvalonMobDrops : GlobalNPC
 
         switch (npc.type)
         {
+            case NPCID.RedDevil:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ForsakenRelic>(), 20));
+                break;
             case NPCID.Hellbat:
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BondrewdHelmet>(), 50));
                 break;
@@ -163,6 +167,60 @@ public class AvalonMobDrops : GlobalNPC
             case NPCID.GoblinThief:
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoblinDagger>(), 100));
                 break;
+            case NPCID.Golem:
+
+
+                // Get main drops and duplicate
+                OneFromRulesRule? oneFromRulesRule = null;
+                foreach (IItemDropRule rule in npcLoot.Get(false))
+                {
+                    if (rule is not LeadingConditionRule rule1)
+                    {
+                        continue;
+                    }
+
+                    foreach (IItemDropRuleChainAttempt chain in rule1.ChainedRules)
+                    {
+                        if (chain is not Chains.TryIfSucceeded { RuleToChain: OneFromRulesRule ruleMain })
+                        {
+                            continue;
+                        }
+
+                        oneFromRulesRule = ruleMain;
+                        break;
+                    }
+
+                    if (oneFromRulesRule != null)
+                    {
+                        IItemDropRule itemDropRule = ItemDropRule.Common(ItemID.Stynger);
+                        itemDropRule.OnSuccess(ItemDropRule.Common(ItemID.StyngerBolt, 1, 60, 180), hideLootReport: true);
+                        oneFromRulesRule = new OneFromRulesRule(1, itemDropRule,
+                            ItemDropRule.Common(ItemID.PossessedHatchet),
+                            ItemDropRule.Common(ItemID.SunStone),
+                            ItemDropRule.Common(ItemID.EyeoftheGolem),
+                            ItemDropRule.Common(ItemID.HeatRay),
+                            ItemDropRule.Common(ItemID.StaffofEarth),
+                            ItemDropRule.Common(ItemID.GolemFist),
+                            ItemDropRule.Common(ModContent.ItemType<EarthenInsignia>()),
+                            ItemDropRule.Common(ModContent.ItemType<HeartoftheGolem>()),
+                            ItemDropRule.Common(ModContent.ItemType<Sunstorm>()));
+                        break;
+                    }
+                }
+
+                //var condition = new Combine(true, null, new FirstTimeKillingGolem(), notExpertCondition);
+                //npcLoot.Add(ItemDropRule.ByCondition(condition, ItemID.Picksaw));
+                if (oneFromRulesRule != null)
+                {
+                    npcLoot.Add(new LeadingConditionRule(notExpertCondition)).OnSuccess(oneFromRulesRule.HideFromBestiary());
+                }
+                else
+                {
+                    Mod.Logger.Error("Extra normal mode drops for Golem failed to be added, please report this to the mod author.");
+                }
+
+                break;
+
         }
         //adhesive bandage
         if (npc.type is NPCID.Werewolf or NPCID.AnglerFish or NPCID.RustyArmoredBonesAxe or

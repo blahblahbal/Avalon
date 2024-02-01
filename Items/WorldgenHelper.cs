@@ -41,7 +41,7 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-            Crystals(x, y);
+            //Crystals(x, y);
             //World.Biomes.CrystalMines.Place(new Point(x, y));
 
             //WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
@@ -50,9 +50,9 @@ class WorldgenHelper : ModItem
             //WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
 
 
-            //int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
-            //Main.item[rift].velocity *= 0f;
-            //Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
+            int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
+            Main.item[rift].velocity *= 0f;
+            Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
         }
         return false;
     }

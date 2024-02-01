@@ -102,6 +102,10 @@ public class GenSystem : ModSystem
 
             // uncomment when sky fortress becomes a thing
             //tasks.Insert(underworld + 4, new SkyFortress());
+
+            currentPass = new ReplacePass("Replacing any improper ores", 25f);
+            tasks.Insert(underworld + 1, currentPass);
+            totalWeight += currentPass.Weight;
         }
 
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");

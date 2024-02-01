@@ -32,6 +32,13 @@ class Boltstone : ModItem
         Item.height = dims.Height;
     }
 
+    public override void AddRecipes()
+    {
+        CreateRecipe(25)
+            .AddIngredient(ModContent.ItemType<Consumables.StaminaCrystal>())
+            .AddTile(TileID.Furnaces)
+            .Register();
+    }
     //public override void AddRecipes()
     //{
     //    Recipe.Create(ModContent.ItemType<Items.Consumables.StaminaCrystal>()).AddIngredient(this, 35).AddTile(TileID.Furnaces).Register();

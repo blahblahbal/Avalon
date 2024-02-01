@@ -146,7 +146,7 @@ public class DeathMessages : ModHook
                 }
             }
             #endregion falling
-            #region drowing
+            #region drowning
             else if (other == 1)
             {
                 switch (Main.rand.Next(10) + 1)

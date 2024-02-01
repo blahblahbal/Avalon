@@ -228,6 +228,7 @@ public class AvalonPlayer : ModPlayer
     public bool ForceGambler;
     public bool OilBottle;
     public int OilBottleTimer;
+    public bool EarthInsig;
     #endregion
 
     #region buffs and debuffs
@@ -374,6 +375,7 @@ public class AvalonPlayer : ModPlayer
         DesertGambler = false;
         ForceGambler = false;
         OilBottle = false;
+        EarthInsig = false;
 
         // armor sets
         SkyBlessing = false;
@@ -1448,6 +1450,15 @@ public class AvalonPlayer : ModPlayer
     /// <inheritdoc />
     public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
     {
+        if (EarthInsig)
+        {
+            if (Data.Sets.Item.EarthRelatedItems[item.type])
+            {
+                modifiers.FinalDamage *= 1.2f;
+            }
+        }
+
+
         if (ZombieArmor && Vector2.Distance(Player.Center, target.Center) < 15 * 16)
         {
             modifiers.FlatBonusDamage += 5;
@@ -1501,6 +1512,14 @@ public class AvalonPlayer : ModPlayer
     }
     public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
+        if (EarthInsig)
+        {
+            if (Data.Sets.Projectile.EarthRelatedItems[proj.type])
+            {
+                modifiers.FinalDamage *= 1.2f;
+            }
+        }
+
         //if (ZombieArmor && Vector2.Distance(Player.Center, target.Center) < 15 * 16)
         //{
         //    modifiers.FlatBonusDamage += 5;

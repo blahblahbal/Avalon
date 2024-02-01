@@ -28,13 +28,13 @@ class FreezeBolt : ModItem
         Item.UseSound = SoundID.Item21;
     }
 
-    //public override void AddRecipes()
-    //{
-    //    Terraria.Recipe.Create(ModContent.ItemType<FreezeBolt>())
-    //        .AddIngredient(ItemID.WaterBolt)
-    //        .AddIngredient(ModContent.ItemType<Material.SoulofIce>(), 20)
-    //        .AddIngredient(ItemID.FrostCore, 2)
-    //        .AddTile(TileID.Bookcases)
-    //        .Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ItemID.WaterBolt)
+            .AddIngredient(ModContent.ItemType<Material.SoulofIce>(), 20)
+            .AddIngredient(ItemID.FrostCore, 2)
+            .AddTile(TileID.Bookcases)
+            .Register();
+    }
 }

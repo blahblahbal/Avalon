@@ -12,6 +12,7 @@ ItemName: {
 	CoinGun: Spend Shot
 	HighTestFishingLine: High Tensile Fishing Line
 	Volcano: Volcanic Greatsword
+    CrimsonPlanterBox: Bloodberry Planter Box
 }
 
 Mods: {
@@ -127,9 +128,9 @@ Mods: {
 			Fell_8: "{0} tripped."
 			Fell_9: "{0} underestimated the power of gravity."
 			Fell_10: "{0} forgot to jump."
-			Drowning_1: "{0} blub blub blub..."
-			Drowning_2: "{0} thought they could breathe water."
-			Drowning_3: "{0} asphyxiated."
+			Drowned_1: "{0} blub blub blub..."
+			Drowned_2: "{0} thought they could breathe water."
+			Drowned_3: "{0} asphyxiated."
 			Lava_1: "{0} took a bath in a lake of fire."
 			Lava_2: "{0} became a charcoal briquette."
 			Lava_3: "{0} is HOT HOT HOT."
@@ -7611,6 +7612,73 @@ Mods: {
 				DisplayName: Wall Sliding Scroll
 				Tooltip: Unlocks stamina wall sliding
 			}
+
+			GiftofStarpower: {
+				DisplayName: Giftof Starpower
+				Tooltip:
+					'''
+					20% decreased mana usage and +40 mana
+					Automatically use mana potions when needed
+					15% increased magic damage
+					'''
+			}
+
+			NaturesEndowment: {
+				DisplayName: Natures Endowment
+				Tooltip:
+					'''
+					25% decreased mana usage
+					+20 mana
+					'''
+			}
+
+			QuackinaBalloon: {
+				DisplayName: Quack in a Balloon
+				Tooltip:
+					'''
+					Allows the holder to double jump
+					Increases jump height
+					'May annoy others'
+					'''
+			}
+
+			QuackinaBottle: {
+				DisplayName: Quack in a Bottle
+				Tooltip:
+					'''
+					Allows the holder to double jump
+					'May annoy others'
+					'''
+			}
+
+			ForsakenRelic: {
+				DisplayName: Forsaken Relic
+				Tooltip: Increases damage and critical strike chance by 7% while invincible
+			}
+
+			ForsakenCross: {
+				DisplayName: Forsaken Cross
+				Tooltip:
+					'''
+					Increases damage and critical strike chance by 7% while invincible
+					Increases length of invincibility after taking damage
+					'''
+			}
+
+			EarthenInsignia: {
+				DisplayName: Earthen Insignia
+				Tooltip: Earth related items receive a stat boost
+			}
+
+			Sunstorm: {
+				DisplayName: Sunstorm
+				Tooltip: Fires beams from the sun itself
+			}
+
+			BloodberryPlanterBox: {
+				DisplayName: Bloodberry Planter Box
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7828,6 +7896,7 @@ Mods: {
 			OilBottle.DisplayName: Oil Bottle
 			OilExplosion.DisplayName: Oil Explosion
 			EruptionHookBoom.DisplayName: Eruption Hook Boom
+			Sunstorm.DisplayName: Sunstorm
 		}
 
 		NPCs: {

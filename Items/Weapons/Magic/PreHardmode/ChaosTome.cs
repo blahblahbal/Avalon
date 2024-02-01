@@ -13,7 +13,6 @@ class ChaosTome : ModItem
         Item.DamageType = DamageClass.Magic;
         Item.damage = 24;
         Item.autoReuse = true;
-        Item.useTurn = true;
         Item.shootSpeed = 8f;
         Item.mana = 8;
         Item.noMelee = true;

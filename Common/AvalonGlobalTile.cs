@@ -2,6 +2,7 @@ using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -161,25 +162,28 @@ public class AvalonGlobalTile : GlobalTile
     }
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
-        /*int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
+        int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
         if (pid >= 0)
         {
-            if (Main.player[pid].GetModPlayer<AvalonPlayer>().OreDupe && TileID.Sets.Ore[Main.tile[i, j].TileType])
+            if (TileID.Sets.Ore[Main.tile[i, j].TileType])
             {
-                if (Data.Sets.Tile.OresToChunks.ContainsKey(Main.tile[i, j].TileType))
+                if (Main.player[pid].GetModPlayer<AvalonPlayer>().OreDupe)
                 {
-                    int drop = Data.Sets.Tile.OresToChunks[Main.tile[i, j].TileType];
-                    int stack = 1;
-                    if (Main.rand.NextBool(3))
+                    if (Data.Sets.Tile.OresToChunks.ContainsKey(Main.tile[i, j].TileType))
                     {
-                        stack = 2;
+                        int drop = Data.Sets.Tile.OresToChunks[Main.tile[i, j].TileType];
+                        int stack = 1;
+                        if (Main.rand.NextBool(3))
+                        {
+                            stack = 2;
+                        }
+                        int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, drop, stack);
+                        if (Main.netMode == NetmodeID.Server)
+                        {
+                            NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
+                        }
+                        noItem = true;
                     }
-                    int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, drop, stack);
-                    if (Main.netMode == NetmodeID.Server)
-                    {
-                        NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
-                    }
-                    noItem = true;
                 }
             }
             // Probably doesn't work in multiplayer
@@ -187,6 +191,6 @@ public class AvalonGlobalTile : GlobalTile
             {
                 fail = true;
             }
-        }*/
+        }
     }
 }

@@ -65,4 +65,14 @@ public static class Projectile
         ModContent.ProjectileType<MarrowMasher>(),
         ModContent.ProjectileType<UrchinMace>(),
         ModContent.ProjectileType<CraniumCrusher>());
+
+    public static readonly bool[] EarthRelatedItems = ProjectileID.Sets.Factory.CreateBoolSet(
+        ProjectileID.BoulderStaffOfEarth,
+        ProjectileID.HeatRay,
+        ProjectileID.GolemFist,
+        ProjectileID.Stynger,
+        ProjectileID.PossessedHatchet,
+        ModContent.ProjectileType<PossessedFlamesaw>(),
+        ModContent.ProjectileType<PossessedFlamesawChop>()
+    );
 }

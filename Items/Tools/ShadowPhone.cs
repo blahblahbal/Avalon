@@ -482,6 +482,16 @@ class ShadowPhoneHome : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(Type)
+            .AddIngredient(ItemID.ShellphoneDummy)
+            .AddIngredient(ModContent.ItemType<EyeoftheGods>())
+            .AddIngredient(ItemID.FallenStar, 40)
+            .AddIngredient(ItemID.Diamond, 20)
+            .AddIngredient(ItemID.ChlorophyteBar, 7)
+            .AddIngredient(ItemID.Ectoplasm, 10)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+        Recipe.Create(Type)
             .AddIngredient(ItemID.Shellphone)
             .AddIngredient(ModContent.ItemType<EyeoftheGods>())
             .AddIngredient(ItemID.FallenStar, 40)

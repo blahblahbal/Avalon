@@ -1,6 +1,7 @@
 using Avalon.Items.Material.Herbs;
 using Avalon.Items.Placeable.Wall;
 using Avalon.Items.Tools.PreHardmode;
+using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using System.Collections.Generic;
 using Terraria.ID;
@@ -49,7 +50,7 @@ namespace Avalon.Data.Sets
             ModContent.ItemType<PurpleBrickWall>(),
             ModContent.ItemType<PurpleSlabWall>(),
             ModContent.ItemType<PurpleTiledWall>()
-            );
+        );
 
         public static readonly bool[] Longbows = ItemID.Sets.Factory.CreateBoolSet(
             ModContent.ItemType<Longbow>(),
@@ -58,6 +59,16 @@ namespace Avalon.Data.Sets
             ModContent.ItemType<OsmiumLongbow>(),
             ModContent.ItemType<IridiumLongbow>(),
             ModContent.ItemType<Moonforce>()
-            );
+        );
+
+        public static readonly bool[] EarthRelatedItems = ItemID.Sets.Factory.CreateBoolSet(
+            ItemID.StaffofEarth,
+            ItemID.Picksaw,
+            ItemID.HeatRay,
+            ItemID.GolemFist,
+            ItemID.Stynger,
+            ItemID.PossessedHatchet,
+            ModContent.ItemType<PossessedFlamesaw>()
+        );
     }
 }
