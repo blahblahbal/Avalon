@@ -1492,6 +1492,12 @@ namespace Avalon.Common.Templates
             //info.directionOffset = info.restingEntity is Player ? 6 : 2; // Default to 6 for players, 2 for NPCs
             //info.visualOffset = Vector2.Zero; // Defaults to (0,0)
 
+            if (info.RestingEntity is not null and Player)
+            {
+                Player p = (Player)info.RestingEntity;
+                typeof(Player).GetMethod("TryToPoop", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(p, null);
+            }
+
             info.TargetDirection = -1;
 
             if (tile.TileFrameX != 0)

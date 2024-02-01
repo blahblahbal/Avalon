@@ -3897,7 +3897,7 @@ Mods: {
 
 			OrangeDungeonWorkBench: {
 				DisplayName: Orange Dungeon Work Bench
-				Tooltip: Used for basic crafting
+				Tooltip: ""
 			}
 
 			PurpleDungeonBathtub: {
@@ -3982,7 +3982,7 @@ Mods: {
 
 			PurpleDungeonWorkbench: {
 				DisplayName: Purple Dungeon Work Bench
-				Tooltip: Used for basic crafting
+				Tooltip: ""
 			}
 
 			AngelSculpture: {
@@ -7565,7 +7565,7 @@ Mods: {
 
 			HeartstoneWorkBench: {
 				DisplayName: Heartstone Work Bench
-				Tooltip: Used for basic crafting
+				Tooltip: ""
 			}
 
 			HeartstonePlatform: {
