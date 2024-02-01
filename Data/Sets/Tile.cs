@@ -50,12 +50,11 @@ namespace Avalon.Data.Sets
         public static List<int> CraftingStations = new List<int>();
 
         public static readonly bool[] NoPlacingGemStashesOnThese = TileID.Sets.Factory.CreateBoolSet(
+            TileID.RollingCactus,
             TileID.BreakableIce,
             TileID.IceBlock,
             TileID.Sand,
             TileID.SnowBlock,
-            TileID.HardenedSand,
-            TileID.Sandstone,
             TileID.Ebonstone,
             TileID.Crimstone,
             TileID.Dirt

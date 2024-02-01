@@ -151,6 +151,9 @@ Mods: {
 			Generic_10: "{0} had the tables turned on them"
 			Generic_11: "{0} got shipped to Timbuktu"
 			Generic_12: "{0} isn't in Kansas anymore"
+            Poisoned_1: "{0} ate too many apple seeds."
+            Space_1: "{0} broke the Warp 10 threshold."
+            Space_2: "{0} got too close a black hole."
 		}
 
 		BossDefeatedBlurbs: {
