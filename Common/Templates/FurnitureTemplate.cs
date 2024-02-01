@@ -1635,17 +1635,17 @@ namespace Avalon.Common.Templates
                 if (tile.TileFrameX == 0)
                 {
                     info.DirectionOffset = info.RestingEntity is Player ? -1 : 4; // Default to 6 for players, 2 for NPCs
-                    info.VisualOffset = new Vector2(5, 0); // Defaults to (0,0)
+                    info.VisualOffset = new Vector2(5, SittingHeight); // Defaults to (0,0)
                 }
                 if (tile.TileFrameX == 18)
                 {
                     info.DirectionOffset = info.RestingEntity is Player ? -1 : 0;
-                    info.VisualOffset = new Vector2(1, 0);
+                    info.VisualOffset = new Vector2(1, SittingHeight);
                 }
                 if (tile.TileFrameX == 36)
                 {
                     info.DirectionOffset = info.RestingEntity is Player ? -1 : -6;
-                    info.VisualOffset = new Vector2(-3, 0);
+                    info.VisualOffset = new Vector2(-3, SittingHeight);
                 }
                 info.TargetDirection = 1; // Facing right if sat down on while facing right, left otherwise
             }
@@ -1654,17 +1654,17 @@ namespace Avalon.Common.Templates
                 if (tile.TileFrameX == 0)
                 {
                     info.DirectionOffset = info.RestingEntity is Player ? 1 : -4;
-                    info.VisualOffset = new Vector2(-3, 0);
+                    info.VisualOffset = new Vector2(-3, SittingHeight);
                 }
                 if (tile.TileFrameX == 18)
                 {
                     info.DirectionOffset = info.RestingEntity is Player ? 1 : 2;
-                    info.VisualOffset = new Vector2(1, 0);
+                    info.VisualOffset = new Vector2(1, SittingHeight);
                 }
                 if (tile.TileFrameX == 36)
                 {
                     info.DirectionOffset = info.RestingEntity is Player ? 1 : 6;
-                    info.VisualOffset = new Vector2(5, 0);
+                    info.VisualOffset = new Vector2(5, SittingHeight);
                 }
                 info.TargetDirection = -1;
             }

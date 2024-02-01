@@ -258,6 +258,7 @@ public class WildMushroomSink : SinkTemplate
 }
 public class WildMushroomSofa : SofaTemplate
 {
+    public override float SittingHeight => 2;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomSofa>();
 }
 
