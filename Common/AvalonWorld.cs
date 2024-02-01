@@ -1706,7 +1706,8 @@ public class AvalonWorld : ModSystem
                 Asset<Texture2D> obj = ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_Everything", (AssetRequestMode)1);
                 UIImageFramed uIImageFramed = new UIImageFramed(obj, obj.Frame(7, 16));
                 uIImageFramed.Left = new StyleDimension(0f, 0f);
-                uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+                //uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+                uIImageFramed.ExecuteRecursively(UpdateGlitchAnimation);
                 worldIcon.Append(uIImageFramed);
             }
             #endregion
@@ -1722,7 +1723,8 @@ public class AvalonWorld : ModSystem
             Asset<Texture2D> obj = ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_Everything");
             UIImageFramed uIImageFramed = new UIImageFramed(obj, obj.Frame(7, 16));
             uIImageFramed.Left = new StyleDimension(4f, 0f);
-            uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+            //uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+            uIImageFramed.ExecuteRecursively(UpdateGlitchAnimation);
             return uIImageFramed;
         }
         return null;
