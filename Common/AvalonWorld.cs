@@ -1438,6 +1438,13 @@ public class AvalonWorld : ModSystem
             DrawWorldSelectItemOverlay(self, spriteBatch);
         };
     }
+    public override void Unload()
+    {
+        On_UIWorldListItem.DrawSelf -= (orig, self, spriteBatch) => {
+            orig(self, spriteBatch);
+            DrawWorldSelectItemOverlay(self, spriteBatch);
+        };
+    }
 
     #region World%Calculations
     private void On_WorldGen_AddUpAlignmentCounts(On_WorldGen.orig_AddUpAlignmentCounts orig, bool clearCounts)
@@ -1577,7 +1584,7 @@ public class AvalonWorld : ModSystem
         bool data = uiItem.Data.TryGetHeaderData(ModContent.GetInstance<AvalonWorld>(), out var _data);
         UIElement WorldIcon = (UIElement)typeof(UIWorldListItem).GetField("_worldIcon", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(uiItem);
         WorldFileData Data = (WorldFileData)typeof(AWorldListItem).GetField("_data", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(uiItem);
-
+        WorldIcon.RemoveAllChildren();
         if (data)
         {
             #region RegularSeedIcon
@@ -1699,7 +1706,8 @@ public class AvalonWorld : ModSystem
                 Asset<Texture2D> obj = ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_Everything", (AssetRequestMode)1);
                 UIImageFramed uIImageFramed = new UIImageFramed(obj, obj.Frame(7, 16));
                 uIImageFramed.Left = new StyleDimension(0f, 0f);
-                uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+                //uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+                uIImageFramed.ExecuteRecursively(UpdateGlitchAnimation);
                 worldIcon.Append(uIImageFramed);
             }
             #endregion
@@ -1715,7 +1723,8 @@ public class AvalonWorld : ModSystem
             Asset<Texture2D> obj = ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconContagionOverlay_Everything");
             UIImageFramed uIImageFramed = new UIImageFramed(obj, obj.Frame(7, 16));
             uIImageFramed.Left = new StyleDimension(4f, 0f);
-            uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+            //uIImageFramed.OnUpdate += UpdateGlitchAnimation;
+            uIImageFramed.ExecuteRecursively(UpdateGlitchAnimation);
             return uIImageFramed;
         }
         return null;
