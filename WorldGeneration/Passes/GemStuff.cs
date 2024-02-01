@@ -19,10 +19,12 @@ internal class GemStashes : GenPass
         {
             for (int y = (int)Main.rockLayer; y < Main.maxTilesY - 200; y++)
             {
-                if (WorldGen.genRand.NextBool(90))
+                if (WorldGen.genRand.NextBool(110))
                 {
                     if (Main.tile[x, y + 1].HasTile && Main.tile[x + 1, y + 1].HasTile &&
-                        !Main.tile[x, y].HasTile && !Main.tile[x + 1, y].HasTile)
+                        !Main.tile[x, y].HasTile && !Main.tile[x + 1, y].HasTile &&
+                        !Data.Sets.Tile.NoPlacingGemStashesOnThese[Main.tile[x, y + 1].TileType] &&
+                        !Data.Sets.Tile.NoPlacingGemStashesOnThese[Main.tile[x + 1, y + 1].TileType])
                     {
                         WorldGen.PlaceSmallPile(x, y, WorldGen.genRand.Next(3), 1, (ushort)ModContent.TileType<Tiles.GemStashes>());
                     }

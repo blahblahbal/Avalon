@@ -28,7 +28,7 @@ namespace Avalon.Data.Sets
             ModContent.TileType<SnotOrb>()
         );
 
-        public static readonly HashSet<int> Stalac = new(){ModContent.TileType<ContagionStalactgmites>()};
+        public static readonly HashSet<int> Stalac = new() { ModContent.TileType<ContagionStalactgmites>() };
 
         public static bool[] SuitableForPlantingHerbs = TileID.Sets.Factory.CreateBoolSet(TileID.ClayPot, TileID.PlanterBox);
         public class Conversion
@@ -48,6 +48,18 @@ namespace Avalon.Data.Sets
             TileID.Adamantite, TileID.Titanium);
 
         public static List<int> CraftingStations = new List<int>();
+
+        public static readonly bool[] NoPlacingGemStashesOnThese = TileID.Sets.Factory.CreateBoolSet(
+            TileID.BreakableIce,
+            TileID.IceBlock,
+            TileID.Sand,
+            TileID.SnowBlock,
+            TileID.HardenedSand,
+            TileID.Sandstone,
+            TileID.Ebonstone,
+            TileID.Crimstone,
+            TileID.Dirt
+        );
 
         //public static Dictionary<int, bool> RiftOres = new Dictionary<int, bool>
         //{

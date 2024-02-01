@@ -12,7 +12,7 @@ ItemName: {
 	CoinGun: Spend Shot
 	HighTestFishingLine: High Tensile Fishing Line
 	Volcano: Volcanic Greatsword
-    CrimsonPlanterBox: Bloodberry Planter Box
+	CrimsonPlanterBox: Bloodberry Planter Box
 }
 
 Mods: {
@@ -149,6 +149,8 @@ Mods: {
 			Generic_8: "{0}'s bones got scattered all over {1}"
 			Generic_9: "{0} met their untimely demise"
 			Generic_10: "{0} had the tables turned on them"
+            Generic_11: "{0} got shipped to Timbuktu"
+            Generic_12: "{0} isn't in Kansas anymore"
 		}
 
 		BossDefeatedBlurbs: {
@@ -8663,7 +8665,7 @@ Mods: {
 				Zircon: Zircon
 			}
 
-			HeartstoneChest.MapEntry0: Mods.Avalon.Tiles.HeartstoneChest.MapEntry0
+			HeartstoneChest.MapEntry0: Chest
 			HeartstoneDresser.MapEntry: Heartstone Dresser
 		}
 

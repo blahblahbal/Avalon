@@ -29,6 +29,10 @@ public class GemStashes : ModTile
         AddMapEntry(new Color(0, 237, 14), this.GetLocalization("Peridot"));
         AddMapEntry(new Color(198, 168, 130), this.GetLocalization("Zircon"));
     }
+    public override ushort GetMapOption(int i, int j)
+    {
+        return (ushort)(Main.tile[i, j].TileFrameX / 36);
+    }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int toDrop = 0;

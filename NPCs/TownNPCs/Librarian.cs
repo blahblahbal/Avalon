@@ -225,6 +225,7 @@ public class Librarian : ModNPC
         {
             shopCustomPrice = 75000
         });
+        shop.Add(new Item(ItemID.Book));
         // in hardmode
         shop.Add(new Item(ModContent.ItemType<MysticalTomePage>())
         {

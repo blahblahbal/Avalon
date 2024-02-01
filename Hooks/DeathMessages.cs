@@ -59,6 +59,8 @@ public class DeathMessages : ModHook
                 case 7:
                 case 9:
                 case 10:
+                case 11:
+                case 12:
                     empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_" + msg, deadPlayerName);
                     break;
                 case 8:
