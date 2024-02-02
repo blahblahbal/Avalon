@@ -500,12 +500,6 @@ public class AvalonMobDrops : GlobalNPC
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ArcaneShard>(), 7));
         }
-
-        if (npc.type is NPCID.ChaosElemental or NPCID.IceElemental or NPCID.IchorSticker or NPCID.Corruptor)// ||
-                                                                                                            // npc.type == ModContent.NPCType<Viris>())
-        {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDiamond>(), 6));
-        }
         #endregion shards
 
         if (!NPCID.Sets.CountsAsCritter[npc.type] && !npc.townNPC && npc.aiStyle != 9 && npc.life > 5)
