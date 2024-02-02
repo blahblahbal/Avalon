@@ -51,6 +51,19 @@ public class RecipeChanger : ModSystem
                     }
                     break;
                 }
+                case ItemID.MagicMirror:
+                {
+                    if (recipe.TryGetIngredient(ItemID.GoldBar, out Item ing))
+                    {
+                        recipe.RemoveIngredient(ing);
+                        recipe.AddRecipeGroup("Avalon:GoldBar");
+                    }
+                    if (recipe.TryGetIngredient(ItemID.PlatinumBar, out Item ing2))
+                    {
+                        recipe.DisableRecipe();
+                    }
+                    break;
+                }
                 case ItemID.BlueBrickWallUnsafe:
                 case ItemID.BlueSlabWallUnsafe:
                 case ItemID.BlueTiledWallUnsafe:

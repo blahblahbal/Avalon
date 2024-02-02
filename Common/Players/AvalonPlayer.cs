@@ -229,6 +229,9 @@ public class AvalonPlayer : ModPlayer
     public bool OilBottle;
     public int OilBottleTimer;
     public bool EarthInsig;
+    public bool GoblinToolbelt;
+    public bool GoblinAK;
+    public bool BuilderBelt;
     #endregion
 
     #region buffs and debuffs
@@ -376,6 +379,9 @@ public class AvalonPlayer : ModPlayer
         ForceGambler = false;
         OilBottle = false;
         EarthInsig = false;
+        GoblinToolbelt = false;
+        GoblinAK = false;
+        BuilderBelt = false;
 
         // armor sets
         SkyBlessing = false;

@@ -126,49 +126,65 @@ public class AvalonGlobalItem : GlobalItem
             if (item.type == ModContent.ItemType<Breakdawn>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                int pfix = item.prefix;
                 item.ChangeItemType(ModContent.ItemType<Breakdawn3x3>());
+                item.Prefix(pfix);
                 return false;
             }
             if (item.type == ModContent.ItemType<Breakdawn3x3>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                int pfix = item.prefix;
                 item.ChangeItemType(ModContent.ItemType<Breakdawn>());
+                item.Prefix(pfix);
                 return false;
             }
             if (item.type == ModContent.ItemType<PickaxeofDusk>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                int pfix = item.prefix;
                 item.ChangeItemType(ModContent.ItemType<PickaxeofDusk3x3>());
+                item.Prefix(pfix);
                 return false;
             }
             if (item.type == ModContent.ItemType<PickaxeofDusk3x3>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                int pfix = item.prefix;
                 item.ChangeItemType(ModContent.ItemType<PickaxeofDusk>());
+                item.Prefix(pfix);
                 return false;
             }
             if (item.type == ModContent.ItemType<AccelerationPickaxe>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                int pfix = item.prefix;
                 item.ChangeItemType(ModContent.ItemType<AccelerationPickaxeSpeed>());
+                item.Prefix(pfix);
                 return false;
             }
             if (item.type == ModContent.ItemType<AccelerationPickaxeSpeed>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                int pfix = item.prefix;
                 item.ChangeItemType(ModContent.ItemType<AccelerationPickaxe>());
+                item.Prefix(pfix);
                 return false;
             }
             if (item.type == ModContent.ItemType<AccelerationDrill>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                int pfix = item.prefix;
                 item.ChangeItemType(ModContent.ItemType<AccelerationDrillSpeed>());
+                item.Prefix(pfix);
                 return false;
             }
             if (item.type == ModContent.ItemType<AccelerationDrillSpeed>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+                int pfix = item.prefix;
                 item.ChangeItemType(ModContent.ItemType<AccelerationDrill>());
+                item.Prefix(pfix);
                 return false;
             }
             if (item.type == ModContent.ItemType<ShadowPhone>())

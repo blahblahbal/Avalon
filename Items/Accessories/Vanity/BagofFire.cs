@@ -34,12 +34,13 @@ internal class BagofFire : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(Type)
+        CreateRecipe()
             .AddIngredient(ItemID.Fireblossom, 15)
             .AddIngredient(ItemID.HellstoneBar, 10)
             .AddIngredient(ItemID.AshBlock, 50)
             .AddIngredient(ModContent.ItemType<FireShard>(), 5)
-            .AddTile(TileID.Hellforge).Register();
+            .AddTile(TileID.Hellforge)
+            .Register();
     }
     public override void UpdateVanity(Player player)
     {
@@ -63,9 +64,5 @@ internal class BagofFire : ModItem
                 Main.dust[num2].shader = GameShaders.Armor.GetShaderFromItemId(player.dye[t].type);
             }
         }
-
-        //int dust = Dust.NewDust(player.position, player.width + 20, player.height + 20, DustID.Torch, 0f, 0f, 100,
-        //    Color.White, 2f);
-        //Main.dust[dust].noGravity = true;
     }
 }

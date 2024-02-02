@@ -42,7 +42,9 @@ public class AccelerationDrill : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<AccelerationDrillSpeed>());
+            Item.Prefix(pfix);
         }
         if (player.controlUseItem)
         {
@@ -90,7 +92,9 @@ public class AccelerationDrillSpeed : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<AccelerationDrill>());
+            Item.Prefix(pfix);
         }
         if (player.controlUseItem)
         {

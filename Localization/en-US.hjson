@@ -7684,6 +7684,36 @@ Mods: {
 				DisplayName: Bloodberry Planter Box
 				Tooltip: ""
 			}
+
+			SulphurCrystal: {
+				DisplayName: Sulphur Crystal
+				Tooltip: Used at the catalyzer to exchange various hardmode items
+			}
+
+			GoblinArmyKnife: {
+				DisplayName: Goblin Army Knife
+				Tooltip:
+					'''
+					Increases length of invincibility after taking damage
+					Provides life and mana regeneration
+					7% increased damage
+					2% increased critical strike chance
+					+4 block range
+					Tells the time and shows position
+					Provides an aura of light
+					Can craft certain items by hand
+					Reveals treasures and mobs
+					'''
+			}
+
+			GoblinToolbelt: {
+				DisplayName: Goblin Toolbelt
+				Tooltip:
+					'''
+					Increases block placement range by 2, tells time and shows position
+					Can craft Tinkerer's Workshop and Work Bench items by hand
+					'''
+			}
 		}
 
 		InfoDisplays: {

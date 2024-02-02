@@ -49,7 +49,9 @@ public class AccelerationPickaxe : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<AccelerationPickaxeSpeed>());
+            Item.Prefix(pfix);
         }
         if (player.controlUseItem)
         {
@@ -105,7 +107,9 @@ public class AccelerationPickaxeSpeed : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<AccelerationPickaxe>());
+            Item.Prefix(pfix);
         }
         if (player.controlUseItem && player.whoAmI == Main.myPlayer)
         {

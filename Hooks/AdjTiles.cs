@@ -17,57 +17,131 @@ internal class AdjTiles : ModHook
     }
     private static void OnAdjTilesPocketBench(On_Player.orig_AdjTiles orig, Player self)
     {
-        if (self.GetModPlayer<AvalonPlayer>().PocketBench)
+        if (((self.GetModPlayer<AvalonPlayer>().GoblinToolbelt ||
+            self.GetModPlayer<AvalonPlayer>().GoblinAK ||
+            self.GetModPlayer<AvalonPlayer>().BuilderBelt) && Main.myPlayer == self.whoAmI) || self.GetModPlayer<AvalonPlayer>().PocketBench)
         {
-            for (int o = 0; o < 50; o++)
+            if ((self.GetModPlayer<AvalonPlayer>().GoblinToolbelt ||
+                self.GetModPlayer<AvalonPlayer>().GoblinAK ||
+                self.GetModPlayer<AvalonPlayer>().BuilderBelt) && Main.myPlayer == self.whoAmI)
             {
-                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.inventory[o].type))
+                if (!self.adjTile[TileID.TinkerersWorkbench])
                 {
-                    if (!self.adjTile[self.inventory[o].createTile])
+                    self.adjTile[TileID.TinkerersWorkbench] = true;
+                }
+                else if (!self.GetModPlayer<AvalonPlayer>().GoblinToolbelt &&
+                    !self.GetModPlayer<AvalonPlayer>().GoblinAK &&
+                    !self.GetModPlayer<AvalonPlayer>().BuilderBelt)
+                {
+                    self.adjTile[TileID.TinkerersWorkbench] = false;
+                }
+                if (!self.adjTile[TileID.WorkBenches])
+                {
+                    self.adjTile[TileID.WorkBenches] = true;
+                }
+                else if (!self.GetModPlayer<AvalonPlayer>().GoblinToolbelt &&
+                    !self.GetModPlayer<AvalonPlayer>().GoblinAK &&
+                    !self.GetModPlayer<AvalonPlayer>().BuilderBelt)
+                {
+                    self.adjTile[TileID.WorkBenches] = false;
+                }
+                if (!self.adjTile[TileID.HeavyWorkBench])
+                {
+                    self.adjTile[TileID.HeavyWorkBench] = true;
+                }
+                else if (!self.GetModPlayer<AvalonPlayer>().GoblinToolbelt &&
+                    !self.GetModPlayer<AvalonPlayer>().GoblinAK &&
+                    !self.GetModPlayer<AvalonPlayer>().BuilderBelt)
+                {
+                    self.adjTile[TileID.HeavyWorkBench] = false;
+                }
+                if (self.GetModPlayer<AvalonPlayer>().GoblinAK ||
+                    self.GetModPlayer<AvalonPlayer>().BuilderBelt)
+                {
+                    if (!self.adjTile[TileID.Anvils])
                     {
-                        self.adjTile[self.inventory[o].createTile] = true;
+                        self.adjTile[TileID.Anvils] = true;
+                    }
+                    else if (!self.GetModPlayer<AvalonPlayer>().GoblinToolbelt &&
+                        !self.GetModPlayer<AvalonPlayer>().GoblinAK &&
+                        !self.GetModPlayer<AvalonPlayer>().BuilderBelt)
+                    {
+                        self.adjTile[TileID.Anvils] = false;
+                    }
+                    if (!self.adjTile[TileID.MythrilAnvil])
+                    {
+                        self.adjTile[TileID.MythrilAnvil] = true;
+                    }
+                    else if (!self.GetModPlayer<AvalonPlayer>().GoblinToolbelt &&
+                        !self.GetModPlayer<AvalonPlayer>().GoblinAK &&
+                        !self.GetModPlayer<AvalonPlayer>().BuilderBelt)
+                    {
+                        self.adjTile[TileID.MythrilAnvil] = false;
                     }
                 }
+                Recipe.FindRecipes();
             }
-            for (int o = 0; o < self.bank.item.Length; o++)
+            else
             {
-                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank.item[o].type))
-                {
-                    if (!self.adjTile[self.bank.item[o].createTile])
-                    {
-                        self.adjTile[self.bank.item[o].createTile] = true;
-                    }
-                }
+                self.adjTile[TileID.TinkerersWorkbench] = false;
+                self.adjTile[TileID.WorkBenches] = false;
+                self.adjTile[TileID.HeavyWorkBench] = false;
+                self.adjTile[TileID.Anvils] = false;
+                self.adjTile[TileID.MythrilAnvil] = false;
             }
-            for (int o = 0; o < self.bank2.item.Length; o++)
+            if (self.GetModPlayer<AvalonPlayer>().PocketBench)
             {
-                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank2.item[o].type))
+                for (int o = 0; o < 50; o++)
                 {
-                    if (!self.adjTile[self.bank2.item[o].createTile])
+                    if (Data.Sets.Item.CraftingStationsItemID.Contains(self.inventory[o].type))
                     {
-                        self.adjTile[self.bank2.item[o].createTile] = true;
+                        if (!self.adjTile[self.inventory[o].createTile])
+                        {
+                            self.adjTile[self.inventory[o].createTile] = true;
+                        }
                     }
                 }
-            }
-            for (int o = 0; o < self.bank3.item.Length; o++)
-            {
-                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank3.item[o].type))
+                for (int o = 0; o < self.bank.item.Length; o++)
                 {
-                    if (!self.adjTile[self.bank3.item[o].createTile])
+                    if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank.item[o].type))
                     {
-                        self.adjTile[self.bank3.item[o].createTile] = true;
+                        if (!self.adjTile[self.bank.item[o].createTile])
+                        {
+                            self.adjTile[self.bank.item[o].createTile] = true;
+                        }
                     }
                 }
-            }
-            for (int o = 0; o < self.bank4.item.Length; o++)
-            {
-                if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank4.item[o].type))
+                for (int o = 0; o < self.bank2.item.Length; o++)
                 {
-                    if (!self.adjTile[self.bank4.item[o].createTile])
+                    if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank2.item[o].type))
                     {
-                        self.adjTile[self.bank4.item[o].createTile] = true;
+                        if (!self.adjTile[self.bank2.item[o].createTile])
+                        {
+                            self.adjTile[self.bank2.item[o].createTile] = true;
+                        }
                     }
                 }
+                for (int o = 0; o < self.bank3.item.Length; o++)
+                {
+                    if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank3.item[o].type))
+                    {
+                        if (!self.adjTile[self.bank3.item[o].createTile])
+                        {
+                            self.adjTile[self.bank3.item[o].createTile] = true;
+                        }
+                    }
+                }
+                for (int o = 0; o < self.bank4.item.Length; o++)
+                {
+                    if (Data.Sets.Item.CraftingStationsItemID.Contains(self.bank4.item[o].type))
+                    {
+                        if (!self.adjTile[self.bank4.item[o].createTile])
+                        {
+                            self.adjTile[self.bank4.item[o].createTile] = true;
+                        }
+                    }
+                }
+                Recipe.FindRecipes();
             }
             Recipe.FindRecipes();
         }

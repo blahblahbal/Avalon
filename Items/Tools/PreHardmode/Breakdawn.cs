@@ -61,7 +61,9 @@ public class Breakdawn : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<Breakdawn3x3>());
+            Item.Prefix(pfix);
         }
         if (player.whoAmI == Main.myPlayer && player.ItemAnimationJustStarted)
         {
@@ -224,7 +226,9 @@ public class Breakdawn3x3 : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<Breakdawn>());
+            Item.Prefix(pfix);
         }
         if (player.controlUseItem)
         {

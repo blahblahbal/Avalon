@@ -37,17 +37,54 @@ internal class CatalyzerRecipes : ModSystem
             .DisableDecraft()
             .Register();
 
+        // HM stone
         Recipe.Create(ItemID.PearlstoneBlock, 50)
-            .AddIngredient(ModContent.ItemType<ChunkstoneBlock>(), 50)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ItemID.EbonstoneBlock, 50)
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
+        Recipe.Create(ItemID.PearlstoneBlock, 50)
+            .AddIngredient(ItemID.CrimstoneBlock, 50)
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
+            .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+            .DisableDecraft()
+            .Register();
+
+        Recipe.Create(ItemID.PearlstoneBlock, 50)
+            .AddIngredient(ModContent.ItemType<ChunkstoneBlock>(), 50)
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
+            .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+            .DisableDecraft()
+            .Register();
+
+        Recipe.Create(ModContent.ItemType<ChunkstoneBlock>(), 50)
+            .AddIngredient(ItemID.PearlstoneBlock, 50)
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
+            .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+            .DisableDecraft()
+            .Register();
+
+        Recipe.Create(ItemID.CrimstoneBlock, 50)
+            .AddIngredient(ItemID.PearlstoneBlock, 50)
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
+            .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+            .DisableDecraft()
+            .Register();
+
+        Recipe.Create(ItemID.EbonstoneBlock, 50)
+            .AddIngredient(ItemID.PearlstoneBlock, 50)
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
+            .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+            .DisableDecraft()
+            .Register();
+        //end HM stone
         //end stone types
         //start wood
         Recipe.Create(ItemID.Wood, 50)
-            .AddIngredient(ModContent.ItemType<ApocalyptusWood>(), 50)
+            .AddIngredient(ItemID.RichMahogany, 50)
+            //.AddIngredient(ModContent.ItemType<ApocalyptusWood>(), 50) // uncomment when available
             .AddIngredient(ModContent.ItemType<Sulphur>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
@@ -100,20 +137,28 @@ internal class CatalyzerRecipes : ModSystem
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
+        // UNCOMMENT WHEN AVAILABLE
+        //Recipe.Create(ModContent.ItemType<BleachedEbony>(), 50)
+        //    .AddIngredient(ItemID.RichMahogany, 50)
+        //    .AddIngredient(ModContent.ItemType<Sulphur>())
+        //    .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+        //    .DisableDecraft()
+        //    .Register();
 
-        Recipe.Create(ModContent.ItemType<BleachedEbony>(), 50)
-            .AddIngredient(ItemID.RichMahogany, 50)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
-            .AddTile(ModContent.TileType<Tiles.Catalyzer>())
-            .DisableDecraft()
-            .Register();
+        //Recipe.Create(ModContent.ItemType<ResistantWood>(), 50)
+        //    .AddIngredient(ModContent.ItemType<BleachedEbony>(), 50)
+        //    .AddIngredient(ModContent.ItemType<Sulphur>())
+        //    .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+        //    .DisableDecraft()
+        //    .Register();
 
-        Recipe.Create(ModContent.ItemType<ApocalyptusWood>(), 50)
-            .AddIngredient(ModContent.ItemType<BleachedEbony>(), 50)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
-            .AddTile(ModContent.TileType<Tiles.Catalyzer>())
-            .DisableDecraft()
-            .Register();
+        //Recipe.Create(ModContent.ItemType<ApocalyptusWood>(), 50)
+        //    .AddIngredient(ModContent.ItemType<ResistantWood>(), 50)
+        //    .AddIngredient(ModContent.ItemType<Sulphur>())
+        //    .AddTile(ModContent.TileType<Tiles.Catalyzer>())
+        //    .DisableDecraft()
+        //    .Register();
+
         //end wood
         //evil ores
         Recipe.Create(ItemID.DemoniteOre, 40)
@@ -141,63 +186,63 @@ internal class CatalyzerRecipes : ModSystem
         //hardmode ores
         Recipe.Create(ItemID.CobaltOre, 20)
             .AddIngredient(ModContent.ItemType<DurataniumOre>(), 20)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.PalladiumOre, 20)
             .AddIngredient(ItemID.CobaltOre, 20)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ModContent.ItemType<DurataniumOre>(), 20)
             .AddIngredient(ItemID.PalladiumOre, 20)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.MythrilOre, 20)
             .AddIngredient(ModContent.ItemType<NaquadahOre>(), 20)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.OrichalcumOre, 20)
             .AddIngredient(ItemID.MythrilOre, 20)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ModContent.ItemType<NaquadahOre>(), 20)
             .AddIngredient(ItemID.OrichalcumOre, 20)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.AdamantiteOre, 10)
             .AddIngredient(ModContent.ItemType<TroxiniumOre>(), 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.TitaniumOre, 10)
             .AddIngredient(ItemID.AdamantiteOre, 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ModContent.ItemType<TroxiniumOre>(), 10)
             .AddIngredient(ItemID.TitaniumOre, 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
@@ -401,63 +446,63 @@ internal class CatalyzerRecipes : ModSystem
         //hardmode ore bars
         Recipe.Create(ItemID.CobaltBar, 10)
             .AddIngredient(ModContent.ItemType<DurataniumBar>(), 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.PalladiumBar, 10)
             .AddIngredient(ItemID.CobaltBar, 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ModContent.ItemType<DurataniumBar>(), 10)
             .AddIngredient(ItemID.PalladiumBar, 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.MythrilBar, 10)
             .AddIngredient(ModContent.ItemType<NaquadahBar>(), 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.OrichalcumBar, 10)
             .AddIngredient(ItemID.MythrilBar, 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ModContent.ItemType<NaquadahBar>(), 10)
             .AddIngredient(ItemID.OrichalcumBar, 10)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.AdamantiteBar, 5)
             .AddIngredient(ModContent.ItemType<TroxiniumBar>(), 5)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.TitaniumBar, 5)
             .AddIngredient(ItemID.AdamantiteBar, 5)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ModContent.ItemType<TroxiniumBar>(), 5)
             .AddIngredient(ItemID.TitaniumBar, 5)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
@@ -489,21 +534,21 @@ internal class CatalyzerRecipes : ModSystem
         // hm mats
         Recipe.Create(ItemID.CursedFlame, 33)
             .AddIngredient(ModContent.ItemType<Pathogen>(), 33)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.Ichor, 33)
             .AddIngredient(ItemID.CursedFlame, 33)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
 
         Recipe.Create(ModContent.ItemType<Pathogen>(), 33)
             .AddIngredient(ItemID.Ichor, 33)
-            .AddIngredient(ModContent.ItemType<Sulphur>())
+            .AddIngredient(ModContent.ItemType<SulphurCrystal>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();

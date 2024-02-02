@@ -58,7 +58,9 @@ public class PickaxeofDusk : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<PickaxeofDusk3x3>());
+            Item.Prefix(pfix);
         }
         if (player.inventory[player.selectedItem].type == Type)
         {
@@ -135,7 +137,9 @@ public class PickaxeofDusk3x3 : ModItem
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<PickaxeofDusk>());
+            Item.Prefix(pfix);
         }
     }
     public override void MeleeEffects(Player player, Rectangle hitbox)

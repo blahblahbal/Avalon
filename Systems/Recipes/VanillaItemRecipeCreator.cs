@@ -56,7 +56,7 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddIngredient(ItemID.SoulofSight)
             .AddTile(TileID.MythrilAnvil)
             .Register();
-            //Recipe.Create(ItemID.LihzahrdPowerCell).AddIngredient(ModContent.ItemType<SolariumStar>(), 5).AddIngredient(ItemID.LihzahrdBrick, 10).AddTile(TileID.MythrilAnvil).Register();
+        //Recipe.Create(ItemID.LihzahrdPowerCell).AddIngredient(ModContent.ItemType<SolariumStar>(), 5).AddIngredient(ItemID.LihzahrdBrick, 10).AddTile(TileID.MythrilAnvil).Register();
         #endregion
 
         #region Furnace
@@ -86,7 +86,7 @@ public class VanillaItemRecipeCreator : ModSystem
         Recipe.Create(ItemID.PeaceCandle).AddIngredient(ModContent.ItemType<BismuthBar>(), 2).AddIngredient(ItemID.PinkTorch).AddTile(TileID.WorkBenches).Register();
         //Recipe.Create(ItemID.Picksaw).AddIngredient(ModContent.ItemType<SolariumStar>(), 50).AddIngredient(ModContent.ItemType<Items.Placeable.Bar.BeetleBar>(), 3).AddIngredient(ItemID.SoulofMight, 15).AddTile(TileID.MythrilAnvil).Register();
         Recipe.Create(ItemID.Leather).AddIngredient(ModContent.ItemType<RottenFlesh>(), 4).AddTile(TileID.WorkBenches).Register();
-        Recipe.Create(ItemID.Leather).AddIngredient(ModContent.ItemType<YuckyBit>(), 6).AddTile(TileID.WorkBenches).Register();
+        Recipe.Create(ItemID.Leather).AddIngredient(ModContent.ItemType<YuckyBit>(), 5).AddTile(TileID.WorkBenches).Register();
         Recipe.Create(ItemID.AcornAxe).AddIngredient(ItemID.StaffofRegrowth).AddIngredient(ModContent.ItemType<BronzeAxe>()).AddIngredient(ItemID.JungleSpores, 12).AddIngredient(ItemID.Vine, 3).AddTile(TileID.WorkBenches).Register();
         #endregion
 
