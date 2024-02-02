@@ -7619,7 +7619,7 @@ Mods: {
 			}
 
 			GiftofStarpower: {
-				DisplayName: Giftof Starpower
+				DisplayName: Gift of Starpower
 				Tooltip:
 					'''
 					20% decreased mana usage and +40 mana

@@ -227,6 +227,6 @@ public class OreSlime : ModNPC
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
         spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon
-            ? 0.3f * AvalonGlobalNPC.ModSpawnRate
+            ? 0.2f * AvalonGlobalNPC.ModSpawnRate
             : 0f;
 }
