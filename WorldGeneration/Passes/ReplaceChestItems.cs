@@ -62,7 +62,7 @@ public class ReplaceChestItems : GenPass
                     //        i.Prefix(-1);
                     //    }
                     //}
-                    if (i?.type == ItemID.StaffofRegrowth && WorldGen.genRand.NextBool(2))
+                    if ((i?.type == ItemID.StaffofRegrowth || i?.type == ItemID.FeralClaws || i?.type == ItemID.AnkletoftheWind || i?.type == ItemID.Boomstick) && WorldGen.genRand.NextBool(5))
                     {
                         i.SetDefaults(ModContent.ItemType<FlowerofTheJungle>());
                         i.Prefix(-1);
