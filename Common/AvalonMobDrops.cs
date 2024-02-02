@@ -530,7 +530,8 @@ public class AvalonMobDrops : GlobalNPC
         var hardModeCondition = new HardmodeOnly();
         var desertPostBeakCondition = new DesertPostBeakDrop();
         var contagionCondition = new ZoneContagion();
-        var soulCondition = new UndergroundContagionCondition();
+        var undergroundContagionCondition = new UndergroundContagionCondition();
+        var soulCondition = new Combine(true, null, undergroundContagionCondition, hardModeCondition);
 
         var zoneRockLayerCondition = new ZoneRockLayer();
         var snowCondition = new ZoneSnow();
