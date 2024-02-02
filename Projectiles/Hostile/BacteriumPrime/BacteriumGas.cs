@@ -53,7 +53,7 @@ public class BacteriumGas : ModProjectile
         if (Projectile.alpha <= 100)
             Projectile.ai[2]++;
 
-        if (Projectile.alpha == 255) Projectile.Kill();
+        if (Projectile.alpha >= 255) Projectile.Kill();
 
         Projectile.velocity = Vector2.Lerp(Projectile.velocity.RotatedByRandom(0.1f), new Vector2(1, 0).RotatedBy(Projectile.velocity.ToRotation()), 0.003f);
         Projectile.rotation += MathHelper.Clamp(Projectile.velocity.Length() * 0.1f, -0.3f, 0.3f);
