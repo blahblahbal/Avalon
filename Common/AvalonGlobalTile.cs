@@ -160,6 +160,20 @@ public class AvalonGlobalTile : GlobalTile
             }
         }
     }
+    public override bool CanPlace(int i, int j, int type)
+    {
+        Main.NewText(type);
+        Console.WriteLine(type);
+        if (Data.Sets.Tile.AvalonPlanterBoxes[Main.tile[i, j + 1].TileType] &&
+            (Main.tile[i, j].TileType == TileID.ImmatureHerbs || Main.tile[i, j].TileType == TileID.MatureHerbs ||
+            Main.tile[i, j].TileType == TileID.BloomingHerbs || Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>() ||
+            Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Bloodberry>() || Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Holybird>() ||
+            Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Sweetstem>() || Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.TwilightPlume>()))
+        {
+            return false;
+        }
+        return base.CanPlace(i, j, type);
+    }
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
         int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);

@@ -102,8 +102,7 @@ public class HerbologyUIState : ExxoUIState
         };
 
         Append(new ExxoUIContentLockPanel(herbExchange.Toggle,
-            () => Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Tier >=
-                  AvalonHerbologyPlayer.HerbTier.Apprentice,
+            () => Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Apprentice,
             Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Title") + Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Apprentice")));
         #endregion
 
@@ -118,12 +117,12 @@ public class HerbologyUIState : ExxoUIState
             herbCountAttachment?.AttachTo(null);
         };
 
-        var potionLock = new ExxoUIContentLockPanel(potionExchange,
-            () => Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Tier >=
-                  AvalonHerbologyPlayer.HerbTier.Expert,
-            Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Title") + Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Expert"));
-        Append(potionLock);
-        potionLock.OnLockStatusChanged += (_, args) => potionExchange.Scrollbar.Active = !args.Locked;
+        //var potionLock = new ExxoUIContentLockPanel(potionExchange,
+        //    () => Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Tier >=
+        //          AvalonHerbologyPlayer.HerbTier.Expert,
+        //    Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Title") + Language.GetTextValue("Mods.Avalon.Herbology.ContentLocked.Expert"));
+        //Append(potionLock);
+        //potionLock.OnLockStatusChanged += (_, args) => potionExchange.Scrollbar.Active = !args.Locked;
 
         potionExchange.Hidden = true;
         #endregion
@@ -164,7 +163,7 @@ public class HerbologyUIState : ExxoUIState
         #region button toggles
         herbButton =
             new ExxoUIImageButton(Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconRandomSeed"))
-            { Scale = 1, Tooltip = "Herbs", HAlign = 0.33f, VAlign = 0.02f };
+            { Scale = 1, Tooltip = "Herbs", HAlign = 0.38f, VAlign = 0.02f };
         herbContainer.Append(herbButton);
         herbButton.Selected = true;
         herbButton.OnLeftClick += (_, args) =>
@@ -176,8 +175,11 @@ public class HerbologyUIState : ExxoUIState
 
         potionButton =
             new ExxoUIImageButton(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbPotion"))
-            { Scale = 1, Tooltip = "Potions", HAlign = 0.4f, VAlign = 0.04f };
+            { Scale = 1, Tooltip = "Potions", HAlign = 0.45f, VAlign = 0.04f };
         herbContainer.Append(potionButton);
+
+        potionButton.Hidden = true;
+
         potionButton.OnLeftClick += (_, args) =>
         {
             potionExchange.Hidden = false;
@@ -411,6 +413,14 @@ public class HerbologyUIState : ExxoUIState
         Player player = Main.LocalPlayer;
         AvalonHerbologyPlayer modPlayer = player.GetModPlayer<AvalonHerbologyPlayer>();
 
+        if (modPlayer.Expert)
+        {
+            if (potionButton != null)
+            {
+                potionButton.Hidden = false;
+            }
+        }
+
         if (player.chest != -1 || Main.npcShop != 0)
         {
             modPlayer.DisplayHerbologyMenu = false;
@@ -433,7 +443,7 @@ public class HerbologyUIState : ExxoUIState
 
         if (herbExchange != null && potionExchange != null)
         {
-            if (potionButton?.ContainsPoint(evt.MousePosition) == true && herbButton != null)
+            if (potionButton?.ContainsPoint(evt.MousePosition) == true && herbButton != null && potionButton?.Hidden == false)
             {
                 herbExchange.Hidden = true;
                 potionExchange.Hidden = false;
@@ -516,22 +526,20 @@ public class HerbologyUIState : ExxoUIState
     {
         potionExchange?.Grid.Clear();
         var items = new List<int>();
-        if (Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Tier >=
-            AvalonHerbologyPlayer.HerbTier.Master)
+        if (Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Master)
         {
             items.AddRange(HerbologyData.SuperRestorationIDs);
         }
 
-        if (Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Tier >=
-            AvalonHerbologyPlayer.HerbTier.Expert)
+        if (Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Expert ||
+            Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Master)
         {
             items.AddRange(HerbologyData.RestorationIDs);
         }
 
         items.AddRange(displayElixirs ? HerbologyData.ElixirIds : HerbologyData.PotionIds);
 
-        if (Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Tier >=
-            AvalonHerbologyPlayer.HerbTier.Master)
+        if (Main.LocalPlayer.GetModPlayer<AvalonHerbologyPlayer>().Master)
         {
             items.Add(ModContent.ItemType<BlahPotion>());
         }

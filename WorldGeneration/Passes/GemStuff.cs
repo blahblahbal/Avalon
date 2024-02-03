@@ -23,8 +23,8 @@ internal class GemStashes : GenPass
                 {
                     if (Main.tile[x, y + 1].HasTile && Main.tile[x + 1, y + 1].HasTile &&
                         !Main.tile[x, y].HasTile && !Main.tile[x + 1, y].HasTile &&
-                        !Data.Sets.Tile.NoPlacingGemStashesOnThese[Main.tile[x, y + 1].TileType] &&
-                        !Data.Sets.Tile.NoPlacingGemStashesOnThese[Main.tile[x + 1, y + 1].TileType])
+                        Data.Sets.Tile.OnlyPlaceGemStashesOnThese[Main.tile[x, y + 1].TileType] &&
+                        Data.Sets.Tile.OnlyPlaceGemStashesOnThese[Main.tile[x + 1, y + 1].TileType])
                     {
                         WorldGen.PlaceSmallPile(x, y, WorldGen.genRand.Next(3), 1, (ushort)ModContent.TileType<Tiles.GemStashes>());
                     }

@@ -13,7 +13,7 @@ class ZirconHook : ModItem
         Item.noUseGraphic = true;
         Item.useTurn = true;
         Item.shootSpeed = 14f;
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.Blue;
         Item.noMelee = true;
         Item.width = dims.Width;
         Item.useTime = 0;

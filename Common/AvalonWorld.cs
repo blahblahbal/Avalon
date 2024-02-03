@@ -272,7 +272,7 @@ public class AvalonWorld : ModSystem
             #endregion
 
             #region planter box grass growth
-            if (Main.tile[num5, num6].TileType == ModContent.TileType<PlanterBoxes>())
+            if (Main.tile[num5, num6].TileType == ModContent.TileType<BarfbushPlanterBox>())
             {
                 if (!Main.tile[num5, num9].HasTile && WorldGen.genRand.NextBool(2))
                 {

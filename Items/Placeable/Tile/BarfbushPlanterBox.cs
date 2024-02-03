@@ -13,7 +13,7 @@ class BarfbushPlanterBox : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.BlinkrootPlanterBox);
-        Item.createTile = ModContent.TileType<Tiles.PlanterBoxes>();
+        Item.createTile = ModContent.TileType<Tiles.Herbs.BarfbushPlanterBox>();
         Item.placeStyle = 0;
     }
 }

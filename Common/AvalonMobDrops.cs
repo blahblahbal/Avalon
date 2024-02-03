@@ -142,7 +142,7 @@ public class AvalonMobDrops : GlobalNPC
                 npcLoot.Add(ItemDropRule.ByCondition(hardModeCondition, ItemID.ShinyRedBalloon, 50));
                 break;
             case NPCID.Vulture:
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Beak>(), 3));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Beak>(), 2));
                 break;
             case NPCID.QueenBee:
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FightoftheBumblebee>(), 8));

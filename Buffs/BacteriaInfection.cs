@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -13,6 +14,6 @@ public class BacteriaInfection : ModBuff
 
     public override void Update(NPC npc, ref int buffIndex)
     {
-        npc.lifeRegen -= 24;
+        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().BacterialInfection = true;
     }
 }

@@ -31,6 +31,13 @@ namespace Avalon.Data.Sets
         public static readonly HashSet<int> Stalac = new() { ModContent.TileType<ContagionStalactgmites>() };
 
         public static bool[] SuitableForPlantingHerbs = TileID.Sets.Factory.CreateBoolSet(TileID.ClayPot, TileID.PlanterBox);
+
+        public static bool[] AvalonPlanterBoxes = TileID.Sets.Factory.CreateBoolSet(
+            ModContent.TileType<Tiles.Herbs.BarfbushPlanterBox>(),
+            ModContent.TileType<Tiles.Herbs.SweetstemPlanterBox>(),
+            ModContent.TileType<Tiles.Herbs.TwilightPlumePlanterBox>(),
+            ModContent.TileType<Tiles.Herbs.HolybirdPlanterBox>()
+        );
         public class Conversion
         {
             public static bool[] ShortGrass = TileID.Sets.Factory.CreateBoolSet(
@@ -58,6 +65,10 @@ namespace Avalon.Data.Sets
             TileID.Ebonstone,
             TileID.Crimstone,
             TileID.Dirt
+        );
+
+        public static readonly bool[] OnlyPlaceGemStashesOnThese = TileID.Sets.Factory.CreateBoolSet(
+            TileID.Stone, TileID.Sandstone
         );
 
         //public static Dictionary<int, bool> RiftOres = new Dictionary<int, bool>

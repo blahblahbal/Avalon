@@ -15,7 +15,7 @@ public class OreGenPreHardmode : GenPass
     }
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
     {
-        for (int tourmaline = 0; tourmaline < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); tourmaline++)
+        for (int tourmaline = 0; tourmaline < (int)(Main.maxTilesX * 0.08); tourmaline++)
         {
             int xc = WorldGen.genRand.Next(0, Main.maxTilesX);
             int yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
@@ -26,7 +26,7 @@ public class OreGenPreHardmode : GenPass
             }
             WorldGen.TileRunner(xc, yc, WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(3, 7), ModContent.TileType<Tourmaline>());
         }
-        for (int peridot = 0; peridot < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); peridot++)
+        for (int peridot = 0; peridot < (int)(Main.maxTilesX * 0.08); peridot++)
         {
             int xc = WorldGen.genRand.Next(0, Main.maxTilesX);
             int yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
@@ -37,7 +37,7 @@ public class OreGenPreHardmode : GenPass
             }
             WorldGen.TileRunner(xc, yc, WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(3, 7), ModContent.TileType<Peridot>());
         }
-        for (int zircon = 0; zircon < (int)(Main.maxTilesX * Main.maxTilesY * 0.00012); zircon++)
+        for (int zircon = 0; zircon < (int)(Main.maxTilesX * 0.08); zircon++)
         {
             int xc = WorldGen.genRand.Next(0, Main.maxTilesX);
             int yc = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);

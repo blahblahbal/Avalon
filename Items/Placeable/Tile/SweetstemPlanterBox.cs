@@ -13,7 +13,7 @@ class SweetstemPlanterBox : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.BlinkrootPlanterBox);
-        Item.createTile = ModContent.TileType<Tiles.PlanterBoxes>();
-        Item.placeStyle = 3;
+        Item.createTile = ModContent.TileType<Tiles.Herbs.SweetstemPlanterBox>();
+        Item.placeStyle = 0;
     }
 }

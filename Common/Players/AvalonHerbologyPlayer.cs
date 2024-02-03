@@ -36,6 +36,10 @@ public class AvalonHerbologyPlayer : ModPlayer
           //{ ModContent.ItemType<Holybird>(), false },
     //};
     public HerbTier Tier { get; private set; }
+    public bool Novice = true;
+    public bool Apprentice = false;
+    public bool Expert = false;
+    public bool Master = false;
     public int HerbTotal { get; private set; }
     public int HerbX { get; set; }
     public int HerbY { get; set; }
@@ -213,24 +217,34 @@ public class AvalonHerbologyPlayer : ModPlayer
     public void UpdateHerbTier()
     {
         HerbTier newHerbTier;
-        //if (HerbTotal >= HerbologyData.HerbTier4Threshold && Main.hardMode &&
-        //    ModContent.GetInstance<AvalonWorld>().SuperHardmode)
+        //if ((HerbTotal >= HerbologyData.HerbTier4Threshold && Main.hardMode &&
+        //    ModContent.GetInstance<AvalonWorld>().SuperHardmode) || Master)
         //{
         //    newHerbTier = HerbTier.Master; // tier 4; Blah Potion exchange
+        //    Master = true;
+        //    Expert = true;
+        //    Apprentice = true;
+        //    Novice = true;
         //}
         //else
-        if (HerbTotal >= HerbologyData.HerbTier3Threshold && Main.hardMode)
+        if ((HerbTotal >= HerbologyData.HerbTier3Threshold && Main.hardMode) || Expert)
         {
             newHerbTier = HerbTier.Expert; // tier 3; allows you to obtain elixirs
+            Expert = true;
+            Apprentice = true;
+            Novice = true;
         }
-        else if (HerbTotal >= HerbologyData.HerbTier2Threshold)
+        else if (HerbTotal >= HerbologyData.HerbTier2Threshold || Apprentice)
         {
             newHerbTier = HerbTier.Apprentice; // tier 2; allows for large herb seeds
+            Apprentice = true;
+            Novice = true;
         }
         else
         {
             newHerbTier =
                 HerbTier.Novice; // tier 1; allows for exchanging one herb for another
+            Novice = true;
         }
 
         if (newHerbTier > Tier)
@@ -246,11 +260,26 @@ public class AvalonHerbologyPlayer : ModPlayer
         tag["Avalon:HerbTotal"] = HerbTotal;
         tag["Avalon:PotionTotal"] = PotionTotal;
         tag["Avalon:HerbCounts"] = HerbCounts.Save();
+        tag["Avalon:HerbApprentice"] = Apprentice;
+        tag["Avalon:HerbExpert"] = Expert;
+        tag["Avalon:HerbMaster"] = Master;
         //tag["Avalon:HerbExchangeUnlocked"] = HerbExchangeUnlocked.Save();
     }
     /// <inheritdoc />
     public override void LoadData(TagCompound tag)
     {
+        if (tag.ContainsKey("Avalon:HerbApprentice"))
+        {
+            Apprentice = tag.Get<bool>("Avalon:HerbApprentice");
+        }
+        if (tag.ContainsKey("Avalon:HerbExpert"))
+        {
+            Expert = tag.Get<bool>("Avalon:HerbExpert");
+        }
+        if (tag.ContainsKey("Avalon:HerbMaster"))
+        {
+            Master = tag.Get<bool>("Avalon:HerbMaster");
+        }
         if (tag.ContainsKey("Avalon:Tier"))
         {
             Tier = (HerbTier)tag.GetAsInt("Avalon:Tier");

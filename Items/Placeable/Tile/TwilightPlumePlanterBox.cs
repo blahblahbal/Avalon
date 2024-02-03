@@ -13,7 +13,7 @@ class TwilightPlumePlanterBox : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.BlinkrootPlanterBox);
-        Item.createTile = ModContent.TileType<Tiles.PlanterBoxes>();
-        Item.placeStyle = 2;
+        Item.createTile = ModContent.TileType<Tiles.Herbs.TwilightPlumePlanterBox>();
+        Item.placeStyle = 0;
     }
 }
