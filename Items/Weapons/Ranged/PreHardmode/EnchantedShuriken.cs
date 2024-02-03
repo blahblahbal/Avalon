@@ -11,7 +11,7 @@ class EnchantedShuriken : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 16;
+        Item.damage = 15;
         Item.noUseGraphic = true;
         Item.maxStack = 1;
         Item.shootSpeed = 10.5f;

@@ -24,7 +24,7 @@ public class EnchantedShuriken : ModProjectile
         Projectile.height = 18;
         Projectile.aiStyle = -1;
         Projectile.friendly = true;
-        Projectile.penetrate = 6;
+        Projectile.penetrate = 3;
         Projectile.DamageType = DamageClass.Ranged;
     }
 
