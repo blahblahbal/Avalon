@@ -343,6 +343,7 @@ Mods: {
 		}
 
 		TooltipEdits: {
+			HerbologyLine: Can be exchanged at the Herbology Bench
 			EvilPickaxe: Can mine Rhodium, Osmium, and Iridium
 			FishingLine:
 				'''
@@ -405,7 +406,7 @@ Mods: {
 			}
 
 			HerbExchange: {
-				Description: Purchase herbs - each herb's exchange unlocks after 50 collected
+				Description: Purchase herbs seeds
 				Toggle: Toggle listing between seeds and large seeds
 				Grid: Select an item to purchase
 			}
@@ -454,7 +455,7 @@ Mods: {
 				Tooltip:
 					'''
 					Shine potion effect
-					[c/C39FDD:10th Anniversary Contest Winner - Crispy]
+					[c/C39FDD:[10th Anniversary Contest Winner - Crispy][c/C39FDD:]]
 					'''
 			}
 
@@ -464,7 +465,7 @@ Mods: {
 					'''
 					Night Owl potion effect
 					Grappling hooks have 50% increased range
-					[c/C39FDD:10th Anniversary Contest Winner - Crispy]
+					[c/C39FDD:[10th Anniversary Contest Winner - Crispy][c/C39FDD:]]
 					'''
 			}
 
@@ -474,7 +475,7 @@ Mods: {
 					'''
 					Increases jump height
 					15% increased mining speed
-					[c/C39FDD:10th Anniversary Contest Winner - Crispy]
+					[c/C39FDD:[10th Anniversary Contest Winner - Crispy][c/C39FDD:]]
 					'''
 			}
 
@@ -645,7 +646,7 @@ Mods: {
 					'''
 					6% increased minion damage
 					Increases your max number of minions by 1
-					[c/C39FDD:10th Anniversary Contest Winner - Crabby]
+					[c/C39FDD:[10th Anniversary Contest Winner - Crabby][c/C39FDD:]]
 					'''
 			}
 
@@ -655,7 +656,7 @@ Mods: {
 					'''
 					10% increased minion damage
 					Increases your max number of minions by 1
-					[c/C39FDD:10th Anniversary Contest Winner - Crabby]
+					[c/C39FDD:[10th Anniversary Contest Winner - Crabby][c/C39FDD:]]
 					'''
 			}
 
@@ -665,7 +666,7 @@ Mods: {
 					'''
 					4% increased minion damage
 					20% increased movement acceleration and jump speed
-					[c/C39FDD:10th Anniversary Contest Winner - Crabby]
+					[c/C39FDD:[10th Anniversary Contest Winner - Crabby][c/C39FDD:]]
 					'''
 			}
 
@@ -790,7 +791,7 @@ Mods: {
 				Tooltip:
 					'''
 					Phases through normal tiles
-					[c/C39FDD:10th Anniversary Contest Winner - quibop]
+					[c/C39FDD:[10th Anniversary Contest Winner - quibop][c/C39FDD:]]
 					'''
 			}
 
@@ -799,7 +800,7 @@ Mods: {
 				Tooltip:
 					'''
 					Phases through normal tiles
-					[c/C39FDD:10th Anniversary Contest Winner - quibop]
+					[c/C39FDD:[10th Anniversary Contest Winner - quibop][c/C39FDD:]]
 					'''
 			}
 
@@ -1433,7 +1434,7 @@ Mods: {
 					'''
 					The holder has afterimages when moving
 					Works in the vanity slot
-					[c/C39FDD:10th Anniversary Contest Winner - quibop]
+					[c/C39FDD:[10th Anniversary Contest Winner - quibop][c/C39FDD:]]
 					'''
 			}
 
@@ -2427,7 +2428,7 @@ Mods: {
 
 			GPSPotion: {
 				DisplayName: GPS Potion
-				Tooltip: GPS effect
+				Tooltip: Tells the time and shows position
 			}
 
 			InvincibilityPotion: {
@@ -3062,8 +3063,9 @@ Mods: {
 				DisplayName: Crystal Unity
 				Tooltip:
 					'''
+					Shoots random gem bolts that each have a different effect
 					'The power of chaos vanquishes your enemies'
-					[c/C39FDD:10th Anniversary Contest Winner - FractureACBF]
+					[c/C39FDD:[10th Anniversary Contest Winner - FractureACBF][c/C39FDD:]]
 					'''
 			}
 
@@ -3113,7 +3115,14 @@ Mods: {
 
 			HerbologyBench: {
 				DisplayName: Herbology Bench
-				Tooltip: ""
+				Tooltip:
+					'''
+					Used for herb and potion exchange
+					Herbology has three tiers
+					Tier 1 requires no knowledge and allows exchanging herbs for any herb seed
+					Tier 2 requires 250 herb credits to unlock and allows exchanging for large herb seeds
+					Tier 3 requires hardmode and 750 herb credits to unlock and allows potion exchange
+					'''
 			}
 
 			LargeBarfbushSeed: {
@@ -4756,7 +4765,7 @@ Mods: {
 
 			Blahtue: {
 				DisplayName: Blahtue
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - quibop][c/C39FDD:]]"
 			}
 
 			CoughwoodFence: {
@@ -5426,7 +5435,7 @@ Mods: {
 					'Tear through time to rip apart your foes'
 					Fires a piercing quantum beam
 					True melee strikes summon extra non-piercing beams
-					[c/C39FDD:10th Anniversary Contest Winner - Waasephi]
+					[c/C39FDD:[10th Anniversary Contest Winner - Waasephi][c/C39FDD:]]
 					'''
 			}
 
@@ -6513,66 +6522,76 @@ Mods: {
 
 			WildMushroomBed: {
 				DisplayName: Wild Mushroom Bed
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomBookcase: {
 				DisplayName: Wild Mushroom Bookcase
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomChair: {
 				DisplayName: Wild Mushroom Chair
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomClock: {
 				DisplayName: Wild Mushroom Clock
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomLamp: {
 				DisplayName: Wild Mushroom Lamp
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomSofa: {
 				DisplayName: Wild Mushroom Sofa
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomTable: {
 				DisplayName: Wild Mushroom Table
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomToilet: {
 				DisplayName: Wild Mushroom Toilet
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomWorkBench: {
 				DisplayName: Wild Mushroom Work Bench
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomBathtub: {
 				DisplayName: Wild Mushroom Bathtub
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomChandelier: {
 				DisplayName: Wild Mushroom Chandelier
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomPiano: {
 				DisplayName: Wild Mushroom Piano
-				Tooltip: ""
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
 			}
 
 			WildMushroomSink: {
 				DisplayName: Wild Mushroom Sink
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
+			}
+
+			WildMushroomPlatform: {
+				DisplayName: Wild Mushroom Platform
+				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - dr spwewps][c/C39FDD:]]"
+			}
+
+			WildMushroom: {
+				DisplayName: Wild Mushroom
 				Tooltip: ""
 			}
 

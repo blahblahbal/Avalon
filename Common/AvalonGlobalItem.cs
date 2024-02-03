@@ -763,7 +763,7 @@ public class AvalonGlobalItem : GlobalItem
         }
         if (item.type == ModContent.ItemType<VomitWater>() || item.type is ItemID.BloodWater or ItemID.UnholyWater or ItemID.HolyWater)
         {
-            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") && tt.Name.Equals("CritChance")));
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("CritChance"));
             if (index != -1)
             {
                 tooltips.RemoveAt(index);
@@ -771,7 +771,7 @@ public class AvalonGlobalItem : GlobalItem
         }
         if (item.type is ItemID.Extractinator)
         {
-            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0")));
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
             if (index != -1)
             {
                 tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
@@ -779,10 +779,26 @@ public class AvalonGlobalItem : GlobalItem
         }
         if (item.type is ItemID.ChlorophyteExtractinator)
         {
-            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip2")));
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip2"));
             if (index != -1)
             {
                 tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip2", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
+            }
+        }
+        if (Data.Sets.Item.Herbs[item.type])
+        {
+            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name)) && tt.Name.Equals("Material"));
+            if (index != -1)
+            {
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "Material", NetworkText.FromKey("Mods.Avalon.TooltipEdits.HerbologyLine").ToString()));
+            }
+        }
+        if (Data.Sets.Item.Potions[item.type])
+        {
+            int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name)) && tt.Name.Equals("Tooltip0"));
+            if (index != -1)
+            {
+                tooltips.Insert(index + (item.type == ModContent.ItemType<BloodCastPotion>() ? 2 : 1), new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.HerbologyLine").ToString()));
             }
         }
         if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome)

@@ -31,24 +31,21 @@ class WildMushroomLamp : ModItem
     {
         CreateRecipe(1)
             .AddIngredient(ItemID.Torch)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 1)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 3)
             .AddIngredient(ItemID.VileMushroom)
             .AddTile(TileID.WorkBenches)
             .Register();
 
         CreateRecipe(1)
             .AddIngredient(ItemID.Torch)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 1)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 3)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddTile(TileID.WorkBenches)
             .Register();
 
         CreateRecipe(1)
             .AddIngredient(ItemID.Torch)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 1)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 3)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddTile(TileID.WorkBenches)
             .Register();

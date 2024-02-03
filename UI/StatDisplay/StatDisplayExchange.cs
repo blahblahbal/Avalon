@@ -3,11 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.UI;
 
-namespace Avalon.UI.Herbology;
+namespace Avalon.UI.StatDisplay;
 
-internal class HerbologyUIHerbExchange : ExxoUIPanelWrapper<ExxoUIList>
+internal class StatDisplayExchange : ExxoUIPanelWrapper<ExxoUIList>
 {
-    public HerbologyUIHerbExchange() : base(new ExxoUIList())
+    public StatDisplayExchange() : base(new ExxoUIList())
     {
         Height.Set(0, 1);
         InnerElement.Direction = Direction.Horizontal;
@@ -16,21 +16,41 @@ internal class HerbologyUIHerbExchange : ExxoUIPanelWrapper<ExxoUIList>
         list.Height.Set(0, 1);
         InnerElement.Append(list, new ExxoUIList.ElementParams(true, false));
 
-        var herbExchangeTitleContainer = new ExxoUIList { FitHeightToContent = true, ContentVAlign = UIAlign.Center };
+        #region potions
+        var potionExchangeTitleContainer = new ExxoUIList { FitHeightToContent = true, ContentVAlign = UIAlign.Center, ContentHAlign = 0.3f };
+        potionExchangeTitleContainer.Width.Set(0, 1);
+        potionExchangeTitleContainer.Direction = Direction.Horizontal;
+        potionExchangeTitleContainer.Justification = Justification.Center;
+        list.Append(potionExchangeTitleContainer);
+
+        var titlePotions = new ExxoUIText("Potion Exchange");
+        potionExchangeTitleContainer.Append(titlePotions);
+
+        Toggle = new ExxoUIImageButtonToggle(
+            Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconEvilCorruption"), Color.White,
+            Color.Orange)
+        { Tooltip = "Toggle Potions/Elixirs" };
+        potionExchangeTitleContainer.Append(Toggle);
+        potionExchangeTitleContainer.Hidden = true;
+        #endregion
+
+        #region herbs
+        var herbExchangeTitleContainer = new ExxoUIList { FitHeightToContent = true, ContentVAlign = UIAlign.Center, ContentHAlign = 0.3f };
         herbExchangeTitleContainer.Width.Set(0, 1);
         herbExchangeTitleContainer.Direction = Direction.Horizontal;
         herbExchangeTitleContainer.Justification = Justification.Center;
         list.Append(herbExchangeTitleContainer);
 
-        var title = new ExxoUIText("Herb Exchange");
-        herbExchangeTitleContainer.Append(title);
+        var titleHerbs = new ExxoUIText("Herb Exchange");
+        herbExchangeTitleContainer.Append(titleHerbs);
 
         Toggle = new ExxoUIImageButtonToggle(
-            Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconRandomSeed"), Color.White, Color.Red)
+            Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconRandomSeed"), Color.Red, Color.White)
         {
             Tooltip = "Toggle Seeds/Large Seeds",
         };
         herbExchangeTitleContainer.Append(Toggle);
+        #endregion
 
         var horizontalRule = new ExxoUIHorizontalRule();
         horizontalRule.Width.Set(0, 1);

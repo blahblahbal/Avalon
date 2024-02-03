@@ -12,7 +12,7 @@ class DungeonWand : ModItem
         Item.width = 24;
         Item.height = 28;
         Item.autoReuse = true;
-        Item.rare = ItemRarityID.Blue;
+        Item.rare = ItemRarityID.Green;
         Item.useTurn = true;
         Item.useTime = 7;
         Item.useStyle = ItemUseStyleID.Swing;

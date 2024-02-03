@@ -30,8 +30,7 @@ class WildMushroomChandelier : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
             .AddIngredient(ItemID.VileMushroom)
             .AddIngredient(ItemID.Torch, 4)
             .AddIngredient(ItemID.Chain)
@@ -39,8 +38,7 @@ class WildMushroomChandelier : ModItem
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddIngredient(ItemID.Torch, 4)
             .AddIngredient(ItemID.Chain)
@@ -48,8 +46,7 @@ class WildMushroomChandelier : ModItem
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddIngredient(ItemID.Torch, 4)
             .AddIngredient(ItemID.Chain)

@@ -31,24 +31,21 @@ public class WildMushroomSink : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 3)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 6)
             .AddIngredient(ItemID.VileMushroom)
             .AddIngredient(ItemID.WaterBucket)
             .AddTile(TileID.WorkBenches)
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 3)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 6)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddIngredient(ItemID.WaterBucket)
             .AddTile(TileID.WorkBenches)
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 3)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 6)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddIngredient(ItemID.WaterBucket)
             .AddTile(TileID.WorkBenches)

@@ -53,7 +53,7 @@ class RevenantHelm : ModItem
     }
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Zombie");
+        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Revenant");
         player.GetModPlayer<AvalonPlayer>().ZombieArmor = true;
     }
     public override void UpdateEquip(Player player)

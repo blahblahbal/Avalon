@@ -13,16 +13,16 @@ public class FractureRarity : ModRarity
         {
             List<Color> colors = new List<Color>
             {
-                new Color(238, 51, 53),
-                new Color(239, 99, 0),
-                new Color(255, 198, 0),
-                new Color(0, 237, 14),
-                new Color(33, 184, 115),
-                new Color(27, 247, 229),
-                new Color(23, 147, 234),
-                new Color(165, 0, 236),
-                new Color(137, 126, 187),
-                new Color(160, 124, 80)
+                new Color(238, 51, 53, 0),
+                new Color(239, 99, 0, 0),
+                new Color(255, 198, 0, 0),
+                new Color(0, 237, 14, 0),
+                new Color(33, 184, 115, 0),
+                new Color(27, 247, 229, 0),
+                new Color(23, 147, 234, 0),
+                new Color(165, 0, 236, 0),
+                new Color(137, 126, 187, 0),
+                new Color(160, 124, 80, 0)
             };
             int numColors = colors.Count;
             float fade = Main.GameUpdateCount % 60 / 60f;

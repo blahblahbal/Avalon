@@ -30,24 +30,21 @@ class WildMushroomSofa : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 5)
             .AddIngredient(ItemID.VileMushroom)
             .AddIngredient(ItemID.Silk, 2)
             .AddTile(TileID.Sawmill)
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 5)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddIngredient(ItemID.Silk, 2)
             .AddTile(TileID.Sawmill)
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 5)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddIngredient(ItemID.Silk, 2)
             .AddTile(TileID.Sawmill)

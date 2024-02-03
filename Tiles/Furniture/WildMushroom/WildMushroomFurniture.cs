@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -238,16 +239,16 @@ public class WildMushroomLantern : LanternTemplate
         }
     }
 }
+*/
 
 
 
 public class WildMushroomPlatform : PlatformTemplate
 {
-    public override int Dust => ModContent.DustType<WildMushroomDust>();
+    public override int Dust => DustID.Dirt; // ModContent.DustType<WildMushroomDust>();
 }
 
 
-*/
 
 public class WildMushroomPiano : PianoTemplate
 {

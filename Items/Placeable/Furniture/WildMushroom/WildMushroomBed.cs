@@ -29,24 +29,21 @@ class WildMushroomBed : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 8)
-            .AddIngredient(ItemID.GlowingMushroom, 7)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 15)
             .AddIngredient(ItemID.VileMushroom)
             .AddIngredient(ItemID.Silk, 5)
             .AddTile(TileID.Sawmill)
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 8)
-            .AddIngredient(ItemID.GlowingMushroom, 7)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 15)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddIngredient(ItemID.Silk, 5)
             .AddTile(TileID.Sawmill)
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 8)
-            .AddIngredient(ItemID.GlowingMushroom, 7)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 15)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddIngredient(ItemID.Silk, 5)
             .AddTile(TileID.Sawmill)

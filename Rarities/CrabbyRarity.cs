@@ -11,7 +11,11 @@ public class CrabbyRarity : ModRarity
     {
         get
         {
-            var colors = new List<Color> { new(76, 255, 0), new(0, 127, 14) };
+            var colors = new List<Color>
+            {
+                new(76, 255, 0),
+                new(0, 127, 14)
+            };
             int num = (int)(Main.GlobalTimeWrappedHourly / 2f % colors.Count);
             Color blue = colors[num];
             Color silver = colors[(num + 1) % colors.Count];

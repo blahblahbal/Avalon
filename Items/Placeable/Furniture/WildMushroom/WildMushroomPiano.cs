@@ -32,8 +32,7 @@ class WildMushroomPiano : ModItem
     {
         CreateRecipe(1)
            .AddIngredient(ItemID.Bone, 4)
-           .AddIngredient(ItemID.Mushroom, 8)
-           .AddIngredient(ItemID.GlowingMushroom, 7)
+           .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 15)
            .AddIngredient(ItemID.VileMushroom)
            .AddIngredient(ItemID.Book)
            .AddTile(TileID.Sawmill)
@@ -41,8 +40,7 @@ class WildMushroomPiano : ModItem
 
         CreateRecipe(1)
            .AddIngredient(ItemID.Bone, 4)
-           .AddIngredient(ItemID.Mushroom, 8)
-           .AddIngredient(ItemID.GlowingMushroom, 7)
+           .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 15)
            .AddIngredient(ItemID.ViciousMushroom)
            .AddIngredient(ItemID.Book)
            .AddTile(TileID.Sawmill)
@@ -50,8 +48,7 @@ class WildMushroomPiano : ModItem
 
         CreateRecipe(1)
             .AddIngredient(ItemID.Bone, 4)
-            .AddIngredient(ItemID.Mushroom, 8)
-            .AddIngredient(ItemID.GlowingMushroom, 7)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 15)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddIngredient(ItemID.Book)
             .AddTile(TileID.Sawmill)

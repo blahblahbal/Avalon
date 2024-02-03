@@ -15,7 +15,6 @@ namespace Avalon.Tiles
             Main.tileFrameImportant[Type] = true;
             Main.tileSolidTop[Type] = true;
             Main.tileSolid[Type] = true;
-            Main.tileNoAttach[Type] = true;
             Main.tileLavaDeath[Type] = false;
             TileID.Sets.IgnoresNearbyHalfbricksWhenDrawn[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);

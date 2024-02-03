@@ -31,22 +31,19 @@ class WildMushroomTable : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 4)
-            .AddIngredient(ItemID.GlowingMushroom, 4)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 8)
             .AddIngredient(ItemID.VileMushroom)
             .AddTile(TileID.WorkBenches)
             .Register();
 
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 4)
-            .AddIngredient(ItemID.GlowingMushroom, 4)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 8)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddTile(TileID.WorkBenches)
             .Register();
 
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 4)
-            .AddIngredient(ItemID.GlowingMushroom, 4)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 8)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddTile(TileID.WorkBenches)
             .Register();

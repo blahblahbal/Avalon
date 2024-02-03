@@ -1,3 +1,4 @@
+using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;
@@ -34,6 +35,7 @@ public class DesertBeakBossBag : ModItem
 
     public override void ModifyItemLoot(ItemLoot itemLoot)
     {
+        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DesertGambler>()));
         itemLoot.Add(ItemDropRule.Common(ItemID.SandBlock, 1, 22, 55));
         itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DesertFeather>(), 1, 18, 24));
         itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TomeoftheDistantPast>(), 3));

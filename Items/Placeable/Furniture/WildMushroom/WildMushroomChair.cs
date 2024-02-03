@@ -30,22 +30,19 @@ class WildMushroomChair : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
             .AddIngredient(ItemID.VileMushroom)
             .AddTile(TileID.WorkBenches)
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddTile(TileID.WorkBenches)
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.Mushroom, 2)
-            .AddIngredient(ItemID.GlowingMushroom, 2)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddTile(TileID.WorkBenches)
             .Register();

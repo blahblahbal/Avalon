@@ -33,8 +33,7 @@ class WildMushroomClock : ModItem
         CreateRecipe()
             .AddRecipeGroup("IronBar", 3)
             .AddIngredient(ItemID.Glass, 6)
-            .AddIngredient(ItemID.Mushroom, 5)
-            .AddIngredient(ItemID.GlowingMushroom, 5)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 10)
             .AddIngredient(ItemID.VileMushroom)
             .AddTile(TileID.Sawmill)
             .Register();
@@ -42,8 +41,7 @@ class WildMushroomClock : ModItem
         CreateRecipe()
             .AddRecipeGroup("IronBar", 3)
             .AddIngredient(ItemID.Glass, 6)
-            .AddIngredient(ItemID.Mushroom, 5)
-            .AddIngredient(ItemID.GlowingMushroom, 5)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 10)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddTile(TileID.Sawmill)
             .Register();
@@ -51,8 +49,7 @@ class WildMushroomClock : ModItem
         CreateRecipe()
             .AddRecipeGroup("IronBar", 3)
             .AddIngredient(ItemID.Glass, 6)
-            .AddIngredient(ItemID.Mushroom, 5)
-            .AddIngredient(ItemID.GlowingMushroom, 5)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 10)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddTile(TileID.Sawmill)
             .Register();

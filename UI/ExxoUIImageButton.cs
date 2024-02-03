@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.Audio;
@@ -12,11 +12,12 @@ internal class ExxoUIImageButton : ExxoUIImage
     public ExxoUIImageButton(Asset<Texture2D> texture) : base(texture) { }
     public float OpacityActive { get; set; } = 1f;
     public float OpacityInactive { get; set; } = 0.4f;
+    public bool Selected { get; set; }
 
     protected override void DrawSelf(SpriteBatch spriteBatch)
     {
         Color oldColor = Color;
-        Color *= IsMouseHovering ? OpacityActive : OpacityInactive;
+        Color *= IsMouseHovering || Selected ? OpacityActive : OpacityInactive;
         base.DrawSelf(spriteBatch);
         Color = oldColor;
     }

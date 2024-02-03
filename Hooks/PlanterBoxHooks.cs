@@ -15,7 +15,18 @@ namespace Avalon.Hooks
             On_WorldGen.PlaceAlch += OnPlaceAlch;
             On_WorldGen.CheckAlch += OnCheckAlch;
             On_WorldGen.CanCutTile += On_WorldGen_CanCutTile;
+            //On_WorldGen.PlaceTile += On_WorldGen_PlaceTile;
         }
+
+        private bool On_WorldGen_PlaceTile(On_WorldGen.orig_PlaceTile orig, int i, int j, int Type, bool mute, bool forced, int plr, int style)
+        {
+            if (Main.tile[i, j + 1].TileType == ModContent.TileType<Tiles.PlanterBoxes>() && Type != TileID.ImmatureHerbs && Type != TileID.MatureHerbs && Type != TileID.BloomingHerbs)
+            {
+                return false;
+            }
+            return orig.Invoke(i, j, Type, mute, forced, plr, style);
+        }
+
         private bool On_WorldGen_CanCutTile(On_WorldGen.orig_CanCutTile orig, int x, int y, TileCuttingContext context)
         {
             if (Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.PlanterBoxes>())
@@ -24,6 +35,7 @@ namespace Avalon.Hooks
             }
             return orig(x, y, context);
         }
+        
         private static bool OnPlaceAlch(On_WorldGen.orig_PlaceAlch orig, int x, int y, int style)
         {
             if (Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.PlanterBoxes>())

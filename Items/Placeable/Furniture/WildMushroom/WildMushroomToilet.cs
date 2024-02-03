@@ -30,22 +30,19 @@ class WildMushroomToilet : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 3)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 6)
             .AddIngredient(ItemID.VileMushroom)
             .AddTile(TileID.Sawmill)
             .Register();
 
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 3)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 6)
             .AddIngredient(ItemID.ViciousMushroom)
             .AddTile(TileID.Sawmill)
             .Register();
 
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 3)
-            .AddIngredient(ItemID.GlowingMushroom, 3)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 6)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .AddTile(TileID.Sawmill)
             .Register();

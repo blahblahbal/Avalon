@@ -31,20 +31,17 @@ class WildMushroomWorkBench : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 5)
-            .AddIngredient(ItemID.GlowingMushroom, 5)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 10)
             .AddIngredient(ItemID.VileMushroom)
             .Register();
 
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 5)
-            .AddIngredient(ItemID.GlowingMushroom, 5)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 10)
             .AddIngredient(ItemID.ViciousMushroom)
             .Register();
 
         CreateRecipe()
-            .AddIngredient(ItemID.Mushroom, 5)
-            .AddIngredient(ItemID.GlowingMushroom, 5)
+            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 10)
             .AddIngredient(ModContent.ItemType<VirulentMushroom>())
             .Register();
     }
