@@ -30,10 +30,6 @@ public class ContagionPalmTree : ModPalmTree
 
     public override int CreateDust() => ModContent.DustType<CoughwoodDust>();
     //public override int TreeLeaf() => ModContent.Find<ModGore>("Avalon/ContagionTreeLeaf").Type;
-    public override bool CanDropAcorn()
-    {
-        return false;
-    }
     public override bool Shake(int x, int y, ref bool createLeaves)
     {
         if (Main.getGoodWorld && Main.rand.NextBool(17))
