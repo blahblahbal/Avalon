@@ -72,6 +72,14 @@ internal class DesertBeakWingNPC : ModNPC
 
         // aaaaaaaaaa
 
+        if (Main.player[Main.npc[MainBody].target].dead || Main.npc[MainBody].target < 0 || Main.npc[MainBody].target == 255)
+        {
+            NPC.timeLeft = 0;
+            NPC.checkDead();
+            NPC.life = 0;
+            NPC.active = false;
+        }
+
         if (NPC.ai[2] == 1)
         {
             NPC.position.X = Main.npc[MainBody].Center.X - 77 - 31;
