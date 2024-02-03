@@ -30,7 +30,7 @@ public class Hallowor : ModNPC
         NPC.HitSound = SoundID.NPCHit5;
         NPC.DeathSound = SoundID.NPCDeath7;
         NPC.lifeMax = 530;
-        NPC.scale = 1.8f;
+        NPC.scale = 1.2f;
         NPC.knockBackResist = 0.35f;
         NPC.noGravity = true;
         NPC.noTileCollide = false;
