@@ -27,7 +27,7 @@ class BacciliteBar : ModItem
         Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
         Item.useTime = 10;
-        Item.value = Item.sellPrice(0, 0, 28, 0);
+        Item.value = Item.sellPrice(0, 0, 21, 0);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;
