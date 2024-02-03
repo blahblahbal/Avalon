@@ -31,7 +31,12 @@ public static class NPC
         NPCID.GiantTortoise,
         NPCID.WallCreeper,
         NPCID.WallCreeperWall,
-        NPCID.BlackRecluse);
+        NPCID.BlackRecluse,
+        NPCID.BlackRecluseWall,
+        NPCID.GiantFlyingAntlion,
+        NPCID.FlyingAntlion,
+        NPCID.WalkingAntlion,
+        NPCID.GiantWalkingAntlion);
 
     public static readonly bool[] Fiery = NPCID.Sets.Factory.CreateBoolSet(
         NPCID.FireImp,
