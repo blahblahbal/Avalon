@@ -29,9 +29,9 @@ public class ContagionPalmTree : ModPalmTree
     //public override int TreeLeaf() => ModContent.Find<ModGore>("Avalon/ContagionTreeLeaf").Type;
     public override bool Shake(int x, int y, ref bool createLeaves)
     {
-        if (Main.rand.NextBool(10))
+        if (Main.rand.NextBool(12))
         {
-            Item.NewItem(WorldGen.GetItemSource_FromTreeShake(x, y), new Vector2(x, y) * 16, ModContent.ItemType<Items.Food.Durian>());
+            Item.NewItem(WorldGen.GetItemSource_FromTreeShake(x, y), new Vector2(x, y) * 16, (!Main.rand.NextBool(2)) ? ModContent.ItemType<Items.Food.Durian>() : ModContent.ItemType<Items.Food.Medlar>());
             return false;
         }
         return true;
