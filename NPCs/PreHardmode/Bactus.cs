@@ -68,6 +68,14 @@ public class Bactus : ModNPC
     //    NPC.damage = (int)(NPC.damage * 0.65f);
     //}
     bool spawned;
+    public bool treeSpawn;
+    public override void OnSpawn(IEntitySource source)
+    {
+        if (source is EntitySource_ShakeTree)
+        {
+            treeSpawn = true;
+        }
+    }
     public override void AI()
     {
         if (!spawned)
@@ -75,6 +83,8 @@ public class Bactus : ModNPC
             spawned = true;
 
             int J = Main.rand.Next(0, 3);
+            if (treeSpawn && !Main.remixWorld) J = 1;
+            if (Main.remixWorld && !Main.getGoodWorld) J = 2;
             if (J == 1)
             {
                 NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
