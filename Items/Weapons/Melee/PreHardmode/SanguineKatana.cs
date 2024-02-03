@@ -52,7 +52,7 @@ public class SanguineKatana : ModItem
     }
     public override bool CanShoot(Player player)
     {
-        if (!player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
+        if (!player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()) && Item.useAnimation != 24)
         {
             Item.noMelee = false;
             Item.useTurn = true;
