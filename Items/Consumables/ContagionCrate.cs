@@ -19,8 +19,8 @@ public class ContagionCrate : ModItem
         Item.placeStyle = 0;
         Item.width = 12; //The hitbox dimensions are intentionally smaller so that it looks nicer when fished up on a bobber
         Item.height = 12;
-        Item.rare = ItemRarityID.Orange;
-        Item.value = Item.sellPrice(0, 2);
+        Item.rare = ItemRarityID.Green;
+        Item.value = Item.sellPrice(0, 1);
     }
 
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
@@ -36,11 +36,11 @@ public class ContagionCrate : ModItem
     public override void ModifyItemLoot(ItemLoot itemLoot)
     {
         int[] themedDrops = new int[] {
-            ModContent.ItemType<Accessories.PreHardmode.BandofStamina>(),
+            ModContent.ItemType<Accessories.PreHardmode.NerveNumbNecklace>(),
             ModContent.ItemType<Weapons.Ranged.PreHardmode.Blunderblight>(),
             ModContent.ItemType<Weapons.Magic.PreHardmode.Smogscreen>(),
             ModContent.ItemType<Pets.SepticCell>(),
-            //ModContent.ItemType<Weapons.Melee.PreHardmode.PotentialContagionBoomerang>(),
+            ModContent.ItemType<Weapons.Melee.PreHardmode.TetanusChakram>(),
         };
         itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, themedDrops));
 
