@@ -25,6 +25,7 @@ public class ContagionPalmTree : ModPalmTree
 
     public override Asset<Texture2D> GetTopTextures() =>
         ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Contagion/ContagionPalmTreeTop");
+    public override int TreeLeaf() => ModContent.GoreType<ContagionTreeLeaf>();
 
     public override int DropWood() => ModContent.ItemType<Items.Placeable.Tile.Coughwood>();
 
