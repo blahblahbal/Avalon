@@ -35,8 +35,8 @@ class EnchantedBar : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(Type)
-            .AddIngredient(ItemID.FallenStar)
-            .AddRecipeGroup(RecipeGroupID.IronBar)
+            .AddIngredient(ItemID.FallenStar, 2)
+            .AddRecipeGroup("Avalon:GoldBar")
             .AddTile(TileID.Furnaces).Register();
     }
 }

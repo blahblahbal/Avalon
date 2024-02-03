@@ -928,7 +928,7 @@ Mods: {
 
 			Durian: {
 				DisplayName: Durian
-				Tooltip: "{$CommonItemTooltip.MajorStats}"
+				Tooltip: "{$CommonItemTooltip.MinorStats}"
 			}
 
 			Raspberry: {
@@ -5553,7 +5553,7 @@ Mods: {
 
 			Medlar: {
 				DisplayName: Medlar
-				Tooltip: "{$CommonItemTooltip.MediumStats}"
+				Tooltip: "{$CommonItemTooltip.MinorStats}"
 			}
 
 			MedlarMedley: {
