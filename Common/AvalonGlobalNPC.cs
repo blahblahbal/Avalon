@@ -106,6 +106,7 @@ public class AvalonGlobalNPC : GlobalNPC
         Condition corruption = new Condition("Corruption", () => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Corruption);
         Condition crimson = new Condition("Crimson", () => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Crimson);
         Condition contagion = new Condition("Contagion", () => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion);
+        Condition notContagion = new Condition("Not Contagion", () => !contagion.IsMet());
         Condition downedBP = new Condition("BacteriumPrime", () => ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime);
 
         if (shop.NpcType == NPCID.Merchant)
@@ -162,55 +163,57 @@ public class AvalonGlobalNPC : GlobalNPC
             {
                 shopCustomPrice = Item.buyPrice(silver: 2, copper: 50)
             }, Condition.BloodMoon, contagion);
-            shop.InsertAfter(ItemID.CrimsonSeeds, new Item(ModContent.ItemType<ContagionSeeds>())
-            {
-                shopCustomPrice = Item.buyPrice(silver: 5)
-            }, Condition.BloodMoon, contagion, Condition.NotInGraveyard);
 
             shop.InsertAfter(ItemID.CrimsonSeeds, new Item(ModContent.ItemType<ContagionSeeds>())
             {
                 shopCustomPrice = Item.buyPrice(silver: 5)
-            }, Condition.BloodMoon, corruption, Condition.InGraveyard);
-            
+            }, Condition.BloodMoon, contagion);
+
             shop.InsertAfter(ItemID.CrimsonSeeds, new Item(ModContent.ItemType<ContagionSeeds>())
             {
                 shopCustomPrice = Item.buyPrice(silver: 5)
-            }, Condition.BloodMoon, crimson, Condition.InGraveyard);
+            }, corruption, Condition.InGraveyard, Condition.Hardmode);
             
+            shop.InsertAfter(ItemID.CorruptSeeds, new Item(ModContent.ItemType<ContagionSeeds>())
+            {
+                shopCustomPrice = Item.buyPrice(silver: 5)
+            }, crimson, Condition.InGraveyard, Condition.Hardmode);
+
             shop.InsertAfter(ItemID.ViciousPowder, new Item(ModContent.ItemType<VirulentPowder>())
             {
                 shopCustomPrice = Item.buyPrice(silver: 1)
             }, Condition.BloodMoon, contagion);
 
+            // the seeds here aren't always positioned correctly, but it works and I do NOT want to keep relaunching to figure out something as minor as positioning
             if (shop.TryGetEntry(ItemID.CorruptSeeds, out NPCShop.Entry entry))
             {
-                entry.AddCondition(contagion);
-                entry.Disable();
+                entry.AddCondition(notContagion);
             }
             if (shop.TryGetEntry(ItemID.CrimsonSeeds, out NPCShop.Entry entry2))
             {
-                entry2.AddCondition(contagion);
-                entry2.Disable();
+                entry2.AddCondition(notContagion);
             }
+            shop.InsertAfter(ModContent.ItemType<ContagionGrassWall>(), new Item(ItemID.CorruptSeeds)
+            {
+                shopCustomPrice = Item.buyPrice(silver: 5)
+            }, contagion, Condition.InGraveyard, Condition.Hardmode);
+
+
             if (shop.TryGetEntry(ItemID.CorruptGrassEcho, out NPCShop.Entry entry3))
             {
-                entry3.AddCondition(contagion);
-                entry3.Disable();
+                entry3.AddCondition(notContagion);
             }
             if (shop.TryGetEntry(ItemID.CrimsonGrassEcho, out NPCShop.Entry entry4))
             {
-                entry4.AddCondition(contagion);
-                entry4.Disable();
+                entry4.AddCondition(notContagion);
             }
             if (shop.TryGetEntry(ItemID.VilePowder, out NPCShop.Entry entry5))
             {
-                entry5.AddCondition(contagion);
-                entry5.Disable();
+                entry5.AddCondition(notContagion);
             }
             if (shop.TryGetEntry(ItemID.ViciousPowder, out NPCShop.Entry entry6))
             {
-                entry6.AddCondition(contagion);
-                entry6.Disable();
+                entry6.AddCondition(notContagion);
             }
         }
     }
