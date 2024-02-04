@@ -55,7 +55,7 @@ class NerveNumbNecklace : ModItem
             .Register();
 
         CreateRecipe(1)
-            .AddIngredient(ItemID.ManaCrystal, 3)
+            .AddIngredient(ModContent.ItemType<StaminaCrystal>(), 3)
             .AddIngredient(ModContent.ItemType<BacciliteBar>(), 4)
             .AddIngredient(ModContent.ItemType<CorruptShard>(), 2)
             .AddTile(TileID.TinkerersWorkbench)
