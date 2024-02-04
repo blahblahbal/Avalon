@@ -162,8 +162,6 @@ public class AvalonGlobalTile : GlobalTile
     }
     public override bool CanPlace(int i, int j, int type)
     {
-        Main.NewText(type);
-        Console.WriteLine(type);
         if (Data.Sets.Tile.AvalonPlanterBoxes[Main.tile[i, j + 1].TileType] &&
             (Main.tile[i, j].TileType == TileID.ImmatureHerbs || Main.tile[i, j].TileType == TileID.MatureHerbs ||
             Main.tile[i, j].TileType == TileID.BloomingHerbs || Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>() ||

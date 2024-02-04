@@ -34,6 +34,8 @@ using Avalon.Items.Placeable.Crafting;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Food;
 using Avalon.Items.MusicBoxes;
+using System.Linq;
+using System;
 
 namespace Avalon.Common;
 
@@ -549,6 +551,59 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
+        if (item.type == ItemID.HerbBag)
+        {
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is HerbBagDropsItemDropRule herbRule && Array.IndexOf(herbRule.dropIds, 313) > -1)
+                {
+                    HashSet<int> set = new HashSet<int>(herbRule.dropIds)
+                    {
+                        ModContent.ItemType<Barfbush>(),
+                        ModContent.ItemType<BarfbushSeeds>(),
+                        ModContent.ItemType<Bloodberry>(),
+                        ModContent.ItemType<BloodberrySeeds>(),
+                        ModContent.ItemType<Sweetstem>(),
+                        ModContent.ItemType<SweetstemSeeds>()
+                    };
+                    herbRule.dropIds = set.ToArray();
+                    break;
+                }
+            }
+        }
+        if (item.type == ItemID.LockBox)
+        {
+            OneFromRulesRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not OneFromRulesRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    IItemDropRule ruleAquaScepterBubbleGun = ItemDropRule.ByCondition(new Conditions.NotRemixSeed(), ItemID.AquaScepter);
+                    ruleAquaScepterBubbleGun.OnFailedConditions(ItemDropRule.NotScalingWithLuck(ItemID.BubbleGun), hideLootReport: true);
+
+                    IItemDropRule[] goldenLockBoxList = new IItemDropRule[]
+                    {
+                        ItemDropRule.NotScalingWithLuck(ItemID.Valor),
+                        ItemDropRule.NotScalingWithLuck(ItemID.Muramasa),
+                        ItemDropRule.NotScalingWithLuck(ItemID.CobaltShield),
+                        ruleAquaScepterBubbleGun,
+                        ItemDropRule.NotScalingWithLuck(ItemID.BlueMoon),
+                        ItemDropRule.NotScalingWithLuck(ItemID.MagicMissile),
+                        ItemDropRule.NotScalingWithLuck(ItemID.Handgun),
+                        ItemDropRule.NotScalingWithLuck(ModContent.ItemType<SapphirePickaxe>()),
+                        ItemDropRule.NotScalingWithLuck(ModContent.ItemType<Blueshift>())
+                    };
+                    oneFromRulesRule.options = goldenLockBoxList;
+                    break;
+                }
+            }
+        }
         if (item.type == ItemID.PlanteraBossBag)
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeDew>(), 1, 10, 17));

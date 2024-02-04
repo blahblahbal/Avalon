@@ -704,7 +704,6 @@ public class AvalonStaminaPlayer : ModPlayer
 
             if (doMining)
             {
-                Main.NewText("HI");
                 Player.pickSpeed -= Player.pickSpeed * 0.15f;
                 if (Player.pickSpeed < 0.4f)
                 {
