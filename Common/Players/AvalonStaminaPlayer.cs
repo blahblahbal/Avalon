@@ -666,7 +666,8 @@ public class AvalonStaminaPlayer : ModPlayer
                 Player.spikedBoots++;
             }
         }
-        if (MiningSpeedUnlocked && Player.HeldItem.pick > 0 && Player.ItemAnimationActive && Player.pickSpeed > 0.4f)
+        int amt2 = 5 - (int)(1 - Player.pickSpeed * 5);
+        if (MiningSpeedUnlocked && Player.HeldItem.pick > 0 && Player.ItemAnimationActive && Player.pickSpeed > 0.4f && StatStam > amt2)
         {
             bool doMining = true;
             StaminaMiningCD++;
@@ -703,6 +704,7 @@ public class AvalonStaminaPlayer : ModPlayer
 
             if (doMining)
             {
+                Main.NewText("HI");
                 Player.pickSpeed -= Player.pickSpeed * 0.15f;
                 if (Player.pickSpeed < 0.4f)
                 {

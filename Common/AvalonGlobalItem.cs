@@ -307,7 +307,7 @@ public class AvalonGlobalItem : GlobalItem
         ShimmerTransmute(ModContent.ItemType<MusicBoxHellCastle>(), ItemID.MusicBox);
         ShimmerTransmute(ModContent.ItemType<MusicBoxPhantasm>(), ItemID.MusicBox);
         ShimmerTransmute(ModContent.ItemType<MusicBoxSkyFortress>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxTropics>(), ItemID.MusicBox);
+        //ShimmerTransmute(ModContent.ItemType<MusicBoxTropics>(), ItemID.MusicBox);
         ShimmerTransmute(ModContent.ItemType<MusicBoxTuhrtlOutpost>(), ItemID.MusicBox);
         ShimmerTransmute(ModContent.ItemType<MusicBoxUndergroundContagion>(), ItemID.MusicBox);
         // end music boxes

@@ -176,7 +176,7 @@ public class AvalonPlayer : ModPlayer
     #endregion
 
     public bool CougherMask;
-    private int[] doubleTapTimer = new int[2];
+    private int[] doubleTapTimer = new int[3];
 
     #region accessories
     public bool PulseCharm;
