@@ -48,9 +48,10 @@ class StaminaCrystal : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<Boltstone>(), 25)
             .AddTile(TileID.Furnaces)
+            .DisableDecraft()
             .Register();
     }
 }

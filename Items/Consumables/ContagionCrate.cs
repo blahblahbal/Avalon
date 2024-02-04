@@ -19,7 +19,7 @@ public class ContagionCrate : ModItem
         Item.placeStyle = 0;
         Item.width = 12; //The hitbox dimensions are intentionally smaller so that it looks nicer when fished up on a bobber
         Item.height = 12;
-        Item.rare = ItemRarityID.Orange;
+        Item.rare = ItemRarityID.Green;
         Item.value = Item.sellPrice(0, 2);
     }
 

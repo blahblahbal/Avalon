@@ -454,36 +454,30 @@ public class AvalonStaminaPlayer : ModPlayer
             QuickStamina();
         }
 
-        if (KeybindSystem.DashHotkey.JustPressed)
-        {
-            StamDashKey = !StamDashKey;
-            Main.NewText(!StamDashKey ? "Dashing Off" : "Dashing On");
-        }
-
-        if (KeybindSystem.FlightTimeRestoreHotkey.JustPressed && Player.wingsLogic > 0 && Player.wingTime == 0 && FlightRestoreUnlocked && FlightRestoreCooldown >= 60 * 60)
-        {
-            int amt = 150;
-            if (StaminaDrain)
-            {
-                amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-            }
-            if (StatStam >= amt)
-            {
-                StatStam -= amt;
-                FlightRestoreCooldown = 0;
-                Player.wingTime = Player.wingTimeMax;
-            }
-            else if (StamFlower)
-            {
-                QuickStamina(amt);
-                if (StatStam >= amt)
-                {
-                    StatStam -= amt;
-                    FlightRestoreCooldown = 0;
-                    Player.wingTime = Player.wingTimeMax;
-                }
-            }
-        }
+        //if (KeybindSystem.FlightTimeRestoreHotkey.JustPressed && Player.wingsLogic > 0 && Player.wingTime == 0 && FlightRestoreUnlocked && FlightRestoreCooldown >= 60 * 60)
+        //{
+        //    int amt = 150;
+        //    if (StaminaDrain)
+        //    {
+        //        amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+        //    }
+        //    if (StatStam >= amt)
+        //    {
+        //        StatStam -= amt;
+        //        FlightRestoreCooldown = 0;
+        //        Player.wingTime = Player.wingTimeMax;
+        //    }
+        //    else if (StamFlower)
+        //    {
+        //        QuickStamina(amt);
+        //        if (StatStam >= amt)
+        //        {
+        //            StatStam -= amt;
+        //            FlightRestoreCooldown = 0;
+        //            Player.wingTime = Player.wingTimeMax;
+        //        }
+        //    }
+        //}
     }
     public void WallslideMovement()
     {

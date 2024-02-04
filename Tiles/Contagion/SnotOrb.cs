@@ -11,6 +11,7 @@ using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Magic.PreHardmode;
 
 namespace Avalon.Tiles.Contagion;
 
@@ -59,7 +60,7 @@ public class SnotOrb : ModTile
                     WorldGen.spawnMeteor = true;
                 }
             }
-            int num3 = Main.rand.Next(4);
+            int num3 = Main.rand.Next(5);
             if (!WorldGen.shadowOrbSmashed)
             {
                 num3 = 0;
@@ -80,6 +81,10 @@ public class SnotOrb : ModTile
             else if (num3 == 3)
             {
                 Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<Items.Pets.SepticCell>(), 1, false, -1, false);
+            }
+            else if (num3 == 4)
+            {
+                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<Smogscreen>(), 1, false, -1, false);
             }
             WorldGen.shadowOrbSmashed = true;
             WorldGen.shadowOrbCount++;

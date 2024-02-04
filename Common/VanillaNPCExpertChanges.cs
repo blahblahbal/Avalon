@@ -105,9 +105,10 @@ namespace Avalon.Common
                 #region Cursed Skull
                 if (npc.netID == NPCID.CursedSkull)
                 {
-                    npc.alpha = (int)MathHelper.Clamp(npc.Center.Distance(TargetPlayer.Center) * 0.65f,0,255);
+                    npc.alpha = (int)MathHelper.Clamp(npc.Center.Distance(TargetPlayer.Center) * 0.65f, 0, 255);
 
                     npc.ai[2]++;
+                    if (npc.justHit) npc.ai[2] = -160;
                     if (npc.ai[2] >= 20)
                     {
                         Dust CursedSkullDust = Dust.NewDustPerfect(npc.Center + new Vector2(-8 * npc.spriteDirection, -2).RotatedBy(npc.rotation), DustID.UnusedWhiteBluePurple, Vector2.Zero);
@@ -116,7 +117,7 @@ namespace Avalon.Common
                     if (npc.ai[2] == 100)
                     {
                         npc.aiStyle = -1;
-                        npc.velocity = npc.Center.DirectionTo(TargetPlayer.Center) * 22;
+                        npc.velocity = npc.Center.DirectionTo(TargetPlayer.Center) * 15;
 
                         SoundStyle CursedSkullDash = new SoundStyle("Terraria/Sounds/Zombie_53");
                         CursedSkullDash.MaxInstances = 10;
@@ -156,7 +157,7 @@ namespace Avalon.Common
                 #region Blazing Wheel
                 if (npc.netID == NPCID.BlazingWheel)
                 {
-                    npc.ReflectProjectiles(npc.Hitbox);
+                    //npc.ReflectProjectiles(npc.Hitbox);
                 }
                 #endregion Blazing Wheel
             }

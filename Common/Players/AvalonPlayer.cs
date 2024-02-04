@@ -1007,7 +1007,7 @@ public class AvalonPlayer : ModPlayer
         }
 
         #region double tap keys
-        for (int m = 0; m < 2; m++)
+        for (int m = 0; m < 3; m++)
         {
             doubleTapTimer[m]--;
             if (doubleTapTimer[m] < 0)
@@ -1015,7 +1015,7 @@ public class AvalonPlayer : ModPlayer
                 doubleTapTimer[m] = 0;
             }
         }
-        for (int m = 0; m < 2; m++)
+        for (int m = 0; m < 3; m++)
         {
             bool keyPressedAndReleased = false;
             switch (m)
@@ -1025,6 +1025,9 @@ public class AvalonPlayer : ModPlayer
                     break;
                 case 1:
                     keyPressedAndReleased = Player.controlUp && Player.releaseUp;
+                    break;
+                case 2:
+                    keyPressedAndReleased = Player.controlJump && Player.releaseJump;
                     break;
             }
             if (keyPressedAndReleased)
@@ -2030,6 +2033,10 @@ public class AvalonPlayer : ModPlayer
         {
             num = 1;
         }
+        if (keyDir == 2)
+        {
+            goto doubleTapJump;
+        }
         if (keyDir != num)
         {
             return;
@@ -2045,6 +2052,36 @@ public class AvalonPlayer : ModPlayer
         if (AncientRangedBonusActive && !Player.mount.Active)
         {
             AncientRangedBonusActive = !AncientRangedBonusActive;
+        }
+        doubleTapJump:
+        if (keyDir == 2)
+        {
+            if (Player.wingsLogic > 0 && Player.wingTime == 0 &&
+                Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreUnlocked &&
+                Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown >= 60 * 60)
+            {
+                int amt = 150;
+                if (Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrain)
+                {
+                    amt *= (int)(Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks * Player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainMult);
+                }
+                if (Player.GetModPlayer<AvalonStaminaPlayer>().StatStam >= amt)
+                {
+                    Player.GetModPlayer<AvalonStaminaPlayer>().StatStam -= amt;
+                    Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown = 0;
+                    Player.wingTime = Player.wingTimeMax;
+                }
+                else if (Player.GetModPlayer<AvalonStaminaPlayer>().StamFlower)
+                {
+                    Player.GetModPlayer<AvalonStaminaPlayer>().QuickStamina(amt);
+                    if (Player.GetModPlayer<AvalonStaminaPlayer>().StatStam >= amt)
+                    {
+                        Player.GetModPlayer<AvalonStaminaPlayer>().StatStam -= amt;
+                        Player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreCooldown = 0;
+                        Player.wingTime = Player.wingTimeMax;
+                    }
+                }
+            }
         }
     }
     private void SpectrumDodge()

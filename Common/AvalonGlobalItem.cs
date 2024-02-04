@@ -31,6 +31,9 @@ using Avalon.Items.Tools.PreHardmode;
 using Terraria.DataStructures;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Items.Placeable.Crafting;
+using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Food;
+using Avalon.Items.MusicBoxes;
 
 namespace Avalon.Common;
 
@@ -283,16 +286,31 @@ public class AvalonGlobalItem : GlobalItem
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>());
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.YellowBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientYellowBrick>());
 
-        // commented due to wall wand now works
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeBrickWallUnsafe>());
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeSlabWallUnsafe>());
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.OrangeTiledWallUnsafe>());
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleBrickWallUnsafe>());
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleSlabWallUnsafe>());
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.PurpleTiledWallUnsafe>());
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowBrickWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowBrickWallUnsafe>());
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowSlabWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowSlabWallUnsafe>());
-        //ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>(), ModContent.ItemType<Items.Placeable.Wall.YellowTiledWallUnsafe>());
+        ShimmerTransmuteBothWays(ModContent.ItemType<HiddenBlade>(), ModContent.ItemType<AmmoMagazine>());
+        ShimmerTransmute(ModContent.ItemType<PlagueCrate>(), ModContent.ItemType<ContagionCrate>());
+
+        // ambrosia
+        ShimmerTransmute(ModContent.ItemType<Blackberry>(), ItemID.Ambrosia);
+        ShimmerTransmute(ModContent.ItemType<Durian>(), ItemID.Ambrosia);
+        ShimmerTransmute(ModContent.ItemType<Mangosteen>(), ItemID.Ambrosia);
+        ShimmerTransmute(ModContent.ItemType<Medlar>(), ItemID.Ambrosia);
+        ShimmerTransmute(ModContent.ItemType<Raspberry>(), ItemID.Ambrosia);
+        // end ambrosia
+
+        // music boxes
+        ShimmerTransmute(ModContent.ItemType<MusicBoxArmageddonSlime>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxBacteriumPrime>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxContagion>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxDarkMatter>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxDesertBeak>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxDesertBeakOtherworldly>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxHellCastle>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxPhantasm>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxSkyFortress>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxTropics>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxTuhrtlOutpost>(), ItemID.MusicBox);
+        ShimmerTransmute(ModContent.ItemType<MusicBoxUndergroundContagion>(), ItemID.MusicBox);
+        // end music boxes
 
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>(), ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>());
 

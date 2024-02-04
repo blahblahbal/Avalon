@@ -24,6 +24,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Avalon.Items.Pets;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 public class ContagionLenient : ModBiome
@@ -121,6 +122,7 @@ public class BacteriumPrime : ModNPC
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 15, 41));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<Booger>(), 1, 12, 17));
         npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BacteriumPrimeRelic>()));
+        npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<PetriDish>(), 4));
     }
     const float Phase2Health = 0.6f;
     const float Phase2part2Health = 0.3f;
