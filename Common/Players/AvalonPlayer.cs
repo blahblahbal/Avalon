@@ -1275,18 +1275,18 @@ public class AvalonPlayer : ModPlayer
             }
             if (attempt.uncommon && (Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion))
             {
-                int r = Main.rand.Next(3);
+                int r = Main.rand.Next(2);
                 if (r == 0)
                 {
                     itemDrop = ModContent.ItemType<Items.Fish.Ickfish>();
                     return;
                 }
+                //else if (r == 1)
+                //{
+                //    itemDrop = ModContent.ItemType<Items.Fish.NauSeaFish>();
+                //    return;
+                //}
                 else if (r == 1)
-                {
-                    itemDrop = ModContent.ItemType<Items.Fish.NauSeaFish>();
-                    return;
-                }
-                else if (r == 2)
                 {
                     itemDrop = ModContent.ItemType<Items.Fish.SicklyTrout>();
                     return;

@@ -32,7 +32,11 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode
         }
         public override void AddRecipes()
         {
-            CreateRecipe(555).AddIngredient(ItemID.CrystalShard, 5).AddIngredient(ItemID.SoulofLight, 1).AddTile(TileID.MythrilAnvil).Register();
+            CreateRecipe(555)
+                .AddIngredient(ItemID.CrystalShard, 5)
+                .AddIngredient(ItemID.SoulofLight)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
         }
     }
 }

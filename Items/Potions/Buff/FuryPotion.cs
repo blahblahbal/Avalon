@@ -1,3 +1,5 @@
+using Avalon.Items.Fish;
+using Avalon.Items.Material.Herbs;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -33,8 +35,13 @@ public class FuryPotion : ModItem
         Item.buffTime = 14400;
     }
 
-    //public override void AddRecipes()
-    //{
-    //    CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Ickfish>()).AddIngredient(ModContent.ItemType<Barfbush>()).AddTile(TileID.Bottles).Register();
-    //}
+    public override void AddRecipes()
+    {
+        CreateRecipe(1)
+            .AddIngredient(ItemID.BottledWater)
+            .AddIngredient(ModContent.ItemType<Ickfish>())
+            .AddIngredient(ModContent.ItemType<Barfbush>())
+            .AddTile(TileID.Bottles)
+            .Register();
+    }
 }

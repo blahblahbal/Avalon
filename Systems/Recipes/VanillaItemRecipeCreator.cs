@@ -10,6 +10,8 @@ using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Items.Material.Herbs;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Placeable.Tile;
+using Avalon.Items.Fish;
 
 namespace Avalon.Systems.Recipes;
 
@@ -19,6 +21,8 @@ public class VanillaItemRecipeCreator : ModSystem
     {
         #region By hand
         Recipe.Create(ItemID.PoisonedKnife, 50).AddIngredient(ItemID.ThrowingKnife, 50).AddIngredient(ModContent.ItemType<VirulentPowder>()).Register();
+        Recipe.Create(ItemID.DesertTorch, 3).AddIngredient(ItemID.Torch, 3).AddIngredient(ModContent.ItemType<HardenedSnotsandBlock>());
+        Recipe.Create(ItemID.IceTorch, 3).AddIngredient(ItemID.Torch, 3).AddIngredient(ModContent.ItemType<YellowIceBlock>());
         #endregion
 
         #region Demon Altar
@@ -155,6 +159,8 @@ public class VanillaItemRecipeCreator : ModSystem
 
         #region Cooking Pot
         Recipe.Create(ItemID.MonsterLasagna).AddIngredient(ModContent.ItemType<YuckyBit>(), 8).AddTile(TileID.CookingPots).Register();
+        Recipe.Create(ItemID.SeafoodDinner).AddIngredient(ModContent.ItemType<Ickfish>(), 2).AddTile(TileID.CookingPots).Register();
+        Recipe.Create(ItemID.CookedFish).AddIngredient(ModContent.ItemType<SicklyTrout>()).AddTile(TileID.CookingPots).Register();
         #endregion
 
         #region Loom
