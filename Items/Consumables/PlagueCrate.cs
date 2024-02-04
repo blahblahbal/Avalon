@@ -21,7 +21,7 @@ public class PlagueCrate : ModItem
         Item.width = 12; //The hitbox dimensions are intentionally smaller so that it looks nicer when fished up on a bobber
         Item.height = 12;
         Item.rare = ItemRarityID.Green;
-        Item.value = Item.sellPrice(0, 2);
+        Item.value = Item.sellPrice(0, 1);
     }
 
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
@@ -41,7 +41,7 @@ public class PlagueCrate : ModItem
             ModContent.ItemType<Weapons.Ranged.PreHardmode.Blunderblight>(),
             ModContent.ItemType<Weapons.Magic.PreHardmode.Smogscreen>(),
             ModContent.ItemType<Pets.SepticCell>(),
-            //ModContent.ItemType<Weapons.Melee.PreHardmode.PotentialContagionBoomerang>(),
+            ModContent.ItemType<Weapons.Melee.PreHardmode.TetanusChakram>(),
         };
         itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, themedDrops));
 

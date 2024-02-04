@@ -1,5 +1,7 @@
 using Avalon.Common.Players;
 using Avalon.Items.Consumables;
+using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -50,6 +52,13 @@ class NerveNumbNecklace : ModItem
             .AddIngredient(ModContent.ItemType<StaminaCrystal>())
             .AddTile(TileID.TinkerersWorkbench)
             .AddCondition(Condition.InGraveyard)
+            .Register();
+
+        CreateRecipe(1)
+            .AddIngredient(ItemID.ManaCrystal, 3)
+            .AddIngredient(ModContent.ItemType<BacciliteBar>(), 4)
+            .AddIngredient(ModContent.ItemType<CorruptShard>(), 2)
+            .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }
 }
