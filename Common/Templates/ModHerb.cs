@@ -79,7 +79,7 @@ public abstract class ModHerb : ModTile
     {
         PlantStage stage = GetStage(i, j);
 
-        if (stage == PlantStage.Blooming)
+        if (stage == PlantStage.Blooming || stage == PlantStage.Mature)
         {
             Player p = ClassExtensions.GetPlayerForTile(i, j);
             int dropItemStack = 1;
