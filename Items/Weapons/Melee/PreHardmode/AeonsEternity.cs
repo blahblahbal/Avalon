@@ -1,4 +1,5 @@
 using System;
+using Avalon.Common.Players;
 using Avalon.Particles;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
@@ -19,7 +20,6 @@ public class AeonsEternity : ModItem
     }
     public override void SetDefaults()
     {
-        Item.CloneDefaults(ItemID.IronBroadsword);
         Item.Size = new Vector2(22);
         Item.SetWeaponValues(40, 5, 0);
         Item.useTime = 81;
@@ -27,12 +27,12 @@ public class AeonsEternity : ModItem
         Item.value = Item.sellPrice(0, 5, 0, 0);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.autoReuse = true;
-        //Item.useTurn = true;
-        Item.useTurnOnAnimationStart = true;
+        Item.useTurn = false;
         Item.rare = ItemRarityID.Pink;
         Item.DamageType = DamageClass.Melee;
         Item.shootSpeed = 8f;
         Item.shoot = ModContent.ProjectileType<AeonBeam>();
+        Item.UseSound = SoundID.Item1;
     }
     public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {
@@ -51,7 +51,40 @@ public class AeonsEternity : ModItem
         SoundEngine.PlaySound(SoundID.Item9, player.Center);
         for (int i = 0; i < Main.rand.Next(4, 8); i++)
         {
-            int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f), ModContent.ProjectileType<AeonStar>(), damage / 4, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
+            Vector2 velRand = velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f);
+
+            // presumably fucky way of 
+            float radX = (float)Math.Cos(player.position.AngleTo(player.GetModPlayer<AvalonPlayer>().MousePosition));
+            float radY = (float)Math.Sin(player.position.AngleTo(player.GetModPlayer<AvalonPlayer>().MousePosition));
+            int radDirX = MathF.Sign(radX);
+            int radDirY = MathF.Sign(radY);
+            int velDirX = MathF.Sign(player.velocity.X);
+            int velDirY = MathF.Sign(player.velocity.Y);
+            float velMultX = 0;
+            float velMultY = 0;
+            // X
+            if ((radDirX == 1 && velDirX == 1) || (radDirX == 1 && velDirX == -1))
+            {
+                velMultX = player.velocity.X * radX;
+            }
+            if ((radDirX == -1 && velDirX == 1) || (radDirX == -1 && velDirX == -1))
+            {
+                velMultX = player.velocity.X * -radX;
+            }
+            // Y
+            if ((radDirY == 1 && velDirY == 1) || (radDirY == 1 && velDirY == -1))
+            {
+                velMultY = player.velocity.Y * radY;
+            }
+            if ((radDirY == -1 && velDirY == 1) || (radDirY == -1 && velDirY == -1))
+            {
+                velMultY = player.velocity.Y * -radY;
+            }
+
+            Vector2 velMult = new Vector2(velMultX, velMultY);
+
+
+            int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velRand + velMult * 0.8f + player.velocity * 0.2f, ModContent.ProjectileType<AeonStar>(), damage / 4, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
             Main.projectile[P].scale = Main.rand.NextFloat(0.9f, 1.1f);
             Main.projectile[P].rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
             lastStar = P;
@@ -60,7 +93,7 @@ public class AeonsEternity : ModItem
         {
             ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
             particleOrchestraSettings.PositionInWorld = player.Center;
-            particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
+            particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2 + player.velocity;
             ParticleOrchestraSettings settings = particleOrchestraSettings;
             ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, player.whoAmI);
             //particleOrchestraSettings.PositionInWorld = player.Center;
@@ -68,7 +101,7 @@ public class AeonsEternity : ModItem
             //settings = particleOrchestraSettings;
             //ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PaladinsHammer, settings, player.whoAmI);
             particleOrchestraSettings.PositionInWorld = player.Center;
-            particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
+            particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2 + player.velocity;
             settings = particleOrchestraSettings;
             ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, player.whoAmI);
         }

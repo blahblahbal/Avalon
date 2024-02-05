@@ -27,7 +27,7 @@ public class JunglePetal : ModProjectile
     public override Color? GetAlpha(Color lightColor)
     {
         int a = Projectile.timeLeft * 4;
-        return lightColor * (a / 255f * 3);
+        return lightColor * (a / 255f * 1.5f);
     }
     public override void AI()
     {
