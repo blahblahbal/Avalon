@@ -61,34 +61,28 @@ public class AeonsEternity : ModItem
             float velMultX = 0;
             float velMultY = 0;
             // X
-            if (player.velocity.X != 0)
+            if (radDirX == 1)
             {
-                if (radDirX == 1)
-                {
-                    velMultX = player.velocity.X * radX;
-                }
-                if (radDirX == -1)
-                {
-                    velMultX = player.velocity.X * -radX;
-                }
+                velMultX = player.velocity.X * radX;
+            }
+            if (radDirX == -1)
+            {
+                velMultX = player.velocity.X * -radX;
             }
             // Y
-            if (player.velocity.Y != 0)
+            if (radDirY == 1)
             {
-                if (radDirY == 1)
-                {
-                    velMultY = player.velocity.Y * radY;
-                }
-                if (radDirY == -1)
-                {
-                    velMultY = player.velocity.Y * -radY;
-                }
+                velMultY = player.velocity.Y * radY;
+            }
+            if (radDirY == -1)
+            {
+                velMultY = player.velocity.Y * -radY;
             }
 
             Vector2 velMult = new Vector2(velMultX, velMultY);
 
 
-            int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velRand + velMult * 0.8f + player.velocity * 0.2f, ModContent.ProjectileType<AeonStar>(), damage / 4, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
+            int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velRand + velMult * 0.8f + player.velocity * 0.2f, ModContent.ProjectileType<AeonStar>(), damage / 5, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
             Main.projectile[P].scale = Main.rand.NextFloat(0.9f, 1.1f);
             Main.projectile[P].rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
             lastStar = P;

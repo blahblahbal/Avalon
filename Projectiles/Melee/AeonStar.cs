@@ -23,7 +23,7 @@ public class AeonStar : ModProjectile
         Projectile.DamageType = DamageClass.Melee;
         Projectile.friendly = true;
         Projectile.usesLocalNPCImmunity = true;
-        Projectile.localNPCHitCooldown = 20;
+        Projectile.localNPCHitCooldown = 25;
         Projectile.tileCollide = false;
         //DrawOriginOffsetX= -4;
         DrawOriginOffsetY= 2;
@@ -144,7 +144,7 @@ public class AeonStar : ModProjectile
 
         if (Main.myPlayer == Projectile.owner)
         {
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.Center,Vector2.Zero,ModContent.ProjectileType<AeonExplosion>(),Projectile.damage * 7, Projectile.knockBack * 2, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.Center,Vector2.Zero,ModContent.ProjectileType<AeonExplosion>(),Projectile.damage * 5, Projectile.knockBack * 2, Projectile.owner);
         }
         //for (int i = 0; i < 1; i++)
         //{
