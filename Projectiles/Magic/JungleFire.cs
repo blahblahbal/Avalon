@@ -24,7 +24,7 @@ public class JungleFire : ModProjectile
     }
     public override Color? GetAlpha(Color lightColor)
     {
-        return lightColor * 3;
+        return lightColor * 1.5f;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
