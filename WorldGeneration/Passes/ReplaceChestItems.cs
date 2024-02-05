@@ -1,6 +1,8 @@
 using Avalon.Common;
+using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.Hardmode;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -72,6 +74,25 @@ public class ReplaceChestItems : GenPass
                         else if (WorldGen.genRand.NextBool(24))
                         {
                             i.SetDefaults(ModContent.ItemType<FlowerofTheJungle>());
+                            i.Prefix(-1);
+                        }
+                    }
+                    if (Main.tile[c.x, c.y].TileFrameX >= 288 && Main.tile[c.x, c.y].TileFrameX < 324 && (Main.tile[c.x, c.y].TileType == 21 || Main.tile[c.x, c.y].TileType == 441))
+                    {
+                        if (i?.type == ItemID.BandofRegeneration)
+                        {
+                            if (WorldGen.genRand.NextBool(2))
+                            {
+                                i.SetDefaults(ModContent.ItemType<BandofStamina>());
+                                i.Prefix(-1);
+                            }
+                        }
+                    }
+                    else if (Main.tile[c.x, c.y].TileFrameX >= 360 && Main.tile[c.x, c.y].TileFrameX < 396 && (Main.tile[c.x, c.y].TileType == 21 || Main.tile[c.x, c.y].TileType == 441))
+                    {
+                        if (i?.type == ItemID.BandofRegeneration)
+                        {
+                            i.SetDefaults(ModContent.ItemType<BandofStamina>());
                             i.Prefix(-1);
                         }
                     }

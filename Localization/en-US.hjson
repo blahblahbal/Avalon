@@ -7733,6 +7733,11 @@ Mods: {
 					Can craft Tinkerer's Workshop and Work Bench items by hand
 					'''
 			}
+
+			DurataniumPipe: {
+				DisplayName: Duratanium Pipe
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
