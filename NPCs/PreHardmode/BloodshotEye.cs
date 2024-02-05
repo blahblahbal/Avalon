@@ -159,7 +159,7 @@ public class BloodshotEye : ModNPC
         }
     }
 
-    public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.bloodMoon && !spawnInfo.Player.InPillarZone()
+    public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.bloodMoon && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight
         ? 0.121f * AvalonGlobalNPC.ModSpawnRate
         : 0f;
 }

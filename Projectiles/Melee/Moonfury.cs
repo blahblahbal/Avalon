@@ -54,7 +54,7 @@ public class Moonfury : ModProjectile
         Projectile.penetrate = -1; // Infinite pierce
         Projectile.DamageType = DamageClass.Melee; // Deals melee damage
         Projectile.usesLocalNPCImmunity = true; // Used for hit cooldown changes in the ai hook
-        Projectile.localNPCHitCooldown = 10; // This facilitates custom hit cooldown logic
+        Projectile.localNPCHitCooldown = 40; // This facilitates custom hit cooldown logic
         //DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         //DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
 

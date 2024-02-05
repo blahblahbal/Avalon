@@ -1,41 +1,38 @@
-using System.Collections.Generic;
+using Avalon.Common.Players;
 using Avalon.DropConditions;
-using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Ammo;
 using Avalon.Items.Consumables;
+using Avalon.Items.Food;
 using Avalon.Items.Material;
+using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Herbs;
+using Avalon.Items.Material.Ores;
+using Avalon.Items.MusicBoxes;
+using Avalon.Items.Pets;
+using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Placeable.Tile;
+using Avalon.Items.Potions.Buff;
+using Avalon.Items.Potions.Other;
+using Avalon.Items.Tools;
+using Avalon.Items.Tools.Hardmode;
+using Avalon.Items.Tools.PreHardmode;
+using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
-using Avalon.Items.Weapons.Ranged.Hardmode;
 using Avalon.Prefixes;
 using Avalon.Tiles;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using Avalon.Common.Players;
-using Avalon.Items.Pets;
-using Avalon.Items.Placeable.Tile;
-using Avalon.Items.Material.Herbs;
-using Avalon.Items.Tools.Superhardmode;
-using Terraria.Audio;
-using Avalon.Items.Tools;
-using Avalon.Items.Tools.Hardmode;
-using Avalon.Items.Placeable.Seed;
-using Avalon.Items.Material.Ores;
-using Avalon.Items.Ammo;
-using Avalon.Network;
-using Microsoft.Xna.Framework;
-using Avalon.Items.Potions.Buff;
-using Avalon.Items.Tools.PreHardmode;
-using Terraria.DataStructures;
-using Avalon.NPCs.Bosses.PreHardmode;
-using Avalon.Items.Placeable.Crafting;
-using Avalon.Items.Accessories.Hardmode;
-using Avalon.Items.Food;
-using Avalon.Items.MusicBoxes;
-using System.Linq;
-using System;
 
 namespace Avalon.Common;
 
@@ -547,6 +544,562 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
+        // wooden crate
+        if (item.type == ItemID.WoodenCrate)
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 5, 2, 4));
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    int[] IDs = new int[4];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is SequentialRulesNotScalingWithLuckRule drop)
+                        {
+                            for (int z = 0; z < drop.rules.Length; z++)
+                            {
+                                if (drop.rules[z] is not OneFromRulesRule thing) continue;
+                                CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)thing.options[0];
+                                IDs[z] = c.itemId;
+                            }
+                        }
+                    }
+                    // add Avalon ores into the list
+                    if (IDs.Contains(12))
+                    {
+                        IItemDropRule[] ores = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeOre>(), 1, 4, 15),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelOre>(), 1, 4, 15)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(new OneFromRulesRule(7, ores));
+                    }
+                    // add Avalon bars into the list
+                    if (IDs.Contains(20))
+                    {
+                        IItemDropRule[] bars = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeBar>(), 1, 2, 5),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelBar>(), 1, 2, 5)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(new OneFromRulesRule(8, bars));
+                    }
+                }
+            }
+        }
+        // pearlwood crate
+        if (item.type == ItemID.WoodenCrateHard)
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 5, 2, 4));
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    IItemDropRule[] newRule = new IItemDropRule[4];
+                    int[] IDs = new int[4];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is SequentialRulesNotScalingWithLuckRule drop)
+                        {
+                            for (int z = 0; z < drop.rules.Length; z++)
+                            {
+                                if (drop.rules[z] is SequentialRulesNotScalingWithLuckRule drop2)
+                                {
+                                    for (int q = 0; q < drop2.rules.Length; q++)
+                                    {
+                                        if (drop2.rules[q] is not OneFromRulesRule thing) continue;
+
+                                        CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)thing.options[0];
+                                        IDs[q] = c.itemId;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // add Avalon ores into the list
+                    if (IDs.Contains(12))
+                    {
+                        IItemDropRule[] ores = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeOre>(), 1, 4, 15),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelOre>(), 1, 4, 15),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincOre>(), 1, 4, 15)
+                        };
+                        IItemDropRule[] hardmodeOres = new IItemDropRule[1]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<DurataniumOre>(), 1, 4, 15)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(ItemDropRule.SequentialRulesNotScalingWithLuck(7, new OneFromRulesRule(2, hardmodeOres), new OneFromRulesRule(1, ores)));
+                    }
+                    // add Avalon bars into the list
+                    if (IDs.Contains(20))
+                    {
+                        IItemDropRule[] bars = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeBar>(), 1, 2, 5),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelBar>(), 1, 2, 5),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincBar>(), 1, 2, 5)
+                        };
+                        IItemDropRule[] hardmodeBars = new IItemDropRule[1]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<DurataniumBar>(), 1, 2, 3)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(ItemDropRule.SequentialRulesNotScalingWithLuck(8, new OneFromRulesRule(2, hardmodeBars), new OneFromRulesRule(1, bars)));
+                    }
+                }
+            }
+        }
+
+        //  iron crate
+        if (item.type == ItemID.IronCrate)
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 5, 2, 4));
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    int[] IDs = new int[6];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is SequentialRulesNotScalingWithLuckRule drop)
+                        {
+                            for (int z = 0; z < drop.rules.Length; z++)
+                            {
+                                if (drop.rules[z] is not OneFromRulesRule thing) continue;
+                                CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)thing.options[0];
+                                IDs[z] = c.itemId;
+                            }
+                        }
+                    }
+                    // add Avalon ores into the list
+                    if (IDs.Contains(12))
+                    {
+                        IItemDropRule[] ores = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeOre>(), 1, 12, 21),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelOre>(), 1, 12, 21),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincOre>(), 1, 12, 21)
+                        };
+                        oneFromRulesRule.rules[2].OnSuccess(new OneFromRulesRule(6, ores));
+                    }
+                    // add Avalon bars into the list
+                    if (IDs.Contains(20))
+                    {
+                        IItemDropRule[] bars = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeBar>(), 1, 4, 7),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelBar>(), 1, 4, 7),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincBar>(), 1, 4, 7)
+                        };
+                        oneFromRulesRule.rules[2].OnSuccess(new OneFromRulesRule(4, bars));
+                    }
+                }
+            }
+        }
+        // mythril crate
+        if (item.type == ItemID.IronCrateHard)
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 5, 2, 4));
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    int[] IDs = new int[4];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is SequentialRulesNotScalingWithLuckRule drop)
+                        {
+                            for (int z = 0; z < drop.rules.Length; z++)
+                            {
+                                if (drop.rules[z] is SequentialRulesNotScalingWithLuckRule drop2)
+                                {
+                                    for (int q = 0; q < drop2.rules.Length; q++)
+                                    {
+                                        if (drop2.rules[q] is not OneFromRulesRule thing) continue;
+
+                                        CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)thing.options[0];
+                                        IDs[q] = c.itemId;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // add Avalon ores into the list
+                    if (IDs.Contains(12))
+                    {
+                        IItemDropRule[] ores = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeOre>(), 1, 4, 15),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelOre>(), 1, 4, 15),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincOre>(), 1, 4, 15)
+                        };
+                        IItemDropRule[] hardmodeOres = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<DurataniumOre>(), 1, 4, 15),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NaquadahOre>(), 1, 4, 15)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(ItemDropRule.SequentialRulesNotScalingWithLuck(6, new OneFromRulesRule(2, hardmodeOres), new OneFromRulesRule(1, ores)));
+                    }
+                    // add Avalon bars into the list
+                    if (IDs.Contains(20))
+                    {
+                        IItemDropRule[] bars = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeBar>(), 1, 2, 5),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelBar>(), 1, 2, 5),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincBar>(), 1, 2, 5)
+                        };
+                        IItemDropRule[] hardmodeBars = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<DurataniumBar>(), 1, 2, 3),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NaquadahBar>(), 1, 2, 3)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(ItemDropRule.SequentialRulesNotScalingWithLuck(4, new OneFromRulesRule(3, 2, hardmodeBars), new OneFromRulesRule(1, bars)));
+                    }
+                }
+            }
+        }
+
+        // golden crate
+        if (item.type == ItemID.GoldenCrate)
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 5, 2, 4));
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    int[] IDs = new int[4];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is SequentialRulesNotScalingWithLuckRule drop)
+                        {
+                            for (int z = 0; z < drop.rules.Length; z++)
+                            {
+                                if (drop.rules[z] is not OneFromRulesRule thing) continue;
+                                CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)thing.options[0];
+                                IDs[z] = c.itemId;
+                            }
+                        }
+                    }
+                    // add Avalon ores into the list
+                    if (IDs.Contains(14))
+                    {
+                        IItemDropRule[] ores = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincOre>(), 1, 25, 34),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BismuthOre>(), 1, 25, 34)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(new OneFromRulesRule(5, ores));
+                    }
+                    // add Avalon bars into the list
+                    if (IDs.Contains(21))
+                    {
+                        IItemDropRule[] bars = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincBar>(), 1, 8, 11),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BismuthBar>(), 1, 8, 11)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(new OneFromRulesRule(3, 2, bars));
+                    }
+                }
+            }
+        }
+        // titanium crate
+        if (item.type == ItemID.GoldenCrateHard)
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 5, 2, 4));
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    IItemDropRule[] newRule = new IItemDropRule[4];
+                    int[] IDs = new int[4];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is SequentialRulesNotScalingWithLuckRule drop)
+                        {
+                            for (int z = 0; z < drop.rules.Length; z++)
+                            {
+                                if (drop.rules[z] is SequentialRulesNotScalingWithLuckRule drop2)
+                                {
+                                    for (int q = 0; q < drop2.rules.Length; q++)
+                                    {
+                                        if (drop2.rules[q] is not OneFromRulesRule thing) continue;
+
+                                        CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)thing.options[0];
+                                        IDs[q] = c.itemId;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // add Avalon ores into the list
+                    if (IDs.Contains(14))
+                    {
+                        IItemDropRule[] ores = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincOre>(), 1, 25, 34),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BismuthOre>(), 1, 25, 34)
+                        };
+                        IItemDropRule[] hardmodeOres = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NaquadahOre>(), 1, 25, 34),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<TroxiniumOre>(), 1, 25, 34)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(ItemDropRule.SequentialRulesNotScalingWithLuck(5, new OneFromRulesRule(2, hardmodeOres), new OneFromRulesRule(1, ores)));
+                    }
+                    // add Avalon bars into the list
+                    if (IDs.Contains(21))
+                    {
+                        IItemDropRule[] bars = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincBar>(), 1, 8, 11),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BismuthBar>(), 1, 8, 11)
+                        };
+                        IItemDropRule[] hardmodeBars = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NaquadahBar>(), 1, 8, 11),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<TroxiniumBar>(), 1, 8, 11)
+                        };
+                        oneFromRulesRule.rules[3].OnSuccess(ItemDropRule.SequentialRulesNotScalingWithLuckWithNumerator(3, 2, new OneFromRulesRule(3, 2, hardmodeBars), new OneFromRulesRule(1, bars)));
+                    }
+                }
+            }
+        }
+
+        // biome crates
+        if (item.type is ItemID.OceanCrate or ItemID.JungleFishingCrate or ItemID.FloatingIslandFishingCrate or ItemID.CorruptFishingCrate or
+            ItemID.CrimsonFishingCrate or ItemID.HallowedFishingCrate or ItemID.DungeonFishingCrate or ItemID.FrozenCrate or ItemID.OasisCrate or
+            ItemID.LavaCrate)
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 6, 2, 4));
+            int oreIndex = -1;
+            int barIndex = -1;
+            switch (item.type)
+            {
+                case ItemID.HallowedFishingCrate:
+                    oreIndex = 1;
+                    barIndex = 2;
+                    break;
+                case ItemID.OceanCrate:
+                case ItemID.DungeonFishingCrate:
+                    oreIndex = 3;
+                    barIndex = 4;
+                    break;
+                case ItemID.FloatingIslandFishingCrate:
+                case ItemID.OasisCrate:
+                    oreIndex = 5;
+                    barIndex = 6;
+                    break;
+                case ItemID.CorruptFishingCrate:
+                case ItemID.CrimsonFishingCrate:
+                case ItemID.JungleFishingCrate:
+                case ItemID.FrozenCrate:
+                    oreIndex = 2;
+                    barIndex = 3;
+                    break;
+                case ItemID.LavaCrate:
+                    oreIndex = 7;
+                    barIndex = 8;
+                    break;
+            }
+
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    int[] IDs = new int[20];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is OneFromRulesRule drop)
+                        {
+                            CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)drop.options[0];
+                            IDs[i] = c.itemId;
+                        }
+                    }
+                    // add Avalon ores into the list
+                    if (IDs.Contains(ItemID.CopperOre))
+                    {
+                        IItemDropRule[] ores = new IItemDropRule[4]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeOre>(), 1, 20, 35),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelOre>(), 1, 20, 35),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincOre>(), 1, 20, 35),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BismuthOre>(), 1, 20, 35)
+                        };
+                        oneFromRulesRule.rules[oreIndex].OnSuccess(new OneFromRulesRule(7, ores));
+                    }
+                    // add Avalon bars into the list
+                    if (IDs.Contains(ItemID.IronBar))
+                    {
+                        IItemDropRule[] bars = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelBar>(), 1, 6, 16),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincBar>(), 1, 6, 16),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BismuthBar>(), 1, 6, 16)
+                        };
+                        oneFromRulesRule.rules[barIndex].OnSuccess(new OneFromRulesRule(4, bars));
+                    }
+                }
+            }
+        }
+
+        // biome crates hardmode
+        if (item.type is ItemID.OceanCrateHard or ItemID.JungleFishingCrateHard or ItemID.FloatingIslandFishingCrateHard or ItemID.CorruptFishingCrateHard or
+            ItemID.CrimsonFishingCrateHard or ItemID.HallowedFishingCrateHard or ItemID.DungeonFishingCrateHard or ItemID.FrozenCrateHard or ItemID.OasisCrateHard or
+            ItemID.LavaCrateHard)
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 6, 2, 4));
+            int oreIndex = -1;
+            int barIndex = -1;
+            switch (item.type)
+            {
+                case ItemID.HallowedFishingCrateHard:
+                    oreIndex = 1;
+                    barIndex = 2;
+                    break;
+                case ItemID.OceanCrateHard:
+                case ItemID.DungeonFishingCrateHard:
+                    oreIndex = 3;
+                    barIndex = 4;
+                    break;
+                case ItemID.FloatingIslandFishingCrateHard:
+                case ItemID.OasisCrateHard:
+                    oreIndex = 5;
+                    barIndex = 6;
+                    break;
+                case ItemID.CorruptFishingCrateHard:
+                case ItemID.CrimsonFishingCrateHard:
+                case ItemID.JungleFishingCrateHard:
+                case ItemID.FrozenCrateHard:
+                    oreIndex = 2;
+                    barIndex = 3;
+                    break;
+                case ItemID.LavaCrateHard:
+                    oreIndex = 7;
+                    barIndex = 8;
+                    break;
+            }
+
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    int[] IDs = new int[20];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is SequentialRulesNotScalingWithLuckRule drop)
+                        {
+                            for (int z = 0; z < drop.rules.Length; z++)
+                            {
+                                if (drop.rules[z] is OneFromRulesRule drop2)
+                                {
+                                    CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)drop2.options[0];
+                                    IDs[i] = c.itemId;
+                                }
+                            }
+                        }
+                    }
+                    // add Avalon ores into the list
+                    if (IDs.Contains(ItemID.CopperOre))
+                    {
+                        IItemDropRule[] ores = new IItemDropRule[4]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BronzeOre>(), 1, 20, 35),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelOre>(), 1, 20, 35),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincOre>(), 1, 20, 35),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BismuthOre>(), 1, 20, 35)
+                        };
+                        IItemDropRule[] hardmodeOres = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<DurataniumOre>(), 1, 20, 35),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NaquadahOre>(), 1, 20, 35),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<TroxiniumOre>(), 1, 20, 35),
+                        };
+                        oneFromRulesRule.rules[oreIndex].OnSuccess(ItemDropRule.SequentialRulesNotScalingWithLuck(7, new OneFromRulesRule(2, hardmodeOres), new OneFromRulesRule(1, ores)));
+                    }
+                    // add Avalon bars into the list
+                    if (IDs.Contains(ItemID.IronBar))
+                    {
+                        IItemDropRule[] bars = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NickelBar>(), 1, 6, 16),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<ZincBar>(), 1, 6, 16),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BismuthBar>(), 1, 6, 16)
+                        };
+                        IItemDropRule[] hardmodeBars = new IItemDropRule[3]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<DurataniumBar>(), 1, 6, 16),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<NaquadahBar>(), 1, 6, 16),
+                            ItemDropRule.NotScalingWithLuck(ModContent.ItemType<TroxiniumBar>(), 1, 6, 16)
+                        };
+                        oneFromRulesRule.rules[barIndex].OnSuccess(ItemDropRule.SequentialRulesNotScalingWithLuck(4, new OneFromRulesRule(3, 2, hardmodeBars), new OneFromRulesRule(1, bars)));
+                    }
+                }
+            }
+        }
+
+
         if (item.type == ItemID.HerbBag)
         {
             foreach (IItemDropRule item2 in itemLoot.Get(false))

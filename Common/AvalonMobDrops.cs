@@ -83,6 +83,13 @@ public class AvalonMobDrops : GlobalNPC
             ItemDropRule.ByCondition(hardModeCondition, ModContent.ItemType<SoullessLocket>(), 550);
         }
 
+        if (npc.type is NPCID.PincushionZombie or NPCID.SlimedZombie or NPCID.SwampZombie or NPCID.TwiggyZombie
+            or NPCID.Zombie
+            or NPCID.ZombieEskimo or NPCID.FemaleZombie or NPCID.ZombieRaincoat)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RottenFlesh>(), 15));
+        }
+
         switch (npc.type)
         {
             case NPCID.RedDevil:

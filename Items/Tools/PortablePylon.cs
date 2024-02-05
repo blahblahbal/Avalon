@@ -46,6 +46,13 @@ public class PortablePylon : ModItem
             .AddIngredient(ItemID.HellstoneBar, 8)
             .AddTile(TileID.Anvils)
             .Register();
+
+        CreateRecipe()
+            .AddIngredient(ItemID.PotionOfReturn, 5)
+            .AddIngredient(ItemID.IceMirror)
+            .AddIngredient(ItemID.HellstoneBar, 8)
+            .AddTile(TileID.Anvils)
+            .Register();
     }
     public override bool AltFunctionUse(Player player)
     {
