@@ -51,7 +51,7 @@ public class AeonsEternity : ModItem
         SoundEngine.PlaySound(SoundID.Item9, player.Center);
         for (int i = 0; i < Main.rand.Next(4, 8); i++)
         {
-            int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f), ModContent.ProjectileType<AeonStar>(), damage / 4, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
+            int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f) + player.velocity, ModContent.ProjectileType<AeonStar>(), damage / 4, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
             Main.projectile[P].scale = Main.rand.NextFloat(0.9f, 1.1f);
             Main.projectile[P].rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
             lastStar = P;
@@ -60,7 +60,7 @@ public class AeonsEternity : ModItem
         {
             ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
             particleOrchestraSettings.PositionInWorld = player.Center;
-            particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
+            particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2 + player.velocity;
             ParticleOrchestraSettings settings = particleOrchestraSettings;
             ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, player.whoAmI);
             //particleOrchestraSettings.PositionInWorld = player.Center;
@@ -68,7 +68,7 @@ public class AeonsEternity : ModItem
             //settings = particleOrchestraSettings;
             //ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PaladinsHammer, settings, player.whoAmI);
             particleOrchestraSettings.PositionInWorld = player.Center;
-            particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
+            particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2 + player.velocity;
             settings = particleOrchestraSettings;
             ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, player.whoAmI);
         }
