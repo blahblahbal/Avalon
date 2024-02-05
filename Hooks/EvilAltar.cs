@@ -20,6 +20,12 @@ public class EvilAltar : ModHook
     {
         IL_WorldGen.SmashAltar += WorldGen_SmashAltar;
         On_WorldGen.SmashAltar += On_WorldGen_SmashAltar;
+        IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool;
+    }
+
+    private void IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool(ILContext il)
+    {
+        Utilities.AddAlternativeIdChecks(il, TileID.DemonAltar, id => Data.Sets.Tile.IckyAltar.Contains(id));
     }
 
     private void On_WorldGen_SmashAltar(On_WorldGen.orig_SmashAltar orig, int i, int j)

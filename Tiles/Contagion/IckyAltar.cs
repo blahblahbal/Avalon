@@ -22,6 +22,7 @@ public class IckyAltar : ModTile
         AdjTiles = new int[] { TileID.DemonAltar };
         TileID.Sets.PreventsTileRemovalIfOnTopOfIt[Type] = true;
         TileID.Sets.InteractibleByNPCs[Type] = true;
+        HitSound = SoundID.NPCDeath1;
     }
 
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
