@@ -53,32 +53,36 @@ public class AeonsEternity : ModItem
         {
             Vector2 velRand = velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f);
 
-            // presumably fucky way of 
+            // possibly fucky way of 
             float radX = (float)Math.Cos(player.position.AngleTo(player.GetModPlayer<AvalonPlayer>().MousePosition));
             float radY = (float)Math.Sin(player.position.AngleTo(player.GetModPlayer<AvalonPlayer>().MousePosition));
             int radDirX = MathF.Sign(radX);
             int radDirY = MathF.Sign(radY);
-            int velDirX = MathF.Sign(player.velocity.X);
-            int velDirY = MathF.Sign(player.velocity.Y);
             float velMultX = 0;
             float velMultY = 0;
             // X
-            if ((radDirX == 1 && velDirX == 1) || (radDirX == 1 && velDirX == -1))
+            if (player.velocity.X != 0)
             {
-                velMultX = player.velocity.X * radX;
-            }
-            if ((radDirX == -1 && velDirX == 1) || (radDirX == -1 && velDirX == -1))
-            {
-                velMultX = player.velocity.X * -radX;
+                if (radDirX == 1)
+                {
+                    velMultX = player.velocity.X * radX;
+                }
+                if (radDirX == -1)
+                {
+                    velMultX = player.velocity.X * -radX;
+                }
             }
             // Y
-            if ((radDirY == 1 && velDirY == 1) || (radDirY == 1 && velDirY == -1))
+            if (player.velocity.Y != 0)
             {
-                velMultY = player.velocity.Y * radY;
-            }
-            if ((radDirY == -1 && velDirY == 1) || (radDirY == -1 && velDirY == -1))
-            {
-                velMultY = player.velocity.Y * -radY;
+                if (radDirY == 1)
+                {
+                    velMultY = player.velocity.Y * radY;
+                }
+                if (radDirY == -1)
+                {
+                    velMultY = player.velocity.Y * -radY;
+                }
             }
 
             Vector2 velMult = new Vector2(velMultX, velMultY);
