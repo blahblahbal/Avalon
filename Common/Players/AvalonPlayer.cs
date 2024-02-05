@@ -3,6 +3,7 @@ using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Dusts;
 using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Other;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
@@ -785,7 +786,7 @@ public class AvalonPlayer : ModPlayer
     }
     public override void FrameEffects()
     {
-        if ((DesertGamblerVisible && DesertGambler || ForceGambler) && Player.head <= 0)
+        if ((DesertGamblerVisible && DesertGambler || ForceGambler) && !Player.HasHeadThatShouldntBeReplaced())
         {
             Player.head = EquipLoader.GetEquipSlot(Mod, "DesertGambler", EquipType.Head);
             ArmorIDs.Head.Sets.DrawHatHair[Player.head] = true;
@@ -867,7 +868,7 @@ public class AvalonPlayer : ModPlayer
                     break;
                 }
             }
-            if (proj != -1)
+            if (proj != -1 && Main.projectile[proj].active)
             {
                 PlayerDeathReason damageSource = info.DamageSource;
                 IEntitySource spawnSource = Player.GetSource_FromThis();

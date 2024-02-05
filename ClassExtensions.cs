@@ -6,6 +6,7 @@ using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Hooks;
 using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,7 +22,12 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
-    
+    public static bool HasHeadThatShouldntBeReplaced(this Player p)
+    {
+        return (p.merman && !p.hideMerman) ||
+            (p.wereWolf && !p.hideWolf) ||
+            (p.GetModPlayer<AvalonPlayer>().lavaMerman && !p.GetModPlayer<AvalonPlayer>().HideVarefolk) || p.face == 19;
+    }
     public static bool IsPotion(this Item i)
     {
         return i.healLife > 0 || i.healMana > 0 || i.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina > 0;

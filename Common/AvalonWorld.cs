@@ -1446,6 +1446,56 @@ public class AvalonWorld : ModSystem
         };
     }
 
+    public static bool AddManaCrystal(int i, int j)
+    {
+        int k = j;
+        while (k < Main.maxTilesY)
+        {
+            if (Main.tile[i, k].HasTile && Main.tileSolid[(int)Main.tile[i, k].TileType])
+            {
+                int num = k - 1;
+                if (Main.tile[i, num - 1].LiquidType == LiquidID.Lava || Main.tile[i - 1, num - 1].LiquidType == LiquidID.Lava)
+                {
+                    return false;
+                }
+                if (!WorldGen.EmptyTileCheck(i - 1, i, num - 1, num, -1))
+                {
+                    return false;
+                }
+                if (!Main.tileSolid[(int)Main.tile[i, num].TileType] || !Main.tileSolid[(int)Main.tile[i - 1, num].TileType])
+                {
+                    return false;
+                }
+                if (!Main.wallDungeon[(int)Main.tile[i, num].WallType])
+                {
+                    return false;
+                }
+                Main.tile[i - 1, num - 1].Active(true);
+                Main.tile[i - 1, num - 1].TileType = TileID.ManaCrystal;
+                Main.tile[i - 1, num - 1].TileFrameX = 0;
+                Main.tile[i - 1, num - 1].TileFrameY = 0;
+                Main.tile[i, num - 1].Active(true);
+                Main.tile[i, num - 1].TileType = TileID.ManaCrystal;
+                Main.tile[i, num - 1].TileFrameX = 18;
+                Main.tile[i, num - 1].TileFrameY = 0;
+                Main.tile[i - 1, num].Active(true);
+                Main.tile[i - 1, num].TileType = TileID.ManaCrystal;
+                Main.tile[i - 1, num].TileFrameX = 0;
+                Main.tile[i - 1, num].TileFrameY = 18;
+                Main.tile[i, num].Active(true);
+                Main.tile[i, num].TileType = TileID.ManaCrystal;
+                Main.tile[i, num].TileFrameX = 18;
+                Main.tile[i, num].TileFrameY = 18;
+                return true;
+            }
+            else
+            {
+                k++;
+            }
+        }
+        return false;
+    }
+
     #region World%Calculations
     private void On_WorldGen_AddUpAlignmentCounts(On_WorldGen.orig_AddUpAlignmentCounts orig, bool clearCounts)
     {

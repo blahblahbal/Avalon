@@ -16,6 +16,8 @@ namespace Avalon.Tiles.Furniture
         {
             AddMapEntry(Color.Green);
             AnimationFrameHeight = 36;
+            Main.tileSpelunker[Type] = true;
+            Main.tileOreFinderPriority[Type] = 550;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.newTile.DrawYOffset = 0;
             TileObjectData.newTile.LavaDeath = false;

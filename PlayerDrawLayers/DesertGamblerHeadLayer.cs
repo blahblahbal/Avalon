@@ -17,10 +17,8 @@ public class DesertGamblerHeadLayer : PlayerDrawLayer
 
     protected override void Draw(ref PlayerDrawSet drawInfo)
     {
-        if (drawInfo.shadow != 0f)
-            //(drawInfo.drawPlayer.merman && !drawInfo.drawPlayer.hideMerman) ||
-            //(drawInfo.drawPlayer.wereWolf && !drawInfo.drawPlayer.hideWolf) ||
-            //(drawInfo.drawPlayer.GetModPlayer<AvalonPlayer>().lavaMerman && !drawInfo.drawPlayer.GetModPlayer<AvalonPlayer>().HideVarefolk))
+        if (drawInfo.shadow != 0f ||
+            (drawInfo.drawPlayer.HasHeadThatShouldntBeReplaced()))
         {
             return;
         }

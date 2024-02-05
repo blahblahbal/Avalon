@@ -86,7 +86,13 @@ public class GenSystem : ModSystem
         int dungeon = tasks.FindIndex(genPass => genPass.Name == "Dungeon");
         if (dungeon != -1)
         {
-            tasks.Insert(dungeon + 1, new MoreDungeonChests());
+            currentPass = new MoreDungeonChests();
+            tasks.Insert(dungeon + 1, currentPass);
+            totalWeight += currentPass.Weight;
+
+            currentPass = new ManaCrystals("Mana Crystals in the Dungeon", 5f);
+            tasks.Insert(dungeon + 2, currentPass);
+            totalWeight += currentPass.Weight;
         }
         // uncomment when hm update releases
         int underworld = tasks.FindIndex(genPass => genPass.Name == "Micro Biomes");
