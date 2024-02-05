@@ -17,12 +17,12 @@ class ZincPickaxe : ModItem
         Item.scale = 1f;
         Item.pick = 53;
         Item.width = dims.Width;
-        Item.useTime = 10;
+        Item.useTime = 13;
         Item.knockBack = 2f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 6250;
-        Item.useAnimation = 14;
+        Item.useAnimation = 20;
         Item.height = dims.Height;
     }
     public override void AddRecipes()

@@ -1,9 +1,11 @@
 using Avalon.Common.Players;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -17,6 +19,7 @@ public class Jukebox : ModTile
         Main.tileNoAttach[Type] = true;
         Main.tileOreFinderPriority[Type] = 500;
         //TileID.Sets.HasOutlines[Type] = true;
+        AddMapEntry(new Color(152, 107, 82), LanguageManager.Instance.GetText("Jukebox"));
         TileID.Sets.DisableSmartCursor[Type] = true;
         // Placement
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
