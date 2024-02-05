@@ -19,7 +19,6 @@ public class AeonsEternity : ModItem
     }
     public override void SetDefaults()
     {
-        Item.CloneDefaults(ItemID.IronBroadsword);
         Item.Size = new Vector2(22);
         Item.SetWeaponValues(40, 5, 0);
         Item.useTime = 81;
@@ -27,12 +26,12 @@ public class AeonsEternity : ModItem
         Item.value = Item.sellPrice(0, 5, 0, 0);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.autoReuse = true;
-        //Item.useTurn = true;
-        Item.useTurnOnAnimationStart = true;
+        Item.useTurn = false;
         Item.rare = ItemRarityID.Pink;
         Item.DamageType = DamageClass.Melee;
         Item.shootSpeed = 8f;
         Item.shoot = ModContent.ProjectileType<AeonBeam>();
+        Item.UseSound = SoundID.Item1;
     }
     public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {
