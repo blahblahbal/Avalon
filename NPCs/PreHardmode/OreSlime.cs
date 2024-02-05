@@ -150,8 +150,8 @@ public class OreSlime : ModNPC
     public override void SetDefaults()
     {
         NPC.damage = 20;
-        NPC.lifeMax = 250;
-        NPC.defense = 10;
+        NPC.lifeMax = 200;
+        NPC.defense = 6;
         NPC.width = 36;
         NPC.aiStyle = 1;
         NPC.value = 1000f;
