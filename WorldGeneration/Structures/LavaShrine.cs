@@ -926,13 +926,13 @@ class LavaShrine
                         int rN = WorldGen.genRand.Next(42);
                         if (rN >= 0 && rN <= 20)
                         {
-                            Main.chest[num2].item[0].SetDefaults(174, false);
-                            Main.chest[num2].item[0].stack = WorldGen.genRand.Next(41, 68);
+                            Main.chest[num2].item[1].SetDefaults(174, false);
+                            Main.chest[num2].item[1].stack = WorldGen.genRand.Next(41, 68);
                         }
                         else if (rN >= 21 && rN <= 41)
                         {
-                            Main.chest[num2].item[0].SetDefaults(175, false);
-                            Main.chest[num2].item[0].stack = WorldGen.genRand.Next(2, 7);
+                            Main.chest[num2].item[1].SetDefaults(175, false);
+                            Main.chest[num2].item[1].stack = WorldGen.genRand.Next(2, 7);
                         }
                         int rand = WorldGen.genRand.Next(51);
                         if (rand >= 0 && rand <= 20)
@@ -942,18 +942,18 @@ class LavaShrine
                             else if (r == 1) r = ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>();
                             //else if (r == 2) r = ItemID.FlowerofFire;
                             //else r = ItemID.Sunfury;
-                            Main.chest[num2].item[1].SetDefaults(r, false);
-                            Main.chest[num2].item[1].Prefix(-2);
+                            Main.chest[num2].item[0].SetDefaults(r, false);
+                            Main.chest[num2].item[0].Prefix(-1);
                         }
                         else if (rand >= 21 && rand <= 40)
                         {
-                            Main.chest[num2].item[1].SetDefaults(ModContent.ItemType<AuraPotion>(), false);
+                            Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<AuraPotion>(), false);
                             Main.chest[num2].item[1].stack = WorldGen.genRand.Next(3) + 1;
                         }
                         else if (rand >= 41 && rand <= 50)
                         {
-                            Main.chest[num2].item[1].SetDefaults(ModContent.ItemType<ShockwavePotion>(), false);
-                            Main.chest[num2].item[1].stack = WorldGen.genRand.Next(3) + 1;
+                            Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<ShockwavePotion>(), false);
+                            Main.chest[num2].item[0].stack = WorldGen.genRand.Next(3) + 1;
                         }
                         int rand2 = WorldGen.genRand.Next(27);
                         if (rand2 >= 0 && rand2 <= 25)
