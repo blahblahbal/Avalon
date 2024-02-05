@@ -88,7 +88,7 @@ public class ReplaceChestItems : GenPass
                             }
                         }
                     }
-                    else if (Main.tile[c.x, c.y].TileFrameX >= 360 && Main.tile[c.x, c.y].TileFrameX < 396 && (Main.tile[c.x, c.y].TileType == 21 || Main.tile[c.x, c.y].TileType == 441))
+                    if (Main.tile[c.x, c.y].TileFrameX >= 360 && Main.tile[c.x, c.y].TileFrameX < 396 && (Main.tile[c.x, c.y].TileType == 21 || Main.tile[c.x, c.y].TileType == 441))
                     {
                         if (i?.type == ItemID.BandofRegeneration)
                         {
