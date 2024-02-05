@@ -20,6 +20,10 @@ public class EruptionHook : ModProjectile
         Projectile.width = 26;
         Projectile.height = 24;
     }
+    public override Color? GetAlpha(Color lightColor)
+    {
+        return Color.White;
+    }
     public override bool PreDraw(ref Color lightColor)
     {
         var texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain");
@@ -50,7 +54,7 @@ public class EruptionHook : ModProjectile
                 vector2_4 = mountedCenter - position;
                 var color2 = Lighting.GetColor((int)position.X / 16, (int)(position.Y / 16.0));
                 color2 = Projectile.GetAlpha(color2);
-                Main.EntitySpriteDraw(texture.Value, position - Main.screenPosition, sourceRectangle, color2, rotation, origin, 1f, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture.Value, position - Main.screenPosition, sourceRectangle, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
             }
         }
 
