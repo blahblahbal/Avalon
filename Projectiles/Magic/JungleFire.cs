@@ -41,16 +41,21 @@ public class JungleFire : ModProjectile
         {
             Projectile.ai[2] = -30;
         }
-        else
+        else if (Projectile.ai[0] == 5f)
         {
             Projectile.ai[2] = -15;
+        }
+        float radius = 2.6f;
+        if (Projectile.ai[2] < 0)
+        {
+            radius = 2.1f;
         }
         if (Projectile.ai[0] >= 6f)
         {
             Projectile.position += Projectile.velocity;
             for (int i = 0; i < Main.rand.Next(2, 4); i++)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(2.6f, 2.6f), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.1f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(radius, radius), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.1f, Projectile.owner);
             }
             Projectile.Kill();
         }
