@@ -28,12 +28,23 @@ public class JungleFire : ModProjectile
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
-        for (int i = 0; i < Main.rand.Next(2, 4); i++)
+        if (Projectile.ai[2] > 0)
         {
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(1.9f, 1.9f), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.1f, Projectile.owner);
+            for (int i = 0; i < Main.rand.Next(2, 4); i++)
+            {
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(1.9f, 1.9f), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.1f, Projectile.owner);
+            }
         }
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
         Projectile.ai[0] += 1f;
+        if (Projectile.ai[0] < 5f)
+        {
+            Projectile.ai[2] = -30;
+        }
+        else
+        {
+            Projectile.ai[2] = -15;
+        }
         if (Projectile.ai[0] >= 6f)
         {
             Projectile.position += Projectile.velocity;
@@ -70,6 +81,7 @@ public class JungleFire : ModProjectile
     }
     public override void AI()
     {
+        Projectile.ai[2]++;
         Lighting.AddLight(Projectile.position, 0.2f, 0.2f, 0.1f);
         if (Projectile.type == ModContent.ProjectileType<JungleFire>())
         {
