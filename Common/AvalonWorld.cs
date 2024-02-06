@@ -188,16 +188,29 @@ public class AvalonWorld : ModSystem
     }
     public override void PostUpdateWorld()
     {
-        if (Main.dayTime && Main.time == 0 && !ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak && NPC.downedBoss3 && NPC.downedBoss2 && Main.rand.NextBool(6))
+        if (Main.dayTime && Main.time == 0 && !ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak && NPC.downedBoss3 && NPC.downedBoss2)
         {
-            SpawnDesertBeak = true;
-            if (Main.netMode == NetmodeID.SinglePlayer)
+            bool flag = false;
+            for (int i = 0; i < 255; i++)
             {
-                Main.NewText(Language.GetTextValue("Mods.Avalon.DesertBeakMessage"), 50, 255, 130);
+                if (Main.player[i].active && Main.player[i].ConsumedLifeCrystals >= 10 && (int)Main.player[i].statDefense >= 16)
+                {
+                    flag = true;
+                    break;
+                }
             }
-            else if (Main.netMode == NetmodeID.Server)
+
+            if (flag && Main.rand.NextBool(6))
             {
-                ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.DesertBeakMessage"), new Color(50, 255, 130));
+                SpawnDesertBeak = true;
+                if (Main.netMode == NetmodeID.SinglePlayer)
+                {
+                    Main.NewText(Language.GetTextValue("Mods.Avalon.DesertBeakMessage"), 50, 255, 130);
+                }
+                else if (Main.netMode == NetmodeID.Server)
+                {
+                    ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.DesertBeakMessage"), new Color(50, 255, 130));
+                }
             }
         }
         if (SpawnDesertBeak && Main.time > 18000 && Main.dayTime)
@@ -215,7 +228,6 @@ public class AvalonWorld : ModSystem
                         break;
                     }
                 }
-
             }
         }
 

@@ -1437,20 +1437,11 @@ public class AvalonGlobalItem : GlobalItem
             case ItemID.TheAxe:
                 item.hammer = 95;
                 break;
-            case ItemID.BonePickaxe:
-                item.pick = 55;
-                break;
             case ItemID.LaserDrill:
                 item.pick = 220;
                 break;
             case ItemID.Hellstone:
                 item.value = Item.sellPrice(0, 0, 13, 30);
-                break;
-            case ItemID.NightmarePickaxe:
-                item.pick = 60;
-                break;
-            case ItemID.DeathbringerPickaxe:
-                item.pick = 64;
                 break;
             case ItemID.Vilethorn:
                 item.useStyle = ItemUseStyleID.Shoot;

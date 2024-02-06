@@ -1,9 +1,6 @@
-using Avalon.Common;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Weapons.Magic.PreHardmode;
-using Avalon.Items.Weapons.Melee.Hardmode;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -26,20 +23,18 @@ public class ReplaceChestItems : GenPass
             {
                 foreach (Item i in c.item)
                 {
-                    if (i != null && (i.type == ItemID.IceMirror || i.type == ItemID.Fish ||
-                        i.type == ItemID.IceBlade || i.type == ItemID.SnowballCannon ||
+                    if (i != null && (i.type == ItemID.IceBlade || i.type == ItemID.SnowballCannon ||
                         i.type == ItemID.IceBoomerang || i.type == ItemID.IceSkates ||
                         i.type == ItemID.BlizzardinaBottle || i.type == ItemID.FlurryBoots) &&
-                        WorldGen.genRand.NextBool(5))
+                        WorldGen.genRand.NextBool(7))
                     {
                         i.SetDefaults(ModContent.ItemType<GlacierStaff>());
                         i.Prefix(-1);
                     }
-                    if (i != null && (i.type == ItemID.IceMirror || i.type == ItemID.Fish ||
-                        i.type == ItemID.IceBlade || i.type == ItemID.SnowballCannon ||
+                    if (i != null && (i.type == ItemID.IceBlade || i.type == ItemID.SnowballCannon ||
                         i.type == ItemID.IceBoomerang || i.type == ItemID.IceSkates ||
                         i.type == ItemID.BlizzardinaBottle || i.type == ItemID.FlurryBoots) &&
-                        WorldGen.genRand.NextBool(5))
+                        WorldGen.genRand.NextBool(7))
                     {
                         i.SetDefaults(ModContent.ItemType<FrozenLyre>());
                         i.Prefix(-1);

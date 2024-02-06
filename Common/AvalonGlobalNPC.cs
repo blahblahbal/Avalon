@@ -127,26 +127,24 @@ public class AvalonGlobalNPC : GlobalNPC
                 shopCustomPrice = Item.buyPrice(gold: 12),
             });
         }
-        if (shop.NpcType == NPCID.Pirate && NPC.downedPirates)
+        if (shop.NpcType == NPCID.Pirate)
         {
             shop.Add(new Item(ModContent.ItemType<FalseTreasureMap>())
             {
                 shopCustomPrice = Item.buyPrice(0, 4),
-            });
+            }, Condition.DownedPirates);
         }
-        if (shop.NpcType == NPCID.GoblinTinkerer && Main.hardMode)
+        if (shop.NpcType == NPCID.GoblinTinkerer)
         {
             shop.Add(new Item(ModContent.ItemType<RocketinaBottle>())
             {
                 shopCustomPrice = Item.buyPrice(0, 6),
-            });
-        }
-        if (shop.NpcType == NPCID.GoblinTinkerer && NPC.downedGoblins)
-        {
+            }, Condition.Hardmode);
+
             shop.Add(new Item(ModContent.ItemType<GoblinRetreatOrder>())
             {
                 shopCustomPrice = Item.buyPrice(0, 4),
-            });
+            }, Condition.DownedGoblinArmy);
         }
         if (shop.NpcType == NPCID.Dryad)
         {

@@ -26,15 +26,15 @@ public class RocketinaBottle : ModItem
         player.GetJumpState<RocketBottleJump>().Enable();
     }
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ItemID.Bottle)
-            .AddIngredient(ModContent.ItemType<BlastShard>(), 5)
-            .AddIngredient(ItemID.SoulofMight, 8)
-            .AddTile(TileID.MythrilAnvil)
-            .Register();
-    }
+    //public override void AddRecipes()
+    //{
+    //    CreateRecipe()
+    //        .AddIngredient(ItemID.Bottle)
+    //        .AddIngredient(ModContent.ItemType<BlastShard>(), 5)
+    //        .AddIngredient(ItemID.SoulofMight, 8)
+    //        .AddTile(TileID.MythrilAnvil)
+    //        .Register();
+    //}
 }
 public class RocketBottleJump : ExtraJump
 {
