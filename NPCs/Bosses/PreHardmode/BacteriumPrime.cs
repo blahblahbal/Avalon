@@ -29,9 +29,10 @@ using Avalon.Items.Pets;
 namespace Avalon.NPCs.Bosses.PreHardmode;
 public class ContagionLenient : ModBiome
 {
+    public override int Music => -1;
     public override bool IsBiomeActive(Player player)
     {
-        return ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > 75;
+        return ModContent.GetInstance<BiomeTileCounts>().ContagionTiles >= 75;
     }
 }
 
