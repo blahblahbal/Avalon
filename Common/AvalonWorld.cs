@@ -283,7 +283,7 @@ public class AvalonWorld : ModSystem
                 }
                 else if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 &&
                     !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid &&
-                    WorldGen.genRand.NextBool(10) && (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionJungleGrass>()))
+                    WorldGen.genRand.NextBool(13) && (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<ContagionJungleGrass>()))
                 {
                     WorldGen.PlaceTile(num5, num9, ModContent.TileType<ContagionThornyBushes>(), mute: true);
                 }
