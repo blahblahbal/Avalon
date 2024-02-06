@@ -32,7 +32,13 @@ class GoblinToolbelt : ModItem
             .AddIngredient(ItemID.Toolbelt)
             .AddIngredient(ItemID.GPS)
             .AddIngredient(ItemID.TinkerersWorkshop)
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Anvils)
             .Register();
+    }
+    public override void UpdateInventory(Player player)
+    {
+        player.accWatch = 3;
+        player.accCompass = 1;
+        player.accDepthMeter = 1;
     }
 }

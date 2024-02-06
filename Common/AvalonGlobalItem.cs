@@ -94,7 +94,8 @@ public class AvalonGlobalItem : GlobalItem
             if (item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
             {
                 // if the top slot has an item and the bottom slot doesn't, put current item in bottom slot
-                if (ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != 0 && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type == 0)
+                if (ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != 0 && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type == 0 &&
+                    ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != item.type)
                 {
                     ModContent.GetInstance<StaminaSlot2>().FunctionalItem.SetDefaults(item.type);
                     item.TurnToAir();

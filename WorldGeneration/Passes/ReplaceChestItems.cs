@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Consumables;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Microsoft.Xna.Framework;
@@ -94,6 +95,14 @@ public class ReplaceChestItems : GenPass
                         {
                             i.SetDefaults(ModContent.ItemType<BandofStamina>());
                             i.Prefix(-1);
+                        }
+                    }
+
+                    if (Main.tile[c.x, c.y].TileFrameX >= 72 && Main.tile[c.x, c.y].TileFrameX < 108 && Main.tile[c.x, c.y].TileType == 21)
+                    {
+                        if (i?.type == ItemID.SuspiciousLookingEye)
+                        {
+                            i.SetDefaults(ModContent.ItemType<DesertHorn>());
                         }
                     }
                 }

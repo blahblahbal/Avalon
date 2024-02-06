@@ -155,6 +155,8 @@ public class AvalonWorld : ModSystem
 
         WorldEvil = (WorldEvil)(tag.Get<byte?>("Avalon:WorldEvil") ?? WorldGen.WorldGenParam_Evil);
 
+        Console.WriteLine(WorldEvil);
+
         for (var i = 0; i < Main.tile.Width; ++i)
             for (var j = 0; j < Main.tile.Height; ++j)
                 if (ContagionCountCollection.Contains(Main.tile[i, j].TileType)) //Better calculations, this is only loaded when the world is loaded
@@ -678,6 +680,20 @@ public class AvalonWorld : ModSystem
                 }
             }
         }
+
+        // reflected npc projectiles
+        //for (int thing = 0; thing < Main.npc.Length; thing++)
+        //{
+        //    NPC npc1 = Main.npc[thing];
+        //    if (npc1.aiStyle == 9 && npc1.GetGlobalNPC<AvalonGlobalNPCInstance>().CanDamageMobs)
+        //    {
+        //        for (int thing2 = 0; thing2 < Main.npc.Length; thing2++)
+        //        {
+        //            NPC npc2 = Main.npc[thing2];
+        //            DamageMobWithNPCProjectile(npc1, npc2);
+        //        }
+        //    }
+        //}
         #endregion
     }
 
@@ -1496,6 +1512,48 @@ public class AvalonWorld : ModSystem
         return false;
     }
 
+    public void DamageMobWithNPCProjectile(NPC sourceNPC, NPC npcToHit)
+    {
+        if (Collision.CheckAABBvAABBCollision(sourceNPC.Center, new Vector2(sourceNPC.width, sourceNPC.height), npcToHit.Center, new Vector2(npcToHit.width, npcToHit.height)))
+        {
+            sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer++;
+            if (sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer > 20)
+            {
+                NPC.HitInfo dmg = new NPC.HitInfo();
+                dmg.Damage = sourceNPC.damage;
+                dmg.Knockback = 1f;
+                dmg.HitDirection = 0;
+                npcToHit.StrikeNPC(dmg);
+                sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer = 0;
+            }
+        }
+    }
+
+    public void MakeOblivionOre(NPC npc1, NPC npc2, string text, int radius)
+    {
+        if (Collision.CheckAABBvAABBCollision(npc1.Center, new Vector2(npc1.width, npc1.height), npc2.Center, new Vector2(npc2.width, npc2.height)))
+        {
+            //WorldGeneration.Utils.MakeOblivionOreCircle((int)(npc1.position.X / 16f), (int)(npc1.position.Y / 16f), radius, ModContent.TileType<Tiles.Ores.CaesiumOre>()); // oblivion ore
+            npc1.life = 0;
+            npc1.NPCLoot();
+            npc1.active = false;
+            SoundEngine.PlaySound(npc1.DeathSound, npc1.position);
+            npc2.life = 0;
+            npc2.NPCLoot();
+            npc2.active = false;
+            SoundEngine.PlaySound(npc2.DeathSound, npc2.position);
+            var color = new Color(135, 78, 0);
+            if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                Main.NewText(text, color);
+            }
+            else if (Main.netMode == NetmodeID.Server)
+            {
+                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(text), color);
+            }
+        }
+    }
+
     #region World%Calculations
     private void On_WorldGen_AddUpAlignmentCounts(On_WorldGen.orig_AddUpAlignmentCounts orig, bool clearCounts)
     {
@@ -1590,30 +1648,6 @@ public class AvalonWorld : ModSystem
     public static List<int> ContagionCountCollection; //Our own TileID.Sets for the tiles that are counted towards world %
                                                       //Note: (MUST HAVE THE SAME TILES AS On_WorldGen_AddUpAlignmentCounts SOLID TILE ADD UP SECTION!!!)
 
-    public void MakeOblivionOre(NPC npc1, NPC npc2, string text, int radius)
-    {
-        if (Collision.CheckAABBvAABBCollision(npc1.Center, new Vector2(npc1.width, npc1.height), npc2.Center, new Vector2(npc2.width, npc2.height)))
-        {
-            //WorldGeneration.Utils.MakeOblivionOreCircle((int)(npc1.position.X / 16f), (int)(npc1.position.Y / 16f), radius, ModContent.TileType<Tiles.Ores.CaesiumOre>()); // oblivion ore
-            npc1.life = 0;
-            npc1.NPCLoot();
-            npc1.active = false;
-            SoundEngine.PlaySound(npc1.DeathSound, npc1.position);
-            npc2.life = 0;
-            npc2.NPCLoot();
-            npc2.active = false;
-            SoundEngine.PlaySound(npc2.DeathSound, npc2.position);
-            var color = new Color(135, 78, 0);
-            if (Main.netMode == NetmodeID.SinglePlayer)
-            {
-                Main.NewText(text, color);
-            }
-            else if (Main.netMode == NetmodeID.Server)
-            {
-                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(text), color);
-            }
-        }
-    }
     public override void PostSetupContent()
     {
         ContagionCountCollection = new List<int> {

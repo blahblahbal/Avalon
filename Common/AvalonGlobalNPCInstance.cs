@@ -33,6 +33,8 @@ public class AvalonGlobalNPCInstance : GlobalNPC
     public bool ShowStats { get; set; }
     public bool Wormed { get; set; }
     public bool BacterialInfection { get; set; }
+    public bool CanDamageMobs { get; set; }
+    public int DamageMobsTimer { get; set; }
 
     public override void ResetEffects(NPC npc)
     {

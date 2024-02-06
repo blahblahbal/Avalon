@@ -998,6 +998,19 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdateEquips()
     {
+        #region hand of creation
+        if (Player.HasItemInArmor(ItemID.HandOfCreation))
+        {
+            if ((Player.HasItemInArmorReturnIndex(ItemID.HandOfCreation) < 10 && Main.masterMode) ||
+                (Player.HasItemInArmorReturnIndex(ItemID.HandOfCreation) < 9 && Main.expertMode) ||
+                Player.HasItemInArmorReturnIndex(ItemID.HandOfCreation) < 8)
+            {
+                ObsidianGlove = CloudGlove = true;
+            }
+        }
+        #endregion
+
+        #region pick speed stuff
         if (Player.HeldItem.type == ModContent.ItemType<RhodiumPickaxe>() || Player.HeldItem.type == ModContent.ItemType<OsmiumPickaxe>() || Player.HeldItem.type == ModContent.ItemType<IridiumPickaxe>())
         {
             Player.pickSpeed -= 0.5f;
@@ -1006,6 +1019,7 @@ public class AvalonPlayer : ModPlayer
         {
             Player.pickSpeed -= 0.75f;
         }
+        #endregion
 
         #region double tap keys
         for (int m = 0; m < 3; m++)
@@ -1723,6 +1737,9 @@ public class AvalonPlayer : ModPlayer
                     {
                         npc.friendly = true;
                         npc.velocity *= -1;
+
+                        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().CanDamageMobs = true;
+                        npc.dontTakeDamage = true;
                         return true;
                     }
                 }
@@ -1753,6 +1770,9 @@ public class AvalonPlayer : ModPlayer
                     {
                         npc.friendly = true;
                         npc.velocity *= -1;
+
+                        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().CanDamageMobs = true;
+                        npc.dontTakeDamage = true;
                         return true;
                     }
                 }

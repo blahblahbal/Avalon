@@ -20,6 +20,7 @@ class IridiumPants : ModItem
     public override void UpdateEquip(Player player)
     {
         player.GetDamage(DamageClass.Magic) += 0.11f;
+        player.statManaMax2 += 40;
     }
     public override void AddRecipes()
     {

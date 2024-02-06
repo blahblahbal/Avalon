@@ -37,7 +37,7 @@ public class DungeonContagionChest : ModHook
     }
     private bool On_WorldGen_AddBuriedChest_int_int_int_bool_int_bool_ushort(On_WorldGen.orig_AddBuriedChest_int_int_int_bool_int_bool_ushort orig, int i, int j, int contain, bool notNearOtherChests, int Style, bool trySlope, ushort chestTileType)
     {
-        if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && contain == ItemID.ScourgeoftheCorruptor)
+        if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && (contain == ItemID.ScourgeoftheCorruptor || contain == ItemID.VampireKnives))
         {
             contain = ModContent.ItemType<Items.Weapons.Melee.Hardmode.VirulentScythe>();
             Style = 1;

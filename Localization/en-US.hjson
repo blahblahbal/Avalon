@@ -1770,21 +1770,21 @@ Mods: {
 
 			IridiumHat: {
 				DisplayName: Iridium Hat
-				Tooltip:
-					'''
-					11% increased melee damage and speed
-					11% increased ranged damage
-					'''
+				Tooltip: 11% increased ranged damage
 			}
 
 			IridiumPlateMail: {
 				DisplayName: Iridium Plate Mail
-				Tooltip: Increases maximum mana by 40
+				Tooltip: 11% increased melee damage and speed
 			}
 
 			IridiumPants: {
 				DisplayName: Iridium Pants
-				Tooltip: 11% increased magic damage
+				Tooltip:
+					'''
+					11% increased magic damage
+					Increases maximum mana by 40
+					'''
 			}
 
 			BloodshotLens: {

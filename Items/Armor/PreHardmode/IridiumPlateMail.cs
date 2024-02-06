@@ -19,7 +19,8 @@ class IridiumPlateMail : ModItem
     }
     public override void UpdateEquip(Player player)
     {
-        player.statManaMax2 += 40;
+        player.GetDamage(DamageClass.Melee) += 0.11f;
+        player.GetAttackSpeed(DamageClass.Melee) += 0.11f;
     }
     public override void AddRecipes()
     {
