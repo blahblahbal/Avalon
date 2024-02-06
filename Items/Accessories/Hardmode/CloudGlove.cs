@@ -4,6 +4,7 @@ using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
@@ -59,5 +60,33 @@ internal class CloudGlove : ModItem
             .AddIngredient(ModContent.ItemType<Placeable.Tile.DuskplateBlock>(), 10)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
+    }
+}
+public class CloudGloveBuilderToggle : BuilderToggle
+{
+    public static LocalizedText OnText { get; private set; }
+    public static LocalizedText OffText { get; private set; }
+
+    public override bool Active()
+    {
+        return Main.LocalPlayer.HasItemInFunctionalAccessories(ItemID.HandOfCreation) ||
+            Main.LocalPlayer.HasItemInArmor(ModContent.ItemType<CloudGlove>()) ||
+            Main.LocalPlayer.HasItemInArmor(ModContent.ItemType<ObsidianGlove>());
+    }
+    public override int NumberOfStates => 2;
+    public override string Texture => "Avalon/Assets/Textures/UI/CloudGloveToggle";
+
+    public override void SetStaticDefaults()
+    {
+        OnText = this.GetLocalization(nameof(OnText));
+        OffText = this.GetLocalization(nameof(OffText));
+    }
+    public override string DisplayValue()
+    {
+        return CurrentState == 0 ? OnText.Value : OffText.Value;
+    }
+    public override Color DisplayColorTexture()
+    {
+        return CurrentState == 0 ? Color.White : new Color(100, 100, 100);
     }
 }

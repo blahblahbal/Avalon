@@ -385,6 +385,17 @@ public static class ClassExtensions
         }
         return -1;
     }
+    public static bool HasItemInFunctionalAccessories(this Player p, int type)
+    {
+        int max = 7;
+        if (Main.expertMode) max = 8;
+        if (Main.masterMode) max = 9;
+        for (int i = 3; i <= max; i++)
+        {
+            if (p.armor[i].type == type) return true;
+        }
+        return false;
+    }
 
     public static void SendPacket(this Player p, ModPacket packet, bool server)
     {

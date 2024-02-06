@@ -27,9 +27,16 @@ Mods: {
 	}
 
 	Avalon: {
+		BuilderToggles: {
+			CloudGloveBuilderToggle: {
+				OnText: Cloud Glove On
+				OffText: Cloud Glove Off
+			}
+		}
+
 		DesertBeakMessage: The vultures are weary of your presence...
-        MechastingMessage: The humidity in the air tonight suddenly changes...
-        SteelfangMessage: You feel a strong gust of desert wind...
+		MechastingMessage: The humidity in the air tonight suddenly changes...
+		SteelfangMessage: You feel a strong gust of desert wind...
 
 		Achievements: {
 			TheFiveSword: {

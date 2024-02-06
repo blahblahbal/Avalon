@@ -18,6 +18,9 @@ Report any bugs you find in #bug-reports on the discord.
 Updates:
 Check the change notes section for patch notes.
 
+Compatibility notes:
+Avalon has cross-compat with Achievements and Tokens (more to come).
+
 
 Credits:
 

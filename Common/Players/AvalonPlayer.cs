@@ -999,14 +999,9 @@ public class AvalonPlayer : ModPlayer
     public override void PostUpdateEquips()
     {
         #region hand of creation
-        if (Player.HasItemInArmor(ItemID.HandOfCreation))
+        if (Player.HasItemInFunctionalAccessories(ItemID.HandOfCreation))
         {
-            if ((Player.HasItemInArmorReturnIndex(ItemID.HandOfCreation) < 10 && Main.masterMode) ||
-                (Player.HasItemInArmorReturnIndex(ItemID.HandOfCreation) < 9 && Main.expertMode) ||
-                Player.HasItemInArmorReturnIndex(ItemID.HandOfCreation) < 8)
-            {
-                ObsidianGlove = CloudGlove = true;
-            }
+            ObsidianGlove = CloudGlove = true;
         }
         #endregion
 
