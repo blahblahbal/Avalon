@@ -15,12 +15,12 @@ class BismuthPickaxe : ModItem
         Item.useTurn = true;
         Item.scale = 1f;
         Item.pick = 59;
-        Item.useTime = 10;
+        Item.useTime = 14;
         Item.knockBack = 2f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 14000;
-        Item.useAnimation = 14;
+        Item.useAnimation = 18;
     }
     public override void AddRecipes()
     {
