@@ -72,11 +72,6 @@ public class ReplaceChestItems : GenPass
                             i.SetDefaults(ModContent.ItemType<FlowerofTheJungle>());
                             i.Prefix(-1);
                         }
-                        else if (WorldGen.genRand.NextBool(24))
-                        {
-                            i.SetDefaults(ModContent.ItemType<FlowerofTheJungle>());
-                            i.Prefix(-1);
-                        }
                     }
                     if (Main.tile[c.x, c.y].TileFrameX >= 288 && Main.tile[c.x, c.y].TileFrameX < 324 && (Main.tile[c.x, c.y].TileType == 21 || Main.tile[c.x, c.y].TileType == 441))
                     {
