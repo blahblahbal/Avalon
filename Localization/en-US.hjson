@@ -27,6 +27,10 @@ Mods: {
 	}
 
 	Avalon: {
+		DesertBeakMessage: The vultures are weary of your presence...
+        MechastingMessage: The humidity in the air tonight suddenly changes...
+        SteelfangMessage: You feel a strong gust of desert wind...
+
 		Achievements: {
 			TheFiveSword: {
 				Name: The Five Sword

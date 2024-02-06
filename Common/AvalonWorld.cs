@@ -31,6 +31,7 @@ using Avalon.Reflection;
 using Terraria.Audio;
 using Terraria.WorldBuilding;
 using Avalon.Tiles.Ores;
+using Avalon.NPCs.Bosses.PreHardmode;
 
 namespace Avalon.Common;
 
@@ -94,6 +95,9 @@ public class AvalonWorld : ModSystem
     public static int[] NewTileCounts = new int[TileLoader.TileCount]; //to account for all new modded tiles and not just the vanilla tile amount
 
     public static bool StopStalacAndGrassFromBreakingUponHardmodeGeneration = false;
+
+    public static bool SpawnDesertBeak = false;
+    public static int VultureKillCount = 0;
 
     public override void OnWorldUnload() //Here we reset the numbers for the calculations to make sure they dont carry over to other worlds
     {
@@ -184,6 +188,37 @@ public class AvalonWorld : ModSystem
     }
     public override void PostUpdateWorld()
     {
+        if (Main.dayTime && Main.time == 0 && !ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak && NPC.downedBoss3 && NPC.downedBoss2 && Main.rand.NextBool(6))
+        {
+            SpawnDesertBeak = true;
+            if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                Main.NewText(Language.GetTextValue("Mods.Avalon.DesertBeakMessage"), 50, 255, 130);
+            }
+            else if (Main.netMode == NetmodeID.Server)
+            {
+                ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.DesertBeakMessage"), new Color(50, 255, 130));
+            }
+        }
+        if (SpawnDesertBeak && Main.time > 18000 && Main.dayTime)
+        {
+            if (VultureKillCount > 5)
+            {
+                for (int i = 0; i < 255; i++)
+                {
+                    Player p = Main.player[i];
+                    if (p.ZoneDesert)
+                    {
+                        SpawnDesertBeak = false;
+                        NPC.SpawnOnPlayer(i, ModContent.NPCType<DesertBeak>());
+                        VultureKillCount = 0;
+                        break;
+                    }
+                }
+
+            }
+        }
+
         //ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral((ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion).ToString()), Color.White);
         // these 2 (num12 and 13) are used for herb spawning; if I revert a change we'll need them
         int num12 = 151;

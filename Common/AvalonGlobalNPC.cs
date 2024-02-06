@@ -50,6 +50,10 @@ public class AvalonGlobalNPC : GlobalNPC
     }
     public override void OnKill(NPC npc)
     {
+        if (npc.type == NPCID.Vulture && AvalonWorld.SpawnDesertBeak)
+        {
+            AvalonWorld.VultureKillCount++;
+        }
         if (npc.type == NPCID.SkeletronHead && !NPC.downedBoss3)
         {
             AvalonWorld.GenerateSulphur();
