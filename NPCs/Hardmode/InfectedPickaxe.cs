@@ -43,6 +43,31 @@ public class InfectedPickaxe : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.InfestedPickaxe")),
         });
 
+    public override Color? GetAlpha(Color drawColor)
+    {
+        return Color.White;
+    }
+    public override void FindFrame(int frameHeight)
+    {
+        if (NPC.ai[0] == 2f)
+        {
+            NPC.frameCounter = 0.0;
+            NPC.frame.Y = 0;
+        }
+        else
+        {
+            NPC.frameCounter += 1.0;
+            if (NPC.frameCounter >= 4.0)
+            {
+                NPC.frameCounter = 0.0;
+                NPC.frame.Y = NPC.frame.Y + frameHeight;
+                if (NPC.frame.Y / frameHeight >= Main.npcFrameCount[NPC.type])
+                {
+                    NPC.frame.Y = 0;
+                }
+            }
+        }
+    }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
         NPC.lifeMax = (int)(NPC.lifeMax * 0.7f);

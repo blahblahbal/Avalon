@@ -50,6 +50,7 @@ public class Viriling : ModNPC
     {
         //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Booger>(), 2));
         //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 2));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2, 1, 2));
     }
     //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     //{
