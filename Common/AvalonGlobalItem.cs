@@ -21,6 +21,7 @@ using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Prefixes;
+using Avalon.Reflection;
 using Avalon.Tiles;
 using Microsoft.Xna.Framework;
 using System;
@@ -319,70 +320,80 @@ public class AvalonGlobalItem : GlobalItem
     {
         if (extractType == 0 || extractType == ItemID.DesertFossil)
         {
-            if (Main.rand.NextBool(3))
+            if (resultType is ItemID.CopperOre or ItemID.TinOre)
             {
-                resultStack = 1;
-                if (Main.rand.NextBool(20))
+                if (Main.rand.NextBool(3))
                 {
-                    resultStack += Main.rand.Next(0, 2);
+                    resultType = ModContent.ItemType<BronzeOre>();
                 }
-                if (Main.rand.NextBool(30))
+            }
+            if (resultType is ItemID.IronOre or ItemID.LeadOre)
+            {
+                if (Main.rand.NextBool(3))
                 {
-                    resultStack += Main.rand.Next(0, 3);
+                    resultType = ModContent.ItemType<NickelOre>();
                 }
-                if (Main.rand.NextBool(40))
+            }
+            if (resultType is ItemID.SilverOre or ItemID.TungstenOre)
+            {
+                if (Main.rand.NextBool(3))
                 {
-                    resultStack += Main.rand.Next(0, 4);
+                    resultType = ModContent.ItemType<ZincOre>();
                 }
-                if (Main.rand.NextBool(50))
+            }
+            if (resultType is ItemID.GoldOre or ItemID.PlatinumOre)
+            {
+                if (Main.rand.NextBool(3))
                 {
-                    resultStack += Main.rand.Next(0, 5);
+                    resultType = ModContent.ItemType<BismuthOre>();
                 }
-                if (Main.rand.NextBool(60))
+            }
+            if (resultType is ItemID.Amber or ItemID.Topaz or ItemID.Amethyst or ItemID.Sapphire or ItemID.Emerald or ItemID.Ruby or ItemID.Diamond)
+            {
+                if (Main.rand.NextBool(7))
                 {
-                    resultStack += Main.rand.Next(0, 6);
+                    resultType = ModContent.ItemType<RhodiumOre>();
                 }
-                switch (Main.rand.Next(13))
+                else if (Main.rand.NextBool(7))
                 {
-                    case 0:
-                        resultType = ModContent.ItemType<Items.Material.Ores.BronzeOre>();
-                        break;
-                    case 1:
-                        resultType = ModContent.ItemType<Items.Material.Ores.NickelOre>();
-                        break;
-                    case 2:
-                        resultType = ModContent.ItemType<Items.Material.Ores.ZincOre>();
-                        break;
-                    case 3:
-                        resultType = ModContent.ItemType<Items.Material.Ores.BismuthOre>();
-                        break;
-                    case 4:
-                        resultType = ModContent.ItemType<Items.Material.Ores.RhodiumOre>();
-                        break;
-                    case 5:
-                        resultType = ModContent.ItemType<Items.Material.Ores.OsmiumOre>();
-                        break;
-                    case 6:
-                        resultType = ModContent.ItemType<Items.Material.Ores.IridiumOre>();
-                        break;
-                    case 7:
-                        resultType = ModContent.ItemType<Items.Material.Ores.Tourmaline>();
-                        break;
-                    case 8:
-                        resultType = ModContent.ItemType<Items.Material.Ores.Peridot>();
-                        break;
-                    case 9:
-                        resultType = ModContent.ItemType<Items.Material.Ores.Zircon>();
-                        break;
-                    case 10:
-                        resultType = ModContent.ItemType<Items.Material.Ores.Heartstone>();
-                        break;
-                    case 11:
-                        resultType = ModContent.ItemType<Items.Material.Ores.Starstone>();
-                        break;
-                    case 12:
-                        resultType = ModContent.ItemType<Items.Material.Ores.Boltstone>();
-                        break;
+                    resultType = ModContent.ItemType<OsmiumOre>();
+                }
+                else if (Main.rand.NextBool(7))
+                {
+                    resultType = ModContent.ItemType<IridiumOre>();
+                }
+                else if (Main.rand.NextBool(7))
+                {
+                    resultType = ModContent.ItemType<Heartstone>();
+                }
+                else if (Main.rand.NextBool(7))
+                {
+                    resultType = ModContent.ItemType<Starstone>();
+                }
+                else if (Main.rand.NextBool(7))
+                {
+                    resultType = ModContent.ItemType<Boltstone>();
+                }
+            }
+            if (resultType is ItemID.Topaz or ItemID.Amethyst)
+            {
+                if (Main.rand.NextBool(3))
+                {
+                    resultType = ModContent.ItemType<Tourmaline>();
+                }
+            }
+            if (resultType is ItemID.Sapphire or ItemID.Emerald)
+            {
+                if (Main.rand.NextBool(3))
+                {
+                    resultType = ModContent.ItemType<Peridot>();
+                }
+            }
+            if (resultType is ItemID.Ruby or ItemID.Diamond)
+            {
+                if (Main.rand.NextBool(3))
+                {
+                    resultType = ModContent.ItemType<Zircon>();
                 }
             }
         }
@@ -484,7 +495,7 @@ public class AvalonGlobalItem : GlobalItem
         {
             Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
             Tile t = Framing.GetTileSafely(p);
-            if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple) &&
+            if (player.IsInTileInteractionRange(p.X, p.Y, TileReachCheckSettings.Simple) &&
                 (t.TileType == TileID.Extractinator || t.TileType == TileID.ChlorophyteExtractinator))
             {
                 player.noThrow = 2;
@@ -1474,6 +1485,7 @@ public class AvalonGlobalItem : GlobalItem
                 break;
             #endregion ML item rebalance
         }
+        item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved = item.tileBoost;
     }
     public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
@@ -1543,6 +1555,14 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips.RemoveAt(index);
             }
         }
+        if (item.type is ItemID.SiltBlock or ItemID.SlushBlock)
+        {
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
+            if (index != -1)
+            {
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Silt").ToString()));
+            }
+        }
         if (item.type is ItemID.Extractinator)
         {
             int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
@@ -1557,6 +1577,14 @@ public class AvalonGlobalItem : GlobalItem
             if (index != -1)
             {
                 tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip2", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
+            }
+        }
+        if (item.type is ItemID.HandOfCreation)
+        {
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip5"));
+            if (index != -1)
+            {
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip5", NetworkText.FromKey("Mods.Avalon.TooltipEdits.HandofCreation").ToString()));
             }
         }
         if (Data.Sets.Item.Herbs[item.type])
@@ -1590,7 +1618,7 @@ public class AvalonGlobalItem : GlobalItem
             if (item.prefix == ModContent.PrefixType<Efficient>())
             {
                 int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
-                        && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip")));
+                        && tt.Name.Equals("PrefixSpeed"));
                 if (index != -1)
                 {
                     tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixTool", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Efficiency"))
@@ -1600,6 +1628,81 @@ public class AvalonGlobalItem : GlobalItem
                 }
                 index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
                         && tt.Name.Equals("PrefixSpeed"));
+                if (index != -1)
+                {
+                    tooltips.RemoveAt(index);
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Expanded>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && tt.Name.StartsWith("PrefixSpeed"));
+                if (index != -1)
+                {
+                    tooltips.Insert(index, new TooltipLine(Mod, "PrefixTool", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Expanded"))
+                    {
+                        IsModifier = true
+                    });
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Extended>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && tt.Name.StartsWith("PrefixSpeed"));
+                if (index != -1)
+                {
+                    tooltips.Insert(index, new TooltipLine(Mod, "PrefixTool",
+                        "+" + (item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved + 1).ToString() +
+                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Extended"))
+                    {
+                        IsModifier = true
+                    });
+                }
+                index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && tt.Name.StartsWith("TileBoost"));
+                if (index != -1)
+                {
+                    tooltips.RemoveAt(index);
+                }
+            }
+
+            if (item.prefix == ModContent.PrefixType<Broadened>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && tt.Name.StartsWith("PrefixSpeed"));
+                if (index != -1)
+                {
+                    tooltips.Insert(index, new TooltipLine(Mod, "PrefixTool",
+                        "+" + (item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved + 2).ToString() + 
+                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Broadened"))
+                    {
+                        IsModifier = true
+                    });
+                }
+                index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && tt.Name.StartsWith("TileBoost"));
+                if (index != -1)
+                {
+                    tooltips.RemoveAt(index);
+                }
+            }
+            if (item.prefix == ModContent.PrefixType<Shrunken>())
+            {
+                int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && tt.Name.StartsWith("PrefixSpeed"));
+                if (index != -1)
+                {
+                    tooltips.Insert(index, new TooltipLine(Mod, "PrefixTool",
+                        ((item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved - 1) < 0 ? "" : "+") +
+                        (item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved - 1).ToString() + 
+                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Shrunken"))
+                    {
+                        IsModifier = true,
+                        IsModifierBad = true
+                    }); ;
+                }
+                index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+                        && tt.Name.StartsWith("TileBoost"));
                 if (index != -1)
                 {
                     tooltips.RemoveAt(index);
@@ -1949,8 +2052,188 @@ public class AvalonGlobalItem : GlobalItem
 
         return base.PrefixChance(item, pre, rand);
     }
+    public override void UseAnimation(Item item, Player player)
+    {
+        #region aoe pick mining prefix
+        if (item.prefix == ModContent.PrefixType<Expanded>())
+        {
+            if (player.whoAmI == Main.myPlayer)
+            {
+                if (item.pick > 0)
+                {
+                    Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+                    if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+                    {
+                        for (int x = p.X; x <= p.X + 1; x++)
+                        {
+                            for (int y = p.Y; y <= p.Y + 1; y++)
+                            {
+                                //if (x == p.X && y == p.Y)
+                                //player.ClearMiningCacheAt(p.X, p.Y, Main.tile[x, y].TileType);
+                                if (x == p.X && y == p.Y)
+                                {
+                                    //player.ClearMiningCacheAt(x, y, Main.tile[x, y].TileType);
+                                    continue;
+                                }
+                                //else 
+                                player.PickTile(x, y, item.pick);
+                            }
+                        }
+                    }
+                }
+                if (item.axe > 0)
+                {
+                    int dmgAmt = (int)(item.axe * 1.2f);
+                    Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+                    if (player.IsInTileInteractionRange(tilePosPoint.X, tilePosPoint.Y, TileReachCheckSettings.Simple))
+                    {
+                        for (int x = tilePosPoint.X; x <= tilePosPoint.X + 1; x++)
+                        {
+                            for (int y = tilePosPoint.Y; y <= tilePosPoint.Y + 1; y++)
+                            {
+                                int tileType = Main.tile[x, y].TileType;
+                                if (Main.tile[x, y].HasTile && Main.tileAxe[tileType])
+                                {
+                                    if (!WorldGen.CanKillTile(x, y))
+                                    {
+                                        dmgAmt = 0;
+                                    }
+                                    if (player.hitTile.AddDamage(tileType, dmgAmt) >= 100)
+                                    {
+                                        player.ClearMiningCacheAt(x, y, 1);
+                                        WorldGen.KillTile(x, y);
+                                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                                        {
+                                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, x, y);
+                                        }
+                                        player.hitTile.Clear(tileType);
+                                    }
+                                    if (dmgAmt != 0)
+                                    {
+                                        player.hitTile.Prune();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (item.hammer > 0)
+                {
+                    int dmgAmt = (int)(item.hammer * 1.5f);
+                    Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+                    if (player.IsInTileInteractionRange(tilePosPoint.X, tilePosPoint.Y, TileReachCheckSettings.Simple))
+                    {
+                        for (int x = tilePosPoint.X; x <= tilePosPoint.X + 1; x++)
+                        {
+                            for (int y = tilePosPoint.Y; y <= tilePosPoint.Y + 1; y++)
+                            {
+                                if (Main.tile[x, y].WallType > 0 && (!Main.tile[x, y].HasTile || x != tilePosPoint.X || y != tilePosPoint.Y || (!Main.tileHammer[Main.tile[x, y].TileType] && !player.poundRelease)) && player.toolTime == 0 && player.itemAnimation > 0 && player.controlUseItem && item.hammer > 0 && Player.CanPlayerSmashWall(x, y))
+                                {
+                                    player.PickWall(x, y, dmgAmt);
+                                    player.itemTime = item.useTime / 2;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+    }
     public override bool? UseItem(Item item, Player player)
     {
+        #region aoe pick mining prefix
+        //if (item.prefix == ModContent.PrefixType<Area>())
+        //{
+        //    if (player.whoAmI == Main.myPlayer && player.ItemAnimationJustStarted)
+        //    {
+        //        if (item.pick > 0)
+        //        {
+        //            int savedPickPower = item.pick;
+        //            item.pick = 0;
+        //            Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+        //            if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+        //            {
+        //                for (int x = p.X; x <= p.X + 1; x++)
+        //                {
+        //                    for (int y = p.Y; y <= p.Y + 1; y++)
+        //                    {
+        //                        //if (x == p.X && y == p.Y)
+        //                            //player.ClearMiningCacheAt(p.X, p.Y, Main.tile[x, y].TileType);
+        //                        //if (x == p.X && y == p.Y)
+        //                        //{
+        //                        //    //player.ClearMiningCacheAt(x, y, Main.tile[x, y].TileType);
+        //                        //    continue;
+        //                        //}
+        //                        //else 
+        //                            player.PickTile(x, y, savedPickPower);
+        //                    }
+        //                }
+        //            }
+        //            item.pick = savedPickPower;
+        //        }
+        //        if (item.axe > 0)
+        //        {
+        //            int dmgAmt = (int)(item.axe * 1.2f);
+        //            Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+        //            if (player.IsInTileInteractionRange(tilePosPoint.X, tilePosPoint.Y, TileReachCheckSettings.Simple))
+        //            {
+        //                for (int x = tilePosPoint.X; x <= tilePosPoint.X + 1; x++)
+        //                {
+        //                    for (int y = tilePosPoint.Y; y <= tilePosPoint.Y + 1; y++)
+        //                    {
+        //                        int tileType = Main.tile[x, y].TileType;
+        //                        if (Main.tile[x, y].HasTile && Main.tileAxe[tileType])
+        //                        {
+        //                            if (!WorldGen.CanKillTile(x, y))
+        //                            {
+        //                                dmgAmt = 0;
+        //                            }
+        //                            if (player.hitTile.AddDamage(tileType, dmgAmt) >= 100)
+        //                            {
+        //                                player.ClearMiningCacheAt(x, y, 1);
+        //                                WorldGen.KillTile(x, y);
+        //                                if (Main.netMode == NetmodeID.MultiplayerClient)
+        //                                {
+        //                                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, x, y);
+        //                                }
+        //                                player.hitTile.Clear(tileType);
+        //                            }
+        //                            if (dmgAmt != 0)
+        //                            {
+        //                                player.hitTile.Prune();
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        if (item.hammer > 0)
+        //        {
+        //            int dmgAmt = (int)(item.hammer * 1.5f);
+        //            Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+        //            if (player.IsInTileInteractionRange(tilePosPoint.X, tilePosPoint.Y, TileReachCheckSettings.Simple))
+        //            {
+        //                for (int x = tilePosPoint.X; x <= tilePosPoint.X + 1; x++)
+        //                {
+        //                    for (int y = tilePosPoint.Y; y <= tilePosPoint.Y + 1; y++)
+        //                    {
+        //                        if (Main.tile[x, y].WallType > 0 && (!Main.tile[x, y].HasTile || x != tilePosPoint.X || y != tilePosPoint.Y || (!Main.tileHammer[Main.tile[x, y].TileType] && !player.poundRelease)) && player.toolTime == 0 && player.itemAnimation > 0 && player.controlUseItem && item.hammer > 0 && Player.CanPlayerSmashWall(x, y))
+        //                        {
+        //                            player.PickWall(x, y, dmgAmt);
+        //                            player.itemTime = item.useTime / 2;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+        
+        #endregion
+
+        #region oil bottle
         if (player.GetModPlayer<AvalonPlayer>().OilBottle && player.whoAmI == Main.myPlayer && player.GetModPlayer<AvalonPlayer>().OilBottleTimer == 0 &&
             player.itemAnimation > 0 && item.damage > 0)
         {
@@ -1959,6 +2242,8 @@ public class AvalonGlobalItem : GlobalItem
             Vector2 vector = player.DirectionTo(player.ApplyRangeCompensation(0.2f, center, Main.MouseWorld)) * 10f;
             Projectile.NewProjectile(player.GetSource_FromThis(), center.X, center.Y, vector.X, vector.Y, ModContent.ProjectileType<Projectiles.OilBottle>(), 23, 3f, player.whoAmI);
         }
+        #endregion 
+
         #region cloud/obsidian glove
         if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>())
         {

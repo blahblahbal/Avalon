@@ -1,3 +1,4 @@
+using Avalon.Projectiles.Hostile.Mechasting;
 using Avalon.Projectiles.Melee;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,12 +29,15 @@ public static class Projectile
         ProjectileID.SlimeGun,
         ProjectileID.SandnadoHostile,
         ProjectileID.HallowBossLastingRainbow,
-        ProjectileID.HallowBossRainbowStreak);
+        ProjectileID.HallowBossRainbowStreak,
+        ModContent.ProjectileType<ElectricBolt>(),
+        ModContent.ProjectileType<StingerLaser>(),
+        ModContent.ProjectileType<Mechastinger>());
         //ModContent.ProjectileType<Ghostflame>(),
         //ModContent.ProjectileType<WallofSteelLaser>(),
-        //ModContent.ProjectileType<ElectricBolt>(),
-        //ModContent.ProjectileType<HomingRocket>(),
-        //ModContent.ProjectileType<StingerLaser>(),
+        //,
+        //,
+        //,
         //ModContent.ProjectileType<DarkCinder>(),
         //ModContent.ProjectileType<DarkFlame>(),
         //ModContent.ProjectileType<DarkGeyser>(),

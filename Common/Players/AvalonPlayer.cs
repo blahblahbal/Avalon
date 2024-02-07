@@ -258,6 +258,7 @@ public class AvalonPlayer : ModPlayer
     public int DeliriumCount;
     public bool Berserk;
     public bool SanguineSacrifice;
+    public bool Electrified;
 
     public bool HungryMinion;
     public bool GastroMinion;
@@ -330,6 +331,7 @@ public class AvalonPlayer : ModPlayer
         Vision = false;
         Berserk = false;
         SanguineSacrifice = false;
+        Electrified = false;
 
         // accessories
         TrapImmune = false;
@@ -728,6 +730,10 @@ public class AvalonPlayer : ModPlayer
                 Player.inventory[i].SetDefaults();
             }
             return false;
+        }
+        if (Electrified)
+        {
+            damageSource = PlayerDeathReason.ByCustomReason(Player.name + " had an electrifying personality.");
         }
         return true;
     }
@@ -2030,7 +2036,7 @@ public class AvalonPlayer : ModPlayer
 
         if (num3 > -1)
         {
-            if (SlimeBand) // || Player.GetModPlayer<ExxoBiomePlayer>().ZoneIceSoul)
+            if (SlimeBand) //  || Player.GetModPlayer<AvalonBiomePlayer>().ZoneIceSoul
             {
                 Player.slippy = true;
                 Player.slippy2 = true;

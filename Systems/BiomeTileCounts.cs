@@ -80,18 +80,18 @@ public class BiomeTileCounts : ModSystem
             tileCounts[ModContent.TileType<CrackedPurpleBrick>()];
         CaesiumTiles = tileCounts[ModContent.TileType<BlastedStone>()];
         SkyFortressTiles = tileCounts[ModContent.TileType<SkyBrick>()];
-        /*CrystalTiles = tileCounts[ModContent.TileType<CrystalStone>()];
-        BlightTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.BlightCandle>()];
+        //CrystalTiles = tileCounts[ModContent.TileType<CrystalStone>()];
+        //BlightTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.BlightCandle>()];
         FrightTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.FrightCandle>()];
         MightTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.MightCandle>()];
         NightTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.NightCandle>()];
-        TortureTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.TortureCandle>()];
+        //TortureTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.TortureCandle>()];
         IceSoulTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.IceCandle>()];
         FlightTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.FlightCandle>()];
-        HumidityTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.HumidityCandle>()];
+        //HumidityTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.HumidityCandle>()];
         DelightTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.DelightCandle>()];
         SightTiles = tileCounts[ModContent.TileType<Tiles.SoulCandles.SightCandle>()];
-        DarkMonolithTiles = tileCounts[ModContent.TileType<DarkMatterMonolith>()];*/
+        //DarkMonolithTiles = tileCounts[ModContent.TileType<DarkMatterMonolith>()];
         //Main.LocalPlayer.GetModPlayer<ExxoBiomePlayer>().UpdateZones(this);
     }
 

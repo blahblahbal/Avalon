@@ -18,6 +18,7 @@ public class AvalonGlobalItemInstance : GlobalItem
     public int RiftTimeLeft { get; set; }
     public int TomeGrade { get; set; }
     public bool StaminaScroll { get; set; }
+    public int TileBoostSaved { get; set; }
 
     public override GlobalItem Clone(Item item, Item itemClone)
     {
@@ -30,6 +31,7 @@ public class AvalonGlobalItemInstance : GlobalItem
         clone.RiftTimeLeft = RiftTimeLeft;
         clone.TomeGrade = TomeGrade;
         clone.StaminaScroll = StaminaScroll;
+        clone.TileBoostSaved = TileBoostSaved;
         return clone;
     }
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

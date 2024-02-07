@@ -13,6 +13,7 @@ ItemName: {
 	HighTestFishingLine: High Tensile Fishing Line
 	Volcano: Volcanic Greatsword
 	CrimsonPlanterBox: Bloodberry Planter Box
+	HandOfCreation: Hand of Creation
 }
 
 Mods: {
@@ -123,8 +124,18 @@ Mods: {
 
 		BossChecklist: {
 			SpawnInfo: {
-				BacteriumPrime: Use an [i:Avalon/InfestedCarcass] in the Contagion.
-				DesertBeak: Use [i:Avalon/DesertHorn] in the Desert.
+				BacteriumPrime:
+					'''
+					Use an [i:Avalon/InfestedCarcass] in the Contagion.
+
+					Or smash 3 Sepsis Cells in the Contagion ring.
+					'''
+				DesertBeak:
+					'''
+					Use [i:Avalon/DesertHorn] in the Desert during the day.
+					Spawns naturally at 9:30 AM in the Desert after defeating 5 Vultures if Skeletron and the world evil boss have been defeated.
+					'''
+				Mechasting: Use [i:Avalon/MechanicalWasp] at night.
 			}
 		}
 
@@ -331,7 +342,7 @@ Mods: {
 			Ammo: 5% chance to save ammo
 			Money: 5% increased money drops
 			StamRegen: Increased stamina regeneration
-			Efficiency: Increased mining efficiency
+			Efficiency: 10% increased mining speed
 			Damage: damage
 			Size: size
 			Knockback: knockback
@@ -351,9 +362,15 @@ Mods: {
 			WallSpeed: wall placement speed
 			Fluidic: increased mobility in liquids
 			Stinky: You smell awful
+			Expanded: Mines in a 2x2 area
+			Extended: " range"
+			Broadened: " range"
+			Shrunken: " range"
 		}
 
 		TooltipEdits: {
+			HandofCreation: Can place blocks and walls in midair and in lava
+			Silt: Gather 100 to craft into a Compressed Extractination Block
 			HerbologyLine: Can be exchanged at the Herbology Bench
 			EvilPickaxe: Can mine Rhodium, Osmium, and Iridium
 			FishingLine:
@@ -7749,6 +7766,66 @@ Mods: {
 				DisplayName: Duratanium Pipe
 				Tooltip: ""
 			}
+
+			MechanicalWasp: {
+				DisplayName: Mechanical Wasp
+				Tooltip: Summons Mechasting
+			}
+
+			SoulofDelight: {
+				DisplayName: Soul of Delight
+				Tooltip: "'The essence of jungle creatures'"
+			}
+
+			EggmanTrophy: {
+				DisplayName: Eggman Trophy
+				Tooltip: ""
+			}
+
+			MechastingTrophy: {
+				DisplayName: Mechasting Trophy
+				Tooltip: ""
+			}
+
+			DelightCandle: {
+				DisplayName: Candle of Delight
+				Tooltip: Increases life regeneration of nearby players
+			}
+
+			FlightCandle: {
+				DisplayName: Candle of Flight
+				Tooltip: Nearby players have reduced gravity
+			}
+
+			FrightCandle: {
+				DisplayName: Candle of Fright
+				Tooltip: Nearby players get +5 defense
+			}
+
+			IceCandle: {
+				DisplayName: Candle of Ice
+				Tooltip: Nearby tiles are slippery
+			}
+
+			LightCandle: {
+				DisplayName: Candle of Light
+				Tooltip: Emits a lot of light
+			}
+
+			MightCandle: {
+				DisplayName: Candle of Might
+				Tooltip: Nearby players deal 10% more damage
+			}
+
+			NightCandle: {
+				DisplayName: Candle of Night
+				Tooltip: Nearby players become werewolves
+			}
+
+			SightCandle: {
+				DisplayName: Candle of Sight
+				Tooltip: Nearby players can see nearby enemies and traps
+			}
 		}
 
 		InfoDisplays: {
@@ -7967,6 +8044,10 @@ Mods: {
 			OilExplosion.DisplayName: Oil Explosion
 			EruptionHookBoom.DisplayName: Eruption Hook Boom
 			Sunstorm.DisplayName: Sunstorm
+			ElectricBolt.DisplayName: Electric Bolt
+			HomingRocket.DisplayName: Homing Rocket
+			Mechastinger.DisplayName: Mechastinger
+			StingerLaser.DisplayName: Stinger Laser
 		}
 
 		NPCs: {
@@ -8046,6 +8127,9 @@ Mods: {
 			DarkMotherSlime.DisplayName: Dark Mother Slime
 			Shadlopod.DisplayName: Shadlopod
 			DesertBeakWingNPC.DisplayName: Desert Beak
+			Mechasting.DisplayName: Mechasting
+			StingerProbe.DisplayName: Stinger Probe
+			HomingRocket.DisplayName: Homing Rocket
 		}
 
 		Buffs: {
@@ -8633,9 +8717,9 @@ Mods: {
 				Description: Blood sacrifice weapons are more powerful
 			}
 
-			StaminaMining: {
-				DisplayName: Stamina Mining
-				Description: Mods.Avalon.Buffs.StaminaMining.Description
+			Electrified: {
+				DisplayName: Electrified
+				Description: Losing more life when moving
 			}
 		}
 
@@ -8786,6 +8870,10 @@ Mods: {
 			Sturdy.DisplayName: Sturdy
 			Motivated.DisplayName: Motivated
 			Efficient.DisplayName: Efficient
+			Expanded.DisplayName: Expanded
+			Broadened.DisplayName: Broadened
+			Extended.DisplayName: Extended
+			Shrunken.DisplayName: Shrunken
 		}
 
 		Conditions: {
@@ -8854,6 +8942,41 @@ Mods: {
 			ContagionLenient: {
 				DisplayName: Contagion Lenient
 				TownNPCDialogueName: the Contagion Lenient
+			}
+
+			FlightCandleBiome: {
+				DisplayName: Flight Candle Biome
+				TownNPCDialogueName: the Flight Candle Biome
+			}
+
+			IceCandleBiome: {
+				DisplayName: Ice Candle Biome
+				TownNPCDialogueName: the Ice Candle Biome
+			}
+
+			DelightCandleBiome: {
+				DisplayName: Delight Candle Biome
+				TownNPCDialogueName: the Delight Candle Biome
+			}
+
+			FrightCandleBiome: {
+				DisplayName: Fright Candle Biome
+				TownNPCDialogueName: the Fright Candle Biome
+			}
+
+			MightCandleBiome: {
+				DisplayName: Might Candle Biome
+				TownNPCDialogueName: the Might Candle Biome
+			}
+
+			NightCandleBiome: {
+				DisplayName: Night Candle Biome
+				TownNPCDialogueName: the Night Candle Biome
+			}
+
+			SightCandleBiome: {
+				DisplayName: Sight Candle Biome
+				TownNPCDialogueName: the Sight Candle Biome
 			}
 		}
 

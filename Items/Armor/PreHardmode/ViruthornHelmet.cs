@@ -23,7 +23,7 @@ class ViruthornHelmet : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<Material.Bars.BacciliteBar>(), 15)
             .AddIngredient(ModContent.ItemType<Material.Booger>(), 8)
             .AddTile(TileID.Anvils)
@@ -37,7 +37,7 @@ class ViruthornHelmet : ModItem
     public override void UpdateArmorSet(Player player)
     {
         player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Viruthorn");
-        player.GetAttackSpeed(DamageClass.Generic) -= 0.1f;
+        player.GetAttackSpeed(DamageClass.Generic) += 0.1f;
     }
     public override void UpdateVanitySet(Player player)
     {

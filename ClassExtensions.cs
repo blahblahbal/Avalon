@@ -22,6 +22,28 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
+    /// <summary>
+    /// Return the <see cref="Player"/> instance of this NPC's target.
+    /// </summary>
+    /// <param name="npc"></param>
+    /// <returns></returns>
+    public static Player PlayerTarget(this NPC npc) => Main.player[npc.target];
+
+    public static bool DoesTileExistInBoxAroundPlayer(this Player p, int boxRadius, int tileType)
+    {
+        Point pos = p.Center.ToTileCoordinates();
+        for (int x = pos.X - boxRadius; x <= pos.X + boxRadius; x++)
+        {
+            for (int y = pos.Y - boxRadius; y <= pos.Y + boxRadius; y++)
+            {
+                if (Main.tile[x, y].TileType == tileType)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public static bool HasHeadThatShouldntBeReplaced(this Player p)
     {
         return (p.merman && !p.hideMerman) ||
@@ -303,6 +325,8 @@ public static class ClassExtensions
     /// <returns>Whether or not the item is an armor piece.</returns>
     public static bool IsArmor(this Item item) =>
         (item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1) && !item.vanity;
+
+    public static Rectangle NewRectVector2(Vector2 v, Vector2 wH) => new((int)v.X, (int)v.Y, (int)wH.X, (int)wH.Y);
 
     /// <summary>
     /// Helper method to check if the current item is a tool - used for tool prefixes.

@@ -1,9 +1,11 @@
 using Avalon.Common.Players;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -24,6 +26,7 @@ public class GiantGravestone : ModTile
         TileObjectData.newTile.LavaDeath = false;
         TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
         TileObjectData.addTile(Type);
+        AddMapEntry(new Color(127, 127, 127), Language.GetText("Giant Gravestone"));
     }
     //public override bool RightClick(int i, int j)
     //{

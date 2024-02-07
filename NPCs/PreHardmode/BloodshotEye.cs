@@ -11,12 +11,13 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
-using Microsoft.Xna.Framework.Graphics;
+using System.IO;
 
 namespace Avalon.NPCs.PreHardmode;
 
 public class BloodshotEye : ModNPC
 {
+    int timer;
     public override void SetStaticDefaults()
     {
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -44,6 +45,7 @@ public class BloodshotEye : ModNPC
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath6;
         NPC.buffImmune[BuffID.Confused] = true;
+        AIType = NPCID.DemonEye;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<BloodshotEyeBanner>();
     }
@@ -52,26 +54,26 @@ public class BloodshotEye : ModNPC
         base.AI();
         if (!NPC.HasPlayerTarget)
         {
-            NPC.ai[0] = 0;
-            NPC.ai[1] = 0;
+            NPC.ai[2] = 0;
+            NPC.ai[3] = 0;
             NPC.aiStyle = 2;
         }
-        NPC.ai[0]++;
-        if (NPC.ai[0] >= 320)
+        NPC.ai[2]++;
+        if (NPC.ai[2] >= 320)
         {
             //NPC.aiStyle = -1;
             NPC.velocity *= 0.95f;
         }
-        if (NPC.ai[0] is > 360 and < 400)
+        if (NPC.ai[2] is > 360 and < 400)
         {
             NPC.rotation = NPC.Center.AngleTo(Main.player[NPC.target].Center);
-            NPC.ai[1] += 0.1f;
+            NPC.ai[3] += 0.1f;
             Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood, Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-3, 6), 0, default, Main.rand.NextFloat(1, 1.3f));
         }
-        if (NPC.ai[0] == 400)
+        if (NPC.ai[2] == 400)
         {
-            NPC.ai[0] = NPC.ai[2] * 10;
-            NPC.ai[1] = 0;
+            NPC.ai[2] = timer * 10;
+            NPC.ai[3] = 0;
             NPC.aiStyle = 2;
             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(7, 9), 0).RotatedBy(NPC.Center.AngleTo(Main.player[NPC.target].Center)), ModContent.ProjectileType<BloodshotShot>(), 18, 0, 255);
             for (int i = 0; i < 2; i++)
@@ -81,11 +83,19 @@ public class BloodshotEye : ModNPC
             }
             SoundEngine.PlaySound(SoundID.Item17, NPC.Center);
             NPC.velocity = new Vector2(-5, 0).RotatedBy(NPC.rotation);
-            if (NPC.ai[2] < 30)
+            if (timer < 30)
             {
-                NPC.ai[2] += 2;
+                timer += 2;
             }
         }
+    }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(timer);
+    }
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        timer = reader.ReadInt32();
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]

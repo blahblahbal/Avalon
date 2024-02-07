@@ -8,11 +8,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Other;
 
 class CompressedExtractinationBlock : ModItem
-{   
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
+{
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {
         itemGroup = ContentSamples.CreativeHelper.ItemGroup.EverythingElse;
@@ -21,7 +17,6 @@ class CompressedExtractinationBlock : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
-        Item.consumable = true;
         Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
         Item.useTurn = true;

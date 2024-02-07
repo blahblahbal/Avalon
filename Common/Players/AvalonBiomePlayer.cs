@@ -23,15 +23,15 @@ public class AvalonBiomePlayer : ModPlayer
     public bool ZoneContagionDesert => Player.InModBiome(ModContent.GetInstance<ContagionDesert>());
     public bool ZoneTime { get; private set; }
     public bool ZoneBlight { get; private set; }
-    public bool ZoneFright { get; private set; }
-    public bool ZoneMight { get; private set; }
-    public bool ZoneNight { get; private set; }
+    public bool ZoneFright => Player.InModBiome(ModContent.GetInstance<FrightCandleBiome>());
+    public bool ZoneMight => Player.InModBiome(ModContent.GetInstance<MightCandleBiome>());
+    public bool ZoneNight => Player.InModBiome(ModContent.GetInstance<NightCandleBiome>());
     public bool ZoneTorture { get; private set; }
-    public bool ZoneIceSoul { get; private set; }
-    public bool ZoneFlight { get; private set; }
+    public bool ZoneIceSoul => Player.InModBiome(ModContent.GetInstance<IceCandleBiome>());
+    public bool ZoneFlight => Player.InModBiome(ModContent.GetInstance<FlightCandleBiome>());
     public bool ZoneHumidity { get; private set; }
-    public bool ZoneDelight { get; private set; }
-    public bool ZoneSight { get; private set; }
+    public bool ZoneDelight => Player.InModBiome(ModContent.GetInstance<DelightCandleBiome>());
+    public bool ZoneSight => Player.InModBiome(ModContent.GetInstance<SightCandleBiome>());
     public override void PostUpdate()
     {
         if (ZoneAltDungeon)
@@ -48,6 +48,37 @@ public class AvalonBiomePlayer : ModPlayer
         //    Terraria.Graphics.Effects.Filters.Scene["Sandstorm"].Activate(Player.position);
         //}
         //Main.NewText(Player.ZoneDesert);
+    }
+    public override void PostUpdateBuffs()
+    {
+        if (ZoneFlight)
+        {
+            Player.slowFall = true;
+        }
+        if (ZoneFright)
+        {
+            Player.statDefense += 5;
+        }
+        if (ZoneIceSoul)
+        {
+            Player.slippy = Player.slippy2 = true;
+        }
+        if (ZoneMight)
+        {
+            Player.GetDamage(DamageClass.Generic) += 0.1f;
+        }
+        if (ZoneNight)
+        {
+            Player.wereWolf = true;
+        }
+        if (ZoneSight)
+        {
+            Player.detectCreature = Player.dangerSense = Player.nightVision = true;
+        }
+        if (ZoneDelight)
+        {
+            Player.lifeRegen += 3;
+        }
     }
 
     public void UpdateZones(BiomeTileCounts biomeTileCounts)
@@ -67,16 +98,9 @@ public class AvalonBiomePlayer : ModPlayer
         //ZoneTropics = biomeTileCounts.TropicsTiles > 200;
         //ZoneTuhrtlOutpost = ZoneTropics && wallType == ModContent.WallType<TuhrtlBrickWallUnsafe>() &&
         //                    Player.ZoneRockLayerHeight;
-        ZoneBlight = biomeTileCounts.BlightTiles > 1;
-        ZoneFright = biomeTileCounts.FrightTiles > 1;
-        ZoneMight = biomeTileCounts.MightTiles > 1;
-        ZoneNight = biomeTileCounts.NightTiles > 1;
-        ZoneTorture = biomeTileCounts.TortureTiles > 1;
-        ZoneIceSoul = biomeTileCounts.IceSoulTiles > 1;
-        ZoneFlight = biomeTileCounts.FlightTiles > 1;
-        ZoneHumidity = biomeTileCounts.HumidityTiles > 1;
-        ZoneDelight = biomeTileCounts.DelightTiles > 1;
-        ZoneSight = biomeTileCounts.SightTiles > 1;
+        ZoneBlight = biomeTileCounts.BlightTiles > 0;
+        ZoneTorture = biomeTileCounts.TortureTiles > 0;
+        ZoneHumidity = biomeTileCounts.HumidityTiles > 0;
         //ZoneAltDungeon = biomeTileCounts.DungeonAltTiles > 250 && Main.wallDungeon[wallType] && tileCoordinates.Y > Main.worldSurface;
     }
 }

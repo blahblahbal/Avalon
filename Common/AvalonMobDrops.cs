@@ -11,6 +11,7 @@ using Avalon.Items.Material.TomeMats;
 using Avalon.Items.Other;
 using Avalon.Items.Placeable.Painting;
 using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tokens;
 using Avalon.Items.Tools.PreHardmode;
@@ -47,6 +48,7 @@ public class AvalonMobDrops : GlobalNPC
         var hardModeCondition = new HardmodeOnly();
         var notFromStatueCondition = new Conditions.NotFromStatue();
         var preHardModeCondition = new Invert(hardModeCondition);
+        var inJungle = new JungleOrTropicsCondition();
         //    var superHardModeCondition = new Superhardmode();
         //    var hardmodePreSuperHardmodeCondition =
         //        new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
@@ -83,12 +85,13 @@ public class AvalonMobDrops : GlobalNPC
             ItemDropRule.ByCondition(hardModeCondition, ModContent.ItemType<SoullessLocket>(), 550);
         }
 
-        if (npc.type is NPCID.PincushionZombie or NPCID.SlimedZombie or NPCID.SwampZombie or NPCID.TwiggyZombie
-            or NPCID.Zombie
-            or NPCID.ZombieEskimo or NPCID.FemaleZombie or NPCID.ZombieRaincoat)
+        if (npc.type is NPCID.PincushionZombie or NPCID.SlimedZombie or NPCID.SwampZombie or NPCID.TwiggyZombie or
+            NPCID.Zombie or NPCID.ZombieEskimo or NPCID.FemaleZombie or NPCID.ZombieRaincoat)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RottenFlesh>(), 15));
         }
+
+        npcLoot.Add(ItemDropRule.ByCondition(inJungle, ModContent.ItemType<EggmanTrophy>(), 750));
 
         switch (npc.type)
         {

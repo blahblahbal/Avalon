@@ -14,15 +14,7 @@ public class Efficient : ModPrefix
 
     public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus)
     {
-        useTimeMult = 0.75f;
+        useTimeMult = 0.9f;
+        damageMult = 1.05f;
     }
-    //public override void Apply(Item item)
-    //{
-        
-    //    Main.LocalPlayer.GetModPlayer<AvalonPlayer>().EfficiencyPrefix = 5;
-    //}
-    //public override void UpdateOwnerPlayer(Player player)
-    //{
-    //    player.GetModPlayer<AvalonPlayer>().EfficiencyPrefix = 5;
-    //}
 }
