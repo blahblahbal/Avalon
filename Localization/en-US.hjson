@@ -3808,7 +3808,7 @@ Mods: {
 
 			HellboundHalberd: {
 				DisplayName: Hellbound Halberd
-				Tooltip: ""
+				Tooltip: <right> to stab
 			}
 
 			Pathogen: {
@@ -7967,6 +7967,7 @@ Mods: {
 			OilExplosion.DisplayName: Oil Explosion
 			EruptionHookBoom.DisplayName: Eruption Hook Boom
 			Sunstorm.DisplayName: Sunstorm
+			HellboundHalberdSpear.DisplayName: Hellbound Halberd Spear
 		}
 
 		NPCs: {
