@@ -32,7 +32,7 @@ class MarrowMasher : ModItem
         Item.width = dims.Width;
         Item.height = dims.Height;
         Item.useTime = Item.useAnimation = 30;
-        Item.knockBack = 6.5f;
+        Item.knockBack = 6.9f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.MarrowMasher>();
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = Item.sellPrice(0, 0, 40, 0);

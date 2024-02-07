@@ -3825,7 +3825,7 @@ Mods: {
 
 			HellboundHalberd: {
 				DisplayName: Hellbound Halberd
-				Tooltip: ""
+				Tooltip: <right> to stab
 			}
 
 			Pathogen: {
@@ -8048,6 +8048,7 @@ Mods: {
 			HomingRocket.DisplayName: Homing Rocket
 			Mechastinger.DisplayName: Mechastinger
 			StingerLaser.DisplayName: Stinger Laser
+			HellboundHalberdSpear.DisplayName: Hellbound Halberd Spear
 		}
 
 		NPCs: {

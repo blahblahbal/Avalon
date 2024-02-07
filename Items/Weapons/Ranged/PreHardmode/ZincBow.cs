@@ -10,9 +10,9 @@ class ZincBow : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item5;
-        Item.damage = 12;
+        Item.damage = 11;
         Item.scale = 1f;
-        Item.shootSpeed = 6.5f;
+        Item.shootSpeed = 6.6f;
         Item.useAmmo = AmmoID.Arrow;
         Item.DamageType = DamageClass.Ranged;
         Item.noMelee = true;

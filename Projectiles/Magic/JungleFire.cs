@@ -28,11 +28,11 @@ public class JungleFire : ModProjectile
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
-        if (Projectile.ai[2] > 0)
+        if (Projectile.ai[2] > 0 && Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<JunglePetal>()] < 16)
         {
             for (int i = 0; i < Main.rand.Next(2, 4); i++)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(1.9f, 1.9f), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.1f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(1.9f, 1.9f), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.4f), Projectile.knockBack * 0.1f, Projectile.owner);
             }
         }
         SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
@@ -117,9 +117,9 @@ public class JungleFire : ModProjectile
         {
             Projectile.velocity.Y = 16f;
         }
-        if (Projectile.ai[1] % 20 == 0)
+        if (Projectile.ai[1] % 20 == 0 && Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<JunglePetal>()] < 24)
         {
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(Main.rand.Next(-14, 15), Main.rand.Next(-14, 15)), new Vector2(Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f + 2f), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.1f, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(Main.rand.Next(-14, 15), Main.rand.Next(-14, 15)), new Vector2(Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f + 2f), ModContent.ProjectileType<JunglePetal>(), (int)(Projectile.damage * 0.35f), Projectile.knockBack * 0.1f, Projectile.owner);
         }
     }
 }
