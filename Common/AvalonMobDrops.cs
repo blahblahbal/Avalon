@@ -513,9 +513,8 @@ public class AvalonMobDrops : GlobalNPC
         {
             npcLoot.Add(ItemDropRule.OneFromOptions(600, ItemID.EndurancePotion, ItemID.GravitationPotion,
                 ItemID.InfernoPotion,
-                ModContent.ItemType<StarbrightPotion>(), ModContent.ItemType<StrengthPotion>(),
-                ModContent.ItemType<AuraPotion>(), ItemID.IronskinPotion, ItemID.SwiftnessPotion,
-                ModContent.ItemType<ShockwavePotion>(), ItemID.MiningPotion, ItemID.ObsidianSkinPotion,
+                ModContent.ItemType<StarbrightPotion>(), ModContent.ItemType<AuraPotion>(), ItemID.IronskinPotion,
+                ItemID.SwiftnessPotion, ModContent.ItemType<ShockwavePotion>(), ItemID.MiningPotion, ItemID.ObsidianSkinPotion,
                 ItemID.NightOwlPotion, ItemID.RagePotion, ItemID.RegenerationPotion, ItemID.SpelunkerPotion,
                 ItemID.SonarPotion, ItemID.WrathPotion, ItemID.SummoningPotion, ItemID.HunterPotion,
                 ItemID.FlipperPotion, ModContent.ItemType<GPSPotion>(), ItemID.GillsPotion).HideFromBestiary());

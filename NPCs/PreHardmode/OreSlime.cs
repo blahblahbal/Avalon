@@ -225,8 +225,12 @@ public class OreSlime : ModNPC
         }
     }
 
-    public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
-        spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon
-            ? 0.2f * AvalonGlobalNPC.ModSpawnRate
-            : 0f;
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+        if (spawnInfo.Player.ZoneUndergroundDesert)
+        {
+            return 0.1f * AvalonGlobalNPC.ModSpawnRate;
+        }
+        return spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon ? 0.2f * AvalonGlobalNPC.ModSpawnRate : 0f;
+    }
 }

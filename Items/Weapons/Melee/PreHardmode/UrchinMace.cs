@@ -22,7 +22,7 @@ class UrchinMace : ModItem
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item1;
         Item.DamageType = DamageClass.Melee;
-        Item.damage = 55;
+        Item.damage = 23;
         Item.autoReuse = true;
         Item.scale = scaleMult;
         Item.crit = 6;

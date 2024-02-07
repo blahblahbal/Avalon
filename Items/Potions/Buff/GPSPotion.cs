@@ -1,3 +1,4 @@
+using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -34,11 +35,8 @@ class GPSPotion : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ItemID.IronOre).AddIngredient(ItemID.RottenChunk).AddTile(TileID.Bottles).Register();
-        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ItemID.LeadOre).AddIngredient(ItemID.RottenChunk).AddTile(TileID.Bottles).Register();
-        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ItemID.IronOre).AddIngredient(ItemID.Vertebrae).AddTile(TileID.Bottles).Register();
-        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ItemID.LeadOre).AddIngredient(ItemID.Vertebrae).AddTile(TileID.Bottles).Register();
-        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ItemID.IronOre).AddIngredient(ModContent.ItemType<Material.YuckyBit>()).AddTile(TileID.Bottles).Register();
-        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ItemID.LeadOre).AddIngredient(ModContent.ItemType<Material.YuckyBit>()).AddTile(TileID.Bottles).Register();
+        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ItemID.IronOre).AddIngredient(ItemID.Blinkroot).AddTile(TileID.Bottles).Register();
+        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ItemID.LeadOre).AddIngredient(ItemID.Blinkroot).AddTile(TileID.Bottles).Register();
+        CreateRecipe(1).AddIngredient(ItemID.BottledWater).AddIngredient(ModContent.ItemType<Material.Beak>()).AddIngredient(ModContent.ItemType<NickelOre>()).AddIngredient(ItemID.Blinkroot).AddTile(TileID.Bottles).Register();
     }
 }
