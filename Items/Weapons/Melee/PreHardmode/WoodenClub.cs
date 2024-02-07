@@ -32,7 +32,7 @@ class WoodenClub : ModItem
         Item.width = dims.Width;
         Item.height = dims.Height;
         Item.useTime = Item.useAnimation = 55;
-        Item.knockBack = 5.7f;
+        Item.knockBack = 6.4f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.WoodenClub>();
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = Item.sellPrice(0, 0, 0, 30);
