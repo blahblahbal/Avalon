@@ -1653,7 +1653,7 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     tooltips.Insert(index, new TooltipLine(Mod, "PrefixTool",
                         "+" + (item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved + 1).ToString() +
-                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Extended"))
+                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Range"))
                     {
                         IsModifier = true
                     });
@@ -1674,7 +1674,7 @@ public class AvalonGlobalItem : GlobalItem
                 {
                     tooltips.Insert(index, new TooltipLine(Mod, "PrefixTool",
                         "+" + (item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved + 2).ToString() + 
-                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Broadened"))
+                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Range"))
                     {
                         IsModifier = true
                     });
@@ -1695,7 +1695,7 @@ public class AvalonGlobalItem : GlobalItem
                     tooltips.Insert(index, new TooltipLine(Mod, "PrefixTool",
                         ((item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved - 1) < 0 ? "" : "+") +
                         (item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved - 1).ToString() + 
-                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Shrunken"))
+                        Language.GetTextValue("Mods.Avalon.PrefixTooltips.Range"))
                     {
                         IsModifier = true,
                         IsModifierBad = true

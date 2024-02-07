@@ -363,9 +363,7 @@ Mods: {
 			Fluidic: increased mobility in liquids
 			Stinky: You smell awful
 			Expanded: Mines in a 2x2 area
-			Extended: " range"
-			Broadened: " range"
-			Shrunken: " range"
+			Range: " range"
 		}
 
 		TooltipEdits: {
