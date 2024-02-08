@@ -1251,6 +1251,15 @@ Mods: {
 					'''
 			}
 
+            AFlowerlessPlant: {
+				DisplayName: A Flowerless Plant
+				Tooltip:
+					'''
+					2% increased damage
+					1% increased critical strike chance
+					'''
+			}
+
 			BenevolentWard: {
 				DisplayName: Benevolent Ward
 				Tooltip:
