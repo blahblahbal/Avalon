@@ -239,7 +239,7 @@ public class Sun : ModProjectile
                 // assign the destination as the cursor
                 float vecX = Main.mouseX + Main.screenPosition.X;
                 float vecY = Main.mouseY + Main.screenPosition.Y;
-                mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition;
+                mousePosition = Main.ReverseGravitySupport(Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition);
 
                 // get the inverse melee speed - yoyos do the same thing
                 float inverseMeleeSpeed = 1 / Main.player[Projectile.owner].GetTotalAttackSpeed(DamageClass.Melee);

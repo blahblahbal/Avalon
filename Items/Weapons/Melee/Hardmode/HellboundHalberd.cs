@@ -1,7 +1,9 @@
 using Avalon.Common.Players;
 using Avalon.Network;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,9 +12,11 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class HellboundHalberd : ModItem
 {
+    Vector2 vel = Vector2.Zero;
+
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return false;
+        return true;
     }
     public float scaleMult = 1.35f; // set this to same as in the projectile file
     public override void SetDefaults()
@@ -72,15 +76,11 @@ public class HellboundHalberd : ModItem
     {
         return true;
     }
-    //public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-    //{
-    //    target.AddBuff(BuffID.Ichor, 60 * 4);
-    //}
-    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    public override void HoldItem(Player player)
     {
-        if (player.altFunctionUse == 2)
+        if (Main.mouseRight && player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] == 0)
         {
-            Vector2 mousePos = Main.MouseScreen;
+            Vector2 mousePos = Main.ReverseGravitySupport(Main.MouseScreen);
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
@@ -92,10 +92,24 @@ public class HellboundHalberd : ModItem
             }
             float velX = mousePos.X + Main.screenPosition.X - player.Center.X;
             float velY = mousePos.Y + Main.screenPosition.Y - player.Center.Y;
+
             Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, new Vector2(velX, velY),
                 ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>(), Item.damage, Item.knockBack);
+
+            if (!player.ItemAnimationJustStarted)
+            {
+                SoundEngine.PlaySound(SoundID.Item1, player.Center);
+            }
+            player.direction = Math.Sign(mousePos.X + Main.screenPosition.X - player.Center.X);
         }
-        else
+    }
+    //public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+    //{
+    //    target.AddBuff(BuffID.Ichor, 60 * 4);
+    //}
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    {
+        if (player.altFunctionUse != 2)
         {
             Projectile.NewProjectile(player.GetSource_ItemUse(Item), position, velocity,
                 ModContent.ProjectileType<Projectiles.Melee.HellboundHalberd>(), Item.damage, Item.knockBack);

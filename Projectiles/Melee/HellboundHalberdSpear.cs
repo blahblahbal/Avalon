@@ -26,7 +26,18 @@ public class HellboundHalberdSpear : SpearTemplate
         //DrawProj_Spear(Projectile, new Color(255,0,0,0), SpriteEffects.None, Vector2.Zero);
         return base.PreDraw(ref lightColor);
     }
-
+    public override void AI()
+    {
+        if (Projectile.Owner().direction == -1)
+        {
+            Projectile.Owner().SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * Projectile.Owner().gravDir + (Projectile.Owner().gravDir == -1 ? MathHelper.Pi / 2 + MathHelper.Pi : 0));
+        }
+        else
+        {
+            Projectile.Owner().SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * Projectile.Owner().gravDir + (Projectile.Owner().gravDir == -1 ? MathHelper.Pi : 0));
+        }
+        base.AI();
+    }
     public override void PostAI()
     {
         Projectile.scale = 1.35f;

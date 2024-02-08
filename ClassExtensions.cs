@@ -52,6 +52,13 @@ public static class ClassExtensions
     /// <returns></returns>
     public static Player PlayerTarget(this NPC npc) => Main.player[npc.target];
 
+    /// <summary>
+    /// Return the <see cref="Player"/> instance of this Projectile's owner.
+    /// </summary>
+    /// <param name="proj"></param>
+    /// <returns></returns>
+    public static Player Owner(this Projectile proj) => Main.player[proj.owner];
+
     public static bool DoesTileExistInBoxAroundPlayer(this Player p, int boxRadius, int tileType)
     {
         Point pos = p.Center.ToTileCoordinates();
