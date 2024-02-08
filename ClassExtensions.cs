@@ -40,10 +40,6 @@ public static class ClassExtensions
             if (tileType == TileID.Cobalt || tileType == TileID.Palladium) power = 100;
             if (tileType == TileID.Mythril || tileType == TileID.Orichalcum) power = 110;
             if (tileType == TileID.Adamantite || tileType == TileID.Titanium) power = 150;
-            if (tileType == TileID.Hellstone) power = 70;
-            if (tileType == TileID.Hellstone) power = 70;
-            if (tileType == TileID.Hellstone) power = 70;
-            if (tileType == TileID.Hellstone) power = 70;
         }
 
         return power;

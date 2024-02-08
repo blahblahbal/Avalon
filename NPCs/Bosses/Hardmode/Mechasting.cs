@@ -9,6 +9,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.GameContent.ItemDropRules;
+using Avalon.Items.Vanity;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
@@ -349,6 +350,7 @@ public class Mechasting : ModNPC
     {
         LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
         notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SoulofDelight>(), 1, 20, 40));
+        notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<MechastingMask>(), 7));
         //notExpertRule.OnSuccess(ItemDropRule.OneFromOptions(1, new int[] { ModContent.ItemType<Items.Accessories.StingerPack>(), ModContent.ItemType<Items.Weapons.Magic.Mechazapinator>(), ModContent.ItemType<Items.Weapons.Ranged.HeatSeeker>() }));
         //npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<Items.BossBags.MechastingBossBag>()));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Placeable.Trophy.MechastingTrophy>(), 10));

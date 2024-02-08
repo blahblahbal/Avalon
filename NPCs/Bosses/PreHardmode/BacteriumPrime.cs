@@ -117,10 +117,12 @@ public class BacteriumPrime : ModNPC
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
+        LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacteriumPrimeTrophy>(), 10));
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacteriumPrimeMask>(), 7));
+        notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacteriumPrimeMask>(), 7));
         npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BacteriumPrimeBossBag>()));
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 15, 41));
+        notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 15, 41));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<Booger>(), 1, 12, 17));
         npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BacteriumPrimeRelic>()));
         npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<PetriDish>(), 4));

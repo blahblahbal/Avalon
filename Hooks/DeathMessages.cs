@@ -47,7 +47,7 @@ public class DeathMessages : ModHook
             Main.worldName);
         if (Main.rand.NextBool(6))
         {
-            int msg = Main.rand.Next(10) + 1;
+            int msg = Main.rand.Next(13) + 1;
             switch (msg)
             {
                 case 1:
@@ -61,6 +61,7 @@ public class DeathMessages : ModHook
                 case 10:
                 case 11:
                 case 12:
+                case 13:
                     empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_" + msg, deadPlayerName);
                     break;
                 case 8:
@@ -151,7 +152,7 @@ public class DeathMessages : ModHook
             #region drowning
             else if (other == 1)
             {
-                switch (Main.rand.Next(10) + 1)
+                switch (Main.rand.Next(11) + 1)
                 {
                     case 1:
                         result = NetworkText.FromKey("DeathText.Drowned_1", deadPlayerName);
@@ -182,6 +183,9 @@ public class DeathMessages : ModHook
                         break;
                     case 10:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Drowned_3", deadPlayerName);
+                        break;
+                    case 11:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Drowned_4", deadPlayerName);
                         break;
                 }
             }
@@ -264,7 +268,7 @@ public class DeathMessages : ModHook
             #region electrocution
             else if (other == 10)
             {
-                switch (Main.rand.Next(6) + 1)
+                switch (Main.rand.Next(8) + 1)
                 {
                     case 1:
                         result = NetworkText.FromKey("DeathText.Electrocuted_1", deadPlayerName);
@@ -284,13 +288,19 @@ public class DeathMessages : ModHook
                     case 6:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Electrocuted_2", deadPlayerName);
                         break;
+                    case 7:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Electrocuted_3", deadPlayerName);
+                        break;
+                    case 8:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Electrocuted_4", deadPlayerName);
+                        break;
                 }
             }
             #endregion electrocution
             #region space
             else if (other == 19)
             {
-                switch (Main.rand.Next(7) + 1)
+                switch (Main.rand.Next(8) + 1)
                 {
                     case 1:
                         result = NetworkText.FromKey("DeathText.Space_1", deadPlayerName, Main.worldName);
@@ -312,6 +322,9 @@ public class DeathMessages : ModHook
                         break;
                     case 7:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Space_2", deadPlayerName, Main.worldName);
+                        break;
+                    case 8:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Space_3", deadPlayerName, Main.worldName);
                         break;
                 }
             }

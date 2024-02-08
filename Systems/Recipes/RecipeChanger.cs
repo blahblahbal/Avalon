@@ -64,6 +64,7 @@ public class RecipeChanger : ModSystem
                     }
                     break;
                 }
+                case ItemID.PotSuspendedDeathweedCrimson:
                 case ItemID.BlueBrickWallUnsafe:
                 case ItemID.BlueSlabWallUnsafe:
                 case ItemID.BlueTiledWallUnsafe:

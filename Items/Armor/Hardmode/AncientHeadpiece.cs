@@ -18,28 +18,51 @@ internal class AncientHeadpiece : ModItem
         Item.defense = 30;
         Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 50);
+        Item.value = Item.sellPrice(0, 10);
         Item.height = dims.Height;
     }
 
     public override void AddRecipes()
     {
-        CreateRecipe().AddIngredient(ItemID.SolarFlareHelmet).AddIngredient(ItemID.FragmentNebula, 10)
-            .AddIngredient(ItemID.FragmentStardust, 10).AddIngredient(ItemID.FragmentVortex, 10)
-            .AddIngredient(ModContent.ItemType<LifeDew>(), 5).AddIngredient(ModContent.ItemType<GhostintheMachine>())
-            .AddTile(ModContent.TileType<CaesiumForge>()).Register();
-        CreateRecipe().AddIngredient(ItemID.NebulaHelmet).AddIngredient(ItemID.FragmentSolar, 10)
-            .AddIngredient(ItemID.FragmentStardust, 10).AddIngredient(ItemID.FragmentVortex, 10)
-            .AddIngredient(ModContent.ItemType<LifeDew>(), 5).AddIngredient(ModContent.ItemType<GhostintheMachine>())
-            .AddTile(ModContent.TileType<CaesiumForge>()).Register();
-        CreateRecipe().AddIngredient(ItemID.StardustHelmet).AddIngredient(ItemID.FragmentNebula, 10)
-            .AddIngredient(ItemID.FragmentSolar, 10).AddIngredient(ItemID.FragmentVortex, 10)
-            .AddIngredient(ModContent.ItemType<LifeDew>(), 5).AddIngredient(ModContent.ItemType<GhostintheMachine>())
-            .AddTile(ModContent.TileType<CaesiumForge>()).Register();
-        CreateRecipe().AddIngredient(ItemID.VortexHelmet).AddIngredient(ItemID.FragmentNebula, 10)
-            .AddIngredient(ItemID.FragmentStardust, 10).AddIngredient(ItemID.FragmentSolar, 10)
-            .AddIngredient(ModContent.ItemType<LifeDew>(), 5).AddIngredient(ModContent.ItemType<GhostintheMachine>())
-            .AddTile(ModContent.TileType<CaesiumForge>()).Register();
+        CreateRecipe()
+            .AddIngredient(ItemID.SolarFlareHelmet)
+            .AddIngredient(ItemID.FragmentNebula, 10)
+            .AddIngredient(ItemID.FragmentStardust, 10)
+            .AddIngredient(ItemID.FragmentVortex, 10)
+            .AddIngredient(ModContent.ItemType<LifeDew>(), 5)
+            .AddIngredient(ModContent.ItemType<GhostintheMachine>())
+            .AddTile(ModContent.TileType<CaesiumForge>())
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ItemID.NebulaHelmet)
+            .AddIngredient(ItemID.FragmentSolar, 10)
+            .AddIngredient(ItemID.FragmentStardust, 10)
+            .AddIngredient(ItemID.FragmentVortex, 10)
+            .AddIngredient(ModContent.ItemType<LifeDew>(), 5)
+            .AddIngredient(ModContent.ItemType<GhostintheMachine>())
+            .AddTile(ModContent.TileType<CaesiumForge>())
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ItemID.StardustHelmet)
+            .AddIngredient(ItemID.FragmentNebula, 10)
+            .AddIngredient(ItemID.FragmentSolar, 10)
+            .AddIngredient(ItemID.FragmentVortex, 10)
+            .AddIngredient(ModContent.ItemType<LifeDew>(), 5)
+            .AddIngredient(ModContent.ItemType<GhostintheMachine>())
+            .AddTile(ModContent.TileType<CaesiumForge>())
+            .Register();
+        
+        CreateRecipe()
+            .AddIngredient(ItemID.VortexHelmet)
+            .AddIngredient(ItemID.FragmentNebula, 10)
+            .AddIngredient(ItemID.FragmentStardust, 10)
+            .AddIngredient(ItemID.FragmentSolar, 10)
+            .AddIngredient(ModContent.ItemType<LifeDew>(), 5)
+            .AddIngredient(ModContent.ItemType<GhostintheMachine>())
+            .AddTile(ModContent.TileType<CaesiumForge>())
+            .Register();
     }
 
     public override bool IsArmorSet(Item head, Item body, Item legs)

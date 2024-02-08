@@ -14,7 +14,7 @@ class AncientBodyplate : ModItem
         Item.defense = 35;
         Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 40, 0, 0);
+        Item.value = Item.sellPrice(0, 20);
         Item.height = dims.Height;
     }
     public override void AddRecipes()

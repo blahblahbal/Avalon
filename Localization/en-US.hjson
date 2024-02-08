@@ -153,6 +153,7 @@ Mods: {
 			Drowned_1: "{0} blub blub blub..."
 			Drowned_2: "{0} thought they could breathe water."
 			Drowned_3: "{0} asphyxiated."
+			Drowned_4: "{0} wasn't a fish."
 			Lava_1: "{0} took a bath in a lake of fire."
 			Lava_2: "{0} became a charcoal briquette."
 			Lava_3: "{0} is HOT HOT HOT."
@@ -161,6 +162,8 @@ Mods: {
 			Petrified_1: "{0} was stoned."
 			Electrocution_1: "{0} got zzzzapped."
 			Electrocution_2: "{0} had an electrifying personality."
+			Electrocution_3: "{0} tried to build their own computer."
+			Electrocution_4: "{0} messed up the redstone."
 			Generic_1: "{0} was tickled to smithereens"
 			Generic_2: "{0} was reduced to a fine paste"
 			Generic_3: "{0} became a tombstone dispenser"
@@ -173,9 +176,12 @@ Mods: {
 			Generic_10: "{0} had the tables turned on them"
 			Generic_11: "{0} got shipped to Timbuktu"
 			Generic_12: "{0} isn't in Kansas anymore"
+			Generic_13: "{0} experienced a skill issue"
 			Poisoned_1: "{0} ate too many apple seeds."
+			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Space_1: "{0} broke the Warp 10 threshold."
 			Space_2: "{0} got too close a black hole."
+			Space_3: "{0}'s body was found by martians."
 		}
 
 		BossDefeatedBlurbs: {
@@ -1017,7 +1023,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases maximum life by 60
-                    5% increased damage
+					               5% increased damage
 					10% decreased mana usage
 					'''
 			}
@@ -1027,7 +1033,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases maximum life by 40
-                    Increases maximum mana by 40
+					               Increases maximum mana by 40
 					'''
 			}
 
@@ -1046,12 +1052,12 @@ Mods: {
 				Tooltip:
 					'''
 					20% increased damage
-                    5% increased critical strike chance
-                    20% decreased mana usage
+					               5% increased critical strike chance
+					               20% decreased mana usage
 					25% chance to save ammo
-                    10 defense
-                    Increases maximum life by 100
-                    Increases maximum mana by 100
+					               10 defense
+					               Increases maximum life by 100
+					               Increases maximum mana by 100
 					'''
 			}
 
@@ -1060,12 +1066,12 @@ Mods: {
 				Tooltip:
 					'''
 					22% increased damage
-                    8% increased critical strike chance
-                    10% decreased mana usage
+					               8% increased critical strike chance
+					               10% decreased mana usage
 					20% chance to save ammo
-                    11 defense
-                    Increases maximum life by 80
-                    Increases maximum mana by 140
+					               11 defense
+					               Increases maximum life by 80
+					               Increases maximum mana by 140
 					'''
 			}
 
@@ -1074,23 +1080,23 @@ Mods: {
 				Tooltip:
 					'''
 					25% increased damage
-                    12% increased critical strike chance
-                    20% decreased mana usage
+					               12% increased critical strike chance
+					               20% decreased mana usage
 					30% chance to save ammo
-                    14 defense
-                    Increases maximum life by 100
-                    Increases maximum mana by 200
-                    Increases maximum stamina by 90
+					               14 defense
+					               Increases maximum life by 100
+					               Increases maximum mana by 200
+					               Increases maximum stamina by 90
 					'''
 			}
 
 			EternitysMoon: {
 				DisplayName: Eternity's Moon
 				Tooltip:
-                '''
-                Increases maximum mana by 20
-                5% decreased mana usage
-                '''
+					'''
+					Increases maximum mana by 20
+					5% decreased mana usage
+					'''
 			}
 
 			FlankersTome: {
@@ -1103,12 +1109,12 @@ Mods: {
 				Tooltip:
 					'''
 					15% increased damage
-                    7% increased critical strike chance
-                    25% decreased mana usage
+					               7% increased critical strike chance
+					               25% decreased mana usage
 					20% chance to save ammo
-                    12 defense
-                    Increases maximum life by 80
-                    Increases maximum mana by 80
+					               12 defense
+					               Increases maximum life by 80
+					               Increases maximum mana by 80
 					'''
 			}
 
@@ -1117,7 +1123,7 @@ Mods: {
 				Tooltip:
 					'''
 					5% increased magic damage
-                    -10% decreased mana usage
+					               -10% decreased mana usage
 					Increases maximum mana by 60
 					'''
 			}
@@ -1127,7 +1133,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases maximum life by 20
-                    Increases maximum mana by 20
+					               Increases maximum mana by 20
 					'''
 			}
 
@@ -1141,9 +1147,9 @@ Mods: {
 				Tooltip:
 					'''
 					3% increassed critical strike chance
-                    5% decreased mana usage
+					               5% decreased mana usage
 					8% increased minion damage
-                    5% increased minion knockback
+					               5% increased minion knockback
 					'''
 			}
 
@@ -1153,7 +1159,7 @@ Mods: {
 					'''
 					15% increased melee damage
 					Increases maximum life by 20
-                    Increases maximum mana by 20
+					               Increases maximum mana by 20
 					'''
 			}
 
@@ -1191,9 +1197,9 @@ Mods: {
 				Tooltip:
 					'''
 					15% increased damage
-                    3% increased critical strike chance
-                    Increases maximum life by 60
-                    Increases maximum mana by 40
+					               3% increased critical strike chance
+					               Increases maximum life by 60
+					               Increases maximum mana by 40
 					'''
 			}
 
@@ -1202,13 +1208,13 @@ Mods: {
 				Tooltip:
 					'''
 					35% increased damage
-                    20% increased critical strike chance
-                    25% decreased mana usage
+					               20% increased critical strike chance
+					               25% decreased mana usage
 					30% chance to save ammo
-                    18 defense
-                    Increases maximum life by 160
-                    Increases maximum mana by 260
-                    Increases maximum stamina by 120
+					               18 defense
+					               Increases maximum life by 160
+					               Increases maximum mana by 260
+					               Increases maximum stamina by 120
 					'''
 			}
 
@@ -1217,8 +1223,8 @@ Mods: {
 				Tooltip:
 					'''
 					+15% increased ranged damage
-                    Increases maximum life by 40
-                    Increases maximum mana by 20
+					               Increases maximum life by 40
+					               Increases maximum mana by 20
 					20% chance to save ammo
 					'''
 			}
@@ -1246,12 +1252,12 @@ Mods: {
 				Tooltip:
 					'''
 					Increases maximum life by 20
-                    5% increased ranged damage
+					               5% increased ranged damage
 					4 defense
 					'''
 			}
 
-            AFlowerlessPlant: {
+			AFlowerlessPlant: {
 				DisplayName: A Flowerless Plant
 				Tooltip:
 					'''
@@ -5026,17 +5032,17 @@ Mods: {
 
 			CrackedOrangeBrick: {
 				DisplayName: Cracked Orange Brick
-				Tooltip: "May break when stepped on"
+				Tooltip: May break when stepped on
 			}
 
 			CrackedPurpleBrick: {
 				DisplayName: Cracked Purple Brick
-				Tooltip: "May break when stepped on"
+				Tooltip: May break when stepped on
 			}
 
 			CrackedYellowBrick: {
 				DisplayName: Cracked Yellow Brick
-				Tooltip: "May break when stepped on"
+				Tooltip: May break when stepped on
 			}
 
 			OrangeBrickWallUnsafe: {
@@ -7873,6 +7879,26 @@ Mods: {
 			SightCandle: {
 				DisplayName: Candle of Sight
 				Tooltip: Nearby players can see nearby enemies and traps
+			}
+
+			MechastingMask: {
+				DisplayName: Mechasting Mask
+				Tooltip: ""
+			}
+
+			HangingBloodberry: {
+				DisplayName: Hanging Bloodberry
+				Tooltip: ""
+			}
+
+			HangingHolybird: {
+				DisplayName: Hanging Holybird
+				Tooltip: ""
+			}
+
+			HangingSweetstem: {
+				DisplayName: Hanging Sweetstem
+				Tooltip: ""
 			}
 		}
 

@@ -14,7 +14,7 @@ class AncientLeggings : ModItem
         Item.defense = 25;
         Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 30, 0, 0);
+        Item.value = Item.sellPrice(0, 15);
         Item.height = dims.Height;
     }
     public override void AddRecipes()

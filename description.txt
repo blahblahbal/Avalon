@@ -19,7 +19,7 @@ Updates:
 Check the change notes section for patch notes.
 
 Compatibility notes:
-Avalon has cross-compat with Achievements and Tokens (more to come).
+Avalon has compat with Achievements, Tokens, and Boss Checklist (more to come).
 
 
 Credits:
