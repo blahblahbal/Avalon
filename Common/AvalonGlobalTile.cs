@@ -28,7 +28,8 @@ public class AvalonGlobalTile : GlobalTile
     }
     public override void PostDraw(int i, int j, int type, SpriteBatch spriteBatch)
     {
-        if (Main.tile[i, j].TileType == TileID.LihzahrdAltar && NPC.downedGolemBoss)
+        // add back when hardmode/hidden temple is released
+        if (false) //Main.tile[i, j].TileType == TileID.LihzahrdAltar && NPC.downedGolemBoss)
         {
             Main.tileFrameCounter[TileID.LihzahrdAltar]++;
 
@@ -59,12 +60,6 @@ public class AvalonGlobalTile : GlobalTile
             {
                 frameY += 36 * 5;
             }
-            //if (Main.tileFrameCounter[TileID.LihzahrdAltar] % 6 == 0)
-            //{
-            //    //Main.NewText(Main.tileFrameCounter[TileID.LihzahrdAltar]);
-            //    frameY = (Main.tile[i, j].TileFrameY + 1) * Main.tileFrameCounter[TileID.LihzahrdAltar];
-            //    //Main.NewText(frameY);
-            //}
             if (Main.tileFrameCounter[TileID.LihzahrdAltar] == 48)
             {
                 Main.tileFrameCounter[TileID.LihzahrdAltar] = 0;
@@ -78,32 +73,7 @@ public class AvalonGlobalTile : GlobalTile
             Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Assets/Textures/LihzahrdAltarPortal").Value,
                 new Vector2(i * 16 - (int)Main.screenPosition.X - 0 / 2f, j * 16 - (int)Main.screenPosition.Y) + zero,
                 new Rectangle(frameX, frameY, 16, 16), Color.White, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
-            //Main.NewText(frameY);
         }
-
-        //if (Main.tile[i, j - 1].TileType == TileID.LihzahrdAltar)
-        //{
-        //    if (Main.tileSolid[Main.tile[i, j].TileType])
-        //    {
-        //        var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-        //        if (Main.drawToScreen)
-        //        {
-        //            zero = Vector2.Zero;
-        //        }
-
-        //        Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Assets/Textures/BlueLihzahrdGlowmask").Value,
-        //            new Vector2(i * 16 - (int)Main.screenPosition.X - 0 / 2f, j * 16 - (int)Main.screenPosition.Y) + zero,
-        //            new Rectangle(0, 0, 48, 16), Color.White, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
-        //    }
-
-
-
-
-        //    //Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Assets/Textures/BlueLihzahrdGlowmask").Value,
-        //    //    new Vector2(i * 16 + (int)Main.screenPosition.X / 2f, j * 16 + (int)Main.screenPosition.Y), Color.Cyan);
-        //    //Main.NewText(i);
-
-        //}
     }
     public override void FloorVisuals(int type, Player player)
     {

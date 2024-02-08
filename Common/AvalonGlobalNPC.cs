@@ -81,17 +81,18 @@ public class AvalonGlobalNPC : GlobalNPC
             }
         }
 
-        if (npc.type == NPCID.Golem && !NPC.downedGolemBoss)
-        {
-            if (Main.netMode == 0)
-            {
-                Main.NewText(Language.GetTextValue("Mods.Avalon.BossDefeatedBlurbs.Golem"), 50, 255, 130);
-            }
-            else if (Main.netMode == 2)
-            {
-                ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.BossDefeatedBlurbs.Golem"), new Color(50, 255, 130));
-            }
-        }
+        // add back when hardmode/hidden temple releases
+        //if (npc.type == NPCID.Golem && !NPC.downedGolemBoss)
+        //{
+        //    if (Main.netMode == NetmodeID.SinglePlayer)
+        //    {
+        //        Main.NewText(Language.GetTextValue("Mods.Avalon.BossDefeatedBlurbs.Golem"), 50, 255, 130);
+        //    }
+        //    else if (Main.netMode == NetmodeID.Server)
+        //    {
+        //        ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.BossDefeatedBlurbs.Golem"), new Color(50, 255, 130));
+        //    }
+        //}
     }
 
     /// <summary>

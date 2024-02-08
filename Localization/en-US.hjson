@@ -1023,7 +1023,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases maximum life by 60
-					               5% increased damage
+					5% increased damage
 					10% decreased mana usage
 					'''
 			}
@@ -1033,7 +1033,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases maximum life by 40
-					               Increases maximum mana by 40
+					Increases maximum mana by 40
 					'''
 			}
 
@@ -1052,12 +1052,12 @@ Mods: {
 				Tooltip:
 					'''
 					20% increased damage
-					               5% increased critical strike chance
-					               20% decreased mana usage
+					5% increased critical strike chance
+					20% decreased mana usage
 					25% chance to save ammo
-					               10 defense
-					               Increases maximum life by 100
-					               Increases maximum mana by 100
+					10 defense
+					Increases maximum life by 100
+					Increases maximum mana by 100
 					'''
 			}
 
@@ -1066,12 +1066,12 @@ Mods: {
 				Tooltip:
 					'''
 					22% increased damage
-					               8% increased critical strike chance
-					               10% decreased mana usage
+					8% increased critical strike chance
+					10% decreased mana usage
 					20% chance to save ammo
-					               11 defense
-					               Increases maximum life by 80
-					               Increases maximum mana by 140
+					11 defense
+					Increases maximum life by 80
+					Increases maximum mana by 140
 					'''
 			}
 
@@ -1080,13 +1080,13 @@ Mods: {
 				Tooltip:
 					'''
 					25% increased damage
-					               12% increased critical strike chance
-					               20% decreased mana usage
+					12% increased critical strike chance
+					20% decreased mana usage
 					30% chance to save ammo
-					               14 defense
-					               Increases maximum life by 100
-					               Increases maximum mana by 200
-					               Increases maximum stamina by 90
+					14 defense
+					Increases maximum life by 100
+					Increases maximum mana by 200
+					Increases maximum stamina by 90
 					'''
 			}
 
@@ -1109,12 +1109,12 @@ Mods: {
 				Tooltip:
 					'''
 					15% increased damage
-					               7% increased critical strike chance
-					               25% decreased mana usage
+					7% increased critical strike chance
+					25% decreased mana usage
 					20% chance to save ammo
-					               12 defense
-					               Increases maximum life by 80
-					               Increases maximum mana by 80
+					12 defense
+					Increases maximum life by 80
+					Increases maximum mana by 80
 					'''
 			}
 
@@ -1123,7 +1123,7 @@ Mods: {
 				Tooltip:
 					'''
 					5% increased magic damage
-					               -10% decreased mana usage
+					-10% decreased mana usage
 					Increases maximum mana by 60
 					'''
 			}
@@ -1133,7 +1133,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases maximum life by 20
-					               Increases maximum mana by 20
+					Increases maximum mana by 20
 					'''
 			}
 
@@ -1147,9 +1147,9 @@ Mods: {
 				Tooltip:
 					'''
 					3% increassed critical strike chance
-					               5% decreased mana usage
+					5% decreased mana usage
 					8% increased minion damage
-					               5% increased minion knockback
+					5% increased minion knockback
 					'''
 			}
 
@@ -1159,7 +1159,7 @@ Mods: {
 					'''
 					15% increased melee damage
 					Increases maximum life by 20
-					               Increases maximum mana by 20
+					Increases maximum mana by 20
 					'''
 			}
 
@@ -1197,9 +1197,9 @@ Mods: {
 				Tooltip:
 					'''
 					15% increased damage
-					               3% increased critical strike chance
-					               Increases maximum life by 60
-					               Increases maximum mana by 40
+					3% increased critical strike chance
+					Increases maximum life by 60
+					Increases maximum mana by 40
 					'''
 			}
 
@@ -1208,13 +1208,13 @@ Mods: {
 				Tooltip:
 					'''
 					35% increased damage
-					               20% increased critical strike chance
-					               25% decreased mana usage
+					20% increased critical strike chance
+					25% decreased mana usage
 					30% chance to save ammo
-					               18 defense
-					               Increases maximum life by 160
-					               Increases maximum mana by 260
-					               Increases maximum stamina by 120
+					18 defense
+					Increases maximum life by 160
+					Increases maximum mana by 260
+					Increases maximum stamina by 120
 					'''
 			}
 
@@ -1222,9 +1222,9 @@ Mods: {
 				DisplayName: Tome of Distance
 				Tooltip:
 					'''
-					+15% increased ranged damage
-					               Increases maximum life by 40
-					               Increases maximum mana by 20
+					15% increased ranged damage
+					Increases maximum life by 40
+					Increases maximum mana by 20
 					20% chance to save ammo
 					'''
 			}
@@ -1252,7 +1252,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases maximum life by 20
-					               5% increased ranged damage
+					5% increased ranged damage
 					4 defense
 					'''
 			}
