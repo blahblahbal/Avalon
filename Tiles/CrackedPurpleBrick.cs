@@ -32,4 +32,8 @@ public class CrackedPurpleBrick : ModTile
     {
         return false;
     }
+    public override bool IsTileDangerous(int i, int j, Player player)
+    {
+        return true;
+    }
 }

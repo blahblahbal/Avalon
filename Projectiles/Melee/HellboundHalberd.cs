@@ -103,13 +103,6 @@ public class HellboundHalberd : ModProjectile
         }
         return false;
     }
-    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-    {
-        if (hit.Crit)
-        {
-            hit.Knockback *= 1.5f;
-        }
-    }
     public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
         float diff = target.Center.X - player.Center.X;

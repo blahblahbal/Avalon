@@ -5026,17 +5026,17 @@ Mods: {
 
 			CrackedOrangeBrick: {
 				DisplayName: Cracked Orange Brick
-				Tooltip: ""
+				Tooltip: "May break when stepped on"
 			}
 
 			CrackedPurpleBrick: {
 				DisplayName: Cracked Purple Brick
-				Tooltip: ""
+				Tooltip: "May break when stepped on"
 			}
 
 			CrackedYellowBrick: {
 				DisplayName: Cracked Yellow Brick
-				Tooltip: ""
+				Tooltip: "May break when stepped on"
 			}
 
 			OrangeBrickWallUnsafe: {
