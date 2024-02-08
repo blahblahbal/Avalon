@@ -74,11 +74,11 @@ public class UrchinMace : ModProjectile
         }
 
         swordVel = MathHelper.Lerp(0f, 2f, Projectile.timeLeft / (float)SwingSpeed);
-        Vector2 HandPosition = player.MountedCenter + new Vector2(player.direction * -4f,0);
+        Vector2 HandPosition = player.RotatedRelativePoint(player.MountedCenter) + new Vector2(player.direction * -4f, 0);
         Projectile.Center = swingRadius + HandPosition;
 
         Projectile.rotation = Vector2.Normalize(Projectile.Center - HandPosition).ToRotation() + (45 * (MathHelper.Pi / 180));
-        player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi);
+        player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * player.gravDir + (player.gravDir == -1 ? MathHelper.Pi : 0));
 
         Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Water_Cavern);
         d.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(MathHelper.PiOver2 * player.direction) * 3 * swordVel;

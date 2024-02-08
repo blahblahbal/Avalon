@@ -49,15 +49,20 @@ class UrchinMace : ModItem
         Rectangle dims = this.GetDims();
         float posMult = 1 + (dims.Height * scaleMult - 26) / 26 * 0.1f;
         velocity = Vector2.Zero;
+        int height = dims.Height;
+        if (player.gravDir == -1)
+        {
+            height = -dims.Height;
+        }
         if (swing == 1)
         {
             swing--;
-            position = player.Center + new Vector2(0, dims.Height * Item.scale * posMult);
+            position = player.Center + new Vector2(0, height * Item.scale * posMult);
         }
         else
         {
             swing++;
-            position = player.Center + new Vector2(0, -dims.Height * Item.scale * posMult);
+            position = player.Center + new Vector2(0, -height * Item.scale * posMult);
         }
     }
     public override bool CanUseItem(Player player)
