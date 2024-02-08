@@ -3,6 +3,7 @@ using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -179,9 +180,9 @@ public class AvalonGlobalTile : GlobalTile
         {
             if (TileID.Sets.Ore[Main.tile[i, j].TileType])
             {
-                if (Main.player[pid].GetModPlayer<AvalonPlayer>().OreDupe)
+                if (Main.player[pid].GetModPlayer<AvalonPlayer>().OreDupe && Main.player[pid].HeldItem.pick >= ClassExtensions.GetPickaxePower(Main.tile[i, j].TileType, j))
                 {
-                    if (Data.Sets.Tile.OresToChunks.ContainsKey(Main.tile[i, j].TileType))
+                    if (Data.Sets.Tile.OresToChunks.ContainsKey(Main.tile[i, j].TileType) && !fail)
                     {
                         int drop = Data.Sets.Tile.OresToChunks[Main.tile[i, j].TileType];
                         int stack = 1;
@@ -190,6 +191,7 @@ public class AvalonGlobalTile : GlobalTile
                             stack = 2;
                         }
                         int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, drop, stack);
+                        Main.NewText(stack);
                         if (Main.netMode == NetmodeID.Server)
                         {
                             NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
