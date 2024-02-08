@@ -1016,8 +1016,9 @@ Mods: {
 				DisplayName: Adventures and Mishaps
 				Tooltip:
 					'''
-					+60 HP, +5% damage
-					-10% mana cost
+					Increases maximum life by 60
+                    5% increased damage
+					10% decreased mana usage
 					'''
 			}
 
@@ -1025,8 +1026,8 @@ Mods: {
 				DisplayName: Burning Desire
 				Tooltip:
 					'''
-					+40 HP
-					+40 mana
+					Increases maximum life by 40
+                    Increases maximum mana by 40
 					'''
 			}
 
@@ -1037,15 +1038,20 @@ Mods: {
 
 			ChristmasTome: {
 				DisplayName: Christmas Tome
-				Tooltip: +3% critical strike chance
+				Tooltip: 3% increased critical strike chance
 			}
 
 			CreatorsTome: {
 				DisplayName: Creator's Tome
 				Tooltip:
 					'''
-					+20% damage, +5% critical strike chance, -20% mana cost
-					25% chance to not consume ammo, 10 defense, +100 HP, +100 mana
+					20% increased damage
+                    5% increased critical strike chance
+                    20% decreased mana usage
+					25% chance to save ammo
+                    10 defense
+                    Increases maximum life by 100
+                    Increases maximum mana by 100
 					'''
 			}
 
@@ -1053,8 +1059,13 @@ Mods: {
 				DisplayName: Dominance
 				Tooltip:
 					'''
-					+22% damage, +8% critical strike chance, -10% mana cost
-					20% chance to not consume ammo, 11 defense, +140 mana, +80 HP
+					22% increased damage
+                    8% increased critical strike chance
+                    10% decreased mana usage
+					20% chance to save ammo
+                    11 defense
+                    Increases maximum life by 80
+                    Increases maximum mana by 140
 					'''
 			}
 
@@ -1062,27 +1073,42 @@ Mods: {
 				DisplayName: Emperor
 				Tooltip:
 					'''
-					25% increased damage, 12% increased critical strike chance, -20% mana cost
-					30% chance to not consume ammo, 14 defense, +200 mana, +100 HP, +90 stamina
+					25% increased damage
+                    12% increased critical strike chance
+                    20% decreased mana usage
+					30% chance to save ammo
+                    14 defense
+                    Increases maximum life by 100
+                    Increases maximum mana by 200
+                    Increases maximum stamina by 90
 					'''
 			}
 
 			EternitysMoon: {
 				DisplayName: Eternity's Moon
-				Tooltip: +20 mana, -5% mana cost
+				Tooltip:
+                '''
+                Increases maximum mana by 20
+                5% decreased mana usage
+                '''
 			}
 
 			FlankersTome: {
 				DisplayName: Flanker's Tome
-				Tooltip: +10% melee damage
+				Tooltip: 10% increased melee damage
 			}
 
 			LoveUpandDown: {
 				DisplayName: Love Up and Down
 				Tooltip:
 					'''
-					+15% damage, +7% critical strike chance, -25% mana cost
-					20% chance to not consume ammo, 12 defense, +80 HP, +80 mana
+					15% increased damage
+                    7% increased critical strike chance
+                    25% decreased mana usage
+					20% chance to save ammo
+                    12 defense
+                    Increases maximum life by 80
+                    Increases maximum mana by 80
 					'''
 			}
 
@@ -1090,8 +1116,9 @@ Mods: {
 				DisplayName: Mediation's Flame
 				Tooltip:
 					'''
-					+5% magic damage, -10% mana cost
-					+60 mana
+					5% increased magic damage
+                    -10% decreased mana usage
+					Increases maximum mana by 60
 					'''
 			}
 
@@ -1099,8 +1126,8 @@ Mods: {
 				DisplayName: Misty Peach Blossoms
 				Tooltip:
 					'''
-					+20 HP
-					+20 mana
+					Increases maximum life by 20
+                    Increases maximum mana by 20
 					'''
 			}
 
@@ -1113,8 +1140,10 @@ Mods: {
 				DisplayName: Southeastern Peacock
 				Tooltip:
 					'''
-					+3% critical strike chance, -5% mana cost
-					8% increased minion damage, 5% increased minion knockback
+					3% increassed critical strike chance
+                    5% decreased mana usage
+					8% increased minion damage
+                    5% increased minion knockback
 					'''
 			}
 
@@ -1122,8 +1151,9 @@ Mods: {
 				DisplayName: Tale of the Dolt
 				Tooltip:
 					'''
-					+15% melee damage
-					+20 HP, +20 mana
+					15% increased melee damage
+					Increases maximum life by 20
+                    Increases maximum mana by 20
 					'''
 			}
 
@@ -1131,8 +1161,8 @@ Mods: {
 				DisplayName: Tale of the Red Lotus
 				Tooltip:
 					'''
-					+5% ranged damage
-					+20 HP
+					5% increased ranged damage
+					Increases maximum life by 20
 					'''
 			}
 
@@ -1153,15 +1183,17 @@ Mods: {
 
 			TheThreeScholars: {
 				DisplayName: The Three Scholars
-				Tooltip: +20 defense
+				Tooltip: 20 defense
 			}
 
 			TheVoidlands: {
 				DisplayName: The Voidlands
 				Tooltip:
 					'''
-					+15% damage, +3% critical strike chance
-					+60 HP, +40 mana
+					15% increased damage
+                    3% increased critical strike chance
+                    Increases maximum life by 60
+                    Increases maximum mana by 40
 					'''
 			}
 
@@ -1169,8 +1201,14 @@ Mods: {
 				DisplayName: The World
 				Tooltip:
 					'''
-					35% increased damage, 20% increased critical strike chance, -25% mana cost
-					30% chance to not consume ammo, 18 defense, +260 mana, +160 HP, +120 stamina
+					35% increased damage
+                    20% increased critical strike chance
+                    25% decreased mana usage
+					30% chance to save ammo
+                    18 defense
+                    Increases maximum life by 160
+                    Increases maximum mana by 260
+                    Increases maximum stamina by 120
 					'''
 			}
 
@@ -1178,8 +1216,10 @@ Mods: {
 				DisplayName: Tome of Distance
 				Tooltip:
 					'''
-					+15% ranged damage, +40 HP, +20 mana
-					20% chance to not consume ammo
+					+15% increased ranged damage
+                    Increases maximum life by 40
+                    Increases maximum mana by 20
+					20% chance to save ammo
 					'''
 			}
 
@@ -1187,8 +1227,8 @@ Mods: {
 				DisplayName: Tome of the River Spirits
 				Tooltip:
 					'''
-					+15% magic and minion damage
-					-5% mana cost
+					15% increased magic and minion damage
+					5% decreased mana usage
 					'''
 			}
 
@@ -1205,8 +1245,9 @@ Mods: {
 				DisplayName: Underestimated Resolve
 				Tooltip:
 					'''
-					+20 HP, +5% ranged damage
-					+4 defense
+					Increases maximum life by 20
+                    5% increased ranged damage
+					4 defense
 					'''
 			}
 
