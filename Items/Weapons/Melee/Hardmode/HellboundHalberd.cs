@@ -9,7 +9,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Melee.Hardmode; 
+namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class HellboundHalberd : ModItem
 {
@@ -79,7 +79,8 @@ public class HellboundHalberd : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] == 0)
+        if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] == 0 &&
+            player.cursorItemIconID == 0 && !player.mouseInterface)
         {
             Vector2 mousePos = Main.ReverseGravitySupport(Main.MouseScreen);
             if (Main.netMode == NetmodeID.MultiplayerClient)
