@@ -30,7 +30,7 @@ public class HellboundHalberdSpear : SpearTemplate
     {
         if (Projectile.Owner().direction == -1)
         {
-            Projectile.Owner().SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * Projectile.Owner().gravDir + (Projectile.Owner().gravDir == -1 ? MathHelper.Pi / 2 + MathHelper.Pi : 0));
+            Projectile.Owner().SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * Projectile.Owner().gravDir + MathHelper.Pi + MathHelper.PiOver2);
         }
         else
         {

@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Network;
 using Microsoft.Xna.Framework;
@@ -78,7 +79,7 @@ public class HellboundHalberd : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] == 0)
+        if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] == 0)
         {
             Vector2 mousePos = Main.ReverseGravitySupport(Main.MouseScreen);
             if (Main.netMode == NetmodeID.MultiplayerClient)
@@ -100,7 +101,7 @@ public class HellboundHalberd : ModItem
             {
                 SoundEngine.PlaySound(SoundID.Item1, player.Center);
             }
-            player.direction = Math.Sign(mousePos.X + Main.screenPosition.X - player.Center.X);
+            //player.direction = Math.Sign(mousePos.X + Main.screenPosition.X - player.Center.X);
         }
     }
     //public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)

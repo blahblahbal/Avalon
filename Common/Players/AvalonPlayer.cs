@@ -15,6 +15,7 @@ using Avalon.Systems;
 using Avalon.Tiles.Ores;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -554,7 +555,8 @@ public class AvalonPlayer : ModPlayer
     {
         OilBottleTimer--;
         if (OilBottleTimer < 0) OilBottleTimer = 0;
-        
+
+        #region achievements (all large gems, hellevator)
         if (Player.HasItem(ItemID.LargeRuby) && Player.HasItem(ItemID.LargeAmber) && Player.HasItem(ItemID.LargeTopaz) && Player.HasItem(ModContent.ItemType<LargePeridot>()) &&
             Player.HasItem(ItemID.LargeEmerald) && Player.HasItem(ModContent.ItemType<LargeTourmaline>()) && Player.HasItem(ItemID.LargeSapphire) && Player.HasItem(ItemID.LargeAmethyst) &&
             Player.HasItem(ItemID.LargeDiamond) && Player.HasItem(ModContent.ItemType<LargeZircon>()))
@@ -565,21 +567,19 @@ public class AvalonPlayer : ModPlayer
         {
             ExxoAvalonOrigins.Achievements?.Call("Event", "Hellevator");
         }
+        #endregion
+
+        #region desert beak spawn timer
         DesertBeakSpawnTimer--;
         if (DesertBeakSpawnTimer == 0)
         {
             NPC.SpawnOnPlayer(Player.whoAmI, ModContent.NPCType<DesertBeak>());
-
-            //NPC.NewNPC(Player.GetSource_FromThis(), (int)Player.position.X, (int)Player.position.Y, ModContent.NPCType<DesertBeak>());
-            //int db = ClassExtensions.FindATypeOfNPC(ModContent.NPCType<DesertBeak>());
-            //if (db > -1)
-            //{
-            //    ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(db.ToString()), Color.White);
-            //    ModContent.GetInstance<DesertBeak>().leftWing = NPC.NewNPC(Main.npc[db].GetSource_FromThis(), (int)Main.npc[db].position.X, (int)Main.npc[db].position.Y, ModContent.NPCType<DesertBeakWingNPC>(), Start: Player.whoAmI, ai1: db, ai2: 1);
-            //    ModContent.GetInstance<DesertBeak>().rightWing = NPC.NewNPC(Main.npc[db].GetSource_FromThis(), (int)Main.npc[db].position.X, (int)Main.npc[db].position.Y, ModContent.NPCType<DesertBeakWingNPC>(), Start: Player.whoAmI, ai1: db, ai2: 2);
-            //}
             SoundEngine.PlaySound(SoundID.Roar, Player.position);
         }
+        #endregion
+
+        
+
         if (AncientRangedBonusActive)
         {
             Player.GetDamage(DamageClass.Ranged) += 0.15f;
@@ -2013,6 +2013,22 @@ public class AvalonPlayer : ModPlayer
         {
             SyncMouseCursor(server: false);
         }
+    }
+    public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
+    {
+        #region hellbound halberd weird shit
+        if (drawInfo.drawPlayer.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] > 0 && Main.mouseRight && !Main.mouseLeft && Main.myPlayer == drawInfo.drawPlayer.whoAmI)
+        {
+            if (Math.Sign(Player.Center.X - MousePosition.X) < 0)
+            {
+                drawInfo.playerEffect = SpriteEffects.None;
+            }
+            if (Math.Sign(Player.Center.X - MousePosition.X) > 0)
+            {
+                drawInfo.playerEffect = SpriteEffects.FlipHorizontally;
+            }
+        }
+        #endregion
     }
     public override void PostUpdateRunSpeeds()
     {
