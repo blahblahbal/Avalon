@@ -7909,6 +7909,11 @@ Mods: {
 					Your attacks have a 5% chance to deal damage to yourself instead
 					'''
 			}
+
+			CompressedDesertFossil: {
+				DisplayName: Compressed Desert Fossil
+				Tooltip: "'Stick it in the Extractinator!'"
+			}
 		}
 
 		InfoDisplays: {

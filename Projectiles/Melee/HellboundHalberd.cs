@@ -126,7 +126,7 @@ public class HellboundHalberd : ModProjectile
 
         var spriteDirection = SpriteEffects.None;
         float rotationFlip = 0;
-        if (Items.Weapons.Melee.Hardmode.HellboundHalberd.swing == 1)
+        if ((Items.Weapons.Melee.Hardmode.HellboundHalberd.swing == 1 && player.gravDir != -1) || (player.gravDir == -1 && Items.Weapons.Melee.Hardmode.HellboundHalberd.swing == 0))
         {
             if (player.direction == 1)
             {
@@ -139,7 +139,7 @@ public class HellboundHalberd : ModProjectile
                 offset = new Vector2((float)-(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
             }
         }
-        else if (Items.Weapons.Melee.Hardmode.HellboundHalberd.swing == 0)
+        else if ((Items.Weapons.Melee.Hardmode.HellboundHalberd.swing == 0 && player.gravDir != -1) || (player.gravDir == -1 && Items.Weapons.Melee.Hardmode.HellboundHalberd.swing == 1))
         {
             if (player.direction == 1)
             {
