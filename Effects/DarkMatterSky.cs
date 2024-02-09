@@ -107,16 +107,20 @@ public class DarkMatterSky : CustomSky
         int yCenter = Main.ScreenSize.Y / 2;
 
         // Modifier to allow the black hole to draw in the same place no matter your resolution
-        int modifier = (Main.screenWidth - Main.screenHeight) / 2;
+        int modifier = (Main.screenWidth - Main.screenHeight) / 4;
 
         // If the your game screen's height is greater than your game screen's width, swap the modifier
         if (modifier < 0)
         {
-            modifier = (Main.screenHeight - Main.screenWidth) / 2;
+            modifier = (Main.screenHeight - Main.screenWidth) / 4;
         }
 
         // Create a variable for the percentage to scale the textures by
-        var percentage = new Vector2(1920 / Main.ScreenSize.X, 1080 / Main.ScreenSize.Y); // FIX FOR 4k LATER 3840x2160
+        var percentage = new Vector2(3840 / Main.ScreenSize.X, 2160 / Main.ScreenSize.Y); // FIX FOR 4k LATER 3840x2160
+        //if (Main.ScreenSize.X > 1920)
+        //{
+        //    percentage = new Vector2(3840 / Main.ScreenSize.X, 2160 / Main.ScreenSize.Y);
+        //}
 
         // Create the modifier for the X coordinate of the black hole
         int xModifier = (int)(modifier * percentage.X);

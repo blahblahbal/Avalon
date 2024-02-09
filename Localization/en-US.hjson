@@ -3879,7 +3879,7 @@ Mods: {
 
 			HellboundHalberd: {
 				DisplayName: Hellbound Halberd
-				Tooltip: <right> to stab
+				Tooltip: <right> while holding for an alternate attack!
 			}
 
 			Pathogen: {
@@ -6673,7 +6673,7 @@ Mods: {
 			}
 
 			WildMushroom: {
-				DisplayName: Wild Mushroom
+				DisplayName: Bundle of Wild Mushrooms
 				Tooltip: ""
 			}
 
