@@ -11,7 +11,6 @@ public class KeybindSystem : ModSystem
     public static ModKeybind ModeChangeHotkey { get; private set; }
     public static ModKeybind AstralHotkey { get; private set; }
     public static ModKeybind QuickStaminaHotkey { get; private set; }
-    //public static ModKeybind FlightTimeRestoreHotkey { get; private set; }
     public static ModKeybind MinionGuidingHotkey { get; private set; }
 
     public override void Load()
@@ -23,7 +22,6 @@ public class KeybindSystem : ModSystem
         ModeChangeHotkey = KeybindLoader.RegisterKeybind(Mod, "Mode Change", Keys.N);
         AstralHotkey = KeybindLoader.RegisterKeybind(Mod, "Activate Astral Projecting", Keys.OemPipe);
         QuickStaminaHotkey = KeybindLoader.RegisterKeybind(Mod, "Quick Stamina", Keys.X);
-        //FlightTimeRestoreHotkey = KeybindLoader.RegisterKeybind(Mod, "Stamina Flight Time Restore", Keys.G);
     }
 
     public override void Unload()
@@ -34,7 +32,6 @@ public class KeybindSystem : ModSystem
         ModeChangeHotkey = null;
         AstralHotkey = null;
         QuickStaminaHotkey = null;
-        //FlightTimeRestoreHotkey = null;
         MinionGuidingHotkey = null;
     }
 }

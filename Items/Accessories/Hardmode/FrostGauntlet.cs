@@ -20,10 +20,11 @@ class FrostGauntlet : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(Type)
+        CreateRecipe()
             .AddIngredient(ItemID.FireGauntlet)
             .AddIngredient(ItemID.FrozenTurtleShell)
-            .AddTile(TileID.TinkerersWorkbench).Register();
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

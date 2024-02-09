@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
+[AutoloadEquip(EquipType.Balloon)]
 public class RocketinaBalloon : ModItem
 {
     public override void SetDefaults()

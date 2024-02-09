@@ -234,6 +234,10 @@ public class AvalonPlayer : ModPlayer
     public bool GoblinToolbelt;
     public bool GoblinAK;
     public bool BuilderBelt;
+    public bool LightningInABottle;
+    public bool AstralProject;
+    public int AstralCooldown = 3600;
+    public const int MaxAstralCooldown = 3600; //constraint cooldown, make it no more than max.
     #endregion
 
     #region buffs and debuffs
@@ -388,6 +392,8 @@ public class AvalonPlayer : ModPlayer
         GoblinToolbelt = false;
         GoblinAK = false;
         BuilderBelt = false;
+        LightningInABottle = false;
+        AstralProject = false;
 
         // armor sets
         SkyBlessing = false;
@@ -865,6 +871,62 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostHurt(Player.HurtInfo info)
     {
+        if (info.Damage > 0)
+        {
+            if (LightningInABottle)
+            {
+                var cloudPosition = new Vector2(Player.Center.X + 0f, Player.Center.Y - 150f);
+                var targetPosition = new Vector2(Player.Center.X /* + (-20f * hitDirection)*/, Player.Center.Y);
+                var targetPosition2 = new Vector2(Player.Center.X + Main.rand.Next(-40, -20), Player.Center.Y);
+                var targetPosition3 = new Vector2(Player.Center.X + Main.rand.Next(-40, -20), Player.Center.Y);
+                if (Main.rand.NextBool(2))
+                {
+                    targetPosition2 = new Vector2(Player.Center.X + Main.rand.Next(20, 40), Player.Center.Y);
+                }
+
+                if (Main.rand.NextBool(2))
+                {
+                    targetPosition3 = new Vector2(Player.Center.X + Main.rand.Next(20, 40), Player.Center.Y);
+                }
+
+                Projectile.NewProjectile(
+                    Player.GetSource_Accessory(new Item(ModContent.ItemType<LightninginaBottle>())), cloudPosition,
+                    Vector2.Zero, ModContent.ProjectileType<LightningCloud>(), 0, 0f, Player.whoAmI);
+
+                for (int i = 0; i < 1; i++)
+                {
+                    Vector2 vectorBetween = targetPosition - cloudPosition;
+                    float randomSeed = Main.rand.Next(100);
+                    Vector2 startVelocity = Vector2.Normalize(vectorBetween.RotatedByRandom(0.78539818525314331)) * 27f;
+                    Projectile.NewProjectile(
+                        Player.GetSource_Accessory(new Item(ModContent.ItemType<LightninginaBottle>())), cloudPosition,
+                        startVelocity, ModContent.ProjectileType<Lightning>(), 47, 0f, Main.myPlayer,
+                        vectorBetween.ToRotation(), randomSeed);
+                }
+
+                for (int i = 0; i < 1; i++)
+                {
+                    Vector2 vectorBetween = targetPosition2 - cloudPosition;
+                    float randomSeed = Main.rand.Next(100);
+                    Vector2 startVelocity = Vector2.Normalize(vectorBetween.RotatedByRandom(0.78539818525314331)) * 27f;
+                    Projectile.NewProjectile(
+                        Player.GetSource_Accessory(new Item(ModContent.ItemType<LightninginaBottle>())), cloudPosition,
+                        startVelocity, ModContent.ProjectileType<Lightning>(), 47, 0f, Main.myPlayer,
+                        vectorBetween.ToRotation(), randomSeed);
+                }
+
+                for (int i = 0; i < 1; i++)
+                {
+                    Vector2 vectorBetween = targetPosition3 - cloudPosition;
+                    float randomSeed = Main.rand.Next(100);
+                    Vector2 startVelocity = Vector2.Normalize(vectorBetween.RotatedByRandom(0.78539818525314331)) * 27f;
+                    Projectile.NewProjectile(
+                        Player.GetSource_Accessory(new Item(ModContent.ItemType<LightninginaBottle>())), cloudPosition,
+                        startVelocity, ModContent.ProjectileType<Lightning>(), 47, 0f, Main.myPlayer,
+                        vectorBetween.ToRotation(), randomSeed);
+                }
+            }
+        }
         if (Player.miscEquips[Player.miscSlotHook].type == ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>())
         {
             int proj = -1;
@@ -1006,6 +1068,11 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdateEquips()
     {
+        if (!AstralProject && Player.HasBuff<AstralProjecting>())
+        {
+            Player.ClearBuff(ModContent.BuffType<AstralProjecting>());
+        }
+
         #region hand of creation
         if (Player.HasItemInFunctionalAccessories(ItemID.HandOfCreation))
         {
@@ -1808,7 +1875,7 @@ public class AvalonPlayer : ModPlayer
                 {
                     if (Main.rand.NextBool(2))
                     {
-                        npc.friendly = true;
+                        //npc.friendly = true;
                         npc.velocity *= -1;
 
                         npc.GetGlobalNPC<AvalonGlobalNPCInstance>().CanDamageMobs = true;
@@ -1856,6 +1923,20 @@ public class AvalonPlayer : ModPlayer
     }
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
+        if (AstralProject && KeybindSystem.AstralHotkey.JustPressed)
+        {
+            if (Player.HasBuff<AstralProjecting>())
+            {
+                Player.ClearBuff(ModContent.BuffType<AstralProjecting>());
+                Player.AddBuff(ModContent.BuffType<AstralProjectingCooldown>(), 60 * 60);
+                AstralCooldown = MaxAstralCooldown;
+            }
+            else if (!Player.HasBuff(ModContent.BuffType<AstralProjectingCooldown>()))
+            {
+                Player.AddBuff(ModContent.BuffType<AstralProjecting>(), 15 * 60);
+            }
+        }
+
         if (KeybindSystem.ShadowHotkey.JustPressed && tpStam && tpCD >= 300 &&
             Player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked)
         {

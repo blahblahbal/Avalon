@@ -132,10 +132,11 @@ Mods: {
 					'''
 				DesertBeak:
 					'''
-					Use [i:Avalon/DesertHorn] in the Desert during the day.
+					Use a [i:Avalon/DesertHorn] in the Desert during the day.
 					Spawns naturally at 9:30 AM in the Desert after defeating 5 Vultures if Skeletron and the world evil boss have been defeated.
 					'''
-				Mechasting: Use [i:Avalon/MechanicalWasp] at night.
+				Mechasting: Use a [i:Avalon/MechanicalWasp] at night.
+                Phantasm: Use an [i:Avalon/EctoplasmicBeacon] in the Hellcastle.
 			}
 		}
 
@@ -3182,6 +3183,11 @@ Mods: {
 
 			DesertBeakBossBag: {
 				DisplayName: Treasure Bag (Desert Beak)
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			PhantasmBossBag: {
+				DisplayName: Treasure Bag (Phantasm)
 				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
 			}
 
@@ -7738,6 +7744,16 @@ Mods: {
 					'''
 			}
 
+			QuackHorseshoeBalloon: {
+				DisplayName: Quack Horseshoe Balloon
+				Tooltip:
+					'''
+					Allows the holder to double jump
+					Increases jump height and negates fall damage
+					'May annoy others'
+					'''
+			}
+
 			QuackinaBalloon: {
 				DisplayName: Quack in a Balloon
 				Tooltip:
@@ -7755,6 +7771,31 @@ Mods: {
 					Allows the holder to double jump
 					'May annoy others'
 					'''
+			}
+
+			AlchemicalSkull: {
+				DisplayName: Alchemical Skull
+				Tooltip:
+					'''
+					Increases spawn rate
+					               Attackers also take damage
+					               The wearer can walk on water and lava
+					               Grants immunity to knockback and fire blocks
+					'''
+			}
+
+			CloakofAssists: {
+				DisplayName: Cloak of Assists
+				Tooltip:
+					'''
+					Increases movement speed after being damaged and releases bees when injured
+					               Stars fall and lightning strikes when damaged
+					'''
+			}
+
+			LightninginaBottle: {
+				DisplayName: Lightning in a Bottle
+				Tooltip: Lightning strikes you when damaged
 			}
 
 			ForsakenRelic: {
@@ -7919,6 +7960,35 @@ Mods: {
 				DisplayName: Slime Torch
 				Tooltip: ""
 			}
+
+			PhantomKnives: {
+				DisplayName: Phantom Knives
+				Tooltip: Rapidly throws daggers that compound damage upon hitting a target
+			}
+
+			AstrallineArtifact: {
+				DisplayName: Astralline Artifact
+				Tooltip:
+					'''
+					Allows you to astral project
+					Run into enemies to mark them while astral projecting
+					               Enemies marked will take triple damage for 45 seconds
+					'''
+			}
+
+			EctoplasmicBeacon: {
+				DisplayName: Ectoplasmic Beacon
+				Tooltip:
+					'''
+					Summons Phantasm
+					               Must be used in the Hellcastle
+					'''
+			}
+
+			PhantasmTrophy: {
+				DisplayName: Phantasm Trophy
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -7927,6 +7997,8 @@ Mods: {
 		}
 
 		Projectiles: {
+			SpectreSplit.DisplayName: Phantom Wrath
+			PhantomKnife.DisplayName: Phantom Knife
 			AeonBeam.DisplayName: Aeon's Eternity
 			AeonStar.DisplayName: Aeon Constellation
 			AeonExplosion.DisplayName: Aeon Constellation
@@ -8142,6 +8214,10 @@ Mods: {
 			Mechastinger.DisplayName: Mechastinger
 			StingerLaser.DisplayName: Stinger Laser
 			HellboundHalberdSpear.DisplayName: Hellbound Halberd Spear
+			Lightning.DisplayName: Lightning
+			LightningCloud.DisplayName: Lightning Cloud
+			SoulDagger.DisplayName: Soul Dagger
+			SoulGrabber.DisplayName: Soul Grabber
 		}
 
 		NPCs: {
@@ -8224,9 +8300,20 @@ Mods: {
 			Mechasting.DisplayName: Mechasting
 			StingerProbe.DisplayName: Stinger Probe
 			HomingRocket.DisplayName: Homing Rocket
+			Phantasm.DisplayName: Phantasm
 		}
 
 		Buffs: {
+			AstralProjecting: {
+				DisplayName: Astral Projecting
+				Description: You are immune to damage, but cannot attack anything - touch mobs to inflict a debuff on them
+			}
+
+			AstralCurse: {
+				DisplayName: Astral Curse
+				Description: You take triple damage
+			}
+
 			SkyBlessing: {
 				DisplayName: Blessing of the Sky
 				Description: "Minion damage is increased by "
@@ -8819,6 +8906,11 @@ Mods: {
 			Gambler: {
 				DisplayName: Gambler
 				Description: Increased critical strike chance, but small chance to deal damage to yourself
+			}
+
+			AstralProjectingCooldown: {
+				DisplayName: Astral Projecting Cooldown
+				Description: Mods.Avalon.Buffs.AstralProjectingCooldown.Description
 			}
 		}
 

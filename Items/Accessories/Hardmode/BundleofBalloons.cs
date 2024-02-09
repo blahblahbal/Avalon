@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
+[AutoloadEquip(EquipType.Balloon)]
 public class BundleofBalloons : ModItem
 {
     public override void SetDefaults()

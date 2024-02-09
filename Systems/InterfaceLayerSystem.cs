@@ -21,7 +21,7 @@ public class InterfaceLayerSystem : ModSystem
         //    }, InterfaceScaleType.UI));
         //}
 
-        int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Mouse Text");
+        int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Resource Bars");
         if (staminaBarIndex != -1)
         {
             layers.Insert(staminaBarIndex, new LegacyGameInterfaceLayer("Stamina Bar", delegate

@@ -1,6 +1,7 @@
 using Avalon.Common.Players;
 using Avalon.DropConditions;
 using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Ammo;
 using Avalon.Items.Consumables;
 using Avalon.Items.Food;
@@ -1384,6 +1385,11 @@ public class AvalonGlobalItem : GlobalItem
                     break;
                 }
             }
+        }
+
+        if (item.type == ItemID.KingSlimeBossBag)
+        {
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BandofSlime>(), 3));
         }
         if (item.type == ItemID.PlanteraBossBag)
         {

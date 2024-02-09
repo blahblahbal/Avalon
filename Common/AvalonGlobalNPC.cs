@@ -30,6 +30,7 @@ public class AvalonGlobalNPC : GlobalNPC
 {
     public static float ModSpawnRate { get; set; } = 0.25f;
     public static int BleedTime = 60 * 7;
+    public static int PhantasmBoss = -1;
 
     /// <summary>
     ///     Finds a type of NPC.

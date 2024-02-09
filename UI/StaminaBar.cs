@@ -339,11 +339,27 @@ class StaminaBar : UIState
             PrepareFieldsBars();
             SpriteBatch sb = Main.spriteBatch;
             int xpos = 16;
-            int ypos = 66;
-            int finalXPos = Main.screenWidth - 135 - 22 + xpos;
+            int ypos = Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithFullText" ? 25 : 20;
+            int finalXPos = Main.screenWidth - 540 - 22 + xpos;
             Vector2 vector = new Vector2(finalXPos, ypos);
             vector.X += (maxSegmentCount - stamSegmentsBarsCount) * panelMiddleStam.Value.Width;
             bool isHovered = false;
+
+            if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithFullText")
+            {
+                var player = Main.LocalPlayer.GetModPlayer<AvalonStaminaPlayer>();
+                DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.MouseText.Value, labelText + ": ",
+                    new Vector2((Main.screenWidth - 540 - 32), 0), new Color(Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor), 0f, default, 1f, SpriteEffects.None, 0f);
+
+                float length = FontAssets.MouseText.Value.MeasureString("Stamina: ").X;
+                float curStamLength = FontAssets.MouseText.Value.MeasureString(string.Format("{0}/{1}", player.StatStam, player.StatStamMax2)).X;
+                float maxStamLength = FontAssets.MouseText.Value.MeasureString(string.Format("{0}/{1}", player.StatStamMax2, player.StatStamMax2)).X;
+
+                float difference = maxStamLength - curStamLength;
+
+                DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.MouseText.Value, string.Format("{0}/{1}", player.StatStam, player.StatStamMax2),
+                    new Vector2(Main.screenWidth - 540 - 30 + length + difference, 0), new Color(Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor), 0f, default, 1f, SpriteEffects.None, 0f);
+            }
 
             ResourceDrawSettings resourceDrawSettings = default;
             resourceDrawSettings.ElementCount = stamSegmentsBarsCount + 2;

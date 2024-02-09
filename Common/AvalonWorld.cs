@@ -729,18 +729,19 @@ public class AvalonWorld : ModSystem
         }
 
         // reflected npc projectiles
-        //for (int thing = 0; thing < Main.npc.Length; thing++)
-        //{
-        //    NPC npc1 = Main.npc[thing];
-        //    if (npc1.aiStyle == 9 && npc1.GetGlobalNPC<AvalonGlobalNPCInstance>().CanDamageMobs)
-        //    {
-        //        for (int thing2 = 0; thing2 < Main.npc.Length; thing2++)
-        //        {
-        //            NPC npc2 = Main.npc[thing2];
-        //            DamageMobWithNPCProjectile(npc1, npc2);
-        //        }
-        //    }
-        //}
+        for (int thing = 0; thing < Main.npc.Length; thing++)
+        {
+            NPC npc1 = Main.npc[thing];
+            if (npc1.aiStyle == 9 && npc1.GetGlobalNPC<AvalonGlobalNPCInstance>().CanDamageMobs)
+            {
+                for (int thing2 = 0; thing2 < Main.npc.Length; thing2++)
+                {
+                    NPC npc2 = Main.npc[thing2];
+                    if (npc2.whoAmI != npc1.whoAmI)
+                        DamageMobWithNPCProjectile(npc1, npc2);
+                }
+            }
+        }
         #endregion
     }
 
@@ -1561,15 +1562,16 @@ public class AvalonWorld : ModSystem
 
     public void DamageMobWithNPCProjectile(NPC sourceNPC, NPC npcToHit)
     {
+        //if (sourceNPC.getRect().Intersects(npcToHit.getRect()))
         if (Collision.CheckAABBvAABBCollision(sourceNPC.Center, new Vector2(sourceNPC.width, sourceNPC.height), npcToHit.Center, new Vector2(npcToHit.width, npcToHit.height)))
         {
             sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer++;
-            if (sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer > 20)
+            if (sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer % 5 == 0)
             {
                 NPC.HitInfo dmg = new NPC.HitInfo();
                 dmg.Damage = sourceNPC.damage;
                 dmg.Knockback = 1f;
-                dmg.HitDirection = 0;
+                dmg.HitDirection = 1;
                 npcToHit.StrikeNPC(dmg);
                 sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer = 0;
             }

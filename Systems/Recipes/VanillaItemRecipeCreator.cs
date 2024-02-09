@@ -60,6 +60,14 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddIngredient(ItemID.SoulofSight)
             .AddTile(TileID.MythrilAnvil)
             .Register();
+
+        Recipe.Create(ItemID.NimbusRod)
+            .AddIngredient(ModContent.ItemType<LivingLightningBlock>(), 80)
+            .AddIngredient(ItemID.Cloud, 50)
+            .AddIngredient(ItemID.RainCloud, 50)
+            .AddIngredient(ItemID.SnowCloudBlock, 50)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
         //Recipe.Create(ItemID.LihzahrdPowerCell).AddIngredient(ModContent.ItemType<SolariumStar>(), 5).AddIngredient(ItemID.LihzahrdBrick, 10).AddTile(TileID.MythrilAnvil).Register();
         #endregion
 

@@ -362,7 +362,7 @@ class IceShrine
                         }
                         if (num5 == 1)
                         {
-                            Main.chest[num2].item[2].SetDefaults(ModContent.ItemType<DesertHorn>(), false);
+                            Main.chest[num2].item[2].SetDefaults(ItemID.SuspiciousLookingEye, false);
                             Main.chest[num2].item[2].stack = 1;
                         }
                         if (num5 == 2)
