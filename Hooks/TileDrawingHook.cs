@@ -30,15 +30,7 @@ internal class TileDrawingHook : ModHook
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
             DrawChandeliers();
             DrawLanterns();
-            DrawHangingPots();
             Main.spriteBatch.End();
-        }
-    }
-    private void DrawHangingPots()
-    {
-        for (int i = 0; i < ModContent.GetInstance<HangingPots>().Coordinates.Count; i++)
-        {
-            ModContent.GetInstance<HangingPots>().DrawMultiTileVines(ModContent.GetInstance<HangingPots>().Coordinates[i].X, ModContent.GetInstance<HangingPots>().Coordinates[i].Y, Main.spriteBatch);
         }
     }
     private void DrawLanterns()

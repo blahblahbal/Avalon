@@ -3,6 +3,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Accessories.Vanity;
+using Avalon.Items.Material.Shards;
+using Avalon.Items.Material;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -198,7 +200,7 @@ class LavaShrine
                                     tile.HasTile = false;
                                     tile.Slope = 0;
                                     tile.IsHalfBlock = false;
-                                    AddLavaChest(k + 1, l);
+                                    AddLavaChest(k + 1, l, GenSystem.GetNextHellfireChestItem());
                                     //WorldGen.PlaceTile(k, l, 21, true, true, -1, 0);
                                 }
                                 break;
@@ -923,63 +925,83 @@ class LavaShrine
                     int num3 = 0;
                     while (num3 == 0)
                     {
-                        int rN = WorldGen.genRand.Next(42);
-                        if (rN >= 0 && rN <= 20)
-                        {
-                            Main.chest[num2].item[1].SetDefaults(174, false);
-                            Main.chest[num2].item[1].stack = WorldGen.genRand.Next(41, 68);
-                        }
-                        else if (rN >= 21 && rN <= 41)
-                        {
-                            Main.chest[num2].item[1].SetDefaults(175, false);
-                            Main.chest[num2].item[1].stack = WorldGen.genRand.Next(2, 7);
-                        }
+                        // contained item (oil bottle or eruption hook)
+                        Main.chest[num2].item[0].SetDefaults(contain, false);
+                        Main.chest[num2].item[0].Prefix(-1);
+
+                        // second item (obsidian)
+                        Main.chest[num2].item[1].SetDefaults(ItemID.Obsidian, false);
+                        Main.chest[num2].item[1].stack = WorldGen.genRand.Next(41, 68);
+
+                        // third item (potions)
                         int rand = WorldGen.genRand.Next(51);
-                        if (rand >= 0 && rand <= 20)
+                        if (rand >= 0 && rand <= 16)
                         {
-                            int r = WorldGen.genRand.Next(2);
-                            if (r == 0) r = ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>();
-                            else if (r == 1) r = ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>();
-                            //else if (r == 2) r = ItemID.FlowerofFire;
-                            //else r = ItemID.Sunfury;
-                            Main.chest[num2].item[0].SetDefaults(r, false);
-                            Main.chest[num2].item[0].Prefix(-1);
+                            Main.chest[num2].item[2].SetDefaults(ModContent.ItemType<AuraPotion>(), false);
+                            Main.chest[num2].item[2].stack = WorldGen.genRand.Next(3) + 1;
                         }
-                        else if (rand >= 21 && rand <= 40)
+                        else if (rand >= 17 && rand <= 33)
                         {
-                            Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<AuraPotion>(), false);
-                            Main.chest[num2].item[1].stack = WorldGen.genRand.Next(3) + 1;
+                            Main.chest[num2].item[2].SetDefaults(ModContent.ItemType<ShockwavePotion>(), false);
+                            Main.chest[num2].item[2].stack = WorldGen.genRand.Next(3) + 1;
                         }
-                        else if (rand >= 41 && rand <= 50)
+                        else if (rand >= 34 && rand <= 50)
                         {
-                            Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<ShockwavePotion>(), false);
-                            Main.chest[num2].item[0].stack = WorldGen.genRand.Next(3) + 1;
+                            Main.chest[num2].item[2].SetDefaults(ModContent.ItemType<GamblerPotion>(), false);
+                            Main.chest[num2].item[2].stack = WorldGen.genRand.Next(3) + 1;
                         }
+
+                        // fourth item (gold coins, lava charm, or rarely lava waders)
                         int rand2 = WorldGen.genRand.Next(27);
-                        if (rand2 >= 0 && rand2 <= 25)
+                        if (rand2 >= 0 && rand2 <= 9)
                         {
-                            Main.chest[num2].item[2].SetDefaults(73, false);
-                            Main.chest[num2].item[2].stack = WorldGen.genRand.Next(20, 31);
+                            Main.chest[num2].item[3].SetDefaults(ItemID.GoldCoin);
+                            Main.chest[num2].item[3].stack = WorldGen.genRand.Next(20, 31);
+                        }
+                        if (rand2 >= 10 && rand2 <= 25)
+                        {
+                            Main.chest[num2].item[3].SetDefaults(ItemID.LavaCharm);
+                            Main.chest[num2].item[3].Prefix(-1);
                         }
                         else if (rand2 == 26)
                         {
-                            Main.chest[num2].item[2].SetDefaults(ItemID.LavaWaders, false);
-                            Main.chest[num2].item[2].Prefix(-2);
+                            Main.chest[num2].item[3].SetDefaults(ItemID.LavaWaders);
+                            Main.chest[num2].item[3].Prefix(-2);
                         }
+
+                        // fifth item (obsidian rose, bag of fire, or rarely more money)
                         int rand3 = WorldGen.genRand.Next(27);
                         if (rand3 >= 0 && rand2 <= 10)
                         {
-                            Main.chest[num2].item[3].SetDefaults(ItemID.LavaCharm, false);
-                            Main.chest[num2].item[3].Prefix(-2);
+                            Main.chest[num2].item[4].SetDefaults(ItemID.ObsidianRose);
+                            Main.chest[num2].item[4].Prefix(-1);
                         }
                         else if (rand3 >= 11 && rand2 <= 25)
                         {
-                            Main.chest[num2].item[3].SetDefaults(ModContent.ItemType<BagofFire>(), false);
+                            Main.chest[num2].item[4].SetDefaults(ModContent.ItemType<BagofFire>());
                         }
                         else if (rand3 == 26)
                         {
-                            Main.chest[num2].item[3].SetDefaults(73, false);
-                            Main.chest[num2].item[3].stack = WorldGen.genRand.Next(20, 34);
+                            Main.chest[num2].item[4].SetDefaults(ItemID.GoldCoin);
+                            Main.chest[num2].item[4].stack = WorldGen.genRand.Next(20, 34);
+                        }
+
+                        // sixth item (fireblossom, fire shards, bottled lava)
+                        int rand4 = WorldGen.genRand.Next(30);
+                        if (rand4 >= 0 && rand4 <= 9)
+                        {
+                            Main.chest[num2].item[5].SetDefaults(ItemID.Fireblossom);
+                            Main.chest[num2].item[5].stack = WorldGen.genRand.Next(3, 6);
+                        }
+                        else if (rand4 >= 10 && rand4 <= 19)
+                        {
+                            Main.chest[num2].item[5].SetDefaults(ModContent.ItemType<FireShard>());
+                            Main.chest[num2].item[5].stack = WorldGen.genRand.Next(2, 5);
+                        }
+                        else if (rand4 >= 20 && rand4 <= 29)
+                        {
+                            Main.chest[num2].item[5].SetDefaults(ModContent.ItemType<BottledLava>());
+                            Main.chest[num2].item[5].stack = WorldGen.genRand.Next(3, 6);
                         }
                         num3++;
                     }

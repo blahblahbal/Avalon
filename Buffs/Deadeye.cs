@@ -34,7 +34,7 @@ public class DeadeyePlayer : ModPlayer
     }
     public override float UseSpeedMultiplier(Item item)
     {
-        if (item.DamageType == DamageClass.Ranged)
+        //if (item.DamageType == DamageClass.Ranged)
         {
             return 1 + (DeadeyeTimer * 0.5f);
         }
@@ -42,7 +42,7 @@ public class DeadeyePlayer : ModPlayer
     }
     public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
     {
-        if (DeadeyeTimer > 0 && item.DamageType == DamageClass.Ranged)
+        if (DeadeyeTimer > 0) // && item.DamageType == DamageClass.Ranged)
         {
             velocity *= 1 + (DeadeyeTimer * 1f);
         }
@@ -50,7 +50,7 @@ public class DeadeyePlayer : ModPlayer
     }
     public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
     {
-        if (DeadeyeTimer > 0 && item.DamageType == DamageClass.Ranged)
+        if (DeadeyeTimer > 0) // && item.DamageType == DamageClass.Ranged)
         {
             damage *= 1 + (DeadeyeTimer * 0.5f);
         }

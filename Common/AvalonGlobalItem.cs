@@ -10,6 +10,7 @@ using Avalon.Items.Material.Herbs;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.MusicBoxes;
 using Avalon.Items.Pets;
+using Avalon.Items.Placeable.Furniture;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Potions.Buff;
@@ -261,6 +262,16 @@ public class AvalonGlobalItem : GlobalItem
         }
         return base.CanRightClick(item);
     }
+    public override bool IsAnglerQuestAvailable(int type)
+    {
+        if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion)
+        {
+            if (type == ItemID.BloodyManowar || type == ItemID.Cursedfish || type == ItemID.EaterofPlankton ||
+                type == ItemID.Ichorfish || type == ItemID.InfectedScabbardfish)
+                return false;
+        }
+        return base.IsAnglerQuestAvailable(type);
+    }
     public override void AddRecipes()
     {
         // --== Shimmer!!! ==--
@@ -313,6 +324,15 @@ public class AvalonGlobalItem : GlobalItem
         ShimmerTransmute(ModContent.ItemType<MusicBoxTuhrtlOutpost>(), ItemID.MusicBox);
         ShimmerTransmute(ModContent.ItemType<MusicBoxUndergroundContagion>(), ItemID.MusicBox);
         // end music boxes
+
+        // torches
+        ShimmerTransmute(ModContent.ItemType<BrownTorch>(), ItemID.ShimmerTorch);
+        ShimmerTransmute(ModContent.ItemType<CyanTorch>(), ItemID.ShimmerTorch);
+        ShimmerTransmute(ModContent.ItemType<LimeTorch>(), ItemID.ShimmerTorch);
+        ShimmerTransmute(ModContent.ItemType<ContagionTorch>(), ItemID.ShimmerTorch);
+        ShimmerTransmute(ModContent.ItemType<PathogenTorch>(), ItemID.ShimmerTorch);
+        ShimmerTransmute(ModContent.ItemType<SlimeTorch>(), ItemID.ShimmerTorch);
+        // end torches
 
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>(), ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>());
     }
@@ -1266,6 +1286,46 @@ public class AvalonGlobalItem : GlobalItem
                             ItemDropRule.NotScalingWithLuck(ModContent.ItemType<FrozenLyre>())
                         };
                         oneFromRulesRule.rules[0] = new OneFromRulesRule(1, bc_iceList);
+                    }
+                }
+            }
+        }
+
+        // flower of the jungle
+        if (item.type is ItemID.JungleFishingCrate or ItemID.JungleFishingCrateHard)
+        {
+            AlwaysAtleastOneSuccessDropRule? oneFromRulesRule = null;
+            foreach (IItemDropRule item2 in itemLoot.Get(false))
+            {
+                if (item2 is not AlwaysAtleastOneSuccessDropRule rule1)
+                {
+                    continue;
+                }
+                oneFromRulesRule = rule1;
+
+                if (oneFromRulesRule != null)
+                {
+                    int[] IDs = new int[4];
+                    for (int i = 0; i < oneFromRulesRule.rules.Length; i++)
+                    {
+                        if (oneFromRulesRule.rules[i] is SequentialRulesNotScalingWithLuckRule drop)
+                        {
+                            for (int z = 0; z < drop.rules.Length; z++)
+                            {
+                                if (drop.rules[z] is not OneFromRulesRule thing) continue;
+                                CommonDropNotScalingWithLuck c = (CommonDropNotScalingWithLuck)thing.options[0];
+                                IDs[z] = c.itemId;
+                            }
+                        }
+                    }
+                    //if (IDs.Contains(ItemID.CopperOre))
+                    {
+                        IItemDropRule[] bc_jungle = new IItemDropRule[2]
+                        {
+                            ItemDropRule.NotScalingWithLuck(ItemID.FlowerBoots, 20),
+                            ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemID.AnkletoftheWind, ItemID.Boomstick, ItemID.FeralClaws, ItemID.StaffofRegrowth, ItemID.FiberglassFishingPole, ModContent.ItemType<FlowerofTheJungle>())
+                        };
+                        oneFromRulesRule.rules[0] = ItemDropRule.SequentialRulesNotScalingWithLuck(1, bc_jungle);
                     }
                 }
             }

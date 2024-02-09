@@ -1,3 +1,4 @@
+using Avalon.Items.Material.Shards;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -45,6 +46,15 @@ class ObsidianGlaive : ModItem // Obisidian Glaive
             Projectile.NewProjectile(source, position, velocity.RotatedBy(RotationAmount * -player.direction), type, damage, knockback, player.whoAmI, 0, 0, RotationAmount * 2);
         }
         return false;
+    }
+    public override void AddRecipes()
+    {
+        CreateRecipe()
+            .AddIngredient(ItemID.Obsidian, 30)
+            .AddIngredient(ItemID.Fireblossom, 3)
+            .AddIngredient(ModContent.ItemType<FireShard>())
+            .AddTile(TileID.Anvils)
+            .Register();
     }
     public override bool CanUseItem(Player player)
     {

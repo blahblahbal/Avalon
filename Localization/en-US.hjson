@@ -5548,7 +5548,7 @@ Mods: {
 
 			DesertGambler: {
 				DisplayName: Desert Gambler
-				Tooltip: Ranged abilities increase over time while below 33% life
+				Tooltip: Stats increase over time while below 33% life
 			}
 
 			LotusLeech: {
@@ -7914,6 +7914,11 @@ Mods: {
 				DisplayName: Compressed Desert Fossil
 				Tooltip: "'Stick it in the Extractinator!'"
 			}
+
+			SlimeTorch: {
+				DisplayName: Slime Torch
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8729,7 +8734,7 @@ Mods: {
 
 			Deadeye: {
 				DisplayName: Deadeye
-				Description: Ranged abilities are increasing
+				Description: Stats are increasing
 			}
 
 			LotusCurse: {

@@ -10,6 +10,7 @@ namespace Avalon.WorldGeneration;
 
 public class GenSystem : ModSystem
 {
+    public static int HellfireItemCount;
     public override void PostWorldGen()
     {
         AvalonWorld.JungleLocationX = GenVars.JungleX;
@@ -129,5 +130,21 @@ public class GenSystem : ModSystem
             //tasks.Insert(index + 4, currentPass);
             //totalWeight += currentPass.Weight;
         }
+    }
+    public static int GetNextHellfireChestItem()
+    {
+        int result = ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>();
+        switch (HellfireItemCount % 2)
+        {
+            case 0:
+                result = ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>();
+                break;
+            case 1:
+                result = ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>();
+                break;
+        }
+
+        HellfireItemCount++;
+        return result;
     }
 }
