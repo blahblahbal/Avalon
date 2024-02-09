@@ -117,10 +117,6 @@ public class DarkMatterSky : CustomSky
 
         // Create a variable for the percentage to scale the textures by
         var percentage = new Vector2(3840 / Main.ScreenSize.X, 2160 / Main.ScreenSize.Y); // FIX FOR 4k LATER 3840x2160
-        //if (Main.ScreenSize.X > 1920)
-        //{
-        //    percentage = new Vector2(3840 / Main.ScreenSize.X, 2160 / Main.ScreenSize.Y);
-        //}
 
         // Create the modifier for the X coordinate of the black hole
         int xModifier = (int)(modifier * percentage.X);
@@ -169,10 +165,15 @@ public class DarkMatterSky : CustomSky
             0.25f + scaleMod, SpriteEffects.None, 1f);
 
         // Draw the spiral clouds
-        spriteBatch.Draw(darkMatterBackgrounds[surfaceFrame].Value, new Vector2(xPos, yPos), null,
-            new Color(255, 255, 255, 255), 0f,
-            new Vector2(darkMatterBackgrounds[surfaceFrame].Width() >> 1,
-                darkMatterBackgrounds[surfaceFrame].Height() >> 1), 3f, SpriteEffects.None, 1f);
+        spriteBatch.Draw(darkMatterBackgrounds[surfaceFrame].Value, new Vector2(xPos, yPos),
+            new Rectangle(0, 0, 819, 819), Color.White, 0, new Vector2(819, 819) / 2f,
+            GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / (819 - 336), SpriteEffects.None, 0);
+
+
+        //spriteBatch.Draw(darkMatterBackgrounds[surfaceFrame].Value, new Vector2(xPos, yPos), null,
+        //    new Color(255, 255, 255, 255), 0f,
+        //    new Vector2(darkMatterBackgrounds[surfaceFrame].Width() >> 1,
+        //        darkMatterBackgrounds[surfaceFrame].Height() >> 1), 3f, SpriteEffects.None, 1f);
 
         spriteBatch.End();
         spriteBatch.Begin();
