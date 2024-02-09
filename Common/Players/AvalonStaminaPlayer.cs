@@ -345,52 +345,52 @@ public class AvalonStaminaPlayer : ModPlayer
         {
             if ((Player.controlRight || Player.controlLeft) && Player.velocity.X != 0f)
             {
-                bool flag17 = true;
+                bool doSprint = false;
                 StaminaSprintCooldown++;
                 StaminaRegenCount = 0;
-                if (StaminaSprintCooldown >= 30)
-                {
-                    int amt = 10;
-                    if (StaminaDrain)
-                    {
-                        amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-                    }
 
-                    if (StatStam >= amt)
-                    {
-                        StatStam -= amt;
-                    }
-                    else if (StamFlower)
+                int amt = 10;
+                if (StaminaDrain)
+                {
+                    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+                }
+                if (StatStam >= amt)
+                {
+                    doSprint = true;
+                }
+
+                if (StaminaSprintCooldown >= 30 && doSprint)
+                {
+                    StatStam -= amt;
+                    if (StamFlower && StatStam < amt)
                     {
                         QuickStamina();
-                        if (StatStam >= amt)
-                        {
-                            StatStam -= amt;
-                        }
                     }
 
                     if (StatStam <= 0)
                     {
                         StatStam = 0;
-                        flag17 = false;
+                        doSprint = false;
                     }
 
                     StaminaSprintCooldown = 0;
                 }
 
-                if (flag17)
+                if (doSprint)
                 {
-                    if (!Player.HasItemInArmor(ItemID.HermesBoots) && !Player.HasItemInArmor(ItemID.FlurryBoots) &&
-                        !Player.HasItemInArmor(ItemID.SpectreBoots) &&
-                        !Player.HasItemInArmor(ItemID.LightningBoots) &&
-                        !Player.HasItemInArmor(ItemID.FrostsparkBoots) &&
-                        !Player.HasItemInArmor(ItemID.SailfishBoots) &&
+                    if (!Player.HasItemInFunctionalAccessories(ItemID.HermesBoots) && !Player.HasItemInArmor(ItemID.FlurryBoots) &&
+                        !Player.HasItemInFunctionalAccessories(ItemID.SpectreBoots) &&
+                        !Player.HasItemInFunctionalAccessories(ItemID.LightningBoots) &&
+                        !Player.HasItemInFunctionalAccessories(ItemID.FrostsparkBoots) &&
+                        !Player.HasItemInFunctionalAccessories(ItemID.SailfishBoots) &&
+                        !Player.HasItemInFunctionalAccessories(ItemID.TerrasparkBoots) &&
                         !Player.GetModPlayer<AvalonPlayer>().InertiaBoots && !Player.GetModPlayer<AvalonPlayer>().BlahWings)
                     {
                         Player.accRunSpeed = 6f;
                     }
-                    else if (!Player.HasItemInArmor(ItemID.LightningBoots) &&
-                             !Player.HasItemInArmor(ItemID.FrostsparkBoots) &&
+                    else if (!Player.HasItemInFunctionalAccessories(ItemID.LightningBoots) &&
+                             !Player.HasItemInFunctionalAccessories(ItemID.FrostsparkBoots) &&
+                             !Player.HasItemInFunctionalAccessories(ItemID.TerrasparkBoots) &&
                              !Player.GetModPlayer<AvalonPlayer>().InertiaBoots && !Player.GetModPlayer<AvalonPlayer>().BlahWings)
                     {
                         Player.accRunSpeed = 6.75f;
@@ -628,29 +628,26 @@ public class AvalonStaminaPlayer : ModPlayer
         }
         if (WallSlidingUnlocked && Player.spikedBoots <= 2 && flag)
         {
-            bool doSliding = true;
+            bool doSliding = false;
             StaminaSlidingCD++;
             StaminaRegenCount = 0;
-            
-            if (StaminaSlidingCD >= (Player.spikedBoots == 1 ? 12 : 6))
-            {
-                int amt = 1;
-                if (StaminaDrain)
-                {
-                    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-                }
 
-                if (StatStam >= amt)
-                {
-                    StatStam -= amt;
-                }
-                else if (StamFlower)
+            int amt = 10;
+            if (StaminaDrain)
+            {
+                amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+            }
+            if (StatStam >= amt)
+            {
+                doSliding = true;
+            }
+
+            if (StaminaSlidingCD >= (Player.spikedBoots == 1 ? 12 : 6) && doSliding)
+            {
+                StatStam -= amt;
+                if (StamFlower && StatStam < amt)
                 {
                     QuickStamina();
-                    if (StatStam >= amt)
-                    {
-                        StatStam -= amt;
-                    }
                 }
 
                 if (StatStam <= 0)
@@ -661,6 +658,42 @@ public class AvalonStaminaPlayer : ModPlayer
 
                 StaminaSlidingCD = 0;
             }
+
+
+            Main.NewText(doSliding);
+
+            //StaminaSlidingCD++;
+            //StaminaRegenCount = 0;
+            
+            //if (StaminaSlidingCD >= (Player.spikedBoots == 1 ? 12 : 6))
+            //{
+            //    int amt = 20;
+            //    if (StaminaDrain)
+            //    {
+            //        amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+            //    }
+
+            //    if (StatStam >= amt)
+            //    {
+            //        StatStam -= amt;
+            //    }
+            //    else if (StamFlower)
+            //    {
+            //        QuickStamina();
+            //        if (StatStam >= amt)
+            //        {
+            //            StatStam -= amt;
+            //        }
+            //    }
+
+            //    if (StatStam <= 0)
+            //    {
+            //        StatStam = 0;
+            //        doSliding = false;
+            //    }
+
+            //    StaminaSlidingCD = 0;
+            //}
             if (doSliding)
             {
                 Player.spikedBoots++;
@@ -669,28 +702,26 @@ public class AvalonStaminaPlayer : ModPlayer
         int amt2 = 5 - (int)(1 - Player.pickSpeed * 5);
         if (MiningSpeedUnlocked && Player.HeldItem.pick > 0 && Player.ItemAnimationActive && Player.pickSpeed > 0.4f && StatStam > amt2)
         {
-            bool doMining = true;
+            bool doMining = false;
             StaminaMiningCD++;
             StaminaRegenCount = 0;
-            if (StaminaMiningCD >= 30)
-            {
-                int amt = 5 - (int)(1 - Player.pickSpeed * 5);
-                if (StaminaDrain)
-                {
-                    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-                }
 
-                if (StatStam >= amt)
-                {
-                    StatStam -= amt;
-                }
-                else if (StamFlower)
+            int amt = 5 - (int)(1 - Player.pickSpeed * 5);
+            if (StaminaDrain)
+            {
+                amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+            }
+            if (StatStam >= amt)
+            {
+                doMining = true;
+            }
+
+            if (StaminaMiningCD >= 30 && doMining)
+            {
+                StatStam -= amt;
+                if (StamFlower && StatStam < amt)
                 {
                     QuickStamina();
-                    if (StatStam >= amt)
-                    {
-                        StatStam -= amt;
-                    }
                 }
 
                 if (StatStam <= 0)
@@ -701,6 +732,41 @@ public class AvalonStaminaPlayer : ModPlayer
 
                 StaminaMiningCD = 0;
             }
+
+
+
+
+            //StaminaMiningCD++;
+            //StaminaRegenCount = 0;
+            //if (StaminaMiningCD >= 30)
+            //{
+                
+            //    if (StaminaDrain)
+            //    {
+            //        amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+            //    }
+
+            //    if (StatStam >= amt)
+            //    {
+            //        StatStam -= amt;
+            //    }
+            //    else if (StamFlower)
+            //    {
+            //        QuickStamina();
+            //        if (StatStam >= amt)
+            //        {
+            //            StatStam -= amt;
+            //        }
+            //    }
+
+            //    if (StatStam <= 0)
+            //    {
+            //        StatStam = 0;
+            //        doMining = false;
+            //    }
+
+            //    StaminaMiningCD = 0;
+            //}
 
             if (doMining)
             {

@@ -13,7 +13,7 @@ public class SmallSulphurBlob : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(218, 216, 114), LanguageManager.Instance.GetText("Sulphur Blob"));
+        AddMapEntry(new Color(218, 216, 114), this.GetLocalization("MapEntry"));
         Main.tileFrameImportant[Type] = true;
         Main.tileLavaDeath[Type] = false;
         Main.tileOreFinderPriority[Type] = 441;

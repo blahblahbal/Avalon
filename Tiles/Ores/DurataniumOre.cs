@@ -12,7 +12,7 @@ public class DurataniumOre : ModTile
     public override void SetStaticDefaults()
     {
         MineResist = 2f;
-        AddMapEntry(new Color(107, 20, 80), LanguageManager.Instance.GetText("Duratanium"));
+        AddMapEntry(new Color(107, 20, 80), this.GetLocalization("MapEntry"));
         Data.Sets.Tile.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;

@@ -12,7 +12,7 @@ public class TroxiniumOre : ModTile
     public override void SetStaticDefaults()
     {
         MineResist = 4f;
-        AddMapEntry(Color.Goldenrod, LanguageManager.Instance.GetText("Troxinium"));
+        AddMapEntry(Color.Goldenrod, this.GetLocalization("MapEntry"));
         Data.Sets.Tile.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;

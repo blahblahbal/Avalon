@@ -10,7 +10,7 @@ public class Tourmaline : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(Color.Aqua, LanguageManager.Instance.GetText("Tourmaline"));
+        AddMapEntry(Color.Aqua, this.GetLocalization("MapEntry"));
         Main.tileSolid[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Material.Ores.Tourmaline>());
         TileID.Sets.Ore[Type] = true;

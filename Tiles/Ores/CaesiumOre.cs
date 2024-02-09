@@ -13,7 +13,7 @@ public class CaesiumOre : ModTile
     public override void SetStaticDefaults()
     {
         MineResist = 5f;
-        AddMapEntry(new Color(86, 190, 74), LanguageManager.Instance.GetText("Caesium"));
+        AddMapEntry(new Color(86, 190, 74), this.GetLocalization("MapEntry"));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;

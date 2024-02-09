@@ -10,7 +10,7 @@ public class Zircon : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(102, 66, 43), LanguageManager.Instance.GetText("Zircon"));
+        AddMapEntry(new Color(102, 66, 43), this.GetLocalization("MapEntry"));
         Main.tileSolid[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Material.Ores.Zircon>());
         TileID.Sets.Ore[Type] = true;

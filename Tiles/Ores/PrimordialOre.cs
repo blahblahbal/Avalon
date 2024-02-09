@@ -229,15 +229,15 @@ public class PrimordialOre : ModTile
     public override void SetStaticDefaults()
     {
         TileID.Sets.Ore[Type] = true;
-        AddMapEntry(new Color(255, 0, 0), LanguageManager.Instance.GetText("Primordial Ore")); // new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB)
-        AddMapEntry(new Color(255, 128, 0), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(255, 255, 0), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(0, 255, 0), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(0, 255, 255), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(0, 128, 255), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(0, 0, 255), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(128, 0, 255), LanguageManager.Instance.GetText("Primordial Ore"));
-        AddMapEntry(new Color(255, 0, 255), LanguageManager.Instance.GetText("Primordial Ore"));
+        AddMapEntry(new Color(255, 0, 0), this.GetLocalization("MapEntry")); // new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB)
+        AddMapEntry(new Color(255, 128, 0), this.GetLocalization("MapEntry"));
+        AddMapEntry(new Color(255, 255, 0), this.GetLocalization("MapEntry"));
+        AddMapEntry(new Color(0, 255, 0), this.GetLocalization("MapEntry"));
+        AddMapEntry(new Color(0, 255, 255), this.GetLocalization("MapEntry"));
+        AddMapEntry(new Color(0, 128, 255), this.GetLocalization("MapEntry"));
+        AddMapEntry(new Color(0, 0, 255), this.GetLocalization("MapEntry"));
+        AddMapEntry(new Color(128, 0, 255), this.GetLocalization("MapEntry"));
+        AddMapEntry(new Color(255, 0, 255), this.GetLocalization("MapEntry"));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileLighted[Type] = true;

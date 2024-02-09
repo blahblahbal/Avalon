@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Avalon.Items.Potions.Other;
 using Avalon.Items.Consumables;
 using System.Collections.Generic;
+using Terraria.Localization;
 
 namespace Avalon.Tiles.Furniture
 {
@@ -14,7 +15,7 @@ namespace Avalon.Tiles.Furniture
     {
         public override void SetStaticDefaults()
         {
-            AddMapEntry(Color.Green);
+            AddMapEntry(Color.Green, this.GetLocalization("MapEntry"));
             AnimationFrameHeight = 36;
             Main.tileSpelunker[Type] = true;
             Main.tileOreFinderPriority[Type] = 550;

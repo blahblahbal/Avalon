@@ -10,7 +10,7 @@ public class Peridot : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(Color.Lime, LanguageManager.Instance.GetText("Peridot"));
+        AddMapEntry(Color.Lime, this.GetLocalization("MapEntry"));
         Main.tileSolid[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Material.Ores.Peridot>());
         TileID.Sets.Ore[Type] = true;

@@ -12,7 +12,7 @@ public class OsmiumOre : ModTile
     public override void SetStaticDefaults()
     {
         MineResist = 2f;
-        AddMapEntry(new Color(0, 148, 255), LanguageManager.Instance.GetText("Osmium"));
+        AddMapEntry(new Color(0, 148, 255), this.GetLocalization("MapEntry"));
         Data.Sets.Tile.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;

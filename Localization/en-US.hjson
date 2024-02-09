@@ -136,7 +136,7 @@ Mods: {
 					Spawns naturally at 9:30 AM in the Desert after defeating 5 Vultures if Skeletron and the world evil boss have been defeated.
 					'''
 				Mechasting: Use a [i:Avalon/MechanicalWasp] at night.
-                Phantasm: Use an [i:Avalon/EctoplasmicBeacon] in the Hellcastle.
+				Phantasm: Use an [i:Avalon/EctoplasmicBeacon] in the Hellcastle.
 			}
 		}
 
@@ -8935,6 +8935,7 @@ Mods: {
 				Zircon: Zircon
 			}
 
+			PlacedStaminaCrystal.MapEntry: Stamina Crystal
 			CoughwoodChest.MapEntry0: Coughwood Chest
 			HellfireChest.MapEntry0: Hellfire Chest
 			ResistantWoodChest.MapEntry0: Resistant Wood Chest
@@ -9010,6 +9011,23 @@ Mods: {
 
 			HeartstoneChest.MapEntry0: Chest
 			HeartstoneDresser.MapEntry: Heartstone Dresser
+			BacciliteOre.MapEntry: Baccilite
+			BismuthOre.MapEntry: Bismuth
+			BronzeOre.MapEntry: Bronze
+			CaesiumOre.MapEntry: Caesium
+			DurataniumOre.MapEntry: Duratanium
+			HallowedOre.MapEntry: Hallowed
+			IridiumOre.MapEntry: Iridium
+			NaquadahOre.MapEntry: Naquadah
+			NickelOre.MapEntry: Nickel
+			OsmiumOre.MapEntry: Osmium
+			PrimordialOre.MapEntry: Primordial Ore
+			RhodiumOre.MapEntry: Rhodium
+			SmallSulphurBlob.MapEntry: Sulphur
+			SulphurBlob.MapEntry: Sulphur
+			SulphurOre.MapEntry: Sulphur
+			TroxiniumOre.MapEntry: Troxinium
+			ZincOre.MapEntry: Zinc
 		}
 
 		Prefixes: {

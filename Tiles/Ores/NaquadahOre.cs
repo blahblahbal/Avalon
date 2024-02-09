@@ -12,7 +12,7 @@ public class NaquadahOre : ModTile
     public override void SetStaticDefaults()
     {
         MineResist = 3f;
-        AddMapEntry(Color.Blue, LanguageManager.Instance.GetText("Naquadah"));
+        AddMapEntry(Color.Blue, this.GetLocalization("MapEntry"));
         Data.Sets.Tile.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;

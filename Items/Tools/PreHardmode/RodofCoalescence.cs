@@ -59,7 +59,7 @@ class RodofCoalescence : ModItem
             pointPosition.Y -= player.height;
         }
         pointPosition.X -= player.width / 2;
-        LimitPointToArea(player, ref pointPosition);
+        LimitPointToArea(player, 20, ref pointPosition);
         if (pointPosition.X < 50f || pointPosition.X > Main.maxTilesX * 16 - 50 || pointPosition.Y < 50f || pointPosition.Y > Main.maxTilesY * 16 - 50)
         {
             return false;
@@ -87,16 +87,16 @@ class RodofCoalescence : ModItem
         return true;
 
     }
-    public void LimitPointToArea(Player player, ref Vector2 pointPoisition)
+    public void LimitPointToArea(Player player, int tiles, ref Vector2 pointPoisition)
     {
         Vector2 center = player.Center;
         Vector2 val = pointPoisition - center;
         float num = Math.Abs(val.X);
         float num2 = Math.Abs(val.Y);
         float num3 = 1f;
-        if (num > 15 * 16)
+        if (num > tiles * 16)
         {
-            float num4 = (15 * 16) / num;
+            float num4 = (tiles * 16) / num;
             
             if (num3 > num4)
             {
@@ -104,9 +104,9 @@ class RodofCoalescence : ModItem
                 
             }
         }
-        if (num2 > 15 * 16)
+        if (num2 > tiles * 16)
         {
-            float num5 = (15 * 16) / num2;
+            float num5 = (tiles * 16) / num2;
             if (num3 > num5)
             {
                 num3 = num5;

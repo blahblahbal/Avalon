@@ -12,7 +12,7 @@ public class HallowedOre : ModTile
     public override void SetStaticDefaults()
     {
         MineResist = 5.5f;
-        AddMapEntry(new Color(219, 183, 0), LanguageManager.Instance.GetText("Hallowed Ore"));
+        AddMapEntry(new Color(219, 183, 0), this.GetLocalization("MapEntry"));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;

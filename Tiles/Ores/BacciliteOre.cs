@@ -13,7 +13,7 @@ public class BacciliteOre : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(Color.Olive, LanguageManager.Instance.GetText("Baccilite"));
+        AddMapEntry(Color.Olive, this.GetLocalization("MapEntry"));
         Data.Sets.Tile.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
