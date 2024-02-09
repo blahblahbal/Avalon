@@ -659,41 +659,6 @@ public class AvalonStaminaPlayer : ModPlayer
                 StaminaSlidingCD = 0;
             }
 
-
-            Main.NewText(doSliding);
-
-            //StaminaSlidingCD++;
-            //StaminaRegenCount = 0;
-            
-            //if (StaminaSlidingCD >= (Player.spikedBoots == 1 ? 12 : 6))
-            //{
-            //    int amt = 20;
-            //    if (StaminaDrain)
-            //    {
-            //        amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-            //    }
-
-            //    if (StatStam >= amt)
-            //    {
-            //        StatStam -= amt;
-            //    }
-            //    else if (StamFlower)
-            //    {
-            //        QuickStamina();
-            //        if (StatStam >= amt)
-            //        {
-            //            StatStam -= amt;
-            //        }
-            //    }
-
-            //    if (StatStam <= 0)
-            //    {
-            //        StatStam = 0;
-            //        doSliding = false;
-            //    }
-
-            //    StaminaSlidingCD = 0;
-            //}
             if (doSliding)
             {
                 Player.spikedBoots++;
@@ -732,41 +697,6 @@ public class AvalonStaminaPlayer : ModPlayer
 
                 StaminaMiningCD = 0;
             }
-
-
-
-
-            //StaminaMiningCD++;
-            //StaminaRegenCount = 0;
-            //if (StaminaMiningCD >= 30)
-            //{
-                
-            //    if (StaminaDrain)
-            //    {
-            //        amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-            //    }
-
-            //    if (StatStam >= amt)
-            //    {
-            //        StatStam -= amt;
-            //    }
-            //    else if (StamFlower)
-            //    {
-            //        QuickStamina();
-            //        if (StatStam >= amt)
-            //        {
-            //            StatStam -= amt;
-            //        }
-            //    }
-
-            //    if (StatStam <= 0)
-            //    {
-            //        StatStam = 0;
-            //        doMining = false;
-            //    }
-
-            //    StaminaMiningCD = 0;
-            //}
 
             if (doMining)
             {
