@@ -8,7 +8,7 @@ public class SolarSystem : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return true;
+        return false;
     }
     public override void SetDefaults()
     {

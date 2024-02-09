@@ -7900,6 +7900,15 @@ Mods: {
 				DisplayName: Hanging Sweetstem
 				Tooltip: ""
 			}
+
+			GamblerPotion: {
+				DisplayName: Gambler Potion
+				Tooltip:
+					'''
+					30% increased critical strike chance
+					Your attacks have a 5% chance to deal damage to yourself instead
+					'''
+			}
 		}
 
 		InfoDisplays: {
@@ -8795,6 +8804,11 @@ Mods: {
 			Electrified: {
 				DisplayName: Electrified
 				Description: Losing more life when moving
+			}
+
+			Gambler: {
+				DisplayName: Gambler
+				Description: Increased critical strike chance, but small chance to deal damage to yourself
 			}
 		}
 

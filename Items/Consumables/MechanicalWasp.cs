@@ -12,6 +12,10 @@ class MechanicalWasp : ModItem
     {
         Item.ResearchUnlockCount = 3;
     }
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return false;
+    }
 
     public override void SetDefaults()
     {

@@ -1,4 +1,4 @@
-using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Material;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;

@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Avalon.Items.Material.Ores;
-using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Accessories.Expert;
 
 namespace Avalon.Items.BossBags;
 

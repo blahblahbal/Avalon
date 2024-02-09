@@ -260,6 +260,7 @@ public class AvalonPlayer : ModPlayer
     public bool Berserk;
     public bool SanguineSacrifice;
     public bool Electrified;
+    public bool Gambler;
 
     public bool HungryMinion;
     public bool GastroMinion;
@@ -333,6 +334,7 @@ public class AvalonPlayer : ModPlayer
         Berserk = false;
         SanguineSacrifice = false;
         Electrified = false;
+        Gambler = false;
 
         // accessories
         TrapImmune = false;
@@ -1483,6 +1485,24 @@ public class AvalonPlayer : ModPlayer
             }
         }
 
+        if (Gambler)
+        {
+            float chance = Player.GetCritChance(DamageClass.Generic) / 10f;
+            if (chance < 1f) chance = 1f;
+            if (Main.rand.Next(100) < 5)
+            {
+                int dmg = (int)Player.GetTotalDamage(DamageClass.Generic).ApplyTo(item.damage);
+                modifiers.FinalDamage *= 0f;
+                Player.HurtInfo hit = new Player.HurtInfo()
+                {
+                    Damage = (int)(dmg / 2),
+                    Knockback = 2f,
+                    Dodgeable = false,
+                    DamageSource = PlayerDeathReason.ByCustomReason(Player.name + " gambled with their life.")
+                };
+                Player.Hurt(hit);
+            }
+        }
 
         if (ZombieArmor && Vector2.Distance(Player.Center, target.Center) < 15 * 16)
         {
@@ -1542,6 +1562,25 @@ public class AvalonPlayer : ModPlayer
             if (Data.Sets.Projectile.EarthRelatedItems[proj.type])
             {
                 modifiers.FinalDamage *= 1.2f;
+            }
+        }
+
+        if (Gambler)
+        {
+            float chance = Player.GetCritChance(DamageClass.Generic) / 10f;
+            if (chance < 1f) chance = 1f;
+            if (Main.rand.Next(100) < 5)
+            {
+                int dmg = (int)Player.GetTotalDamage(DamageClass.Generic).ApplyTo(proj.damage);
+                modifiers.FinalDamage *= 0f;
+                Player.HurtInfo hit = new Player.HurtInfo()
+                {
+                    Damage = (int)(dmg / 4),
+                    Knockback = 2f,
+                    Dodgeable = false,
+                    DamageSource = PlayerDeathReason.ByCustomReason(Player.name + " gambled with their life.")
+                };
+                Player.Hurt(hit);
             }
         }
 

@@ -33,21 +33,28 @@ public class DesertGamblerHeadLayer : PlayerDrawLayer
                 float val = p.GetModPlayer<DeadeyePlayer>().DeadeyeTimer * 255;
                 Color c = new Color(val, val, val, val);
 
-                DrawData glow = new DrawData(Mod.Assets.Request<Texture2D>("Items/Accessories/PreHardmode/DesertGambler_Head_Glow").Value,
+                DrawData glow = new DrawData(Mod.Assets.Request<Texture2D>("Items/Accessories/Expert/DesertGambler_Head_Glow").Value,
                     helmoffset + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - drawInfo.drawPlayer.bodyFrame.Width / 2 + drawInfo.drawPlayer.width / 2),
                     (int)(drawInfo.Position.Y - Main.screenPosition.Y + drawInfo.drawPlayer.height - drawInfo.drawPlayer.bodyFrame.Height + 4f)) - new Vector2(0, 2) + drawInfo.drawPlayer.headPosition + drawInfo.headVect,
                     drawInfo.drawPlayer.bodyFrame, c, drawInfo.drawPlayer.headRotation, drawInfo.headVect, 1f, drawInfo.playerEffect);
                 drawInfo.DrawDataCache.Add(glow);
             }
-            DrawData value = new DrawData(Mod.Assets.Request<Texture2D>("Items/Accessories/PreHardmode/DesertGambler_Head_Real").Value,
+            DrawData value = new DrawData(Mod.Assets.Request<Texture2D>("Items/Accessories/Expert/DesertGambler_Head_Real").Value,
                 helmoffset + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - drawInfo.drawPlayer.bodyFrame.Width / 2 + drawInfo.drawPlayer.width / 2),
                 (int)(drawInfo.Position.Y - Main.screenPosition.Y + drawInfo.drawPlayer.height - drawInfo.drawPlayer.bodyFrame.Height + 4f)) - new Vector2(0, 2) + drawInfo.drawPlayer.headPosition + drawInfo.headVect,
                 drawInfo.drawPlayer.bodyFrame, drawInfo.colorArmorHead, drawInfo.drawPlayer.headRotation, drawInfo.headVect, 1f, drawInfo.playerEffect);
 
-            int index = p.HasItemInArmorReturnIndex(ModContent.ItemType<Items.Accessories.PreHardmode.DesertGambler>());
+            int index = p.HasItemInArmorReturnIndex(ModContent.ItemType<Items.Accessories.Expert.DesertGambler>());
             if (index >= 10) index -= 10;
             if (index > -1) value.shader = p.dye[index].dye;
             drawInfo.DrawDataCache.Add(value);
+
+            DrawData shadow = new DrawData(Mod.Assets.Request<Texture2D>("Items/Accessories/Expert/DesertGambler_Head_Shadow").Value,
+                helmoffset + new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - drawInfo.drawPlayer.bodyFrame.Width / 2 + drawInfo.drawPlayer.width / 2),
+                (int)(drawInfo.Position.Y - Main.screenPosition.Y + drawInfo.drawPlayer.height - drawInfo.drawPlayer.bodyFrame.Height + 4f)) - new Vector2(0, 2) + drawInfo.drawPlayer.headPosition + drawInfo.headVect,
+                drawInfo.drawPlayer.bodyFrame, drawInfo.colorArmorHead, drawInfo.drawPlayer.headRotation, drawInfo.headVect, 1f, drawInfo.playerEffect);
+
+            drawInfo.DrawDataCache.Add(shadow);
         }
     }
 }
