@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
@@ -24,7 +25,40 @@ namespace Avalon.Hooks
                 {
                     Tile tile = Main.tile[j, i];
 
-                    if (!tile.HasTile && Main.player[Main.myPlayer].GetModPlayer<AvalonPlayer>().Vision && i > Main.worldSurface && i < Main.maxTilesY - 190)
+                    if (!tile.HasTile && Main.player[Main.myPlayer].GetModPlayer<AvalonPlayer>().Vision && i > Main.worldSurface - 50 && i <= Main.worldSurface)
+                    {
+                        float brightness = Lighting.Brightness(j, i);
+
+                        int diff = -(i - (int)Main.worldSurface);
+
+                        if (diff == 0)
+                        {
+                            diff = 1;
+                        }
+
+                        /*
+                        i = Main.worldSurface - 20
+                        diff = 20
+                        num = 100
+                        Main.rand.NextBool(10000)
+
+                        i = Main.worldsurface - 10
+                        diff = 10
+                        num = 50
+                         */
+
+                        if (!Main.gamePaused && Main.rand.NextBool((int)(diff * 5 * 15)))
+                        {
+                            int num28 = Dust.NewDust(new Vector2(j * 16, i * 16), 16, 16, ModContent.DustType<Dusts.VisionPotion>(), 0f, 0f, (int)(brightness * 255) * 2, default, 0.1f);
+                            Main.dust[num28].fadeIn = 1f;
+                            Main.dust[num28].velocity *= 0.1f;
+                            Main.dust[num28].noLight = true;
+                            Main.dust[num28].noGravity = true;
+                        }
+                    }
+
+
+                    if (!tile.HasTile && Main.player[Main.myPlayer].GetModPlayer<AvalonPlayer>().Vision && i > Main.worldSurface && i < Main.maxTilesY - 200)
                     {
                         float brightness = Lighting.Brightness(j, i);
                         if (!Main.gamePaused && Main.rand.NextBool(300))

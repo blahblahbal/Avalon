@@ -33,7 +33,7 @@ public class AvalonStaminaPlayer : ModPlayer
     public int StatStam = 100;
     public int StatStamMax = 30;
     public int StatStamMax2;
-    public byte StaminaCooldown;
+    public byte StaminaSwimCooldown;
     public byte StaminaSprintCooldown;
     public byte StaminaMiningCD;
     public byte StaminaSlidingCD;
@@ -297,50 +297,49 @@ public class AvalonStaminaPlayer : ModPlayer
     }
     public override void PostUpdateRunSpeeds()
     {
-        // swimming
+        #region swimming (6 stamina per second)
         if (Player.wet && Player.velocity != Vector2.Zero && !Player.accMerman &&
             SwimmingUnlocked)
         {
-            bool flag15 = true;
-            StaminaCooldown++;
+            bool doSwim = false;
+            StaminaSwimCooldown++;
             StaminaRegenCount = 0;
-            if (StaminaCooldown >= 10)
-            {
-                Player.ConsumeStamina(1);
-                int amt = 1;
-                if (StaminaDrain)
-                {
-                    amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
-                }
 
-                if (StatStam >= amt)
-                {
-                    StatStam -= amt;
-                }
-                else if (StamFlower)
+            int amt = 1;
+            if (StaminaDrain)
+            {
+                amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
+            }
+            if (StatStam >= amt)
+            {
+                doSwim = true;
+            }
+
+            if (StaminaSwimCooldown >= 10 && doSwim)
+            {
+                StatStam -= amt;
+                if (StamFlower && StatStam < amt)
                 {
                     QuickStamina();
-                    if (StatStam >= amt)
-                    {
-                        StatStam -= amt;
-                    }
                 }
 
                 if (StatStam <= 0)
                 {
                     StatStam = 0;
-                    flag15 = false;
+                    doSwim = false;
                 }
 
-                StaminaCooldown = 0;
+                StaminaSwimCooldown = 0;
             }
 
-            if (flag15)
+            if (doSwim)
             {
                 Player.accFlipper = true;
             }
         }
-        // sprinting
+        #endregion
+
+        #region sprinting (8 stamina per second)
         if (SprintUnlocked)
         {
             if ((Player.controlRight || Player.controlLeft) && Player.velocity.X != 0f)
@@ -349,7 +348,7 @@ public class AvalonStaminaPlayer : ModPlayer
                 StaminaSprintCooldown++;
                 StaminaRegenCount = 0;
 
-                int amt = 10;
+                int amt = 2;
                 if (StaminaDrain)
                 {
                     amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
@@ -359,7 +358,7 @@ public class AvalonStaminaPlayer : ModPlayer
                     doSprint = true;
                 }
 
-                if (StaminaSprintCooldown >= 30 && doSprint)
+                if (StaminaSprintCooldown >= 15 && doSprint)
                 {
                     StatStam -= amt;
                     if (StamFlower && StatStam < amt)
@@ -446,6 +445,7 @@ public class AvalonStaminaPlayer : ModPlayer
                 }
             }
         }
+        #endregion
     }
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
@@ -626,23 +626,30 @@ public class AvalonStaminaPlayer : ModPlayer
         {
             flag = true;
         }
+
+        #region wall sliding (3 or 6 stamina per second)
         if (WallSlidingUnlocked && Player.spikedBoots <= 2 && flag)
         {
             bool doSliding = false;
             StaminaSlidingCD++;
             StaminaRegenCount = 0;
 
-            int amt = 10;
+            // set the normal amount
+            int amt = 1;
+
             if (StaminaDrain)
             {
+                // multiply the amount relative to your stamina drain stacks
                 amt *= (int)(StaminaDrainStacks * StaminaDrainMult);
             }
+
+            // if your current stamina is above the amount required, set the flag to true
             if (StatStam >= amt)
             {
                 doSliding = true;
             }
 
-            if (StaminaSlidingCD >= (Player.spikedBoots == 1 ? 12 : 6) && doSliding)
+            if (StaminaSlidingCD >= (Player.spikedBoots == 1 ? 20 : 10) && doSliding)
             {
                 StatStam -= amt;
                 if (StamFlower && StatStam < amt)
@@ -664,6 +671,9 @@ public class AvalonStaminaPlayer : ModPlayer
                 Player.spikedBoots++;
             }
         }
+        #endregion
+
+        #region mining speed (stamina consumed depends on current mining speed)
         int amt2 = 5 - (int)(1 - Player.pickSpeed * 5);
         if (MiningSpeedUnlocked && Player.HeldItem.pick > 0 && Player.ItemAnimationActive && Player.pickSpeed > 0.4f && StatStam > amt2)
         {
@@ -707,6 +717,7 @@ public class AvalonStaminaPlayer : ModPlayer
                 }
             }
         }
+        #endregion
     }
     public override void UpdateLifeRegen()
     {

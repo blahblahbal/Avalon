@@ -7717,7 +7717,7 @@ Mods: {
 			}
 
 			MiningScroll: {
-				DisplayName: Mining Scroll
+				DisplayName: Mining Speed Scroll
 				Tooltip: Unlocks stamina mining speed
 			}
 
