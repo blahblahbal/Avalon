@@ -178,6 +178,7 @@ Mods: {
 			Generic_11: "{0} got shipped to Timbuktu"
 			Generic_12: "{0} isn't in Kansas anymore"
 			Generic_13: "{0} experienced a skill issue"
+			Generic_14: "{0}'s keyboard was messed up"
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Space_1: "{0} broke the Warp 10 threshold."
@@ -7972,7 +7973,7 @@ Mods: {
 					'''
 					Allows you to astral project
 					Run into enemies to mark them while astral projecting
-					               Enemies marked will take triple damage for 45 seconds
+					Enemies marked will take triple damage for 45 seconds
 					'''
 			}
 
@@ -7981,7 +7982,7 @@ Mods: {
 				Tooltip:
 					'''
 					Summons Phantasm
-					               Must be used in the Hellcastle
+					Must be used in the Hellcastle
 					'''
 			}
 
@@ -8910,7 +8911,7 @@ Mods: {
 
 			AstralProjectingCooldown: {
 				DisplayName: Astral Projecting Cooldown
-				Description: Mods.Avalon.Buffs.AstralProjectingCooldown.Description
+				Description: You cannot astral project
 			}
 		}
 
@@ -9016,7 +9017,7 @@ Mods: {
 			BronzeOre.MapEntry: Bronze
 			CaesiumOre.MapEntry: Caesium
 			DurataniumOre.MapEntry: Duratanium
-			HallowedOre.MapEntry: Hallowed
+			HallowedOre.MapEntry: Hallowed Ore
 			IridiumOre.MapEntry: Iridium
 			NaquadahOre.MapEntry: Naquadah
 			NickelOre.MapEntry: Nickel
