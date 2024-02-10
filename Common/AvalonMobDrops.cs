@@ -232,6 +232,11 @@ public class AvalonMobDrops : GlobalNPC
                 break;
 
         }
+        if (npc.type == ModContent.NPCType<Bactus>())
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RingofDisgust>(), RareChance));
+        }
+
         //adhesive bandage
         if (npc.type is NPCID.Werewolf or NPCID.AnglerFish or NPCID.RustyArmoredBonesAxe or
             NPCID.RustyArmoredBonesFlail or NPCID.RustyArmoredBonesSword or NPCID.RustyArmoredBonesSwordNoArmor)

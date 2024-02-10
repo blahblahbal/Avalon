@@ -17,6 +17,8 @@ public class HomingRocket : ModNPC
         NPC.aiStyle = -1;
         NPC.lifeMax = 150;
         NPC.value = 0;
+        NPC.noTileCollide = true;
+        NPC.timeLeft = 500;
     }
     public override void OnKill()
     {

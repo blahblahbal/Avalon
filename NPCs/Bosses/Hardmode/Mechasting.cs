@@ -10,11 +10,14 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.GameContent.ItemDropRules;
 using Avalon.Items.Vanity;
+using System.IO;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
 public class Mechasting : ModNPC
 {
+    public bool SecondPhase;
+
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 8;
@@ -52,6 +55,14 @@ public class Mechasting : ModNPC
     //    NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
     //    NPC.damage = (int)(NPC.damage * 0.65f);
     //}
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        SecondPhase = reader.ReadBoolean();
+    }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(SecondPhase);
+    }
     public override void AI()
     {
         NPC.TargetClosest(true);
@@ -64,65 +75,16 @@ public class Mechasting : ModNPC
                 return;
             }
         }
-        // ai phase 1
-        if (NPC.ai[3] == 0)
+        if (NPC.life < NPC.lifeMax * 0.3f)
         {
-            NPC.ai[0]++; // ai phase counter
-            if (NPC.PlayerTarget().position.X < NPC.position.X)
-            {
-                if (NPC.velocity.X > -8) NPC.velocity.X -= 0.22f;
-            }
-            if (NPC.PlayerTarget().position.X > NPC.position.X)
-            {
-                if (NPC.velocity.X < 8) NPC.velocity.X += 0.22f;
-            }
-            if (NPC.PlayerTarget().position.Y < NPC.position.Y + 300)
-            {
-                if (NPC.velocity.Y < 0)
-                {
-                    if (NPC.velocity.Y > -4) NPC.velocity.Y -= 0.8f;
-                }
-                else NPC.velocity.Y -= 0.6f;
-                if (NPC.velocity.Y < -4) NPC.velocity.Y = -4;
-            }
-            if (NPC.PlayerTarget().position.Y > NPC.position.Y + 300)
-            {
-                if (NPC.velocity.Y > 0)
-                {
-                    if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.8f;
-                }
-                else NPC.velocity.Y += 0.6f;
-                if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
-            }
-            NPC.ai[2]++;
-            // fire laser
-            if (NPC.ai[2] > 15)
-            {
-                float Speed = 9f;
-                Vector2 vector8 = new Vector2(NPC.Center.X, NPC.position.Y + NPC.height - 10);
-                int damage = 35;
-                SoundEngine.PlaySound(SoundID.Item33, NPC.position);
-                Vector2 offset = new Vector2(NPC.Center.X + Main.rand.Next(2) * NPC.direction, NPC.Center.Y + Main.rand.Next(2, 5));
-                float rotation = (float)Math.Atan2(NPC.Center.Y - offset.Y, NPC.Center.X - offset.X);
-                int num54 = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, (float)(Math.Cos(rotation) * Speed * -1), (float)(Math.Sin(rotation) * Speed * -1), ProjectileID.DeathLaser, damage, 0f, 0);
-                //Main.projectile[num54].notReflect = true;
-                NPC.ai[2] = 0;
-            }
-            if (NPC.ai[0] > 540)
-            {
-                NPC.ai[0] = 0;
-                NPC.ai[3] = 1;
-                NPC.ai[2] = 0;
-            }
+            SecondPhase = true;
         }
-        // ai phase 2
-        else if (NPC.ai[3] == 1)
+        if (!SecondPhase)
         {
-            NPC.ai[2]++; // ai phase counter
-            NPC.ai[1]++; // movement and stinger probe counter
-            // normal movement
-            if (NPC.ai[1] < 300)
+            // ai phase 1
+            if (NPC.ai[3] == 0)
             {
+                NPC.ai[0]++; // ai phase counter
                 if (NPC.PlayerTarget().position.X < NPC.position.X)
                 {
                     if (NPC.velocity.X > -8) NPC.velocity.X -= 0.22f;
@@ -149,192 +111,368 @@ public class Mechasting : ModNPC
                     else NPC.velocity.Y += 0.6f;
                     if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
                 }
-            }
-            NPC.ai[0]++; // stinger counter
-            // fire a spread of stingers at the closest player
-            if (NPC.ai[0] >= 90)
-            {
-                float speed = 12f;
-                Vector2 vector8 = new Vector2(NPC.position.X + (NPC.width * 0.5f), NPC.position.Y + (NPC.height / 2));
-                int damage = 30;
-                int type = ModContent.ProjectileType<Projectiles.Hostile.Mechasting.Mechastinger>();
-                float rotation = (float)Math.Atan2(NPC.Center.Y - NPC.PlayerTarget().Center.Y, NPC.Center.X - NPC.PlayerTarget().Center.X);
-                int num54;
-                float f = 0f;
-                if (NPC.ai[0] >= 150)
+                NPC.ai[2]++;
+                // fire laser
+                if (NPC.ai[2] > 15)
                 {
-                    while (f <= .2f)
+                    float Speed = 9f;
+                    Vector2 vector8 = new Vector2(NPC.Center.X, NPC.position.Y + NPC.height - 10);
+                    int damage = 35;
+                    SoundEngine.PlaySound(SoundID.Item33, NPC.position);
+                    Vector2 offset = new Vector2(NPC.Center.X + Main.rand.Next(2) * NPC.direction, NPC.Center.Y + Main.rand.Next(2, 5));
+                    float rotation = (float)Math.Atan2(NPC.Center.Y - offset.Y, NPC.Center.X - offset.X);
+                    int num54 = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, (float)(Math.Cos(rotation) * Speed * -1), (float)(Math.Sin(rotation) * Speed * -1), ProjectileID.DeathLaser, damage, 0f, 0);
+                    //Main.projectile[num54].notReflect = true;
+                    NPC.ai[2] = 0;
+                }
+                if (NPC.ai[0] > 540)
+                {
+                    NPC.ai[0] = 0;
+                    NPC.ai[3] = 1;
+                    NPC.ai[2] = 0;
+                }
+            }
+            // ai phase 2
+            if (NPC.ai[3] == 1)
+            {
+                NPC.ai[2]++; // ai phase counter
+                NPC.ai[1]++; // movement and stinger probe counter
+                             // normal movement
+                if (NPC.ai[1] < 300)
+                {
+                    if (NPC.PlayerTarget().position.X < NPC.position.X)
                     {
-                        num54 = Projectile.NewProjectile(NPC.GetSource_FromAI(), vector8.X, vector8.Y, (float)(Math.Cos(rotation + f) * speed * -1), (float)(Math.Sin(rotation + f) * speed * -1), type, damage, 0f, NPC.target);
-                        Main.projectile[num54].timeLeft = 600;
-                        Main.projectile[num54].tileCollide = false;
-                        //Main.projectile[num54].notReflect = true;
-                        if (Main.netMode != NetmodeID.SinglePlayer)
-                        {
-                            NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, num54);
-                        }
-                        num54 = Projectile.NewProjectile(NPC.GetSource_FromAI(), vector8.X, vector8.Y, (float)(Math.Cos(rotation - f) * speed * -1), (float)(Math.Sin(rotation - f) * speed * -1), type, damage, 0f, NPC.target);
-                        Main.projectile[num54].timeLeft = 600;
-                        Main.projectile[num54].tileCollide = false;
-                        //Main.projectile[num54].notReflect = true;
-                        if (Main.netMode != NetmodeID.SinglePlayer)
-                        {
-                            NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, num54);
-                        }
-                        f += .04f;
+                        if (NPC.velocity.X > -8) NPC.velocity.X -= 0.22f;
                     }
+                    if (NPC.PlayerTarget().position.X > NPC.position.X)
+                    {
+                        if (NPC.velocity.X < 8) NPC.velocity.X += 0.22f;
+                    }
+                    if (NPC.PlayerTarget().position.Y < NPC.position.Y + 300)
+                    {
+                        if (NPC.velocity.Y < 0)
+                        {
+                            if (NPC.velocity.Y > -4) NPC.velocity.Y -= 0.8f;
+                        }
+                        else NPC.velocity.Y -= 0.6f;
+                        if (NPC.velocity.Y < -4) NPC.velocity.Y = -4;
+                    }
+                    if (NPC.PlayerTarget().position.Y > NPC.position.Y + 300)
+                    {
+                        if (NPC.velocity.Y > 0)
+                        {
+                            if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.8f;
+                        }
+                        else NPC.velocity.Y += 0.6f;
+                        if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
+                    }
+                }
+                NPC.ai[0]++; // stinger counter
+                             // fire a spread of stingers at the closest player
+                if (NPC.ai[0] >= 90)
+                {
+                    float speed = 12f;
+                    Vector2 vector8 = new Vector2(NPC.position.X + (NPC.width * 0.5f), NPC.position.Y + (NPC.height / 2));
+                    int damage = 30;
+                    int type = ModContent.ProjectileType<Projectiles.Hostile.Mechasting.Mechastinger>();
+                    float rotation = (float)Math.Atan2(NPC.Center.Y - NPC.PlayerTarget().Center.Y, NPC.Center.X - NPC.PlayerTarget().Center.X);
+                    int num54;
+                    float f = 0f;
+                    if (NPC.ai[0] >= 150)
+                    {
+                        while (f <= .2f)
+                        {
+                            num54 = Projectile.NewProjectile(NPC.GetSource_FromAI(), vector8.X, vector8.Y, (float)(Math.Cos(rotation + f) * speed * -1), (float)(Math.Sin(rotation + f) * speed * -1), type, damage, 0f, NPC.target);
+                            Main.projectile[num54].timeLeft = 600;
+                            Main.projectile[num54].tileCollide = false;
+                            //Main.projectile[num54].notReflect = true;
+                            if (Main.netMode != NetmodeID.SinglePlayer)
+                            {
+                                NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, num54);
+                            }
+                            num54 = Projectile.NewProjectile(NPC.GetSource_FromAI(), vector8.X, vector8.Y, (float)(Math.Cos(rotation - f) * speed * -1), (float)(Math.Sin(rotation - f) * speed * -1), type, damage, 0f, NPC.target);
+                            Main.projectile[num54].timeLeft = 600;
+                            Main.projectile[num54].tileCollide = false;
+                            //Main.projectile[num54].notReflect = true;
+                            if (Main.netMode != NetmodeID.SinglePlayer)
+                            {
+                                NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, num54);
+                            }
+                            f += .04f;
+                        }
+                        NPC.ai[0] = 0;
+                    }
+                }
+                // dash at the player
+                if (NPC.ai[1] >= 300)
+                {
+                    NPC.velocity.X *= 0.98f;
+                    NPC.velocity.Y *= 0.98f;
+                    Vector2 vector8 = new Vector2(NPC.position.X + (NPC.width * 0.5f), NPC.position.Y + (NPC.height / 2));
+                    if ((NPC.velocity.X < 2f) && (NPC.velocity.X > -2f) && (NPC.velocity.Y < 2f) && (NPC.velocity.Y > -2f))
+                    {
+                        float rotation = (float)Math.Atan2(vector8.Y - (NPC.PlayerTarget().position.Y + (NPC.PlayerTarget().height * 0.5f)), vector8.X - (NPC.PlayerTarget().position.X + (NPC.PlayerTarget().width * 0.5f)));
+                        NPC.velocity.X = (float)(Math.Cos(rotation) * 25) * -1;
+                        NPC.velocity.Y = (float)(Math.Sin(rotation) * 25) * -1;
+                    }
+                    NPC.ai[1] = 0;
+                }
+                // spawn stinger probes
+                if (NPC.ai[1] % 70 == 0)
+                {
+                    NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<StingerProbe>(), NPC.target);
+                }
+                if (NPC.ai[2] > 700)
+                {
+                    NPC.ai[2] = 0;
+                    NPC.ai[3] = 2;
+                }
+            }
+            // ai phase 3
+            if (NPC.ai[3] == 2)
+            {
+                // fire rockets
+                NPC.velocity *= 0f;
+                NPC.noGravity = true;
+                NPC.ai[1]++; // rocket counter
+                if (NPC.ai[1] > 90 && NPC.ai[1] < 360 && NPC.ai[1] % 25 == 0)
+                {
+                    float rotation = (float)Math.Atan2(NPC.Center.Y - NPC.PlayerTarget().Center.Y, NPC.Center.X - NPC.PlayerTarget().Center.X);
+                    float f = 0f; // degrees; 3.6f is a full 360 degrees
+                    float speed = 9f; // velocity of the projectile to be fired
+                    int p;
+                    while (f < 0.2f) // less than 20 degrees
+                    {
+                        int n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<HomingRocket>());
+                        Main.npc[n].velocity = new((float)(Math.Cos(rotation + f) * speed * -1), (float)(Math.Sin(rotation + f) * speed * -1));
+                        //Main.projectile[p].notReflect = true;
+                        //Main.projectile[p].bombPlayer = true;
+                        //if (Main.netMode != NetmodeID.SinglePlayer)
+                        //{
+                        //    NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, n);
+                        //}
+
+                        //n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<HomingRocket>());
+                        //Main.npc[n].velocity = new((float)(Math.Cos(rotation - f) * speed * -1), (float)(Math.Sin(rotation - f) * speed * -1));
+                        ////Main.projectile[p].notReflect = true;
+                        ////Main.projectile[p].bombPlayer = true;
+                        //if (Main.netMode != NetmodeID.SinglePlayer)
+                        //{
+                        //    NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, n);
+                        //}
+                        f += .2f;
+                    }
+                }
+                if (NPC.ai[1] == 360)
+                {
+                    NPC.ai[0] = 0;
+                    NPC.ai[1] = 0;
+                    NPC.ai[3] = 3;
+                }
+            }
+            // ai phase 4
+            if (NPC.ai[3] == 3)
+            {
+                NPC.ai[2]++; // ai phase counter
+                if (NPC.PlayerTarget().position.X < NPC.position.X)
+                {
+                    if (NPC.velocity.X > -8) NPC.velocity.X -= 0.22f;
+                }
+                if (NPC.PlayerTarget().position.X > NPC.position.X)
+                {
+                    if (NPC.velocity.X < 8) NPC.velocity.X += 0.22f;
+                }
+                if (NPC.PlayerTarget().position.Y < NPC.position.Y + 300)
+                {
+                    if (NPC.velocity.Y < 0)
+                    {
+                        if (NPC.velocity.Y > -4) NPC.velocity.Y -= 0.8f;
+                    }
+                    else NPC.velocity.Y -= 0.6f;
+                    if (NPC.velocity.Y < -4) NPC.velocity.Y = -4;
+                }
+                if (NPC.PlayerTarget().position.Y > NPC.position.Y + 300)
+                {
+                    if (NPC.velocity.Y > 0)
+                    {
+                        if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.8f;
+                    }
+                    else NPC.velocity.Y += 0.6f;
+                    if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
+                }
+                NPC.ai[1]++; // electric bolt counter
+                if (NPC.ai[1] >= 240 && NPC.ai[1] <= 300)
+                {
+                    float rotation = (float)Math.Atan2(NPC.Center.Y - NPC.PlayerTarget().Center.Y, NPC.Center.X - NPC.PlayerTarget().Center.X);
+                    float f = 0f; // degrees; 3.6f is a full 360 degrees
+                    float speed = 9f; // the velocity of the projectile to be shot
+                    if (Main.expertMode)
+                    {
+                        speed = 15f;
+                    }
+                    int p;
+                    #region electric bolt attack
+                    if (NPC.ai[1] % 60 == 0)
+                    {
+                        float increment = Main.expertMode ? 0.225f : 0.45f;
+                        while (f <= 3.6f)
+                        {
+                            // above the boss
+                            p = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, (float)(Math.Cos(rotation + f) * speed * -1), (float)(Math.Sin(rotation + f) * speed * -1), ModContent.ProjectileType<Projectiles.Hostile.Mechasting.ElectricBolt>(), 25, 0f, NPC.target);
+                            Main.projectile[p].timeLeft = 600;
+                            Main.projectile[p].friendly = false;
+                            //Main.projectile[p].notReflect = true;
+                            Main.projectile[p].hostile = true;
+                            if (Main.netMode != NetmodeID.SinglePlayer)
+                            {
+                                NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, p);
+                            }
+                            // below the boss
+                            p = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, (float)(Math.Cos(rotation - f) * speed * -1), (float)(Math.Sin(rotation - f) * speed * -1), ModContent.ProjectileType<Projectiles.Hostile.Mechasting.ElectricBolt>(), 25, 0f, NPC.target);
+                            Main.projectile[p].timeLeft = 600;
+                            Main.projectile[p].friendly = false;
+                            //Main.projectile[p].notReflect = true;
+                            Main.projectile[p].hostile = true;
+                            if (Main.netMode != NetmodeID.SinglePlayer)
+                            {
+                                NetMessage.SendData(MessageID.SyncProjectile, -1, -1, null, p);
+                            }
+                            f += increment;
+                        }
+                    }
+                    #endregion
+                    if (NPC.ai[1] == 300)
+                    {
+                        NPC.ai[1] = 0;
+                    }
+                }
+                if (NPC.ai[2] > 900)
+                {
+                    NPC.ai[0] = 0;
+                    NPC.ai[1] = 0;
+                    NPC.ai[2] = 0;
+                    NPC.ai[3] = 0;
+                }
+            }
+        }
+        else
+        {
+            // phase swap at low hp
+            if (NPC.ai[3] < 5)
+            {
+                NPC.ai[0] = 0;
+                NPC.ai[1] = 0;
+                NPC.ai[2] = 0;
+                NPC.ai[3] = 5;
+                return;
+            }
+
+            // ai phase 5, low hp
+            if (NPC.ai[3] == 5)
+            {
+                NPC.ai[1]++; // movement counter
+                NPC.ai[0]++; // phase change counter
+                // normal movement
+                if (NPC.ai[1] < 120)
+                {
+                    if (NPC.PlayerTarget().position.X < NPC.position.X)
+                    {
+                        if (NPC.velocity.X > -8) NPC.velocity.X -= 0.4f;
+                    }
+                    if (NPC.PlayerTarget().position.X > NPC.position.X)
+                    {
+                        if (NPC.velocity.X < 8) NPC.velocity.X += 0.4f;
+                    }
+                    if (NPC.PlayerTarget().position.Y < NPC.position.Y + 300)
+                    {
+                        if (NPC.velocity.Y < 0)
+                        {
+                            if (NPC.velocity.Y > -4) NPC.velocity.Y -= 0.8f;
+                        }
+                        else NPC.velocity.Y -= 0.6f;
+                        if (NPC.velocity.Y < -4) NPC.velocity.Y = -4;
+                    }
+                    if (NPC.PlayerTarget().position.Y > NPC.position.Y + 300)
+                    {
+                        if (NPC.velocity.Y > 0)
+                        {
+                            if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.8f;
+                        }
+                        else NPC.velocity.Y += 0.6f;
+                        if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
+                    }
+                }
+                if (NPC.ai[1] >= 120)
+                {
+                    Vector2 directionToPlayer = NPC.PlayerTarget().Center - NPC.Center;
+                    directionToPlayer.Normalize();
+                    Vector2 targetPosition = NPC.PlayerTarget().Center + directionToPlayer * 200;
+                    Vector2 dashDirection = targetPosition - NPC.Center;
+                    dashDirection.Normalize();
+                    NPC.velocity = dashDirection * 40f;
+                    if (NPC.ai[1] == 130) NPC.ai[1] = 0;
+                }
+                if (NPC.ai[0] == 130 * 4)
+                {
+                    NPC.ai[3] = 6;
                     NPC.ai[0] = 0;
                 }
             }
-            // dash at the player
-            if (NPC.ai[1] >= 300)
-            {
-                NPC.velocity.X *= 0.98f;
-                NPC.velocity.Y *= 0.98f;
-                Vector2 vector8 = new Vector2(NPC.position.X + (NPC.width * 0.5f), NPC.position.Y + (NPC.height / 2));
-                if ((NPC.velocity.X < 2f) && (NPC.velocity.X > -2f) && (NPC.velocity.Y < 2f) && (NPC.velocity.Y > -2f))
-                {
-                    float rotation = (float)Math.Atan2(vector8.Y - (NPC.PlayerTarget().position.Y + (NPC.PlayerTarget().height * 0.5f)), vector8.X - (NPC.PlayerTarget().position.X + (NPC.PlayerTarget().width * 0.5f)));
-                    NPC.velocity.X = (float)(Math.Cos(rotation) * 25) * -1;
-                    NPC.velocity.Y = (float)(Math.Sin(rotation) * 25) * -1;
-                }
-                NPC.ai[1] = 0;
-            }
-            // spawn stinger probes
-            if (NPC.ai[1] % 70 == 0)
-            {
-                NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<StingerProbe>(), NPC.target);
-            }
-            if (NPC.ai[2] > 700)
-            {
-                NPC.ai[2] = 0;
-                NPC.ai[3] = 2;
-            }
-        }
-        // ai phase 3
-        if (NPC.ai[3] == 2)
-        {
-            // fire rockets
-            NPC.velocity *= 0f;
-            NPC.noGravity = true;
-            NPC.ai[1]++; // rocket counter
-            if (NPC.ai[1] > 90 && NPC.ai[1] < 360 && NPC.ai[1] % 25 == 0)
-            {
-                float rotation = (float)Math.Atan2(NPC.Center.Y - NPC.PlayerTarget().Center.Y, NPC.Center.X - NPC.PlayerTarget().Center.X);
-                float f = 0f; // degrees; 3.6f is a full 360 degrees
-                float speed = 9f; // velocity of the projectile to be fired
-                int p;
-                while (f < 0.2f) // less than 20 degrees
-                {
-                    int n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<HomingRocket>());
-                    Main.npc[n].velocity = new((float)(Math.Cos(rotation + f) * speed * -1), (float)(Math.Sin(rotation + f) * speed * -1));
-                    //Main.projectile[p].notReflect = true;
-                    //Main.projectile[p].bombPlayer = true;
-                    //if (Main.netMode != NetmodeID.SinglePlayer)
-                    //{
-                    //    NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, n);
-                    //}
 
-                    //n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<HomingRocket>());
-                    //Main.npc[n].velocity = new((float)(Math.Cos(rotation - f) * speed * -1), (float)(Math.Sin(rotation - f) * speed * -1));
-                    ////Main.projectile[p].notReflect = true;
-                    ////Main.projectile[p].bombPlayer = true;
-                    //if (Main.netMode != NetmodeID.SinglePlayer)
-                    //{
-                    //    NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, n);
-                    //}
-                    f += .2f;
-                }
-            }
-            if (NPC.ai[1] == 360)
+            // ai phase 6, low hp phase 2
+            if (NPC.ai[3] == 6)
             {
-                NPC.ai[0] = 0;
-                NPC.ai[1] = 0;
-                NPC.ai[3] = 3;
-            }
-        }
-        // ai phase 4
-        if (NPC.ai[3] == 3)
-        {
-            NPC.ai[2]++; // ai phase counter
-            if (NPC.PlayerTarget().position.X < NPC.position.X)
-            {
-                if (NPC.velocity.X > -8) NPC.velocity.X -= 0.22f;
-            }
-            if (NPC.PlayerTarget().position.X > NPC.position.X)
-            {
-                if (NPC.velocity.X < 8) NPC.velocity.X += 0.22f;
-            }
-            if (NPC.PlayerTarget().position.Y < NPC.position.Y + 300)
-            {
-                if (NPC.velocity.Y < 0)
+                // movement
+                if (NPC.PlayerTarget().position.X < NPC.position.X)
                 {
-                    if (NPC.velocity.Y > -4) NPC.velocity.Y -= 0.8f;
+                    if (NPC.velocity.X > -8) NPC.velocity.X -= 0.6f;
                 }
-                else NPC.velocity.Y -= 0.6f;
-                if (NPC.velocity.Y < -4) NPC.velocity.Y = -4;
-            }
-            if (NPC.PlayerTarget().position.Y > NPC.position.Y + 300)
-            {
-                if (NPC.velocity.Y > 0)
+                if (NPC.PlayerTarget().position.X > NPC.position.X)
                 {
-                    if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.8f;
+                    if (NPC.velocity.X < 8) NPC.velocity.X += 0.6f;
                 }
-                else NPC.velocity.Y += 0.6f;
-                if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
-            }
-            NPC.ai[1]++; // electric bolt counter
-            if (NPC.ai[1] >= 240 && NPC.ai[1] <= 300)
-            {
-                float rotation = (float)Math.Atan2(NPC.Center.Y - NPC.PlayerTarget().Center.Y, NPC.Center.X - NPC.PlayerTarget().Center.X);
-                float f = 0f; // degrees; 3.6f is a full 360 degrees
-                float speed = 9f; // the velocity of the projectile to be shot
-                if (Main.expertMode)
+                if (NPC.PlayerTarget().position.Y < NPC.position.Y + 300)
                 {
-                    speed = 15f;
-                }
-                int p;
-                #region electric bolt attack
-                if (NPC.ai[1] % 60 == 0)
-                {
-                    float increment = Main.expertMode ? 0.225f : 0.45f;
-                    while (f <= 3.6f)
+                    if (NPC.velocity.Y < 0)
                     {
-                        // above the boss
-                        p = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, (float)(Math.Cos(rotation + f) * speed * -1), (float)(Math.Sin(rotation + f) * speed * -1), ModContent.ProjectileType<Projectiles.Hostile.Mechasting.ElectricBolt>(), 25, 0f, NPC.target);
-                        Main.projectile[p].timeLeft = 600;
-                        Main.projectile[p].friendly = false;
-                        //Main.projectile[p].notReflect = true;
-                        Main.projectile[p].hostile = true;
-                        if (Main.netMode != NetmodeID.SinglePlayer)
-                        {
-                            NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, p);
-                        }
-                        // below the boss
-                        p = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, (float)(Math.Cos(rotation - f) * speed * -1), (float)(Math.Sin(rotation - f) * speed * -1), ModContent.ProjectileType<Projectiles.Hostile.Mechasting.ElectricBolt>(), 25, 0f, NPC.target);
-                        Main.projectile[p].timeLeft = 600;
-                        Main.projectile[p].friendly = false;
-                        //Main.projectile[p].notReflect = true;
-                        Main.projectile[p].hostile = true;
-                        if (Main.netMode != NetmodeID.SinglePlayer)
-                        {
-                            NetMessage.SendData(MessageID.SyncProjectile, -1, -1, null, p);
-                        }
-                        f += increment;
+                        if (NPC.velocity.Y > -4) NPC.velocity.Y -= 0.8f;
                     }
+                    else NPC.velocity.Y -= 0.6f;
+                    if (NPC.velocity.Y < -4) NPC.velocity.Y = -4;
                 }
-                #endregion
-                if (NPC.ai[1] == 300)
+                if (NPC.PlayerTarget().position.Y > NPC.position.Y + 300)
                 {
-                    NPC.ai[1] = 0;
+                    if (NPC.velocity.Y > 0)
+                    {
+                        if (NPC.velocity.Y < 4) NPC.velocity.Y += 0.8f;
+                    }
+                    else NPC.velocity.Y += 0.6f;
+                    if (NPC.velocity.Y > 4) NPC.velocity.Y = 4;
                 }
-            }
-            if (NPC.ai[2] > 900)
-            {
-                NPC.ai[0] = 0;
-                NPC.ai[1] = 0;
-                NPC.ai[2] = 0;
-                NPC.ai[3] = 0;
+
+                NPC.ai[0]++; // phase counter
+                NPC.ai[2]++;
+                // fire homing rockets
+                if (NPC.ai[2] > 45)
+                {
+                    float Speed = 9f;
+                    Vector2 vector8 = new Vector2(NPC.Center.X, NPC.position.Y + NPC.height - 10);
+                    int damage = 35;
+                    SoundEngine.PlaySound(SoundID.Item42, NPC.position);
+                    Vector2 offset = new Vector2(NPC.Center.X + Main.rand.Next(2) * NPC.direction, NPC.Center.Y + Main.rand.Next(2, 5));
+                    float rotation = (float)Math.Atan2(NPC.Center.Y - offset.Y, NPC.Center.X - offset.X);
+                    float speed = 9f; // velocity of the projectile to be fired
+
+                    int n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.position.Y + NPC.height - 10, ModContent.NPCType<HomingRocket>());
+                    Main.npc[n].velocity = new((float)(Math.Cos(rotation) * speed * -1), (float)(Math.Sin(rotation) * speed * -1));
+                    NPC.ai[2] = 0;
+                }
+
+                if (NPC.ai[0] >= 45 * 8)
+                {
+                    NPC.ai[0] = 0;
+                    NPC.ai[3] = 5;
+                }
             }
         }
     }

@@ -35,18 +35,6 @@ namespace Avalon.Hooks
                         {
                             diff = 1;
                         }
-
-                        /*
-                        i = Main.worldSurface - 20
-                        diff = 20
-                        num = 100
-                        Main.rand.NextBool(10000)
-
-                        i = Main.worldsurface - 10
-                        diff = 10
-                        num = 50
-                         */
-
                         if (!Main.gamePaused && Main.rand.NextBool((int)(diff * 5 * 15)))
                         {
                             int num28 = Dust.NewDust(new Vector2(j * 16, i * 16), 16, 16, ModContent.DustType<Dusts.VisionPotion>(), 0f, 0f, (int)(brightness * 255) * 2, default, 0.1f);
@@ -56,7 +44,6 @@ namespace Avalon.Hooks
                             Main.dust[num28].noGravity = true;
                         }
                     }
-
 
                     if (!tile.HasTile && Main.player[Main.myPlayer].GetModPlayer<AvalonPlayer>().Vision && i > Main.worldSurface && i < Main.maxTilesY - 200)
                     {
