@@ -13,6 +13,6 @@ public class VisionPotion : ModDust
 
     public override Color? GetAlpha(Dust dust, Color lightColor)
     {
-        return new Color(255, 255, 255, 0);
+        return new Color(255, 255, 255, 0) * ((255 - dust.alpha) / 255f);
     }
 }

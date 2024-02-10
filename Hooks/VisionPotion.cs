@@ -24,23 +24,12 @@ namespace Avalon.Hooks
                 {
                     Tile tile = Main.tile[j, i];
 
-                    if (!tile.HasTile && Main.player[Main.myPlayer].GetModPlayer<AvalonPlayer>().Vision && i > Main.worldSurface)
+                    if (!tile.HasTile && Main.player[Main.myPlayer].GetModPlayer<AvalonPlayer>().Vision && i > Main.worldSurface && i < Main.maxTilesY - 190)
                     {
-                        Color color = Lighting.GetColor(j, i);
-                        byte b = 200;
-                        byte b2 = 170;
-                        if (color.R < b)
+                        float brightness = Lighting.Brightness(j, i);
+                        if (!Main.gamePaused && Main.rand.NextBool(300))
                         {
-                            color.R = b;
-                        }
-                        if (color.G < b2)
-                        {
-                            color.G = b2;
-                        }
-                        color.A = Main.mouseTextColor;
-                        if (!Main.gamePaused && Main.rand.NextBool(200))
-                        {
-                            int num28 = Dust.NewDust(new Vector2(j * 16, i * 16), 16, 16, ModContent.DustType<Dusts.VisionPotion>(), 0f, 0f, 150, Color.LightBlue, 0.1f);
+                            int num28 = Dust.NewDust(new Vector2(j * 16, i * 16), 16, 16, ModContent.DustType<Dusts.VisionPotion>(), 0f, 0f, (int)(brightness * 255) * 2, default, 0.1f);
                             Main.dust[num28].fadeIn = 1f;
                             Main.dust[num28].velocity *= 0.1f;
                             Main.dust[num28].noLight = true;
@@ -49,7 +38,6 @@ namespace Avalon.Hooks
                     }
                 }
             }
-                    
         }
     }
 }
