@@ -30,7 +30,7 @@ internal class Contagion : GenPass
             {
                 if (Main.tile[tileXCoord, tileYCoord].HasTile)
                 {
-                    if (Main.tile[tileXCoord, tileYCoord].TileType == TileID.JungleGrass)
+                    if (Main.tile[tileXCoord, tileYCoord].TileType == TileID.JungleGrass || Main.tile[tileXCoord, tileYCoord].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
                     {
                         if (tileXCoord < jungleXMax)
                         {

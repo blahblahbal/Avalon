@@ -189,7 +189,7 @@ public class AvalonWorld : ModSystem
             _ => throw new ArgumentOutOfRangeException(),
         };
 
-        WorldJungle = WorldJungle.Jungle; // (WorldJungle)WorldGen.genRand.Next(2);
+        WorldJungle = WorldJungle.Jungle; // WorldJungle.Tropics; // (WorldJungle)WorldGen.genRand.Next(2);
 
         WorldGen.WorldGenParam_Evil = (int)WorldEvil;
         WorldGen.crimson = WorldEvil == WorldEvil.Crimson;
@@ -1215,8 +1215,8 @@ public class AvalonWorld : ModSystem
         int sunG = backgroundColor.G;
         int sunB = backgroundColor.B;
         sunR -= (int)(212f * ContagionStrength / 2 * (backgroundColor.R / 255f));
-        sunB -= (int)(255f * ContagionStrength / 2 * (backgroundColor.B / 255f));
         sunG -= (int)(127f * ContagionStrength / 2 * (backgroundColor.G / 255f));
+        sunB -= (int)(255f * ContagionStrength / 2 * (backgroundColor.B / 255f));
         sunR = Utils.Clamp(sunR, 15, 255);
         sunG = Utils.Clamp(sunG, 15, 255);
         sunB = Utils.Clamp(sunB, 15, 255);

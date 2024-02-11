@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.IO;
 using Terraria.WorldBuilding;
 using Terraria;
@@ -14,9 +9,27 @@ namespace Avalon.WorldGeneration.Passes;
 
 internal class Tropics
 {
+    public static void TropicsSanctumTask(GenerationProgress progress, GameConfiguration config)
+    {
+        progress.Message = "Adding tropics chests...";
+        int amount = WorldGen.genRand.Next(11, 19);
+        //bool flag30 = true;
+        while (amount > 0)
+        {
+            int num406 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 250);
+            int num407 = ((GenVars.dungeonSide >= 0) ? WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.4)) : WorldGen.genRand.Next((int)(Main.maxTilesX * 0.6), (int)(Main.maxTilesX * 0.85)));
+            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() && GenVars.structures.CanPlace(new(num407, num406, 20, 14)))
+            {
+                //flag30 = false;
+                Structures.TropicsSanctum.MakeSanctum(num407, num406);
+                GenVars.structures.AddProtectedStructure(new(num407, num406, 20, 14));
+                amount--;
+            }
+        }
+    }
     public static void LihzahrdBrickReSolidTask(GenerationProgress progress, GameConfiguration configuration)
     {
-        Main.tileSolid[ModContent.TileType<Tiles.Tropics.TuhrtlBrick>()] = true;
+        Main.tileSolid[TileID.LihzahrdBrick] = true;
     }
     public static void GlowingMushroomsandJunglePlantsTask(GenerationProgress progress, GameConfiguration passConfig)
     {
@@ -46,7 +59,7 @@ internal class Tropics
                     }
                     if (Main.tile[num207, num208].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && !Main.tile[num207, num208 - 1].HasTile)
                     {
-                        WorldGen.PlaceTile(num207, num208 - 1, grass, mute: true, style: grass == TileID.JunglePlants ? 0 : WorldGen.genRand.Next(8));
+                        WorldGen.PlaceTile(num207, num208 - 1, grass, mute: true, style: WorldGen.genRand.Next(8));
                     }
                 }
             }
@@ -73,7 +86,7 @@ internal class Tropics
                 WorldGen.PlaceJunglePlant(num205, num206, (ushort)bush, WorldGen.genRand.Next(8), 0);
                 if (Main.tile[num205, num206].TileType != bush)
                 {
-                    WorldGen.PlaceJunglePlant(num205, num206, (ushort)bush, WorldGen.genRand.Next(12), 1);
+                    WorldGen.PlaceJunglePlant(num205, num206, (ushort)bush, WorldGen.genRand.Next(9), 1);
                 }
             }
         }
@@ -82,17 +95,18 @@ internal class Tropics
     public static void WaspNests(GenerationProgress progress, GameConfiguration configuration)
     {
         progress.Message = "Adding nests...";
-        int amount = WorldGen.genRand.Next(6, 10);
+        int amount = WorldGen.genRand.Next(4, 8);
         //bool flag30 = true;
         while (amount > 0)
         {
             int num406 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 250);
             int num407 = WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.85));
             //((AvalonWorld.dungeonSide >= 0) ? WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.4)) : WorldGen.genRand.Next((int)(Main.maxTilesX * 0.6), (int)(Main.maxTilesX * 0.85)));
-            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() && GenVars.structures.CanPlace(new(num407 - 33, num406 - 49, 66, 87)))
             {
                 //flag30 = false;
-                Structures.Nest.CreateNest(num407, num406);
+                Structures.Nest.CreateWaspNest(num407, num406);
+                GenVars.structures.AddProtectedStructure(new(num407 - 33, num406 - 49, 66, 87));
                 amount--;
             }
         }
@@ -142,11 +156,41 @@ internal class Tropics
 		float rightBorder = Main.maxTilesX - 20;
 		for (int i = 10; i < Main.maxTilesX - 10; i++)
 		{
-			//WorldGen_ScanTileColumnAndRemoveClumps.Invoke(null, new object[] { i });
-			float num835 = (i - 10) / rightBorder;
+            ScanTileColumnAndRemoveClumps(i);
+            //WorldGen_ScanTileColumnAndRemoveClumps.Invoke(null, new object[] { i });
+            float num835 = (i - 10) / rightBorder;
 			progress.Set(0.2f + num835 * 0.8f);
 		}
 	}
+
+    private static void ScanTileColumnAndRemoveClumps(int x)
+    {
+        int num = 0;
+        int y = 0;
+        for (int i = 10; i < Main.maxTilesY - 10; i++)
+        {
+            if (Main.tile[x, i].HasTile && Main.tileSolid[Main.tile[x, i].TileType] && TileID.Sets.CanBeClearedDuringGeneration[Main.tile[x, i].TileType])
+            {
+                if (num == 0)
+                    y = i;
+
+                num++;
+                continue;
+            }
+
+            if (num > 0 && num < 20)
+            {
+                WorldGen.SmallConsecutivesFound++;
+                if (WorldGen.tileCounter(x, y) < 20)
+                {
+                    WorldGen.SmallConsecutivesEliminated++;
+                    WorldGen.tileCounterKill();
+                }
+            }
+
+            num = 0;
+        }
+    }
 
     #region reflection stuff
     internal static MethodInfo WorldGen_ScanTileColumnAndRemoveClumps = null;

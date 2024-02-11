@@ -14,7 +14,7 @@ class WorldgenHelper : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return false;
+        return true;
     }
     public override void SetDefaults()
     {

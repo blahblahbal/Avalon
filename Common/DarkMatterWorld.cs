@@ -21,8 +21,8 @@ namespace Avalon.Common
             int sunG = backgroundColor.G;
             int sunB = backgroundColor.B;
             sunR -= (int)(126f * DarkMatterStrength / 2 * (backgroundColor.R / 255f));
-            sunB -= (int)(71f * DarkMatterStrength / 2 * (backgroundColor.B / 255f));
-            sunG -= (int)(107f * DarkMatterStrength / 2 * (backgroundColor.G / 255f));
+            sunG -= (int)(71f * DarkMatterStrength / 2 * (backgroundColor.G / 255f));
+            sunB -= (int)(107f * DarkMatterStrength / 2 * (backgroundColor.B / 255f));
             sunR = Utils.Clamp(sunR, 15, 255);
             sunG = Utils.Clamp(sunG, 15, 255);
             sunB = Utils.Clamp(sunB, 15, 255);

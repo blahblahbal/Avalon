@@ -58,9 +58,9 @@ public class TropicalShortGrass : ModTile
         {
             Main.tileLighted[Type] = true;
             Color lightColor = new Color(227, 41, 75);
-            r = (float)lightColor.R / 200f;
-            g = (float)lightColor.G / 200f;
-            b = (float)lightColor.B / 200f;
+            r = lightColor.R / 200f;
+            g = lightColor.G / 200f;
+            b = lightColor.B / 200f;
         }
     }
     public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)

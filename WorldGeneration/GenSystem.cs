@@ -80,7 +80,13 @@ public class GenSystem : ModSystem
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Hives"));
             if (jungleIndex != -1)
             {
-                tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
+                tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.WaspNests));
+            }
+
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Chests"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Tropics Sanctums", new WorldGenLegacyMethod(Tropics.TropicsSanctumTask));
             }
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Muds Walls In Jungle"));
             if (jungleIndex != -1)
@@ -123,12 +129,11 @@ public class GenSystem : ModSystem
                         if (flag4)
                             break;
                     }
-
                     GenVars.jungleMinX = num171;
                     GenVars.jungleMaxX = num172;
                     for (int num177 = num171; num177 <= num172; num177++)
                     {
-                        for (int num178 = 0; (double)num178 < Main.worldSurface + 20.0; num178++)
+                        for (int num178 = 0; (double)num178 < Main.maxTilesY - 200; num178++)
                         {
                             if (((num177 >= num171 + 2 && num177 <= num172 - 2) || !WorldGen.genRand.NextBool(2)) && ((num177 >= num171 + 3 && num177 <= num172 - 3) || !WorldGen.genRand.NextBool(3)) && (Main.tile[num177, num178].WallType == 2 || Main.tile[num177, num178].WallType == 59))
                                 Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.TropicalMudWall>();
@@ -140,7 +145,7 @@ public class GenSystem : ModSystem
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Temple"));
             if (jungleIndex != -1)
             {
-                tasks[jungleIndex] = new PassLegacy("Re-solidify Tuhrtl Brick", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask));
+                tasks[jungleIndex] = new PassLegacy("Re-solidify Lihzahrd Brick", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask));
             }
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Glowing Mushrooms and Jungle Plants"));
             if (jungleIndex != -1)

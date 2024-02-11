@@ -9040,6 +9040,7 @@ Mods: {
 				Zircon: Zircon
 			}
 
+			TropicsBushes.MapEntry: ""
 			HeartstoneChest.MapEntry0: Chest
 			HeartstoneDresser.MapEntry: Heartstone Dresser
 			BacciliteOre.MapEntry: Baccilite

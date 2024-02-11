@@ -11,7 +11,7 @@ public class TropicsBushes : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(45, 153, 26));
+        AddMapEntry(new Color(45, 153, 26), this.GetLocalization("MapEntry"));
         Main.tileFrameImportant[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
         TileObjectData.newTile.DrawYOffset = 2;

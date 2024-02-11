@@ -19,7 +19,21 @@ internal class Tropics : ModHook
     protected override void Apply()
     {
         IL_DesertDescription.RowHasInvalidTiles += IL_DesertDescription_RowHasInvalidTiles;
-        
+        IL_WorldGen.PlaceJunglePlant += IL_WorldGen_PlaceJunglePlant;
+        IL_WorldGen.GenerateWorld += IL_WorldGen_GenerateWorld;
+    }
+
+    private void IL_WorldGen_GenerateWorld(ILContext il)
+    {
+        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())[id]);
+    }
+
+    private void IL_WorldGen_PlaceJunglePlant(ILContext il)
+    {
+        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.JunglePlants, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalShortGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.JunglePlants2, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalLongGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.PlantDetritus, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicsBushes>())[id]);
     }
 
     private void IL_DesertDescription_RowHasInvalidTiles(ILContext il)
