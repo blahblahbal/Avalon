@@ -2,6 +2,7 @@ using System;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture;
+using Avalon.Tiles.Tropics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -60,11 +61,11 @@ public class BiomeTileCounts : ModSystem
         //ContagionDesertTiles += tileCounts[ModContent.TileType<Snotsand>()];
         
 
-        /*TropicsTiles = tileCounts[ModContent.TileType<TropicalStone>()] +
+        TropicsTiles = tileCounts[ModContent.TileType<TropicalStone>()] +
                        tileCounts[ModContent.TileType<TuhrtlBrick>()] +
                        tileCounts[ModContent.TileType<Loam>()] +
                        tileCounts[ModContent.TileType<TropicalGrass>()];
-        
+        /*
         DarkTiles = tileCounts[ModContent.TileType<DarkMatter>()] +
                     tileCounts[ModContent.TileType<DarkMatterSand>()] +
                     tileCounts[ModContent.TileType<BlackIce>()] +

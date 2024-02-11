@@ -32,6 +32,7 @@ using Terraria.Audio;
 using Terraria.WorldBuilding;
 using Avalon.Tiles.Ores;
 using Avalon.NPCs.Bosses.PreHardmode;
+using Avalon.Tiles.Tropics;
 
 namespace Avalon.Common;
 
@@ -79,6 +80,8 @@ public class AvalonWorld : ModSystem
     private static bool crackedBrick;
 
     public WorldEvil WorldEvil;
+
+    public WorldJungle WorldJungle;
 
     public static int DungeonLocationX;
     public static int JungleLocationX;
@@ -138,6 +141,7 @@ public class AvalonWorld : ModSystem
     public override void SaveWorldHeader(TagCompound tag)
     {
         tag["Avalon:WorldEvil"] = (byte)WorldEvil;
+        tag["Avalon:WorldJungle"] = (byte)WorldJungle;
     }
 
     public override void LoadWorldData(TagCompound tag)
@@ -158,6 +162,8 @@ public class AvalonWorld : ModSystem
         }
 
         WorldEvil = (WorldEvil)(tag.Get<byte?>("Avalon:WorldEvil") ?? WorldGen.WorldGenParam_Evil);
+
+        WorldJungle = (WorldJungle)(tag.Get<byte>("Avalon:WorldJungle"));
 
         Console.WriteLine(WorldEvil);
 
@@ -182,6 +188,8 @@ public class AvalonWorld : ModSystem
             ContagionSelectionMenu.WorldEvilSelection.Contagion => WorldEvil.Contagion,
             _ => throw new ArgumentOutOfRangeException(),
         };
+
+        WorldJungle = WorldJungle.Jungle; // (WorldJungle)WorldGen.genRand.Next(2);
 
         WorldGen.WorldGenParam_Evil = (int)WorldEvil;
         WorldGen.crimson = WorldEvil == WorldEvil.Crimson;
@@ -634,6 +642,125 @@ public class AvalonWorld : ModSystem
                 }
             }
             #endregion
+
+            #region tropical grass
+            if (Main.tile[num5, num6].TileType == ModContent.TileType<TropicalGrass>())
+            {
+                int num14 = Main.tile[num5, num6].TileType;
+                // twilight plume
+                if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 &&
+                    !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid &&
+                    WorldGen.genRand.NextBool(num6 > Main.worldSurface ? 75 : 250) && num14 == ModContent.TileType<TropicalGrass>())
+                {
+                    WorldGen.PlaceTile(num5, num9, ModContent.TileType<TwilightPlume>(), true, false, -1, 0);
+                    if (Main.tile[num5, num9].HasTile)
+                    {
+                        Tile t = Main.tile[num5, num9];
+                        t.TileColor = Main.tile[num5, num6].TileColor;
+                    }
+                    if (Main.netMode == NetmodeID.Server && Main.tile[num5, num9].HasTile)
+                    {
+                        NetMessage.SendTileSquare(-1, num5, num9, 1);
+                    }
+                }
+                // regular grass
+                if (!Main.tile[num5, num9].HasTile && Main.tile[num5, num9].LiquidAmount == 0 &&
+                    !Main.tile[num5, num6].IsHalfBlock && Main.tile[num5, num6].Slope == SlopeType.Solid &&
+                    WorldGen.genRand.NextBool(5) && num14 == ModContent.TileType<TropicalGrass>())
+                {
+                    WorldGen.PlaceTile(num5, num9, ModContent.TileType<TropicalShortGrass>(), true);
+                    Main.tile[num5, num9].TileFrameX = (short)(WorldGen.genRand.Next(0, 8) * 18);
+                    if (num9 > Main.rockLayer)
+                    {
+                        if (WorldGen.genRand.NextBool(60))
+                        {
+                            Main.tile[num5, num9].TileFrameX = 18 * 8; // shroom cap
+                        }
+                        else if (WorldGen.genRand.NextBool(230))
+                        {
+                            Main.tile[num5, num9].TileFrameX = 18 * 9; // nature's gift
+                        }
+                    }
+                    if (Main.tile[num5, num9].HasTile)
+                    {
+                        Tile t = Main.tile[num5, num9];
+                        t.TileColor = Main.tile[num5, num6].TileColor;
+                    }
+
+                    if (Main.netMode == NetmodeID.Server && Main.tile[num5, num9].HasTile)
+                    {
+                        NetMessage.SendTileSquare(-1, num5, num9, 1);
+                    }
+                }
+                //bool flag2 = false;
+                //for (int m = num7; m < num8; m++)
+                //{
+                //    for (int n = num9; n < num10; n++)
+                //    {
+                //        if ((num5 != m || num6 != n) && Main.tile[m, n].HasTile)
+                //        {
+                //            if (Main.tile[m, n].TileType == ModContent.TileType<Loam>())
+                //            {
+                //                WorldGen.SpreadGrass(m, n, ModContent.TileType<Loam>(), ModContent.TileType<TropicalGrass>(), false,
+                //                    Main.tile[num5, num6].TileColor);
+                //            }
+
+                //            if (Main.tile[m, n].TileType == num14)
+                //            {
+                //                //WorldGen.SquareTileFrame(m, n);
+                //                flag2 = true;
+                //            }
+                //        }
+                //    }
+                //}
+
+                //if (Main.netMode == NetmodeID.Server && flag2)
+                //{
+                //    NetMessage.SendTileSquare(-1, num5, num6, 3);
+                //}
+            }
+            #endregion tropical grass
+
+            #region tropics vines growing
+            if ((Main.tile[num5, num6].TileType == ModContent.TileType<TropicalGrass>() ||
+                 Main.tile[num5, num6].TileType == ModContent.TileType<TropicalVines>()) &&
+                WorldGen.genRand.NextBool(15) && !Main.tile[num5, num6 + 1].HasTile &&
+                Main.tile[num5, num6 + 1].LiquidType != LiquidID.Lava)
+            {
+                bool flag10 = false;
+                for (int num47 = num6; num47 > num6 - 10; num47--)
+                {
+                    if (Main.tile[num5, num47].BottomSlope)
+                    {
+                        flag10 = false;
+                        break;
+                    }
+
+                    if (Main.tile[num5, num47].HasTile &&
+                        Main.tile[num5, num47].TileType == ModContent.TileType<TropicalGrass>() &&
+                        !Main.tile[num5, num47].BottomSlope)
+                    {
+                        flag10 = true;
+                        break;
+                    }
+                }
+
+                if (flag10)
+                {
+                    int num48 = num5;
+                    int num49 = num6 + 1;
+                    Main.tile[num48, num49].TileType = (ushort)ModContent.TileType<TropicalVines>();
+
+                    Tile t = Main.tile[num48, num49];
+                    t.HasTile = true;
+                    WorldGen.SquareTileFrame(num48, num49);
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendTileSquare(-1, num48, num49, 3);
+                    }
+                }
+            }
+            #endregion tropical vines
         }
         #region more fallen stars
         if (!Main.dayTime && Main.player[Main.myPlayer].HasBuff(ModContent.BuffType<Buffs.AdvancedBuffs.AdvStarbright>()) || Main.player[Main.myPlayer].HasBuff(ModContent.BuffType<Buffs.Starbright>()))

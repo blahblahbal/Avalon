@@ -6,6 +6,7 @@ namespace Avalon.Data.Sets
         public const short StaminaPotions = 49;
         public const short VanityBags = 625;
         public const short Tomes = 665;
+        public const short StaminaScrolls = 675;
         public const short Contagion = 10490;
         public const short Shards = 10495;
         public const short CraftedTomeMats = 10497;

@@ -178,7 +178,7 @@ Mods: {
 			Generic_11: "{0} got shipped to Timbuktu"
 			Generic_12: "{0} isn't in Kansas anymore"
 			Generic_13: "{0} experienced a skill issue"
-			Generic_14: "{0}'s keyboard was messed up"
+			Generic_14: "{0}'s keyboard was screwed up"
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Space_1: "{0} broke the Warp 10 threshold."
@@ -2415,6 +2415,11 @@ Mods: {
 			TomeForge: {
 				DisplayName: Tome Forge
 				Tooltip: ""
+			}
+
+			BlankScroll: {
+				DisplayName: Blank Scroll
+				Tooltip: Used to craft stamina scrolls
 			}
 
 			FlightTimeScroll: {
@@ -7990,6 +7995,31 @@ Mods: {
 				DisplayName: Phantasm Trophy
 				Tooltip: ""
 			}
+
+			LoamBlock: {
+				DisplayName: Loam Block
+				Tooltip: ""
+			}
+
+			TuhrtlBrick: {
+				DisplayName: Tuhrtl Brick
+				Tooltip: ""
+			}
+
+			TuhrtlBrickWall: {
+				DisplayName: Tuhrtl Brick Wall
+				Tooltip: ""
+			}
+
+			TropicalShroomCap: {
+				DisplayName: Tropical Shroom Cap
+				Tooltip: ""
+			}
+
+			TropicsLily: {
+				DisplayName: Tropics Lily
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9029,6 +9059,8 @@ Mods: {
 			SulphurOre.MapEntry: Sulphur
 			TroxiniumOre.MapEntry: Troxinium
 			ZincOre.MapEntry: Zinc
+			TropicalSapling.MapEntry: Tropical Sapling
+			TropicalShortGrass.MapEntry1: Tropical Shroom Cap
 		}
 
 		Prefixes: {

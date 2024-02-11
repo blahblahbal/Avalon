@@ -3,6 +3,9 @@ using Avalon.WorldGeneration.Enums;
 using Avalon.WorldGeneration.Passes;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Generation;
+using Terraria.ID;
+using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -44,6 +47,110 @@ public class GenSystem : ModSystem
             if (index != -1)
             {
                 tasks[index] = new IckyAltars();
+            }
+        }
+
+        if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
+        {
+            int jungleIndex = tasks.FindIndex(i => i.Name.Equals("Wet Jungle"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
+            }
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Mud Caves To Grass"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Loam Caves To Grass", new WorldGenLegacyMethod(Tropics.JunglesGrassTask));
+                tasks.Insert(jungleIndex, new PassLegacy("Loam", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration configuration)
+                {
+                    int tile = ModContent.TileType<Tiles.Tropics.Loam>();
+                    for (int i = 0; i < Main.maxTilesX; i++)
+                    {
+                        for (int j = 0; j < Main.maxTilesY; j++)
+                        {
+                            if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Mud)
+                            {
+                                Main.tile[i, j].TileType = (ushort)tile;
+                            }
+                        }
+                    }
+                })));
+            }
+
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Hives"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
+            }
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Muds Walls In Jungle"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Loam Walls in Tropics", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration passConfig)
+                {
+                    progress.Set(1.0);
+                    int num171 = 0;
+                    int num172 = 0;
+                    bool flag4 = false;
+                    for (int num173 = 5; num173 < Main.maxTilesX - 5; num173++)
+                    {
+                        for (int num174 = 0; (double)num174 < Main.worldSurface + 20.0; num174++)
+                        {
+                            if (Main.tile[num173, num174].HasTile && Main.tile[num173, num174].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+                            {
+                                num171 = num173;
+                                flag4 = true;
+                                break;
+                            }
+                        }
+
+                        if (flag4)
+                            break;
+                    }
+
+                    flag4 = false;
+                    for (int num175 = Main.maxTilesX - 5; num175 > 5; num175--)
+                    {
+                        for (int num176 = 0; (double)num176 < Main.worldSurface + 20.0; num176++)
+                        {
+                            if (Main.tile[num175, num176].HasTile && Main.tile[num175, num176].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+                            {
+                                num172 = num175;
+                                flag4 = true;
+                                break;
+                            }
+                        }
+
+                        if (flag4)
+                            break;
+                    }
+
+                    GenVars.jungleMinX = num171;
+                    GenVars.jungleMaxX = num172;
+                    for (int num177 = num171; num177 <= num172; num177++)
+                    {
+                        for (int num178 = 0; (double)num178 < Main.worldSurface + 20.0; num178++)
+                        {
+                            if (((num177 >= num171 + 2 && num177 <= num172 - 2) || !WorldGen.genRand.NextBool(2)) && ((num177 >= num171 + 3 && num177 <= num172 - 3) || !WorldGen.genRand.NextBool(3)) && (Main.tile[num177, num178].WallType == 2 || Main.tile[num177, num178].WallType == 59))
+                                Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.TropicalMudWall>();
+                        }
+                    }
+                }));
+            }
+
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Temple"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Re-solidify Tuhrtl Brick", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask));
+            }
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Glowing Mushrooms and Jungle Plants"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Glowing Mushrooms and Tropics Plants", new WorldGenLegacyMethod(Tropics.GlowingMushroomsandJunglePlantsTask));
+            }
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Plants"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Tropics Plants", new WorldGenLegacyMethod(Tropics.JungleBushesTask));
             }
         }
 
@@ -125,7 +232,12 @@ public class GenSystem : ModSystem
             {
                 tasks.Insert(index + 2, new ContagionVines("Contagion Vines", 25f));
             }
-            
+            if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
+            {
+                currentPass = new TropicsVines();
+                tasks.Insert(index + 3, currentPass);
+                totalWeight += currentPass.Weight;
+            }
             //currentPass = new CrystalMinesPass();
             //tasks.Insert(index + 4, currentPass);
             //totalWeight += currentPass.Weight;

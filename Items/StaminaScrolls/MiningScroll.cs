@@ -1,15 +1,20 @@
 using Avalon.Common;
 using Avalon.Common.Players;
+using Avalon.Items.Consumables;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Consumables;
+namespace Avalon.Items.StaminaScrolls;
 
-class SprintScroll : ModItem
+class MiningScroll : ModItem
 {
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.StaminaScrolls;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -24,9 +29,9 @@ class SprintScroll : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
+            .AddIngredient(ModContent.ItemType<Material.BlankScroll>())
             .AddIngredient(ItemID.Leather, 2)
-            .AddIngredient(ItemID.SwiftnessPotion, 2)
-            .AddIngredient(ModContent.ItemType<StaminaCrystal>())
+            .AddIngredient(ItemID.MiningPotion, 2)
             .AddTile(TileID.Loom)
             .Register();
     }
@@ -34,7 +39,7 @@ class SprintScroll : ModItem
     {
         if (!hideVisual)
         {
-            player.GetModPlayer<AvalonStaminaPlayer>().SprintUnlocked = true;
+            player.GetModPlayer<AvalonStaminaPlayer>().MiningSpeedUnlocked = true;
         }
     }
 }

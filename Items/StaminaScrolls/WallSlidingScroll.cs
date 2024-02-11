@@ -1,33 +1,37 @@
 using Avalon.Common;
 using Avalon.Common.Players;
+using Avalon.Items.Consumables;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Consumables;
+namespace Avalon.Items.StaminaScrolls;
 
-class FlightTimeScroll : ModItem
+class WallSlidingScroll : ModItem
 {
+    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+    {
+        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.StaminaScrolls;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.accessory = true;
         Item.width = dims.Width;
         Item.rare = ItemRarityID.Green;
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.UseSound = new SoundStyle("Avalon/Sounds/Item/Scroll");
+        Item.accessory = true;
         Item.height = dims.Height;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
     }
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ItemID.Leather, 2)
-            .AddIngredient(ItemID.Feather, 20)
-            .AddIngredient(ItemID.SoulofFlight, 15)
-            .AddIngredient(ModContent.ItemType<StaminaCrystal>())
+            .AddIngredient(ModContent.ItemType<Material.BlankScroll>())
+            .AddIngredient(ItemID.Rope, 20)
+            .AddIngredient(ItemID.Cobweb, 30)
             .AddTile(TileID.Loom)
             .Register();
     }
@@ -35,7 +39,7 @@ class FlightTimeScroll : ModItem
     {
         if (!hideVisual)
         {
-            player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreUnlocked = true;
+            player.GetModPlayer<AvalonStaminaPlayer>().WallSlidingUnlocked = true;
         }
     }
 }

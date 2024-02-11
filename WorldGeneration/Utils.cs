@@ -1,5 +1,6 @@
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Tropics;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -109,8 +110,8 @@ public class Utils
         {
             Tile tile = Framing.GetTileSafely(positionX, i);
             if ((tile.TileType == TileID.Dirt || tile.TileType == TileID.ClayBlock || tile.TileType == TileID.Stone ||
-                tile.TileType == TileID.Sand || tile.TileType == ModContent.TileType<Snotsand>()
-                /*|| tile.TileType == ModContent.TileType<Loam>() */|| tile.TileType == TileID.Mud ||
+                tile.TileType == TileID.Sand || tile.TileType == ModContent.TileType<Snotsand>() ||
+                tile.TileType == ModContent.TileType<Loam>() || tile.TileType == TileID.Mud ||
                 tile.TileType == TileID.SnowBlock || tile.TileType == TileID.IceBlock) && tile.HasTile)
             {
                 return i - 3;

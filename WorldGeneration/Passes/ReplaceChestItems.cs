@@ -1,5 +1,6 @@
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Consumables;
+using Avalon.Items.Material;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Terraria;
 using Terraria.ID;
@@ -23,6 +24,7 @@ public class ReplaceChestItems : GenPass
             {
                 foreach (Item i in c.item)
                 {
+                    #region ice chests (glacier staff, frozen lyre)
                     if (i != null && (i.type == ItemID.IceBlade || i.type == ItemID.SnowballCannon ||
                         i.type == ItemID.IceBoomerang || i.type == ItemID.IceSkates ||
                         i.type == ItemID.BlizzardinaBottle || i.type == ItemID.FlurryBoots) &&
@@ -39,19 +41,8 @@ public class ReplaceChestItems : GenPass
                         i.SetDefaults(ModContent.ItemType<FrozenLyre>());
                         i.Prefix(-1);
                     }
-                    //if (i != null && ModContent.GetInstance<AvalonWorld>().WorldEvil == Enums.WorldEvil.Contagion)
-                    //{
-                    //    if (i.type == ItemID.ScourgeoftheCorruptor)
-                    //    {
-                    //        i.SetDefaults(ModContent.ItemType<VirulentScythe>());
-                    //        i.Prefix(-1);
-                    //    }
-                    //}
-                    //if (i != null && i.type == ItemID.EnchantedBoomerang)
-                    //{
-                    //    i.SetDefaults(ModContent.ItemType<EnchantedBar>());
-                    //    i.stack = WorldGen.genRand.Next(35, 49);
-                    //}
+                    #endregion
+
                     //if (WorldBiomeManager.WorldJungle == "Avalon/TropicsAlternateBiome")
                     //{
                     //    if (i?.type == ItemID.Boomstick)
@@ -60,6 +51,8 @@ public class ReplaceChestItems : GenPass
                     //        i.Prefix(-1);
                     //    }
                     //}
+
+                    #region jungle chests (flower of the jungle, band of stamina)
                     if (i?.type == ItemID.StaffofRegrowth || i?.type == ItemID.FeralClaws || i?.type == ItemID.AnkletoftheWind || i?.type == ItemID.Boomstick)
                     {
                         if (WorldGen.genRand.NextBool(5))
@@ -87,7 +80,9 @@ public class ReplaceChestItems : GenPass
                             i.Prefix(-1);
                         }
                     }
+                    #endregion
 
+                    #region dungenon chests (desert horn)
                     if (Main.tile[c.x, c.y].TileFrameX >= 72 && Main.tile[c.x, c.y].TileFrameX < 108 && Main.tile[c.x, c.y].TileType == 21)
                     {
                         if (i?.type == ItemID.SuspiciousLookingEye)
@@ -95,6 +90,18 @@ public class ReplaceChestItems : GenPass
                             i.SetDefaults(ModContent.ItemType<DesertHorn>());
                         }
                     }
+                    #endregion
+
+                    #region surface chests (blank scroll)
+                    if (Main.tile[c.x, c.y].TileFrameX < 36 && Main.tile[c.x, c.y].TileType == 21)
+                    {
+                        if (i?.type == ItemID.Glowstick || i?.type == ItemID.ThrowingKnife)
+                        {
+                            i.stack = 1;
+                            i.SetDefaults(ModContent.ItemType<BlankScroll>());
+                        }
+                    }
+                    #endregion
                 }
             }
         }
