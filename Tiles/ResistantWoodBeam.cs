@@ -9,7 +9,7 @@ public class ResistantWoodBeam : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(235, 166, 135));
+        AddMapEntry(new Color(41, 41, 41));
         //ItemDrop = ModContent.ItemType<Items.Placeable.Beam.ResistantWoodBeam>();
         TileID.Sets.IsBeam[Type] = true;
         DustType = ModContent.DustType<ResistantWoodDust>();

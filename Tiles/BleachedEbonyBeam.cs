@@ -9,7 +9,7 @@ public class BleachedEbonyBeam : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(235, 166, 135));
+        AddMapEntry(new Color(175, 175, 175));
         //ItemDrop = ModContent.ItemType<Items.Placeable.Beam.BleachedEbonyBeam>();
         TileID.Sets.IsBeam[Type] = true;
         DustType = ModContent.DustType<BleachedEbonyDust>();

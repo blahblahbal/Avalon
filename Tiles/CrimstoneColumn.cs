@@ -9,7 +9,7 @@ public class CrimstoneColumn : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(188, 40, 40));
+        AddMapEntry(new Color(90, 38, 38));
         //ItemDrop = ModContent.ItemType<Items.Placeable.Beam.CrimstoneColumn>();
         HitSound = SoundID.Tink;
         TileID.Sets.IsBeam[Type] = true;
