@@ -29,7 +29,7 @@ internal class Tropics : ModHook
     }
 
 
-    public static void ILGenPassDirtWallBackgrounds(ILContext il)
+    /*public static void ILGenPassDirtWallBackgrounds(ILContext il)
     {
         Utilities.AddAlternativeIdChecks(il, WallID.JungleUnsafe, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.WallType<Walls.TropicalGrassWall>())[id]);
     }
@@ -139,5 +139,5 @@ internal class Tropics : ModHook
     private static void ReplaceIDIfTropics(ILContext il, ushort val1, ushort val2)
     {
         //Utilities.ReplaceIDIfMatch(il, val1, val2, typeof(AvalonWorld).GetField("jungleMenuSelection", BindingFlags.Public | BindingFlags.Static), (int)AvalonWorld.JungleVariant.tropics);
-    }
+    }*/
 }
