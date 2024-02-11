@@ -9,7 +9,7 @@ public class BacciliteBrick : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(109, 149, 91));
+        AddMapEntry(new Color(96, 124, 60));
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileBlockLight[Type] = true;
