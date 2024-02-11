@@ -27,7 +27,10 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
 
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
-            UseStyles.gunStyle(player, 0.03f, 5f, 1.5f);
+            if (ModContent.GetInstance<Common.AvalonClientConfig>().AdditionalScreenshakes)
+            {
+                UseStyles.gunStyle(player, 0.03f, 5f, 1.5f);
+            }
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
