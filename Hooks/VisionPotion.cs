@@ -35,7 +35,7 @@ namespace Avalon.Hooks
                         {
                             diff = 1;
                         }
-                        if (!Main.gamePaused && Main.rand.NextBool((int)(diff * 5 * 15)))
+                        if (!Main.gamePaused && Main.rand.NextBool((int)(300 + diff * 75)))
                         {
                             int num28 = Dust.NewDust(new Vector2(j * 16, i * 16), 16, 16, ModContent.DustType<Dusts.VisionPotion>(), 0f, 0f, (int)(brightness * 255) * 2, default, 0.1f);
                             Main.dust[num28].fadeIn = 1f;
