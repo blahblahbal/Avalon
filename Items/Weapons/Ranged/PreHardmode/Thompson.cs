@@ -11,7 +11,7 @@ class Thompson : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 9;
+        Item.damage = 10;
         Item.autoReuse = true;
         Item.shootSpeed = 10f;
         Item.useAmmo = AmmoID.Bullet;
@@ -19,13 +19,13 @@ class Thompson : ModItem
         Item.rare = ItemRarityID.Green;
         Item.noMelee = true;
         Item.width = dims.Width;
-        Item.useTime = 5;
+        Item.useTime = 10;
         Item.knockBack = 1f;
         Item.shoot = ProjectileID.Bullet;
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = Item.sellPrice(0, 2);
-        Item.reuseDelay = 5;
-        Item.useAnimation = 5;
+        //Item.reuseDelay = 5;
+        Item.useAnimation = 10;
         Item.height = dims.Height;
         //item.UseSound = SoundID.Item11;
     }
