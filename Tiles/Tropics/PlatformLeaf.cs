@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -29,6 +30,8 @@ public class PlatformLeaf : ModTile
         TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16, 18 };
         TileObjectData.newTile.AnchorAlternateTiles = new int[] { TileID.WoodenSpikes };
         TileObjectData.newTile.LavaDeath = true;
+        TileObjectData.newTile.AnchorTop = AnchorData.Empty;
+        TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide, 1, 1);
         TileObjectData.addTile(Type);
         DustType = ModContent.DustType<Dusts.TropicalDust>();
         AddMapEntry(new Color(82, 123, 35));
