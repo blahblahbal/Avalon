@@ -1955,7 +1955,21 @@ public class AvalonWorld : ModSystem
         bool data = uiItem.Data.TryGetHeaderData(ModContent.GetInstance<AvalonWorld>(), out var _data);
         UIElement WorldIcon = (UIElement)typeof(UIWorldListItem).GetField("_worldIcon", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(uiItem);
         WorldFileData Data = (WorldFileData)typeof(AWorldListItem).GetField("_data", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(uiItem);
-        WorldIcon.RemoveAllChildren();
+        WorldIcon.RemoveAllChildren();  // this removes the champion border, but overlays will draw every frame without removing previous frames without it. need better solution.
+        if (Data.DefeatedMoonlord)
+        {
+            UIElement worldIcon = WorldIcon;
+            UIImage element = new UIImage(Main.Assets.Request<Texture2D>("Images/UI/IconCompletion"))
+            {
+                HAlign = 0.5f,
+                VAlign = 0.5f,
+                Top = new StyleDimension(-10f, 0f),
+                Left = new StyleDimension(-3f, 0f),
+                IgnoresMouseInteraction = true
+            };
+
+            worldIcon.Append(element);
+        }
         if (data)
         {
             if (Data.DefeatedMoonlord)
@@ -2098,14 +2112,14 @@ public class AvalonWorld : ModSystem
             }
             #endregion
 
-            if (!Data.ZenithWorld && !Data.NotTheBees)
+            if (!Data.ZenithWorld && !Data.NotTheBees && !Data.DefeatedMoonlord)
             {
                 if (_data.GetByte("Avalon:WorldJungle") == (byte)WorldJungle.Jungle)
                 {
                     UIElement worldIcon = WorldIcon;
                     UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconJungleOverlay"))
                     {
-                        Top = new StyleDimension(0f, 0f),
+                        Top = new StyleDimension(-4f, 0f),
                         Left = new StyleDimension(0f, 0f),
                         IgnoresMouseInteraction = true
                     };
@@ -2116,10 +2130,37 @@ public class AvalonWorld : ModSystem
                     UIElement worldIcon = WorldIcon;
                     UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconTropicsOverlay"))
                     {
-                        Top = new StyleDimension(0f, 0f),
+                        Top = new StyleDimension(-4f, 0f),
                         Left = new StyleDimension(0f, 0f),
                         IgnoresMouseInteraction = true
                     };
+                    worldIcon.Append(element);
+                }
+            }
+            if (!Data.ZenithWorld && !Data.NotTheBees && Data.DefeatedMoonlord)
+            {
+                if (_data.GetByte("Avalon:WorldJungle") == (byte)WorldJungle.Jungle)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconJungleOverlay_Champion"))
+                    {
+                        Top = new StyleDimension(-10f, 0f),
+                        Left = new StyleDimension(-3f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.RemoveChild(element);
+                    worldIcon.Append(element);
+                }
+                if (_data.GetByte("Avalon:WorldJungle") == (byte)WorldJungle.Tropics)
+                {
+                    UIElement worldIcon = WorldIcon;
+                    UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconTropicsOverlay_Champion"))
+                    {
+                        Top = new StyleDimension(-10f, 0f),
+                        Left = new StyleDimension(-3f, 0f),
+                        IgnoresMouseInteraction = true
+                    };
+                    worldIcon.RemoveChild(element);
                     worldIcon.Append(element);
                 }
             }
