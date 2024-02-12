@@ -73,7 +73,7 @@ class WorldgenHelper : ModItem
         }
         for (int i = x - 2; i <= x + 2; i++)
         {
-            for (int j = y; j < y + 6; j++)
+            for (int j = y - 3; j < y + 6; j++)
             {
                 if (i == x - 2 || i == x + 2)
                 {

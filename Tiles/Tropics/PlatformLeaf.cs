@@ -86,7 +86,7 @@ public class PlatformLeaf : ModTile
                 }
             }
             SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = 0.2f };
-            SoundEngine.PlaySound(s, new Vector2(xpos + 1, ypos));
+            SoundEngine.PlaySound(s, new Vector2((xpos + 1) * 16, ypos * 16));
             WorldGen.TreeGrowFX(xpos + 1, ypos, 4, ModContent.GoreType<TropicsTreeLeaf>(), true);
         }
     }
