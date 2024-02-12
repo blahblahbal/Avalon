@@ -585,6 +585,8 @@ public class AvalonPlayer : ModPlayer
                     Main.tile[i, j].TileFrameY += 74;
                 }
             }
+            SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.2f };
+            SoundEngine.PlaySound(s, new Vector2((tileCoords.X + 1) * 16, tileCoords.Y * 16));
             WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<TropicsTreeLeaf>(), true);
         }
         #endregion

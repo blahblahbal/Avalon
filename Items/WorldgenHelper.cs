@@ -52,9 +52,9 @@ class WorldgenHelper : ModItem
             //WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
 
 
-            int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
-            Main.item[rift].velocity *= 0f;
-            Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
+            //int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
+            //Main.item[rift].velocity *= 0f;
+            //Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
         }
         return false;
     }
@@ -66,14 +66,16 @@ class WorldgenHelper : ModItem
         ushort spike = (ushort)ModContent.TileType<WoodenSpikes>();
         for (int i = x - 2; i <= x + 2; i++)
         {
-            for (int j = y; j < y + 6; j++)
+            for (int j = y - 3; j < y + 6; j++)
             {
                 WorldGen.KillTile(i, j, noItem: true);
+                Tile t = Main.tile[i, j];
+                t.Slope = SlopeType.Solid;
             }
         }
         for (int i = x - 2; i <= x + 2; i++)
         {
-            for (int j = y - 3; j < y + 6; j++)
+            for (int j = y; j < y + 6; j++)
             {
                 if (i == x - 2 || i == x + 2)
                 {
@@ -95,7 +97,7 @@ class WorldgenHelper : ModItem
                 
                 if (j >= y + 4)
                 {
-                    if (j == y + 4)
+                    if (j == y + 4 && i <= x + 1 && i >= x - 1)
                     {
                         Tile t = Main.tile[i, j];
                         t.TileType = spike;
@@ -146,11 +148,11 @@ class WorldgenHelper : ModItem
                 Main.tile[x - 1, y + k].TileType = type;
                 Main.tile[x, y + k].Active(true);
                 Main.tile[x, y + k].TileFrameY = frameY;
-                Main.tile[x, y + k].TileFrameX = (short)(num + 24);
+                Main.tile[x, y + k].TileFrameX = (short)(num + 26);
                 Main.tile[x, y + k].TileType = type;
                 Main.tile[x + 1, y + k].Active(true);
                 Main.tile[x + 1, y + k].TileFrameY = frameY;
-                Main.tile[x + 1, y + k].TileFrameX = (short)(num + 48);
+                Main.tile[x + 1, y + k].TileFrameX = (short)(num + 52);
                 Main.tile[x + 1, y + k].TileType = type;
             }
         }

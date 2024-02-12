@@ -120,6 +120,7 @@ public class AvalonWorld : ModSystem
     {
         tag["Avalon:RhodiumOre"] = (byte?)RhodiumOre;
         tag["Avalon:WorldEvil"] = (byte)WorldEvil;
+        tag["Avalon:WorldJungle"] = (byte)WorldJungle;
         AvalonConfig config = ModContent.GetInstance<AvalonConfig>();
         Dictionary<string, AvalonConfig.WorldDataValues> tempDict = config.GetWorldData();
         AvalonConfig.WorldDataValues worldData;
@@ -131,6 +132,15 @@ public class AvalonWorld : ModSystem
         else
         {
             worldData.contagion = false;
+        }
+
+        if (WorldJungle == WorldJungle.Tropics)
+        {
+            worldData.tropics = true;
+        }
+        else
+        {
+            worldData.tropics = false;
         }
 
         string path = Path.ChangeExtension(Main.worldPathName, ".twld");
@@ -1948,6 +1958,21 @@ public class AvalonWorld : ModSystem
         WorldIcon.RemoveAllChildren();
         if (data)
         {
+            if (Data.DefeatedMoonlord)
+            {
+                UIElement worldIcon = WorldIcon;
+                UIImage element = new UIImage(Main.Assets.Request<Texture2D>("Images/UI/IconCompletion"))
+                {
+                    HAlign = 0.5f,
+                    VAlign = 0.5f,
+                    Top = new StyleDimension(-10f, 0f),
+                    Left = new StyleDimension(-3f, 0f),
+                    IgnoresMouseInteraction = true
+                };
+
+                worldIcon.Append(element);
+            }
+
             #region RegularSeedIcon
             if (_data.GetByte("Avalon:WorldEvil") == (byte)WorldEvil.Contagion && !Data.RemixWorld && !Data.DrunkWorld && !Data.Anniversary && !Data.DontStarve && !Data.ForTheWorthy && !Data.ZenithWorld && !Data.NotTheBees && !Data.NoTrapsWorld)
             {

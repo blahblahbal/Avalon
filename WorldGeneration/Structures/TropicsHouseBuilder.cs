@@ -1,10 +1,16 @@
 using Avalon.Common;
+using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Furniture;
+using Avalon.Tiles.Furniture.Coughwood;
+using Avalon.Tiles.Tropics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Terraria;
 using Terraria.GameContent.Biomes.CaveHouse;
 using Terraria.GameContent.Generation;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -38,10 +44,45 @@ public class TropicsHouseBuilder : HouseBuilder
 }
 public class TropicsCaveHouseHook : ModHook
 {
+    private static readonly bool[] BlacklistedTiles = TileID.Sets.Factory.CreateBoolSet(true,
+        TileID.Hive, TileID.BlueDungeonBrick, TileID.GreenDungeonBrick, TileID.PinkDungeonBrick, TileID.LihzahrdBrick,
+        TileID.Crimstone, TileID.Ebonsand, TileID.Ebonstone, TileID.SandstoneBrick, TileID.Containers, TileID.Containers2,
+        ModContent.TileType<TuhrtlBrick>(), ModContent.TileType<Tiles.Tropics.Nest>(), ModContent.TileType<CoughwoodChest>(),
+        ModContent.TileType<HellfireChest>(), ModContent.TileType<Chunkstone>(), ModContent.TileType<Snotsand>());
+
+    private static readonly bool[] BeelistedTiles = TileID.Sets.Factory.CreateBoolSet(true,
+        TileID.BlueDungeonBrick, TileID.GreenDungeonBrick, TileID.PinkDungeonBrick, TileID.LihzahrdBrick,
+        TileID.Crimstone, TileID.Ebonsand, TileID.Ebonstone, TileID.SandstoneBrick, TileID.Containers, TileID.Containers2,
+        ModContent.TileType<TuhrtlBrick>(), ModContent.TileType<Tiles.Tropics.Nest>(), ModContent.TileType<CoughwoodChest>(),
+        ModContent.TileType<HellfireChest>(), ModContent.TileType<Chunkstone>(), ModContent.TileType<Snotsand>());
+
     protected override void Apply()
     {
         On_HouseUtils.CreateBuilder += On_HouseUtils_CreateBuilder;
+        On_HouseUtils.AreRoomsValid += On_HouseUtils_AreRoomsValid;
     }
+
+    private bool On_HouseUtils_AreRoomsValid(On_HouseUtils.orig_AreRoomsValid orig, IEnumerable<Rectangle> rooms, StructureMap structures, HouseType style)
+    {
+        foreach (Rectangle room in rooms)
+        {
+            if (style != HouseType.Granite && WorldUtils.Find(new Point(room.X - 2, room.Y - 2), Searches.Chain(new Searches.Rectangle(room.Width + 4, room.Height + 4).RequireAll(mode: false), new Conditions.HasLava()), out var _))
+                return false;
+
+            if (WorldGen.notTheBees)
+            {
+                if (!structures.CanPlace(room, BeelistedTiles, 5))
+                    return false;
+            }
+            else if (!structures.CanPlace(room, BlacklistedTiles, 5))
+            {
+                return false;
+            }
+        }
+
+        return orig.Invoke(rooms, structures, style);
+    }
+
     private static HouseType GetHouseType(IEnumerable<Rectangle> rooms)
     {
         Dictionary<ushort, int> dictionary = new Dictionary<ushort, int>();

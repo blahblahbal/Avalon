@@ -724,7 +724,7 @@ public class AvalonGlobalNPC : GlobalNPC
                     }
                 }
                 SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.2f };
-                SoundEngine.PlaySound(s, new Vector2((xpos + 1) * 16, ypos * 16));
+                SoundEngine.PlaySound(s, new Vector2((tile.X + 1) * 16, tile.Y * 16));
                 WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<TropicsTreeLeaf>(), true);
             }
         }

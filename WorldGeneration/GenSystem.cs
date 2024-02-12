@@ -140,8 +140,13 @@ public class GenSystem : ModSystem
                     {
                         for (int num178 = 0; (double)num178 < Main.maxTilesY - 200; num178++)
                         {
-                            if (((num177 >= num171 + 2 && num177 <= num172 - 2) || !WorldGen.genRand.NextBool(2)) && ((num177 >= num171 + 3 && num177 <= num172 - 3) || !WorldGen.genRand.NextBool(3)) && (Main.tile[num177, num178].WallType == 2 || Main.tile[num177, num178].WallType == 59))
+                            if (((num177 >= num171 + 2 && num177 <= num172 - 2) || !WorldGen.genRand.NextBool(2)) &&
+                                ((num177 >= num171 + 3 && num177 <= num172 - 3) || !WorldGen.genRand.NextBool(3)) &&
+                                (Main.tile[num177, num178].WallType == WallID.DirtUnsafe || Main.tile[num177, num178].WallType == WallID.Cave6Unsafe ||
+                                Main.tile[num177, num178].WallType == WallID.MudUnsafe))
+                            {
                                 Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.TropicalMudWall>();
+                            }
                         }
                     }
                 }));
@@ -230,6 +235,13 @@ public class GenSystem : ModSystem
             currentPass = new ReplacePass("Replacing any improper ores", 25f);
             tasks.Insert(underworld + 1, currentPass);
             totalWeight += currentPass.Weight;
+
+            if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
+            {
+                currentPass = new PassLegacy("Tropics Thing", new WorldGenLegacyMethod(Tropics.LoamWallTask));
+                tasks.Insert(index + 2, currentPass);
+                totalWeight += currentPass.Weight;
+            }
         }
 
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");
@@ -246,6 +258,10 @@ public class GenSystem : ModSystem
             {
                 currentPass = new TropicsVines();
                 tasks.Insert(index + 3, currentPass);
+                totalWeight += currentPass.Weight;
+
+                currentPass = new PassLegacy("Tropics Traps", new WorldGenLegacyMethod(Tropics.PlatformLeafTrapTask));
+                tasks.Insert(index + 4, currentPass);
                 totalWeight += currentPass.Weight;
             }
             //currentPass = new CrystalMinesPass();

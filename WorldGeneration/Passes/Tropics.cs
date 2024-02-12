@@ -6,15 +6,58 @@ using System.Reflection;
 using Terraria.ID;
 using System;
 using Avalon.Common;
+using Avalon.Items;
+using Microsoft.Xna.Framework;
 
 namespace Avalon.WorldGeneration.Passes;
 
 internal class Tropics
 {
+    // delete
+    public static void LoamWallTask(GenerationProgress progress, GameConfiguration config)
+    {
+        for (int num177 = GenVars.jungleMinX; num177 <= GenVars.jungleMaxX; num177++)
+        {
+            for (int num178 = 0; (double)num178 < Main.maxTilesY - 200; num178++)
+            {
+                if (num177 >= GenVars.jungleMinX + 50 && num177 <= GenVars.jungleMaxX - 50 && num178 < Main.rockLayer)
+                {
+                    if (Main.tile[num177, num178].HasTile)
+                    {
+                        if (Main.tile[num177, num178].TileType == TileID.Grass)
+                        {
+                            Main.tile[num177, num178].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>();
+                        }
+                        if (Main.tile[num177, num178].TileType == TileID.Dirt)
+                        {
+                            Main.tile[num177, num178].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Loam>();
+                        }
+                    }
+                }
+                //if (((num177 >= GenVars.jungleMinX + 2 && num177 <= GenVars.jungleMaxX - 2) || !WorldGen.genRand.NextBool(2)) && ((num177 >= GenVars.jungleMinX + 3 && num177 <= GenVars.jungleMaxX - 3) || !WorldGen.genRand.NextBool(3)) && (Main.tile[num177, num178].WallType == 2 || Main.tile[num177, num178].WallType == 59))
+                //    Main.tile[num177, num178].WallType = (ushort) ModContent.WallType<Walls.TropicalMudWall>();
+}
+        }
+    }
+    public static void PlatformLeafTrapTask(GenerationProgress progress, GameConfiguration config)
+    {
+        progress.Message = "Placing platform leaf traps";
+        for (int i = 20; i < Main.maxTilesX - 20; i++)
+        {
+            for (int j = 150; j < Main.maxTilesY - 230; j++)
+            {
+                if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && Main.tile[i, j].HasTile &&
+                    !Main.tile[i, j - 1].HasTile && !Main.tile[i - 1, j - 1].HasTile && !Main.tile[i + 1, j - 1].HasTile)
+                {
+                    if (WorldGen.genRand.NextBool(10)) WorldgenHelper.CreateLeafTrap(i, j);
+                }
+            }
+        }
+    }
     public static void TuhrtlOutpostTask(GenerationProgress progress, GameConfiguration config)
     {
         int num562 = 0;
-        progress.Message = Lang.gen[70].Value;
+        progress.Message = "Generating outpost";
         long num563 = 0L;
         double num564 = 0.25;
         int y21;
@@ -137,11 +180,11 @@ internal class Tropics
             int num406 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 250);
             int num407 = WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.85));
             //((AvalonWorld.dungeonSide >= 0) ? WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.4)) : WorldGen.genRand.Next((int)(Main.maxTilesX * 0.6), (int)(Main.maxTilesX * 0.85)));
-            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() && GenVars.structures.CanPlace(new(num407 - 33, num406 - 49, 66, 87)))
+            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() && GenVars.structures.CanPlace(new Rectangle(num407 - 100, num406 - 100, 100, 100)))
             {
                 //flag30 = false;
                 Structures.Nest.CreateWaspNest(num407, num406);
-                GenVars.structures.AddProtectedStructure(new(num407 - 33, num406 - 49, 66, 87));
+                GenVars.structures.AddProtectedStructure(new Rectangle(num407 - 100, num406 - 100, 100, 100)); // -50, -21, 87, 66
                 amount--;
             }
         }

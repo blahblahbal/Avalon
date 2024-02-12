@@ -28,6 +28,7 @@ public class AvalonConfig : ModConfig
     public struct WorldDataValues
     {
         public bool contagion;
+        public bool tropics;
     }
 
     // Key value is each twld path
