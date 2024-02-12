@@ -11,7 +11,7 @@ ItemName: {
 	PurpleMucos: Purple Mucus
 	CoinGun: Spend Shot
 	HighTestFishingLine: High Tensile Fishing Line
-	Volcano: Volcanic Greatsword
+	FieryGreatsword: Volcanic Greatsword
 	CrimsonPlanterBox: Bloodberry Planter Box
 	HandOfCreation: Hand of Creation
 }
@@ -32,6 +32,23 @@ Mods: {
 			CloudGloveBuilderToggle: {
 				OnText: Cloud Glove On
 				OffText: Cloud Glove Off
+			}
+		}
+
+		JungleSelection: {
+			Jungle: {
+				Title: Jungle
+				Description: A flourishing place full of dense trees and lots of bees.
+			}
+
+			Random: {
+				Title: Random
+				Description: Let nature decide whether your world will have jungle or tropics.
+			}
+
+			Tropics: {
+				Title: Tropics
+				Description: A tropical forest which houses lots of wasps.
 			}
 		}
 
@@ -8020,6 +8037,35 @@ Mods: {
 				DisplayName: Tropics Lily
 				Tooltip: ""
 			}
+
+			AnkletofAcceleration: {
+				DisplayName: Anklet of Acceleration
+				Tooltip: Increases movement acceleration and turn speed
+			}
+
+			RubberGloves: {
+				DisplayName: Rubber Gloves
+				Tooltip:
+					'''
+					Decreases melee speed by 12%
+					Enemies have less immune time
+					'''
+			}
+
+			Thompson: {
+				DisplayName: Thompson
+				Tooltip: ""
+			}
+
+			Root: {
+				DisplayName: Root
+				Tooltip: ""
+			}
+
+			PlatformLeaf: {
+				DisplayName: Platform Leaf
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8332,6 +8378,9 @@ Mods: {
 			StingerProbe.DisplayName: Stinger Probe
 			HomingRocket.DisplayName: Homing Rocket
 			Phantasm.DisplayName: Phantasm
+			Fly.DisplayName: Fly
+			FlySmall.DisplayName: Fly Small
+			Rafflesia.DisplayName: Rafflesia
 		}
 
 		Buffs: {
@@ -9060,7 +9109,7 @@ Mods: {
 			SulphurOre.MapEntry: Sulphur
 			TroxiniumOre.MapEntry: Troxinium
 			ZincOre.MapEntry: Zinc
-			TropicalSapling.MapEntry: Tropical Sapling
+			TropicalSapling.MapEntry: Sapling
 			TropicalShortGrass.MapEntry1: Tropical Shroom Cap
 		}
 
@@ -9220,6 +9269,16 @@ Mods: {
 			SightCandleBiome: {
 				DisplayName: Sight Candle Biome
 				TownNPCDialogueName: the Sight Candle Biome
+			}
+
+			Tropics: {
+				DisplayName: Tropics
+				TownNPCDialogueName: the Tropics
+			}
+
+			UndergroundTropics: {
+				DisplayName: Underground Tropics
+				TownNPCDialogueName: the Underground Tropics
 			}
 		}
 

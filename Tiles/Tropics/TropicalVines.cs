@@ -1,7 +1,9 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Reflection;
 
 namespace Avalon.Tiles.Tropics;
 
@@ -9,11 +11,14 @@ public class TropicalVines : ModTile
 {
     public override void SetStaticDefaults()
     {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        TileID.Sets.IsVine[Type] = true;
+        TileID.Sets.ReplaceTileBreakDown[Type] = true;
+        TileID.Sets.VineThreads[Type] = true;
+        TileID.Sets.DrawFlipMode[Type] = 1;
         Main.tileCut[Type] = true;
-        Main.tileBlockLight[Type] = true;
         Main.tileLavaDeath[Type] = true;
         Main.tileNoFail[Type] = true;
-        Main.tileNoAttach[Type] = true;
         HitSound = SoundID.Grass;
         DustType = ModContent.DustType<Dusts.TropicalDust>();
         AddMapEntry(new Color(61, 100, 22));
@@ -45,7 +50,14 @@ public class TropicalVines : ModTile
         WorldGen.KillTile(i, j);
         return true;
     }
-
+    public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        if (Main.LightingEveryFrame)
+        {
+            Main.instance.TilesRenderer.CrawlToTopOfVineAndAddSpecialPoint(j, i);
+        }
+        return false;
+    }
     public override void RandomUpdate(int i, int j)
     {
         Tile tileBelow = Framing.GetTileSafely(i, j + 1);

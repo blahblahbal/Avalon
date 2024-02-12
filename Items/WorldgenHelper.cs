@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.CrystalMines;
+using Avalon.Tiles.Tropics;
 using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
 using System;
@@ -41,6 +42,7 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
+            CreateLeafTrap(x, y);
             //Crystals(x, y);
             //World.Biomes.CrystalMines.Place(new Point(x, y));
 
@@ -56,6 +58,104 @@ class WorldgenHelper : ModItem
         }
         return false;
     }
+
+    public static void CreateLeafTrap(int x, int y)
+    {
+        ushort loam = (ushort)ModContent.TileType<Loam>();
+        ushort grass = (ushort)ModContent.TileType<TropicalGrass>();
+        ushort spike = (ushort)ModContent.TileType<WoodenSpikes>();
+        for (int i = x - 2; i <= x + 2; i++)
+        {
+            for (int j = y; j < y + 6; j++)
+            {
+                WorldGen.KillTile(i, j, noItem: true);
+            }
+        }
+        for (int i = x - 2; i <= x + 2; i++)
+        {
+            for (int j = y; j < y + 6; j++)
+            {
+                if (i == x - 2 || i == x + 2)
+                {
+                    if (j == y)
+                    {
+                        Tile t = Main.tile[i, j];
+                        t.TileType = grass;
+                        t.HasTile = true;
+                        WorldGen.SquareTileFrame(i, j);
+                    }
+                    else
+                    {
+                        Tile t = Main.tile[i, j];
+                        t.TileType = loam;
+                        t.HasTile = true;
+                        WorldGen.SquareTileFrame(i, j);
+                    }
+                }
+                
+                if (j >= y + 4)
+                {
+                    if (j == y + 4)
+                    {
+                        Tile t = Main.tile[i, j];
+                        t.TileType = spike;
+                        t.HasTile = true;
+                        WorldGen.SquareTileFrame(i, j);
+                    }
+                    else
+                    {
+                        Tile t = Main.tile[i, j];
+                        t.TileType = loam;
+                        t.HasTile = true;
+                        WorldGen.SquareTileFrame(i, j);
+                    }
+                }
+            }
+        }
+        Place3x4(x, y + 3, (ushort)ModContent.TileType<PlatformLeaf>(), 0);
+    }
+
+    public static void Place3x4(int x, int y, ushort type, int style)
+    {
+        if (x < 5 || x > Main.maxTilesX - 5 || y < 5 || y > Main.maxTilesY - 5)
+            return;
+
+        bool flag = true;
+        for (int i = x - 1; i < x + 2; i++)
+        {
+            for (int j = y - 3; j < y + 1; j++)
+            {
+                if (Main.tile[i, j].HasTile)
+                    flag = false;
+            }
+
+            if (!WorldGen.SolidTile2(i, y + 1))
+                flag = false;
+        }
+
+        if (flag)
+        {
+            int num = 0;
+            for (int k = -3; k <= 0; k++)
+            {
+                short frameY = (short)((3 + k) * 18);
+                Tile t = Main.tile[x - 1, y + k];
+                Main.tile[x - 1, y + k].Active(true);
+                Main.tile[x - 1, y + k].TileFrameY = frameY;
+                Main.tile[x - 1, y + k].TileFrameX = (short)num;
+                Main.tile[x - 1, y + k].TileType = type;
+                Main.tile[x, y + k].Active(true);
+                Main.tile[x, y + k].TileFrameY = frameY;
+                Main.tile[x, y + k].TileFrameX = (short)(num + 24);
+                Main.tile[x, y + k].TileType = type;
+                Main.tile[x + 1, y + k].Active(true);
+                Main.tile[x + 1, y + k].TileFrameY = frameY;
+                Main.tile[x + 1, y + k].TileFrameX = (short)(num + 48);
+                Main.tile[x + 1, y + k].TileType = type;
+            }
+        }
+    }
+
 
     public static void Crystals(int x, int y)
     {

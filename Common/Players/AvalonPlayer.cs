@@ -13,6 +13,7 @@ using Avalon.Projectiles;
 using Avalon.Projectiles.Tools;
 using Avalon.Systems;
 using Avalon.Tiles.Ores;
+using Avalon.Tiles.Tropics;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -238,6 +239,7 @@ public class AvalonPlayer : ModPlayer
     public bool AstralProject;
     public int AstralCooldown = 3600;
     public const int MaxAstralCooldown = 3600; //constraint cooldown, make it no more than max.
+    public bool RubberGloves;
     #endregion
 
     #region buffs and debuffs
@@ -394,6 +396,7 @@ public class AvalonPlayer : ModPlayer
         BuilderBelt = false;
         LightningInABottle = false;
         AstralProject = false;
+        RubberGloves = false;
 
         // armor sets
         SkyBlessing = false;
@@ -561,6 +564,31 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdate()
     {
+
+        #region platform leaf
+        Point tileCoords = Player.position.ToTileCoordinates() + new Point(0, Player.height / 16 + 1);
+        Point tc2 = Player.position.ToTileCoordinates() + new Point(Player.width / 16, Player.height / 16 + 1);
+        int xpos;
+        int ypos;
+        for (xpos = Main.tile[tileCoords.X, tileCoords.Y].TileFrameX / 18; xpos > 2; xpos -= 3) { }
+        for (ypos = Main.tile[tileCoords.X, tileCoords.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
+
+        xpos = tileCoords.X - xpos;
+        ypos = tileCoords.Y - ypos;
+        if (Player.velocity.Y > 4.5f && Main.tile[tileCoords.X, tileCoords.Y].TileType == ModContent.TileType<PlatformLeaf>() &&
+            Main.tile[tc2.X, tc2.Y].TileType == ModContent.TileType<PlatformLeaf>() && Main.tile[tileCoords.X, tileCoords.Y].TileFrameY < 18)
+        {
+            for (int i = xpos; i < xpos + 3; i++)
+            {
+                for (int j = ypos; j < ypos + 4; j++)
+                {
+                    Main.tile[i, j].TileFrameY += 74;
+                }
+            }
+            WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<TropicsTreeLeaf>(), true);
+        }
+        #endregion
+
         OilBottleTimer--;
         if (OilBottleTimer < 0) OilBottleTimer = 0;
 
@@ -1389,6 +1417,11 @@ public class AvalonPlayer : ModPlayer
     }
     public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
     {
+        if (RubberGloves)
+        {
+            target.immune[Player.whoAmI] = 1;
+        }
+
         if (Berserk)
         {
             MeleeCritDamage += 1.5f;

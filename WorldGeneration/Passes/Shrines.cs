@@ -33,7 +33,7 @@ internal class Shrines : GenPass
             TileID.BlueDungeonBrick,
             TileID.PinkDungeonBrick,
             TileID.GreenDungeonBrick,
-            //ModContent.TileType<Tiles.TuhrtlBrick>(),
+            ModContent.TileType<Tiles.Tropics.TuhrtlBrick>(),
             //ModContent.TileType<Tiles.TropicalGrass>(),
             //ModContent.TileType<Tiles.Loam>(),
             ModContent.TileType<Tiles.OrangeBrick>(),
@@ -60,7 +60,7 @@ internal class Shrines : GenPass
             WallID.GreenDungeonSlabUnsafe,
             WallID.GreenDungeonUnsafe,
             WallID.GreenDungeonTileUnsafe,
-            //ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>(),
+            ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>(),
             ModContent.WallType<Walls.OrangeBrickUnsafe>(),
             ModContent.WallType<Walls.OrangeTiledUnsafe>(),
             ModContent.WallType<Walls.OrangeSlabUnsafe>(),
@@ -125,6 +125,43 @@ internal class Shrines : GenPass
             var x10 = WorldGen.genRand.Next(200, Main.maxTilesX - 200);
             var y6 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY - 300);
             if (q == 2) y6 = WorldGen.genRand.Next(GenVars.lavaLine - 50, Main.maxTilesY - 250);
+
+            if (q == 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    if (!GenVars.structures.CanPlace(new(x10, y6, 60, 35)))
+                    {
+                        x10 = WorldGen.genRand.Next(200, Main.maxTilesX - 200);
+                        y6 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY - 300);
+                    }
+                    else break;
+                }
+            }
+            else if (q == 1)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    if (!GenVars.structures.CanPlace(new(x10, y6, 41, 22)))
+                    {
+                        x10 = WorldGen.genRand.Next(200, Main.maxTilesX - 200);
+                        y6 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY - 300);
+                    }
+                    else break;
+                }
+            }
+            else if (q == 2)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    if (!GenVars.structures.CanPlace(new(x10, y6, 57, 27)))
+                    {
+                        x10 = WorldGen.genRand.Next(200, Main.maxTilesX - 200);
+                        y6 = WorldGen.genRand.Next(GenVars.lavaLine - 50, Main.maxTilesY - 250);
+                    }
+                    else break;
+                }
+            }
             // causes making cave walls freeze somehow (MIGHT HAVE FIXED THIS (NOPE))
             while (noTiles.Contains(Main.tile[x10, y6].TileType) || noWalls.Contains(Main.tile[x10, y6].WallType))
             {
@@ -158,9 +195,21 @@ internal class Shrines : GenPass
                     x10++;
                 else break;
             }
-            if (q == 0) Structures.IceShrine.Generate(x10, y6);
-            else if (q == 1) Structures.EvilShrine.GenerateEvilShrine(x10, y6);
-            else if (q == 2) Structures.LavaShrine.NewLavaShrine(x10, y6);
+            if (q == 0)
+            {
+                Structures.IceShrine.Generate(x10, y6);
+                GenVars.structures.AddProtectedStructure(new(x10, y6, 60, 35));
+            }
+            else if (q == 1)
+            {
+                Structures.EvilShrine.GenerateEvilShrine(x10, y6);
+                GenVars.structures.AddProtectedStructure(new(x10, y6, 41, 22));
+            }
+            else if (q == 2)
+            {
+                Structures.LavaShrine.NewLavaShrine(x10, y6);
+                GenVars.structures.AddProtectedStructure(new(x10, y6, 57, 27));
+            }
         }
     }
 }

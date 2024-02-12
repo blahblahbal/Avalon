@@ -14,6 +14,7 @@ namespace Avalon.WorldGeneration;
 public class GenSystem : ModSystem
 {
     public static int HellfireItemCount;
+    public static int TropicsItemCount;
     public override void PostWorldGen()
     {
         AvalonWorld.JungleLocationX = GenVars.JungleX;
@@ -76,7 +77,11 @@ public class GenSystem : ModSystem
                     }
                 })));
             }
-
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Temple"));
+            if (jungleIndex != -1)
+            {
+                tasks[jungleIndex] = new PassLegacy("Tuhrtl Outpost", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostTask));
+            }
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Hives"));
             if (jungleIndex != -1)
             {
@@ -262,6 +267,36 @@ public class GenSystem : ModSystem
         }
 
         HellfireItemCount++;
+        return result;
+    }
+
+    public static int GetNextTropicsChestItem()
+    {
+        int result = ModContent.ItemType<Items.Accessories.PreHardmode.RubberGloves>();
+        switch (TropicsItemCount % 4)
+        {
+            case 0:
+                result = ModContent.ItemType<Items.Accessories.PreHardmode.RubberGloves>();
+                break;
+            case 1:
+                result = ModContent.ItemType<Items.Weapons.Ranged.PreHardmode.Thompson>();
+                break;
+            case 2:
+                result = ModContent.ItemType<Items.Accessories.PreHardmode.AnkletofAcceleration>();
+                break;
+            case 3:
+                result = ItemID.StaffofRegrowth;
+                break;
+        }
+
+        if (WorldGen.genRand.NextBool(50))
+            result = ItemID.Seaweed;
+        else if (WorldGen.genRand.NextBool(15))
+            result = ItemID.FiberglassFishingPole;
+        else if (WorldGen.genRand.NextBool(20))
+            result = ItemID.FlowerBoots;
+
+        TropicsItemCount++;
         return result;
     }
 }

@@ -11,6 +11,7 @@ using Terraria.GameContent.Biomes.Desert;
 using Mono.Cecil.Cil;
 using Terraria;
 using System.Reflection;
+using Avalon.Tiles.Tropics;
 
 namespace Avalon.Hooks;
 
@@ -21,6 +22,46 @@ internal class Tropics : ModHook
         IL_DesertDescription.RowHasInvalidTiles += IL_DesertDescription_RowHasInvalidTiles;
         IL_WorldGen.PlaceJunglePlant += IL_WorldGen_PlaceJunglePlant;
         IL_WorldGen.GenerateWorld += IL_WorldGen_GenerateWorld;
+        IL_Liquid.DelWater += IL_Liquid_DelWater;
+        On_Liquid.DelWater += On_Liquid_DelWater;
+    }
+
+    private void On_Liquid_DelWater(On_Liquid.orig_DelWater orig, int l)
+    {
+        orig.Invoke(l);
+
+        int num = Main.liquid[l].x;
+        int num2 = Main.liquid[l].y;
+        Tile tile4 = Main.tile[num, num2];
+
+        if (tile4.LiquidType == LiquidID.Lava)
+        {
+            Liquid.LavaCheck(num, num2);
+            for (int i = num - 1; i <= num + 1; i++)
+            {
+                for (int j = num2 - 1; j <= num2 + 1; j++)
+                {
+                    Tile tile5 = Main.tile[i, j];
+                    if (!tile5.HasTile)
+                        continue;
+
+                    if (tile5.TileType == ModContent.TileType<TropicalGrass>())
+                    {
+                        tile5.TileType = (ushort)ModContent.TileType<Loam>();
+                        WorldGen.SquareTileFrame(i, j);
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendTileSquare(-1, num, num2, 3);
+                    }
+                }
+            }
+        }
+    }
+
+    private void IL_Liquid_DelWater(ILContext il)
+    {
+        //Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.CorruptJungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Contagion.ContagionJungleGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.Grass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Contagion.Ickgrass>())[id]);
     }
 
     private void IL_WorldGen_GenerateWorld(ILContext il)

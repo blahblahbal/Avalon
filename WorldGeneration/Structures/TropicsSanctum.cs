@@ -122,7 +122,7 @@ namespace Avalon.WorldGeneration.Structures
                                     if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
                                         tile.IsHalfBlock = false;
                                     if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>() && confirmPlatforms == 1)
-                                        WorldGen.AddBuriedChest(k, l, contain: WorldGen.GetNextJungleChestItem(), Style: 0, chestTileType: (ushort)ModContent.TileType<Tiles.PlatinumChest>());
+                                        WorldGen.AddBuriedChest(k, l, contain: GenSystem.GetNextTropicsChestItem(), Style: 0, chestTileType: (ushort)ModContent.TileType<Tiles.PlatinumChest>());
                                     if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
                                         tile.WallType = (ushort)ModContent.WallType<Walls.TropicalGrassWall>();
                                     break;

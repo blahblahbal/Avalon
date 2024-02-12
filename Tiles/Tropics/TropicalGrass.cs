@@ -21,7 +21,7 @@ public class TropicalGrass : ModTile
         Main.tileMerge[TileID.JungleGrass][Type] = true;
         Main.tileMerge[Type][TileID.JungleGrass] = true;
         TileID.Sets.Conversion.Grass[Type] = true;
-        DustType = DustID.GrassBlades;
+        DustType = ModContent.DustType<Dusts.TropicalDust>();
         //TileID.Sets.CanBeDugByShovel[Type] = true;
         //TileID.Sets.ResetsHalfBrickPlacementAttempt[Type] = false;
         //TileID.Sets.GrassSpecial[Type] = true;
@@ -30,6 +30,7 @@ public class TropicalGrass : ModTile
         //TileID.Sets.SpreadUnderground[Type] = true;
         //TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
         TileID.Sets.NeedsGrassFraming[Type] = true;
+        RegisterItemDrop(ModContent.ItemType<LoamBlock>());
         TileID.Sets.NeedsGrassFramingDirt[Type] = ModContent.TileType<Loam>();
     }
 

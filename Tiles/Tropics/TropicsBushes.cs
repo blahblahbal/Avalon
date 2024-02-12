@@ -17,5 +17,7 @@ public class TropicsBushes : ModTile
         TileObjectData.newTile.DrawYOffset = 2;
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.addTile(Type);
+        DustType = ModContent.DustType<Dusts.TropicalDust>();
+        HitSound = SoundID.Grass;
     }
 }

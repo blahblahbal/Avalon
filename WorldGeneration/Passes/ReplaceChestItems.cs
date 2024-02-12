@@ -43,16 +43,7 @@ public class ReplaceChestItems : GenPass
                     }
                     #endregion
 
-                    //if (WorldBiomeManager.WorldJungle == "Avalon/TropicsAlternateBiome")
-                    //{
-                    //    if (i?.type == ItemID.Boomstick)
-                    //    {
-                    //        i.SetDefaults(ModContent.ItemType<Thompson>());
-                    //        i.Prefix(-1);
-                    //    }
-                    //}
-
-                    #region jungle chests (flower of the jungle, band of stamina)
+                    #region jungle/tropics chests (flower of the jungle, band of stamina)
                     if (i?.type == ItemID.StaffofRegrowth || i?.type == ItemID.FeralClaws || i?.type == ItemID.AnkletoftheWind || i?.type == ItemID.Boomstick)
                     {
                         if (WorldGen.genRand.NextBool(5))
@@ -61,7 +52,8 @@ public class ReplaceChestItems : GenPass
                             i.Prefix(-1);
                         }
                     }
-                    if (Main.tile[c.x, c.y].TileFrameX >= 288 && Main.tile[c.x, c.y].TileFrameX < 324 && (Main.tile[c.x, c.y].TileType == 21 || Main.tile[c.x, c.y].TileType == 441))
+                    if ((Main.tile[c.x, c.y].TileFrameX >= 288 && Main.tile[c.x, c.y].TileFrameX < 324 && (Main.tile[c.x, c.y].TileType == 21 || Main.tile[c.x, c.y].TileType == 441)) ||
+                        Main.tile[c.x, c.y].TileType == ModContent.TileType<Tiles.Furniture.BleachedEbony.BleachedEbonyChest>())
                     {
                         if (i?.type == ItemID.BandofRegeneration)
                         {

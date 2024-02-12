@@ -1,11 +1,7 @@
 using Avalon.Common;
 using MonoMod.Cil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Hooks;
@@ -15,7 +11,15 @@ internal class GemRobeTimSpawning : ModHook
     protected override void Apply()
     {
         IL_NPC.SpawnNPC += RobeTimIncrease;
+        IL_NPC.SpawnNPC += SlabAndTiledWallHMDungeonFix;
     }
+
+    private void SlabAndTiledWallHMDungeonFix(ILContext il)
+    {
+        Utilities.AddAlternativeIdChecks(il, WallID.PinkDungeonSlabUnsafe, id => Data.Sets.Wall.UnsafeSlabWalls[id]);
+        Utilities.AddAlternativeIdChecks(il, WallID.PinkDungeonTileUnsafe, id => Data.Sets.Wall.UnsafeTiledWalls[id]);
+    }
+
     private void RobeTimIncrease(ILContext il)
     {
         ILCursor c = new ILCursor(il);

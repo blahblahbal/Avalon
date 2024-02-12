@@ -27,6 +27,8 @@ namespace Avalon;
 
 public class ExxoAvalonOrigins : Mod
 {
+    public static string JungleGenMessage;
+
     public static Color ContagionBiomeSightColor = new Color(170, 255, 0);
     /// <summary>
     ///     Gets reference to the main instance of the mod.
@@ -75,6 +77,7 @@ public class ExxoAvalonOrigins : Mod
     //internal StatDisplayUIState statDisplay;
     public override void Load()
     {
+        JungleGenMessage = Lang.gen[11].Value;
         //Additional swords to the zenith's projectiles with both their texture, size and trail color
         var fractalProfiles = getFinalFractalHelperFractalProfiles();
 

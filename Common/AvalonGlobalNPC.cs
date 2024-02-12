@@ -13,6 +13,7 @@ using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.NPCs.TownNPCs;
 using Avalon.Systems;
+using Avalon.Tiles.Tropics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -556,6 +557,17 @@ public class AvalonGlobalNPC : GlobalNPC
     }
     public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
     {
+        if (spawnInfo.Player.InModBiome<Tropics>())
+        {
+            pool.Clear();
+            pool.Add(ModContent.NPCType<Rafflesia>(), 0.6f);
+            /*pool.Add(ModContent.NPCType<TropicalSlime>(), 0.9f);
+            if (Main.hardMode)
+            {
+                pool.Add(ModContent.NPCType<PoisonDartFrog>(), 0.9f);
+            }*/
+        }
+
         if (spawnInfo.Player.InModBiome<ContagionCaveDesert>())
         {
             pool.Add(NPCID.DesertBeast, 0.3f);
@@ -689,6 +701,34 @@ public class AvalonGlobalNPC : GlobalNPC
                 npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SpikeTimer = 0;
             }
         }
+
+        #region platform leaf
+        Point tile = npc.position.ToTileCoordinates() + new Point(0, npc.height / 16 + 1);
+        Point tile2 = npc.position.ToTileCoordinates() + new Point(npc.width / 16, npc.height / 16 + 1);
+        int xpos;
+        int ypos;
+        for (xpos = Main.tile[tile.X, tile.Y].TileFrameX / 18; xpos > 2; xpos -= 3) { }
+        for (ypos = Main.tile[tile.X, tile.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
+        xpos = tile.X - xpos;
+        ypos = tile.Y - ypos;
+        if (npc.velocity.Y > 4.5f && !npc.noGravity && !npc.noTileCollide)
+        {
+            if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Tropics.PlatformLeaf>() &&
+                Main.tile[tile2.X, tile2.Y].TileType == ModContent.TileType<Tiles.Tropics.PlatformLeaf>() && Main.tile[tile.X, tile.Y].TileFrameY < 74)
+            {
+                for (int i = xpos; i < xpos + 3; i++)
+                {
+                    for (int j = ypos; j < ypos + 4; j++)
+                    {
+                        Main.tile[i, j].TileFrameY += 74;
+                    }
+                }
+                SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.2f };
+                SoundEngine.PlaySound(s, new Vector2(xpos + 1, ypos));
+                WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<TropicsTreeLeaf>(), true);
+            }
+        }
+        #endregion 
     }
     public override bool CheckDead(NPC npc)
     {

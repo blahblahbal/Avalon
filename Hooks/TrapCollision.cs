@@ -23,12 +23,14 @@ public class TrapCollision : ModHook
         {
             if (player.GetModPlayer<AvalonPlayer>().TrapImmune)
             {
-                if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
+                if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() ||
+                    type == ModContent.TileType<Tiles.Tropics.WoodenSpikes>() ||
+                    type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
                 {
                     return false;
                 }
             }
-            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && type == ModContent.TileType<Tiles.VenomSpike>())
+            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && (type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.Tropics.WoodenSpikes>()))
             {
                 return true;
             }
@@ -52,6 +54,11 @@ public class TrapCollision : ModHook
         {
             int num = Main.DamageVar(90, 0f - self.luck);
             self.AddBuff(BuffID.Venom, 180);
+            self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, 0, true);
+        }
+        if (tileId == ModContent.TileType<Tiles.Tropics.WoodenSpikes>())
+        {
+            int num = Main.DamageVar(40, 0f - self.luck);
             self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, 0, true);
         }
         orig(self, tileId, x, y);

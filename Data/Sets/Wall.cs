@@ -10,5 +10,17 @@ namespace Avalon.Data.Sets
         );
 
         public static readonly bool[] Hellcastle = WallID.Sets.Factory.CreateBoolSet();
+
+        public static readonly bool[] UnsafeSlabWalls = WallID.Sets.Factory.CreateBoolSet(
+            ModContent.WallType<Walls.OrangeSlabUnsafe>(),
+            ModContent.WallType<Walls.PurpleSlabWallUnsafe>(),
+            ModContent.WallType<Walls.YellowSlabWallUnsafe>()
+        );
+
+        public static readonly bool[] UnsafeTiledWalls = WallID.Sets.Factory.CreateBoolSet(
+            ModContent.WallType<Walls.OrangeTiledUnsafe>(),
+            ModContent.WallType<Walls.PurpleTiledWallUnsafe>(),
+            ModContent.WallType<Walls.YellowTiledWallUnsafe>()
+        );
     }
 }

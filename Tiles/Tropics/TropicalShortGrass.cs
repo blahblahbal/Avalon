@@ -38,6 +38,10 @@ public class TropicalShortGrass : ModTile
         AddMapEntry(new Color(82, 123, 35));
         AddMapEntry(new Color(277, 41, 75), this.GetLocalization("MapEntry1"));
         AddMapEntry(new Color(76, 150, 216));
+        for (int i = 10; i < 23; i++)
+        {
+            AddMapEntry(new Color(82, 123, 35));
+        }
     }
     public override ushort GetMapOption(int i, int j)
     {
