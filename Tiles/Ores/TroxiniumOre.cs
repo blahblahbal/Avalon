@@ -25,6 +25,10 @@ public class TroxiniumOre : ModTile
         MinPick = 150;
         DustType = ModContent.DustType<TroxiniumDust>();
         TileID.Sets.Ore[Type] = true;
+        Main.tileMerge[Type][TileID.Mud] = true;
+        Main.tileMerge[TileID.Mud][Type] = true;
+        Main.tileMerge[Type][ModContent.TileType<Tropics.Loam>()] = true;
+        Main.tileMerge[ModContent.TileType<Tropics.Loam>()][Type] = true;
     }
 
     public override bool CanExplode(int i, int j)

@@ -73,7 +73,7 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
 
         Button = new ExxoUIImageButton(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbButton"))
         {
-            Tooltip = "Consume Herbs/Potions",
+            Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.ConsumeHerbPotion"),
         };
         InnerElement.Append(Button);
 
@@ -111,10 +111,25 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         Player player = Main.LocalPlayer;
         AvalonHerbologyPlayer modPlayer = player.GetModPlayer<AvalonHerbologyPlayer>();
 
-        string rankTitle = $"Herbology {modPlayer.Tier}";
+        string herbTier = Language.GetTextValue("Mods.Avalon.Herbology.Tier0");
+
+        if (modPlayer.Tier == AvalonHerbologyPlayer.HerbTier.Apprentice)
+        {
+            herbTier = Language.GetTextValue("Mods.Avalon.Herbology.Tier1");
+        }
+        else if (modPlayer.Tier == AvalonHerbologyPlayer.HerbTier.Expert)
+        {
+            herbTier = Language.GetTextValue("Mods.Avalon.Herbology.Tier2");
+        }
+        else if (modPlayer.Tier == AvalonHerbologyPlayer.HerbTier.Master)
+        {
+            herbTier = Language.GetTextValue("Mods.Avalon.Herbology.Tier3");
+        }
+
+        string rankTitle = Language.GetTextValue("Mods.Avalon.Herbology.Name") + herbTier;
         RankTitleText.TextElement.SetText(rankTitle);
 
-        string tier = $"Tier {(int)modPlayer.Tier + 1} Herbologist";
+        string tier = Language.GetTextValue("Mods.Avalon.Herbology.Tier") + $"{(int)modPlayer.Tier + 1}" + Language.GetTextValue("Mods.Avalon.Herbology.Herbologist");
         HerbTierText.TextElement.SetText(tier);
 
         string herbTotal = modPlayer.HerbTotal.ToString(CultureInfo.CurrentCulture);

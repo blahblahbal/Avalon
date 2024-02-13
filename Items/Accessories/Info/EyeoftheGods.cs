@@ -2,6 +2,7 @@ using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Info;
@@ -105,12 +106,12 @@ class EyeoftheGodsDefInfoDisplay : InfoDisplay
             if (Main.npc[Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex].GetGlobalNPC<AvalonGlobalNPCInstance>().ShowStats)
             {
                 info += Main.npc[Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex].TypeName;
-                info += " defense: " + Main.npc[Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex].defDefense;
+                info += Language.GetTextValue("Mods.Avalon.InfoDisplays.Defense") + Main.npc[Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex].defDefense;
             }
             else
             {
                 displayColor = InactiveInfoTextColor;
-                info = "No info to display";
+                info = Language.GetTextValue("Mods.Avalon.InfoDisplays.NoInfo");
             }
             
             //Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex = -1;
@@ -118,7 +119,7 @@ class EyeoftheGodsDefInfoDisplay : InfoDisplay
         else
         {
             displayColor = InactiveInfoTextColor;
-            info = "No info to display";
+            info = Language.GetTextValue("Mods.Avalon.InfoDisplays.NoInfo");
         }
         return info;
     }
@@ -149,18 +150,18 @@ class EyeoftheGodsDmgInfoDisplay : InfoDisplay
             if (Main.npc[Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex].GetGlobalNPC<AvalonGlobalNPCInstance>().ShowStats)
             {
                 info += Main.npc[Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex].TypeName;
-                info += " damage: " + Main.npc[Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex].defDamage;
+                info += Language.GetTextValue("Mods.Avalon.InfoDisplays.Damage") + Main.npc[Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex].defDamage;
             }
             else
             {
                 displayColor = InactiveInfoTextColor;
-                info = "No info to display";
+                info = Language.GetTextValue("Mods.Avalon.InfoDisplays.NoInfo");
             }
         }
         else
         {
             displayColor = InactiveInfoTextColor;
-            info = "No info to display";
+            info = Language.GetTextValue("Mods.Avalon.InfoDisplays.NoInfo");
         }
         return info;
     }

@@ -1,4 +1,5 @@
 using Avalon.Dusts;
+using Avalon.Tiles.Tropics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -25,6 +26,8 @@ public class BacciliteOre : ModTile
         Main.tileLighted[Type] = true;
         Main.tileMerge[Type][TileID.Mud] = true;
         Main.tileMerge[TileID.Mud][Type] = true;
+        Main.tileMerge[Type][ModContent.TileType<Loam>()] = true;
+        Main.tileMerge[ModContent.TileType<Loam>()][Type] = true;
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<ContagionWeapons>();
         MinPick = 55;

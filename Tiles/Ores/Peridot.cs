@@ -16,6 +16,8 @@ public class Peridot : ModTile
         TileID.Sets.Ore[Type] = true;
         Main.tileMerge[Type][TileID.Mud] = true;
         Main.tileMerge[TileID.Mud][Type] = true;
+        Main.tileMerge[Type][ModContent.TileType<Tropics.Loam>()] = true;
+        Main.tileMerge[ModContent.TileType<Tropics.Loam>()][Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileSpelunker[Type] = true;
         Main.tileStone[Type] = true;

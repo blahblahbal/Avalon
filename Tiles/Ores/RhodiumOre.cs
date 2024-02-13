@@ -22,6 +22,8 @@ public class RhodiumOre : ModTile
         Main.tileShine[Type] = 1150;
         Main.tileMerge[Type][TileID.Mud] = true;
         Main.tileMerge[TileID.Mud][Type] = true;
+        Main.tileMerge[Type][ModContent.TileType<Tropics.Loam>()] = true;
+        Main.tileMerge[ModContent.TileType<Tropics.Loam>()][Type] = true;
         HitSound = SoundID.Tink;
         MinPick = 60;
         DustType = DustID.t_LivingWood;

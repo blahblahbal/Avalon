@@ -11,7 +11,7 @@ public class NickelAnvil : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(140, 130, 116), LanguageManager.Instance.GetText("Anvil"));
+        AddMapEntry(new Color(140, 130, 116), Language.GetText("MapObject.Anvil"));
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);
         TileObjectData.newTile.CoordinateHeights = new[] { 18, 18 };
         TileObjectData.newTile.LavaDeath = false;

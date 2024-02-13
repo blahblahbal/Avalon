@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -68,7 +69,7 @@ public class PortablePylonMkIIPoint1 : ModItem
         if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
         {
             WaypointSystemMkII.savedLocations[0] = player.Center + new Vector2(0, -15);
-            Main.NewText("Set waypoint 1 to current location.");
+            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointOne"));
         }
         else
         {
@@ -102,7 +103,7 @@ public class PortablePylonMkIIPoint1 : ModItem
                 }
                 else
                 {
-                    Main.NewText("No waypoint found!", 250, 0, 0);
+                    Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.NoWaypointFound"), 250, 0, 0);
                 }
             }
         }
@@ -133,7 +134,7 @@ public class PortablePylonMkIIPoint2 : ModItem
         if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
         {
             WaypointSystemMkII.savedLocations[1] = player.Center + new Vector2(0, -15);
-            Main.NewText("Set waypoint 2 to current location.");
+            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointTwo"));
         }
         else
         {
@@ -167,7 +168,7 @@ public class PortablePylonMkIIPoint2 : ModItem
                 }
                 else
                 {
-                    Main.NewText("No waypoint found!", 250, 0, 0);
+                    Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.NoWaypointFound"), 250, 0, 0);
                 }
             }
         }
@@ -198,7 +199,7 @@ public class PortablePylonMkIIPoint3 : ModItem
         if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
         {
             WaypointSystemMkII.savedLocations[2] = player.Center + new Vector2(0, -15);
-            Main.NewText("Set waypoint 3 to current location.");
+            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointThree"));
         }
         else
         {
@@ -232,7 +233,7 @@ public class PortablePylonMkIIPoint3 : ModItem
                 }
                 else
                 {
-                    Main.NewText("No waypoint found!", 250, 0, 0);
+                    Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.NoWaypointFound"), 250, 0, 0);
                 }
             }
         }

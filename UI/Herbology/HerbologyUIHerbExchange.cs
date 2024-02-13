@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Localization;
 using Terraria.UI;
 
 namespace Avalon.UI.Herbology;
@@ -22,13 +23,13 @@ internal class HerbologyUIHerbExchange : ExxoUIPanelWrapper<ExxoUIList>
         herbExchangeTitleContainer.Justification = Justification.Center;
         list.Append(herbExchangeTitleContainer);
 
-        var title = new ExxoUIText("Herb Exchange");
+        var title = new ExxoUIText(Language.GetTextValue("Mods.Avalon.Herbology.HerbExchange"));
         herbExchangeTitleContainer.Append(title);
 
         Toggle = new ExxoUIImageButtonToggle(
             Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconRandomSeed"), Color.White, Color.Red)
         {
-            Tooltip = "Toggle Seeds/Large Seeds",
+            Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.ToggleSeeds"),
         };
         herbExchangeTitleContainer.Append(Toggle);
 

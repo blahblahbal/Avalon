@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Localization;
 using Terraria.UI;
 
 namespace Avalon.UI.Jukebox;
@@ -22,7 +23,7 @@ internal class JukeboxUIInterface : ExxoUIPanelWrapper<ExxoUIList>
         herbExchangeTitleContainer.Justification = Justification.Center;
         list.Append(herbExchangeTitleContainer);
 
-        var title = new ExxoUIText("Tracks");
+        var title = new ExxoUIText(Language.GetTextValue("Mods.Avalon.Jukebox.Tracks"));
         herbExchangeTitleContainer.Append(title);
 
         var horizontalRule = new ExxoUIHorizontalRule();

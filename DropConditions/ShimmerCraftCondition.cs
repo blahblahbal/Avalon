@@ -6,6 +6,6 @@ namespace Avalon.DropConditions
 {
     public static class ShimmerCraftCondition // Incredible
     {
-        public static Condition ShimmerOnly = new Condition("Mods.Conditions.ShimmerCraft", () => false);
+        public static Condition ShimmerOnly = new Condition("Mods.Avalon.Conditions.ShimmerCraft", () => false);
     }
 }

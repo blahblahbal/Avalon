@@ -11,7 +11,7 @@ public class TomeForge : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(55, 100, 134), LanguageManager.Instance.GetText("Tome Forge"));
+        AddMapEntry(new Color(55, 100, 134), this.GetLocalization("MapEntry"));
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
         TileObjectData.newTile.CoordinateHeights = new[]
         {

@@ -11,7 +11,7 @@ public class Catalyzer : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(146, 155, 187), LanguageManager.Instance.GetText("Catalyzer"));
+        AddMapEntry(new Color(146, 155, 187), this.GetLocalization("MapEntry"));
         Main.tileFrameImportant[Type] = true;
         AnimationFrameHeight = 38;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);

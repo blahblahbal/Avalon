@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Common.Players;
@@ -84,7 +85,7 @@ internal class StaminaSlot : ModAccessorySlot
         switch (context)
         {
             default:
-                Main.hoverItemName = "Stamina Scroll";
+                Main.hoverItemName = Language.GetTextValue("Mods.Avalon.Slots.StaminaScroll");
                 break;
         }
     }
@@ -165,7 +166,7 @@ internal class StaminaSlot2 : ModAccessorySlot
         switch (context)
         {
             default:
-                Main.hoverItemName = "Stamina Scroll";
+                Main.hoverItemName = Language.GetTextValue("Mods.Avalon.Slots.StaminaScroll");
                 break;
         }
     }

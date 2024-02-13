@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -63,7 +64,7 @@ public class PortablePylon : ModItem
         if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
         {
             WaypointSystem.savedLocation = player.Center + new Vector2(0, -15);
-            Main.NewText("Set waypoint to current location");
+            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypoint"));
         }
         else
         {
@@ -97,7 +98,7 @@ public class PortablePylon : ModItem
                 }
                 else
                 {
-                    Main.NewText("No waypoint found!", 250, 0, 0);
+                    Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.NoWaypointFound"), 250, 0, 0);
                 }
             }
         }

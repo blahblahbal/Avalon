@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Avalon.Data;
 using Microsoft.Xna.Framework;
@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.UI;
 
 namespace Avalon.UI.Herbology;
@@ -24,7 +25,7 @@ internal class HerbologyUITurnIn : ExxoUIPanelWrapper<ExxoUIList>
 
         Button = new ExxoUIImageButton(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbButton"))
         {
-            Tooltip = "Consume Herbs/Potions",
+            Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.ConsumeHerbPotion"),
         };
         InnerElement.Append(Button);
 

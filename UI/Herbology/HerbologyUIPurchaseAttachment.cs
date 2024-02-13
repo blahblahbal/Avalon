@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.UI;
 
 namespace Avalon.UI.Herbology;
@@ -68,7 +69,7 @@ internal class HerbologyUIPurchaseAttachment : ExxoUIAttachment<ExxoUIItemSlot, 
         subHerbCountBalance = new ExxoUIText("");
         herbCountCostContainer.Append(subHerbCountBalance);
 
-        Button = new ExxoUIPanelButton<ExxoUIText>(new ExxoUIText("Exchange")) { HAlign = UIAlign.Center };
+        Button = new ExxoUIPanelButton<ExxoUIText>(new ExxoUIText(Language.GetTextValue("Mods.Avalon.Herbology.Exchange"))) { HAlign = UIAlign.Center };
         Button.Width.Set(0, 1);
         Button.InnerElement.HAlign = UIAlign.Center;
 

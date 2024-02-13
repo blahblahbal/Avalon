@@ -24,6 +24,12 @@ internal class Tropics : ModHook
         IL_WorldGen.GenerateWorld += IL_WorldGen_GenerateWorld;
         IL_Liquid.DelWater += IL_Liquid_DelWater;
         On_Liquid.DelWater += On_Liquid_DelWater;
+        IL_WorldGen.OreRunner += IL_WorldGen_OreRunner;
+    }
+
+    private void IL_WorldGen_OreRunner(ILContext il)
+    {
+        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<TropicalGrass>())[id]);
     }
 
     private void On_Liquid_DelWater(On_Liquid.orig_DelWater orig, int l)

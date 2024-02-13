@@ -163,7 +163,7 @@ public class HerbologyUIState : ExxoUIState
         #region button toggles
         herbButton =
             new ExxoUIImageButton(Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconRandomSeed"))
-            { Scale = 1, Tooltip = "Herbs", HAlign = 0.38f, VAlign = 0.02f };
+            { Scale = 1, Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Herbs"), HAlign = 0.38f, VAlign = 0.02f };
         herbContainer.Append(herbButton);
         herbButton.Selected = true;
         herbButton.OnLeftClick += (_, args) =>
@@ -175,7 +175,7 @@ public class HerbologyUIState : ExxoUIState
 
         potionButton =
             new ExxoUIImageButton(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbPotion"))
-            { Scale = 1, Tooltip = "Potions", HAlign = 0.45f, VAlign = 0.04f };
+            { Scale = 1, Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Potions"), HAlign = 0.45f, VAlign = 0.04f };
         herbContainer.Append(potionButton);
 
         potionButton.Hidden = true;

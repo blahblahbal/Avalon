@@ -28,6 +28,11 @@ Mods: {
 	}
 
 	Avalon: {
+		Conditions: {
+			NearShimmer: Needs shimmer
+			ShimmerCraft: Throw into shimmer
+		}
+
 		BuilderToggles: {
 			CloudGloveBuilderToggle: {
 				OnText: Cloud Glove On
@@ -156,6 +161,8 @@ Mods: {
 				Phantasm: Use an [i:Avalon/EctoplasmicBeacon] in the Hellcastle.
 			}
 		}
+
+		Librarian.Bestiary: The Librarian fled his homeland when mysterious otherwordly beings invaded. He seems to be much happier here.
 
 		DeathText: {
 			Fell_1: "{0} made a satisfying SPLAT when they hit the ground."
@@ -432,13 +439,40 @@ Mods: {
 
 		Jukebox: {
 			Name: Jukebox
+			Tracks: Tracks
 			NowPlaying: "Now playing: "
 			Stop: Stop playing
 			StoppedPlaying: Stopped playing tunes
 		}
 
 		Herbology: {
+			Exchange: Exchange
+			ConsumeHerbPotion: Consume Herbs/Potions
+			Name: Herbology
+			Tier0: Novice
+			Tier1: Apprentice
+			Tier2: Expert
+			Tier3: Mastery
 			BenchName: Herbology Bench
+			Herbs: Herbs
+			Potions: Potions
+
+			HerbExchange: {
+				Description: Purchase herbs seeds
+				Toggle: Toggle listing between seeds and large seeds
+				Grid: Select an item to purchase
+			}
+
+			PotionExchange: {
+				Description: Purchase potions using potion credits
+				Toggle: Toggle listing between potions and elixirs
+				Grid: Select an item to purchase
+			}
+
+			ToggleSeeds: Toggle Seeds/Large Seeds
+			TogglePotions: Toggle Potions/Elixirs
+			Tier: Tier
+			Herbologist: Herbologist
 			Help: Help
 			HelpToggle: When this button is active, hovering over elements provides a description of their purpose
 
@@ -454,18 +488,6 @@ Mods: {
 				Description: Turn in herbs and potions in exchange for credits
 				ItemSlot: Place items here to be exchanged for credits
 				Button: Converts the current items in the item slot into credits
-			}
-
-			HerbExchange: {
-				Description: Purchase herbs seeds
-				Toggle: Toggle listing between seeds and large seeds
-				Grid: Select an item to purchase
-			}
-
-			PotionExchange: {
-				Description: Purchase potions using potion credits
-				Toggle: Toggle listing between potions and elixirs
-				Grid: Select an item to purchase
 			}
 
 			Purchase: {
@@ -8070,7 +8092,10 @@ Mods: {
 
 		InfoDisplays: {
 			EyeoftheGodsDefInfoDisplay.DisplayName: Enemy defense
+			Defense: " defense: "
 			EyeoftheGodsDmgInfoDisplay.DisplayName: Enemy damage
+			Damage: " damage: "
+			NoInfo: No info to display
 		}
 
 		Projectiles: {
@@ -8311,6 +8336,25 @@ Mods: {
 
 			Librarian: {
 				DisplayName: Librarian
+				Bestiary: The Librarian fled his homeland when mysterious otherwordly beings invaded. He seems to be much happier here.
+
+				Dialogue: {
+					First: My home is fraught with Wraiths. I'm deathly afraid of them; please keep them away.
+					Second: Wow, {0}'s services are free? Where I'm from, you have to pay an arm and a leg to dye clothes...
+					Third: I come from a distant land, one where there are many races. It doesn't appear that you are any of those races, however.
+					Fourth: This area is quite different from what I'm used to. People where I'm from spend loads to get virtual clothes.
+					Fifth: ...okay. I've got your grade seventeen fifth cast weapon materials ready. *click* Sorry, did you need something?
+					Sixth: How do you people deal with being two-dimensional?
+					Seventh: Oops, sorry about that. I was just speaking to a friend of mine from home.
+					Eighth: Psionic Infusion, Spark, Chant of Chi, Tide Spirit, Sandburst Blast, Stone Smasher, macro. What? Just setting up my strategy for this nuke.
+					Ninth: Pan Gu is the creator of my land. Who created yours? ... Redigit? Never heard of them.
+					Tenth: You should consider the Tome Forge. It's my own invention!
+					Eleventh: When the Changelings took over the Western Steppes, I fled to this land. I already like it better.
+					Twelfth: Wait, you get loot after defeating a boss more than once per day?!
+					Thirteenth: It's very strange to not see fairies flying around everyone. Why don't you buy one from me?
+				}
+
+				Shop: Shop
 
 				TownNPCMood: {
 					Content: I'm feeling great. Thank you for providing this wonderful house for me.
@@ -8995,7 +9039,13 @@ Mods: {
 		}
 
 		Tiles: {
-			CaesiumForge.MapEntry: Caesium Forge
+			Catalyzer.MapEntry: Catalyzer
+
+			CaesiumForge: {
+				MapEntry: Caesium Forge
+				MapEntry0: Caesium Forge
+			}
+
 			MonsterBanner.MapEntry: Banner
 			PlacedBars.MapEntry: Placed Bar
 			Boltstone.MapEntry: Boltstone
@@ -9111,6 +9161,7 @@ Mods: {
 			ZincOre.MapEntry: Zinc
 			TropicalSapling.MapEntry: Sapling
 			TropicalShortGrass.MapEntry1: Tropical Shroom Cap
+			TomeForge.MapEntry: Tome Forge
 		}
 
 		Prefixes: {
@@ -9166,11 +9217,6 @@ Mods: {
 			Broadened.DisplayName: Broadened
 			Extended.DisplayName: Extended
 			Shrunken.DisplayName: Shrunken
-		}
-
-		Conditions: {
-			NearShimmer: Needs shimmer
-			ShimmerCraft: Throw into shimmer
 		}
 
 		Biomes: {
@@ -9313,7 +9359,7 @@ Mods: {
 
 				AdditionalScreenshakes: {
 					Label: Additional Screenshakes
-					Tooltip: ""
+					Tooltip: Enables screenshakes for various actions.
 				}
 			}
 
@@ -9350,6 +9396,40 @@ Mods: {
 			DesertBeakEmote.Command: desertbeak
 			StaminaEmote.Command: staminapotion
 			LibrarianEmote.Command: librarian
+		}
+
+		Tools: {
+			Moonphaser: {
+				Moonphase: "Moon Phase is now "
+				BloodMoon: The Blood Moon has risen...
+				Full: Full
+				LastGibbous: Last Gibbous
+				LastQuarter: Last Quarter
+				LastCrescent: Last Crescent
+				New: New
+				FirstCrescent: First Crescent
+				FirstQuarter: First Quarter
+				FirstGibbous: First Gibbous
+			}
+
+			Timechanger: {
+				ItIsNow: "Is is now "
+				Night: Night
+				Day: Day
+			}
+
+			Rainbringer: {
+				Started: A rain event has started.
+				Stopped: The rain has stopped.
+			}
+
+			PortablePylon: {
+				SetWaypoint: Set waypoint to current location
+				SetWaypointOne: Set waypoint 1 to current location
+				SetWaypointTwo: Set waypoint 2 to current location
+				SetWaypointThree: Set waypoint 3 to current location
+				NoWaypointFound: No waypoint found!
+			}
 		}
 	}
 }

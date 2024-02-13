@@ -13,7 +13,6 @@ namespace Avalon.WorldGeneration.Passes;
 
 internal class Tropics
 {
-    // delete
     public static void LoamWallTask(GenerationProgress progress, GameConfiguration config)
     {
         for (int num177 = GenVars.jungleMinX; num177 <= GenVars.jungleMaxX; num177++)
@@ -36,7 +35,7 @@ internal class Tropics
                 }
                 //if (((num177 >= GenVars.jungleMinX + 2 && num177 <= GenVars.jungleMaxX - 2) || !WorldGen.genRand.NextBool(2)) && ((num177 >= GenVars.jungleMinX + 3 && num177 <= GenVars.jungleMaxX - 3) || !WorldGen.genRand.NextBool(3)) && (Main.tile[num177, num178].WallType == 2 || Main.tile[num177, num178].WallType == 59))
                 //    Main.tile[num177, num178].WallType = (ushort) ModContent.WallType<Walls.TropicalMudWall>();
-}
+            }
         }
     }
     public static void PlatformLeafTrapTask(GenerationProgress progress, GameConfiguration config)

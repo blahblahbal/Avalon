@@ -1,3 +1,4 @@
+using Avalon.Tiles.Tropics;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -21,6 +22,8 @@ public class BismuthOre : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileMerge[Type][TileID.Mud] = true;
         Main.tileMerge[TileID.Mud][Type] = true;
+        Main.tileMerge[Type][ModContent.TileType<Loam>()] = true;
+        Main.tileMerge[ModContent.TileType<Loam>()][Type] = true;
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.BismuthDust>();
         TileID.Sets.Ore[Type] = true;

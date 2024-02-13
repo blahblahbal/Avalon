@@ -29,11 +29,11 @@ public class Timechanger : ModProjectile
 
         if (Main.netMode == NetmodeID.SinglePlayer)
         {
-            Main.NewText(string.Format("It is now {0}.", Main.dayTime ? "Night" : "Day"), 50, 255, 130);
+            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.Timechanger.ItIsNow") + (Main.dayTime ? Language.GetTextValue("Mods.Avalon.Tools.Timechanger.Night") : Language.GetTextValue("Mods.Avalon.Tools.Timechanger.Day")), 50, 255, 130);
         }
         else if (Main.netMode == NetmodeID.Server)
         {
-            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(string.Format("It is now {0}.", Main.dayTime ? "Night" : "Day")), new Color(50, 255, 130));
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(Language.GetTextValue("Mods.Avalon.Tools.Timechanger.ItIsNow") + (Main.dayTime ? Language.GetTextValue("Mods.Avalon.Tools.Timechanger.Night") : Language.GetTextValue("Mods.Avalon.Tools.Timechanger.Day"))), new Color(50, 255, 130));
         }
         Projectile.active = false;
     }
