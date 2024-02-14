@@ -9312,7 +9312,7 @@ Mods: {
 			TropicalSapling.MapEntry: Sapling
 			TropicalShortGrass.MapEntry1: Tropical Shroom Cap
 			TomeForge.MapEntry: Tome Forge
-			LockedTuhrtlDoor.MapEntry: Mods.Avalon.Tiles.LockedTuhrtlDoor.MapEntry
+			LockedTuhrtlDoor.MapEntry: Locked Tuhrtl Door
 			TropicsPot.MapEntry: Pot
 			TuhrtlPot.MapEntry: Pot
 		}
