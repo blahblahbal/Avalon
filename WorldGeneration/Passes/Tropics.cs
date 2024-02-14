@@ -8,11 +8,102 @@ using System;
 using Avalon.Common;
 using Avalon.Items;
 using Microsoft.Xna.Framework;
+using Terraria.Localization;
 
 namespace Avalon.WorldGeneration.Passes;
 
 internal class Tropics
 {
+    public static void TuhrtlOutpostTask(GenerationProgress progress, GameConfiguration config)
+    {
+        int num648 = 0;
+        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.TuhrtlOutpost");
+        long num649 = 0L;
+        double num650 = 0.25;
+        bool flag38 = false;
+        while (true)
+        {
+            int num651 = (int)Main.rockLayer;
+            int num652 = Main.maxTilesY - 500;
+            if (num651 > num652 - 1)
+                num651 = num652 - 1;
+
+            int num653 = WorldGen.genRand.Next(num651, num652);
+            int num654 = (int)(((WorldGen.genRand.NextDouble() * num650 + 0.1) * (double)(-GenVars.dungeonSide) + 0.5) * (double)Main.maxTilesX);
+            if (WorldGen.remixWorldGen)
+            {
+                if (WorldGen.notTheBees)
+                {
+                    num654 = ((GenVars.dungeonSide <= 0) ? WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.6), (int)((double)Main.maxTilesX * 0.8)) : WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.2), (int)((double)Main.maxTilesX * 0.4)));
+                }
+                else
+                {
+                    num654 = WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.2), (int)((double)Main.maxTilesX * 0.8));
+                    while ((double)num654 > (double)Main.maxTilesX * 0.4 && (double)num654 < (double)Main.maxTilesX * 0.6)
+                    {
+                        num654 = WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.2), (int)((double)Main.maxTilesX * 0.8));
+                    }
+                }
+
+                while (Main.tile[num654, num653].HasTile || Main.tile[num654, num653].WallType > 0 || (double)num653 > Main.worldSurface - 5.0)
+                {
+                    num653--;
+                }
+
+                num653++;
+                if (Main.tile[num654, num653].HasTile && (Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() || Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Tropics.Loam>()))
+                {
+                    int num655 = 10;
+                    bool flag39 = false;
+                    for (int num656 = num654 - num655; num656 <= num656 + num655; num656++)
+                    {
+                        for (int num657 = num653 - num655; num657 < num655; num657++)
+                        {
+                            if (Main.tile[num656, num657].TileType == 191 || Main.tileDungeon[Main.tile[num656, num657].TileType])
+                                flag39 = true;
+                        }
+                    }
+
+                    if (!flag39)
+                    {
+                        flag38 = true;
+                        num653 -= 10 + WorldGen.genRand.Next(10);
+                        Structures.TuhrtlOutpost.Outpost(num654, num653);
+                        break;
+                    }
+                }
+            }
+            else if (Main.tile[num654, num653].HasTile && Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+            {
+                flag38 = true;
+                Structures.TuhrtlOutpost.Outpost(num654, num653);
+                break;
+            }
+
+            if (num649++ > 2000000)
+            {
+                if (num650 == 0.35)
+                {
+                    num648++;
+                    if (num648 > 10)
+                        break;
+                }
+
+                num650 = Math.Min(0.35, num650 + 0.05);
+                num649 = 0L;
+            }
+        }
+
+        if (!flag38)
+        {
+            int x14 = Main.maxTilesX - GenVars.dungeonX;
+            int y14 = (int)Main.rockLayer + 100;
+            if (WorldGen.remixWorldGen)
+                x14 = ((!WorldGen.notTheBees) ? ((GenVars.dungeonSide > 0) ? ((int)((double)Main.maxTilesX * 0.4)) : ((int)((double)Main.maxTilesX * 0.6))) : ((GenVars.dungeonSide > 0) ? ((int)((double)Main.maxTilesX * 0.3)) : ((int)((double)Main.maxTilesX * 0.7))));
+
+            Structures.TuhrtlOutpost.Outpost(x14, y14);
+        }
+    }
     public static void LoamWallTask(GenerationProgress progress, GameConfiguration config)
     {
         for (int num177 = GenVars.jungleMinX; num177 <= GenVars.jungleMaxX; num177++)
@@ -40,7 +131,7 @@ internal class Tropics
     }
     public static void PlatformLeafTrapTask(GenerationProgress progress, GameConfiguration config)
     {
-        progress.Message = "Placing platform leaf traps";
+        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.PlatformLeaves");
         for (int i = 20; i < Main.maxTilesX - 20; i++)
         {
             for (int j = 150; j < Main.maxTilesY - 230; j++)
@@ -53,42 +144,42 @@ internal class Tropics
             }
         }
     }
-    public static void TuhrtlOutpostTask(GenerationProgress progress, GameConfiguration config)
-    {
-        int num562 = 0;
-        progress.Message = "Generating outpost";
-        long num563 = 0L;
-        double num564 = 0.25;
-        int y21;
-        int x23;
-        while (true)
-        {
-            y21 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 500);
-            x23 = (int)(((WorldGen.genRand.NextDouble() * num564 + 0.1) * -GenVars.dungeonSide + 0.5) * Main.maxTilesX);
-            if (Main.tile[x23, y21].HasTile && Main.tile[x23, y21].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
-            {
-                break;
-            }
-            if (num563++ > 2000000)
-            {
-                if (num564 == 0.35)
-                {
-                    num562++;
-                    if (num562 > 10)
-                    {
-                        return;
-                    }
-                }
-                num564 = Math.Min(0.35, num564 + 0.05);
-                num563 = 0L;
-            }
-        }
-        AvalonWorld.MakeTempOutpost(x23, y21);
-        GenVars.structures.AddProtectedStructure(new(x23, y21, 25, 25));
-    }
+    //public static void TuhrtlOutpostTask(GenerationProgress progress, GameConfiguration config)
+    //{
+    //    int num562 = 0;
+    //    progress.Message = "Generating outpost";
+    //    long num563 = 0L;
+    //    double num564 = 0.25;
+    //    int y21;
+    //    int x23;
+    //    while (true)
+    //    {
+    //        y21 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 500);
+    //        x23 = (int)(((WorldGen.genRand.NextDouble() * num564 + 0.1) * -GenVars.dungeonSide + 0.5) * Main.maxTilesX);
+    //        if (Main.tile[x23, y21].HasTile && Main.tile[x23, y21].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+    //        {
+    //            break;
+    //        }
+    //        if (num563++ > 2000000)
+    //        {
+    //            if (num564 == 0.35)
+    //            {
+    //                num562++;
+    //                if (num562 > 10)
+    //                {
+    //                    return;
+    //                }
+    //            }
+    //            num564 = Math.Min(0.35, num564 + 0.05);
+    //            num563 = 0L;
+    //        }
+    //    }
+    //    AvalonWorld.MakeTempOutpost(x23, y21);
+    //    GenVars.structures.AddProtectedStructure(new(x23, y21, 25, 25));
+    //}
     public static void TropicsSanctumTask(GenerationProgress progress, GameConfiguration config)
     {
-        progress.Message = "Adding tropics chests...";
+        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.Chests");
         int amount = WorldGen.genRand.Next(11, 19);
         //bool flag30 = true;
         while (amount > 0)
@@ -171,7 +262,7 @@ internal class Tropics
 
     public static void WaspNests(GenerationProgress progress, GameConfiguration configuration)
     {
-        progress.Message = "Adding nests...";
+        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.Nests");
         int amount = WorldGen.genRand.Next(4, 8);
         //bool flag30 = true;
         while (amount > 0)
@@ -179,11 +270,11 @@ internal class Tropics
             int num406 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 250);
             int num407 = WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.85));
             //((AvalonWorld.dungeonSide >= 0) ? WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.4)) : WorldGen.genRand.Next((int)(Main.maxTilesX * 0.6), (int)(Main.maxTilesX * 0.85)));
-            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() && GenVars.structures.CanPlace(new Rectangle(num407 - 100, num406 - 100, 100, 100)))
+            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() && GenVars.structures.CanPlace(new Rectangle(num407 - 50, num406 - 21, 87, 66)))
             {
                 //flag30 = false;
                 Structures.Nest.CreateWaspNest(num407, num406);
-                GenVars.structures.AddProtectedStructure(new Rectangle(num407 - 100, num406 - 100, 100, 100)); // -50, -21, 87, 66
+                GenVars.structures.AddProtectedStructure(new Rectangle(num407 - 50, num406 - 21, 87, 66)); // -50, -21, 87, 66
                 amount--;
             }
         }

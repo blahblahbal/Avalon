@@ -990,7 +990,14 @@ internal class Hellcastle
         {
             for (int j = b; j <= height / 2; j++)
             {
-                WorldGen.PlaceTile(x + i, y + j + 1, type);
+                if (type == ushort.MaxValue)
+                {
+                    WorldGen.KillTile(x + i, y + j + 1);
+                }
+                else
+                {
+                    WorldGen.PlaceTile(x + i, y + j + 1, type);
+                }
             }
         }
     }

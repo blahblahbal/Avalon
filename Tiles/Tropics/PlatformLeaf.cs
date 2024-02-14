@@ -35,6 +35,7 @@ public class PlatformLeaf : ModTile
         TileObjectData.addTile(Type);
         DustType = ModContent.DustType<Dusts.TropicalDust>();
         AddMapEntry(new Color(82, 123, 35));
+        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.PlatformLeaf>());
     }
     //public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
     //{
@@ -43,10 +44,10 @@ public class PlatformLeaf : ModTile
     public override void FloorVisuals(Player player)
     {
     }
-    public override IEnumerable<Item> GetItemDrops(int i, int j)
-    {
-        yield return new Item(ModContent.ItemType<Items.Placeable.Tile.PlatformLeaf>());
-    }
+    //public override IEnumerable<Item> GetItemDrops(int i, int j)
+    //{
+    //    yield return new Item(ModContent.ItemType<Items.Placeable.Tile.PlatformLeaf>());
+    //}
     public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
     {
         if (Main.tile[i, j].TileFrameY >= 74)

@@ -104,7 +104,7 @@ public class GenSystem : ModSystem
                     bool flag4 = false;
                     for (int num173 = 5; num173 < Main.maxTilesX - 5; num173++)
                     {
-                        for (int num174 = 0; (double)num174 < Main.worldSurface + 20.0; num174++)
+                        for (int num174 = 0; num174 < Main.worldSurface + 20.0; num174++)
                         {
                             if (Main.tile[num173, num174].HasTile && Main.tile[num173, num174].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
                             {
@@ -121,7 +121,7 @@ public class GenSystem : ModSystem
                     flag4 = false;
                     for (int num175 = Main.maxTilesX - 5; num175 > 5; num175--)
                     {
-                        for (int num176 = 0; (double)num176 < Main.worldSurface + 20.0; num176++)
+                        for (int num176 = 0; num176 < Main.worldSurface + 20.0; num176++)
                         {
                             if (Main.tile[num175, num176].HasTile && Main.tile[num175, num176].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
                             {
@@ -199,7 +199,7 @@ public class GenSystem : ModSystem
             totalWeight += currentPass.Weight;
 
             currentPass = new GemStashes();
-            tasks.Insert(stalac + 3, currentPass);
+            tasks.Insert(stalac + 2, currentPass);
             totalWeight += currentPass.Weight;
 
             currentPass = new AvalonStalac();

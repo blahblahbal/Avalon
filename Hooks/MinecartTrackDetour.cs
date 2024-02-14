@@ -8,18 +8,23 @@ namespace Avalon.Hooks
 {
     internal class MinecartTrackDetour : ModHook
     {
-        private static readonly int[] InvalidWalls = new int[12]
+        private static readonly int[] InvalidWalls = new int[13]
         {
             ModContent.WallType<Walls.OrangeBrickUnsafe>(), ModContent.WallType<Walls.OrangeSlabUnsafe>(), ModContent.WallType<Walls.OrangeTiledUnsafe>(),
             ModContent.WallType<Walls.PurpleBrickUnsafe>(), ModContent.WallType<Walls.PurpleSlabWallUnsafe>(), ModContent.WallType<Walls.PurpleTiledWallUnsafe>(),
             ModContent.WallType<Walls.YellowBrickUnsafe>(), ModContent.WallType<Walls.YellowSlabWallUnsafe>(), ModContent.WallType<Walls.YellowTiledWallUnsafe>(),
-            WallID.IceBrick, WallID.ObsidianBackEcho, ModContent.WallType<Walls.ImperviousBrickWallUnsafe>(),
+            WallID.IceBrick, WallID.ObsidianBackEcho, ModContent.WallType<Walls.ImperviousBrickWallUnsafe>(), ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>()
         };
-        private static readonly int[] InvalidTiles = new int[10]
+        private static readonly int[] InvalidTiles = new int[26]
         {
             ModContent.TileType<Tiles.OrangeBrick>(), ModContent.TileType<Tiles.PurpleBrick>(), ModContent.TileType<Tiles.YellowBrick>(),
             ModContent.TileType<Tiles.CrackedOrangeBrick>(), ModContent.TileType<Tiles.CrackedPurpleBrick>(), ModContent.TileType<Tiles.CrackedYellowBrick>(),
-            ModContent.TileType<Tiles.BlastedStone>(), TileID.IceBrick, ModContent.TileType<Tiles.ImperviousBrick>(), TileID.LavaMossBlock
+            ModContent.TileType<Tiles.BlastedStone>(), TileID.IceBrick, ModContent.TileType<Tiles.ImperviousBrick>(), TileID.LavaMossBlock, TileID.Containers, TileID.Containers2,
+            ModContent.TileType<Tiles.Furniture.Coughwood.CoughwoodChest>(), ModContent.TileType<Tiles.Furniture.BleachedEbony.BleachedEbonyChest>(),
+            ModContent.TileType<Tiles.Furniture.HellfireChest>(), ModContent.TileType<Tiles.Contagion.IckyAltar>(), ModContent.TileType<Tiles.GemTrees.TourmalineTree>(),
+            ModContent.TileType<Tiles.GemTrees.PeridotTree>(), ModContent.TileType<Tiles.GemTrees.ZirconTree>(), ModContent.TileType<Tiles.Statues>(),
+            ModContent.TileType<Tiles.Tropics.PlatformLeaf>(), ModContent.TileType<Tiles.GemStashes>(), ModContent.TileType<Tiles.ChunkstoneColumn>(),
+            ModContent.TileType<Tiles.CrimstoneColumn>(), ModContent.TileType<Tiles.EbonstoneColumn>(), ModContent.TileType<Tiles.Tropics.TuhrtlBrick>()
         };
 
         protected override void Apply()

@@ -562,21 +562,21 @@ namespace Avalon.Common.Templates
         }
 
         // This example shows using GetItemDrops to manually decide item drops. This example is for a tile with a TileObjectData.
-        public override IEnumerable<Item> GetItemDrops(int i, int j)
-        {
-            Tile tile = Main.tile[i, j];
-            int style = TileObjectData.GetTileStyle(tile);
-            if (style == 0)
-            {
-                yield return new Item(DropItem);
-            }
-            if (style == 1)
-            {
-                // Style 1 is ExampleChest when locked. We want that tile style to drop the ExampleChest item as well. Use the Chest Lock item to lock this chest.
-                // No item places ExampleChest in the locked style, so the automatic item drop is unknown, this is why GetItemDrops is necessary in this situation. 
-                yield return new Item(DropItem);
-            }
-        }
+        //public override IEnumerable<Item> GetItemDrops(int i, int j)
+        //{
+        //    Tile tile = Main.tile[i, j];
+        //    int style = TileObjectData.GetTileStyle(tile);
+        //    if (style == 0)
+        //    {
+        //        yield return new Item(DropItem);
+        //    }
+        //    if (style == 1)
+        //    {
+        //        // Style 1 is ExampleChest when locked. We want that tile style to drop the ExampleChest item as well. Use the Chest Lock item to lock this chest.
+        //        // No item places ExampleChest in the locked style, so the automatic item drop is unknown, this is why GetItemDrops is necessary in this situation. 
+        //        yield return new Item(DropItem);
+        //    }
+        //}
 
         public override ushort GetMapOption(int i, int j)
         {
@@ -630,6 +630,10 @@ namespace Avalon.Common.Templates
 
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
+            //if (!WorldGen.generatingWorld)
+            //{
+            //    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, DropItem);
+            //}
             // We override KillMultiTile to handle additional logic other than the item drop. In this case, unregistering the Chest from the world
             Chest.DestroyChest(i, j);
         }

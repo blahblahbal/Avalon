@@ -8088,6 +8088,16 @@ Mods: {
 				DisplayName: Platform Leaf
 				Tooltip: ""
 			}
+
+			OutpostKey: {
+				DisplayName: Outpost Key
+				Tooltip: Opens the Tuhrtl Outpost door
+			}
+
+			TuhrtlDoor: {
+				DisplayName: Tuhrtl Door
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9162,6 +9172,7 @@ Mods: {
 			TropicalSapling.MapEntry: Sapling
 			TropicalShortGrass.MapEntry1: Tropical Shroom Cap
 			TomeForge.MapEntry: Tome Forge
+			LockedTuhrtlDoor.MapEntry: Mods.Avalon.Tiles.LockedTuhrtlDoor.MapEntry
 		}
 
 		Prefixes: {
@@ -9396,6 +9407,15 @@ Mods: {
 			DesertBeakEmote.Command: desertbeak
 			StaminaEmote.Command: staminapotion
 			LibrarianEmote.Command: librarian
+		}
+
+		Generation: {
+			Tropics: {
+				TuhrtlOutpost: Creating tropical outpost
+				PlatformLeaves: Placing platform leaf traps
+				Chests: Adding tropics chests
+				Nests: Adding nests
+			}
 		}
 
 		Tools: {

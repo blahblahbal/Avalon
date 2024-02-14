@@ -43,10 +43,10 @@ public class DarkMatterMonolith : ModTile
         }
     }
 
-    public override IEnumerable<Item> GetItemDrops(int i, int j)
-    {
-        yield return new Item(ModContent.ItemType<Items.Placeable.Tile.DarkMatterMonolith>());
-    }
+    //public override IEnumerable<Item> GetItemDrops(int i, int j)
+    //{
+    //    yield return new Item(ModContent.ItemType<Items.Placeable.Tile.DarkMatterMonolith>());
+    //}
 
     public override void AnimateTile(ref int frame, ref int frameCounter)
     {
