@@ -28,6 +28,11 @@ Mods: {
 	}
 
 	Avalon: {
+		Slots: {
+			StaminaScroll: Stamina Scroll
+			Tome: Tome
+		}
+
 		Conditions: {
 			NearShimmer: Needs shimmer
 			ShimmerCraft: Throw into shimmer
@@ -254,12 +259,12 @@ Mods: {
 			ContaminatedPenguin: During a Blood Moon, the normally docile penguins fall under the hostile influence of the Contagion.
 			ContaminatedBunny: Bunnies are pure beings that normally cannot be afflicted by the Contagion, but will succumb under the effects of a Blood Moon.
 			Shadlopod: These devious creatures blend themselves into the ebonstone ceilings of the corruption and take pleasure in watching their prey panic when they take their vision away.
-            Rafflesia: A horrible, large, rotten-smelling plant that seems to constantly produce flies.
-            Fly: Truly-annoying insects that love festering meat and rotten produce. They are as disgusting as they sound.
-            AmberSlime: A simple gelatinous creature that somehow also has the properties of amber. It takes a long time to digest anything.
-            InfestedAmberSlime: Consistent consumption of the bugs in the Tropics caused these slimes to burst into a multitude of them when killed.
-            OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
-            PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
+			Rafflesia: A horrible, large, rotten-smelling plant that seems to constantly produce flies.
+			Fly: Truly-annoying insects that love festering meat and rotten produce. They are as disgusting as they sound.
+			AmberSlime: A simple gelatinous creature that somehow also has the properties of amber. It takes a long time to digest anything.
+			InfestedAmberSlime: Consistent consumption of the bugs in the Tropics caused these slimes to burst into a multitude of them when killed.
+			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
+			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
 		}
 
 		Keybinds: {
@@ -462,6 +467,8 @@ Mods: {
 			BenchName: Herbology Bench
 			Herbs: Herbs
 			Potions: Potions
+			HerbExchangeTitle: Herb Exchange
+			PotionExchangeTitle: Potion Exchange
 
 			HerbExchange: {
 				Description: Purchase herbs seeds
@@ -8097,7 +8104,7 @@ Mods: {
 
 			OutpostKey: {
 				DisplayName: Outpost Key
-				Tooltip: Opens the Tuhrtl Outpost door
+				Tooltip: Opens the tuhrtl outpost door
 			}
 
 			TuhrtlDoor: {
@@ -8134,6 +8141,26 @@ Mods: {
 
 			MosquitoProboscis: {
 				DisplayName: Mosquito Proboscis
+				Tooltip: ""
+			}
+
+			KingStingBossBag: {
+				DisplayName: King Sting Boss Bag
+				Tooltip: ""
+			}
+
+			WaspFiber: {
+				DisplayName: Wasp Fiber
+				Tooltip: ""
+			}
+
+			KingStingMask: {
+				DisplayName: King Sting Mask
+				Tooltip: ""
+			}
+
+			LoamstoneBrick: {
+				DisplayName: Loamstone Brick
 				Tooltip: ""
 			}
 		}
@@ -8368,6 +8395,8 @@ Mods: {
 			LightningCloud.DisplayName: Lightning Cloud
 			SoulDagger.DisplayName: Soul Dagger
 			SoulGrabber.DisplayName: Soul Grabber
+			ToxinBall.DisplayName: Toxin Ball
+			ToxinSplash.DisplayName: Toxin Splash
 		}
 
 		NPCs: {
@@ -8476,6 +8505,8 @@ Mods: {
 			PoisonDartFrog.DisplayName: Poison Dart Frog
 			AmberSlime.DisplayName: Amber Slime
 			InfestedAmberSlime.DisplayName: Infested Amber Slime
+			KingSting.DisplayName: King Sting
+			Larvae.DisplayName: Larvae
 		}
 
 		Buffs: {
@@ -9092,11 +9123,79 @@ Mods: {
 		Tiles: {
 			Catalyzer.MapEntry: Catalyzer
 
+			LargeHerbsStage1: {
+				MapEntry0: Growing Large Daybloom
+				MapEntry1: Growing Large Moonglow
+				MapEntry2: Growing Large Blinkroot
+				MapEntry3: Growing Large Deathweed
+				MapEntry4: Growing Large Waterleaf
+				MapEntry5: Growing Large Fireblossom
+				MapEntry6: Growing Large Shiverthorn
+				MapEntry7: Growing Large Bloodberry
+				MapEntry8: Growing Large Sweetstem
+				MapEntry9: Growing Large Barfbush
+				MapEntry10: Growing Large Holybird
+				MapEntry11: Growing Large Twilight Plume
+			}
+
+			LargeHerbsStage2: {
+				MapEntry0: Growing Large Daybloom
+				MapEntry1: Growing Large Moonglow
+				MapEntry2: Growing Large Blinkroot
+				MapEntry3: Growing Large Deathweed
+				MapEntry4: Growing Large Waterleaf
+				MapEntry5: Growing Large Fireblossom
+				MapEntry6: Growing Large Shiverthorn
+				MapEntry7: Growing Large Bloodberry
+				MapEntry8: Growing Large Sweetstem
+				MapEntry9: Growing Large Barfbush
+				MapEntry10: Growing Large Holybird
+				MapEntry11: Growing Large Twilight Plume
+			}
+
+			LargeHerbsStage3: {
+				MapEntry0: Growing Large Daybloom
+				MapEntry1: Growing Large Moonglow
+				MapEntry2: Growing Large Blinkroot
+				MapEntry3: Growing Large Deathweed
+				MapEntry4: Growing Large Waterleaf
+				MapEntry5: Growing Large Fireblossom
+				MapEntry6: Growing Large Shiverthorn
+				MapEntry7: Growing Large Bloodberry
+				MapEntry8: Growing Large Sweetstem
+				MapEntry9: Growing Large Barfbush
+				MapEntry10: Growing Large Holybird
+				MapEntry11: Growing Large Twilight Plume
+			}
+
+			LargeHerbsStage4: {
+				MapEntry0: Large Daybloom
+				MapEntry1: Large Moonglow
+				MapEntry2: Large Blinkroot
+				MapEntry3: Large Deathweed
+				MapEntry4: Large Waterleaf
+				MapEntry5: Large Fireblossom
+				MapEntry6: Large Shiverthorn
+				MapEntry7: Large Bloodberry
+				MapEntry8: Large Sweetstem
+				MapEntry9: Large Barfbush
+				MapEntry10: Large Holybird
+				MapEntry11: Large Twilight Plume
+			}
+
 			CaesiumForge: {
 				MapEntry: Caesium Forge
 				MapEntry0: Caesium Forge
 			}
 
+			EvilAltarsPlaced: {
+				MapEntry0: Demon Altar
+				MapEntry1: Crimson Altar
+				MapEntry2: Icky Altar
+			}
+
+			HerbologyBench.MapEntry: Herbology Bench
+			IckyAltar.MapEntry: Icky Altar
 			MonsterBanner.MapEntry: Banner
 			PlacedBars.MapEntry: Placed Bar
 			Boltstone.MapEntry: Boltstone
@@ -9214,8 +9313,8 @@ Mods: {
 			TropicalShortGrass.MapEntry1: Tropical Shroom Cap
 			TomeForge.MapEntry: Tome Forge
 			LockedTuhrtlDoor.MapEntry: Mods.Avalon.Tiles.LockedTuhrtlDoor.MapEntry
-			TropicsPot.MapEntry: Tropics Pot
-			TuhrtlPot.MapEntry: Tuhrtl Pot
+			TropicsPot.MapEntry: Pot
+			TuhrtlPot.MapEntry: Pot
 		}
 
 		Prefixes: {
@@ -9459,11 +9558,13 @@ Mods: {
 
 		Generation: {
 			Tropics: {
-				TuhrtlOutpost: Creating tropical outpost
+				TuhrtlOutpost: Creating tropical ruins
 				PlatformLeaves: Placing platform leaf traps
 				Chests: Adding tropics chests
 				Nests: Adding nests
 			}
+
+			Contagion.Message: Making the world gross
 		}
 
 		Tools: {

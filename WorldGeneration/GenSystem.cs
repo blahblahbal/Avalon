@@ -183,13 +183,13 @@ public class GenSystem : ModSystem
             tasks.Insert(index + 2, new ReplaceChestItems());
         }
 
-        int iceWalls = tasks.FindIndex(genPass => genPass.Name == "Cave Walls");
-        if (iceWalls != -1)
-        {
-            //currentPass = new Shrines();
-            //tasks.Insert(iceWalls + 1, currentPass);
-            //totalWeight += currentPass.Weight;
-        }
+        //int iceWalls = tasks.FindIndex(genPass => genPass.Name == "Cave Walls");
+        //if (iceWalls != -1)
+        //{
+        //    //currentPass = new Shrines();
+        //    //tasks.Insert(iceWalls + 1, currentPass);
+        //    //totalWeight += currentPass.Weight;
+        //}
 
         int stalac = tasks.FindIndex(genPass => genPass.Name == "Remove Broken Traps");
         if (stalac != -1)

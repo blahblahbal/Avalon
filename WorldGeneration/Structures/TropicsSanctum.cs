@@ -23,30 +23,40 @@ namespace Avalon.WorldGeneration.Structures
         {
             int[,] _structure = {
                 {0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0},
-                {0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
-                {0,1,1,1,1,2,2,2,2,2,2,2,2,2,2,1,1,1,1,0},
-                {1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1},
-                {1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1},
-                {1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1},
+                {0,0,1,1,6,1,1,1,1,1,1,1,1,1,1,6,1,1,0,0},
+                {0,1,1,6,1,2,2,2,2,2,2,2,2,2,2,1,6,1,1,0},
+                {1,1,6,1,2,2,2,2,2,2,2,2,2,2,2,2,1,6,1,1},
+                {1,6,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,6,1},
+                {1,6,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,6,1},
                 {1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1},
                 {1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1},
                 {0,2,2,4,2,2,3,2,2,2,5,2,2,3,2,2,4,2,2,0},
                 {0,2,2,2,2,1,1,1,1,1,1,1,1,1,1,2,2,2,2,0},
-                {0,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,0},
-                {0,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,0},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                {0,2,2,2,1,1,6,1,1,1,1,1,1,6,1,1,2,2,2,0},
+                {0,2,1,1,1,6,6,6,1,1,1,1,6,6,6,1,1,1,2,0},
+                {1,1,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1,1},
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
             };
             int PosX = x;   //spawnX and spawnY is where you want the anchor to be when this generates
             int PosY = y;
             
             ushort t = (ushort)WorldGen.genRand.Next(3);
+            ushort t2 = 0;
             if (t == 0)
+            {
                 t = TileID.IridescentBrick;
+                t2 = (ushort)ModContent.TileType<Tiles.TwiliplateBlock>();
+            }
             else if (t == 1)
-                t = (ushort)ModContent.TileType<Tiles.BismuthBrick>();
+            {
+                t = TileID.PlatinumBrick;
+                t2 = (ushort)ModContent.TileType<Tiles.MoonplateBlock>();
+            }
             else if (t == 2)
+            {
                 t = (ushort)ModContent.TileType<Tiles.Tropics.Loamstone>();
+                t2 = TileID.Sunplate;
+            }
             //i = vertical, j = horizontal
             for (int confirmPlatforms = 0; confirmPlatforms < 2; confirmPlatforms++)    //Increase the iterations on this outermost for loop if tabletop-objects are not properly spawning
             {
@@ -66,13 +76,12 @@ namespace Avalon.WorldGeneration.Structures
                                     break;
                                 case 1:
                                     if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    {
                                         tile.HasTile = true;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
                                         tile.TileType = t;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
                                         tile.Slope = SlopeType.Solid;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
                                         tile.IsHalfBlock = false;
+                                    }
                                     break;
                                 case 2:
                                     if (confirmPlatforms == 0)
@@ -125,6 +134,15 @@ namespace Avalon.WorldGeneration.Structures
                                         WorldGen.AddBuriedChest(k, l, contain: GenSystem.GetNextTropicsChestItem(), Style: 0, chestTileType: (ushort)ModContent.TileType<Tiles.PlatinumChest>());
                                     if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
                                         tile.WallType = (ushort)ModContent.WallType<Walls.TropicalGrassWall>();
+                                    break;
+                                case 6:
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    {
+                                        tile.HasTile = true;
+                                        tile.TileType = t2;
+                                        tile.Slope = SlopeType.Solid;
+                                        tile.IsHalfBlock = false;
+                                    }
                                     break;
                             }
                         }

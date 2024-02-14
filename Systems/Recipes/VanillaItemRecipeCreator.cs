@@ -12,6 +12,7 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Fish;
+using Avalon.Items.Consumables;
 
 namespace Avalon.Systems.Recipes;
 
@@ -134,6 +135,7 @@ public class VanillaItemRecipeCreator : ModSystem
         Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.RangerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.SorcererEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.BundleofBalloons).AddIngredient(ModContent.ItemType<SandyStormcloudinaBottle>()).AddIngredient(ItemID.ShinyRedBalloon, 3).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ItemID.BandofStarpower).AddIngredient(ModContent.ItemType<NerveNumbNecklace>()).AddIngredient(ModContent.ItemType<StaminaCrystal>()).AddTile(TileID.TinkerersWorkbench).AddCondition(Condition.InGraveyard).Register();
         #endregion
 
         #region Bottles

@@ -23,7 +23,7 @@ internal class HerbologyUIHerbExchange : ExxoUIPanelWrapper<ExxoUIList>
         herbExchangeTitleContainer.Justification = Justification.Center;
         list.Append(herbExchangeTitleContainer);
 
-        var title = new ExxoUIText(Language.GetTextValue("Mods.Avalon.Herbology.HerbExchange"));
+        var title = new ExxoUIText(Language.GetTextValue("Mods.Avalon.Herbology.HerbExchangeTitle"));
         herbExchangeTitleContainer.Append(title);
 
         Toggle = new ExxoUIImageButtonToggle(

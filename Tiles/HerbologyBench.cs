@@ -18,7 +18,7 @@ public class HerbologyBench : ModTile
         TileObjectData.addTile(Type);
         TileID.Sets.HasOutlines[Type] = true;
         Main.tileFrameImportant[Type] = true;
-        AddMapEntry(new Color(153, 77, 86), LanguageManager.Instance.GetText("Herbology Bench"));
+        AddMapEntry(new Color(153, 77, 86), this.GetLocalization("MapEntry"));
         AdjTiles = new int[] { TileID.Bottles };
         TileID.Sets.DisableSmartCursor[Type] = true;
         DustType = DustID.WoodFurniture;

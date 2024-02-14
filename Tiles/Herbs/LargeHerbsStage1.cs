@@ -26,18 +26,18 @@ public class LargeHerbsStage1 : ModTile
         TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
         TileObjectData.addTile(Type);
         Main.tileFrameImportant[Type] = true;
-        AddMapEntry(new Color(246, 197, 26), LanguageManager.Instance.GetText("Growing Large Daybloom"));
-        AddMapEntry(new Color(76, 150, 216), LanguageManager.Instance.GetText("Growing Large Moonglow"));
-        AddMapEntry(new Color(185, 214, 42), LanguageManager.Instance.GetText("Growing Large Blinkroot"));
-        AddMapEntry(new Color(167, 203, 37), LanguageManager.Instance.GetText("Growing Large Deathweed"));
-        AddMapEntry(new Color(72, 145, 125), LanguageManager.Instance.GetText("Growing Large Waterleaf"));
-        AddMapEntry(new Color(177, 69, 49), LanguageManager.Instance.GetText("Growing Large Fireblossom"));
-        AddMapEntry(new Color(40, 152, 240), LanguageManager.Instance.GetText("Growing Large Shiverthorn"));
-        AddMapEntry(Color.IndianRed, LanguageManager.Instance.GetText("Growing Large Bloodberry"));
-        AddMapEntry(new Color(216, 161, 50), LanguageManager.Instance.GetText("Growing Large Sweetstem"));
-        AddMapEntry(new Color(0, 200, 50), LanguageManager.Instance.GetText("Growing Large Barfbush"));
-        AddMapEntry(new Color(75, 184, 230), LanguageManager.Instance.GetText("Growing Large Holybird"));
-        AddMapEntry(new Color(191, 0, 81), LanguageManager.Instance.GetText("Growing Large Twilight Plume"));
+        AddMapEntry(new Color(246, 197, 26), this.GetLocalization("MapEntry0")); // LanguageManager.Instance.GetText("Growing Large Daybloom"));
+        AddMapEntry(new Color(76, 150, 216), this.GetLocalization("MapEntry1")); //LanguageManager.Instance.GetText("Growing Large Moonglow"));
+        AddMapEntry(new Color(185, 214, 42), this.GetLocalization("MapEntry2")); // LanguageManager.Instance.GetText("Growing Large Blinkroot"));
+        AddMapEntry(new Color(167, 203, 37), this.GetLocalization("MapEntry3")); // LanguageManager.Instance.GetText("Growing Large Deathweed"));
+        AddMapEntry(new Color(72, 145, 125), this.GetLocalization("MapEntry4")); // LanguageManager.Instance.GetText("Growing Large Waterleaf"));
+        AddMapEntry(new Color(177, 69, 49), this.GetLocalization("MapEntry5")); // LanguageManager.Instance.GetText("Growing Large Fireblossom"));
+        AddMapEntry(new Color(40, 152, 240), this.GetLocalization("MapEntry6")); // LanguageManager.Instance.GetText("Growing Large Shiverthorn"));
+        AddMapEntry(Color.IndianRed, this.GetLocalization("MapEntry7")); // LanguageManager.Instance.GetText("Growing Large Bloodberry"));
+        AddMapEntry(new Color(216, 161, 50), this.GetLocalization("MapEntry8")); // LanguageManager.Instance.GetText("Growing Large Sweetstem"));
+        AddMapEntry(new Color(0, 200, 50), this.GetLocalization("MapEntry9")); // LanguageManager.Instance.GetText("Growing Large Barfbush"));
+        AddMapEntry(new Color(75, 184, 230), this.GetLocalization("MapEntry10")); // LanguageManager.Instance.GetText("Growing Large Holybird"));
+        AddMapEntry(new Color(191, 0, 81), this.GetLocalization("MapEntry11")); //  LanguageManager.Instance.GetText("Growing Large Twilight Plume"));
     }
     public override ushort GetMapOption(int i, int j)
     {

@@ -151,6 +151,7 @@ internal class Tropics
             }
         }
     }
+
     //public static void TuhrtlOutpostTask(GenerationProgress progress, GameConfiguration config)
     //{
     //    int num562 = 0;
@@ -187,7 +188,8 @@ internal class Tropics
     public static void TropicsSanctumTask(GenerationProgress progress, GameConfiguration config)
     {
         progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.Chests");
-        int amount = WorldGen.genRand.Next(11, 19);
+        float amount = WorldGen.genRand.Next(7, 12);
+        amount *= Main.maxTilesX / 4200;
         //bool flag30 = true;
         while (amount > 0)
         {
@@ -266,13 +268,13 @@ internal class Tropics
             }
         }
     }
-
     public static void WaspNests(GenerationProgress progress, GameConfiguration configuration)
     {
         progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.Nests");
-        int amount = WorldGen.genRand.Next(4, 8);
+        float amount = Main.maxTilesX / 4200;
+        int amt = 1 + WorldGen.genRand.Next((int)(5 * amount), (int)(8 * amount));
         //bool flag30 = true;
-        while (amount > 0)
+        while (amt > 0)
         {
             int num406 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 250);
             int num407 = WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.85));
@@ -282,7 +284,7 @@ internal class Tropics
                 //flag30 = false;
                 Structures.Nest.CreateWaspNest(num407, num406);
                 GenVars.structures.AddProtectedStructure(new Rectangle(num407 - 50, num406 - 21, 87, 66)); // -50, -21, 87, 66
-                amount--;
+                amt--;
             }
         }
     }
@@ -337,7 +339,6 @@ internal class Tropics
 			progress.Set(0.2f + num835 * 0.8f);
 		}
 	}
-
     private static void ScanTileColumnAndRemoveClumps(int x)
     {
         int num = 0;

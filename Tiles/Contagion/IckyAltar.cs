@@ -11,7 +11,7 @@ public class IckyAltar : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(0, 250, 50), LanguageManager.Instance.GetText("Icky Altar"));
+        AddMapEntry(new Color(0, 250, 50), this.GetLocalization("MapEntry"));
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
         TileObjectData.newTile.LavaDeath = false;
         TileObjectData.newTile.CoordinateHeights = new[] {16, 18};

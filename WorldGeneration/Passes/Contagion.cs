@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -61,7 +62,7 @@ internal class Contagion : GenPass
         iceXMax -= buffer;
         iceXMin += buffer;
 
-        progress.Message = "Making the world gross";
+        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Contagion.Message");
         double num766 = Main.maxTilesX * 0.00045;
         if (WorldGen.remixWorldGen)
         {

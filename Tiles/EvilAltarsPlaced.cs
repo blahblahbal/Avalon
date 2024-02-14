@@ -12,7 +12,9 @@ public class EvilAltarsPlaced : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(0, 250, 50), LanguageManager.Instance.GetText("Evil Altar"));
+        AddMapEntry(new Color(119, 101, 125), this.GetLocalization("MapEntry0"));
+        AddMapEntry(new Color(214, 127, 133), this.GetLocalization("MapEntry1"));
+        AddMapEntry(new Color(0, 250, 50), this.GetLocalization("MapEntry2"));
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
         TileObjectData.newTile.LavaDeath = false;
         TileObjectData.newTile.CoordinateHeights = new int[]

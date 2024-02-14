@@ -81,7 +81,20 @@ public class Nest
     }
     public static void CreateWaspNest(int x, int y)
     {
+        bool placedLarva = false;
         MakeCell(x, y);
+        // figure out how to make the larva gen in a random cell
+        if (WorldGen.genRand.NextBool(8))
+        {
+            for (int i = x - 1; i <= x + 1; i++)
+            {
+                Main.tile[i, y + 18].TileType = TileID.Hive;
+                Main.tile[i, y + 18].Active(true);
+            }
+            WorldGen.PlaceTile(x, y + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+            placedLarva = true;
+        }
+
 
         int rightSide = WorldGen.genRand.Next(2);
         int leftSide = WorldGen.genRand.Next(2);
@@ -90,12 +103,38 @@ public class Nest
         if (rightSide == 0)
         {
             Vector2 rSideM = MakeCell(x + 24, y);
+
+            // possible larva placement
+            if (WorldGen.genRand.NextBool(6) && !placedLarva)
+            {
+                for (int i = x + 23; i <= x + 25; i++)
+                {
+                    Main.tile[i, y + 18].TileType = TileID.Hive;
+                    Main.tile[i, y + 18].Active(true);
+                }
+                WorldGen.PlaceTile(x + 24, y + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+                placedLarva = true;
+            }
+
             int xOffR = (int)(rSideM.X + 24 * (float)Math.Cos(2 * 60 * Math.PI / 180f));
             int yOffR = (int)(rSideM.Y + 24 * (float)Math.Sin(2 * 60 * Math.PI / 180f));
             centers.Add(new Vector2(x, y + 12));
             centers.Add(rSideM + new Vector2(0, 12));
             centers.Add(rSideM + new Vector2(0, 12));
             Vector2 cell = MakeCell(xOffR, yOffR);
+
+            // possible larva placement
+            if (WorldGen.genRand.NextBool(5) && !placedLarva)
+            {
+                for (int i = xOffR - 1; i <= xOffR + 1; i++)
+                {
+                    Main.tile[i, yOffR + 18].TileType = TileID.Hive;
+                    Main.tile[i, yOffR + 18].Active(true);
+                }
+                WorldGen.PlaceTile(xOffR, yOffR + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+                placedLarva = true;
+            }
+
             int xoffcell = (int)(cell.X + 24 * (float)Math.Cos(3 * 60 * Math.PI / 180f));
             int yoffcell = (int)(cell.Y + 24 * (float)Math.Sin(3 * 60 * Math.PI / 180f));
             centers.Add(cell + new Vector2(0, 12));
@@ -111,6 +150,19 @@ public class Nest
         if (leftSide == 0)
         {
             Vector2 lSideM = MakeCell(x - 24, y);
+
+            // possible larva placement
+            if (WorldGen.genRand.NextBool(6) && !placedLarva)
+            {
+                for (int i = x - 25; i <= x - 23; i++)
+                {
+                    Main.tile[i, y + 18].TileType = TileID.Hive;
+                    Main.tile[i, y + 18].Active(true);
+                }
+                WorldGen.PlaceTile(x - 24, y + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+                placedLarva = true;
+            }
+
             int xOffL = (int)(lSideM.X + 24 * (float)Math.Cos(1 * 60 * Math.PI / 180f));
             int yOffL = (int)(lSideM.Y + 24 * (float)Math.Sin(1 * 60 * Math.PI / 180f));
             centers.Add(new Vector2(x, y + 12));
@@ -118,6 +170,19 @@ public class Nest
             centers.Add(lSideM + new Vector2(0, 12));
 
             Vector2 cell = MakeCell(xOffL, yOffL);
+
+            // possible larva placement
+            if (WorldGen.genRand.NextBool(5) && !placedLarva)
+            {
+                for (int i = xOffL - 1; i <= xOffL + 1; i++)
+                {
+                    Main.tile[i, yOffL + 18].TileType = TileID.Hive;
+                    Main.tile[i, yOffL + 18].Active(true);
+                }
+                WorldGen.PlaceTile(xOffL, yOffL + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+                placedLarva = true;
+            }
+
             int xoffcell = (int)(cell.X + 24 * (float)Math.Cos(3 * 60 * Math.PI / 180f));
             int yoffcell = (int)(cell.Y + 24 * (float)Math.Sin(3 * 60 * Math.PI / 180f));
             centers.Add(cell + new Vector2(0, 12));
@@ -130,31 +195,69 @@ public class Nest
             }
         }
 
-        Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Nest>();
-        Main.tile[x - 1, y].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Nest>();
-        Main.tile[x + 1, y].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Nest>();
-        Tile t = Main.tile[x, y];
-        t.HasTile = true;
-        Tile t2 = Main.tile[x - 1, y];
-        t2.HasTile = true;
-        Tile t3 = Main.tile[x + 1, y];
-        t3.HasTile = true;
+        //Main.tile[x, y].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Nest>();
+        //Main.tile[x - 1, y].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Nest>();
+        //Main.tile[x + 1, y].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Nest>();
+        //Tile t = Main.tile[x, y];
+        //t.HasTile = true;
+        //Tile t2 = Main.tile[x - 1, y];
+        //t2.HasTile = true;
+        //Tile t3 = Main.tile[x + 1, y];
+        //t3.HasTile = true;
         //WorldGen.PlaceTile(x, y - 1, (ushort)ModContent.TileType<Tiles.WaspLarva>());
 
 
         int xoff1 = (int)(x + 24 * (float)Math.Cos(1 * 60 * Math.PI / 180f));
         int yoff1 = (int)(y + 24 * (float)Math.Sin(1 * 60 * Math.PI / 180f));
         MakeCell(xoff1, yoff1);
+
+        // possible larva placement
+        if (WorldGen.genRand.NextBool(5) && !placedLarva)
+        {
+            for (int i = xoff1 - 1; i <= xoff1 + 1; i++)
+            {
+                Main.tile[i, yoff1 + 18].TileType = TileID.Hive;
+                Main.tile[i, yoff1 + 18].Active(true);
+            }
+            WorldGen.PlaceTile(xoff1, yoff1 + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+            placedLarva = true;
+        }
+
         centers.Add(new Vector2(xoff1, yoff1 + 12));
 
         int xoff2 = (int)(x + 24 * (float)Math.Cos(2 * 60 * Math.PI / 180f));
         int yoff2 = (int)(y + 24 * (float)Math.Sin(2 * 60 * Math.PI / 180f));
         MakeCell(xoff2, yoff2);
+
+        // possible larva placement
+        if (WorldGen.genRand.NextBool(4) && !placedLarva)
+        {
+            for (int i = xoff2 - 1; i <= xoff2 + 1; i++)
+            {
+                Main.tile[i, yoff2 + 18].TileType = TileID.Hive;
+                Main.tile[i, yoff2 + 18].Active(true);
+            }
+            WorldGen.PlaceTile(xoff2, yoff2 + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+            placedLarva = true;
+        }
+
         centers.Add(new Vector2(xoff2, yoff2 + 12));
 
         int xoff3 = (int)(x + 23 * (float)Math.Cos(4 * 60 * Math.PI / 180f));
         int yoff3 = (int)(y + 23 * (float)Math.Sin(4 * 60 * Math.PI / 180f));
         Vector2 cellthing = MakeCell(xoff3, yoff3);
+
+        // final larva placement
+        if (!placedLarva)
+        {
+            for (int i = xoff3 - 1; i <= xoff3 + 1; i++)
+            {
+                Main.tile[i, yoff3 + 18].TileType = TileID.Hive;
+                Main.tile[i, yoff3 + 18].Active(true);
+            }
+            WorldGen.PlaceTile(xoff3, yoff3 + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+            placedLarva = true;
+        }
 
         if (WorldGen.genRand.NextBool(3))
         {
@@ -170,6 +273,16 @@ public class Nest
                 if (WorldGen.genRand.NextBool(2))
                 {
                     BoreTunnelOriginal((int)centers[i].X, (int)centers[i].Y, (int)centers[i + 1].X, (int)centers[i + 1].Y, 3, TileID.Hive);
+                }
+            }
+        }
+        for (int i = x - 50; i < x + 37; i++)
+        {
+            for (int j = y - 21; j < y + 45; j++)
+            {
+                if (Main.tile[i, j].TileType == TileID.Hive)
+                {
+                    Main.tile[i, j].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Nest>();
                 }
             }
         }
@@ -223,11 +336,13 @@ public class Nest
                 if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < r)
                 {
                     Tile t = Framing.GetTileSafely(k, l);
-                    t.HasTile = false;
-                    t.IsHalfBlock = false;
-                    t.Slope = SlopeType.Solid;
-                    Main.tile[k, l].TileType = 0;
-                    WorldGen.SquareTileFrame(k, l);
+                    if (t.TileType != ModContent.TileType<Tiles.Tropics.WaspLarva>() && t.TileType != TileID.Hive)
+                    {
+                        t.HasTile = false;
+                        t.IsHalfBlock = false;
+                        t.Slope = SlopeType.Solid;
+                        WorldGen.SquareTileFrame(k, l);
+                    }
                     t.WallType = wallType;
                     WorldGen.SquareWallFrame(k, l);
                 }
