@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria.GameContent.Bestiary;
 using Terraria.Enums;
 using Terraria.DataStructures;
+using Terraria.Localization;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -42,7 +43,7 @@ public class Fly : ModNPC
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            new FlavorTextBestiaryInfoElement("")
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Fly"))
         });
     }
 

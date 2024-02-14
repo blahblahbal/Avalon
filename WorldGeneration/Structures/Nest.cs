@@ -27,7 +27,7 @@ public class Nest
                 {
                     Tile t = Main.tile[tileX, tileY];
                     t.HasTile = false;
-                    t.WallType = WallID.HiveUnsafe;
+                    t.WallType = (ushort)ModContent.WallType<Walls.NestWall>();
                     t.LiquidAmount = 0;
                     WorldGen.SquareWallFrame(tileX, tileY);
                     if (WorldGen.genRand.NextBool(15))
@@ -43,10 +43,11 @@ public class Nest
     public static Vector2 MakeCell(int x, int y)
     {
         CreateHexagon(x, y, 26, ModContent.TileType<Tiles.Tropics.Nest>());
+        CreateHexagon(x, y, 23, 0, true);
         ClearHexagon(x, y + 3, 20);
         return new Vector2(x, y);
     }
-    public static void CreateHexagon(int centerX, int centerY, int hexagonSize, int tileType)
+    public static void CreateHexagon(int centerX, int centerY, int hexagonSize, int tileType, bool doWalls = false)
     {
         int halfHexagonSize = hexagonSize / 2;
 
@@ -63,9 +64,17 @@ public class Nest
                 if (WorldGen.InWorld(tileX, tileY))
                 {
                     Tile t = Main.tile[tileX, tileY];
-                    t.HasTile = true;
-                    t.TileType = (ushort)tileType;
-                    WorldGen.SquareTileFrame(tileX, tileY);
+                    if (!doWalls)
+                    {
+                        t.HasTile = true;
+                        t.TileType = (ushort)tileType;
+                        WorldGen.SquareTileFrame(tileX, tileY);
+                    }
+                    else
+                    {
+                        t.WallType = (ushort)ModContent.WallType<Walls.NestWall>();
+                        WorldGen.SquareWallFrame(tileX, tileY);
+                    }
                 }
             }
         }
@@ -160,7 +169,7 @@ public class Nest
             {
                 if (WorldGen.genRand.NextBool(2))
                 {
-                    BoreTunnelOriginal((int)centers[i].X, (int)centers[i].Y, (int)centers[i + 1].X, (int)centers[i + 1].Y, 2, TileID.Hive);
+                    BoreTunnelOriginal((int)centers[i].X, (int)centers[i].Y, (int)centers[i + 1].X, (int)centers[i + 1].Y, 3, TileID.Hive);
                 }
             }
         }
@@ -188,12 +197,12 @@ public class Nest
         {
             if (flag)
             {
-                MakeCircleNest(num5, i, (int)r, type, WallID.HiveUnsafe);
+                MakeCircleNest(num5, i, (int)r, type, (ushort)ModContent.WallType<Walls.NestWall>());
                 result.Add(new Vector2(num5, i));
             }
             else
             {
-                MakeCircleNest(i, num5, (int)r, type, WallID.HiveUnsafe);
+                MakeCircleNest(i, num5, (int)r, type, (ushort)ModContent.WallType<Walls.NestWall>());
                 result.Add(new Vector2(i, num5));
             }
             num3 -= num2;

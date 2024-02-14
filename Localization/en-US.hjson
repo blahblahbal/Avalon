@@ -254,6 +254,12 @@ Mods: {
 			ContaminatedPenguin: During a Blood Moon, the normally docile penguins fall under the hostile influence of the Contagion.
 			ContaminatedBunny: Bunnies are pure beings that normally cannot be afflicted by the Contagion, but will succumb under the effects of a Blood Moon.
 			Shadlopod: These devious creatures blend themselves into the ebonstone ceilings of the corruption and take pleasure in watching their prey panic when they take their vision away.
+            Rafflesia: A horrible, large, rotten-smelling plant that seems to constantly produce flies.
+            Fly: Truly-annoying insects that love festering meat and rotten produce. They are as disgusting as they sound.
+            AmberSlime: A simple gelatinous creature that somehow also has the properties of amber. It takes a long time to digest anything.
+            InfestedAmberSlime: Consistent consumption of the bugs in the Tropics caused these slimes to burst into a multitude of them when killed.
+            OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
+            PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
 		}
 
 		Keybinds: {
@@ -8098,6 +8104,38 @@ Mods: {
 				DisplayName: Tuhrtl Door
 				Tooltip: ""
 			}
+
+			CordycepsHat: {
+				DisplayName: Cordyceps Hat
+				Tooltip:
+					'''
+					Increases minion damage by 4%
+					Increases your max number of minions by 1
+					'''
+			}
+
+			CordycepsWrappings: {
+				DisplayName: Cordyceps Wrappings
+				Tooltip:
+					'''
+					Increases minion damage by 4%
+					Increases your max number of minions by 1
+					'''
+			}
+
+			CordycepsLeggings: {
+				DisplayName: Cordyceps Leggings
+				Tooltip:
+					'''
+					Increases minion damage by 4%
+					Increases your max number of minions by 1
+					'''
+			}
+
+			MosquitoProboscis: {
+				DisplayName: Mosquito Proboscis
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8433,8 +8471,11 @@ Mods: {
 			HomingRocket.DisplayName: Homing Rocket
 			Phantasm.DisplayName: Phantasm
 			Fly.DisplayName: Fly
-			FlySmall.DisplayName: Fly Small
+			FlySmall.DisplayName: Fly
 			Rafflesia.DisplayName: Rafflesia
+			PoisonDartFrog.DisplayName: Poison Dart Frog
+			AmberSlime.DisplayName: Amber Slime
+			InfestedAmberSlime.DisplayName: Infested Amber Slime
 		}
 
 		Buffs: {
@@ -9173,6 +9214,8 @@ Mods: {
 			TropicalShortGrass.MapEntry1: Tropical Shroom Cap
 			TomeForge.MapEntry: Tome Forge
 			LockedTuhrtlDoor.MapEntry: Mods.Avalon.Tiles.LockedTuhrtlDoor.MapEntry
+			TropicsPot.MapEntry: Tropics Pot
+			TuhrtlPot.MapEntry: Tuhrtl Pot
 		}
 
 		Prefixes: {
@@ -9336,6 +9379,11 @@ Mods: {
 			UndergroundTropics: {
 				DisplayName: Underground Tropics
 				TownNPCDialogueName: the Underground Tropics
+			}
+
+			TuhrtlOutpost: {
+				DisplayName: Tuhrtl Outpost
+				TownNPCDialogueName: the Tuhrtl Outpost
 			}
 		}
 

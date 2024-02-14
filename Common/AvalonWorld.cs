@@ -713,7 +713,7 @@ public class AvalonWorld : ModSystem
                     }
                 }
                 // regular grass
-                if (!Main.tile[xCoord, num9].HasTile && Main.tile[xCoord, num9].LiquidAmount == 0 &&
+                if (!Main.tile[xCoord, num9].HasTile &&
                     !Main.tile[xCoord, yCoord].IsHalfBlock && Main.tile[xCoord, yCoord].Slope == SlopeType.Solid &&
                     WorldGen.genRand.NextBool(5) && num14 == ModContent.TileType<TropicalGrass>())
                 {
@@ -1306,7 +1306,7 @@ public class AvalonWorld : ModSystem
     }
     public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
     {
-        float ContagionStrength = (float)ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
+        float ContagionStrength = ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
         ContagionStrength = Math.Min(ContagionStrength, 1f);
 
         int sunR = backgroundColor.R;
@@ -1740,7 +1740,7 @@ public class AvalonWorld : ModSystem
         int k = j;
         while (k < Main.maxTilesY)
         {
-            if (Main.tile[i, k].HasTile && Main.tileSolid[(int)Main.tile[i, k].TileType])
+            if (Main.tile[i, k].HasTile && Main.tileSolid[Main.tile[i, k].TileType])
             {
                 int num = k - 1;
                 if (Main.tile[i, num - 1].LiquidType == LiquidID.Lava || Main.tile[i - 1, num - 1].LiquidType == LiquidID.Lava)
@@ -1751,11 +1751,15 @@ public class AvalonWorld : ModSystem
                 {
                     return false;
                 }
-                if (!Main.tileSolid[(int)Main.tile[i, num].TileType] || !Main.tileSolid[(int)Main.tile[i - 1, num].TileType])
+                if (!Main.tileSolid[Main.tile[i, num].TileType] || !Main.tileSolid[Main.tile[i - 1, num].TileType])
                 {
                     return false;
                 }
-                if (!Main.wallDungeon[(int)Main.tile[i, num].WallType])
+                if (!Main.wallDungeon[Main.tile[i, num].WallType] || !Main.tileSolid[Main.tile[i, num].TileType])
+                {
+                    return false;
+                }
+                if (num < Main.rockLayer)
                 {
                     return false;
                 }
@@ -1871,7 +1875,7 @@ public class AvalonWorld : ModSystem
         if (X == 0)
         {
             totalSick = totalSick2;
-            tSick = (byte)Math.Round((double)totalSick / (double)WorldGen.totalSolid * 100.0);
+            tSick = (byte)Math.Round(totalSick / (double)WorldGen.totalSolid * 100.0);
             if (tSick == 0 && totalSick > 0)
             {
                 tSick = 1;

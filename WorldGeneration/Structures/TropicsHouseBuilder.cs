@@ -69,6 +69,20 @@ public class TropicsCaveHouseHook : ModHook
             if (style != HouseType.Granite && WorldUtils.Find(new Point(room.X - 2, room.Y - 2), Searches.Chain(new Searches.Rectangle(room.Width + 4, room.Height + 4).RequireAll(mode: false), new Conditions.HasLava()), out var _))
                 return false;
 
+            for (int i = room.X; i < room.X + room.Width; i++)
+            {
+                for (int j = room.Y; j < room.Y + room.Height; j++)
+                {
+                    if (Main.tile[i, j].TileType == ModContent.TileType<TuhrtlBrick>() ||
+                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.Tropics.Nest>() ||
+                        Main.tile[i, j].WallType == ModContent.WallType<Walls.NestWall>() ||
+                        Main.tile[i, j].WallType == ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>())
+                    {
+                        return false;
+                    }
+                }
+            }
+
             if (WorldGen.notTheBees)
             {
                 if (!structures.CanPlace(room, BeelistedTiles, 5))
@@ -80,7 +94,7 @@ public class TropicsCaveHouseHook : ModHook
             }
         }
 
-        return orig.Invoke(rooms, structures, style);
+        return true; // orig.Invoke(rooms, structures, style);
     }
 
     private static HouseType GetHouseType(IEnumerable<Rectangle> rooms)
@@ -88,14 +102,14 @@ public class TropicsCaveHouseHook : ModHook
         Dictionary<ushort, int> dictionary = new Dictionary<ushort, int>();
         foreach (Rectangle room in rooms)
         {
-            WorldUtils.Gen(new Point(room.X - 10, room.Y - 10), new Shapes.Rectangle(room.Width + 20, room.Height + 20), new Actions.TileScanner(0, 59, 147, 1, 161, 53, 396, 397, 368, 367, 60, 70, (ushort)ModContent.TileType<Tiles.Tropics.Loam>(), (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>()).Output(dictionary));
+            WorldUtils.Gen(new Point(room.X - 10, room.Y - 10), new Shapes.Rectangle(room.Width + 20, room.Height + 20), new Actions.TileScanner(0, 59, 147, 1, 161, 53, 396, 397, 368, 367, 60, 70, (ushort)ModContent.TileType<Loam>(), (ushort)ModContent.TileType<TropicalGrass>()).Output(dictionary));
         }
 
         List<Tuple<HouseType, int>> list = new List<Tuple<HouseType, int>>();
         list.Add(Tuple.Create(HouseType.Wood, dictionary[0] + dictionary[1]));
         if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Tropics)
         {
-            list.Add(Tuple.Create(HouseType.Jungle, dictionary[(ushort)ModContent.TileType<Tiles.Tropics.Loam>()] + dictionary[(ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>()] * 10));
+            list.Add(Tuple.Create(HouseType.Jungle, dictionary[(ushort)ModContent.TileType<Loam>()] + dictionary[(ushort)ModContent.TileType<TropicalGrass>()] * 10));
         }
         else
         {
@@ -120,6 +134,23 @@ public class TropicsCaveHouseHook : ModHook
             return HouseBuilder.Invalid;
 
         HouseType houseType = GetHouseType(list);
+
+        foreach (Rectangle room in list)
+        {
+            for (int i = room.X; i < room.X + room.Width; i++)
+            {
+                for (int j = room.Y; j < room.Y + room.Height; j++)
+                {
+                    if (Main.tile[i, j].TileType == ModContent.TileType<TuhrtlBrick>() ||
+                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.Tropics.Nest>() ||
+                        Main.tile[i, j].WallType == ModContent.WallType<Walls.NestWall>() ||
+                        Main.tile[i, j].WallType == ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>())
+                    {
+                        return HouseBuilder.Invalid;
+                    }
+                }
+            }
+        }
 
         if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Tropics && houseType == HouseType.Jungle)
         {

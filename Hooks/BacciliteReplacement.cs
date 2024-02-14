@@ -27,6 +27,17 @@ namespace Avalon.Hooks
                 style = 0;
                 type = (ushort)ModContent.TileType<Tiles.Contagion.ContagionPot>();
             }
+            if (Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() ||
+                Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Tropics.Loam>())
+            {
+                style = 0;
+                type = (ushort)ModContent.TileType<Tiles.Tropics.TropicsPot>();
+            }
+            if (Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+            {
+                style = 0;
+                type = (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlPot>();
+            }
             return orig.Invoke(x, y, type, style);
         }
 

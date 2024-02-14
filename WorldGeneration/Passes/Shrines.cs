@@ -202,8 +202,8 @@ internal class Shrines : GenPass
             }
             else if (q == 1)
             {
-                //Structures.EvilShrine.GenerateEvilShrine(x10, y6);
-                //GenVars.structures.AddProtectedStructure(new(x10, y6, 41, 22));
+                Structures.EvilShrine.GenerateEvilShrine(x10, y6);
+                GenVars.structures.AddProtectedStructure(new(x10, y6, 41, 22));
             }
             else if (q == 2)
             {

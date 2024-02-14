@@ -23,7 +23,7 @@ public class TuhrtlBrick : ModTile
         TileID.Sets.GeneralPlacementTiles[Type] = false;
         TileID.Sets.CanBeClearedDuringGeneration[Type] = false;
         TileID.Sets.ChecksForMerge[Type] = true;
-        TileID.Sets.GeneralPlacementTiles[Type] = true;
+        TileID.Sets.GeneralPlacementTiles[Type] = false;
     }
 
     public override bool CanExplode(int i, int j)

@@ -27,7 +27,6 @@ internal class TuhrtlOutpost
         int wide = 90;
         int high = 60;
 
-
         int totalWidth = wide * 2;
         // add high to height of box, offsetting the diagonal part by high
         heightOfBox += high;

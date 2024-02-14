@@ -19,6 +19,5 @@ public class Nest : ModTile
         TileID.Sets.JungleSpecial[Type] = true;
         TileID.Sets.ChecksForMerge[Type] = true;
         TileID.Sets.GeneralPlacementTiles[Type] = false;
-        TileID.Sets.GeneralPlacementTiles[Type] = true;
     }
 }

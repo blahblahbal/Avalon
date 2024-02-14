@@ -186,9 +186,9 @@ public class GenSystem : ModSystem
         int iceWalls = tasks.FindIndex(genPass => genPass.Name == "Cave Walls");
         if (iceWalls != -1)
         {
-            currentPass = new Shrines();
-            tasks.Insert(iceWalls + 1, currentPass);
-            totalWeight += currentPass.Weight;
+            //currentPass = new Shrines();
+            //tasks.Insert(iceWalls + 1, currentPass);
+            //totalWeight += currentPass.Weight;
         }
 
         int stalac = tasks.FindIndex(genPass => genPass.Name == "Remove Broken Traps");
@@ -203,6 +203,10 @@ public class GenSystem : ModSystem
             totalWeight += currentPass.Weight;
 
             currentPass = new AvalonStalac();
+            tasks.Insert(stalac + 1, currentPass);
+            totalWeight += currentPass.Weight;
+
+            currentPass = new Shrines();
             tasks.Insert(stalac + 1, currentPass);
             totalWeight += currentPass.Weight;
         }
@@ -238,7 +242,7 @@ public class GenSystem : ModSystem
 
             if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
             {
-                currentPass = new PassLegacy("Tropics Thing", new WorldGenLegacyMethod(Tropics.LoamWallTask));
+                currentPass = new PassLegacy("Tropics Loam Walls", new WorldGenLegacyMethod(Tropics.LoamWallTask));
                 tasks.Insert(index + 2, currentPass);
                 totalWeight += currentPass.Weight;
             }

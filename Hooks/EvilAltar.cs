@@ -263,23 +263,23 @@ public class EvilAltar : ModHook
         {
             int i2 = WorldGen.genRand.Next(100, Main.maxTilesX - 100);
             double num9 = Main.worldSurface;
-            if (num == 108 || num == 222)
+            if (num == 108 || num == 222 || num == ModContent.TileType<NaquadahOre>())
             {
                 num9 = Main.rockLayer;
             }
-            if (num == 111 || num == 223)
+            if (num == 111 || num == 223 || num == ModContent.TileType<TroxiniumOre>())
             {
-                num9 = (Main.rockLayer + Main.rockLayer + (double)Main.maxTilesY) / 3.0;
+                num9 = (Main.rockLayer + Main.rockLayer + Main.maxTilesY) / 3.0;
             }
             int j2 = WorldGen.genRand.Next((int)num9, Main.maxTilesY - 150);
             if (Main.remixWorld)
             {
                 double num10 = Main.maxTilesX - 350;
-                if (num == 108 || num == 222)
+                if (num == 108 || num == 222 || num == ModContent.TileType<NaquadahOre>())
                 {
-                    num10 = (Main.rockLayer + Main.rockLayer + (double)Main.maxTilesY - 350.0) / 3.0;
+                    num10 = (Main.rockLayer + Main.rockLayer + Main.maxTilesY - 350.0) / 3.0;
                 }
-                if (num == 111 || num == 223)
+                if (num == 111 || num == 223 || num == ModContent.TileType<TroxiniumOre>())
                 {
                     num10 = Main.rockLayer - 25.0;
                 }
