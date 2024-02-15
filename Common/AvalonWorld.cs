@@ -717,30 +717,29 @@ public class AvalonWorld : ModSystem
                     !Main.tile[xCoord, yCoord].IsHalfBlock && Main.tile[xCoord, yCoord].Slope == SlopeType.Solid &&
                     WorldGen.genRand.NextBool(5) && num14 == ModContent.TileType<TropicalGrass>())
                 {
-                    WorldGen.PlaceTile(xCoord, num9, ModContent.TileType<TropicalShortGrass>(), true);
-                    if (WorldGen.genRand.NextBool(2))
+                    Tile t2 = Main.tile[xCoord, num9];
+                    t2.TileType = (ushort)ModContent.TileType<TropicalShortGrass>();
+
+                    if (WorldGen.genRand.NextBool(60) && num9 > Main.rockLayer) // shroom cap
                     {
-                        Main.tile[xCoord, num9].TileFrameX = (short)(WorldGen.genRand.Next(0, 8) * 18);
+                        t2.TileFrameX = 8 * 18;
+                    }
+                    else if (WorldGen.genRand.NextBool(230) && num9 > Main.rockLayer) // nature's gift
+                    {
+                        t2.TileFrameX = 9 * 18;
+                    }
+                    else if (WorldGen.genRand.NextBool(15))
+                    {
+                        t2.TileFrameX = (short)(WorldGen.genRand.Next(10, 23) * 18);
                     }
                     else
                     {
-                        Main.tile[xCoord, num9].TileFrameX = (short)(WorldGen.genRand.Next(10, 23) * 18);
+                        t2.TileFrameX = (short)(WorldGen.genRand.Next(8) * 18);
                     }
-                    if (num9 > Main.rockLayer)
-                    {
-                        if (WorldGen.genRand.NextBool(60))
-                        {
-                            Main.tile[xCoord, num9].TileFrameX = 18 * 8; // shroom cap
-                        }
-                        else if (WorldGen.genRand.NextBool(230))
-                        {
-                            Main.tile[xCoord, num9].TileFrameX = 18 * 9; // nature's gift
-                        }
-                    }
+
                     if (Main.tile[xCoord, num9].HasTile)
                     {
-                        Tile t = Main.tile[xCoord, num9];
-                        t.TileColor = Main.tile[xCoord, yCoord].TileColor;
+                        t2.TileColor = Main.tile[xCoord, yCoord].TileColor;
                     }
 
                     if (Main.netMode == NetmodeID.Server && Main.tile[xCoord, num9].HasTile)
@@ -817,11 +816,6 @@ public class AvalonWorld : ModSystem
                 }
             }
             #endregion tropical vines
-
-            if (Main.tile[xCoord, yCoord].TileType == ModContent.TileType<PlatformLeaf>() && Main.tile[xCoord, yCoord].TileFrameY >= 74)
-            {
-
-            }
         }
 
         #region more fallen stars

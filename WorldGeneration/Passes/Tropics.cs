@@ -198,9 +198,29 @@ internal class Tropics
                             }
                         }
                     }
-                    if (Main.tile[num207, num208].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && !Main.tile[num207, num208 - 1].HasTile)
+                    if (Main.tile[num207, num208].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && !Main.tile[num207, num208 - 1].HasTile &&
+                        !Main.tile[num207, num208].IsHalfBlock && Main.tile[num207, num208].Slope == SlopeType.Solid)
                     {
-                        WorldGen.PlaceTile(num207, num208 - 1, grass, mute: true, style: WorldGen.genRand.Next(8));
+                        Tile t = Main.tile[num207, num208 - 1];
+                        t.TileType = (ushort)grass;
+                        t.HasTile = true;
+                        if (WorldGen.genRand.NextBool(60) && num208 > Main.rockLayer)
+                        {
+                            t.TileFrameX = 8 * 18;
+                        }
+                        else if (WorldGen.genRand.NextBool(230) && num208 > Main.rockLayer)
+                        {
+                            t.TileFrameX = 9 * 18;
+                        }
+                        else if (WorldGen.genRand.NextBool(15))
+                        {
+                            t.TileFrameX = (short)(WorldGen.genRand.Next(10, 23) * 18);
+                        }
+                        else
+                        {
+                            t.TileFrameX = (short)(WorldGen.genRand.Next(8) * 18);
+                        }
+                        //WorldGen.PlaceTile(num207, num208 - 1, grass, mute: true, style: WorldGen.genRand.Next(8));
                     }
                 }
             }
