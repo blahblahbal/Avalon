@@ -9493,6 +9493,17 @@ Mods: {
 					Description: Vile bacterial contagion is guaranteed to be present in your world.
 				}
 			}
+
+            Generation: {
+			    Tropics: {
+				    TuhrtlOutpost: Creating tropical ruins
+				    PlatformLeaves: Placing platform leaf traps
+				    Chests: Adding tropics chests
+				    Nests: Adding nests
+			    }
+
+			    Contagion.Message: Making the world gross
+		    }
 		}
 
 		DryadSpecialText: {
@@ -9554,17 +9565,6 @@ Mods: {
 			DesertBeakEmote.Command: desertbeak
 			StaminaEmote.Command: staminapotion
 			LibrarianEmote.Command: librarian
-		}
-
-		Generation: {
-			Tropics: {
-				TuhrtlOutpost: Creating tropical ruins
-				PlatformLeaves: Placing platform leaf traps
-				Chests: Adding tropics chests
-				Nests: Adding nests
-			}
-
-			Contagion.Message: Making the world gross
 		}
 
 		Tools: {

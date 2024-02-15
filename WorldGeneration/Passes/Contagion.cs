@@ -62,7 +62,7 @@ internal class Contagion : GenPass
         iceXMax -= buffer;
         iceXMin += buffer;
 
-        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Contagion.Message");
+        progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Contagion.Message");
         double num766 = Main.maxTilesX * 0.00045;
         if (WorldGen.remixWorldGen)
         {

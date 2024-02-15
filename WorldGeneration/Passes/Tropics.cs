@@ -17,7 +17,7 @@ internal class Tropics
     public static void TuhrtlOutpostTask(GenerationProgress progress, GameConfiguration config)
     {
         int num648 = 0;
-        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.TuhrtlOutpost");
+        progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.TuhrtlOutpost");
         long num649 = 0L;
         double num650 = 0.25;
         bool flag38 = false;
@@ -131,7 +131,7 @@ internal class Tropics
     }
     public static void PlatformLeafTrapTask(GenerationProgress progress, GameConfiguration config)
     {
-        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.PlatformLeaves");
+        progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.PlatformLeaves");
         for (int i = 20; i < Main.maxTilesX - 20; i++)
         {
             for (int j = 150; j < Main.maxTilesY - 230; j++)
@@ -187,7 +187,7 @@ internal class Tropics
     //}
     public static void TropicsSanctumTask(GenerationProgress progress, GameConfiguration config)
     {
-        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.Chests");
+        progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.Chests");
         float amount = WorldGen.genRand.Next(7, 12);
         amount *= Main.maxTilesX / 4200;
         //bool flag30 = true;
@@ -270,7 +270,7 @@ internal class Tropics
     }
     public static void WaspNests(GenerationProgress progress, GameConfiguration configuration)
     {
-        progress.Message = Language.GetTextValue("Mods.Avalon.Generation.Tropics.Nests");
+        progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.Nests");
         float amount = Main.maxTilesX / 4200;
         int amt = 1 + WorldGen.genRand.Next((int)(5 * amount), (int)(8 * amount));
         //bool flag30 = true;
