@@ -43,6 +43,11 @@ public class ExxoAvalonOrigins : Mod
     public static readonly Mod? Confection = ModLoader.TryGetMod("TheConfectionRebirth", out Mod obtainedMod) ? obtainedMod : null;
 
     /// <summary>
+    ///     Gets the instance of Fargo's Mod.
+    /// </summary>
+    public static readonly Mod? Fargo = ModLoader.TryGetMod("Fargowiltas", out Mod obtainedMod) ? obtainedMod : null;
+
+    /// <summary>
     ///     Gets the instance of the TMLAchievements mod.
     /// </summary>
     public static readonly Mod? Achievements = ModLoader.TryGetMod("TMLAchievements", out Mod obtainedMod) ? obtainedMod : null;

@@ -2376,6 +2376,19 @@ public class AvalonGlobalItem : GlobalItem
         else if (type == ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>()) return ModContent.WallType<Walls.YellowTiledWallUnsafe>();
         return 0;
     }
+    public override bool CanUseItem(Item item, Player player)
+    {
+        // temporary instavator stoppage
+        if (ExxoAvalonOrigins.Fargo != null)
+        {
+            if (item.type == ExxoAvalonOrigins.Fargo.Find<ModItem>("Instavator").Type && (int)(player.GetModPlayer<AvalonPlayer>().MousePosition.X / 16) >= Main.maxTilesX / 2 - 250 &&
+                (int)(player.GetModPlayer<AvalonPlayer>().MousePosition.X / 16) <= Main.maxTilesX / 2 + 250)
+            {
+                return false;
+            }    
+        }
+        return base.CanUseItem(item, player);
+    }
     public override int ChoosePrefix(Item item, UnifiedRandom rand) => item.IsArmor()
         ? Main.rand.Next(ExxoPrefix.ExxoCategoryPrefixes[ExxoPrefixCategory.Armor]).Type
         : base.ChoosePrefix(item, rand);
