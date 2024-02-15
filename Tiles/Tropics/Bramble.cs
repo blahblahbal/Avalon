@@ -12,15 +12,12 @@ public class Bramble : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(78, 70, 67));
+        AddMapEntry(new Color(65, 67, 24));
         TileID.Sets.TouchDamageImmediate[Type] = 20;
-        Main.tileBrick[Type] = true;
         Main.tileBlockLight[Type] = true;
-        TileID.Sets.IsBeam[Type] = true;
-        Main.tileNoAttach[Type] = true;
-        TileID.Sets.CanPlaceNextToNonSolidTile[Type] = true;
         HitSound = SoundID.Grass;
-        DustType = DustID.JungleGrass;
+        DustType = ModContent.DustType<Dusts.TropicalDust>();
+        TileID.Sets.CanPlaceNextToNonSolidTile[Type] = true;
     }
     public override bool Slope(int i, int j)
     {

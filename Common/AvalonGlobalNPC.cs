@@ -711,7 +711,7 @@ public class AvalonGlobalNPC : GlobalNPC
         for (ypos = Main.tile[tile.X, tile.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
         xpos = tile.X - xpos;
         ypos = tile.Y - ypos;
-        if (npc.velocity.Y > 4.5f && !npc.noGravity && !npc.noTileCollide)
+        if (npc.velocity.Y > 4.85f && !npc.noGravity && !npc.noTileCollide)
         {
             if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Tropics.PlatformLeaf>() &&
                 Main.tile[tile2.X, tile2.Y].TileType == ModContent.TileType<Tiles.Tropics.PlatformLeaf>() && Main.tile[tile.X, tile.Y].TileFrameY < 74)
