@@ -9494,16 +9494,16 @@ Mods: {
 				}
 			}
 
-            Generation: {
-			    Tropics: {
-				    TuhrtlOutpost: Creating tropical ruins
-				    PlatformLeaves: Placing platform leaf traps
-				    Chests: Adding tropics chests
-				    Nests: Adding nests
-			    }
+			Generation: {
+				Tropics: {
+					TuhrtlOutpost: Creating tropical ruins
+					PlatformLeaves: Placing platform leaf traps
+					Chests: Adding tropics chests
+					Nests: Adding nests
+				}
 
-			    Contagion.Message: Making the world gross
-		    }
+				Contagion.Message: Making the world gross
+			}
 		}
 
 		DryadSpecialText: {
