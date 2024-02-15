@@ -213,10 +213,10 @@ public class TuhrtlPot : ModTile
                     {
                         Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<ContagionTorch>(), torchStack); //Contagion Torches
                     }
-                    //else if (Main.LocalPlayer.InModBiome<Biomes.Tropics>() && Main.tile[i, j].LiquidAmount < 0)
-                    //{
-                    //    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<TropicsTorch>(), torchStack); //Tropics Torches
-                    //}
+                    else if (Main.LocalPlayer.InModBiome<Biomes.Tropics>() && Main.tile[i, j].LiquidAmount < 0)
+                    {
+                        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<Items.Placeable.Furniture.TropicsTorch>(), torchStack); //Tropics Torches
+                    }
                     else if (Main.tile[i, j].LiquidAmount > 0 && !Main.LocalPlayer.ZoneSnow && !Main.LocalPlayer.ZoneRockLayerHeight)
                     {
                         Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ItemID.Glowstick, glowstickStack); //Glowstick

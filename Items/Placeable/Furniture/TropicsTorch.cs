@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class SlimeTorch : ModItem
+class TropicsTorch : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -16,7 +16,7 @@ class SlimeTorch : ModItem
 
     public override void SetDefaults()
     {
-        Item.DefaultToTorch(ModContent.TileType<Tiles.Furniture.SlimeTorch>(), 0, false);
+        Item.DefaultToTorch(ModContent.TileType<Tiles.Tropics.TropicsTorch>(), 0, false);
         Item.value = Item.sellPrice(0, 0, 0, 40);
         Item.notAmmo = true;
         Item.flame = true;
@@ -26,7 +26,7 @@ class SlimeTorch : ModItem
     {
         CreateRecipe(33)
             .AddIngredient(ItemID.Torch, 33)
-            .AddIngredient(ItemID.SlimeBlock).Register();
+            .AddIngredient(ModContent.ItemType<Material.TropicalShroomCap>()).Register();
     }
     public override void HoldItem(Player player)
     {
@@ -44,7 +44,7 @@ class SlimeTorch : ModItem
                 Main.dust[d].position = player.RotatedRelativePoint(Main.dust[d].position);
             }
             Vector2 position = player.RotatedRelativePoint(new Vector2(player.itemLocation.X + 12f * player.direction + player.velocity.X, player.itemLocation.Y - 14f + player.velocity.Y), true);
-            Lighting.AddLight(position, 0.25f, 0.72f, 1f);
+            Lighting.AddLight(position, 0.69f, 1f, 0.42f);
         }
     }
 
@@ -52,7 +52,7 @@ class SlimeTorch : ModItem
     {
         if (!Item.wet)
         {
-            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 0.25f, 0.72f, 1f);
+            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 0.69f, 1f, 0.42f);
         }
     }
 }

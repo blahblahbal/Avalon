@@ -9,6 +9,7 @@ public class Tropics : ModBiome
 {
     public override SceneEffectPriority Priority => SceneEffectPriority.BiomeMedium;
     public override ModWaterStyle WaterStyle => ModContent.Find<ModWaterStyle>("Avalon/TropicsWaterStyle");
+    public override int BiomeTorchItemType => ModContent.ItemType<Items.Placeable.Furniture.TropicsTorch>();
     public override string BestiaryIcon => base.BestiaryIcon;
     public override int Music
     {

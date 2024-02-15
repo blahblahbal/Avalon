@@ -102,6 +102,41 @@ public class AvalonPlayer : ModPlayer
     }
     #endregion
 
+    #region stinger probe
+    public int StingerProbeTimer;
+    public LinkedList<int> StingerProbes { get; } = new();
+    public float StingerProbeRotation { get; set; }
+    public LinkedListNode<int> HandleStingerProbe() => StingerProbes.AddLast(StingerProbes.Count);
+
+    public void RemoveStingerProbe(LinkedListNode<int> linkedListNode)
+    {
+        LinkedListNode<int> nextNode = linkedListNode.Next;
+        while (nextNode != null)
+        {
+            nextNode.Value--;
+            nextNode = nextNode.Next;
+        }
+
+        StingerProbes.Remove(linkedListNode);
+    }
+
+    public LinkedListNode<int> ObtainExistingStingerProbe(int index)
+    {
+        int diff = index + 1 - StingerProbes.Count;
+        if (diff > 0)
+        {
+            for (int i = 0; i < diff; i++)
+            {
+                StingerProbes.AddLast(StingerProbes.Count);
+            }
+
+            return StingerProbes.Last;
+        }
+
+        return StingerProbes.Find(index);
+    }
+    #endregion
+
     public bool PotionSicknessSoundPlayed;
 
     public byte FartTimer = 0;
@@ -454,6 +489,7 @@ public class AvalonPlayer : ModPlayer
     public override void PreUpdateBuffs()
     {
         FrameCount++; // aura potion
+        StingerProbeRotation = (StingerProbeRotation % MathHelper.TwoPi) + 0.01f;
         PlanetRotation[0] = (PlanetRotation[0] % MathHelper.TwoPi) + 0.08f;
         PlanetRotation[1] = (PlanetRotation[1] % MathHelper.TwoPi) + 0.09f;
         PlanetRotation[2] = (PlanetRotation[2] % MathHelper.TwoPi) + 0.06f;

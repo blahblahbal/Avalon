@@ -239,7 +239,7 @@ public class AvalonWorld : ModSystem
             setValue.Invoke(Lang.gen[11], new object[] { ExxoAvalonOrigins.JungleGenMessage });
         }
     }
-    int numNPCs = 0;
+
     public override void PostUpdateWorld()
     {
         #region desert beak natural spawning
