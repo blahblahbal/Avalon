@@ -143,7 +143,7 @@ internal class Tropics
                         Main.tile[i - 1, j].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && Main.tile[i - 1, j].HasTile &&
                         !Main.tile[i, j - 1].HasTile && !Main.tile[i - 1, j - 1].HasTile && !Main.tile[i + 1, j - 1].HasTile)
                     {
-                        if (WorldGen.genRand.NextBool(5)) WorldgenHelper.CreateLeafTrap(i, j + 2);
+                        if (WorldGen.genRand.NextBool(5)) Structures.LeafTrap.CreateLeafTrap(i, j + 2);
                     }
                 }
             }

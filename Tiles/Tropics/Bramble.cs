@@ -1,8 +1,10 @@
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ObjectData;
 
 namespace Avalon.Tiles.Tropics;
 
@@ -12,20 +14,13 @@ public class Bramble : ModTile
     {
         AddMapEntry(new Color(78, 70, 67));
         TileID.Sets.TouchDamageImmediate[Type] = 20;
-        //Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;
         Main.tileBlockLight[Type] = true;
-        //Main.tileShine2[Type] = true;
+        TileID.Sets.IsBeam[Type] = true;
+        Main.tileNoAttach[Type] = true;
+        TileID.Sets.CanPlaceNextToNonSolidTile[Type] = true;
         HitSound = SoundID.Grass;
         DustType = DustID.JungleGrass;
-    }
-    public override void FloorVisuals(Player player)
-    {
-        //player.velocity *= 0.6f;
-    }
-    public override bool CanExplode(int i, int j)
-    {
-        return false;
     }
     public override bool Slope(int i, int j)
     {

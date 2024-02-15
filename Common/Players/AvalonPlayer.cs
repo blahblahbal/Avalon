@@ -2,6 +2,7 @@ using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Dusts;
+using Avalon.Hooks;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Other;
@@ -180,6 +181,8 @@ public class AvalonPlayer : ModPlayer
 
     public bool CougherMask;
     private int[] doubleTapTimer = new int[3];
+
+    private int BrambleBreak;
 
     #region accessories
     public bool PulseCharm;
@@ -564,6 +567,9 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdate()
     {
+        #region bramble
+        BrambleMovement();
+        #endregion
 
         #region platform leaf
         Point tileCoords = Player.position.ToTileCoordinates() + new Point(0, Player.height / 16 + 1);
@@ -627,6 +633,8 @@ public class AvalonPlayer : ModPlayer
             Player.endurance -= 0.075f;
             Player.statDefense /= 2;
         }
+
+        #region inertia boots dusts
         if (InertiaBoots)
         {
             if (Player.velocity.X is > 6f or < -6f)
@@ -654,6 +662,7 @@ public class AvalonPlayer : ModPlayer
                 }
             }
         }
+        #endregion
 
         if (RocketDustTimer > 0)
         {
@@ -671,6 +680,7 @@ public class AvalonPlayer : ModPlayer
             RocketDustTimer--;
         }
 
+        #region violent fart in a jar
         if (Player.GetJumpState<FartInAJarJump>().Active)
         {
             FartTimer++;
@@ -688,6 +698,7 @@ public class AvalonPlayer : ModPlayer
             }
         }
         else FartTimer = 0;
+        #endregion
 
         if (SkyBlessing)
         {
@@ -2217,6 +2228,84 @@ public class AvalonPlayer : ModPlayer
                 Player.slippy = false;
                 Player.slippy2 = false;
             }
+        }
+    }
+
+    public void BrambleMovement()
+    {
+        if (Player.shimmering)
+            return;
+
+        bool mounted = false;
+        if (Player.mount.Type > 0 && MountID.Sets.Cart[Player.mount.Type] && Math.Abs(Player.velocity.X) > 5f)
+            mounted = true;
+
+        Vector2 vector = CollisionStickyTiles.BrambleTiles(Player.position, Player.velocity, Player.width, Player.height);
+        if (vector.Y != -1f && vector.X != -1f)
+        {
+            int num3 = (int)vector.X;
+            int num4 = (int)vector.Y;
+            int type = Main.tile[num3, num4].TileType;
+            if (Player.whoAmI == Main.myPlayer && type == ModContent.TileType<Bramble>() && (Player.velocity.X != 0f || Player.velocity.Y != 0f))
+            {
+                BrambleBreak++;
+                if (BrambleBreak > Main.rand.Next(20, 100) || mounted)
+                {
+                    BrambleBreak = 0;
+                    WorldGen.KillTile(num3, num4);
+                    if (!Main.tile[num3, num4].HasTile && Main.netMode == NetmodeID.MultiplayerClient)
+                        NetMessage.SendData(17, -1, -1, null, 0, num3, num4);
+                }
+            }
+
+            if (mounted)
+                return;
+
+            Player.fallStart = (int)(Player.position.Y / 16f);
+            if (type != 229)
+                Player.jump = 0;
+
+            if (Player.velocity.X > 2f)
+                Player.velocity.X = 2f;
+
+            if (Player.velocity.X < -2f)
+                Player.velocity.X = -2f;
+
+            if (Player.velocity.X > 0.75f || Player.velocity.X < -0.75f)
+                Player.velocity.X *= 0.95f;
+            else
+                Player.velocity.X *= 0.9f;
+
+            if (Player.gravDir == -1f)
+            {
+                if (Player.velocity.Y < -1f)
+                    Player.velocity.Y = -1f;
+
+                if (Player.velocity.Y > 5f)
+                    Player.velocity.Y = 5f;
+
+                if (Player.velocity.Y > 0f)
+                    Player.velocity.Y *= 0.99f;
+                else
+                    Player.velocity.Y *= 0.6f;
+            }
+            else
+            {
+                if (Player.velocity.Y > 1f)
+                    Player.velocity.Y = 1f;
+
+                if (Player.velocity.Y < -5f)
+                    Player.velocity.Y = -5f;
+
+                if (Player.velocity.Y < 0f)
+                    Player.velocity.Y *= 0.99f;
+                else
+                    Player.velocity.Y *= 0.6f;
+            }
+        }
+        else
+        {
+            BrambleBreak = 0;
         }
     }
     public void KeyDoubleTap(int keyDir)
