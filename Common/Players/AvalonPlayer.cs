@@ -575,7 +575,7 @@ public class AvalonPlayer : ModPlayer
 
         xpos = tileCoords.X - xpos;
         ypos = tileCoords.Y - ypos;
-        if (Player.velocity.Y > 4.5f && Main.tile[tileCoords.X, tileCoords.Y].TileType == ModContent.TileType<PlatformLeaf>() &&
+        if (Player.velocity.Y > 5.25f && Main.tile[tileCoords.X, tileCoords.Y].TileType == ModContent.TileType<PlatformLeaf>() &&
             Main.tile[tc2.X, tc2.Y].TileType == ModContent.TileType<PlatformLeaf>() && Main.tile[tileCoords.X, tileCoords.Y].TileFrameY < 18)
         {
             for (int i = xpos; i < xpos + 3; i++)
