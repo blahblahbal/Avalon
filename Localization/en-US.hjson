@@ -189,11 +189,13 @@ Mods: {
 			Lava_3: "{0} is HOT HOT HOT."
 			Lava_4: "{0} was infernally eradicated."
 			Lava_5: "{0}, that is not a hot tub."
+			Lava_6: "{0} found the fire in the hole."
 			Petrified_1: "{0} was stoned."
 			Electrocution_1: "{0} got zzzzapped."
 			Electrocution_2: "{0} had an electrifying personality."
 			Electrocution_3: "{0} tried to build their own computer."
 			Electrocution_4: "{0} messed up the redstone."
+			Electrocution_5: "{0} has the power!"
 			Generic_1: "{0} was tickled to smithereens"
 			Generic_2: "{0} was reduced to a fine paste"
 			Generic_3: "{0} became a tombstone dispenser"
@@ -213,6 +215,12 @@ Mods: {
 			Space_1: "{0} broke the Warp 10 threshold."
 			Space_2: "{0} got too close a black hole."
 			Space_3: "{0}'s body was found by martians."
+			Teleport_1: "{0}'s bones didn't teleport with them."
+			Teleport_2: "{0} thought they were an enderman."
+			Teleport_2_Male: "{0}'s bones didn't teleport with them."
+			Teleport_3_Male: "{0} thought they were an enderman."
+			Teleport_2_Female: "{0}'s bones didn't teleport with them."
+			Teleport_3_Female: "{0} thought they were an enderman."
 		}
 
 		BossDefeatedBlurbs: {
@@ -8181,6 +8189,11 @@ Mods: {
 
 			TropicsTorch: {
 				DisplayName: Tropics Torch
+				Tooltip: ""
+			}
+
+			KingStingTrophy: {
+				DisplayName: King Sting Trophy
 				Tooltip: ""
 			}
 		}

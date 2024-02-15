@@ -9,6 +9,7 @@ using Terraria.Audio;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent;
 using Avalon.Items.Material;
+using Avalon.Items.Placeable.Trophy;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 
@@ -428,7 +429,7 @@ public class KingSting : ModNPC
     {
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<WaspFiber>(), 1, 16, 27)); // wasp fiber
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<Items.Vanity.KingStingMask>(), 7));
-        //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<KingStingTrophy>(), 10));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<KingStingTrophy>(), 10));
         npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<Items.BossBags.KingStingBossBag>()));
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 v, Color lightColor) // Not flipping? Not sure why it's not

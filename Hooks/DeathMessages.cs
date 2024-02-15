@@ -193,7 +193,7 @@ public class DeathMessages : ModHook
             #region lava
             else if (other == 2)
             {
-                switch (Main.rand.Next(10) + 1)
+                switch (Main.rand.Next(11) + 1)
                 {
                     case 1:
                         result = NetworkText.FromKey("DeathText.Lava_1", deadPlayerName);
@@ -224,6 +224,9 @@ public class DeathMessages : ModHook
                         break;
                     case 10:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Lava_5", deadPlayerName);
+                        break;
+                    case 11:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Lava_6", deadPlayerName);
                         break;
                 }
             }
@@ -294,6 +297,9 @@ public class DeathMessages : ModHook
                     case 8:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Electrocuted_4", deadPlayerName);
                         break;
+                    case 9:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Electrocuted_5", deadPlayerName);
+                        break;
                 }
             }
             #endregion electrocution
@@ -329,6 +335,53 @@ public class DeathMessages : ModHook
                 }
             }
             #endregion
+            #region teleport
+            else if (other == 13)
+            {
+                switch (Main.rand.Next(3) + 1)
+                {
+                    case 1:
+                        result = NetworkText.FromKey("DeathText.Teleport_1", deadPlayerName);
+                        break;
+                    case 2:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_1", deadPlayerName);
+                        break;
+                    case 3:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_2", deadPlayerName);
+                        break;
+                }
+            }
+            else if (other == 14)
+            {
+                switch (Main.rand.Next(3) + 1)
+                {
+                    case 1:
+                        result = NetworkText.FromKey("DeathText.Teleport_2_Male", deadPlayerName);
+                        break;
+                    case 2:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_2_Male", deadPlayerName);
+                        break;
+                    case 3:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_3_Male", deadPlayerName);
+                        break;
+                }
+            }
+            else if (other == 15)
+            {
+                switch (Main.rand.Next(3) + 1)
+                {
+                    case 1:
+                        result = NetworkText.FromKey("DeathText.Teleport_2_Female", deadPlayerName);
+                        break;
+                    case 2:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_2_Female", deadPlayerName);
+                        break;
+                    case 3:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_3_Female", deadPlayerName);
+                        break;
+                }
+            }
+            #endregion
             else
             {
                 switch (other)
@@ -353,15 +406,6 @@ public class DeathMessages : ModHook
                         break;
                     case 12:
                         result = NetworkText.FromKey("DeathText.WasLicked_" + (Main.rand.Next(2) + 1), deadPlayerName);
-                        break;
-                    case 13:
-                        result = NetworkText.FromKey("DeathText.Teleport_1", deadPlayerName);
-                        break;
-                    case 14:
-                        result = NetworkText.FromKey("DeathText.Teleport_2_Male", deadPlayerName);
-                        break;
-                    case 15:
-                        result = NetworkText.FromKey("DeathText.Teleport_2_Female", deadPlayerName);
                         break;
                     case 16:
                         result = NetworkText.FromKey("DeathText.Inferno", deadPlayerName);

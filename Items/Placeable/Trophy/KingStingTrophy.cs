@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trophy;
 
-class PhantasmTrophy : ModItem
+class KingStingTrophy : ModItem
 {
     public override void SetDefaults()
     {
@@ -15,7 +15,7 @@ class PhantasmTrophy : ModItem
         Item.maxStack = 9999;
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.BossTrophy>();
-        Item.placeStyle = 8;
+        Item.placeStyle = 9;
         Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
         Item.useTime = 10;

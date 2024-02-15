@@ -12,7 +12,7 @@ class MechastingTrophy : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.useTurn = true;
-        Item.maxStack = 99;
+        Item.maxStack = 9999;
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.BossTrophy>();
         Item.placeStyle = 7;
