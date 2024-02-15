@@ -25,7 +25,8 @@ public class TrapCollision : ModHook
             {
                 if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() ||
                     type == ModContent.TileType<Tiles.Tropics.WoodenSpikes>() ||
-                    type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
+                    type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>() ||
+                    type == ModContent.TileType<Tiles.Tropics.Bramble>())
                 {
                     return false;
                 }
@@ -34,7 +35,7 @@ public class TrapCollision : ModHook
             {
                 return true;
             }
-            if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>())
+            if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>() || type == ModContent.TileType<Tiles.Tropics.Bramble>())
             {
                 if (player.afkCounter > 0)
                 {

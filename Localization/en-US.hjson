@@ -8163,6 +8163,11 @@ Mods: {
 				DisplayName: Loamstone Brick
 				Tooltip: ""
 			}
+
+			Bramble: {
+				DisplayName: Bramble
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
