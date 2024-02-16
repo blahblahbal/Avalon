@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Terraria.ModLoader;
 
 namespace Avalon.Backgrounds;
@@ -29,11 +30,19 @@ public class ContagionSurfaceBackground : ModSurfaceBackgroundStyle
 
     public override int ChooseFarTexture()
     {
+        if (ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG)
+        {
+            return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground5");
+        }
         return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground2");
     }
 
     public override int ChooseMiddleTexture()
     {
+        if (ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG)
+        {
+            return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground6");
+        }
         return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground3");
     }
 
