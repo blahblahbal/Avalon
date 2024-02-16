@@ -10,15 +10,15 @@ internal class TropicsWorld : ModSystem
 {
     public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
     {
-        float TropicsStrength = (float)ModContent.GetInstance<BiomeTileCounts>().TropicsTiles / 200f;
+        float TropicsStrength = (float)ModContent.GetInstance<BiomeTileCounts>().TropicsTiles / 1000f;
         TropicsStrength = Math.Min(TropicsStrength, 1f);
 
         int sunR = backgroundColor.R;
         int sunG = backgroundColor.G;
         int sunB = backgroundColor.B;
-        sunR -= (int)(0f * TropicsStrength / 1.4 * (backgroundColor.R / 255f)); // 212, 255, 127
-        sunG -= (int)(150f * TropicsStrength / 1.4 * (backgroundColor.G / 255f));
-        sunB -= (int)(195f * TropicsStrength / 1.4 * (backgroundColor.B / 255f));
+        sunR -= (int)(5f * TropicsStrength / 1.7f * (backgroundColor.R / 255f)); // 212, 255, 127
+        sunG -= (int)(180f * TropicsStrength / 1.7f * (backgroundColor.G / 255f));
+        sunB -= (int)(240f * TropicsStrength / 1.7f * (backgroundColor.B / 255f));
 
         sunR = Utils.Clamp(sunR, 15, 255);
         sunG = Utils.Clamp(sunG, 15, 255);
@@ -27,12 +27,16 @@ internal class TropicsWorld : ModSystem
         backgroundColor.G = (byte)sunG;
         backgroundColor.B = (byte)sunB;
 
-        int tileTint_R = (byte)(0f * TropicsStrength / 2f * (backgroundColor.R / 255f) * 1.6f);
-        int tileTint_G = (byte)(150f * TropicsStrength / 2f * (backgroundColor.G / 255f) * 1.5f);
-        int tileTint_B = (byte)(195f * TropicsStrength / 2f * (backgroundColor.B / 255f) * 1.8f);
+        int backgroundColorAverage = (int)((backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3f);
+        int tileTint_R = (byte)(80f * TropicsStrength * (backgroundColorAverage / 255f));
+        int tileTint_G = (byte)(130f * TropicsStrength * (backgroundColorAverage / 255f));
+        int tileTint_B = (byte)(100f * TropicsStrength * (backgroundColorAverage / 255f));
+        tileTint_R = (int)(tileTint_R - (TropicsStrength * 4f));
+        tileTint_G = (int)(tileTint_G - (TropicsStrength * 4f));
+        tileTint_B = (int)(tileTint_B - (TropicsStrength * 4f));
 
-        tileColor.R = ((byte)(tileColor.R <= tileTint_R ? 0 : tileColor.R - tileTint_R));
-        tileColor.G = ((byte)(tileColor.G <= tileTint_G ? 0 : tileColor.G - tileTint_G));
-        tileColor.B = ((byte)(tileColor.B <= tileTint_B ? 0 : tileColor.B - tileTint_B));
+        tileColor.R = (byte)Math.Clamp(tileColor.R <= tileTint_R ? 1 : tileColor.R - tileTint_R, TropicsStrength * 15f, 255f);
+        tileColor.G = (byte)Math.Clamp(tileColor.G <= tileTint_G ? 1 : tileColor.G - tileTint_G, TropicsStrength * 15f, 255f);
+        tileColor.B = (byte)Math.Clamp(tileColor.B <= tileTint_B ? 1 : tileColor.B - tileTint_B, TropicsStrength * 15f, 255f);
     }
 }
