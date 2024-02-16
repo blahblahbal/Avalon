@@ -93,7 +93,7 @@ public class AvalonWorld : ModSystem
     public static GoldVariant GoldOre = GoldVariant.Random;
     public static RhodiumVariant? RhodiumOre { get; set; }
 
-    public bool SecondaryContagionBG { get; set; } = false;
+    public int SecondaryContagionBG { get; set; } = 0;
     public WorldJungleSelection SelectedWorldJungle { get; set; } = WorldJungleSelection.Random;
 
     public static int totalSick; //Amount of Tiles 
@@ -122,7 +122,7 @@ public class AvalonWorld : ModSystem
         tag["Avalon:RhodiumOre"] = (byte?)RhodiumOre;
         tag["Avalon:WorldEvil"] = (byte)WorldEvil;
         tag["Avalon:WorldJungle"] = (byte)WorldJungle;
-        tag["Avalon:SecondaryContagionBG"] = SecondaryContagionBG;
+        tag["Avalon:ContagionBG"] = SecondaryContagionBG;
         AvalonConfig config = ModContent.GetInstance<AvalonConfig>();
         Dictionary<string, AvalonConfig.WorldDataValues> tempDict = config.GetWorldData();
         AvalonConfig.WorldDataValues worldData;
@@ -161,9 +161,9 @@ public class AvalonWorld : ModSystem
 
     public override void LoadWorldData(TagCompound tag)
     {
-        if (tag.ContainsKey("Avalon:SecondaryContagionBG"))
+        if (tag.ContainsKey("Avalon:ContagionBG"))
         {
-            SecondaryContagionBG = tag.Get<bool>("Avalon:SecondaryContagionBG");
+            SecondaryContagionBG = tag.GetAsInt("Avalon:ContagionBG");
         }
 
         if (tag.ContainsKey("Avalon:JungleX"))
@@ -240,7 +240,7 @@ public class AvalonWorld : ModSystem
 
         if (WorldEvil == WorldEvil.Contagion)
         {
-            SecondaryContagionBG = WorldGen.genRand.NextBool(2);
+            SecondaryContagionBG = WorldGen.genRand.NextBool(2) ? 1 : 0;
         }
     }
     public override void PostWorldGen()

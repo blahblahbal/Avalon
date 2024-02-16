@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
@@ -91,6 +92,35 @@ public class ReplaceChestItems : GenPass
                         {
                             i.stack = 1;
                             i.SetDefaults(ModContent.ItemType<BlankScroll>());
+                        }
+                    }
+                    #endregion
+
+                    #region replace lihzahrd with tuhrtl
+                    if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Tropics)
+                    {
+                        if (Main.tile[c.x, c.y].TileFrameX >= 576 && Main.tile[c.x, c.y].TileFrameX < 612 && Main.tile[c.x, c.y].TileType == 21)
+                        {
+                            // tuhrtl relic
+                            if (i?.type == ItemID.LihzahrdPowerCell)
+                            {
+                                i.stack = 0;
+                                i.SetDefaults();
+                            }
+                            // tuhrtl boiler
+                            if (i?.type == ItemID.LihzahrdFurnace)
+                            {
+                                i.stack = 0;
+                                i.SetDefaults();
+                            }
+                            for (int q = c.x; q <= c.x + 1; q++)
+                            {
+                                for (int z = c.y; z <= c.y + 1; z++)
+                                {
+                                    Main.tile[q, z].TileFrameX -= 576;
+                                    Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlChest>();
+                                }
+                            }
                         }
                     }
                     #endregion

@@ -1,4 +1,6 @@
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -30,6 +32,10 @@ internal class WaypointSystemMkII : ModSystem
 }
 public class PortablePylonMkIIPoint1 : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -54,7 +60,7 @@ public class PortablePylonMkIIPoint1 : ModItem
     }
     public override bool AltFunctionUse(Player player)
     {
-        return true;
+        return false;
     }
     public override void OnCreated(ItemCreationContext context)
     {
@@ -63,15 +69,34 @@ public class PortablePylonMkIIPoint1 : ModItem
             WaypointSystemMkII.savedLocations[0] = WaypointSystem.savedLocation;
         }
     }
-
-    public override void UseStyle(Player player, Rectangle heldItemFrame)
+    public override void HoldItem(Player player)
     {
-        if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
+        if (KeybindSystem.ModeChangeHotkey.JustPressed)
         {
             WaypointSystemMkII.savedLocations[0] = player.Center + new Vector2(0, -15);
             Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointOne"));
         }
-        else
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+        {
+            SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            Item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint2>());
+        }
+    }
+    public override void ModifyTooltips(List<TooltipLine> tooltips)
+    {
+        var assignedKeys = KeybindSystem.ModeChangeHotkey.GetAssignedKeys();
+
+        var assignedKeyInfo = new TooltipLine(Mod, "Controls:PromptKey", "Press " + (assignedKeys.Count > 0 ? string.Join(", ", assignedKeys) : "[c/565656:<Unbound>]") + " to assign a waypoint");
+        tooltips.Add(assignedKeyInfo);
+    }
+    public override void UseStyle(Player player, Rectangle heldItemFrame)
+    {
+        //if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
+        //{
+        //    WaypointSystemMkII.savedLocations[0] = player.Center + new Vector2(0, -15);
+        //    Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointOne"));
+        //}
+        //else
         {
             if (player.itemTime == 0)
             {
@@ -112,6 +137,10 @@ public class PortablePylonMkIIPoint1 : ModItem
 
 public class PortablePylonMkIIPoint2 : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -127,16 +156,36 @@ public class PortablePylonMkIIPoint2 : ModItem
     }
     public override bool AltFunctionUse(Player player)
     {
-        return true;
+        return false;
+    }
+    public override void HoldItem(Player player)
+    {
+        if (KeybindSystem.ModeChangeHotkey.JustPressed)
+        {
+            WaypointSystemMkII.savedLocations[0] = player.Center + new Vector2(0, -15);
+            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointTwo"));
+        }
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+        {
+            SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            Item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint3>());
+        }
+    }
+    public override void ModifyTooltips(List<TooltipLine> tooltips)
+    {
+        var assignedKeys = KeybindSystem.ModeChangeHotkey.GetAssignedKeys();
+
+        var assignedKeyInfo = new TooltipLine(Mod, "Controls:PromptKey", "Press " + (assignedKeys.Count > 0 ? string.Join(", ", assignedKeys) : "[c/565656:<Unbound>]") + " to assign a waypoint");
+        tooltips.Add(assignedKeyInfo);
     }
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {
-        if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
-        {
-            WaypointSystemMkII.savedLocations[1] = player.Center + new Vector2(0, -15);
-            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointTwo"));
-        }
-        else
+        //if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
+        //{
+        //    WaypointSystemMkII.savedLocations[1] = player.Center + new Vector2(0, -15);
+        //    Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointTwo"));
+        //}
+        //else
         {
             if (player.itemTime == 0)
             {
@@ -177,6 +226,10 @@ public class PortablePylonMkIIPoint2 : ModItem
 
 public class PortablePylonMkIIPoint3 : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -192,16 +245,36 @@ public class PortablePylonMkIIPoint3 : ModItem
     }
     public override bool AltFunctionUse(Player player)
     {
-        return true;
+        return false;
+    }
+    public override void HoldItem(Player player)
+    {
+        if (KeybindSystem.ModeChangeHotkey.JustPressed)
+        {
+            WaypointSystemMkII.savedLocations[0] = player.Center + new Vector2(0, -15);
+            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointThree"));
+        }
+        if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+        {
+            SoundEngine.PlaySound(SoundID.Unlock, player.position);
+            Item.ChangeItemType(ModContent.ItemType<PortablePylonMkIIPoint1>());
+        }
+    }
+    public override void ModifyTooltips(List<TooltipLine> tooltips)
+    {
+        var assignedKeys = KeybindSystem.ModeChangeHotkey.GetAssignedKeys();
+
+        var assignedKeyInfo = new TooltipLine(Mod, "Controls:PromptKey", "Press " + (assignedKeys.Count > 0 ? string.Join(", ", assignedKeys) : "[c/565656:<Unbound>]") + " to assign a waypoint");
+        tooltips.Add(assignedKeyInfo);
     }
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {
-        if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
-        {
-            WaypointSystemMkII.savedLocations[2] = player.Center + new Vector2(0, -15);
-            Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointThree"));
-        }
-        else
+        //if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
+        //{
+        //    WaypointSystemMkII.savedLocations[2] = player.Center + new Vector2(0, -15);
+        //    Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypointThree"));
+        //}
+        //else
         {
             if (player.itemTime == 0)
             {
@@ -241,20 +314,7 @@ public class PortablePylonMkIIPoint3 : ModItem
 }
 
 
-//public override void ModifyTooltips(List<TooltipLine> tooltips)
-//{
-//    var assignedKeys = KeybindSystem.ModeChangeHotkey.GetAssignedKeys();
 
-//    var assignedKeyInfo = new TooltipLine(Mod, "Controls:PromptKey", "Press " + (assignedKeys.Count > 0 ? string.Join(", ", assignedKeys) : "[c/565656:<Unbound>]") + " to change teleportation modes");
-//    tooltips.Add(assignedKeyInfo);
-
-//    if (!(assignedKeys.Count > 0))
-//    {
-//        var unboundKeyInfo = new TooltipLine(Mod, "Controls:PromptKeyInfo", "[c/900C3F:Please bind hotkey in the settings to change teleportation modes!]");
-//        tooltips.Add(unboundKeyInfo);
-//    }
-//    tooltips.Add(new TooltipLine(Mod, "ItemName", "Mode: " + mode));
-//}
 //public override void HoldItem(Player player)
 //{
 //    if (KeybindSystem.ModeChangeHotkey.JustPressed)

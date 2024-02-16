@@ -46,6 +46,18 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 
         return closest;
     }
+    public override void OnKill(Projectile projectile, int timeLeft)
+    {
+        if (projectile.type == ProjectileID.WorldGlobe && Main.player[projectile.owner].InModBiome<Biomes.Contagion>())
+        {
+            ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG++;
+            if (ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG > 1)
+            {
+                ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG = 0;
+            }
+        }
+        base.OnKill(projectile, timeLeft);
+    }
     public override bool CanHitPlayer(Projectile projectile, Player target)
     {
         if (target.GetModPlayer<AvalonPlayer>().TrapImmune && (projectile.type == ProjectileID.PoisonDartTrap || projectile.type == ProjectileID.VenomDartTrap ||

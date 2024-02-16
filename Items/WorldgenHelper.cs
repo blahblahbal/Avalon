@@ -42,7 +42,7 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-            //WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
+            WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
             //WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);
             //Crystals(x, y);
             //World.Biomes.CrystalMines.Place(new Point(x, y));

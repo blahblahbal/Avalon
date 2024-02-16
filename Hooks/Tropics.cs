@@ -73,6 +73,7 @@ internal class Tropics : ModHook
     private void IL_WorldGen_GenerateWorld(ILContext il)
     {
         Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, WallID.LihzahrdBrickUnsafe, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>())[id]);
     }
 
     private void IL_WorldGen_PlaceJunglePlant(ILContext il)
