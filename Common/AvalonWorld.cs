@@ -1318,9 +1318,9 @@ public class AvalonWorld : ModSystem
         int sunR = backgroundColor.R;
         int sunG = backgroundColor.G;
         int sunB = backgroundColor.B;
-        sunR -= (int)(212f * ContagionStrength / 2 * (backgroundColor.R / 255f));
-        sunG -= (int)(127f * ContagionStrength / 2 * (backgroundColor.G / 255f));
-        sunB -= (int)(255f * ContagionStrength / 2 * (backgroundColor.B / 255f));
+        sunR -= (int)(80f * ContagionStrength / 1.6f * (backgroundColor.R / 255f));
+        sunG -= (int)(50f * ContagionStrength / 1.6f * (backgroundColor.G / 255f));
+        sunB -= (int)(255f * ContagionStrength / 1.6f * (backgroundColor.B / 255f));
         sunR = Utils.Clamp(sunR, 15, 255);
         sunG = Utils.Clamp(sunG, 15, 255);
         sunB = Utils.Clamp(sunB, 15, 255);
@@ -1328,13 +1328,17 @@ public class AvalonWorld : ModSystem
         backgroundColor.G = (byte)sunG;
         backgroundColor.B = (byte)sunB;
 
-        int tileTint_R = (byte)(212f * ContagionStrength / 2.2f * (backgroundColor.R / 255f) * 1.6f);
-        int tileTint_G = (byte)(212f * ContagionStrength / 2.4f * (backgroundColor.G / 255f) * 1.5f);
-        int tileTint_B = (byte)(212f * ContagionStrength / 1.8f * (backgroundColor.B / 255f) * 1.8f);
+        int backgroundColorAverage = (int)((backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3f);
+        int tileTint_R = (byte)(130f * ContagionStrength * (backgroundColorAverage / 255f));
+        int tileTint_G = (byte)(140f * ContagionStrength * (backgroundColorAverage / 255f));
+        int tileTint_B = (byte)(180f * ContagionStrength * (backgroundColorAverage / 255f));
+        tileTint_R = (int)(tileTint_R - (ContagionStrength * 7f));
+        tileTint_G = (int)(tileTint_G - (ContagionStrength * 7f));
+        tileTint_B = (int)(tileTint_B - (ContagionStrength * 7f));
 
-        tileColor.R = ((byte)(tileColor.R <= tileTint_R ? 0 : tileColor.R - tileTint_R));
-        tileColor.G = ((byte)(tileColor.G <= tileTint_G ? 0 : tileColor.G - tileTint_G));
-        tileColor.B = ((byte)(tileColor.B <= tileTint_B ? 0 : tileColor.B - tileTint_B));
+        tileColor.R = (byte)Math.Clamp(tileColor.R <= tileTint_R ? 1 : tileColor.R - tileTint_R, ContagionStrength * 15f, 255f);
+        tileColor.G = (byte)Math.Clamp(tileColor.G <= tileTint_G ? 1 : tileColor.G - tileTint_G, ContagionStrength * 15f, 255f);
+        tileColor.B = (byte)Math.Clamp(tileColor.B <= tileTint_B ? 1 : tileColor.B - tileTint_B, ContagionStrength * 15f, 255f);
     }
     public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
     {

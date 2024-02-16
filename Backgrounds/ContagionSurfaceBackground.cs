@@ -32,18 +32,18 @@ public class ContagionSurfaceBackground : ModSurfaceBackgroundStyle
     {
         if (ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG)
         {
-            return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground5");
+            return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground6");
         }
-        return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground2");
+        return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground3");
     }
 
     public override int ChooseMiddleTexture()
     {
         if (ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG)
         {
-            return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground6");
+            return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground5");
         }
-        return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground3");
+        return ModContent.GetModBackgroundSlot($"{Mod.Name}/Backgrounds/ContagionSurfaceBackground2");
     }
 
     public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
