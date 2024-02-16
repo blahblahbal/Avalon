@@ -16,180 +16,234 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Client)]
 public class CaesiumBackground : ModHook
 {
-    protected override void Apply() =>
-        IL_Main.DrawUnderworldBackgroudLayer += ILMainDrawUnderworldBackgroundLayer;
+    public static float[] UWBGAlpha = new float[2];
+    public static int UWBGStyle;
+    public Color[] UWBGBottomColor = new Color[2];
+    public Asset<Texture2D>[][] UWBGTexture = new Asset<Texture2D>[2][];
 
-    private static void ILMainDrawUnderworldBackgroundLayer(ILContext il)
+    protected override void Apply()
     {
-        var c = new ILCursor(il);
-        c.GotoNext(i => i.MatchStloc(0));
-        c.Index++;
-
-        c.EmitDelegate(() => // Transition thingy
+        IL_Main.DrawBG += UWBGInsert;
+        IL_Main.DrawCapture += UWBGInsertCapture;
+        if (!Main.dedServ)
         {
-            if (Main.LocalPlayer.GetModPlayer<AvalonBiomePlayer>().ZoneCaesium)
+            UWBGTexture[0] = new Asset<Texture2D>[14];
+            UWBGTexture[1] = new Asset<Texture2D>[14];
+            for (int i = 0; i < 14; i++)
             {
-                ExxoAvalonOrigins.CaesiumTransition += 0.05f;
-                if (ExxoAvalonOrigins.CaesiumTransition > 1f)
-                {
-                    ExxoAvalonOrigins.CaesiumTransition = 1f;
-                }
+                UWBGTexture[0][i] = TextureAssets.Underworld[i];
+                UWBGTexture[1][i] = ModContent.Request<Texture2D>("Avalon/Backgrounds/Caesium" + (i + 1));
             }
-            else
-            {
-                ExxoAvalonOrigins.CaesiumTransition -= 0.05f;
-                if (ExxoAvalonOrigins.CaesiumTransition < 0f)
-                {
-                    ExxoAvalonOrigins.CaesiumTransition = 0f;
-                }
-            }
+            UWBGBottomColor[0] = new Color(6, 5, 6);
+            UWBGBottomColor[1] = new Color(0, 0, 0);
+        }
+    }
+
+    private void UWBGInsert(ILContext il)
+    {
+        ILCursor c = new ILCursor(il);
+        c.GotoNext(MoveType.After, i => i.MatchLdarg0(), i => i.MatchLdcI4(0), i => i.MatchCall<Main>("DrawUnderworldBackground"));
+        c.EmitDelegate(() => {
+            DrawUnderworldBackground(false);
         });
+    }
 
-        c.GotoNext(i => i.MatchRet())
-            .Emit(OpCodes.Ldarg_0)
-            .Emit(OpCodes.Ldarg_1)
-            .Emit(OpCodes.Ldarg_2)
-            .Emit(OpCodes.Ldarg_3);
-        c.EmitDelegate<Action<bool, Vector2, float, int>>((flat, screenOffset, pushUp, layerTextureIndex) =>
+    private void UWBGInsertCapture(ILContext il)
+    {
+        ILCursor c = new ILCursor(il);
+        c.GotoNext(MoveType.After, i => i.MatchLdarg0(), i => i.MatchLdcI4(1), i => i.MatchCall<Main>("DrawUnderworldBackground"));
+        c.EmitDelegate(() => {
+            DrawUnderworldBackground(true);
+        });
+    }
+
+    public int UnderworldStyleCalc() //How the game gets the different styles of background
+    {
+        if (Main.LocalPlayer.GetModPlayer<AvalonBiomePlayer>().ZoneCaesium)
         {
-            int num27 = Main.underworldBG[layerTextureIndex];
-            var assets = new Asset<Texture2D>[TextureAssets.Underworld.Length];
-            for (int i = 0; i < TextureAssets.Underworld.Length; i++)
-            {
-                assets[i] = ModContent.Request<Texture2D>("Avalon/Backgrounds/Caesium" + (i + 1));
-            }
+            return 1;//pretty self explanitory, if you want to expand the backgrounds all you need to do is increase the arrays, add your defaults in Apply() and give you condition here
+        }
+        return 0;
+    }
 
-            Asset<Texture2D> asset = assets[num27];
-            Texture2D value5 = asset.Value;
-            Vector2 vec3 = new Vector2(value5.Width, value5.Height) * 0.5f;
-            float num26 = flat ? 1f : (layerTextureIndex * 2) + 3f;
-            var value4 = new Vector2(1f / num26);
-            var value3 = new Rectangle(0, 0, value5.Width, value5.Height);
-            float num25 = 1.3f;
-            Vector2 zero = Vector2.Zero;
-            int num24 = 0;
-            switch (num27)
+    protected void DrawUnderworldBackground(bool flat)
+    {
+        if (!(Main.screenPosition.Y + (float)Main.screenHeight < (float)(Main.maxTilesY - 220) * 16f))
+        {
+            UWBGStyle = UnderworldStyleCalc();
+            for (var i = 0; i < 2; i++)
             {
-                case 1:
+                if (UWBGStyle != i)
                 {
-                    int num19 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
-                    value3 = new Rectangle((num19 >> 1) * (value5.Width >> 1), num19 % 2 * (value5.Height >> 1),
-                        value5.Width >> 1, value5.Height >> 1);
-                    vec3 *= 0.5f;
+                    UWBGAlpha[i] = Math.Max(UWBGAlpha[i] - 0.05f, 0f);
+                }
+                else
+                {
+                    UWBGAlpha[i] = Math.Min(UWBGAlpha[i] + 0.05f, 1f);
+                }
+            }
+            Vector2 screenOffset = Main.screenPosition + new Vector2((float)(Main.screenWidth >> 1), (float)(Main.screenHeight >> 1));
+            float pushUp = (Main.GameViewMatrix.Zoom.Y - 1f) * 0.5f * 200f;
+            SkyManager.Instance.ResetDepthTracker();
+            for (int num = 4; num >= 0; num--)
+            {
+                bool flag = false;
+                for (int j = 0; j < 2; j++)
+                {
+                    if (UWBGAlpha[j] > 0f && j != UWBGStyle)
+                    {
+                        DrawUnderworldBackgroudLayer(flat, screenOffset, pushUp, num, j, flat ? 1f : UWBGAlpha[j]);
+                        flag = true;
+                    }
+                }
+                DrawUnderworldBackgroudLayer(flat, screenOffset, pushUp, num, UWBGStyle, flag ? UWBGAlpha[UWBGStyle] : 1f);
+            }
+            if (!Main.mapFullscreen)
+            {
+                SkyManager.Instance.DrawRemainingDepth(Main.spriteBatch);
+            }
+        }
+    }
+
+    private void DrawUnderworldBackgroudLayer(bool flat, Vector2 screenOffset, float pushUp, int layerTextureIndex, int Style, float Alpha)
+    {
+        if (Style == 0)
+        {
+            return;
+        }
+        int num = Main.underworldBG[layerTextureIndex];
+        Asset<Texture2D> asset = UWBGTexture[Style][num];
+        if (!asset.IsLoaded)
+        {
+            Main.Assets.Request<Texture2D>(asset.Name);
+        }
+        Texture2D value = asset.Value;
+        Vector2 vec = new Vector2((float)value.Width, (float)value.Height) * 0.5f;
+        float num7 = (flat ? 1f : ((float)(layerTextureIndex * 2) + 3f));
+        Vector2 vector = new(1f / num7);
+        Rectangle value2 = new(0, 0, value.Width, value.Height);
+        float num8 = 1.3f;
+        Vector2 zero = Vector2.Zero;
+        int num9 = 0;
+        switch (num)
+        {
+            case 1:
+                {
+                    int num14 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
+                    value2 = new((num14 >> 1) * (value.Width >> 1), num14 % 2 * (value.Height >> 1), value.Width >> 1, value.Height >> 1);
+                    vec *= 0.5f;
                     zero.Y += 175f;
                     break;
                 }
-                case 2:
-                    zero.Y += 100f;
-                    break;
-                case 3:
-                    zero.Y += 75f;
-                    break;
-                case 4:
-                    num25 = 0.5f;
-                    zero.Y -= 0f;
-                    break;
-                case 5:
-                    zero.Y += num24;
-                    break;
-                case 6:
+            case 2:
+                zero.Y += 100f;
+                break;
+            case 3:
+                zero.Y += 75f;
+                break;
+            case 4:
+                num8 = 0.5f;
+                zero.Y -= 0f;
+                break;
+            case 5:
+                zero.Y += num9;
+                break;
+            case 6:
                 {
-                    int num20 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
-                    value3 = new Rectangle(num20 % 2 * (value5.Width >> 1), (num20 >> 1) * (value5.Height >> 1),
-                        value5.Width >> 1, value5.Height >> 1);
-                    vec3 *= 0.5f;
-                    zero.Y += num24;
+                    int num13 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
+                    value2 = new(num13 % 2 * (value.Width >> 1), (num13 >> 1) * (value.Height >> 1), value.Width >> 1, value.Height >> 1);
+                    vec *= 0.5f;
+                    zero.Y += num9;
                     zero.Y += -60f;
                     break;
                 }
-                case 7:
+            case 7:
                 {
-                    int num21 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
-                    value3 = new Rectangle(num21 % 2 * (value5.Width >> 1), (num21 >> 1) * (value5.Height >> 1),
-                        value5.Width >> 1, value5.Height >> 1);
-                    vec3 *= 0.5f;
-                    zero.Y += num24;
+                    int num12 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
+                    value2 = new(num12 % 2 * (value.Width >> 1), (num12 >> 1) * (value.Height >> 1), value.Width >> 1, value.Height >> 1);
+                    vec *= 0.5f;
+                    zero.Y += num9;
                     zero.X -= 400f;
                     zero.Y += 90f;
                     break;
                 }
-                case 8:
+            case 8:
                 {
-                    int num22 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
-                    value3 = new Rectangle(num22 % 2 * (value5.Width >> 1), (num22 >> 1) * (value5.Height >> 1),
-                        value5.Width >> 1, value5.Height >> 1);
-                    vec3 *= 0.5f;
-                    zero.Y += num24;
+                    int num11 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
+                    value2 = new(num11 % 2 * (value.Width >> 1), (num11 >> 1) * (value.Height >> 1), value.Width >> 1, value.Height >> 1);
+                    vec *= 0.5f;
+                    zero.Y += num9;
                     zero.Y += 90f;
                     break;
                 }
-                case 9:
-                    zero.Y += num24;
-                    zero.Y -= 30f;
-                    break;
-                case 10:
-                    zero.Y += 250f * num26;
-                    break;
-                case 11:
-                    zero.Y += 100f * num26;
-                    break;
-                case 12:
-                    zero.Y += 20f * num26;
-                    break;
-                case 13:
+            case 9:
+                zero.Y += num9;
+                zero.Y -= 30f;
+                break;
+            case 10:
+                zero.Y += 250f * num7;
+                break;
+            case 11:
+                zero.Y += 100f * num7;
+                break;
+            case 12:
+                zero.Y += 20f * num7;
+                break;
+            case 13:
                 {
-                    zero.Y += 20f * num26;
-                    int num23 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
-                    value3 = new Rectangle(num23 % 2 * (value5.Width >> 1), (num23 >> 1) * (value5.Height >> 1),
-                        value5.Width >> 1, value5.Height >> 1);
-                    vec3 *= 0.5f;
+                    zero.Y += 20f * num7;
+                    int num10 = (int)(Main.GlobalTimeWrappedHourly * 8f) % 4;
+                    value2 = new(num10 % 2 * (value.Width >> 1), (num10 >> 1) * (value.Height >> 1), value.Width >> 1, value.Height >> 1);
+                    vec *= 0.5f;
                     break;
                 }
-            }
+        }
+        if (flat)
+        {
+            num8 *= 1.5f;
+        }
+        vec *= num8;
+        SkyManager.Instance.DrawToDepth(Main.spriteBatch, 1f / vector.X);
+        if (flat)
+        {
+            zero.Y += (float)(UWBGTexture[Style][0].Height() >> 1) * 1.3f - vec.Y;
+        }
+        zero.Y -= pushUp;
+        float num2 = num8 * (float)value2.Width;
+        int num3 = (int)((float)(int)(screenOffset.X * vector.X - vec.X + zero.X - (float)(Main.screenWidth >> 1)) / num2);
+        vec = vec.Floor();
+        int num4 = (int)Math.Ceiling((float)Main.screenWidth / num2);
+        int num5 = (int)(num8 * ((float)(value2.Width - 1) / vector.X));
+        Vector2 vec2 = (new Vector2((float)((num3 - 2) * num5), (float)Main.UnderworldLayer * 16f) + vec - screenOffset) * vector + screenOffset - Main.screenPosition - vec + zero;
+        vec2 = vec2.Floor();
+        while (vec2.X + num2 < 0f)
+        {
+            num3++;
+            vec2.X += num2;
+        }
+        for (int i = num3 - 2; i <= num3 + 4 + num4; i++)
+        {
+            Color color = Color.White;
+            float num16 = (float)(int)color.R * Alpha;
+            float num17 = (float)(int)color.G * Alpha;
+            float num18 = (float)(int)color.B * Alpha;
+            float num19 = (float)(int)color.A * Alpha;
+            color = new((int)(byte)num16, (int)(byte)num17, (int)(byte)num18, (int)(byte)num19);
 
-            if (flat)
+            Color color2 = UWBGBottomColor[Style];
+            float num116 = (float)(int)color2.R * Alpha;
+            float num117 = (float)(int)color2.G * Alpha;
+            float num118 = (float)(int)color2.B * Alpha;
+            float num119 = (float)(int)color2.A * Alpha;
+            color2 = new((int)(byte)num116, (int)(byte)num117, (int)(byte)num118, (int)(byte)num119);
+
+            Main.spriteBatch.Draw(value, vec2, (Rectangle?)value2, color, 0f, Vector2.Zero, num8, (SpriteEffects)0, 0f);
+            if (layerTextureIndex == 0)
             {
-                num25 *= 1.5f;
+                int num6 = (int)(vec2.Y + (float)value2.Height * num8);
+                Main.spriteBatch.Draw(TextureAssets.BlackTile.Value, new Rectangle((int)vec2.X, num6, (int)((float)value2.Width * num8), Math.Max(0, Main.screenHeight - num6)), color2);
             }
-
-            vec3 *= num25;
-            SkyManager.Instance.DrawToDepth(Main.spriteBatch, 1f / value4.X);
-            if (flat)
-            {
-                zero.Y += ((TextureAssets.Underworld[0].Height() >> 1) * 1.3f) - vec3.Y;
-            }
-
-            zero.Y -= pushUp;
-            float num18 = num25 * value3.Width;
-            int num17 = (int)((int)((screenOffset.X * value4.X) - vec3.X + zero.X - (Main.screenWidth >> 1)) / num18);
-            vec3 = vec3.Floor();
-            int num16 = (int)Math.Ceiling(Main.screenWidth / num18);
-            int num15 = (int)(num25 * ((value3.Width - 1) / value4.X));
-            Vector2 vector =
-                ((new Vector2((num17 - 2) * num15, Main.UnderworldLayer * 16f) + vec3 - screenOffset) * value4) +
-                screenOffset - Main.screenPosition - vec3 + zero;
-            vector = vector.Floor();
-            while (vector.X + num18 < 0f)
-            {
-                num17++;
-                vector.X += num18;
-            }
-
-            for (int i = num17 - 2; i <= num17 + 4 + num16; i++)
-            {
-                Main.spriteBatch.Draw(value5, vector, value3, Color.White * ExxoAvalonOrigins.CaesiumTransition, 0f,
-                    Vector2.Zero, num25, SpriteEffects.None, 0f);
-                if (layerTextureIndex == 0)
-                {
-                    int num14 = (int)(vector.Y + (value3.Height * num25));
-                    Main.spriteBatch.Draw(TextureAssets.BlackTile.Value,
-                        new Rectangle((int)vector.X, num14, (int)(value3.Width * num25),
-                            Math.Max(0, Main.screenHeight - num14)),
-                        new Color(6, 5, 6) * ExxoAvalonOrigins.CaesiumTransition);
-                }
-
-                vector.X += num18;
-            }
-        });
+            vec2.X += num2;
+        }
     }
 }

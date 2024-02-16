@@ -43,6 +43,11 @@ public class ExxoAvalonOrigins : Mod
     public static readonly Mod? Confection = ModLoader.TryGetMod("TheConfectionRebirth", out Mod obtainedMod) ? obtainedMod : null;
 
     /// <summary>
+    ///     Gets the instance of the Depths mod.
+    /// </summary>
+    public static readonly Mod? Depths = ModLoader.TryGetMod("TheDepths", out Mod obtainedMod) ? obtainedMod : null;
+
+    /// <summary>
     ///     Gets the instance of Fargo's Mod.
     /// </summary>
     public static readonly Mod? Fargo = ModLoader.TryGetMod("Fargowiltas", out Mod obtainedMod) ? obtainedMod : null;
@@ -67,11 +72,6 @@ public class ExxoAvalonOrigins : Mod
     public static Color LastDiscoRGB;
 
     private readonly List<IReplaceAssets> assetReplacers = new();
-
-    /// <summary>
-    ///     Gets or sets the transition value for fading the caesium background in and out.
-    /// </summary>
-    public static float CaesiumTransition { get; set; }
 
     public const string TextureAssetsPath = "Assets/Textures";
     internal UserInterface staminaInterface;
