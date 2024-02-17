@@ -44,17 +44,20 @@ public class ContagionShortGrass : ModTile
             Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<VirulentMushroom>());
         }
     }
-
+    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
+    {
+        WorldGen.PlantCheck(i, j);
+        return false;
+    }
+    public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
+    {
+        height = 20;
+        offsetY = -2;
+    }
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects spriteEffects)
     {
         //Flips the sprite if x coord is odd. Makes the tile more interesting
         if (i % 2 == 0)
             spriteEffects = SpriteEffects.FlipHorizontally;
-    }
-
-    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
-    {
-        WorldGen.PlantCheck(i, j);
-        return false;
     }
 }
