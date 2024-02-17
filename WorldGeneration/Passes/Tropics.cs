@@ -179,21 +179,28 @@ internal class Tropics
                         Tile t = Main.tile[num207, num208 - 1];
                         t.TileType = (ushort)grass;
                         t.HasTile = true;
-                        if (WorldGen.genRand.NextBool(60) && num208 > Main.rockLayer)
+                        if (WorldGen.genRand.NextBool(60) && (num208 > Main.rockLayer || Main.remixWorld || WorldGen.remixWorldGen))
                         {
                             t.TileFrameX = 8 * 18;
                         }
-                        else if (WorldGen.genRand.NextBool(230) && num208 > Main.rockLayer)
+                        else if (WorldGen.genRand.NextBool(230) && (num208 > Main.rockLayer || Main.remixWorld || WorldGen.remixWorldGen))
                         {
                             t.TileFrameX = 9 * 18;
                         }
                         else if (WorldGen.genRand.NextBool(15))
                         {
-                            t.TileFrameX = (short)(WorldGen.genRand.Next(10, 23) * 18);
+                            if (!WorldGen.genRand.NextBool(3))
+                            {
+                                t.TileFrameX = (short)(WorldGen.genRand.Next(6, 8) * 18);
+                            }
+                            else
+                            {
+                                t.TileFrameX = (short)(WorldGen.genRand.Next(10, 23) * 18);
+                            }
                         }
                         else
                         {
-                            t.TileFrameX = (short)(WorldGen.genRand.Next(8) * 18);
+                            t.TileFrameX = (short)(WorldGen.genRand.Next(6) * 18);
                         }
                         //WorldGen.PlaceTile(num207, num208 - 1, grass, mute: true, style: WorldGen.genRand.Next(8));
                     }
