@@ -29,7 +29,7 @@ public class Moonforce : ModItem
         Item.rare = ItemRarityID.Orange;
         Item.value = Item.sellPrice(0, 0, 50);
 
-        Item.damage = 63;
+        Item.damage = 68;
         Item.useAnimation = 77;
         Item.useTime = 77;
         Item.channel = true;

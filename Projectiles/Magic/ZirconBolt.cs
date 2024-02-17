@@ -21,7 +21,7 @@ public class ZirconBolt : ModProjectile
         Projectile.width = dims.Width * 10 / 16;
         Projectile.height = dims.Height * 10 / 16 / Main.projFrames[Projectile.type];
         Projectile.aiStyle = -1;
-        Projectile.penetrate = 3;
+        Projectile.penetrate = 2;
 
         color = new Color(208, 148, 70) * 0.7f;
         dustId = ModContent.DustType<Dusts.ZirconDust>();

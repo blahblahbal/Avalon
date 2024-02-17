@@ -11,7 +11,7 @@ class ChaosTome : ModItem
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item20;
         Item.DamageType = DamageClass.Magic;
-        Item.damage = 24;
+        Item.damage = 21;
         Item.autoReuse = true;
         Item.shootSpeed = 8f;
         Item.mana = 8;

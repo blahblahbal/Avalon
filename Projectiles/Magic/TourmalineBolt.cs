@@ -18,7 +18,6 @@ public class TourmalineBolt : ModProjectile
         Projectile.width = dims.Width * 10 / 16;
         Projectile.height = dims.Height * 10 / 16 / Main.projFrames[Projectile.type];
         Projectile.aiStyle = -1;
-        Projectile.penetrate = 2;
 
         color = new Color(27, 247, 229) * 0.7f;
         dustId = ModContent.DustType<Dusts.TourmalineDust>();

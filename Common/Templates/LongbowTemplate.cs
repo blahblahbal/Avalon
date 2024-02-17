@@ -81,7 +81,7 @@ namespace Avalon.Common.Templates
                     Power = 0.05f;
                 if (Main.myPlayer == Projectile.owner && Projectile.timeLeft == 19)
                 {
-                    Shoot(Projectile.GetSource_FromThis(), player.MountedCenter, Projectile.velocity * player.HeldItem.shootSpeed * Power, ammo, (int)(Projectile.damage * (0.1f + (Power * 1.4f))), Projectile.knockBack * (0.5f + Power), Power);
+                    Shoot(Projectile.GetSource_FromThis(), player.MountedCenter, Projectile.velocity * player.HeldItem.shootSpeed * Power, ammo, (int)(Projectile.damage * (0.1f + (Power * 1.65f))), Projectile.knockBack * (0.5f + Power), Power);
                     //Projectile.NewProjectile(Projectile.GetSource_FromThis(),player.MountedCenter,Projectile.velocity * player.HeldItem.shootSpeed * Power,ammo,(int)(Projectile.damage * (0.1f + Power)),Projectile.knockBack * (0.5f + Power), player.whoAmI);
                 }
                 if (Projectile.timeLeft == 19)

@@ -24,7 +24,7 @@ class Longbow : ModItem
         Item.rare = ItemRarityID.Orange;
         Item.value = Item.sellPrice(0, 0, 50);
 
-        Item.damage = 37;
+        Item.damage = 44;
         Item.useAnimation = 55;
         Item.useTime = 55;
         Item.channel = true;

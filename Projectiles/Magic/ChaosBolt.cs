@@ -25,6 +25,10 @@ public class ChaosBolt : ModProjectile
         //Projectile.velocity = oldVelocity;
         return false;
     }
+    public override void OnHitNPC(Terraria.NPC target, Terraria.NPC.HitInfo hit, int damageDone)
+    {
+        Projectile.damage = (int)(Projectile.damage * 0.9f);
+    }
     public float opacityMult = 1f;
     public override void AI()
     {

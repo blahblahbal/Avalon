@@ -19,13 +19,13 @@ class ZirconStaff : ModItem
         Rectangle dims = this.GetDims();
         Item.width = dims.Width;
         Item.height = dims.Height;
-        Item.damage = 27;
+        Item.damage = 25;
         Item.autoReuse = true;
         Item.shootSpeed = 9.75f;
         Item.mana = 9;
         Item.rare = ItemRarityID.Green;
-        Item.useTime = 24;
-        Item.useAnimation = 24;
+        Item.useTime = 25;
+        Item.useAnimation = 25;
         Item.knockBack = 4.75f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.ZirconBolt>();
         Item.value = Item.buyPrice(0, 3, 60, 0);
