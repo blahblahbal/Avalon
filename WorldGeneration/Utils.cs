@@ -18,6 +18,171 @@ public class Utils
         t.Slope = SlopeType.Solid;
         t.IsHalfBlock = false;
     }
+    /// <summary>
+    /// Adds spike traps to a structure.
+    /// </summary>
+    /// <param name="x">The X coordinate of the top left of the structure.</param>
+    /// <param name="y">The Y coordinate of the top left of the structure.</param>
+    /// <param name="width">The width of the structure.</param>
+    /// <param name="height">The height of the structure.</param>
+    /// <param name="countTo">A number used to determine how often spike traps should be placed.</param>
+    /// <param name="tileType">The type of spike tile to be placed. Defaults to 0; you should NOT be using 0.</param>
+    public static void AddSpikes(int x, int y, int width, int height, int countTo = 20, int tileType = 0)
+    {
+        if (tileType == 0) return;
+        int counter = 0;
+        int countToSaved = countTo;
+
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (i == 0 || i == width - 1 || j == 0 || j == height - 1)
+                {
+
+                }
+                else
+                {
+                    if (Main.tile[x + i, y + j].HasTile && !Main.tileSolidTop[Main.tile[x + i, y + j].TileType] && Main.tileSolid[Main.tile[x + i, y + j].TileType])
+                    {
+                        if (!Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i + 1, y + j].HasTile && Main.tile[x + i - 1, y + j].HasTile)
+                        {
+                            counter++;
+                            if (counter > countTo)
+                            {
+                                GenerateSpikeTrap(x + i, y + j, WorldGen.genRand.Next(15, 21), tileType);
+                                counter = 0;
+                                countTo = countToSaved;
+                            }
+                        }
+                        if (!Main.tile[x + i, y + j + 1].HasTile && Main.tile[x + i + 1, y + j].HasTile && Main.tile[x + i - 1, y + j].HasTile)
+                        {
+                            counter++;
+                            if (counter > countTo)
+                            {
+                                GenerateSpikeTrap(x + i, y + j, WorldGen.genRand.Next(15, 21), tileType);
+                                counter = 0;
+                                countTo = countToSaved;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public static void GenerateSpikeTrap(int x, int y, int length, int tileType = 0)
+    {
+        if (tileType == 0) return;
+        if (length % 2 == 0)
+        {
+            length++;
+        }
+        for (int i = 1; i <= length; i++)
+        {
+            if (!Main.tile[x + i + 2, y].HasTile || Main.tileSolidTop[Main.tile[x + i + 2, y].TileType])
+            {
+                break;
+            }
+            if (Main.tile[x + i + 2, y - 1].HasTile && Main.tile[x + i + 2, y + 1].HasTile)
+            {
+                break;
+            }
+            if (i % 2 == 0)
+            {
+                WorldGen.PlaceTile(x + i - 1, y, tileType, true, true);
+                if (!Main.tile[x, y - 1].HasTile)
+                {
+                    WorldGen.PlaceTile(x + i - 1, y - 1, tileType, true, true);
+                    ResetSlope(x + i - 1, y - 1);
+                    if (WorldGen.genRand.NextBool(2) && i > 2 && i < length - 1)
+                    {
+                        WorldGen.PlaceTile(x + i - 1, y - 2, tileType, true, true);
+                        ResetSlope(x + i - 1, y - 2);
+                    }
+                }
+                else
+                {
+                    WorldGen.PlaceTile(x + i - 1, y + 1, tileType, true, true);
+                    ResetSlope(x + i - 1, y + 1);
+                    if (WorldGen.genRand.NextBool(2) && i > 2 && i < length - 1)
+                    {
+                        WorldGen.PlaceTile(x + i - 1, y + 2, tileType, true, true);
+                        ResetSlope(x + i - 1, y + 2);
+                    }
+                }
+            }
+            else
+            {
+                WorldGen.PlaceTile(x + i - 1, y, tileType, true, true);
+                ResetSlope(x + i - 1, y);
+            }
+        }
+    }
+    /// <summary>
+    /// Helper method to hollow out a tunnel of blocks using <see cref="DestroyBox(int, int, int, int)"/>.
+    /// </summary>
+    /// <param name="x0">The starting X coordinate.</param>
+    /// <param name="y0">The starting Y coordinate.</param>
+    /// <param name="x1">The ending X coordinate.</param>
+    /// <param name="y1">The ending Y coordinate.</param>
+    /// <param name="r">The radius.</param>
+    /// <param name="type">The tile type to place. If <see cref="ushort.MaxValue"/>, kills the tiles.</param>
+    /// <param name="walltype">The wall type to place.</param>
+    /// <param name="outpost">Whether this call is from the Tuhrtl Outpost generation.</param>
+    public static void BoreTunnel(int x0, int y0, int x1, int y1, float r, ushort type, ushort walltype, bool outpost = false)
+    {
+        bool flag = Math.Abs(y1 - y0) > Math.Abs(x1 - x0);
+        if (flag)
+        {
+            Swap(ref x0, ref y0);
+            Swap(ref x1, ref y1);
+        }
+
+        if (x0 > x1)
+        {
+            Swap(ref x0, ref x1);
+            Swap(ref y0, ref y1);
+        }
+
+        int num = x1 - x0;
+        int num2 = Math.Abs(y1 - y0);
+        int num3 = num / 2;
+        int num4 = y0 < y1 ? 1 : -1;
+        int num5 = y0;
+        for (int i = x0; i <= x1; i++)
+        {
+            if (flag)
+            {
+                DestroyBox(num5, i, (int)r, (int)r, outpost);
+            }
+            else
+            {
+                DestroyBox(i, num5, (int)r, (int)r, outpost);
+            }
+
+            num3 -= num2;
+            if (num3 < 0)
+            {
+                num5 += num4;
+                num3 += num;
+            }
+        }
+    }
+    public static void DestroyBox(int x, int y, int width, int height, bool outpost = false)
+    {
+        int a = -(width / 2);
+        int b = -(height / 2);
+        for (int i = a; i <= width / 2; i++)
+        {
+            for (int j = b; j <= height / 2; j++)
+            {
+                if (outpost && (Main.tile[x + i, y + j].TileType == ModContent.TileType<Loam>() || Main.tile[x + i, y + j].TileType == ModContent.TileType<TropicalGrass>()))
+                { }
+                else WorldGen.KillTile(x + i, y + j, noItem: true);
+            }
+        }
+    }
 
     public static bool IsInsideEllipse(int x, int y, Vector2 center, int xRadius, int yRadius)
     {

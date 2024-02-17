@@ -25,7 +25,7 @@ public class BoneFish : ModNPC
 
     public override void SetDefaults()
     {
-        NPC.damage = 30;
+        NPC.damage = 40;
         NPC.lifeMax = 100;
         NPC.timeLeft = 750;
         NPC.defense = 15;

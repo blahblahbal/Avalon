@@ -24,14 +24,14 @@ public class TrapCollision : ModHook
             if (player.GetModPlayer<AvalonPlayer>().TrapImmune)
             {
                 if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() ||
-                    type == ModContent.TileType<Tiles.Tropics.WoodenSpikes>() ||
+                    type == ModContent.TileType<Tiles.Tropics.BrambleSpikes>() ||
                     type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>() ||
                     type == ModContent.TileType<Tiles.Tropics.Bramble>())
                 {
                     return false;
                 }
             }
-            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && (type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.Tropics.WoodenSpikes>()))
+            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && (type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.Tropics.BrambleSpikes>()))
             {
                 return true;
             }
@@ -57,9 +57,13 @@ public class TrapCollision : ModHook
             self.AddBuff(BuffID.Venom, 180);
             self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, 0, true);
         }
-        if (tileId == ModContent.TileType<Tiles.Tropics.WoodenSpikes>())
+        if (tileId == ModContent.TileType<Tiles.Tropics.BrambleSpikes>())
         {
-            int num = Main.DamageVar(40, 0f - self.luck);
+            int num = Main.DamageVar(90, 0f - self.luck);
+            int time = 10;
+            if (Main.expertMode) time = 20;
+            if (Main.masterMode) time = 25;
+            self.AddBuff(BuffID.Bleeding, time * 60);
             self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, 0, true);
         }
         orig(self, tileId, x, y);

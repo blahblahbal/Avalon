@@ -8217,6 +8217,11 @@ Mods: {
 				DisplayName: Tuhrtl Work Bench
 				Tooltip: ""
 			}
+
+			BrambleSpike: {
+				DisplayName: Bramble Spike
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9375,7 +9380,8 @@ Mods: {
 			LockedTuhrtlDoor.MapEntry: Locked Tuhrtl Door
 			TropicsPot.MapEntry: Pot
 			TuhrtlPot.MapEntry: Pot
-			TuhrtlChest.MapEntry0: Mods.Avalon.Tiles.TuhrtlChest.MapEntry0
+			TuhrtlChest.MapEntry0: Tuhrtl Chest
+			BrambleSpikes.MapEntry: Bramble Spike
 		}
 
 		Prefixes: {

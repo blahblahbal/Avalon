@@ -7,15 +7,15 @@ using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Tropics;
 
-public class WoodenSpikes : ModTile
+public class BrambleSpikes : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(132, 65, 172), LanguageManager.Instance.GetText("Wooden Spike"));
+        AddMapEntry(new Color(117, 130, 69), this.GetLocalization("MapEntry"));
         Main.tileSolid[Type] = true;
         Main.tileBlockLight[Type] = true;
-        RegisterItemDrop(ItemID.WoodenSpike);
-        DustType = DustID.WoodFurniture;
+        TileID.Sets.CanBeClearedDuringGeneration[Type] = false;
+        DustType = DustID.CorruptGibs;
     }
     public override bool Slope(int i, int j)
     {

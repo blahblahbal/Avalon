@@ -44,10 +44,10 @@ public class TropicalShortGrass : ModTile
             AddMapEntry(new Color(82, 123, 35));
         }
     }
-    public override ushort GetMapOption(int i, int j)
-    {
-        return (ushort)(Main.tile[i, j].TileFrameX / 18);
-    }
+    //public override ushort GetMapOption(int i, int j)
+    //{
+    //    return (ushort)(Main.tile[i, j].TileFrameX / 18);
+    //}
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
         if (Main.tile[i, j].TileFrameX / 18 == 8)

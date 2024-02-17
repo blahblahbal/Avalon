@@ -146,6 +146,8 @@ internal class Tropics
     public static void LihzahrdBrickReSolidTask(GenerationProgress progress, GameConfiguration configuration)
     {
         Main.tileSolid[TileID.LihzahrdBrick] = true;
+        Main.tileSolid[ModContent.TileType<Tiles.Tropics.TuhrtlBrick>()] = true;
+        Main.tileSolid[ModContent.TileType<Tiles.Tropics.BrambleSpikes>()] = true;
     }
     public static void GlowingMushroomsandJunglePlantsTask(GenerationProgress progress, GameConfiguration passConfig)
     {

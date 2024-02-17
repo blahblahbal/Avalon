@@ -56,7 +56,7 @@ internal class Hellcastle
         // add platforms in various places
         AddPlatforms(x, y, 400, 150);
         AddPaintings(x, y, 400, 150);
-        AddSpikes(x, y, 400, 150);
+        Utils.AddSpikes(x, y, 400, 150, 20, ModContent.TileType<Tiles.VenomSpike>());
         AddChests(x, y, 400, 150);
         AddFurniture(x, y, 400, 150);
         AddPots(x, y, 400, 150);
@@ -970,18 +970,6 @@ internal class Hellcastle
             }
         }
     }
-    public static void DestroyBox(int x, int y, int width, int height)
-    {
-        int a = -(width / 2);
-        int b = -(height / 2);
-        for (int i = a; i <= width / 2; i++)
-        {
-            for (int j = b; j <= height / 2; j++)
-            {
-                WorldGen.KillTile(x + i, y + j, noItem: true);
-            }
-        }
-    }
     public static void MakeBoxFromCenter(int x, int y, int width, int height, int type)
     {
         int a = -(width / 2);
@@ -1053,7 +1041,7 @@ internal class Hellcastle
                             }
                             if (!Main.tile[x + i, y + j - k].HasTile)
                             {
-                                DestroyBox(x + i, y + j - k + (size / 2), size * 2, size + 1);
+                                Utils.DestroyBox(x + i, y + j - k + (size / 2), size * 2, size + 1);
                                 //size = 0;
                                 break;
                             }
@@ -1070,7 +1058,7 @@ internal class Hellcastle
                             }
                             if (!Main.tile[x + i, y + j + k].HasTile)
                             {
-                                DestroyBox(x + i, y + j + k - (size / 2), size * 2, size + 1);
+                                Utils.DestroyBox(x + i, y + j + k - (size / 2), size * 2, size + 1);
                                 //size = 0;
                                 break;
                             }
@@ -1184,90 +1172,6 @@ internal class Hellcastle
             }
         }
     }
-    public static void AddSpikes(int x, int y, int width, int height)
-    {
-        int counter = 0;
-        int countTo = 20;
-
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                if (i == 0 || i == width - 1 || j == 0 || j == height - 1)
-                {
-
-                }
-                else
-                {
-                    if(Main.tile[x + i, y + j].HasTile && !Main.tileSolidTop[Main.tile[x + i, y + j].TileType] && Main.tileSolid[Main.tile[x + i, y + j].TileType])
-                    {
-                        if (!Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i + 1, y + j].HasTile && Main.tile[x + i - 1, y + j].HasTile)
-                        {
-                            counter++;
-                            if (counter > countTo)
-                            {
-                                GenerateSpikeTrap(x + i, y + j, WorldGen.genRand.Next(9, 21));
-                                counter = 0;
-                                countTo = 20;
-                            }
-                        }
-                        if (!Main.tile[x + i, y + j + 1].HasTile && Main.tile[x + i + 1, y + j].HasTile && Main.tile[x + i - 1, y + j].HasTile)
-                        {
-                            counter++;
-                            if (counter > countTo)
-                            {
-                                GenerateSpikeTrap(x + i, y + j, WorldGen.genRand.Next(9, 21));
-                                counter = 0;
-                                countTo = 20;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public static void GenerateSpikeTrap(int x, int y, int length)
-    {
-        if(length % 2 == 0)
-        {
-            length++;
-        }
-        for (int i = 1; i <= length; i++)
-        {
-            if (!Main.tile[x + i + 2, y].HasTile || Main.tileSolidTop[Main.tile[x + i + 2, y].TileType])
-            {
-                break;
-            }
-            if (Main.tile[x + i + 2, y - 1].HasTile && Main.tile[x + i + 2, y + 1].HasTile)
-            {
-                break;
-            }
-            if (i % 2 == 0)
-            {
-                WorldGen.PlaceTile(x + i - 1, y, ModContent.TileType<Tiles.VenomSpike>(), true, true);
-                if(!Main.tile[x, y - 1].HasTile)
-                {
-                    WorldGen.PlaceTile(x + i - 1, y - 1, ModContent.TileType<Tiles.VenomSpike>(), true, true);
-                    if (WorldGen.genRand.NextBool(2) && i > 2 && i < length - 1)
-                    {
-                        WorldGen.PlaceTile(x + i - 1, y - 2, ModContent.TileType<Tiles.VenomSpike>(), true, true);
-                    }
-                }
-                else
-                {
-                    WorldGen.PlaceTile(x + i - 1, y + 1, ModContent.TileType<Tiles.VenomSpike>(), true, true);
-                    if (WorldGen.genRand.NextBool(2) && i > 2 && i < length - 1)
-                    {
-                        WorldGen.PlaceTile(x + i - 1, y + 2, ModContent.TileType<Tiles.VenomSpike>(), true, true);
-                    }
-                }
-            }
-            else
-            {
-                WorldGen.PlaceTile(x + i - 1, y, ModContent.TileType<Tiles.VenomSpike>(), true, true);
-            }
-        }
-    }
     public static void AddFurniture(int x, int y, int width, int height)
     {
         int counter = 0;
@@ -1367,51 +1271,12 @@ internal class Hellcastle
     }
     public static void MakeTunnel(int x, int y, Vector2 beginPoint, Vector2 endPoint, int thickness = 20)
     {
-        BoreTunnel(x + (int)beginPoint.X, y + (int)beginPoint.Y, x + (int)endPoint.X, y + (int)endPoint.Y, thickness, ushort.MaxValue, 0);
+        Utils.BoreTunnel(x + (int)beginPoint.X, y + (int)beginPoint.Y, x + (int)endPoint.X, y + (int)endPoint.Y, thickness, ushort.MaxValue, 0);
     }
     public static void MakeTunnelHollow(int x, int y, Vector2 beginPoint, Vector2 endPoint, int thicknessTunnel = 20, int thicknessHollow = 10)
     {
         int offset = (thicknessTunnel / 2) - (thicknessHollow / 2);
-        BoreTunnel(x + (int)beginPoint.X + offset, y + (int)beginPoint.Y + offset, x + (int)endPoint.X + offset, y + (int)endPoint.Y + offset, thicknessHollow, ushort.MaxValue, WallID.Wood);
-    }
-    public static void BoreTunnel(int x0, int y0, int x1, int y1, float r, ushort type, ushort walltype)
-    {
-        bool flag = Math.Abs(y1 - y0) > Math.Abs(x1 - x0);
-        if (flag)
-        {
-            Utils.Swap(ref x0, ref y0);
-            Utils.Swap(ref x1, ref y1);
-        }
-
-        if (x0 > x1)
-        {
-            Utils.Swap(ref x0, ref x1);
-            Utils.Swap(ref y0, ref y1);
-        }
-
-        int num = x1 - x0;
-        int num2 = Math.Abs(y1 - y0);
-        int num3 = num / 2;
-        int num4 = y0 < y1 ? 1 : -1;
-        int num5 = y0;
-        for (int i = x0; i <= x1; i++)
-        {
-            if (flag)
-            {
-                DestroyBox(num5, i, (int)r, (int)r);
-            }
-            else
-            {
-                DestroyBox(i, num5, (int)r, (int)r);
-            }
-
-            num3 -= num2;
-            if (num3 < 0)
-            {
-                num5 += num4;
-                num3 += num;
-            }
-        }
+        Utils.BoreTunnel(x + (int)beginPoint.X + offset, y + (int)beginPoint.Y + offset, x + (int)endPoint.X + offset, y + (int)endPoint.Y + offset, thicknessHollow, ushort.MaxValue, WallID.Wood);
     }
     public static bool AddHellcastleChest(int i, int j, bool notNearOtherChests = false)
     {

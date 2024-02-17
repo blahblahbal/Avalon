@@ -2,9 +2,6 @@ using Avalon.Tiles.Tropics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,16 +20,25 @@ internal class TuhrtlOutpost
         ushort brick = (ushort)ModContent.TileType<TuhrtlBrick>();
         ushort brickWall = (ushort)ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>();
 
+        float widthMultiplier = 1f;
+        float heightMultiplier = 1f;
+
+        //if (Main.maxTilesX is > 6400)
+        //{
+        //    widthMultiplier = 1.3f;
+        //    heightMultiplier = 1.3f;
+        //}
+
         #region tiles
-        int wide = 90;
-        int high = 60;
+        int wide = (int)(90 * widthMultiplier);
+        int high = (int)(60 * heightMultiplier);
 
         int totalWidth = wide * 2;
         // add high to height of box, offsetting the diagonal part by high
         heightOfBox += high;
 
-        // set the pyramid step width to 90
-        int pstep = 90;
+        // set the pyramid step width to 90 * the width multiplier
+        int pstep = (int)(90 * widthMultiplier);
         int yStartSlope = y + high;
         heightOfBox += high;
 
@@ -89,7 +95,7 @@ internal class TuhrtlOutpost
         wallHeightOfBox += wallHeight;
 
         // set the pyramid step width to 90
-        int pstepWall = 90;
+        int pstepWall = (int)(90 * widthMultiplier);
         int yStartSlopeWall = y + high;
         wallHeightOfBox += high;
 
@@ -140,17 +146,19 @@ internal class TuhrtlOutpost
 
         // true: right, false: left (Start side)
         bool leftOrRight = WorldGen.genRand.NextBool(2);
+        //leftOrRight = true; // remove
+        bool originallyStartingOnTheRight = leftOrRight;
         int xStartTunnel = x + (leftOrRight ? wide : -wide);
-        int yTunnel = y + high / 2 + WorldGen.genRand.Next(-10, 15);
+        int yTunnel = y + high / 2 + WorldGen.genRand.Next(-8, 9);
         int heightOfStartTunnel = WorldGen.genRand.Next(4, 7);
 
         Vector2 tunnelEndpoint = new Vector2(x, yTunnel);
         // add endpoint to list
         endpoints.Add(tunnelEndpoint);
         // length of the tunnel
-        int tunnelLength = WorldGen.genRand.Next(40, 55);
+        int tunnelLength = WorldGen.genRand.Next(30, 38);
 
-        Hellcastle.BoreTunnel(xStartTunnel, y + high / 2, (int)tunnelEndpoint.X, (int)tunnelEndpoint.Y, heightOfStartTunnel, ushort.MaxValue, 0);
+        Utils.BoreTunnel(xStartTunnel, y + high / 2, (int)tunnelEndpoint.X, (int)tunnelEndpoint.Y, heightOfStartTunnel, ushort.MaxValue, 0);
 
         // midpoint calc
         if (leftOrRight)
@@ -161,116 +169,193 @@ internal class TuhrtlOutpost
         {
             midpointStartTunnel = new Vector2(tunnelEndpoint.X - ((tunnelEndpoint.X - xStartTunnel) / 2), tunnelEndpoint.Y - ((tunnelEndpoint.Y - (y + high / 2)) / 2));
         }
-        
 
-        MakeBoxFromCenter((int)endpoints[0].X, (int)endpoints[0].Y + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 0, 15);
-        endpoints.Add(MakeBox((int)endpoints[0].X, (int)endpoints[0].Y + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 15, 1));
-        rooms++;
+        List<Vector2> points = new List<Vector2>();
+        int angleDegrees;
+        float angle;
+        float posX;
+        float posY;
 
-        int angleDegrees = 180 + WorldGen.genRand.Next(-5, 6);
-        if (!leftOrRight) angleDegrees = WorldGen.genRand.Next(-5, 6);
-        float angle = (float)(Math.PI / 180) * angleDegrees;
-        float posX = (float)(endpoints[0].X + (tunnelLength + WorldGen.genRand.Next(8, 10)) * Math.Cos(angle));
-        float posY = (float)(endpoints[0].Y + (tunnelLength + WorldGen.genRand.Next(8, 10)) * Math.Sin(angle));
+        int heightOfTunnel = heightOfStartTunnel * 2;
+        int shiftModifier = 0;
 
-        Hellcastle.BoreTunnel((int)endpoints[1].X, (int)endpoints[1].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
 
-        MakeBoxFromCenter((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 0, 15);
-        endpoints.Add(MakeBox((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 15, 1));
-        rooms++;
-
-        // third tunnel/room (down)
-        angleDegrees = 80 + WorldGen.genRand.Next(-5, 6);
-        angle = (float)(Math.PI / 180) * angleDegrees;
-        posX = (float)(endpoints[2].X + (tunnelLength - 10) * Math.Cos(angle));
-        posY = (float)(endpoints[2].Y + (tunnelLength - 10) * Math.Sin(angle));
-
-        Hellcastle.BoreTunnel((int)endpoints[2].X, (int)endpoints[2].Y - 8, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
-
-        MakeBoxFromCenter((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 0, 15);
-        endpoints.Add(MakeBox((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 15, 1));
-        rooms++;
-
-        // fourth tunnel/room
-        angleDegrees = WorldGen.genRand.Next(-5, 6);
-        int difference = 20;
-        if (!leftOrRight)
+        for (int i = 0; i < 10; i++)
         {
-            angleDegrees = 180 + WorldGen.genRand.Next(-5, 6);
-            difference = -10;
+            bool down = false;
+            // swap direction
+            if (i % 3 == 1)
+            {
+                leftOrRight = !leftOrRight;
+                down = true;
+            }
+            if (i is 1 or 7)
+            {
+                shiftModifier = -20;
+            }
+            if (i is 4)
+            {
+                shiftModifier = 20;
+            }
+
+            // make the room(s)
+            points = OutpostRoom((int)endpoints[i].X, (int)endpoints[i].Y - (i == 0 ? 0 : heightOfStartTunnel / 2), WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20));
+            rooms++;
+
+            // make the tunnels
+            if (down)
+            {
+                if (originallyStartingOnTheRight)
+                {
+                    if (leftOrRight)
+                    {
+                        // bottom left
+                        angleDegrees = 75 + WorldGen.genRand.Next(-5, 6);
+                        angle = (float)(Math.PI / 180) * angleDegrees;
+                        posX = (float)(points[2].X + (tunnelLength - 5) * Math.Cos(angle));
+                        posY = (float)(points[2].Y + (tunnelLength - 5) * Math.Sin(angle));
+                        Utils.BoreTunnel((int)points[2].X + 20, (int)points[2].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+                        endpoints.Add(new Vector2(posX + shiftModifier, posY));
+                    }
+                    else
+                    {
+                        // bottom right
+                        angleDegrees = 105 + WorldGen.genRand.Next(-5, 6);
+                        angle = (float)(Math.PI / 180) * angleDegrees;
+                        posX = (float)(points[3].X + (tunnelLength - 5) * Math.Cos(angle));
+                        posY = (float)(points[3].Y + (tunnelLength - 5) * Math.Sin(angle));
+                        Utils.BoreTunnel((int)points[3].X - 20, (int)points[3].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+                        endpoints.Add(new Vector2(posX + shiftModifier, posY));
+                    }
+                }
+                else // starting on the left
+                {
+                    if (leftOrRight)
+                    {
+                        // bottom right
+                        angleDegrees = 105 + WorldGen.genRand.Next(-5, 6);
+                        angle = (float)(Math.PI / 180) * angleDegrees;
+                        posX = (float)(points[3].X + (tunnelLength - 5) * Math.Cos(angle));
+                        posY = (float)(points[3].Y + (tunnelLength - 5) * Math.Sin(angle));
+                        Utils.BoreTunnel((int)points[3].X - 20, (int)points[3].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+                        endpoints.Add(new Vector2(posX + shiftModifier, posY));
+                    }
+                    else
+                    {
+                        // bottom left
+                        angleDegrees = 75 + WorldGen.genRand.Next(-5, 6);
+                        angle = (float)(Math.PI / 180) * angleDegrees;
+                        posX = (float)(points[2].X + (tunnelLength - 5) * Math.Cos(angle));
+                        posY = (float)(points[2].Y + (tunnelLength - 5) * Math.Sin(angle));
+                        Utils.BoreTunnel((int)points[2].X + 20, (int)points[2].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+                        endpoints.Add(new Vector2(posX + shiftModifier, posY));
+                    }
+                }
+            }
+            else if (!leftOrRight) // left
+            {
+                // bottom right
+                angleDegrees = 340 + WorldGen.genRand.Next(-5, 6);
+                angle = (float)(Math.PI / 180) * angleDegrees;
+                posX = (float)(points[3].X + (tunnelLength) * Math.Cos(angle));
+                posY = (float)(points[3].Y + (tunnelLength) * Math.Sin(angle));
+                Utils.BoreTunnel((int)points[3].X - 5, (int)points[3].Y - heightOfTunnel, (int)posX, (int)posY, heightOfStartTunnel + 3, ushort.MaxValue, 0);
+                endpoints.Add(new Vector2(posX, posY));
+            }
+            else if (leftOrRight)
+            {
+                // bottom left
+                angleDegrees = 200 + WorldGen.genRand.Next(-5, 6);
+                angle = (float)(Math.PI / 180) * angleDegrees;
+                posX = (float)(points[2].X + (tunnelLength) * Math.Cos(angle));
+                posY = (float)(points[2].Y + (tunnelLength) * Math.Sin(angle));
+                Utils.BoreTunnel((int)points[2].X + 5, (int)points[2].Y - heightOfTunnel, (int)posX, (int)posY, heightOfStartTunnel + 3, ushort.MaxValue, 0);
+                endpoints.Add(new Vector2(posX, posY));
+            }
         }
-        else
-        {
-            
-        }
-        angle = (float)(Math.PI / 180) * angleDegrees;
-        posX = (float)(endpoints[3].X + (tunnelLength + difference) * Math.Cos(angle));
-        posY = (float)(endpoints[3].Y + (tunnelLength + difference) * Math.Sin(angle));
 
-        Hellcastle.BoreTunnel((int)endpoints[3].X, (int)endpoints[3].Y - 8, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
-
-        MakeBoxFromCenter((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 0, 15);
-        endpoints.Add(MakeBox((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 15, 1));
-        rooms++;
-
-        // fifth tunnel/room
-        angleDegrees = WorldGen.genRand.Next(-5, 6);
-        if (!leftOrRight) angleDegrees = 180 + WorldGen.genRand.Next(-5, 6);
-        angle = (float)(Math.PI / 180) * angleDegrees;
-        posX = (float)(endpoints[4].X + (tunnelLength + difference) * Math.Cos(angle));
-        posY = (float)(endpoints[4].Y + (tunnelLength + difference) * Math.Sin(angle));
-
-        Hellcastle.BoreTunnel((int)endpoints[4].X, (int)endpoints[4].Y - 8, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
-
-        MakeBoxFromCenter((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 0, 15);
-        endpoints.Add(MakeBox((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 15, 1));
-        rooms++;
-
-        // sixth tunnel/room
-        angleDegrees = 80 + WorldGen.genRand.Next(-5, 6);
-        //if (!leftOrRight) angleDegrees = 180 + WorldGen.genRand.Next(-5, 6);
-        angle = (float)(Math.PI / 180) * angleDegrees;
-        posX = (float)(endpoints[5].X + (tunnelLength - 20) * Math.Cos(angle));
-        posY = (float)(endpoints[5].Y + (tunnelLength - 20) * Math.Sin(angle));
-
-        Hellcastle.BoreTunnel((int)endpoints[5].X, (int)endpoints[5].Y - 8, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
-
-        MakeBoxFromCenter((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 0, 15);
-        endpoints.Add(MakeBox((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 15, 1));
-        rooms++;
-
-        // seventh tunnel/room
-        angleDegrees = 180 + WorldGen.genRand.Next(-5, 6);
-        if (!leftOrRight) angleDegrees = WorldGen.genRand.Next(-5, 6);
-        angle = (float)(Math.PI / 180) * angleDegrees;
-        posX = (float)(endpoints[6].X + (tunnelLength + difference) * Math.Cos(angle));
-        posY = (float)(endpoints[6].Y + (tunnelLength + difference) * Math.Sin(angle));
-
-        Hellcastle.BoreTunnel((int)endpoints[6].X, (int)endpoints[6].Y - 8, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
-
-        MakeBoxFromCenter((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 0, 15);
-        endpoints.Add(MakeBox((int)posX, (int)posY + 7, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20), ushort.MaxValue, 15, 1));
-        rooms++;
+        OutpostRoom((int)endpoints[endpoints.Count - 1].X, (int)endpoints[endpoints.Count - 1].Y, WorldGen.genRand.Next(20, 30), WorldGen.genRand.Next(15, 20));
         #endregion
 
         #region boss room
-        angleDegrees = 80 + WorldGen.genRand.Next(-5, 6);
-        angle = (float)(Math.PI / 180) * angleDegrees;
-        posX = (float)(endpoints[7].X + (tunnelLength) * Math.Cos(angle));
-        posY = (float)(endpoints[7].Y + (tunnelLength) * Math.Sin(angle));
+        if (!originallyStartingOnTheRight)
+        {
+            endpoints.Add(MakeBox(x - 20, y + heightOfBox + high + high / 2 - 40, WorldGen.genRand.Next(80, 90), WorldGen.genRand.Next(23, 27), ushort.MaxValue, 30, 0));
+            endpoints.Add(MakeBox(x - 20, y + heightOfBox + high + high / 2 - 40, WorldGen.genRand.Next(80, 90), WorldGen.genRand.Next(23, 27), ushort.MaxValue, 30, 1));
+        }
+        else
+        {
+            endpoints.Add(MakeBox(x + 20, y + heightOfBox + high + high / 2 - 40, WorldGen.genRand.Next(80, 90), WorldGen.genRand.Next(23, 27), ushort.MaxValue, 30, 0));
+            endpoints.Add(MakeBox(x + 20, y + heightOfBox + high + high / 2 - 40, WorldGen.genRand.Next(80, 90), WorldGen.genRand.Next(23, 27), ushort.MaxValue, 30, 1));
+        }
+        Utils.BoreTunnel((int)endpoints[endpoints.Count - 2].X, (int)endpoints[endpoints.Count - 2].Y, (int)endpoints[endpoints.Count - 3].X, (int)endpoints[endpoints.Count - 3].Y, heightOfStartTunnel, ushort.MaxValue, 0);
+        #endregion
 
-        Hellcastle.BoreTunnel((int)endpoints[7].X, (int)endpoints[7].Y - 8, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+        #region border
+        for (int pyY = yStartSlope; pyY <= yStartSlope + high + 4; pyY += 2)
+        {
+            for (int pyX = x - pstep + 1; pyX <= x + pstep + 1; pyX++)
+            {
+                if (pyX > x - pstep + 6 && pyX < x + pstep - 6)
+                { }
+                else
+                {
+                    Main.tile[pyX, pyY].Active(true);
+                    Main.tile[pyX, pyY].TileType = brick;
+                    Main.tile[pyX, pyY - 1].Active(true);
+                    Main.tile[pyX, pyY - 1].TileType = brick;
+                    Utils.SquareTileFrame(pyX, pyY, resetSlope: true);
+                    Utils.SquareTileFrame(pyX, pyY - 1, resetSlope: true);
+                }
+            }
+            pstep++;
+        }
 
-        MakeBoxFromCenter((int)posX + 25, (int)posY, WorldGen.genRand.Next(80, 90), WorldGen.genRand.Next(25, 29), ushort.MaxValue, 0, 30);
-        endpoints.Add(MakeBox((int)posX + 25, (int)posY, WorldGen.genRand.Next(80, 90), WorldGen.genRand.Next(25, 29), ushort.MaxValue, 30, 1));
+        for (int pyY = yStartInnerSlope; pyY <= yStartInnerSlope + high + 4; pyY += 2)
+        {
+            for (int pyX = x - pstep + 2; pyX <= x + pstep; pyX++)
+            {
+                if (pyX > x - pstep + 6 && pyX < x + pstep - 6)
+                { }
+                else
+                {
+                    Main.tile[pyX, pyY].Active(true);
+                    Main.tile[pyX, pyY].TileType = brick;
+                    Main.tile[pyX, pyY - 1].Active(true);
+                    Main.tile[pyX, pyY - 1].TileType = brick;
+                    Utils.SquareTileFrame(pyX, pyY, resetSlope: true);
+                    Utils.SquareTileFrame(pyX, pyY - 1, resetSlope: true);
+                }
+            }
+            pstep--;
+        }
+
+        // make the main box
+        for (int i = x - wide + 1; i < x + wide + 1; i++)
+        {
+            for (int j = y; j < y + heightOfBox + high + (high / 2); j++)
+            {
+                if (j >= yStartSlope && j <= yStartInnerSlope + high + 4) { }
+                else if (i > x - wide + 6 && i < x + wide - 6) { }
+                else
+                {
+                    Main.tile[i, j].Active(true);
+                    Main.tile[i, j].TileType = brick;
+                    Utils.SquareTileFrame(i, j, resetSlope: true);
+                    Main.tile[i, j].LiquidAmount = 0;
+                }
+            }
+        }
+
+        // remake the entrance tunnel
+        Utils.BoreTunnel(xStartTunnel, y + high / 2, (int)tunnelEndpoint.X, (int)tunnelEndpoint.Y, heightOfStartTunnel, ushort.MaxValue, 0);
         #endregion
 
         #region door, spikes, chests, etc
         PlaceDoor((int)midpointStartTunnel.X, (int)midpointStartTunnel.Y);
         //AddChests(x - wide / 2, y, 90, heightOfBox + high + high / 2);
         
-        AddSpikes(x - wide / 2, y, 90, heightOfBox + high + high / 2);
-        
+        Utils.AddSpikes(x - wide, y, wide * 2, heightOfBox + high + high / 2, 10, ModContent.TileType<BrambleSpikes>());
 
         GenVars.tLeft = x - wide;
         GenVars.tRight = x + wide;
@@ -279,52 +364,33 @@ internal class TuhrtlOutpost
         GenVars.tRooms = rooms;
         OutpostPart2();
 
-        GenVars.structures.AddProtectedStructure(new Rectangle(x - (totalWidth / 2), y, totalWidth, heightOfBox + high + high / 2), 10);
+        //GenVars.structures.AddProtectedStructure(new Rectangle(x - (totalWidth / 2), y, totalWidth, heightOfBox + high + high / 2), 10);
         #endregion
     }
 
-    public static void AddSpikes(int x, int y, int width, int height)
+    /// <summary>
+    /// Helper method to generate a Tuhrtl Outpost room.
+    /// </summary>
+    /// <param name="x">The X coordinate of the center of the room.</param>
+    /// <param name="y">The Y coordinate of the center of the room.</param>
+    /// <param name="width">The width of the room.</param>
+    /// <param name="height">The height of the room.</param>
+    /// <returns>Returns a <see cref="List{Vector2}"/> containing the corners of the room.</returns>
+    public static List<Vector2> OutpostRoom(int x, int y, int width, int height)
     {
-        int counter = 0;
-        int countTo = 10;
+        List<Vector2> points = new List<Vector2>();
 
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                if (i == 0 || i == width - 1 || j == 0 || j == height - 1)
-                {
+        MakeBox(x, y, width, height, ushort.MaxValue, 15, 0);
+        MakeBox(x, y, width, height, ushort.MaxValue, 15, 1);
 
-                }
-                else
-                {
-                    if (Main.tile[x + i, y + j].HasTile && !Main.tileSolidTop[Main.tile[x + i, y + j].TileType] && Main.tileSolid[Main.tile[x + i, y + j].TileType])
-                    {
-                        if (!Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i + 1, y + j].HasTile && Main.tile[x + i - 1, y + j].HasTile)
-                        {
-                            counter++;
-                            if (counter > countTo)
-                            {
-                                Hellcastle.GenerateSpikeTrap(x + i, y + j, WorldGen.genRand.Next(15, 21));
-                                counter = 0;
-                                countTo = 10;
-                            }
-                        }
-                        if (!Main.tile[x + i, y + j + 1].HasTile && Main.tile[x + i + 1, y + j].HasTile && Main.tile[x + i - 1, y + j].HasTile)
-                        {
-                            counter++;
-                            if (counter > countTo)
-                            {
-                                Hellcastle.GenerateSpikeTrap(x + i, y + j, WorldGen.genRand.Next(15, 21));
-                                counter = 0;
-                                countTo = 10;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        points.Add(new Vector2(x - width, y - height)); // top left
+        points.Add(new Vector2(x + width, y - height)); // top right
+        points.Add(new Vector2(x - width, y + height)); // bottom left
+        points.Add(new Vector2(x + width, y + height)); // bottom right
+
+        return points;
     }
+    
     public static void AddChests(int x, int y, int width, int height)
     {
         int maxAmount = WorldGen.genRand.Next(15, 18);
@@ -1028,27 +1094,13 @@ internal class TuhrtlOutpost
 
         if (direction == 0)
         {
-            Hellcastle.BoreTunnel(x - a, y - b + WorldGen.genRand.Next(-6, 7), x + a, y + b, length, (ushort)type, 0);
+            Utils.BoreTunnel(x - a, y - b + WorldGen.genRand.Next(-6, 7), x + a, y + b, length, (ushort)type, 0, true);
             return new Vector2(x + a, y + b - 2);
         }
         else
         {
-            Hellcastle.BoreTunnel(x - a, y + b, x + a, y - b + WorldGen.genRand.Next(-6, 7), length, (ushort)type, 0);
+            Utils.BoreTunnel(x - a, y + b, x + a, y - b + WorldGen.genRand.Next(-6, 7), length, (ushort)type, 0, true);
             return new Vector2(x - a, y + b - 2);
-        }
-    }
-    public static void MakeBoxFromCenter(int x, int y, int width, int height, int type, float angle, int length)
-    {
-        int a = (width / 2);
-        int b = (height / 2);
-
-        if (angle == 0)
-        {
-            Hellcastle.BoreTunnel(x - a, y - b + WorldGen.genRand.Next(-6, 7), x + a, y + b, length, (ushort)type, 0);
-        }
-        else if (angle == 1)
-        {
-            Hellcastle.BoreTunnel(x - a, y + b, x + a, y - b + WorldGen.genRand.Next(-6, 7), length, (ushort)type, 0);
         }
     }
 }

@@ -58,6 +58,15 @@ public class GenSystem : ModSystem
             {
                 tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
             }
+            jungleIndex = tasks.FindIndex(i => i.Name.Equals("Ice"));
+            if (jungleIndex != -1)
+            {
+                tasks.Insert(jungleIndex + 1, new PassLegacy("Tuhrtl Brick Unsolid", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration config)
+                {
+                    Main.tileSolid[ModContent.TileType<Tiles.Tropics.TuhrtlBrick>()] = false;
+                    Main.tileSolid[ModContent.TileType<Tiles.Tropics.BrambleSpikes>()] = false;
+                })));
+            }
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Mud Caves To Grass"));
             if (jungleIndex != -1)
             {
