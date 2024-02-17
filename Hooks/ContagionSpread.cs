@@ -15,6 +15,8 @@ namespace Avalon.Hooks
             On_WorldGen.UpdateWorld_OvergroundTile += On_WorldGen_UpdateWorld_OvergroundTile; //these contain wall spreading
             On_WorldGen.UpdateWorld_UndergroundTile += On_WorldGen_UpdateWorld_UndergroundTile;
             On_WorldGen.SpreadDesertWalls += On_WorldGen_SpreadDesertWalls; //this contains desert wall spreading
+            IL_WorldGen.GrowCactus += IL_WorldGen_GrowCactus;
+            IL_WorldGen.StonePatch += IL_WorldGen_StonePatch;
         }
 
         public override void Unload()
@@ -27,6 +29,14 @@ namespace Avalon.Hooks
 
         //Make sure that once the jungle grass is added that it is given to all the checks for tiles
 
+        private void IL_WorldGen_GrowCactus(MonoMod.Cil.ILContext il)
+        {
+            Utilities.AddAlternativeIdChecks(il, TileID.Crimsand, id => TileID.Sets.Factory.CreateBoolSet(ModContent.TileType<Snotsand>())[id]);
+        }
+        private void IL_WorldGen_StonePatch(MonoMod.Cil.ILContext il)
+        {
+            Utilities.AddAlternativeIdChecks(il, TileID.CrimsonGrass, id => TileID.Sets.Factory.CreateBoolSet(ModContent.TileType<Ickgrass>())[id]);
+        }
         private void On_WorldGen_SpreadDesertWalls(On_WorldGen.orig_SpreadDesertWalls orig, int wallDist, int i, int j)
         {
             orig.Invoke(wallDist, i, j);

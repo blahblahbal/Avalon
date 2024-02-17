@@ -704,6 +704,18 @@ public class AvalonWorld : ModSystem
             }
             #endregion
 
+            #region tropical shortgrass to long grass
+            if (Main.tile[xCoord, yCoord].TileType == ModContent.TileType<TropicalShortGrass>() && WorldGen.genRand.NextBool(3) && Main.tile[xCoord, yCoord].TileFrameX < 144)
+            {
+                if (WorldGen.genRand.NextBool(4))
+                    Main.tile[xCoord, yCoord].TileFrameX = (short)(162 + WorldGen.genRand.Next(8) * 18);
+
+                Main.tile[xCoord, yCoord].TileType = (ushort)ModContent.TileType<TropicalLongGrass>();
+                if (Main.netMode == NetmodeID.Server)
+                    NetMessage.SendTileSquare(-1, xCoord, yCoord);
+            }
+            #endregion
+
             #region tropical grass
             if (Main.tile[xCoord, yCoord].TileType == ModContent.TileType<TropicalGrass>())
             {

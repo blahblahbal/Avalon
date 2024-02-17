@@ -21,8 +21,9 @@ public class TropicalLongGrass : ModTile
         Main.tileLavaDeath[Type] = true;
         Main.tileWaterDeath[Type] = false;
         Main.tileFrameImportant[Type] = true;
-        TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);
+        TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
         TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<TropicalGrass>() };
+        TileObjectData.newTile.CoordinateHeights = new int[1] { 32 };
         TileObjectData.newTile.WaterPlacement = LiquidPlacement.Allowed;
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.addTile(Type);
@@ -41,6 +42,6 @@ public class TropicalLongGrass : ModTile
     }
     public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
     {
-        offsetY = 2;
+        offsetY = -16;
     }
 }

@@ -149,6 +149,51 @@ public class GenSystem : ModSystem
                             }
                         }
                     }
+                    for (int q = GenVars.jungleMinX; q <= GenVars.jungleMaxX; q++)
+                    {
+                        for (int z = 0; (double)z < Main.maxTilesY - 200; z++)
+                        {
+                            if ((q < GenVars.jungleMinX + 75 && q >= GenVars.jungleMinX + 50) ||
+                                (q > GenVars.jungleMaxX - 75 && q <= GenVars.jungleMaxX - 50) &&
+                                z < Main.rockLayer)
+                            {
+                                if (Main.tile[q, z].HasTile && WorldGen.genRand.NextBool(10))
+                                {
+                                    if (Main.tile[q, z].TileType == TileID.Grass)
+                                    {
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>();
+                                    }
+                                    if (Main.tile[q, z].TileType == TileID.Dirt)
+                                    {
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Loam>();
+                                    }
+                                }
+                            }
+
+                            if (q >= GenVars.jungleMinX + 75 && q <= GenVars.jungleMaxX - 75 && z < Main.rockLayer)
+                            {
+                                if (Main.tile[q, z].HasTile)
+                                {
+                                    if (Main.tile[q, z].TileType == TileID.Grass)
+                                    {
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>();
+                                    }
+                                    if (Main.tile[q, z].TileType == TileID.Dirt)
+                                    {
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Loam>();
+                                    }
+                                    if (Main.tile[q, z].TileType == TileID.Plants)
+                                    {
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalShortGrass>();
+                                    }
+                                    if (Main.tile[q, z].TileType == TileID.Plants2)
+                                    {
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalLongGrass>();
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }));
             }
 
@@ -239,13 +284,6 @@ public class GenSystem : ModSystem
             currentPass = new ReplacePass("Replacing any improper ores", 25f);
             tasks.Insert(underworld + 1, currentPass);
             totalWeight += currentPass.Weight;
-
-            if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
-            {
-                currentPass = new PassLegacy("Tropics Loam Walls", new WorldGenLegacyMethod(Tropics.LoamWallTask));
-                tasks.Insert(index + 2, currentPass);
-                totalWeight += currentPass.Weight;
-            }
         }
 
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");

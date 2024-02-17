@@ -104,31 +104,6 @@ internal class Tropics
             Structures.TuhrtlOutpost.Outpost(x14, y14);
         }
     }
-    public static void LoamWallTask(GenerationProgress progress, GameConfiguration config)
-    {
-        for (int num177 = GenVars.jungleMinX; num177 <= GenVars.jungleMaxX; num177++)
-        {
-            for (int num178 = 0; (double)num178 < Main.maxTilesY - 200; num178++)
-            {
-                if (num177 >= GenVars.jungleMinX + 50 && num177 <= GenVars.jungleMaxX - 50 && num178 < Main.rockLayer)
-                {
-                    if (Main.tile[num177, num178].HasTile)
-                    {
-                        if (Main.tile[num177, num178].TileType == TileID.Grass)
-                        {
-                            Main.tile[num177, num178].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>();
-                        }
-                        if (Main.tile[num177, num178].TileType == TileID.Dirt)
-                        {
-                            Main.tile[num177, num178].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Loam>();
-                        }
-                    }
-                }
-                //if (((num177 >= GenVars.jungleMinX + 2 && num177 <= GenVars.jungleMaxX - 2) || !WorldGen.genRand.NextBool(2)) && ((num177 >= GenVars.jungleMinX + 3 && num177 <= GenVars.jungleMaxX - 3) || !WorldGen.genRand.NextBool(3)) && (Main.tile[num177, num178].WallType == 2 || Main.tile[num177, num178].WallType == 59))
-                //    Main.tile[num177, num178].WallType = (ushort) ModContent.WallType<Walls.TropicalMudWall>();
-            }
-        }
-    }
     public static void PlatformLeafTrapTask(GenerationProgress progress, GameConfiguration config)
     {
         progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.PlatformLeaves");
