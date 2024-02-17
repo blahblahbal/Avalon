@@ -7845,9 +7845,9 @@ Mods: {
 				Tooltip:
 					'''
 					Increases spawn rate
-					               Attackers also take damage
-					               The wearer can walk on water and lava
-					               Grants immunity to knockback and fire blocks
+					Attackers also take damage
+					The wearer can walk on water and lava
+					Grants immunity to knockback and fire blocks
 					'''
 			}
 
