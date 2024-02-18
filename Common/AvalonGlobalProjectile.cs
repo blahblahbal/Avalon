@@ -18,6 +18,34 @@ namespace Avalon.Common;
 
 internal class AvalonGlobalProjectile : GlobalProjectile
 {
+    public static void ModifyProjectileStats(Projectile p, int ownedCounts, int origDmg, int dmgMod, float origScale, float scaleMod)
+    {
+        p.damage = (int)Main.player[p.owner].GetDamage(DamageClass.Summon).ApplyTo(origDmg);
+        p.damage += Main.player[p.owner].ownedProjectileCounts[ownedCounts] * dmgMod;
+        p.scale = origScale;
+        p.scale += scaleMod * Main.player[p.owner].ownedProjectileCounts[ownedCounts];
+        if (Main.player[p.owner].ownedProjectileCounts[ownedCounts] > 7)
+        {
+            p.frame = 2;
+            p.scale = origScale;
+            if (Main.player[p.owner].ownedProjectileCounts[ownedCounts] < 10)
+            {
+                p.scale += scaleMod * (Main.player[p.owner].ownedProjectileCounts[ownedCounts] - 7);
+            }
+            else
+            {
+                p.scale += scaleMod * 2;
+            }
+            
+        }
+        else if (Main.player[p.owner].ownedProjectileCounts[ownedCounts] > 4)
+        {
+            p.frame = 1;
+            p.scale = origScale;
+            p.scale += scaleMod * (Main.player[p.owner].ownedProjectileCounts[ownedCounts] - 4);
+        }
+    }
+
     public override void OnSpawn(Projectile projectile, IEntitySource source)
     {
         if (source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.HasBuff(BuffID.Cursed))

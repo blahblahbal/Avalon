@@ -218,6 +218,7 @@ public class AvalonPlayer : ModPlayer
     private int[] doubleTapTimer = new int[3];
 
     private int BrambleBreak;
+    public bool PrimeMinion;
 
     #region accessories
     public bool PulseCharm;
@@ -323,6 +324,29 @@ public class AvalonPlayer : ModPlayer
     public int OldFallStart;
 
     public int DesertBeakSpawnTimer;
+
+    public void UpdatePrimeMinionStatus(EntitySource_ItemUse_WithAmmo source)
+    {
+        int firstMinion = ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>();
+        if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>()] < 1)
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                Projectile projectile = Main.projectile[i];
+                if (projectile.active && projectile.owner == Player.whoAmI && projectile.type != firstMinion)
+                {
+                    projectile.Kill();
+                }
+            }
+        }
+        if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>()] < 1)
+        {
+            Projectile.NewProjectile(source, Player.Center.X - 40f, Player.Center.Y - 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(source, Player.Center.X + 40f, Player.Center.Y - 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiLaser>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(source, Player.Center.X - 40f, Player.Center.Y + 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiSaw>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(source, Player.Center.X + 40f, Player.Center.Y + 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiVice>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
+        }
+    }
     public override void Load()
     {
         if (Main.netMode == NetmodeID.Server)
@@ -372,6 +396,7 @@ public class AvalonPlayer : ModPlayer
         Pathogen = false;
         PathogenImbue = false;
         HungryMinion = false;
+        PrimeMinion = false;
         GastroMinion = false;
         BloodCasting = false;
         Vision = false;

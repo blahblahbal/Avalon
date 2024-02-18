@@ -9,9 +9,19 @@ namespace Avalon.Common
     {
         public override void ModifyBuffText(int type, ref string buffName, ref string tip, ref int rare)
         {
-            if (Avalon.Data.Sets.Buffs.Elixir[type])
+            if (Data.Sets.Buffs.Elixir[type])
             {
                 rare = ModContent.RarityType<ElixirBuffNameRarity>();
+            }
+
+            if (Main.LocalPlayer.ownedProjectileCounts[ProjectileID.StormTigerGem] > 0 && type == BuffID.StormTiger)
+            {
+                tip += "\nUpgrade stage: " + Main.LocalPlayer.ownedProjectileCounts[ProjectileID.StormTigerGem];
+            }
+
+            if (Main.LocalPlayer.ownedProjectileCounts[ProjectileID.AbigailCounter] > 0 && type == BuffID.AbigailMinion)
+            {
+                tip += "\nUpgrade stage: " + Main.LocalPlayer.ownedProjectileCounts[ProjectileID.AbigailCounter];
             }
 
             base.ModifyBuffText(type, ref buffName, ref tip, ref rare);

@@ -59,6 +59,11 @@ public static class ClassExtensions
     /// <returns></returns>
     public static Player Owner(this Projectile proj) => Main.player[proj.owner];
 
+    public static int OwnerProjCounts(this Projectile proj, int type)
+    {
+        return Main.player[proj.owner].ownedProjectileCounts[type];
+    }
+
     public static bool DoesTileExistInBoxAroundPlayer(this Player p, int boxRadius, int tileType)
     {
         Point pos = p.Center.ToTileCoordinates();

@@ -8234,6 +8234,11 @@ Mods: {
 				DisplayName: Lance Trap
 				Tooltip: ""
 			}
+
+			PrimeStaff: {
+				DisplayName: Prime Staff
+				Tooltip: Summons the might of Skeletron Prime to fight for you
+			}
 		}
 
 		InfoDisplays: {
@@ -8473,6 +8478,11 @@ Mods: {
 			PoisonGasTrapStarter.DisplayName: Poison Gas
 			FireballTrap.DisplayName: Fireball
 			FireballTrapStarter.DisplayName: Fireball
+			PrimeArmsCounter.DisplayName: Prime Arms Counter
+			PriminiCannon.DisplayName: Primini Cannon
+			PriminiLaser.DisplayName: Primini Laser
+			PriminiSaw.DisplayName: Primini Saw
+			PriminiVice.DisplayName: Primini Vice
 		}
 
 		NPCs: {
@@ -9197,7 +9207,12 @@ Mods: {
 
 			StingerProbe: {
 				DisplayName: Stinger Probe
-				Description: Mods.Avalon.Buffs.StingerProbe.Description
+				Description: Don't get too close!
+			}
+
+			PrimeArms: {
+				DisplayName: Prime Arms
+				Description: The arms will fight for you
 			}
 		}
 
