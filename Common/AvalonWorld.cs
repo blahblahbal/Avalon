@@ -951,41 +951,41 @@ public class AvalonWorld : ModSystem
         }
         #endregion
 
-        #region platform leaf
-        int numNPCs = 0;
-        for (int n = 0; n < Main.npc.Length; n++)
-        {
-            NPC n1 = Main.npc[n];
-            Point tile = n1.position.ToTileCoordinates() + new Point(0, n1.height / 16 + 1);
+        //#region platform leaf
+        //int numNPCs = 0;
+        //for (int n = 0; n < Main.npc.Length; n++)
+        //{
+        //    NPC n1 = Main.npc[n];
+        //    Point tile = n1.position.ToTileCoordinates() + new Point(0, n1.height / 16 + 1);
 
-            int xpos;
-            int ypos;
-            for (xpos = Main.tile[tile.X, tile.Y].TileFrameX / 18; xpos > 2; xpos -= 3) { }
-            for (ypos = Main.tile[tile.X, tile.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
-            xpos = tile.X - xpos;
-            ypos = tile.Y - ypos;
-            if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<PlatformLeaf>() && Main.tile[tile.X, tile.Y].TileFrameY < 18 && !n1.noGravity && !n1.noTileCollide && n1.active)
-            {
-                numNPCs++;
-                if (numNPCs > 1 || n1.velocity.Y > 4.5f)
-                {
-                    for (int i = xpos; i < xpos + 3; i++)
-                    {
-                        for (int j = ypos; j < ypos + 4; j++)
-                        {
-                            Main.tile[i, j].TileFrameY += 74;
+        //    int xpos;
+        //    int ypos;
+        //    for (xpos = Main.tile[tile.X, tile.Y].TileFrameX / 18; xpos > 2; xpos -= 3) { }
+        //    for (ypos = Main.tile[tile.X, tile.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
+        //    xpos = tile.X - xpos;
+        //    ypos = tile.Y - ypos;
+        //    if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<PlatformLeaf>() && Main.tile[tile.X, tile.Y].TileFrameY < 18 && !n1.noGravity && !n1.noTileCollide && n1.active)
+        //    {
+        //        numNPCs++;
+        //        if (numNPCs > 1 || n1.velocity.Y > 4.5f)
+        //        {
+        //            for (int i = xpos; i < xpos + 3; i++)
+        //            {
+        //                for (int j = ypos; j < ypos + 4; j++)
+        //                {
+        //                    Main.tile[i, j].TileFrameY += 74;
 
-                        }
-                    }
-                    numNPCs = 0;
-                    SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.2f };
-                    SoundEngine.PlaySound(s, new Vector2((xpos + 1) * 16, ypos * 16));
-                    WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<TropicsTreeLeaf>(), true);
-                    break;
-                }
-            }
-        }
-        #endregion
+        //                }
+        //            }
+        //            numNPCs = 0;
+        //            SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.2f };
+        //            SoundEngine.PlaySound(s, new Vector2((xpos + 1) * 16, ypos * 16));
+        //            WorldGen.TreeGrowFX(xpos + 1, ypos + 3, 2, ModContent.GoreType<PlatformLeafLeaf>(), true);
+        //            break;
+        //        }
+        //    }
+        //}
+        //#endregion
     }
 
     public static void GenerateSulphur()
