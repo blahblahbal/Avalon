@@ -53,6 +53,7 @@ public class ContagionShortGrass : ModTile
     {
         height = 20;
         offsetY = -2;
+        tileFrameY = 0;
     }
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects spriteEffects)
     {

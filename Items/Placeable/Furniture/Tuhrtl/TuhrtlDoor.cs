@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Placeable.Furniture;
+namespace Avalon.Items.Placeable.Furniture.Tuhrtl;
 
 class TuhrtlDoor : ModItem
 {

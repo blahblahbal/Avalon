@@ -11,11 +11,11 @@ namespace Avalon.Tiles.Furniture.Tuhrtl;
 
 public class TuhrtlDoorClosed : ClosedDoorTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.TuhrtlDoor>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Tuhrtl.TuhrtlDoor>();
 }
 public class TuhrtlDoorOpen : OpenDoorTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.TuhrtlDoor>();
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Tuhrtl.TuhrtlDoor>();
 }
 public class TuhrtlTable : TableTemplate
 {
@@ -25,4 +25,9 @@ public class TuhrtlWorkBench : WorkbenchTemplate
 }
 public class TuhrtlChair : ChairTemplate
 {
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Tuhrtl.TuhrtlChair>();
+}
+public class TuhrtlChest : ChestTemplate
+{
+    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Tuhrtl.TuhrtlChest>();
 }

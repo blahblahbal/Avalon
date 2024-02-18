@@ -118,7 +118,7 @@ public class ReplaceChestItems : GenPass
                                 for (int z = c.y; z <= c.y + 1; z++)
                                 {
                                     Main.tile[q, z].TileFrameX -= 576;
-                                    Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlChest>();
+                                    Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Furniture.Tuhrtl.TuhrtlChest>();
                                 }
                             }
                         }

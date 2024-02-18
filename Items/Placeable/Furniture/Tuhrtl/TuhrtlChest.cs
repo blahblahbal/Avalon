@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Placeable.Furniture;
+namespace Avalon.Items.Placeable.Furniture.Tuhrtl;
 
 public class TuhrtlChest : ModItem
 {
@@ -11,7 +11,7 @@ public class TuhrtlChest : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.TuhrtlChest>();
+        Item.createTile = ModContent.TileType<Tiles.Furniture.Tuhrtl.TuhrtlChest>();
         Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;

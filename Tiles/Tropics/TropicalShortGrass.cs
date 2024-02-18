@@ -72,6 +72,7 @@ public class TropicalShortGrass : ModTile
     {
         height = 20;
         offsetY = -2;
+        tileFrameY = 0;
     }
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects effects)
     {
