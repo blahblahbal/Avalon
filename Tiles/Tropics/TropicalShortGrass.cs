@@ -15,6 +15,11 @@ public class TropicalShortGrass : ModTile
 {
     public override void SetStaticDefaults()
     {
+        TileID.Sets.ReplaceTileBreakUp[Type] = true;
+        TileID.Sets.SlowlyDiesInWater[Type] = true;
+        TileID.Sets.SwaysInWindBasic[Type] = true;
+        TileID.Sets.DrawFlipMode[Type] = 1;
+        TileID.Sets.IgnoredByGrowingSaplings[Type] = true;
         Main.tileCut[Type] = true;
         Main.tileSolid[Type] = false;
         Main.tileNoAttach[Type] = true;
