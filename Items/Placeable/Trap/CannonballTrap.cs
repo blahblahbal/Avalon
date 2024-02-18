@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trap;
 
-class FireballTrap : ModItem
+class CannonballTrap : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -15,6 +15,6 @@ class FireballTrap : ModItem
     {
         Item.CloneDefaults(ItemID.DemoniteBrick);
         Item.mech = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.FireballTrap>();
+        Item.createTile = ModContent.TileType<Tiles.Tropics.CannonballTrap>();
     }
 }

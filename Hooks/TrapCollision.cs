@@ -15,6 +15,19 @@ public class TrapCollision : ModHook
     {
         On_Collision.CanTileHurt += OnCanTileHurt;
         On_Player.ApplyTouchDamage += OnApplyTouchDamage;
+        On_Player.TryLandingOnDetonator += On_Player_TryLandingOnDetonator;
+        IL_Collision.SwitchTiles += IL_Collision_SwitchTiles;
+    }
+
+    private void IL_Collision_SwitchTiles(MonoMod.Cil.ILContext il)
+    {
+        Utilities.AddAlternativeIdChecks(il, TileID.PressurePlates, id => TileID.Sets.Factory.CreateBoolSet(ModContent.TileType<Tiles.Tropics.TuhrtlPressurePlate>())[id]);
+    }
+
+    private void On_Player_TryLandingOnDetonator(On_Player.orig_TryLandingOnDetonator orig, Player self)
+    {
+        if (self.GetModPlayer<AvalonPlayer>().TrapImmune) return;
+        orig.Invoke(self);
     }
 
     private static bool OnCanTileHurt(On_Collision.orig_CanTileHurt orig, ushort type, int i, int j, Player player)

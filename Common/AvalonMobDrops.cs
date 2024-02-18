@@ -428,19 +428,19 @@ public class AvalonMobDrops : GlobalNPC
         #region tome mats
         if (npc.type is NPCID.ManEater or NPCID.Snatcher or NPCID.AngryTrapper)
         {
-            npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewOrb>(), 25, 1, 1, 4));
+            npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewOrb>(), 9));
         }
 
         if (npc.type is NPCID.GiantTortoise or NPCID.IceTortoise or NPCID.Vulture or NPCID.FlyingFish
             or NPCID.Unicorn)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDust>(), 15));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ElementDust>(), 5));
         }
 
         if (npc.type is NPCID.Harpy or NPCID.CaveBat or NPCID.GiantBat or NPCID.JungleBat)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RubybeadHerb>(), 15));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalClaw>(), 20));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RubybeadHerb>(), 7));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MysticalClaw>(), 8));
         }
 
         if (npc.type is NPCID.Hornet or NPCID.BlackRecluse or NPCID.MossHornet or NPCID.HornetFatty
@@ -448,12 +448,12 @@ public class AvalonMobDrops : GlobalNPC
             or NPCID.HornetLeafy or NPCID.HornetSpikey or NPCID.HornetStingy or NPCID.JungleCreeper
             or NPCID.JungleCreeperWall or NPCID.BlackRecluseWall)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<StrongVenom>(), 15));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<StrongVenom>(), 7));
         }
 
         if (npc.type is NPCID.Retinazer or NPCID.Spazmatism or NPCID.SkeletronPrime or NPCID.TheDestroyer)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ScrollofTome>(), 8));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ScrollofTome>(), 3));
         }
 
         if (npc.type is NPCID.CorruptSlime or NPCID.Gastropod or NPCID.IlluminantSlime or NPCID.ToxicSludge
@@ -461,7 +461,7 @@ public class AvalonMobDrops : GlobalNPC
             or NPCID.RainbowSlime or NPCID.FloatyGross)
         {
             npcLoot.Add(ItemDropRule.ByCondition(notFromStatueCondition, ModContent.ItemType<DewofHerbs>(),
-                25, 1, 1, 4));
+                100, 1, 1, 14));
         }
         if (npc.type is NPCID.ChaosElemental or NPCID.IceElemental or NPCID.IchorSticker or NPCID.Corruptor ||
             npc.type == ModContent.NPCType<Viris>())

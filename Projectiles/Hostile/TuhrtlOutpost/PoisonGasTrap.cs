@@ -9,6 +9,10 @@ namespace Avalon.Projectiles.Hostile.TuhrtlOutpost;
 
 public class PoisonGasTrap : ModProjectile
 {
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.ForcePlateDetection[Projectile.type] = false;
+    }
     public override void SetDefaults()
     {
         Projectile.width = 36;

@@ -721,10 +721,12 @@ internal class TuhrtlOutpost
                     if (Main.tile[num12, num13].TileType == 135)
                         return false;
 
-                    if (Main.tile[num12, num13].TileType == 137)
+                    if (Main.tile[num12, num13].TileType == 137 || Main.tile[num12, num13].TileType == ModContent.TileType<FireballTrap>() ||
+                        Main.tile[num12, num13].TileType == ModContent.TileType<PoisonGasTrap>() ||
+                        Main.tile[num12, num13].TileType == ModContent.TileType<LanceTrap>())
                         return false;
 
-                    if (Main.tile[num12, num13].TileType == ModContent.TileType<Tiles.VenomSpike>())
+                    if (Main.tile[num12, num13].TileType == ModContent.TileType<Tiles.Tropics.BrambleSpikes>())
                         return false;
 
                     if (Main.tile[num12, num13].TileType == 237) // altar
@@ -746,9 +748,9 @@ internal class TuhrtlOutpost
                         num19 = 2;
 
                     int num20 = Math.Abs(num12 - x2);
-                    int style2 = 1;
+                    int style2 = 1; // super dart trap
                     if (num20 < 10 && !WorldGen.genRand.NextBool(3))
-                        style2 = 2;
+                        style2 = 2; // flamethrower trap
 
                     WorldGen.PlaceTile(num12, num13, 137, mute: true, forced: true, -1, style2);
                     if (num18 == 1)

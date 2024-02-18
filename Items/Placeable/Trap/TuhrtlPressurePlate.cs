@@ -1,10 +1,9 @@
-using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trap;
 
-class FireballTrap : ModItem
+class TuhrtlPressurePlate : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -13,8 +12,8 @@ class FireballTrap : ModItem
 
     public override void SetDefaults()
     {
-        Item.CloneDefaults(ItemID.DemoniteBrick);
-        Item.mech = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.FireballTrap>();
+        Item.CloneDefaults(ItemID.LihzahrdPressurePlate);
+        Item.placeStyle = 0;
+        Item.createTile = ModContent.TileType<Tiles.Tropics.TuhrtlPressurePlate>();
     }
 }

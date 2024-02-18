@@ -14,6 +14,52 @@ namespace Avalon.WorldGeneration.Passes;
 
 internal class Tropics
 {
+    public static void TuhrtlOutpostReplaceTraps(GenerationProgress progress, GameConfiguration config)
+    {
+        for (int x = GenVars.tLeft - 20; x < GenVars.tRight + 20; x++)
+        {
+            for (int y = GenVars.tTop; y < GenVars.tBottom; y++)
+            {
+                Tile trap = Main.tile[x, y];
+                if (trap.TileType == TileID.PressurePlates)
+                {
+                    switch (trap.TileFrameY / 18)
+                    {
+                        case 6:
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlPressurePlate>();
+                            trap.TileFrameY -= 18 * 6;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if (trap.TileType == TileID.Traps)
+                {
+                    switch (trap.TileFrameY / 18)
+                    {
+                        case 1:
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.CannonballTrap>();
+                            trap.TileFrameY -= 18;
+                            break;
+                        case 2:
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.PoisonGasTrap>();
+                            trap.TileFrameY -= 36;
+                            break;
+                        case 3:
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.FireballTrap>();
+                            trap.TileFrameY -= 54;
+                            break;
+                        case 4:
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.LanceTrap>();
+                            trap.TileFrameY -= 72;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+    }
     public static void TuhrtlOutpostTask(GenerationProgress progress, GameConfiguration config)
     {
         int num648 = 0;

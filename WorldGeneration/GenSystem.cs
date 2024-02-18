@@ -90,11 +90,12 @@ public class GenSystem : ModSystem
             if (jungleIndex != -1)
             {
                 tasks[jungleIndex] = new PassLegacy("Tuhrtl Outpost", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostTask));
+                tasks.Insert(jungleIndex + 1, new PassLegacy("Outpost Traps", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostReplaceTraps)));
             }
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Hives"));
             if (jungleIndex != -1)
             {
-                tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.WaspNests));
+                tasks[jungleIndex] = new PassLegacy("Wasp Nests", new WorldGenLegacyMethod(Tropics.WaspNests));
             }
 
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Chests"));

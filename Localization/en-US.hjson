@@ -8239,6 +8239,16 @@ Mods: {
 				DisplayName: Prime Staff
 				Tooltip: Summons the might of Skeletron Prime to fight for you
 			}
+
+			CannonballTrap: {
+				DisplayName: Cannonball Trap
+				Tooltip: ""
+			}
+
+			TuhrtlPressurePlate: {
+				DisplayName: Tuhrtl Pressure Plate
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8483,6 +8493,8 @@ Mods: {
 			PriminiLaser.DisplayName: Primini Laser
 			PriminiSaw.DisplayName: Primini Saw
 			PriminiVice.DisplayName: Primini Vice
+			CannonballTrap.DisplayName: Cannonball Trap
+			CannonballTrapStarter.DisplayName: Cannonball Trap Starter
 		}
 
 		NPCs: {
@@ -9416,6 +9428,7 @@ Mods: {
 			PoisonGasTrap.MapEntry: ""
 			FireballTrap.MapEntry: ""
 			LanceTrap.MapEntry: ""
+			CannonballTrap.MapEntry: ""
 		}
 
 		Prefixes: {

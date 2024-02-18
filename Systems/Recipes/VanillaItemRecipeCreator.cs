@@ -79,6 +79,11 @@ public class VanillaItemRecipeCreator : ModSystem
         //    .AddIngredient(ItemID.RecallPotion, 3)
         //    .AddTile(TileID.Furnaces)
         //    .Register();
+
+        Recipe.Create(ItemID.Glass)
+            .AddIngredient(ModContent.ItemType<SnotsandBlock>(), 2)
+            .AddTile(TileID.Furnaces)
+            .Register();
         #endregion
 
         #region Hellforge

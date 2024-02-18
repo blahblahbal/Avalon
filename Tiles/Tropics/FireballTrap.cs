@@ -18,6 +18,8 @@ public class FireballTrap : ModTile
     }
     public override bool Slope(int i, int j)
     {
+        Main.tile[i, j].TileFrameX += 18;
+        if (Main.tile[i, j].TileFrameX > 72) Main.tile[i, j].TileFrameX = 0;
         return false;
     }
     public override void HitWire(int i, int j)
@@ -35,11 +37,11 @@ public class FireballTrap : ModTile
             }
             if (tile.TileFrameX == 54)
             {
-                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i - 1) * 16, (j + 1) * 16), new Vector2(0f, 0f), ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 0);
+                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i) * 16, (j + 1) * 16), new Vector2(0f, 0f), ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 0);
             }
             if (tile.TileFrameX == 72)
             {
-                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i + 1) * 16, (j + 1) * 16), new Vector2(0f, 0f), ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 1);
+                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i + 2) * 16, (j + 1) * 16), new Vector2(0f, 0f), ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 1);
             }
         }
     }

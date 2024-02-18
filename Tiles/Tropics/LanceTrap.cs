@@ -18,6 +18,8 @@ public class LanceTrap : ModTile
     }
     public override bool Slope(int i, int j)
     {
+        Main.tile[i, j].TileFrameX += 18;
+        if (Main.tile[i, j].TileFrameX > 72) Main.tile[i, j].TileFrameX = 0;
         return false;
     }
     public override void HitWire(int i, int j)

@@ -51,8 +51,7 @@ public class PoisonGasTrapStarter : ModProjectile
                 vel.Y = 6f;
             }
             SoundEngine.PlaySound(SoundID.Item34, Projectile.position);
-            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, vel, ModContent.ProjectileType<PoisonGasTrap>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
+            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, vel, ModContent.ProjectileType<PoisonGasTrap>(), 53, Projectile.knockBack, Main.myPlayer);
         }
-        //Lighting.AddLight(Projectile.Center, new Vector3(0.4f, 0.2f, 0.5f) * Projectile.scale * Projectile.Opacity * 0.3f);
     }
 }

@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile.TuhrtlOutpost;
 
-public class FireballTrapStarter : ModProjectile
+public class CannonballTrapStarter : ModProjectile
 {
     public override void SetDefaults()
     {
@@ -18,7 +18,7 @@ public class FireballTrapStarter : ModProjectile
         Projectile.penetrate = -1;
         Projectile.alpha = 128;
         Projectile.friendly = true;
-        Projectile.timeLeft = 120;
+        Projectile.timeLeft = 21;
         Projectile.ignoreWater = true;
         Projectile.hostile = false;
         Projectile.scale = 0.4f;
@@ -31,32 +31,27 @@ public class FireballTrapStarter : ModProjectile
     public override void AI()
     {
         Projectile.ai[0]++;
-        if (Projectile.ai[0] % 30 == 0)
+        if (Projectile.ai[0] == 1)
         {
             Vector2 vel = Vector2.Zero;
             if (Projectile.ai[1] == 0)
             {
-                vel.X = -6f;
-                vel.Y = Main.rand.NextFloat(-3f, 3f);
+                vel.X = -8f;
             }
             if (Projectile.ai[1] == 1)
             {
-                vel.X = 6f;
-                vel.Y = Main.rand.NextFloat(-3f, 3f);
+                vel.X = 8f;
             }
             if (Projectile.ai[1] == 2)
             {
-                vel.X = Main.rand.NextFloat(-3f, 3f);
-                vel.Y = -6f;
+                vel.Y = -8f;
             }
             if (Projectile.ai[1] == 3)
             {
-                vel.X = Main.rand.NextFloat(-3f, 3f);
-                vel.Y = 6f;
+                vel.Y = 8f;
             }
-            SoundEngine.PlaySound(SoundID.Item20, Projectile.position);
-            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, vel, ModContent.ProjectileType<FireballTrap>(), 48, Projectile.knockBack, Main.myPlayer);
+            SoundEngine.PlaySound(SoundID.Item11, Projectile.position);
+            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, vel, ModContent.ProjectileType<CannonballTrap>(), 72, Projectile.knockBack, Main.myPlayer);
         }
-        //Lighting.AddLight(Projectile.Center, new Vector3(0.4f, 0.2f, 0.5f) * Projectile.scale * Projectile.Opacity * 0.3f);
     }
 }

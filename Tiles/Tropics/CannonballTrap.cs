@@ -6,7 +6,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Tropics;
-public class PoisonGasTrap : ModTile
+public class CannonballTrap : ModTile
 {
     public override void SetStaticDefaults()
     {
@@ -29,19 +29,19 @@ public class PoisonGasTrap : ModTile
             Tile tile = Main.tile[i, j];
             if (tile.TileFrameX == 0)
             {
-                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i - 1) * 16, (j + 1) * 16), Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 0);
+                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i - 1) * 16, (j + 1) * 16), Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 0);
             }
             if (tile.TileFrameX == 18)
             {
-                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i + 1) * 16, (j + 1) * 16), Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 1);
+                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i + 1) * 16, (j + 1) * 16), Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 1);
             }
             if (tile.TileFrameX == 36 || tile.TileFrameX == 54)
             {
-                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i + 1) * 16, j * 16), Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 2);
+                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i + 1) * 16, j * 16), Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 2);
             }
             if (tile.TileFrameX == 72 || tile.TileFrameX == 90)
             {
-                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i + 1) * 16, (j + 2) * 16), Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 3);
+                Projectile.NewProjectile(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2((i + 1) * 16, (j + 2) * 16), Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>(), 65, 2f, Main.myPlayer, ai1: 3);
             }
         }
     }
