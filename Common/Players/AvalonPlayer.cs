@@ -608,19 +608,30 @@ public class AvalonPlayer : ModPlayer
         #endregion
 
         #region platform leaf
-        Point tileCoords = Player.position.ToTileCoordinates() + new Point(0, Player.height / 16 + 1);
-        Point tc2 = Player.position.ToTileCoordinates() + new Point(Player.width / 16, Player.height / 16 + 1);
+        Point tileCoordsLeft = Player.position.ToTileCoordinates() + new Point(0, Player.height / 16 + 1);
+        Point tileCoordsRight = Player.position.ToTileCoordinates() + new Point(Player.width / 16, Player.height / 16 + 1);
         int xpos;
         int ypos;
-        for (xpos = Main.tile[tileCoords.X, tileCoords.Y].TileFrameX / 18; xpos > 2; xpos -= 3) { }
-        for (ypos = Main.tile[tileCoords.X, tileCoords.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
+        for (xpos = Main.tile[tileCoordsLeft.X, tileCoordsLeft.Y].TileFrameX / 18; xpos > 2; xpos -= 3) { }
+        for (ypos = Main.tile[tileCoordsLeft.X, tileCoordsLeft.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
 
-        xpos = tileCoords.X - xpos;
-        ypos = tileCoords.Y - ypos;
-        if (Player.velocity.Y > 5.25f && Main.tile[tileCoords.X, tileCoords.Y].TileType == ModContent.TileType<PlatformLeaf>() &&
-            Main.tile[tc2.X, tc2.Y].TileType == ModContent.TileType<PlatformLeaf>() && Main.tile[tileCoords.X, tileCoords.Y].TileFrameY < 18)
+        xpos = tileCoordsLeft.X - xpos;
+        ypos = tileCoordsLeft.Y - ypos;
+        Tile tileLeft = Main.tile[tileCoordsLeft.X, tileCoordsLeft.Y];
+        Tile tileRight = Main.tile[tileCoordsRight.X, tileCoordsRight.Y];
+        int leaf = ModContent.TileType<PlatformLeaf>();
+
+        int xPosOffset = 0;
+        if (!tileLeft.HasTile && tileRight.HasTile && tileRight.TileType == leaf && tileRight.TileFrameY < 18)
         {
-            for (int i = xpos; i < xpos + 3; i++)
+            xPosOffset = 1;
+        }
+
+        if (((tileLeft.HasTile && tileLeft.TileType == leaf && tileRight.HasTile && tileRight.TileType == leaf && tileLeft.TileFrameY < 18) ||
+            (!tileLeft.HasTile && tileRight.HasTile && tileRight.TileType == leaf && tileRight.TileFrameY < 18) ||
+            (!tileRight.HasTile && tileLeft.HasTile && tileLeft.TileType == leaf && tileLeft.TileFrameY < 18)) && Player.velocity.Y > 5.25f && !TrapImmune)
+        {
+            for (int i = xpos + xPosOffset; i < xpos + 3 + xPosOffset; i++)
             {
                 for (int j = ypos; j < ypos + 4; j++)
                 {
@@ -628,7 +639,7 @@ public class AvalonPlayer : ModPlayer
                 }
             }
             SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.8f };
-            SoundEngine.PlaySound(s, new Vector2((tileCoords.X + 1) * 16, tileCoords.Y * 16));
+            SoundEngine.PlaySound(s, new Vector2((tileCoordsLeft.X + 1) * 16, tileCoordsLeft.Y * 16));
             WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<TropicsTreeLeaf>(), true);
         }
         #endregion
