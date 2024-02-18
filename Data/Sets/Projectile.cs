@@ -32,7 +32,9 @@ public static class Projectile
         ProjectileID.HallowBossRainbowStreak,
         ModContent.ProjectileType<ElectricBolt>(),
         ModContent.ProjectileType<StingerLaser>(),
-        ModContent.ProjectileType<Mechastinger>());
+        ModContent.ProjectileType<Mechastinger>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrap>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>());
         //ModContent.ProjectileType<Ghostflame>(),
         //ModContent.ProjectileType<WallofSteelLaser>(),
         //,

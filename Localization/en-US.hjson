@@ -8222,6 +8222,11 @@ Mods: {
 				DisplayName: Bramble Spike
 				Tooltip: ""
 			}
+
+			PoisonGasTrap: {
+				DisplayName: Poison Gas Trap
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8457,6 +8462,8 @@ Mods: {
 			ToxinBall.DisplayName: Toxin Ball
 			ToxinSplash.DisplayName: Toxin Splash
 			StingerProbeMinion.DisplayName: Stinger Probe Minion
+			PoisonGasTrap.DisplayName: Poison Gas Trap
+			PoisonGasTrapStarter.DisplayName: Poison Gas Trap Starter
 		}
 
 		NPCs: {
@@ -9382,6 +9389,7 @@ Mods: {
 			TuhrtlPot.MapEntry: Pot
 			TuhrtlChest.MapEntry0: Tuhrtl Chest
 			BrambleSpikes.MapEntry: Bramble Spike
+			PoisonGasTrap.MapEntry: Mods.Avalon.Tiles.PoisonGasTrap.MapEntry
 		}
 
 		Prefixes: {
