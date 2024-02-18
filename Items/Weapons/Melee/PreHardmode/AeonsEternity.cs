@@ -58,28 +58,12 @@ public class AeonsEternity : ModItem
             float radY = (float)Math.Sin(player.position.AngleTo(player.GetModPlayer<AvalonPlayer>().MousePosition));
             int radDirX = MathF.Sign(radX);
             int radDirY = MathF.Sign(radY);
-            float velMultX = 0;
-            float velMultY = 0;
             // X
-            if (radDirX == 1)
-            {
-                velMultX = player.velocity.X * radX;
-            }
-            if (radDirX == -1)
-            {
-                velMultX = player.velocity.X * -radX;
-            }
+            float velMultX = player.velocity.X * (radX * radDirX);
             // Y
-            if (radDirY == 1)
-            {
-                velMultY = player.velocity.Y * radY;
-            }
-            if (radDirY == -1)
-            {
-                velMultY = player.velocity.Y * -radY;
-            }
+            float velMultY = player.velocity.Y * (radY * radDirY);
 
-            Vector2 velMult = new Vector2(velMultX, velMultY);
+            Vector2 velMult = new(velMultX, velMultY);
 
 
             int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velRand + velMult * 0.8f + player.velocity * 0.2f, ModContent.ProjectileType<AeonStar>(), damage / 5, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
