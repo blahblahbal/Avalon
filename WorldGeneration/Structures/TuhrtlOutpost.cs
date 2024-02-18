@@ -214,7 +214,7 @@ internal class TuhrtlOutpost
                         angle = (float)(Math.PI / 180) * angleDegrees;
                         posX = (float)(points[2].X + (tunnelLength - 5) * Math.Cos(angle));
                         posY = (float)(points[2].Y + (tunnelLength - 5) * Math.Sin(angle));
-                        Utils.BoreTunnel((int)points[2].X + 20, (int)points[2].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+                        Utils.BoreTunnel((int)points[2].X + 20, (int)points[2].Y - 3, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
                         endpoints.Add(new Vector2(posX + shiftModifier, posY));
                     }
                     else
@@ -224,7 +224,7 @@ internal class TuhrtlOutpost
                         angle = (float)(Math.PI / 180) * angleDegrees;
                         posX = (float)(points[3].X + (tunnelLength - 5) * Math.Cos(angle));
                         posY = (float)(points[3].Y + (tunnelLength - 5) * Math.Sin(angle));
-                        Utils.BoreTunnel((int)points[3].X - 20, (int)points[3].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+                        Utils.BoreTunnel((int)points[3].X - 20, (int)points[3].Y - 3, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
                         endpoints.Add(new Vector2(posX + shiftModifier, posY));
                     }
                 }
@@ -237,7 +237,7 @@ internal class TuhrtlOutpost
                         angle = (float)(Math.PI / 180) * angleDegrees;
                         posX = (float)(points[3].X + (tunnelLength - 5) * Math.Cos(angle));
                         posY = (float)(points[3].Y + (tunnelLength - 5) * Math.Sin(angle));
-                        Utils.BoreTunnel((int)points[3].X - 20, (int)points[3].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+                        Utils.BoreTunnel((int)points[3].X - 20, (int)points[3].Y - 3, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
                         endpoints.Add(new Vector2(posX + shiftModifier, posY));
                     }
                     else
@@ -247,7 +247,7 @@ internal class TuhrtlOutpost
                         angle = (float)(Math.PI / 180) * angleDegrees;
                         posX = (float)(points[2].X + (tunnelLength - 5) * Math.Cos(angle));
                         posY = (float)(points[2].Y + (tunnelLength - 5) * Math.Sin(angle));
-                        Utils.BoreTunnel((int)points[2].X + 20, (int)points[2].Y, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
+                        Utils.BoreTunnel((int)points[2].X + 20, (int)points[2].Y - 3, (int)posX, (int)posY, heightOfStartTunnel, ushort.MaxValue, 0);
                         endpoints.Add(new Vector2(posX + shiftModifier, posY));
                     }
                 }
@@ -262,7 +262,7 @@ internal class TuhrtlOutpost
                 Utils.BoreTunnel((int)points[3].X - 5, (int)points[3].Y - heightOfTunnel, (int)posX, (int)posY, heightOfStartTunnel + 3, ushort.MaxValue, 0);
                 endpoints.Add(new Vector2(posX, posY));
             }
-            else if (leftOrRight)
+            else if (leftOrRight) // right
             {
                 // bottom left
                 angleDegrees = 200 + WorldGen.genRand.Next(-5, 6);

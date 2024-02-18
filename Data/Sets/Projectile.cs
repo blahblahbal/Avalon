@@ -34,7 +34,9 @@ public static class Projectile
         ModContent.ProjectileType<StingerLaser>(),
         ModContent.ProjectileType<Mechastinger>(),
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>());
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrap>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>());
         //ModContent.ProjectileType<Ghostflame>(),
         //ModContent.ProjectileType<WallofSteelLaser>(),
         //,

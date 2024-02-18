@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile.TuhrtlOutpost;
 
-public class PoisonGasTrapStarter : ModProjectile
+public class FireballTrapStarter : ModProjectile
 {
     public override void SetDefaults()
     {
@@ -18,12 +18,12 @@ public class PoisonGasTrapStarter : ModProjectile
         Projectile.penetrate = -1;
         Projectile.alpha = 128;
         Projectile.friendly = true;
-        Projectile.timeLeft = 240;
+        Projectile.timeLeft = 120;
         Projectile.ignoreWater = true;
         Projectile.hostile = false;
         Projectile.scale = 0.4f;
         Projectile.extraUpdates = 1;
-        Projectile.DamageType = DamageClass.Magic;
+        Projectile.DamageType = DamageClass.Ranged;
         Projectile.usesLocalNPCImmunity = true;
         Projectile.localNPCHitCooldown = -1;
     }
@@ -31,27 +31,31 @@ public class PoisonGasTrapStarter : ModProjectile
     public override void AI()
     {
         Projectile.ai[0]++;
-        if (Projectile.ai[0] % 20 == 0)
+        if (Projectile.ai[0] % 30 == 0)
         {
             Vector2 vel = Vector2.Zero;
             if (Projectile.ai[1] == 0)
             {
                 vel.X = -6f;
+                vel.Y = Main.rand.NextFloat(-3f, 3f);
             }
             if (Projectile.ai[1] == 1)
             {
                 vel.X = 6f;
+                vel.Y = Main.rand.NextFloat(-3f, 3f);
             }
             if (Projectile.ai[1] == 2)
             {
+                vel.X = Main.rand.NextFloat(-3f, 3f);
                 vel.Y = -6f;
             }
             if (Projectile.ai[1] == 3)
             {
+                vel.X = Main.rand.NextFloat(-3f, 3f);
                 vel.Y = 6f;
             }
-            SoundEngine.PlaySound(SoundID.Item34, Projectile.position);
-            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, vel, ModContent.ProjectileType<PoisonGasTrap>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
+            SoundEngine.PlaySound(SoundID.Item20, Projectile.position);
+            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, vel, ModContent.ProjectileType<FireballTrap>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
         }
         //Lighting.AddLight(Projectile.Center, new Vector3(0.4f, 0.2f, 0.5f) * Projectile.scale * Projectile.Opacity * 0.3f);
     }

@@ -8227,6 +8227,16 @@ Mods: {
 				DisplayName: Poison Gas Trap
 				Tooltip: ""
 			}
+
+			FireballTrap: {
+				DisplayName: Fireball Trap
+				Tooltip: ""
+			}
+
+			LanceTrap: {
+				DisplayName: Lance Trap
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8462,8 +8472,10 @@ Mods: {
 			ToxinBall.DisplayName: Toxin Ball
 			ToxinSplash.DisplayName: Toxin Splash
 			StingerProbeMinion.DisplayName: Stinger Probe Minion
-			PoisonGasTrap.DisplayName: Poison Gas Trap
-			PoisonGasTrapStarter.DisplayName: Poison Gas Trap Starter
+			PoisonGasTrap.DisplayName: Poison Gas
+			PoisonGasTrapStarter.DisplayName: Poison Gas
+			FireballTrap.DisplayName: Fireball
+			FireballTrapStarter.DisplayName: Fireball
 		}
 
 		NPCs: {
@@ -9389,7 +9401,9 @@ Mods: {
 			TuhrtlPot.MapEntry: Pot
 			TuhrtlChest.MapEntry0: Tuhrtl Chest
 			BrambleSpikes.MapEntry: Bramble Spike
-			PoisonGasTrap.MapEntry: Mods.Avalon.Tiles.PoisonGasTrap.MapEntry
+			PoisonGasTrap.MapEntry: ""
+			FireballTrap.MapEntry: ""
+			LanceTrap.MapEntry: ""
 		}
 
 		Prefixes: {
