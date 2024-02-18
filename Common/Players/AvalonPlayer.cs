@@ -2282,17 +2282,17 @@ public class AvalonPlayer : ModPlayer
             int num3 = (int)vector.X;
             int num4 = (int)vector.Y;
             int type = Main.tile[num3, num4].TileType;
-            if (Player.whoAmI == Main.myPlayer && type == ModContent.TileType<Bramble>() && (Player.velocity.X != 0f || Player.velocity.Y != 0f))
-            {
-                BrambleBreak++;
-                if (BrambleBreak > Main.rand.Next(20, 100) || mounted)
-                {
-                    BrambleBreak = 0;
-                    WorldGen.KillTile(num3, num4);
-                    if (!Main.tile[num3, num4].HasTile && Main.netMode == NetmodeID.MultiplayerClient)
-                        NetMessage.SendData(17, -1, -1, null, 0, num3, num4);
-                }
-            }
+            //if (Player.whoAmI == Main.myPlayer && type == ModContent.TileType<Bramble>() && (Player.velocity.X != 0f || Player.velocity.Y != 0f))
+            //{
+            //    BrambleBreak++;
+            //    if (BrambleBreak > Main.rand.Next(20, 100) || mounted)
+            //    {
+            //        BrambleBreak = 0;
+            //        WorldGen.KillTile(num3, num4);
+            //        if (!Main.tile[num3, num4].HasTile && Main.netMode == NetmodeID.MultiplayerClient)
+            //            NetMessage.SendData(17, -1, -1, null, 0, num3, num4);
+            //    }
+            //}
 
             if (mounted)
                 return;
