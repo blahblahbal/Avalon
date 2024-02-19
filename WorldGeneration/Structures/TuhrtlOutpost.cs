@@ -457,7 +457,7 @@ internal class TuhrtlOutpost
             }
         }
 
-        Main.tileSolid[ModContent.TileType<Tiles.VenomSpike>()] = false;
+        Main.tileSolid[ModContent.TileType<BrambleSpikes>()] = false;
         double num5 = tRooms * 0.35;
         num5 *= 1.0 + WorldGen.genRand.Next(-15, 16) * 0.01;
         int contain = 1293;
@@ -612,6 +612,7 @@ internal class TuhrtlOutpost
 
         Main.tileSolid[ModContent.TileType<Tiles.VenomSpike>()] = true;
     }
+
     public static bool TuhrtlTrap(int x2, int y2)
     {
         int num = 1;
@@ -626,7 +627,7 @@ internal class TuhrtlOutpost
                 return false;
         }
 
-        if (Main.tile[x2, num2].TileType == 232 || Main.tile[x2, num2].TileType == 10)
+        if (Main.tile[x2, num2].TileType == ModContent.TileType<BrambleSpikes>() || Main.tile[x2, num2].TileType == 10)
             return false;
 
         num2--;
@@ -647,7 +648,7 @@ internal class TuhrtlOutpost
         if (Main.tile[x2, num2 + 1].TileType == 48)
             return false;
 
-        if (Main.tile[x2, num2 + 1].TileType == 232)
+        if (Main.tile[x2, num2 + 1].TileType == ModContent.TileType<BrambleSpikes>())
             return false;
 
         switch (num)
@@ -738,7 +739,7 @@ internal class TuhrtlOutpost
                     WorldGen.PlaceTile(x2, num2, 135, mute: true, forced: true, -1, 6);
                     WorldGen.KillTile(num12, num13);
                     int num19 = WorldGen.genRand.Next(3);
-                    if (Main.tile[x2, num2].RedWire)
+                    if (Main.tile[x2, num2].YellowWire)
                         num19 = 0;
 
                     if (Main.tile[x2, num2].BlueWire)
@@ -773,7 +774,7 @@ internal class TuhrtlOutpost
                         switch (num19)
                         {
                             case 0:
-                                wireTile.RedWire = true;
+                                wireTile.YellowWire = true;
                                 break;
                             case 1:
                                 wireTile.BlueWire = true;
@@ -792,7 +793,7 @@ internal class TuhrtlOutpost
                         switch (num19)
                         {
                             case 0:
-                                wireTile.RedWire = true;
+                                wireTile.YellowWire = true;
                                 break;
                             case 1:
                                 wireTile.BlueWire = true;
@@ -813,7 +814,7 @@ internal class TuhrtlOutpost
                         switch (num19)
                         {
                             case 0:
-                                wireTile.RedWire = true;
+                                wireTile.YellowWire = true;
                                 break;
                             case 1:
                                 wireTile.BlueWire = true;
@@ -834,7 +835,7 @@ internal class TuhrtlOutpost
                         switch (num19)
                         {
                             case 0:
-                                wireTile.RedWire = true;
+                                wireTile.YellowWire = true;
                                 break;
                             case 1:
                                 wireTile.BlueWire = true;
@@ -863,7 +864,7 @@ internal class TuhrtlOutpost
                         return false;
 
                     int num6 = WorldGen.genRand.Next(3);
-                    if (Main.tile[x2, num2].RedWire)
+                    if (Main.tile[x2, num2].YellowWire)
                         num6 = 0;
 
                     if (Main.tile[x2, num2].BlueWire)
@@ -882,7 +883,7 @@ internal class TuhrtlOutpost
                     if (Main.tile[num3, num4].TileType == 137)
                         return false;
 
-                    if (Main.tile[num3, num4].TileType == ModContent.TileType<Tiles.VenomSpike>()) // change to bramble variant later
+                    if (Main.tile[num3, num4].TileType == ModContent.TileType<BrambleSpikes>()) // change to bramble variant later
                         return false;
 
                     if (Main.tile[num3, num4].TileType == 237) // altar
@@ -916,7 +917,7 @@ internal class TuhrtlOutpost
                             switch (num6)
                             {
                                 case 0:
-                                    wireTile.RedWire = true;
+                                    wireTile.YellowWire = true;
                                     break;
                                 case 1:
                                     wireTile.BlueWire = true;
@@ -936,7 +937,7 @@ internal class TuhrtlOutpost
                         switch (num6)
                         {
                             case 0:
-                                wireTile.RedWire = true;
+                                wireTile.YellowWire = true;
                                 break;
                             case 1:
                                 wireTile.BlueWire = true;
@@ -957,7 +958,7 @@ internal class TuhrtlOutpost
                         switch (num6)
                         {
                             case 0:
-                                wireTile.RedWire = true;
+                                wireTile.YellowWire = true;
                                 break;
                             case 1:
                                 wireTile.BlueWire = true;
@@ -978,7 +979,7 @@ internal class TuhrtlOutpost
                         switch (num6)
                         {
                             case 0:
-                                wireTile.RedWire = true;
+                                wireTile.YellowWire = true;
                                 break;
                             case 1:
                                 wireTile.BlueWire = true;
