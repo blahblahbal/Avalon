@@ -35,18 +35,18 @@ public class Contagion : ModBiome
         }
     }
 
-    public override ModUndergroundBackgroundStyle UndergroundBackgroundStyle
-    {
-        get
-        {
-            if (Main.LocalPlayer.ZoneSnow)
-            {
-                return ModContent.GetInstance<ContagionUndergroundSnowBackground>();
-            }
+    //public override ModUndergroundBackgroundStyle UndergroundBackgroundStyle
+    //{
+    //    get
+    //    {
+    //        if (Main.LocalPlayer.ZoneSnow)
+    //        {
+    //            return ModContent.GetInstance<ContagionUndergroundSnowBackground>();
+    //        }
 
-            return ModContent.GetInstance<ContagionUndergroundBackground>();
-        }
-    }
+    //        return ModContent.GetInstance<ContagionUndergroundBackground>();
+    //    }
+    //}
 
     public override bool IsBiomeActive(Player player)
     {

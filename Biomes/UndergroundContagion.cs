@@ -26,12 +26,16 @@ public class UndergroundContagion : ModBiome
     {
         get
         {
-            if (Main.LocalPlayer.ZoneSnow)
+            if (Main.screenPosition.Y / 16 < Main.UnderworldLayer - 196f && Main.screenPosition.Y / 16 > Main.rockLayer + 60)
             {
-                return ModContent.GetInstance<ContagionUndergroundSnowBackground>();
-            }
+                if (Main.LocalPlayer.ZoneSnow)
+                {
+                    return ModContent.GetInstance<ContagionUndergroundSnowBackground>();
+                }
 
-            return ModContent.GetInstance<ContagionUndergroundBackground>();
+                return ModContent.GetInstance<ContagionUndergroundBackground>();
+            }
+            return default;
         }
     }
 
