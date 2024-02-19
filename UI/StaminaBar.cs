@@ -20,6 +20,7 @@ public struct PlayerStaminaStatsSnapshot
     public int StaminaCount;
     public int StaminaCountMT300;
     public int StaminaCountMT450;
+    public int StaminaCountMT600;
 
     public PlayerStaminaStatsSnapshot(Player p)
     {
@@ -60,6 +61,18 @@ public struct PlayerStaminaStatsSnapshot
             stamOver30 = (StaminaMax2 - 450) / 30;
             stamPerBolt = StaminaMax2 / 5 - 30;
         }
+
+        int stamBarsMoreThan20 = (StaminaMax2 - 600) / 30;
+        if (stamBarsMoreThan20 < 0)
+        {
+            stamBarsMoreThan20 = 0;
+        }
+        if (stamBarsMoreThan20 > 0)
+        {
+            stamOver30 = (StaminaMax2 - 600) / 30;
+            stamPerBolt = StaminaMax2 / 5 - 30;
+        }
+
         int num4 = StaminaMax2 - 150;
         if (StaminaMax2 < 150)
         {
@@ -73,10 +86,15 @@ public struct PlayerStaminaStatsSnapshot
         {
             num4 = StaminaMax2 - 450;
         }
+        if (stamBarsMoreThan20 > 0)
+        {
+            num4 = StaminaMax2 - 600;
+        }
         stamPerBolt += num4 / stamOver30;
         StaminaCount = stamBarsMoreThan5;
         StaminaCountMT300 = stamBarsMoreThan10;
         StaminaCountMT450 = stamBarsMoreThan15;
+        StaminaCountMT600 = stamBarsMoreThan20;
         StaminaPerSegment = stamPerBolt;
     }
 }
@@ -93,6 +111,7 @@ class StaminaBar : UIState
     private Texture2D staminaTexture2;
     private Texture2D staminaTexture3;
     private Texture2D staminaTexture4;
+    private Texture2D staminaTexture5;
 
 
     // bar style fields
@@ -100,12 +119,14 @@ class StaminaBar : UIState
     private int stamSegmentsBarsCount2;
     private int stamSegmentsBarsCount3;
     private int stamSegmentsBarsCount4;
+    private int stamSegmentsBarsCount5;
     private float stamPercent;
     private bool stamHovered;
     private int maxSegmentCount;
     private Asset<Texture2D> stamFillGreen;
     private Asset<Texture2D> stamFillPurple;
     private Asset<Texture2D> stamFillOrange;
+    private Asset<Texture2D> stamFillBlue;
     private Asset<Texture2D> stamFillPink;
 
     private Asset<Texture2D> panelLeft;
@@ -123,6 +144,7 @@ class StaminaBar : UIState
     private Asset<Texture2D> staminaFillGreenFancy;
     private Asset<Texture2D> staminaFillPurpleFancy;
     private Asset<Texture2D> staminaFillOrangeFancy;
+    private Asset<Texture2D> staminaFillBlueFancy;
     private Asset<Texture2D> staminaFillPinkFancy;
     private int lastStaminaFillingIndex;
     private float currentPlayerStamina;
@@ -130,6 +152,7 @@ class StaminaBar : UIState
     private int playerStamCountOver150;
     private int playerStamCountOver300;
     private int playerStamCountOver450;
+    private int playerStamCountOver600;
     // end fancy style fields
 
     public StaminaBar()
@@ -139,6 +162,7 @@ class StaminaBar : UIState
         staminaTexture2 = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina2", AssetRequestMode.ImmediateLoad).Value;
         staminaTexture3 = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina3", AssetRequestMode.ImmediateLoad).Value;
         staminaTexture4 = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina4", AssetRequestMode.ImmediateLoad).Value;
+        staminaTexture5 = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina5", AssetRequestMode.ImmediateLoad).Value;
 
         int manaStarSpacing = 28;
         textYOffset = manaStarSpacing * 11 + 30;
@@ -164,6 +188,7 @@ class StaminaBar : UIState
         stamSegmentsBarsCount2 = snap.StaminaCount;
         stamSegmentsBarsCount3 = snap.StaminaCountMT300;
         stamSegmentsBarsCount4 = snap.StaminaCountMT450;
+        stamSegmentsBarsCount5 = snap.StaminaCountMT600;
 
         stamPercent = ((float)p.StatStam / p.StatStamMax2);
     }
@@ -196,6 +221,10 @@ class StaminaBar : UIState
         }
         if (elementIndex >= stamSegmentsBarsCount - stamSegmentsBarsCount4)
         {
+            sprite = stamFillBlue;
+        }
+        if (elementIndex >= stamSegmentsBarsCount - stamSegmentsBarsCount5)
+        {
             sprite = stamFillPink;
         }
         FillBarByValues(elementIndex, sprite, stamSegmentsBarsCount, stamPercent, out offset, out drawScale, out sourceRect);
@@ -226,6 +255,7 @@ class StaminaBar : UIState
         playerStamCountOver150 = snapshot.StaminaCount;
         playerStamCountOver300 = snapshot.StaminaCountMT300;
         playerStamCountOver450 = snapshot.StaminaCountMT450;
+        playerStamCountOver600 = snapshot.StaminaCountMT600;
         currentPlayerStamina = snapshot.Stamina;
         staminaPerBolt = snapshot.StaminaPerSegment;
         fancyStamCount = (int)(snapshot.StaminaMax2 / staminaPerBolt);
@@ -278,9 +308,13 @@ class StaminaBar : UIState
         //sprite = staminaFillGreenFancy;
         //sprite = staminaBottom;
         sprite = staminaFillGreenFancy;
-        if (elementIndex < playerStamCountOver450)
+        if (elementIndex < playerStamCountOver600)
         {
             sprite = staminaFillPinkFancy;
+        }
+        else if (elementIndex < playerStamCountOver450)
+        {
+            sprite = staminaFillBlueFancy;
         }
         else if (elementIndex < playerStamCountOver300)
         {
@@ -332,6 +366,7 @@ class StaminaBar : UIState
             stamFillGreen = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Green");
             stamFillPurple = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Purple");
             stamFillOrange = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Orange");
+            stamFillBlue = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Blue");
             stamFillPink = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFill_Pink");
             panelMiddleStam = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaPanel_Middle");
             panelRightStam = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaPanel_Right");
@@ -495,7 +530,9 @@ class StaminaBar : UIState
                     case 4:
                         texture = staminaTexture4;
                         break;
-
+                    case 5:
+                        texture = staminaTexture5;
+                        break;
                     default:
                         texture = staminaTexture1;
                         break;
