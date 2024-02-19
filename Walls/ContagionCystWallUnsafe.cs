@@ -11,7 +11,7 @@ public class ContagionCystWallUnsafe : ModWall
     {
         WallID.Sets.Conversion.NewWall3[Type] = true;
         Main.wallBlend[Type] = ModContent.WallType<ContagionCystWall>();
-        AddMapEntry(new Color(61, 70, 64));
+        AddMapEntry(new Color(56, 66, 59));
         DustType = ModContent.DustType<Dusts.ContagionDust>();
     }
 }

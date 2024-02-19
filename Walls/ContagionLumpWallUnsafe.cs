@@ -11,7 +11,7 @@ public class ContagionLumpWallUnsafe : ModWall
     {
         WallID.Sets.Conversion.NewWall1[Type] = true;
         Main.wallBlend[Type] = ModContent.WallType<ContagionLumpWall>();
-        AddMapEntry(new Color(63, 73, 54));
+        AddMapEntry(new Color(61, 71, 51));
         DustType = ModContent.DustType<Dusts.ContagionDust>();
     }
 }

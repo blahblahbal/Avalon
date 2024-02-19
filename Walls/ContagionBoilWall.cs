@@ -12,7 +12,7 @@ public class ContagionBoilWall : ModWall
         WallID.Sets.Conversion.NewWall4[Type] = true;
         Main.wallHouse[Type] = true;
         Main.wallBlend[Type] = ModContent.WallType<ContagionBoilWall>();
-        AddMapEntry(new Color(67, 70, 59));
+        AddMapEntry(new Color(63, 66, 56));
         DustType = ModContent.DustType<Dusts.ContagionDust>();
     }
 }

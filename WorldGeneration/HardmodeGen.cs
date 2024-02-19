@@ -260,47 +260,47 @@ public class HardmodeGen : ModSystem
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<ContagionVines>();
                     }
-                    if (flag && Main.tile[m, n].TileType == TileID.Hive)
+                    if (flag && Main.tile[m, n].TileType == TileID.Hive && Main.tile[m, n].TileType != (ushort)ModContent.TileType<Chunkstone>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Chunkstone>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (flag && Main.tile[m, n].TileType == TileID.CrispyHoneyBlock)
+                    else if (flag && Main.tile[m, n].TileType == TileID.CrispyHoneyBlock && Main.tile[m, n].TileType != (ushort)ModContent.TileType<HardenedSnotsand>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<HardenedSnotsand>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (TileID.Sets.Conversion.Grass[type])
+                    else if (TileID.Sets.Conversion.Grass[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<HardenedSnotsand>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Ickgrass>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (TileID.Sets.Conversion.Stone[type])
+                    else if (TileID.Sets.Conversion.Stone[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<Chunkstone>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Chunkstone>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (TileID.Sets.Conversion.Sand[type])
+                    else if (TileID.Sets.Conversion.Sand[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<Snotsand>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Snotsand>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (TileID.Sets.Conversion.JungleGrass[type])
+                    else if (TileID.Sets.Conversion.JungleGrass[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<ContagionJungleGrass>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
                         WorldGen.SquareTileFrame(m, n); 
                     }
-                    else if (TileID.Sets.Conversion.Ice[type])
+                    else if (TileID.Sets.Conversion.Ice[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<YellowIce>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<YellowIce>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (TileID.Sets.Conversion.HardenedSand[type])
+                    else if (TileID.Sets.Conversion.HardenedSand[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<HardenedSnotsand>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<HardenedSnotsand>();
                         WorldGen.SquareTileFrame(m, n);
                     }
-                    else if (TileID.Sets.Conversion.Sandstone[type])
+                    else if (TileID.Sets.Conversion.Sandstone[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<Snotsandstone>())
                     {
                         Main.tile[m, n].TileType = (ushort)ModContent.TileType<Snotsandstone>();
                         WorldGen.SquareTileFrame(m, n);

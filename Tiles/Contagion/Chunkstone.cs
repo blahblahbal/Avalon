@@ -17,7 +17,7 @@ public class Chunkstone : ModTile
     }
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(62, 72, 50));
+        AddMapEntry(new Color(69, 82, 61));
         //Main.tileShine2[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;

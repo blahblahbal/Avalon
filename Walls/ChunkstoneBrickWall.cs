@@ -10,7 +10,7 @@ public class ChunkstoneBrickWall : ModWall
     {
         Main.wallHouse[Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Wall.ChunkstoneBrickWall>();
-        AddMapEntry(new Color(67, 83, 61));
+        AddMapEntry(new Color(55, 73, 50));
         DustType = ModContent.DustType<Dusts.ChunkstoneBrickDust>();
     }
 }

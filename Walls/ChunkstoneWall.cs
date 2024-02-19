@@ -10,7 +10,7 @@ public class ChunkstoneWall : ModWall
     {
         WallID.Sets.Conversion.Stone[Type] = true;
         WallID.Sets.CannotBeReplacedByWallSpread[Type] = true;
-        AddMapEntry(new Color(34, 44, 25));
+        AddMapEntry(new Color(38, 49, 33));
         DustType = ModContent.DustType<Dusts.ContagionDust>();
     }
 }
