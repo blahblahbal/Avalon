@@ -27,7 +27,7 @@ internal class HerbologyUIHerbExchange : ExxoUIPanelWrapper<ExxoUIList>
         herbExchangeTitleContainer.Append(title);
 
         Toggle = new ExxoUIImageButtonToggle(
-            Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconRandomSeed"), Color.White, Color.Red)
+            ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbThing"), Color.White, Color.Red)
         {
             Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.ToggleSeeds"),
         };

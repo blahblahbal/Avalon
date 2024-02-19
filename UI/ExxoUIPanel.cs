@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria.GameContent.UI.Elements;
 
 namespace Avalon.UI;
@@ -7,7 +7,7 @@ public class ExxoUIPanel : ExxoUIAdapter<UIPanel>
 {
     public ExxoUIPanel() : base(new UIPanel()) { }
 
-    public static Color DefaultBackgroundColor => new Color(63, 82, 151) * 0.7f;
+    public static Color DefaultBackgroundColor => new Color(63, 82, 151) * 0.85f;
     public static Color DefaultBorderColor => Color.Black;
 
     public Color BorderColor

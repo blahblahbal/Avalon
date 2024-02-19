@@ -46,8 +46,8 @@ public class HerbologyUIState : ExxoUIState
         {
             Width = StyleDimension.FromPixels(720),
             Height = StyleDimension.FromPixels(400),
-            VAlign = UIAlign.Center,
-            HAlign = UIAlign.Center,
+            VAlign = 0.65f, //UIAlign.Center,
+            HAlign = 0.125f, //UIAlign.Center,
         };
         mainPanel.SetPadding(15);
         Append(mainPanel);
@@ -162,29 +162,37 @@ public class HerbologyUIState : ExxoUIState
 
         #region button toggles
         herbButton =
-            new ExxoUIImageButton(Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconRandomSeed"))
-            { Scale = 1, Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Herbs"), HAlign = 0.38f, VAlign = 0.02f };
+            new ExxoUIImageButton(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbThing"))
+            { Scale = 1, Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Herbs"), HAlign = 0.27f, VAlign = 0.04f };
         herbContainer.Append(herbButton);
+        
         herbButton.Selected = true;
         herbButton.OnLeftClick += (_, args) =>
         {
+            if (herbExchange.Hidden)
+            {
+                SoundEngine.PlaySound(SoundID.MenuTick);
+            }
             potionExchange.Hidden = true;
             herbExchange.Hidden = false;
-            SoundEngine.PlaySound(SoundID.Grab);
         };
 
         potionButton =
             new ExxoUIImageButton(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbPotion"))
-            { Scale = 1, Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Potions"), HAlign = 0.45f, VAlign = 0.04f };
+            { Scale = 1, Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Potions"), HAlign = 0.34f, VAlign = 0.04f };
         herbContainer.Append(potionButton);
-
+        
         potionButton.Hidden = true;
 
         potionButton.OnLeftClick += (_, args) =>
         {
+            if (potionExchange.Hidden)
+            {
+                SoundEngine.PlaySound(SoundID.MenuTick);
+            }
             potionExchange.Hidden = false;
             herbExchange.Hidden = true;
-            SoundEngine.PlaySound(SoundID.Grab);
+            
         };
         #endregion
 
@@ -419,6 +427,20 @@ public class HerbologyUIState : ExxoUIState
             {
                 potionButton.Hidden = false;
             }
+        }
+
+        if (herbButton != null && herbExchange != null)
+        {
+            herbButton.Scale = herbExchange.Hidden ? 0.7f : 1f;
+            herbButton.VAlign = herbExchange.Hidden ? 0.052f : 0.032f;
+            herbButton.HAlign = 0.27f;
+        }
+
+        if (potionButton != null && potionExchange != null)
+        {
+            potionButton.Scale = potionExchange.Hidden ? 0.7f : 1f;
+            potionButton.VAlign = potionExchange.Hidden ? 0.052f : 0.032f;
+            potionButton.HAlign = 0.34f;
         }
 
         if (player.chest != -1 || Main.npcShop != 0)

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent;
@@ -16,9 +16,11 @@ internal class ExxoUIItemSlot : ExxoUIImageButton
         item.netDefaults(itemType);
         item.stack = 1;
 
+        Scale = 0.85f;
+
         InnerImage = new ExxoUIImage(TextureAssets.Item[item.type])
         {
-            HAlign = UIAlign.Center, VAlign = UIAlign.Center,
+            HAlign = UIAlign.Center, VAlign = UIAlign.Center, Scale = 0.85f
         };
         Append(InnerImage);
     }

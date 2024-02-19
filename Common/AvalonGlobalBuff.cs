@@ -24,6 +24,11 @@ namespace Avalon.Common
                 tip += "\nUpgrade stage: " + Main.LocalPlayer.ownedProjectileCounts[ProjectileID.AbigailCounter];
             }
 
+            if (Main.LocalPlayer.ownedProjectileCounts[ProjectileID.StardustDragon1] > 0 && type == BuffID.StardustDragonMinion)
+            {
+                tip += "\nUpgrade stage: " + Main.LocalPlayer.ownedProjectileCounts[ProjectileID.StardustDragon2];
+            }
+
             base.ModifyBuffText(type, ref buffName, ref tip, ref rare);
         }
         public override void Update(int type, Player player, ref int buffIndex)

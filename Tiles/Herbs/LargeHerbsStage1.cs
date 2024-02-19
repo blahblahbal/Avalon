@@ -1,12 +1,13 @@
 using Avalon.Common;
 using Avalon.Items.Placeable.Seed;
+using Avalon.Reflection;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -42,6 +43,18 @@ public class LargeHerbsStage1 : ModTile
     public override ushort GetMapOption(int i, int j)
     {
         return (ushort)(Main.tile[i, j].TileFrameX / 18);
+    }
+    public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        bool intoRenderTargets = true;
+        bool flag = intoRenderTargets || Main.LightingEveryFrame;
+
+        if (Main.tile[i, j].TileFrameX % 18 == 0 && Main.tile[i, j].TileFrameY % 54 == 0 && flag)
+        {
+            Main.instance.TilesRenderer.AddSpecialPoint(i, j, 4);
+        }
+
+        return false;
     }
     public override bool CreateDust(int i, int j, ref int type)
     {

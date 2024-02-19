@@ -9,7 +9,10 @@ namespace Avalon.UI;
 
 internal class ExxoUIImageButton : ExxoUIImage
 {
-    public ExxoUIImageButton(Asset<Texture2D> texture) : base(texture) { }
+    public ExxoUIImageButton(Asset<Texture2D> texture) : base(texture)
+    {
+        Scale = 0.85f;
+    }
     public float OpacityActive { get; set; } = 1f;
     public float OpacityInactive { get; set; } = 0.4f;
     public bool Selected { get; set; }

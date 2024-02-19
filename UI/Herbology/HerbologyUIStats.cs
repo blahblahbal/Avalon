@@ -26,14 +26,17 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         InnerElement.FitWidthToContent = true;
         InnerElement.Justification = Justification.Center;
         InnerElement.ContentHAlign = UIAlign.Center;
-        RankTitleText = new ExxoUITextPanel("");
-        RankTitleText.TextElement.TextColor = Color.Gold;
-        RankTitleText.BackgroundColor *= 0.7f;
-        InnerElement.Append(RankTitleText);
 
         HerbTierText = new ExxoUITextPanel("");
         HerbTierText.BackgroundColor = Color.Transparent;
+        HerbTierText.BorderColor = Color.Transparent;
         InnerElement.Append(HerbTierText);
+
+        RankTitleText = new ExxoUITextPanel("");
+        RankTitleText.TextElement.TextColor = Color.Gold;
+        RankTitleText.BackgroundColor = Color.Transparent;
+        RankTitleText.BorderColor = Color.Transparent;
+        InnerElement.Append(RankTitleText);
 
         HerbTotalContainer = new ExxoUIPanelWrapper<ExxoUIList>(new ExxoUIList()) { Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Credits.Herb") };
         HerbTotalContainer.InnerElement.Direction = Direction.Horizontal;
@@ -41,6 +44,7 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         HerbTotalContainer.InnerElement.FitWidthToContent = true;
         HerbTotalContainer.InnerElement.ContentVAlign = UIAlign.Center;
         HerbTotalContainer.BackgroundColor = Color.Transparent;
+        HerbTotalContainer.BorderColor = Color.Transparent;
         InnerElement.Append(HerbTotalContainer);
 
         var herbTotalIcon =
@@ -59,10 +63,11 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         PotionTotalContainer.InnerElement.FitWidthToContent = true;
         PotionTotalContainer.InnerElement.ContentVAlign = UIAlign.Center;
         PotionTotalContainer.BackgroundColor = Color.Transparent;
+        PotionTotalContainer.BorderColor = Color.Transparent;
         InnerElement.Append(PotionTotalContainer);
 
         var potionTotalIcon =
-            new ExxoUIImage(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbPotion"))
+            new ExxoUIImage(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbPotionNoOutline"))
             {
                 Inset = new Vector2(4, 5),
             };
@@ -77,7 +82,7 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         };
         InnerElement.Append(Button);
 
-        ItemSlot = new ExxoUIItemSlot(TextureAssets.InventoryBack7, ItemID.None);
+        ItemSlot = new ExxoUIItemSlot(TextureAssets.InventoryBack11, ItemID.None); // texture for the item slot
         InnerElement.Append(ItemSlot);
         ItemSlot.OnLeftClick += delegate
         {
@@ -126,10 +131,10 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
             herbTier = Language.GetTextValue("Mods.Avalon.Herbology.Tier3");
         }
 
-        string rankTitle = Language.GetTextValue("Mods.Avalon.Herbology.Name") + herbTier;
+        string rankTitle = herbTier;
         RankTitleText.TextElement.SetText(rankTitle);
 
-        string tier = Language.GetTextValue("Mods.Avalon.Herbology.Tier") + $"{(int)modPlayer.Tier + 1}" + Language.GetTextValue("Mods.Avalon.Herbology.Herbologist");
+        string tier = Language.GetTextValue("Mods.Avalon.Herbology.Tier") + $"{(int)modPlayer.Tier + 1}" + ":"; //Language.GetTextValue("Mods.Avalon.Herbology.Herbologist");
         HerbTierText.TextElement.SetText(tier);
 
         string herbTotal = modPlayer.HerbTotal.ToString(CultureInfo.CurrentCulture);
