@@ -1,5 +1,6 @@
 using Avalon.Common.Players;
 using Avalon.Items.Material;
+using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -85,6 +86,19 @@ public class AvalonGlobalTile : GlobalTile
     public override void Drop(int i, int j, int type)
     {
         int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
+
+        // icicle drops
+        if (type is TileID.Stalactite && Main.tile[i, j].TileFrameX < 54 && Main.tile[i, j].TileFrameY is 0 or 72 && Main.rand.NextBool(2))
+        {
+            int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16,
+                ModContent.ItemType<Icicle>());
+            if (Main.netMode == NetmodeID.Server)
+            {
+                NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.FromLiteral(""), a, 0f, 0f, 0f, 0);
+                Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
+            }
+        }
+
         // four leaf clover drops
         if (type is TileID.CorruptPlants or TileID.JunglePlants or TileID.JunglePlants2 or TileID.CrimsonPlants or TileID.Plants or TileID.Plants2 ||
             type == ModContent.TileType<Tiles.Contagion.ContagionShortGrass>())

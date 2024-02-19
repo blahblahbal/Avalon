@@ -25,6 +25,17 @@ internal class Tropics : ModHook
         IL_Liquid.DelWater += IL_Liquid_DelWater;
         On_Liquid.DelWater += On_Liquid_DelWater;
         IL_WorldGen.OreRunner += IL_WorldGen_OreRunner;
+        On_WorldGen.Place3x2 += On_WorldGen_Place3x2;
+    }
+
+    private void On_WorldGen_Place3x2(On_WorldGen.orig_Place3x2 orig, int x, int y, ushort type, int style)
+    {
+        if (type is TileID.LargePiles2 or TileID.LargePiles && Main.tile[x, y + 1].TileType == ModContent.TileType<TuhrtlBrick>())
+        {
+            type = (ushort)ModContent.TileType<TuhrtlBackgroundBlobs>();
+            style = WorldGen.genRand.Next(3);
+        }
+        orig.Invoke(x, y, type, style);
     }
 
     private void IL_WorldGen_OreRunner(ILContext il)
