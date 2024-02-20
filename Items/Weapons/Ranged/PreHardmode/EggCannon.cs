@@ -18,6 +18,7 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
             Item.height = 10;
             Item.DefaultToRangedWeapon(1, AmmoID.None, 35, 16, true);
             Item.damage = 35;
+            Item.knockBack = 8f;
             Item.rare = ItemRarityID.Green;
             // doing this makes it add the damage of grenades lol
             //Item.useAmmo = ItemID.Grenade;

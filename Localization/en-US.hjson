@@ -9620,7 +9620,7 @@ Mods: {
 
 			Generation: {
 				Tropics: {
-                    Generating: Generating tropics
+					Generating: Generating tropics
 					TuhrtlOutpost: Creating tropical ruins
 					PlatformLeaves: Placing platform leaf traps
 					Chests: Adding tropics chests
