@@ -17,9 +17,14 @@ public class Sweetstem : ModHerb
         //ModContent.TileType<Nest>(),
         TileID.Hive
     };
-    public override LocalizedText MapName => LanguageManager.Instance.GetText("Sweetstem");
+    public override LocalizedText MapName => this.GetLocalization("MapEntry");
     public override Color MapColor => new Color(216, 161, 50);
     public override int Dust => DustID.Hive;
+    public override void SetStaticDefaults()
+    {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        base.SetStaticDefaults();
+    }
     public override void RandomUpdate(int i, int j)
     {
         Tile tile = Framing.GetTileSafely(i, j); //Safe way of getting a tile instance

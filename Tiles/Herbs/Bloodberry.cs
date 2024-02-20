@@ -17,10 +17,14 @@ public class Bloodberry : ModHerb
         TileID.CrimsonGrass,
         TileID.Crimstone
     };
-    public override LocalizedText MapName => LanguageManager.Instance.GetText("Bloodberry");
+    public override LocalizedText MapName => this.GetLocalization("MapEntry");
     public override Color MapColor => Color.IndianRed;
     public override int Dust => DustID.Crimson;
-    
+    public override void SetStaticDefaults()
+    {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        base.SetStaticDefaults();
+    }
     public override void RandomUpdate(int i, int j)
     {
         Tile tile = Framing.GetTileSafely(i, j); //Safe way of getting a tile instance

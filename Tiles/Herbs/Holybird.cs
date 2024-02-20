@@ -21,9 +21,14 @@ public class Holybird : ModHerb
         TileID.Pearlstone,
         TileID.HallowedGrass
     };
-    public override LocalizedText MapName => LanguageManager.Instance.GetText("Holybird");
+    public override LocalizedText MapName => this.GetLocalization("MapEntry");
     public override Color MapColor => new Color(98, 52, 228);
     public override int Dust => DustID.HallowedPlants;
+    public override void SetStaticDefaults()
+    {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        base.SetStaticDefaults();
+    }
     public override void RandomUpdate(int i, int j)
     {
         Tile tile = Framing.GetTileSafely(i, j); //Safe way of getting a tile instance

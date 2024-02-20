@@ -23,9 +23,14 @@ public class TwilightPlume : ModHerb
     {
         //ModContent.TileType<TropicalGrass>(),
     };
-    public override LocalizedText MapName => LanguageManager.Instance.GetText("Twilight Plume");
+    public override LocalizedText MapName => this.GetLocalization("MapEntry");
     public override Color MapColor => new Color(191, 0, 81);
     public override int Dust => DustID.JungleGrass;
+    public override void SetStaticDefaults()
+    {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        base.SetStaticDefaults();
+    }
 
     public override void RandomUpdate(int i, int j)
     {

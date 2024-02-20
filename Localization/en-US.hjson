@@ -8249,6 +8249,11 @@ Mods: {
 				DisplayName: Tuhrtl Pressure Plate
 				Tooltip: ""
 			}
+
+			AxeofEmancipation: {
+				DisplayName: Axe of Emancipation
+				Tooltip: Can break Resistant Wood
+			}
 		}
 
 		InfoDisplays: {
@@ -9429,6 +9434,11 @@ Mods: {
 			FireballTrap.MapEntry: ""
 			LanceTrap.MapEntry: ""
 			CannonballTrap.MapEntry: ""
+			Barfbush.MapEntry: Mods.Avalon.Tiles.Barfbush.MapEntry
+			Bloodberry.MapEntry: Mods.Avalon.Tiles.Bloodberry.MapEntry
+			Holybird.MapEntry: Mods.Avalon.Tiles.Holybird.MapEntry
+			Sweetstem.MapEntry: Mods.Avalon.Tiles.Sweetstem.MapEntry
+			TwilightPlume.MapEntry: Mods.Avalon.Tiles.TwilightPlume.MapEntry
 		}
 
 		Prefixes: {

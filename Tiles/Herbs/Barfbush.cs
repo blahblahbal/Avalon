@@ -18,9 +18,14 @@ public class Barfbush : ModHerb
         ModContent.TileType<Ickgrass>(),
         ModContent.TileType<Chunkstone>()
     };
-    public override LocalizedText MapName => LanguageManager.Instance.GetText("Barfbush");
+    public override LocalizedText MapName => this.GetLocalization("MapEntry");
     public override Color MapColor => new Color(0, 200, 50);
     public override int Dust => DustID.Grass;
+    public override void SetStaticDefaults()
+    {
+        TileID.Sets.TileCutIgnore.Regrowth[Type] = true;
+        base.SetStaticDefaults();
+    }
     public override void RandomUpdate(int i, int j)
     {
         Tile tile = Framing.GetTileSafely(i, j); //Safe way of getting a tile instance

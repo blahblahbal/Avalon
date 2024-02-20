@@ -7,7 +7,8 @@ namespace Avalon.Hooks
     {
         protected override void Apply()
         {
-            On_WorldGen.HellFort += OnHellFort;
+            // ADD BACK WHEN HELLCASTLE IS RE-ADDED
+            //On_WorldGen.HellFort += OnHellFort;
         }
         private static void OnHellFort(On_WorldGen.orig_HellFort orig, int i, int j, ushort tileType = 75, byte wallType = 14)
         {

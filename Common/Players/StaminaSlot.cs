@@ -13,7 +13,7 @@ namespace Avalon.Common.Players;
 internal class StaminaSlot : ModAccessorySlot
 {
     public override bool IsEnabled() => true;
-    public override bool IsHidden() => Main.EquipPage == 0;
+    public override bool IsHidden() => Main.EquipPage == 0 || Main.EquipPage == 1;
     public override bool DrawDyeSlot => false;
     public override bool DrawVanitySlot => false;
     public override string FunctionalTexture => "Avalon/Assets/Textures/UI/StaminaScroll";
@@ -94,7 +94,7 @@ internal class StaminaSlot : ModAccessorySlot
 internal class StaminaSlot2 : ModAccessorySlot
 {
     public override bool IsEnabled() => true;
-    public override bool IsHidden() => Main.EquipPage == 0;
+    public override bool IsHidden() => Main.EquipPage == 0 || Main.EquipPage == 1;
     public override bool DrawDyeSlot => false;
     public override bool DrawVanitySlot => false;
     public override string FunctionalTexture => "Avalon/Assets/Textures/UI/StaminaScroll";
