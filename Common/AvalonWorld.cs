@@ -228,7 +228,7 @@ public class AvalonWorld : ModSystem
         {
             if (WorldJungle == WorldJungle.Tropics)
             {
-                setValue.Invoke(Lang.gen[11], new object[] { "Generating tropics" });
+                setValue.Invoke(Lang.gen[11], new object[] { Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.Generating") });
             }
             else
             {
