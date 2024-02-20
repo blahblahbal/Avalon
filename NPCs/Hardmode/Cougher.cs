@@ -12,6 +12,8 @@ using Avalon.Projectiles.Hostile;
 using Terraria.Audio;
 using Terraria.Localization;
 using Avalon.Items.Armor.Hardmode;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.DataStructures;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -36,6 +38,43 @@ public class Cougher : ModNPC
         PitchVariance = 0f,
         MaxInstances = 10,
     };
+    public override void OnSpawn(IEntitySource source)
+    {
+        NPC.ai[3] = Main.rand.Next(5);
+    }
+    public Vector2 RotateAboutOrigin(Vector2 point, Vector2 origin, float rotation)
+    {
+        return Vector2.Transform(point - origin, Matrix.CreateRotationZ(rotation)) + origin;
+    }
+    public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+    {
+        if (DateTime.Now.Month == 2 && DateTime.Now.Day == 14)
+        {
+            Rectangle frame = NPC.frame;
+            Vector2 drawPos = NPC.position + new Vector2(18, 0);
+            Vector2 drawPos2 = RotateAboutOrigin(drawPos, NPC.Center, NPC.rotation) - Main.screenPosition;
+            var texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/WhitePartyHat").Value;
+            switch ((int)NPC.ai[3])
+            {
+                case 0:
+                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/BluePartyHat").Value;
+                    break;
+                case 1:
+                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/CyanPartyHat").Value;
+                    break;
+                case 2:
+                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/PinkPartyHat").Value;
+                    break;
+                case 3:
+                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/PurplePartyHat").Value;
+                    break;
+                case 4:
+                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/WhitePartyHat").Value;
+                    break;
+            }
+            Main.spriteBatch.Draw(texture, drawPos2, frame, Color.White, NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+        }
+    }
     public override void SetDefaults()
     {
         NPC.damage = 35;
@@ -301,6 +340,37 @@ public class Cougher : ModNPC
         NPC.ai[0] = 0;
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
+            if (DateTime.Now.Month == 2 && DateTime.Now.Day == 14)
+            {
+                for (int num673 = 0; num673 < 10; num673++)
+                {
+                    int num674 = Main.rand.Next(139, 143);
+                    int num675 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y), NPC.width, NPC.height, num674, (0f - NPC.velocity.X) * 0.3f, (0f - NPC.velocity.Y) * 0.3f, 0, default(Color), 1.2f);
+                    Main.dust[num675].velocity.X += Main.rand.Next(-50, 51) * 0.01f;
+                    Main.dust[num675].velocity.Y += Main.rand.Next(-50, 51) * 0.01f;
+                    Main.dust[num675].velocity.X *= 1f + Main.rand.Next(-50, 51) * 0.01f;
+                    Main.dust[num675].velocity.Y *= 1f + Main.rand.Next(-50, 51) * 0.01f;
+                    Main.dust[num675].velocity.X += Main.rand.Next(-50, 51) * 0.05f;
+                    Main.dust[num675].velocity.Y += Main.rand.Next(-50, 51) * 0.05f;
+                    Dust dust2 = Main.dust[num675];
+                    dust2.scale *= 1f + Main.rand.Next(-30, 31) * 0.01f;
+                }
+
+                for (int num676 = 0; num676 < 5; num676++)
+                {
+                    int num677 = Main.rand.Next(276, 283);
+                    int num678 = Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, -NPC.velocity * 0.3f, num677);
+                    Main.gore[num678].velocity.X += Main.rand.Next(-50, 51) * 0.01f;
+                    Main.gore[num678].velocity.Y += Main.rand.Next(-50, 51) * 0.01f;
+                    Main.gore[num678].velocity.X *= 1f + Main.rand.Next(-50, 51) * 0.01f;
+                    Main.gore[num678].velocity.Y *= 1f + Main.rand.Next(-50, 51) * 0.01f;
+                    Gore gore2 = Main.gore[num678];
+                    gore2.scale *= 1f + Main.rand.Next(-20, 21) * 0.01f;
+                    Main.gore[num678].velocity.X += Main.rand.Next(-50, 51) * 0.05f;
+                    Main.gore[num678].velocity.Y += Main.rand.Next(-50, 51) * 0.05f;
+                }
+            }
+
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Cougher1").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Cougher2").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(0.1f) * Main.rand.NextFloat(0.7f, 0.9f), Mod.Find<ModGore>("Cougher3").Type, NPC.scale);
