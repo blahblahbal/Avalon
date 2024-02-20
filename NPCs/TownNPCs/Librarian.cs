@@ -157,7 +157,7 @@ public class Librarian : ModNPC
     {
         if (!Main.dayTime && Main.hardMode && Main.rand.NextBool(5))
         {
-            return Language.GetTextValue("Mods.Avalon.NPCs.Librarian.Dialogue.Second");
+            return Language.GetTextValue("Mods.Avalon.NPCs.Librarian.Dialogue.First");
         }
 
         if (NPC.AnyNPCs(NPCID.DyeTrader) && Main.rand.NextBool(6))
