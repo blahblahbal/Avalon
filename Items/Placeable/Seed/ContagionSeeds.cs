@@ -1,5 +1,8 @@
+using Avalon.Common.Players;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -23,6 +26,16 @@ public class ContagionSeeds : ModItem
         Item.useAnimation = 15;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
+    }
+
+    public override void HoldItem(Player player)
+    {
+        if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+        {
+            Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+            player.cursorItemIconEnabled = true;
+            player.cursorItemIconID = Type;
+        }
     }
 
     public override bool? UseItem(Player player)

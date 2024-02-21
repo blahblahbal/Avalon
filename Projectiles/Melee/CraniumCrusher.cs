@@ -1,14 +1,10 @@
-using System;
-using Avalon.Items.Material;
-using Avalon.Items.Placeable.Trophy;
-using Avalon.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using Avalon.Items.Tools.PreHardmode;
 
 namespace Avalon.Projectiles.Melee;
 

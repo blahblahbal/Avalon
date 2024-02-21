@@ -180,6 +180,7 @@ Mods: {
 			Fell_8: "{0} tripped."
 			Fell_9: "{0} underestimated the power of gravity."
 			Fell_10: "{0} forgot to jump."
+			Fell_11: "{0} tried to land a cool backflip."
 			Drowned_1: "{0} blub blub blub..."
 			Drowned_2: "{0} thought they could breathe water."
 			Drowned_3: "{0} asphyxiated."
@@ -190,6 +191,7 @@ Mods: {
 			Lava_4: "{0} was infernally eradicated."
 			Lava_5: "{0}, that is not a hot tub."
 			Lava_6: "{0} found the fire in the hole."
+			Lava_7: "{0} accidentally lavaboarded themselves."
 			Petrified_1: "{0} was stoned."
 			Electrocution_1: "{0} got zzzzapped."
 			Electrocution_2: "{0} had an electrifying personality."
@@ -7646,8 +7648,8 @@ Mods: {
 			}
 
 			HallowedGreatsword: {
-				DisplayName: Hallowed Greatsword
-				Tooltip: ""
+				DisplayName: Hallowed Claymore
+				Tooltip: Ignores 15 points of enemy defense
 			}
 
 			GiantGravestone: {
@@ -8254,6 +8256,11 @@ Mods: {
 				DisplayName: Axe of Emancipation
 				Tooltip: Can break Resistant Wood
 			}
+
+			HallowedClaymore: {
+				DisplayName: Hallowed Claymore
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8500,6 +8507,7 @@ Mods: {
 			PriminiVice.DisplayName: Primini Vice
 			CannonballTrap.DisplayName: Cannonball Trap
 			CannonballTrapStarter.DisplayName: Cannonball Trap Starter
+			HallowedClaymore.DisplayName: Hallowed Claymore
 		}
 
 		NPCs: {
@@ -9434,11 +9442,11 @@ Mods: {
 			FireballTrap.MapEntry: ""
 			LanceTrap.MapEntry: ""
 			CannonballTrap.MapEntry: ""
-			Barfbush.MapEntry: Mods.Avalon.Tiles.Barfbush.MapEntry
-			Bloodberry.MapEntry: Mods.Avalon.Tiles.Bloodberry.MapEntry
-			Holybird.MapEntry: Mods.Avalon.Tiles.Holybird.MapEntry
-			Sweetstem.MapEntry: Mods.Avalon.Tiles.Sweetstem.MapEntry
-			TwilightPlume.MapEntry: Mods.Avalon.Tiles.TwilightPlume.MapEntry
+			Barfbush.MapEntry: Barfbush
+			Bloodberry.MapEntry: Bloodberry
+			Holybird.MapEntry: Holybird
+			Sweetstem.MapEntry: Sweetstem
+			TwilightPlume.MapEntry: TwilightPlume
 		}
 
 		Prefixes: {

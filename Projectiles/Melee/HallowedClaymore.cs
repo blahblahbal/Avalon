@@ -8,12 +8,11 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee;
 
-public class UrchinMace : ModProjectile
+public class HallowedClaymore : ModProjectile
 {
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Marrow Masher");
-        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 4;
+        ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
     }
     public Player player => Main.player[Projectile.owner];
@@ -37,9 +36,9 @@ public class UrchinMace : ModProjectile
     public Vector2 swingRadius = Vector2.Zero;
     public bool firstFrame = true;
     public float swordVel;
-    public float speed = MathF.PI * 1.1f;
+    public float speed = MathF.PI * 1.5f;
     public float posY;
-    public float scaleMult = 1.1f; // set this to same as in the item file
+    public float scaleMult = 1.35f; // set this to same as in the item file
     public override void AI()
     {
         if (player.dead) Projectile.Kill();
@@ -66,7 +65,7 @@ public class UrchinMace : ModProjectile
         if (Projectile.timeLeft < 20)
         {
             Projectile.scale *= 0.99f;
-            swingRadius *= 0.99f;
+            swingRadius *= 0.98f;
         }
 
         swordVel = MathHelper.Lerp(0f, 2f, Projectile.timeLeft / (float)SwingSpeed);
@@ -76,12 +75,12 @@ public class UrchinMace : ModProjectile
         Projectile.rotation = Vector2.Normalize(Projectile.Center - HandPosition).ToRotation() + (45 * (MathHelper.Pi / 180));
         player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * player.gravDir + (player.gravDir == -1 ? MathHelper.Pi : 0));
 
-        Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Water_Cavern);
+        Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.HallowedWeapons);
         d.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(MathHelper.PiOver2 * player.direction) * 3 * swordVel;
-        Dust d2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Water);
+        Dust d2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.HallowedWeapons);
         d2.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(MathHelper.PiOver2 * player.direction) * 3 * swordVel;
 
-        Dust d3 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Venom);
+        Dust d3 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.HallowedWeapons);
         d3.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(MathHelper.PiOver2 * player.direction) * 3 * swordVel;
         d3.alpha = 128;
         d3.noGravity = true;
@@ -94,13 +93,14 @@ public class UrchinMace : ModProjectile
         }
         return false;
     }
-    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-    {
-        if(Main.rand.NextBool(3))
-            target.AddBuff(BuffID.Poisoned, 60 * 3);
-        else
-            target.AddBuff(BuffID.Poisoned, 60);
-    }
+    //public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+    //{
+    //    if (hit.Crit)
+    //    {
+    //        target.AddBuff(BuffID.BrokenArmor, 60 * 12);
+    //        hit.Knockback *= 3f;
+    //    }
+    //}
     public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
         float diff = target.Center.X - player.Center.X;
@@ -116,17 +116,11 @@ public class UrchinMace : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         Texture2D texture = ModContent.Request<Texture2D>(Texture, AssetRequestMode.ImmediateLoad).Value;
-        Texture2D after = ModContent.Request<Texture2D>(Texture + "_after", AssetRequestMode.ImmediateLoad).Value;
 
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
         Vector2 offset = new Vector2((float)(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
 
-        for (int i = 0; i < Projectile.oldPos.Length; i++)
-        {
-            Vector2 drawPosOld = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
-            Main.EntitySpriteDraw(after, drawPosOld, frame, Color.Black * (1 - (i * 0.25f)) * 0.25f, Projectile.oldRot[i], frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
-        }
         Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
 
         return false;

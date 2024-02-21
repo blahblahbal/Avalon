@@ -39,6 +39,6 @@ public class ContagionDesert : ModBiome
     //}
     public override bool IsBiomeActive(Player player)
     {
-        return ModContent.GetInstance<BiomeTileCounts>().ContagionDesertTiles > 350 && player.ZoneOverworldHeight;
+        return ModContent.GetInstance<BiomeTileCounts>().ContagionDesertTiles > 300 && player.ZoneOverworldHeight;
     }
 }

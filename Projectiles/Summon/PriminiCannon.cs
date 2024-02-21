@@ -23,8 +23,8 @@ public class PriminiCannon : ModProjectile
     {
         Rectangle dims = this.GetDims();
         Projectile.netImportant = true;
-        Projectile.width = dims.Width * 30 / 18;
-        Projectile.height = dims.Height * 30 / 18 / Main.projFrames[Projectile.type];
+        Projectile.width = 42;
+        Projectile.height = 42;
         Projectile.aiStyle = -1;
         Projectile.penetrate = -1;
         Projectile.timeLeft *= 5;
@@ -34,10 +34,13 @@ public class PriminiCannon : ModProjectile
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
         Main.projPet[Projectile.type] = true;
+        DrawOffsetX = -(int)((42) - (Projectile.Size.X / 2));
+        DrawOriginOffsetY = (int)((18 / Main.projFrames[Projectile.type] / 2) + (Projectile.Size.Y / 2));
     }
 
     public override void AI()
     {
+        
         Player owner = Main.player[Projectile.owner];
 
         if (Projectile.type == ModContent.ProjectileType<PriminiCannon>())

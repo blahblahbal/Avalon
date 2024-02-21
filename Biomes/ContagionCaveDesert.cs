@@ -39,6 +39,6 @@ public class ContagionCaveDesert : ModBiome
     //}
     public override bool IsBiomeActive(Player player)
     {
-        return ModContent.GetInstance<BiomeTileCounts>().ContagionDesertTiles > 350 && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight);
+        return player.InModBiome<UndergroundContagion>() && player.ZoneUndergroundDesert;
     }
 }

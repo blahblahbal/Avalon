@@ -62,7 +62,7 @@ public class PriminiSaw : ModProjectile
         }
         AvalonGlobalProjectile.ModifyProjectileStats(Projectile, ModContent.ProjectileType<PrimeArmsCounter>(), 50, 3, 1f, 0.1f);
 
-        if (Projectile.position.Y > Main.player[Projectile.owner].Center.Y - Main.rand.Next(75, 95) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+        if (Projectile.position.Y > Main.player[Projectile.owner].Center.Y - Main.rand.Next(60, 80) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
         {
             if (Projectile.velocity.Y > 0f)
             {
@@ -74,7 +74,7 @@ public class PriminiSaw : ModProjectile
                 Projectile.velocity.Y = 6f;
             }
         }
-        else if (Projectile.position.Y < Main.player[Projectile.owner].Center.Y - Main.rand.Next(75, 95) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+        else if (Projectile.position.Y < Main.player[Projectile.owner].Center.Y - Main.rand.Next(60, 80) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
         {
             if (Projectile.velocity.Y < 0f)
             {
