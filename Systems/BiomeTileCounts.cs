@@ -59,7 +59,7 @@ public class BiomeTileCounts : ModSystem
         Main.SceneMetrics.SnowTileCount += tileCounts[ModContent.TileType<GreenIce>()];
         Main.SceneMetrics.SandTileCount += tileCounts[ModContent.TileType<Snotsand>()] + tileCounts[ModContent.TileType<HardenedSnotsand>()] + tileCounts[ModContent.TileType<Snotsandstone>()];
         
-        ContagionDesertTiles += tileCounts[ModContent.TileType<Snotsand>()] + tileCounts[ModContent.TileType<HardenedSnotsand>()] + tileCounts[ModContent.TileType<Snotsandstone>()];
+        ContagionDesertTiles = tileCounts[ModContent.TileType<Snotsand>()] + tileCounts[ModContent.TileType<HardenedSnotsand>()] + tileCounts[ModContent.TileType<Snotsandstone>()];
         
 
         TropicsTiles = tileCounts[ModContent.TileType<TropicalStone>()] +
