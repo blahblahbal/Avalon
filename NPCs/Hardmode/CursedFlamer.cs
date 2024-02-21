@@ -33,8 +33,8 @@ public class CursedFlamer : ModNPC
     public override void SetDefaults()
     {
         NPC.npcSlots = 1;
-        NPC.width = 60;
-        NPC.height = 66;
+        NPC.width = 40;
+        NPC.height = 40;
         NPC.aiStyle = -1;
         NPC.timeLeft = 1750;
         AnimationType = NPCID.Corruptor;
@@ -50,6 +50,7 @@ public class CursedFlamer : ModNPC
         NPC.value = 500;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.CursedFlamerBanner>();
+        DrawOffsetY = (int)((82 / 2) - (NPC.height / 2));
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
@@ -195,9 +196,22 @@ public class CursedFlamer : ModNPC
             }
         }
         NPC.rotation = (float)Math.Atan2(num1172, num1171) - 1.57f;
-        Vector2 asdf = new Vector2(NPC.Center.X, NPC.position.Y + NPC.height - 6);
-        Vector2 asdf2 = RotateAboutOrigin(asdf, NPC.Center, NPC.rotation);
-        int dusty = Dust.NewDust(asdf2, 14, 12, DustID.CursedTorch, (float)((Math.Cos(NPC.rotation)) * -1), (float)((Math.Sin(NPC.rotation)) * -1), 100, new Color(), 1.5f);
+        Vector2 correctedCenter = new Vector2(NPC.position.X + NPC.width / 2 - 8, NPC.position.Y + NPC.height / 2 - 8);
+        Vector2 asdf = new Vector2(correctedCenter.X, NPC.position.Y + NPC.height * 1.26f - 6);
+        Vector2 asdf2 = RotateAboutOrigin(asdf, correctedCenter, NPC.rotation);
+        if (!Main.rand.NextBool(4))
+        {
+            int dusty = Dust.NewDust(asdf2 + Main.rand.NextVector2Circular(10f, 10f), 14, 12, DustID.CursedTorch, default, default, 100, new Color(), 2);
+            Main.dust[dusty].noGravity = true;
+            Main.dust[dusty].velocity.X += correctedCenter.DirectionTo(asdf2).X * Main.rand.NextFloat(2f);
+            Main.dust[dusty].velocity.Y += correctedCenter.DirectionTo(asdf2).Y * Main.rand.NextFloat(2f);
+        }
+        if (Main.rand.NextBool(4))
+        {
+            int dusty2 = Dust.NewDust(asdf2 + Main.rand.NextVector2Circular(10f, 10f), 14, 12, DustID.CursedTorch, default, default, 100, new Color(), 1f);
+            Main.dust[dusty2].velocity.X += correctedCenter.DirectionTo(asdf2).X * Main.rand.NextFloat(2f);
+            Main.dust[dusty2].velocity.Y += correctedCenter.DirectionTo(asdf2).Y * Main.rand.NextFloat(2f);
+        }
         var num1179 = 0.7f;
         if (NPC.collideX)
         {
