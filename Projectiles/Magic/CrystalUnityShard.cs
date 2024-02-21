@@ -45,8 +45,8 @@ public class CrystalUnityShard : ModProjectile
     }
     int GemType = 1;
 
-    int[] DustIds = {DustID.AmberBolt, DustID.GemAmethyst,DustID.GemDiamond,DustID.GemEmerald,ModContent.DustType<PeridotDust>(),DustID.GemRuby,DustID.GemSapphire,DustID.GemTopaz, ModContent.DustType<TourmalineDust>(), ModContent.DustType<ZirconDust>() };
-    Color[] Colors = {Color.OrangeRed,Color.Purple,Color.White,Color.MediumSeaGreen,Color.GreenYellow,Color.Red,Color.Blue,Color.Orange,Color.Cyan,Color.RosyBrown};
+    int[] DustIds = { DustID.AmberBolt, DustID.GemAmethyst, DustID.GemDiamond, DustID.GemEmerald, ModContent.DustType<PeridotDust>(), DustID.GemRuby, DustID.GemSapphire, DustID.GemTopaz, ModContent.DustType<TourmalineDust>(), ModContent.DustType<ZirconDust>() };
+    Color[] Colors = { Color.OrangeRed, Color.Purple, Color.White, Color.MediumSeaGreen, Color.GreenYellow, Color.Red, Color.Blue, Color.Orange, Color.Cyan, Color.RosyBrown };
     public override void OnKill(int timeLeft)
     {
         for (int i = 0; i < 12; i++)

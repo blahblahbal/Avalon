@@ -586,7 +586,7 @@ public class AvalonPlayer : ModPlayer
 
     public override void PreUpdate()
     {
-        if (Player.GetModPlayer<AvalonBiomePlayer>().ZoneSkyFortress)
+        if (Player.InModBiome<Biomes.SkyFortress>())
         {
             float num39 = Main.maxTilesX / 4200;
             num39 *= num39;

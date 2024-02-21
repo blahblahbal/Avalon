@@ -9,6 +9,7 @@ class IceShrine
 {
     public static void Generate(int x, int y)
     {
+        int bottomMod = 0; // bottom modifier for taller shrines
         int mult = 2; // overall shrine width modifier
         int rn = WorldGen.genRand.Next(3);
         int width = 0; // width of towers, modified below
@@ -57,7 +58,7 @@ class IceShrine
         {
             for (int fY = y + mult + 4; fY <= y + 13 + mod1; fY++)
             {
-                if (Main.tile[fX, fY].TileType > 0)
+                if (Main.tile[fX, fY].TileType >= 0 && Main.tile[fX, fY].WallType != WallID.IceBrick)
                 {
                     Tile tile = Main.tile[fX, fY];
                     tile.HasTile = true;
@@ -241,6 +242,9 @@ class IceShrine
                 WorldGen.PlaceTile(baseX, y + 11 + mod1, TileID.IceBrick, forced: true);
                 Utils.SquareTileFrame(baseX, y + 11 + mod1, resetSlope: true);
             }
+            // baseX > x + 4 && baseX < x + 10 || > x - 10 && < x - 16      width = 6
+            // 0, 8; width = 8
+            // -4, 6; width = 10
             if (baseX > x + mult * 4 + 6 - 2 * width + 2 && baseX < x + mult * 4 + 6 - width + 2 ||
                 baseX > x - mult * 4 + width - 4 && baseX < x - mult * 4 + 2 * width - 4)
             {
@@ -249,7 +253,10 @@ class IceShrine
                 Utils.SquareTileFrame(baseX, y + 11 + mod1, resetSlope: true);
                 WorldGen.PlaceTile(baseX, y + 12 + mod1, TileID.IceBrick, forced: true);
                 Utils.SquareTileFrame(baseX, y + 12 + mod1, resetSlope: true);
+
+                Main.NewText(mod1);
             }
+            // if the shrine is tall enough, make an extra bottom bit
             if (baseX < x + mult * 4 + 8 - 2 * width + 2 && baseX > x - mult * 4 + 2 * width - 6)
             {
                 WorldGen.PlaceTile(baseX, y + 12 + mod1, TileID.IceBrick, forced: true);
@@ -257,7 +264,17 @@ class IceShrine
                 Main.tile[baseX, y + 13 + mod1].WallType = 0;
                 WorldGen.PlaceTile(baseX, y + 13 + mod1, TileID.IceBrick, forced: true);
                 Utils.SquareTileFrame(baseX, y + 13 + mod1, resetSlope: true);
+
+                // new code
+                Main.tile[baseX, y + 11 + mod1].WallType = WallID.IceBrick;
+                Main.tile[baseX, y + 11 + mod1].LiquidAmount = 0;
+                if (baseX < x + mult * 4 + 8 - 2 * width + 1 && baseX > x - mult * 4 + 2 * width - 5)
+                {
+                    WorldGen.KillTile(baseX, y + 11 + mod1);
+                }
+                bottomMod = 1;
             }
+            // interior sides
             if (baseX == x - width - mult * 4 + 2 || baseX == x + mult * 4 + 2 + width)
             {
                 for (int s = 6; s <= 6 + mod1; s++)
@@ -267,6 +284,7 @@ class IceShrine
                     Utils.SquareTileFrame(baseX, y + mult + s, resetSlope: true);
                 }
             }
+            // exterior sides
             if (baseX == x - width - mult * 4 + 3 || baseX == x + mult * 4 + 2 + width - 1)
             {
                 for (int s = 6; s <= 6 + mod1 - 3; s++)
@@ -304,10 +322,10 @@ class IceShrine
             stylez2 = 5;
             paintingType = ModContent.TileType<Tiles.Paintings>();
         }
-        WorldGen.PlaceTile(x - 7, y + 9 + mod1, 89, style: 27);
-        WorldGen.PlaceTile(x + 11, y + 9 + mod1, 89, style: 27);
-        WorldGen.PlaceTile(x + 1, y + 10 + mod1, 93, style: 5);
-        WorldGen.PlaceTile(x + 3, y + 10 + mod1, 93, style: 5);
+        WorldGen.PlaceTile(x - 7, y + 9 + mod1, TileID.Benches, style: 27);
+        WorldGen.PlaceTile(x + 11, y + 9 + mod1, TileID.Benches, style: 27);
+        WorldGen.PlaceTile(x + 1, y + 10 + bottomMod + mod1, TileID.Lamps, style: 5);
+        WorldGen.PlaceTile(x + 3, y + 10 + bottomMod + mod1, TileID.Lamps, style: 5);
         AddIceShrineChest(x, y + mult + 4 + mod1 - 2, 0, false, 1);
         AddIceShrineChest(x + 5, y + mult + 4 + mod1 - 2, 0, false, 1);
         WorldGen.PlaceTile(x - 2, y + mult + 4 + mod1 - 3, 105, style: 54);
