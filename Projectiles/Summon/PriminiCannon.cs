@@ -34,8 +34,8 @@ public class PriminiCannon : ModProjectile
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
         Main.projPet[Projectile.type] = true;
-        DrawOffsetX = -(int)((42) - (Projectile.Size.X / 2));
-        DrawOriginOffsetY = (int)((18 / Main.projFrames[Projectile.type] / 2) + (Projectile.Size.Y / 2));
+        DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
+        DrawOriginOffsetY = -(int)((dims.Height / Main.projFrames[Projectile.type] / 2) - (Projectile.Size.Y / 2));
     }
 
     public override void AI()

@@ -19,8 +19,8 @@ public class PriminiSaw : ModProjectile
     {
         Rectangle dims = this.GetDims();
         Projectile.netImportant = true;
-        Projectile.width = dims.Width * 30 / 18;
-        Projectile.height = dims.Height * 30 / 18 / Main.projFrames[Projectile.type];
+        Projectile.width = 42;
+        Projectile.height = 42;
         Projectile.aiStyle = -1;
         Projectile.penetrate = -1;
         Projectile.timeLeft *= 5;
@@ -30,6 +30,8 @@ public class PriminiSaw : ModProjectile
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
         Main.projPet[Projectile.type] = true;
+        DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
+        DrawOriginOffsetY = -(int)((dims.Height / Main.projFrames[Projectile.type] / 2) - (Projectile.Size.Y / 2));
     }
     public override bool MinionContactDamage()
     {
