@@ -42,10 +42,6 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-            for (int i = 0; i < player.buffType.Length; i++)
-            {
-                player.DelBuff(i);
-            }
             //WorldGeneration.Structures.IceShrine.Generate(x, y);
             //WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
             //WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);

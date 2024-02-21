@@ -325,7 +325,7 @@ public class AvalonPlayer : ModPlayer
 
     public int DesertBeakSpawnTimer;
 
-    public void UpdatePrimeMinionStatus(EntitySource_ItemUse_WithAmmo source)
+    public void UpdatePrimeMinionStatus(IEntitySource source)
     {
         int firstMinion = ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>();
         if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>()] < 1)
@@ -339,11 +339,16 @@ public class AvalonPlayer : ModPlayer
                 }
             }
         }
+        Main.NewText(Player.maxMinions);
+        if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>()] < Player.maxMinions)
+        {
+            Projectile.NewProjectile(source, Player.position, Vector2.Zero, ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>(), 0, 0, Player.whoAmI);
+        }
         if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>()] < 1)
         {
             Projectile.NewProjectile(source, Player.Center.X - 40f, Player.Center.Y - 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
-            Projectile.NewProjectile(source, Player.Center.X + 40f, Player.Center.Y - 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiLaser>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
-            Projectile.NewProjectile(source, Player.Center.X - 40f, Player.Center.Y + 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiSaw>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(source, Player.Center.X - 40f, Player.Center.Y + 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiLaser>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(source, Player.Center.X + 40f, Player.Center.Y - 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiSaw>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
             Projectile.NewProjectile(source, Player.Center.X + 40f, Player.Center.Y + 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiVice>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
         }
     }

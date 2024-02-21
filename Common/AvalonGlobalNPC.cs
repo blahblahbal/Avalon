@@ -575,13 +575,14 @@ public class AvalonGlobalNPC : GlobalNPC
             pool.Add(NPCID.DesertLamiaDark, 0.45f);
             pool.Add(NPCID.DesertDjinn, 0.45f);
             pool.Add(NPCID.DuneSplicerHead, 0.2f);
-            pool.Add(NPCID.DesertScorpionWalk, 0.35f);
+            //pool.Add(NPCID.DesertScorpionWalk, 0.35f);
             pool.Add(NPCID.Antlion, 0.55f);
             pool.Add(NPCID.WalkingAntlion, 0.35f);
             pool.Add(NPCID.GiantWalkingAntlion, 0.05f);
-            pool.Add(NPCID.GiantFlyingAntlion, 0.05f);
-            pool.Add(NPCID.FlyingAntlion, 0.35f);
+            //pool.Add(NPCID.GiantFlyingAntlion, 0.05f);
+            //pool.Add(NPCID.FlyingAntlion, 0.35f);
             pool.Add(ModContent.NPCType<ContaminatedGhoul>(), 0.33f);
+            pool.Add(ModContent.NPCType<MineralSlime>(), 0.2f);
         }
         if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle)
         {

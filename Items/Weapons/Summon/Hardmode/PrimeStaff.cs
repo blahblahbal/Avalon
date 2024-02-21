@@ -22,7 +22,7 @@ class PrimeStaff : ModItem
         Item.width = dims.Width;
         Item.useTime = 30;
         Item.knockBack = 6.5f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>();
+        //Item.shoot = ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 10);
         Item.useAnimation = 30;
@@ -39,9 +39,30 @@ class PrimeStaff : ModItem
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }
+    public override bool CanUseItem(Player player)
+    {
+        return true;
+    }
+    public override bool? UseItem(Player player)
+    {
+        if (player.whoAmI == Main.myPlayer)
+        {
+            player.GetModPlayer<AvalonPlayer>().UpdatePrimeMinionStatus(player.GetSource_ItemUse_WithPotentialAmmo(Item, 0));
+            return true;
+        }
+        return base.UseItem(player);
+    }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         player.GetModPlayer<AvalonPlayer>().UpdatePrimeMinionStatus(source);
+        //Main.NewText(player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>()]);
+        //for (int i = 0; i < Main.maxProjectiles; i++)
+        //{
+        //    if (Main.projectile[i].type == ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>() && Main.projectile[i].owner == Main.myPlayer)
+        //    {
+        //        Main.projectile[i].minionSlots++;
+        //    }
+        //}
         return true;
     }
 }

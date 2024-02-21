@@ -1,7 +1,9 @@
 using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -9,6 +11,8 @@ namespace Avalon.Projectiles.Summon;
 
 public class PriminiCannon : ModProjectile
 {
+    int scaleSize1;
+    int scaleSize2;
     public override void SetStaticDefaults()
     {
         ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -29,15 +33,23 @@ public class PriminiCannon : ModProjectile
         Projectile.penetrate = -1;
         Projectile.timeLeft *= 5;
         Projectile.minion = true;
-        Projectile.minionSlots = 0.25f;
+        Projectile.minionSlots = 0f;
         Projectile.tileCollide = false;
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
         Main.projPet[Projectile.type] = true;
-        DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-        DrawOriginOffsetY = -(int)((dims.Height / Main.projFrames[Projectile.type] / 2) - (Projectile.Size.Y / 2));
+        scaleSize1 = (int)(Projectile.width * 1.35f);
+        scaleSize2 = (int)(Projectile.height * 1.7f);
     }
-
+    public override bool PreDraw(ref Color lightColor)
+    {
+        var tex = TextureAssets.Projectile[Type].Value;
+        Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition,
+            new Rectangle(0, tex.Height / 3 * Projectile.frame, tex.Width, tex.Height / 3),
+            lightColor, Projectile.rotation, new Vector2(tex.Width / 2, tex.Height / 6),
+            Projectile.scale, SpriteEffects.None);
+        return false;
+    }
     public override void AI()
     {
         
@@ -55,6 +67,15 @@ public class PriminiCannon : ModProjectile
             }
         }
         AvalonGlobalProjectile.ModifyProjectileStats(Projectile, ModContent.ProjectileType<PrimeArmsCounter>(), 50, 3, 1f, 0.1f);
+
+        if (Projectile.frame == 1)
+        {
+            Projectile.Hitbox = new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, scaleSize1, scaleSize1);
+        }
+        if (Projectile.frame == 2)
+        {
+            Projectile.Hitbox = new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, scaleSize2, scaleSize2);
+        }
 
         if (Projectile.position.Y > Main.player[Projectile.owner].Center.Y - Main.rand.Next(60, 80) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
         {
