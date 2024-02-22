@@ -339,7 +339,6 @@ public class AvalonPlayer : ModPlayer
                 }
             }
         }
-        Main.NewText(Player.maxMinions);
         if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>()] < Player.maxMinions)
         {
             Projectile.NewProjectile(source, Player.position, Vector2.Zero, ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>(), 0, 0, Player.whoAmI);
