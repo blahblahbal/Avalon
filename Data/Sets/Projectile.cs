@@ -70,9 +70,12 @@ public static class Projectile
         ProjectileID.StardustCellMinionShot);
 
     public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
+        ModContent.ProjectileType<WoodenClub>(),
         ModContent.ProjectileType<MarrowMasher>(),
         ModContent.ProjectileType<UrchinMace>(),
-        ModContent.ProjectileType<CraniumCrusher>());
+        ModContent.ProjectileType<HallowedClaymore>(),
+        ModContent.ProjectileType<CraniumCrusher>(),
+        ModContent.ProjectileType<HellboundHalberd>());
 
     public static readonly bool[] EarthRelatedItems = ProjectileID.Sets.Factory.CreateBoolSet(
         ProjectileID.BoulderStaffOfEarth,

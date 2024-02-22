@@ -7038,7 +7038,7 @@ Mods: {
 				DisplayName: Soulless Locket
 				Tooltip:
 					'''
-					Provides 20 defense against undead monsters
+					Reduces damage received from undead monsters
 					You are immune to any undead monsters that would do less than 1 damage
 					'''
 			}

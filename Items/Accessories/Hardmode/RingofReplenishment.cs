@@ -37,7 +37,8 @@ internal class RingofReplenishment : ModItem
         player.GetModPlayer<AvalonStaminaPlayer>().StamFlower = true;
         player.pStone = true;
         player.lifeRegen += 2;
-        player.manaRegen++;
-        player.GetModPlayer<AvalonStaminaPlayer>().StaminaRegenCost = 1600;
+        player.manaRegenDelayBonus += 1f;
+        player.manaRegenBonus += 25;
+        player.GetModPlayer<AvalonStaminaPlayer>().StaminaRegenCost = (int)(player.GetModPlayer<AvalonStaminaPlayer>().StaminaRegenCost * 0.75f);
     }
 }

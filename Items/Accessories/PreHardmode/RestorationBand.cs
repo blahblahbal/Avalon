@@ -33,7 +33,7 @@ internal class RestorationBand : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.lifeRegen++;
-        player.manaRegen++;
-        player.GetModPlayer<AvalonStaminaPlayer>().StaminaRegenCost = 1700;
+        player.manaRegenBonus += 10;
+        player.GetModPlayer<AvalonStaminaPlayer>().StaminaRegenCost = (int)(player.GetModPlayer<AvalonStaminaPlayer>().StaminaRegenCost * 0.9f);
     }
 }

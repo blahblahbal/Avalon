@@ -61,7 +61,5 @@ class GoblinArmyKnife : ModItem
         if (player.accWatch < 3) player.accWatch = 3;
         player.accCompass = 1;
         player.accDepthMeter = 1;
-        player.detectCreature = true;
-        player.findTreasure = true;
     }
 }

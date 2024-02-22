@@ -372,7 +372,7 @@ public class AvalonMobDrops : GlobalNPC
         //windshield
         if (npc.type is NPCID.DuneSplicerHead or NPCID.Tumbleweed or NPCID.WalkingAntlion or NPCID.FlyingAntlion or
             NPCID.SandElemental or NPCID.SandShark or NPCID.SandsharkCorrupt or NPCID.SandsharkCrimson or
-            NPCID.SandsharkHallow)
+            NPCID.SandsharkHallow || npc.type == ModContent.NPCType<BaskingSpewer>())
         {
             npcLoot.Add(ItemDropRule.ByCondition(sandstormCondition, ModContent.ItemType<Windshield>(), 75));
         }
