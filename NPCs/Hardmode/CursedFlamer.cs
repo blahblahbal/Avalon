@@ -96,7 +96,7 @@ public class CursedFlamer : ModNPC
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ItemID.CursedFlame, 3));
-        npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GreekExtinguisher>(), 40));
+        //npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GreekExtinguisher>(), 40));
     }
     public Vector2 RotateAboutOrigin(Vector2 point, Vector2 origin, float rotation)
     {
