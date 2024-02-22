@@ -7907,10 +7907,11 @@ Mods: {
 					7% increased damage
 					2% increased critical strike chance
 					+4 block range
-					Tells the time and shows position
-					Provides an aura of light
+					Increases pickup range for items
 					Can craft certain items by hand
+					Tells the time and shows position
 					Reveals treasures and mobs
+					Provides an aura of light
 					'''
 			}
 

@@ -41,7 +41,7 @@ class GoblinArmyKnife : ModItem
         player.wallSpeed++;
         Player.tileRangeX += 4;
         Player.tileRangeY += 4;
-        player.accWatch = 3;
+        if (player.accWatch < 3) player.accWatch = 3;
         player.accCompass = 1;
         player.accDepthMeter = 1;
         Lighting.AddLight((int)player.Center.X / 16, (int)player.Center.Y / 16, 2f, 2f, 2f);
@@ -49,11 +49,19 @@ class GoblinArmyKnife : ModItem
         //{
         //    player.hasJumpOption_Cloud = player.hasJumpOption_Sandstorm = player.hasJumpOption_Blizzard = player.hasJumpOption_Fart = true;
         //}
-        player.jumpBoost = player.treasureMagnet = player.longInvince = player.detectCreature = player.findTreasure = true; // long invince 2
+        /* player.jumpBoost = */ player.treasureMagnet = player.longInvince = player.detectCreature = player.findTreasure = true; // long invince 2
         player.manaRegenDelayBonus++;
         player.manaRegenBonus += 25;
         player.GetDamage(DamageClass.Generic) += 0.07f;
         player.GetCritChance(DamageClass.Generic) += 2;
         player.GetModPlayer<AvalonPlayer>().GoblinAK = true;
+    }
+    public override void UpdateInventory(Player player)
+    {
+        if (player.accWatch < 3) player.accWatch = 3;
+        player.accCompass = 1;
+        player.accDepthMeter = 1;
+        player.detectCreature = true;
+        player.findTreasure = true;
     }
 }

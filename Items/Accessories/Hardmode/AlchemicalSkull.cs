@@ -5,8 +5,13 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
+[AutoloadEquip(EquipType.Face)]
 public class AlchemicalSkull : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        ArmorIDs.Face.Sets.PreventHairDraw[Item.faceSlot] = true;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
