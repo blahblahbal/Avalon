@@ -6884,7 +6884,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases healing potion effectiveness by 50%
-					Increases potion sickness duration by 20%
+					Increases potion sickness duration by 15%
 					Decreases debuff time by 20%
 					'''
 			}

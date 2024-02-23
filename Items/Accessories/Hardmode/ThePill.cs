@@ -18,6 +18,8 @@ namespace Avalon.Items.Accessories.Hardmode
         {
             player.GetModPlayer<AvalonPlayer>().ThePill = true;
             player.potionDelayTime = (int)(player.potionDelayTime * 1.15);
+            player.restorationDelayTime = (int)(player.restorationDelayTime * 1.15);
+            player.mushroomDelayTime = (int)(player.mushroomDelayTime * 1.15);
         }
     }
     public class ThePillGlobalItem : GlobalItem

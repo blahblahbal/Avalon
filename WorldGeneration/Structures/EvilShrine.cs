@@ -83,7 +83,7 @@ class EvilShrine
                             int q = WorldGen.genRand.Next(3);
                             if (q == 0) q = ItemID.BandofStarpower;
                             if (q == 1) q = ItemID.PanicNecklace;
-                            if (q == 2) q = ModContent.ItemType<BandofStamina>();
+                            if (q == 2) q = ModContent.ItemType<NerveNumbNecklace>();
                             Main.chest[num2].item[2].SetDefaults(q, false);
                             Main.chest[num2].item[2].Prefix(-1);
                         }
