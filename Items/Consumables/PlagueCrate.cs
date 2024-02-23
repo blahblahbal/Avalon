@@ -37,7 +37,7 @@ public class PlagueCrate : ModItem
     public override void ModifyItemLoot(ItemLoot itemLoot)
     {
         int[] themedDrops = new int[] {
-            ModContent.ItemType<Accessories.PreHardmode.BandofStamina>(),
+            ModContent.ItemType<Accessories.PreHardmode.NerveNumbNecklace>(),
             ModContent.ItemType<Weapons.Ranged.PreHardmode.Blunderblight>(),
             ModContent.ItemType<Weapons.Magic.PreHardmode.Smogscreen>(),
             ModContent.ItemType<Pets.SepticCell>(),
