@@ -327,7 +327,7 @@ public class AvalonMobDrops : GlobalNPC
             npcLoot.Add(AmmoMagazine);
         }
         //greek extinguisher
-        if (npc.type == NPCID.Clinger || npc.type == NPCID.Spazmatism || npc.type == ModContent.NPCType<CursedFlamer>())
+        if (npc.type == NPCID.Clinger || npc.type == NPCID.Spazmatism || npc.type == NPCID.DesertGhoulCorruption || npc.type == ModContent.NPCType<CursedFlamer>())
         {
             LeadingConditionRule GreekExtinguisher = new LeadingConditionRule(new CloverPotionActive());
             GreekExtinguisher.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GreekExtinguisher>(), 25), true);
@@ -362,7 +362,7 @@ public class AvalonMobDrops : GlobalNPC
             npcLoot.Add(SurgicalMask);
         }
         //golden shield
-        if (npc.type is NPCID.IchorSticker)
+        if (npc.type is NPCID.IchorSticker or NPCID.DesertGhoulCrimson)
         {
             LeadingConditionRule GoldenShield = new LeadingConditionRule(new CloverPotionActive());
             GoldenShield.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GoldenShield>(), 35), true);
