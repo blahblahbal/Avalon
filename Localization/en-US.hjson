@@ -8257,11 +8257,6 @@ Mods: {
 				DisplayName: Axe of Emancipation
 				Tooltip: Can break Resistant Wood
 			}
-
-			HallowedClaymore: {
-				DisplayName: Hallowed Claymore
-				Tooltip: ""
-			}
 		}
 
 		InfoDisplays: {
