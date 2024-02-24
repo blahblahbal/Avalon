@@ -66,7 +66,8 @@ namespace Avalon.Hooks
                 Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.PurpleDungeon.PurpleDungeonChandelier>() ||
                 Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>() ||
                 Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.YellowDungeon.YellowDungeonChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.WildMushroom.WildMushroomChandelier>())
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.WildMushroom.WildMushroomChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.Dirtalier>())
             {
                 sizeX = 3;
                 sizeY = 3;
@@ -124,6 +125,10 @@ namespace Avalon.Hooks
             for (int i = 0; i < ModContent.GetInstance<CoughwoodChandelier>().Coordinates.Count; i++)
             {
                 ModContent.GetInstance<CoughwoodChandelier>().DrawMultiTileVines(ModContent.GetInstance<CoughwoodChandelier>().Coordinates[i].X, ModContent.GetInstance<CoughwoodChandelier>().Coordinates[i].Y, Main.spriteBatch);
+            }
+            for (int i = 0; i < ModContent.GetInstance<Dirtalier>().Coordinates.Count; i++)
+            {
+                ModContent.GetInstance<Dirtalier>().DrawMultiTileVines(ModContent.GetInstance<Dirtalier>().Coordinates[i].X, ModContent.GetInstance<Dirtalier>().Coordinates[i].Y, Main.spriteBatch);
             }
             for (int i = 0; i < ModContent.GetInstance<HeartstoneChandelier>().Coordinates.Count; i++)
             {
