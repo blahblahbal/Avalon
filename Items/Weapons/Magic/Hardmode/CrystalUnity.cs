@@ -46,7 +46,11 @@ class CrystalUnity : ModItem
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
-        int x = Main.rand.Next(10);
+        int x = Main.rand.Next(9);
+        if (Main.rand.NextBool(15))
+        {
+            x = 9;
+        }
 
         for (int spread = 0; spread < 3; spread++)
         {

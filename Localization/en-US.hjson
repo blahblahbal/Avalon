@@ -275,6 +275,7 @@ Mods: {
 			InfestedAmberSlime: Consistent consumption of the bugs in the Tropics caused these slimes to burst into a multitude of them when killed.
 			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
+			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
 		}
 
 		Keybinds: {
@@ -8619,6 +8620,7 @@ Mods: {
 			InfestedAmberSlime.DisplayName: Infested Amber Slime
 			KingSting.DisplayName: King Sting
 			Larvae.DisplayName: Larvae
+			Mosquito.DisplayName: Mosquito
 		}
 
 		Buffs: {
@@ -9239,6 +9241,16 @@ Mods: {
 			PrimeArms: {
 				DisplayName: Prime Arms
 				Description: The arms will fight for you
+			}
+
+			AmberShardBuff: {
+				DisplayName: Amber Shard Buff
+				Description: Mods.Avalon.Buffs.AmberShardBuff.Description
+			}
+
+			Malaria: {
+				DisplayName: Malaria
+				Description: Mods.Avalon.Buffs.Malaria.Description
 			}
 		}
 

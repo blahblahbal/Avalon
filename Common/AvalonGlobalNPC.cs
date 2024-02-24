@@ -557,17 +557,34 @@ public class AvalonGlobalNPC : GlobalNPC
     }
     public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
     {
-        if (spawnInfo.Player.InModBiome<Tropics>())
+        //if (spawnInfo.Player.InModBiome<Tropics>() && !spawnInfo.Player.InPillarZone())
+        //{
+        //    pool.Clear();
+        //    //pool.Add(ModContent.NPCType<Rafflesia>(), 0.6f);
+        //    pool.Add(ModContent.NPCType<AmberSlime>(), 0.6f);
+        //    if (!Main.dayTime)
+        //    {
+
+        //    }
+        //    /*pool.Add(ModContent.NPCType<TropicalSlime>(), 0.9f);
+        //    if (Main.hardMode)
+        //    {
+        //        pool.Add(ModContent.NPCType<PoisonDartFrog>(), 0.9f);
+        //    }*/
+        //}
+        if (spawnInfo.Player.InModBiome<UndergroundTropics>())
         {
             pool.Clear();
             pool.Add(ModContent.NPCType<Rafflesia>(), 0.6f);
+            pool.Add(ModContent.NPCType<InfestedAmberSlime>(), 0.6f);
+            pool.Add(ModContent.NPCType<AmberSlime>(), 0.6f);
+            pool.Add(ModContent.NPCType<Mosquito>(), 0.6f);
             /*pool.Add(ModContent.NPCType<TropicalSlime>(), 0.9f);
             if (Main.hardMode)
             {
                 pool.Add(ModContent.NPCType<PoisonDartFrog>(), 0.9f);
             }*/
         }
-
         if (spawnInfo.Player.InModBiome<ContagionCaveDesert>())
         {
             pool.Clear();
@@ -626,6 +643,11 @@ public class AvalonGlobalNPC : GlobalNPC
         {
             spawnRate = (int)(spawnRate * 0.65f);
             maxSpawns = (int)(maxSpawns * 1.3f);
+        }
+        if (player.InModBiome<Tropics>() || player.InModBiome<UndergroundTropics>())
+        {
+            spawnRate = (int)(spawnRate * 0.4f);
+            maxSpawns = (int)(maxSpawns * 1.5f);
         }
     }
     public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

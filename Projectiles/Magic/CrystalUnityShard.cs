@@ -99,7 +99,7 @@ public class CrystalUnityShard : ModProjectile
         switch (GemType)
         {
             case amber:
-                target.AddBuff(BuffID.OnFire, 60 * 5);
+                Main.player[Projectile.owner].AddBuff(ModContent.BuffType<Buffs.AmberShardBuff>(), 60 * 5);
                 break;
             case amethyst:
                 Main.player[Projectile.owner].AddBuff(ModContent.BuffType<Buffs.AmethystShardBuff>(), 60 * 5);
@@ -118,6 +118,9 @@ public class CrystalUnityShard : ModProjectile
                 break;
             case topaz:
                 target.AddBuff(BuffID.Ichor, 60 * 4);
+                break;
+            case tourmaline:
+                target.AddBuff(BuffID.Slow, 60 * 5);
                 break;
         }
     }

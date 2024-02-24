@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
@@ -11,7 +12,14 @@ public class InfestedAmberSlime : ModNPC
 {
     public override void OnKill()
     {
-        // make mosquito spawn on death
+        int num = Main.rand.Next(2, 5);
+        for (int i = 0; i < num; i++)
+        {
+            int n = NPC.NewNPC(NPC.GetSource_Loot(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<Fly>());
+            Main.npc[n].velocity = new Vector2(Main.rand.NextFloat(-3, 4), Main.rand.NextFloat(-2, 3));
+        }
+        // change to smaller mosquito
+        NPC.NewNPC(NPC.GetSource_Loot(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<Mosquito>());
     }
     public override void SetStaticDefaults()
     {
@@ -100,5 +108,16 @@ public class InfestedAmberSlime : ModNPC
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
         return spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>() && !spawnInfo.Player.ZoneDungeon ? 0.4f * AvalonGlobalNPC.ModSpawnRate : 0f;
+    }
+    public override void HitEffect(NPC.HitInfo hit)
+    {
+        if (NPC.life <= 0)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.TintableDust, 0, 0, Main.rand.Next(100, 200), default, Main.rand.NextFloat(1, 1.5f));
+                Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1.5f, 5) * hit.HitDirection, Main.rand.NextFloat(-1, -5));
+            }
+        }
     }
 }

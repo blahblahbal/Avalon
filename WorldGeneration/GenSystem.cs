@@ -165,7 +165,7 @@ public class GenSystem : ModSystem
                         {
                             if ((q < GenVars.jungleMinX + 75 && q >= GenVars.jungleMinX + 50) ||
                                 (q > GenVars.jungleMaxX - 75 && q <= GenVars.jungleMaxX - 50) &&
-                                z < Main.rockLayer)
+                                z < Main.rockLayer && z > 250)
                             {
                                 if (Main.tile[q, z].HasTile && WorldGen.genRand.NextBool(10))
                                 {
@@ -180,7 +180,7 @@ public class GenSystem : ModSystem
                                 }
                             }
 
-                            if (q >= GenVars.jungleMinX + 75 && q <= GenVars.jungleMaxX - 75 && z < Main.rockLayer)
+                            if (q >= GenVars.jungleMinX + 75 && q <= GenVars.jungleMaxX - 75 && z < Main.rockLayer && z > 250)
                             {
                                 if (Main.tile[q, z].HasTile)
                                 {

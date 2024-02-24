@@ -11,6 +11,7 @@ public class Tropics : ModBiome
     public override ModWaterStyle WaterStyle => ModContent.Find<ModWaterStyle>("Avalon/TropicsWaterStyle");
     public override int BiomeTorchItemType => ModContent.ItemType<Items.Placeable.Furniture.TropicsTorch>();
     public override string BestiaryIcon => base.BestiaryIcon;
+    public override string BackgroundPath => base.BackgroundPath;
     public override int Music
     {
         get

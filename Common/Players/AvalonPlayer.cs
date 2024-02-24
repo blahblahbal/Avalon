@@ -306,6 +306,7 @@ public class AvalonPlayer : ModPlayer
     public bool SanguineSacrifice;
     public bool Electrified;
     public bool Gambler;
+    public bool Malaria;
 
     public bool HungryMinion;
     public bool GastroMinion;
@@ -408,6 +409,7 @@ public class AvalonPlayer : ModPlayer
         SanguineSacrifice = false;
         Electrified = false;
         Gambler = false;
+        Malaria = false;
 
         // accessories
         TrapImmune = false;
@@ -855,6 +857,10 @@ public class AvalonPlayer : ModPlayer
                 Player.inventory[i].SetDefaults();
             }
             return false;
+        }
+        if (Malaria)
+        {
+            damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was bitten by a mosquito.");
         }
         if (Electrified)
         {
