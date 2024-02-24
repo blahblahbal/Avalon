@@ -8257,6 +8257,11 @@ Mods: {
 				DisplayName: Axe of Emancipation
 				Tooltip: Can break Resistant Wood
 			}
+
+			Dirtalier: {
+				DisplayName: Dirtalier
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
