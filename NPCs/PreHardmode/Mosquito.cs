@@ -17,7 +17,7 @@ internal class Mosquito : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[NPC.type] = 3;
+        Main.npcFrameCount[NPC.type] = 6;
         Data.Sets.NPC.Toxic[NPC.type] = true;
     }
 
@@ -27,14 +27,14 @@ internal class Mosquito : ModNPC
         NPC.lifeMax = 51;
         NPC.defense = 12;
         NPC.noGravity = true;
-        NPC.width = 70;
+        NPC.width = 58;
         NPC.aiStyle = -1;
         NPC.npcSlots = 1f;
-        NPC.height = 46;
+        NPC.height = 30;
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.value = 200;
-        AnimationType = NPCID.Hornet;
+        //AnimationType = NPCID.Hornet;
         NPC.knockBackResist = 0.5f;
     }
     public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
@@ -57,6 +57,30 @@ internal class Mosquito : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Mosquito"))
         });
     }
+    public override void FindFrame(int frameHeight)
+    {
+        if (NPC.ai[1] == 0)
+        {
+            NPC.frame.X = 0;
+            NPC.frame.Width = 74;
+        }
+        if (NPC.ai[1] == 1)
+        {
+            NPC.frame.X = 74;
+            NPC.frame.Width = 74;
+        }
+        NPC.frameCounter++;
+        if (NPC.frameCounter < 2.0)
+            NPC.frame.Y = 0 + (int)(150 * NPC.ai[3]);
+        else if (NPC.frameCounter < 4)
+            NPC.frame.Y = frameHeight + (int)(150 * NPC.ai[3]);
+        else if (NPC.frameCounter < 6)
+            NPC.frame.Y = frameHeight * 2 + (int)(150 * NPC.ai[3]);
+        else if (NPC.frameCounter < 8)
+            NPC.frame.Y = frameHeight + (int)(150 * NPC.ai[3]);
+        else
+            NPC.frameCounter = 0.0;
+    }
     public override void AI()
     {
         if (NPC.ai[1] == 0)
@@ -64,139 +88,148 @@ internal class Mosquito : ModNPC
             #region AI
             NPC.spriteDirection = Math.Sign(NPC.PlayerTarget().Center.X - NPC.Center.X);
 
-            if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
+            if (Vector2.Distance(NPC.Center, NPC.PlayerTarget().Center) < 16 * 20 && Collision.CanHit(NPC, NPC.PlayerTarget()))
             {
-                NPC.TargetClosest(true);
+                NPC.ai[3] = 1;
+                NPC.velocity = NPC.Center.DirectionTo(NPC.PlayerTarget().Center) * 7f;
             }
-            float speed = 2;
-            var npcCenter = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height * 0.5f);
-            var targetCenterX = Main.player[NPC.target].position.X + Main.player[NPC.target].width / 2;
-            var targetCenterY = Main.player[NPC.target].position.Y + Main.player[NPC.target].height / 2;
-            targetCenterX = (int)(targetCenterX / 8f) * 8;
-            targetCenterY = (int)(targetCenterY / 8f) * 8;
-            npcCenter.X = (int)(npcCenter.X / 8f) * 8;
-            npcCenter.Y = (int)(npcCenter.Y / 8f) * 8;
-            targetCenterX -= npcCenter.X;
-            targetCenterY -= npcCenter.Y;
-            var num151 = (float)Math.Sqrt(targetCenterX * targetCenterX + targetCenterY * targetCenterY);
-            var num152 = num151;
-            if (num151 == 0f)
+
+            if (NPC.ai[3] == 0)
             {
-                targetCenterX = NPC.velocity.X;
-                targetCenterY = NPC.velocity.Y;
-            }
-            else
-            {
-                num151 = 4f / num151;
-                targetCenterX *= num151;
-                targetCenterY *= num151;
-            }
-            if (num152 > 100f)
-            {
-                NPC.ai[0] += 2f;
-                if (NPC.ai[0] > 0f)
+                if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
                 {
-                    NPC.velocity.Y = NPC.velocity.Y + (speed * 0.023f);
+                    NPC.TargetClosest(true);
+                }
+                float speed = 2;
+                var npcCenter = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height * 0.5f);
+                var targetCenterX = Main.player[NPC.target].position.X + Main.player[NPC.target].width / 2;
+                var targetCenterY = Main.player[NPC.target].position.Y + Main.player[NPC.target].height / 2;
+                targetCenterX = (int)(targetCenterX / 8f) * 8;
+                targetCenterY = (int)(targetCenterY / 8f) * 8;
+                npcCenter.X = (int)(npcCenter.X / 8f) * 8;
+                npcCenter.Y = (int)(npcCenter.Y / 8f) * 8;
+                targetCenterX -= npcCenter.X;
+                targetCenterY -= npcCenter.Y;
+                var num151 = (float)Math.Sqrt(targetCenterX * targetCenterX + targetCenterY * targetCenterY);
+                var num152 = num151;
+                if (num151 == 0f)
+                {
+                    targetCenterX = NPC.velocity.X;
+                    targetCenterY = NPC.velocity.Y;
                 }
                 else
                 {
-                    NPC.velocity.Y = NPC.velocity.Y - (speed * 0.023f);
+                    num151 = 4f / num151;
+                    targetCenterX *= num151;
+                    targetCenterY *= num151;
                 }
-                if (NPC.ai[0] < -100f || NPC.ai[0] > 100f)
+                if (num152 > 100f)
                 {
-                    NPC.velocity.X = NPC.velocity.X + (speed * 0.023f);
+                    NPC.ai[0] += 2f;
+                    if (NPC.ai[0] > 0f)
+                    {
+                        NPC.velocity.Y = NPC.velocity.Y + (speed * 0.023f);
+                    }
+                    else
+                    {
+                        NPC.velocity.Y = NPC.velocity.Y - (speed * 0.023f);
+                    }
+                    if (NPC.ai[0] < -100f || NPC.ai[0] > 100f)
+                    {
+                        NPC.velocity.X = NPC.velocity.X + (speed * 0.023f);
+                    }
+                    else
+                    {
+                        NPC.velocity.X = NPC.velocity.X - (speed * 0.023f);
+                    }
+                    if (NPC.ai[0] > 200f)
+                    {
+                        NPC.ai[0] = -200f;
+                    }
                 }
-                else
+                if (num152 < 150f)
                 {
-                    NPC.velocity.X = NPC.velocity.X - (speed * 0.023f);
+                    NPC.velocity.X = NPC.velocity.X + targetCenterX * (speed * 0.007f);
+                    NPC.velocity.Y = NPC.velocity.Y + targetCenterY * (speed * 0.007f);
                 }
-                if (NPC.ai[0] > 200f)
+                if (Main.player[NPC.target].dead)
                 {
-                    NPC.ai[0] = -200f;
+                    targetCenterX = NPC.direction * 4f / 2f;
+                    targetCenterY = -4f / 2f;
                 }
-            }
-            if (num152 < 150f)
-            {
-                NPC.velocity.X = NPC.velocity.X + targetCenterX * (speed * 0.007f);
-                NPC.velocity.Y = NPC.velocity.Y + targetCenterY * (speed * 0.007f);
-            }
-            if (Main.player[NPC.target].dead)
-            {
-                targetCenterX = NPC.direction * 4f / 2f;
-                targetCenterY = -4f / 2f;
-            }
-            if (NPC.velocity.X < targetCenterX)
-            {
-                NPC.velocity.X = NPC.velocity.X + (speed * 0.02f);
-                if (NPC.velocity.X < 0f && targetCenterX > 0f)
+                if (NPC.velocity.X < targetCenterX)
                 {
                     NPC.velocity.X = NPC.velocity.X + (speed * 0.02f);
+                    if (NPC.velocity.X < 0f && targetCenterX > 0f)
+                    {
+                        NPC.velocity.X = NPC.velocity.X + (speed * 0.02f);
+                    }
                 }
-            }
-            else if (NPC.velocity.X > targetCenterX)
-            {
-                NPC.velocity.X = NPC.velocity.X - (speed * 0.02f);
-                if (NPC.velocity.X > 0f && targetCenterX < 0f)
+                else if (NPC.velocity.X > targetCenterX)
                 {
                     NPC.velocity.X = NPC.velocity.X - (speed * 0.02f);
+                    if (NPC.velocity.X > 0f && targetCenterX < 0f)
+                    {
+                        NPC.velocity.X = NPC.velocity.X - (speed * 0.02f);
+                    }
                 }
-            }
-            if (NPC.velocity.Y < targetCenterY)
-            {
-                NPC.velocity.Y = NPC.velocity.Y + (speed * 0.02f);
-                if (NPC.velocity.Y < 0f && targetCenterY > 0f)
+                if (NPC.velocity.Y < targetCenterY)
                 {
                     NPC.velocity.Y = NPC.velocity.Y + (speed * 0.02f);
+                    if (NPC.velocity.Y < 0f && targetCenterY > 0f)
+                    {
+                        NPC.velocity.Y = NPC.velocity.Y + (speed * 0.02f);
+                    }
                 }
-            }
-            else if (NPC.velocity.Y > targetCenterY)
-            {
-                NPC.velocity.Y = NPC.velocity.Y - (speed * 0.02f);
-                if (NPC.velocity.Y > 0f && targetCenterY < 0f)
+                else if (NPC.velocity.Y > targetCenterY)
                 {
                     NPC.velocity.Y = NPC.velocity.Y - (speed * 0.02f);
+                    if (NPC.velocity.Y > 0f && targetCenterY < 0f)
+                    {
+                        NPC.velocity.Y = NPC.velocity.Y - (speed * 0.02f);
+                    }
                 }
+                var num157 = 0.7f;
+                if (NPC.collideX)
+                {
+                    NPC.netUpdate = true;
+                    NPC.velocity.X = NPC.oldVelocity.X * -num157;
+                    if (NPC.direction == -1 && NPC.velocity.X > 0f && NPC.velocity.X < 2f)
+                    {
+                        NPC.velocity.X = 2f;
+                    }
+                    if (NPC.direction == 1 && NPC.velocity.X < 0f && NPC.velocity.X > -2f)
+                    {
+                        NPC.velocity.X = -2f;
+                    }
+                }
+                if (NPC.collideY)
+                {
+                    NPC.netUpdate = true;
+                    NPC.velocity.Y = NPC.oldVelocity.Y * -num157;
+                    if (NPC.velocity.Y > 0f && NPC.velocity.Y < 1.5)
+                    {
+                        NPC.velocity.Y = 2f;
+                    }
+                    if (NPC.velocity.Y < 0f && NPC.velocity.Y > -1.5)
+                    {
+                        NPC.velocity.Y = -2f;
+                    }
+                }
+                if (Main.player[NPC.target].dead)
+                {
+                    NPC.velocity.Y = NPC.velocity.Y - 0.02f * 2f;
+                    if (NPC.timeLeft > 10)
+                    {
+                        NPC.timeLeft = 10;
+                    }
+                }
+                //if (((NPC.velocity.X > 0f && NPC.oldVelocity.X < 0f) || (NPC.velocity.X < 0f && NPC.oldVelocity.X > 0f) || (NPC.velocity.Y > 0f && NPC.oldVelocity.Y < 0f) || (NPC.velocity.Y < 0f && NPC.oldVelocity.Y > 0f)) && !NPC.justHit)
+                //{
+                //    NPC.netUpdate = true;
+                //    return;
+                //}
             }
-            var num157 = 0.7f;
-            if (NPC.collideX)
-            {
-                NPC.netUpdate = true;
-                NPC.velocity.X = NPC.oldVelocity.X * -num157;
-                if (NPC.direction == -1 && NPC.velocity.X > 0f && NPC.velocity.X < 2f)
-                {
-                    NPC.velocity.X = 2f;
-                }
-                if (NPC.direction == 1 && NPC.velocity.X < 0f && NPC.velocity.X > -2f)
-                {
-                    NPC.velocity.X = -2f;
-                }
-            }
-            if (NPC.collideY)
-            {
-                NPC.netUpdate = true;
-                NPC.velocity.Y = NPC.oldVelocity.Y * -num157;
-                if (NPC.velocity.Y > 0f && NPC.velocity.Y < 1.5)
-                {
-                    NPC.velocity.Y = 2f;
-                }
-                if (NPC.velocity.Y < 0f && NPC.velocity.Y > -1.5)
-                {
-                    NPC.velocity.Y = -2f;
-                }
-            }
-            if (Main.player[NPC.target].dead)
-            {
-                NPC.velocity.Y = NPC.velocity.Y - 0.02f * 2f;
-                if (NPC.timeLeft > 10)
-                {
-                    NPC.timeLeft = 10;
-                }
-            }
-            //if (((NPC.velocity.X > 0f && NPC.oldVelocity.X < 0f) || (NPC.velocity.X < 0f && NPC.oldVelocity.X > 0f) || (NPC.velocity.Y > 0f && NPC.oldVelocity.Y < 0f) || (NPC.velocity.Y < 0f && NPC.oldVelocity.Y > 0f)) && !NPC.justHit)
-            //{
-            //    NPC.netUpdate = true;
-            //    return;
-            //}
             #endregion AI
         }
         if (NPC.ai[1] == 1)
@@ -206,6 +239,7 @@ internal class Mosquito : ModNPC
             {
                 NPC.ai[1] = 0;
                 NPC.ai[2] = 0;
+                NPC.ai[3] = 0;
                 return;
             }
             float speed = 0.5f;
