@@ -1,6 +1,7 @@
 using Avalon.Common.Players;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace Avalon.Common
         {
             if (Player.whoAmI == Main.myPlayer && ModContent.GetInstance<AvalonClientConfig>().BiomeParticlesEnabled)
             {
+                /*if (ExxoAvalonOrigins.Depths != null && (bool)ExxoAvalonOrigins.Depths.Call("InDepths", Player)) //for the future
+                {
+                    return;
+                }*/
+
                 if (Player.position.Y > (Main.UnderworldLayer - 100) * 16)
                 {
                     Particle particleType = new HellEmbers();

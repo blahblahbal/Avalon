@@ -6,6 +6,13 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 public class PygmyShield : ModItem
 {
+	/*public override void SetStaticDefaults() //For the Future
+	{
+		if (ExxoAvalonOrigins.Depths == null)
+			return;
+		ExxoAvalonOrigins.Depths.Call("CobaltShieldOnlyItem", Type, true);
+	}*/ 
+
     public override void SetDefaults()
     {
         Item.defense = 3;
