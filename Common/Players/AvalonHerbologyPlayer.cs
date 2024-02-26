@@ -35,15 +35,15 @@ public class AvalonHerbologyPlayer : ModPlayer
           //{ ModContent.ItemType<Barfbush>(), false },
           //{ ModContent.ItemType<Holybird>(), false },
     //};
-    public HerbTier Tier { get; private set; }
+    public HerbTier Tier { get; set; }
     public bool Novice = true;
     public bool Apprentice = false;
     public bool Expert = false;
     public bool Master = false;
-    public int HerbTotal { get; private set; }
+    public int HerbTotal { get; set; }
     public int HerbX { get; set; }
     public int HerbY { get; set; }
-    public int PotionTotal { get; private set; }
+    public int PotionTotal { get; set; }
 
     public bool DisplayHerbologyMenu { get; set; }
 
