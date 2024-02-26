@@ -24,7 +24,7 @@ public class MineralSlime : ModNPC
     {
         new Color(61, 164, 196), new Color(240, 91, 51), new Color(147, 83, 119),
         new Color(157, 210, 144), new Color(248, 113, 227), new Color(94, 199, 197),
-        new Color(225, 85, 152), new Color(190, 187, 220), new Color(214, 191, 43)
+        new Color(221, 85, 152), new Color(190, 187, 220), new Color(214, 191, 43)
     };
     int[] OreDusts =
     {
