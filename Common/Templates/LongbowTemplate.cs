@@ -189,6 +189,11 @@ namespace Avalon.Common.Templates
             AmmoProj.type = ammo;
             SpriteEffects Flip = Projectile.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             Texture2D texture = TextureAssets.Projectile[ammo].Value;
+            if (texture == null)
+            {
+                Main.instance.LoadProjectile(ammo);
+                texture = TextureAssets.Projectile[ammo].Value;
+            }
             int frameHeight = texture.Height / Main.projFrames[ammo];
             Rectangle frame = new Rectangle(0, frameHeight * 0, texture.Width, frameHeight);
             Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -3) + 8 + Offset.X, Offset.Y).RotatedBy(Projectile.rotation);

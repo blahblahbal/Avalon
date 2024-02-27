@@ -482,72 +482,7 @@ namespace Avalon.Common
         {
             for (int i = 0; i < inventory.Length; i++)
             {
-                switch (inventory[i].type)
-                {
-                    case 2749:
-                        inventory[i].SetDefaults(ModContent.ItemType<ShadowPhone>());
-                        break;
-                    case 2750:
-                        inventory[i].SetDefaults(ModContent.ItemType<RingofArrogance>());
-                        break;
-                    case 2751:
-                        inventory[i].SetDefaults(ModContent.ItemType<AuraPotion>());
-                        break;
-                    case 2752:
-                        inventory[i].SetDefaults(ModContent.ItemType<GoblinArmyKnife>());
-                        break;
-                    case 2753:
-                        inventory[i].SetDefaults(ModContent.ItemType<GoblinToolbelt>());
-                        break;
-                    case 2754:
-                        inventory[i].SetDefaults(ModContent.ItemType<AncientHeadpiece>());
-                        break;
-                    case 2755:
-                        inventory[i].SetDefaults(ModContent.ItemType<AncientBodyplate>());
-                        break;
-                    case 2756:
-                        inventory[i].SetDefaults(ModContent.ItemType<AncientLeggings>());
-                        break;
-                    case 2757:
-                        inventory[i].SetDefaults(ModContent.ItemType<Timechanger>());
-                        break;
-                    case 2758:
-                        inventory[i].SetDefaults(ModContent.ItemType<ShockwavePotion>());
-                        break;
-                    case 2759:
-                        inventory[i].SetDefaults(ModContent.ItemType<ReflexCharm>());
-                        break;
-                    case 2760:
-                        inventory[i].SetDefaults(ModContent.ItemType<ReflexShield>());
-                        break;
-                    case 2761:
-                        //inventory[i].SetDefaults(ModContent.ItemType<QuadWhip>());
-                        break;
-                    case 2762:
-                        inventory[i].SetDefaults(ModContent.ItemType<InertiaBoots>());
-                        break;
-                    case 2763:
-                        inventory[i].SetDefaults(ModContent.ItemType<FrostGauntlet>());
-                        break;
-                    case 2764:
-                        inventory[i].SetDefaults(ModContent.ItemType<HadesCross>());
-                        break;
-                    case 2765:
-                        //inventory[i].SetDefaults(ModContent.ItemType<ManaCompromise>());
-                        break;
-                    case 2766:
-                        inventory[i].SetDefaults(ModContent.ItemType<BestialBand>());
-                        break;
-                    case 2767:
-                        inventory[i].SetDefaults(ModContent.ItemType<LifeDew>());
-                        break;
-                    case 2768:
-                        //inventory[i].SetDefaults(ModContent.ItemType<ElixirofLife>());
-                        break;
-                    case 2769:
-                        inventory[i].SetDefaults(ModContent.ItemType<FreezeBolt>());
-                        break;
-                }
+                inventory[i].SetDefaults(Data.Sets.Item.OldAvalonItemIDsTo144Names[inventory[i].type]);
             }
         }*/
     }
