@@ -20,6 +20,12 @@ using Avalon.Items.Armor.Hardmode;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Magic.Hardmode;
+using Terraria.ModLoader.Core;
+using Terraria.ModLoader.Exceptions;
+using Terraria.Social;
+using Terraria.Utilities;
+using System.Security.Cryptography;
+using System.Reflection;
 
 namespace Avalon.Common
 {
@@ -27,7 +33,7 @@ namespace Avalon.Common
     {
         /*private static ILog Avalog => ModContent.GetInstance<ExxoAvalonOrigins>().Logger;
 
-        private void TestError()
+        private static void TestError()
         {
             Avalog.Debug("Avalon: An error occured when transporting Avalon files to tML");
         }
@@ -39,6 +45,16 @@ namespace Avalon.Common
             {
                 try
                 {
+                    string AvalonPurgatory = Path.Combine(Main.SavePath + @"\Mods" + @"\Avalon Purgatory");
+                    if (Directory.Exists(AvalonPurgatory))
+                    {
+                        DirectoryInfo DirInf = new(AvalonPurgatory);
+                        foreach (FileInfo fileInf in DirInf.GetFiles())
+                        {
+                            fileInf.Delete();
+                        }
+                        Directory.Delete(AvalonPurgatory);
+                    }
                     string MyGamesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games");
                     string ExxoAvalonV2Path = Path.Combine(MyGamesPath, "Exxo Avalon V2.0");
                     string ExxoAvalonV2Player = Path.Combine(ExxoAvalonV2Path, "Players");
@@ -51,32 +67,28 @@ namespace Avalon.Common
                             {
                                 for (int fileCount = 0; fileCount < Directory.GetFiles(ExxoAvalonV2Player, "*.plr").Length; fileCount++)
                                 {
+
                                     string[] filePathArray = Directory.GetFiles(ExxoAvalonV2Player, "*.plr");
                                     string fileNameRaw = Path.GetFileNameWithoutExtension(filePathArray[fileCount]);
                                     string fileName = Path.Combine(fileNameRaw + ".plr");
-                                    if (Path.HasExtension(Path.Combine(PlayerPath + fileName)))
+
+                                    Directory.CreateDirectory(AvalonPurgatory);
+                                    if (Directory.Exists(AvalonPurgatory))
                                     {
-                                        Avalog.Debug("Avalon: Player already exists at: " + Path.Combine(PlayerPath + fileName));
-                                        string AvalonPurgatory = Path.Combine(Main.SavePath + @"\Mods" + @"\Avalon Purgatory");
-                                        Directory.CreateDirectory(AvalonPurgatory);
-                                        if (Directory.Exists(AvalonPurgatory))
+                                        File.Copy(filePathArray[fileCount], Path.Combine(AvalonPurgatory + @"\" + fileName), false);
+                                        if (Path.HasExtension(Path.Combine(AvalonPurgatory + @"\" + fileName)))
                                         {
-                                            File.Copy(filePathArray[fileCount], Path.Combine(AvalonPurgatory + @"\" + fileName), false);
-                                            if (Path.HasExtension(Path.Combine(AvalonPurgatory + @"\" + fileName)))
-                                            {
-                                                PlayerFileData plr = Player.GetFileData(Path.Combine(AvalonPurgatory + @"\" + fileName), false);
-                                                plr.Rename("ExxoAvalonV2:" + plr.Name);
-                                                File.Move(Path.Combine(AvalonPurgatory + @"\" + fileName), Path.Combine(PlayerPath + "ExxoAvalon" + fileNameRaw + ".plr"));
-                                                File.Move(Path.Combine(AvalonPurgatory + @"\" + fileNameRaw + ".tplr"), Path.Combine(PlayerPath + "ExxoAvalon" + fileNameRaw + ".tplr"));
-                                                File.Delete(Path.Combine(AvalonPurgatory + @"\" + fileName + ".bak"));
-                                            }
+                                            //PlayerFileData plr = Player.GetFileData(Path.Combine(AvalonPurgatory + @"\" + fileName), false);
+                                            //plr.Rename("ExxoAvalonV2:" + plr.Name);
+                                           
+                                            Player.SavePlayer(GetFileData(Path.Combine(AvalonPurgatory + @"\" + fileName), false));
+                                            File.Move(Path.Combine(AvalonPurgatory + @"\" + fileName), Path.Combine(PlayerPath + "ExxoAvalon" + fileNameRaw + ".plr"), true);
+                                            File.Move(Path.Combine(AvalonPurgatory + @"\" + fileNameRaw + ".tplr"), Path.Combine(PlayerPath + "ExxoAvalon" + fileNameRaw + ".tplr"), true);
+                                            File.Delete(Path.Combine(AvalonPurgatory + @"\" + fileName + ".bak"));
                                         }
-                                        Directory.Delete(AvalonPurgatory);
                                     }
-                                    else
-                                    {
-                                        File.Copy(filePathArray[fileCount], Path.Combine(PlayerPath + fileName), false);
-                                    }
+                                    Directory.Delete(AvalonPurgatory);
+
                                     Avalog.Debug("Avalon: PLAYER SUCSESS!, Path: " + filePathArray[fileCount]);
                                 }
                                
@@ -111,59 +123,70 @@ namespace Avalon.Common
             }
         }
 
-        public static Player LoadPlayer(string playerPath, bool decryptedCopy = false)
+
+        public static PlayerFileData GetFileData(string file, bool cloudSave)
         {
-            //if (Main.rand == null)
-            //{
-            //    Main.rand = new Random((int)DateTime.Now.Ticks);
-            //}
-            Player player = new Player();
-            try
+            if (file == null || (cloudSave && SocialAPI.Cloud == null))
             {
-                string text = playerPath + ".dat";
-                Player result;
-                if (!decryptedCopy)
+                return null;
+            }
+            PlayerFileData playerFileData = LoadPlayer(file);
+            if (playerFileData.Player != null)
+            {
+                if (playerFileData.Player.loadStatus != 0 && playerFileData.Player.loadStatus != 1)
                 {
-                    //bool flag = Player.DecryptFile(playerPath, text);
-                    if (true)
+                    CustomModDataException customDataFail = playerFileData.customDataFail;
+                    if (FileUtilities.Exists(file + ".bak", cloudSave))
                     {
-                        using (FileStream fileStream = new FileStream(playerPath, FileMode.Open))
-                        {
-                            while (fileStream.Position < fileStream.Length && fileStream.ReadByte() == 0)
-                            {
-                            }
-                            if (fileStream.Position == fileStream.Length)
-                            {
-                                player.loadStatus = 3;
-                            }
-                            else
-                            {
-                                player.loadStatus = 4;
-                            }
-                            string[] array = playerPath.Split(new char[]
-                            {
-                                Path.DirectorySeparatorChar
-                            });
-                            player.name = array[array.Length - 1].Split(new char[]
-                            {
-                                '.'
-                            })[0];
-                            result = player;
-                            return result;
-                        }
+                        FileUtilities.Move(file + ".bak", file, cloudSave);
+                        //PlayerIO.LoadBackup(file, cloudSave);
                     }
-                }
-                using (FileStream fileStream2 = new FileStream(text, FileMode.Open))
-                {
-                    using (BinaryReader binaryReader = new BinaryReader(fileStream2))
+                    playerFileData = LoadPlayer(file);
+                    if (playerFileData.Player == null)
                     {
+                        return null;
+                    }
+                    playerFileData.customDataFail = customDataFail;
+                }
+                return playerFileData;
+            }
+            return null;
+        }
+
+        public static PlayerFileData LoadPlayer(string playerPath)
+        {
+            PlayerFileData playerFileData = new PlayerFileData(playerPath, false);
+            if (Main.rand == null)
+            {
+                Main.rand = new UnifiedRandom((int)DateTime.Now.Ticks);
+            }
+            byte[] plrData = FileUtilities.ReadAllBytes(playerPath, false);
+            byte[] tplrData = null; //Assembly.GetExecutingAssembly().GetType(name: "SystemIO").ReadDataBytes(playerPath, false);
+            return LoadPlayer2(playerFileData, plrData, tplrData);
+        }
+
+        internal static byte[] ENCRYPTION_KEY = new UnicodeEncoding().GetBytes("h3y_gUyZ");
+
+        public static PlayerFileData LoadPlayer2(PlayerFileData playerFileData, byte[] plrData, byte[] tplrData)
+        {
+            string playerPath = playerFileData.Path;
+            Player player = new Player();
+            bool gotToReadName = false;
+            using (new Main.CurrentPlayerOverride(player))
+            {
+                try
+                {
+                    RijndaelManaged rijndaelManaged = new RijndaelManaged();
+                    rijndaelManaged.Padding = PaddingMode.None;
+                    using (MemoryStream stream = new MemoryStream(plrData))
+                    {
+                        using CryptoStream input = new CryptoStream(stream, rijndaelManaged.CreateDecryptor(ENCRYPTION_KEY, ENCRYPTION_KEY), CryptoStreamMode.Read);
+                        using BinaryReader binaryReader = new BinaryReader(input);
                         int num = binaryReader.ReadInt32();
                         if (num > Main.curRelease)
                         {
                             player.loadStatus = 1;
                             player.name = binaryReader.ReadString();
-                            result = player;
-                            return result;
                         }
                         player.name = binaryReader.ReadString();
                         if (num >= 10)
@@ -308,7 +331,7 @@ namespace Avalon.Common
                             }
                             if (num >= 58)
                             {
-                                LoadOldInventory(player.inventory);
+                                //LoadOldInventory(player.inventory);
                                 for (int k = 0; k < 58; k++)
                                 {
                                     // old code
@@ -328,8 +351,8 @@ namespace Avalon.Common
                             }
                             if (num >= 58)
                             {
-                                LoadOldInventory(player.bank.item);
-                                LoadOldInventory(player.bank2.item);
+                                //LoadOldInventory(player.bank.item);
+                                //LoadOldInventory(player.bank2.item);
                                 //for (int m = 0; m < 40; m++)
                                 //{
                                 //    player.bank.item[m].netDefaults(binaryReader.ReadInt32());
@@ -447,34 +470,33 @@ namespace Avalon.Common
                             player.lavaTime = player.lavaMax;
                         }
                         binaryReader.Close();
+                        player.PlayerFrame();
+                        player.loadStatus = 0;
+                        playerFileData.Player = player;
+                        return playerFileData;
                     }
                 }
-                player.PlayerFrame();
-                player.loadStatus = 0;
-                result = player;
-                return result;
-            }
-            catch
-            {
-            }
-            Player player2 = new Player();
-            player2.loadStatus = 2;
-            if (player.name != "")
-            {
-                player2.name = player.name;
-            }
-            else
-            {
-                string[] array2 = playerPath.Split(new char[]
+                catch (CustomModDataException e)
                 {
-                    Path.DirectorySeparatorChar
-                });
-                player.name = array2[array2.Length - 1].Split(new char[]
+                    //playerFileData.customDataFail = e;
+                    TestError();
+                }
+                catch
                 {
-                    '.'
-                })[0];
+                }
+                Player player2 = new Player();
+                player2.loadStatus = 2;
+                if (gotToReadName && player.name.Length <= Player.nameLen)
+                {
+                    player2.name = player.name;
+                }
+                else
+                {
+                    player2.name = playerPath.Replace('/', Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar)[^1].Split('.')[0];
+                }
+                playerFileData.Player = player2;
+                return playerFileData;
             }
-            return player2;
         }
 
         // NOT FINISHED (DUH)
@@ -482,7 +504,7 @@ namespace Avalon.Common
         {
             for (int i = 0; i < inventory.Length; i++)
             {
-                inventory[i].SetDefaults(Data.Sets.Item.OldAvalonItemIDsTo144Names[inventory[i].type]);
+                inventory[i].SetDefaults(Data.Sets.Item.OldAvalonItemConversion[inventory[i].type]);
             }
         }*/
     }

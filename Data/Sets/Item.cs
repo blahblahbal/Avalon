@@ -163,7 +163,7 @@ namespace Avalon.Data.Sets
             ModContent.ItemType<WisdomPotion>(), ItemID.WrathPotion
         );
 
-        public static Dictionary<int, int> OldAvalonItemIDsTo144Names = new Dictionary<int, int>()
+        public static Dictionary<int, int> OldAvalonItemConversion = new Dictionary<int, int>()
         {
             {2749,ItemType<ShadowPhoneHome>()},
             {2750,ItemType<RingofArrogance>()},
