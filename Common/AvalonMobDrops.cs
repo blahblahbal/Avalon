@@ -90,11 +90,39 @@ public class AvalonMobDrops : GlobalNPC
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RottenFlesh>(), 15));
         }
-
+        #region dungeon vanity
+        if (npc.type is NPCID.HellArmoredBones or NPCID.HellArmoredBonesSpikeShield or NPCID.HellArmoredBonesMace
+            or NPCID.HellArmoredBonesSword)
+        {
+            npcLoot.Add(ItemDropRule.OneFromOptions(55, ModContent.ItemType<HellArmoredHelmet>(),
+                ModContent.ItemType<HellBlazingChestplate>(), ModContent.ItemType<HellArmoredGreaves>()));
+        }
+        if (npc.type is NPCID.RustyArmoredBonesAxe or NPCID.RustyArmoredBonesFlail or NPCID.RustyArmoredBonesSword
+            or NPCID.RustyArmoredBonesSwordNoArmor)
+        {
+            npcLoot.Add(ItemDropRule.OneFromOptions(55, ModContent.ItemType<RustyHelmet>(),
+                ModContent.ItemType<RustedChestplate>(), ModContent.ItemType<RustedArmyGreaves>()));
+        }
+        if (npc.type is NPCID.BlueArmoredBones or NPCID.BlueArmoredBonesMace or NPCID.BlueArmoredBonesNoPants
+            or NPCID.BlueArmoredBonesSword)
+        {
+            npcLoot.Add(ItemDropRule.OneFromOptions(55, ModContent.ItemType<DungeonHelmet>(),
+                ModContent.ItemType<DungeonPlateMail>(), ModContent.ItemType<DungeonPants>()));
+        }
+        if (npc.type == NPCID.DungeonSpirit)
+        {
+            npcLoot.Add(ItemDropRule.OneFromOptions(40, ModContent.ItemType<PhantomMask>(),
+                ModContent.ItemType<PhantomShirt>(), ModContent.ItemType<PhantomPants>()));
+        }
+        #endregion
+        
         npcLoot.Add(ItemDropRule.ByCondition(inJungle, ModContent.ItemType<EggmanTrophy>(), 750));
 
         switch (npc.type)
         {
+            case NPCID.Mothron:
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrokenVigilanteTome>(), 5));
+                break;
             case NPCID.RedDevil:
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ForsakenRelic>(), 20));
                 break;

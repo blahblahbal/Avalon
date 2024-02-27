@@ -12,7 +12,7 @@ class IridiumGreatsword : ModItem
         Item.height = 36;
         Item.damage = 30;
         Item.crit = 6;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.autoReuse = true;
         Item.useTurn = true;
         //Item.scale = 1.4f;

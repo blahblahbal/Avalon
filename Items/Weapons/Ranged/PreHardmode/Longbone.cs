@@ -21,7 +21,7 @@ class Longbone : ModItem
         Item.knockBack = 2.3f;
         Item.shoot = ProjectileID.WoodenArrowFriendly;
         Item.useStyle = ItemUseStyleID.Shoot;
-        Item.rare = ItemRarityID.Orange;
+        Item.rare = ItemRarityID.Green;
         Item.value = Item.sellPrice(0, 0, 50);
 
         Item.damage = 33;

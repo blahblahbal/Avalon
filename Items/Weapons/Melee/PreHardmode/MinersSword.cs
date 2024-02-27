@@ -13,7 +13,7 @@ public class MinersSword : ModItem
     {
         Item.damage = 20;
         Item.autoReuse = true;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.Size = new Vector2(28);
         Item.useTime = 23;
         Item.knockBack = 5.5f;

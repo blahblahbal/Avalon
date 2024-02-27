@@ -15,7 +15,7 @@ class IridiumPickaxe : ModItem
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.scale = 1f;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.pick = 85;
         Item.useTime = 15;
         Item.knockBack = 2.6f;

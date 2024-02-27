@@ -20,7 +20,7 @@ class BloodBarrage : ModItem
         Item.scale = 0.9f;
         Item.shootSpeed = 12f;
         Item.mana = 8;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.Size = new Vector2(32);
         Item.knockBack = 4f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.BloodBlob>();

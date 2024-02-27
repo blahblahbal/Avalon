@@ -17,7 +17,7 @@ class IridiumHamaxe : ModItem
         //Item.scale = 1.2f;
         Item.axe = 22;
         Item.crit += 4;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.useTime = 13;
         Item.knockBack = 2.5f;
         Item.DamageType = DamageClass.Melee;

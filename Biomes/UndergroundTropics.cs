@@ -10,7 +10,7 @@ public class UndergroundTropics : ModBiome
 {
     public override SceneEffectPriority Priority => SceneEffectPriority.BiomeMedium;
     public override string BestiaryIcon => ModContent.GetInstance<Tropics>().BestiaryIcon;
-    public override string BackgroundPath => ModContent.GetInstance<Tropics>().BackgroundPath;
+    public override string BackgroundPath => base.BackgroundPath;
     public override int BiomeTorchItemType => ModContent.ItemType<Items.Placeable.Furniture.TropicsTorch>();
     public override string MapBackground => BackgroundPath;
     public override int Music
