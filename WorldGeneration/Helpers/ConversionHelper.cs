@@ -118,6 +118,10 @@ public static class ConversionHelper
             WorldGen.TryKillingTreesAboveIfTheyWouldBecomeInvalid(x, y, tileType);
 
         Main.tile[x, y].TileType = (ushort)tileType;
+        if (Main.netMode != NetmodeID.SinglePlayer)
+        {
+            NetMessage.SendData(MessageID.TileSquare, -1, -1, null, x, y, 1, 1, 0);
+        }
         if (tileType == ModContent.TileType<Ickgrass>() && Main.tile[x, y - 1].TileType == TileID.Pumpkins)
         {
             WorldGen.KillTile(x, y - 1);

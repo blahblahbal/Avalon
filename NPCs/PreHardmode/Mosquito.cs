@@ -13,6 +13,7 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.Audio;
+using System.IO;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -37,6 +38,7 @@ public class Mosquito : ModNPC
         NPC.HitSound = SoundID.NPCHit32;
         NPC.DeathSound = SoundID.NPCDeath35;
         NPC.value = 200;
+        NPC.alpha = 255;
         //AnimationType = NPCID.Hornet;
         NPC.knockBackResist = 1f;
     }
@@ -66,6 +68,8 @@ public class Mosquito : ModNPC
         NPC.ai[0] = 0;
         SoundEngine.PlaySound(SoundID.Item3, NPC.position);
     }
+
+
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MosquitoProboscis>(), 2));
@@ -102,8 +106,51 @@ public class Mosquito : ModNPC
         Main.EntitySpriteDraw(TextureAssets.Npc[Type].Value, NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, TextureAssets.Npc[Type].Value.Size() / new Vector2(4,12),NPC.scale,NPC.spriteDirection == -1? SpriteEffects.None : SpriteEffects.FlipHorizontally);
         return false;
     }
+    int J;
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        J = reader.ReadInt32();
+        NPC.alpha = reader.ReadInt32();
+    }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(J);
+        writer.Write(NPC.alpha);
+    }
     public override void AI()
     {
+        NPC.ai[1]++;
+        if (NPC.ai[1] == 1)
+        {
+            J = Main.rand.Next(3);
+        }
+        if (NPC.ai[1] == 2)
+        {
+            NPC.alpha = 0;
+            if (Main.remixWorld && !Main.getGoodWorld) J = 2;
+            if (J == 1)
+            {
+                NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
+                NPC.defense = (int)(NPC.defense * 0.8f);
+                NPC.damage = (int)(NPC.damage * 0.8f);
+                NPC.scale *= 0.9f;
+                NPC.knockBackResist *= 1.2f;
+                NPC.value *= 0.8f;
+            }
+            if (J == 2)
+            {
+                NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
+                NPC.defense = (int)(NPC.defense * 1.2f);
+                NPC.damage = (int)(NPC.damage * 1.2f);
+                NPC.scale *= 1.15f;
+                NPC.knockBackResist *= 0.9f;
+                NPC.value *= 1.2f;
+            }
+            NPC.life = NPC.lifeMax;
+            NPC.Size *= NPC.scale;
+            NPC.netUpdate = true;
+        }
+
         NPC.ai[0]++;
         NPC.spriteDirection = Math.Sign(NPC.velocity.X);
         if (!NPC.HasValidTarget)

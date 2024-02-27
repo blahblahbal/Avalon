@@ -295,7 +295,7 @@ namespace Avalon.Data.Sets
             { 2876, ItemType<Sporalash>() },
             //{ 2877, ItemType<Lifestone>() },
             //{ 2878, ItemType<PoisonSpike>() },
-            //{ 2879, ItemType<MusicBoxEssence>() }, // maybe set to jukebox?
+            { 2879, ItemType<Jukebox>() }, // music box essence
             //{ 2880, ItemType<Venoshock>() }, // set to air? or make venoshock not jank
             { 2881, ItemType<DesertHorn>() },
             { 2882, ItemType<CursedFlamelash>() },

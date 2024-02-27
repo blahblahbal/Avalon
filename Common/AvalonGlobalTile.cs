@@ -175,7 +175,6 @@ public class AvalonGlobalTile : GlobalTile
                             stack = 2;
                         }
                         int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, drop, stack);
-                        Main.NewText(stack);
                         if (Main.netMode == NetmodeID.Server)
                         {
                             NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);

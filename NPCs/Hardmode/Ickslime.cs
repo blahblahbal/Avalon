@@ -10,6 +10,7 @@ using Avalon.Common.Players;
 using System;
 using Terraria.Localization;
 using Avalon.Common;
+using System.IO;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -48,7 +49,7 @@ public class Ickslime : ModNPC
         NPC.damage = 57;
         NPC.lifeMax = 186;
         NPC.defense = 30;
-        NPC.alpha = 55;
+        NPC.alpha = 255;
         NPC.width = 40;
         NPC.aiStyle = 1;
         NPC.scale = 1.1f;
@@ -98,16 +99,32 @@ public class Ickslime : ModNPC
             !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
     }
     bool spawned;
+    int J;
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        J = reader.ReadInt32();
+        NPC.alpha = reader.ReadInt32();
+    }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(J);
+        writer.Write(NPC.alpha);
+    }
     public override void AI()
     {
-        if (!spawned)
+        NPC.ai[3]++;
+        if (NPC.ai[3] == 1)
         {
-            spawned = true;
-            int J = Main.rand.Next(0, 3);
+            J = Main.rand.Next(3);
+        }
+        if (NPC.ai[3] == 2)
+        {
+            NPC.alpha = 55;
             if (J == 1)
             {
                 NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
                 NPC.defense = (int)(NPC.defense * 0.8f);
+                NPC.damage = (int)(NPC.damage * 0.8f);
                 NPC.scale *= 0.85f;
                 NPC.knockBackResist *= 1.2f;
                 NPC.value *= 0.8f;
@@ -116,6 +133,7 @@ public class Ickslime : ModNPC
             {
                 NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
                 NPC.defense = (int)(NPC.defense * 1.1f);
+                NPC.damage = (int)(NPC.damage * 1.2f);
                 NPC.scale *= 1.15f;
                 NPC.knockBackResist *= 0.9f;
                 NPC.value *= 1.2f;

@@ -8264,10 +8264,75 @@ Mods: {
 				Tooltip: ""
 			}
 
-            UltrabrightRazorbladeBullet: {
-                DisplayName: Ultrabright Razorblade Bullet
-                Tooltip: "'Randomizer be like'"
-            }
+			UltrabrightRazorbladeBullet: {
+				DisplayName: Ultrabright Razorblade Bullet
+				Tooltip: "'Randomizer be like'"
+			}
+
+			BrokenVigilanteTome: {
+				DisplayName: Broken Vigilante Tome
+				Tooltip: ""
+			}
+
+			DungeonHelmet: {
+				DisplayName: Dungeon Helmet
+				Tooltip: ""
+			}
+
+			DungeonPants: {
+				DisplayName: Dungeon Pants
+				Tooltip: ""
+			}
+
+			DungeonPlateMail: {
+				DisplayName: Dungeon Plate Mail
+				Tooltip: ""
+			}
+
+			HellArmoredGreaves: {
+				DisplayName: Hell Armored Greaves
+				Tooltip: ""
+			}
+
+			HellArmoredHelmet: {
+				DisplayName: Hell Armored Helmet
+				Tooltip: ""
+			}
+
+			HellBlazingChestplate: {
+				DisplayName: Hell Blazing Chestplate
+				Tooltip: ""
+			}
+
+			PhantomMask: {
+				DisplayName: Phantom Mask
+				Tooltip: ""
+			}
+
+			PhantomPants: {
+				DisplayName: Phantom Pants
+				Tooltip: ""
+			}
+
+			PhantomShirt: {
+				DisplayName: Phantom Shirt
+				Tooltip: ""
+			}
+
+			RustedArmyGreaves: {
+				DisplayName: Rusted Army Greaves
+				Tooltip: ""
+			}
+
+			RustedChestplate: {
+				DisplayName: Rusted Chestplate
+				Tooltip: ""
+			}
+
+			RustyHelmet: {
+				DisplayName: Rusty Helmet
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8515,6 +8580,8 @@ Mods: {
 			CannonballTrap.DisplayName: Cannonball Trap
 			CannonballTrapStarter.DisplayName: Cannonball Trap Starter
 			HallowedClaymore.DisplayName: Hallowed Claymore
+			UltrabrightRazorbladeBullet.DisplayName: Ultrabright Razorblade Bullet
+			UltrabrightRazorbladeBulletTyphoon.DisplayName: Ultrabright Razorblade Bullet Typhoon
 		}
 
 		NPCs: {

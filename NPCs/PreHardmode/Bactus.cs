@@ -9,6 +9,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.DataStructures;
 using Avalon.Common.Players;
 using Terraria.Localization;
+using System.IO;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -33,6 +34,7 @@ public class Bactus : ModNPC
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.knockBackResist = 0.5f;
+        NPC.alpha = 255;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
@@ -69,6 +71,7 @@ public class Bactus : ModNPC
     //}
     bool spawned;
     public bool treeSpawn;
+    int J;
     public override void OnSpawn(IEntitySource source)
     {
         if (source is EntitySource_ShakeTree)
@@ -76,13 +79,28 @@ public class Bactus : ModNPC
             treeSpawn = true;
         }
     }
+    public override void ReceiveExtraAI(BinaryReader reader)
+    {
+        J = reader.ReadInt32();
+        treeSpawn = reader.ReadBoolean();
+        NPC.alpha = reader.ReadInt32();
+    }
+    public override void SendExtraAI(BinaryWriter writer)
+    {
+        writer.Write(J);
+        writer.Write(treeSpawn);
+        writer.Write(NPC.alpha);
+    }
     public override void AI()
     {
-        if (!spawned)
+        NPC.ai[1]++;
+        if (NPC.ai[1] == 1)
         {
-            spawned = true;
-
-            int J = Main.rand.Next(0, 3);
+            J = Main.rand.Next(3);
+        }
+        if (NPC.ai[1] == 2)
+        {
+            NPC.alpha = 0;
             if (treeSpawn && !Main.remixWorld) J = 1;
             if (Main.remixWorld && !Main.getGoodWorld) J = 2;
             if (J == 1)
