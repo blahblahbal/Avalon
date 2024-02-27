@@ -331,7 +331,6 @@ namespace Avalon.Common
                             }
                             if (num >= 58)
                             {
-                                //LoadOldInventory(player.inventory);
                                 for (int k = 0; k < 58; k++)
                                 {
                                     // old code
@@ -346,13 +345,11 @@ namespace Avalon.Common
                                     //    player.inventory[k].stack = binaryReader.ReadInt32();
                                     //    player.inventory[k].Prefix((int)binaryReader.ReadByte());
                                     //}
-
                                 }
+                                //LoadOldInventory(player.inventory);
                             }
                             if (num >= 58)
                             {
-                                //LoadOldInventory(player.bank.item);
-                                //LoadOldInventory(player.bank2.item);
                                 //for (int m = 0; m < 40; m++)
                                 //{
                                 //    player.bank.item[m].netDefaults(binaryReader.ReadInt32());
@@ -365,6 +362,8 @@ namespace Avalon.Common
                                 //    player.bank2.item[n].stack = binaryReader.ReadInt32();
                                 //    player.bank2.item[n].Prefix((int)binaryReader.ReadByte());
                                 //}
+                                //LoadOldInventory(player.bank.item);
+                                //LoadOldInventory(player.bank2.item);
                             }
                         }
                         if (num >= 11)
