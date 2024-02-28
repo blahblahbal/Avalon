@@ -134,6 +134,27 @@ public class RecipeSystem : ModSystem
         var groupMusicBoxes = new RecipeGroup(() => $"{any} Music Box", boxes);
         RecipeGroup.RegisterGroup("Avalon:MusicBoxes", groupMusicBoxes);
 
+        #region Balloons
+        var groupFartBalloons = new RecipeGroup(() => $"{any} Fart Balloon", new int[]
+        {
+            ItemID.FartInABalloon,
+            ItemID.BalloonHorseshoeFart
+        });
+        RecipeGroup.RegisterGroup("Avalon:FartBalloons", groupFartBalloons);
+        var groupRocketBalloons = new RecipeGroup(() => $"{any} Rocket Balloon", new int[]
+        {
+            ModContent.ItemType<Items.Accessories.Hardmode.RocketinaBalloon>(),
+            ModContent.ItemType<Items.Accessories.Hardmode.RocketHorseshoeBalloon>()
+        });
+        RecipeGroup.RegisterGroup("Avalon:RocketBalloons", groupRocketBalloons);
+        var groupSharkronBalloons = new RecipeGroup(() => $"{any} Sharkron Balloon", new int[]
+        {
+            ItemID.SharkronBalloon,
+            ItemID.BalloonHorseshoeSharkron
+        });
+        RecipeGroup.RegisterGroup("Avalon:SharkronBalloons", groupSharkronBalloons);
+        #endregion Balloons
+
         var groupGemStaves = new RecipeGroup(() => $"{any} Gem Staff", new int[]
         {
             ItemID.RubyStaff,

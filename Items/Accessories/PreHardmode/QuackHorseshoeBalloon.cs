@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
+[AutoloadEquip(EquipType.Balloon)]
 class QuackHorseshoeBalloon : ModItem
 {
     public override void SetDefaults()
