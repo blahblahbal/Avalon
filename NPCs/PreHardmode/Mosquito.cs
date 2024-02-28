@@ -119,12 +119,12 @@ public class Mosquito : ModNPC
     }
     public override void AI()
     {
-        NPC.ai[1]++;
-        if (NPC.ai[1] == 1)
+        NPC.ai[2]++;
+        if (NPC.ai[2] == 1)
         {
             J = Main.rand.Next(3);
         }
-        if (NPC.ai[1] == 2)
+        if (NPC.ai[2] == 2)
         {
             NPC.alpha = 0;
             if (Main.remixWorld && !Main.getGoodWorld) J = 2;

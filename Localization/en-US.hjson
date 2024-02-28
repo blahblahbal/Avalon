@@ -8696,6 +8696,8 @@ Mods: {
 			MosquitoDroopy.DisplayName: Mosquito Droopy
 			MosquitoPainted.DisplayName: Mosquito Painted
 			MosquitoSmall.DisplayName: Mosquito Small
+			RedArowana.DisplayName: Red Arowana
+			RedArowana2.DisplayName: Red Arowana2
 		}
 
 		Buffs: {
