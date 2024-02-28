@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
+[AutoloadEquip(EquipType.Shoes)]
 class BacchusBoots : ModItem
 {
     public override void SetDefaults()

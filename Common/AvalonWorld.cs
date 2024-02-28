@@ -131,6 +131,7 @@ public class AvalonWorld : ModSystem
         tag["Avalon:BismuthChandeliers"] = ModContent.GetInstance<BismuthChandelier>().Coordinates;
         tag["Avalon:BronzeChandeliers"] = ModContent.GetInstance<BronzeChandelier>().Coordinates;
         tag["Avalon:ZincChandeliers"] = ModContent.GetInstance<ZincChandelier>().Coordinates;
+        tag["Avalon:Dirtaliers"] = ModContent.GetInstance<Dirtalier>().Coordinates;
         tag["Avalon:HeartstoneChandeliers"] = ModContent.GetInstance<HeartstoneChandelier>().Coordinates;
         tag["Avalon:BleachedEbonyChandeliers"] = ModContent.GetInstance<BleachedEbonyChandelier>().Coordinates;
         tag["Avalon:CoughwoodChandeliers"] = ModContent.GetInstance<CoughwoodChandelier>().Coordinates;
@@ -199,6 +200,10 @@ public class AvalonWorld : ModSystem
         if (tag.ContainsKey("Avalon:ZincChandeliers"))
         {
             ModContent.GetInstance<ZincChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:ZincChandeliers");
+        }
+        if (tag.ContainsKey("Avalon:Dirtaliers"))
+        {
+            ModContent.GetInstance<ZincChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:Dirtaliers");
         }
         if (tag.ContainsKey("Avalon:BleachedEbonyChandeliers"))
         {

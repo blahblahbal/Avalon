@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
+[AutoloadEquip(EquipType.Shield)]
 class GoldenShield : ModItem
 {
     public override void SetDefaults()
