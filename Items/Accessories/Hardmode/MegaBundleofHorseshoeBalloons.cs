@@ -40,6 +40,18 @@ public class MegaBundleofHorseshoeBalloons : ModItem
 
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<BundleofHorseshoeBalloons>())
+            .AddIngredient(ItemID.BundleofBalloons)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ItemID.HorseshoeBundle)
+            .AddIngredient(ModContent.ItemType<BundleofBalloons>())
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<BundleofHorseshoeBalloons>())
             .AddIngredient(ItemID.HorseshoeBundle)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();

@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
+[AutoloadEquip(EquipType.Neck)]
 class SoullessLocket : ModItem
 {
     public override void SetDefaults()
