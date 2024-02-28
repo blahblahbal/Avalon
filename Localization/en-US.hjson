@@ -8693,11 +8693,11 @@ Mods: {
 			KingSting.DisplayName: King Sting
 			Larvae.DisplayName: Larvae
 			Mosquito.DisplayName: Mosquito
-			MosquitoDroopy.DisplayName: Mosquito Droopy
-			MosquitoPainted.DisplayName: Mosquito Painted
-			MosquitoSmall.DisplayName: Mosquito Small
-			RedArowana.DisplayName: Red Arowana
-			RedArowana2.DisplayName: Red Arowana2
+			MosquitoDroopy.DisplayName: Mosquito 
+			MosquitoPainted.DisplayName: Mosquito 
+			MosquitoSmall.DisplayName: Mosquito 
+			RedArowana.DisplayName: Arowana
+			RedArowana2.DisplayName: Arowana
 		}
 
 		Buffs: {
