@@ -1,19 +1,9 @@
-using System;
-using Avalon.Items.Material;
-using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Bestiary;
-using Terraria.Enums;
-using Terraria.DataStructures;
-using Terraria.Localization;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
 using Terraria.Audio;
-using System.IO;
+using Terraria.GameContent.Bestiary;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -30,6 +20,7 @@ public class RedArowana : ModNPC
         NPC.CloneDefaults(NPCID.Piranha);
         AnimationType = NPCID.Pupfish;
         NPC.width = 55;
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundTropics>().Type };
     }
    
     public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)

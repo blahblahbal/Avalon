@@ -39,8 +39,8 @@ public class Mosquito : ModNPC
         NPC.DeathSound = SoundID.NPCDeath35;
         NPC.value = 200;
         NPC.alpha = 255;
-        //AnimationType = NPCID.Hornet;
         NPC.knockBackResist = 1f;
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundTropics>().Type };
     }
     public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
     {

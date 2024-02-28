@@ -34,10 +34,7 @@ public class Fly : ModNPC
         NPC.DeathSound = SoundID.NPCDeath1;
         AnimationType = NPCID.Bee;
         NPC.knockBackResist = 0.01f;
-        //Banner = NPC.type;
-        //BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
-        //SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Tropics>().Type };
-        //DrawOffsetY = 10;
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundTropics>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {

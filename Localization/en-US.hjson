@@ -276,6 +276,7 @@ Mods: {
 			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
+            RedArowana: It's just a fish.
 		}
 
 		Keybinds: {
@@ -292,7 +293,7 @@ Mods: {
 			"Stamina Rocket Jump.DisplayName": Stamina Rocket Jump
 			"Quick Stamina.DisplayName": Quick Stamina
 			"Stamina Flight Time Restore.DisplayName": Stamina Flight Time Restore
-			"Assign Waypoint.DisplayName": Assign  Waypoint
+			"Assign Waypoint.DisplayName": Assign Waypoint
 		}
 
 		CommonItemTooltip: {
