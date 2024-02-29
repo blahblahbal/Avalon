@@ -76,10 +76,6 @@ internal class AvalonGlobalProjectile : GlobalProjectile
     }
     public override void OnKill(Projectile projectile, int timeLeft)
     {
-        if (projectile.type == ModContent.ProjectileType<Projectiles.Summon.PriminiVice>())
-        {
-            Main.NewText("hi");
-        }
         if (projectile.type == ProjectileID.WorldGlobe && Main.player[projectile.owner].InModBiome<Biomes.Contagion>())
         {
             ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG++;
