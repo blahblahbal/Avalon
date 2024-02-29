@@ -35,12 +35,12 @@ public class MineralSlime : ModNPC
     int WhichOre;
     public override void AI()
     {
-        VanillaNPCExpertChanges.SlimeJumpSpeedIncrase(NPC, 1.2f);
+        VanillaNPCExpertChanges.SlimeJumpSpeedIncrease(NPC, 1.2f);
         NPC.ai[0]++;
     }
     public override void OnSpawn(IEntitySource source)
     {
-        WhichOre = Main.rand.Next(0,Ores.Length);
+        WhichOre = Main.rand.Next(0, Ores.Length);
         NPC.alpha = 90;
     }
     public override void SendExtraAI(BinaryWriter writer)

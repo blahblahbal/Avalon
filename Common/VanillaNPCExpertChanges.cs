@@ -57,7 +57,7 @@ namespace Avalon.Common
             }
             #endregion Cursed Skull
         }
-        public static void SlimeJumpSpeedIncrase(NPC npc, float bonus)
+        public static void SlimeJumpSpeedIncrease(NPC npc, float bonus)
         {
             if (!npc.collideY)
             {
@@ -91,7 +91,7 @@ namespace Avalon.Common
 
                 if(npc.netID is NPCID.CorruptSlime or NPCID.Slimeling or NPCID.Slimer2 or NPCID.ToxicSludge or NPCID.Crimslime or NPCID.RainbowSlime)
                 {
-                    SlimeJumpSpeedIncrase(npc, 1.3f);
+                    SlimeJumpSpeedIncrease(npc, 1.3f);
                 }
 
                 if(npc.aiStyle == NPCAIStyleID.Slime)

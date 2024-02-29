@@ -145,7 +145,7 @@ public class Ickslime : ModNPC
 
         if (Main.expertMode)
         {
-            VanillaNPCExpertChanges.SlimeJumpSpeedIncrase(NPC, 1.3f);
+            VanillaNPCExpertChanges.SlimeJumpSpeedIncrease(NPC, 1.3f);
             NPC.ai[1]++;
         }
     }
