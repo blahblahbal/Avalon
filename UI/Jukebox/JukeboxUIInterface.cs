@@ -8,6 +8,8 @@ namespace Avalon.UI.Jukebox;
 
 internal class JukeboxUIInterface : ExxoUIPanelWrapper<ExxoUIList>
 {
+    public static string TrackText = Language.GetTextValue("Mods.Avalon.Jukebox.Tracks");
+    ExxoUIText TitleText { get; } = new ExxoUIText(TrackText);
     public JukeboxUIInterface() : base(new ExxoUIList())
     {
         Height.Set(0, 1);
@@ -23,8 +25,11 @@ internal class JukeboxUIInterface : ExxoUIPanelWrapper<ExxoUIList>
         herbExchangeTitleContainer.Justification = Justification.Center;
         list.Append(herbExchangeTitleContainer);
 
-        var title = new ExxoUIText(Language.GetTextValue("Mods.Avalon.Jukebox.Tracks"));
-        herbExchangeTitleContainer.Append(title);
+        //string text = Language.GetTextValue("Mods.Avalon.Jukebox.Tracks");
+        //if ()
+
+        TitleText.SetText(TrackText); //new ExxoUIText(Language.GetTextValue("Mods.Avalon.Jukebox.Tracks"));
+        herbExchangeTitleContainer.Append(TitleText);
 
         var horizontalRule = new ExxoUIHorizontalRule();
         horizontalRule.Width.Set(0, 1);
@@ -44,7 +49,11 @@ internal class JukeboxUIInterface : ExxoUIPanelWrapper<ExxoUIList>
         Grid.ScrollBar = Scrollbar;
         OnScrollWheel += Grid.ScrollWheelListener;
     }
-
+    protected override void UpdateSelf(GameTime gameTime)
+    {
+        base.UpdateSelf(gameTime);
+        TitleText.SetText(TrackText);
+    }
     public ExxoUIListGrid Grid { get; }
     public ExxoUIScrollbar Scrollbar { get; }
 }

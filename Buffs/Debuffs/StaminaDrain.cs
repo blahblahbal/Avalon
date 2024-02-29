@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Buffs;
+namespace Avalon.Buffs.Debuffs;
 
 // TODO: IMPLEMENT
 public class StaminaDrain : ModBuff

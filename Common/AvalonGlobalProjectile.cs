@@ -92,12 +92,8 @@ internal class AvalonGlobalProjectile : GlobalProjectile
     }
     public override bool CanHitPlayer(Projectile projectile, Player target)
     {
-        if (target.GetModPlayer<AvalonPlayer>().TrapImmune && (projectile.type == ProjectileID.PoisonDartTrap || projectile.type == ProjectileID.VenomDartTrap ||
-            projectile.type == ProjectileID.GasTrap || projectile.type == ProjectileID.Explosives || projectile.type == ProjectileID.Landmine ||
-            projectile.type == ProjectileID.SpearTrap || projectile.type == ProjectileID.FlamesTrap || projectile.type == ProjectileID.FlamethrowerTrap ||
-            projectile.type == ProjectileID.SpikyBallTrap || projectile.type == ProjectileID.GeyserTrap || ProjectileID.Sets.IsAGravestone[projectile.type] ||
-            projectile.type == ProjectileID.Boulder || projectile.type == ProjectileID.BouncyBoulder || projectile.type == ProjectileID.MiniBoulder ||
-            projectile.type == ProjectileID.LifeCrystalBoulder))
+        if (target.GetModPlayer<AvalonPlayer>().TrapImmune && (ProjectileID.Sets.IsAGravestone[projectile.type] ||
+            Data.Sets.Projectile.TrapProjectiles[projectile.type]))
         {
             return false;
         }

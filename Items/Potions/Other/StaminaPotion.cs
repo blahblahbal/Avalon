@@ -51,7 +51,7 @@ class StaminaPotion : ModItem
     {
         player.GetModPlayer<AvalonStaminaPlayer>().StatStam += 55;
         player.GetModPlayer<AvalonStaminaPlayer>().StaminaHealEffect(55, true);
-        player.AddBuff(ModContent.BuffType<Buffs.StaminaDrain>(), 60 * 9);
+        player.AddBuff(ModContent.BuffType<Buffs.Debuffs.StaminaDrain>(), 60 * 9);
         if (player.GetModPlayer<AvalonStaminaPlayer>().StatStam > player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2)
         {
             player.GetModPlayer<AvalonStaminaPlayer>().StatStam = player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2;

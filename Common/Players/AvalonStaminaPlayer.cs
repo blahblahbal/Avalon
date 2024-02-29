@@ -1,4 +1,5 @@
 using Avalon.Buffs;
+using Avalon.Buffs.Debuffs;
 using Avalon.Dusts;
 using Avalon.Items.Armor.Hardmode;
 using Avalon.Systems;

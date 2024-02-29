@@ -1,7 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Buffs;
+namespace Avalon.Buffs.Debuffs;
 
 public class AstralCurse : ModBuff
 {

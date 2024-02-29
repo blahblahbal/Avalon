@@ -4445,7 +4445,7 @@ Mods: {
 
 			PathogenicDart: {
 				DisplayName: Pathogen Dart
-				Tooltip: Leavses a trail of pathogenic mist
+				Tooltip: Leaves a trail of pathogenic mist
 			}
 
 			FlaskOfPathogens: {
@@ -7435,7 +7435,11 @@ Mods: {
 
 			BloodyAmulet: {
 				DisplayName: Bloody Amulet
-				Tooltip: Summons the Blood Moon
+				Tooltip:
+					'''
+					Summons the Blood Moon
+					'What a horrible night to have a curse.'
+					'''
 			}
 
 			VomitWater: {
