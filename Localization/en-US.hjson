@@ -276,7 +276,7 @@ Mods: {
 			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
-            RedArowana: It's just a fish.
+			RedArowana: It's just a fish.
 		}
 
 		Keybinds: {
@@ -8694,9 +8694,9 @@ Mods: {
 			KingSting.DisplayName: King Sting
 			Larvae.DisplayName: Larvae
 			Mosquito.DisplayName: Mosquito
-			MosquitoDroopy.DisplayName: Mosquito 
-			MosquitoPainted.DisplayName: Mosquito 
-			MosquitoSmall.DisplayName: Mosquito 
+			MosquitoDroopy.DisplayName: Mosquito
+			MosquitoPainted.DisplayName: Mosquito
+			MosquitoSmall.DisplayName: Mosquito
 			RedArowana.DisplayName: Arowana
 			RedArowana2.DisplayName: Arowana
 		}
