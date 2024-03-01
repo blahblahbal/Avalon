@@ -31,36 +31,37 @@ public class BundleofHorseshoeBalloons : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ModContent.ItemType<RocketHorseshoeBalloon>())
-            .AddIngredient(ItemID.BalloonHorseshoeSharkron)
-            .AddIngredient(ItemID.BalloonHorseshoeFart)
-            .AddTile(TileID.TinkerersWorkbench)
-            .Register();
-
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<RocketinaBalloon>())
-            .AddIngredient(ItemID.SharkronBalloon)
-            .AddIngredient(ItemID.FartInABalloon)
-            .AddTile(TileID.TinkerersWorkbench)
-            .Register();
-
-        CreateRecipe()
-            .AddIngredient(ItemID.BalloonHorseshoeSharkron)
-            .AddIngredient(ModContent.ItemType<RocketinaBalloon>())
-            .AddIngredient(ItemID.FartInABalloon)
-            .AddTile(TileID.TinkerersWorkbench)
-            .Register();
-
-        CreateRecipe()
-            .AddIngredient(ItemID.BalloonHorseshoeFart)
-            .AddIngredient(ModContent.ItemType<RocketinaBalloon>())
-            .AddIngredient(ItemID.SharkronBalloon)
-            .AddTile(TileID.TinkerersWorkbench)
-            .Register();
-
-        CreateRecipe()
             .AddIngredient(ModContent.ItemType<BundleofBalloons>())
             .AddIngredient(ItemID.LuckyHorseshoe)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<RocketinaBalloon>())
+            .AddIngredient(ItemID.SharkronBalloon)
+            .AddIngredient(ItemID.FartInABalloon)
+            .AddIngredient(ItemID.LuckyHorseshoe)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ModContent.ItemType<RocketHorseshoeBalloon>())
+            .AddRecipeGroup("Avalon:SharkronBalloons")
+            .AddRecipeGroup("Avalon:FartBalloons")
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ItemID.BalloonHorseshoeSharkron)
+            .AddRecipeGroup("Avalon:RocketBalloons")
+            .AddRecipeGroup("Avalon:FartBalloons")
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ItemID.BalloonHorseshoeFart)
+            .AddRecipeGroup("Avalon:RocketBalloons")
+            .AddRecipeGroup("Avalon:SharkronBalloons")
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }

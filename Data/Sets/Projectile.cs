@@ -36,7 +36,9 @@ public static class Projectile
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrap>(),
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(),
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>());
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrap>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>());
         //ModContent.ProjectileType<Ghostflame>(),
         //ModContent.ProjectileType<WallofSteelLaser>(),
         //,
@@ -68,6 +70,30 @@ public static class Projectile
         ProjectileID.UFOLaser,
         ProjectileID.MiniSharkron,
         ProjectileID.StardustCellMinionShot);
+
+    public static readonly bool[] TrapProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
+        ProjectileID.PoisonDart,
+        ProjectileID.PoisonDartTrap,
+        ProjectileID.Boulder,
+        ProjectileID.GeyserTrap,
+        ProjectileID.FlamethrowerTrap,
+        ProjectileID.SpearTrap,
+        ProjectileID.SpikyBallTrap,
+        ProjectileID.VenomDartTrap,
+        ProjectileID.GasTrap,
+        ProjectileID.Explosives,
+        ProjectileID.Landmine,
+        ProjectileID.FlamesTrap,
+        ProjectileID.MiniBoulder,
+        ProjectileID.BouncyBoulder,
+        ProjectileID.LifeCrystalBoulder,
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrap>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrap>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrap>(),
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>()
+    );
 
     public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
         ModContent.ProjectileType<WoodenClub>(),

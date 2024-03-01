@@ -70,6 +70,7 @@ internal class JukeboxUIState : ExxoUIState
         {
             Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = false;
             Main.NewText(Language.GetTextValue("Mods.Avalon.Jukebox.StoppedPlaying"));
+            JukeboxUIInterface.TrackText = Language.GetTextValue("Mods.Avalon.Jukebox.Tracks");
             SoundEngine.PlaySound(SoundID.Item37);
         };
 
@@ -113,6 +114,11 @@ internal class JukeboxUIState : ExxoUIState
                 Main.SceneMetrics.ActiveMusicBox = AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i);
                 Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
                 Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i);
+
+                JukeboxUIInterface.TrackText = Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
+                    Lang.GetItemName(AvalonJukeboxPlayer.JukeboxTracks[AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i)])
+                    .ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
+
                 Main.NewText(Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
                     Lang.GetItemName(AvalonJukeboxPlayer.JukeboxTracks[AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i)])
                     .ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", ""));
@@ -128,6 +134,10 @@ internal class JukeboxUIState : ExxoUIState
             {
                 Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
                 Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = AvalonJukeboxPlayer.TracksByItemID[i];
+
+                JukeboxUIInterface.TrackText = Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
+                    Lang.GetItemName(AvalonJukeboxPlayer.TracksByMusicID[AvalonJukeboxPlayer.TracksByItemID[i]])
+                    .ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
 
                 Main.NewText(Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
                     Lang.GetItemName(AvalonJukeboxPlayer.TracksByMusicID[AvalonJukeboxPlayer.TracksByItemID[i]])

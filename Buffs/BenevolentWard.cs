@@ -2,6 +2,7 @@ using Avalon.Common.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Buffs.Debuffs;
 
 namespace Avalon.Buffs;
 

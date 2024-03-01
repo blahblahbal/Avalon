@@ -10,6 +10,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using Avalon.Items.Material;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -115,6 +116,7 @@ public class FallenHero : ModNPC
         npcLoot.Add(ItemDropRule.OneFromOptions(30, ModContent.ItemType<BloodstainedHelmet>(),
             ModContent.ItemType<BloodstainedChestplate>(), ModContent.ItemType<BloodstainedGreaves>()));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MinersSword>(), 20));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RottenFlesh>(), 3));
     }
 
     public override void HitEffect(NPC.HitInfo hit)

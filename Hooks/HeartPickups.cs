@@ -76,10 +76,10 @@ namespace Avalon.Hooks
                 {
                     if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((int)((Main.player[p].statLifeMax2 - 400) / 5), 21) == 20)
                     {
-                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(20) ||
-                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(40) ||
+                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
+                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
                             (Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart &&
-                            Main.rand.NextBool(10)))
+                            Main.rand.Next(100) < 15))
                         {
                             Type = ModContent.ItemType<PlatinumHeart>();
                         }
@@ -87,10 +87,10 @@ namespace Avalon.Hooks
                     }
                     else if (Main.player[p].statLifeMax2 >= 500)
                     {
-                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(20) ||
-                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(40) ||
+                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
+                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
                             (Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart &&
-                            Main.rand.NextBool(10)))
+                            Main.rand.Next(100) < 15))
                         {
                             Type = ModContent.ItemType<PlatinumHeart>();
                         }
@@ -101,10 +101,10 @@ namespace Avalon.Hooks
                 {
                     if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((int)((Main.player[p].statLifeMax2 - 400) / 5), 21) == 20)
                     {
-                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(20) ||
-                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(40) ||
+                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
+                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
                             (Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart &&
-                            Main.rand.NextBool(10)))
+                            Main.rand.Next(100) < 15))
                         {
                             Type = ModContent.ItemType<PlatinumApple>();
                         }
@@ -112,10 +112,10 @@ namespace Avalon.Hooks
                     }
                     else if (Main.player[p].statLifeMax2 >= 500)
                     {
-                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(20) ||
-                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(40) ||
+                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
+                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
                             (Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart &&
-                            Main.rand.NextBool(10)))
+                            Main.rand.Next(100) < 15))
                         {
                             Type = ModContent.ItemType<PlatinumApple>();
                         }
@@ -126,10 +126,10 @@ namespace Avalon.Hooks
                 {
                     if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((int)((Main.player[p].statLifeMax2 - 400) / 5), 21) == 20)
                     {
-                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(20) ||
-                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(40) ||
+                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
+                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
                             (Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart &&
-                            Main.rand.NextBool(10)))
+                            Main.rand.Next(100) < 15))
                         {
                             Type = ModContent.ItemType<PlatinumCandyCane>();
                         }
@@ -137,10 +137,10 @@ namespace Avalon.Hooks
                     }
                     else if (Main.player[p].statLifeMax2 >= 500)
                     {
-                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(20) ||
-                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(40) ||
+                        if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
+                            Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
                             (Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart &&
-                            Main.rand.NextBool(10)))
+                            Main.rand.Next(100) < 15))
                         {
                             Type = ModContent.ItemType<PlatinumCandyCane>();
                         }

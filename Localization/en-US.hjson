@@ -274,8 +274,10 @@ Mods: {
 			AmberSlime: A simple gelatinous creature that somehow also has the properties of amber. It takes a long time to digest anything.
 			InfestedAmberSlime: Consistent consumption of the bugs in the Tropics caused these slimes to burst into a multitude of them when killed.
 			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
+            MineralSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
+			RedArowana: It's just a fish.
 		}
 
 		Keybinds: {
@@ -292,7 +294,7 @@ Mods: {
 			"Stamina Rocket Jump.DisplayName": Stamina Rocket Jump
 			"Quick Stamina.DisplayName": Quick Stamina
 			"Stamina Flight Time Restore.DisplayName": Stamina Flight Time Restore
-			"Assign Waypoint.DisplayName": Assign  Waypoint
+			"Assign Waypoint.DisplayName": Assign Waypoint
 		}
 
 		CommonItemTooltip: {
@@ -855,7 +857,7 @@ Mods: {
 			}
 
 			AeonsEternity: {
-				DisplayName: Aeons Eternity
+				DisplayName: Aeon's Eternity
 				Tooltip: Occasionally fires an exploding constellation
 			}
 
@@ -4444,7 +4446,7 @@ Mods: {
 
 			PathogenicDart: {
 				DisplayName: Pathogen Dart
-				Tooltip: Leavses a trail of pathogenic mist
+				Tooltip: Leaves a trail of pathogenic mist
 			}
 
 			FlaskOfPathogens: {
@@ -7434,7 +7436,11 @@ Mods: {
 
 			BloodyAmulet: {
 				DisplayName: Bloody Amulet
-				Tooltip: Summons the Blood Moon
+				Tooltip:
+					'''
+					Summons the Blood Moon
+					'What a horrible night to have a curse.'
+					'''
 			}
 
 			VomitWater: {
@@ -7517,7 +7523,7 @@ Mods: {
 			}
 
 			TrueAeonsEternity: {
-				DisplayName: True Aeons Eternity
+				DisplayName: True Aeon's Eternity
 				Tooltip: ""
 			}
 
@@ -8693,9 +8699,11 @@ Mods: {
 			KingSting.DisplayName: King Sting
 			Larvae.DisplayName: Larvae
 			Mosquito.DisplayName: Mosquito
-			MosquitoDroopy.DisplayName: Mosquito Droopy
-			MosquitoPainted.DisplayName: Mosquito Painted
-			MosquitoSmall.DisplayName: Mosquito Small
+			MosquitoDroopy.DisplayName: Mosquito
+			MosquitoPainted.DisplayName: Mosquito
+			MosquitoSmall.DisplayName: Mosquito
+			RedArowana.DisplayName: Arowana
+			RedArowana2.DisplayName: Arowana
 		}
 
 		Buffs: {

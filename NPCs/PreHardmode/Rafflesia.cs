@@ -32,7 +32,7 @@ public class Rafflesia : ModNPC
         NPC.knockBackResist = 0f;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.RafflesiaBanner>();
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Tropics>().Type };
+        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundTropics>().Type };
         //DrawOffsetY = 10;
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>

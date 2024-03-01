@@ -50,15 +50,15 @@ internal class BagofBlood : ModItem
 
         for (int j = 0; j < 2; j++)
         {
-            int num2 = Dust.NewDust(new Vector2(player.position.X - player.velocity.X * 2f, player.position.Y - 2f - player.velocity.Y * 2f),
-                player.width, player.height, DustID.TheDestroyer, 0f, 0f, 100, default, 0.9f);
-            Main.dust[num2].noGravity = true;
-            Main.dust[num2].noLight = true;
-            Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;
-            Main.dust[num2].velocity.Y -= player.velocity.Y * 0.5f;
+            //int num2 = Dust.NewDust(new Vector2(player.position.X - player.velocity.X * 2f, player.position.Y - 2f - player.velocity.Y * 2f),
+            //    player.width, player.height, DustID.TheDestroyer, 0f, 0f, 100, default, 0.9f);
+            //Main.dust[num2].noGravity = true;
+            //Main.dust[num2].noLight = true;
+            //Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;
+            //Main.dust[num2].velocity.Y -= player.velocity.Y * 0.5f;
 
-            num2 = Dust.NewDust(new Vector2(player.position.X - player.velocity.X * 2f, player.position.Y - 2f - player.velocity.Y * 2f),
-                player.width, player.height, DustID.Blood, 0f, 0f, 100, default, 0.9f);
+            int num2 = Dust.NewDust(new Vector2(player.position.X - player.velocity.X * 2f, player.position.Y - 2f - player.velocity.Y * 2f),
+                player.width, player.height, DustID.Blood, 0f, 0f, 100, default, 1.2f);
             Main.dust[num2].noGravity = true;
             Main.dust[num2].noLight = true;
             Main.dust[num2].velocity.X -= player.velocity.X * 0.5f;

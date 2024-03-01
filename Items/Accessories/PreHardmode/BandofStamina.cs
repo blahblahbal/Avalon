@@ -28,7 +28,7 @@ internal class BandofStamina : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(Type).AddTile(TileID.WorkBenches)
+        Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<StaminaCrystal>(), 3)
             .AddRecipeGroup("Avalon:GoldBar", 4)
             .AddIngredient(ModContent.ItemType<StaminaPotion>(), 2)

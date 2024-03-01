@@ -20,6 +20,7 @@ class SulphurCrystal : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
+        Item.rare = ItemRarityID.LightRed;
         Item.width = dims.Width;
         Item.maxStack = 9999;
         Item.value = Item.sellPrice(silver: 4);

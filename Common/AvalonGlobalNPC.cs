@@ -1,4 +1,5 @@
 using Avalon.Biomes;
+using Avalon.Buffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Avalon.Items.Accessories.Hardmode;
@@ -553,6 +554,10 @@ public class AvalonGlobalNPC : GlobalNPC
             {
                 Dust.NewDust(npc.position, npc.width, npc.height, DustID.Blood);
             }
+        }
+        if (npc.HasBuff<AstralCurse>())
+        {
+            Dust.NewDust(npc.position, npc.width, npc.height, DustID.DungeonSpirit);
         }
     }
     public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)

@@ -1672,6 +1672,10 @@ public class AvalonPlayer : ModPlayer
     /// <inheritdoc />
     public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
     {
+        if (target.HasBuff(ModContent.BuffType<AstralCurse>()))
+        {
+            modifiers.FinalDamage *= 3;
+        }
         if (EarthInsig)
         {
             if (Data.Sets.Item.EarthRelatedItems[item.type])

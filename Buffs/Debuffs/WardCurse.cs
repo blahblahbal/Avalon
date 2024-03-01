@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Avalon.Common.Players;
 
-namespace Avalon.Buffs;
+namespace Avalon.Buffs.Debuffs;
 
 public class WardCurse : ModBuff
 {
