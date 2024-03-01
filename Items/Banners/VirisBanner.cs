@@ -7,7 +7,6 @@ namespace Avalon.Items.Banners;
 
 public class VirisBanner : ModItem
 {
-    // The tooltip for this item is automatically assigned from .lang files
     public override void SetDefaults()
     {
         Item.width = 10;

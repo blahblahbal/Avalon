@@ -28,7 +28,9 @@ public class AvalonMenu : ModMenu
 
     public override void PostDrawLogo(SpriteBatch spriteBatch, Vector2 logoDrawCenter, float logoRotation, float logoScale, Color drawColor)
     {
-        if (DateTime.Now.Month != 4 && DateTime.Now.Day != 1)
+        if (DateTime.Now.Month == 4 && DateTime.Now.Day == 1)
+        { }
+        else
         {
             Texture2D logo = Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/OriginsLogo").Value;
             spriteBatch.Draw(logo, logoDrawCenter + new Vector2(0, 60 * logoScale), new Rectangle(0,0,logo.Width,logo.Height),drawColor,logoRotation * 0.3f,new Vector2(logo.Width / 2, logo.Height / 2),logoScale,SpriteEffects.None,0);

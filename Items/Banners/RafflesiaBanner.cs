@@ -7,12 +7,6 @@ namespace Avalon.Items.Banners;
 
 public class RafflesiaBanner : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Nearby players get a bonus against: Rafflesia");
-        Item.ResearchUnlockCount = 1;
-    }
-    // The tooltip for this item is automatically assigned from .lang files
     public override void SetDefaults()
     {
         Item.width = 10;

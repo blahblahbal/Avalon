@@ -5,14 +5,8 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Banners;
 
-public class PalladiumSlimeBanner : ModItem
+public class ContagionMimicBanner : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Nearby players get a bonus against: Palladium Slime");
-        Item.ResearchUnlockCount = 1;
-    }
-    // The tooltip for this item is automatically assigned from .lang files
     public override void SetDefaults()
     {
         Item.width = 10;
@@ -27,6 +21,6 @@ public class PalladiumSlimeBanner : ModItem
         Item.rare = ItemRarityID.Blue;
         Item.value = Item.buyPrice(0, 0, 10, 0);
         Item.createTile = ModContent.TileType<MonsterBanner>();
-        Item.placeStyle = 32;
+        Item.placeStyle = 81;
     }
 }

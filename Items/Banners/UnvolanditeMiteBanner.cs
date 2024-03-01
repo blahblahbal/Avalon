@@ -7,12 +7,6 @@ namespace Avalon.Items.Banners;
 
 public class UnvolanditeMiteBanner : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Nearby players get a bonus against: Unvolandite Mite");
-        Item.ResearchUnlockCount = 1;
-    }
-    // The tooltip for this item is automatically assigned from .lang files
     public override void SetDefaults()
     {
         Item.width = 10;

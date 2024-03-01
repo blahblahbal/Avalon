@@ -1,21 +1,3 @@
-ItemName: {
-	DarkBlueSolution: Mushroom Solution
-	BlueSolution: Hallow Solution
-	GreenSolution: Purity Solution
-	PurpleSolution: Corruption Solution
-	RedSolution: Crimson Solution
-	SandSolution: Desert Solution
-	SnowSolution: Snow Solution
-	DirtSolution: Forest Solution
-	FrostsparkBoots: Sparkfrost Boots
-	PurpleMucos: Purple Mucus
-	CoinGun: Spend Shot
-	HighTestFishingLine: High Tensile Fishing Line
-	FieryGreatsword: Volcanic Greatsword
-	CrimsonPlanterBox: Bloodberry Planter Box
-	HandOfCreation: Hand of Creation
-}
-
 Mods: {
 	BiomeTitles: {
 		Title: {
@@ -305,9 +287,13 @@ Mods: {
 
 		VanillaItemRenames: {
 			CoinGun: Spend Shot
-			PurpleMucus: Purple Mucus
-			BloodyAmulet: Bloody Amulet
-			FieryGreatsword: Volcanic Greatsword
+			PurpleMucos: Purple Mucus
+			BloodyTear: Bloody Amulet
+			Volcano: Volcanic Greatsword
+			FrostsparkBoots: Sparkfrost Boots
+			HandOfCreation: Hand of Creation
+			FishingLine: High Tensile Fishing Line
+			CrimsonPlanterBox: Bloodberry Planter Box
 
 			Solutions: {
 				Hallow: Hallow Solution
@@ -439,6 +425,8 @@ Mods: {
 			IceBlade: Shoots a giant snowflake
 			Frostbrand: Shoots a spread of giant snowflakes
 			Extractinator: <right> with a prefixed item while on your hotbar to remove the prefix
+			MonsterBanner: Increased damage to and defense from the following:
+			UpgradeStage: "Upgrade stage: "
 
 			CoinGun: {
 				PartOne: Uses coins for ammo
@@ -8337,6 +8325,11 @@ Mods: {
 
 			RustyHelmet: {
 				DisplayName: Rusty Helmet
+				Tooltip: ""
+			}
+
+			ContagionMimicBanner: {
+				DisplayName: Contagion Mimic Banner
 				Tooltip: ""
 			}
 		}

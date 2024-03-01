@@ -17,7 +17,7 @@ public class BlazeOrb : ModNPC
 
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
-            Hide = true // Hides this NPC from the Bestiary, useful for multi-part NPCs whom you only want one entry.
+            Hide = true // Hides this NPC from the Bestiary, useful for multi-part NPCs that you only want one entry for.
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
         NPCID.Sets.ImmuneToRegularBuffs[Type] = true;

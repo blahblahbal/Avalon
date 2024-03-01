@@ -102,9 +102,9 @@ public class MonsterBanner : ModTile
                 //case 18:
                 //    t = ModContent.NPCType<NPCs.GrossyFloat>();
                 //    break;
-                //case 19:
-                //    t = ModContent.NPCType<NPCs.PyrasiteHead>();
-                //    break;
+                case 19:
+                    t = ModContent.NPCType<PyrasiteHead>();
+                    break;
                 //case 20:
                 //    t = ModContent.NPCType<NPCs.EyeBones>();
                 //    break;
@@ -219,9 +219,9 @@ public class MonsterBanner : ModTile
                 //case 61:
                 //    t = ModContent.NPCType<NPCs.CaesiumStalker>();
                 //    break;
-                //case 62:
-                //    t = ModContent.NPCType<NPCs.Rafflesia>();
-                //    break;
+                case 62:
+                    t = ModContent.NPCType<Rafflesia>();
+                    break;
                 //case 63:
                 //    t = ModContent.NPCType<NPCs.PoisonDartFrog>();
                 //    break;
@@ -275,6 +275,9 @@ public class MonsterBanner : ModTile
                     break;
                 case 80:
                     t = ModContent.NPCType<BoneFish>();
+                    break;
+                case 81:
+                    t = ModContent.NPCType<ContagionMimic>();
                     break;
                 default:
                     t = 0;

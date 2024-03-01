@@ -1,10 +1,12 @@
 using Avalon.Common;
 using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Banners;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Ranged.Hardmode;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
@@ -25,6 +27,8 @@ public class ContagionMimic : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
         Data.Sets.NPC.Wicked[NPC.type] = true;
+        NPCID.Sets.TrailingMode[NPC.type] = 7;
+        ItemID.Sets.KillsToBanner[ModContent.ItemType<ContagionMimicBanner>()] = 25;
     }
     public override void SetDefaults()
     {
@@ -32,6 +36,8 @@ public class ContagionMimic : ModNPC
         AIType = NPCID.BigMimicCrimson;
         AnimationType = NPCID.BigMimicCrimson;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
+        Banner = NPC.type;
+        BannerItem = ModContent.ItemType<ContagionMimicBanner>();
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
@@ -74,6 +80,10 @@ public class ContagionMimic : ModNPC
             ModContent.ItemType<DartShotgun>(), ModContent.ItemType<Outbreak>(), ModContent.ItemType<ThePill>()));
         npcLoot.Add(ItemDropRule.Common(ItemID.GreaterHealingPotion, 1, 5, 10));
         npcLoot.Add(ItemDropRule.Common(ItemID.GreaterManaPotion, 1, 5, 15));
+    }
+    public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+    {
+        return true;
     }
 }
 public class ContagionMimicHook : ModHook
