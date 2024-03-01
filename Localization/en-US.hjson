@@ -274,7 +274,7 @@ Mods: {
 			AmberSlime: A simple gelatinous creature that somehow also has the properties of amber. It takes a long time to digest anything.
 			InfestedAmberSlime: Consistent consumption of the bugs in the Tropics caused these slimes to burst into a multitude of them when killed.
 			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
-            MineralSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
+			MineralSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
 			RedArowana: It's just a fish.

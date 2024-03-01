@@ -98,26 +98,28 @@ public class Ickslime : ModNPC
         return ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
             !spawnInfo.Player.InPillarZone() && Main.hardMode) ? 0.7f : 0f;
     }
-    bool spawned;
+    int timer;
     int J;
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         J = reader.ReadInt32();
         NPC.alpha = reader.ReadInt32();
+        timer = reader.ReadInt32();
     }
     public override void SendExtraAI(BinaryWriter writer)
     {
         writer.Write(J);
         writer.Write(NPC.alpha);
+        writer.Write(timer);
     }
     public override void AI()
     {
-        NPC.ai[3]++;
-        if (NPC.ai[3] == 1)
+        timer++;
+        if (timer == 1)
         {
             J = Main.rand.Next(3);
         }
-        if (NPC.ai[3] == 2)
+        if (timer == 2)
         {
             NPC.alpha = 55;
             if (J == 1)

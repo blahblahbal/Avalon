@@ -56,15 +56,15 @@ namespace Avalon.Hooks
                 flag = true;
             }
             num2 = WorldGen.genRand.Next(200, 250);
-            double num3 = (double)Main.maxTilesX / 4200.0;
-            num2 = (int)((double)num2 * num3);
+            double num3 = Main.maxTilesX / 4200.0;
+            num2 = (int)(num2 * num3);
             num4 = num2;
             val = default(Vector2D);
             val.X = i;
             val.Y = j;
             val2 = default(Vector2D);
-            val2.X = (double)WorldGen.genRand.Next(-10, 11) * 0.1;
-            val2.Y = (double)WorldGen.genRand.Next(-10, 11) * 0.1;
+            val2.X = WorldGen.genRand.Next(-10, 11) * 0.1;
+            val2.Y = WorldGen.genRand.Next(-10, 11) * 0.1;
             if (speedX != 0.0 || speedY != 0.0)
             {
                 val2.X = speedX;
@@ -102,40 +102,49 @@ namespace Avalon.Hooks
                 {
                     for (int n = num7; n < num8; n++)
                     {
-                        if (!(Math.Abs((double)m - val.X) + Math.Abs((double)n - val.Y) < (double)num2 * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015)))
+                        if (!(Math.Abs(m - val.X) + Math.Abs(n - val.Y) < num2 * 0.5 * (1.0 + WorldGen.genRand.Next(-10, 11) * 0.015)))
                         {
                             continue;
                         }
 
-                        if (Main.tile[m, n].WallType == 63 || Main.tile[m, n].WallType == 65 || Main.tile[m, n].WallType == 66 || Main.tile[m, n].WallType == 68 || Main.tile[m, n].WallType == 69 || Main.tile[m, n].WallType == 81)
+                        if (Main.tile[m, n].WallType == WallID.GrassUnsafe || Main.tile[m, n].WallType == WallID.FlowerUnsafe ||
+                            Main.tile[m, n].WallType == WallID.Grass || Main.tile[m, n].WallType == WallID.Flower ||
+                            Main.tile[m, n].WallType == WallID.CorruptGrassUnsafe || Main.tile[m, n].WallType == WallID.CrimsonGrassUnsafe)
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionGrassWall>();
                         }
-                        else if (Main.tile[m, n].WallType == 216)
+                        else if (Main.tile[m, n].WallType == WallID.HardenedSand)
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<HardenedSnotsandWallUnsafe>();
                         }
-                        else if (Main.tile[m, n].WallType == 187)
+                        else if (Main.tile[m, n].WallType == WallID.Sandstone)
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<SnotsandstoneWallUnsafe>();
                         }
-                        else if (Main.tile[m, n].WallType == 3 || Main.tile[m, n].WallType == 83)
+                        else if (Main.tile[m, n].WallType == WallID.EbonstoneUnsafe || Main.tile[m, n].WallType == WallID.CrimstoneUnsafe)
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
                         }
-                        else if (Main.tile[m, n].WallType == 50 || Main.tile[m, n].WallType == 51 || Main.tile[m, n].WallType == 52 || Main.tile[m, n].WallType == 189 || Main.tile[m, n].WallType == 193 || Main.tile[m, n].WallType == 214 || Main.tile[m, n].WallType == 201)
+                        else if (Main.tile[m, n].WallType == WallID.CorruptionUnsafe2 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe2 ||
+                            Main.tile[m, n].WallType == WallID.RocksUnsafe3 || Main.tile[m, n].WallType == WallID.HallowUnsafe2)
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionLumpWallUnsafe>();
                         }
-                        else if (Main.tile[m, n].WallType == 56 || Main.tile[m, n].WallType == 188 || Main.tile[m, n].WallType == 192 || Main.tile[m, n].WallType == 213 || Main.tile[m, n].WallType == 202)
+                        else if (Main.tile[m, n].WallType == WallID.Cave3Unsafe || Main.tile[m, n].WallType == WallID.CorruptionUnsafe1 ||
+                            Main.tile[m, n].WallType == WallID.CrimsonUnsafe1 || Main.tile[m, n].WallType == WallID.RocksUnsafe2 ||
+                            Main.tile[m, n].WallType == WallID.HallowUnsafe3)
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionMouldWallUnsafe>();
                         }
-                        else if (Main.tile[m, n].WallType == 48 || Main.tile[m, n].WallType == 49 || Main.tile[m, n].WallType == 53 || Main.tile[m, n].WallType == 57 || Main.tile[m, n].WallType == 58 || Main.tile[m, n].WallType == 190 || Main.tile[m, n].WallType == 194 || Main.tile[m, n].WallType == 212 || Main.tile[m, n].WallType == 203)
+                        else if (Main.tile[m, n].WallType == WallID.Cave4Unsafe || Main.tile[m, n].WallType == WallID.Cave5Unsafe ||
+                            Main.tile[m, n].WallType == WallID.CorruptionUnsafe3 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe3 ||
+                            Main.tile[m, n].WallType == WallID.RocksUnsafe1 || Main.tile[m, n].WallType == WallID.HallowUnsafe4)
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionCystWallUnsafe>();
                         }
-                        else if (Main.tile[m, n].WallType == 191 || Main.tile[m, n].WallType == 195 || Main.tile[m, n].WallType == 185 || Main.tile[m, n].WallType == 215 || Main.tile[m, n].WallType == 200 || Main.tile[m, n].WallType == 83)
+                        else if (Main.tile[m, n].WallType == WallID.CorruptionUnsafe4 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe4 ||
+                            Main.tile[m, n].WallType == WallID.Cave8Unsafe || Main.tile[m, n].WallType == WallID.RocksUnsafe4 ||
+                            Main.tile[m, n].WallType == WallID.HallowUnsafe1 || Main.tile[m, n].WallType == WallID.CrimstoneUnsafe)
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionBoilWallUnsafe>();
                         }
@@ -168,6 +177,7 @@ namespace Avalon.Hooks
                         {
                             Main.tile[m, n].TileType = (ushort)ModContent.TileType<ContagionVines>();
                         }
+                        // ?
                         if (flag && Main.tile[m, n].TileType == TileID.Hive && Main.tile[m, n].TileType != (ushort)ModContent.TileType<Chunkstone>())
                         {
                             Main.tile[m, n].TileType = (ushort)ModContent.TileType<Chunkstone>();
@@ -178,7 +188,7 @@ namespace Avalon.Hooks
                             Main.tile[m, n].TileType = (ushort)ModContent.TileType<HardenedSnotsand>();
                             WorldGen.SquareTileFrame(m, n);
                         }
-                        else if (TileID.Sets.Conversion.Grass[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<HardenedSnotsand>())
+                        else if (TileID.Sets.Conversion.Grass[type] && Main.tile[m, n].TileType != (ushort)ModContent.TileType<Ickgrass>())
                         {
                             Main.tile[m, n].TileType = (ushort)ModContent.TileType<Ickgrass>();
                             WorldGen.SquareTileFrame(m, n);
@@ -213,12 +223,10 @@ namespace Avalon.Hooks
                             Main.tile[m, n].TileType = (ushort)ModContent.TileType<Snotsandstone>();
                             WorldGen.SquareTileFrame(m, n);
                         }
-
-
                     }
                 }
                 val += val2;
-                val2.X += (double)WorldGen.genRand.Next(-10, 11) * 0.05;
+                val2.X += WorldGen.genRand.Next(-10, 11) * 0.05;
                 if (val2.X > speedX + 1.0)
                 {
                     val2.X = speedX + 1.0;
@@ -227,7 +235,7 @@ namespace Avalon.Hooks
                 {
                     val2.X = speedX - 1.0;
                 }
-                if (val.X < (double)(-num2) || val.Y < (double)(-num2) || val.X > (double)(Main.maxTilesX + num2) || val.Y > (double)(Main.maxTilesY + num2))
+                if (val.X < -num2 || val.Y < -num2 || val.X > Main.maxTilesX + num2 || val.Y > Main.maxTilesY + num2)
                 {
                     flag2 = false;
                 }
@@ -264,41 +272,303 @@ namespace Avalon.Hooks
                 {
                     for (int n = num7; n < num8; n++)
                     {
-                        if (!(Math.Abs((double)m - val.X) + Math.Abs((double)n - val.Y) < (double)num2 * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015)))
+                        if (!(Math.Abs(m - val.X) + Math.Abs(n - val.Y) < num2 * 0.5 * (1.0 + WorldGen.genRand.Next(-10, 11) * 0.015)))
                         {
                             continue;
                         }
                         WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
-
+                        int type = Main.tile[m, n].TileType;
                         if (good) //someone add manual support, im not spending 5 hours on listing every tile and wall
                         {
-                            if (Main.tile[m, n].TileType == ModContent.TileType<Ickgrass>())
+                            #region walls
+                            if (Main.tile[m, n].WallType == WallID.GrassUnsafe || Main.tile[m, n].WallType == WallID.FlowerUnsafe ||
+                            Main.tile[m, n].WallType == WallID.Grass || Main.tile[m, n].WallType == WallID.Flower ||
+                            Main.tile[m, n].WallType == WallID.CorruptGrassUnsafe || Main.tile[m, n].WallType == WallID.CrimsonGrassUnsafe)
+                            {
+                                Main.tile[m, n].WallType = WallID.HallowedGrassUnsafe;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.HardenedSand)
+                            {
+                                Main.tile[m, n].WallType = WallID.HallowHardenedSand;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Sandstone)
+                            {
+                                Main.tile[m, n].WallType = WallID.HallowSandstone;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.EbonstoneUnsafe || Main.tile[m, n].WallType == WallID.CrimstoneUnsafe ||
+                                Main.tile[m, n].WallType == ModContent.WallType<ChunkstoneWall>())
+                            {
+                                Main.tile[m, n].WallType = WallID.PearlstoneBrickUnsafe;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.CorruptionUnsafe2 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe2 ||
+                                Main.tile[m, n].WallType == WallID.RocksUnsafe3 || Main.tile[m, n].WallType == ModContent.WallType<ContagionLumpWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.HallowUnsafe2;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Cave3Unsafe || Main.tile[m, n].WallType == WallID.CorruptionUnsafe1 ||
+                                Main.tile[m, n].WallType == WallID.CrimsonUnsafe1 || Main.tile[m, n].WallType == WallID.RocksUnsafe2 ||
+                                Main.tile[m, n].WallType == ModContent.WallType<ContagionMouldWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.HallowUnsafe3;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Cave4Unsafe || Main.tile[m, n].WallType == WallID.Cave5Unsafe ||
+                                Main.tile[m, n].WallType == WallID.CorruptionUnsafe3 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe3 ||
+                                Main.tile[m, n].WallType == WallID.RocksUnsafe1 || Main.tile[m, n].WallType == ModContent.WallType<ContagionCystWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.HallowUnsafe4;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.CorruptionUnsafe4 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe4 ||
+                                Main.tile[m, n].WallType == WallID.Cave8Unsafe || Main.tile[m, n].WallType == WallID.RocksUnsafe4 ||
+                                Main.tile[m, n].WallType == ModContent.WallType<ContagionBoilWallUnsafe>() || Main.tile[m, n].WallType == WallID.CrimstoneUnsafe)
+                            {
+                                Main.tile[m, n].WallType = WallID.HallowUnsafe1;
+                            }
+                            #endregion
+
+                            #region tiles
+                            if (TileID.Sets.IsVine[type])
+                            {
+                                Main.tile[m, n].TileType = TileID.HallowedVines;
+                            }
+
+                            if (flag && Main.tile[m, n].TileType == TileID.Hive && Main.tile[m, n].TileType != TileID.Pearlstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.Pearlstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (flag && Main.tile[m, n].TileType == TileID.CrispyHoneyBlock && Main.tile[m, n].TileType != TileID.HallowHardenedSand)
+                            {
+                                Main.tile[m, n].TileType = TileID.HallowHardenedSand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+
+                            if (TileID.Sets.Conversion.Grass[type] && Main.tile[m, n].TileType != TileID.HallowedGrass)
                             {
                                 Main.tile[m, n].TileType = TileID.HallowedGrass;
                                 WorldGen.SquareTileFrame(m, n);
                             }
+                            else if (TileID.Sets.Conversion.Stone[type] && Main.tile[m, n].TileType != TileID.Pearlstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.Pearlstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Sand[type] && Main.tile[m, n].TileType != TileID.Pearlsand)
+                            {
+                                Main.tile[m, n].TileType = TileID.Pearlsand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Ice[type] && Main.tile[m, n].TileType != TileID.HallowedIce)
+                            {
+                                Main.tile[m, n].TileType = TileID.HallowedIce;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.HardenedSand[type] && Main.tile[m, n].TileType != TileID.HallowHardenedSand)
+                            {
+                                Main.tile[m, n].TileType = TileID.HallowHardenedSand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Sandstone[type] && Main.tile[m, n].TileType != TileID.HallowSandstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.HallowSandstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            #endregion
                             //Add mod call converts that list modded tile and what it converts to, im too fucking depressed to do this right now, sorry for not completing alot of shit
                         }
                         else if (evil == WorldEvil.Crimson)
                         {
-                            if (Main.tile[m, n].TileType == ModContent.TileType<Ickgrass>())
+                            #region walls
+                            if (Main.tile[m, n].WallType == WallID.GrassUnsafe || Main.tile[m, n].WallType == WallID.FlowerUnsafe ||
+                            Main.tile[m, n].WallType == WallID.Grass || Main.tile[m, n].WallType == WallID.Flower ||
+                            Main.tile[m, n].WallType == WallID.CorruptGrassUnsafe || Main.tile[m, n].WallType == ModContent.WallType<ContagionGrassWall>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CrimsonGrassUnsafe;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.HardenedSand)
+                            {
+                                Main.tile[m, n].WallType = WallID.CrimsonHardenedSand;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Sandstone)
+                            {
+                                Main.tile[m, n].WallType = WallID.CrimsonSandstone;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.EbonstoneUnsafe || Main.tile[m, n].WallType == ModContent.WallType<ChunkstoneWall>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CrimstoneUnsafe;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.CorruptionUnsafe2 || Main.tile[m, n].WallType == WallID.HallowUnsafe2 ||
+                                Main.tile[m, n].WallType == WallID.RocksUnsafe3 || Main.tile[m, n].WallType == ModContent.WallType<ContagionLumpWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CrimsonUnsafe2;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Cave3Unsafe || Main.tile[m, n].WallType == WallID.CorruptionUnsafe1 ||
+                                Main.tile[m, n].WallType == WallID.HallowUnsafe3 || Main.tile[m, n].WallType == WallID.RocksUnsafe2 ||
+                                Main.tile[m, n].WallType == ModContent.WallType<ContagionMouldWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CrimsonUnsafe1;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Cave4Unsafe || Main.tile[m, n].WallType == WallID.Cave5Unsafe ||
+                                Main.tile[m, n].WallType == WallID.CorruptionUnsafe3 || Main.tile[m, n].WallType == WallID.HallowUnsafe4 ||
+                                Main.tile[m, n].WallType == WallID.RocksUnsafe1 || Main.tile[m, n].WallType == ModContent.WallType<ContagionCystWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CrimsonUnsafe3;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.CorruptionUnsafe4 || Main.tile[m, n].WallType == WallID.HallowUnsafe1 ||
+                                Main.tile[m, n].WallType == WallID.Cave8Unsafe || Main.tile[m, n].WallType == WallID.RocksUnsafe4 ||
+                                Main.tile[m, n].WallType == ModContent.WallType<ContagionBoilWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CrimsonUnsafe4;
+                            }
+                            #endregion
+
+                            #region tiles
+                            if (TileID.Sets.IsVine[type])
+                            {
+                                Main.tile[m, n].TileType = TileID.CrimsonVines;
+                            }
+
+                            if (flag && Main.tile[m, n].TileType == TileID.Hive && Main.tile[m, n].TileType != TileID.Crimstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.Crimstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (flag && Main.tile[m, n].TileType == TileID.CrispyHoneyBlock && Main.tile[m, n].TileType != TileID.CrimsonHardenedSand)
+                            {
+                                Main.tile[m, n].TileType = TileID.CrimsonHardenedSand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+
+                            if (TileID.Sets.Conversion.Grass[type] && Main.tile[m, n].TileType != TileID.CrimsonGrass)
                             {
                                 Main.tile[m, n].TileType = TileID.CrimsonGrass;
                                 WorldGen.SquareTileFrame(m, n);
                             }
+                            else if (TileID.Sets.Conversion.Stone[type] && Main.tile[m, n].TileType != TileID.Crimstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.Crimstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Sand[type] && Main.tile[m, n].TileType != TileID.Crimsand)
+                            {
+                                Main.tile[m, n].TileType = TileID.Crimsand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Ice[type] && Main.tile[m, n].TileType != TileID.FleshIce)
+                            {
+                                Main.tile[m, n].TileType = TileID.FleshIce;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.HardenedSand[type] && Main.tile[m, n].TileType != TileID.CrimsonHardenedSand)
+                            {
+                                Main.tile[m, n].TileType = TileID.CrimsonHardenedSand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Sandstone[type] && Main.tile[m, n].TileType != TileID.CrimsonSandstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.CrimsonSandstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            #endregion
                         }
                         else if (evil == WorldEvil.Corruption)
                         {
-                            if (Main.tile[m, n].TileType == ModContent.TileType<Ickgrass>())
+                            #region walls
+                            if (Main.tile[m, n].WallType == WallID.GrassUnsafe || Main.tile[m, n].WallType == WallID.FlowerUnsafe ||
+                            Main.tile[m, n].WallType == WallID.Grass || Main.tile[m, n].WallType == WallID.Flower ||
+                            Main.tile[m, n].WallType == ModContent.WallType<ContagionGrassWall>() || Main.tile[m, n].WallType == WallID.CrimsonGrassUnsafe)
+                            {
+                                Main.tile[m, n].WallType = WallID.CorruptGrassUnsafe;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.HardenedSand)
+                            {
+                                Main.tile[m, n].WallType = WallID.CorruptHardenedSand;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Sandstone)
+                            {
+                                Main.tile[m, n].WallType = WallID.CorruptSandstone;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.CrimstoneUnsafe || Main.tile[m, n].WallType == ModContent.WallType<ChunkstoneWall>())
+                            {
+                                Main.tile[m, n].WallType = WallID.EbonstoneUnsafe;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.HallowUnsafe2 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe2 ||
+                                Main.tile[m, n].WallType == WallID.RocksUnsafe3 || Main.tile[m, n].WallType == ModContent.WallType<ContagionLumpWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CorruptionUnsafe2;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Cave3Unsafe || Main.tile[m, n].WallType == WallID.HallowUnsafe3 ||
+                                Main.tile[m, n].WallType == WallID.CrimsonUnsafe1 || Main.tile[m, n].WallType == WallID.RocksUnsafe2 ||
+                                Main.tile[m, n].WallType == ModContent.WallType<ContagionMouldWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CorruptionUnsafe1;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.Cave4Unsafe || Main.tile[m, n].WallType == WallID.Cave5Unsafe ||
+                                Main.tile[m, n].WallType == WallID.HallowUnsafe4 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe3 ||
+                                Main.tile[m, n].WallType == WallID.RocksUnsafe1 || Main.tile[m, n].WallType == ModContent.WallType<ContagionCystWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CorruptionUnsafe3;
+                            }
+                            else if (Main.tile[m, n].WallType == WallID.HallowUnsafe1 || Main.tile[m, n].WallType == WallID.CrimsonUnsafe4 ||
+                                Main.tile[m, n].WallType == WallID.Cave8Unsafe || Main.tile[m, n].WallType == WallID.RocksUnsafe4 ||
+                                Main.tile[m, n].WallType == ModContent.WallType<ContagionBoilWallUnsafe>())
+                            {
+                                Main.tile[m, n].WallType = WallID.CorruptionUnsafe4;
+                            }
+                            #endregion
+
+                            #region tiles
+                            if (TileID.Sets.IsVine[type])
+                            {
+                                Main.tile[m, n].TileType = TileID.CorruptVines;
+                            }
+
+                            if (flag && Main.tile[m, n].TileType == TileID.Hive && Main.tile[m, n].TileType != TileID.Ebonstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.Ebonstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (flag && Main.tile[m, n].TileType == TileID.CrispyHoneyBlock && Main.tile[m, n].TileType != TileID.CorruptHardenedSand)
+                            {
+                                Main.tile[m, n].TileType = TileID.CorruptHardenedSand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+
+                            if (TileID.Sets.Conversion.Grass[type] && Main.tile[m, n].TileType != TileID.CorruptGrass)
                             {
                                 Main.tile[m, n].TileType = TileID.CorruptGrass;
                                 WorldGen.SquareTileFrame(m, n);
                             }
+                            else if (TileID.Sets.Conversion.Stone[type] && Main.tile[m, n].TileType != TileID.Ebonstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.Ebonstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Sand[type] && Main.tile[m, n].TileType != TileID.Ebonsand)
+                            {
+                                Main.tile[m, n].TileType = TileID.Ebonsand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Ice[type] && Main.tile[m, n].TileType != TileID.CorruptIce)
+                            {
+                                Main.tile[m, n].TileType = TileID.CorruptIce;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.HardenedSand[type] && Main.tile[m, n].TileType != TileID.CorruptHardenedSand)
+                            {
+                                Main.tile[m, n].TileType = TileID.CorruptHardenedSand;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            else if (TileID.Sets.Conversion.Sandstone[type] && Main.tile[m, n].TileType != TileID.CorruptSandstone)
+                            {
+                                Main.tile[m, n].TileType = TileID.CorruptSandstone;
+                                WorldGen.SquareTileFrame(m, n);
+                            }
+                            #endregion
                         }
                     }
                 }
                 val += val2;
-                val2.X += (double)WorldGen.genRand.Next(-10, 11) * 0.05;
+                val2.X += WorldGen.genRand.Next(-10, 11) * 0.05;
                 if (val2.X > speedX + 1.0)
                 {
                     val2.X = speedX + 1.0;
@@ -307,7 +577,7 @@ namespace Avalon.Hooks
                 {
                     val2.X = speedX - 1.0;
                 }
-                if (val.X < (double)(-num2) || val.Y < (double)(-num2) || val.X > (double)(Main.maxTilesX + num2) || val.Y > (double)(Main.maxTilesY + num2))
+                if (val.X < -num2 || val.Y < -num2 || val.X > Main.maxTilesX + num2 || val.Y > Main.maxTilesY + num2)
                 {
                     flag2 = false;
                 }

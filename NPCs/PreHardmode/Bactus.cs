@@ -69,7 +69,6 @@ public class Bactus : ModNPC
     //    NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
     //    NPC.damage = (int)(NPC.damage * 0.65f);
     //}
-    bool spawned;
     public bool treeSpawn;
     int J;
     public override void OnSpawn(IEntitySource source)
