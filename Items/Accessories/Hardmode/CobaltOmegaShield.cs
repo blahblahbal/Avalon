@@ -36,6 +36,5 @@ class CobaltOmegaShield : ModItem
         player.GetModPlayer<AvalonPlayer>().DuraShield = true;
         player.GetModPlayer<AvalonPlayer>().CobOmegaShield = true;
         player.noKnockback = true;
-        player.GetModPlayer<AvalonPlayer>().TrapImmune = true;
     }
 }

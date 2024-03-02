@@ -7081,21 +7081,23 @@ Mods: {
 				DisplayName: Cobalt Omega Shield
 				Tooltip:
 					'''
-					Greatly increases defense and regenerates life when struck
+					Greatly increases defense when struck
+					Reduces health regeneration cooldown
 					Slows the effects of damage over time debuffs
 					'''
 			}
 
 			PalladiumCrossShield: {
 				DisplayName: Palladium Cross Shield
-				Tooltip: Regenerates health when struck
+				Tooltip: Reduces health regeneration cooldown
 			}
 
 			PalladiumOmegaShield: {
 				DisplayName: Palladium Omega Shield
 				Tooltip:
 					'''
-					Quickly regenerates life and increases defense when struck
+					Greatly reduces health regeneration cooldown
+					Increases defense when struck
 					Slows the effects of damage over time debuffs
 					'''
 			}
@@ -7109,8 +7111,9 @@ Mods: {
 				DisplayName: Duratanium Omega Shield
 				Tooltip:
 					'''
-					Increases defense and regenerates life when struck
 					Greatly slows the effects of damage over time debuffs
+					Increases defense when struck
+					Reduces health regeneration cooldown
 					'''
 			}
 
@@ -9326,12 +9329,22 @@ Mods: {
 
 			AmberShardBuff: {
 				DisplayName: Amber Shard Buff
-				Description: Mods.Avalon.Buffs.AmberShardBuff.Description
+				Description: 15% increased damage
 			}
 
 			Malaria: {
 				DisplayName: Malaria
 				Description: Mods.Avalon.Buffs.Malaria.Description
+			}
+
+			CobaltEndurance: {
+				DisplayName: Cobalt Endurance
+				Description: Increase defense by 8
+			}
+
+			OmegaCobaltEndurance: {
+				DisplayName: Omega Cobalt Endurance
+				Description: Increase defense by 16
 			}
 		}
 

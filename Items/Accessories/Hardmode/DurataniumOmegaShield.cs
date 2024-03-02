@@ -27,7 +27,6 @@ class DurataniumOmegaShield : ModItem
         player.GetModPlayer<AvalonPlayer>().DuraShield = true;
         player.GetModPlayer<AvalonPlayer>().DuraOmegaShield = true;
         player.noKnockback = true;
-        player.GetModPlayer<AvalonPlayer>().TrapImmune = true;
     }
     public override void AddRecipes()
     {

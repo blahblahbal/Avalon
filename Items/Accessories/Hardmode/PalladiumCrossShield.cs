@@ -23,7 +23,6 @@ class PalladiumCrossShield : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().PallShield = true;
-        player.GetModPlayer<AvalonPlayer>().TrapImmune = true;
     }
     public override void AddRecipes()
     {

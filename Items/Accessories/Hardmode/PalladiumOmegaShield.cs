@@ -36,6 +36,5 @@ class PalladiumOmegaShield : ModItem
         player.GetModPlayer<AvalonPlayer>().DuraShield = true;
         player.GetModPlayer<AvalonPlayer>().PallOmegaShield = true;
         player.noKnockback = true;
-        player.GetModPlayer<AvalonPlayer>().TrapImmune = true;
     }
 }
