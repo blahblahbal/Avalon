@@ -1078,23 +1078,29 @@ public class AvalonPlayer : ModPlayer
         if (Player.whoAmI == Main.myPlayer && CobShield)
         {
             int time = 300;
+            int type = ModContent.BuffType<CobaltEndurance>();
             if (CobOmegaShield)
             {
                 time = 600;
+                type = ModContent.BuffType<OmegaCobaltEndurance>();
             }
 
-            Player.AddBuff(BuffID.Ironskin, time);
+            Player.AddBuff(type, time);
         }
-        if (Player.whoAmI == Main.myPlayer && PallShield)
+    }
+    public override void UpdateLifeRegen()
+    {
+        if (PallShield && Player.lifeRegenTime <= 1)
         {
-            int hpHealed = 5;
+            int regenCooldownReduce = 900;
             if (PallOmegaShield)
             {
-                hpHealed = 10;
+                regenCooldownReduce = 1800;
             }
-
-            Player.statLife += hpHealed;
-            Player.HealEffect(hpHealed);
+            if (Player.lifeRegenTime < regenCooldownReduce)
+            {
+                Player.lifeRegenTime = regenCooldownReduce;
+            }
         }
     }
     public override void UpdateBadLifeRegen()
