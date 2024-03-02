@@ -512,11 +512,56 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void HoldItem(Item item, Player player)
     {
+        Vector2 pos = Main.ReverseGravitySupport(player.GetModPlayer<AvalonPlayer>().MousePosition);
+        Point tilePos = pos.ToTileCoordinates();
+
+        #region right click bottomless buckets to do 3x3
+        if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.cursorItemIconID == 0 && !player.mouseInterface &&
+            player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
+            (item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket))
+        {
+            int liquidID = LiquidID.Water;
+            if (item.type == ItemID.BottomlessLavaBucket) liquidID = LiquidID.Lava;
+            if (item.type == ItemID.BottomlessHoneyBucket) liquidID = LiquidID.Honey;
+            if (item.type == ItemID.BottomlessShimmerBucket) liquidID = LiquidID.Shimmer;
+
+            Main.NewText(liquidID);
+            for (int z = tilePos.X - 1; z <= tilePos.X + 1; z++)
+            {
+                for (int w = tilePos.Y - 1; w <= tilePos.Y + 1; w++)
+                {
+                    if (Main.tile[z, w].LiquidType != liquidID && Main.tile[z, w].LiquidAmount > 0)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            for (int z = tilePos.X - 1; z <= tilePos.X + 1; z++)
+            {
+                for (int w = tilePos.Y - 1; w <= tilePos.Y + 1; w++)
+                {
+                    SoundStyle s = new SoundStyle("Terraria/Sounds/Splash_1");
+                    SoundEngine.PlaySound(s, player.position);
+
+                    Tile t = Main.tile[z, w];
+                    t.LiquidType = liquidID;
+                    t.LiquidAmount = 255;
+                    WorldGen.SquareTileFrame(z, w, true);
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.sendWater(z, w);
+                    }
+                }
+            }
+        }
+        #endregion
+
         #region shimmer bucket
         if (item.type == ItemID.EmptyBucket)
         {
-            Vector2 pos = player.GetModPlayer<AvalonPlayer>().MousePosition;
-            Point tilePos = pos.ToTileCoordinates();
+            //Vector2 pos = player.GetModPlayer<AvalonPlayer>().MousePosition;
+            //Point tilePos = pos.ToTileCoordinates();
             if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !Main.tile[tilePos.X, tilePos.Y].HasTile &&
                 Main.tile[tilePos.X, tilePos.Y].LiquidAmount > 200 && Main.tile[tilePos.X, tilePos.Y].LiquidType == LiquidID.Shimmer)
             {

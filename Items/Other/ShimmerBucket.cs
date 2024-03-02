@@ -11,10 +11,6 @@ namespace Avalon.Items.Other;
 
 internal class ShimmerBucket : ModItem
 {
-    public override bool IsLoadingEnabled(Mod mod)
-    {
-        return true;
-    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -52,9 +48,5 @@ internal class ShimmerBucket : ModItem
                     NetMessage.sendWater(tilePos.X, tilePos.Y);
             }
         }
-    }
-    public override bool? UseItem(Player player)
-    {
-        return true;
     }
 }
