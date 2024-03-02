@@ -8332,6 +8332,11 @@ Mods: {
 				DisplayName: Contagion Mimic Banner
 				Tooltip: ""
 			}
+
+			ShimmerBucket: {
+				DisplayName: Shimmer Bucket
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

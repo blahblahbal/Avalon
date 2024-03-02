@@ -259,7 +259,7 @@ namespace Avalon.Data.Sets
             { 2840, ItemType<Moonphaser>() },
             { 2841, ItemType<Jukebox>() },
             { 2842, ItemType<ApollosQuiver>() },
-            //{ 2843, ItemType<CrystalEdge>() },
+            { 2843, ItemType<CrystalEdge>() },
             { 2844, ItemType<ChaosCrystal>() },
             { 2845, ItemType<ChaosEmblem>() },
             { 2846, ItemType<Beak>() },
@@ -293,7 +293,7 @@ namespace Avalon.Data.Sets
             { 2874, ItemID.FieryGreatsword },
             { 2875, ItemType<Moonfury>() },
             { 2876, ItemType<Sporalash>() },
-            //{ 2877, ItemType<Lifestone>() },
+            //{ 2877, ItemType<Lifestone>() }, // lifestone
             //{ 2878, ItemType<PoisonSpike>() },
             { 2879, ItemType<Jukebox>() }, // music box essence
             //{ 2880, ItemType<Venoshock>() }, // set to air? or make venoshock not jank
