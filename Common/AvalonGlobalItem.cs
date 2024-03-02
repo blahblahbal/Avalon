@@ -512,6 +512,73 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void HoldItem(Item item, Player player)
     {
+        #region shimmer bucket
+        if (item.type == ItemID.EmptyBucket)
+        {
+            Vector2 pos = player.GetModPlayer<AvalonPlayer>().MousePosition;
+            Point tilePos = pos.ToTileCoordinates();
+            if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !Main.tile[tilePos.X, tilePos.Y].HasTile &&
+                Main.tile[tilePos.X, tilePos.Y].LiquidAmount > 200 && Main.tile[tilePos.X, tilePos.Y].LiquidType == LiquidID.Shimmer)
+            {
+                if (player.itemTime == 0 && player.itemAnimation > 0 && player.controlUseItem)
+                {
+                    int liquidType = Main.tile[tilePos.X, tilePos.Y].LiquidType;
+                    int liquidAmt = Main.tile[tilePos.X, tilePos.Y].LiquidAmount;
+
+                    if (liquidAmt > 100 && liquidType == LiquidID.Shimmer)
+                    {
+                        SoundStyle s = new SoundStyle("Terraria/Sounds/Splash_1");
+                        SoundEngine.PlaySound(s, player.position);
+                        item.stack--;
+                        player.PutItemInInventoryFromItemUsage(ModContent.ItemType<ShimmerBucket>(), player.selectedItem);
+                        player.itemTime = player.inventory[player.selectedItem].useTime;
+
+                        int num3 = Main.tile[tilePos.X, tilePos.Y].LiquidAmount;
+                        Tile t = Main.tile[tilePos.X, tilePos.Y];
+                        t.LiquidAmount = 0;
+                        t.LiquidType = LiquidID.Water;
+                        WorldGen.SquareTileFrame(tilePos.X, tilePos.Y, resetFrame: false);
+                        if (Main.netMode == 1)
+                            NetMessage.sendWater(tilePos.X, tilePos.Y);
+                        else
+                            Liquid.AddWater(tilePos.X, tilePos.Y);
+
+                        if (num3 >= 255)
+                            return;
+
+                        for (int k = tilePos.X - 1; k <= tilePos.Y + 1; k++)
+                        {
+                            for (int l = tilePos.X - 1; l <= tilePos.Y + 1; l++)
+                            {
+                                if ((k != tilePos.X || l != tilePos.Y) && Main.tile[k, l].LiquidAmount > 0 && Main.tile[k, l].LiquidType == LiquidID.Shimmer)
+                                {
+                                    int num4 = Main.tile[k, l].LiquidAmount;
+                                    if (num4 + num3 > 255)
+                                        num4 = 255 - num3;
+
+                                    num3 += num4;
+                                    Tile t2 = Main.tile[k, l];
+                                    t2.LiquidAmount -= (byte)num4;
+                                    t2.LiquidType = LiquidID.Shimmer;
+                                    if (t2.LiquidAmount == 0)
+                                    {
+                                        t2.LiquidType = LiquidID.Water;
+                                    }
+
+                                    WorldGen.SquareTileFrame(k, l, resetFrame: false);
+                                    if (Main.netMode == 1)
+                                        NetMessage.sendWater(k, l);
+                                    else
+                                        Liquid.AddWater(k, l);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
         #region extractinator prefix removal
         if (item.prefix > 0)
         {
@@ -2210,63 +2277,6 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override bool? UseItem(Item item, Player player)
     {
-        #region shimmer bucket code (DOES NOT WORK LMAO)
-        //if (item.type == ItemID.EmptyBucket)
-        //{
-        //    Vector2 pos = player.GetModPlayer<AvalonPlayer>().MousePosition;
-        //    Point tilePos = pos.ToTileCoordinates();
-        //    if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !Main.tile[tilePos.X, tilePos.Y].HasTile &&
-        //        Main.tile[tilePos.X, tilePos.Y].LiquidAmount > 200 && Main.tile[tilePos.X, tilePos.Y].LiquidType == LiquidID.Shimmer)
-        //    {
-        //        SoundEngine.PlaySound(SoundID.Splash, player.position);
-        //        item.stack--;
-        //        player.PutItemInInventoryFromItemUsage(ModContent.ItemType<ShimmerBucket>(), player.selectedItem);
-        //        player.ApplyItemTime(item);
-        //        int num3 = Main.tile[tilePos.X, tilePos.Y].LiquidAmount;
-        //        Tile t = Main.tile[tilePos.X, tilePos.Y];
-        //        t.LiquidAmount = 0;
-        //        t.LiquidType = LiquidID.Water;
-        //        WorldGen.SquareTileFrame(tilePos.X, tilePos.Y, resetFrame: false);
-        //        if (Main.netMode == 1)
-        //            NetMessage.sendWater(tilePos.X, tilePos.Y);
-        //        else
-        //            Liquid.AddWater(tilePos.X, tilePos.Y);
-
-        //        if (num3 >= 255)
-        //            return false;
-
-        //        for (int k = tilePos.X - 1; k <= tilePos.Y + 1; k++)
-        //        {
-        //            for (int l = tilePos.X - 1; l <= tilePos.Y + 1; l++)
-        //            {
-        //                if ((k != tilePos.X || l != tilePos.Y) && Main.tile[k, l].LiquidAmount > 0 && Main.tile[k, l].LiquidType == LiquidID.Shimmer)
-        //                {
-        //                    int num4 = Main.tile[k, l].LiquidAmount;
-        //                    if (num4 + num3 > 255)
-        //                        num4 = 255 - num3;
-
-        //                    num3 += num4;
-        //                    Tile t2 = Main.tile[k, l];
-        //                    t2.LiquidAmount -= (byte)num4;
-        //                    t2.LiquidType = LiquidID.Shimmer;
-        //                    if (t2.LiquidAmount == 0)
-        //                    {
-        //                        t2.LiquidType = LiquidID.Water;
-        //                    }
-
-        //                    WorldGen.SquareTileFrame(k, l, resetFrame: false);
-        //                    if (Main.netMode == 1)
-        //                        NetMessage.sendWater(k, l);
-        //                    else
-        //                        Liquid.AddWater(k, l);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return true;
-        //}
-        #endregion
-
         #region aoe pick mining prefix
         //if (item.prefix == ModContent.PrefixType<Area>())
         //{
