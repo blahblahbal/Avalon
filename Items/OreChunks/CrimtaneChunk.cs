@@ -25,7 +25,7 @@ class CrimtaneChunk : ModItem
     {
         Recipe.Create(ItemID.CrimtaneBar)
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

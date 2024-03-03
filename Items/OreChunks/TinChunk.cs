@@ -24,7 +24,7 @@ class TinChunk : ModItem
     {
         Recipe.Create(ItemID.TinBar)
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

@@ -30,7 +30,7 @@ class PyroscoricChunk : ModItem
     //{
     //    Recipe.Create(ModContent.ItemType<Material.Bars.PyroscoricBar>())
     //        .AddIngredient(Type, 5)
-    //        .AddTile(TileID.WorkBenches)
+    //        .AddTile(ModContent.TileType<Tiles.CaesiumForge>())
     //        .Register();
     //}
 }

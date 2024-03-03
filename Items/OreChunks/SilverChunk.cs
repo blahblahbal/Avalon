@@ -24,7 +24,7 @@ class SilverChunk : ModItem
     {
         Recipe.Create(ItemID.SilverBar)
             .AddIngredient(Type, 4)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

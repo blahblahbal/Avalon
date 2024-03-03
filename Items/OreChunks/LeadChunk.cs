@@ -24,7 +24,7 @@ class LeadChunk : ModItem
     {
         Recipe.Create(ItemID.LeadBar)
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

@@ -25,7 +25,7 @@ class MythrilChunk : ModItem
     {
         Recipe.Create(ItemID.MythrilBar)
             .AddIngredient(Type, 4)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

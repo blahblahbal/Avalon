@@ -25,7 +25,7 @@ class OrichalcumChunk : ModItem
     {
         Recipe.Create(ItemID.OrichalcumBar)
             .AddIngredient(Type, 4)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

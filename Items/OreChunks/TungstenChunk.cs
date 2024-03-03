@@ -24,7 +24,7 @@ class TungstenChunk : ModItem
     {
         Recipe.Create(ItemID.TungstenBar)
             .AddIngredient(Type, 4)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

@@ -29,7 +29,7 @@ class TritanoriumChunk : ModItem
     //{
     //    Recipe.Create(ModContent.ItemType<Material.Bars.TritanoriumBar>())
     //        .AddIngredient(Type, 5)
-    //        .AddTile(TileID.WorkBenches)
+    //        .AddTile(ModContent.TileType<Tiles.CaesiumForge>())
     //        .Register();
     //}
 }

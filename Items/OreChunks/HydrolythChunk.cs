@@ -32,14 +32,14 @@ class HydrolythChunk : ModItem
     //        .AddIngredient(Type, 5)
     //        .AddIngredient(ModContent.ItemType<FeroziumChunk>())
     //        .AddIngredient(ModContent.ItemType<Ore.SolariumOre>())
-    //        .AddTile(TileID.WorkBenches)
+    //        .AddTile(ModContent.TileType<Tiles.CaesiumForge>())
     //        .Register();
 
     //    Recipe.Create(ModContent.ItemType<Placeable.Bar.HydrolythBar>())
     //        .AddIngredient(Type, 5)
     //        .AddIngredient(ModContent.ItemType<Ore.FeroziumOre>())
     //        .AddIngredient(ModContent.ItemType<Ore.SolariumOre>())
-    //        .AddTile(TileID.WorkBenches)
+    //        .AddTile(ModContent.TileType<Tiles.CaesiumForge>())
     //        .Register();
     //}
 }

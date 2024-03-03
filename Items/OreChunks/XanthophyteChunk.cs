@@ -30,7 +30,7 @@ class XanthophyteChunk : ModItem
     //{
     //    Recipe.Create(ModContent.ItemType<Material.Bars.XanthophyteBar>())
     //        .AddIngredient(Type, 5)
-    //        .AddTile(TileID.WorkBenches)
+    //        .AddTile(TileID.AdamantiteForge)
     //        .Register();
     //}
 }

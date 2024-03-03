@@ -25,7 +25,7 @@ class ShroomiteChunk : ModItem
     {
         Recipe.Create(ItemID.ShroomiteBar)
             .AddIngredient(Type, 5)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.AdamantiteForge)
             .Register();
     }
 }

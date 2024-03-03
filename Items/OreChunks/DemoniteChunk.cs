@@ -25,7 +25,7 @@ class DemoniteChunk : ModItem
     {
         Recipe.Create(ItemID.DemoniteBar)
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

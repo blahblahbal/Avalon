@@ -30,7 +30,7 @@ class TroxiniumChunk : ModItem
     {
         Recipe.Create(ModContent.ItemType<Material.Bars.TroxiniumBar>())
             .AddIngredient(Type, 5)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.AdamantiteForge)
             .Register();
     }
 }

@@ -25,7 +25,7 @@ class TitaniumChunk : ModItem
     {
         Recipe.Create(ItemID.TitaniumBar)
             .AddIngredient(Type, 5)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.AdamantiteForge)
             .Register();
     }
 }

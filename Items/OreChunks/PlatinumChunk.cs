@@ -24,7 +24,7 @@ class PlatinumChunk : ModItem
     {
         Recipe.Create(ItemID.PlatinumBar)
             .AddIngredient(Type, 4)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

@@ -24,7 +24,7 @@ class IronChunk : ModItem
     {
         Recipe.Create(ItemID.IronBar)
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

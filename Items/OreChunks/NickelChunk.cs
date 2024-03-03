@@ -24,7 +24,7 @@ class NickelChunk : ModItem
     {
         Recipe.Create(ModContent.ItemType<Material.Bars.NickelBar>())
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

@@ -24,7 +24,7 @@ class BronzeChunk : ModItem
     {
         Recipe.Create(ModContent.ItemType<Material.Bars.BronzeBar>())
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

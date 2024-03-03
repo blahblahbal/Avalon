@@ -25,7 +25,7 @@ class PalladiumChunk : ModItem
     {
         Recipe.Create(ItemID.PalladiumBar)
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

@@ -25,14 +25,14 @@ class FeroziumChunk : ModItem
     //{
     //    Recipe.Create(ModContent.ItemType<Placeable.Bar.FeroziumBar>())
     //        .AddIngredient(Type, 5)
-    //        .AddTile(TileID.WorkBenches)
+    //        .AddTile(TileID.AdamantiteForge)
     //        .Register();
 
     //    Recipe.Create(ModContent.ItemType<Placeable.Bar.HydrolythBar>())
     //        .AddIngredient(ModContent.ItemType<HydrolythChunk>(), 5)
     //        .AddIngredient(Type)
     //        .AddIngredient(ModContent.ItemType<Ore.SolariumOre>())
-    //        .AddTile(TileID.WorkBenches)
+    //        .AddTile(TileID.AdamantiteForge)
     //        .Register();
     //}
 }

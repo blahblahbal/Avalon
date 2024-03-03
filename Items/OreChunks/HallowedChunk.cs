@@ -25,7 +25,7 @@ class HallowedChunk : ModItem
     {
         Recipe.Create(ItemID.HallowedBar)
             .AddIngredient(Type, 5)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.AdamantiteForge)
             .Register();
     }
 }

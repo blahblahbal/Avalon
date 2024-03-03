@@ -25,7 +25,7 @@ class ChlorophyteChunk : ModItem
     {
         Recipe.Create(ItemID.ChlorophyteBar)
             .AddIngredient(Type, 5)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.AdamantiteForge)
             .Register();
     }
 }

@@ -26,7 +26,7 @@ class HellstoneChunk : ModItem
         Recipe.Create(ItemID.HellstoneBar)
             .AddIngredient(Type, 3)
             .AddIngredient(ItemID.Obsidian)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

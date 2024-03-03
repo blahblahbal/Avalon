@@ -24,7 +24,7 @@ class CopperChunk : ModItem
     {
         Recipe.Create(ItemID.CopperBar)
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

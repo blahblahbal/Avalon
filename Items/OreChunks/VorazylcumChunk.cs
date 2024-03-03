@@ -30,7 +30,7 @@ class VorazylcumChunk : ModItem
     //{
     //    Recipe.Create(ModContent.ItemType<Material.Bars.VorazylcumBar>())
     //        .AddIngredient(Type, 6)
-    //        .AddTile(TileID.WorkBenches)
+    //        .AddTile(ModContent.TileType<Tiles.CaesiumForge>())
     //        .Register();
     //}
 }

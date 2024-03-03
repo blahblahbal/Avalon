@@ -25,7 +25,7 @@ class DurataniumChunk : ModItem
     {
         Recipe.Create(ModContent.ItemType<Material.Bars.DurataniumBar>())
             .AddIngredient(Type, 3)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

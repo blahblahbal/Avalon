@@ -24,7 +24,7 @@ class ZincChunk : ModItem
     {
         Recipe.Create(ModContent.ItemType<Material.Bars.ZincBar>())
             .AddIngredient(Type, 4)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }

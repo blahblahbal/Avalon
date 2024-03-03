@@ -25,7 +25,7 @@ class IridiumChunk : ModItem
     {
         Recipe.Create(ModContent.ItemType<Material.Bars.IridiumBar>())
             .AddIngredient(Type, 4)
-            .AddTile(TileID.WorkBenches)
+            .AddTile(TileID.Furnaces)
             .Register();
     }
 }
