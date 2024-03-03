@@ -14,7 +14,7 @@ internal class ShimmerBucket : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.White;
+        Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
         Item.maxStack = 9999;
         Item.value = 0;

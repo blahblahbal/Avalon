@@ -525,7 +525,6 @@ public class AvalonGlobalItem : GlobalItem
             if (item.type == ItemID.BottomlessHoneyBucket) liquidID = LiquidID.Honey;
             if (item.type == ItemID.BottomlessShimmerBucket) liquidID = LiquidID.Shimmer;
 
-            Main.NewText(liquidID);
             for (int z = tilePos.X - 1; z <= tilePos.X + 1; z++)
             {
                 for (int w = tilePos.Y - 1; w <= tilePos.Y + 1; w++)
@@ -1734,12 +1733,20 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips.RemoveAt(index);
             }
         }
-        if (item.type is ItemID.SiltBlock or ItemID.SlushBlock)
+        if (item.type is ItemID.SiltBlock or ItemID.SlushBlock or ItemID.DesertFossil)
         {
             int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
             if (index != -1)
             {
                 tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Silt").ToString()));
+            }
+        }
+        if (item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket)
+        {
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip1"));
+            if (index != -1)
+            {
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip1", NetworkText.FromKey("Mods.Avalon.TooltipEdits.BottomlessBuckets").ToString()));
             }
         }
         if (item.type is ItemID.Extractinator)
