@@ -515,6 +515,36 @@ public class AvalonGlobalItem : GlobalItem
         Vector2 pos = Main.ReverseGravitySupport(player.GetModPlayer<AvalonPlayer>().MousePosition);
         Point tilePos = pos.ToTileCoordinates();
 
+        #region sponges 3x3
+        if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.cursorItemIconID == 0 && !player.mouseInterface &&
+            player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
+            (item.type is ItemID.SuperAbsorbantSponge or ItemID.LavaAbsorbantSponge or ItemID.HoneyAbsorbantSponge or ItemID.UltraAbsorbantSponge))
+        {
+            for (int z = tilePos.X - 1; z <= tilePos.X + 1; z++)
+            {
+                for (int w = tilePos.Y - 1; w <= tilePos.Y + 1; w++)
+                {
+                    if ((item.type == ItemID.SuperAbsorbantSponge && (Main.tile[z, w].LiquidType == LiquidID.Water || Main.tile[z, w].LiquidType == LiquidID.Shimmer)) ||
+                        item.type == ItemID.LavaAbsorbantSponge && Main.tile[z, w].LiquidType == LiquidID.Lava ||
+                        item.type == ItemID.HoneyAbsorbantSponge && Main.tile[z, w].LiquidType == LiquidID.Honey ||
+                        item.type == ItemID.UltraAbsorbantSponge)
+                    {
+                        SoundStyle s = new SoundStyle("Terraria/Sounds/Splash_1");
+                        SoundEngine.PlaySound(s, player.position);
+
+                        Tile t = Main.tile[z, w];
+                        t.LiquidAmount = 0;
+                        WorldGen.SquareTileFrame(z, w, true);
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                        {
+                            NetMessage.sendWater(z, w);
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
         #region right click bottomless buckets to do 3x3
         if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.cursorItemIconID == 0 && !player.mouseInterface &&
             player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
@@ -1747,6 +1777,14 @@ public class AvalonGlobalItem : GlobalItem
             if (index != -1)
             {
                 tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip1", NetworkText.FromKey("Mods.Avalon.TooltipEdits.BottomlessBuckets").ToString()));
+            }
+        }
+        if (item.type is ItemID.SuperAbsorbantSponge or ItemID.LavaAbsorbantSponge or ItemID.HoneyAbsorbantSponge or ItemID.UltraAbsorbantSponge)
+        {
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
+            if (index != -1)
+            {
+                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Sponges").ToString()));
             }
         }
         if (item.type is ItemID.Extractinator)

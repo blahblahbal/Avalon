@@ -95,9 +95,22 @@ public class ContagionMimicHook : ModHook
 
     private int On_NPC_NewNPC(On_NPC.orig_NewNPC orig, IEntitySource source, int X, int Y, int Type, int Start, float ai0, float ai1, float ai2, float ai3, int Target)
     {
-        if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && Type is NPCID.BigMimicCorruption or NPCID.BigMimicCrimson)
+        if (source is EntitySource_TileInteraction)
         {
-            Type = ModContent.NPCType<ContagionMimic>();
+            if ((Main.drunkWorld && Main.rand.NextBool(3)) || !Main.drunkWorld)
+            {
+                if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && Type is NPCID.BigMimicCorruption or NPCID.BigMimicCrimson)
+                {
+                    Type = ModContent.NPCType<ContagionMimic>();
+                }
+            }
+            //else if (!Main.drunkWorld)
+            //{
+            //    if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && Type is NPCID.BigMimicCorruption or NPCID.BigMimicCrimson)
+            //    {
+            //        Type = ModContent.NPCType<ContagionMimic>();
+            //    }
+            //}
         }
         return orig(source, X, Y, Type, Start, ai0, ai1, ai2, ai3, Target);
     }

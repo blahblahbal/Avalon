@@ -412,7 +412,8 @@ Mods: {
 		TooltipEdits: {
 			HandofCreation: Can place blocks and walls in midair and in lava
 			Silt: Gather 100 to craft into a Compressed Extractination Block
-			BottomlessBuckets: <right> to place a 3x3 area of liquid
+			BottomlessBuckets: Right Click to place a 3x3 area of liquid
+			Sponges: Right Click to absorb a 3x3 area of liquid
 			HerbologyLine: Can be exchanged at the Herbology Bench
 			EvilPickaxe: Can mine Rhodium, Osmium, and Iridium
 			FishingLine:
