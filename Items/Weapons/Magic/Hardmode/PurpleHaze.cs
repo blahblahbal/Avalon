@@ -32,7 +32,7 @@ class PurpleHaze : ModItem
         Item.knockBack = 1.5f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.PurpleHaze>();
         Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = 500000;
+        Item.value = 200000;
         Item.useAnimation = 20;
         Item.height = dims.Height;
         Item.UseSound = gas;

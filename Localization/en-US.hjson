@@ -4449,7 +4449,7 @@ Mods: {
 				Tooltip:
 					'''
 					Sprays a pathogen mist 
-					Increases target's debuff duration.
+					Increases target's debuff duration
 					'''
 			}
 
@@ -8742,6 +8742,11 @@ Mods: {
 				Description: Losing blood
 			}
 
+			AmberShardBuff: {
+				DisplayName: Attack Speed Up
+				Description: 15% increased damage
+			}
+
 			AmethystShardBuff: {
 				DisplayName: Defense Up
 				Description: Defense is increased by 6
@@ -9339,11 +9344,6 @@ Mods: {
 			PrimeArms: {
 				DisplayName: Prime Arms
 				Description: The arms will fight for you
-			}
-
-			AmberShardBuff: {
-				DisplayName: Amber Shard Buff
-				Description: 15% increased damage
 			}
 
 			Malaria: {
