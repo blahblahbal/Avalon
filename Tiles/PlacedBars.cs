@@ -1,5 +1,6 @@
 using Avalon.Items.Material.Bars;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -33,6 +34,22 @@ public class PlacedBars : ModTile
     public override ushort GetMapOption(int i, int j)
     {
         return (ushort)(Main.tile[i, j].TileFrameX / 18);
+    }
+
+    //Troxinium Bar Glow
+    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+    {
+        Tile tile = Main.tile[i, j];
+        var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+        if (Main.drawToScreen)
+        {
+            zero = Vector2.Zero;
+        }
+
+        Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
+        var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
+        Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Glow").Value, pos, frame,
+            new Color(255, 255, 255, 0) * (Lighting.Brightness(i, j) * 4f));
     }
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
