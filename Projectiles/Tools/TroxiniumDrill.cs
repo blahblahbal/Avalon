@@ -13,9 +13,8 @@ public class TroxiniumDrill : ModProjectile
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width * 26 / 60;
-        Projectile.height = dims.Height * 26 / 60 / Main.projFrames[Projectile.type];
+        Projectile.width = 20;
+        Projectile.height = 20;
         Projectile.aiStyle = ProjAIStyleID.Drill;
         Projectile.friendly = true;
         Projectile.penetrate = -1;
@@ -23,7 +22,11 @@ public class TroxiniumDrill : ModProjectile
         Projectile.hide = true;
         Projectile.ownerHitCheck = true;
         Projectile.DamageType = DamageClass.Melee;
-        Projectile.scale = 1.2f;
+        //Projectile.scale = 1.2f;
+    }
+    public override Color? GetAlpha(Color lightColor)
+    {
+        return lightColor * 4f;
     }
     public override void PostDraw(Color lightColor)
     {

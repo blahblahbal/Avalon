@@ -11,9 +11,8 @@ public class NaquadahDrill : ModProjectile
 {
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width;
-        Projectile.height = dims.Height * 26 / 58 / Main.projFrames[Projectile.type];
+        Projectile.width = 20;
+        Projectile.height = 20;
         Projectile.aiStyle = -1;
         Projectile.friendly = true;
         Projectile.penetrate = -1;
@@ -21,7 +20,7 @@ public class NaquadahDrill : ModProjectile
         Projectile.hide = true;
         Projectile.ownerHitCheck = true;
         Projectile.DamageType = DamageClass.Melee;
-        Projectile.scale = 1.2f;
+        //Projectile.scale = 1.2f;
     }
 
     public override void AI()

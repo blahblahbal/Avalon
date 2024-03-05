@@ -1,3 +1,4 @@
+using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -28,6 +29,15 @@ class TroxiniumBar : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+        if (!Main.dedServ)
+        {
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+        }
+        Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
+    }
+    public override Color? GetAlpha(Color lightColor)
+    {
+        return lightColor * 4f;
     }
     public override void AddRecipes()
     {
@@ -35,9 +45,5 @@ class TroxiniumBar : ModItem
             .AddIngredient(ModContent.ItemType<Material.Ores.TroxiniumOre>(), 5)
             .AddTile(TileID.AdamantiteForge)
             .Register();
-    }
-    public override Color? GetAlpha(Color lightColor)
-    {
-        return Color.White;
     }
 }

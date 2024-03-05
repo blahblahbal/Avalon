@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -40,7 +41,7 @@ public class ShellHammer : ModItem
         CreateRecipe(1)
             .AddIngredient(ItemID.ChlorophyteBar, 18)
             .AddIngredient(ItemID.TurtleShell)
-            //.AddIngredient(ModContent.ItemType<VenomShard>())
+            .AddIngredient(ModContent.ItemType<VenomShard>())
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }

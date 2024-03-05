@@ -35,6 +35,11 @@ public class TroxiniumRepeater : ModItem
         }
         Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = -5;
         Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = 0;
+        Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
+    }
+    public override Color? GetAlpha(Color lightColor)
+    {
+        return lightColor * 4f;
     }
     public override void AddRecipes()
     {
@@ -54,6 +59,6 @@ public class TroxiniumRepeater : ModItem
         Vector2 value = new Vector2((float)(Item.width / 2) - vector.X, Item.height - dims.Height);
         Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
         float num = Item.velocity.X * 0.2f;
-        spriteBatch.Draw((Texture2D)ModContent.Request<Texture2D>(Texture + "_Glow"), vector2, dims, new Color(250, 250, 250, 250), num, vector, scale, SpriteEffects.None, 0f);
+        spriteBatch.Draw((Texture2D)ModContent.Request<Texture2D>(Texture + "_Glow"), vector2, dims, new Color(255, 255, 255, 0), num, vector, scale, SpriteEffects.None, 0f);
     }
 }

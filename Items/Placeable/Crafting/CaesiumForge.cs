@@ -41,5 +41,10 @@ class CaesiumForge : ModItem
             .AddIngredient(ItemID.TitaniumForge)
             .AddIngredient(ModContent.ItemType<CaesiumOre>(), 40)
             .AddTile(TileID.MythrilAnvil).Register();
+
+        Recipe.Create(Type)
+            .AddIngredient(ModContent.ItemType<TroxiniumForge>())
+            .AddIngredient(ModContent.ItemType<CaesiumOre>(), 40)
+            .AddTile(TileID.MythrilAnvil).Register();
     }
 }

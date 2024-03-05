@@ -1,3 +1,4 @@
+using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -28,10 +29,15 @@ class TroxiniumOre : ModItem
         Item.value = Item.sellPrice(0, 0, 15);
         Item.useAnimation = 15;
         Item.height = dims.Height;
+        if (!Main.dedServ)
+        {
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+        }
+        Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
     }
     public override Color? GetAlpha(Color lightColor)
     {
-        return Color.White;
+        return lightColor * 4f;
     }
     //public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     //{

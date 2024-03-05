@@ -1,5 +1,6 @@
 using System;
 using Avalon.Common.Players;
+using log4net.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -27,6 +28,7 @@ public class EruptionHook : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         var texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain");
+        var textureGlow = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain_Glow");
 
         var position = Projectile.Center;
         var mountedCenter = Main.player[Projectile.owner].MountedCenter;
@@ -55,6 +57,8 @@ public class EruptionHook : ModProjectile
                 var color2 = Lighting.GetColor((int)position.X / 16, (int)(position.Y / 16.0));
                 color2 = Projectile.GetAlpha(color2);
                 Main.EntitySpriteDraw(texture.Value, position - Main.screenPosition, sourceRectangle, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(textureGlow.Value, position - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 127), rotation, origin, 1f, SpriteEffects.None, 0);
+                Lighting.AddLight(position, new Vector3(70 / 255f, 30 / 255f, 10 / 255f));
             }
         }
 

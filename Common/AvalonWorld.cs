@@ -43,6 +43,7 @@ using Avalon.Tiles.Furniture.ResistantWood;
 using Avalon.Tiles.Furniture.YellowDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
 using Avalon.Tiles.Furniture.OrangeDungeon;
+using Avalon.Common.Templates;
 
 namespace Avalon.Common;
 
@@ -117,10 +118,47 @@ public class AvalonWorld : ModSystem
 
     public override void OnWorldUnload() //Here we reset the numbers for the calculations to make sure they dont carry over to other worlds
     {
+        ModContent.GetInstance<BismuthChandelier>().Coordinates = new();
+        ModContent.GetInstance<BleachedEbonyChandelier>().Coordinates = new();
+        ModContent.GetInstance<BronzeChandelier>().Coordinates = new();
+        ModContent.GetInstance<CoughwoodChandelier>().Coordinates = new();
+        ModContent.GetInstance<Dirtalier>().Coordinates = new();
+        ModContent.GetInstance<HeartstoneChandelier>().Coordinates = new();
+        ModContent.GetInstance<OrangeDungeonChandelier>().Coordinates = new();
+        ModContent.GetInstance<PurpleDungeonChandelier>().Coordinates = new();
+        ModContent.GetInstance<ResistantWoodChandelier>().Coordinates = new();
+        ModContent.GetInstance<WildMushroomChandelier>().Coordinates = new();
+        ModContent.GetInstance<YellowDungeonChandelier>().Coordinates = new();
+        ModContent.GetInstance<ZincChandelier>().Coordinates = new();
+
+        ModContent.GetInstance<BleachedEbonyLantern>().Coordinates = new();
+        ModContent.GetInstance<CoughwoodLantern>().Coordinates = new();
+        ModContent.GetInstance<HeartstoneLantern>().Coordinates = new();
+        ModContent.GetInstance<ResistantWoodLantern>().Coordinates = new();
         totalSick = 0;
         totalSick2 = 0;
         tSick = 0;
         //Im not too fimiliar how contagion world tags work but imo it would be best if it was reset in an OnWorldUnload and OnWorldLoad somewhere
+    }
+    public override void ClearWorld()
+    {
+        ModContent.GetInstance<BismuthChandelier>().Coordinates = new();
+        ModContent.GetInstance<BleachedEbonyChandelier>().Coordinates = new();
+        ModContent.GetInstance<BronzeChandelier>().Coordinates = new();
+        ModContent.GetInstance<CoughwoodChandelier>().Coordinates = new();
+        ModContent.GetInstance<Dirtalier>().Coordinates = new();
+        ModContent.GetInstance<HeartstoneChandelier>().Coordinates = new();
+        ModContent.GetInstance<OrangeDungeonChandelier>().Coordinates = new();
+        ModContent.GetInstance<PurpleDungeonChandelier>().Coordinates = new();
+        ModContent.GetInstance<ResistantWoodChandelier>().Coordinates = new();
+        ModContent.GetInstance<WildMushroomChandelier>().Coordinates = new();
+        ModContent.GetInstance<YellowDungeonChandelier>().Coordinates = new();
+        ModContent.GetInstance<ZincChandelier>().Coordinates = new();
+
+        ModContent.GetInstance<BleachedEbonyLantern>().Coordinates = new();
+        ModContent.GetInstance<CoughwoodLantern>().Coordinates = new();
+        ModContent.GetInstance<HeartstoneLantern>().Coordinates = new();
+        ModContent.GetInstance<ResistantWoodLantern>().Coordinates = new();
     }
     public override void PostAddRecipes()
     {
@@ -128,24 +166,6 @@ public class AvalonWorld : ModSystem
     }
     public override void SaveWorldData(TagCompound tag)
     {
-        tag["Avalon:BismuthChandeliers"] = ModContent.GetInstance<BismuthChandelier>().Coordinates;
-        tag["Avalon:BronzeChandeliers"] = ModContent.GetInstance<BronzeChandelier>().Coordinates;
-        tag["Avalon:ZincChandeliers"] = ModContent.GetInstance<ZincChandelier>().Coordinates;
-        tag["Avalon:Dirtaliers"] = ModContent.GetInstance<Dirtalier>().Coordinates;
-        tag["Avalon:HeartstoneChandeliers"] = ModContent.GetInstance<HeartstoneChandelier>().Coordinates;
-        tag["Avalon:BleachedEbonyChandeliers"] = ModContent.GetInstance<BleachedEbonyChandelier>().Coordinates;
-        tag["Avalon:CoughwoodChandeliers"] = ModContent.GetInstance<CoughwoodChandelier>().Coordinates;
-        tag["Avalon:OrangeDungeonChandeliers"] = ModContent.GetInstance<OrangeDungeonChandelier>().Coordinates;
-        tag["Avalon:PurpleDungeonChandeliers"] = ModContent.GetInstance<PurpleDungeonChandelier>().Coordinates;
-        tag["Avalon:YellowDungeonChandeliers"] = ModContent.GetInstance<YellowDungeonChandelier>().Coordinates;
-        tag["Avalon:ResistantWoodChandeliers"] = ModContent.GetInstance<ResistantWoodChandelier>().Coordinates;
-        tag["Avalon:WildMushroomChandeliers"] = ModContent.GetInstance<WildMushroomChandelier>().Coordinates;
-
-        tag["Avalon:BleachedEbonyLanterns"] = ModContent.GetInstance<BleachedEbonyLantern>().Coordinates;
-        tag["Avalon:CoughwoodLanterns"] = ModContent.GetInstance<CoughwoodLantern>().Coordinates;
-        tag["Avalon:HeartstoneLanterns"] = ModContent.GetInstance<HeartstoneLantern>().Coordinates;
-        tag["Avalon:ResistantWoodLanterns"] = ModContent.GetInstance<ResistantWoodLantern>().Coordinates;
-
         tag["Avalon:RhodiumOre"] = (byte?)RhodiumOre;
         tag["Avalon:WorldEvil"] = (byte)WorldEvil;
         tag["Avalon:WorldJungle"] = (byte)WorldJungle;
@@ -188,80 +208,6 @@ public class AvalonWorld : ModSystem
 
     public override void LoadWorldData(TagCompound tag)
     {
-        #region chandeliers
-        if (tag.ContainsKey("Avalon:BismuthChandeliers"))
-        {
-            ModContent.GetInstance<BismuthChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:BismuthChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:BronzeChandeliers"))
-        {
-            ModContent.GetInstance<BronzeChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:BronzeChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:ZincChandeliers"))
-        {
-            ModContent.GetInstance<ZincChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:ZincChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:Dirtaliers"))
-        {
-            ModContent.GetInstance<ZincChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:Dirtaliers");
-        }
-        if (tag.ContainsKey("Avalon:BleachedEbonyChandeliers"))
-        {
-            ModContent.GetInstance<BleachedEbonyChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:BleachedEbonyChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:CoughwoodChandeliers"))
-        {
-            ModContent.GetInstance<CoughwoodChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:CoughwoodChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:HeartstoneChandeliers"))
-        {
-            ModContent.GetInstance<HeartstoneChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:HeartstoneChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:OrangeDungeonChandeliers"))
-        {
-            ModContent.GetInstance<OrangeDungeonChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:OrangeDungeonChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:PurpleDungeonChandeliers"))
-        {
-            ModContent.GetInstance<PurpleDungeonChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:PurpleDungeonChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:ResistantWoodChandeliers"))
-        {
-            ModContent.GetInstance<ResistantWoodChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:ResistantWoodChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:WildMushroomChandeliers"))
-        {
-            ModContent.GetInstance<WildMushroomChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:WildMushroomChandeliers");
-        }
-        if (tag.ContainsKey("Avalon:YellowDungeonChandeliers"))
-        {
-            ModContent.GetInstance<YellowDungeonChandelier>().Coordinates = tag.Get<List<Point>>("Avalon:YellowDungeonChandeliers");
-        }
-
-        // lanterns
-        if (tag.ContainsKey("Avalon:BleachedEbonyLanterns"))
-        {
-            ModContent.GetInstance<BleachedEbonyLantern>().Coordinates = tag.Get<List<Point>>("Avalon:BleachedEbonyLanterns");
-        }
-        if (tag.ContainsKey("Avalon:CoughwoodLanterns"))
-        {
-            ModContent.GetInstance<CoughwoodLantern>().Coordinates = tag.Get<List<Point>>("Avalon:CoughwoodLanterns");
-        }
-        if (tag.ContainsKey("Avalon:HeartstoneLanterns"))
-        {
-            ModContent.GetInstance<HeartstoneLantern>().Coordinates = tag.Get<List<Point>>("Avalon:HeartstoneLanterns");
-        }
-        if (tag.ContainsKey("Avalon:ResistantWoodLanterns"))
-        {
-            ModContent.GetInstance<ResistantWoodLantern>().Coordinates = tag.Get<List<Point>>("Avalon:ResistantWoodLanterns");
-        }
-
-        #endregion
-
-
-
-
-
         if (tag.ContainsKey("Avalon:ContagionBG"))
         {
             SecondaryContagionBG = tag.GetAsInt("Avalon:ContagionBG");

@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Graphics.Shaders;
+using Avalon.Items.Material.Shards;
 
 namespace Avalon.Items.Accessories.Vanity;
 
@@ -38,7 +39,7 @@ internal class BagofHallows : ModItem
             .AddIngredient(ItemID.HallowedBar, 15)
             .AddIngredient(ItemID.PixieDust, 10)
             .AddIngredient(ItemID.UnicornHorn, 2)
-            //.AddIngredient(ModContent.ItemType<Material.SacredShard>(), 2) //ADD BACK LATER
+            .AddIngredient(ModContent.ItemType<SacredShard>(), 2)
             .AddTile(TileID.MythrilAnvil).Register();
     }
     public override void UpdateVanity(Player player)

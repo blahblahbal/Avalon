@@ -33,6 +33,6 @@ class ResistantWoodCandle : ModItem
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 4)
             .AddIngredient(ItemID.Torch)
-            .AddTile(TileID.Sawmill).Register();
+            .AddTile(TileID.WorkBenches).Register();
     }
 }

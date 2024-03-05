@@ -12,8 +12,8 @@ public class DurataniumChainsaw : ModProjectile
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width * 18 / 56;
-        Projectile.height = dims.Height * 18 / 56 / Main.projFrames[Projectile.type];
+        Projectile.width = (int)(dims.Width * 1.3f);
+        Projectile.height = (int)(dims.Width * 1.3f);
         Projectile.aiStyle = -1;
         Projectile.friendly = true;
         Projectile.penetrate = -1;
@@ -21,7 +21,7 @@ public class DurataniumChainsaw : ModProjectile
         Projectile.hide = true;
         Projectile.ownerHitCheck = true;
         Projectile.DamageType = DamageClass.Melee;
-        Projectile.scale = 1.16f;
+        //Projectile.scale = 1.16f;
     }
 
     public override void AI()

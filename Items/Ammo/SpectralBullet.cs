@@ -31,7 +31,7 @@ class SpectralBullet : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(Type)
+        CreateRecipe(70)
             .AddIngredient(ItemID.MusketBall, 70)
             .AddIngredient(ItemID.Ectoplasm, 2)
             .AddTile(TileID.MythrilAnvil)

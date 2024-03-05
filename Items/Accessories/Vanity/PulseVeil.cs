@@ -42,10 +42,10 @@ class PulseVeil : ModItem
             .AddTile(TileID.MythrilAnvil)
             .Register();
 
-        //CreateRecipe(1)
-        //    .AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>(), 4)
-        //    .AddIngredient(ItemID.HallowedBar, 4)
-        //    .AddTile(TileID.MythrilAnvil)
-        //    .Register();
+        CreateRecipe(1)
+            .AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>(), 4)
+            .AddIngredient(ItemID.HallowedBar, 4)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
     }
 }

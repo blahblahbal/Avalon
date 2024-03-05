@@ -13,8 +13,8 @@ public class TroxiniumChainsaw : ModProjectile
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width * 18 / 56;
-        Projectile.height = dims.Height * 18 / 56 / Main.projFrames[Projectile.type];
+        Projectile.width = (int)(dims.Width * 1.15f);
+        Projectile.height = (int)(dims.Width * 1.15f);
         Projectile.aiStyle = ProjAIStyleID.Drill;
         Projectile.friendly = true;
         Projectile.penetrate = -1;
@@ -22,7 +22,11 @@ public class TroxiniumChainsaw : ModProjectile
         Projectile.hide = true;
         Projectile.ownerHitCheck = true;
         Projectile.DamageType = DamageClass.Melee;
-        Projectile.scale = 1.16f;
+        //Projectile.scale = 1.16f;
+    }
+    public override Color? GetAlpha(Color lightColor)
+    {
+        return lightColor * 4f;
     }
     public override void PostDraw(Color lightColor)
     {

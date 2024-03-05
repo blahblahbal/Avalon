@@ -25,7 +25,6 @@ class HeartstoneWorkBench : ModItem
     {
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<Material.Ores.Heartstone>(), 10)
-            .AddTile(TileID.WorkBenches)
             .Register();
     }
 }
