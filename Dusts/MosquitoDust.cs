@@ -9,15 +9,20 @@ public class MosquitoDust : ModDust
     public override void OnSpawn(Dust dust)
     {
         dust.scale = Main.rand.NextFloat(0.3f, 0.6f);
-        dust.noGravity = true;
         dust.frame = new Rectangle(0, 0, 8, 8);
     }
     public override bool Update(Dust dust)
     {
         if (Main.rand.NextBool(3))
         {
-            dust.velocity = dust.velocity.RotatedBy(Main.rand.NextFloat(-MathHelper.PiOver4, MathHelper.PiOver4));
+            dust.velocity = (!dust.noGravity && dust.fadeIn <= 0) ? dust.velocity.RotatedBy(Main.rand.NextFloat(-MathHelper.PiOver4, MathHelper.PiOver4)) : dust.velocity.RotatedBy(Main.rand.NextFloat(-MathHelper.PiOver4 / 10, MathHelper.PiOver4 / 10));
         }
+        if(dust.velocity.Length() > 1)
+        {
+            dust.velocity *= 0.98f;
+        }
+
+        dust.fadeIn -= 1f;
         dust.position += dust.velocity;
         dust.scale -= 0.006f;
         if (dust.scale <= 0)

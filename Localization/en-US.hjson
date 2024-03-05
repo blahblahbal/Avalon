@@ -8342,6 +8342,16 @@ Mods: {
 				DisplayName: Shimmer Bucket
 				Tooltip: ""
 			}
+
+			InsectoidBlade: {
+				DisplayName: Insectoid Blade
+				Tooltip: ""
+			}
+
+			PestilentScythe: {
+				DisplayName: Pestilent Scythe
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -8591,6 +8601,8 @@ Mods: {
 			HallowedClaymore.DisplayName: Hallowed Claymore
 			UltrabrightRazorbladeBullet.DisplayName: Ultrabright Razorblade Bullet
 			UltrabrightRazorbladeBulletTyphoon.DisplayName: Ultrabright Razorblade Bullet Typhoon
+			InsectoidBlade.DisplayName: Insectoid Blade
+			PestilentScythe.DisplayName: Pestilent Scythe
 		}
 
 		NPCs: {
