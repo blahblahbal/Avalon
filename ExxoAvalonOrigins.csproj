@@ -23,4 +23,9 @@
     <Folder Include="Items\Weapons\Summon\PreHardmode\" />
     <Folder Include="Mounts\" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ThoriumMod">
+      <HintPath>..\ModAssemblies\ThoriumMod.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

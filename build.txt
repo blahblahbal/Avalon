@@ -1,3 +1,4 @@
 displayName = Exxo Avalon Origins
 author = blahblahbal
 version = 1.2.5
+weakReferences = ThoriumMod@1.7.1.5
