@@ -10,6 +10,7 @@ using Terraria.DataStructures;
 using Avalon.Common.Players;
 using Terraria.Localization;
 using System.IO;
+using Avalon.Common;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -60,8 +61,10 @@ public class Bactus : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        if ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) && !spawnInfo.Player.InPillarZone())
-            return 1;
+        if ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion ||
+            spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
+            !spawnInfo.Player.InPillarZone())
+            return 0.7f;
         return 0;
     }
     //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)

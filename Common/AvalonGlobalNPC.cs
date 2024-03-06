@@ -1,5 +1,6 @@
 using Avalon.Biomes;
 using Avalon.Buffs;
+using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Avalon.Items.Accessories.Hardmode;
@@ -30,7 +31,6 @@ namespace Avalon.Common;
 
 public class AvalonGlobalNPC : GlobalNPC
 {
-    public static float ModSpawnRate { get; set; } = 0.25f;
     public static int BleedTime = 60 * 7;
     public static int PhantasmBoss = -1;
 
@@ -653,6 +653,17 @@ public class AvalonGlobalNPC : GlobalNPC
         {
             spawnRate = (int)(spawnRate * 0.4f);
             maxSpawns = (int)(maxSpawns * 1.5f);
+        }
+        if (player.GetModPlayer<AvalonPlayer>().AdvancedBattle)
+        {
+            spawnRate = (int)(spawnRate * AdvBattle.RateMultiplier);
+            maxSpawns = (int)(maxSpawns * AdvBattle.SpawnMultiplier);
+        }
+
+        if (player.GetModPlayer<AvalonPlayer>().AdvancedCalming)
+        {
+            spawnRate = (int)(spawnRate * AdvCalming.RateMultiplier);
+            maxSpawns = (int)(maxSpawns * AdvCalming.SpawnMultiplier);
         }
     }
     public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

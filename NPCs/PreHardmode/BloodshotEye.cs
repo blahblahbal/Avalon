@@ -106,7 +106,7 @@ public class BloodshotEye : ModNPC
 
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        npcLoot.Add(new CommonDrop(ModContent.ItemType<BloodshotLens>(), 100, 1, 1, 45));
+        npcLoot.Add(new CommonDrop(ModContent.ItemType<BloodshotLens>(), 5, 1, 1, 3));
         npcLoot.Add(ItemDropRule.Common(ItemID.BlackLens, 33));
     }
 
@@ -169,7 +169,20 @@ public class BloodshotEye : ModNPC
         }
     }
 
-    public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.bloodMoon && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight
-        ? 0.121f * AvalonGlobalNPC.ModSpawnRate
-        : 0f;
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+        if (Main.bloodMoon && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneOverworldHeight)
+        {
+            if (Main.bloodMoon && !NPC.downedBoss1 && !NPC.downedBoss2 && !NPC.downedBoss3)
+            {
+                return 0.08f;
+            }
+            else
+            {
+                return 0.15f;
+            }
+        }
+        return 0f;
+    }
+
 }

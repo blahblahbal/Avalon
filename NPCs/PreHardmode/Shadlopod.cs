@@ -159,6 +159,5 @@ public class Shadlopod : ModNPC
     }
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo) => spawnInfo.Player.ZoneCorrupt && !spawnInfo.Player.InPillarZone()
-        ? 0.2f * AvalonGlobalNPC.ModSpawnRate
-        : 0f;
+        ? 0.2f : 0f;
 }

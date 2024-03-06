@@ -74,8 +74,7 @@ public class InfectedPickaxe : ModNPC
         NPC.damage = (int)(NPC.damage * 0.5f);
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.hardMode && spawnInfo.Player.InModBiome<Biomes.UndergroundContagion>()
-        ? 0.2f * AvalonGlobalNPC.ModSpawnRate
-        : 0f;
+        ? 0.2f : 0f;
     public override void ModifyNPCLoot(NPCLoot npcLoot) => npcLoot.Add(ItemDropRule.Common(ItemID.Nazar, 75));
     public override void HitEffect(NPC.HitInfo hit)
     {

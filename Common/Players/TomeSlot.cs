@@ -21,7 +21,7 @@ public class TomeSlot : ModAccessorySlot
     {
         get
         {
-            int top = MainHelper.GetMm() + 174 + 47;
+            int top = MainHelper.GetMm() + 174 + 47 - (ModLoader.HasMod("ThoriumMod") ? 48 * 3 - 2 : 0);
             Rectangle r = new(0, 0, (int)(TextureAssets.InventoryBack.Width() * Main.inventoryScale), (int)(TextureAssets.InventoryBack.Height() * Main.inventoryScale));
             r.Y = top + 5 * 47 + 7;
 
@@ -35,7 +35,7 @@ public class TomeSlot : ModAccessorySlot
     }
     public override bool PreDraw(AccessorySlotType context, Item item, Vector2 position, bool isHovered)
     {
-        int top = MainHelper.GetMm() + 174 + 47;
+        int top = MainHelper.GetMm() + 174 + 47 - (ModLoader.HasMod("ThoriumMod") ? 48 * 3 - 2 : 0);
         Rectangle r = new(0, 0, (int)(TextureAssets.InventoryBack.Width() * Main.inventoryScale), (int)(TextureAssets.InventoryBack.Height() * Main.inventoryScale));
         r.Y = top + 5 * 47 + 7;
         Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47 - 47, r.Top);

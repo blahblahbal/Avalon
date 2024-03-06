@@ -1,3 +1,10 @@
+LoadingTips_Default: {
+    "25": "Slay a boss to attract a Dryad to your house. She can tell you the state of Corruption, Crimson, Contagion, and Hallow in your World."
+    "30": "Demon Altars, Crimson Altars, and Icky Altars can't be destroyed with a normal hammer. You have to pwn them."
+    "39": "The Hallow is the only place where Corruption, Crimson, and Contagion cannot spread."
+    "56": "You can destroy Shadow Orbs, Crimson Hearts, and Sepsis Cells with a hammer or explosives, but prepare yourself for the forces they unleash."
+}
+
 Mods: {
 	BiomeTitles: {
 		Title: {
@@ -194,7 +201,7 @@ Mods: {
 			Generic_12: "{0} isn't in Kansas anymore"
 			Generic_13: "{0} experienced a skill issue"
 			Generic_14: "{0}'s keyboard was screwed up"
-            Generic_15: "{0} was mixelated"
+			Generic_15: "{0} was mixelated"
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Space_1: "{0} broke the Warp 10 threshold."
@@ -207,6 +214,13 @@ Mods: {
 			Teleport_2_Female: "{0}'s bones didn't teleport with them."
 			Teleport_3_Female: "{0} thought they were an enderman."
 		}
+
+        GameTips: {
+            AvalonTip0: "Avalon: You can find Blank Scrolls in surface chests. Use these scrolls to craft Stamina Scrolls, which will enhance your abilities!"
+            AvalonTip1: "Avalon: Tomes are a unique type of accessory that grant only stat boosts. Defeat the Eye of Cthulhu to allow the Librarian to arrive. He will sell you the Tome Forge, among some other Tome materials."
+            AvalonTip2: "Avalon: You can find Heartstone deposits underground! This ore can be used to craft Life Crystals, and also generates in a heart shape."
+            AvalonTip3: "Avalon: You can find Boltstone and Starstone deposits underground in the shape of lightning bolts and stars. These ores can be crafted into Stamina Crystals and Mana Crystals, respectively."
+        }
 
 		BossDefeatedBlurbs: {
 			MoonLord: Screams are emanating from the library...

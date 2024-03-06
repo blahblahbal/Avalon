@@ -230,8 +230,8 @@ public class OreSlime : ModNPC
     {
         if (spawnInfo.Player.ZoneUndergroundDesert)
         {
-            return 0.1f * AvalonGlobalNPC.ModSpawnRate;
+            return 0.1f;
         }
-        return spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon ? 0.2f * AvalonGlobalNPC.ModSpawnRate : 0f;
+        return spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon ? 0.2f : 0f;
     }
 }

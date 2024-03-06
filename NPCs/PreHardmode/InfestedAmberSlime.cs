@@ -107,7 +107,7 @@ public class InfestedAmberSlime : ModNPC
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        return spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>() && !spawnInfo.Player.ZoneDungeon ? 0.4f * AvalonGlobalNPC.ModSpawnRate : 0f;
+        return spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>() && !spawnInfo.Player.ZoneDungeon ? 0.4f : 0f;
     }
     public override void HitEffect(NPC.HitInfo hit)
     {
