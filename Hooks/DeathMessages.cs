@@ -47,7 +47,7 @@ public class DeathMessages : ModHook
             Main.worldName);
         if (Main.rand.NextBool(6))
         {
-            int msg = Main.rand.Next(13) + 1;
+            int msg = Main.rand.Next(15) + 1;
             switch (msg)
             {
                 case 1:

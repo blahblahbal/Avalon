@@ -194,6 +194,7 @@ Mods: {
 			Generic_12: "{0} isn't in Kansas anymore"
 			Generic_13: "{0} experienced a skill issue"
 			Generic_14: "{0}'s keyboard was screwed up"
+            Generic_15: "{0} was mixelated"
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Space_1: "{0} broke the Warp 10 threshold."
