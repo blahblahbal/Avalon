@@ -36,6 +36,7 @@ class OddFertilizer : ModItem
         NPC.SpawnOnPlayer(player.whoAmI, NPCID.Plantera);
         return true;
     }
+    // do not add souls of sight 
     public override void AddRecipes()
     {
         CreateRecipe()
@@ -44,7 +45,6 @@ class OddFertilizer : ModItem
             .AddIngredient(ItemID.JungleSpores, 15)
             .AddIngredient(ItemID.SoulofMight, 5)
             .AddIngredient(ItemID.SoulofFright, 5)
-            .AddIngredient(ItemID.SoulofSight, 5)
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }
