@@ -8365,17 +8365,21 @@ Mods: {
 
 			PestilentScythe: {
 				DisplayName: Pestilent Scythe
-				Tooltip: 
-                Rapidly spins an infected scythe all around you
+				Tooltip: Rapidly spins an infected scythe all around you
 			}
 
 			PlagueDoctor: {
 				DisplayName: Plague Doctor
 				Tooltip:
-                '''
-                Rapidly spins a scythe made of the plague all around you
-                Damage dealt imbues your nearby ally's attacks with pathogen
-                '''
+					'''
+					Rapidly spins a scythe made of the plague all around you
+					Damage dealt imbues your nearby ally's attacks with pathogen
+					'''
+			}
+
+			Clarent: {
+				DisplayName: Clarent
+				Tooltip: "'Doesn't harm critters... Probably.'"
 			}
 		}
 
