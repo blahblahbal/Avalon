@@ -8,7 +8,7 @@ using Terraria.ModLoader.IO;
 
 namespace Avalon.Items.Tools;
 
-internal class WaypointSystem : ModSystem
+public class WaypointSystem : ModSystem
 {
     public static Vector2 savedLocation;
     public override void OnWorldLoad()

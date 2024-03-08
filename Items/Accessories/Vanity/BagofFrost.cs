@@ -7,7 +7,7 @@ using Terraria.Graphics.Shaders;
 
 namespace Avalon.Items.Accessories.Vanity;
 
-internal class BagofFrost : ModItem
+public class BagofFrost : ModItem
 {
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {

@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
-internal class RubberGloves : ModItem
+public class RubberGloves : ModItem
 {
     public override void SetDefaults()
     {

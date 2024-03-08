@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-internal class NickelBow : ModItem
+public class NickelBow : ModItem
 {
     public override void SetDefaults()
     {

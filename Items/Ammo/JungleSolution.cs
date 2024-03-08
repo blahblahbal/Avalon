@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-internal class JungleSolution : ModItem
+public class JungleSolution : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Potions.Buff;
+namespace Avalon.Items.Potions.Other;
 
 class ImmortalityPotion : ModItem
 {

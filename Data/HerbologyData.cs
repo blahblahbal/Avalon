@@ -41,7 +41,7 @@ public static class HerbologyData
         ModContent.ItemType<AdvBuilderPotion>(), ModContent.ItemType<AdvCalmingPotion>(), ModContent.ItemType<AdvCratePotion>(),
         ModContent.ItemType<AdvDangersensePotion>(), ModContent.ItemType<AdvEndurancePotion>(), ModContent.ItemType<AdvFeatherfallPotion>(),
         ModContent.ItemType<AdvFishingPotion>(), ModContent.ItemType<AdvFlipperPotion>(),
-        ModContent.ItemType<AdvForceFieldPotion>(), ModContent.ItemType<AdvFuryPotion>(),
+        ModContent.ItemType<AdvForceFieldPotion>(), ModContent.ItemType<AdvFuryPotion>(), ModContent.ItemType<AdvGamblerPotion>(),
         ModContent.ItemType<AdvGauntletPotion>(), ModContent.ItemType<AdvGillsPotion>(), ModContent.ItemType<AdvGPSPotion>(),
         ModContent.ItemType<AdvGravitationPotion>(), ModContent.ItemType<AdvHeartreachPotion>(), ModContent.ItemType<AdvHeartsickPotion>(),
         ModContent.ItemType<AdvHunterPotion>(), ModContent.ItemType<AdvInfernoPotion>(),
@@ -54,8 +54,8 @@ public static class HerbologyData
         ModContent.ItemType<AdvSpelunkerPotion>(), ModContent.ItemType<AdvStarbrightPotion>(), ModContent.ItemType<AdvStrengthPotion>(),
         ModContent.ItemType<AdvSummoningPotion>(), ModContent.ItemType<AdvSupersonicPotion>(), ModContent.ItemType<AdvSwiftnessPotion>(),
         ModContent.ItemType<AdvThornsPotion>(), ModContent.ItemType<AdvTimeShiftPotion>(), ModContent.ItemType<AdvTitanPotion>(),
-        ModContent.ItemType<AdvTitanskinPotion>(), ModContent.ItemType<AdvWarmthPotion>(), ModContent.ItemType<AdvWaterWalkingPotion>(),
-        ModContent.ItemType<AdvWisdomPotion>(), ModContent.ItemType<AdvWrathPotion>()
+        ModContent.ItemType<AdvTitanskinPotion>(), ModContent.ItemType<AdvVisionPotion>(), ModContent.ItemType<AdvWarmthPotion>(),
+        ModContent.ItemType<AdvWaterWalkingPotion>(), ModContent.ItemType<AdvWisdomPotion>(), ModContent.ItemType<AdvWrathPotion>()
     };
 
     public static readonly Dictionary<int, int> HerbIdByLargeHerbId = new()
@@ -128,7 +128,7 @@ public static class HerbologyData
         ItemID.BattlePotion, ModContent.ItemType<BloodCastPotion>(),
         ItemID.BuilderPotion, ItemID.CalmingPotion, ItemID.CratePotion, ItemID.TrapsightPotion,
         ItemID.EndurancePotion, ItemID.FeatherfallPotion, ItemID.FishingPotion, ItemID.FlipperPotion,
-        ModContent.ItemType<ForceFieldPotion>(), ModContent.ItemType<FuryPotion>(),
+        ModContent.ItemType<ForceFieldPotion>(), ModContent.ItemType<FuryPotion>(), ModContent.ItemType<GamblerPotion>(),
         ModContent.ItemType<GauntletPotion>(), ItemID.GillsPotion, ModContent.ItemType<GPSPotion>(),
         ItemID.GravitationPotion, ItemID.HeartreachPotion, ModContent.ItemType<HeartsickPotion>(),
         ItemID.HunterPotion, ItemID.InfernoPotion, ModContent.ItemType<InvincibilityPotion>(),
@@ -136,7 +136,7 @@ public static class HerbologyData
         ItemID.LifeforcePotion, ItemID.MagicPowerPotion, ModContent.ItemType<MagnetPotion>(),
         ItemID.ManaRegenerationPotion, ItemID.MiningPotion, ItemID.NightOwlPotion,
         ModContent.ItemType<NinjaPotion>(), ItemID.ObsidianSkinPotion, ItemID.RagePotion, ItemID.RegenerationPotion,
-        ModContent.ItemType<RejuvenationPotion>(), ModContent.ItemType<RoguePotion>(), ModContent.ItemType<ShadowPotion>(), 
+        ModContent.ItemType<RejuvenationPotion>(), ModContent.ItemType<RoguePotion>(), ModContent.ItemType<ShadowPotion>(),
         ItemID.ShinePotion, ModContent.ItemType<ShockwavePotion>(), ItemID.SonarPotion, ItemID.SpelunkerPotion,
         ModContent.ItemType<StarbrightPotion>(), ModContent.ItemType<StrengthPotion>(), ItemID.SummoningPotion,
         ModContent.ItemType<SupersonicPotion>(), ItemID.SwiftnessPotion, ItemID.ThornsPotion,

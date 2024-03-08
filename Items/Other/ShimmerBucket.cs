@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Other;
 
-internal class ShimmerBucket : ModItem
+public class ShimmerBucket : ModItem
 {
     public override void SetDefaults()
     {

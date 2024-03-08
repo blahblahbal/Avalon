@@ -13,7 +13,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Accessories.Superhardmode;
 
 [AutoloadEquip(EquipType.Wings)]
-internal class BlahsWings : ModItem
+public class BlahsWings : ModItem
 {
     public override void SetStaticDefaults()
     {

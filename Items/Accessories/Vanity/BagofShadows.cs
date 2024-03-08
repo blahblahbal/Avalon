@@ -8,7 +8,7 @@ using Terraria.Graphics.Shaders;
 
 namespace Avalon.Items.Accessories.Vanity;
 
-internal class BagofShadows : ModItem
+public class BagofShadows : ModItem
 {
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {

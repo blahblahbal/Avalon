@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-internal class ColdCatcher : ModItem
+public class ColdCatcher : ModItem
 {
     public override void SetDefaults()
     {

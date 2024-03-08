@@ -10,7 +10,7 @@ using Terraria.Localization;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-internal class EarthsplitterHelm : ModItem
+public class EarthsplitterHelm : ModItem
 {
     public override void SetDefaults()
     {

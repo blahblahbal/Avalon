@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-internal class BrokenVigilanteTome : ModItem
+public class BrokenVigilanteTome : ModItem
 {
     public override void SetDefaults()
     {

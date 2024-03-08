@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-internal class PlatinumBarbedNet : ModItem
+public class PlatinumBarbedNet : ModItem
 {
     public override void SetStaticDefaults()
     {

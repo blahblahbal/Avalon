@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Blah;
 
-internal class BlahsKnives : ModItem
+public class BlahsKnives : ModItem
 {
     public override void SetDefaults()
     {

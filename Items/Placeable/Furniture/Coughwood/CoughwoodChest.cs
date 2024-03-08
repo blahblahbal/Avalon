@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Coughwood;
 
-internal class CoughwoodChest : ModItem
+public class CoughwoodChest : ModItem
 {
     public override void SetStaticDefaults()
     {

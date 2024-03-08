@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
-internal class CloudGlove : ModItem
+public class CloudGlove : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-internal class VirulentScythe : ModItem
+public class VirulentScythe : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
-internal class GaseousTsunamiRocketinaJar : ModItem
+public class GaseousTsunamiRocketinaJar : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-internal class ContagionSolution : ModItem
+public class ContagionSolution : ModItem
 {
     public override void SetStaticDefaults()
     {

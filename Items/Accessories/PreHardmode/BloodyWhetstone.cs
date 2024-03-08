@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
-internal class BloodyWhetstone : ModItem
+public class BloodyWhetstone : ModItem
 {
     public override void SetDefaults()
     {

@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
-internal class AnkletofAcceleration : ModItem
+public class AnkletofAcceleration : ModItem
 {
     public override void SetDefaults()
     {

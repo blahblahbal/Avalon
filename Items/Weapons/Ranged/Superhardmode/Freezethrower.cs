@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.Superhardmode;
 
-internal class Freezethrower : ModItem
+public class Freezethrower : ModItem
 {
     public override void SetDefaults()
     {

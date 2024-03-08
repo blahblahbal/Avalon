@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Other;
 
-internal class ContagionKey : ModItem
+public class ContagionKey : ModItem
 {
     public override void SetDefaults()
     {

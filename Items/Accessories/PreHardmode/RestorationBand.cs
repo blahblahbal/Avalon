@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
-internal class RestorationBand : ModItem
+public class RestorationBand : ModItem
 {
     public override void SetDefaults()
     {

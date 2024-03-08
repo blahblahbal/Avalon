@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Blah;
 
-internal class TacticalBlahncher : ModItem
+public class TacticalBlahncher : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
-internal class OilBottle : ModItem
+public class OilBottle : ModItem
 {
     public override void SetDefaults()
     {

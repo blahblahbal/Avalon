@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
-internal class BandofSlime : ModItem
+public class BandofSlime : ModItem
 {
     public override void SetDefaults()
     {

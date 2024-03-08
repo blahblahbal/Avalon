@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
-internal class BestialBand : ModItem
+public class BestialBand : ModItem
 {
     public override void SetDefaults()
     {

@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Vanity;
 
-internal class BagofBlood : ModItem
+public class BagofBlood : ModItem
 {
     public override void SetDefaults()
     {

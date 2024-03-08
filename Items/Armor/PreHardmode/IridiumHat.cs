@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-internal class IridiumHat : ModItem
+public class IridiumHat : ModItem
 {
     public override void SetDefaults()
     {

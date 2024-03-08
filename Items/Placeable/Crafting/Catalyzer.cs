@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-internal class Catalyzer : ModItem
+public class Catalyzer : ModItem
 {
     public override void SetDefaults()
     {

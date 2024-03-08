@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Accessories;
 
-internal class IntelligenceBoots : ModItem
+public class IntelligenceBoots : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

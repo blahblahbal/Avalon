@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Other;
 
-internal class UnstableCatalyzer : ModItem
+public class UnstableCatalyzer : ModItem
 {
     public override void SetDefaults()
     {

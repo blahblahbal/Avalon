@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged;
 
-internal class RhotukaLauncher : ModItem
+public class RhotukaLauncher : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

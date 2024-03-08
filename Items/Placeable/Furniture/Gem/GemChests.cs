@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Gem;
 
-internal class AmberChest : ModItem
+public class AmberChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -38,7 +38,7 @@ internal class AmberChest : ModItem
     }
 }
 
-internal class AmethystChest : ModItem
+public class AmethystChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -71,7 +71,7 @@ internal class AmethystChest : ModItem
     }
 }
 
-internal class DiamondChest : ModItem
+public class DiamondChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -104,7 +104,7 @@ internal class DiamondChest : ModItem
     }
 }
 
-internal class EmeraldChest : ModItem
+public class EmeraldChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -137,7 +137,7 @@ internal class EmeraldChest : ModItem
     }
 }
 
-internal class PeridotChest : ModItem
+public class PeridotChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -170,7 +170,7 @@ internal class PeridotChest : ModItem
     }
 }
 
-internal class RubyChest : ModItem
+public class RubyChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -203,7 +203,7 @@ internal class RubyChest : ModItem
     }
 }
 
-internal class SapphireChest : ModItem
+public class SapphireChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -236,7 +236,7 @@ internal class SapphireChest : ModItem
     }
 }
 
-internal class TopazChest : ModItem
+public class TopazChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -269,7 +269,7 @@ internal class TopazChest : ModItem
     }
 }
 
-internal class TourmalineChest : ModItem
+public class TourmalineChest : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -302,7 +302,7 @@ internal class TourmalineChest : ModItem
     }
 }
 
-internal class ZirconChest : ModItem
+public class ZirconChest : ModItem
 {
     public override void SetStaticDefaults()
     {

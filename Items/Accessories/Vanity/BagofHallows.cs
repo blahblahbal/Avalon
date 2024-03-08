@@ -8,7 +8,7 @@ using Avalon.Items.Material.Shards;
 
 namespace Avalon.Items.Accessories.Vanity;
 
-internal class BagofHallows : ModItem
+public class BagofHallows : ModItem
 {
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {

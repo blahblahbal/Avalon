@@ -306,6 +306,7 @@ public class AvalonPlayer : ModPlayer
     public bool SanguineSacrifice;
     public bool Electrified;
     public bool Gambler;
+    public bool AdvGambler;
     public bool Malaria;
 
     public bool HungryMinion;
@@ -410,6 +411,7 @@ public class AvalonPlayer : ModPlayer
         Electrified = false;
         Gambler = false;
         Malaria = false;
+        AdvGambler = false;
 
         // accessories
         TrapImmune = false;
@@ -845,11 +847,11 @@ public class AvalonPlayer : ModPlayer
     }
     public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
     {
-        if (Player.HasItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>()) && !Player.HasBuff(ModContent.BuffType<ImmortalityCooldown>()))
+        if (Player.HasItem(ModContent.ItemType<Items.Potions.Other.ImmortalityPotion>()) && !Player.HasBuff(ModContent.BuffType<ImmortalityCooldown>()))
         {
             Player.statLife = Player.statLifeMax2 / 4;
             Player.AddBuff(ModContent.BuffType<ImmortalityCooldown>(), 60 * 60 * 5);
-            int i = Player.FindItem(ModContent.ItemType<Items.Potions.Buff.ImmortalityPotion>());
+            int i = Player.FindItem(ModContent.ItemType<Items.Potions.Other.ImmortalityPotion>());
             Player.inventory[i].stack--;
             SoundEngine.PlaySound(SoundID.Item3, Player.position);
             if (Player.inventory[i].stack <= 0)
@@ -1690,11 +1692,9 @@ public class AvalonPlayer : ModPlayer
             }
         }
 
-        if (Gambler)
+        if (Gambler || AdvGambler)
         {
-            float chance = Player.GetCritChance(DamageClass.Generic) / 10f;
-            if (chance < 1f) chance = 1f;
-            if (Main.rand.Next(100) < 5)
+            if (Main.rand.Next(100) < (AdvGambler ? 8 : 5))
             {
                 int dmg = (int)Player.GetTotalDamage(DamageClass.Generic).ApplyTo(item.damage);
                 modifiers.FinalDamage *= 0f;

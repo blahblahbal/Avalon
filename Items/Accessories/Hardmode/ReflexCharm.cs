@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
-internal class ReflexCharm : ModItem
+public class ReflexCharm : ModItem
 {
     public override void SetDefaults()
     {

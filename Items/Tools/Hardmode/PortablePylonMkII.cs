@@ -11,7 +11,7 @@ using Terraria.ModLoader.IO;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-internal class WaypointSystemMkII : ModSystem
+public class WaypointSystemMkII : ModSystem
 {
     public static Vector2[] savedLocations = new Vector2[3];
     public override void OnWorldLoad()

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Gem;
 
-internal class PeridotSquirrelCage : ModItem
+public class PeridotSquirrelCage : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -27,7 +27,7 @@ internal class PeridotSquirrelCage : ModItem
             .Register();
     }
 }
-internal class TourmalineSquirrelCage : ModItem
+public class TourmalineSquirrelCage : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -48,7 +48,7 @@ internal class TourmalineSquirrelCage : ModItem
             .Register();
     }
 }
-internal class ZirconSquirrelCage : ModItem
+public class ZirconSquirrelCage : ModItem
 {
     public override void SetStaticDefaults()
     {

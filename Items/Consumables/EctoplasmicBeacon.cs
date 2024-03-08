@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-internal class EctoplasmicBeacon : ModItem
+public class EctoplasmicBeacon : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

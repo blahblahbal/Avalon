@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-internal class AncientHeadpiece : ModItem
+public class AncientHeadpiece : ModItem
 {
     public override void SetDefaults()
     {

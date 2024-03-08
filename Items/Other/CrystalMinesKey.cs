@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Other;
 
-internal class CrystalMinesKey : ModItem
+public class CrystalMinesKey : ModItem
 {
     public override void SetStaticDefaults()
     {

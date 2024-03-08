@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
-internal class RingofReplenishment : ModItem
+public class RingofReplenishment : ModItem
 {
     public override void SetDefaults()
     {

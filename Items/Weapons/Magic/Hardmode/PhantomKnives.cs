@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-internal class PhantomKnives : ModItem
+public class PhantomKnives : ModItem
 {
     public override void SetDefaults()
     {

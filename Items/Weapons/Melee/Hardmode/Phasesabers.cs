@@ -6,7 +6,7 @@ using Avalon.Items.Weapons.Melee.PreHardmode;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode
 {
-    internal class Phasesabers
+    public class Phasesabers
     {
         public class BrownPhasesaber : ModItem
         {

@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.PreHardmode;
 
-internal class StaminaFlower : ModItem
+public class StaminaFlower : ModItem
 {
     public override void SetDefaults()
     {

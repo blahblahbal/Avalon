@@ -9,7 +9,7 @@ using Terraria.Localization;
 namespace Avalon.Items.Armor.Superhardmode;
 
 [AutoloadEquip(EquipType.Head)]
-internal class AeroforceGuardia : ModItem
+public class AeroforceGuardia : ModItem
 {
     public override void SetDefaults()
     {
