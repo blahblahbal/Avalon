@@ -31,7 +31,7 @@ public class VomitWater : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe()
+        CreateRecipe(10)
             .AddIngredient(ItemID.BottledWater, 10)
             .AddIngredient(ModContent.ItemType<Placeable.Tile.SnotsandBlock>())
             .AddIngredient(ModContent.ItemType<Placeable.Seed.ContagionSeeds>())
