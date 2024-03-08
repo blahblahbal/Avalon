@@ -19,6 +19,10 @@ public class HellboundHalberd : ModItem
     {
         return true;
     }
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.ItemsThatAllowRepeatedRightClick[Item.type] = true;
+    }
     public float scaleMult = 1.35f; // set this to same as in the projectile file
     public override void SetDefaults()
     {
@@ -79,8 +83,7 @@ public class HellboundHalberd : ModItem
     }
     public override void HoldItem(Player player)
     {
-        if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] == 0 &&
-            player.ownedProjectileCounts[Item.shoot] == 0 && player.cursorItemIconID == 0 && !player.mouseInterface)
+        if (player.altFunctionUse == 2 && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] == 0)
         {
             Vector2 mousePos = Main.ReverseGravitySupport(Main.MouseScreen);
             if (Main.netMode == NetmodeID.MultiplayerClient)

@@ -12,6 +12,10 @@ public class DarklightLance : ModItem
     {
         return false;
     }
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.Spears[Item.type] = true;
+    }
     public override void SetDefaults()
     {
         Item.width = 24;

@@ -7,6 +7,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class CaesiumPike : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.Spears[Item.type] = true;
+    }
     public override void SetDefaults()
     {
         Item.width = 38;

@@ -11,6 +11,10 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode;
 class ObsidianGlaive : ModItem // Obisidian Glaive
 {
     int ShootTimes;
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.Spears[Item.type] = true;
+    }
     public override void SetDefaults()
     {
         Item.width = 38;
