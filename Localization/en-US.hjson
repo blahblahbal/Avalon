@@ -1,8 +1,8 @@
 LoadingTips_Default: {
-    "25": "Slay a boss to attract a Dryad to your house. She can tell you the state of Corruption, Crimson, Contagion, and Hallow in your World."
-    "30": "Demon Altars, Crimson Altars, and Icky Altars can't be destroyed with a normal hammer. You have to pwn them."
-    "39": "The Hallow is the only place where Corruption, Crimson, and Contagion cannot spread."
-    "56": "You can destroy Shadow Orbs, Crimson Hearts, and Sepsis Cells with a hammer or explosives, but prepare yourself for the forces they unleash."
+	25: Slay a boss to attract a Dryad to your house. She can tell you the state of Corruption, Crimson, Contagion, and Hallow in your World.
+	30: Demon Altars, Crimson Altars, and Icky Altars can't be destroyed with a normal hammer. You have to pwn them.
+	39: The Hallow is the only place where Corruption, Crimson, and Contagion cannot spread.
+	56: You can destroy Shadow Orbs, Crimson Hearts, and Sepsis Cells with a hammer or explosives, but prepare yourself for the forces they unleash.
 }
 
 Mods: {
@@ -215,12 +215,12 @@ Mods: {
 			Teleport_3_Female: "{0} thought they were an enderman."
 		}
 
-        GameTips: {
-            AvalonTip0: "Avalon: You can find Blank Scrolls in surface chests. Use these scrolls to craft Stamina Scrolls, which will enhance your abilities!"
-            AvalonTip1: "Avalon: Tomes are a unique type of accessory that grant only stat boosts. Defeat the Eye of Cthulhu to allow the Librarian to arrive. He will sell you the Tome Forge, among some other Tome materials."
-            AvalonTip2: "Avalon: You can find Heartstone deposits underground! This ore can be used to craft Life Crystals, and also generates in a heart shape."
-            AvalonTip3: "Avalon: You can find Boltstone and Starstone deposits underground in the shape of lightning bolts and stars. These ores can be crafted into Stamina Crystals and Mana Crystals, respectively."
-        }
+		GameTips: {
+			AvalonTip0: Avalon: You can find Blank Scrolls in surface chests. Use these scrolls to craft Stamina Scrolls, which will enhance your abilities!
+			AvalonTip1: Avalon: Tomes are a unique type of accessory that grant only stat boosts. Defeat the Eye of Cthulhu to allow the Librarian to arrive. He will sell you the Tome Forge, among some other Tome materials.
+			AvalonTip2: Avalon: You can find Heartstone deposits underground! This ore can be used to craft Life Crystals, and also generates in a heart shape.
+			AvalonTip3: Avalon: You can find Boltstone and Starstone deposits underground in the shape of lightning bolts and stars. These ores can be crafted into Stamina Crystals and Mana Crystals, respectively.
+		}
 
 		BossDefeatedBlurbs: {
 			MoonLord: Screams are emanating from the library...
@@ -8365,7 +8365,17 @@ Mods: {
 
 			PestilentScythe: {
 				DisplayName: Pestilent Scythe
-				Tooltip: ""
+				Tooltip: 
+                Rapidly spins an infected scythe all around you
+			}
+
+			PlagueDoctor: {
+				DisplayName: Plague Doctor
+				Tooltip:
+                '''
+                Rapidly spins a scythe made of the plague all around you
+                Damage dealt imbues your nearby ally's attacks with pathogen
+                '''
 			}
 		}
 
@@ -8618,6 +8628,7 @@ Mods: {
 			UltrabrightRazorbladeBulletTyphoon.DisplayName: Ultrabright Razorblade Bullet Typhoon
 			InsectoidBlade.DisplayName: Insectoid Blade
 			PestilentScythe.DisplayName: Pestilent Scythe
+			PlagueDoctor.DisplayName: Plague Doctor
 		}
 
 		NPCs: {
@@ -9374,6 +9385,11 @@ Mods: {
 			OmegaCobaltEndurance: {
 				DisplayName: Omega Cobalt Endurance
 				Description: Increase defense by 16
+			}
+
+			PathogenBoost: {
+				DisplayName: Pathogen Boost
+				Description: Mods.Avalon.Buffs.PathogenBoost.Description
 			}
 		}
 

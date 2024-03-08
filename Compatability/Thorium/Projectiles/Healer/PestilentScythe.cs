@@ -23,8 +23,9 @@ namespace Avalon.Compatability.Thorium.Projectiles.Healer
 
         public override void ModifyDust(Dust dust, Vector2 position, int scytheIndex)
         {
-            dust.alpha = 128;
-            dust.velocity += Main.rand.NextVector2Circular(0.3f, 0.3f);
+            dust.scale = 1;
+            //dust.alpha = 128;
+            //dust.velocity += Main.rand.NextVector2Circular(0.3f, 0.3f);
         }
     }
 }
