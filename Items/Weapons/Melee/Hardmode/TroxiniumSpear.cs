@@ -9,6 +9,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class TroxiniumSpear : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.Spears[Item.type] = true;
+    }
     public override void SetDefaults()
     {
         Item.width = 36;

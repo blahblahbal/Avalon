@@ -6,6 +6,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 class DurataniumGlaive : ModItem
 {
+    public override void SetStaticDefaults()
+    {
+        ItemID.Sets.Spears[Item.type] = true;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
