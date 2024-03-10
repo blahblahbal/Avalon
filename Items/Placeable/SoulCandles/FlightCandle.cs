@@ -26,8 +26,22 @@ class FlightCandle : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ItemID.SoulofFlight, 15).AddIngredient(ItemID.Candle).AddTile(TileID.MythrilAnvil).Register();
-        CreateRecipe(1).AddIngredient(ItemID.SoulofFlight, 15).AddIngredient(ItemID.PlatinumCandle).AddTile(TileID.MythrilAnvil).Register();
-        CreateRecipe(1).AddIngredient(ItemID.SoulofFlight, 15).AddIngredient(ModContent.ItemType<Furniture.BismuthCandle>()).AddTile(TileID.MythrilAnvil).Register();
+        CreateRecipe(2)
+            .AddIngredient(ItemID.SoulofFlight, 5)
+            .AddIngredient(ItemID.Candle)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
+
+        CreateRecipe(2)
+            .AddIngredient(ItemID.SoulofFlight, 5)
+            .AddIngredient(ItemID.PlatinumCandle)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
+
+        CreateRecipe(2)
+            .AddIngredient(ItemID.SoulofFlight, 5)
+            .AddIngredient(ModContent.ItemType<Furniture.BismuthCandle>())
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
     }
 }

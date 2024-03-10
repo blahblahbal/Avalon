@@ -170,6 +170,56 @@ public class RecipeSystem : ModSystem
         });
         RecipeGroup.RegisterGroup("Avalon:GemStaves", groupGemStaves);
 
+        List<int> banners = new();
+        for (int i = 0; i < NPCLoader.NPCCount; i++)
+        {
+            NPC npc = new NPC();
+            npc.SetDefaults(i);
+            if (NPCLoader.GetNPC(i) is ModNPC modnpc)
+            {
+                banners.Add(modnpc.BannerItem);
+            }
+            else
+            {
+                if (Item.NPCtoBanner(npc.BannerID()) > 0)
+                {
+                    int bannerID = ClassExtensions.BannerPlaceStyleToItemID(Item.NPCtoBanner(npc.BannerID()));
+                    if (bannerID > 0)
+                    {
+                        banners.Add(bannerID);
+                    }
+                }
+            }
+        }
+        int[] bannerArray = banners.ToArray();
+        var groupBanners = new RecipeGroup(() => $"{any} Monster Banner", bannerArray);
+        RecipeGroup.RegisterGroup("Avalon:Banners", groupBanners);
+        //{
+        //    ItemID.RedBanner,
+        //    ItemID.YellowBanner,
+        //    ItemID.GreenBanner,
+        //    ItemID.BlueBanner,
+        //    ItemID.MarchingBonesBanner,
+        //    ItemID.NecromanticSign,
+        //    ItemID.RustedCompanyStandard,
+        //    ItemID.RaggedBrotherhoodSigil,
+        //    ItemID.MoltenLegionFlag,
+        //    ItemID.DiabolicSigil,
+        //    ItemID.WorldBanner,
+        //    ItemID.SunBanner,
+        //    ItemID.GravityBanner,
+        //    ItemID.HellboundBanner,
+        //    ItemID.HellHammerBanner,
+        //    ItemID.HelltowerBanner,
+        //    ItemID.LostHopesofManBanner,
+        //    ItemID.ObsidianWatcherBanner,
+        //    ItemID.LavaEruptsBanner,
+        //    ItemID.AnkhBanner,
+        //    ItemID.SnakeBanner,
+        //    ItemID.OmegaBanner
+        //});
+
+
         var groupSilverBarMagicStorage = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.SilverBar)}", new int[]
         {
             ItemID.SilverBar,

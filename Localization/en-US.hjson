@@ -2931,7 +2931,7 @@ Mods: {
 
 			AdvVisionPotion: {
 				DisplayName: Vision Elixir
-				Tooltip: Open caves light up (Currently not functional)
+				Tooltip: Open caves light up
 			}
 
 			AdvWarmthPotion: {
@@ -6325,11 +6325,6 @@ Mods: {
 				Tooltip: Open caves light up
 			}
 
-            AdvVisionPotion: {
-				DisplayName: Vision Elixir
-				Tooltip: Open caves light up
-			}
-
 			MusicBoxArmageddonSlime: {
 				DisplayName: Music Box (Armageddon Slime)
 				Tooltip: ""
@@ -8037,7 +8032,7 @@ Mods: {
 					'''
 			}
 
-            AdvGamblerPotion: {
+			AdvGamblerPotion: {
 				DisplayName: Gambler Elixir
 				Tooltip:
 					'''
@@ -8395,10 +8390,10 @@ Mods: {
 				Tooltip: "'Doesn't harm critters... Probably.'"
 			}
 
-            BannerBelt: {
-                DisplayName: Banner Belt
-                Tooltip: Grants the effect of any enemy banner in any of your inventories to yourself and anyone near you
-            }
+			BannerBelt: {
+				DisplayName: Banner Belt
+				Tooltip: Grants the effect of any enemy banner in any of your inventories to yourself and anyone near you
+			}
 		}
 
 		InfoDisplays: {
@@ -9414,6 +9409,11 @@ Mods: {
 			PathogenBoost: {
 				DisplayName: Pathogen Boost
 				Description: Mods.Avalon.Buffs.PathogenBoost.Description
+			}
+
+			AdvGambler: {
+				DisplayName: Adv Gambler
+				Description: Mods.Avalon.Buffs.AdvGambler.Description
 			}
 		}
 

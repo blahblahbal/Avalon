@@ -26,8 +26,22 @@ class LightCandle : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1).AddIngredient(ItemID.SoulofLight, 15).AddIngredient(ItemID.Candle).AddTile(TileID.MythrilAnvil).Register();
-        CreateRecipe(1).AddIngredient(ItemID.SoulofLight, 15).AddIngredient(ItemID.PlatinumCandle).AddTile(TileID.MythrilAnvil).Register();
-        CreateRecipe(1).AddIngredient(ItemID.SoulofLight, 15).AddIngredient(ModContent.ItemType<Furniture.BismuthCandle>()).AddTile(TileID.MythrilAnvil).Register();
+        CreateRecipe(2)
+            .AddIngredient(ItemID.SoulofLight, 5)
+            .AddIngredient(ItemID.Candle)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
+
+        CreateRecipe(2)
+            .AddIngredient(ItemID.SoulofLight, 5)
+            .AddIngredient(ItemID.PlatinumCandle)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
+
+        CreateRecipe(2)
+            .AddIngredient(ItemID.SoulofLight, 5)
+            .AddIngredient(ModContent.ItemType<Furniture.BismuthCandle>())
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
     }
 }

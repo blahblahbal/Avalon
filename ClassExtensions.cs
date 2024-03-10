@@ -22,6 +22,21 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
+    public static int BannerPlaceStyleToItemID(int placeStyle)
+    {
+        placeStyle += 21;
+        for (int i = 0; i < ItemLoader.ItemCount; i++)
+        {
+            Item item = new Item();
+            item.SetDefaults(i);
+            if (item.createTile == TileID.Banners && item.placeStyle == placeStyle)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static int GetPickaxePower(int tileType, int yPos)
     {
         if (!TileID.Sets.Ore[tileType]) return -1;
