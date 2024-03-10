@@ -63,9 +63,9 @@ public class BannerBeltPlayer : ModPlayer
             {
                 Banners.Add(Player.bank.item[i].placeStyle - 21);
             }
-            if (Player.inventory[i].createTile == ModContent.TileType<MonsterBanner>())
+            if (Player.bank.item[i].createTile == ModContent.TileType<MonsterBanner>())
             {
-                Banners.Add(ModdedBanners(Player.inventory[i].placeStyle));
+                Banners.Add(ModdedBanners(Player.bank.item[i].placeStyle));
             }
         }
         for (int i = 0; i < Player.bank2.item.Length; i++)
@@ -74,9 +74,9 @@ public class BannerBeltPlayer : ModPlayer
             {
                 Banners.Add(Player.bank2.item[i].placeStyle - 21);
             }
-            if (Player.inventory[i].createTile == ModContent.TileType<MonsterBanner>())
+            if (Player.bank2.item[i].createTile == ModContent.TileType<MonsterBanner>())
             {
-                Banners.Add(ModdedBanners(Player.inventory[i].placeStyle));
+                Banners.Add(ModdedBanners(Player.bank2.item[i].placeStyle));
             }
         }
         for (int i = 0; i < Player.bank3.item.Length; i++)
@@ -85,9 +85,9 @@ public class BannerBeltPlayer : ModPlayer
             {
                 Banners.Add(Player.bank3.item[i].placeStyle - 21);
             }
-            if (Player.inventory[i].createTile == ModContent.TileType<MonsterBanner>())
+            if (Player.bank3.item[i].createTile == ModContent.TileType<MonsterBanner>())
             {
-                Banners.Add(ModdedBanners(Player.inventory[i].placeStyle));
+                Banners.Add(ModdedBanners(Player.bank3.item[i].placeStyle));
             }
         }
         for (int i = 0; i < Player.bank4.item.Length; i++)
@@ -96,9 +96,9 @@ public class BannerBeltPlayer : ModPlayer
             {
                 Banners.Add(Player.bank4.item[i].placeStyle - 21);
             }
-            if (Player.inventory[i].createTile == ModContent.TileType<MonsterBanner>())
+            if (Player.bank4.item[i].createTile == ModContent.TileType<MonsterBanner>())
             {
-                Banners.Add(ModdedBanners(Player.inventory[i].placeStyle));
+                Banners.Add(ModdedBanners(Player.bank4.item[i].placeStyle));
             }
         }
 
@@ -361,6 +361,20 @@ public class BannerBeltHook : ModHook
     protected override void Apply()
     {
         On_SceneMetrics.Reset += On_SceneMetrics_Reset;
+        On_Player.ApplyBannerOffenseBuff_int_refHitModifiers += On_Player_ApplyBannerOffenseBuff_int_refHitModifiers;
+        On_Player.ApplyBannerDefenseBuff_int_refHurtModifiers += On_Player_ApplyBannerDefenseBuff_int_refHurtModifiers;
+    }
+
+    private void On_Player_ApplyBannerDefenseBuff_int_refHurtModifiers(On_Player.orig_ApplyBannerDefenseBuff_int_refHurtModifiers orig, Player self, int bannerId, ref Player.HurtModifiers modifiers)
+    {
+        orig.Invoke(self, bannerId, ref modifiers);
+        modifiers.IncomingDamageMultiplier *= self.GetModPlayer<BannerBeltPlayer>().BannerBelt ? 0.75f : 1f;
+    }
+
+    private void On_Player_ApplyBannerOffenseBuff_int_refHitModifiers(On_Player.orig_ApplyBannerOffenseBuff_int_refHitModifiers orig, Player self, int bannerId, ref NPC.HitModifiers modifiers)
+    {
+        orig.Invoke(self, bannerId, ref modifiers);
+        modifiers.TargetDamageMultiplier *= self.GetModPlayer<BannerBeltPlayer>().BannerBelt ? 1.5f : 1f;
     }
 
     private void On_SceneMetrics_Reset(On_SceneMetrics.orig_Reset orig, SceneMetrics self)
