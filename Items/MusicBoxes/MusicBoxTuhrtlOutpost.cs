@@ -10,7 +10,6 @@ class MusicBoxTuhrtlOutpost : ModItem
     public override void SetStaticDefaults()
     {
         ItemID.Sets.CanGetPrefixes[Type] = false;
-        Item.ResearchUnlockCount = 1;
         if (ExxoAvalonOrigins.MusicMod != null)
             MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/TuhrtlOutpost"), ModContent.ItemType<MusicBoxTuhrtlOutpost>(), ModContent.TileType<Tiles.MusicBoxes>(), 324);
     }

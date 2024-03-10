@@ -36,8 +36,6 @@ public class HungrySummon : ModProjectile
     }
     public override void SetDefaults()
     {
-        //Projectile.aiStyle = ProjAIStyleID.MiniTwins;
-        //AIType = ProjectileID.Spazmamini;
         Projectile.aiStyle = -1;
         Rectangle dims = this.GetDims();
         Projectile.DamageType = DamageClass.Summon;
@@ -52,7 +50,7 @@ public class HungrySummon : ModProjectile
         Projectile.ignoreWater = true;
         Projectile.friendly = true;
         Projectile.usesLocalNPCImmunity= true;
-        Projectile.localNPCHitCooldown = 20;
+        Projectile.localNPCHitCooldown = 30;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
         DrawOriginOffsetY = -(int)(((dims.Height / Main.projFrames[Projectile.type]) / 2) - (Projectile.Size.Y / 2));
         //Main.projPet[projectile.type] = true;

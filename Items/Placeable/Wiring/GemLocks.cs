@@ -7,11 +7,6 @@ namespace Avalon.Items.Placeable.Wiring;
 
 public class PeridotGemLock : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -41,11 +36,6 @@ public class PeridotGemLock : ModItem
 
 public class TourmalineGemLock : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -76,11 +66,6 @@ public class TourmalineGemLock : ModItem
 
 public class ZirconGemLock : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -8,7 +8,6 @@ public class ResistantWoodSink : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.IsLavaImmuneRegardlessOfRarity[Type] = true;
     }
 

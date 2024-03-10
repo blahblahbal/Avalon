@@ -22,7 +22,7 @@ class HungryStaff : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.DamageType = DamageClass.Summon;
-        Item.damage = 27;
+        Item.damage = 21;
         Item.shootSpeed = 14f;
         Item.mana = 10;
         Item.noMelee = true;

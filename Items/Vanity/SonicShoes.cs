@@ -8,11 +8,6 @@ namespace Avalon.Items.Vanity;
 [AutoloadEquip(EquipType.Legs)]
 class SonicShoes : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

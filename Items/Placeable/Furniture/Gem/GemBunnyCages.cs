@@ -8,11 +8,6 @@ namespace Avalon.Items.Placeable.Furniture.Gem;
 
 public class PeridotBunnyCage : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.SapphireBunnyCage);
@@ -29,11 +24,6 @@ public class PeridotBunnyCage : ModItem
 }
 public class TourmalineBunnyCage : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.AmethystBunnyCage);
@@ -50,11 +40,6 @@ public class TourmalineBunnyCage : ModItem
 }
 public class ZirconBunnyCage : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.RubyBunnyCage);

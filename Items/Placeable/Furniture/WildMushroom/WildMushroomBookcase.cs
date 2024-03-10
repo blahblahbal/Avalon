@@ -7,11 +7,6 @@ namespace Avalon.Items.Placeable.Furniture.WildMushroom;
 
 class WildMushroomBookcase : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -96,11 +96,11 @@ public class RecipeChanger : ModSystem
                         recipe.ReplaceResult(ItemID.SunplateBlock, 40);
                         break;
                     }
-                case ItemID.HandOfCreation:
+                /*case ItemID.HandOfCreation:
                 {
                     recipe.AddIngredient(ModContent.ItemType<ObsidianGlove>());
                     break;
-                }
+                }*/
                 case ItemID.ShroomiteBar:
                 {
                     if (recipe.TryGetIngredient(ItemID.GlowingMushroom, out Item ing))

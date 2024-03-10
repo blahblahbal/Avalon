@@ -7,11 +7,6 @@ namespace Avalon.Items.Banners;
 
 public class CometTailBanner : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Nearby players get a bonus against: Comet Tail");
-        Item.ResearchUnlockCount = 1;
-    }
     // The tooltip for this item is automatically assigned from .lang files
     public override void SetDefaults()
     {

@@ -5,11 +5,6 @@ namespace Avalon.Items.Placeable.Furniture;
 
 class PathogenCampfire : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.useStyle = 1;

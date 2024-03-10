@@ -10,7 +10,6 @@ public class CrystalMinesKey : ModItem
     {
         //DisplayName.SetDefault("Crystal Mines Key");
         //Tooltip.SetDefault("Opens a Crystal Mines Chest");
-        Item.ResearchUnlockCount = 1;
     }
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {

@@ -8,11 +8,6 @@ namespace Avalon.Items.Placeable.Furniture.Gem;
 
 public class PeridotSquirrelCage : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.SapphireSquirrelCage);
@@ -29,11 +24,6 @@ public class PeridotSquirrelCage : ModItem
 }
 public class TourmalineSquirrelCage : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.AmethystSquirrelCage);
@@ -50,11 +40,6 @@ public class TourmalineSquirrelCage : ModItem
 }
 public class ZirconSquirrelCage : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.RubySquirrelCage);

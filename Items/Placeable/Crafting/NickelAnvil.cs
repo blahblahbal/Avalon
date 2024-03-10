@@ -6,11 +6,6 @@ namespace Avalon.Items.Placeable.Crafting;
 
 class NickelAnvil : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.LeadAnvil);

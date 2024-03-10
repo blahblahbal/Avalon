@@ -6,11 +6,6 @@ namespace Avalon.Items.Placeable.Statue;
 
 class DNASculpture : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

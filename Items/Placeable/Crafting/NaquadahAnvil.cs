@@ -9,7 +9,6 @@ class NaquadahAnvil : ModItem
     public override void SetStaticDefaults()
     {
         //Tooltip.SetDefault("Used to craft items from mythril, orichalcum, naquadah, adamantite, titanium, and troxinium bars");
-        Item.ResearchUnlockCount = 1;
     }
 
     public override void SetDefaults()

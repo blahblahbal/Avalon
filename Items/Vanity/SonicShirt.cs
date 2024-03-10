@@ -8,11 +8,6 @@ namespace Avalon.Items.Vanity;
 [AutoloadEquip(EquipType.Body)]
 class SonicShirt : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

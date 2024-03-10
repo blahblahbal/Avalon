@@ -8,7 +8,6 @@ class BlahPotion : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Item.ResearchUnlockCount = 1;
         ItemID.Sets.DrinkParticleColors[Type] = new Color[3]
         {
             Color.Orange,

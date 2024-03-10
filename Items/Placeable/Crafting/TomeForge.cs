@@ -7,13 +7,6 @@ namespace Avalon.Items.Placeable.Crafting;
 
 class TomeForge : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //DisplayName.SetDefault("Tome Forge");
-        //Tooltip.SetDefault("Used to craft Mystical Tomes");
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

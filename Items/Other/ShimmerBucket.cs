@@ -32,6 +32,8 @@ public class ShimmerBucket : ModItem
         if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !Main.tile[tilePos.X, tilePos.Y].HasTile &&
             (Main.tile[tilePos.X, tilePos.Y].LiquidAmount == 0 || Main.tile[tilePos.X, tilePos.Y].LiquidType == LiquidID.Shimmer))
         {
+            player.cursorItemIconEnabled = true;
+            player.cursorItemIconID = Type;
             if (player.itemTime == 0 && player.itemAnimation > 0 && player.controlUseItem)
             {
                 SoundStyle s = new SoundStyle("Terraria/Sounds/Splash_1");

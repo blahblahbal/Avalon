@@ -6,12 +6,6 @@ namespace Avalon.Items.Placeable.Crafting;
 
 class TroxiniumForge : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //Tooltip.SetDefault("Used to smelt adamantite, titanium, and troxinium ore");
-        Item.ResearchUnlockCount = 1;
-    }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

@@ -594,6 +594,8 @@ public class AvalonGlobalItem : GlobalItem
             if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !Main.tile[tilePos.X, tilePos.Y].HasTile &&
                 Main.tile[tilePos.X, tilePos.Y].LiquidAmount > 200 && Main.tile[tilePos.X, tilePos.Y].LiquidType == LiquidID.Shimmer)
             {
+                player.cursorItemIconEnabled = true;
+                player.cursorItemIconID = item.type;
                 if (player.itemTime == 0 && player.itemAnimation > 0 && player.controlUseItem)
                 {
                     int liquidType = Main.tile[tilePos.X, tilePos.Y].LiquidType;
@@ -1771,6 +1773,22 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Silt").ToString()));
             }
         }
+        if (item.type == ItemID.MythrilAnvil || item.type == ItemID.OrichalcumAnvil)
+        {
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
+            if (index != -1)
+            {
+                tooltips[index].Text = Language.GetTextValue("Mods.Avalon.Items.NaquadahAnvil.Tooltip");
+            }
+        }
+        if (item.type == ItemID.AdamantiteForge || item.type == ItemID.TitaniumForge)
+        {
+            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
+            if (index != -1)
+            {
+                tooltips[index].Text = Language.GetTextValue("Mods.Avalon.Items.TroxiniumForge.Tooltip");
+            }
+        }
         if (item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket)
         {
             int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip1"));
@@ -1787,30 +1805,30 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Sponges").ToString()));
             }
         }
-        if (item.type is ItemID.Extractinator)
-        {
-            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
-            if (index != -1)
-            {
-                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
-            }
-        }
-        if (item.type is ItemID.ChlorophyteExtractinator)
-        {
-            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip2"));
-            if (index != -1)
-            {
-                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip2", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
-            }
-        }
-        if (item.type is ItemID.HandOfCreation)
-        {
-            int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip5"));
-            if (index != -1)
-            {
-                tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip5", NetworkText.FromKey("Mods.Avalon.TooltipEdits.HandofCreation").ToString()));
-            }
-        }
+        //if (item.type is ItemID.Extractinator)
+        //{
+        //    int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip0"));
+        //    if (index != -1)
+        //    {
+        //        tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip0", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
+        //    }
+        //}
+        //if (item.type is ItemID.ChlorophyteExtractinator)
+        //{
+        //    int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip2"));
+        //    if (index != -1)
+        //    {
+        //        tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip2", NetworkText.FromKey("Mods.Avalon.TooltipEdits.Extractinator").ToString()));
+        //    }
+        //}
+        //if (item.type is ItemID.HandOfCreation)
+        //{
+        //    int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip5"));
+        //    if (index != -1)
+        //    {
+        //        tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip5", NetworkText.FromKey("Mods.Avalon.TooltipEdits.HandofCreation").ToString()));
+        //    }
+        //}
         if (Data.Sets.Item.Herbs[item.type])
         {
             int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name)) && tt.Name.Equals("Material"));
