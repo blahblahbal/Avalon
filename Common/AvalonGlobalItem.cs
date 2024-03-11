@@ -661,8 +661,7 @@ public class AvalonGlobalItem : GlobalItem
             Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
             Tile t = Framing.GetTileSafely(p);
             if (player.IsInTileInteractionRange(p.X, p.Y, TileReachCheckSettings.Simple) &&
-                t.TileType == ModContent.TileType<Tiles.Furniture.Grindstone>()
-                /*(t.TileType == TileID.Extractinator || t.TileType == TileID.ChlorophyteExtractinator)*/)
+                t.TileType == ModContent.TileType<Tiles.Furniture.Grindstone>())
             {
                 player.noThrow = 2;
                 player.cursorItemIconEnabled = true;

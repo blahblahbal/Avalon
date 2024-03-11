@@ -90,13 +90,12 @@ public class AvalonGlobalTile : GlobalTile
         // icicle drops
         if (type is TileID.Stalactite && Main.tile[i, j].TileFrameX < 54 && Main.tile[i, j].TileFrameY is 0 or 72 && Main.rand.NextBool(2))
         {
-            int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16,
-                ModContent.ItemType<Icicle>());
-            if (Main.netMode == NetmodeID.Server)
-            {
-                NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.FromLiteral(""), a, 0f, 0f, 0f, 0);
-                Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
-            }
+            int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<Icicle>());
+            //if (Main.netMode == NetmodeID.Server)
+            //{
+            //    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.FromLiteral(""), a, 0f, 0f, 0f, 0);
+            //    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
+            //}
         }
 
         // four leaf clover drops
@@ -128,20 +127,20 @@ public class AvalonGlobalTile : GlobalTile
             if (doRealCloverDrop)
             {
                 int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<FourLeafClover>(), 1, false, 0);
-                if (Main.netMode == NetmodeID.Server)
-                {
-                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
-                    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
-                }
+                //if (Main.netMode == NetmodeID.Server)
+                //{
+                //    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
+                //    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
+                //}
             }
             else if (doFakeCloverDrop)
             {
                 int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<FakeFourLeafClover>(), 1, false, 0);
-                if (Main.netMode == NetmodeID.Server)
-                {
-                    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
-                    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
-                }
+                //if (Main.netMode == NetmodeID.Server)
+                //{
+                //    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
+                //    Main.item[a].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[a].position, 8, 8);
+                //}
             }
         }
     }
@@ -175,10 +174,10 @@ public class AvalonGlobalTile : GlobalTile
                             stack = 2;
                         }
                         int a = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, drop, stack);
-                        if (Main.netMode == NetmodeID.Server)
-                        {
-                            NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
-                        }
+                        //if (Main.netMode == NetmodeID.Server)
+                        //{
+                        //    NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a, 0f, 0f, 0f, 0);
+                        //}
                         noItem = true;
                     }
                 }

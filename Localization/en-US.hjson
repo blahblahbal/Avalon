@@ -9452,6 +9452,7 @@ Mods: {
 
 		Tiles: {
 			Catalyzer.MapEntry: Catalyzer
+            Grindstone.MapEntry: Grindstone
 
 			LargeHerbsStage1: {
 				MapEntry0: Growing Large Daybloom

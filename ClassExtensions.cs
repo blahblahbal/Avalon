@@ -150,7 +150,11 @@ public static class ClassExtensions
                     num8 /= Main.rand.Next(3) + 1;
                 }
                 num7 -= 1000000 * num8;
-                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.PlatinumCoin, num8);
+                int platinum = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.PlatinumCoin, num8);
+                if (Main.netMode == NetmodeID.MultiplayerClient && platinum >= 0)
+                {
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, platinum, 1f);
+                }
                 continue;
             }
             if (num7 > 10000f)
@@ -165,7 +169,11 @@ public static class ClassExtensions
                     num9 /= Main.rand.Next(3) + 1;
                 }
                 num7 -= 10000 * num9;
-                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.GoldCoin, num9);
+                int gold = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.GoldCoin, num9);
+                if (Main.netMode == NetmodeID.MultiplayerClient && gold >= 0)
+                {
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, gold, 1f);
+                }
                 continue;
             }
             if (num7 > 100f)
@@ -180,7 +188,11 @@ public static class ClassExtensions
                     num10 /= Main.rand.Next(3) + 1;
                 }
                 num7 -= 100 * num10;
-                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.SilverCoin, num10);
+                int silver = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.SilverCoin, num10);
+                if (Main.netMode == NetmodeID.MultiplayerClient && silver >= 0)
+                {
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, silver, 1f);
+                }
                 continue;
             }
             int num11 = (int)num7;
@@ -198,10 +210,9 @@ public static class ClassExtensions
             }
             num7 -= num11;
             int money = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.CopperCoin, num11);
-            if (Main.netMode == NetmodeID.Server)
+            if (Main.netMode == NetmodeID.MultiplayerClient && money >= 0)
             {
-                NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.FromLiteral(""), money, 0f, 0f, 0f, 0);
-                Main.item[money].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[money].position, 8, 8);
+                NetMessage.SendData(MessageID.SyncItem, -1, -1, null, money, 1f);
             }
         }
     }
