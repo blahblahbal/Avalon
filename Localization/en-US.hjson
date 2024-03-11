@@ -17,6 +17,16 @@ Mods: {
 	}
 
 	Avalon: {
+		GameTitles: {
+			0: Terraria: May contain zombies
+			1: Terraria: Clever titles
+			2: Terraria: Because Cthulhu has more body parts
+			3: Terraria: Back in Block!
+			4: Terraria: Ashes, Ashes, Why Don't They Fall Down?
+			5: Terraria: Hell is not enough
+			6: Terraria: Made with AI!
+		}
+
 		Slots: {
 			StaminaScroll: Stamina Scroll
 			Tome: Tome
@@ -6449,12 +6459,12 @@ Mods: {
 
 			NaquadahAnvil: {
 				DisplayName: Naquadah Anvil
-				Tooltip: "Used to craft items from mythril, orichalcum, naquadah, adamantite, titanium, and troxinium bars"
+				Tooltip: Used to craft items from mythril, orichalcum, naquadah, adamantite, titanium, and troxinium bars
 			}
 
 			TroxiniumForge: {
 				DisplayName: Troxinium Forge
-				Tooltip: "Used to smelt adamantite, titanium, and troxinium ore"
+				Tooltip: Used to smelt adamantite, titanium, and troxinium ore
 			}
 
 			DurataniumChainsaw: {
@@ -8393,30 +8403,30 @@ Mods: {
 			BannerBelt: {
 				DisplayName: Banner Belt
 				Tooltip:
-                '''
-                Grants the effect of any enemy banner in any of your inventories to yourself and anyone near you
-                Banner effects are stronger for the wearer
-                '''
+					'''
+					Grants the effect of any enemy banner in any of your inventories to yourself and anyone near you
+					Banner effects are stronger for the wearer
+					'''
 			}
 
-            Grindstone: {
+			Grindstone: {
 				DisplayName: Grindstone
 				Tooltip: <right> this with a prefixed item while on your hotbar to remove the prefix
 			}
 
-            GloveofCreation: {
-                DisplayName: Glove of Creation
-                Tooltip:
-                '''
-                Increases mining speed by 25%
-                Increases block & wall placement speed
-                Increases block placement & tool range by 3
-                Increases pickup range for items
-                Automatically paints or coats placed objects
-                Hold Up to reach higher
-                Can place blocks and walls in midair and in lava
-                '''
-            }
+			GloveofCreation: {
+				DisplayName: Glove of Creation
+				Tooltip:
+					'''
+					Increases mining speed by 25%
+					Increases block & wall placement speed
+					Increases block placement & tool range by 3
+					Increases pickup range for items
+					Automatically paints or coats placed objects
+					Hold Up to reach higher
+					Can place blocks and walls in midair and in lava
+					'''
+			}
 		}
 
 		InfoDisplays: {

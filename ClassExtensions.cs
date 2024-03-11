@@ -15,6 +15,7 @@ using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -196,7 +197,12 @@ public static class ClassExtensions
                 num11 = 1;
             }
             num7 -= num11;
-            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.CopperCoin, num11);
+            int money = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i, j, 16, 16, ItemID.CopperCoin, num11);
+            if (Main.netMode == NetmodeID.Server)
+            {
+                NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.FromLiteral(""), money, 0f, 0f, 0f, 0);
+                Main.item[money].playerIndexTheItemIsReservedFor = Player.FindClosest(Main.item[money].position, 8, 8);
+            }
         }
     }
     public static Player GetPlayerForTile(int x, int y)

@@ -14,6 +14,7 @@ using Avalon.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using ReLogic.OS;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Graphics;
@@ -154,6 +155,15 @@ public class ExxoAvalonOrigins : Mod
         }
         
         Mod = null!;
+    }
+    public override void PostSetupContent()
+    {
+        if (Main.netMode == NetmodeID.Server) return;
+        if (!Main.dedServ)
+        {
+            var title = Lang.GetRandomGameTitle();
+            Platform.Get<IWindowService>().SetUnicodeTitle(Main.instance.Window, title);
+        }
     }
     private void ReplaceVanillaTextures()
     {
