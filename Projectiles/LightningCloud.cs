@@ -7,11 +7,15 @@ namespace Avalon.Projectiles;
 
 public class LightningCloud : ModProjectile
 {
+    public override void SetStaticDefaults()
+    {
+        Main.projFrames[Projectile.type] = 5;
+    }
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Projectile.width = dims.Width;
-        Projectile.height = dims.Height;
+        Projectile.height = dims.Height / Main.projFrames[Projectile.type];
         Projectile.friendly = true;
         Projectile.DamageType = DamageClass.Ranged;
         Projectile.tileCollide = false;
@@ -37,6 +41,19 @@ public class LightningCloud : ModProjectile
             {
                 Projectile.active = false;
             }
+        }
+        if (Projectile.frameCounter == 6 || Projectile.frameCounter == 12)
+        {
+            Projectile.frame++;
+        }
+        if (Projectile.frameCounter > 18f)
+        {
+            Projectile.frame++;
+            if (Projectile.frame > 4)
+            {
+                Projectile.frame = 2;
+            }
+            Projectile.frameCounter = 13;
         }
     }
 }

@@ -103,8 +103,8 @@ public class Lightning : ModProjectile
                     return;
                 }
             }
-            if (Main.rand.NextBool(Projectile.extraUpdates))
-            {
+            //if (Main.rand.NextBool(Projectile.extraUpdates))
+            //{
                 for (int i = 0; i < 2; i++)
                 {
                     float num1054 = Projectile.rotation + (Main.rand.NextBool(2) ? (-1f) : 1f) * ((float)Math.PI / 2f);
@@ -123,7 +123,7 @@ public class Lightning : ModProjectile
                     dust189.velocity *= 0.5f;
                     Main.dust[num1057].velocity.Y = 0f - Math.Abs(Main.dust[num1057].velocity.Y);
                 }
-            }
+            //}
         }
         else
         {
