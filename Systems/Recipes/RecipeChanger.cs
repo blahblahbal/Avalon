@@ -141,6 +141,51 @@ public class RecipeChanger : ModSystem
                     recipe.AddIngredient(ModContent.ItemType<Bayonet>());
                     break;
                 }
+                case ItemID.ChlorophyteHelmet:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteMask:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteHeadgear:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophytePlateMail:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteGreaves:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophytePickaxe:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteDrill:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteJackhammer:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteWarhammer:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteShotbow:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteSaber:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophytePartisan:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteGreataxe:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteClaymore:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
+                case ItemID.ChlorophyteChainsaw:
+                    recipe.AddIngredient(ModContent.ItemType<VenomShard>());
+                    break;
                 //case ItemID.FrostHelmet:
                 //{
                 //    if (recipe.TryGetIngredient(ItemID.AdamantiteBar, out Item ing))

@@ -18,6 +18,7 @@ using Avalon.Items.Placeable.Furniture;
 using Avalon.Items.Placeable.Furniture.Heartstone;
 using Terraria.Localization;
 using Avalon.Items.Placeable.Furniture.Gem;
+using Avalon.Items.Tools.PreHardmode;
 
 namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
@@ -227,6 +228,14 @@ public class RecipeSystem : ModSystem
             ModContent.ItemType<ZincBar>()
         });
         RecipeGroup.RegisterGroup("MagicStorage:AnySilverBar", groupSilverBarMagicStorage);
+
+        var groupGoldPickaxe = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.GoldPickaxe)}", new int[]
+        {
+            ItemID.GoldPickaxe,
+            ItemID.PlatinumPickaxe,
+            ModContent.ItemType<BismuthPickaxe>()
+        });
+        RecipeGroup.RegisterGroup("Avalon:GoldPickaxe", groupGoldPickaxe);
 
         var groupChestMS = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.Chest)}", new int[]
         {

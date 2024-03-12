@@ -47,7 +47,7 @@ public class DeathMessages : ModHook
             Main.worldName);
         if (Main.rand.NextBool(6))
         {
-            int msg = Main.rand.Next(15) + 1;
+            int msg = Main.rand.Next(17) + 1;
             switch (msg)
             {
                 case 1:
@@ -62,6 +62,9 @@ public class DeathMessages : ModHook
                 case 11:
                 case 12:
                 case 13:
+                case 14:
+                case 15:
+                case 16:
                     empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_" + msg, deadPlayerName);
                     break;
                 case 8:
@@ -190,9 +193,12 @@ public class DeathMessages : ModHook
                     case 11:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Drowned_4", deadPlayerName);
                         break;
+                    case 12:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Drowned_5", deadPlayerName);
+                        break;
                 }
             }
-            #endregion drowing
+            #endregion drowning
             #region lava
             else if (other == 2)
             {
@@ -312,7 +318,7 @@ public class DeathMessages : ModHook
             #region space
             else if (other == 19)
             {
-                switch (Main.rand.Next(8) + 1)
+                switch (Main.rand.Next(9) + 1)
                 {
                     case 1:
                         result = NetworkText.FromKey("DeathText.Space_1", deadPlayerName, Main.worldName);
@@ -355,6 +361,9 @@ public class DeathMessages : ModHook
                     case 3:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_2", deadPlayerName);
                         break;
+                    case 4:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_3", deadPlayerName);
+                        break;
                 }
             }
             else if (other == 14)
@@ -370,6 +379,9 @@ public class DeathMessages : ModHook
                     case 3:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_3_Male", deadPlayerName);
                         break;
+                    case 4:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_4_Male", deadPlayerName);
+                        break;
                 }
             }
             else if (other == 15)
@@ -384,6 +396,23 @@ public class DeathMessages : ModHook
                         break;
                     case 3:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_3_Female", deadPlayerName);
+                        break;
+                    case 4:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Teleport_4_Female", deadPlayerName);
+                        break;
+                }
+            }
+            #endregion
+            #region escape
+            else if (other == 11)
+            {
+                switch (Main.rand.Next(2) + 1)
+                {
+                    case 1:
+                        result = NetworkText.FromKey("DeathText.TriedToEscape", deadPlayerName);
+                        break;
+                    case 2:
+                        result = NetworkText.FromKey("Mods.Avalon.DeathText.Escape_1", deadPlayerName);
                         break;
                 }
             }
@@ -406,9 +435,6 @@ public class DeathMessages : ModHook
                         break;
                     case 8:
                         result = NetworkText.FromKey("DeathText.Burned_" + (Main.rand.Next(4) + 1), deadPlayerName);
-                        break;
-                    case 11:
-                        result = NetworkText.FromKey("DeathText.TriedToEscape", deadPlayerName);
                         break;
                     case 12:
                         result = NetworkText.FromKey("DeathText.WasLicked_" + (Main.rand.Next(2) + 1), deadPlayerName);
