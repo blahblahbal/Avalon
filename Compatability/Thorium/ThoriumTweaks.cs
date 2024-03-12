@@ -12,6 +12,7 @@ using ThoriumMod.NPCs.Depths;
 
 namespace Avalon.Compatability.Thorium;
 
+[ExtendsFromMod("ThoriumMod")]
 public class ThoriumTweaksGlobalNPC : GlobalNPC
 {
     public override bool IsLoadingEnabled(Mod mod)
@@ -176,6 +177,7 @@ public class ThoriumTweaksGlobalNPC : GlobalNPC
         }
     }
 }
+[ExtendsFromMod("ThoriumMod")]
 public class ThoriumTweaksRecipeSystem : ModSystem
 {
     public override bool IsLoadingEnabled(Mod mod)
@@ -184,6 +186,7 @@ public class ThoriumTweaksRecipeSystem : ModSystem
     }
     public override void AddRecipes()
     {
+        // Enchanted items
         Recipe.Create(ModContent.ItemType<ThoriumMod.Items.Misc.EnchantedPickaxe>())
             .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.EnchantedBar>(), 8)
             .AddRecipeGroup("Avalon:GoldPickaxe")
@@ -204,6 +207,21 @@ public class ThoriumTweaksRecipeSystem : ModSystem
             .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.EnchantedBar>(), 6)
             .AddTile(TileID.Anvils)
             .Register();
+        // End Enchanted items
+
+        // EGG
+        Recipe.Create(ModContent.ItemType<ThoriumMod.Items.BardItems.FabergeEgg>())
+            .AddIngredient(ItemID.Cloud, 25)
+            .AddIngredient(ModContent.ItemType<Avalon.Items.Placeable.Tile.MoonplateBlock>(), 10)
+            .AddTile(TileID.SkyMill)
+            .Register();
+
+        Recipe.Create(ModContent.ItemType<ThoriumMod.Items.BardItems.FabergeEgg>())
+            .AddIngredient(ItemID.Cloud, 25)
+            .AddIngredient(ModContent.ItemType<Avalon.Items.Placeable.Tile.DuskplateBlock>(), 10)
+            .AddTile(TileID.SkyMill)
+            .Register();
+        // END EGG
     }
     public override void PostAddRecipes()
     {

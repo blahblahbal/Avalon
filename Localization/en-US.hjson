@@ -184,8 +184,8 @@ Mods: {
 			Drowned_2: "{0} thought they could breathe water."
 			Drowned_3: "{0} asphyxiated."
 			Drowned_4: "{0} wasn't a fish."
-            Drowned_5: "{0} forgot to inhale an air bubble."
-            Escape_1: "{0} accidentally misclicked."
+			Drowned_5: "{0} forgot to inhale an air bubble."
+			Escape_1: "{0} accidentally misclicked."
 			Lava_1: "{0} took a bath in a lake of fire."
 			Lava_2: "{0} became a charcoal briquette."
 			Lava_3: "{0} is HOT HOT HOT."
@@ -213,23 +213,23 @@ Mods: {
 			Generic_12: "{0} isn't in Kansas anymore"
 			Generic_13: "{0} experienced a skill issue"
 			Generic_14: "{0}'s keyboard was screwed up"
-            Generic_15: "{0} was folded into origami"
-            Generic_16: "{0} was force fed a porcupine"
+			Generic_15: "{0} was folded into origami"
+			Generic_16: "{0} was force fed a porcupine"
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Space_1: "{0} broke the Warp 10 threshold."
 			Space_2: "{0} got too close a black hole."
 			Space_3: "{0}'s body was found by martians."
-            Space_4: "{0} forgot their Environmental Protection Pack."
+			Space_4: "{0} forgot their Environmental Protection Pack."
 			Teleport_1: "{0}'s bones didn't teleport with them."
 			Teleport_2: "{0} thought they were an enderman."
-            Teleport_3: "{0} warped into the third dimension."
+			Teleport_3: "{0} warped into the third dimension."
 			Teleport_2_Male: "{0}'s bones didn't teleport with them."
 			Teleport_3_Male: "{0} thought they were an enderman."
-            Teleport_4_Male: "{0} warped into the third dimension."
+			Teleport_4_Male: "{0} warped into the third dimension."
 			Teleport_2_Female: "{0}'s bones didn't teleport with them."
 			Teleport_3_Female: "{0} thought they were an enderman."
-            Teleport_4_Female: "{0} warped into the third dimension."
+			Teleport_4_Female: "{0} warped into the third dimension."
 		}
 
 		GameTips: {
@@ -9460,7 +9460,7 @@ Mods: {
 
 		Tiles: {
 			Catalyzer.MapEntry: Catalyzer
-            Grindstone.MapEntry: Grindstone
+			Grindstone.MapEntry: Grindstone
 
 			LargeHerbsStage1: {
 				MapEntry0: Growing Large Daybloom

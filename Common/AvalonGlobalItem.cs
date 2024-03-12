@@ -655,10 +655,10 @@ public class AvalonGlobalItem : GlobalItem
         }
         #endregion
 
-        #region extractinator prefix removal
+        #region prefix removal
         if (item.prefix > 0)
         {
-            Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+            Point p = pos.ToTileCoordinates();
             Tile t = Framing.GetTileSafely(p);
             if (player.IsInTileInteractionRange(p.X, p.Y, TileReachCheckSettings.Simple) &&
                 t.TileType == ModContent.TileType<Tiles.Furniture.Grindstone>())

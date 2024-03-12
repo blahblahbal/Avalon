@@ -220,7 +220,15 @@ public class RecipeSystem : ModSystem
         //    ItemID.OmegaBanner
         //});
 
+        var groupGoldPickaxe = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.GoldPickaxe)}", new int[]
+        {
+            ItemID.GoldPickaxe,
+            ItemID.PlatinumPickaxe,
+            ModContent.ItemType<BismuthPickaxe>()
+        });
+        RecipeGroup.RegisterGroup("Avalon:GoldPickaxe", groupGoldPickaxe);
 
+        #region magic storage stuff
         var groupSilverBarMagicStorage = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.SilverBar)}", new int[]
         {
             ItemID.SilverBar,
@@ -229,13 +237,7 @@ public class RecipeSystem : ModSystem
         });
         RecipeGroup.RegisterGroup("MagicStorage:AnySilverBar", groupSilverBarMagicStorage);
 
-        var groupGoldPickaxe = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.GoldPickaxe)}", new int[]
-        {
-            ItemID.GoldPickaxe,
-            ItemID.PlatinumPickaxe,
-            ModContent.ItemType<BismuthPickaxe>()
-        });
-        RecipeGroup.RegisterGroup("Avalon:GoldPickaxe", groupGoldPickaxe);
+        
 
         var groupChestMS = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.Chest)}", new int[]
         {
@@ -299,6 +301,7 @@ public class RecipeSystem : ModSystem
             ModContent.ItemType<IckyAltar>()
         });
         RecipeGroup.RegisterGroup("MagicStorage:AnyDemonAltar", groupDemonAltarMagicStorage);
+        #endregion
 
         var groupTombstones = new RecipeGroup(() => $"{any} Tombstone", new int[]
         {
@@ -503,5 +506,63 @@ public class RecipeSystem : ModSystem
             ModContent.ItemType<ZincBar>()
         });
         RecipeGroup.RegisterGroup("Avalon:SilverBar", groupSilverBar);
+
+        #region thorium stuff
+        var groupThoriumDemoniteBar = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.DemoniteBar)}", new int[]
+        {
+            ItemID.DemoniteBar,
+            ItemID.CrimtaneBar,
+            ModContent.ItemType<BacciliteBar>()
+        });
+        RecipeGroup.RegisterGroup("DemoniteBar", groupThoriumDemoniteBar);
+
+        var groupThoriumCopper = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.CopperBar)}", new int[]
+        {
+            ItemID.CopperBar,
+            ItemID.TinBar,
+            ModContent.ItemType<BronzeBar>()
+        });
+        RecipeGroup.RegisterGroup("CopperBar", groupThoriumCopper);
+
+        var groupThoriumSilver = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.SilverBar)}", new int[]
+        {
+            ItemID.SilverBar,
+            ItemID.TungstenBar,
+            ModContent.ItemType<ZincBar>()
+        });
+        RecipeGroup.RegisterGroup("SilverBar", groupThoriumSilver);
+
+        var groupThoriumGold = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.GoldBar)}", new int[]
+        {
+            ItemID.GoldBar,
+            ItemID.PlatinumBar,
+            ModContent.ItemType<BismuthBar>()
+        });
+        RecipeGroup.RegisterGroup("GoldBar", groupThoriumGold);
+
+        var groupThoriumCobalt = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.CobaltBar)}", new int[]
+        {
+            ItemID.CobaltBar,
+            ItemID.PalladiumBar,
+            ModContent.ItemType<DurataniumBar>()
+        });
+        RecipeGroup.RegisterGroup("CobaltBar", groupThoriumCobalt);
+
+        var groupThoriumMythril = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.MythrilBar)}", new int[]
+        {
+            ItemID.MythrilBar,
+            ItemID.OrichalcumBar,
+            ModContent.ItemType<NaquadahBar>()
+        });
+        RecipeGroup.RegisterGroup("MythrilBar", groupThoriumMythril);
+
+        var groupThoriumAdamantite = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.AdamantiteBar)}", new int[]
+        {
+            ItemID.AdamantiteBar,
+            ItemID.TitaniumBar,
+            ModContent.ItemType<TroxiniumBar>()
+        });
+        RecipeGroup.RegisterGroup("AdamantiteBar", groupThoriumAdamantite);
+        #endregion
     }
 }
