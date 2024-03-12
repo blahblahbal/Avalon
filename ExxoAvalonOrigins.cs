@@ -49,6 +49,11 @@ public class ExxoAvalonOrigins : Mod
     public static readonly Mod? Depths = ModLoader.TryGetMod("TheDepths", out Mod obtainedMod) ? obtainedMod : null;
 
     /// <summary>
+    ///     Gets the instance of Thorium mod.
+    /// </summary>
+    public static readonly Mod? Thorium = ModLoader.TryGetMod("ThoriumMod", out Mod obtainedMod) ? obtainedMod : null;
+
+    /// <summary>
     ///     Gets the instance of Fargo's Mod.
     /// </summary>
     public static readonly Mod? Fargo = ModLoader.TryGetMod("Fargowiltas", out Mod obtainedMod) ? obtainedMod : null;

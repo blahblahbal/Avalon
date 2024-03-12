@@ -86,6 +86,17 @@ public class SnotOrb : ModTile
             {
                 Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<Smogscreen>(), 1, false, -1, false);
             }
+            if (ExxoAvalonOrigins.Thorium != null)
+            {
+                if (WorldGen.genRand.NextBool(2))
+                {
+                    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, ExxoAvalonOrigins.Thorium.Find<ModItem>("DarkHeart").Type, 1, false, -1, false);
+                }
+                else
+                {
+                    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<Compatability.Thorium.Items.Accessories.FanLetter3>(), 1, false, -1, false);
+                }
+            }
             WorldGen.shadowOrbSmashed = true;
             WorldGen.shadowOrbCount++;
             if (WorldGen.shadowOrbCount >= 3)

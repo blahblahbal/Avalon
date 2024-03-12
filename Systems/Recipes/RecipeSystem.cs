@@ -19,6 +19,7 @@ using Avalon.Items.Placeable.Furniture.Heartstone;
 using Terraria.Localization;
 using Avalon.Items.Placeable.Furniture.Gem;
 using Avalon.Items.Tools.PreHardmode;
+using Avalon.Items.Food;
 
 namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
@@ -31,10 +32,19 @@ public class RecipeSystem : ModSystem
         {
             int index = RecipeGroup.recipeGroupIDs["Wood"];
             RecipeGroup group0 = RecipeGroup.recipeGroups[index];
-            group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>());
-            group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.Coughwood>());
-            group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>());
-            group0.ValidItems.Add(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>());
+            group0.ValidItems.Add(ModContent.ItemType<ApocalyptusWood>());
+            group0.ValidItems.Add(ModContent.ItemType<Coughwood>());
+            group0.ValidItems.Add(ModContent.ItemType<BleachedEbony>());
+            group0.ValidItems.Add(ModContent.ItemType<ResistantWood>());
+        }
+
+        if (RecipeGroup.recipeGroups.TryGetValue(RecipeGroupID.Fruit, out var group1))
+        {
+            group1.ValidItems.Add(ModContent.ItemType<Blackberry>());
+            group1.ValidItems.Add(ModContent.ItemType<Durian>());
+            group1.ValidItems.Add(ModContent.ItemType<Mangosteen>());
+            group1.ValidItems.Add(ModContent.ItemType<Medlar>());
+            group1.ValidItems.Add(ModContent.ItemType<Raspberry>());
         }
 
         List<int> JukeboxTracks = new List<int>
