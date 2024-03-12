@@ -13,6 +13,39 @@ using ThoriumMod.NPCs.Depths;
 namespace Avalon.Compatability.Thorium;
 
 [ExtendsFromMod("ThoriumMod")]
+public class ThoriumTweaksPlayer : ModPlayer
+{
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return ModLoader.HasMod("ThoriumMod");
+    }
+    public override void PreUpdateBuffs()
+    {
+        if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.SkeletonRepellentBuff>()))
+        {
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.IrateBones>()] = true;
+        }
+        if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.ZombieRepellentBuff>()))
+        {
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.FallenHero>()] = true;
+        }
+        if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.InsectRepellentBuff>()))
+        {
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.Mosquito>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.MosquitoDroopy>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.MosquitoPainted>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.MosquitoSmall>()] = true;
+        }
+        if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.FishRepellentBuff>()))
+        {
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.Critters.ContaminatedGoldfish>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.RedArowana>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.RedArowana2>()] = true;
+        }
+    }
+}
+
+[ExtendsFromMod("ThoriumMod")]
 public class ThoriumTweaksGlobalNPC : GlobalNPC
 {
     public override bool IsLoadingEnabled(Mod mod)

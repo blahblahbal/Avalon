@@ -1381,6 +1381,21 @@ Mods: {
 				Tooltip: 5% increased magic damage
 			}
 
+			ChrysoberylAmulet: {
+				DisplayName: Chrysoberyl Amulet
+				Tooltip: 5% increased throwing damage
+			}
+
+			OpalAmulet: {
+				DisplayName: Opal Amulet
+				Tooltip: 5% increased symphonic damage
+			}
+
+			AquamarineAmulet: {
+				DisplayName: Aquamarine Amulet
+				Tooltip: 5% increased radiant damage
+			}
+
 			InertiaBoots: {
 				DisplayName: Inertia Boots
 				Tooltip:

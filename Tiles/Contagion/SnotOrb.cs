@@ -94,7 +94,7 @@ public class SnotOrb : ModTile
                 }
                 else
                 {
-                    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<Compatability.Thorium.Items.Accessories.FanLetter3>(), 1, false, -1, false);
+                    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, Mod.Find<ModItem>("FanLetter3").Type, 1, false, -1, false);
                 }
             }
             WorldGen.shadowOrbSmashed = true;
