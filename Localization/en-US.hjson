@@ -1386,6 +1386,11 @@ Mods: {
 				Tooltip: 5% increased throwing damage
 			}
 
+			Chrysoberyl: {
+				DisplayName: Chrysoberyl
+				Tooltip: ""
+			}
+
 			OpalAmulet: {
 				DisplayName: Opal Amulet
 				Tooltip: 5% increased symphonic damage
@@ -8434,7 +8439,7 @@ Mods: {
 
 			Grindstone: {
 				DisplayName: Grindstone
-				Tooltip: <right> this with a prefixed item while on your hotbar to remove the prefix
+				Tooltip: <right> to remove a prefix from an item
 			}
 
 			GloveofCreation: {
@@ -8449,6 +8454,20 @@ Mods: {
 					Hold Up to reach higher
 					Can place blocks and walls in midair and in lava
 					'''
+			}
+
+			FanLetter3: {
+				DisplayName: Fan Letter
+				Tooltip:
+					'''
+					'Full of intrusive compliments... but is surprisingly inspirational'
+					Increases maximum inspiration by 3
+					'''
+			}
+
+			ChrysoberylStaff: {
+				DisplayName: Chrysoberyl Staff
+				Tooltip: ""
 			}
 		}
 
@@ -8702,6 +8721,7 @@ Mods: {
 			InsectoidBlade.DisplayName: Insectoid Blade
 			PestilentScythe.DisplayName: Pestilent Scythe
 			PlagueDoctor.DisplayName: Plague Doctor
+			ChrysoberylBolt.DisplayName: Chrysoberyl Bolt
 		}
 
 		NPCs: {
