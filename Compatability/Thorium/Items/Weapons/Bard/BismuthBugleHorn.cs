@@ -32,8 +32,13 @@ namespace Avalon.Compatability.Thorium.Items.Weapons.Bard
                 .Register();
         }
     }
+    [ExtendsFromMod("ThoriumMod")]
     public class BismuthBugleHornPro : GoldBugleHornPro
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return ModLoader.HasMod("ThoriumMod");
+        }
         public override int DustType => 86;
     }
 }

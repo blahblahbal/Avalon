@@ -94,6 +94,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
         }
     }
 
+    [ExtendsFromMod("ThoriumMod")]
     public class ShieldBuffs : GlobalItem
     {
         public override bool IsLoadingEnabled(Mod mod)

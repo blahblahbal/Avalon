@@ -16,6 +16,73 @@ Mods: {
 		}
 	}
 
+	ThoriumMod: {
+		Items: {
+			IronShield: {
+				DisplayName: Iron Shield
+				Tooltip:
+					'''
+					Defense increased by 1
+					You constantly generate an 11 life shield
+					'''
+			}
+
+			LeadShield: {
+				DisplayName: Lead Shield
+				Tooltip:
+					'''
+					Defense increased by 1
+					You constantly generate a 12 life shield
+					'''
+			}
+
+			SilverBulwark: {
+				DisplayName: Silver Bulwark
+				Tooltip:
+					'''
+					Defense increased by 2
+					You constantly generate a 14 life shield
+					'''
+			}
+
+			TungstenBulwark: {
+				DisplayName: Tungsten Bulwark
+				Tooltip:
+					'''
+					Defense increased by 2
+					You constantly generate a 15 life shield
+					'''
+			}
+
+			GoldAegis: {
+				DisplayName: Gold Aegis
+				Tooltip:
+					'''
+					Defense increased by 2
+					You constantly generate a 17 life shield
+					'''
+			}
+
+			PlatinumAegis: {
+				DisplayName: Platinum Aegis
+				Tooltip:
+					'''
+					Defense increased by 2
+					You constantly generate an 18 life shield
+					'''
+			}
+
+			ThoriumShield: {
+				DisplayName: Thorium Shield
+				Tooltip:
+					'''
+					Defense increased by 3
+					You constantly generate a 20 life shield
+					'''
+			}
+		}
+	}
+
 	Avalon: {
 		GameTitles: {
 			0: Terraria: May contain zombies
@@ -8474,7 +8541,7 @@ Mods: {
 				DisplayName: Bismuth Aegis
 				Tooltip:
 					'''
-					defense increased by 2
+					Defense increased by 2
 					You constantly generate a 19 life shield
 					'''
 			}
@@ -8483,7 +8550,7 @@ Mods: {
 				DisplayName: Bronze Buckler
 				Tooltip:
 					'''
-					defense increased by 1
+					Defense increased by 1
 					You constantly generate a 10 life shield
 					'''
 			}
@@ -8492,7 +8559,7 @@ Mods: {
 				DisplayName: Nickel Shield
 				Tooltip:
 					'''
-					defense increased by 1
+					Defense increased by 1
 					You constantly generate a 13 life shield
 					'''
 			}
@@ -8501,7 +8568,7 @@ Mods: {
 				DisplayName: Zinc Bulwark
 				Tooltip:
 					'''
-					defense increased by 2
+					Defense increased by 2
 					You constantly generate a 16 life shield
 					'''
 			}
@@ -8798,7 +8865,7 @@ Mods: {
 			PestilentScythe.DisplayName: Pestilent Scythe
 			PlagueDoctor.DisplayName: Plague Doctor
 			ChrysoberylBolt.DisplayName: Chrysoberyl Bolt
-			BismuthBugleHornPro.DisplayName: Bismuth Bugle Horn Pro
+			BismuthBugleHornPro.DisplayName: Bismuth Bugle Horn
 		}
 
 		NPCs: {
