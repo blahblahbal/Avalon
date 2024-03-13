@@ -10,6 +10,7 @@ using ThoriumMod.Utilities;
 namespace Avalon.Compatability.Thorium.Items.Accessories
 {
     [ExtendsFromMod("ThoriumMod")]
+    [AutoloadEquip(EquipType.Shield)]
     public class BronzeBuckler : ThoriumItem
     {
         public override bool IsLoadingEnabled(Mod mod)
@@ -18,7 +19,9 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
         }
         public override void SetDefaults()
         {
-            Item.CloneDefaults(ModContent.ItemType<TinBuckler>());
+            Item.accessory = true;
+            Item.rare = ItemRarityID.White;
+            Item.value = 2000;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -27,10 +30,12 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ModContent.ItemType<BronzeBar>(),10).AddTile(TileID.Anvils).Register();
+            CreateRecipe().AddIngredient(ModContent.ItemType<BronzeBar>(), 10).AddTile(TileID.Anvils).Register();
         }
     }
+
     [ExtendsFromMod("ThoriumMod")]
+    [AutoloadEquip(EquipType.Shield)]
     public class NickelShield : ThoriumItem
     {
         public override bool IsLoadingEnabled(Mod mod)
@@ -39,7 +44,9 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
         }
         public override void SetDefaults()
         {
-            Item.CloneDefaults(ModContent.ItemType<TinBuckler>());
+            Item.accessory = true;
+            Item.rare = ItemRarityID.White;
+            Item.value = 4000;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -51,7 +58,9 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             CreateRecipe().AddIngredient(ModContent.ItemType<NickelBar>(), 10).AddTile(TileID.Anvils).Register();
         }
     }
+
     [ExtendsFromMod("ThoriumMod")]
+    [AutoloadEquip(EquipType.Shield)]
     public class ZincBulwark : ThoriumItem
     {
         public override bool IsLoadingEnabled(Mod mod)
@@ -60,7 +69,9 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
         }
         public override void SetDefaults()
         {
-            Item.CloneDefaults(ModContent.ItemType<TinBuckler>());
+            Item.accessory = true;
+            Item.rare = ItemRarityID.White;
+            Item.value = 9000;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -72,7 +83,9 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             CreateRecipe().AddIngredient(ModContent.ItemType<ZincBar>(), 10).AddTile(TileID.Anvils).Register();
         }
     }
+
     [ExtendsFromMod("ThoriumMod")]
+    [AutoloadEquip(EquipType.Shield)]
     public class BismuthAegis : ThoriumItem
     {
         public override bool IsLoadingEnabled(Mod mod)
@@ -81,7 +94,9 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
         }
         public override void SetDefaults()
         {
-            Item.CloneDefaults(ModContent.ItemType<TinBuckler>());
+            Item.accessory = true;
+            Item.rare = ItemRarityID.White;
+            Item.value = 16000;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -113,7 +128,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
         }
         public override void UpdateAccessory(Item item, Player player, bool hideVisual)
         {
-            if(item.type == ModContent.ItemType<IronShield>()) player.GetThoriumPlayer().MetalShieldMax = 11;
+            if (item.type == ModContent.ItemType<IronShield>()) player.GetThoriumPlayer().MetalShieldMax = 11;
             else if (item.type == ModContent.ItemType<LeadShield>()) player.GetThoriumPlayer().MetalShieldMax = 12;
             else if (item.type == ModContent.ItemType<SilverBulwark>()) player.GetThoriumPlayer().MetalShieldMax = 14;
             else if (item.type == ModContent.ItemType<TungstenBulwark>()) player.GetThoriumPlayer().MetalShieldMax = 15;
