@@ -8504,7 +8504,7 @@ Mods: {
 					defense increased by 2
 					You constantly generate a 16 life shield
 					'''
-            }
+			}
 
 			ChrysoberylGemsparkBlock: {
 				DisplayName: Chrysoberyl Gemspark Block
@@ -8539,6 +8539,11 @@ Mods: {
 			OpalChest: {
 				DisplayName: Opal Chest
 				Tooltip: ""
+			}
+
+			BismuthBugleHorn: {
+				DisplayName: Bismuth Bugle Horn
+				Tooltip: Releases a twin pulse of sound
 			}
 		}
 
@@ -8793,6 +8798,7 @@ Mods: {
 			PestilentScythe.DisplayName: Pestilent Scythe
 			PlagueDoctor.DisplayName: Plague Doctor
 			ChrysoberylBolt.DisplayName: Chrysoberyl Bolt
+			BismuthBugleHornPro.DisplayName: Bismuth Bugle Horn Pro
 		}
 
 		NPCs: {
