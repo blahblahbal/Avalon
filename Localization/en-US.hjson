@@ -8489,6 +8489,21 @@ Mods: {
 				DisplayName: Offline Chrysoberyl Gemspark Wall
 				Tooltip: ""
 			}
+
+			AquamarineChest: {
+				DisplayName: Aquamarine Chest
+				Tooltip: ""
+			}
+
+			ChrysoberylChest: {
+				DisplayName: Chrysoberyl Chest
+				Tooltip: ""
+			}
+
+			OpalChest: {
+				DisplayName: Opal Chest
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9720,6 +9735,9 @@ Mods: {
 			Holybird.MapEntry: Holybird
 			Sweetstem.MapEntry: Sweetstem
 			TwilightPlume.MapEntry: TwilightPlume
+			AquamarineChest.MapEntry0: Aquamarine Chest
+			ChrysoberylChest.MapEntry0: Chrysoberyl Chest
+			OpalChest.MapEntry0: Opal Chest
 		}
 
 		Prefixes: {
