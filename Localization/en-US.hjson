@@ -8504,6 +8504,41 @@ Mods: {
 					defense increased by 2
 					You constantly generate a 16 life shield
 					'''
+            }
+
+			ChrysoberylGemsparkBlock: {
+				DisplayName: Chrysoberyl Gemspark Block
+				Tooltip: ""
+			}
+
+			ChartreuseStainedGlass: {
+				DisplayName: Chartreuse Stained Glass
+				Tooltip: ""
+			}
+
+			ChrysoberylGemsparkWall: {
+				DisplayName: Chrysoberyl Gemspark Wall
+				Tooltip: ""
+			}
+
+			ChrysoberylGemsparkWallOff: {
+				DisplayName: Offline Chrysoberyl Gemspark Wall
+				Tooltip: ""
+			}
+
+			AquamarineChest: {
+				DisplayName: Aquamarine Chest
+				Tooltip: ""
+			}
+
+			ChrysoberylChest: {
+				DisplayName: Chrysoberyl Chest
+				Tooltip: ""
+			}
+
+			OpalChest: {
+				DisplayName: Opal Chest
+				Tooltip: ""
 			}
 		}
 
@@ -9736,6 +9771,9 @@ Mods: {
 			Holybird.MapEntry: Holybird
 			Sweetstem.MapEntry: Sweetstem
 			TwilightPlume.MapEntry: TwilightPlume
+			AquamarineChest.MapEntry0: Aquamarine Chest
+			ChrysoberylChest.MapEntry0: Chrysoberyl Chest
+			OpalChest.MapEntry0: Opal Chest
 		}
 
 		Prefixes: {

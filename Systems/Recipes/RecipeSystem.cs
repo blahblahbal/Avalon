@@ -20,6 +20,7 @@ using Terraria.Localization;
 using Avalon.Items.Placeable.Furniture.Gem;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Food;
+using Avalon.Compatability.Thorium.Items.Placeable.Furniture.Gem;
 
 namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
@@ -268,7 +269,12 @@ public class RecipeSystem : ModSystem
             ModContent.ItemType<SapphireChest>(),
             ModContent.ItemType<TopazChest>(),
             ModContent.ItemType<TourmalineChest>(),
-            ModContent.ItemType<ZirconChest>()
+            ModContent.ItemType<ZirconChest>(),
+            #region thorium
+            ModContent.ItemType<AquamarineChest>(),
+            ModContent.ItemType<ChrysoberylChest>(),
+            ModContent.ItemType<OpalChest>()
+            #endregion thorium
         });
         RecipeGroup.RegisterGroup("MagicStorage:AnyChest", groupChestMS);
 
