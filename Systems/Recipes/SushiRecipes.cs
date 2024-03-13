@@ -2,7 +2,18 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Systems;
+namespace Avalon.Systems.Recipes;
+
+public class TokensRecipesSystem : ModSystem
+{
+    public override void AddRecipes()
+    {
+        if (ExxoAvalonOrigins.Tokens != null)
+        {
+            Systems.Recipes.SushiRecipes.CreateRecipes(ExxoAvalonOrigins.Tokens);
+        }
+    }
+}
 
 public static class SushiRecipes
 {
