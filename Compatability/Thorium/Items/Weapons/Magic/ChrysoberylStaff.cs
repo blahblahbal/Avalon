@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Magic.PreHardmode;
+namespace Avalon.Compatability.Thorium.Items.Weapons.Magic;
 
 [ExtendsFromMod("ThoriumMod")]
 class ChrysoberylStaff : ModItem
@@ -21,15 +21,11 @@ class ChrysoberylStaff : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.SapphireStaff);
-        Item.staff[Item.type] = true;
-        Rectangle dims = this.GetDims();
-        Item.width = dims.Width;
-        Item.height = dims.Height;
         Item.damage = 18;
         Item.autoReuse = true;
         Item.shootSpeed = 7.5f;
         Item.mana = 5;
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.White;
         Item.useTime = 35;
         Item.useAnimation = 35;
         Item.knockBack = 3.75f;
@@ -40,8 +36,8 @@ class ChrysoberylStaff : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 10)
-            .AddIngredient(ModContent.ItemType<Compatability.Thorium.Items.Material.Chrysoberyl>(), 8)
+            .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.NickelBar>(), 10)
+            .AddIngredient(ModContent.ItemType<Material.Chrysoberyl>(), 8)
             .AddTile(TileID.Anvils)
             .Register();
     }
