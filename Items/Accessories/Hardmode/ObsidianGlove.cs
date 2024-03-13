@@ -31,7 +31,7 @@ class ObsidianGlove : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<CloudGlove>())
             .AddIngredient(ItemID.ObsidianSkull)
             .AddTile(TileID.TinkerersWorkbench)

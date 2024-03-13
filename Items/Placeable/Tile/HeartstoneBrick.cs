@@ -30,7 +30,7 @@ class HeartstoneBrick : ModItem
     public override void AddRecipes()
     {
         CreateRecipe(5)
-            .AddIngredient(ItemID.StoneBlock,5)
+            .AddIngredient(ItemID.StoneBlock, 5)
             .AddIngredient(ModContent.ItemType<Material.Ores.Heartstone>())
             .AddTile(TileID.Furnaces)
             .Register();

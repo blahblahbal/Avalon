@@ -3,10 +3,17 @@ using Avalon.Items.Material;
 using Avalon.Items.Material.Herbs;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Material.Shards;
+using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
+using ThoriumMod.Items.BardItems;
+using ThoriumMod.Items.Donate;
+using ThoriumMod.Items.HealerItems;
+using ThoriumMod.Items.Misc;
+using ThoriumMod.Items.ThrownItems;
 using ThoriumMod.NPCs;
 using ThoriumMod.NPCs.Depths;
 
@@ -217,16 +224,27 @@ public class ThoriumTweaksRecipeSystem : ModSystem
     {
         return ModLoader.HasMod("ThoriumMod");
     }
+    public override void AddRecipeGroups()
+    {
+        string any = Language.GetTextValue("LegacyMisc.37");
+
+        var groupLifeCrystalOre = new RecipeGroup(() => $"{any} Life Crystal Ore", new int[]
+        {
+            ModContent.ItemType<LifeQuartz>(),
+            ModContent.ItemType<Heartstone>()
+        });
+        RecipeGroup.RegisterGroup("Avalon:LifeCrystalOre", groupLifeCrystalOre);
+    }
     public override void AddRecipes()
     {
         // Enchanted items
-        Recipe.Create(ModContent.ItemType<ThoriumMod.Items.Misc.EnchantedPickaxe>())
+        Recipe.Create(ModContent.ItemType<EnchantedPickaxe>())
             .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.EnchantedBar>(), 8)
             .AddRecipeGroup("Avalon:GoldPickaxe")
             .AddTile(TileID.Anvils)
             .Register();
 
-        Recipe.Create(ModContent.ItemType<ThoriumMod.Items.ThrownItems.EnchantedKnife>(), 125)
+        Recipe.Create(ModContent.ItemType<EnchantedKnife>(), 125)
             .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.EnchantedBar>(), 2)
             .AddTile(TileID.Anvils)
             .Register();
@@ -243,18 +261,28 @@ public class ThoriumTweaksRecipeSystem : ModSystem
         // End Enchanted items
 
         // EGG
-        Recipe.Create(ModContent.ItemType<ThoriumMod.Items.BardItems.FabergeEgg>())
+        Recipe.Create(ModContent.ItemType<FabergeEgg>())
             .AddIngredient(ItemID.Cloud, 25)
-            .AddIngredient(ModContent.ItemType<Avalon.Items.Placeable.Tile.MoonplateBlock>(), 10)
+            .AddIngredient(ModContent.ItemType<MoonplateBlock>(), 10)
             .AddTile(TileID.SkyMill)
             .Register();
 
-        Recipe.Create(ModContent.ItemType<ThoriumMod.Items.BardItems.FabergeEgg>())
+        Recipe.Create(ModContent.ItemType<FabergeEgg>())
             .AddIngredient(ItemID.Cloud, 25)
-            .AddIngredient(ModContent.ItemType<Avalon.Items.Placeable.Tile.DuskplateBlock>(), 10)
+            .AddIngredient(ModContent.ItemType<DuskplateBlock>(), 10)
             .AddTile(TileID.SkyMill)
             .Register();
         // END EGG
+
+        Recipe.Create(ModContent.ItemType<LifeQuartz>())
+            .AddIngredient(ModContent.ItemType<Heartstone>())
+            .AddTile(TileID.Furnaces)
+            .Register();
+
+        Recipe.Create(ModContent.ItemType<Heartstone>())
+            .AddIngredient(ModContent.ItemType<LifeQuartz>())
+            .AddTile(TileID.Furnaces)
+            .Register();
     }
     public override void PostAddRecipes()
     {
@@ -266,14 +294,165 @@ public class ThoriumTweaksRecipeSystem : ModSystem
             {
                 recipe.AddIngredient(ModContent.ItemType<VenomShard>());
             }
-            if (recipe.createItem.type == ModContent.ItemType<ThoriumMod.Items.BardItems.TheGreenTambourine>())
+            if (recipe.createItem.type == ModContent.ItemType<TheGreenTambourine>())
             {
                 recipe.AddIngredient(ModContent.ItemType<VenomShard>());
             }
-            if (recipe.createItem.type == ModContent.ItemType<ThoriumMod.Items.ThrownItems.TechniqueCobraBite>())
+            if (recipe.createItem.type == ModContent.ItemType<TechniqueCobraBite>())
             {
                 recipe.AddIngredient(ModContent.ItemType<VenomShard>());
             }
+
+            #region life quartz/heartstone
+            if (recipe.createItem.type == ModContent.ItemType<LifeQuartz>())
+            {
+                if (recipe.TryGetIngredient(ItemID.LifeCrystal, out Item ing))
+                {
+                    recipe.DisableRecipe();
+                }
+            }
+            if (recipe.createItem.type == ItemID.LifeCrystal)
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 45);
+                }
+                if (recipe.TryGetIngredient(ModContent.ItemType<Heartstone>(), out Item ing2))
+                {
+                    recipe.RemoveIngredient(ing2);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 45);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<LifeGem>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 15);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<AphrodisiacVial>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre");
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<TemplarsGrace>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 4);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<Prophecy>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 5);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<LifeQuartzClaymore>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 10);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<TemplarJudgment>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 4);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<TemplarsCirclet>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 3);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<TemplarsTabard>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 5);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<TemplarsLeggings>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 4);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<HeartWand>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 6);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<LifeQuartzShield>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 6);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<HeadMirror>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 4);
+                }
+            }
+            if (recipe.createItem.type == ItemID.HeartStatue)
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 5);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<CupidString>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 10);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<Violin>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 6);
+                }
+            }
+            if (recipe.createItem.type == ModContent.ItemType<StrawberryHeart>())
+            {
+                if (recipe.TryGetIngredient(ModContent.ItemType<LifeQuartz>(), out Item ing))
+                {
+                    recipe.RemoveIngredient(ing);
+                    recipe.AddRecipeGroup("Avalon:LifeCrystalOre", 5);
+                }
+            }
+            #endregion
         }
     }
 }

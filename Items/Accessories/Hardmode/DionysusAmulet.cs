@@ -29,7 +29,7 @@ class DionysusAmulet : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<PygmyShield>())
             .AddIngredient(ModContent.ItemType<PeridotAmulet>())
             .AddIngredient(ItemID.SharkToothNecklace)

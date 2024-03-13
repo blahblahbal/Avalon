@@ -35,7 +35,7 @@ class ChrysoberylStaff : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.NickelBar>(), 10)
             .AddIngredient(ModContent.ItemType<Material.Chrysoberyl>(), 8)
             .AddTile(TileID.Anvils)

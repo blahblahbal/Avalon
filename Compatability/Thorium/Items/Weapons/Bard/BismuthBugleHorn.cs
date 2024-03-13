@@ -26,7 +26,7 @@ namespace Avalon.Compatability.Thorium.Items.Weapons.Bard
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1)
+            CreateRecipe()
                 .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.BismuthBar>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();

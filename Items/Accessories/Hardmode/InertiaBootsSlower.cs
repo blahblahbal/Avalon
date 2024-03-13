@@ -28,7 +28,7 @@ class InertiaBootsSlower : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<InertiaBoots>())
             .AddTile(TileID.TinkerersWorkbench)
             .Register();

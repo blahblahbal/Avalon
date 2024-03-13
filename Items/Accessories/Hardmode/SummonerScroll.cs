@@ -16,7 +16,7 @@ public class SummonerScroll : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ItemID.SummonerEmblem)
             .AddIngredient(ItemID.PapyrusScarab)
             .AddTile(TileID.TinkerersWorkbench)

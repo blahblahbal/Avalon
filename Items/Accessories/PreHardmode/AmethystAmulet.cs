@@ -25,7 +25,7 @@ public class AmethystAmulet : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ItemID.Amethyst, 12)
             .AddIngredient(ItemID.Chain)
             .AddTile(TileID.Anvils)

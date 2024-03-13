@@ -35,7 +35,7 @@ class BacchusBoots : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe(1)
+        CreateRecipe()
             .AddIngredient(ModContent.ItemType<DionysusAmulet>())
             .AddIngredient(ModContent.ItemType<GuardianBoots>())
             .AddTile(TileID.TinkerersWorkbench)
