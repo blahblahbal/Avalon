@@ -9,6 +9,7 @@ using ThoriumMod.Utilities;
 
 namespace Avalon.Compatability.Thorium.Items.Accessories
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class BronzeBuckler : ThoriumItem
     {
         public override bool IsLoadingEnabled(Mod mod)
@@ -29,6 +30,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             CreateRecipe().AddIngredient(ModContent.ItemType<BronzeBar>(),10).AddTile(TileID.Anvils).Register();
         }
     }
+    [ExtendsFromMod("ThoriumMod")]
     public class NickelShield : ThoriumItem
     {
         public override bool IsLoadingEnabled(Mod mod)
@@ -49,6 +51,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             CreateRecipe().AddIngredient(ModContent.ItemType<NickelBar>(), 10).AddTile(TileID.Anvils).Register();
         }
     }
+    [ExtendsFromMod("ThoriumMod")]
     public class ZincBulwark : ThoriumItem
     {
         public override bool IsLoadingEnabled(Mod mod)
@@ -69,6 +72,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             CreateRecipe().AddIngredient(ModContent.ItemType<ZincBar>(), 10).AddTile(TileID.Anvils).Register();
         }
     }
+    [ExtendsFromMod("ThoriumMod")]
     public class BismuthAegis : ThoriumItem
     {
         public override bool IsLoadingEnabled(Mod mod)

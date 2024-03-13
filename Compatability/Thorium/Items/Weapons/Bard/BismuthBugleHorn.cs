@@ -10,8 +10,13 @@ using ThoriumMod.Projectiles.Bard;
 
 namespace Avalon.Compatability.Thorium.Items.Weapons.Bard
 {
+    [ExtendsFromMod("ThoriumMod")]
     public class BismuthBugleHorn : GoldBugleHorn
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return ModLoader.HasMod("ThoriumMod");
+        }
         public override void SetBardDefaults()
         {
             base.SetBardDefaults();
