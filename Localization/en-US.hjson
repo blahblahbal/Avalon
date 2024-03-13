@@ -8469,6 +8469,26 @@ Mods: {
 				DisplayName: Chrysoberyl Staff
 				Tooltip: ""
 			}
+
+			ChrysoberylGemsparkBlock: {
+				DisplayName: Chrysoberyl Gemspark Block
+				Tooltip: ""
+			}
+
+			ChartreuseStainedGlass: {
+				DisplayName: Chartreuse Stained Glass
+				Tooltip: ""
+			}
+
+			ChrysoberylGemsparkWall: {
+				DisplayName: Chrysoberyl Gemspark Wall
+				Tooltip: ""
+			}
+
+			ChrysoberylGemsparkWallOff: {
+				DisplayName: Offline Chrysoberyl Gemspark Wall
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

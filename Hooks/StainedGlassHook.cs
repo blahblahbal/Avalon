@@ -25,7 +25,8 @@ namespace Avalon.Hooks
             if ((!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) &&
                (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>() ||
                tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>() ||
-               tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>()) && tile.LiquidAmount < 255)
+               tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>() ||
+                tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>()) && tile.LiquidAmount < 255)
             {
                 finalR = num4;
                 finalG = num4 * 0.6f;
@@ -47,6 +48,12 @@ namespace Avalon.Hooks
                     finalR *= 0f;
                     finalG *= 1f;
                     finalB *= 1f;
+                }
+                else if (tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())
+                {
+                    finalR *= 0.745f;
+                    finalG *= 0.925f;
+                    finalB *= 0.1f;
                 }
             }
             if (lightColor.X < finalR)
@@ -75,7 +82,8 @@ namespace Avalon.Hooks
             if ((!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) &&
                 (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>() ||
                 tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>() ||
-                tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>()) && tile.LiquidAmount < 255)
+                tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>() ||
+                tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>()) && tile.LiquidAmount < 255)
             {
                 finalR = num6;
                 finalG = num7;
@@ -97,6 +105,12 @@ namespace Avalon.Hooks
                     finalR *= 0f;
                     finalG *= 1f;
                     finalB *= 1f;
+                }
+                else if (tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())
+                {
+                    finalR *= 0.745f;
+                    finalG *= 0.925f;
+                    finalB *= 0.1f;
                 }
             }
             float num3 = 1f - Main.shimmerDarken;
