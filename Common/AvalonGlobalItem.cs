@@ -2479,10 +2479,10 @@ public class AvalonGlobalItem : GlobalItem
         if (player.GetModPlayer<AvalonPlayer>().OilBottle && player.whoAmI == Main.myPlayer && player.GetModPlayer<AvalonPlayer>().OilBottleTimer == 0 &&
             player.itemAnimation > 0 && item.damage > 0)
         {
-            player.GetModPlayer<AvalonPlayer>().OilBottleTimer = 60;
+            player.GetModPlayer<AvalonPlayer>().OilBottleTimer = 120;
             Vector2 center = player.Center;
             Vector2 vector = player.DirectionTo(player.ApplyRangeCompensation(0.2f, center, Main.MouseWorld)) * 10f;
-            Projectile.NewProjectile(player.GetSource_FromThis(), center.X, center.Y, vector.X, vector.Y, ModContent.ProjectileType<Projectiles.OilBottle>(), 23, 3f, player.whoAmI);
+            Projectile.NewProjectile(player.GetSource_FromThis(), center.X, center.Y, vector.X, vector.Y, ModContent.ProjectileType<Projectiles.OilBottle>(), 13, 3f, player.whoAmI);
         }
         #endregion 
 

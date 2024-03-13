@@ -8469,6 +8469,42 @@ Mods: {
 				DisplayName: Chrysoberyl Staff
 				Tooltip: ""
 			}
+
+			BismuthAegis: {
+				DisplayName: Bismuth Aegis
+				Tooltip:
+					'''
+					defense increased by 2
+					You constantly generate a 19 life shield
+					'''
+			}
+
+			BronzeBuckler: {
+				DisplayName: Bronze Buckler
+				Tooltip:
+					'''
+					defense increased by 1
+					You constantly generate a 10 life shield
+					'''
+			}
+
+			NickelShield: {
+				DisplayName: Nickel Shield
+				Tooltip:
+					'''
+					defense increased by 1
+					You constantly generate a 13 life shield
+					'''
+			}
+
+			ZincBulwark: {
+				DisplayName: Zinc Bulwark
+				Tooltip:
+					'''
+					defense increased by 2
+					You constantly generate a 16 life shield
+					'''
+			}
 		}
 
 		InfoDisplays: {
