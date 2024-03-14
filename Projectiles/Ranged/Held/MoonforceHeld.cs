@@ -108,7 +108,7 @@ namespace Avalon.Projectiles.Ranged.Held
         {
             if (Moonlight)
             {
-                SoundEngine.PlaySound(SoundID.Item110);
+                SoundEngine.PlaySound(SoundID.Item110,projectile.position);
                 for (int i = 0; i < projectile.width / 2; i++)
                 {
                     Dust d = Dust.NewDustDirect(projectile.Center, 0, 0, Main.rand.Next(DustID.CorruptTorch,DustID.JungleTorch));
