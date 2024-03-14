@@ -11,7 +11,7 @@ public class PlagueCrate : ModItem
     {
         ItemID.Sets.IsFishingCrate[Type] = true;
         ItemID.Sets.IsFishingCrateHardmode[Type] = true;
-        Item.ResearchUnlockCount = 10;
+        Item.ResearchUnlockCount = 5;
     }
 
     public override void SetDefaults()

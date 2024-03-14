@@ -10,7 +10,7 @@ public class ContagionCrate : ModItem
     public override void SetStaticDefaults()
     {
         ItemID.Sets.IsFishingCrate[Type] = true;
-        Item.ResearchUnlockCount = 10;
+        Item.ResearchUnlockCount = 5;
     }
 
     public override void SetDefaults()
