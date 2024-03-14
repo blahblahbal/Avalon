@@ -9,16 +9,16 @@ class NickelBroadsword : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 11;
+        Item.damage = 14;
         Item.useTurn = true;
         Item.scale = 1f;
         Item.width = dims.Width;
-        Item.useTime = 21;
-        Item.knockBack = 5.2f;
+        Item.useTime = 20;
+        Item.knockBack = 5.5f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 2250;
-        Item.useAnimation = 21;
+        Item.useAnimation = 20;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item1;
     }

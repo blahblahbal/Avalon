@@ -11,7 +11,7 @@ public class PlagueCrate : ModItem
     {
         ItemID.Sets.IsFishingCrate[Type] = true;
         ItemID.Sets.IsFishingCrateHardmode[Type] = true;
-        Item.ResearchUnlockCount = 10;
+        Item.ResearchUnlockCount = 5;
     }
 
     public override void SetDefaults()
@@ -46,7 +46,7 @@ public class PlagueCrate : ModItem
         itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, themedDrops));
 
         // Drop coins
-        itemLoot.Add(ItemDropRule.Common(ItemID.GoldCoin, 4, 5, 13));
+        itemLoot.Add(ItemDropRule.Common(ItemID.GoldCoin, 4, 5, 12));
 
         // Drop pre-hm ores, with the addition of the Avalon ones
         IItemDropRule[] oreTypes = new IItemDropRule[] {

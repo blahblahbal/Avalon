@@ -17,7 +17,7 @@ class BronzeShortsword : ModItem
     public override void AddRecipes()
     {
         Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.BronzeBar>(), 7)
+            .AddIngredient(ModContent.ItemType<Material.Bars.BronzeBar>(), 5)
             .AddTile(TileID.Anvils)
             .Register();
     }

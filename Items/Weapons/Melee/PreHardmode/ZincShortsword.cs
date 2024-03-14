@@ -17,7 +17,7 @@ class ZincShortsword : ModItem
     public override void AddRecipes()
     {
         Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 7)
+            .AddIngredient(ModContent.ItemType<Material.Bars.ZincBar>(), 6)
             .AddTile(TileID.Anvils)
             .Register();
     }
