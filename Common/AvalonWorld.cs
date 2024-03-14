@@ -44,6 +44,7 @@ using Avalon.Tiles.Furniture.YellowDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Common.Templates;
+using Avalon.Logic;
 
 namespace Avalon.Common;
 
@@ -382,6 +383,25 @@ public class AvalonWorld : ModSystem
             {
                 num10 = Main.maxTilesY - 10;
             }
+
+            #region hardmode/superhardmode stuff
+            if (Main.tile[xCoord, yCoord].HasUnactuatedTile)
+            {
+                //ContagionHardmodeSpread(num5, num6);
+                //if (Main.hardMode)
+                //{
+                //    SpreadXanthophyte(num5, num6);
+                //}
+                if (Main.hardMode)
+                {
+                    SpreadShroomite(xCoord, yCoord);
+                }
+                //if (SuperHardmode && ModContent.GetInstance<BiomeTileCounts>().WorldDarkMatterTiles < BiomeTileCounts.DarkMatterTilesHardLimit)
+                //{
+                //    DarkMatterSpread(num5, num6);
+                //}
+            }
+            #endregion hardmode/superhardmode stuff
 
             #region bone fish spawning
             for (int i = 0; i < 255; i++)
@@ -1862,7 +1882,7 @@ public class AvalonWorld : ModSystem
     public void DamageMobWithNPCProjectile(NPC sourceNPC, NPC npcToHit)
     {
         //if (sourceNPC.getRect().Intersects(npcToHit.getRect()))
-        if (Collision.CheckAABBvAABBCollision(sourceNPC.Center, new Vector2(sourceNPC.width, sourceNPC.height), npcToHit.Center, new Vector2(npcToHit.width, npcToHit.height)))
+        if (Terraria.Collision.CheckAABBvAABBCollision(sourceNPC.Center, new Vector2(sourceNPC.width, sourceNPC.height), npcToHit.Center, new Vector2(npcToHit.width, npcToHit.height)))
         {
             sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer++;
             if (sourceNPC.GetGlobalNPC<AvalonGlobalNPCInstance>().DamageMobsTimer % 5 == 0)
@@ -1879,7 +1899,7 @@ public class AvalonWorld : ModSystem
 
     public void MakeOblivionOre(NPC npc1, NPC npc2, string text, int radius)
     {
-        if (Collision.CheckAABBvAABBCollision(npc1.Center, new Vector2(npc1.width, npc1.height), npc2.Center, new Vector2(npc2.width, npc2.height)))
+        if (Terraria.Collision.CheckAABBvAABBCollision(npc1.Center, new Vector2(npc1.width, npc1.height), npc2.Center, new Vector2(npc2.width, npc2.height)))
         {
             //WorldGeneration.Utils.MakeOblivionOreCircle((int)(npc1.position.X / 16f), (int)(npc1.position.Y / 16f), radius, ModContent.TileType<Tiles.Ores.CaesiumOre>()); // oblivion ore
             npc1.life = 0;
@@ -1902,15 +1922,53 @@ public class AvalonWorld : ModSystem
         }
     }
 
-    public static void MakeTempOutpost(int x, int y)
+    public void SpreadShroomite(int x, int y)
     {
-        for (int i = x; i < x + 25; i++)
+        if (Main.tile[x, y].IsActuated)
         {
-            for (int j = y; j < y + 25; j++)
+            return;
+        }
+
+        int type = Main.tile[x, y].TileType;
+
+        if (y > (Main.worldSurface + Main.rockLayer) / 2.0)
+        {
+            if ((type == TileID.MushroomGrass) && WorldGen.genRand.NextBool(150))
             {
-                Tile t = Main.tile[i, j];
-                t.HasTile = true;
-                t.TileType = (ushort)ModContent.TileType<TuhrtlBrick>();
+                int num6 = x + WorldGen.genRand.Next(-10, 11);
+                int num7 = y + WorldGen.genRand.Next(-10, 11);
+                if (Main.tile[num6, num7].HasTile && (Main.tile[num6, num7].TileType == TileID.Mud) && (!Main.tile[num6, num7 - 1].HasTile || (Main.tile[num6, num7 - 1].TileType != 5 && Main.tile[num6, num7 - 1].TileType != 236 && Main.tile[num6, num7 - 1].TileType != 238)) && GrowingOreSpread.GrowingOre(x, y, ModContent.TileType<ShroomiteOre>()))
+                {
+                    Main.tile[num6, num7].TileType = (ushort)ModContent.TileType<ShroomiteOre>();
+                    WorldGen.SquareTileFrame(num6, num7, true);
+                }
+            }
+            if (type == (ushort)ModContent.TileType<ShroomiteOre>() && !WorldGen.genRand.NextBool(3))
+            {
+                int num8 = x;
+                int num9 = y;
+                int num10 = WorldGen.genRand.Next(4);
+                if (num10 == 0)
+                {
+                    num8++;
+                }
+                if (num10 == 1)
+                {
+                    num8--;
+                }
+                if (num10 == 2)
+                {
+                    num9++;
+                }
+                if (num10 == 3)
+                {
+                    num9--;
+                }
+                if (Main.tile[num8, num9].HasTile && (Main.tile[num8, num9].TileType == TileID.Mud || Main.tile[num8, num9].TileType == TileID.MushroomGrass) && GrowingOreSpread.GrowingOre(x, y, ModContent.TileType<ShroomiteOre>()))
+                {
+                    Main.tile[num8, num9].TileType = (ushort)ModContent.TileType<ShroomiteOre>();
+                    WorldGen.SquareTileFrame(num8, num9, true);
+                }
             }
         }
     }

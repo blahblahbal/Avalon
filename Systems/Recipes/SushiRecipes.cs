@@ -19,7 +19,7 @@ public class TokensRecipesSystem : ModSystem
     {
         if (ExxoAvalonOrigins.Tokens != null)
         {
-            Systems.Recipes.SushiRecipes.CreateRecipes(ExxoAvalonOrigins.Tokens);
+            SushiRecipes.CreateRecipes(ExxoAvalonOrigins.Tokens);
         }
     }
 }
