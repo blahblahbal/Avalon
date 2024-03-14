@@ -17,7 +17,7 @@ class NickelShortsword : ModItem
     public override void AddRecipes()
     {
         Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 7)
+            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 6)
             .AddTile(TileID.Anvils)
             .Register();
     }
