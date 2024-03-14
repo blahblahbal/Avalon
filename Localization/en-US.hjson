@@ -8616,6 +8616,11 @@ Mods: {
 				DisplayName: Bismuth Bugle Horn
 				Tooltip: Releases a twin pulse of sound
 			}
+
+			Boompipe: {
+				DisplayName: Boompipe
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

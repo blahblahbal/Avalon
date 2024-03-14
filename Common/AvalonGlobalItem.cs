@@ -63,7 +63,6 @@ public class AvalonGlobalItem : GlobalItem
     };
     public override void SetStaticDefaults()
     {
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BismuthOre>()] = ItemID.PlatinumOre;
         ItemID.Sets.ShimmerTransformToItem[ItemID.ChlorophyteOre] = ModContent.ItemType<TroxiniumOre>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<TroxiniumOre>()] = ItemID.TitaniumOre;
         ItemID.Sets.ShimmerTransformToItem[ItemID.AdamantiteOre] = ModContent.ItemType<NaquadahOre>();
