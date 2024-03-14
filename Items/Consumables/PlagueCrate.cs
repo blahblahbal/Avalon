@@ -46,7 +46,7 @@ public class PlagueCrate : ModItem
         itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, themedDrops));
 
         // Drop coins
-        itemLoot.Add(ItemDropRule.Common(ItemID.GoldCoin, 4, 5, 13));
+        itemLoot.Add(ItemDropRule.Common(ItemID.GoldCoin, 4, 5, 12));
 
         // Drop pre-hm ores, with the addition of the Avalon ones
         IItemDropRule[] oreTypes = new IItemDropRule[] {
