@@ -3,6 +3,7 @@ using Avalon.Hooks;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Herbs;
 using Avalon.Items.Material.Shards;
 using System.Collections.Generic;
 using System.Reflection;
@@ -331,6 +332,15 @@ public class RecipeChanger : ModSystem
                     recipe.AddIngredient(ModContent.ItemType<FireShard>());
                     break;
                 }
+
+                #region potions
+                case ItemID.RagePotion:
+                {
+                    recipe.RemoveIngredient(ItemID.Deathweed);
+                    recipe.AddIngredient(ModContent.ItemType<Bloodberry>());
+                    break;
+                }
+                #endregion potions
             }
         }
 
