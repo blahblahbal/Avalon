@@ -6052,7 +6052,11 @@ Mods: {
 
 			ContagionToken: {
 				DisplayName: Contagion Token
-				Tooltip: ""
+				Tooltip:
+					'''
+					Used to make things
+					Gathered in the Contagion, having defeated a boss
+					'''
 			}
 
 			PhantomWispDye: {

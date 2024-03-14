@@ -6,6 +6,10 @@ namespace Avalon.Items.Tokens;
 
 class ContagionToken : ModItem
 {
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return ModLoader.HasMod("Tokens");
+    }
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 25;

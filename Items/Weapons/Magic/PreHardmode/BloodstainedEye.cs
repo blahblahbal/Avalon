@@ -29,7 +29,7 @@ class BloodstainedEye : ModItem
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.BloodyTear>();
         Item.shootSpeed = 14f;
         Item.UseSound = SoundID.NPCHit1;
-        Item.value = Item.sellPrice(0, 1, 0, 0);
+        Item.value = Item.sellPrice(0, 0, 60, 0);
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
