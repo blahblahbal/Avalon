@@ -8645,6 +8645,16 @@ Mods: {
 					8% decreased mana usage
 					'''
 			}
+
+			ChartreusePhaseblade: {
+				DisplayName: Chartreuse Phaseblade
+				Tooltip: ""
+			}
+
+			ChartreusePhasesaber: {
+				DisplayName: Chartreuse Phasesaber
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9881,6 +9891,10 @@ Mods: {
 			ChrysoberylChest.MapEntry0: Chrysoberyl Chest
 			OpalChest.MapEntry0: Opal Chest
 			ShroomiteOre.MapEntry: Mods.Avalon.Tiles.ShroomiteOre.MapEntry
+			LargeMarineKelpStage1.MapEntry: Mods.Avalon.Tiles.LargeMarineKelpStage1.MapEntry
+			LargeMarineKelpStage2.MapEntry: Mods.Avalon.Tiles.LargeMarineKelpStage2.MapEntry
+			LargeMarineKelpStage3.MapEntry: Mods.Avalon.Tiles.LargeMarineKelpStage3.MapEntry
+			LargeMarineKelpStage4.MapEntry: Mods.Avalon.Tiles.LargeMarineKelpStage4.MapEntry
 		}
 
 		Prefixes: {

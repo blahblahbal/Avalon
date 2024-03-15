@@ -52,13 +52,21 @@ public class Boompipe : ModItem
             Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(14));
             Projectile P = Projectile.NewProjectileDirect(source, position, perturbedSpeed * Main.rand.NextFloat(0.85f, 1.1f), type, damage / 2, knockback);
             P.GetGlobalProjectile<BoompipeProjVisuals>().Shards = true;
-            Gore G = Gore.NewGoreDirect(source, position + Vector2.Normalize(perturbedSpeed) * 50 - new Vector2(16, 24), Vector2.Zero, Main.rand.NextFromList(GoreID.Smoke1, GoreID.Smoke2, GoreID.Smoke3), Main.rand.NextFloat(0.7f, 1f));
-            G.velocity = perturbedSpeed * 0.2f * Main.rand.NextFloat(0.65f, 1f);
-            G.alpha = Main.rand.Next(80, 175);
+            if (!Main.rand.NextBool(3) && i != 0)
+            {
+                Gore G = Gore.NewGoreDirect(source, position + Vector2.Normalize(perturbedSpeed) * 50 - new Vector2(16, 24), Vector2.Zero, Main.rand.NextFromList(GoreID.Smoke1, GoreID.Smoke2, GoreID.Smoke3), Main.rand.NextFloat(0.7f, 1f));
+                G.velocity = perturbedSpeed * 0.18f * Main.rand.NextFloat(0.45f, 1f);
+                G.alpha = Main.rand.Next(80, 175);
+            }
             Dust D = Dust.NewDustDirect(position + Vector2.Normalize(perturbedSpeed) * 50 - new Vector2(16, 16), default, default, DustID.Smoke, perturbedSpeed.X * Main.rand.NextFloat(0.55f, 1.1f), perturbedSpeed.Y * Main.rand.NextFloat(0.55f, 1.1f), 100, Main.rand.NextFromList(Color.LightGray, Color.Gray), Main.rand.NextFloat(0.7f, 1.3f));
             D.velocity = perturbedSpeed * 0.15f * Main.rand.NextFloat(0.65f, 1f);
             D.alpha = Main.rand.Next(120, 175);
             D.fadeIn = 1;
+            Vector2 perturbedSpeed2 = velocity.RotatedByRandom(MathHelper.ToRadians(24));
+            Dust D2 = Dust.NewDustDirect(position + Vector2.Normalize(perturbedSpeed2) * 50 - new Vector2(16, 16), default, default, DustID.Torch, perturbedSpeed.X * Main.rand.NextFloat(0.55f, 1.1f), perturbedSpeed.Y * Main.rand.NextFloat(0.55f, 1.1f), default, default, Main.rand.NextFloat(0.7f, 1.3f));
+            D2.velocity = perturbedSpeed2 * 0.15f * Main.rand.NextFloat(0.65f, 1.5f);
+            D2.fadeIn = 1;
+            D2.noGravity = true;
         }
         return false;
     }
@@ -84,6 +92,14 @@ public class Boompipe : ModItem
                 d.scale = Main.rand.NextFloat(0.3f, 0.7f);
                 d.fadeIn = 2;
                 d.noGravity = true;
+                if (!Main.rand.NextBool(3))
+                {
+                    Dust d2 = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.Torch);
+                    d2.velocity = projectile.velocity.RotatedByRandom(0.1f) * 0.5f * (projectile.extraUpdates + 1);
+                    d2.scale = Main.rand.NextFloat(0.6f, 1.1f);
+                    d2.fadeIn = 1;
+                    d2.noGravity = true;
+                }
             }
             blastDust++;
         }
