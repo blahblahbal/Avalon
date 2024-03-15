@@ -1,4 +1,8 @@
+using Avalon.Items.Material;
+using Avalon.Items.Material.Herbs;
+using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -30,4 +34,15 @@ class ForceFieldPotion : ModItem
         Item.buffTime = 18000;
         Item.UseSound = SoundID.Item3;
     }
+
+    //public override void AddRecipes()
+    //{
+    //    Recipe.Create(Type)
+    //        .AddIngredient(ModContent.ItemType<BottledLava>())
+    //        .AddIngredient(ItemID.SoulofNight, 3)
+    //        .AddIngredient(ModContent.ItemType<Sweetstem>(), 2)
+    //        .AddIngredient(ItemID.Hellstone)
+    //        .AddTile(TileID.Bottles)
+    //        .Register();
+    //}
 }

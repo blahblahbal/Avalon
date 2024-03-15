@@ -8617,6 +8617,12 @@ Mods: {
 				Tooltip: Releases a twin pulse of sound
 			}
 
+			Boompipe: {
+				DisplayName: Boompipe
+				Tooltip: ""
+			}
+		}
+
 			LargeMarineKelp: {
 				DisplayName: Large Marine Kelp
 				Tooltip: ""
