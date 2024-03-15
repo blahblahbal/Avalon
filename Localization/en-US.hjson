@@ -8619,7 +8619,7 @@ Mods: {
 
 			Boompipe: {
 				DisplayName: Boompipe
-				Tooltip: ""
+				Tooltip: "Splits ammo into several high velocity shrapnel shards"
 			}
 
 			LargeMarineKelp: {
