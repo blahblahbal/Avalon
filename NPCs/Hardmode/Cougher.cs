@@ -51,7 +51,7 @@ public class Cougher : ModNPC
         if (DateTime.Now.Month == 2 && DateTime.Now.Day == 14)
         {
             Rectangle frame = NPC.frame;
-            Vector2 drawPos = NPC.position + new Vector2(18, 0);
+            Vector2 drawPos = NPC.position + new Vector2(18, -2);
             Vector2 drawPos2 = RotateAboutOrigin(drawPos, NPC.Center, NPC.rotation) - Main.screenPosition;
             var texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/WhitePartyHat").Value;
             switch ((int)NPC.ai[3])

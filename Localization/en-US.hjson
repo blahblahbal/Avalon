@@ -8621,7 +8621,6 @@ Mods: {
 				DisplayName: Boompipe
 				Tooltip: ""
 			}
-		}
 
 			LargeMarineKelp: {
 				DisplayName: Large Marine Kelp
@@ -8636,6 +8635,15 @@ Mods: {
 			ShroomiteOre: {
 				DisplayName: Shroomite Ore
 				Tooltip: ""
+			}
+
+			ChrysoberylRobe: {
+				DisplayName: Chrysoberyl Robe
+				Tooltip:
+					'''
+					Increases maximum mana by 40
+					8% decreased mana usage
+					'''
 			}
 		}
 
