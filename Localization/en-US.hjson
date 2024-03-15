@@ -8616,6 +8616,21 @@ Mods: {
 				DisplayName: Bismuth Bugle Horn
 				Tooltip: Releases a twin pulse of sound
 			}
+
+			LargeMarineKelp: {
+				DisplayName: Large Marine Kelp
+				Tooltip: ""
+			}
+
+			LargeMarineKelpSeed: {
+				DisplayName: Large Marine Kelp Seed
+				Tooltip: ""
+			}
+
+			ShroomiteOre: {
+				DisplayName: Shroomite Ore
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9851,6 +9866,7 @@ Mods: {
 			AquamarineChest.MapEntry0: Aquamarine Chest
 			ChrysoberylChest.MapEntry0: Chrysoberyl Chest
 			OpalChest.MapEntry0: Opal Chest
+			ShroomiteOre.MapEntry: Mods.Avalon.Tiles.ShroomiteOre.MapEntry
 		}
 
 		Prefixes: {

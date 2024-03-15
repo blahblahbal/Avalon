@@ -1,23 +1,55 @@
+using Avalon.Compatability.Thorium.Items.Placeable.Tile;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Herbs;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Placeable.Tile;
+using Avalon.Items.Potions.Other;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using ThoriumMod.Items.BardItems;
+using ThoriumMod.Items.Consumable;
+using ThoriumMod.Items.Depths;
 using ThoriumMod.Items.Donate;
 using ThoriumMod.Items.HealerItems;
 using ThoriumMod.Items.Misc;
+using ThoriumMod.Items.Thorium;
 using ThoriumMod.Items.ThrownItems;
 using ThoriumMod.NPCs;
 using ThoriumMod.NPCs.Depths;
 
 namespace Avalon.Compatability.Thorium;
+
+[ExtendsFromMod("ThoriumMod")]
+public class ThoriumHerbologyAdditions
+{
+    public static void Initialize()
+    {
+        // add herbs and herb seeds
+        Data.HerbologyData.HerbIdByLargeHerbId.Add(ModContent.ItemType<LargeMarineKelp>(), ModContent.ItemType<MarineKelp>());
+        Data.HerbologyData.LargeHerbIdByLargeHerbSeedId.Add(ModContent.ItemType<LargeMarineKelpSeed>(), ModContent.ItemType<LargeMarineKelp>());
+        Data.HerbologyData.LargeHerbSeedIdByHerbId.Add(ModContent.ItemType<MarineKelp>(), ModContent.ItemType<LargeMarineKelpSeed>());
+        Data.HerbologyData.LargeHerbSeedIdByHerbSeedId.Add(ModContent.ItemType<MarineKelpSeeds>(), ModContent.ItemType<LargeMarineKelpSeed>());
+
+        // add potions
+        List<int> potions = new()
+        {
+            ModContent.ItemType<AquaPotion>(), ModContent.ItemType<ArcanePotion>(), ModContent.ItemType<ArtilleryPotion>(),
+            ModContent.ItemType<AssassinPotion>(), ModContent.ItemType<BloodPotion>(), ModContent.ItemType<BouncingFlamePotion>(),
+            ModContent.ItemType<ConflagrationPotion>(), ModContent.ItemType<CreativityPotion>(), ModContent.ItemType<EarwormPotion>(),
+            ModContent.ItemType<FrenzyPotion>(), ModContent.ItemType<GlowingPotion>(), ModContent.ItemType<HolyPotion>(),
+            ModContent.ItemType<HydrationPotion>(), ModContent.ItemType<InspirationReachPotion>(), ModContent.ItemType<KineticPotion>(),
+            ModContent.ItemType<WarmongerPotion>()
+        };
+        Data.HerbologyData.PotionIds.AddRange(potions);
+
+    }
+}
 
 [ExtendsFromMod("ThoriumMod")]
 public class ThoriumTweaksPlayer : ModPlayer
@@ -26,6 +58,7 @@ public class ThoriumTweaksPlayer : ModPlayer
     {
         return ModLoader.HasMod("ThoriumMod");
     }
+
     public override void PreUpdateBuffs()
     {
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.SkeletonRepellentBuff>()))
@@ -453,6 +486,24 @@ public class ThoriumTweaksRecipeSystem : ModSystem
                 }
             }
             #endregion
+        }
+    }
+}
+[ExtendsFromMod("ThoriumMod")]
+public class ThoriumTweaksGlobalItem : GlobalItem
+{
+    public override bool IsLoadingEnabled(Mod mod)
+    {
+        return ModLoader.HasMod("ThoriumMod");
+    }
+    public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
+    {
+        // TODO: ADD AVALON RINGS TO SCARLET AND SINISTER CRATES
+        if (item.type == ModContent.ItemType<ScarletCrate>() || item.type == ModContent.ItemType<SinisterCrate>() ||
+            item.type == ModContent.ItemType<AquaticDepthsCrate>() || item.type == ModContent.ItemType<AbyssalCrate>() ||
+            item.type == ModContent.ItemType<StrangeCrate>() || item.type == ModContent.ItemType<WondrousCrate>())
+        {
+            itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 5, 2, 4));
         }
     }
 }

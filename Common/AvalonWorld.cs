@@ -1135,7 +1135,8 @@ public class AvalonWorld : ModSystem
                     grow = true;
                 }
 
-                if (grow) {
+                if (grow)
+                {
                     Main.tile[x, y].TileType = (ushort)ModContent.TileType<LargeHerbsStage2>();
                     if (Main.tile[x, y + 1].TileType == (ushort)ModContent.TileType<LargeHerbsStage1>())
                     {
@@ -1254,6 +1255,116 @@ public class AvalonWorld : ModSystem
                 }
 
                 WorldGeneration.Utils.SquareTileFrameArea(x, y, 4, true);
+            }
+
+
+            if (ExxoAvalonOrigins.Thorium != null)
+            {
+                if (Main.tile[x, y].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage1").Type &&
+                    WorldGen.genRand.NextBool(8)) // phase 1 to 2
+                {
+                    Main.tile[x, y].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type;
+                    if (Main.tile[x, y + 1].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage1").Type)
+                    {
+                        Main.tile[x, y + 1].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type;
+                    }
+
+                    if (Main.tile[x, y + 2].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage1").Type)
+                    {
+                        Main.tile[x, y + 2].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type;
+                    }
+
+                    if (Main.tile[x, y - 1].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage1").Type)
+                    {
+                        Main.tile[x, y - 1].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type;
+                    }
+
+                    if (Main.tile[x, y - 2].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage1").Type)
+                    {
+                        Main.tile[x, y - 2].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type;
+                    }
+
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendTileSquare(-1, x, y, 2);
+                        NetMessage.SendTileSquare(-1, x, y + 1, 2);
+                        NetMessage.SendTileSquare(-1, x, y + 2, 2);
+                        NetMessage.SendTileSquare(-1, x, y - 1, 2);
+                        NetMessage.SendTileSquare(-1, x, y - 2, 2);
+                    }
+
+                    WorldGeneration.Utils.SquareTileFrameArea(x, y, 4, true);
+                }
+                else if (Main.tile[x, y].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type &&
+                         WorldGen.genRand.NextBool(7)) // phase 2 to 3
+                {
+                    Main.tile[x, y].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type;
+                    if (Main.tile[x, y + 1].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type)
+                    {
+                        Main.tile[x, y + 1].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type;
+                    }
+
+                    if (Main.tile[x, y + 2].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type)
+                    {
+                        Main.tile[x, y + 2].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type;
+                    }
+
+                    if (Main.tile[x, y - 1].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type)
+                    {
+                        Main.tile[x, y - 1].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type;
+                    }
+
+                    if (Main.tile[x, y - 2].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage2").Type)
+                    {
+                        Main.tile[x, y - 2].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type;
+                    }
+
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendTileSquare(-1, x, y, 2);
+                        NetMessage.SendTileSquare(-1, x, y + 1, 2);
+                        NetMessage.SendTileSquare(-1, x, y + 2, 2);
+                        NetMessage.SendTileSquare(-1, x, y - 1, 2);
+                        NetMessage.SendTileSquare(-1, x, y - 2, 2);
+                    }
+
+                    WorldGeneration.Utils.SquareTileFrameArea(x, y, 4, true);
+                }
+                else if (Main.tile[x, y].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type &&
+                         WorldGen.genRand.NextBool(5)) // phase 3 to 4
+                {
+                    Main.tile[x, y].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage4").Type;
+                    if (Main.tile[x, y + 1].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type)
+                    {
+                        Main.tile[x, y + 1].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage4").Type;
+                    }
+
+                    if (Main.tile[x, y + 2].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type)
+                    {
+                        Main.tile[x, y + 2].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage4").Type;
+                    }
+
+                    if (Main.tile[x, y - 1].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type)
+                    {
+                        Main.tile[x, y - 1].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage4").Type;
+                    }
+
+                    if (Main.tile[x, y - 2].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage3").Type)
+                    {
+                        Main.tile[x, y - 2].TileType = ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage4").Type;
+                    }
+
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendTileSquare(-1, x, y, 2);
+                        NetMessage.SendTileSquare(-1, x, y + 1, 2);
+                        NetMessage.SendTileSquare(-1, x, y + 2, 2);
+                        NetMessage.SendTileSquare(-1, x, y - 1, 2);
+                        NetMessage.SendTileSquare(-1, x, y - 2, 2);
+                    }
+
+                    WorldGeneration.Utils.SquareTileFrameArea(x, y, 4, true);
+                }
             }
         }
     }

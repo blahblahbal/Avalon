@@ -489,6 +489,10 @@ public class HerbologyUIState : ExxoUIState
             return;
         }
 
+        if (ModLoader.HasMod("ThoriumMod"))
+        {
+            Compatability.Thorium.ThoriumHerbologyAdditions.Initialize();
+        }
         RefreshHerbList(herbExchange.Toggle.Toggled);
         RefreshPotionList(potionExchange.Toggle.Toggled);
     }

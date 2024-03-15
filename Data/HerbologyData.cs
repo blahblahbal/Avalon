@@ -34,7 +34,7 @@ public static class HerbologyData
     public const int PotionSellPrice = 1;
     public const int RestorationPotionCost = 2;
 
-    public static readonly int[] ElixirIds =
+    public static List<int> ElixirIds = new()
     {
         ModContent.ItemType<AdvAmmoReservationPotion>(), ModContent.ItemType<AdvArcheryPotion>(), ModContent.ItemType<AdvAuraPotion>(),
         ModContent.ItemType<AdvBattlePotion>(), ModContent.ItemType<AdvBloodCastPotion>(),
@@ -58,7 +58,7 @@ public static class HerbologyData
         ModContent.ItemType<AdvWaterWalkingPotion>(), ModContent.ItemType<AdvWisdomPotion>(), ModContent.ItemType<AdvWrathPotion>()
     };
 
-    public static readonly Dictionary<int, int> HerbIdByLargeHerbId = new()
+    public static Dictionary<int, int> HerbIdByLargeHerbId = new()
     {
         { ModContent.ItemType<LargeDaybloom>(), ItemID.Daybloom },
         { ModContent.ItemType<LargeMoonglow>(), ItemID.Moonglow },
@@ -74,7 +74,7 @@ public static class HerbologyData
         //{ ModContent.ItemType<LargeTwilightPlume>(), ModContent.ItemType<TwilightPlume>() },
     };
 
-    public static readonly Dictionary<int, int> LargeHerbIdByLargeHerbSeedId = new()
+    public static Dictionary<int, int> LargeHerbIdByLargeHerbSeedId = new()
     {
         { ModContent.ItemType<LargeDaybloomSeed>(), ModContent.ItemType<LargeDaybloom>() },
         { ModContent.ItemType<LargeMoonglowSeed>(), ModContent.ItemType<LargeMoonglow>() },
@@ -90,7 +90,7 @@ public static class HerbologyData
         //{ ModContent.ItemType<LargeTwilightPlumeSeed>(), ModContent.ItemType<LargeTwilightPlume>() },
     };
 
-    public static readonly Dictionary<int, int> LargeHerbSeedIdByHerbId = new()
+    public static Dictionary<int, int> LargeHerbSeedIdByHerbId = new()
     {
         { ItemID.Daybloom, ModContent.ItemType<LargeDaybloomSeed>() },
         { ItemID.Moonglow, ModContent.ItemType<LargeMoonglowSeed>() },
@@ -106,7 +106,7 @@ public static class HerbologyData
         //{ ModContent.ItemType<TwilightPlume>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
     };
 
-    public static readonly Dictionary<int, int> LargeHerbSeedIdByHerbSeedId = new()
+    public static Dictionary<int, int> LargeHerbSeedIdByHerbSeedId = new()
     {
         { ItemID.DaybloomSeeds, ModContent.ItemType<LargeDaybloomSeed>() },
         { ItemID.MoonglowSeeds, ModContent.ItemType<LargeMoonglowSeed>() },
@@ -122,7 +122,7 @@ public static class HerbologyData
         //{ ModContent.ItemType<TwilightPlumeSeeds>(), ModContent.ItemType<LargeTwilightPlumeSeed>() },
     };
 
-    public static readonly int[] PotionIds =
+    public static List<int> PotionIds = new()
     {
         ItemID.AmmoReservationPotion, ItemID.ArcheryPotion, ModContent.ItemType<AuraPotion>(),
         ItemID.BattlePotion, ModContent.ItemType<BloodCastPotion>(),
