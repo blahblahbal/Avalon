@@ -116,7 +116,7 @@ internal class HerbologyUIPurchaseAttachment : ExxoUIAttachment<ExxoUIItemSlot, 
         if (HerbologyData.ItemIsHerb(AttachmentHolder.Item))
         {
             balance = modPlayer.HerbTotal;
-            balanceIcon.SetImage(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbThing"));
+            balanceIcon.SetImage(Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconRandomSeed"));
             balanceIcon.Inset = new Vector2(11, 11);
         }
         else

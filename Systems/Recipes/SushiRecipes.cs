@@ -74,7 +74,7 @@ public static class SushiRecipes
         #endregion Dungeon
 
         #region Biome Keys
-        Recipe.Create(ModContent.ItemType<ContagionKey>()).AddIngredient(imk.Find<ModItem>("Biome Key").Type).AddIngredient(ModContent.ItemType<BacciliteBar>(), 50).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ModContent.ItemType<ContagionKey>()).AddIngredient(imk.Find<ModItem>("BiomeKey").Type).AddIngredient(ModContent.ItemType<BacciliteBar>(), 50).AddTile(TileID.TinkerersWorkbench).Register();
         #endregion Biome Keys
 
         //Recipe.Create(ModContent.ItemType<Items.Accessories.StingerPack>()).AddIngredient(ModContent.ItemType<Items.Weapons.Magic.Mechazapinator>()).AddIngredient(imk.Find<ModItem>("BossLootSwapToken").Type).AddTile(TileID.MythrilAnvil).Register();

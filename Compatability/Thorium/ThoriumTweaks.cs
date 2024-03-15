@@ -1,4 +1,5 @@
 using Avalon.Compatability.Thorium.Items.Placeable.Tile;
+using Avalon.Compatability.Thorium.Items.Potions;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Herbs;
@@ -48,6 +49,17 @@ public class ThoriumHerbologyAdditions
         };
         Data.HerbologyData.PotionIds.AddRange(potions);
 
+        // add elixirs
+        List<int> elixirs = new()
+        {
+            ModContent.ItemType<AdvAquaPotion>(), ModContent.ItemType<AdvArcanePotion>(), ModContent.ItemType<AdvArtilleryPotion>(),
+            ModContent.ItemType<AdvAssassinPotion>(), ModContent.ItemType<AdvBloodPotion>(), ModContent.ItemType<AdvBouncingFlamePotion>(),
+            ModContent.ItemType<AdvConflagrationPotion>(), ModContent.ItemType<AdvCreativityPotion>(), ModContent.ItemType<AdvEarwormPotion>(),
+            ModContent.ItemType<AdvFrenzyPotion>(), ModContent.ItemType<AdvGlowingPotion>(), ModContent.ItemType<AdvHolyPotion>(),
+            ModContent.ItemType<AdvHydrationPotion>(), ModContent.ItemType<AdvInspirationalReachPotion>(), ModContent.ItemType<AdvKineticPotion>(),
+            ModContent.ItemType<AdvWarmongerPotion>()
+        };
+        Data.HerbologyData.ElixirIds.AddRange(elixirs);
     }
 }
 

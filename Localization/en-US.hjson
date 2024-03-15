@@ -8619,7 +8619,7 @@ Mods: {
 
 			Boompipe: {
 				DisplayName: Boompipe
-				Tooltip: "Splits ammo into several high velocity shrapnel shards"
+				Tooltip: Splits ammo into several high velocity shrapnel shards
 			}
 
 			LargeMarineKelp: {
@@ -8654,6 +8654,86 @@ Mods: {
 			ChartreusePhasesaber: {
 				DisplayName: Chartreuse Phasesaber
 				Tooltip: ""
+			}
+
+			AdvAquaPotion: {
+				DisplayName: Aqua Elixir
+				Tooltip: Grants uninhibited liquid movement
+			}
+
+			AdvArcanePotion: {
+				DisplayName: Arcane Elixir
+				Tooltip: Causes magic and radiant damage to periodically generate collectable mini-stars
+			}
+
+			AdvArtilleryPotion: {
+				DisplayName: Artillery Elixir
+				Tooltip: Increases your max number of sentries by 2
+			}
+
+			AdvAssassinPotion: {
+				DisplayName: Assassin Elixir
+				Tooltip: Your first throwing attack when out of combat will crit for x4 damage
+			}
+
+			AdvBloodPotion: {
+				DisplayName: Blood Elixir
+				Tooltip: Increases mining and movement speed by 20%
+			}
+
+			AdvBouncingFlamePotion: {
+				DisplayName: Bouncing Flame Elixir
+				Tooltip: Causes your flaming debuffs to spread amongst nearby enemies
+			}
+
+			AdvConflagrationPotion: {
+				DisplayName: Conflagration Elixir
+				Tooltip: Increases your damage by 15%, but causes damage over time
+			}
+
+			AdvCreativityPotion: {
+				DisplayName: Creativity Elixir
+				Tooltip: Triples your base inspiration drop chance
+			}
+
+			AdvEarwormPotion: {
+				DisplayName: Earworm Elixir
+				Tooltip: Increases the duration of your symphonic empowerments by 35%
+			}
+
+			AdvFrenzyPotion: {
+				DisplayName: Frenzy Elixir
+				Tooltip: Increases all attack speed by 12%
+			}
+
+			AdvGlowingPotion: {
+				DisplayName: Glowing Elixir
+				Tooltip: Increases radiant damage by 15%
+			}
+
+			AdvHolyPotion: {
+				DisplayName: Holy Elixir
+				Tooltip: Increases the potency of healing spells
+			}
+
+			AdvHydrationPotion: {
+				DisplayName: Hydration Elixir
+				Tooltip: Increases exhaustion and technique point regeneration rate
+			}
+
+			AdvInspirationalReachPotion: {
+				DisplayName: Inspirational Reach Elixir
+				Tooltip: Increases pickup range for inspiration notes
+			}
+
+			AdvKineticPotion: {
+				DisplayName: Kinetic Elixir
+				Tooltip: Allows you to double-tap dash
+			}
+
+			AdvWarmongerPotion: {
+				DisplayName: Warmonger Elixir
+				Tooltip: Increases enemy spawn rates significantly
 			}
 		}
 
@@ -9671,12 +9751,92 @@ Mods: {
 
 			PathogenBoost: {
 				DisplayName: Pathogen Boost
-				Description: Mods.Avalon.Buffs.PathogenBoost.Description
+				Description: An ally is augmenting your on-hit effects
 			}
 
 			AdvGambler: {
-				DisplayName: Adv Gambler
-				Description: Mods.Avalon.Buffs.AdvGambler.Description
+				DisplayName: Advanced Gambler
+				Description: Increased critical strike chance, but small chance to deal damage to yourself
+			}
+
+			AdvAquaAffinity: {
+				DisplayName: Advanced Aqua Affinity
+				Description: Movement is not inhibited in water
+			}
+
+			AdvArcane: {
+				DisplayName: Advanced Arcane
+				Description: Magic and radiant damage generates mini stars
+			}
+
+			AdvArtillery: {
+				DisplayName: Advanced Artillery
+				Description: Increases your max number of sentries
+			}
+
+			AdvAssassin: {
+				DisplayName: Advanced Assassin
+				Description: Out of combat throwing attacks will crit for x4 damage
+			}
+
+			AdvBloodRush: {
+				DisplayName: Advanced Blood Rush
+				Description: 20% increased movement and mining speed
+			}
+
+			AdvBouncingFlame: {
+				DisplayName: Advanced Bouncing Flame
+				Description: Your flaming debuffs will spread to nearby enemies
+			}
+
+			AdvConflagration: {
+				DisplayName: Advanced Conflagration
+				Description: A burning fury has taken hold
+			}
+
+			AdvCreativity: {
+				DisplayName: Advanced Creativity
+				Description: Your base inspiration drop chance is tripled
+			}
+
+			AdvEarworm: {
+				DisplayName: Advanced Earworm
+				Description: Your empowerments will last 35% longer
+			}
+
+			AdvFrenzy: {
+				DisplayName: Advanced Frenzy
+				Description: Your attack speed is increased by 12%
+			}
+
+			AdvGlowing: {
+				DisplayName: Advanced Glowing
+				Description: Radiant damage increased by 15%
+			}
+
+			AdvHoly: {
+				DisplayName: Advanced Holy
+				Description: Healing spells will heal an additional 2 life
+			}
+
+			AdvHydration: {
+				DisplayName: Advanced Hydration
+				Description: Your exhaustion and technique points are regenerating faster
+			}
+
+			AdvInspirationalReach: {
+				DisplayName: Advanced Inspirational Reach
+				Description: Increased inspiration note pickup range
+			}
+
+			AdvKinetic: {
+				DisplayName: Advanced Kinetic
+				Description: Allows you to double-tap to dash
+			}
+
+			AdvWarmonger: {
+				DisplayName: Advanced Warmonger
+				Description: Increased enemy spawn rates
 			}
 		}
 
@@ -9886,15 +10046,15 @@ Mods: {
 			Bloodberry.MapEntry: Bloodberry
 			Holybird.MapEntry: Holybird
 			Sweetstem.MapEntry: Sweetstem
-			TwilightPlume.MapEntry: TwilightPlume
+			TwilightPlume.MapEntry: Twilight Plume
 			AquamarineChest.MapEntry0: Aquamarine Chest
 			ChrysoberylChest.MapEntry0: Chrysoberyl Chest
 			OpalChest.MapEntry0: Opal Chest
-			ShroomiteOre.MapEntry: Mods.Avalon.Tiles.ShroomiteOre.MapEntry
-			LargeMarineKelpStage1.MapEntry: Mods.Avalon.Tiles.LargeMarineKelpStage1.MapEntry
-			LargeMarineKelpStage2.MapEntry: Mods.Avalon.Tiles.LargeMarineKelpStage2.MapEntry
-			LargeMarineKelpStage3.MapEntry: Mods.Avalon.Tiles.LargeMarineKelpStage3.MapEntry
-			LargeMarineKelpStage4.MapEntry: Mods.Avalon.Tiles.LargeMarineKelpStage4.MapEntry
+			ShroomiteOre.MapEntry: Shroomite
+			LargeMarineKelpStage1.MapEntry: Large Marine Kelp
+			LargeMarineKelpStage2.MapEntry: Large Marine Kelp
+			LargeMarineKelpStage3.MapEntry: Large Marine Kelp
+			LargeMarineKelpStage4.MapEntry: Large Marine Kelp
 		}
 
 		Prefixes: {
