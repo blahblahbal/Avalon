@@ -1,5 +1,7 @@
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Ores;
+using Avalon.Items.Other;
 using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Tokens;
@@ -67,7 +69,13 @@ public static class SushiRecipes
         #region Dungeon
         Recipe.Create(ModContent.ItemType<Blueshift>()).AddIngredient(imk.Find<ModItem>("DungeonToken").Type, 30).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ModContent.ItemType<SapphirePickaxe>()).AddIngredient(imk.Find<ModItem>("DungeonToken").Type, 30).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ModContent.ItemType<MarrowMasher>()).AddIngredient(imk.Find<ModItem>("DungeonToken").Type, 25).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ModContent.ItemType<RodofCoalescence>()).AddIngredient(imk.Find<ModItem>("DungeonToken").Type, 75).AddTile(TileID.TinkerersWorkbench).Register();
         #endregion Dungeon
+
+        #region Biome Keys
+        Recipe.Create(ModContent.ItemType<ContagionKey>()).AddIngredient(imk.Find<ModItem>("Biome Key").Type).AddIngredient(ModContent.ItemType<BacciliteBar>(), 50).AddTile(TileID.TinkerersWorkbench).Register();
+        #endregion Biome Keys
 
         //Recipe.Create(ModContent.ItemType<Items.Accessories.StingerPack>()).AddIngredient(ModContent.ItemType<Items.Weapons.Magic.Mechazapinator>()).AddIngredient(imk.Find<ModItem>("BossLootSwapToken").Type).AddTile(TileID.MythrilAnvil).Register();
         //Recipe.Create(ModContent.ItemType<Items.Accessories.StingerPack>()).AddIngredient(ModContent.ItemType<Items.Weapons.Ranged.HeatSeeker>()).AddIngredient(imk.Find<ModItem>("BossLootSwapToken").Type).AddTile(TileID.MythrilAnvil).Register();
