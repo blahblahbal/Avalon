@@ -27,5 +27,6 @@ class AdvArcanePotion : ArcanePotion
         Item.useAnimation = 15;
         Item.buffTime = 8 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvArcane>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

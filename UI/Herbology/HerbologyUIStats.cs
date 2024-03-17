@@ -27,17 +27,6 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         InnerElement.Justification = Justification.Center;
         InnerElement.ContentHAlign = UIAlign.Center;
 
-        HerbTierText = new ExxoUITextPanel("");
-        HerbTierText.BackgroundColor = Color.Transparent;
-        HerbTierText.BorderColor = Color.Transparent;
-        InnerElement.Append(HerbTierText);
-
-        RankTitleText = new ExxoUITextPanel("");
-        RankTitleText.TextElement.TextColor = Color.Gold;
-        RankTitleText.BackgroundColor = Color.Transparent;
-        RankTitleText.BorderColor = Color.Transparent;
-        InnerElement.Append(RankTitleText);
-
         HerbTotalContainer = new ExxoUIPanelWrapper<ExxoUIList>(new ExxoUIList()) { Tooltip = Language.GetTextValue("Mods.Avalon.Herbology.Credits.Herb") };
         HerbTotalContainer.InnerElement.Direction = Direction.Horizontal;
         HerbTotalContainer.InnerElement.FitHeightToContent = true;
@@ -65,6 +54,17 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         PotionTotalContainer.BackgroundColor = Color.Transparent;
         PotionTotalContainer.BorderColor = Color.Transparent;
         InnerElement.Append(PotionTotalContainer);
+
+        HerbTierText = new ExxoUITextPanel("");
+        //HerbTierText.BackgroundColor = Color.Transparent;
+        //HerbTierText.BorderColor = Color.Transparent;
+        //InnerElement.Append(HerbTierText);
+
+        RankTitleText = new ExxoUITextPanel("");
+        RankTitleText.TextElement.TextColor = Color.Gold;
+        RankTitleText.BackgroundColor = Color.Transparent;
+        RankTitleText.BorderColor = Color.Transparent;
+        InnerElement.Append(RankTitleText);
 
         var potionTotalIcon =
             new ExxoUIImage(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/UI/HerbPotionNoOutline"))
@@ -134,8 +134,8 @@ internal class HerbologyUIStats : ExxoUIPanelWrapper<ExxoUIList>
         string rankTitle = herbTier;
         RankTitleText.TextElement.SetText(rankTitle);
 
-        string tier = Language.GetTextValue("Mods.Avalon.Herbology.Tier") + $"{(int)modPlayer.Tier + 1}" + ":"; //Language.GetTextValue("Mods.Avalon.Herbology.Herbologist");
-        HerbTierText.TextElement.SetText(tier);
+        //string tier = Language.GetTextValue("Mods.Avalon.Herbology.Tier") + $"{(int)modPlayer.Tier + 1}" + ":"; //Language.GetTextValue("Mods.Avalon.Herbology.Herbologist");
+        //HerbTierText.TextElement.SetText(tier);
 
         string herbTotal = modPlayer.HerbTotal.ToString(CultureInfo.CurrentCulture);
         herbTotalText.SetText(herbTotal);

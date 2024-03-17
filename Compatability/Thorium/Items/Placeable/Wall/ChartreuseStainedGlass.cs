@@ -27,6 +27,7 @@ class ChartreuseStainedGlass : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.useAnimation = 15;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
     public override void AddRecipes()
     {

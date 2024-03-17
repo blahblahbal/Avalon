@@ -20,6 +20,7 @@ public class ChrysoberylAmulet : ModItem
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 50);
         Item.height = dims.Height;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
     public override void AddRecipes()
     {

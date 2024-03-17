@@ -44,8 +44,8 @@ public class HerbologyUIState : ExxoUIState
 
         mainPanel = new ExxoUIDraggablePanel
         {
-            Width = StyleDimension.FromPixels(720),
-            Height = StyleDimension.FromPixels(400),
+            Width = StyleDimension.FromPixels(600),
+            Height = StyleDimension.FromPixels(300),
             VAlign = 0.65f, //UIAlign.Center,
             HAlign = 0.125f, //UIAlign.Center,
         };

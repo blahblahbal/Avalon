@@ -32,6 +32,7 @@ class ChrysoberylStaff : ModItem
         Item.shoot = ModContent.ProjectileType<ChrysoberylBolt>();
         Item.value = Item.buyPrice(0, 0, 15);
         Item.UseSound = SoundID.Item43;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
     public override void AddRecipes()
     {

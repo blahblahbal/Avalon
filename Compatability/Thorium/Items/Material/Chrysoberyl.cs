@@ -36,6 +36,7 @@ class Chrysoberyl : ModItem
         //Item.useStyle = ItemUseStyleID.Swing;
         //Item.useAnimation = 15;
         Item.height = dims.Height;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
     //public override bool? UseItem(Player player)
     //{

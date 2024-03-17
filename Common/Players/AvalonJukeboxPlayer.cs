@@ -145,7 +145,7 @@ namespace Avalon.Common.Players
                 }
             }
 
-            if (!Main.playerInventory)
+            if (!Main.playerInventory || Player.GetModPlayer<AvalonHerbologyPlayer>().DisplayHerbologyMenu)
             {
                 DisplayJukeboxInterface = false;
             }

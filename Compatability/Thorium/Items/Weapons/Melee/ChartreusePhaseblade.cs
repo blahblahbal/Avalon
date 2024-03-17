@@ -16,6 +16,7 @@ public class ChartreusePhaseblade : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.RedPhaseblade);
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
     public override Color? GetAlpha(Color lightColor)
     {

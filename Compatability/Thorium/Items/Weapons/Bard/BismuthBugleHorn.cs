@@ -18,6 +18,7 @@ namespace Avalon.Compatability.Thorium.Items.Weapons.Bard
             Item.shoot = ModContent.ProjectileType<BismuthBugleHornPro>();
             Item.damage = 12;
             Item.useTime = Item.useAnimation = 25;
+            Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
         }
         public override void AddRecipes()
         {

@@ -7,7 +7,7 @@ public class ExxoUIPanel : ExxoUIAdapter<UIPanel>
 {
     public ExxoUIPanel() : base(new UIPanel()) { }
 
-    public static Color DefaultBackgroundColor => new Color(63, 82, 151) * 0.85f;
+    public static Color DefaultBackgroundColor => new Color(63, 65, 151) * 0.85f;
     public static Color DefaultBorderColor => Color.Black;
 
     public Color BorderColor

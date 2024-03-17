@@ -28,6 +28,7 @@ public class AquamarineChest : ModItem
         Item.value = 500;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 
     public override void AddRecipes()
@@ -61,6 +62,7 @@ public class ChrysoberylChest : ModItem
         Item.value = 500;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 
     public override void AddRecipes()
@@ -94,6 +96,7 @@ public class OpalChest : ModItem
         Item.value = 500;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 
     public override void AddRecipes()

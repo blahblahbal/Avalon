@@ -22,6 +22,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             Item.accessory = true;
             Item.rare = ItemRarityID.White;
             Item.value = 2000;
+            Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -47,6 +48,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             Item.accessory = true;
             Item.rare = ItemRarityID.White;
             Item.value = 4000;
+            Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -72,6 +74,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             Item.accessory = true;
             Item.rare = ItemRarityID.White;
             Item.value = 9000;
+            Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -97,6 +100,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
             Item.accessory = true;
             Item.rare = ItemRarityID.White;
             Item.value = 16000;
+            Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

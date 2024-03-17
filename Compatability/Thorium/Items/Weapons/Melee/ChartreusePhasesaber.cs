@@ -15,6 +15,7 @@ public class ChartreusePhasesaber : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.RedPhasesaber);
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
     public override Color? GetAlpha(Color lightColor)
     {

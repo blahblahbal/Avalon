@@ -27,5 +27,6 @@ class AdvFrenzyPotion : FrenzyPotion
         Item.useAnimation = 15;
         Item.buffTime = 6 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvFrenzy>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

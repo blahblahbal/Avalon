@@ -28,5 +28,6 @@ class AdvAquaPotion : AquaPotion
         Item.useAnimation = 15;
         Item.buffTime = 16 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvAquaAffinity>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

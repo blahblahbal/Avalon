@@ -27,5 +27,6 @@ class AdvBouncingFlamePotion : BouncingFlamePotion
         Item.useAnimation = 15;
         Item.buffTime = 10 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvBouncingFlame>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

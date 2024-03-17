@@ -27,5 +27,6 @@ class AdvConflagrationPotion : ConflagrationPotion
         Item.useAnimation = 15;
         Item.buffTime = 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvConflagration>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

@@ -1,3 +1,4 @@
+using Avalon.Compatability.Thorium.Items.Accessories;
 using Avalon.Compatability.Thorium.Items.Placeable.Tile;
 using Avalon.Compatability.Thorium.Items.Potions;
 using Avalon.Items.Consumables;
@@ -508,6 +509,13 @@ public class ThoriumTweaksGlobalItem : GlobalItem
     {
         return ModLoader.HasMod("ThoriumMod");
     }
+    public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+    {
+        if (item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem)
+        {
+            tooltips.Add(new TooltipLine(Mod, "AvalonCompatItem", Language.GetTextValue("Mods.Avalon.ThoriumCompatLine")));
+        }
+    }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
         // TODO: ADD AVALON RINGS TO SCARLET AND SINISTER CRATES
@@ -517,5 +525,17 @@ public class ThoriumTweaksGlobalItem : GlobalItem
         {
             itemLoot.Add(new CommonDropNotScalingWithLuck(ModContent.ItemType<StaminaPotion>(), 5, 2, 4));
         }
+    }
+}
+public class ThoriumTweaksGlobalItemInstance : GlobalItem
+{
+    public override bool InstancePerEntity => true;
+    public bool AvalonThoriumItem { get; set; }
+
+    public override GlobalItem Clone(Item? from, Item to)
+    {
+        var clone = (ThoriumTweaksGlobalItemInstance)base.Clone(from, to);
+        clone.AvalonThoriumItem = AvalonThoriumItem;
+        return clone;
     }
 }

@@ -27,5 +27,6 @@ class AdvArtilleryPotion : ArtilleryPotion
         Item.useAnimation = 15;
         Item.buffTime = 12 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvArtillery>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

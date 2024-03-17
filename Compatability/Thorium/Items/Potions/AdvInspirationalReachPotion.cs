@@ -32,5 +32,6 @@ class AdvInspirationalReachPotion : ModItem
         Item.useAnimation = 15;
         Item.buffTime = 12 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvInspirationalReach>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

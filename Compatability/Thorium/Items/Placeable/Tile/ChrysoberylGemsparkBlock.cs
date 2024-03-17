@@ -30,6 +30,7 @@ class ChrysoberylGemsparkBlock : ModItem
         Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
     public override void AddRecipes()
     {

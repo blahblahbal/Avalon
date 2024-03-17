@@ -32,6 +32,7 @@ class ChrysoberylRobe : ModItem
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 1, 40, 0);
         Item.height = dims.Height;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
     public override void AddRecipes()
     {

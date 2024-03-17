@@ -65,7 +65,7 @@ public class AvalonHerbologyPlayer : ModPlayer
             }
         }
 
-        if (!Main.playerInventory)
+        if (!Main.playerInventory || Player.GetModPlayer<AvalonJukeboxPlayer>().DisplayJukeboxInterface)
         {
             DisplayHerbologyMenu = false;
         }

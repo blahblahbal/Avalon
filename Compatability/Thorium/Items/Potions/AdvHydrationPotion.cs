@@ -28,5 +28,6 @@ class AdvHydrationPotion : HydrationPotion
         Item.useAnimation = 15;
         Item.buffTime = 10 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvHydration>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

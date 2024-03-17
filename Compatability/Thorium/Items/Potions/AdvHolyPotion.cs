@@ -27,5 +27,6 @@ class AdvHolyPotion : HolyPotion
         Item.useAnimation = 15;
         Item.buffTime = 6 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvHoly>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

@@ -32,5 +32,6 @@ class AdvEarwormPotion : ModItem
         Item.useAnimation = 15;
         Item.buffTime = 6 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvEarworm>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

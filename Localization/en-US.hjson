@@ -84,6 +84,8 @@ Mods: {
 	}
 
 	Avalon: {
+		ThoriumCompatLine: "[i:Avalon/IconItem]"
+
 		GameTitles: {
 			0: Terraria: May contain zombies
 			1: Terraria: Clever titles
@@ -8734,6 +8736,11 @@ Mods: {
 			AdvWarmongerPotion: {
 				DisplayName: Warmonger Elixir
 				Tooltip: Increases enemy spawn rates significantly
+			}
+
+			IconItem: {
+				DisplayName: Icon Item
+				Tooltip: ""
 			}
 		}
 

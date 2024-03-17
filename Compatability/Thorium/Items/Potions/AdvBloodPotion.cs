@@ -27,5 +27,6 @@ class AdvBloodPotion : BloodPotion
         Item.useAnimation = 15;
         Item.buffTime = 6 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvBloodRush>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

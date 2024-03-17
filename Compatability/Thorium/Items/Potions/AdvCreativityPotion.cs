@@ -31,6 +31,7 @@ class AdvCreativityPotion : ModItem
         Item.useTime = 15;
         Item.useAnimation = 15;
         Item.buffTime = 16 * 3600;
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
         Item.buffType = ModContent.BuffType<Buffs.AdvCreativity>();
     }
 }

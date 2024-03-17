@@ -27,5 +27,6 @@ class AdvKineticPotion : KineticPotion
         Item.useAnimation = 15;
         Item.buffTime = 5 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvKinetic>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

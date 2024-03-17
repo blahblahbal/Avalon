@@ -27,5 +27,6 @@ class AdvAssassinPotion : AssassinPotion
         Item.useAnimation = 15;
         Item.buffTime = 16 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvAssassin>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

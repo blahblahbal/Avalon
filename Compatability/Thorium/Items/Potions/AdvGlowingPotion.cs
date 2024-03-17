@@ -27,5 +27,6 @@ class AdvGlowingPotion : GlowingPotion
         Item.useAnimation = 15;
         Item.buffTime = 8 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvGlowing>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

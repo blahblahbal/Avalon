@@ -27,5 +27,6 @@ class AdvWarmongerPotion : WarmongerPotion
         Item.useAnimation = 15;
         Item.buffTime = 14 * 3600;
         Item.buffType = ModContent.BuffType<Buffs.AdvWarmonger>();
+        Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

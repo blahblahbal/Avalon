@@ -27,6 +27,7 @@ namespace Avalon.Compatability.Thorium.Items.Weapons.Healer
             Item.rare = ItemRarityID.Blue;
             Item.Size = new Vector2(24);
             Item.shoot = ModContent.ProjectileType<Projectiles.Healer.PestilentScythe>();
+            Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
         }
         public override void AddRecipes()
         {
