@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class DurataniumChainmail : ModItem
+public class DurataniumChainmail : ModItem
 {
     public override void SetDefaults()
     {
@@ -27,5 +27,15 @@ class DurataniumChainmail : ModItem
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Bars.DurataniumBar>(), 20)
             .AddTile(TileID.Anvils).Register();
+    }
+}
+[AutoloadEquip(EquipType.Body)]
+public class AncientDurataniumChainmail : DurataniumChainmail
+{
+    public override void AddRecipes()
+    {
+        Recipe.Create(Type)
+            .AddIngredient(ModContent.ItemType<Material.Bars.DurataniumBar>(), 20)
+            .AddTile(TileID.DemonAltar).Register();
     }
 }

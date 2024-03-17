@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class DurataniumHeadgear : ModItem
+public class DurataniumHeadgear : ModItem
 {
     public override void SetDefaults()
     {
@@ -22,7 +22,7 @@ class DurataniumHeadgear : ModItem
 
     public override bool IsArmorSet(Item head, Item body, Item legs)
     {
-        return body.type == ModContent.ItemType<DurataniumChainmail>() && legs.type == ModContent.ItemType<DurataniumGreaves>();
+        return (body.type == ModContent.ItemType<DurataniumChainmail>() || body.type == ModContent.ItemType<AncientDurataniumChainmail>()) && (legs.type == ModContent.ItemType<DurataniumGreaves>() || legs.type == ModContent.ItemType<AncientDurataniumGreaves>());
     }
 
     public override void UpdateArmorSet(Player player)
@@ -41,5 +41,15 @@ class DurataniumHeadgear : ModItem
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Bars.DurataniumBar>(), 10)
             .AddTile(TileID.Anvils).Register();
+    }
+}
+[AutoloadEquip(EquipType.Head)]
+public class AncientDurataniumHeadgear : DurataniumHeadgear
+{
+    public override void AddRecipes()
+    {
+        Recipe.Create(Type)
+            .AddIngredient(ModContent.ItemType<Material.Bars.DurataniumBar>(), 10)
+            .AddTile(TileID.DemonAltar).Register();
     }
 }

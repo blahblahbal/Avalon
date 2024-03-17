@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class DurataniumGreaves : ModItem
+public class DurataniumGreaves : ModItem
 {
     public override void SetDefaults()
     {
@@ -27,5 +27,15 @@ class DurataniumGreaves : ModItem
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Bars.DurataniumBar>(), 15)
             .AddTile(TileID.Anvils).Register();
+    }
+}
+[AutoloadEquip(EquipType.Legs)]
+public class AncientDurataniumGreaves : DurataniumGreaves
+{
+    public override void AddRecipes()
+    {
+        Recipe.Create(Type)
+            .AddIngredient(ModContent.ItemType<Material.Bars.DurataniumBar>(), 15)
+            .AddTile(TileID.DemonAltar).Register();
     }
 }

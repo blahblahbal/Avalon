@@ -7147,11 +7147,6 @@ Mods: {
 					'''
 			}
 
-			ThornedHeartAmulet: {
-				DisplayName: Thorned Heart Amulet
-				Tooltip: Damage increases as your health drops
-			}
-
 			SoullessLocket: {
 				DisplayName: Soulless Locket
 				Tooltip:
@@ -8738,6 +8733,11 @@ Mods: {
 				Tooltip: Increases enemy spawn rates significantly
 			}
 
+			SunsShadow: {
+				DisplayName: Sun's Shadow
+				Tooltip: ""
+			}
+
 			IconItem: {
 				DisplayName: Icon Item
 				Tooltip: ""
@@ -8996,6 +8996,7 @@ Mods: {
 			PlagueDoctor.DisplayName: Plague Doctor
 			ChrysoberylBolt.DisplayName: Chrysoberyl Bolt
 			BismuthBugleHornPro.DisplayName: Bismuth Bugle Horn
+			SunsShadowProj.DisplayName: Sun's Shadow Fireball
 		}
 
 		NPCs: {
