@@ -13,7 +13,7 @@ class ChaosEye : ModItem
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Cyan;
         Item.width = dims.Width;
-        Item.value = 3450000;
+        Item.value = 400000;
         Item.accessory = true;
         Item.height = dims.Height;
     }
