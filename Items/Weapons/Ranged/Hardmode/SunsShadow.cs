@@ -44,7 +44,7 @@ public class SunsShadow : ModItem
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
-        Projectile P = Projectile.NewProjectileDirect(source, position - new Vector2(0, 4), velocity, ModContent.ProjectileType<SunsShadowProj>(), damage, knockback);
+        Projectile P = Projectile.NewProjectileDirect(source, position - new Vector2(0, 4) + (Vector2.Normalize(velocity) * 42), velocity, ModContent.ProjectileType<SunsShadowProj>(), damage, knockback);
         P.ai[0] = type;
         return false;
     }

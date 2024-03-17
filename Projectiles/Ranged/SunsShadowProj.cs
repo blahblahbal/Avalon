@@ -19,8 +19,8 @@ public class SunsShadowProj : ModProjectile
         Projectile.DamageType = DamageClass.Ranged;
         Projectile.friendly = true;
         Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width * 10 / 16;
-        Projectile.height = dims.Height * 10 / 16;
+        Projectile.width = 16;
+        Projectile.height = 16;
         Projectile.aiStyle = -1;
         Projectile.penetrate = -1;
         DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
@@ -29,6 +29,14 @@ public class SunsShadowProj : ModProjectile
 
         lightColor = new Color(255, 200, 70);
         dustType = ModContent.DustType<SunsShadowDust>();
+    }
+    public override void ModifyDamageHitbox(ref Rectangle hitbox)
+    {
+        int size = 16;
+        hitbox.X -= size;
+        hitbox.Y -= size;
+        hitbox.Width += size * 2;
+        hitbox.Height += size * 2;
     }
     public override void AI()
     {
@@ -102,12 +110,24 @@ public class SunsShadowProj : ModProjectile
     public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Item45, Projectile.position);
+        float dustAngle = 1f;
         for (int i = 0; i < 14; i++)
+        {
+            Vector2 dustRad = new Vector2(Main.rand.NextFloat(1.5f, 5f), Main.rand.NextFloat(1.5f, 5f));
+            var dust = Dust.NewDustPerfect(Projectile.Center + Projectile.velocity * 2.5f, dustType, dustRad.RotatedBy((MathHelper.Pi / 180f) * dustAngle) + Projectile.velocity * 0.5f, 50, default, 1f);
+            dust.noGravity = true;
+            dust.alpha = 20;
+            dust.scale *= 1.25f;
+            dust.velocity *= 0.5f;
+            dustAngle += 36f;
+        }
+        for (int i = 0; i < 6; i++)
         {
             int dust = Dust.NewDust(Projectile.position - Projectile.velocity * Main.rand.NextFloat(1f, 2f), Projectile.width, Projectile.height, dustType, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, default, default, 1.2f);
             Main.dust[dust].noGravity = true;
+            Main.dust[dust].alpha = 20;
             Main.dust[dust].scale *= 1.25f;
-            Main.dust[dust].velocity *= 0.5f;
+            Main.dust[dust].velocity *= 0.65f;
         }
     }
 }

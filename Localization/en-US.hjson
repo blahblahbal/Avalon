@@ -8735,11 +8735,36 @@ Mods: {
 
 			SunsShadow: {
 				DisplayName: Sun's Shadow
-				Tooltip: ""
+				Tooltip: Shoots a fireball which fires the consumed ammo type at enemies
 			}
 
 			IconItem: {
 				DisplayName: Icon Item
+				Tooltip: ""
+			}
+
+			AncientDurataniumChainmail: {
+				DisplayName: Ancient Duratanium Chainmail
+				Tooltip: ""
+			}
+
+			AncientDurataniumGreaves: {
+				DisplayName: Ancient Duratanium Greaves
+				Tooltip: ""
+			}
+
+			AncientDurataniumHeadgear: {
+				DisplayName: Ancient Duratanium Headgear
+				Tooltip: ""
+			}
+
+			AncientDurataniumHeadpiece: {
+				DisplayName: Ancient Duratanium Headpiece
+				Tooltip: ""
+			}
+
+			AncientDurataniumHelmet: {
+				DisplayName: Ancient Duratanium Helmet
 				Tooltip: ""
 			}
 		}
