@@ -28,7 +28,7 @@ public class SunsShadow : ModItem
         Item.value = 1800;
         Item.useAnimation = 40;
         Item.height = dims.Height;
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.Lime;
     }
     //public override void UseItemFrame(Player player)
     //{
