@@ -20,7 +20,7 @@ public class Boompipe : ModItem
         Rectangle dims = this.GetDims();
         Item.UseSound = new SoundStyle($"{nameof(Avalon)}/Sounds/Item/Boompipe");
         Item.autoReuse = true;
-        Item.damage = 13;
+        Item.damage = 11;
         Item.scale = 1f;
         Item.shootSpeed = 14.5f;
         Item.useAmmo = AmmoID.Dart;
