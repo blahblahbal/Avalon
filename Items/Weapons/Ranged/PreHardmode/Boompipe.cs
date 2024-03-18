@@ -31,10 +31,10 @@ public class Boompipe : ModItem
         Item.knockBack = 3.5f;
         Item.shoot = ProjectileID.Seed;
         Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = 1800;
+        Item.value = 24000;
         Item.useAnimation = 40;
         Item.height = dims.Height;
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.Orange;
     }
     public override void UseItemFrame(Player player)
     {
