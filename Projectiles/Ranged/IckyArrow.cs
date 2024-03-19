@@ -10,6 +10,7 @@ public class IckyArrow : ModProjectile
 {
     public override void SetDefaults()
     {
+        Projectile.arrow = true;
         Rectangle dims = this.GetDims();
         Projectile.width = 16;
         Projectile.height = 16;

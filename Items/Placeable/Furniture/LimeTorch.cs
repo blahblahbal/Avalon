@@ -27,7 +27,7 @@ class LimeTorch : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(3).AddIngredient(ItemID.Torch, 3).AddIngredient(ModContent.ItemType<Material.Ores.Peridot>()).Register();
+        CreateRecipe(10).AddIngredient(ItemID.Torch, 10).AddIngredient(ModContent.ItemType<Material.Ores.Peridot>()).Register();
     }
     public override void HoldItem(Player player)
     {

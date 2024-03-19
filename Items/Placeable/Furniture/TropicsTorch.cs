@@ -24,8 +24,8 @@ class TropicsTorch : ModItem
     }
     public override void AddRecipes()
     {
-        CreateRecipe(33)
-            .AddIngredient(ItemID.Torch, 33)
+        CreateRecipe(25)
+            .AddIngredient(ItemID.Torch, 25)
             .AddIngredient(ModContent.ItemType<Material.TropicalShroomCap>()).Register();
     }
     public override void HoldItem(Player player)

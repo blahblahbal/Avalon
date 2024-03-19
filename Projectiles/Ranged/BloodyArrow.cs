@@ -38,7 +38,7 @@ public class BloodyArrow : ModProjectile
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
-        SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+        SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
         return true;
     }
     public override bool? CanHitNPC(NPC target)
@@ -194,6 +194,15 @@ public class BloodyArrow : ModProjectile
         if (Projectile.velocity.Y > 16f)
         {
             Projectile.velocity.Y = 16f;
+        }
+    }
+    public override void OnKill(int timeLeft)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Blood, 0, 0, default, default, 1.3f);
+            Main.dust[d].velocity = Main.rand.NextVector2Circular(2f, 2f) * new Vector2(2f, 2f);
+            Main.dust[d].noGravity = Main.rand.NextBool(3);
         }
     }
 }
