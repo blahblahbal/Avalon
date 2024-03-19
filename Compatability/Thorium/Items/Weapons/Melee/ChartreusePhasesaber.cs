@@ -25,7 +25,7 @@ public class ChartreusePhasesaber : ModItem
     {
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<ChartreusePhaseblade>())
-            .AddIngredient(ItemID.CrystalShard, 50)
+            .AddIngredient(ItemID.CrystalShard, 25)
             .AddTile(TileID.Anvils)
             .Register();
     }

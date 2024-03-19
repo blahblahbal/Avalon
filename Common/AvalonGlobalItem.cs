@@ -514,6 +514,33 @@ public class AvalonGlobalItem : GlobalItem
         Vector2 pos = Main.ReverseGravitySupport(player.GetModPlayer<AvalonPlayer>().MousePosition);
         Point tilePos = pos.ToTileCoordinates();
 
+        #region contagion chest lock locking
+        if (item.type == ItemID.ChestLock && player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
+            player.whoAmI == Main.myPlayer && player.ItemTimeIsZero && player.itemAnimation > 0 && player.controlUseItem)
+        {
+            Tile tileSafely = Framing.GetTileSafely(tilePos.X, tilePos.Y);
+            if (tileSafely.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>())
+            {
+                int xpos;
+                for (xpos = Main.tile[tilePos.X, tilePos.Y].TileFrameX / 18; xpos > 1; xpos -= 2)
+                {
+                }
+                xpos = tilePos.X - xpos;
+                int ypos = tilePos.Y - Main.tile[tilePos.X, tilePos.Y].TileFrameY / 18;
+
+                if (Tiles.Contagion.ContagionChest.LockOrUnlock(xpos, ypos))
+                {
+                    item.stack--;
+                    if (item.stack <= 0)
+                    {
+                        item = new Item();
+                    }
+                    NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3, xpos, ypos);
+                }
+            }
+        }
+        #endregion
+
         #region sponges 3x3
         if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.cursorItemIconID == 0 && !player.mouseInterface &&
             player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&

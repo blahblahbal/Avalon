@@ -20,7 +20,11 @@ namespace Avalon.Items.Weapons.Melee.Hardmode
             }
             public override void AddRecipes()
             {
-                Recipe.Create(Type).AddIngredient(ModContent.ItemType<BrownPhaseblade>()).AddIngredient(ItemID.CrystalShard, 50).AddTile(TileID.Anvils).Register();
+                CreateRecipe()
+                    .AddIngredient(ModContent.ItemType<BrownPhaseblade>())
+                    .AddIngredient(ItemID.CrystalShard, 25)
+                    .AddTile(TileID.Anvils)
+                    .Register();
             }
             public override void MeleeEffects(Player player, Rectangle hitbox)
             {
@@ -39,7 +43,11 @@ namespace Avalon.Items.Weapons.Melee.Hardmode
             }
             public override void AddRecipes()
             {
-                Recipe.Create(Type).AddIngredient(ModContent.ItemType<CyanPhaseblade>()).AddIngredient(ItemID.CrystalShard, 50).AddTile(TileID.Anvils).Register();
+                CreateRecipe()
+                    .AddIngredient(ModContent.ItemType<CyanPhaseblade>())
+                    .AddIngredient(ItemID.CrystalShard, 25)
+                    .AddTile(TileID.Anvils)
+                    .Register();
             }
             public override void MeleeEffects(Player player, Rectangle hitbox)
             {
@@ -58,7 +66,11 @@ namespace Avalon.Items.Weapons.Melee.Hardmode
             }
             public override void AddRecipes()
             {
-                Recipe.Create(Type).AddIngredient(ModContent.ItemType<LimePhaseblade>()).AddIngredient(ItemID.CrystalShard, 50).AddTile(TileID.Anvils).Register();
+                CreateRecipe()
+                    .AddIngredient(ModContent.ItemType<LimePhaseblade>())
+                    .AddIngredient(ItemID.CrystalShard, 25)
+                    .AddTile(TileID.Anvils)
+                    .Register();
             }
             public override void MeleeEffects(Player player, Rectangle hitbox)
             {
