@@ -16,6 +16,12 @@ public class IrateBones : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 15;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+        {
+            // Influences how the NPC looks in the Bestiary
+            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
     }
 
     public override void SetDefaults()
@@ -97,8 +103,9 @@ public class IrateBones : ModNPC
     {
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity,
-                Mod.Find<ModGore>("IrateBonesHelmet").Type);
+            //Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity,
+            //    Mod.Find<ModGore>("IrateBonesHelmet").Type);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, 42);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, 43);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, 43);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, 44);
