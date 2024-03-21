@@ -22,7 +22,7 @@ public class PointingLaser : ModProjectile
         Projectile.MaxUpdates = 1;
         Projectile.extraUpdates = 1;
         Projectile.alpha = 255;
-        Projectile.timeLeft = 6;
+        Projectile.timeLeft = 9;
         Projectile.damage = 0;
         Projectile.penetrate = -1;
     }
