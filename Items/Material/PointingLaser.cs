@@ -19,8 +19,8 @@ class PointingLaser : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Pink;
-        Item.useAnimation = 5;
-        Item.useTime = 5;
+        Item.useAnimation = 1;
+        Item.useTime = 1;
         Item.autoReuse = true;
         Item.shoot = ModContent.ProjectileType<Projectiles.PointingLaser>();
         Item.shootSpeed = 6f;
