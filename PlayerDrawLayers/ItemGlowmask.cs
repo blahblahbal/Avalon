@@ -36,7 +36,7 @@ public class PlayerUseItemGlowmask : PlayerDrawLayer
             if (heldItem.GetGlobalItem<ItemGlowmask>().glowTexture != null && drawPlayer.itemAnimation > 0)
             {
                 Vector2 basePosition = drawPlayer.itemLocation - Main.screenPosition;
-                basePosition = new Vector2((int)basePosition.X, (int)basePosition.Y + drawPlayer.RotatedRelativePoint(drawPlayer.MountedCenter).Y);
+                basePosition = new Vector2((int)basePosition.X, (int)basePosition.Y) + (drawPlayer.RotatedRelativePoint(drawPlayer.MountedCenter) - drawPlayer.Center);
                 if (heldItem.useStyle == ItemUseStyleID.Shoot)
                 {
                     if (Item.staff[heldItem.type])
