@@ -35,7 +35,7 @@ public class Breakdawn : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.TheBreaker)
             .AddIngredient(ModContent.ItemType<Blueshift>())
-            .AddIngredient(ItemID.AcornAxe)
+            .AddIngredient(ModContent.ItemType<JungleAxe>())
             .AddIngredient(ItemID.MoltenHamaxe)
             .AddTile(TileID.DemonAltar)
             .Register();
@@ -43,7 +43,7 @@ public class Breakdawn : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.FleshGrinder)
             .AddIngredient(ModContent.ItemType<Blueshift>())
-            .AddIngredient(ItemID.AcornAxe)
+            .AddIngredient(ModContent.ItemType<JungleAxe>())
             .AddIngredient(ItemID.MoltenHamaxe)
             .AddTile(TileID.DemonAltar)
             .Register();
@@ -51,7 +51,7 @@ public class Breakdawn : ModItem
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<MucusHammer>())
             .AddIngredient(ModContent.ItemType<Blueshift>())
-            .AddIngredient(ItemID.AcornAxe)
+            .AddIngredient(ModContent.ItemType<JungleAxe>())
             .AddIngredient(ItemID.MoltenHamaxe)
             .AddTile(TileID.DemonAltar)
             .Register();
@@ -65,64 +65,64 @@ public class Breakdawn : ModItem
             Item.ChangeItemType(ModContent.ItemType<Breakdawn3x3>());
             Item.Prefix(pfix);
         }
-        if (player.whoAmI == Main.myPlayer && player.ItemAnimationJustStarted)
-        {
-            Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-            int tileType = Main.tile[tilePosPoint.X, tilePosPoint.Y].TileType;
-            int dmgAmt = (int)(Item.axe * 1.2f);
-            bool isAxeableTile = Main.tileAxe[tileType];
-            if (isAxeableTile)
-            {
-                if (!WorldGen.CanKillTile(tilePosPoint.X, tilePosPoint.Y))
-                {
-                    dmgAmt = 0;
-                }
-                //Main.NewText(player.hitTile.AddDamage(tileType, dmgAmt));
-                if (player.hitTile.AddDamage(tileType, dmgAmt) >= 100)
-                {
-                    player.ClearMiningCacheAt(tilePosPoint.X, tilePosPoint.Y, 1);
-                    bool flag = player.IsBottomOfTreeTrunkNoRoots(tilePosPoint.X, tilePosPoint.Y);
+        //if (player.whoAmI == Main.myPlayer && player.ItemAnimationJustStarted)
+        //{
+        //    Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+        //    int tileType = Main.tile[tilePosPoint.X, tilePosPoint.Y].TileType;
+        //    int dmgAmt = (int)(Item.axe * 1.2f);
+        //    bool isAxeableTile = Main.tileAxe[tileType];
+        //    if (isAxeableTile)
+        //    {
+        //        if (!WorldGen.CanKillTile(tilePosPoint.X, tilePosPoint.Y))
+        //        {
+        //            dmgAmt = 0;
+        //        }
+        //        //Main.NewText(player.hitTile.AddDamage(tileType, dmgAmt));
+        //        if (player.hitTile.AddDamage(tileType, dmgAmt) >= 100)
+        //        {
+        //            player.ClearMiningCacheAt(tilePosPoint.X, tilePosPoint.Y, 1);
+        //            bool flag = player.IsBottomOfTreeTrunkNoRoots(tilePosPoint.X, tilePosPoint.Y);
 
-                    // kill the tile, with mp support
-                    WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y);
-                    if (Main.netMode == NetmodeID.MultiplayerClient)
-                    {
-                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y);
-                    }
+        //            // kill the tile, with mp support
+        //            WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y);
+        //            if (Main.netMode == NetmodeID.MultiplayerClient)
+        //            {
+        //                NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y);
+        //            }
 
-                    // replant the sapling
-                    if (flag)
-                    {
-                        player.TryReplantingTree(tilePosPoint.X, tilePosPoint.Y);
-                    }
-                    player.hitTile.Clear(tileType);
-                }
-                else
-                {
-                    if (tileType is TileID.TreeAmber or TileID.TreeAmethyst or TileID.TreeDiamond or TileID.TreeEmerald or TileID.TreeRuby or TileID.TreeSapphire or TileID.TreeTopaz)
-                    {
-                        WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y);
-                        if (Main.netMode == NetmodeID.MultiplayerClient)
-                        {
-                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y);
-                        }
-                    }
-                    else
-                    {
-                        WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y, fail: true);
-                        if (Main.netMode == NetmodeID.MultiplayerClient)
-                        {
-                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y, 1f);
-                        }
-                    }
-                }
-                if (dmgAmt != 0)
-                {
-                    player.hitTile.Prune();
-                }
-                player.ApplyItemTime(Item);
-            }
-        }
+        //            // replant the sapling
+        //            if (flag)
+        //            {
+        //                player.TryReplantingTree(tilePosPoint.X, tilePosPoint.Y);
+        //            }
+        //            player.hitTile.Clear(tileType);
+        //        }
+        //        else
+        //        {
+        //            if (tileType is TileID.TreeAmber or TileID.TreeAmethyst or TileID.TreeDiamond or TileID.TreeEmerald or TileID.TreeRuby or TileID.TreeSapphire or TileID.TreeTopaz)
+        //            {
+        //                WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y);
+        //                if (Main.netMode == NetmodeID.MultiplayerClient)
+        //                {
+        //                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y);
+        //                }
+        //            }
+        //            else
+        //            {
+        //                WorldGen.KillTile(tilePosPoint.X, tilePosPoint.Y, fail: true);
+        //                if (Main.netMode == NetmodeID.MultiplayerClient)
+        //                {
+        //                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tilePosPoint.X, tilePosPoint.Y, 1f);
+        //                }
+        //            }
+        //        }
+        //        if (dmgAmt != 0)
+        //        {
+        //            player.hitTile.Prune();
+        //        }
+        //        player.ApplyItemTime(Item);
+        //    }
+        //}
     }
     public override void MeleeEffects(Player player, Rectangle hitbox)
     {
@@ -194,7 +194,7 @@ public class BreakdawnHook : ModHook
 {
     protected override void Apply()
     {
-        IL_WorldGen.KillTile_GetItemDrops += IL_WorldGen_KillTile_GetItemDrops;
+        //IL_WorldGen.KillTile_GetItemDrops += IL_WorldGen_KillTile_GetItemDrops;
     }
 
     private void IL_WorldGen_KillTile_GetItemDrops(MonoMod.Cil.ILContext il)
