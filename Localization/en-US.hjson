@@ -8767,6 +8767,11 @@ Mods: {
 				DisplayName: Ancient Duratanium Helmet
 				Tooltip: ""
 			}
+
+			JungleAxe: {
+				DisplayName: Jungle Axe
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
