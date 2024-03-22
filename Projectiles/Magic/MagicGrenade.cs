@@ -10,13 +10,14 @@ public class MagicGrenade : ModProjectile
 {
     public override void SetDefaults()
     {
-        Projectile.width = Projectile.height = 10;
+        Projectile.width = Projectile.height = 16;
         Projectile.alpha = 0;
         Projectile.DamageType = DamageClass.Magic;
         Projectile.friendly = true;
         Projectile.aiStyle = -1;
         Projectile.penetrate = -1;
         Projectile.timeLeft = 240;
+        DrawOriginOffsetY = -2;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
@@ -36,7 +37,7 @@ public class MagicGrenade : ModProjectile
     }
     public override void AI()
     {
-        for (var i = 0; i < 2; i++)
+        for (var i = 0; i < 1 + (int)(MathHelper.Clamp(Projectile.velocity.Length(), 0, 1)); i++)
         {
             var dust = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.HallowedWeapons, Projectile.velocity.X, Projectile.velocity.Y, 50, default, 1.2f);
             Main.dust[dust].noGravity = true;

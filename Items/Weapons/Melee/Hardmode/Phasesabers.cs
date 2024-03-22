@@ -23,7 +23,7 @@ namespace Avalon.Items.Weapons.Melee.Hardmode
                 CreateRecipe()
                     .AddIngredient(ModContent.ItemType<BrownPhaseblade>())
                     .AddIngredient(ItemID.CrystalShard, 25)
-                    .AddTile(TileID.Anvils)
+                    .AddTile(TileID.MythrilAnvil)
                     .Register();
             }
             public override void MeleeEffects(Player player, Rectangle hitbox)
@@ -46,7 +46,7 @@ namespace Avalon.Items.Weapons.Melee.Hardmode
                 CreateRecipe()
                     .AddIngredient(ModContent.ItemType<CyanPhaseblade>())
                     .AddIngredient(ItemID.CrystalShard, 25)
-                    .AddTile(TileID.Anvils)
+                    .AddTile(TileID.MythrilAnvil)
                     .Register();
             }
             public override void MeleeEffects(Player player, Rectangle hitbox)
@@ -69,7 +69,7 @@ namespace Avalon.Items.Weapons.Melee.Hardmode
                 CreateRecipe()
                     .AddIngredient(ModContent.ItemType<LimePhaseblade>())
                     .AddIngredient(ItemID.CrystalShard, 25)
-                    .AddTile(TileID.Anvils)
+                    .AddTile(TileID.MythrilAnvil)
                     .Register();
             }
             public override void MeleeEffects(Player player, Rectangle hitbox)

@@ -28,7 +28,7 @@ class PeridotStaff : ModItem
         Item.useAnimation = 31;
         Item.knockBack = 4.75f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.PeridotBolt>();
-        Item.value = Item.buyPrice(0, 1, 90, 0);
+        Item.value = Item.sellPrice(0, 0, 38, 0);
         Item.UseSound = SoundID.Item43;
     }
     public override void AddRecipes()

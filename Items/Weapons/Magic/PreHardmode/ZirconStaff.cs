@@ -28,7 +28,7 @@ class ZirconStaff : ModItem
         Item.useAnimation = 25;
         Item.knockBack = 4.75f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.ZirconBolt>();
-        Item.value = Item.buyPrice(0, 3, 60, 0);
+        Item.value = Item.sellPrice(0, 0, 72, 0);
         Item.UseSound = SoundID.Item43;
     }
     public override void AddRecipes()

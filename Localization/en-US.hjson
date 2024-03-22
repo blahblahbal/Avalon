@@ -8772,6 +8772,11 @@ Mods: {
 				DisplayName: Jungle Axe
 				Tooltip: ""
 			}
+
+			NaquadahBrick: {
+				DisplayName: Naquadah Brick
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
