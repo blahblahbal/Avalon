@@ -92,8 +92,8 @@ public class PlayerUseItemGlowmask : PlayerDrawLayer
                     else
                     {
                         Vector2 offsetFix = new Vector2(texture.Width / 2, texture.Height / 2 + (heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetY * drawPlayer.gravDir));
-                        int glowOffsetXDefaultTo = heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetX + heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetX * -2;
-                        Vector2 positionFix = new Vector2(drawPlayer.direction == -1 ? texture.Width - glowOffsetXDefaultTo : glowOffsetXDefaultTo, texture.Height / 2);
+                        int glowOffsetXInvert = -heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetX;
+                        Vector2 positionFix = new Vector2(drawPlayer.direction == -1 ? texture.Width - glowOffsetXInvert : glowOffsetXInvert, texture.Height / 2);
 
                         DrawData horizontalStaffDraw = new DrawData(
                             texture,                                        // texture
