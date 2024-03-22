@@ -8777,6 +8777,11 @@ Mods: {
 				DisplayName: Naquadah Brick
 				Tooltip: ""
 			}
+
+			NaquadahBrickWall: {
+				DisplayName: Naquadah Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
