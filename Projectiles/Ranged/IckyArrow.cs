@@ -11,9 +11,8 @@ public class IckyArrow : ModProjectile
     public override void SetDefaults()
     {
         Projectile.arrow = true;
-        Rectangle dims = this.GetDims();
-        Projectile.width = 16;
-        Projectile.height = 16;
+        Projectile.width = 10;
+        Projectile.height = 10;
         Projectile.aiStyle = 1;
         AIType = ProjectileID.WoodenArrowFriendly;
         Projectile.friendly = true;

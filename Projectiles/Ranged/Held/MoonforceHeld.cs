@@ -81,7 +81,7 @@ namespace Avalon.Projectiles.Ranged.Held
         }
         public override void PostAI(Projectile projectile)
         {
-            if (Moonlight && Main.rand.NextBool(projectile.width / 16))
+            if (Moonlight)
             {
                 Dust d = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, Main.rand.Next(DustID.CorruptTorch, DustID.JungleTorch));
                 d.velocity = projectile.velocity.RotatedByRandom(0.1f) * 0.5f * (projectile.extraUpdates + 1);
