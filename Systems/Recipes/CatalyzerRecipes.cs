@@ -17,7 +17,7 @@ internal class CatalyzerRecipes : ModSystem
 
         //start stone types
         Recipe.Create(ItemID.EbonstoneBlock, 50)
-            .AddIngredient(ItemID.PearlstoneBlock, 50)
+            .AddIngredient(ModContent.ItemType<ChunkstoneBlock>(), 50)
             .AddIngredient(ModContent.ItemType<Sulphur>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
@@ -124,6 +124,7 @@ internal class CatalyzerRecipes : ModSystem
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()
             .Register();
+
         Recipe.Create(ItemID.PalmWood, 50)
             .AddIngredient(ItemID.BorealWood, 50)
             .AddIngredient(ModContent.ItemType<Sulphur>())
