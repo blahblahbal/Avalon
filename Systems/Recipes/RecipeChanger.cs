@@ -116,7 +116,7 @@ public class RecipeChanger : ModSystem
                     if (recipe.TryGetIngredient(ItemID.DemoniteBar, out Item ing))
                     {
                         recipe.RemoveIngredient(ing);
-                        recipe.AddRecipeGroup("Avalon:EvilBar", 12);
+                        recipe.AddRecipeGroup("Avalon:DemoniteBar", 12);
                     }
                     if (recipe.TryGetIngredient(ItemID.CrimtaneBar, out Item ing2))
                     {
@@ -129,7 +129,7 @@ public class RecipeChanger : ModSystem
                     if (recipe.TryGetIngredient(ItemID.DemoniteBar, out Item ing))
                     {
                         recipe.RemoveIngredient(ing);
-                        recipe.AddRecipeGroup("Avalon:EvilBar", 3);
+                        recipe.AddRecipeGroup("Avalon:DemoniteBar", 3);
                     }
                     if (recipe.TryGetIngredient(ItemID.CrimtaneBar, out Item ing2))
                     {

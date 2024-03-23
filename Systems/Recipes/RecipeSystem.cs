@@ -498,7 +498,7 @@ public class RecipeSystem : ModSystem
             ItemID.CrimtaneBar,
             ModContent.ItemType<BacciliteBar>()
         });
-        RecipeGroup.RegisterGroup("Avalon:EvilBar", groupEvilBar);
+        RecipeGroup.RegisterGroup("Avalon:DemoniteBar", groupEvilBar);
 
         if (RecipeGroup.recipeGroupIDs.ContainsKey("IronBar"))
         {
