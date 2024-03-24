@@ -22,7 +22,7 @@ class EnchantedShuriken : ModItem
         Item.useTime = 16;
         Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.EnchantedShuriken>();
         Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = 30;
+        Item.value = 75000;
         Item.useAnimation = 16;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item1;
