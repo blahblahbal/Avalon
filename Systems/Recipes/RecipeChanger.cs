@@ -57,7 +57,7 @@ public class RecipeChanger : ModSystem
                     if (recipe.TryGetIngredient(ItemID.GoldBar, out Item ing))
                     {
                         recipe.RemoveIngredient(ing);
-                        recipe.AddRecipeGroup("Avalon:GoldBar");
+                        recipe.AddRecipeGroup("Avalon:GoldBar", 8);
                     }
                     if (recipe.TryGetIngredient(ItemID.PlatinumBar, out Item ing2))
                     {
@@ -84,6 +84,7 @@ public class RecipeChanger : ModSystem
                         recipe.RemoveIngredient(ing);
                         recipe.AddIngredient(ModContent.ItemType<EnchantedBar>());
                     }
+                    recipe.AddTile(TileID.Anvils);
                     break;
                 }
                 case ItemID.SunplateBlock:
