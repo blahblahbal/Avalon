@@ -8782,6 +8782,11 @@ Mods: {
 				DisplayName: Naquadah Brick Wall
 				Tooltip: ""
 			}
+
+			NickelDoor: {
+				DisplayName: Nickel Door
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
