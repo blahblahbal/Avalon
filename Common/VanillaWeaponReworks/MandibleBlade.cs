@@ -17,7 +17,7 @@ namespace Avalon.Common.VanillaWeaponReworks
     {
         public override void SetDefaults(Item entity)
         {
-            if(entity.type == ItemID.AntlionClaw || entity.type == ModContent.ItemType<DesertLongsword>()) 
+            if (entity.type == ItemID.AntlionClaw)
             {
                 entity.useTurn = false;
                 entity.scale = 1;
