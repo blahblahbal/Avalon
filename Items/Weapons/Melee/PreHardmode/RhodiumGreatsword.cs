@@ -15,7 +15,7 @@ class RhodiumGreatsword : ModItem
         //Item.scale = 1.5f;
         Item.crit = 6;
         Item.rare = ItemRarityID.Orange;
-        Item.useTime = 25;
+        Item.useTime = 20;
         Item.knockBack = 5f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;

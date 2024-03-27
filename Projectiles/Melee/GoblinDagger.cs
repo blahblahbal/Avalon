@@ -25,9 +25,9 @@ public class GoblinDagger : ModProjectile
     }
     public override void AI()
     {
-        Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
+        Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection * Main.player[Projectile.owner].gravDir;
         SetVisualOffsets();
-        Projectile.position += Vector2.Normalize(Projectile.velocity) * 16;
+        Projectile.position += Vector2.Normalize(Projectile.velocity) * 26;
     }
 
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -54,22 +54,23 @@ public class GoblinDagger : ModProjectile
     }
     private void SetVisualOffsets()
     {
-        // 32 is the sprite size (here both width and height equal)
-        const int HalfSpriteWidth = 32 / 2;
+        // 38 is the sprite size (here both width and height equal)
+        const int HalfSpriteWidth = 38 / 2;
 
         int HalfProjWidth = Projectile.width / 2;
 
         if (Projectile.spriteDirection == 1)
         {
-            DrawOriginOffsetX = -(HalfProjWidth - HalfSpriteWidth);
+            DrawOriginOffsetX = -(HalfProjWidth - HalfSpriteWidth) * Main.player[Projectile.owner].gravDir;
             DrawOffsetX = (int)-DrawOriginOffsetX * 2;
-            DrawOriginOffsetY = 0;
+            DrawOriginOffsetY = -6;
+            DrawOffsetX -= Main.player[Projectile.owner].gravDir == 1 ? 0 : 20;
         }
         else
         {
-            DrawOriginOffsetX = (HalfProjWidth - HalfSpriteWidth);
-            DrawOffsetX = 0;
-            DrawOriginOffsetY = 0;
+            DrawOriginOffsetX = (HalfProjWidth - HalfSpriteWidth) * Main.player[Projectile.owner].gravDir;
+            DrawOffsetX = Main.player[Projectile.owner].gravDir == 1 ? 0 : -20;
+            DrawOriginOffsetY = -6;
         }
         DrawOffsetX -= Projectile.spriteDirection * 4;
     }
