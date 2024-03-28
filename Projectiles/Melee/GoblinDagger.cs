@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,7 +28,7 @@ public class GoblinDagger : ModProjectile
     {
         Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection * Main.player[Projectile.owner].gravDir;
         SetVisualOffsets();
-        Projectile.position += Vector2.Normalize(Projectile.velocity) * 26;
+        Projectile.position += Vector2.Normalize(Projectile.velocity) * 16;
     }
 
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -54,8 +55,7 @@ public class GoblinDagger : ModProjectile
     }
     private void SetVisualOffsets()
     {
-        // 38 is the sprite size (here both width and height equal)
-        const int HalfSpriteWidth = 38 / 2;
+        int HalfSpriteWidth = TextureAssets.Projectile[Type].Value.Width / 2;
 
         int HalfProjWidth = Projectile.width / 2;
 
@@ -63,15 +63,14 @@ public class GoblinDagger : ModProjectile
         {
             DrawOriginOffsetX = -(HalfProjWidth - HalfSpriteWidth) * Main.player[Projectile.owner].gravDir;
             DrawOffsetX = (int)-DrawOriginOffsetX * 2;
-            DrawOriginOffsetY = -6;
-            DrawOffsetX -= Main.player[Projectile.owner].gravDir == 1 ? 0 : 20;
+            DrawOffsetX -= Main.player[Projectile.owner].gravDir == 1 ? 0 : HalfSpriteWidth;
         }
         else
         {
             DrawOriginOffsetX = (HalfProjWidth - HalfSpriteWidth) * Main.player[Projectile.owner].gravDir;
-            DrawOffsetX = Main.player[Projectile.owner].gravDir == 1 ? 0 : -20;
-            DrawOriginOffsetY = -6;
+            DrawOffsetX = Main.player[Projectile.owner].gravDir == 1 ? 0 : -HalfSpriteWidth;
         }
+        DrawOriginOffsetY = -(TextureAssets.Projectile[Type].Value.Width / 6);
         DrawOffsetX -= Projectile.spriteDirection * 4;
     }
 }
