@@ -8,12 +8,11 @@ namespace Avalon.Items.Accessories.Hardmode;
 class OxygenTank : ModItem
 {    public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+        Item.width = 16;
+        Item.height = 24;
         Item.rare = ItemRarityID.Yellow;
-        Item.width = dims.Width;
         Item.accessory = true;
         Item.value = 100000;
-        Item.height = dims.Height;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

@@ -295,13 +295,17 @@ public class AvalonGlobalItem : GlobalItem
         ShimmerTransmute(ModContent.ItemType<Peridot>(), ModContent.ItemType<Tourmaline>());
         ShimmerTransmute(ModContent.ItemType<Tourmaline>(), ItemID.Diamond);
 
-        //Dungeon bricks
+        // Dungeon bricks
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>());
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>());
         ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.YellowBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientYellowBrick>());
 
+        // misc items
         ShimmerTransmuteBothWays(ModContent.ItemType<HiddenBlade>(), ModContent.ItemType<AmmoMagazine>());
         ShimmerTransmute(ModContent.ItemType<PlagueCrate>(), ModContent.ItemType<ContagionCrate>());
+        ShimmerTransmute(ModContent.ItemType<GreekExtinguisher>(), ModContent.ItemType<GoldenShield>());
+        ShimmerTransmute(ModContent.ItemType<GoldenShield>(), ModContent.ItemType<SurgicalMask>());
+        ShimmerTransmute(ModContent.ItemType<SurgicalMask>(), ModContent.ItemType<GreekExtinguisher>());
 
         // ambrosia
         ShimmerTransmute(ModContent.ItemType<Blackberry>(), ItemID.Ambrosia);
