@@ -148,6 +148,11 @@ namespace Avalon.Hooks
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionBoilWallUnsafe>();
                         }
+                        else if (Data.Sets.Wall.ConvertsToContagionWall[Main.tile[m, n].WallType] >= 0)
+                        {
+                            Main.tile[m, n].WallType = (ushort)Data.Sets.Wall.ConvertsToContagionWall[Main.tile[m, n].WallType];
+                            WorldGen.SquareTileFrame(m, n);
+                        }
 
                         // TEST
                         //if (Main.tile[m, n].TileType == TileID.Stalactite && (Main.tile[m, n].TileFrameX >= 54 && Main.tile[m, n].TileFrameX <= 90 || Main.tile[m, n].TileFrameX >= 216 && Main.tile[m, n].TileFrameX <= 360))
@@ -223,6 +228,11 @@ namespace Avalon.Hooks
                             Main.tile[m, n].TileType = (ushort)ModContent.TileType<Snotsandstone>();
                             WorldGen.SquareTileFrame(m, n);
                         }
+                        else if (Data.Sets.Tile.ConvertsToContagion[type] >= 0)
+                        {
+                            Main.tile[m, n].TileType = (ushort)Data.Sets.Tile.ConvertsToContagion[Main.tile[m, n].TileType];
+                            WorldGen.SquareTileFrame(m, n);
+                        }
                     }
                 }
                 val += val2;
@@ -278,7 +288,7 @@ namespace Avalon.Hooks
                         }
                         WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
                         int type = Main.tile[m, n].TileType;
-                        if (good) //someone add manual support, im not spending 5 hours on listing every tile and wall
+                        if (good)
                         {
                             #region walls
                             if (Main.tile[m, n].WallType == WallID.GrassUnsafe || Main.tile[m, n].WallType == WallID.FlowerUnsafe ||
@@ -373,7 +383,6 @@ namespace Avalon.Hooks
                                 WorldGen.SquareTileFrame(m, n);
                             }
                             #endregion
-                            //Add mod call converts that list modded tile and what it converts to, im too fucking depressed to do this right now, sorry for not completing alot of shit
                         }
                         else if (evil == WorldEvil.Crimson)
                         {

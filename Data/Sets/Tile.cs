@@ -73,6 +73,14 @@ namespace Avalon.Data.Sets
             TileID.Stone, TileID.Sandstone
         );
 
+        /// <summary>
+        /// Used to add extra tiles to the Contagion's worldgen, such as modded grass tiles converting to ickgrass tiles upon hardmode
+        /// <br/> Example:
+        /// <br/> Data.Sets.Tiles.ConvertsToContagion[Type] = TileID.Clay;
+        /// <br/> This will turn the modded tile of choice into clay blocks if the contagion's worldgen hits directly ontop of the modded tile
+        /// </summary>
+        public static int[] ConvertsToContagion = TileID.Sets.Factory.CreateIntSet(-1);
+
         //public static Dictionary<int, bool> RiftOres = new Dictionary<int, bool>
         //{
         //    { TileID.Copper, true },

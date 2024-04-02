@@ -11,6 +11,7 @@ using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Network;
 using Avalon.UI;
+using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -170,6 +171,22 @@ public class ExxoAvalonOrigins : Mod
             Platform.Get<IWindowService>().SetUnicodeTitle(Main.instance.Window, title);
         }
     }
+
+    public override object Call(params object[] args)
+    {
+        //For Content creators: Message me (Lion8cake) on discord if you have any mod call suggestions
+        return args switch
+        {
+            ["Contagion"] => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion,
+            ["SetWorldEvil", int value] => ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)value,
+
+            //IDs
+            ["ConvertsToContagion", int tileID, int num] => Data.Sets.Tile.ConvertsToContagion[tileID] = num,
+            ["ConvertsToContagionWall", int wallID, int num] => Data.Sets.Wall.ConvertsToContagionWall[wallID] = num,
+            _ => throw new Exception("ExxoAvalonOrigins: Unknown mod call, make sure you are calling the right method/field with the right parameters!")
+        };
+    }
+
     private void ReplaceVanillaTextures()
     {
         //if (DragonLens != null)

@@ -22,5 +22,13 @@ namespace Avalon.Data.Sets
             ModContent.WallType<Walls.PurpleTiledWallUnsafe>(),
             ModContent.WallType<Walls.YellowTiledWallUnsafe>()
         );
+
+        /// <summary>
+        /// Used to add extra walls to the Contagion's worldgen, such as modded stone walls converting to chunkstone walls upon hardmode
+        /// <br/> Example:
+        /// <br/> Data.Sets.Wall.ConvertsToContagionWall[Type] = WallID.LivingWood;
+        /// <br/> This will turn the modded wall of choice into Living wood walls if the contagion's worldgen hits directly ontop of the modded wall
+        /// </summary>
+        public static int[] ConvertsToContagionWall = WallID.Sets.Factory.CreateIntSet(-1);
     }
 }
