@@ -26,6 +26,7 @@ class TourmalineStoneBlock : ModItem
         Item.maxStack = 9999;
         Item.useAnimation = 15;
         Item.height = dims.Height;
+        Item.sellPrice(0, 0, 1, 0);
     }
     public override void AddRecipes()
     {

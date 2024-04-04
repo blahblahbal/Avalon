@@ -48,18 +48,30 @@ public class AngryNimbusDropsHook : ModHook
     {
         if (type == NPCID.AngryNimbus)
         {
-            entry = new AllFromOptionsDropRule(ModContent.ItemType<LivingLightningBlock>(), ItemID.Cloud, ItemID.RainCloud, ItemID.SnowCloudBlock);
+            entry = new AllFromOptionsDropRuleWithBonusRoll(8, 15, 1, 3, 1, 4, ModContent.ItemType<LivingLightningBlock>(), ItemID.Cloud, ItemID.RainCloud);
         }
         return orig.Invoke(self, type, entry);
     }
 }
-public class AllFromOptionsDropRule : IItemDropRule
+public class AllFromOptionsDropRuleWithBonusRoll : IItemDropRule
 {
     public int[] dropIds;
+    public int minDrop;
+    public int maxDrop;
+    public int bonusNumerator;
+    public int bonusDenominator;
+    public int bonusMin;
+    public int bonusMax;
     public List<IItemDropRuleChainAttempt> ChainedRules { get; private set; }
 
-    public AllFromOptionsDropRule(params int[] options)
+    public AllFromOptionsDropRuleWithBonusRoll(int minimumDropped, int maximumDropped, int bonusDropsNumerator, int bonusDropsDenominator, int minimumBonusDrops, int maximumBonusDrops, params int[] options)
     {
+        minDrop = minimumDropped;
+        maxDrop = maximumDropped;
+        bonusNumerator = bonusDropsNumerator;
+        bonusDenominator = bonusDropsDenominator;
+        bonusMin = minimumBonusDrops;
+        bonusMax = maximumBonusDrops;
         dropIds = options;
         ChainedRules = new List<IItemDropRuleChainAttempt>();
     }
@@ -71,25 +83,21 @@ public class AllFromOptionsDropRule : IItemDropRule
 
     public void ReportDroprates(List<DropRateInfo> drops, DropRateInfoChainFeed ratesInfo)
     {
-        float num = 1f;
-        float num2 = num * ratesInfo.parentDroprateChance;
-        float dropRate = 1f / ((float)dropIds.Length + 3.83f) * num2;
         for (int i = 0; i < dropIds.Length; i++)
         {
-            drops.Add(new DropRateInfo(dropIds[i], 1, 1, dropRate, ratesInfo.conditions));
+            drops.Add(new DropRateInfo(dropIds[i], minDrop, maxDrop + bonusMax, ratesInfo.parentDroprateChance, ratesInfo.conditions));
         }
-        Chains.ReportDroprates(ChainedRules, num, drops, ratesInfo);
+        Chains.ReportDroprates(ChainedRules, ratesInfo.parentDroprateChance, drops, ratesInfo);
     }
 
     public ItemDropAttemptResult TryDroppingItem(DropAttemptInfo info)
     {
-        int amount = 3;
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < dropIds.Length; i++)
         {
-            int stack = Main.rand.Next(8, 16);
-            if (Main.rand.NextBool(3))
+            int stack = Main.rand.Next(minDrop, maxDrop + 1);
+            if (Main.rand.NextBool(bonusNumerator, bonusDenominator))
             {
-                stack += Main.rand.Next(1, 5);
+                stack += Main.rand.Next(bonusMin, bonusMax + 1);
             }
             CommonCode.DropItem(info, dropIds[i], stack);
         }
