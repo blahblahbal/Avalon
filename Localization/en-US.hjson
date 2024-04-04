@@ -9042,6 +9042,7 @@ Mods: {
 			ChrysoberylBolt.DisplayName: Chrysoberyl Bolt
 			BismuthBugleHornPro.DisplayName: Bismuth Bugle Horn
 			SunsShadowProj.DisplayName: Sun's Shadow Fireball
+			SnotsandBallFallingProjectile.DisplayName: Snotsand Ball
 		}
 
 		NPCs: {
