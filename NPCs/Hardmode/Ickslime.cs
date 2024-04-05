@@ -29,8 +29,8 @@ public class Ickslime : ModNPC
         npcLoot.Add(ItemDropRule.Common(ItemID.Gel, 1,5,10));
         npcLoot.Add(ItemDropRule.StatusImmunityItem(ItemID.Vitamins, 90));
 
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), 5091, 1500));
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), 5091, 500));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), ItemID.PigPetItem, 1500));
+        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), ItemID.PigPetItem, 500));
     }
 
     public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
