@@ -5829,7 +5829,7 @@ Mods: {
 
 			MedlarMedley: {
 				DisplayName: Medlar Medley
-				Tooltip: "{$CommonItemTooltip.MediumStats}"
+				Tooltip: "{$CommonItemTooltip.MinorStats}"
 			}
 
 			CompressedExtractinationBlock: {
