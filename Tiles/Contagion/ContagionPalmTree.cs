@@ -77,6 +77,10 @@ public class ContagionPalmTree : ModPalmTree
             }
             Item.NewItem(WorldGen.GetItemSource_FromTreeShake(x, y), x * 16, y * 16, 16, 16, type, chance);
         }
+        else if (Main.rand.NextBool(20) && !WorldGen.IsPalmOasisTree(x))
+        {
+            NPC.NewNPC(new EntitySource_ShakeTree(x, y), x * 16, y * 16, NPCID.Seagull2);
+        }
         else if (Main.rand.NextBool(30))
         {
             NPC.NewNPC(new EntitySource_ShakeTree(x, y), x * 16 + 8, (y - 1) * 16, ModContent.NPCType<Bactus>());
