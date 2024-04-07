@@ -24,6 +24,10 @@ class TroxiniumBodyarmor : ModItem
         }
         Item.GetGlobalItem<ArmorGlowmask>().glowAlpha = 0;
     }
+    public override Color? GetAlpha(Color lightColor)
+    {
+        return lightColor * 4f;
+    }
     public override void DrawArmorColor(Player drawPlayer, float shadow, ref Color color, ref int glowMask, ref Color glowMaskColor)
     {
         if (!Main.gameMenu)
