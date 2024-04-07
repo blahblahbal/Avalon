@@ -30,8 +30,6 @@ class TroxiniumBodyarmor : ModItem
         {
             color = Color.White * (Lighting.Brightness((int)drawPlayer.position.X / 16, (int)drawPlayer.position.Y / 16) * 4f);
         }
-        glowMask = EquipLoader.GetEquipSlot(Mod, "TroxiniumBodyarmor_Body_Glow", EquipType.Body);
-        glowMaskColor = new Color(255, 255, 255, 0);
     }
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
