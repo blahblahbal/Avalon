@@ -1,3 +1,4 @@
+using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -17,10 +18,22 @@ class TroxiniumCuisses : ModItem
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 2, 30);
         Item.height = dims.Height;
+        if (!Main.dedServ)
+        {
+            Item.GetGlobalItem<ArmorGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Legs_Glow").Value;
+        }
+        Item.GetGlobalItem<ArmorGlowmask>().glowAlpha = 0;
     }
     public override Color? GetAlpha(Color lightColor)
     {
         return lightColor * 4f;
+    }
+    public override void DrawArmorColor(Player drawPlayer, float shadow, ref Color color, ref int glowMask, ref Color glowMaskColor)
+    {
+        if (!Main.gameMenu)
+        {
+            color = Color.White * (Lighting.Brightness((int)drawPlayer.position.X / 16, (int)drawPlayer.position.Y / 16) * 4f);
+        }
     }
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
