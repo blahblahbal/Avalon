@@ -8535,12 +8535,12 @@ Mods: {
 			VomitWater.DisplayName: Vomit Water
 			HallowedThorn.DisplayName: Hallowed Thorn
 			HallowedThornEnd.DisplayName: Hallowed Thorn
-			SnotsandBall.DisplayName: Snotsand
+			SnotsandBall.DisplayName: Snotsand Ball
 			ColdCatcherBobber.DisplayName: Cold Catcher Bobber
 			IckyArrow.DisplayName: Icky Arrow
 			EnergyLaser.DisplayName: Energy Laser
 			LongboneCurse.DisplayName: Longbone Curse
-			SnotsandSandgunProjectile.DisplayName: Sandgun
+			SnotsandSandgunProjectile.DisplayName: Snotsand Ball
 			ThrowingRock.DisplayName: Throwing Rock
 			TrueAeonStar.DisplayName: True Aeon Star
 			AnchorWorm.DisplayName: Anchor Worm
@@ -8590,6 +8590,7 @@ Mods: {
 			HallowedClaymore.DisplayName: Hallowed Claymore
 			UltrabrightRazorbladeBullet.DisplayName: Ultrabright Razorblade Bullet
 			UltrabrightRazorbladeBulletTyphoon.DisplayName: Ultrabright Razorblade Bullet Typhoon
+			SnotsandBallFallingProjectile.DisplayName: Snotsand Ball Falling Projectile
 		}
 
 		NPCs: {

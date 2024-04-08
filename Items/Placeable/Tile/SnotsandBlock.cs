@@ -9,22 +9,14 @@ class SnotsandBlock : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 100;
+        ItemID.Sets.SandgunAmmoProjectileData[Type] = new(ModContent.ProjectileType<Projectiles.SnotsandSandgunProjectile>(), 5);
     }
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Contagion.Snotsand>();
-        Item.width = dims.Width;
+        Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Contagion.Snotsand>());
+        Item.width = 12;
+        Item.height = 12;
         Item.ammo = AmmoID.Sand;
         Item.notAmmo = true;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.scale = 1f;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
     }
 }
