@@ -15,6 +15,7 @@ public class Crates : ModTile
         Main.tileFrameImportant[Type] = true;
         Main.tileSolidTop[Type] = true;
         Main.tileTable[Type] = true;
+        DustType = -1;
 
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
         TileObjectData.newTile.CoordinateHeights = new int[2] { 16, 18 };

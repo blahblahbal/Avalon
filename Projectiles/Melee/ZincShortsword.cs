@@ -25,7 +25,7 @@ public class ZincShortsword : ModProjectile
     }
     public override void AI()
     {
-        Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
+        Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection * Main.player[Projectile.owner].gravDir;
         SetVisualOffsets();
     }
     private void SetVisualOffsets()
