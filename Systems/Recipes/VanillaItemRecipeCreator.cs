@@ -140,7 +140,8 @@ public class VanillaItemRecipeCreator : ModSystem
         Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.RangerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.SummonerEmblem).AddIngredient(ItemID.SorcererEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.BundleofBalloons).AddIngredient(ModContent.ItemType<SandyStormcloudinaBottle>()).AddIngredient(ItemID.ShinyRedBalloon, 3).AddTile(TileID.TinkerersWorkbench).Register();
-        Recipe.Create(ItemID.BandofStarpower).AddIngredient(ModContent.ItemType<NerveNumbNecklace>()).AddIngredient(ModContent.ItemType<StaminaCrystal>()).AddTile(TileID.TinkerersWorkbench).AddCondition(Condition.InGraveyard).Register();
+        Recipe.Create(ItemID.BandofStarpower).AddIngredient(ModContent.ItemType<NerveNumbNecklace>()).AddIngredient(ItemID.ManaCrystal).AddTile(TileID.TinkerersWorkbench).AddCondition(Condition.InGraveyard).Register();
+        Recipe.Create(ItemID.PanicNecklace).AddIngredient(ModContent.ItemType<NerveNumbNecklace>()).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.TinkerersWorkbench).AddCondition(Condition.InGraveyard).Register();
         #endregion
 
         #region Bottles
