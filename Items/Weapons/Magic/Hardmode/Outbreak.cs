@@ -19,6 +19,7 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
             Item.width = 24;
             Item.height = 28;
             Item.DefaultToMagicWeapon(1, 45, 6, true);
+            Item.mana = 20;
             Item.damage = 90;
             Item.UseSound = SoundID.Item46;
             Item.rare = ItemRarityID.Pink;
@@ -55,7 +56,7 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
                 {
                     if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < AttackRad && !Main.npc[i].friendly && Main.npc[i].active)
                     {
-                        int DPS = Main.npc[i].SimpleStrikeNPC((Item.damage / Divide) + (int)MathHelper.Clamp(Divide * 3,0,Item.damage), player.direction, Main.rand.NextBool(101 - player.GetWeaponCrit(player.HeldItem)), Item.knockBack, DamageClass.Magic, true, player.luck);
+                        int DPS = Main.npc[i].SimpleStrikeNPC((int)(Item.damage / (1f + Divide / 10f)), player.direction, Main.rand.NextBool(player.GetWeaponCrit(player.HeldItem), 100), Item.knockBack, DamageClass.Magic, true, player.luck);
                         player.addDPS(DPS);
                         if (Main.rand.NextBool(5))
                             Main.npc[i].AddBuff(ModContent.BuffType<Pathogen>(), 600 / Divide);
