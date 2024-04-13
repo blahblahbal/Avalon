@@ -21,23 +21,16 @@ public class LoveUpandDown : ModItem
         Item.width = dims.Width;
         Item.value = 150000;
         Item.height = dims.Height;
+        Item.defense = 12;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 4;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Ranged) += 0.15f;
-        player.GetDamage(DamageClass.Melee) += 0.15f;
-        player.GetDamage(DamageClass.Magic) += 0.15f;
-        player.GetDamage(DamageClass.Summon) += 0.15f;
-        player.GetDamage(DamageClass.Throwing) += 0.15f;
-        player.GetCritChance(DamageClass.Melee) += 7;
-        player.GetCritChance(DamageClass.Magic) += 7;
-        player.GetCritChance(DamageClass.Ranged) += 7;
-        player.GetCritChance(DamageClass.Throwing) += 7;
+        player.GetDamage(DamageClass.Generic) += 0.15f;
+        player.GetCritChance(DamageClass.Generic) += 7;
         player.manaCost -= 0.25f;
-        player.statDefense += 12;
         player.statLifeMax2 += 80;
         player.statManaMax2 += 80;
     }

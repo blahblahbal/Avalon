@@ -27,11 +27,7 @@ public class AdventuresandMishaps : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.statLifeMax2 += 60;
-        player.GetDamage(DamageClass.Magic) += 0.05f;
-        player.GetDamage(DamageClass.Summon) += 0.05f;
-        player.GetDamage(DamageClass.Melee) += 0.05f;
-        player.GetDamage(DamageClass.Ranged) += 0.05f;
-        player.GetDamage(DamageClass.Throwing) += 0.05f;
+        player.GetDamage(DamageClass.Generic) += 0.05f;
         player.manaCost -= 0.1f;
     }
 

@@ -20,6 +20,7 @@ class TheWorld : ModItem
         Item.width = dims.Width;
         Item.value = 250000;
         Item.height = dims.Height;
+        Item.defense = 18;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 8;
     }
@@ -27,12 +28,8 @@ class TheWorld : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetDamage(DamageClass.Generic) += 0.35f;
-        player.GetCritChance(DamageClass.Melee) += 20;
-        player.GetCritChance(DamageClass.Magic) += 20;
-        player.GetCritChance(DamageClass.Ranged) += 20;
-        player.GetCritChance(DamageClass.Throwing) += 20;
+        player.GetCritChance(DamageClass.Generic) += 20;
         player.manaCost -= 0.25f;
-        player.statDefense += 18;
         player.statLifeMax2 += 160;
         player.statManaMax2 += 260;
         player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 += 120;

@@ -835,7 +835,7 @@ Mods: {
 				DisplayName: Aeroforce Guardia
 				Tooltip:
 					'''
-					6% increased minion damage
+					6% increased summon damage
 					Increases your max number of minions by 1
 					[c/C39FDD:[10th Anniversary Contest Winner - Crabby][c/C39FDD:]]
 					'''
@@ -845,7 +845,7 @@ Mods: {
 				DisplayName: Aeroforce Protector
 				Tooltip:
 					'''
-					10% increased minion damage
+					10% increased summon damage
 					Increases your max number of minions by 1
 					[c/C39FDD:[10th Anniversary Contest Winner - Crabby][c/C39FDD:]]
 					'''
@@ -855,7 +855,7 @@ Mods: {
 				DisplayName: Aeroforce Leggings
 				Tooltip:
 					'''
-					4% increased minion damage
+					4% increased summon damage
 					20% increased movement acceleration and jump speed
 					[c/C39FDD:[10th Anniversary Contest Winner - Crabby][c/C39FDD:]]
 					'''
@@ -1214,7 +1214,6 @@ Mods: {
 					5% increased critical strike chance
 					20% decreased mana usage
 					25% chance to save ammo
-					10 defense
 					Increases maximum life by 100
 					Increases maximum mana by 100
 					'''
@@ -1228,7 +1227,6 @@ Mods: {
 					8% increased critical strike chance
 					10% decreased mana usage
 					20% chance to save ammo
-					11 defense
 					Increases maximum life by 80
 					Increases maximum mana by 140
 					'''
@@ -1242,7 +1240,6 @@ Mods: {
 					12% increased critical strike chance
 					20% decreased mana usage
 					30% chance to save ammo
-					14 defense
 					Increases maximum life by 100
 					Increases maximum mana by 200
 					Increases maximum stamina by 90
@@ -1271,7 +1268,6 @@ Mods: {
 					7% increased critical strike chance
 					25% decreased mana usage
 					20% chance to save ammo
-					12 defense
 					Increases maximum life by 80
 					Increases maximum mana by 80
 					'''
@@ -1307,7 +1303,7 @@ Mods: {
 					'''
 					3% increassed critical strike chance
 					5% decreased mana usage
-					8% increased minion damage
+					8% increased summon damage
 					5% increased minion knockback
 					'''
 			}
@@ -1338,7 +1334,7 @@ Mods: {
 
 			TheOasisRemembered: {
 				DisplayName: The Oasis Remembered
-				Tooltip: 20% increased minion damage and knockback
+				Tooltip: 20% increased summon damage and knockback
 			}
 
 			ThePlumHarvest: {
@@ -1348,7 +1344,7 @@ Mods: {
 
 			TheThreeScholars: {
 				DisplayName: The Three Scholars
-				Tooltip: 20 defense
+				Tooltip: ""
 			}
 
 			TheVoidlands: {
@@ -1370,7 +1366,6 @@ Mods: {
 					20% increased critical strike chance
 					25% decreased mana usage
 					30% chance to save ammo
-					18 defense
 					Increases maximum life by 160
 					Increases maximum mana by 260
 					Increases maximum stamina by 120
@@ -1392,7 +1387,7 @@ Mods: {
 				DisplayName: Tome of the River Spirits
 				Tooltip:
 					'''
-					15% increased magic and minion damage
+					15% increased magic and summon damage
 					5% decreased mana usage
 					'''
 			}
@@ -1401,7 +1396,7 @@ Mods: {
 				DisplayName: Tomorrow's Phoenix
 				Tooltip:
 					'''
-					8% increased minion damage
+					8% increased summon damage
 					5% increased minion knockback
 					'''
 			}
@@ -1412,7 +1407,6 @@ Mods: {
 					'''
 					Increases maximum life by 20
 					5% increased ranged damage
-					4 defense
 					'''
 			}
 
@@ -6414,7 +6408,7 @@ Mods: {
 
 			FleshCap: {
 				DisplayName: Flesh Cap
-				Tooltip: 10% increased minion damage
+				Tooltip: 10% increased summon damage
 			}
 
 			FleshWrappings: {
@@ -6951,7 +6945,7 @@ Mods: {
 				DisplayName: Summoner Scroll
 				Tooltip:
 					'''
-					17% increased minion damage
+					17% increased summon damage
 					Increases your max number of minions by 1
 					'''
 			}
@@ -6970,7 +6964,7 @@ Mods: {
 				Tooltip:
 					'''
 					Increases your max number of minions by 2
-					8% increased minion damage
+					8% increased summon damage
 					Increases armor penetration by 5
 					Grants immunity to knockback
 					'''
@@ -7033,7 +7027,7 @@ Mods: {
 					'''
 					Increases your max number of minions by 2
 					Increases your max number of sentries by 1
-					8% increased minion damage
+					8% increased summon damage
 					Increases armor penetration by 5
 					Provides immunity to traps, knockback, fire blocks, and fall damage
 					'''
@@ -8254,7 +8248,7 @@ Mods: {
 				DisplayName: Cordyceps Hat
 				Tooltip:
 					'''
-					Increases minion damage by 4%
+					Increases summon damage by 4%
 					Increases your max number of minions by 1
 					'''
 			}
@@ -8263,7 +8257,7 @@ Mods: {
 				DisplayName: Cordyceps Wrappings
 				Tooltip:
 					'''
-					Increases minion damage by 4%
+					Increases summon damage by 4%
 					Increases your max number of minions by 1
 					'''
 			}
@@ -8272,7 +8266,7 @@ Mods: {
 				DisplayName: Cordyceps Leggings
 				Tooltip:
 					'''
-					Increases minion damage by 4%
+					Increases summon damage by 4%
 					Increases your max number of minions by 1
 					'''
 			}
@@ -9176,7 +9170,7 @@ Mods: {
 
 			SkyBlessing: {
 				DisplayName: Blessing of the Sky
-				Description: "Minion damage is increased by "
+				Description: "Summon damage is increased by "
 			}
 
 			Lacerated: {

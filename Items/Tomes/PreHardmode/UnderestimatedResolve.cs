@@ -20,6 +20,7 @@ class UnderestimatedResolve : ModItem
         Item.width = dims.Width;
         Item.value = 20000;
         Item.height = dims.Height;
+        Item.defense = 4;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 1;
     }
@@ -28,7 +29,6 @@ class UnderestimatedResolve : ModItem
     {
         player.statLifeMax2 += 20;
         player.GetDamage(DamageClass.Ranged) += 0.05f;
-        player.statDefense += 4;
     }
 
     public override void AddRecipes()

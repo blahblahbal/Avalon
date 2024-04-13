@@ -21,23 +21,16 @@ class CreatorsTome : ModItem
         Item.width = dims.Width;
         Item.value = 150000;
         Item.height = dims.Height;
+        Item.defense = 10;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 4;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Magic) += 0.2f;
-        player.GetDamage(DamageClass.Summon) += 0.2f;
-        player.GetDamage(DamageClass.Melee) += 0.2f;
-        player.GetDamage(DamageClass.Ranged) += 0.2f;
-        player.GetDamage(DamageClass.Throwing) += 0.2f;
-        player.GetCritChance(DamageClass.Melee) += 5;
-        player.GetCritChance(DamageClass.Magic) += 5;
-        player.GetCritChance(DamageClass.Ranged) += 5;
-        player.GetCritChance(DamageClass.Throwing) += 5;
+        player.GetDamage(DamageClass.Generic) += 0.2f;
+        player.GetCritChance(DamageClass.Generic) += 5;
         player.manaCost -= 0.2f;
-        player.statDefense += 10;
         player.statLifeMax2 += 100;
         player.statManaMax2 += 100;
     }

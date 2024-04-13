@@ -26,15 +26,8 @@ class TheVoidlands : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Magic) += 0.15f;
-        player.GetDamage(DamageClass.Summon) += 0.15f;
-        player.GetDamage(DamageClass.Melee) += 0.15f;
-        player.GetDamage(DamageClass.Ranged) += 0.15f;
-        player.GetDamage(DamageClass.Throwing) += 0.15f;
-        player.GetCritChance(DamageClass.Melee) += 3;
-        player.GetCritChance(DamageClass.Magic) += 3;
-        player.GetCritChance(DamageClass.Ranged) += 3;
-        player.GetCritChance(DamageClass.Throwing) += 3;
+        player.GetDamage(DamageClass.Generic) += 0.15f;
+        player.GetCritChance(DamageClass.Generic) += 3;
         player.statLifeMax2 += 60;
         player.statManaMax2 += 40;
     }

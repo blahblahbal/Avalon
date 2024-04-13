@@ -27,10 +27,7 @@ public class SoutheasternPeacock : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetCritChance(DamageClass.Melee) += 3;
-        player.GetCritChance(DamageClass.Ranged) += 3;
-        player.GetCritChance(DamageClass.Throwing) += 3;
-        player.GetCritChance(DamageClass.Magic) += 3;
+        player.GetCritChance(DamageClass.Generic) += 3;
         player.GetKnockback(DamageClass.Summon) += 0.05f;
         player.GetDamage(DamageClass.Summon) += 0.08f;
     }

@@ -19,23 +19,16 @@ class Dominance : ModItem
         Item.width = dims.Width;
         Item.value = 250000;
         Item.height = dims.Height;
+        Item.defense = 11;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 6;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Magic) += 0.22f;
-        player.GetDamage(DamageClass.Summon) += 0.22f;
-        player.GetDamage(DamageClass.Melee) += 0.22f;
-        player.GetDamage(DamageClass.Ranged) += 0.22f;
-        player.GetDamage(DamageClass.Throwing) += 0.22f;
-        player.GetCritChance(DamageClass.Melee) += 8;
-        player.GetCritChance(DamageClass.Magic) += 8;
-        player.GetCritChance(DamageClass.Ranged) += 8;
-        player.GetCritChance(DamageClass.Throwing) += 8;
+        player.GetDamage(DamageClass.Generic) += 0.22f;
+        player.GetCritChance(DamageClass.Generic) += 8;
         player.manaCost -= 0.1f;
-        player.statDefense += 11;
         player.statLifeMax2 += 80;
         player.statManaMax2 += 140;
     }

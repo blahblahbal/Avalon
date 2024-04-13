@@ -19,13 +19,9 @@ class TheThreeScholars : ModItem
         Item.width = dims.Width;
         Item.value = 150000;
         Item.height = dims.Height;
+        Item.defense = 20;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 5;
-    }
-
-    public override void UpdateAccessory(Player player, bool hideVisual)
-    {
-        player.statDefense += 20;
     }
 
     //public override void AddRecipes()
