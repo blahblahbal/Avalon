@@ -26,7 +26,7 @@ class TheHeavenlyScent : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.lifeRegen += 2;
+        player.lifeRegen += 4;
     }
 
     public override void AddRecipes()

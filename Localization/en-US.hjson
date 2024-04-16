@@ -707,7 +707,7 @@ Mods: {
 				Tooltip:
 					'''
 					Launches homing blahckets
-					75% chance to not consume ammo
+					75% chance to save ammo
 					Blahckets will not destroy tiles
 					'''
 			}
@@ -1198,7 +1198,7 @@ Mods: {
 
 			ChantoftheWaterDragon: {
 				DisplayName: Chant of the Water Dragon
-				Tooltip: +20% magic damage
+				Tooltip: 20% increased magic damage
 			}
 
 			ChristmasTome: {
@@ -1278,7 +1278,7 @@ Mods: {
 				Tooltip:
 					'''
 					5% increased magic damage
-					-10% decreased mana usage
+					10% decreased mana usage
 					Increases maximum mana by 60
 					'''
 			}
@@ -1301,7 +1301,7 @@ Mods: {
 				DisplayName: Southeastern Peacock
 				Tooltip:
 					'''
-					3% increassed critical strike chance
+					3% increased critical strike chance
 					5% decreased mana usage
 					8% increased summon damage
 					5% increased minion knockback
@@ -1329,7 +1329,7 @@ Mods: {
 
 			TheHeavenlyScent: {
 				DisplayName: The Heavenly Scent
-				Tooltip: +2 life regen
+				Tooltip: Regenerates life
 			}
 
 			TheOasisRemembered: {
@@ -1339,7 +1339,7 @@ Mods: {
 
 			ThePlumHarvest: {
 				DisplayName: The Plum Harvest
-				Tooltip: 30% chance to not consume ammo
+				Tooltip: 30% chance to save ammo
 			}
 
 			TheThreeScholars: {
@@ -2727,7 +2727,7 @@ Mods: {
 
 			RoguePotion: {
 				DisplayName: Rogue Potion
-				Tooltip: -5% ranged damage, 20% chance to not consume ammo
+				Tooltip: -5% ranged damage, 20% chance to save ammo
 			}
 
 			ShadowPotion: {
@@ -2777,7 +2777,7 @@ Mods: {
 
 			AdvAmmoReservationPotion: {
 				DisplayName: Ammo Reservation Elixir
-				Tooltip: 30% chance to not consume ammo
+				Tooltip: 30% chance to save ammo
 			}
 
 			AdvArcheryPotion: {
@@ -2957,7 +2957,7 @@ Mods: {
 
 			AdvRoguePotion: {
 				DisplayName: Rogue Elixir
-				Tooltip: -5% ranged damage, 25% chance to not consume ammo
+				Tooltip: -5% ranged damage, 25% chance to save ammo
 			}
 
 			AdvShadowPotion: {
@@ -6495,7 +6495,7 @@ Mods: {
 				Tooltip:
 					'''
 					7% increased ranged damage
-					10% chance to not consume ammo
+					10% chance to save ammo
 					'''
 			}
 
@@ -6724,7 +6724,7 @@ Mods: {
 				Tooltip:
 					'''
 					9% increased ranged damage
-					15% chance to not consume ammo
+					15% chance to save ammo
 					'''
 			}
 
@@ -9255,7 +9255,7 @@ Mods: {
 
 			Rogue: {
 				DisplayName: Rogue
-				Description: -3% ranged damage, 20% chance to not consume ammo
+				Description: -3% ranged damage, 20% chance to save ammo
 			}
 
 			Shadows: {
@@ -9305,7 +9305,7 @@ Mods: {
 
 			AdvAmmoReservation: {
 				DisplayName: Advanced Ammo Reservation
-				Description: 30% chance to not consume ammo
+				Description: 30% chance to save ammo
 			}
 
 			AdvArchery: {
@@ -9485,7 +9485,7 @@ Mods: {
 
 			AdvRogue: {
 				DisplayName: Advanced Rogue
-				Description: -5% ranged damage, 25% chance to not consume ammo
+				Description: -5% ranged damage, 25% chance to save ammo
 			}
 
 			AdvShadow: {
