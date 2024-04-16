@@ -19,7 +19,7 @@ public class Catalyzer : ModTile
         TileObjectData.newTile.LavaDeath = false;
         TileObjectData.addTile(Type);
         Main.tileLighted[Type] = true;
-        DustType = DustID.Stone;
+        DustType = -1;
     }
 
     public override void AnimateTile(ref int frame, ref int frameCounter)
@@ -29,7 +29,7 @@ public class Catalyzer : ModTile
         {
             frameCounter = 0;
             frame++;
-            if (frame >= 12) frame = 0;
+            if (frame >= 6) frame = 0;
         }
     }
 
