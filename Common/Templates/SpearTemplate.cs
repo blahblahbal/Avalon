@@ -51,7 +51,7 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
         }
 
         // Move the projectile from the HoldoutRangeMin to the HoldoutRangeMax and back, using SmoothStep for easing the movement
-        Projectile.Center = player.MountedCenter + Vector2.Lerp(Projectile.velocity * HoldoutRangeMin, Projectile.velocity * HoldoutRangeMax, progress);
+        Projectile.Center = player.RotatedRelativePoint(player.MountedCenter) + Vector2.Lerp(Projectile.velocity * HoldoutRangeMin, Projectile.velocity * HoldoutRangeMax, progress);
         // Apply proper rotation to the sprite.
         if (Projectile.spriteDirection == -1)
         {
@@ -136,7 +136,7 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
         //    float num5 = Utils.Remap(num4, 0f, 0.3f, 0f, 1f) * Utils.Remap(num4, 0.3f, 1f, 1f, 0f);
         //    num5 = 1f - (1f - num5) * (1f - num5);
         //    Vector2 vector3 = extensionBox.Center.ToVector2() + new Vector2(0f, proj.gfxOffY);
-        //    Vector2.Lerp(player.MountedCenter, vector3, 1.1f);
+        //    Vector2.Lerp(player.RotatedRelativePoint(player.MountedCenter), vector3, 1.1f);
         //    Texture2D value2 = TextureAssets.Extra[98].Value;
         //    Vector2 origin = value2.Size() / 2f;
         //    color = new Microsoft.Xna.Framework.Color(255, 255, 255, 0) * 0.5f;
@@ -162,10 +162,10 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
         //    }
         //    Main.EntitySpriteDraw(value2, Vector2.Lerp(vector3, vector2, 0.5f) - Main.screenPosition, null, color * num5, num6, origin, new Vector2(num5 * num3, num3) * proj.scale * num3, dir);
         //    Main.EntitySpriteDraw(value2, Vector2.Lerp(vector3, vector2, 1f) - Main.screenPosition, null, color * num5, num6, origin, new Vector2(num5 * num3, num3 * 1.5f) * proj.scale * num3, dir);
-        //    Main.EntitySpriteDraw(value2, Vector2.Lerp(player.MountedCenter, vector2, num4 * 1.5f - 0.5f) - Main.screenPosition + new Vector2(0f, 2f), null, color * num5, num6, origin, new Vector2(num5 * num3 * 1f * num5, num3 * 2f * num5) * proj.scale * num3, dir);
+        //    Main.EntitySpriteDraw(value2, Vector2.Lerp(player.RotatedRelativePoint(player.MountedCenter), vector2, num4 * 1.5f - 0.5f) - Main.screenPosition + new Vector2(0f, 2f), null, color * num5, num6, origin, new Vector2(num5 * num3 * 1f * num5, num3 * 2f * num5) * proj.scale * num3, dir);
         //    for (float num7 = 0.4f; num7 <= 1f; num7 += 0.1f)
         //    {
-        //        Vector2 vector4 = Vector2.Lerp(player.MountedCenter, vector3, num7 + 0.2f);
+        //        Vector2 vector4 = Vector2.Lerp(player.RotatedRelativePoint(player.MountedCenter), vector3, num7 + 0.2f);
         //        Main.EntitySpriteDraw(value2, vector4 - Main.screenPosition + new Vector2(0f, 2f), null, color * num5 * 0.75f * num7, num6, origin, new Vector2(num5 * num3 * 1f * num5, num3 * 2f * num5) * proj.scale * num3, dir);
         //    }
         //    extensionBox.Offset((int)(0f - Main.screenPosition.X), (int)(0f - Main.screenPosition.Y));
@@ -220,7 +220,7 @@ public abstract class SpearTemplate2 : ModProjectile // Thanks example mod ! ! !
         }
 
         // Move the projectile from the HoldoutRangeMin to the HoldoutRangeMax and back, using SmoothStep for easing the movement
-        Projectile.Center = player.MountedCenter + Vector2.SmoothStep(Projectile.velocity * HoldoutRangeMin, Projectile.velocity * HoldoutRangeMax, progress);
+        Projectile.Center = player.RotatedRelativePoint(player.MountedCenter) + Vector2.SmoothStep(Projectile.velocity * HoldoutRangeMin, Projectile.velocity * HoldoutRangeMax, progress);
         // Apply proper rotation to the sprite.
         if (Projectile.spriteDirection == -1)
         {

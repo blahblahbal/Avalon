@@ -56,8 +56,8 @@ public static class SushiRecipes
         #endregion Snow
 
         #region Space
-        Recipe.Create(ModContent.ItemType<MoonplateBlock>(), 40).AddIngredient(imk.Find<ModItem>("PreHardmodeSpaceToken").Type).AddIngredient(ItemID.PlatinumOre).AddTile(TileID.TinkerersWorkbench).Register();
-        Recipe.Create(ModContent.ItemType<DuskplateBlock>(), 40).AddIngredient(imk.Find<ModItem>("PreHardmodeSpaceToken").Type).AddIngredient(ModContent.ItemType<BismuthOre>()).AddTile(TileID.TinkerersWorkbench).Register();
+        Recipe.Create(ModContent.ItemType<MoonplateBlock>(), 40).AddIngredient(imk.Find<ModItem>("PreHardmodeSpaceToken").Type).AddIngredient(ItemID.PlatinumOre).AddTile(TileID.TinkerersWorkbench).DisableDecraft().Register();
+        Recipe.Create(ModContent.ItemType<DuskplateBlock>(), 40).AddIngredient(imk.Find<ModItem>("PreHardmodeSpaceToken").Type).AddIngredient(ModContent.ItemType<BismuthOre>()).AddTile(TileID.TinkerersWorkbench).DisableDecraft().Register();
         #endregion Space
 
         #region Goblins

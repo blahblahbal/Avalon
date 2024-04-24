@@ -9650,7 +9650,7 @@ Mods: {
 
 			BacterialEndurance: {
 				DisplayName: Bacterial Endurance
-				Description: Thorns effect and increased damage and jump speed
+				Description: Damage increased by 8
 			}
 
 			Pathogen: {

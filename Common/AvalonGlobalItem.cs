@@ -63,6 +63,8 @@ public class AvalonGlobalItem : GlobalItem
     };
     public override void SetStaticDefaults()
     {
+        #region Shimmer
+        // ores
         ItemID.Sets.ShimmerTransformToItem[ItemID.ChlorophyteOre] = ModContent.ItemType<TroxiniumOre>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<TroxiniumOre>()] = ItemID.TitaniumOre;
         ItemID.Sets.ShimmerTransformToItem[ItemID.AdamantiteOre] = ModContent.ItemType<NaquadahOre>();
@@ -80,15 +82,94 @@ public class AvalonGlobalItem : GlobalItem
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<NickelOre>()] = ItemID.LeadOre;
         ItemID.Sets.ShimmerTransformToItem[ItemID.IronOre] = ModContent.ItemType<BronzeOre>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BronzeOre>()] = ItemID.TinOre;
+        // end ores
+
+        ItemID.Sets.ShimmerTransformToItem[ItemID.CrimstoneBlock] = ModContent.ItemType<ChunkstoneBlock>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ChunkstoneBlock>()] = ItemID.EbonstoneBlock;
 
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>()] = ItemID.Wood;
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Coughwood>()] = ItemID.Wood;
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>()] = ItemID.Wood;
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ResistantWood>()] = ItemID.Wood;
 
+        // weapons
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<DesertLongsword>()] = ItemID.AntlionClaw;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.AntlionClaw] = ModContent.ItemType<DesertLongsword>();
+
+        //ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientDartRifle>()] = ItemID.DartRifle;
+        //ItemID.Sets.ShimmerTransformToItem[ItemID.DartRifle] = ModContent.ItemType<AncientDartRifle>();
+
+        //ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientDartPistol>()] = ItemID.DartPistol;
+        //ItemID.Sets.ShimmerTransformToItem[ItemID.DartPistol] = ModContent.ItemType<AncientDartPistol>();
+
+        //ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientDartShotgun>()] = ModContent.ItemType<DartShotgun>();
+        //ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<DartShotgun>()] = ModContent.ItemType<AncientDartShotgun>();
+        // end weapons
+
+        // misc items
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<StaminaCrystal>()] = ModContent.ItemType<EnergyCrystal>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<UnstableCatalyzer>()] = ModContent.ItemType<Items.Placeable.Crafting.Catalyzer>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ContagionKey>()] = ModContent.ItemType<ContagionChest>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<PlagueCrate>()] = ModContent.ItemType<ContagionCrate>();
+
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Zircon>()] = ModContent.ItemType<Peridot>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Peridot>()] = ModContent.ItemType<Tourmaline>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Tourmaline>()] = ItemID.Diamond;
+
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>()] = ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>();
+        // end misc items
+
+        // dungeon bricks
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.YellowBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientYellowBrick>();
+        // end dungeon bricks
+
+        // equipment
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ArgusLantern>()] = ItemID.MagicLantern;
+        ItemID.Sets.ShimmerTransformToItem[ItemID.MagicLantern] = ModContent.ItemType<ArgusLantern>();
+
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<HiddenBlade>()] = ModContent.ItemType<AmmoMagazine>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AmmoMagazine>()] = ModContent.ItemType<HiddenBlade>();
+
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<GreekExtinguisher>()] = ModContent.ItemType<GoldenShield>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<GoldenShield>()] = ModContent.ItemType<SurgicalMask>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<SurgicalMask>()] = ModContent.ItemType<GreekExtinguisher>();
+        // end equipment
+
+        // ambrosia
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Blackberry>()] = ItemID.Ambrosia;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Durian>()] = ItemID.Ambrosia;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Mangosteen>()] = ItemID.Ambrosia;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Medlar>()] = ItemID.Ambrosia;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Raspberry>()] = ItemID.Ambrosia;
+        // end ambrosia
+
+        // music boxes
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxArmageddonSlime>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxBacteriumPrime>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxContagion>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxDarkMatter>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxDesertBeak>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxDesertBeakOtherworldly>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxHellCastle>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxPhantasm>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxSkyFortress>()] = ItemID.MusicBox;
+        //ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxTropics>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxTuhrtlOutpost>()] = ItemID.MusicBox;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxUndergroundContagion>()] = ItemID.MusicBox;
+        // end music boxes
+
+        // torches
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BrownTorch>()] = ItemID.ShimmerTorch;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<CyanTorch>()] = ItemID.ShimmerTorch;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<LimeTorch>()] = ItemID.ShimmerTorch;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ContagionTorch>()] = ItemID.ShimmerTorch;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<PathogenTorch>()] = ItemID.ShimmerTorch;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<SlimeTorch>()] = ItemID.ShimmerTorch;
+        // end torches
+        #endregion Shimmer
+
         Item.staff[ItemID.Vilethorn] = true;
     }
     public override bool CanRightClick(Item item)
@@ -273,74 +354,6 @@ public class AvalonGlobalItem : GlobalItem
         }
         return base.IsAnglerQuestAvailable(type);
     }
-    public override void AddRecipes()
-    {
-        // --== Shimmer!!! ==--
-
-        ShimmerTransmuteBothWays(ItemID.AntlionClaw, ModContent.ItemType<DesertLongsword>());
-
-        //ShimmerTransmuteBothWays(ItemID.DartRifle, ModContent.ItemType<AncientDartRifle>());
-        //ShimmerTransmuteBothWays(ItemID.DartPistol, ModContent.ItemType<AncientDartPistol>());
-        //ShimmerTransmuteBothWays(ModContent.ItemType<DartShotgun>(), ModContent.ItemType<AncientDartShotgun>());
-
-        ShimmerTransmuteBothWays(ModContent.ItemType<ArgusLantern>(), ItemID.MagicLantern);
-
-        ShimmerTransmute(ModContent.ItemType<StaminaCrystal>(), ModContent.ItemType<EnergyCrystal>());
-
-        ShimmerTransmute(ModContent.ItemType<Items.Other.UnstableCatalyzer>(), ModContent.ItemType<Items.Placeable.Crafting.Catalyzer>());
-
-        ShimmerTransmute(ModContent.ItemType<Items.Other.ContagionKey>(), ModContent.ItemType<Items.Placeable.Furniture.ContagionChest>());
-
-        ShimmerTransmute(ModContent.ItemType<Zircon>(), ModContent.ItemType<Peridot>());
-        ShimmerTransmute(ModContent.ItemType<Peridot>(), ModContent.ItemType<Tourmaline>());
-        ShimmerTransmute(ModContent.ItemType<Tourmaline>(), ItemID.Diamond);
-
-        // Dungeon bricks
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>());
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Tile.YellowBrick>(), ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientYellowBrick>());
-
-        // misc items
-        ShimmerTransmuteBothWays(ModContent.ItemType<HiddenBlade>(), ModContent.ItemType<AmmoMagazine>());
-        ShimmerTransmute(ModContent.ItemType<PlagueCrate>(), ModContent.ItemType<ContagionCrate>());
-        ShimmerTransmute(ModContent.ItemType<GreekExtinguisher>(), ModContent.ItemType<GoldenShield>());
-        ShimmerTransmute(ModContent.ItemType<GoldenShield>(), ModContent.ItemType<SurgicalMask>());
-        ShimmerTransmute(ModContent.ItemType<SurgicalMask>(), ModContent.ItemType<GreekExtinguisher>());
-
-        // ambrosia
-        ShimmerTransmute(ModContent.ItemType<Blackberry>(), ItemID.Ambrosia);
-        ShimmerTransmute(ModContent.ItemType<Durian>(), ItemID.Ambrosia);
-        ShimmerTransmute(ModContent.ItemType<Mangosteen>(), ItemID.Ambrosia);
-        ShimmerTransmute(ModContent.ItemType<Medlar>(), ItemID.Ambrosia);
-        ShimmerTransmute(ModContent.ItemType<Raspberry>(), ItemID.Ambrosia);
-        // end ambrosia
-
-        // music boxes
-        ShimmerTransmute(ModContent.ItemType<MusicBoxArmageddonSlime>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxBacteriumPrime>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxContagion>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxDarkMatter>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxDesertBeak>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxDesertBeakOtherworldly>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxHellCastle>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxPhantasm>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxSkyFortress>(), ItemID.MusicBox);
-        //ShimmerTransmute(ModContent.ItemType<MusicBoxTropics>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxTuhrtlOutpost>(), ItemID.MusicBox);
-        ShimmerTransmute(ModContent.ItemType<MusicBoxUndergroundContagion>(), ItemID.MusicBox);
-        // end music boxes
-
-        // torches
-        ShimmerTransmute(ModContent.ItemType<BrownTorch>(), ItemID.ShimmerTorch);
-        ShimmerTransmute(ModContent.ItemType<CyanTorch>(), ItemID.ShimmerTorch);
-        ShimmerTransmute(ModContent.ItemType<LimeTorch>(), ItemID.ShimmerTorch);
-        ShimmerTransmute(ModContent.ItemType<ContagionTorch>(), ItemID.ShimmerTorch);
-        ShimmerTransmute(ModContent.ItemType<PathogenTorch>(), ItemID.ShimmerTorch);
-        ShimmerTransmute(ModContent.ItemType<SlimeTorch>(), ItemID.ShimmerTorch);
-        // end torches
-
-        ShimmerTransmute(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>(), ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>());
-    }
     public override void ExtractinatorUse(int extractType, int extractinatorBlockType, ref int resultType, ref int resultStack)
     {
         if (extractType == 0 || extractType == ItemID.DesertFossil)
@@ -423,13 +436,6 @@ public class AvalonGlobalItem : GlobalItem
             }
         }
     }
-    public void ShimmerTransmute(int From, int To)
-    {
-        Recipe ShimmerTransmute = Recipe.Create(From);
-        ShimmerTransmute.AddCustomShimmerResult(To);
-        ShimmerTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        ShimmerTransmute.Register();
-    }
     public override void ModifyWeaponCrit(Item item, Player player, ref float crit)
     {
         Item curItem = item;
@@ -501,17 +507,6 @@ public class AvalonGlobalItem : GlobalItem
                 crit = (int)cRanged;
             }
         }
-    }
-    public void ShimmerTransmuteBothWays(int From, int To)
-    {
-        Recipe ShimmerTransmute = Recipe.Create(From);
-        ShimmerTransmute.AddCustomShimmerResult(To);
-        ShimmerTransmute.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        ShimmerTransmute.Register();
-        Recipe ShimmerTransmute2 = Recipe.Create(To);
-        ShimmerTransmute2.AddCustomShimmerResult(From);
-        ShimmerTransmute2.AddCondition(ShimmerCraftCondition.ShimmerOnly);
-        ShimmerTransmute2.Register();
     }
     public override void HoldItem(Item item, Player player)
     {
