@@ -59,10 +59,16 @@ public class EnergyLaser : ModProjectile
         {
             Projectile.Kill();
         }
+        // fix to the laser not rendering if fired near the edges of the world, PROBABLY won't have issues with world size mods but... idk
+        if (Projectile.position.X <= 16 || Projectile.position.X >= (Main.maxTilesX - 1) * 16 || Projectile.position.Y <= 16 || Projectile.position.Y >= (Main.maxTilesY - 1) * 16)
+        {
+            Projectile.velocity = Vector2.Zero;
+        }
     }
 
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
+        Projectile.damage = (int)(Projectile.damage * 0.9f);
         if (Main.rand.NextBool(6))
             target.AddBuff(BuffID.OnFire3, 60 * 3);
         ParticleSystem.AddParticle(new EnergyRevolverParticle(), Projectile.Center, default, new Color(64, 128, 255, 0), 0, Main.rand.NextFloat(0.9f,1.1f), 14);
