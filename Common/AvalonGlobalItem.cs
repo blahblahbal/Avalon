@@ -3,6 +3,7 @@ using Avalon.DropConditions;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Ammo;
+using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Food;
 using Avalon.Items.Material;
@@ -135,6 +136,13 @@ public class AvalonGlobalItem : GlobalItem
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<GreekExtinguisher>()] = ModContent.ItemType<GoldenShield>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<GoldenShield>()] = ModContent.ItemType<SurgicalMask>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<SurgicalMask>()] = ModContent.ItemType<GreekExtinguisher>();
+
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<RhodiumHeadgear>()] = ModContent.ItemType<AncientTitaniumHeadgear>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientTitaniumHeadgear>()] = ModContent.ItemType<RhodiumHeadgear>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<RhodiumPlateMail>()] = ModContent.ItemType<AncientTitaniumPlateMail>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientTitaniumPlateMail>()] = ModContent.ItemType<RhodiumPlateMail>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<RhodiumGreaves>()] = ModContent.ItemType<AncientTitaniumGreaves>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientTitaniumGreaves>()] = ModContent.ItemType<RhodiumGreaves>();
         // end equipment
 
         // ambrosia

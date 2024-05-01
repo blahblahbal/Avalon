@@ -14,7 +14,7 @@ class IridiumPants : ModItem
         Item.defense = 8;
         Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 0, 9, 75);
+        Item.value = Item.sellPrice(0, 1, 20, 0);
         Item.height = dims.Height;
     }
     public override void UpdateEquip(Player player)

@@ -21,6 +21,7 @@ public class IckyAltar : ModTile
         Main.tileFrameImportant[Type] = true;
         AdjTiles = new int[] { TileID.DemonAltar };
         TileID.Sets.PreventsTileRemovalIfOnTopOfIt[Type] = true;
+        TileID.Sets.PreventsSandfall[Type] = true;
         TileID.Sets.InteractibleByNPCs[Type] = true;
         HitSound = SoundID.NPCDeath1;
     }
