@@ -7,6 +7,6 @@ public class AmberShardBuff : ModBuff
 {
     public override void Update(Player player, ref int buffIndex)
     {
-        player.GetAttackSpeed(DamageClass.Generic) += 0.15f;
+        player.GetAttackSpeed(DamageClass.Generic) += 0.55f;
     }
 }
