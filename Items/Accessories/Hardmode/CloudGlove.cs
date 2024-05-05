@@ -85,7 +85,7 @@ public class CloudGloveBuilderToggle : BuilderToggle
     {
         return CurrentState == 0 ? OnText.Value : OffText.Value;
     }
-    public override Color DisplayColorTexture()
+    public override Color DisplayColorTexture()/* tModPorter Note: Removed. Use BuilderToggle.Draw */
     {
         return CurrentState == 0 ? Color.White : new Color(100, 100, 100);
     }
