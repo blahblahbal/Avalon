@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using Avalon.Common.Players;
 using Avalon.Systems;
@@ -39,8 +40,10 @@ public class AccelerationDrill : ModItem
     }
     public override void HoldItem(Player player)
     {
+
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
+
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
             int pfix = Item.prefix;
             Item.ChangeItemType(ModContent.ItemType<AccelerationDrillSpeed>());
@@ -57,6 +60,7 @@ public class AccelerationDrill : ModItem
                 }
             }
         }
+
     }
 }
 
