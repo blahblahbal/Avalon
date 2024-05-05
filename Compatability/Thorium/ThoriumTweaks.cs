@@ -1,6 +1,7 @@
 using Avalon.Compatability.Thorium.Items.Accessories;
 using Avalon.Compatability.Thorium.Items.Placeable.Tile;
 using Avalon.Compatability.Thorium.Items.Potions;
+using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Herbs;
@@ -14,12 +15,17 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using ThoriumMod;
+using ThoriumMod.Items;
 using ThoriumMod.Items.BardItems;
+using ThoriumMod.Items.BasicAccessories;
+using ThoriumMod.Items.BossThePrimordials.Omni;
 using ThoriumMod.Items.Consumable;
 using ThoriumMod.Items.Depths;
 using ThoriumMod.Items.Donate;
 using ThoriumMod.Items.HealerItems;
 using ThoriumMod.Items.Misc;
+using ThoriumMod.Items.Placeable;
 using ThoriumMod.Items.Thorium;
 using ThoriumMod.Items.ThrownItems;
 using ThoriumMod.NPCs;
@@ -329,6 +335,28 @@ public class ThoriumTweaksRecipeSystem : ModSystem
             .AddIngredient(ModContent.ItemType<LifeQuartz>())
             .AddTile(TileID.Furnaces)
             .Register();
+
+        Recipe.Create(ModContent.ItemType<DecorativeDish>(), 2)
+            .AddIngredient(ItemID.ClayBlock, 5)
+            .AddIngredient(ModContent.ItemType<YuckyBit>())
+            .Register();
+
+        // ACCESSORIES
+        Recipe.Create(ModContent.ItemType<FearMonger>())
+            .AddIngredient(ModContent.ItemType<ThePill>())
+            .AddIngredient(ModContent.ItemType<PurifiedShards>(), 10)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+        // END ACCESSORIES
+
+        // THORIUM DONATOR ITEMS
+        Recipe donatorRecipe = ThoriumItem.GetDonatorRecipe(() => ThoriumConfigServer.Instance.donatorAccessories.togglePlagueLordsFlask, ModContent.ItemType<PlagueLordFlask>());
+            donatorRecipe.AddIngredient(ModContent.ItemType<YuckyBit>(), 20);
+            donatorRecipe.AddIngredient(ModContent.ItemType<DeathEssence>(), 3);
+            donatorRecipe.AddIngredient(ItemID.BottledWater);
+            donatorRecipe.AddTile(TileID.ImbuingStation);
+            donatorRecipe.Register();
+        // END THORIUM DONATOR ITEMS
     }
     public override void PostAddRecipes()
     {
