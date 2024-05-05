@@ -76,7 +76,6 @@ public class AccelerationPickaxeSpeed : ModItem
         Item.damage = 28;
         Item.autoReuse = true;
         Item.scale = 1f;
-        Item.pick = 400;
         Item.rare = ModContent.RarityType<Rarities.DarkGreenRarity>();
         Item.width = dims.Width;
         Item.useTime = 12;
