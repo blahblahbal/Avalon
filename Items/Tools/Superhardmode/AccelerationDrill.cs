@@ -72,7 +72,6 @@ public class AccelerationDrillSpeed : ModItem
         Item.channel = true;
         Item.scale = 1f;
         Item.shootSpeed = 32f;
-        Item.pick = 400;
         Item.rare = ModContent.RarityType<Rarities.DarkGreenRarity>();
         Item.noMelee = true;
         Item.width = dims.Width;
