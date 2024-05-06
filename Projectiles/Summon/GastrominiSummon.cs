@@ -91,7 +91,7 @@ public abstract class GastrominiSummon : ModProjectile
             if (nPC5.active && !nPC5.dontTakeDamage && !nPC5.friendly && nPC5.lifeMax > 5)
             {
                 var num824 = Vector2.Distance(nPC5.Center, Projectile.Center);
-                if (((Vector2.Distance(Projectile.Center, vector57) > num824 && num824 < num822)) && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, nPC5.position, nPC5.width, nPC5.height))
+                if (num824 < num822 && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, nPC5.position, nPC5.width, nPC5.height))
                 {
                     num822 = num824;
                     vector57 = nPC5.Center;
