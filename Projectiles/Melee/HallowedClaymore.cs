@@ -5,11 +5,14 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-
+using Avalon.Items.Weapons.Melee.Hardmode;
+using System.Runtime.CompilerServices;
+using Terraria.GameContent.Drawing;
 namespace Avalon.Projectiles.Melee;
 
 public class HallowedClaymore : ModProjectile
 {
+    
     public override void SetStaticDefaults()
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
@@ -27,7 +30,7 @@ public class HallowedClaymore : ModProjectile
         Projectile.friendly = true;
         Projectile.penetrate = -1;
         Projectile.tileCollide = false;
-        Projectile.scale = 1f;
+        Projectile.scale = 1;
         Projectile.ownerHitCheck = true;
         Projectile.usesLocalNPCImmunity = true;
         Projectile.localNPCHitCooldown = -1;
@@ -38,18 +41,22 @@ public class HallowedClaymore : ModProjectile
     public float swordVel;
     public float speed = MathF.PI * 1.5f;
     public float posY;
-    public float scaleMult = 1.35f; // set this to same as in the item file
+    public float scaleMult = 3; // set this to same as in the item file
+    public float direction;
+    public int maxTime;
     public override void AI()
     {
+        //I basically used scaleMult as a way to check if this is a combo swing
+        scaleMult = Projectile.ai[0];
         if (player.dead) Projectile.Kill();
         Vector2 toMouse = Vector2.Zero;
         player.heldProj = Projectile.whoAmI;
 
         if (firstFrame)
         {
-            SwingSpeed = player.HeldItem.useAnimation;
-            Projectile.timeLeft = SwingSpeed;
-
+            SwingSpeed = player.HeldItem.useAnimation * (int)Projectile.ai[1] / 2;
+            Projectile.timeLeft = maxTime = SwingSpeed;
+            direction = player.direction;
             toMouse = Vector2.Normalize(Main.MouseWorld - player.MountedCenter) * player.direction;
             posY = player.Center.Y - Projectile.Center.Y;
             posY = MathF.Sign(posY);
@@ -60,21 +67,21 @@ public class HallowedClaymore : ModProjectile
             firstFrame = false;
         }
 
-        swingRadius = swingRadius.RotatedBy(speed * swordVel / SwingSpeed * player.direction * posY);
+        swingRadius = swingRadius.RotatedBy(speed * swordVel / SwingSpeed * direction * posY * 2);
 
-        if (Projectile.timeLeft < 20)
+        if (Projectile.timeLeft < Projectile.timeLeft/2)
         {
-            Projectile.scale *= 0.99f;
+            Projectile.scale *= 0.5f;
             swingRadius *= 0.98f;
         }
 
-        swordVel = MathHelper.Lerp(0f, 2f, Projectile.timeLeft / (float)SwingSpeed);
+        swordVel = MathHelper.Lerp(0f, 2f, (Projectile.timeLeft > maxTime * 0.2f ? Projectile.timeLeft - maxTime * 0.2f: 0) / (float)SwingSpeed);
         Vector2 HandPosition = player.RotatedRelativePoint(player.MountedCenter) + new Vector2(player.direction * -4f, 0);
         Projectile.Center = swingRadius + HandPosition;
 
         Projectile.rotation = Vector2.Normalize(Projectile.Center - HandPosition).ToRotation() + (45 * (MathHelper.Pi / 180));
         player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * player.gravDir + (player.gravDir == -1 ? MathHelper.Pi : 0));
-
+        
         Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.HallowedWeapons);
         d.velocity = Vector2.Normalize(swingRadius * posY).RotatedBy(MathHelper.PiOver2 * player.direction) * 3 * swordVel;
         Dust d2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.HallowedWeapons);
@@ -93,14 +100,7 @@ public class HallowedClaymore : ModProjectile
         }
         return false;
     }
-    //public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-    //{
-    //    if (hit.Crit)
-    //    {
-    //        target.AddBuff(BuffID.BrokenArmor, 60 * 12);
-    //        hit.Knockback *= 3f;
-    //    }
-    //}
+
     public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
         float diff = target.Center.X - player.Center.X;
@@ -113,10 +113,11 @@ public class HallowedClaymore : ModProjectile
             modifiers.HitDirectionOverride = -1;
         }
     }
+    
     public override bool PreDraw(ref Color lightColor)
     {
         Texture2D texture = ModContent.Request<Texture2D>(Texture, AssetRequestMode.ImmediateLoad).Value;
-
+        
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
         Vector2 offset = new Vector2((float)(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
