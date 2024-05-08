@@ -8781,6 +8781,11 @@ Mods: {
 				DisplayName: Nickel Door
 				Tooltip: ""
 			}
+
+			StarTorch: {
+				DisplayName: Star Torch
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

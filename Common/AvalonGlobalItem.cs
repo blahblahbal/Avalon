@@ -2520,7 +2520,8 @@ public class AvalonGlobalItem : GlobalItem
         #endregion 
 
         #region cloud/obsidian glove
-        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>())
+        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>() &&
+            item.tileWand > -1)
         {
             if (ModContent.GetInstance<CloudGloveBuilderToggle>().CurrentState == 0)
             {
