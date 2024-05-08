@@ -92,6 +92,11 @@ public class AccelerationDrillSpeed : ModItem
     }
     public override void HoldItem(Player player)
     {
+        if (!Main.GamepadDisableCursorItemIcon && player.position.X / 16f - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetX && (player.position.X + player.width) / 16f + Player.tileRangeX + player.inventory[player.selectedItem].tileBoost - 1f >= Player.tileTargetX && player.position.Y / 16f - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetY && (player.position.Y + player.height) / 16f + Player.tileRangeY + player.inventory[player.selectedItem].tileBoost - 2f >= Player.tileTargetY)
+        {
+            player.cursorItemIconEnabled = true;
+            Main.ItemIconCacheUpdate(Type);
+        }
         if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
         {
             SoundEngine.PlaySound(SoundID.Unlock, player.position);
@@ -110,14 +115,7 @@ public class AccelerationDrillSpeed : ModItem
                     {
                         if (Main.tile[x, y].HasTile && !Main.tileHammer[Main.tile[x, y].TileType] && !Main.tileAxe[Main.tile[x, y].TileType])
                         {
-                            if (!TileID.Sets.BasicChest[Main.tile[x, y].TileType])
-                            {
-                                WorldGen.KillTile(x, y);
-                                if (Main.netMode == NetmodeID.MultiplayerClient)
-                                {
-                                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, NetworkText.Empty, 0, x, y, 0f, 0);
-                                }
-                            }
+                            player.PickTile(x, y, 400);
                         }
                     }
                 }
