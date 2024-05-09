@@ -82,24 +82,10 @@ class EyeoftheGodsDefInfoDisplay : InfoDisplay
     {
         return Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay;
     }
-
     public override string DisplayValue(ref Color displayColor, ref Color displayShadowColor)
     {
         int npc = -1;
         string info = "";
-        //for (int n = 0; n < Main.npc.Length; n++)
-        //{
-        //    if (Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex == n)
-        //    {
-        //        npc = n;
-        //        break;
-        //    }
-        //    //if (Main.npc[n].justHit && Main.npc[n].target == Main.myPlayer)
-        //    //{
-        //    //    npc = n;
-        //    //    break;
-        //    //}
-        //}
 
         if (Main.LocalPlayer.GetModPlayer<EyeoftheGodsPlayer>().NPCIndex > -1)
         {
