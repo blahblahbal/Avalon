@@ -30,7 +30,7 @@ public class CalculatorSpectacles : ModItem
         });
         return p;
     }
-    public static int CountOres(Point p, int type, int maxTiles = 500)
+    public static float CountOres(Point p, int type, int maxTiles = 500)
     {
         int tiles = 0;
         int t2 = 0;
@@ -44,6 +44,8 @@ public class CalculatorSpectacles : ModItem
         List<List<Point>> points = new List<List<Point>>();
         points = AddValidNeighbors(points, p);
 
+        HashSet<Point> exclusions = new HashSet<Point>();
+
         int index = 0;
         while (points.Count > 0 && tiles < maxTiles && index < points.Count)
         {
@@ -56,43 +58,24 @@ public class CalculatorSpectacles : ModItem
                 {
                     tiles++;
                     AddValidNeighbors(points, a);
-                    if (!t.YellowWire)
-                    {
-
-                        t.YellowWire = true;
-                    }
+                    exclusions.Add(a);
                 }
             }
             index++;
         }
-        foreach (List<Point> z in points)
-        {
-            foreach (Point q in z)
-            {
-                Tile t = Framing.GetTileSafely(q.X, q.Y);
-                if (t.HasTile && t.TileType == type)
-                {
-                    if (t.YellowWire)
-                    {
-                        t2++;
-                        t.YellowWire = false;
-                    }
-                }
-            }
-        }
 
-        int bars = t2;
+        float bars = exclusions.Count;
         if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
         {
-            bars /= 3;
+            bars /= 3f;
         }
         else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
         {
-            bars /= 4;
+            bars /= 4f;
         }
         else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
         {
-            bars /= 5;
+            bars /= 5f;
         }
 
         return bars;
@@ -116,7 +99,7 @@ public class CalcSpecSystem : ModSystem
             Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
             if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType])
             {
-                int bars = CalculatorSpectacles.CountOres(tilepos, Main.tile[tilepos.X, tilepos.Y].TileType, 500);
+                int bars = (int)CalculatorSpectacles.CountOres(tilepos, Main.tile[tilepos.X, tilepos.Y].TileType, 600);
                 DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, bars + " bars" /*" [i:" + Data.Sets.Tile.OresToBars[Main.tile[tilepos.X, tilepos.Y].TileType] + "]"*/, Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition - Main.screenPosition - new Vector2(32, 32), Color.Yellow, Color.Black, 1.4f);
             }
         }
