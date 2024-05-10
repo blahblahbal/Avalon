@@ -8,6 +8,8 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.GameContent;
 namespace Avalon.Projectiles.Melee;
+
+using Microsoft.CodeAnalysis;
 using Terraria.Graphics.Shaders;
 
 
@@ -42,7 +44,7 @@ public class HallowedRapierProj : ModProjectile
         float scale = Projectile.ai[1];
         Projectile.ai[0] += 1f;
         
-        float num3 = Main.rand.NextFloatDirection() * ((float)Math.PI * 2f) * 0.05f;
+        float num3 = Main.rand.NextFloatDirection() * ((float)Math.PI * 2f) * 0.02f;
         soundDelay--;
         if (soundDelay <= 0)
         {
@@ -100,16 +102,29 @@ public class HallowedRapierProj : ModProjectile
         DrawOriginOffsetY = -(TextureAssets.Projectile[Type].Value.Width / 6);
         DrawOffsetX -= Projectile.spriteDirection * 4;
         Projectile.position += Vector2.Normalize(Projectile.velocity) * 40;
-        if (Projectile.ai[0] % 4f == 0)
-        {
 
+        for (float num8 = 0f; num8 <= 1f; num8 += 0.05f)
+        {
+            float num9 = Utils.Remap(num8, 0f, 1f, 1f, 5f);
             Rectangle rectangle = Projectile.Hitbox;
+            Vector2 vector5 = Projectile.velocity.SafeNormalize(Vector2.Zero) * Projectile.width * num9 * Projectile.scale;
+            rectangle.Offset((int)vector5.X, (int)vector5.Y);
+
+
+
             Vector2 location = new Vector2(Main.rand.NextFloat(rectangle.X, rectangle.X + rectangle.Width), Main.rand.NextFloat(rectangle.Y, rectangle.Y + rectangle.Height));
 
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.position + (Projectile.velocity * Main.rand.Next(5, 10)), Projectile.velocity / 50, ModContent.ProjectileType<HallowedRapierVis>(), 0, Projectile.knockBack, Projectile.owner, Projectile.rotation);
-           
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), location, location.DirectionTo(player.Center), ModContent.ProjectileType<HallowedRapierVis>(), 0, Projectile.knockBack, Projectile.owner, Projectile.rotation);
         }
-        
+        if (Projectile.ai[0] % 4f == 1)
+        {
+
+            
+
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + (Projectile.velocity * Main.rand.Next(1, 7)), Projectile.velocity / 50, ModContent.ProjectileType<HallowedRapierVis>(), 0, Projectile.knockBack, Projectile.owner, Projectile.rotation);
+
+        }
+
 
         if (Projectile.ai[0] >= 8f)
             {
