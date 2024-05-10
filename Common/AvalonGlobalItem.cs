@@ -1,7 +1,10 @@
+using Avalon.Buffs;
+using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Common.Players;
 using Avalon.DropConditions;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.AdvancedPotions;
 using Avalon.Items.Ammo;
 using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
@@ -2588,6 +2591,129 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override bool CanUseItem(Item item, Player player)
     {
+        #region elixir/potion lockout (NEEDS EDITING TO BE MORE EFFICIENT)
+        if (item.type == ModContent.ItemType<AdvAmmoReservationPotion>() && player.HasBuff(BuffID.AmmoReservation) ||
+           item.type == ItemID.AmmoReservationPotion && player.HasBuff(ModContent.BuffType<AdvAmmoReservation>()) ||
+           item.type == ModContent.ItemType<AdvArcheryPotion>() && player.HasBuff(BuffID.Archery) ||
+           item.type == ItemID.ArcheryPotion && player.HasBuff(ModContent.BuffType<AdvArchery>()) ||
+           item.type == ModContent.ItemType<AdvBattlePotion>() && player.HasBuff(BuffID.Battle) ||
+           item.type == ItemID.BattlePotion && player.HasBuff(ModContent.BuffType<AdvBattle>()) ||
+           item.type == ModContent.ItemType<AdvBuilderPotion>() && player.HasBuff(BuffID.Builder) ||
+           item.type == ItemID.BuilderPotion && player.HasBuff(ModContent.BuffType<AdvBuilder>()) ||
+           item.type == ModContent.ItemType<AdvCalmingPotion>() && player.HasBuff(BuffID.Calm) ||
+           item.type == ItemID.CalmingPotion && player.HasBuff(ModContent.BuffType<AdvCalming>()) ||
+           item.type == ModContent.ItemType<AdvCratePotion>() && player.HasBuff(BuffID.Crate) ||
+           item.type == ItemID.CratePotion && player.HasBuff(ModContent.BuffType<AdvCrate>()) ||
+           item.type == ModContent.ItemType<AdvDangersensePotion>() && player.HasBuff(BuffID.Dangersense) ||
+           item.type == ItemID.TrapsightPotion && player.HasBuff(ModContent.BuffType<AdvDangersense>()) ||
+           item.type == ModContent.ItemType<AdvEndurancePotion>() && player.HasBuff(BuffID.Endurance) ||
+           item.type == ItemID.EndurancePotion && player.HasBuff(ModContent.BuffType<AdvEndurance>()) ||
+           item.type == ModContent.ItemType<AdvFeatherfallPotion>() && player.HasBuff(BuffID.Featherfall) ||
+           item.type == ItemID.FeatherfallPotion && player.HasBuff(ModContent.BuffType<AdvFeatherfall>()) ||
+           item.type == ModContent.ItemType<AdvFishingPotion>() && player.HasBuff(BuffID.Fishing) ||
+           item.type == ItemID.FishingPotion && player.HasBuff(ModContent.BuffType<AdvFishing>()) ||
+           item.type == ModContent.ItemType<AdvFlipperPotion>() && player.HasBuff(BuffID.Flipper) ||
+           item.type == ItemID.FlipperPotion && player.HasBuff(ModContent.BuffType<AdvFlipper>()) ||
+           item.type == ModContent.ItemType<AdvGillsPotion>() && player.HasBuff(BuffID.Gills) ||
+           item.type == ItemID.GillsPotion && player.HasBuff(ModContent.BuffType<AdvGills>()) ||
+           item.type == ModContent.ItemType<AdvGravitationPotion>() && player.HasBuff(BuffID.Gravitation) ||
+           item.type == ItemID.GravitationPotion && player.HasBuff(ModContent.BuffType<AdvGravitation>()) ||
+           item.type == ModContent.ItemType<AdvHeartreachPotion>() && player.HasBuff(BuffID.Heartreach) ||
+           item.type == ItemID.HeartreachPotion && player.HasBuff(ModContent.BuffType<AdvHeartreach>()) ||
+           item.type == ModContent.ItemType<AdvHunterPotion>() && player.HasBuff(BuffID.Hunter) ||
+           item.type == ItemID.HunterPotion && player.HasBuff(ModContent.BuffType<AdvHunter>()) ||
+           item.type == ModContent.ItemType<AdvInfernoPotion>() && player.HasBuff(BuffID.Inferno) ||
+           item.type == ItemID.InfernoPotion && player.HasBuff(ModContent.BuffType<AdvInferno>()) ||
+           item.type == ModContent.ItemType<AdvInvisibilityPotion>() && player.HasBuff(BuffID.Invisibility) ||
+           item.type == ItemID.InvisibilityPotion && player.HasBuff(ModContent.BuffType<AdvInvisibility>()) ||
+           item.type == ModContent.ItemType<AdvIronskinPotion>() && player.HasBuff(BuffID.Ironskin) ||
+           item.type == ItemID.IronskinPotion && player.HasBuff(ModContent.BuffType<AdvIronskin>()) ||
+           item.type == ModContent.ItemType<AdvLifeforcePotion>() && player.HasBuff(BuffID.Lifeforce) ||
+           item.type == ItemID.LifeforcePotion && player.HasBuff(ModContent.BuffType<AdvLifeforce>()) ||
+           item.type == ModContent.ItemType<AdvMagicPowerPotion>() && player.HasBuff(BuffID.MagicPower) ||
+           item.type == ItemID.MagicPowerPotion && player.HasBuff(ModContent.BuffType<AdvMagicPower>()) ||
+           item.type == ModContent.ItemType<AdvManaRegenerationPotion>() && player.HasBuff(BuffID.ManaRegeneration) ||
+           item.type == ItemID.ManaRegenerationPotion && player.HasBuff(ModContent.BuffType<AdvManaRegeneration>()) ||
+           item.type == ModContent.ItemType<AdvMiningPotion>() && player.HasBuff(BuffID.Mining) ||
+           item.type == ItemID.MiningPotion && player.HasBuff(ModContent.BuffType<AdvMining>()) ||
+           item.type == ModContent.ItemType<AdvNightOwlPotion>() && player.HasBuff(BuffID.NightOwl) ||
+           item.type == ItemID.NightOwlPotion && player.HasBuff(ModContent.BuffType<AdvNightOwl>()) ||
+           item.type == ModContent.ItemType<AdvObsidianSkinPotion>() && player.HasBuff(BuffID.ObsidianSkin) ||
+           item.type == ItemID.ObsidianSkinPotion && player.HasBuff(ModContent.BuffType<AdvObsidianSkin>()) ||
+           item.type == ModContent.ItemType<AdvRagePotion>() && player.HasBuff(BuffID.Rage) ||
+           item.type == ItemID.RagePotion && player.HasBuff(ModContent.BuffType<AdvRage>()) ||
+           item.type == ModContent.ItemType<AdvRegenerationPotion>() && player.HasBuff(BuffID.Regeneration) ||
+           item.type == ItemID.RegenerationPotion && player.HasBuff(ModContent.BuffType<AdvRegeneration>()) ||
+           item.type == ModContent.ItemType<AdvShinePotion>() && player.HasBuff(BuffID.Shine) ||
+           item.type == ItemID.ShinePotion && player.HasBuff(ModContent.BuffType<AdvShine>()) ||
+           item.type == ModContent.ItemType<AdvSonarPotion>() && player.HasBuff(BuffID.Sonar) ||
+           item.type == ItemID.SonarPotion && player.HasBuff(ModContent.BuffType<AdvSonar>()) ||
+           item.type == ModContent.ItemType<AdvSpelunkerPotion>() && player.HasBuff(BuffID.Spelunker) ||
+           item.type == ItemID.SpelunkerPotion && player.HasBuff(ModContent.BuffType<AdvSpelunker>()) ||
+           item.type == ModContent.ItemType<AdvSummoningPotion>() && player.HasBuff(BuffID.Summoning) ||
+           item.type == ItemID.SummoningPotion && player.HasBuff(ModContent.BuffType<AdvSummoning>()) ||
+           item.type == ModContent.ItemType<AdvSwiftnessPotion>() && player.HasBuff(BuffID.Swiftness) ||
+           item.type == ItemID.SwiftnessPotion && player.HasBuff(ModContent.BuffType<AdvSwiftness>()) ||
+           item.type == ModContent.ItemType<AdvThornsPotion>() && player.HasBuff(BuffID.Thorns) ||
+           item.type == ItemID.ThornsPotion && player.HasBuff(ModContent.BuffType<AdvThorns>()) ||
+           item.type == ModContent.ItemType<AdvTitanPotion>() && player.HasBuff(BuffID.Titan) ||
+           item.type == ItemID.TitanPotion && player.HasBuff(ModContent.BuffType<AdvTitan>()) ||
+           item.type == ModContent.ItemType<AdvWarmthPotion>() && player.HasBuff(BuffID.Warmth) ||
+           item.type == ItemID.WarmthPotion && player.HasBuff(ModContent.BuffType<AdvWarmth>()) ||
+           item.type == ModContent.ItemType<AdvWaterWalkingPotion>() && player.HasBuff(BuffID.WaterWalking) ||
+           item.type == ItemID.WaterWalkingPotion && player.HasBuff(ModContent.BuffType<AdvWaterWalking>()) ||
+           item.type == ModContent.ItemType<AdvWrathPotion>() && player.HasBuff(BuffID.Wrath) ||
+           item.type == ItemID.WrathPotion && player.HasBuff(ModContent.BuffType<AdvWrath>()) ||
+           item.type == ModContent.ItemType<AdvBloodCastPotion>() && player.HasBuff(ModContent.BuffType<BloodCast>()) ||
+           item.type == ModContent.ItemType<BloodCastPotion>() && player.HasBuff(ModContent.BuffType<AdvBloodCast>()) ||
+           item.type == ModContent.ItemType<AdvAuraPotion>() && player.HasBuff(ModContent.BuffType<CrimsonDrain>()) ||
+           item.type == ModContent.ItemType<AuraPotion>() && player.HasBuff(ModContent.BuffType<AdvCrimson>()) ||
+           item.type == ModContent.ItemType<AdvForceFieldPotion>() && player.HasBuff(ModContent.BuffType<ForceField>()) ||
+           item.type == ModContent.ItemType<ForceFieldPotion>() && player.HasBuff(ModContent.BuffType<AdvForceField>()) ||
+           item.type == ModContent.ItemType<AdvFuryPotion>() && player.HasBuff(ModContent.BuffType<Fury>()) ||
+           item.type == ModContent.ItemType<FuryPotion>() && player.HasBuff(ModContent.BuffType<AdvFury>()) ||
+           item.type == ModContent.ItemType<AdvGauntletPotion>() && player.HasBuff(ModContent.BuffType<Gauntlet>()) ||
+           item.type == ModContent.ItemType<GauntletPotion>() && player.HasBuff(ModContent.BuffType<AdvGauntlet>()) ||
+           item.type == ModContent.ItemType<AdvGPSPotion>() && player.HasBuff(ModContent.BuffType<GPS>()) ||
+           item.type == ModContent.ItemType<GPSPotion>() && player.HasBuff(ModContent.BuffType<AdvGPS>()) ||
+           item.type == ModContent.ItemType<AdvLeapingPotion>() && player.HasBuff(ModContent.BuffType<Leaping>()) ||
+           item.type == ModContent.ItemType<LeapingPotion>() && player.HasBuff(ModContent.BuffType<AdvLeaping>()) ||
+           item.type == ModContent.ItemType<AdvLuckPotion>() && player.HasBuff(ModContent.BuffType<Clover>()) ||
+           item.type == ModContent.ItemType<CloverPotion>() && player.HasBuff(ModContent.BuffType<AdvLuck>()) ||
+           item.type == ModContent.ItemType<AdvRoguePotion>() && player.HasBuff(ModContent.BuffType<Rogue>()) ||
+           item.type == ModContent.ItemType<RoguePotion>() && player.HasBuff(ModContent.BuffType<AdvRogue>()) ||
+           item.type == ModContent.ItemType<AdvShadowPotion>() && player.HasBuff(ModContent.BuffType<Shadows>()) ||
+           item.type == ModContent.ItemType<ShadowPotion>() && player.HasBuff(ModContent.BuffType<AdvShadow>()) ||
+           item.type == ModContent.ItemType<AdvShockwavePotion>() && player.HasBuff(ModContent.BuffType<Shockwave>()) ||
+           item.type == ModContent.ItemType<ShockwavePotion>() && player.HasBuff(ModContent.BuffType<AdvShockwave>()) ||
+           item.type == ModContent.ItemType<AdvStarbrightPotion>() && player.HasBuff(ModContent.BuffType<Starbright>()) ||
+           item.type == ModContent.ItemType<StarbrightPotion>() && player.HasBuff(ModContent.BuffType<AdvStarbright>()) ||
+           item.type == ModContent.ItemType<AdvStrengthPotion>() && player.HasBuff(ModContent.BuffType<Strong>()) ||
+           item.type == ModContent.ItemType<StrengthPotion>() && player.HasBuff(ModContent.BuffType<AdvStrength>()) ||
+           item.type == ModContent.ItemType<AdvSupersonicPotion>() && player.HasBuff(ModContent.BuffType<Supersonic>()) ||
+           item.type == ModContent.ItemType<SupersonicPotion>() && player.HasBuff(ModContent.BuffType<AdvSupersonic>()) ||
+           item.type == ModContent.ItemType<AdvTitanskinPotion>() && player.HasBuff(ModContent.BuffType<Titanskin>()) ||
+           item.type == ModContent.ItemType<TitanskinPotion>() && player.HasBuff(ModContent.BuffType<AdvTitanskin>()) ||
+           item.type == ModContent.ItemType<AdvVisionPotion>() && player.HasBuff(ModContent.BuffType<Vision>()) ||
+           item.type == ModContent.ItemType<VisionPotion>() && player.HasBuff(ModContent.BuffType<AdvVision>()) ||
+           item.type == ModContent.ItemType<AdvWisdomPotion>() && player.HasBuff(ModContent.BuffType<Wisdom>()) ||
+           item.type == ModContent.ItemType<WisdomPotion>() && player.HasBuff(ModContent.BuffType<AdvWisdom>()) ||
+           item.type == ModContent.ItemType<AdvTimeShiftPotion>() && player.HasBuff(ModContent.BuffType<TimeShift>()) ||
+           item.type == ModContent.ItemType<TimeShiftPotion>() && player.HasBuff(ModContent.BuffType<AdvTimeShift>()) ||
+           item.type == ModContent.ItemType<AdvSupersonicPotion>() && player.HasBuff(ModContent.BuffType<Supersonic>()) ||
+           item.type == ModContent.ItemType<SupersonicPotion>() && player.HasBuff(ModContent.BuffType<AdvSupersonic>()) ||
+           item.type == ModContent.ItemType<AdvNinjaPotion>() && player.HasBuff(ModContent.BuffType<Ninja>()) ||
+           item.type == ModContent.ItemType<NinjaPotion>() && player.HasBuff(ModContent.BuffType<AdvNinja>()) ||
+           item.type == ModContent.ItemType<AdvMagnetPotion>() && player.HasBuff(ModContent.BuffType<Magnet>()) ||
+           item.type == ModContent.ItemType<MagnetPotion>() && player.HasBuff(ModContent.BuffType<AdvMagnet>()) ||
+           item.type == ModContent.ItemType<AdvHeartsickPotion>() && player.HasBuff(ModContent.BuffType<Heartsick>()) ||
+           item.type == ModContent.ItemType<HeartsickPotion>() && player.HasBuff(ModContent.BuffType<AdvHeartsick>()) ||
+           item.type == ModContent.ItemType<AdvGamblerPotion>() && player.HasBuff(ModContent.BuffType<Gambler>()) ||
+           item.type == ModContent.ItemType<GamblerPotion>() && player.HasBuff(ModContent.BuffType<AdvGambler>()))
+        {
+            return false;
+        }
+        #endregion
         // temporary instavator stoppage
         if (ExxoAvalonOrigins.Fargo != null)
         {
