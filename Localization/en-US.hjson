@@ -8781,6 +8781,11 @@ Mods: {
 				DisplayName: Nickel Door
 				Tooltip: ""
 			}
+
+			HallowedRapier: {
+				DisplayName: Hallowed Rapier
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9037,6 +9042,8 @@ Mods: {
 			BismuthBugleHornPro.DisplayName: Bismuth Bugle Horn
 			SunsShadowProj.DisplayName: Sun's Shadow Fireball
 			SnotsandBallFallingProjectile.DisplayName: Snotsand Ball
+			HallowedRapierProj.DisplayName: Hallowed Rapier Proj
+			HallowedRapierVis.DisplayName: Hallowed Rapier Vis
 		}
 
 		NPCs: {

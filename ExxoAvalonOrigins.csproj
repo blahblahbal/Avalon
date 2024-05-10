@@ -16,6 +16,10 @@
     <None Remove="DrawMagics\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Projectiles\Melee\HallowedRapierProj.png" />
+    <None Remove="Projectiles\Melee\HallowedRapierVis.png" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
   </ItemGroup>
   <ItemGroup>
