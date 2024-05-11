@@ -1,6 +1,11 @@
+using Avalon.Compatability.Thorium.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Buffs;
+using ThoriumMod.Buffs.Bard;
+using ThoriumMod.Items.BardItems;
+using ThoriumMod.Items.Depths;
 
 namespace Avalon.Compatability.Thorium.Items.Potions;
 
@@ -14,6 +19,8 @@ class AdvCreativityPotion : ModItem
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 30;
+        Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<CreativityPotionBuff>());
+        Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<CreativityPotion>(), ModContent.BuffType<AdvCreativity>());
     }
 
     public override void SetDefaults()
@@ -32,6 +39,6 @@ class AdvCreativityPotion : ModItem
         Item.useAnimation = 15;
         Item.buffTime = 16 * 3600;
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
-        Item.buffType = ModContent.BuffType<Buffs.AdvCreativity>();
+        Item.buffType = ModContent.BuffType<AdvCreativity>();
     }
 }

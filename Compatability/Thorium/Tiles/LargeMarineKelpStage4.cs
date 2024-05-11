@@ -3,9 +3,14 @@ using Avalon.Compatability.Thorium.Items.Placeable.Tile;
 using Avalon.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
+using Terraria.GameContent;
+using Terraria.GameContent.Drawing;
+using Terraria.Graphics.Capture;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -50,26 +55,10 @@ public class LargeMarineKelpStage4 : ModTile
 
         return false;
     }
+
     public override bool CreateDust(int i, int j, ref int type)
     {
         type = DustID.GrassBlades;
         return base.CreateDust(i, j, ref type);
-    }
-    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
-    {
-        AvalonWorld.CheckLargeHerb(i, j, Type);
-        noBreak = true;
-        return true;
-    }
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        int item = 0;
-        switch (frameX / 18)
-        {
-            case 0:
-                item = ModContent.ItemType<LargeMarineKelp>();
-                break;
-        }
-        if (item > 0) Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 48, item);
     }
 }

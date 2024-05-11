@@ -18,7 +18,6 @@ using Avalon.Items.Material.Herbs;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
-using Avalon.Items.Material.Herbs;
 using Avalon.Items.MusicBoxes;
 using Avalon.Items.Other;
 using Avalon.Items.Placeable.Beam;
@@ -61,11 +60,142 @@ using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Avalon.Buffs.AdvancedBuffs;
+using Avalon.Buffs;
 
 namespace Avalon.Data.Sets
 {
     internal class Item
     {
+        /// <summary>
+        /// Add to this if your mod adds potions/elixirs; used for potion/elixir usage lockout
+        /// </summary>
+        public static Dictionary<int, int> ElixirToPotionBuffID = new Dictionary<int, int>()
+        {
+            { ItemType<AdvAmmoReservationPotion>(), BuffID.AmmoReservation },
+            { ItemType<AdvArcheryPotion>(), BuffID.Archery },
+            { ItemType<AdvBattlePotion>(), BuffID.Battle },
+            { ItemType<AdvBloodCastPotion>(), BuffType<BloodCast>() },
+            { ItemType<AdvBuilderPotion>(), BuffID.Builder },
+            { ItemType<AdvCalmingPotion>(), BuffID.Calm },
+            { ItemType<AdvCratePotion>(), BuffID.Crate },
+            { ItemType<AdvAuraPotion>(), BuffType<CrimsonDrain>() },
+            { ItemType<AdvDangersensePotion>(), BuffID.Dangersense },
+            { ItemType<AdvEndurancePotion>(), BuffID.Endurance },
+            { ItemType<AdvFeatherfallPotion>(), BuffID.Featherfall },
+            { ItemType<AdvFishingPotion>(), BuffID.Fishing },
+            { ItemType<AdvFlipperPotion>(), BuffID.Flipper },
+            { ItemType<AdvForceFieldPotion>(), BuffType<ForceField>() },
+            { ItemType<AdvFuryPotion>(), BuffType<Fury>() },
+            { ItemType<AdvGamblerPotion>(), BuffType<Gambler>() },
+            { ItemType<AdvGauntletPotion>(), BuffType<Gauntlet>() },
+            { ItemType<AdvGillsPotion>(), BuffID.Gills },
+            { ItemType<AdvGPSPotion>(), BuffType<GPS>() },
+            { ItemType<AdvGravitationPotion>(), BuffID.Gravitation },
+            { ItemType<AdvHeartreachPotion>(), BuffID.Heartreach },
+            { ItemType<AdvHeartsickPotion>(), BuffType<Heartsick>() },
+            { ItemType<AdvHunterPotion>(), BuffID.Hunter },
+            { ItemType<AdvInfernoPotion>(), BuffID.Inferno },
+            { ItemType<AdvInvisibilityPotion>(), BuffID.Invisibility },
+            { ItemType<AdvIronskinPotion>(), BuffID.Ironskin },
+            { ItemType<AdvLeapingPotion>(), BuffType<Leaping>() },
+            { ItemType<AdvLifeforcePotion>(), BuffID.Lifeforce },
+            { ItemType<AdvMagicPowerPotion>(), BuffID.MagicPower },
+            { ItemType<AdvMagnetPotion>(), BuffType<Magnet>() },
+            { ItemType<AdvManaRegenerationPotion>(), BuffID.ManaRegeneration },
+            { ItemType<AdvMiningPotion>(), BuffID.Mining },
+            { ItemType<AdvNightOwlPotion>(), BuffID.NightOwl },
+            { ItemType<AdvNinjaPotion>(), BuffType<Ninja>() },
+            { ItemType<AdvObsidianSkinPotion>(), BuffID.ObsidianSkin },
+            { ItemType<AdvRagePotion>(), BuffID.Rage },
+            { ItemType<AdvRegenerationPotion>(), BuffID.Regeneration },
+            { ItemType<AdvRoguePotion>(), BuffType<Rogue>() },
+            { ItemType<AdvShadowPotion>(), BuffType<Shadows>() },
+            { ItemType<AdvShinePotion>(), BuffID.Shine },
+            { ItemType<AdvShockwavePotion>(), BuffType<Shockwave>() },
+            { ItemType<AdvSonarPotion>(), BuffID.Sonar },
+            { ItemType<AdvSpelunkerPotion>(), BuffID.Spelunker },
+            { ItemType<AdvStarbrightPotion>(), BuffType<Starbright>() },
+            { ItemType<AdvStrengthPotion>(), BuffType<Strong>() },
+            { ItemType<AdvSummoningPotion>(), BuffID.Summoning },
+            { ItemType<AdvSupersonicPotion>(), BuffType<Supersonic>() },
+            { ItemType<AdvSwiftnessPotion>(), BuffID.Swiftness },
+            { ItemType<AdvThornsPotion>(), BuffID.Thorns },
+            { ItemType<AdvTimeShiftPotion>(), BuffType<TimeShift>() },
+            { ItemType<AdvTitanPotion>(), BuffID.Titan },
+            { ItemType<AdvTitanskinPotion>(), BuffType<Titanskin>() },
+            { ItemType<AdvVisionPotion>(), BuffType<Vision>() },
+            { ItemType<AdvWarmthPotion>(), BuffID.Warmth },
+            { ItemType<AdvWaterWalkingPotion>(), BuffID.WaterWalking },
+            { ItemType<AdvWisdomPotion>(), BuffType<Wisdom>() },
+            { ItemType<AdvWrathPotion>(), BuffID.Wrath }
+        };
+
+        /// <summary>
+        /// Add to this if your mod adds potions/elixirs; used for potion/elixir usage lockout
+        /// </summary>
+        public static Dictionary<int, int> PotionToElixirBuffID = new Dictionary<int, int>()
+        {
+            { ItemID.AmmoReservationPotion, BuffType<AdvAmmoReservation>() },
+            { ItemID.ArcheryPotion, BuffType<AdvArchery>() },
+            { ItemID.BattlePotion, BuffType<AdvBattle>() },
+            { ItemType<BloodCastPotion>(), BuffType<AdvBloodCast>() },
+            { ItemID.BuilderPotion, BuffType<AdvBuilder>() },
+            { ItemID.CalmingPotion, BuffType<AdvCalming>() },
+            { ItemID.CratePotion, BuffType<AdvCrate>() },
+            { ItemType<AuraPotion>(), BuffType<AdvCrimson>() },
+            { ItemID.TrapsightPotion, BuffType<AdvDangersense>() },
+            { ItemID.EndurancePotion, BuffType<AdvEndurance>() },
+            { ItemID.FeatherfallPotion, BuffType<AdvFeatherfall>() },
+            { ItemID.FishingPotion, BuffType<AdvFishing>() },
+            { ItemID.FlipperPotion, BuffType<AdvFlipper>() },
+            { ItemType<ForceFieldPotion>(), BuffType<AdvForceField>() },
+            { ItemType<FuryPotion>(), BuffType<AdvFury>() },
+            { ItemType<GamblerPotion>(), BuffType<Gambler>() },
+            { ItemType<GauntletPotion>(), BuffType<Gauntlet>() },
+            { ItemID.GillsPotion, BuffType<AdvGills>() },
+            { ItemType<GPSPotion>(), BuffType<AdvGPS>() },
+            { ItemID.GravitationPotion, BuffType<AdvGravitation>() },
+            { ItemID.HeartreachPotion, BuffType<AdvHeartreach>() },
+            { ItemType<HeartsickPotion>(), BuffType<AdvHeartsick>() },
+            { ItemID.HunterPotion, BuffType<AdvHunter>() },
+            { ItemID.InfernoPotion, BuffType<AdvInferno>() },
+            { ItemID.InvisibilityPotion, BuffType<AdvInvisibility>() },
+            { ItemID.IronskinPotion, BuffType<AdvIronskin>() },
+            { ItemType<LeapingPotion>(), BuffType<AdvLeaping>() },
+            { ItemID.LifeforcePotion, BuffType<AdvLifeforce>() },
+            { ItemType<CloverPotion>(), BuffType<AdvLuck>() },
+            { ItemID.MagicPowerPotion, BuffType<AdvMagicPower>() },
+            { ItemType<MagnetPotion>(), BuffType<AdvMagnet>() },
+            { ItemID.ManaRegenerationPotion, BuffType<AdvManaRegeneration>() },
+            { ItemID.MiningPotion, BuffType<AdvMining>() },
+            { ItemID.NightOwlPotion, BuffType<AdvNightOwl>() },
+            { ItemType<NinjaPotion>(), BuffType<AdvNinja>() },
+            { ItemID.ObsidianSkinPotion, BuffType<AdvObsidianSkin>() },
+            { ItemID.RagePotion, BuffType<AdvRage>() },
+            { ItemID.RegenerationPotion, BuffType<AdvRegeneration>() },
+            { ItemType<RoguePotion>(), BuffType<AdvRogue>() },
+            { ItemType<ShadowPotion>(), BuffType<AdvShadow>() },
+            { ItemID.ShinePotion, BuffType<AdvShine>() },
+            { ItemType<ShockwavePotion>(), BuffType<AdvShockwave>() },
+            { ItemID.SonarPotion, BuffType<AdvSonar>() },
+            { ItemID.SpelunkerPotion, BuffType<AdvSpelunker>() },
+            { ItemType<StarbrightPotion>(), BuffType<AdvStarbright>() },
+            { ItemType<StrengthPotion>(), BuffType<AdvStrength>() },
+            { ItemID.SummoningPotion, BuffType<AdvSummoning>() },
+            { ItemType<SupersonicPotion>(), BuffType<AdvSupersonic>() },
+            { ItemID.SwiftnessPotion, BuffType<AdvSwiftness>() },
+            { ItemID.ThornsPotion, BuffType<AdvThorns>() },
+            { ItemType<TimeShiftPotion>(), BuffType<AdvTimeShift>() },
+            { ItemID.TitanPotion, BuffType<AdvTitan>() },
+            { ItemType<TitanskinPotion>(), BuffType<AdvTitanskin>() },
+            { ItemType<VisionPotion>(), BuffType<AdvVision>() },
+            { ItemID.WarmthPotion, BuffType<AdvWarmth>() },
+            { ItemID.WaterWalkingPotion, BuffType<AdvWaterWalking>() },
+            { ItemType<WisdomPotion>(), BuffType<AdvWisdom>() },
+            { ItemID.WrathPotion, BuffType<AdvWrath>() },
+        };
+
         public static readonly bool[] HerbSeeds = ItemID.Sets.Factory.CreateBoolSet(
             ItemID.BlinkrootSeeds,
             ItemID.DaybloomSeeds,

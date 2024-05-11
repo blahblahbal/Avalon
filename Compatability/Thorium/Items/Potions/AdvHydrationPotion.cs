@@ -1,7 +1,10 @@
+using Avalon.Compatability.Thorium.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Buffs;
 using ThoriumMod.Items.Consumable;
+using ThoriumMod.Items.Depths;
 using ThoriumMod.Items.ThrownItems;
 
 namespace Avalon.Compatability.Thorium.Items.Potions;
@@ -17,6 +20,8 @@ class AdvHydrationPotion : HydrationPotion
     {
         base.SetStaticDefaults();
         Item.ResearchUnlockCount = 30;
+        Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<HydrationBuff>());
+        Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<HydrationPotion>(), ModContent.BuffType<AdvHydration>());
     }
 
     public override void SetDefaults()
@@ -27,7 +32,7 @@ class AdvHydrationPotion : HydrationPotion
         Item.useTime = 15;
         Item.useAnimation = 15;
         Item.buffTime = 10 * 3600;
-        Item.buffType = ModContent.BuffType<Buffs.AdvHydration>();
+        Item.buffType = ModContent.BuffType<AdvHydration>();
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

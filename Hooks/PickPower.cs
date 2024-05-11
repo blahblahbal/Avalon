@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Hooks;
 internal class PickPower : ModHook
@@ -15,6 +16,13 @@ internal class PickPower : ModHook
         if (tileTarget.TileType == TileID.Hellstone && pickPower < 70)
         {
             num = 0;
+        }
+        if (ExxoAvalonOrigins.Depths != null)
+        {
+            if (tileTarget.TileType == ExxoAvalonOrigins.Depths.Find<ModTile>("ArqueriteOre").Type && pickPower < 70)
+            {
+                num = 0;
+            }
         }
         return num;
     }

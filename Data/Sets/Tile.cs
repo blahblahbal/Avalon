@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Avalon.Items.Material.Bars;
 using Avalon.Items.OreChunks;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
@@ -10,6 +11,22 @@ namespace Avalon.Data.Sets
 {
     internal class Tile
     {
+        public static List<int> ThreeOrePerBar = new() { TileID.Copper, TileID.Tin, TileID.Meteorite,
+            TileID.Demonite, TileID.Crimtane, TileID.Hellstone, TileID.Cobalt, TileID.Palladium, TileID.Iron, TileID.Lead,
+            ModContent.TileType<BronzeOre>(), ModContent.TileType<NickelOre>(), ModContent.TileType<DurataniumOre>(),
+            ModContent.TileType<BacciliteOre>()
+        };
+
+        public static List<int> FourOrePerBar = new() { TileID.Silver, TileID.Tungsten, TileID.Gold,
+            TileID.Platinum, TileID.Mythril, TileID.Orichalcum, TileID.LunarOre, ModContent.TileType<ZincOre>(),
+            ModContent.TileType<BismuthOre>(), ModContent.TileType<NaquadahOre>(), ModContent.TileType<RhodiumOre>(),
+            ModContent.TileType<OsmiumOre>(), ModContent.TileType<IridiumOre>()
+        };
+
+        public static List<int> FiveOrePerBar = new() { TileID.Adamantite, TileID.Titanium, TileID.Chlorophyte,
+            ModContent.TileType<TroxiniumOre>(), ModContent.TileType<HallowedOre>()
+        };
+
         public static List<ushort> LivingBlocks = new()
         {
             TileID.LivingFire, TileID.LivingCursedFire, TileID.LivingDemonFire, TileID.LivingFrostFire, TileID.LivingIchor,
@@ -144,6 +161,49 @@ namespace Avalon.Data.Sets
             //{ ModContent.TileType<UnvolanditeOre>(), ModContent.ItemType<UnvolanditeChunk>() },
             //{ ModContent.TileType<VorazylcumOre>(), ModContent.ItemType<VorazylcumChunk>() },
             //{ ModContent.TileType<HydrolythOre>(), ModContent.ItemType<HydrolythChunk>() }
+        };
+
+        public static readonly Dictionary<int, int> OresToBars = new Dictionary<int, int>
+        {
+            { TileID.Copper, ItemID.CopperBar },
+            { TileID.Tin, ItemID.TinBar },
+            { ModContent.TileType<BronzeOre>(), ModContent.ItemType<BronzeBar>() },
+            { TileID.Iron, ItemID.IronBar },
+            { TileID.Lead, ItemID.LeadBar },
+            { ModContent.TileType<NickelOre>(), ModContent.ItemType<NickelBar>() },
+            { TileID.Silver, ItemID.SilverBar },
+            { TileID.Tungsten, ItemID.TungstenBar },
+            { ModContent.TileType<ZincOre>(), ModContent.ItemType<ZincBar>() },
+            { TileID.Gold, ItemID.GoldBar },
+            { TileID.Platinum, ItemID.PlatinumBar },
+            { TileID.Demonite, ItemID.DemoniteBar },
+            { TileID.Crimtane, ItemID.CrimtaneBar },
+            { ModContent.TileType<BacciliteOre>(), ModContent.ItemType<BacciliteBar>() },
+            { ModContent.TileType<BismuthOre>(), ModContent.ItemType<BismuthBar>() },
+            { ModContent.TileType<RhodiumOre>(), ModContent.ItemType<RhodiumBar>() },
+            { ModContent.TileType<OsmiumOre>(), ModContent.ItemType<OsmiumBar>() },
+            { ModContent.TileType<IridiumOre>(), ModContent.ItemType<IridiumBar>() },
+            { TileID.Hellstone, ItemID.HellstoneBar },
+            { TileID.Cobalt, ItemID.CobaltBar },
+            { TileID.Palladium, ItemID.PalladiumBar },
+            { ModContent.TileType<DurataniumOre>(), ModContent.ItemType<DurataniumBar>() },
+            { TileID.Mythril, ItemID.MythrilBar },
+            { TileID.Orichalcum, ItemID.OrichalcumBar },
+            { ModContent.TileType<NaquadahOre>(), ModContent.ItemType<NaquadahBar>() },
+            { TileID.Adamantite, ItemID.AdamantiteBar },
+            { TileID.Titanium, ItemID.TitaniumBar },
+            { ModContent.TileType<TroxiniumOre>(), ModContent.ItemType<TroxiniumBar>() },
+            { ModContent.TileType<HallowedOre>(), ItemID.HallowedBar },
+            //{ ModContent.TileType<FeroziumOre>(), ModContent.ItemType<FeroziumBar>() },
+            { TileID.Chlorophyte, ItemID.ChlorophyteBar },
+            //{ ModContent.TileType<XanthophyteOre>(), ModContent.ItemType<XanthophyteBar>() },
+            //{ ModContent.TileType<ShroomiteOre>(), ItemID.ShroomiteBar },
+            { ModContent.TileType<CaesiumOre>(), ModContent.ItemType<CaesiumBar>() },
+            //{ ModContent.TileType<PyroscoricOre>(), ModContent.ItemType<PyroscoricBar>() },
+            //{ ModContent.TileType<TritanoriumOre>(), ModContent.ItemType<TritanoriumBar>() },
+            //{ ModContent.TileType<UnvolanditeOre>(), ModContent.ItemType<UnvolanditeBar>() },
+            //{ ModContent.TileType<VorazylcumOre>(), ModContent.ItemType<VorazylcumBar>() },
+            //{ ModContent.TileType<HydrolythOre>(), ModContent.ItemType<HydrolythBar>() }
         };
     }
 }

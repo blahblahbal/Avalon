@@ -18,8 +18,7 @@ class LargeMarineKelpSeed : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<LargeMarineKelpStage4>();
-        Item.placeStyle = 1;
+        Item.createTile = ModContent.TileType<LargeMarineKelpStage1>();
         Item.width = dims.Width;
         Item.useTurn = true;
         Item.useTime = 10;

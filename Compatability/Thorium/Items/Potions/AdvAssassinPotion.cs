@@ -1,6 +1,9 @@
+using Avalon.Compatability.Thorium.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Buffs;
+using ThoriumMod.Items.Depths;
 using ThoriumMod.Items.ThrownItems;
 
 namespace Avalon.Compatability.Thorium.Items.Potions;
@@ -16,6 +19,8 @@ class AdvAssassinPotion : AssassinPotion
     {
         base.SetStaticDefaults();
         Item.ResearchUnlockCount = 30;
+        Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<AssassinPotionBuff>());
+        Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<AssassinPotion>(), ModContent.BuffType<AdvAssassin>());
     }
 
     public override void SetDefaults()
@@ -26,7 +31,7 @@ class AdvAssassinPotion : AssassinPotion
         Item.useTime = 15;
         Item.useAnimation = 15;
         Item.buffTime = 16 * 3600;
-        Item.buffType = ModContent.BuffType<Buffs.AdvAssassin>();
+        Item.buffType = ModContent.BuffType<AdvAssassin>();
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

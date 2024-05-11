@@ -1,6 +1,8 @@
+using Avalon.Compatability.Thorium.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Buffs;
 using ThoriumMod.Items.Depths;
 
 namespace Avalon.Compatability.Thorium.Items.Potions;
@@ -16,6 +18,8 @@ class AdvFrenzyPotion : FrenzyPotion
     {
         base.SetStaticDefaults();
         Item.ResearchUnlockCount = 30;
+        Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<FrenzyPotionBuff>());
+        Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<FrenzyPotion>(), ModContent.BuffType<AdvFrenzy>());
     }
 
     public override void SetDefaults()
@@ -26,7 +30,7 @@ class AdvFrenzyPotion : FrenzyPotion
         Item.useTime = 15;
         Item.useAnimation = 15;
         Item.buffTime = 6 * 3600;
-        Item.buffType = ModContent.BuffType<Buffs.AdvFrenzy>();
+        Item.buffType = ModContent.BuffType<AdvFrenzy>();
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

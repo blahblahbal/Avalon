@@ -1,7 +1,10 @@
+using Avalon.Compatability.Thorium.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Buffs;
 using ThoriumMod.Items.Consumable;
+using ThoriumMod.Items.Depths;
 
 namespace Avalon.Compatability.Thorium.Items.Potions;
 
@@ -16,6 +19,8 @@ class AdvBouncingFlamePotion : BouncingFlamePotion
     {
         base.SetStaticDefaults();
         Item.ResearchUnlockCount = 30;
+        Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<BouncingFlamePotionBuff>());
+        Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<BouncingFlamePotion>(), ModContent.BuffType<AdvBouncingFlame>());
     }
 
     public override void SetDefaults()
@@ -26,7 +31,7 @@ class AdvBouncingFlamePotion : BouncingFlamePotion
         Item.useTime = 15;
         Item.useAnimation = 15;
         Item.buffTime = 10 * 3600;
-        Item.buffType = ModContent.BuffType<Buffs.AdvBouncingFlame>();
+        Item.buffType = ModContent.BuffType<AdvBouncingFlame>();
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

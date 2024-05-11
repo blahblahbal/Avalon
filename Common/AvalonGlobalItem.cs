@@ -1,7 +1,10 @@
+using Avalon.Buffs;
+using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Common.Players;
 using Avalon.DropConditions;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.AdvancedPotions;
 using Avalon.Items.Ammo;
 using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
@@ -2520,7 +2523,8 @@ public class AvalonGlobalItem : GlobalItem
         #endregion 
 
         #region cloud/obsidian glove
-        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>())
+        if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>() &&
+            item.tileWand > -1)
         {
             if (ModContent.GetInstance<CloudGloveBuilderToggle>().CurrentState == 0)
             {
@@ -2587,6 +2591,12 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override bool CanUseItem(Item item, Player player)
     {
+        // potion/elixir usage lockout
+        if (Data.Sets.Item.ElixirToPotionBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.ElixirToPotionBuffID[item.type]) ||
+            Data.Sets.Item.PotionToElixirBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.PotionToElixirBuffID[item.type]))
+        {
+            return false;
+        }
         // temporary instavator stoppage
         if (ExxoAvalonOrigins.Fargo != null)
         {

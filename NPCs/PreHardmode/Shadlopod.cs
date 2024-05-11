@@ -71,7 +71,7 @@ public class Shadlopod : ModNPC
             NPC.TargetClosest();
             NPC.behindTiles = true;
 
-            bool TargetValidForShootingAt = NPC.HasValidTarget ? Main.player[NPC.target].Center.Y > NPC.Center.Y || Collision.CanHitLine(NPC.Center, 1, 1, Main.player[NPC.target].position, Main.player[NPC.target].width, Main.player[NPC.target].height) : false;
+            bool TargetValidForShootingAt = NPC.HasValidTarget ? Main.player[NPC.target].Center.Y > NPC.Center.Y && Collision.CanHitLine(NPC.Center + new Vector2(0, 16).RotatedBy(NPC.rotation) + new Vector2(0, 32), 1, 1, Main.player[NPC.target].position, Main.player[NPC.target].width, Main.player[NPC.target].height) : false;
 
             NPC.rotation = MathHelper.SmoothStep(NPC.Center.DirectionTo(TargetValidForShootingAt ? Main.player[NPC.target].Center : NPC.Bottom).ToRotation() - MathHelper.PiOver2, NPC.rotation, 0.9f);
 
@@ -114,7 +114,7 @@ public class Shadlopod : ModNPC
 
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        npcLoot.Add(ItemDropRule.Common(ItemID.RottenChunk, 66,1,2));
+        npcLoot.Add(new CommonDrop(ItemID.RottenChunk, 3, 1, 2, 2));
     }
     public override void FindFrame(int frameHeight)
     {
