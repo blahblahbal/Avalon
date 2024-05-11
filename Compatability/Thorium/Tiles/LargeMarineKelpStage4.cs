@@ -3,9 +3,14 @@ using Avalon.Compatability.Thorium.Items.Placeable.Tile;
 using Avalon.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
+using Terraria.GameContent;
+using Terraria.GameContent.Drawing;
+using Terraria.Graphics.Capture;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -50,25 +55,10 @@ public class LargeMarineKelpStage4 : ModTile
 
         return false;
     }
+
     public override bool CreateDust(int i, int j, ref int type)
     {
         type = DustID.GrassBlades;
         return base.CreateDust(i, j, ref type);
-    }
-    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
-    {
-        Color color = Color.White * 0.65f;
-        int frameX = Main.tile[i, j].TileFrameX;
-        int frameY = Main.tile[i, j].TileFrameY;
-        int width = 18;
-        int offsetY = 2;
-        int height = 18;
-        int offsetX = 1;
-        Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-        if (Main.drawToScreen)
-        {
-            zero = Vector2.Zero;
-        }
-        Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Glow").Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
     }
 }

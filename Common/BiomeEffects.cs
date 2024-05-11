@@ -18,10 +18,10 @@ namespace Avalon.Common
         {
             if (Player.whoAmI == Main.myPlayer && ModContent.GetInstance<AvalonClientConfig>().BiomeParticlesEnabled)
             {
-                /*if (ExxoAvalonOrigins.Depths != null && (bool)ExxoAvalonOrigins.Depths.Call("InDepths", Player)) //for the future
+                if (ExxoAvalonOrigins.Depths != null && (bool)ExxoAvalonOrigins.Depths.Call("InDepths", Player)) //for the future //THE FUTURE IS NOW OLD MAN
                 {
                     return;
-                }*/
+                }
 
                 if (Player.position.Y > (Main.UnderworldLayer - 100) * 16)
                 {
