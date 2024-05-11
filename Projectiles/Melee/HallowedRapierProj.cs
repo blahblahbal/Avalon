@@ -79,7 +79,7 @@ public class HallowedRapierProj : ModProjectile
             }
             
         }
-        Projectile.velocity = Projectile.velocity.RotatedByRandom(MathHelper.PiOver4/2);
+        Projectile.velocity = Projectile.velocity.RotatedByRandom(MathHelper.PiOver4/6);
         player.SetDummyItemTime(num2);
         DelegateMethods.v3_1 = new Vector3(0.5f, 0.5f, 0.5f);
         Utils.PlotTileLine(Projectile.Center - Projectile.velocity, Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 80f, 16f, DelegateMethods.CastLightOpen);
@@ -99,23 +99,26 @@ public class HallowedRapierProj : ModProjectile
             DrawOriginOffsetX = (HalfProjWidth - HalfSpriteWidth) * Main.player[Projectile.owner].gravDir;
             DrawOffsetX = Main.player[Projectile.owner].gravDir == 1 ? 0 : -HalfSpriteWidth;
         }
-        DrawOriginOffsetY = -(TextureAssets.Projectile[Type].Value.Width / 6);
-        DrawOffsetX -= Projectile.spriteDirection * 4;
+        DrawOffsetX -= Projectile.spriteDirection * Main.rand.Next(-4,8);
         Projectile.position += Vector2.Normalize(Projectile.velocity) * 40;
-
-        for (float num8 = 0f; num8 <= 1f; num8 += 0.05f)
+        if (Projectile.ai[0] % 2f == 0)
         {
-            float num9 = Utils.Remap(num8, 0f, 1f, 1f, 5f);
-            Rectangle rectangle = Projectile.Hitbox;
-            Vector2 vector5 = Projectile.velocity.SafeNormalize(Vector2.Zero) * Projectile.width * num9 * Projectile.scale;
-            rectangle.Offset((int)vector5.X, (int)vector5.Y);
+            for (float num8 = 0.3f; num8 <= 1f; num8 += Main.rand.NextFloat(0.01f, 0.2f))
+            {
+                float num9 = Utils.Remap(num8, 0f, 1f, 1f, 5f);
+                Rectangle rectangle = Projectile.Hitbox;
+                Vector2 vector5 = Projectile.velocity.SafeNormalize(Vector2.Zero) * Projectile.width * num9 * Projectile.scale;
+                rectangle.Offset((int)vector5.X, (int)vector5.Y);
 
 
 
-            Vector2 location = new Vector2(Main.rand.NextFloat(rectangle.X, rectangle.X + rectangle.Width), Main.rand.NextFloat(rectangle.Y, rectangle.Y + rectangle.Height));
+                Vector2 location = new Vector2(Main.rand.NextFloat(rectangle.X, rectangle.X + rectangle.Width), Main.rand.NextFloat(rectangle.Y, rectangle.Y + rectangle.Height));
 
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), location, location.DirectionTo(player.Center), ModContent.ProjectileType<HallowedRapierVis>(), 0, Projectile.knockBack, Projectile.owner, Projectile.rotation);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), location, location.DirectionTo(player.Center), ModContent.ProjectileType<HallowedRapierVis>(), 0, Projectile.knockBack, Projectile.owner, Projectile.rotation);
+            }
+
         }
+       
         if (Projectile.ai[0] % 4f == 1)
         {
 
@@ -134,7 +137,7 @@ public class HallowedRapierProj : ModProjectile
     }
     public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
     {
-        for (float num8 = 0f; num8 <= 1f; num8 += 0.05f)
+        for (float num8 = 0.1f; num8 <= 1f; num8 += 0.05f)
         {
             float num9 = Utils.Remap(num8, 0f, 1f, 1f, 5f);
             Rectangle rectangle = projHitbox;
@@ -142,10 +145,6 @@ public class HallowedRapierProj : ModProjectile
             rectangle.Offset((int)vector5.X, (int)vector5.Y);
             if (rectangle.Intersects(targetHitbox))
             {
-                Vector2 location = new Vector2(Main.rand.NextFloat(rectangle.X, rectangle.X + rectangle.Width), Main.rand.NextFloat(rectangle.Y, rectangle.Y + rectangle.Height));
-
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), location, Projectile.velocity / 5, ModContent.ProjectileType<HallowedRapierVis>(), 0, Projectile.knockBack, Projectile.owner, Projectile.rotation, 1);
-
                 return true;
             }
             
