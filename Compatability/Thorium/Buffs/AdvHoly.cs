@@ -12,6 +12,10 @@ public class AdvHoly: ModBuff
     {
         return ModLoader.HasMod("ThoriumMod");
     }
+    public override void SetStaticDefaults()
+    {
+        Data.Sets.Buffs.Elixir[Type] = true;
+    }
     public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
     {
         rare = 3;

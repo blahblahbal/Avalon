@@ -1,7 +1,10 @@
+using Avalon.Compatability.Thorium.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Buffs;
 using ThoriumMod.Items.Consumable;
+using ThoriumMod.Items.Depths;
 
 namespace Avalon.Compatability.Thorium.Items.Potions;
 
@@ -16,6 +19,8 @@ class AdvArcanePotion : ArcanePotion
     {
         base.SetStaticDefaults();
         Item.ResearchUnlockCount = 30;
+        Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ArcanePotionBuff>());
+        Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<ArcanePotion>(), ModContent.BuffType<AdvArcane>());
     }
 
     public override void SetDefaults()
@@ -26,7 +31,7 @@ class AdvArcanePotion : ArcanePotion
         Item.useTime = 15;
         Item.useAnimation = 15;
         Item.buffTime = 8 * 3600;
-        Item.buffType = ModContent.BuffType<Buffs.AdvArcane>();
+        Item.buffType = ModContent.BuffType<AdvArcane>();
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

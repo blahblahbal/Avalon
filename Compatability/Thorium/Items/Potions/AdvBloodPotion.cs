@@ -1,7 +1,10 @@
+using Avalon.Compatability.Thorium.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Buffs;
 using ThoriumMod.Items.Consumable;
+using ThoriumMod.Items.Depths;
 
 namespace Avalon.Compatability.Thorium.Items.Potions;
 
@@ -16,6 +19,8 @@ class AdvBloodPotion : BloodPotion
     {
         base.SetStaticDefaults();
         Item.ResearchUnlockCount = 30;
+        Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<BloodRush>());
+        Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<BloodPotion>(), ModContent.BuffType<AdvBloodRush>());
     }
 
     public override void SetDefaults()
@@ -26,7 +31,7 @@ class AdvBloodPotion : BloodPotion
         Item.useTime = 15;
         Item.useAnimation = 15;
         Item.buffTime = 6 * 3600;
-        Item.buffType = ModContent.BuffType<Buffs.AdvBloodRush>();
+        Item.buffType = ModContent.BuffType<AdvBloodRush>();
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }

@@ -11,6 +11,10 @@ public class AdvArcane : ModBuff
     {
         return ModLoader.HasMod("ThoriumMod");
     }
+    public override void SetStaticDefaults()
+    {
+        Data.Sets.Buffs.Elixir[Type] = true;
+    }
     public override void Update(Player player, ref int buffIndex)
     {
         player.GetThoriumPlayer().buffArcanePotion = true;

@@ -68,7 +68,7 @@ namespace Avalon.Data.Sets
     internal class Item
     {
         /// <summary>
-        /// Used for potion/elixir use lockout
+        /// Add to this if your mod adds potions/elixirs; used for potion/elixir usage lockout
         /// </summary>
         public static Dictionary<int, int> ElixirToPotionBuffID = new Dictionary<int, int>()
         {
@@ -132,7 +132,7 @@ namespace Avalon.Data.Sets
         };
 
         /// <summary>
-        /// Used for potion/elixir use lockout
+        /// Add to this if your mod adds potions/elixirs; used for potion/elixir usage lockout
         /// </summary>
         public static Dictionary<int, int> PotionToElixirBuffID = new Dictionary<int, int>()
         {

@@ -11,6 +11,10 @@ public class AdvGlowing : ModBuff
     {
         return ModLoader.HasMod("ThoriumMod");
     }
+    public override void SetStaticDefaults()
+    {
+        Data.Sets.Buffs.Elixir[Type] = true;
+    }
     public override void Update(Player player, ref int buffIndex)
     {
         player.GetDamage(ThoriumDamageBase<HealerDamage>.Instance) += 0.15f;

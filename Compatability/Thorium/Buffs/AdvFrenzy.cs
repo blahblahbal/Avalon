@@ -10,6 +10,10 @@ public class AdvFrenzy : ModBuff
     {
         return ModLoader.HasMod("ThoriumMod");
     }
+    public override void SetStaticDefaults()
+    {
+        Data.Sets.Buffs.Elixir[Type] = true;
+    }
     public override void Update(Player player, ref int buffIndex)
     {
         player.GetAttackSpeed(DamageClass.Generic) += 0.12f;

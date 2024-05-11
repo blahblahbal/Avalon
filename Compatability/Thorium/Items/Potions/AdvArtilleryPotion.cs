@@ -1,7 +1,10 @@
+using Avalon.Compatability.Thorium.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Buffs;
 using ThoriumMod.Items.Consumable;
+using ThoriumMod.Items.Depths;
 
 namespace Avalon.Compatability.Thorium.Items.Potions;
 
@@ -16,6 +19,8 @@ class AdvArtilleryPotion : ArtilleryPotion
     {
         base.SetStaticDefaults();
         Item.ResearchUnlockCount = 30;
+        Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ArtilleryBuff>());
+        Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<ArtilleryPotion>(), ModContent.BuffType<AdvArtillery>());
     }
 
     public override void SetDefaults()
@@ -26,7 +31,7 @@ class AdvArtilleryPotion : ArtilleryPotion
         Item.useTime = 15;
         Item.useAnimation = 15;
         Item.buffTime = 12 * 3600;
-        Item.buffType = ModContent.BuffType<Buffs.AdvArtillery>();
+        Item.buffType = ModContent.BuffType<AdvArtillery>();
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
     }
 }
