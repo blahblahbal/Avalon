@@ -53,12 +53,6 @@ public class LargeMarineKelpStage2 : ModTile
         type = DustID.GrassBlades;
         return base.CreateDust(i, j, ref type);
     }
-    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
-    {
-        AvalonWorld.CheckLargeHerb(i, j, Type);
-        noBreak = true;
-        return true;
-    }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         yield return new Item(ModContent.ItemType<LargeMarineKelpSeed>());

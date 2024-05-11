@@ -37,6 +37,16 @@ namespace Avalon.Hooks
             {
                 sizeY = 3;
             }
+            if (ExxoAvalonOrigins.Thorium != null)
+            {
+                if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Compatability.Thorium.Tiles.LargeMarineKelpStage1>() ||
+                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Compatability.Thorium.Tiles.LargeMarineKelpStage2>() ||
+                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Compatability.Thorium.Tiles.LargeMarineKelpStage3>() ||
+                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Compatability.Thorium.Tiles.LargeMarineKelpStage4>())
+                {
+                    sizeY = 3;
+                }
+            }
             orig.Invoke(self, screenPosition, offSet, topLeftX, topLeftY, sizeX, sizeY);
         }
 

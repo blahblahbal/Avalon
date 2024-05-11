@@ -1369,138 +1369,138 @@ public class AvalonWorld : ModSystem
         }
     }
 
-    public static void CheckLargeHerb(int x, int y, int type)
-    {
-        if (WorldGen.destroyObject)
-        {
-            return;
-        }
+    //public static void CheckLargeHerb(int x, int y, int type)
+    //{
+    //    if (WorldGen.destroyObject)
+    //    {
+    //        return;
+    //    }
 
-        Tile t = Main.tile[x, y];
-        int style = t.TileFrameX / 18;
-        bool destroy = false;
-        int fixedY = y;
-        int yFrame = Main.tile[x, y].TileFrameY;
-        fixedY -= yFrame / 18;
-        if (!WorldGen.SolidTile2(x, fixedY + 3) || !Main.tile[x, fixedY].HasTile ||
-            !Main.tile[x, fixedY + 1].HasTile || !Main.tile[x, fixedY + 2].HasTile)
-        {
-            destroy = true;
-        }
+    //    Tile t = Main.tile[x, y];
+    //    int style = t.TileFrameX / 18;
+    //    bool destroy = false;
+    //    int fixedY = y;
+    //    int yFrame = Main.tile[x, y].TileFrameY;
+    //    fixedY -= yFrame / 18;
+    //    if (!WorldGen.SolidTile2(x, fixedY + 3) || !Main.tile[x, fixedY].HasTile ||
+    //        !Main.tile[x, fixedY + 1].HasTile || !Main.tile[x, fixedY + 2].HasTile)
+    //    {
+    //        destroy = true;
+    //    }
 
-        if (destroy)
-        {
-            WorldGen.destroyObject = true;
-            for (int u = fixedY; u < fixedY + 3; u++)
-            {
-                WorldGen.KillTile(x, u);
-            }
+    //    if (destroy)
+    //    {
+    //        WorldGen.destroyObject = true;
+    //        for (int u = fixedY; u < fixedY + 3; u++)
+    //        {
+    //            WorldGen.KillTile(x, u);
+    //        }
 
-            // 469 through 471 are the immature tiles of the large herb; 472 is the mature version
-            if (type == (ushort)ModContent.TileType<LargeHerbsStage1>() ||
-                type == (ushort)ModContent.TileType<LargeHerbsStage2>() ||
-                type == (ushort)ModContent.TileType<LargeHerbsStage3>())
-            {
-                int item = 0;
-                switch (style)
-                {
-                    case 0:
-                        item = ModContent.ItemType<LargeDaybloomSeed>();
-                        break;
-                    case 1:
-                        item = ModContent.ItemType<LargeMoonglowSeed>();
-                        break;
-                    case 2:
-                        item = ModContent.ItemType<LargeBlinkrootSeed>();
-                        break;
-                    case 3:
-                        item = ModContent.ItemType<LargeDeathweedSeed>();
-                        break;
-                    case 4:
-                        item = ModContent.ItemType<LargeWaterleafSeed>();
-                        break;
-                    case 5:
-                        item = ModContent.ItemType<LargeFireblossomSeed>();
-                        break;
-                    case 6:
-                        item = ModContent.ItemType<LargeShiverthornSeed>();
-                        break;
-                    case 7:
-                        item = ModContent.ItemType<LargeBloodberrySeed>();
-                        break;
-                    case 8:
-                        item = ModContent.ItemType<LargeSweetstemSeed>();
-                        break;
-                    case 9:
-                        item = ModContent.ItemType<LargeBarfbushSeed>();
-                        break;
-                    case 10:
-                        item = ModContent.ItemType<LargeHolybirdSeed>();
-                        break;
-                    case 11:
-                        item = ModContent.ItemType<LargeTwilightPlumeSeed>();
-                        break;
-                } // 3710 through 3719 are the seeds
+    //        // 469 through 471 are the immature tiles of the large herb; 472 is the mature version
+    //        if (type == (ushort)ModContent.TileType<LargeHerbsStage1>() ||
+    //            type == (ushort)ModContent.TileType<LargeHerbsStage2>() ||
+    //            type == (ushort)ModContent.TileType<LargeHerbsStage3>())
+    //        {
+    //            int item = 0;
+    //            switch (style)
+    //            {
+    //                case 0:
+    //                    item = ModContent.ItemType<LargeDaybloomSeed>();
+    //                    break;
+    //                case 1:
+    //                    item = ModContent.ItemType<LargeMoonglowSeed>();
+    //                    break;
+    //                case 2:
+    //                    item = ModContent.ItemType<LargeBlinkrootSeed>();
+    //                    break;
+    //                case 3:
+    //                    item = ModContent.ItemType<LargeDeathweedSeed>();
+    //                    break;
+    //                case 4:
+    //                    item = ModContent.ItemType<LargeWaterleafSeed>();
+    //                    break;
+    //                case 5:
+    //                    item = ModContent.ItemType<LargeFireblossomSeed>();
+    //                    break;
+    //                case 6:
+    //                    item = ModContent.ItemType<LargeShiverthornSeed>();
+    //                    break;
+    //                case 7:
+    //                    item = ModContent.ItemType<LargeBloodberrySeed>();
+    //                    break;
+    //                case 8:
+    //                    item = ModContent.ItemType<LargeSweetstemSeed>();
+    //                    break;
+    //                case 9:
+    //                    item = ModContent.ItemType<LargeBarfbushSeed>();
+    //                    break;
+    //                case 10:
+    //                    item = ModContent.ItemType<LargeHolybirdSeed>();
+    //                    break;
+    //                case 11:
+    //                    item = ModContent.ItemType<LargeTwilightPlumeSeed>();
+    //                    break;
+    //            } // 3710 through 3719 are the seeds
 
-                if (item > 0)
-                {
-                    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(x, y), x * 16, fixedY * 16, 16, 48, item);
-                }
-            }
-            else
-            {
-                int item = 0;
-                switch (style)
-                {
-                    case 0:
-                        item = ModContent.ItemType<LargeDaybloom>();
-                        break;
-                    case 1:
-                        item = ModContent.ItemType<LargeMoonglow>();
-                        break;
-                    case 2:
-                        item = ModContent.ItemType<LargeBlinkroot>();
-                        break;
-                    case 3:
-                        item = ModContent.ItemType<LargeDeathweed>();
-                        break;
-                    case 4:
-                        item = ModContent.ItemType<LargeWaterleaf>();
-                        break;
-                    case 5:
-                        item = ModContent.ItemType<LargeFireblossom>();
-                        break;
-                    case 6:
-                        item = ModContent.ItemType<LargeShiverthorn>();
-                        break;
-                    case 7:
-                        item = ModContent.ItemType<LargeBloodberry>();
-                        break;
-                    case 8:
-                        item = ModContent.ItemType<LargeSweetstem>();
-                        break;
-                    case 9:
-                        item = ModContent.ItemType<LargeBarfbush>();
-                        break;
-                    case 10:
-                        item = ModContent.ItemType<LargeHolybird>();
-                        break;
-                    case 11:
-                        item = ModContent.ItemType<LargeTwilightPlume>();
-                        break;
-                }
+    //            if (item > 0)
+    //            {
+    //                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(x, y), x * 16, fixedY * 16, 16, 48, item);
+    //            }
+    //        }
+    //        else if (type == ModContent.TileType<LargeHerbsStage4>())
+    //        {
+    //            int item = 0;
+    //            switch (style)
+    //            {
+    //                case 0:
+    //                    item = ModContent.ItemType<LargeDaybloom>();
+    //                    break;
+    //                case 1:
+    //                    item = ModContent.ItemType<LargeMoonglow>();
+    //                    break;
+    //                case 2:
+    //                    item = ModContent.ItemType<LargeBlinkroot>();
+    //                    break;
+    //                case 3:
+    //                    item = ModContent.ItemType<LargeDeathweed>();
+    //                    break;
+    //                case 4:
+    //                    item = ModContent.ItemType<LargeWaterleaf>();
+    //                    break;
+    //                case 5:
+    //                    item = ModContent.ItemType<LargeFireblossom>();
+    //                    break;
+    //                case 6:
+    //                    item = ModContent.ItemType<LargeShiverthorn>();
+    //                    break;
+    //                case 7:
+    //                    item = ModContent.ItemType<LargeBloodberry>();
+    //                    break;
+    //                case 8:
+    //                    item = ModContent.ItemType<LargeSweetstem>();
+    //                    break;
+    //                case 9:
+    //                    item = ModContent.ItemType<LargeBarfbush>();
+    //                    break;
+    //                case 10:
+    //                    item = ModContent.ItemType<LargeHolybird>();
+    //                    break;
+    //                case 11:
+    //                    item = ModContent.ItemType<LargeTwilightPlume>();
+    //                    break;
+    //            }
 
-                if (item > 0)
-                {
-                    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(x, y), x * 16, fixedY * 16, 16, 48, item);
-                }
+    //            if (item > 0)
+    //            {
+    //                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(x, y), x * 16, fixedY * 16, 16, 48, item);
+    //            }
 
-                // 3700 through 3709 are the large herbs
-            }
+    //            // 3700 through 3709 are the large herbs
+    //        }
 
-            WorldGen.destroyObject = false;
-        }
-    }
+    //        WorldGen.destroyObject = false;
+    //    }
+    //}
     public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
     {
         float ContagionStrength = ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;

@@ -91,12 +91,6 @@ public class LargeHerbsStage3 : ModTile
         }
         return base.CreateDust(i, j, ref type);
     }
-    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
-    {
-        AvalonWorld.CheckLargeHerb(i, j, Type);
-        noBreak = true;
-        return true;
-    }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         int item = 0;

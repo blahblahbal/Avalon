@@ -55,21 +55,20 @@ public class LargeMarineKelpStage4 : ModTile
         type = DustID.GrassBlades;
         return base.CreateDust(i, j, ref type);
     }
-    public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
+    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
-        AvalonWorld.CheckLargeHerb(i, j, Type);
-        noBreak = true;
-        return true;
-    }
-    public override void KillMultiTile(int i, int j, int frameX, int frameY)
-    {
-        int item = 0;
-        switch (frameX / 18)
+        Color color = Color.White * 0.65f;
+        int frameX = Main.tile[i, j].TileFrameX;
+        int frameY = Main.tile[i, j].TileFrameY;
+        int width = 18;
+        int offsetY = 2;
+        int height = 18;
+        int offsetX = 1;
+        Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+        if (Main.drawToScreen)
         {
-            case 0:
-                item = ModContent.ItemType<LargeMarineKelp>();
-                break;
+            zero = Vector2.Zero;
         }
-        if (item > 0) Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 48, item);
+        Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Glow").Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
     }
 }
