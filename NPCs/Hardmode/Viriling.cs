@@ -22,15 +22,16 @@ public class Viriling : ModNPC
 
     public override void SetDefaults()
     {
+        NPC.width = 32;
+        NPC.height = 40;
+        NPC.gfxOffY = 6;
         NPC.damage = 23;
         NPC.lifeMax = 122;
         NPC.defense = 9;
         NPC.noGravity = true;
-        NPC.width = 46;
         NPC.aiStyle = -1;
         NPC.npcSlots = 1f;
         NPC.value = 55f;
-        NPC.height = 54;
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.knockBackResist = 0.3f;
