@@ -8786,6 +8786,21 @@ Mods: {
 				DisplayName: Hallowed Rapier
 				Tooltip: ""
 			}
+
+			CalculatorSpectacles: {
+				DisplayName: Calculator Spectacles
+				Tooltip: ""
+			}
+
+			StarTorch: {
+				DisplayName: Star Torch
+				Tooltip: ""
+			}
+
+			Taco: {
+				DisplayName: Taco
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9662,12 +9677,12 @@ Mods: {
 
 			Pathogen: {
 				DisplayName: Pathogen
-				Description: Increases debuff time and reduces life regen
+				Description: Increases debuff duration and potency
 			}
 
 			ImbuePathogen: {
 				DisplayName: Weapon Imbue: Pathogen
-				Description: Melee attacks decrease increase enemies debuff duration
+				Description: Melee attacks increase enemies debuff duration
 			}
 
 			IcySlowdown: {
