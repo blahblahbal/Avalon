@@ -201,7 +201,7 @@ class StaminaBar : UIState
         if (elementIndex == lastElementIndex)
         {
             sprite = panelRightStam;
-            offset = new Vector2(-19f, -6f);
+            offset = new Vector2(-18f, -12f);
         }
         else if (elementIndex != firstElementIndex)
         {
