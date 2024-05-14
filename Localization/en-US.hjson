@@ -8799,7 +8799,12 @@ Mods: {
 
 			Taco: {
 				DisplayName: Taco
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.MajorStats}"
+			}
+
+			RockCandy: {
+				DisplayName: Rock Candy
+				Tooltip: "{$CommonItemTooltip.MajorStats}"
 			}
 		}
 
