@@ -66,8 +66,19 @@ public abstract class ModHerb : ModTile
     public override bool CanKillTile(int i, int j, ref bool blockDamaged)
     {
         Player p = ClassExtensions.GetPlayerForTile(i, j);
+
         if (p.HeldItem.type == ItemID.StaffofRegrowth || p.HeldItem.type == ItemID.AcornAxe)
-            return true;
+        {
+            PlantStage stage = GetStage(i, j);
+            if (stage == PlantStage.Blooming)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         return base.CanKillTile(i, j, ref blockDamaged);
     }
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects spriteEffects)
@@ -79,7 +90,7 @@ public abstract class ModHerb : ModTile
     {
         PlantStage stage = GetStage(i, j);
 
-        if (stage == PlantStage.Blooming || stage == PlantStage.Mature)
+        if (stage == PlantStage.Blooming)
         {
             Player p = ClassExtensions.GetPlayerForTile(i, j);
             int dropItemStack = 1;
@@ -96,10 +107,6 @@ public abstract class ModHerb : ModTile
         int secondaryItemStack = Main.rand.Next(3) + 1;
         PlantStage stage = GetStage(i, j);
         bool flag = p.HeldItem.type == ItemID.StaffofRegrowth || p.HeldItem.type == ItemID.AcornAxe;
-        if (flag && stage == PlantStage.Mature)
-        {
-            Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), new Vector2(i, j).ToWorldCoordinates(), SeedDrop, secondaryItemStack);
-        }
         if (stage == PlantStage.Blooming)
         {
             if (flag)
