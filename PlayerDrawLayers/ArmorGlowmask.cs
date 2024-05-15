@@ -51,6 +51,11 @@ public class HeadGlowmask : PlayerDrawLayer
         {
             return;
         }
+
+        if (drawPlayer.head != slot.headSlot)
+        {
+            return;
+        }
         Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
 
         Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
@@ -91,6 +96,11 @@ public class BodyGlowmask : PlayerDrawLayer
             slot = drawPlayer.armor[11];
         }
         else
+        {
+            return;
+        }
+
+        if (drawPlayer.body != slot.bodySlot)
         {
             return;
         }
@@ -144,6 +154,11 @@ public class aShoulderGlowmask : PlayerDrawLayer
             slot = drawPlayer.armor[11];
         }
         else
+        {
+            return;
+        }
+
+        if (drawPlayer.body != slot.bodySlot)
         {
             return;
         }
@@ -201,7 +216,12 @@ public class zArmGlowmask : PlayerDrawLayer
         {
             return;
         }
-        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, 255), drawInfo.shadow);
+
+        if (drawPlayer.body != slot.bodySlot)
+        {
+            return;
+        }
+        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
 
         Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
 
@@ -270,6 +290,11 @@ public class LegsGlowmask : PlayerDrawLayer
             slot = drawPlayer.armor[12];
         }
         else
+        {
+            return;
+        }
+
+        if (drawPlayer.legs != slot.legSlot)
         {
             return;
         }
