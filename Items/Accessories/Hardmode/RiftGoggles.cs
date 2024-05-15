@@ -618,7 +618,6 @@ public class OreRift : ModItem
                     tiles++;
                     AddValidNeighbors(points, a);
                 }
-                
             }
             index++;
         }

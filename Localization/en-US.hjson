@@ -8789,12 +8789,12 @@ Mods: {
 
 			CalculatorSpectacles: {
 				DisplayName: Calculator Spectacles
-				Tooltip: ""
+				Tooltip: Displays how many bars each ore vein is worth when hovering the vein
 			}
 
 			StarTorch: {
 				DisplayName: Star Torch
-				Tooltip: ""
+				Tooltip: Can be placed in midair
 			}
 
 			Taco: {

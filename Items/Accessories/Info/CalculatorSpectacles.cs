@@ -7,7 +7,6 @@ using Avalon.Common.Players;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
-using Terraria.UI;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -33,7 +32,6 @@ public class CalculatorSpectacles : ModItem
     public static float CountOres(Point p, int type, int maxTiles = 500)
     {
         int tiles = 0;
-        int t2 = 0;
 
         Tile tile = Framing.GetTileSafely(p);
         if (!tile.HasTile || tile.TileType != type)
@@ -44,7 +42,7 @@ public class CalculatorSpectacles : ModItem
         List<List<Point>> points = new List<List<Point>>();
         points = AddValidNeighbors(points, p);
 
-        HashSet<Point> exclusions = new HashSet<Point>();
+        HashSet<Point> fullAmount = new HashSet<Point>();
 
         int index = 0;
         while (points.Count > 0 && tiles < maxTiles && index < points.Count)
@@ -53,18 +51,19 @@ public class CalculatorSpectacles : ModItem
 
             foreach (Point a in tilePos)
             {
+                if (fullAmount.Contains(a)) continue;
                 Tile t = Framing.GetTileSafely(a.X, a.Y);
                 if (t.HasTile && t.TileType == type)
                 {
                     tiles++;
                     AddValidNeighbors(points, a);
-                    exclusions.Add(a);
+                    fullAmount.Add(a);
                 }
             }
             index++;
         }
 
-        float bars = exclusions.Count;
+        float bars = fullAmount.Count;
         if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
         {
             bars /= 3f;
@@ -99,8 +98,8 @@ public class CalcSpecSystem : ModSystem
             Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
             if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType])
             {
-                int bars = (int)CalculatorSpectacles.CountOres(tilepos, Main.tile[tilepos.X, tilepos.Y].TileType, 600);
-                DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, bars + " bars" /*" [i:" + Data.Sets.Tile.OresToBars[Main.tile[tilepos.X, tilepos.Y].TileType] + "]"*/, Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition - Main.screenPosition - new Vector2(32, 32), Color.Yellow, Color.Black, 1.4f);
+                int bars = (int)CalculatorSpectacles.CountOres(tilepos, Main.tile[tilepos.X, tilepos.Y].TileType, 700);
+                DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, bars + (bars == 1 ? " bar" : " bars"), Main.MouseScreen + new Vector2(-5, -32), Color.Yellow, Color.Black, 1.4f);
             }
         }
     }
