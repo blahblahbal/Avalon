@@ -7,6 +7,7 @@ using Avalon.Common.Players;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
+using Avalon.Tiles.Ores;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -76,8 +77,32 @@ public class CalculatorSpectacles : ModItem
         {
             bars /= 5f;
         }
+		//else if (Data.Sets.Tile.SixOrePerBar.Contains(type))
+		//{
+		//	bars /= 6f;
+		//}
+		//else if (Data.Sets.Tile.SevenOrePerBar.Contains(type))
+		//{
+		//	bars /= 7f;
+		//}
+		else if (Data.Sets.Tile.EightOrePerBar.Contains(type))
+		{
+			bars /= 8f;
+		}
+		else if (type == ModContent.TileType<Heartstone>())
+		{
+			bars /= 45;
+		}
+		else if (type == ModContent.TileType<Starstone>())
+		{
+			bars /= 60;
+		}
+		else if (type == ModContent.TileType<Boltstone>())
+		{
+			bars /= 25;
+		}
 
-        return bars;
+		return bars;
     }
 }
 public class CalcSpecSystem : ModSystem
@@ -96,10 +121,20 @@ public class CalcSpecSystem : ModSystem
         if (Main.LocalPlayer.HasItem(ModContent.ItemType<CalculatorSpectacles>()))
         {
             Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-            if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType])
+			Color c = Lighting.GetColor(tilepos);
+
+			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] && c.R > 5 && c.G > 5 && c.B > 5 && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Tiles.Ores.PrimordialOre>())
             {
                 int bars = (int)CalculatorSpectacles.CountOres(tilepos, Main.tile[tilepos.X, tilepos.Y].TileType, 700);
-                DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, bars + (bars == 1 ? " bar" : " bars"), Main.MouseScreen + new Vector2(-5, -32), Color.Yellow, Color.Black, 1.4f);
+				string text = bars.ToString();
+				if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>() ||
+					Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>() ||
+					Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
+				{
+					text += (bars == 1 ? " crystal" : " crystals");
+				}
+				else text += (bars == 1 ? " bar" : " bars");
+				DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, Main.MouseScreen + new Vector2(-5, -32), Color.Yellow, Color.Black, 1.4f);
             }
         }
     }

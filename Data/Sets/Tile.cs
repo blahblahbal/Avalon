@@ -24,10 +24,15 @@ namespace Avalon.Data.Sets
         };
 
         public static List<int> FiveOrePerBar = new() { TileID.Adamantite, TileID.Titanium, TileID.Chlorophyte,
-            ModContent.TileType<TroxiniumOre>(), ModContent.TileType<HallowedOre>()
+            ModContent.TileType<TroxiniumOre>(), ModContent.TileType<HallowedOre>(), ModContent.TileType<ShroomiteOre>(),
+			//ModContent.TileType<PyroscoricOre>(), ModContent.TileType<TritanoriumOre>()
         };
 
-        public static List<ushort> LivingBlocks = new()
+		//public static List<int> SixOrePerBar = new() { ModContent.TileType<UnvolanditeOre>(), ModContent.TileType<VorazylcumOre>() };
+
+		public static List<int> EightOrePerBar = new() { ModContent.TileType<CaesiumOre>() };
+
+		public static List<ushort> LivingBlocks = new()
         {
             TileID.LivingFire, TileID.LivingCursedFire, TileID.LivingDemonFire, TileID.LivingFrostFire, TileID.LivingIchor,
             TileID.LivingUltrabrightFire, (ushort)ModContent.TileType<LivingLightning>()
