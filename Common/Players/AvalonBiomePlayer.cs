@@ -1,7 +1,9 @@
 using Avalon.Biomes;
+using Avalon.Buffs;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Common.Players;
@@ -32,7 +34,8 @@ public class AvalonBiomePlayer : ModPlayer
     public bool ZoneHumidity { get; private set; }
     public bool ZoneDelight => Player.InModBiome(ModContent.GetInstance<DelightCandleBiome>());
     public bool ZoneSight => Player.InModBiome(ModContent.GetInstance<SightCandleBiome>());
-    public override void PostUpdate()
+	public bool ZoneBasaltObelisk => Player.InModBiome(ModContent.GetInstance<BasaltObeliskBiome>());
+	public override void PostUpdate()
     {
         if (ZoneAltDungeon)
         {
@@ -78,10 +81,14 @@ public class AvalonBiomePlayer : ModPlayer
         if (ZoneDelight)
         {
             Player.lifeRegen += 3;
-        }
-    }
+		}
+		if (ZoneBasaltObelisk)
+		{
+			Player.AddBuff(ModContent.BuffType<BasaltObeliskBuff>(), 5 * 60);
+		}
+	}
 
-    public void UpdateZones(BiomeTileCounts biomeTileCounts)
+	public void UpdateZones(BiomeTileCounts biomeTileCounts)
     {
         Point tileCoordinates = Player.Center.ToTileCoordinates();
         ushort wallType = Main.tile[tileCoordinates.X, tileCoordinates.Y].WallType;

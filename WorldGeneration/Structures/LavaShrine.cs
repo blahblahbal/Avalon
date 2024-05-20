@@ -971,12 +971,12 @@ class LavaShrine
 
                         // fifth item (obsidian rose, bag of fire, or rarely more money)
                         int rand3 = WorldGen.genRand.Next(27);
-                        if (rand3 >= 0 && rand2 <= 10)
+                        if (rand3 >= 0 && rand3 <= 10)
                         {
                             Main.chest[num2].item[4].SetDefaults(ItemID.ObsidianRose);
                             Main.chest[num2].item[4].Prefix(-1);
                         }
-                        else if (rand3 >= 11 && rand2 <= 25)
+                        else if (rand3 >= 11 && rand3 <= 25)
                         {
                             Main.chest[num2].item[4].SetDefaults(ModContent.ItemType<BagofFire>());
                         }

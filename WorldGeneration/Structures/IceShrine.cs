@@ -375,7 +375,7 @@ class IceShrine
                         var num5 = WorldGen.genRand.Next(5);
                         if (num5 == 0)
                         {
-                            Main.chest[num2].item[2].SetDefaults(ItemID.LesserRestorationPotion, false);
+                            Main.chest[num2].item[2].SetDefaults(ItemID.RestorationPotion, false);
                             Main.chest[num2].item[2].stack = WorldGen.genRand.Next(3, 7);
                         }
                         if (num5 == 1)

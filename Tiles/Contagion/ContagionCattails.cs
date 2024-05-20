@@ -11,7 +11,7 @@ using Avalon.Dusts;
 using Avalon.Common;
 using Avalon.Hooks;
 
-namespace Avalon.Contagion.Tiles;
+namespace Avalon.Tiles.Contagion;
 
 public class ContagionCattails : ModTile
 {

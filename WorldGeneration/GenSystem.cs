@@ -14,7 +14,8 @@ namespace Avalon.WorldGeneration;
 public class GenSystem : ModSystem
 {
     public static int HellfireItemCount;
-    public static int TropicsItemCount;
+	public static int HellfireItemResult;
+	public static int TropicsItemCount;
     public override void PostWorldGen()
     {
         AvalonWorld.JungleLocationX = GenVars.JungleX;
@@ -323,22 +324,42 @@ public class GenSystem : ModSystem
     }
     public static int GetNextHellfireChestItem()
     {
-        int result = ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>();
-        switch (HellfireItemCount % 2)
-        {
-            case 0:
-                result = ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>();
-                break;
-            case 1:
-                result = ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>();
-                break;
-        }
+		//int result = ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>();
+		//switch (HellfireItemCount % 2)
+		//{
+		//	case 0:
+		//		result = ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>();
+		//		break;
+		//	case 1:
+		//		result = ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>();
+		//		break;
+		//}
 
-        HellfireItemCount++;
-        return result;
-    }
+		//HellfireItemCount++;
+		//return result;
+		List<int> items = new List<int>()
+		{
+			ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>(),
+			ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>(),
+			ModContent.ItemType<Items.Placeable.Furniture.BasaltObelisk>(),
+		};
+		if (HellfireItemCount % 2 == 0)
+		{
+			HellfireItemResult = WorldGen.genRand.Next(items.Count);
+			HellfireItemCount++;
+			return items[HellfireItemResult];
+		}
+		else
+		{
+			List<int> excludeFirstItem = items;
+			excludeFirstItem.Remove(excludeFirstItem[HellfireItemResult]);
+			int result2 = WorldGen.genRand.Next(excludeFirstItem.Count);
+			HellfireItemCount++;
+			return excludeFirstItem[result2];
+		}
+	}
 
-    public static int GetNextTropicsChestItem()
+	public static int GetNextTropicsChestItem()
     {
         int result = ModContent.ItemType<Items.Accessories.PreHardmode.RubberGloves>();
         switch (TropicsItemCount % 4)

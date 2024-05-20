@@ -1,10 +1,9 @@
 using Avalon.Common;
 using Terraria.ModLoader;
 using Terraria;
-using Avalon.Contagion.Tiles;
+using Avalon.Tiles.Contagion;
 using MonoMod.Cil;
 using Microsoft.Xna.Framework;
-using Avalon.Tiles.Contagion;
 using Terraria.ID;
 using Terraria.GameContent.Drawing;
 using Terraria.Map;

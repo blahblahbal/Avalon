@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Dusts;
 
-namespace Avalon.Contagion.Tiles;
+namespace Avalon.Tiles.Contagion;
 
 public class ContagionLilyPads : ModTile
 {
