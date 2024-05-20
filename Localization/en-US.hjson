@@ -8806,6 +8806,11 @@ Mods: {
 				DisplayName: Rock Candy
 				Tooltip: "{$CommonItemTooltip.MajorStats}"
 			}
+
+			BasaltObelisk: {
+				DisplayName: Basalt Obelisk
+				Tooltip: Provides 7 seconds of immunity to lava and immunity to On Fire! when placed nearby
+			}
 		}
 
 		InfoDisplays: {
@@ -9913,6 +9918,11 @@ Mods: {
 				DisplayName: Advanced Warmonger
 				Description: Increased enemy spawn rates
 			}
+
+			BasaltObeliskBuff: {
+				DisplayName: Basalt Sanctuary
+				Description: Provides 7 seconds of immunity to lava and immunity to On Fire!
+			}
 		}
 
 		Tiles: {
@@ -10298,6 +10308,11 @@ Mods: {
 			TuhrtlOutpost: {
 				DisplayName: Tuhrtl Outpost
 				TownNPCDialogueName: the Tuhrtl Outpost
+			}
+
+			BasaltObeliskBiome: {
+				DisplayName: Basalt Obelisk Biome
+				TownNPCDialogueName: the Basalt Obelisk Biome
 			}
 		}
 
