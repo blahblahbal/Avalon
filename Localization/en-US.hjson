@@ -8215,7 +8215,7 @@ Mods: {
 				Tooltip:
 					'''
 					Decreases melee speed by 12%
-					Enemies have less immune time
+					Reduces melee attack cooldown
 					'''
 			}
 

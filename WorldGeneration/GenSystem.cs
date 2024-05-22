@@ -337,7 +337,7 @@ public class GenSystem : ModSystem
 
 		//HellfireItemCount++;
 		//return result;
-		List<int> items = new List<int>()
+		List<int> items = new()
 		{
 			ModContent.ItemType<Items.Accessories.PreHardmode.OilBottle>(),
 			ModContent.ItemType<Items.Tools.PreHardmode.EruptionHook>(),

@@ -1514,17 +1514,11 @@ public class AvalonPlayer : ModPlayer
     {
         if (victim is NPC && Player.HasBuff(ModContent.BuffType<Blah>()))
         {
-            NPC n = (NPC)victim;
-            n.AddBuff(BuffID.Midas, 60 * 3);
+            ((NPC)victim).AddBuff(BuffID.Midas, 60 * 3);
         }
     }
     public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
     {
-        if (RubberGloves)
-        {
-            target.immune[Player.whoAmI] = 1;
-        }
-
         if (Berserk)
         {
             MeleeCritDamage += 1.5f;
