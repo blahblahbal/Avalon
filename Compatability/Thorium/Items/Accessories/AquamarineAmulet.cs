@@ -7,6 +7,7 @@ using ThoriumMod;
 namespace Avalon.Compatability.Thorium.Items.Accessories;
 
 [ExtendsFromMod("ThoriumMod")]
+[AutoloadEquip(EquipType.Neck)]
 public class AquamarineAmulet : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
