@@ -16,10 +16,11 @@ internal class StaminaEquipPage : ModHook
         orig.Invoke(item);
         if (!item.IsAir)
         {
-            if (item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
-            {
-                Main.EquipPage = 2;
-            }
+			if (item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
+			{
+				Main.EquipPage = 2;
+			}
+			else Main.EquipPage = 0;
         }
     }
 }

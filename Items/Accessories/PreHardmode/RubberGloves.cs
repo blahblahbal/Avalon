@@ -23,7 +23,7 @@ public class RubberGloves : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetAttackSpeed(DamageClass.Melee) -= 0.12f;
+        player.GetAttackSpeed(DamageClass.Melee) -= 0.24f;
         player.GetModPlayer<AvalonPlayer>().RubberGloves = true;
     }
     //public override void AddRecipes()

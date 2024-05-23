@@ -7254,7 +7254,6 @@ Mods: {
 				DisplayName: Pickaxe of Dusk (Area)
 				Tooltip:
 					'''
-					100% pickaxe power
 					Mines in a 3x3 area
 					<right> to change to normal mode
 					'''
@@ -8216,8 +8215,8 @@ Mods: {
 				DisplayName: Rubber Gloves
 				Tooltip:
 					'''
-					Decreases melee speed by 12%
-					Reduces melee attack cooldown
+					Decreases melee speed by 24%
+					Reduces melee attack immunity frames
 					'''
 			}
 

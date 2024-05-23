@@ -187,10 +187,31 @@ public class AvalonGlobalItem : GlobalItem
     {
         if (Main.mouseRightRelease && Main.mouseRight)
         {
-            if (item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
+			bool isItemInInventory = false;
+			for (int i = 0; i < Main.LocalPlayer.inventory.Length; i++)
+			{
+				if (item == Main.LocalPlayer.inventory[i])
+				{
+					isItemInInventory = true;
+					break;
+				}
+			}
+			if (Main.LocalPlayer.chest != -1)
+			{
+				for (int j = 0; j < Main.chest[Main.LocalPlayer.chest].item.Length; j++)
+				{
+					if (item == Main.chest[Main.LocalPlayer.chest].item[j])
+					{
+						isItemInInventory = true;
+						break;
+					}
+				}
+			}
+			
+            if (item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll && isItemInInventory)
             {
                 // if the top slot has an item and the bottom slot doesn't, put current item in bottom slot
-                if (ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != 0 && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type == 0 &&
+                if (ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != 0 && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type == ItemID.None &&
                     ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != item.type)
                 {
                     ModContent.GetInstance<StaminaSlot2>().FunctionalItem.SetDefaults(item.type);
@@ -199,7 +220,7 @@ public class AvalonGlobalItem : GlobalItem
                     return false;
                 }
                 // if both slots have an item, swap current item with top slot
-                else if (ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != 0 && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type != 0)
+                else if (ModContent.GetInstance<StaminaSlot>().FunctionalItem.type != ItemID.None && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type != ItemID.None)
                 {
                     Item scrollInSlot = new Item();
                     scrollInSlot.SetDefaults(ModContent.GetInstance<StaminaSlot>().FunctionalItem.type);
@@ -211,7 +232,7 @@ public class AvalonGlobalItem : GlobalItem
                     return false;
                 }
             }
-            if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome && ModContent.GetInstance<TomeSlot>().FunctionalItem.type != 0)
+            if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome && ModContent.GetInstance<TomeSlot>().FunctionalItem.type != ItemID.None && isItemInInventory)
             {
                 Item tomeInSlot = new Item();
                 tomeInSlot.SetDefaults(ModContent.GetInstance<TomeSlot>().FunctionalItem.type);
@@ -1825,7 +1846,25 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips[index].Text = Language.GetTextValue("Mods.Avalon.Items.TroxiniumForge.Tooltip");
             }
         }
-        if (item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket)
+		if (item.type == ModContent.ItemType<PickaxeofDusk3x3>() || item.type == ModContent.ItemType<AccelerationPickaxeSpeed>() ||
+			item.type == ModContent.ItemType<AccelerationDrillSpeed>())
+		{
+			int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Knockback"));
+			if (index != -1)
+			{
+				tooltips.Insert(index + 1, new TooltipLine(Mod, "PickPower", (item.type == ModContent.ItemType<PickaxeofDusk3x3>() ? "100" : "400") + NetworkText.FromKey("LegacyTooltip.26").ToString()));
+			}
+		}
+		if (item.type == ModContent.ItemType<Breakdawn3x3>())
+		{
+			int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Knockback"));
+			if (index != -1)
+			{
+				tooltips.Insert(index + 1, new TooltipLine(Mod, "AxePower", "160" + NetworkText.FromKey("LegacyTooltip.27").ToString()));
+				tooltips.Insert(index + 1, new TooltipLine(Mod, "HammerPower", "70" + NetworkText.FromKey("LegacyTooltip.28").ToString()));
+			}
+		}
+		if (item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket)
         {
             int index = tooltips.FindLastIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Tooltip1"));
             if (index != -1)
