@@ -23,7 +23,7 @@ class Dirtalier : ModItem
 
     public override void AddRecipes()
     {
-        CreateRecipe()
+        CreateRecipe(10)
             .AddIngredient(ItemID.DirtiestBlock, 1)
             .AddIngredient(ItemID.Torch, 4)
             .AddIngredient(ItemID.Chain)

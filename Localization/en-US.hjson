@@ -5,6 +5,8 @@ LoadingTips_Default: {
 	56: You can destroy Shadow Orbs, Crimson Hearts, and Sepsis Cells with a hammer or explosives, but prepare yourself for the forces they unleash.
 }
 
+UI.WorldDescriptionEvilRandom: Let nature decide if corruption, crimson, or contagion is in your world.
+
 Mods: {
 	BiomeTitles: {
 		Title: {
@@ -9692,7 +9694,7 @@ Mods: {
 
 			ImbuePathogen: {
 				DisplayName: Weapon Imbue: Pathogen
-				Description: Melee attacks increase enemies debuff duration
+				Description: Melee attacks increase enemies' debuff duration
 			}
 
 			IcySlowdown: {
