@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Compatability.Thorium.Items.Accessories;
 
 [ExtendsFromMod("ThoriumMod")]
+[AutoloadEquip(EquipType.Neck)]
 public class ChrysoberylAmulet : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
