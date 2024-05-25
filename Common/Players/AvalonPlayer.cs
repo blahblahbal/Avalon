@@ -1659,6 +1659,10 @@ public class AvalonPlayer : ModPlayer
         {
             Player.AddBuff(ModContent.BuffType<BacterialEndurance>(), 6 * 60);
         }
+		if (Player.HasBuff(ModContent.BuffType<ShadowCurse>()))
+		{
+			hurtInfo.Damage *= 2;
+		}
     }
     public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
     {
@@ -1670,7 +1674,11 @@ public class AvalonPlayer : ModPlayer
                 modifiers.SetMaxDamage(dmgPlaceholder - ((Player.statDefense / 2) + 10));
             }
         }
-    }
+		if (Player.HasBuff(ModContent.BuffType<ShadowCurse>()))
+		{
+			modifiers.FinalDamage *= 2;
+		}
+	}
     /// <inheritdoc />
     public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
     {

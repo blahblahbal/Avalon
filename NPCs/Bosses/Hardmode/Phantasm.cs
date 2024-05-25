@@ -229,7 +229,7 @@ public class Phantasm : ModNPC
                 Main.dust[num893].noGravity = true;
             }
         }
-        if(NPC.ai[0] == 3)
+        if (NPC.ai[0] == 3)
         {
             timeTillNextAttack = 330;
             oldPhase = 3;

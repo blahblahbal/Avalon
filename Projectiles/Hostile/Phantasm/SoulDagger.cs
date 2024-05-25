@@ -10,6 +10,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Avalon.Common;
+using Avalon.Buffs.Debuffs;
 
 namespace Avalon.Projectiles.Hostile.Phantasm;
 
@@ -37,7 +38,14 @@ public class SoulDagger : ModProjectile
     public int shootTimer;
     public float lerpAmount;
     public float rotTo;
-    public override void AI()
+	public override void OnHitPlayer(Player target, Player.HurtInfo info)
+	{
+		if (Main.rand.NextBool(3))
+		{
+			target.AddBuff(ModContent.BuffType<ShadowCurse>(), 60 * 5);
+		}
+	}
+	public override void AI()
     {
         if (AvalonGlobalNPC.PhantasmBoss != -1)
         {

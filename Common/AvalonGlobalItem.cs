@@ -2563,11 +2563,11 @@ public class AvalonGlobalItem : GlobalItem
 
         #region cloud/obsidian glove
         if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>() &&
-            item.tileWand > -1)
+            item.tileWand == -1)
         {
             if (ModContent.GetInstance<CloudGloveBuilderToggle>().CurrentState == 0)
             {
-                bool inrange = player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple);
+                bool inrange = player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple);
                 if (item.createTile > -1 &&
                     (Main.tileSolid[item.createTile] || nonSolidExceptions.Contains(item.createTile)) &&
                     (Main.tile[Player.tileTargetX, Player.tileTargetY].LiquidType != LiquidID.Lava ||
@@ -2578,7 +2578,7 @@ public class AvalonGlobalItem : GlobalItem
                     if (Main.tile[Player.tileTargetX, Player.tileTargetY].HasTile &&
                         Main.netMode != NetmodeID.SinglePlayer && subtractFromStack)
                     {
-                        NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 1, Player.tileTargetX,
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, Player.tileTargetX,
                             Player.tileTargetY, item.createTile);
                     }
 
@@ -2594,7 +2594,7 @@ public class AvalonGlobalItem : GlobalItem
                     if (Main.tile[Player.tileTargetX, Player.tileTargetY].WallType != 0 &&
                         Main.netMode != NetmodeID.SinglePlayer)
                     {
-                        NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 3, Player.tileTargetX,
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 3, Player.tileTargetX,
                             Player.tileTargetY, item.createWall);
                     }
 

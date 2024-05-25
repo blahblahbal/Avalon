@@ -9924,6 +9924,11 @@ Mods: {
 				DisplayName: Basalt Sanctuary
 				Description: Provides 7 seconds of immunity to lava and immunity to On Fire!
 			}
+
+			ShadowCurse: {
+				DisplayName: Shadow Curse
+				Description: You take double damage
+			}
 		}
 
 		Tiles: {
