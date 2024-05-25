@@ -8790,7 +8790,7 @@ Mods: {
 
 			CalculatorSpectacles: {
 				DisplayName: Calculator Spectacles
-				Tooltip: Displays how many bars an ore vein is worth when hovering it
+				Tooltip: Mousing over an ore vein displays how many bars it's worth
 			}
 
 			StarTorch: {

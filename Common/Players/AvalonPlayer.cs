@@ -279,6 +279,7 @@ public class AvalonPlayer : ModPlayer
     public int AstralCooldown = 3600;
     public const int MaxAstralCooldown = 3600; //constraint cooldown, make it no more than max.
     public bool RubberGloves;
+	public bool CalculatorSpectacles;
     #endregion
 
     #region buffs and debuffs
@@ -468,6 +469,7 @@ public class AvalonPlayer : ModPlayer
         LightningInABottle = false;
         AstralProject = false;
         RubberGloves = false;
+		CalculatorSpectacles = false;
 
         // armor sets
         SkyBlessing = false;

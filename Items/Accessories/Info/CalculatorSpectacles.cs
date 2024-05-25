@@ -22,7 +22,15 @@ public class CalculatorSpectacles : ModItem
         Item.value = Item.sellPrice(0, 2, 0, 0);
         Item.height = dims.Height;
     }
-    public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
+	public override void UpdateAccessory(Player player, bool hideVisual)
+	{
+		player.GetModPlayer<AvalonPlayer>().CalculatorSpectacles = true;
+	}
+	public override void UpdateInventory(Player player)
+	{
+		player.GetModPlayer<AvalonPlayer>().CalculatorSpectacles = true;
+	}
+	public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
     {
         p.Add(new List<Point>()
         {
@@ -64,45 +72,7 @@ public class CalculatorSpectacles : ModItem
             index++;
         }
 
-        float bars = fullAmount.Count;
-        if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
-        {
-            bars /= 3f;
-        }
-        else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
-        {
-            bars /= 4f;
-        }
-        else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
-        {
-            bars /= 5f;
-        }
-		//else if (Data.Sets.Tile.SixOrePerBar.Contains(type))
-		//{
-		//	bars /= 6f;
-		//}
-		//else if (Data.Sets.Tile.SevenOrePerBar.Contains(type))
-		//{
-		//	bars /= 7f;
-		//}
-		else if (Data.Sets.Tile.EightOrePerBar.Contains(type))
-		{
-			bars /= 8f;
-		}
-		else if (type == ModContent.TileType<Heartstone>())
-		{
-			bars /= 45;
-		}
-		else if (type == ModContent.TileType<Starstone>())
-		{
-			bars /= 60;
-		}
-		else if (type == ModContent.TileType<Boltstone>())
-		{
-			bars /= 25;
-		}
-
-		return bars;
+        return fullAmount.Count;
     }
 }
 public class CalcSpecSystem : ModSystem
@@ -118,24 +88,95 @@ public class CalcSpecSystem : ModSystem
 
     public override void PostDrawInterface(SpriteBatch spriteBatch)
     {
-        if (Main.LocalPlayer.HasItem(ModContent.ItemType<CalculatorSpectacles>()) || Main.LocalPlayer.HasItemInFunctionalAccessories(ModContent.ItemType<CalculatorSpectacles>()))
+        if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().CalculatorSpectacles)
         {
             Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 			Color c = Lighting.GetColor(tilepos);
 
-			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] && c.R > 5 && c.G > 5 && c.B > 5 && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Tiles.Ores.PrimordialOre>())
+			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] && c.R > 5 && c.G > 5 && c.B > 5 &&
+				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<PrimordialOre>() &&
+				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>())
             {
-                int bars = (int)CalculatorSpectacles.CountOres(tilepos, Main.tile[tilepos.X, tilepos.Y].TileType, 700);
-				string text = bars.ToString();
-				if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>() ||
-					Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>() ||
-					Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
+				ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
+				int bars = (int)CalculatorSpectacles.CountOres(tilepos, type, 700);
+				int remainder = 0;
+
+				if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
 				{
-					text += (bars == 1 ? " crystal" : " crystals");
+					remainder = bars % 3;
+					bars /= 3;
 				}
-				else text += (bars == 1 ? " bar" : " bars");
-				DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, Main.MouseScreen + new Vector2(-5, -32), Color.Yellow, Color.Black, 1.4f);
-            }
-        }
+				else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
+				{
+					remainder = bars % 4;
+					bars /= 4;
+				}
+				else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
+				{
+					remainder = bars % 5;
+					bars /= 5;
+				}
+				//else if (Data.Sets.Tile.SixOrePerBar.Contains(type))
+				//{
+				//	remainder = bars % 6;
+				//	bars /= 6;
+				//}
+				//else if (Data.Sets.Tile.SevenOrePerBar.Contains(type))
+				//{
+				//	remainder = bars % 7;
+				//	bars /= 7;
+				//}
+				else if (Data.Sets.Tile.EightOrePerBar.Contains(type))
+				{
+					remainder = bars % 8;
+					bars /= 8;
+				}
+				else if (type == ModContent.TileType<Heartstone>())
+				{
+					remainder = bars % 45;
+					bars /= 45;
+				}
+				else if (type == ModContent.TileType<Starstone>())
+				{
+					remainder = bars % 60;
+					bars /= 60;
+				}
+				else if (type == ModContent.TileType<Boltstone>())
+				{
+					remainder = bars % 25;
+					bars /= 25;
+				}
+
+				string text = bars.ToString();
+				//if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>() ||
+				//	Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>() ||
+				//	Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
+				//{
+				//	//text += bars == 1 ? " crystal" : " crystals";
+				//}
+				//else text += bars == 1 ? " bar" : " bars";
+				//if (remainder > 0)
+				//{
+				//	text += "\n" + remainder + " ore";
+				//}
+				int ypos = -32;
+				if (remainder > 0)
+				{
+					ypos = -50;
+				}
+				Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
+				Vector2 pos2 = Main.MouseScreen + new Vector2(-5, ypos + FontAssets.MouseText.Value.MeasureString(text).Y);
+				DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, pos, Color.Yellow, Color.Black, 1.4f);
+				spriteBatch.Draw(TextureAssets.Item[Data.Sets.Tile.OresToBars[type]].Value, pos + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 5, 0), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+				string text2 = text;
+				if (remainder > 0)
+				{
+					Vector2 pos3 = new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X, ypos);
+					text = remainder.ToString();
+					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, pos2 + new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X - 9, 0), Color.Yellow, Color.Black, 1.4f);
+					spriteBatch.Draw(TextureAssets.Item[Data.Sets.Tile.OreTilesToItems[type]].Value, pos2 + new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X + 5, 0), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+				}
+			}
+		}
     }
 }
