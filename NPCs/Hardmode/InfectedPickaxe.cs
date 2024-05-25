@@ -18,6 +18,7 @@ public class InfectedPickaxe : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 6;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+        Data.Sets.NPC.Wicked[NPC.type] = true;
     }
 
     public override void SetDefaults()

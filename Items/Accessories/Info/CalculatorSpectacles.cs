@@ -118,7 +118,7 @@ public class CalcSpecSystem : ModSystem
 
     public override void PostDrawInterface(SpriteBatch spriteBatch)
     {
-        if (Main.LocalPlayer.HasItem(ModContent.ItemType<CalculatorSpectacles>()))
+        if (Main.LocalPlayer.HasItem(ModContent.ItemType<CalculatorSpectacles>()) || Main.LocalPlayer.HasItemInFunctionalAccessories(ModContent.ItemType<CalculatorSpectacles>()))
         {
             Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 			Color c = Lighting.GetColor(tilepos);

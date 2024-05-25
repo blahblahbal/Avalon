@@ -84,7 +84,7 @@ public class AvalonBiomePlayer : ModPlayer
 		}
 		if (ZoneBasaltObelisk)
 		{
-			Player.AddBuff(ModContent.BuffType<BasaltObeliskBuff>(), 5 * 60);
+			Player.AddBuff(ModContent.BuffType<BasaltObeliskBuff>(), 7 * 60);
 		}
 	}
 
