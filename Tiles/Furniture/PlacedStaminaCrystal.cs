@@ -4,10 +4,8 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
-using Avalon.Items.Potions.Other;
 using Avalon.Items.Consumables;
 using System.Collections.Generic;
-using Terraria.Localization;
 
 namespace Avalon.Tiles.Furniture;
 
@@ -27,9 +25,12 @@ public class PlacedStaminaCrystal : ModTile
         Main.tileShine[Type] = 300;
         Main.tileFrameImportant[Type] = true;
         DustType = DustID.Grass;
-        RegisterItemDrop(ModContent.ItemType<StaminaCrystal>());
     }
-    public override void AnimateTile(ref int frame, ref int frameCounter)
+	public override IEnumerable<Item> GetItemDrops(int i, int j)
+	{
+		yield return new Item(ModContent.ItemType<StaminaCrystal>());
+	}
+	public override void AnimateTile(ref int frame, ref int frameCounter)
     {
         frameCounter++;
         if (frameCounter > 6)

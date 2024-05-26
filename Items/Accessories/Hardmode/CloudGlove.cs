@@ -2,7 +2,9 @@ using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -75,8 +77,9 @@ public class CloudGloveBuilderToggle : BuilderToggle
     }
     public override int NumberOfStates => 2;
     public override string Texture => "Avalon/Assets/Textures/UI/CloudGloveToggle";
+	public override string HoverTexture => Texture + "_Hover";
 
-    public override void SetStaticDefaults()
+	public override void SetStaticDefaults()
     {
         OnText = this.GetLocalization(nameof(OnText));
         OffText = this.GetLocalization(nameof(OffText));
@@ -85,8 +88,9 @@ public class CloudGloveBuilderToggle : BuilderToggle
     {
         return CurrentState == 0 ? OnText.Value : OffText.Value;
     }
-    public override Color DisplayColorTexture()/* tModPorter Note: Removed. Use BuilderToggle.Draw */
-    {
-        return CurrentState == 0 ? Color.White : new Color(100, 100, 100);
-    }
+	public override bool Draw(SpriteBatch spriteBatch, ref BuilderToggleDrawParams drawParams)
+	{
+		drawParams.Color = CurrentState == 0 ? Color.White : new Color(100, 100, 100);
+		return true;
+	}
 }
