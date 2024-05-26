@@ -35,7 +35,7 @@ public class BagofShadows : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(Type)
-            .AddIngredient(ItemID.DemoniteBar, 15)
+            .AddIngredient(ItemID.RottenChunk, 15)
             //.AddIngredient(ItemID.CursedFlame, 5)
             .AddIngredient(ItemID.EbonstoneBlock, 50)
             .AddIngredient(ModContent.ItemType<CorruptShard>(), 5)
