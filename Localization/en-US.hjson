@@ -251,6 +251,7 @@ Mods: {
 			Fell_9: "{0} underestimated the power of gravity."
 			Fell_10: "{0} forgot to jump."
 			Fell_11: "{0} tried to land a cool backflip."
+			Fell_12: "{0} took 'hit the ground running' way too literally."
 			Drowned_1: "{0} blub blub blub..."
 			Drowned_2: "{0} thought they could breathe water."
 			Drowned_3: "{0} asphyxiated."
@@ -264,12 +265,15 @@ Mods: {
 			Lava_5: "{0}, that is not a hot tub."
 			Lava_6: "{0} found the fire in the hole."
 			Lava_7: "{0} accidentally lavaboarded themselves."
+			Lava_8: "{0} was ritually sacrificed."
 			Petrified_1: "{0} was stoned."
+			Petrified_2: "{0} was taken for granite."
 			Electrocution_1: "{0} got zzzzapped."
 			Electrocution_2: "{0} had an electrifying personality."
 			Electrocution_3: "{0} tried to build their own computer."
 			Electrocution_4: "{0} messed up the redstone."
 			Electrocution_5: "{0} has the power!"
+			Electrocution_6: "{0} thought they were a toaster."
 			Generic_1: "{0} was tickled to smithereens"
 			Generic_2: "{0} was reduced to a fine paste"
 			Generic_3: "{0} became a tombstone dispenser"
@@ -286,8 +290,17 @@ Mods: {
 			Generic_14: "{0}'s keyboard was screwed up"
 			Generic_15: "{0} was folded into origami"
 			Generic_16: "{0} was force fed a porcupine"
+			Generic_17: "{0} was reached about their mount's extended warranty"
+			Generic_18: "{0} was relieved of their ribcage"
+			Generic_19: "{0}'s no-hit counter was incremented"
+			Generic_20: "{0}'s head was amputated"
+			Generic_21: "death.{0}.accident.generic"
+			Generic_22: "{0}'s organs were harvested"
+			Generic_23: "{0} was extricated from their mortal coil"
+			Generic_24: "{0} was given up and let down"
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
+			Poisoned_3: "{0} was digested from the inside."
 			Space_1: "{0} broke the Warp 10 threshold."
 			Space_2: "{0} got too close a black hole."
 			Space_3: "{0}'s body was found by martians."
@@ -295,12 +308,15 @@ Mods: {
 			Teleport_1: "{0}'s bones didn't teleport with them."
 			Teleport_2: "{0} thought they were an enderman."
 			Teleport_3: "{0} warped into the third dimension."
+			Teleport_4: "{0}'s magic trick did indeed make them disappear."
 			Teleport_2_Male: "{0}'s bones didn't teleport with them."
 			Teleport_3_Male: "{0} thought they were an enderman."
 			Teleport_4_Male: "{0} warped into the third dimension."
+			Teleport_5_Male: "{0}'s magic trick did indeed make them disappear."
 			Teleport_2_Female: "{0}'s bones didn't teleport with them."
 			Teleport_3_Female: "{0} thought they were an enderman."
 			Teleport_4_Female: "{0} warped into the third dimension."
+			Teleport_5_Female: "{0}'s magic trick did indeed make them disappear."
 		}
 
 		GameTips: {
@@ -8790,7 +8806,7 @@ Mods: {
 
 			CalculatorSpectacles: {
 				DisplayName: Calculator Spectacles
-				Tooltip: Mousing over an ore vein displays how many bars it's worth
+				Tooltip: Displays the bar yield of the ore vein under the cursor
 			}
 
 			StarTorch: {
