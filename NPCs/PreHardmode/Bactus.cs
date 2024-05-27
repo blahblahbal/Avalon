@@ -20,7 +20,8 @@ public class Bactus : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 8;
         Data.Sets.NPC.Wicked[NPC.type] = true;
-    }
+		Data.Sets.NPC.Flyer[NPC.type] = true;
+	}
     public override void SetDefaults()
     {
         NPC.damage = 23;

@@ -32,8 +32,8 @@ class TroxiniumBodyarmor : ModItem
     {
         if (!Main.gameMenu)
         {
-            color = Color.White * (Lighting.Brightness((int)drawPlayer.position.X / 16, (int)drawPlayer.position.Y / 16) * 4f);
-        }
+			color *= 4f;
+		}
     }
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
