@@ -16,6 +16,7 @@
     <None Remove="DrawMagics\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="effects\PixelChange.fx" />
     <None Remove="Projectiles\Melee\HallowedRapierProj.png" />
     <None Remove="Projectiles\Melee\HallowedRapierVis.png" />
   </ItemGroup>

@@ -294,7 +294,7 @@ Mods: {
 			Generic_18: "{0} was relieved of their ribcage"
 			Generic_19: "{0}'s no-hit counter was incremented"
 			Generic_20: "{0}'s head was amputated"
-			Generic_21: "death.{0}.accident.generic"
+			Generic_21: death.{0}.accident.generic
 			Generic_22: "{0}'s organs were harvested"
 			Generic_23: "{0} was extricated from their mortal coil"
 			Generic_24: "{0} was given up and let down"

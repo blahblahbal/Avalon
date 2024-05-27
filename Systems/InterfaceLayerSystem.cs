@@ -21,7 +21,17 @@ public class InterfaceLayerSystem : ModSystem
         //    }, InterfaceScaleType.UI));
         //}
 
-        int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Resource Bars");
+		int calcSpec = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Mouse Text");
+		if (calcSpec != -1)
+		{
+			layers.Insert(calcSpec, new LegacyGameInterfaceLayer("Calculator Spectacles", delegate
+			{
+				ExxoAvalonOrigins.Mod.CalculatorSpectaclesInterface.Draw(Main.spriteBatch, Main._drawInterfaceGameTime);
+				return true;
+			}, InterfaceScaleType.Game));
+		}
+
+		int staminaBarIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Resource Bars");
         if (staminaBarIndex != -1)
         {
             layers.Insert(staminaBarIndex, new LegacyGameInterfaceLayer("Stamina Bar", delegate

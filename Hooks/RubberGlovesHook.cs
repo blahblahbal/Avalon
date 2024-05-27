@@ -17,7 +17,7 @@ internal class RubberGlovesHook : ModHook
 		orig.Invoke(self, npcIndex, timeInFrames);
 		if (self.GetModPlayer<AvalonPlayer>().RubberGloves)
 		{
-			self.meleeNPCHitCooldown[npcIndex] = self.itemAnimation / 4 * 3;
+			self.meleeNPCHitCooldown[npcIndex] = self.itemAnimation / 6 * 5;
 		}
 	}
 
@@ -26,7 +26,7 @@ internal class RubberGlovesHook : ModHook
 		orig.Invoke(self);
 		if (self.GetModPlayer<AvalonPlayer>().RubberGloves)
 		{
-			self.attackCD = self.attackCD / 4 * 3;
+			self.attackCD = self.attackCD / 5 * 6;
 			if (self.attackCD < 1) self.attackCD = 1;
 		}
 	}

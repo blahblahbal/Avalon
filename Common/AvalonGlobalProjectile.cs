@@ -48,6 +48,12 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 
     public override void OnSpawn(Projectile projectile, IEntitySource source)
     {
+		if ((projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.Flail ||
+			projectile.aiStyle == ProjAIStyleID.ShortSword) && Main.player[projectile.owner].GetModPlayer<AvalonPlayer>().RubberGloves)
+		{
+			projectile.usesLocalNPCImmunity = true;
+			projectile.localNPCHitCooldown = 4;
+		}	
         if (source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.HasBuff(BuffID.Cursed))
         {
             projectile.Kill();

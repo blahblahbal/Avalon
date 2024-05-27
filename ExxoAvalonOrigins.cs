@@ -7,6 +7,7 @@ using Avalon.Biomes;
 using Avalon.Common;
 using Avalon.Effects;
 using Avalon.Hooks;
+using Avalon.Items.Accessories.Info;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Network;
@@ -20,6 +21,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.Graphics;
 using Terraria.Graphics.Effects;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -80,9 +82,14 @@ public class ExxoAvalonOrigins : Mod
 
     private readonly List<IReplaceAssets> assetReplacers = new();
 
+	public static Effect CalculatorSpectaclesEffect = default;
+
     public const string TextureAssetsPath = "Assets/Textures";
     internal UserInterface staminaInterface;
     internal StaminaBar staminaBar;
+
+	internal UserInterface CalculatorSpectaclesInterface;
+	internal CalcSpec calcSpec;
     private static readonly Func<Dictionary<int, FinalFractalProfile>> getFinalFractalHelperFractalProfiles = Reflection.Utilities.CreateFieldReader<Dictionary<int, FinalFractalProfile>>(typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.Static | BindingFlags.NonPublic)!);
 
     //internal UserInterface statDisplayInterface;
@@ -122,6 +129,10 @@ public class ExxoAvalonOrigins : Mod
         staminaBar = new StaminaBar();
         staminaInterface.SetState(staminaBar);
 
+		CalculatorSpectaclesInterface = new UserInterface();
+		calcSpec = new CalcSpec();
+		CalculatorSpectaclesInterface.SetState(calcSpec);
+
         //statDisplay = new StatDisplayUIState();
         //statDisplayInterface = new UserInterface();
         //statDisplayInterface.SetState(statDisplay);
@@ -136,7 +147,11 @@ public class ExxoAvalonOrigins : Mod
         Filters.Scene["Avalon:DarkMatter"] = new Filter(
             new DarkMatterScreenShader(new Ref<Effect>(shader.Value), "DarkMatterSky")
                 .UseColor(0.18f, 0.08f, 0.24f), EffectPriority.VeryHigh);
-    }
+
+		Asset<Effect> shaderForCalcSpec = ModContent.Request<Effect>("Avalon/Effects/PixelChange", AssetRequestMode.ImmediateLoad);
+		GameShaders.Misc["Avalon:CalcSpec"] = new CalculatorSpectaclesShader(new Ref<Effect>(shaderForCalcSpec.Value), "PixelChange");
+		CalculatorSpectaclesEffect = shaderForCalcSpec.Value;
+	}
     public override void Unload()
     {
         var fractalProfiles = getFinalFractalHelperFractalProfiles();

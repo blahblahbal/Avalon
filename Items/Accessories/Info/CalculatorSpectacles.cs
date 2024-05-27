@@ -8,6 +8,8 @@ using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using Avalon.Tiles.Ores;
+using System;
+using Terraria.UI;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -75,28 +77,19 @@ public class CalculatorSpectacles : ModItem
         return fullAmount.Count;
     }
 }
-public class CalcSpecSystem : ModSystem
+internal class CalcSpec : UIState
 {
-    private void DrawOutlinedString(SpriteBatch SB, DynamicSpriteFont SF, string txt, Vector2 P, Color C, Color shadeC, float strength = 1f, Vector2 V = default(Vector2), float scale = 1f, SpriteEffects SE = SpriteEffects.None, float LL = 0f)
-    {
-        if (string.IsNullOrEmpty(txt) || string.IsNullOrWhiteSpace(txt)) return;
-        Vector2[] OS = new Vector2[4] { new Vector2(strength, strength), new Vector2(strength, -strength), new Vector2(-strength, strength), new Vector2(-strength, -strength) };
-        foreach (Vector2 VO in OS)
-            DynamicSpriteFontExtensionMethods.DrawString(SB, SF, txt, new Vector2(P.X + VO.X, P.Y + VO.Y), shadeC, 0f, V, scale, SE, LL);
-        DynamicSpriteFontExtensionMethods.DrawString(SB, SF, txt, P, C, 0f, V, scale, SE, LL);
-    }
-
-    public override void PostDrawInterface(SpriteBatch spriteBatch)
-    {
-        if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().CalculatorSpectacles)
-        {
-            Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+	protected override void DrawSelf(SpriteBatch spriteBatch)
+	{
+		if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().CalculatorSpectacles)
+		{
+			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 			Color c = Lighting.GetColor(tilepos);
 
 			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] && c.R > 5 && c.G > 5 && c.B > 5 &&
 				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<PrimordialOre>() &&
 				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>())
-            {
+			{
 				ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
 				int bars = (int)CalculatorSpectacles.CountOres(tilepos, type, 700);
 				int remainder = 0;
@@ -148,35 +141,66 @@ public class CalcSpecSystem : ModSystem
 				}
 
 				string text = bars.ToString();
-				//if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>() ||
-				//	Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>() ||
-				//	Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
-				//{
-				//	//text += bars == 1 ? " crystal" : " crystals";
-				//}
-				//else text += bars == 1 ? " bar" : " bars";
-				//if (remainder > 0)
-				//{
-				//	text += "\n" + remainder + " ore";
-				//}
-				int ypos = -32;
+				int ypos = -40;
 				if (remainder > 0)
 				{
-					ypos = -50;
+					ypos = -58;
 				}
 				Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
-				Vector2 pos2 = Main.MouseScreen + new Vector2(-5, ypos + FontAssets.MouseText.Value.MeasureString(text).Y);
+				Vector2 pos2 = Main.MouseScreen + new Vector2(-5, ypos + FontAssets.MouseText.Value.MeasureString(text).Y + 5);
 				DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, pos, Color.Yellow, Color.Black, 1.4f);
-				spriteBatch.Draw(TextureAssets.Item[Data.Sets.Tile.OresToBars[type]].Value, pos + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 5, 0), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OresToBars[type]].Value, pos + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 5, 0), Color.White, Color.White, 1.4f, Vector2.Zero);
 				string text2 = text;
 				if (remainder > 0)
 				{
-					Vector2 pos3 = new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X, ypos);
 					text = remainder.ToString();
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, pos2 + new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X - 9, 0), Color.Yellow, Color.Black, 1.4f);
-					spriteBatch.Draw(TextureAssets.Item[Data.Sets.Tile.OreTilesToItems[type]].Value, pos2 + new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X + 5, 0), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+					DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OreTilesToItems[type]].Value, pos2 + new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X + 5, 0), Color.White, Color.White, 1.4f);
 				}
 			}
 		}
-    }
+	}
+	private void DrawOutlinedString(SpriteBatch SB, DynamicSpriteFont SF, string txt, Vector2 P, Color C, Color shadeC, float strength = 1f, Vector2 V = default(Vector2), float scale = 1f, SpriteEffects SE = SpriteEffects.None, float LL = 0f)
+	{
+		if (string.IsNullOrEmpty(txt) || string.IsNullOrWhiteSpace(txt)) return;
+		Vector2[] OS = new Vector2[4] { new Vector2(strength, strength), new Vector2(strength, -strength), new Vector2(-strength, strength), new Vector2(-strength, -strength) };
+		foreach (Vector2 VO in OS)
+			DynamicSpriteFontExtensionMethods.DrawString(SB, SF, txt, new Vector2(P.X + VO.X, P.Y + VO.Y), shadeC, 0f, V, scale, SE, LL);
+		DynamicSpriteFontExtensionMethods.DrawString(SB, SF, txt, P, C, 0f, V, scale, SE, LL);
+	}
+
+	private void DrawOutlinedTexture(SpriteBatch sb, Texture2D tex, Vector2 pos, Color color, Color shadowColor, float strength = 1f, Vector2 vec = default, float scale = 1f, SpriteEffects effects = SpriteEffects.None, float LL = 0f)
+	{
+		if (tex == null) return;
+
+		int num = 2;
+		int num2 = num * 2;
+		for (int i = -num2; i <= num2; i += num)
+		{
+			for (int j = -num2; j <= num2; j += num)
+			{
+				if (Math.Abs(i) + Math.Abs(j) == num2)
+				{
+					sb.Draw(tex, new Vector2(pos.X + i, pos.Y + j), Color.Black);
+				}
+			}
+		}
+		sb.End();
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, null, null, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.GameViewMatrix.ZoomMatrix);
+		num2 = num;
+		for (int k = -num2; k <= num2; k += num)
+		{
+			for (int l = -num2; l <= num2; l += num)
+			{
+				if (Math.Abs(k) + Math.Abs(l) == num2)
+				{
+					sb.Draw(tex, new Vector2(pos.X + k, pos.Y + l), Color.White);
+				}
+			}
+		}
+		sb.End();
+		sb.Begin();
+
+		sb.Draw(tex, pos, color);
+	}
 }
