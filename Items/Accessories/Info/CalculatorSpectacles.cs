@@ -148,30 +148,41 @@ internal class CalcSpec : UIState
 				}
 				Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
 				Vector2 pos2 = Main.MouseScreen + new Vector2(-5, ypos + FontAssets.MouseText.Value.MeasureString(text).Y + 5);
-				DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, pos, Color.Yellow, Color.Black, 1.4f);
-				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OresToBars[type]].Value, pos + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 5, 0), Color.White, Color.White, 1.4f, Vector2.Zero);
 				string text2 = text;
+				Vector2 posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
+
+				DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, posModified, Color.Yellow, Color.Black, 1.4f);
+				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OresToBars[type]].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f, Vector2.Zero);
+				
 				if (remainder > 0)
 				{
 					text = remainder.ToString();
-					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, pos2 + new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X - 9, 0), Color.Yellow, Color.Black, 1.4f);
-					DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OreTilesToItems[type]].Value, pos2 + new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X + 5, 0), Color.White, Color.White, 1.4f);
+					posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos2.Y);
+					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, posModified /*+ new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X - 9, 0)*/, Color.Yellow, Color.Black, 1.4f);
+					DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OreTilesToItems[type]].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f);
 				}
 			}
 		}
 	}
 	private void DrawOutlinedString(SpriteBatch SB, DynamicSpriteFont SF, string txt, Vector2 P, Color C, Color shadeC, float strength = 1f, Vector2 V = default(Vector2), float scale = 1f, SpriteEffects SE = SpriteEffects.None, float LL = 0f)
 	{
+		SB.End();
+		SB.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
 		if (string.IsNullOrEmpty(txt) || string.IsNullOrWhiteSpace(txt)) return;
 		Vector2[] OS = new Vector2[4] { new Vector2(strength, strength), new Vector2(strength, -strength), new Vector2(-strength, strength), new Vector2(-strength, -strength) };
 		foreach (Vector2 VO in OS)
 			DynamicSpriteFontExtensionMethods.DrawString(SB, SF, txt, new Vector2(P.X + VO.X, P.Y + VO.Y), shadeC, 0f, V, scale, SE, LL);
 		DynamicSpriteFontExtensionMethods.DrawString(SB, SF, txt, P, C, 0f, V, scale, SE, LL);
+		SB.End();
+		SB.Begin();
 	}
 
 	private void DrawOutlinedTexture(SpriteBatch sb, Texture2D tex, Vector2 pos, Color color, Color shadowColor, float strength = 1f, Vector2 vec = default, float scale = 1f, SpriteEffects effects = SpriteEffects.None, float LL = 0f)
 	{
 		if (tex == null) return;
+
+		sb.End();
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
 
 		int num = 2;
 		int num2 = num * 2;
@@ -186,7 +197,7 @@ internal class CalcSpec : UIState
 			}
 		}
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, null, null, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.GameViewMatrix.ZoomMatrix);
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.GameViewMatrix.ZoomMatrix);
 		num2 = num;
 		for (int k = -num2; k <= num2; k += num)
 		{
@@ -199,7 +210,7 @@ internal class CalcSpec : UIState
 			}
 		}
 		sb.End();
-		sb.Begin();
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
 
 		sb.Draw(tex, pos, color);
 	}
