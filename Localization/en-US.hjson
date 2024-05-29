@@ -1162,7 +1162,7 @@ Mods: {
 
 			RhotukaSpinner: {
 				DisplayName: Rhotuka Spinner
-				Tooltip: Charged with power
+				Tooltip: "'Charged with power'"
 			}
 
 			RhotukaSpinnerScrambler: {
@@ -1762,87 +1762,87 @@ Mods: {
 
 			ArcaneShard: {
 				DisplayName: Arcane Shard
-				Tooltip: A fragment of light creatures
+				Tooltip: "'A fragment of light creatures'"
 			}
 
 			BreezeShard: {
 				DisplayName: Breeze Shard
-				Tooltip: A fragment of flying creatures
+				Tooltip: "'A fragment of flying creatures'"
 			}
 
 			CorruptShard: {
 				DisplayName: Evil Shard
-				Tooltip: A fragment of evil creatures
+				Tooltip: "'A fragment of evil creatures'"
 			}
 
 			EarthShard: {
 				DisplayName: Earth Shard
-				Tooltip: A fragment of earthen creatures
+				Tooltip: "'A fragment of earthen creatures'"
 			}
 
 			FireShard: {
 				DisplayName: Fire Shard
-				Tooltip: A fragment of fiery creatures
+				Tooltip: "'A fragment of fiery creatures'"
 			}
 
 			FrostShard: {
 				DisplayName: Frost Shard
-				Tooltip: A fragment of icy creatures
+				Tooltip: "'A fragment of icy creatures'"
 			}
 
 			ToxinShard: {
 				DisplayName: Toxin Shard
-				Tooltip: A fragment of jungle creatures
+				Tooltip: "'A fragment of jungle creatures'"
 			}
 
 			UndeadShard: {
 				DisplayName: Undead Shard
-				Tooltip: A fragment of undead creatures
+				Tooltip: "'A fragment of undead creatures'"
 			}
 
 			WaterShard: {
 				DisplayName: Water Shard
-				Tooltip: A fragment of water creatures
+				Tooltip: "'A fragment of water creatures'"
 			}
 
 			RubybeadHerb: {
 				DisplayName: Rubybead Herb
-				Tooltip: A mystical object containing an unknown force
+				Tooltip: "'A mystical object containing an unknown force'"
 			}
 
 			DewofHerbs: {
 				DisplayName: Dew of Herbs
-				Tooltip: A mystical object containing an unknown force
+				Tooltip: "'A mystical object containing an unknown force'"
 			}
 
 			DewOrb: {
 				DisplayName: Dew Orb
-				Tooltip: Substance found inside some beast's body
+				Tooltip: "'Substance found inside some beast's body'"
 			}
 
 			ElementDust: {
 				DisplayName: Element Dust
-				Tooltip: Compound of the five elements
+				Tooltip: "'Compound of the five elements'"
 			}
 
 			ElementDiamond: {
 				DisplayName: Element Diamond
-				Tooltip: Compound of the five elements
+				Tooltip: "'Compound of the five elements'"
 			}
 
 			MysticalClaw: {
 				DisplayName: Mystical Claw
-				Tooltip: Part of a beast's body
+				Tooltip: "'Part of a beast's body'"
 			}
 
 			MysticalTotem: {
 				DisplayName: Mystical Totem
-				Tooltip: Part of a beast's body
+				Tooltip: "'Part of a beast's body'"
 			}
 
 			StrongVenom: {
 				DisplayName: Strong Venom
-				Tooltip: Substance found inside some beast's body
+				Tooltip: "'Substance found inside some beast's body'"
 			}
 
 			MysticalTomePage: {
@@ -1876,7 +1876,7 @@ Mods: {
 
 			MysteriousPage: {
 				DisplayName: Mysterious Page
-				Tooltip: It contains unknown symbols
+				Tooltip: "'It contains unknown symbols'"
 			}
 
 			ScrollofTome: {
@@ -2072,17 +2072,17 @@ Mods: {
 
 			AdamantiteSlimeBanner: {
 				DisplayName: Adamantite Slime Banner
-				Tooltip: Nearby players get a bonus against: Adamantite Slime
+				Tooltip: ""
 			}
 
 			BloodshotEyeBanner: {
 				DisplayName: Bloodshot Eye Banner
-				Tooltip: Nearby players get a bonus against: Bloodshot Eye
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.BloodshotEye.DisplayName}"
 			}
 
 			FallenHeroBanner: {
 				DisplayName: Fallen Hero Banner
-				Tooltip: Nearby players get a bonus against: Fallen Hero
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.FallenHero.DisplayName}"
 			}
 
 			AegisHalloworBanner: {
@@ -2102,7 +2102,7 @@ Mods: {
 
 			BactusBanner: {
 				DisplayName: Bactus Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Bactus.DisplayName}"
 			}
 
 			BismuthSlimeBanner: {
@@ -2112,7 +2112,7 @@ Mods: {
 
 			BlazeBanner: {
 				DisplayName: Blaze Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Blaze.DisplayName}"
 			}
 
 			BombSkeletonBanner: {
@@ -2162,7 +2162,7 @@ Mods: {
 
 			CougherBanner: {
 				DisplayName: Cougher Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Cougher.DisplayName}"
 			}
 
 			CrystalBonesBanner: {
@@ -2177,7 +2177,7 @@ Mods: {
 
 			CursedFlamerBanner: {
 				DisplayName: Cursed Flamer Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.CursedFlamer.DisplayName}"
 			}
 
 			CursedMagmaSkeletonBanner: {
@@ -2187,7 +2187,7 @@ Mods: {
 
 			CursedScepterBanner: {
 				DisplayName: Cursed Scepter Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.CursedScepter.DisplayName}"
 			}
 
 			DarkMatterSlimeBanner: {
@@ -2207,7 +2207,7 @@ Mods: {
 
 			EctoHandBanner: {
 				DisplayName: Ecto Hand Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.EctoHand.DisplayName}"
 			}
 
 			EctosphereBanner: {
@@ -2227,7 +2227,7 @@ Mods: {
 
 			GargoyleBanner: {
 				DisplayName: Gargoyle Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Gargoyle.DisplayName}"
 			}
 
 			GoldSlimeBanner: {
@@ -2247,17 +2247,17 @@ Mods: {
 
 			HalloworBanner: {
 				DisplayName: Hallowor Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Hallowor.DisplayName}"
 			}
 
 			HellboundLizardBanner: {
 				DisplayName: Hellbound Lizard Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.HellboundLizard.DisplayName}"
 			}
 
 			IckslimeBanner: {
 				DisplayName: Ickslime Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Ickslime.DisplayName}"
 			}
 
 			ImpactWizardBanner: {
@@ -2267,7 +2267,7 @@ Mods: {
 
 			IrateBonesBanner: {
 				DisplayName: Irate Bones Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.IrateBones.DisplayName}"
 			}
 
 			IridiumSlimeBanner: {
@@ -2352,12 +2352,12 @@ Mods: {
 
 			PoisonDartFrogBanner: {
 				DisplayName: Poison Dart Frog Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.PoisonDartFrog.DisplayName}"
 			}
 
 			PyrasiteBanner: {
 				DisplayName: Pyrasite Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.PyrasiteHead.DisplayName}"
 			}
 
 			QuickCaribeBanner: {
@@ -2367,7 +2367,7 @@ Mods: {
 
 			RafflesiaBanner: {
 				DisplayName: Rafflesia Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Rafflesia.DisplayName}"
 			}
 
 			RedAegisBonesBanner: {
@@ -2506,7 +2506,7 @@ Mods: {
 
 			FourLeafClover: {
 				DisplayName: Four Leaf Clover
-				Tooltip: You are very lucky to have found this!
+				Tooltip: "'You are very lucky to have found this!'"
 			}
 
 			BismuthBrick: {
@@ -5228,7 +5228,7 @@ Mods: {
 
 			ViralMummyBanner: {
 				DisplayName: Viral Mummy Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.ViralMummy.DisplayName}"
 			}
 
 			CrackedOrangeBrick: {
@@ -5708,16 +5708,16 @@ Mods: {
 
 			BondrewdHelmet: {
 				DisplayName: Abyssal Scientist Helmet
-				Tooltip: May your journey overflow with curses and blessings
+				Tooltip: "'May your journey overflow with curses and blessings'"
 			}
 
 			QuantumClaymore: {
 				DisplayName: Quantum Claymore
 				Tooltip:
 					'''
-					'Tear through time to rip apart your foes'
 					Fires a piercing quantum beam
 					True melee strikes summon extra non-piercing beams
+					'Tear through time to rip apart your foes'
 					[c/C39FDD:[10th Anniversary Contest Winner - Waasephi][c/C39FDD:]]
 					'''
 			}
@@ -5781,7 +5781,7 @@ Mods: {
 				Tooltip:
 					'''
 					Explodes on hit
-					Poke!
+					'Poke!'
 					'''
 			}
 
@@ -7175,12 +7175,12 @@ Mods: {
 
 			BoneFishBanner: {
 				DisplayName: Bone Fish Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.BoneFish.DisplayName}"
 			}
 
 			VirisBanner: {
 				DisplayName: Viris Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Viris.DisplayName}"
 			}
 
 			JungleSolution: {
@@ -8475,7 +8475,7 @@ Mods: {
 
 			ContagionMimicBanner: {
 				DisplayName: Contagion Mimic Banner
-				Tooltip: ""
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.ContagionMimic.DisplayName}"
 			}
 
 			ShimmerBucket: {
@@ -8806,7 +8806,7 @@ Mods: {
 
 			CalculatorSpectacles: {
 				DisplayName: Calculator Spectacles
-				Tooltip: Displays the bar yield of the ore vein under the cursor
+				Tooltip: Displays the bar yield of the ore vein above the cursor
 			}
 
 			StarTorch: {
