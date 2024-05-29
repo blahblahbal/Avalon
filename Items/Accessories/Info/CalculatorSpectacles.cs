@@ -86,58 +86,70 @@ internal class CalcSpec : UIState
 			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 			Color c = Lighting.GetColor(tilepos);
 
-			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] && c.R > 5 && c.G > 5 && c.B > 5 &&
+			if (/*TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType]*/
+				Data.Sets.Tile.VanillaAndAvalonOres.Contains(Main.tile[tilepos.X, tilepos.Y].TileType) &&
+				c.R > 5 && c.G > 5 && c.B > 5 &&
 				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<PrimordialOre>() &&
 				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>())
 			{
 				ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
 				int bars = (int)CalculatorSpectacles.CountOres(tilepos, type, 700);
 				int remainder = 0;
+				int remainderDenominator = 3;
 
 				if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
 				{
 					remainder = bars % 3;
 					bars /= 3;
+					remainderDenominator = 3;
 				}
 				else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
 				{
 					remainder = bars % 4;
 					bars /= 4;
+					remainderDenominator = 4;
 				}
 				else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
 				{
 					remainder = bars % 5;
 					bars /= 5;
+					remainderDenominator = 5;
 				}
 				//else if (Data.Sets.Tile.SixOrePerBar.Contains(type))
 				//{
 				//	remainder = bars % 6;
 				//	bars /= 6;
+				//	remainderDenominator = 6;
 				//}
 				//else if (Data.Sets.Tile.SevenOrePerBar.Contains(type))
 				//{
 				//	remainder = bars % 7;
 				//	bars /= 7;
+				//	remainderDenominator = 7;
 				//}
 				else if (Data.Sets.Tile.EightOrePerBar.Contains(type))
 				{
 					remainder = bars % 8;
 					bars /= 8;
+					remainderDenominator = 8;
 				}
 				else if (type == ModContent.TileType<Heartstone>())
 				{
 					remainder = bars % 45;
 					bars /= 45;
+					remainderDenominator = 45;
 				}
 				else if (type == ModContent.TileType<Starstone>())
 				{
 					remainder = bars % 60;
 					bars /= 60;
+					remainderDenominator = 60;
 				}
 				else if (type == ModContent.TileType<Boltstone>())
 				{
 					remainder = bars % 25;
 					bars /= 25;
+					remainderDenominator = 25;
 				}
 
 				string text = bars.ToString();
@@ -149,18 +161,32 @@ internal class CalcSpec : UIState
 				Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
 				Vector2 pos2 = Main.MouseScreen + new Vector2(-5, ypos + FontAssets.MouseText.Value.MeasureString(text).Y + 5);
 				string text2 = text;
-				Vector2 posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
-
-				DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, posModified, Color.Yellow, Color.Black, 1.4f);
-				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OresToBars[type]].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f, Vector2.Zero);
-				
 				if (remainder > 0)
 				{
-					text = remainder.ToString();
-					posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos2.Y);
-					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, posModified /*+ new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X - 9, 0)*/, Color.Yellow, Color.Black, 1.4f);
-					DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OreTilesToItems[type]].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f);
+					text += "" + remainder + "/" + remainderDenominator;
 				}
+				Vector2 posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
+
+				Vector2 pos3 = posModified;
+				DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{bars}", pos3, Color.Yellow, Color.Black, 1.4f);
+				if (remainder > 0)
+				{
+					pos3.X += FontAssets.MouseText.Value.MeasureString($"{bars}  ").X;
+					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, "/", pos3, Color.Yellow, Color.Black, 1.4f);
+					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainder}", pos3 + new Vector2(-5, 0), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
+					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
+				}
+				//DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, posModified, Color.Yellow, Color.Black, 1.4f);
+				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OresToBars[type]].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f, Vector2.Zero);
+				
+				//if (remainder > 0)
+				//{
+				//	text = remainder.ToString();
+				//	posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos2.Y);
+				//	DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, posModified /*+ new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X - 9, 0)*/, Color.Yellow, Color.Black, 1.4f);
+				//	DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OreTilesToItems[type]].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f);
+				//}
+				// ⅓
 			}
 		}
 	}
