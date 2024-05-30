@@ -10,6 +10,7 @@ using ReLogic.Graphics;
 using Avalon.Tiles.Ores;
 using System;
 using Terraria.UI;
+using Avalon.Items.Consumables;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -87,95 +88,81 @@ internal class CalcSpec : UIState
 			Color c = Lighting.GetColor(tilepos);
 			Data.Sets.Tile.OresToBars.TryGetValue(Main.tile[tilepos.X, tilepos.Y].TileType, out int stupidWayOfCheckingIfThisIsZero);
 
-			if (/*TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType]*/
-				stupidWayOfCheckingIfThisIsZero != 0 && c.R > 5 && c.G > 5 && c.B > 5)
+			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] &&
+				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Boltstone>() &&
+				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Heartstone>() &&
+				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Starstone>() &&
+				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>() &&
+				c.R > 5 && c.G > 5 && c.B > 5)
 			{
 				ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
 				int bars = (int)CalculatorSpectacles.CountOres(tilepos, type, 700);
 				int remainder = 0;
 				int remainderDenominator = 3;
 
-				// for some reason the CountOres method returns 0 if there's only 1 ore
+				// for some reason CountOres returns 0 if there's only 1 ore
 				if (bars == 0) bars = 1;
 
-				/*ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
-				if (t != null)
-				{
-					var drops = t.GetItemDrops(tilepos.X, tilepos.Y);
+				int barType = -1;
 
-					int amtOfOre = 0;
-					int barType = -1;
-					foreach (Item item in drops)
-					{
-						foreach (Recipe recipe in Main.recipe)
-						{
-							if (recipe.TryGetIngredient(item.type, out Item ing))
-							{
-								if (recipe.createItem.Name.Contains("Bar"))
-								{
-									amtOfOre = ing.stack;
-									barType = recipe.createItem.type;
-								}
-							}
-						}
-					}
-				}*/
-
-
-				if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
-				{
-					remainder = bars % 3;
-					bars /= 3;
-					remainderDenominator = 3;
-				}
-				else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
-				{
-					remainder = bars % 4;
-					bars /= 4;
-					remainderDenominator = 4;
-				}
-				else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
+				if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<ShroomiteOre>())
 				{
 					remainder = bars % 5;
 					bars /= 5;
 					remainderDenominator = 5;
+					barType = ItemID.ShroomiteBar;
 				}
-				//else if (Data.Sets.Tile.SixOrePerBar.Contains(type))
-				//{
-				//	remainder = bars % 6;
-				//	bars /= 6;
-				//	remainderDenominator = 6;
-				//}
-				//else if (Data.Sets.Tile.SevenOrePerBar.Contains(type))
-				//{
-				//	remainder = bars % 7;
-				//	bars /= 7;
-				//	remainderDenominator = 7;
-				//}
-				else if (Data.Sets.Tile.EightOrePerBar.Contains(type))
+				else
 				{
-					remainder = bars % 8;
-					bars /= 8;
-					remainderDenominator = 8;
+					ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
+					if (t != null)
+					{
+						var drops = t.GetItemDrops(tilepos.X, tilepos.Y);
+
+						int amtOfOre = 0;
+						foreach (Item item in drops)
+						{
+							foreach (Recipe recipe in Main.recipe)
+							{
+								if (recipe.TryGetIngredient(item.type, out Item ing))
+								{
+									if (recipe.createItem.Name.Contains("Bar"))
+									{
+										amtOfOre = ing.stack;
+										barType = recipe.createItem.type;
+										break;
+									}
+								}
+							}
+						}
+						remainder = bars % amtOfOre;
+						bars /= amtOfOre;
+						remainderDenominator = amtOfOre;
+					}
+					else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
+					{
+						if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
+						{
+							remainder = bars % 3;
+							bars /= 3;
+							remainderDenominator = 3;
+						}
+						else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
+						{
+							remainder = bars % 4;
+							bars /= 4;
+							remainderDenominator = 4;
+						}
+						else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
+						{
+							remainder = bars % 5;
+							bars /= 5;
+							remainderDenominator = 5;
+						}
+						barType = Data.Sets.Tile.OresToBars[type];
+					}
 				}
-				else if (type == ModContent.TileType<Heartstone>())
-				{
-					remainder = bars % 45;
-					bars /= 45;
-					remainderDenominator = 45;
-				}
-				else if (type == ModContent.TileType<Starstone>())
-				{
-					remainder = bars % 60;
-					bars /= 60;
-					remainderDenominator = 60;
-				}
-				else if (type == ModContent.TileType<Boltstone>())
-				{
-					remainder = bars % 25;
-					bars /= 25;
-					remainderDenominator = 25;
-				}
+
 
 				string text = bars.ToString();
 				int ypos = -40;
@@ -199,7 +186,7 @@ internal class CalcSpec : UIState
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainder}", pos3 + new Vector2(-5, 0), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
 				}
-				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OresToBars[type]].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f, Vector2.Zero);
+				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f, Vector2.Zero);
 				//if (remainder > 0)
 				//{
 				//	text = remainder.ToString();

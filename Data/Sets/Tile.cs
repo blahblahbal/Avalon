@@ -14,24 +14,24 @@ namespace Avalon.Data.Sets
     {
         public static List<int> ThreeOrePerBar = new() { TileID.Copper, TileID.Tin, TileID.Meteorite,
             TileID.Demonite, TileID.Crimtane, TileID.Hellstone, TileID.Cobalt, TileID.Palladium, TileID.Iron, TileID.Lead,
-            ModContent.TileType<BronzeOre>(), ModContent.TileType<NickelOre>(), ModContent.TileType<DurataniumOre>(),
-            ModContent.TileType<BacciliteOre>()
+            //ModContent.TileType<BronzeOre>(), ModContent.TileType<NickelOre>(), ModContent.TileType<DurataniumOre>(),
+            //ModContent.TileType<BacciliteOre>()
         };
 
         public static List<int> FourOrePerBar = new() { TileID.Silver, TileID.Tungsten, TileID.Gold,
-            TileID.Platinum, TileID.Mythril, TileID.Orichalcum, TileID.LunarOre, ModContent.TileType<ZincOre>(),
-            ModContent.TileType<BismuthOre>(), ModContent.TileType<NaquadahOre>(), ModContent.TileType<RhodiumOre>(),
-            ModContent.TileType<OsmiumOre>(), ModContent.TileType<IridiumOre>()
+            TileID.Platinum, TileID.Mythril, TileID.Orichalcum, TileID.LunarOre, //ModContent.TileType<ZincOre>(),
+            //ModContent.TileType<BismuthOre>(), ModContent.TileType<NaquadahOre>(), ModContent.TileType<RhodiumOre>(),
+            //ModContent.TileType<OsmiumOre>(), ModContent.TileType<IridiumOre>()
         };
 
         public static List<int> FiveOrePerBar = new() { TileID.Adamantite, TileID.Titanium, TileID.Chlorophyte,
-            ModContent.TileType<TroxiniumOre>(), ModContent.TileType<HallowedOre>(), ModContent.TileType<ShroomiteOre>(),
+            //ModContent.TileType<TroxiniumOre>(), ModContent.TileType<HallowedOre>(), ModContent.TileType<ShroomiteOre>(),
 			//ModContent.TileType<PyroscoricOre>(), ModContent.TileType<TritanoriumOre>(), ModContent.TileType<XanthophyteOre>()
         };
 
 		//public static List<int> SixOrePerBar = new() { ModContent.TileType<UnvolanditeOre>(), ModContent.TileType<VorazylcumOre>() };
 
-		public static List<int> EightOrePerBar = new() { ModContent.TileType<CaesiumOre>() };
+		//public static List<int> EightOrePerBar = new() { ModContent.TileType<CaesiumOre>() };
 
 		public static List<ushort> LivingBlocks = new()
         {
