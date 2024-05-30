@@ -22,7 +22,7 @@ class TroxiniumHeadpiece : ModItem
         Item.height = dims.Height;
         if (!Main.dedServ)
         {
-           Item.GetGlobalItem<ArmorGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Head_Glow").Value;
+            Item.GetGlobalItem<ArmorGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Head_Glow").Value;
         }
         Item.GetGlobalItem<ArmorGlowmask>().glowAlpha = 0;
     }
@@ -33,9 +33,9 @@ class TroxiniumHeadpiece : ModItem
     public override void DrawArmorColor(Player drawPlayer, float shadow, ref Color color, ref int glowMask, ref Color glowMaskColor)
     {
         if (!Main.gameMenu)
-        {
-            color = Color.White * (Lighting.Brightness((int)drawPlayer.position.X / 16, (int)drawPlayer.position.Y / 16) * 4f);
-        }
+		{
+			color *= 4f;
+		}
     }
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
