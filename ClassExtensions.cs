@@ -23,7 +23,7 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
-    public static int BannerPlaceStyleToItemID(int placeStyle)
+	public static int BannerPlaceStyleToItemID(int placeStyle)
     {
         placeStyle += 21;
         for (int i = 0; i < ItemLoader.ItemCount; i++)
