@@ -16,10 +16,12 @@ public class BasaltObeliskBuff : ModBuff
     public override void Update(Player player, ref int buffIndex)
 	{
 		player.lavaMax += 420;
-		if (player.lavaTime < player.lavaMax && !player.lavaWet)
-		{
-			player.lavaTime++;
-		}
+		// code not needed, breaks behaviour when in shallow lava
+		// leaving in case we want to make the lava immunity remain after the buff disappears instead of being immediately depleted
+		//if (player.lavaTime < player.lavaMax && !player.lavaWet)
+		//{
+		//	player.lavaTime++;
+		//}
 		player.buffImmune[BuffID.OnFire] = true;
 	}
 }

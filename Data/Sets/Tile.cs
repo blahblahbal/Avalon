@@ -12,23 +12,6 @@ namespace Avalon.Data.Sets
 {
     internal class Tile
     {
-		/// <summary>
-		/// temporary list for the calculator spectacles, to prevent errors and lag when hovering an ore that isn't in the dictionaries
-		/// </summary>
-		public static List<int> VanillaAndAvalonOres = new List<int>()
-		{
-			TileID.Copper, TileID.Tin, TileID.Meteorite,
-			TileID.Demonite, TileID.Crimtane, TileID.Hellstone, TileID.Cobalt, TileID.Palladium, TileID.Iron, TileID.Lead,
-			ModContent.TileType<BronzeOre>(), ModContent.TileType<NickelOre>(), ModContent.TileType<DurataniumOre>(),
-			ModContent.TileType<BacciliteOre>(), TileID.Silver, TileID.Tungsten, TileID.Gold,
-			TileID.Platinum, TileID.Mythril, TileID.Orichalcum, TileID.LunarOre, ModContent.TileType<ZincOre>(),
-			ModContent.TileType<BismuthOre>(), ModContent.TileType<NaquadahOre>(), ModContent.TileType<RhodiumOre>(),
-			ModContent.TileType<OsmiumOre>(), ModContent.TileType<IridiumOre>(), TileID.Adamantite, TileID.Titanium, TileID.Chlorophyte,
-			ModContent.TileType<TroxiniumOre>(), ModContent.TileType<HallowedOre>(), ModContent.TileType<ShroomiteOre>(),
-			ModContent.TileType<CaesiumOre>(), ModContent.TileType<Boltstone>(), ModContent.TileType<Heartstone>(),
-			ModContent.TileType<Starstone>()
-		};
-
         public static List<int> ThreeOrePerBar = new() { TileID.Copper, TileID.Tin, TileID.Meteorite,
             TileID.Demonite, TileID.Crimtane, TileID.Hellstone, TileID.Cobalt, TileID.Palladium, TileID.Iron, TileID.Lead,
             ModContent.TileType<BronzeOre>(), ModContent.TileType<NickelOre>(), ModContent.TileType<DurataniumOre>(),
