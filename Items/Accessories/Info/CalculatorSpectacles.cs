@@ -89,7 +89,6 @@ internal class CalcSpec : UIState
 
 			if (/*TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType]*/
 				stupidWayOfCheckingIfThisIsZero != 0 && c.R > 5 && c.G > 5 && c.B > 5)
-			
 			{
 				ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
 				int bars = (int)CalculatorSpectacles.CountOres(tilepos, type, 700);
