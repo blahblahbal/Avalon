@@ -86,12 +86,8 @@ internal class CalcSpec : UIState
 		{
 			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 			Color c = Lighting.GetColor(tilepos);
-			Data.Sets.Tile.OresToBars.TryGetValue(Main.tile[tilepos.X, tilepos.Y].TileType, out int stupidWayOfCheckingIfThisIsZero);
 
 			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] &&
-				//Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Boltstone>() &&
-				//Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Heartstone>() &&
-				//Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Starstone>() &&
 				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>() &&
 				c.R > 5 && c.G > 5 && c.B > 5)
 			{
@@ -105,6 +101,7 @@ internal class CalcSpec : UIState
 
 				int barType = -1;
 
+				// check manually for shroomite/bars
 				if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<ShroomiteOre>())
 				{
 					remainder = bars % 5;
@@ -112,6 +109,7 @@ internal class CalcSpec : UIState
 					remainderDenominator = 5;
 					barType = ItemID.ShroomiteBar;
 				}
+				// check manually for heartstone/life crystals
 				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>())
 				{
 					remainder = bars % 45;
@@ -119,6 +117,7 @@ internal class CalcSpec : UIState
 					remainderDenominator = 45;
 					barType = ItemID.LifeCrystal;
 				}
+				// check manually for starstone/mana crystals
 				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>())
 				{
 					remainder = bars % 60;
@@ -126,6 +125,7 @@ internal class CalcSpec : UIState
 					remainderDenominator = 60;
 					barType = ItemID.ManaCrystal;
 				}
+				// check manually for boltstone/stamina crystals
 				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
 				{
 					remainder = bars % 25;
@@ -135,18 +135,25 @@ internal class CalcSpec : UIState
 				}
 				else
 				{
+					// grab the modded tile at the cursor's position
 					ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
 					if (t != null)
 					{
+						// grab the drops of the tile
 						var drops = t.GetItemDrops(tilepos.X, tilepos.Y);
 
 						int amtOfOre = 0;
+						// loop through the drops of the tile (will only loop once likely)
 						foreach (Item item in drops)
 						{
+							// loop through all recipes
 							foreach (Recipe recipe in Main.recipe)
 							{
+								// check if the recipe's ingredient matches the drop of the tile
 								if (recipe.TryGetIngredient(item.type, out Item ing))
 								{
+									// if the recipe's result contains the word "Bar," set barType to the
+									// result's type and amtOfOre to the stack size of the ingredient
 									if (recipe.createItem.Name.Contains("Bar"))
 									{
 										amtOfOre = ing.stack;
@@ -156,10 +163,12 @@ internal class CalcSpec : UIState
 								}
 							}
 						}
+						// assign all the things necessary to display the text/sprite later on
 						remainder = bars % amtOfOre;
 						bars /= amtOfOre;
 						remainderDenominator = amtOfOre;
 					}
+					// if the tile is vanilla
 					else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
 					{
 						if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
@@ -202,30 +211,45 @@ internal class CalcSpec : UIState
 				}
 				if (remainder > 0)
 				{
+					// position modifier for if the remainder (numerator) is 10
+					// or higher, to shift it to the left a bit
 					int xmod = -5;
 					if (remainder > 9) xmod = -11;
 					pos3.X += FontAssets.MouseText.Value.MeasureString($"{bars}  ").X;
+					
+					// for some reason the text is shifted farther to the left if it's a crystal
+					// this just shifts it back to the right by a magic number that seems appropriate
 					if (bars == 0 && (barType == ItemID.LifeCrystal || barType == ItemID.ManaCrystal || barType == ModContent.ItemType<StaminaCrystal>()))
 					{
 						pos3.X += 18;
 					}
-					//Main.NewText(FontAssets.MouseText.Value.MeasureString($"{bars}  ").X);
+
+					// draw the text
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, "/", pos3, Color.Yellow, Color.Black, 1.4f);
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainder}", pos3 + new Vector2(xmod, 0), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
 				}
-				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f, Vector2.Zero);
-				//if (remainder > 0)
-				//{
-				//	text = remainder.ToString();
-				//	posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos2.Y);
-				//	DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, text, posModified /*+ new Vector2(FontAssets.MouseText.Value.MeasureString(text2).X - 9, 0)*/, Color.Yellow, Color.Black, 1.4f);
-				//	DrawOutlinedTexture(spriteBatch, TextureAssets.Item[Data.Sets.Tile.OreTilesToItems[type]].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f);
-				//}
+
+				// draw the sprite
+				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White);
 				// ⅓
 			}
 		}
 	}
+	/// <summary>
+	/// A helper method made by PoroCYon a very long time ago. Draws an outlined string (obviously).
+	/// </summary>
+	/// <param name="SB">The <see cref="SpriteBatch"/> to draw from.</param>
+	/// <param name="SF">The <see cref="SpriteFont"/> to use.</param>
+	/// <param name="txt">The text to draw.</param>
+	/// <param name="P">The position to draw at.</param>
+	/// <param name="C">The color to use for the interior of the text.</param>
+	/// <param name="shadeC">The outline color.</param>
+	/// <param name="strength">The thickness of the outline.</param>
+	/// <param name="V">Unknown.</param>
+	/// <param name="scale">The size of the text.</param>
+	/// <param name="SE">The SpriteEffects to use.</param>
+	/// <param name="LL">Unknown.</param>
 	private void DrawOutlinedString(SpriteBatch SB, DynamicSpriteFont SF, string txt, Vector2 P, Color C, Color shadeC, float strength = 1f, Vector2 V = default(Vector2), float scale = 1f, SpriteEffects SE = SpriteEffects.None, float LL = 0f)
 	{
 		SB.End();
@@ -239,13 +263,22 @@ internal class CalcSpec : UIState
 		SB.Begin();
 	}
 
-	private void DrawOutlinedTexture(SpriteBatch sb, Texture2D tex, Vector2 pos, Color color, Color shadowColor, float strength = 1f, Vector2 vec = default, float scale = 1f, SpriteEffects effects = SpriteEffects.None, float LL = 0f)
+	/// <summary>
+	/// A helper method to draw an outlined texture.
+	/// </summary>
+	/// <param name="sb">The <see cref="SpriteBatch"/> to draw from.</param>
+	/// <param name="tex">The texture to use.</param>
+	/// <param name="pos">The position to draw the texture at.</param>
+	/// <param name="color">The color to tint the texture.</param>
+	private void DrawOutlinedTexture(SpriteBatch sb, Texture2D tex, Vector2 pos, Color color)
 	{
 		if (tex == null) return;
 
+		// end the sprite batch and begin again to make it draw in the right position
 		sb.End();
 		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
 
+		// code yoinked from vanilla; this draws the outer black outline
 		int num = 2;
 		int num2 = num * 2;
 		for (int i = -num2; i <= num2; i += num)
@@ -258,8 +291,12 @@ internal class CalcSpec : UIState
 				}
 			}
 		}
+
+		// end the spritebatch and begin again, using the shader this time (so it draws the sprite full white)
 		sb.End();
 		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.GameViewMatrix.ZoomMatrix);
+
+		// code yoinked from vanilla; this draws the inner white outline 
 		num2 = num;
 		for (int k = -num2; k <= num2; k += num)
 		{
@@ -271,9 +308,12 @@ internal class CalcSpec : UIState
 				}
 			}
 		}
+
+		// end the sprite batch and begin again, so it draws normally without the shader now
 		sb.End();
 		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
 
+		// draw the actual texture with normal colors
 		sb.Draw(tex, pos, color);
 	}
 }
