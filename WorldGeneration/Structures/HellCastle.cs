@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Avalon.Items.Potions.Buff;
 using System.Collections.Generic;
+using Terraria.WorldBuilding;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -66,6 +67,7 @@ internal class Hellcastle
         AddDevilsScythes(x, y, 400, 150);
         AddEntranceArea(x, y + 150);
         SmoothHellcastle(x, y, 400, 150);
+		GenVars.structures.AddProtectedStructure(new Rectangle(x, y, 400, 150));
     }
     public static void AddPaintings(int x, int y, int width, int height)
     {
