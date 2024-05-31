@@ -2,6 +2,7 @@ using Avalon.Logic;
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,7 +11,7 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode;
 
 public class TroxiniumRepeater : ModItem
 {
-    public override void SetDefaults()
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item5;
@@ -31,7 +32,7 @@ public class TroxiniumRepeater : ModItem
         Item.height = dims.Height;
         if (!Main.dedServ)
         {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow.Value;
         }
         Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = -5;
         Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = 0;
@@ -52,13 +53,17 @@ public class TroxiniumRepeater : ModItem
     {
         return new Vector2(-5, 0);
     }
-    public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+	private static Asset<Texture2D> glow;
+	public override void SetStaticDefaults()
+	{
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+	}
+	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
-        Rectangle dims = this.GetDims();
-        Vector2 vector = dims.Size() / 2f;
-        Vector2 value = new Vector2((float)(Item.width / 2) - vector.X, Item.height - dims.Height);
+        Vector2 vector = glow.Size() / 2f;
+        Vector2 value = new Vector2((float)(Item.width / 2) - vector.X, Item.height - glow.Height());
         Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
         float num = Item.velocity.X * 0.2f;
-        spriteBatch.Draw((Texture2D)ModContent.Request<Texture2D>(Texture + "_Glow"), vector2, dims, new Color(255, 255, 255, 0), num, vector, scale, SpriteEffects.None, 0f);
+        spriteBatch.Draw(glow.Value, vector2, new Rectangle(0,0,glow.Width(),glow.Height()), new Color(255, 255, 255, 0), num, vector, scale, SpriteEffects.None, 0f);
     }
 }

@@ -1,6 +1,7 @@
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,11 +10,13 @@ namespace Avalon.Items.Material;
 
 class PointingLaser : ModItem
 {
+	Asset<Texture2D> glow;
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 25;
         Item.staff[Item.type] = true;
-    }
+		glow = Mod.Assets.Request<Texture2D>("Items/Material/PointingLaser_Glow");
+	}
 
     public override void SetDefaults()
     {
@@ -32,12 +35,11 @@ class PointingLaser : ModItem
         Item.height = dims.Height;
         if (!Main.dedServ)
         {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow.Value;
         }
     }
     public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
     {
-        Texture2D texture = Mod.Assets.Request<Texture2D>("Items/Material/PointingLaser_Glow").Value;
         Color c = Color.White;
         if (Main.LocalPlayer.team == (int)Terraria.Enums.Team.Red || Main.netMode == NetmodeID.SinglePlayer)
         {
@@ -59,6 +61,6 @@ class PointingLaser : ModItem
         {
             c = new Color(171, 59, 218);
         }
-        spriteBatch.Draw(texture, position, frame, c, 0f, origin, scale, SpriteEffects.None, 0f);
+        spriteBatch.Draw(glow.Value, position, frame, c, 0f, origin, scale, SpriteEffects.None, 0f);
     }
 }
