@@ -99,8 +99,9 @@ public static class Projectile
         ModContent.ProjectileType<WoodenClub>(),
         ModContent.ProjectileType<MarrowMasher>(),
         ModContent.ProjectileType<UrchinMace>(),
-        ModContent.ProjectileType<HallowedClaymore>(),
-        ModContent.ProjectileType<CraniumCrusher>(),
+        ModContent.ProjectileType<HallowedRapierProj>(),
+		ModContent.ProjectileType<HallowedRapierVis>(),
+		ModContent.ProjectileType<CraniumCrusher>(),
         ModContent.ProjectileType<HellboundHalberd>());
 
     public static readonly bool[] EarthRelatedItems = ProjectileID.Sets.Factory.CreateBoolSet(
