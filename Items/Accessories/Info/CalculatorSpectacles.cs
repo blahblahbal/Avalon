@@ -89,9 +89,9 @@ internal class CalcSpec : UIState
 			Data.Sets.Tile.OresToBars.TryGetValue(Main.tile[tilepos.X, tilepos.Y].TileType, out int stupidWayOfCheckingIfThisIsZero);
 
 			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] &&
-				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Boltstone>() &&
-				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Heartstone>() &&
-				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Starstone>() &&
+				//Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Boltstone>() &&
+				//Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Heartstone>() &&
+				//Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<Starstone>() &&
 				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>() &&
 				c.R > 5 && c.G > 5 && c.B > 5)
 			{
@@ -111,6 +111,27 @@ internal class CalcSpec : UIState
 					bars /= 5;
 					remainderDenominator = 5;
 					barType = ItemID.ShroomiteBar;
+				}
+				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>())
+				{
+					remainder = bars % 45;
+					bars /= 45;
+					remainderDenominator = 45;
+					barType = ItemID.LifeCrystal;
+				}
+				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>())
+				{
+					remainder = bars % 60;
+					bars /= 60;
+					remainderDenominator = 60;
+					barType = ItemID.ManaCrystal;
+				}
+				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
+				{
+					remainder = bars % 25;
+					bars /= 25;
+					remainderDenominator = 25;
+					barType = ModContent.ItemType<StaminaCrystal>();
 				}
 				else
 				{
@@ -181,9 +202,16 @@ internal class CalcSpec : UIState
 				}
 				if (remainder > 0)
 				{
+					int xmod = -5;
+					if (remainder > 9) xmod = -11;
 					pos3.X += FontAssets.MouseText.Value.MeasureString($"{bars}  ").X;
+					if (bars == 0 && (barType == ItemID.LifeCrystal || barType == ItemID.ManaCrystal || barType == ModContent.ItemType<StaminaCrystal>()))
+					{
+						pos3.X += 18;
+					}
+					//Main.NewText(FontAssets.MouseText.Value.MeasureString($"{bars}  ").X);
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, "/", pos3, Color.Yellow, Color.Black, 1.4f);
-					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainder}", pos3 + new Vector2(-5, 0), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
+					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainder}", pos3 + new Vector2(xmod, 0), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
 				}
 				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White, Color.White, 1.4f, Vector2.Zero);

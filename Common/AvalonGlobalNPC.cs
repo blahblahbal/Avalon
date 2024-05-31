@@ -51,7 +51,36 @@ public class AvalonGlobalNPC : GlobalNPC
 
         return 0;
     }
-    public override void OnKill(NPC npc)
+
+	public override bool PreAI(NPC npc)
+	{
+		if (Main.netMode != NetmodeID.MultiplayerClient)
+		{
+			//if (Main.rand.NextBool(1) && !Main.npcChatRelease)
+			{
+				for (int i = 0; i < 255; i++)
+				{
+					if (Main.player[i].active && npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SkellyBanana)//Main.player[i].talkNPC == npc.whoAmI && npc.type == NPCID.SkeletonMerchant)
+					{
+						Item.NewItem(npc.GetSource_FromThis(), npc.position, ItemID.Banana);
+						Utils.PoofOfSmoke(npc.position);
+						if (Main.netMode == NetmodeID.SinglePlayer)
+						{
+							Main.NewText(Language.GetTextValue("Mods.Avalon.Banana"), 230, 230, 0);
+						}
+						else
+						{
+							ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.Banana"), new Color(230, 230, 0));
+						}
+						npc.active = false;
+						npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SkellyBanana = false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	public override void OnKill(NPC npc)
     {
         if (npc.type == NPCID.Vulture && AvalonWorld.SpawnDesertBeak)
         {
