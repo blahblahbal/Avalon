@@ -11,6 +11,7 @@ using Avalon.Tiles.Ores;
 using System;
 using Terraria.UI;
 using Avalon.Items.Consumables;
+using Terraria.Localization;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -78,6 +79,65 @@ public class CalculatorSpectacles : ModItem
         return fullAmount.Count;
     }
 }
+public class CalcSpecGlobalItem : GlobalItem
+{
+	public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+	{
+		if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().CalculatorSpectacles)
+		{
+			int amtOfOre = 0;
+			int barType = -1;
+			int bars = 0;
+			string text = "";
+			foreach (Recipe recipe in Main.recipe)
+			{
+				// check if the recipe's ingredient matches the drop of the tile
+				if (recipe.TryGetIngredient(item.type, out Item ing))
+				{
+					// if the recipe's result contains the word "Bar" or "Ingot," or is Life Quartz (Thorium), Heartstone, Boltstone, or Starstone
+					// set barType to the result's type and amtOfOre to the stack size of the ingredient
+					// also set bars to item.stack
+					if (recipe.createItem.Name.Contains("Bar") || recipe.createItem.Name.Contains("Ingot") ||
+						item.type == ExxoAvalonOrigins.Thorium?.Find<ModItem>("LifeQuartz").Type ||
+						item.type == ModContent.ItemType<Material.Ores.Heartstone>() || item.type == ModContent.ItemType<Material.Ores.Boltstone>() ||
+						item.type == ModContent.ItemType<Material.Ores.Starstone>())
+					{
+						amtOfOre = ing.stack;
+						barType = recipe.createItem.type;
+						bars = item.stack;
+						break;
+					}
+				}
+				foreach (int itemID in Data.Sets.Tile.VanillaOreTilesToBarItems.Values)
+				{
+					if (recipe.TryGetResult(itemID, out _))
+					{
+						if (Data.Sets.Item.VanillaBarItems[itemID])
+						{
+							if (recipe.TryGetIngredient(item.type, out Item ingr))
+							{
+								if (recipe.createItem.type == itemID)
+								{
+									amtOfOre = ingr.stack;
+									barType = itemID;
+									bars = item.stack;
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+			if (amtOfOre != 0 && barType != -1)
+			{
+				int remainder = bars % amtOfOre;
+				bars /= amtOfOre;
+				text = bars + " [i:" + barType + "] " + remainder + " [i:" + item.type + "]";
+				tooltips.Add(new TooltipLine(Mod, "CalcSpecTooltip", NetworkText.FromLiteral(text).ToString()));
+			}
+		}
+	}
+}
 internal class CalcSpec : UIState
 {
 	protected override void DrawSelf(SpriteBatch spriteBatch)
@@ -108,6 +168,14 @@ internal class CalcSpec : UIState
 					bars /= 5;
 					remainderDenominator = 5;
 					barType = ItemID.ShroomiteBar;
+				}
+				// check manually for shroomite/bars
+				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<HallowedOre>())
+				{
+					remainder = bars % 5;
+					bars /= 5;
+					remainderDenominator = 5;
+					barType = ItemID.HallowedBar;
 				}
 				// check manually for heartstone/life crystals
 				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>())
@@ -154,15 +222,19 @@ internal class CalcSpec : UIState
 								{
 									// if the recipe's result contains the word "Bar," set barType to the
 									// result's type and amtOfOre to the stack size of the ingredient
-									if (recipe.createItem.Name.Contains("Bar"))
+									if (recipe.createItem.Name.Contains("Bar") || recipe.createItem.Name.Contains("Ingot") ||
+										item.type == ExxoAvalonOrigins.Thorium?.Find<ModItem>("LifeQuartz").Type)
 									{
 										amtOfOre = ing.stack;
 										barType = recipe.createItem.type;
 										break;
 									}
+									
 								}
 							}
 						}
+						if (amtOfOre == 0) return;
+
 						// assign all the things necessary to display the text/sprite later on
 						remainder = bars % amtOfOre;
 						bars /= amtOfOre;
@@ -171,25 +243,31 @@ internal class CalcSpec : UIState
 					// if the tile is vanilla
 					else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
 					{
+
 						if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
 						{
 							remainder = bars % 3;
 							bars /= 3;
 							remainderDenominator = 3;
+							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
 						}
 						else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
 						{
 							remainder = bars % 4;
 							bars /= 4;
 							remainderDenominator = 4;
+							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
 						}
 						else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
 						{
 							remainder = bars % 5;
 							bars /= 5;
 							remainderDenominator = 5;
+							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
 						}
-						barType = Data.Sets.Tile.OresToBars[type];
+						else return;
+						
+
 					}
 				}
 

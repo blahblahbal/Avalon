@@ -28,4 +28,11 @@ class ShroomiteOre : ModItem
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(this, 5)
+			.AddTile(TileID.AdamantiteForge)
+			.Register();
+	}
 }

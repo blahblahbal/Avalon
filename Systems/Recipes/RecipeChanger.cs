@@ -88,21 +88,16 @@ public class RecipeChanger : ModSystem
                     break;
                 }
                 case ItemID.SunplateBlock:
-                    {
-                        if (recipe.TryGetIngredient(ItemID.StoneBlock, out Item ing))
-                        {
-                            recipe.RemoveIngredient(ing);
-                            recipe.AddIngredient(ItemID.StoneBlock, 40);
-                        }
-                        recipe.AddIngredient(ItemID.GoldOre);
-                        recipe.ReplaceResult(ItemID.SunplateBlock, 40);
-                        break;
-                    }
-                /*case ItemID.HandOfCreation:
                 {
-                    recipe.AddIngredient(ModContent.ItemType<ObsidianGlove>());
+                    if (recipe.TryGetIngredient(ItemID.StoneBlock, out Item ing))
+                    {
+                        recipe.RemoveIngredient(ing);
+                        recipe.AddIngredient(ItemID.StoneBlock, 40);
+                    }
+                    recipe.AddIngredient(ItemID.GoldOre);
+                    recipe.ReplaceResult(ItemID.SunplateBlock, 40);
                     break;
-                }*/
+                }
                 case ItemID.ShroomiteBar:
                 {
                     if (recipe.TryGetIngredient(ItemID.GlowingMushroom, out Item ing))
@@ -188,52 +183,22 @@ public class RecipeChanger : ModSystem
                 case ItemID.ChlorophyteChainsaw:
                     recipe.AddIngredient(ModContent.ItemType<VenomShard>());
                     break;
-                //case ItemID.FrostHelmet:
-                //{
-                //    if (recipe.TryGetIngredient(ItemID.AdamantiteBar, out Item ing))
-                //    {
-                //        recipe.RemoveIngredient(ing);
-                //        recipe.AddIngredient(ModContent.ItemType<FeroziumBar>(), 12);
-                //        recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
-                //    }
-                //    else if (recipe.HasIngredient(ItemID.TitaniumBar))
-                //    {
-                //        recipe.DisableRecipe();
-                //    }
-
-                //    break;
-                //}
-                //case ItemID.FrostBreastplate:
-                //{
-                //    if (recipe.TryGetIngredient(ItemID.AdamantiteBar, out Item ing))
-                //    {
-                //        recipe.RemoveIngredient(ing);
-                //        recipe.AddIngredient(ModContent.ItemType<FeroziumBar>(), 24);
-                //        recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
-                //    }
-                //    else if (recipe.HasIngredient(ItemID.TitaniumBar))
-                //    {
-                //        recipe.DisableRecipe();
-                //    }
-
-                //    break;
-                //}
-                //case ItemID.FrostLeggings:
-                //{
-                //    if (recipe.TryGetIngredient(ItemID.AdamantiteBar, out Item ing))
-                //    {
-                //        recipe.RemoveIngredient(ing);
-                //        recipe.AddIngredient(ModContent.ItemType<FeroziumBar>(), 18);
-                //        recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
-                //    }
-                //    else if (recipe.HasIngredient(ItemID.TitaniumBar))
-                //    {
-                //        recipe.DisableRecipe();
-                //    }
-
-                //    break;
-                //}
-                case ItemID.ClayPot:
+				case ItemID.FrostHelmet:
+				{
+					recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					break;
+				}
+				case ItemID.FrostBreastplate:
+				{
+					recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					break;
+				}
+				case ItemID.FrostLeggings:
+				{
+					recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					break;
+				}
+				case ItemID.ClayPot:
                 {
                     if (recipe.TryGetIngredient(ItemID.ClayBlock, out Item ing))
                     {

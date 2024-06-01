@@ -31,7 +31,7 @@ public class Phantasm : ModNPC
         NPC.Size = new Vector2(66);
         NPC.boss = NPC.noTileCollide = NPC.noGravity = true;
         NPC.npcSlots = 100f;
-        NPC.damage = 95;
+        NPC.damage = 105;
         NPC.lifeMax = 160000;
         NPC.defense = 80;
         NPC.aiStyle = -1;
@@ -208,7 +208,7 @@ public class Phantasm : ModNPC
             NPC.ai[2]++;
             if (NPC.ai[2] == 25)
             {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Normalize(player.Center - NPC.Center) * 20f, ModContent.ProjectileType<Projectiles.Hostile.Phantasm.SoulGrabber>(), 35, default, 255);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Normalize(player.Center - NPC.Center) * 20f, ModContent.ProjectileType<Projectiles.Hostile.Phantasm.SoulGrabber>(), 60, default, 255);
                 NPC.ai[2] = 0;
             }
             oldPhase = 2;
@@ -275,7 +275,7 @@ public class Phantasm : ModNPC
                     swordDashTimer++;
                     if (swordDashTimer == 8)
                     {
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.Phantasm.SoulDagger>(), 35, default, Main.myPlayer, 0f, 7f);
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.Phantasm.SoulDagger>(), 55, default, Main.myPlayer, 0f, 7f);
                         swordDashTimer = 0;
                     }
                 }
@@ -307,7 +307,7 @@ public class Phantasm : ModNPC
     {
         for (int i = 0; i < amount; i++)
         {
-            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.Phantasm.SoulDagger>(), 35, 0, Main.myPlayer, 0f, i);
+            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Hostile.Phantasm.SoulDagger>(), 55, 0, Main.myPlayer, 0f, i);
         }
     }
     public override void OnKill()

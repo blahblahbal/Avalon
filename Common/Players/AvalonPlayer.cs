@@ -6,6 +6,7 @@ using Avalon.Hooks;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Other;
+using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
@@ -1214,7 +1215,8 @@ public class AvalonPlayer : ModPlayer
         #endregion
 
         #region pick speed stuff
-        if (Player.HeldItem.type == ModContent.ItemType<RhodiumPickaxe>() || Player.HeldItem.type == ModContent.ItemType<OsmiumPickaxe>() || Player.HeldItem.type == ModContent.ItemType<IridiumPickaxe>())
+        if (Player.HeldItem.type == ModContent.ItemType<RhodiumPickaxe>() || Player.HeldItem.type == ModContent.ItemType<OsmiumPickaxe>() ||
+			Player.HeldItem.type == ModContent.ItemType<IridiumPickaxe>() || Player.HeldItem.type == ModContent.ItemType<FeroziumPickaxe>())
         {
             Player.pickSpeed -= 0.5f;
         }

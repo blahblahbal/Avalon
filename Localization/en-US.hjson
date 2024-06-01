@@ -8808,7 +8808,11 @@ Mods: {
 
 			CalculatorSpectacles: {
 				DisplayName: Calculator Spectacles
-				Tooltip: Displays the bar yield of the ore vein above the cursor
+				Tooltip:
+					'''
+					Displays the bar yield of the ore vein above the cursor
+					Displays the bar yield on each ore stack in your inventory
+					'''
 			}
 
 			StarTorch: {
@@ -8829,6 +8833,21 @@ Mods: {
 			BasaltObelisk: {
 				DisplayName: Basalt Obelisk
 				Tooltip: Provides 7 seconds of immunity to lava and immunity to On Fire! when placed nearby
+			}
+
+			FeroziumPickaxe: {
+				DisplayName: Ferozium Pickaxe
+				Tooltip: ""
+			}
+
+			FeroziumWaraxe: {
+				DisplayName: Ferozium Waraxe
+				Tooltip: ""
+			}
+
+			FeroziumIceSword: {
+				DisplayName: Ferozium Ice Sword
+				Tooltip: ""
 			}
 		}
 
@@ -9088,6 +9107,7 @@ Mods: {
 			SnotsandBallFallingProjectile.DisplayName: Snotsand Ball
 			HallowedRapierProj.DisplayName: Hallowed Rapier Proj
 			HallowedRapierVis.DisplayName: Hallowed Rapier Vis
+			IcicleFerozium.DisplayName: Icicle Ferozium
 		}
 
 		NPCs: {

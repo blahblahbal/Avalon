@@ -53,7 +53,7 @@ class TroxiniumBar : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Ores.TroxiniumOre>(), 5)
+            .AddIngredient(ModContent.ItemType<Ores.TroxiniumOre>(), 4)
             .AddTile(TileID.AdamantiteForge)
             .Register();
     }
