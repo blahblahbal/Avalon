@@ -49,12 +49,12 @@ class MagnetPotion : ModItem
             .AddTile(TileID.Bottles)
             .Register();
 
-        //CreateRecipe(1)
-        //    .AddIngredient(ModContent.ItemType<Material.BottledLava>())
-        //    .AddRecipeGroup(RecipeGroupID.IronBar)
-        //    .AddIngredient(ModContent.ItemType<Fish.SicklyTrout>())
-        //    .AddIngredient(ItemID.Blinkroot)
-        //    .AddTile(TileID.Bottles)
-        //    .Register();
-    }
+		CreateRecipe(1)
+			.AddIngredient(ModContent.ItemType<Material.BottledLava>())
+			.AddRecipeGroup(RecipeGroupID.IronBar)
+			.AddIngredient(ModContent.ItemType<Fish.SicklyTrout>())
+			.AddIngredient(ItemID.Blinkroot)
+			.AddTile(TileID.Bottles)
+			.Register();
+	}
 }
