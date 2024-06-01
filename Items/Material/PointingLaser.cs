@@ -10,7 +10,7 @@ namespace Avalon.Items.Material;
 
 class PointingLaser : ModItem
 {
-	Asset<Texture2D> glow;
+	private static Asset<Texture2D> glow;
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 25;
