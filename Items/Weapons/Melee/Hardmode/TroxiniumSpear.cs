@@ -11,10 +11,12 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 class TroxiniumSpear : ModItem
 {
 	private static Asset<Texture2D> glow;
+	public override void Load()
+	{
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+	}
 	public override void SetStaticDefaults()
     {
-		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
-
 		ItemID.Sets.Spears[Item.type] = true;
     }
     public override void SetDefaults()

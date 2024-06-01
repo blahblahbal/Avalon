@@ -54,7 +54,7 @@ public class TroxiniumRepeater : ModItem
         return new Vector2(-5, 0);
     }
 	private static Asset<Texture2D> glow;
-	public override void SetStaticDefaults()
+	public override void Load()
 	{
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}

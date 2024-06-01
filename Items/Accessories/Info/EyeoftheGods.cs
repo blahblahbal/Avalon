@@ -62,7 +62,7 @@ class EyeoftheGodsPlayer : ModPlayer
             //NPCIndex = -1;
             DisplayTimer = 0;
         }
-    }
+	}
     public override void RefreshInfoAccessoriesFromTeamPlayers(Player otherPlayer)
     {
         if (otherPlayer.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay)

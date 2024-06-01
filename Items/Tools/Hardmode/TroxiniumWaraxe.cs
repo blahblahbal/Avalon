@@ -11,7 +11,7 @@ namespace Avalon.Items.Tools.Hardmode;
 public class TroxiniumWaraxe : ModItem
 {
 	private static Asset<Texture2D> glow;
-	public override void SetStaticDefaults()
+	public override void Load()
 	{
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}

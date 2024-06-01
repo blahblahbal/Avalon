@@ -11,11 +11,14 @@ namespace Avalon.Items.Material;
 class PointingLaser : ModItem
 {
 	private static Asset<Texture2D> glow;
-    public override void SetStaticDefaults()
+	public override void Load()
+	{
+		glow = Mod.Assets.Request<Texture2D>("Items/Material/PointingLaser_Glow");
+	}
+	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 25;
         Item.staff[Item.type] = true;
-		glow = Mod.Assets.Request<Texture2D>("Items/Material/PointingLaser_Glow");
 	}
 
     public override void SetDefaults()

@@ -12,9 +12,12 @@ namespace Avalon.Projectiles.Melee;
 public class UrchinMace : ModProjectile
 {
 	private static Asset<Texture2D> after;
-	public override void SetStaticDefaults()
+	public override void Load()
 	{
 		after = ModContent.Request<Texture2D>(Texture + "_after");
+	}
+	public override void SetStaticDefaults()
+	{
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 4;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
     }

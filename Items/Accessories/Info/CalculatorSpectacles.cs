@@ -26,14 +26,18 @@ public class CalculatorSpectacles : ModItem
         Item.value = Item.sellPrice(0, 2, 0, 0);
         Item.height = dims.Height;
     }
-	public override void UpdateAccessory(Player player, bool hideVisual)
+	public override void UpdateInfoAccessory(Player player)
 	{
-		player.GetModPlayer<AvalonPlayer>().CalculatorSpectacles = true;
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
 	}
-	public override void UpdateInventory(Player player)
-	{
-		player.GetModPlayer<AvalonPlayer>().CalculatorSpectacles = true;
-	}
+	//public override void UpdateAccessory(Player player, bool hideVisual)
+	//{
+	//	player.GetModPlayer<AvalonPlayer>().CalculatorSpectacles = true;
+	//}
+	//public override void UpdateInventory(Player player)
+	//{
+	//	player.GetModPlayer<AvalonPlayer>().CalculatorSpectacles = true;
+	//}
 	public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
     {
         p.Add(new List<Point>()
@@ -79,11 +83,26 @@ public class CalculatorSpectacles : ModItem
         return fullAmount.Count;
     }
 }
+
+public class CalcSpecInfoDisplay : InfoDisplay
+{
+	public override string HoverTexture => Texture + "_Hover";
+	public override bool Active()
+	{
+		return Main.LocalPlayer.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay;
+	}
+
+	public override string DisplayValue(ref Color displayColor, ref Color displayShadowColor)
+	{
+		return Language.GetTextValue("Mods.Avalon.InfoDisplays.CalcSpec");
+	}
+}
+
 public class CalcSpecGlobalItem : GlobalItem
 {
 	public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 	{
-		if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().CalculatorSpectacles)
+		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type])
 		{
 			int amtOfOre = 0;
 			int barType = -1;
@@ -128,6 +147,12 @@ public class CalcSpecGlobalItem : GlobalItem
 					}
 				}
 			}
+			if (item.type == ModContent.ItemType<Material.Ores.ShroomiteOre>())
+			{
+				amtOfOre = 5;
+				barType = ItemID.ShroomiteBar;
+				bars = item.stack;
+			}
 			if (amtOfOre != 0 && barType != -1)
 			{
 				int remainder = bars % amtOfOre;
@@ -142,7 +167,7 @@ internal class CalcSpec : UIState
 {
 	protected override void DrawSelf(SpriteBatch spriteBatch)
 	{
-		if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().CalculatorSpectacles)
+		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type])
 		{
 			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 			Color c = Lighting.GetColor(tilepos);
@@ -393,5 +418,35 @@ internal class CalcSpec : UIState
 
 		// draw the actual texture with normal colors
 		sb.Draw(tex, pos, color);
+	}
+}
+
+public class CalcSpecPlayer : ModPlayer
+{
+	public bool CalcSpecDisplay;
+	public bool CalculatorSpectacles;
+	public bool ActuallyDisplay;
+	public override void ResetEffects()
+	{
+		CalculatorSpectacles = false;
+	}
+	public override void ResetInfoAccessories()
+	{
+		CalcSpecDisplay = false;
+	}
+	public override void PostUpdate()
+	{
+		if (CalcSpecDisplay)
+		{
+			CalculatorSpectacles = true;
+		}
+		else CalculatorSpectacles = false;
+	}
+	public override void RefreshInfoAccessoriesFromTeamPlayers(Player otherPlayer)
+	{
+		if (otherPlayer.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay)
+		{
+			CalcSpecDisplay = true;
+		}
 	}
 }

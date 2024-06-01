@@ -281,6 +281,7 @@ public class AvalonPlayer : ModPlayer
     public const int MaxAstralCooldown = 3600; //constraint cooldown, make it no more than max.
     public bool RubberGloves;
 	public bool CalculatorSpectacles;
+	public bool CalcSpecDisplay;
     #endregion
 
     #region buffs and debuffs
@@ -522,7 +523,11 @@ public class AvalonPlayer : ModPlayer
             else { InBossFight = false; }
         }
     }
-    public override void PreUpdateBuffs()
+	public override void ResetInfoAccessories()
+	{
+		CalcSpecDisplay = false;
+	}
+	public override void PreUpdateBuffs()
     {
         FrameCount++; // aura potion
         StingerProbeRotation = (StingerProbeRotation % MathHelper.TwoPi) + 0.01f;

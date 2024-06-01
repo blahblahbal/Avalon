@@ -8811,7 +8811,7 @@ Mods: {
 				Tooltip:
 					'''
 					Displays the bar yield of the ore vein above the cursor
-					Displays the bar yield on each ore stack in your inventory
+					Displays the bar yield of each ore stack in your inventory
 					'''
 			}
 
@@ -8846,7 +8846,7 @@ Mods: {
 			}
 
 			FeroziumIceSword: {
-				DisplayName: Ferozium Ice Sword
+				DisplayName: Ferozium Icesword
 				Tooltip: ""
 			}
 		}
@@ -8857,6 +8857,8 @@ Mods: {
 			EyeoftheGodsDmgInfoDisplay.DisplayName: Enemy damage
 			Damage: " damage: "
 			NoInfo: No info to display
+			CalcSpecInfoDisplay.DisplayName: Calculator Spectacles
+			CalcSpec: Mouse over an ore vein
 		}
 
 		Projectiles: {

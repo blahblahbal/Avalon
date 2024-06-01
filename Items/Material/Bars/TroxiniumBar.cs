@@ -11,10 +11,13 @@ namespace Avalon.Items.Material.Bars;
 class TroxiniumBar : ModItem
 {
     private static Asset<Texture2D> glow;
+	public override void Load()
+	{
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+	}
 	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 25;
-		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}
 	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 	{
