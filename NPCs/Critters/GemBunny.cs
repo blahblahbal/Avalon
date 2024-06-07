@@ -190,8 +190,11 @@ public class PeridotBunny : GemBunny
         {
             Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PeridotDust>(), 2 * hit.HitDirection, -2f);
         }
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("PeridotBunny1").Type);
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("PeridotBunny2").Type);
+		if (Main.netMode != NetmodeID.Server)
+		{
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("PeridotBunny1").Type);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("PeridotBunny2").Type);
+		}
     }
 }
 public class TourmalineBunny : GemBunny
@@ -236,8 +239,11 @@ public class TourmalineBunny : GemBunny
         {
             Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<TourmalineDust>(), 2 * hit.HitDirection, -2f);
         }
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("TourmalineBunny1").Type);
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("TourmalineBunny2").Type);
+		if (Main.netMode != NetmodeID.Server)
+		{
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("TourmalineBunny1").Type);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("TourmalineBunny2").Type);
+		}
     }
 }
 public class ZirconBunny : GemBunny
@@ -282,7 +288,10 @@ public class ZirconBunny : GemBunny
         {
             Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<ZirconDust>(), 2 * hit.HitDirection, -2f);
         }
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("ZirconBunny1").Type);
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("ZirconBunny2").Type);
+		if (Main.netMode != NetmodeID.Server)
+		{
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("ZirconBunny1").Type);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("ZirconBunny2").Type);
+		}
     }
 }

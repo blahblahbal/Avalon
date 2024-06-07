@@ -174,23 +174,26 @@ public class PeridotSquirrel : GemSquirrel
         NPC.friendly = false;
         NPC.catchItem = ModContent.ItemType<Items.Consumables.Critters.PeridotSquirrel>();
     }
-    public override void HitEffect(NPC.HitInfo hit)
-    {
-        Player player = Main.player[NPC.target];
-        if (NPC.life > 0)
-        {
-            for (int num461 = 0; (double)num461 < (double)10.0 / (double)NPC.lifeMax * 20.0; num461++)
-            {
-                Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PeridotDust>(), hit.HitDirection, -1f);
-            }
-            return;
-        }
-        for (int num462 = 0; num462 < 10; num462++)
-        {
-            Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PeridotDust>(), 2 * hit.HitDirection, -2f);
-        }
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("PeridotSquirrel").Type);
-    }
+	public override void HitEffect(NPC.HitInfo hit)
+	{
+		Player player = Main.player[NPC.target];
+		if (NPC.life > 0)
+		{
+			for (int num461 = 0; (double)num461 < (double)10.0 / (double)NPC.lifeMax * 20.0; num461++)
+			{
+				Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PeridotDust>(), hit.HitDirection, -1f);
+			}
+			return;
+		}
+		for (int num462 = 0; num462 < 10; num462++)
+		{
+			Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PeridotDust>(), 2 * hit.HitDirection, -2f);
+		}
+		if (Main.netMode != NetmodeID.Server)
+		{
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("PeridotSquirrel").Type);
+		}
+	}
 }
 public class TourmalineSquirrel : GemSquirrel
 {
@@ -233,7 +236,10 @@ public class TourmalineSquirrel : GemSquirrel
         {
             Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<TourmalineDust>(), 2 * hit.HitDirection, -2f);
         }
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("TourmalineSquirrel").Type);
+		if (Main.netMode != NetmodeID.Server)
+		{
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("TourmalineSquirrel").Type);
+		}
     }
 }
 public class ZirconSquirrel : GemSquirrel
@@ -262,21 +268,24 @@ public class ZirconSquirrel : GemSquirrel
         NPC.friendly = false;
         NPC.catchItem = ModContent.ItemType<Items.Consumables.Critters.ZirconSquirrel>();
     }
-    public override void HitEffect(NPC.HitInfo hit)
-    {
-        Player player = Main.player[NPC.target];
-        if (NPC.life > 0)
-        {
-            for (int num461 = 0; (double)num461 < (double)10.0 / (double)NPC.lifeMax * 20.0; num461++)
-            {
-                Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<ZirconDust>(), hit.HitDirection, -1f);
-            }
-            return;
-        }
-        for (int num462 = 0; num462 < 10; num462++)
-        {
-            Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<ZirconDust>(), 2 * hit.HitDirection, -2f);
-        }
-        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("ZirconSquirrel").Type);
-    }
+	public override void HitEffect(NPC.HitInfo hit)
+	{
+		Player player = Main.player[NPC.target];
+		if (NPC.life > 0)
+		{
+			for (int num461 = 0; (double)num461 < (double)10.0 / (double)NPC.lifeMax * 20.0; num461++)
+			{
+				Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<ZirconDust>(), hit.HitDirection, -1f);
+			}
+			return;
+		}
+		for (int num462 = 0; num462 < 10; num462++)
+		{
+			Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<ZirconDust>(), 2 * hit.HitDirection, -2f);
+		}
+		if (Main.netMode != NetmodeID.Server)
+		{
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity.RotatedByRandom(MathHelper.Pi / 16), Mod.Find<ModGore>("ZirconSquirrel").Type);
+		}
+	}
 }
