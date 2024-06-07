@@ -21,7 +21,8 @@ public class BoneFish : ModNPC
         Main.npcFrameCount[NPC.type] = 6;
         Data.Sets.NPC.Undead[NPC.type] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
-    }
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+	}
 
     public override void SetDefaults()
     {
