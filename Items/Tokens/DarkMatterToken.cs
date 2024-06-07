@@ -4,16 +4,16 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tokens;
 
-class ContagionToken : ModItem
+class DarkMatterToken : ModItem
 {
-    public override bool IsLoadingEnabled(Mod mod)
+	public override bool IsLoadingEnabled(Mod mod)
+	{
+		return ModLoader.HasMod("Tokens");
+	}
+	public override void SetStaticDefaults()
     {
-        return ModLoader.HasMod("Tokens");
-    }
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 25;
-    }
+		Item.ResearchUnlockCount = 25;
+	}
 
     public override void SetDefaults()
     {

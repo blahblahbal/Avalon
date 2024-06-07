@@ -790,6 +790,10 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
+		if (item.Name.Contains("Treasure Bag"))
+		{
+			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<StaminaCrystal>(), 4));
+		}
         // wooden crate
         if (item.type == ItemID.WoodenCrate)
         {

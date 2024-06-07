@@ -132,6 +132,7 @@ public class CalcSpecGlobalItem : GlobalItem
 						{
 							continue;
 						}
+						if (ing.type == ItemID.FallenStar) continue;
 						if (!recipe.HasIngredient(ModContent.ItemType<Material.Ores.Sulphur>()) &&
 							!recipe.HasIngredient(ModContent.ItemType<Material.SulphurCrystal>()) &&
 							!ing.Name.EndsWith(" Bar"))

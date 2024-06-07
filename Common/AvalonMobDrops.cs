@@ -22,6 +22,8 @@ using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -560,7 +562,20 @@ public class AvalonMobDrops : GlobalNPC
         {
             npcLoot.Add(ItemDropRule.ByCondition(notExpertCondition, ModContent.ItemType<StaminaCrystal>(), 4));
         }
-    }
+
+		if (ExxoAvalonOrigins.Tokens != null)
+		{
+			List<IItemDropRule> rules = npcLoot.Get(false);
+			rules = rules.Where(x => x is ItemDropWithConditionRule drop &&
+				(drop.itemId == ExxoAvalonOrigins.Tokens.Find<ModItem>("PostMartiansLootToken").Type ||
+				drop.itemId == ExxoAvalonOrigins.Tokens.Find<ModItem>("PostPlanteraLootToken").Type ||
+				drop.itemId == ExxoAvalonOrigins.Tokens.Find<ModItem>("HardmodeLootToken").Type)).ToList();
+			foreach (ItemDropWithConditionRule rule in rules)
+			{
+				rule.condition = new Combine(true, null, rule.condition, new Invert(new PostPhantasmDrop()));
+			}
+		}
+	}
     public override void ModifyGlobalLoot(GlobalLoot globalLoot)
     {
         var hardModeCondition = new HardmodeOnly();
@@ -579,8 +594,7 @@ public class AvalonMobDrops : GlobalNPC
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumPlateMail>(), 150));
         globalLoot.Add(ItemDropRule.ByCondition(desertPostBeakCondition, ModContent.ItemType<AncientTitaniumGreaves>(), 150));
 
-
-        globalLoot.RemoveWhere(
+		globalLoot.RemoveWhere(
             rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.JungleKey);
         LeadingConditionRule JungleKeyRule = new LeadingConditionRule(new CloverPotionActive());
         JungleKeyRule.OnSuccess(new ItemDropWithConditionRule(ItemID.JungleKey, 1250, 1, 1, new Conditions.JungleKeyCondition()), true);
@@ -631,22 +645,15 @@ public class AvalonMobDrops : GlobalNPC
 
         globalLoot.Add(ItemDropRule.ByCondition(soulCondition, ItemID.SoulofNight, 5));
 
-        if (ExxoAvalonOrigins.Tokens != null)
+		if (ExxoAvalonOrigins.Tokens != null)
         {
-            //globalLoot.Add(ItemDropRule.ByCondition(
-            //    new PostPhantasmHellcastleTokenDrop(),
-            //    ModContent.ItemType<HellcastleToken>(), 15));
-            //globalLoot.Add(ItemDropRule.ByCondition(
-            //    new SuperhardmodePreArmaTokenDrop(),
-            //    ModContent.ItemType<SuperhardmodeToken>(), 15));
-            //globalLoot.Add(ItemDropRule.ByCondition(new PostArmageddonTokenDrop(), ModContent.ItemType<DarkMatterToken>(),
-            //    15));
-            //globalLoot.Add(ItemDropRule.ByCondition(new PostMechastingTokenDrop(), ModContent.ItemType<MechastingToken>(),
-            //    15));
-            //globalLoot.Add(ItemDropRule.ByCondition(new ZoneTropicsToken(), ModContent.ItemType<TropicsToken>(), 15));
-            globalLoot.Add(ItemDropRule.ByCondition(
-                new UndergroundHardmodeContagionTokenDrop(contagionCondition),
-                ModContent.ItemType<ContagionToken>(), 15));
-        }
-    }
+			//globalLoot.Add(ItemDropRule.ByCondition(new PostArmageddonTokenDrop(), ModContent.ItemType<DarkMatterToken>(), 15));
+			//globalLoot.Add(ItemDropRule.ByCondition(new SuperhardmodePreArmaTokenDrop(), ModContent.ItemType<SuperhardmodeToken>(), 15));
+			//globalLoot.Add(ItemDropRule.ByCondition(new PostPhantasmHellcastleTokenDrop(), ModContent.ItemType<HellcastleToken>(), 15));
+			globalLoot.Add(ItemDropRule.ByCondition(new ZoneOutpost(), ModContent.ItemType<OutpostToken>(), 15));
+			globalLoot.Add(ItemDropRule.ByCondition(new ZoneTropics(), ModContent.ItemType<TropicsToken>(), 15));
+			globalLoot.Add(ItemDropRule.ByCondition(new ContagionTokenDropRule(), ModContent.ItemType<ContagionToken>(), 15));
+
+		}
+	}
 }

@@ -96,6 +96,7 @@ Mods: {
 			4: Terraria: Ashes, Ashes, Why Don't They Fall Down?
 			5: Terraria: Hell is not enough
 			6: Terraria: Made with AI!
+			7: Terraria: Logic sold separately
 		}
 
 		Banana: You walk up to a skeleton, and it turns into a banana.
@@ -181,12 +182,12 @@ Mods: {
 
 			DesertBeak: {
 				Name: Watch the talons!
-				Description: Defeat the overseer of the Desert, Desert Beak.
+				Description: Defeat Desert Beak, the overseer of the Desert.
 			}
 
 			BacteriumPrime: {
 				Name: Sulfonamided
-				Description: Defeat the Contagion's biggest threat - Bacterium Prime.
+				Description: Defeat Bacterium Prime, the Contagion's biggest threat.
 			}
 
 			Gems: {
@@ -6083,6 +6084,51 @@ Mods: {
 					'''
 					Used to make things
 					Gathered in the Contagion, having defeated a boss
+					'''
+			}
+
+			HellcastleToken: {
+				DisplayName: Hellcastle Token
+				Tooltip:
+					'''
+					Used to make things
+					Gathered in the Hellcastle after Phantasm is defeated
+					'''
+			}
+
+			DarkMatterToken: {
+				DisplayName: Dark Matter Token
+				Tooltip:
+					'''
+					Used to make things
+					Gathered after Armageddon Slime is defeated
+					'''
+			}
+
+			TropicsToken: {
+				DisplayName: Tropics Token
+				Tooltip:
+					'''
+					Used to make things
+					Gathered in the Tropics
+					'''
+			}
+
+			SuperhardmodeToken: {
+				DisplayName: Superhardmode Token
+				Tooltip:
+					'''
+					Used to make things
+					Gathered during the start of Superhardmode
+					'''
+			}
+
+			OutpostToken: {
+				DisplayName: Tuhrtl Outpost Token
+				Tooltip:
+					'''
+					Used to make things
+					Gathered in the Tuhrtl Outpost
 					'''
 			}
 

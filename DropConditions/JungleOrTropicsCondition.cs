@@ -8,8 +8,8 @@ public class JungleOrTropicsCondition : IItemDropRuleCondition, IProvideItemCond
 {
     public bool CanDrop(DropAttemptInfo info)
     {
-        if (info.npc.value > 0f && info.npc.lifeMax > 5 && !info.IsInSimulation && !info.npc.boss)
-            return info.player.ZoneJungle;
+		if (info.npc.value > 0f && info.npc.lifeMax > 5 && !info.IsInSimulation && !info.npc.boss)
+			return info.player.ZoneJungle; // || info.player.InModBiome<UndergroundTropics>();
         return false;
     }
 
