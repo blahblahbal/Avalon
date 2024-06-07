@@ -110,6 +110,7 @@ public class OreSlime : ModNPC
     public override void OnKill()
     {
         Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, Ores[WhichOre], Main.rand.Next(15, 35));
+		Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, ItemID.Gel, Main.rand.Next(3, 6));
     }
     public override void HitEffect(NPC.HitInfo hit)
     {

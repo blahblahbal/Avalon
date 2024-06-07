@@ -21,15 +21,15 @@ public class AstrallineArtifact : ModItem
         Item.expert = true;
     }
 
-    public override void ModifyTooltips(List<TooltipLine> tooltips)
-    {
-        var AstralCooldownInfo = new TooltipLine(Mod, "Controls:AstralCooldown", "Time before you can astral project: " + AstralCooldown / 60 + " seconds");
-        tooltips.Add(AstralCooldownInfo);
-    }
+    //public override void ModifyTooltips(List<TooltipLine> tooltips)
+    //{
+    //    var AstralCooldownInfo = new TooltipLine(Mod, "Controls:AstralCooldown", "Time before you can astral project: " + AstralCooldown / 60 + " seconds");
+    //    tooltips.Add(AstralCooldownInfo);
+    //}
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().AstralProject = true;
-        AstralCooldown = player.GetModPlayer<AvalonPlayer>().AstralCooldown;
+        //AstralCooldown = player.GetModPlayer<AvalonPlayer>().AstralCooldown;
     }
 }

@@ -108,7 +108,7 @@ public class Cougher : ModNPC
     //}
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 3));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2));
         // add back when the mask gets added back
         //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CougherMask>(), 150));

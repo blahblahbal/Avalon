@@ -166,6 +166,8 @@ public class AvalonPlayer : ModPlayer
     public bool BadgeOfBacteria = false;
     public bool BacterialEndurance;
 
+	public int SpiritPoppyUseCount;
+
     public bool DisplayStats;
 
     /// <summary>
@@ -213,6 +215,8 @@ public class AvalonPlayer : ModPlayer
     public bool RoseMagic;
     public int RoseMagicCooldown;
     public bool SplitProj;
+	public bool XanthophyteFossil;
+	public bool XanthophyteFossilActive;
     #endregion
 
     public bool CougherMask;
@@ -496,6 +500,7 @@ public class AvalonPlayer : ModPlayer
         RoseMagic = false;
         SplitProj = false;
         TeleportV = false;
+		XanthophyteFossil = false;
 
         // prefixes
         GreedyPrefix = false;
@@ -644,6 +649,10 @@ public class AvalonPlayer : ModPlayer
     }
     public override void PostUpdate()
     {
+		//if (XanthophyteTreeActive)
+		//{
+		//	Player.AddBuff(ModContent.BuffType<XanthophyteTree>(), 2);
+		//}
         #region bramble
         BrambleMovement();
         #endregion
@@ -976,7 +985,7 @@ public class AvalonPlayer : ModPlayer
                 revertHeads.Clear();
             }
         }
-        if (Player.HasBuff(ModContent.BuffType<Shockwave>()) || Player.HasBuff(ModContent.BuffType<AdvShockwave>()))
+        if (Player.HasBuff(ModContent.BuffType<Shockwave>()) || Player.HasBuff(ModContent.BuffType<AdvShockwave>()) || Player.HasBuff(ModContent.BuffType<XanthophyteTree>()))
         {
             r *= 0.7372f;
             g *= 0.5176f;
@@ -1197,23 +1206,68 @@ public class AvalonPlayer : ModPlayer
     public override void SaveData(TagCompound tag)
     {
         tag["Avalon:StatStam"] = Player.GetModPlayer<AvalonStaminaPlayer>().StatStam;
-    }
+		tag["Avalon:SpiritPoppyUseCount"] = SpiritPoppyUseCount;
+	}
     public override void LoadData(TagCompound tag)
     {
         if (tag.ContainsKey("Avalon:StatStam"))
         {
             Player.GetModPlayer<AvalonStaminaPlayer>().StatStam = tag.Get<int>("Avalon:StatStam");
         }
-    }
+		if (tag.ContainsKey("Avalon:SpiritPoppyUseCount"))
+		{
+			SpiritPoppyUseCount = tag.Get<int>("Avalon:SpiritPoppyUseCount");
+		}
+	}
     public override void PostUpdateEquips()
     {
-        if (!AstralProject && Player.HasBuff<AstralProjecting>())
+		#region xanthophyte armor
+		if (!XanthophyteFossil)
+		{
+			XanthophyteFossilActive = false;
+		}
+		if (XanthophyteFossil && !Player.mount.Active && Player.PlayerDoublePressedSetBonusActivateKey())
+		{
+			if (XanthophyteFossilActive)
+			{
+				XanthophyteFossilActive = false;
+			}
+			else if (!Player.HasBuff<XanthophyteFossilCooldown>())
+			{
+				XanthophyteFossilActive = true;
+				Player.AddBuff(ModContent.BuffType<XanthophyteTree>(), 10 * 60);
+				Player.AddBuff(ModContent.BuffType<XanthophyteFossilCooldown>(), 60 * 55);
+			}
+		}
+
+		if (!XanthophyteFossil && Player.HasBuff<XanthophyteTree>())
+		{
+			Player.ClearBuff(ModContent.BuffType<XanthophyteTree>());
+		}
+		#endregion
+
+		if (!AstralProject && Player.HasBuff<AstralProjecting>())
         {
             Player.ClearBuff(ModContent.BuffType<AstralProjecting>());
         }
 
-        #region hand of creation
-        if (Player.HasItemInFunctionalAccessories(ItemID.HandOfCreation))
+		#region royal gel avalon fix
+		// doesn't work for modded accessory slots :pensive:
+		for (int i = 3; i < Player.armor.Length; i++)
+		{
+			if (Player.armor[i].type == ItemID.RoyalGel)
+			{
+				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.OreSlime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.MineralSlime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.AmberSlime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.InfestedAmberSlime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.Ickslime>()] = true;
+			}
+		}
+		#endregion royal gel avalon fix
+
+		#region hand of creation
+		if (Player.HasItemInFunctionalAccessories(ItemID.HandOfCreation))
         {
             ObsidianGlove = CloudGlove = true;
         }
@@ -2180,7 +2234,8 @@ public class AvalonPlayer : ModPlayer
             }
         }
     }
-    public override void PostUpdateMiscEffects()
+	public void UpdateMana() => Player.statManaMax2 += SpiritPoppyUseCount * 20;
+	public override void PostUpdateMiscEffects()
     {
         #region Biome Particles
         ////--== Biome Particles ==--
@@ -2282,7 +2337,8 @@ public class AvalonPlayer : ModPlayer
         {
             SyncMouseCursor(server: false);
         }
-    }
+		UpdateMana();
+	}
     public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
     {
         #region hellbound halberd weird shit

@@ -10,9 +10,9 @@ class ChrysoberylGemsparkWall : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
-    }
-    public override void SetStaticDefaults()
+		return false; // ModLoader.HasMod("ThoriumMod");
+	}
+	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 400;
     }
@@ -51,7 +51,7 @@ class ChrysoberylGemsparkWallOff : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return false; // ModLoader.HasMod("ThoriumMod");
     }
     public override void SetStaticDefaults()
     {

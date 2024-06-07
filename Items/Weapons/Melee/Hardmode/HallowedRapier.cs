@@ -14,7 +14,12 @@ class HallowedRapier: ModItem
 {
     //unused item, if someone wants to deletes this go ahead
     public float scaleMult = 1.35f; // set this to same as in the projectile file
-    public override void SetDefaults()
+
+	public override bool IsLoadingEnabled(Mod mod)
+	{
+		return false;
+	}
+	public override void SetDefaults()
     {
         Item.width = 14;
         Item.height = 38;

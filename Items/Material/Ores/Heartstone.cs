@@ -27,7 +27,7 @@ class Heartstone : ModItem
         Item.useTurn = true;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
-        Item.value = Item.sellPrice(0, 0, 1, 50);
+        Item.value = Item.sellPrice(0, 0, 3, 33);
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }

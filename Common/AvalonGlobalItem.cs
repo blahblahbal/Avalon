@@ -116,11 +116,16 @@ public class AvalonGlobalItem : GlobalItem
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ContagionKey>()] = ModContent.ItemType<ContagionChest>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<PlagueCrate>()] = ModContent.ItemType<ContagionCrate>();
 
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Zircon>()] = ModContent.ItemType<Peridot>();
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Peridot>()] = ModContent.ItemType<Tourmaline>();
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Tourmaline>()] = ItemID.Diamond;
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Zircon>()] = ItemID.Diamond;
+		ItemID.Sets.ShimmerTransformToItem[ItemID.Diamond] = ItemID.Ruby;
+		ItemID.Sets.ShimmerTransformToItem[ItemID.Ruby] = ModContent.ItemType<Peridot>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Peridot>()] = ItemID.Emerald;
+		ItemID.Sets.ShimmerTransformToItem[ItemID.Emerald] = ItemID.Sapphire;
+		ItemID.Sets.ShimmerTransformToItem[ItemID.Diamond] = ModContent.ItemType<Tourmaline>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Tourmaline>()] = ItemID.Topaz;
+		ItemID.Sets.ShimmerTransformToItem[ItemID.Topaz] = ItemID.Amethyst;
 
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>()] = ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>()] = ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>();
         // end misc items
 
         // dungeon bricks
@@ -1654,7 +1659,25 @@ public class AvalonGlobalItem : GlobalItem
         }
         switch (item.type)
         {
-            case ItemID.Grenade:
+			case ItemID.Amethyst:
+				item.value = Item.sellPrice(0, 0, 3, 75);
+				break;
+			case ItemID.Topaz:
+				item.value = Item.sellPrice(0, 0, 7, 50);
+				break;
+			case ItemID.Sapphire:
+				item.value = Item.sellPrice(0, 0, 15);
+				break;
+			case ItemID.Emerald:
+				item.value = Item.sellPrice(0, 0, 18, 75);
+				break;
+			case ItemID.Ruby:
+				item.value = Item.sellPrice(0, 0, 26, 25);
+				break;
+			case ItemID.Diamond:
+				item.value = Item.sellPrice(0, 0, 30);
+				break;
+			case ItemID.Grenade:
                 item.ammo = ItemID.Grenade;
                 break;
             case ItemID.CactusHelmet:
@@ -2143,13 +2166,13 @@ public class AvalonGlobalItem : GlobalItem
             }
         }
 
-        if (tooltipMat != null)
-        {
-            if (item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial)
-            {
-                tooltipMat.Text = Language.GetTextValue("Mods.Avalon.CommonItemTooltip.TomeMaterial");
-            }
-        }
+        //if (tooltipMat != null)
+        //{
+        //    if (item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial)
+        //    {
+        //        tooltipMat.Text = Language.GetTextValue("Mods.Avalon.CommonItemTooltip.TomeMaterial");
+        //    }
+        //}
         if (tooltipLine != null && (ModContent.GetInstance<AvalonConfig>().VanillaRenames || ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement))
         {
             if (item.type == ItemID.BloodMoonStarter)

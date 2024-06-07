@@ -48,6 +48,7 @@ public class InsectoidBlade : ModItem
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<TropicalShroomCap>(), 12)
             .AddIngredient(ModContent.ItemType<MosquitoProboscis>(), 12)
-            .AddTile(TileID.Anvils).Register();
+            .AddTile(TileID.Anvils)
+			.Register();
     }
 }

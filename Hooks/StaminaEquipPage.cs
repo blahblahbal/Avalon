@@ -13,14 +13,14 @@ internal class StaminaEquipPage : ModHook
 
     private void On_ItemSlot_SelectEquipPage(On_ItemSlot.orig_SelectEquipPage orig, Item item)
     {
-        orig.Invoke(item);
         if (!item.IsAir)
         {
 			if (item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
 			{
 				Main.EquipPage = 2;
 			}
-			else Main.EquipPage = 0;
-        }
-    }
+			else orig.Invoke(item);
+		}
+		else orig.Invoke(item);
+	}
 }

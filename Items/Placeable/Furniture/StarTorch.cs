@@ -1,5 +1,5 @@
-using Avalon.Common;
 using Avalon.Common.Players;
+using Avalon.Data.Sets;
 using Avalon.Dusts;
 using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
@@ -21,7 +21,7 @@ class StarTorch : ModItem
     public override void SetDefaults()
     {
         Item.DefaultToTorch(ModContent.TileType<Tiles.Furniture.StarTorch>(), 0, true);
-        Item.value = Item.sellPrice(0, 0, 0, 40);
+        Item.value = Terraria.Item.sellPrice(0, 0, 0, 40);
         Item.flame = true;
     }
     public override void AddRecipes()
@@ -64,6 +64,10 @@ class StarTorch : ModItem
                     t.HasTile = true;
                     t.TileType = (ushort)Item.createTile;
                     t.TileFrameX = 0;
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+					}
                     SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
                     return true;
                 }
@@ -73,7 +77,11 @@ class StarTorch : ModItem
                     t.HasTile = true;
                     t.TileType = (ushort)Item.createTile;
                     t.TileFrameX = 0;
-                    SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+					}
+					SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
                     return true;
                 }
                 else if (Main.tile[tilePos.X - 1, tilePos.Y].HasTile && Main.tileSolid[Main.tile[tilePos.X - 1, tilePos.Y].TileType])
@@ -82,7 +90,11 @@ class StarTorch : ModItem
                     t.HasTile = true;
                     t.TileType = (ushort)Item.createTile;
                     t.TileFrameX = 22;
-                    SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+					}
+					SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
                     return true;
                 }
                 else if (Main.tile[tilePos.X + 1, tilePos.Y].HasTile && Main.tileSolid[Main.tile[tilePos.X + 1, tilePos.Y].TileType])
@@ -91,7 +103,11 @@ class StarTorch : ModItem
                     t.HasTile = true;
                     t.TileType = (ushort)Item.createTile;
                     t.TileFrameX = 44;
-                    SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+					}
+					SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
                     return true;
                 }
             }

@@ -71,7 +71,7 @@ class Peridot : ModItem
         Item.rare = ItemRarityID.White;
         Item.width = dims.Width;
         Item.useTime = 10;
-        Item.value = 4000;
+        Item.value = Item.sellPrice(0, 0, 22, 50);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;

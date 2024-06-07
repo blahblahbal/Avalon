@@ -38,6 +38,13 @@ public class CalculatorSpectacles : ModItem
 	//{
 	//	player.GetModPlayer<AvalonPlayer>().CalculatorSpectacles = true;
 	//}
+	//public override void AddRecipes()
+	//{
+	//	CreateRecipe()
+	//		.AddRecipeGroup("Avalon:SilverBar", 10)
+	//		.AddIngredient(ItemID.Lens, 2)
+	//		.AddIngredient()
+	//}
 	public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
     {
         p.Add(new List<Point>()
@@ -116,15 +123,26 @@ public class CalcSpecGlobalItem : GlobalItem
 					// if the recipe's result contains the word "Bar" or "Ingot," or is Life Quartz (Thorium), Heartstone, Boltstone, or Starstone
 					// set barType to the result's type and amtOfOre to the stack size of the ingredient
 					// also set bars to item.stack
-					if (recipe.createItem.Name.Contains("Bar") || recipe.createItem.Name.Contains("Ingot") ||
+					if (recipe.createItem.Name.EndsWith(" Bar") || recipe.createItem.Name.EndsWith(" Ingot") ||
 						item.type == ExxoAvalonOrigins.Thorium?.Find<ModItem>("LifeQuartz").Type ||
 						item.type == ModContent.ItemType<Material.Ores.Heartstone>() || item.type == ModContent.ItemType<Material.Ores.Boltstone>() ||
 						item.type == ModContent.ItemType<Material.Ores.Starstone>())
 					{
-						amtOfOre = ing.stack;
-						barType = recipe.createItem.type;
-						bars = item.stack;
-						break;
+						if (ing.Name.EndsWith(" Bar") && recipe.createItem.Name.EndsWith(" Bar"))
+						{
+							continue;
+						}
+						if (!recipe.HasIngredient(ModContent.ItemType<Material.Ores.Sulphur>()) &&
+							!recipe.HasIngredient(ModContent.ItemType<Material.SulphurCrystal>()) &&
+							!ing.Name.EndsWith(" Bar"))
+							//&&
+							//!recipe.createItem.Name.Contains("Barbed") && !recipe.createItem.Name.Contains("Barr"))
+						{
+							amtOfOre = ing.stack;
+							barType = recipe.createItem.type;
+							bars = item.stack;
+							break;
+						}
 					}
 				}
 				foreach (int itemID in Data.Sets.Tile.VanillaOreTilesToBarItems.Values)
@@ -167,7 +185,7 @@ internal class CalcSpec : UIState
 {
 	protected override void DrawSelf(SpriteBatch spriteBatch)
 	{
-		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type])
+		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type] && Main.LocalPlayer.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay)
 		{
 			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 			Color c = Lighting.GetColor(tilepos);

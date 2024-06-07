@@ -106,6 +106,10 @@ public class BacteriumPrime : ModNPC
     }
     public override void OnKill()
     {
+		if (!NPC.downedBoss2 || Main.rand.NextBool(2))
+		{
+			WorldGen.spawnMeteor = true;
+		}
         if (!NPC.downedBoss2)
         {
             NPC.SetEventFlagCleared(ref NPC.downedBoss2, -1);

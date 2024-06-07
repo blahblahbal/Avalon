@@ -4,6 +4,7 @@ using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Accessories.Info;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Accessories.Vanity;
 using Avalon.Items.Consumables;
@@ -82,7 +83,15 @@ public class AvalonGlobalNPC : GlobalNPC
 	}
 	public override void OnKill(NPC npc)
     {
-        if (npc.type == NPCID.Vulture && AvalonWorld.SpawnDesertBeak)
+		//if (npc.type == NPCID.DungeonSpirit && Main.rand.NextBool(15) &&
+		//	Main.player[Player.FindClosest(npc.position, npc.width, npc.height)].ZoneDungeon)
+		//{
+		//	int proj = Projectile.NewProjectile(npc.GetSource_FromThis(), npc.position, npc.velocity,
+		//		ModContent.ProjectileType<Projectiles.SpiritPoppy>(), 0, 0, Main.myPlayer);
+		//	Main.projectile[proj].velocity.Y = -2.5f;
+		//	Main.projectile[proj].velocity.X = Main.rand.Next(-45, 46) * 0.1f;
+		//}
+		if (npc.type == NPCID.Vulture && AvalonWorld.SpawnDesertBeak)
         {
             AvalonWorld.VultureKillCount++;
         }
@@ -178,7 +187,12 @@ public class AvalonGlobalNPC : GlobalNPC
             {
                 shopCustomPrice = Item.buyPrice(0, 4),
             }, Condition.DownedGoblinArmy);
-        }
+
+			shop.Add(new Item(ModContent.ItemType<CalculatorSpectacles>())
+			{
+				shopCustomPrice = Item.buyPrice(0, 5),
+			}, Condition.DownedGoblinArmy);
+		}
         if (shop.NpcType == NPCID.Dryad)
         {
             shop.InsertAfter(ItemID.CrimsonPlanterBox, new Item(ModContent.ItemType<BarfbushPlanterBox>())

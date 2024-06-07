@@ -10,7 +10,7 @@ public class ChrysoberylGemsparkWall : ModWall
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return false; // ModLoader.HasMod("ThoriumMod");
     }
     public override void SetStaticDefaults()
     {
@@ -33,7 +33,7 @@ public class ChrysoberylGemsparkWallOff : ModWall
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return false; // ModLoader.HasMod("ThoriumMod");
     }
     public override void SetStaticDefaults()
     {

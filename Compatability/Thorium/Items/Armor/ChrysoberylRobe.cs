@@ -12,8 +12,8 @@ class ChrysoberylRobe : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
-    }
+		return false; // ModLoader.HasMod("ThoriumMod");
+	}
     public override void Load()
     {
         if (Main.netMode == NetmodeID.Server) return;

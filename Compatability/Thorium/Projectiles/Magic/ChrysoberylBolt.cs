@@ -12,7 +12,7 @@ public class ChrysoberylBolt : ModProjectile
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return false; // ModLoader.HasMod("ThoriumMod");
     }
     private Color color;
     private int dustId;

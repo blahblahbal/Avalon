@@ -16,8 +16,8 @@ public class GemStashes : ModTile
         Main.tileNoAttach[Type] = true;
         Main.tileLavaDeath[Type] = true;
         Main.tileFrameImportant[Type] = true;
-        TileID.Sets.DisableSmartCursor[Type] = true;
-
+		Main.tileSpelunker[Type] = true;
+		TileID.Sets.DisableSmartCursor[Type] = true;
 
         // Placement
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);

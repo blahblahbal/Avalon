@@ -14,8 +14,8 @@ class Chrysoberyl : ModItem
     }
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
-    }
+		return false; // ModLoader.HasMod("ThoriumMod");
+	}
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {
         itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.Gems;

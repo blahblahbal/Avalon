@@ -39,6 +39,15 @@ public class RecipeChanger : ModSystem
 
             switch (recipe.createItem.type)
             {
+				case ItemID.BlizzardinaBottle:
+				case ItemID.SandstorminaBottle:
+				{
+					if (recipe.HasIngredient(ItemID.CloudinaBottle))
+					{
+						recipe.DisableDecraft();
+					}
+					break;
+				}
                 case ItemID.GPS:
                 {
                     if (recipe.TryGetIngredient(ItemID.GoldWatch, out Item ing))

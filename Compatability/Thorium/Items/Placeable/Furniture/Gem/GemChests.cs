@@ -11,9 +11,10 @@ public class AquamarineChest : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return ModLoader.HasMod("ThoriumMod");
+		return false; // ModLoader.HasMod("ThoriumMod");
 	}
-    public override void SetDefaults()
+
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
@@ -45,9 +46,9 @@ public class ChrysoberylChest : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return ModLoader.HasMod("ThoriumMod");
+		return false; // ModLoader.HasMod("ThoriumMod");
 	}
-    public override void SetDefaults()
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
@@ -79,9 +80,9 @@ public class OpalChest : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return ModLoader.HasMod("ThoriumMod");
+		return false; // ModLoader.HasMod("ThoriumMod");
 	}
-    public override void SetDefaults()
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;

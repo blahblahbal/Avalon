@@ -130,7 +130,7 @@ Mods: {
 
 			Tropics: {
 				Title: Tropics
-				Description: A tropical forest which houses lots of wasps.
+				Description: A tropical forest which houses lots of mosquitoes.
 			}
 		}
 
@@ -445,6 +445,10 @@ Mods: {
 			Contagion: Contagion!
 		}
 
+		MagicText: magic
+		MeleeText: melee
+		RangedText: ranged
+
 		SetBonuses: {
 			BlahTier2: Shroomite stealth, Go Berserk, Rosebuds, Spectrum Speed, Attackers also take double full damage, and Spectre Heal
 			Revenant: Enemies within 15 tiles have reduced defense
@@ -461,9 +465,16 @@ Mods: {
 				Increases your max number of minions by 1
 				Grants a chance for a Sky Insignia to drop when your minions damage an enemy
 				'''
+			Xanthophyte:
+				'''
+				Increases {0} speed by 10%
+				Double tap {1} to activate fossil state
+				This state increases your defense by 40 and life regeneration by 10 but you cannot move
+				45 second cooldown
+				'''
 			Caesium:
 				'''
-				Increased stats
+				Increases stats
 				Double tap {0} to activate Caesium Boosting stance
 				This stance reduces movement speed and increases damage and damage reduction
 				'''
@@ -8849,6 +8860,71 @@ Mods: {
 				DisplayName: Ferozium Icesword
 				Tooltip: ""
 			}
+
+			SpiritPoppy: {
+				DisplayName: Spirit Poopy
+				Tooltip:
+					'''
+					Permanently increases maximum mana by 20
+					Can only be used when you have 200 or more mana
+					Maxes at 400 mana
+					'''
+			}
+
+			XanthophyteBar: {
+				DisplayName: Xanthophyte Bar
+				Tooltip: "'It glows warmly in the sun'"
+			}
+
+			XanthophyteOre: {
+				DisplayName: Xanthophyte Ore
+				Tooltip: "'It glows warmly in the sun'"
+			}
+
+			XanthophyteHat: {
+				DisplayName: Xanthophyte Hat
+				Tooltip:
+					'''
+					Increases maximum mana by 100 and reduces mana usage by 15%
+					18% increased magic damage
+					'''
+			}
+
+			XanthophyteMask: {
+				DisplayName: Xanthophyte Mask
+				Tooltip:
+					'''
+					20% increased ranged damage
+					20% chance to save ammo
+					'''
+			}
+
+			XanthophyteHelm: {
+				DisplayName: Xanthophyte Helm
+				Tooltip:
+					'''
+					18% increased melee damage
+					7% increased melee critical strike chance
+					'''
+			}
+
+			XanthophytePlate: {
+				DisplayName: Xanthophyte Plate
+				Tooltip:
+					'''
+					7% increased damage
+					8% increased critical strike chance
+					'''
+			}
+
+			XanthophyteLeggings: {
+				DisplayName: Xanthophyte Leggings
+				Tooltip:
+					'''
+					9% increased critical strike chance
+					10% increased movement speed
+					'''
+			}
 		}
 
 		InfoDisplays: {
@@ -9110,6 +9186,7 @@ Mods: {
 			HallowedRapierProj.DisplayName: Hallowed Rapier Proj
 			HallowedRapierVis.DisplayName: Hallowed Rapier Vis
 			IcicleFerozium.DisplayName: Icicle Ferozium
+			SpiritPoppy.DisplayName: Spirit Poppy
 		}
 
 		NPCs: {
@@ -9968,6 +10045,16 @@ Mods: {
 			ShadowCurse: {
 				DisplayName: Shadow Curse
 				Description: You take double damage
+			}
+
+			XanthophyteTree: {
+				DisplayName: Xanthophyte Fossil
+				Description: You are a fossil
+			}
+
+			XanthophyteFossilCooldown: {
+				DisplayName: Xanthophyte Fossil Cooldown
+				Description: You cannot enter the fossil state
 			}
 		}
 

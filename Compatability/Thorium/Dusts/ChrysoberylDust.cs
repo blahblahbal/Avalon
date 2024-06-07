@@ -9,7 +9,7 @@ public class ChrysoberylDust : ModDust
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return false; // ModLoader.HasMod("ThoriumMod");
     }
     public override bool Update(Dust dust)
     {

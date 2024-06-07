@@ -13,9 +13,9 @@ class AdvArcanePotion : ArcanePotion
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
-    }
-    public override void SetStaticDefaults()
+		return false; // ModLoader.HasMod("ThoriumMod");
+	}
+	public override void SetStaticDefaults()
     {
         base.SetStaticDefaults();
         Item.ResearchUnlockCount = 30;

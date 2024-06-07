@@ -462,6 +462,7 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddIngredient(ItemID.Obsidian, 15)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddTile(TileID.Sawmill)
+			.DisableDecraft()
             .Register();
 
         Recipe.Create(ItemID.ObsidianBed)
@@ -469,34 +470,39 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddIngredient(ItemID.Hellstone, 2)
             .AddIngredient(ItemID.Silk, 5)
             .AddTile(TileID.Sawmill)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianBookcase)
             .AddIngredient(ItemID.Obsidian, 20)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddIngredient(ItemID.Book, 10)
             .AddTile(TileID.Sawmill)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianCandelabra)
             .AddIngredient(ItemID.Obsidian, 5)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddIngredient(ItemID.Torch, 3)
             .AddTile(TileID.WorkBenches)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianCandle)
             .AddIngredient(ItemID.Obsidian, 4)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddIngredient(ItemID.Torch)
             .AddTile(TileID.WorkBenches)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianChair)
             .AddIngredient(ItemID.Obsidian, 4)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddTile(TileID.WorkBenches)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianChandelier)
             .AddIngredient(ItemID.Obsidian, 4)
@@ -504,7 +510,8 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddIngredient(ItemID.Torch, 4)
             .AddIngredient(ItemID.Chain)
             .AddTile(TileID.Anvils)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianClock)
             .AddIngredient(ItemID.Obsidian, 10)
@@ -512,33 +519,38 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddRecipeGroup(RecipeGroupID.IronBar, 3)
             .AddIngredient(ItemID.Glass, 6)
             .AddTile(TileID.Sawmill)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianDoor)
             .AddIngredient(ItemID.Obsidian, 6)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddTile(TileID.WorkBenches)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianDresser)
             .AddIngredient(ItemID.Obsidian, 16)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddTile(TileID.Sawmill)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianLamp)
             .AddIngredient(ItemID.Torch)
             .AddIngredient(ItemID.Obsidian, 3)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddTile(TileID.WorkBenches)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianLantern)
             .AddIngredient(ItemID.Obsidian, 6)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddIngredient(ItemID.Torch)
             .AddTile(TileID.WorkBenches)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianPiano)
             .AddIngredient(ItemID.Obsidian, 15)
@@ -546,25 +558,29 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddIngredient(ItemID.Bone, 4)
             .AddIngredient(ItemID.Book)
             .AddTile(TileID.Sawmill)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianSofa)
             .AddIngredient(ItemID.Obsidian, 5)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddIngredient(ItemID.Silk, 2)
             .AddTile(TileID.Sawmill)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianTable)
             .AddIngredient(ItemID.Obsidian, 8)
             .AddIngredient(ItemID.Hellstone, 2)
             .AddTile(TileID.WorkBenches)
-            .Register();
+			.DisableDecraft()
+			.Register();
 
         Recipe.Create(ItemID.ObsidianWorkBench)
             .AddIngredient(ItemID.Obsidian, 10)
             .AddIngredient(ItemID.Hellstone, 2)
-            .Register();
+			.DisableDecraft()
+			.Register();
         #endregion
 
         #region Bone Welder

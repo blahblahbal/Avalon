@@ -27,7 +27,7 @@ class Tourmaline : ModItem
         Item.rare = ItemRarityID.White;
         Item.width = dims.Width;
         Item.useTime = 10;
-        Item.value = 3000;
+        Item.value = Item.sellPrice(0, 0, 11, 25);
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;

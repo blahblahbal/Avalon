@@ -13,8 +13,6 @@ public class Malaria : ModBuff
     // do something different than just "dot" with this debuff
     public override void SetStaticDefaults()
     {
-        //DisplayName.SetDefault("Malaria");
-        //Description.SetDefault("You have been bitten");
         Main.debuff[Type] = true;
     }
 

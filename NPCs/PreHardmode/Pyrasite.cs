@@ -83,7 +83,7 @@ public class PyrasiteHead : WormHead
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>()));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 3));
     }
     public override void Init()
     {

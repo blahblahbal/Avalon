@@ -14,9 +14,9 @@ class AdvEarwormPotion : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
-    }
-    public override void SetStaticDefaults()
+		return false; // ModLoader.HasMod("ThoriumMod");
+	}
+	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 30;
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<EarwormPotionBuff>());

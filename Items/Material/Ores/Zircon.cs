@@ -27,8 +27,8 @@ class Zircon : ModItem
         Item.rare = ItemRarityID.White;
         Item.width = dims.Width;
         Item.useTime = 10;
-        Item.value = 4400;
-        Item.useStyle = ItemUseStyleID.Swing;
+        Item.value = Item.sellPrice(0, 0, 33, 75);
+		Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }

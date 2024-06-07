@@ -28,10 +28,10 @@ internal class StaminaSlot : ModAccessorySlot
             Rectangle r = new(0, 0, (int)(TextureAssets.InventoryBack.Width() * Main.inventoryScale), (int)(TextureAssets.InventoryBack.Height() * Main.inventoryScale));
             r.Y = top + 4 * 44 - 2;
 
-            Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top);
+            Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top + 47 * 3);
             if (Main.mapStyle is 0 or 2)
             {
-                p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top);
+                p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top + 47 * 3);
             }
             return p;
         }
@@ -43,10 +43,10 @@ internal class StaminaSlot : ModAccessorySlot
         Rectangle r = new(0, 0, (int)(TextureAssets.InventoryBack.Width() * Main.inventoryScale), (int)(TextureAssets.InventoryBack.Height() * Main.inventoryScale));
         r.Y = top + 4 * 44 - 2;
 
-        Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top);
+        Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top + 47 * 3);
         if (Main.mapStyle is 0 or 2)
         {
-            p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top);
+            p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top + 47 * 3);
         }
 
         int cX = TextureAssets.InventoryBack3.Value.Width / 2;
@@ -109,10 +109,10 @@ internal class StaminaSlot2 : ModAccessorySlot
             Rectangle r = new(0, 0, (int)(TextureAssets.InventoryBack.Width() * Main.inventoryScale), (int)(TextureAssets.InventoryBack.Height() * Main.inventoryScale));
             r.Y = top + 4 * 44 - 2 + 47;
 
-            Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top);
+            Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top + 47 * 3);
             if (Main.mapStyle is 0 or 2)
             {
-                p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top);
+                p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top + 47 * 3);
             }
             return p;
         }
@@ -124,10 +124,10 @@ internal class StaminaSlot2 : ModAccessorySlot
         Rectangle r = new(0, 0, (int)(TextureAssets.InventoryBack.Width() * Main.inventoryScale), (int)(TextureAssets.InventoryBack.Height() * Main.inventoryScale));
         r.Y = top + 4 * 44 - 2 + 47;
 
-        Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top);
+        Vector2 p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top + 47 * 3);
         if (Main.mapStyle is 0 or 2)
         {
-            p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top);
+            p = new Vector2(Main.screenWidth - 64 - 28 - 47 - 47, r.Top + 47 * 3);
         }
 
         int cX = TextureAssets.InventoryBack3.Value.Width / 2;

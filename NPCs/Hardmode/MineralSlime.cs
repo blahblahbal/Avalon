@@ -105,7 +105,8 @@ public class MineralSlime : ModNPC
     public override void OnKill()
     {
         Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, Ores[WhichOre], Main.rand.Next(10, 30));
-    }
+		Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, ItemID.Gel, Main.rand.Next(3, 6));
+	}
     public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life > 0)

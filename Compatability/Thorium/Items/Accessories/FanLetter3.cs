@@ -8,6 +8,6 @@ public class FanLetter3 : FanLetter
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+		return false; //ModLoader.HasMod("ThoriumMod");
     }
 }

@@ -45,6 +45,7 @@ class ShadowPhone : ModItem
     {
         player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
         player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
         player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
@@ -120,7 +121,8 @@ class ShadowPhoneSurface : ModItem
     {
         player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
         player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-        player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
+		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
         player.accDepthMeter = 1;
@@ -216,7 +218,8 @@ class ShadowPhoneDungeon : ModItem
     {
         player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
         player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-        player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
+		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
         player.accDepthMeter = 1;
@@ -260,7 +263,8 @@ class ShadowPhoneOcean : ModItem
     {
         player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
         player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-        player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
+		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
         player.accDepthMeter = 1;
@@ -304,7 +308,8 @@ class ShadowPhoneHell : ModItem
     {
         player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
         player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-        player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
+		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
         player.accDepthMeter = 1;
@@ -403,7 +408,8 @@ class ShadowPhoneJungleTropics : ModItem
     {
         player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
         player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-        player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
+		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
         player.accDepthMeter = 1;
@@ -448,7 +454,8 @@ class ShadowPhoneRandom : ModItem
     {
         player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
         player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-        player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
+		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
         player.accDepthMeter = 1;
@@ -484,7 +491,8 @@ class ShadowPhoneHome : ModItem
         Recipe.Create(Type)
             .AddIngredient(ItemID.ShellphoneDummy)
             .AddIngredient(ModContent.ItemType<EyeoftheGods>())
-            .AddIngredient(ItemID.FallenStar, 40)
+			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
+			.AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
             .AddIngredient(ItemID.Ectoplasm, 10)
@@ -494,7 +502,8 @@ class ShadowPhoneHome : ModItem
         Recipe.Create(Type)
             .AddIngredient(ItemID.Shellphone)
             .AddIngredient(ModContent.ItemType<EyeoftheGods>())
-            .AddIngredient(ItemID.FallenStar, 40)
+			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
+			.AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
             .AddIngredient(ItemID.Ectoplasm, 10)
@@ -504,7 +513,8 @@ class ShadowPhoneHome : ModItem
         Recipe.Create(Type)
             .AddIngredient(ItemID.ShellphoneSpawn)
             .AddIngredient(ModContent.ItemType<EyeoftheGods>())
-            .AddIngredient(ItemID.FallenStar, 40)
+			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
+			.AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
             .AddIngredient(ItemID.Ectoplasm, 10)
@@ -514,7 +524,8 @@ class ShadowPhoneHome : ModItem
         Recipe.Create(Type)
             .AddIngredient(ItemID.ShellphoneOcean)
             .AddIngredient(ModContent.ItemType<EyeoftheGods>())
-            .AddIngredient(ItemID.FallenStar, 40)
+			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
+			.AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
             .AddIngredient(ItemID.Ectoplasm, 10)
@@ -524,7 +535,8 @@ class ShadowPhoneHome : ModItem
         Recipe.Create(Type)
             .AddIngredient(ItemID.ShellphoneHell)
             .AddIngredient(ModContent.ItemType<EyeoftheGods>())
-            .AddIngredient(ItemID.FallenStar, 40)
+			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
+			.AddIngredient(ItemID.FallenStar, 40)
             .AddIngredient(ItemID.Diamond, 20)
             .AddIngredient(ItemID.ChlorophyteBar, 7)
             .AddIngredient(ItemID.Ectoplasm, 10)
@@ -549,7 +561,8 @@ class ShadowPhoneHome : ModItem
     {
         player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
         player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-        player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
+		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
+		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
             player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
         player.accWatch = 3;
         player.accDepthMeter = 1;
