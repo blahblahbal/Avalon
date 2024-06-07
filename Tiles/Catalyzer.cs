@@ -15,7 +15,7 @@ public class Catalyzer : ModTile
         Main.tileFrameImportant[Type] = true;
         AnimationFrameHeight = 38;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
-        TileObjectData.newTile.DrawYOffset = 2;
+		TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
         TileObjectData.newTile.LavaDeath = false;
         TileObjectData.addTile(Type);
         Main.tileLighted[Type] = true;
