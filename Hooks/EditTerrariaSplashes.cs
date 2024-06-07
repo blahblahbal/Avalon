@@ -16,7 +16,7 @@ internal class EditTerrariaSplashes : ModHook
         var output = orig.Invoke();
         if (Main.rand.NextBool(12))
         {
-            switch (Main.rand.Next(7))
+            switch (Main.rand.Next(10))
             {
                 case 0:
                     output = Language.GetTextValue("Mods.Avalon.GameTitles.0");
@@ -38,6 +38,15 @@ internal class EditTerrariaSplashes : ModHook
                     break;
                 case 6:
                     output = Language.GetTextValue("Mods.Avalon.GameTitles.6");
+                    break;
+                case 7:
+                    output = Language.GetTextValue("Mods.Avalon.GameTitles.7");
+                    break;
+                case 8:
+                    output = Language.GetTextValue("Mods.Avalon.GameTitles.8");
+                    break;
+                case 9:
+                    output = Language.GetTextValue("Mods.Avalon.GameTitles.9");
                     break;
             }
         }
