@@ -264,6 +264,79 @@ public class zArmGlowmask : PlayerDrawLayer
     }
 }
 
+public class zBackArmGlowmask : PlayerDrawLayer
+{ //Back Arm Drawing
+	public override Position GetDefaultPosition()
+	{
+		return new BeforeParent(Terraria.DataStructures.PlayerDrawLayers.OffhandAcc); //there's like, no other fitting layer lol
+	}
+
+	protected override void Draw(ref PlayerDrawSet drawInfo)
+	{
+		Player drawPlayer = drawInfo.drawPlayer;
+		if (drawInfo.drawPlayer.dead)
+		{
+			return;
+		}
+
+		Terraria.Item slot;
+
+		if (drawPlayer.armor[11].type == ItemID.None && drawPlayer.armor[1].type != ItemID.None)
+		{
+			slot = drawPlayer.armor[1];
+		}
+		else if (drawPlayer.armor[11].type != ItemID.None)
+		{
+			slot = drawPlayer.armor[11];
+		}
+		else
+		{
+			return;
+		}
+
+		if (drawPlayer.body != slot.bodySlot)
+		{
+			return;
+		}
+		Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
+
+		Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
+
+		float drawX = (int)drawInfo.Position.X + drawPlayer.width / 2;
+		float drawY = (int)drawInfo.Position.Y + drawPlayer.height - drawPlayer.bodyFrame.Height / 2 + 4f;
+		Vector2 origin = drawInfo.bodyVect;
+		Vector2 position = new Vector2(drawX, drawY) + drawPlayer.bodyPosition - Main.screenPosition;
+		float rotation = drawPlayer.bodyRotation;
+		SpriteEffects spriteEffects = drawInfo.playerEffect;
+		if (drawPlayer.compositeBackArm.enabled)
+		{
+			Vector2 vector2 = Main.OffsetsPlayerHeadgear[drawPlayer.bodyFrame.Y / drawPlayer.bodyFrame.Height];
+			vector2.Y -= 2f;
+			position += vector2 * -drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically).ToDirectionInt();
+			Vector2 offset = new Vector2(6 * ((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipHorizontally)) ? 1 : (-1)), 2 * ((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically)) ? 1 : (-1)));
+			origin += offset;
+			position += offset + drawInfo.backShoulderOffset;
+			rotation = drawPlayer.bodyRotation + drawInfo.compositeBackArmRotation;
+
+			DrawData drawData = new(texture, position, drawInfo.compBackArmFrame, color, rotation, origin, 1f, spriteEffects, 0);
+			drawData.shader = drawInfo.cBody;
+			drawInfo.DrawDataCache.Add(drawData);
+		}
+		else
+		{
+			Rectangle frame = drawInfo.compBackArmFrame;
+			int walkFrame = drawPlayer.bodyFrame.Y / 56;
+			if (walkFrame == 7 || walkFrame == 8 || walkFrame == 9 || walkFrame == 14 || walkFrame == 15 || walkFrame == 16)
+			{
+				frame.Y += 2; //walking bop
+			}
+			DrawData drawData = new(texture, position, frame, color, rotation, origin, 1f, spriteEffects, 0);
+			drawData.shader = drawInfo.cBody;
+			drawInfo.DrawDataCache.Add(drawData);
+		}
+	}
+}
+
 public class LegsGlowmask : PlayerDrawLayer
 {
     public override Position GetDefaultPosition()
