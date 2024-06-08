@@ -249,8 +249,11 @@ public class ExxoAvalonOrigins : Mod
         tileReplacer.ReplaceAsset(TileID.PlatinumCoinPile, Assets.Request<Texture2D>("Assets/Vanilla/Tiles/PlatinumCoin"));
         tileReplacer.ReplaceAsset(TileID.Banners, Assets.Request<Texture2D>("Assets/Vanilla/Tiles/VanillaBanners"));
         tileReplacer.ReplaceAsset(TileID.Containers, Assets.Request<Texture2D>("Assets/Vanilla/Tiles/VanillaChests"));
+		tileReplacer.ReplaceAsset(TileID.ImmatureHerbs, Assets.Request<Texture2D>("Assets/Vanilla/Tiles/BuddingHerbs"));
+		tileReplacer.ReplaceAsset(TileID.MatureHerbs, Assets.Request<Texture2D>("Assets/Vanilla/Tiles/MatureHerbs"));
+		tileReplacer.ReplaceAsset(TileID.BloomingHerbs, Assets.Request<Texture2D>("Assets/Vanilla/Tiles/BloomingHerbs"));
 
-        var projectileReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Projectile);
+		var projectileReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Projectile);
         assetReplacers.Add(projectileReplacer);
         projectileReplacer.ReplaceAsset(ProjectileID.MagicDagger, Assets.Request<Texture2D>("Assets/Vanilla/Items/MagicDagger"));
         projectileReplacer.ReplaceAsset(ProjectileID.BouncyBomb, Assets.Request<Texture2D>("Assets/Vanilla/Items/BouncyBomb"));

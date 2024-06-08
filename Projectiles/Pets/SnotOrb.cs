@@ -123,7 +123,7 @@ public class SnotOrb : ModProjectile
             return;
         }
 
-        // Keep the projectile disappearing as long as the player isn't dead and has the pet buff.
+        // Keep the projectile from disappearing as long as the player isn't dead and has the pet buff.
         if (!player.dead && player.HasBuff(ModContent.BuffType<Buffs.Pets.SnotOrb>()))
         {
             Projectile.timeLeft = 2;
@@ -140,14 +140,14 @@ public class SnotOrb : ModProjectile
             Projectile.ai[0] += ForcedMovementSpeed;
         }
 
-        if(player.controlUp || player.controlDown)
+        if (player.controlUp || player.controlDown)
         {
             Projectile.Center = Vector2.SmoothStep(Projectile.Center, targetPos, 0.1f);
         }
 
         Projectile.ai[0] = MathHelper.Clamp(Projectile.ai[0], -40 , 40 * 3);
         Projectile.velocity = Vector2.SmoothStep(Projectile.velocity += Projectile.Center.DirectionTo(targetPos) * (Projectile.Center.Distance(targetPos) * 0.01f), Projectile.Center.DirectionTo(targetPos) * 3, 0.1f);
-        if(Projectile.Center.Distance(targetPos) < 10)
+        if (Projectile.Center.Distance(targetPos) < 10)
         {
             Projectile.velocity *= 0.8f;
         }
@@ -158,7 +158,7 @@ public class SnotOrb : ModProjectile
         float MaxSpeed = MathHelper.Clamp(Projectile.Center.Distance(targetPos) * 0.05f, 6, 12);
         Projectile.velocity = Vector2.Clamp(Projectile.velocity, new Vector2(-MaxSpeed), new Vector2(MaxSpeed));
         
-        if(!player.controlDown && !player.controlUp && Projectile.Center.Distance(targetPos) < 100)
+        if (!player.controlDown && !player.controlUp && Projectile.Center.Distance(targetPos) < 100)
         {
             Projectile.velocity *= 0.95f;
         }

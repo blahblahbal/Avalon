@@ -72,7 +72,7 @@ class RodofCoalescence : ModItem
             return false;
         }
         player.Teleport(pointPosition, 6);
-        NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, pointPosition.X, pointPosition.Y, 1);
+        NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, pointPosition.X, pointPosition.Y, 6);
         for (int num20 = 0; num20 < 75; num20++)
         {
             Dust obj8 = Dust.NewDustDirect(pointPosition, player.getRect().Width, player.getRect().Height + 24, DustID.Water);
