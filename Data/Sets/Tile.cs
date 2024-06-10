@@ -168,6 +168,7 @@ namespace Avalon.Data.Sets
             { TileID.Tungsten, ItemID.TungstenBar },
             { TileID.Gold, ItemID.GoldBar },
             { TileID.Platinum, ItemID.PlatinumBar },
+			{ TileID.Meteorite, ItemID.MeteoriteBar },
             { TileID.Demonite, ItemID.DemoniteBar },
             { TileID.Crimtane, ItemID.CrimtaneBar },
             { TileID.Hellstone, ItemID.HellstoneBar },

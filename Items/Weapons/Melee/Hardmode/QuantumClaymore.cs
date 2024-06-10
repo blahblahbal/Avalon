@@ -17,7 +17,7 @@ public class QuantumClaymore : ModItem
         Item.damage = 88;
         Item.autoReuse = true;
         Item.rare = ModContent.RarityType<Rarities.QuantumRarity>();
-        Item.knockBack = 10f;
+        Item.knockBack = 6f;
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = Item.sellPrice(0, 10, 90, 0);
@@ -32,7 +32,7 @@ public class QuantumClaymore : ModItem
     {
         return Color.White;
     }
-    public override void AddRecipes()
+	public override void AddRecipes()
     {
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<CorruptShard>(), 10) // Replace with corrupted bar later

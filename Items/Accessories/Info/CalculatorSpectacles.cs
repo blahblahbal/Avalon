@@ -128,11 +128,13 @@ public class CalcSpecGlobalItem : GlobalItem
 						item.type == ModContent.ItemType<Material.Ores.Heartstone>() || item.type == ModContent.ItemType<Material.Ores.Boltstone>() ||
 						item.type == ModContent.ItemType<Material.Ores.Starstone>())
 					{
+						// if the recipe result and ingredient both contain "Bar" bypass it
 						if (ing.Name.EndsWith(" Bar") && recipe.createItem.Name.EndsWith(" Bar"))
 						{
 							continue;
 						}
-						if (ing.type == ItemID.FallenStar) continue;
+						// if the ingredient is Fallen Star, bypass it
+						if (ing.type is ItemID.FallenStar or ItemID.GlowingMushroom) continue;
 						if (!recipe.HasIngredient(ModContent.ItemType<Material.Ores.Sulphur>()) &&
 							!recipe.HasIngredient(ModContent.ItemType<Material.SulphurCrystal>()) &&
 							!ing.Name.EndsWith(" Bar"))

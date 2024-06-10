@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Tools;
+namespace Avalon.Items.Tools.PreHardmode;
 
 class PocketStation : ModItem
 {

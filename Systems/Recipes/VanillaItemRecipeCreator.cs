@@ -126,7 +126,6 @@ public class VanillaItemRecipeCreator : ModSystem
         Recipe.Create(ItemID.Extractinator).AddRecipeGroup("IronBar", 30).AddIngredient(ItemID.Glass, 5).AddIngredient(ItemID.Wire, 20).AddIngredient(ItemID.Timer1Second).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.HermesBoots).AddIngredient(ItemID.OldShoe).AddIngredient(ItemID.SwiftnessPotion, 2).AddIngredient(ItemID.Cloud, 60).AddIngredient(ModContent.ItemType<BreezeShard>(), 2).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.FlurryBoots).AddIngredient(ItemID.OldShoe).AddIngredient(ItemID.SwiftnessPotion, 2).AddIngredient(ItemID.Cloud, 30).AddIngredient(ItemID.IceBlock, 30).AddIngredient(ModContent.ItemType<BreezeShard>(), 1).AddIngredient(ModContent.ItemType<FrostShard>(), 1).AddTile(TileID.TinkerersWorkbench).Register();
-        Recipe.Create(ItemID.RodofDiscord).AddIngredient(ModContent.ItemType<ChaosDust>(), 45).AddIngredient(ItemID.SoulofLight, 25).AddIngredient(ItemID.Diamond, 10).AddIngredient(ItemID.SoulofMight).AddIngredient(ItemID.SoulofFright).AddIngredient(ItemID.SoulofSight).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.WarriorEmblem).AddIngredient(ItemID.RangerEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.WarriorEmblem).AddIngredient(ItemID.SorcererEmblem).AddTile(TileID.TinkerersWorkbench).Register();
         Recipe.Create(ItemID.WarriorEmblem).AddIngredient(ItemID.SummonerEmblem).AddTile(TileID.TinkerersWorkbench).Register();

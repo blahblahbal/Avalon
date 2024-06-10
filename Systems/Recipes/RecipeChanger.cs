@@ -194,17 +194,44 @@ public class RecipeChanger : ModSystem
                     break;
 				case ItemID.FrostHelmet:
 				{
-					recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					if (recipe.TryGetIngredient(ItemID.AdamantiteBar, out Item ing))
+					{
+						recipe.RemoveIngredient(ing);
+						recipe.AddRecipeGroup("AdamantiteBar", 12);
+						recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					}
+					else if (recipe.HasIngredient(ItemID.TitaniumBar))
+					{
+						recipe.DisableRecipe();
+					}
 					break;
 				}
 				case ItemID.FrostBreastplate:
 				{
-					recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					if (recipe.TryGetIngredient(ItemID.AdamantiteBar, out Item ing))
+					{
+						recipe.RemoveIngredient(ing);
+						recipe.AddRecipeGroup("AdamantiteBar", 24);
+						recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					}
+					else if (recipe.HasIngredient(ItemID.TitaniumBar))
+					{
+						recipe.DisableRecipe();
+					}
 					break;
 				}
 				case ItemID.FrostLeggings:
 				{
-					recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					if (recipe.TryGetIngredient(ItemID.AdamantiteBar, out Item ing))
+					{
+						recipe.RemoveIngredient(ing);
+						recipe.AddRecipeGroup("AdamantiteBar", 18);
+						recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					}
+					else if (recipe.HasIngredient(ItemID.TitaniumBar))
+					{
+						recipe.DisableRecipe();
+					}
 					break;
 				}
 				case ItemID.ClayPot:

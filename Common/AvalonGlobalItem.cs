@@ -730,24 +730,21 @@ public class AvalonGlobalItem : GlobalItem
                 player.cursorItemIconID = item.type;
                 if (Main.mouseRight && Main.mouseRightRelease)
                 {
-                    Item item2 = new Item();
-                    item2.SetDefaults(item.type);
-                    if (item2.value < item.value)
+					Item item2 = new Item();
+					item2.SetDefaults(item.type);
+
+					if (item2.value < item.value)
                     {
                         int money = (int)(item.value / 4 * Main.rand.NextFloat(0.5f, 1.5f)) / 5;
                         ClassExtensions.DropCoinsProperly(money, (int)player.position.X, (int)player.position.Y);
                     }
                     SoundEngine.PlaySound(SoundID.Item37);
-                    bool favorited = item.favorited;
-                    item.SetDefaults(item.type);
-                    item.favorited = favorited;
-
-                    if (Main.mouseItem.type == item.type)
-                    {
-                        Main.mouseItem.SetDefaults(item.type);
-                        Main.mouseItem.favorited = favorited;
-                    }
-                }
+					item.ResetPrefix();
+					if (Main.mouseItem.type == item.type)
+					{
+						Main.mouseItem.ResetPrefix();
+					}
+				}
             }
         }
         #endregion

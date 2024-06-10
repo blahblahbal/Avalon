@@ -4024,6 +4024,26 @@ Mods: {
 				Tooltip: Immunity to Broken Weaponry and Unloaded
 			}
 
+			MidasShoe: {
+				DisplayName: Midas' Shoe
+				Tooltip: Immunity to Ichor and Electrified
+			}
+
+			RubberBoot: {
+				DisplayName: Rubber Boot
+				Tooltip: Immunity to Electrified
+			}
+
+			Antivenom: {
+				DisplayName: Antivenom
+				Tooltip: Immunity to Acid Venom
+			}
+
+			SpaceHelmet: {
+				DisplayName: Space Helmet
+				Tooltip: Immunity to Suffocation and On Fire!
+			}
+
 			SolarSystem: {
 				DisplayName: Solar System
 				Tooltip: "'Not to scale'"
@@ -4575,12 +4595,12 @@ Mods: {
 
 			PathogenicArrow: {
 				DisplayName: Pathogen Arrow
-				Tooltip: Increases target's debuff duration
+				Tooltip: Increases target's debuff duration and potency
 			}
 
 			PathogenicBullet: {
 				DisplayName: Pathogen Bullet
-				Tooltip: Increases target's debuff duration
+				Tooltip: Increases target's debuff duration and potency
 			}
 
 			PathogenicDart: {
@@ -4598,7 +4618,7 @@ Mods: {
 				Tooltip:
 					'''
 					Sprays a pathogen mist 
-					Increases target's debuff duration
+					Increases target's debuff duration and potency
 					'''
 			}
 
@@ -6182,6 +6202,16 @@ Mods: {
 			BlahsEnergyBlade: {
 				DisplayName: Blah's Energy Blade
 				Tooltip: ""
+			}
+
+			PortablePylonMkII: {
+				DisplayName: Portable Pylon Mk II
+				Tooltip:
+					'''
+					Teleports you to a saved location
+					Maximum of 3 saved locations
+					<right> to set a waypoint
+					'''
 			}
 
 			PortablePylonMkIIPoint1: {
@@ -8973,6 +9003,16 @@ Mods: {
 					10% increased movement speed
 					'''
 			}
+
+			FaceShield: {
+				DisplayName: Face Shield
+				Tooltip: Immunity to Pathogen and Mighty Winds
+			}
+
+			Sandstormer: {
+				Tooltip: ""
+				DisplayName: Sandstormer
+			}
 		}
 
 		InfoDisplays: {
@@ -9235,6 +9275,7 @@ Mods: {
 			HallowedRapierVis.DisplayName: Hallowed Rapier Vis
 			IcicleFerozium.DisplayName: Icicle Ferozium
 			SpiritPoppy.DisplayName: Spirit Poppy
+			Sandstormer.DisplayName: Sandstormer
 		}
 
 		NPCs: {
@@ -9858,7 +9899,7 @@ Mods: {
 
 			ImbuePathogen: {
 				DisplayName: Weapon Imbue: Pathogen
-				Description: Melee attacks increase enemies' debuff duration
+				Description: Melee attacks increase enemies' debuff duration and potency
 			}
 
 			IcySlowdown: {
@@ -10604,11 +10645,16 @@ Mods: {
 				Stopped: The rain has stopped.
 			}
 
+			Sandstormer: {
+				Started: A sandstorm kicked up!
+				Stopped: The sandstorm has subsided.
+			}
+
 			PortablePylon: {
 				SetWaypoint: Set waypoint to current location
-				SetWaypointOne: Set waypoint 1 to current location
-				SetWaypointTwo: Set waypoint 2 to current location
-				SetWaypointThree: Set waypoint 3 to current location
+				SetWaypoint1: Set waypoint 1 to current location
+				SetWaypoint2: Set waypoint 2 to current location
+				SetWaypoint3: Set waypoint 3 to current location
 				NoWaypointFound: No waypoint found!
 			}
 		}

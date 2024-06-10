@@ -20,6 +20,7 @@ using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
+using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 using System.Collections.Generic;
@@ -407,7 +408,26 @@ public class AvalonMobDrops : GlobalNPC
             npcLoot.Add(ItemDropRule.ByCondition(sandstormCondition, ModContent.ItemType<Windshield>(), 75));
         }
 
-        if (npc.type == NPCID.EyeofCthulhu)
+		//rubber boot
+		if (npc.type == NPCID.MartianTurret || npc.type == NPCID.GigaZapper || npc.type == ModContent.NPCType<Mechasting>())
+		{
+			LeadingConditionRule RubberBoot = new LeadingConditionRule(new CloverPotionActive());
+			RubberBoot.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<RubberBoot>(), 50), true);
+			RubberBoot.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<RubberBoot>(), 100));
+			npcLoot.Add(RubberBoot);
+		}
+
+		//antivenom
+		if (npc.type == NPCID.BlackRecluse || npc.type == NPCID.JungleCreeper || npc.type == NPCID.JungleCreeperWall ||
+			npc.type == NPCID.BlackRecluseWall || npc.type == NPCID.DesertScorpionWalk || npc.type == NPCID.DesertScorpionWall)
+		{
+			LeadingConditionRule Antivenom = new LeadingConditionRule(new CloverPotionActive());
+			Antivenom.OnSuccess(ItemDropRule.StatusImmunityItem(ModContent.ItemType<Antivenom>(), 50), true);
+			Antivenom.OnFailedConditions(ItemDropRule.StatusImmunityItem(ModContent.ItemType<Antivenom>(), 100));
+			npcLoot.Add(Antivenom);
+		}
+
+		if (npc.type == NPCID.EyeofCthulhu)
         {
             // remove corruption loot
             npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.DemoniteOre);

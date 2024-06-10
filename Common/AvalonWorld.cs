@@ -1571,7 +1571,7 @@ public class AvalonWorld : ModSystem
         int xloc = -100 + Main.maxTilesX - 100;
         int yloc = -(int)num5 + Main.maxTilesY - 200;
         int sum = xloc * yloc;
-        int amount = (sum / 10000) * 5;
+        int amount = (sum / 18000) * 5;
         for (int zz = 0; zz < amount; zz++)
         {
             int i2 = WorldGen.genRand.Next(100, Main.maxTilesX - 100);

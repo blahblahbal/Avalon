@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Avalon.Items.Accessories.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -25,11 +24,10 @@ class ReflexShield : ModItem
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<ReflexCharm>())
             .AddIngredient(ItemID.AnkhShield)
-            .AddIngredient(ModContent.ItemType<GoldenShield>())
-            .AddIngredient(ModContent.ItemType<OxygenTank>())
-            .AddIngredient(ModContent.ItemType<Vortex>())
-            .AddIngredient(ModContent.ItemType<SurgicalMask>())
-            .AddIngredient(ModContent.ItemType<Windshield>())
+            .AddIngredient(ModContent.ItemType<MidasShoe>())
+            .AddIngredient(ModContent.ItemType<SpaceHelmet>())
+            .AddIngredient(ModContent.ItemType<Antivenom>())
+            .AddIngredient(ModContent.ItemType<FaceShield>())
             .AddIngredient(ModContent.ItemType<NuclearExtinguisher>())
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
@@ -56,7 +54,8 @@ class ReflexShield : ModItem
         player.buffImmune[BuffID.CursedInferno] = true;
         player.buffImmune[BuffID.Stoned] = true;
         player.buffImmune[BuffID.WindPushed] = true;
-        player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Pathogen>()] = true;
+		player.buffImmune[BuffID.Venom] = true;
+		player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Pathogen>()] = true;
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Unloaded>()] = true;
         player.buffImmune[ModContent.BuffType<Buffs.Debuffs.BrokenWeaponry>()] = true;
         player.GetModPlayer<AvalonPlayer>().ReflexShield = true;

@@ -6,7 +6,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace Avalon.Items.Tools;
+namespace Avalon.Items.Tools.PreHardmode;
 
 public class WaypointSystem : ModSystem
 {
@@ -26,7 +26,20 @@ public class WaypointSystem : ModSystem
 }
 public class PortablePylon : ModItem
 {
-    public override void SetDefaults()
+	public static List<Vector2> SavedLocations = new List<Vector2>();
+	public override void SaveData(TagCompound tag)
+	{
+		tag["Avalon:PortablePylonSavedLocations"] = SavedLocations;
+	}
+	public override void LoadData(TagCompound tag)
+	{
+		if (tag.ContainsKey("Avalon:PortablePylonSavedLocations"))
+		{
+			SavedLocations = tag.Get<List<Vector2>>("Avalon:PortablePylonSavedLocations");
+		}
+	}
+
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Orange;
@@ -63,7 +76,14 @@ public class PortablePylon : ModItem
     {
         if (player.altFunctionUse == 2 && player.itemTime == Item.useTime / 2)
         {
-            WaypointSystem.savedLocation = player.Center + new Vector2(0, -15);
+			if (SavedLocations.Contains(new Vector2(Main.worldID, 0)))
+			{
+				SavedLocations.RemoveAt(SavedLocations.FindIndex(i => i.X == Main.worldID) + 1);
+				SavedLocations.Remove(new Vector2(Main.worldID, 0));
+			}
+			SavedLocations.Add(new Vector2(Main.worldID, 0));
+			SavedLocations.Add(player.Center + new Vector2(0, -15));
+            //WaypointSystem.savedLocation = player.Center + new Vector2(0, -15);
             Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.SetWaypoint"));
         }
         else
@@ -74,11 +94,11 @@ public class PortablePylon : ModItem
             }
             else if (player.itemTime == Item.useTime / 2)
             {
-                if (WaypointSystem.savedLocation != Vector2.Zero)
+                if (SavedLocations.Count > 0 && SavedLocations[SavedLocations.FindIndex(i => i.X == Main.worldID) + 1] != Vector2.Zero)
                 {
                     for (int num345 = 0; num345 < 70; num345++)
                     {
-                        Dust.NewDust(player.position, player.width, player.height, DustID.MagicMirror, player.velocity.X * 0.5f, player.velocity.Y * 0.5f, 150, default(Color), 1.5f);
+                        Dust.NewDust(player.position, player.width, player.height, DustID.MagicMirror, player.velocity.X * 0.5f, player.velocity.Y * 0.5f, 150, default, 1.5f);
                     }
                     player.grappling[0] = -1;
                     player.grapCount = 0;
@@ -89,8 +109,8 @@ public class PortablePylon : ModItem
                             Main.projectile[num346].Kill();
                         }
                     }
-                    player.Teleport(WaypointSystem.savedLocation);
-                    NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, WaypointSystem.savedLocation.X, WaypointSystem.savedLocation.Y, 0);
+					player.Teleport(SavedLocations[SavedLocations.FindIndex(i => i.X == Main.worldID) + 1]);
+                    NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, SavedLocations[SavedLocations.FindIndex(i => i.X == Main.worldID) + 1].X, SavedLocations[SavedLocations.FindIndex(i => i.X == Main.worldID) + 1].Y, 0);
                     for (int num347 = 0; num347 < 70; num347++)
                     {
                         Dust.NewDust(player.position, player.width, player.height, DustID.MagicMirror, 0f, 0f, 150, default, 1.5f);

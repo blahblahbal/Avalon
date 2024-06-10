@@ -74,7 +74,8 @@ namespace Avalon.Hooks
             {
                 if (Type == ItemID.Heart && source is not EntitySource_TileBreak && source is not EntitySource_Wiring)
                 {
-                    if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((Main.player[p].statLifeMax2 - 400) / 5, 21) == 20)
+					if (Main.player[p].ConsumedLifeFruit is > 0 and < 19 && Main.rand.Next(Main.player[p].ConsumedLifeFruit, 21) == 20)
+					//if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((Main.player[p].statLifeMax2 - 400) / 5, 21) == 20)
                     {
                         if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
                             Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
@@ -85,7 +86,7 @@ namespace Avalon.Hooks
                         }
                         else Type = ModContent.ItemType<GoldHeart>();
                     }
-                    else if (Main.player[p].statLifeMax2 >= 500)
+                    else if (Main.player[p].statLifeMax2 >= 500 && Main.player[p].ConsumedLifeFruit >= 20)
                     {
                         if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
                             Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
@@ -99,8 +100,9 @@ namespace Avalon.Hooks
                 }
                 if (Type == ItemID.CandyApple && source is not EntitySource_TileBreak && source is not EntitySource_Wiring)
                 {
-                    if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((Main.player[p].statLifeMax2 - 400) / 5, 21) == 20)
-                    {
+					//if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((Main.player[p].statLifeMax2 - 400) / 5, 21) == 20)
+					if (Main.player[p].ConsumedLifeFruit is > 0 and < 19 && Main.rand.Next(Main.player[p].ConsumedLifeFruit, 21) == 20)
+					{
                         if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
                             Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
                             (Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart &&
@@ -110,7 +112,7 @@ namespace Avalon.Hooks
                         }
                         else Type = ModContent.ItemType<GoldApple>();
                     }
-                    else if (Main.player[p].statLifeMax2 >= 500)
+                    else if (Main.player[p].statLifeMax2 >= 500 && Main.player[p].ConsumedLifeFruit >= 20)
                     {
                         if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
                             Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
@@ -124,8 +126,9 @@ namespace Avalon.Hooks
                 }
                 if (Type == ItemID.CandyCane && source is not EntitySource_TileBreak && source is not EntitySource_Wiring)
                 {
-                    if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((Main.player[p].statLifeMax2 - 400) / 5, 21) == 20)
-                    {
+					//if (Main.player[p].statLifeMax2 > 400 && Main.player[p].statLifeMax2 < 500 && Main.rand.Next((Main.player[p].statLifeMax2 - 400) / 5, 21) == 20)
+					if (Main.player[p].ConsumedLifeFruit is > 0 and < 19 && Main.rand.Next(Main.player[p].ConsumedLifeFruit, 21) == 20)
+					{
                         if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
                             Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||
                             (Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart &&
@@ -135,7 +138,7 @@ namespace Avalon.Hooks
                         }
                         else Type = ModContent.ItemType<GoldCandyCane>();
                     }
-                    else if (Main.player[p].statLifeMax2 >= 500)
+                    else if (Main.player[p].statLifeMax2 >= 500 && Main.player[p].ConsumedLifeFruit >= 20)
                     {
                         if (Main.player[p].GetModPlayer<AvalonPlayer>().EtherealHeart && Main.rand.NextBool(10) ||
                             Main.player[p].GetModPlayer<AvalonPlayer>().HeartGolem && Main.rand.NextBool(20) ||

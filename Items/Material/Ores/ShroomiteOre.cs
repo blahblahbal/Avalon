@@ -30,7 +30,7 @@ class ShroomiteOre : ModItem
     }
 	public override void AddRecipes()
 	{
-		CreateRecipe()
+		Recipe.Create(ItemID.ShroomiteBar)
 			.AddIngredient(this, 5)
 			.AddTile(TileID.AdamantiteForge)
 			.Register();
