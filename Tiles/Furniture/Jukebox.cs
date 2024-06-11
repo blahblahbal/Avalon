@@ -17,7 +17,6 @@ public class Jukebox : ModTile
     {
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
-        Main.tileOreFinderPriority[Type] = 500;
         //TileID.Sets.HasOutlines[Type] = true;
         AddMapEntry(new Color(152, 107, 82), LanguageManager.Instance.GetText("Jukebox"));
         TileID.Sets.DisableSmartCursor[Type] = true;

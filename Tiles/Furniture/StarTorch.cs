@@ -9,6 +9,8 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent.Drawing;
+using Avalon.Particles;
 
 namespace Avalon.Tiles.Furniture
 {
@@ -84,6 +86,19 @@ namespace Avalon.Tiles.Furniture
 
         public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
         {
+			if (Main.rand.NextBool(40) && Main.tile[i, j].TileFrameX < 66 && Main.hasFocus)
+			{
+				//ParticleOrchestraSettings pos = new ParticleOrchestraSettings();
+				//pos.PositionInWorld = new Vector2(i, j) * 16;
+				//pos.MovementVector = new Vector2(Main.rand.Next(-2, 3), Main.rand.Next(1, 4));
+				////pos.IndexOfPlayerWhoInvokedThis = 255;
+				//ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.SilverBulletSparkle, pos);
+				ParticleSystem.AddParticle(new Particles.StarTorch(),
+					new Vector2(i, j) * 16 + new Vector2(Main.rand.Next(5, 16), Main.rand.Next(-1, 4)), // position
+					new Vector2(Main.rand.NextFloat(-0.2f, 0.21f), Main.rand.NextFloat(0.3f, 0.5f)), // velocity
+					Color.LightYellow, // color
+					scale: 0.12f); // scale
+			}
             if (Main.rand.NextBool(40) && Main.tile[i, j].TileFrameX < 66)
             {
                 Dust d = Dust.NewDustDirect(new Vector2(i * 16, j * 16) + new Vector2(6, -6), 0, 0, dustType, 0, 0, 100, default, Main.rand.NextFloat(0.5f, 1));

@@ -545,6 +545,8 @@ Mods: {
 		}
 
 		TooltipEdits: {
+			HiveWand: Shoots bolts that split into bees upon hitting a target
+			ExtraJumps: Converts extra jumps to flight time if wearing wings
 			HandofCreation: Can place blocks and walls in midair and in lava
 			Silt: Gather 100 to craft into a Compressed Extractination Block
 			BottomlessBuckets: Right Click to place a 3x3 area of liquid
@@ -1621,7 +1623,11 @@ Mods: {
 
 			SandyStormcloudinaBottle: {
 				DisplayName: Sandy Stormcloud in a Bottle
-				Tooltip: Allows the holder to quadruple jump
+				Tooltip:
+					'''
+					Allows the holder to quadruple jump
+					Converts extra jumps to flight time if wearing wings
+					'''
 			}
 
 			GuardianBoots: {
@@ -6191,7 +6197,11 @@ Mods: {
 
 			RocketinaBottle: {
 				DisplayName: Rocket in a Bottle
-				Tooltip: Allows the holder to double jump
+				Tooltip:
+					'''
+					Allows the holder to double jump
+					Converts extra jumps to flight time if wearing wings
+					'''
 			}
 
 			LivingLightningBlock: {
@@ -7463,6 +7473,7 @@ Mods: {
 					'''
 					Allows the holder to quadruple jump
 					Increases jump height
+					Converts extra jumps to flight time if wearing wings
 					'''
 			}
 
@@ -7476,20 +7487,22 @@ Mods: {
 			}
 
 			MegaBundleofBalloons: {
-				DisplayName: Mega Bundle of Balloons
+				DisplayName: Mega Balloon
 				Tooltip:
 					'''
 					Allows the holder to septuple jump
 					Increases jump height
+					Converts extra jumps to flight time if wearing wings
 					'''
 			}
 
 			MegaBundleofHorseshoeBalloons: {
-				DisplayName: Mega Bundle of Horseshoe Balloons
+				DisplayName: Mega Horseshoe Balloon
 				Tooltip:
 					'''
 					Allows the holder to septuple jump
 					Increases jump height and negates fall damage
+					Converts extra jumps to flight time if wearing wings
 					'''
 			}
 
@@ -7499,6 +7512,7 @@ Mods: {
 					'''
 					Allows the holder to double jump
 					Increases jump height and negates fall damage
+					Converts extra jumps to flight time if wearing wings
 					'''
 			}
 
@@ -7508,6 +7522,7 @@ Mods: {
 					'''
 					Allows the holder to double jump
 					Increases jump height
+					Converts extra jumps to flight time if wearing wings
 					'''
 			}
 
@@ -7709,7 +7724,11 @@ Mods: {
 
 			GaseousTsunamiRocketinaJar: {
 				DisplayName: Gaseous Tsunami Rocket in a Jar
-				Tooltip: Allows the holder to quadruple jump
+				Tooltip:
+					'''
+					Allows the holder to quadruple jump
+					Converts extra jumps to flight time if wearing wings
+					'''
 			}
 
 			BasaltPillar: {
@@ -8038,6 +8057,7 @@ Mods: {
 					'''
 					Allows the holder to double jump
 					Increases jump height and negates fall damage
+					Converts extra jumps to flight time if wearing wings
 					'May annoy others'
 					'''
 			}
@@ -8048,6 +8068,7 @@ Mods: {
 					'''
 					Allows the holder to double jump
 					Increases jump height
+					Converts extra jumps to flight time if wearing wings
 					'May annoy others'
 					'''
 			}
@@ -8057,6 +8078,7 @@ Mods: {
 				Tooltip:
 					'''
 					Allows the holder to double jump
+					Converts extra jumps to flight time if wearing wings
 					'May annoy others'
 					'''
 			}
@@ -9276,6 +9298,7 @@ Mods: {
 			IcicleFerozium.DisplayName: Icicle Ferozium
 			SpiritPoppy.DisplayName: Spirit Poppy
 			Sandstormer.DisplayName: Sandstormer
+			BeeBolt.DisplayName: Bee Bolt
 		}
 
 		NPCs: {

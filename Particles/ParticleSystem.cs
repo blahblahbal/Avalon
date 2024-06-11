@@ -97,7 +97,7 @@ namespace Avalon.Particles
 
             Main.spriteBatch.End();
         }
-        public static Particle AddParticle(Particle type, Vector2 position, Vector2 velocity, Color color, float AI1 = 0, float AI2 = 0, float AI3 = 0)
+        public static Particle AddParticle(Particle type, Vector2 position, Vector2 velocity, Color color, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 1f)
         {
             if (Particles.Count == MaxParticles)
             {
@@ -110,6 +110,7 @@ namespace Avalon.Particles
             Particles.Last().ai1 = AI1;
             Particles.Last().ai2 = AI2;
             Particles.Last().ai3 = AI3;
+			Particles.Last().Scale = scale;
 
             return Particles.Last();
         }
@@ -125,6 +126,7 @@ namespace Avalon.Particles
         public bool Active = true;
         public Color Color;
         public bool FrontLayer;
+		public float Scale = 1f;
         public virtual void Update()
         {
             //TimeInWorld++;

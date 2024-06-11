@@ -13,12 +13,11 @@ using Terraria.GameContent.Achievements;
 
 namespace Avalon.Hooks;
 
-[Autoload(Side = ModSide.Client)]
 public class EvilAltar : ModHook
 {
     protected override void Apply()
     {
-        IL_WorldGen.SmashAltar += WorldGen_SmashAltar;
+        //IL_WorldGen.SmashAltar += WorldGen_SmashAltar;
         On_WorldGen.SmashAltar += On_WorldGen_SmashAltar;
         IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool;
     }

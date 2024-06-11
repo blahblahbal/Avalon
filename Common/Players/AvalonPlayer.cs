@@ -17,6 +17,7 @@ using Avalon.Systems;
 using Avalon.Tiles.Ores;
 using Avalon.Tiles.Tropics;
 using Avalon.Walls;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -1219,7 +1220,292 @@ public class AvalonPlayer : ModPlayer
 			SpiritPoppyUseCount = tag.Get<int>("Avalon:SpiritPoppyUseCount");
 		}
 	}
-    public override void PostUpdateEquips()
+
+	private void OnStartedExtraJump(ExtraJumpType mode)
+	{
+		switch (mode)
+		{
+			case ExtraJumpType.Sandstorm:
+			case ExtraJumpType.Blizzard:
+				break;
+			case ExtraJumpType.Rocket:
+				int offsetY = Player.height;
+				if (Player.gravDir == -1f)
+					offsetY = 0;
+
+				offsetY -= 16;
+
+				Player.GetModPlayer<AvalonPlayer>().RocketDustTimer = 28;
+
+				int num6 = Gore.NewGore(Player.GetSource_FromThis(),
+					new Vector2(Player.position.X + (Player.width / 2) - 16f,
+						Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
+					new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
+				Main.gore[num6].velocity.X = (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
+				Main.gore[num6].velocity.Y = (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
+				num6 = Gore.NewGore(Player.GetSource_FromThis(),
+					new Vector2(Player.position.X - 36f,
+						Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
+					new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
+				Main.gore[num6].velocity.X = (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
+				Main.gore[num6].velocity.Y = (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
+				num6 = Gore.NewGore(Player.GetSource_FromThis(),
+					new Vector2(Player.position.X + Player.width + 4f,
+						Player.position.Y + (Player.gravDir == -1 ? 0 : Player.height) - 16f),
+					new Vector2(-Player.velocity.X, -Player.velocity.Y), Main.rand.Next(11, 14));
+				Main.gore[num6].velocity.X = (Main.gore[num6].velocity.X * 0.1f) - (Player.velocity.X * 0.1f);
+				Main.gore[num6].velocity.Y = (Main.gore[num6].velocity.Y * 0.1f) - (Player.velocity.Y * 0.05f);
+
+				for (int i = 0; i < 10; i++)
+				{
+					int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, 0, 0, 0, default, 2f);
+					Main.dust[d].velocity = Main.rand.NextVector2Circular(6, 6);
+					Main.dust[d].noGravity = true;
+					Main.dust[d].fadeIn = 2.3f;
+					Main.dust[d].customData = 0;
+				}
+				for (int i = 0; i < 20; i++)
+				{
+					int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, 0, 0, 0, default, 2f);
+					Main.dust[d].velocity = Main.rand.NextVector2Circular(5, 5) / 3f;
+					Main.dust[d].fadeIn = Main.rand.NextFloat(1, 2);
+					Main.dust[d].customData = 0;
+				}
+				for (int i = 0; i < 20; i++)
+				{
+					int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Smoke, 0, 0, 0, default, 1.4f);
+					Main.dust[d].velocity = Main.rand.NextVector2Circular(10, 6) + new Vector2(-3, 0).RotatedBy(Player.velocity.ToRotation());
+					Main.dust[d].noGravity = !Main.rand.NextBool(10);
+				}
+				for (int i = 0; i < 7; i++)
+				{
+					int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.SolarFlare, 0, 0, 0, default, 1.4f);
+					//Main.dust[d].color = Color.Red;
+					Main.dust[d].velocity = (Main.rand.NextVector2Circular(10, 6) + new Vector2(-5, 0).RotatedBy(Player.velocity.ToRotation())) / 3f;
+					Main.dust[d].noGravity = true;
+				}
+				for (int i = 0; i < 9; i++)
+				{
+					Vector2 vel = Player.velocity / 20f;
+					int g = Gore.NewGore(Player.GetSource_FromThis(), new Vector2(Player.Center.X - 10, Player.position.Y + Player.height), Main.rand.NextVector2Circular(10, 6) / 3f + new Vector2(-1, 0).RotatedBy(vel.ToRotation()), Main.rand.Next(61, 63), 0.8f);
+					Main.gore[g].alpha = 128;
+				}
+
+				SoundEngine.PlaySound(SoundID.Item11, Player.Center);
+				SoundEngine.PlaySound(SoundID.Item14, Player.Center);
+				break;
+			case ExtraJumpType.Fart:
+				int num7 = Player.height;
+				if (Player.gravDir == -1f)
+					num7 = 0;
+
+				SoundEngine.PlaySound(SoundID.Item16, Player.position);
+
+				for (int l = 0; l < 10; l++)
+				{
+					int num8 = Dust.NewDust(new Vector2(Player.position.X - 34f, Player.position.Y + num7 - 16f), 102, 32, 188, (0f - Player.velocity.X) * 0.5f, Player.velocity.Y * 0.5f, 100, default(Color), 1.5f);
+					Main.dust[num8].velocity.X = Main.dust[num8].velocity.X * 0.5f - Player.velocity.X * 0.1f;
+					Main.dust[num8].velocity.Y = Main.dust[num8].velocity.Y * 0.5f - Player.velocity.Y * 0.3f;
+				}
+
+				int num9 = Gore.NewGore(Player.GetSource_FromThis(), new Vector2(Player.position.X + Player.width / 2 - 16f, Player.position.Y + num7 - 16f), new Vector2(0f - Player.velocity.X, 0f - Player.velocity.Y), Main.rand.Next(435, 438));
+				Main.gore[num9].velocity.X = Main.gore[num9].velocity.X * 0.1f - Player.velocity.X * 0.1f;
+				Main.gore[num9].velocity.Y = Main.gore[num9].velocity.Y * 0.1f - Player.velocity.Y * 0.05f;
+				num9 = Gore.NewGore(Player.GetSource_FromThis(), new Vector2(Player.position.X - 36f, Player.position.Y + num7 - 16f), new Vector2(0f - Player.velocity.X, 0f - Player.velocity.Y), Main.rand.Next(435, 438));
+				Main.gore[num9].velocity.X = Main.gore[num9].velocity.X * 0.1f - Player.velocity.X * 0.1f;
+				Main.gore[num9].velocity.Y = Main.gore[num9].velocity.Y * 0.1f - Player.velocity.Y * 0.05f;
+				num9 = Gore.NewGore(Player.GetSource_FromThis(), new Vector2(Player.position.X + Player.width + 4f, Player.position.Y + num7 - 16f), new Vector2(0f - Player.velocity.X, 0f - Player.velocity.Y), Main.rand.Next(435, 438));
+				Main.gore[num9].velocity.X = Main.gore[num9].velocity.X * 0.1f - Player.velocity.X * 0.1f;
+				Main.gore[num9].velocity.Y = Main.gore[num9].velocity.Y * 0.1f - Player.velocity.Y * 0.05f;
+				break;
+			case ExtraJumpType.Tsunami:
+				int num5 = Player.height;
+				if (Player.gravDir == -1f)
+					num5 = 0;
+				for (int k = 0; k < 30; k++)
+				{
+					num6 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)num5), Player.width, 12, 253, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f, 100, default(Color), 1.5f);
+					if (k % 2 == 0)
+						Main.dust[num6].velocity.X += (float)Main.rand.Next(30, 71) * 0.1f;
+					else
+						Main.dust[num6].velocity.X -= (float)Main.rand.Next(30, 71) * 0.1f;
+
+					Main.dust[num6].velocity.Y += (float)Main.rand.Next(-10, 31) * 0.1f;
+					Main.dust[num6].noGravity = true;
+					Main.dust[num6].scale += (float)Main.rand.Next(-10, 41) * 0.01f;
+					Main.dust[num6].velocity *= Main.dust[num6].scale * 0.7f;
+					Vector2 vector = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
+					vector.Normalize();
+					vector *= (float)Main.rand.Next(81) * 0.1f;
+				}
+				break;
+			case ExtraJumpType.Cloud:
+				int num22 = Player.height;
+				if (Player.gravDir == -1f)
+					num22 = 0;
+
+				for (int num23 = 0; num23 < 10; num23++)
+				{
+					int num24 = Dust.NewDust(new Vector2(Player.position.X - 34f, Player.position.Y + (float)num22 - 16f), 102, 32, 16, (0f - Player.velocity.X) * 0.5f, Player.velocity.Y * 0.5f, 100, default(Color), 1.5f);
+					Main.dust[num24].velocity.X = Main.dust[num24].velocity.X * 0.5f - Player.velocity.X * 0.1f;
+					Main.dust[num24].velocity.Y = Main.dust[num24].velocity.Y * 0.5f - Player.velocity.Y * 0.3f;
+				}
+
+				int num25 = Gore.NewGore(Player.GetSource_FromThis(), new Vector2(Player.position.X + (float)(Player.width / 2) - 16f, Player.position.Y + (float)num22 - 16f), new Vector2(0f - Player.velocity.X, 0f - Player.velocity.Y), Main.rand.Next(11, 14));
+				Main.gore[num25].velocity.X = Main.gore[num25].velocity.X * 0.1f - Player.velocity.X * 0.1f;
+				Main.gore[num25].velocity.Y = Main.gore[num25].velocity.Y * 0.1f - Player.velocity.Y * 0.05f;
+				num25 = Gore.NewGore(Player.GetSource_FromThis(), new Vector2(Player.position.X - 36f, Player.position.Y + (float)num22 - 16f), new Vector2(0f - Player.velocity.X, 0f - Player.velocity.Y), Main.rand.Next(11, 14));
+				Main.gore[num25].velocity.X = Main.gore[num25].velocity.X * 0.1f - Player.velocity.X * 0.1f;
+				Main.gore[num25].velocity.Y = Main.gore[num25].velocity.Y * 0.1f - Player.velocity.Y * 0.05f;
+				num25 = Gore.NewGore(Player.GetSource_FromThis(), new Vector2(Player.position.X + (float)Player.width + 4f, Player.position.Y + (float)num22 - 16f), new Vector2(0f - Player.velocity.X, 0f - Player.velocity.Y), Main.rand.Next(11, 14));
+				Main.gore[num25].velocity.X = Main.gore[num25].velocity.X * 0.1f - Player.velocity.X * 0.1f;
+				Main.gore[num25].velocity.Y = Main.gore[num25].velocity.Y * 0.1f - Player.velocity.Y * 0.05f;
+				break;
+			case ExtraJumpType.Quack:
+				bool trash = true;
+				ModContent.GetInstance<QuackBottleJump>().OnStarted(Player, ref trash);
+				break;
+		}
+		if (mode != ExtraJumpType.Rocket && mode != ExtraJumpType.Fart)
+		{
+			SoundEngine.PlaySound(SoundID.DoubleJump, Player.position);
+		}
+	}
+	private void ShowExtraJumpVisuals(ExtraJumpType mode)
+	{
+		if (mode == ExtraJumpType.Sandstorm)
+		{
+			int num3 = Player.height;
+			if (Player.gravDir == -1f)
+				num3 = -6;
+
+			float num4 = (Player.jump / 75f + 1f) / 2f;
+			for (int i = 0; i < 3; i++)
+			{
+				int num5 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + num3 / 2), Player.width, 32, 124, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f, 150, default, 1f * num4);
+				Main.dust[num5].velocity *= 0.5f * num4;
+				Main.dust[num5].fadeIn = 1.5f * num4;
+			}
+
+			Player.sandStorm = true;
+			if (Player.miscCounter % 3 == 0)
+			{
+				int num6 = Gore.NewGore(Player.GetSource_FromThis(), new Vector2(Player.position.X + Player.width / 2 - 18f, Player.position.Y + num3 / 2), new Vector2(0f - Player.velocity.X, 0f - Player.velocity.Y), Main.rand.Next(220, 223), num4);
+				Main.gore[num6].velocity = Player.velocity * 0.3f * num4;
+				Main.gore[num6].alpha = 100;
+			}
+		}
+		else if (mode == ExtraJumpType.Blizzard)
+		{
+			int num12 = Player.height - 6;
+			if (Player.gravDir == -1f)
+				num12 = 6;
+
+			for (int k = 0; k < 2; k++)
+			{
+				int num13 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)num12), Player.width, 12, 76, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f);
+				Main.dust[num13].velocity *= 0.1f;
+				if (k == 0)
+					Main.dust[num13].velocity += Player.velocity * 0.03f;
+				else
+					Main.dust[num13].velocity -= Player.velocity * 0.03f;
+
+				Main.dust[num13].velocity -= Player.velocity * 0.1f;
+				Main.dust[num13].noGravity = true;
+				Main.dust[num13].noLight = true;
+			}
+
+			for (int l = 0; l < 3; l++)
+			{
+				int num14 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)num12), Player.width, 12, 76, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f);
+				Main.dust[num14].fadeIn = 1.5f;
+				Main.dust[num14].velocity *= 0.6f;
+				Main.dust[num14].velocity += Player.velocity * 0.8f;
+				Main.dust[num14].noGravity = true;
+				Main.dust[num14].noLight = true;
+			}
+
+			for (int m = 0; m < 3; m++)
+			{
+				int num15 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)num12), Player.width, 12, 76, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f);
+				Main.dust[num15].fadeIn = 1.5f;
+				Main.dust[num15].velocity *= 0.6f;
+				Main.dust[num15].velocity -= Player.velocity * 0.8f;
+				Main.dust[num15].noGravity = true;
+				Main.dust[num15].noLight = true;
+			}
+		}
+		else if (mode == ExtraJumpType.Rocket)
+		{
+			if (Player.velocity.Y < 0)
+			{
+				for (int x = 0; x < 5; x++)
+				{
+					int d = Dust.NewDust(new Vector2(Player.Center.X, Player.position.Y + Player.height), 10, 10,
+						DustID.Smoke);
+				}
+			}
+		}
+		else if (mode == ExtraJumpType.Fart)
+		{
+			int num7 = Player.height;
+			if (Player.gravDir == -1f)
+				num7 = -6;
+
+			int num8 = Dust.NewDust(new Vector2(Player.position.X - 4f, Player.position.Y + (float)num7), Player.width + 8, 4, 188, (0f - Player.velocity.X) * 0.5f, Player.velocity.Y * 0.5f, 100, default(Color), 1.5f);
+			Main.dust[num8].velocity.X = Main.dust[num8].velocity.X * 0.5f - Player.velocity.X * 0.1f;
+			Main.dust[num8].velocity.Y = Main.dust[num8].velocity.Y * 0.5f - Player.velocity.Y * 0.3f;
+			Main.dust[num8].velocity *= 0.5f;
+		}
+		else if (mode == ExtraJumpType.Tsunami)
+		{
+			int num9 = 1;
+			if (Player.jump > 0)
+				num9 = 2;
+
+			int num10 = Player.height - 6;
+			if (Player.gravDir == -1f)
+				num10 = 6;
+
+			for (int j = 0; j < num9; j++)
+			{
+				int num11 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)num10), Player.width, 12, 253, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f, 100, default(Color), 1.5f);
+				Main.dust[num11].scale += (float)Main.rand.Next(-5, 3) * 0.1f;
+				if (Player.jump <= 0)
+					Main.dust[num11].scale *= 0.8f;
+				else
+					Main.dust[num11].velocity -= Player.velocity / 5f;
+
+				Main.dust[num11].noGravity = true;
+				Vector2 vector = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
+				vector.Normalize();
+				vector *= (float)Main.rand.Next(81) * 0.1f;
+			}
+		}
+		else if (mode == ExtraJumpType.Cloud)
+		{
+			int num = Player.height;
+			if (Player.gravDir == -1f)
+				num = -6;
+
+			int num2 = Dust.NewDust(new Vector2(Player.position.X - 4f, Player.position.Y + (float)num), Player.width + 8, 4, 16, (0f - Player.velocity.X) * 0.5f, Player.velocity.Y * 0.5f, 100, default(Color), 1.5f);
+			Main.dust[num2].velocity.X = Main.dust[num2].velocity.X * 0.5f - Player.velocity.X * 0.1f;
+			Main.dust[num2].velocity.Y = Main.dust[num2].velocity.Y * 0.5f - Player.velocity.Y * 0.3f;
+		}
+	}
+
+	enum ExtraJumpType
+	{
+		Sandstorm = 0,
+		Blizzard = 1,
+		Rocket = 2,
+		Fart = 3,
+		Tsunami = 4,
+		Cloud = 5,
+		Quack = 6
+	}
+
+	public override void PostUpdateEquips()
     {
 		#region xanthophyte armor
 		if (!XanthophyteFossil)
@@ -1250,6 +1536,210 @@ public class AvalonPlayer : ModPlayer
         {
             Player.ClearBuff(ModContent.BuffType<AstralProjecting>());
         }
+
+		#region extra flight time extra jumps
+		if (Player.wingsLogic > 0 && !Player.empressBrooch)
+		{
+			/*
+			base jump:					7 tiles 
+			cloud in a bottle:			5 additional tiles (10)
+			blizzard in a bottle:		10 additional tiles (20)
+			sandstorm in a bottle:		18 additional tiles (36)
+			fart in a jar:				12 additional tiles (24)
+			tsunami in a bottle:		8 additional tiles (16)
+			rocket in a bottle:			20 additional tiles (40)
+			 */
+
+			int baseJumpHeight = 14;
+
+			int sandstormBottleHeight = 36;
+			int blizzardBottleHeight = 20;
+			int rocketBottleHeight = 40;
+			int fartJarHeight = 24;
+			int tsunamiBottleHeight = 16;
+			int cloudBottleHeight = 10;
+
+			int sandstormBlizzard = sandstormBottleHeight + blizzardBottleHeight;
+			int sandstormBlizzardRocket = sandstormBottleHeight + blizzardBottleHeight + rocketBottleHeight;
+			int sandstormBlizzardRocketFart = sandstormBottleHeight + blizzardBottleHeight + rocketBottleHeight + fartJarHeight;
+			int sandstormBlizzardRocketFartTsunami = sandstormBottleHeight + blizzardBottleHeight + rocketBottleHeight + fartJarHeight + tsunamiBottleHeight;
+			int all = sandstormBottleHeight + blizzardBottleHeight + rocketBottleHeight + fartJarHeight + tsunamiBottleHeight + cloudBottleHeight;
+
+			#region mega balloons
+			if (Player.HasItemInFunctionalAccessories(ModContent.ItemType<MegaBundleofBalloons>()) || Player.HasItemInFunctionalAccessories(ModContent.ItemType<MegaBundleofHorseshoeBalloons>()))
+			{
+				Player.GetJumpState<RocketBottleJump>().Disable();
+				Player.GetJumpState<TsunamiInABottleJump>().Disable();
+				Player.GetJumpState<FartInAJarJump>().Disable();
+				Player.GetJumpState<SandstormInABottleJump>().Disable();
+				Player.GetJumpState<BlizzardInABottleJump>().Disable();
+				Player.GetJumpState<CloudInABottleJump>().Disable();
+				Player.wingTimeMax += 146;
+
+				// sandstorm
+				if (Player.wingTime > Player.wingTimeMax - baseJumpHeight - sandstormBottleHeight && Player.wingTime <= Player.wingTimeMax - baseJumpHeight)
+				{
+					if (Player.wingTime == Player.wingTimeMax - baseJumpHeight)
+					{
+						OnStartedExtraJump(ExtraJumpType.Sandstorm);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Sandstorm);
+				}
+				// blizzard
+				if (Player.wingTime > Player.wingTimeMax - baseJumpHeight - sandstormBlizzard && Player.wingTime <= Player.wingTimeMax - baseJumpHeight - sandstormBottleHeight)
+				{
+					if (Player.wingTime == Player.wingTimeMax - baseJumpHeight - sandstormBottleHeight)
+					{
+						OnStartedExtraJump(ExtraJumpType.Blizzard);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Blizzard);
+				}
+				// rocket
+				if (Player.wingTime > Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocket && Player.wingTime <= Player.wingTimeMax - baseJumpHeight - sandstormBlizzard)
+				{
+					if (Player.wingTime == Player.wingTimeMax - baseJumpHeight - sandstormBlizzard)
+					{
+						OnStartedExtraJump(ExtraJumpType.Rocket);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Rocket);
+				}
+				// fart
+				if (Player.wingTime > Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocketFart && Player.wingTime <= Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocket)
+				{
+					if (Player.wingTime == Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocket)
+					{
+						OnStartedExtraJump(ExtraJumpType.Fart);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Fart);
+				}
+				// tsunami
+				if (Player.wingTime > Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocketFartTsunami && Player.wingTime <= Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocketFart)
+				{
+					if (Player.wingTime == Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocketFart)
+					{
+						OnStartedExtraJump(ExtraJumpType.Tsunami);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Tsunami);
+				}
+				// cloud
+				if (Player.wingTime > Player.wingTimeMax - baseJumpHeight - all && Player.wingTime <= Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocketFartTsunami)
+				{
+					if (Player.wingTime == Player.wingTimeMax - baseJumpHeight - sandstormBlizzardRocketFartTsunami)
+					{
+						OnStartedExtraJump(ExtraJumpType.Cloud);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Cloud);
+				}
+			}
+			#endregion
+			#region individual extra jumps
+			if (Player.GetJumpState<CloudInABottleJump>().Enabled)
+			{
+				Player.GetJumpState<CloudInABottleJump>().Disable();
+				Player.wingTimeMax += 10;
+
+				if (Player.wingTime > Player.wingTimeMax - 10 - baseJumpHeight && Player.wingTime <= Player.wingTimeMax - 10)
+				{
+					if (Player.wingTime == Player.wingTimeMax - 10)
+					{
+						OnStartedExtraJump(ExtraJumpType.Cloud);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Cloud);
+				}
+			}
+
+			if (Player.GetJumpState<BlizzardInABottleJump>().Enabled)
+			{
+				Player.GetJumpState<BlizzardInABottleJump>().Disable();
+				Player.wingTimeMax += 20;
+
+				if (Player.wingTime > Player.wingTimeMax - 20 - baseJumpHeight && Player.wingTime <= Player.wingTimeMax - 20)
+				{
+					if (Player.wingTime == Player.wingTimeMax - 20)
+					{
+						OnStartedExtraJump(ExtraJumpType.Blizzard);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Blizzard);
+				}
+			}
+
+			if (Player.GetJumpState<SandstormInABottleJump>().Enabled)
+			{
+				Player.GetJumpState<SandstormInABottleJump>().Disable();
+				Player.wingTimeMax += 36;
+
+				if (Player.wingTime > Player.wingTimeMax - 36 - baseJumpHeight && Player.wingTime <= Player.wingTimeMax - 36)
+				{
+					if (Player.wingTime == Player.wingTimeMax - 36)
+					{
+						OnStartedExtraJump(ExtraJumpType.Sandstorm);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Sandstorm);
+				}
+			}
+
+			if (Player.GetJumpState<TsunamiInABottleJump>().Enabled)
+			{
+				Player.GetJumpState<TsunamiInABottleJump>().Disable();
+				Player.wingTimeMax += 36;
+
+				if (Player.wingTime > Player.wingTimeMax - 16 - baseJumpHeight && Player.wingTime <= Player.wingTimeMax - 16)
+				{
+					if (Player.wingTime == Player.wingTimeMax - 16)
+					{
+						OnStartedExtraJump(ExtraJumpType.Tsunami);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Tsunami);
+				}
+			}
+
+			if (Player.GetJumpState<FartInAJarJump>().Enabled)
+			{
+				Player.GetJumpState<FartInAJarJump>().Disable();
+				Player.wingTimeMax += 36;
+
+				if (Player.wingTime > Player.wingTimeMax - 16 - baseJumpHeight && Player.wingTime <= Player.wingTimeMax - 16)
+				{
+					if (Player.wingTime == Player.wingTimeMax - 16)
+					{
+						OnStartedExtraJump(ExtraJumpType.Tsunami);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Tsunami);
+				}
+			}
+
+			if (Player.GetJumpState<RocketBottleJump>().Enabled)
+			{
+				Player.GetJumpState<RocketBottleJump>().Disable();
+				Player.wingTimeMax += 40;
+
+				if (Player.wingTime > Player.wingTimeMax - 40 - baseJumpHeight && Player.wingTime <= Player.wingTimeMax - 40)
+				{
+					if (Player.wingTime == Player.wingTimeMax - 40)
+					{
+						OnStartedExtraJump(ExtraJumpType.Tsunami);
+					}
+					ShowExtraJumpVisuals(ExtraJumpType.Tsunami);
+				}
+			}
+
+			if (Player.GetJumpState<QuackBottleJump>().Enabled)
+			{
+				Player.GetJumpState<QuackBottleJump>().Disable();
+				Player.wingTimeMax += 12;
+
+				if (Player.wingTime > Player.wingTimeMax - 12 - baseJumpHeight && Player.wingTime <= Player.wingTimeMax - 12)
+				{
+					if (Player.wingTime == Player.wingTimeMax - 12)
+					{
+						OnStartedExtraJump(ExtraJumpType.Quack);
+					}
+					//ShowExtraJumpVisuals(ExtraJumpType.Quack);
+				}
+			}
+			#endregion
+		}
+		#endregion
 
 		#region royal gel avalon fix
 		// doesn't work for modded accessory slots :pensive:

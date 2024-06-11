@@ -48,7 +48,7 @@ public class QuackBottleJump : ExtraJump
     {
         // Use this hook to set the duration of the extra jump
         // The XML summary for this hook mentions the values used by the vanilla extra jumps
-        return 0f;
+        return 1f;
     }
 
     public override void UpdateHorizontalSpeeds(Player player)
