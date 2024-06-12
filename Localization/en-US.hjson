@@ -7065,6 +7065,7 @@ Mods: {
 				Tooltip:
 					'''
 					17% increased summon damage
+					Increases the knockback of your minions
 					Increases your max number of minions by 1
 					'''
 			}

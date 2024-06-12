@@ -25,7 +25,7 @@ public class Sandstormer : ModProjectile
         {
             if (!Terraria.GameContent.Events.Sandstorm.Happening)
 			{
-				Main.windSpeedCurrent = 2f * (Main.rand.NextBool() ? -1 : 1);
+				Main.windSpeedCurrent = 20f * (Main.rand.NextBool() ? -1 : 1);
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					Terraria.GameContent.Events.Sandstorm.StartSandstorm();

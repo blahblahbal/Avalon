@@ -100,6 +100,10 @@ public abstract class ModHerb : ModTile
             }
             yield return new Item(HerbDrop, dropItemStack);
         }
+		else if (stage == PlantStage.Mature)
+		{
+			yield return new Item(HerbDrop, 1);
+		}
     }
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     {

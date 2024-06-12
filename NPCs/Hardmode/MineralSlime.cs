@@ -226,5 +226,5 @@ public class MineralSlime : ModNPC
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
         spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon && Main.hardMode
-            ? 0.2f : 0f;
+            ? 0.05f : 0f;
 }

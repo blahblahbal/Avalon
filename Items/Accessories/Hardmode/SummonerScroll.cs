@@ -25,6 +25,7 @@ public class SummonerScroll : ModItem
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetDamage(DamageClass.Summon) += 0.17f;
+		player.GetKnockback(DamageClass.Summon) += 2;
         player.maxMinions++;
     }
 }

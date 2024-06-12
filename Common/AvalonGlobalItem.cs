@@ -141,9 +141,14 @@ public class AvalonGlobalItem : GlobalItem
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<HiddenBlade>()] = ModContent.ItemType<AmmoMagazine>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AmmoMagazine>()] = ModContent.ItemType<HiddenBlade>();
 
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<GreekExtinguisher>()] = ModContent.ItemType<GoldenShield>();
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<GoldenShield>()] = ModContent.ItemType<SurgicalMask>();
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<SurgicalMask>()] = ModContent.ItemType<GreekExtinguisher>();
+        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<GreekExtinguisher>()] = ModContent.ItemType<SixHundredWattLightbulb>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<SixHundredWattLightbulb>()] = ModContent.ItemType<GreekExtinguisher>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Windshield>()] = ModContent.ItemType<SurgicalMask>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<SurgicalMask>()] = ModContent.ItemType<Windshield>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<GoldenShield>()] = ModContent.ItemType<RubberBoot>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<RubberBoot>()] = ModContent.ItemType<GoldenShield>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<OxygenTank>()] = ModContent.ItemType<Vortex>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Vortex>()] = ModContent.ItemType<OxygenTank>();
 
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<RhodiumHeadgear>()] = ModContent.ItemType<AncientTitaniumHeadgear>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientTitaniumHeadgear>()] = ModContent.ItemType<RhodiumHeadgear>();
