@@ -9,7 +9,6 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent.Drawing;
 using Avalon.Particles;
 
 namespace Avalon.Tiles.Furniture
@@ -84,35 +83,43 @@ namespace Avalon.Tiles.Furniture
             return true;
         }
 
+		int timer;
         public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
         {
-			if (Main.rand.NextBool(40) && Main.tile[i, j].TileFrameX < 66 && Main.hasFocus)
+			if (timer > 0)
 			{
+				timer--;
+			}
+			if (Main.rand.NextBool(5) && Main.tile[i, j].TileFrameX < 66 && Main.hasFocus && timer < 25)
+			{
+				timer += 26;
 				//ParticleOrchestraSettings pos = new ParticleOrchestraSettings();
 				//pos.PositionInWorld = new Vector2(i, j) * 16;
 				//pos.MovementVector = new Vector2(Main.rand.Next(-2, 3), Main.rand.Next(1, 4));
 				////pos.IndexOfPlayerWhoInvokedThis = 255;
 				//ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.SilverBulletSparkle, pos);
 				ParticleSystem.AddParticle(new Particles.StarTorch(),
-					new Vector2(i, j) * 16 + new Vector2(Main.rand.Next(5, 16), Main.rand.Next(-1, 4)), // position
-					new Vector2(Main.rand.NextFloat(-0.2f, 0.21f), Main.rand.NextFloat(0.3f, 0.5f)), // velocity
-					Color.LightYellow, // color
-					scale: 0.12f); // scale
+					new Vector2(i, j) * 16 + new Vector2(Main.rand.Next(4, 13), Main.rand.Next(2, 6)), // position
+					new Vector2(Main.rand.NextFloat(-0.02f, 0.03f), Main.rand.NextFloat(-0.4f, -0.5f)), // velocity
+					Color.White, // color
+					default,
+					Main.rand.NextFromList(Main.rand.NextFloat(-0.25f, -0.15f), Main.rand.NextFloat(0.15f, 0.25f)),
+					scale: Main.rand.NextFloat(0.11f, 0.17f)); // scale
 			}
-            if (Main.rand.NextBool(40) && Main.tile[i, j].TileFrameX < 66)
-            {
-                Dust d = Dust.NewDustDirect(new Vector2(i * 16, j * 16) + new Vector2(6, -6), 0, 0, dustType, 0, 0, 100, default, Main.rand.NextFloat(0.5f, 1));
-                if (!Main.rand.NextBool(3))
-                {
-                    d.noGravity = NoDustGravity;
-                }
-                d.noLightEmittence = true;
-                d.velocity *= 0.3f;
-                d.velocity.Y -= 1.5f;
-                d.noGravity = false;
-            }
-        }
-        public override void NumDust(int i, int j, bool fail, ref int num)
+			//if (Main.rand.NextBool(40) && Main.tile[i, j].TileFrameX < 66)
+			//{
+			//	Dust d = Dust.NewDustDirect(new Vector2(i * 16, j * 16) + new Vector2(6, -6), 0, 0, dustType, 0, 0, 100, default, Main.rand.NextFloat(0.5f, 1));
+			//	if (!Main.rand.NextBool(3))
+			//	{
+			//		d.noGravity = NoDustGravity;
+			//	}
+			//	d.noLightEmittence = true;
+			//	d.velocity *= 0.3f;
+			//	d.velocity.Y -= 1.5f;
+			//	d.noGravity = false;
+			//}
+		}
+		public override void NumDust(int i, int j, bool fail, ref int num)
         {
             num = Main.rand.Next(10, 15);
         }
