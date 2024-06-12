@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Hardmode;
 
+[AutoloadEquip(EquipType.Face)]
 class FaceShield : ModItem
 {
     public override void SetDefaults()
