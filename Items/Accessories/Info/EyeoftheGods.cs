@@ -43,7 +43,7 @@ class EyeoftheGodsPlayer : ModPlayer
         {
             NPCIndex = target.whoAmI;
             target.GetGlobalNPC<AvalonGlobalNPCInstance>().ShowStats = true;
-            DisplayTimer = 240;
+            DisplayTimer = 2400;
         }
     }
     public override void PostUpdate()

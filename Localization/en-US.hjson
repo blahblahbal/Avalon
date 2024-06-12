@@ -9035,6 +9035,15 @@ Mods: {
 				Tooltip: ""
 				DisplayName: Sandstormer
 			}
+
+			CrystalSkull: {
+				DisplayName: Crystal Skull
+				Tooltip:
+					'''
+					The wearer emits a lot of light
+					Summons light spikes when damaged
+					'''
+			}
 		}
 
 		InfoDisplays: {
@@ -9299,6 +9308,7 @@ Mods: {
 			SpiritPoppy.DisplayName: Spirit Poppy
 			Sandstormer.DisplayName: Sandstormer
 			BeeBolt.DisplayName: Bee Bolt
+			CrystalSkullProj.DisplayName: Crystal Skull Light Spike
 		}
 
 		NPCs: {

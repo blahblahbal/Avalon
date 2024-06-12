@@ -12,6 +12,7 @@ using System;
 using Terraria.UI;
 using Avalon.Items.Consumables;
 using Terraria.Localization;
+using ThoriumMod.Tiles;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -94,6 +95,10 @@ public class CalculatorSpectacles : ModItem
 public class CalcSpecInfoDisplay : InfoDisplay
 {
 	public override string HoverTexture => Texture + "_Hover";
+	public static int BarValue = -1;
+	public static int OreRemainder = -1;
+	public static int BarType = -1;
+	public static int Denominator = -1;
 	public override bool Active()
 	{
 		return Main.LocalPlayer.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay;
@@ -101,7 +106,24 @@ public class CalcSpecInfoDisplay : InfoDisplay
 
 	public override string DisplayValue(ref Color displayColor, ref Color displayShadowColor)
 	{
-		return Language.GetTextValue("Mods.Avalon.InfoDisplays.CalcSpec");
+		if (BarType > -1 && BarValue > -1)
+		{
+			string barName = Lang.GetItemNameValue(BarType);
+			string barAmount = BarValue.ToString();
+
+			string all = barName + ": " + barAmount;
+
+			if (OreRemainder > 0 && Denominator > 0)
+			{
+				all += " " + OreRemainder + "/" + Denominator;
+			}
+			return all;
+		}
+		else
+		{
+			displayColor = InactiveInfoTextColor;
+			return Language.GetTextValue("Mods.Avalon.InfoDisplays.NoInfo");
+		}
 	}
 }
 
@@ -312,11 +334,13 @@ internal class CalcSpec : UIState
 							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
 						}
 						else return;
-						
-
 					}
 				}
 
+				CalcSpecInfoDisplay.BarType = barType;
+				CalcSpecInfoDisplay.BarValue = bars;
+				CalcSpecInfoDisplay.OreRemainder = remainder;
+				CalcSpecInfoDisplay.Denominator = remainderDenominator;
 
 				string text = bars.ToString();
 				int ypos = -40;
@@ -357,6 +381,13 @@ internal class CalcSpec : UIState
 				// draw the sprite
 				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White);
 				// ⅓
+			}
+			else
+			{
+				CalcSpecInfoDisplay.BarType = -1;
+				CalcSpecInfoDisplay.BarValue = -1;
+				CalcSpecInfoDisplay.OreRemainder = -1;
+				CalcSpecInfoDisplay.Denominator = -1;
 			}
 		}
 	}

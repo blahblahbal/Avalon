@@ -5,6 +5,7 @@ using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -49,67 +50,72 @@ class StarTorch : ModItem
         if (Main.myPlayer == player.whoAmI && Main.mouseLeft)
         {
             Point tilePos = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-            if (Main.tile[tilePos.X, tilePos.Y].HasTile)
-            {
-                return null;
-            }
-            else
-            {
-                if ((!Main.tile[tilePos.X, tilePos.Y - 1].HasTile || !Main.tileSolid[Main.tile[tilePos.X, tilePos.Y - 1].TileType]) &&
-                    (!Main.tile[tilePos.X - 1, tilePos.Y].HasTile || !Main.tileSolid[Main.tile[tilePos.X - 1, tilePos.Y].TileType]) &&
-                    (!Main.tile[tilePos.X, tilePos.Y + 1].HasTile || !Main.tileSolid[Main.tile[tilePos.X, tilePos.Y + 1].TileType]) &&
-                    (!Main.tile[tilePos.X + 1, tilePos.Y].HasTile || !Main.tileSolid[Main.tile[tilePos.X + 1, tilePos.Y].TileType]))
-                {
-                    Terraria.Tile t = Main.tile[tilePos.X, tilePos.Y];
-                    t.HasTile = true;
-                    t.TileType = (ushort)Item.createTile;
-                    t.TileFrameX = 0;
-					if (Main.netMode != NetmodeID.SinglePlayer)
+			bool inrange = player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple);
+			if (inrange)
+			{
+
+				if (Main.tile[tilePos.X, tilePos.Y].HasTile)
+				{
+					return null;
+				}
+				else
+				{
+					if ((!Main.tile[tilePos.X, tilePos.Y - 1].HasTile || !Main.tileSolid[Main.tile[tilePos.X, tilePos.Y - 1].TileType]) &&
+						(!Main.tile[tilePos.X - 1, tilePos.Y].HasTile || !Main.tileSolid[Main.tile[tilePos.X - 1, tilePos.Y].TileType]) &&
+						(!Main.tile[tilePos.X, tilePos.Y + 1].HasTile || !Main.tileSolid[Main.tile[tilePos.X, tilePos.Y + 1].TileType]) &&
+						(!Main.tile[tilePos.X + 1, tilePos.Y].HasTile || !Main.tileSolid[Main.tile[tilePos.X + 1, tilePos.Y].TileType]))
 					{
-						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+						Terraria.Tile t = Main.tile[tilePos.X, tilePos.Y];
+						t.HasTile = true;
+						t.TileType = (ushort)Item.createTile;
+						t.TileFrameX = 0;
+						if (Main.netMode != NetmodeID.SinglePlayer)
+						{
+							NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+						}
+						SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
+						return true;
 					}
-                    SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
-                    return true;
-                }
-                else if (Main.tile[tilePos.X, tilePos.Y + 1].HasTile && Main.tileSolid[Main.tile[tilePos.X, tilePos.Y + 1].TileType])
-                {
-                    Terraria.Tile t = Main.tile[tilePos.X, tilePos.Y + 1];
-                    t.HasTile = true;
-                    t.TileType = (ushort)Item.createTile;
-                    t.TileFrameX = 0;
-					if (Main.netMode != NetmodeID.SinglePlayer)
+					else if (Main.tile[tilePos.X, tilePos.Y + 1].HasTile && Main.tileSolid[Main.tile[tilePos.X, tilePos.Y + 1].TileType])
 					{
-						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+						Terraria.Tile t = Main.tile[tilePos.X, tilePos.Y + 1];
+						t.HasTile = true;
+						t.TileType = (ushort)Item.createTile;
+						t.TileFrameX = 0;
+						if (Main.netMode != NetmodeID.SinglePlayer)
+						{
+							NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+						}
+						SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
+						return true;
 					}
-					SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
-                    return true;
-                }
-                else if (Main.tile[tilePos.X - 1, tilePos.Y].HasTile && Main.tileSolid[Main.tile[tilePos.X - 1, tilePos.Y].TileType])
-                {
-                    Terraria.Tile t = Main.tile[tilePos.X - 1, tilePos.Y];
-                    t.HasTile = true;
-                    t.TileType = (ushort)Item.createTile;
-                    t.TileFrameX = 22;
-					if (Main.netMode != NetmodeID.SinglePlayer)
+					else if (Main.tile[tilePos.X - 1, tilePos.Y].HasTile && Main.tileSolid[Main.tile[tilePos.X - 1, tilePos.Y].TileType])
 					{
-						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+						Terraria.Tile t = Main.tile[tilePos.X - 1, tilePos.Y];
+						t.HasTile = true;
+						t.TileType = (ushort)Item.createTile;
+						t.TileFrameX = 22;
+						if (Main.netMode != NetmodeID.SinglePlayer)
+						{
+							NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+						}
+						SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
+						return true;
 					}
-					SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
-                    return true;
-                }
-                else if (Main.tile[tilePos.X + 1, tilePos.Y].HasTile && Main.tileSolid[Main.tile[tilePos.X + 1, tilePos.Y].TileType])
-                {
-                    Terraria.Tile t = Main.tile[tilePos.X + 1, tilePos.Y];
-                    t.HasTile = true;
-                    t.TileType = (ushort)Item.createTile;
-                    t.TileFrameX = 44;
-					if (Main.netMode != NetmodeID.SinglePlayer)
+					else if (Main.tile[tilePos.X + 1, tilePos.Y].HasTile && Main.tileSolid[Main.tile[tilePos.X + 1, tilePos.Y].TileType])
 					{
-						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+						Terraria.Tile t = Main.tile[tilePos.X + 1, tilePos.Y];
+						t.HasTile = true;
+						t.TileType = (ushort)Item.createTile;
+						t.TileFrameX = 44;
+						if (Main.netMode != NetmodeID.SinglePlayer)
+						{
+							NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePos.X, tilePos.Y, Item.createTile);
+						}
+						SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
+						return true;
 					}
-					SoundEngine.PlaySound(SoundID.Dig, tilePos.ToWorldCoordinates());
-                    return true;
-                }
+				}
             }
         }
         return base.UseItem(player);

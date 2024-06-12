@@ -2162,6 +2162,22 @@ public class AvalonPlayer : ModPlayer
             });
         }
 
+		if (CrystalSkull)
+		{
+			Vector2 vector9 = Player.Center + new Vector2(0, -50);
+			int num27 = (npc.Center.X > Player.Center.X) ? 1 : 0;
+			float num28 = 6f;
+
+			float num29 = 1f / num28;
+			for (float num30 = 0f; num30 < 1f; num30 += num29)
+			{
+				float num31 = (num30 + num29 * 0.5f + /*(float)num26 **/ num29 * 0.5f) % 1f;
+				float ai = (float)Math.PI * 2f * (num31 + (float)num27);
+				if (Main.netMode != 1)
+					Projectile.NewProjectile(Player.GetSource_FromThis(), vector9, Vector2.Zero, ModContent.ProjectileType<CrystalSkullProj>(), 50, 0f, Main.myPlayer, ai, Player.whoAmI);
+			}
+		}
+
         //if (!npc.friendly && npc.aiStyle == 9)
         //{
         //    if (Main.rand.NextBool(4) || Player.HasItemInArmor(ModContent.ItemType<ReflexShield>()))
