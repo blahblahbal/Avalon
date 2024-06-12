@@ -61,43 +61,49 @@ class InertiaBoots : ModItem
         player.wingTime = 1000;
         player.empressBrooch = true;
         player.GetModPlayer<AvalonPlayer>().InertiaBoots = true;
-        //if (player.controlUp && player.controlJump)
-        //{
-        //    player.velocity.Y = player.velocity.Y - 0.3f * player.gravDir;
-        //    if (player.gravDir == 1f)
-        //    {
-        //        if (player.velocity.Y > 0f)
-        //        {
-        //            player.velocity.Y = player.velocity.Y - 1f;
-        //        }
-        //        else if (player.velocity.Y > -Player.jumpSpeed)
-        //        {
-        //            player.velocity.Y = player.velocity.Y - 0.2f;
-        //        }
-        //        if (player.velocity.Y < -Player.jumpSpeed * 3f)
-        //        {
-        //            player.velocity.Y = -Player.jumpSpeed * 3f;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (player.velocity.Y < 0f)
-        //        {
-        //            player.velocity.Y = player.velocity.Y + 1f;
-        //        }
-        //        else if (player.velocity.Y < Player.jumpSpeed)
-        //        {
-        //            player.velocity.Y = player.velocity.Y + 0.2f;
-        //        }
-        //        if (player.velocity.Y > Player.jumpSpeed * 3f)
-        //        {
-        //            player.velocity.Y = Player.jumpSpeed * 3f;
-        //        }
-        //    }
-        //}
+		player.wingsLogic = 45;
+		if (!player.mount.Active && player.controlDown && !player.controlJump && player.velocity.Y != 0f)
+		{
+			player.velocity.Y += 0.6f * player.gravDir;
+			player.maxFallSpeed = 20f;
+		}
+		//if (player.controlUp && player.controlJump)
+		//{
+		//    player.velocity.Y = player.velocity.Y - 0.3f * player.gravDir;
+		//    if (player.gravDir == 1f)
+		//    {
+		//        if (player.velocity.Y > 0f)
+		//        {
+		//            player.velocity.Y = player.velocity.Y - 1f;
+		//        }
+		//        else if (player.velocity.Y > -Player.jumpSpeed)
+		//        {
+		//            player.velocity.Y = player.velocity.Y - 0.2f;
+		//        }
+		//        if (player.velocity.Y < -Player.jumpSpeed * 3f)
+		//        {
+		//            player.velocity.Y = -Player.jumpSpeed * 3f;
+		//        }
+		//    }
+		//    else
+		//    {
+		//        if (player.velocity.Y < 0f)
+		//        {
+		//            player.velocity.Y = player.velocity.Y + 1f;
+		//        }
+		//        else if (player.velocity.Y < Player.jumpSpeed)
+		//        {
+		//            player.velocity.Y = player.velocity.Y + 0.2f;
+		//        }
+		//        if (player.velocity.Y > Player.jumpSpeed * 3f)
+		//        {
+		//            player.velocity.Y = Player.jumpSpeed * 3f;
+		//        }
+		//    }
+		//}
 
-        // ADD BACK AFTER CAESIUM ADDED
-        if (!player.vortexStealthActive && !player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
+		// ADD BACK AFTER CAESIUM ADDED
+		if (!player.vortexStealthActive && !player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
         {
             if (player.controlLeft)
             {

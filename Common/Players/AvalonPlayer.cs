@@ -693,9 +693,9 @@ public class AvalonPlayer : ModPlayer
             SoundEngine.PlaySound(s, new Vector2((tileCoordsLeft.X + 1) * 16, tileCoordsLeft.Y * 16));
             WorldGen.TreeGrowFX(xpos + 1, ypos + 3, 2, ModContent.GoreType<PlatformLeafLeaf>(), true);
         }
-        #endregion
+		#endregion
 
-        OilBottleTimer--;
+		OilBottleTimer--;
         if (OilBottleTimer < 0) OilBottleTimer = 0;
 
         #region achievements (all large gems, hellevator)

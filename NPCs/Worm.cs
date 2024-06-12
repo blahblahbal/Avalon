@@ -109,7 +109,9 @@ namespace Avalon.NPCs
 				}
 			}
 			else
+			{
 				BodyTailAI();
+			}
 
 			return true;
 		}
@@ -176,7 +178,7 @@ namespace Avalon.NPCs
 		/// Override this method to use custom body-spawning code.<br/>
 		/// This method only runs if <see cref="HasCustomBodySegments"/> returns <see langword="true"/>.
 		/// </summary>
-		/// <param name="segmentCount">How many body segements are expected to be spawned</param>
+		/// <param name="segmentCount">How many body segments are expected to be spawned</param>
 		/// <returns>The whoAmI of the most-recently spawned NPC, which is the result of calling <see cref="NPC.NewNPC(Terraria.DataStructures.IEntitySource, int, int, int, int, float, float, float, float, int)"/></returns>
 		public virtual int SpawnBodySegments(int segmentCount)
 		{
@@ -266,22 +268,18 @@ namespace Avalon.NPCs
 
 					// Ensure that all of the segments could spawn.  If they could not, despawn the worm entirely
 					int count = 0;
-					for (int i = 0; i < Main.maxNPCs; i++)
+					foreach (var n in Main.ActiveNPCs)
 					{
-						NPC n = Main.npc[i];
-
-						if (n.active && (n.type == Type || n.type == BodyType || n.type == TailType) && n.realLife == NPC.whoAmI)
+						if ((n.type == Type || n.type == BodyType || n.type == TailType) && n.realLife == NPC.whoAmI)
 							count++;
 					}
 
 					if (count != randomWormLength)
 					{
 						// Unable to spawn all of the segments... kill the worm
-						for (int i = 0; i < Main.maxNPCs; i++)
+						foreach (var n in Main.ActiveNPCs)
 						{
-							NPC n = Main.npc[i];
-
-							if (n.active && (n.type == Type || n.type == BodyType || n.type == TailType) && n.realLife == NPC.whoAmI)
+							if ((n.type == Type || n.type == BodyType || n.type == TailType) && n.realLife == NPC.whoAmI)
 							{
 								n.active = false;
 								n.netUpdate = true;
@@ -352,15 +350,13 @@ namespace Avalon.NPCs
 
 				bool tooFar = true;
 
-				for (int i = 0; i < Main.maxPlayers; i++)
+				foreach (var player in Main.ActivePlayers)
 				{
 					Rectangle areaCheck;
 
-					Player player = Main.player[i];
-
 					if (ForcedTargetPosition is Vector2 target)
 						areaCheck = new Rectangle((int)target.X - maxDistance, (int)target.Y - maxDistance, maxDistance * 2, maxDistance * 2);
-					else if (player.active && !player.dead && !player.ghost)
+					else if (!player.dead && !player.ghost)
 						areaCheck = new Rectangle((int)player.position.X - maxDistance, (int)player.position.Y - maxDistance, maxDistance * 2, maxDistance * 2);
 					else
 						continue;  // Not a valid player
@@ -431,7 +427,7 @@ namespace Avalon.NPCs
 			if (NPC.velocity.Y > speed)
 				NPC.velocity.Y = speed;
 
-			// The following behaviour mimicks vanilla worm movement
+			// The following behavior mimics vanilla worm movement
 			if (Math.Abs(NPC.velocity.X) + Math.Abs(NPC.velocity.Y) < speed * 0.4f)
 			{
 				// Velocity is sufficiently fast, but not too fast
@@ -597,7 +593,7 @@ namespace Avalon.NPCs
 			NPC following = worm.NPC.ai[1] >= Main.maxNPCs ? null : worm.FollowingNPC;
 			if (Main.netMode != NetmodeID.MultiplayerClient)
 			{
-				// Some of these conditions are possble if the body/tail segment was spawned individually
+				// Some of these conditions are possible if the body/tail segment was spawned individually
 				// Kill the segment if the segment NPC it's following is no longer valid
 				if (following is null || !following.active || following.friendly || following.townNPC || following.lifeMax <= 5)
 				{

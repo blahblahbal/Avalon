@@ -7469,7 +7469,7 @@ Mods: {
 			}
 
 			BundleofBalloons: {
-				DisplayName: Bundle of Balloons
+				DisplayName: Bundle of Unusual Balloons
 				Tooltip:
 					'''
 					Allows the holder to quadruple jump

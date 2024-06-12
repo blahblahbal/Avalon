@@ -70,7 +70,7 @@ public class PyrasiteHead : WormHead
     {
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("PyrasiteHead").Type, 1f);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, ModContent.GoreType<Gores.PyrasiteHead>(), 1f);
             for (int i = 0; i < 10; i++)
             {
                 Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
@@ -123,13 +123,13 @@ public class PyrasiteHead : WormHead
         }
         public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
         {
-            return false;
+			return false;
         }
         public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
             {
-                Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("PyrasiteBody").Type, 1f);
+                Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, ModContent.GoreType<Gores.PyrasiteBody>(), 1f);
                 for(int i = 0; i < 10; i++) 
                 {
                     Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2),Main.rand.NextFloat(-2, 2),128,default,Main.rand.NextFloat(1,1.5f));
@@ -166,7 +166,7 @@ public class PyrasiteTail : WormTail
     {
         if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
         {
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("PyrasiteTail").Type, 1f);
+            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, ModContent.GoreType<Gores.PyrasiteTail>(), 1f);
             for (int i = 0; i < 10; i++)
             {
                 Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
