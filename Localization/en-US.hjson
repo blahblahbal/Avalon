@@ -9045,6 +9045,21 @@ Mods: {
 					Summons light spikes when damaged
 					'''
 			}
+
+			HadirosBodyplate: {
+				DisplayName: Hadiros' Bodyplate
+				Tooltip: ""
+			}
+
+			HadirosCrownmet: {
+				DisplayName: Hadiros' Crownmet
+				Tooltip: ""
+			}
+
+			HadirosGreaves: {
+				DisplayName: Hadiros' Greaves
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
