@@ -9068,6 +9068,22 @@ Mods: {
 				Tooltip: ""
 			}
 
+			HadirosBodyplate: {
+				DisplayName: Hadiros' Bodyplate
+				Tooltip: ""
+			}
+
+			HadirosCrownmet: {
+				DisplayName: Hadiros' Crownmet
+				Tooltip: ""
+			}
+
+			HadirosGreaves: {
+				DisplayName: Hadiros' Greaves
+				Tooltip: ""
+			}
+		}
+
 			XanthophyteWarhammer: {
 				DisplayName: Xanthophyte Warhammer
 				Tooltip: ""
