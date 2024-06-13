@@ -64,8 +64,9 @@ class TroxiniumHeadpiece : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Troxinium.Ranged");
-        player.GetModPlayer<AvalonPlayer>().HyperRanged = true;
+		player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Troxinium", Language.GetTextValue("Mods.Avalon.RangedText"));
+		//player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Troxinium.Ranged");
+		player.GetModPlayer<AvalonPlayer>().HyperRanged = true;
     }
 
     public override void UpdateEquip(Player player)

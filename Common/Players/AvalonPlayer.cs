@@ -1773,10 +1773,14 @@ public class AvalonPlayer : ModPlayer
         {
             Player.pickSpeed -= 0.75f;
         }
-        #endregion
+		else if (Player.HeldItem.type == ModContent.ItemType<XanthophytePickaxe>())
+		{
+			Player.pickSpeed -= 0.05f;
+		}
+		#endregion
 
-        #region double tap keys
-        for (int m = 0; m < 3; m++)
+		#region double tap keys
+		for (int m = 0; m < 3; m++)
         {
             doubleTapTimer[m]--;
             if (doubleTapTimer[m] < 0)

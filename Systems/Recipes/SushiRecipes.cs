@@ -84,11 +84,6 @@ public static class SushiRecipes
         Recipe.Create(ModContent.ItemType<RodofCoalescence>()).AddIngredient(imk.Find<ModItem>("DungeonToken").Type, 75).AddTile(TileID.TinkerersWorkbench).DisableDecraft().Register();
         #endregion Dungeon
 
-        #region Biome Keys
-        Recipe.Create(ModContent.ItemType<ContagionKey>()).AddIngredient(imk.Find<ModItem>("BiomeKey").Type).AddIngredient(ModContent.ItemType<BacciliteBar>(), 50).AddTile(TileID.TinkerersWorkbench).DisableDecraft().Register();
-        Recipe.Create(imk.Find<ModItem>("BiomeKey").Type).AddIngredient(ModContent.ItemType<ContagionKey>()).AddIngredient(ItemID.GreenSolution, 10).AddTile(TileID.TinkerersWorkbench).DisableDecraft().Register();
-		#endregion Biome Keys
-
 		#region immunity accessories
 		Recipe.Create(ModContent.ItemType<GoldenShield>()).AddIngredient(imk.Find<ModItem>("PostMechanicalBossLootToken").Type, 20).AddTile(TileID.TinkerersWorkbench).DisableDecraft().Register();
 		Recipe.Create(ModContent.ItemType<GreekExtinguisher>()).AddIngredient(imk.Find<ModItem>("PostMechanicalBossLootToken").Type, 20).AddTile(TileID.TinkerersWorkbench).DisableDecraft().Register();

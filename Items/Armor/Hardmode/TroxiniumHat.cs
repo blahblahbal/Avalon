@@ -64,7 +64,8 @@ class TroxiniumHat : ModItem
 
     public override void UpdateArmorSet(Player player)
     {
-        player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Troxinium.Magic");
+		player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Troxinium", Language.GetTextValue("Mods.Avalon.MagicText"));
+		//player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Troxinium.Magic");
         player.GetModPlayer<AvalonPlayer>().HyperMagic = true;
     }
 

@@ -351,7 +351,7 @@ Mods: {
 			Blaze: This hellish creature is quite vulnerable to water. Thankfully, no water exists in its natural environment, so it thrives.
 			ContagionMimic: Sometimes, when a Mimic falls ill, instead of recovering fully, they turn into this monster. They can be birthed from ordinary chests by force.
 			ContaminatedGhoul: Ghouls plagued by the Contagion slobber infectious drool that weakens their victim's immune system.
-			Cougher: Coughers fly around seeking prey to coat in their poisonous breath, Their breath contains a pathogen able to completely destroy their target's immune system making it easier for the contagion to infect.
+			Cougher: Coughers fly around seeking prey to coat in their poisonous breath. Their breath contains a pathogen able to completely destroy their target's immune system, making it easier for the Contagion to infect.
 			EctoHand: They reach out, as if to touch their lost life. Or maybe they just want to give you a high-five?
 			Gargoyle: Made of stone, they resemble mythical creatures. They guard the Hellcastle and its treasures.
 			GreenPigron: This elusive dragon-pig hybrid has excellent stealth capabilities despite its rotund figure. It is uncertain how they came to exist.
@@ -383,7 +383,7 @@ Mods: {
 			MineralSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
-			RedArowana: It's just a fish.
+			RedArowana: Normally these fish are quite passive, but something in the Tropics causes them to become aggressive. What makes them behave this way is unknown.
 		}
 
 		Keybinds: {
@@ -496,6 +496,7 @@ Mods: {
 			Duratanium: Defense is increased by 12 while you are affected by a debuff
 			Naquadah: Nearby enemies take damage when you are damaged
 			Flesh: Hungry minions can be summoned up to 8
+			Cordyceps: 9% increased summon damage
 
 			Troxinium: {
 				Magic:
@@ -7479,11 +7480,12 @@ Mods: {
 			}
 
 			BundleofHorseshoeBalloons: {
-				DisplayName: Bundle of Horseshoe Balloons
+				DisplayName: Bundle of Unusual Horseshoe Balloons
 				Tooltip:
 					'''
 					Allows the holder to quadruple jump
 					Increases jump height and negates fall damage
+					Converts extra jumps to flight time if wearing wings
 					'''
 			}
 
@@ -9045,6 +9047,46 @@ Mods: {
 					Summons light spikes when damaged
 					'''
 			}
+
+			XanthophyteChainsaw: {
+				DisplayName: Xanthophyte Chainsaw
+				Tooltip: ""
+			}
+
+			XanthophyteDrill: {
+				DisplayName: Xanthophyte Drill
+				Tooltip: ""
+			}
+
+			XanthophyteGreataxe: {
+				DisplayName: Xanthophyte Greataxe
+				Tooltip: ""
+			}
+
+			XanthophytePickaxe: {
+				DisplayName: Xanthophyte Pickaxe
+				Tooltip: ""
+			}
+
+			XanthophyteWarhammer: {
+				DisplayName: Xanthophyte Warhammer
+				Tooltip: ""
+			}
+
+			XanthophyteClub: {
+				DisplayName: Xanthophyte Club
+				Tooltip: ""
+			}
+
+			XanthophyteSaber: {
+				DisplayName: Xanthophyte Saber
+				Tooltip: ""
+			}
+
+			XanthophyteSpear: {
+				DisplayName: Xanthophyte Spear
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9310,6 +9352,9 @@ Mods: {
 			Sandstormer.DisplayName: Sandstormer
 			BeeBolt.DisplayName: Bee Bolt
 			CrystalSkullProj.DisplayName: Crystal Skull Light Spike
+			XanthophyteSpear.DisplayName: Xanthophyte Spear
+			XanthophyteChainsaw.DisplayName: Xanthophyte Chainsaw
+			XanthophyteDrill.DisplayName: Xanthophyte Drill
 		}
 
 		NPCs: {
@@ -9428,6 +9473,8 @@ Mods: {
 			MosquitoSmall.DisplayName: Mosquito
 			RedArowana.DisplayName: Arowana
 			RedArowana2.DisplayName: Arowana
+			VenusFlytrap.DisplayName: Venus Flytrap
+			VenusFlytrapSideHead.DisplayName: Venus Flytrap Side Head
 		}
 
 		Buffs: {

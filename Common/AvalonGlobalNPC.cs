@@ -627,12 +627,19 @@ public class AvalonGlobalNPC : GlobalNPC
             pool.Add(ModContent.NPCType<InfestedAmberSlime>(), 0.6f);
             pool.Add(ModContent.NPCType<AmberSlime>(), 0.6f);
             pool.Add(ModContent.NPCType<Mosquito>(), 0.6f);
-            /*pool.Add(ModContent.NPCType<TropicalSlime>(), 0.9f);
+			pool.Add(ModContent.NPCType<MosquitoDroopy>(), 0.6f);
+			pool.Add(ModContent.NPCType<MosquitoSmall>(), 0.6f);
+			pool.Add(ModContent.NPCType<MosquitoPainted>(), 0.6f);
+			
+			/*pool.Add(ModContent.NPCType<TropicalSlime>(), 0.9f);*/
             if (Main.hardMode)
             {
                 pool.Add(ModContent.NPCType<PoisonDartFrog>(), 0.9f);
-            }*/
-        }
+				pool.Add(ModContent.NPCType<RedArowana>(), 0.5f);
+				pool.Add(ModContent.NPCType<RedArowana2>(), 0.5f);
+				pool.Add(ModContent.NPCType<VenusFlytrap>(), 0.3f);
+			}
+		}
         if (spawnInfo.Player.InModBiome<ContagionCaveDesert>())
         {
             pool.Clear();

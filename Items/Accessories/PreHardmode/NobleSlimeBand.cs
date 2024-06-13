@@ -52,29 +52,9 @@ class NobleSlimeBand : ModItem
         player.npcTypeNoAggro[676] = true;
         player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.OreSlime>()] = true;
         player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.MineralSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.TinSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.BronzeSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.IronSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.LeadSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.NickelSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.SilverSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.TungstenSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.ZincSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.GoldSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.PlatinumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.BismuthSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.RhodiumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.OsmiumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.IridiumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.CobaltSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.PalladiumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.DurantiumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.MythrilSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.OrichalcumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.NaquadahSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.AdamantiteSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.TitaniumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.TroxiniumSlime>()] = true;
-        //player.npcTypeNoAggro[ModContent.NPCType<NPCs.DarkMatterSlime>()] = true;
-    }
+		player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.AmberSlime>()] = true;
+		player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.InfestedAmberSlime>()] = true;
+		player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.Ickslime>()] = true;
+		//player.npcTypeNoAggro[ModContent.NPCType<NPCs.DarkMatterSlime>()] = true;
+	}
 }

@@ -1,5 +1,7 @@
+using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Armor.Hardmode;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -40,8 +42,11 @@ class InertiaBoots : ModItem
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }
-
-    public override void UpdateAccessory(Player player, bool hideVisual)
+	public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
+	{
+		acceleration = 0.2f;
+	}
+	public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<AvalonPlayer>().NoSticky = true;
         player.accRunSpeed = 10.29f;

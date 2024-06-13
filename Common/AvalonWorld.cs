@@ -387,12 +387,12 @@ public class AvalonWorld : ModSystem
             #region hardmode/superhardmode stuff
             if (Main.tile[xCoord, yCoord].HasUnactuatedTile)
             {
-                //ContagionHardmodeSpread(num5, num6);
-                //if (Main.hardMode)
-                //{
-                //    SpreadXanthophyte(num5, num6);
-                //}
-                if (Main.hardMode)
+				//ContagionHardmodeSpread(num5, num6);
+				if (Main.hardMode)
+				{
+					SpreadXanthophyte(xCoord, yCoord);
+				}
+				if (Main.hardMode)
                 {
                     SpreadShroomite(xCoord, yCoord);
                 }
@@ -2440,8 +2440,57 @@ public class AvalonWorld : ModSystem
             }
         }
     }
+	public void SpreadXanthophyte(int x, int y)
+	{
+		if (Main.tile[x, y].IsActuated)
+		{
+			return;
+		}
 
-    public void SpreadShroomite(int x, int y)
+		int type = Main.tile[x, y].TileType;
+
+		if (y > (Main.worldSurface + Main.rockLayer) / 2.0)
+		{
+			if ((type == ModContent.TileType<TropicalGrass>()/* || type == ModContent.TileType<Tiles.BrownIce>()*/) && WorldGen.genRand.NextBool(325))
+			{
+				int num6 = x + WorldGen.genRand.Next(-10, 11);
+				int num7 = y + WorldGen.genRand.Next(-10, 11);
+				if (Main.tile[num6, num7].HasTile && (Main.tile[num6, num7].TileType == ModContent.TileType<Loam>()/* || Main.tile[num6, num7].type == ModContent.TileType<Tiles.BrownIce>()*/) && (!Main.tile[num6, num7 - 1].HasTile || (Main.tile[num6, num7 - 1].TileType != 5 && Main.tile[num6, num7 - 1].TileType != 236 && Main.tile[num6, num7 - 1].TileType != 238)) && GrowingOreSpread.GrowingOre(x, y, ModContent.TileType<XanthophyteOre>()))
+				{
+					Main.tile[num6, num7].TileType = (ushort)ModContent.TileType<XanthophyteOre>();
+					WorldGen.SquareTileFrame(num6, num7, true);
+				}
+			}
+			if (type == (ushort)ModContent.TileType<XanthophyteOre>() && !WorldGen.genRand.NextBool(3))
+			{
+				int num8 = x;
+				int num9 = y;
+				int num10 = WorldGen.genRand.Next(4);
+				if (num10 == 0)
+				{
+					num8++;
+				}
+				if (num10 == 1)
+				{
+					num8--;
+				}
+				if (num10 == 2)
+				{
+					num9++;
+				}
+				if (num10 == 3)
+				{
+					num9--;
+				}
+				if (Main.tile[num8, num9].HasTile && (Main.tile[num8, num9].TileType == ModContent.TileType<Loam>() || Main.tile[num8, num9].TileType == ModContent.TileType<TropicalGrass>()) /*|| Main.tile[num8, num9].type == ModContent.TileType<Tiles.BrownIce>())*/ && GrowingOreSpread.GrowingOre(x, y, ModContent.TileType<XanthophyteOre>()))
+				{
+					Main.tile[num8, num9].TileType = (ushort)ModContent.TileType<XanthophyteOre>();
+					WorldGen.SquareTileFrame(num8, num9, true);
+				}
+			}
+		}
+	}
+	public void SpreadShroomite(int x, int y)
     {
         if (Main.tile[x, y].IsActuated)
         {

@@ -20,7 +20,7 @@ public class RedArowana : ModNPC
         NPC.CloneDefaults(NPCID.Piranha);
         AnimationType = NPCID.Pupfish;
         NPC.width = 55;
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundTropics>().Type };
+        SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundTropics>().Type];
     }
    
     public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
@@ -31,7 +31,7 @@ public class RedArowana : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        return spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>() && !spawnInfo.Player.InPillarZone() ? 0.5f : 0f;
+        return spawnInfo.Water && Main.hardMode && spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>() && !spawnInfo.Player.InPillarZone() ? 0.5f : 0f;
     }
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
