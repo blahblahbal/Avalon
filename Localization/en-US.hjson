@@ -9478,7 +9478,9 @@ Mods: {
 			FlySmall.DisplayName: Fly
 			Rafflesia.DisplayName: Rafflesia
 			PoisonDartFrog.DisplayName: Poison Dart Frog
-			AmberSlime.DisplayName: Amber Slime
+			AmberSlime.DisplayName: Tropical Slime
+			TropicalSlimeGrassy.DisplayName: Tropical Slime
+			TropicalSlimeShroomy.DisplayName: Tropical Slime
 			InfestedAmberSlime.DisplayName: Infested Amber Slime
 			KingSting.DisplayName: King Sting
 			Larvae.DisplayName: Larvae

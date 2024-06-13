@@ -98,3 +98,10 @@ public class AmberSlime : ModNPC
         return (spawnInfo.Player.InModBiome<Biomes.Tropics>() || spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>()) && !spawnInfo.Player.ZoneDungeon ? 0.5f : 0f;
     }
 }
+public class TropicalSlimeGrassy : AmberSlime
+{
+}
+
+public class TropicalSlimeShroomy : AmberSlime
+{
+}
