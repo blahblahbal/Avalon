@@ -2177,8 +2177,7 @@ public class AvalonPlayer : ModPlayer
 			{
 				float num31 = (num30 + num29 * 0.5f + /*(float)num26 **/ num29 * 0.5f) % 1f;
 				float ai = (float)Math.PI * 2f * (num31 + (float)num27);
-				if (Main.netMode != 1)
-					Projectile.NewProjectile(Player.GetSource_FromThis(), vector9, Vector2.Zero, ModContent.ProjectileType<CrystalSkullProj>(), 50, 0f, Main.myPlayer, ai, Player.whoAmI);
+				Projectile.NewProjectile(Player.GetSource_FromThis(), vector9, Vector2.Zero, ModContent.ProjectileType<CrystalSkullProj>(), 50, 0f, Main.myPlayer, ai, Player.whoAmI);
 			}
 		}
 

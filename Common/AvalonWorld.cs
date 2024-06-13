@@ -268,7 +268,7 @@ public class AvalonWorld : ModSystem
 
 		//string jungleGenMessage = Lang.gen[11].Value;
 
-		WorldJungle = WorldJungle.Jungle; // WorldJungle.Tropics; // (WorldJungle)WorldGen.genRand.Next(2);
+		//WorldJungle = WorldJungle.Jungle; // WorldJungle.Tropics; // (WorldJungle)WorldGen.genRand.Next(2);
 
 		MethodInfo? setValue = typeof(LocalizedText).GetMethod("SetValue", BindingFlags.NonPublic | BindingFlags.Instance);
 

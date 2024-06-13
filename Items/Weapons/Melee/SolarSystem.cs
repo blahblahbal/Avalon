@@ -6,6 +6,7 @@ namespace Avalon.Items.Weapons.Melee;
 
 public class SolarSystem : ModItem
 {
+	// loading enabled
     public override bool IsLoadingEnabled(Mod mod)
     {
         return false;

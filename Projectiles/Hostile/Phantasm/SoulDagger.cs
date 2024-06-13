@@ -50,132 +50,135 @@ public class SoulDagger : ModProjectile
         if (AvalonGlobalNPC.PhantasmBoss != -1)
         {
             NPC boss = Main.npc[AvalonGlobalNPC.PhantasmBoss];
-            NPCs.Bosses.Hardmode.Phantasm phantasm = (NPCs.Bosses.Hardmode.Phantasm)boss.ModNPC;
-            Player player = GetClosestTo(Projectile.Center);
+			if (boss.ModNPC is NPCs.Bosses.Hardmode.Phantasm)
+			{
+				NPCs.Bosses.Hardmode.Phantasm phantasm = (NPCs.Bosses.Hardmode.Phantasm)boss.ModNPC;
+				Player player = GetClosestTo(Projectile.Center);
 
-            float timing = 60 + (Projectile.ai[1] * 20);
+				float timing = 60 + (Projectile.ai[1] * 20);
 
-            if(Projectile.ai[1] <= 6)
-            {
-                if (isIdle)
-                {
-                    for (int i = 0; i < 6; i++)
-                    {
-                        if (Projectile.ai[1] == i)
-                        {
-                            double rotateAmount = 60 * i * (MathHelper.Pi / 180);
-                            Projectile.Center = boss.Center + spawnPos.RotatedBy(rotateAmount);
-                            spawnPos = spawnPos.RotatedBy(0.1);
-                        }
-                    }
-                    Projectile.rotation = Vector2.Normalize(boss.Center - Projectile.Center).ToRotation() - MathHelper.PiOver2;
-                }
+				if (Projectile.ai[1] <= 6)
+				{
+					if (isIdle)
+					{
+						for (int i = 0; i < 6; i++)
+						{
+							if (Projectile.ai[1] == i)
+							{
+								double rotateAmount = 60 * i * (MathHelper.Pi / 180);
+								Projectile.Center = boss.Center + spawnPos.RotatedBy(rotateAmount);
+								spawnPos = spawnPos.RotatedBy(0.1);
+							}
+						}
+						Projectile.rotation = Vector2.Normalize(boss.Center - Projectile.Center).ToRotation() - MathHelper.PiOver2;
+					}
 
-                if (!isIdle)
-                {
-                    if (Projectile.ai[0] == 0)
-                    {
-                        Projectile.rotation = Vector2.Normalize(player.Center - Projectile.Center).ToRotation() + MathHelper.PiOver2;
-                        Projectile.velocity = Vector2.Normalize(player.Center - Projectile.Center) * 35f;
-                        Projectile.timeLeft = 60;
-                        Projectile.ai[0]++;
-                        for (int i = 0; i < 30; i++)
-                        {
-                            int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
-                            Main.dust[num893].velocity *= 3f;
-                            Main.dust[num893].noGravity = true;
-                        }
-                    }
-                    if (Main.rand.NextBool((60 - Projectile.timeLeft + 10) / 10))
-                    {
-                        int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
-                        Main.dust[num893].velocity *= 0f;
-                        Main.dust[num893].noGravity = true;
-                    }
-                    if (Projectile.timeLeft < 30)
-                    {
-                        Projectile.tileCollide = true;
-                    }
-                    if (Projectile.timeLeft < 20)
-                    {
-                        alpha -= 15;
-                    }
-                    if (alpha <= 0)
-                    {
-                        Projectile.Kill();
-                    }
-                }
+					if (!isIdle)
+					{
+						if (Projectile.ai[0] == 0)
+						{
+							Projectile.rotation = Vector2.Normalize(player.Center - Projectile.Center).ToRotation() + MathHelper.PiOver2;
+							Projectile.velocity = Vector2.Normalize(player.Center - Projectile.Center) * 35f;
+							Projectile.timeLeft = 60;
+							Projectile.ai[0]++;
+							for (int i = 0; i < 30; i++)
+							{
+								int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
+								Main.dust[num893].velocity *= 3f;
+								Main.dust[num893].noGravity = true;
+							}
+						}
+						if (Main.rand.NextBool((60 - Projectile.timeLeft + 10) / 10))
+						{
+							int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
+							Main.dust[num893].velocity *= 0f;
+							Main.dust[num893].noGravity = true;
+						}
+						if (Projectile.timeLeft < 30)
+						{
+							Projectile.tileCollide = true;
+						}
+						if (Projectile.timeLeft < 20)
+						{
+							alpha -= 15;
+						}
+						if (alpha <= 0)
+						{
+							Projectile.Kill();
+						}
+					}
 
-                if (boss.ai[0] == 1)
-                {
-                    count++;
-                    if (count == timing)
-                    {
-                        isIdle = false;
-                    }
-                    if (isIdle)
-                    {
-                        Projectile.rotation = Vector2.Normalize(player.Center - Projectile.Center).ToRotation() + MathHelper.PiOver2;
-                    }
-                }
+					if (boss.ai[0] == 1)
+					{
+						count++;
+						if (count == timing)
+						{
+							isIdle = false;
+						}
+						if (isIdle)
+						{
+							Projectile.rotation = Vector2.Normalize(player.Center - Projectile.Center).ToRotation() + MathHelper.PiOver2;
+						}
+					}
 
-                if (!runOnce)
-                {
-                    for (int i = 0; i < 20; i++)
-                    {
-                        int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
-                        Main.dust[num893].velocity *= 2f;
-                        Main.dust[num893].noGravity = true;
-                    }
-                    runOnce = true;
-                }
-            }
-            if(Projectile.ai[1] == 7)
-            {
-                if(shootTimer == 0)
-                {
-                    Projectile.rotation = boss.velocity.ToRotation() + MathHelper.PiOver2;
-                    Projectile.rotation += 90 * (MathHelper.Pi / 180) * -phantasm.playerDir;
-                }
-                shootTimer++;
+					if (!runOnce)
+					{
+						for (int i = 0; i < 20; i++)
+						{
+							int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
+							Main.dust[num893].velocity *= 2f;
+							Main.dust[num893].noGravity = true;
+						}
+						runOnce = true;
+					}
+				}
+				if (Projectile.ai[1] == 7)
+				{
+					if (shootTimer == 0)
+					{
+						Projectile.rotation = boss.velocity.ToRotation() + MathHelper.PiOver2;
+						Projectile.rotation += 90 * (MathHelper.Pi / 180) * -phantasm.playerDir;
+					}
+					shootTimer++;
 
-                if (shootTimer == 30)
-                {
-                    Projectile.velocity = Vector2.Normalize(player.Center - Projectile.Center) * 30f;
-                    rotTo = Vector2.Normalize(player.Center - Projectile.Center).ToRotation() + MathHelper.PiOver2;
-                    Projectile.timeLeft = 60;
-                    for (int i = 0; i < 30; i++)
-                    {
-                        int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
-                        Main.dust[num893].velocity *= 3f;
-                        Main.dust[num893].noGravity = true;
-                    }
-                }
-                if(shootTimer > 30)
-                {
-                    lerpAmount += 0.05f;
-                    lerpAmount = MathHelper.Clamp(lerpAmount, 0f, 1f);
-                    Projectile.rotation = Projectile.rotation.AngleLerp(rotTo, lerpAmount);
-                    if (Main.rand.NextBool((60 - Projectile.timeLeft + 10) / 10))
-                    {
-                        int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
-                        Main.dust[num893].velocity *= 0f;
-                        Main.dust[num893].noGravity = true;
-                    }
-                    if (Projectile.timeLeft < 30)
-                    {
-                        Projectile.tileCollide = true;
-                    }
-                    if (Projectile.timeLeft < 20)
-                    {
-                        alpha -= 15;
-                    }
-                    if (alpha <= 0)
-                    {
-                        Projectile.Kill();
-                    }
-                }
-            }
+					if (shootTimer == 30)
+					{
+						Projectile.velocity = Vector2.Normalize(player.Center - Projectile.Center) * 30f;
+						rotTo = Vector2.Normalize(player.Center - Projectile.Center).ToRotation() + MathHelper.PiOver2;
+						Projectile.timeLeft = 60;
+						for (int i = 0; i < 30; i++)
+						{
+							int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
+							Main.dust[num893].velocity *= 3f;
+							Main.dust[num893].noGravity = true;
+						}
+					}
+					if (shootTimer > 30)
+					{
+						lerpAmount += 0.05f;
+						lerpAmount = MathHelper.Clamp(lerpAmount, 0f, 1f);
+						Projectile.rotation = Projectile.rotation.AngleLerp(rotTo, lerpAmount);
+						if (Main.rand.NextBool((60 - Projectile.timeLeft + 10) / 10))
+						{
+							int num893 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1.5f);
+							Main.dust[num893].velocity *= 0f;
+							Main.dust[num893].noGravity = true;
+						}
+						if (Projectile.timeLeft < 30)
+						{
+							Projectile.tileCollide = true;
+						}
+						if (Projectile.timeLeft < 20)
+						{
+							alpha -= 15;
+						}
+						if (alpha <= 0)
+						{
+							Projectile.Kill();
+						}
+					}
+				}
+			}
         }
         else
         {
