@@ -42,35 +42,71 @@ class InertiaBoots : ModItem
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
     }
+	// TO-DO: Hoverboard style movement (not currently possible with tmod, but just search "1E-05f" in vanilla player.cs to find the vanilla logic if you wanna try your luck)
 	public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
 	{
-		acceleration = 0.2f;
+		//acceleration = 0.17f;
+		acceleration = 0.35f;
 	}
+	public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
+	{
+		ascentWhenFalling = 0.95f;
+		ascentWhenRising = 0.15f;
+		maxCanAscendMultiplier = 1f;
+		maxAscentMultiplier = 1.875f;
+		if (player.TryingToHoverUp)
+		{
+			maxAscentMultiplier = 2.15f;
+
+			player.velocity.Y -= 0.4f * player.gravDir;
+			if (player.gravDir == 1f)
+			{
+				if (player.velocity.Y > 0f)
+					player.velocity.Y -= 1f;
+				else if (player.velocity.Y > 0f - Player.jumpSpeed)
+					player.velocity.Y -= 0.2f;
+
+				if (player.velocity.Y < (0f - Player.jumpSpeed) * 3f)
+					player.velocity.Y = (0f - Player.jumpSpeed) * 3f;
+			}
+			else
+			{
+				if (player.velocity.Y < 0f)
+					player.velocity.Y += 1f;
+				else if (player.velocity.Y < Player.jumpSpeed)
+					player.velocity.Y += 0.2f;
+
+				if (player.velocity.Y > Player.jumpSpeed * 3f)
+					player.velocity.Y = Player.jumpSpeed * 3f;
+			}
+		}
+	}
+
 	public override void UpdateAccessory(Player player, bool hideVisual)
-    {
-        player.GetModPlayer<AvalonPlayer>().NoSticky = true;
-        player.accRunSpeed = 10.29f;
-        // ADD BACK AFTER CAESIUM ARMOR ADDED
-        if (!player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
-        {
-            player.accRunSpeed = 10.29f;
-        }
-        else
-        {
-            player.accRunSpeed = 5f;
-        }
-        player.rocketBoots = 3;
-        player.noFallDmg = true;
-        player.blackBelt = true;
-        player.iceSkate = true;
-        player.wingTime = 1000;
-        player.empressBrooch = true;
-        player.GetModPlayer<AvalonPlayer>().InertiaBoots = true;
-		player.wingsLogic = 45;
-		if (!player.mount.Active && player.controlDown && !player.controlJump && player.velocity.Y != 0f)
+	{
+		player.GetModPlayer<AvalonPlayer>().NoSticky = true;
+		player.accRunSpeed = 10.29f;
+		// ADD BACK AFTER CAESIUM ARMOR ADDED
+		if (!player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
+		{
+			player.accRunSpeed = 10.29f;
+		}
+		else
+		{
+			player.accRunSpeed = 5f;
+		}
+		player.rocketBoots = 3;
+		player.noFallDmg = true;
+		player.blackBelt = true;
+		player.iceSkate = true;
+		player.wingTime = 1000;
+		player.empressBrooch = true;
+		player.GetModPlayer<AvalonPlayer>().InertiaBoots = true;
+		//player.wingsLogic = 45;
+		if (!player.mount.Active && player.TryingToHoverDown && !player.controlJump && player.velocity.Y != 0f)
 		{
 			player.velocity.Y += 0.6f * player.gravDir;
-			player.maxFallSpeed = 20f;
+			player.maxFallSpeed = 13.5f;
 		}
 		//if (player.controlUp && player.controlJump)
 		//{
