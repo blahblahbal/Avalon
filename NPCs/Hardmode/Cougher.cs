@@ -23,7 +23,8 @@ public class Cougher : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 3;
         Data.Sets.NPC.Wicked[NPC.type] = true;
-    }
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+	}
     static SoundStyle Cough = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCough")
     {
         Volume = 0.8f,

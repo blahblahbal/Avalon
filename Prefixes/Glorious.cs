@@ -1,4 +1,4 @@
-﻿using Terraria;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Avalon.Prefixes;
@@ -12,7 +12,7 @@ public class Glorious : ExxoPrefix
 
     public override void UpdateOwnerPlayer(Player player)
     {
-        player.GetDamage(DamageClass.Generic) += 0.04f;
+        player.GetDamage(DamageClass.Generic) += 0.03f;
         player.statDefense++;
     }
 }

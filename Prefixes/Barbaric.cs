@@ -12,7 +12,7 @@ public class Barbaric : ExxoPrefix
 
     public override void UpdateOwnerPlayer(Player player)
     {
-        player.GetDamage<GenericDamageClass>() += 0.04f;
+        player.GetDamage<GenericDamageClass>() += 0.03f;
         player.GetKnockback<GenericDamageClass>() += 0.06f;
     }
 }

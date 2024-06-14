@@ -1,4 +1,3 @@
-using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.Bestiary;
@@ -19,7 +18,7 @@ public class InfestedAmberSlime : ModNPC
             Main.npc[n].velocity = new Vector2(Main.rand.NextFloat(-3, 4), Main.rand.NextFloat(-2, 3));
         }
         // change to smaller mosquito
-        NPC.NewNPC(NPC.GetSource_Loot(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<Mosquito>());
+        NPC.NewNPC(NPC.GetSource_Loot(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<MosquitoSmall>());
     }
     public override void SetStaticDefaults()
     {

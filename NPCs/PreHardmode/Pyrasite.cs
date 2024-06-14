@@ -26,7 +26,8 @@ public class PyrasiteHead : WormHead
             //PortraitPositionYOverride = 12f
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
-        Data.Sets.NPC.Wicked[NPC.type] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+		Data.Sets.NPC.Wicked[NPC.type] = true;
     }
     public override void SetDefaults()
     {

@@ -42,12 +42,14 @@ class RodofCoalescence : ModItem
         }
         if (player.ItemAnimationEndingOrEnded && !player.HasBuff(ModContent.BuffType<Buffs.Debuffs.Coalesced>()))
         {
-            if (TeleportPlayer(player))
-            {
-                player.AddBuff(ModContent.BuffType<Buffs.Debuffs.Coalesced>(), 60 * 5);
-                return true;
-            }
-            return false;
+			if (player.whoAmI == Main.myPlayer)
+			{
+				if (TeleportPlayer(player))
+				{
+					player.AddBuff(ModContent.BuffType<Buffs.Debuffs.Coalesced>(), 60 * 5);
+					return true;
+				}
+			}
         }
         return false;
     }

@@ -21,7 +21,8 @@ public class Viris : ModNPC
         NPCID.Sets.TrailCacheLength[NPC.type] = 5;
         NPCID.Sets.TrailingMode[NPC.type] = 7;
         Data.Sets.NPC.Wicked[NPC.type] = true;
-    }
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+	}
     public override void SetDefaults()
     {
         NPC.damage = 40;

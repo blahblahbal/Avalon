@@ -543,6 +543,9 @@ Mods: {
 			Stinky: You smell awful
 			Expanded: Mines in a 2x2 area
 			Range: " range"
+			CritCap: critical strike chance cap
+			MeleeDamage: melee damage
+			MeleeSpeed: melee speed
 		}
 
 		TooltipEdits: {
@@ -10242,6 +10245,11 @@ Mods: {
 			XanthophyteFossilCooldown: {
 				DisplayName: Xanthophyte Fossil Cooldown
 				Description: You cannot enter the fossil state
+			}
+
+			Sticky: {
+				DisplayName: Sticky
+				Description: Mods.Avalon.Buffs.Sticky.Description
 			}
 		}
 

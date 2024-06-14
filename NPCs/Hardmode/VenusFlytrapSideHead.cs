@@ -1,3 +1,4 @@
+using Avalon.Buffs.Debuffs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,13 +13,15 @@ public class VenusFlytrapSideHead : ModNPC
 {
 	public override void SetStaticDefaults()
 	{
+		NPCID.Sets.SpecialSpawningRules.Add(ModContent.NPCType<VenusFlytrapSideHead>(), 0);
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		Main.npcFrameCount[Type] = 3;
 	}
 	public override void SetDefaults()
 	{
-		NPC.damage = 25;
-		NPC.lifeMax = 50;
-		NPC.defense = 12;
+		NPC.damage = 106;
+		NPC.lifeMax = 550;
+		NPC.defense = 27;
 		NPC.noGravity = true;
 		NPC.width = 58;
 		NPC.aiStyle = -1;
@@ -114,7 +117,13 @@ public class VenusFlytrapSideHead : ModNPC
 
 		NPC.rotation = NPC.Center.DirectionTo(Main.player[Main.npc[MainHead].target].Center).ToRotation() + MathHelper.Pi / 2;
 	}
-
+	public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
+	{
+		if (Main.rand.NextBool(3))
+		{
+			target.AddBuff(ModContent.BuffType<Sticky>(), 60 * 5);
+		}
+	}
 	public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
 	{
 		Main.npc[MainHead].life -= damageDone;
@@ -135,20 +144,6 @@ public class VenusFlytrapSideHead : ModNPC
 			Main.npc[MainHead].HitEffect();
 		}
 	}
-	//public override void FindFrame(int frameHeight)
-	//{
-	//	NPC.frameCounter += 1.0;
-	//	if (NPC.frameCounter < 6.0)
-	//		NPC.frame.Y = 0;
-	//	else if (NPC.frameCounter < 12.0)
-	//		NPC.frame.Y = frameHeight;
-	//	else if (NPC.frameCounter < 18.0)
-	//		NPC.frame.Y = frameHeight * 2;
-	//	else if (NPC.frameCounter < 24.0)
-	//		NPC.frame.Y = frameHeight;
-	//	if (NPC.frameCounter == 23.0)
-	//		NPC.frameCounter = 0.0;
-	//}
 	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 v, Color drawColor)
 	{
 		Vector2 start = NPC.Center;

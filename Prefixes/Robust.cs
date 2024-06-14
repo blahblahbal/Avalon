@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -11,9 +12,9 @@ public class Robust : ExxoPrefix
 
     public override bool CanRoll(Item item) => true;
 
-    public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult,
-                                  ref float scaleMult, ref float shootSpeedMult, ref float manaMult,
-                                  ref int critBonus) => damageMult += 0.03f;
-
-    public override void UpdateOwnerPlayer(Player player) => player.statDefense += 3;
+    public override void UpdateOwnerPlayer(Player player)
+	{
+		player.statDefense += 3;
+		player.GetDamage(DamageClass.Generic) += 0.03f;
+	}
 }

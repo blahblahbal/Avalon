@@ -29,7 +29,8 @@ public class EctoHand : ModNPC
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         Data.Sets.NPC.Undead[NPC.type] = true;
-    }
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+	}
     public override void SetDefaults()
     {
         NPC.damage = 155;

@@ -47,7 +47,7 @@ public class PaintingsInDungeonHook : ModHook
     private PaintingEntry On_WorldGen_RandPictureTile(On_WorldGen.orig_RandPictureTile orig)
     {
         PaintingEntry pe = orig.Invoke();
-        if (pe.tileType == TileID.Painting6X4 && WorldGen.genRand.NextBool(1))
+        if (pe.tileType == TileID.Painting6X4 && WorldGen.genRand.NextBool(5))
         {
             switch (WorldGen.genRand.Next(3))
             {

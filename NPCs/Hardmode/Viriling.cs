@@ -17,7 +17,8 @@ public class Viriling : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[NPC.type] = 4;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+		Main.npcFrameCount[NPC.type] = 4;
     }
 
     public override void SetDefaults()

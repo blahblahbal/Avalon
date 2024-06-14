@@ -13,7 +13,8 @@ public class RedArowana : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 6;
         Data.Sets.NPC.Watery[NPC.type] = true;
-    }
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+	}
 
     public override void SetDefaults()
     {

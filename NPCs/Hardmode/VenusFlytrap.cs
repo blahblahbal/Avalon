@@ -5,10 +5,9 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Avalon.NPCs.Bosses.PreHardmode;
 using System.IO;
 using Terraria.Localization;
-using Terraria.GameContent;
+using Avalon.Buffs.Debuffs;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -22,14 +21,16 @@ internal class VenusFlytrap : ModNPC
 	private float PosY = 0f;
 	public override void SetStaticDefaults()
 	{
+		NPCID.Sets.SpecialSpawningRules.Add(ModContent.NPCType<VenusFlytrap>(), 0);
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		Main.npcFrameCount[Type] = 3;
 	}
 
 	public override void SetDefaults()
 	{
-		NPC.damage = 25;
-		NPC.lifeMax = 50;
-		NPC.defense = 12;
+		NPC.damage = 106;
+		NPC.lifeMax = 550;
+		NPC.defense = 27;
 		NPC.noGravity = true;
 		NPC.width = 58;
 		NPC.aiStyle = -1;
@@ -39,23 +40,10 @@ internal class VenusFlytrap : ModNPC
 		NPC.DeathSound = SoundID.NPCDeath35;
 		NPC.value = 200;
 		NPC.knockBackResist = 0f;
+		NPC.noTileCollide = true;
 		SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundTropics>().Type];
 		AnimationType = NPCID.AngryTrapper;
 	}
-	//public override void FindFrame(int frameHeight)
-	//{
-	//	NPC.frameCounter += 1.0;
-	//	if (NPC.frameCounter < 6.0)
-	//		NPC.frame.Y = 0;
-	//	else if (NPC.frameCounter < 12.0)
-	//		NPC.frame.Y = frameHeight;
-	//	else if (NPC.frameCounter < 18.0)
-	//		NPC.frame.Y = frameHeight * 2;
-	//	else if (NPC.frameCounter < 24.0)
-	//		NPC.frame.Y = frameHeight;
-	//	if (NPC.frameCounter == 23.0)
-	//		NPC.frameCounter = 0.0;
-	//}
 	public override void AI()
 	{
 		timer++;
@@ -72,8 +60,8 @@ internal class VenusFlytrap : ModNPC
 			NPC.position.Y = worldY;
 			PosX = Main.player[NPC.target].position.X + (Main.player[NPC.target].width * 0.5f);
 			PosY = Main.player[NPC.target].position.Y + (Main.player[NPC.target].height * 0.5f);
-			NPC.ai[1] = NPC.position.X + (float)(NPC.width / 2);
-			NPC.ai[2] = NPC.position.Y + (float)(NPC.height / 2);
+			NPC.ai[1] = NPC.position.X + NPC.width / 2;
+			NPC.ai[2] = NPC.position.Y + NPC.height / 2;
 		}
 
 		if (timer > 180)
@@ -112,6 +100,13 @@ internal class VenusFlytrap : ModNPC
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
 		return Main.hardMode && spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>() && !spawnInfo.Player.InPillarZone() ? 0.3f : 0f;
+	}
+	public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
+	{
+		if (Main.rand.NextBool(3))
+		{
+			target.AddBuff(ModContent.BuffType<Sticky>(), 60 * 5);
+		}
 	}
 	public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
 	{

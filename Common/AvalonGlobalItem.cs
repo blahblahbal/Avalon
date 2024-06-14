@@ -2158,9 +2158,167 @@ public class AvalonGlobalItem : GlobalItem
                         IsModifier = true,
                         IsModifierBad = true
                     });
-                }
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccStinky", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Stinky"))
+					{
+						IsModifier = true,
+						IsModifierBad = true
+					});
+				}
             }
-        }
+			if (item.prefix == ModContent.PrefixType<Barbaric>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+3% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Damage"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccKnockback", "+6% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Knockback"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Bloated>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMeleeDamage", "+5% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MeleeDamage"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccKnockback", "-2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MeleeSpeed"))
+					{
+						IsModifier = true,
+						IsModifierBad = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Boosted>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMoveSpeed", "+4% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MovementSpeed"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Fluidic>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMoveSpeed", "+5% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MovementSpeed"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccIgnoreWater", "+25% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Fluidic"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Glorious>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDamage", "+3% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Damage"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccDefense", "+1 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Handy>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccBlockRange", "+1 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.PlacementRange"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Insane>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccTileSpeed", "+30% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.TileSpeed"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccWallSpeed", "+30% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.WallSpeed"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Mythic>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMana", "+20 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Mana"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Sharpened>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccArmorPen", "+2 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.ArmorPenetration"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Silly>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccCritChance", "+2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritChance"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Slimy>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccEndurance", "-3% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.DamageTaken"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+		}
         if (item.accessory && !item.social)
         {
             if (item.prefix == ModContent.PrefixType<Enchanted>())
@@ -2169,13 +2327,37 @@ public class AvalonGlobalItem : GlobalItem
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
                 if (index != -1)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+1 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMana", "+20 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Mana"))
                     {
                         IsModifier = true
                     });
-                }
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccMoveSpeed", "+3% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MovementSpeed"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 3, new TooltipLine(Mod, "PrefixAccDefense", "+1 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
+					{
+						IsModifier = true
+					});
+				}
             }
-            if (item.prefix == ModContent.PrefixType<Lurid>())
+			if (item.prefix == ModContent.PrefixType<Robust>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+3 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccDamage", "+3% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Damage"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Lurid>())
             {
                 int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
@@ -2223,7 +2405,94 @@ public class AvalonGlobalItem : GlobalItem
                     });
                 }
             }
-        }
+			if (item.prefix == ModContent.PrefixType<Bogus>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccCritBonus", "+4% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritDamage"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccCritBonus", "+2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritChance"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 3, new TooltipLine(Mod, "PrefixAccMaxCritReduction", "-1% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritCap"))
+					{
+						IsModifier = true,
+						IsModifierBad = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Languid>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMoveSpeed", "-2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MovementSpeed"))
+					{
+						IsModifier = true,
+						IsModifierBad = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Magical>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMana", "+40 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Mana"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Sturdy>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccEndurance", "-1% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.DamageTaken"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Timid>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMeleeSpeed", "-2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MeleeSpeed"))
+					{
+						IsModifier = true,
+						IsModifierBad = true
+					});
+				}
+			}
+			if (item.prefix == ModContent.PrefixType<Vigorous>())
+			{
+				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+				if (index != -1)
+				{
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDamage", "+2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Damage"))
+					{
+						IsModifier = true
+					});
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccMeleeSpeed", "+2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MeleeSpeed"))
+					{
+						IsModifier = true
+					});
+				}
+			}
+		}
 
         //if (tooltipMat != null)
         //{
@@ -2303,7 +2572,8 @@ public class AvalonGlobalItem : GlobalItem
             }
         }
 
-        switch (item.type)
+		#region vanillla tooltip edits
+		switch (item.type)
         {
             //case ItemID.Vine:
             //    tooltips.Add(new TooltipLine(Mod, "Rope", "Can be climbed on"));
@@ -2421,8 +2691,9 @@ public class AvalonGlobalItem : GlobalItem
                 }
                 break;
         }
-    }
-    public override void UpdateVanity(Item item, Player player)
+		#endregion
+	}
+	public override void UpdateVanity(Item item, Player player)
     {
         if (item.type == ItemID.HighTestFishingLine)
         {
@@ -2729,7 +3000,8 @@ public class AvalonGlobalItem : GlobalItem
         }
         return base.CanUseItem(item, player);
     }
-    public override int ChoosePrefix(Item item, UnifiedRandom rand) => item.IsArmor()
-        ? Main.rand.Next(ExxoPrefix.ExxoCategoryPrefixes[ExxoPrefixCategory.Armor]).Type
-        : base.ChoosePrefix(item, rand);
+	public override int ChoosePrefix(Item item, UnifiedRandom rand)
+	{
+		return item.IsArmor() ? Main.rand.Next(ExxoPrefix.ExxoCategoryPrefixes[ExxoPrefixCategory.Armor]).Type : base.ChoosePrefix(item, rand);
+	}
 }

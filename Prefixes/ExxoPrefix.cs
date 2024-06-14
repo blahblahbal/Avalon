@@ -82,31 +82,31 @@ public abstract class ExxoPrefix : ModPrefix
         BasicDifference(lines, "PrefixUseMana", Language.GetTextValue("Mods.Avalon.PrefixTooltips.ManaCost"), manaMult, true);
         BasicDifference(lines, "PrefixCritBonus", Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritDamage"), critBonus);
 
-        StatModifierDifference(lines, "PrefixAccDamage", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Damage"), origPlayer, modifiedPlayer,
-            (player, damageClass) => player.GetDamage(damageClass).Additive);
-        StatModifierDifference(lines, "PrefixAccAttackSpeed", Language.GetTextValue("Mods.Avalon.PrefixTooltips.AttackSpeed"), origPlayer, modifiedPlayer,
-            (player, damageClass) => player.GetAttackSpeed(damageClass));
-        StatModifierDifference(lines, "PrefixAccKnockback", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Knockback"), origPlayer, modifiedPlayer,
-            (player, damageClass) => player.GetKnockback(damageClass).Additive);
-        StatModifierDifference(lines, "PrefixAccCritChance", Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritChance"), origPlayer, modifiedPlayer,
-            (player, damageClass) => player.GetCritChance(damageClass) / 100f);
-        BasicDifference(lines, "PrefixAccArmorPen", Language.GetTextValue("Mods.Avalon.PrefixTooltips.ArmorPenetration"), (int)(modifiedPlayer.GetArmorPenetration(DamageClass.Generic) - origPlayer.GetArmorPenetration(DamageClass.Generic)), percentage: false);
+        //StatModifierDifference(lines, "PrefixAccDamage", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Damage"), origPlayer, modifiedPlayer,
+        //    (player, damageClass) => player.GetDamage(damageClass).Additive);
+        //StatModifierDifference(lines, "PrefixAccAttackSpeed", Language.GetTextValue("Mods.Avalon.PrefixTooltips.AttackSpeed"), origPlayer, modifiedPlayer,
+        //    (player, damageClass) => player.GetAttackSpeed(damageClass));
+        //StatModifierDifference(lines, "PrefixAccKnockback", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Knockback"), origPlayer, modifiedPlayer,
+        //    (player, damageClass) => player.GetKnockback(damageClass).Additive);
+        //StatModifierDifference(lines, "PrefixAccCritChance", Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritChance"), origPlayer, modifiedPlayer,
+        //    (player, damageClass) => player.GetCritChance(damageClass) / 100f);
+        //BasicDifference(lines, "PrefixAccArmorPen", Language.GetTextValue("Mods.Avalon.PrefixTooltips.ArmorPenetration"), (int)(modifiedPlayer.GetArmorPenetration(DamageClass.Generic) - origPlayer.GetArmorPenetration(DamageClass.Generic)), percentage: false);
 
-        BasicDifference(lines, "PrefixAccEndurance", Language.GetTextValue("Mods.Avalon.PrefixTooltips.DamageTaken"), -(modifiedPlayer.endurance - origPlayer.endurance),
-            true);
+        //BasicDifference(lines, "PrefixAccEndurance", Language.GetTextValue("Mods.Avalon.PrefixTooltips.DamageTaken"), -(modifiedPlayer.endurance - origPlayer.endurance),
+        //    true);
 
-        BasicDifference(lines, "PrefixAccMaxMana", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Mana"), modifiedPlayer.statManaMax2 - origPlayer.statManaMax2);
-        BasicDifference(lines, "PrefixAccMoveSpeed", Language.GetTextValue("Mods.Avalon.PrefixTooltips.MovementSpeed"), modifiedPlayer.moveSpeed - origPlayer.moveSpeed);
-        BasicDifference(lines, "PrefixAccDefense", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"), modifiedPlayer.statDefense - origPlayer.statDefense);
-        BasicDifference(lines, "PrefixAccCritDamage", Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritDamage"), critDamageDiff);
-        BasicDifference(lines, "PrefixAccBlockRange", Language.GetTextValue("Mods.Avalon.PrefixTooltips.PlacementRange"),
-            modifiedPlayer.blockRange - origPlayer.blockRange);
-        BasicDifference(lines, "PrefixAccTileSpeed", Language.GetTextValue("Mods.Avalon.PrefixTooltips.TileSpeed"),
-            modifiedPlayer.tileSpeed - origPlayer.tileSpeed);
-        BasicDifference(lines, "PrefixAccWallSpeed", Language.GetTextValue("Mods.Avalon.PrefixTooltips.WallSpeed"),
-            modifiedPlayer.wallSpeed - origPlayer.wallSpeed);
-        BasicDifference(lines, "PrefixAccIgnoreWater", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Fluidic"), modifiedPlayer.GetModPlayer<AvalonPlayer>().FluidicModifier - origPlayer.GetModPlayer<AvalonPlayer>().FluidicModifier);
-        BasicDifference(lines, "PrefixAccStinky", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Stinky"), modifiedPlayer.stinky, true);
+        //BasicDifference(lines, "PrefixAccMaxMana", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Mana"), modifiedPlayer.statManaMax2 - origPlayer.statManaMax2);
+        //BasicDifference(lines, "PrefixAccMoveSpeed", Language.GetTextValue("Mods.Avalon.PrefixTooltips.MovementSpeed"), modifiedPlayer.moveSpeed - origPlayer.moveSpeed);
+        //BasicDifference(lines, "PrefixAccDefense", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"), modifiedPlayer.statDefense - origPlayer.statDefense);
+        //BasicDifference(lines, "PrefixAccCritDamage", Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritDamage"), critDamageDiff);
+        //BasicDifference(lines, "PrefixAccBlockRange", Language.GetTextValue("Mods.Avalon.PrefixTooltips.PlacementRange"),
+        //    modifiedPlayer.blockRange - origPlayer.blockRange);
+        //BasicDifference(lines, "PrefixAccTileSpeed", Language.GetTextValue("Mods.Avalon.PrefixTooltips.TileSpeed"),
+        //    modifiedPlayer.tileSpeed - origPlayer.tileSpeed);
+        //BasicDifference(lines, "PrefixAccWallSpeed", Language.GetTextValue("Mods.Avalon.PrefixTooltips.WallSpeed"),
+        //    modifiedPlayer.wallSpeed - origPlayer.wallSpeed);
+        //BasicDifference(lines, "PrefixAccIgnoreWater", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Fluidic"), modifiedPlayer.GetModPlayer<AvalonPlayer>().FluidicModifier - origPlayer.GetModPlayer<AvalonPlayer>().FluidicModifier);
+        //BasicDifference(lines, "PrefixAccStinky", Language.GetTextValue("Mods.Avalon.PrefixTooltips.Stinky"), modifiedPlayer.stinky, true);
 
         foreach (TooltipLine line in lines)
         {
