@@ -289,9 +289,46 @@ public class ExxoAvalonOrigins : Mod
         };
     }
 
-    public dynamic BTitlesHook_GetBiome(int index)
-    {
-        switch (index)
+	public string BTitlesHook_BiomeChecker(Player player)
+	{
+		if (player.InModBiome<NearHellcastle>()) return "PhantomGardens";
+		if (player.InModBiome<Hellcastle>()) return "Hellcastle";
+		if (player.InModBiome<Contagion>()) return "Contagion";
+
+		return "";
+	}
+
+	public IEnumerable<dynamic> BTitlesHook_GetBiomes()
+	{
+		yield return new
+		{
+			Key = "PhantomGardens",
+			Title = "Phantom Gardens",
+			SubTitle = "Avalon",
+			Icon = ModContent.Request<Texture2D>("Avalon/Biomes/Hellcastle_Icon").Value,
+			TitleColor = new Color(35, 200, 254),
+			TitleStroke = new Color(13, 77, 113),
+		};
+		yield return new
+		{
+			Key = "Hellcastle",
+			Title = "Hellcastle",
+			SubTitle = "Avalon",
+			Icon = ModContent.Request<Texture2D>("Avalon/Biomes/Hellcastle_Icon").Value,
+			TitleColor = Color.LightGray
+		};
+		yield return new
+		{
+			Key = "Contagion",
+			Title = "Contagion",
+			SubTitle = "Avalon",
+			TitleColor = new Color(191, 212, 52),
+			TitleStroke = new Color(39, 29, 22),
+			Icon = ModContent.Request<Texture2D>("Avalon/Biomes/Contagion_Icon").Value,
+		};
+
+
+		/*switch (index)
         {
             case 0:
                 return new
@@ -324,7 +361,7 @@ public class ExxoAvalonOrigins : Mod
                 };
             default:
                 return null;
-        }
+        }*/
     }
 
     public override void HandlePacket(BinaryReader reader, int whoAmI) => MessageHandler.HandlePacket(reader, whoAmI);
