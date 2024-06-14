@@ -57,4 +57,8 @@ public class AvalonClientConfig : ModConfig
 
     [DefaultValue(true)]
     public bool AdditionalScreenshakes;
+
+	[DefaultValue(false)]
+	[ReloadRequired]
+	public bool BetaTropicsGen;
 }

@@ -19,10 +19,13 @@ public class JungleSelectionMenu : ModHook
 {
     protected override void Apply()
     {
-		//IL_UIWorldCreation.BuildPage += ILBuildPage;
-		//IL_UIWorldCreation.MakeInfoMenu += ILMakeInfoMenu;
-		//IL_UIWorldCreation.ShowOptionDescription += ILShowOptionDescription;
-		//On_UIWorldCreation.SetDefaultOptions += OnSetDefaultOptions;
+		if (ModContent.GetInstance<AvalonClientConfig>().BetaTropicsGen)
+		{
+			IL_UIWorldCreation.BuildPage += ILBuildPage;
+			IL_UIWorldCreation.MakeInfoMenu += ILMakeInfoMenu;
+			IL_UIWorldCreation.ShowOptionDescription += ILShowOptionDescription;
+			On_UIWorldCreation.SetDefaultOptions += OnSetDefaultOptions;
+		}
 	}
     public enum WorldJungleSelection
     {

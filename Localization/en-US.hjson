@@ -10681,6 +10681,11 @@ Mods: {
 					Label: Additional Screenshakes
 					Tooltip: Enables screenshakes for various actions.
 				}
+
+				BetaTropicsGen: {
+					Label: Beta Tropics Gen
+					Tooltip: ""
+				}
 			}
 
 			AvalonConfig: {
