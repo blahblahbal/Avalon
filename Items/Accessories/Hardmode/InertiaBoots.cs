@@ -151,7 +151,7 @@ class InertiaBoots : ModItem
 			float reducedAccelX = 0.29f;
 			if (player.TryingToHoverDown && player.controlJump)
 			{
-				maxSpeedX = 13f;
+				maxSpeedX = 14.5f;
 				startAccelX = 0.41f;
 				reducedAccelX = 0.39f;
 			}
