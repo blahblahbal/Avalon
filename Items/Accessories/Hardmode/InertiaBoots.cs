@@ -145,27 +145,36 @@ class InertiaBoots : ModItem
 
 		// ADD BACK AFTER CAESIUM ADDED
 		if (!player.vortexStealthActive && !player.GetModPlayer<CaesiumBoostingStancePlayer>().CaesiumBoostActive)
-        {
-            if (player.controlLeft)
+		{
+			float maxSpeedX = 10f;
+			float startAccelX = 0.31f;
+			float reducedAccelX = 0.29f;
+			if (player.TryingToHoverDown && player.controlJump)
+			{
+				maxSpeedX = 13f;
+				startAccelX = 0.41f;
+				reducedAccelX = 0.39f;
+			}
+			if (player.controlLeft)
             {
-                if (player.velocity.X > (player.vortexStealthActive ? -1f : -5f))
+                if (player.velocity.X > (player.vortexStealthActive ? -1f : -(maxSpeedX / 2f)))
                 {
-                    player.velocity.X -= player.vortexStealthActive ? 0.06f : 0.31f;
+                    player.velocity.X -= player.vortexStealthActive ? 0.06f : startAccelX;
                 }
-                if (player.velocity.X < (player.vortexStealthActive ? -1f : -5f) && player.velocity.X > (player.vortexStealthActive ? -2f : -10f))
+                if (player.velocity.X < (player.vortexStealthActive ? -1f : -(maxSpeedX / 2f)) && player.velocity.X > (player.vortexStealthActive ? -2f : -maxSpeedX))
                 {
-                    player.velocity.X -= player.vortexStealthActive ? 0.04f : 0.29f;
+                    player.velocity.X -= player.vortexStealthActive ? 0.04f : reducedAccelX;
                 }
             }
             if (player.controlRight)
             {
-                if (player.velocity.X < (player.vortexStealthActive ? 1f : 5f))
+                if (player.velocity.X < (player.vortexStealthActive ? 1f : maxSpeedX / 2f))
                 {
-                    player.velocity.X += player.vortexStealthActive ? 0.06f : 0.31f;
+                    player.velocity.X += player.vortexStealthActive ? 0.06f : startAccelX;
                 }
-                if (player.velocity.X > (player.vortexStealthActive ? 1f : 5f) && player.velocity.X < (player.vortexStealthActive ? 2f : 10f))
+                if (player.velocity.X > (player.vortexStealthActive ? 1f : maxSpeedX / 2f) && player.velocity.X < (player.vortexStealthActive ? 2f : maxSpeedX))
                 {
-                    player.velocity.X += player.vortexStealthActive ? 0.04f : 0.29f;
+                    player.velocity.X += player.vortexStealthActive ? 0.04f : reducedAccelX;
                 }
             }
         }

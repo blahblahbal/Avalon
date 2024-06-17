@@ -646,16 +646,23 @@ public class AvalonPlayer : ModPlayer
             {
                 Player.trashItem.SetDefaults();
             }
-        }
-    }
-    public override void PostUpdate()
-    {
+		}
+	}
+	public override void PreUpdateMovement()
+	{
+		if (InertiaBoots && Player.TryingToHoverDown && Player.controlJump && Player.wingTime > 0f && !Player.merman)
+		{
+			Player.velocity.Y = 1E-05f;
+		}
+	}
+	public override void PostUpdate()
+	{
 		//if (XanthophyteTreeActive)
 		//{
 		//	Player.AddBuff(ModContent.BuffType<XanthophyteTree>(), 2);
 		//}
-        #region bramble
-        BrambleMovement();
+		#region bramble
+		BrambleMovement();
         #endregion
 
         #region platform leaf
