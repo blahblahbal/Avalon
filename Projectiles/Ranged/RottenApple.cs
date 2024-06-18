@@ -12,8 +12,8 @@ public class RottenApple : ModProjectile
     public override void SetDefaults()
 	{
 		Rectangle dims = this.GetDims();
-		Projectile.width = 16;
-        Projectile.height = 16;
+		Projectile.width = 12;
+        Projectile.height = 12;
         Projectile.aiStyle = 2;
         Projectile.friendly = true;
         Projectile.penetrate = 1;
