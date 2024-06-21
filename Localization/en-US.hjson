@@ -8746,7 +8746,7 @@ Mods: {
 
 			Boompipe: {
 				DisplayName: Boompipe
-				Tooltip: Splits ammo into several high velocity shrapnel shards
+				Tooltip: Fires several high velocity shrapnel shards
 			}
 
 			LargeMarineKelp: {
@@ -9373,6 +9373,7 @@ Mods: {
 			XanthophyteSpear.DisplayName: Xanthophyte Spear
 			XanthophyteChainsaw.DisplayName: Xanthophyte Chainsaw
 			XanthophyteDrill.DisplayName: Xanthophyte Drill
+			BoompipeShrapnel.DisplayName: Boompipe Shrapnel
 		}
 
 		NPCs: {
