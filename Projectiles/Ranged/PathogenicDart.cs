@@ -55,11 +55,11 @@ namespace Avalon.Projectiles.Ranged
 			//	Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, perturbedSpeed, ModContent.ProjectileType<PathogenDartTrail>(), (int)(Projectile.damage * 0.7f), 0, Projectile.owner);
 			//}
 
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 6; i++)
 			{
-				int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<PathogenDust>(), 0, 0, default, default, Main.rand.NextFloat(0.9f, 1.3f));
-				Main.dust[d].velocity = Main.rand.NextVector2Circular(2f, 2f) * new Vector2(2f, 2f);
-				Main.dust[d].noGravity = true;
+				Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<PathogenDust>(), 0, 0, 128, default, 1);
+				d.noGravity = true;
+				d.fadeIn = 1.3f;
 			}
 		}
 	}
