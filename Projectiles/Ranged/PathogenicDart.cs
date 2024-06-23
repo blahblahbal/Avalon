@@ -44,5 +44,23 @@ namespace Avalon.Projectiles.Ranged
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             return base.OnTileCollide(oldVelocity);
         }
-    }
+		public override void OnKill(int timeLeft)
+		{
+			// too powerful but code could be recycled idk
+			//int amount = Main.rand.Next(2) + 3;
+			//Vector2 rotation = Main.rand.NextVector2CircularEdge(1f, 1f) * Main.rand.NextFloat(0.25f, 0.65f);
+			//for (int i = 0; i < amount; i++)
+			//{
+			//	Vector2 perturbedSpeed = rotation.RotatedBy(MathHelper.ToRadians(Main.rand.Next(270, 450) / amount * i));
+			//	Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, perturbedSpeed, ModContent.ProjectileType<PathogenDartTrail>(), (int)(Projectile.damage * 0.7f), 0, Projectile.owner);
+			//}
+
+			for (int i = 0; i < 3; i++)
+			{
+				int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<PathogenDust>(), 0, 0, default, default, Main.rand.NextFloat(0.9f, 1.3f));
+				Main.dust[d].velocity = Main.rand.NextVector2Circular(2f, 2f) * new Vector2(2f, 2f);
+				Main.dust[d].noGravity = true;
+			}
+		}
+	}
 }
