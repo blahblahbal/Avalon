@@ -21,19 +21,19 @@ class PurpleHaze : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.DamageType = DamageClass.Magic;
-        Item.damage = 28;
+        Item.damage = 26;
         Item.autoReuse = true;
         Item.scale = 0.9f;
         Item.shootSpeed = 8f;
         Item.mana = 5;
         Item.rare = ItemRarityID.LightRed;
         Item.width = dims.Width;
-        Item.useTime = 5;
+        Item.useTime = 7;
         Item.knockBack = 1.5f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Magic.PurpleHaze>();
         Item.useStyle = ItemUseStyleID.Shoot;
         Item.value = 200000;
-        Item.useAnimation = 20;
+        Item.useAnimation = 21;
         Item.height = dims.Height;
         Item.UseSound = gas;
     }

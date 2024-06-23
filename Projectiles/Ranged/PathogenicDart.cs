@@ -27,7 +27,7 @@ namespace Avalon.Projectiles.Ranged
             Projectile.ai[2]++;
             if (Projectile.ai[2] > Main.rand.Next(10, 20))
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<PathogenDartTrail>(), (int)(Projectile.damage * 1.35f), 0, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<PathogenDartTrail>(), (int)(Projectile.damage * 1.25f), 0, Projectile.owner);
                 Projectile.ai[2] = 0;
             }
         }
