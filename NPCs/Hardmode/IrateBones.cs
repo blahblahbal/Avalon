@@ -1,9 +1,13 @@
 using System;
 using Avalon.Common;
 using Avalon.Items.Banners;
+using Avalon.Items.Material;
+using Avalon.Items.Vanity;
+using Avalon.Items.Weapons.Melee.PreHardmode;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -22,7 +26,8 @@ public class IrateBones : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-    }
+		Data.Sets.NPC.Undead[NPC.type] = true;
+	}
 
     public override void SetDefaults()
     {
@@ -111,5 +116,13 @@ public class IrateBones : ModNPC
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, 44);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, 44);
         }
-    }
+	}
+	public override void ModifyNPCLoot(NPCLoot npcLoot)
+	{
+		npcLoot.Add(ItemDropRule.Common(ItemID.BoneWand, 250))
+			.OnFailedRoll(ItemDropRule.Common(ItemID.TallyCounter, 100))
+			.OnFailedRoll(ItemDropRule.Common(ItemID.GoldenKey, 65))
+			.OnFailedRoll(ItemDropRule.ByCondition(new Conditions.NotExpert(), ItemID.Bone, 1, 1, 3));
+		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.IsExpert(), ItemID.Bone, 1, 2, 6));
+	}
 }
