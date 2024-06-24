@@ -19,7 +19,6 @@ public class IrateBones : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 15;
-        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary

@@ -26,7 +26,6 @@ public class FallenHero : ModNPC
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         Main.npcFrameCount[NPC.type] = 3;
-        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         Data.Sets.NPC.Undead[NPC.type] = true;
     }
 
