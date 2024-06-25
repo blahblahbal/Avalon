@@ -660,8 +660,9 @@ public class AvalonMobDrops : GlobalNPC
         globalLoot.Add(HallowKeyRule);
         globalLoot.Add(CrimsonKeyRule);
         globalLoot.Add(DesertKeyRule);
+		globalLoot.Add(ContagionKeyRule);
 
-        globalLoot.Add(ItemDropRule.ByCondition(undergroundHardmodeSnow, ModContent.ItemType<SoulofIce>(), 10));
+		globalLoot.Add(ItemDropRule.ByCondition(undergroundHardmodeSnow, ModContent.ItemType<SoulofIce>(), 10));
 
         globalLoot.Add(ItemDropRule.ByCondition(soulCondition, ItemID.SoulofNight, 5));
 

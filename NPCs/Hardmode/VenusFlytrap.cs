@@ -32,17 +32,38 @@ internal class VenusFlytrap : ModNPC
 		NPC.lifeMax = 550;
 		NPC.defense = 27;
 		NPC.noGravity = true;
-		NPC.width = 58;
+		NPC.width = 44;
 		NPC.aiStyle = -1;
 		NPC.npcSlots = 1f;
-		NPC.height = 58;
+		NPC.height = 44;
 		NPC.HitSound = SoundID.NPCHit32;
 		NPC.DeathSound = SoundID.NPCDeath35;
 		NPC.value = 200;
 		NPC.knockBackResist = 0f;
 		NPC.noTileCollide = true;
 		SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundTropics>().Type];
-		AnimationType = NPCID.AngryTrapper;
+		DrawOffsetY = 2f;
+	}
+	public override void FindFrame(int frameHeight)
+	{
+		NPC.frameCounter += 1.0;
+		if (NPC.frameCounter == 27.0)
+		{
+			NPC.frameCounter = 0.0;
+		}
+
+		if (NPC.frameCounter < 9.0)
+		{
+			NPC.frame.Y = 0;
+		}
+		else if (NPC.frameCounter < 18.0)
+		{
+			NPC.frame.Y = frameHeight;
+		}
+		else if (NPC.frameCounter < 27.0)
+		{
+			NPC.frame.Y = frameHeight * 2;
+		}
 	}
 	public override void AI()
 	{
@@ -96,6 +117,7 @@ internal class VenusFlytrap : ModNPC
 		//NPC.rotation = ((float)Math.Atan2(Main.player[NPC.target].Center.Y - (double)NPC.Center.Y, Main.player[NPC.target].Center.X - (double)NPC.Center.X) + 3.14f) * 1f + ((float)Math.Atan2((double)NPC.velocity.Y, (double)NPC.velocity.X)) * 0.1f;
 
 		NPC.rotation = NPC.Center.DirectionTo(Main.player[NPC.target].Center).ToRotation() + MathHelper.Pi / 2;
+		//NPC.velocity = Vector2.Zero;
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
@@ -146,6 +168,7 @@ internal class VenusFlytrap : ModNPC
 	}
 	public override void OnSpawn(IEntitySource source)
 	{
+		NPC.frameCounter = (NPC.whoAmI * Main.rand.Next(6, 13)) % 26;
 		leftHead = NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.position.X - 50, (int)NPC.position.Y, ModContent.NPCType<VenusFlytrapSideHead>(), ai3: NPC.whoAmI);
 		rightHead = NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.position.X + 50, (int)NPC.position.Y, ModContent.NPCType<VenusFlytrapSideHead>(), ai3: NPC.whoAmI);
 
