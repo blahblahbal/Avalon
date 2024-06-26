@@ -34,7 +34,6 @@ public class IrateBones : ModNPC
         NPC.damage = 35;
         NPC.lifeMax = 350;
         NPC.defense = 15;
-        NPC.lavaImmune = true;
         NPC.width = 18;
         NPC.aiStyle = 3;
 		AIType = NPCID.AngryBones;
