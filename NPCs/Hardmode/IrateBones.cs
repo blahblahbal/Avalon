@@ -26,6 +26,7 @@ public class IrateBones : ModNPC
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 		Data.Sets.NPC.Undead[NPC.type] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
 	}
 
     public override void SetDefaults()
@@ -36,7 +37,9 @@ public class IrateBones : ModNPC
         NPC.lavaImmune = true;
         NPC.width = 18;
         NPC.aiStyle = 3;
-        NPC.value = 1000f;
+		AIType = NPCID.AngryBones;
+		AnimationType = NPCID.AngryBones;
+		NPC.value = 1000f;
         NPC.height = 40;
         NPC.knockBackResist = 0.5f;
         NPC.HitSound = SoundID.NPCHit2;
@@ -58,47 +61,13 @@ public class IrateBones : ModNPC
         NPC.damage = (int)(NPC.damage * 0.5f);
     }
 
-    public override void FindFrame(int frameHeight)
-    {
-        if (NPC.velocity.Y == 0f)
-        {
-            if (NPC.direction == 1)
-            {
-                NPC.spriteDirection = 1;
-            }
-
-            if (NPC.direction == -1)
-            {
-                NPC.spriteDirection = -1;
-            }
-
-            if (NPC.velocity.X == 0f)
-            {
-                NPC.frame.Y = 0;
-                NPC.frameCounter = 0.0;
-            }
-            else
-            {
-                NPC.frameCounter += Math.Abs(NPC.velocity.X) * 2f;
-                NPC.frameCounter += 1.0;
-                if (NPC.frameCounter > 6.0)
-                {
-                    NPC.frame.Y = NPC.frame.Y + frameHeight;
-                    NPC.frameCounter = 0.0;
-                }
-
-                if (NPC.frame.Y / frameHeight >= Main.npcFrameCount[NPC.type])
-                {
-                    NPC.frame.Y = frameHeight * 2;
-                }
-            }
-        }
-        else
-        {
-            NPC.frameCounter = 0.0;
-            NPC.frame.Y = frameHeight;
-        }
-    }
+	public override void PostAI()
+	{
+		if (NPC.velocity.Y == 0 && (NPC.velocity.X > 1f || NPC.velocity.X < 1f))
+		{
+			NPC.velocity.X = NPC.direction;
+		}
+	}
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.hardMode && spawnInfo.Player.ZoneDungeon
         ? 0.6f : 0f;
