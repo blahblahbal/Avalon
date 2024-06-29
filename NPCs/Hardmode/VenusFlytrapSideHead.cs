@@ -170,12 +170,12 @@ public class VenusFlytrapSideHead : ModNPC
 			Main.npc[MainHead].HitEffect();
 		}
 	}
-	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 v, Color drawColor)
+	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
 		Vector2 start = NPC.Center;
 		Vector2 end = new Vector2(NPC.ai[1], NPC.ai[2]);
-		start -= Main.screenPosition;
-		end -= Main.screenPosition;
+		start -= screenPos;
+		end -= screenPos;
 		Texture2D TEX = Mod.Assets.Request<Texture2D>("NPCs/Hardmode/VenusFlytrapVine").Value;
 		int linklength = TEX.Height;
 		Vector2 chain = end - start;
@@ -187,7 +187,7 @@ public class VenusFlytrapSideHead : ModNPC
 		for (int i = 0; i < numlinks; i++)
 		{
 			links[i] = start + chain / numlinks * i;
-			Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), Color.White, rotation + 1.57f, new Vector2(TEX.Width / 2, TEX.Height), 1f,
+			Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), Lighting.GetColor((links[i] + screenPos).ToTileCoordinates()), rotation + 1.57f, new Vector2(TEX.Width / 2, TEX.Height), 1f,
 				SpriteEffects.None, 1f);
 		}
 		//if (NPC.IsABestiaryIconDummy)

@@ -12,7 +12,7 @@ public class Sunstorm : ModProjectile
     {
         Projectile.width = 14;
         Projectile.height = 1200;
-        Projectile.alpha = 50;
+        //Projectile.alpha = 50;
         Projectile.DamageType = DamageClass.Magic;
         Projectile.friendly = true;
         Rectangle dims = this.GetDims();
@@ -46,4 +46,8 @@ public class Sunstorm : ModProjectile
             Projectile.Kill();
         }
     }
+	public override Color? GetAlpha(Color lightColor)
+	{
+		return new Color(255, 255, 255, 50);
+	}
 }
