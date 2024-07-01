@@ -78,7 +78,12 @@ public class ExxoAvalonOrigins : Mod
     /// </summary>
     public static readonly Mod? Tokens = ModLoader.TryGetMod("Tokens", out Mod obtainedMod) ? obtainedMod : null;
 
-    public static Color LastDiscoRGB;
+	/// <summary>
+	///     Gets the instance of the Biome Lava mod.
+	/// </summary>
+	public static readonly Mod? BiomeLava = ModLoader.TryGetMod("BiomeLava", out Mod obtainedMod) ? obtainedMod : null;
+
+	public static Color LastDiscoRGB;
 
     private readonly List<IReplaceAssets> assetReplacers = new();
 

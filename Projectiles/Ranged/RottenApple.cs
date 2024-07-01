@@ -10,23 +10,25 @@ namespace Avalon.Projectiles.Ranged;
 public class RottenApple : ModProjectile
 {
     public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width;
-        Projectile.height = dims.Height * 12 / 18 / Main.projFrames[Projectile.type];
+	{
+		Rectangle dims = this.GetDims();
+		Projectile.width = 12;
+        Projectile.height = 12;
         Projectile.aiStyle = 2;
         Projectile.friendly = true;
         Projectile.penetrate = 1;
         Projectile.DamageType = DamageClass.Ranged;
         AIType = ProjectileID.RottenEgg;
-    }
+		DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
+		DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
+	}
     public override bool? CanHitNPC(NPC target)
     {
         return target.lifeMax >= 1 && !target.dontTakeDamage;
     }
     public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
-        if (target.type == NPCID.Nurse || target.type == NPCID.DoctorBones || target.type == NPCID.WitchDoctor || target.type == NPCID.DrManFly)
+        if (target.type == NPCID.Nurse || target.type == NPCID.DoctorBones || target.type == NPCID.WitchDoctor || target.type == NPCID.DrManFly || target.type == NPCID.ZombieDoctor)
         {
             modifiers.FinalDamage *= 3f;
         }

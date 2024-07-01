@@ -128,7 +128,7 @@ public class BodyGlowmask : PlayerDrawLayer
         drawInfo.DrawDataCache.Add(drawData);
     }
 }
-public class aShoulderGlowmask : PlayerDrawLayer
+public class A_ShoulderGlowmask : PlayerDrawLayer
 { //Shoulder Drawing
     public override Position GetDefaultPosition()
     {
@@ -187,7 +187,7 @@ public class aShoulderGlowmask : PlayerDrawLayer
     }
 }
 
-public class zArmGlowmask : PlayerDrawLayer
+public class Z_ArmGlowmask : PlayerDrawLayer
 { //Arm Drawing
     public override Position GetDefaultPosition()
     {
@@ -264,7 +264,7 @@ public class zArmGlowmask : PlayerDrawLayer
     }
 }
 
-public class zBackArmGlowmask : PlayerDrawLayer
+public class Z_BackArmGlowmask : PlayerDrawLayer
 { //Back Arm Drawing
 	public override Position GetDefaultPosition()
 	{

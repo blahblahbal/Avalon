@@ -70,7 +70,7 @@ public class AvalonMobDrops : GlobalNPC
             npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<LifeDew>(), 1, 14, 20));
             npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ItemID.ChlorophyteOre, 1, 60, 120));
         }
-        if (npc.type == NPCID.AngryBones || npc.type >= NPCID.AngryBonesBig && npc.type <= NPCID.AngryBonesBigHelmet)
+        if (npc.type == NPCID.AngryBones || npc.type >= NPCID.AngryBonesBig && npc.type <= NPCID.AngryBonesBigHelmet || npc.type == ModContent.NPCType<IrateBones>())
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BlackWhetstone>(), 100));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MarrowMasher>(), 100));
@@ -85,7 +85,7 @@ public class AvalonMobDrops : GlobalNPC
         }
         if (Data.Sets.NPC.Undead[npc.type])
         {
-            ItemDropRule.ByCondition(hardModeCondition, ModContent.ItemType<SoullessLocket>(), 550);
+			npcLoot.Add(ItemDropRule.ByCondition(hardModeCondition, ModContent.ItemType<SoullessLocket>(), 550));
         }
 
         if (npc.type is NPCID.PincushionZombie or NPCID.SlimedZombie or NPCID.SwampZombie or NPCID.TwiggyZombie or
@@ -660,8 +660,9 @@ public class AvalonMobDrops : GlobalNPC
         globalLoot.Add(HallowKeyRule);
         globalLoot.Add(CrimsonKeyRule);
         globalLoot.Add(DesertKeyRule);
+		globalLoot.Add(ContagionKeyRule);
 
-        globalLoot.Add(ItemDropRule.ByCondition(undergroundHardmodeSnow, ModContent.ItemType<SoulofIce>(), 10));
+		globalLoot.Add(ItemDropRule.ByCondition(undergroundHardmodeSnow, ModContent.ItemType<SoulofIce>(), 10));
 
         globalLoot.Add(ItemDropRule.ByCondition(soulCondition, ItemID.SoulofNight, 5));
 

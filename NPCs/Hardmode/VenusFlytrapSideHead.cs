@@ -20,20 +20,45 @@ public class VenusFlytrapSideHead : ModNPC
 	public override void SetDefaults()
 	{
 		NPC.damage = 106;
-		NPC.lifeMax = 550;
+		NPC.lifeMax = 5500;
 		NPC.defense = 27;
 		NPC.noGravity = true;
-		NPC.width = 58;
+		NPC.width = 44;
 		NPC.aiStyle = -1;
 		NPC.npcSlots = 1f;
-		NPC.height = 58;
+		NPC.height = 44;
 		NPC.HitSound = SoundID.NPCHit32;
 		NPC.DeathSound = SoundID.NPCDeath35;
 		NPC.value = 200;
 		NPC.knockBackResist = 0f;
 		NPC.noTileCollide = true;
 		SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundTropics>().Type];
-		AnimationType = NPCID.AngryTrapper;
+		DrawOffsetY = 2f;
+	}
+	public override void OnSpawn(IEntitySource source)
+	{
+		NPC.frameCounter = (NPC.whoAmI * Main.rand.Next(6, 13)) % 26;
+	}
+	public override void FindFrame(int frameHeight)
+	{
+		NPC.frameCounter += 1.0;
+		if (NPC.frameCounter == 27.0)
+		{
+			NPC.frameCounter = 0.0;
+		}
+
+		if (NPC.frameCounter < 9.0)
+		{
+			NPC.frame.Y = 0;
+		}
+		else if (NPC.frameCounter < 18.0)
+		{
+			NPC.frame.Y = frameHeight;
+		}
+		else if (NPC.frameCounter < 27.0)
+		{
+			NPC.frame.Y = frameHeight * 2;
+		}
 	}
 	public int MainHead
 	{
@@ -49,12 +74,12 @@ public class VenusFlytrapSideHead : ModNPC
 	public override void AI()
 	{
 		Vector2 middleHeadPos = Main.npc[MainHead].position;
-		if (Vector2.Distance(middleHeadPos, NPC.position) < 60)
+		if (Vector2.Distance(middleHeadPos, NPC.position) < 44)
 		{
 			NPC.velocity = Vector2.Normalize(NPC.position - middleHeadPos) * 3f;
 		}
 		Vector2 otherHeadPos = Main.npc[(int)NPC.ai[0]].position;
-		if (Vector2.Distance(otherHeadPos, NPC.position) < 60)
+		if (Vector2.Distance(otherHeadPos, NPC.position) < 44)
 		{
 			NPC.velocity = Vector2.Normalize(NPC.position - otherHeadPos) * 3f;
 		}
@@ -116,6 +141,7 @@ public class VenusFlytrapSideHead : ModNPC
 		//NPC.rotation = ((float)Math.Atan2(Main.player[NPC.target].Center.Y - (double)NPC.Center.Y, Main.player[NPC.target].Center.X - (double)NPC.Center.X) + 3.14f) * 1f + ((float)Math.Atan2((double)NPC.velocity.Y, (double)NPC.velocity.X)) * 0.1f;
 
 		NPC.rotation = NPC.Center.DirectionTo(Main.player[Main.npc[MainHead].target].Center).ToRotation() + MathHelper.Pi / 2;
+		//NPC.velocity = Vector2.Zero;
 	}
 	public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 	{
@@ -144,12 +170,12 @@ public class VenusFlytrapSideHead : ModNPC
 			Main.npc[MainHead].HitEffect();
 		}
 	}
-	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 v, Color drawColor)
+	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
 		Vector2 start = NPC.Center;
 		Vector2 end = new Vector2(NPC.ai[1], NPC.ai[2]);
-		start -= Main.screenPosition;
-		end -= Main.screenPosition;
+		start -= screenPos;
+		end -= screenPos;
 		Texture2D TEX = Mod.Assets.Request<Texture2D>("NPCs/Hardmode/VenusFlytrapVine").Value;
 		int linklength = TEX.Height;
 		Vector2 chain = end - start;
@@ -161,7 +187,7 @@ public class VenusFlytrapSideHead : ModNPC
 		for (int i = 0; i < numlinks; i++)
 		{
 			links[i] = start + chain / numlinks * i;
-			Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), Color.White, rotation + 1.57f, new Vector2(TEX.Width / 2, TEX.Height), 1f,
+			Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), Lighting.GetColor((links[i] + screenPos).ToTileCoordinates()), rotation + 1.57f, new Vector2(TEX.Width / 2, TEX.Height), 1f,
 				SpriteEffects.None, 1f);
 		}
 		//if (NPC.IsABestiaryIconDummy)
