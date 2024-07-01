@@ -60,9 +60,9 @@ public class DungeonRemoveCrackedBricks : GenPass
         bool otherColors = WorldGen.genRand.NextBool(2);
         if (otherColors)
         {
-            for (int i = 100; i < Main.maxTilesX - 100; i++)
+            for (int i = 20; i < Main.maxTilesX - 20; i++)
             {
-                for (int j = 100; j < Main.maxTilesY - 200; j++)
+                for (int j = 30; j < Main.maxTilesY - 200; j++)
                 {
                     if (Main.tile[i, j].TileType is TileID.BlueDungeonBrick or TileID.GreenDungeonBrick or TileID.PinkDungeonBrick &&
                         Main.tile[i, j].HasTile)
@@ -439,9 +439,9 @@ public class DungeonRemoveCrackedBricks : GenPass
             }
         }
         #endregion
-        for (int i = 100; i < Main.maxTilesX - 100; i++)
+        for (int i = 30; i < Main.maxTilesX - 30; i++)
         {
-            for (int j = 100; j < Main.maxTilesY - 200; j++)
+            for (int j = 20; j < Main.maxTilesY - 200; j++)
             {
                 if ((Main.tile[i, j].TileType is TileID.CrackedBlueDungeonBrick or TileID.CrackedGreenDungeonBrick or TileID.CrackedPinkDungeonBrick) &&
                     Main.tile[i, j].HasTile && ModContent.GetInstance<AvalonConfig>().RevertDungeonGen)

@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Common.Players;
 using System;
+using Avalon.Tiles;
 
 namespace Avalon.Hooks;
 
@@ -83,11 +84,11 @@ internal class AdjTiles : ModHook
             }
             else
             {
-                self.adjTile[TileID.TinkerersWorkbench] = false;
-                self.adjTile[TileID.WorkBenches] = false;
-                self.adjTile[TileID.HeavyWorkBench] = false;
-                self.adjTile[TileID.Anvils] = false;
-                self.adjTile[TileID.MythrilAnvil] = false;
+                //self.adjTile[TileID.TinkerersWorkbench] = false;
+                //self.adjTile[TileID.WorkBenches] = false;
+                //self.adjTile[TileID.HeavyWorkBench] = false;
+                //self.adjTile[TileID.Anvils] = false;
+                //self.adjTile[TileID.MythrilAnvil] = false;
             }
             if (self.GetModPlayer<AvalonPlayer>().PocketBench)
             {
@@ -99,6 +100,10 @@ internal class AdjTiles : ModHook
                         {
                             self.adjTile[self.inventory[o].createTile] = true;
                         }
+						if (self.inventory[o].createTile == ModContent.TileType<NaquadahAnvil>() && !self.adjTile[TileID.MythrilAnvil])
+						{
+							self.adjTile[TileID.MythrilAnvil] = true;
+						}
                     }
                 }
                 for (int o = 0; o < self.bank.item.Length; o++)
@@ -109,7 +114,11 @@ internal class AdjTiles : ModHook
                         {
                             self.adjTile[self.bank.item[o].createTile] = true;
                         }
-                    }
+						if (self.bank.item[o].createTile == ModContent.TileType<NaquadahAnvil>() && !self.adjTile[TileID.MythrilAnvil])
+						{
+							self.adjTile[TileID.MythrilAnvil] = true;
+						}
+					}
                 }
                 for (int o = 0; o < self.bank2.item.Length; o++)
                 {
@@ -119,7 +128,11 @@ internal class AdjTiles : ModHook
                         {
                             self.adjTile[self.bank2.item[o].createTile] = true;
                         }
-                    }
+						if (self.bank2.item[o].createTile == ModContent.TileType<NaquadahAnvil>() && !self.adjTile[TileID.MythrilAnvil])
+						{
+							self.adjTile[TileID.MythrilAnvil] = true;
+						}
+					}
                 }
                 for (int o = 0; o < self.bank3.item.Length; o++)
                 {
@@ -129,7 +142,11 @@ internal class AdjTiles : ModHook
                         {
                             self.adjTile[self.bank3.item[o].createTile] = true;
                         }
-                    }
+						if (self.bank3.item[o].createTile == ModContent.TileType<NaquadahAnvil>() && !self.adjTile[TileID.MythrilAnvil])
+						{
+							self.adjTile[TileID.MythrilAnvil] = true;
+						}
+					}
                 }
                 for (int o = 0; o < self.bank4.item.Length; o++)
                 {
@@ -139,7 +156,11 @@ internal class AdjTiles : ModHook
                         {
                             self.adjTile[self.bank4.item[o].createTile] = true;
                         }
-                    }
+						if (self.bank4.item[o].createTile == ModContent.TileType<NaquadahAnvil>() && !self.adjTile[TileID.MythrilAnvil])
+						{
+							self.adjTile[TileID.MythrilAnvil] = true;
+						}
+					}
                 }
                 Recipe.FindRecipes();
             }

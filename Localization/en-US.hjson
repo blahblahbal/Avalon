@@ -2600,7 +2600,7 @@ Mods: {
 				Tooltip:
 					'''
 					Melee attacks inflict Lacerated
-					+15 armor penetration
+					+15 melee armor penetration
 					'''
 			}
 

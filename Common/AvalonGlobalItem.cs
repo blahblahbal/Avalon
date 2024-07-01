@@ -65,7 +65,14 @@ public class AvalonGlobalItem : GlobalItem
         ModContent.TileType<LivingLightning>(),
         //ModContent.TileType<VineRope>(),
     };
-    public override void SetStaticDefaults()
+	public override void UpdateInventory(Item item, Player player)
+	{
+		if (item.type == ItemID.GreedyRing || item.type == ItemID.DiscountCard)
+		{
+			player.discountEquipped = true;
+		}
+	}
+	public override void SetStaticDefaults()
     {
         #region Shimmer
         // ores

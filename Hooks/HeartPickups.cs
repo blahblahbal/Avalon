@@ -16,9 +16,21 @@ namespace Avalon.Hooks
         {
             On_Item.NewItem_Inner += OnItemNewItem;
             On_Player.PickupItem += OnPickupItem;
+			On_Player.GetItemGrabRange += On_Player_GetItemGrabRange;
         }
 
-        private static Item OnPickupItem(On_Player.orig_PickupItem orig, Player self, int playerIndex, int worldItemArrayIndex, Item itemToPickUp)
+		private int On_Player_GetItemGrabRange(On_Player.orig_GetItemGrabRange orig, Player self, Item item)
+		{
+			int range = orig.Invoke(self, item);
+			if (item.type == ModContent.ItemType<GoldApple>() || item.type == ModContent.ItemType<GoldHeart>() || item.type == ModContent.ItemType<GoldCandyCane>() ||
+				item.type == ModContent.ItemType<PlatinumApple>() || item.type == ModContent.ItemType<PlatinumHeart>() || item.type == ModContent.ItemType<PlatinumCandyCane>())
+			{
+				range += Item.lifeGrabRange;
+			}
+			return range;
+		}
+
+		private static Item OnPickupItem(On_Player.orig_PickupItem orig, Player self, int playerIndex, int worldItemArrayIndex, Item itemToPickUp)
         {
             if (self.GetModPlayer<AvalonPlayer>().Heartsick || self.GetModPlayer<AvalonPlayer>().HeartsickElixir)
             {

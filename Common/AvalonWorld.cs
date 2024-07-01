@@ -95,6 +95,9 @@ public class AvalonWorld : ModSystem
 
     public WorldJungle WorldJungle;
 
+	public static bool OopsAllCaves;
+	public static bool OopsAllCavesGen;
+
     public static int DungeonLocationX;
     public static int JungleLocationX;
 
@@ -160,6 +163,8 @@ public class AvalonWorld : ModSystem
         ModContent.GetInstance<CoughwoodLantern>().Coordinates = new();
         ModContent.GetInstance<HeartstoneLantern>().Coordinates = new();
         ModContent.GetInstance<ResistantWoodLantern>().Coordinates = new();
+
+		OopsAllCaves = false;
     }
     public override void PostAddRecipes()
     {
@@ -200,6 +205,8 @@ public class AvalonWorld : ModSystem
         AvalonConfig.Save(config);
 
         tag["Avalon:JungleX"] = JungleLocationX;
+
+		tag["Avalon:OopsAllCaves"] = OopsAllCaves;
     }
     public override void SaveWorldHeader(TagCompound tag)
     {
@@ -209,7 +216,12 @@ public class AvalonWorld : ModSystem
 
     public override void LoadWorldData(TagCompound tag)
     {
-        if (tag.ContainsKey("Avalon:ContagionBG"))
+		if (tag.ContainsKey("Avalon:OopsAllCaves"))
+		{
+			OopsAllCaves = tag.GetBool("Avalon:OopsAllCaves");
+		}
+
+		if (tag.ContainsKey("Avalon:ContagionBG"))
         {
             SecondaryContagionBG = tag.GetAsInt("Avalon:ContagionBG");
         }

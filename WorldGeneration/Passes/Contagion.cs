@@ -370,6 +370,10 @@ internal class Contagion : GenPass
     /// <param name="j">The y coordinate to start the generation at.</param>
     public static void ContagionRunner(int i, int j)
     {
+		if (AvalonWorld.OopsAllCavesGen)
+		{
+			j += 40;
+		}
         int j2 = j;
         int radius = WorldGen.genRand.Next(70, 75);
         int radMod = radius - 10;

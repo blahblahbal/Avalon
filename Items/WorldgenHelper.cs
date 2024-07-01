@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Hooks;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.CrystalMines;
 using Avalon.Tiles.Tropics;
@@ -42,6 +43,7 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
+			AvalonSpecialSeedsGenSystem.GenerateSpawnArea(x, y);
             //WorldGeneration.Structures.IceShrine.Generate(x, y);
             //WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
             //WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);
