@@ -125,15 +125,19 @@ public abstract class ModHerb : ModTile
         bool intoRenderTargets = true;
         bool flag = intoRenderTargets || Main.LightingEveryFrame;
 
-        if (Main.tile[i, j].TileFrameX > 18 && flag)
+        if (Main.tile[i, j].TileFrameX > 16 && flag)
         {
             Main.instance.TilesRenderer.AddSpecialPoint(i, j, 3);
             return false;
         }
 
         return true;
-    }
-    public PlantStage GetStage(int i, int j)
+	}
+	public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
+	{
+		offsetY = -2;
+	}
+	public PlantStage GetStage(int i, int j)
     {
         Tile tile = Framing.GetTileSafely(i, j); //Always use Framing.GetTileSafely instead of Main.tile as it prevents any errors caused from other mods
         return (PlantStage)(tile.TileFrameX / 18);

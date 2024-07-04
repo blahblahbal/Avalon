@@ -86,7 +86,7 @@ public class LargeHerbsStage3 : ModTile
                 type = DustID.GoldCritter_LessOutline;
                 break;
             case 10:
-                type = DustID.HallowedPlants;
+                type = DustID.EnchantedNightcrawler;
                 break;
         }
         return base.CreateDust(i, j, ref type);
