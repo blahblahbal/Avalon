@@ -56,7 +56,7 @@ public class HeadGlowmask : PlayerDrawLayer
         {
             return;
         }
-        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
+        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha) * drawPlayer.stealth, drawInfo.shadow);
 
         Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
 
@@ -104,7 +104,7 @@ public class BodyGlowmask : PlayerDrawLayer
         {
             return;
         }
-        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
+        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha) * drawPlayer.stealth, drawInfo.shadow);
 
         Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
 
@@ -130,138 +130,138 @@ public class BodyGlowmask : PlayerDrawLayer
 }
 public class A_ShoulderGlowmask : PlayerDrawLayer
 { //Shoulder Drawing
-    public override Position GetDefaultPosition()
-    {
-        return new AfterParent(Terraria.DataStructures.PlayerDrawLayers.ArmOverItem);
-    }
+	public override Position GetDefaultPosition()
+	{
+		return new AfterParent(Terraria.DataStructures.PlayerDrawLayers.ArmOverItem);
+	}
 
-    protected override void Draw(ref PlayerDrawSet drawInfo)
-    {
-        Player drawPlayer = drawInfo.drawPlayer;
-        if (drawInfo.drawPlayer.dead)
-        {
-            return;
-        }
+	protected override void Draw(ref PlayerDrawSet drawInfo)
+	{
+		Player drawPlayer = drawInfo.drawPlayer;
+		if (drawInfo.drawPlayer.dead)
+		{
+			return;
+		}
 
-        Terraria.Item slot;
+		Terraria.Item slot;
 
-        if (drawPlayer.armor[11].type == ItemID.None && drawPlayer.armor[1].type != ItemID.None)
-        {
-            slot = drawPlayer.armor[1];
-        }
-        else if (drawPlayer.armor[11].type != ItemID.None)
-        {
-            slot = drawPlayer.armor[11];
-        }
-        else
-        {
-            return;
-        }
+		if (drawPlayer.armor[11].type == ItemID.None && drawPlayer.armor[1].type != ItemID.None)
+		{
+			slot = drawPlayer.armor[1];
+		}
+		else if (drawPlayer.armor[11].type != ItemID.None)
+		{
+			slot = drawPlayer.armor[11];
+		}
+		else
+		{
+			return;
+		}
 
-        if (drawPlayer.body != slot.bodySlot)
-        {
-            return;
-        }
-        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
+		if (drawPlayer.body != slot.bodySlot)
+		{
+			return;
+		}
+		Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha) * drawPlayer.stealth, drawInfo.shadow);
 
-        Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
+		Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
 
-        float drawX = (int)drawInfo.Position.X + drawPlayer.width / 2;
-        float drawY = (int)drawInfo.Position.Y + drawPlayer.height - drawPlayer.bodyFrame.Height / 2 + 4f;
-        Vector2 origin = drawInfo.bodyVect;
-        Vector2 position = new Vector2(drawX, drawY) + drawPlayer.bodyPosition - Main.screenPosition;
+		float drawX = (int)drawInfo.Position.X + drawPlayer.width / 2;
+		float drawY = (int)drawInfo.Position.Y + drawPlayer.height - drawPlayer.bodyFrame.Height / 2 + 4f;
+		Vector2 origin = drawInfo.bodyVect;
+		Vector2 position = new Vector2(drawX, drawY) + drawPlayer.bodyPosition - Main.screenPosition;
 
-        Rectangle frame = drawInfo.compBackShoulderFrame;
-        int walkFrame = drawPlayer.bodyFrame.Y / 56;
-        if (walkFrame == 7 || walkFrame == 8 || walkFrame == 9 || walkFrame == 14 || walkFrame == 15 || walkFrame == 16)
-        {
-            frame.Y += 2; //walking bop
-        }
+		Rectangle frame = drawInfo.compBackShoulderFrame;
+		int walkFrame = drawPlayer.bodyFrame.Y / 56;
+		if (walkFrame == 7 || walkFrame == 8 || walkFrame == 9 || walkFrame == 14 || walkFrame == 15 || walkFrame == 16)
+		{
+			frame.Y += 2; //walking bop
+		}
 
-        float rotation = drawPlayer.bodyRotation;
-        SpriteEffects spriteEffects = drawInfo.playerEffect;
+		float rotation = drawPlayer.bodyRotation;
+		SpriteEffects spriteEffects = drawInfo.playerEffect;
 
-        DrawData drawData = new(texture, position, frame, color, rotation, origin, 1f, spriteEffects, 0);
-        drawData.shader = drawInfo.cBody;
-        drawInfo.DrawDataCache.Add(drawData);
-    }
+		DrawData drawData = new(texture, position, frame, color, rotation, origin, 1f, spriteEffects, 0);
+		drawData.shader = drawInfo.cBody;
+		drawInfo.DrawDataCache.Add(drawData);
+	}
 }
 
 public class Z_ArmGlowmask : PlayerDrawLayer
 { //Arm Drawing
-    public override Position GetDefaultPosition()
-    {
-        return new AfterParent(Terraria.DataStructures.PlayerDrawLayers.ArmOverItem);
-    }
+	public override Position GetDefaultPosition()
+	{
+		return new AfterParent(Terraria.DataStructures.PlayerDrawLayers.ArmOverItem);
+	}
 
-    protected override void Draw(ref PlayerDrawSet drawInfo)
-    {
-        Player drawPlayer = drawInfo.drawPlayer;
-        if (drawInfo.drawPlayer.dead)
-        {
-            return;
-        }
+	protected override void Draw(ref PlayerDrawSet drawInfo)
+	{
+		Player drawPlayer = drawInfo.drawPlayer;
+		if (drawInfo.drawPlayer.dead)
+		{
+			return;
+		}
 
-        Terraria.Item slot;
+		Terraria.Item slot;
 
-        if (drawPlayer.armor[11].type == ItemID.None && drawPlayer.armor[1].type != ItemID.None)
-        {
-            slot = drawPlayer.armor[1];
-        }
-        else if (drawPlayer.armor[11].type != ItemID.None)
-        {
-            slot = drawPlayer.armor[11];
-        }
-        else
-        {
-            return;
-        }
+		if (drawPlayer.armor[11].type == ItemID.None && drawPlayer.armor[1].type != ItemID.None)
+		{
+			slot = drawPlayer.armor[1];
+		}
+		else if (drawPlayer.armor[11].type != ItemID.None)
+		{
+			slot = drawPlayer.armor[11];
+		}
+		else
+		{
+			return;
+		}
 
-        if (drawPlayer.body != slot.bodySlot)
-        {
-            return;
-        }
-        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
+		if (drawPlayer.body != slot.bodySlot)
+		{
+			return;
+		}
+		Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha) * drawPlayer.stealth, drawInfo.shadow);
 
-        Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
+		Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
 
-        float drawX = (int)drawInfo.Position.X + drawPlayer.width / 2;
-        float drawY = (int)drawInfo.Position.Y + drawPlayer.height - drawPlayer.bodyFrame.Height / 2 + 4f;
-        Vector2 origin = drawInfo.bodyVect;
-        Vector2 position = new Vector2(drawX, drawY) + drawPlayer.bodyPosition - Main.screenPosition;
-        float rotation = drawPlayer.bodyRotation;
-        SpriteEffects spriteEffects = drawInfo.playerEffect;
-        if (drawPlayer.compositeFrontArm.enabled)
-        {
-            if (drawInfo.compFrontArmFrame.X / drawInfo.compFrontArmFrame.Width >= 7)
-            {
-                position += new Vector2((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipHorizontally)) ? 1 : (-1), (!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically)) ? 1 : (-1));
-            }
-            Vector2 vector2 = Main.OffsetsPlayerHeadgear[drawPlayer.bodyFrame.Y / drawPlayer.bodyFrame.Height];
-            vector2.Y -= 2f;
-            position += vector2 * -drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically).ToDirectionInt();
-            Vector2 offset = new Vector2(-5 * ((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipHorizontally)) ? 1 : (-1)), 0f);
-            origin += offset;
-            position += offset + drawInfo.frontShoulderOffset;
-            rotation = drawPlayer.bodyRotation + drawInfo.compositeFrontArmRotation;
+		float drawX = (int)drawInfo.Position.X + drawPlayer.width / 2;
+		float drawY = (int)drawInfo.Position.Y + drawPlayer.height - drawPlayer.bodyFrame.Height / 2 + 4f;
+		Vector2 origin = drawInfo.bodyVect;
+		Vector2 position = new Vector2(drawX, drawY) + drawPlayer.bodyPosition - Main.screenPosition;
+		float rotation = drawPlayer.bodyRotation;
+		SpriteEffects spriteEffects = drawInfo.playerEffect;
+		if (drawPlayer.compositeFrontArm.enabled)
+		{
+			if (drawInfo.compFrontArmFrame.X / drawInfo.compFrontArmFrame.Width >= 7)
+			{
+				position += new Vector2((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipHorizontally)) ? 1 : (-1), (!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically)) ? 1 : (-1));
+			}
+			Vector2 vector2 = Main.OffsetsPlayerHeadgear[drawPlayer.bodyFrame.Y / drawPlayer.bodyFrame.Height];
+			vector2.Y -= 2f;
+			position += vector2 * -drawInfo.playerEffect.HasFlag(SpriteEffects.FlipVertically).ToDirectionInt();
+			Vector2 offset = new Vector2(-5 * ((!drawInfo.playerEffect.HasFlag(SpriteEffects.FlipHorizontally)) ? 1 : (-1)), 0f);
+			origin += offset;
+			position += offset + drawInfo.frontShoulderOffset;
+			rotation = drawPlayer.bodyRotation + drawInfo.compositeFrontArmRotation;
 
-            DrawData drawData = new(texture, position, drawInfo.compFrontArmFrame, color, rotation, origin, 1f, spriteEffects, 0);
-            drawData.shader = drawInfo.cBody;
-            drawInfo.DrawDataCache.Add(drawData);
-        }
-        else
-        {
-            Rectangle frame = drawInfo.compFrontArmFrame;
-            int walkFrame = drawPlayer.bodyFrame.Y / 56;
-            if (walkFrame == 7 || walkFrame == 8 || walkFrame == 9 || walkFrame == 14 || walkFrame == 15 || walkFrame == 16)
-            {
-                frame.Y += 2; //walking bop
-            }
-            DrawData drawData = new(texture, position, frame, color, rotation, origin, 1f, spriteEffects, 0);
-            drawData.shader = drawInfo.cBody;
-            drawInfo.DrawDataCache.Add(drawData);
-        }
-    }
+			DrawData drawData = new(texture, position, drawInfo.compFrontArmFrame, color, rotation, origin, 1f, spriteEffects, 0);
+			drawData.shader = drawInfo.cBody;
+			drawInfo.DrawDataCache.Add(drawData);
+		}
+		else
+		{
+			Rectangle frame = drawInfo.compFrontArmFrame;
+			int walkFrame = drawPlayer.bodyFrame.Y / 56;
+			if (walkFrame == 7 || walkFrame == 8 || walkFrame == 9 || walkFrame == 14 || walkFrame == 15 || walkFrame == 16)
+			{
+				frame.Y += 2; //walking bop
+			}
+			DrawData drawData = new(texture, position, frame, color, rotation, origin, 1f, spriteEffects, 0);
+			drawData.shader = drawInfo.cBody;
+			drawInfo.DrawDataCache.Add(drawData);
+		}
+	}
 }
 
 public class Z_BackArmGlowmask : PlayerDrawLayer
@@ -298,7 +298,7 @@ public class Z_BackArmGlowmask : PlayerDrawLayer
 		{
 			return;
 		}
-		Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
+		Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha) * drawPlayer.stealth, drawInfo.shadow);
 
 		Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
 
@@ -371,7 +371,7 @@ public class LegsGlowmask : PlayerDrawLayer
         {
             return;
         }
-        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha), drawInfo.shadow);
+        Color color = drawPlayer.GetImmuneAlphaPure(new Color(255, 255, 255, slot.GetGlobalItem<ArmorGlowmask>().glowAlpha) * drawPlayer.stealth, drawInfo.shadow);
 
         Texture2D texture = slot.GetGlobalItem<ArmorGlowmask>().glowTexture;
 
