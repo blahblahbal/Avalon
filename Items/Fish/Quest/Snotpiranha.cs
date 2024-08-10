@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,7 +24,7 @@ class Snotpiranha : ModItem
     }
     public override bool IsAnglerQuestAvailable()
     {
-        return true;
+        return ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion;
     }
 
     public override void AnglerQuestChat(ref string description, ref string catchLocation)

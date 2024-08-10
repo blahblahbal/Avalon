@@ -1,3 +1,4 @@
+using Avalon.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -19,6 +20,7 @@ class Blahtue : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.maxStack = 9999;
         Item.value = 300;
+		Item.rare = ModContent.RarityType<BlahRarity>();
         Item.useAnimation = 15;
         Item.height = dims.Height;
     }
