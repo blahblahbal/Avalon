@@ -73,52 +73,22 @@ public class HellboundHalberd : ModItem
             }
         }
     }
-    public override bool CanUseItem(Player player)
-    {
-        return player.ownedProjectileCounts[Item.shoot] < 1 && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] < 1;
-    }
     public override bool AltFunctionUse(Player player)
     {
         return true;
     }
-    public override void HoldItem(Player player)
-    {
-        if (player.altFunctionUse == 2 && player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] == 0)
-        {
-            Vector2 mousePos = Main.ReverseGravitySupport(Main.MouseScreen);
-            if (Main.netMode == NetmodeID.MultiplayerClient)
-            {
-                player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
-                CursorPosition.SendPacket(mousePos, player.whoAmI);
-            }
-            else if (Main.netMode == NetmodeID.SinglePlayer)
-            {
-                player.GetModPlayer<AvalonPlayer>().MousePosition = mousePos;
-            }
-            float velX = mousePos.X + Main.screenPosition.X - player.Center.X;
-            float velY = mousePos.Y + Main.screenPosition.Y - player.Center.Y;
-
-            Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, new Vector2(velX, velY),
-                ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>(), Item.damage, Item.knockBack);
-
-            if (!player.ItemAnimationJustStarted)
-            {
-                SoundEngine.PlaySound(SoundID.Item1, player.Center);
-            }
-            //player.direction = Math.Sign(mousePos.X + Main.screenPosition.X - player.Center.X);
-        }
-    }
-    //public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-    //{
-    //    target.AddBuff(BuffID.Ichor, 60 * 4);
-    //}
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
-        if (player.altFunctionUse != 2)
+        if (player.altFunctionUse == 2)
         {
             Projectile.NewProjectile(player.GetSource_ItemUse(Item), position, velocity,
-                ModContent.ProjectileType<Projectiles.Melee.HellboundHalberd>(), Item.damage, Item.knockBack);
+                ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>(), Item.damage, Item.knockBack);
         }
+		else
+		{
+			Projectile.NewProjectile(player.GetSource_ItemUse(Item), position, velocity,
+				ModContent.ProjectileType<Projectiles.Melee.HellboundHalberd>(), Item.damage, Item.knockBack);
+		}
         return false;
     }
 }

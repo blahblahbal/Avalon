@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Avalon.Items.Material;
 using Avalon.Items.Vanity;
 using Microsoft.Xna.Framework;
@@ -32,7 +33,7 @@ public class TropicalLongGrass : ModTile
         TileObjectData.newTile.WaterPlacement = LiquidPlacement.Allowed;
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.addTile(Type);
-        DustType = ModContent.DustType<Dusts.TropicalDust>();
+        DustType = ModContent.DustType<TropicalGrassBladeDust>();
         HitSound = SoundID.Grass;
         AddMapEntry(new Color(58, 188, 32));
     }

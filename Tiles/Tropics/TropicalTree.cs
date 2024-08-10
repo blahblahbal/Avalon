@@ -14,7 +14,6 @@ public class TropicalTree : ModTree
 
     public override void SetTreeFoliageSettings(Tile tile, ref int xoffset, ref int treeFrame, ref int floorY, ref int topTextureFrameWidth, ref int topTextureFrameHeight)
     {
-        xoffset = 2;
         topTextureFrameWidth = 116;
         topTextureFrameHeight = 96;
     }

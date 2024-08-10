@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Reflection;
+using Avalon.Dusts;
 
 namespace Avalon.Tiles.Tropics;
 
@@ -20,7 +21,7 @@ public class TropicalVines : ModTile
         Main.tileLavaDeath[Type] = true;
         Main.tileNoFail[Type] = true;
         HitSound = SoundID.Grass;
-        DustType = ModContent.DustType<Dusts.TropicalDust>();
+        DustType = ModContent.DustType<TropicalGrassBladeDust>();
         AddMapEntry(new Color(61, 100, 22));
     }
 

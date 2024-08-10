@@ -1388,169 +1388,175 @@ public class AvalonWorld : ModSystem
         }
     }
 
-    //public static void CheckLargeHerb(int x, int y, int type)
-    //{
-    //    if (WorldGen.destroyObject)
-    //    {
-    //        return;
-    //    }
+	//public static void CheckLargeHerb(int x, int y, int type)
+	//{
+	//    if (WorldGen.destroyObject)
+	//    {
+	//        return;
+	//    }
 
-    //    Tile t = Main.tile[x, y];
-    //    int style = t.TileFrameX / 18;
-    //    bool destroy = false;
-    //    int fixedY = y;
-    //    int yFrame = Main.tile[x, y].TileFrameY;
-    //    fixedY -= yFrame / 18;
-    //    if (!WorldGen.SolidTile2(x, fixedY + 3) || !Main.tile[x, fixedY].HasTile ||
-    //        !Main.tile[x, fixedY + 1].HasTile || !Main.tile[x, fixedY + 2].HasTile)
-    //    {
-    //        destroy = true;
-    //    }
+	//    Tile t = Main.tile[x, y];
+	//    int style = t.TileFrameX / 18;
+	//    bool destroy = false;
+	//    int fixedY = y;
+	//    int yFrame = Main.tile[x, y].TileFrameY;
+	//    fixedY -= yFrame / 18;
+	//    if (!WorldGen.SolidTile2(x, fixedY + 3) || !Main.tile[x, fixedY].HasTile ||
+	//        !Main.tile[x, fixedY + 1].HasTile || !Main.tile[x, fixedY + 2].HasTile)
+	//    {
+	//        destroy = true;
+	//    }
 
-    //    if (destroy)
-    //    {
-    //        WorldGen.destroyObject = true;
-    //        for (int u = fixedY; u < fixedY + 3; u++)
-    //        {
-    //            WorldGen.KillTile(x, u);
-    //        }
+	//    if (destroy)
+	//    {
+	//        WorldGen.destroyObject = true;
+	//        for (int u = fixedY; u < fixedY + 3; u++)
+	//        {
+	//            WorldGen.KillTile(x, u);
+	//        }
 
-    //        // 469 through 471 are the immature tiles of the large herb; 472 is the mature version
-    //        if (type == (ushort)ModContent.TileType<LargeHerbsStage1>() ||
-    //            type == (ushort)ModContent.TileType<LargeHerbsStage2>() ||
-    //            type == (ushort)ModContent.TileType<LargeHerbsStage3>())
-    //        {
-    //            int item = 0;
-    //            switch (style)
-    //            {
-    //                case 0:
-    //                    item = ModContent.ItemType<LargeDaybloomSeed>();
-    //                    break;
-    //                case 1:
-    //                    item = ModContent.ItemType<LargeMoonglowSeed>();
-    //                    break;
-    //                case 2:
-    //                    item = ModContent.ItemType<LargeBlinkrootSeed>();
-    //                    break;
-    //                case 3:
-    //                    item = ModContent.ItemType<LargeDeathweedSeed>();
-    //                    break;
-    //                case 4:
-    //                    item = ModContent.ItemType<LargeWaterleafSeed>();
-    //                    break;
-    //                case 5:
-    //                    item = ModContent.ItemType<LargeFireblossomSeed>();
-    //                    break;
-    //                case 6:
-    //                    item = ModContent.ItemType<LargeShiverthornSeed>();
-    //                    break;
-    //                case 7:
-    //                    item = ModContent.ItemType<LargeBloodberrySeed>();
-    //                    break;
-    //                case 8:
-    //                    item = ModContent.ItemType<LargeSweetstemSeed>();
-    //                    break;
-    //                case 9:
-    //                    item = ModContent.ItemType<LargeBarfbushSeed>();
-    //                    break;
-    //                case 10:
-    //                    item = ModContent.ItemType<LargeHolybirdSeed>();
-    //                    break;
-    //                case 11:
-    //                    item = ModContent.ItemType<LargeTwilightPlumeSeed>();
-    //                    break;
-    //            } // 3710 through 3719 are the seeds
+	//        // 469 through 471 are the immature tiles of the large herb; 472 is the mature version
+	//        if (type == (ushort)ModContent.TileType<LargeHerbsStage1>() ||
+	//            type == (ushort)ModContent.TileType<LargeHerbsStage2>() ||
+	//            type == (ushort)ModContent.TileType<LargeHerbsStage3>())
+	//        {
+	//            int item = 0;
+	//            switch (style)
+	//            {
+	//                case 0:
+	//                    item = ModContent.ItemType<LargeDaybloomSeed>();
+	//                    break;
+	//                case 1:
+	//                    item = ModContent.ItemType<LargeMoonglowSeed>();
+	//                    break;
+	//                case 2:
+	//                    item = ModContent.ItemType<LargeBlinkrootSeed>();
+	//                    break;
+	//                case 3:
+	//                    item = ModContent.ItemType<LargeDeathweedSeed>();
+	//                    break;
+	//                case 4:
+	//                    item = ModContent.ItemType<LargeWaterleafSeed>();
+	//                    break;
+	//                case 5:
+	//                    item = ModContent.ItemType<LargeFireblossomSeed>();
+	//                    break;
+	//                case 6:
+	//                    item = ModContent.ItemType<LargeShiverthornSeed>();
+	//                    break;
+	//                case 7:
+	//                    item = ModContent.ItemType<LargeBloodberrySeed>();
+	//                    break;
+	//                case 8:
+	//                    item = ModContent.ItemType<LargeSweetstemSeed>();
+	//                    break;
+	//                case 9:
+	//                    item = ModContent.ItemType<LargeBarfbushSeed>();
+	//                    break;
+	//                case 10:
+	//                    item = ModContent.ItemType<LargeHolybirdSeed>();
+	//                    break;
+	//                case 11:
+	//                    item = ModContent.ItemType<LargeTwilightPlumeSeed>();
+	//                    break;
+	//            } // 3710 through 3719 are the seeds
 
-    //            if (item > 0)
-    //            {
-    //                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(x, y), x * 16, fixedY * 16, 16, 48, item);
-    //            }
-    //        }
-    //        else if (type == ModContent.TileType<LargeHerbsStage4>())
-    //        {
-    //            int item = 0;
-    //            switch (style)
-    //            {
-    //                case 0:
-    //                    item = ModContent.ItemType<LargeDaybloom>();
-    //                    break;
-    //                case 1:
-    //                    item = ModContent.ItemType<LargeMoonglow>();
-    //                    break;
-    //                case 2:
-    //                    item = ModContent.ItemType<LargeBlinkroot>();
-    //                    break;
-    //                case 3:
-    //                    item = ModContent.ItemType<LargeDeathweed>();
-    //                    break;
-    //                case 4:
-    //                    item = ModContent.ItemType<LargeWaterleaf>();
-    //                    break;
-    //                case 5:
-    //                    item = ModContent.ItemType<LargeFireblossom>();
-    //                    break;
-    //                case 6:
-    //                    item = ModContent.ItemType<LargeShiverthorn>();
-    //                    break;
-    //                case 7:
-    //                    item = ModContent.ItemType<LargeBloodberry>();
-    //                    break;
-    //                case 8:
-    //                    item = ModContent.ItemType<LargeSweetstem>();
-    //                    break;
-    //                case 9:
-    //                    item = ModContent.ItemType<LargeBarfbush>();
-    //                    break;
-    //                case 10:
-    //                    item = ModContent.ItemType<LargeHolybird>();
-    //                    break;
-    //                case 11:
-    //                    item = ModContent.ItemType<LargeTwilightPlume>();
-    //                    break;
-    //            }
+	//            if (item > 0)
+	//            {
+	//                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(x, y), x * 16, fixedY * 16, 16, 48, item);
+	//            }
+	//        }
+	//        else if (type == ModContent.TileType<LargeHerbsStage4>())
+	//        {
+	//            int item = 0;
+	//            switch (style)
+	//            {
+	//                case 0:
+	//                    item = ModContent.ItemType<LargeDaybloom>();
+	//                    break;
+	//                case 1:
+	//                    item = ModContent.ItemType<LargeMoonglow>();
+	//                    break;
+	//                case 2:
+	//                    item = ModContent.ItemType<LargeBlinkroot>();
+	//                    break;
+	//                case 3:
+	//                    item = ModContent.ItemType<LargeDeathweed>();
+	//                    break;
+	//                case 4:
+	//                    item = ModContent.ItemType<LargeWaterleaf>();
+	//                    break;
+	//                case 5:
+	//                    item = ModContent.ItemType<LargeFireblossom>();
+	//                    break;
+	//                case 6:
+	//                    item = ModContent.ItemType<LargeShiverthorn>();
+	//                    break;
+	//                case 7:
+	//                    item = ModContent.ItemType<LargeBloodberry>();
+	//                    break;
+	//                case 8:
+	//                    item = ModContent.ItemType<LargeSweetstem>();
+	//                    break;
+	//                case 9:
+	//                    item = ModContent.ItemType<LargeBarfbush>();
+	//                    break;
+	//                case 10:
+	//                    item = ModContent.ItemType<LargeHolybird>();
+	//                    break;
+	//                case 11:
+	//                    item = ModContent.ItemType<LargeTwilightPlume>();
+	//                    break;
+	//            }
 
-    //            if (item > 0)
-    //            {
-    //                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(x, y), x * 16, fixedY * 16, 16, 48, item);
-    //            }
+	//            if (item > 0)
+	//            {
+	//                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(x, y), x * 16, fixedY * 16, 16, 48, item);
+	//            }
 
-    //            // 3700 through 3709 are the large herbs
-    //        }
+	//            // 3700 through 3709 are the large herbs
+	//        }
 
-    //        WorldGen.destroyObject = false;
-    //    }
-    //}
-    public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
-    {
-        float ContagionStrength = ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
-        ContagionStrength = Math.Min(ContagionStrength, 1f);
+	//        WorldGen.destroyObject = false;
+	//    }
+	//}
+	public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
+	{
+		float ContagionStrength = ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
+		ContagionStrength = Math.Min(ContagionStrength, 1f);
 
-        int sunR = backgroundColor.R;
-        int sunG = backgroundColor.G;
-        int sunB = backgroundColor.B;
-        sunR -= (int)(80f * ContagionStrength / 1.6f * (backgroundColor.R / 255f));
-        sunG -= (int)(50f * ContagionStrength / 1.6f * (backgroundColor.G / 255f));
-        sunB -= (int)(255f * ContagionStrength / 1.6f * (backgroundColor.B / 255f));
-        sunR = Utils.Clamp(sunR, 15, 255);
-        sunG = Utils.Clamp(sunG, 15, 255);
-        sunB = Utils.Clamp(sunB, 15, 255);
-        backgroundColor.R = (byte)sunR;
-        backgroundColor.G = (byte)sunG;
-        backgroundColor.B = (byte)sunB;
+		int sunR = backgroundColor.R;
+		int sunG = backgroundColor.G;
+		int sunB = backgroundColor.B;
+		byte readableSunR = 175;
+		byte readableSunG = 205;
+		byte readableSunB = 0;
+		sunR -= (int)((byte.MaxValue - readableSunR) * ContagionStrength / 1.6f * (backgroundColor.R / 255f));
+		sunG -= (int)((byte.MaxValue - readableSunG) * ContagionStrength / 1.6f * (backgroundColor.G / 255f));
+		sunB -= (int)((byte.MaxValue - readableSunB) * ContagionStrength / 1.6f * (backgroundColor.B / 255f));
+		sunR = Utils.Clamp(sunR, 15, 255);
+		sunG = Utils.Clamp(sunG, 15, 255);
+		sunB = Utils.Clamp(sunB, 15, 255);
+		backgroundColor.R = (byte)sunR;
+		backgroundColor.G = (byte)sunG;
+		backgroundColor.B = (byte)sunB;
 
-        int backgroundColorAverage = (int)((backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3f);
-        int tileTint_R = (byte)(130f * ContagionStrength * (backgroundColorAverage / 255f));
-        int tileTint_G = (byte)(140f * ContagionStrength * (backgroundColorAverage / 255f));
-        int tileTint_B = (byte)(180f * ContagionStrength * (backgroundColorAverage / 255f));
-        tileTint_R = (int)(tileTint_R - (ContagionStrength * 7f));
-        tileTint_G = (int)(tileTint_G - (ContagionStrength * 7f));
-        tileTint_B = (int)(tileTint_B - (ContagionStrength * 7f));
+		int backgroundColorAverage = (int)((backgroundColor.R + backgroundColor.G + backgroundColor.B) / 3f);
+		byte readableTint_R = 125;
+		byte readableTint_G = 115;
+		byte readableTint_B = 75;
+		int tileTint_R = (byte)((byte.MaxValue - readableTint_R) * ContagionStrength * (backgroundColorAverage / 255f));
+		int tileTint_G = (byte)((byte.MaxValue - readableTint_G) * ContagionStrength * (backgroundColorAverage / 255f));
+		int tileTint_B = (byte)((byte.MaxValue - readableTint_B) * ContagionStrength * (backgroundColorAverage / 255f));
+		tileTint_R = (int)(tileTint_R - (ContagionStrength * 7f));
+		tileTint_G = (int)(tileTint_G - (ContagionStrength * 7f));
+		tileTint_B = (int)(tileTint_B - (ContagionStrength * 7f));
 
-        tileColor.R = (byte)Math.Clamp(tileColor.R <= tileTint_R ? 1 : tileColor.R - tileTint_R, ContagionStrength * 15f, 255f);
-        tileColor.G = (byte)Math.Clamp(tileColor.G <= tileTint_G ? 1 : tileColor.G - tileTint_G, ContagionStrength * 15f, 255f);
-        tileColor.B = (byte)Math.Clamp(tileColor.B <= tileTint_B ? 1 : tileColor.B - tileTint_B, ContagionStrength * 15f, 255f);
-    }
-    public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
+		tileColor.R = (byte)Math.Clamp(tileColor.R <= tileTint_R ? 1 : tileColor.R - tileTint_R, ContagionStrength * 15f, 255f);
+		tileColor.G = (byte)Math.Clamp(tileColor.G <= tileTint_G ? 1 : tileColor.G - tileTint_G, ContagionStrength * 15f, 255f);
+		tileColor.B = (byte)Math.Clamp(tileColor.B <= tileTint_B ? 1 : tileColor.B - tileTint_B, ContagionStrength * 15f, 255f);
+	}
+	public static void ShatterCrackedBricks(int i, int j, Tile tileCache, bool fail)
     {
         if (tileCache.TileType != ModContent.TileType<CrackedOrangeBrick>() && tileCache.TileType != ModContent.TileType<CrackedPurpleBrick>() || Main.netMode == NetmodeID.MultiplayerClient || crackedBrick || j < Main.maxTilesY - 200)
         {

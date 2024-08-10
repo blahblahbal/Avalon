@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -17,7 +18,7 @@ public class TropicsBushes : ModTile
         TileObjectData.newTile.DrawYOffset = 2;
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.addTile(Type);
-        DustType = ModContent.DustType<Dusts.TropicalDust>();
+        DustType = ModContent.DustType<TropicalGrassBladeDust>();
         HitSound = SoundID.Grass;
     }
 }

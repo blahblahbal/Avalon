@@ -128,12 +128,12 @@ Mods: {
 
 			Random: {
 				Title: Random
-				Description: Let nature decide whether your world will have jungle or tropics.
+				Description: Let nature decide whether your world will have jungle or savanna.
 			}
 
 			Tropics: {
-				Title: Tropics
-				Description: A tropical forest which houses lots of mosquitoes.
+				Title: Savanna
+				Description: Arid plains which house lots of mosquitoes.
 			}
 		}
 
@@ -943,11 +943,11 @@ Mods: {
 			}
 
 			ShadowPhoneJungleTropics: {
-				DisplayName: Shadow Phone (Jungle)
+				DisplayName: Shadow Phone (Wilderness)
 				Tooltip:
 					'''
 					Displays everything
-					Allows you to teleport to the Jungle or Tropics
+					Allows you to teleport to the Jungle or Savanna
 					<right> to change destination
 					'''
 			}
@@ -6138,11 +6138,11 @@ Mods: {
 			}
 
 			TropicsToken: {
-				DisplayName: Tropics Token
+				DisplayName: Savanna Token
 				Tooltip:
 					'''
 					Used to make things
-					Gathered in the Tropics
+					Gathered in the Savanna
 					'''
 			}
 
@@ -8337,7 +8337,7 @@ Mods: {
 			}
 
 			TropicsLily: {
-				DisplayName: Tropics Lily
+				DisplayName: Savanna Lily
 				Tooltip: ""
 			}
 
@@ -8448,7 +8448,7 @@ Mods: {
 			}
 
 			TropicsTorch: {
-				DisplayName: Tropics Torch
+				DisplayName: Savanna Torch
 				Tooltip: ""
 			}
 
@@ -9103,6 +9103,11 @@ Mods: {
 
 			XanthophyteSpear: {
 				DisplayName: Xanthophyte Spear
+				Tooltip: ""
+			}
+
+			TropicsGrassWall: {
+				DisplayName: Savanna Grass Wall
 				Tooltip: ""
 			}
 		}
@@ -10625,13 +10630,13 @@ Mods: {
 			}
 
 			Tropics: {
-				DisplayName: Tropics
-				TownNPCDialogueName: the Tropics
+				DisplayName: Savanna
+				TownNPCDialogueName: the Savanna
 			}
 
 			UndergroundTropics: {
-				DisplayName: Underground Tropics
-				TownNPCDialogueName: the Underground Tropics
+				DisplayName: Underground Savanna
+				TownNPCDialogueName: the Underground Savanna
 			}
 
 			TuhrtlOutpost: {
@@ -10655,10 +10660,10 @@ Mods: {
 
 			Generation: {
 				Tropics: {
-					Generating: Generating tropics
-					TuhrtlOutpost: Creating tropical ruins
+					Generating: Generating savanna
+					TuhrtlOutpost: Creating savanna ruins
 					PlatformLeaves: Placing platform leaf traps
-					Chests: Adding tropics chests
+					Chests: Adding savanna chests
 					Nests: Adding nests
 				}
 
@@ -10692,7 +10697,7 @@ Mods: {
 				}
 
 				BetaTropicsGen: {
-					Label: Beta Tropics Gen
+					Label: Beta Savanna Gen
 					Tooltip: ""
 				}
 			}
