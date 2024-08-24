@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,11 +20,6 @@ class TroxiniumCuisses : ModItem
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 2, 30);
         Item.height = dims.Height;
-        if (!Main.dedServ)
-        {
-            Item.GetGlobalItem<ArmorGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Legs_Glow").Value;
-        }
-        Item.GetGlobalItem<ArmorGlowmask>().glowAlpha = 0;
     }
     public override Color? GetAlpha(Color lightColor)
     {
@@ -40,6 +36,15 @@ class TroxiniumCuisses : ModItem
 	public override void SetStaticDefaults()
 	{
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+
+		if (!Main.dedServ)
+		{
+			LegsLayer.RegisterData(Item.legSlot, new DrawLayerData()
+			{
+				Texture = ModContent.Request<Texture2D>(Texture + "_Legs_Glow"),
+				Color = (PlayerDrawSet drawInfo) => new Color(255, 255, 255, 0)
+			});
+		}
 	}
 	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 	{

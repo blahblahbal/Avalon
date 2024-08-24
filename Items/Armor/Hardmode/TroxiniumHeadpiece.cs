@@ -7,6 +7,7 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework.Graphics;
 using Avalon.PlayerDrawLayers;
 using ReLogic.Content;
+using Terraria.DataStructures;
 
 namespace Avalon.Items.Armor.Hardmode;
 
@@ -21,11 +22,6 @@ class TroxiniumHeadpiece : ModItem
         Item.width = dims.Width;
         Item.value = Item.sellPrice(0, 3, 40, 0);
         Item.height = dims.Height;
-        if (!Main.dedServ)
-        {
-            Item.GetGlobalItem<ArmorGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Head_Glow").Value;
-        }
-        Item.GetGlobalItem<ArmorGlowmask>().glowAlpha = 0;
     }
     public override Color? GetAlpha(Color lightColor)
     {
@@ -42,6 +38,15 @@ class TroxiniumHeadpiece : ModItem
 	public override void SetStaticDefaults()
 	{
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+
+		if (!Main.dedServ)
+		{
+			HeadLayer.RegisterData(Item.headSlot, new DrawLayerData()
+			{
+				Texture = ModContent.Request<Texture2D>(Texture + "_Head_Glow"),
+				Color = (PlayerDrawSet drawInfo) => new Color(255, 255, 255, 0)
+			});
+		}
 	}
 	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 	{
