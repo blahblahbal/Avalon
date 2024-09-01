@@ -304,7 +304,7 @@ public class Cougher : ModNPC
             for (int i = 0; i < Main.rand.Next(3,6); i++)
             {
                 Vector2 ShootDirection = NPC.Center.DirectionTo(TargetPlr.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(6, 3);
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<Cough>(), (int)(NPC.damage * 0.6f), 0, 255);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<Cough>(), 21, 0, 255);
             }
         }
 
