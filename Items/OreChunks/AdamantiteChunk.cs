@@ -24,7 +24,7 @@ class AdamantiteChunk : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(ItemID.AdamantiteBar)
-            .AddIngredient(Type, 5)
+            .AddIngredient(Type, 4)
             .AddTile(TileID.AdamantiteForge)
             .Register();
     }

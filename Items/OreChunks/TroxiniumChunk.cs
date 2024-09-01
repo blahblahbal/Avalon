@@ -35,7 +35,7 @@ class TroxiniumChunk : ModItem
     public override void AddRecipes()
     {
         Recipe.Create(ModContent.ItemType<Material.Bars.TroxiniumBar>())
-            .AddIngredient(Type, 5)
+            .AddIngredient(Type, 4)
             .AddTile(TileID.AdamantiteForge)
             .Register();
     }
