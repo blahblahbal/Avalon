@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
 public class TuhrtlBackgroundBlobs : ModTile
 {

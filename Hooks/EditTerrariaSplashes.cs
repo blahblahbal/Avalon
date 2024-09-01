@@ -48,7 +48,25 @@ internal class EditTerrariaSplashes : ModHook
                 case 9:
                     output = Language.GetTextValue("Mods.Avalon.GameTitles.9");
                     break;
-            }
+				case 10:
+					output = Language.GetTextValue("Mods.Avalon.GameTitles.10");
+					break;
+				case 11:
+					output = Language.GetTextValue("Mods.Avalon.GameTitles.11");
+					break;
+				case 12:
+					output = Language.GetTextValue("Mods.Avalon.GameTitles.12");
+					break;
+				case 13:
+					output = Language.GetTextValue("Mods.Avalon.GameTitles.13");
+					break;
+				case 14:
+					output = Language.GetTextValue("Mods.Avalon.GameTitles.14");
+					break;
+				case 15:
+					output = Language.GetTextValue("Mods.Avalon.GameTitles.15");
+					break;
+			}
         }
         return output;
     }

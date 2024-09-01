@@ -14,7 +14,7 @@ namespace Avalon.WorldGeneration.Structures
             else if (t == 1)
                 t = (ushort)ModContent.TileType<Tiles.BismuthBrick>();
             else if (t == 2)
-                t = (ushort)ModContent.TileType<Tiles.Tropics.Loamstone>();
+                t = (ushort)ModContent.TileType<Tiles.Savanna.Loamstone>();
 
 
         }
@@ -54,7 +54,7 @@ namespace Avalon.WorldGeneration.Structures
             }
             else if (t == 2)
             {
-                t = (ushort)ModContent.TileType<Tiles.Tropics.Loamstone>();
+                t = (ushort)ModContent.TileType<Tiles.Savanna.Loamstone>();
                 t2 = TileID.Sunplate;
             }
             //i = vertical, j = horizontal
@@ -75,7 +75,7 @@ namespace Avalon.WorldGeneration.Structures
                                 case 0:
                                     break;
                                 case 1:
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                     {
                                         tile.HasTile = true;
                                         tile.TileType = t;
@@ -86,57 +86,57 @@ namespace Avalon.WorldGeneration.Structures
                                 case 2:
                                     if (confirmPlatforms == 0)
                                     {
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             tile.HasTile = false;
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             tile.IsHalfBlock = false;
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             tile.Slope = SlopeType.Solid;
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             tile.WallType = (ushort)ModContent.WallType<Walls.TropicalGrassWall>();
                                     }
                                     break;
                                 case 3:
                                     if (confirmPlatforms == 1)
                                     {
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             tile.HasTile = false;
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             tile.Slope = SlopeType.Solid;
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             tile.IsHalfBlock = false;
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             WorldGen.PlaceTile(k, l, 93, true, true, -1, 0);
-                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                        if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                             tile.WallType = (ushort)ModContent.WallType<Walls.TropicalGrassWall>();
                                     }
                                     break;
                                 case 4:
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.WallType = (ushort)ModContent.WallType<Walls.TropicalGrassWall>();
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.HasTile = true;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.TileType = 4;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.Slope = SlopeType.Solid;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.IsHalfBlock = false;
                                     break;
                                 case 5:
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.HasTile = false;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.Slope = SlopeType.Solid;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.IsHalfBlock = false;
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>() && confirmPlatforms == 1)
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>() && confirmPlatforms == 1)
                                         WorldGen.AddBuriedChest(k, l, contain: GenSystem.GetNextTropicsChestItem(), Style: 0, chestTileType: (ushort)ModContent.TileType<Tiles.PlatinumChest>());
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                         tile.WallType = (ushort)ModContent.WallType<Walls.TropicalGrassWall>();
                                     break;
                                 case 6:
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
                                     {
                                         tile.HasTile = true;
                                         tile.TileType = t2;

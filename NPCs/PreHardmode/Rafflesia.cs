@@ -49,7 +49,7 @@ public class Rafflesia : ModNPC
     {
         if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneTropics || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundTropics)
         {
-            if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 2].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+            if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 2].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
                 //&&
                 //!Main.tile[spawnInfo.SpawnTileX + 1, spawnInfo.SpawnTileY].HasTile && !Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].HasTile &&
                 //!Main.tile[spawnInfo.SpawnTileX - 1, spawnInfo.SpawnTileY].HasTile)

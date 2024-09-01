@@ -15,6 +15,6 @@ class CannonballTrap : ModItem
     {
         Item.CloneDefaults(ItemID.DemoniteBrick);
         Item.mech = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.CannonballTrap>();
+        Item.createTile = ModContent.TileType<Tiles.Savanna.CannonballTrap>();
     }
 }

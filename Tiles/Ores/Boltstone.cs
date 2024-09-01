@@ -20,8 +20,8 @@ public class Boltstone : ModTile
         Main.tileBlockLight[Type] = true;
         Main.tileMerge[Type][TileID.Mud] = true;
         Main.tileMerge[TileID.Mud][Type] = true;
-        Main.tileMerge[Type][ModContent.TileType<Tropics.Loam>()] = true;
-        Main.tileMerge[ModContent.TileType<Tropics.Loam>()][Type] = true;
+        Main.tileMerge[Type][ModContent.TileType<Savanna.Loam>()] = true;
+        Main.tileMerge[ModContent.TileType<Savanna.Loam>()][Type] = true;
         HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.BoltstoneDust>();
     }

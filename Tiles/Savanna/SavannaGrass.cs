@@ -4,13 +4,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
-public class TropicalGrass : ModTile
+public class SavannaGrass : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry(new Color(115, 159, 57));
+        AddMapEntry(new Color(159, 121, 57));
         Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;
         Main.tileBlockLight[Type] = true;

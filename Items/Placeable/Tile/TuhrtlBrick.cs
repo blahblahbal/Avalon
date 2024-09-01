@@ -16,7 +16,7 @@ class TuhrtlBrick : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.TuhrtlBrick>();
+        Item.createTile = ModContent.TileType<Tiles.Savanna.TuhrtlBrick>();
         Item.width = dims.Width;
         Item.useTime = 10;
         Item.useTurn = true;

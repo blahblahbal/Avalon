@@ -5,12 +5,12 @@ using Terraria.GameContent;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
-public class TropicalTree : ModTree
+public class SavannaTree : ModTree
 {
     public override TreePaintingSettings TreeShaderSettings => new();
-    public override void SetStaticDefaults() => GrowsOnTileId = new[] { ModContent.TileType<TropicalGrass>() };
+    public override void SetStaticDefaults() => GrowsOnTileId = new[] { ModContent.TileType<SavannaGrass>() };
 
     public override void SetTreeFoliageSettings(Tile tile, ref int xoffset, ref int treeFrame, ref int floorY, ref int topTextureFrameWidth, ref int topTextureFrameHeight)
     {
@@ -18,18 +18,18 @@ public class TropicalTree : ModTree
         topTextureFrameHeight = 96;
     }
 
-    public override Asset<Texture2D> GetTexture() => ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Tropics/TropicalTree");
+    public override Asset<Texture2D> GetTexture() => ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Savanna/SavannaTree");
 
     public override Asset<Texture2D> GetBranchTextures() =>
-        ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Tropics/TropicalTreeBranches");
+        ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Savanna/SavannaTreeBranches");
 
     public override Asset<Texture2D> GetTopTextures() =>
-        ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Tropics/TropicalTreeTop");
+        ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Savanna/SavannaTreeTop");
 
     public override int DropWood() => ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>();
 
     public override int CreateDust() => 51;
-    public override int TreeLeaf() => ModContent.GoreType<TropicsTreeLeaf>();
+    public override int TreeLeaf() => ModContent.GoreType<SavannaTreeLeaf>();
     public override bool Shake(int x, int y, ref bool createLeaves)
     {
         if (Main.rand.NextBool(10))
@@ -46,6 +46,6 @@ public class TropicalTree : ModTree
     public override int SaplingGrowthType(ref int style)
     {
         style = 0;
-        return ModContent.TileType<TropicalSapling>();
+        return ModContent.TileType<SavannaSapling>();
     }
 }

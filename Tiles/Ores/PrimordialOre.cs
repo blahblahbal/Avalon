@@ -247,8 +247,8 @@ public class PrimordialOre : ModTile
         DustType = DustID.ShimmerSpark;
         Main.tileMerge[Type][TileID.Mud] = true;
         Main.tileMerge[TileID.Mud][Type] = true;
-        Main.tileMerge[Type][ModContent.TileType<Tropics.Loam>()] = true;
-        Main.tileMerge[ModContent.TileType<Tropics.Loam>()][Type] = true;
+        Main.tileMerge[Type][ModContent.TileType<Savanna.Loam>()] = true;
+        Main.tileMerge[ModContent.TileType<Savanna.Loam>()][Type] = true;
         MineResist = 3f;
     }
 

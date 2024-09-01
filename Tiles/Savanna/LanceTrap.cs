@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 public class LanceTrap : ModTile
 {
     public override void SetStaticDefaults()

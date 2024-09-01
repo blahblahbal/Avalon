@@ -10,9 +10,9 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
-public class TropicalShortGrass : ModTile
+public class SavannaShortGrass : ModTile
 {
     public override void SetStaticDefaults()
     {
@@ -29,25 +29,25 @@ public class TropicalShortGrass : ModTile
         Main.tileWaterDeath[Type] = false;
         Main.tileFrameImportant[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
-        TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<TropicalGrass>() };
+        TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<SavannaGrass>() };
         TileObjectData.newTile.WaterPlacement = LiquidPlacement.Allowed;
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.addTile(Type);
-        DustType = ModContent.DustType<TropicalGrassBladeDust>();
+        DustType = ModContent.DustType<SavannaGrassBladeDust>();
         HitSound = SoundID.Grass;
-        AddMapEntry(new Color(82, 123, 35));
-        AddMapEntry(new Color(82, 123, 35));
-        AddMapEntry(new Color(82, 123, 35));
-        AddMapEntry(new Color(82, 123, 35));
-        AddMapEntry(new Color(82, 123, 35));
-        AddMapEntry(new Color(82, 123, 35));
-        AddMapEntry(new Color(82, 123, 35));
-        AddMapEntry(new Color(82, 123, 35));
+        AddMapEntry(new Color(118, 96, 42));
+        AddMapEntry(new Color(118, 96, 42));
+        AddMapEntry(new Color(118, 96, 42));
+        AddMapEntry(new Color(118, 96, 42));
+        AddMapEntry(new Color(118, 96, 42));
+        AddMapEntry(new Color(118, 96, 42));
+        AddMapEntry(new Color(118, 96, 42));
+        AddMapEntry(new Color(118, 96, 42));
         AddMapEntry(new Color(277, 41, 75), this.GetLocalization("MapEntry1"));
         AddMapEntry(new Color(76, 150, 216));
         for (int i = 10; i < 23; i++)
         {
-            AddMapEntry(new Color(82, 123, 35));
+            AddMapEntry(new Color(118, 96, 42));
         }
     }
     //public override ushort GetMapOption(int i, int j)

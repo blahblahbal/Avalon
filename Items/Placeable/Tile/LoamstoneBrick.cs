@@ -16,7 +16,7 @@ public class LoamstoneBrick : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.Loamstone>();
+        Item.createTile = ModContent.TileType<Tiles.Savanna.Loamstone>();
         Item.width = dims.Width;
         Item.useTime = 10;
         Item.useTurn = true;

@@ -9,9 +9,9 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
-public class TropicalLongGrass : ModTile
+public class SavannaLongGrass : ModTile
 {
     public override void SetStaticDefaults()
     {
@@ -28,14 +28,14 @@ public class TropicalLongGrass : ModTile
         Main.tileWaterDeath[Type] = false;
         Main.tileFrameImportant[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
-        TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<TropicalGrass>() };
+        TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<SavannaGrass>() };
         TileObjectData.newTile.CoordinateHeights = new int[1] { 32 };
         TileObjectData.newTile.WaterPlacement = LiquidPlacement.Allowed;
         TileObjectData.newTile.LavaDeath = true;
         TileObjectData.addTile(Type);
-        DustType = ModContent.DustType<TropicalGrassBladeDust>();
+        DustType = ModContent.DustType<SavannaGrassBladeDust>();
         HitSound = SoundID.Grass;
-        AddMapEntry(new Color(58, 188, 32));
+        AddMapEntry(new Color(118, 96, 42));
     }
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     {

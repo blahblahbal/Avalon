@@ -1,4 +1,4 @@
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

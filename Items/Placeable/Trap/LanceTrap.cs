@@ -15,6 +15,6 @@ class LanceTrap : ModItem
     {
         Item.CloneDefaults(ItemID.DemoniteBrick);
         Item.mech = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.LanceTrap>();
+        Item.createTile = ModContent.TileType<Tiles.Savanna.LanceTrap>();
     }
 }

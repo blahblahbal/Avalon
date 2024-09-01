@@ -7,9 +7,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
-public class TropicalSapling : ModTile
+public class SavannaSapling : ModTile
 {
     public override void SetStaticDefaults()
     {
@@ -24,7 +24,7 @@ public class TropicalSapling : ModTile
         TileObjectData.newTile.CoordinateHeights = new int[2] { 16, 18 };
         TileObjectData.newTile.CoordinateWidth = 16;
         TileObjectData.newTile.CoordinatePadding = 2;
-        TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<TropicalGrass>() };
+        TileObjectData.newTile.AnchorValidTiles = new int[1] { ModContent.TileType<SavannaGrass>() };
         TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.DrawFlipHorizontal = true;
         TileObjectData.newTile.WaterPlacement = LiquidPlacement.Allowed;

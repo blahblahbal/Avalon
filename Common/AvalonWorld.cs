@@ -32,7 +32,7 @@ using Terraria.Audio;
 using Terraria.WorldBuilding;
 using Avalon.Tiles.Ores;
 using Avalon.NPCs.Bosses.PreHardmode;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using static Avalon.Hooks.JungleSelectionMenu;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Furniture.Heartstone;
@@ -792,25 +792,25 @@ public class AvalonWorld : ModSystem
             #endregion
 
             #region tropical shortgrass to long grass
-            if (Main.tile[xCoord, yCoord].TileType == ModContent.TileType<TropicalShortGrass>() && WorldGen.genRand.NextBool(3) && Main.tile[xCoord, yCoord].TileFrameX < 144)
+            if (Main.tile[xCoord, yCoord].TileType == ModContent.TileType<SavannaShortGrass>() && WorldGen.genRand.NextBool(3) && Main.tile[xCoord, yCoord].TileFrameX < 144)
             {
                 if (WorldGen.genRand.NextBool(4))
                     Main.tile[xCoord, yCoord].TileFrameX = (short)(162 + WorldGen.genRand.Next(8) * 18);
 
-                Main.tile[xCoord, yCoord].TileType = (ushort)ModContent.TileType<TropicalLongGrass>();
+                Main.tile[xCoord, yCoord].TileType = (ushort)ModContent.TileType<SavannaLongGrass>();
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendTileSquare(-1, xCoord, yCoord);
             }
             #endregion
 
             #region tropical grass
-            if (Main.tile[xCoord, yCoord].TileType == ModContent.TileType<TropicalGrass>())
+            if (Main.tile[xCoord, yCoord].TileType == ModContent.TileType<SavannaGrass>())
             {
                 int num14 = Main.tile[xCoord, yCoord].TileType;
                 // twilight plume
                 if (!Main.tile[xCoord, num9].HasTile && Main.tile[xCoord, num9].LiquidAmount == 0 &&
                     !Main.tile[xCoord, yCoord].IsHalfBlock && Main.tile[xCoord, yCoord].Slope == SlopeType.Solid &&
-                    WorldGen.genRand.NextBool(yCoord > Main.worldSurface ? 75 : 250) && num14 == ModContent.TileType<TropicalGrass>())
+                    WorldGen.genRand.NextBool(yCoord > Main.worldSurface ? 75 : 250) && num14 == ModContent.TileType<SavannaGrass>())
                 {
                     WorldGen.PlaceTile(xCoord, num9, ModContent.TileType<TwilightPlume>(), true, false, -1, 0);
                     if (Main.tile[xCoord, num9].HasTile)
@@ -826,10 +826,10 @@ public class AvalonWorld : ModSystem
                 // regular grass
                 if (!Main.tile[xCoord, num9].HasTile &&
                     !Main.tile[xCoord, yCoord].IsHalfBlock && Main.tile[xCoord, yCoord].Slope == SlopeType.Solid &&
-                    WorldGen.genRand.NextBool(5) && num14 == ModContent.TileType<TropicalGrass>())
+                    WorldGen.genRand.NextBool(5) && num14 == ModContent.TileType<SavannaGrass>())
                 {
                     Tile t2 = Main.tile[xCoord, num9];
-                    t2.TileType = (ushort)ModContent.TileType<TropicalShortGrass>();
+                    t2.TileType = (ushort)ModContent.TileType<SavannaShortGrass>();
 
                     if (WorldGen.genRand.NextBool(60) && num9 > Main.rockLayer) // shroom cap
                     {
@@ -868,7 +868,7 @@ public class AvalonWorld : ModSystem
                             if (Main.tile[m, n].TileType == ModContent.TileType<Loam>())
                             {
                                 TileColorCache color = Main.tile[xCoord, yCoord].BlockColorAndCoating();
-                                WorldGen.SpreadGrass(m, n, ModContent.TileType<Loam>(), ModContent.TileType<TropicalGrass>(), false, color);
+                                WorldGen.SpreadGrass(m, n, ModContent.TileType<Loam>(), ModContent.TileType<SavannaGrass>(), false, color);
                             }
 
                             if (Main.tile[m, n].TileType == num14)
@@ -888,8 +888,8 @@ public class AvalonWorld : ModSystem
             #endregion tropical grass
 
             #region tropics vines growing
-            if ((Main.tile[xCoord, yCoord].TileType == ModContent.TileType<TropicalGrass>() ||
-                Main.tile[xCoord, yCoord].TileType == ModContent.TileType<TropicalVines>()) &&
+            if ((Main.tile[xCoord, yCoord].TileType == ModContent.TileType<SavannaGrass>() ||
+                Main.tile[xCoord, yCoord].TileType == ModContent.TileType<SavannaVines>()) &&
                 WorldGen.genRand.NextBool(15) && !Main.tile[xCoord, yCoord + 1].HasTile &&
                 Main.tile[xCoord, yCoord + 1].LiquidType != LiquidID.Lava)
             {
@@ -903,7 +903,7 @@ public class AvalonWorld : ModSystem
                     }
 
                     if (Main.tile[xCoord, num47].HasTile &&
-                        Main.tile[xCoord, num47].TileType == ModContent.TileType<TropicalGrass>() &&
+                        Main.tile[xCoord, num47].TileType == ModContent.TileType<SavannaGrass>() &&
                         !Main.tile[xCoord, num47].BottomSlope)
                     {
                         flag10 = true;
@@ -915,7 +915,7 @@ public class AvalonWorld : ModSystem
                 {
                     int num48 = xCoord;
                     int num49 = yCoord + 1;
-                    Main.tile[num48, num49].TileType = (ushort)ModContent.TileType<TropicalVines>();
+                    Main.tile[num48, num49].TileType = (ushort)ModContent.TileType<SavannaVines>();
 
                     Tile t = Main.tile[num48, num49];
                     t.HasTile = true;
@@ -2476,7 +2476,7 @@ public class AvalonWorld : ModSystem
 
 		if (y > (Main.worldSurface + Main.rockLayer) / 2.0)
 		{
-			if ((type == ModContent.TileType<TropicalGrass>()/* || type == ModContent.TileType<Tiles.BrownIce>()*/) && WorldGen.genRand.NextBool(325))
+			if ((type == ModContent.TileType<SavannaGrass>()/* || type == ModContent.TileType<Tiles.BrownIce>()*/) && WorldGen.genRand.NextBool(325))
 			{
 				int num6 = x + WorldGen.genRand.Next(-10, 11);
 				int num7 = y + WorldGen.genRand.Next(-10, 11);
@@ -2507,7 +2507,7 @@ public class AvalonWorld : ModSystem
 				{
 					num9--;
 				}
-				if (Main.tile[num8, num9].HasTile && (Main.tile[num8, num9].TileType == ModContent.TileType<Loam>() || Main.tile[num8, num9].TileType == ModContent.TileType<TropicalGrass>()) /*|| Main.tile[num8, num9].type == ModContent.TileType<Tiles.BrownIce>())*/ && GrowingOreSpread.GrowingOre(x, y, ModContent.TileType<XanthophyteOre>()))
+				if (Main.tile[num8, num9].HasTile && (Main.tile[num8, num9].TileType == ModContent.TileType<Loam>() || Main.tile[num8, num9].TileType == ModContent.TileType<SavannaGrass>()) /*|| Main.tile[num8, num9].type == ModContent.TileType<Tiles.BrownIce>())*/ && GrowingOreSpread.GrowingOre(x, y, ModContent.TileType<XanthophyteOre>()))
 				{
 					Main.tile[num8, num9].TileType = (ushort)ModContent.TileType<XanthophyteOre>();
 					WorldGen.SquareTileFrame(num8, num9, true);

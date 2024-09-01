@@ -15,6 +15,6 @@ class FireballTrap : ModItem
     {
         Item.CloneDefaults(ItemID.DemoniteBrick);
         Item.mech = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.FireballTrap>();
+        Item.createTile = ModContent.TileType<Tiles.Savanna.FireballTrap>();
     }
 }

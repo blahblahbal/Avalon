@@ -33,7 +33,7 @@ internal class Shrines : GenPass
             TileID.BlueDungeonBrick,
             TileID.PinkDungeonBrick,
             TileID.GreenDungeonBrick,
-            ModContent.TileType<Tiles.Tropics.TuhrtlBrick>(),
+            ModContent.TileType<Tiles.Savanna.TuhrtlBrick>(),
             //ModContent.TileType<Tiles.TropicalGrass>(),
             //ModContent.TileType<Tiles.Loam>(),
             ModContent.TileType<Tiles.OrangeBrick>(),

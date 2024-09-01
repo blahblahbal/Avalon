@@ -2,11 +2,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
-public class PlatformLeafLeaf : ModGore
+public class SavannaTreeLeaf : ModGore
 {
-    public override string Texture => "Avalon/Tiles/Tropics/PlatformLeaf_Leaf";
+    public override string Texture => "Avalon/Tiles/Savanna/SavannaTree_Leaf";
 
     public override void SetStaticDefaults()
     {

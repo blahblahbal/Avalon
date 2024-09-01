@@ -14,6 +14,6 @@ class TuhrtlPressurePlate : ModItem
     {
         Item.CloneDefaults(ItemID.LihzahrdPressurePlate);
         Item.placeStyle = 0;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.TuhrtlPressurePlate>();
+        Item.createTile = ModContent.TileType<Tiles.Savanna.TuhrtlPressurePlate>();
     }
 }

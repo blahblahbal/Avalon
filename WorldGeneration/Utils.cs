@@ -1,6 +1,6 @@
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -177,7 +177,7 @@ public class Utils
         {
             for (int j = b; j <= height / 2; j++)
             {
-                if (outpost && (Main.tile[x + i, y + j].TileType == ModContent.TileType<Loam>() || Main.tile[x + i, y + j].TileType == ModContent.TileType<TropicalGrass>()))
+                if (outpost && (Main.tile[x + i, y + j].TileType == ModContent.TileType<Loam>() || Main.tile[x + i, y + j].TileType == ModContent.TileType<SavannaGrass>()))
                 { }
                 else WorldGen.KillTile(x + i, y + j, noItem: true);
             }

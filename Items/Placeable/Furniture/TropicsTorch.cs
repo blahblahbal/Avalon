@@ -16,7 +16,7 @@ class TropicsTorch : ModItem
 
     public override void SetDefaults()
     {
-        Item.DefaultToTorch(ModContent.TileType<Tiles.Tropics.TropicsTorch>(), 0, false);
+        Item.DefaultToTorch(ModContent.TileType<Tiles.Savanna.SavannaTorch>(), 0, false);
         Item.value = Item.sellPrice(0, 0, 0, 40);
         Item.notAmmo = true;
         Item.flame = true;

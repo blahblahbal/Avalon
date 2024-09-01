@@ -6,9 +6,9 @@ using Terraria.ModLoader;
 using Avalon.Reflection;
 using Avalon.Dusts;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
-public class TropicalVines : ModTile
+public class SavannaVines : ModTile
 {
     public override void SetStaticDefaults()
     {
@@ -21,8 +21,8 @@ public class TropicalVines : ModTile
         Main.tileLavaDeath[Type] = true;
         Main.tileNoFail[Type] = true;
         HitSound = SoundID.Grass;
-        DustType = ModContent.DustType<TropicalGrassBladeDust>();
-        AddMapEntry(new Color(61, 100, 22));
+        DustType = ModContent.DustType<SavannaGrassBladeDust>();
+        AddMapEntry(new Color(118, 96, 42));
     }
 
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
@@ -43,7 +43,7 @@ public class TropicalVines : ModTile
             type = tileAbove.TileType;
         }
 
-        if (type == ModContent.TileType<TropicalGrass>() || type == Type)
+        if (type == ModContent.TileType<SavannaGrass>() || type == Type)
         {
             return true;
         }

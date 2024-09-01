@@ -6,9 +6,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Tropics
+namespace Avalon.Tiles.Savanna
 {
-    public class TropicsTorch : ModTorch
+    public class SavannaTorch : ModTorch
     {
         public override Vector3 LightColor => new Vector3(0.69f, 1f, 0.42f);
         public override int TorchItem => ModContent.ItemType<Items.Placeable.Furniture.TropicsTorch>();

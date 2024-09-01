@@ -1,5 +1,5 @@
 using Avalon.Dusts;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;

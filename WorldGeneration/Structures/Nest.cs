@@ -42,7 +42,7 @@ public class Nest
     }
     public static Vector2 MakeCell(int x, int y)
     {
-        CreateHexagon(x, y, 26, ModContent.TileType<Tiles.Tropics.Nest>());
+        CreateHexagon(x, y, 26, ModContent.TileType<Tiles.Savanna.Nest>());
         CreateHexagon(x, y, 23, 0, true);
         ClearHexagon(x, y + 3, 20);
         return new Vector2(x, y);
@@ -91,7 +91,7 @@ public class Nest
                 Main.tile[i, y + 18].TileType = TileID.Hive;
                 Main.tile[i, y + 18].Active(true);
             }
-            WorldGen.PlaceTile(x, y + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+            WorldGen.PlaceTile(x, y + 17, (ushort)ModContent.TileType<Tiles.Savanna.WaspLarva>());
             placedLarva = true;
         }
 
@@ -112,7 +112,7 @@ public class Nest
                     Main.tile[i, y + 18].TileType = TileID.Hive;
                     Main.tile[i, y + 18].Active(true);
                 }
-                WorldGen.PlaceTile(x + 24, y + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+                WorldGen.PlaceTile(x + 24, y + 17, (ushort)ModContent.TileType<Tiles.Savanna.WaspLarva>());
                 placedLarva = true;
             }
 
@@ -131,7 +131,7 @@ public class Nest
                     Main.tile[i, yOffR + 18].TileType = TileID.Hive;
                     Main.tile[i, yOffR + 18].Active(true);
                 }
-                WorldGen.PlaceTile(xOffR, yOffR + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+                WorldGen.PlaceTile(xOffR, yOffR + 17, (ushort)ModContent.TileType<Tiles.Savanna.WaspLarva>());
                 placedLarva = true;
             }
 
@@ -159,7 +159,7 @@ public class Nest
                     Main.tile[i, y + 18].TileType = TileID.Hive;
                     Main.tile[i, y + 18].Active(true);
                 }
-                WorldGen.PlaceTile(x - 24, y + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+                WorldGen.PlaceTile(x - 24, y + 17, (ushort)ModContent.TileType<Tiles.Savanna.WaspLarva>());
                 placedLarva = true;
             }
 
@@ -179,7 +179,7 @@ public class Nest
                     Main.tile[i, yOffL + 18].TileType = TileID.Hive;
                     Main.tile[i, yOffL + 18].Active(true);
                 }
-                WorldGen.PlaceTile(xOffL, yOffL + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+                WorldGen.PlaceTile(xOffL, yOffL + 17, (ushort)ModContent.TileType<Tiles.Savanna.WaspLarva>());
                 placedLarva = true;
             }
 
@@ -219,7 +219,7 @@ public class Nest
                 Main.tile[i, yoff1 + 18].TileType = TileID.Hive;
                 Main.tile[i, yoff1 + 18].Active(true);
             }
-            WorldGen.PlaceTile(xoff1, yoff1 + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+            WorldGen.PlaceTile(xoff1, yoff1 + 17, (ushort)ModContent.TileType<Tiles.Savanna.WaspLarva>());
             placedLarva = true;
         }
 
@@ -237,7 +237,7 @@ public class Nest
                 Main.tile[i, yoff2 + 18].TileType = TileID.Hive;
                 Main.tile[i, yoff2 + 18].Active(true);
             }
-            WorldGen.PlaceTile(xoff2, yoff2 + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+            WorldGen.PlaceTile(xoff2, yoff2 + 17, (ushort)ModContent.TileType<Tiles.Savanna.WaspLarva>());
             placedLarva = true;
         }
 
@@ -255,7 +255,7 @@ public class Nest
                 Main.tile[i, yoff3 + 18].TileType = TileID.Hive;
                 Main.tile[i, yoff3 + 18].Active(true);
             }
-            WorldGen.PlaceTile(xoff3, yoff3 + 17, (ushort)ModContent.TileType<Tiles.Tropics.WaspLarva>());
+            WorldGen.PlaceTile(xoff3, yoff3 + 17, (ushort)ModContent.TileType<Tiles.Savanna.WaspLarva>());
             placedLarva = true;
         }
 
@@ -282,7 +282,7 @@ public class Nest
             {
                 if (Main.tile[i, j].TileType == TileID.Hive)
                 {
-                    Main.tile[i, j].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Nest>();
+                    Main.tile[i, j].TileType = (ushort)ModContent.TileType<Tiles.Savanna.Nest>();
                 }
             }
         }
@@ -336,7 +336,7 @@ public class Nest
                 if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < r)
                 {
                     Tile t = Framing.GetTileSafely(k, l);
-                    if (t.TileType != ModContent.TileType<Tiles.Tropics.WaspLarva>() && t.TileType != TileID.Hive)
+                    if (t.TileType != ModContent.TileType<Tiles.Savanna.WaspLarva>() && t.TileType != TileID.Hive)
                     {
                         t.HasTile = false;
                         t.IsHalfBlock = false;

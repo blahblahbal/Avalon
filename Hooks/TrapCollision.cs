@@ -21,7 +21,7 @@ public class TrapCollision : ModHook
 
     private void IL_Collision_SwitchTiles(MonoMod.Cil.ILContext il)
     {
-        Utilities.AddAlternativeIdChecks(il, TileID.PressurePlates, id => TileID.Sets.Factory.CreateBoolSet(ModContent.TileType<Tiles.Tropics.TuhrtlPressurePlate>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.PressurePlates, id => TileID.Sets.Factory.CreateBoolSet(ModContent.TileType<Tiles.Savanna.TuhrtlPressurePlate>())[id]);
     }
 
     private void On_Player_TryLandingOnDetonator(On_Player.orig_TryLandingOnDetonator orig, Player self)
@@ -37,18 +37,18 @@ public class TrapCollision : ModHook
             if (player.GetModPlayer<AvalonPlayer>().TrapImmune)
             {
                 if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() ||
-                    type == ModContent.TileType<Tiles.Tropics.BrambleSpikes>() ||
+                    type == ModContent.TileType<Tiles.Savanna.BrambleSpikes>() ||
                     type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>() ||
-                    type == ModContent.TileType<Tiles.Tropics.Bramble>())
+                    type == ModContent.TileType<Tiles.Savanna.Bramble>())
                 {
                     return false;
                 }
             }
-            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && (type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.Tropics.BrambleSpikes>()))
+            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && (type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.Savanna.BrambleSpikes>()))
             {
                 return true;
             }
-            if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>() || type == ModContent.TileType<Tiles.Tropics.Bramble>())
+            if (type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>() || type == ModContent.TileType<Tiles.Savanna.Bramble>())
             {
                 if (player.afkCounter > 0)
                 {
@@ -70,7 +70,7 @@ public class TrapCollision : ModHook
             self.AddBuff(BuffID.Venom, 180);
             self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, 0, true);
         }
-        if (tileId == ModContent.TileType<Tiles.Tropics.BrambleSpikes>())
+        if (tileId == ModContent.TileType<Tiles.Savanna.BrambleSpikes>())
         {
             int num = Main.DamageVar(90, 0f - self.luck);
             int time = 10;

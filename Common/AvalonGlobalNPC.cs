@@ -16,7 +16,7 @@ using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.NPCs.TownNPCs;
 using Avalon.Systems;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -804,8 +804,8 @@ public class AvalonGlobalNPC : GlobalNPC
         ypos = tile.Y - ypos;
         if (npc.velocity.Y > 4.85f && !npc.noGravity && !npc.noTileCollide)
         {
-            if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Tropics.PlatformLeaf>() &&
-                Main.tile[tile2.X, tile2.Y].TileType == ModContent.TileType<Tiles.Tropics.PlatformLeaf>() && Main.tile[tile.X, tile.Y].TileFrameY < 74)
+            if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Savanna.PlatformLeaf>() &&
+                Main.tile[tile2.X, tile2.Y].TileType == ModContent.TileType<Tiles.Savanna.PlatformLeaf>() && Main.tile[tile.X, tile.Y].TileFrameY < 74)
             {
                 for (int i = xpos; i < xpos + 3; i++)
                 {
@@ -816,7 +816,7 @@ public class AvalonGlobalNPC : GlobalNPC
                 }
                 SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.8f };
                 SoundEngine.PlaySound(s, new Vector2((tile.X + 1) * 16, tile.Y * 16));
-                WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<TropicsTreeLeaf>(), true);
+                WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<SavannaTreeLeaf>(), true);
             }
         }
         #endregion 

@@ -64,8 +64,8 @@ public class GenSystem : ModSystem
             {
                 tasks.Insert(jungleIndex + 1, new PassLegacy("Tuhrtl Brick Unsolid", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration config)
                 {
-                    Main.tileSolid[ModContent.TileType<Tiles.Tropics.TuhrtlBrick>()] = false;
-                    Main.tileSolid[ModContent.TileType<Tiles.Tropics.BrambleSpikes>()] = false;
+                    Main.tileSolid[ModContent.TileType<Tiles.Savanna.TuhrtlBrick>()] = false;
+                    Main.tileSolid[ModContent.TileType<Tiles.Savanna.BrambleSpikes>()] = false;
                 })));
             }
             jungleIndex = tasks.FindIndex(i => i.Name.Equals("Mud Caves To Grass"));
@@ -74,7 +74,7 @@ public class GenSystem : ModSystem
                 tasks[jungleIndex] = new PassLegacy("Loam Caves To Grass", new WorldGenLegacyMethod(Tropics.JunglesGrassTask));
                 tasks.Insert(jungleIndex, new PassLegacy("Loam", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration configuration)
                 {
-                    int tile = ModContent.TileType<Tiles.Tropics.Loam>();
+                    int tile = ModContent.TileType<Tiles.Savanna.Loam>();
                     for (int i = 0; i < Main.maxTilesX; i++)
                     {
                         for (int j = 0; j < Main.maxTilesY; j++)
@@ -117,7 +117,7 @@ public class GenSystem : ModSystem
                     {
                         for (int num174 = 0; num174 < Main.worldSurface + 20.0; num174++)
                         {
-                            if (Main.tile[num173, num174].HasTile && Main.tile[num173, num174].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+                            if (Main.tile[num173, num174].HasTile && Main.tile[num173, num174].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
                             {
                                 num171 = num173;
                                 flag4 = true;
@@ -134,7 +134,7 @@ public class GenSystem : ModSystem
                     {
                         for (int num176 = 0; num176 < Main.worldSurface + 20.0; num176++)
                         {
-                            if (Main.tile[num175, num176].HasTile && Main.tile[num175, num176].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+                            if (Main.tile[num175, num176].HasTile && Main.tile[num175, num176].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
                             {
                                 num172 = num175;
                                 flag4 = true;
@@ -172,11 +172,11 @@ public class GenSystem : ModSystem
                                 {
                                     if (Main.tile[q, z].TileType == TileID.Grass)
                                     {
-                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>();
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>();
                                     }
                                     if (Main.tile[q, z].TileType == TileID.Dirt)
                                     {
-                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Loam>();
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.Loam>();
                                     }
                                 }
                             }
@@ -187,19 +187,19 @@ public class GenSystem : ModSystem
                                 {
                                     if (Main.tile[q, z].TileType == TileID.Grass)
                                     {
-                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>();
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>();
                                     }
                                     if (Main.tile[q, z].TileType == TileID.Dirt)
                                     {
-                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.Loam>();
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.Loam>();
                                     }
                                     if (Main.tile[q, z].TileType == TileID.Plants)
                                     {
-                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalShortGrass>();
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaShortGrass>();
                                     }
                                     if (Main.tile[q, z].TileType == TileID.Plants2)
                                     {
-                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalLongGrass>();
+                                        Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaLongGrass>();
                                     }
                                 }
                             }

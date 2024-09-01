@@ -15,7 +15,7 @@ using Avalon.Projectiles;
 using Avalon.Projectiles.Tools;
 using Avalon.Systems;
 using Avalon.Tiles.Ores;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Avalon.Walls;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework;

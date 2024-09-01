@@ -2,7 +2,7 @@ using System;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -63,10 +63,10 @@ public class BiomeTileCounts : ModSystem
         ContagionDesertTiles = tileCounts[ModContent.TileType<Snotsand>()] + tileCounts[ModContent.TileType<HardenedSnotsand>()] + tileCounts[ModContent.TileType<Snotsandstone>()];
         
 
-        TropicsTiles = tileCounts[ModContent.TileType<TropicalStone>()] +
+        TropicsTiles = tileCounts[ModContent.TileType<SavannaStone>()] +
                        tileCounts[ModContent.TileType<TuhrtlBrick>()] +
                        tileCounts[ModContent.TileType<Loam>()] +
-                       tileCounts[ModContent.TileType<TropicalGrass>()];
+                       tileCounts[ModContent.TileType<SavannaGrass>()];
         /*
         DarkTiles = tileCounts[ModContent.TileType<DarkMatter>()] +
                     tileCounts[ModContent.TileType<DarkMatterSand>()] +

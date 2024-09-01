@@ -10,9 +10,9 @@ using Avalon.Common;
 using Avalon.WorldGeneration.Enums;
 using Avalon.Items.Placeable.Furniture;
 
-namespace Avalon.Tiles.Tropics;
+namespace Avalon.Tiles.Savanna;
 
-public class TropicsPot : ModTile
+public class SavannaPot : ModTile
 {
     public override void SetStaticDefaults()
     {

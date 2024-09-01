@@ -99,6 +99,12 @@ Mods: {
 			7: Terraria: Logic sold separately
 			8: Terraria: Also try Core Ascension!
 			9: Terraria: /q
+			10: Terraria:airarreT
+			11: Terraria: Not 18+!*
+			12: Terraria: Also try The Depths!
+			13: Terraria: 'Done' since 1.1!
+			14: Terraria: tML Updates Stop Breaking Things Challenge (Impossible)
+			15: Terraria: Getting freaky with the computer
 		}
 
 		Banana: You walk up to a skeleton, and it turns into a banana.
@@ -257,11 +263,15 @@ Mods: {
 			Fell_10: "{0} forgot to jump."
 			Fell_11: "{0} tried to land a cool backflip."
 			Fell_12: "{0} took 'hit the ground running' way too literally."
+			Fell_13: There is now a {0}-shaped hole in the ground.
+			Fell_14: "{0} fell for it again."
+			Fell_15: "{0} slowly watched their kneecaps invert."
 			Drowned_1: "{0} blub blub blub..."
 			Drowned_2: "{0} thought they could breathe water."
 			Drowned_3: "{0} asphyxiated."
 			Drowned_4: "{0} wasn't a fish."
 			Drowned_5: "{0} forgot to inhale an air bubble."
+			Drowned_6: "{0} got a sinking feeling."
 			Escape_1: "{0} accidentally misclicked."
 			Lava_1: "{0} took a bath in a lake of fire."
 			Lava_2: "{0} became a charcoal briquette."
@@ -271,6 +281,8 @@ Mods: {
 			Lava_6: "{0} found the fire in the hole."
 			Lava_7: "{0} accidentally lavaboarded themselves."
 			Lava_8: "{0} was ritually sacrificed."
+			Lava_9: "{0} tried to drink the forbidden orange juice."
+			Lava_10: "{0}'s coffee was too hot."
 			Petrified_1: "{0} was stoned."
 			Petrified_2: "{0} was taken for granite."
 			Electrocution_1: "{0} got zzzzapped."
@@ -303,6 +315,14 @@ Mods: {
 			Generic_22: "{0}'s organs were harvested"
 			Generic_23: "{0} was extricated from their mortal coil"
 			Generic_24: "{0} was given up and let down"
+			Generic_25: "{0} was meticulously disassembled"
+			Generic_26: "{0}'s ego was shrunken"
+			Generic_27: "{0} got rekt"
+			Generic_28: "{0} was pwned"
+			Generic_29: "{0} was yoinked from {1}"
+			Generic_30: "{0}'s head was amputated"
+			Generic_31: "{0}'s task was managed"
+			Generic_32: "{1} was deprived of {0}"
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Poisoned_3: "{0} was digested from the inside."
@@ -10474,6 +10494,10 @@ Mods: {
 			LargeMarineKelpStage2.MapEntry: Large Marine Kelp
 			LargeMarineKelpStage3.MapEntry: Large Marine Kelp
 			LargeMarineKelpStage4.MapEntry: Large Marine Kelp
+			SavannaBushes.MapEntry: Mods.Avalon.Tiles.SavannaBushes.MapEntry
+			SavannaPot.MapEntry: Savanna Pot
+			SavannaSapling.MapEntry: Mods.Avalon.Tiles.SavannaSapling.MapEntry
+			SavannaShortGrass.MapEntry1: Mods.Avalon.Tiles.SavannaShortGrass.MapEntry1
 		}
 
 		Prefixes: {

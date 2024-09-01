@@ -26,7 +26,7 @@ internal class Tropics
                     switch (trap.TileFrameY / 18)
                     {
                         case 6:
-                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.TuhrtlPressurePlate>();
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlPressurePlate>();
                             trap.TileFrameY -= 18 * 6;
                             break;
                         default:
@@ -38,19 +38,19 @@ internal class Tropics
                     switch (trap.TileFrameY / 18)
                     {
                         case 1:
-                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.CannonballTrap>();
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Savanna.CannonballTrap>();
                             trap.TileFrameY -= 18;
                             break;
                         case 2:
-                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.PoisonGasTrap>();
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Savanna.PoisonGasTrap>();
                             trap.TileFrameY -= 36;
                             break;
                         case 3:
-                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.FireballTrap>();
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Savanna.FireballTrap>();
                             trap.TileFrameY -= 54;
                             break;
                         case 4:
-                            trap.TileType = (ushort)ModContent.TileType<Tiles.Tropics.LanceTrap>();
+                            trap.TileType = (ushort)ModContent.TileType<Tiles.Savanna.LanceTrap>();
                             trap.TileFrameY -= 72;
                             break;
                         default:
@@ -97,7 +97,7 @@ internal class Tropics
                 }
 
                 num653++;
-                if (Main.tile[num654, num653].HasTile && (Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() || Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Tropics.Loam>()))
+                if (Main.tile[num654, num653].HasTile && (Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>() || Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Savanna.Loam>()))
                 {
                     int num655 = 10;
                     bool flag39 = false;
@@ -119,7 +119,7 @@ internal class Tropics
                     }
                 }
             }
-            else if (Main.tile[num654, num653].HasTile && Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+            else if (Main.tile[num654, num653].HasTile && Main.tile[num654, num653].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
             {
                 flag38 = true;
                 Structures.TuhrtlOutpost.Outpost(num654, num653);
@@ -159,9 +159,9 @@ internal class Tropics
             {
                 if (j > Main.rockLayer)
                 {
-                    if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && Main.tile[i, j].HasTile &&
-                        Main.tile[i + 1, j].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && Main.tile[i + 1, j].HasTile &&
-                        Main.tile[i - 1, j].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && Main.tile[i - 1, j].HasTile &&
+                    if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>() && Main.tile[i, j].HasTile &&
+                        Main.tile[i + 1, j].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>() && Main.tile[i + 1, j].HasTile &&
+                        Main.tile[i - 1, j].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>() && Main.tile[i - 1, j].HasTile &&
                         !Main.tile[i, j - 1].HasTile && !Main.tile[i - 1, j - 1].HasTile && !Main.tile[i + 1, j - 1].HasTile)
                     {
                         if (WorldGen.genRand.NextBool(5)) Structures.LeafTrap.CreateLeafTrap(i, j + 2);
@@ -180,7 +180,7 @@ internal class Tropics
         {
             int num406 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 250);
             int num407 = ((GenVars.dungeonSide >= 0) ? WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.4)) : WorldGen.genRand.Next((int)(Main.maxTilesX * 0.6), (int)(Main.maxTilesX * 0.85)));
-            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() && GenVars.structures.CanPlace(new(num407, num406, 20, 14)))
+            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>() && GenVars.structures.CanPlace(new(num407, num406, 20, 14)))
             {
                 //flag30 = false;
                 Structures.TropicsSanctum.MakeSanctum(num407, num406);
@@ -192,13 +192,13 @@ internal class Tropics
     public static void LihzahrdBrickReSolidTask(GenerationProgress progress, GameConfiguration configuration)
     {
         Main.tileSolid[TileID.LihzahrdBrick] = true;
-        Main.tileSolid[ModContent.TileType<Tiles.Tropics.TuhrtlBrick>()] = true;
-        Main.tileSolid[ModContent.TileType<Tiles.Tropics.BrambleSpikes>()] = true;
+        Main.tileSolid[ModContent.TileType<Tiles.Savanna.TuhrtlBrick>()] = true;
+        Main.tileSolid[ModContent.TileType<Tiles.Savanna.BrambleSpikes>()] = true;
     }
     public static void GlowingMushroomsandJunglePlantsTask(GenerationProgress progress, GameConfiguration passConfig)
     {
         progress.Set(1f);
-        int grass = ModContent.TileType<Tiles.Tropics.TropicalShortGrass>();
+        int grass = ModContent.TileType<Tiles.Savanna.SavannaShortGrass>();
         for (int num207 = 0; num207 < Main.maxTilesX; num207++)
         {
             for (int num208 = 0; num208 < Main.maxTilesY; num208++)
@@ -221,7 +221,7 @@ internal class Tropics
                             }
                         }
                     }
-                    if (Main.tile[num207, num208].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>() && !Main.tile[num207, num208 - 1].HasTile &&
+                    if (Main.tile[num207, num208].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>() && !Main.tile[num207, num208 - 1].HasTile &&
                         !Main.tile[num207, num208].IsHalfBlock && Main.tile[num207, num208].Slope == SlopeType.Solid)
                     {
                         Tile t = Main.tile[num207, num208 - 1];
@@ -259,7 +259,7 @@ internal class Tropics
     public static void JungleBushesTask(GenerationProgress progress, GameConfiguration passConfig)
     {
         progress.Set(1f);
-        int bush = ModContent.TileType<Tiles.Tropics.TropicsBushes>();
+        int bush = ModContent.TileType<Tiles.Savanna.SavannaBushes>();
         for (int num204 = 0; num204 < Main.maxTilesX * 100; num204++)
         {
             int num205 = WorldGen.genRand.Next(40, Main.maxTilesX / 2 - 40);
@@ -271,7 +271,7 @@ internal class Tropics
             for (num206 = WorldGen.genRand.Next(Main.maxTilesY - 300); !Main.tile[num205, num206].HasTile && num206 < Main.maxTilesY - 300; num206++)
             {
             }
-            if (Main.tile[num205, num206].HasTile && Main.tile[num205, num206].TileType == ModContent.TileType<Tiles.Tropics.TropicalGrass>())
+            if (Main.tile[num205, num206].HasTile && Main.tile[num205, num206].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
             {
                 num206--;
                 WorldGen.PlaceJunglePlant(num205, num206, (ushort)bush, WorldGen.genRand.Next(8), 0);
@@ -293,7 +293,7 @@ internal class Tropics
             int num406 = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 250);
             int num407 = WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.85));
             //((AvalonWorld.dungeonSide >= 0) ? WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.4)) : WorldGen.genRand.Next((int)(Main.maxTilesX * 0.6), (int)(Main.maxTilesX * 0.85)));
-            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() && GenVars.structures.CanPlace(new Rectangle(num407 - 50, num406 - 21, 87, 66)))
+            if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>() && GenVars.structures.CanPlace(new Rectangle(num407 - 50, num406 - 21, 87, 66)))
             {
                 //flag30 = false;
                 Structures.Nest.CreateWaspNest(num407, num406);
@@ -337,7 +337,7 @@ internal class Tropics
 				if (Main.tile[i, j].HasUnactuatedTile)
 				{
 					WorldGen.grassSpread = 0;
-					WorldGen.SpreadGrass(i, j, ModContent.TileType<Tiles.Tropics.Loam>(), ModContent.TileType<Tiles.Tropics.TropicalGrass>(), repeat: true, default);
+					WorldGen.SpreadGrass(i, j, ModContent.TileType<Tiles.Savanna.Loam>(), ModContent.TileType<Tiles.Savanna.SavannaGrass>(), repeat: true, default);
 				}
 				progress.Set(0.2f * ((i * Main.maxTilesY + j) / (float)(Main.maxTilesX * Main.maxTilesY)));
 			}

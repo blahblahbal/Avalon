@@ -16,7 +16,7 @@ class Bramble : ModItem
         Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.Bramble>();
+        Item.createTile = ModContent.TileType<Tiles.Savanna.Bramble>();
         Item.width = dims.Width;
         Item.useTime = 10;
         Item.useTurn = true;

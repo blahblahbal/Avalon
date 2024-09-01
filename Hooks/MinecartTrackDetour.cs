@@ -28,9 +28,9 @@ namespace Avalon.Hooks
             ModContent.TileType<Tiles.Furniture.Coughwood.CoughwoodChest>(), ModContent.TileType<Tiles.Furniture.BleachedEbony.BleachedEbonyChest>(),
             ModContent.TileType<Tiles.Furniture.HellfireChest>(), ModContent.TileType<Tiles.Contagion.IckyAltar>(), ModContent.TileType<Tiles.GemTrees.TourmalineTree>(),
             ModContent.TileType<Tiles.GemTrees.PeridotTree>(), ModContent.TileType<Tiles.GemTrees.ZirconTree>(), ModContent.TileType<Tiles.Statues>(),
-            ModContent.TileType<Tiles.Tropics.PlatformLeaf>(), ModContent.TileType<Tiles.GemStashes>(), ModContent.TileType<Tiles.ChunkstoneColumn>(),
-            ModContent.TileType<Tiles.CrimstoneColumn>(), ModContent.TileType<Tiles.EbonstoneColumn>(), ModContent.TileType<Tiles.Tropics.TuhrtlBrick>(),
-            ModContent.TileType<Tiles.Paintings>(), ModContent.TileType<Tiles.PlatinumChest>(), ModContent.TileType<Tiles.Tropics.Loamstone>(), TileID.PlatinumBrick
+            ModContent.TileType<Tiles.Savanna.PlatformLeaf>(), ModContent.TileType<Tiles.GemStashes>(), ModContent.TileType<Tiles.ChunkstoneColumn>(),
+            ModContent.TileType<Tiles.CrimstoneColumn>(), ModContent.TileType<Tiles.EbonstoneColumn>(), ModContent.TileType<Tiles.Savanna.TuhrtlBrick>(),
+            ModContent.TileType<Tiles.Paintings>(), ModContent.TileType<Tiles.PlatinumChest>(), ModContent.TileType<Tiles.Savanna.Loamstone>(), TileID.PlatinumBrick
         };
 
         protected override void Apply()

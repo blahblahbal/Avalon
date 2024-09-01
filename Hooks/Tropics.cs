@@ -11,7 +11,7 @@ using Terraria.GameContent.Biomes.Desert;
 using Mono.Cecil.Cil;
 using Terraria;
 using System.Reflection;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 
 namespace Avalon.Hooks;
 
@@ -40,7 +40,7 @@ internal class Tropics : ModHook
 
     private void IL_WorldGen_OreRunner(ILContext il)
     {
-        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<TropicalGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<SavannaGrass>())[id]);
     }
 
     private void On_Liquid_DelWater(On_Liquid.orig_DelWater orig, int l)
@@ -62,7 +62,7 @@ internal class Tropics : ModHook
                     if (!tile5.HasTile)
                         continue;
 
-                    if (tile5.TileType == ModContent.TileType<TropicalGrass>())
+                    if (tile5.TileType == ModContent.TileType<SavannaGrass>())
                     {
                         tile5.TileType = (ushort)ModContent.TileType<Loam>();
                         WorldGen.SquareTileFrame(i, j);
@@ -83,22 +83,22 @@ internal class Tropics : ModHook
 
     private void IL_WorldGen_GenerateWorld(ILContext il)
     {
-        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>())[id]);
         Utilities.AddAlternativeIdChecks(il, WallID.LihzahrdBrickUnsafe, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>())[id]);
     }
 
     private void IL_WorldGen_PlaceJunglePlant(ILContext il)
     {
-        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())[id]);
-        Utilities.AddAlternativeIdChecks(il, TileID.JunglePlants, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalShortGrass>())[id]);
-        Utilities.AddAlternativeIdChecks(il, TileID.JunglePlants2, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalLongGrass>())[id]);
-        Utilities.AddAlternativeIdChecks(il, TileID.PlantDetritus, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicsBushes>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.JunglePlants, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Savanna.SavannaShortGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.JunglePlants2, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Savanna.SavannaLongGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.PlantDetritus, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Savanna.SavannaBushes>())[id]);
     }
 
     private void IL_DesertDescription_RowHasInvalidTiles(ILContext il)
     {
-        Utilities.AddAlternativeIdChecks(il, TileID.Mud, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.Loam>())[id]);
-        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.Mud, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Savanna.Loam>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>())[id]);
     }
 
 

@@ -15,6 +15,6 @@ class PoisonGasTrap : ModItem
     {
         Item.CloneDefaults(ItemID.DemoniteBrick);
         Item.mech = true;
-        Item.createTile = ModContent.TileType<Tiles.Tropics.PoisonGasTrap>();
+        Item.createTile = ModContent.TileType<Tiles.Savanna.PoisonGasTrap>();
     }
 }

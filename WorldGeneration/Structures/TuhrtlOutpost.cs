@@ -1,4 +1,4 @@
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -727,7 +727,7 @@ internal class TuhrtlOutpost
                         Main.tile[num12, num13].TileType == ModContent.TileType<LanceTrap>())
                         return false;
 
-                    if (Main.tile[num12, num13].TileType == ModContent.TileType<Tiles.Tropics.BrambleSpikes>())
+                    if (Main.tile[num12, num13].TileType == ModContent.TileType<Tiles.Savanna.BrambleSpikes>())
                         return false;
 
                     if (Main.tile[num12, num13].TileType == 237) // altar

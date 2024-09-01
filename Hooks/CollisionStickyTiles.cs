@@ -43,14 +43,14 @@ namespace Avalon.Hooks
             {
                 for (int j = num3; j < num4; j++)
                 {
-                    if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.Tropics.Bramble>())
+                    if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.Savanna.Bramble>())
                     {
                         int num5 = 0;
                         vector2.X = i * 16;
                         vector2.Y = j * 16;
                         if (vector.X + Width > vector2.X - num5 && vector.X < vector2.X + 16f + num5 && vector.Y + Height > vector2.Y && vector.Y < vector2.Y + 16.01)
                         {
-                            if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.Tropics.Bramble>() && (double)(Math.Abs(Velocity.X) + Math.Abs(Velocity.Y)) > 0.7 && Main.rand.NextBool(30))
+                            if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.Savanna.Bramble>() && (double)(Math.Abs(Velocity.X) + Math.Abs(Velocity.Y)) > 0.7 && Main.rand.NextBool(30))
                                 Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, DustID.CorruptGibs);
                             return new Vector2(i, j);
                         }

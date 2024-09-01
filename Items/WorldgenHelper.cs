@@ -2,7 +2,7 @@ using Avalon.Common;
 using Avalon.Hooks;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.CrystalMines;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
 using System;

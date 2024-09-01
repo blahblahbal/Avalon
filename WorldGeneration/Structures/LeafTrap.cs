@@ -1,4 +1,4 @@
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ internal class LeafTrap
     public static void CreateLargeLeafTrap(int x, int y)
     {
         ushort loam = (ushort)ModContent.TileType<Loam>();
-        ushort grass = (ushort)ModContent.TileType<TropicalGrass>();
+        ushort grass = (ushort)ModContent.TileType<SavannaGrass>();
         ushort bramble = (ushort)ModContent.TileType<Bramble>();
 
         for (int i = x; i < x + 13; i++)
@@ -88,7 +88,7 @@ internal class LeafTrap
     public static void CreateLeafTrap(int x, int y)
     {
         ushort loam = (ushort)ModContent.TileType<Loam>();
-        ushort grass = (ushort)ModContent.TileType<TropicalGrass>();
+        ushort grass = (ushort)ModContent.TileType<SavannaGrass>();
         ushort bramble = (ushort)ModContent.TileType<Bramble>();
         for (int i = x - 2; i <= x + 2; i++)
         {

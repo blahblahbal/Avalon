@@ -2,7 +2,7 @@ using Avalon.Common;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Furniture.Coughwood;
-using Avalon.Tiles.Tropics;
+using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -36,9 +36,9 @@ public class TropicsHouseBuilder : HouseBuilder
 
     protected override void AgeRoom(Rectangle room)
     {
-        WorldUtils.Gen(new Point(room.X, room.Y), new Shapes.Rectangle(room.Width, room.Height), Actions.Chain(new Modifiers.Dither(0.6), new Modifiers.Blotches(2, 0.6), new Modifiers.OnlyTiles(TileType), new Actions.SetTileKeepWall((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>(), setSelfFrames: true), new Modifiers.Dither(0.8), new Actions.SetTileKeepWall((ushort)ModContent.TileType<Tiles.Tropics.Loam>(), setSelfFrames: true)));
-        WorldUtils.Gen(new Point(room.X + 1, room.Y), new Shapes.Rectangle(room.Width - 2, 1), Actions.Chain(new Modifiers.Dither(), new Modifiers.OnlyTiles((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>()), new Modifiers.Offset(0, 1), new Modifiers.IsEmpty(), new ActionVines(3, room.Height, ModContent.TileType<Tiles.Tropics.TropicalVines>())));
-        WorldUtils.Gen(new Point(room.X + 1, room.Y + room.Height - 1), new Shapes.Rectangle(room.Width - 2, 1), Actions.Chain(new Modifiers.Dither(), new Modifiers.OnlyTiles((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>()), new Modifiers.Offset(0, 1), new Modifiers.IsEmpty(), new ActionVines(3, room.Height, ModContent.TileType<Tiles.Tropics.TropicalVines>())));
+        WorldUtils.Gen(new Point(room.X, room.Y), new Shapes.Rectangle(room.Width, room.Height), Actions.Chain(new Modifiers.Dither(0.6), new Modifiers.Blotches(2, 0.6), new Modifiers.OnlyTiles(TileType), new Actions.SetTileKeepWall((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>(), setSelfFrames: true), new Modifiers.Dither(0.8), new Actions.SetTileKeepWall((ushort)ModContent.TileType<Tiles.Savanna.Loam>(), setSelfFrames: true)));
+        WorldUtils.Gen(new Point(room.X + 1, room.Y), new Shapes.Rectangle(room.Width - 2, 1), Actions.Chain(new Modifiers.Dither(), new Modifiers.OnlyTiles((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>()), new Modifiers.Offset(0, 1), new Modifiers.IsEmpty(), new ActionVines(3, room.Height, ModContent.TileType<Tiles.Savanna.SavannaVines>())));
+        WorldUtils.Gen(new Point(room.X + 1, room.Y + room.Height - 1), new Shapes.Rectangle(room.Width - 2, 1), Actions.Chain(new Modifiers.Dither(), new Modifiers.OnlyTiles((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>()), new Modifiers.Offset(0, 1), new Modifiers.IsEmpty(), new ActionVines(3, room.Height, ModContent.TileType<Tiles.Savanna.SavannaVines>())));
         WorldUtils.Gen(new Point(room.X, room.Y), new Shapes.Rectangle(room.Width, room.Height), Actions.Chain(new Modifiers.Dither(0.85), new Modifiers.Blotches(), new Actions.PlaceWall((ushort)ModContent.WallType<Walls.TropicalGrassWall>())));
     }
 }
@@ -47,13 +47,13 @@ public class TropicsCaveHouseHook : ModHook
     private static readonly bool[] BlacklistedTiles = TileID.Sets.Factory.CreateBoolSet(true,
         TileID.Hive, TileID.BlueDungeonBrick, TileID.GreenDungeonBrick, TileID.PinkDungeonBrick, TileID.LihzahrdBrick,
         TileID.Crimstone, TileID.Ebonsand, TileID.Ebonstone, TileID.SandstoneBrick, TileID.Containers, TileID.Containers2,
-        ModContent.TileType<TuhrtlBrick>(), ModContent.TileType<Tiles.Tropics.Nest>(), ModContent.TileType<CoughwoodChest>(),
+        ModContent.TileType<TuhrtlBrick>(), ModContent.TileType<Tiles.Savanna.Nest>(), ModContent.TileType<CoughwoodChest>(),
         ModContent.TileType<HellfireChest>(), ModContent.TileType<Chunkstone>(), ModContent.TileType<Snotsand>());
 
     private static readonly bool[] BeelistedTiles = TileID.Sets.Factory.CreateBoolSet(true,
         TileID.BlueDungeonBrick, TileID.GreenDungeonBrick, TileID.PinkDungeonBrick, TileID.LihzahrdBrick,
         TileID.Crimstone, TileID.Ebonsand, TileID.Ebonstone, TileID.SandstoneBrick, TileID.Containers, TileID.Containers2,
-        ModContent.TileType<TuhrtlBrick>(), ModContent.TileType<Tiles.Tropics.Nest>(), ModContent.TileType<CoughwoodChest>(),
+        ModContent.TileType<TuhrtlBrick>(), ModContent.TileType<Tiles.Savanna.Nest>(), ModContent.TileType<CoughwoodChest>(),
         ModContent.TileType<HellfireChest>(), ModContent.TileType<Chunkstone>(), ModContent.TileType<Snotsand>());
 
     protected override void Apply()
@@ -74,7 +74,7 @@ public class TropicsCaveHouseHook : ModHook
                 for (int j = room.Y; j < room.Y + room.Height; j++)
                 {
                     if (Main.tile[i, j].TileType == ModContent.TileType<TuhrtlBrick>() ||
-                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.Tropics.Nest>() ||
+                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.Savanna.Nest>() ||
                         Main.tile[i, j].WallType == ModContent.WallType<Walls.NestWall>() ||
                         Main.tile[i, j].WallType == ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>())
                     {
@@ -102,14 +102,14 @@ public class TropicsCaveHouseHook : ModHook
         Dictionary<ushort, int> dictionary = new Dictionary<ushort, int>();
         foreach (Rectangle room in rooms)
         {
-            WorldUtils.Gen(new Point(room.X - 10, room.Y - 10), new Shapes.Rectangle(room.Width + 20, room.Height + 20), new Actions.TileScanner(0, 59, 147, 1, 161, 53, 396, 397, 368, 367, 60, 70, (ushort)ModContent.TileType<Loam>(), (ushort)ModContent.TileType<TropicalGrass>()).Output(dictionary));
+            WorldUtils.Gen(new Point(room.X - 10, room.Y - 10), new Shapes.Rectangle(room.Width + 20, room.Height + 20), new Actions.TileScanner(0, 59, 147, 1, 161, 53, 396, 397, 368, 367, 60, 70, (ushort)ModContent.TileType<Loam>(), (ushort)ModContent.TileType<SavannaGrass>()).Output(dictionary));
         }
 
         List<Tuple<HouseType, int>> list = new List<Tuple<HouseType, int>>();
         list.Add(Tuple.Create(HouseType.Wood, dictionary[0] + dictionary[1]));
         if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Tropics)
         {
-            list.Add(Tuple.Create(HouseType.Jungle, dictionary[(ushort)ModContent.TileType<Loam>()] + dictionary[(ushort)ModContent.TileType<TropicalGrass>()] * 10));
+            list.Add(Tuple.Create(HouseType.Jungle, dictionary[(ushort)ModContent.TileType<Loam>()] + dictionary[(ushort)ModContent.TileType<SavannaGrass>()] * 10));
         }
         else
         {
@@ -142,7 +142,7 @@ public class TropicsCaveHouseHook : ModHook
                 for (int j = room.Y; j < room.Y + room.Height; j++)
                 {
                     if (Main.tile[i, j].TileType == ModContent.TileType<TuhrtlBrick>() ||
-                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.Tropics.Nest>() ||
+                        Main.tile[i, j].TileType == ModContent.TileType<Tiles.Savanna.Nest>() ||
                         Main.tile[i, j].WallType == ModContent.WallType<Walls.NestWall>() ||
                         Main.tile[i, j].WallType == ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>())
                     {

@@ -13,6 +13,6 @@ public class TropicalGrassWallSafe : ModWall
         Main.wallHouse[Type] = true;
         AddMapEntry(new Color(35, 76, 0));
         HitSound = SoundID.Grass;
-        DustType = ModContent.DustType<TropicalGrassBladeDust>();
+        DustType = ModContent.DustType<SavannaGrassBladeDust>();
     }
 }

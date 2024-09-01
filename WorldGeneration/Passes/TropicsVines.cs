@@ -19,7 +19,7 @@ internal class TropicsVines : GenPass
             {
                 if (num587 > 0 && !Main.tile[num586, num589].HasTile)
                 {
-                    Main.tile[num586, num589].TileType = (ushort)ModContent.TileType<Tiles.Tropics.TropicalVines>();
+                    Main.tile[num586, num589].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaVines>();
                     Tile t = Main.tile[num586, num589];
                     t.HasTile = true;
                     num587--;
@@ -30,7 +30,7 @@ internal class TropicsVines : GenPass
                 }
 
                 if (Main.tile[num586, num589].HasTile &&
-                    Main.tile[num586, num589].TileType == (ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>() &&
+                    Main.tile[num586, num589].TileType == (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>() &&
                     !Main.tile[num586, num589].BottomSlope && WorldGen.genRand.Next(5) < 3)
                 {
                     num587 = WorldGen.genRand.Next(1, 10);
