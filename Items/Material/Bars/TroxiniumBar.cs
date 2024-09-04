@@ -43,7 +43,8 @@ class TroxiniumBar : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;
-        if (!Main.dedServ)
+		Item.MakeUsableWithChlorophyteExtractinator();
+		if (!Main.dedServ)
         {
             Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow.Value;
         }

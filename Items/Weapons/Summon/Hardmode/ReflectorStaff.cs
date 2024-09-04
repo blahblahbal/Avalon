@@ -24,7 +24,8 @@ public class ReflectorStaff : ModItem
         Item.value = Item.sellPrice(0, 30, 0, 0);
         Item.knockBack = 8.5f;
         Item.rare = ItemRarityID.Cyan;
-        Item.DamageType = DamageClass.Summon;
+		Item.autoReuse = true;
+		Item.DamageType = DamageClass.Summon;
         Item.mana = 10;
     }
     public override bool CanUseItem(Player player)

@@ -6,7 +6,11 @@ namespace Avalon.Items.Tools.Hardmode;
 
 class DurataniumDrill : ModItem
 {
-    public override void SetDefaults()
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.IsDrill[Type] = true;
+	}
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Item.UseSound = SoundID.Item23;

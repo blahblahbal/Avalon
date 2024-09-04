@@ -6,10 +6,14 @@ namespace Avalon.Items.Tools.Hardmode;
 
 class NaquadahDrill : ModItem
 {
-    public override void SetDefaults()
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.IsDrill[Type] = true;
+	}
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 12;
+		Item.damage = 12;
         Item.noUseGraphic = true;
         Item.channel = true;
         Item.shootSpeed = 32f;

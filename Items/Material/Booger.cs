@@ -22,5 +22,6 @@ class Booger : ModItem
         Item.maxStack = 9999;
         Item.value = 750;
         Item.height = dims.Height;
-    }
+		Item.MakeUsableWithChlorophyteExtractinator();
+	}
 }

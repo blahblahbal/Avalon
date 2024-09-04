@@ -27,7 +27,8 @@ class PrimeStaff : ModItem
         Item.value = Item.sellPrice(0, 10);
         Item.useAnimation = 30;
         Item.height = dims.Height;
-        Item.UseSound = SoundID.Item44;
+		Item.autoReuse = true;
+		Item.UseSound = SoundID.Item44;
     }
     public override void AddRecipes()
     {

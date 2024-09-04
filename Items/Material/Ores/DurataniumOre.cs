@@ -27,5 +27,6 @@ class DurataniumOre : ModItem
         Item.value = Item.sellPrice(0, 0, 10);
         Item.useAnimation = 15;
         Item.height = dims.Height;
-    }
+		Item.MakeUsableWithChlorophyteExtractinator();
+	}
 }

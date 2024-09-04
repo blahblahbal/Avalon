@@ -36,7 +36,8 @@ class HungryStaff : ModItem
         Item.useAnimation = 30;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item44;
-        Item.buffType = ModContent.BuffType<Hungry>();
+		Item.autoReuse = true;
+		Item.buffType = ModContent.BuffType<Hungry>();
     }
     public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
     {

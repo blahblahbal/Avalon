@@ -26,6 +26,7 @@ class GastropodStaff : ModItem
         Item.useAnimation = 30;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item44;
+		Item.autoReuse = true;
         Item.buffType = ModContent.BuffType<Buffs.Minions.Gastropod>();
     }
     public override void AddRecipes()

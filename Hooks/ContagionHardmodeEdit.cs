@@ -10,6 +10,7 @@ using Terraria.WorldBuilding;
 using Avalon.WorldGeneration.Enums;
 using ReLogic.Utilities;
 using System;
+using Avalon.Tiles;
 
 namespace Avalon.Hooks
 {
@@ -18,9 +19,40 @@ namespace Avalon.Hooks
         protected override void Apply()
         {
             On_WorldGen.GERunner += On_WorldGen_GERunner;
+			On_NPC.CreateBrickBoxForWallOfFlesh += On_NPC_CreateBrickBoxForWallOfFlesh;
         }
 
-        private void On_WorldGen_GERunner(On_WorldGen.orig_GERunner orig, int i, int j, double speedX, double speedY, bool good)
+		private void On_NPC_CreateBrickBoxForWallOfFlesh(On_NPC.orig_CreateBrickBoxForWallOfFlesh orig, NPC self)
+		{
+			int num = (int)(self.position.X + (float)(self.width / 2)) / 16;
+			int num2 = (int)(self.position.Y + (float)(self.height / 2)) / 16;
+			int num3 = self.width / 2 / 16 + 1;
+			for (int i = num - num3; i <= num + num3; i++)
+			{
+				for (int j = num2 - num3; j <= num2 + num3; j++)
+				{
+					if ((i == num - num3 || i == num + num3 || j == num2 - num3 || j == num2 + num3) && !Main.tile[i, j].HasTile)
+					{
+						Tile t = Main.tile[i, j];
+						ushort ttype = TileID.DemoniteBrick;
+						if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Crimson) ttype = TileID.CrimtaneBrick;
+						else if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion) ttype = (ushort)ModContent.TileType<BacciliteBrick>();
+
+						t.TileType = ttype;
+						t.HasTile = true;
+					}
+					Tile t2 = Main.tile[i, j];
+					t2.LiquidType = LiquidID.Water;
+					t2.LiquidAmount = 0;
+					if (Main.netMode == 2)
+						NetMessage.SendTileSquare(-1, i, j);
+					else
+						WorldGen.SquareTileFrame(i, j);
+				}
+			}
+		}
+
+		private void On_WorldGen_GERunner(On_WorldGen.orig_GERunner orig, int i, int j, double speedX, double speedY, bool good)
         {
             WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
             if (evil == WorldEvil.Contagion && !good)

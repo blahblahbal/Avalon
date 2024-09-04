@@ -10,7 +10,7 @@ namespace Avalon.Hooks
     {
         protected override void Apply()
         {
-            On_ItemTrader.CreateChlorophyteExtractinator += OnChlorophyteExtractinator;
+            //On_ItemTrader.CreateChlorophyteExtractinator += OnChlorophyteExtractinator;
         }
         public static ItemTrader CreateAvalonChlorophyteExtractinator()
         {
@@ -21,9 +21,9 @@ namespace Avalon.Hooks
             itemTrader.AddOption_CyclicLoop(ItemID.GoldOre, ItemID.PlatinumOre, ModContent.ItemType<Items.Material.Ores.BismuthOre>());
             itemTrader.AddOption_CyclicLoop(ModContent.ItemType<Items.Material.Ores.RhodiumOre>(), ModContent.ItemType<Items.Material.Ores.OsmiumOre>(), ModContent.ItemType<Items.Material.Ores.IridiumOre>());
             itemTrader.AddOption_CyclicLoop(ItemID.DemoniteOre, ItemID.CrimtaneOre, ModContent.ItemType<Items.Material.Ores.BacciliteOre>());
-            itemTrader.AddOption_CyclicLoop(ItemID.CobaltOre, ItemID.PalladiumOre); //, ModContent.ItemType<Items.Material.Ores.DurataniumOre>());
-            itemTrader.AddOption_CyclicLoop(ItemID.MythrilOre, ItemID.OrichalcumOre); //, ModContent.ItemType<Items.Material.Ores.NaquadahOre>());
-            itemTrader.AddOption_CyclicLoop(ItemID.AdamantiteOre, ItemID.TitaniumOre); //, ModContent.ItemType<Items.Material.Ores.TroxiniumOre>());
+            itemTrader.AddOption_CyclicLoop(ItemID.CobaltOre, ItemID.PalladiumOre, ModContent.ItemType<Items.Material.Ores.DurataniumOre>());
+            itemTrader.AddOption_CyclicLoop(ItemID.MythrilOre, ItemID.OrichalcumOre, ModContent.ItemType<Items.Material.Ores.NaquadahOre>());
+            itemTrader.AddOption_CyclicLoop(ItemID.AdamantiteOre, ItemID.TitaniumOre, ModContent.ItemType<Items.Material.Ores.TroxiniumOre>());
             itemTrader.AddOption_CyclicLoop(ItemID.PinkBrick, ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>(), ModContent.ItemType<Items.Placeable.Tile.YellowBrick>(), ItemID.GreenBrick,
                 ItemID.BlueBrick, ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>());
             itemTrader.AddOption_CyclicLoop(ItemID.CopperBar, ItemID.TinBar, ModContent.ItemType<Items.Material.Bars.BronzeBar>());
@@ -32,9 +32,9 @@ namespace Avalon.Hooks
             itemTrader.AddOption_CyclicLoop(ItemID.GoldBar, ItemID.PlatinumBar, ModContent.ItemType<Items.Material.Bars.BismuthBar>());
             itemTrader.AddOption_CyclicLoop(ModContent.ItemType<Items.Material.Bars.RhodiumBar>(), ModContent.ItemType<Items.Material.Bars.OsmiumBar>(), ModContent.ItemType<Items.Material.Bars.IridiumBar>());
             itemTrader.AddOption_CyclicLoop(ItemID.DemoniteBar, ItemID.CrimtaneBar, ModContent.ItemType<Items.Material.Bars.BacciliteBar>());
-            itemTrader.AddOption_CyclicLoop(ItemID.CobaltBar, ItemID.PalladiumBar); //, ModContent.ItemType<Items.Material.Bars.DurataniumBar>());
-            itemTrader.AddOption_CyclicLoop(ItemID.MythrilBar, ItemID.OrichalcumBar); //, ModContent.ItemType<Items.Material.Bars.NaquadahBar>());
-            itemTrader.AddOption_CyclicLoop(ItemID.AdamantiteBar, ItemID.TitaniumBar); //, ModContent.ItemType<Items.Material.Bars.TroxiniumBar>());
+            itemTrader.AddOption_CyclicLoop(ItemID.CobaltBar, ItemID.PalladiumBar, ModContent.ItemType<Items.Material.Bars.DurataniumBar>());
+            itemTrader.AddOption_CyclicLoop(ItemID.MythrilBar, ItemID.OrichalcumBar, ModContent.ItemType<Items.Material.Bars.NaquadahBar>());
+            itemTrader.AddOption_CyclicLoop(ItemID.AdamantiteBar, ItemID.TitaniumBar, ModContent.ItemType<Items.Material.Bars.TroxiniumBar>());
             itemTrader.AddOption_CyclicLoop(ItemID.ShadowScale, ItemID.TissueSample, ModContent.ItemType<Items.Material.Booger>());
             itemTrader.AddOption_FromAny(ItemID.StoneBlock, ItemID.EbonstoneBlock, ItemID.CrimstoneBlock, ModContent.ItemType<Items.Placeable.Tile.ChunkstoneBlock>());
             itemTrader.AddOption_FromAny(ItemID.SandBlock, ItemID.EbonsandBlock, ItemID.CrimsandBlock, ItemID.PearlsandBlock, ModContent.ItemType<Items.Placeable.Tile.SnotsandBlock>());

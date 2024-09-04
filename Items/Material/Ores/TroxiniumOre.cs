@@ -43,7 +43,8 @@ class TroxiniumOre : ModItem
         Item.value = Item.sellPrice(0, 0, 15);
         Item.useAnimation = 15;
         Item.height = dims.Height;
-        if (!Main.dedServ)
+		Item.MakeUsableWithChlorophyteExtractinator();
+		if (!Main.dedServ)
         {
             Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow.Value;
         }

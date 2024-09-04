@@ -28,7 +28,8 @@ class DurataniumBar : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;
-    }
+		Item.MakeUsableWithChlorophyteExtractinator();
+	}
     public override void AddRecipes()
     {
         Recipe.Create(Type)

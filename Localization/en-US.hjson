@@ -7563,17 +7563,17 @@ Mods: {
 
 			TerrorPenguinsEarpiece: {
 				DisplayName: TerrorPenguin's Earpiece
-				Tooltip: ""
+				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
 			}
 
 			TerrorPenguinsHeels: {
 				DisplayName: TerrorPenguin's Heels
-				Tooltip: ""
+				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
 			}
 
 			TerrorPenguinsOnepiece: {
 				DisplayName: TerrorPenguin's One-piece
-				Tooltip: ""
+				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
 			}
 
 			AncientBodyplate: {
@@ -9093,17 +9093,17 @@ Mods: {
 
 			HadirosBodyplate: {
 				DisplayName: Hadiros' Bodyplate
-				Tooltip: ""
+				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
 			}
 
 			HadirosCrownmet: {
 				DisplayName: Hadiros' Crownmet
-				Tooltip: ""
+				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
 			}
 
 			HadirosGreaves: {
 				DisplayName: Hadiros' Greaves
-				Tooltip: ""
+				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
 			}
 
 			XanthophyteWarhammer: {

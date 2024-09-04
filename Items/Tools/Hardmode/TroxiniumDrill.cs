@@ -9,10 +9,14 @@ namespace Avalon.Items.Tools.Hardmode;
 
 class TroxiniumDrill : ModItem
 {
-    public override void SetDefaults()
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.IsDrill[Type] = true;
+	}
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.damage = 14;
+		Item.damage = 14;
         Item.noUseGraphic = true;
         Item.channel = true;
         Item.shootSpeed = 32f;

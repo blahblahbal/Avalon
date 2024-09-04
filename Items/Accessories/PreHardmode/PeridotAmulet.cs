@@ -11,7 +11,7 @@ class PeridotAmulet : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Orange;
+        Item.rare = ItemRarityID.Blue;
         Item.width = dims.Width;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 70);

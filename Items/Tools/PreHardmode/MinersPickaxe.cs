@@ -14,7 +14,7 @@ class MinersPickaxe : ModItem
         Item.useTurn = true;
         Item.scale = 1f;
         Item.pick = 60;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Orange;
         Item.width = dims.Width;
         Item.useTime = 18;
         Item.knockBack = 3.5f;

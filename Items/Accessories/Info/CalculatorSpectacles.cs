@@ -131,7 +131,7 @@ public class CalcSpecGlobalItem : GlobalItem
 {
 	public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 	{
-		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type])
+		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type] && Main.LocalPlayer.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay)
 		{
 			int amtOfOre = 0;
 			int barType = -1;
