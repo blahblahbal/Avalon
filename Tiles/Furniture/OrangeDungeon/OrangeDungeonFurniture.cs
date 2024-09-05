@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameContent.Drawing;
@@ -260,7 +261,14 @@ public class OrangeDungeonChandelier : ChandelierTemplate
 
 public class OrangeDungeonChest : ChestTemplate
 {
-    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.OrangeDungeon.OrangeDungeonChest>();
+	protected override bool CanBeLocked => true;
+	protected override int ChestKeyItemId => ItemID.GoldenKey;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry1"), MapChestName);
+	}
+	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.OrangeDungeon.OrangeDungeonChest>();
 }
 
 public class OrangeDungeonClock : ClockTemplate

@@ -17,6 +17,9 @@ using Terraria.Utilities;
 using System.Reflection;
 using System;
 using static Terraria.GameContent.Drawing.TileDrawing;
+using Avalon.Tiles.Furniture.OrangeDungeon;
+using Avalon.Tiles.Furniture.PurpleDungeon;
+using Avalon.Tiles.Furniture.YellowDungeon;
 
 namespace Avalon.Common.Templates
 {
@@ -706,23 +709,53 @@ namespace Avalon.Common.Templates
             }
             else if (!isLocked)
             {
-                int chest = Chest.FindChest(left, top);
-                if (chest != -1)
-                {
-                    Main.stackSplit = 600;
-                    if (chest == player.chest)
-                    {
-                        player.chest = -1;
-                        SoundEngine.PlaySound(SoundID.MenuClose);
-                    }
-                    else
-                    {
-                        SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
-                        player.OpenChest(left, top, chest);
-                    }
+				if (player.inventory[player.selectedItem].type == ItemID.ChestLock && 
+					(tile.TileType == ModContent.TileType<OrangeDungeonChest>() ||
+					tile.TileType == ModContent.TileType<PurpleDungeonChest>() ||
+					tile.TileType == ModContent.TileType<YellowDungeonChest>()) &&
+					tile.TileFrameX == 0)
+				{
+					SoundEngine.PlaySound(SoundID.Unlock, new Vector2(left * 16, top * 16));
+					for (int q = left; q <= left + 1; q++)
+					{
+						for (int z = top; z <= top + 1; z++)
+						{
+							Tile tileSafely2 = Framing.GetTileSafely(i, z);
+							if (tileSafely2.TileType == ModContent.TileType<OrangeDungeonChest>() ||
+								tileSafely2.TileType == ModContent.TileType<PurpleDungeonChest>() ||
+								tileSafely2.TileType == ModContent.TileType<YellowDungeonChest>())
+							{
+								tileSafely2.TileFrameX += 36;
+							}
+						}
+					}
+					player.inventory[player.selectedItem].stack--;
+					if (player.inventory[player.selectedItem].stack <= 0)
+						player.inventory[player.selectedItem] = new Item();
 
-                    Recipe.FindRecipes();
-                }
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+						NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3f, left, top);
+				}
+				else
+				{
+					int chest = Chest.FindChest(left, top);
+					if (chest != -1)
+					{
+						Main.stackSplit = 600;
+						if (chest == player.chest)
+						{
+							player.chest = -1;
+							SoundEngine.PlaySound(SoundID.MenuClose);
+						}
+						else
+						{
+							SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
+							player.OpenChest(left, top, chest);
+						}
+
+						Recipe.FindRecipes();
+					}
+				}
             }
 
             return true;

@@ -9,8 +9,8 @@ namespace Avalon.Items.Vanity;
 class SavannaLily : ModItem
 {
     public override void SetStaticDefaults()
-    {
-        ArmorIDs.Head.Sets.DrawFullHair[EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "TropicsLily", EquipType.Head)] = true;
+	{
+        ArmorIDs.Head.Sets.DrawFullHair[EquipLoader.GetEquipSlot(ExxoAvalonOrigins.Mod, "SavannaLily", EquipType.Head)] = true;
     }
 
     public override void SetDefaults()

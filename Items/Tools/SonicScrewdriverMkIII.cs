@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Network;
 using Microsoft.Xna.Framework;
@@ -83,7 +84,7 @@ class SonicScrewdriverMkIII : ModItem
                         returnflag = true;
                         NPC.downedPlantBoss = true;
                     }
-                    Tiles.Contagion.ContagionChest.LockOrUnlock(xpos, ypos);
+                    AvalonGlobalTile.LockOrUnlock(xpos, ypos);
                     if (Main.netMode == NetmodeID.MultiplayerClient)
                     {
                         NetMessage.SendData(Terraria.ID.MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3, xpos, ypos);

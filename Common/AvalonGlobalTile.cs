@@ -1,20 +1,70 @@
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
+using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Furniture.OrangeDungeon;
+using Avalon.Tiles.Furniture.PurpleDungeon;
+using Avalon.Tiles.Furniture.YellowDungeon;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Reflection;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Common;
 
 public class AvalonGlobalTile : GlobalTile
 {
-    public override void SetStaticDefaults()
+	public static bool LockOrUnlock(int X, int Y)
+	{
+		if (Main.tile[X, Y] == null || Main.tile[X + 1, Y] == null || Main.tile[X, Y + 1] == null || Main.tile[X + 1, Y + 1] == null)
+		{
+			return false;
+		}
+		int type = 0;
+		Tile tileSafely = Framing.GetTileSafely(X, Y);
+		if (!(tileSafely.TileType == ModContent.TileType<OrangeDungeonChest>() || tileSafely.TileType == ModContent.TileType<PurpleDungeonChest>() ||
+			tileSafely.TileType == ModContent.TileType<YellowDungeonChest>() || tileSafely.TileType == ModContent.TileType<ContagionChest>())) return false;
+		int type2 = tileSafely.TileType;
+		int num2 = tileSafely.TileFrameX / 36;
+
+		SoundEngine.PlaySound(SoundID.Unlock, new(X * 16, Y * 16));
+
+		if (num2 == 0)
+		{
+			for (int i = X; i <= X + 1; i++)
+			{
+				for (int j = Y; j <= Y + 1; j++)
+				{
+					Tile tileSafely2 = Framing.GetTileSafely(i, j);
+					tileSafely2.TileFrameX += 36;
+					for (int k = 0; k < 4; k++)
+					{
+						Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, type);
+					}
+				}
+			}
+		}
+		else if (num2 == 1)
+		{
+			for (int i = X; i <= X + 1; i++)
+			{
+				for (int j = Y; j <= Y + 1; j++)
+				{
+					Tile tileSafely2 = Framing.GetTileSafely(i, j);
+					tileSafely2.TileFrameX -= 36;
+					for (int k = 0; k < 4; k++)
+					{
+						Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, type);
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	public override void SetStaticDefaults()
     {
         int[] spelunkers = { TileID.Crimtane, TileID.Meteorite, TileID.Obsidian, TileID.Hellstone };
         int[] ores = { TileID.Topaz, TileID.Ruby, TileID.Amethyst, TileID.Diamond, TileID.Emerald, TileID.Sapphire, TileID.AmberStoneBlock };

@@ -21,52 +21,6 @@ namespace Avalon.Tiles.Contagion
         {
             return NPC.downedPlantBoss;
         }
-        public static bool LockOrUnlock(int X, int Y)
-        {
-            if (Main.tile[X, Y] == null || Main.tile[X + 1, Y] == null || Main.tile[X, Y + 1] == null || Main.tile[X + 1, Y + 1] == null)
-            {
-                return false;
-            }
-            int type = 0;
-            Tile tileSafely = Framing.GetTileSafely(X, Y);
-            if (tileSafely.TileType != ModContent.TileType<ContagionChest>()) return false;
-            int type2 = tileSafely.TileType;
-            int num2 = tileSafely.TileFrameX / 36;
-
-            SoundEngine.PlaySound(SoundID.Unlock, new(X * 16, Y * 16));
-
-            if (num2 == 0)
-            {
-                for (int i = X; i <= X + 1; i++)
-                {
-                    for (int j = Y; j <= Y + 1; j++)
-                    {
-                        Tile tileSafely2 = Framing.GetTileSafely(i, j);
-                        tileSafely2.TileFrameX += 36;
-                        for (int k = 0; k < 4; k++)
-                        {
-                            Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, type);
-                        }
-                    }
-                }
-            }
-            else if (num2 == 1)
-            {
-                for (int i = X; i <= X + 1; i++)
-                {
-                    for (int j = Y; j <= Y + 1; j++)
-                    {
-                        Tile tileSafely2 = Framing.GetTileSafely(i, j);
-                        tileSafely2.TileFrameX -= 36;
-                        for (int k = 0; k < 4; k++)
-                        {
-                            Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, type);
-                        }
-                    }
-                }
-            }
-            return true;
-        }
         public override ushort GetMapOption(int i, int j)
         {
             return (ushort)(Main.tile[i, j].TileFrameX / 36);

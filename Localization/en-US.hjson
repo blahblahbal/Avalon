@@ -7563,17 +7563,17 @@ Mods: {
 
 			TerrorPenguinsEarpiece: {
 				DisplayName: TerrorPenguin's Earpiece
-				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
+				Tooltip: "[c/7FFFD4:[Developer item][c/7FFFD4:]]"
 			}
 
 			TerrorPenguinsHeels: {
 				DisplayName: TerrorPenguin's Heels
-				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
+				Tooltip: "[c/7FFFD4:[Developer item][c/7FFFD4:]]"
 			}
 
 			TerrorPenguinsOnepiece: {
 				DisplayName: TerrorPenguin's One-piece
-				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
+				Tooltip: "[c/7FFFD4:[Developer item][c/7FFFD4:]]"
 			}
 
 			AncientBodyplate: {
@@ -9058,8 +9058,8 @@ Mods: {
 			}
 
 			Sandstormer: {
-				Tooltip: ""
 				DisplayName: Sandstormer
+				Tooltip: ""
 			}
 
 			CrystalSkull: {
@@ -9093,17 +9093,17 @@ Mods: {
 
 			HadirosBodyplate: {
 				DisplayName: Hadiros' Bodyplate
-				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
+				Tooltip: "[c/7FFFD4:[Developer item][c/7FFFD4:]]"
 			}
 
 			HadirosCrownmet: {
 				DisplayName: Hadiros' Crownmet
-				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
+				Tooltip: "[c/7FFFD4:[Developer item][c/7FFFD4:]]"
 			}
 
 			HadirosGreaves: {
 				DisplayName: Hadiros' Greaves
-				Tooltip: [c/7FFFD4:[Developer item][c/7FFFD4:]]
+				Tooltip: "[c/7FFFD4:[Developer item][c/7FFFD4:]]"
 			}
 
 			XanthophyteWarhammer: {
@@ -9128,6 +9128,11 @@ Mods: {
 
 			TropicsGrassWall: {
 				DisplayName: Savanna Grass Wall
+				Tooltip: ""
+			}
+
+			SavannaLily: {
+				DisplayName: Savanna Lily
 				Tooltip: ""
 			}
 		}
@@ -10382,10 +10387,24 @@ Mods: {
 			ResistantWoodDresser.MapEntry: Resistant Wood Dresser
 			ResistantSapling.MapEntry: Resistant Sapling
 			OrangeDungeonDresser.MapEntry: Orange Dungeon Dresser
-			PurpleDungeonChest.MapEntry0: Purple Dungeon Chest
+
+			PurpleDungeonChest: {
+				MapEntry0: Purple Dungeon Chest
+				MapEntry1: Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry1
+			}
+
 			PurpleDungeonDresser.MapEntry: Purple Dungeon Dresser
-			OrangeDungeonChest.MapEntry0: Orange Dungeon Chest
-			YellowDungeonChest.MapEntry0: Yellow Dungeon Chest
+
+			OrangeDungeonChest: {
+				MapEntry0: Orange Dungeon Chest
+				MapEntry1: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry1
+			}
+
+			YellowDungeonChest: {
+				MapEntry0: Yellow Dungeon Chest
+				MapEntry1: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry1
+			}
+
 			YellowDungeonDresser.MapEntry: Yellow Dungeon Dresser
 			CoughwoodDresser.MapEntry: Coughwood Dresser
 			BleachedEbonyDresser.MapEntry: Bleached Ebony Dresser

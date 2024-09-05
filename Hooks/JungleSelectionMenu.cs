@@ -123,7 +123,7 @@ public class JungleSelectionMenu : ModHook
         Color[] colors = {
             Color.White,
             new Color(107, 182, 0),
-            new Color(255, 140, 0),
+            new Color(191, 162, 78),
         };
         Asset<Texture2D>[] icons = {
             Main.Assets.Request<Texture2D>("Images/UI/WorldCreation/IconEvilRandom"),

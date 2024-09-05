@@ -30,6 +30,9 @@ using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Reflection;
 using Avalon.Tiles;
+using Avalon.Tiles.Furniture.OrangeDungeon;
+using Avalon.Tiles.Furniture.PurpleDungeon;
+using Avalon.Tiles.Furniture.YellowDungeon;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -565,10 +568,13 @@ public class AvalonGlobalItem : GlobalItem
 
         #region contagion chest lock locking
         if (item.type == ItemID.ChestLock && player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
-            player.whoAmI == Main.myPlayer && player.ItemTimeIsZero && player.itemAnimation > 0 && player.controlUseItem)
+            player.whoAmI == Main.myPlayer && player.ItemTimeIsZero && player.itemAnimation > 0 && Main.mouseLeft && Main.mouseLeftRelease)
         {
             Tile tileSafely = Framing.GetTileSafely(tilePos.X, tilePos.Y);
-            if (tileSafely.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>())
+            if (tileSafely.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>() ||
+				tileSafely.TileType == ModContent.TileType<OrangeDungeonChest>() ||
+				tileSafely.TileType == ModContent.TileType<PurpleDungeonChest>() ||
+				tileSafely.TileType == ModContent.TileType<YellowDungeonChest>())
             {
                 int xpos;
                 for (xpos = Main.tile[tilePos.X, tilePos.Y].TileFrameX / 18; xpos > 1; xpos -= 2)
@@ -577,7 +583,7 @@ public class AvalonGlobalItem : GlobalItem
                 xpos = tilePos.X - xpos;
                 int ypos = tilePos.Y - Main.tile[tilePos.X, tilePos.Y].TileFrameY / 18;
 
-                if (Tiles.Contagion.ContagionChest.LockOrUnlock(xpos, ypos))
+                if (AvalonGlobalTile.LockOrUnlock(xpos, ypos))
                 {
                     item.stack--;
                     if (item.stack <= 0)
@@ -587,7 +593,7 @@ public class AvalonGlobalItem : GlobalItem
                     NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3, xpos, ypos);
                 }
             }
-        }
+		}
         #endregion
 
         #region sponges 3x3
