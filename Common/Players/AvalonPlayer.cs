@@ -331,9 +331,9 @@ public class AvalonPlayer : ModPlayer
     #endregion
     public int FrameCount { get; set; }
     public int ShadowCooldown { get; private set; }
-    public int OldFallStart;
+	public Vector2 playerOldVelocity = Vector2.Zero;
 
-    public int DesertBeakSpawnTimer;
+	public int DesertBeakSpawnTimer;
 
     public void UpdatePrimeMinionStatus(IEntitySource source)
     {
@@ -534,8 +534,8 @@ public class AvalonPlayer : ModPlayer
 		CalcSpecDisplay = false;
 	}
 	public override void PreUpdateBuffs()
-    {
-        FrameCount++; // aura potion
+	{
+		FrameCount++; // aura potion
         StingerProbeRotation = (StingerProbeRotation % MathHelper.TwoPi) + 0.01f;
         PlanetRotation[0] = (PlanetRotation[0] % MathHelper.TwoPi) + 0.08f;
         PlanetRotation[1] = (PlanetRotation[1] % MathHelper.TwoPi) + 0.09f;
@@ -607,8 +607,8 @@ public class AvalonPlayer : ModPlayer
     }
 
     public override void PreUpdate()
-    {
-        if (Player.InModBiome<Biomes.SkyFortress>())
+	{
+		if (Player.InModBiome<Biomes.SkyFortress>())
         {
             float num39 = Main.maxTilesX / 4200;
             num39 *= num39;
@@ -654,6 +654,7 @@ public class AvalonPlayer : ModPlayer
 		{
 			Player.velocity.Y = 1E-05f;
 		}
+		playerOldVelocity = Player.velocity - new Vector2(0f, Player.velocity.Y == 1E-05f ? 1E-05f : Player.gravity); // ideally this gets assigned before gravity or other movement calcs are applied, this will do for now though
 	}
 	public override void PostUpdate()
 	{
