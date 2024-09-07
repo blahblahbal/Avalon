@@ -58,7 +58,7 @@ public class Shockwave : ModBuff
 			}
 		}
 
-		if ((player.gravDir == 1f ? player.velocity.Y < 0f : player.velocity.Y > 0f) || player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y == 0f)
+		if ((player.gravDir == 1f ? player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y < 0f : player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y > 0f) || player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y == 0f)
 		{
 			fall_time = 0;
 		}
