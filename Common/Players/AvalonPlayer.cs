@@ -662,7 +662,6 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PostUpdate()
 	{
-		Main.NewText(Player.velocity + " _ " + playerOldVelocity);
 		//if (XanthophyteTreeActive)
 		//{
 		//	Player.AddBuff(ModContent.BuffType<XanthophyteTree>(), 2);
