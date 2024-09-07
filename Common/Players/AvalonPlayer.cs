@@ -332,6 +332,8 @@ public class AvalonPlayer : ModPlayer
     public int FrameCount { get; set; }
     public int ShadowCooldown { get; private set; }
 	public Vector2 playerOldVelocity = Vector2.Zero;
+	public Vector2 playerOldOldVelocity = Vector2.Zero;
+	public bool IsOnGroundBuffered = true;
 
 	public int DesertBeakSpawnTimer;
 
@@ -654,10 +656,13 @@ public class AvalonPlayer : ModPlayer
 		{
 			Player.velocity.Y = 1E-05f;
 		}
-		playerOldVelocity = Player.velocity - new Vector2(0f, Player.velocity.Y == 1E-05f ? 1E-05f : Player.gravity); // ideally this gets assigned before gravity or other movement calcs are applied, this will do for now though
+		playerOldOldVelocity = playerOldVelocity;
+		playerOldVelocity = Player.velocity - new Vector2(0f, Player.velocity.Y == 1E-05f ? 1E-05f : (IsOnGroundBuffered ? Player.gravity : 0f)); // ideally this gets assigned before gravity or other movement calcs are applied, this will do for now though
+		IsOnGroundBuffered = Player.IsOnGround();
 	}
 	public override void PostUpdate()
 	{
+		Main.NewText(Player.velocity + " _ " + playerOldVelocity);
 		//if (XanthophyteTreeActive)
 		//{
 		//	Player.AddBuff(ModContent.BuffType<XanthophyteTree>(), 2);

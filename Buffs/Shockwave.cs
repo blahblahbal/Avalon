@@ -62,11 +62,12 @@ public class Shockwave : ModBuff
 		{
 			fall_time = 0;
 		}
-		if ((player.gravDir == 1f ? player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y > 0f : player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y < 0f) && player.velocity.Y == 0f && fall_time > 23) // just fell
+		//Main.NewText(fall_time + " _ " + player.velocity + " _ " + player.GetModPlayer<AvalonPlayer>().playerOldVelocity);
+		if (player.IsOnGround() && (player.gravDir == 1f ? player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y > 0f : player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y < 0f) && player.velocity.Y == 0f && fall_time > 23) // just fell
 		{
-			float fall_dist = (fall_time - 23f) / (76f - 23f) * (21f - 3.5f) + 3.5f; // remap fall_time to range from 3.5f to 21f
+			float fall_dist = ((fall_time - 23f) / (76f - 23f) * (21f - 3.5f) + 3.5f) * (player.GetModPlayer<AvalonPlayer>().playerOldOldVelocity.Y / 10f); // remap fall_time to range from 3.5f to 21f
 
-			float Radius = 8f * fall_time;
+			float Radius = 8f * fall_time * (player.GetModPlayer<AvalonPlayer>().playerOldOldVelocity.Y / 10f);
 			for (int o = 0; o < Main.npc.Length; o++)
 			{
 				// iterate through NPCs
