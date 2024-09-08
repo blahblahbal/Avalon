@@ -585,21 +585,40 @@ public static class ClassExtensions
         conditionRule.OnFailedConditions(itemDropRule, true);
         return conditionRule;
     }
-    /// <summary>
-    ///     A helper method to check if the given Player is touching the ground.
-    /// </summary>
-    /// <param name="player">The player.</param>
-    /// <returns>True if the player is touching the ground, false otherwise.</returns>
-    public static bool IsOnGround(this Player player) =>
-        (Main.tile[(int)(player.position.X / 16f), (int)(player.position.Y / 16f) + 3].HasTile &&
-         Main.tileSolid[
-             Main.tile[(int)(player.position.X / 16f), (int)(player.position.Y / 16f) + 3].TileType]) ||
-        (Main.tile[(int)(player.position.X / 16f) + 1, (int)(player.position.Y / 16f) + 3].HasTile &&
-         Main.tileSolid[
-             Main.tile[(int)(player.position.X / 16f) + 1, (int)(player.position.Y / 16f) + 3].TileType] &&
-         player.velocity.Y == 0f);
+	/// <summary>
+	///     A helper method to check if the given Player is touching the ground.<br></br><br></br>
+	///     
+	///     Low precision, can return true if the player is hovering slightly above the ground.<br></br>
+	///     If precision is necessary, use IsOnGroundPrecise().
+	/// </summary>
+	/// <param name="player">The player.</param>
+	/// <returns>True if the player is touching the ground, false otherwise.</returns>
+	public static bool IsOnGround(this Player player)
+	{
+		var tileX_1 = Main.tile[(int)(player.position.X / 16f), (int)(player.position.Y / 16f) + 1 + (int)(2 * player.gravDir)];
+		var tileX_2 = Main.tile[(int)(player.position.X / 16f) + 1, (int)(player.position.Y / 16f) + 1 + (int)(2 * player.gravDir)];
 
-    public static bool PlayerDoublePressedSetBonusActivateKey(this Player player)
+		return (tileX_1.HasTile && (Main.tileSolid[tileX_1.TileType] || Main.tileSolidTop[tileX_1.TileType]) && player.velocity.Y == 0f) ||
+				(tileX_2.HasTile && (Main.tileSolid[tileX_2.TileType] || Main.tileSolidTop[tileX_2.TileType]) && player.velocity.Y == 0f);
+	}
+
+	/// <summary>
+	///     A helper method to check if the given Player is touching the ground.<br></br><br></br>
+	///     
+	///     High precision, if precision is unnecessary or undesired, use IsOnGround().
+	/// </summary>
+	/// <param name="player">The player.</param>
+	/// <returns>True if the player is touching the ground, false otherwise.</returns>
+	public static bool IsOnGroundPrecise(this Player player)
+	{
+		var tileX_1 = Main.tile[(int)(player.position.X / 16f), (int)((player.position.Y + (player.gravDir == 1 ? player.Size.Y + 1 : -1)) / 16f)];
+		var tileX_2 = Main.tile[(int)(player.position.X / 16f) + 1, (int)((player.position.Y + (player.gravDir == 1 ? player.Size.Y + 1 : -1)) / 16f)];
+
+		return (tileX_1.HasTile && (Main.tileSolid[tileX_1.TileType] || Main.tileSolidTop[tileX_1.TileType]) && player.velocity.Y == 0f) ||
+				(tileX_2.HasTile && (Main.tileSolid[tileX_2.TileType] || Main.tileSolidTop[tileX_2.TileType]) && player.velocity.Y == 0f);
+	}
+
+	public static bool PlayerDoublePressedSetBonusActivateKey(this Player player)
     {
         return (player.doubleTapCardinalTimer[Main.ReversedUpDownArmorSetBonuses ? 1 : 0] < 15 && ((player.releaseUp && Main.ReversedUpDownArmorSetBonuses && player.controlUp) || (player.releaseDown && !Main.ReversedUpDownArmorSetBonuses && player.controlDown)));
     }

@@ -61,15 +61,15 @@ public class AdvShockwave : ModBuff
 			}
 		}
 
-		if ((player.gravDir == 1f ? player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y < 0f : player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y > 0f) || player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y == 0f)
+		if ((player.gravDir == 1f ? player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y < 0f : player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y > 0f) || player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y == 0f || player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y == 1E-05f)
 		{
 			fall_time = 0;
 		}
-		if (player.IsOnGround() && (player.gravDir == 1f ? player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y > 0f : player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y < 0f) && player.velocity.Y == 0f && fall_time > 23) // just fell
+		if (player.IsOnGroundPrecise() && (player.gravDir == 1f ? player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y > 0f : player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y < 0f) && player.velocity.Y == 0f && fall_time > 23) // just fell
 		{
-			float fall_dist = ((fall_time - 23f) / (76f - 23f) * (21f - 3.5f) + 3.5f) * (player.GetModPlayer<AvalonPlayer>().playerOldOldVelocity.Y / 10f); // remap fall_time to range from 3.5f to 21f
+			float fall_dist = ((fall_time - 23f) / (76f - 23f) * (21f - 3.5f) + 3.5f) * (player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y * player.gravDir / 10f); // remap fall_time to range from 3.5f to 21f
 
-			float Radius = 8f * fall_time * (player.GetModPlayer<AvalonPlayer>().playerOldOldVelocity.Y / 10f);
+			float Radius = 8f * fall_time * (player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y * player.gravDir / 10f);
 			for (int o = 0; o < Main.npc.Length; o++)
 			{
 				// iterate through NPCs
@@ -97,7 +97,7 @@ public class AdvShockwave : ModBuff
 					numOfNPCs++;
 					int multiplier = 7;
 
-					//if (player.IsOnGround() && numOfNPCs == list.Count - 1)
+					//if (player.IsOnGroundPrecise() && numOfNPCs == list.Count - 1)
 					//{
 					//    break;
 					//}
