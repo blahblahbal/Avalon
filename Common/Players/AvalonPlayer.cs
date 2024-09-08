@@ -331,9 +331,16 @@ public class AvalonPlayer : ModPlayer
     #endregion
     public int FrameCount { get; set; }
     public int ShadowCooldown { get; private set; }
-    public int OldFallStart;
+	/// <summary>
+	/// Current velocity is [0], old velocity is [1], and older velocity is [2].<br></br><br></br>
+	/// 
+	/// As tile collision is unreliable and lowers velocity once before setting it to 0, it may be desired to use [2] instead of [1] to get the actual top speed right before stopping.<br></br><br></br>
+	/// 
+	/// Remember to still check if velocity[x].Y == 1E-05f for hovering if relevant to your logic.
+	/// </summary>
+	public Vector2[] playerOldVelocity = new Vector2[3];
 
-    public int DesertBeakSpawnTimer;
+	public int DesertBeakSpawnTimer;
 
     public void UpdatePrimeMinionStatus(IEntitySource source)
     {
@@ -381,7 +388,7 @@ public class AvalonPlayer : ModPlayer
             Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Legs", EquipType.Legs,
             null, LavaMermanName);
     }
-    public override void ResetEffects()
+	public override void ResetEffects()
     {
         EfficiencyPrefix = 0;
         if (DesertBeakSpawnTimer < -1)
@@ -534,8 +541,8 @@ public class AvalonPlayer : ModPlayer
 		CalcSpecDisplay = false;
 	}
 	public override void PreUpdateBuffs()
-    {
-        FrameCount++; // aura potion
+	{
+		FrameCount++; // aura potion
         StingerProbeRotation = (StingerProbeRotation % MathHelper.TwoPi) + 0.01f;
         PlanetRotation[0] = (PlanetRotation[0] % MathHelper.TwoPi) + 0.08f;
         PlanetRotation[1] = (PlanetRotation[1] % MathHelper.TwoPi) + 0.09f;
@@ -607,8 +614,11 @@ public class AvalonPlayer : ModPlayer
     }
 
     public override void PreUpdate()
-    {
-        if (Player.InModBiome<Biomes.SkyFortress>())
+	{
+		playerOldVelocity[2] = playerOldVelocity[1];
+		playerOldVelocity[1] = playerOldVelocity[0];
+		playerOldVelocity[0] = Player.velocity;
+		if (Player.InModBiome<Biomes.SkyFortress>())
         {
             float num39 = Main.maxTilesX / 4200;
             num39 *= num39;
