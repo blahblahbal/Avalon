@@ -62,7 +62,6 @@ public class Shockwave : ModBuff
 		{
 			fall_time = 0;
 		}
-		//Main.NewText(fall_time + " _ " + player.velocity + " _ " + player.GetModPlayer<AvalonPlayer>().playerOldVelocity);
 		if (player.IsOnGround() && (player.gravDir == 1f ? player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y > 0f : player.GetModPlayer<AvalonPlayer>().playerOldVelocity.Y < 0f) && player.velocity.Y == 0f && fall_time > 23) // just fell
 		{
 			float fall_dist = ((fall_time - 23f) / (76f - 23f) * (21f - 3.5f) + 3.5f) * (player.GetModPlayer<AvalonPlayer>().playerOldOldVelocity.Y / 10f); // remap fall_time to range from 3.5f to 21f
@@ -139,6 +138,7 @@ public class Shockwave : ModBuff
 				PunchCameraModifier modifier = new PunchCameraModifier(player.Center, new Vector2(Main.rand.NextFloat(-0.3f, 0.3f), fall_dist / 2f), 1f, 3f, 15, 300f, player.name);
 				Main.instance.CameraModifiers.Add(modifier);
 			}
+			fall_time = 0; // just in case the checks above fail for whatever reason
 		} // END just fell
 	}
 }
