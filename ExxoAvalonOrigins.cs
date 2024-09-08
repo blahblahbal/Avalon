@@ -61,10 +61,20 @@ public class ExxoAvalonOrigins : Mod
     /// </summary>
     public static readonly Mod? Fargo = ModLoader.TryGetMod("Fargowiltas", out Mod obtainedMod) ? obtainedMod : null;
 
-    /// <summary>
-    ///     Gets the instance of the TMLAchievements mod.
-    /// </summary>
-    public static readonly Mod? Achievements = ModLoader.TryGetMod("TMLAchievements", out Mod obtainedMod) ? obtainedMod : null;
+	/// <summary>
+	///     Gets the instance of Music Display Mod.
+	/// </summary>
+	public static readonly Mod? MusicDisplay = ModLoader.TryGetMod("MusicDisplay", out Mod obtainedMod) ? obtainedMod : null;
+
+	/// <summary>
+	///     Gets the instance of Munchies Mod.
+	/// </summary>
+	public static readonly Mod? Munchies = ModLoader.TryGetMod("Munchies", out Mod obtainedMod) ? obtainedMod : null;
+
+	/// <summary>
+	///     Gets the instance of the TMLAchievements mod.
+	/// </summary>
+	public static readonly Mod? Achievements = ModLoader.TryGetMod("TMLAchievements", out Mod obtainedMod) ? obtainedMod : null;
 
     /// <summary>
     ///     Gets the instance of the music mod for this mod.

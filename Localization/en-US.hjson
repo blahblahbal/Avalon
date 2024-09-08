@@ -86,6 +86,92 @@ Mods: {
 	}
 
 	Avalon: {
+		TrackNames: {
+			Contagion: {
+				Name: Contagion
+				Author: by ENNWAY
+				ModName: Avalon
+			}
+
+			UndergroundContagion: {
+				Name: Underground Contagion
+				Author: by ENNWAY
+				ModName: Avalon
+			}
+
+			DesertBeakOtherworldly: {
+				Name: Otherworldly Desert Beak
+				Author: by ENNWAY
+				ModName: Avalon
+			}
+
+			BacteriumPrime: {
+				Name: Bacterium Prime
+				Author: by ENNWAY
+				ModName: Avalon
+			}
+
+			ArmageddonSlime: {
+				Name: Armageddon Slime
+				Author: by ENNWAY
+				ModName: Avalon
+			}
+
+			Hellcastle: {
+				Name: Hellcastle
+				Author: by musicman
+				ModName: Avalon
+			}
+
+			Phantasm: {
+				Name: Hellcastle
+				Author: by musicman
+				ModName: Avalon
+			}
+
+			DesertBeak: {
+				Name: Desert Beak
+				Author: by Marlilo
+				ModName: Avalon
+			}
+
+			SkyFortress: {
+				Name: Sky Fortress
+				Author: by FatCat
+				ModName: Avalon
+			}
+
+			Myriapoda: {
+				Name: Myriapoda
+				Author: by FatCat
+				ModName: Avalon
+			}
+
+			TuhrtlOutpost: {
+				Name: Tuhrtl Outpost
+				Author: by FatCat
+				ModName: Avalon
+			}
+
+			DarkMatter: {
+				Name: Dark Matter
+				Author: by Mioqu
+				ModName: Avalon
+			}
+
+			Mechasting: {
+				Name: Mechasting
+				Author: by Zemmie
+				ModName: Avalon
+			}
+		}
+
+		MunchiesSupport: {
+			StaminaCrystal: Craft from [i:Avalon/Boltstone] or obtain from bosses
+			EnergyCrystal: Throw a [i:Avalon/StaminaCrystal] into Shimmer
+		}
+
+		Stamina: Stamina
 		ThoriumCompatLine: "[i:Avalon/IconItem]"
 
 		GameTitles: {

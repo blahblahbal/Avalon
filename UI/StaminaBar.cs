@@ -6,6 +6,7 @@ using ReLogic.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.ResourceSets;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -104,7 +105,7 @@ class StaminaBar : UIState
     private const int staminaPerBar = 30;
     private const int maxStaminaBars = 5;
     private const int barSpacing = 26;
-    private const string labelText = "Stamina";
+    private string labelText = "Stamina";
     private float textYOffset;
     private Vector2 labelDimensions;
     private Texture2D staminaTexture1;
@@ -167,7 +168,9 @@ class StaminaBar : UIState
         int manaStarSpacing = 28;
         textYOffset = manaStarSpacing * 11 + 30;
 
-        labelDimensions = FontAssets.MouseText.Value.MeasureString(labelText);
+		labelText = Language.GetTextValue("Mods.Avalon.Stamina");
+
+		labelDimensions = FontAssets.MouseText.Value.MeasureString(labelText) - new Vector2(FontAssets.MouseText.Value.MeasureString("Mods.Avalon.").X, 0);
 
         Top.Set(textYOffset + labelDimensions.Y, 0);
         Width.Set(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width, 0);
@@ -358,7 +361,9 @@ class StaminaBar : UIState
         {
             return;
         }
-        if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars" ||
+		labelText = Language.GetTextValue("Mods.Avalon.Stamina");
+
+		if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars" ||
             Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithText" ||
             Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithFullText")
         {
