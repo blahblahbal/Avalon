@@ -14,7 +14,7 @@ namespace Avalon.Common
             float DarkMatterStrength = 0; // Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith && MonolithTilesInRange(Main.LocalPlayer) ? ModContent.GetInstance<BiomeTileCounts>().DarkMonolithTiles / 1 : 0;
             if (MonolithTilesInRange(Main.LocalPlayer))
             {
-                DarkMatterStrength = 1f;
+				DarkMatterStrength = 1f;
 			}
 			if (DarkMatterStrength != 0)
 			{
@@ -60,18 +60,16 @@ namespace Avalon.Common
 		}
         public override void ModifyLightingBrightness(ref float scale)
         {
-            if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith)
+            if (MonolithTilesInRange(Main.LocalPlayer))
             {
                 scale = 0.8f;
-            }
+			}
         }
         public static bool MonolithTilesInRange(Player p)
         {
-            Point point = p.position.ToTileCoordinates();
-
-            for (int i = point.X - 200; i < point.X + 200; i++)
+            for (int i = (int)(p.position.X - 88.375f * 16) >> 4; i < (int)(p.position.X + 90.625f * 16) >> 4; i++)
             {
-                for (int j = point.Y - 200; j < point.Y + 200; j++)
+                for (int j = (int)(p.position.Y - 60.625f * 16) >> 4; j < (int)(p.position.Y + 64.375f * 16) >> 4; j++)
                 {
                     Tile t = Framing.GetTileSafely(i, j);
                     if (t.TileType == ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>() && t.TileFrameX >= 36)
