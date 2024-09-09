@@ -31,7 +31,7 @@ public class CoughwoodCandelabra : CandelabraTemplate
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
-        if (tile.TileFrameX == 0)
+        if (tile.TileFrameX <= 36)
         {
             r = 0.77f;
             g = 0.67f;
@@ -248,8 +248,8 @@ public class CoughwoodChandelier : ChandelierTemplate
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
-        if (tile.TileFrameX == 0)
-        {
+		if (tile.TileFrameX <= 52)
+		{
             r = 0.77f;
             g = 0.67f;
             b = 0.42f;

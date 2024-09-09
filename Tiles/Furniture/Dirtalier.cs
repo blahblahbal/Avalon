@@ -158,8 +158,8 @@ public class Dirtalier : ChandelierTemplate
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
-        if (tile.TileFrameX == 0)
-        {
+		if (tile.TileFrameX <= 52)
+		{
             r = 1f / 1.5f;
             g = 0.95f / 1.75f;
             b = 0.65f / 1.75f;

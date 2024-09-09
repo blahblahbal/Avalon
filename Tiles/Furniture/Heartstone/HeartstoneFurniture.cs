@@ -32,8 +32,8 @@ public class HeartstoneCandelabra : CandelabraTemplate
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
-        if (tile.TileFrameX == 0)
-        {
+		if (tile.TileFrameX <= 36)
+		{
             r = 0.9f;
             g = 0.5f;
             b = 0.7f;
@@ -249,8 +249,8 @@ public class HeartstoneChandelier : ChandelierTemplate
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
-        if (tile.TileFrameX == 0)
-        {
+		if (tile.TileFrameX <= 52)
+		{
             r = 0.9f;
             g = 0.5f;
             b = 0.7f;

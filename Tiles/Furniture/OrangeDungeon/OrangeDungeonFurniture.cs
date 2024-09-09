@@ -33,8 +33,8 @@ public class OrangeDungeonCandelabra : CandelabraTemplate
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
-        if (tile.TileFrameX == 0)
-        {
+		if (tile.TileFrameX <= 36)
+		{
             r = 0.69f;
             g = 0.32f;
             b = 0.77f;
@@ -250,8 +250,8 @@ public class OrangeDungeonChandelier : ChandelierTemplate
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
-        if (tile.TileFrameX == 0)
-        {
+		if (tile.TileFrameX <= 52)
+		{
             r = 0.69f;
             g = 0.32f;
             b = 0.77f;
