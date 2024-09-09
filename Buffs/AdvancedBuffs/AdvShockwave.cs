@@ -119,7 +119,7 @@ public class AdvShockwave : ModBuff
 					//    multiplier = 2;
 					//}
 
-					//NPC.HitInfo h = new NPC.HitInfo { Damage = (int)(multiplier * fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1)) * 2, Knockback = fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1) * 2.7f * N.knockBackResist, HitDirection = HitDir };
+					//NPC.HitInfo h = new NPC.HitInfo { Damage = (int)(multiplier * fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1)) * 2, Knockback = fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1) * 2.7f, HitDirection = HitDir };
 					//int dmg = N.StrikeNPC(h);
 					//player.addDPS(dmg);
 					//if (Main.netMode != NetmodeID.SinglePlayer)
