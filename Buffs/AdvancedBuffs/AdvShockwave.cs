@@ -51,7 +51,7 @@ public class AdvShockwave : ModBuff
 		}
 
 		Vector2 p_pos = player.position + (new Vector2(player.width, player.height) / 2f);
-		int numOfNPCs = 0;
+		//int numOfNPCs = 0;
 		if (player.gravDir == 1f ? player.velocity.Y > 0f : player.velocity.Y < 0f)
 		{
 			fall_time++;
@@ -70,7 +70,7 @@ public class AdvShockwave : ModBuff
 			float fall_dist = ((fall_time - 23f) / (76f - 23f) * (21f - 3.5f) + 3.5f) * (player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y * player.gravDir / 10f); // remap fall_time to range from 3.5f to 21f
 
 			float Radius = 8f * fall_time * (player.GetModPlayer<AvalonPlayer>().playerOldVelocity[2].Y * player.gravDir / 10f);
-			for (int o = 0; o < Main.npc.Length; o++)
+			for (int o = Main.npc.Length - 1; o > 0; o--)
 			{
 				// iterate through NPCs
 				NPC N = Main.npc[o];
@@ -94,7 +94,7 @@ public class AdvShockwave : ModBuff
 
 				if (N.Center.Distance(player.Center) < Radius)
 				{
-					numOfNPCs++;
+					//numOfNPCs++;
 					int multiplier = 7;
 
 					//if (player.IsOnGroundPrecise() && numOfNPCs == list.Count - 1)
@@ -119,13 +119,16 @@ public class AdvShockwave : ModBuff
 					//    multiplier = 2;
 					//}
 
-					NPC.HitInfo h = new NPC.HitInfo { Damage = (int)(multiplier * fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1)) * 2, Knockback = fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1) * 2.7f, HitDirection = HitDir };
-					int dmg = N.StrikeNPC(h);
+					//NPC.HitInfo h = new NPC.HitInfo { Damage = (int)(multiplier * fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1)) * 2, Knockback = fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1) * 2.7f * N.knockBackResist, HitDirection = HitDir };
+					//int dmg = N.StrikeNPC(h);
+					//player.addDPS(dmg);
+					//if (Main.netMode != NetmodeID.SinglePlayer)
+					//{
+					//	NetMessage.SendStrikeNPC(N, h);
+					//}
+
+					int dmg = N.SimpleStrikeNPC(damage: (int)(multiplier * fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1)) * 2, hitDirection: HitDir, knockBack: fall_dist * -((N.Center.Distance(player.Center) / Radius) - 1) * 2.7f);
 					player.addDPS(dmg);
-					if (Main.netMode != NetmodeID.SinglePlayer)
-					{
-						NetMessage.SendStrikeNPC(N, h);
-					}
 					// optionally add debuff here
 				} // END on screen
 			} // END iterate through NPCs
