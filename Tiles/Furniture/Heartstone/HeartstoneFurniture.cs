@@ -1,6 +1,7 @@
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -29,7 +30,13 @@ public class HeartstoneBookcase : BookcaseTemplate { }
 public class HeartstoneCandelabra : CandelabraTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneCandelabra>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
 		if (tile.TileFrameX <= 36)
@@ -59,7 +66,7 @@ public class HeartstoneCandelabra : CandelabraTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -67,7 +74,13 @@ public class HeartstoneCandelabra : CandelabraTemplate
 public class HeartstoneCandle : CandleTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneCandle>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
@@ -97,7 +110,7 @@ public class HeartstoneCandle : CandleTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -112,11 +125,13 @@ public class HeartstoneChandelier : ChandelierTemplate
     public override Color FlameColor => new Color(85, 85, 85, 0);
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneChandelier>();
     public List<Point> Coordinates = new List<Point>();
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
     {
         base.SetStaticDefaults();
         Coordinates = new();
-    }
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         Point p = new(i, j);
@@ -231,7 +246,7 @@ public class HeartstoneChandelier : ChandelierTemplate
                     {
                         float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                         float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                        spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                        spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                     }
                 }
             }
@@ -262,11 +277,13 @@ public class HeartstoneLantern : LanternTemplate
     public override Color FlameColor => new Color(85, 85, 85, 0);
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneLantern>();
     public List<Point> Coordinates = new List<Point>();
-    public override void SetStaticDefaults()
-    {
-        base.SetStaticDefaults();
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
         Coordinates = new();
-    }
+		FlameImage = HasFlame ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         Point p = new(i, j);
@@ -383,7 +400,7 @@ public class HeartstoneLantern : LanternTemplate
                         {
                             float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                             float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                            spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                            spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                         }
                     }
                 }
@@ -438,7 +455,13 @@ public class HeartstoneDresser : DresserTemplate
 public class HeartstoneLamp : LampTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Heartstone.HeartstoneLamp>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
@@ -468,7 +491,7 @@ public class HeartstoneLamp : LampTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }

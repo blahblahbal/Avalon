@@ -14,6 +14,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria.Utilities;
 using static Terraria.GameContent.Drawing.TileDrawing;
+using ReLogic.Content;
 
 namespace Avalon.Tiles.Furniture;
 
@@ -21,11 +22,13 @@ public class Dirtalier : ChandelierTemplate
 {
     public override Color FlameColor => new Color(60, 60, 60, 0);
     public List<Point> Coordinates = new List<Point>();
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
     {
         base.SetStaticDefaults();
         Coordinates = new();
-    }
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         Point p = new(i, j);
@@ -140,7 +143,7 @@ public class Dirtalier : ChandelierTemplate
                     {
                         float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                         float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                        spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                        spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                     }
                 }
             }

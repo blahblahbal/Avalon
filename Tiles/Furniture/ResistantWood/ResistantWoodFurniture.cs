@@ -2,6 +2,7 @@ using Avalon.Common.Templates;
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -37,7 +38,13 @@ public class ResistantWoodBookcase : BookcaseTemplate
 public class ResistantWoodCandelabra : CandelabraTemplate
 {
     public override bool LavaDeath => false;
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
 		if (tile.TileFrameX <= 36)
@@ -67,7 +74,7 @@ public class ResistantWoodCandelabra : CandelabraTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -76,7 +83,13 @@ public class ResistantWoodCandle : CandleTemplate
 {
     public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodCandle>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
@@ -106,7 +119,7 @@ public class ResistantWoodCandle : CandleTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -124,11 +137,14 @@ public class ResistantWoodChandelier : ChandelierTemplate
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodChandelier>();
 
     public List<Point> Coordinates = new List<Point>();
-    public override void SetStaticDefaults()
-    {
-        base.SetStaticDefaults();
-        Coordinates = new();
-    }
+
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		Coordinates = new();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         Point p = new(i, j);
@@ -243,7 +259,7 @@ public class ResistantWoodChandelier : ChandelierTemplate
                     {
                         float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                         float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                        spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                        spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                     }
                 }
             }
@@ -305,7 +321,13 @@ public class ResistantWoodLamp : LampTemplate
 {
     public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodLamp>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
@@ -335,7 +357,7 @@ public class ResistantWoodLamp : LampTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -348,11 +370,13 @@ public class ResistantWoodLantern : LanternTemplate
     public override bool LavaDeath => false;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.ResistantWood.ResistantWoodLantern>();
     public List<Point> Coordinates = new List<Point>();
-    public override void SetStaticDefaults()
-    {
-        base.SetStaticDefaults();
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
         Coordinates = new();
-    }
+		FlameImage = HasFlame ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         Point p = new(i, j);
@@ -469,7 +493,7 @@ public class ResistantWoodLantern : LanternTemplate
                         {
                             float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                             float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                            spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                            spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                         }
                     }
                 }

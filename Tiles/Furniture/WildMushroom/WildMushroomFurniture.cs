@@ -1,6 +1,7 @@
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -32,77 +33,89 @@ public class WildMushroomBookcase : BookcaseTemplate
 
 //public class WildMushroomCandelabra : CandelabraTemplate
 //{
-//    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
-//    {
-//        Tile tile = Main.tile[i, j];
-//        if (tile.TileFrameX <= 36)
-//        {
-//            r = 1f / 1.5f;
-//            g = 0.95f / 1.75f;
-//            b = 0.65f / 1.75f;
-//        }
-//    }
+//	private static Asset<Texture2D>? FlameImage;
+//	public override void SetStaticDefaults()
+//	{
+//		base.SetStaticDefaults();
+//		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+//	}
+//	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+//	{
+//		Tile tile = Main.tile[i, j];
+//		if (tile.TileFrameX <= 36)
+//		{
+//			r = 1f / 1.5f;
+//			g = 0.95f / 1.75f;
+//			b = 0.65f / 1.75f;
+//		}
+//	}
 
-//    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
-//    {
-//        ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-//        Color color = new Color(198, 171, 108, 0);
-//        int frameX = Main.tile[i, j].TileFrameX;
-//        int frameY = Main.tile[i, j].TileFrameY;
-//        int width = 18;
-//        int offsetY = 2;
-//        int height = 18;
-//        int offsetX = 1;
-//        Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-//        if (Main.drawToScreen)
-//        {
-//            zero = Vector2.Zero;
-//        }
-//        for (int k = 0; k < 7; k++)
-//        {
-//            float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
-//            float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-//            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
-//        }
-//    }
+//	public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+//	{
+//		ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
+//		Color color = new Color(198, 171, 108, 0);
+//		int frameX = Main.tile[i, j].TileFrameX;
+//		int frameY = Main.tile[i, j].TileFrameY;
+//		int width = 18;
+//		int offsetY = 2;
+//		int height = 18;
+//		int offsetX = 1;
+//		Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+//		if (Main.drawToScreen)
+//		{
+//			zero = Vector2.Zero;
+//		}
+//		for (int k = 0; k < 7; k++)
+//		{
+//			float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
+//			float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
+//			Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+//		}
+//	}
 //}
 
 //public class WildMushroomCandle : CandleTemplate
 //{
-//    public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomCandle>();
-//    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
-//    {
-//        Tile tile = Main.tile[i, j];
-//        if (tile.TileFrameX == 0)
-//        {
-//            r = 1f / 1.5f;
-//            g = 0.95f / 1.75f;
-//            b = 0.65f / 1.75f;
-//        }
-//    }
+//	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomCandle>();
+//	private static Asset<Texture2D>? FlameImage;
+//	public override void SetStaticDefaults()
+//	{
+//		base.SetStaticDefaults();
+//		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+//	}
+//	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+//	{
+//		Tile tile = Main.tile[i, j];
+//		if (tile.TileFrameX == 0)
+//		{
+//			r = 1f / 1.5f;
+//			g = 0.95f / 1.75f;
+//			b = 0.65f / 1.75f;
+//		}
+//	}
 
-//    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
-//    {
-//        ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
-//        Color color = new Color(198, 171, 108, 0);
-//        int frameX = Main.tile[i, j].TileFrameX;
-//        int frameY = Main.tile[i, j].TileFrameY;
-//        int width = 18;
-//        int offsetY = -4;
-//        int height = 20;
-//        int offsetX = 1;
-//        Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-//        if (Main.drawToScreen)
-//        {
-//            zero = Vector2.Zero;
-//        }
-//        for (int k = 0; k < 7; k++)
-//        {
-//            float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
-//            float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-//            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
-//        }
-//    }
+//	public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+//	{
+//		ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
+//		Color color = new Color(198, 171, 108, 0);
+//		int frameX = Main.tile[i, j].TileFrameX;
+//		int frameY = Main.tile[i, j].TileFrameY;
+//		int width = 18;
+//		int offsetY = -4;
+//		int height = 20;
+//		int offsetX = 1;
+//		Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+//		if (Main.drawToScreen)
+//		{
+//			zero = Vector2.Zero;
+//		}
+//		for (int k = 0; k < 7; k++)
+//		{
+//			float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
+//			float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
+//			Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+//		}
+//	}
 //}
 
 public class WildMushroomChair : ChairTemplate
@@ -119,11 +132,13 @@ public class WildMushroomChandelier : ChandelierTemplate
     public override Color FlameColor => base.FlameColor;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomChandelier>();
     public List<Point> Coordinates = new List<Point>();
-    public override void SetStaticDefaults()
-    {
-        base.SetStaticDefaults();
-        Coordinates = new();
-    }
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		Coordinates = new();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         Point p = new(i, j);
@@ -238,7 +253,7 @@ public class WildMushroomChandelier : ChandelierTemplate
                     {
                         float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                         float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                        spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                        spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                     }
                 }
             }
@@ -308,7 +323,13 @@ public class WildMushroomDresser : DresserTemplate
 public class WildMushroomLamp : LampTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomLamp>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
@@ -338,7 +359,7 @@ public class WildMushroomLamp : LampTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -348,11 +369,13 @@ public class WildMushroomLantern : LanternTemplate
     public override Color FlameColor => base.FlameColor;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.WildMushroom.WildMushroomLantern>();
     public List<Point> Coordinates = new List<Point>();
-    public override void SetStaticDefaults()
-    {
-        base.SetStaticDefaults();
+	private static Asset<Texture2D>? FlameImage;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
         Coordinates = new();
-    }
+		FlameImage = HasFlame ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         Point p = new(i, j);
@@ -469,7 +492,7 @@ public class WildMushroomLantern : LanternTemplate
                         {
                             float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                             float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                            spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                            spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                         }
                     }
                 }
