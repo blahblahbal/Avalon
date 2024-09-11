@@ -25,6 +25,8 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Avalon.Items.Pets;
+using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 public class ContagionLenient : ModBiome
@@ -57,8 +59,9 @@ public class BacteriumPrime : ModNPC
         {
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.BacteriumPrime"))
         });
-    }
-    public override void SetStaticDefaults()
+	}
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         //DisplayName.SetDefault("Bacterium Prime");
 
@@ -80,6 +83,7 @@ public class BacteriumPrime : ModNPC
         NPCID.Sets.TrailingMode[NPC.type] = 7;
 
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+        texture = TextureAssets.Npc[Type];
     }
     public override void SetDefaults()
     {
@@ -470,15 +474,14 @@ public class BacteriumPrime : ModNPC
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-        int frameHeight = texture.Height / Main.npcFrameCount[NPC.type];
+        int frameHeight = texture.Value.Height / Main.npcFrameCount[NPC.type];
         Rectangle frame = NPC.frame;
         Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
         float alphaThingHackyWow = 0;
         for (int i = 11; i > 0; i -= 2)
         {
             alphaThingHackyWow += 0.03f;
-            Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R / 2 * alphaThingHackyWow * (NPC.ai[3] / 120), drawColor.G, 0, 128) * alphaThingHackyWow * (NPC.ai[3] / 60), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R / 2 * alphaThingHackyWow * (NPC.ai[3] / 120), drawColor.G, 0, 128) * alphaThingHackyWow * (NPC.ai[3] / 60), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
         }
         
         if (NPC.ai[0] < 0 && NPC.ai[3] == 0)
@@ -487,7 +490,7 @@ public class BacteriumPrime : ModNPC
             for (int i = 11; i > 0; i -= 2)
             {
                 alphaThingHackyWow += 0.07f * (NPC.ai[0] / -60);
-                Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R * alphaThingHackyWow, drawColor.G * alphaThingHackyWow, drawColor.B * alphaThingHackyWow, 128 * alphaThingHackyWow) * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture.Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R * alphaThingHackyWow, drawColor.G * alphaThingHackyWow, drawColor.B * alphaThingHackyWow, 128 * alphaThingHackyWow) * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
             }
         }
         //Main.EntitySpriteDraw(texture, drawPos, frame, drawColor, NPC.rotation, new Vector2(NPC.frame.Width / 2,NPC.frame.Height / 2), NPC.scale,SpriteEffects.None,0);

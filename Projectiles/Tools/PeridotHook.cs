@@ -2,6 +2,7 @@ using System;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,9 +11,11 @@ namespace Avalon.Projectiles.Tools;
 
 public class PeridotHook : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.SingleGrappleHook[Type] = true;
+        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/PeridotHook_Chain");
     }
     public override void SetDefaults()
     {
@@ -20,7 +23,6 @@ public class PeridotHook : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        var texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/PeridotHook_Chain");
 
         var position = Projectile.Center;
         var mountedCenter = Main.player[Projectile.owner].MountedCenter;

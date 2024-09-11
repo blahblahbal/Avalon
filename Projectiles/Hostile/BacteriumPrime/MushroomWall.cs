@@ -1,6 +1,7 @@
 using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -11,9 +12,15 @@ namespace Avalon.Projectiles.Hostile.BacteriumPrime;
 
 public class MushroomWall : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> textureBottom;
+	private static Asset<Texture2D> textureTop;
+	public override void SetStaticDefaults()
     {
         Main.projFrames[Type] = 4;
+        texture = ModContent.Request<Texture2D>(Texture);
+        textureBottom = ModContent.Request<Texture2D>(Texture + "Bot");
+        textureTop = ModContent.Request<Texture2D>(Texture + "Top");
     }
     public override void SetDefaults()
     {
@@ -50,22 +57,19 @@ public class MushroomWall : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-        Texture2D textureBottom = ModContent.Request<Texture2D>(Texture + "Bot").Value;
-        Texture2D textureTop = ModContent.Request<Texture2D>(Texture + "Top").Value;
-        Rectangle frame = new Rectangle(0, 0, texture.Width, texture.Height);
-        Rectangle frameTop = new Rectangle(0, 0, texture.Width, textureTop.Height);
+        Rectangle frame = new Rectangle(0, 0, texture.Value.Width, texture.Value.Height);
+        Rectangle frameTop = new Rectangle(0, 0, texture.Value.Width, textureTop.Value.Height);
         for (int i = 0; i < (int)Math.Max(Math.Floor(Projectile.height / 20f),1); i++) 
         {
             Vector2 drawPos = Projectile.Bottom - Main.screenPosition - new Vector2(0,20 * i);
-            Main.EntitySpriteDraw(texture, drawPos, frame, Lighting.GetColor((drawPos + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Width / 2, texture.Height), 1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos, frame, Lighting.GetColor((drawPos + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Value.Width / 2, texture.Value.Height), 1f, SpriteEffects.None, 0);
         }
 
         Vector2 drawPosBottom = Projectile.Bottom - Main.screenPosition;
-        Main.EntitySpriteDraw(textureBottom, drawPosBottom, frame, Lighting.GetColor((drawPosBottom + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Width / 2, texture.Height), 1f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(textureBottom.Value, drawPosBottom, frame, Lighting.GetColor((drawPosBottom + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Value.Width / 2, texture.Value.Height), 1f, SpriteEffects.None, 0);
 
         Vector2 drawPosTop = Projectile.Top - Main.screenPosition + new Vector2(0,-16);
-        Main.EntitySpriteDraw(textureTop, drawPosTop, frameTop, Lighting.GetColor((drawPosTop + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Width / 2, 0), 1f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(textureTop.Value, drawPosTop, frameTop, Lighting.GetColor((drawPosTop + Main.screenPosition).ToTileCoordinates()), 0f, new Vector2(texture.Value.Width / 2, 0), 1f, SpriteEffects.None, 0);
         return false;
     }
     public override void OnKill(int timeLeft)

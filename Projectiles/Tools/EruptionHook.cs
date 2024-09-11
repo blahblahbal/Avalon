@@ -3,6 +3,7 @@ using Avalon.Common.Players;
 using log4net.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,9 +12,13 @@ namespace Avalon.Projectiles.Tools;
 
 public class EruptionHook : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> textureGlow;
+	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.SingleGrappleHook[Type] = true;
+        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain");
+        textureGlow = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain_Glow");
     }
     public override void SetDefaults()
     {
@@ -27,9 +32,6 @@ public class EruptionHook : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        var texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain");
-        var textureGlow = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain_Glow");
-
         var position = Projectile.Center;
         var mountedCenter = Main.player[Projectile.owner].MountedCenter;
         var sourceRectangle = new Rectangle?();

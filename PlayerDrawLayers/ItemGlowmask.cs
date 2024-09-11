@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -12,7 +13,7 @@ public class ItemGlowmask : GlobalItem
 {
     public int glowOffsetX = 10; // defaults to 10 for vanilla holdout offset
     public int glowOffsetY;
-    public Texture2D glowTexture;
+	public Asset<Texture2D> glowTexture;
     public int glowAlpha = 255;
 
     public override bool InstancePerEntity => true;
@@ -31,9 +32,9 @@ public class PlayerUseItemGlowmask : PlayerDrawLayer
 
         if (!heldItem.IsAir)
         {
-            Texture2D texture = heldItem.GetGlobalItem<ItemGlowmask>().glowTexture;
+            Asset<Texture2D> texture = heldItem.GetGlobalItem<ItemGlowmask>().glowTexture;
             Color color = new Color(255, 255, 255, heldItem.GetGlobalItem<ItemGlowmask>().glowAlpha);
-            if (heldItem.GetGlobalItem<ItemGlowmask>().glowTexture != null && drawPlayer.itemAnimation > 0)
+            if (texture != null && drawPlayer.itemAnimation > 0)
             {
                 Vector2 basePosition = drawPlayer.itemLocation - Main.screenPosition;
                 basePosition = new Vector2((int)basePosition.X, (int)basePosition.Y) + (drawPlayer.RotatedRelativePoint(drawPlayer.MountedCenter) - drawPlayer.Center);
@@ -76,13 +77,13 @@ public class PlayerUseItemGlowmask : PlayerDrawLayer
                         }
                         float rotationMod = MathHelper.PiOver4 * -drawPlayer.direction * drawPlayer.gravDir;
                         DrawData staffDraw = new DrawData(
-                            texture,                                                        // texture
+                            texture.Value,                                                  // texture
                             basePosition,                                                   // position
                             default,                                                        // texture coords
                             color,                                                          // color
                             drawPlayer.itemRotation - rotationMod,                          // rotation
-                            new Vector2(drawPlayer.direction == -1 ? texture.Width : 0,     // origin X
-                            drawPlayer.gravDir == 1 ? texture.Height : 0),                  // origin Y
+                            new Vector2(drawPlayer.direction == -1 ? texture.Value.Width : 0,     // origin X
+                            drawPlayer.gravDir == 1 ? texture.Value.Height : 0),                  // origin Y
                             drawPlayer.GetAdjustedItemScale(heldItem),                      // scale
                             drawInfo.itemEffect                                             // sprite effects
                             );
@@ -91,12 +92,12 @@ public class PlayerUseItemGlowmask : PlayerDrawLayer
                     }
                     else
                     {
-                        Vector2 offsetFix = new Vector2(texture.Width / 2, texture.Height / 2 + (heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetY * drawPlayer.gravDir));
+                        Vector2 offsetFix = new Vector2(texture.Value.Width / 2, texture.Value.Height / 2 + (heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetY * drawPlayer.gravDir));
                         int glowOffsetXInvert = -heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetX;
-                        Vector2 positionFix = new Vector2(drawPlayer.direction == -1 ? texture.Width - glowOffsetXInvert : glowOffsetXInvert, texture.Height / 2);
+                        Vector2 positionFix = new Vector2(drawPlayer.direction == -1 ? texture.Value.Width - glowOffsetXInvert : glowOffsetXInvert, texture.Value.Height / 2);
 
                         DrawData horizontalStaffDraw = new DrawData(
-                            texture,                                        // texture
+                            texture.Value,                                        // texture
                             basePosition + offsetFix,                       // position
                             default,                                        // texture coords
                             color,                                          // color
@@ -111,13 +112,13 @@ public class PlayerUseItemGlowmask : PlayerDrawLayer
                 else
                 {
                     DrawData swingDraw = new DrawData(
-                        texture,                                                        // texture
+                        texture.Value,                                                        // texture
                         basePosition,                                                   // position
                         default,                                                        // texture coords
                         color,                                                          // color
                         drawPlayer.itemRotation,                                        // rotation
-                        new Vector2(drawPlayer.direction == -1 ? texture.Width : 0,     // origin X
-                        drawPlayer.gravDir == 1 ? texture.Height : 0),                  // origin Y
+                        new Vector2(drawPlayer.direction == -1 ? texture.Value.Width : 0,     // origin X
+                        drawPlayer.gravDir == 1 ? texture.Value.Height : 0),                  // origin Y
                         drawPlayer.GetAdjustedItemScale(heldItem),                      // scale
                         drawInfo.itemEffect                                             // sprite effects
                         );

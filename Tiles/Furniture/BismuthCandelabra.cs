@@ -12,7 +12,6 @@ public class BismuthCandelabra : CandelabraTemplate
 	private static Asset<Texture2D>? FlameImage;
 	public override void SetStaticDefaults()
 	{
-		base.SetStaticDefaults();
 		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 

@@ -14,17 +14,21 @@ using Terraria.GameContent.ItemDropRules;
 using Microsoft.Xna.Framework.Graphics;
 using Avalon.Common.Players;
 using Avalon.Common;
+using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
 [AutoloadBossHead]
 public class Phantasm : ModNPC
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 4;
         NPCID.Sets.TrailingMode[NPC.type] = 0;
         NPCID.Sets.TrailCacheLength[NPC.type] = 4;
+        texture = TextureAssets.Npc[Type];
     }
     public override void SetDefaults()
     {
@@ -394,9 +398,8 @@ public class Phantasm : ModNPC
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>("Avalon/NPCs/Bosses/Hardmode/Phantasm").Value;
-        int frameHeight = texture.Height / Main.npcFrameCount[NPC.type];
-        Rectangle sourceRectangle = new Rectangle(0, NPC.frame.Y, texture.Width, frameHeight);
+        int frameHeight = texture.Value.Height / Main.npcFrameCount[NPC.type];
+        Rectangle sourceRectangle = new Rectangle(0, NPC.frame.Y, texture.Value.Width, frameHeight);
         Vector2 frameOrigin = sourceRectangle.Size() / 2f;
         Vector2 offset = new Vector2(NPC.width / 2 - frameOrigin.X, NPC.height - sourceRectangle.Height);
 
@@ -405,11 +408,11 @@ public class Phantasm : ModNPC
         for (int i = 0; i < NPC.oldPos.Length; i++)
         {
             Vector2 drawPosOld = NPC.oldPos[i] - Main.screenPosition + frameOrigin + offset;
-            Main.EntitySpriteDraw(texture, drawPosOld, sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i * 0.25f)) * 0.2f, NPC.rotation, frameOrigin, NPC.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPosOld, sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i * 0.25f)) * 0.2f, NPC.rotation, frameOrigin, NPC.scale, SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, drawPos, sourceRectangle, new Color(255, 255, 255, 225) * 0.3f, NPC.rotation, frameOrigin, NPC.scale * 1.1f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(texture, drawPos, sourceRectangle, new Color(255, 255, 255, 225) * 0.15f, NPC.rotation, frameOrigin, NPC.scale * 1.2f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(texture, drawPos, sourceRectangle, new Color(255, 255, 255, 225), NPC.rotation, frameOrigin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, new Color(255, 255, 255, 225) * 0.3f, NPC.rotation, frameOrigin, NPC.scale * 1.1f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, new Color(255, 255, 255, 225) * 0.15f, NPC.rotation, frameOrigin, NPC.scale * 1.2f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, new Color(255, 255, 255, 225), NPC.rotation, frameOrigin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
         return false;
     }
 }

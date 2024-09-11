@@ -12,11 +12,12 @@ namespace Avalon.Projectiles.Melee;
 
 public class HallowedClaymore : ModProjectile
 {
-
+	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
 		ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
+		texture = ModContent.Request<Texture2D>(Texture);
 	}
 	public Player player => Main.player[Projectile.owner];
 	public int SwingSpeed = 40;
@@ -191,13 +192,11 @@ public class HallowedClaymore : ModProjectile
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		Texture2D texture = ModContent.Request<Texture2D>(Texture, AssetRequestMode.ImmediateLoad).Value;
-
 		Rectangle frame = texture.Frame();
 		Vector2 drawPos = Projectile.Center - Main.screenPosition;
-		Vector2 offset = new Vector2((float)(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
+		Vector2 offset = new Vector2((float)(texture.Value.Width * 1.2f * 0.25f), -(float)(texture.Value.Height * 1.2f * 0.25f));
 
-		Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
 
 		return false;
 	}

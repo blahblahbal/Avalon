@@ -34,7 +34,6 @@ public class PurpleDungeonCandelabra : CandelabraTemplate
 	private static Asset<Texture2D>? FlameImage;
 	public override void SetStaticDefaults()
 	{
-		base.SetStaticDefaults();
 		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -78,7 +77,6 @@ public class PurpleDungeonCandle : CandleTemplate
 	private static Asset<Texture2D>? FlameImage;
 	public override void SetStaticDefaults()
 	{
-		base.SetStaticDefaults();
 		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -312,7 +310,6 @@ public class PurpleDungeonLamp : LampTemplate
 	private static Asset<Texture2D>? FlameImage;
 	public override void SetStaticDefaults()
 	{
-		base.SetStaticDefaults();
 		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

@@ -24,6 +24,7 @@ using Terraria.ModLoader;
 using Avalon.Items.Material.Ores;
 using Avalon.DropConditions;
 using Terraria.Chat;
+using ReLogic.Content;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 
@@ -32,7 +33,8 @@ public class DesertBeak : ModNPC
 {
     public int leftWing = -1;
     public int rightWing = -1;
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 8;
 
@@ -47,6 +49,7 @@ public class DesertBeak : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         NPCID.Sets.TrailCacheLength[Type] = 16;
         NPCID.Sets.TrailingMode[Type] = 7;
+        texture = TextureAssets.Npc[Type];
     }
     public override void SetDefaults()
     {
@@ -568,8 +571,7 @@ public class DesertBeak : ModNPC
     }
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-        int frameHeight = texture.Height / Main.npcFrameCount[NPC.type];
+        int frameHeight = texture.Value.Height / Main.npcFrameCount[NPC.type];
         Rectangle frame = NPC.frame;
         Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
 
@@ -581,7 +583,7 @@ public class DesertBeak : ModNPC
             for (int i = 8; i > 0; i--)
             {
                 alphaThingHackyWow += 0.07f;
-                Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow * MathHelper.Clamp(afterImageTimer * 0.05f,0,1), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
+                Main.EntitySpriteDraw(texture.Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow * MathHelper.Clamp(afterImageTimer * 0.05f,0,1), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
             }
         }
         if (phase > phase1Egg)
@@ -590,14 +592,14 @@ public class DesertBeak : ModNPC
             for (int i = 8; i > 0; i-= 2)
             {
                 alphaThingHackyWow += 0.07f;
-                Main.EntitySpriteDraw(texture, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
+                Main.EntitySpriteDraw(texture.Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
             }
         }
         if (pulseTimer is > 0 and < MathHelper.Pi)
         {
             for (int i = 4; i > 0; i--)
             {
-                Main.EntitySpriteDraw(texture, drawPos + new Vector2(0, (float)Math.Sin(pulseTimer) * 8).RotatedBy(MathHelper.PiOver2 * i), frame, new Color(drawColor.R,drawColor.G,drawColor.B,128) * (float)Math.Sin(pulseTimer) * 0.7f, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
+                Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(0, (float)Math.Sin(pulseTimer) * 8).RotatedBy(MathHelper.PiOver2 * i), frame, new Color(drawColor.R,drawColor.G,drawColor.B,128) * (float)Math.Sin(pulseTimer) * 0.7f, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
             }
         }
         return true;

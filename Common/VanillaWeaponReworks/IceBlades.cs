@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -43,11 +45,13 @@ namespace Avalon.Common.VanillaWeaponReworks
         }
     }
     public class GiantSnowflake : ModProjectile
-    {
-        public override void SetStaticDefaults()
+	{
+		private static Asset<Texture2D> texture;
+		public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
             ProjectileID.Sets.TrailingMode[Type] = 2;
+            texture = TextureAssets.Projectile[Type];
         }
         public override void SetDefaults() 
         {
@@ -125,16 +129,15 @@ namespace Avalon.Common.VanillaWeaponReworks
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
-            int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+            int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
             Vector2 frameOrigin = frame.Size() / 2f;
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type]; i++)
             {
                 float shrink = (float)(Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length;
-                Main.EntitySpriteDraw(texture, Projectile.oldPos[i] + frameOrigin - Main.screenPosition, frame, Color.White * shrink * 0.35f, Projectile.rotation, frameOrigin, Projectile.scale - (i * 0.03f), SpriteEffects.None);
+                Main.EntitySpriteDraw(texture.Value, Projectile.oldPos[i] + frameOrigin - Main.screenPosition, frame, Color.White * shrink * 0.35f, Projectile.rotation, frameOrigin, Projectile.scale - (i * 0.03f), SpriteEffects.None);
             }
-            Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition, frame, Color.White * 0.7f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
+            Main.EntitySpriteDraw(texture.Value, Projectile.position + frameOrigin - Main.screenPosition, frame, Color.White * 0.7f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
             return false;
         }
     }

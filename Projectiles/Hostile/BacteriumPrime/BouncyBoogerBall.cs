@@ -2,6 +2,7 @@ using Avalon.Items.Material;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -11,9 +12,15 @@ namespace Avalon.Projectiles.Hostile.BacteriumPrime;
 
 public class BouncyBoogerBall : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> textureBooger;
+	private static Asset<Texture2D> textureBaccilite;
+	public override void SetStaticDefaults()
     {
         Main.projFrames[Type] = 4;
+        texture = ModContent.Request<Texture2D>(Texture);
+        textureBooger = ModContent.Request<Texture2D>("Avalon/Items/Material/Booger");
+        textureBaccilite = ModContent.Request<Texture2D>("Avalon/Items/Material/Ores/BacciliteOre");
     }
     public override void SetDefaults()
     {
@@ -83,26 +90,23 @@ public class BouncyBoogerBall : ModProjectile
 
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-        int frameHeight = texture.Height / Main.projFrames[Type];
-        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+        int frameHeight = texture.Value.Height / Main.projFrames[Type];
+        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
 
-        Texture2D textureBooger = ModContent.Request<Texture2D>("Avalon/Items/Material/Booger").Value;
-        int frameHeightBooger = textureBooger.Height;
-        Rectangle frameBooger = new Rectangle(0, 0, textureBooger.Width, textureBooger.Height);
+        int frameHeightBooger = textureBooger.Value.Height;
+        Rectangle frameBooger = new Rectangle(0, 0, textureBooger.Value.Width, textureBooger.Value.Height);
         Vector2 drawPosBooger = Projectile.Center - Main.screenPosition;
         if (Projectile.ai[0] == 1)
-            Main.EntitySpriteDraw(textureBooger, drawPosBooger, frameBooger, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBooger.Width, frameHeightBooger) / 2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(textureBooger.Value, drawPosBooger, frameBooger, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBooger.Value.Width, frameHeightBooger) / 2, Projectile.scale, SpriteEffects.None, 0);
 
-        Texture2D textureBaccilite = ModContent.Request<Texture2D>("Avalon/Items/Material/Ores/BacciliteOre").Value;
-        int frameHeightBaccilite = textureBaccilite.Height;
-        Rectangle frameBaccilite = new Rectangle(0, 0, textureBaccilite.Width, textureBaccilite.Height);
+        int frameHeightBaccilite = textureBaccilite.Value.Height;
+        Rectangle frameBaccilite = new Rectangle(0, 0, textureBaccilite.Value.Width, textureBaccilite.Value.Height);
         Vector2 drawPosBaccilite = Projectile.Center - Main.screenPosition;
         if (Projectile.ai[0] == 2)
-            Main.EntitySpriteDraw(textureBaccilite, drawPosBaccilite, frameBaccilite, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBaccilite.Width, frameHeightBaccilite) / 2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(textureBaccilite.Value, drawPosBaccilite, frameBaccilite, lightColor, (Main.masterColor - 0.5f) * 0.4f, new Vector2(textureBaccilite.Value.Width, frameHeightBaccilite) / 2, Projectile.scale, SpriteEffects.None, 0);
 
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, (Main.masterColor - 0.5f) * -0.2f, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor * Projectile.Opacity, (Main.masterColor - 0.5f) * -0.2f, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)

@@ -1,6 +1,7 @@
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.IO;
 using Terraria;
@@ -11,14 +12,23 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 
 public class Sun : ModProjectile
 {
-    Vector2 mousePosition = Vector2.Zero;
+	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> sunTex;
+	private static Asset<Texture2D> backTex;
+
+	Vector2 mousePosition = Vector2.Zero;
     int planetSpawnTimer = 0;
     int dustTimer = 0;
     bool dontSnapBack;
     bool spawnPluto;
     int goreIndex;
-
-    public override void SetDefaults()
+	public override void SetStaticDefaults()
+	{
+        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain");
+        sunTex = ModContent.Request<Texture2D>(Texture);
+        backTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Sun_Back");
+	}
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Projectile.penetrate = -1;
@@ -306,7 +316,6 @@ public class Sun : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         Projectile.rotation += 0.01f;
-        var texture = Mod.Assets.Request<Texture2D>("Projectiles/Melee/SolarSystem/SolarSystem_Chain");
 
         Vector2 start = Projectile.Center;
         var end = Main.player[Projectile.owner].MountedCenter;
@@ -409,15 +418,13 @@ public class Sun : ModProjectile
         //    }
         //}
 
-        Texture2D sunTex = (Texture2D)ModContent.Request<Texture2D>(Texture);
-        Texture2D backTex = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Sun_Back");
         Rectangle sunFrame = sunTex.Frame();
         Vector2 sunFrameOrigin = sunFrame.Size() / 2f;
         Rectangle backFrame = backTex.Frame();
         Vector2 backFrameOrigin = backFrame.Size() / 2f;
-        Main.EntitySpriteDraw(sunTex, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 0.9f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(backTex, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(180, 180, 180, 180), Projectile.rotation, backFrameOrigin, 1f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(backTex, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(70, 70, 70, 70), Projectile.rotation + MathHelper.PiOver4 / 2, backFrameOrigin, 1.5f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(sunTex.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 0.9f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(backTex.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(180, 180, 180, 180), Projectile.rotation, backFrameOrigin, 1f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(backTex.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(70, 70, 70, 70), Projectile.rotation + MathHelper.PiOver4 / 2, backFrameOrigin, 1.5f, SpriteEffects.None, 0);
 
         return false;
     }

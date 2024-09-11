@@ -1,6 +1,7 @@
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
@@ -11,7 +12,8 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 
 public abstract class Planet : ModProjectile
 {
-    private int hostPosition = -1;
+	private static Asset<Texture2D> texture;
+	private int hostPosition = -1;
     private LinkedListNode<int> positionNode;
     public virtual int Radius { get; set; } = 1;
     public virtual string PlanetName { get; set; } = "Mercury";
@@ -20,6 +22,7 @@ public abstract class Planet : ModProjectile
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 100;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 3;
+        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Trail");
     }
     public override void SendExtraAI(BinaryWriter writer)
     {
@@ -35,7 +38,6 @@ public abstract class Planet : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Trail");
         float scale = 1f;
         Color planetColor = Color.White;
         switch (PlanetName)
@@ -99,7 +101,7 @@ public abstract class Planet : ModProjectile
             Vector2 drawPos = Projectile.oldPos[i] + new Vector2(Projectile.width / 2, Projectile.height / 2) - Main.screenPosition;
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-            Main.EntitySpriteDraw(texture, drawPos, frame, c, Projectile.oldRot[i] + 1.57f, frameOrigin, scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos, frame, c, Projectile.oldRot[i] + 1.57f, frameOrigin, scale, SpriteEffects.None, 0);
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
         }

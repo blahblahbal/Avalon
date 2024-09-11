@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System.IO;
 using Terraria;
 using Terraria.DataStructures;
@@ -78,28 +79,28 @@ public class MineralSlime : ModNPC
             Main.instance.LoadItem(Ores[i]);
         }
         float rotate = MathHelper.SmoothStep(0.1f, -0.1f, Main.masterColor);
-        Texture2D oreTexture;
+        Asset<Texture2D> oreTexture;
         if (Ores[WhichOre] > ItemID.Count)
         {
             if (Ores[WhichOre] == ModContent.ItemType<Items.Material.Ores.DurataniumOre>())
             {
-                oreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.DurataniumOre>().Texture).Value;
+                oreTexture = DurataniumOreTexture;
             }
             else if (Ores[WhichOre] == ModContent.ItemType<Items.Material.Ores.NaquadahOre>())
             {
-                oreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.NaquadahOre>().Texture).Value;
+                oreTexture = NaquadahOreTexture;
             }
             else if (Ores[WhichOre] == ModContent.ItemType<Items.Material.Ores.TroxiniumOre>())
             {
-                oreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.TroxiniumOre>().Texture).Value;
+                oreTexture = TroxiniumOreTexture;
             }
-            else oreTexture = TextureAssets.Item[ItemID.CopperOre].Value; // will never get here but VS is stupid
+            else oreTexture = TextureAssets.Item[ItemID.CopperOre]; // will never get here but VS is stupid
         }
         else
-            oreTexture = TextureAssets.Item[Ores[WhichOre]].Value;
+            oreTexture = TextureAssets.Item[Ores[WhichOre]];
         Rectangle frame = oreTexture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
-        Main.EntitySpriteDraw(oreTexture, NPC.Center - Main.screenPosition + new Vector2(0, NPC.frame.Y * -0.05f), frame, drawColor, NPC.rotation + rotate, frameOrigin, NPC.scale, SpriteEffects.None);
+        Main.EntitySpriteDraw(oreTexture.Value, NPC.Center - Main.screenPosition + new Vector2(0, NPC.frame.Y * -0.05f), frame, drawColor, NPC.rotation + rotate, frameOrigin, NPC.scale, SpriteEffects.None);
         return base.PreDraw(spriteBatch, screenPos, drawColor);
     }
     public override void OnKill()
@@ -138,12 +139,18 @@ public class MineralSlime : ModNPC
                 Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1f, 4) * hit.HitDirection, Main.rand.NextFloat(-1, -4));
             }
         }
-    }
-    public override void SetStaticDefaults()
+	}
+	private static Asset<Texture2D> DurataniumOreTexture;
+	private static Asset<Texture2D> NaquadahOreTexture;
+	private static Asset<Texture2D> TroxiniumOreTexture;
+	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 2;
         Data.Sets.NPC.Earthen[NPC.type] = true;
-    }
+		DurataniumOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.DurataniumOre>()];
+		NaquadahOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.NaquadahOre>()];
+		TroxiniumOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.TroxiniumOre>()];
+	}
 
     public override void SetDefaults()
     {

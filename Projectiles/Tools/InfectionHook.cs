@@ -2,6 +2,7 @@ using System;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,15 +11,18 @@ namespace Avalon.Projectiles.Tools;
 
 public class InfectionHook : ModProjectile
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/InfectionHook_Chain");
+	}
+	public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.GemHookEmerald);
     }
 
     public override bool PreDraw(ref Color lightColor)
     {
-        var texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/InfectionHook_Chain");
-
         var position = Projectile.Center;
         var mountedCenter = Main.player[Projectile.owner].MountedCenter;
         var sourceRectangle = new Rectangle?();

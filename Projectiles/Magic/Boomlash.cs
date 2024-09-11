@@ -10,16 +10,23 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
 using Avalon.Particles;
 using Avalon.Projectiles.Melee;
+using ReLogic.Content;
 
 namespace Avalon.Projectiles.Magic;
 
 public class Boomlash : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> texture2;
+	public override void SetStaticDefaults()
     {
         Main.projFrames[Type] = 1;
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 29;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+
+        //Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
+        texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/SparklySingleEnd");
+        texture2 = ModContent.Request<Texture2D>(Texture);
     }
     public override void SetDefaults()
     {
@@ -35,12 +42,9 @@ public class Boomlash : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        //Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
-        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/SparklySingleEnd").Value;
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
 
-        Texture2D texture2 = (Texture2D)ModContent.Request<Texture2D>(Texture);
         Rectangle frame2 = texture2.Frame();
         Vector2 frameOrigin2 = frame2.Size() / 2f;
 
@@ -55,12 +59,12 @@ public class Boomlash : ModProjectile
             Vector2 drawPos = Projectile.oldPos[i] - Main.screenPosition + new Vector2(Projectile.width / 2);
             //int col = (int)(128 - (i * 16) * Projectile.Opacity);
             //Main.EntitySpriteDraw(texture, drawPos, frame, new Color(col / i, col / i, col, 0), Projectile.oldRot[i], frameOrigin, Projectile.scale, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(texture, drawPos + Main.rand.NextVector2Circular(i / 2,i / 2), frame, new Color(col.R, col.G - (i * 8), col.B, 0) * (1 - (i * 0.04f)), Projectile.oldRot[i] + Main.rand.NextFloat(-i * 0.01f,i * 0.01f), frameOrigin, new Vector2(stretchscale.X - (i * 0.05f), (stretchscale.Y * Main.rand.NextFloat(0.1f,0.05f) * Vector2.Distance(Projectile.oldPos[i], Projectile.oldPos[i+1]) - (i * 0.05f)) * 0.7f), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos + Main.rand.NextVector2Circular(i / 2,i / 2), frame, new Color(col.R, col.G - (i * 8), col.B, 0) * (1 - (i * 0.04f)), Projectile.oldRot[i] + Main.rand.NextFloat(-i * 0.01f,i * 0.01f), frameOrigin, new Vector2(stretchscale.X - (i * 0.05f), (stretchscale.Y * Main.rand.NextFloat(0.1f,0.05f) * Vector2.Distance(Projectile.oldPos[i], Projectile.oldPos[i+1]) - (i * 0.05f)) * 0.7f), SpriteEffects.None, 0);
         }
         
-        Main.EntitySpriteDraw(texture2, Projectile.Center - Main.screenPosition, frame2, new Color(255,0,0,0), Projectile.rotation, frameOrigin2, stretchscale * 0.8f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture2.Value, Projectile.Center - Main.screenPosition, frame2, new Color(255,0,0,0), Projectile.rotation, frameOrigin2, stretchscale * 0.8f, SpriteEffects.None, 0);
         col.A = 255;
-        Main.EntitySpriteDraw(texture2, Projectile.Center - Main.screenPosition, frame2, col2 * Projectile.Opacity, Projectile.rotation, frameOrigin2, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture2.Value, Projectile.Center - Main.screenPosition, frame2, col2 * Projectile.Opacity, Projectile.rotation, frameOrigin2, Projectile.scale, SpriteEffects.None, 0);
 
         return false;
     }

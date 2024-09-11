@@ -2,6 +2,7 @@ using Avalon.Buffs.Debuffs;
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -15,7 +16,8 @@ namespace Avalon.NPCs.Hardmode;
 
 public class ContaminatedGhoul : ModNPC
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> glowTexture;
+	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[Type] = 8;
         Data.Sets.NPC.Wicked[NPC.type] = true;
@@ -25,6 +27,7 @@ public class ContaminatedGhoul : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+        glowTexture = ModContent.Request<Texture2D>(Texture + "Glow");
     }
     public override void SetDefaults()
     {
@@ -122,7 +125,6 @@ public class ContaminatedGhoul : ModNPC
     }
     public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture + "Glow").Value;
         Rectangle frame = NPC.frame;
         Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
         SpriteEffects spriteEffects = SpriteEffects.None;
@@ -130,6 +132,6 @@ public class ContaminatedGhoul : ModNPC
             spriteEffects = SpriteEffects.None;
         else
             spriteEffects = SpriteEffects.FlipHorizontally;
-        Main.EntitySpriteDraw(texture, drawPos, frame, new Color(200, 200, 200, 100), NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, spriteEffects, 0);
+        Main.EntitySpriteDraw(glowTexture.Value, drawPos, frame, new Color(200, 200, 200, 100), NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, spriteEffects, 0);
     }
 }

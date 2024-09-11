@@ -10,10 +10,15 @@ namespace Avalon.Projectiles.Melee;
 
 public class HellboundHalberd : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> after;
+	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
+
+        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/HellboundHalberd");
+        after = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/HellboundHalberd_after");
     }
     public Player player => Main.player[Projectile.owner];
     public int SwingSpeed = 40;
@@ -117,12 +122,9 @@ public class HellboundHalberd : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/HellboundHalberd", AssetRequestMode.ImmediateLoad).Value;
-        Texture2D after = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/HellboundHalberd_after", AssetRequestMode.ImmediateLoad).Value;
-
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
-        Vector2 offset = new Vector2((float)(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
+        Vector2 offset = new Vector2((float)(texture.Value.Width * 1.2f * 0.25f), -(float)(texture.Value.Height * 1.2f * 0.25f));
 
         var spriteDirection = SpriteEffects.None;
         float rotationFlip = 0;
@@ -136,7 +138,7 @@ public class HellboundHalberd : ModProjectile
             {
                 spriteDirection = SpriteEffects.FlipHorizontally;
                 rotationFlip = MathHelper.ToRadians(90f);
-                offset = new Vector2((float)-(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
+                offset = new Vector2((float)-(texture.Value.Width * 1.2f * 0.25f), -(float)(texture.Value.Height * 1.2f * 0.25f));
             }
         }
         else if ((Items.Weapons.Melee.Hardmode.HellboundHalberd.swing == 0 && player.gravDir != -1) || (player.gravDir == -1 && Items.Weapons.Melee.Hardmode.HellboundHalberd.swing == 1))
@@ -145,7 +147,7 @@ public class HellboundHalberd : ModProjectile
             {
                 spriteDirection = SpriteEffects.FlipHorizontally;
                 rotationFlip = MathHelper.ToRadians(90f);
-                offset = new Vector2((float)-(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
+                offset = new Vector2((float)-(texture.Value.Width * 1.2f * 0.25f), -(float)(texture.Value.Height * 1.2f * 0.25f));
             }
             if (player.direction == -1)
             {
@@ -156,9 +158,9 @@ public class HellboundHalberd : ModProjectile
         for (int i = 0; i < Projectile.oldPos.Length; i++)
         {
             Vector2 drawPosOld = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
-            Main.EntitySpriteDraw(after, drawPosOld, frame, lightColor * (1 - (i * 0.25f)) * 0.25f, Projectile.oldRot[i] + rotationFlip, frame.Size() / 2f + offset, Projectile.scale, spriteDirection, 0);
+            Main.EntitySpriteDraw(after.Value, drawPosOld, frame, lightColor * (1 - (i * 0.25f)) * 0.25f, Projectile.oldRot[i] + rotationFlip, frame.Size() / 2f + offset, Projectile.scale, spriteDirection, 0);
         }
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation + rotationFlip, frame.Size() / 2f + offset, Projectile.scale, spriteDirection, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor, Projectile.rotation + rotationFlip, frame.Size() / 2f + offset, Projectile.scale, spriteDirection, 0);
 
         return false;
     }

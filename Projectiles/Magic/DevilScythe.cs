@@ -5,15 +5,18 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent.Drawing;
+using ReLogic.Content;
 
 namespace Avalon.Projectiles.Magic;
 
 public class DevilScythe : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+        texture = ModContent.Request<Texture2D>(Texture);
     }
     public override void SetDefaults()
     {
@@ -156,20 +159,19 @@ public class DevilScythe : ModProjectile
 
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-        int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+        int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
         int length = ProjectileID.Sets.TrailCacheLength[Projectile.type];
         for (int i = 1; i < length; i++)
         {
             //float multiply = ((float)(length - i) / length) * Projectile.Opacity * 0.2f;
             float multiply = (float)(length - i) / length * 0.5f;
-            Main.EntitySpriteDraw(texture, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255, 255, 255, 0) * multiply, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255, 255, 255, 0) * multiply, Projectile.oldRot[i], new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
             multiply = (float)(length - i - ((float)i - 0.5f)) / length * 0.5f;
-            Main.EntitySpriteDraw(texture, Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[i - 1],0.5f) - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255, 255, 255, 0) * multiply, MathHelper.Lerp(Projectile.oldRot[i], Projectile.oldRot[i - 1],0.5f), new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[i - 1],0.5f) - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255, 255, 255, 0) * multiply, MathHelper.Lerp(Projectile.oldRot[i], Projectile.oldRot[i - 1],0.5f), new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         }
 
-        Main.EntitySpriteDraw(texture, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255,255,255, 25) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, new Color(255,255,255, 25) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)

@@ -7,12 +7,18 @@ using Avalon.Data.Sets;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.GameContent;
+using ReLogic.Content;
 
 namespace Avalon.Projectiles.Hostile.DesertBeak;
 
 public class DesertBeakSandstorm : ModProjectile
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+		texture = TextureAssets.Projectile[Type] /*TextureAssets.Projectile[ProjectileID.DD2ApprenticeStorm].Value*/;
+	}
+	public override void SetDefaults()
     {
         Projectile.width = 60;
         Projectile.height = 300;
@@ -35,8 +41,7 @@ public class DesertBeakSandstorm : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value /*TextureAssets.Projectile[ProjectileID.DD2ApprenticeStorm].Value*/;
-        Rectangle frame = new Rectangle(0, 0, texture.Width, texture.Height);
+        Rectangle frame = new Rectangle(0, 0, texture.Value.Width, texture.Value.Height);
         for (int j = 0; j < 2; j++)
         {
             float opacity = 0;
@@ -48,7 +53,7 @@ public class DesertBeakSandstorm : ModProjectile
                 opacity = MathHelper.Clamp(opacity + 0.01f, 0, 1);
                 scale = MathHelper.Clamp(scale + 0.03f, 0, 1.1f);
                 Color color = j == 0 ? Color.Goldenrod * opacity : new Color(255, 255, 255, 128) * opacity * 0.8f;
-                Main.EntitySpriteDraw(texture, drawPos + new Vector2(0, i * -heightDivision), frame, color * Projectile.Opacity, Projectile.rotation + MathHelper.PiOver4 * i * -0.1f * Projectile.direction, new Vector2(texture.Width, texture.Height) / 2, scale - (j * 0.1f), SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(0, i * -heightDivision), frame, color * Projectile.Opacity, Projectile.rotation + MathHelper.PiOver4 * i * -0.1f * Projectile.direction, new Vector2(texture.Value.Width, texture.Value.Height) / 2, scale - (j * 0.1f), SpriteEffects.None, 0);
             }
         }
         return false;

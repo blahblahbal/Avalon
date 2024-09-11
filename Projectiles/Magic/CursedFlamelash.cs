@@ -8,16 +8,19 @@ using Terraria.Audio;
 using Avalon.Particles;
 using Terraria.Graphics.Shaders;
 using Terraria.Graphics;
+using ReLogic.Content;
 
 namespace Avalon.Projectiles.Magic;
 
 public class CursedFlamelash : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 25;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         Main.projFrames[Type] = 6;
+        texture = ModContent.Request<Texture2D>(Texture);
     }
     public override void SetDefaults()
     {
@@ -114,16 +117,15 @@ public class CursedFlamelash : ModProjectile
         default(CursedFlameLashDrawer).Draw(Projectile);
 
         //Thanks ballsfah
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-        int frameHeight = texture.Height / Main.projFrames[Type];
-        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+        int frameHeight = texture.Value.Height / Main.projFrames[Type];
+        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
 
         float Rot = MathHelper.Lerp(0,Projectile.velocity.ToRotation() - MathHelper.PiOver2, MathHelper.Clamp(Projectile.velocity.Length() * 0.1f,0,1));
 
         //Main.EntitySpriteDraw(texture, drawPos, frame, Color.White, Rot, new Vector2(texture.Width, frameHeight) / 2, new Vector2(Projectile.scale,MathHelper.Clamp(Projectile.velocity.Length() * 0.2f,Projectile.scale,Projectile.scale * 2f)), SpriteEffects.None, 0);
         //The line above stretches the flame with speed
-        Main.EntitySpriteDraw(texture, drawPos, frame, new Color(230,255,0,0), Rot, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, new Color(230,255,0,0), Rot, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 
         return false;
     }

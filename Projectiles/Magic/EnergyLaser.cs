@@ -2,6 +2,7 @@ using System;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -13,9 +14,11 @@ namespace Avalon.Projectiles.Magic;
 
 public class EnergyLaser : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> tex;
+	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.DrawScreenCheckFluff[Type] = 4800;
+        tex = ModContent.Request<Texture2D>(Texture);
     }
     public override void SetDefaults()
     {
@@ -99,8 +102,7 @@ public class EnergyLaser : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         Vector2 StartPos = new Vector2(Projectile.ai[0], Projectile.ai[1]);
-        Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-        Main.EntitySpriteDraw(tex,Projectile.Center - Main.screenPosition,new Rectangle(0,0,tex.Width,tex.Height),new Color(Projectile.Opacity, Projectile.Opacity, 1f,0),Projectile.Center.DirectionTo(StartPos).ToRotation() + MathHelper.PiOver2,new Vector2(tex.Width / 2f,tex.Height),new Vector2(Projectile.Opacity * 1.3f, Projectile.Center.Distance(StartPos)),SpriteEffects.None);
+        Main.EntitySpriteDraw(tex.Value,Projectile.Center - Main.screenPosition,new Rectangle(0,0,tex.Value.Width,tex.Value.Height),new Color(Projectile.Opacity, Projectile.Opacity, 1f,0),Projectile.Center.DirectionTo(StartPos).ToRotation() + MathHelper.PiOver2,new Vector2(tex.Value.Width / 2f,tex.Value.Height),new Vector2(Projectile.Opacity * 1.3f, Projectile.Center.Distance(StartPos)),SpriteEffects.None);
         return false;
     }
 }

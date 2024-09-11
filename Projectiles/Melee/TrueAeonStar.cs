@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -12,7 +13,12 @@ namespace Avalon.Projectiles.Melee;
 
 public class TrueAeonStar : ModProjectile
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+        texture = ModContent.Request<Texture2D>(Texture);
+	}
+	public override void SetDefaults()
     {
         Projectile.width = 24;
         Projectile.height = 24;
@@ -42,16 +48,15 @@ public class TrueAeonStar : ModProjectile
 
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
-        int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+        int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
         Vector2 frameOrigin = frame.Size() / 2f;
         Color color = Color.Lerp(new Color(255,255,255,0), new Color(128, 128, 128, 64), Projectile.ai[1] * 0.03f);
         for(int i = 0; i < 6; i++)
         {
-            Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition + new Vector2(0, (float)Math.Sin(Main.GlobalTimeWrappedHourly * MathHelper.TwoPi / 6f) * 6).RotatedBy(i * MathHelper.PiOver2 + (Main.timeForVisualEffects * 0.03f)), frame, color * 0.2f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
+            Main.EntitySpriteDraw(texture.Value, Projectile.position + frameOrigin - Main.screenPosition + new Vector2(0, (float)Math.Sin(Main.GlobalTimeWrappedHourly * MathHelper.TwoPi / 6f) * 6).RotatedBy(i * MathHelper.PiOver2 + (Main.timeForVisualEffects * 0.03f)), frame, color * 0.2f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
         }
-        Main.EntitySpriteDraw(texture, Projectile.position + frameOrigin - Main.screenPosition, frame, color, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
+        Main.EntitySpriteDraw(texture.Value, Projectile.position + frameOrigin - Main.screenPosition, frame, color, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
         return false;
     }
     public override void AI()

@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,6 +10,11 @@ namespace Avalon.Projectiles.Hostile.Phantasm;
 public class SoulGrabber : ModProjectile
 {
     public int alpha = 255;
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+		texture = ModContent.Request<Texture2D>(Texture);
+	}
     public override void SetDefaults()
     {
         Projectile.width = 24;
@@ -62,17 +68,16 @@ public class SoulGrabber : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         auraScale = MathHelper.Clamp(auraScale, 0f, 18.5f);
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
         Color color = new Color(alpha, alpha, alpha, alpha);
         for (int i = 1; i < 4; i++)
         {
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(Projectile.velocity.X * (-i * 3), Projectile.velocity.Y * (-i * 3)), frame, (color * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 9f), Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 3), Projectile.velocity.Y * (-i * 3)), frame, (color * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 9f), Projectile.scale, SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, drawPos, frame, color, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 9f), Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, color, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 9f), Projectile.scale, SpriteEffects.None, 0);
         auraScale -= 0.01f;
-        Main.EntitySpriteDraw(texture, drawPos, frame, color * 0.15f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 10f), Projectile.scale * auraScale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, color * 0.15f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 10f), Projectile.scale * auraScale, SpriteEffects.None, 0);
         return false;
     }
 }

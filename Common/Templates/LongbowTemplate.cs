@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using ReLogic.Utilities;
 using Terraria;
 using Terraria.Audio;
@@ -171,13 +172,13 @@ namespace Avalon.Common.Templates
         public void DefaultBowDraw(Color lightColor, Vector2 Offset, float Scale = 1)
         {
             SpriteEffects Flip = Projectile.direction == 1 ? SpriteEffects.FlipVertically : SpriteEffects.None;
-            Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-            int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+            Asset<Texture2D> texture = ModContent.Request<Texture2D>(Texture);
+            int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
             Vector2 drawPos = Projectile.Center - Main.screenPosition + Offset;
             drawPos.Y += Main.player[Projectile.owner].gfxOffY;
             //Stretch 
-            Main.EntitySpriteDraw(texture, drawPos - new Vector2(Projectile.frame, 0).RotatedBy(Projectile.rotation), frame, lightColor, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, new Vector2(1 + (Projectile.frame * 0.06f), 1) * Projectile.scale * Scale, Flip, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos - new Vector2(Projectile.frame, 0).RotatedBy(Projectile.rotation), frame, lightColor, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, new Vector2(1 + (Projectile.frame * 0.06f), 1) * Projectile.scale * Scale, Flip, 0);
             //No stretch
             //Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, Flip, 0);
         }
