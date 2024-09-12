@@ -9,7 +9,12 @@ namespace Avalon.Waters;
 
 public class ContagionWaterStyle : ModWaterStyle
 {
-    public override int ChooseWaterfallStyle()
+	private Asset<Texture2D> rainTexture;
+	public override void Load()
+	{
+		rainTexture = ModContent.Request<Texture2D>("Avalon/Waters/ContagionRain");
+	}
+	public override int ChooseWaterfallStyle()
     {
         return Mod.Find<ModWaterfallStyle>("ContagionWaterfallStyle").Slot;
     }
@@ -41,10 +46,7 @@ public class ContagionWaterStyle : ModWaterStyle
         return (byte)Main.rand.Next(3);
     }
 
-    public override Asset<Texture2D> GetRainTexture()
-    {
-        return ModContent.Request<Texture2D>("Avalon/Waters/ContagionRain");
-    }
+    public override Asset<Texture2D> GetRainTexture()=> rainTexture;
 }
 
 

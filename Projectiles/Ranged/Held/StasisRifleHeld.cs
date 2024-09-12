@@ -5,6 +5,7 @@ using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,7 +17,7 @@ namespace Avalon.Projectiles.Ranged.Held
 		public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
-            texture = ModContent.Request<Texture2D>(Texture);
+            texture = TextureAssets.Projectile[Type];
         }
         public override bool? CanDamage()
         {

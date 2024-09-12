@@ -1,6 +1,7 @@
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -10,8 +11,11 @@ namespace Avalon.Tiles.Ores;
 
 public class TroxiniumOre : ModTile
 {
-    public override void SetStaticDefaults()
+	private Asset<Texture2D> glow;
+	public override void SetStaticDefaults()
     {
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+
         MineResist = 4f;
         AddMapEntry(Color.Goldenrod, this.GetLocalization("MapEntry"));
         Data.Sets.Tile.RiftOres[Type] = true;
@@ -42,7 +46,7 @@ public class TroxiniumOre : ModTile
 
         Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
         var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
-        Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Glow").Value, pos, frame,
+        Main.spriteBatch.Draw(glow.Value, pos, frame,
             new Color(255, 255, 255, 0) * (Lighting.Brightness(i, j) * 4f));
     }
     public override bool CanExplode(int i, int j)

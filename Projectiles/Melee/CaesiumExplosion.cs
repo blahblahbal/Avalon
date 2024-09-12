@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,7 +15,7 @@ public class CaesiumExplosion : ModProjectile
 	private static Asset<Texture2D> texture2;
 	public override void SetStaticDefaults()
 	{
-		texture = ModContent.Request<Texture2D>(Texture);
+		texture = TextureAssets.Projectile[Type];
 		texture2 = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WhiteExplosion");
 	}
     public override void SetDefaults()

@@ -12,9 +12,12 @@ namespace Avalon.Projectiles.Melee;
 public class CraniumCrusher : ModProjectile
 {
 	private static Asset<Texture2D> after;
+	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
     {
 		after = ModContent.Request<Texture2D>(Texture + "_after");
+		texture = TextureAssets.Projectile[Type];
+
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
     }
@@ -108,8 +111,6 @@ public class CraniumCrusher : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-		Asset<Texture2D> texture = TextureAssets.Projectile[Type];
-
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
         Vector2 offset = new Vector2((float)(texture.Width() * 1.2f * 0.25f), -(float)(texture.Height() * 1.2f * 0.25f));

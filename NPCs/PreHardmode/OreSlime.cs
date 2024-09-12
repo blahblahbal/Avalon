@@ -152,10 +152,10 @@ public class OreSlime : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 2;
         Data.Sets.NPC.Earthen[NPC.type] = true;
-		BronzeOreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.BronzeOre>().Texture);
-		NickelOreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.NickelOre>().Texture);
-		ZincOreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.ZincOre>().Texture);
-		BismuthOreTexture = ModContent.Request<Texture2D>(ModContent.GetInstance<Items.Material.Ores.BismuthOre>().Texture);
+		BronzeOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.BronzeOre>()];
+		NickelOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.NickelOre>()];
+		ZincOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.ZincOre>()];
+		BismuthOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.BismuthOre>()];
 	}
 
     public override void SetDefaults()

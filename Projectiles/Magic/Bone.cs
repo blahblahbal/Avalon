@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,7 +15,7 @@ public class Bone1 : ModProjectile
 	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
-        texture = ModContent.Request<Texture2D>(Texture);
+        texture = TextureAssets.Projectile[Type];
 	}
 	public override void SetDefaults()
     {
@@ -66,7 +67,7 @@ public class Bone2 : ModProjectile
 	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
-        texture = ModContent.Request<Texture2D>(Texture);
+        texture = TextureAssets.Projectile[Type];
 	}
 	public override void SetDefaults()
     {
@@ -147,7 +148,7 @@ public class Bone3 : ModProjectile
 	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
-        texture = ModContent.Request<Texture2D>(Texture);
+        texture = TextureAssets.Projectile[Type];
 	}
 	public override void SetDefaults()
     {
@@ -208,7 +209,7 @@ public class Bone4 : ModProjectile
 	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
-		texture = ModContent.Request<Texture2D>(Texture);
+		texture = TextureAssets.Projectile[Type];
 	}
     public override void SetDefaults()
     {

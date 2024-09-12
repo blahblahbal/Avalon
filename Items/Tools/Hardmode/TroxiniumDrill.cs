@@ -10,11 +10,11 @@ namespace Avalon.Items.Tools.Hardmode;
 
 class TroxiniumDrill : ModItem
 {
-	private static Asset<Texture2D> textureGlow;
+	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()
 	{
 		ItemID.Sets.IsDrill[Type] = true;
-		textureGlow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}
 	public override void SetDefaults()
     {
@@ -52,7 +52,7 @@ class TroxiniumDrill : ModItem
         Vector2 value = new Vector2((float)(Item.width / 2) - vector.X, Item.height - dims.Height);
         Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
         float num = Item.velocity.X * 0.2f;
-        spriteBatch.Draw(textureGlow.Value, vector2, dims, new Color(255, 255, 255, 0), num, vector, scale, SpriteEffects.None, 0f);
+        spriteBatch.Draw(glow.Value, vector2, dims, new Color(255, 255, 255, 0), num, vector, scale, SpriteEffects.None, 0f);
     }
     public override void AddRecipes()
     {

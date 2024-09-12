@@ -11,6 +11,7 @@ using Terraria.DataStructures;
 using Avalon.Particles;
 using Avalon.Projectiles.Melee;
 using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.Projectiles.Magic;
 
@@ -26,7 +27,7 @@ public class Boomlash : ModProjectile
 
         //Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
         texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/SparklySingleEnd");
-        texture2 = ModContent.Request<Texture2D>(Texture);
+        texture2 = TextureAssets.Projectile[Type];
     }
     public override void SetDefaults()
     {

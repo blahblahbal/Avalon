@@ -6,6 +6,7 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,7 +18,7 @@ public class AeonStar : ModProjectile
 	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
-		texture = ModContent.Request<Texture2D>(Texture);
+		texture = TextureAssets.Projectile[Type];
 	}
     public override void SetDefaults()
     {

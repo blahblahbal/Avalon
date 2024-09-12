@@ -24,7 +24,7 @@ public class MineralSlime : ModNPC
     Color[] OreColor =
     {
         new Color(61, 164, 196), new Color(240, 91, 51), new Color(147, 83, 119),
-        new Color(157, 210, 144), new Color(248, 113, 227), new Color(94, 199, 197),
+        new Color(157, 210, 144), new Color(248, 113, 227), new Color(80, 86, 160),
         new Color(221, 85, 152), new Color(190, 187, 220), new Color(214, 191, 43)
     };
     int[] OreDusts =
@@ -41,7 +41,7 @@ public class MineralSlime : ModNPC
     }
     public override void OnSpawn(IEntitySource source)
     {
-        WhichOre = Main.rand.Next(0, Ores.Length);
+		WhichOre = 5;//Main.rand.Next(0, Ores.Length);
         NPC.alpha = 90;
     }
     public override void SendExtraAI(BinaryWriter writer)

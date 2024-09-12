@@ -14,7 +14,10 @@ namespace Avalon.Tiles.Contagion;
 
 public class ContagionTree : ModTree
 {
-    public override TreePaintingSettings TreeShaderSettings => new TreePaintingSettings
+	private Asset<Texture2D> texture;
+	private Asset<Texture2D> branchesTexture;
+	private Asset<Texture2D> topsTexture;
+	public override TreePaintingSettings TreeShaderSettings => new TreePaintingSettings
     {
         UseSpecialGroups = true,
         SpecialGroupMinimalHueValue = 11f / 72f,
@@ -30,7 +33,10 @@ public class ContagionTree : ModTree
                 ModContent.TileType<Ickgrass>(),
                 ModContent.TileType<ContagionJungleGrass>()
             };
-    }
+		texture = ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/ContagionTree");
+		branchesTexture = ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/ContagionTreeBranches");
+		topsTexture = ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/ContagionTreeTop");
+	}
 
     public override int CreateDust()
     {
@@ -39,7 +45,7 @@ public class ContagionTree : ModTree
 
     public override Asset<Texture2D> GetTexture()
     {
-        return ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/ContagionTree");
+        return texture;
     }
     public override int TreeLeaf() => ModContent.GoreType<ContagionTreeLeaf>();
     public override int SaplingGrowthType(ref int style)
@@ -54,16 +60,10 @@ public class ContagionTree : ModTree
     }
 
     // Branch Textures
-    public override Asset<Texture2D> GetBranchTextures()
-    {
-        return ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/ContagionTreeBranches");
-    }
+    public override Asset<Texture2D> GetBranchTextures() => branchesTexture;
 
     // Top Textures
-    public override Asset<Texture2D> GetTopTextures()
-    {
-        return ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/ContagionTreeTop");
-    }
+    public override Asset<Texture2D> GetTopTextures() => topsTexture;
 
     public override int DropWood()
     {

@@ -8,18 +8,19 @@ using Avalon.Dusts;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.Projectiles.Ranged;
 
 public class BoompipeShrapnel : ModProjectile
 {
-	private static Asset<Texture2D> textureGlow;
+	private static Asset<Texture2D> glow;
 	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 4;
-		textureGlow = ModContent.Request<Texture2D>(Texture + "_Glow");
-		texture = ModContent.Request<Texture2D>(Texture);
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		texture = TextureAssets.Projectile[Type];
 	}
 	public override void SetDefaults()
     {
@@ -89,7 +90,7 @@ public class BoompipeShrapnel : ModProjectile
 		Color glowLerp = Color.Lerp(new Color(255, 255, 255, 0), new Color(0, 0, 0, 0), (initialTimeLeft - Projectile.timeLeft) / glowLerpDiv);
 
 		Main.EntitySpriteDraw(texture.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, lightColor, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(textureGlow.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, glowLerp, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(glow.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, glowLerp, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 		return false;
 	}
 }

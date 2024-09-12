@@ -31,10 +31,10 @@ public class YellowDungeonBookcase : BookcaseTemplate { }
 public class YellowDungeonCandelabra : CandelabraTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.YellowDungeon.YellowDungeonCandelabra>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -66,7 +66,7 @@ public class YellowDungeonCandelabra : CandelabraTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -74,10 +74,10 @@ public class YellowDungeonCandelabra : CandelabraTemplate
 public class YellowDungeonCandle : CandleTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.YellowDungeon.YellowDungeonCandle>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -109,7 +109,7 @@ public class YellowDungeonCandle : CandleTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -123,12 +123,12 @@ public class YellowDungeonChandelier : ChandelierTemplate
 {
     public override Color FlameColor => new Color(198, 171, 108, 0);
     public List<Point> Coordinates = new List<Point>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
     {
         base.SetStaticDefaults();
         Coordinates = new();
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 
 	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
@@ -245,7 +245,7 @@ public class YellowDungeonChandelier : ChandelierTemplate
                     {
                         float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                         float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                        spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                        spriteBatch.Draw(flameTexture.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                     }
                 }
             }
@@ -308,10 +308,10 @@ public class YellowDungeonDresser : DresserTemplate
 public class YellowDungeonLamp : LampTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.YellowDungeon.YellowDungeonLamp>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -343,7 +343,7 @@ public class YellowDungeonLamp : LampTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }

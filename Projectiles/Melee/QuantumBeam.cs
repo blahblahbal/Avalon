@@ -8,6 +8,7 @@ using Terraria.DataStructures;
 using System;
 using Avalon.Particles;
 using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.Projectiles.Melee;
 
@@ -17,7 +18,7 @@ public class QuantumBeam : ModProjectile
 	private static Asset<Texture2D> texture2;
 	public override void SetStaticDefaults()
 	{
-		texture = ModContent.Request<Texture2D>(Texture);
+		texture = TextureAssets.Projectile[Type];
 		texture2 = ModContent.Request<Texture2D>(Texture + "2");
 	}
 	public override void SetDefaults()

@@ -1,6 +1,7 @@
 using Avalon.Items.Material.Bars;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,8 +11,10 @@ namespace Avalon.Tiles;
 
 public class PlacedBars : ModTile
 {
-    public override void SetStaticDefaults()
+	private Asset<Texture2D> glow;
+	public override void SetStaticDefaults()
     {
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
         TileObjectData.newTile.Width = 1;
@@ -48,7 +51,7 @@ public class PlacedBars : ModTile
 
         Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
         var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
-        Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Glow").Value, pos, frame,
+        Main.spriteBatch.Draw(glow.Value, pos, frame,
             new Color(255, 255, 255, 0) * (Lighting.Brightness(i, j) * 4f));
     }
     public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)

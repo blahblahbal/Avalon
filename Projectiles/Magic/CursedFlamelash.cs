@@ -9,6 +9,7 @@ using Avalon.Particles;
 using Terraria.Graphics.Shaders;
 using Terraria.Graphics;
 using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.Projectiles.Magic;
 
@@ -20,7 +21,7 @@ public class CursedFlamelash : ModProjectile
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 25;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         Main.projFrames[Type] = 6;
-        texture = ModContent.Request<Texture2D>(Texture);
+        texture = TextureAssets.Projectile[Type];
     }
     public override void SetDefaults()
     {

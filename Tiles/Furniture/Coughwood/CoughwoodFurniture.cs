@@ -29,10 +29,10 @@ public class CoughwoodBookcase : BookcaseTemplate { }
 
 public class CoughwoodCandelabra : CandelabraTemplate
 {
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 	{
@@ -64,7 +64,7 @@ public class CoughwoodCandelabra : CandelabraTemplate
 		{
 			float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 			float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-			Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 		}
 	}
 }
@@ -72,10 +72,10 @@ public class CoughwoodCandelabra : CandelabraTemplate
 public class CoughwoodCandle : CandleTemplate
 {
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodCandle>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 	{
@@ -107,7 +107,7 @@ public class CoughwoodCandle : CandleTemplate
 		{
 			float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 			float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-			Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 		}
 	}
 }
@@ -122,12 +122,12 @@ public class CoughwoodChandelier : ChandelierTemplate
 	public override Color FlameColor => new Color(198, 171, 108, 0);
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodChandelier>();
 	public List<Point> Coordinates = new List<Point>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
 		Coordinates = new();
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void KillMultiTile(int i, int j, int frameX, int frameY)
 	{
@@ -243,7 +243,7 @@ public class CoughwoodChandelier : ChandelierTemplate
 					{
 						float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
 						float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-						spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+						spriteBatch.Draw(flameTexture.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
 					}
 				}
 			}
@@ -313,10 +313,10 @@ public class CoughwoodDresser : DresserTemplate
 public class CoughwoodLamp : LampTemplate
 {
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodLamp>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 	{
@@ -348,7 +348,7 @@ public class CoughwoodLamp : LampTemplate
 		{
 			float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 			float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-			Main.spriteBatch.Draw(FlameImage.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 		}
 	}
 }
@@ -358,12 +358,12 @@ public class CoughwoodLantern : LanternTemplate
 	public override bool HasFlame => false;
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Coughwood.CoughwoodLantern>();
 	public List<Point> Coordinates = new List<Point>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
 		Coordinates = new();
-		FlameImage = HasFlame ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		flameTexture = HasFlame ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
 	}
 	public override void KillMultiTile(int i, int j, int frameX, int frameY)
 	{
@@ -481,7 +481,7 @@ public class CoughwoodLantern : LanternTemplate
 						{
 							float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
 							float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-							spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+							spriteBatch.Draw(flameTexture.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
 						}
 					}
 				}

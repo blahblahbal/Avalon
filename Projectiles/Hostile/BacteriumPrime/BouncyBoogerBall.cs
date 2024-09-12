@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,7 +19,7 @@ public class BouncyBoogerBall : ModProjectile
 	public override void SetStaticDefaults()
     {
         Main.projFrames[Type] = 4;
-        texture = ModContent.Request<Texture2D>(Texture);
+        texture = TextureAssets.Projectile[Type];
         textureBooger = ModContent.Request<Texture2D>("Avalon/Items/Material/Booger");
         textureBaccilite = ModContent.Request<Texture2D>("Avalon/Items/Material/Ores/BacciliteOre");
     }

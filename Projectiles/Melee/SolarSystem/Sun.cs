@@ -12,9 +12,11 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 
 public class Sun : ModProjectile
 {
-	private static Asset<Texture2D> texture;
-	private static Asset<Texture2D> sunTex;
-	private static Asset<Texture2D> backTex;
+	private static Asset<Texture2D> textureChain1;
+	private static Asset<Texture2D> textureChain2;
+	private static Asset<Texture2D> textureChain3;
+	private static Asset<Texture2D> sunTexture;
+	private static Asset<Texture2D> backTexture;
 
 	Vector2 mousePosition = Vector2.Zero;
     int planetSpawnTimer = 0;
@@ -24,9 +26,11 @@ public class Sun : ModProjectile
     int goreIndex;
 	public override void SetStaticDefaults()
 	{
-        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain");
-        sunTex = ModContent.Request<Texture2D>(Texture);
-        backTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Sun_Back");
+        textureChain1 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain");
+        textureChain2 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain2");
+        textureChain3 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain3");
+        sunTexture = ModContent.Request<Texture2D>(Texture);
+        backTexture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Sun_Back");
 	}
 	public override void SetDefaults()
     {
@@ -322,11 +326,10 @@ public class Sun : ModProjectile
         start -= Main.screenPosition;
         end -= Main.screenPosition;
 
-        Texture2D TEX = Mod.Assets.Request<Texture2D>("Projectiles/Melee/SolarSystem/SolarSystem_Chain").Value;
-        int linklength = TEX.Height;
+        int linklength = textureChain1.Value.Height;
         Vector2 chain = end - start;
 
-        var origin = new Vector2(texture.Value.Width * 0.5f, texture.Value.Height * 0.5f);
+        var origin = new Vector2(textureChain1.Value.Width * 0.5f, textureChain1.Value.Height * 0.5f);
         float length = (float)chain.Length();
         int numlinks = (int)Math.Ceiling(length / linklength);
         Vector2[] links = new Vector2[numlinks];
@@ -336,38 +339,30 @@ public class Sun : ModProjectile
         for (int i = 0; i < numlinks; i++)
         {
             links[i] = start + chain / numlinks * i;
-            string TEXTURE;
+            Asset<Texture2D> TEXTURE;
             string GORE;
             string GORE2;
             if (chainVariant % 3 == 0)
             {
-                TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain3";
+                TEXTURE = textureChain3;
                 GORE = "SolarSystem3";
                 GORE2 = "SolarSystem4";
             }
             else if (chainVariant % 2 == 0)
             {
-                TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain2";
+                TEXTURE = textureChain2;
                 GORE = "SolarSystem5";
                 GORE2 = "SolarSystem6";
             }
             else
             {
-                TEXTURE = "Projectiles/Melee/SolarSystem/SolarSystem_Chain";
+                TEXTURE = textureChain1;
                 GORE = "SolarSystem1";
                 GORE2 = "SolarSystem2";
             }
-            if (chainVariant % 2 == 0)
-            {
-                TEX = Mod.Assets.Request<Texture2D>(TEXTURE).Value;
-            }
-            else
-            {
-                TEX = Mod.Assets.Request<Texture2D>(TEXTURE).Value;
-            }
             if (Projectile.ai[0] != 0)
             {
-                Main.spriteBatch.Draw(TEX, links[i], new Rectangle?(), Color.White, rotation + 1.57f, origin, 1f,
+                Main.spriteBatch.Draw(TEXTURE.Value, links[i], new Rectangle?(), Color.White, rotation + 1.57f, origin, 1f,
                     SpriteEffects.None, 1f);
             }
             else
@@ -418,13 +413,13 @@ public class Sun : ModProjectile
         //    }
         //}
 
-        Rectangle sunFrame = sunTex.Frame();
+        Rectangle sunFrame = sunTexture.Frame();
         Vector2 sunFrameOrigin = sunFrame.Size() / 2f;
-        Rectangle backFrame = backTex.Frame();
+        Rectangle backFrame = backTexture.Frame();
         Vector2 backFrameOrigin = backFrame.Size() / 2f;
-        Main.EntitySpriteDraw(sunTex.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 0.9f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(backTex.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(180, 180, 180, 180), Projectile.rotation, backFrameOrigin, 1f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(backTex.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(70, 70, 70, 70), Projectile.rotation + MathHelper.PiOver4 / 2, backFrameOrigin, 1.5f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(sunTexture.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 0.9f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(backTexture.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(180, 180, 180, 180), Projectile.rotation, backFrameOrigin, 1f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(backTexture.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(70, 70, 70, 70), Projectile.rotation + MathHelper.PiOver4 / 2, backFrameOrigin, 1.5f, SpriteEffects.None, 0);
 
         return false;
     }

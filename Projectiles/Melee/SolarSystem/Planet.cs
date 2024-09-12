@@ -12,18 +12,39 @@ namespace Avalon.Projectiles.Melee.SolarSystem;
 
 public abstract class Planet : ModProjectile
 {
+	private readonly string TexturePath = "Avalon/Projectiles/Melee/SolarSystem/";
 	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> textureMercury;
+	private static Asset<Texture2D> textureVenus;
+	private static Asset<Texture2D> textureEarth;
+	private static Asset<Texture2D> textureMars;
+	private static Asset<Texture2D> textureJupiter;
+	private static Asset<Texture2D> textureSaturn;
+	private static Asset<Texture2D> textureUranus;
+	private static Asset<Texture2D> textureNeptune;
+	private static Asset<Texture2D> texturePluto;
 	private int hostPosition = -1;
     private LinkedListNode<int> positionNode;
     public virtual int Radius { get; set; } = 1;
     public virtual string PlanetName { get; set; } = "Mercury";
-
-    public override void SetStaticDefaults()
+	public override void Load()
+	{
+		texture = ModContent.Request<Texture2D>(TexturePath + "Trail");
+		textureMercury = ModContent.Request<Texture2D>(TexturePath + "Mercury");
+		textureVenus = ModContent.Request<Texture2D>(TexturePath + "Venus");
+		textureEarth = ModContent.Request<Texture2D>(TexturePath + "Earth");
+		textureMars = ModContent.Request<Texture2D>(TexturePath + "Mars");
+		textureJupiter = ModContent.Request<Texture2D>(TexturePath + "Jupiter");
+		textureSaturn = ModContent.Request<Texture2D>(TexturePath + "Saturn");
+		textureUranus = ModContent.Request<Texture2D>(TexturePath + "Uranus");
+		textureNeptune = ModContent.Request<Texture2D>(TexturePath + "Neptune");
+		texturePluto = ModContent.Request<Texture2D>(TexturePath + "Pluto");
+	}
+	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 100;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 3;
-        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Trail");
-    }
+	}
     public override void SendExtraAI(BinaryWriter writer)
     {
         AvalonPlayer modPlayer = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>();
@@ -40,43 +61,53 @@ public abstract class Planet : ModProjectile
     {
         float scale = 1f;
         Color planetColor = Color.White;
+        Asset<Texture2D> planetTexture = textureMercury;
         switch (PlanetName)
         {
             case "Mercury":
                 scale = 0.37f;
-                //planetColor = new Color(206, 143, 90);
+				//planetColor = new Color(206, 143, 90);
+				planetTexture = textureMercury;
                 break;
             case "Venus":
                 scale = 0.75f;
                 planetColor = new Color(222, 186, 135);
+				planetTexture = textureVenus;
                 break;
             case "Earth":
                 scale = 0.75f;
                 planetColor = new Color(86, 212, 251);
+				planetTexture = textureEarth;
                 break;
             case "Mars":
                 scale = 0.6f;
                 planetColor = new Color(214, 74, 61);
+				planetTexture = textureMars;
                 break;
             case "Jupiter":
                 scale = 2.5f;
                 planetColor = new Color(206, 143, 90);
+				planetTexture = textureJupiter;
                 break;
             case "Saturn":
                 scale = 1.8f;
                 planetColor = new Color(228, 197, 138);
+				planetTexture = textureSaturn;
                 break;
             case "Uranus":
                 scale = 1.3f;
                 planetColor = new Color(57, 116, 186);
+				planetTexture = textureUranus;
                 break;
             case "Neptune":
                 scale = 1.4f;
                 planetColor = new Color(64, 106, 255);
+				planetTexture = textureNeptune;
                 break;
             case "Pluto":
                 scale = 0.37f;
                 planetColor = new Color(234, 219, 198);
+				planetTexture = texturePluto;
                 break;
         }
         Rectangle frame = texture.Frame();
@@ -106,10 +137,9 @@ public abstract class Planet : ModProjectile
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
         }
 
-        Texture2D planetTexture = (Texture2D)ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/" + PlanetName);
         Rectangle planetFrame = planetTexture.Frame();
         Vector2 planetFrameOrigin = planetFrame.Size() / 2f;
-        Main.EntitySpriteDraw(planetTexture, Projectile.position - Main.screenPosition + planetFrameOrigin, planetFrame, Color.White, Projectile.rotation, planetFrameOrigin, 1f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(planetTexture.Value, Projectile.position - Main.screenPosition + planetFrameOrigin, planetFrame, Color.White, Projectile.rotation, planetFrameOrigin, 1f, SpriteEffects.None, 0);
 
         return false;
     }

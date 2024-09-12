@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -11,12 +12,12 @@ namespace Avalon.Projectiles.Ranged;
 
 public class PhantasmalBullet : ModProjectile
 {
-	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> trailTexture;
 	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
-        texture = ModContent.Request<Texture2D>(Texture);
+        trailTexture = TextureAssets.Projectile[Type];
     }
     public override void SetDefaults()
     {
@@ -131,7 +132,7 @@ public class PhantasmalBullet : ModProjectile
         {
             Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
             Color color = new Color(180, 180, 180, 50) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-            Main.EntitySpriteDraw(texture.Value, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, new Vector2(0.9f * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length), 0.9f) * Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(trailTexture.Value, drawPos, new Rectangle(0, dims.Height * Projectile.frame, dims.Width, dims.Height), color, Projectile.rotation, drawOrigin, new Vector2(0.9f * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length), 0.9f) * Projectile.scale, SpriteEffects.None, 0);
         }
         return false;
     }

@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using System.Runtime.CompilerServices;
 using Terraria.GameContent.Drawing;
+using Terraria.GameContent;
 namespace Avalon.Projectiles.Melee;
 
 public class HallowedClaymore : ModProjectile
@@ -17,7 +18,7 @@ public class HallowedClaymore : ModProjectile
 	{
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
 		ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
-		texture = ModContent.Request<Texture2D>(Texture);
+		texture = TextureAssets.Projectile[Type];
 	}
 	public Player player => Main.player[Projectile.owner];
 	public int SwingSpeed = 40;

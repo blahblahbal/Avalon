@@ -9,11 +9,11 @@ namespace Avalon.Tiles.Furniture;
 
 public class BismuthCandle : CandleTemplate
 {
-	private static Asset<Texture2D> FlameImage;
+	private static Asset<Texture2D> flameTexture;
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.BismuthCandle>();
 	public override void SetStaticDefaults()
 	{
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
@@ -44,7 +44,7 @@ public class BismuthCandle : CandleTemplate
         {
             float x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(FlameImage.Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(flameTexture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }

@@ -17,12 +17,12 @@ public class BronzeChandelier : ChandelierTemplate
 {
     public override Color FlameColor => new Color(100, 100, 100, 0);
     public List<Point> Coordinates = new List<Point>();
-	private static Asset<Texture2D>? FlameImage;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
     {
         base.SetStaticDefaults();
         Coordinates = new();
-		FlameImage = ModContent.Request<Texture2D>(Texture + "_Flame");
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
@@ -138,7 +138,7 @@ public class BronzeChandelier : ChandelierTemplate
                     {
                         float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                         float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                        spriteBatch.Draw(FlameImage.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                        spriteBatch.Draw(flameTexture.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                     }
                 }
             }

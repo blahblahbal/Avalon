@@ -10,14 +10,14 @@ namespace Avalon.Items.OreChunks;
 
 class TroxiniumChunk : ModItem
 {
-	private static Asset<Texture2D> textureGlow;
+	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 200;
-		textureGlow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
         if (!Main.dedServ)
         {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = textureGlow;
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
         }
         Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
     }

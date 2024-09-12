@@ -14,11 +14,11 @@ namespace Avalon.Projectiles.Magic;
 
 public class EnergyLaser : ModProjectile
 {
-	private static Asset<Texture2D> tex;
+	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.DrawScreenCheckFluff[Type] = 4800;
-        tex = ModContent.Request<Texture2D>(Texture);
+        texture = TextureAssets.Projectile[Type];
     }
     public override void SetDefaults()
     {
@@ -102,7 +102,7 @@ public class EnergyLaser : ModProjectile
     public override bool PreDraw(ref Color lightColor)
     {
         Vector2 StartPos = new Vector2(Projectile.ai[0], Projectile.ai[1]);
-        Main.EntitySpriteDraw(tex.Value,Projectile.Center - Main.screenPosition,new Rectangle(0,0,tex.Value.Width,tex.Value.Height),new Color(Projectile.Opacity, Projectile.Opacity, 1f,0),Projectile.Center.DirectionTo(StartPos).ToRotation() + MathHelper.PiOver2,new Vector2(tex.Value.Width / 2f,tex.Value.Height),new Vector2(Projectile.Opacity * 1.3f, Projectile.Center.Distance(StartPos)),SpriteEffects.None);
+        Main.EntitySpriteDraw(texture.Value,Projectile.Center - Main.screenPosition,new Rectangle(0,0,texture.Value.Width,texture.Value.Height),new Color(Projectile.Opacity, Projectile.Opacity, 1f,0),Projectile.Center.DirectionTo(StartPos).ToRotation() + MathHelper.PiOver2,new Vector2(texture.Value.Width / 2f,texture.Value.Height),new Vector2(Projectile.Opacity * 1.3f, Projectile.Center.Distance(StartPos)),SpriteEffects.None);
         return false;
     }
 }

@@ -12,13 +12,13 @@ namespace Avalon.Projectiles.Tools;
 
 public class EruptionHook : ModProjectile
 {
-	private static Asset<Texture2D> texture;
-	private static Asset<Texture2D> textureGlow;
+	private static Asset<Texture2D> chainTexture;
+	private static Asset<Texture2D> chainGlow;
 	public override void SetStaticDefaults()
     {
         ProjectileID.Sets.SingleGrappleHook[Type] = true;
-        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain");
-        textureGlow = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain_Glow");
+        chainTexture = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain");
+        chainGlow = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/EruptionHook_Chain_Glow");
     }
     public override void SetDefaults()
     {
@@ -35,8 +35,8 @@ public class EruptionHook : ModProjectile
         var position = Projectile.Center;
         var mountedCenter = Main.player[Projectile.owner].MountedCenter;
         var sourceRectangle = new Rectangle?();
-        var origin = new Vector2(texture.Value.Width * 0.5f, texture.Value.Height + 1);
-        float num1 = texture.Value.Height;
+        var origin = new Vector2(chainTexture.Value.Width * 0.5f, chainTexture.Value.Height + 1);
+        float num1 = chainTexture.Value.Height;
         var vector2_4 = mountedCenter - position;
         var rotation = (float)Math.Atan2(vector2_4.Y, vector2_4.X) - 1.57f;
         var flag = true;
@@ -58,8 +58,8 @@ public class EruptionHook : ModProjectile
                 vector2_4 = mountedCenter - position;
                 var color2 = Lighting.GetColor((int)position.X / 16, (int)(position.Y / 16.0));
                 color2 = Projectile.GetAlpha(color2);
-                Main.EntitySpriteDraw(texture.Value, position - Main.screenPosition, sourceRectangle, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
-                Main.EntitySpriteDraw(textureGlow.Value, position - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 127), rotation, origin, 1f, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(chainTexture.Value, position - Main.screenPosition, sourceRectangle, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(chainGlow.Value, position - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 127), rotation, origin, 1f, SpriteEffects.None, 0);
                 Lighting.AddLight(position, new Vector3(70 / 255f, 30 / 255f, 10 / 255f));
             }
         }

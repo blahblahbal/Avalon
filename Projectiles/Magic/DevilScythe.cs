@@ -6,6 +6,7 @@ using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent.Drawing;
 using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.Projectiles.Magic;
 
@@ -16,7 +17,7 @@ public class DevilScythe : ModProjectile
     {
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
-        texture = ModContent.Request<Texture2D>(Texture);
+        texture = TextureAssets.Projectile[Type];
     }
     public override void SetDefaults()
     {

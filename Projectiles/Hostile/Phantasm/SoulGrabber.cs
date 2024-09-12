@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,7 +14,7 @@ public class SoulGrabber : ModProjectile
 	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
-		texture = ModContent.Request<Texture2D>(Texture);
+		texture = TextureAssets.Projectile[Type];
 	}
     public override void SetDefaults()
     {

@@ -9,16 +9,19 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Avalon.Items.Tools.PreHardmode;
+using Terraria.GameContent;
 
 namespace Avalon.Projectiles.Melee;
 
 public class WoodenClub : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         //DisplayName.SetDefault("Marrow Masher");
         ProjectileID.Sets.TrailCacheLength[Projectile.type] = 2;
         ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+		texture = TextureAssets.Projectile[Type];
     }
     public Player player => Main.player[Projectile.owner];
     public int SwingSpeed = 255;
@@ -110,19 +113,18 @@ public class WoodenClub : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture, AssetRequestMode.ImmediateLoad).Value;
         //Texture2D after = ModContent.Request<Texture2D>(Texture + "_after", AssetRequestMode.ImmediateLoad).Value;
 
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
-        Vector2 offset = new Vector2((float)(texture.Width * 1.2f * 0.25f), -(float)(texture.Height * 1.2f * 0.25f));
+        Vector2 offset = new Vector2((float)(texture.Value.Width * 1.2f * 0.25f), -(float)(texture.Value.Height * 1.2f * 0.25f));
 
         //for (int i = 0; i < Projectile.oldPos.Length; i++)
         //{
         //    Vector2 drawPosOld = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
         //    Main.EntitySpriteDraw(after, drawPosOld, frame, Color.Black * (1 - (i * 0.25f)) * 0.25f, Projectile.oldRot[i], frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
         //}
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
 
         return false;
     }

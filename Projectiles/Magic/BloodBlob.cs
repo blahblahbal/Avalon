@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,7 +15,7 @@ public class BloodBlob : ModProjectile
 	public override void SetStaticDefaults()
     {
         Main.projFrames[Projectile.type] = 4;
-        texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Magic/BloodBlob");
+        texture = TextureAssets.Projectile[Type];
     }
     public override void SetDefaults()
     {

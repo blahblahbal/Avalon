@@ -11,13 +11,13 @@ namespace Avalon.Items.Weapons.Blah;
 
 class BlahsEnergyBlade : ModItem
 {
-	private static Asset<Texture2D> textureGlow;
+	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()
 	{
-		textureGlow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
         if (!Main.dedServ)
         {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = textureGlow;
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
         }
 	}
 	public override void SetDefaults()
@@ -66,7 +66,7 @@ class BlahsEnergyBlade : ModItem
         Vector2 value = new Vector2((float)(Item.width / 2) - vector.X, Item.height - dims.Height);
         Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
         float num = Item.velocity.X * 0.2f;
-        spriteBatch.Draw(textureGlow.Value, vector2, dims, new Color(250, 250, 250, 250), num, vector, scale, SpriteEffects.None, 0f);
+        spriteBatch.Draw(glow.Value, vector2, dims, new Color(250, 250, 250, 250), num, vector, scale, SpriteEffects.None, 0f);
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {

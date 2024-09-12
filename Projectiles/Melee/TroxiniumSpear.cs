@@ -11,10 +11,10 @@ namespace Avalon.Projectiles.Melee;
 
 public class TroxiniumSpear : SpearTemplate
 {
-	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()
 	{
-        texture = ModContent.Request<Texture2D>(Texture + "_Glow");
+        glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}
 	public override void SetDefaults()
     {
@@ -44,7 +44,7 @@ public class TroxiniumSpear : SpearTemplate
         if (player.direction == 1)
         {
             dir = SpriteEffects.FlipHorizontally;
-            origin.X = texture.Value.Width;
+            origin.X = glow.Value.Width;
             rotation -= MathHelper.PiOver2;
         }
         if (player.gravDir == -1f)
@@ -52,17 +52,17 @@ public class TroxiniumSpear : SpearTemplate
             if (Projectile.direction == 1)
             {
                 dir = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
-                origin = new Vector2(texture.Value.Width, texture.Value.Height);
+                origin = new Vector2(glow.Value.Width, glow.Value.Height);
                 rotation -= MathHelper.PiOver2;
             }
             else if (Projectile.direction == -1)
             {
                 dir = SpriteEffects.FlipVertically;
-                origin = new Vector2(0f, texture.Value.Height);
+                origin = new Vector2(0f, glow.Value.Height);
                 rotation += MathHelper.PiOver2;
             }
         }
         Vector2 basePosition = Projectile.Center + new Vector2(0f, Projectile.gfxOffY);
-        Main.EntitySpriteDraw(texture.Value, basePosition - Main.screenPosition, default, Projectile.GetAlpha(Color.White), rotation, origin, Projectile.scale, dir);
+        Main.EntitySpriteDraw(glow.Value, basePosition - Main.screenPosition, default, Projectile.GetAlpha(Color.White), rotation, origin, Projectile.scale, dir);
     }
 }

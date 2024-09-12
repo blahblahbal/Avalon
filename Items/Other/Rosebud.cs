@@ -10,12 +10,12 @@ namespace Avalon.Items.Other;
 
 public class Rosebud : ModItem
 {
-	private static Asset<Texture2D> textureGlow;
+	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()
     {
         ItemID.Sets.ItemIconPulse[Item.type] = true;
         ItemID.Sets.ItemNoGravity[Item.type] = true;
-		textureGlow = ModContent.Request<Texture2D>(Texture + "Glow");
+		glow = ModContent.Request<Texture2D>(Texture + "Glow");
     }
 
     public override void SetDefaults()
@@ -51,16 +51,16 @@ public class Rosebud : ModItem
     {
         spriteBatch.Draw
         (
-            textureGlow.Value,
+            glow.Value,
             new Vector2
             (
                 Item.position.X - Main.screenPosition.X + Item.width * 0.5f,
-                Item.position.Y - Main.screenPosition.Y + Item.height - textureGlow.Value.Height * 0.5f + 2f
+                Item.position.Y - Main.screenPosition.Y + Item.height - glow.Value.Height * 0.5f + 2f
             ),
-            new Rectangle(0, 0, textureGlow.Value.Width, textureGlow.Value.Height),
+            new Rectangle(0, 0, glow.Value.Width, glow.Value.Height),
             Color.White,
             rotation,
-            textureGlow.Value.Size() * 0.5f,
+            glow.Value.Size() * 0.5f,
             scale,
             SpriteEffects.None,
             0f
