@@ -41,7 +41,7 @@ public class MineralSlime : ModNPC
     }
     public override void OnSpawn(IEntitySource source)
     {
-		WhichOre = 5;//Main.rand.Next(0, Ores.Length);
+		WhichOre = Main.rand.Next(0, Ores.Length);
         NPC.alpha = 90;
     }
     public override void SendExtraAI(BinaryWriter writer)
