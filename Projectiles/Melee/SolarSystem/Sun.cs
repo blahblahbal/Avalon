@@ -5,6 +5,7 @@ using ReLogic.Content;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -29,7 +30,7 @@ public class Sun : ModProjectile
         textureChain1 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain");
         textureChain2 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain2");
         textureChain3 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain3");
-        sunTexture = ModContent.Request<Texture2D>(Texture);
+        sunTexture = TextureAssets.Projectile[Type];
         backTexture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Sun_Back");
 	}
 	public override void SetDefaults()
@@ -281,7 +282,15 @@ public class Sun : ModProjectile
 
                 
                 mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition; // new Vector2(vecX, vecY);
-                Projectile.velocity = Projectile.Center.DirectionTo(mousePosition) * 8.5f;
+				if (Projectile.Center != mousePosition)
+				{
+					Projectile.velocity = Projectile.Center.DirectionTo(mousePosition) * MathHelper.Clamp(Projectile.Center.Distance(mousePosition), 0f, 8.5f);
+				}
+				else
+				{
+					Projectile.velocity = Vector2.Zero;
+				}
+				Main.NewText(Projectile.velocity.Length());
                 Projectile.Center = ClassExtensions.ClampToCircle(Main.player[Projectile.owner].Center, 16 * 30, Projectile.Center);
                 //Projectile.Center = mousePosition;
                 if (planetSpawnTimer == 0)
