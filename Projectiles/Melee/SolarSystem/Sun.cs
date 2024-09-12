@@ -290,7 +290,6 @@ public class Sun : ModProjectile
 				{
 					Projectile.velocity = Vector2.Zero;
 				}
-				Main.NewText(Projectile.velocity.Length());
                 Projectile.Center = ClassExtensions.ClampToCircle(Main.player[Projectile.owner].Center, 16 * 30, Projectile.Center);
                 //Projectile.Center = mousePosition;
                 if (planetSpawnTimer == 0)
