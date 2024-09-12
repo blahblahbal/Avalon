@@ -604,24 +604,11 @@ Mods: {
 			Naquadah: Nearby enemies take damage when you are damaged
 			Flesh: Hungry minions can be summoned up to 8
 			Cordyceps: 9% increased summon damage
-
-			Troxinium: {
-				Magic:
-					'''
-					Hitting enemies 15 times guarantees magic crits for the next 10 hits
-					Effect scales down relative to critical strike damage
-					'''
-				Melee:
-					'''
-					Hitting enemies 15 times guarantees melee crits for the next 10 hits
-					Effect scales down relative to critical strike damage
-					'''
-				Ranged:
-					'''
-					Hitting enemies 15 times guarantees ranged crits for the next 10 hits
-					Effect scales down relative to critical strike damage
-					'''
-			}
+			Troxinium:
+				'''
+				Hitting enemies 15 times guarantees {0} crits for the next 10 hits
+				Effect scales down relative to critical strike damage
+				'''
 		}
 
 		PrefixTooltips: {
