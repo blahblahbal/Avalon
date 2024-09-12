@@ -4,6 +4,7 @@ using Avalon.Items.Banners;
 using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -18,7 +19,8 @@ namespace Avalon.NPCs.Hardmode;
 
 public class Blaze : ModNPC
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> glowTexture;
+	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 4;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
@@ -27,6 +29,7 @@ public class Blaze : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
         Data.Sets.NPC.Fiery[NPC.type] = true;
+		glowTexture = ModContent.Request<Texture2D>(Texture + "Glow");
     }
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
@@ -78,7 +81,7 @@ public class Blaze : ModNPC
         float glow = ((float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.5f + 0.5f);
         for (int i = 0; i < 4; i++)
         {
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "Glow").Value,
+            Main.spriteBatch.Draw(glowTexture.Value,
                 new Vector2(NPC.position.X - vector.X + (NPC.width / 2) - (TextureAssets.Npc[NPC.type].Width() * NPC.scale / 2f) + (vector13.X * NPC.scale), NPC.position.Y - Main.screenPosition.Y + NPC.height - (TextureAssets.Npc[NPC.type].Height() * NPC.scale / Main.npcFrameCount[NPC.type]) + 4f +(vector13.Y * NPC.scale) + num66) + new Vector2(0,2 * glow).RotatedBy(i * MathHelper.PiOver2)
                 , NPC.frame, new Color(200, 200, 200, 0) * glow * 0.3f, NPC.rotation, vector13,
                 NPC.scale, effects, 0f);

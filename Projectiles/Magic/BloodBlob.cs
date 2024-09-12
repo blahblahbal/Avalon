@@ -1,7 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -9,9 +11,11 @@ namespace Avalon.Projectiles.Magic;
 
 public class BloodBlob : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         Main.projFrames[Projectile.type] = 4;
+        texture = TextureAssets.Projectile[Type];
     }
     public override void SetDefaults()
     {
@@ -85,14 +89,13 @@ public class BloodBlob : ModProjectile
 
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Magic/BloodBlob").Value;
-        int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+        int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
 
-        Main.EntitySpriteDraw(texture, drawPos, frame, Color.White * 0.25f, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale * 1.2f, Projectile.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, Color.White * 0.25f, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale * 1.2f, Projectile.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
-        Main.EntitySpriteDraw(texture, drawPos, frame, Color.Lerp(Color.White, lightColor, 0.6f), Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, Projectile.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, Color.Lerp(Color.White, lightColor, 0.6f), Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, Projectile.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
         return false;
     }

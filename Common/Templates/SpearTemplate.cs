@@ -11,7 +11,12 @@ namespace Avalon.Common.Templates;
 
 public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! ! 
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	public override void Load()
+	{
+		texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Sparkly");
+	}
+	public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.Spear);
         //Projectile.aiStyle = -1;
@@ -74,7 +79,6 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
         Offset = Offset.RotatedBy(Projectile.rotation);
         Offset.X *= -Projectile.direction;
         Player player = Main.player[Projectile.owner];
-        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Assets/Sparkly").Value;
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
 
@@ -88,7 +92,7 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
             for (int i = 1; i < Intensity; i++)
             {
                 j--;
-                Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + Offset.RotatedBy(Projectile.rotation) + new Vector2(0, i * 10 * Scale.Y * -Projectile.direction).RotatedBy(Projectile.rotation), frame, color * (j ), Projectile.rotation, frameOrigin, Scale - new Vector2(i / Intensity), SpriteEffects.None);
+                Main.EntitySpriteDraw(texture.Value, Projectile.Center - Main.screenPosition + Offset.RotatedBy(Projectile.rotation) + new Vector2(0, i * 10 * Scale.Y * -Projectile.direction).RotatedBy(Projectile.rotation), frame, color * (j ), Projectile.rotation, frameOrigin, Scale - new Vector2(i / Intensity), SpriteEffects.None);
             }
         }
     }

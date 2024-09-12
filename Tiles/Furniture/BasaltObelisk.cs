@@ -16,14 +16,16 @@ using Avalon.Waters;
 namespace Avalon.Tiles.Furniture
 {
     public class BasaltObelisk : ModTile
-    {
-        public override void SetStaticDefaults()
+	{
+		private static Asset<Texture2D> Glow;
+		public override void SetStaticDefaults()
         {
-            Main.tileFrameImportant[Type] = true; // Any multitile requires this
+			Main.tileFrameImportant[Type] = true; // Any multitile requires this
 			Main.tileLighted[Type] = true;
 			TileID.Sets.InteractibleByNPCs[Type] = true; // Town NPCs will palm their hand at this tile
 
             DustType = DustID.Wraith;
+			Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 
             TileObjectData.newTile.CopyFrom(TileObjectData.GetTileData(TileID.VoidMonolith, 0));
             TileObjectData.newTile.LavaDeath = false; // Does not break when lava touches it
@@ -68,7 +70,7 @@ namespace Avalon.Tiles.Furniture
 			Rectangle drawRectangle = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 
 			// The flame is manually drawn separate from the tile texture so that it can be drawn at full brightness.
-			Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Glow").Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, drawRectangle, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(Glow.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, drawRectangle, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 		}
 	}
 }

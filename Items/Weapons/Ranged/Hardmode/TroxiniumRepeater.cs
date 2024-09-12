@@ -32,7 +32,7 @@ public class TroxiniumRepeater : ModItem
         Item.height = dims.Height;
         if (!Main.dedServ)
         {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow.Value;
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
         }
         Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = -5;
         Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = 0;

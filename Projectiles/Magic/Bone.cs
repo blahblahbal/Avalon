@@ -1,8 +1,10 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,7 +12,12 @@ namespace Avalon.Projectiles.Magic;
 
 public class Bone1 : ModProjectile
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+        texture = TextureAssets.Projectile[Type];
+	}
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Projectile.width = dims.Width;
@@ -35,16 +42,15 @@ public class Bone1 : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
         Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin;
 
         for (int i = 1; i < 4; i++)
         {
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override void OnKill(int timeLeft)
@@ -58,7 +64,12 @@ public class Bone1 : ModProjectile
 }
 public class Bone2 : ModProjectile
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+        texture = TextureAssets.Projectile[Type];
+	}
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Projectile.width = dims.Width;
@@ -82,16 +93,15 @@ public class Bone2 : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
         Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin;
 
         for (int i = 1; i < 4; i++)
         {
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override void OnKill(int timeLeft)
@@ -135,7 +145,12 @@ public class Bone2 : ModProjectile
 }
 public class Bone3 : ModProjectile
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+        texture = TextureAssets.Projectile[Type];
+	}
+	public override void SetDefaults()
     {
         Projectile.width = 16;
         Projectile.height = 16;
@@ -168,16 +183,15 @@ public class Bone3 : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
         Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin;
 
         for (int i = 1; i < 4; i++)
         {
-            Main.EntitySpriteDraw(texture, new Vector2(drawPos.X - 9, drawPos.Y - 8) + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, new Vector2(drawPos.X - 9, drawPos.Y - 8) + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, new Vector2(drawPos.X - 9, drawPos.Y - 8), frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, new Vector2(drawPos.X - 9, drawPos.Y - 8), frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override void OnKill(int timeLeft)
@@ -192,6 +206,11 @@ public class Bone3 : ModProjectile
 public class Bone4 : ModProjectile
 {
     public float bounces = 3;
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+		texture = TextureAssets.Projectile[Type];
+	}
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
@@ -217,16 +236,15 @@ public class Bone4 : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
         Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin;
 
         for (int i = 1; i < 4; i++)
         {
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)

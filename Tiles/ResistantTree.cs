@@ -8,10 +8,14 @@ using Terraria.ModLoader;
 namespace Avalon.Tiles
 {
     public class ResistantTree : ModTree
-    {
-        // This is a blind copy-paste from Vanilla's PurityPalmTree settings.
-        //TODO: This needs some explanations
-        public override TreePaintingSettings TreeShaderSettings => new TreePaintingSettings
+	{
+		private Asset<Texture2D> texture;
+		private Asset<Texture2D> branchesTexture;
+		private Asset<Texture2D> topsTexture;
+
+		// This is a blind copy-paste from Vanilla's PurityPalmTree settings.
+		//TODO: This needs some explanations
+		public override TreePaintingSettings TreeShaderSettings => new TreePaintingSettings
         {
             UseSpecialGroups = true,
             SpecialGroupMinimalHueValue = 11f / 72f,
@@ -24,7 +28,10 @@ namespace Avalon.Tiles
         {
             // Makes Example Tree grow on ExampleBlock
             GrowsOnTileId = new int[1] { ModContent.TileType<Ectograss>() };
-        }
+			texture = ModContent.Request<Texture2D>("Avalon/Tiles/ResistantTree");
+			branchesTexture = ModContent.Request<Texture2D>("Avalon/Tiles/ResistantTree_Branches");
+			topsTexture = ModContent.Request<Texture2D>("Avalon/Tiles/ResistantTree_Tops");
+		}
 
         public override int CreateDust()
         {
@@ -34,7 +41,7 @@ namespace Avalon.Tiles
         // This is the primary texture for the trunk. Branches and foliage use different settings.
         public override Asset<Texture2D> GetTexture()
         {
-            return ModContent.Request<Texture2D>("Avalon/Tiles/ResistantTree");
+			return texture;
         }
 
         public override int SaplingGrowthType(ref int style)
@@ -49,16 +56,10 @@ namespace Avalon.Tiles
         }
 
         // Branch Textures
-        public override Asset<Texture2D> GetBranchTextures()
-        {
-            return ModContent.Request<Texture2D>("Avalon/Tiles/ResistantTree_Branches");
-        }
+        public override Asset<Texture2D> GetBranchTextures() => branchesTexture;
 
         // Top Textures
-        public override Asset<Texture2D> GetTopTextures()
-        {
-            return ModContent.Request<Texture2D>("Avalon/Tiles/ResistantTree_Tops");
-        }
+        public override Asset<Texture2D> GetTopTextures() => topsTexture;
 
         public override int DropWood()
         {

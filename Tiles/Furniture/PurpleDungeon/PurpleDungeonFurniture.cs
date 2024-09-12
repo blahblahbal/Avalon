@@ -1,6 +1,7 @@
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -30,7 +31,12 @@ public class PurpleDungeonBookcase : BookcaseTemplate { }
 public class PurpleDungeonCandelabra : CandelabraTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonCandelabra>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? flameTexture;
+	public override void SetStaticDefaults()
+	{
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
 		if (tile.TileFrameX <= 36)
@@ -60,7 +66,7 @@ public class PurpleDungeonCandelabra : CandelabraTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -68,7 +74,12 @@ public class PurpleDungeonCandelabra : CandelabraTemplate
 public class PurpleDungeonCandle : CandleTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonCandle>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? flameTexture;
+	public override void SetStaticDefaults()
+	{
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
@@ -98,7 +109,7 @@ public class PurpleDungeonCandle : CandleTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
@@ -113,11 +124,13 @@ public class PurpleDungeonChandelier : ChandelierTemplate
     public override Color FlameColor => new Color(198, 171, 108, 0);
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonChandelier>();
     public List<Point> Coordinates = new List<Point>();
-    public override void SetStaticDefaults()
-    {
-        base.SetStaticDefaults();
-        Coordinates = new();
-    }
+	private static Asset<Texture2D>? flameTexture;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		Coordinates = new();
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
         Point p = new(i, j);
@@ -232,7 +245,7 @@ public class PurpleDungeonChandelier : ChandelierTemplate
                     {
                         float x = Utils.RandomInt(ref randSeed, -10, 11) * FlameJitterMultX;
                         float y = Utils.RandomInt(ref randSeed, -10, 1) * FlameJitterMultY;
-                        spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
+                        spriteBatch.Draw(flameTexture.Value, vector6 + new Vector2(x, y), (Rectangle?)rectangle, FlameColor, rotation, vector5, 1f, tileSpriteEffect, 0f);
                     }
                 }
             }
@@ -294,7 +307,12 @@ public class PurpleDungeonDresser : DresserTemplate
 public class PurpleDungeonLamp : LampTemplate
 {
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.PurpleDungeon.PurpleDungeonLamp>();
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	private static Asset<Texture2D>? flameTexture;
+	public override void SetStaticDefaults()
+	{
+		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
+	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         Tile tile = Main.tile[i, j];
         if (tile.TileFrameX == 0)
@@ -324,7 +342,7 @@ public class PurpleDungeonLamp : LampTemplate
         {
             float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(flameTexture.Value, new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
 }

@@ -2,19 +2,25 @@ using Avalon.Particles;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Ranged
 {
     public class CrystalTomahawk : ModProjectile
-    {
-        public override void SetStaticDefaults()
+	{
+		private static Asset<Texture2D> trailTexture;
+		private static Asset<Texture2D> texture;
+		public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+            trailTexture = ModContent.Request<Texture2D>(Texture + "_Trail");
+            texture = TextureAssets.Projectile[Type];
         }
         public override void SetDefaults()
         {
@@ -136,10 +142,8 @@ namespace Avalon.Projectiles.Ranged
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D textureTrail = ModContent.Request<Texture2D>(Texture + "_Trail").Value;
-            Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-            int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+            int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
             int length = ProjectileID.Sets.TrailCacheLength[Projectile.type];
             SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Color[] Colors = { Color.LightSkyBlue, Color.Magenta, Color.White, Color.Magenta };
@@ -149,10 +153,10 @@ namespace Avalon.Projectiles.Ranged
             for (int i = 1; i < length; i++)
             {
                 float multiply = (float)(length - i) / length;
-                Main.EntitySpriteDraw(textureTrail, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, Color1 * multiply, Projectile.oldRot[i], new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);
+                Main.EntitySpriteDraw(trailTexture.Value, Projectile.oldPos[i] - Main.screenPosition + (Projectile.Size / 2f), frame, Color1 * multiply, Projectile.oldRot[i], new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);
             }
 
-            Main.EntitySpriteDraw(texture, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, Color.Lerp(lightColor, Color.White, 0.5f) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);
+            Main.EntitySpriteDraw(texture.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, Color.Lerp(lightColor, Color.White, 0.5f) * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, spriteEffects, 0);
 
             return false;
         }

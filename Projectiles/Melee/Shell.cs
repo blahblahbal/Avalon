@@ -6,16 +6,19 @@ using Terraria.Audio;
 using Terraria.ID;
 using Avalon.Data.Sets;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 
 namespace Avalon.Projectiles.Melee;
 
 public class Shell : ModProjectile
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
     {
         Main.projFrames[Projectile.type] = 4;
         ProjectileID.Sets.TrailCacheLength[Type] = 6;
         ProjectileID.Sets.TrailingMode[Type] = 2;
+        texture = ModContent.Request<Texture2D>(Texture);
     }
     public override void SetDefaults()
     {
@@ -47,17 +50,16 @@ public class Shell : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-        int frameHeight = texture.Height / Main.projFrames[Type];
-        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+        int frameHeight = texture.Value.Height / Main.projFrames[Type];
+        Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
         Vector2 drawPos;
         for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type]; i++)
         {
             drawPos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2;
-            Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity * ((ProjectileID.Sets.TrailCacheLength[Type] - i) / (float)ProjectileID.Sets.TrailCacheLength[Type]) * 0.5f, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor * Projectile.Opacity * ((ProjectileID.Sets.TrailCacheLength[Type] - i) / (float)ProjectileID.Sets.TrailCacheLength[Type]) * 0.5f, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         }
         drawPos = Projectile.Center - Main.screenPosition;
-        Main.EntitySpriteDraw(texture, drawPos, frame, lightColor * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
         return false;
     }
     public override void OnKill(int timeLeft)

@@ -46,7 +46,7 @@ class TroxiniumOre : ModItem
 		Item.MakeUsableWithChlorophyteExtractinator();
 		if (!Main.dedServ)
         {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow.Value;
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
         }
         Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
     }

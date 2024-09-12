@@ -14,16 +14,27 @@ using Terraria.Localization;
 using Avalon.Items.Armor.Hardmode;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
+using ReLogic.Content;
 
 namespace Avalon.NPCs.Hardmode;
 
 public class Cougher : ModNPC
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> textureBlue;
+	private static Asset<Texture2D> textureCyan;
+	private static Asset<Texture2D> texturePink;
+	private static Asset<Texture2D> texturePurple;
+	private static Asset<Texture2D> textureWhite;
+	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 3;
         Data.Sets.NPC.Wicked[NPC.type] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+		textureBlue = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/BluePartyHat");
+		textureCyan = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/CyanPartyHat");
+		texturePink = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/PinkPartyHat");
+		texturePurple = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/PurplePartyHat");
+		textureWhite = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/WhitePartyHat");
 	}
     static SoundStyle Cough = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCough")
     {
@@ -54,26 +65,26 @@ public class Cougher : ModNPC
             Rectangle frame = NPC.frame;
             Vector2 drawPos = NPC.position + new Vector2(18, -2);
             Vector2 drawPos2 = RotateAboutOrigin(drawPos, NPC.Center, NPC.rotation) - Main.screenPosition;
-            var texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/WhitePartyHat").Value;
+            var texture = textureWhite;
             switch ((int)NPC.ai[3])
             {
                 case 0:
-                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/BluePartyHat").Value;
+					texture = textureBlue;
                     break;
                 case 1:
-                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/CyanPartyHat").Value;
+					texture = textureCyan;
                     break;
                 case 2:
-                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/PinkPartyHat").Value;
+					texture = texturePink;
                     break;
                 case 3:
-                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/PurplePartyHat").Value;
+					texture = texturePurple;
                     break;
                 case 4:
-                    texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/WhitePartyHat").Value;
+					texture = textureWhite;
                     break;
             }
-            Main.spriteBatch.Draw(texture, drawPos2, frame, Color.White, NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(texture.Value, drawPos2, frame, Color.White, NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
         }
     }
     public override void SetDefaults()

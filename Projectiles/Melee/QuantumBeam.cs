@@ -7,12 +7,21 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
 using System;
 using Avalon.Particles;
+using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.Projectiles.Melee;
 
 public class QuantumBeam : ModProjectile
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D> texture2;
+	public override void SetStaticDefaults()
+	{
+		texture = TextureAssets.Projectile[Type];
+		texture2 = ModContent.Request<Texture2D>(Texture + "2");
+	}
+	public override void SetDefaults()
     {
         Projectile.width = 25;
         Projectile.height = 25;
@@ -188,19 +197,17 @@ public class QuantumBeam : ModProjectile
         };
         Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendS, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
-        Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
-        Texture2D texture2 = (Texture2D)ModContent.Request<Texture2D>(Texture + "2");
         Rectangle frame = texture.Frame();
         Vector2 frameOrigin = frame.Size() / 2f;
         Vector2 offset = new Vector2((Projectile.width / 1) - frameOrigin.X, Projectile.height - frame.Height);
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
-        Main.EntitySpriteDraw(texture, drawPos, frame, Color.Lerp(new Color(64,255,64), new Color(128, 255, 64), Main.masterColor) * Projectile.Opacity, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, Color.Lerp(new Color(64,255,64), new Color(128, 255, 64), Main.masterColor) * Projectile.Opacity, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
 
         Main.spriteBatch.End();
         Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
-        Main.EntitySpriteDraw(texture2, drawPos, frame, Color.Lerp(new Color(255,64,255),new Color(128,64,255),Main.masterColor) * Projectile.Opacity * 0.4f, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(texture2, drawPos, frame, new Color(255, 255, 255, 0) * Projectile.Opacity * 0.2f, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture2.Value, drawPos, frame, Color.Lerp(new Color(255,64,255),new Color(128,64,255),Main.masterColor) * Projectile.Opacity * 0.4f, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture2.Value, drawPos, frame, new Color(255, 255, 255, 0) * Projectile.Opacity * 0.2f, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
 
         Main.spriteBatch.End();
         Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);

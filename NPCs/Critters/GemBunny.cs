@@ -2,6 +2,7 @@ using Avalon.Dusts;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
@@ -133,8 +134,13 @@ public abstract class GemBunny : ModNPC
             }
         }
         return 0;
-    }
-    public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+	}
+	private static Asset<Texture2D> glowTexture;
+	public override void Load()
+	{
+		glowTexture = ModContent.Request<Texture2D>("Avalon/NPCs/Critters/GemBunny_Glow");
+	}
+	public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
         SpriteEffects spriteEffects = SpriteEffects.None;
         if (NPC.direction == 1)
@@ -145,7 +151,7 @@ public abstract class GemBunny : ModNPC
         float num35 = 0f;
         float num36 = Main.NPCAddHeight(NPC);
         Vector2 halfSize = new Vector2(TextureAssets.Npc[Type].Width() / 2, TextureAssets.Npc[Type].Height() / Main.npcFrameCount[Type] / 2);
-        Main.spriteBatch.Draw(ModContent.Request<Texture2D>("Avalon/NPCs/Critters/GemBunny_Glow").Value, new Vector2(NPC.position.X - screenPos.X + (float)(NPC.width / 2) - (float)TextureAssets.Npc[Type].Width() * NPC.scale / 2f + halfSize.X * NPC.scale, NPC.position.Y - screenPos.Y + (float)NPC.height - (float)TextureAssets.Npc[Type].Height() * NPC.scale / (float)Main.npcFrameCount[Type] + 4f + halfSize.Y * NPC.scale + num36 + num35 + NPC.gfxOffY), frame6, NPC.GetAlpha(Color.White), NPC.rotation, halfSize, NPC.scale, spriteEffects, 0f);
+        Main.spriteBatch.Draw(glowTexture.Value, new Vector2(NPC.position.X - screenPos.X + (float)(NPC.width / 2) - (float)TextureAssets.Npc[Type].Width() * NPC.scale / 2f + halfSize.X * NPC.scale, NPC.position.Y - screenPos.Y + (float)NPC.height - (float)TextureAssets.Npc[Type].Height() * NPC.scale / (float)Main.npcFrameCount[Type] + 4f + halfSize.Y * NPC.scale + num36 + num35 + NPC.gfxOffY), frame6, NPC.GetAlpha(Color.White), NPC.rotation, halfSize, NPC.scale, spriteEffects, 0f);
     }
 }
 public class PeridotBunny : GemBunny

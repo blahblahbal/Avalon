@@ -42,7 +42,7 @@ public class TroxiniumWaraxe : ModItem
         Item.value = Item.sellPrice(0, 2, 28, 0);
         if (!Main.dedServ)
         {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow.Value;
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
         }
         Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
     }

@@ -4,14 +4,22 @@ using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using Avalon.PlayerDrawLayers;
+using ReLogic.Content;
 
 namespace Avalon.Items.OreChunks;
 
 class TroxiniumChunk : ModItem
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> glow;
+	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 200;
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+        if (!Main.dedServ)
+        {
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
+        }
+        Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
     }
 
     public override void SetDefaults()
@@ -22,11 +30,6 @@ class TroxiniumChunk : ModItem
         Item.value = 100;
         Item.height = dims.Height;
         Item.rare = ItemRarityID.LightRed;
-        if (!Main.dedServ)
-        {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-        }
-        Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
     }
     public override Color? GetAlpha(Color lightColor)
     {

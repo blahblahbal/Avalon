@@ -14,11 +14,11 @@ namespace Avalon.Projectiles.Melee
     // Example Advanced Flail shows a plethora of advanced AI and collision topics.
     // See ExampleFlail for a simpler but less customizable flail projectile example.
     public class CaesiumMace : ModProjectile
-    {
-        private const string ChainTexturePath = "Avalon/Projectiles/Melee/CaesiumMace_Chain"; // The folder path to the flail chain sprite
-        //private const string ChainTextureExtraPath = "Avalon/Projectiles/Melee/CaesiumFlail_Chain";  // This texture and related code is optional and used for a unique effect
+	{
+		private static Asset<Texture2D> chainTexture;
+		//private static Asset<Texture2D> chainTextureExtra;
 
-        private enum AIState
+		private enum AIState
         {
             Spinning,
             LaunchingForward,
@@ -51,6 +51,9 @@ namespace Avalon.Projectiles.Melee
             // These lines facilitate the trail drawing
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+
+            chainTexture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/CaesiumMace_Chain"); // The folder path to the flail chain sprite
+            //chainTextureExtra = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/CaesiumFlail_Chain"); // This texture and related code is optional and used for a unique effect
         }
 
         public override void SetDefaults()
@@ -471,9 +474,6 @@ namespace Avalon.Projectiles.Melee
 
             // This fixes a vanilla GetPlayerArmPosition bug causing the chain to draw incorrectly when stepping up slopes. The flail itself still draws incorrectly due to another similar bug. This should be removed once the vanilla bug is fixed.
             playerArmPosition.Y -= Main.player[Projectile.owner].gfxOffY;
-
-            Asset<Texture2D> chainTexture = ModContent.Request<Texture2D>(ChainTexturePath);
-            //Asset<Texture2D> chainTextureExtra = ModContent.Request<Texture2D>(ChainTextureExtraPath); // This texture and related code is optional and used for a unique effect
 
             Rectangle? chainSourceRectangle = null;
             // Drippler Crippler customizes sourceRectangle to cycle through sprite frames: sourceRectangle = asset.Frame(1, 6);

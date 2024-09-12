@@ -7,14 +7,20 @@ using Avalon.Data.Sets;
 using Avalon.Dusts;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria.GameContent;
 
 namespace Avalon.Projectiles.Ranged;
 
 public class BoompipeShrapnel : ModProjectile
 {
+	private static Asset<Texture2D> glow;
+	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 4;
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		texture = TextureAssets.Projectile[Type];
 	}
 	public override void SetDefaults()
     {
@@ -79,14 +85,12 @@ public class BoompipeShrapnel : ModProjectile
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		Texture2D textureGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-		Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-		int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-		Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+		int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+		Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
 		Color glowLerp = Color.Lerp(new Color(255, 255, 255, 0), new Color(0, 0, 0, 0), (initialTimeLeft - Projectile.timeLeft) / glowLerpDiv);
 
-		Main.EntitySpriteDraw(texture, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, lightColor, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(textureGlow, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, glowLerp, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, lightColor, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(glow.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, glowLerp, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 		return false;
 	}
 }

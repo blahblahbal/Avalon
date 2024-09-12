@@ -38,7 +38,7 @@ class PointingLaser : ModItem
         Item.height = dims.Height;
         if (!Main.dedServ)
         {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow.Value;
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
         }
     }
     public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

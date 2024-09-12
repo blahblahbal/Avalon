@@ -1,6 +1,7 @@
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -10,7 +11,16 @@ namespace Avalon.Items.Weapons.Blah;
 
 class BlahsEnergyBlade : ModItem
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> glow;
+	public override void SetStaticDefaults()
+	{
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+        if (!Main.dedServ)
+        {
+            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
+        }
+	}
+	public override void SetDefaults()
     {
         Item.width = 50;
         Item.height = 54;
@@ -28,10 +38,6 @@ class BlahsEnergyBlade : ModItem
         Item.value = Item.sellPrice(0, 25, 0, 0);
         Item.crit = 10;
         Item.useAnimation = 14;
-        if (!Main.dedServ)
-        {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-        }
     }
     public override Color? GetAlpha(Color lightColor)
     {
@@ -60,7 +66,7 @@ class BlahsEnergyBlade : ModItem
         Vector2 value = new Vector2((float)(Item.width / 2) - vector.X, Item.height - dims.Height);
         Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
         float num = Item.velocity.X * 0.2f;
-        spriteBatch.Draw((Texture2D)ModContent.Request<Texture2D>(Texture + "_Glow"), vector2, dims, new Color(250, 250, 250, 250), num, vector, scale, SpriteEffects.None, 0f);
+        spriteBatch.Draw(glow.Value, vector2, dims, new Color(250, 250, 250, 250), num, vector, scale, SpriteEffects.None, 0f);
     }
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {

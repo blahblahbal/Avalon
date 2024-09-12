@@ -27,7 +27,8 @@ public abstract class SpecialLight : ModTile
 
 public abstract class ModTorch : SpecialLight
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> textureFlame;
+	public override void SetStaticDefaults()
     {
         RegisterItemDrop(TorchItem);
 
@@ -66,6 +67,7 @@ public abstract class ModTorch : SpecialLight
         AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Torch"));
         //DustType = DustID.JungleSpore;
         AdjTiles = new int[] { TileID.Torches };
+		textureFlame = ModContent.Request<Texture2D>(Texture + "_Flame");
     }
     public override bool CreateDust(int i, int j, ref int type)
     {
@@ -166,7 +168,7 @@ public abstract class ModTorch : SpecialLight
         {
             var x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
             var y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(textureFlame.Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
     public override void MouseOver(int i, int j)
@@ -219,7 +221,8 @@ public abstract class ModTorch : SpecialLight
 
 public abstract class ModCampfire : SpecialLight
 {
-    public override void SetStaticDefaults()
+	private static Asset<Texture2D> textureFlame;
+	public override void SetStaticDefaults()
     {
         RegisterItemDrop(TorchItem);
 
@@ -234,6 +237,7 @@ public abstract class ModCampfire : SpecialLight
 
         DustType = -1; // No dust when mined.
         AdjTiles = new int[] { TileID.Campfire };
+		textureFlame = ModContent.Request<Texture2D>(Texture + "_Flame");
 
         // Placement
         TileObjectData.newTile.CopyFrom(TileObjectData.GetTileData(TileID.Campfire, 0));
@@ -406,7 +410,7 @@ public abstract class ModCampfire : SpecialLight
             Rectangle drawRectangle = new Rectangle(tile.TileFrameX, tile.TileFrameY + addFrY, 16, 16);
 
             // The flame is manually drawn separate from the tile texture so that it can be drawn at full brightness.
-            Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, drawRectangle, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(textureFlame.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, drawRectangle, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
     }
 }

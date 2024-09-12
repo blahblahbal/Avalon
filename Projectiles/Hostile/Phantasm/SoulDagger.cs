@@ -11,13 +11,23 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Avalon.Common;
 using Avalon.Buffs.Debuffs;
+using ReLogic.Content;
 
 namespace Avalon.Projectiles.Hostile.Phantasm;
 
 public class SoulDagger : ModProjectile
 {
     public int alpha = 255;
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture0;
+	private static Asset<Texture2D> texture1;
+	private static Asset<Texture2D> texture2;
+	public override void SetStaticDefaults()
+	{
+		texture0 = TextureAssets.Projectile[Type];
+		texture1 = ModContent.Request<Texture2D>("Avalon/Projectiles/Hostile/Phantasm/SoulDagger1");
+		texture2 = ModContent.Request<Texture2D>("Avalon/Projectiles/Hostile/Phantasm/SoulDagger2");
+	}
+	public override void SetDefaults()
     {
         Projectile.width = 9;
         Projectile.height = 9;
@@ -203,25 +213,25 @@ public class SoulDagger : ModProjectile
     public int randTex = Main.rand.Next(3);
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Hostile/Phantasm/SoulDagger").Value;
+        Asset<Texture2D> texture = texture0;
         if (randTex == 1)
         {
-            texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Hostile/Phantasm/SoulDagger1").Value;
+            texture = texture1;
         }
         if (randTex == 2)
         {
-            texture = ModContent.Request<Texture2D>("Avalon/Projectiles/Hostile/Phantasm/SoulDagger2").Value;
+            texture = texture2;
         }
         Rectangle frame = texture.Frame();
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
         Color color = new Color(alpha, alpha, alpha, (alpha / 4) * 3);
         for (int i = 1; i < 4; i++)
         {
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(Projectile.velocity.X * (-i * 1), Projectile.velocity.Y * (-i * 1)), frame, (color * (1 - (i * 0.25f))) * 0.75f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 20f), Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 1), Projectile.velocity.Y * (-i * 1)), frame, (color * (1 - (i * 0.25f))) * 0.75f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 20f), Projectile.scale, SpriteEffects.None, 0);
         }
-        Main.EntitySpriteDraw(texture, drawPos, frame, color, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 20f), Projectile.scale, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(texture, drawPos, frame, color * 0.3f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 14f), Projectile.scale * 1.3f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(texture, drawPos, frame, color * 0.15f, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 10f), Projectile.scale * 1.6f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, color, Projectile.rotation, texture.Value.Size() / 2f - new Vector2(0, 20f), Projectile.scale, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, color * 0.3f, Projectile.rotation, texture.Value.Size() / 2f - new Vector2(0, 14f), Projectile.scale * 1.3f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos, frame, color * 0.15f, Projectile.rotation, texture.Value.Size() / 2f - new Vector2(0, 10f), Projectile.scale * 1.6f, SpriteEffects.None, 0);
         return false;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)

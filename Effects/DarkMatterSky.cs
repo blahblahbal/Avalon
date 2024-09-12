@@ -167,7 +167,7 @@ public class DarkMatterSky : CustomSky
         // Draw the spiral clouds
         spriteBatch.Draw(darkMatterBackgrounds[surfaceFrame].Value, new Vector2(xPos, yPos),
             new Rectangle(0, 0, 819, 819), Color.White, 0, new Vector2(819, 819) / 2f,
-            GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / (819 - 336), SpriteEffects.None, 0);
+            GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 635f, SpriteEffects.None, 0);
 
 
         //spriteBatch.Draw(darkMatterBackgrounds[surfaceFrame].Value, new Vector2(xPos, yPos), null,

@@ -1,19 +1,23 @@
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Ranged.Held
 {
     public class StasisRifleHeld : ModProjectile
-    {
-        public override void SetStaticDefaults()
+	{
+		private static Asset<Texture2D> texture;
+		public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
+            texture = TextureAssets.Projectile[Type];
         }
         public override bool? CanDamage()
         {
@@ -94,12 +98,11 @@ namespace Avalon.Projectiles.Ranged.Held
         public override bool PreDraw(ref Color lightColor)
         {
             SpriteEffects Flip = Projectile.direction == -1 ? SpriteEffects.FlipVertically : SpriteEffects.None;
-            Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-            int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Width, frameHeight);
+            int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+            Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             drawPos.Y += Main.player[Projectile.owner].gfxOffY;
-            Main.EntitySpriteDraw(texture, drawPos + new Vector2(0, -4), frame, lightColor, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2,Projectile.scale, Flip, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(0, -4), frame, lightColor, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2,Projectile.scale, Flip, 0);
             return false;
         }
     }

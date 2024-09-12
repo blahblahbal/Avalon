@@ -1,8 +1,10 @@
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,7 +12,12 @@ namespace Avalon.Projectiles;
 
 public class PointingLaser : ModProjectile
 {
-    public override void SetDefaults()
+	private static Asset<Texture2D> texture;
+	public override void SetStaticDefaults()
+	{
+        texture = TextureAssets.Projectile[Type];
+	}
+	public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
         Projectile.width = dims.Width * 4 / 1;
@@ -35,8 +42,7 @@ public class PointingLaser : ModProjectile
     {
         start -= Main.screenPosition;
         end -= Main.screenPosition;
-        Texture2D TEX = ModContent.Request<Texture2D>(Texture).Value;
-        int linklength = TEX.Height;
+        int linklength = texture.Value.Height;
         Vector2 chain = end - start;
 
         float length = (float)chain.Length();
@@ -75,7 +81,7 @@ public class PointingLaser : ModProjectile
             }
             #endregion
             c.A = 255;
-            Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), c, rotation + 1.57f, new Vector2(TEX.Width / 2f, linklength), 2f,
+            Main.spriteBatch.Draw(texture.Value, links[i], new Rectangle(0, 0, texture.Value.Width, linklength), c, rotation + 1.57f, new Vector2(texture.Value.Width / 2f, linklength), 2f,
                 SpriteEffects.None, 1f);
         }
     }

@@ -15,16 +15,22 @@ using static Terraria.WorldGen;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Material.Ores;
 using Terraria.Graphics.Capture;
+using ReLogic.Content;
 
 namespace Avalon.Tiles.GemTrees;
 
 public class TourmalineTree : ModTile
 {
     private readonly string TexturePath = "Avalon/Tiles/GemTrees/TourmalineGemTree";
+	private Asset<Texture2D> branchesTexture;
+	private Asset<Texture2D> topsTexture;
 
-    public override void SetStaticDefaults()
-    {
-        Main.tileAxe[Type] = true;
+	public override void SetStaticDefaults()
+	{
+		branchesTexture = ModContent.Request<Texture2D>(TexturePath + "_Branches");
+		topsTexture = ModContent.Request<Texture2D>(TexturePath + "_Tops");
+
+		Main.tileAxe[Type] = true;
         Main.tileFrameImportant[Type] = true;
         TileID.Sets.CountsAsGemTree[Type] = true;
         TileID.Sets.IsATreeTrunk[Type] = true;
@@ -298,11 +304,6 @@ public class TourmalineTree : ModTile
                             return;
                         }
                         EmitTourmalineLeaves(x, y, grassPosX, floorY3);
-                        Texture2D treeTopTexture = null;
-                        if (treeTopTexture == null)
-                        {
-                            treeTopTexture = (Texture2D)ModContent.Request<Texture2D>(TexturePath + "_Tops");
-                        }
                         Vector2 vector = new Vector2((float)(x * 16 - (int)unscaledPosition.X + 8 + PositioningFix), (float)(y * 16 - (int)unscaledPosition.Y + 16 + PositioningFix)) + zero;
                         float num7 = 0f;
                         if (!flag)
@@ -316,7 +317,7 @@ public class TourmalineTree : ModTile
                         {
                             color6 = Color.White;
                         }
-                        Main.spriteBatch.Draw(treeTopTexture, vector, (Rectangle?)new Rectangle(treeFrame * (topTextureFrameWidth3 + 2), 0, topTextureFrameWidth3, topTextureFrameHeight3), color6, num7 * num15, new Vector2((float)(topTextureFrameWidth3 / 2), (float)topTextureFrameHeight3), 1f, (SpriteEffects)0, 0f);
+                        Main.spriteBatch.Draw(topsTexture.Value, vector, (Rectangle?)new Rectangle(treeFrame * (topTextureFrameWidth3 + 2), 0, topTextureFrameWidth3, topTextureFrameHeight3), color6, num7 * num15, new Vector2((float)(topTextureFrameWidth3 / 2), (float)topTextureFrameHeight3), 1f, (SpriteEffects)0, 0f);
                         break;
                     }
                 case 44:
@@ -328,11 +329,6 @@ public class TourmalineTree : ModTile
                             return;
                         }
                         EmitTourmalineLeaves(x, y, num21 + num2, floorY2);
-                        Texture2D treeBranchTexture2 = null;
-                        if (treeBranchTexture2 == null)
-                        {
-                            treeBranchTexture2 = (Texture2D)ModContent.Request<Texture2D>(TexturePath + "_Branches");
-                        }
                         Vector2 position2 = new Vector2((float)(x * 16) + PositioningFix, (float)(y * 16) + PositioningFix) - unscaledPosition.Floor() + zero + new Vector2(16f, 12f);
                         float num4 = 0f;
                         if (!flag)
@@ -349,7 +345,7 @@ public class TourmalineTree : ModTile
                         {
                             color4 = Color.White;
                         }
-                        Main.spriteBatch.Draw(treeBranchTexture2, position2, (Rectangle?)new Rectangle(0, treeFrame * 42, 40, 40), color4, num4 * num16, new Vector2(40f, 24f), 1f, (SpriteEffects)0, 0f);
+                        Main.spriteBatch.Draw(branchesTexture.Value, position2, (Rectangle?)new Rectangle(0, treeFrame * 42, 40, 40), color4, num4 * num16, new Vector2(40f, 24f), 1f, (SpriteEffects)0, 0f);
                         break;
                     }
                 case 66:
@@ -361,11 +357,6 @@ public class TourmalineTree : ModTile
                             return;
                         }
                         EmitTourmalineLeaves(x, y, num17 + num18, floorY);
-                        Texture2D treeBranchTexture = null;
-                        if (treeBranchTexture == null)
-                        {
-                            treeBranchTexture = (Texture2D)ModContent.Request<Texture2D>(TexturePath + "_Branches");
-                        }
                         Vector2 position = new Vector2((float)(x * 16) + PositioningFix, (float)(y * 16) + PositioningFix) - unscaledPosition.Floor() + zero + new Vector2(0f, 18f);
                         float num20 = 0f;
                         if (!flag)
@@ -382,7 +373,7 @@ public class TourmalineTree : ModTile
                         {
                             color2 = Color.White;
                         }
-                        Main.spriteBatch.Draw(treeBranchTexture, position, (Rectangle?)new Rectangle(42, treeFrame * 42, 40, 40), color2, num20 * num16, new Vector2(0f, 30f), 1f, (SpriteEffects)0, 0f);
+                        Main.spriteBatch.Draw(branchesTexture.Value, position, (Rectangle?)new Rectangle(42, treeFrame * 42, 40, 40), color2, num20 * num16, new Vector2(0f, 30f), 1f, (SpriteEffects)0, 0f);
                         break;
                     }
             }
