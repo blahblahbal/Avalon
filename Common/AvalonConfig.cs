@@ -61,4 +61,12 @@ public class AvalonClientConfig : ModConfig
 	[DefaultValue(false)]
 	[ReloadRequired]
 	public bool BetaTropicsGen;
+
+	[DefaultValue(false)]
+	[ReloadRequired]
+	public bool UnimplementedStructureGen;
+
+	[DefaultValue(false)]
+	[ReloadRequired]
+	public bool SuperhardmodeStuff;
 }

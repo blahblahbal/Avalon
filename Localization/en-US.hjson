@@ -10815,7 +10815,17 @@ Mods: {
 
 				BetaTropicsGen: {
 					Label: Beta Savanna Gen
-					Tooltip: ""
+					Tooltip: Allows generating a Savanna world.
+				}
+
+				UnimplementedStructureGen: {
+					Label: Structure Generation for Unimplemented (as of yet) Structures
+					Tooltip: Enables Generation of the Hellcastle and Sky Fortress.
+				}
+
+				SuperhardmodeStuff: {
+					Label: Superhardmode Stuff
+					Tooltip: Enables generation of the Caesium Blastplains.
 				}
 			}
 

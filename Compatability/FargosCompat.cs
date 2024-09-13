@@ -7,12 +7,8 @@ namespace Avalon.Compatability;
 
 internal class FargosCompat : ModSystem
 {
-	public override void PostSetupContent()
+	public override void PostSetupRecipes()
 	{
-		//if (ExxoAvalonOrigins.Fargo == null)
-		//{
-		//	return;
-		//}
 		if (ModLoader.TryGetMod("Fargowiltas", out Mod fargos))
 		{
 			fargos.Call("AddEvilAltar", ModContent.TileType<IckyAltar>());

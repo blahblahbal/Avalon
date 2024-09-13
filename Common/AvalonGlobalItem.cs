@@ -2996,22 +2996,13 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override bool CanUseItem(Item item, Player player)
     {
-        // potion/elixir usage lockout
-        if (Data.Sets.Item.ElixirToPotionBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.ElixirToPotionBuffID[item.type]) ||
-            Data.Sets.Item.PotionToElixirBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.PotionToElixirBuffID[item.type]))
-        {
-            return false;
-        }
-        // temporary instavator stoppage
-        if (ExxoAvalonOrigins.Fargo != null)
-        {
-            if (item.type == ExxoAvalonOrigins.Fargo.Find<ModItem>("Instavator").Type && (int)(player.GetModPlayer<AvalonPlayer>().MousePosition.X / 16) >= Main.maxTilesX / 2 - 250 &&
-                (int)(player.GetModPlayer<AvalonPlayer>().MousePosition.X / 16) <= Main.maxTilesX / 2 + 250)
-            {
-                return false;
-            }    
-        }
-        return base.CanUseItem(item, player);
+		// potion/elixir usage lockout
+		if (Data.Sets.Item.ElixirToPotionBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.ElixirToPotionBuffID[item.type]) ||
+			Data.Sets.Item.PotionToElixirBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.PotionToElixirBuffID[item.type]))
+		{
+			return false;
+		}
+		return base.CanUseItem(item, player);
     }
 	public override int ChoosePrefix(Item item, UnifiedRandom rand)
 	{

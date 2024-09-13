@@ -23,6 +23,7 @@ class JungleAxe : ModItem
         Item.UseSound = SoundID.Item1;
         Item.useAnimation = 23;
         Item.height = dims.Height;
+		Item.rare = ItemRarityID.Orange;
     }
     public override void AddRecipes()
     {

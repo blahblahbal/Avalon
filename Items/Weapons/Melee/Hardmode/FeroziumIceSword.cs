@@ -17,7 +17,7 @@ class FeroziumIceSword : ModItem
         Item.scale = 1.5f;
         Item.shootSpeed = 15f;
         Item.crit += 2;
-        Item.rare = ItemRarityID.Lime;
+        Item.rare = ItemRarityID.Pink;
         Item.useTime = 20;
         Item.knockBack = 6f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.IcicleFerozium>();
