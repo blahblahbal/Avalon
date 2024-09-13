@@ -16,6 +16,7 @@ public class BismuthBarbedNet : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ModContent.ItemType<BismuthBroadsword>());
+		Item.autoReuse = true;
         Item.useTurn = true;
         Item.useTime = 23;
         Item.useAnimation = 23;

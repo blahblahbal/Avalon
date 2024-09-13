@@ -16,7 +16,8 @@ public class PlatinumBarbedNet : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.PlatinumBroadsword);
-        Item.useTurn = true;
+		Item.autoReuse = true;
+		Item.useTurn = true;
         Item.useTime = 23;
         Item.useAnimation = 23;
     }
