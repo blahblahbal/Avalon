@@ -328,7 +328,31 @@ public class AvalonGlobalItem : GlobalItem
                 item.Prefix(pfix);
                 return false;
             }
-            if (item.type == ModContent.ItemType<ShadowPhone>())
+			if (item.type == ModContent.ItemType<ManipulatorTime>())
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+				item.ChangeItemType(ModContent.ItemType<ManipulatorMoon>());
+				return false;
+			}
+			if (item.type == ModContent.ItemType<ManipulatorMoon>())
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+				item.ChangeItemType(ModContent.ItemType<ManipulatorRain>());
+				return false;
+			}
+			if (item.type == ModContent.ItemType<ManipulatorRain>())
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+				item.ChangeItemType(ModContent.ItemType<ManipulatorSand>());
+				return false;
+			}
+			if (item.type == ModContent.ItemType<ManipulatorSand>())
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+				item.ChangeItemType(ModContent.ItemType<ManipulatorTime>());
+				return false;
+			}
+			if (item.type == ModContent.ItemType<ShadowPhone>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
                 item.ChangeItemType(ModContent.ItemType<ShadowPhoneSurface>());

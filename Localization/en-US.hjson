@@ -9209,6 +9209,42 @@ Mods: {
 				DisplayName: Savanna Lily
 				Tooltip: ""
 			}
+
+			ManipulatorMoon: {
+				DisplayName: Manipulator (Moon)
+				Tooltip:
+					'''
+					Changes the phases of the moon
+					<right> to change modes
+					'''
+			}
+
+			ManipulatorRain: {
+				DisplayName: Manipulator (Rain)
+				Tooltip:
+					'''
+					Toggles rainfall
+					<right> to change modes
+					'''
+			}
+
+			ManipulatorSand: {
+				DisplayName: Manipulator (Sand)
+				Tooltip:
+					'''
+					Toggles sandstorm
+					<right> to change modes
+					'''
+			}
+
+			ManipulatorTime: {
+				DisplayName: Manipulator (Time)
+				Tooltip:
+					'''
+					Toggles daytime
+					<right> to change modes
+					'''
+			}
 		}
 
 		InfoDisplays: {
