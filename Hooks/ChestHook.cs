@@ -1,6 +1,9 @@
 using Terraria;
 using Avalon.Common;
 using Terraria.ModLoader;
+using Avalon.Tiles.Furniture.OrangeDungeon;
+using Avalon.Tiles.Furniture.PurpleDungeon;
+using Avalon.Tiles.Furniture.YellowDungeon;
 
 namespace Avalon.Hooks
 {
@@ -15,8 +18,11 @@ namespace Avalon.Hooks
             if (t != null)
             {
                 if (t.TileType == ModContent.TileType<Tiles.Furniture.LockedChests>()) return true;
-                if (t.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>() && t.TileFrameX > 34) return true;
-            }
+                if ((t.TileType == ModContent.TileType<OrangeDungeonChest>() ||
+					t.TileType == ModContent.TileType<PurpleDungeonChest>() ||
+					t.TileType == ModContent.TileType<YellowDungeonChest>() ||
+					t.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>()) && t.TileFrameX > 34) return true;
+			}
             return orig(i, j, t);
         }
     }

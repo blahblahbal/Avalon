@@ -2671,12 +2671,7 @@ Mods: {
 
 			BloodyWhetstone: {
 				DisplayName: Bloody Whetstone
-				Tooltip: Melee attacks inflict Lacerated
-			}
-
-			BloodyNecklace: {
-				DisplayName: Bloody Necklace
-				Tooltip: Melee attacks inflict Lacerated and 15 increased armor penetration
+				Tooltip: True melee attacks inflict Lacerated
 			}
 
 			DesertLongsword: {
@@ -2693,7 +2688,7 @@ Mods: {
 				DisplayName: Slitthroat Necklace
 				Tooltip:
 					'''
-					Melee attacks inflict Lacerated
+					True melee attacks inflict Lacerated
 					+15 melee armor penetration
 					'''
 			}
