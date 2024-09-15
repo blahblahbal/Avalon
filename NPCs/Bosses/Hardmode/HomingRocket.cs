@@ -5,17 +5,23 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
+using Avalon.Data.Sets;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
 public class HomingRocket : ModNPC
 {
-    public override void SetDefaults()
+	private float maxSpeed = 20f;
+	private float acceleration = 0.1f;
+	private float currentSpeed = 2f; // Initial speed
+	private float homingRange = 20f * 16f; // 20 tiles in pixels (1 tile = 16 pixels)
+	public override void SetDefaults()
     {
         NPC.width = 14;
         NPC.height = 14;
         NPC.aiStyle = -1;
-        NPC.lifeMax = 150;
+        NPC.lifeMax = 500;
+		NPC.defense = 30;
         NPC.value = 0;
         NPC.noTileCollide = true;
         NPC.timeLeft = 500;
@@ -108,33 +114,55 @@ public class HomingRocket : ModNPC
                 Main.dust[num267].velocity *= 0.05f;
             }
         }
-        if (Math.Abs(NPC.velocity.X) < 15f && Math.Abs(NPC.velocity.Y) < 15f)
+		NPC.rotation = (float)Math.Atan2(NPC.velocity.Y, NPC.velocity.X) + 1.57f;
+		for (int p = 0; p < Main.player.Length; p++)
+		{
+			if (Main.player[p].active)
+			{
+				if (ClassExtensions.NewRectVector2(Main.player[p].position, new Vector2(Main.player[p].width, Main.player[p].height)).Intersects(ClassExtensions.NewRectVector2(NPC.position, new Vector2(NPC.width, NPC.height))))
+				{
+					NPC.timeLeft = 3;
+					break;
+				}
+			}
+		}
+		if (NPC.timeLeft <= 3)
+		{
+			NPC.position.X = NPC.position.X + NPC.width / 2;
+			NPC.position.Y = NPC.position.Y + NPC.height / 2;
+			NPC.width = 128;
+			NPC.height = 128;
+			NPC.position.X = NPC.position.X - NPC.width / 2;
+			NPC.position.Y = NPC.position.Y - NPC.height / 2;
+			NPC.life = 0;
+			NPC.checkDead();
+		}
+
+		//NPC.velocity = NPC.velocity.SafeNormalize(Vector2.Zero) * currentSpeed;
+
+		// Increase speed gradually until it reaches max speed
+		//if (currentSpeed < maxSpeed)
+		//{
+		//	currentSpeed += acceleration;
+		//}
+		//if (currentSpeed >= maxSpeed)
+		//{
+		//	HomeInWithinRange(float.MaxValue);
+		//}
+		//else
+		//{
+		//	HomeInWithinRange(homingRange);
+		//}
+		
+		if (Math.Abs(NPC.velocity.X) < 15f && Math.Abs(NPC.velocity.Y) < 15f)
         {
             NPC.velocity *= 1.1f;
         }
-        NPC.rotation = (float)Math.Atan2(NPC.velocity.Y, NPC.velocity.X) + 1.57f;
-        for (int p = 0; p < Main.player.Length; p++)
-        {
-            if (Main.player[p].active)
-            {
-                if (ClassExtensions.NewRectVector2(Main.player[p].position, new Vector2(Main.player[p].width, Main.player[p].height)).Intersects(ClassExtensions.NewRectVector2(NPC.position, new Vector2(NPC.width, NPC.height))))
-                {
-                    NPC.timeLeft = 3;
-                    break;
-                }
-            }
-        }
-        if (NPC.timeLeft <= 3)
-        {
-            NPC.position.X = NPC.position.X + NPC.width / 2;
-            NPC.position.Y = NPC.position.Y + NPC.height / 2;
-            NPC.width = 128;
-            NPC.height = 128;
-            NPC.position.X = NPC.position.X - NPC.width / 2;
-            NPC.position.Y = NPC.position.Y - NPC.height / 2;
-            NPC.life = 0;
-            NPC.checkDead();
-        }
+		else
+		{
+			NPC.ai[2] = 1;
+		}
+        
         float num26 = (float)Math.Sqrt((double)(NPC.velocity.X * NPC.velocity.X + NPC.velocity.Y * NPC.velocity.Y));
         float num27 = NPC.localAI[0];
         if (num27 == 0f)
@@ -150,37 +178,65 @@ public class HomingRocket : ModNPC
         {
             NPC.alpha = 0;
         }
-        float num28 = NPC.position.X;
-        float num29 = NPC.position.Y;
-        float num30 = 250f;
+        float targetPositionX = NPC.position.X;
+        float targetPositionY = NPC.position.Y;
+		Vector2 targetPos = NPC.position;
+        float desiredDistanceForLockOn = NPC.ai[2] == 1 ? 100000 : NPC.velocity.Length() * 1f;
+		//Main.NewText(NPC.velocity.Length());
         bool flag = false;
-        int num31 = 0;
-        if (NPC.ai[1] == 0)
-        {
-            for (int num32 = 0; num32 < Main.player.Length; num32++)
-            {
-                if (Main.player[num32].active && Main.player[num32].statLife > 0 && (NPC.ai[1] == 0f || NPC.ai[1] == num32 + 1))
-                {
-                    float num33 = Main.player[num32].position.X + Main.player[num32].width / 2;
-                    float num34 = Main.player[num32].position.Y + Main.player[num32].height / 2;
-                    float num35 = Math.Abs(NPC.position.X + NPC.width / 2 - num33) + Math.Abs(NPC.position.Y + NPC.height / 2 - num34);
-                    if (num35 < num30 && Collision.CanHit(new Vector2(NPC.position.X + NPC.width / 2, NPC.position.Y + NPC.height / 2), 1, 1, Main.player[num32].position, Main.player[num32].width, Main.player[num32].height))
-                    {
-                        num30 = num35;
-                        num28 = num33;
-                        num29 = num34;
-                        flag = true;
-                        num31 = num32;
-                    }
-                }
-            }
-            if (flag)
-            {
-                NPC.ai[1] = num31 + 1;
-            }
-            flag = false;
-        }
-        if (NPC.ai[1] != 0f)
+        int foundPlayer = 0;
+
+		if (NPC.ai[1] == 0)
+		{
+			for (int playerIndex = 0; playerIndex < Main.player.Length; playerIndex++)
+			{
+				Player target = Main.player[playerIndex];
+				if (target.active && target.statLife > 0 && (NPC.ai[1] == 0f || NPC.ai[1] == playerIndex + 1) &&
+					Vector2.Distance(target.Center, NPC.Center) < desiredDistanceForLockOn &&
+					Collision.CanHit(new Vector2(NPC.position.X + NPC.width / 2, NPC.position.Y + NPC.height / 2), 1, 1,
+						target.position, target.width, target.height))
+				{
+					flag = true;
+					//targetPos = target.Center;
+					targetPositionX = target.Center.X;
+					targetPositionY = target.Center.Y;
+					foundPlayer = playerIndex;
+				}
+			}
+			if (flag)
+			{
+				NPC.ai[1] = foundPlayer + 1;
+			}
+			flag = false;
+		}
+
+		// OLD CODE
+		//if (NPC.ai[1] == 0)
+		//{
+		//    for (int playerIndex = 0; playerIndex < Main.player.Length; playerIndex++)
+		//    {
+		//        if (Main.player[playerIndex].active && Main.player[playerIndex].statLife > 0 && (NPC.ai[1] == 0f || NPC.ai[1] == playerIndex + 1))
+		//        {
+		//            float playerCenterX = Main.player[playerIndex].position.X + Main.player[playerIndex].width / 2;
+		//            float playerCenterY = Main.player[playerIndex].position.Y + Main.player[playerIndex].height / 2;
+		//            float distanceBetweenPlayerAndNPC = Math.Abs(NPC.position.X + NPC.width / 2 - playerCenterX) + Math.Abs(NPC.position.Y + NPC.height / 2 - playerCenterY);
+		//            if (distanceBetweenPlayerAndNPC < desiredDistanceForLockOn && Collision.CanHit(new Vector2(NPC.position.X + NPC.width / 2, NPC.position.Y + NPC.height / 2), 1, 1, Main.player[playerIndex].position, Main.player[playerIndex].width, Main.player[playerIndex].height))
+		//            {
+		//                desiredDistanceForLockOn = distanceBetweenPlayerAndNPC;
+		//                targetPositionX = playerCenterX;
+		//                targetPositionY = playerCenterY;
+		//                flag = true;
+		//                foundPlayer = playerIndex;
+		//            }
+		//        }
+		//    }
+		//    if (flag)
+		//    {
+		//        NPC.ai[1] = foundPlayer + 1;
+		//    }
+		//    flag = false;
+		//}
+		if (NPC.ai[1] != 0f)
         {
             int num36 = (int)(NPC.ai[1] - 1f);
             if (Main.player[num36].active)
@@ -191,24 +247,88 @@ public class HomingRocket : ModNPC
                 if (num39 < 1000f)
                 {
                     flag = true;
-                    num28 = Main.player[num36].position.X + Main.player[num36].width / 2;
-                    num29 = Main.player[num36].position.Y + Main.player[num36].height / 2;
+                    targetPositionX = Main.player[num36].position.X + Main.player[num36].width / 2;
+                    targetPositionY = Main.player[num36].position.Y + Main.player[num36].height / 2;
                 }
             }
         }
-        if (flag)
+        if (flag || NPC.ai[2] == 1)
         {
             float num40 = num27;
-            Vector2 vector = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height * 0.5f);
-            float num41 = num28 - vector.X;
-            float num42 = num29 - vector.Y;
-            float num43 = (float)Math.Sqrt((double)(num41 * num41 + num42 * num42));
+            float xDistance = targetPositionX - NPC.Center.X;
+            float yDistance = targetPositionY - NPC.Center.Y;
+            float num43 = (float)Math.Sqrt((double)(xDistance * xDistance + yDistance * yDistance));
             num43 = num40 / num43;
-            num41 *= num43;
-            num42 *= num43;
+            xDistance *= num43;
+            yDistance *= num43;
             int num44 = 8;
-            NPC.velocity.X = (NPC.velocity.X * (num44 - 1) + num41) / num44;
-            NPC.velocity.Y = (NPC.velocity.Y * (num44 - 1) + num42) / num44;
+            NPC.velocity.X = (NPC.velocity.X * (num44 - 1) + xDistance) / num44;
+            NPC.velocity.Y = (NPC.velocity.Y * (num44 - 1) + yDistance) / num44;
         }
-    }
+	}
+
+
+	// OTHER CODE, DOESN'T WORK PROPERLY
+	private void HomeInWithinRange(float range)
+	{
+		// Find closest NPC within homing range
+		Player closestPlayer = null;
+		float closestDistance = range;
+
+		for (int playerIndex = 0; playerIndex < Main.player.Length; playerIndex++)
+		{
+			//if (Collision.CanHit(new Vector2(NPC.position.X + NPC.width / 2, NPC.position.Y + NPC.height / 2), 1, 1,
+			//			Main.player[playerIndex].position, Main.player[playerIndex].width, Main.player[playerIndex].height))
+			{
+				float distanceToPlayer = Vector2.Distance(Main.player[playerIndex].Center, NPC.Center);
+				if (distanceToPlayer < closestDistance)
+				{
+					closestDistance = distanceToPlayer;
+					closestPlayer = Main.player[playerIndex];
+				}
+			}
+		}
+
+		// Home in on closest NPC within range
+		if (closestPlayer != null)
+		{
+			//Vector2 direction = closestPlayer.Center - NPC.Center;
+			//direction.Normalize();
+			//NPC.velocity = Vector2.Lerp(NPC.velocity, direction * 2, 0.1f);
+
+			float targetPositionX = NPC.position.X;
+			float targetPositionY = NPC.position.Y;
+
+			if (closestPlayer.active)
+			{
+				float num37 = closestPlayer.position.X + closestPlayer.width / 2;
+				float num38 = closestPlayer.position.Y + closestPlayer.height / 2;
+				float num39 = Math.Abs(NPC.position.X + NPC.width / 2 - num37) + Math.Abs(NPC.position.Y + NPC.height / 2 - num38);
+				if (num39 < 1000f)
+				{
+					//flag = true;
+					targetPositionX = closestPlayer.position.X + closestPlayer.width / 2;
+					targetPositionY = closestPlayer.position.Y + closestPlayer.height / 2;
+				}
+			}
+
+			float num26 = (float)Math.Sqrt((double)(NPC.velocity.X * NPC.velocity.X + NPC.velocity.Y * NPC.velocity.Y));
+			float num27 = NPC.localAI[0];
+			if (num27 == 0f)
+			{
+				NPC.localAI[0] = num26;
+				num27 = num26;
+			}
+			float num40 = num27;
+			float xDistance = targetPositionX - NPC.Center.X;
+			float yDistance = targetPositionY - NPC.Center.Y;
+			float num43 = (float)Math.Sqrt((double)(xDistance * xDistance + yDistance * yDistance));
+			num43 = num40 / num43;
+			xDistance *= num43;
+			yDistance *= num43;
+			int num44 = 8;
+			NPC.velocity.X = (NPC.velocity.X * (num44 - 1) + xDistance) / num44;
+			NPC.velocity.Y = (NPC.velocity.Y * (num44 - 1) + yDistance) / num44;
+		}
+	}
 }

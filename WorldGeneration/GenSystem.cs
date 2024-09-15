@@ -283,18 +283,17 @@ public class GenSystem : ModSystem
         {
 			if (ModContent.GetInstance<AvalonClientConfig>().UnimplementedStructureGen)
 			{
-				currentPass = new Underworld();
-				tasks.Insert(underworld + 1, currentPass);
-				totalWeight += currentPass.Weight;
-
-				currentPass = new Ectovines();
-				tasks.Insert(underworld + 2, currentPass);
-				totalWeight += currentPass.Weight;
+				// uncomment when sky fortress becomes a thing
+				tasks.Insert(underworld + 4, new SkyFortress());
 			}
-			
 
-			// uncomment when sky fortress becomes a thing
-			//tasks.Insert(underworld + 4, new SkyFortress());
+			currentPass = new Underworld();
+			tasks.Insert(underworld + 1, currentPass);
+			totalWeight += currentPass.Weight;
+
+			currentPass = new Ectovines();
+			tasks.Insert(underworld + 2, currentPass);
+			totalWeight += currentPass.Weight;
 
 			currentPass = new ReplacePass("Replacing any improper ores", 25f);
             tasks.Insert(underworld + 1, currentPass);
@@ -317,7 +316,7 @@ public class GenSystem : ModSystem
                 tasks.Insert(index + 3, currentPass);
                 totalWeight += currentPass.Weight;
 
-                currentPass = new PassLegacy("Tropics Traps", new WorldGenLegacyMethod(Tropics.PlatformLeafTrapTask));
+                currentPass = new PassLegacy("Savanna Traps", new WorldGenLegacyMethod(Tropics.PlatformLeafTrapTask));
                 tasks.Insert(index + 4, currentPass);
                 totalWeight += currentPass.Weight;
             }

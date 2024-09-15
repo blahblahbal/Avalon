@@ -2589,18 +2589,8 @@ Mods: {
 					'''
 			}
 
-			PandemiteBar: {
-				DisplayName: Pandemite Bar
-				Tooltip: ""
-			}
-
 			Booger: {
 				DisplayName: Booger
-				Tooltip: ""
-			}
-
-			PandemiteOre: {
-				DisplayName: Pandemite Ore
 				Tooltip: ""
 			}
 

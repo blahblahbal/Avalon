@@ -284,66 +284,71 @@ internal class Underworld : GenPass
         int ashenRight = hellcastleOriginX + 525;
 
 
-        //if (Main.drunkWorld)
-        //{
-        //    hellcastleOriginX = (Main.maxTilesX / 3) - 210;
-        //    ashenLeft = (Main.maxTilesX / 3) - 450;
-        //    ashenRight = (Main.maxTilesX / 3) + 500;
-        //}
+		//if (Main.drunkWorld)
+		//{
+		//    hellcastleOriginX = (Main.maxTilesX / 3) - 210;
+		//    ashenLeft = (Main.maxTilesX / 3) - 450;
+		//    ashenRight = (Main.maxTilesX / 3) + 500;
+		//}
 
-        Hellcastle.GenerateHellcastle(hellcastleOriginX, Main.maxTilesY - 330);
-        for (int hbx = ashenLeft; hbx < ashenRight; hbx++)
-        {
-            for (int hby = Main.maxTilesY - 200; hby < Main.maxTilesY - 50; hby++)
-            {
-                //if (Main.tile[hbx, hby].HasTile &&
-                //    (Main.tile[hbx, hby].TileType == TileID.ObsidianBrick ||
-                //     Main.tile[hbx, hby].TileType == TileID.HellstoneBrick))
-                //{
-                //    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
-                //    Tile t = Main.tile[hbx, hby];
-                //    t.HasTile = true;
-                //}
-                //if (Main.tile[hbx, hby].WallType == WallID.ObsidianBrickUnsafe ||
-                //     Main.tile[hbx, hby].WallType == WallID.HellstoneBrickUnsafe)
-                //{
-                //    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
-                //    Tile t = Main.tile[hbx, hby];
-                //    t.HasTile = true;
-                //    WorldGen.KillWall(hbx, hby);
-                //}
-                if ((Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby - 1].HasTile) ||
-                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby + 1].HasTile) ||
-                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby].HasTile) ||
-                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby].HasTile) ||
-                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby - 1].HasTile) ||
-                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby + 1].HasTile) ||
-                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby - 1].HasTile) ||
-                    (Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby + 1].HasTile))
-                {
-                    if (Main.tile[hbx, hby].TileType == TileID.Ash)
-                    {
-                        SlopeType s = Main.tile[hbx, hby].Slope;
-                        Tile t = Main.tile[hbx, hby];
-                        t.TileType = (ushort)ModContent.TileType<Ectograss>();
-                        t.Slope = s;
-                        if (WorldGen.genRand.NextBool(1))
-                        {
-                            WorldGen.GrowTree(hbx, hby - 1);
-                        }
-                    }
-                }
-                if (WorldGen.genRand.NextBool(100))
-                {
-                    WorldGen.OreRunner(hbx, hby, 4, 4, (ushort)ModContent.TileType<BrimstoneBlock>());
-                }
-                if (WorldGen.genRand.NextBool(50))
-                {
-                    WorldGen.OreRunner(hbx, hby, 2, 3, TileID.Hellstone);
-                }
-            }
-        }
-    }
+		#region hellcastle
+		if (ModContent.GetInstance<AvalonClientConfig>().UnimplementedStructureGen)
+		{
+			Hellcastle.GenerateHellcastle(hellcastleOriginX, Main.maxTilesY - 330);
+			for (int hbx = ashenLeft; hbx < ashenRight; hbx++)
+			{
+				for (int hby = Main.maxTilesY - 200; hby < Main.maxTilesY - 50; hby++)
+				{
+					//if (Main.tile[hbx, hby].HasTile &&
+					//    (Main.tile[hbx, hby].TileType == TileID.ObsidianBrick ||
+					//     Main.tile[hbx, hby].TileType == TileID.HellstoneBrick))
+					//{
+					//    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
+					//    Tile t = Main.tile[hbx, hby];
+					//    t.HasTile = true;
+					//}
+					//if (Main.tile[hbx, hby].WallType == WallID.ObsidianBrickUnsafe ||
+					//     Main.tile[hbx, hby].WallType == WallID.HellstoneBrickUnsafe)
+					//{
+					//    Main.tile[hbx, hby].TileType = (ushort)ModContent.TileType<ImperviousBrick>();
+					//    Tile t = Main.tile[hbx, hby];
+					//    t.HasTile = true;
+					//    WorldGen.KillWall(hbx, hby);
+					//}
+					if ((Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby - 1].HasTile) ||
+						(Main.tile[hbx, hby].HasTile && !Main.tile[hbx, hby + 1].HasTile) ||
+						(Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby].HasTile) ||
+						(Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby].HasTile) ||
+						(Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby - 1].HasTile) ||
+						(Main.tile[hbx, hby].HasTile && !Main.tile[hbx - 1, hby + 1].HasTile) ||
+						(Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby - 1].HasTile) ||
+						(Main.tile[hbx, hby].HasTile && !Main.tile[hbx + 1, hby + 1].HasTile))
+					{
+						if (Main.tile[hbx, hby].TileType == TileID.Ash)
+						{
+							SlopeType s = Main.tile[hbx, hby].Slope;
+							Tile t = Main.tile[hbx, hby];
+							t.TileType = (ushort)ModContent.TileType<Ectograss>();
+							t.Slope = s;
+							if (WorldGen.genRand.NextBool(1))
+							{
+								WorldGen.GrowTree(hbx, hby - 1);
+							}
+						}
+					}
+					if (WorldGen.genRand.NextBool(100))
+					{
+						WorldGen.OreRunner(hbx, hby, 4, 4, (ushort)ModContent.TileType<BrimstoneBlock>());
+					}
+					if (WorldGen.genRand.NextBool(50))
+					{
+						WorldGen.OreRunner(hbx, hby, 2, 3, TileID.Hellstone);
+					}
+				}
+			}
+		}
+		#endregion
+	}
 
     public static void MakeSpike2(int x, int y, ushort type, int lengthMin, int lengthMax)
     {

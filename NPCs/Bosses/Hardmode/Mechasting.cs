@@ -81,6 +81,7 @@ public class Mechasting : ModNPC
         }
         if (!SecondPhase)
         {
+			NPC.ai[3] = 2;
             // ai phase 1
             if (NPC.ai[3] == 0)
             {
