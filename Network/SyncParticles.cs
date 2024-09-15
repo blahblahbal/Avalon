@@ -32,11 +32,13 @@ internal class SyncParticles
         float ai2 = reader.ReadSingle();
         float ai3 = reader.ReadSingle();
 
-        ParticleSystem.AddParticle(type, pos, vel, c, ai1, ai2, ai3);
-
         if (Main.netMode == NetmodeID.Server)
         {
 			SendPacket(type, pos, vel, c, ai1, ai2, ai3, -1, fromWho);
         }
+		else
+		{
+			ParticleSystem.AddParticle(type, pos, vel, c, ai1, ai2, ai3);
+		}
     }
 }
