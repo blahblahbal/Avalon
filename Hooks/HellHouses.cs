@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace Avalon.Hooks
 {
@@ -8,7 +9,10 @@ namespace Avalon.Hooks
         protected override void Apply()
         {
             // ADD BACK WHEN HELLCASTLE IS RE-ADDED
-            //On_WorldGen.HellFort += OnHellFort;
+            if (ModContent.GetInstance<AvalonClientConfig>().UnimplementedStructureGen)
+			{
+				On_WorldGen.HellFort += OnHellFort;
+			}
         }
         private static void OnHellFort(On_WorldGen.orig_HellFort orig, int i, int j, ushort tileType = 75, byte wallType = 14)
         {

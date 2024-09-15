@@ -2190,14 +2190,19 @@ Mods: {
 				Tooltip: ""
 			}
 
-			AdamantiteSlimeBanner: {
-				DisplayName: Adamantite Slime Banner
-				Tooltip: ""
-			}
-
 			BloodshotEyeBanner: {
 				DisplayName: Bloodshot Eye Banner
 				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.BloodshotEye.DisplayName}"
+			}
+
+			OreSlimeBanner: {
+				DisplayName: Ore Slime Banner
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.OreSlime.DisplayName}"
+			}
+
+			MineralSlimeBanner: {
+				DisplayName: Mineral Slime Banner
+				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.MineralSlime.DisplayName}"
 			}
 
 			FallenHeroBanner: {
@@ -2225,11 +2230,6 @@ Mods: {
 				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Bactus.DisplayName}"
 			}
 
-			BismuthSlimeBanner: {
-				DisplayName: Bismuth Slime Banner
-				Tooltip: ""
-			}
-
 			BlazeBanner: {
 				DisplayName: Blaze Banner
 				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Blaze.DisplayName}"
@@ -2237,11 +2237,6 @@ Mods: {
 
 			BombSkeletonBanner: {
 				DisplayName: Bomb Skeleton Banner
-				Tooltip: ""
-			}
-
-			BronzeSlimeBanner: {
-				DisplayName: Bronze Slime Banner
 				Tooltip: ""
 			}
 
@@ -2265,18 +2260,8 @@ Mods: {
 				Tooltip: ""
 			}
 
-			CobaltSlimeBanner: {
-				DisplayName: Cobalt Slime Banner
-				Tooltip: ""
-			}
-
 			CometTailBanner: {
 				DisplayName: Comet Tail Banner
-				Tooltip: ""
-			}
-
-			CopperSlimeBanner: {
-				DisplayName: Copper Slime Banner
 				Tooltip: ""
 			}
 
@@ -2320,11 +2305,6 @@ Mods: {
 				Tooltip: ""
 			}
 
-			DurataniumSlimeBanner: {
-				DisplayName: Duratanium Slime Banner
-				Tooltip: ""
-			}
-
 			EctoHandBanner: {
 				DisplayName: Ecto Hand Banner
 				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.EctoHand.DisplayName}"
@@ -2348,11 +2328,6 @@ Mods: {
 			GargoyleBanner: {
 				DisplayName: Gargoyle Banner
 				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.Gargoyle.DisplayName}"
-			}
-
-			GoldSlimeBanner: {
-				DisplayName: Gold Slime Banner
-				Tooltip: ""
 			}
 
 			GrossyFloatBanner: {
@@ -2390,16 +2365,6 @@ Mods: {
 				Tooltip: "{$CommonItemTooltip.BannerBonus}{$Mods.Avalon.NPCs.IrateBones.DisplayName}"
 			}
 
-			IridiumSlimeBanner: {
-				DisplayName: Iridium Slime Banner
-				Tooltip: ""
-			}
-
-			IronSlimeBanner: {
-				DisplayName: Iron Slime Banner
-				Tooltip: ""
-			}
-
 			JuggernautBruteBanner: {
 				DisplayName: Juggernaut Brute Banner
 				Tooltip: ""
@@ -2415,11 +2380,6 @@ Mods: {
 				Tooltip: ""
 			}
 
-			LeadSlimeBanner: {
-				DisplayName: Lead Slime Banner
-				Tooltip: ""
-			}
-
 			MatterManBanner: {
 				DisplayName: Matter Man Banner
 				Tooltip: ""
@@ -2432,41 +2392,6 @@ Mods: {
 
 			MimeBanner: {
 				DisplayName: Mime Banner
-				Tooltip: ""
-			}
-
-			MythrilSlimeBanner: {
-				DisplayName: Mythril Slime Banner
-				Tooltip: ""
-			}
-
-			NaquadahSlimeBanner: {
-				DisplayName: Naquadah Slime Banner
-				Tooltip: ""
-			}
-
-			NickelSlimeBanner: {
-				DisplayName: Nickel Slime Banner
-				Tooltip: ""
-			}
-
-			OrichalcumSlimeBanner: {
-				DisplayName: Orichalcum Slime Banner
-				Tooltip: ""
-			}
-
-			OsmiumSlimeBanner: {
-				DisplayName: Osmium Slime Banner
-				Tooltip: ""
-			}
-
-			PalladiumSlimeBanner: {
-				DisplayName: Palladium Slime Banner
-				Tooltip: ""
-			}
-
-			PlatinumSlimeBanner: {
-				DisplayName: Platinum Slime Banner
 				Tooltip: ""
 			}
 
@@ -2495,38 +2420,8 @@ Mods: {
 				Tooltip: ""
 			}
 
-			RhodiumSlimeBanner: {
-				DisplayName: Rhodium Slime Banner
-				Tooltip: ""
-			}
-
-			SilverSlimeBanner: {
-				DisplayName: Silver Slime Banner
-				Tooltip: ""
-			}
-
-			TinSlimeBanner: {
-				DisplayName: Tin Slime Banner
-				Tooltip: ""
-			}
-
-			TitaniumSlimeBanner: {
-				DisplayName: Titanium Slime Banner
-				Tooltip: ""
-			}
-
 			TropicalSlimeBanner: {
 				DisplayName: Tropical Slime Banner
-				Tooltip: ""
-			}
-
-			TroxiniumSlimeBanner: {
-				DisplayName: Troxinium Slime Banner
-				Tooltip: ""
-			}
-
-			TungstenSlimeBanner: {
-				DisplayName: Tungsten Slime Banner
 				Tooltip: ""
 			}
 
@@ -2552,11 +2447,6 @@ Mods: {
 
 			VorazylcumMiteBanner: {
 				DisplayName: Vorazylcum Mite Banner
-				Tooltip: ""
-			}
-
-			ZincSlimeBanner: {
-				DisplayName: Zinc Slime Banner
 				Tooltip: ""
 			}
 
@@ -9230,6 +9120,41 @@ Mods: {
 					<right> to change modes
 					'''
 			}
+
+			CoughwoodBeam: {
+				DisplayName: Coughwood Beam
+				Tooltip: ""
+			}
+
+			EbonwoodBeam: {
+				DisplayName: Ebonwood Beam
+				Tooltip: ""
+			}
+
+			PalmWoodBeam: {
+				DisplayName: Palm Wood Beam
+				Tooltip: ""
+			}
+
+			PearlstoneColumn: {
+				DisplayName: Pearlstone Column
+				Tooltip: ""
+			}
+
+			PearlwoodBeam: {
+				DisplayName: Pearlwood Beam
+				Tooltip: ""
+			}
+
+			ShadewoodBeam: {
+				DisplayName: Shadewood Beam
+				Tooltip: ""
+			}
+
+			AdamantiteSlimeBanner: {
+				DisplayName: Adamantite Slime Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10921,6 +10846,7 @@ Mods: {
 				SetWaypoint2: Set waypoint 2 to current location
 				SetWaypoint3: Set waypoint 3 to current location
 				NoWaypointFound: No waypoint found!
+				WaypointMode: "Waypoint mode: "
 			}
 		}
 	}

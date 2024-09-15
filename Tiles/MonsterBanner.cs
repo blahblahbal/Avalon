@@ -1,3 +1,4 @@
+
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.Reflection;
@@ -105,97 +106,97 @@ public class MonsterBanner : ModTile
                 case 19:
                     t = ModContent.NPCType<PyrasiteHead>();
                     break;
-                //case 20:
-                //    t = ModContent.NPCType<NPCs.EyeBones>();
-                //    break;
-                //case 21:
-                //    t = ModContent.NPCType<NPCs.Ectosphere>();
-                //    break;
-                //case 22:
-                //    t = ModContent.NPCType<NPCs.BombSkeleton>();
-                //    break;
-                //case 23:
-                //    t = ModContent.NPCType<NPCs.CopperSlime>();
-                //    break;
-                //case 24:
-                //    t = ModContent.NPCType<NPCs.TinSlime>();
-                //    break;
-                //case 25:
-                //    t = ModContent.NPCType<NPCs.IronSlime>();
-                //    break;
-                //case 26:
-                //    t = ModContent.NPCType<NPCs.LeadSlime>();
-                //    break;
-                //case 27:
-                //    t = ModContent.NPCType<NPCs.SilverSlime>();
-                //    break;
-                //case 28:
-                //    t = ModContent.NPCType<NPCs.TungstenSlime>();
-                //    break;
-                //case 29:
-                //    t = ModContent.NPCType<NPCs.GoldSlime>();
-                //    break;
-                //case 30:
-                //    t = ModContent.NPCType<NPCs.PlatinumSlime>();
-                //    break;
-                //case 31:
-                //    t = ModContent.NPCType<NPCs.CobaltSlime>();
-                //    break;
-                //case 32:
-                //    t = ModContent.NPCType<NPCs.PalladiumSlime>();
-                //    break;
-                //case 33:
-                //    t = ModContent.NPCType<NPCs.MythrilSlime>();
-                //    break;
-                //case 34:
-                //    t = ModContent.NPCType<NPCs.OrichalcumSlime>();
-                //    break;
-                //case 35:
-                //    t = ModContent.NPCType<NPCs.AdamantiteSlime>();
-                //    break;
-                //case 36:
-                //    t = ModContent.NPCType<NPCs.TitaniumSlime>();
-                //    break;
-                //case 37:
-                //    t = ModContent.NPCType<NPCs.RhodiumSlime>();
-                //    break;
-                //case 38:
-                //    t = ModContent.NPCType<NPCs.OsmiumSlime>();
-                //    break;
-                //case 39:
-                //    t = ModContent.NPCType<NPCs.DurantiumSlime>();
-                //    break;
-                //case 40:
-                //    t = ModContent.NPCType<NPCs.NaquadahSlime>();
-                //    break;
-                //case 41:
-                //    t = ModContent.NPCType<NPCs.TroxiniumSlime>();
-                //    break;
-                //case 42:
-                //    t = ModContent.NPCType<NPCs.UnstableAnomaly>();
-                //    break;
-                //case 43:
-                //    t = ModContent.NPCType<NPCs.MatterMan>();
-                //    break;
-                //case 44:
-                //    t = ModContent.NPCType<NPCs.BronzeSlime>();
-                //    break;
-                //case 45:
-                //    t = ModContent.NPCType<NPCs.NickelSlime>();
-                //    break;
-                //case 46:
-                //    t = ModContent.NPCType<NPCs.ZincSlime>();
-                //    break;
-                //case 47:
-                //    t = ModContent.NPCType<NPCs.BismuthSlime>();
-                //    break;
-                //case 48:
-                //    t = ModContent.NPCType<NPCs.IridiumSlime>();
-                //    break;
-                //case 49:
-                //    t = ModContent.NPCType<NPCs.Hallowor>();
-                //    break;
-                case 51:
+				//case 20:
+				//    t = ModContent.NPCType<NPCs.EyeBones>();
+				//    break;
+				//case 21:
+				//    t = ModContent.NPCType<NPCs.Ectosphere>();
+				//    break;
+				//case 22:
+				//    t = ModContent.NPCType<NPCs.BombSkeleton>();
+				//    break;
+				case 23:
+					t = ModContent.NPCType<OreSlime>();
+					break;
+				//case 24:
+				//    t = ModContent.NPCType<NPCs.TinSlime>();
+				//    break;
+				//case 25:
+				//    t = ModContent.NPCType<NPCs.IronSlime>();
+				//    break;
+				//case 26:
+				//    t = ModContent.NPCType<NPCs.LeadSlime>();
+				//    break;
+				//case 27:
+				//    t = ModContent.NPCType<NPCs.SilverSlime>();
+				//    break;
+				//case 28:
+				//    t = ModContent.NPCType<NPCs.TungstenSlime>();
+				//    break;
+				//case 29:
+				//    t = ModContent.NPCType<NPCs.GoldSlime>();
+				//    break;
+				//case 30:
+				//    t = ModContent.NPCType<NPCs.PlatinumSlime>();
+				//    break;
+				case 31:
+					t = ModContent.NPCType<MineralSlime>();
+					break;
+				//case 32:
+				//    t = ModContent.NPCType<NPCs.PalladiumSlime>();
+				//    break;
+				//case 33:
+				//    t = ModContent.NPCType<NPCs.MythrilSlime>();
+				//    break;
+				//case 34:
+				//    t = ModContent.NPCType<NPCs.OrichalcumSlime>();
+				//    break;
+				//case 35:
+				//    t = ModContent.NPCType<NPCs.AdamantiteSlime>();
+				//    break;
+				//case 36:
+				//    t = ModContent.NPCType<NPCs.TitaniumSlime>();
+				//    break;
+				//case 37:
+				//    t = ModContent.NPCType<NPCs.RhodiumSlime>();
+				//    break;
+				//case 38:
+				//    t = ModContent.NPCType<NPCs.OsmiumSlime>();
+				//    break;
+				//case 39:
+				//    t = ModContent.NPCType<NPCs.DurantiumSlime>();
+				//    break;
+				//case 40:
+				//    t = ModContent.NPCType<NPCs.NaquadahSlime>();
+				//    break;
+				//case 41:
+				//    t = ModContent.NPCType<NPCs.TroxiniumSlime>();
+				//    break;
+				//case 42:
+				//    t = ModContent.NPCType<NPCs.UnstableAnomaly>();
+				//    break;
+				//case 43:
+				//    t = ModContent.NPCType<NPCs.MatterMan>();
+				//    break;
+				//case 44:
+				//    t = ModContent.NPCType<NPCs.BronzeSlime>();
+				//    break;
+				//case 45:
+				//    t = ModContent.NPCType<NPCs.NickelSlime>();
+				//    break;
+				//case 46:
+				//    t = ModContent.NPCType<NPCs.ZincSlime>();
+				//    break;
+				//case 47:
+				//    t = ModContent.NPCType<NPCs.BismuthSlime>();
+				//    break;
+				//case 48:
+				//    t = ModContent.NPCType<NPCs.IridiumSlime>();
+				//    break;
+				//case 49:
+				//    t = ModContent.NPCType<NPCs.Hallowor>();
+				//    break;
+				case 51:
                     t = ModContent.NPCType<IrateBones>();
                     break;
                 case 55:

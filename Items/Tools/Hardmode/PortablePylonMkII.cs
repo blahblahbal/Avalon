@@ -99,7 +99,7 @@ public class PortablePylonMkII : ModItem
 		if (KeybindSystem.ModeChangeHotkey.JustPressed)
 		{
 			if (++mode > 2) mode = 0;
-			Main.NewText("Waypoint mode: " + (mode + 1));
+			Main.NewText(Language.GetTextValue("Mods.Avalon.Tools.PortablePylon.WaypointMode") + (mode + 1));
 		}
 	}
 	public override void UseStyle(Player player, Rectangle heldItemFrame)

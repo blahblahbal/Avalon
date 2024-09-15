@@ -56,7 +56,7 @@ namespace Avalon.Common
                         Directory.Delete(AvalonPurgatory);
                     }
                     string MyGamesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games");
-                    string ExxoAvalonV2Path = Path.Combine(MyGamesPath, "Exxo Avalon V2.0");
+                    string ExxoAvalonV2Path = Path.Combine(MyGamesPath, "Exxo Avalon v2.0");
                     string ExxoAvalonV2Player = Path.Combine(ExxoAvalonV2Path, "Players");
                     string ExxoAvalonV2World = Path.Combine(ExxoAvalonV2Path, "Worlds");
                     if (Directory.Exists(MyGamesPath))
@@ -89,7 +89,7 @@ namespace Avalon.Common
                                     }
                                     Directory.Delete(AvalonPurgatory);
 
-                                    Avalog.Debug("Avalon: PLAYER SUCSESS!, Path: " + filePathArray[fileCount]);
+                                    Avalog.Debug("Avalon: PLAYER SUCCESS!, Path: " + filePathArray[fileCount]);
                                 }
                                
                             }
@@ -104,12 +104,12 @@ namespace Avalon.Common
                         }
                         else
                         {
-                            Avalog.Debug("Avalon (1.2 Avalon Converter): Could not find 1.2 Avalon Saves folder (Exxo Avalon V2.0)");
+                            Avalog.Debug("Avalon (1.2 Avalon Converter): Could not find 1.2 Avalon Saves folder (Exxo Avalon v2.0)");
                         }
                     }
                     else
                     {
-                        Avalog.Debug("Avalon (1.2 Avalon Converter): How are you playing without a My Game folder?");
+                        Avalog.Debug("Avalon (1.2 Avalon Converter): How are you playing without a My Games folder?");
                     }
                 }
                 catch
