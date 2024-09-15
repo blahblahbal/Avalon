@@ -20,6 +20,19 @@ namespace Avalon.Particles
             SanguineCuts = 0,
             CrystalSparkle = 1
         }
+		public static void ParticleIDtoType(in int particleID, out Particle particle)
+		{
+			particle = new SanguineCuts(); // default
+			switch (particleID)
+			{
+				case 0:
+					particle = new SanguineCuts();
+					break;
+				case 1:
+					particle = new CrystalSparkle();
+					break;
+			}
+		}
 
         public override void Load()
         {
@@ -96,9 +109,33 @@ namespace Avalon.Particles
             }
 
             Main.spriteBatch.End();
-        }
-        public static Particle AddParticle(Particle type, Vector2 position, Vector2 velocity, Color color, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 1f)
+		}
+		public static Particle AddParticle(Particle type, Vector2 position, Vector2 velocity, Color color, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 1f)
+		{
+			if (Particles.Count == MaxParticles)
+			{
+				Particles.Remove(Particles.First());
+			}
+			Particles.Add(type);
+			Particles.Last().Position = position;
+			Particles.Last().Velocity = velocity;
+			Particles.Last().Color = color;
+			Particles.Last().ai1 = AI1;
+			Particles.Last().ai2 = AI2;
+			Particles.Last().ai3 = AI3;
+			Particles.Last().Scale = scale;
+
+			return Particles.Last();
+		}
+		/// <summary>
+		/// Use the other overload to spawn on the current client, this overload is used purely when syncing particles
+		/// ID must be defined manually in enum ParticleType and ParticleIDtoType at the top of this file
+		/// </summary>
+		/// <returns></returns>
+		public static Particle AddParticle(int particleID, Vector2 position, Vector2 velocity, Color color, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 1f)
         {
+			Particle type;
+			ParticleIDtoType(particleID, out type);
             if (Particles.Count == MaxParticles)
             {
                 Particles.Remove(Particles.First());
