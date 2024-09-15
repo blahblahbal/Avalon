@@ -58,7 +58,10 @@ public class ClearCutterSlash : EnergySlashTemplate
         //}
         Vector2 positionslansdglag = Main.rand.NextVector2FromRectangle(target.Hitbox);
         ParticleSystem.AddParticle(new CrystalSparkle(), positionslansdglag, Vector2.Zero, default);
-        //Network.SyncParticles.SendPacket(ParticleSystem.ParticleType.CrystalSparkle, positionslansdglag, Vector2.Zero, default);
+		if (Main.netMode == NetmodeID.MultiplayerClient)
+		{
+			Network.SyncParticles.SendPacket((int)ParticleSystem.ParticleType.CrystalSparkle, positionslansdglag, Vector2.Zero, default);
+		}
         for (int i = 0; i < Main.rand.Next(1, 3); i++)
         {
             settings.MovementVector = Vector2.Zero;

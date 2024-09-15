@@ -61,8 +61,12 @@ public class SanguineKatanaSlash : EnergySlashTemplate
         SoundEngine.PlaySound(SoundID.NPCHit1,target.position);
         Vector2 pos = vector - new Vector2(0, 24);
         Vector2 vel = new Vector2(Main.rand.NextFloat(-0.5f, 0.5f), 1);
-        ParticleSystem.AddParticle(new SanguineCuts(), pos, vel, default,Main.rand.Next(12,24));
-        //Network.SyncParticles.SendPacket(ParticleSystem.ParticleType.SanguineCuts, pos, vel, default);
+		float ai1 = Main.rand.Next(12, 24);
+        ParticleSystem.AddParticle(new SanguineCuts(), pos, vel, default, ai1);
+		if (Main.netMode == NetmodeID.MultiplayerClient)
+		{
+			Network.SyncParticles.SendPacket((int)ParticleSystem.ParticleType.SanguineCuts, pos, vel, default, ai1);
+		}
     }
     public override void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawpos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness)
     {
