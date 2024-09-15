@@ -32,4 +32,8 @@ public class Mechastinger : ModProjectile
             Projectile.velocity.Y = 16f;
         }
     }
+	public override void OnHitPlayer(Player target, Player.HurtInfo info)
+	{
+		target.AddBuff(BuffID.Venom, 60 * 5);
+	}
 }

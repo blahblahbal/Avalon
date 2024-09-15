@@ -19,7 +19,8 @@ class InfectionHook : ModItem
         Item.knockBack = 7f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Tools.InfectionHook>();
         Item.value = Item.sellPrice(0, 6);
-        Item.height = dims.Height;
+		Item.UseSound = SoundID.Item1;
+		Item.height = dims.Height;
         Item.useStyle = ItemUseStyleID.None;
         Item.useTime = 0;
         Item.useAnimation = 0;

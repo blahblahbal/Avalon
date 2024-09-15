@@ -60,14 +60,19 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 			projectile.Kill();
 		}
 	}
-	public static int FindClosestHostile(Vector2 pos, float dist)
+	public static int FindClosest(Vector2 pos, float dist, bool hostile = true)
 	{
 		int closest = -1;
 		float last = dist;
 		for (int i = 0; i < Main.projectile.Length; i++)
 		{
 			Projectile p = Main.projectile[i];
-			if (!p.active || !p.hostile)
+			if (!p.active || (hostile ? !p.hostile : p.hostile))
+			{
+				continue;
+			}
+
+			if (!hostile && p.type == ProjectileID.Daybreak)
 			{
 				continue;
 			}
@@ -81,6 +86,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 
 		return closest;
 	}
+
 	public override void OnKill(Projectile projectile, int timeLeft)
 	{
 		if (projectile.type == ProjectileID.WorldGlobe && Main.player[projectile.owner].InModBiome<Biomes.Contagion>())

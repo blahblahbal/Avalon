@@ -165,7 +165,7 @@ public class Reflector : ModProjectile
             positionNode ??= modPlayer.ObtainExistingReflectorSummon(hostPosition);
         }
         deactivateTimer++;
-        int closest = AvalonGlobalProjectile.FindClosestHostile(Projectile.Center, 540f); // 240
+        int closest = AvalonGlobalProjectile.FindClosest(Projectile.Center, 540f); // 240
         if (closest != -1 && deactivateTimer >= 300)
         {
             Projectile targ = Main.projectile[closest];

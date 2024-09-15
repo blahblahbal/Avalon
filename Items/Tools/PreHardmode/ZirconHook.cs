@@ -20,7 +20,8 @@ class ZirconHook : ModItem
         Item.knockBack = 7f;
         Item.shoot = ModContent.ProjectileType<Projectiles.Tools.ZirconHook>();
         Item.value = Item.sellPrice(0, 0, 54, 0);
-        Item.useStyle = ItemUseStyleID.None;
+		Item.UseSound = SoundID.Item1;
+		Item.useStyle = ItemUseStyleID.None;
         Item.useAnimation = 0;
         Item.height = dims.Height;
     }

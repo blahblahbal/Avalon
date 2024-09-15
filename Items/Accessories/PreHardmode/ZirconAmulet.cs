@@ -13,7 +13,7 @@ class ZirconAmulet : ModItem
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Orange;
+        Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 70);

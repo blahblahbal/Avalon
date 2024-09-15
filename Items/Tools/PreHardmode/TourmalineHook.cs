@@ -19,7 +19,8 @@ class TourmalineHook : ModItem
         Item.useTime = 0;
         Item.shoot = ModContent.ProjectileType<Projectiles.Tools.TourmalineHook>();
         Item.value = Item.sellPrice(silver: 54);
-        Item.useStyle = ItemUseStyleID.None;
+		Item.UseSound = SoundID.Item1;
+		Item.useStyle = ItemUseStyleID.None;
         Item.useAnimation = 0;
         Item.height = dims.Height;
     }

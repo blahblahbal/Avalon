@@ -11,6 +11,7 @@ using Terraria.Audio;
 using Terraria.GameContent.ItemDropRules;
 using Avalon.Items.Vanity;
 using System.IO;
+using Terraria.DataStructures;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
@@ -63,9 +64,16 @@ public class Mechasting : ModNPC
     {
         writer.Write(SecondPhase);
     }
-    public override void AI()
+	public override void AI()
     {
-        NPC.TargetClosest(true);
+		//if (NPC.ai[3] == 0)
+		//{
+		//	for (int i = 0; i < 10; i++)
+		//	{
+		//		NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<StingerProbe>(), NPC.target, NPC.whoAmI);
+		//	}
+		//}
+		NPC.TargetClosest(true);
         if (NPC.PlayerTarget().dead || Main.dayTime)
         {
             NPC.velocity.Y = NPC.velocity.Y - 0.04f;
@@ -81,7 +89,7 @@ public class Mechasting : ModNPC
         }
         if (!SecondPhase)
         {
-			NPC.ai[3] = 2;
+			//NPC.ai[3] = 2;
             // ai phase 1
             if (NPC.ai[3] == 0)
             {

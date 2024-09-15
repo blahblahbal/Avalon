@@ -567,7 +567,7 @@ public class AvalonMobDrops : GlobalNPC
         }
         #endregion shards
 
-        if (!NPCID.Sets.CountsAsCritter[npc.type] && !npc.townNPC && npc.aiStyle != 9 && npc.life > 5)
+        if (!NPCID.Sets.CountsAsCritter[npc.type] && !npc.townNPC && npc.aiStyle != 9 && npc.life > 5 && npc.type != ModContent.NPCType<HomingRocket>())
         {
             npcLoot.Add(ItemDropRule.OneFromOptions(600, ItemID.EndurancePotion, ItemID.GravitationPotion,
                 ItemID.InfernoPotion,
