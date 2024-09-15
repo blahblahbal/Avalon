@@ -10,8 +10,16 @@ namespace Avalon.Network;
 
 internal class SyncParticles
 {
-    public static void SendPacket(int type, Vector2 position, Vector2 velocity, Color color, float ai1 = 0, float ai2 = 0, float ai3 = 0, int toClient = -1, int ignoreClient = -1)
+	/// <summary>
+	/// Simply returns before doing anything when called in singleplayer, so you can safely call this whenever.<br></br>
+	/// Might still want to check if Main.netMode == NetmodeID.MultiplayerClient so the method doesn't run at all though, idk.
+	/// </summary>
+	public static void SendPacket(int type, Vector2 position, Vector2 velocity, Color color, float ai1 = 0, float ai2 = 0, float ai3 = 0, int toClient = -1, int ignoreClient = -1)
     {
+		if (Main.netMode == NetmodeID.SinglePlayer)
+		{
+			return; // no sending packets in singleplayer :D
+		}
         ModPacket packet = MessageHandler.GetPacket(MessageID.SyncParticle);
         packet.Write(type);
         packet.WriteVector2(position);
