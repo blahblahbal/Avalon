@@ -41,7 +41,7 @@ namespace Avalon.Compatability.BiomeLava
 
 		static int GetSplashDust()
 		{
-			return ModContent.DustType<PathogenDust>();
+			return ModContent.DustType<ContagionLavaDust>();
 		}
 
 		static int GetDropletGore()
@@ -118,7 +118,7 @@ namespace Avalon.Compatability.BiomeLava
 
 		static int GetSplashDust()
 		{
-			return ModContent.DustType<PhantomDust>();
+			return ModContent.DustType<PhantomLavaDust>();
 		}
 
 		static int GetDropletGore()
@@ -128,7 +128,7 @@ namespace Avalon.Compatability.BiomeLava
 
 		static Vector3 ModifyLight(int i, int j, float r, float g, float b)
 		{
-			return new Vector3(2f, 1f, 1.2f);
+			return new Vector3(0.9f, 0.55f, 0.65f);
 		}
 
 		static bool lavafallGlowmask()
@@ -205,7 +205,7 @@ namespace Avalon.Compatability.BiomeLava
 
 		static Vector3 ModifyLight(int i, int j, float r, float g, float b)
 		{
-			return new Vector3(2.5f, 0.1f, 0.1f);
+			return new Vector3(0.7f, 0.4f, 0.4f);
 		}
 
 		static bool lavafallGlowmask()
@@ -282,7 +282,7 @@ namespace Avalon.Compatability.BiomeLava
 
 		static Vector3 ModifyLight(int i, int j, float r, float g, float b)
 		{
-			return new Vector3(1f, 1f, 0f);
+			return new Vector3(0.7f, 0.7f, 0);
 		}
 
 		static bool lavafallGlowmask()

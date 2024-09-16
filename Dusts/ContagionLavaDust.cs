@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Dusts;
 
-public class SavannaLavaDust : ModDust
+public class ContagionLavaDust : ModDust
 {
 	public override void SetStaticDefaults()
 	{
@@ -50,7 +50,7 @@ public class SavannaLavaDust : ModDust
 			{
 				num109 = 1f;
 			}
-			Lighting.AddLight((int)(dust.position.X / 16f), (int)(dust.position.Y / 16f + 1f), num109 * 0.7f * 1.4f, num109 * 0.7f * 1.4f, num109 * 0.05f * 1.4f);
+			Lighting.AddLight((int)(dust.position.X / 16f), (int)(dust.position.Y / 16f + 1f), num109 * 0.32f * 2f, num109 * 0.2f * 2f, num109 * 0.5f * 2f);
 		}
 		else
 		{
@@ -84,7 +84,7 @@ public class SavannaLavaDust : ModDust
 			{
 				num3 = 1f;
 			}
-			Lighting.AddLight((int)(dust.position.X / 16f), (int)(dust.position.Y / 16f), num3 * 0.7f * 1.65f, num3 * 0.7f * 1.65f, num3 * 0.05f * 1.65f);
+			Lighting.AddLight((int)(dust.position.X / 16f), (int)(dust.position.Y / 16f), num3 * 0.32f * 3.5f, num3 * 0.2f * 3.5f, num3 * 0.5f * 3.5f);
 		}
 		dust.rotation += dust.velocity.X * 0.5f;
 		if (dust.fadeIn > 0f && dust.fadeIn < 100f)
