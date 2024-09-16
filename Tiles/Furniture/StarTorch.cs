@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework.Graphics;
 using Avalon.Particles;
+using ReLogic.Content;
 
 namespace Avalon.Tiles.Furniture
 {
@@ -19,10 +20,12 @@ namespace Avalon.Tiles.Furniture
         public override int TorchItem => ModContent.ItemType<Items.Placeable.Furniture.StarTorch>();
         public override int dustType => DustID.YellowTorch;
         public override bool WaterDeath => false;
+		private static Asset<Texture2D>? flameTexture;
 
-        public override void SetStaticDefaults()
-        {
-            RegisterItemDrop(TorchItem);
+		public override void SetStaticDefaults()
+		{
+			flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
+			RegisterItemDrop(TorchItem);
 
             Main.tileLighted[Type] = true;
             Main.tileFrameImportant[Type] = true;
@@ -227,7 +230,7 @@ namespace Avalon.Tiles.Furniture
             {
                 var x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
                 var y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-                Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "_Flame").Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(flameTexture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
             }
         }
         public override void MouseOver(int i, int j)
