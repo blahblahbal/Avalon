@@ -248,7 +248,7 @@ public class Mechasting : ModNPC
                 {
                     float rotation = (float)Math.Atan2(NPC.Center.Y - NPC.PlayerTarget().Center.Y, NPC.Center.X - NPC.PlayerTarget().Center.X);
                     float f = 0f; // degrees; 3.6f is a full 360 degrees
-                    float speed = 9f; // velocity of the projectile to be fired
+                    float speed = 3.5f; // velocity of the projectile to be fired
                     int p;
                     while (f < 0.2f) // less than 20 degrees
                     {
@@ -464,7 +464,7 @@ public class Mechasting : ModNPC
                 // fire homing rockets
                 if (NPC.ai[2] > 45)
                 {
-                    float Speed = 9f;
+                    float Speed = 3.5f;
                     Vector2 vector8 = new Vector2(NPC.Center.X, NPC.position.Y + NPC.height - 10);
                     int damage = 35;
                     SoundEngine.PlaySound(SoundID.Item42, NPC.position);

@@ -15,6 +15,8 @@ public class HomingRocket : ModNPC
 	private float acceleration = 0.1f;
 	private float currentSpeed = 2f; // Initial speed
 	private float homingRange = 20f * 16f; // 20 tiles in pixels (1 tile = 16 pixels)
+	private int elapsedTime;
+	private float degrees;
 	public override void SetDefaults()
     {
         NPC.width = 14;
@@ -25,7 +27,8 @@ public class HomingRocket : ModNPC
         NPC.value = 0;
         NPC.noTileCollide = true;
         NPC.timeLeft = 500;
-    }
+		NPC.noGravity = true;
+	}
     public override void OnKill()
     {
         foreach (Player P in Main.player)
@@ -114,7 +117,7 @@ public class HomingRocket : ModNPC
                 Main.dust[num267].velocity *= 0.05f;
             }
         }
-		NPC.rotation = (float)Math.Atan2(NPC.velocity.Y, NPC.velocity.X) + 1.57f;
+		NPC.rotation = MathF.Atan2(NPC.velocity.Y, NPC.velocity.X) + MathHelper.PiOver2;
 		for (int p = 0; p < Main.player.Length; p++)
 		{
 			if (Main.player[p].active)
@@ -153,38 +156,44 @@ public class HomingRocket : ModNPC
 		//{
 		//	HomeInWithinRange(homingRange);
 		//}
-		
-		if (Math.Abs(NPC.velocity.X) < 15f && Math.Abs(NPC.velocity.Y) < 15f)
-        {
-            NPC.velocity *= 1.1f;
-        }
-		else
+		//if (Math.Abs(NPC.velocity.X) < 15f && Math.Abs(NPC.velocity.Y) < 15f)
+		//{
+		//	NPC.velocity *= 1.1f;
+		//}
+		//else
+		//{
+		//	NPC.ai[2] = 1;
+		//}
+
+		// accelerate if velocity is less than x units/s
+		if (NPC.velocity.Length() < 20f)
 		{
-			NPC.ai[2] = 1;
+			elapsedTime++;
+			Vector2 acceleration = NPC.velocity / 1200f;
+			NPC.velocity = NPC.velocity + acceleration * elapsedTime;
 		}
-        
-        float num26 = (float)Math.Sqrt((double)(NPC.velocity.X * NPC.velocity.X + NPC.velocity.Y * NPC.velocity.Y));
-        float num27 = NPC.localAI[0];
-        if (num27 == 0f)
-        {
-            NPC.localAI[0] = num26;
-            num27 = num26;
-        }
-        if (NPC.alpha > 0)
-        {
-            NPC.alpha -= 25;
-        }
-        if (NPC.alpha < 0)
-        {
-            NPC.alpha = 0;
-        }
-        float targetPositionX = NPC.position.X;
-        float targetPositionY = NPC.position.Y;
+
+		float num26 = (float)Math.Sqrt((double)(NPC.velocity.X * NPC.velocity.X + NPC.velocity.Y * NPC.velocity.Y));
+		float num27 = NPC.localAI[0];
+		if (num27 == 0f)
+		{
+			NPC.localAI[0] = num26;
+			num27 = num26;
+		}
+		if (NPC.alpha > 0)
+		{
+			NPC.alpha -= 25;
+		}
+		if (NPC.alpha < 0)
+		{
+			NPC.alpha = 0;
+		}
+		float targetPositionX = NPC.position.X;
+		float targetPositionY = NPC.position.Y;
 		Vector2 targetPos = NPC.position;
-        float desiredDistanceForLockOn = NPC.ai[2] == 1 ? 100000 : NPC.velocity.Length() * 1f;
-		//Main.NewText(NPC.velocity.Length());
-        bool flag = false;
-        int foundPlayer = 0;
+		float desiredDistanceForLockOn = NPC.ai[2] == 1 ? 100000 : NPC.velocity.Length() * 30f;
+		bool flag = false;
+		int foundPlayer = 0;
 
 		if (NPC.ai[1] == 0)
 		{
@@ -236,99 +245,105 @@ public class HomingRocket : ModNPC
 		//    }
 		//    flag = false;
 		//}
+
+		// home into target, with some extra fancy bits to prevent it getting stuck and to make it look cool
 		if (NPC.ai[1] != 0f)
-        {
-            int num36 = (int)(NPC.ai[1] - 1f);
-            if (Main.player[num36].active)
-            {
-                float num37 = Main.player[num36].position.X + Main.player[num36].width / 2;
-                float num38 = Main.player[num36].position.Y + Main.player[num36].height / 2;
-                float num39 = Math.Abs(NPC.position.X + NPC.width / 2 - num37) + Math.Abs(NPC.position.Y + NPC.height / 2 - num38);
-                if (num39 < 1000f)
-                {
-                    flag = true;
-                    targetPositionX = Main.player[num36].position.X + Main.player[num36].width / 2;
-                    targetPositionY = Main.player[num36].position.Y + Main.player[num36].height / 2;
-                }
-            }
-        }
-        if (flag || NPC.ai[2] == 1)
-        {
-            float num40 = num27;
-            float xDistance = targetPositionX - NPC.Center.X;
-            float yDistance = targetPositionY - NPC.Center.Y;
-            float num43 = (float)Math.Sqrt((double)(xDistance * xDistance + yDistance * yDistance));
-            num43 = num40 / num43;
-            xDistance *= num43;
-            yDistance *= num43;
-            int num44 = 8;
-            NPC.velocity.X = (NPC.velocity.X * (num44 - 1) + xDistance) / num44;
-            NPC.velocity.Y = (NPC.velocity.Y * (num44 - 1) + yDistance) / num44;
-        }
-	}
-
-
-	// OTHER CODE, DOESN'T WORK PROPERLY
-	private void HomeInWithinRange(float range)
-	{
-		// Find closest NPC within homing range
-		Player closestPlayer = null;
-		float closestDistance = range;
-
-		for (int playerIndex = 0; playerIndex < Main.player.Length; playerIndex++)
 		{
-			//if (Collision.CanHit(new Vector2(NPC.position.X + NPC.width / 2, NPC.position.Y + NPC.height / 2), 1, 1,
-			//			Main.player[playerIndex].position, Main.player[playerIndex].width, Main.player[playerIndex].height))
+			int num36 = (int)(NPC.ai[1] - 1f);
+			if (Main.player[num36].active)
 			{
-				float distanceToPlayer = Vector2.Distance(Main.player[playerIndex].Center, NPC.Center);
-				if (distanceToPlayer < closestDistance)
-				{
-					closestDistance = distanceToPlayer;
-					closestPlayer = Main.player[playerIndex];
-				}
-			}
-		}
-
-		// Home in on closest NPC within range
-		if (closestPlayer != null)
-		{
-			//Vector2 direction = closestPlayer.Center - NPC.Center;
-			//direction.Normalize();
-			//NPC.velocity = Vector2.Lerp(NPC.velocity, direction * 2, 0.1f);
-
-			float targetPositionX = NPC.position.X;
-			float targetPositionY = NPC.position.Y;
-
-			if (closestPlayer.active)
-			{
-				float num37 = closestPlayer.position.X + closestPlayer.width / 2;
-				float num38 = closestPlayer.position.Y + closestPlayer.height / 2;
+				float num37 = Main.player[num36].position.X + Main.player[num36].width / 2;
+				float num38 = Main.player[num36].position.Y + Main.player[num36].height / 2;
 				float num39 = Math.Abs(NPC.position.X + NPC.width / 2 - num37) + Math.Abs(NPC.position.Y + NPC.height / 2 - num38);
 				if (num39 < 1000f)
 				{
-					//flag = true;
-					targetPositionX = closestPlayer.position.X + closestPlayer.width / 2;
-					targetPositionY = closestPlayer.position.Y + closestPlayer.height / 2;
+					flag = true;
+					targetPositionX = Main.player[num36].position.X + Main.player[num36].width / 2;
+					targetPositionY = Main.player[num36].position.Y + Main.player[num36].height / 2;
 				}
 			}
+		}
+		if (flag || NPC.ai[2] == 1)
+		{
+			float length = NPC.velocity.Length();
+			Vector2 targetLockedPosition = new Vector2(targetPositionX, targetPositionY);
+			float targetAngle = NPC.AngleTo(targetLockedPosition);
 
-			float num26 = (float)Math.Sqrt((double)(NPC.velocity.X * NPC.velocity.X + NPC.velocity.Y * NPC.velocity.Y));
-			float num27 = NPC.localAI[0];
-			if (num27 == 0f)
+			float velToRot = NPC.velocity.ToRotation();
+			float angleMultiplier = 0.95f;
+			Vector2 a = velToRot.AngleTowards(targetAngle, MathHelper.ToRadians(360)).ToRotationVector2();
+			Vector2 a2 = velToRot.AngleTowards(velToRot + MathHelper.PiOver2 * angleMultiplier, MathHelper.ToRadians(360)).ToRotationVector2();
+			Vector2 a3 = velToRot.AngleTowards(velToRot - MathHelper.PiOver2 * angleMultiplier, MathHelper.ToRadians(360)).ToRotationVector2();
+			float aToRot = a.ToRotation();
+			float a2ToRot = a2.ToRotation();
+			float a3ToRot = a3.ToRotation();
+			// dusts to visualise detection cone behind the rocket
+			//Dust b = Dust.NewDustPerfect(NPC.Center, DustID.FireworksRGB, a * 25f, newColor: Color.Lime);
+			//Dust b2 = Dust.NewDustPerfect(NPC.Center, DustID.FireworksRGB, a2 * 25f, newColor: Color.Red);
+			//Dust b3 = Dust.NewDustPerfect(NPC.Center, DustID.FireworksRGB, a3 * 25f, newColor: new Color(10, 50, 255));
+			//b.noGravity = true;
+			//b2.noGravity = true;
+			//b3.noGravity = true;
+
+			//float distanceHigh = 448f;
+			float distanceLow = 60f;
+			//if (NPC.Center.Distance(targetLockedPosition) > distanceHigh)
+			//{
+			//	degrees = NPC.Center.Distance(targetLockedPosition) / (distanceHigh / 4f);
+			//}
+			//else
+			if (NPC.Center.Distance(targetLockedPosition) < distanceLow) // if close, rotate towards target faster
 			{
-				NPC.localAI[0] = num26;
-				num27 = num26;
+				if (degrees < 32f)
+				{
+					degrees += 1.5f;
+				}
+				else
+				{
+					degrees -= 0.25f;
+				}
 			}
-			float num40 = num27;
-			float xDistance = targetPositionX - NPC.Center.X;
-			float yDistance = targetPositionY - NPC.Center.Y;
-			float num43 = (float)Math.Sqrt((double)(xDistance * xDistance + yDistance * yDistance));
-			num43 = num40 / num43;
-			xDistance *= num43;
-			yDistance *= num43;
-			int num44 = 8;
-			NPC.velocity.X = (NPC.velocity.X * (num44 - 1) + xDistance) / num44;
-			NPC.velocity.Y = (NPC.velocity.Y * (num44 - 1) + yDistance) / num44;
+			// next two else ifs are for detecting if the player is in a cone behind the rocket, and if so increase degrees to 16
+			// cone can be visualised by uncommenting the dusts above
+			else if (a2ToRot > a3ToRot)
+			{
+				if (aToRot > a2ToRot || aToRot < a3ToRot)
+				{
+					if (degrees < 16f)
+					{
+						degrees += 0.5f;
+					}
+					else
+					{
+						degrees -= 1.5f;
+					}
+				}
+			}
+			else if (a2ToRot < a3ToRot)
+			{
+				if (aToRot > a2ToRot && aToRot < a3ToRot)
+				{
+					if (degrees < 16f)
+					{
+						degrees += 0.5f;
+					}
+					else
+					{
+						degrees -= 1.5f;
+					}
+				}
+			}
+			// increasing minimumDegrees to about 6 means the missiles can no longer lose track of the player
+			float minimumDegrees = 4.5f;
+			if (degrees > minimumDegrees)
+			{
+				degrees -= 2.5f;
+			}
+			else if (degrees < minimumDegrees)
+			{
+				degrees = minimumDegrees;
+			}
+			NPC.velocity = NPC.velocity.ToRotation().AngleTowards(targetAngle, MathHelper.ToRadians(degrees)).ToRotationVector2() * length;
 		}
 	}
 }
