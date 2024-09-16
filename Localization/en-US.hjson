@@ -9191,11 +9191,6 @@ Mods: {
 				DisplayName: Savanna Torch
 				Tooltip: ""
 			}
-
-			AdamantiteSlimeBanner: {
-				DisplayName: Adamantite Slime Banner
-				Tooltip: ""
-			}
 		}
 
 		InfoDisplays: {

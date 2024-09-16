@@ -1,5 +1,4 @@
 using Avalon.Buffs.Debuffs;
-using Avalon.Common.Players;
 using Avalon.Dusts;
 using Avalon.Gores;
 using Microsoft.Xna.Framework;
@@ -283,7 +282,7 @@ namespace Avalon.Compatability.BiomeLava
 
 		static Vector3 ModifyLight(int i, int j, float r, float g, float b)
 		{
-			return new Vector3(0.5f, 0, 2f);
+			return new Vector3(1f, 1f, 0f);
 		}
 
 		static bool lavafallGlowmask()
