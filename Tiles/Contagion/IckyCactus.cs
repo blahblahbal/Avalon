@@ -10,5 +10,5 @@ public class IckyCactus : ModCactus
 
     public override Asset<Texture2D> GetTexture() => ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Contagion/IckyCactus");
 
-    public override Asset<Texture2D> GetFruitTexture() => Asset<Texture2D>.Empty;
+    public override Asset<Texture2D> GetFruitTexture() => ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Contagion/IckyCactus_Fruit");
 }
