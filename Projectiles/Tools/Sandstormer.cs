@@ -25,7 +25,9 @@ public class Sandstormer : ModProjectile
         {
             if (!Terraria.GameContent.Events.Sandstorm.Happening)
 			{
-				Main.windSpeedCurrent = 20f * (Main.rand.NextBool() ? -1 : 1);
+				AvalonWorld.SandstormTimeLeft = 60 * 60 * Main.rand.Next(8, 25);
+				AvalonWorld.SandstormDirection = (sbyte)(Main.rand.NextBool() ? -1 : 1);
+				//Main.windSpeedCurrent = 20f * (Main.rand.NextBool() ? -1 : 1);
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					Terraria.GameContent.Events.Sandstorm.StartSandstorm();
@@ -42,6 +44,7 @@ public class Sandstormer : ModProjectile
             }
             else
             {
+				AvalonWorld.SandstormTimeLeft = 0;
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					Terraria.GameContent.Events.Sandstorm.StopSandstorm();
