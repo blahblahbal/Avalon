@@ -298,6 +298,7 @@ public class AvalonPlayer : ModPlayer
     public bool RubberGloves;
 	public bool CalculatorSpectacles;
 	public bool CalcSpecDisplay;
+	public bool ConfusionTal;
     #endregion
 
     #region buffs and debuffs
@@ -653,8 +654,10 @@ public class AvalonPlayer : ModPlayer
             Player.gravity /= gravity;
         }
 
-        #region mouseposition
-        if (Player.whoAmI == Main.myPlayer)
+		WOSTongue();
+
+		#region mouseposition
+		if (Player.whoAmI == Main.myPlayer)
         {
             MousePosition = Main.MouseWorld;
         }
@@ -686,6 +689,53 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PostUpdate()
 	{
+		#region wall of steel
+		if (Player.tongued)
+		{
+			bool flag21 = false;
+			if (AvalonWorld.WallOfSteel >= 0)
+			{
+				float num159 = Main.npc[AvalonWorld.WallOfSteel].position.X +
+							   (Main.npc[AvalonWorld.WallOfSteel].width / 2);
+				num159 += Main.npc[AvalonWorld.WallOfSteel].direction * 200;
+				float num160 = Main.npc[AvalonWorld.WallOfSteel].position.Y +
+							   (Main.npc[AvalonWorld.WallOfSteel].height / 2);
+				var vector5 = new Vector2(Player.position.X + (Player.width * 0.5f),
+					Player.position.Y + (Player.height * 0.5f));
+				float num161 = num159 - vector5.X;
+				float num162 = num160 - vector5.Y;
+				float num163 = (float)Math.Sqrt((num161 * num161) + (num162 * num162));
+				float num164 = 11f;
+				float num165;
+				if (num163 > num164)
+				{
+					num165 = num164 / num163;
+				}
+				else
+				{
+					num165 = 1f;
+					flag21 = true;
+				}
+
+				num161 *= num165;
+				num162 *= num165;
+				Player.velocity.X = num161;
+				Player.velocity.Y = num162;
+				Player.position += Player.velocity;
+			}
+
+			if (flag21 && Main.myPlayer == Player.whoAmI)
+			{
+				for (int num166 = 0; num166 < 22; num166++)
+				{
+					if (Player.buffType[num166] == 38)
+					{
+						Player.DelBuff(num166);
+					}
+				}
+			}
+		}
+		#endregion
 		#region genies
 		GenieCooldown--;
 		if (GenieCooldown < 0) GenieCooldown = 0;
@@ -2372,7 +2422,12 @@ public class AvalonPlayer : ModPlayer
             }
         }
 
-        if (Gambler || AdvGambler)
+		if (ConfusionTal && Main.rand.Next(100) < 12)
+		{
+			target.AddBuff(BuffID.Confused, 540);
+		}
+
+		if (Gambler || AdvGambler)
         {
             if (Main.rand.Next(100) < (AdvGambler ? 8 : 5))
             {
@@ -2450,7 +2505,12 @@ public class AvalonPlayer : ModPlayer
             }
         }
 
-        if (Gambler)
+		if (ConfusionTal && Main.rand.Next(100) < 12)
+		{
+			target.AddBuff(BuffID.Confused, 540);
+		}
+
+		if (Gambler)
         {
             float chance = Player.GetCritChance(DamageClass.Generic) / 10f;
             if (chance < 1f) chance = 1f;
@@ -2855,62 +2915,63 @@ public class AvalonPlayer : ModPlayer
 	public void UpdateMana() => Player.statManaMax2 += SpiritPoppyUseCount * 20;
 	public override void PostUpdateMiscEffects()
     {
-        #region Biome Particles
-        ////--== Biome Particles ==--
-        //if(ModContent.GetInstance<AvalonClientConfig>().BiomeParticlesEnabled)
-        //    {
-        //    if (Main.myPlayer == Player.whoAmI && Main.netMode != NetmodeID.Server)
-        //    {
+		WOSTongue();
+		#region Biome Particles
+		////--== Biome Particles ==--
+		//if(ModContent.GetInstance<AvalonClientConfig>().BiomeParticlesEnabled)
+		//    {
+		//    if (Main.myPlayer == Player.whoAmI && Main.netMode != NetmodeID.Server)
+		//    {
 
-        //        if (Player.position.Y >= (Main.maxTilesY - 300) * 16) // Sparks
-        //        {
-        //            int yea = (Player.position.Y >= (Main.maxTilesY - 200) * 16) ? 5 : 2;
-        //            for (int i = 0; i < Main.rand.Next(yea); i++)
-        //            {
-        //                Dust d = Dust.NewDustPerfect(Player.Center + new Vector2(Main.rand.Next(-1000, 1000), Main.rand.Next(-1000, 1000)), DustID.Torch, new Vector2(Main.rand.NextFloat(1f, 8f), Main.rand.NextFloat(-1f, -5f)), 0, default, Main.rand.NextFloat(0.1f, 1.5f));
-        //                d.noGravity = Main.rand.NextBool(3);
-        //                d.noLightEmittence = true;
-        //                if (Main.rand.NextBool(3))
-        //                    d.type = DustID.InfernoFork;
-        //            }
-        //        }
-        //        if (Player.position.Y >= (Main.maxTilesY - 200) * 16) // Smoke
-        //        {
-        //            for (int i = 0; i < Main.rand.Next(3); i++)
-        //            {
-        //                Dust d = Dust.NewDustPerfect(new Vector2(Player.Center.X, Main.rand.Next((Main.maxTilesY - 150) * 16, Main.maxTilesY * 16)) + new Vector2(Main.rand.Next(-1000, 1000), 0), DustID.Smoke, new Vector2(Main.rand.NextFloat(1f, 8f), Main.rand.NextFloat(-1f, -5f)), 200, Color.DarkGray, Main.rand.NextFloat(0.1f, 2f));
-        //                d.noGravity = Main.rand.NextBool(3);
-        //                d.noLightEmittence = true;
-        //            }
-        //            if (Player.position.X < 1100 * 16 || Player.position.X > (Main.maxTilesX - 1100) * 16) // Ashwood Biome
-        //            {
-        //                for (int ix = -60; ix < 60; ix++)
-        //                {
-        //                    for (int iy = -60; iy < 60; iy++)
-        //                    {
-        //                        Vector2 coord = Player.Center + new Vector2(ix * 16, iy * 16);
-        //                        int TileCoordsX = (int)(coord.X / 16);
-        //                        int TileCoordsY = (int)(coord.Y / 16);
-        //                        if (Main.tile[TileCoordsX, TileCoordsY + 1].LiquidType == LiquidID.Lava && Main.tile[TileCoordsX, TileCoordsY + 1].LiquidAmount > 0 && Main.tile[TileCoordsX, TileCoordsY - 1].LiquidAmount == 0)
-        //                        {
-        //                            if (Main.rand.NextBool(2300))
-        //                            {
-        //                                Gore g = Gore.NewGorePerfect(Player.GetSource_FromThis(), coord, new Vector2(Main.rand.NextFloat(-1f, 3f), Main.rand.NextFloat(-3f, -4f)), Main.rand.Next(11, 13), 1);
-        //                                g.GetAlpha(Color.Lerp(new Color(128, 128, 128, 128), new Color(0, 0, 0, 128), Main.rand.NextFloat(0.3f, 0.8f)));
-        //                                g.rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
-        //                                g.alpha = Main.rand.Next(128, 180);
-        //                                g.scale = Main.rand.NextFloat(0.8f, 1.5f);
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-        #endregion
+		//        if (Player.position.Y >= (Main.maxTilesY - 300) * 16) // Sparks
+		//        {
+		//            int yea = (Player.position.Y >= (Main.maxTilesY - 200) * 16) ? 5 : 2;
+		//            for (int i = 0; i < Main.rand.Next(yea); i++)
+		//            {
+		//                Dust d = Dust.NewDustPerfect(Player.Center + new Vector2(Main.rand.Next(-1000, 1000), Main.rand.Next(-1000, 1000)), DustID.Torch, new Vector2(Main.rand.NextFloat(1f, 8f), Main.rand.NextFloat(-1f, -5f)), 0, default, Main.rand.NextFloat(0.1f, 1.5f));
+		//                d.noGravity = Main.rand.NextBool(3);
+		//                d.noLightEmittence = true;
+		//                if (Main.rand.NextBool(3))
+		//                    d.type = DustID.InfernoFork;
+		//            }
+		//        }
+		//        if (Player.position.Y >= (Main.maxTilesY - 200) * 16) // Smoke
+		//        {
+		//            for (int i = 0; i < Main.rand.Next(3); i++)
+		//            {
+		//                Dust d = Dust.NewDustPerfect(new Vector2(Player.Center.X, Main.rand.Next((Main.maxTilesY - 150) * 16, Main.maxTilesY * 16)) + new Vector2(Main.rand.Next(-1000, 1000), 0), DustID.Smoke, new Vector2(Main.rand.NextFloat(1f, 8f), Main.rand.NextFloat(-1f, -5f)), 200, Color.DarkGray, Main.rand.NextFloat(0.1f, 2f));
+		//                d.noGravity = Main.rand.NextBool(3);
+		//                d.noLightEmittence = true;
+		//            }
+		//            if (Player.position.X < 1100 * 16 || Player.position.X > (Main.maxTilesX - 1100) * 16) // Ashwood Biome
+		//            {
+		//                for (int ix = -60; ix < 60; ix++)
+		//                {
+		//                    for (int iy = -60; iy < 60; iy++)
+		//                    {
+		//                        Vector2 coord = Player.Center + new Vector2(ix * 16, iy * 16);
+		//                        int TileCoordsX = (int)(coord.X / 16);
+		//                        int TileCoordsY = (int)(coord.Y / 16);
+		//                        if (Main.tile[TileCoordsX, TileCoordsY + 1].LiquidType == LiquidID.Lava && Main.tile[TileCoordsX, TileCoordsY + 1].LiquidAmount > 0 && Main.tile[TileCoordsX, TileCoordsY - 1].LiquidAmount == 0)
+		//                        {
+		//                            if (Main.rand.NextBool(2300))
+		//                            {
+		//                                Gore g = Gore.NewGorePerfect(Player.GetSource_FromThis(), coord, new Vector2(Main.rand.NextFloat(-1f, 3f), Main.rand.NextFloat(-3f, -4f)), Main.rand.Next(11, 13), 1);
+		//                                g.GetAlpha(Color.Lerp(new Color(128, 128, 128, 128), new Color(0, 0, 0, 128), Main.rand.NextFloat(0.3f, 0.8f)));
+		//                                g.rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
+		//                                g.alpha = Main.rand.Next(128, 180);
+		//                                g.scale = Main.rand.NextFloat(0.8f, 1.5f);
+		//                            }
+		//                        }
+		//                    }
+		//                }
+		//            }
+		//        }
+		//    }
+		//}
+		#endregion
 
-        if (RoseMagic)
+		if (RoseMagic)
         {
             if (RoseMagicCooldown > 0)
             {
@@ -3250,4 +3311,87 @@ public class AvalonPlayer : ModPlayer
         Player.AddBuff(ModContent.BuffType<SkyBlessing>(), 60 * 7);
     }
     public void ResetShadowCooldown() => ShadowCooldown = 0;
+
+	public void WOSTongue()
+	{
+		if (AvalonWorld.WallOfSteel >= 0 && Main.npc[AvalonWorld.WallOfSteel].active)
+		{
+			float num = Main.npc[AvalonWorld.WallOfSteel].position.X + 40f;
+			if (Main.npc[AvalonWorld.WallOfSteel].direction > 0)
+			{
+				num -= 96f;
+			}
+			if (Player.position.X + Player.width > num && Player.position.X < num + 140f && Player.gross)
+			{
+				Player.noKnockback = false;
+				Player.Hurt(PlayerDeathReason.ByNPC(AvalonWorld.WallOfSteel), 50,
+					Main.npc[AvalonWorld.WallOfSteel].direction);
+			}
+
+			if (!Player.gross && Player.position.Y > (Main.maxTilesY - 250) * 16 && Player.position.X > num - 1920f &&
+				Player.position.X < num + 1920f)
+			{
+				Player.AddBuff(37, 10);
+				Player.gross = true;
+				//Main.PlaySound(4, (int)Main.npc[AvalonWorld.wos].position.X, (int)Main.npc[AvalonWorld.wos].position.Y, 10);
+			}
+
+			if (Player.gross)
+			{
+				if (Player.position.Y < (Main.maxTilesY - 200) * 16)
+				{
+					Player.AddBuff(38, 10);
+				}
+
+				if (Main.npc[AvalonWorld.WallOfSteel].direction < 0)
+				{
+					if (Player.position.X + (Player.width / 2) > Main.npc[AvalonWorld.WallOfSteel].position.X +
+						(Main.npc[AvalonWorld.WallOfSteel].width / 2) + 40f)
+					{
+						Player.AddBuff(38, 10);
+					}
+				}
+				else if (Player.position.X + (Player.width / 2) < Main.npc[AvalonWorld.WallOfSteel].position.X +
+						 (Main.npc[AvalonWorld.WallOfSteel].width / 2) - 40f)
+				{
+					Player.AddBuff(38, 10);
+				}
+			}
+
+			if (Player.tongued)
+			{
+				Player.controlHook = false;
+				Player.controlUseItem = false;
+				for (int i = 0; i < 1000; i++)
+				{
+					if (Main.projectile[i].active && Main.projectile[i].owner == Main.myPlayer &&
+						Main.projectile[i].aiStyle == 7)
+					{
+						Main.projectile[i].Kill();
+					}
+				}
+
+				var vector = new Vector2(Player.position.X + (Player.width * 0.5f),
+					Player.position.Y + (Player.height * 0.5f));
+				float num2 = Main.npc[AvalonWorld.WallOfSteel].position.X +
+					(Main.npc[AvalonWorld.WallOfSteel].width / 2) - vector.X;
+				float num3 = Main.npc[AvalonWorld.WallOfSteel].position.Y +
+					(Main.npc[AvalonWorld.WallOfSteel].height / 2) - vector.Y;
+				float num4 = (float)Math.Sqrt((num2 * num2) + (num3 * num3));
+				if (num4 > 3000f)
+				{
+					Player.lastDeathPostion = Player.position;
+					Player.KillMe(PlayerDeathReason.ByNPC(AvalonWorld.WallOfSteel), 1000.0, 0);
+					return;
+				}
+
+				if (Main.npc[AvalonWorld.WallOfSteel].position.X < 608f ||
+					Main.npc[AvalonWorld.WallOfSteel].position.X > (Main.maxTilesX - 38) * 16)
+				{
+					Player.lastDeathPostion = Player.position;
+					Player.KillMe(PlayerDeathReason.ByNPC(AvalonWorld.WallOfSteel), 1000.0, 0);
+				}
+			}
+		}
+	}
 }

@@ -1,5 +1,4 @@
 using Avalon.Common.Templates;
-using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;

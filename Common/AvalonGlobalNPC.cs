@@ -81,6 +81,93 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		return true;
 	}
+
+	/// <summary>
+	/// Spawns the Wall of Steel at the given position.
+	/// </summary>
+	/// <param name="pos">The position to spawn the boss at.</param>
+	/// <param name="essence">Whether or not the method will broadcast the "has awoken!" message.</param>
+	public static void SpawnWOS(Vector2 pos, bool essence = false)
+	{
+		if (pos.Y / 16f < Main.maxTilesY - 205)
+		{
+			return;
+		}
+		if (AvalonWorld.WallOfSteel >= 0 || Main.wofNPCIndex >= 0)
+		{
+			return;
+		}
+		if (Main.netMode == NetmodeID.MultiplayerClient)
+		{
+			return;
+		}
+		int num = 1;
+		if (pos.X / 16f > Main.maxTilesX / 2)
+		{
+			num = -1;
+		}
+		bool flag = false;
+		int num2 = (int)pos.X;
+		while (!flag)
+		{
+			flag = true;
+			for (int i = 0; i < 255; i++)
+			{
+				if (Main.player[i].active && Main.player[i].position.X > num2 - 1200 && Main.player[i].position.X < num2 + 1200)
+				{
+					num2 -= num * 16;
+					flag = false;
+				}
+			}
+			if (num2 / 16 < 20 || num2 / 16 > Main.maxTilesX - 20)
+			{
+				flag = true;
+			}
+		}
+		int num3 = (int)pos.Y;
+		int num4 = num2 / 16;
+		int num5 = num3 / 16;
+		int num6 = 0;
+		try
+		{
+			while (WorldGen.SolidTile(num4, num5 - num6) || Main.tile[num4, num5 - num6].LiquidAmount >= 100)
+			{
+				if (!WorldGen.SolidTile(num4, num5 + num6) && Main.tile[num4, num5 + num6].LiquidAmount < 100)
+				{
+					num5 += num6;
+					goto IL_162;
+				}
+				num6++;
+			}
+			num5 -= num6;
+		}
+		catch
+		{
+		}
+		IL_162:
+		num3 = num5 * 16;
+		int num7 = NPC.NewNPC(NPC.GetBossSpawnSource(Player.FindClosest(pos, 32, 32)), num2, num3, ModContent.NPCType<NPCs.Bosses.Hardmode.WallofSteel>(), 0);
+		if (Main.netMode == NetmodeID.Server && num7 < 200)
+		{
+			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, num7);
+		}
+		//if (Main.npc[num7].displayName == "")
+		//{
+		//    Main.npc[num7].DisplayName = "Wall of Steel";
+		//}
+		if (!essence)
+		{
+			if (Main.netMode == NetmodeID.SinglePlayer)
+			{
+				Main.NewText(Language.GetTextValue("Mods.Avalon.WOSAwaken"), 175, 75, 255);
+				return;
+			}
+			if (Main.netMode == NetmodeID.Server)
+			{
+				ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(Language.GetTextValue("Mods.Avalon.WOSAwaken")), new Color(175, 75, 255));
+			}
+		}
+	}
 	public override void OnKill(NPC npc)
     {
 		//if (npc.type == NPCID.DungeonSpirit && Main.rand.NextBool(15) &&

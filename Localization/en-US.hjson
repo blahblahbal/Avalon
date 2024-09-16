@@ -439,6 +439,8 @@ Mods: {
 			AvalonTip3: Avalon: You can find Boltstone and Starstone deposits underground in the shape of lightning bolts and stars. These ores can be crafted into Stamina Crystals and Mana Crystals, respectively.
 		}
 
+		WOSAwaken: Wall of Steel has awoken!
+
 		BossDefeatedBlurbs: {
 			MoonLord: Screams are emanating from the library...
 			WallofSteel: The ancient souls have been disturbed!
@@ -492,6 +494,10 @@ Mods: {
 			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
 			RedArowana: Normally these fish are quite passive, but something in the Tropics causes them to become aggressive. What makes them behave this way is unknown.
+			Mime: The Copycat Extraordinaire, the Mime loves to copy what its opponent does. The cruel joke often lands it in lava, though.
+			EvilVulture: A bird attuned to the forces of evil, this Vulture has no such normal nature left.
+			WallOfSteel: An abandoned creation designed to accomplish what the original Guardian of the Underworld could not - prevent the Terrarian from further destabilizing the world.
+			MechanicalHungry: The Wall of Steel's many mouths, attached by steel cables. As a last resort, they can detach and precisely chase down threats.
 		}
 
 		Keybinds: {
@@ -9191,6 +9197,31 @@ Mods: {
 				DisplayName: Savanna Torch
 				Tooltip: ""
 			}
+
+			ManaCompromise: {
+				DisplayName: Mana Compromise
+				Tooltip:
+					'''
+					12% decreased magic damage and 8% decreased mana usage
+					Automatically use mana potions when needed
+					Provides immunity to Mana Sickness
+					'''
+			}
+
+			ConfusionTalisman: {
+				DisplayName: Confusion Talisman
+				Tooltip: 12% chance for your attacks to confuse your enemies
+			}
+
+			CoolGemsparkBlock: {
+				DisplayName: Cool Gemspark Block
+				Tooltip: ""
+			}
+
+			WarmGemsparkBlock: {
+				DisplayName: Warm Gemspark Block
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9460,6 +9491,8 @@ Mods: {
 			XanthophyteChainsaw.DisplayName: Xanthophyte Chainsaw
 			XanthophyteDrill.DisplayName: Xanthophyte Drill
 			BoompipeShrapnel.DisplayName: Boompipe Shrapnel
+			WoSCursedFireball.DisplayName: Wo S Cursed Fireball
+			WoSLaserSmall.DisplayName: Wo S Laser Small
 		}
 
 		NPCs: {
@@ -9582,6 +9615,14 @@ Mods: {
 			RedArowana2.DisplayName: Arowana
 			VenusFlytrap.DisplayName: Venus Flytrap
 			VenusFlytrapSideHead.DisplayName: Venus Flytrap Side Head
+			EvilVulture.DisplayName: Evil Vulture
+			Mime.DisplayName: Mime
+			MechanicalHungry.DisplayName: Mechanical Hungry
+			MechanicalHungry2.DisplayName: Mechanical Hungry2
+			MechanicalLeechHead.DisplayName: Mechanical Leech Head
+			MechanicalLeechBody.DisplayName: Mechanical Leech Body
+			MechanicalLeechTail.DisplayName: Mechanical Leech Tail
+			WallofSteel.DisplayName: Wallof Steel
 		}
 
 		Buffs: {

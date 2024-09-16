@@ -101,7 +101,12 @@ public class AvalonWorld : ModSystem
     public static int DungeonLocationX;
     public static int JungleLocationX;
 
-    public static CopperVariant CopperOre = CopperVariant.Random;
+	public static int WallOfSteel { get; set; } = -1;
+	public static int WallOfSteelB { get; set; }
+	public static int WallOfSteelF { get; set; }
+	public static int WallOfSteelT { get; set; }
+
+	public static CopperVariant CopperOre = CopperVariant.Random;
     public static IronVariant IronOre = IronVariant.Random;
     public static SilverVariant SilverOre = SilverVariant.Random;
     public static GoldVariant GoldOre = GoldVariant.Random;
