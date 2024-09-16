@@ -33,6 +33,7 @@ public class BleachedEbonyCandelabra : CandelabraTemplate
 	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
+		base.SetStaticDefaults();
 		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -76,6 +77,7 @@ public class BleachedEbonyCandle : CandleTemplate
 	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
+		base.SetStaticDefaults();
 		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -304,6 +306,7 @@ public class BleachedEbonyLamp : LampTemplate
 	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
+		base.SetStaticDefaults();
 		flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
 	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

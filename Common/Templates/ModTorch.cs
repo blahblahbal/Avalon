@@ -27,7 +27,6 @@ public abstract class SpecialLight : ModTile
 
 public abstract class ModTorch : SpecialLight
 {
-	private static Asset<Texture2D> textureFlame;
 	public override void SetStaticDefaults()
     {
         RegisterItemDrop(TorchItem);
@@ -67,7 +66,6 @@ public abstract class ModTorch : SpecialLight
         AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Torch"));
         //DustType = DustID.JungleSpore;
         AdjTiles = new int[] { TileID.Torches };
-		textureFlame = ModContent.Request<Texture2D>(Texture + "_Flame");
     }
     public override bool CreateDust(int i, int j, ref int type)
     {
@@ -141,36 +139,6 @@ public abstract class ModTorch : SpecialLight
             }
         }
     }
-
-    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
-    {
-        var randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)(ulong)i);
-        var color = new Color(100, 100, 100, 0);
-        int frameX = Main.tile[i, j].TileFrameX;
-        int frameY = Main.tile[i, j].TileFrameY;
-        var width = 20;
-        var offsetY = 0;
-        var height = 20;
-        if (WorldGen.SolidTile(i, j - 1))
-        {
-            offsetY = 2;
-            if (WorldGen.SolidTile(i - 1, j + 1) || WorldGen.SolidTile(i + 1, j + 1))
-            {
-                offsetY = 4;
-            }
-        }
-        var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-        if (Main.drawToScreen)
-        {
-            zero = Vector2.Zero;
-        }
-        for (var k = 0; k < 7; k++)
-        {
-            var x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
-            var y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-            Main.spriteBatch.Draw(textureFlame.Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
-        }
-    }
     public override void MouseOver(int i, int j)
     {
         Player player = Main.LocalPlayer;
@@ -221,7 +189,6 @@ public abstract class ModTorch : SpecialLight
 
 public abstract class ModCampfire : SpecialLight
 {
-	private static Asset<Texture2D> textureFlame;
 	public override void SetStaticDefaults()
     {
         RegisterItemDrop(TorchItem);
@@ -237,7 +204,6 @@ public abstract class ModCampfire : SpecialLight
 
         DustType = -1; // No dust when mined.
         AdjTiles = new int[] { TileID.Campfire };
-		textureFlame = ModContent.Request<Texture2D>(Texture + "_Flame");
 
         // Placement
         TileObjectData.newTile.CopyFrom(TileObjectData.GetTileData(TileID.Campfire, 0));
@@ -380,37 +346,6 @@ public abstract class ModCampfire : SpecialLight
             r = LightColor.X + pulse;
             g = LightColor.Y + pulse;
             b = LightColor.Z + pulse;
-        }
-    }
-
-    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
-    {
-        var tile = Main.tile[i, j];
-        if (tile.TileFrameY < 36)
-        {
-            Color color = new Color(255, 255, 255, 0);
-
-            Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-            if (Main.drawToScreen)
-            {
-                zero = Vector2.Zero;
-            }
-
-            int width = 16;
-            int offsetY = 0;
-            int height = 16;
-            short frameX = tile.TileFrameX;
-            short frameY = tile.TileFrameY;
-            int addFrX = 0;
-            int addFrY = 0;
-
-            TileLoader.SetDrawPositions(i, j, ref width, ref offsetY, ref height, ref frameX, ref frameY); // calculates the draw offsets
-            TileLoader.SetAnimationFrame(Type, i, j, ref addFrX, ref addFrY); // calculates the animation offsets
-
-            Rectangle drawRectangle = new Rectangle(tile.TileFrameX, tile.TileFrameY + addFrY, 16, 16);
-
-            // The flame is manually drawn separate from the tile texture so that it can be drawn at full brightness.
-            Main.spriteBatch.Draw(textureFlame.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, drawRectangle, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
     }
 }
