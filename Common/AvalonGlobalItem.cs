@@ -264,7 +264,19 @@ public class AvalonGlobalItem : GlobalItem
                 SoundEngine.PlaySound(SoundID.Grab);
                 return false;
             }
-            if (item.type == ModContent.ItemType<Breakdawn>())
+			// genie slot swapping
+			if (item.GetGlobalItem<AvalonGlobalItemInstance>().Genie && ModContent.GetInstance<GenieSlot>().FunctionalItem.type != ItemID.None && isItemInInventory)
+			{
+				Item genieInSlot = new Item();
+				genieInSlot.SetDefaults(ModContent.GetInstance<GenieSlot>().FunctionalItem.type);
+
+				ModContent.GetInstance<GenieSlot>().FunctionalItem.SetDefaults(item.type);
+				item.SetDefaults(genieInSlot.type);
+
+				SoundEngine.PlaySound(SoundID.Grab);
+				return false;
+			}
+			if (item.type == ModContent.ItemType<Breakdawn>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
                 int pfix = item.prefix;
@@ -1882,8 +1894,12 @@ public class AvalonGlobalItem : GlobalItem
         {
             return false;
         }
+		if (item.GetGlobalItem<AvalonGlobalItemInstance>().Genie && slot < 19 && !modded)
+		{
+			return false;
+		}
 
-        return !item.IsArmor() && base.CanEquipAccessory(item, player, slot, modded);
+		return !item.IsArmor() && base.CanEquipAccessory(item, player, slot, modded);
     }
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {
@@ -2739,7 +2755,7 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override bool AllowPrefix(Item item, int pre)
     {
-        if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome || item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll)
+        if (item.GetGlobalItem<AvalonGlobalItemInstance>().Tome || item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll || item.GetGlobalItem<AvalonGlobalItemInstance>().Genie)
         {
             return false;
         }
@@ -2752,7 +2768,8 @@ public class AvalonGlobalItem : GlobalItem
             return true;
         }
         if ((item.GetGlobalItem<AvalonGlobalItemInstance>().Tome ||
-            item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll) && (pre == -1 || pre == -3))
+            item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll ||
+			item.GetGlobalItem<AvalonGlobalItemInstance>().Genie) && (pre == -1 || pre == -3))
         {
             return false;
         }

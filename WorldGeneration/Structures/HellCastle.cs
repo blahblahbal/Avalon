@@ -58,15 +58,15 @@ internal class Hellcastle
         AddPlatforms(x, y, 400, 150);
         AddPaintings(x, y, 400, 150);
         Utils.AddSpikes(x, y, 400, 150, 20, ModContent.TileType<Tiles.VenomSpike>());
-        AddChests(x, y, 400, 150);
-        AddFurniture(x, y, 400, 150);
-        AddPots(x, y, 400, 150);
         // unsmooth tiles such as the spikes and impervious bricks
         UnsmoothTiles(x, y, 400, 150);
         // place up to 3 devil's scythes on the shelves/platforms
         AddDevilsScythes(x, y, 400, 150);
         AddEntranceArea(x, y + 150);
-        SmoothHellcastle(x, y, 400, 150);
+		AddChests(x, y, 400, 150);
+		AddFurniture(x, y, 400, 150);
+		AddPots(x, y, 400, 150);
+		SmoothHellcastle(x, y, 400, 150);
 		GenVars.structures.AddProtectedStructure(new Rectangle(x, y, 400, 150));
     }
     public static void AddPaintings(int x, int y, int width, int height)

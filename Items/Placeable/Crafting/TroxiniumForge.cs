@@ -1,3 +1,4 @@
+using Avalon.Items.OreChunks;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -29,5 +30,11 @@ class TroxiniumForge : ModItem
             .AddIngredient(ItemID.Hellforge)
             .AddTile(TileID.MythrilAnvil)
             .Register();
+
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<TroxiniumChunk>(), 30)
+			.AddIngredient(ItemID.Hellforge)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
     }
 }

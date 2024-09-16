@@ -13,6 +13,7 @@ using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Fish;
 using Avalon.Items.Consumables;
+using Avalon.Items.OreChunks;
 
 namespace Avalon.Systems.Recipes;
 
@@ -69,18 +70,30 @@ public class VanillaItemRecipeCreator : ModSystem
             .AddIngredient(ItemID.SnowCloudBlock, 50)
             .AddTile(TileID.MythrilAnvil)
             .Register();
-        //Recipe.Create(ItemID.LihzahrdPowerCell).AddIngredient(ModContent.ItemType<SolariumStar>(), 5).AddIngredient(ItemID.LihzahrdBrick, 10).AddTile(TileID.MythrilAnvil).Register();
-        #endregion
 
-        #region Furnace
-        //Recipe.Create(ItemID.MagicMirror)
-        //    .AddIngredient(ItemID.Glass, 20)
-        //    .AddRecipeGroup(RecipeGroupID.IronBar, 5)
-        //    .AddIngredient(ItemID.RecallPotion, 3)
-        //    .AddTile(TileID.Furnaces)
-        //    .Register();
+		Recipe.Create(ItemID.AdamantiteForge)
+			.AddIngredient(ModContent.ItemType<AdamantiteChunk>(), 30)
+			.AddIngredient(ItemID.Hellforge)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
 
-        Recipe.Create(ItemID.Glass)
+		Recipe.Create(ItemID.TitaniumForge)
+			.AddIngredient(ModContent.ItemType<TitaniumChunk>(), 30)
+			.AddIngredient(ItemID.Hellforge)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+		//Recipe.Create(ItemID.LihzahrdPowerCell).AddIngredient(ModContent.ItemType<SolariumStar>(), 5).AddIngredient(ItemID.LihzahrdBrick, 10).AddTile(TileID.MythrilAnvil).Register();
+		#endregion
+
+		#region Furnace
+		//Recipe.Create(ItemID.MagicMirror)
+		//    .AddIngredient(ItemID.Glass, 20)
+		//    .AddRecipeGroup(RecipeGroupID.IronBar, 5)
+		//    .AddIngredient(ItemID.RecallPotion, 3)
+		//    .AddTile(TileID.Furnaces)
+		//    .Register();
+
+		Recipe.Create(ItemID.Glass)
             .AddIngredient(ModContent.ItemType<SnotsandBlock>(), 2)
             .AddTile(TileID.Furnaces)
             .Register();

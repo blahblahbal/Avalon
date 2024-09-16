@@ -20,6 +20,7 @@ using Avalon.Walls;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -226,8 +227,18 @@ public class AvalonPlayer : ModPlayer
     private int BrambleBreak;
     public bool PrimeMinion;
 
-    #region accessories
-    public bool PulseCharm;
+	#region genies
+	public bool Paramount;
+	public bool Zeal;
+	public bool Longevity;
+	public bool Infliction;
+	public bool Discipline;
+	public bool SpiritOfOriginal;
+	public int GenieCooldown;
+	#endregion
+
+	#region accessories
+	public bool PulseCharm;
     public bool ShadowCharm;
     public bool CloudGlove;
     public float BonusKB = 1f;
@@ -404,6 +415,14 @@ public class AvalonPlayer : ModPlayer
         MagicCritDamage = 0f;
         MeleeCritDamage = 0f;
         RangedCritDamage = 0f;
+
+		// genies
+		Paramount = false;
+		Zeal = false;
+		Longevity = false;
+		Infliction = false;
+		Discipline = false;
+		SpiritOfOriginal = false;
 
         // buffs
         AdvancedBattle = false;
@@ -667,6 +686,72 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PostUpdate()
 	{
+		#region genies
+		GenieCooldown--;
+		if (GenieCooldown < 0) GenieCooldown = 0;
+
+		if (Paramount && GenieCooldown == 0 && KeybindSystem.GenieHotkey.JustPressed)
+		{
+			Player.Heal(25);
+			SoundEngine.PlaySound(SoundID.Item4);
+			GenieCooldown = 60 * 45;
+		}
+
+		if (Longevity && GenieCooldown == 0 && KeybindSystem.GenieHotkey.JustPressed)
+		{
+			Player.AddBuff(ModContent.BuffType<ArmorPenetration>(), 60 * 8);
+			SoundEngine.PlaySound(SoundID.Item4);
+			GenieCooldown = 60 * 45;
+		}
+
+		if (Discipline && GenieCooldown == 0 && KeybindSystem.GenieHotkey.JustPressed)
+		{
+			Player.AddBuff(ModContent.BuffType<Fledgling>(), 60 * 25);
+			SoundEngine.PlaySound(SoundID.Item4);
+			GenieCooldown = 60 * 45;
+		}
+
+		if (Zeal && GenieCooldown == 0 && KeybindSystem.GenieHotkey.JustPressed)
+		{
+			for (int i = 0; i < Main.npc.Length; i++)
+			{
+				NPC n = Main.npc[i];
+				if (n.dontTakeDamage) continue;
+				if (Vector2.Distance(n.Center, MousePosition) < 16 * 15)
+				{
+					n.SimpleStrikeNPC(15 + n.defense / 2, 0);
+					n.AddBuff(BuffID.OnFire3, 60 * 3);
+				}
+			}
+			SoundEngine.PlaySound(SoundID.Item4);
+			GenieCooldown = 60 * 45;
+		}
+
+		if (SpiritOfOriginal && GenieCooldown == 0 && KeybindSystem.GenieHotkey.JustPressed)
+		{
+			Player.AddBuff(ModContent.BuffType<SpiritOfOriginal>(), 60 * 10);
+			Player.immuneTime = 60 * 2;
+			SoundEngine.PlaySound(SoundID.Item4);
+			GenieCooldown = 60 * 45;
+		}
+
+		if (Infliction && GenieCooldown == 0 && KeybindSystem.GenieHotkey.JustPressed)
+		{
+			Player.AddBuff(ModContent.BuffType<InflictionGenieBuff>(), 60 * 6);
+			for (int i = 0; i < Main.npc.Length; i++)
+			{
+				NPC n = Main.npc[i];
+				if (n.dontTakeDamage) continue;
+				if (Vector2.Distance(n.Center, Player.Center) < 16 * 12)
+				{
+					n.AddBuff(BuffID.Slow, 60 * 6);
+				}
+			}
+			SoundEngine.PlaySound(SoundID.Item4);
+			GenieCooldown = 60 * 45;
+		}
+		#endregion
+
 		//if (XanthophyteTreeActive)
 		//{
 		//	Player.AddBuff(ModContent.BuffType<XanthophyteTree>(), 2);
@@ -2252,7 +2337,11 @@ public class AvalonPlayer : ModPlayer
 		{
 			hurtInfo.Damage *= 2;
 		}
-    }
+		if (Player.HasBuff(ModContent.BuffType<InflictionGenieBuff>()))
+		{
+			hurtInfo.Damage = (int)(hurtInfo.Damage * 1.2);
+		}
+	}
     public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
     {
         if (UndeadImmune)

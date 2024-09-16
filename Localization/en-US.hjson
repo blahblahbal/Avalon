@@ -199,6 +199,7 @@ Mods: {
 		Slots: {
 			StaminaScroll: Stamina Scroll
 			Tome: Tome
+			Genie: Genie
 		}
 
 		Conditions: {
@@ -508,6 +509,7 @@ Mods: {
 			"Quick Stamina.DisplayName": Quick Stamina
 			"Stamina Flight Time Restore.DisplayName": Stamina Flight Time Restore
 			"Assign Waypoint.DisplayName": Assign Waypoint
+			"Trigger Genie Effect.DisplayName": Trigger  Genie  Effect
 		}
 
 		CommonItemTooltip: {
@@ -599,7 +601,7 @@ Mods: {
 			Robe2: Increases maximum mana by 60
 			ResistantWood: 10 armor penetration and reduces damage taken by 10%
 			Viruthorn: 10% increased attack speed
-			Earthsplitter: Ore blocks have a 33% chance to drop double ore
+			Earthsplitter: Ore blocks have a 33% chance to drop 2 ore chunks
 			Duratanium: Defense is increased by 12 while you are affected by a debuff
 			Naquadah: Nearby enemies take damage when you are damaged
 			Flesh: Hungry minions can be summoned up to 8
@@ -9151,6 +9153,45 @@ Mods: {
 				Tooltip: ""
 			}
 
+			Discipline: {
+				DisplayName: Discipline
+				Tooltip: Press G to receive fledgling wings for 25 seconds
+			}
+
+			Infliction: {
+				DisplayName: Infliction
+				Tooltip:
+					'''
+					Press G to reduce all nearby enemies' speed and increase your movement speed for 6 seconds
+					You also take more damage during this effect
+					'''
+			}
+
+			Longevity: {
+				DisplayName: Longevity
+				Tooltip: Press G to increase your armor penetration by 7 for 8 seconds
+			}
+
+			Paramount: {
+				DisplayName: Paramount
+				Tooltip: Press G to restore 25 life
+			}
+
+			SpiritofOriginal: {
+				DisplayName: Spirit of Original
+				Tooltip: Press G to reduce your aggro for a short time and become immune to damage for 2 seconds
+			}
+
+			Zeal: {
+				DisplayName: Zeal
+				Tooltip: Press G to light enemies near your cursor on fire
+			}
+
+			SavannaTorch: {
+				DisplayName: Savanna Torch
+				Tooltip: ""
+			}
+
 			AdamantiteSlimeBanner: {
 				DisplayName: Adamantite Slime Banner
 				Tooltip: ""
@@ -10301,6 +10342,26 @@ Mods: {
 			Sticky: {
 				DisplayName: Sticky
 				Description: Mods.Avalon.Buffs.Sticky.Description
+			}
+
+			ArmorPenetration: {
+				DisplayName: Armor Penetration
+				Description: Mods.Avalon.Buffs.ArmorPenetration.Description
+			}
+
+			Fledgling: {
+				DisplayName: Fledgling
+				Description: Mods.Avalon.Buffs.Fledgling.Description
+			}
+
+			SpiritOfOriginal: {
+				DisplayName: Spirit Of Original
+				Description: Mods.Avalon.Buffs.SpiritOfOriginal.Description
+			}
+
+			InflictionGenieBuff: {
+				DisplayName: Infliction Genie Buff
+				Description: Mods.Avalon.Buffs.InflictionGenieBuff.Description
 			}
 		}
 

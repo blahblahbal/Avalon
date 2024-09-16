@@ -18,6 +18,7 @@ class SepticCell : ModItem
     {
         Item.CloneDefaults(ItemID.WispinaBottle);
         Item.shoot = ModContent.ProjectileType<Projectiles.Pets.SnotOrb>();
+		Item.UseSound = SoundID.Item8;
         Item.buffType = ModContent.BuffType<Buffs.Pets.SnotOrb>();
         Item.value = Item.sellPrice(0, 1, 50);
         Item.rare = ItemRarityID.Blue;

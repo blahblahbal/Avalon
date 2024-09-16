@@ -6,7 +6,7 @@ namespace Avalon.Systems;
 public class KeybindSystem : ModSystem
 {
     public static ModKeybind ShadowHotkey { get; private set; }
-    public static ModKeybind QuintupleHotkey { get; private set; }
+    public static ModKeybind GenieHotkey { get; private set; }
     public static ModKeybind BubbleBoostHotkey { get; private set; }
     public static ModKeybind ModeChangeHotkey { get; private set; }
     public static ModKeybind AstralHotkey { get; private set; }
@@ -16,7 +16,7 @@ public class KeybindSystem : ModSystem
     public override void Load()
     {
         ShadowHotkey = KeybindLoader.RegisterKeybind(Mod, "Shadow Teleport", Keys.V);
-        QuintupleHotkey = KeybindLoader.RegisterKeybind(Mod, "Toggle Quintuple Jump", Keys.RightControl);
+        GenieHotkey = KeybindLoader.RegisterKeybind(Mod, "Trigger Genie Effect", Keys.G);
         MinionGuidingHotkey = KeybindLoader.RegisterKeybind(Mod, "Minion Guide", Keys.RightControl);
         BubbleBoostHotkey = KeybindLoader.RegisterKeybind(Mod, "Toggle Bubble Boost", Keys.U);
         ModeChangeHotkey = KeybindLoader.RegisterKeybind(Mod, "Assign Waypoint", Keys.N);
@@ -27,7 +27,7 @@ public class KeybindSystem : ModSystem
     public override void Unload()
     {
         ShadowHotkey = null;
-        QuintupleHotkey = null;
+        GenieHotkey = null;
         BubbleBoostHotkey = null;
         ModeChangeHotkey = null;
         AstralHotkey = null;

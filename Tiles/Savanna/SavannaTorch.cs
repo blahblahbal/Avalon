@@ -11,7 +11,7 @@ namespace Avalon.Tiles.Savanna
     public class SavannaTorch : ModTorch
     {
         public override Vector3 LightColor => new Vector3(0.69f, 1f, 0.42f);
-        public override int TorchItem => ModContent.ItemType<Items.Placeable.Furniture.TropicsTorch>();
+        public override int TorchItem => ModContent.ItemType<Items.Placeable.Furniture.SavannaTorch>();
         public override int dustType => DustID.JungleTorch;
 
         public override float GetTorchLuck(Player player)
