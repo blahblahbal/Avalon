@@ -654,13 +654,18 @@ public class AvalonMobDrops : GlobalNPC
         ContagionKeyRule.OnSuccess(new ItemDropWithConditionRule(ModContent.ItemType<ContagionKey>(), 1250, 1, 1, new ContagionKeyCondition()), true);
         ContagionKeyRule.OnFailedConditions(new ItemDropWithConditionRule(ModContent.ItemType<ContagionKey>(), 2500, 1, 1, new ContagionKeyCondition()), true);
 
-        globalLoot.Add(FrozenKeyRule);
+		LeadingConditionRule UnderworldKeyRule = new LeadingConditionRule(new CloverPotionActive());
+		UnderworldKeyRule.OnSuccess(new ItemDropWithConditionRule(ModContent.ItemType<UnderworldKey>(), 1250, 1, 1, new UnderworldKeyCondition()), true);
+		UnderworldKeyRule.OnFailedConditions(new ItemDropWithConditionRule(ModContent.ItemType<UnderworldKey>(), 2500, 1, 1, new UnderworldKeyCondition()), true);
+
+		globalLoot.Add(FrozenKeyRule);
         globalLoot.Add(JungleKeyRule);
         globalLoot.Add(CorruptKeyRule);
         globalLoot.Add(HallowKeyRule);
         globalLoot.Add(CrimsonKeyRule);
         globalLoot.Add(DesertKeyRule);
 		globalLoot.Add(ContagionKeyRule);
+		globalLoot.Add(UnderworldKeyRule);
 
 		globalLoot.Add(ItemDropRule.ByCondition(undergroundHardmodeSnow, ModContent.ItemType<SoulofIce>(), 10));
 

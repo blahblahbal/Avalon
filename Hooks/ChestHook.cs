@@ -21,7 +21,8 @@ namespace Avalon.Hooks
                 if ((t.TileType == ModContent.TileType<OrangeDungeonChest>() ||
 					t.TileType == ModContent.TileType<PurpleDungeonChest>() ||
 					t.TileType == ModContent.TileType<YellowDungeonChest>() ||
-					t.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>()) && t.TileFrameX > 34) return true;
+					t.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>() ||
+					t.TileType == ModContent.TileType<Tiles.Furniture.UnderworldChest>()) && t.TileFrameX > 34) return true;
 			}
             return orig(i, j, t);
         }

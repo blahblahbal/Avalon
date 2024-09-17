@@ -8424,11 +8424,6 @@ Mods: {
 					'''
 			}
 
-			TropicsTorch: {
-				DisplayName: Savanna Torch
-				Tooltip: ""
-			}
-
 			KingStingTrophy: {
 				DisplayName: King Sting Trophy
 				Tooltip: ""
@@ -9220,6 +9215,33 @@ Mods: {
 
 			WarmGemsparkBlock: {
 				DisplayName: Warm Gemspark Block
+				Tooltip: ""
+			}
+
+			BuildersToolbelt: {
+				DisplayName: Builder's Toolbelt
+				Tooltip:
+					'''
+					Increases block and tool range by 10
+					Increases wall and tile placement speed
+					Tells time and shows position
+					Can craft Tinkerer's Workshop, Anvil, Furnace, and Work Bench items by hand
+					Allows the owner to float for a few seconds
+					'''
+			}
+
+			UnderworldKey: {
+				DisplayName: Underworld Key
+				Tooltip: Unlocks an Underworld Chest in the dungeon
+			}
+
+			Hellrazer: {
+				DisplayName: Hellrazer
+				Tooltip: Musket Balls turn into Explosive rounds
+			}
+
+			UnderworldChest: {
+				DisplayName: Underworld Chest
 				Tooltip: ""
 			}
 		}
@@ -10634,6 +10656,7 @@ Mods: {
 			SavannaPot.MapEntry: Savanna Pot
 			SavannaSapling.MapEntry: Mods.Avalon.Tiles.SavannaSapling.MapEntry
 			SavannaShortGrass.MapEntry1: Mods.Avalon.Tiles.SavannaShortGrass.MapEntry1
+			UnderworldChest.MapEntry0: Mods.Avalon.Tiles.UnderworldChest.MapEntry0
 		}
 
 		Prefixes: {

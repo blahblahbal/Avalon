@@ -49,7 +49,8 @@ class SonicScrewdriverMkIII : ModItem
                 }
             }
             // contagion chest
-            else if (Main.tile[c.X, c.Y].TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>())
+            else if (Main.tile[c.X, c.Y].TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>() ||
+				Main.tile[c.X, c.Y].TileType == ModContent.TileType<Tiles.Furniture.UnderworldChest>())
             {
                 int xpos;
                 for (xpos = (int)(Main.tile[c.X, c.Y].TileFrameX / 18); xpos > 1; xpos -= 2)
@@ -96,7 +97,7 @@ class SonicScrewdriverMkIII : ModItem
                 }
             }
             // vanilla chests
-            else if (Main.tile[c.X, c.Y].TileType == TileID.Containers)
+            else if (Main.tile[c.X, c.Y].TileType == TileID.Containers || Main.tile[c.X, c.Y].TileType == TileID.Containers2)
             {
                 int xpos;
                 for (xpos = (int)(Main.tile[c.X, c.Y].TileFrameX / 18); xpos > 1; xpos -= 2)
@@ -127,7 +128,7 @@ class SonicScrewdriverMkIII : ModItem
                 {
                     Tile tile = Main.tile[xpos, ypos];
                     int style = TileObjectData.GetTileStyle(tile);
-                    if (style == 0 || style >= 7 && style <= 16 || style == 48)
+                    if ((style == 0 || style >= 7 && style <= 16 || style == 48) && Main.tile[c.X, c.Y].TileType == TileID.Containers)
                     {
                         Tiles.Furniture.LockedChests.Lock(xpos, ypos);
                         if (Main.netMode != NetmodeID.SinglePlayer)

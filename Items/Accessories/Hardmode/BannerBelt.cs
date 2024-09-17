@@ -8,7 +8,7 @@ using Avalon.Tiles;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 
-namespace Avalon.Items.Accessories;
+namespace Avalon.Items.Accessories.Hardmode;
 
 public class BannerBelt : ModItem
 {

@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.UI;
 
 namespace Avalon.Items.Accessories.Vanity;
 
@@ -42,9 +43,23 @@ public class ShadowRingHook : ModHook
     protected override void Apply()
     {
         On_PlayerDrawSet.BoringSetup_End += On_PlayerDrawSet_BoringSetup_End;
+		On_PlayerDrawLayers.DrawPlayer_27_HeldItem += On_PlayerDrawLayers_DrawPlayer_27_HeldItem;
     }
 
-    private void On_PlayerDrawSet_BoringSetup_End(On_PlayerDrawSet.orig_BoringSetup_End orig, ref PlayerDrawSet self)
+	// DOES NOT WORK
+	private void On_PlayerDrawLayers_DrawPlayer_27_HeldItem(On_PlayerDrawLayers.orig_DrawPlayer_27_HeldItem orig, ref PlayerDrawSet drawinfo)
+	{
+		orig.Invoke(ref drawinfo);
+		if (drawinfo.drawPlayer.GetModPlayer<AvalonPlayer>().ShadowRing)
+		{
+			if (drawinfo.drawPlayer.shroomiteStealth || drawinfo.drawPlayer.setVortex)
+			{
+				drawinfo.itemColor = Color.White; // new Color((byte)((float)(int)drawinfo.itemColor.R), (byte)((float)(int)drawinfo.itemColor.G), (byte)((float)(int)drawinfo.itemColor.B), (byte)((float)(int)drawinfo.itemColor.A));
+			}
+		}
+	}
+
+	private void On_PlayerDrawSet_BoringSetup_End(On_PlayerDrawSet.orig_BoringSetup_End orig, ref PlayerDrawSet self)
     {
         if (self.drawPlayer.GetModPlayer<AvalonPlayer>().ShadowRing)
         {
