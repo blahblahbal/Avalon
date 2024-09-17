@@ -6,9 +6,16 @@ namespace Avalon.Tiles.Contagion;
 
 public class IckyCactus : ModCactus
 {
-    public override void SetStaticDefaults() => GrowsOnTileId = new[] { ModContent.TileType<Snotsand>() };
+	private Asset<Texture2D> texture;
+	private Asset<Texture2D> fruitTexture;
+	public override void SetStaticDefaults()
+	{
+		GrowsOnTileId = new[] { ModContent.TileType<Snotsand>() };
+		texture = ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/IckyCactus");
+		fruitTexture = ModContent.Request<Texture2D>("Avalon/Tiles/Contagion/IckyCactus_Fruit");
+	}
 
-    public override Asset<Texture2D> GetTexture() => ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Contagion/IckyCactus");
+    public override Asset<Texture2D> GetTexture() => texture;
 
-    public override Asset<Texture2D> GetFruitTexture() => ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Tiles/Contagion/IckyCactus_Fruit");
+    public override Asset<Texture2D> GetFruitTexture() => fruitTexture;
 }
