@@ -28,8 +28,9 @@ public abstract class ModHerb : ModTile
     public virtual LocalizedText MapName => LanguageManager.Instance.GetText("");
     public virtual Color MapColor => Color.White;
     public virtual int Dust => DustID.Dirt;
+	public virtual bool FlipSprite => true;
 
-    public override void SetStaticDefaults()
+	public override void SetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
         Main.tileCut[Type] = true;
@@ -83,7 +84,7 @@ public abstract class ModHerb : ModTile
     }
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects spriteEffects)
     {
-        if (i % 2 == 1)
+        if (FlipSprite && i % 2 == 1)
             spriteEffects = SpriteEffects.FlipHorizontally;
     }
     public override IEnumerable<Item> GetItemDrops(int i, int j)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -12,7 +13,16 @@ namespace Avalon.PlayerDrawLayers;
 
 public class LargeGemLayer : PlayerDrawLayer
 {
-    public override Position GetDefaultPosition()
+	private static Asset<Texture2D> texturePeridot;
+	private static Asset<Texture2D> textureTourmaline;
+	private static Asset<Texture2D> textureZircon;
+	public override void SetStaticDefaults()
+	{
+		texturePeridot = ModContent.Request<Texture2D>("Avalon/Items/Other/LargePeridot_Extra");
+		textureTourmaline = ModContent.Request<Texture2D>("Avalon/Items/Other/LargeTourmaline_Extra");
+		textureZircon = ModContent.Request<Texture2D>("Avalon/Items/Other/LargeZircon_Extra");
+	}
+	public override Position GetDefaultPosition()
     {
         return new AfterParent(Terraria.DataStructures.PlayerDrawLayers.CaptureTheGem);
     }
@@ -99,18 +109,15 @@ public class LargeGemLayer : PlayerDrawLayer
                         switch (num30)
                         {
                             case 7:
-                                texture2D4 = ModContent.GetModItem(ModContent.ItemType<Items.Other.LargeZircon>()).GetTexture().Value;
-                                num31 *= 1.25f;
+                                texture2D4 = textureZircon.Value;
                                 break;
 
                             case 8:
-                                texture2D4 = ModContent.GetModItem(ModContent.ItemType<Items.Other.LargeTourmaline>()).GetTexture().Value;
-                                num31 *= 1.25f;
+                                texture2D4 = textureTourmaline.Value;
                                 break;
 
                             case 9:
-                                texture2D4 = ModContent.GetModItem(ModContent.ItemType<Items.Other.LargePeridot>()).GetTexture().Value;
-                                num31 *= 1.25f;
+                                texture2D4 = texturePeridot.Value;
                                 break;
                         }
                     }
