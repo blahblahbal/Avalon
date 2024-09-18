@@ -17,10 +17,19 @@ public class WarmGemsparkBlock : ModTile
         AddMapEntry(Color.OrangeRed);
         Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;
-        DustType = DustID.Crimstone;
-    }
+		Main.tileLighted[Type] = true;
+		TileID.Sets.AllBlocksWithSmoothBordersToResolveHalfBlockIssue[Type] = true;
+		TileID.Sets.ForcedDirtMerging[Type] = true;
+		TileID.Sets.GemsparkFramingTypes[Type] = Type;
+		DustType = DustID.Crimstone;
+	}
+	public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
+	{
+		Framing.SelfFrame8Way(i, j, Main.tile[i, j], resetFrame);
+		return false;
+	}
 
-    public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+	public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
         Tile tile = Main.tile[i, j];
         Texture2D texture;

@@ -1809,8 +1809,18 @@ public class AvalonGlobalItem : GlobalItem
                 item.autoReuse = true;
                 item.createTile = ModContent.TileType<Ectoplasm>();
                 break;
-            #region miscellaneous changes
-            case ItemID.ShroomiteDiggingClaw:
+			case ItemID.ShadowScale:
+				item.chlorophyteExtractinatorConsumable = false;
+				item.useStyle = ItemUseStyleID.Swing;
+				item.useAnimation = 15;
+				item.useTime = 10;
+				item.consumable = true;
+				item.useTurn = true;
+				item.autoReuse = true;
+				item.createTile = ModContent.TileType<ShadowScale>();
+				break;
+			#region miscellaneous changes
+			case ItemID.ShroomiteDiggingClaw:
                 item.pick = 205;
                 break;
             case ItemID.Picksaw:

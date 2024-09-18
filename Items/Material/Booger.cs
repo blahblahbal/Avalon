@@ -1,3 +1,4 @@
+using Avalon.Tiles;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -22,6 +23,12 @@ class Booger : ModItem
         Item.maxStack = 9999;
         Item.value = 750;
         Item.height = dims.Height;
-		Item.MakeUsableWithChlorophyteExtractinator();
+		Item.useStyle = ItemUseStyleID.Swing;
+		Item.useAnimation = 15;
+		Item.useTime = 10;
+		Item.consumable = true;
+		Item.useTurn = true;
+		Item.autoReuse = true;
+		Item.createTile = ModContent.TileType<Tiles.Booger>();
 	}
 }

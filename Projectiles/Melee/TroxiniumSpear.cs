@@ -63,6 +63,6 @@ public class TroxiniumSpear : SpearTemplate
             }
         }
         Vector2 basePosition = Projectile.Center + new Vector2(0f, Projectile.gfxOffY);
-        Main.EntitySpriteDraw(glow.Value, basePosition - Main.screenPosition, default, Projectile.GetAlpha(Color.White), rotation, origin, Projectile.scale, dir);
+		Main.EntitySpriteDraw(glow.Value, basePosition - Main.screenPosition, default, new Color(255, 255, 255, 0), rotation, origin, Projectile.scale, dir);
     }
 }
