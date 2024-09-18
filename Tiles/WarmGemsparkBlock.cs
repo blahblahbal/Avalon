@@ -23,6 +23,12 @@ public class WarmGemsparkBlock : ModTile
 		TileID.Sets.GemsparkFramingTypes[Type] = Type;
 		DustType = DustID.Crimstone;
 	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	{
+		r = 1f;
+		g = G / 255f;
+		b = 0;
+	}
 	public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
 	{
 		Framing.SelfFrame8Way(i, j, Main.tile[i, j], resetFrame);

@@ -25,6 +25,12 @@ public class CoolGemsparkBlock : ModTile
 		TileID.Sets.GemsparkFramingTypes[Type] = Type;
 		DustType = DustID.Ebonwood;
 	}
+	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+	{
+		r = R / 255f;
+		g = G / 255f;
+		b = B / 255f;
+	}
 	public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
 	{
 		Framing.SelfFrame8Way(i, j, Main.tile[i, j], resetFrame);
@@ -32,8 +38,8 @@ public class CoolGemsparkBlock : ModTile
 	}
 
 	public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
-    {
-        Tile tile = Main.tile[i, j];
+	{
+		Tile tile = Main.tile[i, j];
         Texture2D texture;
         //if (Main.canDrawColorTile(i, j))
         //{
