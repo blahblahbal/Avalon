@@ -30,6 +30,7 @@ using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Reflection;
+using Avalon.Systems;
 using Avalon.Tiles;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
@@ -207,7 +208,30 @@ public class AvalonGlobalItem : GlobalItem
         Item.staff[ItemID.Vilethorn] = true;
 		Item.staff[ItemID.HiveWand] = true;
     }
-    public override bool CanRightClick(Item item)
+	public override void PostUpdate(Item item)
+	{
+		if (item.lavaWet && item.position.Y / 16 > Main.maxTilesY - 190)
+		{
+			if (item.type == ModContent.ItemType<HellboundRemote>() && Main.hardMode) // &&
+				//ModContent.GetInstance<DownedBossSystem>().DownedPhantasm)
+			{
+				if (Main.netMode != NetmodeID.MultiplayerClient)
+				{
+					item.active = false;
+					item.type = ItemID.None;
+					item.stack = 0;
+					if (Main.hardMode && ModContent.GetInstance<DownedBossSystem>().DownedPhantasm)
+					{
+						AvalonGlobalNPC.SpawnWOS(item.position);
+						SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/WoS"), item.position);
+					}
+
+					NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, item.whoAmI);
+				}
+			}
+		}
+	}
+	public override bool CanRightClick(Item item)
     {
         if (Main.mouseRightRelease && Main.mouseRight)
         {

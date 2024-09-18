@@ -299,10 +299,11 @@ public class AvalonPlayer : ModPlayer
 	public bool CalculatorSpectacles;
 	public bool CalcSpecDisplay;
 	public bool ConfusionTal;
-    #endregion
+	#endregion
 
-    #region buffs and debuffs
-    public bool BrokenWeaponry;
+	#region buffs and debuffs
+	public int InfectDamage;
+	public bool BrokenWeaponry;
     public bool Unloaded;
     public bool Lucky;
     public bool Heartsick;

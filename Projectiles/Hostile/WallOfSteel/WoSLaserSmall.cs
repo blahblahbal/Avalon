@@ -22,5 +22,6 @@ public class WoSLaserSmall : ModProjectile
         Projectile.DamageType = DamageClass.Ranged;
         Projectile.aiStyle = 1;
         AIType = ProjectileID.DeathLaser;
+		Projectile.extraUpdates = 2;
     }
 }

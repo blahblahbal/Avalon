@@ -19,6 +19,7 @@ using Terraria.GameContent.Bestiary;
 using Avalon.Common;
 using Avalon.Items.Weapons.Magic.Superhardmode;
 using Avalon.Items.Weapons.Ranged.Superhardmode;
+using System.IO;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
@@ -27,8 +28,12 @@ public class WallofSteel : ModNPC
 {
     private static Asset<Texture2D> wosTexture;
     private static Asset<Texture2D> mechaHungryChainTexture;
-
-    public override void Load()
+	private int TopEyeHP;
+	private int BottomEyeHP;
+	private int TopEyeMaxHP;
+	private int BottomEyeMaxHP;
+	public override string Texture => "Avalon/NPCs/Bosses/Hardmode/WallofSteelWall";
+	public override void Load()
     {
         wosTexture = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/WallofSteel");
         mechaHungryChainTexture = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/MechaHungryChain");
@@ -57,7 +62,7 @@ public class WallofSteel : ModNPC
     {
         NPC.width = 200;
         NPC.height = 580;
-        NPC.boss = NPC.noTileCollide = NPC.noGravity = NPC.behindTiles = true;
+		NPC.boss = NPC.noTileCollide = NPC.noGravity = NPC.behindTiles = true;
         NPC.npcSlots = 100f;
         NPC.damage = 150;
         NPC.lifeMax = 152000;
@@ -66,7 +71,7 @@ public class WallofSteel : ModNPC
         NPC.aiStyle = -1;
         NPC.value = Item.buyPrice(0, 10);
         NPC.knockBackResist = 0;
-        NPC.scale = 1.4f;
+        NPC.scale = 1f;
         NPC.HitSound = SoundID.NPCHit4;
         NPC.DeathSound = SoundID.NPCDeath14;
         //NPC.BossBar = ModContent.GetInstance<BossBars.WallofSteelBossBar>();
@@ -85,10 +90,43 @@ public class WallofSteel : ModNPC
     {
         potionType = ItemID.SuperHealingPotion;
     }
+	public override void SendExtraAI(BinaryWriter writer)
+	{
+		writer.Write(TopEyeHP);
+		writer.Write(TopEyeMaxHP);
+		writer.Write(BottomEyeHP);
+		writer.Write(BottomEyeMaxHP);
+	}
+	public override void ReceiveExtraAI(BinaryReader reader)
+	{
+		TopEyeHP = reader.ReadByte();
+		TopEyeMaxHP = reader.ReadByte();
+		BottomEyeHP = reader.ReadByte();
+		BottomEyeMaxHP = reader.ReadByte();
+	}
+	public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+	{
+		SpriteEffects effects = SpriteEffects.None;
+		if (NPC.spriteDirection == 1)
+		{
+			effects = SpriteEffects.FlipHorizontally;
+		}
 
-    public override Color? GetAlpha(Color lightColor)
+		float num66 = Main.NPCAddHeight(NPC);
+		var vector13 = new Vector2(TextureAssets.Npc[NPC.type].Width() / 2,
+			TextureAssets.Npc[NPC.type].Height() / Main.npcFrameCount[NPC.type] / 2);
+		float glow = (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.5f + 0.5f;
+		for (int i = 0; i < 4; i++)
+		{
+			Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value,
+				new Vector2(NPC.position.X - screenPos.X + (NPC.width / 2) - (TextureAssets.Npc[NPC.type].Width() * NPC.scale / 2f) + (vector13.X * NPC.scale), NPC.position.Y - Main.screenPosition.Y + NPC.height - (TextureAssets.Npc[NPC.type].Height() * NPC.scale / Main.npcFrameCount[NPC.type]) + 4f + (vector13.Y * NPC.scale) + num66) + new Vector2(0, 2 * glow).RotatedBy(i * MathHelper.PiOver2)
+				, NPC.frame, default, NPC.rotation, vector13,
+				NPC.scale, effects, 0f);
+		}
+	}
+	public override Color? GetAlpha(Color lightColor)
     {
-        return Color.Lerp(Color.White, Lighting.GetColor((int)NPC.position.X, (int)NPC.position.Y), 0.5f);
+		return null; // Color.Lerp(Color.White, Lighting.GetColor((int)NPC.position.X, (int)NPC.position.Y), 0.5f);
     }
 
 	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
@@ -200,7 +238,7 @@ public class WallofSteel : ModNPC
             SpriteEffects effects2 = SpriteEffects.None;
             if (Main.npc[AvalonWorld.WallOfSteel].spriteDirection == -1)
             {
-                wosPosX += 160; // going to the left
+                wosPosX += 50; // going to the left
             }
             if (Main.npc[AvalonWorld.WallOfSteel].spriteDirection == 1)
             {
@@ -208,7 +246,7 @@ public class WallofSteel : ModNPC
             }
             if (Main.npc[AvalonWorld.WallOfSteel].direction > 0)
             {
-                wosPosX -= 110f; // going to the right
+                wosPosX -= 80f; // going to the right
             }
             int num19 = 0;
             if (!Main.gamePaused)
@@ -259,6 +297,12 @@ public class WallofSteel : ModNPC
 
     public override void AI()
     {
+		if (NPC.AnyNPCs(ModContent.NPCType<WallofSteelMouthEye>()) ||
+			NPC.AnyNPCs(ModContent.NPCType<WallofSteelLaserEye>()))
+		{
+			NPC.dontTakeDamage = true;
+		}
+		else NPC.dontTakeDamage = false;
         bool expert = Main.expertMode;
         if (NPC.position.X < 160f || NPC.position.X > (Main.maxTilesX - 10) * 16)
         {
@@ -356,40 +400,54 @@ public class WallofSteel : ModNPC
             NPC.position.Y = (Main.maxTilesY - 200) * 16;
         }
 
-        float num451 = 2.5f;
-        if (NPC.life < NPC.lifeMax * 0.75)
+
+		if (ClassExtensions.FindATypeOfNPC(ModContent.NPCType<WallofSteelMouthEye>()) == -1)
+		{
+			TopEyeHP = 0;
+		}
+		if (ClassExtensions.FindATypeOfNPC(ModContent.NPCType<WallofSteelLaserEye>()) == -1)
+		{
+			BottomEyeHP = 0;
+		}
+
+		int totalHP = TopEyeHP + BottomEyeHP + NPC.life;
+
+		int totalMaxHP = TopEyeMaxHP + BottomEyeMaxHP + NPC.lifeMax;
+
+		float num451 = 2.5f;
+        if (totalHP < totalMaxHP * 0.75)
         {
             num451 += 0.25f;
         }
-        if (NPC.life < NPC.lifeMax * 0.5)
+        if (totalHP < totalMaxHP * 0.5)
         {
             num451 += 0.4f;
         }
-        if (NPC.life < NPC.lifeMax * 0.25)
+        if (totalHP < totalMaxHP * 0.25)
         {
             num451 += 0.5f;
         }
-        if (NPC.life < NPC.lifeMax * 0.1)
+        if (totalHP < totalMaxHP * 0.1)
         {
             num451 += 0.6f;
         }
-        if (NPC.life < NPC.lifeMax * 0.66 && Main.expertMode)
+        if (totalHP < totalMaxHP * 0.66 && Main.expertMode)
         {
             num451 += 0.3f;
         }
-        if (NPC.life < NPC.lifeMax * 0.33 && Main.expertMode)
+        if (totalHP < totalMaxHP * 0.33 && Main.expertMode)
         {
             num451 += 0.3f;
         }
-        if (NPC.life < NPC.lifeMax * 0.05 && Main.expertMode)
+        if (totalHP < totalMaxHP * 0.05 && Main.expertMode)
         {
             num451 += 0.6f;
         }
-        if (NPC.life < NPC.lifeMax * 0.035 && Main.expertMode)
+        if (totalHP < totalMaxHP * 0.035 && Main.expertMode)
         {
             num451 += 0.6f;
         }
-        if (NPC.life < NPC.lifeMax * 0.025 && Main.expertMode)
+        if (totalHP < totalMaxHP * 0.025 && Main.expertMode)
         {
             num451 += 0.6f;
         }
@@ -408,86 +466,6 @@ public class WallofSteel : ModNPC
             NPC.velocity.X = num451;
             NPC.direction = 1;
         }
-        if (NPC.life > NPC.lifeMax / 3)
-        {
-            NPC.ai[1]++;
-            if (NPC.ai[1] == 90)
-            {
-                if (Main.netMode != NetmodeID.MultiplayerClient) // leeches
-                {
-                    int num442 = NPC.NewNPC(NPC.GetSource_FromAI(), (int)(NPC.position.X + NPC.width / 2), (int)(NPC.position.Y + NPC.height / 2 + 20f), ModContent.NPCType<MechanicalLeechHead>(), 1);
-                    Main.npc[num442].velocity.X = NPC.direction * 8;
-                }
-            }
-            if (NPC.ai[1] > 90)
-            {
-                int fire;
-                float f = 0f;
-                int dmg = Main.expertMode ? 75 : 60;
-                var laserPos = new Vector2((NPC.velocity.X < 0 ? NPC.position.X : NPC.position.X + NPC.width), AvalonWorld.WallOfSteelT);
-                float rotation = (float)Math.Atan2(laserPos.Y - (Main.player[NPC.target].position.Y + (Main.player[NPC.target].height * 0.5f)), laserPos.X - (Main.player[NPC.target].position.X + (Main.player[NPC.target].width * 0.5f)));
-                SoundEngine.PlaySound(SoundID.Item33, new Vector2((int)NPC.position.X, AvalonWorld.WallOfSteelT));
-                while (f <= .1f)
-                {
-                    fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X, laserPos.Y, (float)((Math.Cos(rotation + f) * 12f) * -1), (float)((Math.Sin(rotation + f) * 12f) * -1), ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSCursedFireball>(), dmg, 6f);
-                    Main.projectile[fire].timeLeft = 600;
-                    Main.projectile[fire].tileCollide = false;
-                    if (Main.netMode != NetmodeID.SinglePlayer)
-                    {
-                        NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
-                    }
-                    fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X, laserPos.Y, (float)((Math.Cos(rotation - f) * 12f) * -1), (float)((Math.Sin(rotation - f) * 12f) * -1), ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSCursedFireball>(), dmg, 6f);
-                    Main.projectile[fire].timeLeft = 600;
-                    Main.projectile[fire].tileCollide = false;
-                    if (Main.netMode != NetmodeID.SinglePlayer)
-                    {
-                        NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
-                    }
-                    f += .034f;
-                }
-                NPC.ai[1] = 0;
-            }
-            NPC.ai[2]++;
-            if (NPC.ai[2] == 100)
-            {
-                int laser = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.velocity.X < 0 ? NPC.position.X : NPC.position.X + NPC.width, AvalonWorld.WallOfSteelB, NPC.velocity.X, NPC.velocity.Y, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 4f);
-                Main.projectile[laser].velocity = Vector2.Normalize(Main.player[NPC.target].Center - new Vector2(NPC.position.X, AvalonWorld.WallOfSteelB)) * 5f;
-                Main.projectile[laser].hostile = true;
-                Main.projectile[laser].friendly = false;
-                Main.projectile[laser].tileCollide = false;
-                if (Main.netMode != NetmodeID.SinglePlayer)
-                {
-                    NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, laser);
-                }
-
-                NPC.ai[2] = 0;
-            }
-            if (NPC.ai[2] == 90)
-            {
-                int fire;
-                float f = 0f;
-                var laserPos = new Vector2((NPC.velocity.X < 0 ? NPC.position.X : NPC.position.X + NPC.width), AvalonWorld.WallOfSteelT);
-                float rotation = (float)Math.Atan2(laserPos.Y - (Main.player[NPC.target].position.Y + (Main.player[NPC.target].height * 0.5f)), laserPos.X - (Main.player[NPC.target].position.X + (Main.player[NPC.target].width * 0.5f)));
-                SoundEngine.PlaySound(SoundID.Item33, new Vector2((int)NPC.position.X, AvalonWorld.WallOfSteelT));
-                //while (f <= .1f)
-                //{
-                fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X, laserPos.Y, (float)((Math.Cos(rotation + f) * 12f) * -1), (float)((Math.Sin(rotation + f) * 12f) * -1), ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSCursedFireball>(), Main.expertMode ? 70 : 55, 6f);
-                Main.projectile[fire].timeLeft = 600;
-                if (Main.netMode != NetmodeID.SinglePlayer)
-                {
-                    NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
-                }
-                fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X, laserPos.Y, (float)((Math.Cos(rotation - f) * 12f) * -1), (float)((Math.Sin(rotation - f) * 12f) * -1), ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSCursedFireball>(), Main.expertMode ? 70 : 55, 6f);
-                Main.projectile[fire].timeLeft = 600;
-                if (Main.netMode != NetmodeID.SinglePlayer)
-                {
-                    NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
-                }
-                f += .1f;
-                //}
-            }
-        }
-        else
         {
             NPC.ai[3]++;
             //if (NPC.ai[3] == 1)
@@ -529,21 +507,6 @@ public class WallofSteel : ModNPC
             //        }
             //    }
             //}
-            if (NPC.ai[3] > 100 && NPC.ai[3] < 150)
-            {
-                NPC.defense = 55;
-                int fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.velocity.X < 0 ? NPC.position.X : NPC.position.X + NPC.width, AvalonWorld.WallOfSteelT, NPC.velocity.X, NPC.velocity.Y, ProjectileID.EyeFire, 45, 4f);
-                Main.projectile[fire].velocity = Vector2.Normalize(Main.player[NPC.target].Center - new Vector2(NPC.position.X, AvalonWorld.WallOfSteelT)) * 20f;
-                Main.projectile[fire].tileCollide = false;
-                if (Main.netMode != NetmodeID.SinglePlayer)
-                {
-                    NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
-                }
-            }
-            if (NPC.ai[3] > 300)
-            {
-                NPC.ai[3] = 0;
-            }
         }
         NPC.spriteDirection = NPC.direction;
         if (NPC.localAI[0] == 1f && Main.netMode != NetmodeID.MultiplayerClient)
@@ -556,6 +519,7 @@ public class WallofSteel : ModNPC
             }
             return;
 		}
+		//NPC.velocity.X = 0;
     }
 
 	public override void HitEffect(NPC.HitInfo hit)
@@ -580,16 +544,26 @@ public class WallofSteel : ModNPC
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore14").Type, NPC.scale);
         }
     }
-    public override void OnKill()
+	public override void OnSpawn(IEntitySource source)
+	{
+		int topEye = NPC.NewNPC(source, (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<WallofSteelMouthEye>());
+		int bottomEye = NPC.NewNPC(source, (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<WallofSteelLaserEye>());
+
+		TopEyeMaxHP = Main.npc[topEye].lifeMax;
+		TopEyeHP = Main.npc[topEye].life;
+		BottomEyeMaxHP = Main.npc[bottomEye].lifeMax;
+		BottomEyeHP = Main.npc[bottomEye].life;
+	}
+	public override void OnKill()
     {
         AvalonWorld.WallOfSteel = -1;
-        /*if (!ModContent.GetInstance<AvalonWorld>().SuperHardmode && Main.hardMode)
+		/*if (!ModContent.GetInstance<AvalonWorld>().SuperHardmode && Main.hardMode)
         {
             if (!Main.expertMode)
                 NPC.DropItemInstanced(NPC.position, new Vector2(NPC.width, NPC.height), ModContent.ItemType<Items.Consumables.MechanicalHeart>());
             Task.Run(() => ModContent.GetInstance<AvalonWorld>().InitiateSuperHardMode());
-        }
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        }*/
+		if (Main.netMode != NetmodeID.MultiplayerClient)
         {
             int num22 = (int)(NPC.position.X + (NPC.width / 2)) / 16;
             int num23 = (int)(NPC.position.Y + (NPC.height / 2)) / 16;
@@ -600,7 +574,7 @@ public class WallofSteel : ModNPC
                 {
                     if ((k == num22 - num24 || k == num22 + num24 || l == num23 - num24 || l == num23 + num24) && !Main.tile[k, l].HasTile)
                     {
-                        Main.tile[k, l].TileType = (ushort)ModContent.TileType<Tiles.OblivionBrick>();
+                        Main.tile[k, l].TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
                         Main.tile[k, l].Active(true);
                     }
                     Main.tile[k, l].LiquidAmount = 0;
@@ -614,12 +588,12 @@ public class WallofSteel : ModNPC
                     }
                 }
             }
-        }*/
+        }
     }
 	public override void ModifyNPCLoot(NPCLoot npcLoot)
 	{
 		LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-		notExpertRule.OnSuccess(ItemDropRule.OneFromOptions(1, new int[] { ModContent.ItemType<FleshBoiler>(), ModContent.ItemType<MagicCleaver>(), ModContent.ItemType<Items.Accessories.Superhardmode.BubbleBoost>() }));
+		notExpertRule.OnSuccess(ItemDropRule.OneFromOptions(1, [ModContent.ItemType<FleshBoiler>(), ModContent.ItemType<MagicCleaver>(), ModContent.ItemType<Items.Accessories.Superhardmode.BubbleBoost>()]));
 		npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<Items.BossBags.WallofSteelBossBag>()));
 		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WallofSteelTrophy>(), 10));
 		npcLoot.Add(notExpertRule);

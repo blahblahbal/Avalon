@@ -1,4 +1,5 @@
 using Avalon.Projectiles.Hostile.Mechasting;
+using Avalon.Projectiles.Hostile.WallOfSteel;
 using Avalon.Projectiles.Melee;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -30,6 +31,7 @@ public static class Projectile
         ProjectileID.SandnadoHostile,
         ProjectileID.HallowBossLastingRainbow,
         ProjectileID.HallowBossRainbowStreak,
+		ProjectileID.EyeFire,
         ModContent.ProjectileType<ElectricBolt>(),
         ModContent.ProjectileType<StingerLaser>(),
         ModContent.ProjectileType<Mechastinger>(),
@@ -38,31 +40,33 @@ public static class Projectile
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrap>(),
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(),
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>());
-        //ModContent.ProjectileType<Ghostflame>(),
-        //ModContent.ProjectileType<WallofSteelLaser>(),
-        //,
-        //,
-        //,
-        //ModContent.ProjectileType<DarkCinder>(),
-        //ModContent.ProjectileType<DarkFlame>(),
-        //ModContent.ProjectileType<DarkGeyser>(),
-        //ModContent.ProjectileType<DarkMatterFireball>(),
-        //ModContent.ProjectileType<DarkMatterFlamethrower>(),
-        //ModContent.ProjectileType<CaesiumFireball>(),
-        //ModContent.ProjectileType<CaesiumCrystal>(),
-        //ModContent.ProjectileType<CaesiumGas>(),
-        //ModContent.ProjectileType<SpikyBall>(),
-        //ModContent.ProjectileType<Spike>(),
-        //ModContent.ProjectileType<CrystalShard>(),
-        //ModContent.ProjectileType<WallofSteelLaserEnd>(),
-        //ModContent.ProjectileType<WallofSteelLaserStart>(),
-        //ModContent.ProjectileType<CrystalBit>(),
-        //ModContent.ProjectileType<CrystalBeam>(),
-        //ModContent.ProjectileType<WoSLaserSmall>(),
-        //ModContent.ProjectileType<WoSCursedFireball>());
+        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>(),
+		ModContent.ProjectileType<WoSLaserSmall>(),
+		ModContent.ProjectileType<WoSCursedFireball>(),
+		ModContent.ProjectileType<WoSRocket>());
+		//ModContent.ProjectileType<Ghostflame>(),
+		//ModContent.ProjectileType<WallofSteelLaser>(),
+		//,
+		//,
+		//,
+		//ModContent.ProjectileType<DarkCinder>(),
+		//ModContent.ProjectileType<DarkFlame>(),
+		//ModContent.ProjectileType<DarkGeyser>(),
+		//ModContent.ProjectileType<DarkMatterFireball>(),
+		//ModContent.ProjectileType<DarkMatterFlamethrower>(),
+		//ModContent.ProjectileType<CaesiumFireball>(),
+		//ModContent.ProjectileType<CaesiumCrystal>(),
+		//ModContent.ProjectileType<CaesiumGas>(),
+		//ModContent.ProjectileType<SpikyBall>(),
+		//ModContent.ProjectileType<Spike>(),
+		//ModContent.ProjectileType<CrystalShard>(),
+		//ModContent.ProjectileType<WallofSteelLaserEnd>(),
+		//ModContent.ProjectileType<WallofSteelLaserStart>(),
+		//ModContent.ProjectileType<CrystalBit>(),
+		//ModContent.ProjectileType<CrystalBeam>(),
 
-    public static readonly bool[] MinionProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
+
+	public static readonly bool[] MinionProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
         ProjectileID.HornetStinger,
         ProjectileID.ImpFireball,
         ProjectileID.MiniRetinaLaser,

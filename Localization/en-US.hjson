@@ -9335,6 +9335,20 @@ Mods: {
 				DisplayName: Heartstone Brick Wall
 				Tooltip: ""
 			}
+
+			ToxinStaff: {
+				DisplayName: Toxin Staff
+				Tooltip: Shoots a toxic fang that pierces multiple enemies
+			}
+
+			HellboundRemote: {
+				DisplayName: Hellbound Remote
+				Tooltip:
+					'''
+					Summons the Wall of Steel
+					Toss into lava in the Underworld
+					'''
+			}
 		}
 
 		InfoDisplays: {
@@ -9609,6 +9623,8 @@ Mods: {
 			MagicCleaver.DisplayName: Magic Cleaver
 			FleshFire.DisplayName: Flesh Fire
 			FleshFireLinger.DisplayName: Flesh Fire Linger
+			ToxicFang.DisplayName: Toxic Fang
+			WoSRocket.DisplayName: Wo S Rocket
 		}
 
 		NPCs: {
@@ -9738,7 +9754,9 @@ Mods: {
 			MechanicalLeechHead.DisplayName: Mechanical Leech Head
 			MechanicalLeechBody.DisplayName: Mechanical Leech Body
 			MechanicalLeechTail.DisplayName: Mechanical Leech Tail
-			WallofSteel.DisplayName: Wallof Steel
+			WallofSteel.DisplayName: Wall of Steel
+			WallofSteelMouthEye.DisplayName: Wall of Steel
+			WallofSteelLaserEye.DisplayName: Wallof Steel Laser Eye
 		}
 
 		Buffs: {
@@ -10514,6 +10532,11 @@ Mods: {
 			InflictionGenieBuff: {
 				DisplayName: Infliction Genie Buff
 				Description: Increased movement speed
+			}
+
+			Toxic: {
+				DisplayName: Toxic
+				Description: Mods.Avalon.Buffs.Toxic.Description
 			}
 		}
 
