@@ -9,17 +9,17 @@ public class Booger : ModTile
     public override void SetStaticDefaults()
     {
         AddMapEntry(new Color(83, 65, 67));
-        Main.tileSolid[Type] = false;
-        Main.tileBlockLight[Type] = false;
+        Main.tileSolid[Type] = true;
+        Main.tileBlockLight[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Material.Booger>());
         DustType = ModContent.DustType<Dusts.SnotsandDust>();
     }
     public override bool Slope(int i, int j)
     {
-        return false;
+        return true;
     }
     public override void FloorVisuals(Player player)
     {
-        player.velocity *= 0.6f;
+        //player.velocity *= 0.6f;
     }
 }
