@@ -241,12 +241,24 @@ internal class WallofSteelMouthEye : ModNPC
 
 		if (modeChangeCounter == 1)
 		{
-			NPC.ai[1]++;
-			if (NPC.ai[1] < 90)
+			NPC.ai[2] += 0.005f;
+			if (NPC.ai[2] > 0.5)
 			{
-				NPC.rotation += 0.35f;
+				NPC.ai[2] = 0.5f;
+				modeChangeCounter = 2;
 			}
-			if (NPC.ai[1] == 90)
+			NPC.rotation += NPC.ai[2];
+		}
+		else if (modeChangeCounter == 2)
+		{
+			NPC.ai[2] -= 0.005f;
+			if (NPC.ai[2] < 0f)
+				NPC.ai[2] = 0f;
+
+			NPC.rotation += NPC.ai[2];
+			NPC.ai[1]++;
+
+			if (NPC.ai[1] == 100)
 			{
 				NPC.ai[1] = 0;
 				Phase++;
