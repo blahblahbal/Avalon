@@ -2,7 +2,6 @@ using Avalon.Common.Players;
 using Avalon.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Superhardmode;

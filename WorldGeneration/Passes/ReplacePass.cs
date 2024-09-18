@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Tiles;
 using Avalon.Tiles.Ores;
 using Terraria;
 using Terraria.ID;
@@ -128,6 +129,13 @@ internal class ReplacePass : GenPass
                         Main.tile[i, j].TileType = (ushort)ModContent.TileType<BismuthOre>();
                     }
                 }
+				// poison spike unsmoothing
+				if (Main.tile[i, j].TileType == ModContent.TileType<PoisonSpike>())
+				{
+					Tile aklsd = Main.tile[i, j];
+					aklsd.Slope = SlopeType.Solid;
+					aklsd.IsHalfBlock = false;
+				}
             }
         }
     }

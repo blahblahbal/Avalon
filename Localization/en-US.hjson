@@ -205,6 +205,7 @@ Mods: {
 		Conditions: {
 			NearShimmer: Needs shimmer
 			ShimmerCraft: Throw into shimmer
+			InSavanna: Mods.Avalon.Conditions.InSavanna
 		}
 
 		BuilderToggles: {
@@ -3381,6 +3382,11 @@ Mods: {
 
 			DesertBeakBossBag: {
 				DisplayName: Treasure Bag (Desert Beak)
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			WallofSteelBossBag: {
+				DisplayName: Treasure Bag (Wall of Steel)
 				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
 			}
 
@@ -9244,6 +9250,91 @@ Mods: {
 				DisplayName: Underworld Chest
 				Tooltip: ""
 			}
+
+			SoulofBlight: {
+				DisplayName: Soul of Blight
+				Tooltip: "'The essence of death'"
+			}
+
+			Canister: {
+				DisplayName: Canister
+				Tooltip: ""
+			}
+
+			HellsteelPlate: {
+				DisplayName: Hellsteel Plate
+				Tooltip: ""
+			}
+
+			WallofSteelTrophy: {
+				DisplayName: Wallof Steel Trophy
+				Tooltip: ""
+			}
+
+			MagicCleaver: {
+				DisplayName: Magic Cleaver
+				Tooltip: ""
+			}
+
+			FleshBoiler: {
+				DisplayName: Flesh Boiler
+				Tooltip: ""
+			}
+
+			SavannaPylon: {
+				DisplayName: Savanna Pylon
+				Tooltip: ""
+			}
+
+			VoltBrick: {
+				DisplayName: Volt Brick
+				Tooltip: ""
+			}
+
+			VoltBrickWall: {
+				DisplayName: Volt Brick Wall
+				Tooltip: ""
+			}
+
+			KryzinviumBar: {
+				DisplayName: Kryzinvium Bar
+				Tooltip: ""
+			}
+
+			PlasmaLamp: {
+				DisplayName: Plasma Lamp
+				Tooltip: ""
+			}
+
+			AncientAdamantiteBrick: {
+				DisplayName: Ancient Adamantite Brick
+				Tooltip: ""
+			}
+
+			AncientIronBrick: {
+				DisplayName: Ancient Iron Brick
+				Tooltip: ""
+			}
+
+			PoisonSpike: {
+				DisplayName: Poison Spike
+				Tooltip: ""
+			}
+
+			AncientAdamantiteBrickWall: {
+				DisplayName: Ancient Adamantite Brick Wall
+				Tooltip: ""
+			}
+
+			AncientIronBrickWall: {
+				DisplayName: Ancient Iron Brick Wall
+				Tooltip: ""
+			}
+
+			HeartstoneBrickWall: {
+				DisplayName: Heartstone Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9515,6 +9606,9 @@ Mods: {
 			BoompipeShrapnel.DisplayName: Boompipe Shrapnel
 			WoSCursedFireball.DisplayName: Wo S Cursed Fireball
 			WoSLaserSmall.DisplayName: Wo S Laser Small
+			MagicCleaver.DisplayName: Magic Cleaver
+			FleshFire.DisplayName: Flesh Fire
+			FleshFireLinger.DisplayName: Flesh Fire Linger
 		}
 
 		NPCs: {
@@ -10205,7 +10299,7 @@ Mods: {
 
 			Wormed: {
 				DisplayName: Wormed
-				Description: Mods.Avalon.Buffs.Wormed.Description
+				Description: ""
 			}
 
 			Reflector: {
@@ -10234,7 +10328,7 @@ Mods: {
 
 			PixieHalloworBuff: {
 				DisplayName: Pixie Hallowor Buff
-				Description: Mods.Avalon.Buffs.PixieHalloworBuff.Description
+				Description: ""
 			}
 
 			Coalesced: {
@@ -10274,7 +10368,7 @@ Mods: {
 
 			Malaria: {
 				DisplayName: Malaria
-				Description: Mods.Avalon.Buffs.Malaria.Description
+				Description: Losing life
 			}
 
 			CobaltEndurance: {
@@ -10399,27 +10493,27 @@ Mods: {
 
 			Sticky: {
 				DisplayName: Sticky
-				Description: Mods.Avalon.Buffs.Sticky.Description
+				Description: Your mobility is reduced
 			}
 
 			ArmorPenetration: {
 				DisplayName: Armor Penetration
-				Description: Mods.Avalon.Buffs.ArmorPenetration.Description
+				Description: Armor penetration is increased by 7
 			}
 
 			Fledgling: {
 				DisplayName: Fledgling
-				Description: Mods.Avalon.Buffs.Fledgling.Description
+				Description: You can fly
 			}
 
 			SpiritOfOriginal: {
 				DisplayName: Spirit Of Original
-				Description: Mods.Avalon.Buffs.SpiritOfOriginal.Description
+				Description: You have reduced enemy aggression
 			}
 
 			InflictionGenieBuff: {
 				DisplayName: Infliction Genie Buff
-				Description: Mods.Avalon.Buffs.InflictionGenieBuff.Description
+				Description: Increased movement speed
 			}
 		}
 
@@ -10529,19 +10623,19 @@ Mods: {
 
 			PurpleDungeonChest: {
 				MapEntry0: Purple Dungeon Chest
-				MapEntry1: Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry1
+				MapEntry1: Locked Purple Dungeon Chest
 			}
 
 			PurpleDungeonDresser.MapEntry: Purple Dungeon Dresser
 
 			OrangeDungeonChest: {
 				MapEntry0: Orange Dungeon Chest
-				MapEntry1: Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry1
+				MapEntry1: Locked Orange Dungeon Chest
 			}
 
 			YellowDungeonChest: {
 				MapEntry0: Yellow Dungeon Chest
-				MapEntry1: Mods.Avalon.Tiles.YellowDungeonChest.MapEntry1
+				MapEntry1: Locked Yellow Dungeon Chest
 			}
 
 			YellowDungeonDresser.MapEntry: Yellow Dungeon Dresser
@@ -10652,11 +10746,13 @@ Mods: {
 			LargeMarineKelpStage2.MapEntry: Large Marine Kelp
 			LargeMarineKelpStage3.MapEntry: Large Marine Kelp
 			LargeMarineKelpStage4.MapEntry: Large Marine Kelp
-			SavannaBushes.MapEntry: Mods.Avalon.Tiles.SavannaBushes.MapEntry
-			SavannaPot.MapEntry: Savanna Pot
-			SavannaSapling.MapEntry: Mods.Avalon.Tiles.SavannaSapling.MapEntry
-			SavannaShortGrass.MapEntry1: Mods.Avalon.Tiles.SavannaShortGrass.MapEntry1
-			UnderworldChest.MapEntry0: Mods.Avalon.Tiles.UnderworldChest.MapEntry0
+			SavannaBushes.MapEntry: ""
+			SavannaPot.MapEntry: Pot
+			SavannaSapling.MapEntry: Sapling
+			SavannaShortGrass.MapEntry1: ""
+			UnderworldChest.MapEntry0: Underworld Chest
+			SavannaPylon.MapEntry: Savanna Pylon
+			PoisonSpike.MapEntry: Poison Spike
 		}
 
 		Prefixes: {

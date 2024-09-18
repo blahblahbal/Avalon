@@ -289,7 +289,7 @@ public static class ClassExtensions
         }
     }
 
-    public static void RiftReplace(Point p, int type, int replace, int maxTiles = 500)
+    public static void ReplaceVein(Point p, int type, int replace, int maxTiles = 500)
     {
         int tiles = 0;
 

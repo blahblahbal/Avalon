@@ -17,6 +17,8 @@ using Terraria.DataStructures;
 using ReLogic.Content;
 using Terraria.GameContent.Bestiary;
 using Avalon.Common;
+using Avalon.Items.Weapons.Magic.Superhardmode;
+using Avalon.Items.Weapons.Ranged.Superhardmode;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
@@ -614,14 +616,14 @@ public class WallofSteel : ModNPC
             }
         }*/
     }
-    //public override void ModifyNPCLoot(NPCLoot npcLoot)
-    //{
-    //    LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-    //    notExpertRule.OnSuccess(ItemDropRule.OneFromOptions(1, new int[] { ModContent.ItemType<FleshBoiler>(), ModContent.ItemType<MagicCleaver>(), ModContent.ItemType<Items.Accessories.BubbleBoost>() }));
-    //    npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<Items.BossBags.WallofSteelBossBag>()));
-    //    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WallofSteelTrophy>(), 10));
-    //    npcLoot.Add(notExpertRule);
-    //    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<SoulofBlight>(), 1, 40, 56));
-    //    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<HellsteelPlate>(), 1, 20, 31));
-    //}
+	public override void ModifyNPCLoot(NPCLoot npcLoot)
+	{
+		LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+		notExpertRule.OnSuccess(ItemDropRule.OneFromOptions(1, new int[] { ModContent.ItemType<FleshBoiler>(), ModContent.ItemType<MagicCleaver>(), ModContent.ItemType<Items.Accessories.Superhardmode.BubbleBoost>() }));
+		npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<Items.BossBags.WallofSteelBossBag>()));
+		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WallofSteelTrophy>(), 10));
+		npcLoot.Add(notExpertRule);
+		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<SoulofBlight>(), 1, 40, 56));
+		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<HellsteelPlate>(), 1, 20, 31));
+	}
 }

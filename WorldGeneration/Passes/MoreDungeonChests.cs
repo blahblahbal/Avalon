@@ -5,6 +5,8 @@ using Terraria.ID;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
+using Microsoft.Xna.Framework;
+using Avalon.Tiles;
 
 namespace Avalon.WorldGeneration.Passes;
 
@@ -16,6 +18,19 @@ internal class MoreDungeonChests : GenPass
 
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configurations)
     {
+		// also replace some spikes with poison spikes
+		for (int i = 10; i < Main.maxTilesX - 10; i++)
+		{
+			for (int j = 150; j < Main.maxTilesY - 150; j++)
+			{
+				if (Main.tile[i, j].TileType == TileID.Spikes && WorldGen.genRand.NextBool(40))
+				{
+					ClassExtensions.ReplaceVein(new Point(i, j), TileID.Spikes, ModContent.TileType<PoisonSpike>());
+				}
+			}
+		}
+
+		// underworld chest
 		bool placedUnderworldChest = false;
 		while (!placedUnderworldChest)
 		{
@@ -30,6 +45,7 @@ internal class MoreDungeonChests : GenPass
 			int style2 = 1;
 			placedUnderworldChest = WorldGen.AddBuriedChest(num80, num81, contain, notNearOtherChests: false, style2, trySlope: false, chestTileType);
 		}
+		// more regular locked gold chests
 		for (int num79 = 0; num79 < 6; num79++)
         {
             bool flag5 = false;

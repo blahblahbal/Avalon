@@ -39,12 +39,14 @@ public class TrapCollision : ModHook
                 if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() ||
                     type == ModContent.TileType<Tiles.Savanna.BrambleSpikes>() ||
                     type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>() ||
-                    type == ModContent.TileType<Tiles.Savanna.Bramble>())
+					type == ModContent.TileType<Tiles.PoisonSpike>() ||
+					type == ModContent.TileType<Tiles.Savanna.Bramble>())
                 {
                     return false;
                 }
             }
-            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && (type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.Savanna.BrambleSpikes>()))
+            else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune && 
+				(type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.Savanna.BrambleSpikes>() || type == ModContent.TileType<Tiles.PoisonSpike>()))
             {
                 return true;
             }
@@ -70,7 +72,13 @@ public class TrapCollision : ModHook
             self.AddBuff(BuffID.Venom, 180);
             self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, 0, true);
         }
-        if (tileId == ModContent.TileType<Tiles.Savanna.BrambleSpikes>())
+		if (tileId == ModContent.TileType<Tiles.PoisonSpike>())
+		{
+			int num = Main.DamageVar(40, 0f - self.luck);
+			self.AddBuff(BuffID.Poisoned, 180);
+			self.Hurt(PlayerDeathReason.ByOther(3), num, 0, false, false, 0, true);
+		}
+		if (tileId == ModContent.TileType<Tiles.Savanna.BrambleSpikes>())
         {
             int num = Main.DamageVar(90, 0f - self.luck);
             int time = 10;

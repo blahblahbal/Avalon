@@ -29,7 +29,7 @@ class TroxiniumBar : ModItem
 	}
 	public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
+		Rectangle dims = this.GetDims();
         Item.autoReuse = true;
         Item.useTurn = true;
         Item.maxStack = 9999;
@@ -43,7 +43,7 @@ class TroxiniumBar : ModItem
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.height = dims.Height;
-		Item.MakeUsableWithChlorophyteExtractinator();
+		
 		if (!Main.dedServ)
         {
             Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;

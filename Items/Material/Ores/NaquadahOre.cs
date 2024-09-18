@@ -27,6 +27,5 @@ class NaquadahOre : ModItem
         Item.value = Item.sellPrice(0, 0, 14);
         Item.useAnimation = 15;
         Item.height = dims.Height;
-		Item.MakeUsableWithChlorophyteExtractinator();
 	}
 }

@@ -19,6 +19,7 @@ using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Furniture;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile;
+using Avalon.Items.Placeable.Tile.Ancient;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Potions.Other;
 using Avalon.Items.Tools;
@@ -96,9 +97,17 @@ public class AvalonGlobalItem : GlobalItem
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<NickelOre>()] = ItemID.LeadOre;
         ItemID.Sets.ShimmerTransformToItem[ItemID.IronOre] = ModContent.ItemType<BronzeOre>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BronzeOre>()] = ItemID.TinOre;
-        // end ores
+		// end ores
 
-        ItemID.Sets.ShimmerTransformToItem[ItemID.CrimstoneBlock] = ModContent.ItemType<ChunkstoneBlock>();
+		// ancient bricks
+		ItemID.Sets.ShimmerTransformToItem[ItemID.IronBrick] = ModContent.ItemType<AncientIronBrick>();
+		ItemID.Sets.ShimmerTransformToItem[ItemID.AdamantiteBeam] = ModContent.ItemType<AncientAdamantiteBrick>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>()] = ModContent.ItemType<AncientOrangeBrick>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>()] = ModContent.ItemType<AncientPurpleBrick>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.YellowBrick>()] = ModContent.ItemType<AncientYellowBrick>();
+		// end ancient bricks
+
+		ItemID.Sets.ShimmerTransformToItem[ItemID.CrimstoneBlock] = ModContent.ItemType<ChunkstoneBlock>();
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ChunkstoneBlock>()] = ItemID.EbonstoneBlock;
 
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>()] = ItemID.Wood;
@@ -137,12 +146,6 @@ public class AvalonGlobalItem : GlobalItem
 
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>()] = ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallUnsafe>();
         // end misc items
-
-        // dungeon bricks
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientOrangeBrick>();
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.PurpleBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientPurpleBrick>();
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.YellowBrick>()] = ModContent.ItemType<Items.Placeable.Tile.Ancient.AncientYellowBrick>();
-        // end dungeon bricks
 
         // equipment
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ArgusLantern>()] = ItemID.MagicLantern;
