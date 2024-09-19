@@ -238,7 +238,6 @@ internal class WallofSteelMouthEye : ModNPC
 				}
 			}
 		}
-
 		if (modeChangeCounter == 1)
 		{
 			NPC.ai[2] += 0.005f;
