@@ -43,6 +43,7 @@ public static class Projectile
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>(),
 		ModContent.ProjectileType<WoSLaserSmall>(),
 		ModContent.ProjectileType<WoSCursedFireball>(),
+		ModContent.ProjectileType<WoSBeegLaser>(),
 		ModContent.ProjectileType<WoSRocket>());
 		//ModContent.ProjectileType<Ghostflame>(),
 		//ModContent.ProjectileType<WallofSteelLaser>(),

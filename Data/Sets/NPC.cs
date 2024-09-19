@@ -1,9 +1,13 @@
+using Avalon.NPCs.Bosses.Hardmode;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets;
 
 public static class NPC
 {
+	//public static bool[] DontDropPotions = NPCID.Sets.Factory.CreateBoolSet(false, ModContent.NPCType<HomingRocket>());
+
     public static readonly bool[] Arcane = NPCID.Sets.Factory.CreateBoolSet(
         NPCID.Pixie,
         NPCID.LightMummy,

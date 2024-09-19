@@ -1,25 +1,23 @@
-using System;
-using System.Threading.Tasks;
+using Avalon.Common;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
-using Avalon.Items.Weapons.Magic;
-using Avalon.Items.Weapons.Ranged;
+using Avalon.Items.Weapons.Magic.Superhardmode;
+using Avalon.Items.Weapons.Ranged.Superhardmode;
+using Avalon.Projectiles.Hostile.WallOfSteel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
+using System.IO;
 using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.GameContent;
-using Terraria.DataStructures;
-using ReLogic.Content;
-using Terraria.GameContent.Bestiary;
-using Avalon.Common;
-using Avalon.Items.Weapons.Magic.Superhardmode;
-using Avalon.Items.Weapons.Ranged.Superhardmode;
-using System.IO;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
@@ -28,15 +26,22 @@ public class WallofSteel : ModNPC
 {
     private static Asset<Texture2D> wosTexture;
     private static Asset<Texture2D> mechaHungryChainTexture;
+	private static Asset<Texture2D>[] WoSTextures = new Asset<Texture2D>[7];
 	private int TopEyeHP;
 	private int BottomEyeHP;
 	private int TopEyeMaxHP;
 	private int BottomEyeMaxHP;
+	private int LaserSpreadTimer;
 	public override string Texture => "Avalon/NPCs/Bosses/Hardmode/WallofSteelWall";
 	public override void Load()
     {
         wosTexture = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/WallofSteel");
         mechaHungryChainTexture = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/MechaHungryChain");
+
+		for (int i = 0; i < 7; i++)
+		{
+			WoSTextures[i] = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("NPCs/Bosses/Hardmode/WallofSteelWall_Segment" + (i + 1));
+		}
     }
 
     public override void SetStaticDefaults()
@@ -65,9 +70,10 @@ public class WallofSteel : ModNPC
 		NPC.boss = NPC.noTileCollide = NPC.noGravity = NPC.behindTiles = true;
         NPC.npcSlots = 100f;
         NPC.damage = 150;
-        NPC.lifeMax = 152000;
+        NPC.lifeMax = 92000;
         NPC.timeLeft = 750000;
         NPC.defense = 55;
+		NPC.alpha = 255;
         NPC.aiStyle = -1;
         NPC.value = Item.buyPrice(0, 10);
         NPC.knockBackResist = 0;
@@ -79,11 +85,11 @@ public class WallofSteel : ModNPC
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
-        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-        {
-            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheUnderworld,
+        bestiaryEntry.Info.AddRange(
+		[
+			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheUnderworld,
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.WallOfSteel"))
-        });
+        ]);
     }
 
     public override void BossLoot(ref string name, ref int potionType)
@@ -96,6 +102,7 @@ public class WallofSteel : ModNPC
 		writer.Write(TopEyeMaxHP);
 		writer.Write(BottomEyeHP);
 		writer.Write(BottomEyeMaxHP);
+		writer.Write(LaserSpreadTimer);
 	}
 	public override void ReceiveExtraAI(BinaryReader reader)
 	{
@@ -103,26 +110,45 @@ public class WallofSteel : ModNPC
 		TopEyeMaxHP = reader.ReadByte();
 		BottomEyeHP = reader.ReadByte();
 		BottomEyeMaxHP = reader.ReadByte();
+		LaserSpreadTimer = reader.ReadInt32();
 	}
 	public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
-		SpriteEffects effects = SpriteEffects.None;
-		if (NPC.spriteDirection == 1)
-		{
-			effects = SpriteEffects.FlipHorizontally;
-		}
+		//SpriteEffects effects = SpriteEffects.None;
+		//if (NPC.spriteDirection == 1)
+		//{
+		//	effects = SpriteEffects.FlipHorizontally;
+		//}
 
-		float num66 = Main.NPCAddHeight(NPC);
-		var vector13 = new Vector2(TextureAssets.Npc[NPC.type].Width() / 2,
-			TextureAssets.Npc[NPC.type].Height() / Main.npcFrameCount[NPC.type] / 2);
-		float glow = (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.5f + 0.5f;
-		for (int i = 0; i < 4; i++)
-		{
-			Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value,
-				new Vector2(NPC.position.X - screenPos.X + (NPC.width / 2) - (TextureAssets.Npc[NPC.type].Width() * NPC.scale / 2f) + (vector13.X * NPC.scale), NPC.position.Y - Main.screenPosition.Y + NPC.height - (TextureAssets.Npc[NPC.type].Height() * NPC.scale / Main.npcFrameCount[NPC.type]) + 4f + (vector13.Y * NPC.scale) + num66) + new Vector2(0, 2 * glow).RotatedBy(i * MathHelper.PiOver2)
-				, NPC.frame, default, NPC.rotation, vector13,
-				NPC.scale, effects, 0f);
-		}
+		//Vector2 start = NPC.position + new Vector2(100, 46);
+		//Vector2 end = NPC.position + new Vector2(0, NPC.height);
+		//start -= screenPos;
+		////Texture2D TEX; // Mod.Assets.Request<Texture2D>("NPCs/Hardmode/VenusFlytrapVine").Value;
+		////int linklength = TEX.Height;
+		//Vector2 chain = new Vector2(0, 94);
+
+		//int numlinks = 7;
+		//Vector2[] links = new Vector2[numlinks];
+		//for (int i = 0; i < numlinks; i++)
+		//{
+		//	links[i] = start + chain * i - (i == 6 ? new Vector2(0, 26) : Vector2.Zero);
+
+		//	Texture2D TEX = WoSTextures[i].Value;
+
+		//	//Main.spriteBatch.Draw(TEX, links[i], Lighting.GetColor((links[i] + screenPos).ToTileCoordinates()));
+		//	Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, TEX.Height), Lighting.GetColor((links[i] + screenPos).ToTileCoordinates()), 0f, new Vector2(TEX.Width / 2, TEX.Height), 1f,
+		//		effects, 1f);
+		//}
+
+
+		//float num66 = Main.NPCAddHeight(NPC);
+		//var vector13 = new Vector2(TextureAssets.Npc[NPC.type].Width() / 2,
+		//	TextureAssets.Npc[NPC.type].Height() / Main.npcFrameCount[NPC.type] / 2);
+		//float glow = (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.5f + 0.5f;
+		//Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value,
+		//	new Vector2(NPC.position.X - screenPos.X + (NPC.width / 2) - (TextureAssets.Npc[NPC.type].Width() * NPC.scale / 2f) + (vector13.X * NPC.scale), NPC.position.Y - Main.screenPosition.Y + NPC.height - (TextureAssets.Npc[NPC.type].Height() * NPC.scale / Main.npcFrameCount[NPC.type]) + 4f + (vector13.Y * NPC.scale) + num66) + new Vector2(0, 2 * glow)
+		//	, NPC.frame, default, NPC.rotation, vector13,
+		//	NPC.scale, effects, 0f);
 	}
 	public override Color? GetAlpha(Color lightColor)
     {
@@ -137,7 +163,7 @@ public class WallofSteel : ModNPC
 
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 v, Color drawColor)
     {
-        if (AvalonWorld.WallOfSteel >= 0)
+		if (AvalonWorld.WallOfSteel >= 0)
         {
             for (int i = 0; i < 255; i++)
             {
@@ -192,7 +218,7 @@ public class WallofSteel : ModNPC
                     bool flag3 = true;
                     while (flag3)
                     {
-                        SpriteEffects effects = SpriteEffects.None;
+						SpriteEffects effects = SpriteEffects.None;
                         if (flag2)
                         {
                             effects = SpriteEffects.FlipHorizontally;
@@ -292,7 +318,44 @@ public class WallofSteel : ModNPC
                 }
             }
         }
-        return true;
+
+		SpriteEffects effects3 = SpriteEffects.None;
+		if (NPC.spriteDirection == 1)
+		{
+			effects3 = SpriteEffects.FlipHorizontally;
+		}
+
+		Vector2 start = NPC.position + new Vector2(100, -16);
+		int numVerticalSegments = (int)MathF.Ceiling(ModContent.Request<Texture2D>(Texture).Value.Height / 16);
+		int numHorizontalSegments = (int)MathF.Ceiling(ModContent.Request<Texture2D>(Texture).Value.Width / 16);
+		for (int i = 0; i < numVerticalSegments; i++)
+		{
+			for (int j = 0; j < numHorizontalSegments; j++)
+			{
+				Texture2D TEX = ModContent.Request<Texture2D>(Texture).Value;
+				Main.spriteBatch.Draw(
+					TEX,
+					(start - Main.screenPosition).Floor() + new Vector2(NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, TEX.Height + i * 16),
+					new Rectangle(j * 16, i * 16, 16, 16),
+					Lighting.GetColor((start + new Vector2(TEX.Width + NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, i * 16)).ToTileCoordinates()),
+					0f,
+					new Vector2(TEX.Width / 2, TEX.Height),
+					1f,
+					effects3,
+					1f);
+			}
+		}
+
+
+		/*
+		for (int i = 0; i < numSegments; i++)
+		{
+			Texture2D TEX = ModContent.Request<Texture2D>(Texture).Value;
+			Main.spriteBatch.Draw(TEX, (start - Main.screenPosition).Floor() + new Vector2(0, TEX.Height + i * 16), new Rectangle(0, i * 16, TEX.Width, 16), Lighting.GetColor((start + new Vector2(0, i * 16)).ToTileCoordinates()), 0f, new Vector2(TEX.Width / 2, TEX.Height), 1f,
+				effects, 1f);
+		}
+		 */
+		return true;
     }
 
     public override void AI()
@@ -400,6 +463,24 @@ public class WallofSteel : ModNPC
             NPC.position.Y = (Main.maxTilesY - 200) * 16;
         }
 
+		if (Main.expertMode)
+		{
+			NPC.ai[2]--; // mouth eye respawn timer; do not use anywhere else
+			NPC.ai[3]--; // laser eye respawn timer; do not use anywhere else
+			if (NPC.ai[2] < 0) NPC.ai[2] = 0;
+			if (NPC.ai[3] < 0) NPC.ai[3] = 0;
+
+			if (NPC.ai[2] == 1)
+			{
+				NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<WallofSteelMouthEye>());
+			}
+			if (NPC.ai[3] == 1)
+			{
+				NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<WallofSteelLaserEye>());
+			}
+		}
+		
+
 
 		if (ClassExtensions.FindATypeOfNPC(ModContent.NPCType<WallofSteelMouthEye>()) == -1)
 		{
@@ -414,42 +495,42 @@ public class WallofSteel : ModNPC
 
 		int totalMaxHP = TopEyeMaxHP + BottomEyeMaxHP + NPC.lifeMax;
 
-		float num451 = 2.5f;
+		float speed = 2.5f;
         if (totalHP < totalMaxHP * 0.75)
         {
-            num451 += 0.25f;
+            speed += 0.25f;
         }
         if (totalHP < totalMaxHP * 0.5)
         {
-            num451 += 0.4f;
+            speed += 0.4f;
         }
         if (totalHP < totalMaxHP * 0.25)
         {
-            num451 += 0.5f;
+            speed += 0.5f;
         }
         if (totalHP < totalMaxHP * 0.1)
         {
-            num451 += 0.6f;
+            speed += 0.6f;
         }
         if (totalHP < totalMaxHP * 0.66 && Main.expertMode)
         {
-            num451 += 0.3f;
+            speed += 0.3f;
         }
         if (totalHP < totalMaxHP * 0.33 && Main.expertMode)
         {
-            num451 += 0.3f;
+            speed += 0.3f;
         }
         if (totalHP < totalMaxHP * 0.05 && Main.expertMode)
         {
-            num451 += 0.6f;
+            speed += 0.6f;
         }
         if (totalHP < totalMaxHP * 0.035 && Main.expertMode)
         {
-            num451 += 0.6f;
+            speed += 0.6f;
         }
         if (totalHP < totalMaxHP * 0.025 && Main.expertMode)
         {
-            num451 += 0.6f;
+            speed += 0.6f;
         }
         if (NPC.velocity.X == 0f)
         {
@@ -458,16 +539,147 @@ public class WallofSteel : ModNPC
         }
         if (NPC.velocity.X < 0f)
         {
-            NPC.velocity.X = -num451;
+            NPC.velocity.X = -speed;
             NPC.direction = -1;
         }
         else
         {
-            NPC.velocity.X = num451;
+            NPC.velocity.X = speed;
             NPC.direction = 1;
         }
-        {
-            NPC.ai[3]++;
+
+		if (!NPC.AnyNPCs(ModContent.NPCType<WallofSteelMouthEye>()) &&
+			!NPC.AnyNPCs(ModContent.NPCType<WallofSteelLaserEye>()))
+		{
+			#region sweeping laser attack
+			NPC.ai[1]++;
+
+			if (NPC.ai[1] >= 450 && NPC.ai[1] < 540)
+			{
+				if (NPC.ai[1] == 450)
+				{
+					SoundEngine.PlaySound(
+						new SoundStyle($"{nameof(Avalon)}/Sounds/Item/LaserCharge") { Volume = 1.6f },
+						NPC.position);
+				}
+				Vector2 center22 = NPC.Center;
+				int num1260 = 0;
+				for (int num1261 = 0; num1261 < 1 + num1260; num1261++)
+				{
+					float num1263 = 0.8f;
+					if (num1261 % 2 == 1)
+					{
+						num1263 = 1.65f;
+					}
+					Vector2 vector215 = center22 + ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * new Vector2(27, 59) / 2f;
+					int num1264 = Dust.NewDust(vector215 - Vector2.One * 8f + (NPC.direction == 1 ? new Vector2(40, -10) : new Vector2(-36, -10)), 16, 16, DustID.RedTorch, NPC.velocity.X / 2f, NPC.velocity.Y / 2f);
+					Main.dust[num1264].velocity = Vector2.Normalize(center22 - vector215) * 3.5f * (10f - num1260 * 2f) / 10f;
+					Main.dust[num1264].noGravity = true;
+					Main.dust[num1264].scale = num1263;
+					Main.dust[num1264].customData = this;
+				}
+			}
+			if (NPC.ai[1] == 540)
+			{
+				SoundEngine.PlaySound(
+					new SoundStyle("Terraria/Sounds/Zombie_104") { Volume = 0.8f },
+					NPC.Center);
+				// fire laser
+				Vector2 velocityOfProj = Main.player[NPC.target].Center - NPC.Center;
+				velocityOfProj.Normalize();
+				float num1275 = -1f;
+				if (velocityOfProj.Y < 0f)
+				{
+					num1275 = 1f;
+				}
+				velocityOfProj = velocityOfProj.RotatedBy((double)((0f - num1275) * MathHelper.TwoPi));
+				int p = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y + NPC.width / 3, velocityOfProj.X, velocityOfProj.Y, ModContent.ProjectileType<WoSBeegLaser>(), 95, 0f, Main.myPlayer, num1275 * MathHelper.TwoPi / 1080f, (float)NPC.whoAmI);
+				NPC.localAI[1] += 0.05f;
+				if (NPC.localAI[1] > 1f)
+				{
+					NPC.localAI[1] = 1f;
+				}
+				float num1277 = 1;
+				if (num1277 < 0f)
+				{
+					num1277 *= -1f;
+				}
+				num1277 += MathHelper.Pi * -3;
+				num1277 += MathHelper.TwoPi / 720f;
+				NPC.localAI[0] = num1277;
+				NPC.ai[1] = 0;
+			}
+			if (NPC.ai[1] % 100 == 0)
+			{
+				int fire;
+				float f = -.1f;
+				var fireballPos = new Vector2(NPC.Center.X + NPC.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.DirectionTo(NPC.PlayerTarget().Center).Y * 40f);
+				float rotation = (float)Math.Atan2(fireballPos.Y - (Main.player[NPC.target].position.Y + (Main.player[NPC.target].height * 0.5f)), fireballPos.X - (Main.player[NPC.target].position.X + (Main.player[NPC.target].width * 0.5f)));
+				SoundEngine.PlaySound(SoundID.Item33, new Vector2((int)NPC.position.X, AvalonWorld.WallOfSteelT));
+				while (f <= .1f)
+				{
+					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), fireballPos.X, fireballPos.Y, (float)((Math.Cos(rotation + f) * 12f) * -1), (float)((Math.Sin(rotation + f) * 12f) * -1), ModContent.ProjectileType<WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
+					Main.projectile[fire].timeLeft = 600;
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
+					}
+					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), fireballPos.X, fireballPos.Y, (float)((Math.Cos(rotation - f) * 12f) * -1), (float)((Math.Sin(rotation - f) * 12f) * -1), ModContent.ProjectileType<WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
+					Main.projectile[fire].timeLeft = 600;
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
+					}
+					f += .1f;
+				}
+			}
+			#endregion
+		}
+		else
+		{
+			LaserSpreadTimer++;
+			if (LaserSpreadTimer % 500 == 0)
+			{
+				if (Main.netMode != NetmodeID.MultiplayerClient) // leeches
+				{
+					int num442 = NPC.NewNPC(NPC.GetSource_FromAI(), (int)(NPC.position.X + NPC.width / 2), (int)(NPC.position.Y + NPC.height / 2 + 20f), ModContent.NPCType<MechanicalLeechHead>(), 1);
+					Main.npc[num442].velocity.X = NPC.direction * 8;
+					SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
+				}
+			}			
+			if (LaserSpreadTimer % 1500 == 0)
+			{
+				SoundEngine.PlaySound(
+					new SoundStyle("Terraria/Sounds/Zombie_104") { Volume = 0.8f },
+					NPC.Center);
+				// fire laser
+				Vector2 velocityOfProj = Main.player[NPC.target].Center - NPC.Center;
+				velocityOfProj.Normalize();
+				float num1275 = -1f;
+				if (velocityOfProj.Y < 0f)
+				{
+					num1275 = 1f;
+				}
+				velocityOfProj = velocityOfProj.RotatedBy((double)((0f - num1275) * MathHelper.TwoPi));
+				int p = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y + NPC.width / 3, velocityOfProj.X, velocityOfProj.Y, ModContent.ProjectileType<WoSBeegLaser>(), 95, 0f, Main.myPlayer, num1275 * MathHelper.TwoPi / 1080f, (float)NPC.whoAmI);
+				NPC.localAI[1] += 0.05f;
+				if (NPC.localAI[1] > 1f)
+				{
+					NPC.localAI[1] = 1f;
+				}
+				float num1277 = 1;
+				if (num1277 < 0f)
+				{
+					num1277 *= -1f;
+				}
+				num1277 += MathHelper.Pi * -3;
+				num1277 += MathHelper.TwoPi / 720f;
+				NPC.localAI[0] = num1277;
+				LaserSpreadTimer = 0;
+			}
+		}
+		{
+            //NPC.ai[3]++;
             //if (NPC.ai[3] == 1)
             //{
             //    NPC.defense = 0;
@@ -514,7 +726,7 @@ public class WallofSteel : ModNPC
             NPC.localAI[0] = 2f;
             for (int num456 = 0; num456 < 11; num456++)
             {
-                int hungry = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)num450, ModContent.NPCType<MechanicalHungry>(), NPC.whoAmI);
+                int hungry = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)num450, ModContent.NPCType<MechanicalHungry>(), NPC.whoAmI);
                 Main.npc[hungry].ai[0] = num456 * 0.1f - 0.05f;
             }
             return;
@@ -530,8 +742,6 @@ public class WallofSteel : ModNPC
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore2").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore3").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore3").Type, NPC.scale);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore4").Type, NPC.scale);
-            Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore5").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore6").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore6").Type, NPC.scale);
             Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore7").Type, NPC.scale);

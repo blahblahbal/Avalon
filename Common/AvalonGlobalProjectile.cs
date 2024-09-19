@@ -377,7 +377,9 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 		}
 		if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.Drill || projectile.type == ModContent.ProjectileType<HallowedClaymore>() ||
 			projectile.type == ModContent.ProjectileType<MarrowMasher>() || projectile.type == ModContent.ProjectileType<CraniumCrusher>() ||
-			projectile.type == ModContent.ProjectileType<UrchinMace>() || projectile.type == ModContent.ProjectileType<WoodenClub>())
+			projectile.type == ModContent.ProjectileType<UrchinMace>() || projectile.type == ModContent.ProjectileType<WoodenClub>() ||
+			((projectile.type == ModContent.ProjectileType<CaesiumMace>() || projectile.type == ModContent.ProjectileType<Sporalash>() ||
+			projectile.type == ModContent.ProjectileType<Cell>()) && projectile.ai[0] == 0) || (projectile.aiStyle == 15 && projectile.ai[0] == 0))
 		{
 			if (projectile.Owner().GetModPlayer<AvalonPlayer>().BloodyWhetstone)
 			{

@@ -9267,7 +9267,7 @@ Mods: {
 			}
 
 			WallofSteelTrophy: {
-				DisplayName: Wallof Steel Trophy
+				DisplayName: Wall of Steel Trophy
 				Tooltip: ""
 			}
 
@@ -9625,6 +9625,7 @@ Mods: {
 			FleshFireLinger.DisplayName: Flesh Fire Linger
 			ToxicFang.DisplayName: Toxic Fang
 			WoSRocket.DisplayName: Wo S Rocket
+			WoSBeegLaser.DisplayName: Wo S Beeg Laser
 		}
 
 		NPCs: {
@@ -9750,13 +9751,13 @@ Mods: {
 			EvilVulture.DisplayName: Evil Vulture
 			Mime.DisplayName: Mime
 			MechanicalHungry.DisplayName: Mechanical Hungry
-			MechanicalHungry2.DisplayName: Mechanical Hungry2
+			MechanicalHungry2.DisplayName: Mechanical Hungry
 			MechanicalLeechHead.DisplayName: Mechanical Leech Head
 			MechanicalLeechBody.DisplayName: Mechanical Leech Body
 			MechanicalLeechTail.DisplayName: Mechanical Leech Tail
 			WallofSteel.DisplayName: Wall of Steel
 			WallofSteelMouthEye.DisplayName: Wall of Steel
-			WallofSteelLaserEye.DisplayName: Wallof Steel Laser Eye
+			WallofSteelLaserEye.DisplayName: Wall of Steel
 		}
 
 		Buffs: {
