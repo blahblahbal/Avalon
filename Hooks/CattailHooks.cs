@@ -95,11 +95,11 @@ internal class CattailHooks : ModHook
 			Tile tile = Main.tile[i, j];
 			if (tile != null)
 			{ //somehow still out of bounds
-				WorldGen.GetCactusType(i, j, tile.TileFrameX, tile.TileFrameY, out var sandType);
-				if (Main.tile[i, j].TileType == TileID.Cactus && TileLoader.CanGrowModCactus(sandType) && sandType == ModContent.TileType<Snotsand>())
-				{
-					num5 = MapHelper.tileLookup[ModContent.TileType<IckyCactusDummyTile>()];
-				}
+				//WorldGen.GetCactusType(i, j, tile.TileFrameX, tile.TileFrameY, out var sandType);
+				//if (Main.tile[i, j].TileType == TileID.Cactus && TileLoader.CanGrowModCactus(sandType) && sandType == ModContent.TileType<Snotsand>())
+				//{
+				//	num5 = MapHelper.tileLookup[ModContent.TileType<IckyCactusDummyTile>()];
+				//}
 			}
 		});
 	}
