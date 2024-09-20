@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -53,7 +52,7 @@ internal class WallofSteelMouthEye : ModNPC
 		NPC.scale = 1f;
 		NPC.HitSound = SoundID.NPCHit4;
 		NPC.DeathSound = SoundID.NPCDeath14;
-		DrawOffsetY = (int)((TextureAssets.Npc[Type].Value.Height / 2) - (NPC.Size.Y / 2));
+		DrawOffsetY = (int)((110 / 2) - (NPC.Size.Y / 2));
 		//NPC.BossBar = ModContent.GetInstance<BossBars.WallofSteelBossBar>();
 		//Music = ExxoAvalonOrigins.MusicMod == null ? MusicID.Boss2 : MusicID.Boss2; // MusicLoader.GetMusicSlot(Avalon.MusicMod, "Sounds/Music/WallofSteel");
 	}

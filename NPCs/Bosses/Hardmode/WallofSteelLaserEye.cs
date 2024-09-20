@@ -1,6 +1,5 @@
 using Avalon.Common;
 using Avalon.Projectiles;
-using Avalon.Projectiles.Hostile.Mechasting;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
@@ -49,7 +48,7 @@ internal class WallofSteelLaserEye : ModNPC
 		NPC.HitSound = SoundID.NPCHit4;
 		NPC.DeathSound = SoundID.NPCDeath14;
 		//NPC.gfxOffY = 30;
-		DrawOffsetY = (int)((TextureAssets.Npc[Type].Value.Height / 2) - (NPC.Size.Y / 2));
+		DrawOffsetY = (int)((154 / 2) - (NPC.Size.Y / 2));
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{
@@ -207,15 +206,15 @@ internal class WallofSteelLaserEye : ModNPC
 		{
 			int fire;
 			float f = 0f;
-			var fireballPos = new Vector2(NPC.Center.X + NPC.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.DirectionTo(NPC.PlayerTarget().Center).Y * 40f);
-			float rotation = (float)Math.Atan2(fireballPos.Y - NPC.PlayerTarget().Center.Y, fireballPos.X - NPC.PlayerTarget().Center.X);
+			var laserPos = new Vector2(NPC.Center.X + NPC.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.DirectionTo(NPC.PlayerTarget().Center).Y * 40f);
+			float rotation = (float)Math.Atan2(laserPos.Y - NPC.PlayerTarget().Center.Y, laserPos.X - NPC.PlayerTarget().Center.X);
 			SoundEngine.PlaySound(SoundID.Item33, new Vector2((int)NPC.position.X, AvalonWorld.WallOfSteelT));
 			if (Phase1FireballCounter == 0)
 			{
 				if (NPC.ai[3] <= 0.5f)
 				{
 					Vector2 vel = NPC.Center.DirectionTo(NPC.Center + new Vector2((float)(Math.Cos(rotation + NPC.ai[3]) * 12f * -1), (float)(Math.Sin(rotation + NPC.ai[3]) * 12f * -1)));
-					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + vel.X * 40f - 8, NPC.Center.Y + vel.Y * 40f - 8, vel.X * 8f, vel.Y * 8f, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
+					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X + vel.X * 40f - 8, laserPos.Y + vel.Y * 40f - 8, vel.X * 8f, vel.Y * 8f, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
 					Main.projectile[fire].timeLeft = 600;
 					if (Main.netMode != NetmodeID.SinglePlayer)
 					{
@@ -235,7 +234,7 @@ internal class WallofSteelLaserEye : ModNPC
 				if (NPC.ai[3] >= 0)
 				{
 					Vector2 vel = NPC.Center.DirectionTo(NPC.Center + new Vector2((float)((Math.Cos(rotation + NPC.ai[3]) * 12f) * -1), (float)((Math.Sin(rotation + NPC.ai[3]) * 12f) * -1)));
-					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + vel.X * 40f - 8, NPC.Center.Y + vel.Y * 40f - 8, vel.X * 8f, vel.Y * 8f, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
+					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X + vel.X * 40f - 8, laserPos.Y + vel.Y * 40f - 8, vel.X * 8f, vel.Y * 8f, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
 					Main.projectile[fire].timeLeft = 600;
 
 					if (Main.netMode != NetmodeID.SinglePlayer)
@@ -254,7 +253,7 @@ internal class WallofSteelLaserEye : ModNPC
 			Cycle++;
 		}
 
-		if (Cycle == 15)
+		if (Cycle == 30)
 		{
 			ModeChangeCounter = 1;
 			Cycle = 0;
@@ -276,6 +275,8 @@ internal class WallofSteelLaserEye : ModNPC
 			Main.projectile[lightning].friendly = false;
 			Main.projectile[lightning].hostile = true;
 
+			SoundEngine.PlaySound(SoundID.Item91, NPC.Center);
+
 			NPC.ai[2] = 0;
 			Cycle++;
 		}
@@ -294,7 +295,7 @@ internal class WallofSteelLaserEye : ModNPC
 		if (NPC.ai[2] == 75)
 		{
 			int laser = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + NPC.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.DirectionTo(NPC.PlayerTarget().Center).Y * 40f - 10, NPC.velocity.X, NPC.velocity.Y, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 4f);
-			Main.projectile[laser].velocity = Vector2.Normalize(Main.player[NPC.target].Center - new Vector2(NPC.position.X, NPC.Center.Y)) * 11f;
+			Main.projectile[laser].velocity = Vector2.Normalize(Main.player[NPC.target].Center - new Vector2(NPC.Center.X, NPC.Center.Y)) * 11f;
 			Main.projectile[laser].hostile = true;
 			Main.projectile[laser].friendly = false;
 			Main.projectile[laser].tileCollide = false;

@@ -26,7 +26,6 @@ public class WallofSteel : ModNPC
 {
     private static Asset<Texture2D> wosTexture;
     private static Asset<Texture2D> mechaHungryChainTexture;
-	private static Asset<Texture2D>[] WoSTextures = new Asset<Texture2D>[7];
 	private int TopEyeHP;
 	private int BottomEyeHP;
 	private int TopEyeMaxHP;
@@ -37,11 +36,6 @@ public class WallofSteel : ModNPC
     {
         wosTexture = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/WallofSteel");
         mechaHungryChainTexture = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("Assets/Textures/MechaHungryChain");
-
-		for (int i = 0; i < 7; i++)
-		{
-			WoSTextures[i] = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>("NPCs/Bosses/Hardmode/WallofSteelWall_Segment" + (i + 1));
-		}
     }
 
     public override void SetStaticDefaults()
@@ -150,10 +144,6 @@ public class WallofSteel : ModNPC
 		//	, NPC.frame, default, NPC.rotation, vector13,
 		//	NPC.scale, effects, 0f);
 	}
-	public override Color? GetAlpha(Color lightColor)
-    {
-		return null; // Color.Lerp(Color.White, Lighting.GetColor((int)NPC.position.X, (int)NPC.position.Y), 0.5f);
-    }
 
 	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 	{
@@ -731,7 +721,7 @@ public class WallofSteel : ModNPC
             }
             return;
 		}
-		//NPC.velocity.X = 0;
+		NPC.velocity.X = 0;
     }
 
 	public override void HitEffect(NPC.HitInfo hit)
