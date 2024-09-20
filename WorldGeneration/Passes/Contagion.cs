@@ -11,6 +11,8 @@ using Terraria.IO;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
+using ThoriumMod.Items.Depths;
+using ThoriumMod.NPCs;
 
 namespace Avalon.WorldGeneration.Passes;
 
@@ -413,12 +415,33 @@ internal class Contagion : GenPass
             for (int l = j - radius; l <= j + radius; l++)
             {
                 float dist = Vector2.Distance(new Vector2(k, l), new Vector2(i, j));
-                if (dist <= radius && dist >= (radius - 29))
+				float angle = center.DirectionTo(new Vector2(k, l)).ToRotation() + MathHelper.PiOver4;
+
+				//Get the angle of the point from the middle and modify the radius with a function
+				//     ___
+				//	  /   \                                                                       
+				//   /     \                                                                      
+				//__/_______\__________  Cool sine wave
+				//  0        \       /1
+				//            \     /
+				//             \___/
+
+				float angleDelta = (float)(Math.Sin(angle * (MathHelper.Pi * 4)) + 1) + (float)(Math.Sin(angle + 2 * (MathHelper.Pi * 2)) + 1) * 2f;
+				int shrunkradius = (int)(radius - angleDelta);
+
+
+				float tunnelwidth = 15;
+				float wallthickness = 7;
+				float shrunktunnelwidth = tunnelwidth - (float)(Math.Sin(angle * (MathHelper.Pi * 2)) + 1) * 2f;
+
+                if (dist <= shrunkradius && dist >= (shrunkradius - wallthickness - shrunktunnelwidth))
                 {
                     Tile t = Main.tile[k, l];
                     t.HasTile = false;
                 }
-                if (((dist <= radius && dist >= radius - 7) || (dist <= (float)(radius - 22) && dist >= (float)(radius - 29))) && Main.tile[k, l].TileType != (ushort)ModContent.TileType<SnotOrb>())
+				if (((dist <= shrunkradius && dist >= shrunkradius - wallthickness) || 
+					(dist <= shrunkradius - wallthickness - shrunktunnelwidth && dist >= shrunkradius - (wallthickness * 2) - shrunktunnelwidth)) &&
+					Main.tile[k, l].TileType != (ushort)ModContent.TileType<SnotOrb>())
                 {
                     Tile t = Main.tile[k, l];
                     t.HasTile = true;
@@ -426,7 +449,7 @@ internal class Contagion : GenPass
                     t.Slope = SlopeType.Solid;
                     t.TileType = (ushort)ModContent.TileType<Chunkstone>();
                 }
-                if (dist <= radius - 6 && dist >= radius - 23)
+                if (dist <= shrunkradius - wallthickness + 3 && dist >= shrunkradius - (wallthickness * 2) - shrunktunnelwidth - 3)
                 {
                     Main.tile[k, l].WallType = (ushort)ModContent.WallType<ChunkstoneWall>();
                 }
@@ -689,6 +712,7 @@ internal class Contagion : GenPass
         //    }
         //}
         #endregion
+
         for (int n = 0; n < points.Count; n++)
         {
             //BoreWavyTunnel((int)pointsForHollow[n].X, (int)pointsForHollow[n].Y, (int)endpoints[n][0], (int)endpoints[n][1], 50, 4, 3, 65535);

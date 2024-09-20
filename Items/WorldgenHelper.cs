@@ -43,7 +43,8 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
-			AvalonSpecialSeedsGenSystem.GenerateSpawnArea(x, y);
+			Contagion.ContagionRunner(x, y);
+			//AvalonSpecialSeedsGenSystem.GenerateSpawnArea(x, y);
             //WorldGeneration.Structures.IceShrine.Generate(x, y);
             //WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
             //WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);

@@ -2,6 +2,8 @@ using Avalon.Common;
 using Avalon.Projectiles;
 using Avalon.Projectiles.Hostile.Mechasting;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.IO;
 using Terraria;
@@ -49,7 +51,7 @@ internal class WallofSteelLaserEye : ModNPC
 		NPC.HitSound = SoundID.NPCHit4;
 		NPC.DeathSound = SoundID.NPCDeath14;
 		//NPC.gfxOffY = 30;
-		DrawOffsetY = (int)((TextureAssets.Npc[Type].Value.Height / 2) - (NPC.Size.Y / 2));
+		DrawOffsetY = (int)((154 / 2) - (NPC.Size.Y / 2));
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{
