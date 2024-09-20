@@ -418,13 +418,14 @@ internal class Contagion : GenPass
 				float angle = center.DirectionTo(new Vector2(k, l)).ToRotation() + MathHelper.PiOver4;
 
 				//Get the angle of the point from the middle and modify the radius with a function
-				//     ___
-				//	  /   \                                                                       
-				//   /     \                                                                      
-				//__/_______\__________  Cool sine wave
-				//  0        \       /1
-				//            \     /
-				//             \___/
+				//
+				//_Wall___BG_____Wall___
+				//│####│        │####│$$   
+				//└┴┴┴┴┴────────┴┴┴┴┴┴┴┘  
+				//│                    │     
+				//▼                    ▼     
+				//shrunkradius         circle
+				//					   center
 
 				float angleDelta = (float)(Math.Sin(angle * (MathHelper.Pi * 4)) + 1) + (float)(Math.Sin(angle + 2 * (MathHelper.Pi * 2)) + 1) * 2f;
 				int shrunkradius = (int)(radius - angleDelta);
@@ -434,7 +435,8 @@ internal class Contagion : GenPass
 				float wallthickness = 7;
 				float shrunktunnelwidth = tunnelwidth - (float)(Math.Sin(angle * (MathHelper.Pi * 2)) + 1) * 2f;
 
-                if (dist <= shrunkradius && dist >= (shrunkradius - wallthickness - shrunktunnelwidth))
+				// 
+                if (dist <= shrunkradius && dist >= (shrunkradius - (wallthickness * 2) - shrunktunnelwidth))
                 {
                     Tile t = Main.tile[k, l];
                     t.HasTile = false;
