@@ -337,7 +337,7 @@ public class WallofSteel : ModNPC
 					TEX,
 					(start - Main.screenPosition).Floor() + new Vector2(NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, TEX.Height + i * 16),
 					new Rectangle(j * 16, i * 16, 16, 16),
-					Lighting.GetColor((NPC.position + new Vector2(TEX.Width + NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, i * 16 - 8)).ToTileCoordinates()),
+					Lighting.GetColor((NPC.position + new Vector2(NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, i * 16 - 8)).ToTileCoordinates()),
 					0f,
 					new Vector2(TEX.Width / 2, TEX.Height),
 					1f,
@@ -606,7 +606,7 @@ public class WallofSteel : ModNPC
 					num1275 = 1f;
 				}
 				velocityOfProj = velocityOfProj.RotatedBy((double)((0f - num1275) * MathHelper.TwoPi));
-				int p = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y + NPC.width / 3, velocityOfProj.X, velocityOfProj.Y, ModContent.ProjectileType<WoSBeegLaser>(), 95, 0f, Main.myPlayer, num1275 * MathHelper.TwoPi / 1080f, (float)NPC.whoAmI);
+				int p = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y + NPC.height / 3, velocityOfProj.X, velocityOfProj.Y, ModContent.ProjectileType<WoSBeegLaser>(), 95, 0f, Main.myPlayer, num1275 * MathHelper.TwoPi / 1080f, (float)NPC.whoAmI);
 				NPC.localAI[1] += 0.05f;
 				if (NPC.localAI[1] > 1f)
 				{
@@ -770,6 +770,7 @@ public class WallofSteel : ModNPC
             return;
 		}
 		NPC.velocity.X = 0;
+		NPC.velocity.Y = 0;
     }
 
 	public override void HitEffect(NPC.HitInfo hit)

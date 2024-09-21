@@ -157,13 +157,13 @@ internal class WallofSteelLaserEye : ModNPC
 		{
 			if (Phase == 0)
 			{
-				PanningLaserPhase();
-				//SingleLaserSpamPhase();
+				//PanningLaserPhase();
+				SingleLaserSpamPhase();
 			}
 			if (Phase == 1)
 			{
-				PanningLaserPhase();
-				//ElectricBoltPhase();
+				//PanningLaserPhase();
+				ElectricBoltPhase();
 			}
 			if (Phase == 2)
 			{

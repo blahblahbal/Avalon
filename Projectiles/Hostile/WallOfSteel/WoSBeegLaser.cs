@@ -124,7 +124,6 @@
 
 	public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
 	{
-		//Rectangle playerRect = new Rectangle((int)Main.player[Main.myPlayer].position.X, (int)Main.player[Main.myPlayer].position.Y, Main.player[Main.myPlayer].width, Main.player[Main.myPlayer].height);
 		if (Colliding2(projHitbox, targetHitbox))
 		{
 			Main.player[Main.myPlayer].Hurt(PlayerDeathReason.ByProjectile(Main.myPlayer, Projectile.whoAmI), Projectile.damage, Projectile.direction);
@@ -144,9 +143,7 @@
 	public override void AI()
 	{
 		Vector2 samplingPoint = Projectile.Center;
-		var value35 = new Vector2(40f, 40f); // 27, 59
-		Vector2 value36 = Utils.Vector2FromElipse(Main.npc[(int)Projectile.ai[1]].localAI[0].ToRotationVector2(), value35 * Main.npc[(int)Projectile.ai[1]].localAI[1]);
-		Projectile.position = Main.npc[(int)Projectile.ai[1]].Center + new Vector2((Main.npc[(int)Projectile.ai[1]].direction == 1 ? 34 : -25), 0) + value36 - new Vector2(Projectile.width, Projectile.height) / 2f;
+		Projectile.position = Main.npc[(int)Projectile.ai[1]].Center + new Vector2((Main.npc[(int)Projectile.ai[1]].direction == 1 ? 50 : -65), -12) + new Vector2(Projectile.width, Projectile.height) / 2f;
 		Projectile.localAI[0]++;
 		if (Projectile.localAI[0] >= 180f)
 		{
@@ -158,9 +155,7 @@
 		Player targetPlayer = Main.npc[(int)Projectile.ai[1]].PlayerTarget();
 		num828 = Main.npc[(int)Projectile.ai[1]].DirectionTo(targetPlayer.Center).ToRotation();
 		Projectile.velocity = Projectile.velocity.ToRotation().AngleTowards(num828, MathHelper.ToRadians(0.3f)).ToRotationVector2();
-		//num828 += Projectile.ai[0];
 		Projectile.rotation = Projectile.velocity.ToRotation().AngleTowards(num828, MathHelper.ToRadians(0.3f)) - 1.57079637f;
-		//Projectile.velocity = num828.ToRotationVector2();
 		float[] array5 = new float[3];
 		Collision.LaserScan(samplingPoint, Projectile.velocity, Projectile.width * Projectile.scale, 2400f, array5);
 		float num831 = 0f;
@@ -183,7 +178,7 @@
 			Main.dust[num836].scale = 1f;
 			num4 = num833;
 		}
-		if (Main.rand.Next(5) == 0)
+		if (Main.rand.NextBool(5))
 		{
 			Vector2 value42 = Projectile.velocity.RotatedBy(1.5707963705062866) * ((float)Main.rand.NextDouble() - 0.5f) * Projectile.width;
 			int num837 = Dust.NewDust(vector58 + value42 - Vector2.One * 4f, 8, 8, DustID.Smoke, 0f, 0f, 100, default(Color), 1.5f);
