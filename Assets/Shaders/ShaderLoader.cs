@@ -10,6 +10,7 @@ namespace Avalon.Assets.Shaders;
 public class ShaderLoader : ModSystem
 {
 	private static Asset<Effect> AdditiveColor;
+	private static Asset<Effect> WOSLaser;
 	public override void Load()
 	{
 		if (Main.netMode == NetmodeID.Server)
@@ -17,7 +18,11 @@ public class ShaderLoader : ModSystem
 			return;
 		}
 		AdditiveColor = Mod.Assets.Request<Effect>("Effects/AdditiveColor");
-		MiscShaderData passParamRegistration = new MiscShaderData(AdditiveColor, "AdditiveColor");
-		GameShaders.Misc.Add("Avalon:AdditiveColor", passParamRegistration);
+		MiscShaderData AdditiveColorData = new MiscShaderData(AdditiveColor, "AdditiveColor");
+		GameShaders.Misc.Add("Avalon:AdditiveColor", AdditiveColorData);
+
+		WOSLaser = Mod.Assets.Request<Effect>("Effects/WOSLaser");
+		MiscShaderData WOSLaserData = new MiscShaderData(WOSLaser, "WOSLaser");
+		GameShaders.Misc.Add("Avalon:WOSLaser", WOSLaserData);
 	}
 }

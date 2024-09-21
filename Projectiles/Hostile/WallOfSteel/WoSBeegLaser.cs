@@ -2,7 +2,7 @@
 	using Microsoft.Xna.Framework;
 	using Microsoft.Xna.Framework.Graphics;
 	using ReLogic.Content;
-	using Terraria;
+using Terraria;
 	using Terraria.DataStructures;
 	using Terraria.Graphics.Shaders;
 	using Terraria.ID;
@@ -18,12 +18,14 @@
 		private static Asset<Texture2D> BeamMiddleTexture;
 		private static Asset<Texture2D> BeamStartTexture;
 		private static Asset<Texture2D> BeamEndTexture;
+		private static Asset<Texture2D> Gradient;
 
 	public override void Load()
 	{
 		BeamMiddleTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamMiddle");
 		BeamStartTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamStart");
 		BeamEndTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamEnd");
+		Gradient = ModContent.Request<Texture2D>("Avalon/Assets/Shaders/Gradient");
 	}
 
 	public override void SetDefaults()
@@ -71,17 +73,33 @@
 		Main.spriteBatch.End();
 		Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
-		Vector3 colorHSL = Main.rgbToHsl(Color.White);
 		float frequency = 4f;
 		float varianceReduction = 3f;
 		float saturation = MathF.Sin((float)Main.timeForVisualEffects / frequency) / varianceReduction + (1 - 1f / varianceReduction);
 
-		GameShaders.Misc["Avalon:AdditiveColor"].UseOpacity(1f);
-		GameShaders.Misc["Avalon:AdditiveColor"].UseColor(Color.Red);
-		GameShaders.Misc["Avalon:AdditiveColor"].UseSaturation(saturation);
-		GameShaders.Misc["Avalon:AdditiveColor"].Apply();
+		GameShaders.Misc["Avalon:WOSLaser"].UseOpacity(1f);
+		GameShaders.Misc["Avalon:WOSLaser"].UseColor(Color.Red);
+		GameShaders.Misc["Avalon:WOSLaser"].UseSaturation(saturation);
+		GameShaders.Misc["Avalon:WOSLaser"].UseImage1(Gradient);
+		GameShaders.Misc["Avalon:WOSLaser"].Apply();
 
-		Main.EntitySpriteDraw(BeamEndTexture.Value, p.Center - Main.screenPosition, null, Color.White, Projectile.rotation, BeamEndTexture.Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+		// regular fade in/out
+		//float fadeIn = (Projectile.timeLeft > (3600 - 44) ? Projectile.timeLeft - (3600 - 44) : 0) / 44f;
+		//float fadeInEased = 1 - MathF.Sqrt(1 - MathF.Pow(fadeIn, 5));
+		//float fadeOut = (Projectile.timeLeft < 44 + 3421 ? (44 - (Projectile.timeLeft - 3421)) : 0) / 44f;
+		//float fadeOutEased = MathF.Sin(fadeOut * MathHelper.Pi / 2);
+		//float fadeInOutEased = fadeInEased + fadeOutEased;
+
+		// regular fade in, flickering fade out
+		float fadeIn = (Projectile.timeLeft > (3600 - 44) ? Projectile.timeLeft - (3600 - 44) : 0) / 44f;
+		float fadeInEased = 1 - MathF.Sqrt(1 - MathF.Pow(fadeIn, 5));
+		float fadeOut = (Projectile.timeLeft < 88 + 3421 ? (88 - (Projectile.timeLeft - 3421)) : 0) / 88f;
+		float fadeOutEased = (88f - fadeOut * 88f > 33f) ? MathF.Sin(fadeOut * MathHelper.Pi / 2) : 0;
+		float fadeOut2 = fadeOutEased == 0 ? (Projectile.timeLeft < 88 + 3421 ? (88 - (Projectile.timeLeft - 3421)) : 0) / 88f : 0;
+		float fadeOutElastic = fadeOut2 == 0 ? 0 : fadeOut2 == 1 ? 1 : MathF.Pow(2f, -4f * fadeOut2) * MathF.Sin((fadeOut2 * 10f - 0.75f) * MathHelper.TwoPi) + 1f;
+		float fadeInOutEased = fadeInEased + fadeOutEased + fadeOutElastic;
+
+		Main.EntitySpriteDraw(BeamEndTexture.Value, p.Center - Main.screenPosition, null, Color.White, Projectile.rotation, BeamEndTexture.Size() / 2f, new Vector2(Projectile.scale - fadeInOutEased, Projectile.scale), SpriteEffects.None, 0);
 		num204 -= (BeamEndTexture.Value.Height / 2 + BeamStartTexture.Value.Height) * Projectile.scale;
 		Vector2 center2 = p.Center;
 		center2 += Projectile.velocity * Projectile.scale * BeamStartTexture.Value.Height / 2f;
@@ -95,8 +113,8 @@
 				{
 					rectangle7.Height = (int)(num204 - num205);
 				}
-				Main.EntitySpriteDraw(BeamMiddleTexture.Value, center2 - Main.screenPosition, rectangle7, Color.White, Projectile.rotation, new Vector2(rectangle7.Width / 2, 0f), Projectile.scale, SpriteEffects.None, 0);
-				Lighting.AddLight(center2, new Vector3(255f / 255f, 128f / 128f, 128f / 128f));
+				Main.EntitySpriteDraw(BeamMiddleTexture.Value, center2 - Main.screenPosition, rectangle7, Color.White, Projectile.rotation, new Vector2(rectangle7.Width / 2, 0f), new Vector2(Projectile.scale - fadeInOutEased, Projectile.scale), SpriteEffects.None, 0);
+				Lighting.AddLight(center2, new Vector3(255f / 255f, 128f / 128f, 128f / 128f) * (1f - fadeInOutEased));
 				num205 += rectangle7.Height * Projectile.scale;
 				center2 += Projectile.velocity * rectangle7.Height * Projectile.scale;
 				rectangle7.Y += 16;
@@ -106,7 +124,7 @@
 				}
 			}
 		}
-		Main.EntitySpriteDraw(BeamStartTexture.Value, center2 - Main.screenPosition, null, Color.White, Projectile.rotation, BeamEndTexture.Frame().Top(), Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(BeamStartTexture.Value, center2 - Main.screenPosition, null, Color.White, Projectile.rotation, BeamEndTexture.Frame().Top(), new Vector2(Projectile.scale - fadeInOutEased, Projectile.scale), SpriteEffects.None, 0);
 		
 		Main.spriteBatch.End();
 		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
