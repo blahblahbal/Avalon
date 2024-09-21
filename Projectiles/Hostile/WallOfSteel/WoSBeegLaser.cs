@@ -1,28 +1,29 @@
-using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
+	using System;
+	using Microsoft.Xna.Framework;
+	using Microsoft.Xna.Framework.Graphics;
+	using ReLogic.Content;
+	using Terraria;
+	using Terraria.DataStructures;
+	using Terraria.Graphics.Shaders;
+	using Terraria.ID;
+	using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile.WallOfSteel;
+	namespace Avalon.Projectiles.Hostile.WallOfSteel;
 
-public class WoSBeegLaser : ModProjectile
-{
-	private Color laserColor;
-	private readonly Color[] colorArray = new Color[3];
-	private int colorShift;
-	private static Asset<Texture2D> BeamMiddleTexture;
-	private static Asset<Texture2D> BeamStartTexture;
-	private static Asset<Texture2D> BeamEndTexture;
+	public class WoSBeegLaser : ModProjectile
+	{
+		//private Color laserColor;
+		//private readonly Color[] colorArray = new Color[3];
+		//private int colorShift;
+		private static Asset<Texture2D> BeamMiddleTexture;
+		private static Asset<Texture2D> BeamStartTexture;
+		private static Asset<Texture2D> BeamEndTexture;
 
 	public override void Load()
 	{
-		BeamMiddleTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamMiddle");
-		BeamStartTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamStart");
-		BeamEndTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamEnd");
+		BeamMiddleTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/BeamVenoshock");
+		BeamStartTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/BeamStart");
+		BeamEndTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/BeamEnd");
 	}
 
 	public override void SetDefaults()
@@ -45,30 +46,42 @@ public class WoSBeegLaser : ModProjectile
 
 		float num204 = Projectile.localAI[1];
 
-		colorArray[0] = Color.White; // TODO: make the laser shift colors better
-		colorArray[1] = new Color(220, 110, 110, 255);
-		colorArray[2] = new Color(195, 85, 85, 255);
+		//colorArray[0] = new Color(255, 0, 0, 255); // TODO: make the laser shift colors better
+		//colorArray[1] = new Color(255, 0, 0, 255);
+		//colorArray[2] = new Color(255, 0, 0, 255);
 
-		colorShift++;
-		if (colorShift > 60)
-		{
-			colorShift = 0;
-		}
+		//colorShift++;
+		//if (colorShift > 60)
+		//{
+		//	colorShift = 0;
+		//}
 
-		if (colorShift <= 15)
-		{
-			laserColor = colorArray[0];
-		}
-		else if (colorShift > 15 && colorShift <= 30 || colorShift > 45 && colorShift <= 61)
-		{
-			laserColor = colorArray[1];
-		}
-		else if (colorShift > 30 && colorShift <= 45)
-		{
-			laserColor = colorArray[2];
-		}
+		//if (colorShift <= 15)
+		//{
+		//	laserColor = colorArray[0];
+		//}
+		//else if (colorShift > 15 && colorShift <= 30 || colorShift > 45 && colorShift <= 61)
+		//{
+		//	laserColor = colorArray[1];
+		//}
+		//else if (colorShift > 30 && colorShift <= 45)
+		//{
+		//	laserColor = colorArray[2];
+		//}
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
-		Main.EntitySpriteDraw(BeamEndTexture.Value, p.Center - Main.screenPosition, null, laserColor, Projectile.rotation, BeamEndTexture.Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+		Vector3 colorHSL = Main.rgbToHsl(Color.White);
+		float frequency = 4f;
+		float varianceReduction = 3f;
+		float saturation = MathF.Sin((float)Main.timeForVisualEffects / frequency) / varianceReduction + (1 - 1f / varianceReduction);
+
+		GameShaders.Misc["Avalon:AdditiveColor"].UseOpacity(1f);
+		GameShaders.Misc["Avalon:AdditiveColor"].UseColor(Color.Red);
+		GameShaders.Misc["Avalon:AdditiveColor"].UseSaturation(saturation);
+		GameShaders.Misc["Avalon:AdditiveColor"].Apply();
+
+		Main.EntitySpriteDraw(BeamEndTexture.Value, p.Center - Main.screenPosition, null, Color.White, Projectile.rotation, BeamEndTexture.Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
 		num204 -= (BeamEndTexture.Value.Height / 2 + BeamStartTexture.Value.Height) * Projectile.scale;
 		Vector2 center2 = p.Center;
 		center2 += Projectile.velocity * Projectile.scale * BeamStartTexture.Value.Height / 2f;
@@ -82,7 +95,8 @@ public class WoSBeegLaser : ModProjectile
 				{
 					rectangle7.Height = (int)(num204 - num205);
 				}
-				Main.EntitySpriteDraw(BeamMiddleTexture.Value, center2 - Main.screenPosition, rectangle7, laserColor, Projectile.rotation, new Vector2(rectangle7.Width / 2, 0f), Projectile.scale, SpriteEffects.None, 0);
+				Main.EntitySpriteDraw(BeamMiddleTexture.Value, center2 - Main.screenPosition, rectangle7, Color.White, Projectile.rotation, new Vector2(rectangle7.Width / 2, 0f), Projectile.scale, SpriteEffects.None, 0);
+				Lighting.AddLight(center2, new Vector3(255f / 255f, 128f / 128f, 128f / 128f));
 				num205 += rectangle7.Height * Projectile.scale;
 				center2 += Projectile.velocity * rectangle7.Height * Projectile.scale;
 				rectangle7.Y += 16;
@@ -92,7 +106,10 @@ public class WoSBeegLaser : ModProjectile
 				}
 			}
 		}
-		Main.EntitySpriteDraw(BeamStartTexture.Value, center2 - Main.screenPosition, null, laserColor, Projectile.rotation, BeamEndTexture.Frame().Top(), Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(BeamStartTexture.Value, center2 - Main.screenPosition, null, Color.White, Projectile.rotation, BeamEndTexture.Frame().Top(), Projectile.scale, SpriteEffects.None, 0);
+		
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 	}
 
 	public bool Colliding2(Rectangle myRect, Rectangle targetRect)
@@ -129,7 +146,7 @@ public class WoSBeegLaser : ModProjectile
 		Vector2 samplingPoint = Projectile.Center;
 		var value35 = new Vector2(40f, 40f); // 27, 59
 		Vector2 value36 = Utils.Vector2FromElipse(Main.npc[(int)Projectile.ai[1]].localAI[0].ToRotationVector2(), value35 * Main.npc[(int)Projectile.ai[1]].localAI[1]);
-		Projectile.position = Main.npc[(int)Projectile.ai[1]].Center + new Vector2((Main.npc[(int)Projectile.ai[1]].direction == 1 ? 34 : -25), 16) + value36 - new Vector2(Projectile.width, Projectile.height) / 2f;
+		Projectile.position = Main.npc[(int)Projectile.ai[1]].Center + new Vector2((Main.npc[(int)Projectile.ai[1]].direction == 1 ? 34 : -25), 0) + value36 - new Vector2(Projectile.width, Projectile.height) / 2f;
 		Projectile.localAI[0]++;
 		if (Projectile.localAI[0] >= 180f)
 		{
