@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Weapons.Magic.Superhardmode;
@@ -56,8 +57,17 @@ public class WallofSteel : ModNPC
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
     }
+	public override bool ModifyCollisionData(Rectangle victimHitbox, ref int immunityCooldownSlot, ref MultipliableFloat damageMultiplier, ref Rectangle npcHitbox)
+	{
+		Rectangle hb = new(npcHitbox.X + (NPC.direction == 1 ? NPC.width : 0), npcHitbox.Y + 150, (NPC.direction == 1 ? 100 : -100), 80);
 
-    public override void SetDefaults()
+		if (victimHitbox.Intersects(hb))
+		{
+			return true;
+		}
+		return true;
+	}
+	public override void SetDefaults()
     {
         NPC.width = 200;
         NPC.height = 580;
@@ -538,18 +548,31 @@ public class WallofSteel : ModNPC
             NPC.direction = 1;
         }
 
+		if (!NPC.AnyNPCs(ModContent.NPCType<WallofSteelMouthEye>()))
+		{
+			Vector2 offset = new(65, 115);
+			if (NPC.direction == 1) offset = new(NPC.width - (65 + 16), 115);
+			Dust d1 = Dust.NewDustDirect(NPC.position + offset, 1, 1, DustID.Smoke, 0f, 0f);
+		}
+		if (!NPC.AnyNPCs(ModContent.NPCType<WallofSteelLaserEye>()))
+		{
+			Vector2 offset = new(65, NPC.height - 115 - 16);
+			if (NPC.direction == 1) offset = new(NPC.width - (65 + 16), NPC.height - 115 - 16);
+			Dust d1 = Dust.NewDustDirect(NPC.position + offset, 1, 1, DustID.Smoke, 0f, 0f);
+		}
+
 		if (!NPC.AnyNPCs(ModContent.NPCType<WallofSteelMouthEye>()) &&
 			!NPC.AnyNPCs(ModContent.NPCType<WallofSteelLaserEye>()))
 		{
 			#region sweeping laser attack
 			NPC.ai[1]++;
 
-			if (NPC.ai[1] >= 450 && NPC.ai[1] < 540)
+			if (NPC.ai[1] >= 360 && NPC.ai[1] < 540)
 			{
-				if (NPC.ai[1] == 450)
+				if (NPC.ai[1] == 360)
 				{
 					SoundEngine.PlaySound(
-						new SoundStyle($"{nameof(Avalon)}/Sounds/Item/LaserCharge") { Volume = 1.6f },
+						new SoundStyle($"{nameof(Avalon)}/Sounds/Item/LaserCharge2") { Volume = 1.2f },
 						NPC.position);
 				}
 				Vector2 center22 = NPC.Center;
@@ -636,8 +659,33 @@ public class WallofSteel : ModNPC
 					Main.npc[num442].velocity.X = NPC.direction * 8;
 					SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
 				}
-			}			
-			if (LaserSpreadTimer % 1500 == 0)
+			}
+			if (LaserSpreadTimer >= 1320 && LaserSpreadTimer < 1500)
+			{
+				if (LaserSpreadTimer == 1320)
+				{
+					SoundEngine.PlaySound(
+						new SoundStyle($"{nameof(Avalon)}/Sounds/Item/LaserCharge2") { Volume = 1.2f },
+						NPC.position);
+				}
+				Vector2 center22 = NPC.Center;
+				int num1260 = 0;
+				for (int num1261 = 0; num1261 < 1 + num1260; num1261++)
+				{
+					float num1263 = 0.8f;
+					if (num1261 % 2 == 1)
+					{
+						num1263 = 1.65f;
+					}
+					Vector2 vector215 = center22 + ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * new Vector2(27, 59) / 2f;
+					int num1264 = Dust.NewDust(vector215 - Vector2.One * 8f + (NPC.direction == 1 ? new Vector2(40, -10) : new Vector2(-36, -10)), 16, 16, DustID.RedTorch, NPC.velocity.X / 2f, NPC.velocity.Y / 2f);
+					Main.dust[num1264].velocity = Vector2.Normalize(center22 - vector215) * 3.5f * (10f - num1260 * 2f) / 10f;
+					Main.dust[num1264].noGravity = true;
+					Main.dust[num1264].scale = num1263;
+					Main.dust[num1264].customData = this;
+				}
+			}
+			if (LaserSpreadTimer == 1500)
 			{
 				SoundEngine.PlaySound(
 					new SoundStyle("Terraria/Sounds/Zombie_104") { Volume = 0.8f },
@@ -799,5 +847,33 @@ public class WallofSteel : ModNPC
 		npcLoot.Add(notExpertRule);
 		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<SoulofBlight>(), 1, 40, 56));
 		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<HellsteelPlate>(), 1, 20, 31));
+	}
+}
+public class WallOfSteelHPHack : ModHook
+{
+	protected override void Apply()
+	{
+		On_Main.MouseTextHackZoom_string_string += On_Main_MouseTextHackZoom_string_string;
+	}
+
+	private void On_Main_MouseTextHackZoom_string_string(On_Main.orig_MouseTextHackZoom_string_string orig, Main self, string text, string buffTooltip)
+	{
+		if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSRenderHPText)
+		{
+			if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSLaserEyeIndex != -1)
+			{
+				text += ": " + Main.npc[Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSLaserEyeIndex].life + "/" + Main.npc[Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSLaserEyeIndex].lifeMax;
+			}
+			if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSMouthEyeIndex != -1)
+			{
+				text += ": " + Main.npc[Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSMouthEyeIndex].life + "/" + Main.npc[Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSMouthEyeIndex].lifeMax;
+			}
+		}
+		else
+		{
+			Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSLaserEyeIndex = -1;
+			Main.LocalPlayer.GetModPlayer<AvalonPlayer>().WOSMouthEyeIndex = -1;
+		}
+		orig.Invoke(self, text, buffTooltip);
 	}
 }

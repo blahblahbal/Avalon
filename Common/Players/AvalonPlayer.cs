@@ -9,6 +9,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
+using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Projectiles;
@@ -138,9 +139,13 @@ public class AvalonPlayer : ModPlayer
 
         return StingerProbes.Find(index);
     }
-    #endregion
+	#endregion
 
-    public bool PotionSicknessSoundPlayed;
+	public bool WOSRenderHPText = false;
+	public int WOSLaserEyeIndex = -1;
+	public int WOSMouthEyeIndex = -1;
+
+	public bool PotionSicknessSoundPlayed;
 
     public byte FartTimer = 0;
     public int RocketDustTimer = 0;
@@ -403,6 +408,7 @@ public class AvalonPlayer : ModPlayer
     }
 	public override void ResetEffects()
     {
+		WOSRenderHPText = false;
         EfficiencyPrefix = 0;
         if (DesertBeakSpawnTimer < -1)
         {
@@ -690,6 +696,33 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PostUpdate()
 	{
+		if (AvalonWorld.WallOfSteel != -1)
+		{
+			int laser = ClassExtensions.FindATypeOfNPC(ModContent.NPCType<WallofSteelLaserEye>());
+			if (laser != -1)
+			{
+				NPC laserEye = Main.npc[laser];
+
+				if (laserEye.Hitbox.Contains((int)MousePosition.X, (int)MousePosition.Y))
+				{
+					WOSRenderHPText = true;
+					WOSLaserEyeIndex = laser;
+				}
+			}
+
+			int mouth = ClassExtensions.FindATypeOfNPC(ModContent.NPCType<WallofSteelMouthEye>());
+			if (mouth != -1)
+			{
+				NPC mouthEye = Main.npc[mouth];
+
+				if (mouthEye.Hitbox.Contains((int)MousePosition.X, (int)MousePosition.Y))
+				{
+					WOSRenderHPText = true;
+					WOSLaserEyeIndex = mouth;
+				}
+			}
+		}
+
 		#region wall of steel
 		if (Player.tongued)
 		{

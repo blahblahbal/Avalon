@@ -37,6 +37,9 @@ internal class WallofSteelMouthEye : ModNPC
 		if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
 		{
 			Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore5").Type, NPC.scale);
+			int s1 = Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, GoreID.Smoke1, NPC.scale);
+			int s2 = Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, GoreID.Smoke2, NPC.scale);
+			int s3 = Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, GoreID.Smoke3, NPC.scale);
 		}
 	}
 	public override void SetDefaults()

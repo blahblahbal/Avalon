@@ -61,3 +61,6 @@ MasterSword.ogg shortened/edited from https://freesound.org/people/jobro/sounds/
 Both Longbow sounds from https://www.epidemicsound.com/music/featured/
 
 DesertHorn.ogg shortened/edited from https://audiojungle.net/item/horn-calls/24273579
+
+LaserCharge2.ogg shortened from https://freesound.org/people/plasterbrain/sounds/351807/
+	License link: http://creativecommons.org/licenses/by/3.0/

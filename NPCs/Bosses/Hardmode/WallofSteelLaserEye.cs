@@ -57,6 +57,9 @@ internal class WallofSteelLaserEye : ModNPC
 		if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
 		{
 			Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, Mod.Find<ModGore>("WallofSteelGore4").Type, NPC.scale);
+			int s1 = Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, GoreID.Smoke1, NPC.scale);
+			int s2 = Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, GoreID.Smoke2, NPC.scale);
+			int s3 = Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity, GoreID.Smoke3, NPC.scale);
 		}
 	}
 	public override void SendExtraAI(BinaryWriter writer)
@@ -104,7 +107,7 @@ internal class WallofSteelLaserEye : ModNPC
 		NPC.spriteDirection = mainWall.spriteDirection;
 
 		Vector2 NPCCenter = NPC.Center;
-		if (ModeChangeCounter == 0 && Phase != 2)
+		if (ModeChangeCounter == 0 && Phase != 0 && Phase != 1 && Phase != 2)
 		{
 			float rotationModifier = 0.05f;
 			float targetCenterX = Main.player[NPC.target].position.X + Main.player[NPC.target].width / 2 - NPCCenter.X;
@@ -154,11 +157,13 @@ internal class WallofSteelLaserEye : ModNPC
 		{
 			if (Phase == 0)
 			{
-				SingleLaserSpamPhase();
+				PanningLaserPhase();
+				//SingleLaserSpamPhase();
 			}
 			if (Phase == 1)
 			{
-				ElectricBoltPhase();
+				PanningLaserPhase();
+				//ElectricBoltPhase();
 			}
 			if (Phase == 2)
 			{
