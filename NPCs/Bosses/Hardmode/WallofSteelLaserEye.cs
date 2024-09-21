@@ -107,7 +107,7 @@ internal class WallofSteelLaserEye : ModNPC
 		NPC.spriteDirection = mainWall.spriteDirection;
 
 		Vector2 NPCCenter = NPC.Center;
-		if (ModeChangeCounter == 0 && Phase != 0 && Phase != 1 && Phase != 2)
+		if (ModeChangeCounter == 0 && Phase != 2)
 		{
 			float rotationModifier = 0.05f;
 			float targetCenterX = Main.player[NPC.target].position.X + Main.player[NPC.target].width / 2 - NPCCenter.X;

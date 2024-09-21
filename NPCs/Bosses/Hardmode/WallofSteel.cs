@@ -32,6 +32,8 @@ public class WallofSteel : ModNPC
 	private int TopEyeMaxHP;
 	private int BottomEyeMaxHP;
 	private int LaserSpreadTimer;
+	private int MortarTimer;
+	private float MortarAngleThingy;
 	public override string Texture => "Avalon/NPCs/Bosses/Hardmode/WallofSteelWall";
 	public override void Load()
     {
@@ -107,6 +109,8 @@ public class WallofSteel : ModNPC
 		writer.Write(BottomEyeHP);
 		writer.Write(BottomEyeMaxHP);
 		writer.Write(LaserSpreadTimer);
+		writer.Write(MortarTimer);
+		writer.Write(MortarAngleThingy);
 	}
 	public override void ReceiveExtraAI(BinaryReader reader)
 	{
@@ -115,6 +119,8 @@ public class WallofSteel : ModNPC
 		BottomEyeHP = reader.ReadByte();
 		BottomEyeMaxHP = reader.ReadByte();
 		LaserSpreadTimer = reader.ReadInt32();
+		MortarTimer = reader.ReadInt32();
+		MortarAngleThingy = reader.ReadSingle();
 	}
 	public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
@@ -561,6 +567,32 @@ public class WallofSteel : ModNPC
 			Dust d1 = Dust.NewDustDirect(NPC.position + offset, 1, 1, DustID.Smoke, 0f, 0f);
 		}
 
+		MortarTimer++;
+		if (MortarTimer > 200)
+		{
+			int fire;
+			float f = 0f;
+			var laserPos = new Vector2(NPC.Center.X + NPC.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.DirectionTo(NPC.PlayerTarget().Center).Y * 40f);
+			float rotation = (float)Math.Atan2(laserPos.Y - NPC.PlayerTarget().Center.Y, laserPos.X - NPC.PlayerTarget().Center.X);
+			SoundEngine.PlaySound(SoundID.Item11, NPC.Center);
+			if (MortarAngleThingy <= 0.3f)
+			{
+				Vector2 vel = NPC.Center.DirectionTo(NPC.Center + new Vector2((float)(Math.Cos(rotation + MortarAngleThingy) * 12f * -1), (float)(Math.Sin(rotation + MortarAngleThingy) * 20f * -1)));
+				fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X + vel.X * 40f - 8, laserPos.Y + vel.Y * 40f - 8, vel.X * 20f, vel.Y * 20f, ModContent.ProjectileType<WoSMortar>(), Main.expertMode ? 70 : 55, 6f, Main.myPlayer);
+				Main.projectile[fire].timeLeft = 600;
+				if (Main.netMode != NetmodeID.SinglePlayer)
+				{
+					NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
+				}
+
+				NPC.rotation = NPC.Center.DirectionTo(Main.projectile[fire].Center).ToRotation() + (NPC.direction == -1 ? MathHelper.Pi : MathHelper.PiOver4 / 2);
+				MortarAngleThingy += .1f;
+			}
+			MortarTimer = 0;
+			MortarAngleThingy = 0f;
+		}
+
+		// if the eyes are dead
 		if (!NPC.AnyNPCs(ModContent.NPCType<WallofSteelMouthEye>()) &&
 			!NPC.AnyNPCs(ModContent.NPCType<WallofSteelLaserEye>()))
 		{
@@ -648,6 +680,7 @@ public class WallofSteel : ModNPC
 			}
 			#endregion
 		}
+		// if the eyes are not dead
 		else
 		{
 			LaserSpreadTimer++;
@@ -770,7 +803,6 @@ public class WallofSteel : ModNPC
             return;
 		}
 		NPC.velocity.X = 0;
-		NPC.velocity.Y = 0;
     }
 
 	public override void HitEffect(NPC.HitInfo hit)

@@ -9626,6 +9626,9 @@ Mods: {
 			ToxicFang.DisplayName: Toxic Fang
 			WoSRocket.DisplayName: Wo S Rocket
 			WoSBeegLaser.DisplayName: Wo S Beeg Laser
+			WoSCinder.DisplayName: Wo S Cinder
+			WoSGeyser.DisplayName: Wo S Geyser
+			WoSMortar.DisplayName: Wo S Mortar
 		}
 
 		NPCs: {
