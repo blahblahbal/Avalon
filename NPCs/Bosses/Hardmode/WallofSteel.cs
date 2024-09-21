@@ -337,7 +337,7 @@ public class WallofSteel : ModNPC
 					TEX,
 					(start - Main.screenPosition).Floor() + new Vector2(NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, TEX.Height + i * 16),
 					new Rectangle(j * 16, i * 16, 16, 16),
-					Lighting.GetColor((start + new Vector2(TEX.Width + NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, i * 16)).ToTileCoordinates()),
+					Lighting.GetColor((NPC.position + new Vector2(TEX.Width + NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, i * 16 - 8)).ToTileCoordinates()),
 					0f,
 					new Vector2(TEX.Width / 2, TEX.Height),
 					1f,

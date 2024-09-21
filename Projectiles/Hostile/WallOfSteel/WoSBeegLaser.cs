@@ -21,9 +21,9 @@
 
 	public override void Load()
 	{
-		BeamMiddleTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/BeamVenoshock");
-		BeamStartTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/BeamStart");
-		BeamEndTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/BeamEnd");
+		BeamMiddleTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamMiddle");
+		BeamStartTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamStart");
+		BeamEndTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamEnd");
 	}
 
 	public override void SetDefaults()
