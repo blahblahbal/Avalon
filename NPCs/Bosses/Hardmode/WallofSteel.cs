@@ -332,20 +332,19 @@ public class WallofSteel : ModNPC
 		}
 
 		Vector2 start = NPC.position + new Vector2(100, -16);
-		int numVerticalSegments = (int)MathF.Ceiling(ModContent.Request<Texture2D>(Texture).Value.Height / 16);
-		int numHorizontalSegments = (int)MathF.Ceiling(ModContent.Request<Texture2D>(Texture).Value.Width / 16);
+		int numVerticalSegments = (int)MathF.Ceiling(TextureAssets.Npc[Type].Value.Height / 16f);
+		int numHorizontalSegments = (int)MathF.Ceiling(TextureAssets.Npc[Type].Value.Width / 16f);
 		for (int i = 0; i < numVerticalSegments; i++)
 		{
 			for (int j = 0; j < numHorizontalSegments; j++)
 			{
-				Texture2D TEX = ModContent.Request<Texture2D>(Texture).Value;
 				Main.spriteBatch.Draw(
-					TEX,
-					(start - Main.screenPosition).Floor() + new Vector2(NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, TEX.Height + i * 16),
+					TextureAssets.Npc[Type].Value,
+					(start - Main.screenPosition).Floor() + new Vector2(NPC.direction == 1 ? TextureAssets.Npc[Type].Value.Width - j * 16 - 16 : j * 16, TextureAssets.Npc[Type].Value.Height + i * 16),
 					new Rectangle(j * 16, i * 16, 16, 16),
-					Lighting.GetColor((NPC.position + new Vector2(NPC.direction == 1 ? TEX.Width - j * 16 - 16 : j * 16, i * 16 - 8)).ToTileCoordinates()),
+					Lighting.GetColor((NPC.position + new Vector2(NPC.direction == 1 ? TextureAssets.Npc[Type].Value.Width - j * 16 - 16 : j * 16, i * 16 - 8)).ToTileCoordinates()),
 					0f,
-					new Vector2(TEX.Width / 2, TEX.Height),
+					new Vector2(TextureAssets.Npc[Type].Value.Width / 2, TextureAssets.Npc[Type].Value.Height),
 					1f,
 					effects3,
 					1f);
