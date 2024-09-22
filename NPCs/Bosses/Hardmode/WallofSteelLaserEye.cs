@@ -21,6 +21,7 @@ internal class WallofSteelLaserEye : ModNPC
 	private byte Phase1FireballCounter = 0;
 	private byte Cycle = 0;
 	private float PhaseRotation = 0f;
+	private int PreviousProj = -1;
 	public override void SetStaticDefaults()
 	{
 		Main.npcFrameCount[NPC.type] = 1;
@@ -69,6 +70,7 @@ internal class WallofSteelLaserEye : ModNPC
 		writer.Write(Phase1FireballCounter);
 		writer.Write(Cycle);
 		writer.Write(PhaseRotation);
+		writer.Write(PreviousProj);
 	}
 	public override void ReceiveExtraAI(BinaryReader reader)
 	{
@@ -77,6 +79,7 @@ internal class WallofSteelLaserEye : ModNPC
 		Phase1FireballCounter = reader.ReadByte();
 		Cycle = reader.ReadByte();
 		PhaseRotation = reader.ReadSingle();
+		PreviousProj = reader.ReadInt32();
 	}
 	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 	{
@@ -102,12 +105,12 @@ internal class WallofSteelLaserEye : ModNPC
 
 		NPC.TargetClosest(true);
 
-		NPC.Center = mainWall.Center + new Vector2(75 * mainWall.direction, 165);
+		NPC.Center = mainWall.Center + new Vector2(75 * mainWall.direction, 160);
 		NPC.direction = mainWall.direction;
 		NPC.spriteDirection = mainWall.spriteDirection;
 
 		Vector2 NPCCenter = NPC.Center;
-		if (ModeChangeCounter == 0 && Phase != 2)
+		if (ModeChangeCounter == 0 && Phase != 2) // && Phase != 0 && Phase != 1)
 		{
 			float rotationModifier = 0.05f;
 			float targetCenterX = Main.player[NPC.target].position.X + Main.player[NPC.target].width / 2 - NPCCenter.X;
@@ -213,24 +216,27 @@ internal class WallofSteelLaserEye : ModNPC
 		{
 			int fire;
 			float f = 0f;
-			var laserPos = new Vector2(NPC.Center.X + NPC.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.DirectionTo(NPC.PlayerTarget().Center).Y * 40f);
+			//var laserPos = new Vector2(NPC.Center.X + NPC.Center.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.Center.DirectionTo(NPC.PlayerTarget().Center).Y * 40f);
+			var laserPos = NPC.Center;
 			float rotation = (float)Math.Atan2(laserPos.Y - NPC.PlayerTarget().Center.Y, laserPos.X - NPC.PlayerTarget().Center.X);
 			SoundEngine.PlaySound(SoundID.Item33, new Vector2((int)NPC.position.X, AvalonWorld.WallOfSteelT));
+
 			if (Phase1FireballCounter == 0)
 			{
-				if (NPC.ai[3] <= 0.5f)
+				if (NPC.ai[3] <= 0.3f)
 				{
+					//var spawnOffset = laserPos.DirectionTo(NPC.PlayerTarget().Center).RotatedBy(rotation);
 					Vector2 vel = NPC.Center.DirectionTo(NPC.Center + new Vector2((float)(Math.Cos(rotation + NPC.ai[3]) * 12f * -1), (float)(Math.Sin(rotation + NPC.ai[3]) * 12f * -1)));
-					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X + vel.X * 40f - 8, laserPos.Y + vel.Y * 40f - 8, vel.X * 8f, vel.Y * 8f, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
+					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X + vel.X * 40f, laserPos.Y + vel.Y * 40f, vel.X * 8f, vel.Y * 8f, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
 					Main.projectile[fire].timeLeft = 600;
 					if (Main.netMode != NetmodeID.SinglePlayer)
 					{
 						NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
 					}
 
-					NPC.rotation = NPC.Center.DirectionTo(Main.projectile[fire].Center).ToRotation() + (NPC.direction == -1 ? MathHelper.Pi : MathHelper.PiOver4 / 2);
+					NPC.rotation = NPC.Center.DirectionTo(Main.projectile[fire].Center).ToRotation() + (NPC.direction == -1 ? MathHelper.Pi : -MathHelper.TwoPi);
 					NPC.ai[3] += .1f;
-					if (NPC.ai[3] >= 0.5f)
+					if (NPC.ai[3] >= 0.3f)
 					{
 						Phase1FireballCounter = 1;
 					}
@@ -238,19 +244,19 @@ internal class WallofSteelLaserEye : ModNPC
 			}
 			else
 			{
-				if (NPC.ai[3] >= 0)
+				if (NPC.ai[3] >= -0.3f)
 				{
 					Vector2 vel = NPC.Center.DirectionTo(NPC.Center + new Vector2((float)((Math.Cos(rotation + NPC.ai[3]) * 12f) * -1), (float)((Math.Sin(rotation + NPC.ai[3]) * 12f) * -1)));
-					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X + vel.X * 40f - 8, laserPos.Y + vel.Y * 40f - 8, vel.X * 8f, vel.Y * 8f, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
+					fire = Projectile.NewProjectile(NPC.GetSource_FromAI(), laserPos.X + vel.X * 40f, laserPos.Y + vel.Y * 40f, vel.X * 8f, vel.Y * 8f, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 6f);
 					Main.projectile[fire].timeLeft = 600;
 
 					if (Main.netMode != NetmodeID.SinglePlayer)
 					{
 						NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, fire);
 					}
-					NPC.rotation = NPC.Center.DirectionTo(Main.projectile[fire].Center).ToRotation() + (NPC.direction == -1 ? MathHelper.Pi : MathHelper.PiOver4 / 2);
+					NPC.rotation = NPC.Center.DirectionTo(Main.projectile[fire].Center).ToRotation() + (NPC.direction == -1 ? MathHelper.Pi : -MathHelper.TwoPi);
 					NPC.ai[3] -= .1f;
-					if (NPC.ai[3] <= 0)
+					if (NPC.ai[3] <= -0.3f)
 					{
 						Phase1FireballCounter = 0;
 					}

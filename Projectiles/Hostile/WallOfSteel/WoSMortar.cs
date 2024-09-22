@@ -47,7 +47,7 @@ internal class WoSMortar : ModProjectile
 		}
 		int bomb = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileID.Grenade, 50, 3f);
 		Main.projectile[bomb].timeLeft = 1;
-		Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -5f), ModContent.ProjectileType<WoSGeyser>(), Projectile.damage / 3, 1f);
+		Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -15f), ModContent.ProjectileType<WoSGeyser>(), Projectile.damage / 3, 1f);
 		for (int i = 0; i < 9; i++)
 		{
 			int rand = Main.rand.Next(-10, 11);
