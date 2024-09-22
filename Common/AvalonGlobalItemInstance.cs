@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -21,7 +22,9 @@ public class AvalonGlobalItemInstance : GlobalItem
     public int TileBoostSaved { get; set; }
 	public bool Genie { get; set; }
 
-    public override GlobalItem Clone(Item item, Item itemClone)
+	public List<Vector3> RiftLocations = new List<Vector3>();
+
+	public override GlobalItem Clone(Item item, Item itemClone)
     {
         var clone = (AvalonGlobalItemInstance)base.Clone(item, itemClone);
         clone.HealStamina = HealStamina;
@@ -34,6 +37,7 @@ public class AvalonGlobalItemInstance : GlobalItem
         clone.StaminaScroll = StaminaScroll;
         clone.TileBoostSaved = TileBoostSaved;
 		clone.Genie = Genie;
+		clone.RiftLocations = RiftLocations;
         return clone;
     }
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

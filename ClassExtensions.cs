@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -23,6 +24,43 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
+	public static bool ContainsRange(this List<List<Point>> list, List<Point> range)
+	{
+		foreach (List<Point> lp in list)
+		{
+			foreach (Point pt in lp)
+			{
+				if (range.Contains(pt))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	public static int FindVector2InVector4List(this List<Vector4> v4, Vector2 v2)
+	{
+		for (int i = 0; i < v4.Count; i++)
+		{
+			if (v4[i].X == v2.X && v4[i].Y == v2.Y)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public static int FindVector2InVector3List(this List<Vector3> v3, Vector2 v2)
+	{
+		for (int i = 0; i < v3.Count; i++)
+		{
+			if (v3[i].X == v2.X && v3[i].Y == v2.Y)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
 	public static int BannerPlaceStyleToItemID(int placeStyle)
     {
         placeStyle += 21;
