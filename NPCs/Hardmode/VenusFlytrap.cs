@@ -37,24 +37,15 @@ internal class VenusFlytrap : ModNPC
 		{
 			// rotation doesn't work when a custom texture path is set, so instead we manually draw the bestiary icon in PreDraw
 			//CustomTexturePath = Texture + "_Bestiary",
-			Position = new Vector2(4f, -6f),
-			Rotation = MathHelper.PiOver4 * 3f
+			Position = new Vector2(3f, 9f),
+			PortraitPositionXOverride = 4f,
+			PortraitPositionYOverride = -6f
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 	}
 
 	public override void SetDefaults()
 	{
-		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
-		{
-			// rotation doesn't work when a custom texture path is set, so instead we manually draw the bestiary icon in PreDraw
-			//CustomTexturePath = Texture + "_Bestiary",
-			Position = new Vector2(3f, 9f),
-			PortraitPositionXOverride = 4f,
-			PortraitPositionYOverride = -6f
-		};
-		NPCID.Sets.NPCBestiaryDrawOffset.Remove(Type);
-		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 		NPC.damage = 106;
 		NPC.lifeMax = 550;
 		NPC.defense = 27;
