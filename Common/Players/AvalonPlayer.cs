@@ -2211,6 +2211,11 @@ public class AvalonPlayer : ModPlayer
         }
         if (water)
         {
+			if (attempt.rare && Player.ZoneDungeon && Main.hardMode)
+			{
+				itemDrop = ModContent.ItemType<Items.Consumables.BiomeLockbox>();
+				return;
+			}
             if (attempt.crate && (Player.InModBiome<Biomes.Contagion>() || Player.InModBiome<Biomes.UndergroundContagion>()))
             {
                 if (!attempt.veryrare && !attempt.legendary && attempt.rare && Main.rand.NextBool())

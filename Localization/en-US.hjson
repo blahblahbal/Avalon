@@ -3519,12 +3519,12 @@ Mods: {
 			}
 
 			LargeTwilightPlumeSeed: {
-				DisplayName: Large Twilight Plume Seed
+				DisplayName: Large Dawnplume Seed
 				Tooltip: ""
 			}
 
 			LargeTwilightPlume: {
-				DisplayName: Large Twilight Plume
+				DisplayName: Large Dawnplume
 				Tooltip: ""
 			}
 
@@ -5905,12 +5905,12 @@ Mods: {
 			}
 
 			TwilightPlume: {
-				DisplayName: Twilight Plume
+				DisplayName: Dawnplume
 				Tooltip: ""
 			}
 
 			TwilightPlumeSeeds: {
-				DisplayName: Twilight Plume Seeds
+				DisplayName: Dawnplume Seeds
 				Tooltip: ""
 			}
 
@@ -5930,7 +5930,7 @@ Mods: {
 			}
 
 			TwilightPlumePlanterBox: {
-				DisplayName: Twilight Plume Planter Box
+				DisplayName: Dawnplume Planter Box
 				Tooltip: ""
 			}
 
@@ -9350,6 +9350,11 @@ Mods: {
 					Toss into lava in the Underworld
 					'''
 			}
+
+			BiomeLockbox: {
+				DisplayName: Biome Lockbox
+				Tooltip: <right> with a biome key to open
+			}
 		}
 
 		InfoDisplays: {
@@ -10561,7 +10566,7 @@ Mods: {
 				MapEntry8: Growing Large Sweetstem
 				MapEntry9: Growing Large Barfbush
 				MapEntry10: Growing Large Holybird
-				MapEntry11: Growing Large Twilight Plume
+				MapEntry11: Growing Large Dawnplume
 			}
 
 			LargeHerbsStage2: {
@@ -10576,7 +10581,7 @@ Mods: {
 				MapEntry8: Growing Large Sweetstem
 				MapEntry9: Growing Large Barfbush
 				MapEntry10: Growing Large Holybird
-				MapEntry11: Growing Large Twilight Plume
+				MapEntry11: Growing Large Dawnplume
 			}
 
 			LargeHerbsStage3: {
@@ -10591,7 +10596,7 @@ Mods: {
 				MapEntry8: Growing Large Sweetstem
 				MapEntry9: Growing Large Barfbush
 				MapEntry10: Growing Large Holybird
-				MapEntry11: Growing Large Twilight Plume
+				MapEntry11: Growing Large Dawnplume
 			}
 
 			LargeHerbsStage4: {
@@ -10606,7 +10611,7 @@ Mods: {
 				MapEntry8: Large Sweetstem
 				MapEntry9: Large Barfbush
 				MapEntry10: Large Holybird
-				MapEntry11: Large Twilight Plume
+				MapEntry11: Large Dawnplume
 			}
 
 			CaesiumForge: {
@@ -10765,7 +10770,7 @@ Mods: {
 			Bloodberry.MapEntry: Bloodberry
 			Holybird.MapEntry: Holybird
 			Sweetstem.MapEntry: Sweetstem
-			TwilightPlume.MapEntry: Twilight Plume
+			TwilightPlume.MapEntry: Dawnplume
 			AquamarineChest.MapEntry0: Aquamarine Chest
 			ChrysoberylChest.MapEntry0: Chrysoberyl Chest
 			OpalChest.MapEntry0: Opal Chest

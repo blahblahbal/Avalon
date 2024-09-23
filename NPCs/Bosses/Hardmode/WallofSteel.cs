@@ -59,16 +59,6 @@ public class WallofSteel : ModNPC
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
 	}
-	public override bool ModifyCollisionData(Rectangle victimHitbox, ref int immunityCooldownSlot, ref MultipliableFloat damageMultiplier, ref Rectangle npcHitbox)
-	{
-		Rectangle hb = new(npcHitbox.X + (NPC.direction == 1 ? NPC.width : 0), npcHitbox.Y + 150, (NPC.direction == 1 ? 100 : -100), 80);
-
-		if (victimHitbox.Intersects(hb))
-		{
-			return true;
-		}
-		return true;
-	}
 	public override void SetDefaults()
 	{
 		NPC.width = 200;
@@ -477,11 +467,13 @@ public class WallofSteel : ModNPC
 
 			if (NPC.ai[2] == 1)
 			{
-				NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<WallofSteelMouthEye>());
+				int q = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<WallofSteelMouthEye>());
+				Main.npc[q].life = Main.npc[q].lifeMax / 3;
 			}
 			if (NPC.ai[3] == 1)
 			{
-				NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<WallofSteelLaserEye>());
+				int q = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<WallofSteelLaserEye>());
+				Main.npc[q].life = Main.npc[q].lifeMax / 3;
 			}
 		}
 		

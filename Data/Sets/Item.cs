@@ -204,6 +204,61 @@ namespace Avalon.Data.Sets
 			{ ItemID.WrathPotion, BuffType<AdvWrath>() },
 		};
 
+		public static List<int> HallowedChest = new List<int>()
+		{
+			ItemID.HallowedKey,
+			ItemID.RainbowGun
+		};
+
+		public static List<int> CorruptionChest = new List<int>()
+		{
+			ItemID.CorruptionKey,
+			ItemID.ScourgeoftheCorruptor,
+			ItemID.Gel,
+			ItemID.StoneBlock
+		};
+
+		public static List<int> CrimsonChest = new List<int>()
+		{
+			ItemID.CrimsonKey,
+			ItemID.VampireKnives
+		};
+
+		public static List<int> DesertChest = new List<int>()
+		{
+			ItemID.DungeonDesertKey,
+			ItemID.StormTigerStaff
+		};
+
+		public static List<int> JungleChest = new List<int>()
+		{
+			ItemID.JungleKey,
+			ItemID.PiranhaGun
+		};
+
+		public static List<int> FrozenChest = new List<int>()
+		{
+			ItemID.FrozenKey,
+			ItemID.StaffoftheFrostHydra
+		};
+
+		public static List<int> UnderworldChest = new List<int>()
+		{
+			ItemType<UnderworldKey>(),
+			ItemType<Hellrazer>()
+		};
+
+		public static List<int> ContagionChest = new List<int>()
+		{
+			ItemType<ContagionKey>(),
+			ItemType<VirulentScythe>()
+		};
+
+		public static List<List<int>> BiomeLockboxCollection = new List<List<int>>()
+		{
+			HallowedChest, CorruptionChest, CrimsonChest, DesertChest,
+			JungleChest, FrozenChest, UnderworldChest, ContagionChest
+		};
 		public static readonly bool[] HerbSeeds = ItemID.Sets.Factory.CreateBoolSet(
 			ItemID.BlinkrootSeeds,
 			ItemID.DaybloomSeeds,
