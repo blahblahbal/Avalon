@@ -11,12 +11,13 @@ public class CoolGemsparkBlock : ModTile
 {
     public static int R { get; private set; } = 160;
     public static int G { get; private set; } = 0;
-    public static int B { get; private set; } = 0;
-    private static int style = 0;
+    public static int B { get; private set; } = 255;
+	private static ModWaterfallStyle waterfallStyle;
 
-    public override void SetStaticDefaults()
-    {
-        AddMapEntry(Color.DarkCyan);
+	public override void SetStaticDefaults()
+	{
+		waterfallStyle = Mod.Find<ModWaterfallStyle>("CoolGemsparkWaterfallStyle");
+		AddMapEntry(Color.DarkCyan);
         Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;
 		Main.tileLighted[Type] = true;
@@ -35,6 +36,10 @@ public class CoolGemsparkBlock : ModTile
 	{
 		Framing.SelfFrame8Way(i, j, Main.tile[i, j], resetFrame);
 		return false;
+	}
+	public override void ChangeWaterfallStyle(ref int style)
+	{
+		style = waterfallStyle.Slot;
 	}
 
 	public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
@@ -153,57 +158,54 @@ public class CoolGemsparkBlock : ModTile
 	}
 	public static void StaticUpdate()
 	{
-		if (style == 0)
+		int time = ((int)Main.timeForVisualEffects) % 212;
+		if (time <= 31)
 		{
 			R -= 5;
 			if (R <= 0)
 			{
 				R = 0;
-				style = 1;
 			}
 		}
-        if (style == 1)
-        {
-            G += 5;
-            if (G >= 255)
-            {
-                G = 255;
-            }
-            if (G >= 160)
-            {
-                B -= 5;
-                if (B <= 0)
-                {
-                    B = 0;
-                    style = 2;
-                }
-            }
-        }
-        if (style == 2)
-        {
-            G -= 5;
-            if (G <= 0)
-            {
-                G = 0;
-            }
-            if (G <= 160)
-            {
-                B += 5;
-                if (B >= 255)
-                {
-                    B = 255;
-                    style = 3;
-                }
-            }
-        }
-        if (style == 3)
-        {
-            R += 5;
-            if (R >= 160)
-            {
-                R = 160;
-                style = 0;
-            }
-        }
-    }
+		if (time >= 32 && time <= 112)
+		{
+			G += 5;
+			if (G >= 255)
+			{
+				G = 255;
+			}
+			if (G >= 160)
+			{
+				B -= 5;
+				if (B <= 0)
+				{
+					B = 0;
+				}
+			}
+		}
+		if (time >= 112 && time <= 180)
+		{
+			G -= 5;
+			if (G <= 0)
+			{
+				G = 0;
+			}
+			if (G <= 160)
+			{
+				B += 5;
+				if (B >= 255)
+				{
+					B = 255;
+				}
+			}
+		}
+		if (time >= 180)
+		{
+			R += 5;
+			if (R >= 160)
+			{
+				R = 160;
+			}
+		}
+	}
 }
