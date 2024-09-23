@@ -130,15 +130,15 @@ class RiftGogglesPlayer : ModPlayer
             }
         }
         // ores
-        if (Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Main.rand.NextBool(100))
+        if (Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Main.rand.NextBool(3200))
         {
-            //if (Player.ZoneRockLayerHeight)
+            if (Player.ZoneRockLayerHeight)
             {
                 Vector2 pposTile2 = Player.position + new Vector2(Main.rand.Next(-50 * 16, 50 * 16), Main.rand.Next(-35 * 16, 35 * 16));
                 Point pt = pposTile2.ToTileCoordinates();
                 for (int q = 0; q < 50; q++)
                 {
-                    if (!Data.Sets.Tile.RiftOres[Main.tile[pt.X, pt.Y].TileType]/* || Main.tile[pt.X, pt.Y].LiquidType == LiquidID.Honey*/)
+                    if (!Data.Sets.Tile.RiftOres[Main.tile[pt.X, pt.Y].TileType])
                     {
                         pposTile2 = Player.position + new Vector2(Main.rand.Next(-50 * 16, 50 * 16), Main.rand.Next(-35 * 16, 35 * 16));
                         pt = pposTile2.ToTileCoordinates();
@@ -164,23 +164,147 @@ class RiftGogglesPlayer : ModPlayer
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
-
-					//               Tile t = Main.tile[pt.X, pt.Y];
-					//               t.LiquidType = LiquidID.Honey;
-					//               t.LiquidAmount = 54;
-					//               int rift = Item.NewItem(Player.GetSource_TileInteraction(pt.X, pt.Y), pt.X * 16 + 10, pt.Y * 16 + 10, 8, 8, ModContent.ItemType<OreRift>());
-					//               Main.item[rift].playerIndexTheItemIsReservedFor = Player.whoAmI;
-					//               Main.item[rift].keepTime = 600;
-					//Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftLocations.Add(new Vector3(pt.X, pt.Y, 300));
-					//               if (Main.netMode == NetmodeID.Server)
-					//               {
-					//                   NetMessage.SendData(MessageID.SyncItem, -1, -1, null, rift);
-					//               }
+					#region iron
+					if (Main.tile[pt.X, pt.Y].TileType == TileID.Iron)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Iron, TileID.Lead, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Lead)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Lead, ModContent.TileType<Tiles.Ores.NickelOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.NickelOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.NickelOre>(), TileID.Iron, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					#endregion
+					#region silver
+					if (Main.tile[pt.X, pt.Y].TileType == TileID.Silver)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Silver, TileID.Tungsten, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Tungsten)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Tungsten, ModContent.TileType<Tiles.Ores.ZincOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.ZincOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.ZincOre>(), TileID.Silver, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					#endregion
+					#region gold
+					if (Main.tile[pt.X, pt.Y].TileType == TileID.Gold)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Gold, TileID.Platinum, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Platinum)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Platinum, ModContent.TileType<Tiles.Ores.BismuthOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.BismuthOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.BismuthOre>(), TileID.Gold, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					#endregion
+					#region rhodium
+					if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.RhodiumOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.RhodiumOre>(), ModContent.TileType<Tiles.Ores.OsmiumOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.OsmiumOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.OsmiumOre>(), ModContent.TileType<Tiles.Ores.IridiumOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.IridiumOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.IridiumOre>(), ModContent.TileType<Tiles.Ores.RhodiumOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					#endregion
+					#region evil
+					if (Main.tile[pt.X, pt.Y].TileType == TileID.Demonite)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Demonite, TileID.Crimtane, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Crimtane)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Crimtane, ModContent.TileType<Tiles.Ores.BacciliteOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.BacciliteOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.BacciliteOre>(), TileID.Demonite, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					#endregion
+					#region cobalt
+					if (Main.tile[pt.X, pt.Y].TileType == TileID.Cobalt)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Cobalt, TileID.Palladium, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Palladium)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Palladium, ModContent.TileType<Tiles.Ores.DurataniumOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.DurataniumOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.DurataniumOre>(), TileID.Cobalt, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					#endregion
+					#region mythril
+					if (Main.tile[pt.X, pt.Y].TileType == TileID.Mythril)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Mythril, TileID.Orichalcum, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Orichalcum)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Orichalcum, ModContent.TileType<Tiles.Ores.NaquadahOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.NaquadahOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.NaquadahOre>(), TileID.Mythril, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					#endregion
+					#region adamantite
+					if (Main.tile[pt.X, pt.Y].TileType == TileID.Adamantite)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Adamantite, TileID.Titanium, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Titanium)
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Titanium, ModContent.TileType<Tiles.Ores.TroxiniumOre>(), new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.TroxiniumOre>())
+					{
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.TroxiniumOre>(), TileID.Adamantite, new Vector3(pt.X, pt.Y, 54));
+						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
+					}
+					#endregion
 				}
 			}
         }
         // fishing
-        /*if (Player.ZoneCrimson || Player.ZoneCorrupt || Player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion)
+        /*if (Player.ZoneCrimson || Player.ZoneCorrupt || Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion)
         {
             if (Main.rand.NextBool(15) && RiftGoggles)
             {
@@ -212,12 +336,12 @@ class RiftGogglesPlayer : ModPlayer
         }*/
         #endregion rift goggles
     }
-	public static void AddValidNeighbors(Queue<Point> toDo, List<Point> done, Point pos, int type)
+	public static void AddValidNeighbors(Queue<Point> toDo, List<Point> done, Point pos, int type, List<Vector4> positions)
 	{
-		TryAddPoint(toDo, done, pos + new Point(-1, 0), type);
-		TryAddPoint(toDo, done, pos + new Point(1, 0), type);
-		TryAddPoint(toDo, done, pos + new Point(0, -1), type);
-		TryAddPoint(toDo, done, pos + new Point(0, 1), type);
+		TryAddPoint(toDo, done, pos + new Point(-1, 0), type, positions);
+		TryAddPoint(toDo, done, pos + new Point(1, 0), type, positions);
+		TryAddPoint(toDo, done, pos + new Point(0, -1), type, positions);
+		TryAddPoint(toDo, done, pos + new Point(0, 1), type, positions);
 	}
 	public static List<Vector4> GetAllTiles(Point pos, int type, int replace, Vector3 position)
 	{
@@ -227,9 +351,9 @@ class RiftGogglesPlayer : ModPlayer
 		List<Point> done = new List<Point>();
 
 		// add the first point
-		TryAddPoint(toDo, done, pos, type);
+		TryAddPoint(toDo, done, pos, type, new List<Vector4>() { new Vector4(position.X, position.Y, position.Z, replace) });
 
-		// repeatedly take the next point to do, add it to the done list, then add all of it's neighbors to the to-do list
+		// repeatedly take the next point to do, add it to the done list, then add all of its neighbors to the to-do list
 		Point nextPoint;
 		while (toDo.TryDequeue(out nextPoint))
 		{
@@ -238,12 +362,12 @@ class RiftGogglesPlayer : ModPlayer
 			positions.Add(new Vector4(nextPoint.X, nextPoint.Y, // position
 				position.Z, // timer
 				replace)); // tile to draw
-			AddValidNeighbors(toDo, done, nextPoint, type);
+			AddValidNeighbors(toDo, done, nextPoint, type, positions);
 		}
 
 		return positions;
 	}
-	public static void TryAddPoint(Queue<Point> toDo, List<Point> done, Point point, int type)
+	public static void TryAddPoint(Queue<Point> toDo, List<Point> done, Point point, int type, List<Vector4> positions)
 	{
 		if (!toDo.Contains(point) && !done.Contains(point))
 		{
@@ -255,93 +379,12 @@ class RiftGogglesPlayer : ModPlayer
 }
 class RiftGogglesGlobalTile : GlobalTile
 {
-	List<Vector4> v = new List<Vector4>();
 	public override void PostDraw(int i, int j, int type, SpriteBatch spriteBatch)
     {
         if (!Main.tileSolid[Main.tile[i, j].TileType])
         {
             return;
         }
-
-		if (Main.tile[i, j].HasTile && Data.Sets.Tile.RiftOres[Main.tile[i, j].TileType])
-		{
-			Tile tile = Main.tile[i, j];
-			var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-			if (Main.drawToScreen)
-			{
-				zero = Vector2.Zero;
-			}
-
-			if (ModContent.GetInstance<RiftGogglesSystem>().Positions2.Count == 0) return;
-			int index = ModContent.GetInstance<RiftGogglesSystem>().Positions2.FindVector2InVector4List(new Vector2(i, j));
-			if (index >= ModContent.GetInstance<RiftGogglesSystem>().Positions2.Count || index == -1) return;
-
-			if (ModContent.GetInstance<RiftGogglesSystem>().Positions2[index].Z <= 627 && ModContent.GetInstance<RiftGogglesSystem>().Positions2[index].Z >= 27)
-			{
-				int frameX = 0;
-				int frameY = 0;
-
-				Vector2 pos = new Vector2(i, j) * 16 + zero - Main.screenPosition;
-				var frame = new Rectangle(tile.TileFrameX + frameX * 288, tile.TileFrameY + frameY * 270, 16, 16);
-				var halfFrame = new Rectangle(tile.TileFrameX + frameX * 288, tile.TileFrameY + frameY * 270, 16, 8);
-
-				Texture2D tex = TextureAssets.Tile[(int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[index].W].Value;
-
-				if (tile.Slope == SlopeType.Solid && !tile.IsHalfBlock)
-				{
-					spriteBatch.Draw(tex, pos, frame, Color.White);
-				}
-				else if (tile.IsHalfBlock)
-				{
-					pos = new Vector2(i * 16, (j * 16) + 8) + zero - Main.screenPosition;
-					spriteBatch.Draw(tex, pos, halfFrame, Color.White);
-				}
-				else
-				{
-					Vector2 screenOffset = new Vector2(Main.offScreenRange, Main.offScreenRange);
-					if (Main.drawToScreen)
-					{
-						screenOffset = Vector2.Zero;
-					}
-					Vector2 vector = new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + screenOffset;
-					int slopeType = (int)tile.Slope;
-					int num5 = 2;
-					int addFrY = Main.tileFrame[type] * 90;
-					int addFrX = 0;
-					for (int q = 0; q < 8; q++)
-					{
-						int num6 = q * -2;
-						int num7 = 16 - q * 2;
-						int num8 = 16 - num7;
-						int num9;
-						switch (slopeType)
-						{
-							case 1:
-								num6 = 0;
-								num9 = q * 2;
-								num7 = 14 - q * 2;
-								num8 = 0;
-								break;
-							case 2:
-								num6 = 0;
-								num9 = 16 - q * 2 - 2;
-								num7 = 14 - q * 2;
-								num8 = 0;
-								break;
-							case 3:
-								num9 = q * 2;
-								break;
-							default:
-								num9 = 16 - q * 2 - 2;
-								break;
-						}
-						Main.spriteBatch.Draw(tex, vector + new Vector2(num9, q * num5 + num6), (Rectangle?)new Rectangle(tile.TileFrameX + frameX * 288 + addFrX + num9, tile.TileFrameY + frameY * 270 + addFrY + num8, num5, num7), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-					}
-					int num10 = ((slopeType <= 2) ? 14 : 0);
-					Main.spriteBatch.Draw(tex, vector + new Vector2(0f, num10), (Rectangle?)new Rectangle(tile.TileFrameX + frameX * 288 + addFrX, tile.TileFrameY + frameY * 270 + addFrY + num10, 16, 2), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-				}
-			}
-		}
         if (Main.tile[i, j].HasTile && Data.Sets.Tile.RiftOres[Main.tile[i, j].TileType])
         {
             Tile tile = Main.tile[i, j];
@@ -358,7 +401,7 @@ class RiftGogglesGlobalTile : GlobalTile
 			// 654 to 600
 			int v = (int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[index].Z; // - 600;
 			//if (v < 0) return;
-			int frameY = (int)(54 - v) / 3;
+			int frameY = (int)(54 - ModContent.GetInstance<RiftGogglesSystem>().Positions2[index].Z) / 3;
             int frameX = 0;
             if (frameY > 6 && frameY <= 13)
             {
@@ -431,52 +474,6 @@ class RiftGogglesGlobalTile : GlobalTile
             }
 		}
 	}
-	public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
-	{
-		p.Add(new List<Point>()
-		{
-			start + new Point(0, -1), start + new Point(0, 1), start + new Point(-1, 0), start + new Point(1, 0)
-		});
-
-		return p;
-	}
-	public static List<Vector4> RiftReplace(Point p, int type, int replace, Vector3 position, int maxTiles = 600)
-	{
-		List<Vector4> positions = new List<Vector4>();
-		int tiles = 0;
-
-		Tile tile = Framing.GetTileSafely(p);
-		if (!tile.HasTile || tile.TileType != type)
-		{
-			return new List<Vector4>();
-		}
-
-		List<List<Point>> points = new List<List<Point>>();
-		points = AddValidNeighbors(points, p);
-
-		int index = 0;
-		while (points.Count > 0 && tiles < maxTiles && index < points.Count)
-		{
-			List<Point> tilePos = points[index];
-
-			foreach (Point a in tilePos)
-			{
-				Tile t = Framing.GetTileSafely(a.X, a.Y);
-				if (t.HasTile && t.TileType == type) // && t.LiquidType == LiquidID.Honey)
-				{
-					Tile q = Framing.GetTileSafely(a.X, a.Y);
-					positions.Add(new Vector4(a.X, a.Y, // position
-												position.Z, // timer
-												replace)); // tile to draw
-					//ModContent.GetInstance<RiftGogglesSystem>().RiftLocations.Add(new Vector3(a.X, a.Y, position.Z));
-					tiles++;
-					AddValidNeighbors(points, a);
-				}
-			}
-			index++;
-		}
-		return positions;
-	}
 }
 public class OreRift : ModItem
 {
@@ -508,135 +505,6 @@ public class OreRift : ModItem
 			{
 				Item.alpha += 5;
 			}
-			//if (pos.Z == 250)
-			//{
-			//	#region copper
-			//	if (Main.tile[tile.X, tile.Y].TileType == TileID.Copper)
-			//	{
-			//		Honeyify(tile, TileID.Copper);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == TileID.Tin)
-			//	{
-			//		Honeyify(tile, TileID.Tin);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BronzeOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.BronzeOre>());
-			//	}
-			//	#endregion
-			//	#region iron
-			//	if (Main.tile[tile.X, tile.Y].TileType == TileID.Iron)
-			//	{
-			//		Honeyify(tile, TileID.Iron);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == TileID.Lead)
-			//	{
-			//		Honeyify(tile, TileID.Lead);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.NickelOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.NickelOre>());
-			//	}
-			//	#endregion
-			//	#region silver
-			//	if (Main.tile[tile.X, tile.Y].TileType == TileID.Silver)
-			//	{
-			//		Honeyify(tile, TileID.Silver);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == TileID.Tungsten)
-			//	{
-			//		Honeyify(tile, TileID.Tungsten);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.ZincOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.ZincOre>());
-			//	}
-			//	#endregion
-			//	#region gold
-			//	if (Main.tile[tile.X, tile.Y].TileType == TileID.Gold)
-			//	{
-			//		Honeyify(tile, TileID.Gold);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == TileID.Platinum)
-			//	{
-			//		Honeyify(tile, TileID.Platinum);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BismuthOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.BismuthOre>());
-			//	}
-			//	#endregion
-			//	#region rhodium
-			//	if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.RhodiumOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.RhodiumOre>());
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.OsmiumOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.OsmiumOre>());
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.IridiumOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.IridiumOre>());
-			//	}
-			//	#endregion
-			//	#region evil
-			//	if (Main.tile[tile.X, tile.Y].TileType == TileID.Demonite)
-			//	{
-			//		Honeyify(tile, TileID.Demonite);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == TileID.Crimtane)
-			//	{
-			//		Honeyify(tile, TileID.Crimtane);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BacciliteOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.BacciliteOre>());
-			//	}
-			//	#endregion
-			//	#region cobalt
-			//	if (Main.tile[tile.X, tile.Y].TileType == TileID.Cobalt)
-			//	{
-			//		Honeyify(tile, TileID.Cobalt);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == TileID.Palladium)
-			//	{
-			//		Honeyify(tile, TileID.Palladium);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.DurataniumOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.DurataniumOre>());
-			//	}
-			//	#endregion
-			//	#region mythril
-			//	if (Main.tile[tile.X, tile.Y].TileType == TileID.Mythril)
-			//	{
-			//		Honeyify(tile, TileID.Mythril);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == TileID.Orichalcum)
-			//	{
-			//		Honeyify(tile, TileID.Orichalcum);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.NaquadahOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.NaquadahOre>());
-			//	}
-			//	#endregion
-			//	#region adamantite
-			//	if (Main.tile[tile.X, tile.Y].TileType == TileID.Adamantite)
-			//	{
-			//		Honeyify(tile, TileID.Adamantite);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == TileID.Titanium)
-			//	{
-			//		Honeyify(tile, TileID.Titanium);
-			//	}
-			//	else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.TroxiniumOre>())
-			//	{
-			//		Honeyify(tile, ModContent.TileType<Tiles.Ores.TroxiniumOre>());
-			//	}
-			//	#endregion
-			//}
 			if (pos.Z == 150)
 			{
 				#region copper
@@ -860,8 +728,6 @@ public class OreRift : ModItem
 }
 public class RiftGogglesSystem : ModSystem
 {
-	public List<Vector3> RiftLocations = new List<Vector3>();
-	public byte[] Timers = new byte[100000];
 	public List<Vector4> Positions2 = new List<Vector4>();
 	public bool ChangeTile = true;
 
@@ -880,10 +746,9 @@ public class RiftGogglesSystem : ModSystem
 			// change the tile
 			if (ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].Z == 27)
 			{
-				Main.NewText(ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].Z);
 				Point tilePos = new Point((int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].X, (int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].Y);
 				Main.tile[tilePos].TileType = (ushort)ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].W;
-				WorldGen.SquareTileFrame(tilePos.X, tilePos.Y);
+				//WorldGen.SquareTileFrame(tilePos.X, tilePos.Y);
 			}
 		}	
 	}
