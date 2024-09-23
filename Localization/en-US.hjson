@@ -499,6 +499,7 @@ Mods: {
 			EvilVulture: A bird attuned to the forces of evil, this Vulture has no such normal nature left.
 			WallOfSteel: An abandoned creation designed to accomplish what the original Guardian of the Underworld could not - prevent the Terrarian from further destabilizing the world.
 			MechanicalHungry: The Wall of Steel's many mouths, attached by steel cables. As a last resort, they can detach and precisely chase down threats.
+			InfectedPickaxe: Inspirited by the viciously endemic Contagion, this tool swings about attempting to split apart its foes.
 		}
 
 		Keybinds: {
@@ -9755,9 +9756,9 @@ Mods: {
 			Mime.DisplayName: Mime
 			MechanicalHungry.DisplayName: Mechanical Hungry
 			MechanicalHungry2.DisplayName: Mechanical Hungry
-			MechanicalLeechHead.DisplayName: Mechanical Leech Head
-			MechanicalLeechBody.DisplayName: Mechanical Leech Body
-			MechanicalLeechTail.DisplayName: Mechanical Leech Tail
+			MechanicalLeechHead.DisplayName: Mechanical Leech
+			MechanicalLeechBody.DisplayName: Mechanical Leech
+			MechanicalLeechTail.DisplayName: Mechanical Leech
 			WallofSteel.DisplayName: Wall of Steel
 			WallofSteelMouthEye.DisplayName: Wall of Steel
 			WallofSteelLaserEye.DisplayName: Wall of Steel

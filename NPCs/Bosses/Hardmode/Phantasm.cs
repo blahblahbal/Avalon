@@ -29,10 +29,16 @@ public class Phantasm : ModNPC
         NPCID.Sets.TrailingMode[NPC.type] = 0;
         NPCID.Sets.TrailCacheLength[NPC.type] = 4;
         texture = TextureAssets.Npc[Type];
-    }
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(0, -16f),
+			PortraitPositionYOverride = 0,
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+	}
     public override void SetDefaults()
-    {
-        NPC.Size = new Vector2(66);
+	{
+		NPC.Size = new Vector2(66);
         NPC.boss = NPC.noTileCollide = NPC.noGravity = true;
         NPC.npcSlots = 100f;
         NPC.damage = 105;
@@ -45,7 +51,8 @@ public class Phantasm : ModNPC
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath39;
         Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Phantasm") : MusicID.EmpressOfLight;
-    }
+		SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Hellcastle>().Type };
+	}
     public override void BossLoot(ref string name, ref int potionType)
     {
         potionType = ItemID.SuperHealingPotion;
@@ -408,11 +415,11 @@ public class Phantasm : ModNPC
         for (int i = 0; i < NPC.oldPos.Length; i++)
         {
             Vector2 drawPosOld = NPC.oldPos[i] - Main.screenPosition + frameOrigin + offset;
-            Main.EntitySpriteDraw(texture.Value, drawPosOld, sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i * 0.25f)) * 0.2f, NPC.rotation, frameOrigin, NPC.scale, SpriteEffects.None, 0);
-        }
-        Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, new Color(255, 255, 255, 225) * 0.3f, NPC.rotation, frameOrigin, NPC.scale * 1.1f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, new Color(255, 255, 255, 225) * 0.15f, NPC.rotation, frameOrigin, NPC.scale * 1.2f, SpriteEffects.None, 0);
-        Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, new Color(255, 255, 255, 225), NPC.rotation, frameOrigin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture.Value, drawPosOld + (NPC.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero), sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i * 0.25f)) * 0.2f, NPC.rotation, frameOrigin, NPC.scale, SpriteEffects.None, 0);
+		}
+        Main.EntitySpriteDraw(texture.Value, drawPos + (NPC.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero), sourceRectangle, new Color(255, 255, 255, 225) * 0.3f, NPC.rotation, frameOrigin, NPC.scale * 1.1f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos + (NPC.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero), sourceRectangle, new Color(255, 255, 255, 225) * 0.15f, NPC.rotation, frameOrigin, NPC.scale * 1.2f, SpriteEffects.None, 0);
+        Main.EntitySpriteDraw(texture.Value, drawPos + (NPC.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero), sourceRectangle, new Color(255, 255, 255, 225), NPC.rotation, frameOrigin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
         return false;
     }
 }

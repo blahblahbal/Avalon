@@ -19,11 +19,18 @@ public class InfectedPickaxe : ModNPC
         Main.npcFrameCount[NPC.type] = 6;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         Data.Sets.NPC.Wicked[NPC.type] = true;
-    }
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(-3f, 16f),
+			PortraitPositionXOverride = -2f,
+			PortraitPositionYOverride = -8f,
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+	}
 
     public override void SetDefaults()
-    {
-        NPC.damage = 80;
+	{
+		NPC.damage = 80;
         NPC.lifeMax = 200;
         NPC.defense = 15;
         NPC.width = 18;
@@ -33,15 +40,15 @@ public class InfectedPickaxe : ModNPC
         NPC.knockBackResist = 0.5f;
         NPC.HitSound = SoundID.NPCHit4;
         NPC.DeathSound = SoundID.NPCDeath6;
-        //Banner = NPC.type;
-        //BannerItem = ModContent.ItemType<IrateBonesBanner>();
-    }
+		//Banner = NPC.type;
+		//BannerItem = ModContent.ItemType<IrateBonesBanner>();
+		SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
+	}
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon,
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.InfestedPickaxe")),
+            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.InfectedPickaxe"))
         });
 
     public override Color? GetAlpha(Color drawColor)

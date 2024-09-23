@@ -23,8 +23,8 @@ public class Bactus : ModNPC
 		Data.Sets.NPC.Flyer[NPC.type] = true;
 	}
     public override void SetDefaults()
-    {
-        NPC.damage = 23;
+	{
+		NPC.damage = 23;
         NPC.lifeMax = 50;
         NPC.defense = 7;
         NPC.noGravity = true;
@@ -36,7 +36,14 @@ public class Bactus : ModNPC
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.knockBackResist = 0.5f;
-        NPC.alpha = 255;
+		if (NPC.IsABestiaryIconDummy)
+		{
+			NPC.alpha = 0;
+		}
+		else
+		{
+			NPC.alpha = 255;
+		}
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
@@ -98,8 +105,8 @@ public class Bactus : ModNPC
     {
         NPC.ai[1]++;
         if (NPC.ai[1] == 1)
-        {
-            J = Main.rand.Next(3);
+		{
+			J = Main.rand.Next(3);
         }
         if (NPC.ai[1] == 2)
         {

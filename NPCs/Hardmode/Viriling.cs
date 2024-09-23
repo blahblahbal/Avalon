@@ -37,7 +37,14 @@ public class Viriling : ModNPC
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.knockBackResist = 0.3f;
         NPC.scale = 1f;
-        NPC.alpha = 128;
+		if (NPC.IsABestiaryIconDummy)
+		{
+			NPC.alpha = 0;
+		}
+		else
+		{
+			NPC.alpha = 128;
+		}
         NPC.noTileCollide = true;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
     }

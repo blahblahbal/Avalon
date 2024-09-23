@@ -17,6 +17,14 @@ public class HomingRocket : ModNPC
 	private float homingRange = 20f * 16f; // 20 tiles in pixels (1 tile = 16 pixels)
 	private int elapsedTime;
 	private float degrees;
+	public override void SetStaticDefaults()
+	{
+		var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Hide = true
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
+	}
 	public override void SetDefaults()
     {
         NPC.width = 14;

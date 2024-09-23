@@ -19,7 +19,7 @@ public class Mime : ModNPC
     public override void SetDefaults()
     {
         NPC.damage = 75;
-        NPC.scale = 1.4f;
+        NPC.scale = 1.4f; // make a slightly bigger sprite instead of upscaling? also more walking frames
         NPC.noTileCollide = false;
         NPC.lifeMax = 630;
         NPC.defense = 46;

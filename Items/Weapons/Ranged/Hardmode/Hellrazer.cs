@@ -37,12 +37,13 @@ public class Hellrazer : ModItem
         Item.useAnimation = 30;
         Item.height = dims.Height;
         Item.UseSound = SoundID.Item40;
-  //      if (!Main.dedServ)
-  //      {
-		//	Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
-  //      }
-		//Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = 0;
-		//Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = 0;
+		if (!Main.dedServ)
+		{
+			Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
+		}
+		Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = 0;
+		Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = 0;
+		Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
 	}
     public override Vector2? HoldoutOffset()
     {

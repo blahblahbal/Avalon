@@ -31,6 +31,11 @@ internal class WallofSteelMouthEye : ModNPC
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frostburn] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Venom] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frozen] = true;
+		var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Hide = true
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{

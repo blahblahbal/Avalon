@@ -14,16 +14,18 @@ public class MechanicalHungry : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 4;
-        var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
-        { // Influences how the NPC looks in the Bestiary
-            Position = new Vector2(0f, 14f)
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			CustomTexturePath = Texture + "_Bestiary",
+			Position = new Vector2(50f, 3f),
+			PortraitPositionYOverride = 0f
         };
-        NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
     }
 
     public override void SetDefaults()
-    {
-        NPC.damage = 50;
+	{
+		NPC.damage = 50;
         NPC.lifeMax = 660;
         NPC.defense = 50;
         NPC.width = 36;

@@ -39,14 +39,15 @@ public class InfestedAmberSlime : ModNPC
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.alpha = 50;
-        //Banner = NPC.type;
-        //BannerItem = ModContent.ItemType<InfestedAmberSlimeBanner>();
-    }
+		//Banner = NPC.type;
+		//BannerItem = ModContent.ItemType<InfestedAmberSlimeBanner>();
+		SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundTropics>().Type];
+	}
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
+            //BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.InfestedAmberSlime")),
         });
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)

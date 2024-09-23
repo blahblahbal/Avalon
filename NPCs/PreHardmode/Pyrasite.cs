@@ -21,17 +21,17 @@ public class PyrasiteHead : WormHead
         var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             CustomTexturePath = Texture + "_Bestiary",
-            //Position = new Vector2(54f, 16f),
-            //PortraitPositionXOverride = 10f,
-            //PortraitPositionYOverride = 12f
-        };
+			Position = new Vector2(55f, 18f),
+			PortraitPositionXOverride = 10f,
+			PortraitPositionYOverride = 11f
+		};
         NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		Data.Sets.NPC.Wicked[NPC.type] = true;
     }
     public override void SetDefaults()
-    {
-        NPC.damage = 15;
+	{
+		NPC.damage = 15;
         NPC.netAlways = true;
         NPC.noTileCollide = true;
         NPC.lifeMax = 70;
@@ -100,8 +100,16 @@ public class PyrasiteHead : WormHead
         worm.Acceleration = 0.075f;
     }
     public class PyrasiteBody : WormBody
-    {
-        public override void Init()
+	{
+		public override void SetStaticDefaults()
+		{
+			var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
+			{
+				Hide = true
+			};
+			NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
+		}
+		public override void Init()
         {
             CommonWormInit(this);
         }
@@ -145,7 +153,15 @@ public class PyrasiteHead : WormHead
 }
 public class PyrasiteTail : WormTail
 {
-    public override void SetDefaults()
+	public override void SetStaticDefaults()
+	{
+		var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Hide = true
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
+	}
+	public override void SetDefaults()
     {
         NPC.damage = 8;
         NPC.netAlways = true;

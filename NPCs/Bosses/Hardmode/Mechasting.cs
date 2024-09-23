@@ -12,6 +12,7 @@ using Terraria.GameContent.ItemDropRules;
 using Avalon.Items.Vanity;
 using System.IO;
 using Terraria.DataStructures;
+using Terraria.GameContent.Bestiary;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
@@ -22,11 +23,24 @@ public class Mechasting : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 8;
-    }
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(11, 72),
+			PortraitPositionXOverride = 4,
+			PortraitPositionYOverride = 40,
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+	}
+	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
+		bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
+		{
+			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.NightTime,
+			//new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Mechasting")),
+		});
 
-    public override void SetDefaults()
-    {
-        NPC.aiStyle = -1;
+	public override void SetDefaults()
+	{
+		NPC.aiStyle = -1;
         NPC.npcSlots = 175;
         NPC.height = 174;
         NPC.width = 88;

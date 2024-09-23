@@ -12,7 +12,12 @@ public class HallowSpit : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 1;
-    }
+		var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Hide = true
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
+	}
     public override void SetDefaults()
     {
         NPC.npcSlots = 1;

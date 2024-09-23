@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using Terraria.Localization;
 using Avalon.Buffs.Debuffs;
+using ReLogic.Content;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -19,15 +20,41 @@ internal class VenusFlytrap : ModNPC
 	private bool spawn = false;
 	private float PosX = 0f;
 	private float PosY = 0f;
+	private static Asset<Texture2D> bestiaryTexture0;
+	private static Asset<Texture2D> bestiaryTexture1;
+	private static Asset<Texture2D> bestiaryTexture2;
 	public override void SetStaticDefaults()
 	{
+		bestiaryTexture0 = ModContent.Request<Texture2D>(Texture + "_Bestiary0");
+		bestiaryTexture1 = ModContent.Request<Texture2D>(Texture + "_Bestiary1");
+		bestiaryTexture2 = ModContent.Request<Texture2D>(Texture + "_Bestiary2");
+
 		NPCID.Sets.SpecialSpawningRules.Add(ModContent.NPCType<VenusFlytrap>(), 0);
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		Main.npcFrameCount[Type] = 3;
+
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			// rotation doesn't work when a custom texture path is set, so instead we manually draw the bestiary icon in PreDraw
+			//CustomTexturePath = Texture + "_Bestiary",
+			Position = new Vector2(4f, -6f),
+			Rotation = MathHelper.PiOver4 * 3f
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 	}
 
 	public override void SetDefaults()
 	{
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			// rotation doesn't work when a custom texture path is set, so instead we manually draw the bestiary icon in PreDraw
+			//CustomTexturePath = Texture + "_Bestiary",
+			Position = new Vector2(3f, 9f),
+			PortraitPositionXOverride = 4f,
+			PortraitPositionYOverride = -6f
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Remove(Type);
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 		NPC.damage = 106;
 		NPC.lifeMax = 550;
 		NPC.defense = 27;
@@ -180,6 +207,13 @@ internal class VenusFlytrap : ModNPC
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
+		if (NPC.IsABestiaryIconDummy)
+		{
+			Main.spriteBatch.Draw(bestiaryTexture0.Value, NPC.Center - new Vector2(100f, -70f), new Rectangle(0, 0, bestiaryTexture0.Value.Width, bestiaryTexture0.Value.Height), Color.White, MathHelper.PiOver4 / 1.5f, new Vector2(bestiaryTexture0.Value.Width / 2, bestiaryTexture0.Value.Height), 1f, SpriteEffects.None, 1f);
+			Main.spriteBatch.Draw(bestiaryTexture1.Value, NPC.Center - new Vector2(65f, -57f), new Rectangle(0, 0, bestiaryTexture1.Value.Width, bestiaryTexture1.Value.Height), Color.White, MathHelper.PiOver4, new Vector2(bestiaryTexture1.Value.Width / 2, bestiaryTexture1.Value.Height), 1f, SpriteEffects.None, 1f);
+			Main.spriteBatch.Draw(bestiaryTexture2.Value, NPC.Center - new Vector2(70f, -85f), new Rectangle(0, 0, bestiaryTexture2.Value.Width, bestiaryTexture2.Value.Height), Color.White, MathHelper.PiOver2 / 1.5f, new Vector2(bestiaryTexture2.Value.Width / 2, bestiaryTexture2.Value.Height), 1f, SpriteEffects.None, 1f);
+			return false;
+		}
 		Vector2 start = NPC.Center;
 		Vector2 end = new Vector2(NPC.ai[1], NPC.ai[2]);
 		start -= screenPos;
@@ -198,12 +232,6 @@ internal class VenusFlytrap : ModNPC
 			Main.spriteBatch.Draw(TEX, links[i], new Rectangle(0, 0, TEX.Width, linklength), Lighting.GetColor((links[i] + screenPos).ToTileCoordinates()), rotation + 1.57f, new Vector2(TEX.Width / 2, TEX.Height), 1f,
 				SpriteEffects.None, 1f);
 		}
-		//if (NPC.IsABestiaryIconDummy)
-		//{
-		//	Texture2D bestiaryTex = Mod.Assets.Request<Texture2D>("NPCs/Hardmode/EctoHand_Bestiary").Value;
-		//	Main.spriteBatch.Draw(bestiaryTex, NPC.Center - new Vector2(70f, -70f), new Rectangle(0, 0, bestiaryTex.Width, bestiaryTex.Height), Color.White, MathHelper.TwoPi / 8, new Vector2(bestiaryTex.Width / 2, bestiaryTex.Height), 1f, SpriteEffects.None, 1f);
-		//	return false;
-		//}
 		return true;
 	}
 }

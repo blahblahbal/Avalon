@@ -16,6 +16,11 @@ public class VenusFlytrapSideHead : ModNPC
 		NPCID.Sets.SpecialSpawningRules.Add(ModContent.NPCType<VenusFlytrapSideHead>(), 0);
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		Main.npcFrameCount[Type] = 3;
+		var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Hide = true
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
 	}
 	public override void SetDefaults()
 	{

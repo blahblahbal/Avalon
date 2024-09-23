@@ -16,10 +16,18 @@ public class Hallowor : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 4;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
-    }
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(0f, 2f),
+			Scale = 1f,
+			PortraitScale = 1.2f,
+			PortraitPositionYOverride = 10f
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
+	}
     public override void SetDefaults()
-    {
-        NPC.npcSlots = 1;
+	{
+		NPC.npcSlots = 1;
         NPC.width = 40;
         NPC.height = 38;
         NPC.aiStyle = -1;

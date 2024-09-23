@@ -18,6 +18,14 @@ public class BaskingSpewer : ModNPC
         Main.npcFrameCount[Type] = 4;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         Data.Sets.NPC.Wicked[NPC.type] = true;
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			// Influences how the NPC looks in the Bestiary
+			Position = new Vector2(34f, 19f),
+			PortraitPositionXOverride = 0,
+			PortraitPositionYOverride = 18
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
     }
     public override void SetDefaults()
     {
@@ -35,7 +43,7 @@ public class BaskingSpewer : ModNPC
         AIType = NPCID.SandsharkCorrupt;
         AnimationType = NPCID.SandsharkCorrupt;
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionDesert>().Type };
-    }
+	}
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
         return Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].HasTile && spawnInfo.Player.InModBiome<Biomes.ContagionDesert>() && Main.hardMode ? 0.2f : 0f;

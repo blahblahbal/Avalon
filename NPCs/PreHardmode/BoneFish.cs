@@ -22,6 +22,11 @@ public class BoneFish : ModNPC
         Data.Sets.NPC.Undead[NPC.type] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			IsWet = true,
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 	}
 
     public override void SetDefaults()
@@ -43,7 +48,7 @@ public class BoneFish : ModNPC
         NPC.buffImmune[BuffID.Confused] = true;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<BoneFishBanner>();
-    }
+	}
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {

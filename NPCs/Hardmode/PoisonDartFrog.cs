@@ -37,7 +37,6 @@ public class PoisonDartFrog : ModNPC
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
-            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon,
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.PoisonDartFrog")),
         });
     public override void SetStaticDefaults()
@@ -47,11 +46,19 @@ public class PoisonDartFrog : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+		var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(6f, 4f),
+			PortraitPositionXOverride = 0,
+			PortraitPositionYOverride = 0,
+			Frame = 0
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
     }
 
     public override void SetDefaults()
-    {
-        NPC.damage = 65;
+	{
+		NPC.damage = 65;
         NPC.scale = 1f;
         NPC.lifeMax = 310;
         NPC.defense = 24;
@@ -67,7 +74,8 @@ public class PoisonDartFrog : ModNPC
         AIInJump = true;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<PoisonDartFrogBanner>();
-    }
+		SpawnModBiomes = [ModContent.GetInstance<Biomes.Tropics>().Type];
+	}
 
     public override void AI()
     {

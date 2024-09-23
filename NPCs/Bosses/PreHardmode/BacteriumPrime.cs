@@ -72,8 +72,8 @@ public class BacteriumPrime : ModNPC
 
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
-            PortraitScale = 0.7f,
-            PortraitPositionYOverride = -14,
+			Position = new Vector2(0, 10f),
+            PortraitPositionYOverride = 8,
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
@@ -86,8 +86,8 @@ public class BacteriumPrime : ModNPC
         texture = TextureAssets.Npc[Type];
     }
     public override void SetDefaults()
-    {
-        NPC.damage = 27;
+	{
+		NPC.damage = 27;
         NPC.boss = true;
         NPC.noTileCollide = true;
         NPC.lifeMax = 3100;

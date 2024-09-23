@@ -17,11 +17,18 @@ public class CursedScepter : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 6;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
-    }
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(-9f, 18f),
+			PortraitPositionXOverride = -4f,
+			PortraitPositionYOverride = -8f,
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+	}
 
     public override void SetDefaults()
-    {
-        NPC.damage = 61;
+	{
+		NPC.damage = 61;
         NPC.lifeMax = 226;
         NPC.defense = 18;
         NPC.lavaImmune = true;

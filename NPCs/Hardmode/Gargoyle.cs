@@ -5,7 +5,6 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Avalon.Common.Players;
 using Terraria.Localization;
 
@@ -18,7 +17,8 @@ public class Gargoyle : ModNPC
         Main.npcFrameCount[NPC.type] = 5;
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
-            // Influences how the NPC looks in the Bestiary
+			Position = new Vector2(6f, 8f),
+			PortraitPositionYOverride = -10f,
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
@@ -26,8 +26,8 @@ public class Gargoyle : ModNPC
         Data.Sets.NPC.Earthen[NPC.type] = true;
     }
     public override void SetDefaults()
-    {
-        NPC.damage = 150;
+	{
+		NPC.damage = 150;
         NPC.netAlways = true;
         NPC.scale = 1.1f;
         NPC.lifeMax = 4400;

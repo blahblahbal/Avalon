@@ -35,6 +35,11 @@ public class Cougher : ModNPC
 		texturePink = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/PinkPartyHat");
 		texturePurple = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/PurplePartyHat");
 		textureWhite = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/WhitePartyHat");
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(0, 10),
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 	}
     static SoundStyle Cough = new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/CougherCough")
     {
@@ -88,8 +93,8 @@ public class Cougher : ModNPC
         }
     }
     public override void SetDefaults()
-    {
-        NPC.damage = 35;
+	{
+		NPC.damage = 35;
         NPC.lifeMax = 230;
         NPC.defense = 12;
         NPC.noGravity = true;

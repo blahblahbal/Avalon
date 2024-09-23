@@ -45,11 +45,18 @@ public class KingSting : ModNPC
 
         NPCID.Sets.TrailCacheLength[NPC.type] = 4;
         NPCID.Sets.TrailingMode[NPC.type] = 3;
-    }
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(10, 28),
+			PortraitPositionXOverride = 4,
+			PortraitPositionYOverride = 16,
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+	}
 
     public override void SetDefaults()
-    {
-        NPC.npcSlots = 150f;
+	{
+		NPC.npcSlots = 150f;
         NPC.height = 140;
         NPC.width = 88;
         NPC.knockBackResist = 0f;
@@ -68,9 +75,10 @@ public class KingSting : ModNPC
         NPC.lifeMax = 3400;
         NPC.scale = 1;
         Music = ExxoAvalonOrigins.MusicMod == null ? MusicID.Boss2 : MusicID.Boss4; // MusicLoader.GetMusicSlot(Avalon.MusicMod, "Sounds/Music/KingSting");
-        //NPC.BossBar = ModContent.GetInstance<BossBars.KingStingBossBar>();
-        // Misc vars
-        phase = 0;
+		SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundTropics>().Type];
+		//NPC.BossBar = ModContent.GetInstance<BossBars.KingStingBossBar>();
+		// Misc vars
+		phase = 0;
         masterTimer = 0;
 
         // Movement vars

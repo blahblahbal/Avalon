@@ -49,7 +49,14 @@ public class Ickslime : ModNPC
         NPC.damage = 57;
         NPC.lifeMax = 186;
         NPC.defense = 30;
-        NPC.alpha = 255;
+		if (NPC.IsABestiaryIconDummy)
+		{
+			NPC.alpha = 55;
+		}
+		else
+		{
+			NPC.alpha = 255;
+		}
         NPC.width = 40;
         NPC.aiStyle = 1;
         NPC.scale = 1.1f;

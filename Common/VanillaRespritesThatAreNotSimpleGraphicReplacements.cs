@@ -47,16 +47,33 @@ namespace Avalon.Common
             if(npc.netID == NPCID.Pinky)
             {
                 Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/NPCs/Pinky").Value;
-                Main.EntitySpriteDraw(texture,npc.Bottom - Main.screenPosition - new Vector2(1,-4),new Rectangle(0,(int)(npc.frame.Y * (32f / 52f)),texture.Width,16),drawColor * 0.7f,npc.rotation,new Vector2(texture.Width / 2f,texture.Height / 2f),1,SpriteEffects.None);
+                Main.EntitySpriteDraw(texture,npc.Bottom - (!npc.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero) - new Vector2(1,-4),new Rectangle(0,(int)(npc.frame.Y * (32f / 52f)),texture.Width,16),drawColor * 0.7f,npc.rotation,new Vector2(texture.Width / 2f,texture.Height / 2f),1,SpriteEffects.None);
                 return false;
             }
             else if(npc.netID == NPCID.JungleSlime)
             {
                 Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/NPCs/JungleSlime").Value;
-                Main.EntitySpriteDraw(texture, npc.Bottom - Main.screenPosition - new Vector2(1, -4), npc.frame, drawColor * 0.7f, npc.rotation, new Vector2(texture.Width / 2f, texture.Height / 2f), 1, SpriteEffects.None);
+                Main.EntitySpriteDraw(texture, npc.Bottom - (!npc.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero) - new Vector2(1, -4), npc.frame, drawColor * 0.7f, npc.rotation, new Vector2(texture.Width / 2f, texture.Height / 2f), 1, SpriteEffects.None);
                 return false;
             }
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
-    }
+		public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+		{
+			//if (npc.IsABestiaryIconDummy)
+			//{
+			//	if (npc.netID == NPCID.Pinky)
+			//	{
+			//		Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/NPCs/Pinky").Value;
+			//		Main.EntitySpriteDraw(texture, npc.Bottom - Main.screenPosition - new Vector2(1, -4), new Rectangle(0, (int)(npc.frame.Y * (32f / 52f)), texture.Width, 16), drawColor * 0.7f, npc.rotation, new Vector2(texture.Width / 2f, texture.Height / 2f), 1, SpriteEffects.None);
+			//	}
+			//	else if (npc.netID == NPCID.JungleSlime)
+			//	{
+			//		Texture2D texture = Mod.Assets.Request<Texture2D>("Assets/Vanilla/NPCs/JungleSlime").Value;
+			//		Main.EntitySpriteDraw(texture, npc.Bottom - Main.screenPosition - new Vector2(1, -4), npc.frame, drawColor * 0.7f, npc.rotation, new Vector2(texture.Width / 2f, texture.Height / 2f), 1, SpriteEffects.None);
+			//	}
+			//}
+			//base.PostDraw(npc, spriteBatch, screenPos, drawColor);
+		}
+	}
 }

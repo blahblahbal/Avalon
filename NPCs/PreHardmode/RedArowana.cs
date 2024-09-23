@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.Bestiary;
@@ -14,11 +15,19 @@ public class RedArowana : ModNPC
         Main.npcFrameCount[NPC.type] = 6;
         Data.Sets.NPC.Watery[NPC.type] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			Position = new Vector2(8, 8),
+			PortraitPositionXOverride = 0,
+			PortraitPositionYOverride = 12,
+			IsWet = true,
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 	}
 
     public override void SetDefaults()
-    {
-        NPC.CloneDefaults(NPCID.Piranha);
+	{
+		NPC.CloneDefaults(NPCID.Piranha);
         AnimationType = NPCID.Pupfish;
         NPC.width = 55;
         SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundTropics>().Type];

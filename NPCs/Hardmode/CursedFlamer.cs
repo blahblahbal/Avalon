@@ -21,7 +21,14 @@ public class CursedFlamer : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         Data.Sets.NPC.Wicked[NPC.type] = true;
-    }
+		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+		{
+			// Influences how the NPC looks in the Bestiary
+			Position = new Vector2(8f, -6f),
+			Rotation = MathHelper.PiOver4
+		};
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
+	}
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
@@ -51,7 +58,7 @@ public class CursedFlamer : ModNPC
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.CursedFlamerBanner>();
         DrawOffsetY = (int)((82 / 2) - (NPC.height / 2));
-    }
+	}
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
         return Main.hardMode && spawnInfo.Player.ZoneCorrupt && !spawnInfo.Player.InPillarZone() && spawnInfo.SpawnTileY < (Main.maxTilesY - 200) ? 0.3f : 0f;

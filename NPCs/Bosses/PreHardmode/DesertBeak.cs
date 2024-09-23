@@ -40,9 +40,9 @@ public class DesertBeak : ModNPC
 
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
-            PortraitScale = 0.6f,
-            PortraitPositionYOverride = 2,
-            Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+			Position = new Vector2(30, 60),
+			PortraitPositionXOverride = 0,
+			Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 
@@ -73,7 +73,7 @@ public class DesertBeak : ModNPC
         NPC.scale = 1f;
         phase = 0;
         FlapMultiplier = 1;
-    }
+	}
     //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     //{
     //    NPC.lifeMax = (int)(NPC.lifeMax * 0.66f * bossAdjustment);
@@ -134,7 +134,8 @@ public class DesertBeak : ModNPC
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
         {
              BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Desert,
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.DesertBeak"))
+			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.DayTime,
+			new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.DesertBeak"))
         });
     }
     public override void OnSpawn(IEntitySource source)
