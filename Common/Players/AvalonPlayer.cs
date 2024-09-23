@@ -307,6 +307,7 @@ public class AvalonPlayer : ModPlayer
 	#endregion
 
 	#region buffs and debuffs
+	public int IcarusTimer;
 	public int InfectDamage;
 	public bool BrokenWeaponry;
     public bool Unloaded;

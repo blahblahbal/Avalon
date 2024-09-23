@@ -2725,7 +2725,7 @@ Mods: {
 
 			LeapingPotion: {
 				DisplayName: Leaping Potion
-				Tooltip: Increases vertical acceleration
+				Tooltip: Increases vertical acceleration and flight time
 			}
 
 			CloverPotion: {
@@ -2925,7 +2925,7 @@ Mods: {
 
 			AdvLeapingPotion: {
 				DisplayName: Leaping Elixir
-				Tooltip: Increases vertical acceleration
+				Tooltip: Increases vertical acceleration and flight time
 			}
 
 			AdvLifeforcePotion: {
@@ -9857,7 +9857,7 @@ Mods: {
 
 			Leaping: {
 				DisplayName: Leaping
-				Description: Vertical acceleration is increased
+				Description: Vertical acceleration and flight time are increased
 			}
 
 			Magnet: {

@@ -1,4 +1,5 @@
 using Avalon.Buffs;
+using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common;
 using Avalon.Common.Players;
@@ -60,54 +61,58 @@ public class BuffEffects : ModHook
                 {
                     self.buffTime[j] = timeToAdd;
                 }
-                if (self.GetModPlayer<AvalonPlayer>().Pathogen && Main.debuff[self.buffType[j]])
-                {
-                    if (self.buffTime[j] < timeToAdd * 2)
-                        self.buffTime[j] = timeToAdd * 2;
-                }
-                else if (self.GetModPlayer<AvalonPlayer>().ThePill && Main.debuff[self.buffType[j]])
-                {
-                    if (self.buffTime[j] > timeToAdd * 0.8f)
-                        self.buffTime[j] = (int)(timeToAdd * 0.8f);
-                }
-                /*if (type == ModContent.BuffType<Buffs.SkyBlessing>())
-                {
-                    self.buffTime[j] += timeToAdd;
-                    if (self.GetModPlayer<ExxoBuffPlayer>().SkyStacks < 10)
-                    {
-                        self.GetModPlayer<ExxoBuffPlayer>().SkyStacks++;
-                    }
-                    else self.GetModPlayer<ExxoBuffPlayer>().SkyStacks = 10;
-                    if (self.buffTime[j] > 60 * 7)
-                    {
-                        self.buffTime[j] = 60 * 7;
-                        return;
-                    }
-                }
-                else if (self.buffTime[j] < timeToAdd)
-                {
-                    self.buffTime[j] = timeToAdd;
-                }
-                if (type == ModContent.BuffType<Buffs.Reckoning>())
-                {
-                    self.buffTime[j] += timeToAdd;
-                    if (self.GetModPlayer<ExxoPlayer>().reckoningLevel < 10)
-                    {
-                        self.GetModPlayer<ExxoPlayer>().reckoningLevel++;
-                    }
-                    else
-                        self.GetModPlayer<ExxoPlayer>().reckoningLevel = 10;
-                    if (self.buffTime[j] > 60 * 8)
-                    {
-                        self.buffTime[j] = 60 * 8;
-                        return;
-                    }
-                }
-                else if (self.buffTime[j] < timeToAdd)
-                {
-                    self.buffTime[j] = timeToAdd;
-                }*/
-                return;
+				if (self.GetModPlayer<AvalonPlayer>().Pathogen && Main.debuff[self.buffType[j]])
+				{
+					if (self.buffTime[j] < timeToAdd * 2)
+						self.buffTime[j] = timeToAdd * 2;
+				}
+				else if (self.GetModPlayer<AvalonPlayer>().ThePill && Main.debuff[self.buffType[j]])
+				{
+					if (self.buffTime[j] > timeToAdd * 0.8f)
+						self.buffTime[j] = (int)(timeToAdd * 0.8f);
+				}
+				else if (type == ModContent.BuffType<Leaping>() || type == ModContent.BuffType<AdvLeaping>())
+				{
+					self.GetModPlayer<AvalonPlayer>().IcarusTimer = 0;
+				}
+				/*if (type == ModContent.BuffType<Buffs.SkyBlessing>())
+				{
+					self.buffTime[j] += timeToAdd;
+					if (self.GetModPlayer<ExxoBuffPlayer>().SkyStacks < 10)
+					{
+						self.GetModPlayer<ExxoBuffPlayer>().SkyStacks++;
+					}
+					else self.GetModPlayer<ExxoBuffPlayer>().SkyStacks = 10;
+					if (self.buffTime[j] > 60 * 7)
+					{
+						self.buffTime[j] = 60 * 7;
+						return;
+					}
+				}
+				else if (self.buffTime[j] < timeToAdd)
+				{
+					self.buffTime[j] = timeToAdd;
+				}
+				if (type == ModContent.BuffType<Buffs.Reckoning>())
+				{
+					self.buffTime[j] += timeToAdd;
+					if (self.GetModPlayer<ExxoPlayer>().reckoningLevel < 10)
+					{
+						self.GetModPlayer<ExxoPlayer>().reckoningLevel++;
+					}
+					else
+						self.GetModPlayer<ExxoPlayer>().reckoningLevel = 10;
+					if (self.buffTime[j] > 60 * 8)
+					{
+						self.buffTime[j] = 60 * 8;
+						return;
+					}
+				}
+				else if (self.buffTime[j] < timeToAdd)
+				{
+					self.buffTime[j] = timeToAdd;
+				}*/
+				return;
             }
         }
         orig(self, type, timeToAdd, quiet, foodHack);
