@@ -17,7 +17,7 @@ public class AvalonBiomePlayer : ModPlayer
     public bool ZoneHellcastle => Player.InModBiome(ModContent.GetInstance<Hellcastle>());
     public bool ZoneNearHellcastle => Player.InModBiome(ModContent.GetInstance<NearHellcastle>());
     public bool ZoneSkyFortress => Player.InModBiome(ModContent.GetInstance<SkyFortress>());
-    public bool ZoneTropics => Player.InModBiome(ModContent.GetInstance<Tropics>());
+    public bool ZoneSavanna => Player.InModBiome(ModContent.GetInstance<Tropics>());
     //public bool ZoneTuhrtlOutpost => Player.InModBiome(ModContent.GetInstance<TuhrtlOutpost>());
     public bool ZoneUndergroundContagion => Player.InModBiome(ModContent.GetInstance<UndergroundContagion>());
     public bool ZoneUndergroundTropics => Player.InModBiome(ModContent.GetInstance<UndergroundTropics>());

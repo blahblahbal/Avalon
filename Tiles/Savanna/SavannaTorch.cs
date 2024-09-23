@@ -53,7 +53,7 @@ namespace Avalon.Tiles.Savanna
 
 		public override float GetTorchLuck(Player player)
         {
-            if (player.GetModPlayer<AvalonBiomePlayer>().ZoneTropics)
+            if (player.GetModPlayer<AvalonBiomePlayer>().ZoneSavanna)
             {
                 return 1f;
             }

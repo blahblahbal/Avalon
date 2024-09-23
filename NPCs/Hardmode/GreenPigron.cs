@@ -6,6 +6,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using Avalon.Common.Players;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -38,14 +39,14 @@ public class GreenPigron : ModNPC
         NPC.npcSlots = 0.5f;
         AIType = NPCID.PigronCorruption;
         AnimationType = NPCID.PigronCorruption;
-        //SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.ContagionDesert>().Type };
+        SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundContagionIce>().Type];
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
-        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-        {
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.GreenPigron"))
-        });
+        bestiaryEntry.Info.AddRange(
+		[
+			new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.GreenPigron"))
+        ]);
     }
     public override void HitEffect(NPC.HitInfo hit)
     {
@@ -79,4 +80,7 @@ public class GreenPigron : ModNPC
         npcLoot.Add(ItemDropRule.Common(ItemID.PigronMinecart, 100));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.WindyEnoughForKiteDrops(), ItemID.KitePigron, 25));
     }
+	public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
+		spawnInfo.Player.InModBiome<Biomes.UndergroundContagionIce>() && !spawnInfo.Player.InPillarZone() &&
+		Main.hardMode ? 0.083f : 0f;
 }

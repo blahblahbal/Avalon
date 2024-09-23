@@ -150,24 +150,18 @@ class RiftGogglesPlayer : ModPlayer
 					#region copper
 					if (Main.tile[pt.X, pt.Y].TileType == TileID.Copper)
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Copper, TileID.Tin, new Vector3(pt.X, pt.Y, 54 + 60 * 10));
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Copper, TileID.Tin, new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-						//int index = ModContent.GetInstance<RiftGogglesSystem>().Positions2.FindVector2InVector4List(new Vector2(pt.X, pt.Y));
-						//ModContent.GetInstance<RiftGogglesSystem>().Timers[index] = 54;
 					}
 					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Tin)
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Tin, ModContent.TileType<Tiles.Ores.BronzeOre>(), new Vector3(pt.X, pt.Y, 54 + 60 * 10));
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Tin, ModContent.TileType<Tiles.Ores.BronzeOre>(), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-						//int index = ModContent.GetInstance<RiftGogglesSystem>().Positions2.FindVector2InVector4List(new Vector2(pt.X, pt.Y));
-						//ModContent.GetInstance<RiftGogglesSystem>().Timers[index] = 54;
 					}
 					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.BronzeOre>())
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.BronzeOre>(), TileID.Copper, new Vector3(pt.X, pt.Y, 54 + 60 * 10));
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.BronzeOre>(), TileID.Copper, new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-						//int index = ModContent.GetInstance<RiftGogglesSystem>().Positions2.FindVector2InVector4List(new Vector2(pt.X, pt.Y));
-						//ModContent.GetInstance<RiftGogglesSystem>().Timers[index] = 54;
 					}
 					#endregion
 
@@ -361,8 +355,9 @@ class RiftGogglesGlobalTile : GlobalTile
 			int index = ModContent.GetInstance<RiftGogglesSystem>().Positions2.FindVector2InVector4List(new Vector2(i, j));
 			if (index >= ModContent.GetInstance<RiftGogglesSystem>().Positions2.Count || index == -1) return;
 
-			int v = (int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[index].Z - 600;
-			if (v < 0) return;
+			// 654 to 600
+			int v = (int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[index].Z; // - 600;
+			//if (v < 0) return;
 			int frameY = (int)(54 - v) / 3;
             int frameX = 0;
             if (frameY > 6 && frameY <= 13)
@@ -434,101 +429,6 @@ class RiftGogglesGlobalTile : GlobalTile
                 int num10 = ((slopeType <= 2) ? 14 : 0);
                 Main.spriteBatch.Draw(tex, vector + new Vector2(0f, num10), (Rectangle?)new Rectangle(tile.TileFrameX + frameX * 288 + addFrX, tile.TileFrameY + frameY * 270 + addFrY + num10, 16, 2), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
-		}
-		// revert back
-		if (Main.tile[i, j].HasTile && Data.Sets.Tile.RiftOres[Main.tile[i, j].TileType])
-		{
-			Tile tile = Main.tile[i, j];
-			var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-			if (Main.drawToScreen)
-			{
-				zero = Vector2.Zero;
-			}
-
-			if (ModContent.GetInstance<RiftGogglesSystem>().Positions2.Count == 0) return;
-			int index = ModContent.GetInstance<RiftGogglesSystem>().Positions2.FindVector2InVector4List(new Vector2(i, j));
-			if (index >= ModContent.GetInstance<RiftGogglesSystem>().Positions2.Count || index == -1) return;
-
-			int v = (int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[index].Z - 600;
-			if (v < 0) return;
-			int frameY = (int)(54 - v) / 3;
-			int frameX = 0;
-			if (frameY > 6 && frameY <= 13)
-			{
-				frameY -= 7;
-				frameX = 1;
-			}
-			else if (frameY > 13)
-			{
-				frameY -= 14;
-				frameX = 2;
-			}
-
-			Vector2 pos = new Vector2(i, j) * 16 + zero - Main.screenPosition;
-			var frame = new Rectangle(tile.TileFrameX + frameX * 288, tile.TileFrameY + frameY * 270, 16, 16);
-			var halfFrame = new Rectangle(tile.TileFrameX + frameX * 288, tile.TileFrameY + frameY * 270, 16, 8);
-
-			Texture2D tex = ModContent.Request<Texture2D>("Avalon/Assets/Textures/OreRiftAnimation").Value;
-			if (tile.Slope == SlopeType.Solid && !tile.IsHalfBlock)
-			{
-				spriteBatch.Draw(tex, pos, frame, Color.White);
-			}
-			else if (tile.IsHalfBlock)
-			{
-				pos = new Vector2(i * 16, (j * 16) + 8) + zero - Main.screenPosition;
-				spriteBatch.Draw(tex, pos, halfFrame, Color.White);
-			}
-			else
-			{
-				Vector2 screenOffset = new Vector2(Main.offScreenRange, Main.offScreenRange);
-				if (Main.drawToScreen)
-				{
-					screenOffset = Vector2.Zero;
-				}
-				Vector2 vector = new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + screenOffset;
-				int slopeType = (int)tile.Slope;
-				int num5 = 2;
-				int addFrY = Main.tileFrame[type] * 90;
-				int addFrX = 0;
-				for (int q = 0; q < 8; q++)
-				{
-					int num6 = q * -2;
-					int num7 = 16 - q * 2;
-					int num8 = 16 - num7;
-					int num9;
-					switch (slopeType)
-					{
-						case 1:
-							num6 = 0;
-							num9 = q * 2;
-							num7 = 14 - q * 2;
-							num8 = 0;
-							break;
-						case 2:
-							num6 = 0;
-							num9 = 16 - q * 2 - 2;
-							num7 = 14 - q * 2;
-							num8 = 0;
-							break;
-						case 3:
-							num9 = q * 2;
-							break;
-						default:
-							num9 = 16 - q * 2 - 2;
-							break;
-					}
-					Main.spriteBatch.Draw(tex, vector + new Vector2(num9, q * num5 + num6), (Rectangle?)new Rectangle(tile.TileFrameX + frameX * 288 + addFrX + num9, tile.TileFrameY + frameY * 270 + addFrY + num8, num5, num7), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-				}
-				int num10 = ((slopeType <= 2) ? 14 : 0);
-				Main.spriteBatch.Draw(tex, vector + new Vector2(0f, num10), (Rectangle?)new Rectangle(tile.TileFrameX + frameX * 288 + addFrX, tile.TileFrameY + frameY * 270 + addFrY + num10, 16, 2), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-			}
-			//for (int q = 0; q < ModContent.GetInstance<RiftGogglesSystem>().RiftLocations.Count; q++)
-			//{
-			//	Vector3 test = ModContent.GetInstance<RiftGogglesSystem>().RiftLocations[q];
-			//	test.Z++;
-			//	ModContent.GetInstance<RiftGogglesSystem>().RiftLocations[q] = test;
-			//}
-			//Main.tile[i, j].LiquidAmount--;
 		}
 	}
 	public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
@@ -968,23 +868,23 @@ public class RiftGogglesSystem : ModSystem
 	public override void PostUpdateEverything()
 	{
 		
-		for (float i = 0; i < Positions2.Count; i += 1f)
+		for (int i = 0; i < Positions2.Count; i++)
 		{
-			if (Math.Floor(i) == Math.Round(i, 2))
 			{
-				Vector4 test = Positions2[(int)i];
+				Vector4 test = Positions2[i];
 				test.Z--;
 				if (test.Z < 0) test.Z = 0;
-				Positions2[(int)i] = test;
-				//Main.NewText(Positions2[(int)i].Z);
+				Positions2[i] = test;
 			}
-			//if (ModContent.GetInstance<RiftGogglesSystem>().Positions2[(int)i].Z == 27)
-			//{
-			//	Main.NewText(ModContent.GetInstance<RiftGogglesSystem>().Positions2[(int)i].Z);
-			//	Point tilePos = new Point((int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[(int)i].X, (int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[(int)i].Y);
-			//	Main.tile[tilePos].TileType = (ushort)ModContent.GetInstance<RiftGogglesSystem>().Positions2[(int)i].W;
-			//	WorldGen.SquareTileFrame(tilePos.X, tilePos.Y);
-			//}
+
+			// change the tile
+			if (ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].Z == 27)
+			{
+				Main.NewText(ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].Z);
+				Point tilePos = new Point((int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].X, (int)ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].Y);
+				Main.tile[tilePos].TileType = (ushort)ModContent.GetInstance<RiftGogglesSystem>().Positions2[i].W;
+				WorldGen.SquareTileFrame(tilePos.X, tilePos.Y);
+			}
 		}	
 	}
 }

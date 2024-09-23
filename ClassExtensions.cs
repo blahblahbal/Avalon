@@ -24,20 +24,6 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
-	public static bool ContainsRange(this List<List<Point>> list, List<Point> range)
-	{
-		foreach (List<Point> lp in list)
-		{
-			foreach (Point pt in lp)
-			{
-				if (range.Contains(pt))
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 	public static int FindVector2InVector4List(this List<Vector4> v4, Vector2 v2)
 	{
 		for (int i = 0; i < v4.Count; i++)

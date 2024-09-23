@@ -10955,6 +10955,11 @@ Mods: {
 				DisplayName: Basalt Obelisk Biome
 				TownNPCDialogueName: the Basalt Obelisk Biome
 			}
+
+			UndergroundContagionIce: {
+				DisplayName: Underground Contagion Ice
+				TownNPCDialogueName: the Underground Contagion Ice
+			}
 		}
 
 		World: {
