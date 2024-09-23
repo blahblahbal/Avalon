@@ -9352,7 +9352,7 @@ Mods: {
 			}
 
 			BiomeLockbox: {
-				DisplayName: Biome Lockbox
+				DisplayName: Biome Lock Box
 				Tooltip: <right> with a biome key to open
 			}
 		}

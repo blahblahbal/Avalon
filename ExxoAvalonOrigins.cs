@@ -204,19 +204,21 @@ public class ExxoAvalonOrigins : Mod
 
     public override object Call(params object[] args)
     {
-        //For Content creators: Message me (Lion8cake) on discord if you have any mod call suggestions
-        return args switch
-        {
-            ["Contagion"] => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion,
-            ["SetWorldEvil", int value] => ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)value,
+		//For Content creators: Message me (Lion8cake) on discord if you have any mod call suggestions
+		return args switch
+		{
+		["Contagion"] => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion,
+		["SetWorldEvil", int value] => ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)value,
 
-            //IDs
-            ["ConvertsToContagion", int tileID, int num] => Data.Sets.Tile.ConvertsToContagion[tileID] = num,
-            ["ConvertsToContagionWall", int wallID, int num] => Data.Sets.Wall.ConvertsToContagionWall[wallID] = num,
-            _ => throw new Exception("ExxoAvalonOrigins: Unknown mod call, make sure you are calling the right method/field with the right parameters!")
-        };
+		// biome chests
+		["AddBiomeChest", List<int> value] => Data.Sets.Item.BiomeLockboxCollection.AddToListAndReturnIt(value),
+
+		//IDs
+		["ConvertsToContagion", int tileID, int num] => Data.Sets.Tile.ConvertsToContagion[tileID] = num,
+		["ConvertsToContagionWall", int wallID, int num] => Data.Sets.Wall.ConvertsToContagionWall[wallID] = num,
+			_ => throw new Exception("ExxoAvalonOrigins: Unknown mod call, make sure you are calling the right method/field with the right parameters!")
+		};
     }
-
     private void ReplaceVanillaTextures()
     {
         //if (DragonLens != null)

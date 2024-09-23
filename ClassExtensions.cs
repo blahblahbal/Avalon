@@ -11,6 +11,7 @@ using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent.Drawing;
@@ -24,6 +25,38 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
+	public static List<List<int>> AddToListAndReturnIt(this List<List<int>> list, List<int> list2)
+	{
+		list.Add(list2);
+		for (int i = 0; i < list2.Count; i++)
+		{
+			if (list2[0] == ItemID.HallowedKey)
+			{
+				Data.Sets.Item.HallowedChest.Add(list2[1]);
+			}
+			if (list2[0] == ItemID.CorruptionKey)
+			{
+				Data.Sets.Item.CorruptionChest.Add(list2[1]);
+			}
+			if (list2[0] == ItemID.CrimsonKey)
+			{
+				Data.Sets.Item.CrimsonChest.Add(list2[1]);
+			}
+			if (list2[0] == ItemID.DungeonDesertKey)
+			{
+				Data.Sets.Item.DesertChest.Add(list2[1]);
+			}
+			if (list2[0] == ItemID.JungleKey)
+			{
+				Data.Sets.Item.JungleChest.Add(list2[1]);
+			}
+			if (list2[0] == ItemID.FrozenKey)
+			{
+				Data.Sets.Item.FrozenChest.Add(list2[1]);
+			}
+		}
+		return list;
+	}
 	public static int FindVector2InVector4List(this List<Vector4> v4, Vector2 v2)
 	{
 		for (int i = 0; i < v4.Count; i++)

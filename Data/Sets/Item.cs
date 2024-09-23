@@ -213,9 +213,7 @@ namespace Avalon.Data.Sets
 		public static List<int> CorruptionChest = new List<int>()
 		{
 			ItemID.CorruptionKey,
-			ItemID.ScourgeoftheCorruptor,
-			ItemID.Gel,
-			ItemID.StoneBlock
+			ItemID.ScourgeoftheCorruptor
 		};
 
 		public static List<int> CrimsonChest = new List<int>()
