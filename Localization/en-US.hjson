@@ -236,6 +236,18 @@ Mods: {
 		MechastingMessage: The humidity in the air tonight suddenly changes...
 		SteelfangMessage: You feel a strong gust of desert wind...
 
+		QuestFish: {
+			Snotpiranha: {
+				Description: "I don't even want to tell you about this one. It's so nasty, it looks like boogers! Go and catch one, but make sure you bag it before you give it to me. Ewww!"
+				CatchLocation: Caught in the Contagion
+			}
+
+			Pathofish: {
+				Description: "Did you hear the story about a fish filled with 100 pathogens? Well, it exists! I wanna play a prank on someone, so go fetch it for me, but make sure you don't get sick while bringing it to me!"
+				CatchLocation: Caught in the Contagion
+			}
+		}
+
 		Achievements: {
 			TheFiveSword: {
 				Name: The Five Sword

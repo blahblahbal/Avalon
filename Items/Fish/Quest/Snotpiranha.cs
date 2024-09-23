@@ -29,7 +29,7 @@ class Snotpiranha : ModItem
 
     public override void AnglerQuestChat(ref string description, ref string catchLocation)
     {
-        description = "I don't even want to tell you about this one. It's so nasty, it looks like boogers! Go and catch one, but make sure you bag it before you give it to me. Ewww!";
-        catchLocation = "Caught in the Contagion";
+        description = "Mods.Avalon.QuestFish.Snotpiranha.Description";
+        catchLocation = "Mods.Avalon.QuestFish.Pathofish.CatchLocation";
     }
 }

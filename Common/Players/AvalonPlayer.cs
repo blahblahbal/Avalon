@@ -2205,11 +2205,19 @@ public class AvalonPlayer : ModPlayer
 
         Point point = Player.Center.ToTileCoordinates();
         if ((Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
-            attempt.uncommon && questFish == ModContent.ItemType<Items.Fish.Quest.Snotpiranha>())
+            attempt.uncommon)
         {
-            itemDrop = ModContent.ItemType<Items.Fish.Quest.Snotpiranha>();
-            return;
-        }
+			if (questFish == ModContent.ItemType<Items.Fish.Quest.Snotpiranha>())
+			{
+				itemDrop = ModContent.ItemType<Items.Fish.Quest.Snotpiranha>();
+				return;
+			}
+			if (questFish == ModContent.ItemType<Items.Fish.Quest.Pathofish>())
+			{
+				itemDrop = ModContent.ItemType<Items.Fish.Quest.Pathofish>();
+				return;
+			}
+		}
         if (water)
         {
 			if (attempt.rare && Player.ZoneDungeon && Main.hardMode)
