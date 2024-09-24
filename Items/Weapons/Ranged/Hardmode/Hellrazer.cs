@@ -43,7 +43,7 @@ public class Hellrazer : ModItem
 		}
 		Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = 0;
 		Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = 0;
-		Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
+		Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 127;
 	}
     public override Vector2? HoldoutOffset()
     {
@@ -56,9 +56,10 @@ public class Hellrazer : ModItem
         Vector2 value = new Vector2((float)(Item.width / 2) - vector.X, Item.height - dims.Height);
         Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
         float num = Item.velocity.X * 0.2f;
-        spriteBatch.Draw((Texture2D)ModContent.Request<Texture2D>(Texture + "_Glow"), vector2, dims, new Color(250, 250, 250, 250), num, vector, scale, SpriteEffects.None, 0f);
-    }
-    public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        spriteBatch.Draw(glow.Value, vector2, dims, new Color(255, 255, 255, 127), num, vector, scale, SpriteEffects.None, 0f);
+		Lighting.AddLight(Item.position + vector, new Vector3(60 / 255f, 35 / 255f, 5 / 255f));
+	}
+	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
     {
         if (type == ProjectileID.Bullet)
         {
