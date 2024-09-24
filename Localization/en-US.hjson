@@ -205,7 +205,7 @@ Mods: {
 		Conditions: {
 			NearShimmer: Needs shimmer
 			ShimmerCraft: Throw into shimmer
-			InSavanna: Mods.Avalon.Conditions.InSavanna
+			InSavanna: ""
 		}
 
 		BuilderToggles: {
@@ -9372,6 +9372,61 @@ Mods: {
 				DisplayName: Pathofish
 				Tooltip: ""
 			}
+
+			TrappedBleachedEbonyChest: {
+				DisplayName: Trapped Bleached Ebony Chest
+				Tooltip: ""
+			}
+
+			TrappedContagionChest: {
+				DisplayName: Trapped Contagion Chest
+				Tooltip: ""
+			}
+
+			TrappedCoughwoodChest: {
+				DisplayName: Trapped Coughwood Chest
+				Tooltip: ""
+			}
+
+			TrappedHeartstoneChest: {
+				DisplayName: Trapped Heartstone Chest
+				Tooltip: ""
+			}
+
+			TrappedOrangeDungeonChest: {
+				DisplayName: Trapped Orange Dungeon Chest
+				Tooltip: ""
+			}
+
+			TrappedPlatinumChest: {
+				DisplayName: Trapped Platinum Chest
+				Tooltip: ""
+			}
+
+			TrappedPurpleDungeonChest: {
+				DisplayName: Trapped Purple Dungeon Chest
+				Tooltip: ""
+			}
+
+			TrappedResistantWoodChest: {
+				DisplayName: Trapped Resistant Wood Chest
+				Tooltip: ""
+			}
+
+			TrappedTuhrtlChest: {
+				DisplayName: Trapped Tuhrtl Chest
+				Tooltip: ""
+			}
+
+			TrappedUnderworldChest: {
+				DisplayName: Trapped Underworld Chest
+				Tooltip: ""
+			}
+
+			TrappedYellowDungeonChest: {
+				DisplayName: Trapped Yellow Dungeon Chest
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10803,6 +10858,20 @@ Mods: {
 			UnderworldChest.MapEntry0: Underworld Chest
 			SavannaPylon.MapEntry: Savanna Pylon
 			PoisonSpike.MapEntry: Poison Spike
+
+			TrappedChests: {
+				Contagion: Contagion Chest
+				Underworld: Underworld Chest
+				BleachedEbony: Bleached Ebony Chest
+				Coughwood: Coughwood Chest
+				Heartstone: Heartstone Chest
+				OrangeDungeon: Orange Dungeon Chest
+				PurpleDungeon: Purple Dungeon Chest
+				ResistantWood: Resistant Wood Chest
+				Tuhrtl: Tuhrtl Chest
+				YellowDungeon: Yellow Dungeon Chest
+				Platinum: Platinum Chest
+			}
 		}
 
 		Prefixes: {

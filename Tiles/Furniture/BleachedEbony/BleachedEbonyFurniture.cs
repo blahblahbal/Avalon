@@ -7,13 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.Enums;
 using Terraria.GameContent.Drawing;
-using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
 using Terraria.Utilities;
 using static Terraria.GameContent.Drawing.TileDrawing;
 

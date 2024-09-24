@@ -10,7 +10,8 @@ public class SyncWiring
     public enum WiringType
     {
         BookcaseTeleporter = 0,
-        GemLocks = 1
+        GemLocks = 1,
+		TrappedChests = 2
     }
     public static void SendPacket(int playerIndex, int x, int y, int type, int toClient = -1, int ignoreClient = -1)
     {
@@ -38,6 +39,11 @@ public class SyncWiring
             Tiles.GemLocks.HitSwitch(x, y);
             Wiring.TripWire(x, y, 3, 3);
         }
+		if (t == (short)WiringType.TrappedChests)
+		{
+			Tiles.Furniture.TrappedChests.Trigger(x, y);
+			Wiring.TripWire(x, y, 2, 2);
+		}
         Wiring.SetCurrentUser();
         if (Main.netMode == NetmodeID.Server)
         {

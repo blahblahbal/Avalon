@@ -1,7 +1,4 @@
 using Avalon.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Furniture.BleachedEbony;
 using Avalon.Tiles.Furniture.Coughwood;
@@ -18,7 +15,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using Avalon.Compatability.Thorium.Tiles;
-using System.Text.Encodings.Web;
 
 namespace Avalon.Hooks
 {
@@ -31,7 +27,7 @@ namespace Avalon.Hooks
             IL_TileDrawing.DrawMultiTileGrassInWind += IL_TileDrawing_DrawMultiTileGrassInWind;
         }
 
-        private void IL_TileDrawing_DrawMultiTileGrassInWind(MonoMod.Cil.ILContext il)
+        private void IL_TileDrawing_DrawMultiTileGrassInWind(ILContext il)
         {
             ILCursor c = new(il);
             c.EmitLdarg0(); //self
@@ -81,10 +77,10 @@ namespace Avalon.Hooks
             }
             if (ExxoAvalonOrigins.Thorium != null)
             {
-                if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Compatability.Thorium.Tiles.LargeMarineKelpStage1>() ||
-                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Compatability.Thorium.Tiles.LargeMarineKelpStage2>() ||
-                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Compatability.Thorium.Tiles.LargeMarineKelpStage3>() ||
-                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Compatability.Thorium.Tiles.LargeMarineKelpStage4>())
+                if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage1>() ||
+                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage2>() ||
+                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage3>() ||
+                    Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage4>())
                 {
                     sizeY = 3;
                     overlayColor = Color.White;
@@ -99,28 +95,28 @@ namespace Avalon.Hooks
             {
                 sizeY = 3;
             }
-            else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.Coughwood.CoughwoodLantern>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.BleachedEbony.BleachedEbonyLantern>())
+            else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<ResistantWoodLantern>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<CoughwoodLantern>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<BleachedEbonyLantern>())
             {
                 sizeY = 2;
             }
-            else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.HangingPots>())
+            else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<HangingPots>())
             {
                 sizeX = 2;
                 sizeY = 3;
             }
-            else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.BismuthChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.BronzeChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.ZincChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.BleachedEbony.BleachedEbonyChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.Coughwood.CoughwoodChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.OrangeDungeon.OrangeDungeonChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.PurpleDungeon.PurpleDungeonChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.YellowDungeon.YellowDungeonChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.WildMushroom.WildMushroomChandelier>() ||
-                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Furniture.Dirtalier>())
+            else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<BismuthChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<BronzeChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<ZincChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<BleachedEbonyChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<CoughwoodChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<OrangeDungeonChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<PurpleDungeonChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<ResistantWoodChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<YellowDungeonChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<WildMushroomChandelier>() ||
+                Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Dirtalier>())
             {
                 sizeX = 3;
                 sizeY = 3;
