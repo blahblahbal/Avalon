@@ -238,12 +238,12 @@ Mods: {
 
 		QuestFish: {
 			Snotpiranha: {
-				Description: "I don't even want to tell you about this one. It's so nasty, it looks like boogers! Go and catch one, but make sure you bag it before you give it to me. Ewww!"
+				Description: I don't even want to tell you about this one. It's so nasty, it looks like boogers! Go and catch one, but make sure you bag it before you give it to me. Ewww!
 				CatchLocation: Caught in the Contagion
 			}
 
 			Pathofish: {
-				Description: "Did you hear the story about a fish filled with 100 pathogens? Well, it exists! I wanna play a prank on someone, so go fetch it for me, but make sure you don't get sick while bringing it to me!"
+				Description: Did you hear the story about a fish filled with 100 pathogens? Well, it exists! I wanna play a prank on someone, so go fetch it for me, but make sure you don't get sick while bringing it to me!
 				CatchLocation: Caught in the Contagion
 			}
 		}
@@ -511,7 +511,7 @@ Mods: {
 			EvilVulture: A bird attuned to the forces of evil, this Vulture has no such normal nature left.
 			WallOfSteel: An abandoned creation designed to accomplish what the original Guardian of the Underworld could not - prevent the Terrarian from further destabilizing the world.
 			MechanicalHungry: The Wall of Steel's many mouths, attached by steel cables. As a last resort, they can detach and precisely chase down threats.
-			InfectedPickaxe: Inspirited by the viciously endemic Contagion, this tool swings about attempting to split apart its foes.
+			InfectedPickaxe: Inspirited by the viciously virulent Contagion, this tool swings about attempting to split apart its foes.
 		}
 
 		Keybinds: {
@@ -9366,6 +9366,11 @@ Mods: {
 			BiomeLockbox: {
 				DisplayName: Biome Lock Box
 				Tooltip: <right> with a biome key to open
+			}
+
+			Pathofish: {
+				DisplayName: Pathofish
+				Tooltip: ""
 			}
 		}
 
