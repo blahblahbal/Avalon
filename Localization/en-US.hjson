@@ -9427,6 +9427,56 @@ Mods: {
 				DisplayName: Trapped Yellow Dungeon Chest
 				Tooltip: ""
 			}
+
+			TrappedAmberChest: {
+				DisplayName: Trapped Amber Chest
+				Tooltip: ""
+			}
+
+			TrappedAmethystChest: {
+				DisplayName: Trapped Amethyst Chest
+				Tooltip: ""
+			}
+
+			TrappedDiamondChest: {
+				DisplayName: Trapped Diamond Chest
+				Tooltip: ""
+			}
+
+			TrappedEmeraldChest: {
+				DisplayName: Trapped Emerald Chest
+				Tooltip: ""
+			}
+
+			TrappedPeridotChest: {
+				DisplayName: Trapped Peridot Chest
+				Tooltip: ""
+			}
+
+			TrappedRubyChest: {
+				DisplayName: Trapped Ruby Chest
+				Tooltip: ""
+			}
+
+			TrappedSapphireChest: {
+				DisplayName: Trapped Sapphire Chest
+				Tooltip: ""
+			}
+
+			TrappedTopazChest: {
+				DisplayName: Trapped Topaz Chest
+				Tooltip: ""
+			}
+
+			TrappedTourmalineChest: {
+				DisplayName: Trapped Tourmaline Chest
+				Tooltip: ""
+			}
+
+			TrappedZirconChest: {
+				DisplayName: Trapped Zircon Chest
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10807,7 +10857,7 @@ Mods: {
 			}
 
 			TropicsBushes.MapEntry: ""
-			HeartstoneChest.MapEntry0: Chest
+			HeartstoneChest.MapEntry0: Heartstone Chest
 			HeartstoneDresser.MapEntry: Heartstone Dresser
 			BacciliteOre.MapEntry: Baccilite
 			BismuthOre.MapEntry: Bismuth
@@ -10858,20 +10908,6 @@ Mods: {
 			UnderworldChest.MapEntry0: Underworld Chest
 			SavannaPylon.MapEntry: Savanna Pylon
 			PoisonSpike.MapEntry: Poison Spike
-
-			TrappedChests: {
-				Contagion: Contagion Chest
-				Underworld: Underworld Chest
-				BleachedEbony: Bleached Ebony Chest
-				Coughwood: Coughwood Chest
-				Heartstone: Heartstone Chest
-				OrangeDungeon: Orange Dungeon Chest
-				PurpleDungeon: Purple Dungeon Chest
-				ResistantWood: Resistant Wood Chest
-				Tuhrtl: Tuhrtl Chest
-				YellowDungeon: Yellow Dungeon Chest
-				Platinum: Platinum Chest
-			}
 		}
 
 		Prefixes: {

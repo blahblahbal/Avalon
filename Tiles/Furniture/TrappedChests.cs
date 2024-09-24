@@ -7,6 +7,7 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 using Terraria.Enums;
 using Terraria.Audio;
+using Terraria.Localization;
 
 namespace Avalon.Tiles.Furniture;
 
@@ -34,17 +35,27 @@ internal class TrappedChests : ModTile
 		TileObjectData.newTile.LavaDeath = false;
 		TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
 		TileObjectData.addTile(Type);
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("Contagion"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("Underworld"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("BleachedEbony"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("Coughwood"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("Heartstone"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("OrangeDungeon"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("PurpleDungeon"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("ResistantWood"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("Tuhrtl"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("YellowDungeon"));
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("Platinum"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.ContagionChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.UnderworldChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.BleachedEbonyChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.CoughwoodChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.HeartstoneChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.OrangeDungeonChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.PurpleDungeonChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.ResistantWoodChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.TuhrtlChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.YellowDungeonChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.PlatinumChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.AmberChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.AmethystChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.DiamondChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.EmeraldChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.PeridotChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.RubyChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.SapphireChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.TopazChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.TourmalineChest.MapEntry0"));
+		AddMapEntry(new Color(174, 129, 92), Language.GetText("Mods.Avalon.Tiles.ZirconChest.MapEntry0"));
 		DustType = -1;
 		AdjTiles = [441];
 	}
