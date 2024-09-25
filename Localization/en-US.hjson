@@ -9494,6 +9494,12 @@ Mods: {
 			}
 		}
 
+			StaffStatue: {
+				DisplayName: Staff Statue
+				Tooltip: ""
+			}
+		}
+
 		InfoDisplays: {
 			EyeoftheGodsDefInfoDisplay.DisplayName: Enemy defense
 			Defense: " defense: "
