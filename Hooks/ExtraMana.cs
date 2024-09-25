@@ -99,7 +99,8 @@ public class ExtraMana : ModHook {
 				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 				{
 					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-					return ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableMana");
+					return ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
+						$"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Mana{manaTier}", AssetRequestMode.ImmediateLoad);
 				}
 			}
 
@@ -120,21 +121,21 @@ public class ExtraMana : ModHook {
             out sourceRect);
 
         int manaTier = GetManaTier(lastElementIndex, elementIndex);
-
-		if (manaTier > 1) {
-            sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
-                $"{ExxoAvalonOrigins.TextureAssetsPath}/UI/FancyMana{manaTier}", AssetRequestMode.ImmediateLoad);
-        }
-
 		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
 		if (slot != -1)
 		{
 			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 			{
 				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-				sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyMana");
 			}
 		}
+
+		if (manaTier > 1) {
+            sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
+                $"{ExxoAvalonOrigins.TextureAssetsPath}/UI/FancyMana{manaTier}", AssetRequestMode.ImmediateLoad);
+        }
+
+		
 	}
 
     private static void OnManaFillingDrawer(On_HorizontalBarsPlayerResourcesDisplaySet.orig_ManaFillingDrawer orig,
@@ -144,41 +145,19 @@ public class ExtraMana : ModHook {
         orig(self, elementIndex, firstElementIndex, lastElementIndex, out sprite, out offset, out drawScale,
             out sourceRect);
 
-        int manaTier = GetManaTier(lastElementIndex, elementIndex);
-		if (manaTier > 1) {
-            sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
-                $"{ExxoAvalonOrigins.TextureAssetsPath}/UI/BarMana{manaTier}", AssetRequestMode.ImmediateLoad);
-        }
 		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
 		if (slot != -1)
 		{
 			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 			{
 				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-				sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableBarMana");
 			}
 		}
+
+		int manaTier = GetManaTier(lastElementIndex, elementIndex);
+		if (manaTier > 1) {
+            sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
+                $"{ExxoAvalonOrigins.TextureAssetsPath}/UI/BarMana{manaTier}", AssetRequestMode.ImmediateLoad);
+        }
 	}
 }
-//public class ManaResourceThing : ModResourceOverlay
-//{
-//	public override void PostDrawResourceDisplay(PlayerStatsSnapshot snapshot, IPlayerResourcesDisplaySet displaySet, bool drawingLife, Color textColor, bool drawText)
-//	{
-//		if (drawingLife)
-//		{
-//			int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
-//			if (slot != -1)
-//			{
-//				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
-//				{
-//					Main.spriteBatch.End();
-//					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
-//					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-//					displaySet.Draw();
-//					Main.spriteBatch.End();
-//					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
-//				}
-//			}
-//		}
-//	}
-//}

@@ -294,11 +294,6 @@ class StaminaBar : UIState
 			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 			{
 				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-				staminaFillGreenFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-				staminaFillPurpleFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-				staminaFillOrangeFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-				staminaFillPinkFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-				staminaFillBlueFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
 			}
 		}
 		resourceDrawSettings.ElementCount = fancyStamCount;
@@ -438,11 +433,6 @@ class StaminaBar : UIState
 				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 				{
 					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-					stamFillGreen = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
-					stamFillPurple = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
-					stamFillOrange = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
-					stamFillBlue = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
-					stamFillPink = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
 				}
 			}
 			resourceDrawSettings.ElementCount = stamSegmentsBarsCount;
@@ -479,22 +469,7 @@ class StaminaBar : UIState
             staminaFillPinkFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillPink");
 			staminaFillBlueFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillBlue");
 
-			
-
 			PrepareFieldsFancy();
-			//int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
-			//if (slot != -1)
-			//{
-			//	if (Main.LocalPlayer.dye[slot].type != ItemID.None)
-			//	{
-			//		GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-			//		staminaFillGreenFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-			//		staminaFillPurpleFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-			//		staminaFillOrangeFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-			//		staminaFillPinkFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-			//		staminaFillBlueFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
-			//	}
-			//}
 			DrawStaminaBarFancy(spriteBatch);
 
             Left.Set(Main.screenWidth - 25 - (ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width / 2f), 0);
@@ -604,7 +579,6 @@ class StaminaBar : UIState
 					if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 					{
 						GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-						texture = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStamina").Value;
 					}
 				}
 				spriteBatch.Draw(texture, position, null, new Color(intensity, intensity, intensity, alpha), 0f, origin, scale, SpriteEffects.None, 0f);
