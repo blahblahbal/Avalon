@@ -9477,6 +9477,11 @@ Mods: {
 				DisplayName: Trapped Zircon Chest
 				Tooltip: ""
 			}
+
+			StaffStatue: {
+				DisplayName: Staff Statue
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
