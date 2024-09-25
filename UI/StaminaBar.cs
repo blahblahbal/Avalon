@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using ReLogic.Graphics;
+using System.Net.Sockets;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.ResourceSets;
@@ -598,7 +599,7 @@ class StaminaBar : UIState
                 var position = new Vector2(dimensions.X + scaleOffsetX + (texture.Width / 2f), dimensions.Y + (barSpacing * (i - 1)) + (texture.Height / 2f));
 
 				int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
-				if (slot != -1)
+				if (slot != -1 && slot != 0 && slot != 1)
 				{
 					if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 					{

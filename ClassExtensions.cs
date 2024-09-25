@@ -403,16 +403,16 @@ public static class ClassExtensions
 	public static int ReturnEquippedDyeInSlot(this Player p, int type)
 	{
 		int slot = -1;
-		for (int i = 0; i < p.armor.Length; i++)
+		for (int i = 3; i < p.armor.Length; i++)
 		{
+			if (i >= 10 && i <= 12) continue;
 			int slot2 = i;
 			if (p.armor[i].type == type)
 			{
 				if (i > 10) 
 					slot2 -= 10;
 				slot = slot2;
-				
-				break;
+			
 			}
 		}
 		return slot;

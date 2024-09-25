@@ -2,6 +2,7 @@ using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.NPCs.Hardmode;
+using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
@@ -254,6 +255,40 @@ public class AvalonGlobalTile : GlobalTile
 				}
 			}
 		}
+		if (type == ModContent.TileType<Statues>())
+		{
+			if (Main.tile[i, j].TileFrameX >= 576 && Main.tile[i, j].TileFrameX <= 594)
+			{
+				if ((Main.tile[i, j].TileFrameY >= 0 && Main.tile[i, j].TileFrameY <= 36) || (Main.tile[i, j].TileFrameY >= 162 && Main.tile[i, j].TileFrameY <= 198))
+				{
+					while (tile.TileFrameX % 36 != 0)
+					{
+						left--;
+						if (Main.tile[left, j].TileFrameX % 36 == 0)
+						{
+							break;
+						}
+					}
+					while (tile.TileFrameY != 0 || tile.TileFrameY != 162)
+					{
+						top--;
+						if (Main.tile[i, top].TileFrameY == 0 || Main.tile[i, top].TileFrameY == 162)
+						{
+							break;
+						}
+					}
+					ClassExtensions.SkipWireMulti(left, top, 2, 3);
+					if (Wiring.CheckMech(left, top, 30) && MechSpawn(left, top, ModContent.NPCType<CursedScepter>()))
+					{
+						int n = NPC.NewNPC(Entity.GetSource_None(), left * 16, top * 16, ModContent.NPCType<CursedScepter>());
+						Main.npc[n].value = 0f;
+						Main.npc[n].npcSlots = 0f;
+						Main.npc[n].SpawnedFromStatue = true;
+						Main.npc[n].CanBeReplacedByOtherNPCs = true;
+					}
+				}
+			}
+		}
 	}
 	public static bool MechSpawn(int x, int y, int type)
 	{
@@ -266,6 +301,11 @@ public class AvalonGlobalTile : GlobalTile
 			if (type == ModContent.NPCType<InfectedPickaxe>())
 			{
 				if (Main.npc[i].type == ModContent.NPCType<InfectedPickaxe>())
+					amt++;
+			}
+			if (type == ModContent.NPCType<CursedScepter>())
+			{
+				if (Main.npc[i].type == ModContent.NPCType<CursedScepter>())
 					amt++;
 			}
 			if (type == NPCID.CursedHammer)
