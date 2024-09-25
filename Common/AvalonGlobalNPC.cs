@@ -758,7 +758,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			//    pool.Add(ModContent.NPCType<ArmoredHellTortoise>(), 1f);
 			//}
 		}
-		if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone()) //
+		if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone())// && !spawnInfo.Player.HasBuff(ModContent.BuffType<SilenceCandleBuff>()))
 		{
 			pool.Clear();
 			pool.Add(ModContent.NPCType<Bactus>(), 1f);
@@ -775,7 +775,7 @@ public class AvalonGlobalNPC : GlobalNPC
 
 				if (spawnInfo.Player.ZoneDesert)
 				{
-					pool.Add(NPCID.DarkMummy, 0.3f);
+					pool.Add(ModContent.NPCType<ViralMummy>(), 0.3f);
 					//pool.Add(ModContent.NPCType<EvilVulture>(), 0.4f);
 				}
 			}

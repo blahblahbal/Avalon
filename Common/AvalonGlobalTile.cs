@@ -1,6 +1,7 @@
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
+using Avalon.NPCs.Hardmode;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
@@ -133,7 +134,162 @@ public class AvalonGlobalTile : GlobalTile
             player.sticky = false;
         }
     }
-    public override void Drop(int i, int j, int type)
+	public override void HitWire(int i, int j, int type)
+	{
+		int left = i;
+		int top = j;
+		Tile tile = Main.tile[i, j];
+		if (type == 105 && ((Main.tile[i, j].TileFrameY >= 0 && Main.tile[i, j].TileFrameY <= 36) || (Main.tile[i, j].TileFrameY >= 162 && Main.tile[i, j].TileFrameY <= 198)))
+		{
+			if (Main.tile[i, j].TileFrameX >= 108 && Main.tile[i, j].TileFrameX <= 126)
+			{
+				while (tile.TileFrameX % 36 != 0)
+				{
+					left--;
+					if (Main.tile[left, j].TileFrameX % 36 == 0)
+					{
+						break;
+					}
+				}
+				while (tile.TileFrameY != 0 || tile.TileFrameY != 162)
+				{
+					top--;
+					if (Main.tile[i, top].TileFrameY == 0 || Main.tile[i, top].TileFrameY == 162)
+					{
+						break;
+					}
+				}
+				ClassExtensions.SkipWireMulti(left, top, 2, 3);
+				if (Wiring.CheckMech(left, top, 30) && MechSpawn(left, top, NPCID.EnchantedSword))
+				{
+					int n = NPC.NewNPC(Entity.GetSource_None(), left * 16, top * 16, NPCID.EnchantedSword);
+					Main.npc[n].value = 0f;
+					Main.npc[n].npcSlots = 0f;
+					Main.npc[n].SpawnedFromStatue = true;
+					Main.npc[n].CanBeReplacedByOtherNPCs = true;
+				}
+			}
+			if (Main.tile[i, j].TileFrameX >= 684 && Main.tile[i, j].TileFrameX <= 702)
+			{
+				while (tile.TileFrameX % 36 != 0)
+				{
+					left--;
+					if (Main.tile[left, j].TileFrameX % 36 == 0)
+					{
+						break;
+					}
+				}
+				while (tile.TileFrameY != 0 || tile.TileFrameY != 162)
+				{
+					top--;
+					if (Main.tile[i, top].TileFrameY == 0 || Main.tile[i, top].TileFrameY == 162)
+					{
+						break;
+					}
+				}
+				ClassExtensions.SkipWireMulti(left, top, 2, 3);
+				if (Wiring.CheckMech(left, top, 30) && MechSpawn(left, top, NPCID.CursedHammer))
+				{
+					int n = NPC.NewNPC(Entity.GetSource_None(), left * 16, top * 16, NPCID.CursedHammer);
+					Main.npc[n].value = 0f;
+					Main.npc[n].npcSlots = 0f;
+					Main.npc[n].SpawnedFromStatue = true;
+					Main.npc[n].CanBeReplacedByOtherNPCs = true;
+				}
+			}
+			if (Main.tile[i, j].TileFrameX >= 1044 && Main.tile[i, j].TileFrameX <= 1062)
+			{
+				while (tile.TileFrameX % 36 != 0)
+				{
+					left--;
+					if (Main.tile[left, j].TileFrameX % 36 == 0)
+					{
+						break;
+					}
+				}
+				while (tile.TileFrameY != 0 || tile.TileFrameY != 162)
+				{
+					top--;
+					if (Main.tile[i, top].TileFrameY == 0 || Main.tile[i, top].TileFrameY == 162)
+					{
+						break;
+					}
+				}
+				ClassExtensions.SkipWireMulti(left, top, 2, 3);
+				if (Wiring.CheckMech(left, top, 30) && MechSpawn(left, top, NPCID.CrimsonAxe))
+				{
+					int n = NPC.NewNPC(Entity.GetSource_None(), left * 16, top * 16, NPCID.CrimsonAxe);
+					Main.npc[n].value = 0f;
+					Main.npc[n].npcSlots = 0f;
+					Main.npc[n].SpawnedFromStatue = true;
+					Main.npc[n].CanBeReplacedByOtherNPCs = true;
+				}
+			}
+			if (Main.tile[i, j].TileFrameX >= 1188 && Main.tile[i, j].TileFrameX <= 1206)
+			{
+				while (tile.TileFrameX % 36 != 0)
+				{
+					left--;
+					if (Main.tile[left, j].TileFrameX % 36 == 0)
+					{
+						break;
+					}
+				}
+				while (tile.TileFrameY != 0 || tile.TileFrameY != 162)
+				{
+					top--;
+					if (Main.tile[i, top].TileFrameY == 0 || Main.tile[i, top].TileFrameY == 162)
+					{
+						break;
+					}
+				}
+				ClassExtensions.SkipWireMulti(left, top, 2, 3);
+				if (Wiring.CheckMech(left, top, 30) && MechSpawn(left, top, ModContent.NPCType<InfectedPickaxe>()))
+				{
+					int n = NPC.NewNPC(Entity.GetSource_None(), left * 16, top * 16, ModContent.NPCType<InfectedPickaxe>());
+					Main.npc[n].value = 0f;
+					Main.npc[n].npcSlots = 0f;
+					Main.npc[n].SpawnedFromStatue = true;
+					Main.npc[n].CanBeReplacedByOtherNPCs = true;
+				}
+			}
+		}
+	}
+	public static bool MechSpawn(int x, int y, int type)
+	{
+		int amt = 0;
+		for (int i = 0; i < 200; i++)
+		{
+			if (!Main.npc[i].active)
+				continue;
+
+			if (type == ModContent.NPCType<InfectedPickaxe>())
+			{
+				if (Main.npc[i].type == ModContent.NPCType<InfectedPickaxe>())
+					amt++;
+			}
+			if (type == NPCID.CursedHammer)
+			{
+				if (Main.npc[i].type == NPCID.CursedHammer)
+					amt++;
+			}
+			if (type == NPCID.CrimsonAxe)
+			{
+				if (Main.npc[i].type == NPCID.CrimsonAxe)
+					amt++;
+			}
+			if (type == NPCID.EnchantedSword)
+			{
+				if (Main.npc[i].type == NPCID.EnchantedSword)
+					amt++;
+			}
+		}
+		if (amt >= 3)
+			return false;
+
+		return true;
+	}
+	public override void Drop(int i, int j, int type)
     {
         int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
 

@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.Items.Accessories.Vanity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -6,6 +7,8 @@ using ReLogic.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.ResourceSets;
+using Terraria.Graphics.Shaders;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -284,7 +287,20 @@ class StaminaBar : UIState
         resourceDrawSettings.OffsetSpriteAnchorByTexturePercentile = Vector2.Zero;
         resourceDrawSettings.Draw(spriteBatch, ref isHovered);
         resourceDrawSettings = default;
-        resourceDrawSettings.ElementCount = fancyStamCount;
+		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+		if (slot != -1)
+		{
+			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+			{
+				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+				staminaFillGreenFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+				staminaFillPurpleFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+				staminaFillOrangeFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+				staminaFillPinkFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+				staminaFillBlueFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+			}
+		}
+		resourceDrawSettings.ElementCount = fancyStamCount;
         resourceDrawSettings.ElementIndexOffset = 0;
         resourceDrawSettings.TopLeftAnchor = vector + new Vector2(15f, 16f);
         resourceDrawSettings.GetTextureMethod = StaminaFillingDrawerFancy;
@@ -342,7 +358,7 @@ class StaminaBar : UIState
         drawScale = 1f;
         if (elementIndex == lastElementIndex && elementIndex == firstElementIndex)
         {
-            sprite = staminaSingle;
+			sprite = staminaSingle;
         }
         else if (elementIndex == lastElementIndex)
         {
@@ -362,7 +378,8 @@ class StaminaBar : UIState
             return;
         }
 		labelText = Language.GetTextValue("Mods.Avalon.Stamina");
-
+		spriteBatch.End();
+		spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 		if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars" ||
             Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithText" ||
             Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithFullText")
@@ -376,7 +393,9 @@ class StaminaBar : UIState
             panelMiddleStam = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaPanel_Middle");
             panelRightStam = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaPanel_Right");
 
-            PrepareFieldsBars();
+			
+
+			PrepareFieldsBars();
             SpriteBatch sb = Main.spriteBatch;
             int xpos = 16;
             int ypos = Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithFullText" ? 25 : 20;
@@ -412,7 +431,20 @@ class StaminaBar : UIState
             resourceDrawSettings.OffsetSpriteAnchorByTexturePercentile = Vector2.Zero;
             resourceDrawSettings.Draw(spriteBatch, ref isHovered);
             resourceDrawSettings = default;
-            resourceDrawSettings.ElementCount = stamSegmentsBarsCount;
+			int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+			if (slot != -1)
+			{
+				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+				{
+					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+					stamFillGreen = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
+					stamFillPurple = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
+					stamFillOrange = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
+					stamFillBlue = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
+					stamFillPink = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStaminaFill");
+				}
+			}
+			resourceDrawSettings.ElementCount = stamSegmentsBarsCount;
             resourceDrawSettings.ElementIndexOffset = 0;
             resourceDrawSettings.TopLeftAnchor = vector + new Vector2(6f, 6f);
             resourceDrawSettings.GetTextureMethod = StaminaFillingDrawerBars;
@@ -444,8 +476,25 @@ class StaminaBar : UIState
             staminaFillPurpleFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillPurple");
             staminaFillOrangeFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillOrange");
             staminaFillPinkFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillPink");
-            PrepareFieldsFancy();
-            DrawStaminaBarFancy(spriteBatch);
+			staminaFillBlueFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/StaminaFancy_FillBlue");
+
+			
+
+			PrepareFieldsFancy();
+			//int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+			//if (slot != -1)
+			//{
+			//	if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+			//	{
+			//		GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+			//		staminaFillGreenFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+			//		staminaFillPurpleFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+			//		staminaFillOrangeFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+			//		staminaFillPinkFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+			//		staminaFillBlueFancy = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyStamina");
+			//	}
+			//}
+			DrawStaminaBarFancy(spriteBatch);
 
             Left.Set(Main.screenWidth - 25 - (ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width / 2f), 0);
             Height.Set(fancyStamCount * staminaTop.Value.Height, 0);
@@ -548,8 +597,17 @@ class StaminaBar : UIState
                 var origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
                 var position = new Vector2(dimensions.X + scaleOffsetX + (texture.Width / 2f), dimensions.Y + (barSpacing * (i - 1)) + (texture.Height / 2f));
 
-                spriteBatch.Draw(texture, position, null, new Color(intensity, intensity, intensity, alpha), 0f, origin, scale, SpriteEffects.None, 0f);
-            }
+				int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+				if (slot != -1)
+				{
+					if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+					{
+						GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+						texture = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableStamina").Value;
+					}
+				}
+				spriteBatch.Draw(texture, position, null, new Color(intensity, intensity, intensity, alpha), 0f, origin, scale, SpriteEffects.None, 0f);
+			}
 
             if (IsMouseHovering)
             {
@@ -561,6 +619,8 @@ class StaminaBar : UIState
             Height.Set(barSpacing * stamBars, 0);
             Width.Set(ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Stamina").Value.Width, 0);
         }
-        base.DrawSelf(spriteBatch);
+		spriteBatch.End();
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+		base.DrawSelf(spriteBatch);
     }
 }

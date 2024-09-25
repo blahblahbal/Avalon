@@ -21,11 +21,24 @@ using Avalon.Items.Placeable.Furniture.Gem;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Food;
 using Avalon.Compatability.Thorium.Items.Placeable.Furniture.Gem;
+using SDL2;
 
 namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
 {
-    public override void AddRecipeGroups()
+	//public override void PostAddRecipes()
+	//{
+	//	for (int i = 0; i < Recipe.numRecipes; i++)
+	//	{
+	//		Recipe recipe = Main.recipe[i];
+	//		if (recipe.TryGetIngredient(ItemID.RottenChunk, out var chunk) && !Data.Sets.Recipe.RottenChunkOnlyItem[recipe.createItem.type])
+	//		{
+	//			recipe.AddRecipeGroup("RottenChunk", chunk.stack);
+	//			recipe.RemoveIngredient(chunk);
+	//		}
+	//	}
+	//}
+	public override void AddRecipeGroups()
     {
         string any = Language.GetTextValue("LegacyMisc.37");
 
@@ -165,9 +178,20 @@ public class RecipeSystem : ModSystem
             ItemID.BalloonHorseshoeSharkron
         });
         RecipeGroup.RegisterGroup("Avalon:SharkronBalloons", groupSharkronBalloons);
-        #endregion Balloons
+		#endregion Balloons
 
-        var groupGemStaves = new RecipeGroup(() => $"{any} Gem Staff", new int[]
+		#region evil groups
+		//var groupRottenChunks = new RecipeGroup(() => $"{any} Rotten Chunk",
+		//[
+		//	ItemID.RottenChunk,
+		//	ItemID.Vertebrae,
+		//	ModContent.ItemType<Items.Material.YuckyBit>()
+		//]);
+		//RecipeGroup.RegisterGroup("RottenChunk", groupRottenChunks);
+
+		#endregion
+
+		var groupGemStaves = new RecipeGroup(() => $"{any} Gem Staff", new int[]
         {
             ItemID.RubyStaff,
             ItemID.AmberStaff,

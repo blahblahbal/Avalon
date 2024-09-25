@@ -1,4 +1,6 @@
 using Avalon.NPCs.Bosses.Hardmode;
+using Avalon.NPCs.Hardmode;
+using Avalon.NPCs.PreHardmode;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,6 +9,19 @@ namespace Avalon.Data.Sets;
 public static class NPC
 {
 	//public static bool[] DontDropPotions = NPCID.Sets.Factory.CreateBoolSet(false, ModContent.NPCType<HomingRocket>());
+
+	public static readonly bool[] SilenceCandleStopSpawns = NPCID.Sets.Factory.CreateBoolSet(
+		ModContent.NPCType<CursedFlamer>(), ModContent.NPCType<ViralMummy>(), ModContent.NPCType<Cougher>(),
+		ModContent.NPCType<Shadlopod>(), ModContent.NPCType<Viris>(), ModContent.NPCType<Bactus>(),
+		ModContent.NPCType<PyrasiteHead>(), ModContent.NPCType<Ickslime>(), ModContent.NPCType<InfectedPickaxe>(),
+		ModContent.NPCType<Gargoyle>(), ModContent.NPCType<HellboundLizard>(), ModContent.NPCType<EctoHand>(),
+		ModContent.NPCType<ContaminatedGhoul>(), ModContent.NPCType<MineralSlime>(), ModContent.NPCType<OreSlime>(),
+		ModContent.NPCType<VenusFlytrap>(), ModContent.NPCType<PoisonDartFrog>(), ModContent.NPCType<RedArowana>(),
+		ModContent.NPCType<RedArowana2>(), ModContent.NPCType<Mosquito>(), ModContent.NPCType<MosquitoDroopy>(),
+		ModContent.NPCType<MosquitoPainted>(), ModContent.NPCType<MosquitoSmall>(), ModContent.NPCType<TropicalSlimeGrassy>(),
+		ModContent.NPCType<TropicalSlimeShroomy>(), ModContent.NPCType<AmberSlime>(), ModContent.NPCType<InfestedAmberSlime>(),
+		ModContent.NPCType<Rafflesia>(), NPCID.RedDevil, NPCID.Demon, NPCID.GiantWalkingAntlion, NPCID.WalkingAntlion,
+		NPCID.Antlion, NPCID.DuneSplicerHead, NPCID.DesertDjinn, NPCID.DesertLamiaDark, NPCID.DesertBeast);
 
     public static readonly bool[] Arcane = NPCID.Sets.Factory.CreateBoolSet(
         NPCID.Pixie,

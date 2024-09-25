@@ -15,6 +15,7 @@ using Avalon.Prefixes;
 using Avalon.Projectiles;
 using Avalon.Projectiles.Tools;
 using Avalon.Systems;
+using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Ores;
 using Avalon.Tiles.Savanna;
 using Avalon.Walls;
@@ -697,6 +698,26 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PostUpdate()
 	{
+		#region silence candle
+		Point p = Player.Center.ToTileCoordinates();
+		for (int i = p.X - 85; i < p.X + 85; i++)
+		{
+			for (int j = p.Y - 62; j < p.Y + 62; j++)
+			{
+				Tile t = Framing.GetTileSafely(i, j);
+				if (t.TileType == ModContent.TileType<SilenceCandle>() && t.TileFrameX == 0)
+				{
+					Player.AddBuff(ModContent.BuffType<SilenceCandleBuff>(), 2);
+				}
+			}
+		}
+		if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<Items.Placeable.Furniture.SilenceCandle>())
+		{
+			Player.AddBuff(ModContent.BuffType<SilenceCandleBuff>(), 2);
+		}
+		#endregion
+
+		#region wall of steel
 		if (AvalonWorld.WallOfSteel != -1)
 		{
 			int laser = ClassExtensions.FindATypeOfNPC(ModContent.NPCType<WallofSteelLaserEye>());
@@ -724,7 +745,6 @@ public class AvalonPlayer : ModPlayer
 			}
 		}
 
-		#region wall of steel
 		if (Player.tongued)
 		{
 			bool flag21 = false;

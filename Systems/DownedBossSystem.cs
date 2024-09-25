@@ -15,7 +15,6 @@ public class DownedBossSystem : ModSystem
     public bool DownedMechasting;
     public bool DownedOblivion;
     public bool DownedPhantasm;
-
     public override void OnWorldLoad()
     {
         ResetDownedFlags();

@@ -17,7 +17,7 @@ internal class GenieSlot : ModAccessorySlot
 	public override bool DrawVanitySlot => false;
 	public override string FunctionalTexture => "Avalon/Assets/Textures/UI/GenieSlot";
 	public override bool CanAcceptItem(Item checkItem, AccessorySlotType context) =>
-		checkItem.GetGlobalItem<AvalonGlobalItemInstance>().Genie && ModContent.GetInstance<StaminaSlot2>().FunctionalItem.type != checkItem.type;
+		checkItem.GetGlobalItem<AvalonGlobalItemInstance>().Genie && ModContent.GetInstance<GenieSlot>().FunctionalItem.type != checkItem.type;
 
 	public override Vector2? CustomLocation
 	{

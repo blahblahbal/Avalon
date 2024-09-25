@@ -9477,6 +9477,21 @@ Mods: {
 				DisplayName: Trapped Zircon Chest
 				Tooltip: ""
 			}
+
+			BrokenHiltPiece: {
+				DisplayName: Broken Hilt Piece
+				Tooltip: ""
+			}
+
+			SilenceCandle: {
+				DisplayName: Silence Candle
+				Tooltip: Enemy spawns are disabled
+			}
+
+			ResourceBarSkin: {
+				DisplayName: Resource Bar Skin
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10492,7 +10507,7 @@ Mods: {
 			}
 
 			Electrified: {
-				DisplayName: Electrified
+				DisplayName: Volted
 				Description: Losing more life when moving
 			}
 
@@ -10669,6 +10684,11 @@ Mods: {
 			Toxic: {
 				DisplayName: Toxic
 				Description: Mods.Avalon.Buffs.Toxic.Description
+			}
+
+			SilenceCandleBuff: {
+				DisplayName: Silence Candle Buff
+				Description: Mods.Avalon.Buffs.SilenceCandleBuff.Description
 			}
 		}
 
@@ -10908,6 +10928,7 @@ Mods: {
 			UnderworldChest.MapEntry0: Underworld Chest
 			SavannaPylon.MapEntry: Savanna Pylon
 			PoisonSpike.MapEntry: Poison Spike
+			SilenceCandle.MapEntry: Mods.Avalon.Tiles.SilenceCandle.MapEntry
 		}
 
 		Prefixes: {
@@ -11086,6 +11107,11 @@ Mods: {
 			UndergroundContagionIce: {
 				DisplayName: Underground Contagion Ice
 				TownNPCDialogueName: the Underground Contagion Ice
+			}
+
+			SilenceCandleBiome: {
+				DisplayName: Silence Candle Biome
+				TownNPCDialogueName: the Silence Candle Biome
 			}
 		}
 

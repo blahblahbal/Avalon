@@ -137,17 +137,27 @@ public static class ClassExtensions
         return Main.player[proj.owner].ownedProjectileCounts[type];
     }
 
-    public static bool DoesTileExistInBoxAroundPlayer(this Player p, int boxRadius, int tileType)
+    public static bool DoesTileExistInBoxAroundPlayer(this Player p, int boxRadius, int tileType, bool silenceCandle = false)
     {
         Point pos = p.Center.ToTileCoordinates();
         for (int x = pos.X - boxRadius; x <= pos.X + boxRadius; x++)
         {
             for (int y = pos.Y - boxRadius; y <= pos.Y + boxRadius; y++)
             {
-                if (Main.tile[x, y].TileType == tileType)
-                {
-                    return true;
-                }
+				if (silenceCandle)
+				{
+					if (Main.tile[x, y].TileType == tileType && Main.tile[x, y].TileFrameX == 0)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					if (Main.tile[x, y].TileType == tileType)
+					{
+						return true;
+					}
+				}
             }
         }
         return false;
@@ -389,6 +399,24 @@ public static class ClassExtensions
             index++;
         }
     }
+
+	public static int ReturnEquippedDyeInSlot(this Player p, int type)
+	{
+		int slot = -1;
+		for (int i = 0; i < p.armor.Length; i++)
+		{
+			int slot2 = i;
+			if (p.armor[i].type == type)
+			{
+				if (i > 10) 
+					slot2 -= 10;
+				slot = slot2;
+				
+				break;
+			}
+		}
+		return slot;
+	}
     public static int GetTileMinPick(Tile tile)
     {
         int type = tile.TileType;

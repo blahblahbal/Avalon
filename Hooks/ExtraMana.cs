@@ -1,5 +1,6 @@
 using System;
 using Avalon.Common;
+using Avalon.Items.Accessories.Vanity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
@@ -8,7 +9,10 @@ using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.ResourceSets;
+using Terraria.Graphics.Shaders;
+using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.NPCs;
 
 namespace Avalon.Hooks;
 
@@ -22,9 +26,40 @@ public class ExtraMana : ModHook {
         On_FancyClassicPlayerResourcesDisplaySet.StarFillingDrawer += OnStarFillingDrawer;
         On_HorizontalBarsPlayerResourcesDisplaySet.ManaFillingDrawer += OnManaFillingDrawer;
         IL_ClassicPlayerResourcesDisplaySet.DrawMana += ILClassicDrawMana;
+
+		On_HorizontalBarsPlayerResourcesDisplaySet.Draw += On_HorizontalBarsPlayerResourcesDisplaySet_Draw;
+		On_FancyClassicPlayerResourcesDisplaySet.Draw += On_FancyClassicPlayerResourcesDisplaySet_Draw;
+		On_ClassicPlayerResourcesDisplaySet.Draw += On_ClassicPlayerResourcesDisplaySet_Draw;
     }
 
-    private void OnPlayerStatsSnapshotCtor(On_PlayerStatsSnapshot.orig_ctor orig, ref PlayerStatsSnapshot self,
+	private void On_ClassicPlayerResourcesDisplaySet_Draw(On_ClassicPlayerResourcesDisplaySet.orig_Draw orig, ClassicPlayerResourcesDisplaySet self)
+	{
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+		orig.Invoke(self);
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+	}
+
+	private void On_FancyClassicPlayerResourcesDisplaySet_Draw(On_FancyClassicPlayerResourcesDisplaySet.orig_Draw orig, FancyClassicPlayerResourcesDisplaySet self)
+	{
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+		orig.Invoke(self);
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+	}
+
+	private void On_HorizontalBarsPlayerResourcesDisplaySet_Draw(On_HorizontalBarsPlayerResourcesDisplaySet.orig_Draw orig, HorizontalBarsPlayerResourcesDisplaySet self)
+	{
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+		orig.Invoke(self);
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+	}
+
+	private void OnPlayerStatsSnapshotCtor(On_PlayerStatsSnapshot.orig_ctor orig, ref PlayerStatsSnapshot self,
                                            Player player) {
         orig(ref self, player);
         self.AmountOfManaStars = Math.Min(self.AmountOfManaStars, 10);
@@ -58,7 +93,17 @@ public class ExtraMana : ModHook {
 
             int manaTier = GetManaTier(lastElementIndex, elementIndex);
 
-            if (manaTier > 1) {
+			int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+			if (slot != -1)
+			{
+				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+				{
+					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+					return ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableMana");
+				}
+			}
+
+			if (manaTier > 1) {
                 return ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
                     $"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Mana{manaTier}", AssetRequestMode.ImmediateLoad);
             }
@@ -76,11 +121,21 @@ public class ExtraMana : ModHook {
 
         int manaTier = GetManaTier(lastElementIndex, elementIndex);
 
-        if (manaTier > 1) {
+		if (manaTier > 1) {
             sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
                 $"{ExxoAvalonOrigins.TextureAssetsPath}/UI/FancyMana{manaTier}", AssetRequestMode.ImmediateLoad);
         }
-    }
+
+		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+		if (slot != -1)
+		{
+			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+			{
+				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+				sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableFancyMana");
+			}
+		}
+	}
 
     private static void OnManaFillingDrawer(On_HorizontalBarsPlayerResourcesDisplaySet.orig_ManaFillingDrawer orig,
                                             HorizontalBarsPlayerResourcesDisplaySet self, int elementIndex,
@@ -90,10 +145,40 @@ public class ExtraMana : ModHook {
             out sourceRect);
 
         int manaTier = GetManaTier(lastElementIndex, elementIndex);
-
-        if (manaTier > 1) {
+		if (manaTier > 1) {
             sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
                 $"{ExxoAvalonOrigins.TextureAssetsPath}/UI/BarMana{manaTier}", AssetRequestMode.ImmediateLoad);
         }
-    }
+		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+		if (slot != -1)
+		{
+			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+			{
+				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+				sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableBarMana");
+			}
+		}
+	}
 }
+//public class ManaResourceThing : ModResourceOverlay
+//{
+//	public override void PostDrawResourceDisplay(PlayerStatsSnapshot snapshot, IPlayerResourcesDisplaySet displaySet, bool drawingLife, Color textColor, bool drawText)
+//	{
+//		if (drawingLife)
+//		{
+//			int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+//			if (slot != -1)
+//			{
+//				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+//				{
+//					Main.spriteBatch.End();
+//					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+//					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+//					displaySet.Draw();
+//					Main.spriteBatch.End();
+//					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+//				}
+//			}
+//		}
+//	}
+//}

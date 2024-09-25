@@ -52,7 +52,7 @@ public class WallofSteel : ModNPC
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frostburn] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Venom] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frozen] = true;
-		var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+		var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{ // Influences how the NPC looks in the Bestiary
 			CustomTexturePath = "Avalon/Assets/Bestiary/WallofSteel",
 			Position = new Vector2(7f, 0f)
@@ -76,7 +76,6 @@ public class WallofSteel : ModNPC
 		NPC.scale = 1f;
 		NPC.HitSound = SoundID.NPCHit4;
 		NPC.DeathSound = SoundID.NPCDeath14;
-		//NPC.BossBar = ModContent.GetInstance<BossBars.WallofSteelBossBar>();
 		Music = ExxoAvalonOrigins.MusicMod == null ? MusicID.Boss2 : MusicID.Boss2; // MusicLoader.GetMusicSlot(Avalon.MusicMod, "Sounds/Music/WallofSteel");
 	}
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
