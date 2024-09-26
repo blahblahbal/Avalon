@@ -54,12 +54,6 @@ public class IrateBones : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.IrateBones")),
         });
 
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.7f);
-        NPC.damage = (int)(NPC.damage * 0.5f);
-    }
-
 	public override void PostAI()
 	{
 		if (NPC.velocity.Y == 0 && (NPC.velocity.X > 1f || NPC.velocity.X < 1f))
