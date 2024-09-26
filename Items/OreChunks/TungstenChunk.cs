@@ -25,6 +25,7 @@ class TungstenChunk : ModItem
         Recipe.Create(ItemID.TungstenBar)
             .AddIngredient(Type, 4)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.TungstenBar)
+			.Register();
     }
 }

@@ -26,6 +26,7 @@ class HallowedChunk : ModItem
         Recipe.Create(ItemID.HallowedBar)
             .AddIngredient(Type, 5)
             .AddTile(TileID.AdamantiteForge)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.HallowedBar)
+			.Register();
     }
 }

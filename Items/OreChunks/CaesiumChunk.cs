@@ -26,6 +26,7 @@ class CaesiumChunk : ModItem
         Recipe.Create(ModContent.ItemType<Material.Bars.CaesiumBar>())
             .AddIngredient(Type, 8)
             .AddTile(ModContent.TileType<Tiles.CaesiumForge>())
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<Material.Bars.CaesiumBar>())
+			.Register();
     }
 }

@@ -81,7 +81,8 @@ public class Boompipe : ModItem
             .AddIngredient(ItemID.HellstoneBar, 15)
             .AddIngredient(ModContent.ItemType<FireShard>(), 1)
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.ImpStaff)
+			.Register();
     }
     public class BoompipeProjVisuals : GlobalProjectile
     {

@@ -43,6 +43,7 @@ class FlaskOfPathogens : ModItem
             .AddIngredient(ItemID.BottledWater)
             .AddIngredient(ModContent.ItemType<Pathogen>(), 2)
             .AddTile(TileID.ImbuingStation)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.FlaskofCursedFlames)
+			.Register();
     }
 }

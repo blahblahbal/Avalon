@@ -26,6 +26,7 @@ class PalladiumChunk : ModItem
         Recipe.Create(ItemID.PalladiumBar)
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.PalladiumBar)
+			.Register();
     }
 }

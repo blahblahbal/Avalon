@@ -22,6 +22,7 @@ public class TourmalineMinecart : ModItem
             .AddIngredient(ItemID.Minecart)
             .AddIngredient(ModContent.ItemType<Other.LargeTourmaline>())
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.TopazMinecart)
+			.Register();
     }
 }

@@ -26,6 +26,7 @@ class MythrilChunk : ModItem
         Recipe.Create(ItemID.MythrilBar)
             .AddIngredient(Type, 4)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.MythrilBar)
+			.Register();
     }
 }

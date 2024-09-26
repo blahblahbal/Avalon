@@ -31,6 +31,7 @@ class ZirconGemcorn : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Acorn)
             .AddIngredient(ModContent.ItemType<Material.Ores.Zircon>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.GemTreeDiamondSeed)
+			.Register();
     }
 }

@@ -52,7 +52,8 @@ class MechanicalWasp : ModItem
             .AddIngredient(ItemID.SoulofFlight, 9)
             .AddIngredient(ItemID.SoulofNight, 6)
             .AddTile(TileID.MythrilAnvil)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.MechanicalSkull)
+			.Register();
         //CreateRecipe(1).AddIngredient(ModContent.ItemType<Material.MosquitoProboscis>(), 9).AddIngredient(ItemID.HallowedBar, 10).AddIngredient(ModContent.ItemType<Material.DragonScale>(), 2).AddIngredient(ItemID.SoulofFlight, 15).AddTile(ModContent.TileType<Tiles.HallowedAltar>()).Register();
     }
 }

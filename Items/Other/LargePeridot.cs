@@ -24,7 +24,8 @@ class LargePeridot : ModItem
         CreateRecipe(1)
             .AddIngredient(ModContent.ItemType<Material.Ores.Peridot>(), 15)
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.LargeEmerald)
+			.Register();
     }
     public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
     {

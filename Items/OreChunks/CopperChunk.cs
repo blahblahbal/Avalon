@@ -25,6 +25,7 @@ class CopperChunk : ModItem
         Recipe.Create(ItemID.CopperBar)
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.CopperBar)
+			.Register();
     }
 }

@@ -37,24 +37,28 @@ public class MegaBundleofHorseshoeBalloons : ModItem
             .AddIngredient(ModContent.ItemType<MegaBundleofBalloons>())
             .AddIngredient(ItemID.LuckyHorseshoe)
             .AddTile(TileID.TinkerersWorkbench)
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<MegaBundleofBalloons>())
+			.Register();
 
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<BundleofHorseshoeBalloons>())
             .AddIngredient(ItemID.BundleofBalloons)
             .AddTile(TileID.TinkerersWorkbench)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<MegaBundleofBalloons>())
             .Register();
 
         CreateRecipe()
             .AddIngredient(ItemID.HorseshoeBundle)
             .AddIngredient(ModContent.ItemType<BundleofBalloons>())
             .AddTile(TileID.TinkerersWorkbench)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<MegaBundleofBalloons>())
             .Register();
 
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<BundleofHorseshoeBalloons>())
             .AddIngredient(ItemID.HorseshoeBundle)
             .AddTile(TileID.TinkerersWorkbench)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<MegaBundleofBalloons>())
             .Register();
     }
 }

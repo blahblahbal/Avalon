@@ -40,6 +40,7 @@ class TroxiniumChunk : ModItem
         Recipe.Create(ModContent.ItemType<Material.Bars.TroxiniumBar>())
             .AddIngredient(Type, 4)
             .AddTile(TileID.AdamantiteForge)
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<Material.Bars.TroxiniumBar>())
+			.Register();
     }
 }

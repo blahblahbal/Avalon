@@ -65,6 +65,8 @@ class InfestedCarcass : ModItem
         CreateRecipe()
 			.AddIngredient(ModContent.ItemType<VirulentPowder>(), 30)
 			.AddIngredient(ModContent.ItemType<YuckyBit>(), 15)
-			.AddTile(TileID.DemonAltar).Register();
+			.AddTile(TileID.DemonAltar)
+			.SortAfterFirstRecipesOf(ItemID.BloodySpine)
+			.Register();
     }
 }

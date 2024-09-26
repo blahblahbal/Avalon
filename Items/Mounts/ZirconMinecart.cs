@@ -22,6 +22,7 @@ public class ZirconMinecart : ModItem
             .AddIngredient(ItemID.Minecart)
             .AddIngredient(ModContent.ItemType<Other.LargeZircon>())
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.DiamondMinecart)
+			.Register();
     }
 }

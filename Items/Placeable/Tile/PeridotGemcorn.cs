@@ -31,6 +31,7 @@ class PeridotGemcorn : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Acorn)
             .AddIngredient(ModContent.ItemType<Material.Ores.Peridot>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.GemTreeEmeraldSeed)
+			.Register();
     }
 }

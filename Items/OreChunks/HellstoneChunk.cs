@@ -27,6 +27,7 @@ class HellstoneChunk : ModItem
             .AddIngredient(Type, 3)
             .AddIngredient(ItemID.Obsidian)
             .AddTile(TileID.Hellforge)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.HellstoneBar)
+			.Register();
     }
 }

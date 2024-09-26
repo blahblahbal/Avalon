@@ -25,6 +25,7 @@ class GoldChunk : ModItem
         Recipe.Create(ItemID.GoldBar)
             .AddIngredient(Type, 4)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.GoldBar)
+			.Register();
     }
 }

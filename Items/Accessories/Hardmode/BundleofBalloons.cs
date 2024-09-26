@@ -33,12 +33,14 @@ public class BundleofBalloons : ModItem
             .AddIngredient(ItemID.SharkronBalloon)
             .AddIngredient(ItemID.FartInABalloon)
             .AddTile(TileID.TinkerersWorkbench)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.BundleofBalloons)
+			.Register();
 
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<GaseousTsunamiRocketinaJar>())
             .AddIngredient(ItemID.ShinyRedBalloon, 3)
             .AddTile(TileID.TinkerersWorkbench)
+			.SortAfterFirstRecipesOf(ItemID.BundleofBalloons)
             .Register();
     }
 }

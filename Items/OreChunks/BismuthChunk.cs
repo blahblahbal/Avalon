@@ -25,6 +25,7 @@ class BismuthChunk : ModItem
         Recipe.Create(ModContent.ItemType<Material.Bars.BismuthBar>())
             .AddIngredient(Type, 4)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<Material.Bars.BismuthBar>())
+			.Register();
     }
 }

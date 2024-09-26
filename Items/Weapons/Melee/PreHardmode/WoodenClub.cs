@@ -70,8 +70,10 @@ class WoodenClub : ModItem
     }
     public override void AddRecipes()
     {
-        Recipe.Create(Type).AddTile(TileID.WorkBenches)
+        Recipe.Create(Type)
+			.AddTile(TileID.WorkBenches)
             .AddIngredient(ItemID.Wood, 20)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.WoodYoyo)
+			.Register();
     }
 }

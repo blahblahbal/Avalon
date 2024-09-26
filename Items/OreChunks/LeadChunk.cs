@@ -25,6 +25,7 @@ class LeadChunk : ModItem
         Recipe.Create(ItemID.LeadBar)
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.LeadBar)
+			.Register();
     }
 }

@@ -33,6 +33,7 @@ class JungleAxe : ModItem
             .AddIngredient(ItemID.Vine)
             .AddIngredient(ModContent.ItemType<Material.Shards.ToxinShard>())
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortBeforeFirstRecipesOf(ItemID.BladeofGrass)
+			.Register();
     }
 }

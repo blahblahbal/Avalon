@@ -30,6 +30,7 @@ class PeridotHook : ModItem
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Ores.Peridot>(), 15)
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.EmeraldHook)
+			.Register();
     }
 }

@@ -29,6 +29,7 @@ class TourmalineHook : ModItem
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>(), 15)
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.TopazHook)
+			.Register();
     }
 }

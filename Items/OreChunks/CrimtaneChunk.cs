@@ -26,6 +26,7 @@ class CrimtaneChunk : ModItem
         Recipe.Create(ItemID.CrimtaneBar)
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.CrimtaneBar)
+			.Register();
     }
 }

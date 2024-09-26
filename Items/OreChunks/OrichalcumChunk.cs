@@ -26,6 +26,7 @@ class OrichalcumChunk : ModItem
         Recipe.Create(ItemID.OrichalcumBar)
             .AddIngredient(Type, 4)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.OrichalcumBar)
+			.Register();
     }
 }

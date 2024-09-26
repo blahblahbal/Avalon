@@ -25,6 +25,7 @@ class TinChunk : ModItem
         Recipe.Create(ItemID.TinBar)
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.TinBar)
+			.Register();
     }
 }

@@ -19,7 +19,8 @@ public class PeridotBunnyCage : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Terrarium)
             .AddIngredient(ModContent.ItemType<PeridotBunny>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.EmeraldBunnyCage)
+			.Register();
     }
 }
 public class TourmalineBunnyCage : ModItem
@@ -35,7 +36,8 @@ public class TourmalineBunnyCage : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Terrarium)
             .AddIngredient(ModContent.ItemType<TourmalineBunny>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.TopazBunnyCage)
+			.Register();
     }
 }
 public class ZirconBunnyCage : ModItem
@@ -51,6 +53,7 @@ public class ZirconBunnyCage : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Terrarium)
             .AddIngredient(ModContent.ItemType<ZirconBunny>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.DiamondBunnyCage)
+			.Register();
     }
 }

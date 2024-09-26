@@ -28,6 +28,7 @@ class JunglePickaxe : ModItem
             .AddIngredient(ItemID.JungleSpores, 12)
             .AddIngredient(ModContent.ItemType<Material.Shards.ToxinShard>())
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortBeforeFirstRecipesOf(ItemID.BladeofGrass)
+			.Register();
     }
 }

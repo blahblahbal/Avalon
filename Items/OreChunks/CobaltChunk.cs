@@ -26,6 +26,7 @@ class CobaltChunk : ModItem
         Recipe.Create(ItemID.CobaltBar)
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.CobaltBar)
+			.Register();
     }
 }

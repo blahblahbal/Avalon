@@ -18,7 +18,12 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode
         }
         public override void AddRecipes()
         {
-            Recipe.Create(Type).AddIngredient(ModContent.ItemType<Zircon>(), 10).AddIngredient(ItemID.MeteoriteBar, 15).AddTile(TileID.Anvils).Register();
+            Recipe.Create(Type)
+				.AddIngredient(ModContent.ItemType<Zircon>(), 10)
+				.AddIngredient(ItemID.MeteoriteBar, 15)
+				.AddTile(TileID.Anvils)
+				.SortAfterFirstRecipesOf(ItemID.YellowPhaseblade)
+				.Register();
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
@@ -37,7 +42,12 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode
         }
         public override void AddRecipes()
         {
-            Recipe.Create(Type).AddIngredient(ModContent.ItemType<Tourmaline>(), 10).AddIngredient(ItemID.MeteoriteBar, 15).AddTile(TileID.Anvils).Register();
+            Recipe.Create(Type)
+				.AddIngredient(ModContent.ItemType<Tourmaline>(), 10)
+				.AddIngredient(ItemID.MeteoriteBar, 15)
+				.AddTile(TileID.Anvils)
+				.SortAfterFirstRecipesOf(ItemID.YellowPhaseblade)
+				.Register();
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
@@ -56,7 +66,12 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode
         }
         public override void AddRecipes()
         {
-            Recipe.Create(Type).AddIngredient(ModContent.ItemType<Peridot>(), 10).AddIngredient(ItemID.MeteoriteBar, 15).AddTile(TileID.Anvils).Register();
+            Recipe.Create(Type)
+				.AddIngredient(ModContent.ItemType<Peridot>(), 10)
+				.AddIngredient(ItemID.MeteoriteBar, 15)
+				.AddTile(TileID.Anvils)
+				.SortAfterFirstRecipesOf(ItemID.YellowPhaseblade)
+				.Register();
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {

@@ -26,6 +26,7 @@ class DemoniteChunk : ModItem
         Recipe.Create(ItemID.DemoniteBar)
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.DemoniteBar)
+			.Register();
     }
 }

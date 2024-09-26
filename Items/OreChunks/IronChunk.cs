@@ -25,6 +25,7 @@ class IronChunk : ModItem
         Recipe.Create(ItemID.IronBar)
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.IronBar)
+			.Register();
     }
 }

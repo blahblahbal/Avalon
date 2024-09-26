@@ -25,6 +25,7 @@ class PlatinumChunk : ModItem
         Recipe.Create(ItemID.PlatinumBar)
             .AddIngredient(Type, 4)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.PlatinumBar)
+			.Register();
     }
 }

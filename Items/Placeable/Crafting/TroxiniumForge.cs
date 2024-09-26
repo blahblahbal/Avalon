@@ -29,12 +29,14 @@ class TroxiniumForge : ModItem
             .AddIngredient(ModContent.ItemType<Material.Ores.TroxiniumOre>(), 30)
             .AddIngredient(ItemID.Hellforge)
             .AddTile(TileID.MythrilAnvil)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.AdamantiteForge)
+			.Register();
 
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<TroxiniumChunk>(), 30)
 			.AddIngredient(ItemID.Hellforge)
 			.AddTile(TileID.MythrilAnvil)
+			.SortAfterFirstRecipesOf(Type)
 			.Register();
     }
 }

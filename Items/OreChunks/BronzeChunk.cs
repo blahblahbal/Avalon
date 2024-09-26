@@ -25,6 +25,7 @@ class BronzeChunk : ModItem
         Recipe.Create(ModContent.ItemType<Material.Bars.BronzeBar>())
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<Material.Bars.BronzeBar>())
+			.Register();
     }
 }

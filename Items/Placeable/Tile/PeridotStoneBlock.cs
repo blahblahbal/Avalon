@@ -35,6 +35,7 @@ class PeridotStoneBlock : ModItem
             .AddIngredient(ItemID.StoneBlock)
             .AddTile(TileID.HeavyWorkBench)
             .AddCondition(Condition.InGraveyard)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.EmeraldStoneBlock)
+			.Register();
     }
 }

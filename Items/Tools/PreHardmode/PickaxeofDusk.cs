@@ -35,7 +35,8 @@ public class PickaxeofDusk : ModItem
             .AddIngredient(ModContent.ItemType<JunglePickaxe>())
             .AddIngredient(ItemID.MoltenPickaxe)
             .AddTile(TileID.DemonAltar)
-            .Register();
+			.SortBeforeFirstRecipesOf(ItemID.NightsEdge)
+			.Register();
 
         CreateRecipe()
             .AddIngredient(ItemID.DeathbringerPickaxe)
@@ -43,6 +44,7 @@ public class PickaxeofDusk : ModItem
             .AddIngredient(ModContent.ItemType<JunglePickaxe>())
             .AddIngredient(ItemID.MoltenPickaxe)
             .AddTile(TileID.DemonAltar)
+			.SortBeforeFirstRecipesOf(ItemID.NightsEdge)
             .Register();
 
         CreateRecipe()
@@ -51,6 +53,7 @@ public class PickaxeofDusk : ModItem
             .AddIngredient(ModContent.ItemType<JunglePickaxe>())
             .AddIngredient(ItemID.MoltenPickaxe)
             .AddTile(TileID.DemonAltar)
+			.SortBeforeFirstRecipesOf(ItemID.NightsEdge)
             .Register();
     }
     public override void HoldItem(Player player)

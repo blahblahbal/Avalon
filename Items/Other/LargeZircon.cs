@@ -24,7 +24,8 @@ class LargeZircon : ModItem
         CreateRecipe(1)
             .AddIngredient(ModContent.ItemType<Material.Ores.Zircon>(), 15)
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.LargeDiamond)
+			.Register();
     }
     public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
     {

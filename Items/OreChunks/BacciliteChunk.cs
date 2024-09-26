@@ -26,6 +26,7 @@ class BacciliteChunk : ModItem
         Recipe.Create(ModContent.ItemType<Material.Bars.BacciliteBar>())
             .AddIngredient(Type, 3)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<Material.Bars.BacciliteBar>())
+			.Register();
     }
 }

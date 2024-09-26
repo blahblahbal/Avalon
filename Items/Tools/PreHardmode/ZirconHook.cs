@@ -30,6 +30,7 @@ class ZirconHook : ModItem
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Ores.Zircon>(), 15)
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.DiamondHook)
+			.Register();
     }
 }

@@ -32,6 +32,7 @@ class NaquadahAnvil : ModItem
         Terraria.Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Bars.NaquadahBar>(), 10)
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.MythrilAnvil)
+			.Register();
     }
 }

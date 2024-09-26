@@ -19,7 +19,8 @@ public class PeridotSquirrelCage : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Terrarium)
             .AddIngredient(ModContent.ItemType<PeridotSquirrel>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.EmeraldSquirrelCage)
+			.Register();
     }
 }
 public class TourmalineSquirrelCage : ModItem
@@ -35,7 +36,8 @@ public class TourmalineSquirrelCage : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Terrarium)
             .AddIngredient(ModContent.ItemType<TourmalineSquirrel>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.TopazSquirrelCage)
+			.Register();
     }
 }
 public class ZirconSquirrelCage : ModItem
@@ -51,6 +53,7 @@ public class ZirconSquirrelCage : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Terrarium)
             .AddIngredient(ModContent.ItemType<ZirconSquirrel>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.DiamondSquirrelCage)
+			.Register();
     }
 }

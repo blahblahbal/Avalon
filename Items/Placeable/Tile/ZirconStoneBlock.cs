@@ -35,6 +35,7 @@ class ZirconStoneBlock : ModItem
             .AddIngredient(ItemID.StoneBlock)
             .AddTile(TileID.HeavyWorkBench)
             .AddCondition(Condition.InGraveyard)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.DiamondStoneBlock)
+			.Register();
     }
 }

@@ -25,7 +25,8 @@ class LargeTourmaline : ModItem
         CreateRecipe(1)
             .AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>(), 15)
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.LargeTopaz)
+			.Register();
     }
     public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
     {

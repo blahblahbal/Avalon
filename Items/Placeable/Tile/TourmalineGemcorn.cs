@@ -31,6 +31,7 @@ class TourmalineGemcorn : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.Acorn)
             .AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.GemTreeTopazSeed)
+			.Register();
     }
 }

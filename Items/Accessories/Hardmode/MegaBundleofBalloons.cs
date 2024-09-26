@@ -35,6 +35,7 @@ public class MegaBundleofBalloons : ModItem
             .AddIngredient(ModContent.ItemType<BundleofBalloons>())
             .AddIngredient(ItemID.BundleofBalloons)
             .AddTile(TileID.TinkerersWorkbench)
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BundleofHorseshoeBalloons>())
+			.Register();
     }
 }

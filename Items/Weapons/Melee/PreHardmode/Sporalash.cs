@@ -37,6 +37,8 @@ class Sporalash : ModItem
             .AddIngredient(ItemID.Stinger, 10)
             .AddIngredient(ItemID.Vine, 2)
             .AddIngredient(ModContent.ItemType<Material.Shards.ToxinShard>(), 2)
-            .AddTile(TileID.Anvils).Register();
+            .AddTile(TileID.Anvils)
+			.SortAfterFirstRecipesOf(ItemID.ThornWhip)
+			.Register();
     }
 }

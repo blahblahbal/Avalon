@@ -20,6 +20,7 @@ class NickelAnvil : ModItem
         Terraria.Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 5)
             .AddTile(TileID.WorkBenches)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.IronAnvil)
+			.Register();
     }
 }

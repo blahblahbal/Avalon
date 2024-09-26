@@ -26,6 +26,7 @@ class AdamantiteChunk : ModItem
         Recipe.Create(ItemID.AdamantiteBar)
             .AddIngredient(Type, 4)
             .AddTile(TileID.AdamantiteForge)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.AdamantiteBar)
+			.Register();
     }
 }

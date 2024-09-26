@@ -22,6 +22,7 @@ public class PeridotMinecart : ModItem
             .AddIngredient(ItemID.Minecart)
             .AddIngredient(ModContent.ItemType<Other.LargePeridot>())
             .AddTile(TileID.Anvils)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.EmeraldMinecart)
+			.Register();
     }
 }

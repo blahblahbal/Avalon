@@ -35,6 +35,7 @@ class TourmalineStoneBlock : ModItem
             .AddIngredient(ItemID.StoneBlock)
             .AddTile(TileID.HeavyWorkBench)
             .AddCondition(Condition.InGraveyard)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.TopazStoneBlock)
+			.Register();
     }
 }

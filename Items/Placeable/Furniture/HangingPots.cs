@@ -28,7 +28,8 @@ class HangingBarfbush : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.PotSuspended)
             .AddIngredient(ModContent.ItemType<Barfbush>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.PotSuspendedDeathweedCorrupt)
+			.Register();
     }
 }
 
@@ -55,7 +56,8 @@ class HangingSweetstem : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.PotSuspended)
             .AddIngredient(ModContent.ItemType<Sweetstem>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.PotSuspendedMoonglow)
+			.Register();
     }
 }
 class HangingBloodberry : ModItem
@@ -81,7 +83,8 @@ class HangingBloodberry : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.PotSuspended)
             .AddIngredient(ModContent.ItemType<Bloodberry>())
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<HangingBarfbush>())
+			.Register();
     }
 }
 class HangingHolybird : ModItem
@@ -107,7 +110,8 @@ class HangingHolybird : ModItem
         CreateRecipe()
             .AddIngredient(ItemID.PotSuspended)
             .AddIngredient(ModContent.ItemType<Holybird>())
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.PotSuspendedFireblossom)
+			.Register();
     }
 }
 

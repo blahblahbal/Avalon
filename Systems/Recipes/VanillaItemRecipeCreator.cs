@@ -25,16 +25,19 @@ public class VanillaItemRecipeCreator : ModSystem
 		Recipe.Create(ItemID.PoisonedKnife, 50)
 			.AddIngredient(ItemID.ThrowingKnife, 50)
 			.AddIngredient(ModContent.ItemType<VirulentPowder>())
+			.SortAfterFirstRecipesOf(ItemID.PoisonedKnife)
 			.Register();
         
 		Recipe.Create(ItemID.DesertTorch, 3)
 			.AddIngredient(ItemID.Torch, 3)
 			.AddIngredient(ModContent.ItemType<HardenedSnotsandBlock>())
+			.SortAfterFirstRecipesOf(ItemID.DesertTorch)
 			.Register();
 
 		Recipe.Create(ItemID.IceTorch, 3)
 			.AddIngredient(ItemID.Torch, 3)
 			.AddIngredient(ModContent.ItemType<YellowIceBlock>())
+			.SortAfterFirstRecipesOf(ItemID.IceTorch)
 			.Register();
 		#endregion
 
@@ -43,6 +46,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Gel, 20)
 			.AddIngredient(ModContent.ItemType<Items.Vanity.BismuthCrown>())
 			.AddTile(TileID.DemonAltar)
+			.SortAfterFirstRecipesOf(ItemID.SlimeCrown)
 			.Register();
 
 		Recipe.Create(ItemID.NightsEdge)
@@ -51,6 +55,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.BladeofGrass)
 			.AddIngredient(ItemID.FieryGreatsword)
 			.AddTile(TileID.DemonAltar)
+			.SortAfterFirstRecipesOf(ItemID.NightsEdge)
 			.Register();
 
 		Recipe.Create(ItemID.VoidLens)
@@ -58,6 +63,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.JungleSpores, 15)
 			.AddIngredient(ModContent.ItemType<Booger>(), 30)
 			.AddTile(TileID.DemonAltar)
+			.SortAfterFirstRecipesOf(ItemID.VoidLens)
 			.Register();
 
 		Recipe.Create(ItemID.VoidVault)
@@ -65,6 +71,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.JungleSpores, 8)
 			.AddIngredient(ModContent.ItemType<Booger>(), 15)
 			.AddTile(TileID.DemonAltar)
+			.SortAfterFirstRecipesOf(ItemID.VoidVault)
 			.Register();
 
 		Recipe.Create(ItemID.DeerThing)
@@ -72,6 +79,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<BacciliteOre>(), 5)
 			.AddIngredient(ItemID.Lens)
 			.AddTile(TileID.DemonAltar)
+			.SortAfterFirstRecipesOf(ItemID.DeerThing)
 			.Register();
 		#endregion
 
@@ -86,6 +94,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Silk, 20)
 			.AddIngredient(ModContent.ItemType<BismuthBar>(), 30)
 			.AddTile(TileID.Anvils)
+			.SortAfterFirstRecipesOf(ItemID.Throne)
 			.Register();
 
 		Recipe.Create(ItemID.Starfury)
@@ -115,6 +124,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<YuckyBit>(), 10)
 			.AddTile(TileID.Anvils)
 			.AddCondition(condition: Condition.InGraveyard)
+			.SortAfterFirstRecipesOf(ItemID.CoffinMinecart)
 			.Register();
 		
 		Recipe.Create(ItemID.EnchantedSword)
@@ -130,6 +140,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddRecipeGroup("IronBar", 5)
 			.AddIngredient(ItemID.SoulofNight, 6)
 			.AddTile(TileID.MythrilAnvil)
+			.SortAfterFirstRecipesOf(ItemID.MechanicalWorm)
 			.Register();
 
 		Recipe.Create(ItemID.RodofDiscord)
@@ -155,12 +166,14 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<AdamantiteChunk>(), 30)
 			.AddIngredient(ItemID.Hellforge)
 			.AddTile(TileID.MythrilAnvil)
+			.SortAfterFirstRecipesOf(ItemID.AdamantiteForge)
 			.Register();
 
 		Recipe.Create(ItemID.TitaniumForge)
 			.AddIngredient(ModContent.ItemType<TitaniumChunk>(), 30)
 			.AddIngredient(ItemID.Hellforge)
 			.AddTile(TileID.MythrilAnvil)
+			.SortAfterFirstRecipesOf(ItemID.TitaniumForge)
 			.Register();
 		//Recipe.Create(ItemID.LihzahrdPowerCell).AddIngredient(ModContent.ItemType<SolariumStar>(), 5).AddIngredient(ItemID.LihzahrdBrick, 10).AddTile(TileID.MythrilAnvil).Register();
 		#endregion
@@ -185,6 +198,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Obsidian, 20)
 			.AddIngredient(ModContent.ItemType<Booger>(), 5)
 			.AddTile(TileID.Hellforge)
+			.SortAfterFirstRecipesOf(ItemID.ObsidianHelm)
 			.Register();
 
 		Recipe.Create(ItemID.ObsidianShirt)
@@ -192,6 +206,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Obsidian, 20)
 			.AddIngredient(ModContent.ItemType<Booger>(), 10)
 			.AddTile(TileID.Hellforge)
+			.SortAfterFirstRecipesOf(ItemID.ObsidianHelm)
 			.Register();
 
 		Recipe.Create(ItemID.ObsidianPants)
@@ -199,6 +214,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Obsidian, 20)
 			.AddIngredient(ModContent.ItemType<Booger>(), 5)
 			.AddTile(TileID.Hellforge)
+			.SortAfterFirstRecipesOf(ItemID.ObsidianPants)
 			.Register();
 		#endregion
 
@@ -214,12 +230,14 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.FlinxFur, 6)
 			.AddIngredient(ModContent.ItemType<BismuthBar>(), 10)
 			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ItemID.FlinxStaff)
 			.Register();
 
 		Recipe.Create(ItemID.PeaceCandle)
 			.AddIngredient(ModContent.ItemType<BismuthBar>(), 2)
 			.AddIngredient(ItemID.PinkTorch)
 			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ItemID.PeaceCandle)
 			.Register();
 
 		//Recipe.Create(ItemID.Picksaw)
@@ -232,11 +250,13 @@ public class VanillaItemRecipeCreator : ModSystem
 		Recipe.Create(ItemID.Leather)
 			.AddIngredient(ModContent.ItemType<RottenFlesh>(), 4)
 			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ItemID.Leather)
 			.Register();
 
 		Recipe.Create(ItemID.Leather)
 			.AddIngredient(ModContent.ItemType<YuckyBit>(), 5)
 			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ItemID.Leather)
 			.Register();
 
 		Recipe.Create(ItemID.AcornAxe)
@@ -245,6 +265,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.JungleSpores, 12)
 			.AddIngredient(ItemID.Vine, 3)
 			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ItemID.AcornAxe)
 			.Register();
 		#endregion
 
@@ -457,6 +478,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Daybloom)
 			.AddIngredient(ModContent.ItemType<NickelOre>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.IronskinPotion)
 			.Register();
 
 		Recipe.Create(ItemID.SpelunkerPotion)
@@ -465,6 +487,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Moonglow)
 			.AddIngredient(ModContent.ItemType<BismuthOre>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.SpelunkerPotion)
 			.Register();
 
 		Recipe.Create(ItemID.MagicPowerPotion)
@@ -473,6 +496,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<Bloodberry>())
 			.AddIngredient(ItemID.FallenStar)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.MagicPowerPotion)
 			.Register();
 
 		Recipe.Create(ItemID.MagicPowerPotion)
@@ -481,6 +505,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<Barfbush>())
 			.AddIngredient(ItemID.FallenStar)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.MagicPowerPotion)
 			.Register();
 
 		Recipe.Create(ItemID.BattlePotion)
@@ -488,6 +513,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<Bloodberry>())
 			.AddIngredient(ItemID.Vertebrae)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.BattlePotion)
 			.Register();
 
 		Recipe.Create(ItemID.BattlePotion)
@@ -495,6 +521,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<Barfbush>())
 			.AddIngredient(ModContent.ItemType<YuckyBit>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.BattlePotion)
 			.Register();
 
 		Recipe.Create(ItemID.ThornsPotion)
@@ -502,6 +529,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<Bloodberry>())
 			.AddIngredient(ItemID.Cactus)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.ThornsPotion)
 			.Register();
 
 		Recipe.Create(ItemID.ThornsPotion)
@@ -509,6 +537,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<Barfbush>())
 			.AddIngredient(ItemID.Cactus)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.ThornsPotion)
 			.Register();
 
 		Recipe.Create(ItemID.GravitationPotion)
@@ -518,6 +547,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Blinkroot)
 			.AddIngredient(ItemID.Feather)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.GravitationPotion)
 			.Register();
 
 		Recipe.Create(ItemID.GravitationPotion)
@@ -527,6 +557,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Blinkroot)
 			.AddIngredient(ItemID.Feather)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.GravitationPotion)
 			.Register();
 
 		Recipe.Create(ItemID.CratePotion)
@@ -536,6 +567,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Blinkroot)
 			.AddIngredient(ModContent.ItemType<Bloodberry>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.CratePotion)
 			.Register();
 
 		Recipe.Create(ItemID.CratePotion)
@@ -545,6 +577,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Blinkroot)
 			.AddIngredient(ModContent.ItemType<Barfbush>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.CratePotion)
 			.Register();
 
 		Recipe.Create(ItemID.TitanPotion)
@@ -553,6 +586,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<Bloodberry>())
 			.AddIngredient(ItemID.Shiverthorn)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.TitanPotion)
 			.Register();
 
 		Recipe.Create(ItemID.TitanPotion)
@@ -561,6 +595,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<Barfbush>())
 			.AddIngredient(ItemID.Shiverthorn)
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.TitanPotion)
 			.Register();
 
 		Recipe.Create(ItemID.RecallPotion)
@@ -568,6 +603,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.SpecularFish)
 			.AddIngredient(ModContent.ItemType<Bloodberry>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.RecallPotion)
 			.Register();
 
 		Recipe.Create(ItemID.RecallPotion)
@@ -575,6 +611,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.SpecularFish)
 			.AddIngredient(ModContent.ItemType<Barfbush>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.RecallPotion)
 			.Register();
 
 		Recipe.Create(ItemID.StinkPotion)
@@ -582,6 +619,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Stinkfish)
 			.AddIngredient(ModContent.ItemType<Bloodberry>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.StinkPotion)
 			.Register();
 
 		Recipe.Create(ItemID.StinkPotion)
@@ -589,6 +627,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Stinkfish)
 			.AddIngredient(ModContent.ItemType<Barfbush>())
 			.AddTile(TileID.Bottles)
+			.SortAfterFirstRecipesOf(ItemID.StinkPotion)
 			.Register();
 		#endregion
 
@@ -596,16 +635,19 @@ public class VanillaItemRecipeCreator : ModSystem
 		Recipe.Create(ItemID.MonsterLasagna)
 			.AddIngredient(ModContent.ItemType<YuckyBit>(), 8)
 			.AddTile(TileID.CookingPots)
+			.SortAfterFirstRecipesOf(ItemID.MonsterLasagna)
 			.Register();
 
 		Recipe.Create(ItemID.SeafoodDinner)
 			.AddIngredient(ModContent.ItemType<Ickfish>(), 2)
 			.AddTile(TileID.CookingPots)
+			.SortAfterFirstRecipesOf(ItemID.SeafoodDinner)
 			.Register();
 
 		Recipe.Create(ItemID.CookedFish)
 			.AddIngredient(ModContent.ItemType<SicklyTrout>())
 			.AddTile(TileID.CookingPots)
+			.SortAfterFirstRecipesOf(ItemID.CookedFish)
 			.Register();
 		#endregion
 
@@ -615,6 +657,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.FlinxFur, 8)
 			.AddIngredient(ModContent.ItemType<BismuthBar>(), 8)
 			.AddTile(TileID.Loom)
+			.SortAfterFirstRecipesOf(ItemID.FlinxFurCoat)
 			.Register();
 		#endregion
 
@@ -1080,6 +1123,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<BismuthBroadsword>())
 			.AddIngredient(ItemID.Stinkbug, 5)
 			.AddCondition(Condition.NearHoney)
+			.SortAfterFirstRecipesOf(ItemID.Flymeal)
 			.Register();
 		#endregion
 	}

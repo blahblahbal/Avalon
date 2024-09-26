@@ -26,6 +26,7 @@ class OsmiumChunk : ModItem
         Recipe.Create(ModContent.ItemType<Material.Bars.OsmiumBar>())
             .AddIngredient(Type, 4)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<Material.Bars.OsmiumBar>())
+			.Register();
     }
 }

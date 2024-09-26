@@ -34,7 +34,8 @@ public class BundleofHorseshoeBalloons : ModItem
             .AddIngredient(ModContent.ItemType<BundleofBalloons>())
             .AddIngredient(ItemID.LuckyHorseshoe)
             .AddTile(TileID.TinkerersWorkbench)
-            .Register();
+			.SortAfterFirstRecipesOf(ItemID.HorseshoeBundle)
+			.Register();
 
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<RocketinaBalloon>())
@@ -42,6 +43,7 @@ public class BundleofHorseshoeBalloons : ModItem
             .AddIngredient(ItemID.FartInABalloon)
             .AddIngredient(ItemID.LuckyHorseshoe)
             .AddTile(TileID.TinkerersWorkbench)
+			.SortAfterFirstRecipesOf(ItemID.HorseshoeBundle)
             .Register();
 
         CreateRecipe()
@@ -49,6 +51,7 @@ public class BundleofHorseshoeBalloons : ModItem
             .AddRecipeGroup("Avalon:SharkronBalloons")
             .AddRecipeGroup("Avalon:FartBalloons")
             .AddTile(TileID.TinkerersWorkbench)
+			.SortAfterFirstRecipesOf(ItemID.HorseshoeBundle)
             .Register();
 
         CreateRecipe()
@@ -56,6 +59,7 @@ public class BundleofHorseshoeBalloons : ModItem
             .AddRecipeGroup("Avalon:RocketBalloons")
             .AddRecipeGroup("Avalon:FartBalloons")
             .AddTile(TileID.TinkerersWorkbench)
+			.SortAfterFirstRecipesOf(ItemID.HorseshoeBundle)
             .Register();
 
         CreateRecipe()
@@ -63,6 +67,7 @@ public class BundleofHorseshoeBalloons : ModItem
             .AddRecipeGroup("Avalon:RocketBalloons")
             .AddRecipeGroup("Avalon:SharkronBalloons")
             .AddTile(TileID.TinkerersWorkbench)
+			.SortAfterFirstRecipesOf(ItemID.HorseshoeBundle)
             .Register();
     }
 }

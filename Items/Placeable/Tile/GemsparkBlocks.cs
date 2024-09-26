@@ -31,7 +31,9 @@ class PeridotGemsparkBlock : ModItem
         Terraria.Recipe.Create(Type, 20)
             .AddIngredient(ItemID.Glass, 20)
             .AddIngredient(ModContent.ItemType<Material.Ores.Peridot>())
-            .AddTile(TileID.WorkBenches).Register();
+            .AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ItemID.RubyGemsparkBlock)
+			.Register();
     }
 
     public override void PostUpdate()
@@ -66,7 +68,9 @@ class TourmalineGemsparkBlock : ModItem
         Terraria.Recipe.Create(Type, 20)
             .AddIngredient(ItemID.Glass, 20)
             .AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>())
-            .AddTile(TileID.WorkBenches).Register();
+            .AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ItemID.SapphireGemsparkBlock)
+			.Register();
     }
 
     public override void PostUpdate()
@@ -101,7 +105,9 @@ class ZirconGemsparkBlock : ModItem
         Terraria.Recipe.Create(Type, 20)
             .AddIngredient(ItemID.Glass, 20)
             .AddIngredient(ModContent.ItemType<Material.Ores.Zircon>())
-            .AddTile(TileID.WorkBenches).Register();
+            .AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ItemID.AmberGemsparkBlock)
+			.Register();
     }
 
     public override void PostUpdate()

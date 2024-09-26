@@ -26,6 +26,7 @@ class IridiumChunk : ModItem
         Recipe.Create(ModContent.ItemType<Material.Bars.IridiumBar>())
             .AddIngredient(Type, 4)
             .AddTile(TileID.Furnaces)
-            .Register();
+			.SortAfterFirstRecipesOf(ModContent.ItemType<Material.Bars.IridiumBar>())
+			.Register();
     }
 }
