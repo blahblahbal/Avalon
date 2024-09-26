@@ -508,10 +508,12 @@ Mods: {
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
 			RedArowana: Normally these fish are quite passive, but something in the Tropics causes them to become aggressive. What makes them behave this way is unknown.
 			Mime: The Copycat Extraordinaire, the Mime loves to copy what its opponent does. The cruel joke often lands it in lava, though.
-			EvilVulture: A bird attuned to the forces of evil, this Vulture has no such normal nature left.
 			WallOfSteel: An abandoned creation designed to accomplish what the original Guardian of the Underworld could not - prevent the Terrarian from further destabilizing the world.
 			MechanicalHungry: The Wall of Steel's many mouths, attached by steel cables. As a last resort, they can detach and precisely chase down threats.
 			InfectedPickaxe: Inspirited by the viciously virulent Contagion, this tool swings about attempting to split apart its foes.
+			EvilVulture: A vulture tainted by the Corruption, its nature becoming twisted and foul.
+			BloodyVulture: A vulture consumed by the Crimson, it similarly seeks to consume its prey.
+			SicklyVulture: A vulture inflicted by the Contagion, its cells have been mutated by the rampaging virus.
 		}
 
 		Keybinds: {
@@ -9497,6 +9499,16 @@ Mods: {
 				DisplayName: Staff Statue
 				Tooltip: ""
 			}
+
+			BloodyVultureBanner: {
+				DisplayName: Bloody Vulture Banner
+				Tooltip: ""
+			}
+
+			SicklyVultureBanner: {
+				DisplayName: Sickly Vulture Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9909,6 +9921,8 @@ Mods: {
 			WallofSteel.DisplayName: Wall of Steel
 			WallofSteelMouthEye.DisplayName: Wall of Steel
 			WallofSteelLaserEye.DisplayName: Wall of Steel
+			BloodyVulture.DisplayName: Bloody Vulture
+			SicklyVulture.DisplayName: Sickly Vulture
 		}
 
 		Buffs: {

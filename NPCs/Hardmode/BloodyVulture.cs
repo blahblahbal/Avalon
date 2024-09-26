@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace Avalon.NPCs.Hardmode;
 
-public class EvilVulture : ModNPC
+public class BloodyVulture : ModNPC
 {
     public override void SetStaticDefaults()
     {
@@ -26,8 +26,8 @@ public class EvilVulture : ModNPC
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
 		bestiaryEntry.Info.AddRange(
 		[
-			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.CorruptDesert,
-			new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.EvilVulture")),
+			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.CrimsonDesert,
+			new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.BloodyVulture")),
 		]);
 
 	public override void SetDefaults()
@@ -47,13 +47,13 @@ public class EvilVulture : ModNPC
         NPC.HitSound = SoundID.NPCHit28;
         NPC.DeathSound = SoundID.NPCDeath31;
         Banner = NPC.type;
-        BannerItem = ModContent.ItemType<Items.Banners.EvilVultureBanner>();
+        BannerItem = ModContent.ItemType<Items.Banners.BloodyVultureBanner>();
 		if (NPC.IsABestiaryIconDummy)
 		{
 			NPC.noGravity = true;
 			NPC.velocity.Y = 1f;
 		}
-    }
+	}
 	public override void ModifyNPCLoot(NPCLoot loot)
     {
         loot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Material.Beak>(), 2));
@@ -61,11 +61,11 @@ public class EvilVulture : ModNPC
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        if (spawnInfo.Player.ZoneCorrupt)
+        if (spawnInfo.Player.ZoneCrimson)
         {
             if (Main.hardMode)
             {
-                if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 1].TileType == TileID.Ebonsand)
+                if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 1].TileType == TileID.Crimsand)
                 {
                     return 1f;
                 }
@@ -78,11 +78,11 @@ public class EvilVulture : ModNPC
 	{
 		if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
 		{
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("CorruptVultureHead").Type, 0.9f);
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("CorruptVultureWing").Type, 0.9f);
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("CorruptVultureWing").Type, 0.9f);
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("CorruptVultureTalon").Type, 0.9f);
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("CorruptVultureTalon").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("BloodyVultureHead").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("BloodyVultureWing").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("BloodyVultureWing").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("BloodyVultureTalon").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("BloodyVultureTalon").Type, 0.9f);
 		}
 	}
 }

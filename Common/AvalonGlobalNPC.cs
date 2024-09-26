@@ -776,6 +776,7 @@ public class AvalonGlobalNPC : GlobalNPC
 				if (spawnInfo.Player.ZoneDesert)
 				{
 					pool.Add(ModContent.NPCType<ViralMummy>(), 0.3f);
+					pool.Add(ModContent.NPCType<SicklyVulture>(), 1f);
 					//pool.Add(ModContent.NPCType<EvilVulture>(), 0.4f);
 				}
 			}
