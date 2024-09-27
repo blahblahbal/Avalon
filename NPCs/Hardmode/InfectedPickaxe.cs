@@ -21,9 +21,9 @@ public class InfectedPickaxe : ModNPC
         Data.Sets.NPC.Wicked[NPC.type] = true;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{
-			Position = new Vector2(-3f, 16f),
+			Position = new Vector2(-3f, 5f),
 			PortraitPositionXOverride = -2f,
-			PortraitPositionYOverride = -24f,
+			PortraitPositionYOverride = 2f,
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 	}
@@ -112,7 +112,7 @@ public class InfectedPickaxe : ModNPC
 	// vanilla is STUPID!!!! the aistyle for the enchanted sword ALWAYS emits blue light if the npc type isn't cursed hammer or crimson axe!!!!!
 	public override void AI()
 	{
-		Lighting.AddLight((int)(NPC.Center.X / 16f), (int)(NPC.Center.Y / 16f), 0.2f, 0.225f, 0.05f);
+		Lighting.AddLight((int)(NPC.Center.X / 16f), (int)(NPC.Center.Y / 16f), 0.2f, 0.25f, 0.05f);
 		if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
 		{
 			NPC.TargetClosest();

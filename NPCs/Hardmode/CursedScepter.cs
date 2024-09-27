@@ -21,9 +21,9 @@ public class CursedScepter : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{
-			Position = new Vector2(-9f, 18f),
-			PortraitPositionXOverride = -4f,
-			PortraitPositionYOverride = -22f,
+			Position = new Vector2(-10f, 10f),
+			PortraitPositionXOverride = -5f,
+			PortraitPositionYOverride = 3f,
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 	}
@@ -45,7 +45,7 @@ public class CursedScepter : ModNPC
         NPC.DeathSound = SoundID.NPCDeath6;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<CursedScepterBanner>();
-		DrawOffsetY = 14;
+		DrawOffsetY = 13;
     }
 
     public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
