@@ -63,7 +63,7 @@ public class Mime : ModNPC
 		if (NPC.position.Distance(Main.player[NPC.target].position) < 180f && NPC.velocity.Y == 0f && IsOnGround(NPC) && NPC.position.Y + NPC.height > Main.player[NPC.target].position.Y + Main.player[NPC.target].height)
 		{
 			Vector2 jump = new Vector2((MathF.Sqrt(Math.Abs(NPC.DirectionTo(Main.player[NPC.target].position).X) + 1f) - 1f) * NPC.direction * 2f, NPC.DirectionTo(Main.player[NPC.target].position).Y * 7.75f);
-			jump *= MathHelper.Clamp(NPC.position.Distance(Main.player[NPC.target].position) / 60f, 0.5f, 1.1f);
+			jump *= MathHelper.Clamp(NPC.position.Distance(Main.player[NPC.target].position) / 60f, 0.6f, 1.1f);
 			if ((NPC.velocity.X > 0 && jump.X > 0) || (NPC.velocity.X < 0 && jump.X < 0))
 			{
 				NPC.velocity += jump;
