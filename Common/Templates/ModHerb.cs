@@ -28,7 +28,13 @@ public abstract class ModHerb : ModTile
     public virtual LocalizedText MapName => LanguageManager.Instance.GetText("");
     public virtual Color MapColor => Color.White;
     public virtual int Dust => DustID.Dirt;
-	public virtual bool FlipSprite => true;
+	public virtual byte FlipSpriteStyle => 0;
+	public enum FlipSprite : byte
+	{
+		Flipped,
+		Custom,
+		None
+	}
 
 	public override void SetStaticDefaults()
     {
@@ -51,7 +57,7 @@ public abstract class ModHerb : ModTile
         };
         TileObjectData.addTile(Type);
         DustType = Dust;
-    }
+	}
     public override bool CanPlace(int i, int j)
     {
         return Data.Sets.Tile.SuitableForPlantingHerbs[Main.tile[i, j + 1].TileType] &&
@@ -83,9 +89,23 @@ public abstract class ModHerb : ModTile
         return base.CanKillTile(i, j, ref blockDamaged);
     }
     public override void SetSpriteEffects(int i, int j, ref SpriteEffects spriteEffects)
-    {
-        if (FlipSprite && i % 2 == 1)
-            spriteEffects = SpriteEffects.FlipHorizontally;
+	{
+		Tile tile = Framing.GetTileSafely(i, j); //Safe way of getting a tile instance
+		if (i % 2 == 1)
+		{
+			if (FlipSpriteStyle == (byte)FlipSprite.Flipped)
+			{
+				spriteEffects = SpriteEffects.FlipHorizontally;
+			}
+			else if (FlipSpriteStyle == (byte)FlipSprite.Custom)
+			{
+				tile.TileFrameY = 22;
+			}
+			else if (FlipSpriteStyle == (byte)FlipSprite.None) // redundant, but whatever
+			{
+				spriteEffects = SpriteEffects.None;
+			}
+		}
     }
     public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
