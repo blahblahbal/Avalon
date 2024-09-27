@@ -61,11 +61,7 @@ public class Viriling : ModNPC
         //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 2));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2, 1, 1 + (!Main.rand.NextBool(3) ? 1 : 0)));
     }
-    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    //{
-    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-    //    NPC.damage = (int)(NPC.damage * 0.65f);
-    //}
+
     bool spawned;
     public override void AI()
     {

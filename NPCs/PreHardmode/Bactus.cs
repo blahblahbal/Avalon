@@ -75,11 +75,7 @@ public class Bactus : ModNPC
             return 0.7f;
         return 0;
     }
-    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    //{
-    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-    //    NPC.damage = (int)(NPC.damage * 0.65f);
-    //}
+
     public bool treeSpawn;
     int J;
     public override void OnSpawn(IEntitySource source)

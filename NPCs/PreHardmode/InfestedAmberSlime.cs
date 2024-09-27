@@ -50,11 +50,6 @@ public class InfestedAmberSlime : ModNPC
             //BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.InfestedAmberSlime")),
         });
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
-        NPC.damage = (int)(NPC.damage * 0.45f);
-    }
     public override void FindFrame(int frameHeight)
     {
         int num2 = 0;

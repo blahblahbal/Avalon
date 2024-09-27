@@ -58,12 +58,6 @@ public class CursedScepter : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.CursedScepter")),
         });
 
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.75f);
-        NPC.damage = (int)(NPC.damage * 0.5f);
-    }
-
     public override Color? GetAlpha(Color drawColor)
     {
         return Color.White;

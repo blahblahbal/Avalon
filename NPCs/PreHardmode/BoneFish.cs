@@ -55,12 +55,6 @@ public class BoneFish : ModNPC
             BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheUnderworld,
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.BoneFish")),
         });
-
-    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    //{
-    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
-    //    NPC.damage = (int)(NPC.damage * 0.6f);
-    //}
     public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life <= 0)

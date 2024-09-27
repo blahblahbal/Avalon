@@ -48,7 +48,6 @@ public class MechanicalLeechHead : WormHead
     }
 	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 	{
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
         NPC.damage = (int)(NPC.damage * 0.8f);
     }
     public override void Init()
@@ -98,7 +97,6 @@ public class MechanicalLeechHead : WormHead
 		}
 		public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 		{
-			NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
 			NPC.damage = (int)(NPC.damage * 0.8f);
 		}
 		public override void Init()
@@ -140,7 +138,6 @@ public class MechanicalLeechTail : WormTail
 	}
 	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 	{
-		NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
 		NPC.damage = (int)(NPC.damage * 0.8f);
 	}
 	public override void Init()

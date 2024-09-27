@@ -49,11 +49,6 @@ public class PyrasiteHead : WormHead
         BannerItem = ModContent.ItemType<Items.Banners.PyrasiteBanner>();
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
     }
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.8f);
-    }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]

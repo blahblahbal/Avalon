@@ -46,8 +46,7 @@ public class MechanicalHungry : ModNPC
 
 	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 	{
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.66f);
-        NPC.damage = (int)(NPC.damage * 0.4f);
+        NPC.lifeMax = (int)(NPC.lifeMax * 0.8f);
     }
     public override void AI()
     {

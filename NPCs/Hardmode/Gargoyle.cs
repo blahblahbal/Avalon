@@ -55,11 +55,6 @@ public class Gargoyle : ModNPC
     {
         return true;
     }
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        //NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.5f);
-    }
     public override void AI()
     {
         NPC.noGravity = true;

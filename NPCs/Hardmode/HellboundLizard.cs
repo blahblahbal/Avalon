@@ -61,8 +61,7 @@ public class HellboundLizard : CustomFighterAI
     }
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
-        //NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.85f);
+        NPC.lifeMax = (int)(NPC.lifeMax * 0.85f);
     }
     public override Color? GetAlpha(Color lightColor)
     {

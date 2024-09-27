@@ -792,7 +792,7 @@ public class WallofSteel : ModNPC
 			}
 			return;
 		}
-		//NPC.velocity.X = 0;
+		NPC.velocity.X = 0;
 		//NPC.velocity.Y = 0;
 	}
 

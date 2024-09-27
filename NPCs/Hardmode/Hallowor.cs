@@ -54,11 +54,6 @@ public class Hallowor : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Hallowor"))
         });
     }
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55);
-        NPC.damage = (int)(NPC.damage * 0.5f);
-    }
     // uncomment when time to add
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {

@@ -184,7 +184,6 @@ public class OreSlime : ModNPC
     public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
     {
         NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
-        NPC.damage = (int)(NPC.damage * 0.75f);
     }
     public override void FindFrame(int frameHeight)
     {

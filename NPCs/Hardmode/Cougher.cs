@@ -118,11 +118,6 @@ public class Cougher : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Cougher"))
         });
     }
-    //public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    //{
-    //    NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-    //    NPC.damage = (int)(NPC.damage * 0.5f);
-    //}
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 3));

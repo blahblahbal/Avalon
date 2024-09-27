@@ -63,11 +63,6 @@ public class CursedFlamer : ModNPC
     {
         return Main.hardMode && spawnInfo.Player.ZoneCorrupt && !spawnInfo.Player.InPillarZone() && spawnInfo.SpawnTileY < (Main.maxTilesY - 200) ? 0.3f : 0f;
     }
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.5f);
-    }
     //public override void FindFrame(int frameHeight)
     //{
         //NPC.frameCounter++;

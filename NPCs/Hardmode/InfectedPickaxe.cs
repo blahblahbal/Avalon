@@ -76,11 +76,6 @@ public class InfectedPickaxe : ModNPC
             }
         }
     }
-    public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-    {
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.7f);
-        NPC.damage = (int)(NPC.damage * 0.5f);
-    }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.hardMode && spawnInfo.Player.InModBiome<Biomes.UndergroundContagion>()
         ? 0.2f : 0f;
     public override void ModifyNPCLoot(NPCLoot npcLoot) => npcLoot.Add(ItemDropRule.Common(ItemID.Nazar, 75));
