@@ -6,6 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.Localization;
+using Microsoft.Xna.Framework;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -19,7 +20,6 @@ public class Mime : ModNPC
     public override void SetDefaults()
     {
         NPC.damage = 75;
-        NPC.scale = 1.4f; // make a slightly bigger sprite instead of upscaling? also more walking frames
         NPC.noTileCollide = false;
         NPC.lifeMax = 630;
         NPC.defense = 46;
@@ -34,11 +34,6 @@ public class Mime : ModNPC
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.MimeBanner>();
     }
-	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-	{
-        NPC.lifeMax = (int)(NPC.lifeMax * 0.55f);
-        NPC.damage = (int)(NPC.damage * 0.75f);
-    }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
         bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
@@ -52,54 +47,86 @@ public class Mime : ModNPC
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ConfusionTalisman>(), 8));
 		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ManaCompromise>(), 100));
 	}
-    public override void FindFrame(int frameHeight)
-    {
-        if (NPC.velocity.Y == 0f)
-        {
-            if (NPC.direction == 1)
-            {
-                NPC.spriteDirection = 1;
-            }
-            if (NPC.direction == -1)
-            {
-                NPC.spriteDirection = -1;
-            }
-        }
-        if (NPC.velocity.Y != 0f || (NPC.direction == -1 && NPC.velocity.X > 0f) || (NPC.direction == 1 && NPC.velocity.X < 0f))
-        {
-            NPC.frameCounter = 0.0;
-            NPC.frame.Y = frameHeight * 2;
-        }
-        else if (NPC.velocity.X == 0f)
-        {
-            NPC.frameCounter = 0.0;
-            NPC.frame.Y = 0;
-        }
-        else
-        {
-            NPC.frameCounter += Math.Abs(NPC.velocity.X);
-            if (NPC.frameCounter < 8.0)
-            {
-                NPC.frame.Y = 0;
-            }
-            else if (NPC.frameCounter < 16.0)
-            {
-                NPC.frame.Y = frameHeight;
-            }
-            else if (NPC.frameCounter < 24.0)
-            {
-                NPC.frame.Y = frameHeight * 2;
-            }
-            else if (NPC.frameCounter < 32.0)
-            {
-                NPC.frame.Y = frameHeight;
-            }
-            else
-            {
-                NPC.frameCounter = 0.0;
-            }
-        }
-    }
+	public override void PostAI()
+	{
+		if (MathF.Abs(NPC.velocity.X) < 2f)
+		{
+			if (NPC.velocity.X > 0 && NPC.direction == 1)
+			{
+				NPC.velocity.X += NPC.velocity.X * 0.3f;
+			}
+			if (NPC.velocity.X < 0 && NPC.direction == -1)
+			{
+				NPC.velocity.X += NPC.velocity.X * 0.3f;
+			}
+		}
+		if (NPC.position.Distance(Main.player[NPC.target].position) < 180f && NPC.velocity.Y == 0f && IsOnGround(NPC) && NPC.position.Y + NPC.height > Main.player[NPC.target].position.Y + Main.player[NPC.target].height)
+		{
+			Vector2 jump = new Vector2((MathF.Sqrt(Math.Abs(NPC.DirectionTo(Main.player[NPC.target].position).X) + 1f) - 1f) * NPC.direction * 2f, NPC.DirectionTo(Main.player[NPC.target].position).Y * 7.75f);
+			jump *= MathHelper.Clamp(NPC.position.Distance(Main.player[NPC.target].position) / 60f, 0.5f, 1.1f);
+			if ((NPC.velocity.X > 0 && jump.X > 0) || (NPC.velocity.X < 0 && jump.X < 0))
+			{
+				NPC.velocity += jump;
+			}
+		}
+	}
+	// Copied from the IsOnGround method in ClassExtensions.cs
+	public static bool IsOnGround(NPC npc)
+	{
+		var tileX_1 = Main.tile[(int)(npc.position.X / 16f), (int)(npc.position.Y / 16f) + 3];
+		var tileX_2 = Main.tile[(int)(npc.position.X / 16f) + 1, (int)(npc.position.Y / 16f) + 3];
+
+		return (tileX_1.HasTile && (Main.tileSolid[tileX_1.TileType] || Main.tileSolidTop[tileX_1.TileType]) && npc.velocity.Y == 0f) ||
+				(tileX_2.HasTile && (Main.tileSolid[tileX_2.TileType] || Main.tileSolidTop[tileX_2.TileType]) && npc.velocity.Y == 0f);
+	}
+	public override void FindFrame(int frameHeight)
+	{
+		if (NPC.velocity.Y == 0f)
+		{
+			if (NPC.direction == 1)
+			{
+				NPC.spriteDirection = 1;
+			}
+			if (NPC.direction == -1)
+			{
+				NPC.spriteDirection = -1;
+			}
+		}
+		if (NPC.velocity.Y != 0f || (NPC.direction == -1 && NPC.velocity.X > 0f) || (NPC.direction == 1 && NPC.velocity.X < 0f))
+		{
+			NPC.frameCounter = 0.0;
+			NPC.frame.Y = frameHeight * 2;
+		}
+		else if (NPC.velocity.X == 0f)
+		{
+			NPC.frameCounter = 0.0;
+			NPC.frame.Y = 0;
+		}
+		else
+		{
+			NPC.frameCounter += Math.Abs(NPC.velocity.X);
+			if (NPC.frameCounter < 12.0)
+			{
+				NPC.frame.Y = 0;
+			}
+			else if (NPC.frameCounter < 24.0)
+			{
+				NPC.frame.Y = frameHeight;
+			}
+			else if (NPC.frameCounter < 36.0)
+			{
+				NPC.frame.Y = frameHeight * 2;
+			}
+			else if (NPC.frameCounter < 48.0)
+			{
+				NPC.frame.Y = frameHeight;
+			}
+			else
+			{
+				NPC.frameCounter = 0.0;
+			}
+		}
+	}
 
 	public override void HitEffect(NPC.HitInfo hit)
 	{
