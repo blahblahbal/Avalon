@@ -1,6 +1,8 @@
 using Avalon.Common;
 using Avalon.Items.Banners;
+using Avalon.UI;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
@@ -21,26 +23,29 @@ public class CursedScepter : ModNPC
 		{
 			Position = new Vector2(-9f, 18f),
 			PortraitPositionXOverride = -4f,
-			PortraitPositionYOverride = -8f,
+			PortraitPositionYOverride = -22f,
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 	}
 
     public override void SetDefaults()
 	{
+		NPC.noGravity = true;
+		NPC.noTileCollide = true;
 		NPC.damage = 61;
         NPC.lifeMax = 226;
         NPC.defense = 18;
         NPC.lavaImmune = true;
-        NPC.Size = new Vector2(32, 32);
-        NPC.aiStyle = 23;
-        NPC.value = 1000f;
+		NPC.Size = new Vector2(40, 40);
+		//NPC.aiStyle = NPCID.EnchantedSword;
+		NPC.value = 1000f;
         NPC.scale = 1.1f;
         NPC.knockBackResist = 0.3f;
         NPC.HitSound = SoundID.NPCHit4;
         NPC.DeathSound = SoundID.NPCDeath6;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<CursedScepterBanner>();
+		DrawOffsetY = 14;
     }
 
     public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
@@ -117,4 +122,64 @@ public class CursedScepter : ModNPC
             Main.gore[num165].velocity *= 0.5f;
         }
     }
+	// vanilla is STUPID!!!! the aistyle for the enchanted sword ALWAYS emits blue light if the npc type isn't cursed hammer or crimson axe!!!!!
+	public override void AI()
+	{
+		Lighting.AddLight((int)(NPC.Center.X / 16f), (int)(NPC.Center.Y / 16f), 0.1f, 0.25f, 0.05f);
+		if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
+		{
+			NPC.TargetClosest();
+		}
+		if (NPC.ai[0] == 0f)
+		{
+			Vector2 distanceXY = Main.player[NPC.target].Center - NPC.Center;
+			float num872 = 9f / MathF.Sqrt(MathF.Pow(distanceXY.X, 2) + MathF.Pow(distanceXY.Y, 2));
+			NPC.velocity = distanceXY * num872;
+			NPC.rotation = MathF.Atan2(NPC.velocity.Y, NPC.velocity.X) + 0.785f;
+			NPC.ai[0] = 1f;
+			NPC.ai[1] = 0f;
+			NPC.netUpdate = true;
+		}
+		else if (NPC.ai[0] == 1f)
+		{
+			if (NPC.justHit)
+			{
+				NPC.ai[0] = 2f;
+				NPC.ai[1] = 0f;
+			}
+			NPC.velocity *= 0.99f;
+			NPC.ai[1] += 1f;
+			if (NPC.ai[1] >= 100f)
+			{
+				NPC.netUpdate = true;
+				NPC.ai[0] = 2f;
+				NPC.ai[1] = 0f;
+				NPC.velocity.X = 0f;
+				NPC.velocity.Y = 0f;
+			}
+			else
+			{
+				NPC.rotation = MathF.Atan2(NPC.velocity.Y, NPC.velocity.X) + 0.785f;
+			}
+		}
+		else
+		{
+			if (NPC.justHit)
+			{
+				NPC.ai[0] = 2f;
+				NPC.ai[1] = 0f;
+			}
+			NPC.velocity *= 0.96f;
+			NPC.ai[1] += 1f;
+			float num875 = NPC.ai[1] / 120f;
+			num875 = 0.1f + num875 * 0.4f;
+			NPC.rotation += num875 * NPC.direction;
+			if (NPC.ai[1] >= 120f)
+			{
+				NPC.netUpdate = true;
+				NPC.ai[0] = 0f;
+				NPC.ai[1] = 0f;
+			}
+		}
+	}
 }
