@@ -513,7 +513,7 @@ Mods: {
 			InfectedPickaxe: Inspirited by the viciously virulent Contagion, this tool swings about attempting to split apart its foes.
 			EvilVulture: A vulture tainted by the Corruption, its nature becoming twisted and foul.
 			BloodyVulture: A vulture consumed by the Crimson, it similarly seeks to consume its prey.
-			SicklyVulture: A vulture inflicted by the Contagion, its cells have been mutated by the rampaging virus.
+			SicklyVulture: A vulture afflicted by the Contagion, its cells have been mutated by the rampaging virus.
 		}
 
 		Keybinds: {
