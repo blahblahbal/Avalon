@@ -89,7 +89,9 @@ public class AvalonMobDrops : GlobalNPC
         }
 
         if (npc.type is NPCID.PincushionZombie or NPCID.SlimedZombie or NPCID.SwampZombie or NPCID.TwiggyZombie or
-            NPCID.Zombie or NPCID.ZombieEskimo or NPCID.FemaleZombie or NPCID.ZombieRaincoat)
+            NPCID.Zombie or NPCID.ZombieEskimo or NPCID.FemaleZombie or NPCID.ZombieRaincoat or NPCID.BaldZombie or
+			NPCID.TorchZombie or NPCID.TheGroom or NPCID.TheBride or NPCID.MaggotZombie or NPCID.DoctorBones or
+			NPCID.ZombieDoctor or NPCID.ZombieSuperman or NPCID.ZombiePixie or NPCID.ZombieXmas or NPCID.ZombieSweater)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RottenFlesh>(), 15));
         }
