@@ -58,20 +58,20 @@ public class TourmalineSapling : ModTile
         return false;
     }
 
-    public override void RandomUpdate(int i, int j)
-    {
-        if (j > Main.rockLayer)
-        {
-            Tile tile = Main.tile[i, j];
-            if (tile.HasUnactuatedTile)
+	public override void RandomUpdate(int i, int j)
+	{
+		if (j > Main.rockLayer)
+		{
+			Tile tile = Main.tile[i, j];
+			if (tile.HasUnactuatedTile)
 			{
-				if (WorldGen.genRand.NextBool(1))
+				if (WorldGen.genRand.NextBool(5))
 				{
-                    AttemptToGrowTourmalineFromSapling(i, j, underground: true);
-                }
-            }
-        }
-    }
+					AttemptToGrowTourmalineFromSapling(i, j, underground: true);
+				}
+			}
+		}
+	}
 
     public static bool AttemptToGrowTourmalineFromSapling(int x, int y, bool underground)
 	{

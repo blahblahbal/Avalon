@@ -59,20 +59,20 @@ public class PeridotSapling : ModTile
         return false;
     }
 
-    public override void RandomUpdate(int i, int j)
-    {
-        if (j > Main.rockLayer)
-        {
-            Tile tile = Main.tile[i, j];
-            if (tile.HasUnactuatedTile)
-            {
-                if (WorldGen.genRand.NextBool(1))
-                {
-                    AttemptToGrowPeridotFromSapling(i, j, underground: true);
-                }
-            }
-        }
-    }
+	public override void RandomUpdate(int i, int j)
+	{
+		if (j > Main.rockLayer)
+		{
+			Tile tile = Main.tile[i, j];
+			if (tile.HasUnactuatedTile)
+			{
+				if (WorldGen.genRand.NextBool(5))
+				{
+					AttemptToGrowPeridotFromSapling(i, j, underground: true);
+				}
+			}
+		}
+	}
 
     public static bool AttemptToGrowPeridotFromSapling(int x, int y, bool underground)
     {
