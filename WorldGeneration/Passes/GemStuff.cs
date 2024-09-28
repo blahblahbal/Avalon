@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Avalon.Tiles.GemTrees;
 using Terraria.ID;
+using Avalon.Common.Templates;
 
 namespace Avalon.WorldGeneration.Passes;
 
@@ -73,15 +74,15 @@ internal class GemTreePass : GenPass
         bool result = false;
         if (treeTileType == ModContent.TileType<PeridotTree>())
         {
-            result = PeridotSapling.GrowPeridotTreeWithSettings(checkedX, checkedY, PeridotSapling.GemTree_Peridot);
+            result = AvalonModTree.GrowModdedTreeWithSettings(checkedX, checkedY, PeridotSapling.GemTree_Peridot);
         }
         else if (treeTileType == ModContent.TileType<TourmalineTree>())
         {
-            result = TourmalineSapling.GrowTourmalineTreeWithSettings(checkedX, checkedY, TourmalineSapling.GemTree_Tourmaline);
+            result = AvalonModTree.GrowModdedTreeWithSettings(checkedX, checkedY, TourmalineSapling.GemTree_Tourmaline);
         }
         else if (treeTileType == ModContent.TileType<ZirconTree>())
         {
-            result = ZirconSapling.GrowZirconTreeWithSettings(checkedX, checkedY, ZirconSapling.GemTree_Zircon);
+            result = AvalonModTree.GrowModdedTreeWithSettings(checkedX, checkedY, ZirconSapling.GemTree_Zircon);
         }
         return result;
     }
