@@ -62,7 +62,7 @@ internal class WallofSteelMouthEye : ModNPC
 		NPC.scale = 1f;
 		NPC.HitSound = SoundID.NPCHit4;
 		NPC.DeathSound = SoundID.NPCDeath14;
-		DrawOffsetY = (int)((110 / 2) - (NPC.Size.Y / 2));
+		DrawOffsetY = (124 / 2) - (NPC.Size.Y / 2) - 2.5f;
 		//NPC.BossBar = ModContent.GetInstance<BossBars.WallofSteelBossBar>();
 		//Music = ExxoAvalonOrigins.MusicMod == null ? MusicID.Boss2 : MusicID.Boss2; // MusicLoader.GetMusicSlot(Avalon.MusicMod, "Sounds/Music/WallofSteel");
 	}
@@ -106,7 +106,7 @@ internal class WallofSteelMouthEye : ModNPC
 
 		NPC.TargetClosest(true);
 
-		NPC.Center = mainWall.Center + new Vector2(71 * mainWall.direction, -178);
+		NPC.Center = mainWall.Center + new Vector2(70 * mainWall.direction - (mainWall.direction == 1 ? 2 : 0), -169);
 		NPC.direction = mainWall.direction;
 		NPC.spriteDirection = mainWall.spriteDirection;
 
@@ -212,6 +212,7 @@ internal class WallofSteelMouthEye : ModNPC
 				return;
 			}
 		}
+		//NPC.rotation = 0;
 	}
 
 	private void FireballPhase()

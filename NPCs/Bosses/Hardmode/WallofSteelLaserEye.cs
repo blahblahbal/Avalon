@@ -55,8 +55,7 @@ internal class WallofSteelLaserEye : ModNPC
 		NPC.scale = 1f;
 		NPC.HitSound = SoundID.NPCHit4;
 		NPC.DeathSound = SoundID.NPCDeath14;
-		//NPC.gfxOffY = 30;
-		DrawOffsetY = (int)((154 / 2) - (NPC.Size.Y / 2));
+		DrawOffsetY = (154 / 2) - (NPC.Size.Y / 2) - 2.5f;
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{
@@ -110,7 +109,7 @@ internal class WallofSteelLaserEye : ModNPC
 
 		NPC.TargetClosest(true);
 
-		NPC.Center = mainWall.Center + new Vector2(75 * mainWall.direction, 160);
+		NPC.Center = mainWall.Center + new Vector2(70 * mainWall.direction - (mainWall.direction == 1 ? 2 : 0), 165);
 		NPC.direction = mainWall.direction;
 		NPC.spriteDirection = mainWall.spriteDirection;
 
@@ -212,6 +211,7 @@ internal class WallofSteelLaserEye : ModNPC
 				return;
 			}
 		}
+		//NPC.rotation = 0;
 	}
 
 	private void PanningLaserPhase()
@@ -312,7 +312,7 @@ internal class WallofSteelLaserEye : ModNPC
 		NPC.ai[2]++;
 		if (NPC.ai[2] == 75)
 		{
-			int laser = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + NPC.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.DirectionTo(NPC.PlayerTarget().Center).Y * 40f - 10, NPC.velocity.X, NPC.velocity.Y, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 4f);
+			int laser = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + NPC.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.DirectionTo(NPC.PlayerTarget().Center).Y * 40f, NPC.velocity.X, NPC.velocity.Y, ModContent.ProjectileType<Projectiles.Hostile.WallOfSteel.WoSLaserSmall>(), Main.expertMode ? 70 : 55, 4f);
 			Main.projectile[laser].velocity = Vector2.Normalize(Main.player[NPC.target].Center - new Vector2(NPC.Center.X, NPC.Center.Y)) * 11f;
 			Main.projectile[laser].hostile = true;
 			Main.projectile[laser].friendly = false;
