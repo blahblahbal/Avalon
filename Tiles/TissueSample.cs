@@ -14,7 +14,7 @@ public class TissueSample : ModTile
 		//Main.tileBlockLight[Type] = true;
 		TileID.Sets.GemsparkFramingTypes[Type] = Type;
 		RegisterItemDrop(ItemID.TissueSample);
-        DustType = DustID.HeartCrystal;
+        DustType = DustID.Blood;
 	}
 	public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
 	{
