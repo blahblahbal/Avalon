@@ -146,5 +146,12 @@ public class AdvShockwave : ModBuff
 			}
 			fall_time = 0; // just in case the checks above fail for whatever reason
 		} // END just fell
+
+		// this check happens after the shockwave logic because it would cancel the shockwave if run beforehand
+		// it basically just checks if the player ever stops moving on the Y axis, used to check if they're flying into a ceiling
+		if (player.oldPosition.Y == player.position.Y)
+		{
+			fall_time = 0;
+		}
 	}
 }
