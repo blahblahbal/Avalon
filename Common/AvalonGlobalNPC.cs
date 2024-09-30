@@ -42,11 +42,11 @@ public class AvalonGlobalNPC : GlobalNPC
 	/// <returns>The index of the found NPC in the Main.npc[] array.</returns>
 	public static int FindATypeOfNPC(int type)
 	{
-		for (int i = 0; i < 200; i++)
+		foreach (var npc in Main.ActiveNPCs)
 		{
-			if (type == Main.npc[i].type && Main.npc[i].active)
+			if (type == npc.type && npc.active)
 			{
-				return i;
+				return npc.whoAmI;
 			}
 		}
 
@@ -59,7 +59,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		{
 			//if (Main.rand.NextBool(1) && !Main.npcChatRelease)
 			{
-				for (int i = 0; i < 255; i++)
+				for (int i = 0; i < Main.maxPlayers; i++)
 				{
 					if (Main.player[i].active && npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SkellyBanana)//Main.player[i].talkNPC == npc.whoAmI && npc.type == NPCID.SkeletonMerchant)
 					{
@@ -111,9 +111,9 @@ public class AvalonGlobalNPC : GlobalNPC
 		while (!flag)
 		{
 			flag = true;
-			for (int i = 0; i < 255; i++)
+			foreach (var player in Main.ActivePlayers)
 			{
-				if (Main.player[i].active && Main.player[i].position.X > num2 - 1200 && Main.player[i].position.X < num2 + 1200)
+				if (player.active && player.position.X > num2 - 1200 && player.position.X < num2 + 1200)
 				{
 					num2 -= num * 16;
 					flag = false;

@@ -383,21 +383,21 @@ public class BannerBeltHook : ModHook
         if (Main.gameMenu)
             return;
         List<Player> beltPlayer = new();
-        for (int i = 0; i < 255; i++)
+        foreach (var player in Main.ActivePlayers)
         {
-            if (Main.player[i].active && !Main.player[i].dead && Main.player[i].GetModPlayer<BannerBeltPlayer>().BannerBelt)
+            if (player.active && !player.dead && player.GetModPlayer<BannerBeltPlayer>().BannerBelt)
             {
-                beltPlayer.Add(Main.player[i]);
-                Main.player[i].GetModPlayer<BannerBeltPlayer>().UpdateBanners(Main.player[i]);
+                beltPlayer.Add(player);
+				player.GetModPlayer<BannerBeltPlayer>().UpdateBanners(player);
             }
         }
-        for (int j = 0; j < 255; j++)
+        foreach (var player in Main.ActivePlayers)
         {
             for (int p = 0; p < beltPlayer.Count; p++)
             {
-                if (Main.player[j].active && !Main.player[j].dead && Vector2.Distance(Main.player[j].Center, beltPlayer[p].Center) < 16 * 75)
+                if (player.active && !player.dead && Vector2.Distance(player.Center, beltPlayer[p].Center) < 16 * 75)
                 {
-                    Main.player[j].GetModPlayer<BannerBeltPlayer>().UpdateBanners(beltPlayer[p]);
+					player.GetModPlayer<BannerBeltPlayer>().UpdateBanners(beltPlayer[p]);
                 }
             }
         }

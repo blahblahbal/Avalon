@@ -27,15 +27,15 @@ internal class AncientHeadphones : ModHook
                 Rectangle rectangle = new((int)Main.screenPosition.X, (int)Main.screenPosition.Y, Main.screenWidth, Main.screenHeight);
                 int num2 = 5000;
                 Rectangle value = default(Rectangle);
-                for (int j = 0; j < 200; j++)
+                foreach (var npc in Main.ActiveNPCs)
                 {
-                    if (!Main.npc[j].active)
+                    if (!npc.active)
                     {
                         continue;
                     }
                     num2 = 5000;
                     int num3 = 0;
-                    switch (Main.npc[j].type)
+                    switch (npc.type)
                     {
                         case 26:
                         case 27:
@@ -57,7 +57,7 @@ internal class AncientHeadphones : ModHook
                             num3 = 15;
                             break;
                     }
-                    value = new((int)(Main.npc[j].position.X + (float)(Main.npc[j].width / 2)) - num2, (int)(Main.npc[j].position.Y + (float)(Main.npc[j].height / 2)) - num2, num2 * 2, num2 * 2);
+                    value = new((int)(npc.position.X + (float)(npc.width / 2)) - num2, (int)(npc.position.Y + (float)(npc.height / 2)) - num2, num2 * 2, num2 * 2);
                     if (rectangle.Intersects(value))
                     {
                         switch (num3)

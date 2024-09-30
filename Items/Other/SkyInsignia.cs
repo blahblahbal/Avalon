@@ -36,15 +36,14 @@ class SkyInsignia : ModItem
         if (Main.netMode != NetmodeID.SinglePlayer)
         {
             Network.SyncSkyBlessing.SendPacket((byte)player.whoAmI, player.position);
-            //for (int i = 0; i < 255; i++)
-            //{
-            //    Player p = Main.player[i];
-            //    if (p.whoAmI != player.whoAmI && Vector2.Distance(p.position, player.position) < 43.75f * 16)
-            //    {
-            //        p.AddBuff(ModContent.BuffType<Buffs.SkyBlessing>(), 60 * 7);
-            //    }
-            //}
-        }
+			//foreach (var p in Main.ActivePlayers)
+			//{
+			//	if (p.whoAmI != player.whoAmI && Vector2.Distance(p.position, player.position) < 43.75f * 16)
+			//	{
+			//		p.AddBuff(ModContent.BuffType<Buffs.SkyBlessing>(), 60 * 7);
+			//	}
+			//}
+		}
         return false;
     }
 }

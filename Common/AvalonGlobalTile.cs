@@ -293,34 +293,34 @@ public class AvalonGlobalTile : GlobalTile
 	public static bool MechSpawn(int x, int y, int type)
 	{
 		int amt = 0;
-		for (int i = 0; i < 200; i++)
+		foreach (var npc in Main.ActiveNPCs)
 		{
-			if (!Main.npc[i].active)
+			if (!npc.active)
 				continue;
 
 			if (type == ModContent.NPCType<InfectedPickaxe>())
 			{
-				if (Main.npc[i].type == ModContent.NPCType<InfectedPickaxe>())
+				if (npc.type == ModContent.NPCType<InfectedPickaxe>())
 					amt++;
 			}
 			if (type == ModContent.NPCType<CursedScepter>())
 			{
-				if (Main.npc[i].type == ModContent.NPCType<CursedScepter>())
+				if (npc.type == ModContent.NPCType<CursedScepter>())
 					amt++;
 			}
 			if (type == NPCID.CursedHammer)
 			{
-				if (Main.npc[i].type == NPCID.CursedHammer)
+				if (npc.type == NPCID.CursedHammer)
 					amt++;
 			}
 			if (type == NPCID.CrimsonAxe)
 			{
-				if (Main.npc[i].type == NPCID.CrimsonAxe)
+				if (npc.type == NPCID.CrimsonAxe)
 					amt++;
 			}
 			if (type == NPCID.EnchantedSword)
 			{
-				if (Main.npc[i].type == NPCID.EnchantedSword)
+				if (npc.type == NPCID.EnchantedSword)
 					amt++;
 			}
 		}

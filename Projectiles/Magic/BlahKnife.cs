@@ -124,23 +124,23 @@ public class BlahKnife : ModProjectile
         int num4 = 0;
         _ = new int[200];
         int num5 = 0;
-        for (int i = 0; i < 200; i++)
+        foreach (var npc in Main.ActiveNPCs)
         {
-            if (!Main.npc[i].CanBeChasedBy(this))
+            if (!npc.CanBeChasedBy(this))
             {
                 continue;
             }
-            float num6 = Math.Abs(Main.npc[i].position.X + Main.npc[i].width / 2 - Projectile.position.X + Projectile.width / 2) + Math.Abs(Main.npc[i].position.Y + Main.npc[i].height / 2 - Projectile.position.Y + Projectile.height / 2);
+            float num6 = Math.Abs(npc.position.X + npc.width / 2 - Projectile.position.X + Projectile.width / 2) + Math.Abs(npc.position.Y + npc.height / 2 - Projectile.position.Y + Projectile.height / 2);
             if (num6 < 800f)
             {
-                if (Collision.CanHit(Projectile.position, 1, 1, Main.npc[i].position, Main.npc[i].width, Main.npc[i].height) && num6 > 50f)
+                if (Collision.CanHit(Projectile.position, 1, 1, npc.position, npc.width, npc.height) && num6 > 50f)
                 {
-                    array[num5] = i;
+                    array[num5] = npc.whoAmI;
                     num5++;
                 }
                 else if (num5 == 0)
                 {
-                    array[num4] = i;
+                    array[num4] = npc.whoAmI;
                     num4++;
                 }
             }

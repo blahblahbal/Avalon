@@ -160,13 +160,13 @@ public class WallofSteel : ModNPC
 	{
 		if (AvalonWorld.WallOfSteel >= 0)
 		{
-			for (int i = 0; i < 255; i++)
+			foreach (var player in Main.ActivePlayers)
 			{
-				if (Main.player[i].gross && Main.player[i].active && Main.player[i].tongued && !Main.player[i].dead)
+				if (player.gross && player.active && player.tongued && !player.dead)
 				{
 					float num = Main.npc[AvalonWorld.WallOfSteel].position.X + Main.npc[AvalonWorld.WallOfSteel].width / 2;
 					float num2 = Main.npc[AvalonWorld.WallOfSteel].position.Y + Main.npc[AvalonWorld.WallOfSteel].height / 2;
-					var vector = new Vector2(Main.player[i].position.X + Main.player[i].width * 0.5f, Main.player[i].position.Y + Main.player[i].height * 0.5f);
+					var vector = new Vector2(player.position.X + player.width * 0.5f, player.position.Y + player.height * 0.5f);
 					float num3 = num - vector.X;
 					float num4 = num2 - vector.Y;
 					float rotation = (float)Math.Atan2(num4, num3) - 1.57f;
@@ -193,20 +193,20 @@ public class WallofSteel : ModNPC
 					}
 				}
 			}
-			for (int j = 0; j < 200; j++)
+			foreach (var npcMechaHungry in Main.ActiveNPCs)
 			{
-				if (Main.npc[j].active && (Main.npc[j].type == ModContent.NPCType<MechanicalHungry>() || Main.npc[j].type == ModContent.NPCType<MechanicalHungry2>()))
+				if (npcMechaHungry.active && (npcMechaHungry.type == ModContent.NPCType<MechanicalHungry>() || npcMechaHungry.type == ModContent.NPCType<MechanicalHungry2>()))
 				{
 					float num6 = Main.npc[AvalonWorld.WallOfSteel].position.X + Main.npc[AvalonWorld.WallOfSteel].width / 2;
 					float num7 = Main.npc[AvalonWorld.WallOfSteel].position.Y;
 					float num8 = AvalonWorld.WallOfSteelB - AvalonWorld.WallOfSteelT;
 					bool flag2 = false;
-					if (Main.npc[j].frameCounter > 7.0)
+					if (npcMechaHungry.frameCounter > 7.0)
 					{
 						flag2 = true;
 					}
-					num7 = AvalonWorld.WallOfSteelT + num8 * Main.npc[j].ai[0];
-					var vector2 = new Vector2(Main.npc[j].position.X + Main.npc[j].width / 2, Main.npc[j].position.Y + Main.npc[j].height / 2);
+					num7 = AvalonWorld.WallOfSteelT + num8 * npcMechaHungry.ai[0];
+					var vector2 = new Vector2(npcMechaHungry.position.X + npcMechaHungry.width / 2, npcMechaHungry.position.Y + npcMechaHungry.height / 2);
 					float num9 = num6 - vector2.X;
 					float num10 = num7 - vector2.Y;
 					float rotation2 = (float)Math.Atan2(num10, num9) - 1.57f;

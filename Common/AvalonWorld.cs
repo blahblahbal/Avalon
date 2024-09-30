@@ -348,9 +348,9 @@ public class AvalonWorld : ModSystem
         if (Main.dayTime && Main.time == 0 && !ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak && NPC.downedBoss3 && NPC.downedBoss2)
         {
             bool flag = false;
-            for (int i = 0; i < 255; i++)
+            foreach (var player in Main.ActivePlayers)
             {
-                if (Main.player[i].active && Main.player[i].ConsumedLifeCrystals >= 10 && (int)Main.player[i].statDefense >= 16)
+                if (player.active && player.ConsumedLifeCrystals >= 10 && (int)player.statDefense >= 16)
                 {
                     flag = true;
                     break;
@@ -374,13 +374,12 @@ public class AvalonWorld : ModSystem
         {
             if (VultureKillCount > 5)
             {
-                for (int i = 0; i < 255; i++)
+                foreach (var player in Main.ActivePlayers)
                 {
-                    Player p = Main.player[i];
-                    if (p.ZoneDesert)
+                    if (player.ZoneDesert)
                     {
                         SpawnDesertBeak = false;
-                        NPC.SpawnOnPlayer(i, ModContent.NPCType<DesertBeak>());
+                        NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<DesertBeak>());
                         VultureKillCount = 0;
                         break;
                     }
@@ -445,18 +444,17 @@ public class AvalonWorld : ModSystem
             #endregion hardmode/superhardmode stuff
 
             #region bone fish spawning
-            for (int i = 0; i < 255; i++)
+            foreach (var player in Main.ActivePlayers)
             {
-                Player p = Main.player[i];
-                if (p.active && !p.dead && p.lavaWet)
+                if (player.active && !player.dead && player.lavaWet)
                 {
-                    float dist = Vector2.Distance(p.position, new Vector2(xCoord, yCoord) * 16);
-                    if (p.ZoneUnderworldHeight && dist > Main.screenWidth / 2 && dist < Main.screenWidth && NPCHelper.GetSpawnRate() >= 60)
+                    float dist = Vector2.Distance(player.position, new Vector2(xCoord, yCoord) * 16);
+                    if (player.ZoneUnderworldHeight && dist > Main.screenWidth / 2 && dist < Main.screenWidth && NPCHelper.GetSpawnRate() >= 60)
                     {
                         if (!Main.tile[xCoord, yCoord].HasTile && Main.tile[xCoord, yCoord].LiquidType == LiquidID.Lava && Main.tile[xCoord, yCoord].LiquidAmount > 70 &&
                             Main.rand.NextBool(NPCHelper.GetSpawnRate() / 60))
                         {
-                            NPC.NewNPC(p.GetSource_Misc(""), xCoord * 16, yCoord * 16, ModContent.NPCType<BoneFish>());
+                            NPC.NewNPC(player.GetSource_Misc(""), xCoord * 16, yCoord * 16, ModContent.NPCType<BoneFish>());
                         }
                     }
                 }

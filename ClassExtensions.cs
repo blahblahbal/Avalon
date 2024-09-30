@@ -190,11 +190,11 @@ public static class ClassExtensions
     /// <returns>The index of the found NPC in the Main.npc[] array. If not found, returns -1.</returns>
     public static int FindATypeOfNPC(int type)
     {
-        for (int i = 0; i < 200; i++)
+        foreach (var npc in Main.ActiveNPCs)
         {
-            if (type == Main.npc[i].type && Main.npc[i].active)
+            if (type == npc.type && npc.active)
             {
-                return i;
+                return npc.whoAmI;
             }
         }
 
