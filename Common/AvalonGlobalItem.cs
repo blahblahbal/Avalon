@@ -1843,6 +1843,16 @@ public class AvalonGlobalItem : GlobalItem
 				item.autoReuse = true;
 				item.createTile = ModContent.TileType<ShadowScale>();
 				break;
+			case ItemID.TissueSample:
+				item.chlorophyteExtractinatorConsumable = false;
+				item.useStyle = ItemUseStyleID.Swing;
+				item.useAnimation = 15;
+				item.useTime = 10;
+				item.consumable = true;
+				item.useTurn = true;
+				item.autoReuse = true;
+				item.createTile = ModContent.TileType<TissueSample>();
+				break;
 			#region miscellaneous changes
 			case ItemID.ShroomiteDiggingClaw:
                 item.pick = 205;
