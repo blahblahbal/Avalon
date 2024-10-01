@@ -41,13 +41,13 @@ public class Hellrazer : ModItem
 		{
 			Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
 		}
-		Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = 0;
-		Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = 0;
+		Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = -8;
+		Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = -4;
 		Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 127;
 	}
     public override Vector2? HoldoutOffset()
     {
-        return new Vector2(0, 0);
+        return new Vector2(-8, -4);
     }
     public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
     {
