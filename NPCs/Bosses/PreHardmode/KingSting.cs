@@ -325,6 +325,7 @@ public class KingSting : ModNPC
                 attackType = 0;
             }
         }
+		//NPC.rotation = 0;
     }
     public void FlyTo(Vector2 endpoint, float accel)
     {
@@ -444,19 +445,17 @@ public class KingSting : ModNPC
     {
         if (afterImage)
         {
-            Vector2 drawOrigin = TextureAssets.Npc[NPC.type].Size() / new Vector2(2, (Main.npcFrameCount[NPC.type] * 2));
-
             SpriteEffects spriteEffect;
             if (NPC.spriteDirection == 1)
                 spriteEffect = SpriteEffects.FlipHorizontally;
             else
                 spriteEffect = SpriteEffects.None;
 
-            for (int i = 0; i < NPC.oldPos.Length; i++)
+            for (int i = NPC.oldPos.Length - 1; i > 0; i--)
             {
-                Vector2 drawPos = NPC.oldPos[i] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
-                Color color = NPC.GetAlpha(lightColor) * ((float)(NPC.oldPos.Length - i) / NPC.oldPos.Length);
-                spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, drawPos, NPC.frame, color, NPC.rotation, drawOrigin, NPC.scale, spriteEffect, 0f);
+				Vector2 drawPos = NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition - new Vector2(0, 7); // I have no idea where this 7 offset comes from, but if it doesn't have it then it doesn't draw in the same position as the main npc sprite
+				Color color = NPC.GetAlpha(lightColor) * ((float)(NPC.oldPos.Length - i) / NPC.oldPos.Length) * 0.5f;
+				Main.EntitySpriteDraw(TextureAssets.Npc[NPC.type].Value, drawPos, NPC.frame, color, NPC.oldRot[i], NPC.frame.Size() / 2f, NPC.scale, spriteEffect, 0f);
             }
         }
         return true;
