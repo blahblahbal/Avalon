@@ -2605,7 +2605,7 @@ public class AvalonGlobalItem : GlobalItem
         {
             if (item.type == ItemID.BloodMoonStarter)
             {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.BloodyAmulet");
+                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.BloodyTear");
             }
         }
         if (tooltipLine != null && ModContent.GetInstance<AvalonConfig>().VanillaRenames)

@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Fish.Quest;
@@ -29,7 +30,7 @@ class Snotpiranha : ModItem
 
     public override void AnglerQuestChat(ref string description, ref string catchLocation)
     {
-        description = "Mods.Avalon.QuestFish.Snotpiranha.Description";
-        catchLocation = "Mods.Avalon.QuestFish.Pathofish.CatchLocation";
+        description = Language.GetTextValue("Mods.Avalon.QuestFish.Snotpiranha.Description");
+        catchLocation = Language.GetTextValue("Mods.Avalon.QuestFish.Snotpiranha.CatchLocation");
     }
 }

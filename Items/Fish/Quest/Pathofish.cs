@@ -2,6 +2,7 @@ using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Fish.Quest;
@@ -30,7 +31,7 @@ class Pathofish : ModItem
 
 	public override void AnglerQuestChat(ref string description, ref string catchLocation)
 	{
-		description = "Mods.Avalon.QuestFish.Pathofish.Description";
-		catchLocation = "Mods.Avalon.QuestFish.Pathofish.CatchLocation";
+		description = Language.GetTextValue("Mods.Avalon.QuestFish.Pathofish.Description");
+		catchLocation = Language.GetTextValue("Mods.Avalon.QuestFish.Pathofish.CatchLocation");
 	}
 }
