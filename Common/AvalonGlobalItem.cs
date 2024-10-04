@@ -2603,10 +2603,10 @@ public class AvalonGlobalItem : GlobalItem
         //}
         if (tooltipLine != null && (ModContent.GetInstance<AvalonConfig>().VanillaRenames || ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement))
         {
-            if (item.type == ItemID.BloodMoonStarter)
-            {
-                tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.BloodyTear");
-            }
+            //if (item.type == ItemID.BloodMoonStarter)
+            //{
+            //    tooltipLine.Text = Language.GetTextValue("Mods.Avalon.VanillaItemRenames.BloodyTear");
+            //}
         }
         if (tooltipLine != null && ModContent.GetInstance<AvalonConfig>().VanillaRenames)
         {

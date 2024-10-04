@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Data.Sets;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -14,8 +15,15 @@ internal class ItemNameChange : ModHook
     }
 
     private LocalizedText On_Lang_GetItemName(On_Lang.orig_GetItemName orig, int id)
-    {
-        if (ModContent.GetInstance<AvalonConfig>().VanillaRenames)
+	{
+		if (ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement)
+		{
+			if (id == ItemID.BloodMoonStarter)
+			{
+				return Language.GetText("Mods.Avalon.VanillaItemRenames.BloodyTear");
+			}
+		}
+		if (ModContent.GetInstance<AvalonConfig>().VanillaRenames)
         {
             if (id == ItemID.DarkBlueSolution)
                 return Language.GetText("Mods.Avalon.VanillaItemRenames.Solutions.Mushrooms");
