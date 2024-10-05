@@ -156,32 +156,33 @@ public class ContagionCattails : ModTile
 	}
 }
 
-
-public class CattailLilyPadGen : GlobalTile
-{
-	public override void RandomUpdate(int i, int j, int type)
-	{
-		if (j >= Main.worldSurface)
-		{
-			if (Main.tile[i, j].LiquidAmount > 32)
-			{
-				if (WorldGen.genRand.NextBool(600))
-				{
-					WorldGen.PlaceTile(i, j, ModContent.TileType<ContagionCattails>(), mute: true);
-					if (Main.netMode == NetmodeID.Server)
-					{
-						NetMessage.SendTileSquare(-1, i, j);
-					}
-				}
-				else if (WorldGen.genRand.NextBool(600))
-				{
-					WorldGen.PlaceTile(i, j, ModContent.TileType<ContagionCattails>(), mute: true);
-					if (Main.netMode == 2)
-					{
-						NetMessage.SendTileSquare(-1, i, j);
-					}
-				}
-			}
-		}
-	}
-}
+// this code is REALLY bad, it was allowing any tile containing liquid to possibly be overwritten by a cattail
+// no idea if cattails have code elsewhere to make them generate randomly cause I don't understand the CattailHooks shit
+//public class CattailLilyPadGen : GlobalTile
+//{
+//	public override void RandomUpdate(int i, int j, int type)
+//	{
+//		if (j >= Main.worldSurface)
+//		{
+//			if (Main.tile[i, j].LiquidAmount > 32)
+//			{
+//				if (WorldGen.genRand.NextBool(600))
+//				{
+//					WorldGen.PlaceTile(i, j, ModContent.TileType<ContagionCattails>(), mute: true);
+//					if (Main.netMode == NetmodeID.Server)
+//					{
+//						NetMessage.SendTileSquare(-1, i, j);
+//					}
+//				}
+//				else if (WorldGen.genRand.NextBool(600))
+//				{
+//					WorldGen.PlaceTile(i, j, ModContent.TileType<ContagionCattails>(), mute: true);
+//					if (Main.netMode == 2)
+//					{
+//						NetMessage.SendTileSquare(-1, i, j);
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
