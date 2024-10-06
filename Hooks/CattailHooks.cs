@@ -67,7 +67,7 @@ internal class CattailHooks : ModHook
 						}
 					}
 				}
-				else if (num == ModContent.TileType<ContagionLilyPads>())
+				else if (num == ModContent.TileType<ContagionLilypads>())
 				{
 					WorldGen.PlaceLilyPad(i, j);
 				}
@@ -95,14 +95,54 @@ internal class CattailHooks : ModHook
 			Tile tile = Main.tile[i, j];
 			if (tile != null)
 			{ //somehow still out of bounds
-				//WorldGen.GetCactusType(i, j, tile.TileFrameX, tile.TileFrameY, out var sandType);
-				//if (Main.tile[i, j].TileType == TileID.Cactus && TileLoader.CanGrowModCactus(sandType) && sandType == ModContent.TileType<Snotsand>())
-				//{
-				//	num5 = MapHelper.tileLookup[ModContent.TileType<IckyCactusDummyTile>()];
-				//}
+				GetCactusType(i, j, tile.TileFrameX, tile.TileFrameY, out var sandType);
+				if (Main.tile[i, j].TileType == TileID.Cactus && TileLoader.CanGrowModCactus(sandType) && sandType == ModContent.TileType<Snotsand>())
+				{
+					num5 = MapHelper.tileLookup[ModContent.TileType<IckyCactusDummyTile>()];
+				}
 			}
 		});
 	}
+
+	/// Copied from vanilla's WorldGen.GetCactusType due to a critical issue where this is no prevention for checking out of bounds for cacti - Lion8cake
+	public static void GetCactusType(int tileX, int tileY, int frameX, int frameY, out int type)
+	{
+		type = 0;
+		int num = tileX;
+		if (frameX == 36)
+			num--;
+
+		if (frameX == 54)
+			num++;
+
+		if (frameX == 108)
+			num = ((frameY != 18) ? (num + 1) : (num - 1));
+
+		int num2 = tileY;
+		bool flag = false;
+		Tile tile = Main.tile[num, num2];
+		if (tile == null)
+			return;
+
+		if (tile.TileType == 80 && tile.HasTile)
+			flag = true;
+
+		while (tile != null && (!tile.HasTile || !Main.tileSolid[tile.TileType] || !flag))
+		{
+			if (tile.TileType == 80 && tile.HasTile)
+				flag = true;
+
+			num2++;
+			if (num2 > tileY + 20)
+				break;
+
+			if (num < Main.maxTilesX && num2 < Main.maxTilesY)
+				tile = Main.tile[num, num2];
+		}
+
+		type = tile.TileType;
+	}
+
 	private void PlaceLilyPadEdit(ILContext il)
 	{
 		ILCursor c = new(il);
@@ -121,7 +161,7 @@ internal class CattailHooks : ModHook
 			{
 				for (int k = num - num2; k <= num + num2; k++)
 				{
-					if (Main.tile[i, k].HasTile && Main.tile[i, k].TileType == ModContent.TileType<ContagionLilyPads>())
+					if (Main.tile[i, k].HasTile && Main.tile[i, k].TileType == ModContent.TileType<ContagionLilypads>())
 					{
 						num3++;
 					}
@@ -139,7 +179,7 @@ internal class CattailHooks : ModHook
 		c.EmitDelegate((int type, ref int num5) => {
 			if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<Snotsand>())
 			{
-				num5 = ModContent.TileType<ContagionLilyPads>();
+				num5 = ModContent.TileType<ContagionLilypads>();
 			}
 		});
 		c.GotoNext(
@@ -153,7 +193,7 @@ internal class CattailHooks : ModHook
 		c.EmitLdloc(0); //num
 		c.EmitLdloc(6); //num5
 		c.EmitDelegate((int x, int num, int num5) => {
-			if (num5 == ModContent.TileType<ContagionLilyPads>())
+			if (num5 == ModContent.TileType<ContagionLilypads>())
 			{
 				Main.tile[x, num].TileType = (ushort)num5;
 				Main.tile[x, num].TileFrameY = 0;
@@ -179,7 +219,7 @@ internal class CattailHooks : ModHook
 			if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<Snotsand>())
 			{
 				num2 = -1;
-				int num3 = ModContent.TileType<ContagionLilyPads>();
+				int num3 = ModContent.TileType<ContagionLilypads>();
 				tile = Main.tile[x, y];
 				if (num3 != tile.TileType)
 				{
@@ -196,7 +236,7 @@ internal class CattailHooks : ModHook
 					if (!tile.HasTile)
 					{
 						tile.HasTile = true;
-						tile.TileType = (ushort)ModContent.TileType<ContagionLilyPads>();
+						tile.TileType = (ushort)ModContent.TileType<ContagionLilypads>();
 						ref short frameX = ref tile.TileFrameX;
 						tile = Main.tile[x, y];
 						frameX = tile.TileFrameX;
@@ -228,7 +268,7 @@ internal class CattailHooks : ModHook
 				{
 					tile = Main.tile[x, y + 1];
 					tile.HasTile = true;
-					tile.TileType = (ushort)ModContent.TileType<ContagionLilyPads>();
+					tile.TileType = (ushort)ModContent.TileType<ContagionLilypads>();
 					ref short frameX2 = ref tile.TileFrameX;
 					tile = Main.tile[x, y];
 					frameX2 = tile.TileFrameX;
@@ -492,7 +532,7 @@ internal class CattailHooks : ModHook
 																					//this converts the tile if num5 is the creamcattail ID
 			if (Main.tile[x, num2].TileType == ModContent.TileType<ContagionCattails>())
 			{
-				CreamcattailCheck(x, num2, ref num, ref flag);
+				CoughcattailCheck(x, num2, ref num, ref flag);
 			}
 			if (!flag)
 			{
@@ -543,7 +583,7 @@ internal class CattailHooks : ModHook
 		}
 		return orig.Invoke(x, j);
 	}
-	private void CreamcattailCheck(int x, int y, ref int num, ref bool flag)
+	private void CoughcattailCheck(int x, int y, ref int num, ref bool flag)
 	{
 		int num2 = y;
 		while ((!Main.tile[x, num2].HasTile || !Main.tileSolid[Main.tile[x, num2].TileType] || Main.tileSolidTop[Main.tile[x, num2].TileType]) && num2 < Main.maxTilesY - 50)

@@ -176,7 +176,6 @@ public class BleachedEbonyChandelier : ChandelierTemplate
         float num5 = -4f;
         bool flag2 = false;
         num2 = 0.15f;
-        int PositioningFix = 192;
         num3 = 1f;
         num5 = 0f;
         if (flag2)
@@ -402,7 +401,6 @@ public class BleachedEbonyLantern : LanternTemplate
         float num5 = -4f;
         bool flag2 = false;
         num2 = 0.15f;
-        int PositioningFix = 192;
         num3 = 1f;
         num5 = 0f;
         if (flag2)

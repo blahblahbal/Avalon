@@ -7,7 +7,7 @@ using Avalon.Dusts;
 
 namespace Avalon.Tiles.Contagion;
 
-public class ContagionLilyPads : ModTile
+public class ContagionLilypads : ModTile
 {
 	public override void SetStaticDefaults()
 	{
@@ -37,7 +37,7 @@ public class ContagionLilyPads : ModTile
 
 	public override void RandomUpdate(int i, int j)
 	{
-		if (i > Main.worldSurface)
+		if (j > Main.worldSurface)
 		{
 			if (Main.tile[i, j].LiquidAmount == 0 || (Main.tile[i, j].LiquidAmount / 16 >= 9 && WorldGen.SolidTile(i, j - 1)) || (Main.tile[i, j - 1].LiquidAmount > 0 && Main.tile[i, j - 1].HasTile))
 			{

@@ -64,7 +64,11 @@ public class ContagionCattails : ModTile
 	private void DrawMultiTileGrass(int x, int num3, SpriteBatch unused)
 	{
 		Vector2 unscaledPosition = Main.Camera.UnscaledPosition;
-		Vector2 zero = Vector2.Zero;
+		Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+		if (Main.drawToScreen)
+		{
+			zero = Vector2.Zero;
+		}
 		int sizeX = 1;
 		int num4 = 1;
 		Tile tile = Main.tile[x, num3];
@@ -82,8 +86,6 @@ public class ContagionCattails : ModTile
 		double _sunflowerWindCounter = (double)typeof(TileDrawing).GetField("_sunflowerWindCounter", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance).GetValue(Main.instance.TilesRenderer);
 		float windCycle = Main.instance.TilesRenderer.GetWindCycle(topLeftX, topLeftY, _sunflowerWindCounter);
 		new Vector2((float)(sizeX * 16) * 0.5f, (float)(sizeY * 16));
-		int PositioningFix = CaptureManager.Instance.IsCapturing ? 0 : 192; //Fix to the positioning to the tiles being 192 pixels to the top and left
-		offSet = new(PositioningFix, PositioningFix);
 		Vector2 vector = new Vector2((float)(topLeftX * 16 - (int)screenPosition.X) + (float)sizeX * 16f * 0.5f, (float)(topLeftY * 16 - (int)screenPosition.Y + 16 * sizeY)) + offSet;
 		float num = 0.07f;
 		int type = Main.tile[topLeftX, topLeftY].TileType;
@@ -157,32 +159,35 @@ public class ContagionCattails : ModTile
 }
 
 // this code is REALLY bad, it was allowing any tile containing liquid to possibly be overwritten by a cattail
-// no idea if cattails have code elsewhere to make them generate randomly cause I don't understand the CattailHooks shit
-//public class CattailLilyPadGen : GlobalTile
-//{
-//	public override void RandomUpdate(int i, int j, int type)
-//	{
-//		if (j >= Main.worldSurface)
-//		{
-//			if (Main.tile[i, j].LiquidAmount > 32)
-//			{
-//				if (WorldGen.genRand.NextBool(600))
-//				{
-//					WorldGen.PlaceTile(i, j, ModContent.TileType<ContagionCattails>(), mute: true);
-//					if (Main.netMode == NetmodeID.Server)
-//					{
-//						NetMessage.SendTileSquare(-1, i, j);
-//					}
-//				}
-//				else if (WorldGen.genRand.NextBool(600))
-//				{
-//					WorldGen.PlaceTile(i, j, ModContent.TileType<ContagionCattails>(), mute: true);
-//					if (Main.netMode == 2)
-//					{
-//						NetMessage.SendTileSquare(-1, i, j);
-//					}
-//				}
-//			}
-//		}
-//	}
-//}
+// no idea if cattails have code elsewhere to make them generate randomly cause I don't understand the CattailHooks shit - Terror 5/10/2024
+//
+// my bad homie - Lion8cake 6/10/2024
+public class CattailLilyPadGen : GlobalTile
+{
+	public override void RandomUpdate(int i, int j, int type)
+	{
+		if (j >= Main.worldSurface)
+		{
+			Tile tile = Main.tile[i, j];
+			if (!tile.HasTile && tile.LiquidAmount > 32 && tile.LiquidType == LiquidID.Water)
+			{
+				if (WorldGen.genRand.NextBool(600))
+				{
+					WorldGen.PlaceTile(i, j, ModContent.TileType<ContagionCattails>(), mute: true);
+					if (Main.netMode == NetmodeID.Server)
+					{
+						NetMessage.SendTileSquare(-1, i, j);
+					}
+				}
+				else if (WorldGen.genRand.NextBool(600))
+				{
+					WorldGen.PlaceTile(i, j, ModContent.TileType<ContagionCattails>(), mute: true);
+					if (Main.netMode == 2)
+					{
+						NetMessage.SendTileSquare(-1, i, j);
+					}
+				}
+			}
+		}
+	}
+}
