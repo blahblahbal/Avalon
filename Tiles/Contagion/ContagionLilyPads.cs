@@ -7,7 +7,7 @@ using Avalon.Dusts;
 
 namespace Avalon.Tiles.Contagion;
 
-public class ContagionLilypads : ModTile
+public class ContagionLilyPads : ModTile
 {
 	public override void SetStaticDefaults()
 	{

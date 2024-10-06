@@ -67,7 +67,7 @@ internal class CattailHooks : ModHook
 						}
 					}
 				}
-				else if (num == ModContent.TileType<ContagionLilypads>())
+				else if (num == ModContent.TileType<ContagionLilyPads>())
 				{
 					WorldGen.PlaceLilyPad(i, j);
 				}
@@ -161,7 +161,7 @@ internal class CattailHooks : ModHook
 			{
 				for (int k = num - num2; k <= num + num2; k++)
 				{
-					if (Main.tile[i, k].HasTile && Main.tile[i, k].TileType == ModContent.TileType<ContagionLilypads>())
+					if (Main.tile[i, k].HasTile && Main.tile[i, k].TileType == ModContent.TileType<ContagionLilyPads>())
 					{
 						num3++;
 					}
@@ -179,7 +179,7 @@ internal class CattailHooks : ModHook
 		c.EmitDelegate((int type, ref int num5) => {
 			if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<Snotsand>())
 			{
-				num5 = ModContent.TileType<ContagionLilypads>();
+				num5 = ModContent.TileType<ContagionLilyPads>();
 			}
 		});
 		c.GotoNext(
@@ -193,7 +193,7 @@ internal class CattailHooks : ModHook
 		c.EmitLdloc(0); //num
 		c.EmitLdloc(6); //num5
 		c.EmitDelegate((int x, int num, int num5) => {
-			if (num5 == ModContent.TileType<ContagionLilypads>())
+			if (num5 == ModContent.TileType<ContagionLilyPads>())
 			{
 				Main.tile[x, num].TileType = (ushort)num5;
 				Main.tile[x, num].TileFrameY = 0;
@@ -219,7 +219,7 @@ internal class CattailHooks : ModHook
 			if (type == ModContent.TileType<Ickgrass>() || type == ModContent.TileType<Snotsand>())
 			{
 				num2 = -1;
-				int num3 = ModContent.TileType<ContagionLilypads>();
+				int num3 = ModContent.TileType<ContagionLilyPads>();
 				tile = Main.tile[x, y];
 				if (num3 != tile.TileType)
 				{
@@ -236,7 +236,7 @@ internal class CattailHooks : ModHook
 					if (!tile.HasTile)
 					{
 						tile.HasTile = true;
-						tile.TileType = (ushort)ModContent.TileType<ContagionLilypads>();
+						tile.TileType = (ushort)ModContent.TileType<ContagionLilyPads>();
 						ref short frameX = ref tile.TileFrameX;
 						tile = Main.tile[x, y];
 						frameX = tile.TileFrameX;
@@ -268,7 +268,7 @@ internal class CattailHooks : ModHook
 				{
 					tile = Main.tile[x, y + 1];
 					tile.HasTile = true;
-					tile.TileType = (ushort)ModContent.TileType<ContagionLilypads>();
+					tile.TileType = (ushort)ModContent.TileType<ContagionLilyPads>();
 					ref short frameX2 = ref tile.TileFrameX;
 					tile = Main.tile[x, y];
 					frameX2 = tile.TileFrameX;
