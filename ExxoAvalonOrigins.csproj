@@ -29,6 +29,9 @@
     <Folder Include="Mounts\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="OphioidMod">
+      <HintPath>..\ModAssemblies\OphioidMod_v2.30.dll</HintPath>
+    </Reference>
     <Reference Include="ThoriumMod">
       <HintPath>..\ModAssemblies\ThoriumMod.dll</HintPath>
     </Reference>
