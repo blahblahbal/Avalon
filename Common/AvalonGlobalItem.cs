@@ -1730,8 +1730,12 @@ public class AvalonGlobalItem : GlobalItem
             itemLoot.Add(contagionRule);
         }
     }
-    public override void SetDefaults(Item item)
-    {
+	public override void SetDefaults(Item item)
+	{
+		if (item.type != ModContent.ItemType<InactiveCoating>() && item.paintCoating == AvalonCoatingsID.ActuatorCoating)
+		{
+			throw new Exception("Item is attempting to use the same coating ID as an already exisiting coating Item. This is a Mod Conflict and would suggest disabling each mod one at a time.");
+		}
         if (item.IsArmor())
         {
             ItemID.Sets.CanGetPrefixes[item.type] = true;

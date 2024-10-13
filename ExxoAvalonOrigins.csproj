@@ -8,6 +8,7 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <RootNamespace>Avalon</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Remove="DrawMagics\**" />
@@ -33,7 +34,7 @@
       <HintPath>..\ModAssemblies\OphioidMod_v2.30.dll</HintPath>
     </Reference>
     <Reference Include="ThoriumMod">
-      <HintPath>..\ModAssemblies\ThoriumMod.dll</HintPath>
+      <HintPath>..\..\ModReader\ThoriumMod\ThoriumMod.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

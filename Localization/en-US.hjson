@@ -9509,6 +9509,16 @@ Mods: {
 				DisplayName: Sickly Vulture Banner
 				Tooltip: ""
 			}
+
+			InactiveCoating: {
+				DisplayName: Inactive Coating
+				Tooltip:
+					'''
+					Makes tiles render actuated, and reverse when physically actuated
+					Can be combined with any other paint or coating
+					'This gives me dim ideas.'
+					'''
+			}
 		}
 
 		InfoDisplays: {

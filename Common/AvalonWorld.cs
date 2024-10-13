@@ -215,7 +215,21 @@ public class AvalonWorld : ModSystem
         tag["Avalon:JungleX"] = JungleLocationX;
 
 		tag["Avalon:OopsAllCaves"] = OopsAllCaves;
-    }
+
+		AvalonTileData[] myData = Main.tile.GetData<AvalonTileData>(); //Coppied from SLR because I havent worked with pointers much
+		byte[] data = new byte[myData.Length];
+		unsafe
+		{
+			fixed (AvalonTileData* ptr = myData)
+			{
+				byte* bytePtr = (byte*)ptr;
+				var span = new Span<byte>(bytePtr, myData.Length);
+				var target = new Span<byte>(data);
+				span.CopyTo(target);
+			}
+		}
+		tag.Add("Avalon:TileData", data);
+	}
     public override void SaveWorldHeader(TagCompound tag)
     {
         tag["Avalon:WorldEvil"] = (byte)WorldEvil;
@@ -260,8 +274,20 @@ public class AvalonWorld : ModSystem
                 if (ContagionCountCollection.Contains(Main.tile[i, j].TileType)) //Better calculations, this is only loaded when the world is loaded
                     totalSick2++;                                                //to make sure that the world doesn't lag when calculating normally
 
+		AvalonTileData[] targetData = Main.tile.GetData<AvalonTileData>(); //Coppied from SLR because I havent worked with pointers much
+		byte[] data = tag.GetByteArray("Avalon:TileData");
 
-    }
+		unsafe
+		{
+			fixed (AvalonTileData* ptr = targetData)
+			{
+				byte* bytePtr = (byte*)ptr;
+				var span = new Span<byte>(bytePtr, targetData.Length);
+				var target = new Span<byte>(data);
+				target.CopyTo(span);
+			}
+		}
+	}
     public override void PreUpdateWorld()
     {
         Main.tileSolidTop[ModContent.TileType<FallenStarTile>()] = Main.dayTime;
