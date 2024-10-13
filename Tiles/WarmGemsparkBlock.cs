@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent;
+using Avalon.Systems;
 
 namespace Avalon.Tiles;
 
@@ -67,7 +68,7 @@ public class WarmGemsparkBlock : ModTile
 		Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
 		var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 		var halfFrame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 8);
-		Color color = new Color(255, G, 0);
+		Color color = TileGlowDrawing.ActuatedColor(new Color(255, G, 0), tile);
 		if (tileL.IsHalfBlock && tileR.IsHalfBlock && tile.Slope == SlopeType.Solid && !tile.IsHalfBlock)
 		{
 			Main.spriteBatch.Draw(texture, pos + new Vector2(0f, 8f), new Rectangle(tile.TileFrameX + addFrX, addFrY + tile.TileFrameY + 8, 16, 8), color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);

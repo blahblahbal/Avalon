@@ -1,3 +1,4 @@
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ public class LaziteGrass : ModTile
         int num = (int)(Main.GlobalTimeWrappedHourly / 135f % colors.Count);
         int index = (int)(Main.GameUpdateCount / 135 % colors.Count);
         int nextIndex = (index + 1) % colors.Count;
-        Color colorShift = Color.Lerp(colors[index], colors[nextIndex], Main.GameUpdateCount % 135 / 135f);
+        Color colorShift = TileGlowDrawing.ActuatedColor(Color.Lerp(colors[index], colors[nextIndex], Main.GameUpdateCount % 135 / 135f), tile);
         if (tile.Slope == SlopeType.Solid && !tile.IsHalfBlock)
         {
             Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/LaziteGrass_Glow").Value, pos, frame, colorShift);
