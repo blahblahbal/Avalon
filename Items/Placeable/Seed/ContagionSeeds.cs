@@ -41,18 +41,23 @@ public class ContagionSeeds : ModItem
     public override bool? UseItem(Player player)
     {
         Terraria.Tile tile = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
-        if (tile.HasTile && tile.TileType == TileID.Dirt && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple))
+        if (tile.HasTile && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple))
         {
-            Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Tiles.Contagion.Ickgrass>();
-            SoundEngine.PlaySound(SoundID.Dig, player.Center);
-            return true;
-        }
-        if (tile.HasTile && tile.TileType == TileID.Mud && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple))
-        {
-            Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Tiles.Contagion.ContagionJungleGrass>();
-            SoundEngine.PlaySound(SoundID.Dig, player.Center);
-            return true;
+			if (tile.TileType == TileID.Dirt)
+			{
+				Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Tiles.Contagion.Ickgrass>();
+				WorldGen.SquareTileFrame(Player.tileTargetX, Player.tileTargetY, true);
+				SoundEngine.PlaySound(SoundID.Dig, player.Center);
+				return true;
+			}
+			else if (tile.TileType == TileID.Mud)
+			{
+				Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Tiles.Contagion.ContagionJungleGrass>();
+				WorldGen.SquareTileFrame(Player.tileTargetX, Player.tileTargetY, true);
+				SoundEngine.PlaySound(SoundID.Dig, player.Center);
+				return true;
+			}
         }
         return false;
-    }
+	}
 }
