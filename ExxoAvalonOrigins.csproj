@@ -30,10 +30,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OphioidMod">
-      <HintPath>..\ModAssemblies\OphioidMod_v2.30.dll</HintPath>
+      <HintPath>..\..\ModReader\OphioidMod\OphioidMod.dll</HintPath>
     </Reference>
     <Reference Include="ThoriumMod">
-      <HintPath>..\ModAssemblies\ThoriumMod.dll</HintPath>
+      <HintPath>..\..\ModReader\ThoriumMod\ThoriumMod.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

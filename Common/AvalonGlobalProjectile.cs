@@ -14,6 +14,7 @@ using Terraria.ModLoader;
 using Avalon.Tiles.Contagion;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Projectiles.Melee;
+using Avalon.Tiles;
 
 namespace Avalon.Common;
 
@@ -258,6 +259,11 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 							//    ContagionSapling.AttemptToGrowContagionTreeFromSapling(num1032, num1043);
 							//}
 							ContagionSapling.AttemptToGrowContagionTreeFromSapling(num1032, num1043);
+						}
+
+						if (tile.TileType == ModContent.TileType<ResistantSapling>())
+						{
+							ResistantSapling.AttemptToGrowResistantFromSapling(num1032, num1043);
 						}
 
 						if (tile.TileType == ModContent.TileType<TourmalineSapling>())

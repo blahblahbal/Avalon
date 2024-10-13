@@ -10948,6 +10948,7 @@ Mods: {
 			SavannaPylon.MapEntry: Savanna Pylon
 			PoisonSpike.MapEntry: Poison Spike
 			SilenceCandle.MapEntry: Mods.Avalon.Tiles.SilenceCandle.MapEntry
+			ResistantTree.MapEntry: Resistant Tree
 		}
 
 		Prefixes: {
