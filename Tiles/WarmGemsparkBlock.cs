@@ -15,7 +15,10 @@ public class WarmGemsparkBlock : ModTile
 
     public override void SetStaticDefaults()
     {
-		waterfallStyle = Mod.Find<ModWaterfallStyle>("WarmGemsparkWaterfallStyle");
+		if (Main.netMode != NetmodeID.Server)
+		{
+			waterfallStyle = Mod.Find<ModWaterfallStyle>("WarmGemsparkWaterfallStyle");
+		}
         AddMapEntry(Color.OrangeRed);
         Main.tileSolid[Type] = true;
         Main.tileBrick[Type] = true;
