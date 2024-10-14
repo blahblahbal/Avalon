@@ -434,5 +434,9 @@ public class AvalonGlobalTile : GlobalTile
                 fail = true;
             }
         }
+		if (!fail && !effectOnly)
+		{
+			Main.tile[i, j].Get<AvalonTileData>().IsTileActupainted = false;
+		}
     }
 }

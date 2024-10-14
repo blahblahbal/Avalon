@@ -28,27 +28,6 @@ namespace Avalon.Hooks
 			On_WorldGen.paintCoatEffect += paintModCoatEffect;
 			On_Player.PlaceThing_PaintScrapper_TryScrapping += RemoveModCoatings;
 			On_TileLightScanner.GetTileMask += LightTileMask;
-			IL_WallDrawing.DrawWalls += InactiveWallColoring;
-		}
-
-		private void InactiveWallColoring(ILContext il)
-		{
-			ILCursor c = new(il);
-			c.GotoNext(MoveType.After, i => i.MatchLdloc(26), i => i.MatchCall<Lighting>("GetColor"), i => i.MatchStloc(29));
-			c.EmitLdloca(29); //color
-			c.EmitLdloc(27); //tile
-			c.EmitDelegate((ref Color color, Tile tile) =>
-			{
-				color = TileGlowDrawing.ActuatedRetroWallColor(color, tile);
-			});
-			c.GotoNext(MoveType.After, i => i.MatchCall<Lighting>("GetCornerColors"));
-			c.EmitLdloca(21);
-			c.EmitLdloc(27);
-			c.EmitDelegate((ref VertexColors vertices, Tile tile) =>
-			{
-				vertices = TileGlowDrawing.ActuatedWallColor(vertices, tile);
-			});
-
 		}
 
 		private LightMaskMode LightTileMask(On_TileLightScanner.orig_GetTileMask orig, TileLightScanner self, Tile tile)
@@ -145,9 +124,9 @@ namespace Avalon.Hooks
 			{
 				NetMessage.SendData(MessageID.PaintWall, -1, -1, null, x, y, (int)paintCoatId, 1f);
 			}
-			WorldGen.paintCoatEffect(x, y, paintCoatId, oldColors);
 			if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
 			{
+				WorldGen.paintCoatEffect(x, y, paintCoatId, oldColors);
 				return true;
 			}
 			return orig.Invoke(x, y, paintCoatId, broadcast);
@@ -183,9 +162,9 @@ namespace Avalon.Hooks
 			{
 				NetMessage.SendData(MessageID.PaintTile, -1, -1, null, x, y, (int)paintCoatId, 1f);
 			}
-			WorldGen.paintCoatEffect(x, y, paintCoatId, oldColors);
 			if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
 			{
+				WorldGen.paintCoatEffect(x, y, paintCoatId, oldColors);
 				return true;
 			}
 			return orig.Invoke(x, y, paintCoatId, broadcast);

@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 using Avalon.Dusts;
 using Avalon.Common;
 using Avalon.Hooks;
+using Avalon.Systems;
 
 namespace Avalon.Tiles.Contagion;
 
@@ -122,6 +123,7 @@ public class ContagionCattails : ModTile
 				Main.instance.TilesRenderer.GetTileDrawData(i, j, tile, type2, ref tileFrameX, ref tileFrameY, out var tileWidth, out var tileHeight, out var tileTop, out var halfBrickHeight, out var addFrX, out var addFrY, out var tileSpriteEffect, out var _, out var _, out var _);
 				bool flag2 = Main.rand.NextBool(4);
 				Color tileLight = Lighting.GetColor(i, j);
+				tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile);
 				//As far as I know cattails dont use these, so they'll keep as comments until needed (watch relogic add particle effects to cattails)
 				/*DrawAnimatedTile_AdjustForVisionChangers(i, j, tile, type2, tileFrameX, tileFrameY, ref tileLight, flag2);
 				tileLight = DrawTiles_GetLightOverride(j, i, tile, type2, tileFrameX, tileFrameY, tileLight);
