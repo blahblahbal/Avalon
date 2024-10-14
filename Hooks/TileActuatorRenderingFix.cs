@@ -1,15 +1,13 @@
 using Avalon.Common;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Steamworks;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.Graphics;
+using Terraria.ModLoader;
 
 namespace Avalon.Hooks
 {
@@ -19,10 +17,39 @@ namespace Avalon.Hooks
 		{
 			IL_WallDrawing.DrawWalls += InactiveWallColoring;
 
-			IL_TileDrawing.DrawMultiTileVinesInWind += ActuatorVineFix;
+			IL_TileDrawing.DrawMultiTileVinesInWind += ActuatorHangingTilesFix;
 			IL_TileDrawing.DrawMultiTileGrassInWind += ActuatorGrassFix;
 			IL_TileDrawing.DrawGrass += ActuatorBasicGrassFix;
 			IL_TileDrawing.DrawTrees += ActuatedTreesFix;
+			IL_TileDrawing.CrawlToTopOfVineAndAddSpecialPoint += FixVinesJustDisappearing;
+			IL_TileDrawing.CrawlToBottomOfReverseVineAndAddSpecialPoint += FixVinesJustDisappearing;
+			IL_TileDrawing.DrawVineStrip += ActuatedVinesFix;
+			IL_TileDrawing.DrawRisingVineStrip += ActuatedVinesFix;
+		}
+
+		private void ActuatedVinesFix(ILContext il)
+		{
+			ILCursor c = new(il);
+			c.GotoNext(MoveType.After, i => i.MatchCall<Lighting>("GetColor"), i => i.MatchStloc(14));
+			c.EmitLdloca(14);
+			c.EmitLdloc(9);
+			c.EmitDelegate((ref Color color, Tile tile) =>
+			{
+				color = TileGlowDrawing.ActuatedColor(color, tile);
+			});
+		}
+
+		private void FixVinesJustDisappearing(ILContext il)
+		{
+			ILCursor c = new(il);
+			c.GotoNext(MoveType.After, i => i.MatchCall<WorldGen>("SolidTile"));
+			c.EmitLdarg2();
+			c.EmitLdloc2();
+			c.EmitDelegate((int i, int num) =>
+			{
+				return (Main.tile[i, num].Get<AvalonTileData>().IsTileActupainted && ModCoatingEdits.SolidTileNoActuator(i, num));
+			});
+			c.EmitOr();
 		}
 
 		private void ActuatedTreesFix(ILContext il)
@@ -82,7 +109,7 @@ namespace Avalon.Hooks
 			});
 		}
 
-		private void ActuatorVineFix(ILContext il)
+		private void ActuatorHangingTilesFix(ILContext il)
 		{
 			ILCursor c = new(il);
 			c.GotoNext(MoveType.After, i => i.MatchCall<TileDrawing>("DrawTiles_GetLightOverride"), i => i.MatchStloc(33));

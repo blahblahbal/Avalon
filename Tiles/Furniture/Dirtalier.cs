@@ -15,6 +15,7 @@ using Terraria.ObjectData;
 using Terraria.Utilities;
 using static Terraria.GameContent.Drawing.TileDrawing;
 using ReLogic.Content;
+using Avalon.Systems;
 
 namespace Avalon.Tiles.Furniture;
 
@@ -121,7 +122,8 @@ public class Dirtalier : ChandelierTemplate
                 Color tileLight = Lighting.GetColor(i, j);
                 typeof(TileDrawing).GetMethod("DrawAnimatedTile_AdjustForVisionChangers", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).Invoke(Main.instance.TilesRenderer, new object[] { i, j, tile2, type2, tileFrameX, tileFrameY, tileLight, flag3 });
                 tileLight = (Color)typeof(TileDrawing).GetMethod("DrawTiles_GetLightOverride", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).Invoke(Main.instance.TilesRenderer, new object[] { j, i, tile2, type2, tileFrameX, tileFrameY, tileLight });
-                if (_isActiveAndNotPaused && flag3)
+				tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile);
+				if (_isActiveAndNotPaused && flag3)
                 {
                     typeof(TileDrawing).GetMethod("DrawTiles_EmitParticles", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).Invoke(Main.instance.TilesRenderer, new object[] { j, i, tile2, type2, tileFrameX, tileFrameY, tileLight });
                 }

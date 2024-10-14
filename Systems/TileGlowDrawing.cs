@@ -11,7 +11,7 @@ public class TileGlowDrawing : ModSystem
 {
 	public static Color ActuatedColor(Color oldColor, Tile tile)
 	{
-		if (!tile.IsActuated && !tile.Get<AvalonTileData>().IsTileActupainted)
+		if (!tile.IsActuated)
 		{
 			return oldColor;
 		}

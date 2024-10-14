@@ -8,6 +8,8 @@ using Terraria.DataStructures;
 using System;
 using System.Runtime.CompilerServices;
 using Terraria.WorldBuilding;
+using Avalon.Systems;
+using ThoriumMod.Projectiles;
 
 namespace Avalon.Tiles.CrystalMines;
 
@@ -107,7 +109,7 @@ public class CrystalStone : ModTile
             float colorMultiply = Math.Abs(Math.Clamp(Main.player[Main.myPlayer].Center.Distance(new Vector2(i * 16, j * 16)) * 0.003f, 0.2f, 0.8f) - 1);
 
             Color color = Color.Lerp(Color.White * colorMultiply, Lighting.GetColor(i, j), lerp);
-            color.A = 0;
+			color.A = 0;
            
             for(int r = 0; r < 8; r++)
             {

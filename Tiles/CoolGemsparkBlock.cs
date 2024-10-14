@@ -70,8 +70,8 @@ public class CoolGemsparkBlock : ModTile
 		Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
 		var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 		var halfFrame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 8);
-		Color color = TileGlowDrawing.ActuatedColor(new Color(R, G, B), tile);
-		
+		Color color = new Color(R, G, B);
+		color = TileGlowDrawing.ActuatedColor(color, tile);
 		if (tileL.IsHalfBlock && tileR.IsHalfBlock && tile.Slope == SlopeType.Solid && !tile.IsHalfBlock)
 		{
 			Main.spriteBatch.Draw(texture, pos + new Vector2(0f, 8f), new Rectangle(tile.TileFrameX + addFrX, addFrY + tile.TileFrameY + 8, 16, 8), color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);

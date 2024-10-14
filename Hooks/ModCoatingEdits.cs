@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using MonoMod.Cil;
 using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.Graphics;
@@ -25,9 +26,40 @@ namespace Avalon.Hooks
 			On_Tile.CopyPaintAndCoating += CopyModCoating;
 			On_WorldGen.paintCoatTile += paintModCoatingTile;
 			On_WorldGen.paintCoatWall += paintModCoatingWall;
-			On_WorldGen.paintCoatEffect += paintModCoatEffect;
 			On_Player.PlaceThing_PaintScrapper_TryScrapping += RemoveModCoatings;
 			On_TileLightScanner.GetTileMask += LightTileMask;
+			On_WorldGen.coatingColor += modCoatingColor;
+			On_WorldGen.coatingColors += modCoatingColors;
+		}
+
+		private List<Color> modCoatingColors(On_WorldGen.orig_coatingColors orig, Tile tile, bool block)
+		{
+			List<Color> _coatingColors = (List<Color>)typeof(WorldGen).GetField("_coatingColors", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance).GetValue(null);
+			orig.Invoke(tile, block);
+			if ((block && tile.Get<AvalonTileData>().IsTileActupainted) || (!block && tile.Get<AvalonTileData>().IsWallActupainted))
+			{
+				_coatingColors.Add(WorldGen.coatingColor(AvalonCoatingsID.ActuatorCoating));
+			}
+			return _coatingColors;
+		}
+
+		private Color modCoatingColor(On_WorldGen.orig_coatingColor orig, int coating)
+		{
+			if (coating == AvalonCoatingsID.ActuatorCoating)
+			{
+				Color newColor;
+				if (WorldGen.genRand.NextBool(2))
+				{
+					newColor = new Color(172, 2, 5);
+				}
+				else
+				{
+					newColor = new Color(52, 52, 52);
+				}
+				return newColor;
+			}
+			else
+				return orig.Invoke(coating);
 		}
 
 		private LightMaskMode LightTileMask(On_TileLightScanner.orig_GetTileMask orig, TileLightScanner self, Tile tile)
@@ -58,40 +90,6 @@ namespace Avalon.Hooks
 				}
 			}
 			orig.Invoke(self, x, y);
-		}
-		private void paintModCoatEffect(On_WorldGen.orig_paintCoatEffect orig, int x, int y, byte paintCoatId, List<Color> oldColors)
-		{
-			Color color = WorldGen.coatingColor(paintCoatId);
-			for (int i = 0; i < 10; i++)
-			{
-				Color newColor = color;
-				if (paintCoatId == 0 && oldColors.Count > 0)
-				{
-					newColor = oldColors[Main.rand.Next(oldColors.Count)];
-				}
-				if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
-				{
-					if (WorldGen.genRand.NextBool(2))
-					{
-						newColor = new Color(172, 2, 5);
-					}
-					else
-					{
-						newColor = new Color(52, 52, 52);
-					}
-				}
-				int num = Dust.NewDust(new Vector2((float)(x * 16), (float)(y * 16)), 16, 16, DustID.Paint, 0f, 0f, 50, newColor);
-				if (WorldGen.genRand.NextBool(2))
-				{
-					Main.dust[num].noGravity = true;
-					Main.dust[num].scale *= 1.2f;
-				}
-				else
-				{
-					Main.dust[num].scale *= 0.5f;
-				}
-			}
-			orig.Invoke(x, y, paintCoatId, oldColors);
 		}
 
 		private bool paintModCoatingWall(On_WorldGen.orig_paintCoatWall orig, int x, int y, byte paintCoatId, bool broadcast)
@@ -124,9 +122,12 @@ namespace Avalon.Hooks
 			{
 				NetMessage.SendData(MessageID.PaintWall, -1, -1, null, x, y, (int)paintCoatId, 1f);
 			}
-			if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			if (paintCoatId == 0 || paintCoatId == AvalonCoatingsID.ActuatorCoating)
 			{
 				WorldGen.paintCoatEffect(x, y, paintCoatId, oldColors);
+			}
+			if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			{
 				return true;
 			}
 			return orig.Invoke(x, y, paintCoatId, broadcast);
@@ -162,9 +163,12 @@ namespace Avalon.Hooks
 			{
 				NetMessage.SendData(MessageID.PaintTile, -1, -1, null, x, y, (int)paintCoatId, 1f);
 			}
-			if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			if (paintCoatId == 0 || paintCoatId == AvalonCoatingsID.ActuatorCoating)
 			{
 				WorldGen.paintCoatEffect(x, y, paintCoatId, oldColors);
+			}
+			if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			{
 				return true;
 			}
 			return orig.Invoke(x, y, paintCoatId, broadcast);
@@ -291,6 +295,29 @@ namespace Avalon.Hooks
 					IsActuated[i][j] = false;
 				}
 			}
+		}
+
+		public static bool SolidTileNoActuator(int i, int j, bool noDoors = false)
+		{
+			try
+			{
+				if (Main.tile[i, j] == null)
+				{
+					return true;
+				}
+				if (Main.tile[i, j].HasTile && Main.tileSolid[Main.tile[i, j].TileType] && !Main.tileSolidTop[Main.tile[i, j].TileType] && !Main.tile[i, j].IsHalfBlock && Main.tile[i, j].Slope == 0)
+				{
+					if (noDoors && Main.tile[i, j].TileType == 10)
+					{
+						return false;
+					}
+					return true;
+				}
+			}
+			catch
+			{
+			}
+			return false;
 		}
 	}
 }
