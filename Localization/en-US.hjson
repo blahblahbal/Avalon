@@ -9519,6 +9519,15 @@ Mods: {
 					'This gives me dim ideas.'
 					'''
 			}
+
+			CreepingColony: {
+				DisplayName: Creeping Colony
+				Tooltip:
+					'''
+					'A putrid stench comes from the thing you just made, it might attract something...'
+					Summons Ophiopede
+					'''
+			}
 		}
 
 		InfoDisplays: {
