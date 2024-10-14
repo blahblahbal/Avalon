@@ -38,33 +38,31 @@ public class SanguineKatana : ModItem
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         if (player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
-        {
-            float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
+		{
+			float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem);
             Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), ModContent.ProjectileType<SanguineKatanaSlash>(), (int)(damage * 1.25f), knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1f, adjustedItemScale5 * 1.3f);
             NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI);
-        }
-        else
-        {
-            Item.noMelee = false;
-            Item.useTurn = true;
         }
         return false;
     }
     public override bool CanShoot(Player player)
     {
-        if (!player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()) && Item.useAnimation != 24)
+        if (!player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
         {
             Item.noMelee = false;
             Item.useTurn = true;
-            return false;
+			//Item.ChangePlayerDirectionOnShoot = false; // not needed, but is a neat value regardless so just leaving it here for reference lol
+			return false;
         }
-        else
+        else if (player.itemAnimation == Item.useAnimation)
         {
             Item.noMelee = true;
             Item.useTurn = false;
-            return true;
-        }
-    }
+			//Item.ChangePlayerDirectionOnShoot = true;
+			return true;
+		}
+		return false;
+	}
     public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {
         //if(target.type != NPCID.TargetDummy)
