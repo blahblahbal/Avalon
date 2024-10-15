@@ -9,6 +9,7 @@ using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Accessories.Vanity;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
+using Avalon.Items.Other;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Placeable.Wall;
@@ -248,6 +249,10 @@ public class AvalonGlobalNPC : GlobalNPC
 			{
 				shopCustomPrice = 350000,
 			});
+		}
+		if (shop.NpcType == NPCID.Painter)
+		{
+			shop.Add(ModContent.ItemType<InactiveCoating>(), Condition.InGraveyard, Condition.DownedSkeletron);
 		}
 		if (shop.NpcType == NPCID.PartyGirl)
 		{

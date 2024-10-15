@@ -64,7 +64,7 @@ namespace Avalon.Hooks
 
 		private LightMaskMode LightTileMask(On_TileLightScanner.orig_GetTileMask orig, TileLightScanner self, Tile tile)
 		{
-			if (tile.IsActuated && tile.Get<AvalonTileData>().IsTileActupainted)
+			if (tile.IsActuated && tile.Get<AvalonTileData>().IsTileActupainted && Main.tileBlockLight[tile.TileType])
 			{
 				return LightMaskMode.Solid;
 			}

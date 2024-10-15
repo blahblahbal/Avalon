@@ -13,6 +13,7 @@ namespace Avalon.Items.Other
 			Item.width = 24;
 			Item.height = 24;
 			Item.value = Item.buyPrice(0, 0, 2);
+			Item.buyPrice(silver: 2);
 			Item.maxStack = Item.CommonMaxStack;
 		}
 	}
