@@ -38,14 +38,14 @@ namespace Avalon.Hooks
 			orig.Invoke(tile, block);
 			if ((block && tile.Get<AvalonTileData>().IsTileActupainted) || (!block && tile.Get<AvalonTileData>().IsWallActupainted))
 			{
-				_coatingColors.Add(WorldGen.coatingColor(AvalonCoatingsID.ActuatorCoating));
+				_coatingColors.Add(WorldGen.coatingColor(Data.Sets.AvalonCoatingsID.ActuatorCoating));
 			}
 			return _coatingColors;
 		}
 
 		private Color modCoatingColor(On_WorldGen.orig_coatingColor orig, int coating)
 		{
-			if (coating == AvalonCoatingsID.ActuatorCoating)
+			if (coating == Data.Sets.AvalonCoatingsID.ActuatorCoating)
 			{
 				Color newColor;
 				if (WorldGen.genRand.NextBool(2))
@@ -110,7 +110,7 @@ namespace Avalon.Hooks
 
 				WorldGen.SquareTileFrame(x, y, resetFrame: false);
 			}
-			else if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			else if (paintCoatId == Data.Sets.AvalonCoatingsID.ActuatorCoating)
 			{
 				if (tile.Get<AvalonTileData>().IsWallActupainted)
 				{
@@ -122,11 +122,11 @@ namespace Avalon.Hooks
 			{
 				NetMessage.SendData(MessageID.PaintWall, -1, -1, null, x, y, (int)paintCoatId, 1f);
 			}
-			if (paintCoatId == 0 || paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			if (paintCoatId == 0 || paintCoatId == Data.Sets.AvalonCoatingsID.ActuatorCoating)
 			{
 				WorldGen.paintCoatEffect(x, y, paintCoatId, oldColors);
 			}
-			if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			if (paintCoatId == Data.Sets.AvalonCoatingsID.ActuatorCoating)
 			{
 				return true;
 			}
@@ -151,7 +151,7 @@ namespace Avalon.Hooks
 
 				WorldGen.SquareTileFrame(x, y, resetFrame: false);
 			}
-			else if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			else if (paintCoatId == Data.Sets.AvalonCoatingsID.ActuatorCoating)
 			{
 				if (tile.Get<AvalonTileData>().IsTileActupainted)
 				{
@@ -163,11 +163,11 @@ namespace Avalon.Hooks
 			{
 				NetMessage.SendData(MessageID.PaintTile, -1, -1, null, x, y, (int)paintCoatId, 1f);
 			}
-			if (paintCoatId == 0 || paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			if (paintCoatId == 0 || paintCoatId == Data.Sets.AvalonCoatingsID.ActuatorCoating)
 			{
 				WorldGen.paintCoatEffect(x, y, paintCoatId, oldColors);
 			}
-			if (paintCoatId == AvalonCoatingsID.ActuatorCoating)
+			if (paintCoatId == Data.Sets.AvalonCoatingsID.ActuatorCoating)
 			{
 				return true;
 			}

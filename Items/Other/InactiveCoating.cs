@@ -9,7 +9,7 @@ namespace Avalon.Items.Other
 	{
 		public override void SetDefaults()
 		{
-			Item.paintCoating = AvalonCoatingsID.ActuatorCoating;
+			Item.paintCoating = Data.Sets.AvalonCoatingsID.ActuatorCoating;
 			Item.width = 24;
 			Item.height = 24;
 			Item.value = Item.buyPrice(0, 0, 2);
