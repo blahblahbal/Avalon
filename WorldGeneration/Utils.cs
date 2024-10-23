@@ -389,8 +389,25 @@ public class Utils
                 SquareTileFrame(i, j, true, lh);
             }
         }
-    }
-    public static void MakeCircleNormal(int x, int y, int r, ushort tileType, ushort wallType = 0)
+	}
+	/// <summary>
+	/// A helper method to run WorldGen.SquareTileFrame() over an area.
+	/// </summary>
+	/// <param name="x">The x coordinate.</param>
+	/// <param name="y">The y coordinate.</param>
+	/// <param name="xr">The number of walls in the X direction.</param>
+	/// <param name="yr">The number of walls in the Y direction.</param>
+	public static void SquareWallFrameArea(int x, int y, int xr, int yr)
+	{
+		for (int i = x; i < x + xr; i++)
+		{
+			for (int j = y; j < y + yr; j++)
+			{
+				WorldGen.SquareWallFrame(i, j, true);
+			}
+		}
+	}
+	public static void MakeCircleNormal(int x, int y, int r, ushort tileType, ushort wallType = 0)
     {
         for (int k = x - r; k <= x + r; k++)
         {

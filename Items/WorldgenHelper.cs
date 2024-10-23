@@ -24,10 +24,11 @@ class WorldgenHelper : ModItem
         Item.rare = ItemRarityID.Purple;
         Item.width = dims.Width;
         Item.maxStack = 1;
-        Item.useAnimation = Item.useTime = 30;
+        Item.useAnimation = Item.useTime = 4;
         Item.useStyle = ItemUseStyleID.Swing;
         Item.value = 0;
         Item.height = dims.Height;
+		Item.autoReuse = true;
         //item.UseSound = mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/Scroll");
     }
     public static float Distance(Vector2 a, Vector2 b)
@@ -43,25 +44,55 @@ class WorldgenHelper : ModItem
 
         if (player.ItemAnimationJustStarted)
         {
+			//if (AvalonGlobalTile.TileVisibilityState < (int)AvalonGlobalTile.TileVisibilityStateEnum.OnlyTiles)
+			//{
+			//	AvalonGlobalTile.TileVisibilityState++;
+			//}
+			//else
+			//{
+			//	AvalonGlobalTile.TileVisibilityState = 0;
+			//}
+
+			// with these parameters, the top floor will always have space for two of the hidden rooms (technically more, but at least 2)
+			// these guaranteed free spots should be checked for after the middle floors though, so that it's likely that at least 1 of the rooms generates in those instead
+			int totalSegments = 16;
+			int totalFloors = 6;
+			int wallChanceDenominator = 8;
+			int maxWallsPerFloor = 2;
+			int minGapBetweenWalls = 5;
+			//int lowerHallsFloorCount = 2;
+			//int middleHallsFloorCount = 2;
+			//int upperHallsFloorCount = 2;
+			WorldGeneration.Structures.ChainedArrayBuilder.NewChainedStructure(x, y, totalSegments, totalFloors, wallChanceDenominator, maxWallsPerFloor, minGapBetweenWalls);
+
+			//for (int i = 0; i < Main.item.Length - 1; i++)
+			//{
+			//	if (Main.item[i].type > ItemID.None)
+			//	{
+			//		Main.NewText(Main.item[i].position + " _ " + i);
+			//		player.Center = Main.item[i].position;
+			//		i = Main.item.Length;
+			//	}
+			//}
 			//Contagion.ContagionRunner(x, y);
 			//AvalonSpecialSeedsGenSystem.GenerateSpawnArea(x, y);
-            //WorldGeneration.Structures.IceShrine.Generate(x, y);
-            //WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
-            //WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);
-            //Crystals(x, y);
-            //World.Biomes.CrystalMines.Place(new Point(x, y));
+			//WorldGeneration.Structures.IceShrine.Generate(x, y);
+			//WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
+			//WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);
+			//Crystals(x, y);
+			//World.Biomes.CrystalMines.Place(new Point(x, y));
 
-            //WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
+			//WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
 
-            //WorldGeneration.Structures.LavaOcean.MakeLavaLake(x, y);
-            //WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
+			//WorldGeneration.Structures.LavaOcean.MakeLavaLake(x, y);
+			//WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
 
 
-            //int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
-            //Main.item[rift].velocity *= 0f;
-            //Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
-        }
-        return false;
+			//int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
+			//Main.item[rift].velocity *= 0f;
+			//Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
+		}
+		return false;
     }
 
     
