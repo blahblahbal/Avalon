@@ -30,11 +30,14 @@
     <Folder Include="Mounts\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework.Input.Touch">
+      <HintPath>S:\terraria stuff\Terraria Remaster\github\1.1AvalonRemaster\bin\Debug\net40\Microsoft.Xna.Framework.Input.Touch.dll</HintPath>
+    </Reference>
     <Reference Include="OphioidMod">
-      <HintPath>..\ModAssemblies\OphioidMod_v2.30.dll</HintPath>
+      <HintPath>..\ModAssemblies\OphioidMod.dll</HintPath>
     </Reference>
     <Reference Include="ThoriumMod">
-      <HintPath>..\..\ModReader\ThoriumMod\ThoriumMod.dll</HintPath>
+      <HintPath>..\ModAssemblies\ThoriumMod.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

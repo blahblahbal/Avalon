@@ -19,10 +19,9 @@ class CrystalSkull : ModItem
         Item.defense = 4;
 		Item.expert = true;
     }
-
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
 		player.GetModPlayer<AvalonPlayer>().CrystalSkull = true;
-		Lighting.AddLight(player.position, 1.5f, 1.5f, 1.5f);
+		Lighting.AddLight(player.Center, Vector3.Lerp(new Vector3(Main.DiscoColor.R,Main.DiscoColor.G,Main.DiscoColor.B) / 255f * 1.5f,new Vector3(1.5f,1.5f,1.5f),0.9f));
     }
 }

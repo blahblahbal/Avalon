@@ -1,0 +1,107 @@
+using Avalon.Buffs.Debuffs;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace Avalon.Projectiles.Hostile.Phantasm;
+
+public class Soulblade : ModProjectile
+{
+	public override void SetStaticDefaults()
+	{
+		ProjectileID.Sets.TrailCacheLength[Type] = 8;
+		ProjectileID.Sets.TrailingMode[Type] = 2;
+	}
+	public override void SetDefaults()
+	{
+		Projectile.Size = new Vector2(32);
+		Projectile.hostile = true;
+		Projectile.aiStyle = -1;
+		Projectile.tileCollide = false;
+		Projectile.timeLeft = 60 * 8;
+		Projectile.alpha = 256;
+	}
+	public override void OnHitPlayer(Player target, Player.HurtInfo info)
+	{
+		if (Main.rand.NextBool(3))
+		{
+			target.AddBuff(ModContent.BuffType<ShadowCurse>(), 60 * 5);
+		}
+	}
+	public override bool OnTileCollide(Vector2 oldVelocity)
+	{
+		if(Projectile.velocity.Y != Projectile.oldVelocity.Y)
+		{
+			Projectile.velocity.Y = -Projectile.oldVelocity.Y;
+		}
+		if (Projectile.velocity.X != Projectile.oldVelocity.X)
+		{
+			Projectile.velocity.X = -Projectile.oldVelocity.X;
+		}
+		return false;
+	}
+	public override void AI()
+	{
+		if(Projectile.timeLeft == 60 * 8)
+		{
+			SoundEngine.PlaySound(SoundID.Zombie54, Projectile.Center);
+		}
+
+		if(Projectile.timeLeft < 60)
+		{
+			Projectile.alpha += 8;
+		}
+		Projectile.spriteDirection = -Projectile.direction;
+
+		Projectile.rotation += 0.2f * Projectile.direction;
+
+		if (Projectile.alpha > 0)
+			Projectile.alpha -= 4;
+
+		//Projectile.velocity *= 1.02f;
+		Projectile.velocity.Y += 0.3f;
+
+		if (!Projectile.tileCollide && !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
+		{
+			Projectile.tileCollide = true;
+		}
+
+		Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit);
+		d.noGravity = true;
+		d.velocity = Projectile.velocity;
+		d.alpha = Projectile.alpha;
+	}
+	public override void OnKill(int timeLeft)
+	{
+		for(int i = 0; i < 15; i++)
+		{
+			Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit);
+			d.noGravity = true;
+			d.velocity *= 3;
+		}
+	}
+	public override bool PreDraw(ref Color lightColor)
+	{
+		Asset<Texture2D> texture = TextureAssets.Projectile[Type];
+		int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
+		Rectangle sourceRectangle = new Rectangle(0, frameHeight * Projectile.frame, texture.Width(), frameHeight);
+		Vector2 frameOrigin = sourceRectangle.Size() / 2f;
+
+		Vector2 drawPos = Projectile.Center;
+
+		for (int i = 0; i < Projectile.oldPos.Length; i++)
+		{
+			Vector2 drawPosOld = Projectile.oldPos[i] + (Projectile.Size / 2);
+			Main.EntitySpriteDraw(texture.Value, drawPosOld - Main.screenPosition, sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i / 8f)) * 0.2f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
+		}
+		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.3f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.1f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.15f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.2f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * Projectile.Opacity, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
+		return false;
+	}
+}

@@ -27,7 +27,6 @@ public class AmberSlime : ModNPC
         NPC.height = 22;
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
-        NPC.alpha = 50;
 		//Banner = NPC.type;
 		//BannerItem = ModContent.ItemType<AmberSlimeBanner>();
 		SpawnModBiomes = [ModContent.GetInstance<Biomes.Tropics>().Type];
