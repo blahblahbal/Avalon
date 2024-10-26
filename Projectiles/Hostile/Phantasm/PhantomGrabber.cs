@@ -14,7 +14,10 @@ public class PhantomGrabber : SoulGrabber
 {
     public override void AI()
     {
-		if(Projectile.timeLeft == 60 * 5)
+		Projectile.frameCounter++;
+		Projectile.frame = (Projectile.frameCounter / 5) % 6;
+
+		if (Projectile.timeLeft == 60 * 5)
 		{
 			SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
 		}

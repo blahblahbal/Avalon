@@ -30,7 +30,14 @@ namespace Avalon.Projectiles.Hostile.Phantasm
 		}
 		public override void AI()
 		{
-			Projectile.rotation = MathHelper.SmoothStep(0, MathHelper.TwoPi * 2, Projectile.timeLeft / (float)ContentSamples.ProjectilesByType[ModContent.ProjectileType<PhantomDeathray>()].timeLeft) + (Projectile.ai[2] * MathHelper.PiOver2);
+			NPC owner = Main.npc[(int)Projectile.ai[0]];
+			Projectile.Center = owner.Center;
+			if (!owner.active)
+			{
+				Projectile.Kill();
+			}
+
+			Projectile.rotation = MathHelper.SmoothStep(0, MathHelper.TwoPi * 2 * owner.direction, Projectile.timeLeft / (float)ContentSamples.ProjectilesByType[ModContent.ProjectileType<PhantomDeathray>()].timeLeft) + (Projectile.ai[2] * MathHelper.PiOver2);
 			if (Projectile.timeLeft > ContentSamples.ProjectilesByType[ModContent.ProjectileType<PhantomDeathray>()].timeLeft - 10)
 				Projectile.scale += 0.1f;
 
@@ -64,13 +71,6 @@ namespace Avalon.Projectiles.Hostile.Phantasm
 			Dust d2 = Dust.NewDustPerfect(Projectile.Center + Projectile.velocity * Main.rand.NextFloat(Projectile.ai[1]), ModContent.DustType<PhantoplasmDust>(),null,128);
 			d2.noGravity = true;
 			d2.scale = Main.rand.NextFloat(1, 2);
-			NPC owner = Main.npc[(int)Projectile.ai[0]];
-			Projectile.Center = owner.Center;
-			if (!owner.active)
-			{
-				Projectile.Kill();
-			}
-			
 		}
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
 		{
@@ -88,18 +88,22 @@ namespace Avalon.Projectiles.Hostile.Phantasm
 			Rectangle start = new Rectangle(0,0,26,22);
 			Rectangle mid = new Rectangle(0, 24, 26, 30);
 			Rectangle end = new Rectangle(0, 56, 26, 22);
-			Color drawColor = new Color(1f, 1f, 1f, 1f);
+			Color drawColor = new Color(1f, 1f, 1f, 0f);
 
-			Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0,14).RotatedBy(Projectile.rotation), start, drawColor, Projectile.rotation, new Vector2(start.Width / 2, start.Height),Projectile.scale,SpriteEffects.None);
-			int max = (int)Math.Floor((Projectile.ai[1]) / mid.Height);
-			for(int i = 0; i < max; i++)
+			for (int x = 1; x <= 3; x++)
 			{
-				Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0,(mid.Height * i)).RotatedBy(Projectile.rotation), mid, drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2(Projectile.scale + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (i * 0.5f))) * 0.3f * Projectile.scale),1f), SpriteEffects.None);
-			}
-			Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, mid.Height * max).RotatedBy(Projectile.rotation), new Rectangle(mid.X,mid.Y,mid.Width,(int)(mid.Height * ((Projectile.ai[1] / 30f) - max))), drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2(Projectile.scale + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (max * 0.5f))) * 0.3f * Projectile.scale), 1), SpriteEffects.None);
-			
-			Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.ai[1] - 1).RotatedBy(Projectile.rotation), end, drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2(Projectile.scale + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (max * 0.5f))) * 0.3f * Projectile.scale),1), SpriteEffects.None);
+				Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, 14).RotatedBy(Projectile.rotation), start, drawColor, Projectile.rotation, new Vector2(start.Width / 2, start.Height), (Projectile.scale * x), SpriteEffects.None);
+				int max = (int)Math.Floor((Projectile.ai[1]) / mid.Height);
+				for (int i = 0; i < max; i++)
+				{
+					Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, (mid.Height * i)).RotatedBy(Projectile.rotation), mid, drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (i * 0.5f))) * 0.3f * Projectile.scale), 1f), SpriteEffects.None);
+				}
+				Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, mid.Height * max).RotatedBy(Projectile.rotation), new Rectangle(mid.X, mid.Y, mid.Width, (int)(mid.Height * ((Projectile.ai[1] / 30f) - max))), drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (max * 0.5f))) * 0.3f * Projectile.scale), 1), SpriteEffects.None);
 
+				Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.ai[1] - 1).RotatedBy(Projectile.rotation), end, drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (max * 0.5f))) * 0.3f * Projectile.scale), 1), SpriteEffects.None);
+
+				drawColor *= 0.5f;
+			}
 			if (Projectile.ai[2] != 0)
 				return false;
 

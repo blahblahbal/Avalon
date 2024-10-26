@@ -33,7 +33,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			int dashInterval = 60;
 			if (NPC.ai[1] < dashInterval - 30)
 			{
-				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.02f)) * 0.2f;
+				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.02f * NPC.direction)) * 0.2f;
 				NPC.velocity = NPC.velocity.LengthClamp(10);
 				NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 			}
@@ -105,7 +105,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 		private void Phase2_Hands()
 		{
 			NPC.ai[0]++;
-			NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, 400).RotatedBy(NPC.ai[0] * 0.04f)) * 1f;
+			NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, 400).RotatedBy(NPC.ai[0] * 0.04f * NPC.direction)) * 1f;
 			NPC.velocity = NPC.velocity.LengthClamp(12);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
@@ -190,7 +190,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			int dashInterval = 30;
 			if (NPC.ai[1] < dashInterval - 30)
 			{
-				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.02f)) * 0.2f;
+				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.03f * NPC.direction)) * 0.2f;
 				NPC.velocity = NPC.velocity.LengthClamp(10);
 				NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 			}
@@ -236,7 +236,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 		private void Phase5_Hands2()
 		{
 			NPC.ai[0]++;
-			NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, 500).RotatedBy(NPC.ai[0] * 0.04f)) * 1.2f;
+			NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, 500).RotatedBy(NPC.ai[0] * 0.04f * NPC.direction)) * 1.2f;
 			NPC.velocity = NPC.velocity.LengthClamp(14);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
@@ -374,10 +374,14 @@ namespace Avalon.NPCs.Bosses.Hardmode
 
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
-					NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(), NPC.whoAmI, NPC.whoAmI,1);
+					//NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(), NPC.whoAmI, NPC.whoAmI,1);
 					for (int i = 0; i < 12; i++)
 					{
 						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
+					}
+					for(int i = 0; i < 2; i++)
+					{
+						Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, Main.rand.NextVector2CircularEdge(8, 8), ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
 					}
 				}
 				SoundEngine.PlaySound(SoundID.Roar, NPC.position);
@@ -392,7 +396,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			int dashInterval = 60;
 			if (NPC.ai[1] < dashInterval - 50)
 			{
-				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.02f)) * 0.3f;
+				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.04f * NPC.direction)) * 0.3f;
 				NPC.velocity = NPC.velocity.LengthClamp(12);
 				NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 			}

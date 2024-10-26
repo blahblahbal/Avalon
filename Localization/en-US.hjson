@@ -9808,12 +9808,16 @@ Mods: {
 			WoSCinder.DisplayName: Wo S Cinder
 			WoSGeyser.DisplayName: Wo S Geyser
 			WoSMortar.DisplayName: Wo S Mortar
-			LostSoul.DisplayName: Lost Soul
+			LostSoul.DisplayName: Soul Eater
 			Soulblade.DisplayName: Soulblade
 			PhantomDagger.DisplayName: Phantom Dagger
 			Phantom.DisplayName: Phantom
 			PhantomGrabber.DisplayName: Phantom Grabber
-			PhantomDeathray.DisplayName: Phantom Deathray
+			PhantomDeathray.DisplayName: Phantasm Deathray
+			PhantasmOrbSpawner.DisplayName: Phantasm Orb Spawner
+			SoulEaterFriendly.DisplayName: Soul Eater Friendly
+			SoulEdgeSlash.DisplayName: Soul Edge Slash
+			SoulEdgeDash.DisplayName: Soul Edge Dash
 		}
 
 		NPCs: {
@@ -9949,6 +9953,7 @@ Mods: {
 			BloodyVulture.DisplayName: Bloody Vulture
 			SicklyVulture.DisplayName: Sickly Vulture
 			PhantoplasmaBall.DisplayName: Phantoplasma Ball
+			PhantasmHealthOrbs.DisplayName: Phantasm Health Orbs
 		}
 
 		Buffs: {

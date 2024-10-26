@@ -30,7 +30,7 @@ public partial class Phantasm : ModNPC
 {
 	public override void SetStaticDefaults()
 	{
-		Main.npcFrameCount[NPC.type] = 12;
+		Main.npcFrameCount[NPC.type] = 16;
 		NPCID.Sets.TrailingMode[NPC.type] = 0;
 		NPCID.Sets.TrailCacheLength[NPC.type] = 4;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -45,17 +45,19 @@ public partial class Phantasm : ModNPC
 	{ get { return Main.player[NPC.target]; } }
 	public override void SetDefaults()
 	{
-		phase = 0;
+		phase = 200;
 		NPC.Size = new Vector2(66);
 		NPC.boss = NPC.noTileCollide = NPC.noGravity = true;
 		NPC.npcSlots = 100f;
-		NPC.damage = 105;
-		NPC.lifeMax = 100000;
+		NPC.damage = 40;
+		NPC.lifeMax = 80000;
 		NPC.defense = 20;
 		NPC.aiStyle = -1;
 		NPC.value = 100000f;
 		NPC.knockBackResist = 0f;
 		NPC.scale = 1.5f;
+		if(!NPC.IsABestiaryIconDummy)
+			NPC.alpha = 255;
 		SoundStyle sound = SoundID.NPCHit54;
 		sound.Pitch += 0.1f;
 		NPC.HitSound = sound;
@@ -105,21 +107,44 @@ public partial class Phantasm : ModNPC
 		d.noGravity = true;
 		d.scale = Main.rand.NextFloat(1);
 
-		if(phase > 3 && Main.rand.NextBool(3))
+		if(phase > 3 && Main.rand.NextBool(3) && phase != 200)
 			AddParticle(new SoulEmbers(), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, Main.LocalPlayer.position.Y + 600), new Vector2(Main.rand.NextFloat(-5, 5), -1), default);
-		if (phase > 8 && Main.rand.NextBool(3))
+		if (phase > 8 && Main.rand.NextBool(3) && phase != 200)
 			AddParticle(new HellEmbers(), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, Main.LocalPlayer.position.Y + 600), new Vector2(Main.rand.NextFloat(-5, 5), -1), default);
 
-		//Main.NewText(phase);
-		if (!NPC.HasValidTarget)
+		foreach(NPC orb in Main.ActiveNPCs)
 		{
-			NPC.TargetClosest();
+			if(orb.type == ModContent.NPCType<PhantasmHealthOrbs>())
+			{
+				NPC.dontTakeDamage = true;
+				break;
+			}
+			else
+			{
+				NPC.dontTakeDamage = false;
+			}
 		}
+
+		//Main.NewText(phase);
+
 		Vector2 vector = NPC.Center;
 		NPC.scale = 1.2f + (0.3f * (NPC.life / (float)NPC.lifeMax));
 		NPC.Size = new Vector2(66 * NPC.scale);
 		NPC.Center = vector;
 
+		if (!NPC.HasValidTarget)
+		{
+			NPC.TargetClosest();
+			if (!NPC.HasValidTarget)
+			{
+				NPC.alpha += 4;
+				if (NPC.alpha > 255)
+				{
+					NPC.active = false;
+				}
+				return;
+			}
+		}
 
 		if (NPC.life <= NPC.lifeMax * 0.7f && phase < 3)
 		{
@@ -137,9 +162,25 @@ public partial class Phantasm : ModNPC
 			NPC.ai[2] = 0;
 			NPC.netUpdate = true;
 		}
-
 		switch (phase)
 		{
+			case 200:
+				if (NPC.ai[0] == 0)
+				{
+					NPC.velocity.Y = 10;
+				}
+				NPC.velocity *= 0.96f;
+				NPC.ai[0]++;
+				NPC.alpha = (int)(NPC.alpha * 0.9f);
+
+				if (NPC.ai[0] > 120)
+				{
+					playPhantasmSound();
+					NPC.alpha = 0;
+					phase = 0; 
+					NPC.TargetClosest();
+				}
+				break;
 			case 0:
 				Phase0_Dash();
 				break;
@@ -180,6 +221,7 @@ public partial class Phantasm : ModNPC
 	}
 	private void playPhantasmSound()
 	{
+		NPC.direction = Main.rand.NextBool() ? 1 : -1;
 		return;
 		CombatText.NewText(NPC.Hitbox, new Color(1f,1f,1f,0f), "Phantasm!", true);
 		Main.NewText("<Phantasm> Phantasm!", Color.Cyan);
@@ -241,9 +283,11 @@ public partial class Phantasm : ModNPC
 	{
 		NPC.frameCounter++;
 		NPC.frame.Y = frameHeight * (int)((NPC.frameCounter / 4) % 4);
-		if (phase > 3)
+		if (phase > 3 && phase != 200)
 			NPC.frame.Y += 416;
-		if (phase > 8)
+		if (phase > 8 && phase != 200)
+			NPC.frame.Y += 416;
+		if (NPC.dontTakeDamage)
 			NPC.frame.Y += 416;
 	}
 	public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
@@ -260,16 +304,17 @@ public partial class Phantasm : ModNPC
 		Vector2 frameOrigin = sourceRectangle.Size() / 2f;
 		Vector2 offset = new Vector2(NPC.width / 2 - frameOrigin.X, NPC.height - sourceRectangle.Height);
 
-		Vector2 drawPos = NPC.position - Main.screenPosition + frameOrigin + offset;
+		Vector2 drawPos = NPC.position - screenPos + frameOrigin + offset;
 
 		for (int i = 0; i < NPC.oldPos.Length; i++)
 		{
-			Vector2 drawPosOld = NPC.oldPos[i] - Main.screenPosition + frameOrigin + offset;
-			Main.EntitySpriteDraw(texture.Value, drawPosOld + (NPC.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero), sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i * 0.25f)) * 0.2f, NPC.rotation, frameOrigin, NPC.scale, SpriteEffects.None, 0);
+			Vector2 drawPosOld = NPC.oldPos[i] - screenPos + frameOrigin + offset;
+			Main.EntitySpriteDraw(texture.Value, drawPosOld, sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i * 0.25f)) * 0.2f * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale, SpriteEffects.None, 0);
 		}
-		Main.EntitySpriteDraw(texture.Value, drawPos + (NPC.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero), sourceRectangle, new Color(255, 255, 255, 225) * 0.3f, NPC.rotation, frameOrigin, NPC.scale * 1.1f, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(texture.Value, drawPos + (NPC.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero), sourceRectangle, new Color(255, 255, 255, 225) * 0.15f, NPC.rotation, frameOrigin, NPC.scale * 1.2f, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(texture.Value, drawPos + (NPC.IsABestiaryIconDummy ? Main.screenPosition : Vector2.Zero), sourceRectangle, new Color(255, 255, 255, 225), NPC.rotation, frameOrigin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
+		Color color = (!NPC.dontTakeDamage?  Color.White : new Color(Color.Purple.R,Color.Purple.G,Color.Purple.B,Main.masterColor));
+		Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * 0.3f * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale * 1.1f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * 0.15f * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale * 1.2f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * NPC.Opacity, NPC.rotation, frameOrigin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
 		return false;
 	}
 }
