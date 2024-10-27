@@ -287,6 +287,36 @@ public class AvalonWorld : ModSystem
 				target.CopyTo(span);
 			}
 		}
+
+		//Love terraria hardcoding how % are caculated, re-caculated here because the current caculations earlier in the file saving are so early they cant caculate modded tiles (as modded tiles haddent loaded at that point)
+		for (int x = 0; x < Main.maxTilesX; x++)
+		{
+			for (int j = 0; j < Main.maxTilesY; j++)
+			{
+				int type = Main.tile[x, j].TileType;
+				if (type != -1)
+				{
+					if (j <= Main.worldSurface)
+					{
+						if (j <= Main.worldSurface)
+						{
+							WorldGen.tileCounts[type] += 1 * 5;
+						}
+						else
+						{
+							int num4 = (int)(Main.worldSurface - (double)j + 1.0);
+							int num5 = 1 - num4;
+							WorldGen.tileCounts[type] += num4 * 5 + num5;
+						}
+					}
+					else
+					{
+						WorldGen.tileCounts[type] += 1;
+					}
+				}
+			}
+		}
+		WorldGen.AddUpAlignmentCounts(true);
 	}
 
     public override void PreUpdateWorld()
