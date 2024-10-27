@@ -7767,7 +7767,11 @@ Mods: {
 
 			SoulEdge: {
 				DisplayName: Soul Edge
-				Tooltip: ""
+				Tooltip:
+				'''
+				Build up charge by hitting enemies
+				Right click at full charge to do an invincible dash
+				'''
 			}
 
 			ArmageddonSlimeBossBag: {
