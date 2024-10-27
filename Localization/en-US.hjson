@@ -11187,14 +11187,16 @@ Mods: {
 		}
 
 		DryadSpecialText: {
-			WorldStatusAll: "{0} is {1}% hallow, {2}% corrupt, {3}% crimson, and {4}% contagion."
-			WorldStatusHallowCorruptSick: "{0} is {1}% hallow, {2}% corrupt, and {3}% contagion."
-			WorldStatusHallowCrimsonSick: "{0} is {1}% hallow, {2}% confected, and {3}% crimson."
-			WorldStatusCorruptCrimsonSick: "{0} is {1}% corrupt, {2}% crimson, and {3}% contagion."
-			WorldStatusCorruptSick: "{0} is {1}% corrupt and {2}% contagion."
-			WorldStatusCrimsonSick: "{0} is {1}% crimson and {2}% contagion."
-			WorldStatusHallowSick: "{0} is {1}% hallow and {2}% contagion."
+			WorldStatusWorldNameIs: " is "
+			#This is for any text used inbetween the world name and the first percentage of a world. This is the text that the modded percentages will be placed after and should not contain any percantage prefixes (ie spanish's "un {x}% de sagrado")
+			#for example: for english this is ' is ' while for spanish this is ' tiene '
+			WorldStatusContainsAnd: and
+			#used to check if there is 2 or more percentages already being displayed so there isn't weird overlapping of texts (for example 5% my awesome biome and 2% cirmson and 2% corruption)
 			WorldStatusSick: "{0} is {1}% contagion."
+			#Formatted like other singualr percentage texts
+			WorldStatusSickAnd: "{0}% contagion, and"
+			#These 2 status texts are injected into the other localised text formats
+			WorldStatusSickComma: "{0}% contagion,"
 		}
 
 		Configs: {

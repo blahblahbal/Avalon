@@ -147,9 +147,6 @@ public class AvalonWorld : ModSystem
         ModContent.GetInstance<CoughwoodLantern>().Coordinates = new();
         ModContent.GetInstance<HeartstoneLantern>().Coordinates = new();
         ModContent.GetInstance<ResistantWoodLantern>().Coordinates = new();
-        totalSick = 0;
-        totalSick2 = 0;
-        tSick = 0;
         //Im not too fimiliar how contagion world tags work but imo it would be best if it was reset in an OnWorldUnload and OnWorldLoad somewhere
     }
     public override void ClearWorld()
@@ -173,6 +170,9 @@ public class AvalonWorld : ModSystem
         ModContent.GetInstance<ResistantWoodLantern>().Coordinates = new();
 
 		OopsAllCaves = false;
+		tSick = 0;
+		totalSick = 0;
+		totalSick2 = 0;
     }
     public override void PostAddRecipes()
     {
@@ -288,6 +288,7 @@ public class AvalonWorld : ModSystem
 			}
 		}
 	}
+
     public override void PreUpdateWorld()
     {
         Main.tileSolidTop[ModContent.TileType<FallenStarTile>()] = Main.dayTime;
@@ -2576,112 +2577,16 @@ public class AvalonWorld : ModSystem
         }
     }
 
-    #region World%Calculations
-    private void On_WorldGen_AddUpAlignmentCounts(On_WorldGen.orig_AddUpAlignmentCounts orig, bool clearCounts)
-    {
-        orig.Invoke(clearCounts);
-        if (clearCounts)
-        {
-            totalSick2 = 0;
-        }
-        /*for (int i = 0; i < ContagionCountCollection.Count; i++) {
-            totalSick2 += WorldGen.tileCounts[ContagionCountCollection[i]]; //Vanilla's way of calulating the tiles, we dont use this due to falws 
-        }*/
-
-        WorldGen.totalSolid2 +=
-            WorldGen.tileCounts[ModContent.TileType<Chunkstone>()] +
-            WorldGen.tileCounts[ModContent.TileType<Ickgrass>()] +
-            WorldGen.tileCounts[ModContent.TileType<ContagionJungleGrass>()] +
-            WorldGen.tileCounts[ModContent.TileType<Snotsand>()] +
-            WorldGen.tileCounts[ModContent.TileType<YellowIce>()] +
-            WorldGen.tileCounts[ModContent.TileType<Snotsandstone>()] +
-            WorldGen.tileCounts[ModContent.TileType<HardenedSnotsand>()];
-
-        Array.Clear(WorldGen.tileCounts, 0, WorldGen.tileCounts.Length);
-    }
-
-    private void On_WorldGen_CountTiles(On_WorldGen.orig_CountTiles orig, int X)
-    {
-        orig.Invoke(X);
-        if (X == 0)
-        {
-            totalSick = totalSick2;
-            tSick = (byte)Math.Round(totalSick / (double)WorldGen.totalSolid * 100.0);
-            if (tSick == 0 && totalSick > 0)
-            {
-                tSick = 1;
-            }
-            if (Main.netMode == 2)
-            {
-                NetMessage.SendData(MessageID.TileCounts);
-            }
-            totalSick2 = 0;
-        }
-        ushort num = 0;
-        ushort num2 = 0;
-        int num3 = 0;
-        int num4 = 0;
-        int num5 = 0;
-        do
-        {
-            int num6;
-            int num7;
-            if (num4 == 0)
-            {
-                num6 = 0;
-                num5 = (int)(Main.worldSurface + 1.0);
-                num7 = 5;
-            }
-            else
-            {
-                num6 = num5;
-                num5 = Main.maxTilesY;
-                num7 = 1;
-            }
-            for (int i = num6; i < num5; i++)
-            {
-                Tile tile = Main.tile[X, i];
-                if (tile == null)
-                {
-                    Tile TILE = Main.tile[X, i];
-                    tile = (TILE = new Tile());
-                }
-                num = tile.TileType;
-                if (num != 0 || tile.HasTile)
-                {
-                    if (num == num2)
-                    {
-                        num3 += num7;
-                        continue;
-                    }
-                    NewTileCounts[num2] += num3;
-                    num2 = num;
-                    num3 = num7;
-                }
-            }
-            NewTileCounts[num2] += num3;
-            num3 = 0;
-            num4++;
-        }
-        while (num4 < 2);
-        WorldGen.AddUpAlignmentCounts();
-    }
-
-    public static List<int> ContagionCountCollection; //Our own TileID.Sets for the tiles that are counted towards world %
-                                                      //Note: (MUST HAVE THE SAME TILES AS On_WorldGen_AddUpAlignmentCounts SOLID TILE ADD UP SECTION!!!)
-
-    public override void PostSetupContent()
-    {
-        ContagionCountCollection = new List<int> {
-                ModContent.TileType<Chunkstone>(),
-                ModContent.TileType<Ickgrass>(),
-                ModContent.TileType<ContagionJungleGrass>(),
-                ModContent.TileType<Snotsand>(),
-                ModContent.TileType<YellowIce>(),
-                ModContent.TileType<Snotsandstone>(),
-                ModContent.TileType<HardenedSnotsand>()
-            };
-    }
+    #region Contagion Collection
+    public static List<int> ContagionCountCollection = new List<int> {
+				ModContent.TileType<Chunkstone>(),
+				ModContent.TileType<Ickgrass>(),
+				ModContent.TileType<ContagionJungleGrass>(),
+				ModContent.TileType<Snotsand>(),
+				ModContent.TileType<YellowIce>(),
+				ModContent.TileType<Snotsandstone>(),
+				ModContent.TileType<HardenedSnotsand>()
+			};
     #endregion
 
     #region WorldIconOverlay
