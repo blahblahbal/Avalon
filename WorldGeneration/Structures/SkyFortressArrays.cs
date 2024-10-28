@@ -18,86 +18,139 @@ class SkyFortressArrays
 		// provide cell density
 
 		// can't be modified with hot reload, make sure to restart game if for some reason you need to add more to these (or just modify it in another method)
-		public static List<int[,]> LeftConnections = new List<int[,]>()
+		public static List<int[,]> None = new List<int[,]>()
 		{
-			Cells._structureTilesLeft,
-			Cells._structureTilesLeftRight,
-			Cells._structureTilesLeftTop,
-			Cells._structureTilesLeftBottom,
-			Cells._structureTilesLeftRightTop,
-			Cells._structureTilesLeftRightBottom,
-			Cells._structureTilesLeftTopBottom,
-			Cells._structureTilesLeftRightTopBottom,
-
-			//CentralCellArrays._structureTilesCentralLeft,
-			//CentralCellArrays._structureTilesCentralLeftRight,
-			//CentralCellArrays._structureTilesCentralLeftTop,
-			//CentralCellArrays._structureTilesCentralLeftBottom,
-			//CentralCellArrays._structureTilesCentralLeftRightTop,
-			//CentralCellArrays._structureTilesCentralLeftRightBottom,
-			//CentralCellArrays._structureTilesCentralLeftTopBottom,
-			//CentralCellArrays._structureTilesCentralLeftRightTopBottom
+			Cells.Filled
 		};
-		public static List<int[,]> RightConnections = new List<int[,]>()
+
+		public static List<int[,]> SingleSide = new List<int[,]>()
 		{
-			Cells._structureTilesRight,
-			Cells._structureTilesRightTop,
-			Cells._structureTilesRightBottom,
-			Cells._structureTilesRightTopBottom,
-			Cells._structureTilesLeftRight,
-			Cells._structureTilesLeftRightTop,
-			Cells._structureTilesLeftRightBottom,
-			Cells._structureTilesLeftRightTopBottom,
-
-			//CentralCellArrays._structureTilesCentralRight,
-			//CentralCellArrays._structureTilesCentralRightTop,
-			//CentralCellArrays._structureTilesCentralRightBottom,
-			//CentralCellArrays._structureTilesCentralRightTopBottom,
-			//CentralCellArrays._structureTilesCentralLeftRight,
-			//CentralCellArrays._structureTilesCentralLeftRightTop,
-			//CentralCellArrays._structureTilesCentralLeftRightBottom,
-			//CentralCellArrays._structureTilesCentralLeftRightTopBottom
+			Cells.Left
 		};
-		public static List<int[,]> UpConnections = new List<int[,]>()
+		public static List<int[,]> DualSide = new List<int[,]>()
 		{
-			Cells._structureTilesTop,
-			Cells._structureTilesLeftTop,
-			Cells._structureTilesRightTop,
-			Cells._structureTilesTopBottom,
-			Cells._structureTilesLeftRightTop,
-			Cells._structureTilesLeftTopBottom,
-			Cells._structureTilesRightTopBottom,
-			Cells._structureTilesLeftRightTopBottom,
-
-			//CentralCellArrays._structureTilesCentralTop,
-			//CentralCellArrays._structureTilesCentralLeftTop,
-			//CentralCellArrays._structureTilesCentralRightTop,
-			//CentralCellArrays._structureTilesCentralTopBottom,
-			//CentralCellArrays._structureTilesCentralLeftRightTop,
-			//CentralCellArrays._structureTilesCentralLeftTopBottom,
-			//CentralCellArrays._structureTilesCentralRightTopBottom,
-			//CentralCellArrays._structureTilesCentralLeftRightTopBottom
+			Cells.LeftRight
 		};
-		public static List<int[,]> DownConnections = new List<int[,]>()
+
+		public static List<int[,]> Up = new List<int[,]>()
 		{
-			Cells._structureTilesBottom,
-			Cells._structureTilesLeftBottom,
-			Cells._structureTilesRightBottom,
-			Cells._structureTilesTopBottom,
-			Cells._structureTilesLeftRightBottom,
-			Cells._structureTilesLeftTopBottom,
-			Cells._structureTilesRightTopBottom,
-			Cells._structureTilesLeftRightTopBottom,
-
-			//CentralCellArrays._structureTilesCentralBottom,
-			//CentralCellArrays._structureTilesCentralLeftBottom,
-			//CentralCellArrays._structureTilesCentralRightBottom,
-			//CentralCellArrays._structureTilesCentralTopBottom,
-			//CentralCellArrays._structureTilesCentralLeftRightBottom,
-			//CentralCellArrays._structureTilesCentralLeftTopBottom,
-			//CentralCellArrays._structureTilesCentralRightTopBottom,
-			//CentralCellArrays._structureTilesCentralLeftRightTopBottom
+			Cells.Up
 		};
+		public static List<int[,]> SingleSideUp = new List<int[,]>()
+		{
+			Cells.LeftUp
+		};
+		public static List<int[,]> DualSideUp = new List<int[,]>()
+		{
+			Cells.LeftRightUp
+		};
+
+		public static List<int[,]> Down = new List<int[,]>()
+		{
+			Cells.Down
+		};
+		public static List<int[,]> SingleSideDown = new List<int[,]>()
+		{
+			Cells.LeftDown
+		};
+		public static List<int[,]> DualSideDown = new List<int[,]>()
+		{
+			Cells.LeftRightDown
+		};
+
+		public static List<int[,]> UpDown = new List<int[,]>()
+		{
+			Cells.UpDown
+		};
+		public static List<int[,]> SingleSideUpDown = new List<int[,]>()
+		{
+			Cells.LeftUpDown
+		};
+		public static List<int[,]> DualSideUpDown = new List<int[,]>()
+		{
+			Cells.LeftRightUpDown
+		};
+		#region old connection lists
+		//public static List<int[,]> LeftConnections = new List<int[,]>()
+		//{
+		//	Cells._structureTilesLeft,
+		//	Cells._structureTilesLeftRight,
+		//	Cells._structureTilesLeftTop,
+		//	Cells._structureTilesLeftBottom,
+		//	Cells._structureTilesLeftRightTop,
+		//	Cells._structureTilesLeftRightBottom,
+		//	Cells._structureTilesLeftTopBottom,
+		//	Cells._structureTilesLeftRightTopBottom,
+
+		//	//CentralCellArrays._structureTilesCentralLeft,
+		//	//CentralCellArrays._structureTilesCentralLeftRight,
+		//	//CentralCellArrays._structureTilesCentralLeftTop,
+		//	//CentralCellArrays._structureTilesCentralLeftBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftRightTop,
+		//	//CentralCellArrays._structureTilesCentralLeftRightBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftTopBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftRightTopBottom
+		//};
+		//public static List<int[,]> RightConnections = new List<int[,]>()
+		//{
+		//	Cells._structureTilesRight,
+		//	Cells._structureTilesRightTop,
+		//	Cells._structureTilesRightBottom,
+		//	Cells._structureTilesRightTopBottom,
+		//	Cells._structureTilesLeftRight,
+		//	Cells._structureTilesLeftRightTop,
+		//	Cells._structureTilesLeftRightBottom,
+		//	Cells._structureTilesLeftRightTopBottom,
+
+		//	//CentralCellArrays._structureTilesCentralRight,
+		//	//CentralCellArrays._structureTilesCentralRightTop,
+		//	//CentralCellArrays._structureTilesCentralRightBottom,
+		//	//CentralCellArrays._structureTilesCentralRightTopBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftRight,
+		//	//CentralCellArrays._structureTilesCentralLeftRightTop,
+		//	//CentralCellArrays._structureTilesCentralLeftRightBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftRightTopBottom
+		//};
+		//public static List<int[,]> UpConnections = new List<int[,]>()
+		//{
+		//	Cells._structureTilesTop,
+		//	Cells._structureTilesLeftTop,
+		//	Cells._structureTilesRightTop,
+		//	Cells._structureTilesTopBottom,
+		//	Cells._structureTilesLeftRightTop,
+		//	Cells._structureTilesLeftTopBottom,
+		//	Cells._structureTilesRightTopBottom,
+		//	Cells._structureTilesLeftRightTopBottom,
+
+		//	//CentralCellArrays._structureTilesCentralTop,
+		//	//CentralCellArrays._structureTilesCentralLeftTop,
+		//	//CentralCellArrays._structureTilesCentralRightTop,
+		//	//CentralCellArrays._structureTilesCentralTopBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftRightTop,
+		//	//CentralCellArrays._structureTilesCentralLeftTopBottom,
+		//	//CentralCellArrays._structureTilesCentralRightTopBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftRightTopBottom
+		//};
+		//public static List<int[,]> DownConnections = new List<int[,]>()
+		//{
+		//	Cells._structureTilesBottom,
+		//	Cells._structureTilesLeftBottom,
+		//	Cells._structureTilesRightBottom,
+		//	Cells._structureTilesTopBottom,
+		//	Cells._structureTilesLeftRightBottom,
+		//	Cells._structureTilesLeftTopBottom,
+		//	Cells._structureTilesRightTopBottom,
+		//	Cells._structureTilesLeftRightTopBottom,
+
+		//	//CentralCellArrays._structureTilesCentralBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftBottom,
+		//	//CentralCellArrays._structureTilesCentralRightBottom,
+		//	//CentralCellArrays._structureTilesCentralTopBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftRightBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftTopBottom,
+		//	//CentralCellArrays._structureTilesCentralRightTopBottom,
+		//	//CentralCellArrays._structureTilesCentralLeftRightTopBottom
+		//};
 		//public static List<int[,]> SpecialCells = new List<int[,]>()
 		//{
 		//	CentralCellArrays._structureTilesCentralLeft,
@@ -116,10 +169,11 @@ class SkyFortressArrays
 		//	CentralCellArrays._structureTilesCentralRightTopBottom,
 		//	CentralCellArrays._structureTilesCentralLeftRightTopBottom
 		//};
+		#endregion old connection lists
 	}
 	public class Cells
 	{
-		public static int[,] _structureFilled =
+		public static int[,] Filled =
 			new int[,]
 			{
 				{1,1,1,1,1,1},
@@ -139,7 +193,7 @@ class SkyFortressArrays
 				{0,0,0,0,0,0},
 				{0,0,0,0,0,0}
 			};
-		public static int[,] _structureTilesRight =
+		public static int[,] Right =
 			new int[,]
 			{
 				{1,1,1,1,1,1},
@@ -149,7 +203,7 @@ class SkyFortressArrays
 				{1,0,0,0,0,0},
 				{1,1,1,1,1,1}
 			};
-		public static int[,] _structureTilesTop =
+		public static int[,] Up =
 			new int[,]
 			{
 				{1,0,0,0,0,1},
@@ -159,7 +213,7 @@ class SkyFortressArrays
 				{1,0,0,0,0,1},
 				{1,1,1,1,1,1}
 			};
-		public static int[,] _structureTilesLeft =
+		public static int[,] Left =
 			new int[,]
 			{
 				{1,1,1,1,1,1},
@@ -169,7 +223,7 @@ class SkyFortressArrays
 				{0,0,0,0,0,1},
 				{1,1,1,1,1,1}
 			};
-		public static int[,] _structureTilesBottom =
+		public static int[,] Down =
 			new int[,]
 			{
 				{1,1,1,1,1,1},
@@ -189,7 +243,7 @@ class SkyFortressArrays
 				{1,0,0,0,0,0},
 				{1,0,0,0,0,1}
 			};
-		public static int[,] _structureTilesTopBottom =
+		public static int[,] UpDown =
 			new int[,]
 			{
 				{1,0,0,0,0,1},
@@ -199,7 +253,7 @@ class SkyFortressArrays
 				{1,0,0,0,0,1},
 				{1,0,0,0,0,1}
 			};
-		public static int[,] _structureTilesLeftBottom =
+		public static int[,] LeftDown =
 			new int[,]
 			{
 				{1,1,1,1,1,1},
@@ -219,7 +273,7 @@ class SkyFortressArrays
 				{1,0,0,0,0,0},
 				{1,1,1,1,1,1}
 			};
-		public static int[,] _structureTilesLeftRight =
+		public static int[,] LeftRight =
 			new int[,]
 			{
 				{1,1,1,1,1,1},
@@ -229,7 +283,7 @@ class SkyFortressArrays
 				{0,0,0,0,0,0},
 				{1,1,1,1,1,1}
 			};
-		public static int[,] _structureTilesLeftTop =
+		public static int[,] LeftUp =
 			new int[,] {
 				{1,0,0,0,0,1},
 				{0,0,0,0,0,1},
@@ -248,7 +302,7 @@ class SkyFortressArrays
 				{1,0,0,0,0,0},
 				{1,0,0,0,0,1}
 			};
-		public static int[,] _structureTilesLeftRightTop =
+		public static int[,] LeftRightUp =
 			new int[,]
 			{
 				{1,0,0,0,0,1},
@@ -258,7 +312,7 @@ class SkyFortressArrays
 				{0,0,0,0,0,0},
 				{1,1,1,1,1,1}
 			};
-		public static int[,] _structureTilesLeftTopBottom =
+		public static int[,] LeftUpDown =
 			new int[,]
 			{
 				{1,0,0,0,0,1},
@@ -268,7 +322,7 @@ class SkyFortressArrays
 				{0,0,0,0,0,1},
 				{1,0,0,0,0,1}
 			};
-		public static int[,] _structureTilesLeftRightBottom =
+		public static int[,] LeftRightDown =
 			new int[,]
 			{
 				{1,1,1,1,1,1},
@@ -278,7 +332,7 @@ class SkyFortressArrays
 				{0,0,0,0,0,0},
 				{1,0,0,0,0,1}
 			};
-		public static int[,] _structureTilesLeftRightTopBottom =
+		public static int[,] LeftRightUpDown =
 			new int[,]
 			{
 				{1,0,0,0,0,1},

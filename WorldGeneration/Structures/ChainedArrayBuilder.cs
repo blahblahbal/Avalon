@@ -35,6 +35,10 @@ class ChainedArrayBuilder
 		DefaultDownThrough,
 		RightBlockedDownThrough
 	}
+	private const bool LeftConnection = true;
+	private const bool RightConnection = true;
+	private const bool UpConnection = true;
+	private const bool DownConnection = true;
 	//private enum sideWinderStates : byte
 	//{
 	//	Left,
@@ -61,8 +65,9 @@ class ChainedArrayBuilder
 	//	CentreRightBlockedDownThrough
 	//}
 
-	public static void NewChainedStructure(int x, int y, int totalSegmentCount, int totalFloorCount, int wallChance, int maxWalls, int gapBetweenWalls)
+	public static void NewChainedStructure(int x, int y, int totalSegmentCount, int lowerHallsFloorCount, int middleHallsFloorCount, int upperHallsFloorCount, /*int totalFloorCount, */int wallChance, int maxWalls, int topFloorMaxWalls, int gapBetweenWalls, int initialGapBetweenWalls, int finalGapBetweenWalls)
 	{
+		int totalFloorCount = lowerHallsFloorCount + middleHallsFloorCount + upperHallsFloorCount;
 		List<int[,]> floors = new List<int[,]>(totalSegmentCount * totalFloorCount);
 		int[,] sideWinderFloors = new int[totalSegmentCount, totalFloorCount];
 		ushort typeTile = 0;
@@ -79,6 +84,10 @@ class ChainedArrayBuilder
 		{
 			int previousWall = -1;
 			int totalWalls = 0;
+			if (curFloor == 0)
+			{
+				maxWalls = topFloorMaxWalls;
+			}
 			for (int curSegment = 0; curSegment < totalSegmentCount; curSegment++)
 			{
 				if (curFloor == totalFloorCount - 1)
@@ -92,7 +101,9 @@ class ChainedArrayBuilder
 						sideWinderFloors[curSegment, curFloor] = (int)sideWinderStates.Default;
 					}
 				}
-				else if ((totalWalls < maxWalls && curSegment - previousWall > gapBetweenWalls - 1 && WorldGen.genRand.NextBool(wallChance)) || curSegment == totalSegmentCount - 1)
+				else if ((totalWalls < maxWalls && curSegment - previousWall > gapBetweenWalls - 1 && curSegment < totalSegmentCount - finalGapBetweenWalls && WorldGen.genRand.NextBool(wallChance)) ||
+					curSegment == totalSegmentCount - 1 ||
+					(totalWalls < maxWalls && curSegment < gapBetweenWalls && curSegment >= initialGapBetweenWalls - 1 && previousWall == -1 && WorldGen.genRand.NextBool(wallChance)))
 				{
 					sideWinderFloors[curSegment, curFloor] = (int)sideWinderStates.RightBlocked;
 					int currentWall = previousWall == curSegment - 1 ? curSegment : WorldGen.genRand.Next(previousWall + 1, curSegment + 1);
@@ -114,13 +125,15 @@ class ChainedArrayBuilder
 			}
 		}
 
-		PosY -= SkyFortressArrays.Cells._structureTilesRight.GetLength(0) - 1;
+		PosY -= SkyFortressArrays.Cells.Right.GetLength(0) - 1;
 
 		floors.Clear();
+		int leftCentre = Math.Min(totalSegmentCount / 2 + (totalSegmentCount % 2 == 0 ? -1 : +1), totalSegmentCount / 2);
+		int rightCentre = Math.Max(totalSegmentCount / 2 + (totalSegmentCount % 2 == 0 ? -1 : +1), totalSegmentCount / 2);
 		bool blockedCentreSide = WorldGen.genRand.NextBool(); // which side of the centre starts as possibly blocked downwards
 		int hiddenRoomCount = 0; // counts how many hidden rooms exist
 
-		List<(int, int, bool)> hiddenRoomLocations = ChooseHiddenRoomLocationsFromValid(totalSegmentCount, totalFloorCount, floors, sideWinderFloors, blockedCentreSide);
+		List<(int, int, bool)> hiddenRoomLocations = ChooseHiddenRoomLocationsFromValid(totalSegmentCount, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, floors, sideWinderFloors, blockedCentreSide, leftCentre, rightCentre);
 
 		Main.NewText("hidden rooms allocated: " + hiddenRoomLocations.Count); // it only happens very rarely, it'll be easier to make sure it never happens if I set the hidden rooms in an entirely different loop BEFORE setting regular/central, modifying the cell left of hidden rooms to blockright/blockrightdownthrough, and rightmost of hidden rooms to blockright
 		if (hiddenRoomLocations.Count < 2)
@@ -138,13 +151,30 @@ class ChainedArrayBuilder
 			Main.NewText("order after sort: " + hiddenRoomLocations[0] + " _ " + hiddenRoomLocations[1], Color.Gray);
 		}
 
+		// sets the edges of hidden rooms to be blocked off
+		foreach (var location in hiddenRoomLocations)
+		{
+			if (location.Item1 > 0)
+			{
+				if (sideWinderFloors[location.Item1 - 1, location.Item2] == (int)sideWinderStates.Default)
+				{
+					sideWinderFloors[location.Item1 - 1, location.Item2] = (int)sideWinderStates.RightBlocked;
+				}
+				else if (sideWinderFloors[location.Item1 - 1, location.Item2] == (int)sideWinderStates.DefaultDownThrough)
+				{
+					sideWinderFloors[location.Item1 - 1, location.Item2] = (int)sideWinderStates.RightBlockedDownThrough;
+				}
+			}
+			sideWinderFloors[location.Item1 + (location.Item3 == false ? 1 : 2), location.Item2] = (int)sideWinderStates.RightBlocked;
+		}
+
 		// loop for regular and central cells, as well as placing cells
 		for (int curFloor = totalFloorCount - 1; curFloor >= 0; curFloor--)
 		{
 			blockedCentreSide = !blockedCentreSide; // flips for each floor
 			int hiddenCellCountdown = 0;
 
-			var selectedCell = SkyFortressArrays.Cells._structureTilesLeftRightTopBottom;
+			var selectedCell = SkyFortressArrays.Cells.LeftRightUpDown;
 			for (int curSegment = 0; curSegment < totalSegmentCount; curSegment++)
 			{
 				//Main.NewText(curSegment + "_" + curFloor);
@@ -158,7 +188,7 @@ class ChainedArrayBuilder
 				}
 				if (hiddenCellCountdown > 0)
 				{
-					selectedCell = SkyFortressArrays.Cells._structureFilled;
+					selectedCell = SkyFortressArrays.Cells.Filled;
 					hiddenCellCountdown--;
 					typeTile = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
 				}
@@ -170,7 +200,7 @@ class ChainedArrayBuilder
 				}
 				else
 				{
-					var a = FortressRegularCells(floors, sideWinderFloors, curFloor, curSegment, flipped);
+					var a = FortressRegularCells(totalSegmentCount, totalFloorCount, floors, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
 					selectedCell = a.outCell;
 					flipped = a.flipped;
 					typeTile = (ushort)ModContent.TileType<Tiles.SkyBrick>();
@@ -372,12 +402,12 @@ class ChainedArrayBuilder
 		Utils.SquareWallFrameArea(PosX, PosY, floors[curSegment + (totalSegmentCount * (totalFloorCount - 1 - curFloor))].GetLength(1), floors[curSegment + (totalSegmentCount * (totalFloorCount - 1 - curFloor))].GetLength(0));
 	}
 
-	public static List<(int x, int y, bool is3Width)> ChooseHiddenRoomLocationsFromValid(int totalSegmentCount, int totalFloorCount, List<int[,]> floors, int[,] sideWinderFloors, bool blockedCentreSide)
+	public static List<(int x, int y, bool is3Width)> ChooseHiddenRoomLocationsFromValid(int totalSegmentCount, int lowerHallsFloorCount, int middleHallsFloorCount, int upperHallsFloorCount, /*int totalFloorCount, */List<int[,]> floors, int[,] sideWinderFloors, bool blockedCentreSide, int leftCentre, int rightCentre)
 	{
+		int totalFloorCount = lowerHallsFloorCount + middleHallsFloorCount + upperHallsFloorCount;
 		List<(int, int)> validCoords2 = new List<(int, int)>(totalSegmentCount * totalFloorCount);
 		List<(int, int)> validCoords3 = new List<(int, int)>(totalSegmentCount * totalFloorCount);
 		List<(int, int, bool)> hiddenRoomLocations = new List<(int, int, bool)>();
-		int lowerHallsFloorCount = 2;
 		//bool has2WidthHiddenRoom = false;
 		//bool has3WidthHiddenRoom = false;
 
@@ -389,7 +419,7 @@ class ChainedArrayBuilder
 		{
 			for (int curSegment = 0; curSegment < totalSegmentCount; curSegment++)
 			{
-				var a = HiddenRoomValidCheck(totalSegmentCount, totalFloorCount, floors, sideWinderFloors, curFloor, curSegment, blockedCentreSide);
+				var a = HiddenRoomValidCheck(totalSegmentCount, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, floors, sideWinderFloors, curFloor, curSegment, blockedCentreSide, leftCentre, rightCentre);
 				if (a.validFor2Width)
 				{
 					validCoords2.Add((curSegment, curFloor));
@@ -464,14 +494,13 @@ class ChainedArrayBuilder
 		}
 	}
 
-	public static (bool validFor2Width, bool validFor3Width) HiddenRoomValidCheck(/*int[,] selectedCell, */int totalSegmentCount, int totalFloorCount, List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment, bool blockedCentreSide)
+	public static (bool validFor2Width, bool validFor3Width) HiddenRoomValidCheck(/*int[,] selectedCell, */int totalSegmentCount, int lowerHallsFloorCount, int middleHallsFloorCount, int upperHallsFloorCount, /*int totalFloorCount, */List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment, bool blockedCentreSide, int leftCentre, int rightCentre)
 	{
+		int totalFloorCount = lowerHallsFloorCount + middleHallsFloorCount + upperHallsFloorCount;
 		// top floor isn't checking for valid spaces properly when it comes to halls open to the top from the central pillars, screenshot name: dotnet_thkNSNAI2Q.png, 2024-10
 		// it properly assigned a space to a 2 wide room, but NOT a 3 wide room here, screenshot name: dotnet_exNsrQoYq7.png, 2024-10
 		// another room with 0 valid 3 spots with potential space on top floor assigned to neither, had only 3 valid 2 spaces too: dotnet_GJpg6zoWcv.png
 		// this one GENUINELY doesn't have space for 3 wide rooms: dotnet_8Qt8FAalgh.png
-		int leftCentre = Math.Min(totalSegmentCount / 2 + (totalSegmentCount % 2 == 0 ? -1 : +1), totalSegmentCount / 2);
-		int rightCentre = Math.Max(totalSegmentCount / 2 + (totalSegmentCount % 2 == 0 ? -1 : +1), totalSegmentCount / 2);
 
 		// blockedCentreSide corresponding to the top floor will be the same as received here if an even amount of totalFloors, and opposite if an odd amount
 		bool isLeftCentreTopFloorBlockedDownwards = (totalFloorCount % 2 == 0 ? blockedCentreSide == false : blockedCentreSide == true) && (sideWinderFloors[leftCentre, 0] == (int)sideWinderStates.RightBlocked);
@@ -553,7 +582,7 @@ class ChainedArrayBuilder
 				{
 					bool leftCheck = false;
 					bool rightCheck = false;
-					for (int i = curSegment; i < totalSegmentCount - 1; i++)
+					for (int i = curSegment; i < totalSegmentCount; i++)
 					{
 						if (sideWinderFloors[i, curFloor] is (int)sideWinderStates.DefaultDownThrough or (int)sideWinderStates.RightBlockedDownThrough)
 						{
@@ -565,7 +594,7 @@ class ChainedArrayBuilder
 							rightCheck = false;
 							break;
 						}
-						if (i == totalSegmentCount - 2)
+						if (i == totalSegmentCount - 1)
 						{
 							rightCheck = false;
 						}
@@ -628,7 +657,7 @@ class ChainedArrayBuilder
 			//}
 		}
 		// regular checks for other floors, excluding the bottom halls
-		if (curFloor < totalFloorCount - 2)
+		if (curFloor < totalFloorCount - lowerHallsFloorCount)
 		{
 			if ((curSegment == 0 &&
 				sideWinderFloors[curSegment, curFloor] == (int)sideWinderStates.Default &&
@@ -658,7 +687,7 @@ class ChainedArrayBuilder
 		{
 			return (validFor2Width, false);
 		}
-		if (curFloor < totalFloorCount - 2)
+		if (curFloor < totalFloorCount - lowerHallsFloorCount)
 		{
 			if ((curSegment == 0 &&
 				sideWinderFloors[curSegment, curFloor] == (int)sideWinderStates.Default &&
@@ -846,62 +875,74 @@ class ChainedArrayBuilder
 	//	return (3, flipped, hiddenCell);
 	//}
 
-	public static (int[,] outCell, bool flipped) FortressRegularCells(List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped)
+	public static (int[,] outCell, bool flipped) FortressRegularCells(int totalSegmentCount, int totalFloorCount, List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped, List<(int, int, bool)> hiddenRoomLocations, int leftCentre, int rightCentre)
 	{
 		// this version provides a bool to flip the given cell based on parameters instead of having to store flipped versions of cells; the regular version is commented out below
-		IEnumerable<int[,]> tempList = new List<int[,]>();
+
+		(byte sidesOpen, bool? Up, bool? Down) connections = (0, null, null); // sidesOpen refers to the left/right sides, as it isn't necessary to define whether each are individually open
+
 		if (sideWinderFloors[curSegment, curFloor] == (int)sideWinderStates.Default)
 		{
-			tempList = SkyFortressArrays.CellConnections.RightConnections.Except(SkyFortressArrays.CellConnections.DownConnections);
 			if (curSegment == 0 || (curSegment != 0 && (sideWinderFloors[curSegment - 1, curFloor] is (int)sideWinderStates.RightBlocked or (int)sideWinderStates.RightBlockedDownThrough)))
 			{
-				tempList = SkyFortressArrays.CellConnections.LeftConnections.Except(SkyFortressArrays.CellConnections.DownConnections).Except(SkyFortressArrays.CellConnections.RightConnections);
+				connections = (1, null, false);
 				flipped = true;
 			}
 			else
 			{
-				tempList = tempList.Intersect(SkyFortressArrays.CellConnections.LeftConnections);
+				connections = (2, null, false);
 			}
 		}
 		else if (sideWinderFloors[curSegment, curFloor] == (int)sideWinderStates.RightBlocked)
 		{
-			tempList = SkyFortressArrays.CellConnections.LeftConnections.Except(SkyFortressArrays.CellConnections.RightConnections).Except(SkyFortressArrays.CellConnections.DownConnections);
+			connections = (1, null, false);
 		}
 		else if (sideWinderFloors[curSegment, curFloor] == (int)sideWinderStates.DefaultDownThrough)
 		{
-			tempList = SkyFortressArrays.CellConnections.RightConnections.Intersect(SkyFortressArrays.CellConnections.DownConnections);
 			if (curSegment == 0 || (curSegment != 0 && (sideWinderFloors[curSegment - 1, curFloor] is (int)sideWinderStates.RightBlocked or (int)sideWinderStates.RightBlockedDownThrough)))
 			{
-				tempList = SkyFortressArrays.CellConnections.LeftConnections.Intersect(SkyFortressArrays.CellConnections.DownConnections).Except(SkyFortressArrays.CellConnections.RightConnections);
+				connections = (1, null, true);
 				flipped = true;
 			}
 			else
 			{
-				tempList = tempList.Intersect(SkyFortressArrays.CellConnections.LeftConnections);
+				connections = (2, null, true);
 			}
 		}
 		else if (sideWinderFloors[curSegment, curFloor] == (int)sideWinderStates.RightBlockedDownThrough)
 		{
-			tempList = SkyFortressArrays.CellConnections.DownConnections.Except(SkyFortressArrays.CellConnections.RightConnections);
 			if (curSegment == 0 || (curSegment != 0 && (sideWinderFloors[curSegment - 1, curFloor] is (int)sideWinderStates.RightBlocked or (int)sideWinderStates.RightBlockedDownThrough)))
 			{
-				tempList = SkyFortressArrays.CellConnections.DownConnections.Except(SkyFortressArrays.CellConnections.LeftConnections).Except(SkyFortressArrays.CellConnections.RightConnections);
+				connections = (0, null, true);
 				flipped = true;
 			}
 			else
 			{
-				tempList = tempList.Intersect(SkyFortressArrays.CellConnections.LeftConnections);
+				connections = (1, null, true);
 			}
 		}
 		if (curFloor != 0 && (sideWinderFloors[curSegment, curFloor - 1] is (int)sideWinderStates.DefaultDownThrough or (int)sideWinderStates.RightBlockedDownThrough))
 		{
-			tempList = tempList.Intersect(SkyFortressArrays.CellConnections.UpConnections);
+			connections.Up = true;
 		}
 		else
 		{
-			tempList = tempList.Except(SkyFortressArrays.CellConnections.UpConnections);
+			connections.Up = false;
 		}
-		return (WorldGen.genRand.Next(tempList.ToList()), flipped);
+
+		if (FortressRegularCellBuffer != null && FortressRegularCellBuffer.Count > 0)
+		{
+			var temp = FortressRegularCellBuffer[0];
+			FortressRegularCellBuffer.RemoveAt(0);
+			return (WorldGen.genRand.Next(temp), flipped);
+		}
+		else
+		{
+			FortressRegularCellBuffer = FortressRegularCellSelection(connections, totalSegmentCount, totalFloorCount, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
+			var temp = FortressRegularCellBuffer[0];
+			FortressRegularCellBuffer.RemoveAt(0);
+			return (WorldGen.genRand.Next(temp), flipped);
+		}
 	}
 	//public static int[,] FortressRegularCells(List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment)
 	//{
@@ -956,6 +997,73 @@ class ChainedArrayBuilder
 	//	}
 	//	return WorldGen.genRand.Next(tempList.ToList());
 	//}
+
+	public static List<List<int[,]>>? FortressRegularCellBuffer;
+	// this buffer is a little bit silly I think? need a better way to provide specific styles (book, statue, flower, etc), which will be carried to next cell when placing multi-cell rooms
+	// as well as determining WHEN a multi-cell room should start
+	public static List<List<int[,]>> FortressRegularCellSelection((byte sidesOpen, bool? Up, bool? Down) connections, int totalSegmentCount, int totalFloorCount, int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped, List<(int, int, bool)> hiddenRoomLocations, int leftCentre, int rightCentre)
+	{
+		List<int[,]> tempList = new List<int[,]>();
+		if (connections.sidesOpen == 0)
+		{
+			if (connections.Up == false && connections.Down == false)
+			{
+				tempList = SkyFortressArrays.CellConnections.None; // doesn't ever choose this, just for completeness sake
+			}
+			else if (connections.Up == true && connections.Down == false)
+			{
+				tempList = SkyFortressArrays.CellConnections.Up;
+			}
+			else if (connections.Up == false && connections.Down == true)
+			{
+				tempList = SkyFortressArrays.CellConnections.Down;
+			}
+			else if (connections.Up == true && connections.Down == true)
+			{
+				tempList = SkyFortressArrays.CellConnections.UpDown;
+			}
+		}
+		else if (connections.sidesOpen == 1)
+		{
+			if (connections.Up == false && connections.Down == false)
+			{
+				tempList = SkyFortressArrays.CellConnections.SingleSide;
+			}
+			else if (connections.Up == true && connections.Down == false)
+			{
+				tempList = SkyFortressArrays.CellConnections.SingleSideUp;
+			}
+			else if (connections.Up == false && connections.Down == true)
+			{
+				tempList = SkyFortressArrays.CellConnections.SingleSideDown;
+			}
+			else if (connections.Up == true && connections.Down == true)
+			{
+				tempList = SkyFortressArrays.CellConnections.SingleSideUpDown;
+			}
+		}
+		else if (connections.sidesOpen == 2)
+		{
+			if (connections.Up == false && connections.Down == false)
+			{
+				tempList = SkyFortressArrays.CellConnections.DualSide;
+			}
+			else if (connections.Up == true && connections.Down == false)
+			{
+				tempList = SkyFortressArrays.CellConnections.DualSideUp;
+			}
+			else if (connections.Up == false && connections.Down == true)
+			{
+				tempList = SkyFortressArrays.CellConnections.DualSideDown;
+			}
+			else if (connections.Up == true && connections.Down == true)
+			{
+				tempList = SkyFortressArrays.CellConnections.DualSideUpDown;
+			}
+		}
+		//List<List<int[,]>> tempListofLists = [tempList];
+		return [tempList];
+	}
 
 	public static int[,] FortressCentralCells(int[,] selectedCell, int totalSegmentCount, int totalFloorCount, List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment, bool blockedCentreSide)
 	{
