@@ -27,6 +27,7 @@ public class SoulEaterFriendly : ModProjectile
 		Projectile.friendly = true;
 		Projectile.alpha = 64;
 		Projectile.scale = 0.75f;
+		Projectile.tileCollide = false;
 	}
 	public override void AI()
 	{
