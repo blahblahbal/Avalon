@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.GameContent.Dyes;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,7 +18,7 @@ public class ReflectiveOsmiumDye : ModItem
         if (!Main.dedServ)
         {
             // The following code creates an effect (shader) reference and associates it with this item's type ID.
-            GameShaders.Armor.BindShader(Item.type,new ArmorShaderData(new Ref<Effect>(GameShaders.Armor.GetShaderFromItemId(ItemID.ReflectiveCopperDye).Shader), "ArmorReflectiveColor")).UseColor(new Color(43, 186, 217));
+            GameShaders.Armor.BindShader(Item.type,new ReflectiveArmorShaderData(new Ref<Effect>(GameShaders.Armor.GetShaderFromItemId(ItemID.ReflectiveCopperDye).Shader), "ArmorReflectiveColor")).UseColor(new Color(43, 186, 217));
         }
 
         Item.ResearchUnlockCount = 3;

@@ -35,8 +35,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
         return color;
     
     //color.rgb = lerp(color.rgb, float3(0.5,0.5,0.5), 0.4);
-    
-	color.rgb *= color.a; // this fixes issues with bilinear filtered pixels on the outlines of sprites
+	
     return color * sampleColor;
 }
     

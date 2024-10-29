@@ -31,11 +31,11 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     if(any(color))
         color.rgb = lerp(float3(0.1, 0, 0.3), float3(0.4, 0.2, 0.7), dot(color.rgb, float3(0.5,0.5,0.5)));
     if (!any(color))
-        return color * sampleColor.a;
+        return color;
     
     //color.rgb = lerp(color.rgb, float3(0.5,0.5,0.5), 0.4);
     
-    return color * sampleColor.a;
+    return color * sampleColor;
 }
     
 technique Technique1
