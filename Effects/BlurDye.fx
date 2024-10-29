@@ -30,8 +30,8 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
         {
             color.rgb += tex2D(uImage0, coords + (float2(i * 2,j * 2) / uImageSize0)) / 9;
         }
-    }
-
+	}
+	color.rgb *= color.a; // this fixes issues with bilinear filtered pixels on the outlines of sprites
     return color * sampleColor;
 }
     

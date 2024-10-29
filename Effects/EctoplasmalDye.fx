@@ -33,7 +33,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
 		gray += soulColor * gray * (1 + (sin(uTime + coords2.y * 0.2) * 0.5));
 		
 		color.rgb = lerp(uSecondaryColor, uColor, gray);
-		color.a = sampleColor.a;
+		color.rgb *= color.a; // this fixes issues with bilinear filtered pixels on the outlines of sprites
         return color * sampleColor.a;
     }
     else
