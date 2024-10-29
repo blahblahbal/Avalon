@@ -9547,6 +9547,16 @@ Mods: {
 				DisplayName: Invulnoplasmal Dye
 				Tooltip: ""
 			}
+
+			IlluminantDye: {
+				DisplayName: Illuminant Dye
+				Tooltip: ""
+			}
+
+			LivingPathogenBlock: {
+				DisplayName: Living Pathogen Block
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

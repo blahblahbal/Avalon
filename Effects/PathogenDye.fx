@@ -35,7 +35,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     
     //color.rgb = lerp(color.rgb, float3(0.5,0.5,0.5), 0.4);
     
-    return color * sampleColor;
+	return color * sampleColor.a;
 }
     
 technique Technique1

@@ -33,7 +33,7 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     
     if (!any(color))
         return color;
-    return color * sampleColor;
+	return color * sampleColor.a;
 }
     
 technique Technique1

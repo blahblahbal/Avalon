@@ -54,8 +54,9 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
       
     if ((cloud <= 0.9 && cloud >= 0.78) || (cloud <= 0.7 && cloud >= 0.68) || (cloud <= 0.5 && cloud >= 0.48) || (cloud <= 0.3 && cloud >= 0.28) || (cloud <= 0.1 && cloud >= 0.08))
         color.rgb *= 1.9;
-    
-    return color * sampleColor;
+	else
+		color.rgb *= sampleColor.rgb;
+    return color * sampleColor.a;
 }
     
 technique Technique1
