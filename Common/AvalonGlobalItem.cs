@@ -68,6 +68,7 @@ public class AvalonGlobalItem : GlobalItem
         TileID.VineRope,
         TileID.WebRope,
         ModContent.TileType<LivingLightning>(),
+		ModContent.TileType<LivingPathogen>(),
         //ModContent.TileType<VineRope>(),
     };
 	public override void UpdateInventory(Item item, Player player)

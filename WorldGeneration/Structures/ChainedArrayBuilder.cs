@@ -200,7 +200,7 @@ class ChainedArrayBuilder
 				}
 				else
 				{
-					var a = FortressRegularCells(totalSegmentCount, totalFloorCount, floors, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
+					var a = FortressRegularCells(totalSegmentCount, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, floors, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
 					selectedCell = a.outCell;
 					flipped = a.flipped;
 					typeTile = (ushort)ModContent.TileType<Tiles.SkyBrick>();
@@ -875,8 +875,9 @@ class ChainedArrayBuilder
 	//	return (3, flipped, hiddenCell);
 	//}
 
-	public static (int[,] outCell, bool flipped) FortressRegularCells(int totalSegmentCount, int totalFloorCount, List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped, List<(int, int, bool)> hiddenRoomLocations, int leftCentre, int rightCentre)
+	public static (int[,] outCell, bool flipped) FortressRegularCells(int totalSegmentCount, int lowerHallsFloorCount, int middleHallsFloorCount, int upperHallsFloorCount, /*int totalFloorCount, */List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped, List<(int, int, bool)> hiddenRoomLocations, int leftCentre, int rightCentre)
 	{
+		int totalFloorCount = lowerHallsFloorCount + middleHallsFloorCount + upperHallsFloorCount;
 		// this version provides a bool to flip the given cell based on parameters instead of having to store flipped versions of cells; the regular version is commented out below
 
 		(byte sidesOpen, bool? Up, bool? Down) connections = (0, null, null); // sidesOpen refers to the left/right sides, as it isn't necessary to define whether each are individually open
@@ -938,7 +939,7 @@ class ChainedArrayBuilder
 		}
 		else
 		{
-			FortressRegularCellBuffer = FortressRegularCellSelection(connections, totalSegmentCount, totalFloorCount, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
+			FortressRegularCellBuffer = FortressRegularCellSelection(connections, totalSegmentCount, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
 			var temp = FortressRegularCellBuffer[0];
 			FortressRegularCellBuffer.RemoveAt(0);
 			return (WorldGen.genRand.Next(temp), flipped);
@@ -1001,8 +1002,9 @@ class ChainedArrayBuilder
 	public static List<List<int[,]>>? FortressRegularCellBuffer;
 	// this buffer is a little bit silly I think? need a better way to provide specific styles (book, statue, flower, etc), which will be carried to next cell when placing multi-cell rooms
 	// as well as determining WHEN a multi-cell room should start
-	public static List<List<int[,]>> FortressRegularCellSelection((byte sidesOpen, bool? Up, bool? Down) connections, int totalSegmentCount, int totalFloorCount, int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped, List<(int, int, bool)> hiddenRoomLocations, int leftCentre, int rightCentre)
+	public static List<List<int[,]>> FortressRegularCellSelection((byte sidesOpen, bool? Up, bool? Down) connections, int totalSegmentCount, int lowerHallsFloorCount, int middleHallsFloorCount, int upperHallsFloorCount, /*int totalFloorCount, */int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped, List<(int, int, bool)> hiddenRoomLocations, int leftCentre, int rightCentre)
 	{
+		int totalFloorCount = lowerHallsFloorCount + middleHallsFloorCount + upperHallsFloorCount;
 		List<int[,]> tempList = new List<int[,]>();
 		if (connections.sidesOpen == 0)
 		{
@@ -1046,7 +1048,14 @@ class ChainedArrayBuilder
 		{
 			if (connections.Up == false && connections.Down == false)
 			{
-				tempList = SkyFortressArrays.CellConnections.DualSide;
+				if (curFloor >= totalFloorCount - lowerHallsFloorCount)
+				{
+					tempList = [SkyFortressArrays.Cells.LowerHall];
+				}
+				else
+				{
+					tempList = SkyFortressArrays.CellConnections.DualSide;
+				}
 			}
 			else if (connections.Up == true && connections.Down == false)
 			{

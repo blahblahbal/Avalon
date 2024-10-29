@@ -25,8 +25,8 @@ namespace Avalon.Data.Sets
 		public static List<ushort> LivingBlocks = new()
         {
             TileID.LivingFire, TileID.LivingCursedFire, TileID.LivingDemonFire, TileID.LivingFrostFire, TileID.LivingIchor,
-            TileID.LivingUltrabrightFire, (ushort)ModContent.TileType<LivingLightning>()
-        };
+            TileID.LivingUltrabrightFire, (ushort)ModContent.TileType<LivingLightning>(), (ushort)ModContent.TileType<LivingPathogen>()
+		};
 
         public static readonly bool[] Chunkstone = TileID.Sets.Factory.CreateBoolSet(
             ModContent.TileType<Chunkstone>()

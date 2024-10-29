@@ -80,6 +80,7 @@ class WorldgenHelper : ModItem
 			int topFloorMaxWalls = smallWorld.X ? 0 : 2;
 			// the minimum gap in cells between dividing walls
 			int minGapBetweenWalls = 5;
+			// pretty sure these next two values are not working properly rn, I'll just fix it later
 			// used for the far left side of the structure
 			int initialGapBetweenWalls = 2;
 			// used for the far right side of the structure
