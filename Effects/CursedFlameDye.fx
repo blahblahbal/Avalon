@@ -29,10 +29,12 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     
     color.rgb *= color.a;
     color -= tex2D(uImage0, coords + float2(cloud.r / uImageSize0.x * 2, cloud.r / uImageSize0.y * 6)) * 0.3 * frameY;
-    float4 color2 = tex2D(uImage0, coords + float2(0, 2 / uImageSize0.y)) * 0.2;
-    
-    if (!any(color))
-        return color;
+	float4 color2 = tex2D(uImage0, coords + float2(0, 2 / uImageSize0.y)) * 0.2;
+	
+	if (sampleColor.a != 1.0) // special calculation for transparent pixels
+	{
+		return color * sampleColor;
+	}
 	return color * sampleColor.a;
 }
     

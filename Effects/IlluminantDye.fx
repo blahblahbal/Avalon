@@ -18,7 +18,12 @@ float2 uLegacyArmorSheetSize;
     
 float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLOR0
 {
-	return tex2D(uImage0, coords) * sampleColor.a;
+	float4 color = tex2D(uImage0, coords);
+	if (sampleColor.a != 1.0) // special calculation for transparent pixels
+	{
+		return color * sampleColor;
+	}
+	return color * sampleColor.a;
 }
     
 technique Technique1

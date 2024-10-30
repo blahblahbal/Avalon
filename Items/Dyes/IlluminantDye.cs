@@ -17,9 +17,7 @@ public class IlluminantDye : ModItem
             // The following code creates an effect (shader) reference and associates it with this item's type ID.
             GameShaders.Armor.BindShader(
                 Item.type,
-                new ArmorShaderData(
-                    new Ref<Effect>(Mod.Assets.Request<Effect>("Effects/IlluminantDye", AssetRequestMode.ImmediateLoad)
-                        .Value), "IlluminantDye") // Be sure to update the effect path and pass name here.
+                new ArmorShaderData(Mod.Assets.Request<Effect>("Effects/IlluminantDye"), "IlluminantDye") // Be sure to update the effect path and pass name here.
             );
         }
 
