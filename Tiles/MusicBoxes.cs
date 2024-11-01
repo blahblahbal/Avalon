@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -21,10 +22,16 @@ public class MusicBoxes : ModTile
         TileObjectData.newTile.DrawYOffset = 2;
         TileObjectData.addTile(Type);
         TileID.Sets.DisableSmartCursor[Type] = true;
+		TileID.Sets.HasOutlines[Type] = true;
         AddMapEntry(new Color(200, 200, 200));
+		DustType = -1;
     }
+	public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
+	{
+		return true;
+	}
 
-    public override IEnumerable<Item> GetItemDrops(int i, int j)
+	public override IEnumerable<Item> GetItemDrops(int i, int j)
     {
         Tile t = Framing.GetTileSafely(i, j);
         int item = 0;
