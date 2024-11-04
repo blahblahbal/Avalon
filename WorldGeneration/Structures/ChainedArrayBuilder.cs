@@ -931,19 +931,21 @@ class ChainedArrayBuilder
 			connections.Up = false;
 		}
 
-		if (FortressRegularCellBuffer != null && FortressRegularCellBuffer.Count > 0)
-		{
-			var temp = FortressRegularCellBuffer[0];
-			FortressRegularCellBuffer.RemoveAt(0);
-			return (WorldGen.genRand.Next(temp), flipped);
-		}
-		else
-		{
-			FortressRegularCellBuffer = FortressRegularCellSelection(connections, totalSegmentCount, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
-			var temp = FortressRegularCellBuffer[0];
-			FortressRegularCellBuffer.RemoveAt(0);
-			return (WorldGen.genRand.Next(temp), flipped);
-		}
+		//if (FortressRegularCellBuffer != null && FortressRegularCellBuffer.Count > 0)
+		//{
+		//	var temp = FortressRegularCellBuffer[0];
+		//	FortressRegularCellBuffer.RemoveAt(0);
+		//	return (WorldGen.genRand.Next(temp), flipped);
+		//}
+		//else
+		//{
+		//	FortressRegularCellBuffer = FortressRegularCellSelection(connections, totalSegmentCount, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
+		//	var temp = FortressRegularCellBuffer[0];
+		//	FortressRegularCellBuffer.RemoveAt(0);
+		//	return (WorldGen.genRand.Next(temp), flipped);
+		//}
+		var temp = FortressRegularCellSelection(connections, totalSegmentCount, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
+		return (WorldGen.genRand.Next(temp), flipped);
 	}
 	//public static int[,] FortressRegularCells(List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment)
 	//{
@@ -999,13 +1001,16 @@ class ChainedArrayBuilder
 	//	return WorldGen.genRand.Next(tempList.ToList());
 	//}
 
-	public static List<List<int[,]>>? FortressRegularCellBuffer;
 	// this buffer is a little bit silly I think? need a better way to provide specific styles (book, statue, flower, etc), which will be carried to next cell when placing multi-cell rooms
 	// as well as determining WHEN a multi-cell room should start
-	public static List<List<int[,]>> FortressRegularCellSelection((byte sidesOpen, bool? Up, bool? Down) connections, int totalSegmentCount, int lowerHallsFloorCount, int middleHallsFloorCount, int upperHallsFloorCount, /*int totalFloorCount, */int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped, List<(int, int, bool)> hiddenRoomLocations, int leftCentre, int rightCentre)
+	// maybe just make this an (int segments, int style) tuple, with the first specifying number of cells to use this style, and the second being the style
+	//public static List<List<int[,]>>? FortressRegularCellBuffer;
+	public static (int segmentCount, int style) FortressRegularCellBuffer = (0, 0);
+
+	public static List<int[,]> FortressRegularCellSelection((byte sidesOpen, bool? Up, bool? Down) connections, int totalSegmentCount, int lowerHallsFloorCount, int middleHallsFloorCount, int upperHallsFloorCount, /*int totalFloorCount, */int[,] sideWinderFloors, int curFloor, int curSegment, bool flipped, List<(int, int, bool)> hiddenRoomLocations, int leftCentre, int rightCentre)
 	{
 		int totalFloorCount = lowerHallsFloorCount + middleHallsFloorCount + upperHallsFloorCount;
-		List<int[,]> tempList = new List<int[,]>();
+		List<int[,]> tempList = [];
 		if (connections.sidesOpen == 0)
 		{
 			if (connections.Up == false && connections.Down == false)
@@ -1071,7 +1076,7 @@ class ChainedArrayBuilder
 			}
 		}
 		//List<List<int[,]>> tempListofLists = [tempList];
-		return [tempList];
+		return tempList;
 	}
 
 	public static int[,] FortressCentralCells(int[,] selectedCell, int totalSegmentCount, int totalFloorCount, List<int[,]> floors, int[,] sideWinderFloors, int curFloor, int curSegment, bool blockedCentreSide)

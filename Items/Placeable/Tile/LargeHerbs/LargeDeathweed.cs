@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,7 +7,8 @@ namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
 class LargeDeathweed : ModItem
 {
-    public override void SetStaticDefaults()
+	public override string Texture => ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement ? $"Avalon/Items/Placeable/Tile/{Name}_Alt" : base.Texture;
+	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 15;
     }

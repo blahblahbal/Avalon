@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,7 +11,8 @@ namespace Avalon.Items.Placeable.Seed;
 
 public class ContagionSeeds : ModItem
 {
-    public override void SetStaticDefaults()
+	public override string Texture => ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement ? $"Avalon/Items/Placeable/Seed/{Name}_Alt" : base.Texture;
+	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 25;
     }
