@@ -7,7 +7,7 @@ namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
 class LargeDeathweed : ModItem
 {
-	public override string Texture => ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement ? $"Avalon/Items/Placeable/Tile/{Name}_Alt" : base.Texture;
+	public override string Texture => ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement ? $"Avalon/Items/Placeable/Tile/LargeHerbs/{Name}_Alt" : base.Texture;
 	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 15;
