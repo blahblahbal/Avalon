@@ -116,7 +116,7 @@ class StructureSaver : ModItem
 
 								}
 							}
-							Console.WriteLine(String.Join(", ", arrayLines.Cast<int>()));
+							Console.WriteLine("{" + String.Join(", ", arrayLines.Cast<int>()) + "},");
 						}
 					}
 					coordStartSet = false;
