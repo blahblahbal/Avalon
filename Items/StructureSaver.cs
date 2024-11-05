@@ -81,7 +81,7 @@ class StructureSaver : ModItem
 								Console.WriteLine("\n\n" + "Wall Type Array:" + "\n");
 								break;
 							case 2:
-								Console.WriteLine("\n\n" + "Slope/Liquid Amount Type Array (negative values are inverse of the BlockType, positive are LiquidAmount):" + "\n");
+								Console.WriteLine("\n\n" + "Slope Type/Liquid Amount Array (negative values are inverse of the BlockType, positive are LiquidAmount):" + "\n");
 								break;
 							case 3:
 								Console.WriteLine("\n\n" + "Liquid Type Array:" + "\n");
