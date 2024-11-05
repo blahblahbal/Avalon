@@ -9557,6 +9557,17 @@ Mods: {
 				DisplayName: Living Pathogen Block
 				Tooltip: ""
 			}
+
+			StructureSaver: {
+				DisplayName: Structure Saver
+				Tooltip:
+					'''
+					<left> to select points in the world
+					Once two points have been set, it will clear and print the array of tiles to console
+					Console output can be copied by pressing ctrl+A to select all, then ctrl+C to copy
+					<right> to cancel current selection
+					'''
+			}
 		}
 
 		InfoDisplays: {
