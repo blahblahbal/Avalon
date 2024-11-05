@@ -70,19 +70,54 @@ class StructureSaver : ModItem
 					int width = maxCoords.X - minCoords.X + 1;
 					int height = maxCoords.Y - minCoords.Y + 1;
 					Console.Clear();
-					for (int i = 0; i < height; i++)
+					for (int data = 0; data < 4; data++)
 					{
-						List<int> arrayLines = new List<int>();
-						for (int j = 0; j < width; j++)
+						switch (data)
 						{
-							if ((i == 0 || i == height - 1) || (j == 0 || j == width - 1))
-							{
-								Dust d = Dust.QuickDust(minCoords + new Point(j, i), Color.Red);
-								d.fadeIn = 2f;
-							}
-							arrayLines.Add(Main.tile[minCoords.X + j, minCoords.Y + i].TileType);
+							case 0:
+								Console.WriteLine("Tile Type Array:" + "\n");
+								break;
+							case 1:
+								Console.WriteLine("\n\n" + "Wall Type Array:" + "\n");
+								break;
+							case 2:
+								Console.WriteLine("\n\n" + "Slope/Liquid Amount Type Array (negative values are inverse of the BlockType, positive are LiquidAmount):" + "\n");
+								break;
+							case 3:
+								Console.WriteLine("\n\n" + "Liquid Type Array:" + "\n");
+								break;
+
 						}
-						Console.WriteLine(String.Join(", ", arrayLines.Cast<int>()));
+						for (int i = 0; i < height; i++)
+						{
+							List<int> arrayLines = new List<int>();
+							for (int j = 0; j < width; j++)
+							{
+								if ((i == 0 || i == height - 1) || (j == 0 || j == width - 1))
+								{
+									Dust d = Dust.QuickDust(minCoords + new Point(j, i), Color.Red);
+									d.fadeIn = 2f;
+								}
+								switch (data)
+								{
+									case 0:
+										arrayLines.Add(Main.tile[minCoords.X + j, minCoords.Y + i].TileType);
+										break;
+									case 1:
+										arrayLines.Add(Main.tile[minCoords.X + j, minCoords.Y + i].WallType);
+										break;
+									case 2:
+										int states = (int)Main.tile[minCoords.X + j, minCoords.Y + i].BlockType;
+										arrayLines.Add(states != 0 ? -states : Main.tile[minCoords.X + j, minCoords.Y + i].LiquidAmount);
+										break;
+									case 3:
+										arrayLines.Add(Main.tile[minCoords.X + j, minCoords.Y + i].LiquidType);
+										break;
+
+								}
+							}
+							Console.WriteLine(String.Join(", ", arrayLines.Cast<int>()));
+						}
 					}
 					coordStartSet = false;
 					storedCoords.start = Point.Zero;
