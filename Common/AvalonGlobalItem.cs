@@ -870,7 +870,7 @@ public class AvalonGlobalItem : GlobalItem
     }
     public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
     {
-		if (item.Name.Contains("Treasure Bag"))
+		if (ItemID.Sets.BossBag[item.type] == true)
 		{
 			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<StaminaCrystal>(), 4));
 		}

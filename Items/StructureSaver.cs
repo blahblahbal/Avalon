@@ -98,7 +98,7 @@ class StructureSaver : ModItem
 									Dust d = Dust.QuickDust(minCoords + new Point(j, i), Color.Red);
 									d.fadeIn = 2f;
 								}
-								switch (data)
+								switch (data) // to-do: store actuation, paint, and coating
 								{
 									case 0:
 										arrayLines.Add(Main.tile[minCoords.X + j, minCoords.Y + i].TileType);
