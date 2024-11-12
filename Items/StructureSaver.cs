@@ -7,7 +7,9 @@ using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -69,22 +71,32 @@ class StructureSaver : ModItem
 					Point maxCoords = new Point(Math.Max(storedCoords.start.X, storedCoords.end.X), Math.Max(storedCoords.start.Y, storedCoords.end.Y));
 					int width = maxCoords.X - minCoords.X + 1;
 					int height = maxCoords.Y - minCoords.Y + 1;
-					Console.Clear();
+					//Console.Clear();
+					List<string> lines = [];
 					for (int data = 0; data < 4; data++)
 					{
+						string arrayType;
 						switch (data)
 						{
 							case 0:
-								Console.WriteLine("Tile Type Array:" + "\n");
+								arrayType = "Tile Type Array:" + "\n";
+								//Console.WriteLine(arrayType);
+								lines.Add(arrayType);
 								break;
 							case 1:
-								Console.WriteLine("\n\n" + "Wall Type Array:" + "\n");
+								arrayType = "\n\n" + "Wall Type Array:" + "\n";
+								//Console.WriteLine(arrayType);
+								lines.Add(arrayType);
 								break;
 							case 2:
-								Console.WriteLine("\n\n" + "Slope Type/Liquid Amount Array (negative values are inverse of the BlockType, positive are LiquidAmount):" + "\n");
+								arrayType = "\n\n" + "Slope Type/Liquid Amount Array (negative values are inverse of the BlockType, positive are LiquidAmount):" + "\n";
+								//Console.WriteLine(arrayType);
+								lines.Add(arrayType);
 								break;
 							case 3:
-								Console.WriteLine("\n\n" + "Liquid Type Array:" + "\n");
+								arrayType = "\n\n" + "Liquid Type Array:" + "\n";
+								//Console.WriteLine(arrayType);
+								lines.Add(arrayType);
 								break;
 
 						}
@@ -116,9 +128,23 @@ class StructureSaver : ModItem
 
 								}
 							}
-							Console.WriteLine("{" + String.Join(", ", arrayLines.Cast<int>()) + "},");
+							//Console.WriteLine("{" + String.Join(", ", arrayLines.Cast<int>()) + "},");
+							lines.Add("{" + String.Join(", ", arrayLines.Cast<int>()) + "},");
 						}
 					}
+					string path = Path.Combine(Main.SavePath, "AvalonSavedStructures");
+					Directory.CreateDirectory(path);
+					StringBuilder pathToFile = new StringBuilder(Path.Combine(path, "SavedStructure_0"));
+					while (File.Exists(pathToFile.ToString() + ".txt"))
+					{
+						pathToFile[^1] = (char)(pathToFile[^1] + 1);
+					}
+					using (StreamWriter outputFile = new StreamWriter(pathToFile.ToString() + ".txt"))
+					{
+						foreach (string line in lines)
+							outputFile.WriteLine(line);
+					}
+					Main.NewText("Structure saved to: " + $"[c/2eec78:" + pathToFile.ToString() + ".txt" + $"]");
 					coordStartSet = false;
 					storedCoords.start = Point.Zero;
 					storedCoords.end = Point.Zero;
