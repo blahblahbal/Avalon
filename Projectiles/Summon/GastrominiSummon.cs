@@ -187,18 +187,25 @@ public abstract class GastrominiSummon : ModProjectile
         if (Projectile.localAI[0] == 0)
         {
             Projectile.frameCounter++;
-            if (Projectile.frameCounter <= 3)
+            if (Projectile.frameCounter <= 20)
             {
                 Projectile.frame = 0;
             }
-            else if (Projectile.frameCounter <= 6)
+            else if (Projectile.frameCounter <= 40)
             {
                 Projectile.frame = 1;
             }
-        }
+			else
+			{
+				Projectile.frame = 0;
+				Projectile.frameCounter = 0;
+			}
+			Projectile.spriteDirection = (Math.Abs(Projectile.velocity.X) > 2.25f || (!target && Projectile.Center.Distance(player.Center) > 300f)) ? -Math.Sign(Projectile.velocity.X) : Projectile.spriteDirection;
+		}
         else if (Projectile.localAI[0] > 0)
-        {
-            Projectile.localAI[0]++;
+		{
+			Projectile.frameCounter = 0;
+			Projectile.localAI[0]++;
             if (Projectile.localAI[0] <= 4)
             {
                 Projectile.frame = 2;
@@ -234,7 +241,8 @@ public abstract class GastrominiSummon : ModProjectile
             {
                 Projectile.ai[1] += 1f;
                 Projectile.localAI[0] = 1;
-                if (Main.myPlayer == Projectile.owner && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, targetPos, 0, 0))
+				Projectile.frameCounter = 0;
+				if (Main.myPlayer == Projectile.owner && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, targetPos, 0, 0))
                 {
                     Projectile.spriteDirection = -(int)((targetPos.X - Projectile.Center.X) / Math.Abs(targetPos.X - Projectile.Center.X));
                     var value24 = targetPos - Projectile.Center;
