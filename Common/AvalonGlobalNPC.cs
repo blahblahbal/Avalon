@@ -368,12 +368,14 @@ public class AvalonGlobalNPC : GlobalNPC
 		string result = string.Empty;
 		if (type == NPCID.Merchant)
 		{
-			int r = Main.rand.Next(5);
+			int r = Main.rand.Next(7);
 			if (r == 0) result += " tried to sell torches to a zombie.";
 			if (r == 1) result += " made a grave error...";
 			if (r == 2) result += " was slain...";
 			if (r == 3) result += " was hanged with a bug net.";
 			if (r == 4) result += " tried gold dust for the first time.";
+			if (r == 5) result += " made a deal that cost his life.";
+			if (r == 6) result += " tried to sell his soul for a dirt block.";
 		}
 		else if (type == NPCID.Nurse)
 		{
@@ -392,7 +394,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		else if (type == NPCID.ArmsDealer)
 		{
-			int r = Main.rand.Next(6);
+			int r = Main.rand.Next(7);
 			if (r == 0) result += "'s gun jammed.";
 			if (r == 1) result += " fired a meteor bullet...";
 			if (r == 2) result += " ran out of ammo.";
@@ -403,6 +405,7 @@ public class AvalonGlobalNPC : GlobalNPC
 				if (!Main.dayTime) result += " was caught.";
 				else result += " shot himself.";
 			}
+			if (r == 6) result += "'s hand wasn't the fastest in the west.";
 		}
 		else if (type == NPCID.Dryad)
 		{
@@ -417,7 +420,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		else if (type == NPCID.Guide)
 		{
-			int r = Main.rand.Next(7);
+			int r = Main.rand.Next(8);
 			if (r == 0) result += " let too many zombies in.";
 			if (r == 1) result += " was reading a history book...";
 			if (r == 2) result += " was slain...";
@@ -425,6 +428,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			if (r == 4) result += " was the victim of dark magic.";
 			if (r == 5) result += " was voodoo'd.";
 			if (r == 6) result += " opened a door.";
+			if (r == 7) result += " read the wrong wiki.";
 		}
 		else if (type == NPCID.Demolitionist)
 		{
@@ -486,12 +490,14 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		else if (type == NPCID.Truffle)
 		{
-			int r = Main.rand.Next(5);
+			int r = Main.rand.Next(7);
 			if (r == 0) result += " bit himself.";
 			if (r == 1) result += " was eaten.";
 			if (r == 2) result += " was slain...";
 			if (r == 3) result += " is no longer a fun guy.";
 			if (r == 4) result += " went on a trip.";
+			if (r == 5) result += " was found partially eaten.";
+			if (r == 6) result += " was sautéed";
 		}
 		else if (type == NPCID.Steampunker)
 		{
@@ -524,7 +530,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		else if (type == NPCID.Cyborg)
 		{
-			int r = Main.rand.Next(8);
+			int r = Main.rand.Next(9);
 			if (r == 0) result += " was assimilated.";
 			if (r == 1) result += "'s mechanisms were damaged beyond repair.";
 			if (r == 2) result += " was crushed.";
@@ -533,6 +539,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			if (r == 5) result += " short-circuited.";
 			if (r == 6) result += " malfunctioned.";
 			if (r == 7) result += " encountered a glitch in his systems.";
+			if (r == 8) result += " tried to divide by zero.";
 		}
 		else if (type == NPCID.Painter)
 		{
@@ -575,13 +582,14 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		else if (type == NPCID.TravellingMerchant)
 		{
-			int r = Main.rand.Next(6);
+			int r = Main.rand.Next(7);
 			if (r == 0) result += " has departed...";
 			if (r == 1) result += " had INTERPOL problems.";
 			if (r == 2) result += " was vaporized.";
 			if (r == 3) result += " did not need a monster there.";
 			if (r == 4) result += " tried to sell an exotic pitcher plant...";
 			if (r == 5) result += " failed to make any sales.";
+			if (r == 6) result += " is now travelling the afterlife";
 		}
 		else if (type == NPCID.Angler)
 		{
@@ -603,12 +611,13 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		else if (type == NPCID.TaxCollector)
 		{
-			int r = Main.rand.Next(5);
+			int r = Main.rand.Next(6);
 			if (r == 0) result += " went to the wrong house.";
 			if (r == 1) result += " collected counterfeit money.";
 			if (r == 2) result += " had a hole in his pocket.";
 			if (r == 3) result += " saw the ghost of " + Main.worldName + "'s past.";
 			if (r == 4) result += " overtaxed himself.";
+			if (r == 5) result += " was finally caught by the IRS.";
 		}
 		else if (type == NPCID.DD2Bartender)
 		{
@@ -621,11 +630,12 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		else if (type == NPCID.Princess)
 		{
-			int r = Main.rand.Next(4);
+			int r = Main.rand.Next(5);
 			if (r == 0) result += " was taken away by a dragon.";
 			if (r == 1) result += " was chained up in a tower.";
 			if (r == 2) result += " swallowed her scepter.";
 			if (r == 3) result += " tripped on her dress.";
+			if (r == 4) result += " failed to consider the durability of glass heels.";
 		}
 		else if (type == NPCID.Golfer)
 		{
@@ -662,13 +672,14 @@ public class AvalonGlobalNPC : GlobalNPC
 		}*/
 		else if (type == ModContent.NPCType<Librarian>())
 		{
-			int r = Main.rand.Next(6);
+			int r = Main.rand.Next(7);
 			if (r == 0) result += " was nuked by a full squad.";
 			if (r == 1) result += " fell victim to toxic world chat.";
 			if (r == 2) result += " couldn't afford grade eighteen.";
 			if (r == 3) result += " was slain by a boss cone attack.";
 			if (r == 4) result += " was no match for Kun Kun.";
 			if (r == 5) result += "'s Visa card was declined.";
+			if (r == 6) result += " was changed to past tense in a history book.";
 		}
 		else result += " was slain...";
 

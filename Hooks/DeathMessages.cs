@@ -47,7 +47,7 @@ public class DeathMessages : ModHook
             Main.worldName);
         if (Main.rand.NextBool(6))
         {
-            int msg = Main.rand.Next(32) + 1;
+            int msg = Main.rand.Next(33) + 1;
             switch (msg)
             {
                 case 1:
@@ -78,6 +78,7 @@ public class DeathMessages : ModHook
 				case 28:
 				case 30:
 				case 31:
+				case 33:
                     empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_" + msg, deadPlayerName);
                     break;
                 case 8:

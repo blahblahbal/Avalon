@@ -192,6 +192,9 @@ Mods: {
 			14: Terraria: tML Updates Stop Breaking Things Challenge (Impossible)
 			15: Terraria: Getting freaky with the computer
 			16: Terraria: Unblocked
+			17: Terraria: Edit this to change the output of the custom command 19!
+			18: Terraria: Now with more final updates!
+			19: Terraria: 404 title not found
 		}
 
 		Banana: You walk up to a skeleton, and it turns into a banana.
@@ -424,6 +427,7 @@ Mods: {
 			Generic_30: "{0}'s head was amputated"
 			Generic_31: "{0}'s task was managed"
 			Generic_32: "{1} was deprived of {0}"
+			Generic_33: "{0} had their bed gobbled"
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Poisoned_3: "{0} was digested from the inside."
