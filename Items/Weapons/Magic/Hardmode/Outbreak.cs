@@ -43,35 +43,35 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
             }
 
             int Divide = 0;
-            for(int i = 0; i < Main.npc.Length; i++)
-            {
-                if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < AttackRad && !Main.npc[i].friendly && Main.npc[i].active)
+			foreach (var npc in Main.ActiveNPCs)
+			{
+                if (Vector2.Distance(npc.Center, AttackPosition) < AttackRad && !npc.dontTakeDamage && (!npc.friendly || (npc.type == NPCID.Guide && player.killGuide) || (npc.type == NPCID.Clothier && player.killClothier)))
                 {
                     Divide++;
                 }
             }
             if (Divide > 0)
-            {
-                for (int i = 0; i < Main.npc.Length; i++)
-                {
-                    if (Vector2.Distance(Main.npc[i].Center, AttackPosition) < AttackRad && !Main.npc[i].friendly && Main.npc[i].active)
-                    {
-                        int DPS = Main.npc[i].SimpleStrikeNPC((int)(Item.damage / (1f + Divide / 10f)), player.direction, Main.rand.NextBool(player.GetWeaponCrit(player.HeldItem), 100), Item.knockBack, DamageClass.Magic, true, player.luck);
-                        player.addDPS(DPS);
-                        if (Main.rand.NextBool(5))
-                            Main.npc[i].AddBuff(ModContent.BuffType<Pathogen>(), 600 / Divide);
-                        if (Main.rand.NextBool(3))
-                            Main.npc[i].AddBuff(BuffID.Poisoned, 600 / Divide);
-                        for (int j = 0; j < 10; j++) 
-                        {
-                            Dust d = Dust.NewDustPerfect(Main.npc[i].Center,DustID.Stone,Main.rand.NextVector2Circular(Main.npc[i].width, Main.npc[i].height),0,Color.Lerp(Color.OliveDrab,Color.MediumPurple,Main.rand.NextFloat()),1.5f);
-                            d.velocity *= 0.1f;
-                            d.noGravity = true;
-                            d.color.A = 200;
-                        }
-                    }
-                }
-            }
+			{
+				foreach (var npc in Main.ActiveNPCs)
+				{
+					if (Vector2.Distance(npc.Center, AttackPosition) < AttackRad && !npc.dontTakeDamage && (!npc.friendly || (npc.type == NPCID.Guide && player.killGuide) || (npc.type == NPCID.Clothier && player.killClothier)))
+					{
+						int DPS = npc.SimpleStrikeNPC((int)(Item.damage / (1f + Divide / 10f)), player.direction, Main.rand.NextBool(player.GetWeaponCrit(player.HeldItem), 100), Item.knockBack, DamageClass.Magic, true, player.luck);
+						player.addDPS(DPS);
+						if (Main.rand.NextBool(5))
+							npc.AddBuff(ModContent.BuffType<Pathogen>(), 600 / Divide);
+						if (Main.rand.NextBool(3))
+							npc.AddBuff(BuffID.Poisoned, 600 / Divide);
+						for (int j = 0; j < 10; j++)
+						{
+							Dust d = Dust.NewDustPerfect(npc.Center, DustID.Stone, Main.rand.NextVector2Circular(npc.width, npc.height), 0, Color.Lerp(Color.OliveDrab, Color.MediumPurple, Main.rand.NextFloat()), 1.5f);
+							d.velocity *= 0.1f;
+							d.noGravity = true;
+							d.color.A = 200;
+						}
+					}
+				}
+			}
             return false;
         }
         public override Vector2? HoldoutOrigin()
