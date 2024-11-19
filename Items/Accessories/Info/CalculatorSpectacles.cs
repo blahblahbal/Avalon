@@ -375,7 +375,6 @@ internal class CalcSpec : UIState
 					{
 						baseDenom += "11";
 					}
-					Main.NewText(baseDenom);
 					pos3.X += FontAssets.MouseText.Value.MeasureString(text).X - FontAssets.MouseText.Value.MeasureString(baseDenom).X;
 
 					// draw the text
