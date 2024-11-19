@@ -354,7 +354,7 @@ internal class CalcSpec : UIState
 				Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
 				if (remainder > 0)
 				{
-					text += "" + remainder + "/" + remainderDenominator;
+					text += "" + remainderDenominator + "/" + remainderDenominator;
 				}
 				Vector2 posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
 				Vector2 pos3 = posModified;
@@ -370,7 +370,12 @@ internal class CalcSpec : UIState
 					int xmod = -5;
 					if (remainder > 9) xmod = -11;
 					//pos3.X += FontAssets.MouseText.Value.MeasureString($"{bars}  ").X;
-					string baseDenom = "1/1";
+					string baseDenom = "/";
+					foreach (var ch in remainderDenominator.ToString())
+					{
+						baseDenom += "11";
+					}
+					Main.NewText(baseDenom);
 					pos3.X += FontAssets.MouseText.Value.MeasureString(text).X - FontAssets.MouseText.Value.MeasureString(baseDenom).X;
 
 					// draw the text
