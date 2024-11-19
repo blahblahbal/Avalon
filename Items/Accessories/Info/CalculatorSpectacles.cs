@@ -175,6 +175,7 @@ public class CalcSpecGlobalItem : GlobalItem
 							{
 								if (recipe.TryGetIngredient(item.type, out Item ingr))
 								{
+									if (!TileID.Sets.Ore[item.createTile]) continue;
 									if (recipe.createItem.type == itemID)
 									{
 										amtOfOre = ingr.stack;
