@@ -9862,6 +9862,9 @@ Mods: {
 			SoulEaterFriendly.DisplayName: Soul Eater Friendly
 			SoulEdgeSlash.DisplayName: Soul Edge Slash
 			SoulEdgeDash.DisplayName: Soul Edge Dash
+			FishingRift.DisplayName: Fishing Rift
+			FishingRiftBack.DisplayName: Fishing Rift Back
+			FishingRiftFront.DisplayName: Fishing Rift Front
 		}
 
 		NPCs: {
