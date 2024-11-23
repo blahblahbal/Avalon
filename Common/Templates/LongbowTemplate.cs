@@ -34,9 +34,9 @@ namespace Avalon.Common.Templates
             Projectile.tileCollide = false;
             Projectile.DamageType = DamageClass.Ranged;
         }
-        public static float Power;
+        public float Power;
         bool Notified;
-        public static float FullPowerGlow;
+        public float FullPowerGlow;
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
