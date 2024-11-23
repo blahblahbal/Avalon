@@ -207,15 +207,15 @@ public class ExxoAvalonOrigins : Mod
 		//For Content creators: Message me (Lion8cake) on discord if you have any mod call suggestions
 		return args switch
 		{
-		["Contagion"] => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion,
-		["SetWorldEvil", int value] => ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)value,
+			["Contagion"] => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion,
+			["SetWorldEvil", int value] => ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)value,
 
-		// biome chests
-		["AddBiomeChest", List<int> value] => Data.Sets.Item.BiomeLockboxCollection.AddToListAndReturnIt(value),
+			// biome chest loot for the biome lockbox
+			["AddBiomeChest", List<int> value] => Data.Sets.Item.BiomeLockboxCollection.AddToListAndReturnIt(value),
 
-		//IDs
-		["ConvertsToContagion", int tileID, int num] => Data.Sets.Tile.ConvertsToContagion[tileID] = num,
-		["ConvertsToContagionWall", int wallID, int num] => Data.Sets.Wall.ConvertsToContagionWall[wallID] = num,
+			//IDs
+			["ConvertsToContagion", int tileID, int num] => Data.Sets.Tile.ConvertsToContagion[tileID] = num,
+			["ConvertsToContagionWall", int wallID, int num] => Data.Sets.Wall.ConvertsToContagionWall[wallID] = num,
 			_ => throw new Exception("ExxoAvalonOrigins: Unknown mod call, make sure you are calling the right method/field with the right parameters!")
 		};
     }

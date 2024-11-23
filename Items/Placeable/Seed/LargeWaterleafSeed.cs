@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,7 +7,8 @@ namespace Avalon.Items.Placeable.Seed;
 
 class LargeWaterleafSeed : ModItem
 {
-    public override void SetStaticDefaults()
+	public override string Texture => ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement ? $"Avalon/Items/Placeable/Seed/{Name}_Alt" : base.Texture;
+	public override void SetStaticDefaults()
     {
         ItemID.Sets.DisableAutomaticPlaceableDrop[Type] = true;
         Item.ResearchUnlockCount = 10;

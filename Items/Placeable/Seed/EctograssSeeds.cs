@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -7,7 +8,8 @@ namespace Avalon.Items.Placeable.Seed;
 
 public class EctograssSeeds : ModItem
 {
-    public override void SetStaticDefaults()
+	public override string Texture => ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement ? $"Avalon/Items/Placeable/Seed/{Name}_Alt" : base.Texture;
+	public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 25;
     }

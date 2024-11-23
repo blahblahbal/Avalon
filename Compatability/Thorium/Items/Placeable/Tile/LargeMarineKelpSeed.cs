@@ -5,9 +5,14 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Items.Placeable.Tile;
 
+[ExtendsFromMod("ThoriumMod")]
 class LargeMarineKelpSeed : ModItem
 {
-    public override void SetStaticDefaults()
+	public override bool IsLoadingEnabled(Mod mod)
+	{
+		return false;// ModLoader.HasMod("ThoriumMod");
+	}
+	public override void SetStaticDefaults()
     {
         ItemID.Sets.DisableAutomaticPlaceableDrop[Type] = true;
         Item.ResearchUnlockCount = 10;

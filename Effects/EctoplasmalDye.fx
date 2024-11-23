@@ -19,27 +19,24 @@ float2 uLegacyArmorSheetSize;
 float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLOR0
 {
     float4 color = tex2D(uImage0, coords);
-    if (any(color))
-    {
-		float gray = dot(color.rgb, float3(0.5, 0.4, 0.3));
+	float gray = dot(color.rgb, float3(0.5, 0.4, 0.3));
 		
-		if (gray < 0.5)
-			gray *= 0.75;
+	if (gray < 0.5)
+		gray *= 0.75;
 		
-		float2 coords2 = (((coords * uImageSize0) - (uSourceRect.xy)) / uImageSize1 * (2 + (sin(uTime * 0.5) * 0.3)));
-		coords2 += uWorldPosition * 0.01 * float2(uDirection,1);
-		float soulColor = tex2D(uImage1, coords2 + float2(sin(uTime + coords2.y * 0.3) * 0.3, uTime * 0.2)).
-		r;
-		gray += soulColor * gray * (1 + (sin(uTime + coords2.y * 0.2) * 0.5));
+	float2 coords2 = (((coords * uImageSize0) - (uSourceRect.xy)) / uImageSize1 * (2 + (sin(uTime * 0.5) * 0.3)));
+	coords2 += uWorldPosition * 0.01 * float2(uDirection,1);
+	float soulColor = tex2D(uImage1, coords2 + float2(sin(uTime + coords2.y * 0.3) * 0.3, uTime * 0.2)).
+	r;
+	gray += soulColor * gray * (1 + (sin(uTime + coords2.y * 0.2) * 0.5));
 		
-		color.rgb = lerp(uSecondaryColor, uColor, gray);
-		color.rgb *= color.a; // this fixes issues with bilinear filtered pixels on the outlines of sprites
-		return color * sampleColor.a;
+	color.rgb = lerp(uSecondaryColor, uColor, gray);
+	color.rgb *= color.a; // this fixes issues with bilinear filtered pixels on the outlines of sprites
+	if (sampleColor.a != 1.0) // special calculation for transparent pixels
+	{
+		return color * sampleColor;
 	}
-    else
-    {
-        return tex2D(uImage0, coords);
-    }
+	return color * sampleColor.a;
 }
     
 technique Technique1

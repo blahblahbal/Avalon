@@ -14,7 +14,8 @@ namespace Avalon.Tiles.Herbs;
 
 public class LargeHerbsStage4 : ModTile
 {
-    public override void SetStaticDefaults()
+	public override string Texture => ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement ? $"Avalon/Tiles/Herbs/{Name}_Alt" : base.Texture;
+	public override void SetStaticDefaults()
     {
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1xX);
         TileObjectData.newTile.Width = 1;
