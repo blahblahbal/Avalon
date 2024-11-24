@@ -212,6 +212,7 @@ internal class CalcSpec : UIState
 		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type] && Main.LocalPlayer.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay)
 		{
 			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+			if (!WorldGen.InWorld(tilepos.X, tilepos.Y)) return;
 			Color c = Lighting.GetColor(tilepos);
 
 			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType]/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&

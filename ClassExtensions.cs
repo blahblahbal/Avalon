@@ -143,7 +143,8 @@ public static class ClassExtensions
         for (int x = pos.X - boxRadius; x <= pos.X + boxRadius; x++)
         {
             for (int y = pos.Y - boxRadius; y <= pos.Y + boxRadius; y++)
-            {
+			{
+				if (!WorldGen.InWorld(x, y)) continue;
 				if (silenceCandle)
 				{
 					if (Main.tile[x, y].TileType == tileType && Main.tile[x, y].TileFrameX == 0)
