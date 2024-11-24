@@ -15,12 +15,12 @@ namespace Avalon.Projectiles.Ranged;
 public class BoompipeShrapnel : ModProjectile
 {
 	private static Asset<Texture2D> glow;
-	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
+		ProjectileID.Sets.TrailCacheLength[Type] = 1;
+		ProjectileID.Sets.TrailingMode[Type] = 2;
 		Main.projFrames[Type] = 4;
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
-		texture = TextureAssets.Projectile[Type];
 	}
 	public override void SetDefaults()
     {
@@ -31,10 +31,20 @@ public class BoompipeShrapnel : ModProjectile
         Projectile.hostile = false;
         Projectile.DamageType = DamageClass.Ranged;
 	}
-	float rotation;
-	float oldRotation;
-	int initialTimeLeft;
-	float glowLerpDiv;
+	public float rotation {
+		get { return Projectile.ai[0]; }
+		set { Projectile.ai[0] = value; }
+	}
+	public float initialTimeLeft
+	{
+		get { return Projectile.ai[1]; }
+		set { Projectile.ai[1] = value; }
+	}
+	public float glowLerpDiv
+	{
+		get { return Projectile.ai[2]; }
+		set { Projectile.ai[2] = value; }
+	}
 	public override void OnSpawn(IEntitySource source)
 	{
 		Projectile.frame = Main.rand.Next(4);
@@ -42,15 +52,10 @@ public class BoompipeShrapnel : ModProjectile
 		initialTimeLeft = Projectile.timeLeft;
 		rotation = Main.rand.NextFromList(Main.rand.NextFloat(-0.35f, -0.2f), Main.rand.NextFloat(0.2f, 0.35f));
 	}
-	public override bool PreAI()
-	{
-		oldRotation = Projectile.rotation;
-		return true;
-	}
 	public override void AI()
 	{
-		Projectile.rotation = oldRotation + rotation;
-		if ((initialTimeLeft - Projectile.timeLeft) / glowLerpDiv * 10f < 15f && Main.rand.NextBool(1 + (int)((initialTimeLeft - Projectile.timeLeft) / glowLerpDiv * 15f)))
+		Projectile.rotation = Projectile.oldRot[0] + rotation;
+		if (((int)initialTimeLeft - Projectile.timeLeft) / glowLerpDiv * 10f < 15f && Main.rand.NextBool(1 + (int)(((int)initialTimeLeft - Projectile.timeLeft) / glowLerpDiv * 15f)))
 		{
 			int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0, 0, 0, default, 1f);
 			if (!Main.rand.NextBool(4))
@@ -85,12 +90,12 @@ public class BoompipeShrapnel : ModProjectile
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
-		Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
+		int frameHeight = TextureAssets.Projectile[Type].Value.Height / Main.projFrames[Projectile.type];
+		Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, TextureAssets.Projectile[Type].Value.Width, frameHeight);
 		Color glowLerp = Color.Lerp(new Color(255, 255, 255, 0), new Color(0, 0, 0, 0), (initialTimeLeft - Projectile.timeLeft) / glowLerpDiv);
 
-		Main.EntitySpriteDraw(texture.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, lightColor, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(glow.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, glowLerp, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, lightColor, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(glow.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, glowLerp, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 		return false;
 	}
 }
