@@ -31,20 +31,9 @@ public class BoompipeShrapnel : ModProjectile
         Projectile.hostile = false;
         Projectile.DamageType = DamageClass.Ranged;
 	}
-	public float rotation {
-		get { return Projectile.ai[0]; }
-		set { Projectile.ai[0] = value; }
-	}
-	public float initialTimeLeft
-	{
-		get { return Projectile.ai[1]; }
-		set { Projectile.ai[1] = value; }
-	}
-	public float glowLerpDiv
-	{
-		get { return Projectile.ai[2]; }
-		set { Projectile.ai[2] = value; }
-	}
+	public float rotation { get => Projectile.ai[0]; set => Projectile.ai[0] = value; }
+	public float initialTimeLeft { get => Projectile.ai[1]; set => Projectile.ai[1] = value; }
+	public float glowLerpDiv { get => Projectile.ai[2]; set => Projectile.ai[2] = value; }
 	public override void OnSpawn(IEntitySource source)
 	{
 		Projectile.frame = Main.rand.Next(4);
