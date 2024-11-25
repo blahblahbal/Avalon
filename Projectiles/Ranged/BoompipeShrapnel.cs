@@ -43,6 +43,14 @@ public class BoompipeShrapnel : ModProjectile
 	}
 	public override void AI()
 	{
+		if (Projectile.timeLeft == (int)initialTimeLeft && !Main.rand.NextBool(3))
+		{
+			Vector2 correctedPos = Projectile.Center + new Vector2(0, 8);
+			Vector2 perturbedSpeed = Projectile.velocity.RotatedByRandom(MathHelper.ToRadians(14));
+			Gore G = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), correctedPos + Vector2.Normalize(Projectile.velocity) * 50 - new Vector2(16, 24), Vector2.Zero, Main.rand.NextFromList(GoreID.Smoke1, GoreID.Smoke2, GoreID.Smoke3), Main.rand.NextFloat(0.7f, 1f));
+			G.velocity = perturbedSpeed * 0.18f * Main.rand.NextFloat(0.45f, 1f);
+			G.alpha = Main.rand.Next(80, 175);
+		}
 		Projectile.rotation = Projectile.oldRot[0] + rotation;
 		if (((int)initialTimeLeft - Projectile.timeLeft) / glowLerpDiv * 10f < 15f && Main.rand.NextBool(1 + (int)(((int)initialTimeLeft - Projectile.timeLeft) / glowLerpDiv * 15f)))
 		{
