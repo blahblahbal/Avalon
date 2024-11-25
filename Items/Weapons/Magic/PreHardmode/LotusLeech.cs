@@ -78,7 +78,6 @@ public class LotusLeech : ModItem
                 Count++;
                 Success = true;
                 Projectile P = Projectile.NewProjectileDirect(source,Main.rand.NextVector2FromRectangle(npc.Hitbox) + npc.velocity,npc.velocity,type,damage,knockback,player.whoAmI);
-				projIdentity = P.identity;
             }
             if(Count > 2)
             {
