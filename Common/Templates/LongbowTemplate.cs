@@ -3,12 +3,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using ReLogic.Utilities;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Avalon.Common.Templates
 {
@@ -206,6 +208,26 @@ namespace Avalon.Common.Templates
 		public override bool ShouldUpdatePosition()
 		{
 			return false;
+		}
+	}
+	public class LongbowGlobalProj : GlobalProjectile
+	{
+		public override bool InstancePerEntity => true;
+		public bool LongbowArrow;
+		public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter)
+		{
+			bitWriter.WriteBit(LongbowArrow);
+		}
+		public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader)
+		{
+			LongbowArrow = bitReader.ReadBit();
+		}
+		public override void PostAI(Projectile projectile)
+		{
+			if (LongbowArrow)
+			{
+				projectile.netUpdate = true;
+			}
 		}
 	}
 }
