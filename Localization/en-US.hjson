@@ -9572,6 +9572,16 @@ Mods: {
 					<right> to cancel current selection
 					'''
 			}
+
+			OsmiumStaff: {
+				DisplayName: Osmium Staff
+				Tooltip: ""
+			}
+
+			RhodiumStaff: {
+				DisplayName: Rhodium Staff
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9865,6 +9875,8 @@ Mods: {
 			FishingRift.DisplayName: Fishing Rift
 			FishingRiftBack.DisplayName: Fishing Rift Back
 			FishingRiftFront.DisplayName: Fishing Rift Front
+			OsmiumBolt.DisplayName: Osmium Bolt
+			RhodiumBolt.DisplayName: Rhodium Bolt
 		}
 
 		NPCs: {

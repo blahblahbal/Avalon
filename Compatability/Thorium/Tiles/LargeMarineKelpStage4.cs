@@ -22,7 +22,7 @@ public class LargeMarineKelpStage4 : ModTile
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return false; // ModLoader.HasMod("ThoriumMod");
+        return ModLoader.HasMod("ThoriumMod");
     }
     public override void SetStaticDefaults()
     {

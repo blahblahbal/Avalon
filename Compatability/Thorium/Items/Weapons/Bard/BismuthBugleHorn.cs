@@ -10,7 +10,7 @@ namespace Avalon.Compatability.Thorium.Items.Weapons.Bard
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return false; // ModLoader.HasMod("ThoriumMod");
+            return ModLoader.HasMod("ThoriumMod");
         }
         public override void SetBardDefaults()
         {
@@ -33,7 +33,7 @@ namespace Avalon.Compatability.Thorium.Items.Weapons.Bard
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return false; // ModLoader.HasMod("ThoriumMod");
+            return ModLoader.HasMod("ThoriumMod");
         }
         public override int DustType => 86;
     }
