@@ -83,6 +83,8 @@ Mods: {
 					'''
 			}
 		}
+
+		Bestiary.Sickubus: Proof of the insidious influence of the Contagion. Nothing is safe from its spread, not even Demons.
 	}
 
 	Avalon: {
@@ -9877,6 +9879,7 @@ Mods: {
 			FishingRiftFront.DisplayName: Fishing Rift Front
 			OsmiumBolt.DisplayName: Osmium Bolt
 			RhodiumBolt.DisplayName: Rhodium Bolt
+			PathogenSickle.DisplayName: Pathogen Sickle
 		}
 
 		NPCs: {
@@ -10343,6 +10346,7 @@ Mods: {
 			SicklyVulture.DisplayName: Sickly Vulture
 			PhantoplasmaBall.DisplayName: Phantoplasma Ball
 			PhantasmHealthOrbs.DisplayName: Phantasm Health Orbs
+			Sickubus.DisplayName: Sickubus
 		}
 
 		Buffs: {
