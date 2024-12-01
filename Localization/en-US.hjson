@@ -9584,6 +9584,11 @@ Mods: {
 				DisplayName: Rhodium Staff
 				Tooltip: ""
 			}
+
+			ContentiousSoup: {
+				DisplayName: Contentious Soup
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

@@ -19,30 +19,28 @@ namespace Avalon.Compatability.Thorium.Common
 		private static Asset<Texture2D> cursedSickle;
 		private static Asset<Texture2D> ichorSickle;
 		private static Asset<Texture2D> pathogenSickle;
-		int? cursedSickleProj => ExxoAvalonOrigins.Thorium != null ? ExxoAvalonOrigins.Thorium.Find<ModProjectile>("CursedSicklePro").Type : null;
-		int? ichorSickleProj => ExxoAvalonOrigins.Thorium != null ? ExxoAvalonOrigins.Thorium.Find<ModProjectile>("IchorSicklePro").Type : null;
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
 			cursedSickle = ModContent.Request<Texture2D>("Avalon/Compatability/Thorium/Assets/Projectiles/CursedSickle");
 			ichorSickle = ModContent.Request<Texture2D>("Avalon/Compatability/Thorium/Assets/Projectiles/IchorSickle");
 			pathogenSickle = ModContent.Request<Texture2D>("Avalon/Compatability/Thorium/Assets/Projectiles/PathogenSickle");
-			ProjectileID.Sets.TrailCacheLength[(int)cursedSickleProj] = 6;
-			ProjectileID.Sets.TrailingMode[(int)cursedSickleProj] = 2;
-			ProjectileID.Sets.TrailCacheLength[(int)ichorSickleProj] = 6;
-			ProjectileID.Sets.TrailingMode[(int)ichorSickleProj] = 2;
+			ProjectileID.Sets.TrailCacheLength[ModContent.ProjectileType<CursedSicklePro>()] = 6;
+			ProjectileID.Sets.TrailingMode[ModContent.ProjectileType<CursedSicklePro>()] = 2;
+			ProjectileID.Sets.TrailCacheLength[ModContent.ProjectileType<IchorSicklePro>()] = 6;
+			ProjectileID.Sets.TrailingMode[ModContent.ProjectileType<IchorSicklePro>()] = 2;
 		}
 		public override bool PreDraw(Projectile projectile, ref Color lightColor)
 		{
-			if (projectile.type == cursedSickleProj || projectile.type == ichorSickleProj || projectile.type == ModContent.ProjectileType<PathogenSickle>())
+			if (projectile.type == ModContent.ProjectileType<CursedSicklePro>() || projectile.type == ModContent.ProjectileType<IchorSicklePro>() || projectile.type == ModContent.ProjectileType<PathogenSickle>())
 			{
 				float rotationMultiplier = 0.7f;
 				var texture = cursedSickle;
-				if (projectile.type == cursedSickleProj)
+				if (projectile.type == ModContent.ProjectileType<CursedSicklePro>())
 				{
 					texture = cursedSickle;
 				}
-				else if (projectile.type == ichorSickleProj)
+				else if (projectile.type == ModContent.ProjectileType<IchorSicklePro>())
 				{
 					texture = ichorSickle;
 				}

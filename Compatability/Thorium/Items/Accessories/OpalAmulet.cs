@@ -7,7 +7,6 @@ using ThoriumMod;
 namespace Avalon.Compatability.Thorium.Items.Accessories;
 
 [AutoloadEquip(EquipType.Neck)]
-[ExtendsFromMod("ThoriumMod")]
 public class OpalAmulet : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
@@ -34,6 +33,6 @@ public class OpalAmulet : ModItem
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(ThoriumDamageBase<BardDamage>.Instance) += 0.05f;
+        player.GetDamage(BardDamage.Instance) += 0.05f;
     }
 }
