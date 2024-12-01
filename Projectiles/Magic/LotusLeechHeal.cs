@@ -25,10 +25,15 @@ public class LotusLeechHeal : ModProjectile
     public override void AI()
     {
         if (Projectile.ai[1] == 0f)
-        {
-            Projectile.oldPosition = Projectile.position;
+		{
+			Projectile.oldPosition = Projectile.position;
             Projectile.ai[1] = 1f;
             SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
+			for (float j = 0; j < MathHelper.TwoPi; j += MathHelper.TwoPi / 32f)
+			{
+				var dust = Dust.NewDustPerfect(Projectile.Center, DustID.PurificationPowder, new Vector2(0, 3).RotatedBy(j));
+				dust.noGravity = true;
+			}
         }
 
         if (!Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))

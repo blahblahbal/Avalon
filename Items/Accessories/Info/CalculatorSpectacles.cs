@@ -13,6 +13,8 @@ using Terraria.UI;
 using Avalon.Items.Consumables;
 using Terraria.Localization;
 using ThoriumMod.Tiles;
+using Avalon.Tiles;
+using System.Linq;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -140,29 +142,22 @@ public class CalcSpecGlobalItem : GlobalItem
 			foreach (Recipe recipe in Main.recipe)
 			{
 				// check if the recipe's ingredient matches the drop of the tile
-				if (recipe.TryGetIngredient(item.type, out Item ing))
+				if (item.type > ItemID.Count) // this check is pretty much only necessary for hellstone, but I literally could not be bothered fixing it properly rn
 				{
-					// if the recipe's result contains the word "Bar" or "Ingot," or is Life Quartz (Thorium), Heartstone, Boltstone, or Starstone
-					// set barType to the result's type and amtOfOre to the stack size of the ingredient
-					// also set bars to item.stack
-					if (recipe.createItem.Name.EndsWith(" Bar") || recipe.createItem.Name.EndsWith(" Ingot") ||
-						item.type == ExxoAvalonOrigins.Thorium?.Find<ModItem>("LifeQuartz").Type ||
-						item.type == ModContent.ItemType<Material.Ores.Heartstone>() || item.type == ModContent.ItemType<Material.Ores.Boltstone>() ||
-						item.type == ModContent.ItemType<Material.Ores.Starstone>())
+					if (recipe.TryGetIngredient(item.type, out Item ing))
 					{
-						// if the recipe result and ingredient both contain "Bar" bypass it
-						if (ing.Name.EndsWith(" Bar") && recipe.createItem.Name.EndsWith(" Bar"))
+						// if the recipe's required tile is a furnace, Hellforge, or Adamantite Forge(s), or result is is Life Quartz (Thorium)
+						// set barType to the result's type and amtOfOre to the stack size of the ingredient
+						// also set bars to item.stack
+						if (recipe.requiredTile.Contains(TileID.Furnaces) ||
+							recipe.requiredTile.Contains(TileID.Hellforge) ||
+							recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
+							recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()) ||
+							item.type == ExxoAvalonOrigins.Thorium?.Find<ModItem>("LifeQuartz").Type)
 						{
-							continue;
-						}
-						// if the ingredient is Fallen Star, bypass it
-						if (ing.type is ItemID.FallenStar or ItemID.GlowingMushroom) continue;
-						if (!recipe.HasIngredient(ModContent.ItemType<Material.Ores.Sulphur>()) &&
-							!recipe.HasIngredient(ModContent.ItemType<Material.SulphurCrystal>()) &&
-							!ing.Name.EndsWith(" Bar"))
-							//&&
-							//!recipe.createItem.Name.Contains("Barbed") && !recipe.createItem.Name.Contains("Barr"))
-						{
+							// if the ingredient is Fallen Star or Glowing Mushroom, bypass it
+							//if (ing.type is ItemID.FallenStar or ItemID.GlowingMushroom) continue;
+							if (recipe.requiredItem.Count > 1 || item.createTile == -1 || !TileID.Sets.Ore[item.createTile]) continue;
 							amtOfOre = ing.stack;
 							barType = recipe.createItem.type;
 							bars = item.stack;
@@ -170,32 +165,36 @@ public class CalcSpecGlobalItem : GlobalItem
 						}
 					}
 				}
-				foreach (int itemID in Data.Sets.Tile.VanillaOreTilesToBarItems.Values)
+				else
 				{
-					if (recipe.TryGetResult(itemID, out _))
+					foreach (int itemID in Data.Sets.Tile.VanillaOreTilesToBarItems.Values)
 					{
-						if (Data.Sets.Item.VanillaBarItems[itemID])
+						if (recipe.TryGetResult(itemID, out _))
 						{
-							if (recipe.TryGetIngredient(item.type, out Item ingr))
+							if (Data.Sets.Item.VanillaBarItems[itemID])
 							{
-								if (recipe.createItem.type == itemID)
+								if (recipe.TryGetIngredient(item.type, out Item ingr))
 								{
-									amtOfOre = ingr.stack;
-									barType = itemID;
-									bars = item.stack;
-									break;
+									if (item.createTile == -1 || !TileID.Sets.Ore[item.createTile]) continue;
+									if (recipe.createItem.type == itemID)
+									{
+										amtOfOre = ingr.stack;
+										barType = itemID;
+										bars = item.stack;
+										break;
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-			if (item.type == ModContent.ItemType<Material.Ores.ShroomiteOre>())
-			{
-				amtOfOre = 5;
-				barType = ItemID.ShroomiteBar;
-				bars = item.stack;
-			}
+			//if (item.type == ModContent.ItemType<Material.Ores.ShroomiteOre>())
+			//{
+			//	amtOfOre = 5;
+			//	barType = ItemID.ShroomiteBar;
+			//	bars = item.stack;
+			//}
 			if (amtOfOre != 0 && barType != -1)
 			{
 				int remainder = bars % amtOfOre;
@@ -213,10 +212,10 @@ internal class CalcSpec : UIState
 		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type] && Main.LocalPlayer.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay)
 		{
 			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+			if (!WorldGen.InWorld(tilepos.X, tilepos.Y)) return;
 			Color c = Lighting.GetColor(tilepos);
 
-			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] &&
-				Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>() &&
+			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType]/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&
 				c.R > 5 && c.G > 5 && c.B > 5)
 			{
 				ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
@@ -230,47 +229,47 @@ internal class CalcSpec : UIState
 				int barType = -1;
 
 				// check manually for shroomite/bars
-				if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<ShroomiteOre>())
-				{
-					remainder = bars % 5;
-					bars /= 5;
-					remainderDenominator = 5;
-					barType = ItemID.ShroomiteBar;
-				}
-				// check manually for shroomite/bars
-				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<HallowedOre>())
-				{
-					remainder = bars % 5;
-					bars /= 5;
-					remainderDenominator = 5;
-					barType = ItemID.HallowedBar;
-				}
-				// check manually for heartstone/life crystals
-				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>())
-				{
-					remainder = bars % 45;
-					bars /= 45;
-					remainderDenominator = 45;
-					barType = ItemID.LifeCrystal;
-				}
-				// check manually for starstone/mana crystals
-				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>())
-				{
-					remainder = bars % 60;
-					bars /= 60;
-					remainderDenominator = 60;
-					barType = ItemID.ManaCrystal;
-				}
-				// check manually for boltstone/stamina crystals
-				else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
-				{
-					remainder = bars % 25;
-					bars /= 25;
-					remainderDenominator = 25;
-					barType = ModContent.ItemType<StaminaCrystal>();
-				}
-				else
-				{
+				//if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<ShroomiteOre>())
+				//{
+				//	remainder = bars % 5;
+				//	bars /= 5;
+				//	remainderDenominator = 5;
+				//	barType = ItemID.ShroomiteBar;
+				//}
+				//// check manually for shroomite/bars
+				//else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<HallowedOre>())
+				//{
+				//	remainder = bars % 5;
+				//	bars /= 5;
+				//	remainderDenominator = 5;
+				//	barType = ItemID.HallowedBar;
+				//}
+				//// check manually for heartstone/life crystals
+				//else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>())
+				//{
+				//	remainder = bars % 45;
+				//	bars /= 45;
+				//	remainderDenominator = 45;
+				//	barType = ItemID.LifeCrystal;
+				//}
+				//// check manually for starstone/mana crystals
+				//else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>())
+				//{
+				//	remainder = bars % 60;
+				//	bars /= 60;
+				//	remainderDenominator = 60;
+				//	barType = ItemID.ManaCrystal;
+				//}
+				//// check manually for boltstone/stamina crystals
+				//else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
+				//{
+				//	remainder = bars % 25;
+				//	bars /= 25;
+				//	remainderDenominator = 25;
+				//	barType = ModContent.ItemType<StaminaCrystal>();
+				//}
+				//else
+				//{
 					// grab the modded tile at the cursor's position
 					ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
 					if (t != null)
@@ -290,7 +289,10 @@ internal class CalcSpec : UIState
 								{
 									// if the recipe's result contains the word "Bar," set barType to the
 									// result's type and amtOfOre to the stack size of the ingredient
-									if (recipe.createItem.Name.Contains("Bar") || recipe.createItem.Name.Contains("Ingot") ||
+									if (recipe.requiredTile.Contains(TileID.Furnaces) ||
+										recipe.requiredTile.Contains(TileID.Hellforge) ||
+										recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
+										recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()) ||
 										item.type == ExxoAvalonOrigins.Thorium?.Find<ModItem>("LifeQuartz").Type)
 									{
 										amtOfOre = ing.stack;
@@ -335,20 +337,25 @@ internal class CalcSpec : UIState
 						}
 						else return;
 					}
+				//}
+				if (barType != -1 && barType < ItemID.Count)
+				{
+					Main.instance.LoadItem(barType);
 				}
-
 				CalcSpecInfoDisplay.BarType = barType;
 				CalcSpecInfoDisplay.BarValue = bars;
 				CalcSpecInfoDisplay.OreRemainder = remainder;
 				CalcSpecInfoDisplay.Denominator = remainderDenominator;
 
-				string text = bars.ToString();
+				//string text = bars.ToString();
+				string text = $"{(bars > 0 ? bars : "")}";
 				int ypos = -40;
+				//Main.NewText(FontAssets.MouseText.Value.MeasureString(text).X);
 
 				Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
 				if (remainder > 0)
 				{
-					text += "" + remainder + "/" + remainderDenominator;
+					text += "" + remainderDenominator + "/" + remainderDenominator;
 				}
 				Vector2 posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
 				Vector2 pos3 = posModified;
@@ -363,14 +370,13 @@ internal class CalcSpec : UIState
 					// or higher, to shift it to the left a bit
 					int xmod = -5;
 					if (remainder > 9) xmod = -11;
-					pos3.X += FontAssets.MouseText.Value.MeasureString($"{bars}  ").X;
-					
-					// for some reason the text is shifted farther to the left if it's a crystal
-					// this just shifts it back to the right by a magic number that seems appropriate
-					if (bars == 0 && (barType == ItemID.LifeCrystal || barType == ItemID.ManaCrystal || barType == ModContent.ItemType<StaminaCrystal>()))
+					//pos3.X += FontAssets.MouseText.Value.MeasureString($"{bars}  ").X;
+					string baseDenom = "/";
+					foreach (var ch in remainderDenominator.ToString())
 					{
-						pos3.X += 18;
+						baseDenom += "11";
 					}
+					pos3.X += FontAssets.MouseText.Value.MeasureString(text).X - FontAssets.MouseText.Value.MeasureString(baseDenom).X;
 
 					// draw the text
 					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, "/", pos3, Color.Yellow, Color.Black, 1.4f);

@@ -15,7 +15,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-			return false; // ModLoader.HasMod("ThoriumMod");
+			return ModLoader.HasMod("ThoriumMod");
         }
         public override void SetDefaults()
         {
@@ -41,7 +41,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-			return false; // ModLoader.HasMod("ThoriumMod");
+			return ModLoader.HasMod("ThoriumMod");
 		}
         public override void SetDefaults()
         {
@@ -67,7 +67,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-			return false; // ModLoader.HasMod("ThoriumMod");
+			return ModLoader.HasMod("ThoriumMod");
 		}
         public override void SetDefaults()
         {
@@ -93,7 +93,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-			return false; // ModLoader.HasMod("ThoriumMod");
+			return ModLoader.HasMod("ThoriumMod");
 		}
         public override void SetDefaults()
         {
@@ -118,7 +118,7 @@ namespace Avalon.Compatability.Thorium.Items.Accessories
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-			return false; // ModLoader.HasMod("ThoriumMod");
+			return ModLoader.HasMod("ThoriumMod");
 		}
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {

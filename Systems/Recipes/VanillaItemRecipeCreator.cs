@@ -275,6 +275,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ModContent.ItemType<FleshyTendril>(), 5)
 			.AddIngredient(ItemID.SoulofNight, 5)
 			.AddTile(TileID.TinkerersWorkbench)
+			.DisableDecraft()
 			.Register();
 
 		Recipe.Create(ItemID.IceSkates)

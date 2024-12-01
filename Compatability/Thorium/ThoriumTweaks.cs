@@ -75,31 +75,31 @@ public class ThoriumTweaksPlayer : ModPlayer
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return false; // ModLoader.HasMod("ThoriumMod");
+        return ModLoader.HasMod("ThoriumMod");
     }
 
     public override void PreUpdateBuffs()
     {
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.SkeletonRepellentBuff>()))
         {
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.IrateBones>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.Hardmode.IrateBones>()] = true;
         }
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.ZombieRepellentBuff>()))
         {
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.FallenHero>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.FallenHero>()] = true;
         }
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.InsectRepellentBuff>()))
         {
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.Mosquito>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.MosquitoDroopy>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.MosquitoPainted>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.MosquitoSmall>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.Mosquito>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.MosquitoDroopy>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.MosquitoPainted>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.MosquitoSmall>()] = true;
         }
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.FishRepellentBuff>()))
         {
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.Critters.ContaminatedGoldfish>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.RedArowana>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.RedArowana2>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.Critters.ContaminatedGoldfish>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.RedArowana>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.RedArowana2>()] = true;
         }
     }
 }
@@ -109,7 +109,7 @@ public class ThoriumTweaksGlobalNPC : GlobalNPC
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return false; // ModLoader.HasMod("ThoriumMod");
+        return ModLoader.HasMod("ThoriumMod");
     }
     public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
     {
@@ -274,7 +274,7 @@ public class ThoriumTweaksRecipeSystem : ModSystem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return false; // ModLoader.HasMod("ThoriumMod");
+        return ModLoader.HasMod("ThoriumMod");
     }
     public override void AddRecipeGroups()
     {
@@ -535,7 +535,7 @@ public class ThoriumTweaksGlobalItem : GlobalItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return false; // ModLoader.HasMod("ThoriumMod");
+        return ModLoader.HasMod("ThoriumMod");
     }
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {

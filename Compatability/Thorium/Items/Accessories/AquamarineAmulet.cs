@@ -12,7 +12,7 @@ public class AquamarineAmulet : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-		return false;// ModLoader.HasMod("ThoriumMod");
+		return ModLoader.HasMod("ThoriumMod");
     }
     public override void SetDefaults()
     {

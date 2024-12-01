@@ -11,7 +11,7 @@ public class AquamarineChest : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return false; // ModLoader.HasMod("ThoriumMod");
+		return ModLoader.HasMod("ThoriumMod");
 	}
 
 	public override void SetDefaults()
@@ -46,7 +46,7 @@ public class ChrysoberylChest : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return false; // ModLoader.HasMod("ThoriumMod");
+		return ModLoader.HasMod("ThoriumMod");
 	}
 	public override void SetDefaults()
     {
@@ -80,7 +80,7 @@ public class OpalChest : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return false; // ModLoader.HasMod("ThoriumMod");
+		return ModLoader.HasMod("ThoriumMod");
 	}
 	public override void SetDefaults()
     {

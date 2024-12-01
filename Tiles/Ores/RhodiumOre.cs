@@ -1,3 +1,4 @@
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -26,7 +27,7 @@ public class RhodiumOre : ModTile
         Main.tileMerge[ModContent.TileType<Savanna.Loam>()][Type] = true;
         HitSound = SoundID.Tink;
         MinPick = 60;
-        DustType = DustID.t_LivingWood;
+        DustType = ModContent.DustType<RhodiumDust>();
         TileID.Sets.Ore[Type] = true;
     }
 }

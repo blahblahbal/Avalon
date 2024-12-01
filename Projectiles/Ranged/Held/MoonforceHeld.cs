@@ -3,12 +3,14 @@ using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Avalon.Projectiles.Ranged.Held
 {
@@ -25,19 +27,21 @@ namespace Avalon.Projectiles.Ranged.Held
                 d.scale += Power;
             }
         }
-        public override void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)
+		public override void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)
         {
             SoundEngine.PlaySound(SoundID.Item14,Projectile.position);
-            float ScaleMod = 1 + (Power * 5);
+            //float ScaleMod = 1 + (Power * 5);
             Projectile P = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Projectile.owner);
             if (Power > 0.3f)
             {
                 SoundEngine.PlaySound(SoundID.Item9, Projectile.Center);
-                P.usesLocalNPCImmunity = true;
+				P.GetGlobalProjectile<LongbowGlobalProj>().LongbowArrow = true;
+				P.usesLocalNPCImmunity = true;
                 P.localNPCHitCooldown = 30;
                 P.extraUpdates++;
-                P.Resize((int)(P.width * ScaleMod), (int)(P.height * ScaleMod));
-                P.GetGlobalProjectile<MoonlightArrowVisuals>().Moonlight = true;
+				//P.Resize((int)(P.width * ScaleMod), (int)(P.height * ScaleMod));
+				P.GetGlobalProjectile<MoonlightArrowVisuals>().ScaleMod = 1 + (Power * 5);
+				P.GetGlobalProjectile<MoonlightArrowVisuals>().Moonlight = true;
                 if (P.penetrate > 0)
                     P.penetrate += (int)(Power * 6);
                 P.usesLocalNPCImmunity = true;
@@ -69,8 +73,20 @@ namespace Avalon.Projectiles.Ranged.Held
     {
         public override bool InstancePerEntity => true;
         public bool Moonlight;
+		public float ScaleMod;
+		private bool Resized;
+		public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter)
+		{
+			bitWriter.WriteBit(Moonlight);
+			binaryWriter.Write(ScaleMod);
+		}
+		public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader)
+		{
+			Moonlight = bitReader.ReadBit();
+			ScaleMod = binaryReader.ReadSingle();
+		}
 
-        public override bool TileCollideStyle(Projectile projectile, ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+		public override bool TileCollideStyle(Projectile projectile, ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
             if (Moonlight)
             {
@@ -79,10 +95,21 @@ namespace Avalon.Projectiles.Ranged.Held
             }
             return base.TileCollideStyle(projectile, ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-        public override void PostAI(Projectile projectile)
+		public override bool PreAI(Projectile projectile)
+		{
+			if (Moonlight && !Resized)
+			{
+				projectile.Resize((int)(projectile.width * ScaleMod), (int)(projectile.height * ScaleMod));
+				projectile.netUpdate = true;
+				Resized = true;
+			}
+			return base.PreAI(projectile);
+		}
+		public override void PostAI(Projectile projectile)
         {
             if (Moonlight)
             {
+				projectile.netUpdate = true;
                 Dust d = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, Main.rand.Next(DustID.CorruptTorch, DustID.JungleTorch));
                 d.velocity = projectile.velocity.RotatedByRandom(0.1f) * 0.5f * (projectile.extraUpdates + 1);
                 d.scale = MathHelper.Clamp(projectile.width / 30, 0.2f, 100);
@@ -135,9 +162,9 @@ namespace Avalon.Projectiles.Ranged.Held
                 //Main.EntitySpriteDraw(texture, drawPos, frame, new Color(255, 255, 255, 0) * 0.4f, projectile.velocity.ToRotation() + MathHelper.PiOver2, new Vector2(texture.Width, frameHeight / 2f) / 2, projectile.width / 34f * 0.8f, Flip, 0);
 
                 Color alpha3 = projectile.GetAlpha(lightColor);
-                Texture2D value21 = TextureAssets.Extra[91].Value;
-                Rectangle value22 = value21.Frame();
-                Vector2 origin10 = new Vector2((float)value22.Width / 2f, 10f);
+                //Texture2D value21 = TextureAssets.Extra[91].Value;
+                //Rectangle value22 = TextureAssets.Extra[91].Value.Frame();
+                Vector2 origin10 = new Vector2(TextureAssets.Extra[91].Value.Width / 2f, 10f);
                 Vector2 vector34 = Vector2.Normalize(projectile.velocity) * -4;
                 Vector2 spinningpoint = new Vector2(0f, -6f);
                 float num189 = (float)Main.timeForVisualEffects / 60f;
@@ -152,9 +179,9 @@ namespace Avalon.Projectiles.Ranged.Held
                 color47.A = 0;
                 Color color48 = color44;
                 color48.A = 0;
-                Main.EntitySpriteDraw(value21, vector35 - Main.screenPosition + vector34 + spinningpoint.RotatedBy((float)Math.PI * 2f * num189), value22, color46, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 1.1f * FlameScale, SpriteEffects.None);
-                Main.EntitySpriteDraw(value21, vector35 - Main.screenPosition + vector34 + spinningpoint.RotatedBy((float)Math.PI * 2f * num189 + (float)Math.PI * 2f / 3f), value22, color47, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 0.8f * FlameScale, SpriteEffects.None);
-                Main.EntitySpriteDraw(value21, vector35 - Main.screenPosition + vector34 + spinningpoint.RotatedBy((float)Math.PI * 2f * num189 + 4.18879032f), value22, color48, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 1f * FlameScale, SpriteEffects.None);
+                Main.EntitySpriteDraw(TextureAssets.Extra[91].Value, vector35 - Main.screenPosition + vector34 + spinningpoint.RotatedBy((float)Math.PI * 2f * num189), TextureAssets.Extra[91].Value.Frame(), color46, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 1.1f * FlameScale, SpriteEffects.None);
+                Main.EntitySpriteDraw(TextureAssets.Extra[91].Value, vector35 - Main.screenPosition + vector34 + spinningpoint.RotatedBy((float)Math.PI * 2f * num189 + (float)Math.PI * 2f / 3f), TextureAssets.Extra[91].Value.Frame(), color47, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 0.8f * FlameScale, SpriteEffects.None);
+                Main.EntitySpriteDraw(TextureAssets.Extra[91].Value, vector35 - Main.screenPosition + vector34 + spinningpoint.RotatedBy((float)Math.PI * 2f * num189 + 4.18879032f), TextureAssets.Extra[91].Value.Frame(), color48, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 1f * FlameScale, SpriteEffects.None);
                 for (float num191 = 0f; num191 < 1f; num191 += 0.5f)
                 {
                     float num192 = num189 % 0.5f / 0.5f;
@@ -164,14 +191,14 @@ namespace Avalon.Projectiles.Ranged.Held
                     {
                         num193 = 2f - num193;
                     }
-                    Main.EntitySpriteDraw(value21, vector35 - Main.screenPosition + vector34, value22, color45 * num193, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 0.3f + num192 * 0.9f, SpriteEffects.None);
+                    Main.EntitySpriteDraw(TextureAssets.Extra[91].Value, vector35 - Main.screenPosition + vector34, TextureAssets.Extra[91].Value.Frame(), color45 * num193, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 0.3f + num192 * 0.9f, SpriteEffects.None);
                 }
 
-                Texture2D textureArrow = TextureAssets.Projectile[projectile.type].Value;
-                int frameHeightArrow = textureArrow.Height;
-                Rectangle frameArrow = new Rectangle(0, frameHeightArrow * 0, textureArrow.Width, frameHeightArrow);
+                //Texture2D textureArrow = TextureAssets.Projectile[projectile.type].Value;
+                int frameHeightArrow = TextureAssets.Projectile[projectile.type].Value.Height;
+                Rectangle frameArrow = new Rectangle(0, frameHeightArrow * 0, TextureAssets.Projectile[projectile.type].Value.Width, frameHeightArrow);
 
-                Main.EntitySpriteDraw(textureArrow, drawPos, frameArrow, projectile.GetAlpha(lightColor), projectile.velocity.ToRotation() + MathHelper.PiOver2, new Vector2(textureArrow.Width, frameHeightArrow / 2f) / 2, projectile.scale, Flip, 0);
+                Main.EntitySpriteDraw(TextureAssets.Projectile[projectile.type].Value, drawPos, frameArrow, projectile.GetAlpha(lightColor), projectile.velocity.ToRotation() + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[projectile.type].Value.Width, frameHeightArrow / 2f) / 2, projectile.scale, Flip, 0);
                 return false;
             }
             return base.PreDraw(projectile, ref lightColor);

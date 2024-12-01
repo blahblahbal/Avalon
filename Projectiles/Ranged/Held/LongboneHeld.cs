@@ -3,12 +3,14 @@ using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Avalon.Projectiles.Ranged.Held
 {
@@ -51,19 +53,28 @@ namespace Avalon.Projectiles.Ranged.Held
     {
         public override bool InstancePerEntity => true;
         public byte Longbone;
+		public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter)
+		{
+			binaryWriter.Write(Longbone);
+		}
+		public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader)
+		{
+			Longbone = binaryReader.ReadByte();
+		}
 
-        public override void PostAI(Projectile projectile)
+		public override void PostAI(Projectile projectile)
         {
             if(Longbone > 0)
             {
                 Dust d = Dust.NewDustPerfect(projectile.Center, 172, projectile.velocity * 0.5f);
                 d.noGravity = true;
                 d.scale = 0.6f + (Longbone / 4f);
+				projectile.netUpdate = true;
             }
         }
         public override void OnKill(Projectile projectile, int timeLeft)
         {
-            if (projectile.owner == Main.myPlayer && Longbone > 0)
+            if (Longbone > 0)
             {
                 SoundEngine.PlaySound(SoundID.Item20, projectile.position);
                 Particle p = ParticleSystem.AddParticle(new ColorExplosion(), projectile.Center, default, new Color(32, 77, 255, 64), Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.1f, 0.35f) + (Longbone * 0.1f));
@@ -79,10 +90,13 @@ namespace Avalon.Projectiles.Ranged.Held
                         d.scale = 2;
                     }
                 }
-                for (int i = 0; i < Longbone; i++)
-                {
-                    Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, Vector2.Normalize((Collision.SolidCollision(projectile.position + projectile.velocity, projectile.width, projectile.height) ? -projectile.oldVelocity : projectile.oldVelocity)).RotatedByRandom(Longbone * 0.03f) * Main.rand.NextFloat(6, 10), ModContent.ProjectileType<LongboneCurse>(), projectile.damage / 3, projectile.knockBack / 2f, projectile.owner);
-                }
+				if (projectile.owner == Main.myPlayer)
+				{
+					for (int i = 0; i < Longbone; i++)
+					{
+						Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, Vector2.Normalize((Collision.SolidCollision(projectile.position + projectile.velocity, projectile.width, projectile.height) ? -projectile.oldVelocity : projectile.oldVelocity)).RotatedByRandom(Longbone * 0.03f) * Main.rand.NextFloat(6, 10), ModContent.ProjectileType<LongboneCurse>(), projectile.damage / 3, projectile.knockBack / 2f, projectile.owner);
+					}
+				}
             }
         }
     }

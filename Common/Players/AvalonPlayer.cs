@@ -360,6 +360,10 @@ public class AvalonPlayer : ModPlayer
 	/// </summary>
 	public Vector2[] playerOldVelocity = new Vector2[3];
 
+	//public bool isFishingRiftActive = false;
+	public bool riftContagionFishing = false;
+	public bool riftSavannaFishing = false;
+
 	public int DesertBeakSpawnTimer;
 
     public void UpdatePrimeMinionStatus(IEntitySource source)
@@ -549,7 +553,11 @@ public class AvalonPlayer : ModPlayer
 
         SnotOrb = false;
 
-        MaxMagicCrit = 100;
+		// rift fishing biome checks
+		riftContagionFishing = false;
+		riftSavannaFishing = false;
+
+		MaxMagicCrit = 100;
         MaxMeleeCrit = 100;
         MaxRangedCrit = 100;
 
@@ -695,6 +703,7 @@ public class AvalonPlayer : ModPlayer
 		{
 			Player.velocity.Y = 1E-05f;
 		}
+		//Player.gfxOffY = 0;
 	}
 	public override void PostUpdate()
 	{
@@ -2224,8 +2233,9 @@ public class AvalonPlayer : ModPlayer
         bool lava = attempt.inLava;
 
         Point point = Player.Center.ToTileCoordinates();
-        if ((Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
-            attempt.uncommon)
+		bool isContagionFishingAttempt = Player.InModBiome<Biomes.Contagion>() || Player.InModBiome<Biomes.UndergroundContagion>() || riftContagionFishing;
+
+		if ((Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) && attempt.uncommon) // not possible via rifts anyways, so doesn't check for it
         {
 			if (questFish == ModContent.ItemType<Items.Fish.Quest.Snotpiranha>())
 			{
@@ -2245,7 +2255,7 @@ public class AvalonPlayer : ModPlayer
 				itemDrop = ModContent.ItemType<Items.Consumables.BiomeLockbox>();
 				return;
 			}
-            if (attempt.crate && (Player.InModBiome<Biomes.Contagion>() || Player.InModBiome<Biomes.UndergroundContagion>()))
+            if (attempt.crate && isContagionFishingAttempt)
             {
                 if (!attempt.veryrare && !attempt.legendary && attempt.rare && Main.rand.NextBool())
                 {
@@ -2261,12 +2271,12 @@ public class AvalonPlayer : ModPlayer
                     }
                 }
             }
-            if (attempt.legendary && Main.hardMode && (Player.InModBiome<Biomes.Contagion>() || Player.InModBiome<Biomes.UndergroundContagion>()) && Main.rand.NextBool(2))
+            if (attempt.legendary && Main.hardMode && isContagionFishingAttempt && Main.rand.NextBool(2))
             {
                 itemDrop = ModContent.ItemType<Items.Weapons.Summon.Whips.AnchorWhipworm>();
                 return;
             }
-            if (attempt.uncommon && (Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion))
+            if (attempt.uncommon && isContagionFishingAttempt)
             {
                 int r = Main.rand.Next(2);
                 if (r == 0)
@@ -3110,12 +3120,15 @@ public class AvalonPlayer : ModPlayer
     {
         int num = (int)((Player.position.X + (Player.width / 2)) / 16f);
         int num2 = (int)((Player.position.Y + Player.height) / 16f);
-        Tile? floorTile = Player.GetFloorTile(num, num2);
         int num3 = -1;
-        if (floorTile.HasValue)
-        {
-            num3 = floorTile.Value.TileType;
-        }
+		if (WorldGen.InWorld(num, num2, 1))
+		{
+			Tile? floorTile = Player.GetFloorTile(num, num2);
+			if (floorTile.HasValue)
+			{
+				num3 = floorTile.Value.TileType;
+			}
+		}
         if (num3 <= -1)
         {
             Player.ResetFloorFlags();

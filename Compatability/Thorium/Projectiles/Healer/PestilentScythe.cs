@@ -12,7 +12,7 @@ namespace Avalon.Compatability.Thorium.Projectiles.Healer
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return false; // ModLoader.HasMod("ThoriumMod");
+            return ModLoader.HasMod("ThoriumMod");
         }
         public override void SafeSetDefaults()
         {

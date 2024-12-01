@@ -18,20 +18,20 @@ namespace Avalon.Items;
 
 class StructureSaver : ModItem
 {
-    public override bool IsLoadingEnabled(Mod mod)
-    {
-        return true;
-    }
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Purple;
-        Item.width = dims.Width;
-        Item.maxStack = 1;
-        Item.useAnimation = Item.useTime = 30;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = 0;
-        Item.height = dims.Height;
+	public override bool IsLoadingEnabled(Mod mod)
+	{
+		return true;
+	}
+	public override void SetDefaults()
+	{
+		Rectangle dims = this.GetDims();
+		Item.rare = ItemRarityID.Purple;
+		Item.width = dims.Width;
+		Item.maxStack = 1;
+		Item.useAnimation = Item.useTime = 30;
+		Item.useStyle = ItemUseStyleID.Swing;
+		Item.value = 0;
+		Item.height = dims.Height;
 		Item.autoReuse = false;
 		//item.UseSound = mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/Scroll");
 	}
@@ -42,12 +42,12 @@ class StructureSaver : ModItem
 
 	public bool coordStartSet = false;
 	public (Point start, Point end) storedCoords = (Point.Zero, Point.Zero);
-    public override bool? UseItem(Player player)
-    {
-        int x = (int)Main.MouseWorld.X / 16;
-        int y = (int)Main.MouseWorld.Y / 16;
+	public override bool? UseItem(Player player)
+	{
+		int x = (int)Main.MouseWorld.X / 16;
+		int y = (int)Main.MouseWorld.Y / 16;
 
-        if (player.ItemAnimationJustStarted)
+		if (player.ItemAnimationJustStarted)
 		{
 			if (player.altFunctionUse == 2)
 			{
@@ -153,5 +153,5 @@ class StructureSaver : ModItem
 
 		}
 		return false;
-    }
+	}
 }

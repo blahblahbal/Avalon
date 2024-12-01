@@ -314,7 +314,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			{
 				shopCustomPrice = Item.buyPrice(silver: 5)
 			}, corruption, Condition.InGraveyard, Condition.Hardmode);
-            
+			
 			shop.InsertAfter(ItemID.CorruptSeeds, new Item(ModContent.ItemType<ContagionSeeds>())
 			{
 				shopCustomPrice = Item.buyPrice(silver: 5)
@@ -369,319 +369,176 @@ public class AvalonGlobalNPC : GlobalNPC
 		if (type == NPCID.Merchant)
 		{
 			int r = Main.rand.Next(7);
-			if (r == 0) result += " tried to sell torches to a zombie.";
-			if (r == 1) result += " made a grave error...";
-			if (r == 2) result += " was slain...";
-			if (r == 3) result += " was hanged with a bug net.";
-			if (r == 4) result += " tried gold dust for the first time.";
-			if (r == 5) result += " made a deal that cost his life.";
-			if (r == 6) result += " tried to sell his soul for a dirt block.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Merchant.DeathText.{r}");
 		}
 		else if (type == NPCID.Nurse)
 		{
 			int r = Main.rand.Next(5);
-			if (r == 0) result += " couldn't heal herself in a timely manner.";
-			if (r == 1) result += " was expected to make a full recovery.";
-			if (r == 2) result += "'s face wasn't sewn on well enough.";
-			if (r == 3) result += " encountered a complication.";
-			if (r == 4) result += "'s surgical strike was in error.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Nurse.DeathText.{r}");
 		}
 		else if (type == NPCID.OldMan)
 		{
 			int r = Main.rand.Next(2);
-			if (r == 0) result += " died of old age.";
-			if (r == 1) result += " was slain...";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.OldMan.DeathText.{r}");
 		}
 		else if (type == NPCID.ArmsDealer)
 		{
 			int r = Main.rand.Next(7);
-			if (r == 0) result += "'s gun jammed.";
-			if (r == 1) result += " fired a meteor bullet...";
-			if (r == 2) result += " ran out of ammo.";
-			if (r == 3) result += " was slain...";
-			if (r == 4) result += " shot himself.";
 			if (r == 5)
 			{
-				if (!Main.dayTime) result += " was caught.";
-				else result += " shot himself.";
+				if (!Main.dayTime) result += Language.GetTextValue($"Mods.Avalon.NPCs.ArmsDealer.DeathText.{r}");
+				else result += Language.GetTextValue($"Mods.Avalon.NPCs.ArmsDealer.DeathText.{r - 1}");
 			}
-			if (r == 6) result += "'s hand wasn't the fastest in the west.";
+			else result += Language.GetTextValue($"Mods.Avalon.NPCs.ArmsDealer.DeathText.{r}");
 		}
 		else if (type == NPCID.Dryad)
 		{
 			int r = Main.rand.Next(7);
-			if (r == 0) result += "'s time was up...";
-			if (r == 1) result += " choked on an herb.";
-			if (r == 2) result += " turned into grass.";
-			if (r == 3) result += " died.";
-			if (r == 4) result += " was reduced to a fine paste...";
-			if (r == 5) result += " was mauled by an unknown creature.";
-			if (r == 6) result += " tripped on a corrupt vine.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Dryad.DeathText.{r}");
 		}
 		else if (type == NPCID.Guide)
 		{
 			int r = Main.rand.Next(8);
-			if (r == 0) result += " let too many zombies in.";
-			if (r == 1) result += " was reading a history book...";
-			if (r == 2) result += " was slain...";
-			if (r == 3) result += " got impaled...";
-			if (r == 4) result += " was the victim of dark magic.";
-			if (r == 5) result += " was voodoo'd.";
-			if (r == 6) result += " opened a door.";
-			if (r == 7) result += " read the wrong wiki.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Guide.DeathText.{r}");
 		}
 		else if (type == NPCID.Demolitionist)
 		{
 			int r = Main.rand.Next(7);
-			if (r == 0) result += " blew up.";
-			if (r == 1) result += " threw a bomb at a mob, but it bounced back.";
-			if (r == 2) result += "'s explosives were a little too sensitive...";
-			if (r == 3) result += " made a dirty bomb.";
-			if (r == 4) result += " was bombed.";
-			if (r == 5) result += " went out with a bang.";
-			if (r == 6) result += " became a true martyr.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Demolitionist.DeathText.{r}");
 		}
 		else if (type == NPCID.Clothier)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += " was unknowingly cursed...";
-			if (r == 1) result += " died from unknown causes.";
-			if (r == 2) result += " was unravelled...";
-			if (r == 3) result += " was eviscerated...";
-			if (r == 4) result += " went back to the dungeon.";
-			if (r == 5) result += " stitched himself up.";
 		}
 		else if (type == NPCID.GoblinTinkerer)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += "'s contraption exploded.";
-			if (r == 1) result += " tinkered with his life.";
-			if (r == 2) result += " was crushed...";
-			if (r == 3) result += " rocketed into the ceiling.";
-			if (r == 4) result += " died from platinum poisoning.";
-			if (r == 5) result += " was approached from the north.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.GoblinTinkerer.DeathText.{r}");
 		}
 		else if (type == NPCID.Wizard)
 		{
 			int r = Main.rand.Next(7);
-			if (r == 0) result += " forgot how to live.";
-			if (r == 1) result += " cast too many spells...";
-			if (r == 2) result += " was crushed...";
-			if (r == 3) result += " watched his innards become outards...";
-			if (r == 4) result += " made himself 'disappear.'";
-			if (r == 5) result += " became a frog.";
-			if (r == 6) result += "'s low armor class failed him.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Wizard.DeathText.{r}");
 		}
 		else if (type == NPCID.SantaClaus)
 		{
 			int r = Main.rand.Next(2);
-			if (r == 0) result += " had too much milk and cookies.";
-			if (r == 1) result += " wasn't believed in.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.SantaClaus.DeathText.{r}");
 		}
 		else if (type == NPCID.Mechanic)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += "'s spine cracked...";
-			if (r == 1) result += "'s engine broke down.";
-			if (r == 2) result += " ran out of wire...";
-			if (r == 3) result += " died.";
-			if (r == 4) result += " dropped her contacts...";
-			if (r == 5) result += " was removed from " + Main.worldName + ".";
+			if (r == 5)
+			{
+				result += Language.GetTextValue($"Mods.Avalon.NPCs.Mechanic.DeathText.{r}", Main.worldName);
+			}
+			else result += Language.GetTextValue($"Mods.Avalon.NPCs.Mechanic.DeathText.{r}");
 		}
 		else if (type == NPCID.Truffle)
 		{
 			int r = Main.rand.Next(7);
-			if (r == 0) result += " bit himself.";
-			if (r == 1) result += " was eaten.";
-			if (r == 2) result += " was slain...";
-			if (r == 3) result += " is no longer a fun guy.";
-			if (r == 4) result += " went on a trip.";
-			if (r == 5) result += " was found partially eaten.";
-			if (r == 6) result += " was sautéed";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Truffle.DeathText.{r}");
 		}
 		else if (type == NPCID.Steampunker)
 		{
 			int r = Main.rand.Next(5);
-			if (r == 0) result += "'s time machine created a paradox...";
-			if (r == 1) result += " slipped a cog.";
-			if (r == 2) result += " died from unknown causes.";
-			if (r == 3) result += " fell off an airship.";
-			if (r == 4) result += " used her teleporter too fast.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Steampunker.DeathText.{r}");
 		}
 		else if (type == NPCID.DyeTrader)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += " fell into his dye.";
-			if (r == 1) result += " was killed.";
-			if (r == 2) result += " died from unknown causes.";
-			if (r == 3) result += " was decapitated.";
-			if (r == 4) result += " has dyed.";
-			if (r == 5) result += " was dyed a deep chartreuse.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.DyeTrader.DeathText.{r}");
 		}
 		else if (type == NPCID.PartyGirl)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += " partied too hard.";
-			if (r == 1) result += " inhaled too much confetti...";
-			if (r == 2) result += " was crushed.";
-			if (r == 3) result += " left the party.";
-			if (r == 4) result += " was eaten.";
-			if (r == 5) result += " was dissolved into the punch.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.PartyGirl.DeathText.{r}");
 		}
 		else if (type == NPCID.Cyborg)
 		{
 			int r = Main.rand.Next(9);
-			if (r == 0) result += " was assimilated.";
-			if (r == 1) result += "'s mechanisms were damaged beyond repair.";
-			if (r == 2) result += " was crushed.";
-			if (r == 3) result += " is '404 not found.'";
-			if (r == 4) result += "'s implants were ripped out.";
-			if (r == 5) result += " short-circuited.";
-			if (r == 6) result += " malfunctioned.";
-			if (r == 7) result += " encountered a glitch in his systems.";
-			if (r == 8) result += " tried to divide by zero.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Cyborg.DeathText.{r}");
 		}
 		else if (type == NPCID.Painter)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += " inhaled paint fumes.";
-			if (r == 1) result += " tried to paint himself.";
-			if (r == 2) result += "'s body was mangled.";
-			if (r == 3) result += "'s paint was ripped off the canvas...";
-			if (r == 4) result += "'s paint cracked.";
-			if (r == 5) result += " inhaled asbestos.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Painter.DeathText.{r}");
 		}
 		else if (type == NPCID.WitchDoctor)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += "'s practice lead to his demise.";
-			if (r == 1) result += " tried to embody life.";
-			if (r == 2) result += "'s body was mangled.";
-			if (r == 3) result += " was chopped up.";
-			if (r == 4) result += " was eaten by an exotic insect.";
-			if (r == 5) result += " forgot which doctor he was.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.WitchDoctor.DeathText.{r}");
 		}
 		else if (type == NPCID.Pirate)
 		{
 			int r = Main.rand.Next(5);
-			if (r == 0) result += " choked on his gold tooth.";
-			if (r == 1) result += " was hit by a cannonball.";
-			if (r == 2) result += " was eviscerated.";
-			if (r == 3) result += "'s other eye was removed.";
-			if (r == 4) result += " lost his peg leg.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Pirate.DeathText.{r}");
 		}
 		else if (type == NPCID.Stylist)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += " attempted to give a spider a trim.";
-			if (r == 1) result += " was tied up.";
-			if (r == 2) result += " was eviscerated.";
-			if (r == 3) result += " got a little too snippy.";
-			if (r == 4) result += " tried to give Cousin It a trim.";
-			if (r == 5) result += " couldn't take the sight of spiders anymore.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Stylist.DeathText.{r}");
 		}
 		else if (type == NPCID.TravellingMerchant)
 		{
 			int r = Main.rand.Next(7);
-			if (r == 0) result += " has departed...";
-			if (r == 1) result += " had INTERPOL problems.";
-			if (r == 2) result += " was vaporized.";
-			if (r == 3) result += " did not need a monster there.";
-			if (r == 4) result += " tried to sell an exotic pitcher plant...";
-			if (r == 5) result += " failed to make any sales.";
-			if (r == 6) result += " is now travelling the afterlife";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.TravellingMerchant.DeathText.{r}");
 		}
 		else if (type == NPCID.Angler)
 		{
 			int r = Main.rand.Next(9);
-			if (r == 0) result += " has left!";
-			if (r == 1) result += " caught a fish!";
-			if (r == 2) result += " fell into a ditch!";
-			if (r == 3) result += " failed a test!";
-			if (r == 4) result += " lost the game!";
-			if (r == 5) result += " took off!";
-			if (r == 6) result += " died.";
-			if (r == 7) result += " found someone better to harass.";
 			if (r == 8)
 			{
-				if (NPC.AnyNPCs(NPCID.Pirate))
-					result += " was thrown overboard by " + Main.npc[FindATypeOfNPC(NPCID.Pirate)].GivenName + ".";
-				else result += " died.";
+				if (NPC.AnyNPCs(NPCID.Pirate)) result += Language.GetTextValue($"Mods.Avalon.NPCs.Angler.DeathText.{r}", Main.npc[FindATypeOfNPC(NPCID.Pirate)].GivenName);
+				else result += Language.GetTextValue($"Mods.Avalon.NPCs.Angler.DeathText.{r - 2}");
 			}
+			else result += Language.GetTextValue($"Mods.Avalon.NPCs.Angler.DeathText.{r}");
 		}
 		else if (type == NPCID.TaxCollector)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += " went to the wrong house.";
-			if (r == 1) result += " collected counterfeit money.";
-			if (r == 2) result += " had a hole in his pocket.";
-			if (r == 3) result += " saw the ghost of " + Main.worldName + "'s past.";
-			if (r == 4) result += " overtaxed himself.";
-			if (r == 5) result += " was finally caught by the IRS.";
+			if (r == 3)
+			{
+				result += Language.GetTextValue($"Mods.Avalon.NPCs.TaxCollector.DeathText.{r}", Main.worldName);
+			}
+			else result += Language.GetTextValue($"Mods.Avalon.NPCs.Angler.DeathText.{r}");
 		}
 		else if (type == NPCID.DD2Bartender)
 		{
 			int r = Main.rand.Next(5);
-			if (r == 0) result += " found himself on the wrong side of the bar.";
-			if (r == 1) result += "'s sentries stopped working.";
-			if (r == 2) result += " spontaneously combusted.";
-			if (r == 3) result += " went through the wrong portal.";
-			if (r == 4) result += " drank his feelings away.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.DD2Bartender.DeathText.{r}");
 		}
 		else if (type == NPCID.Princess)
 		{
 			int r = Main.rand.Next(5);
-			if (r == 0) result += " was taken away by a dragon.";
-			if (r == 1) result += " was chained up in a tower.";
-			if (r == 2) result += " swallowed her scepter.";
-			if (r == 3) result += " tripped on her dress.";
-			if (r == 4) result += " failed to consider the durability of glass heels.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Princess.DeathText.{r}");
 		}
 		else if (type == NPCID.Golfer)
 		{
 			int r = Main.rand.Next(6);
-			if (r == 0) result += " didn't yell \"fore!\"";
-			if (r == 1) result += " was hit in the head by a golf ball.";
-			if (r == 2) result += " got a triple bogey.";
-			if (r == 3) result += " went over par.";
-			if (r == 4) result += " fell in a hole.";
-			if (r == 5) result += "'s club hit back.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Golfer.DeathText.{r}");
 		}
 		else if (type == NPCID.BestiaryGirl)
 		{
 			int r = Main.rand.Next(3);
-			if (r == 0) result += " got rabies.";
-			if (r == 1) result += " was put down.";
-			if (r == 2) result += " got too comfortable with an exotic beast.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.BestiaryGirl.DeathText.{r}");
 		}
-		/*else if (type == ModContent.NPCType<Iceman>())
-		{
-			int r = Main.rand.Next(7);
-			if (r == 0) result += " froze.";
-			if (r == 1) result += " melted.";
-			if (r == 2) result += " has died.";
-			if (r == 3) result += "'s ice was cracked.";
-			if (r == 4)
-			{
-				if (NPC.AnyNPCs(NPCID.ArmsDealer))
-					result += " was used to cool " + Main.npc[FindATypeOfNPC(NPCID.ArmsDealer)].GivenName + "'s drink.";
-				else result += " fell into a crevasse.";
-			}
-			if (r == 5) result += " fell into a crevasse";
-			if (r == 6) result += " slipped.";
-		}*/
+		//else if (type == ModContent.NPCType<Iceman>())
+		//{
+		//	int r = Main.rand.Next(7);
+		//	if (r == 4)
+		//	{
+		//		if (NPC.AnyNPCs(NPCID.ArmsDealer)) result += Language.GetTextValue($"Mods.Avalon.NPCs.Iceman.DeathText.{r}", Main.npc[FindATypeOfNPC(NPCID.ArmsDealer)].GivenName);
+		//		else result += Language.GetTextValue($"Mods.Avalon.NPCs.Iceman.DeathText.{r + 1}");
+		//	}
+		//	else result += Language.GetTextValue($"Mods.Avalon.NPCs.Iceman.DeathText.{r}");
+		//}
 		else if (type == ModContent.NPCType<Librarian>())
 		{
 			int r = Main.rand.Next(7);
-			if (r == 0) result += " was nuked by a full squad.";
-			if (r == 1) result += " fell victim to toxic world chat.";
-			if (r == 2) result += " couldn't afford grade eighteen.";
-			if (r == 3) result += " was slain by a boss cone attack.";
-			if (r == 4) result += " was no match for Kun Kun.";
-			if (r == 5) result += "'s Visa card was declined.";
-			if (r == 6) result += " was changed to past tense in a history book.";
+			result += Language.GetTextValue($"Mods.Avalon.NPCs.Librarian.DeathText.{r}");
 		}
-		else result += " was slain...";
+		else result += Language.GetTextValue("Mods.Avalon.NPCs.DeathTextGeneric");
 
 		return result;
 	}
