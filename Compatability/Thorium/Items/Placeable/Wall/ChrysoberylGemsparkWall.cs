@@ -5,7 +5,6 @@ using Terraria;
 
 namespace Avalon.Compatability.Thorium.Items.Placeable.Wall;
 
-[ExtendsFromMod("ThoriumMod")]
 class ChrysoberylGemsparkWall : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
@@ -46,7 +45,6 @@ class ChrysoberylGemsparkWall : ModItem
         Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 0.745f * 0.8f, 0.925f * 0.8f, 0.1f * 0.8f);
     }
 }
-[ExtendsFromMod("ThoriumMod")]
 class ChrysoberylGemsparkWallOff : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)

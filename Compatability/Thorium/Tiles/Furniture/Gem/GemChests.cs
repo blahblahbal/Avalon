@@ -12,21 +12,33 @@ using System.Collections.Generic;
 using Avalon.Common.Templates;
 
 namespace Avalon.Compatability.Thorium.Tiles.Furniture.Gem;
+
 [ExtendsFromMod("ThoriumMod")]
 public class AquamarineChest : ChestTemplate
 {
-    public override bool Shiny => true;
+	public override bool IsLoadingEnabled(Mod mod)
+	{
+		return ModLoader.HasMod("ThoriumMod");
+	}
+	public override bool Shiny => true;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Gem.AquamarineChest>();
 }
-[ExtendsFromMod("ThoriumMod")]
 public class ChrysoberylChest : ChestTemplate
 {
-    public override bool Shiny => true;
+	public override bool IsLoadingEnabled(Mod mod)
+	{
+		return ModLoader.HasMod("ThoriumMod");
+	}
+	public override bool Shiny => true;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Gem.ChrysoberylChest>();
 }
 [ExtendsFromMod("ThoriumMod")]
 public class OpalChest : ChestTemplate
 {
-    public override bool Shiny => true;
+	public override bool IsLoadingEnabled(Mod mod)
+	{
+		return ModLoader.HasMod("ThoriumMod");
+	}
+	public override bool Shiny => true;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Gem.OpalChest>();
 }

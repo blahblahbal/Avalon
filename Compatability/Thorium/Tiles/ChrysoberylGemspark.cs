@@ -6,7 +6,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Tiles;
 
-[ExtendsFromMod("ThoriumMod")]
 public class ChrysoberylGemspark : ModTile
 {
     public override bool IsLoadingEnabled(Mod mod)
@@ -68,7 +67,6 @@ public class ChrysoberylGemspark : ModTile
         }
     }
 }
-[ExtendsFromMod("ThoriumMod")]
 public class ChrysoberylGemsparkOff : ModTile
 {
     public override bool IsLoadingEnabled(Mod mod)

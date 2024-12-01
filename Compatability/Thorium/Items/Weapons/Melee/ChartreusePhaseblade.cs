@@ -6,7 +6,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Items.Weapons.Melee;
 
-[ExtendsFromMod("ThoriumMod")]
 public class ChartreusePhaseblade : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)

@@ -1,3 +1,4 @@
+using Avalon.Compatability.Thorium.Items.Material;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -5,13 +6,12 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Items.Accessories;
 
-[ExtendsFromMod("ThoriumMod")]
 [AutoloadEquip(EquipType.Neck)]
 public class ChrysoberylAmulet : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-		return false; //ModLoader.HasMod("ThoriumMod");
+		return ModLoader.HasMod("ThoriumMod");
     }
     public override void SetDefaults()
     {
@@ -26,7 +26,7 @@ public class ChrysoberylAmulet : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient(ModContent.ItemType<ThoriumMod.Items.Misc.Aquamarine>(), 12)
+            .AddIngredient(ModContent.ItemType<Chrysoberyl>(), 12)
             .AddIngredient(ItemID.Chain)
             .AddTile(TileID.Anvils)
             .Register();

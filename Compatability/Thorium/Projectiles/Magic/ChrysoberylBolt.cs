@@ -7,7 +7,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Projectiles.Magic;
 
-[ExtendsFromMod("ThoriumMod")]
 public class ChrysoberylBolt : ModProjectile
 {
     public override bool IsLoadingEnabled(Mod mod)

@@ -4,7 +4,6 @@ using ThoriumMod.Utilities;
 
 namespace Avalon.Compatability.Thorium.Buffs;
 
-[ExtendsFromMod("ThoriumMod")]
 public class AdvBloodRush : ModBuff
 {
     public override bool IsLoadingEnabled(Mod mod)

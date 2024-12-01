@@ -11,7 +11,6 @@ using Terraria.ObjectData;
 
 namespace Avalon.Compatability.Thorium.Tiles;
 
-[ExtendsFromMod("ThoriumMod")]
 public class LargeMarineKelpStage2 : ModTile
 {
     public override bool IsLoadingEnabled(Mod mod)

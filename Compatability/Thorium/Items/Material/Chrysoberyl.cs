@@ -5,7 +5,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Items.Material;
 
-[ExtendsFromMod("ThoriumMod")]
 class Chrysoberyl : ModItem
 {
     public override void SetStaticDefaults()

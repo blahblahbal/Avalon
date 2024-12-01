@@ -5,7 +5,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Walls;
 
-[ExtendsFromMod("ThoriumMod")]
 public class ChartreuseStainedGlass : ModWall
 {
     public override bool IsLoadingEnabled(Mod mod)

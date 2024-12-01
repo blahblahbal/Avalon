@@ -3,7 +3,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Buffs;
 
-[ExtendsFromMod("ThoriumMod")]
 public class AdvArtillery : ModBuff
 {
     public override bool IsLoadingEnabled(Mod mod)

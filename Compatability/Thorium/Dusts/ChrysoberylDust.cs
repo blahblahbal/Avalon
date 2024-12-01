@@ -4,7 +4,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Dusts;
 
-[ExtendsFromMod("ThoriumMod")]
 public class ChrysoberylDust : ModDust
 {
     public override bool IsLoadingEnabled(Mod mod)

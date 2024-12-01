@@ -269,6 +269,7 @@ public class ThoriumTweaksGlobalNPC : GlobalNPC
         }
     }
 }
+
 [ExtendsFromMod("ThoriumMod")]
 public class ThoriumTweaksRecipeSystem : ModSystem
 {
@@ -530,6 +531,7 @@ public class ThoriumTweaksRecipeSystem : ModSystem
         }
     }
 }
+
 [ExtendsFromMod("ThoriumMod")]
 public class ThoriumTweaksGlobalItem : GlobalItem
 {

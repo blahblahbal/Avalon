@@ -6,8 +6,8 @@ using ThoriumMod;
 
 namespace Avalon.Compatability.Thorium.Items.Accessories;
 
-[ExtendsFromMod("ThoriumMod")]
 [AutoloadEquip(EquipType.Neck)]
+[ExtendsFromMod("ThoriumMod")]
 public class AquamarineAmulet : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
@@ -23,16 +23,16 @@ public class AquamarineAmulet : ModItem
         Item.value = Item.sellPrice(0, 0, 50);
         Item.height = dims.Height;
         Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
-    }
-    public override void AddRecipes()
+	}
+	public override void AddRecipes()
     {
         CreateRecipe()
             .AddIngredient(ModContent.ItemType<ThoriumMod.Items.Misc.Aquamarine>(), 12)
             .AddIngredient(ItemID.Chain)
             .AddTile(TileID.Anvils)
             .Register();
-    }
-    public override void UpdateAccessory(Player player, bool hideVisual)
+	}
+	public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetDamage(ThoriumDamageBase<HealerDamage>.Instance) += 0.05f;
     }

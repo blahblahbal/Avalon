@@ -41,7 +41,6 @@ public class AquamarineChest : ModItem
     }
 }
 
-[ExtendsFromMod("ThoriumMod")]
 public class ChrysoberylChest : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)

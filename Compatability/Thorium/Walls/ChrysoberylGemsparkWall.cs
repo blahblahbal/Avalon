@@ -5,7 +5,6 @@ using Terraria.ModLoader;
 
 namespace Avalon.Compatability.Thorium.Walls;
 
-[ExtendsFromMod("ThoriumMod")]
 public class ChrysoberylGemsparkWall : ModWall
 {
     public override bool IsLoadingEnabled(Mod mod)
@@ -28,7 +27,6 @@ public class ChrysoberylGemsparkWall : ModWall
         b = 0.1f * 0.8f;
     }
 }
-[ExtendsFromMod("ThoriumMod")]
 public class ChrysoberylGemsparkWallOff : ModWall
 {
     public override bool IsLoadingEnabled(Mod mod)
