@@ -10,4 +10,9 @@ public class FanLetter3 : FanLetter
     {
 		return ModLoader.HasMod("ThoriumMod");
     }
+	public override void SetBardDefaults()
+	{
+		base.SetBardDefaults();
+		Item.GetGlobalItem<ThoriumTweaksGlobalItemInstance>().AvalonThoriumItem = true;
+	}
 }

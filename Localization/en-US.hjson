@@ -9587,7 +9587,11 @@ Mods: {
 
 			ContentiousSoup: {
 				DisplayName: Contentious Soup
-				Tooltip: ""
+				Tooltip:
+					'''
+					'Its appearance is revolting, but its taste will shock you'
+					Grants increased enemy spawn rates and minor improvements to all stats
+					'''
 			}
 		}
 
