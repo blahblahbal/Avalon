@@ -353,7 +353,6 @@ public class AvalonWorld : ModSystem
 			
 
 		//WorldJungle = WorldJungle.Jungle; // WorldJungle.Tropics; // (WorldJungle)WorldGen.genRand.Next(2);
-
 		MethodInfo? setValue = typeof(LocalizedText).GetMethod("SetValue", BindingFlags.NonPublic | BindingFlags.Instance);
 
         if (setValue != null)

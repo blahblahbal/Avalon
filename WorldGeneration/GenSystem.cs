@@ -300,12 +300,17 @@ public class GenSystem : ModSystem
             totalWeight += currentPass.Weight;
         }
 
+		index = tasks.FindIndex(genPass => genPass.Name == "Slush");
+		if (index != -1)
+		{
+			currentPass = new Hooks.DungeonRemoveCrackedBricks();
+			tasks.Insert(index + 1, currentPass);
+			totalWeight += currentPass.Weight;
+		}
+
         index = tasks.FindIndex(genPass => genPass.Name == "Vines");
         if (index != -1)
-        {
-            currentPass = new Hooks.DungeonRemoveCrackedBricks();
-            tasks.Insert(index + 1, currentPass);
-            totalWeight += currentPass.Weight;
+        {   
             if (evil == (int)WorldEvil.Contagion && !Main.zenithWorld)
             {
                 tasks.Insert(index + 2, new ContagionVines("Contagion Vines", 25f));
