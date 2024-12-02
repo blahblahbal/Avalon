@@ -10,6 +10,7 @@ using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using static Terraria.GameContent.Drawing.TileDrawing;
 
 namespace Avalon.Tiles;
 
@@ -306,7 +307,7 @@ public class MonsterBanner : ModTile
 
         if (Main.tile[i, j].TileFrameX % 18 == 0 && Main.tile[i, j].TileFrameY % 54 == 0 && flag)
         {
-            Main.instance.TilesRenderer.AddSpecialPoint(i, j, 5);
+            Main.instance.TilesRenderer.AddSpecialPoint(i, j, TileCounterType.MultiTileVine);
         }
 
         return false;

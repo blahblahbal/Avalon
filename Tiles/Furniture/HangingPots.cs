@@ -6,6 +6,7 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using static Terraria.GameContent.Drawing.TileDrawing;
 
 namespace Avalon.Tiles.Furniture;
 
@@ -53,7 +54,7 @@ public class HangingPots : ModTile
 
         if (Main.tile[i, j].TileFrameX % 36 == 0 && Main.tile[i, j].TileFrameY % 54 == 0 && flag)
         {
-            Main.instance.TilesRenderer.AddSpecialPoint(i, j, 5);
+            Main.instance.TilesRenderer.AddSpecialPoint(i, j, TileCounterType.MultiTileVine);
             //Point p = new(i, j);
             //if (!Coordinates.Contains(p)) Coordinates.Add(p);
         }

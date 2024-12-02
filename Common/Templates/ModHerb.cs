@@ -10,6 +10,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Avalon.Tiles;
+using static Terraria.GameContent.Drawing.TileDrawing;
 
 namespace Avalon.Common.Templates;
 
@@ -148,7 +149,7 @@ public abstract class ModHerb : ModTile
 
         if (Main.tile[i, j].TileFrameX > 16 && flag)
         {
-            Main.instance.TilesRenderer.AddSpecialPoint(i, j, 3);
+            Main.instance.TilesRenderer.AddSpecialPoint(i, j, TileCounterType.WindyGrass);
             return false;
         }
 
