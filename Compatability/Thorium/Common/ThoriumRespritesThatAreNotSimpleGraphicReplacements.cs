@@ -10,6 +10,7 @@ using ThoriumMod.Projectiles.Enemy;
 
 namespace Avalon.Compatability.Thorium.Common
 {
+	[ExtendsFromMod("ThoriumMod")]
 	public class ThoriumRespritesThatAreNotSimpleGraphicReplacementsProjectile : GlobalProjectile
 	{
 		public override bool IsLoadingEnabled(Mod mod)
