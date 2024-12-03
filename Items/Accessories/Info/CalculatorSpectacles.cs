@@ -166,7 +166,10 @@ public class CalcSpecGlobalItem : GlobalItem
 						{
 							// if the ingredient is Fallen Star or Glowing Mushroom, bypass it
 							//if (ing.type is ItemID.FallenStar or ItemID.GlowingMushroom) continue;
-							if (recipe.requiredItem.Count > 1 || item.createTile == -1 || !TileID.Sets.Ore[item.createTile] || ing.stack < 2) continue;
+							if (!Data.Sets.Tile.OresToChunks.ContainsValue(item.type))
+							{
+								if (recipe.requiredItem.Count > 1 || item.createTile == -1 || !TileID.Sets.Ore[item.createTile] || ing.stack < 2) continue;
+							}
 							amtOfOre = ing.stack;
 							barType = recipe.createItem.type;
 							bars = item.stack;
