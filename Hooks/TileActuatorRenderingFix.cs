@@ -17,7 +17,7 @@ namespace Avalon.Hooks
 		{
 			IL_WallDrawing.DrawWalls += InactiveWallColoring;
 
-			//IL_TileDrawing.DrawMultiTileVinesInWind += ActuatorHangingTilesFix;
+			IL_TileDrawing.DrawMultiTileVinesInWind += ActuatorHangingTilesFix;
 			IL_TileDrawing.DrawMultiTileGrassInWind += ActuatorGrassFix;
 			IL_TileDrawing.DrawGrass += ActuatorBasicGrassFix;
 			IL_TileDrawing.DrawTrees += ActuatedTreesFix;
@@ -109,17 +109,17 @@ namespace Avalon.Hooks
 			});
 		}
 
-		//private void ActuatorHangingTilesFix(ILContext il)
-		//{
-		//	ILCursor c = new(il);
-		//	c.GotoNext(MoveType.After, i => i.MatchCall<TileDrawing>("DrawTiles_GetLightOverride"), i => i.MatchStloc(33));
-		//	c.EmitLdloca(33);//tileLight
-		//	c.EmitLdloc(20);
-		//	c.EmitDelegate((ref Color tileLight, Tile tile2) =>
-		//	{
-		//		tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile2);
-		//	});
-		//}
+		private void ActuatorHangingTilesFix(ILContext il)
+		{
+			ILCursor c = new(il);
+			c.GotoNext(MoveType.After, i => i.MatchCall<TileDrawing>("DrawTiles_GetLightOverride"), i => i.MatchStloc(35));
+			c.EmitLdloca(35); //tileLight
+			c.EmitLdloc(22); //tile2 inside of the x and y loops 
+			c.EmitDelegate((ref Color tileLight, Tile tile2) =>
+			{
+				tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile2);
+			});
+		}
 
 		private void InactiveWallColoring(ILContext il)
 		{
