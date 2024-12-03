@@ -72,7 +72,8 @@ namespace Avalon.Data.Sets
 			ItemID.TungstenBar, ItemID.GoldBar, ItemID.PlatinumBar, ItemID.MeteoriteBar,
 			ItemID.DemoniteBar, ItemID.CrimtaneBar, ItemID.HellstoneBar, ItemID.CobaltBar,
 			ItemID.PalladiumBar, ItemID.MythrilBar, ItemID.OrichalcumBar, ItemID.AdamantiteBar,
-			ItemID.TitaniumBar, ItemID.HallowedBar, ItemID.ChlorophyteBar, ItemID.ShroomiteBar
+			ItemID.TitaniumBar, ItemID.HallowedBar, ItemID.ChlorophyteBar, ItemID.ShroomiteBar,
+			ItemID.LunarBar
 		);
 
 		/// <summary>

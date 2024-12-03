@@ -15,20 +15,21 @@ using Terraria.Localization;
 using ThoriumMod.Tiles;
 using Avalon.Tiles;
 using System.Linq;
+using Avalon.Items.Material.Ores;
 
 namespace Avalon.Items.Accessories.Info;
 
 public class CalculatorSpectacles : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.LightRed;
-        Item.width = dims.Width;
-        Item.accessory = true;
-        Item.value = Item.sellPrice(0, 2, 0, 0);
-        Item.height = dims.Height;
-    }
+	public override void SetDefaults()
+	{
+		Rectangle dims = this.GetDims();
+		Item.rare = ItemRarityID.LightRed;
+		Item.width = dims.Width;
+		Item.accessory = true;
+		Item.value = Item.sellPrice(0, 2, 0, 0);
+		Item.height = dims.Height;
+	}
 	public override void UpdateInfoAccessory(Player player)
 	{
 		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
@@ -49,49 +50,49 @@ public class CalculatorSpectacles : ModItem
 	//		.AddIngredient()
 	//}
 	public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
-    {
-        p.Add(new List<Point>()
-        {
-            start + new Point(0, -1), start + new Point(0, 1), start + new Point(-1, 0), start + new Point(1, 0)
-        });
-        return p;
-    }
-    public static float CountOres(Point p, int type, int maxTiles = 500)
-    {
-        int tiles = 0;
+	{
+		p.Add(new List<Point>()
+		{
+			start + new Point(0, -1), start + new Point(0, 1), start + new Point(-1, 0), start + new Point(1, 0)
+		});
+		return p;
+	}
+	public static float CountOres(Point p, int type, int maxTiles = 500)
+	{
+		int tiles = 0;
 
-        Tile tile = Framing.GetTileSafely(p);
-        if (!tile.HasTile || tile.TileType != type)
-        {
-            return 0;
-        }
+		Tile tile = Framing.GetTileSafely(p);
+		if (!tile.HasTile || tile.TileType != type)
+		{
+			return 0;
+		}
 
-        List<List<Point>> points = new();
-        points = AddValidNeighbors(points, p);
+		List<List<Point>> points = new();
+		points = AddValidNeighbors(points, p);
 
-        HashSet<Point> fullAmount = new HashSet<Point>();
+		HashSet<Point> fullAmount = new HashSet<Point>();
 
-        int index = 0;
-        while (points.Count > 0 && tiles < maxTiles && index < points.Count)
-        {
-            List<Point> tilePos = points[index];
+		int index = 0;
+		while (points.Count > 0 && tiles < maxTiles && index < points.Count)
+		{
+			List<Point> tilePos = points[index];
 
-            foreach (Point a in tilePos)
-            {
-                if (fullAmount.Contains(a)) continue;
-                Tile t = Framing.GetTileSafely(a.X, a.Y);
-                if (t.HasTile && t.TileType == type)
-                {
-                    tiles++;
-                    AddValidNeighbors(points, a);
-                    fullAmount.Add(a);
-                }
-            }
-            index++;
-        }
+			foreach (Point a in tilePos)
+			{
+				if (fullAmount.Contains(a)) continue;
+				Tile t = Framing.GetTileSafely(a.X, a.Y);
+				if (t.HasTile && t.TileType == type)
+				{
+					tiles++;
+					AddValidNeighbors(points, a);
+					fullAmount.Add(a);
+				}
+			}
+			index++;
+		}
 
-        return fullAmount.Count;
-    }
+		return fullAmount.Count;
+	}
 }
 
 public class CalcSpecInfoDisplay : InfoDisplay
@@ -144,7 +145,16 @@ public class CalcSpecGlobalItem : GlobalItem
 				// check if the recipe's ingredient matches the drop of the tile
 				if (item.type > ItemID.Count) // this check is pretty much only necessary for hellstone, but I literally could not be bothered fixing it properly rn
 				{
-					if (recipe.TryGetIngredient(item.type, out Item ing))
+					if (ModLoader.HasMod("ThoriumMod") && item.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
+					{
+						if (recipe.createItem.type == ItemID.LifeCrystal)
+						{
+							amtOfOre = lq.stack;
+							barType = recipe.createItem.type;
+							bars = item.stack;
+						}
+					}
+					else if (recipe.TryGetIngredient(item.type, out Item ing))
 					{
 						// if the recipe's required tile is a furnace, Hellforge, or Adamantite Forge(s), or result is is Life Quartz (Thorium)
 						// set barType to the result's type and amtOfOre to the stack size of the ingredient
@@ -152,12 +162,11 @@ public class CalcSpecGlobalItem : GlobalItem
 						if (recipe.requiredTile.Contains(TileID.Furnaces) ||
 							recipe.requiredTile.Contains(TileID.Hellforge) ||
 							recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
-							recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()) ||
-							item.type == ExxoAvalonOrigins.Thorium?.Find<ModItem>("LifeQuartz").Type)
+							recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()))
 						{
 							// if the ingredient is Fallen Star or Glowing Mushroom, bypass it
 							//if (ing.type is ItemID.FallenStar or ItemID.GlowingMushroom) continue;
-							if (recipe.requiredItem.Count > 1 || item.createTile == -1 || !TileID.Sets.Ore[item.createTile]) continue;
+							if (recipe.requiredItem.Count > 1 || item.createTile == -1 || !TileID.Sets.Ore[item.createTile] || ing.stack < 2) continue;
 							amtOfOre = ing.stack;
 							barType = recipe.createItem.type;
 							bars = item.stack;
@@ -175,7 +184,7 @@ public class CalcSpecGlobalItem : GlobalItem
 							{
 								if (recipe.TryGetIngredient(item.type, out Item ingr))
 								{
-									if (item.createTile == -1 || !TileID.Sets.Ore[item.createTile]) continue;
+									if (item.createTile == -1 || (!TileID.Sets.Ore[item.createTile] && item.createTile != TileID.LunarOre)) continue;
 									if (recipe.createItem.type == itemID)
 									{
 										amtOfOre = ingr.stack;
@@ -214,8 +223,7 @@ internal class CalcSpec : UIState
 			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
 			if (!WorldGen.InWorld(tilepos.X, tilepos.Y)) return;
 			Color c = Lighting.GetColor(tilepos);
-
-			if (TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType]/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&
+			if ((TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] || Main.tile[tilepos.X, tilepos.Y].TileType == TileID.LunarOre)/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&
 				c.R > 5 && c.G > 5 && c.B > 5)
 			{
 				ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
@@ -270,73 +278,80 @@ internal class CalcSpec : UIState
 				//}
 				//else
 				//{
-					// grab the modded tile at the cursor's position
-					ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
-					if (t != null)
-					{
-						// grab the drops of the tile
-						var drops = t.GetItemDrops(tilepos.X, tilepos.Y);
+				// grab the modded tile at the cursor's position
+				ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
+				if (t != null)
+				{
+					// grab the drops of the tile
+					var drops = t.GetItemDrops(tilepos.X, tilepos.Y);
 
-						int amtOfOre = 0;
-						// loop through the drops of the tile (will only loop once likely)
-						foreach (Item item in drops)
+					int amtOfOre = 0;
+					// loop through the drops of the tile (will only loop once likely)
+					foreach (Item item in drops)
+					{
+						// loop through all recipes
+						foreach (Recipe recipe in Main.recipe)
 						{
-							// loop through all recipes
-							foreach (Recipe recipe in Main.recipe)
+							// check if the recipe's ingredient matches the drop of the tile
+							if (ModLoader.HasMod("ThoriumMod") && item.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
 							{
-								// check if the recipe's ingredient matches the drop of the tile
-								if (recipe.TryGetIngredient(item.type, out Item ing))
+								if (recipe.createItem.type == ItemID.LifeCrystal)
 								{
-									// if the recipe's result contains the word "Bar," set barType to the
-									// result's type and amtOfOre to the stack size of the ingredient
-									if (recipe.requiredTile.Contains(TileID.Furnaces) ||
-										recipe.requiredTile.Contains(TileID.Hellforge) ||
-										recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
-										recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()) ||
-										item.type == ExxoAvalonOrigins.Thorium?.Find<ModItem>("LifeQuartz").Type)
-									{
-										amtOfOre = ing.stack;
-										barType = recipe.createItem.type;
-										break;
-									}
-									
+									amtOfOre = lq.stack;
+									barType = recipe.createItem.type;
+								}
+							}
+							else if (recipe.TryGetIngredient(item.type, out Item ing))
+							{
+								// if the recipe's result contains the word "Bar," set barType to the
+								// result's type and amtOfOre to the stack size of the ingredient
+								if (recipe.requiredTile.Contains(TileID.Furnaces) ||
+									recipe.requiredTile.Contains(TileID.Hellforge) ||
+									recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
+									recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()))
+								{
+									if (ing.stack < 2) continue;
+									amtOfOre = ing.stack;
+									barType = recipe.createItem.type;
+									break;
 								}
 							}
 						}
-						if (amtOfOre == 0) return;
-
-						// assign all the things necessary to display the text/sprite later on
-						remainder = bars % amtOfOre;
-						bars /= amtOfOre;
-						remainderDenominator = amtOfOre;
 					}
-					// if the tile is vanilla
-					else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
+					if (amtOfOre == 0) return;
+
+					// assign all the things necessary to display the text/sprite later on
+					remainder = bars % amtOfOre;
+					bars /= amtOfOre;
+					remainderDenominator = amtOfOre;
+				}
+				// if the tile is vanilla
+				else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
+				{
+
+					if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
 					{
-
-						if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
-						{
-							remainder = bars % 3;
-							bars /= 3;
-							remainderDenominator = 3;
-							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
-						}
-						else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
-						{
-							remainder = bars % 4;
-							bars /= 4;
-							remainderDenominator = 4;
-							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
-						}
-						else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
-						{
-							remainder = bars % 5;
-							bars /= 5;
-							remainderDenominator = 5;
-							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
-						}
-						else return;
+						remainder = bars % 3;
+						bars /= 3;
+						remainderDenominator = 3;
+						barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
 					}
+					else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
+					{
+						remainder = bars % 4;
+						bars /= 4;
+						remainderDenominator = 4;
+						barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
+					}
+					else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
+					{
+						remainder = bars % 5;
+						bars /= 5;
+						remainderDenominator = 5;
+						barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
+					}
+					else return;
+				}
 				//}
 				if (barType != -1 && barType < ItemID.Count)
 				{
