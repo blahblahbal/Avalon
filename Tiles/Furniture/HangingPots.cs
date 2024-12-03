@@ -39,13 +39,13 @@ public class HangingPots : ModTile
     }
     public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
     {
-        Tile tile = Main.tile[i, j];
-        int topLeftX = i - tile.TileFrameX / 36 % 1;
-        int topLeftY = j - tile.TileFrameY / 18 % 3;
-        if (WorldGen.IsBelowANonHammeredPlatform(topLeftX, topLeftY))
-        {
-            offsetY -= 8;
-        }
+        //Tile tile = Main.tile[i, j];
+        //int topLeftX = i - tile.TileFrameX / 36 % 1;
+        //int topLeftY = j - tile.TileFrameY / 18 % 3;
+        //if (WorldGen.IsBelowANonHammeredPlatform(topLeftX, topLeftY))
+        //{
+        //    offsetY -= 8;
+        //}
     }
     public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
     {
