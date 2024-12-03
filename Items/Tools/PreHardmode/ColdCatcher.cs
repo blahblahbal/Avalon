@@ -32,6 +32,6 @@ public class ColdCatcher : ModItem
 	public override void ModifyFishingLine(Projectile bobber, ref Vector2 lineOriginOffset, ref Color lineColor)
 	{
 		lineOriginOffset = new Vector2(46, -33);
-		lineColor = new Color(191 / 2, 212 / 2, 52 / 2);
+		lineColor = new Color(139, 143, 18);
 	}
 }
