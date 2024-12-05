@@ -7,15 +7,10 @@ using Avalon.Common.Players;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
-using Avalon.Tiles.Ores;
 using System;
 using Terraria.UI;
-using Avalon.Items.Consumables;
 using Terraria.Localization;
-using ThoriumMod.Tiles;
 using Avalon.Tiles;
-using System.Linq;
-using Avalon.Items.Material.Ores;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -223,198 +218,221 @@ internal class CalcSpec : UIState
 	{
 		if (!Main.LocalPlayer.hideInfo[ModContent.GetInstance<CalcSpecInfoDisplay>().Type] && Main.LocalPlayer.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay)
 		{
-			Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-			if (!WorldGen.InWorld(tilepos.X, tilepos.Y)) return;
-			Color c = Lighting.GetColor(tilepos);
-			if ((TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] || Main.tile[tilepos.X, tilepos.Y].TileType == TileID.LunarOre)/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&
-				c.R > 5 && c.G > 5 && c.B > 5)
+			bool itemAlreadyAssigned = false;
+			int bars = -1;
+			int remainder = -1;
+			int remainderDenominator = -1;
+			int barType = -1;
+			int amtOfOre = 0;
+			// get the item dropped in the world, which unfortunately isn't a value stored anywhere in vanillaRectangle mouseRectangle = default(Rectangle);
+			Rectangle mouseRectangle = new Rectangle((int)(Main.mouseX + Main.screenPosition.X), (int)(Main.mouseY + Main.screenPosition.Y), 1, 1);
+			if (Main.LocalPlayer.gravDir == -1f)
 			{
-				ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
-				int bars = (int)CalculatorSpectacles.CountOres(tilepos, type, 700);
-				int remainder = 0;
-				int remainderDenominator = 3;
-
-				// for some reason CountOres returns 0 if there's only 1 ore
-				if (bars == 0) bars = 1;
-
-				int barType = -1;
-
-				// check manually for shroomite/bars
-				//if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<ShroomiteOre>())
-				//{
-				//	remainder = bars % 5;
-				//	bars /= 5;
-				//	remainderDenominator = 5;
-				//	barType = ItemID.ShroomiteBar;
-				//}
-				//// check manually for shroomite/bars
-				//else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<HallowedOre>())
-				//{
-				//	remainder = bars % 5;
-				//	bars /= 5;
-				//	remainderDenominator = 5;
-				//	barType = ItemID.HallowedBar;
-				//}
-				//// check manually for heartstone/life crystals
-				//else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Heartstone>())
-				//{
-				//	remainder = bars % 45;
-				//	bars /= 45;
-				//	remainderDenominator = 45;
-				//	barType = ItemID.LifeCrystal;
-				//}
-				//// check manually for starstone/mana crystals
-				//else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Starstone>())
-				//{
-				//	remainder = bars % 60;
-				//	bars /= 60;
-				//	remainderDenominator = 60;
-				//	barType = ItemID.ManaCrystal;
-				//}
-				//// check manually for boltstone/stamina crystals
-				//else if (Main.tile[tilepos.X, tilepos.Y].TileType == ModContent.TileType<Boltstone>())
-				//{
-				//	remainder = bars % 25;
-				//	bars /= 25;
-				//	remainderDenominator = 25;
-				//	barType = ModContent.ItemType<StaminaCrystal>();
-				//}
-				//else
-				//{
-				// grab the modded tile at the cursor's position
-				ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
-				if (t != null)
-				{
-					// grab the drops of the tile
-					var drops = t.GetItemDrops(tilepos.X, tilepos.Y);
-
-					int amtOfOre = 0;
-					// loop through the drops of the tile (will only loop once likely)
-					foreach (Item item in drops)
-					{
-						// loop through all recipes
-						foreach (Recipe recipe in Main.recipe)
-						{
-							// check if the recipe's ingredient matches the drop of the tile
-							if (ModLoader.HasMod("ThoriumMod") && item.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
-							{
-								if (recipe.createItem.type == ItemID.LifeCrystal)
-								{
-									amtOfOre = lq.stack;
-									barType = recipe.createItem.type;
-								}
-							}
-							else if (recipe.TryGetIngredient(item.type, out Item ing))
-							{
-								// if the recipe's result contains the word "Bar," set barType to the
-								// result's type and amtOfOre to the stack size of the ingredient
-								if (recipe.requiredTile.Contains(TileID.Furnaces) ||
-									recipe.requiredTile.Contains(TileID.Hellforge) ||
-									recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
-									recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()))
-								{
-									if (ing.stack < 2) continue;
-									amtOfOre = ing.stack;
-									barType = recipe.createItem.type;
-									break;
-								}
-							}
-						}
-					}
-					if (amtOfOre == 0) return;
-
-					// assign all the things necessary to display the text/sprite later on
-					remainder = bars % amtOfOre;
-					bars /= amtOfOre;
-					remainderDenominator = amtOfOre;
-				}
-				// if the tile is vanilla
-				else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
-				{
-
-					if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
-					{
-						remainder = bars % 3;
-						bars /= 3;
-						remainderDenominator = 3;
-						barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
-					}
-					else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
-					{
-						remainder = bars % 4;
-						bars /= 4;
-						remainderDenominator = 4;
-						barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
-					}
-					else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
-					{
-						remainder = bars % 5;
-						bars /= 5;
-						remainderDenominator = 5;
-						barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
-					}
-					else return;
-				}
-				//}
-				if (barType != -1 && barType < ItemID.Count)
-				{
-					Main.instance.LoadItem(barType);
-				}
-				CalcSpecInfoDisplay.BarType = barType;
-				CalcSpecInfoDisplay.BarValue = bars;
-				CalcSpecInfoDisplay.OreRemainder = remainder;
-				CalcSpecInfoDisplay.Denominator = remainderDenominator;
-
-				//string text = bars.ToString();
-				string text = $"{(bars > 0 ? bars : "")}";
-				int ypos = -40;
-				//Main.NewText(FontAssets.MouseText.Value.MeasureString(text).X);
-
-				Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
-				if (remainder > 0)
-				{
-					text += "" + remainderDenominator + "/" + remainderDenominator;
-				}
-				Vector2 posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
-				Vector2 pos3 = posModified;
-
-				if (bars > 0)
-				{
-					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{bars}", pos3, Color.Yellow, Color.Black, 1.4f);
-				}
-				if (remainder > 0)
-				{
-					// position modifier for if the remainder (numerator) is 10
-					// or higher, to shift it to the left a bit
-					int xmod = -5;
-					if (remainder > 9) xmod = -11;
-					//pos3.X += FontAssets.MouseText.Value.MeasureString($"{bars}  ").X;
-					string baseDenom = "/";
-					foreach (var ch in remainderDenominator.ToString())
-					{
-						baseDenom += "11";
-					}
-					pos3.X += FontAssets.MouseText.Value.MeasureString(text).X - FontAssets.MouseText.Value.MeasureString(baseDenom).X;
-
-					// draw the text
-					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, "/", pos3, Color.Yellow, Color.Black, 1.4f);
-					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainder}", pos3 + new Vector2(xmod, 0), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
-					DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
-				}
-
-				// draw the sprite
-				DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White);
-				// ⅓
+				mouseRectangle.Y = (int)Main.screenPosition.Y + Main.screenHeight - Main.mouseY;
 			}
-			else
+			foreach (var item in Main.ActiveItems)
 			{
-				CalcSpecInfoDisplay.BarType = -1;
-				CalcSpecInfoDisplay.BarValue = -1;
-				CalcSpecInfoDisplay.OreRemainder = -1;
-				CalcSpecInfoDisplay.Denominator = -1;
+				Rectangle drawHitbox = Item.GetDrawHitbox(item.type, null);
+				Vector2 bottom = item.Bottom;
+				Rectangle value = new Rectangle((int)(bottom.X - drawHitbox.Width * 0.5f), (int)(bottom.Y - drawHitbox.Height), drawHitbox.Width, drawHitbox.Height);
+				if (mouseRectangle.Intersects(value))
+				{
+					var amountAndType = GetModdedBars(item, amtOfOre, barType);
+					amtOfOre = amountAndType.amountOfOre;
+					barType = amountAndType.barType;
+					if (barType != -1)
+					{
+						itemAlreadyAssigned = true;
+						bars = item.stack;
+						remainder = bars % amtOfOre;
+						bars /= amtOfOre;
+						remainderDenominator = amtOfOre;
+						Draw(spriteBatch, bars, remainder, remainderDenominator, barType);
+					}
+					break;
+				}
+			}
+
+			// get the tile
+			if (!itemAlreadyAssigned)
+			{
+				Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+				if (!WorldGen.InWorld(tilepos.X, tilepos.Y)) return;
+				Color c = Lighting.GetColor(tilepos);
+				if ((TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] || Main.tile[tilepos.X, tilepos.Y].TileType == TileID.LunarOre)/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&
+					c.R > 5 && c.G > 5 && c.B > 5)
+				{
+					ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
+					bars = (int)CalculatorSpectacles.CountOres(tilepos, type, 700);
+					remainder = 0;
+					remainderDenominator = 3;
+
+					// for some reason CountOres returns 0 if there's only 1 ore
+					if (bars == 0) bars = 1;
+
+					// grab the modded tile at the cursor's position
+					ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
+					if (t != null)
+					{
+						// grab the drops of the tile
+						var drops = t.GetItemDrops(tilepos.X, tilepos.Y);
+
+						var amountAndType = GetModdedBars(drops, amtOfOre, barType);
+						amtOfOre = amountAndType.amountOfOre;
+						barType = amountAndType.barType;
+						if (amtOfOre == 0) return;
+
+						// assign all the things necessary to display the text/sprite later on
+						remainder = bars % amtOfOre;
+						bars /= amtOfOre;
+						remainderDenominator = amtOfOre;
+					}
+					// if the tile is vanilla
+					else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
+					{
+						if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
+						{
+							remainder = bars % 3;
+							bars /= 3;
+							remainderDenominator = 3;
+							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
+						}
+						else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
+						{
+							remainder = bars % 4;
+							bars /= 4;
+							remainderDenominator = 4;
+							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
+						}
+						else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
+						{
+							remainder = bars % 5;
+							bars /= 5;
+							remainderDenominator = 5;
+							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
+						}
+						else return;
+					}
+					Draw(spriteBatch, bars, remainder, remainderDenominator, barType);
+				}
+				else
+				{
+					CalcSpecInfoDisplay.BarType = -1;
+					CalcSpecInfoDisplay.BarValue = -1;
+					CalcSpecInfoDisplay.OreRemainder = -1;
+					CalcSpecInfoDisplay.Denominator = -1;
+				}
 			}
 		}
 	}
+	private (int amountOfOre, int barType) GetModdedBars(IEnumerable<Item>? itemsToCheck, int amountOfOre, int barType)
+	{
+		// loop through the drops of the tile (will only loop once likely)
+		if (itemsToCheck != null)
+		{
+			foreach (Item item in itemsToCheck)
+			{
+				var amountAndType = GetModdedBars(item, amountOfOre, barType);
+				amountOfOre = amountAndType.amountOfOre;
+				barType = amountAndType.barType;
+			}
+		}
+		return (amountOfOre, barType);
+	}
+	private (int amountOfOre, int barType) GetModdedBars(Item itemToCheck, int amountOfOre, int barType)
+	{
+		// loop through all recipes
+		foreach (Recipe recipe in Main.recipe)
+		{
+			// check if the recipe's ingredient matches the drop of the tile
+			if (ModLoader.HasMod("ThoriumMod") && itemToCheck.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
+			{
+				if (recipe.createItem.type == ItemID.LifeCrystal)
+				{
+					amountOfOre = lq.stack;
+					barType = recipe.createItem.type;
+				}
+			}
+			else if (recipe.TryGetIngredient(itemToCheck.type, out Item ing))
+			{
+				// if the recipe's result contains the word "Bar," set barType to the
+				// result's type and amountOfOre to the stack size of the ingredient
+				if (recipe.requiredTile.Contains(TileID.Furnaces) ||
+					recipe.requiredTile.Contains(TileID.Hellforge) ||
+					recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
+					recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()))
+				{
+					if (ing.stack < 2) continue;
+					amountOfOre = ing.stack;
+					barType = recipe.createItem.type;
+					break;
+				}
+			}
+		}
+		return (amountOfOre, barType);
+	}
+
+	/// <summary>
+	/// Sets up the draw positions using the provided parameters, then calls the DrawOutlinedString and DrawOutlinedTexture methods to draw the text and item
+	/// </summary>
+	/// <param name="spriteBatch"></param>
+	/// <param name="bars"></param>
+	/// <param name="remainder"></param>
+	/// <param name="remainderDenominator"></param>
+	/// <param name="barType"></param>
+	private void Draw(SpriteBatch spriteBatch, int bars, int remainder, int remainderDenominator, int barType)
+	{
+		if (barType != -1 && barType < ItemID.Count)
+		{
+			Main.instance.LoadItem(barType);
+		}
+		CalcSpecInfoDisplay.BarType = barType;
+		CalcSpecInfoDisplay.BarValue = bars;
+		CalcSpecInfoDisplay.OreRemainder = remainder;
+		CalcSpecInfoDisplay.Denominator = remainderDenominator;
+
+		//string text = bars.ToString();
+		string text = $"{(bars > 0 ? bars : "")}";
+		int ypos = -40;
+		//Main.NewText(FontAssets.MouseText.Value.MeasureString(text).X);
+
+		Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
+		if (remainder > 0)
+		{
+			text += "" + remainderDenominator + "/" + remainderDenominator;
+		}
+		Vector2 posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
+		Vector2 pos3 = posModified;
+
+		if (bars > 0)
+		{
+			DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{bars}", pos3, Color.Yellow, Color.Black, 1.4f);
+		}
+		if (remainder > 0)
+		{
+			// position modifier for if the remainder (numerator) is 10
+			// or higher, to shift it to the left a bit
+			int xmod = -5;
+			if (remainder > 9) xmod = -11;
+			//pos3.X += FontAssets.MouseText.Value.MeasureString($"{bars}  ").X;
+			string baseDenom = "/";
+			foreach (var ch in remainderDenominator.ToString())
+			{
+				baseDenom += "11";
+			}
+			pos3.X += FontAssets.MouseText.Value.MeasureString(text).X - FontAssets.MouseText.Value.MeasureString(baseDenom).X;
+
+			// draw the text
+			DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, "/", pos3, Color.Yellow, Color.Black, 1.4f);
+			DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainder}", pos3 + new Vector2(xmod, 0), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
+			DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
+		}
+
+		// draw the sprite
+		DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White);
+		// ⅓
+	}
+
 	/// <summary>
 	/// A helper method made by PoroCYon a very long time ago. Draws an outlined string (obviously).
 	/// </summary>
