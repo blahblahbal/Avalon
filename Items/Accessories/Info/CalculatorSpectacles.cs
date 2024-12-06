@@ -52,7 +52,7 @@ public class CalculatorSpectacles : ModItem
 		});
 		return p;
 	}
-	public static float CountOres(Point p, int type, int maxTiles = 500)
+	public static int CountOres(Point p, int type, int maxTiles = 500)
 	{
 		int tiles = 0;
 
@@ -263,7 +263,7 @@ internal class CalcSpec : UIState
 					c.R > 5 && c.G > 5 && c.B > 5)
 				{
 					ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
-					bars = (int)CalculatorSpectacles.CountOres(tilepos, type, 700);
+					bars = CalculatorSpectacles.CountOres(tilepos, type, 700);
 					remainder = 0;
 					remainderDenominator = 3;
 
