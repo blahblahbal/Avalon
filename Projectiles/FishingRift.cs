@@ -1,23 +1,20 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Avalon.Common.Players;
-using Avalon.Particles;
 using Avalon.Items.Accessories.Hardmode;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System;
 using Terraria.ID;
-using ReLogic.Content;
+using Terraria.Localization;
 
 namespace Avalon.Projectiles;
 
 public abstract class FishingRiftAbstract : ModProjectile
 {
-	public static Asset<Texture2D> textureHalo;
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Projectile.type] = 1;
@@ -29,23 +26,20 @@ public abstract class FishingRiftAbstract : ModProjectile
 		Projectile.height = dims.Height / Main.projFrames[Projectile.type];
 		Projectile.friendly = true;
 		Projectile.tileCollide = false;
-		//Projectile.timeLeft = Main.rand.Next(60 * 10, 60 * 50);
-		//Projectile.alpha = 20;
 		Projectile.aiStyle = -1;
-		//DrawOriginOffsetX = Projectile.width / 2;
-		//DrawOriginOffsetY = Projectile.height / 2;
 		Projectile.hide = true;
 		Projectile.ignoreWater = true;
+		Projectile.netImportant = true;
 	}
-	public int initialTimeLeft;
-	//public override void OnSpawn(IEntitySource source)
-	//{
-	//	Projectile.timeLeft = Main.rand.Next(60 * 60, 120 * 60);
-	//}
-	public override void OnSpawn(IEntitySource source)
+	public int initialTimeLeft
 	{
-		Projectile.timeLeft = (int)Projectile.ai[0];
-		initialTimeLeft = Projectile.timeLeft;
+		get => (int)Projectile.ai[1];
+		set => Projectile.ai[1] = value;
+	}
+	public int timeLeft
+	{
+		get => (int)Projectile.ai[2];
+		set => Projectile.ai[2] = value;
 	}
 	public override bool? CanCutTiles()
 	{
@@ -65,10 +59,6 @@ public abstract class FishingRiftAbstract : ModProjectile
 			{
 				color *= 1f - MathF.Pow(1.3f, -10 * Projectile.timeLeft / 60f);
 			}
-			//if (Projectile.type == ModContent.ProjectileType<FishingRiftBack>())
-			//{
-			//	Main.EntitySpriteDraw(textureHalo.Value, Projectile.Center - Main.screenPosition - new Vector2(0, 20), new Rectangle(0, 0, TextureAssets.Projectile[Projectile.type].Value.Width, TextureAssets.Projectile[Projectile.type].Value.Height), color, 0, TextureAssets.Projectile[Projectile.type].Value.Size() / 2, 1, SpriteEffects.None);
-			//}
 			float dampeningX = 8f;
 			float dampeningY = 12f;
 			float scaleX = 1f + (1f / dampeningX) - ((1f + MathF.Sin((float)Main.timeForVisualEffects / 20f)) / dampeningX);
@@ -78,110 +68,167 @@ public abstract class FishingRiftAbstract : ModProjectile
 		}
 		return false;
 	}
-	public override void PostDraw(Color lightColor)
-	{
-	}
 	public override void AI()
 	{
+		Projectile.timeLeft = timeLeft;
+		timeLeft--;
+
 		Point pos = (Projectile.Center / 16).ToPoint();
 		if (!WorldGen.InWorld(pos.X, pos.Y, 30))
 		{
 			Projectile.Kill();
 		}
+		//Main.NewText($"initial: {initialTimeLeft} _ position: {Projectile.position}");
 	}
 }
 public class FishingRiftFront : FishingRiftAbstract
 {
+	//public override void OnSpawn(IEntitySource source)
+	//{
+	//	Projectile.timeLeft = (int)Projectile.ai[1];
+	//}
 	public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
 	{
 		overWiresUI.Add(index);
 	}
-	private (byte L, byte M, byte R) liquidAmountOld;
-	public override void OnSpawn(IEntitySource source)
+
+	//-1 on other clients, but it's only relevant for owner
+	public int RiftWhoAmI
 	{
-		base.OnSpawn(source);
-		Point pos = ((Projectile.position + new Vector2(23, 4)) / 16).ToPoint();
-		Tile tile = Main.tile[pos];
-		Tile tileLeft = Main.tile[pos + new Point(-1, 0)];
-		Tile tileRight = Main.tile[pos + new Point(1, 0)];
-		liquidAmountOld = (tileLeft.LiquidAmount, tile.LiquidAmount, tileRight.LiquidAmount);
+		get => (int)Projectile.localAI[0] - 1;
+		set => Projectile.localAI[0] = value + 1;
 	}
 	public override void AI()
 	{
 		base.AI();
 
-		// too lazy rn to make it able to move downwards while the liquid is draining, so it just despawns if the liquid changes rn
-
-		// if any of these have tiles, then set timeleft to 60
-		// needs to have active checks for liquid level rising or falling
-		// don't just immediately despawn if the top water layer suddenly becomes 0; check first if it can move down by one tile
-		// some checks too for if there is liquid or tiles or a combo above the rift too
-
-		Point pos = ((Projectile.position + new Vector2(23, 4)) / 16).ToPoint();
-		Tile tile = Main.tile[pos];
-		Tile tileUp = Main.tile[pos + new Point(0, -1)];
-		Tile tileLeftUp = Main.tile[pos + new Point(0, -1)];
-		Tile tileRightUp = Main.tile[pos + new Point(0, -1)];
-		Tile tileLeft = Main.tile[pos + new Point(-1, 0)];
-		Tile tileRight = Main.tile[pos + new Point(1, 0)];
-		Tile tileDown = Main.tile[pos + new Point(0, 1)];
-		Tile tileLeftDown = Main.tile[pos + new Point(-1, 1)];
-		Tile tileRightDown = Main.tile[pos + new Point(1, 1)];
-
-		List<Tile> intersectingTiles = [tile, tileLeft, tileRight, tileDown, tileLeftDown, tileRightDown];
-		List<Tile> aboveTiles = [tileUp, tileLeftUp, tileRightUp];
-		//List<Tile> topTiles = [tile, tileLeft, tileRight];
-		//List<Tile> lowerTiles = [tileDown, tileLeftDown, tileRightDown];
-		//Main.NewText(liquidAmountOld);
-		if (Projectile.timeLeft > 60 && Projectile.timeLeft < initialTimeLeft - 60)
+		//Spawns child
+		if (RiftWhoAmI <= -1 && Projectile.owner == Main.myPlayer)
 		{
-			if (tileUp.HasTile)
+			var source = Projectile.GetSource_FromThis();
+			RiftWhoAmI = Projectile.NewProjectile(source, Projectile.position, Vector2.Zero, ModContent.ProjectileType<FishingRiftBack>(), default, default, Projectile.owner, ai1: initialTimeLeft, ai2: timeLeft);
+		}
+
+		//Just makes sure if the child disappears, this one does too
+		if (Projectile.owner == Main.myPlayer)
+		{
+			bool kill = true;
+			if (RiftWhoAmI > -1 && RiftWhoAmI <= Main.maxProjectiles)
 			{
-				Projectile.timeLeft = 60;
+				Projectile riftBack = Main.projectile[RiftWhoAmI];
+				if (riftBack.active && riftBack.owner == Projectile.owner && riftBack.type == ModContent.ProjectileType<FishingRiftBack>())
+				{
+					kill = false;
+				}
 			}
-			if (tileLeft.LiquidAmount / 16 != liquidAmountOld.L / 16 || tile.LiquidAmount / 16 != liquidAmountOld.M / 16 || tileRight.LiquidAmount / 16 != liquidAmountOld.R / 16) Projectile.timeLeft = 60;
-			foreach (var t in intersectingTiles)
+
+			if (kill)
 			{
-				if (t.HasTile || !(t.LiquidAmount > 0) ) Projectile.timeLeft = 60;
-			}
-			foreach (var t in aboveTiles)
-			{
-				if (t.LiquidAmount > 0) Projectile.timeLeft = 60;
+				Projectile.Kill();
+				return;
 			}
 		}
-		//Main.NewText(tile.LiquidAmount);
-		//Dust.QuickDust(pos, Color.Red);
 	}
 }
 public class FishingRiftBack : FishingRiftAbstract
 {
-	private int parentRift;
 	public override void SetStaticDefaults()
 	{
-		//textureHalo = ModContent.Request<Texture2D>(Texture + "_Halo");
 		base.SetStaticDefaults();
-	}
-	public override void OnSpawn(IEntitySource source)
-	{
-		parentRift = (int)Projectile.ai[1];
-		base.OnSpawn(source);
 	}
 	public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
 	{
 		behindProjectiles.Add(index);
 	}
+	public int ParentIdentity
+	{
+		get => (int)Projectile.ai[0] - 1;
+		set => Projectile.ai[0] = value + 1;
+	}
+	//Since the index might be different between clients, using ai[] for it will break stuff
+	public int ParentIndex
+	{
+		get => (int)Projectile.localAI[1] - 1;
+		set => Projectile.localAI[1] = value + 1;
+	}
+	public override void OnSpawn(IEntitySource source)
+	{
+		if (source is not EntitySource_Parent parentSource)
+		{
+			return;
+		}
+
+		if (parentSource.Entity is not Projectile parent)
+		{
+			return;
+		}
+
+		ParentIdentity = parent.identity;
+	}
 	public override void AI()
 	{
 		base.AI();
-		var p = Main.projectile[parentRift];
-		if (!p.active || p.type != ModContent.ProjectileType<FishingRiftFront>())
+
+		if (ParentIdentity <= -1 || ParentIdentity > Main.maxProjectiles)
 		{
 			Projectile.Kill();
+			return;
 		}
-		else
+
+		Projectile parent = null;
+		if (ParentIndex <= -1)
 		{
-			Projectile.position = p.position;
+			//Find parent based on identity
+			Projectile test = NetGetProjectile(Projectile.owner, ParentIdentity, ModContent.ProjectileType<FishingRiftFront>(), out int index);
+			if (test != null)
+			{
+				//Important not to use test.whoAmI here
+				ParentIndex = index;
+			}
 		}
+
+		if (ParentIndex > -1 && ParentIndex <= Main.maxProjectiles)
+		{
+			parent = Main.projectile[ParentIndex];
+		}
+
+		if (parent == null)
+		{
+			//If the parent was not found, despawn
+			Projectile.Kill();
+			return;
+		}
+
+		parent = Main.projectile[ParentIndex];
+		if (!parent.active || parent.type != ModContent.ProjectileType<FishingRiftFront>())
+		{
+			Projectile.Kill();
+			return;
+		}
+
+		Projectile.position = parent.position;
+	}
+	/// <summary>
+	/// Gets a projectile given its owner ID, its identity ID, and its type ID.
+	/// </summary>
+	/// <param name="owner">The owner to check</param>
+	/// <param name="identity">The identity to check</param>
+	/// <param name="type">The type to check</param>
+	/// <param name="index">The index ("whoAmI") of the found projectile. Main.maxProjectiles if returning null.</param>
+	/// <returns>Returns null if not found.</returns>
+	public static Projectile NetGetProjectile(int owner, int identity, int type, out int index)
+	{
+		for (short i = 0; i < Main.maxProjectiles; i++)
+		{
+			Projectile proj = Main.projectile[i];
+			if (proj.active && proj.owner == owner && proj.identity == identity && proj.type == type)
+			{
+				index = i;
+				return proj;
+			}
+		}
+		index = Main.maxProjectiles;
+		return null;
 	}
 }
 public class FishingRiftGlobalProj : GlobalProjectile
@@ -217,13 +264,13 @@ public class FishingRiftSpawning : ModPlayer
 {
 	public override void PostUpdate()
 	{
-		if (Player.whoAmI == Main.myPlayer && Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Player.ownedProjectileCounts[ModContent.ProjectileType<FishingRiftFront>()] < 1)
+		bool spawn = false;
+		List<Point> spawnPos = new List<Point>();
+		//if (Main.rand.NextBool(20))
+		if (false)
 		{
-			//if (Main.rand.NextBool(20))
-			if (false)
+			if (Player.whoAmI == Main.myPlayer && Player.GetModPlayer<AvalonPlayer>().RiftGoggles && Player.ownedProjectileCounts[ModContent.ProjectileType<FishingRiftFront>()] < 1)
 			{
-				bool spawn = false;
-				List<Point> spawnPos = new List<Point>();
 				for (int i = 0; i < 51; i++)
 				{
 					for (int j = 0; j < 51; j++)
@@ -255,8 +302,13 @@ public class FishingRiftSpawning : ModPlayer
 					float offsetY = Math.Clamp(256 - (Main.tile[finalSpawnPos].LiquidAmount + 1), 0, 256 - 64) / 16f + 12f;
 					//Dust.QuickDust(finalSpawnPos.ToVector2() * 16, Color.Red);
 					int timeLeft = Main.rand.Next(60 * 10, 60 * 50);
-					var frontProj = Projectile.NewProjectile(Player.GetSource_Accessory(new Item(ModContent.ItemType<RiftGoggles>())), finalSpawnPos.ToVector2() * 16 + new Vector2(8, offsetY), Vector2.Zero, ModContent.ProjectileType<FishingRiftFront>(), default, default, Main.myPlayer, timeLeft);
-					Projectile.NewProjectile(Player.GetSource_Accessory(new Item(ModContent.ItemType<RiftGoggles>())), finalSpawnPos.ToVector2() * 16 + new Vector2(8, offsetY), Vector2.Zero, ModContent.ProjectileType<FishingRiftBack>(), default, default, Main.myPlayer, timeLeft, frontProj);
+					int frontProj = Projectile.NewProjectile(Player.GetSource_Accessory(new Item(ModContent.ItemType<RiftGoggles>())), finalSpawnPos.ToVector2() * 16 + new Vector2(8, offsetY), Vector2.Zero, ModContent.ProjectileType<FishingRiftFront>(), default, default, Main.myPlayer, ai1: timeLeft, ai2: timeLeft);
+					Main.projectile[frontProj].timeLeft = timeLeft;
+					Main.projectile[frontProj].netUpdate = true;
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.Empty, frontProj);
+					}
 				}
 			}
 		}
