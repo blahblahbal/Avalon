@@ -44,6 +44,7 @@ The Avalon composers, Ennway, FatCat, Mioqu, Ace, Marlilo, and musicman for, wel
 All the beta testers and discord members for general help with testing the mod
 Relxs, Hadiros, and Lion8cake for assisting with the Sky Fortress construction
 Clicker Class for the armor glowmask code
+Thorium for parent/child projectile syncing code, and various miscellaneous bits of code used for compatibility
 
 
 Bubbles.ogg from https://freesound.org/people/Avaruusnuija/sounds/476618/
