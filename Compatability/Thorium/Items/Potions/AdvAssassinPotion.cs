@@ -13,7 +13,7 @@ class AdvAssassinPotion : AssassinPotion
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-		return ModLoader.HasMod("ThoriumMod");
+		return ExxoAvalonOrigins.ThoriumContentEnabled;
 	}
 	public override void SetStaticDefaults()
     {

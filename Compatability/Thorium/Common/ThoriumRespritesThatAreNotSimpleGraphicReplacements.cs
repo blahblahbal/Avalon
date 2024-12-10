@@ -15,7 +15,7 @@ namespace Avalon.Compatability.Thorium.Common
 	{
 		public override bool IsLoadingEnabled(Mod mod)
 		{
-			return ModLoader.HasMod("ThoriumMod") && ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement;
+			return ExxoAvalonOrigins.ThoriumContentEnabled && ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement;
 		}
 		private static Asset<Texture2D> cursedSickle;
 		private static Asset<Texture2D> ichorSickle;

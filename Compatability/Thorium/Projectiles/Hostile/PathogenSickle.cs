@@ -13,7 +13,7 @@ public class PathogenSickle : ModProjectile
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return ModLoader.HasMod("ThoriumMod");
+		return ExxoAvalonOrigins.ThoriumContentEnabled;
 	}
 	public bool Spawned { get => Projectile.ai[0] == 1f; set => Projectile.ai[0] = (value ? 1f : 0f); }
 	public override void SetStaticDefaults()

@@ -489,7 +489,7 @@ public class HerbologyUIState : ExxoUIState
             return;
         }
 
-        if (ModLoader.HasMod("ThoriumMod"))
+        if (ExxoAvalonOrigins.ThoriumContentEnabled)
         {
             Compatability.Thorium.ThoriumHerbologyAdditions.Initialize();
         }

@@ -55,6 +55,10 @@ public class ExxoAvalonOrigins : Mod
     ///     Gets the instance of Thorium mod.
     /// </summary>
     public static readonly Mod? Thorium = ModLoader.TryGetMod("ThoriumMod", out Mod obtainedMod) ? obtainedMod : null;
+	/// <summary>
+	///		Debug option to entirely enable/disable thorium x avalon compatibility content
+	/// </summary>
+	public static bool ThoriumContentEnabled = false /*ModLoader.HasMod("ThoriumMod")*/;
 
     /// <summary>
     ///     Gets the instance of Fargo's Mod.

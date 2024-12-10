@@ -10,7 +10,7 @@ public class ChrysoberylGemspark : ModTile
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return ExxoAvalonOrigins.ThoriumContentEnabled;
     }
     public override void SetStaticDefaults()
     {
@@ -71,7 +71,7 @@ public class ChrysoberylGemsparkOff : ModTile
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return ExxoAvalonOrigins.ThoriumContentEnabled;
     }
     public override void SetStaticDefaults()
     {

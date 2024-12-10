@@ -13,7 +13,7 @@ namespace Avalon.Compatability.Thorium.Items.Weapons.Healer
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return ModLoader.HasMod("ThoriumMod");
+            return ExxoAvalonOrigins.ThoriumContentEnabled;
         }
         public override void SetStaticDefaults()
         {

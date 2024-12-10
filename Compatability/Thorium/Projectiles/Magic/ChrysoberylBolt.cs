@@ -11,7 +11,7 @@ public class ChrysoberylBolt : ModProjectile
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return ExxoAvalonOrigins.ThoriumContentEnabled;
     }
     private Color color;
     private int dustId;

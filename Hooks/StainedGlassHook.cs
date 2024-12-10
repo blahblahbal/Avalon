@@ -26,7 +26,7 @@ namespace Avalon.Hooks
                (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>() ||
                tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>() ||
                tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>() ||
-				(ModLoader.HasMod("ThoriumMod") && tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())) && tile.LiquidAmount < 255)
+				(ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())) && tile.LiquidAmount < 255)
             {
                 finalR = num4;
                 finalG = num4 * 0.6f;
@@ -83,7 +83,7 @@ namespace Avalon.Hooks
 				(tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>() ||
 				tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>() ||
 				tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>() ||
-				(ModLoader.HasMod("ThoriumMod") && tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())) && tile.LiquidAmount < 255)
+				(ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())) && tile.LiquidAmount < 255)
 			{
 				finalR = num6;
 				finalG = num7;

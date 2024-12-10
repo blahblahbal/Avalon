@@ -18,7 +18,7 @@ public class AquamarineChest : ChestTemplate
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return ModLoader.HasMod("ThoriumMod");
+		return ExxoAvalonOrigins.ThoriumContentEnabled;
 	}
 	public override bool Shiny => true;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Gem.AquamarineChest>();
@@ -27,7 +27,7 @@ public class ChrysoberylChest : ChestTemplate
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return ModLoader.HasMod("ThoriumMod");
+		return ExxoAvalonOrigins.ThoriumContentEnabled;
 	}
 	public override bool Shiny => true;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Gem.ChrysoberylChest>();
@@ -37,7 +37,7 @@ public class OpalChest : ChestTemplate
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{
-		return ModLoader.HasMod("ThoriumMod");
+		return ExxoAvalonOrigins.ThoriumContentEnabled;
 	}
 	public override bool Shiny => true;
     public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Gem.OpalChest>();

@@ -75,7 +75,7 @@ public class ThoriumTweaksPlayer : ModPlayer
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return ExxoAvalonOrigins.ThoriumContentEnabled;
     }
 
     public override void PreUpdateBuffs()
@@ -109,7 +109,7 @@ public class ThoriumTweaksGlobalNPC : GlobalNPC
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return ExxoAvalonOrigins.ThoriumContentEnabled;
     }
     public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
     {
@@ -275,7 +275,7 @@ public class ThoriumTweaksRecipeSystem : ModSystem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return ExxoAvalonOrigins.ThoriumContentEnabled;
     }
     public override void AddRecipeGroups()
     {
@@ -537,7 +537,7 @@ public class ThoriumTweaksGlobalItem : GlobalItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return ModLoader.HasMod("ThoriumMod");
+        return ExxoAvalonOrigins.ThoriumContentEnabled;
     }
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {

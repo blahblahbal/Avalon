@@ -140,7 +140,7 @@ public class CalcSpecGlobalItem : GlobalItem
 				// check if the recipe's ingredient matches the drop of the tile
 				if (item.type > ItemID.Count) // this check is pretty much only necessary for hellstone, but I literally could not be bothered fixing it properly rn
 				{
-					if (ModLoader.HasMod("ThoriumMod") && item.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
+					if (ExxoAvalonOrigins.ThoriumContentEnabled && item.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
 					{
 						if (recipe.createItem.type == ItemID.LifeCrystal)
 						{
@@ -345,7 +345,7 @@ internal class CalcSpec : UIState
 		foreach (Recipe recipe in Main.recipe)
 		{
 			// check if the recipe's ingredient matches the drop of the tile
-			if (ModLoader.HasMod("ThoriumMod") && itemToCheck.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
+			if (ExxoAvalonOrigins.ThoriumContentEnabled && itemToCheck.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
 			{
 				if (recipe.createItem.type == ItemID.LifeCrystal)
 				{
