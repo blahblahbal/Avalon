@@ -75,7 +75,7 @@ namespace Avalon.Hooks
             {
                 sizeY = 3;
             }
-            if (ExxoAvalonOrigins.Thorium != null)
+            if (ExxoAvalonOrigins.ThoriumContentEnabled)
             {
                 if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage1>() ||
                     Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage2>() ||

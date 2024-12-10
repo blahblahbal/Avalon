@@ -86,7 +86,7 @@ public class SnotOrb : ModTile
             {
                 Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<Smogscreen>(), 1, false, -1, false);
             }
-            if (ExxoAvalonOrigins.Thorium != null)
+            if (ExxoAvalonOrigins.ThoriumContentEnabled)
             {
                 if (WorldGen.genRand.NextBool(2))
                 {

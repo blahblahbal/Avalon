@@ -1353,7 +1353,7 @@ public class AvalonWorld : ModSystem
             }
 
 
-            if (ExxoAvalonOrigins.Thorium != null)
+            if (ExxoAvalonOrigins.ThoriumContentEnabled)
             {
                 if (Main.tile[x, y].TileType == ExxoAvalonOrigins.Mod.Find<ModTile>("LargeMarineKelpStage1").Type &&
                     WorldGen.genRand.NextBool(8)) // phase 1 to 2
