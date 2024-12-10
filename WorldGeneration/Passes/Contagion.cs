@@ -740,7 +740,7 @@ internal class Contagion : GenPass
         // Make the tunnel from the surface to the main circle
         for (int x = i - 14; x < i + 14; x++)
         {
-            for (int y = j - radius - 50; y < j - radius + 8; y++)
+            for (int y = j - radius - 50; y < j - radius + 12; y++)
             {
                 int min = WorldGen.genRand.Next(6, 10);
                 int max = WorldGen.genRand.Next(6, 10);
