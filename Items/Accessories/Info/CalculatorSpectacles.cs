@@ -451,9 +451,9 @@ internal class CalcSpec : UIState
 			//DrawOutlinedString(spriteBatch, tempFont, $"{remainder}", pos3 + new Vector2(xmod, 0), Color.Yellow, Color.Black, tempStrength, scale: 0.6f * tempModScale, outlineSmoothness: tempSmooth);
 			//DrawOutlinedString(spriteBatch, tempFont, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, tempStrength, scale: 0.6f * tempModScale, outlineSmoothness: tempSmooth);
 
-			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, "/", pos3, color, 0f, default, new Vector2(1f));
-			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{remainder}", pos3 + new Vector2(xmod, 0), color, 0f, default, new Vector2(0.6f));
-			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{remainderDenominator}", pos3 + new Vector2(5, 10), color, 0f, default, new Vector2(0.6f));
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, "/", pos3, color, 0f, default, new Vector2(1f), spread: 1.4f);
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{remainder}", pos3 + new Vector2(xmod, 0), color, 0f, default, new Vector2(0.6f), spread: 1.4f);
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{remainderDenominator}", pos3 + new Vector2(5, 10), color, 0f, default, new Vector2(0.6f), spread: 1.4f);
 		}
 		spriteBatch.End();
 		spriteBatch.Begin();
