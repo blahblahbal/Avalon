@@ -12,6 +12,7 @@ using Terraria.UI;
 using Terraria.Localization;
 using Avalon.Tiles;
 using Terraria.UI.Chat;
+using Terraria.GameInput;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -398,12 +399,17 @@ internal class CalcSpec : UIState
 		//Main.NewText(FontAssets.MouseText.Value.MeasureString(text).X);
 
 		// Fixes the position based on zoom level and UI scale
-		// todo: fix the position being inconsistent to vanilla cursor at non-default zoom levels
-		Vector2 mouseZoomFix = Main.MouseScreen;
+		//Vector2 mouseZoomFix = Main.MouseScreen;
 
-		mouseZoomFix.X += (mouseZoomFix.X - Main.screenWidth / 2f) * Main.GameZoomTarget - (mouseZoomFix.X - Main.screenWidth / 2f);
-		mouseZoomFix.Y += (mouseZoomFix.Y - Main.screenHeight / 2f) * Main.GameZoomTarget - (mouseZoomFix.Y - Main.screenHeight / 2f);
+		//mouseZoomFix.X += (mouseZoomFix.X - Main.screenWidth / 2f) * Main.GameZoomTarget - (mouseZoomFix.X - Main.screenWidth / 2f);
+		//mouseZoomFix.Y += (mouseZoomFix.Y - Main.screenHeight / 2f) * Main.GameZoomTarget - (mouseZoomFix.Y - Main.screenHeight / 2f);
+		Vector2 mouseZoomFix = new Vector2(PlayerInput.MouseX, PlayerInput.MouseY);
 		mouseZoomFix /= Main.UIScale;
+		mouseZoomFix = mouseZoomFix.ToPoint().ToVector2();
+		if (mouseZoomFix.Y > (Main.screenHeight - 24) / Main.UIScale)
+		{
+			mouseZoomFix.Y = (Main.screenHeight - 24) / Main.UIScale;
+		}
 
 		Vector2 pos = mouseZoomFix + new Vector2(-5, ypos);
 		if (remainder > 0)
@@ -551,7 +557,7 @@ internal class CalcSpec : UIState
 
 		// end the sprite batch and begin again to make it draw in the right position
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 
 		// code yoinked from vanilla; this draws the outer black outline
 		int num = 2;
@@ -569,7 +575,7 @@ internal class CalcSpec : UIState
 
 		// end the spritebatch and begin again, using the shader this time (so it draws the sprite full white)
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.UIScaleMatrix);
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.UIScaleMatrix);
 
 		// code yoinked from vanilla; this draws the inner white outline 
 		num2 = num;
@@ -586,7 +592,7 @@ internal class CalcSpec : UIState
 
 		// end the sprite batch and begin again, so it draws normally without the shader now
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 
 		// draw the actual texture with normal colors
 		sb.Draw(tex, pos, color);
