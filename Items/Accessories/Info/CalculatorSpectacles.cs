@@ -11,6 +11,7 @@ using System;
 using Terraria.UI;
 using Terraria.Localization;
 using Avalon.Tiles;
+using Terraria.UI.Chat;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -396,17 +397,40 @@ internal class CalcSpec : UIState
 		int ypos = -40;
 		//Main.NewText(FontAssets.MouseText.Value.MeasureString(text).X);
 
-		Vector2 pos = Main.MouseScreen + new Vector2(-5, ypos);
+		// Fixes the position based on zoom level and UI scale
+		// todo: fix the position being inconsistent to vanilla cursor at non-default zoom levels
+		Vector2 mouseZoomFix = Main.MouseScreen;
+
+		mouseZoomFix.X += (mouseZoomFix.X - Main.screenWidth / 2f) * Main.GameZoomTarget - (mouseZoomFix.X - Main.screenWidth / 2f);
+		mouseZoomFix.Y += (mouseZoomFix.Y - Main.screenHeight / 2f) * Main.GameZoomTarget - (mouseZoomFix.Y - Main.screenHeight / 2f);
+		mouseZoomFix /= Main.UIScale;
+
+		Vector2 pos = mouseZoomFix + new Vector2(-5, ypos);
 		if (remainder > 0)
 		{
 			text += "" + remainderDenominator + "/" + remainderDenominator;
 		}
-		Vector2 posModified = new Vector2(Main.MouseScreen.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
+		Vector2 posModified = new Vector2(mouseZoomFix.X - FontAssets.MouseText.Value.MeasureString(text).X, pos.Y);
 		Vector2 pos3 = posModified;
+		//float tempModScale = 0.4f;
+		//var tempFont = FontAssets.DeathText.Value;
+		//float tempStrength = 1.25f;
+		//StringOutlineSmoothness tempSmooth = StringOutlineSmoothness.Vanilla;
+		//float tempModScale = 1f;
+		var tempFont = FontAssets.MouseText.Value;
+		//float tempStrength = 1.4f;
 
+		float mouseTextColorRemapped = Utils.Remap(Main.mouseTextColor, 0, 255, 60, 255) / 255f;
+		float mouseTextColorRemappedBlue = Utils.Remap(Main.mouseTextColor, 190, 255, 0, 70) / 255f;
+		Color color = new Color(mouseTextColorRemapped, mouseTextColorRemapped, mouseTextColorRemappedBlue, Main.mouseTextColor / 255f);
+
+		spriteBatch.End();
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 		if (bars > 0)
 		{
-			DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{bars}", pos3, Color.Yellow, Color.Black, 1.4f);
+			//DrawOutlinedString(spriteBatch, tempFont, $"{bars}", pos3, Color.Yellow, Color.Black, tempStrength, scale: 1f * tempModScale, outlineSmoothness: tempSmooth);
+
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{bars}", pos3, color, 0f, default(Vector2), new Vector2(1f));
 		}
 		if (remainder > 0)
 		{
@@ -423,10 +447,16 @@ internal class CalcSpec : UIState
 			pos3.X += FontAssets.MouseText.Value.MeasureString(text).X - FontAssets.MouseText.Value.MeasureString(baseDenom).X;
 
 			// draw the text
-			DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, "/", pos3, Color.Yellow, Color.Black, 1.4f);
-			DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainder}", pos3 + new Vector2(xmod, 0), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
-			DrawOutlinedString(spriteBatch, FontAssets.MouseText.Value, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, 1.4f, scale: 0.6f);
+			//DrawOutlinedString(spriteBatch, tempFont, "/", pos3, Color.Yellow, Color.Black, tempStrength, scale: 1f * tempModScale, outlineSmoothness: tempSmooth);
+			//DrawOutlinedString(spriteBatch, tempFont, $"{remainder}", pos3 + new Vector2(xmod, 0), Color.Yellow, Color.Black, tempStrength, scale: 0.6f * tempModScale, outlineSmoothness: tempSmooth);
+			//DrawOutlinedString(spriteBatch, tempFont, $"{remainderDenominator}", pos3 + new Vector2(5, 10), Color.Yellow, Color.Black, tempStrength, scale: 0.6f * tempModScale, outlineSmoothness: tempSmooth);
+
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, "/", pos3, color, 0f, default, new Vector2(1f));
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{remainder}", pos3 + new Vector2(xmod, 0), color, 0f, default, new Vector2(0.6f));
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{remainderDenominator}", pos3 + new Vector2(5, 10), color, 0f, default, new Vector2(0.6f));
 		}
+		spriteBatch.End();
+		spriteBatch.Begin();
 
 		// draw the sprite
 		DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White);
@@ -447,17 +477,65 @@ internal class CalcSpec : UIState
 	/// <param name="scale">The size of the text.</param>
 	/// <param name="SE">The SpriteEffects to use.</param>
 	/// <param name="LL">Unknown.</param>
-	private void DrawOutlinedString(SpriteBatch SB, DynamicSpriteFont SF, string txt, Vector2 P, Color C, Color shadeC, float strength = 1f, Vector2 V = default(Vector2), float scale = 1f, SpriteEffects SE = SpriteEffects.None, float LL = 0f)
+	/// <param name="outlineSmoothness">
+	/// Controls the smoothness of the outline.<br/>
+	/// Vanilla will draw the outline offset by scale in each orthogonal direction.<br/>
+	/// Diagonal will draw the outline offset by scale in each diagonal direction.<br/>
+	/// Double will draw characters diagonally and orthogonally, with altered position of the diagonal characters to smooth the edges.<br/>
+	/// Quad draws a character interpolated between each of the above.
+	/// </param>
+	private void DrawOutlinedString(SpriteBatch SB, DynamicSpriteFont SF, string txt, Vector2 P, Color C, Color shadeC, float strength = 1f, Vector2 V = default(Vector2), float scale = 1f, SpriteEffects SE = SpriteEffects.None, float LL = 0f, StringOutlineSmoothness outlineSmoothness = StringOutlineSmoothness.Vanilla)
 	{
 		SB.End();
-		SB.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
+		//SB.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
+		SB.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 		if (string.IsNullOrEmpty(txt) || string.IsNullOrWhiteSpace(txt)) return;
-		Vector2[] OS = new Vector2[4] { new Vector2(strength, strength), new Vector2(strength, -strength), new Vector2(-strength, strength), new Vector2(-strength, -strength) };
+		Vector2 up = new(0, -strength);
+		Vector2 down = new(0, strength);
+		Vector2 left = new(-strength, 0);
+		Vector2 right = new(strength, 0);
+
+		if (outlineSmoothness is not StringOutlineSmoothness.Diagonal or StringOutlineSmoothness.Vanilla) strength *= 0.85f;
+
+		Vector2 upLeft = new(-strength, -strength);
+		Vector2 upRight = new(strength, -strength);
+		Vector2 downLeft = new(-strength, strength);
+		Vector2 downRight = new(strength, strength);
+
+		//Vector2[] OS = [upLeft, upRight, downLeft, downRight];
+		Vector2[] OS = outlineSmoothness == StringOutlineSmoothness.Diagonal ? [upLeft, upRight, downLeft, downRight] : [up, down, left, right];
+		if (outlineSmoothness >= StringOutlineSmoothness.Double)
+		{
+			OS = [up, upLeft * 0.85f, left, downLeft * 0.85f, down, downRight * 0.85f, right, upRight * 0.85f];
+
+			if (outlineSmoothness == StringOutlineSmoothness.Quad)
+			{
+				Array.Resize(ref OS, OS.Length * 2);
+				for (int i = OS.Length / 2; i < OS.Length; i++)
+				{
+					if (i == OS.Length - 1)
+					{
+						OS[i] = Vector2.Lerp(OS[i - 8], OS[0], 0.5f);
+					}
+					else
+					{
+						OS[i] = Vector2.Lerp(OS[i - 8], OS[i - 7], 0.5f);
+					}
+				}
+			}
+		}
 		foreach (Vector2 VO in OS)
 			DynamicSpriteFontExtensionMethods.DrawString(SB, SF, txt, new Vector2(P.X + VO.X, P.Y + VO.Y), shadeC, 0f, V, scale, SE, LL);
 		DynamicSpriteFontExtensionMethods.DrawString(SB, SF, txt, P, C, 0f, V, scale, SE, LL);
 		SB.End();
 		SB.Begin();
+	}
+	private enum StringOutlineSmoothness : byte
+	{
+		Vanilla = 0,
+		Diagonal = 4,
+		Double = 8,
+		Quad = 16
 	}
 
 	/// <summary>
@@ -473,7 +551,7 @@ internal class CalcSpec : UIState
 
 		// end the sprite batch and begin again to make it draw in the right position
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 
 		// code yoinked from vanilla; this draws the outer black outline
 		int num = 2;
@@ -491,7 +569,7 @@ internal class CalcSpec : UIState
 
 		// end the spritebatch and begin again, using the shader this time (so it draws the sprite full white)
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.GameViewMatrix.ZoomMatrix);
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.UIScaleMatrix);
 
 		// code yoinked from vanilla; this draws the inner white outline 
 		num2 = num;
@@ -508,10 +586,12 @@ internal class CalcSpec : UIState
 
 		// end the sprite batch and begin again, so it draws normally without the shader now
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.ZoomMatrix);
+		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
 
 		// draw the actual texture with normal colors
 		sb.Draw(tex, pos, color);
+		sb.End();
+		sb.Begin();
 	}
 }
 
