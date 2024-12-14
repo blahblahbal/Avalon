@@ -47,7 +47,6 @@ public class Boompipe : ModItem
 		int amount = Main.rand.Next(4, 7);
 		for (int i = 0; i < amount; i++)
 		{
-			player.fullRotation = 0f;
 			Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(14));
 			if (i == 0)
 			{
