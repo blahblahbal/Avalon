@@ -67,7 +67,7 @@ public class CalculatorSpectacles : ModItem
 		List<List<Point>> points = new();
 		points = AddValidNeighbors(points, p);
 
-		HashSet<Point> fullAmount = new HashSet<Point>();
+		HashSet<Point> fullAmount = [p];
 
 		int index = 0;
 		while (points.Count > 0 && tiles < maxTiles && index < points.Count)
@@ -268,9 +268,6 @@ internal class CalcSpec : UIState
 					bars = CalculatorSpectacles.CountOres(tilepos, type, 700);
 					remainder = 0;
 					remainderDenominator = 3;
-
-					// for some reason CountOres returns 0 if there's only 1 ore
-					if (bars == 0) bars = 1;
 
 					// grab the modded tile at the cursor's position
 					ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
