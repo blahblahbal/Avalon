@@ -51,13 +51,13 @@ public class Boompipe : ModItem
 			if (i == 0)
 			{
 				perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(5));
-				Projectile P = Projectile.NewProjectileDirect(source, position - new Vector2(0, 8), perturbedSpeed * Main.rand.NextFloat(0.85f, 1.1f), type, damage / 2, knockback);
+				Projectile P = Projectile.NewProjectileDirect(source, position - new Vector2(0, 8 * player.gravDir).RotatedBy(player.fullRotation), perturbedSpeed * Main.rand.NextFloat(0.85f, 1.1f), type, damage / 2, knockback);
 				P.netUpdate = true;
 				P.GetGlobalProjectile<BoompipeProjVisuals>().Shards = true;
 			}
 			else
 			{
-				Projectile P = Projectile.NewProjectileDirect(source, position - new Vector2(0, 8), perturbedSpeed * Main.rand.NextFloat(0.75f, 1f), ModContent.ProjectileType<BoompipeShrapnel>(), damage / 2, knockback);
+				Projectile P = Projectile.NewProjectileDirect(source, position - new Vector2(0, 8 * player.gravDir).RotatedBy(player.fullRotation), perturbedSpeed * Main.rand.NextFloat(0.75f, 1f), ModContent.ProjectileType<BoompipeShrapnel>(), damage / 2, knockback);
 				P.netUpdate = true;
 				P.GetGlobalProjectile<BoompipeProjVisuals>().Shards = true;
 			}
