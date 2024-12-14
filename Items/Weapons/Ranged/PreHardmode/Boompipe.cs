@@ -13,63 +13,64 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
 public class Boompipe : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.UseSound = new SoundStyle($"{nameof(Avalon)}/Sounds/Item/Boompipe");
-        Item.autoReuse = true;
-        Item.damage = 11;
-        Item.scale = 1f;
-        Item.shootSpeed = 14.5f;
-        Item.useAmmo = AmmoID.Dart;
-        Item.DamageType = DamageClass.Ranged;
-        Item.noMelee = true;
-        Item.width = dims.Width;
-        Item.useTime = 40;
-        Item.knockBack = 3.5f;
-        Item.shoot = ProjectileID.Seed;
-        Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = 24000;
-        Item.useAnimation = 40;
-        Item.height = dims.Height;
-        Item.rare = ItemRarityID.Orange;
-    }
-    public override void UseItemFrame(Player player)
-    {
-        player.bodyFrame.Y = player.bodyFrame.Height * 2;
-    }
-    public override Vector2? HoldoutOffset()
-    {
-        return new Vector2(0, -7);
-    }
-    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-    {
+	public override void SetDefaults()
+	{
+		Rectangle dims = this.GetDims();
+		Item.UseSound = new SoundStyle($"{nameof(Avalon)}/Sounds/Item/Boompipe");
+		Item.autoReuse = true;
+		Item.damage = 11;
+		Item.scale = 1f;
+		Item.shootSpeed = 14.5f;
+		Item.useAmmo = AmmoID.Dart;
+		Item.DamageType = DamageClass.Ranged;
+		Item.noMelee = true;
+		Item.width = dims.Width;
+		Item.useTime = 40;
+		Item.knockBack = 3.5f;
+		Item.shoot = ProjectileID.Seed;
+		Item.useStyle = ItemUseStyleID.Shoot;
+		Item.value = 24000;
+		Item.useAnimation = 40;
+		Item.height = dims.Height;
+		Item.rare = ItemRarityID.Orange;
+	}
+	public override void UseItemFrame(Player player)
+	{
+		player.bodyFrame.Y = player.bodyFrame.Height * 2;
+	}
+	public override Vector2? HoldoutOffset()
+	{
+		return new Vector2(0, -7);
+	}
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+	{
 		int amount = Main.rand.Next(4, 7);
 		for (int i = 0; i < amount; i++)
 		{
+			player.fullRotation = 0f;
 			Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(14));
 			if (i == 0)
 			{
 				perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(5));
-				Projectile P = Projectile.NewProjectileDirect(source, position - new Vector2(0, 8 * player.gravDir).RotatedBy(player.fullRotation), perturbedSpeed * Main.rand.NextFloat(0.85f, 1.1f), type, damage / 2, knockback);
+				Projectile P = Projectile.NewProjectileDirect(source, player.RotatedRelativePoint(position - new Vector2(0, 8 * player.gravDir)), perturbedSpeed * Main.rand.NextFloat(0.85f, 1.1f), type, damage / 2, knockback);
 				P.netUpdate = true;
 				P.GetGlobalProjectile<BoompipeProjVisuals>().Shards = true;
 			}
 			else
 			{
-				Projectile P = Projectile.NewProjectileDirect(source, position - new Vector2(0, 8 * player.gravDir).RotatedBy(player.fullRotation), perturbedSpeed * Main.rand.NextFloat(0.75f, 1f), ModContent.ProjectileType<BoompipeShrapnel>(), damage / 2, knockback);
+				Projectile P = Projectile.NewProjectileDirect(source, player.RotatedRelativePoint(position - new Vector2(0, 8 * player.gravDir)), perturbedSpeed * Main.rand.NextFloat(0.75f, 1f), ModContent.ProjectileType<BoompipeShrapnel>(), damage / 2, knockback);
 				P.netUpdate = true;
 				P.GetGlobalProjectile<BoompipeProjVisuals>().Shards = true;
 			}
 		}
 		return false;
-    }
+	}
 	public override void AddRecipes()
-    {
-        Terraria.Recipe.Create(Type)
-            .AddIngredient(ItemID.HellstoneBar, 15)
-            .AddIngredient(ModContent.ItemType<FireShard>(), 1)
-            .AddTile(TileID.Anvils)
+	{
+		Terraria.Recipe.Create(Type)
+			.AddIngredient(ItemID.HellstoneBar, 15)
+			.AddIngredient(ModContent.ItemType<FireShard>(), 1)
+			.AddTile(TileID.Anvils)
 			.SortAfterFirstRecipesOf(ItemID.ImpStaff)
 			.Register();
 	}
