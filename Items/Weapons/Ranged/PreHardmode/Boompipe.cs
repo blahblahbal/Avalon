@@ -93,7 +93,6 @@ public class Boompipe : ModItem
 				projectile.netUpdate = true;
 				if (blastDust == 0)
 				{
-					Main.NewText(projectile.identity);
 					Vector2 correctedPos = projectile.Center + new Vector2(0, 8);
 					Vector2 perturbedSpeed = projectile.velocity.RotatedByRandom(MathHelper.ToRadians(14));
 					Dust D = Dust.NewDustDirect(correctedPos + Vector2.Normalize(projectile.velocity) * 50 - new Vector2(0, 14), default, default, DustID.Smoke, perturbedSpeed.X * Main.rand.NextFloat(0.55f, 1.1f), perturbedSpeed.Y * Main.rand.NextFloat(0.55f, 1.1f), 100, Main.rand.NextFromList(Color.LightGray, Color.Gray), Main.rand.NextFloat(0.7f, 1.3f));
