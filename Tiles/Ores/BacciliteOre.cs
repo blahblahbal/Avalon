@@ -48,21 +48,19 @@ public class BacciliteOre : ModTile
 		{
 			Vector2 vel = Vector2.Zero;
 			Vector2 tilePos = Utils.ToWorldCoordinates(new Point(i, j));
-			bool? playerOrNPC = null;
 			float distance = -1f;
 			foreach (Player p in Main.ActivePlayers)
 			{
 				if (p.MountedCenter.Distance(tilePos) < 64f)
 				{
-					if (distance < 0f || p.MountedCenter.Distance(tilePos) < distance)
+					if (distance == -1f || p.MountedCenter.Distance(tilePos) < distance)
 					{
 						distance = p.MountedCenter.Distance(tilePos);
-						playerOrNPC = true;
 						vel = tilePos.DirectionTo(p.MountedCenter);
 					}
 				}
 			}
-			if (playerOrNPC == null)
+			if (distance == -1f)
 			{
 				foreach (NPC n in Main.ActiveNPCs)
 				{
@@ -71,13 +69,12 @@ public class BacciliteOre : ModTile
 						if (distance < 0f || n.Center.Distance(tilePos) < distance)
 						{
 							distance = n.Center.Distance(tilePos);
-							playerOrNPC = false;
 							vel = tilePos.DirectionTo(n.Center);
 						}
 					}
 				}
 			}
-			if (playerOrNPC != null)
+			if (distance != -1f)
 			{
 				Dust d = Dust.NewDustDirect(new Vector2(i, j) * 16, 16, 16, DustType, 0, 0, 128);
 				d.noGravity = true;
