@@ -58,7 +58,7 @@ public class SoulEdgeLayer : PlayerDrawLayer
 	}
 	protected override void Draw(ref PlayerDrawSet drawInfo)
 	{
-		if (drawInfo.shadow != 0 || drawInfo.drawPlayer.altFunctionUse == 2)
+		if (drawInfo.shadow != 0 || drawInfo.drawPlayer.ownedProjectileCounts[ModContent.ProjectileType<SoulEdgeSlash>()] == 0)
 			return;
 
 		drawSword(ref drawInfo, Color.White, 1);
@@ -77,7 +77,7 @@ public class SoulEdgeLayer : PlayerDrawLayer
 			Item.shootSpeed = 1f;
 			Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
 			Item.knockBack = 6.5f;
-			Item.shoot = ModContent.ProjectileType<Projectiles.Melee.SoulEdgeSlash>();
+			Item.shoot = ModContent.ProjectileType<SoulEdgeSlash>();
 			Item.DamageType = DamageClass.Melee;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.value = Item.sellPrice(0, 30);
@@ -117,13 +117,10 @@ public class SoulEdgeLayer : PlayerDrawLayer
 		}
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			if(player.altFunctionUse == 2)
+			if (player.altFunctionUse == 2)
 			{
-				player.immune = true;
-				player.AddImmuneTime(ImmunityCooldownID.General, 60);
 				SoundEngine.PlaySound(SoundID.Zombie53, player.position);
 				Projectile.NewProjectile(source, position, velocity * 8, ModContent.ProjectileType<SoulEdgeDash>(),damage * 3, knockback * 2, player.whoAmI);
-				player.GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage = 0;
 				return false;
 			}
 

@@ -1,20 +1,14 @@
-using System;
-using System.Runtime.CompilerServices;
 using Avalon.Common.Templates;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Melee.Hardmode;
-using Avalon.Particles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.IO;
 using Terraria;
-using Terraria.Audio;
-using Terraria.GameContent;
-using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ThoriumMod.Projectiles;
 
-namespace Avalon.Projectiles.Melee; 
+namespace Avalon.Projectiles.Melee;
 
 public class SoulEdgeSlash : EnergySlashTemplate
 {
@@ -70,10 +64,20 @@ public class SoulEdgeSlash : EnergySlashTemplate
 		//float num3 = Projectile.velocity.ToRotation();
 		//Projectile.rotation = (float)Math.PI * 2f * num2 * num + num3 + num2 * (float)MathHelper.TwoPi + player.fullRotation + MathHelper.Pi;
 	}
-    
-    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+
+	public override void SendExtraAI(BinaryWriter writer)
+	{
+		writer.Write7BitEncodedInt(Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage);
+	}
+	public override void ReceiveExtraAI(BinaryReader reader)
+	{
+		Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage = reader.Read7BitEncodedInt();
+	}
+
+	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
 		Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage += damageDone;
+		Projectile.netUpdate = true;
 
 		if(Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage >= SoulEdgePlayer.maxSoulEdge)
 		{

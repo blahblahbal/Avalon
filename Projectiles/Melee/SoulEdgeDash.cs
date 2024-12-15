@@ -1,10 +1,8 @@
-using Avalon.Common.Templates;
+using Avalon.Items.Weapons.Melee.Hardmode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -12,6 +10,7 @@ namespace Avalon.Projectiles.Melee;
 
 public class SoulEdgeDash : ModProjectile
 {
+	private const int initialTimeLeft = 20;
 	public override void SetDefaults()
 	{
 		Projectile.Size = new Vector2(64);
@@ -19,12 +18,18 @@ public class SoulEdgeDash : ModProjectile
 		Projectile.aiStyle = -1;
 		Projectile.friendly = true;
 		Projectile.tileCollide = false;
-		Projectile.timeLeft = 20;
+		Projectile.timeLeft = initialTimeLeft;
 		Projectile.penetrate = -1;
 	}
 	public override void AI()
 	{
 		Player player = Main.player[Projectile.owner];
+		if (Projectile.timeLeft == initialTimeLeft)
+		{
+			player.immune = true;
+			player.AddImmuneTime(ImmunityCooldownID.General, 60);
+			player.GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage = 0;
+		}
 		player.velocity = Projectile.velocity * new Vector2(4,3);
 		player.heldProj = Projectile.whoAmI;
 		player.SetDummyItemTime(2);
