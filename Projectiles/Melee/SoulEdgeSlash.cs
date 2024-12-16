@@ -83,7 +83,7 @@ public class SoulEdgeSlash : EnergySlashTemplate
 		{
 			for (int i = 0; i < 35; i++)
 			{
-				Dust d = Dust.NewDustDirect(target.Hitbox.ClosestPointInRect(Projectile.Center), Projectile.width, Projectile.height, ModContent.DustType<PhantoplasmDust>());
+				Dust d = Dust.NewDustDirect(target.Hitbox.ClosestPointInRect(Projectile.Center) - Projectile.Size / 2f, Projectile.width, Projectile.height, ModContent.DustType<PhantoplasmDust>());
 				d.noGravity = true;
 				d.velocity *= 2;
 				d.scale *= 2;

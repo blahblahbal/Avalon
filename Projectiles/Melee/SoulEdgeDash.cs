@@ -52,6 +52,7 @@ public class SoulEdgeDash : ModProjectile
 
 		Projectile.Center = player.Center + new Vector2(0,player.gfxOffY) + Vector2.Normalize(Projectile.velocity) * 10;
 		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
+		player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * player.gravDir + (player.gravDir == -1 ? MathHelper.Pi : 0));
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
