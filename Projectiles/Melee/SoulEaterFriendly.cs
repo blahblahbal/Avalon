@@ -1,8 +1,7 @@
-using Avalon.Buffs.Debuffs;
-using Avalon.Common.Players;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -15,10 +14,11 @@ public class SoulEaterFriendly : ModProjectile
 {
 	public override void SetStaticDefaults()
 	{
-		Main.projFrames[Type] = 4;
+		Main.projFrames[Type] = 8;
 		ProjectileID.Sets.TrailCacheLength[Type] = 8;
 		ProjectileID.Sets.TrailingMode[Type] = 2;
 	}
+	private const int initialTimeLeft = 3600;
 	public override void SetDefaults()
 	{
 		Projectile.Size = new Vector2(16);
@@ -28,6 +28,7 @@ public class SoulEaterFriendly : ModProjectile
 		Projectile.alpha = 64;
 		Projectile.scale = 0.75f;
 		Projectile.tileCollide = false;
+		Projectile.timeLeft = initialTimeLeft;
 	}
 	public override void AI()
 	{
@@ -54,7 +55,8 @@ public class SoulEaterFriendly : ModProjectile
 	{
 		for(int i = 0; i < 15; i++)
 		{
-			Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit);
+			int DustType = Main.rand.NextFloat() < Utils.Remap(initialTimeLeft - timeLeft, 0, 50, 0, 1, true) ? DustID.DungeonSpirit : ModContent.DustType<PhantoplasmDust>();
+			Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustType);
 			d.noGravity = true;
 			d.velocity *= 3;
 		}
@@ -62,21 +64,37 @@ public class SoulEaterFriendly : ModProjectile
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		Asset<Texture2D> texture = TextureAssets.Projectile[Type];
-		int frameHeight = texture.Value.Height / Main.projFrames[Projectile.type];
-		Rectangle sourceRectangle = new Rectangle(0, frameHeight * Projectile.frame, texture.Width(), frameHeight);
+		int frameHeight = TextureAssets.Projectile[Type].Value.Height / Main.projFrames[Projectile.type];
+		Rectangle sourceRectangle = new Rectangle(0, frameHeight * Projectile.frame, TextureAssets.Projectile[Type].Width(), frameHeight);
 		Vector2 frameOrigin = sourceRectangle.Size() / 2f;
 
 		Vector2 drawPos = Projectile.Center;
 
-		for (int i = 0; i < Projectile.oldPos.Length; i++)
+		float colorFade = Utils.Remap(initialTimeLeft - Projectile.timeLeft, 0, 60, 0, 1, true);
+		Color color = new(255, 255, 255, 225);
+		Color colorTrail = new(255, 125, 255, 225);
+		Color colorTrailFromRed = colorTrail * (1f - colorFade);
+		for (int i = 0; i < 1 + (int)MathF.Ceiling(1f - colorFade); i++)
 		{
-			Vector2 drawPosOld = Projectile.oldPos[i] + (Projectile.Size / 2);
-			Main.EntitySpriteDraw(texture.Value, drawPosOld - Main.screenPosition, sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i / 8f)) * 0.2f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
+			if (i == 1)
+			{
+				color *= 1f - colorFade;
+				colorTrail = colorTrailFromRed;
+				sourceRectangle.Y += Main.projFrames[Type] * frameHeight / 2;
+			}
+			else
+			{
+				colorTrail *= colorFade;
+			}
+			for (int j = 0; j < Projectile.oldPos.Length; j++)
+			{
+				Vector2 drawPosOld = Projectile.oldPos[j] + (Projectile.Size / 2);
+				Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPosOld - Main.screenPosition, sourceRectangle, colorTrail * (1 - (j / 8f)) * 0.2f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
+			}
+			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos - Main.screenPosition, sourceRectangle, color * 0.3f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.1f, SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos - Main.screenPosition, sourceRectangle, color * 0.15f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.2f, SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos - Main.screenPosition, sourceRectangle, color * Projectile.Opacity, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
 		}
-		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.3f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.1f, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.15f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.2f, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * Projectile.Opacity, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
 		return false;
 	}
 }
