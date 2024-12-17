@@ -681,11 +681,16 @@ public static class ClassExtensions
 	/// <returns>True if the player is touching the ground, false otherwise.</returns>
 	public static bool IsOnGround(this Player player)
 	{
-		var tileX_1 = Main.tile[(int)(player.position.X / 16f), (int)(player.position.Y / 16f) + 1 + (int)(2 * player.gravDir)];
-		var tileX_2 = Main.tile[(int)(player.position.X / 16f) + 1, (int)(player.position.Y / 16f) + 1 + (int)(2 * player.gravDir)];
+		for (int i = 0; i < 3; i++)
+		{
+			var tileX = Main.tile[(int)((player.position.X + (player.width * i / 2f)) / 16f), (int)(player.position.Y / 16f) + 1 + (int)(2 * player.gravDir)];
 
-		return (tileX_1.HasTile && (Main.tileSolid[tileX_1.TileType] || Main.tileSolidTop[tileX_1.TileType]) && player.velocity.Y == 0f) ||
-				(tileX_2.HasTile && (Main.tileSolid[tileX_2.TileType] || Main.tileSolidTop[tileX_2.TileType]) && player.velocity.Y == 0f);
+			if (tileX.HasTile && (Main.tileSolid[tileX.TileType] || Main.tileSolidTop[tileX.TileType]) && player.velocity.Y == 0f)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/// <summary>
@@ -697,11 +702,16 @@ public static class ClassExtensions
 	/// <returns>True if the player is touching the ground, false otherwise.</returns>
 	public static bool IsOnGroundPrecise(this Player player)
 	{
-		var tileX_1 = Main.tile[(int)(player.position.X / 16f), (int)((player.position.Y + (player.gravDir == 1 ? player.Size.Y + 1 : -1)) / 16f)];
-		var tileX_2 = Main.tile[(int)(player.position.X / 16f) + 1, (int)((player.position.Y + (player.gravDir == 1 ? player.Size.Y + 1 : -1)) / 16f)];
+		for (int i = 0; i < 3; i++)
+		{
+			var tileX = Main.tile[(int)((player.position.X + (player.width * i / 2f)) / 16f), (int)((player.position.Y + (player.gravDir == 1 ? player.height + 1 : -1)) / 16f)];
 
-		return (tileX_1.HasTile && (Main.tileSolid[tileX_1.TileType] || Main.tileSolidTop[tileX_1.TileType]) && player.velocity.Y == 0f) ||
-				(tileX_2.HasTile && (Main.tileSolid[tileX_2.TileType] || Main.tileSolidTop[tileX_2.TileType]) && player.velocity.Y == 0f);
+			if (tileX.HasTile && (Main.tileSolid[tileX.TileType] || Main.tileSolidTop[tileX.TileType]) && player.velocity.Y == 0f)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static bool PlayerDoublePressedSetBonusActivateKey(this Player player)
