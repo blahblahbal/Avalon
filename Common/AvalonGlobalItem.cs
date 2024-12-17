@@ -211,26 +211,26 @@ public class AvalonGlobalItem : GlobalItem
     }
 	public override void PostUpdate(Item item)
 	{
-		if (item.lavaWet && item.position.Y / 16 > Main.maxTilesY - 190)
-		{
-			if (item.type == ModContent.ItemType<HellboundRemote>() && Main.hardMode) // &&
-				//ModContent.GetInstance<DownedBossSystem>().DownedPhantasm)
-			{
-				if (Main.netMode != NetmodeID.MultiplayerClient)
-				{
-					item.active = false;
-					item.type = ItemID.None;
-					item.stack = 0;
-					if (Main.hardMode && ModContent.GetInstance<DownedBossSystem>().DownedPhantasm)
-					{
-						AvalonGlobalNPC.SpawnWOS(item.position);
-						SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/WoS"), item.position);
-					}
+		//if (item.lavaWet && item.position.Y / 16 > Main.maxTilesY - 190)
+		//{
+		//	if (item.type == ModContent.ItemType<HellboundRemote>() && Main.hardMode) // &&
+		//		//ModContent.GetInstance<DownedBossSystem>().DownedPhantasm)
+		//	{
+		//		if (Main.netMode != NetmodeID.MultiplayerClient)
+		//		{
+		//			item.active = false;
+		//			item.type = ItemID.None;
+		//			item.stack = 0;
+		//			if (Main.hardMode && ModContent.GetInstance<DownedBossSystem>().DownedPhantasm)
+		//			{
+		//				AvalonGlobalNPC.SpawnWOS(item.position);
+		//				SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/WoS"), item.position);
+		//			}
 
-					NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, item.whoAmI);
-				}
-			}
-		}
+		//			NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, item.whoAmI);
+		//		}
+		//	}
+		//}
 	}
 	public override bool CanRightClick(Item item)
     {
