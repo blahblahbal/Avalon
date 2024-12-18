@@ -707,6 +707,12 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PostUpdate()
 	{
+		if (KeybindSystem.LegacyLightModeChange.JustPressed)
+		{
+			Lighting.Mode = (Terraria.Graphics.Light.LightMode)((int)(Lighting.Mode + 1) % 4);
+			Main.NewText($"Lighting: {Lighting.Mode}");
+		}
+
 		#region silence candle
 		Point p = Player.Center.ToTileCoordinates();
 		for (int i = p.X - 85; i < p.X + 85; i++)

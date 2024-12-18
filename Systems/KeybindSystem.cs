@@ -12,8 +12,9 @@ public class KeybindSystem : ModSystem
     public static ModKeybind AstralHotkey { get; private set; }
     public static ModKeybind QuickStaminaHotkey { get; private set; }
     public static ModKeybind MinionGuidingHotkey { get; private set; }
+	public static ModKeybind LegacyLightModeChange { get; private set; }
 
-    public override void Load()
+	public override void Load()
     {
         ShadowHotkey = KeybindLoader.RegisterKeybind(Mod, "Shadow Teleport", Keys.V);
         GenieHotkey = KeybindLoader.RegisterKeybind(Mod, "Trigger Genie Effect", Keys.G);
@@ -22,7 +23,8 @@ public class KeybindSystem : ModSystem
         ModeChangeHotkey = KeybindLoader.RegisterKeybind(Mod, "Assign Waypoint", Keys.N);
         AstralHotkey = KeybindLoader.RegisterKeybind(Mod, "Activate Astral Projecting", Keys.OemPipe);
         QuickStaminaHotkey = KeybindLoader.RegisterKeybind(Mod, "Quick Stamina", Keys.X);
-    }
+		LegacyLightModeChange = KeybindLoader.RegisterKeybind(Mod, "Change Lighting Mode", Keys.F9);
+	}
 
     public override void Unload()
     {
@@ -33,5 +35,7 @@ public class KeybindSystem : ModSystem
         AstralHotkey = null;
         QuickStaminaHotkey = null;
         MinionGuidingHotkey = null;
-    }
+		LegacyLightModeChange = null;
+
+	}
 }
