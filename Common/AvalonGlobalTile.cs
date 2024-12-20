@@ -128,7 +128,85 @@ public class AvalonGlobalTile : GlobalTile
                 new Rectangle(frameX, frameY, 16, 16), Color.White, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
     }
-    public override void FloorVisuals(int type, Player player)
+	public override void AnimateTile()
+	{
+		// colors are determined here, drawing is done in Avalon.Hooks.TileDrawingHooks
+		#region Warm Gemspark
+		if (WarmGemsparkBlock.time <= 50)
+		{
+			WarmGemsparkBlock.G += 5;
+			if (WarmGemsparkBlock.G >= 255)
+			{
+				WarmGemsparkBlock.G = 255;
+			}
+		}
+		if (WarmGemsparkBlock.time >= 50)
+		{
+			WarmGemsparkBlock.G -= 5;
+			if (WarmGemsparkBlock.G <= 0)
+			{
+				WarmGemsparkBlock.G = 0;
+			}
+		}
+		WarmGemsparkBlock.time++;
+		WarmGemsparkBlock.time = (byte)(WarmGemsparkBlock.time % 101);
+		#endregion
+
+		// colors are determined here, drawing is done in Avalon.Hooks.TileDrawingHooks
+		#region Cool Gemspark
+		if (CoolGemsparkBlock.time <= 31)
+		{
+			CoolGemsparkBlock.R -= 5;
+			if (CoolGemsparkBlock.R <= 0)
+			{
+				CoolGemsparkBlock.R = 0;
+			}
+		}
+		if (CoolGemsparkBlock.time >= 32 && CoolGemsparkBlock.time <= 112)
+		{
+			CoolGemsparkBlock.G += 5;
+			if (CoolGemsparkBlock.G >= 255)
+			{
+				CoolGemsparkBlock.G = 255;
+			}
+			if (CoolGemsparkBlock.G >= 160)
+			{
+				CoolGemsparkBlock.B -= 5;
+				if (CoolGemsparkBlock.B <= 0)
+				{
+					CoolGemsparkBlock.B = 0;
+				}
+			}
+		}
+		if (CoolGemsparkBlock.time >= 112 && CoolGemsparkBlock.time <= 180)
+		{
+			CoolGemsparkBlock.G -= 5;
+			if (CoolGemsparkBlock.G <= 0)
+			{
+				CoolGemsparkBlock.G = 0;
+			}
+			if (CoolGemsparkBlock.G <= 160)
+			{
+				CoolGemsparkBlock.B += 5;
+				if (CoolGemsparkBlock.B >= 255)
+				{
+					CoolGemsparkBlock.B = 255;
+				}
+			}
+		}
+		if (CoolGemsparkBlock.time >= 180)
+		{
+			CoolGemsparkBlock.R += 5;
+			if (CoolGemsparkBlock.R >= 160)
+			{
+				CoolGemsparkBlock.R = 160;
+			}
+		}
+		CoolGemsparkBlock.time++;
+		CoolGemsparkBlock.time = (byte)(CoolGemsparkBlock.time % 212); 
+		#endregion
+	}
+	public override void FloorVisuals(int type, Player player)
     {
         if (type == 229 && player.GetModPlayer<AvalonPlayer>().NoSticky)
         {

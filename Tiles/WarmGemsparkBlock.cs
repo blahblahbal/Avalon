@@ -7,9 +7,9 @@ namespace Avalon.Tiles;
 
 public class WarmGemsparkBlock : ModTile
 {
-	public static int G { get; private set; } = 0;
+	public static int G { get; set; } = 0;
 	private static ModWaterfallStyle waterfallStyle;
-	private static byte time;
+	public static byte time;
 
 	public override void SetStaticDefaults()
 	{
@@ -41,27 +41,5 @@ public class WarmGemsparkBlock : ModTile
 	public override void ChangeWaterfallStyle(ref int style)
 	{
 		style = waterfallStyle.Slot;
-	}
-	// colors are determined here, drawing is done in Avalon.Hooks.TileDrawingHooks
-	public override void AnimateTile(ref int frame, ref int frameCounter)
-	{
-		if (time <= 50)
-		{
-			G += 5;
-			if (G >= 255)
-			{
-				G = 255;
-			}
-		}
-		if (time >= 50)
-		{
-			G -= 5;
-			if (G <= 0)
-			{
-				G = 0;
-			}
-		}
-		time++;
-		time = (byte)(time % 101);
 	}
 }
