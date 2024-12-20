@@ -22,10 +22,12 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     if (any(color))
     color.rgb = lerp(color.rgb, float3(1, 1, 1), 0.4);
     
-    float2 cloudCoords = (coords * uImageSize0 - uSourceRect.xy) / float2(uImageSize1.x * 3,uImageSize1.y * 0.9);
+	float2 frame = ((coords.x * uImageSize0.x - uSourceRect.x), coords.y * uImageSize0.y - uSourceRect.y);
+	
+	float2 cloudCoords = frame / float2(uImageSize1.x * 3, uImageSize1.y * 0.9);
     float cloud = tex2D(uImage1, cloudCoords + float2(sin(uTime * 0.01) * 5, sin(uTime * 0.005) * 4));
     
-    float2 cloudCoords2 = (coords * uImageSize0 - uSourceRect.xy * 0.3) / float2(uImageSize1.x, uImageSize1.y);
+	float2 cloudCoords2 = (frame * 0.3) / float2(uImageSize1.x, uImageSize1.y);
     float cloud2 = tex2D(uImage1, cloudCoords2 + float2(sin(uTime * 0.005) * 4, sin(uTime * 0.0025) * 2));
     float4 color2 = tex2D(uImage0, coords + float2(((cloud * 10) - 5) / uImageSize0.x, ((cloud * 5) - 2.5) / uImageSize0.y));
 	color.rgb *= color.a; // this fixes issues with bilinear filtered pixels on the outlines of sprites
