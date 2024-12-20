@@ -36,7 +36,9 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
 	
 	if (sampleColor.a != 1.0) // special calculation for transparent pixels
 	{
-		return color * sampleColor;
+		float4 samplePurplified = sampleColor;
+		samplePurplified.rgb = lerp(float3(0.1, 0, 0.3) * samplePurplified.a, float3(0.4, 0.2, 0.7), dot(samplePurplified.rgb, float3(0.5, 0.5, 0.5)));
+		return color * samplePurplified;
 	}
 	return color * sampleColor.a;
 }
