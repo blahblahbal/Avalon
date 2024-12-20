@@ -11,6 +11,7 @@ public class CoolGemsparkBlock : ModTile
 	public static int G { get; private set; } = 0;
 	public static int B { get; private set; } = 255;
 	private static ModWaterfallStyle waterfallStyle;
+	private static byte time;
 
 	public override void SetStaticDefaults()
 	{
@@ -44,9 +45,8 @@ public class CoolGemsparkBlock : ModTile
 		style = waterfallStyle.Slot;
 	}
 	// colors are determined here, drawing is done in Avalon.Hooks.TileDrawingHooks
-	public static void StaticUpdate()
+	public override void AnimateTile(ref int frame, ref int frameCounter)
 	{
-		int time = ((int)Main.timeForVisualEffects) % 212;
 		if (time <= 31)
 		{
 			R -= 5;
@@ -95,5 +95,7 @@ public class CoolGemsparkBlock : ModTile
 				R = 160;
 			}
 		}
+		time++;
+		time = (byte)(time % 212);
 	}
 }

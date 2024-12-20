@@ -387,11 +387,6 @@ public class AvalonWorld : ModSystem
             setValue.Invoke(Lang.gen[11], new object[] { ExxoAvalonOrigins.JungleGenMessage });
         }
     }
-	public override void PostUpdateEverything()
-	{
-		CoolGemsparkBlock.StaticUpdate();
-		WarmGemsparkBlock.StaticUpdate();
-	}
 	public override void PostUpdateWorld()
     {
 		SandstormTimeLeft--;
