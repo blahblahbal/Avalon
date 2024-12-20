@@ -21,20 +21,23 @@ float4 ArmorBasic(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLO
     
     float2 cloudCoords = (coords * uImageSize0 - uSourceRect.xy) / float2(uImageSize1.x * 2,uImageSize1.y * 3);
     float cloud = (tex2D(uImage1, cloudCoords + float2(uTime * 0.01, uTime * 0.005)) * 4) -2;
-    float4 color2 = tex2D(uImage0, coords + float2((cloud * 4 - 6) / uImageSize0.x, (cloud - 1) / uImageSize0.y));
-    float4 color = tex2D(uImage0, coords + float2((cloud * 0.5) / uImageSize0.x, (cloud * 0.5) / uImageSize0.y));
+	float4 color2 = tex2D(uImage0, coords + float2((cloud * 4 - 6) / uImageSize0.x, (cloud - 1) / uImageSize0.y));
+	float4 color = tex2D(uImage0, coords);
+	color.rgb *= color.a; // this fixes issues with bilinear filtered pixels on the outlines of sprites
     color.rgb += color + color2 * cloud;
     color.rgb = clamp(color.rgb - 0.3, float3(0, 0, 0), float3(1.5, 1.5, 1.5));
     
-    color.a = tex2D(uImage0, coords).a;
-    
-    if(any(color))
+    if(any(color.rgb))
         color.rgb = lerp(float3(0.1, 0, 0.3), float3(0.4, 0.2, 0.7), dot(color.rgb, float3(0.5,0.5,0.5)));
+	else if (any(color.a))
+		color.rgb = lerp(float3(0.1, 0, 0.3), float3(0.4, 0.2, 0.7), dot(color.rgb, float3(0.5, 0.5, 0.5))) * color.a;
     if (!any(color))
         return color;
-    
-    //color.rgb = lerp(color.rgb, float3(0.5,0.5,0.5), 0.4);
-    
+	
+	if (sampleColor.a != 1.0) // special calculation for transparent pixels
+	{
+		return color * sampleColor;
+	}
 	return color * sampleColor.a;
 }
     
