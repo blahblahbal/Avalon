@@ -24,7 +24,7 @@ public class Holybird : ModHerb
     public override LocalizedText MapName => this.GetLocalization("MapEntry");
     public override Color MapColor => new Color(98, 52, 228);
     public override int Dust => DustID.EnchantedNightcrawler;
-	public override byte FlipSpriteStyle => (byte)FlipSprite.Custom;
+	public override FlipSprite FlipSpriteStyle => FlipSprite.Custom;
 	public override void SetStaticDefaults()
     {
         TileID.Sets.TileCutIgnore.Regrowth[Type] = true;

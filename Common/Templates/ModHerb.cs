@@ -29,7 +29,7 @@ public abstract class ModHerb : ModTile
     public virtual LocalizedText MapName => LanguageManager.Instance.GetText("");
     public virtual Color MapColor => Color.White;
     public virtual int Dust => DustID.Dirt;
-	public virtual byte FlipSpriteStyle => 0;
+	public virtual FlipSprite FlipSpriteStyle => FlipSprite.Flipped;
 	public enum FlipSprite : byte
 	{
 		Flipped,
@@ -94,15 +94,15 @@ public abstract class ModHerb : ModTile
 		Tile tile = Framing.GetTileSafely(i, j); //Safe way of getting a tile instance
 		if (i % 2 == 1)
 		{
-			if (FlipSpriteStyle == (byte)FlipSprite.Flipped)
+			if (FlipSpriteStyle == FlipSprite.Flipped)
 			{
 				spriteEffects = SpriteEffects.FlipHorizontally;
 			}
-			else if (FlipSpriteStyle == (byte)FlipSprite.Custom)
+			else if (FlipSpriteStyle == FlipSprite.Custom)
 			{
 				tile.TileFrameY = 22;
 			}
-			else if (FlipSpriteStyle == (byte)FlipSprite.None) // redundant, but whatever
+			else if (FlipSpriteStyle == FlipSprite.None) // redundant, but whatever
 			{
 				spriteEffects = SpriteEffects.None;
 			}
