@@ -11,7 +11,7 @@ public class ZirconDust : ModDust
         if (!dust.noLightEmittence)
         {
             var lightFade = (dust.scale > 1 ? 1 : dust.scale);
-            Lighting.AddLight((int)(dust.position.X / 16f), (int)(dust.position.Y / 16f), ((float)208 / 255 * lightFade), ((float)148 / 255 * lightFade), ((float)70 / 255 * lightFade));
+            Lighting.AddLight((int)(dust.position.X / 16f), (int)(dust.position.Y / 16f), ((float)208 / 255 * lightFade), ((float)142 / 255 * lightFade), ((float)95 / 255 * lightFade));
         }
         return true;
     }

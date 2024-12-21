@@ -29,7 +29,7 @@ namespace Avalon.Items.Weapons.Melee.Hardmode
             }
             public override void MeleeEffects(Player player, Rectangle hitbox)
             {
-                Lighting.AddLight((int)((player.itemLocation.X + 6f + player.velocity.X) / 16f), (int)((player.itemLocation.Y - 14f) / 16f), 0.5f, 0.3f, 0f);
+                Lighting.AddLight((int)((player.itemLocation.X + 6f + player.velocity.X) / 16f), (int)((player.itemLocation.Y - 14f) / 16f), 0.5f, 0.3f, 0.2f);
             }
         }
         public class CyanPhasesaber : ModItem

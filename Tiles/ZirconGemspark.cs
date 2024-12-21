@@ -23,8 +23,8 @@ public class ZirconGemspark : ModTile
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         r = 1.1f;
-        g = 0.8f;
-        b = 0.4f;
+        g = 0.75f;
+        b = 0.5f;
     }
     public override bool CreateDust(int i, int j, ref int type)
     {

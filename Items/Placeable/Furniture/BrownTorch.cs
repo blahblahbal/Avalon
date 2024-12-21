@@ -44,7 +44,7 @@ class BrownTorch : ModItem
                 Main.dust[d].position = player.RotatedRelativePoint(Main.dust[d].position);
             }
             Vector2 position = player.RotatedRelativePoint(new Vector2(player.itemLocation.X + 12f * player.direction + player.velocity.X, player.itemLocation.Y - 14f + player.velocity.Y), true);
-            Lighting.AddLight(position, 1.1f, 0.8f, 0.4f);
+            Lighting.AddLight(position, 1.1f, 0.75f, 0.5f);
         }
     }
 
@@ -52,7 +52,7 @@ class BrownTorch : ModItem
     {
         if (!Item.wet)
         {
-            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1.1f, 0.8f, 0.4f);
+            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1.1f, 0.75f, 0.5f);
         }
     }
 }

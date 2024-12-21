@@ -84,7 +84,7 @@ namespace Avalon.Hooks
 				}
 				if (typeCache == ModContent.TileType<Zircon>() || (typeCache == ModContent.TileType<PlacedGems>() && Main.tile[i, j].TileFrameX / 18 == 5))
 				{
-					tileShineColor = new Color(255, 230, 120, 255);
+					tileShineColor = new Color(255, 243, 235, 255);
 				}
 
 				// misc

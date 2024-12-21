@@ -19,8 +19,8 @@ public class ZirconGemsparkWall : ModWall
     public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
     {
         r = 1.1f * 0.8f;
-        g = 0.8f * 0.8f;
-        b = 0.4f * 0.8f;
+        g = 0.75f * 0.8f;
+        b = 0.5f * 0.8f;
     }
 }
 public class ZirconGemsparkWallOff : ModWall

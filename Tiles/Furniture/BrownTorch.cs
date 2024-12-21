@@ -11,7 +11,7 @@ namespace Avalon.Tiles.Furniture
 {
     public class BrownTorch : ModTorch
     {
-        public override Vector3 LightColor => new Vector3(1.1f, 0.8f, 0.4f);
+        public override Vector3 LightColor => new Vector3(1.1f, 0.75f, 0.5f);
         public override int TorchItem => ModContent.ItemType<Items.Placeable.Furniture.BrownTorch>();
         public override int dustType => ModContent.DustType<BrownTorchDust>();
 		private static Asset<Texture2D>? flameTexture;

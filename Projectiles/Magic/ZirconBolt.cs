@@ -23,7 +23,7 @@ public class ZirconBolt : ModProjectile
         Projectile.aiStyle = -1;
         Projectile.penetrate = 2;
 
-        color = new Color(208, 148, 70) * 0.7f;
+        color = new Color(208, 142, 95) * 0.7f;
         dustId = ModContent.DustType<Dusts.ZirconDust>();
     }
 

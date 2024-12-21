@@ -34,8 +34,8 @@ namespace Avalon.Hooks
                 if (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>())
                 {
                     finalR *= 1.1f;
-                    finalG *= 0.8f;
-                    finalB *= 0.4f;
+                    finalG *= 0.75f;
+                    finalB *= 0.5f;
                 }
                 else if (tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>())
                 {
@@ -91,8 +91,8 @@ namespace Avalon.Hooks
 				if (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>())
 				{
 					finalR *= 1.1f;
-					finalG *= 0.8f;
-					finalB *= 0.4f;
+					finalG *= 0.75f;
+					finalB *= 0.5f;
 				}
 				else if (tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>())
 				{
