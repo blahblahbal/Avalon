@@ -73,6 +73,7 @@ public class DesertBeak : ModNPC
 		NPC.scale = 1f;
 		phase = 0;
 		FlapMultiplier = 1;
+		NPC.dontTakeDamage = true;
 	}
 	//public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 	//{
@@ -140,23 +141,66 @@ public class DesertBeak : ModNPC
 	}
 	public override void OnSpawn(IEntitySource source)
 	{
-		if (Main.netMode != NetmodeID.MultiplayerClient)
+		//ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(NPC.target.ToString()), Color.White);
+		while (leftWing == -1 || Main.npc[leftWing].type != ModContent.NPCType<DesertBeakWingNPC>() || !Main.npc[leftWing].active)
 		{
-			//ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(NPC.target.ToString()), Color.White);
 			leftWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai1: NPC.whoAmI, ai2: 1);
-			//NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
-
-			rightWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai1: NPC.whoAmI, ai2: 2);
-			//NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
+			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
+			//ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("BRO L"), Color.Wheat);
 		}
+		while (rightWing == -1 || Main.npc[rightWing].type != ModContent.NPCType<DesertBeakWingNPC>() || !Main.npc[rightWing].active)
+		{
+			//ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("BRO R"), Color.Wheat);
+			rightWing = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<DesertBeakWingNPC>(), ai1: NPC.whoAmI, ai2: 2);
+			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
+		}
+		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
 	}
-	public override bool PreAI()
-	{
-		//ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(NPC.target.ToString()), Color.Wheat);
-		return base.PreAI();
-	}
+	int JustSpawned = 10;
 	public override void AI()
 	{
+		//if (!Main.npc[leftWing].active)
+		//{
+		//	Main.NewText("Left: " + leftWing + Main.npc[leftWing].active, Color.LightBlue);
+		//}
+		//if (!Main.npc[rightWing].active)
+		//{
+		//	Main.NewText("Right: " + rightWing + Main.npc[rightWing].active, Color.LightBlue);
+		//}
+
+		// this probably isn't foolproof, as you can tell by how hacky it is, this is just the only way to stop it from not syncing the npc in onspawn for no reason (idk how to properly sync it without fucking up the values on the server)
+		// please if you can find a better way to do this, do it, I already tried specifically syncing it if the wing npc wasn't active on the multiplayer client, but I probably did it wrong cause it didn't work
+		if (JustSpawned > 0)
+		{
+			//NPC.dontTakeDamage = true;
+			//Main.npc[leftWing].dontTakeDamage = true;
+			//Main.npc[rightWing].dontTakeDamage = true;
+			if (Main.netMode == NetmodeID.Server)
+			{
+				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
+				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
+				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
+			}
+			JustSpawned--;
+		}
+		//if (JustSpawned == 5)
+		//{
+		//	Main.NewText(NPC.dontTakeDamage, Color.PaleVioletRed);
+		//}
+		if (JustSpawned == 0)
+		{
+			NPC.dontTakeDamage = false;
+			Main.npc[leftWing].dontTakeDamage = false;
+			Main.npc[rightWing].dontTakeDamage = false;
+			if (Main.netMode == NetmodeID.Server)
+			{
+				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
+				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
+				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
+			}
+			JustSpawned--;
+			//Main.NewText(NPC.dontTakeDamage, Color.PaleVioletRed);
+		}
 		//ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(NPC.target.ToString()), Color.Lime);
 		//Main.NewText("[" + $"{NPC.ai[0]}" + "]" + "[" + $"{NPC.ai[1]}" + "]" + "[" + $"{NPC.ai[2]}" + "]" + " phase: " + $"{phase}", Main.DiscoColor);
 		float enragedModifier = 1f;
@@ -198,16 +242,27 @@ public class DesertBeak : ModNPC
 		if (!NPC.HasValidTarget)
 		{
 			NPC.TargetClosest(false);
+			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
 		}
 		if (!NPC.HasValidTarget || !Main.dayTime)
 		{
 			phase = 255;
+			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
 		}
 		if (phase == 255)
 		{
 			NPC.timeLeft = 0;
 			NPC.velocity.Y -= 0.2f;
 			NPC.alpha += 2;
+			Main.NewText("phase");
+			Main.npc[leftWing].timeLeft = 0;
+			Main.npc[leftWing].life = 0;
+			Main.npc[leftWing].checkDead();
+			Main.npc[leftWing].active = false;
+			Main.npc[rightWing].timeLeft = 0;
+			Main.npc[rightWing].life = 0;
+			Main.npc[rightWing].checkDead();
+			Main.npc[rightWing].active = false;
 			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
 			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
 		}
@@ -548,11 +603,12 @@ public class DesertBeak : ModNPC
 	{
 		if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
 		{
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("DesertBeakHead").Type, 0.9f);
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("DesertBeakBody").Type, 0.9f);
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("DesertBeakTalon").Type, 0.9f);
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("DesertBeakWing").Type, 0.9f);
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("DesertBeakWing2").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(-150, -40), NPC.velocity, Mod.Find<ModGore>("DesertBeakWing").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(40, -40), NPC.velocity, Mod.Find<ModGore>("DesertBeakWing2").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(-10, 0), NPC.velocity, Mod.Find<ModGore>("DesertBeakBody").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(-24, 10), NPC.velocity, Mod.Find<ModGore>("DesertBeakHead").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(-10, 60), NPC.velocity, Mod.Find<ModGore>("DesertBeakTalon").Type, 0.9f);
+			//Main.NewText($"{NPC.position} | {NPC.velocity} Main");
 		}
 		Main.npc[leftWing].life -= hit.Damage;
 		Main.npc[rightWing].life -= hit.Damage;

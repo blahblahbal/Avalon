@@ -36,6 +36,7 @@ internal class DesertBeakWingNPC : ModNPC
 		NPC.HitSound = new SoundStyle("Terraria/Sounds/NPC_Hit_28") { Pitch = -0.1f };
 		NPC.DeathSound = new SoundStyle("Terraria/Sounds/NPC_Killed_31") { Pitch = -0.1f };
 		NPC.scale = 1f;
+		NPC.dontTakeDamage = true;
 	}
 	public int MainBody
 	{
@@ -52,13 +53,18 @@ internal class DesertBeakWingNPC : ModNPC
 
 		// aaaaaaaaaa
 
-		if (Main.player[Main.npc[MainBody].target].dead || Main.npc[MainBody].target < 0 || Main.npc[MainBody].target == 255)
+		//if (Main.player[Main.npc[MainBody].target].dead || Main.npc[MainBody].target < 0 || Main.npc[MainBody].target == 255)
+		//{
+		//	NPC.timeLeft = 0;
+		//	NPC.checkDead();
+		//	NPC.life = 0;
+		//	NPC.active = false;
+		//}
+		if (Main.npc[MainBody].type != ModContent.NPCType<DesertBeak>() || !Main.npc[MainBody].active)
 		{
-			NPC.timeLeft = 0;
-			NPC.checkDead();
-			NPC.life = 0;
 			NPC.active = false;
 		}
+		//Main.NewText(NPC.ai[2] == 1 ? "Left: " + NPC.position.ToPoint() : "Right: " + NPC.position.ToPoint());
 
 		if (NPC.ai[2] == 1)
 		{
@@ -153,6 +159,15 @@ internal class DesertBeakWingNPC : ModNPC
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{
+		if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
+		{
+			Gore.NewGore(NPC.GetSource_Death(), Main.npc[MainBody].position + new Vector2(-110, -40), Main.npc[MainBody].velocity, Mod.Find<ModGore>("DesertBeakWing").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), Main.npc[MainBody].position + new Vector2(0, -40), Main.npc[MainBody].velocity, Mod.Find<ModGore>("DesertBeakWing2").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), Main.npc[MainBody].position + new Vector2(-10, 0), Main.npc[MainBody].velocity, Mod.Find<ModGore>("DesertBeakBody").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), Main.npc[MainBody].position + new Vector2(-24, 10), Main.npc[MainBody].velocity, Mod.Find<ModGore>("DesertBeakHead").Type, 0.9f);
+			Gore.NewGore(NPC.GetSource_Death(), Main.npc[MainBody].position + new Vector2(-10, 60), Main.npc[MainBody].velocity, Mod.Find<ModGore>("DesertBeakTalon").Type, 0.9f);
+			//Main.NewText($"{NPC.position} | {NPC.velocity} Main");
+		}
 		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
 		if (NPC.life <= 0)
 		{
@@ -190,14 +205,14 @@ internal class DesertBeakWingNPC : ModNPC
 	}
 }
 
-public class Stardam : GlobalItem
-{
-	public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-	{
-		return entity.type == ItemID.PiercingStarlight;
-	}
-	public override void SetDefaults(Item entity)
-	{
-		entity.damage = 5000;
-	}
-}
+//public class Stardam : GlobalItem
+//{
+//	public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+//	{
+//		return entity.type == ItemID.PiercingStarlight;
+//	}
+//	public override void SetDefaults(Item entity)
+//	{
+//		entity.damage = 5000;
+//	}
+//}
