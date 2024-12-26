@@ -35,8 +35,9 @@ public class DesertBeak : ModNPC
     public int rightWing = -1;
 	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
-    {
-        Main.npcFrameCount[NPC.type] = 8;
+	{
+		NPCID.Sets.MPAllowedEnemies[Type] = true;
+		Main.npcFrameCount[NPC.type] = 8;
 
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {

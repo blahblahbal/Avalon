@@ -364,8 +364,6 @@ public class AvalonPlayer : ModPlayer
 	public bool riftContagionFishing = false;
 	public bool riftSavannaFishing = false;
 
-	public int DesertBeakSpawnTimer;
-
     public void UpdatePrimeMinionStatus(IEntitySource source)
     {
         int firstMinion = ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>();
@@ -416,10 +414,6 @@ public class AvalonPlayer : ModPlayer
     {
 		WOSRenderHPText = false;
         EfficiencyPrefix = 0;
-        if (DesertBeakSpawnTimer < -1)
-        {
-            DesertBeakSpawnTimer = -1;
-        }
 
         CoughCooldown = false;
         if (DarkMatterTimeOut-- < 0)
@@ -707,7 +701,7 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PostUpdate()
 	{
-		if (KeybindSystem.LegacyLightModeChange.JustPressed)
+		if (Main.netMode != NetmodeID.Server && KeybindSystem.LegacyLightModeChange.JustPressed)
 		{
 			Lighting.Mode = (Terraria.Graphics.Light.LightMode)((int)(Lighting.Mode + 1) % 4);
 			Main.NewText($"Lighting: {Lighting.Mode}");
@@ -932,17 +926,6 @@ public class AvalonPlayer : ModPlayer
             ExxoAvalonOrigins.Achievements?.Call("Event", "Hellevator");
         }
         #endregion
-
-        #region desert beak spawn timer
-        DesertBeakSpawnTimer--;
-        if (DesertBeakSpawnTimer == 0)
-        {
-            NPC.SpawnOnPlayer(Player.whoAmI, ModContent.NPCType<DesertBeak>());
-            SoundEngine.PlaySound(SoundID.Roar, Player.position);
-        }
-        #endregion
-
-        
 
         if (AncientRangedBonusActive)
         {

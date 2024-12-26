@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.NPCs.Bosses.PreHardmode;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -25,7 +26,7 @@ class DesertHorn : ModItem
         Item.maxStack = 9999;
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.height = 28;
-        Item.useAnimation = Item.useTime = 180;
+        Item.useAnimation = Item.useTime = 18;
     }
     public override void AddRecipes()
     {
@@ -42,10 +43,28 @@ class DesertHorn : ModItem
     }
     public override void UseAnimation(Player player)
     {
-        player.GetModPlayer<AvalonPlayer>().DesertBeakSpawnTimer = 60 * 3;
         SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/DesertHorn"), player.position);
     }
-    public override void HoldItem(Player player)
+	public override bool? UseItem(Player player)
+	{
+		if (player.whoAmI == Main.myPlayer && player.itemAnimation == 1)
+		{
+			if (Main.netMode != NetmodeID.MultiplayerClient)
+			{
+				// If the player is not in multiplayer, spawn directly
+				NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<DesertBeak>());
+			}
+			else
+			{
+				// If the player is in multiplayer, request a spawn
+				// This will only work if NPCID.Sets.MPAllowedEnemies[type] is true
+				NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: ModContent.NPCType<DesertBeak>());
+			}
+			SoundEngine.PlaySound(SoundID.Roar, player.position);
+		}
+		return base.UseItem(player);
+	}
+	public override void HoldItem(Player player)
     {
         if (player.ItemAnimationJustStarted)
         {
