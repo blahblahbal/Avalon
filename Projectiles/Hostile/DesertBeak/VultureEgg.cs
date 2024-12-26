@@ -45,7 +45,16 @@ public class VultureEgg : ModProjectile
         fallThrough = Main.rand.NextBool();
         return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
     }
-    public override void OnKill(int timeLeft)
+	public override bool PreKill(int timeLeft)
+	{
+		if (Main.netMode != NetmodeID.MultiplayerClient)
+		{
+			int npc = NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.position.X, (int)Projectile.position.Y, ModContent.NPCType<DesertTalon>());
+			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, npc);
+		}
+		return base.PreKill(timeLeft);
+	}
+	public override void OnKill(int timeLeft)
     {
         if (Projectile.penetrate == 1)
         {
@@ -104,12 +113,6 @@ public class VultureEgg : ModProjectile
         Projectile.height = 10;
         Projectile.position.X = Projectile.position.X - Projectile.width / 2;
         Projectile.position.Y = Projectile.position.Y - Projectile.height / 2;
-
-        if (Main.netMode != NetmodeID.MultiplayerClient)
-        {
-            int npc = NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.position.X, (int)Projectile.position.Y, ModContent.NPCType<DesertTalon>());
-            NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, npc);
-        }
     }
     public override void AI()
     {

@@ -26,7 +26,7 @@ class DesertHorn : ModItem
         Item.maxStack = 9999;
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.height = 28;
-        Item.useAnimation = Item.useTime = 18;
+        Item.useAnimation = Item.useTime = 180;
     }
     public override void AddRecipes()
     {
