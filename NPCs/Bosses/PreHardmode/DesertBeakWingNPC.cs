@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
@@ -36,7 +37,8 @@ internal class DesertBeakWingNPC : ModNPC
 		NPC.HitSound = new SoundStyle("Terraria/Sounds/NPC_Hit_28") { Pitch = -0.1f };
 		NPC.DeathSound = new SoundStyle("Terraria/Sounds/NPC_Killed_31") { Pitch = -0.1f };
 		NPC.scale = 1f;
-		NPC.dontTakeDamage = true;
+		//NPC.dontTakeDamage = true;
+		NPC.netAlways = true;
 	}
 	public int MainBody
 	{
@@ -159,6 +161,15 @@ internal class DesertBeakWingNPC : ModNPC
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{
+		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
+		if (NPC.life <= 0)
+		{
+			NPC.life = 0;
+			//NPC.active = false;
+			NPC.checkDead();
+		}
+		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
+
 		if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
 		{
 			Gore.NewGore(NPC.GetSource_Death(), Main.npc[MainBody].position + new Vector2(-110, -40), Main.npc[MainBody].velocity, Mod.Find<ModGore>("DesertBeakWing").Type, 0.9f);
@@ -168,14 +179,6 @@ internal class DesertBeakWingNPC : ModNPC
 			Gore.NewGore(NPC.GetSource_Death(), Main.npc[MainBody].position + new Vector2(-10, 60), Main.npc[MainBody].velocity, Mod.Find<ModGore>("DesertBeakTalon").Type, 0.9f);
 			//Main.NewText($"{NPC.position} | {NPC.velocity} Main");
 		}
-		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
-		if (NPC.life <= 0)
-		{
-			NPC.life = 0;
-			//NPC.active = false;
-			NPC.checkDead();
-		}
-		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
 
 		foreach (NPC npc in Main.ActiveNPCs)
 		{

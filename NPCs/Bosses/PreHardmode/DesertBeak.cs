@@ -73,7 +73,7 @@ public class DesertBeak : ModNPC
 		NPC.scale = 1f;
 		phase = 0;
 		FlapMultiplier = 1;
-		NPC.dontTakeDamage = true;
+		//NPC.dontTakeDamage = true;
 	}
 	//public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 	//{
@@ -170,37 +170,38 @@ public class DesertBeak : ModNPC
 
 		// this probably isn't foolproof, as you can tell by how hacky it is, this is just the only way to stop it from not syncing the npc in onspawn for no reason (idk how to properly sync it without fucking up the values on the server)
 		// please if you can find a better way to do this, do it, I already tried specifically syncing it if the wing npc wasn't active on the multiplayer client, but I probably did it wrong cause it didn't work
-		if (JustSpawned > 0)
-		{
-			//NPC.dontTakeDamage = true;
-			//Main.npc[leftWing].dontTakeDamage = true;
-			//Main.npc[rightWing].dontTakeDamage = true;
-			if (Main.netMode == NetmodeID.Server)
-			{
-				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
-				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
-				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
-			}
-			JustSpawned--;
-		}
-		//if (JustSpawned == 5)
+		// turns out just setting NPC.netAlways in the wing seems to fix it (skeletron prime also does this for the hands)
+		//if (JustSpawned > 0)
 		//{
-		//	Main.NewText(NPC.dontTakeDamage, Color.PaleVioletRed);
+		//	//NPC.dontTakeDamage = true;
+		//	//Main.npc[leftWing].dontTakeDamage = true;
+		//	//Main.npc[rightWing].dontTakeDamage = true;
+		//	if (Main.netMode == NetmodeID.Server)
+		//	{
+		//		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
+		//		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
+		//		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
+		//	}
+		//	JustSpawned--;
 		//}
-		if (JustSpawned == 0)
-		{
-			NPC.dontTakeDamage = false;
-			Main.npc[leftWing].dontTakeDamage = false;
-			Main.npc[rightWing].dontTakeDamage = false;
-			if (Main.netMode == NetmodeID.Server)
-			{
-				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
-				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
-				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
-			}
-			JustSpawned--;
-			//Main.NewText(NPC.dontTakeDamage, Color.PaleVioletRed);
-		}
+		////if (JustSpawned == 5)
+		////{
+		////	Main.NewText(NPC.dontTakeDamage, Color.PaleVioletRed);
+		////}
+		//if (JustSpawned == 0)
+		//{
+		//	NPC.dontTakeDamage = false;
+		//	Main.npc[leftWing].dontTakeDamage = false;
+		//	Main.npc[rightWing].dontTakeDamage = false;
+		//	if (Main.netMode == NetmodeID.Server)
+		//	{
+		//		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
+		//		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
+		//		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
+		//	}
+		//	JustSpawned--;
+		//	//Main.NewText(NPC.dontTakeDamage, Color.PaleVioletRed);
+		//}
 		//ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(NPC.target.ToString()), Color.Lime);
 		//Main.NewText("[" + $"{NPC.ai[0]}" + "]" + "[" + $"{NPC.ai[1]}" + "]" + "[" + $"{NPC.ai[2]}" + "]" + " phase: " + $"{phase}", Main.DiscoColor);
 		float enragedModifier = 1f;
