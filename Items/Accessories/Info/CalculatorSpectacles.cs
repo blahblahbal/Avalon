@@ -142,37 +142,11 @@ public class CalcSpecGlobalItem : GlobalItem
 				// check if the recipe's ingredient matches the drop of the tile
 				if (item.type > ItemID.Count) // this check is pretty much only necessary for hellstone, but I literally could not be bothered fixing it properly rn
 				{
-					if (ExxoAvalonOrigins.ThoriumContentEnabled && item.type == ModContent.ItemType<Material.Ores.Heartstone>() && recipe.TryGetIngredient(ExxoAvalonOrigins.Thorium.Find<ModItem>("LifeQuartz").Type, out Item lq))
-					{
-						if (recipe.createItem.type == ItemID.LifeCrystal)
-						{
-							amtOfOre = lq.stack;
-							barType = recipe.createItem.type;
-							bars = item.stack;
-						}
-					}
-					else if (recipe.TryGetIngredient(item.type, out Item ing))
-					{
-						// if the recipe's required tile is a furnace, Hellforge, or Adamantite Forge(s), or result is is Life Quartz (Thorium)
-						// set barType to the result's type and amtOfOre to the stack size of the ingredient
-						// also set bars to item.stack
-						if (recipe.requiredTile.Contains(TileID.Furnaces) ||
-							recipe.requiredTile.Contains(TileID.Hellforge) ||
-							recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
-							recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()))
-						{
-							// if the ingredient is Fallen Star or Glowing Mushroom, bypass it
-							//if (ing.type is ItemID.FallenStar or ItemID.GlowingMushroom) continue;
-							if (!Data.Sets.Tile.OresToChunks.ContainsValue(item.type))
-							{
-								if (recipe.requiredItem.Count > 1 || item.createTile == -1 || !TileID.Sets.Ore[item.createTile] || ing.stack < 2) continue;
-							}
-							amtOfOre = ing.stack;
-							barType = recipe.createItem.type;
-							bars = item.stack;
-							break;
-						}
-					}
+					var amountAndType = CalcSpec.GetModdedBars(item, amtOfOre, barType);
+					amtOfOre = amountAndType.amountOfOre;
+					barType = amountAndType.barType;
+					bars = item.stack;
+					break;
 				}
 				else
 				{
@@ -276,7 +250,7 @@ internal class CalcSpec : UIState
 						// grab the drops of the tile
 						var drops = t.GetItemDrops(tilepos.X, tilepos.Y);
 
-						var amountAndType = GetModdedBars(drops, amtOfOre, barType);
+						var amountAndType = GetModdedBarsFromTileDrop(drops, amtOfOre, barType);
 						amtOfOre = amountAndType.amountOfOre;
 						barType = amountAndType.barType;
 						if (amtOfOre == 0) return;
@@ -324,7 +298,7 @@ internal class CalcSpec : UIState
 			}
 		}
 	}
-	private (int amountOfOre, int barType) GetModdedBars(IEnumerable<Item>? itemsToCheck, int amountOfOre, int barType)
+	private (int amountOfOre, int barType) GetModdedBarsFromTileDrop(IEnumerable<Item>? itemsToCheck, int amountOfOre, int barType)
 	{
 		// loop through the drops of the tile (will only loop once likely)
 		if (itemsToCheck != null)
@@ -338,7 +312,7 @@ internal class CalcSpec : UIState
 		}
 		return (amountOfOre, barType);
 	}
-	private (int amountOfOre, int barType) GetModdedBars(Item itemToCheck, int amountOfOre, int barType)
+	public static (int amountOfOre, int barType) GetModdedBars(Item itemToCheck, int amountOfOre, int barType)
 	{
 		// loop through all recipes
 		foreach (Recipe recipe in Main.recipe)
@@ -361,7 +335,10 @@ internal class CalcSpec : UIState
 					recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
 					recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()))
 				{
-					if (ing.stack < 2) continue;
+					if (!Data.Sets.Tile.OresToChunks.ContainsValue(ing.type))
+					{
+						if (recipe.requiredItem.Count > 1 || ing.createTile == -1 || !TileID.Sets.Ore[ing.createTile] || ing.stack < 2) continue;
+					}
 					amountOfOre = ing.stack;
 					barType = recipe.createItem.type;
 					break;
