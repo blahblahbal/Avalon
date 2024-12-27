@@ -538,6 +538,7 @@ Mods: {
 			"Stamina Flight Time Restore.DisplayName": Stamina Flight Time Restore
 			"Assign Waypoint.DisplayName": Assign Waypoint
 			"Trigger Genie Effect.DisplayName": Trigger  Genie  Effect
+			"Change Lighting Mode.DisplayName": Change  Lighting  Mode
 		}
 
 		CommonItemTooltip: {
@@ -9569,8 +9570,8 @@ Mods: {
 				Tooltip:
 					'''
 					<left> to select points in the world
-					Once two points have been set, it will clear and print the array of tiles to console
-					Console output can be copied by pressing ctrl+A to select all, then ctrl+C to copy
+					Once two points have been set, it will save the array of tiles to a file
+					Folder containing the files is 'AvalonSavedStructures' in the tModLoader save directory
 					<right> to cancel current selection
 					'''
 			}
