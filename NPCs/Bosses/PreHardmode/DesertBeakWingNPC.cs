@@ -161,7 +161,6 @@ internal class DesertBeakWingNPC : ModNPC
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{
-		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, NPC.whoAmI);
 		if (NPC.life <= 0)
 		{
 			NPC.life = 0;
@@ -185,7 +184,6 @@ internal class DesertBeakWingNPC : ModNPC
 			if (npc.whoAmI != NPC.whoAmI && npc.type == ModContent.NPCType<DesertBeakWingNPC>() && npc.ai[1] == MainBody)
 			{
 				npc.life -= hit.Damage;
-				NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, npc.whoAmI);
 				if (npc.life <= 0)
 				{
 					npc.life = 0;
@@ -197,7 +195,6 @@ internal class DesertBeakWingNPC : ModNPC
 		}
 
 		Main.npc[MainBody].life -= hit.Damage;
-		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, Main.npc[MainBody].whoAmI);
 		if (Main.npc[MainBody].life <= 0)
 		{
 			Main.npc[MainBody].life = 0;

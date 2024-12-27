@@ -617,8 +617,6 @@ public class DesertBeak : ModNPC
 		//ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral($"R life: {Main.npc[rightWing].life} R rLife: {Main.npc[rightWing].realLife}"), Color.LightBlue);
 		//Main.NewText($"L life: {Main.npc[leftWing].life} L rLife: {Main.npc[leftWing].realLife}");
 		//Main.NewText($"R life: {Main.npc[rightWing].life} R rLife: {Main.npc[rightWing].realLife}");
-		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftWing);
-		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightWing);
 		if (Main.npc[leftWing].life <= 0)
 		{
 			Main.npc[leftWing].checkDead();
