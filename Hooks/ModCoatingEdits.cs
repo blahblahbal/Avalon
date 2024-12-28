@@ -214,10 +214,10 @@ namespace Avalon.Hooks
 			{
 				for (int i = firstTileY; i < lastTileY + 4; i++)
 				{
-					Tile tile = Main.tile[j, i];
+					Tile tile = Framing.GetTileSafely(j, i);
 					if (tile != null)
 					{
-						if (IsActuated == null)
+						if (IsActuated == null || IsActuated.Length != Main.maxTilesX || IsActuated[1].Length != Main.maxTilesY)
 						{
 							ResizeActuators(Main.maxTilesX, Main.maxTilesY);
 						}
@@ -242,7 +242,7 @@ namespace Avalon.Hooks
 				for (int i = firstTileY; i < lastTileY + 4; i++)
 				{
 					Tile tile = Main.tile[j, i];
-					if (tile != null)
+					if (tile != null && IsActuated != null)
 					{
 						tile.IsActuated = IsActuated[j][i];
 					}
