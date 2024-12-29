@@ -3,6 +3,7 @@ using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -285,7 +286,39 @@ public class Utils
         return 0;
     }
 
-    public static int CaesiumTileCheck(int posX, int posY, int modifier = 1)
+	public static bool Place_Check8WayMatchingTile(int posX, int posY, ushort place, params (ushort tile, float chance)[] check)
+	{
+		float aggregateChance = 0f;
+		for (int i = -1; i < 2; i++)
+		{
+			for (int j = -1; j < 2; j++)
+			{
+				if (!(i == 0 && j == 0))
+				{
+					Tile t = Framing.GetTileSafely(posX + i, posY + j);
+					bool checkCheck = false;
+					foreach (var (tile, chance) in check)
+					{
+						if (t.TileType == tile)
+						{
+							checkCheck = true;
+							aggregateChance += chance;
+						}
+					}
+					if (checkCheck == false) return false;
+				}
+			}
+		}
+		if (WorldGen.genRand.NextFloat(8f) < (8f - aggregateChance)) return false;
+
+		Tile t2 = Framing.GetTileSafely(posX, posY);
+		t2.HasTile = true;
+		t2.TileType = place;
+		return true;
+	}
+
+
+	public static int CaesiumTileCheck(int posX, int posY, int modifier = 1)
     {
         if (modifier == -1)
         {
@@ -458,7 +491,7 @@ public class Utils
 				{
 					if (WorldGen.genRand.NextFloat(1f) < slopeChance)
 					{
-						Tile.SmoothSlope(k, l);
+						if (WorldGen.InWorld(k, l, 2)) Tile.SmoothSlope(k, l);
 					}
 				}
 			}
