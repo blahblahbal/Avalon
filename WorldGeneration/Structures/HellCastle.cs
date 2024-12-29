@@ -57,7 +57,7 @@ internal class Hellcastle
         // add platforms in various places
         AddPlatforms(x, y, 400, 150);
         AddPaintings(x, y, 400, 150);
-        Utils.AddSpikes(x, y, 400, 150, 20, ModContent.TileType<Tiles.VenomSpike>());
+        Utils.AddSpikes(x, y, 400, 150, 50, ModContent.TileType<Tiles.VenomSpike>(), WorldGen.genRand.Next(5, 10));
         // unsmooth tiles such as the spikes and impervious bricks
         UnsmoothTiles(x, y, 400, 150);
         // place up to 3 devil's scythes on the shelves/platforms

@@ -28,7 +28,7 @@ public class Utils
     /// <param name="height">The height of the structure.</param>
     /// <param name="countTo">A number used to determine how often spike traps should be placed.</param>
     /// <param name="tileType">The type of spike tile to be placed. Defaults to 0; you should NOT be using 0.</param>
-    public static void AddSpikes(int x, int y, int width, int height, int countTo = 20, int tileType = 0)
+    public static void AddSpikes(int x, int y, int width, int height, int countTo = 20, int tileType = 0, int spikeWidth = -1)
     {
         if (tileType == 0) return;
         int counter = 0;
@@ -52,7 +52,9 @@ public class Utils
                             counter++;
                             if (counter > countTo)
                             {
-                                GenerateSpikeTrap(x + i, y + j, WorldGen.genRand.Next(15, 21), tileType);
+								int defaultSpikeWidth = spikeWidth == -1 ? WorldGen.genRand.Next(15, 21) : spikeWidth;
+
+								GenerateSpikeTrap(x + i, y + j, defaultSpikeWidth, tileType);
                                 counter = 0;
                                 countTo = countToSaved;
                             }
@@ -61,8 +63,10 @@ public class Utils
                         {
                             counter++;
                             if (counter > countTo)
-                            {
-                                GenerateSpikeTrap(x + i, y + j, WorldGen.genRand.Next(15, 21), tileType);
+							{
+								int defaultSpikeWidth = spikeWidth == 1 ? WorldGen.genRand.Next(15, 21) : spikeWidth;
+
+								GenerateSpikeTrap(x + i, y + j, defaultSpikeWidth, tileType);
                                 counter = 0;
                                 countTo = countToSaved;
                             }
