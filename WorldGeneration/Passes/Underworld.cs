@@ -27,10 +27,11 @@ internal class Underworld : GenPass
 			int caesiumXPosRight = Main.maxTilesX - (Main.maxTilesX / 5);
 			int caesiumMaxRight = Main.maxTilesX - 20;
 
-			bool smallWorld = Main.maxTilesY < WorldGen.WorldSizeMediumY;
-			bool mediumWorld = Main.maxTilesY is >= WorldGen.WorldSizeMediumY and < WorldGen.WorldSizeLargeY;
+			//bool smallWorld = Main.maxTilesY < WorldGen.WorldSizeMediumY;
+			//bool mediumWorld = Main.maxTilesY is >= WorldGen.WorldSizeMediumY and < WorldGen.WorldSizeLargeY;
 
-			int spikeLength = smallWorld ? 20 : mediumWorld ? 23 : 26;
+			//int spikeLength = smallWorld ? 22 : 24;
+			int spikeLength = 24;
 			int spikeWidth = 13;
 
 			if (Main.drunkWorld)
@@ -106,10 +107,10 @@ internal class Underworld : GenPass
 									{
 										z = Utils.CaesiumTileCheck(q, z, -1);
 										z += WorldGen.genRand.Next(12) + 4;
-										int height = WorldGen.genRand.Next(spikeLength - 7, spikeLength);
+										int height = WorldGen.genRand.Next(spikeLength - 8, spikeLength);
 										int width = WorldGen.genRand.Next(spikeWidth - 5, spikeWidth);
 										MakeSpike(q, z, height, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
-										MakeSpike(q, z, height - 3, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
+										MakeSpike(q, z, height - WorldGen.genRand.Next(1, 3), width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
 										//if (WorldGen.genRand.NextBool(3))
 										//{
 										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
@@ -135,10 +136,10 @@ internal class Underworld : GenPass
 									if (q % WorldGen.genRand.Next(10, 15) == 0)
 									{
 										z = Utils.CaesiumTileCheck(q, z, 1);
-										int height = WorldGen.genRand.Next(spikeLength - 7, spikeLength);
+										int height = WorldGen.genRand.Next(spikeLength - 8, spikeLength);
 										int width = WorldGen.genRand.Next(spikeWidth - 5, spikeWidth);
 										MakeSpike(q, z, height, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
-										MakeSpike(q, z, height - 3, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
+										MakeSpike(q, z, height - WorldGen.genRand.Next(2, 4), width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
 										//if (WorldGen.genRand.NextBool(3))
 										//{
 										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
@@ -151,10 +152,21 @@ internal class Underworld : GenPass
 							//	MakeSpike(q, z, WorldGen.genRand.Next(5, 10), WorldGen.genRand.Next(2, 5), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
 							//}
 						}
-						if (WorldGen.genRand.NextBool(50))
-							Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
+						//if (WorldGen.genRand.NextBool(50))
+						//	Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
 					}
 				}
+
+				//for (int q = caesiumMaxLeft; q < caesiumLeftSidePosXLeft; q++)
+				//{
+				//	for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+				//	{
+				//		if (!WorldGen.genRand.NextBool(5) && Main.tile[q, z].TileType == (ushort)ModContent.TileType<CaesiumCrystal>())
+				//		{
+				//			Utils.Place_Check8WayMatchingTile(q, z, (ushort)ModContent.TileType<CaesiumOre>(), ((ushort)ModContent.TileType<CaesiumCrystal>(), 0.075f), ((ushort)ModContent.TileType<CaesiumOre>(), 1.75f));
+				//		}
+				//	}
+				//}
 
 				for (int q = caesiumMaxLeft; q < caesiumLeftSidePosXLeft; q++)
 				{
@@ -240,10 +252,10 @@ internal class Underworld : GenPass
 									{
 										z = Utils.CaesiumTileCheck(q, z, -1);
 										z += WorldGen.genRand.Next(12) + 4;
-										int height = WorldGen.genRand.Next(spikeLength - 7, spikeLength);
+										int height = WorldGen.genRand.Next(spikeLength - 8, spikeLength);
 										int width = WorldGen.genRand.Next(spikeWidth - 5, spikeWidth);
 										MakeSpike(q, z, height, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
-										MakeSpike(q, z, height - 3, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
+										MakeSpike(q, z, height - WorldGen.genRand.Next(1, 3), width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
 										//if (WorldGen.genRand.NextBool(3))
 										//{
 										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
@@ -270,10 +282,10 @@ internal class Underworld : GenPass
 									{
 										z = Utils.CaesiumTileCheck(q, z, 1);
 										// 15, 22 / 8, 13
-										int height = WorldGen.genRand.Next(spikeLength - 7, spikeLength);
+										int height = WorldGen.genRand.Next(spikeLength - 8, spikeLength);
 										int width = WorldGen.genRand.Next(spikeWidth - 5, spikeWidth);
 										MakeSpike(q, z, height, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
-										MakeSpike(q, z, height - 3, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
+										MakeSpike(q, z, height - WorldGen.genRand.Next(2, 4), width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
 										//if (WorldGen.genRand.NextBool(3))
 										//{
 										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
@@ -286,10 +298,21 @@ internal class Underworld : GenPass
 							//	MakeSpike(q, z, WorldGen.genRand.Next(5, 10), WorldGen.genRand.Next(2, 5), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
 							//}
 						}
-						if (WorldGen.genRand.NextBool(50))
-							Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
+						//if (WorldGen.genRand.NextBool(50))
+						//	Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
 					}
 				}
+				
+				//for (int q = caesiumXPosRight; q < caesiumMaxRight; q++)
+				//{
+				//	for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
+				//	{
+				//		if (!WorldGen.genRand.NextBool(5) && Main.tile[q, z].TileType == (ushort)ModContent.TileType<CaesiumCrystal>())
+				//		{
+				//			Utils.Place_Check8WayMatchingTile(q, z, (ushort)ModContent.TileType<CaesiumOre>(), ((ushort)ModContent.TileType<CaesiumCrystal>(), 0.075f), ((ushort)ModContent.TileType<CaesiumOre>(), 1.75f));
+				//		}
+				//	}
+				//}
 
 				for (int q = caesiumXPosLeft; q < caesiumXPosRight; q++)
 				{
@@ -474,6 +497,8 @@ internal class Underworld : GenPass
 		// Initial assignment of last position
 		Vector2 lastPos = new(x, y);
 
+		float radiusMult = WorldGen.genRand.NextFloat(0.2f, 0.35f);
+
 		// Loop until length
 		for (int q = 1; q <= length; q++)
 		{
@@ -490,70 +515,153 @@ internal class Underworld : GenPass
 			// Put a circle between the last point and the current
 			int betweenXPos = (int)(lastPos.X + x) / 2;
 			int betweenYPos = (int)(lastPos.Y + y) / 2;
-			float radiusTemp = (length - q) * 0.4f;
+			float radiusTemp = (length - q) * radiusMult;
 			int radius = radiusTemp > 1f ? (int)radiusTemp : (int)MathF.Round(radiusTemp);
-			float radiusNextTemp = MathHelper.Clamp(radiusTemp - 0.4f, 0, radiusTemp);
+			float radiusNextTemp = MathHelper.Clamp(radiusTemp - radiusMult, 0, radiusTemp);
 			int radiusNext = radiusNextTemp > 1f ? (int)radiusNextTemp : (int)MathF.Round(radiusNextTemp);
 			//if (radius == 0) radius = 1;
 			//Main.NewText($"{radius} {radiusTemp} {radiusNext}");
 			if (radiusNext > 1)
 			{
-				WorldGeneration.Utils.MakeCircle2(betweenXPos, betweenYPos, radius, borderType, centerType, 0.5f);
+				//Utils.MakeCircle2(betweenXPos, betweenYPos, radius, borderType, centerType, 0.5f);
+				Utils.MakeCircle2(betweenXPos, betweenYPos, radius, borderType, centerType, 0.5f);
+				Tile t = Framing.GetTileSafely(betweenXPos, betweenYPos);
+				t.HasTile = true;
+				t.TileType = centerType;
 
 				// Make a square/circle of the tile
-				WorldGeneration.Utils.MakeCircle2(x, y, radius, borderType, centerType, 0.5f);
+				//Utils.MakeCircle2(x, y, radius, borderType, centerType, 0.5f);
+				Utils.MakeCircle2(x, y, radius, borderType, centerType, 0.5f);
+				Tile t2 = Framing.GetTileSafely(x, y);
+				t2.HasTile = true;
+				t2.TileType = centerType;
 			}
 			else
 			{
-				if ((direction == 1 || q != length) && (direction == 1 ? MathHelper.Max(betweenXPos, x) - MathHelper.Min(betweenXPos, x) != 0 : MathHelper.Max(betweenXPos, x) - MathHelper.Min(betweenXPos, x) == 0))
-				{
-					betweenXPos -= 1;
-					//Main.NewText($"{betweenXPos - x} {x - betweenXPos}", Main.DiscoColor);
-				}
+				//if (q != length && (direction == 1 ? MathHelper.Max(betweenXPos, x) - MathHelper.Min(betweenXPos, x) != 0 : MathHelper.Max(betweenXPos, x) - MathHelper.Min(betweenXPos, x) == 0))
+				//{
+				//	betweenXPos += modifier;
+				//	//Main.NewText($"{betweenXPos - x} {x - betweenXPos}", Main.DiscoColor);
+				//}
 
-				for (int i = 0; i < radius + 1 + (int)(radiusTemp - 0.4f); i++)
+				for (int i = 0; i < radius + 1 + (int)(radiusTemp - radiusMult); i++)
 				{
 					int betweenXPosMod = betweenXPos - i * modifier;
-					if (direction == 1 && q == length)
+					int xMod = x - i * modifier;
+					if (q == length && betweenYPos == lastPos.Y)
 					{
-						Tile betweenPosUp = Framing.GetTileSafely(betweenXPosMod, betweenYPos - 1);
-						if (betweenPosUp.TileType != borderType)
+						betweenYPos += direction;
+					}
+					//if (q == length)
+					//{
+					// stupid dumb checks for downwards spikes because they keep generating with disconnected tips
+					Tile betweenPosYNext = Framing.GetTileSafely(betweenXPosMod, betweenYPos - direction);
+					if (betweenPosYNext.TileType != borderType)
+					{
+						Tile betweenPosYNextL2 = Framing.GetTileSafely(betweenXPosMod - 2, betweenYPos - direction);
+						Tile betweenPosYNextL = Framing.GetTileSafely(betweenXPosMod - 1, betweenYPos - direction);
+						Tile betweenPosYNextR = Framing.GetTileSafely(betweenXPosMod + 1, betweenYPos - direction);
+						Tile betweenPosYNextR2 = Framing.GetTileSafely(betweenXPosMod + 2, betweenYPos - direction);
+						if (betweenPosYNextL.TileType == borderType)
 						{
-							Tile betweenPosUpL = Framing.GetTileSafely(betweenXPosMod - 1, betweenYPos - 1);
-							Tile betweenPosUpR = Framing.GetTileSafely(betweenXPosMod + 1, betweenYPos - 1);
-							if (betweenPosUpL.TileType == borderType)
-							{
-								betweenXPosMod -= 1;
-							}
-							else if (betweenPosUpR.TileType == borderType)
-							{
-								betweenXPosMod += 1;
-							}
-
+							betweenXPosMod -= 1;
+						}
+						else if (betweenPosYNextR.TileType == borderType)
+						{
+							betweenXPosMod += 1;
+						}
+						else if (betweenPosYNextL2.TileType == borderType)
+						{
+							betweenXPosMod -= 2;
+						}
+						else if (betweenPosYNextR2.TileType == borderType)
+						{
+							betweenXPosMod += 2;
 						}
 					}
+					if (q == length - 1)
+					{
+						Tile yNext = Framing.GetTileSafely(xMod, y - direction);
+						if (yNext.TileType != borderType)
+						{
+							Tile yNextL = Framing.GetTileSafely(xMod - 1, y - direction);
+							Tile yNextR = Framing.GetTileSafely(xMod + 1, y - direction);
+							if (yNextL.TileType == borderType)
+							{
+								xMod -= 1;
+							}
+							else if (yNextR.TileType == borderType)
+							{
+								xMod += 1;
+							}
+						}
+					}
+					//}
 					Tile t = Framing.GetTileSafely(betweenXPosMod, betweenYPos);
 					t.HasTile = true;
-					t.IsHalfBlock = false;
-					t.Slope = SlopeType.Solid;
+					//t.IsHalfBlock = false;
+					//t.Slope = SlopeType.Solid;
 					t.TileType = borderType;
-					Tile.SmoothSlope(betweenXPosMod, betweenYPos);
-					WorldGen.SquareTileFrame(betweenXPosMod, betweenYPos);
+					if (WorldGen.InWorld(betweenXPosMod, betweenYPos, 2)) Tile.SmoothSlope(betweenXPosMod, betweenYPos);
+					if (q == length)
+					{
+						if (direction == 1 && modifier == -1)
+							t.Slope = SlopeType.SlopeUpLeft;
+						if (direction == 1 && modifier == 1)
+							t.Slope = SlopeType.SlopeUpRight;
+
+						if (direction == -1 && modifier == -1)
+							t.Slope = SlopeType.SlopeDownLeft;
+						if (direction == -1 && modifier == 1)
+							t.Slope = SlopeType.SlopeDownRight;
+					}
+					//WorldGen.SquareTileFrame(betweenXPosMod, betweenYPos);
 
 					if (q != length)
 					{
-						int xMod = x - i * modifier;
 						Tile t2 = Framing.GetTileSafely(xMod, y);
 						t2.HasTile = true;
-						t2.IsHalfBlock = false;
-						t2.Slope = SlopeType.Solid;
+						//t2.IsHalfBlock = false;
+						//t2.Slope = SlopeType.Solid;
 						t2.TileType = borderType;
-						Tile.SmoothSlope(xMod, y);
-						WorldGen.SquareTileFrame(xMod, y);
+						if (WorldGen.InWorld(xMod, y, 2)) Tile.SmoothSlope(xMod, y);
+						//WorldGen.SquareTileFrame(xMod, y);
 						//Dust.QuickDust(new Point(xMod, y), Color.Blue);
 						//Main.NewText(MathHelper.Max(betweenXPos, x) - MathHelper.Min(betweenXPos, x), Main.DiscoColor);
 					}
 					//Dust.QuickDust(new Point(betweenXPosMod, betweenYPos), Color.Red);
+				}
+			}
+
+			for (int k = x - radius; k <= x + radius; k++)
+			{
+				if (direction == 1)
+				{
+					for (int l = y - radius; l <= y + radius; l++)
+					{
+						if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius && radius > 1)
+						{
+							if (k > 0 && l > 0)
+							{
+								Utils.Place_Check8WayMatchingTile(k, l, (ushort)ModContent.TileType<CaesiumOre>(), ((ushort)ModContent.TileType<CaesiumCrystal>(), 0.035f), ((ushort)ModContent.TileType<CaesiumOre>(), 1f));
+								//WorldGen.SquareTileFrame(k, l);
+							}
+						}
+					}
+				}
+				else
+				{
+					for (int l = y + radius; l >= y - radius; l--)
+					{
+						if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius && radius > 1)
+						{
+							if (k > 0 && l > 0)
+							{
+								Utils.Place_Check8WayMatchingTile(k, l, (ushort)ModContent.TileType<CaesiumOre>(), ((ushort)ModContent.TileType<CaesiumCrystal>(), 0.035f), ((ushort)ModContent.TileType<CaesiumOre>(), 1f));
+								//WorldGen.SquareTileFrame(k, l);
+							}
+						}
+					}
 				}
 			}
 
