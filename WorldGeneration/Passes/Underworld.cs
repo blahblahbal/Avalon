@@ -3,6 +3,7 @@ using Avalon.Tiles;
 using Avalon.Tiles.Ores;
 using Avalon.WorldGeneration.Structures;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -25,6 +26,13 @@ internal class Underworld : GenPass
 			int caesiumXPosLeft = Main.maxTilesX - (Main.maxTilesX / 5) - 15;
 			int caesiumXPosRight = Main.maxTilesX - (Main.maxTilesX / 5);
 			int caesiumMaxRight = Main.maxTilesX - 20;
+
+			bool smallWorld = Main.maxTilesY < WorldGen.WorldSizeMediumY;
+			bool mediumWorld = Main.maxTilesY is >= WorldGen.WorldSizeMediumY and < WorldGen.WorldSizeLargeY;
+
+			int spikeLength = smallWorld ? 20 : mediumWorld ? 23 : 26;
+			int spikeWidth = 13;
+
 			if (Main.drunkWorld)
 			{
 				caesiumXPosLeft = Main.maxTilesX - (Main.maxTilesX / 3) - 15;
@@ -97,15 +105,19 @@ internal class Underworld : GenPass
 									if (q % WorldGen.genRand.Next(30, 45) == 0)
 									{
 										z = Utils.CaesiumTileCheck(q, z, -1);
-										z += WorldGen.genRand.Next(12);
-										MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
+										z += WorldGen.genRand.Next(12) + 4;
+										MakeSpike(q, z, WorldGen.genRand.Next(spikeLength - 7, spikeLength), WorldGen.genRand.Next(spikeWidth - 5, spikeWidth), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
 										//if (WorldGen.genRand.NextBool(3))
 										//{
-										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
+										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
 										//}
 									}
 								}
 							}
+							//if (WorldGen.genRand.NextBool(250))
+							//{
+							//	MakeSpike(q, z + WorldGen.genRand.Next(12, 90), WorldGen.genRand.Next(5, 14), WorldGen.genRand.Next(2, 7), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumOre>(), WorldGen.genRand.NextFromList(-1, 1));
+							//}
 						}
 						// down spikes
 						if (z < Main.maxTilesY - 185 && z > Main.maxTilesY - 195)
@@ -120,14 +132,18 @@ internal class Underworld : GenPass
 									if (q % WorldGen.genRand.Next(10, 15) == 0)
 									{
 										z = Utils.CaesiumTileCheck(q, z, 1);
-										MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
+										MakeSpike(q, z, WorldGen.genRand.Next(spikeLength - 7, spikeLength), WorldGen.genRand.Next(spikeWidth - 5, spikeWidth), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
 										//if (WorldGen.genRand.NextBool(3))
 										//{
-										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
+										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
 										//}
 									}
 								}
 							}
+							//if (WorldGen.genRand.NextBool(500))
+							//{
+							//	MakeSpike(q, z, WorldGen.genRand.Next(5, 10), WorldGen.genRand.Next(2, 5), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
+							//}
 						}
 						if (WorldGen.genRand.NextBool(50))
 							Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
@@ -217,15 +233,19 @@ internal class Underworld : GenPass
 									if (q % WorldGen.genRand.Next(30, 45) == 0)
 									{
 										z = Utils.CaesiumTileCheck(q, z, -1);
-										z += WorldGen.genRand.Next(12);
-										MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
+										z += WorldGen.genRand.Next(12) + 4;
+										MakeSpike(q, z, WorldGen.genRand.Next(spikeLength - 7, spikeLength), WorldGen.genRand.Next(spikeWidth - 5, spikeWidth), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
 										//if (WorldGen.genRand.NextBool(3))
 										//{
-										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), -1);
+										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
 										//}
 									}
 								}
 							}
+							//if (WorldGen.genRand.NextBool(250))
+							//{
+							//	MakeSpike(q, z + WorldGen.genRand.Next(12, 90), WorldGen.genRand.Next(5, 14), WorldGen.genRand.Next(2, 7), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumOre>(), WorldGen.genRand.NextFromList(-1, 1));
+							//}
 						}
 						// down spikes
 						if (z < Main.maxTilesY - 185 && z > Main.maxTilesY - 195)
@@ -241,14 +261,18 @@ internal class Underworld : GenPass
 									{
 										z = Utils.CaesiumTileCheck(q, z, 1);
 										// 15, 22 / 8, 13
-										MakeSpike(q, z, WorldGen.genRand.Next(15, 22), WorldGen.genRand.Next(8, 13), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
+										MakeSpike(q, z, WorldGen.genRand.Next(spikeLength - 7, spikeLength), WorldGen.genRand.Next(spikeWidth - 5, spikeWidth), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
 										//if (WorldGen.genRand.NextBool(3))
 										//{
-										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumCrystal>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
+										//    MakeSpike(q, z, WorldGen.genRand.Next(20, 25), WorldGen.genRand.Next(6, 11), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
 										//}
 									}
 								}
 							}
+							//if (WorldGen.genRand.NextBool(500))
+							//{
+							//	MakeSpike(q, z, WorldGen.genRand.Next(5, 10), WorldGen.genRand.Next(2, 5), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumOre>(), 1);
+							//}
 						}
 						if (WorldGen.genRand.NextBool(50))
 							Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
@@ -410,81 +434,141 @@ internal class Underworld : GenPass
         }
     }
 
-    /// <summary>
-    /// Makes a spike at the given coordinates.
-    /// </summary>
-    /// <param name="x">The X coordinate.</param>
-    /// <param name="y">The Y coordinate.</param>
-    /// <param name="length">The height/tallness of the spike to generate.</param>
-    /// <param name="width">The width/thickness of the spike to generate.</param>
-    /// <param name="direction">The vertical direction of the spike; 1 is down, -1 is up.</param>
-    public static void MakeSpike(int x, int y, int length, int width, ushort centerType, ushort borderType, int direction = 1)
-    {
-        // Store the x and y in new vars
-        int startX = x;
-        int startY = y;
+	/// <summary>
+	/// Makes a spike at the given coordinates.
+	/// </summary>
+	/// <param name="x">The X coordinate.</param>
+	/// <param name="y">The Y coordinate.</param>
+	/// <param name="length">The height/tallness of the spike to generate.</param>
+	/// <param name="width">The width/thickness of the spike to generate.</param>
+	/// <param name="direction">The vertical direction of the spike; 1 is down, -1 is up.</param>
+	public static void MakeSpike(int x, int y, int length, int width, ushort centerType, ushort borderType, int direction = 1)
+	{
+		// Store the x and y in new vars
+		int startX = x;
+		int startY = y;
 
-        // Define variables to determine how many tiles to travel in one direction before changing direction
-        int howManyTimes = 0;
-        int maxTimes = WorldGen.genRand.Next(4) + 2;
-        int modifier = 1;
+		// Define variables to determine how many tiles to travel in one direction before changing direction
+		int howManyTimes = 0;
+		int maxTimes = WorldGen.genRand.Next(4) + 2;
+		int modifier = 1;
 
-        // Change direction (left/right) of the spike before generating
-        if (WorldGen.genRand.NextBool())
-        {
-            modifier *= -1;
-        }
+		// Change direction (left/right) of the spike before generating
+		if (WorldGen.genRand.NextBool())
+		{
+			modifier *= -1;
+		}
 
-        // Initial assignment of last position
-        Vector2 lastPos = new(x, y);
+		// Initial assignment of last position
+		Vector2 lastPos = new(x, y);
 
-        // Loop until length
-        for (int q = 1; q <= length; q++)
-        {
-            // Grab the distance between the start and the current position
-            float distFromStart = Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y));
+		// Loop until length
+		for (int q = 1; q <= length; q++)
+		{
+			// Grab the distance between the start and the current position
+			float distFromStart = Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y));
 
-            // If the distance is divisible by 4 and the width is less than 5, reduce the width
-            int w = width;
-            if ((int)distFromStart % 4 == 0 || w < 5)
-            {
-                width--;
-            }
+			// If the distance is divisible by 4 and the width is less than 5, reduce the width
+			int w = width;
+			if ((int)distFromStart % 4 == 0 || w < 5)
+			{
+				width--;
+			}
 
-            // Put a circle between the last point and the current
-            int betweenXPos = (int)(lastPos.X + x) / 2;
-            int betweenYPos = (int)(lastPos.Y + y) / 2;
+			// Put a circle between the last point and the current
+			int betweenXPos = (int)(lastPos.X + x) / 2;
+			int betweenYPos = (int)(lastPos.Y + y) / 2;
+			float radiusTemp = (length - q) * 0.4f;
+			int radius = radiusTemp > 1f ? (int)radiusTemp : (int)MathF.Round(radiusTemp);
+			float radiusNextTemp = MathHelper.Clamp(radiusTemp - 0.4f, 0, radiusTemp);
+			int radiusNext = radiusNextTemp > 1f ? (int)radiusNextTemp : (int)MathF.Round(radiusNextTemp);
+			//if (radius == 0) radius = 1;
+			//Main.NewText($"{radius} {radiusTemp} {radiusNext}");
+			if (radiusNext > 1)
+			{
+				WorldGeneration.Utils.MakeCircle2(betweenXPos, betweenYPos, radius, borderType, centerType, 0.5f);
 
-            // weird, centerType and borderType are swapped
-            Utils.MakeCircle2(betweenXPos, betweenYPos, (int)((length - q) * 0.4f), centerType, borderType);
+				// Make a square/circle of the tile
+				WorldGeneration.Utils.MakeCircle2(x, y, radius, borderType, centerType, 0.5f);
+			}
+			else
+			{
+				if ((direction == 1 || q != length) && (direction == 1 ? MathHelper.Max(betweenXPos, x) - MathHelper.Min(betweenXPos, x) != 0 : MathHelper.Max(betweenXPos, x) - MathHelper.Min(betweenXPos, x) == 0))
+				{
+					betweenXPos -= 1;
+					//Main.NewText($"{betweenXPos - x} {x - betweenXPos}", Main.DiscoColor);
+				}
 
-            // Make a square/circle of the tile
-            Utils.MakeCircle2(x, y, (int)((length - q) * 0.4f), centerType, borderType);
+				for (int i = 0; i < radius + 1 + (int)(radiusTemp - 0.4f); i++)
+				{
+					int betweenXPosMod = betweenXPos - i * modifier;
+					if (direction == 1 && q == length)
+					{
+						Tile betweenPosUp = Framing.GetTileSafely(betweenXPosMod, betweenYPos - 1);
+						if (betweenPosUp.TileType != borderType)
+						{
+							Tile betweenPosUpL = Framing.GetTileSafely(betweenXPosMod - 1, betweenYPos - 1);
+							Tile betweenPosUpR = Framing.GetTileSafely(betweenXPosMod + 1, betweenYPos - 1);
+							if (betweenPosUpL.TileType == borderType)
+							{
+								betweenXPosMod -= 1;
+							}
+							else if (betweenPosUpR.TileType == borderType)
+							{
+								betweenXPosMod += 1;
+							}
 
-            // Assign the last position to the current position
-            lastPos = new(x, y);
+						}
+					}
+					Tile t = Framing.GetTileSafely(betweenXPosMod, betweenYPos);
+					t.HasTile = true;
+					t.IsHalfBlock = false;
+					t.Slope = SlopeType.Solid;
+					t.TileType = borderType;
+					Tile.SmoothSlope(betweenXPosMod, betweenYPos);
+					WorldGen.SquareTileFrame(betweenXPosMod, betweenYPos);
 
-            // Make the spike go in the opposite direction after a certain amount of tiles
-            howManyTimes++;
-            if (howManyTimes % maxTimes == 0)
-            {
-                modifier *= -1;
-                howManyTimes = 0;
-                maxTimes = WorldGen.genRand.Next(4) + 2;
-            }
+					if (q != length)
+					{
+						int xMod = x - i * modifier;
+						Tile t2 = Framing.GetTileSafely(xMod, y);
+						t2.HasTile = true;
+						t2.IsHalfBlock = false;
+						t2.Slope = SlopeType.Solid;
+						t2.TileType = borderType;
+						Tile.SmoothSlope(xMod, y);
+						WorldGen.SquareTileFrame(xMod, y);
+						//Dust.QuickDust(new Point(xMod, y), Color.Blue);
+						//Main.NewText(MathHelper.Max(betweenXPos, x) - MathHelper.Min(betweenXPos, x), Main.DiscoColor);
+					}
+					//Dust.QuickDust(new Point(betweenXPosMod, betweenYPos), Color.Red);
+				}
+			}
 
-            // Add to the x to make the spike turn/curve in a direction
-            x += (WorldGen.genRand.Next(2) + 1) * modifier; // * (maxTimes / (WorldGen.genRand.Next(2) + 1));
+			// Assign the last position to the current position
+			lastPos = new(x, y);
 
-            // Add a bit to the y coord to make it go up or down depending on the parameter
-            if (w > 3)
-            {
-                y += (WorldGen.genRand.Next(3) + 2) * direction;
-            }
-            else
-            {
-                y += 1 * direction;
-            }
-        }
-    }
+			// Make the spike go in the opposite direction after a certain amount of tiles
+			howManyTimes++;
+			if (howManyTimes % maxTimes == 0 && radiusNext > 3)
+			{
+				modifier *= -1;
+				howManyTimes = 0;
+				maxTimes = WorldGen.genRand.Next(4) + 2;
+			}
+
+			// Add to the x to make the spike turn/curve in a direction
+			x += ((radiusNext > 1 ? WorldGen.genRand.Next(2) + 1 : y != startY + length * direction ? WorldGen.genRand.Next(2) : 0)) * modifier; // * (maxTimes / (WorldGen.genRand.Next(2) + 1));
+
+			// Add a bit to the y coord to make it go up or down depending on the parameter
+			if (w > 3)
+			{
+				y += ((radiusNext > 2 ? WorldGen.genRand.Next(3) + 2 : 1)) * direction;
+			}
+			else
+			{
+				y += 1 * direction;
+			}
+		}
+	}
 }

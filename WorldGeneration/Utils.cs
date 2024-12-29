@@ -368,7 +368,6 @@ public class Utils
             for (int j = y - r; j < y + r; j++)
             {
                 //Main.tile[i, j].LiquidAmount = 0;
-                SquareTileFrame(i, j, true, lh);
             }
         }
     }
@@ -386,7 +385,6 @@ public class Utils
         {
             for (int j = y; j < y + yr; j++)
             {
-                SquareTileFrame(i, j, true, lh);
             }
         }
 	}
@@ -429,7 +427,7 @@ public class Utils
             }
         }
     }
-    public static void MakeCircle2(int x, int y, int radius, int outerType, int innerType)
+    public static void MakeCircle2(int x, int y, int radius, int outerType, int innerType, float slopeChance = 0f)
     {
         for (int k = x - radius; k <= x + radius; k++)
         {
@@ -446,13 +444,26 @@ public class Utils
                             t.IsHalfBlock = false;
                             t.Slope = SlopeType.Solid;
                             Main.tile[k, l].TileType = (ushort)outerType;
-                            WorldGen.SquareTileFrame(k, l);
+							WorldGen.SquareTileFrame(k, l);
                         }
                     }
                 }
             }
-        }
-        for (int k = x - radius; k <= x + radius; k++)
+		}
+		if (slopeChance != 0)
+		{
+			for (int k = x - radius; k <= x + radius; k++)
+			{
+				for (int l = y - radius; l <= y + radius; l++)
+				{
+					if (WorldGen.genRand.NextFloat(1f) < slopeChance)
+					{
+						Tile.SmoothSlope(k, l);
+					}
+				}
+			}
+		}
+		for (int k = x - radius; k <= x + radius; k++)
         {
             for (int l = y - radius; l <= y + radius; l++)
             {
