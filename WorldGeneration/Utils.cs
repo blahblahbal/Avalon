@@ -746,13 +746,15 @@ public class Utils
         return true;
     }
 
-    public static bool IsValidPlacementForPaintingInHellcastle(int x, int y, int width, int height)
+    public static bool IsValidPlacementForPaintingInHellcastle(int x, int y, int width, int height, Rectangle excludedZone)
     {
         for (int i = x; i < x + width; i++)
         {
             for (int j = y; j < y + height; j++)
-            {
-                if (Main.tile[i, j].WallType == ModContent.WallType<Walls.ImperviousBrickWallBrownUnsafe>() ||
+			{
+				if (excludedZone.Contains(i, j)) return false;
+
+				if (Main.tile[i, j].WallType == ModContent.WallType<Walls.ImperviousBrickWallBrownUnsafe>() ||
                     Main.tile[i, j].WallType == ModContent.WallType<Walls.ImperviousBrickWallEctoUnsafe>() ||
                     Main.tile[i, j].WallType == ModContent.WallType<Walls.ImperviousBrickWallWhiteUnsafe>())
                 {

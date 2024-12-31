@@ -13,8 +13,8 @@ internal class Hellcastle
 {
     public static void GenerateHellcastle(int x, int y)
     {
-        Vector2 castleBottomCenterL = new Vector2(x + 199, y + 150);
-        Vector2 castleBottomCenterR = new Vector2(x + 200, y + 150);
+        Point castleBottomCenterL = new Point(x + 199, y + 150);
+		Point castleBottomCenterR = new Point(x + 200, y + 150);
 
         MakeBox(x, y, 400, 150, ModContent.TileType<Tiles.ImperviousBrick>(), (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>());
         MakePath(x, y, -1);
@@ -43,20 +43,25 @@ internal class Hellcastle
             }
         }
 
-        // large room
-        MakeTunnel((int)castleBottomCenterL.X - 25, (int)castleBottomCenterL.Y - 115, Vector2.Zero, Vector2.Zero, 50);
-        MakeTunnel((int)castleBottomCenterR.X + 25, (int)castleBottomCenterR.Y - 115, Vector2.Zero, Vector2.Zero, 50);
+		// large room
+		int CenterWidth = 2;
+		Point largeRoomSize = new Point(100 + CenterWidth, 50);
+		//Point largeRoomTopLeft = new Point(castleBottomCenterL.X - (largeRoomSize.X / 2), castleBottomCenterL.Y - 115 - (largeRoomSize.Y / 2));
+		//Point largeRoomBottomRight = new Point(castleBottomCenterR.X + (largeRoomSize.X / 2), castleBottomCenterR.Y - 115 + (largeRoomSize.Y / 2));
+		Rectangle largeRoomRect = new Rectangle(castleBottomCenterL.X - ((largeRoomSize.X - CenterWidth) / 2), castleBottomCenterL.Y - 115 - ((largeRoomSize.Y - CenterWidth) / 2), largeRoomSize.X, largeRoomSize.Y);
+		MakeTunnel(castleBottomCenterL.X - ((largeRoomSize.X - CenterWidth) / 4), castleBottomCenterL.Y - 115, Vector2.Zero, Vector2.Zero, 50);
+        MakeTunnel(castleBottomCenterR.X + ((largeRoomSize.X - CenterWidth) / 4), castleBottomCenterR.Y - 115, Vector2.Zero, Vector2.Zero, 50);
 
         //large room backwall
-        AddDecorativeWalls((int)castleBottomCenterL.X - 50, (int)castleBottomCenterL.Y - 140);
+        AddDecorativeWalls(castleBottomCenterL.X - 50, castleBottomCenterL.Y - 140);
 
         // remove random floating tiles
         RefineStructure(x, y, 400, 150);
         // place the trapezoid shape and the library altar on top of it, at the bottom of the large room
-        AddLibraryAltar((int)castleBottomCenterL.X, (int)castleBottomCenterL.Y - 85);
+        AddLibraryAltar(castleBottomCenterL.X, castleBottomCenterL.Y - 85);
         // add platforms in various places
         AddPlatforms(x, y, 400, 150);
-        AddPaintings(x, y, 400, 150);
+        AddPaintings(x, y, 400, 150, new Rectangle(largeRoomRect.X, largeRoomRect.Y, largeRoomRect.Width, largeRoomRect.Height + 4));
         Utils.AddSpikes(x, y, 400, 150, 50, ModContent.TileType<Tiles.VenomSpike>(), WorldGen.genRand.Next(5, 10));
         // unsmooth tiles such as the spikes and impervious bricks
         UnsmoothTiles(x, y, 400, 150);
@@ -69,7 +74,7 @@ internal class Hellcastle
 		SmoothHellcastle(x, y, 400, 150);
 		GenVars.structures.AddProtectedStructure(new Rectangle(x, y, 400, 150));
     }
-    public static void AddPaintings(int x, int y, int width, int height)
+    public static void AddPaintings(int x, int y, int width, int height, Rectangle excludedZone)
     {
         int s1t = 0;
         int s2t = 0;
@@ -110,7 +115,7 @@ internal class Hellcastle
                         }
                         s1t++;
                         if (Utils.HasEnoughRoomForPaintingType(i, j, 2, 3) && Utils.NoPaintingsInRange(i, j, 10) &&
-                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 2, 3))
+                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 2, 3, excludedZone))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
@@ -144,7 +149,7 @@ internal class Hellcastle
                         }
                         s2t++;
                         if (Utils.HasEnoughRoomForPaintingType(i, j, 3, 3) && Utils.NoPaintingsInRange(i, j, 10) &&
-                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 3, 3))
+                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 3, 3, excludedZone))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
@@ -172,7 +177,7 @@ internal class Hellcastle
                         }
                         s3t++;
                         if (Utils.HasEnoughRoomForPaintingType(i, j, 6, 4) && Utils.NoPaintingsInRange(i, j, 10) &&
-                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 6, 4))
+                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 6, 4, excludedZone))
                         {
                             WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.Paintings>(), style: pStyle);
                         }
@@ -204,7 +209,7 @@ internal class Hellcastle
                         }
                         s4t++;
                         if (Utils.HasEnoughRoomForPaintingType(i, j, 3, 2) && Utils.NoPaintingsInRange(i, j, 10) &&
-                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 3, 2))
+                            Utils.IsValidPlacementForPaintingInHellcastle(i, j, 3, 2, excludedZone))
                         {
                             WorldGen.PlaceTile(i, j, tileType, style: pStyle);
                         }
