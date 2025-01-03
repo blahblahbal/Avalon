@@ -31,16 +31,10 @@ public class PlacedStaminaCrystal : ModTile
 		yield return new Item(ModContent.ItemType<StaminaCrystal>());
 	}
 	public override void AnimateTile(ref int frame, ref int frameCounter)
-    {
-        frameCounter++;
-        if (frameCounter > 6)
-        {
-            frameCounter = 0;
-            frame++;
-            if (frame >= 11) frame = 0;
-        }
-    }
-    public override bool KillSound(int i, int j, bool fail)
+	{
+		frame = Main.tileFrame[TileID.Heart];
+	}
+	public override bool KillSound(int i, int j, bool fail)
     {
         if (!fail)
         {

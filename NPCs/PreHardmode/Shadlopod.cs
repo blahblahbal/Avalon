@@ -42,7 +42,15 @@ public class Shadlopod : ModNPC
     }
     float collisionPoint = 0f;
     bool Grounded = false;
-    public override void AI()
+	public override bool PreAI()
+	{
+		if (Grounded && NPC.velocity.Y < 0f)
+		{
+			NPC.velocity.Y *= 0.88f;
+		}
+		return true;
+	}
+	public override void AI()
     {
         bool FoundTile = false;
         if (NPC.ai[0] == 0 && !Grounded)
@@ -98,11 +106,6 @@ public class Shadlopod : ModNPC
         {
             NPC.TargetClosest();
             NPC.rotation = NPC.velocity.X * -0.1f;
-            if(NPC.gfxOffY != 2)
-            {
-                NPC.gfxOffY--;
-                NPC.height+= 3;
-            }
         }
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
