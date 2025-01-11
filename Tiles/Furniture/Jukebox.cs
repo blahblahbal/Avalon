@@ -24,7 +24,8 @@ public class Jukebox : ModTile
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
         TileObjectData.newTile.Origin = new Point16(0, 1);
         TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
-        TileObjectData.newTile.StyleHorizontal = true;
+		TileObjectData.newTile.DrawYOffset = 2;
+		TileObjectData.newTile.StyleHorizontal = true;
         TileObjectData.newTile.LavaDeath = false;
         TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
         TileObjectData.addTile(Type);
