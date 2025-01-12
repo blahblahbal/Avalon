@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\tModLoader.targets" />
-  <PropertyGroup>
-    <AssemblyName>Avalon</AssemblyName>
-    <TargetFramework>net8.0</TargetFramework>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Avalon</RootNamespace>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <ItemGroup>
-    <AdditionalFiles Remove="DrawMagics\**" />
-    <Compile Remove="DrawMagics\**" />
-    <EmbeddedResource Remove="DrawMagics\**" />
-    <None Remove="DrawMagics\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="effects\PixelChange.fx" />
-    <None Remove="Projectiles\Melee\HallowedRapierProj.png" />
-    <None Remove="Projectiles\Melee\HallowedRapierVis.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Items\Placeable\Furniture\Coughwood\" />
-    <Folder Include="Items\Weapons\Summon\PreHardmode\" />
-    <Folder Include="Mounts\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Xna.Framework.Input.Touch">
-      <HintPath>S:\terraria stuff\Terraria Remaster\github\1.1AvalonRemaster\bin\Debug\net40\Microsoft.Xna.Framework.Input.Touch.dll</HintPath>
-    </Reference>
-    <Reference Include="OphioidMod">
-      <HintPath>..\..\ModAssemblies\OphioidMod.dll</HintPath>
-    </Reference>
-    <Reference Include="ThoriumMod">
-      <HintPath>..\..\ModAssemblies\ThoriumMod.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<Import Project="..\tModLoader.targets" />
+	<PropertyGroup>
+		<AssemblyName>Avalon</AssemblyName>
+		<TargetFramework>net8.0</TargetFramework>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<RootNamespace>Avalon</RootNamespace>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+	<ItemGroup>
+		<AdditionalFiles Remove="DrawMagics\**" />
+		<Compile Remove="DrawMagics\**" />
+		<EmbeddedResource Remove="DrawMagics\**" />
+		<None Remove="DrawMagics\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="effects\PixelChange.fx" />
+		<None Remove="Projectiles\Melee\HallowedRapierProj.png" />
+		<None Remove="Projectiles\Melee\HallowedRapierVis.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Items\Placeable\Furniture\Coughwood\" />
+		<Folder Include="Items\Weapons\Summon\PreHardmode\" />
+		<Folder Include="Mounts\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Microsoft.Xna.Framework.Input.Touch">
+			<HintPath>S:\terraria stuff\Terraria Remaster\github\1.1AvalonRemaster\bin\Debug\net40\Microsoft.Xna.Framework.Input.Touch.dll</HintPath>
+		</Reference>
+		<Reference Include="OphioidMod">
+			<HintPath Condition="Exists('..\ModAssemblies')">..\ModAssemblies\OphioidMod.dll</HintPath>
+			<HintPath Condition="Exists('..\..\ModAssemblies')">..\..\ModAssemblies\OphioidMod.dll</HintPath>
+		</Reference>
+		<Reference Include="ThoriumMod">
+			<HintPath Condition="Exists('..\ModAssemblies')">..\ModAssemblies\ThoriumMod.dll</HintPath>
+			<HintPath Condition="Exists('..\..\ModAssemblies')">..\..\ModAssemblies\ThoriumMod.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 </Project>

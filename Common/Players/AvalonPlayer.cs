@@ -364,19 +364,33 @@ public class AvalonPlayer : ModPlayer
 	public bool riftContagionFishing = false;
 	public bool riftSavannaFishing = false;
 
-    public void UpdatePrimeMinionStatus(IEntitySource source)
+	public static void MinionRemoveCheck(int owner, int buffID, Projectile projectile)
+	{
+		MinionRemoveCheck(Main.player[owner], buffID, projectile);
+	}
+	public static void MinionRemoveCheck(Player player, int buffID, Projectile projectile)
+	{
+		if (player.dead)
+		{
+			player.ClearBuff(buffID);
+		}
+		if (player.HasBuff(buffID) && projectile.timeLeft <= 2)
+		{
+			projectile.timeLeft = 2;
+		}
+	}
+	public void UpdatePrimeMinionStatus(IEntitySource source)
     {
         int firstMinion = ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>();
         if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>()] < 1)
         {
-            for (int i = 0; i < 1000; i++)
-            {
-                Projectile projectile = Main.projectile[i];
-                if (projectile.active && projectile.owner == Player.whoAmI && projectile.type != firstMinion)
-                {
-                    projectile.Kill();
-                }
-            }
+			foreach (var projectile in Main.ActiveProjectiles)
+			{
+				if (projectile.owner == Player.whoAmI && projectile.type != firstMinion)
+				{
+					projectile.Kill();
+				}
+			}
         }
         if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>()] < Player.maxMinions)
         {
