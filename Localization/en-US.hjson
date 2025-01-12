@@ -11568,6 +11568,8 @@ Mods: {
 			}
 		}
 
+		CaptureBiomeChoice.Contagion: The Contagion
+
 		World: {
 			EvilSelection: {
 				Contagion: {

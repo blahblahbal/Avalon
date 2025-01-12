@@ -34,10 +34,10 @@
       <HintPath>S:\terraria stuff\Terraria Remaster\github\1.1AvalonRemaster\bin\Debug\net40\Microsoft.Xna.Framework.Input.Touch.dll</HintPath>
     </Reference>
     <Reference Include="OphioidMod">
-      <HintPath>..\ModAssemblies\OphioidMod.dll</HintPath>
+      <HintPath>..\..\ModAssemblies\OphioidMod.dll</HintPath>
     </Reference>
     <Reference Include="ThoriumMod">
-      <HintPath>..\ModAssemblies\ThoriumMod.dll</HintPath>
+      <HintPath>..\..\ModAssemblies\ThoriumMod.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

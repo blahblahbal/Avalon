@@ -1,7 +1,10 @@
+using Avalon.Backgrounds;
+using Avalon.Hooks;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.Graphics.Capture;
 using Terraria.ModLoader;
 
 namespace Avalon.Common;
@@ -11,6 +14,10 @@ internal class ContagionWorld : ModSystem
     public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
 	{
 		float ContagionStrength = ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 350f;
+		if (CaptureManager.Instance.Active && CaptureManager.Instance.IsCapturing && CaptureInterface.Settings.BiomeChoiceIndex == AddModdedCaptureBiomes.biomeCapturesIndexs[0])
+		{
+			ContagionStrength = 1f;
+		}
 		if (ContagionStrength != 0)
 		{
 			ContagionStrength = Math.Min(ContagionStrength, 1f);
