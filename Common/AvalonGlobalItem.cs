@@ -117,8 +117,10 @@ public class AvalonGlobalItem : GlobalItem
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>()] = ItemID.Wood;
         ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ResistantWood>()] = ItemID.Wood;
 
-        // weapons
-        ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<DesertLongsword>()] = ItemID.AntlionClaw;
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<UnderworldKey>()] = ModContent.ItemType<UnderworldChest>();
+
+		// weapons
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<DesertLongsword>()] = ItemID.AntlionClaw;
         ItemID.Sets.ShimmerTransformToItem[ItemID.AntlionClaw] = ModContent.ItemType<DesertLongsword>();
 
         //ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientDartRifle>()] = ItemID.DartRifle;

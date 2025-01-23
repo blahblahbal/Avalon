@@ -13,7 +13,7 @@ class InfectionHook : ModItem
         Item.noUseGraphic = true;
         Item.useTurn = true;
         Item.shootSpeed = 15f;
-        Item.rare = ItemRarityID.Green;
+        Item.rare = ItemRarityID.LightPurple;
         Item.noMelee = true;
         Item.width = dims.Width;
         Item.knockBack = 7f;

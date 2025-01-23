@@ -21,7 +21,7 @@ class HemorrhagingHalberd : ModItem
         Item.noUseGraphic = true;
         Item.scale = 1f;
         Item.shootSpeed = 4f;
-        Item.rare = ItemRarityID.LightRed;
+        Item.rare = ItemRarityID.Pink;
         Item.noMelee = true;
         Item.useTime = 35;
         Item.useAnimation = 35;

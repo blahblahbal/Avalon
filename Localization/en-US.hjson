@@ -322,6 +322,7 @@ Mods: {
 
 		Potions: Potions
 		ContagionKey.AfterPlantera: Unlocks a Contagion Chest in the dungeon
+		Underworld.AfterPlantera: Unlocks an Underworld Chest in the dungeon
 
 		RejuvenationPotion: {
 			NoThePill:
