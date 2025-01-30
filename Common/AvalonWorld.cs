@@ -98,7 +98,9 @@ public class AvalonWorld : ModSystem
 	public static bool OopsAllCaves;
 	public static bool OopsAllCavesGen;
 
-    public static int DungeonLocationX;
+	public static bool retroWorld;
+
+	public static int DungeonLocationX;
     public static int JungleLocationX;
 
 	public static int SandstormTimeLeft = 0;
@@ -150,6 +152,7 @@ public class AvalonWorld : ModSystem
 
 		ModContent.GetInstance<Relics>().Coordinates = new();
 		//Im not too fimiliar how contagion world tags work but imo it would be best if it was reset in an OnWorldUnload and OnWorldLoad somewhere
+		retroWorld = false;
 	}
     public override void ClearWorld()
     {
@@ -174,6 +177,7 @@ public class AvalonWorld : ModSystem
 		ModContent.GetInstance<Relics>().Coordinates = new();
 
 		OopsAllCaves = false;
+		retroWorld = false;
 		tSick = 0;
 		totalSick = 0;
 		totalSick2 = 0;
@@ -219,6 +223,7 @@ public class AvalonWorld : ModSystem
         tag["Avalon:JungleX"] = JungleLocationX;
 
 		tag["Avalon:OopsAllCaves"] = OopsAllCaves;
+		tag["Avalon:RetroSecretSeed"] = retroWorld;
 
 		AvalonTileData[] myData = Main.tile.GetData<AvalonTileData>(); //Coppied from SLR because I havent worked with pointers much
 		byte[] data = new byte[myData.Length];
@@ -238,13 +243,19 @@ public class AvalonWorld : ModSystem
     {
         tag["Avalon:WorldEvil"] = (byte)WorldEvil;
         tag["Avalon:WorldJungle"] = (byte)WorldJungle;
-    }
+		tag["Avalon:RetroSecretSeed"] = retroWorld;
+	}
 
     public override void LoadWorldData(TagCompound tag)
     {
 		if (tag.ContainsKey("Avalon:OopsAllCaves"))
 		{
 			OopsAllCaves = tag.GetBool("Avalon:OopsAllCaves");
+		}
+
+		if (tag.ContainsKey("Avalon:RetroSecretSeed"))
+		{
+			retroWorld = tag.GetBool("Avalon:RetroSecretSeed");
 		}
 
 		if (tag.ContainsKey("Avalon:ContagionBG"))
