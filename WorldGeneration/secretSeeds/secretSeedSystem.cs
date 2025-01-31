@@ -858,6 +858,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			Main.checkXMas();
 			//NPC.clrNames(); //legacy NPC name code, does not to be reinstalled
 			//NPC.setNames();
+			SetBackgroundNormal();
 			WorldGen.gen = true;
 			resetGen();
 			/*if (seed > 0) //seed is done before any genpass now, adding this line may cause unknown changes
@@ -3002,7 +3003,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 					}
 					num261--;
-					WorldGen.PlaceTile(num260, num261, 105, mute: true, forced: true, -1, num256);
+					PlaceTile_Old(num260, num261, 105, mute: true, forced: true, -1, num256);
 					if (Main.tile[num260, num261].HasTile && Main.tile[num260, num261].TileType == 105)
 					{
 						flag14 = true;
@@ -3203,7 +3204,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					int num288 = Main.rand.Next(200, Main.maxTilesX - 200);
 					int num289 = Main.rand.Next((int)Main.worldSurface, Main.maxTilesY - 300);
-					if (Main.tile[num288, num289].WallType == 0 && placeTrap(num288, num289))
+					if (Main.tile[num288, num289].WallType == 0 && WorldGen.placeTrap(num288, num289))
 					{
 						break;
 					}
@@ -5040,7 +5041,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				num12++;
 				int num90 = WorldGen.genRand.Next(GenVars.dMinX, GenVars.dMaxX);
 				int num91 = WorldGen.genRand.Next(GenVars.dMinY, GenVars.dMaxY);
-				if (Main.tile[num90, num91].WallType == wallType && placeTrap(num90, num91, 0))
+				if (Main.tile[num90, num91].WallType == wallType && WorldGen.placeTrap(num90, num91, 0))
 				{
 					num12 = num13;
 				}
@@ -7369,7 +7370,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 			return num;
 		}
 
-		public static bool placeTrap(int x2, int y2, int type = -1)
+		//something broke idk
+		public static bool placeTrap_Old(int x2, int y2, int type = -1)
 		{
 			int num = y2;
 			while (!WorldGen.SolidTile(x2, num))
@@ -7952,7 +7954,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 								else
 								{
 									flag2 = false;
-									Main.tile[num7, num11].WallType = 30;
+									Main.tile[num7, num11].TileType = 30;
 								}
 							}
 							else
@@ -8224,7 +8226,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					continue;
 				}
-				if (WorldGen.genRand.Next(3) == 0)
+				if (WorldGen.genRand.NextBool(3))
 				{
 					int num44 = WorldGen.genRand.Next(9);
 					if (num44 == 0)
@@ -8268,7 +8270,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				else
 				{
 					int style = WorldGen.genRand.Next(2, 43);
-					WorldGen.PlaceTile(num42, num43, 105, mute: true, forced: true, -1, style);
+					PlaceTile_Old(num42, num43, 105, mute: true, forced: true, -1, style);
 				}
 			}
 		}
@@ -9559,6 +9561,87 @@ namespace Avalon.WorldGeneration.secretSeeds
 			{
 				NetMessage.SendTileSquare(-1, i, (int)((double)y - (double)num * 0.5), num + 1);
 			}
+		}
+
+		public static bool PlaceTile_Old(int i, int j, int type, bool mute = false, bool forced = false, int plr = -1, int style = 0)
+		{
+			if (type >= 150)
+			{
+				return false;
+			}
+			bool result = false;
+			if (i >= 0 && j >= 0 && i < Main.maxTilesX && j < Main.maxTilesY)
+			{
+				if (forced || Collision.EmptyTile(i, j) || !Main.tileSolid[type] || (type == 23 && Main.tile[i, j].TileType == 0 && Main.tile[i, j].HasTile) || (type == 2 && Main.tile[i, j].TileType == 0 && Main.tile[i, j].HasTile) || (type == 109 && Main.tile[i, j].TileType == 0 && Main.tile[i, j].HasTile) || (type == 60 && Main.tile[i, j].TileType == 59 && Main.tile[i, j].HasTile) || (type == 70 && Main.tile[i, j].TileType == 59 && Main.tile[i, j].HasTile))
+				{
+					Main.tile[i, j].TileFrameX = 0;
+					Main.tile[i, j].TileFrameY = 0;
+					switch (type)
+					{
+						case 105:
+							Place2xX(i, j, type, style);
+							WorldGen.SquareTileFrame(i, j);
+							break;
+					}
+				}
+			}
+			return result;
+		}
+
+		public static void Place2xX(int x, int y, int type, int style = 0)
+		{
+			int num = style * 36;
+			int num2 = 3;
+			if (type == 104)
+			{
+				num2 = 5;
+			}
+			bool flag = true;
+			for (int i = y - num2 + 1; i < y + 1; i++)
+			{
+				if (Main.tile[x, i].HasTile)
+				{
+					flag = false;
+				}
+				if (Main.tile[x + 1, i].HasTile)
+				{
+					flag = false;
+				}
+			}
+			if (flag && Main.tile[x, y + 1].HasTile && Main.tileSolid[Main.tile[x, y + 1].TileType] && Main.tile[x + 1, y + 1].HasTile && Main.tileSolid[Main.tile[x + 1, y + 1].TileType])
+			{
+				for (int j = 0; j < num2; j++)
+				{
+					Tile tile = Main.tile[x, y - num2 + 1 + j];
+					tile.HasTile = true;
+					tile.TileFrameY = (short)(j * 18);
+					tile.TileFrameX = (short)num;
+					tile.TileType = (byte)type;
+					Tile tile2 = Main.tile[x + 1, y - num2 + 1 + j];
+					tile2.HasTile = true;
+					tile2.TileFrameY = (short)(j * 18);
+					tile2.TileFrameX = (short)(num + 18);
+					tile2.TileType = (byte)type;
+				}
+			}
+		}
+
+		//Reset all backgrounds
+		public static void SetBackgroundNormal()
+		{
+			WorldGen.corruptBG = 0;
+			WorldGen.crimsonBG = 0;
+			WorldGen.desertBG = 0;
+			WorldGen.hallowBG = 0;
+			WorldGen.jungleBG = 0;
+			WorldGen.mushroomBG = 0;
+			WorldGen.oceanBG = 0;
+			WorldGen.snowBG = 0;
+			WorldGen.treeBG1 = 0;
+			WorldGen.treeBG2 = 0;
+			WorldGen.treeBG3 = 0;
+			WorldGen.treeBG4 = 0;
+			WorldGen.underworldBG = 0;
 		}
 	}
 }
