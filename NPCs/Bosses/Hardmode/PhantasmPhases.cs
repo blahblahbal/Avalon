@@ -379,10 +379,9 @@ namespace Avalon.NPCs.Bosses.Hardmode
 					{
 						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
 					}
-					for(int i = 0; i < 2; i++)
-					{
-						Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, Main.rand.NextVector2CircularEdge(8, 8), ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
-					}
+					Vector2 direction = Main.rand.NextVector2CircularEdge(8, 8);
+					Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, direction, ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
+					Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, direction.RotatedBy(Main.rand.NextFloat(MathHelper.PiOver2,MathHelper.Pi) * (Main.rand.NextBool()? 1 : -1)), ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
 				}
 				SoundEngine.PlaySound(SoundID.Roar, NPC.position);
 				NPC.ai[0] = 0;
@@ -521,10 +520,54 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			{
 				playPhantasmSound();
 				NPC.TargetClosest();
-				phase = 9;
+				phase = 12;
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
 				NPC.netUpdate = true;
+			}
+		}
+		private void Phase12_SawHandsScary2()
+		{
+			NPC.velocity += NPC.Center.DirectionTo(new Vector2(target.Center.X, MathHelper.Lerp(target.Center.Y, eyePos.Y, 0.6f))) * 0.2f;
+			NPC.velocity = NPC.velocity.LengthClamp(10);
+			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
+
+			NPC.ai[0]++;
+			if (NPC.ai[0] > 100)
+			{
+				NPC.velocity *= 0.93f;
+			}
+
+			if (NPC.ai[0] >= 120 && Main.netMode != NetmodeID.MultiplayerClient)
+			{
+				if (NPC.ai[1] >= 6)
+				{
+					NPC.ai[0] = 0;
+					NPC.ai[1] = 0;
+					NPC.TargetClosest();
+					playPhantasmSound();
+					phase = 9;
+					NPC.netUpdate = true;
+					return;
+				}
+
+				if (NPC.ai[1] % 2 == 0 && NPC.ai[0] == 120)
+				{
+					int iterations = 16;
+					for(int i = 0; i < iterations; i++)
+						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(0,8).RotatedBy(i * MathHelper.TwoPi / iterations), ModContent.ProjectileType<PhantomBlade>(), swordDamage, 1);
+				}
+				else if (NPC.ai[1] % 2 == 1 && NPC.ai[0] % 10 == 0)
+				{
+					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedByRandom(0.5f) * 10, ModContent.ProjectileType<PhantomGrabber>(), handDamage, 1);
+					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedByRandom(0.5f) * 8, ModContent.ProjectileType<PhantomGrabber>(), handDamage, 1);
+				}
+			}
+
+			if (NPC.ai[0] == 160)
+			{
+				NPC.ai[0] = 0;
+				NPC.ai[1]++;
 			}
 		}
 	}

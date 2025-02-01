@@ -28,11 +28,6 @@ namespace Avalon.NPCs.Bosses.Hardmode;
 [AutoloadBossHead]
 public partial class Phantasm : ModNPC
 {
-	public override bool IsLoadingEnabled(Mod mod)
-	{
-		return false;
-	}
-
 	public override void SetStaticDefaults()
 	{
 		Main.npcFrameCount[NPC.type] = 16;
@@ -221,6 +216,9 @@ public partial class Phantasm : ModNPC
 				break;
 			case 11:
 				Phase11_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELL();
+					break;
+			case 12:
+				Phase12_SawHandsScary2();
 					break;
 		}
 	}

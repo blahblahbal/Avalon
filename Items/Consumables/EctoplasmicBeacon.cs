@@ -29,20 +29,20 @@ public class EctoplasmicBeacon : ModItem
         Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
     }
 
-    //public override bool CanUseItem(Player player)
-    //{
-    //    return !NPC.AnyNPCs(ModContent.NPCType<Phantasm>()) && player.InModBiome<Biomes.Hellcastle>() &&
-    //           NPC.downedMoonlord && Main.hardMode;
-    //}
+	//public override bool CanUseItem(Player player)
+	//{
+	//	return !NPC.AnyNPCs(ModContent.NPCType<Phantasm>()) && player.InModBiome<Biomes.Hellcastle>() &&
+	//		   NPC.downedMoonlord && Main.hardMode;
+	//}
 
-    //public override bool? UseItem(Player player)
-    //{
-    //    NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<Phantasm>());
-    //    SoundEngine.PlaySound(SoundID.Roar, player.position);
-    //    return true;
-    //}
+	//public override bool? UseItem(Player player)
+	//{
+	//	//NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<Phantasm>());
+	//	//SoundEngine.PlaySound(SoundID.Roar, player.position);
+	//	return true;
+	//}
 
-    public override void AddRecipes()
+	public override void AddRecipes()
     {
         CreateRecipe()
             .AddIngredient(ItemID.Ectoplasm, 10)

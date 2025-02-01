@@ -11,10 +11,6 @@ namespace Avalon.NPCs.Bosses.Hardmode
 {
 	public class PhantoplasmaBall : ModNPC
 	{
-		public override bool IsLoadingEnabled(Mod mod)
-		{
-			return false;
-		}
 		public override void SetStaticDefaults()
 		{
 			Main.npcFrameCount[Type] = 4;

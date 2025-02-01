@@ -11,10 +11,6 @@ namespace Avalon.NPCs.Bosses.Hardmode
 {
 	public class PhantasmHealthOrbs : ModNPC
 	{
-		public override bool IsLoadingEnabled(Mod mod)
-		{
-			return false;
-		}
 		public override void SetStaticDefaults()
 		{
 			Main.npcFrameCount[Type] = 4;
@@ -23,7 +19,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 		public override void SetDefaults()
 		{
 			NPC.Size = new Vector2(100);
-			NPC.damage = 50;
+			NPC.damage = 0;
 			NPC.lifeMax = 25000;
 			NPC.aiStyle = -1;
 			NPC.noGravity = true;

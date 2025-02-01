@@ -9891,6 +9891,7 @@ Mods: {
 			OsmiumBolt.DisplayName: Osmium Bolt
 			RhodiumBolt.DisplayName: Rhodium Bolt
 			PathogenSickle.DisplayName: Pathogen Sickle
+			PhantomBlade.DisplayName: Phantom Blade
 		}
 
 		NPCs: {

@@ -159,6 +159,7 @@ public class DesertBeak : ModNPC
 	int JustSpawned = 10;
 	public override void AI()
 	{
+
 		//if (!Main.npc[leftWing].active)
 		//{
 		//	Main.NewText("Left: " + leftWing + Main.npc[leftWing].active, Color.LightBlue);
@@ -277,6 +278,10 @@ public class DesertBeak : ModNPC
 		}
 		//NPC.velocity = Vector2.Zero;
 		//Main.NewText(NPC.ai[1], Main.DiscoColor);
+		if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height) && phase != phase2Tornados)
+		{
+			NPC.velocity.Y -= NPC.velocity.Length() * 0.2f;
+		}
 	}
 	public void PhaseOne(Player Target, float modifier)
 	{
@@ -311,11 +316,11 @@ public class DesertBeak : ModNPC
 							NPC.ai[1] = 0;
 							phase = phase1Egg;
 							NPC.TargetClosest();
-							NPC.netUpdate = true;
 						}
 					}
 					afterImageTimer = 30;
 					NPC.velocity = NPC.Center.DirectionTo(Target.Center + Main.rand.NextVector2Circular(30, 30)) * 12 * (NPC.ai[0] * 0.001f + 1);
+					NPC.netUpdate = true;
 				}
 				NPC.velocity *= 0.98f;
 			}
@@ -325,6 +330,7 @@ public class DesertBeak : ModNPC
 			NPC.ai[0]++;
 			NPC.ai[1]++;
 			NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f * modifier;
+
 			NPC.velocity = NPC.velocity.LengthClamp(8);
 
 			if (NPC.ai[1] > 200)
