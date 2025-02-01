@@ -8,6 +8,7 @@ using Microsoft.Build.Tasks;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Terraria;
 using Terraria.DataStructures;
@@ -19,16 +20,19 @@ using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
-using ThoriumMod.Items.Misc;
-using ThoriumMod.Items.NPCItems;
-using ThoriumMod.Projectiles;
-using ThoriumMod.Projectiles.Minions;
-using ThoriumMod.Tiles;
 
 namespace Avalon.WorldGeneration.secretSeeds
 {
 	public class secretSeedSystem : ModSystem
 	{
+		private static readonly string[] vanillaGenpasses = new string[] { "Reset", "Terrain", "Dunes", "Ocean Sand", "Sand Patches", "Tunnels", "Mount Caves", "Dirt Wall Backgrounds", "Rocks In Dirt", "Dirt In Rocks", "Clay", "Small Holes", "Dirt Layer Caves", "Rock Layer Caves", "Surface Caves",
+				"Wavy Caves", "Generate Ice Biome", "Grass", "Jungle", "Mud Caves To Grass", "Full Desert", "Floating Islands", "Mushroom Patches", "Marble", "Granite", "Dirt To Mud", "Silt", "Shinies", "Webs", "Underworld", "Corruption", "Lakes", "Dungeon", "Slush", "Mountain Caves",
+				"Beaches", "Gems", "Gravitating Sand", "Create Ocean Caves", "Shimmer", "Clean Up Dirt", "Pyramids", "Dirt Rock Wall Runner", "Living Trees", "Wood Tree Walls", "Altars", "Wet Jungle", "Jungle Temple", "Hives", "Jungle Chests", "Settle Liquids", "Remove Water From Sand",
+				"Oasis", "Shell Piles", "Smooth World", "Waterfalls", "Ice", "Wall Variety", "Life Crystals", "Statues", "Buried Chests", "Surface Chests", "Jungle Chests Placement", "Water Chests", "Spider Caves", "Gem Caves", "Moss", "Temple", "Cave Walls", "Jungle Trees",
+				"Floating Island Houses", "Quick Cleanup", "Pots", "Hellforge", "Spreading Grass", "Surface Ore and Stone", "Place Fallen Log", "Traps", "Piles", "Spawn Point", "Grass Wall", "Guide", "Sunflowers", "Planting Trees", "Herbs", "Dye Plants", "Webs And Honey", "Weeds",
+				"Glowing Mushrooms and Jungle Plants", "Jungle Plants", "Vines", "Flowers", "Mushrooms", "Gems In Ice Biome", "Random Gems", "Moss Grass", "Muds Walls In Jungle", "Larva", "Settle Liquids Again", "Cactus, Palm Trees, & Coral", "Tile Cleanup", "Lihzahrd Altars", "Micro Biomes",
+				"Water Plants", "Stalac", "Remove Broken Traps", "Final Cleanup" };
+
 		public static bool GetRetroWorldGen = false;
 
 		public override void Load()
@@ -70,741 +74,261 @@ namespace Avalon.WorldGeneration.secretSeeds
 		{
 			if (AvalonWorld.retroWorld)
 			{
-				int index = tasks.FindIndex(genpass => genpass.Name.Equals("Reset"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Reset", new WorldGenLegacyMethod(Reset)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Terrain"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Terrain", new WorldGenLegacyMethod(Terrain)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Dunes"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Dunes", new WorldGenLegacyMethod(Dunes)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Ocean Sand"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Ocean Sand", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Sand Patches"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Sand Patches", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Tunnels"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Tunnels", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Mount Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Mount Caves", new WorldGenLegacyMethod(MountCaves)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Dirt Wall Backgrounds"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Dirt Wall Backgrounds", new WorldGenLegacyMethod(DirtWallBackgrounds)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Rocks In Dirt"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Rocks In Dirt", new WorldGenLegacyMethod(RocksInDirt)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Dirt In Rocks"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Dirt In Rocks", new WorldGenLegacyMethod(DirtInRocks)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Clay"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Clay", new WorldGenLegacyMethod(Clay)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Small Holes"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Small Holes", new WorldGenLegacyMethod(SmallHoles)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Dirt Layer Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Dirt Layer Caves", new WorldGenLegacyMethod(DirtLayerCaves)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Rock Layer Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Rock Layer Caves", new WorldGenLegacyMethod(RockLayerCaves)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Surface Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Surface Caves", new WorldGenLegacyMethod(SurfaceCaves)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Wavy Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Wavy Caves", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Generate Ice Biome"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Generate Ice Biome", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Grass"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Grass", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Jungle", new WorldGenLegacyMethod(Jungle)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Mud Caves To Grass"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Mud Caves To Grass", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Full Desert"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Full Desert", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Islands"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Floating Islands", new WorldGenLegacyMethod(FloatingIslands)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Mushroom Patches"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Mushroom Patches", new WorldGenLegacyMethod(MushroomPatches)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Marble"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Marble", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Granite"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Granite", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Dirt To Mud"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Dirt To Mud", new WorldGenLegacyMethod(DirtToMud)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Silt"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Silt", new WorldGenLegacyMethod(Silt)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Shinies", new WorldGenLegacyMethod(Shinies)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Webs"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Webs", new WorldGenLegacyMethod(Webs)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Underworld"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Underworld", new WorldGenLegacyMethod(Underworld)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				int index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Corruption")); //for some reason corruption was moved down before lakes in later updates
-				int index3 = tasks.FindIndex(genpass => genpass.Name.Equals("Lakes"));
-				int index4 = tasks.FindIndex(genpass => genpass.Name.Equals("Dungeon"));
-				if (index2 != -1)
-				{
-					tasks.Insert(index2 + 1, new PassLegacy("Lakes", new WorldGenLegacyMethod(Lakes)));
-					tasks.RemoveAt(index2);
-				}
-				if (index3 != -1)
-				{
-					tasks.Insert(index3 + 1, new PassLegacy("Dungeon", new WorldGenLegacyMethod(Dungeon)));
-					tasks.RemoveAt(index3);
-				}
-				if (index != -1)
-				{
-					tasks.Insert(index4 + 1, new PassLegacy("Corruption", new WorldGenLegacyMethod(Corruption)));
-					tasks.RemoveAt(index4);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Slush"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Slush", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Mountain Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Mountain Caves", new WorldGenLegacyMethod(MountainCaves)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Beaches"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Beaches", new WorldGenLegacyMethod(Beaches)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Gems"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Gems", new WorldGenLegacyMethod(Gems)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Gravitating Sand"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Gravitating Sand", new WorldGenLegacyMethod(GravitatingSand)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Create Ocean Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Create Ocean Caves", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Shimmer"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Shimmer", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Clean Up Dirt"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Clean Up Dirt", new WorldGenLegacyMethod(CleanUpDirt)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Pyramids"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Pyramids", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Dirt Rock Wall Runner"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Dirt Rock Wall Runner", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Living Trees"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Living Trees", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Wood Tree Walls"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Wood Tree Walls", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Altars"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Altars", new WorldGenLegacyMethod(Altars)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Wet Jungle"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Wet Jungle", new WorldGenLegacyMethod(WetJungle)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle Temple"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Jungle Temple", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Hives"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Hives", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle Chests")); //90% sure this isnt implemented until later in the chests method but idk
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Jungle Chests", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals(""));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Settle Liquids", new WorldGenLegacyMethod(SettleLiquids)));
-					tasks.RemoveAt(index);
-				}
-				
-
-
-				index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Settle Liquids"));
-				index3 = tasks.FindIndex(genpass => genpass.Name.Equals("Remove Water From Sand"));
-				if (index2 != -1)
-				{
-					tasks.Insert(index2 + 1, new PassLegacy("Remove Water From Sand", new WorldGenLegacyMethod(RemoveWaterFromSand)));
-					tasks.RemoveAt(index2);
-				}
-				if (index3 != -1)
-				{
-					tasks.Insert(index3 + 1, new PassLegacy("Settle Liquids", new WorldGenLegacyMethod(SettleLiquids)));
-					tasks.RemoveAt(index3);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Oasis"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Oasis", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Shell Piles"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Shell Piles", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Smooth World"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Smooth World", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Waterfalls"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Waterfalls", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Ice"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Ice", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Wall Variety"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Wall Variety", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Life Crystals"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Life Crystals", new WorldGenLegacyMethod(LifeCrystals)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Statues"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Statues", new WorldGenLegacyMethod(Statues)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Buried Chests"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Buried Chests", new WorldGenLegacyMethod(BuriedChests)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Surface Chests"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Surface Chests", new WorldGenLegacyMethod(SurfaceChests)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle Chests Placement"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Jungle Chests Placement", new WorldGenLegacyMethod(JungleChestsPlacement)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Water Chests"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Water Chests", new WorldGenLegacyMethod(WaterChests)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Spider Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Spider Caves", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Gem Caves"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Gem Caves", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Moss"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Moss", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Temple"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Temple", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Cave Walls"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Cave Walls", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle Trees"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Jungle Trees", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Island Houses"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Floating Island Houses", new WorldGenLegacyMethod(FloatingIslandHouses)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Quick Cleanup"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Quick Cleanup", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Pots")); //Traps was also moved from pre-pots to post fallen log/speading grass
-				index3 = tasks.FindIndex(genpass => genpass.Name.Equals("Hellforge"));
-				index4 = tasks.FindIndex(genpass => genpass.Name.Equals("Spreading Grass"));
-				int index5 = tasks.FindIndex(genpass => genpass.Name.Equals("Surface Ore and Stone"));
-				int index6 = tasks.FindIndex(genpass => genpass.Name.Equals("Place Fallen Log"));
-				int index7 = tasks.FindIndex(genpass => genpass.Name.Equals("Traps"));
-				if (index2 != -1)
-				{
-					tasks.Insert(index2 + 1, new PassLegacy("Traps", new WorldGenLegacyMethod(Traps)));
-					tasks.RemoveAt(index2);
-				}
-				if (index3 != -1)
-				{
-					tasks.Insert(index3 + 1, new PassLegacy("Pots", new WorldGenLegacyMethod(Pots)));
-					tasks.RemoveAt(index3);
-				}
-				if (index4 != -1)
-				{
-					tasks.Insert(index4 + 1, new PassLegacy("Hellforge", new WorldGenLegacyMethod(Hellforge)));
-					tasks.RemoveAt(index4);
-				}
-				if (index5 != -1)
-				{
-					tasks.Insert(index5 + 1, new PassLegacy("Spreading Grass", new WorldGenLegacyMethod(SpreadingGrass)));
-					tasks.RemoveAt(index5);
-				}
-				if (index6 != -1)
-				{
-					tasks.Insert(index6 + 1, new PassLegacy("Surface Ore and Stone", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index6);
-				}
-				if (index7 != -1)
-				{
-					tasks.Insert(index7 + 1, new PassLegacy("Place Fallen Log", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index7);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Piles"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Piles", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-
-
-
-				index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Spawn Point")); //Cactus growth was also moved from pre-spawnpoint to post BLANK
-				index3 = tasks.FindIndex(genpass => genpass.Name.Equals("Grass Wall"));
-				index4 = tasks.FindIndex(genpass => genpass.Name.Equals("Guide"));
-				index5 = tasks.FindIndex(genpass => genpass.Name.Equals("Sunflowers"));
-				index6 = tasks.FindIndex(genpass => genpass.Name.Equals("Planting Trees"));
-				index7 = tasks.FindIndex(genpass => genpass.Name.Equals("Herbs"));
-				int index8 = tasks.FindIndex(genpass => genpass.Name.Equals("Dye Plants"));
-				int index9 = tasks.FindIndex(genpass => genpass.Name.Equals("Webs And Honey"));
-				int index10 = tasks.FindIndex(genpass => genpass.Name.Equals("Weeds"));
-				int index11 = tasks.FindIndex(genpass => genpass.Name.Equals("Glowing Mushrooms and Jungle Plants"));
-				int index12 = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle Plants"));
-				int index13 = tasks.FindIndex(genpass => genpass.Name.Equals("Vines"));
-				int index14 = tasks.FindIndex(genpass => genpass.Name.Equals("Flowers"));
-				int index15 = tasks.FindIndex(genpass => genpass.Name.Equals("Mushrooms"));
-				int index16 = tasks.FindIndex(genpass => genpass.Name.Equals("Gems In Ice Biome"));
-				int index17 = tasks.FindIndex(genpass => genpass.Name.Equals("Random Gems"));
-				int index18 = tasks.FindIndex(genpass => genpass.Name.Equals("Moss Grass"));
-				int index19 = tasks.FindIndex(genpass => genpass.Name.Equals("Muds Walls In Jungle"));
-				int index20 = tasks.FindIndex(genpass => genpass.Name.Equals("Larva"));
-				int index21 = tasks.FindIndex(genpass => genpass.Name.Equals("Settle Liquids Again"));
-				int index22 = tasks.FindIndex(genpass => genpass.Name.Equals("Cactus, Palm Trees, & Coral"));
-				if (index2 != -1)
-				{
-					tasks.Insert(index2 + 1, new PassLegacy("Cactus, Palm Trees, & Coral", new WorldGenLegacyMethod(CactusPalmTreesCoral)));
-					tasks.RemoveAt(index2);
-				}
-				if (index3 != -1)
-				{
-					tasks.Insert(index3 + 1, new PassLegacy("Spawn Point", new WorldGenLegacyMethod(SpawnPoint)));
-					tasks.RemoveAt(index3);
-				}
-				if (index4 != -1)
-				{
-					tasks.Insert(index4 + 1, new PassLegacy("Grass Wall", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index4);
-				}
-				if (index5 != -1)
-				{
-					tasks.Insert(index5 + 1, new PassLegacy("Guide", new WorldGenLegacyMethod(Guide)));
-					tasks.RemoveAt(index5);
-				}
-				if (index6 != -1)
-				{
-					tasks.Insert(index6 + 1, new PassLegacy("Sunflowers", new WorldGenLegacyMethod(Sunflowers)));
-					tasks.RemoveAt(index6);
-				}
-				if (index7 != -1)
-				{
-					tasks.Insert(index7 + 1, new PassLegacy("Planting Trees", new WorldGenLegacyMethod(PlantingTrees)));
-					tasks.RemoveAt(index7);
-				}
-				if (index8 != -1)
-				{
-					tasks.Insert(index8 + 1, new PassLegacy("Herbs", new WorldGenLegacyMethod(Herbs)));
-					tasks.RemoveAt(index8);
-				}
-				if (index9 != -1)
-				{
-					tasks.Insert(index9 + 1, new PassLegacy("Dye Plants", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index9);
-				}
-				if (index10 != -1)
-				{
-					tasks.Insert(index10 + 1, new PassLegacy("Webs And Honey", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index10);
-				}
-				if (index11 != -1)
-				{
-					tasks.Insert(index11 + 1, new PassLegacy("Weeds", new WorldGenLegacyMethod(Weeds)));
-					tasks.RemoveAt(index11);
-				}
-				if (index12 != -1)
-				{
-					tasks.Insert(index12 + 1, new PassLegacy("Glowing Mushrooms and Jungle Plants", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index12);
-				}
-				if (index13 != -1)
-				{
-					tasks.Insert(index13 + 1, new PassLegacy("Jungle Plants", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index13);
-				}
-				if (index14 != -1)
-				{
-					tasks.Insert(index14 + 1, new PassLegacy("Vines", new WorldGenLegacyMethod(Vines)));
-					tasks.RemoveAt(index14);
-				}
-				if (index15 != -1)
-				{
-					tasks.Insert(index15 + 1, new PassLegacy("Flowers", new WorldGenLegacyMethod(Flowers)));
-					tasks.RemoveAt(index15);
-				}
-				if (index16 != -1)
-				{
-					tasks.Insert(index16 + 1, new PassLegacy("Mushrooms", new WorldGenLegacyMethod(Mushrooms)));
-					tasks.RemoveAt(index16);
-				}
-				if (index17 != -1)
-				{
-					tasks.Insert(index17 + 1, new PassLegacy("Gems In Ice Biome", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index17);
-				}
-				if (index18 != -1)
-				{
-					tasks.Insert(index18 + 1, new PassLegacy("Random Gems", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index18);
-				}
-				if (index19 != -1)
-				{
-					tasks.Insert(index19 + 1, new PassLegacy("Moss Grass", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index19);
-				}
-				if (index20 != -1)
-				{
-					tasks.Insert(index20 + 1, new PassLegacy("Muds Walls In Jungle", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index20);
-				}
-				if (index21 != -1)
-				{
-					tasks.Insert(index21 + 1, new PassLegacy("Larva", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index21);
-				}
-				if (index22 != -1)
-				{
-					tasks.Insert(index22 + 1, new PassLegacy("Settle Liquids Again", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index22);
-				}
-
-
-
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Tile Cleanup"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Tile Cleanup", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Lihzahrd Altars"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Lihzahrd Altars", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Micro Biomes", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Water Plants"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Water Plants", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Stalac"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Stalac", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Remove Broken Traps"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Remove Broken Traps", new WorldGenLegacyMethod(EmptyPass)));
-					tasks.RemoveAt(index);
-				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Final Cleanup"));
-				if (index != -1)
-				{
-					tasks.Insert(index + 1, new PassLegacy("Final Cleanup", new WorldGenLegacyMethod(FinalCleanup)));
-					tasks.RemoveAt(index);
+				if (!(WorldGen.drunkWorldGen && WorldGen.getGoodWorldGen && WorldGen.noTrapsWorldGen))
+				{
+					string[] blockedGenpass = new string[32];
+
+					blockedGenpass[0] = "Corruption";
+					blockedGenpass[1] = "Lakes";
+					blockedGenpass[2] = "Dungeon";
+					blockedGenpass[3] = "Settle Liquids";
+					blockedGenpass[4] = "Remove Water From Sand";
+					blockedGenpass[5] = "Pots";
+					blockedGenpass[6] = "Hellforge";
+					blockedGenpass[7] = "Spreading Grass";
+					blockedGenpass[8] = "Surface Ore and Stone";
+					blockedGenpass[9] = "Place Fallen Log";
+					blockedGenpass[10] = "Traps";
+					blockedGenpass[11] = "Spawn Point";
+					blockedGenpass[12] = "Grass Wall";
+					blockedGenpass[13] = "Guide";
+					blockedGenpass[14] = "Sunflowers";
+					blockedGenpass[15] = "Planting Trees";
+					blockedGenpass[16] = "Herbs";
+					blockedGenpass[17] = "Dye Plants";
+					blockedGenpass[18] = "Webs And Honey";
+					blockedGenpass[19] = "Weeds";
+					blockedGenpass[20] = "Glowing Mushrooms and Jungle Plants";
+					blockedGenpass[21] = "Jungle Plants";
+					blockedGenpass[22] = "Vines";
+					blockedGenpass[23] = "Flowers";
+					blockedGenpass[24] = "Mushrooms";
+					blockedGenpass[25] = "Gems In Ice Biome";
+					blockedGenpass[26] = "Random Gems";
+					blockedGenpass[27] = "Moss Grass";
+					blockedGenpass[28] = "Muds Walls In Jungle";
+					blockedGenpass[29] = "Larva";
+					blockedGenpass[30] = "Settle Liquids Again";
+					blockedGenpass[31] = "Cactus, Palm Trees, & Coral";
+
+					for (int i = 0; i < vanillaGenpasses.Length; i++)
+					{
+						string str = vanillaGenpasses[i];
+						for (int j = 0; j < blockedGenpass.Length; j++)
+						{
+							if (str == blockedGenpass[j])
+							{
+								continue;
+							}
+						}
+						int index = tasks.FindIndex(genpass => genpass.Name.Equals(str));
+						if (index != -1)
+						{
+							WorldGenLegacyMethod editedGenpass = null;
+							switch (str)
+							{
+								case "Reset":
+									editedGenpass = new WorldGenLegacyMethod(Reset);
+									break;
+								case "Terrain":
+									editedGenpass = new WorldGenLegacyMethod(Terrain);
+									break;
+								case "Dunes":
+									editedGenpass = new WorldGenLegacyMethod(Dunes);
+									break;
+								case "Mount Caves":
+									editedGenpass = new WorldGenLegacyMethod(MountCaves);
+									break;
+								case "Dirt Wall Backgrounds":
+									editedGenpass = new WorldGenLegacyMethod(DirtWallBackgrounds);
+									break;
+								case "Rocks In Dirt":
+									editedGenpass = new WorldGenLegacyMethod(RocksInDirt);
+									break;
+								case "Dirt In Rocks":
+									editedGenpass = new WorldGenLegacyMethod(DirtInRocks);
+									break;
+								case "Clay":
+									editedGenpass = new WorldGenLegacyMethod(Clay);
+									break;
+								case "Small Holes":
+									editedGenpass = new WorldGenLegacyMethod(SmallHoles);
+									break;
+								case "Dirt Layer Caves":
+									editedGenpass = new WorldGenLegacyMethod(DirtLayerCaves);
+									break;
+								case "Rock Layer Caves":
+									editedGenpass = new WorldGenLegacyMethod(RockLayerCaves);
+									break;
+								case "Surface Caves":
+									editedGenpass = new WorldGenLegacyMethod(SurfaceCaves);
+									break;
+								case "Jungle":
+									editedGenpass = new WorldGenLegacyMethod(Jungle);
+									break;
+								case "Floating Islands":
+									editedGenpass = new WorldGenLegacyMethod(FloatingIslands);
+									break;
+								case "Mushroom Patches":
+									editedGenpass = new WorldGenLegacyMethod(MushroomPatches);
+									break;
+								case "Dirt To Mud":
+									editedGenpass = new WorldGenLegacyMethod(DirtToMud);
+									break;
+								case "Silt":
+									editedGenpass = new WorldGenLegacyMethod(Silt);
+									break;
+								case "Shinies":
+									editedGenpass = new WorldGenLegacyMethod(Shinies);
+									break;
+								case "Webs":
+									editedGenpass = new WorldGenLegacyMethod(Webs);
+									break;
+								case "Underworld":
+									editedGenpass = new WorldGenLegacyMethod(Underworld);
+									break;
+								case "Mountain Caves":
+									editedGenpass = new WorldGenLegacyMethod(MountainCaves);
+									break;
+								case "Beaches":
+									editedGenpass = new WorldGenLegacyMethod(Beaches);
+									break;
+								case "Gems":
+									editedGenpass = new WorldGenLegacyMethod(Gems);
+									break;
+								case "Gravitating Sand":
+									editedGenpass = new WorldGenLegacyMethod(GravitatingSand);
+									break;
+								case "Clean Up Dirt":
+									editedGenpass = new WorldGenLegacyMethod(CleanUpDirt);
+									break;
+								case "Altars":
+									editedGenpass = new WorldGenLegacyMethod(Altars);
+									break;
+								case "Wet Jungle":
+									editedGenpass = new WorldGenLegacyMethod(WetJungle);
+									break;
+								case "Life Crystals":
+									editedGenpass = new WorldGenLegacyMethod(LifeCrystals);
+									break;
+								case "Statues":
+									editedGenpass = new WorldGenLegacyMethod(Statues);
+									break;
+								case "Buried Chests":
+									editedGenpass = new WorldGenLegacyMethod(BuriedChests);
+									break;
+								case "Surface Chests":
+									editedGenpass = new WorldGenLegacyMethod(SurfaceChests);
+									break;
+								case "Jungle Chests Placement":
+									editedGenpass = new WorldGenLegacyMethod(JungleChestsPlacement);
+									break;
+								case "Water Chests":
+									editedGenpass = new WorldGenLegacyMethod(WaterChests);
+									break;
+								case "Floating Island Houses":
+									editedGenpass = new WorldGenLegacyMethod(FloatingIslandHouses);
+									break;
+								case "Final Cleanup":
+									editedGenpass = new WorldGenLegacyMethod(FinalCleanup);
+									break;
+								default:
+									editedGenpass = new WorldGenLegacyMethod(EmptyPass);
+									break;
+							}
+							tasks.Insert(index + 1, new PassLegacy(str, editedGenpass));
+							tasks.RemoveAt(index);
+						}
+					}
+
+					int index2 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[0])); //for some reason corruption was moved down before lakes in later updates
+					int index3 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[1]));
+					int index4 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[2]));
+					ReplaceGenpass(ref tasks, index2, "Lakes", new WorldGenLegacyMethod(Lakes));
+					ReplaceGenpass(ref tasks, index3, "Dungeon", new WorldGenLegacyMethod(Dungeon));
+					ReplaceGenpass(ref tasks, index4, "Corruption", new WorldGenLegacyMethod(Corruption));
+
+					index2 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[3])); //swapped sand water removal and settle liquids
+					index3 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[4]));
+					ReplaceGenpass(ref tasks, index2, "Remove Water From Sand", new WorldGenLegacyMethod(RemoveWaterFromSand));
+					ReplaceGenpass(ref tasks, index3, "Settle Liquids", new WorldGenLegacyMethod(SettleLiquids));
+
+					index2 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[5])); //Traps was also moved from pre-pots to post fallen log/speading grass
+					index3 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[6]));
+					index4 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[7]));
+					int index5 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[8]));
+					int index6 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[9]));
+					int index7 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[10]));
+					ReplaceGenpass(ref tasks, index2, "Traps", new WorldGenLegacyMethod(Traps));
+					ReplaceGenpass(ref tasks, index3, "Pots", new WorldGenLegacyMethod(Pots));
+					ReplaceGenpass(ref tasks, index4, "Hellforge", new WorldGenLegacyMethod(Hellforge));
+					ReplaceGenpass(ref tasks, index5, "Spreading Grass", new WorldGenLegacyMethod(SpreadingGrass));
+					ReplaceGenpass(ref tasks, index6, "Surface Ore and Stone", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index7, "Place Fallen Log", new WorldGenLegacyMethod(EmptyPass));
+
+					index2 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[11])); //Cactus growth was also moved from pre-spawnpoint to post-settling liquids for a second time
+					index3 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[12]));
+					index4 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[13]));
+					index5 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[14]));
+					index6 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[15]));
+					index7 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[16]));
+					int index8 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[17]));
+					int index9 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[18]));
+					int index10 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[19]));
+					int index11 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[20]));
+					int index12 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[21]));
+					int index13 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[22]));
+					int index14 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[23]));
+					int index15 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[24]));
+					int index16 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[25]));
+					int index17 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[26]));
+					int index18 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[27]));
+					int index19 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[28]));
+					int index20 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[29]));
+					int index21 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[30]));
+					int index22 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[31]));
+					ReplaceGenpass(ref tasks, index2, "Cactus, Palm Trees, & Coral", new WorldGenLegacyMethod(CactusPalmTreesCoral));
+					ReplaceGenpass(ref tasks, index3, "Spawn Point", new WorldGenLegacyMethod(SpawnPoint));
+					ReplaceGenpass(ref tasks, index4, "Grass Wall", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index5, "Guide", new WorldGenLegacyMethod(Guide));
+					ReplaceGenpass(ref tasks, index6, "Sunflowers", new WorldGenLegacyMethod(Sunflowers));
+					ReplaceGenpass(ref tasks, index7, "Planting Trees", new WorldGenLegacyMethod(PlantingTrees));
+					ReplaceGenpass(ref tasks, index8, "Herbs", new WorldGenLegacyMethod(Herbs));
+					ReplaceGenpass(ref tasks, index9, "Dye Plants", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index10, "Webs And Honey", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index11, "Weeds", new WorldGenLegacyMethod(Weeds));
+					ReplaceGenpass(ref tasks, index12, "Glowing Mushrooms and Jungle Plants", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index13, "Jungle Plants", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index14, "Vines", new WorldGenLegacyMethod(Vines));
+					ReplaceGenpass(ref tasks, index15, "Flowers", new WorldGenLegacyMethod(Flowers));
+					ReplaceGenpass(ref tasks, index16, "Mushrooms", new WorldGenLegacyMethod(Mushrooms));
+					ReplaceGenpass(ref tasks, index17, "Gems In Ice Biome", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index18, "Random Gems", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index19, "Moss Grass", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index20, "Muds Walls In Jungle", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index21, "Larva", new WorldGenLegacyMethod(EmptyPass));
+					ReplaceGenpass(ref tasks, index22, "Settle Liquids Again", new WorldGenLegacyMethod(EmptyPass));
+				}
+				else
+				{
+					//get fixed boi worldgen
 				}
 			}
 		}
 
+		private static void ReplaceGenpass(ref List<GenPass> tasks, int index, string passName, WorldGenLegacyMethod newGenPass)
+		{
+			if (index != -1)
+			{
+				tasks.Insert(index + 1, new PassLegacy(passName, newGenPass));
+				tasks.RemoveAt(index);
+			}
+		}
+
+		//all genpasses that didnt exist in 1.1.2 use a blank genpass to still exist so mod confict happen less, although the old worldgen is quite agressive and may/will still break with other mod worldgen
 		private static void EmptyPass(GenerationProgress progres, GameConfiguration configurations) { }
 
-		//readded old feilds, have a look into GenVars for ones moved there
+		//readded old feilds
 		private static int houseCount = 0;
 		private static int numDPlats;
 		private static int[] fihX = new int[300];
@@ -813,29 +337,20 @@ namespace Avalon.WorldGeneration.secretSeeds
 		private static int[] DPlatY = new int[300];
 		private static int lastMaxTilesX = 0;
 		private static int lastMaxTilesY = 0;
-		private static Vector2 lastDungeonHall = default(Vector2);
+		private static Vector2 lastDungeonHall = default(Vector2); //was added to GenVars.cs but was changed to Vector2D, which breaks worldgen
 
-		private static int localVar1; //due to 1.1 worldgeneration being in 1 big method, local variables are shared constantly
-		private static int localVar2; //as worldgen is added, the names for the ones used a lot (ie ones here) are given
-		private static double localVar3;
-		private static double localVar4;
-		private static double localVar5;
-		private static double localVar6;
-		private static double localVar7;
-		private static double localVar8;
-		private static int localVar9;
-		private static int localVar12;
-		private static int localVar197;
-		private static int localVar198;
-		private static int localVar199;
-		private static int localVar200;
-		private static float localVar252;
-
-		public static void clearWorld() //maybe detour clear world to add this?
-		{
-			lastMaxTilesX = Main.maxTilesX;
-			lastMaxTilesY = Main.maxTilesY;
-		}
+		//due to 1.1 worldgeneration being in 1 big method, local variables are shared constantly
+		//these are interperated names for the values, although the local variable names are still found in the Worldgen methods
+		private static double surfaceVariance; //varaince in the terrain saved and used
+		private static double surfaceVariance2;
+		private static double undergroundVariance;
+		private static double undergroundVariance2;
+		private static int dungeonSide; //num9
+		private static int beachYPos; //beach pos to prevent gem spawning
+		private static int beach2YPos;
+		private static int beachXPos;
+		private static int beach2XPos;
+		private static float worldSizeMultiplier; //multiplier of how many world elements (hearts, water chests, etc) should spawn
 
 		private static void resetGen()
 		{
@@ -854,7 +369,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Reset(GenerationProgress progres, GameConfiguration configurations) 
 		{
-			clearWorld(); //added since clearworld is just before this method
+			lastMaxTilesX = Main.maxTilesX;
+			lastMaxTilesY = Main.maxTilesY;
 			Main.checkXMas();
 			//NPC.clrNames(); //legacy NPC name code, does not to be reinstalled
 			//NPC.setNames();
@@ -870,6 +386,10 @@ namespace Avalon.WorldGeneration.secretSeeds
 				genRand = new Random((int)DateTime.Now.Ticks);
 			}*/
 			Main.worldID = WorldGen.genRand.Next(int.MaxValue);
+		}
+
+		private static void Terrain(GenerationProgress progres, GameConfiguration configurations)
+		{
 			int num = 0;
 			int num2 = 0;
 			double num3 = (double)Main.maxTilesY * 0.3;
@@ -882,29 +402,6 @@ namespace Avalon.WorldGeneration.secretSeeds
 			double num8 = num4;
 			int num9 = 0;
 			num9 = ((!WorldGen.genRand.NextBool(2)) ? 1 : (-1));
-
-			localVar1 = num;
-			localVar2 = num2;
-			localVar3 = num3;
-			localVar4 = num4;
-			localVar5 = num5;
-			localVar6 = num6;
-			localVar7 = num7;
-			localVar8 = num8;
-			localVar9 = num9;
-		}
-
-		private static void Terrain(GenerationProgress progres, GameConfiguration configurations)
-		{
-			int num = localVar1;
-			int num2 = localVar2;
-			double num3 = localVar3;
-			double num4 = localVar4;
-			double num5 = localVar5;
-			double num6 = localVar6;
-			double num7 = localVar7;
-			double num8 = localVar8;
-
 			for (int i = 0; i < Main.maxTilesX; i++)
 			{
 				float num10 = (float)i / (float)Main.maxTilesX;
@@ -1047,7 +544,6 @@ namespace Avalon.WorldGeneration.secretSeeds
 			GenVars.waterLine = (int)(Main.rockLayer + (double)Main.maxTilesY) / 2;
 			GenVars.waterLine += WorldGen.genRand.Next(-100, 20);
 			GenVars.lavaLine = GenVars.waterLine + WorldGen.genRand.Next(50, 80);
-			int num12 = 0;
 			for (int l = 0; l < (int)((double)Main.maxTilesX * 0.0015); l++)
 			{
 				int[] array = new int[10];
@@ -1070,20 +566,16 @@ namespace Avalon.WorldGeneration.secretSeeds
 				}
 			}
 
-			localVar1 = num;
-			localVar2 = num2;
-			localVar3 = num3;
-			localVar4 = num4;
-			localVar5 = num5;
-			localVar6 = num6;
-			localVar7 = num7;
-			localVar8 = num8;
-			localVar12 = num12;
+			surfaceVariance = num5;
+			surfaceVariance2 = num6;
+			undergroundVariance = num7;
+			undergroundVariance2 = num8;
+			dungeonSide = num9;
 		}
 
 		private static void Dunes(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num9 = localVar9;
+			int num9 = dungeonSide;
 
 			Main.statusText = (string)Lang.gen[1];
 			int num15 = WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.0008), (int)((double)Main.maxTilesX * 0.0025));
@@ -1323,8 +815,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void DirtWallBackgrounds(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num12 = localVar12;
-
+			int num12 = 0;
 			for (int num43 = 1; num43 < Main.maxTilesX - 1; num43++)
 			{
 				float num44 = (float)num43 / (float)Main.maxTilesX;
@@ -1351,15 +842,13 @@ namespace Avalon.WorldGeneration.secretSeeds
 					}
 				}
 			}
-
-			localVar12 = num12;
 		}
 
 		private static void RocksInDirt(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
-			double num6 = localVar6;
-			double num8 = localVar8;
+			double num5 = surfaceVariance;
+			double num6 = surfaceVariance2;
+			double num8 = undergroundVariance2;
 
 			Main.statusText = (string)Lang.gen[4];
 			for (int num46 = 0; num46 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0002); num46++)
@@ -1378,7 +867,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void DirtInRocks(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num7 = localVar7;
+			double num7 = undergroundVariance;
 
 			Main.statusText = (string)Lang.gen[5];
 			for (int num49 = 0; num49 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.005); num49++)
@@ -1389,9 +878,9 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Clay(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
-			double num6 = localVar6;
-			double num8 = localVar8;
+			double num5 = surfaceVariance;
+			double num6 = surfaceVariance2;
+			double num8 = undergroundVariance2;
 
 			Main.statusText = (string)Lang.gen[6];
 			for (int num50 = 0; num50 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 2E-05); num50++)
@@ -1428,7 +917,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void SmallHoles(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num6 = localVar6;
+			double num6 = surfaceVariance2;
 
 			for (int num57 = 0; num57 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0015); num57++)
 			{
@@ -1446,8 +935,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void DirtLayerCaves(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
-			double num8 = localVar8;
+			double num5 = surfaceVariance;
+			double num8 = undergroundVariance2;
 
 			for (int num59 = 0; num59 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 3E-05); num59++)
 			{
@@ -1467,7 +956,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void RockLayerCaves(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num8 = localVar8;
+			double num8 = undergroundVariance2;
 
 			for (int num61 = 0; num61 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00013); num61++)
 			{
@@ -1487,8 +976,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void SurfaceCaves(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
-			double num6 = localVar6;
+			double num5 = surfaceVariance;
+			double num6 = surfaceVariance2;
 
 			int num56 = 0;
 			Main.statusText = (string)Lang.gen[10];
@@ -1584,7 +1073,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Jungle(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num9 = localVar9;
+			int num9 = dungeonSide;
 
 			Main.statusText = Lang.gen[11] + " 0%";
 			float num76 = Main.maxTilesX / 4200;
@@ -1823,7 +1312,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void FloatingIslands(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
+			double num5 = surfaceVariance;
 
 			GenVars.numIslandHouses = 0;
 			houseCount = 0;
@@ -1904,7 +1393,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void DirtToMud(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num7 = localVar7;
+			double num7 = undergroundVariance;
 
 			Main.statusText = (string)Lang.gen[14];
 			for (int num129 = 0; num129 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.001); num129++)
@@ -1915,7 +1404,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Silt(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num8 = localVar8;
+			double num8 = undergroundVariance2;
 
 			Main.statusText = (string)Lang.gen[15];
 			for (int num130 = 0; num130 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0001); num130++)
@@ -1930,10 +1419,10 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Shinies(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
-			double num6 = localVar6;
-			double num7 = localVar7;
-			double num8 = localVar8;
+			double num5 = surfaceVariance;
+			double num6 = surfaceVariance2;
+			double num7 = undergroundVariance;
+			double num8 = undergroundVariance2;
 
 			Main.statusText = (string)Lang.gen[16];
 			for (int num132 = 0; num132 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 6E-05); num132++)
@@ -1988,7 +1477,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Webs(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
+			double num5 = surfaceVariance;
 
 			Main.statusText = (string)Lang.gen[17];
 			for (int num144 = 0; num144 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0006); num144++)
@@ -2154,7 +1643,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Lakes(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
+			double num5 = surfaceVariance;
 
 			int num163 = WorldGen.genRand.Next(2, (int)((double)Main.maxTilesX * 0.005));
 			for (int num164 = 0; num164 < num163; num164++)
@@ -2176,7 +1665,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Dungeon(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num9 = localVar9;
+			int num9 = dungeonSide;
 
 			int num168 = 0;
 			if (num9 == -1)
@@ -2192,12 +1681,12 @@ namespace Avalon.WorldGeneration.secretSeeds
 			int y = (int)((Main.rockLayer + (double)Main.maxTilesY) / 2.0) + WorldGen.genRand.Next(-200, 200);
 			MakeDungeon(num168, y);
 
-			localVar9 = num9;
+			dungeonSide = num9;
 		}
 
 		private static void Corruption(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
+			double num5 = surfaceVariance;
 			int num56 = 0;
 
 			for (int num169 = 0; (double)num169 < (double)Main.maxTilesX * 0.00045; num169++)
@@ -2399,7 +1888,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Beaches(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num9 = localVar9;
+			int num9 = dungeonSide;
 
 			int num197 = 0;
 			int num198 = 0;
@@ -2640,18 +2129,18 @@ namespace Avalon.WorldGeneration.secretSeeds
 				}
 			}
 
-			localVar197 = num197;
-			localVar198 = num198;
-			localVar199 = num199;
-			localVar200 = num200;
+			beachYPos = num197;
+			beach2YPos = num198;
+			beachXPos = num199;
+			beach2XPos = num200;
 		}
 
 		private static void Gems(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num197 = localVar197;
-			int num198 = localVar198;
-			int num199 = localVar199;
-			int num200 = localVar200;
+			int num197 = beachYPos;
+			int num198 = beach2YPos;
+			int num199 = beachXPos;
+			int num200 = beach2XPos;
 
 			for (; !Main.tile[num199, num197].HasTile; num197++)
 			{
@@ -2829,7 +2318,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Altars(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num6 = localVar6;
+			double num6 = surfaceVariance2;
 
 			for (int num237 = 0; num237 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 2E-05); num237++)
 			{
@@ -2858,7 +2347,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void WetJungle(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
+			double num5 = surfaceVariance;
 			int num56 = 0;
 
 			for (int num242 = 0; num242 < Main.maxTilesX; num242++)
@@ -2881,7 +2370,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void RemoveWaterFromSand(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
+			double num5 = surfaceVariance;
 			int num56 = 0;
 
 			for (int num244 = 400; num244 < Main.maxTilesX - 400; num244++)
@@ -2952,7 +2441,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void LifeCrystals(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num6 = localVar6;
+			double num6 = surfaceVariance2;
 
 			float num252 = Main.maxTilesX / 4200;
 			for (int num253 = 0; num253 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 2E-05); num253++)
@@ -2976,13 +2465,13 @@ namespace Avalon.WorldGeneration.secretSeeds
 				}
 			}
 
-			localVar252 = num252;
+			worldSizeMultiplier = num252;
 		}
 
 		private static void Statues(GenerationProgress progres, GameConfiguration configurations)
 		{
-			float num252 = localVar252;
-			double num6 = localVar6;
+			float num252 = worldSizeMultiplier;
+			double num6 = surfaceVariance2;
 
 			int num256 = 0;
 			for (int num257 = 0; (float)num257 < 82f * num252; num257++)
@@ -3021,8 +2510,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void BuriedChests(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num6 = localVar6;
-			float num252 = localVar252;
+			double num6 = surfaceVariance2;
+			float num252 = worldSizeMultiplier;
 
 			for (int num262 = 0; num262 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 1.6E-05); num262++)
 			{
@@ -3076,7 +2565,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void SurfaceChests(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
+			double num5 = surfaceVariance;
 
 			for (int num268 = 0; num268 < (int)((double)Main.maxTilesX * 0.005); num268++)
 			{
@@ -3149,7 +2638,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void WaterChests(GenerationProgress progres, GameConfiguration configurations)
 		{
-			float num252 = localVar252;
+			float num252 = worldSizeMultiplier;
 
 			int num278 = 0;
 			for (int num279 = 0; (float)num279 < 9f * num252; num279++)
@@ -3214,8 +2703,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Pots(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num5 = localVar5;
-			double num6 = localVar6;
+			double num5 = surfaceVariance;
+			double num6 = surfaceVariance2;
 
 			for (int num290 = 0; num290 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0008); num290++)
 			{
@@ -3305,7 +2794,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void SpreadingGrass(GenerationProgress progres, GameConfiguration configurations)
 		{
-			double num6 = localVar6;
+			double num6 = surfaceVariance2;
 			int num56 = 0;
 
 			Main.statusText = (string)Lang.gen[37];
