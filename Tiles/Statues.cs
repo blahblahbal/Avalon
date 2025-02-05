@@ -208,7 +208,7 @@ public class ExampleStatueModWorld : ModSystem
 {
     public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
     {
-		if (!AvalonWorld.retroWorld)
+		if (!AvalonWorld.retroWorld || (WorldGen.drunkWorldGen && WorldGen.getGoodWorldGen && WorldGen.noTrapsWorldGen))
 		{
 			int ResetIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Reset"));
 			if (ResetIndex != -1)

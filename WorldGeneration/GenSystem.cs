@@ -22,7 +22,7 @@ public class GenSystem : ModSystem
     }
     public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
     {
-		if (!AvalonWorld.retroWorld)
+		if (!AvalonWorld.retroWorld || (WorldGen.drunkWorldGen && WorldGen.getGoodWorldGen && WorldGen.noTrapsWorldGen))
 		{
 			GenPass currentPass;
 

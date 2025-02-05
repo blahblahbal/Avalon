@@ -6,12 +6,14 @@ using Avalon.WorldGeneration.Passes;
 using Humanizer;
 using Microsoft.Build.Tasks;
 using Microsoft.Xna.Framework;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Biomes;
 using Terraria.GameContent.Generation;
 using Terraria.GameContent.UI.States;
 using Terraria.ID;
@@ -20,6 +22,8 @@ using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
+using ThoriumMod;
+using ThoriumMod.Projectiles.Boss;
 
 namespace Avalon.WorldGeneration.secretSeeds
 {
@@ -39,6 +43,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 		{
 			On_WorldGen.GenerateWorld += CheckSeedNumber;
 			On_UIWorldCreation.ProcessSpecialWorldSeeds += SetGetRetroSeed;
+			On_CaveHouseBiome.Place += ReplaceHousesInSpecialSeeds;
 		}
 
 		private void SetGetRetroSeed(On_UIWorldCreation.orig_ProcessSpecialWorldSeeds orig, string processedSeed)
@@ -124,7 +129,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						int index = tasks.FindIndex(genpass => genpass.Name.Equals(str));
 						if (index != -1)
 						{
-							WorldGenLegacyMethod editedGenpass = null;
+							WorldGenLegacyMethod editedGenpass;
 							switch (str)
 							{
 								case "Reset":
@@ -312,6 +317,32 @@ namespace Avalon.WorldGeneration.secretSeeds
 				else
 				{
 					//get fixed boi worldgen
+					int index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Reset"));
+					if (index2 != -1)
+					{
+						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Reset Secret Seed stuff", new WorldGenLegacyMethod(ResetZenith)));
+					}
+
+					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Planting Trees"));
+					ReplaceGenpass(ref tasks, index2, "Planting Trees", new WorldGenLegacyMethod(PlantingTreesZenith));
+					
+					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Remove Broken Traps"));
+					if (index2 != -1)
+					{
+						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Unhammer hammered tiles", new WorldGenLegacyMethod(RemoveSlopesSlabsZenith)));
+					}
+
+					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Islands"));
+					ReplaceGenpass(ref tasks, index2, "Floating Islands", new WorldGenLegacyMethod(FloatingIslandsZenith));
+
+					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Final Cleanup"));
+					if (index2 != -1)
+					{
+						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Angel-ify chests", new WorldGenLegacyMethod(ReplaceGoldChestsWithStatues)));
+					}
+
+					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Island Houses"));
+					ReplaceGenpass(ref tasks, index2, "Floating Island Houses", new WorldGenLegacyMethod(FloatingIslandHousesZenith));
 				}
 			}
 		}
@@ -328,6 +359,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 		//all genpasses that didnt exist in 1.1.2 use a blank genpass to still exist so mod confict happen less, although the old worldgen is quite agressive and may/will still break with other mod worldgen
 		private static void EmptyPass(GenerationProgress progres, GameConfiguration configurations) { }
 
+		#region 1.1 Worldgen
 		//readded old feilds
 		private static int houseCount = 0;
 		private static int numDPlats;
@@ -367,7 +399,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			GenVars.numJChests = 0;
 		}
 
-		private static void Reset(GenerationProgress progres, GameConfiguration configurations) 
+		private static void Reset(GenerationProgress progres, GameConfiguration configurations)
 		{
 			lastMaxTilesX = Main.maxTilesX;
 			lastMaxTilesY = Main.maxTilesY;
@@ -2950,7 +2982,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				}
 			}
 		}
-		
+
 		private static void PlantingTrees(GenerationProgress progres, GameConfiguration configurations)
 		{
 			Main.statusText = (string)Lang.gen[40];
@@ -7878,7 +7910,21 @@ namespace Avalon.WorldGeneration.secretSeeds
 					contain = 158;
 					break;
 			}
-			AddBuriedChest(i, num10 - 3, contain, notNearOtherChests: false, 2);
+			if (WorldGen.remixWorldGen)
+			{
+				if (WorldGen.getGoodWorldGen)
+				{
+					WorldGen.AddBuriedChest(i, num2 - 3, contain, notNearOtherChests: false, 2, trySlope: false, 0);
+				}
+				else
+				{
+					WorldGen.AddBuriedChest(i, num2 - 3, contain, notNearOtherChests: false, 13, trySlope: false, 0);
+				}
+			}
+			else
+			{
+				AddBuriedChest(i, num10 - 3, contain, notNearOtherChests: false, 2);
+			}
 			houseCount++;
 		}
 
@@ -9132,5 +9178,1698 @@ namespace Avalon.WorldGeneration.secretSeeds
 			WorldGen.treeBG4 = 0;
 			WorldGen.underworldBG = 0;
 		}
+		#endregion
+
+		#region getfixedboy additions/edits
+		private static void ResetZenith(GenerationProgress progres, GameConfiguration configurations)
+		{
+			SetBackgroundNormal();
+			Main.treeStyle[0] = 0;
+			Main.treeStyle[1] = 0;
+			Main.treeStyle[2] = 0;
+			Main.treeStyle[3] = 0;
+			WorldGen.TreeTops.CopyExistingWorldInfoForWorldGeneration();
+			houseCount = 0;
+		}
+
+		private static void PlantingTreesZenith(GenerationProgress progres, GameConfiguration configurations)
+		{
+			Main.statusText = (string)Lang.gen[40];
+			for (int num318 = 0; (double)num318 < (double)Main.maxTilesX * 0.003; num318++)
+			{
+				int num319 = WorldGen.genRand.Next(50, Main.maxTilesX - 50);
+				int num320 = WorldGen.genRand.Next(25, 50);
+				for (int num321 = num319 - num320; num321 < num319 + num320; num321++)
+				{
+					for (int num322 = 20; (double)num322 < Main.worldSurface; num322++)
+					{
+						GrowEpicTreeZenith(num321, num322);
+					}
+				}
+			}
+			AddTreesZenith();
+		}
+
+		private static void FloatingIslandsZenith(GenerationProgress progres, GameConfiguration configurations)
+		{
+			double num5 = GenVars.worldSurfaceLow;
+
+			GenVars.numIslandHouses = 0;
+			houseCount = 0;
+			Main.statusText = (string)Lang.gen[12];
+			for (int num119 = 0; num119 < (int)((double)Main.maxTilesX * 0.0008); num119++)
+			{
+				int num120 = 0;
+				bool flag7 = false;
+				int num121 = WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.1), (int)((double)Main.maxTilesX * 0.9));
+				bool flag8 = false;
+				while (!flag8)
+				{
+					flag8 = true;
+					while (num121 > Main.maxTilesX / 2 - 80 && num121 < Main.maxTilesX / 2 + 80)
+					{
+						num121 = WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.1), (int)((double)Main.maxTilesX * 0.9));
+					}
+					for (int num122 = 0; num122 < GenVars.numIslandHouses; num122++)
+					{
+						if (num121 > fihX[num122] - 80 && num121 < fihX[num122] + 80)
+						{
+							num120++;
+							flag8 = false;
+							break;
+						}
+					}
+					if (num120 >= 200)
+					{
+						flag7 = true;
+						break;
+					}
+				}
+				if (flag7)
+				{
+					continue;
+				}
+				for (int num123 = 200; (double)num123 < Main.worldSurface; num123++)
+				{
+					if (Main.tile[num121, num123].HasTile)
+					{
+						int num124 = num121;
+						int num125 = WorldGen.genRand.Next(90, num123 - 100);
+						while ((double)num125 > num5 - 50.0)
+						{
+							num125--;
+						}
+						FloatingIsland(num124, num125);
+						fihX[GenVars.numIslandHouses] = num124;
+						fihY[GenVars.numIslandHouses] = num125;
+						GenVars.numIslandHouses++;
+						break;
+					}
+				}
+			}
+		}
+
+		private bool ReplaceHousesInSpecialSeeds(On_CaveHouseBiome.orig_Place orig, CaveHouseBiome self, Point origin, StructureMap structures)
+		{
+			if (AvalonWorld.retroWorld)
+			{
+				if (!WorldGen.InWorld(origin.X, origin.Y, 10))
+				{
+					return false;
+				}
+				int x = origin.X;
+				int y = origin.Y;
+				MineHouseZenith(x, y);
+				return true;
+			}
+			return orig.Invoke(self, origin, structures);
+		}
+
+		private static void ReplaceGoldChestsWithStatues(GenerationProgress progres, GameConfiguration configurations)
+		{
+			for (int k = 0; k < Main.maxChests; k++)
+			{
+				Chest chest = Main.chest[k];
+				if (chest != null)
+				{
+					if (WorldGen.genRand.NextBool(8))
+					{
+						Tile tile = Main.tile[chest.x, chest.y];
+						if (tile.TileFrameX >= 36 && tile.TileFrameX < 72)
+						{
+							ExxoAvalonOrigins.Mod.Logger.Info("replaced chest: " + chest.x + ", " + chest.y);
+							Chest.DestroyChestDirect(chest.x, chest.y, k);
+							//uhh uhh um uh
+							WorldGen.KillTile(chest.x, chest.y);
+							WorldGen.KillTile(chest.x + 1, chest.y);
+							WorldGen.KillTile(chest.x, chest.y - 1);
+							WorldGen.KillTile(chest.x + 1, chest.y - 1);
+							WorldGen.KillTile(chest.x, chest.y + 1);
+							WorldGen.KillTile(chest.x + 1, chest.y + 1);
+
+							WorldGen.Place2xX(chest.x + 1, chest.y + 1, TileID.Statues, 1);
+						}
+					}
+				}
+			}
+		}
+
+		private static void FloatingIslandHousesZenith(GenerationProgress progres, GameConfiguration configurations)
+		{
+			for (int num284 = 0; num284 < GenVars.numIslandHouses; num284++)
+			{
+				IslandHouseZenith(fihX[num284], fihY[num284]);
+			}
+		}
+
+		private static void RemoveSlopesSlabsZenith(GenerationProgress progres, GameConfiguration configurations)
+		{
+			for (int i = 0; i < Main.maxTilesX; i++)
+			{
+				for (int j = 0; j < Main.maxTilesY; j++)
+				{
+					Tile tile = Main.tile[i, j];
+					if (tile.Slope > 0)
+					{
+						tile.Slope = 0;
+					}
+					if (tile.IsHalfBlock)
+					{
+						tile.IsHalfBlock = false;
+					}
+				}
+			}
+		}
+
+		public static void MineHouseZenith(int i, int j)
+		{
+			if (i < 50 || i > Main.maxTilesX - 50 || j < 50 || j > Main.maxTilesY - 50)
+			{
+				return;
+			}
+			int num = WorldGen.genRand.Next(6, 12);
+			int num2 = WorldGen.genRand.Next(3, 6);
+			int num3 = WorldGen.genRand.Next(15, 30);
+			int num4 = WorldGen.genRand.Next(15, 30);
+			if (WorldGen.SolidTile(i, j) || Main.tile[i, j].WallType > 0)
+			{
+				return;
+			}
+			int num5 = j - num;
+			int num6 = j + num2;
+			for (int k = 0; k < 2; k++)
+			{
+				bool flag = true;
+				int num7 = i;
+				int num8 = j;
+				int num9 = -1;
+				int num10 = num3;
+				if (k == 1)
+				{
+					num9 = 1;
+					num10 = num4;
+					num7++;
+				}
+				while (flag)
+				{
+					if (num8 - num < num5)
+					{
+						num5 = num8 - num;
+					}
+					if (num8 + num2 > num6)
+					{
+						num6 = num8 + num2;
+					}
+					for (int l = 0; l < 2; l++)
+					{
+						int num11 = num8;
+						bool flag2 = true;
+						int num12 = num;
+						int num13 = -1;
+						if (l == 1)
+						{
+							num11++;
+							num12 = num2;
+							num13 = 1;
+						}
+						while (flag2)
+						{
+							if (num7 != i && Main.tile[num7 - num9, num11].WallType != 27 && (WorldGen.SolidTile(num7 - num9, num11) || !Main.tile[num7 - num9, num11].HasTile))
+							{
+								Tile tile = Main.tile[num7 - num9, num11];
+								tile.HasTile = true;
+								tile.TileType = 30;
+							}
+							if (WorldGen.SolidTile(num7 - 1, num11))
+							{
+								Main.tile[num7 - 1, num11].TileType = 30;
+							}
+							if (WorldGen.SolidTile(num7 + 1, num11))
+							{
+								Main.tile[num7 + 1, num11].TileType = 30;
+							}
+							if (WorldGen.SolidTile(num7, num11))
+							{
+								int num14 = 0;
+								if (WorldGen.SolidTile(num7 - 1, num11))
+								{
+									num14++;
+								}
+								if (WorldGen.SolidTile(num7 + 1, num11))
+								{
+									num14++;
+								}
+								if (WorldGen.SolidTile(num7, num11 - 1))
+								{
+									num14++;
+								}
+								if (WorldGen.SolidTile(num7, num11 + 1))
+								{
+									num14++;
+								}
+								if (num14 < 2)
+								{
+									Tile tile = Main.tile[num7, num11];
+									tile.HasTile = false;
+								}
+								else
+								{
+									flag2 = false;
+									Main.tile[num7, num11].TileType = 30;
+								}
+							}
+							else
+							{
+								Tile tile = Main.tile[num7, num11];
+								tile.WallType = 27;
+								tile.LiquidAmount = 0;
+								tile.LiquidType = 0;
+							}
+							num11 += num13;
+							num12--;
+							if (num12 <= 0)
+							{
+								if (!Main.tile[num7, num11].HasTile)
+								{
+									Tile tile = Main.tile[num7, num11];
+									tile.HasTile = true;
+									tile.TileType = 30;
+								}
+								flag2 = false;
+							}
+						}
+					}
+					num10--;
+					num7 += num9;
+					if (WorldGen.SolidTile(num7, num8))
+					{
+						int num15 = 0;
+						int num16 = 0;
+						int num17 = num8;
+						bool flag3 = true;
+						while (flag3)
+						{
+							num17--;
+							num15++;
+							if (WorldGen.SolidTile(num7 - num9, num17))
+							{
+								num15 = 999;
+								flag3 = false;
+							}
+							else if (!WorldGen.SolidTile(num7, num17))
+							{
+								flag3 = false;
+							}
+						}
+						num17 = num8;
+						flag3 = true;
+						while (flag3)
+						{
+							num17++;
+							num16++;
+							if (WorldGen.SolidTile(num7 - num9, num17))
+							{
+								num16 = 999;
+								flag3 = false;
+							}
+							else if (!WorldGen.SolidTile(num7, num17))
+							{
+								flag3 = false;
+							}
+						}
+						if (num16 <= num15)
+						{
+							if (num16 > num2)
+							{
+								num10 = 0;
+							}
+							else
+							{
+								num8 += num16 + 1;
+							}
+						}
+						else if (num15 > num)
+						{
+							num10 = 0;
+						}
+						else
+						{
+							num8 -= num15 + 1;
+						}
+					}
+					if (num10 <= 0)
+					{
+						flag = false;
+					}
+				}
+			}
+			int num18 = i - num3 - 1;
+			int num19 = i + num4 + 2;
+			int num20 = num5 - 1;
+			int num21 = num6 + 2;
+			for (int m = num18; m < num19; m++)
+			{
+				for (int n = num20; n < num21; n++)
+				{
+					if (Main.tile[m, n].WallType == 27 && !Main.tile[m, n].HasTile)
+					{
+						if (Main.tile[m - 1, n].WallType != 27 && m < i && !WorldGen.SolidTile(m - 1, n))
+						{
+							WorldGen.PlaceTile(m, n, 30, mute: true);
+							Main.tile[m, n].WallType = 0;
+						}
+						if (Main.tile[m + 1, n].WallType != 27 && m > i && !WorldGen.SolidTile(m + 1, n))
+						{
+							WorldGen.PlaceTile(m, n, 30, mute: true);
+							Main.tile[m, n].WallType = 0;
+						}
+						for (int num22 = m - 1; num22 <= m + 1; num22++)
+						{
+							for (int num23 = n - 1; num23 <= n + 1; num23++)
+							{
+								if (WorldGen.SolidTile(num22, num23))
+								{
+									Main.tile[num22, num23].TileType = 30;
+								}
+							}
+						}
+					}
+					if (Main.tile[m, n].TileType == 30 && Main.tile[m - 1, n].WallType == 27 && Main.tile[m + 1, n].WallType == 27 && (Main.tile[m, n - 1].WallType == 27 || Main.tile[m, n - 1].HasTile) && (Main.tile[m, n + 1].WallType == 27 || Main.tile[m, n + 1].HasTile))
+					{
+						Tile tile = Main.tile[m, n];
+						tile.HasTile = false;
+						tile.WallType = 27;
+					}
+				}
+			}
+			for (int num24 = num18; num24 < num19; num24++)
+			{
+				for (int num25 = num20; num25 < num21; num25++)
+				{
+					if (Main.tile[num24, num25].WallType == 30)
+					{
+						if (Main.tile[num24 - 1, num25].WallType == 27 && Main.tile[num24 + 1, num25].WallType == 27 && !Main.tile[num24 - 1, num25].HasTile && !Main.tile[num24 + 1, num25].HasTile)
+						{
+							Tile tile = Main.tile[num24, num25];
+							tile.HasTile = false;
+							tile.WallType = 27;
+						}
+						if (Main.tile[num24, num25 - 1].TileType != 21 && Main.tile[num24 - 1, num25].WallType == 27 && Main.tile[num24 + 1, num25].TileType == 30 && Main.tile[num24 + 2, num25].WallType == 27 && !Main.tile[num24 - 1, num25].HasTile && !Main.tile[num24 + 2, num25].HasTile)
+						{
+							Tile tile = Main.tile[num24, num25];
+							tile.HasTile = false;
+							tile.WallType = 27;
+							Tile tile2 = Main.tile[num24 + 1, num25];
+							tile2.HasTile = false;
+							tile2.WallType = 27;
+						}
+						if (Main.tile[num24, num25 - 1].WallType == 27 && Main.tile[num24, num25 + 1].WallType == 27 && !Main.tile[num24, num25 - 1].HasTile && !Main.tile[num24, num25 + 1].HasTile)
+						{
+							Tile tile = Main.tile[num24, num25];
+							tile.HasTile = false;
+							tile.WallType = 27;
+						}
+					}
+				}
+			}
+			for (int num26 = num18; num26 < num19; num26++)
+			{
+				for (int num27 = num21; num27 > num20; num27--)
+				{
+					bool flag4 = false;
+					if (Main.tile[num26, num27].HasTile && Main.tile[num26, num27].TileType == 30)
+					{
+						int num28 = -1;
+						for (int num29 = 0; num29 < 2; num29++)
+						{
+							if (!WorldGen.SolidTile(num26 + num28, num27) && Main.tile[num26 + num28, num27].WallType == 0)
+							{
+								int num30 = 0;
+								int num31 = num27;
+								int num32 = num27;
+								while (Main.tile[num26, num31].HasTile && Main.tile[num26, num31].TileType == 30 && !WorldGen.SolidTile(num26 + num28, num31) && Main.tile[num26 + num28, num31].WallType == 0)
+								{
+									num31--;
+									num30++;
+								}
+								num31++;
+								int num33 = num31 + 1;
+								if (num30 > 4)
+								{
+									if (WorldGen.genRand.Next(2) == 0)
+									{
+										num31 = num32 - 1;
+										bool flag5 = true;
+										for (int num34 = num26 - 2; num34 <= num26 + 2; num34++)
+										{
+											for (int num35 = num31 - 2; num35 <= num31; num35++)
+											{
+												if (num34 != num26 && Main.tile[num34, num35].HasTile)
+												{
+													flag5 = false;
+												}
+											}
+										}
+										if (flag5)
+										{
+											Tile tile = Main.tile[num26, num31];
+											tile.HasTile = false;
+											Tile tile2 = Main.tile[num26, num31 - 1];
+											tile2.HasTile = false;
+											Tile tile3 = Main.tile[num26, num31 - 2];
+											tile3.HasTile = false;
+											WorldGen.PlaceTile(num26, num31, 10, mute: true);
+											flag4 = true;
+										}
+									}
+									if (!flag4)
+									{
+										for (int num36 = num33; num36 < num32; num36++)
+										{
+											Main.tile[num26, num36].TileType = 124;
+										}
+									}
+								}
+							}
+							num28 = 1;
+						}
+					}
+					if (flag4)
+					{
+						break;
+					}
+				}
+			}
+			bool chestFlag = false;
+			int num37;
+			for (num37 = num18; num37 < num19; num37++)
+			{
+				bool flag6 = true;
+				for (int num38 = num20; num38 < num21; num38++)
+				{
+					for (int num39 = num37 - 2; num39 <= num37 + 2; num39++)
+					{
+						if (Main.tile[num39, num38].HasTile && (!WorldGen.SolidTile(num39, num38) || Main.tile[num39, num38].TileType == 10))
+						{
+							flag6 = false;
+						}
+						
+					}
+				}
+				if (flag6)
+				{
+					for (int num40 = num20; num40 < num21; num40++)
+					{
+						if (!chestFlag && num40 != num20 && Main.tile[num37, num40 + 1].TileType == TileID.WoodBlock && Main.tile[num37, num40 + 1].HasTile && Main.tile[num37 + 1, num40 + 1].TileType == TileID.WoodBlock && Main.tile[num37 + 1, num40 + 1].HasTile)
+						{
+							Tile tile = Main.tile[num37, num40];
+							tile.HasTile = false;
+							Tile tile2 = Main.tile[num37 + 1, num40];
+							tile2.HasTile = false;
+							Tile tile3 = Main.tile[num37, num40 - 1];
+							tile3.HasTile = false;
+							Tile tile4 = Main.tile[num37 + 1, num40 - 1];
+							tile4.HasTile = false;
+							chestFlag = WorldGen.AddBuriedChest(num37, num40, 0, notNearOtherChests: false, trySlope: false);
+							flag6 = !chestFlag;
+						}
+						if (Main.tile[num37, num40].WallType == 27 && !Main.tile[num37, num40].HasTile)
+						{
+							WorldGen.PlaceTile(num37, num40, 124, mute: true);
+						}
+					}
+				}
+				num37 += WorldGen.genRand.Next(3);
+			}
+			
+			for (int num41 = 0; num41 < 4; num41++)
+			{
+				int num42 = WorldGen.genRand.Next(num18 + 2, num19 - 1);
+				int num43 = WorldGen.genRand.Next(num20 + 2, num21 - 1);
+				while (Main.tile[num42, num43].WallType != 27)
+				{
+					num42 = WorldGen.genRand.Next(num18 + 2, num19 - 1);
+					num43 = WorldGen.genRand.Next(num20 + 2, num21 - 1);
+				}
+				while (Main.tile[num42, num43].HasTile)
+				{
+					num43--;
+				}
+				for (; !Main.tile[num42, num43].HasTile; num43++)
+				{
+				}
+				num43--;
+				if (Main.tile[num42, num43].WallType != 27)
+				{
+					continue;
+				}
+				if (!chestFlag)
+				{
+					chestFlag = WorldGen.AddBuriedChest(num42, num43, 0, notNearOtherChests: false, trySlope: false);
+				}
+				if (WorldGen.genRand.NextBool(3))
+				{
+					int num44 = WorldGen.genRand.Next(9);
+					if (num44 == 0)
+					{
+						num44 = 14;
+					}
+					if (num44 == 1)
+					{
+						num44 = 16;
+					}
+					if (num44 == 2)
+					{
+						num44 = 18;
+					}
+					if (num44 == 3)
+					{
+						num44 = 86;
+					}
+					if (num44 == 4)
+					{
+						num44 = 87;
+					}
+					if (num44 == 5)
+					{
+						num44 = 94;
+					}
+					if (num44 == 6)
+					{
+						num44 = 101;
+					}
+					if (num44 == 7)
+					{
+						num44 = 104;
+					}
+					if (num44 == 8)
+					{
+						num44 = 106;
+					}
+					WorldGen.PlaceTile(num42, num43, num44, mute: true);
+				}
+				else
+				{
+					int style = WorldGen.genRand.Next(2, 43);
+					PlaceTile_Old(num42, num43, 105, mute: true, forced: true, -1, style);
+				}
+			}
+			if (!chestFlag)
+			{
+				WorldGen.KillTile(i, j);
+				Tile tile = Main.tile[i, j];
+				tile.HasTile = false;
+				WorldGen.KillTile(i + 1, j);
+				Tile tile2 = Main.tile[i + 1, j];
+				tile2.HasTile = false;
+				WorldGen.KillTile(i, j - 1);
+				Tile tile3 = Main.tile[i, j - 1];
+				tile3.HasTile = false;
+				WorldGen.KillTile(i + 1, j - 1);
+				Tile tile4 = Main.tile[i + 1, j - 1];
+				tile4.HasTile = false;
+				WorldGen.KillTile(i, j + 1);
+				Tile tile5 = Main.tile[i, j + 1];
+				tile5.HasTile = true;
+				tile5.TileType = TileID.WoodBlock;
+				WorldGen.KillTile(i + 1, j + 1);
+				Tile tile6 = Main.tile[i + 1, j + 1];
+				tile6.HasTile = true;
+				tile6.TileType = TileID.WoodBlock;
+				WorldGen.AddBuriedChest(i + 1, j, 0, notNearOtherChests: false, trySlope: false);
+			}
+		}
+
+		public static void IslandHouseZenith(int i, int j)
+		{
+			byte type = (byte)WorldGen.genRand.Next(45, 48);
+			byte wall = (byte)WorldGen.genRand.Next(10, 13);
+			Vector2 vector = new Vector2(i, j);
+			int num = 1;
+			if (WorldGen.genRand.NextBool(2))
+			{
+				num = -1;
+			}
+			int num2 = WorldGen.genRand.Next(7, 12);
+			int num3 = WorldGen.genRand.Next(5, 7);
+			vector.X = i + (num2 + 2) * num;
+			for (int k = j - 15; k < j + 30; k++)
+			{
+				if (Main.tile[(int)vector.X, k].HasTile)
+				{
+					vector.Y = k - 1;
+					break;
+				}
+			}
+			vector.X = i;
+			int num4 = (int)(vector.X - (float)num2 - 2f);
+			int num5 = (int)(vector.X + (float)num2 + 2f);
+			int num6 = (int)(vector.Y - (float)num3 - 2f);
+			int num7 = (int)(vector.Y + 2f + (float)WorldGen.genRand.Next(3, 5));
+			if (num4 < 0)
+			{
+				num4 = 0;
+			}
+			if (num5 > Main.maxTilesX)
+			{
+				num5 = Main.maxTilesX;
+			}
+			if (num6 < 0)
+			{
+				num6 = 0;
+			}
+			if (num7 > Main.maxTilesY)
+			{
+				num7 = Main.maxTilesY;
+			}
+			for (int l = num4; l <= num5; l++)
+			{
+				for (int m = num6; m < num7; m++)
+				{
+					Tile tile = Main.tile[l, m];
+					tile.HasTile = true;
+					tile.TileType = type;
+					tile.WallType = 0;
+				}
+			}
+			num4 = (int)(vector.X - (float)num2);
+			num5 = (int)(vector.X + (float)num2);
+			num6 = (int)(vector.Y - (float)num3);
+			num7 = (int)(vector.Y + 1f);
+			if (num4 < 0)
+			{
+				num4 = 0;
+			}
+			if (num5 > Main.maxTilesX)
+			{
+				num5 = Main.maxTilesX;
+			}
+			if (num6 < 0)
+			{
+				num6 = 0;
+			}
+			if (num7 > Main.maxTilesY)
+			{
+				num7 = Main.maxTilesY;
+			}
+			for (int n = num4; n <= num5; n++)
+			{
+				for (int num8 = num6; num8 < num7; num8++)
+				{
+					if (Main.tile[n, num8].WallType == 0)
+					{
+						Tile tile = Main.tile[n, num8];
+						tile.HasTile = false;
+						tile.WallType = wall;
+					}
+				}
+			}
+			int num9 = i + (num2 + 1) * num;
+			int num10 = (int)vector.Y;
+			for (int num11 = num9 - 2; num11 <= num9 + 2; num11++)
+			{
+				Tile tile = Main.tile[num11, num10];
+				tile.HasTile = false;
+				Tile tile2 = Main.tile[num11, num10 - 1];
+				tile2.HasTile = false;
+				Tile tile3 = Main.tile[num11, num10 - 2];
+				tile3.HasTile = false;
+			}
+			WorldGen.PlaceTile(num9, num10, 10, mute: true);
+			int contain = 0;
+			int num12 = houseCount;
+			if (num12 > 2)
+			{
+				num12 = WorldGen.genRand.Next(3);
+			}
+			switch (num12)
+			{
+				case 0:
+					contain = 159;
+					break;
+				case 1:
+					contain = 65;
+					break;
+				case 2:
+					contain = 158;
+					break;
+			}
+			if (WorldGen.remixWorldGen)
+			{
+
+				if (WorldGen.getGoodWorldGen)
+				{
+					WorldGen.AddBuriedChest(i, num10 - 3, contain, notNearOtherChests: false, 2, trySlope: false, 0);
+				}
+				else
+				{
+					WorldGen.AddBuriedChest(i, num10 - 3, contain, notNearOtherChests: false, 13, trySlope: false, 0);
+				}
+			}
+			else
+			{
+				AddBuriedChest(i, num10 - 3, contain, notNearOtherChests: false, 2);
+			}
+			houseCount++;
+		}
+
+		public static bool GrowEpicTreeZenith(int i, int y)
+		{
+			int j;
+			for (j = y; Main.tile[i, j].TileType == 20; j++)
+			{
+			}
+			if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == 2 && Main.tile[i, j - 1].WallType == 0 && Main.tile[i, j - 1].LiquidAmount == 0 && ((Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == TileID.CorruptJungleGrass || Main.tile[i - 1, j].TileType == TileID.CrimsonGrass || Main.tile[i - 1, j].TileType == TileID.CrimsonJungleGrass || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109)) || (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == TileID.CorruptJungleGrass || Main.tile[i + 1, j].TileType == TileID.CrimsonGrass || Main.tile[i + 1, j].TileType == TileID.CrimsonJungleGrass || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109))))
+			{
+				int num = 1;
+				if (WorldGen.EmptyTileCheck(i - num, i + num, j - 55, j - 1, 20))
+				{
+					bool flag = false;
+					bool flag2 = false;
+					int num2 = WorldGen.genRand.Next(20, 30);
+					int num3;
+					for (int k = j - num2; k < j; k++)
+					{
+						Tile tile = Main.tile[i, k];
+						tile.TileFrameNumber = (byte)WorldGen.genRand.Next(3);
+						tile.HasTile = true;
+						tile.TileType = 5;
+						num3 = WorldGen.genRand.Next(3);
+						int num4 = WorldGen.genRand.Next(10);
+						if (k == j - 1 || k == j - num2)
+						{
+							num4 = 0;
+						}
+						while (((num4 == 5 || num4 == 7) && flag) || ((num4 == 6 || num4 == 7) && flag2))
+						{
+							num4 = WorldGen.genRand.Next(10);
+						}
+						flag = false;
+						flag2 = false;
+						if (num4 == 5 || num4 == 7)
+						{
+							flag = true;
+						}
+						if (num4 == 6 || num4 == 7)
+						{
+							flag2 = true;
+						}
+						switch (num4)
+						{
+							case 1:
+								if (num3 == 0)
+								{
+									Main.tile[i, k].TileFrameX = 0;
+									Main.tile[i, k].TileFrameY = 66;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i, k].TileFrameX = 0;
+									Main.tile[i, k].TileFrameY = 88;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i, k].TileFrameX = 0;
+									Main.tile[i, k].TileFrameY = 110;
+								}
+								break;
+							case 2:
+								if (num3 == 0)
+								{
+									Main.tile[i, k].TileFrameX = 22;
+									Main.tile[i, k].TileFrameY = 0;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i, k].TileFrameX = 22;
+									Main.tile[i, k].TileFrameY = 22;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i, k].TileFrameX = 22;
+									Main.tile[i, k].TileFrameY = 44;
+								}
+								break;
+							case 3:
+								if (num3 == 0)
+								{
+									Main.tile[i, k].TileFrameX = 44;
+									Main.tile[i, k].TileFrameY = 66;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i, k].TileFrameX = 44;
+									Main.tile[i, k].TileFrameY = 88;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i, k].TileFrameX = 44;
+									Main.tile[i, k].TileFrameY = 110;
+								}
+								break;
+							case 4:
+								if (num3 == 0)
+								{
+									Main.tile[i, k].TileFrameX = 22;
+									Main.tile[i, k].TileFrameY = 66;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i, k].TileFrameX = 22;
+									Main.tile[i, k].TileFrameY = 88;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i, k].TileFrameX = 22;
+									Main.tile[i, k].TileFrameY = 110;
+								}
+								break;
+							case 5:
+								if (num3 == 0)
+								{
+									Main.tile[i, k].TileFrameX = 88;
+									Main.tile[i, k].TileFrameY = 0;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i, k].TileFrameX = 88;
+									Main.tile[i, k].TileFrameY = 22;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i, k].TileFrameX = 88;
+									Main.tile[i, k].TileFrameY = 44;
+								}
+								break;
+							case 6:
+								if (num3 == 0)
+								{
+									Main.tile[i, k].TileFrameX = 66;
+									Main.tile[i, k].TileFrameY = 66;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i, k].TileFrameX = 66;
+									Main.tile[i, k].TileFrameY = 88;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i, k].TileFrameX = 66;
+									Main.tile[i, k].TileFrameY = 110;
+								}
+								break;
+							case 7:
+								if (num3 == 0)
+								{
+									Main.tile[i, k].TileFrameX = 110;
+									Main.tile[i, k].TileFrameY = 66;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i, k].TileFrameX = 110;
+									Main.tile[i, k].TileFrameY = 88;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i, k].TileFrameX = 110;
+									Main.tile[i, k].TileFrameY = 110;
+								}
+								break;
+							default:
+								if (num3 == 0)
+								{
+									Main.tile[i, k].TileFrameX = 0;
+									Main.tile[i, k].TileFrameY = 0;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i, k].TileFrameX = 0;
+									Main.tile[i, k].TileFrameY = 22;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i, k].TileFrameX = 0;
+									Main.tile[i, k].TileFrameY = 44;
+								}
+								break;
+						}
+						if (num4 == 5 || num4 == 7)
+						{
+							Tile tile3 = Main.tile[i - 1, k];
+							tile3.HasTile = true;
+							tile3.TileType = 5;
+							num3 = WorldGen.genRand.Next(3);
+							if (WorldGen.genRand.Next(3) < 2)
+							{
+								if (num3 == 0)
+								{
+									Main.tile[i - 1, k].TileFrameX = 44;
+									Main.tile[i - 1, k].TileFrameY = 198;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i - 1, k].TileFrameX = 44;
+									Main.tile[i - 1, k].TileFrameY = 220;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i - 1, k].TileFrameX = 44;
+									Main.tile[i - 1, k].TileFrameY = 242;
+								}
+							}
+							else
+							{
+								if (num3 == 0)
+								{
+									Main.tile[i - 1, k].TileFrameX = 66;
+									Main.tile[i - 1, k].TileFrameY = 0;
+								}
+								if (num3 == 1)
+								{
+									Main.tile[i - 1, k].TileFrameX = 66;
+									Main.tile[i - 1, k].TileFrameY = 22;
+								}
+								if (num3 == 2)
+								{
+									Main.tile[i - 1, k].TileFrameX = 66;
+									Main.tile[i - 1, k].TileFrameY = 44;
+								}
+							}
+						}
+						if (num4 != 6 && num4 != 7)
+						{
+							continue;
+						}
+						Tile tile2 = Main.tile[i + 1, k];
+						tile2.HasTile = true;
+						tile2.TileType = 5;
+						num3 = WorldGen.genRand.Next(3);
+						if (WorldGen.genRand.Next(3) < 2)
+						{
+							if (num3 == 0)
+							{
+								Main.tile[i + 1, k].TileFrameX = 66;
+								Main.tile[i + 1, k].TileFrameY = 198;
+							}
+							if (num3 == 1)
+							{
+								Main.tile[i + 1, k].TileFrameX = 66;
+								Main.tile[i + 1, k].TileFrameY = 220;
+							}
+							if (num3 == 2)
+							{
+								Main.tile[i + 1, k].TileFrameX = 66;
+								Main.tile[i + 1, k].TileFrameY = 242;
+							}
+						}
+						else
+						{
+							if (num3 == 0)
+							{
+								Main.tile[i + 1, k].TileFrameX = 88;
+								Main.tile[i + 1, k].TileFrameY = 66;
+							}
+							if (num3 == 1)
+							{
+								Main.tile[i + 1, k].TileFrameX = 88;
+								Main.tile[i + 1, k].TileFrameY = 88;
+							}
+							if (num3 == 2)
+							{
+								Main.tile[i + 1, k].TileFrameX = 88;
+								Main.tile[i + 1, k].TileFrameY = 110;
+							}
+						}
+					}
+					int num5 = WorldGen.genRand.Next(3);
+					bool flag3 = false;
+					bool flag4 = false;
+					if (Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == TileID.CrimsonGrass || Main.tile[i - 1, j].TileType == TileID.CorruptJungleGrass || Main.tile[i - 1, j].TileType == TileID.CrimsonJungleGrass || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109))
+					{
+						flag3 = true;
+					}
+					if (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == TileID.CorruptJungleGrass || Main.tile[i + 1, j].TileType == TileID.CrimsonGrass || Main.tile[i + 1, j].TileType == TileID.CrimsonJungleGrass || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109))
+					{
+						flag4 = true;
+					}
+					if (!flag3)
+					{
+						if (num5 == 0)
+						{
+							num5 = 2;
+						}
+						if (num5 == 1)
+						{
+							num5 = 3;
+						}
+					}
+					if (!flag4)
+					{
+						if (num5 == 0)
+						{
+							num5 = 1;
+						}
+						if (num5 == 2)
+						{
+							num5 = 3;
+						}
+					}
+					if (flag3 && !flag4)
+					{
+						num5 = 1;
+					}
+					if (flag4 && !flag3)
+					{
+						num5 = 2;
+					}
+					if (num5 == 0 || num5 == 1)
+					{
+						Tile tile = Main.tile[i + 1, j - 1];
+						tile.HasTile = true;
+						tile.TileType = 5;
+						num3 = WorldGen.genRand.Next(3);
+						if (num3 == 0)
+						{
+							Main.tile[i + 1, j - 1].TileFrameX = 22;
+							Main.tile[i + 1, j - 1].TileFrameY = 132;
+						}
+						if (num3 == 1)
+						{
+							Main.tile[i + 1, j - 1].TileFrameX = 22;
+							Main.tile[i + 1, j - 1].TileFrameY = 154;
+						}
+						if (num3 == 2)
+						{
+							Main.tile[i + 1, j - 1].TileFrameX = 22;
+							Main.tile[i + 1, j - 1].TileFrameY = 176;
+						}
+					}
+					if (num5 == 0 || num5 == 2)
+					{
+						Tile tile = Main.tile[i - 1, j - 1];
+						tile.HasTile = true;
+						tile.TileType = 5;
+						num3 = WorldGen.genRand.Next(3);
+						if (num3 == 0)
+						{
+							Main.tile[i - 1, j - 1].TileFrameX = 44;
+							Main.tile[i - 1, j - 1].TileFrameY = 132;
+						}
+						if (num3 == 1)
+						{
+							Main.tile[i - 1, j - 1].TileFrameX = 44;
+							Main.tile[i - 1, j - 1].TileFrameY = 154;
+						}
+						if (num3 == 2)
+						{
+							Main.tile[i - 1, j - 1].TileFrameX = 44;
+							Main.tile[i - 1, j - 1].TileFrameY = 176;
+						}
+					}
+					num3 = WorldGen.genRand.Next(3);
+					switch (num5)
+					{
+						case 0:
+							if (num3 == 0)
+							{
+								Main.tile[i, j - 1].TileFrameX = 88;
+								Main.tile[i, j - 1].TileFrameY = 132;
+							}
+							if (num3 == 1)
+							{
+								Main.tile[i, j - 1].TileFrameX = 88;
+								Main.tile[i, j - 1].TileFrameY = 154;
+							}
+							if (num3 == 2)
+							{
+								Main.tile[i, j - 1].TileFrameX = 88;
+								Main.tile[i, j - 1].TileFrameY = 176;
+							}
+							break;
+						case 1:
+							if (num3 == 0)
+							{
+								Main.tile[i, j - 1].TileFrameX = 0;
+								Main.tile[i, j - 1].TileFrameY = 132;
+							}
+							if (num3 == 1)
+							{
+								Main.tile[i, j - 1].TileFrameX = 0;
+								Main.tile[i, j - 1].TileFrameY = 154;
+							}
+							if (num3 == 2)
+							{
+								Main.tile[i, j - 1].TileFrameX = 0;
+								Main.tile[i, j - 1].TileFrameY = 176;
+							}
+							break;
+						case 2:
+							if (num3 == 0)
+							{
+								Main.tile[i, j - 1].TileFrameX = 66;
+								Main.tile[i, j - 1].TileFrameY = 132;
+							}
+							if (num3 == 1)
+							{
+								Main.tile[i, j - 1].TileFrameX = 66;
+								Main.tile[i, j - 1].TileFrameY = 154;
+							}
+							if (num3 == 2)
+							{
+								Main.tile[i, j - 1].TileFrameX = 66;
+								Main.tile[i, j - 1].TileFrameY = 176;
+							}
+							break;
+					}
+					if (WorldGen.genRand.Next(3) < 2)
+					{
+						num3 = WorldGen.genRand.Next(3);
+						if (num3 == 0)
+						{
+							Main.tile[i, j - num2].TileFrameX = 22;
+							Main.tile[i, j - num2].TileFrameY = 198;
+						}
+						if (num3 == 1)
+						{
+							Main.tile[i, j - num2].TileFrameX = 22;
+							Main.tile[i, j - num2].TileFrameY = 220;
+						}
+						if (num3 == 2)
+						{
+							Main.tile[i, j - num2].TileFrameX = 22;
+							Main.tile[i, j - num2].TileFrameY = 242;
+						}
+					}
+					else
+					{
+						num3 = WorldGen.genRand.Next(3);
+						if (num3 == 0)
+						{
+							Main.tile[i, j - num2].TileFrameX = 0;
+							Main.tile[i, j - num2].TileFrameY = 198;
+						}
+						if (num3 == 1)
+						{
+							Main.tile[i, j - num2].TileFrameX = 0;
+							Main.tile[i, j - num2].TileFrameY = 220;
+						}
+						if (num3 == 2)
+						{
+							Main.tile[i, j - num2].TileFrameX = 0;
+							Main.tile[i, j - num2].TileFrameY = 242;
+						}
+					}
+					WorldGen.RangeFrame(i - 2, j - num2 - 1, i + 2, j + 1);
+					if (Main.netMode == 2)
+					{
+						NetMessage.SendTileSquare(-1, i, (int)((double)j - (double)num2 * 0.5), num2 + 1);
+					}
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public static void GrowTreeZenith(int i, int y)
+		{
+			int j;
+			for (j = y; Main.tile[i, j].TileType == 20; j++)
+			{
+			}
+			if (((Main.tile[i - 1, j - 1].LiquidAmount != 0 || Main.tile[i - 1, j - 1].LiquidAmount != 0 || Main.tile[i + 1, j - 1].LiquidAmount != 0) && Main.tile[i, j].TileType != 60) || !Main.tile[i, j].HasTile || (Main.tile[i, j].TileType != 2 && Main.tile[i, j].TileType != 23 && Main.tile[i, j].TileType != TileID.CorruptJungleGrass && Main.tile[i, j].TileType != TileID.CrimsonGrass && Main.tile[i, j].TileType != TileID.CrimsonJungleGrass && Main.tile[i, j].TileType != 60 && Main.tile[i, j].TileType != 109 && Main.tile[i, j].TileType != 147) || Main.tile[i, j - 1].WallType != 0 || ((!Main.tile[i - 1, j].HasTile || (Main.tile[i - 1, j].TileType != 2 && Main.tile[i - 1, j].TileType != 23 && Main.tile[i - 1, j].TileType != TileID.CorruptJungleGrass && Main.tile[i - 1, j].TileType != TileID.CrimsonGrass && Main.tile[i - 1, j].TileType != TileID.CrimsonJungleGrass && Main.tile[i - 1, j].TileType != 60 && Main.tile[i - 1, j].TileType != 109 && Main.tile[i - 1, j].TileType != 147)) && (!Main.tile[i + 1, j].HasTile || (Main.tile[i + 1, j].TileType != 2 && Main.tile[i + 1, j].TileType != 23 && Main.tile[i + 1, j].TileType != TileID.CorruptJungleGrass && Main.tile[i + 1, j].TileType != TileID.CrimsonGrass && Main.tile[i + 1, j].TileType != TileID.CrimsonJungleGrass && Main.tile[i + 1, j].TileType != 60 && Main.tile[i + 1, j].TileType != 109 && Main.tile[i + 1, j].TileType != 147))))
+			{
+				return;
+			}
+			int num = 1;
+			int num2 = 16;
+			if (Main.tile[i, j].TileType == 60)
+			{
+				num2 += 5;
+			}
+			if (!WorldGen.EmptyTileCheck(i - num, i + num, j - num2, j - 1, 20))
+			{
+				return;
+			}
+			bool flag = false;
+			bool flag2 = false;
+			int num3 = WorldGen.genRand.Next(5, num2 + 1);
+			int num4;
+			for (int k = j - num3; k < j; k++)
+			{
+				Tile tile = Main.tile[i, k];
+				tile.TileFrameNumber = (byte)WorldGen.genRand.Next(3);
+				tile.HasTile = true;
+				tile.TileType = 5;
+				num4 = WorldGen.genRand.Next(3);
+				int num5 = WorldGen.genRand.Next(10);
+				if (k == j - 1 || k == j - num3)
+				{
+					num5 = 0;
+				}
+				while (((num5 == 5 || num5 == 7) && flag) || ((num5 == 6 || num5 == 7) && flag2))
+				{
+					num5 = WorldGen.genRand.Next(10);
+				}
+				flag = false;
+				flag2 = false;
+				if (num5 == 5 || num5 == 7)
+				{
+					flag = true;
+				}
+				if (num5 == 6 || num5 == 7)
+				{
+					flag2 = true;
+				}
+				switch (num5)
+				{
+					case 1:
+						if (num4 == 0)
+						{
+							Main.tile[i, k].TileFrameX = 0;
+							Main.tile[i, k].TileFrameY = 66;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i, k].TileFrameX = 0;
+							Main.tile[i, k].TileFrameY = 88;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i, k].TileFrameX = 0;
+							Main.tile[i, k].TileFrameY = 110;
+						}
+						break;
+					case 2:
+						if (num4 == 0)
+						{
+							Main.tile[i, k].TileFrameX = 22;
+							Main.tile[i, k].TileFrameY = 0;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i, k].TileFrameX = 22;
+							Main.tile[i, k].TileFrameY = 22;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i, k].TileFrameX = 22;
+							Main.tile[i, k].TileFrameY = 44;
+						}
+						break;
+					case 3:
+						if (num4 == 0)
+						{
+							Main.tile[i, k].TileFrameX = 44;
+							Main.tile[i, k].TileFrameY = 66;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i, k].TileFrameX = 44;
+							Main.tile[i, k].TileFrameY = 88;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i, k].TileFrameX = 44;
+							Main.tile[i, k].TileFrameY = 110;
+						}
+						break;
+					case 4:
+						if (num4 == 0)
+						{
+							Main.tile[i, k].TileFrameX = 22;
+							Main.tile[i, k].TileFrameY = 66;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i, k].TileFrameX = 22;
+							Main.tile[i, k].TileFrameY = 88;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i, k].TileFrameX = 22;
+							Main.tile[i, k].TileFrameY = 110;
+						}
+						break;
+					case 5:
+						if (num4 == 0)
+						{
+							Main.tile[i, k].TileFrameX = 88;
+							Main.tile[i, k].TileFrameY = 0;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i, k].TileFrameX = 88;
+							Main.tile[i, k].TileFrameY = 22;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i, k].TileFrameX = 88;
+							Main.tile[i, k].TileFrameY = 44;
+						}
+						break;
+					case 6:
+						if (num4 == 0)
+						{
+							Main.tile[i, k].TileFrameX = 66;
+							Main.tile[i, k].TileFrameY = 66;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i, k].TileFrameX = 66;
+							Main.tile[i, k].TileFrameY = 88;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i, k].TileFrameX = 66;
+							Main.tile[i, k].TileFrameY = 110;
+						}
+						break;
+					case 7:
+						if (num4 == 0)
+						{
+							Main.tile[i, k].TileFrameX = 110;
+							Main.tile[i, k].TileFrameY = 66;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i, k].TileFrameX = 110;
+							Main.tile[i, k].TileFrameY = 88;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i, k].TileFrameX = 110;
+							Main.tile[i, k].TileFrameY = 110;
+						}
+						break;
+					default:
+						if (num4 == 0)
+						{
+							Main.tile[i, k].TileFrameX = 0;
+							Main.tile[i, k].TileFrameY = 0;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i, k].TileFrameX = 0;
+							Main.tile[i, k].TileFrameY = 22;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i, k].TileFrameX = 0;
+							Main.tile[i, k].TileFrameY = 44;
+						}
+						break;
+				}
+				if (num5 == 5 || num5 == 7)
+				{
+					Tile tile2 = Main.tile[i - 1, k];
+					tile2.HasTile = true;
+					tile2.TileType = 5;
+					num4 = WorldGen.genRand.Next(3);
+					if (WorldGen.genRand.Next(3) < 2)
+					{
+						if (num4 == 0)
+						{
+							Main.tile[i - 1, k].TileFrameX = 44;
+							Main.tile[i - 1, k].TileFrameY = 198;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i - 1, k].TileFrameX = 44;
+							Main.tile[i - 1, k].TileFrameY = 220;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i - 1, k].TileFrameX = 44;
+							Main.tile[i - 1, k].TileFrameY = 242;
+						}
+					}
+					else
+					{
+						if (num4 == 0)
+						{
+							Main.tile[i - 1, k].TileFrameX = 66;
+							Main.tile[i - 1, k].TileFrameY = 0;
+						}
+						if (num4 == 1)
+						{
+							Main.tile[i - 1, k].TileFrameX = 66;
+							Main.tile[i - 1, k].TileFrameY = 22;
+						}
+						if (num4 == 2)
+						{
+							Main.tile[i - 1, k].TileFrameX = 66;
+							Main.tile[i - 1, k].TileFrameY = 44;
+						}
+					}
+				}
+				if (num5 != 6 && num5 != 7)
+				{
+					continue;
+				}
+				Tile tile3 = Main.tile[i + 1, k];
+				tile3.HasTile = true;
+				tile3.TileType = 5;
+				num4 = WorldGen.genRand.Next(3);
+				if (WorldGen.genRand.Next(3) < 2)
+				{
+					if (num4 == 0)
+					{
+						Main.tile[i + 1, k].TileFrameX = 66;
+						Main.tile[i + 1, k].TileFrameY = 198;
+					}
+					if (num4 == 1)
+					{
+						Main.tile[i + 1, k].TileFrameX = 66;
+						Main.tile[i + 1, k].TileFrameY = 220;
+					}
+					if (num4 == 2)
+					{
+						Main.tile[i + 1, k].TileFrameX = 66;
+						Main.tile[i + 1, k].TileFrameY = 242;
+					}
+				}
+				else
+				{
+					if (num4 == 0)
+					{
+						Main.tile[i + 1, k].TileFrameX = 88;
+						Main.tile[i + 1, k].TileFrameY = 66;
+					}
+					if (num4 == 1)
+					{
+						Main.tile[i + 1, k].TileFrameX = 88;
+						Main.tile[i + 1, k].TileFrameY = 88;
+					}
+					if (num4 == 2)
+					{
+						Main.tile[i + 1, k].TileFrameX = 88;
+						Main.tile[i + 1, k].TileFrameY = 110;
+					}
+				}
+			}
+			int num6 = WorldGen.genRand.Next(3);
+			bool flag3 = false;
+			bool flag4 = false;
+			if (Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == TileID.CrimsonGrass || Main.tile[i - 1, j].TileType == TileID.CrimsonJungleGrass || Main.tile[i - 1, j].TileType == TileID.CorruptJungleGrass || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109 || Main.tile[i - 1, j].TileType == 147))
+			{
+				flag3 = true;
+			}
+			if (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == TileID.CorruptJungleGrass || Main.tile[i + 1, j].TileType == TileID.CrimsonGrass || Main.tile[i + 1, j].TileType == TileID.CrimsonJungleGrass || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109 || Main.tile[i + 1, j].TileType == 147))
+			{
+				flag4 = true;
+			}
+			if (!flag3)
+			{
+				if (num6 == 0)
+				{
+					num6 = 2;
+				}
+				if (num6 == 1)
+				{
+					num6 = 3;
+				}
+			}
+			if (!flag4)
+			{
+				if (num6 == 0)
+				{
+					num6 = 1;
+				}
+				if (num6 == 2)
+				{
+					num6 = 3;
+				}
+			}
+			if (flag3 && !flag4)
+			{
+				num6 = 1;
+			}
+			if (flag4 && !flag3)
+			{
+				num6 = 2;
+			}
+			if (num6 == 0 || num6 == 1)
+			{
+				Tile tile = Main.tile[i + 1, j - 1];
+				tile.HasTile = true;
+				tile.TileType = 5;
+				num4 = WorldGen.genRand.Next(3);
+				if (num4 == 0)
+				{
+					Main.tile[i + 1, j - 1].TileFrameX = 22;
+					Main.tile[i + 1, j - 1].TileFrameY = 132;
+				}
+				if (num4 == 1)
+				{
+					Main.tile[i + 1, j - 1].TileFrameX = 22;
+					Main.tile[i + 1, j - 1].TileFrameY = 154;
+				}
+				if (num4 == 2)
+				{
+					Main.tile[i + 1, j - 1].TileFrameX = 22;
+					Main.tile[i + 1, j - 1].TileFrameY = 176;
+				}
+			}
+			if (num6 == 0 || num6 == 2)
+			{
+				Tile tile = Main.tile[i - 1, j - 1];
+				tile.HasTile = true;
+				tile.TileType = 5;
+				num4 = WorldGen.genRand.Next(3);
+				if (num4 == 0)
+				{
+					Main.tile[i - 1, j - 1].TileFrameX = 44;
+					Main.tile[i - 1, j - 1].TileFrameY = 132;
+				}
+				if (num4 == 1)
+				{
+					Main.tile[i - 1, j - 1].TileFrameX = 44;
+					Main.tile[i - 1, j - 1].TileFrameY = 154;
+				}
+				if (num4 == 2)
+				{
+					Main.tile[i - 1, j - 1].TileFrameX = 44;
+					Main.tile[i - 1, j - 1].TileFrameY = 176;
+				}
+			}
+			num4 = WorldGen.genRand.Next(3);
+			switch (num6)
+			{
+				case 0:
+					if (num4 == 0)
+					{
+						Main.tile[i, j - 1].TileFrameX = 88;
+						Main.tile[i, j - 1].TileFrameY = 132;
+					}
+					if (num4 == 1)
+					{
+						Main.tile[i, j - 1].TileFrameX = 88;
+						Main.tile[i, j - 1].TileFrameY = 154;
+					}
+					if (num4 == 2)
+					{
+						Main.tile[i, j - 1].TileFrameX = 88;
+						Main.tile[i, j - 1].TileFrameY = 176;
+					}
+					break;
+				case 1:
+					if (num4 == 0)
+					{
+						Main.tile[i, j - 1].TileFrameX = 0;
+						Main.tile[i, j - 1].TileFrameY = 132;
+					}
+					if (num4 == 1)
+					{
+						Main.tile[i, j - 1].TileFrameX = 0;
+						Main.tile[i, j - 1].TileFrameY = 154;
+					}
+					if (num4 == 2)
+					{
+						Main.tile[i, j - 1].TileFrameX = 0;
+						Main.tile[i, j - 1].TileFrameY = 176;
+					}
+					break;
+				case 2:
+					if (num4 == 0)
+					{
+						Main.tile[i, j - 1].TileFrameX = 66;
+						Main.tile[i, j - 1].TileFrameY = 132;
+					}
+					if (num4 == 1)
+					{
+						Main.tile[i, j - 1].TileFrameX = 66;
+						Main.tile[i, j - 1].TileFrameY = 154;
+					}
+					if (num4 == 2)
+					{
+						Main.tile[i, j - 1].TileFrameX = 66;
+						Main.tile[i, j - 1].TileFrameY = 176;
+					}
+					break;
+			}
+			if (WorldGen.genRand.Next(4) < 3)
+			{
+				num4 = WorldGen.genRand.Next(3);
+				if (num4 == 0)
+				{
+					Main.tile[i, j - num3].TileFrameX = 22;
+					Main.tile[i, j - num3].TileFrameY = 198;
+				}
+				if (num4 == 1)
+				{
+					Main.tile[i, j - num3].TileFrameX = 22;
+					Main.tile[i, j - num3].TileFrameY = 220;
+				}
+				if (num4 == 2)
+				{
+					Main.tile[i, j - num3].TileFrameX = 22;
+					Main.tile[i, j - num3].TileFrameY = 242;
+				}
+			}
+			else
+			{
+				num4 = WorldGen.genRand.Next(3);
+				if (num4 == 0)
+				{
+					Main.tile[i, j - num3].TileFrameX = 0;
+					Main.tile[i, j - num3].TileFrameY = 198;
+				}
+				if (num4 == 1)
+				{
+					Main.tile[i, j - num3].TileFrameX = 0;
+					Main.tile[i, j - num3].TileFrameY = 220;
+				}
+				if (num4 == 2)
+				{
+					Main.tile[i, j - num3].TileFrameX = 0;
+					Main.tile[i, j - num3].TileFrameY = 242;
+				}
+			}
+			WorldGen.RangeFrame(i - 2, j - num3 - 1, i + 2, j + 1);
+			if (Main.netMode == 2)
+			{
+				NetMessage.SendTileSquare(-1, i, (int)((double)j - (double)num3 * 0.5), num3 + 1);
+			}
+		}
+
+		public static void AddTreesZenith()
+		{
+			for (int i = 1; i < Main.maxTilesX - 1; i++)
+			{
+				for (int j = 20; (double)j < Main.worldSurface; j++)
+				{
+					GrowTreeZenith(i, j);
+				}
+				if (WorldGen.genRand.Next(3) == 0)
+				{
+					i++;
+				}
+				if (WorldGen.genRand.Next(4) == 0)
+				{
+					i++;
+				}
+			}
+		}
+		#endregion
 	}
 }
