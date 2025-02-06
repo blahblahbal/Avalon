@@ -2947,6 +2947,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			Main.npc[num311].direction = 1;
 			Main.npc[num311].homeless = true;
 		}
+
 		private static void Sunflowers(GenerationProgress progres, GameConfiguration configurations)
 		{
 			Main.statusText = (string)Lang.gen[39];
@@ -9292,10 +9293,10 @@ namespace Avalon.WorldGeneration.secretSeeds
 				Chest chest = Main.chest[k];
 				if (chest != null)
 				{
-					if (WorldGen.genRand.NextBool(8))
+					Tile tile = Main.tile[chest.x, chest.y];
+					if (tile.TileFrameX >= 36 && tile.TileFrameX < 72)
 					{
-						Tile tile = Main.tile[chest.x, chest.y];
-						if (tile.TileFrameX >= 36 && tile.TileFrameX < 72)
+						if (WorldGen.genRand.NextBool(20))
 						{
 							ExxoAvalonOrigins.Mod.Logger.Info("replaced chest: " + chest.x + ", " + chest.y);
 							Chest.DestroyChestDirect(chest.x, chest.y, k);
@@ -9308,6 +9309,10 @@ namespace Avalon.WorldGeneration.secretSeeds
 							WorldGen.KillTile(chest.x + 1, chest.y + 1);
 
 							WorldGen.Place2xX(chest.x + 1, chest.y + 1, TileID.Statues, 1);
+						}
+						else if (WorldGen.genRand.NextBool(4) && chest.item[1].type != ItemID.AngelStatue)
+						{
+							chest.item[0].SetDefaults(ItemID.AngelStatue);
 						}
 					}
 				}
