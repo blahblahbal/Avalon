@@ -68,7 +68,14 @@ public class AvalonGlobalTile : GlobalTile
 
 	public override void SetStaticDefaults()
     {
-        int[] spelunkers = { TileID.Crimtane, TileID.Meteorite, TileID.Obsidian, TileID.Hellstone };
+		Main.tileDungeon[TileID.AncientBlueBrick] = true; //a sincier fuck you to all builders
+		Main.tileDungeon[TileID.AncientGreenBrick] = true;
+		Main.tileDungeon[TileID.AncientPinkBrick] = true;
+		TileID.Sets.DungeonBiome[TileID.AncientBlueBrick] = 1;
+		TileID.Sets.DungeonBiome[TileID.AncientGreenBrick] = 1;
+		TileID.Sets.DungeonBiome[TileID.AncientPinkBrick] = 1;
+
+		int[] spelunkers = { TileID.Crimtane, TileID.Meteorite, TileID.Obsidian, TileID.Hellstone };
         int[] ores = { TileID.Topaz, TileID.Ruby, TileID.Amethyst, TileID.Diamond, TileID.Emerald, TileID.Sapphire, TileID.AmberStoneBlock };
         foreach (int tile in spelunkers)
         {

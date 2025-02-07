@@ -3,6 +3,7 @@ using Avalon.Items.Material;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.Tiles;
+using Avalon.Walls;
 using Avalon.WorldGeneration.Passes;
 using Humanizer;
 using Microsoft.Build.Tasks;
@@ -2802,7 +2803,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					int num300 = WorldGen.genRand.Next(Main.maxTilesY - 250, Main.maxTilesY - 5);
 					try
 					{
-						if (Main.tile[num299, num300].WallType != 13 && Main.tile[num299, num300].WallType != 14)
+						if (Main.tile[num299, num300].WallType != ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>() && Main.tile[num299, num300].WallType != ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>())
 						{
 							continue;
 						}
@@ -3522,15 +3523,15 @@ namespace Avalon.WorldGeneration.secretSeeds
 				}
 				if (Main.tile[i, num2 + 1].HasTile)
 				{
-					byte b = (byte)WorldGen.genRand.Next(75, 77);
-					byte wall = 13;
+					ushort b = (WorldGen.genRand.NextBool() ? TileID.AncientObsidianBrick : TileID.AncientHellstoneBrick);
+					ushort wall = (ushort)ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>();
 					if (WorldGen.genRand.Next(5) > 0)
 					{
-						b = 75;
+						b = TileID.AncientObsidianBrick;
 					}
-					if (b == 75)
+					if (b == TileID.AncientObsidianBrick)
 					{
-						wall = 14;
+						wall = (ushort)ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>();
 					}
 					HellHouse(i, num2, b, wall);
 					i += WorldGen.genRand.Next(15, 80);
@@ -3546,7 +3547,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					num4++;
 					int num5 = WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.2), (int)((double)Main.maxTilesX * 0.8));
 					int num6 = WorldGen.genRand.Next(Main.maxTilesY - 300, Main.maxTilesY - 20);
-					if (Main.tile[num5, num6].HasTile && (Main.tile[num5, num6].TileType == 75 || Main.tile[num5, num6].TileType == 76))
+					if (Main.tile[num5, num6].HasTile && (Main.tile[num5, num6].TileType == TileID.AncientObsidianBrick || Main.tile[num5, num6].TileType == TileID.AncientHellstoneBrick))
 					{
 						int num7 = 0;
 						if (Main.tile[num5 - 1, num6].WallType > 0)
@@ -3586,8 +3587,12 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 		}
 
-		public static void HellHouse(int i, int j, byte type = 76, byte wall = 13)
+		public static void HellHouse(int i, int j, ushort type = TileID.AncientObsidianBrick, ushort wall = 1)
 		{
+			if (wall == 1)
+			{
+				wall = (ushort)ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>();
+			}
 			int num = WorldGen.genRand.Next(8, 20);
 			int num2 = WorldGen.genRand.Next(1, 3);
 			int num3 = WorldGen.genRand.Next(4, 13);
@@ -3607,7 +3612,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 			for (int m = i - num / 2; m <= i + num / 2; m++)
 			{
-				for (num4 = j; num4 < Main.maxTilesY && ((Main.tile[m, num4].HasTile && (Main.tile[m, num4].TileType == 76 || Main.tile[m, num4].TileType == 75)) || Main.tile[i, num4].WallType == 13 || Main.tile[i, num4].WallType == 14); num4++)
+				for (num4 = j; num4 < Main.maxTilesY && ((Main.tile[m, num4].HasTile && (Main.tile[m, num4].TileType == TileID.AncientObsidianBrick || Main.tile[m, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>()); num4++)
 				{
 				}
 				int num7 = 6 + WorldGen.genRand.Next(3);
@@ -3626,15 +3631,15 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 			int num8 = 0;
 			int num9 = 0;
-			for (num4 = j; num4 < Main.maxTilesY && ((Main.tile[i, num4].HasTile && (Main.tile[i, num4].TileType == 76 || Main.tile[i, num4].TileType == 75)) || Main.tile[i, num4].WallType == 13 || Main.tile[i, num4].WallType == 14); num4++)
+			for (num4 = j; num4 < Main.maxTilesY && ((Main.tile[i, num4].HasTile && (Main.tile[i, num4].TileType == TileID.AncientObsidianBrick || Main.tile[i, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>()); num4++)
 			{
 			}
 			num4--;
 			num9 = num4;
-			while ((Main.tile[i, num4].HasTile && (Main.tile[i, num4].TileType == 76 || Main.tile[i, num4].TileType == 75)) || Main.tile[i, num4].WallType == 13 || Main.tile[i, num4].WallType == 14)
+			while ((Main.tile[i, num4].HasTile && (Main.tile[i, num4].TileType == TileID.AncientObsidianBrick || Main.tile[i, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>())
 			{
 				num4--;
-				if (!Main.tile[i, num4].HasTile || (Main.tile[i, num4].TileType != 76 && Main.tile[i, num4].TileType != 75))
+				if (!Main.tile[i, num4].HasTile || (Main.tile[i, num4].TileType != TileID.AncientObsidianBrick && Main.tile[i, num4].TileType != TileID.AncientHellstoneBrick))
 				{
 					continue;
 				}
@@ -3659,13 +3664,13 @@ namespace Avalon.WorldGeneration.secretSeeds
 				}
 				for (int n = num10; n <= num11; n++)
 				{
-					if (Main.tile[n, num4 - 1].WallType == 13)
+					if (Main.tile[n, num4 - 1].WallType == TileID.AncientHellstoneBrick)
 					{
-						Main.tile[n, num4].WallType = 13;
+						Main.tile[n, num4].WallType = TileID.AncientHellstoneBrick;
 					}
-					if (Main.tile[n, num4 - 1].WallType == 14)
+					if (Main.tile[n, num4 - 1].WallType == TileID.AncientObsidianBrick)
 					{
-						Main.tile[n, num4].WallType = 14;
+						Main.tile[n, num4].WallType = TileID.AncientHellstoneBrick;
 					}
 					Tile tile = Main.tile[n, num4];
 					tile.TileType = 19;
@@ -3692,7 +3697,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						}
 						try
 						{
-							if (Main.tile[num18, num19].TileType == 76 || Main.tile[num18, num19].TileType == 19)
+							if (Main.tile[num18, num19].TileType == TileID.AncientHellstoneBrick || Main.tile[num18, num19].TileType == 19)
 							{
 								Tile tile = Main.tile[num18, num19];
 								tile.HasTile = false;
@@ -3707,8 +3712,12 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 		}
 
-		public static void HellRoom(int i, int j, int width, int height, byte type = 76, byte wall = 13)
+		public static void HellRoom(int i, int j, int width, int height, ushort type = TileID.AncientObsidianBrick, ushort wall = 1)
 		{
+			if (wall == 1)
+			{
+				wall = (ushort)ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>();
+			}
 			if (j > Main.maxTilesY - 40)
 			{
 				return;
@@ -3749,26 +3758,30 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 		}
 
-		public static void MakeDungeon(int x, int y, int tileType = 41, int wallType = 7)
+		public static void MakeDungeon(int x, int y, ushort tileType = 677, ushort wallType = 1)
 		{
 			int num = WorldGen.genRand.Next(3);
 			int num2 = WorldGen.genRand.Next(3);
 			switch (num)
 			{
 				case 1:
-					tileType = 43;
+					tileType = 678;
 					break;
 				case 2:
-					tileType = 44;
+					tileType = 679;
 					break;
+			}
+			if (wallType == 1)
+			{
+				wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientBlueBrickWall>();
 			}
 			switch (num2)
 			{
 				case 1:
-					wallType = 8;
+					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientGreenBrickWall>();
 					break;
 				case 2:
-					wallType = 9;
+					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientPinkBrickWall>();
 					break;
 			}
 			GenVars.numDDoors = 0;
@@ -4139,7 +4152,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					Tile tile3 = Main.tile[num42, num45];
 					tile3.HasTile = true;
-					tile3.TileType = (byte)tileType;
+					tile3.TileType = tileType;
 				}
 				WorldGen.PlaceTile(num42, num43, 10, mute: true);
 				num42--;
@@ -4154,7 +4167,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile3 = Main.tile[num42, num47];
 						tile3.HasTile = true;
-						tile3.TileType = (byte)tileType;
+						tile3.TileType = tileType;
 					}
 				}
 				num42 += 2;
@@ -4169,17 +4182,17 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile3 = Main.tile[num42, num48];
 						tile3.HasTile = true;
-						tile3.TileType = (byte)tileType;
+						tile3.TileType = tileType;
 					}
 				}
 				num43++;
 				num42--;
 				Tile tile = Main.tile[num42 - 1, num43];
 				tile.HasTile = true;
-				tile.TileType = (byte)tileType;
+				tile.TileType = tileType;
 				Tile tile2 = Main.tile[num42 + 1, num43];
 				tile2.HasTile = true;
-				tile2.TileType = (byte)tileType;
+				tile2.TileType = tileType;
 			}
 			Main.statusText = Lang.gen[58] + " 85%";
 			for (int num49 = 0; num49 < numDPlats; num49++)
@@ -4581,7 +4594,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 		}
 
-		public static void DungeonRoom(int i, int j, int tileType, int wallType)
+		public static void DungeonRoom(int i, int j, ushort tileType, ushort wallType)
 		{
 			double num = WorldGen.genRand.Next(15, 30);
 			Vector2 vector = default(Vector2);
@@ -4627,7 +4640,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						{
 							Tile tile = Main.tile[k, l];
 							tile.HasTile = true;
-							tile.TileType = (byte)tileType;
+							tile.TileType = tileType;
 						}
 					}
 				}
@@ -4680,7 +4693,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num11, num12];
 						tile.HasTile = false;
-						tile.WallType = (byte)wallType;
+						tile.WallType = wallType;
 					}
 				}
 				vector2 += vector;
@@ -4714,7 +4727,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			GenVars.numDRooms++;
 		}
 
-		public static void DungeonHalls(int i, int j, int tileType, int wallType, bool forceX = false)
+		public static void DungeonHalls(int i, int j, ushort tileType, ushort wallType, bool forceX = false)
 		{
 			Vector2 vector = default(Vector2);
 			double num = WorldGen.genRand.Next(4, 6);
@@ -4979,7 +4992,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						{
 							Tile tile = Main.tile[k, l];
 							tile.HasTile = true;
-							tile.TileType = (byte)tileType;
+							tile.TileType = tileType;
 						}
 					}
 				}
@@ -5029,7 +5042,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num9, num10];
 						tile.HasTile = false;
-						tile.WallType = (byte)wallType;
+						tile.WallType = wallType;
 					}
 				}
 				vector4 += vector;
@@ -5051,7 +5064,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 		}
 
-		public static void DungeonStairs(int i, int j, int tileType, int wallType)
+		public static void DungeonStairs(int i, int j, ushort tileType, ushort wallType)
 		{
 			Vector2 vector = default(Vector2);
 			double num = WorldGen.genRand.Next(5, 9);
@@ -5124,7 +5137,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 							Tile tile = Main.tile[k, l];
 							tile.WallType = 0;
 							tile.HasTile = true;
-							tile.TileType = (byte)tileType;
+							tile.TileType = tileType;
 						}
 					}
 				}
@@ -5179,7 +5192,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			GenVars.dungeonY = (int)vector2.Y;
 		}
 
-		public static void DungeonEnt(int i, int j, int tileType, int wallType)
+		public static void DungeonEnt(int i, int j, ushort tileType, ushort wallType)
 		{
 			int num = 60;
 			for (int k = i - num; k < i + num; k++)
@@ -5236,7 +5249,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						}
 						Tile tile = Main.tile[m, n];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 			}
@@ -5252,7 +5265,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num13, num14];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 			}
@@ -5268,7 +5281,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num15, num16];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 			}
@@ -5283,7 +5296,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num20, num21];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 				num19++;
@@ -5351,7 +5364,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			{
 				for (int num27 = num7; num27 < num8; num27++)
 				{
-					Main.tile[num26, num27].WallType = (byte)wallType;
+					Main.tile[num26, num27].WallType = wallType;
 				}
 			}
 			num5 = (int)((double)vector.X - num2 * 0.5);
@@ -5380,7 +5393,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					Tile tile = Main.tile[num28, num29];
 					tile.HasTile = false;
-					tile.WallType = (byte)wallType;
+					tile.WallType = wallType;
 				}
 			}
 			DPlatX[numDPlats] = (int)vector.X;
@@ -5437,7 +5450,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						Tile tile = Main.tile[num30, num31];
 						tile.WallType = 0;
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 			}
@@ -5466,7 +5479,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num34, num35];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 			}
@@ -5482,7 +5495,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num36, num37];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 			}
@@ -5501,7 +5514,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num38, num39];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 				num19++;
@@ -5592,7 +5605,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num47, num48];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 			}
@@ -5606,7 +5619,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						Tile tile = Main.tile[num50, num51];
 						tile.HasTile = true;
-						tile.TileType = (byte)tileType;
+						tile.TileType = tileType;
 					}
 				}
 			}
@@ -7805,8 +7818,32 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		public static void IslandHouse(int i, int j)
 		{
-			byte type = (byte)WorldGen.genRand.Next(45, 48);
-			byte wall = (byte)WorldGen.genRand.Next(10, 13);
+			ushort type = (ushort)WorldGen.genRand.Next(3);
+			ushort wall = (ushort)WorldGen.genRand.Next(3);
+			switch (type)
+			{
+				case 0:
+					type = TileID.AncientCopperBrick;
+					break;
+				case 1:
+					type = TileID.AncientSilverBrick;
+					break;
+				case 2:
+					type = TileID.AncientGoldBrick;
+					break;
+			}
+			switch (wall)
+			{
+				case 0:
+					wall = WallID.AncientCopperBrickWall;
+					break;
+				case 1:
+					wall = WallID.AncientSilverBrickWall;
+					break;
+				case 2:
+					wall = WallID.AncientGoldBrickWall;
+					break;
+			}
 			Vector2 vector = new Vector2(i, j);
 			int num = 1;
 			if (WorldGen.genRand.NextBool(2))
@@ -9184,6 +9221,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			WorldGen.treeBG3 = 0;
 			WorldGen.treeBG4 = 0;
 			WorldGen.underworldBG = 0;
+			Main.moonType = 0;
 		}
 		#endregion
 

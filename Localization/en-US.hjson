@@ -9600,6 +9600,31 @@ Mods: {
 				DisplayName: Mirage Chest
 				Tooltip: Unfortunately, the chest is not real
 			}
+
+			UnsafeAncientBlueBrickWall: {
+				DisplayName: Unsafe Ancient Blue Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientGreenBrickWall: {
+				DisplayName: Unsafe Ancient Green Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientPinkBrickWall: {
+				DisplayName: Unsafe Ancient Pink Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientHellstoneBrickWall: {
+				DisplayName: Unsafe Ancient Hellstone Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientObsidianBrickWall: {
+				DisplayName: Unsafe Ancient Obsidian Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
