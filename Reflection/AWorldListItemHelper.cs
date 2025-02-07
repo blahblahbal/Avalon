@@ -9,12 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
+using Terraria.GameContent.UI.States;
 using Terraria.IO;
 using Terraria.UI;
 
 namespace Avalon.Reflection;
 
-//for both AWorldListItem and UIWorldListItem
+//for both AWorldListItem, UIWorldListItem and UIWorldLoad
 public static class AWorldListItemHelper
 {
 	//saving the reflected variable means that preformance isnt impacted every time the game has to reflect
@@ -25,6 +26,7 @@ public static class AWorldListItemHelper
 		_addGlitchVariation = typeof(AWorldListItem).GetField("_glitchVariation", BindingFlags.Instance | BindingFlags.NonPublic);
 		_addGlitchFrame = typeof(AWorldListItem).GetField("_glitchFrame", BindingFlags.Instance | BindingFlags.NonPublic);
 		_addGlitchFrameCounter = typeof(AWorldListItem).GetField("_glitchFrameCounter", BindingFlags.Instance | BindingFlags.NonPublic);
+		_addProgressMessage = typeof(UIWorldLoad).GetField("_progressMessage", BindingFlags.Instance | BindingFlags.NonPublic);
 	}
 
 	public static void Unload()
@@ -34,6 +36,7 @@ public static class AWorldListItemHelper
 		_addGlitchVariation = null;
 		_addGlitchFrame = null;
 		_addGlitchFrameCounter = null;
+		_addProgressMessage = null;
 	}
 
 	public static FieldInfo _addData;
@@ -41,6 +44,7 @@ public static class AWorldListItemHelper
 	public static FieldInfo _addGlitchVariation;
 	public static FieldInfo _addGlitchFrame;
 	public static FieldInfo _addGlitchFrameCounter;
+	public static FieldInfo _addProgressMessage;
 	internal static Dictionary<int, bool> _isZenithIconContagion = new Dictionary<int, bool>();
 
 	public static WorldFileData GetWorldListItemData(this AWorldListItem self)
@@ -86,6 +90,15 @@ public static class AWorldListItemHelper
 			return _glitchFrameCounter;
 		}
 		return 0;
+	}
+
+	public static UIHeader GetProgressMessage(this UIWorldLoad self)
+	{
+		if (_addProgressMessage.GetValue(self) is UIHeader _progressMessage)
+		{
+			return _progressMessage;
+		}
+		return null;
 	}
 
 	internal static void UpdateAvalonGlitchAnimation(this UIWorldListItem self, UIElement affectedElement)

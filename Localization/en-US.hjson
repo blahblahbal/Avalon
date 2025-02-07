@@ -11588,6 +11588,11 @@ Mods: {
 					Nests: Adding nests
 				}
 
+				Retro: {
+					AddingAngels: Making Chests Heavenly.
+					UnslopingSlopes: Making the world blocky.
+				}
+
 				Contagion.Message: Making the world gross
 			}
 		}

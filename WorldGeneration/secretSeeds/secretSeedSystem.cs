@@ -18,6 +18,7 @@ using Terraria.GameContent.Generation;
 using Terraria.GameContent.UI.States;
 using Terraria.ID;
 using Terraria.IO;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.Utilities;
@@ -38,6 +39,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 				"Water Plants", "Stalac", "Remove Broken Traps", "Final Cleanup" };
 
 		public static bool GetRetroWorldGen = false;
+
+		internal static bool isGeneratingOldWorld = false;
 
 		public override void Load()
 		{
@@ -401,6 +404,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Reset(GenerationProgress progres, GameConfiguration configurations)
 		{
+			isGeneratingOldWorld = true;
 			lastMaxTilesX = Main.maxTilesX;
 			lastMaxTilesY = Main.maxTilesY;
 			Main.checkXMas();
@@ -3145,6 +3149,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void FinalCleanup(GenerationProgress progres, GameConfiguration configurations)
 		{
+			isGeneratingOldWorld = false;
 			WorldGen.gen = false;
 		}
 
@@ -9195,6 +9200,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void PlantingTreesZenith(GenerationProgress progres, GameConfiguration configurations)
 		{
+			isGeneratingOldWorld = true;
 			Main.statusText = (string)Lang.gen[40];
 			for (int num318 = 0; (double)num318 < (double)Main.maxTilesX * 0.003; num318++)
 			{
@@ -9209,10 +9215,12 @@ namespace Avalon.WorldGeneration.secretSeeds
 				}
 			}
 			AddTreesZenith();
+			isGeneratingOldWorld = false;
 		}
 
 		private static void FloatingIslandsZenith(GenerationProgress progres, GameConfiguration configurations)
 		{
+			isGeneratingOldWorld = true;
 			double num5 = GenVars.worldSurfaceLow;
 
 			GenVars.numIslandHouses = 0;
@@ -9268,19 +9276,24 @@ namespace Avalon.WorldGeneration.secretSeeds
 					}
 				}
 			}
+			isGeneratingOldWorld = false;
 		}
 
 		private bool ReplaceHousesInSpecialSeeds(On_CaveHouseBiome.orig_Place orig, CaveHouseBiome self, Point origin, StructureMap structures)
 		{
 			if (AvalonWorld.retroWorld)
 			{
+				isGeneratingOldWorld = true;
+				Main.statusText = Lang.gen[30] + " 100%";
 				if (!WorldGen.InWorld(origin.X, origin.Y, 10))
 				{
+					isGeneratingOldWorld = false;
 					return false;
 				}
 				int x = origin.X;
 				int y = origin.Y;
 				MineHouseZenith(x, y);
+				isGeneratingOldWorld = false;
 				return true;
 			}
 			return orig.Invoke(self, origin, structures);
@@ -9288,6 +9301,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void ReplaceGoldChestsWithStatues(GenerationProgress progres, GameConfiguration configurations)
 		{
+			isGeneratingOldWorld = true;
+			Main.statusText = Language.GetTextValue("Mods.Avalon.World.Generation.Retro.AddingAngels");
 			for (int k = 0; k < Main.maxChests; k++)
 			{
 				Chest chest = Main.chest[k];
@@ -9317,18 +9332,24 @@ namespace Avalon.WorldGeneration.secretSeeds
 					}
 				}
 			}
+			isGeneratingOldWorld = false;
 		}
 
 		private static void FloatingIslandHousesZenith(GenerationProgress progres, GameConfiguration configurations)
 		{
+			isGeneratingOldWorld = true;
+			Main.statusText = Lang.gen[33] + " 100%";
 			for (int num284 = 0; num284 < GenVars.numIslandHouses; num284++)
 			{
 				IslandHouseZenith(fihX[num284], fihY[num284]);
 			}
+			isGeneratingOldWorld = false;
 		}
 
 		private static void RemoveSlopesSlabsZenith(GenerationProgress progres, GameConfiguration configurations)
 		{
+			isGeneratingOldWorld = true;
+			Main.statusText = Language.GetTextValue("Mods.Avalon.World.Generation.Retro.UnslopingSlopes");
 			for (int i = 0; i < Main.maxTilesX; i++)
 			{
 				for (int j = 0; j < Main.maxTilesY; j++)
@@ -9344,6 +9365,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					}
 				}
 			}
+			isGeneratingOldWorld = false;
 		}
 
 		public static void MineHouseZenith(int i, int j)
