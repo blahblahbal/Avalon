@@ -9595,6 +9595,11 @@ Mods: {
 					Grants increased enemy spawn rates and minor improvements to all stats
 					'''
 			}
+
+			MirageChest: {
+				DisplayName: Mirage Chest
+				Tooltip: Unfortunately, the chest is not real
+			}
 		}
 
 		InfoDisplays: {
@@ -11383,6 +11388,8 @@ Mods: {
 			SavannaPylon.MapEntry: Savanna Pylon
 			PoisonSpike.MapEntry: Poison Spike
 			SilenceCandle.MapEntry: Mods.Avalon.Tiles.SilenceCandle.MapEntry
+			#intentionally lowercase to allow players an alternate way to find angel chests
+			AngelChest.MapEntry: gold chest
 		}
 
 		Prefixes: {

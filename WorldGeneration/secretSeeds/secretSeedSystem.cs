@@ -2,6 +2,7 @@ using Avalon.Common;
 using Avalon.Items.Material;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.NPCs.PreHardmode;
+using Avalon.Tiles;
 using Avalon.WorldGeneration.Passes;
 using Humanizer;
 using Microsoft.Build.Tasks;
@@ -52,7 +53,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 		private void SetGetRetroSeed(On_UIWorldCreation.orig_ProcessSpecialWorldSeeds orig, string processedSeed)
 		{
 			GetRetroWorldGen = false;
-			if (processedSeed.ToLower() == "test-icles")
+			if (processedSeed.ToLower() == "oh so retro")
 			{
 				GetRetroWorldGen = true;
 			}
@@ -63,9 +64,9 @@ namespace Avalon.WorldGeneration.secretSeeds
 			orig.Invoke(processedSeed);
 		}
 
-		private void CheckSeedNumber(On_WorldGen.orig_GenerateWorld orig, int seed, Terraria.WorldBuilding.GenerationProgress customProgressObject)
+		private void CheckSeedNumber(On_WorldGen.orig_GenerateWorld orig, int seed, GenerationProgress customProgressObject)
 		{
-			if (GetRetroWorldGen || seed == 12012011)
+			if (GetRetroWorldGen || seed == 12012011 || seed == 01312024 || seed == 05232012)
 			{
 				AvalonWorld.retroWorld = true;
 				Main.rand = new UnifiedRandom();
@@ -9323,7 +9324,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 							WorldGen.KillTile(chest.x, chest.y + 1);
 							WorldGen.KillTile(chest.x + 1, chest.y + 1);
 
-							WorldGen.Place2xX(chest.x + 1, chest.y + 1, TileID.Statues, 1);
+							WorldGen.PlaceTile(chest.x + 1, chest.y + 1, (ushort)ModContent.TileType<AngelChest>());
 						}
 						else if (WorldGen.genRand.NextBool(4) && chest.item[1].type != ItemID.AngelStatue)
 						{
