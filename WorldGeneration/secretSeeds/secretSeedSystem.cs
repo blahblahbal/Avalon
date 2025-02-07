@@ -9314,7 +9314,6 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						if (WorldGen.genRand.NextBool(20))
 						{
-							ExxoAvalonOrigins.Mod.Logger.Info("replaced chest: " + chest.x + ", " + chest.y);
 							Chest.DestroyChestDirect(chest.x, chest.y, k);
 							//uhh uhh um uh
 							WorldGen.KillTile(chest.x, chest.y);
