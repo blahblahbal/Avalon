@@ -16,8 +16,9 @@ namespace Avalon.Items.Placeable.Furniture
 	{
 		public override void SetStaticDefaults()
 		{
-			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.DeadMansChest;
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.Fake_GoldChest;
 			ItemID.Sets.ShimmerTransformToItem[ItemID.DeadMansChest] = Type;
+			ItemID.Sets.ShimmerTransformToItem[ItemID.Fake_GoldChest] = ItemID.DeadMansChest;
 		}
 
 		public override void SetDefaults()

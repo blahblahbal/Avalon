@@ -213,6 +213,9 @@ Mods: {
 			InSavanna: ""
 		}
 
+		#for giving recipe conditions translations
+		RecipeConditions.retroWorld: In Retro Worlds
+
 		BuilderToggles: {
 			CloudGloveBuilderToggle: {
 				OnText: Cloud Glove On
