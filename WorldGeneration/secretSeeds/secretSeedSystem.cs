@@ -3,7 +3,10 @@ using Avalon.Items.Material;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.Tiles;
+using Avalon.Tiles.Ancient;
+using Avalon.Tiles.Contagion;
 using Avalon.Walls;
+using Avalon.WorldGeneration.Enums;
 using Avalon.WorldGeneration.Passes;
 using Humanizer;
 using Microsoft.Build.Tasks;
@@ -1727,6 +1730,22 @@ namespace Avalon.WorldGeneration.secretSeeds
 			double num5 = surfaceVariance;
 			int num56 = 0;
 
+			WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
+			ushort stone = TileID.Ebonstone;
+			ushort grass = TileID.CorruptGrass;
+			ushort orb = TileID.ShadowOrbs;
+			if (evil == WorldEvil.Crimson)
+			{
+				stone = TileID.Crimstone;
+				grass = TileID.CrimsonGrass;
+			}
+			if (evil == WorldEvil.Contagion)
+			{
+				stone = (ushort)ModContent.TileType<Tiles.Contagion.Chunkstone>();
+				grass = (ushort)ModContent.TileType<Tiles.Contagion.Ickgrass>();
+				orb = (ushort)ModContent.TileType<Tiles.Contagion.SnotOrb>();
+			}
+
 			for (int num169 = 0; (double)num169 < (double)Main.maxTilesX * 0.00045; num169++)
 			{
 				float num170 = (float)((double)num169 / ((double)Main.maxTilesX * 0.00045));
@@ -1855,16 +1874,16 @@ namespace Avalon.WorldGeneration.secretSeeds
 							if (Main.tile[num56, num187].TileType == 0 && (double)num187 < Main.worldSurface - 1.0 && !flag10)
 							{
 								WorldGen.grassSpread = 0;
-								WorldGen.SpreadGrass(num56, num187, 0, 23);
+								WorldGen.SpreadGrass(num56, num187, 0, grass);
 							}
 							flag10 = true;
 							if (Main.tile[num56, num187].TileType == 1 && num56 >= num172 + WorldGen.genRand.Next(5) && num56 <= num173 - WorldGen.genRand.Next(5))
 							{
-								Main.tile[num56, num187].TileType = 25;
+								Main.tile[num56, num187].TileType = stone;
 							}
 							if (Main.tile[num56, num187].TileType == 2)
 							{
-								Main.tile[num56, num187].TileType = 23;
+								Main.tile[num56, num187].TileType = grass;
 							}
 						}
 					}
@@ -1873,7 +1892,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					for (int num189 = 0; num189 < Main.maxTilesY - 50; num189++)
 					{
-						if (!Main.tile[num188, num189].HasTile || Main.tile[num188, num189].TileType != 31)
+						if (!Main.tile[num188, num189].HasTile || Main.tile[num188, num189].TileType != orb)
 						{
 							continue;
 						}
@@ -1889,18 +1908,18 @@ namespace Avalon.WorldGeneration.secretSeeds
 							}
 							for (int num195 = num192; num195 < num193; num195++)
 							{
-								if (Math.Abs(num194 - num188) + Math.Abs(num195 - num189) < 9 + WorldGen.genRand.Next(11) && !WorldGen.genRand.NextBool(3) && Main.tile[num194, num195].TileType != 31)
+								if (Math.Abs(num194 - num188) + Math.Abs(num195 - num189) < 9 + WorldGen.genRand.Next(11) && !WorldGen.genRand.NextBool(3) && Main.tile[num194, num195].TileType != orb)
 								{
 									Tile tile = Main.tile[num194, num195];
 									tile.HasTile = true;
-									tile.TileType = 25;
+									tile.TileType = stone;
 									if (Math.Abs(num194 - num188) <= 1 && Math.Abs(num195 - num189) <= 1)
 									{
 										Tile tile2 = Main.tile[num194, num195];
 										tile2.HasTile = false;
 									}
 								}
-								if (Main.tile[num194, num195].TileType != 31 && Math.Abs(num194 - num188) <= 2 + WorldGen.genRand.Next(3) && Math.Abs(num195 - num189) <= 2 + WorldGen.genRand.Next(3))
+								if (Main.tile[num194, num195].TileType != orb && Math.Abs(num194 - num188) <= 2 + WorldGen.genRand.Next(3) && Math.Abs(num195 - num189) <= 2 + WorldGen.genRand.Next(3))
 								{
 									Tile tile = Main.tile[num194, num195];
 									tile.HasTile = false;
@@ -2358,6 +2377,18 @@ namespace Avalon.WorldGeneration.secretSeeds
 		{
 			double num6 = surfaceVariance2;
 
+			ushort tileType = TileID.DemonAltar;
+			int style = 0;
+			WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
+			if (evil == WorldEvil.Crimson)
+			{
+				style = 1;
+			}
+			if (evil == WorldEvil.Contagion)
+			{
+				tileType = (ushort)ModContent.TileType<Tiles.Contagion.IckyAltar>();
+			}
+
 			for (int num237 = 0; num237 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 2E-05); num237++)
 			{
 				float num238 = (float)((double)num237 / ((double)(Main.maxTilesX * Main.maxTilesY) * 2E-05));
@@ -2368,8 +2399,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					int num240 = WorldGen.genRand.Next(1, Main.maxTilesX);
 					int num241 = (int)(num6 + 20.0);
-					WorldGen.Place3x2(num240, num241, 26);
-					if (Main.tile[num240, num241].TileType == 26)
+					WorldGen.Place3x2(num240, num241, tileType, style);
+					if (Main.tile[num240, num241].TileType == tileType)
 					{
 						flag12 = true;
 						continue;
@@ -2565,7 +2596,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						num266 = WorldGen.genRand.Next(Main.maxTilesY - 200, Main.maxTilesY - 50);
 					}
-					while (Main.tile[num265, num266].WallType == 7 || Main.tile[num265, num266].WallType == 8 || Main.tile[num265, num266].WallType == 9)
+					while (Main.tile[num265, num266].WallType == ModContent.WallType<UnsafeAncientBlueBrickWall>() || Main.tile[num265, num266].WallType == ModContent.WallType<UnsafeAncientGreenBrickWall>() || Main.tile[num265, num266].WallType == ModContent.WallType<UnsafeAncientPinkBrickWall>() ||
+						Main.tile[num265, num266].WallType == ModContent.WallType<UnsafeAncientOrangeBrickWall>() || Main.tile[num265, num266].WallType == ModContent.WallType<UnsafeAncientPurpleBrickWall>() || Main.tile[num265, num266].WallType == ModContent.WallType<UnsafeAncientYellowBrickWall>())
 					{
 						num265 = WorldGen.genRand.Next(1, Main.maxTilesX);
 						num266 = WorldGen.genRand.Next((int)(num6 + 20.0), Main.maxTilesY - 230);
@@ -3760,8 +3792,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		public static void MakeDungeon(int x, int y, ushort tileType = 677, ushort wallType = 1)
 		{
-			int num = WorldGen.genRand.Next(3);
-			int num2 = WorldGen.genRand.Next(3);
+			int num = WorldGen.genRand.Next(6);
+			int num2 = WorldGen.genRand.Next(6);
 			switch (num)
 			{
 				case 1:
@@ -3769,6 +3801,15 @@ namespace Avalon.WorldGeneration.secretSeeds
 					break;
 				case 2:
 					tileType = 679;
+					break;
+				case 3:
+					tileType = (ushort)ModContent.TileType<AncientOrangeBrick>();
+					break;
+				case 4:
+					tileType = (ushort)ModContent.TileType<AncientPurpleBrick>();
+					break;
+				case 5:
+					tileType = (ushort)ModContent.TileType<AncientYellowBrick>();
 					break;
 			}
 			if (wallType == 1)
@@ -3782,6 +3823,15 @@ namespace Avalon.WorldGeneration.secretSeeds
 					break;
 				case 2:
 					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientPinkBrickWall>();
+					break;
+				case 3:
+					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientOrangeBrickWall>();
+					break;
+				case 4:
+					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientPurpleBrickWall>();
+					break;
+				case 5:
+					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientYellowBrickWall>();
 					break;
 			}
 			GenVars.numDDoors = 0;
@@ -5685,6 +5735,31 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		public static void ChasmRunner(int i, int j, int steps, bool makeOrb = false)
 		{
+			
+			WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
+			ushort altar = TileID.DemonAltar;
+			int altarStyle = 0;
+			ushort stone = TileID.Ebonstone;
+			ushort ore = TileID.Demonite;
+			ushort orb = TileID.ShadowOrbs;
+			ushort stoneWall = WallID.EbonstoneUnsafe;
+
+			if (evil == WorldEvil.Crimson)
+			{
+				stone = TileID.Crimstone;
+				ore = TileID.Crimtane;
+				altarStyle = 1;
+				stoneWall = WallID.CrimstoneUnsafe;
+			}
+			if (evil == WorldEvil.Contagion)
+			{
+				stone = (ushort)ModContent.TileType<Tiles.Contagion.Chunkstone>();
+				ore = (ushort)ModContent.TileType<Tiles.Ores.BacciliteOre>();
+				orb = (ushort)ModContent.TileType<Tiles.Contagion.SnotOrb>();
+				altar = (ushort)ModContent.TileType<Tiles.Contagion.IckyAltar>();
+				stoneWall = (ushort)ModContent.WallType<Walls.ChunkstoneWall>();
+			}
+
 			bool flag = false;
 			bool flag2 = false;
 			bool flag3 = false;
@@ -5765,7 +5840,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						for (int l = num6; l < num7; l++)
 						{
-							if ((double)(Math.Abs((float)k - vector.X) + Math.Abs((float)l - vector.Y)) < num3 * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015) && Main.tile[k, l].TileType != 31 && Main.tile[k, l].TileType != 22)
+							if ((double)(Math.Abs((float)k - vector.X) + Math.Abs((float)l - vector.Y)) < num3 * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015) && Main.tile[k, l].TileType != orb && Main.tile[k, l].TileType != ore)
 							{
 								Tile tile = Main.tile[k, l];
 								tile.HasTile = false;
@@ -5811,8 +5886,8 @@ namespace Avalon.WorldGeneration.secretSeeds
 							}
 							if ((double)num10 > Main.worldSurface)
 							{
-								WorldGen.Place3x2(num9, num10, 26);
-								if (Main.tile[num9, num10].TileType == 26)
+								WorldGen.Place3x2(num9, num10, altar, altarStyle);
+								if (Main.tile[num9, num10].TileType == altar)
 								{
 									flag4 = true;
 									continue;
@@ -5866,7 +5941,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						if ((double)(Math.Abs((float)m - vector.X) + Math.Abs((float)n - vector.Y)) < num3 * 1.1 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015))
 						{
-							if (Main.tile[m, n].TileType != 25 && n > j + WorldGen.genRand.Next(3, 20))
+							if (Main.tile[m, n].TileType != stone && n > j + WorldGen.genRand.Next(3, 20))
 							{
 								Tile tile = Main.tile[m, n];
 								tile.HasTile = true;
@@ -5876,9 +5951,9 @@ namespace Avalon.WorldGeneration.secretSeeds
 								Tile tile = Main.tile[m, n];
 								tile.HasTile = true;
 							}
-							if (Main.tile[m, n].TileType != 31)
+							if (Main.tile[m, n].TileType != orb)
 							{
-								Main.tile[m, n].TileType = 25;
+								Main.tile[m, n].TileType = stone;
 							}
 							if (Main.tile[m, n].WallType == 2)
 							{
@@ -5893,9 +5968,9 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						if ((double)(Math.Abs((float)num11 - vector.X) + Math.Abs((float)num12 - vector.Y)) < num3 * 1.1 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015))
 						{
-							if (Main.tile[num11, num12].TileType != 31)
+							if (Main.tile[num11, num12].TileType != orb)
 							{
-								Main.tile[num11, num12].TileType = 25;
+								Main.tile[num11, num12].TileType = stone;
 							}
 							if (steps <= num2)
 							{
@@ -5904,7 +5979,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 							}
 							if (num12 > j + WorldGen.genRand.Next(3, 20))
 							{
-								WorldGen.PlaceWall(num11, num12, 3, mute: true);
+								WorldGen.PlaceWall(num11, num12, stoneWall, mute: true);
 							}
 						}
 					}
@@ -5914,6 +5989,26 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		public static void ChasmRunnerSideways(int i, int j, int direction, int steps)
 		{
+			WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
+			ushort stone = TileID.Ebonstone;
+			ushort ore = TileID.Demonite;
+			ushort orb = TileID.ShadowOrbs;
+			ushort stoneWall = WallID.EbonstoneUnsafe;
+
+			if (evil == WorldEvil.Crimson)
+			{
+				stone = TileID.Crimstone;
+				ore = TileID.Crimtane;
+				stoneWall = WallID.CrimstoneUnsafe;
+			}
+			if (evil == WorldEvil.Contagion)
+			{
+				stone = (ushort)ModContent.TileType<Tiles.Contagion.Chunkstone>();
+				ore = (ushort)ModContent.TileType<Tiles.Ores.BacciliteOre>();
+				orb = (ushort)ModContent.TileType<Tiles.Contagion.SnotOrb>();
+				stoneWall = (ushort)ModContent.WallType<Walls.ChunkstoneWall>();
+			}
+
 			float num = steps;
 			Vector2 vector = default(Vector2);
 			vector.X = i;
@@ -5974,7 +6069,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					for (int l = num5; l < num6; l++)
 					{
-						if ((double)(Math.Abs((float)k - vector.X) + Math.Abs((float)l - vector.Y)) < num2 * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015) && Main.tile[k, l].TileType != 31 && Main.tile[k, l].TileType != 22)
+						if ((double)(Math.Abs((float)k - vector.X) + Math.Abs((float)l - vector.Y)) < num2 * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015) && Main.tile[k, l].TileType != orb && Main.tile[k, l].TileType != ore)
 						{
 							Tile tile = Main.tile[k, l];
 							tile.HasTile = false;
@@ -6047,18 +6142,18 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					for (int n = num5; n < num6; n++)
 					{
-						if ((double)(Math.Abs((float)m - vector.X) + Math.Abs((float)n - vector.Y)) < num2 * 1.1 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015) && Main.tile[m, n].WallType != 3)
+						if ((double)(Math.Abs((float)m - vector.X) + Math.Abs((float)n - vector.Y)) < num2 * 1.1 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015) && Main.tile[m, n].WallType != stoneWall)
 						{
-							if (Main.tile[m, n].TileType != 25 && n > j + WorldGen.genRand.Next(3, 20))
+							if (Main.tile[m, n].TileType != stone && n > j + WorldGen.genRand.Next(3, 20))
 							{
 								Tile tile2 = Main.tile[m, n];
 								tile2.HasTile = true;
 							}
 							Tile tile = Main.tile[m, n];
 							tile.HasTile = true;
-							if (Main.tile[m, n].TileType != 31 && Main.tile[m, n].TileType != 22)
+							if (Main.tile[m, n].TileType != orb && Main.tile[m, n].TileType != ore)
 							{
-								Main.tile[m, n].TileType = 25;
+								Main.tile[m, n].TileType = stone;
 							}
 							if (Main.tile[m, n].WallType == 2)
 							{
@@ -6071,15 +6166,15 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					for (int num8 = num5; num8 < num6; num8++)
 					{
-						if ((double)(Math.Abs((float)num7 - vector.X) + Math.Abs((float)num8 - vector.Y)) < num2 * 1.1 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015) && Main.tile[num7, num8].WallType != 3)
+						if ((double)(Math.Abs((float)num7 - vector.X) + Math.Abs((float)num8 - vector.Y)) < num2 * 1.1 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015) && Main.tile[num7, num8].WallType != stoneWall)
 						{
-							if (Main.tile[num7, num8].TileType != 31 && Main.tile[num7, num8].TileType != 22)
+							if (Main.tile[num7, num8].TileType != orb && Main.tile[num7, num8].TileType != ore)
 							{
-								Main.tile[num7, num8].TileType = 25;
+								Main.tile[num7, num8].TileType = stone;
 							}
 							Tile tile = Main.tile[num7, num8];
 							tile.HasTile = true;
-							WorldGen.PlaceWall(num7, num8, 3, mute: true);
+							WorldGen.PlaceWall(num7, num8, stoneWall, mute: true);
 						}
 					}
 				}
@@ -6091,12 +6186,25 @@ namespace Avalon.WorldGeneration.secretSeeds
 				for (num10 = (int)vector.Y; !Main.tile[num9, num10].HasTile; num10++)
 				{
 				}
-				WorldGen.TileRunner(num9, num10, WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(3, 7), 22);
+				WorldGen.TileRunner(num9, num10, WorldGen.genRand.Next(2, 6), WorldGen.genRand.Next(3, 7), ore);
 			}
 		}
 
 		public static void AddShadowOrb(int x, int y)
 		{
+			WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
+			ushort orb = TileID.ShadowOrbs;
+			short style = 0;
+
+			if (evil == WorldEvil.Crimson)
+			{
+				style = 36;
+			}
+			if (evil == WorldEvil.Contagion)
+			{
+				orb = (ushort)ModContent.TileType<Tiles.Contagion.SnotOrb>();
+			}
+
 			if (x < 10 || x > Main.maxTilesX - 10 || y < 10 || y > Main.maxTilesY - 10)
 			{
 				return;
@@ -6105,7 +6213,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			{
 				for (int j = y - 1; j < y + 1; j++)
 				{
-					if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == 31)
+					if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == orb)
 					{
 						return;
 					}
@@ -6113,23 +6221,23 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 			Tile tile = Main.tile[x - 1, y - 1];
 			tile.HasTile = true;
-			tile.TileType = 31;
-			tile.TileFrameX = 0;
+			tile.TileType = orb;
+			tile.TileFrameX = (short)(0 + style);
 			tile.TileFrameY = 0;
 			Tile tile2 = Main.tile[x, y - 1];
 			tile2.HasTile = true;
-			tile2.TileType = 31;
-			tile2.TileFrameX = 18;
+			tile2.TileType = orb;
+			tile2.TileFrameX = (short)(18 + style);
 			tile2.TileFrameY = 0;
 			Tile tile3 = Main.tile[x - 1, y];
 			tile3.HasTile = true;
-			tile3.TileType = 31;
-			tile3.TileFrameX = 0;
+			tile3.TileType = orb;
+			tile3.TileFrameX = (short)(0 + style);
 			tile3.TileFrameY = 18;
 			Tile tile4 = Main.tile[x, y];
 			tile4.HasTile = true;
-			tile4.TileType = 31;
-			tile4.TileFrameX = 18;
+			tile4.TileType = orb;
+			tile4.TileFrameX = (short)(18 + style);
 			tile4.TileFrameY = 18;
 		}
 
@@ -8015,7 +8123,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			for (j = y; Main.tile[i, j].TileType == 20; j++)
 			{
 			}
-			if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == 2 && Main.tile[i, j - 1].WallType == 0 && Main.tile[i, j - 1].LiquidAmount == 0 && ((Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109)) || (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109))))
+			if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == 2 && Main.tile[i, j - 1].WallType == 0 && Main.tile[i, j - 1].LiquidAmount == 0 && ((Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == TileID.CrimsonGrass || Main.tile[i - 1, j].TileType == ModContent.TileType<Ickgrass>() || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109)) || (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == TileID.CrimsonGrass || Main.tile[i + 1, j].TileType == ModContent.TileType<Ickgrass>() || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109))))
 			{
 				int num = 1;
 				if (WorldGen.EmptyTileCheck(i - num, i + num, j - 55, j - 1, 20))
@@ -8280,11 +8388,11 @@ namespace Avalon.WorldGeneration.secretSeeds
 					int num5 = WorldGen.genRand.Next(3);
 					bool flag3 = false;
 					bool flag4 = false;
-					if (Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109))
+					if (Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == TileID.CrimsonGrass || Main.tile[i - 1, j].TileType == ModContent.TileType<Ickgrass>() || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109))
 					{
 						flag3 = true;
 					}
-					if (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109))
+					if (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == TileID.CrimsonGrass || Main.tile[i + 1, j].TileType == ModContent.TileType<Ickgrass>() || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109))
 					{
 						flag4 = true;
 					}
@@ -8472,7 +8580,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			for (j = y; Main.tile[i, j].TileType == 20; j++)
 			{
 			}
-			if (((Main.tile[i - 1, j - 1].LiquidAmount != 0 || Main.tile[i - 1, j - 1].LiquidAmount != 0 || Main.tile[i + 1, j - 1].LiquidAmount != 0) && Main.tile[i, j].TileType != 60) || !Main.tile[i, j].HasTile || (Main.tile[i, j].TileType != 2 && Main.tile[i, j].TileType != 23 && Main.tile[i, j].TileType != 60 && Main.tile[i, j].TileType != 109 && Main.tile[i, j].TileType != 147) || Main.tile[i, j - 1].WallType != 0 || ((!Main.tile[i - 1, j].HasTile || (Main.tile[i - 1, j].TileType != 2 && Main.tile[i - 1, j].TileType != 23 && Main.tile[i - 1, j].TileType != 60 && Main.tile[i - 1, j].TileType != 109 && Main.tile[i - 1, j].TileType != 147)) && (!Main.tile[i + 1, j].HasTile || (Main.tile[i + 1, j].TileType != 2 && Main.tile[i + 1, j].TileType != 23 && Main.tile[i + 1, j].TileType != 60 && Main.tile[i + 1, j].TileType != 109 && Main.tile[i + 1, j].TileType != 147))))
+			if (((Main.tile[i - 1, j - 1].LiquidAmount != 0 || Main.tile[i - 1, j - 1].LiquidAmount != 0 || Main.tile[i + 1, j - 1].LiquidAmount != 0) && Main.tile[i, j].TileType != 60) || !Main.tile[i, j].HasTile || (Main.tile[i, j].TileType != 2 && Main.tile[i, j].TileType != 23 && Main.tile[i, j].TileType != TileID.CrimsonGrass && Main.tile[i, j].TileType != ModContent.TileType<Ickgrass>() && Main.tile[i, j].TileType != 60 && Main.tile[i, j].TileType != 109 && Main.tile[i, j].TileType != 147) || Main.tile[i, j - 1].WallType != 0 || ((!Main.tile[i - 1, j].HasTile || (Main.tile[i - 1, j].TileType != 2 && Main.tile[i - 1, j].TileType != 23 && Main.tile[i - 1, j].TileType != TileID.CrimsonGrass && Main.tile[i - 1, j].TileType != ModContent.TileType<Ickgrass>() && Main.tile[i - 1, j].TileType != 60 && Main.tile[i - 1, j].TileType != 109 && Main.tile[i - 1, j].TileType != 147)) && (!Main.tile[i + 1, j].HasTile || (Main.tile[i + 1, j].TileType != 2 && Main.tile[i + 1, j].TileType != 23 && Main.tile[i + 1, j].TileType != TileID.CrimsonGrass && Main.tile[i + 1, j].TileType != ModContent.TileType<Ickgrass>() && Main.tile[i + 1, j].TileType != 60 && Main.tile[i + 1, j].TileType != 109 && Main.tile[i + 1, j].TileType != 147))))
 			{
 				return;
 			}
@@ -8746,11 +8854,11 @@ namespace Avalon.WorldGeneration.secretSeeds
 			int num6 = WorldGen.genRand.Next(3);
 			bool flag3 = false;
 			bool flag4 = false;
-			if (Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109 || Main.tile[i - 1, j].TileType == 147))
+			if (Main.tile[i - 1, j].HasTile && (Main.tile[i - 1, j].TileType == 2 || Main.tile[i - 1, j].TileType == 23 || Main.tile[i - 1, j].TileType == TileID.CrimsonGrass || Main.tile[i - 1, j].TileType == ModContent.TileType<Ickgrass>() || Main.tile[i - 1, j].TileType == 60 || Main.tile[i - 1, j].TileType == 109 || Main.tile[i - 1, j].TileType == 147))
 			{
 				flag3 = true;
 			}
-			if (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109 || Main.tile[i + 1, j].TileType == 147))
+			if (Main.tile[i + 1, j].HasTile && (Main.tile[i + 1, j].TileType == 2 || Main.tile[i + 1, j].TileType == 23 || Main.tile[i + 1, j].TileType == TileID.CrimsonGrass || Main.tile[i + 1, j].TileType == ModContent.TileType<Ickgrass>() || Main.tile[i + 1, j].TileType == 60 || Main.tile[i + 1, j].TileType == 109 || Main.tile[i + 1, j].TileType == 147))
 			{
 				flag4 = true;
 			}
@@ -8968,7 +9076,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 				{
 					PlaceAlch(num, num2 - 1, 2);
 				}
-				if (Main.tile[num, num2].TileType == 23 || Main.tile[num, num2].TileType == 25)
+				if (Main.tile[num, num2].TileType == 23 || Main.tile[num, num2].TileType == 25 || Main.tile[num, num2].TileType == TileID.CrimsonGrass || Main.tile[num, num2].TileType == TileID.Crimstone || Main.tile[num, num2].TileType == ModContent.TileType<Ickgrass>() || Main.tile[num, num2].TileType == ModContent.TileType<Chunkstone>())
 				{
 					PlaceAlch(num, num2 - 1, 3);
 				}
@@ -9025,7 +9133,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						}
 						break;
 					case 3:
-						if (Main.tile[x, y + 1].TileType != 23 && Main.tile[x, y + 1].TileType != 25 && Main.tile[x, y + 1].TileType != 78)
+						if (Main.tile[x, y + 1].TileType != 23 && Main.tile[x, y + 1].TileType != 25 && Main.tile[x, y + 1].TileType != TileID.CrimsonGrass && Main.tile[x, y + 1].TileType != TileID.Crimstone && Main.tile[x, y + 1].TileType != ModContent.TileType<Ickgrass>() && Main.tile[x, y + 1].TileType != ModContent.TileType<Chunkstone>() && Main.tile[x, y + 1].TileType != 78)
 						{
 							flag = true;
 						}
@@ -9081,7 +9189,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 							WorldGen.PlaceTile(i, j - 1, 3, mute: true);
 						}
 					}
-					else if (Main.tile[i, j].TileType == 23 && Main.tile[i, j].HasTile && !Main.tile[i, j - 1].HasTile)
+					else if ((Main.tile[i, j].TileType == 23 || Main.tile[i, j].TileType == TileID.CrimsonGrass || Main.tile[i, j].TileType == ModContent.TileType<Ickgrass>()) && Main.tile[i, j].HasTile && !Main.tile[i, j - 1].HasTile)
 					{
 						WorldGen.PlaceTile(i, j - 1, 24, mute: true);
 					}

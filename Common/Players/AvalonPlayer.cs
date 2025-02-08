@@ -1,3 +1,4 @@
+using Avalon.Assets;
 using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
@@ -31,6 +32,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -38,6 +40,7 @@ using Terraria.Localization;
 using Terraria.Map;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using ThoriumMod.Items.ZRemoved;
 
 namespace Avalon.Common.Players;
 
@@ -424,6 +427,19 @@ public class AvalonPlayer : ModPlayer
             Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Legs", EquipType.Legs,
             null, LavaMermanName);
     }
+	public override void Unload()
+	{
+		TextureAssets.Tile[TileID.AncientBlueBrick] = Main.Assets.Request<Texture2D>("Images/Tiles_" + TileID.AncientBlueBrick);
+		TextureAssets.Tile[TileID.AncientGreenBrick] = Main.Assets.Request<Texture2D>("Images/Tiles_" + TileID.AncientGreenBrick);
+		TextureAssets.Tile[TileID.AncientPinkBrick] = Main.Assets.Request<Texture2D>("Images/Tiles_" + TileID.AncientPinkBrick);
+
+		TextureAssets.Wall[WallID.AncientBlueBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientBlueBrickWall);
+		TextureAssets.Wall[WallID.AncientGreenBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientGreenBrickWall);
+		TextureAssets.Wall[WallID.AncientPinkBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientPinkBrickWall);
+		TextureAssets.Wall[ModContent.WallType<UnsafeAncientBlueBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientBlueBrickWall");
+		TextureAssets.Wall[ModContent.WallType<UnsafeAncientGreenBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientGreenBrickWall");
+		TextureAssets.Wall[ModContent.WallType<UnsafeAncientPinkBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientPinkBrickWall");
+	}
 	public override void ResetEffects()
     {
 		WOSRenderHPText = false;
@@ -3099,7 +3115,7 @@ public class AvalonPlayer : ModPlayer
         }
 		UpdateMana();
 	}
-    public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
+	public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
     {
         #region hellbound halberd weird shit
         if (drawInfo.drawPlayer.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] > 0 && Main.mouseRight && !Main.mouseLeft && Main.myPlayer == drawInfo.drawPlayer.whoAmI)

@@ -195,6 +195,7 @@ public class ExxoAvalonOrigins : Mod
         {
             assetReplacer.RestoreAssets();
         }
+
 		AWorldListItemHelper.Unload();
 
 		Mod = null!;

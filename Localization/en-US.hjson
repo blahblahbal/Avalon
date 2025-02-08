@@ -9625,6 +9625,21 @@ Mods: {
 				DisplayName: Unsafe Ancient Obsidian Brick Wall
 				Tooltip: ""
 			}
+
+			UnsafeAncientOrangeBrickWall: {
+				DisplayName: Unsafe Ancient Orange Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientPurpleBrickWall: {
+				DisplayName: Unsafe Ancient Purple Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientYellowBrickWall: {
+				DisplayName: Unsafe Ancient Yellow Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
