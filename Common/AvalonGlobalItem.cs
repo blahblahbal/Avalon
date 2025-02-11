@@ -1953,7 +1953,7 @@ public class AvalonGlobalItem : GlobalItem
 			return false;
 		}
 
-		return !item.IsArmor() && base.CanEquipAccessory(item, player, slot, modded);
+		return base.CanEquipAccessory(item, player, slot, modded);
     }
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {
