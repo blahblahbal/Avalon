@@ -109,7 +109,7 @@ namespace Avalon.Hooks
 
 			int num2 = tileY;
 			bool flag = false;
-			Tile tile = Main.tile[num, num2];
+			Tile tile = Framing.GetTileSafely(num, num2);
 			if (tile == null)
 				return;
 
@@ -126,7 +126,7 @@ namespace Avalon.Hooks
 					break;
 
 				if (num < Main.maxTilesX && num2 < Main.maxTilesY)
-					tile = Main.tile[num, num2];
+					tile = Framing.GetTileSafely(num, num2);
 			}
 
 			type = tile.TileType;

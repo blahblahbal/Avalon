@@ -9643,6 +9643,11 @@ Mods: {
 				DisplayName: Unsafe Ancient Yellow Brick Wall
 				Tooltip: ""
 			}
+
+			HydrolythOre: {
+				DisplayName: Hydrolyth Ore
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -11433,6 +11438,7 @@ Mods: {
 			SilenceCandle.MapEntry: Mods.Avalon.Tiles.SilenceCandle.MapEntry
 			#intentionally lowercase to allow players an alternate way to find angel chests
 			AngelChest.MapEntry: gold chest
+			HydrolythOre.MapEntry: Mods.Avalon.Tiles.HydrolythOre.MapEntry
 		}
 
 		Prefixes: {
