@@ -1,7 +1,9 @@
 using Avalon.Common;
 using Avalon.Items.Material;
+using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Placeable.Statue;
+using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
@@ -43,6 +45,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		internal static bool isGeneratingOldWorld = false;
 
+		//1.1 worldgen passes names
 		private static readonly string[] gen = new string[] { "Adding Clouds...", "Adding Titanium Ore...", "Adding Coal...", "Adding Jungle Ore...", "Adding Ice Shrines..", "Adding Caesium Ore...", "Generating Hellcastle:", "Placing hallowed altars:", "Generating Heartstone biomes...", "Adding Ice Caves:",
 				"Placing Avalon's statues:" };
 
@@ -240,6 +243,12 @@ namespace Avalon.WorldGeneration.secretSeeds
 									break;
 								case "Floating Island Houses":
 									editedGenpass = new WorldGenLegacyMethod(FloatingIslandHouses);
+									break;
+								case "Jungle Temple":
+									editedGenpass = new WorldGenLegacyMethod(JungleTemple);
+									break;
+								case "Lihzahrd Altars":
+									editedGenpass = new WorldGenLegacyMethod(LihzahrdAltars);
 									break;
 								case "Final Cleanup":
 									editedGenpass = new WorldGenLegacyMethod(FinalCleanup);
@@ -9368,6 +9377,11 @@ namespace Avalon.WorldGeneration.secretSeeds
 			WorldGen.treeBG4 = 0;
 			WorldGen.underworldBG = 0;
 			Main.moonType = 0;
+			Main.treeStyle[0] = 0;
+			Main.treeStyle[1] = 0;
+			Main.treeStyle[2] = 0;
+			Main.treeStyle[3] = 0;
+			WorldGen.TreeTops.CopyExistingWorldInfoForWorldGeneration();
 		}
 
 		//MudRunner
@@ -9602,6 +9616,329 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						vector2D2.Y = -1.0;
 					}
+				}
+			}
+		}
+
+		//Added passes to not break progression
+		private static void JungleTemple(GenerationProgress progres, GameConfiguration configurations)
+		{
+			Main.statusText = Lang.gen[70].Value;
+			bool flag38 = false;
+			while (true)
+			{
+				int randX = GenVars.JungleX;
+				int randY = WorldGen.genRand.Next(0, Main.maxTilesY);
+				if (randY < Main.maxTilesY - 500 && randY > Main.rockLayer)
+				{
+					if (Main.tile[randX, randY].HasTile && Main.tile[randX, randY].TileType == 60)
+					{
+						flag38 = true;
+						makeTemple(randX, randY);
+						break;
+					}
+				}
+			}
+			if (!flag38)
+			{
+				int x25 = Main.maxTilesX - GenVars.dungeonX;
+				int y22 = (int)Main.rockLayer + 100;
+				makeTemple(x25, y22);
+			}
+		}
+
+		private static void LihzahrdAltars(GenerationProgress progres, GameConfiguration configurations)
+		{
+			for (int i = 0; i < 3; i++) //remove tiles where the altar will be (such as chests)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					int x = GenVars.lAltarX + i;
+					int y = GenVars.lAltarY + j;
+					WorldGen.KillTile(x, y);
+				}
+			}
+			for (int i = 0; i < 3; i++) //place the altar (revised 1.4.4.9 altar gen code)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					int x = GenVars.lAltarX + i;
+					int y = GenVars.lAltarY + j;
+					Tile tile = Main.tile[x, y];
+					tile.HasTile = true;
+					tile.TileType = 237;
+					tile.TileFrameX = (short)(i * 18);
+					tile.TileFrameY = (short)(j * 18);
+				}
+				Tile tile2 = Main.tile[GenVars.lAltarX + i, GenVars.lAltarY + 2];
+				tile2.HasTile = true;
+				tile2.Slope = 0;
+				tile2.IsHalfBlock = false;
+				tile2.TileType = 226;
+			}
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					int x = GenVars.lAltarX + i;
+					int y = GenVars.lAltarY + j;
+					WorldGen.SquareTileFrame(x, y);
+				}
+			}
+
+			int posX = GenVars.tLeft; //get positioning, its before chests because I did it a stupid and dumb way intitially 
+			int posY = GenVars.tBottom;
+			int length = GenVars.tRight - posX;
+			int height = GenVars.tTop - posY;
+			for (int i = 0; i < Main.maxChests; i++)
+			{
+				Chest c = Main.chest[i];
+				if (c != null)
+				{
+					if (Main.tile[c.x, c.y].WallType == WallID.LihzahrdBrickUnsafe)
+					{
+						c.item[0].SetDefaults(ItemID.LihzahrdPowerCell); //give chests inside the temple power cells 
+						c.item[0].ResetPrefix();
+					}
+				}
+			}
+			for (int i = 0; i < length; i++) //remove liquids AGAIN
+			{
+				for (int j = 0; j > height; j--)
+				{
+					Tile tile = Main.tile[posX + i, posY + j];
+					tile.LiquidAmount = 0;
+					tile.LiquidType = 0;
+				}
+			}
+		}
+
+		public static void makeTemple(int x, int y)
+		{
+			float variance = Main.maxTilesX / 4200;
+			int templeLength = (int)(100 * variance); //get a length for the temple
+			if (templeLength % 2 != 0)
+			{
+				templeLength += 1; //always make it odd numbered
+			}
+			int halfsize = templeLength / 2;
+			for (int length = 0; length <= templeLength; length++)
+			{
+				for (int height = 0; height > -11; height--)
+				{
+					Tile tile = Main.tile[x + length, y + height];
+					WorldGen.KillTile(x + length, y + height); //generate platform and empty space for entrance
+					tile.LiquidAmount = 0;
+					tile.LiquidType = 0;
+					if (height > -4)
+						WorldGen.PlaceTile(x + length, y + height, TileID.LihzahrdBrick, true, true);
+				}
+			}
+			Tile tile2 = Main.tile[x - 1, y - 3]; //place platform on the left
+			WorldGen.KillTile(x - 1, y - 3);
+			tile2.HasTile = true;
+			tile2.TileType = TileID.Platforms;
+			tile2 = Main.tile[x + templeLength + 1, y - 3]; //place platform on the right
+			WorldGen.KillTile(x + templeLength + 1, y - 3);
+			tile2.HasTile = true;
+			tile2.TileType = TileID.Platforms;
+			//climb up to make the left side of the walls
+			int placeBlockX = 5;
+			int placeBlockY = -11;
+			//Left side
+			while (placeBlockX < halfsize)
+			{
+				for (int up = 0; up <= 3; up++)
+				{
+					Generate3x3(x + placeBlockX, y + placeBlockY, TileID.LihzahrdBrick);
+					placeBlockY -= 3;
+				}
+				for (int across = 0; across <= 5; across++)
+				{
+					if (placeBlockX > halfsize + 3)
+					{
+						break;
+					}
+					Generate3x3(x + placeBlockX, y + placeBlockY, TileID.LihzahrdBrick);
+					placeBlockX += 3;
+				}
+			}
+			//climb up to make the right side of the walls
+			placeBlockX = templeLength - 3;
+			placeBlockY = -11;
+			//Right side
+			while (placeBlockX > halfsize) 
+			{
+				for (int up = 0; up <= 3; up++)
+				{
+					Generate3x3(x + placeBlockX, y + placeBlockY, TileID.LihzahrdBrick);
+					placeBlockY -= 3;
+				}
+				for (int across = 0; across <= 5; across++)
+				{
+					if (placeBlockX < halfsize - 3)
+					{
+						break;
+					}
+					Generate3x3(x + placeBlockX, y + placeBlockY, TileID.LihzahrdBrick);
+					placeBlockX -= 3;
+				}
+			}
+			int tallestInsidePoint = -5; //the tallets celing of the temple
+			int insideLength = templeLength - 10; //5 tiles each side
+			for (int i = 0; i <= insideLength; i++) //empty out and replace everything with lihzahrd walls
+			{
+				int j = 0;
+				int x2 = x + 5 + i;
+				int y2 = y - 4 + j;
+				Tile tile = Main.tile[x2, y2];
+				while (tile.TileType != TileID.LihzahrdBrick && y2 > 0)
+				{
+					WorldGen.KillTile(x2, y2);
+					tile.WallType = WallID.LihzahrdBrickUnsafe;
+					tile.LiquidAmount = 0;
+					tile.LiquidType = 0;
+					if (j < tallestInsidePoint)
+					{
+						tallestInsidePoint = j;
+					}
+					j--;
+					y2 = y - 4 + j;
+					tile = Main.tile[x2, y2];
+				}
+			}
+			int templeHeight = Math.Abs(tallestInsidePoint) + 8; //create a non-negitive version of the height
+			for (int i = 0; i <= templeLength; i++) //make all lizhard tiles away from the outside jungle have a wall
+			{
+				for (int j = 0; j >= tallestInsidePoint; j--)
+				{
+					int x2 = x + i;
+					int y2 = y + j;
+					Tile tile1 = Main.tile[x2, y2];
+					Tile tile12 = Main.tile[x2 - 1, y2];
+					Tile tile13 = Main.tile[x2 + 1, y2];
+					Tile tile14 = Main.tile[x2, y2 - 1];
+					Tile tile15 = Main.tile[x2, y2 + 1];
+					if (tile1.WallType != WallID.LihzahrdBrickUnsafe && ((tile12.TileType == TileID.LihzahrdBrick && tile12.HasTile) || tile12.WallType == WallID.LihzahrdBrickUnsafe) &&
+						((tile13.TileType == TileID.LihzahrdBrick && tile13.HasTile) || tile13.WallType == WallID.LihzahrdBrickUnsafe) &&
+						((tile14.TileType == TileID.LihzahrdBrick && tile14.HasTile) || tile14.WallType == WallID.LihzahrdBrickUnsafe) &&
+						((tile15.TileType == TileID.LihzahrdBrick && tile15.HasTile) || tile15.WallType == WallID.LihzahrdBrickUnsafe))
+					{
+						tile1.WallType = WallID.LihzahrdBrickUnsafe;
+					}
+				}
+			}
+			Utils.AddSpikes(x + 5, y - templeHeight, templeLength - 5, templeHeight, 50, TileID.WoodenSpikes, WorldGen.genRand.Next(5, 10), WallID.LihzahrdBrickUnsafe); //generate wooden spikes
+			for (int i = 0; i < insideLength; i++) //generate traps
+			{
+				int x2 = x + 5 + i;
+				if (WorldGen.genRand.NextBool(10) && Main.tile[x2, y - 3].TileType == TileID.LihzahrdBrick && !(i > halfsize - 6 && i < insideLength - halfsize + 6)) //if its a 1 in 10 chance + has a lihzahrd brick and is not where the altar is
+				{
+					int trapType = WorldGen.genRand.Next(2); //grab 1 of 2 traps
+					if (i < 15 || i > insideLength - 15)
+					{
+						trapType = 0; //make sure when near the entries, dont generate a floor trap
+					}
+					switch (trapType)
+					{
+						case 0: //dropdown trap
+							int j2 = 0;
+							WorldGen.PlaceTile(x2 + 2, y - 4, TileID.PressurePlates, true, true, style: 6); //place a presuure plate
+							while (Main.tile[x2 + 2, y - 4 + j2].TileType != TileID.LihzahrdBrick && Main.tile[x2 + 2, y - 4 + j2].TileType != TileID.WoodenSpikes)
+							{
+								Tile tile = Main.tile[x2 + 2, y - 4 + j2];
+								tile.RedWire = true; //climb up and place red wires
+								j2--;
+							}
+							for (int i2 = 0; i2 < 5; i2++) //generate a row of 5 traps
+							{
+								if (Main.tile[x2 + i2, y - 4 + j2 + 1].TileType != TileID.LihzahrdBrick)
+								{
+									Tile tile3 = Main.tile[x2 + i2, y - 4 + j2];
+									tile3.TileType = TileID.Traps;
+									tile3.TileFrameX = 0;
+									tile3.TileFrameY = 18 * 3;
+									tile3.RedWire = true;
+									if (j2 >= -21) //if the wire climb up was less than the length of a spear trap, generate a spear trap
+									{
+										tile3.TileFrameY = 18 * 4;
+									}
+									WorldGen.KillTile(x2 + i2, y - 4 + j2 + 1); //clear out 2 tiles below the trap, to prevent spikes from generating infront of the traps, blocking their projectiles
+									WorldGen.KillTile(x2 + i2, y - 4 + j2 + 2);
+								}
+							}
+							i += 5;
+							break;
+						case 1: //ground trap
+							int groundType = WorldGen.genRand.Next(2); //get either a flame or dart trap
+							WorldGen.PlaceTile(x2, y - 4, TileID.PressurePlates, true, true, style: 6); //place a pressure plate
+							Tile tile4 = Main.tile[x2, y - 4];
+							tile4.RedWire = true; //place a wire where the plate is
+							Tile tile5 = Main.tile[x2, y - 3];
+							tile5.TileType = TileID.Traps; //place a trap of the type below the plate
+							tile5.TileFrameX = 18 * 2;
+							tile5.TileFrameY = (short)(18 * (groundType + 1));
+							tile5.RedWire = true;
+							i += 1;
+							break;
+					}
+				}
+			}
+			for (int length = 0; length <= templeLength; length++) //generate the entrances
+			{
+				if (5 == length || templeLength - 3 == length) // make 3x3 and place a door in the middle
+				{
+					Generate3x3(x + length, y - 8, TileID.LihzahrdBrick);
+					WorldGen.PlaceTile(x + length - 1, y - 4, TileID.ClosedDoor, true, true, style: 11); //locked lihzahrd door
+					WorldGen.KillTile(x + length - 1, y - 3);
+					WorldGen.PlaceTile(x + length - 1, y - 3, TileID.LihzahrdBrick, true, true);
+				}
+			}
+			for (int j = 0; j < 3; j++) //generate the altar steps 
+			{
+				for (int i = 0; i < 11; i++)
+				{
+					if (i < 11 - (2 * j))
+					{
+						WorldGen.KillTile(x + halfsize - 5 + i + j, y - 4 - j);
+						WorldGen.PlaceTile(x + halfsize - 5 + i + j, y - 4 - j, TileID.LihzahrdBrick, true, true);
+					}
+					if (i < 3 && j == 0) //generate the altar
+					{
+						WorldGen.KillTile(x + halfsize - 1 + i, y - 8);
+						if (i == 1)
+						{
+							GenVars.lAltarX = x + halfsize - 1;
+							GenVars.lAltarY = y - 8;
+						}
+					}
+				}
+			}
+			for (int i = 0; i < templeLength; i++) //clear out liquids in the bounding box of the temple
+			{
+				for (int j = 0; j > tallestInsidePoint; j--)
+				{
+					Tile tile3 = Main.tile[x + i, y - j];
+					tile3.LiquidAmount = 0;
+					tile3.LiquidType = 0;
+				}
+			}
+			GenVars.tLeft = x; //save stuff such as position, length position and room count (there is only ever 1)
+			GenVars.tRight = x + templeLength;
+			GenVars.tTop = y + tallestInsidePoint;
+			GenVars.tBottom = y;
+			GenVars.tRooms = 1;
+		}
+
+		private static void Generate3x3(int rightX, int centreY, int type)
+		{
+			for (int i = -2; i <= 0; i++)
+			{
+				for (int j = -1; j <= 1; j++)
+				{
+					Tile tile = Framing.GetTileSafely(rightX + i, centreY + j);
+					tile.HasTile = true;
+					tile.TileType = (ushort)type;
 				}
 			}
 		}
@@ -10912,7 +11249,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						tile4.HasTile = true;
 						Main.tile[num24, num25].TileType = type5;
 					}
-					//AddHellfireChest(num, num2 + 49, Config.itemDefs.byName["Autonomic Drill"].type, notNearOtherChests: false, 1);
+					AddHellfireChestNew(num, num2 + 49, ItemID.Drax, notNearOtherChests: false, 1);
 				}
 			}
 			for (int num26 = num - 65; num26 <= num - 51; num26++)
@@ -11538,11 +11875,13 @@ namespace Avalon.WorldGeneration.secretSeeds
 						tile6.HasTile = true;
 						if (num34 == num - 45)
 						{
-							WorldGen.PlaceTile(num34, num35, 137, true, true, -1, 1);
+							WorldGen.PlaceTile(num34, num35, 137, true, true, -1);
+							Tile tile7 = Main.tile[num34, num35];
+							tile7.TileFrameX += 18;
 						}
 						else
 						{
-							WorldGen.PlaceTile(num34, num35, 137, true, true, -1, -1);
+							WorldGen.PlaceTile(num34, num35, 137, true, true, -1);
 						}
 					}
 					if (((num34 >= num - 44 && num34 <= num - 30) || (num34 <= num + 44 && num34 >= num + 30) || (num34 >= num - 12 && num34 <= num + 12)) && (num35 == num2 - 7 || num35 == num2 - 6))
@@ -11562,6 +11901,14 @@ namespace Avalon.WorldGeneration.secretSeeds
 						Main.tile[num34, num35].TileType = 135;
 						Main.tile[num34, num35].TileFrameX = 0;
 						Main.tile[num34, num35].TileFrameY = 36;
+
+						for (int i = -1; i <= 1; i++)
+						{
+							Tile platTile = Main.tile[num34 + i, num35 - 5];
+							platTile.HasTile = true;
+							platTile.TileType = TileID.Platforms;
+						}
+						WorldGen.PlaceTile(num34, num35 - 6, ModContent.TileType<LibraryAltar>(), true, true);
 					}
 					if (num34 >= num - 45 && num34 <= num + 45 && num35 == num2 - 8)
 					{
@@ -11608,11 +11955,13 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						if (num38 == num - 12)
 						{
-							WorldGen.PlaceTile(num38, num39, 137, true, true, -1, 1);
+							WorldGen.PlaceTile(num38, num39, 137, true, true, -1);
+							Tile tile7 = Main.tile[num38, num39];
+							tile7.TileFrameX += 18;
 						}
 						else
 						{
-							WorldGen.PlaceTile(num38, num39, 137, true, true, -1, -1);
+							WorldGen.PlaceTile(num38, num39, 137, true, true, -1);
 						}
 					}
 					if (num38 >= num - 12 && num38 <= num + 11 && num39 == num2 + 46)
@@ -11656,11 +12005,13 @@ namespace Avalon.WorldGeneration.secretSeeds
 					{
 						if (num42 == num - 61)
 						{
-							WorldGen.PlaceTile(num42, num43, 137, true, true, -1, 1);
+							WorldGen.PlaceTile(num42, num43, 137, true, true, -1);
+							Tile tile7 = Main.tile[num42, num43];
+							tile7.TileFrameX += 18;
 						}
 						else
 						{
-							WorldGen.PlaceTile(num42, num43, 137, true, true, -1, -1);
+							WorldGen.PlaceTile(num42, num43, 137, true, true, -1);
 						}
 					}
 					if (((num42 >= num - 61 && num42 <= num - 54) || (num42 >= num + 54 && num42 <= num + 61)) && num43 == num2 - 26)
@@ -11889,6 +12240,232 @@ namespace Avalon.WorldGeneration.secretSeeds
 			}
 			return false;
 		}*/
+
+		public static int PlaceCustomChest(int x, int y, int type = 21, bool notNearOtherChests = false, int style = 0)
+		{
+			bool flag = true;
+			int num = -1;
+			for (int i = x; i < x + 2; i++)
+			{
+				for (int j = y - 1; j < y + 1; j++)
+				{
+					if (Main.tile[i, j].HasTile)
+					{
+						flag = false;
+					}
+					if (Main.tile[i, j].LiquidType == LiquidID.Lava)
+					{
+						flag = false;
+					}
+				}
+				if (!Main.tile[i, y + 1].HasTile || !Main.tileSolid[(int)Main.tile[i, y + 1].TileType])
+				{
+					flag = false;
+				}
+			}
+			if (flag)
+			{
+				num = Chest.CreateChest(x, y - 1);
+				if (num == -1)
+				{
+					flag = false;
+				}
+			}
+			if (flag)
+			{
+				WorldGen.PlaceTile(x, y, (int)(ushort)type, false, false, -1, style);
+			}
+			return num;
+		}
+
+		public static bool AddHellfireChestNew(int i, int j, int contain = 0, bool notNearOtherChests = false, int Style = -1)
+		{
+			for (int k = j; k < Main.maxTilesY; k++)
+			{
+				if (!Main.tile[i, k].HasTile || !Main.tileSolid[(int)Main.tile[i, k].TileType])
+				{
+					continue;
+				}
+				int num = k;
+				int num2 = PlaceCustomChest(i - 1, num - 1, 21, notNearOtherChests, 4);
+				if (num2 >= 0)
+				{
+					int num3 = 0;
+					while (num3 == 0)
+					{
+						if (contain > 0)
+						{
+							Main.chest[num2].item[num3].SetDefaults(contain, false);
+							Main.chest[num2].item[num3].Prefix(-1);
+							num3++;
+						}
+						int num4 = WorldGen.genRand.Next(7);
+						switch (num4)
+						{
+							case 0:
+								Main.chest[num2].item[num3].SetDefaults(ItemID.DestroyerEmblem, false);
+								Main.chest[num2].item[num3].Prefix(-1);
+								num3++;
+								break;
+							case 2:
+								Main.chest[num2].item[num3].SetDefaults(489, false);
+								Main.chest[num2].item[num3].Prefix(-1);
+								num3++;
+								break;
+							case 3:
+								Main.chest[num2].item[num3].SetDefaults(490, false);
+								Main.chest[num2].item[num3].Prefix(-1);
+								num3++;
+								break;
+							case 4:
+								{
+									Main.chest[num2].item[num3].SetDefaults(353, false);
+									int stack2 = WorldGen.genRand.Next(3) + 1;
+									Main.chest[num2].item[num3].stack = stack2;
+									num3++;
+									break;
+								}
+							case 5:
+								{
+									Main.chest[num2].item[num3].SetDefaults(ItemID.RestorationPotion, false);
+									int stack = WorldGen.genRand.Next(12, 23);
+									Main.chest[num2].item[num3].stack = stack;
+									num3++;
+									break;
+								}
+							default:
+								Main.chest[num2].item[num3].SetDefaults(491, false);
+								Main.chest[num2].item[num3].Prefix(-1);
+								num3++;
+								break;
+						}
+						Main.chest[num2].item[num3].SetDefaults(ModContent.ItemType<CaesiumBar>(), false);
+						int stack3 = WorldGen.genRand.Next(22, 37);
+						Main.chest[num2].item[num3].stack = stack3;
+						Main.chest[num2].item[3].SetDefaults(ModContent.ItemType<Items.Placeable.Tile.ImperviousBrick>(), false);
+						int stack4 = WorldGen.genRand.Next(11, 55);
+						Main.chest[num2].item[3].stack = stack4;
+						Main.chest[num2].item[4].SetDefaults(73, false);
+						int stack5 = WorldGen.genRand.Next(45, 110);
+						Main.chest[num2].item[4].stack = stack5;
+						switch (WorldGen.genRand.Next(11))
+						{
+							case 0:
+								{
+									Main.chest[num2].item[5].SetDefaults(391, false);
+									int stack16 = WorldGen.genRand.Next(10, 30);
+									Main.chest[num2].item[5].stack = stack16;
+									break;
+								}
+							case 1:
+								{
+									Main.chest[num2].item[5].SetDefaults(522, false);
+									int stack15 = WorldGen.genRand.Next(10, 30);
+									Main.chest[num2].item[5].stack = stack15;
+									break;
+								}
+							case 2:
+								{
+									Main.chest[num2].item[5].SetDefaults(ModContent.ItemType<SoulofDelight>(), false);
+									int stack14 = WorldGen.genRand.Next(3, 8);
+									Main.chest[num2].item[5].stack = stack14;
+									break;
+								}
+							case 3:
+								{
+									Main.chest[num2].item[5].SetDefaults(ItemID.SoulofFright, false);
+									int stack13 = WorldGen.genRand.Next(3, 8);
+									Main.chest[num2].item[5].stack = stack13;
+									break;
+								}
+							case 4:
+								{
+									Main.chest[num2].item[5].SetDefaults(575, false);
+									int stack12 = WorldGen.genRand.Next(5, 7);
+									Main.chest[num2].item[5].stack = stack12;
+									break;
+								}
+							case 5:
+								{
+									Main.chest[num2].item[5].SetDefaults(547, false);
+									int stack11 = WorldGen.genRand.Next(5, 7);
+									Main.chest[num2].item[5].stack = stack11;
+									break;
+								}
+							case 6:
+								{
+									Main.chest[num2].item[5].SetDefaults(548, false);
+									int stack10 = WorldGen.genRand.Next(5, 7);
+									Main.chest[num2].item[5].stack = stack10;
+									break;
+								}
+							case 7:
+								{
+									Main.chest[num2].item[5].SetDefaults(549, false);
+									int stack9 = WorldGen.genRand.Next(5, 7);
+									Main.chest[num2].item[5].stack = stack9;
+									break;
+								}
+							case 8:
+								{
+									Main.chest[num2].item[5].SetDefaults(520, false);
+									int stack8 = WorldGen.genRand.Next(5, 7);
+									Main.chest[num2].item[5].stack = stack8;
+									break;
+								}
+							case 9:
+								{
+									Main.chest[num2].item[5].SetDefaults(521, false);
+									int stack7 = WorldGen.genRand.Next(5, 7);
+									Main.chest[num2].item[5].stack = stack7;
+									break;
+								}
+							default:
+								{
+									Main.chest[num2].item[5].SetDefaults(ItemID.SoulofFlight, false);
+									int stack6 = WorldGen.genRand.Next(3, 8);
+									Main.chest[num2].item[5].stack = stack6;
+									break;
+								}
+						}
+						switch (WorldGen.genRand.Next(4))
+						{
+							case 0:
+								{
+									Main.chest[num2].item[6].SetDefaults(ModContent.ItemType<AuraPotion>(), false);
+									int stack19 = WorldGen.genRand.Next(2, 4);
+									Main.chest[num2].item[6].stack = stack19;
+									break;
+								}
+							case 1:
+								{
+									Main.chest[num2].item[6].SetDefaults(ItemID.InvisibilityPotion, false);
+									int stack18 = WorldGen.genRand.Next(1, 4);
+									Main.chest[num2].item[6].stack = stack18;
+									break;
+								}
+							default:
+								if (num4 == 2)
+								{
+									Main.chest[num2].item[6].SetDefaults(ModContent.ItemType<StrengthPotion>(), false);
+									int stack17 = WorldGen.genRand.Next(3, 5);
+									Main.chest[num2].item[6].stack = stack17;
+								}
+								else
+								{
+									Main.chest[num2].item[6].SetDefaults(437, false);
+								}
+								break;
+						}
+						Main.chest[num2].item[7].SetDefaults(ItemID.CursedFlames, false);
+						Main.chest[num2].item[7].stack = WorldGen.genRand.Next(2) + 1;
+					}
+					return true;
+				}
+				return false;
+			}
+			return false;
+		}
 
 		public static void HeartStonePatch(int i, int j)
 		{
@@ -12242,11 +12819,6 @@ namespace Avalon.WorldGeneration.secretSeeds
 		private static void ResetZenith(GenerationProgress progres, GameConfiguration configurations)
 		{
 			SetBackgroundNormal();
-			Main.treeStyle[0] = 0;
-			Main.treeStyle[1] = 0;
-			Main.treeStyle[2] = 0;
-			Main.treeStyle[3] = 0;
-			WorldGen.TreeTops.CopyExistingWorldInfoForWorldGeneration();
 			houseCount = 0;
 		}
 

@@ -28,28 +28,31 @@ public class Utils
     /// <param name="height">The height of the structure.</param>
     /// <param name="countTo">A number used to determine how often spike traps should be placed.</param>
     /// <param name="tileType">The type of spike tile to be placed. Defaults to 0; you should NOT be using 0.</param>
-    public static void AddSpikes(int x, int y, int width, int height, int countTo = 20, int tileType = 0, int spikeWidth = -1)
+	/// <param name="wallType">The wall ID the spikes are placed infront of. Return 0 to not have any specific walls it generates infront</param>>
+    public static void AddSpikes(int x, int y, int width, int height, int countTo = 20, int tileType = 0, int spikeWidth = -1, int wallType = 0)
     {
         if (tileType == 0) return;
         int counter = 0;
         int countToSaved = countTo;
 
-
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                if (i == 0 || i == width - 1 || j == 0 || j == height - 1)
-                {
-
-                }
-                else
-                {
-                    if (Main.tile[x + i, y + j].HasTile && !Main.tileSolidTop[Main.tile[x + i, y + j].TileType] && Main.tileSolid[Main.tile[x + i, y + j].TileType])
+				if (!(i == 0 || i == width - 1 || j == 0 || j == height - 1))
+				{
+					if (Main.tile[x + i, y + j].HasTile && !Main.tileSolidTop[Main.tile[x + i, y + j].TileType] && Main.tileSolid[Main.tile[x + i, y + j].TileType])
                     {
                         if (!Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i + 1, y + j].HasTile && Main.tile[x + i - 1, y + j].HasTile)
                         {
-                            counter++;
+							if (wallType != 0)
+							{
+								if (Main.tile[x + i, y + j - 1].WallType != (ushort)wallType)
+								{
+									continue;
+								}
+							}
+							counter++;
                             if (counter > countTo)
                             {
 								int defaultSpikeWidth = spikeWidth == -1 ? WorldGen.genRand.Next(15, 21) : spikeWidth;
@@ -61,7 +64,14 @@ public class Utils
                         }
                         if (!Main.tile[x + i, y + j + 1].HasTile && Main.tile[x + i + 1, y + j].HasTile && Main.tile[x + i - 1, y + j].HasTile)
                         {
-                            counter++;
+							if (wallType != 0)
+							{
+								if (Main.tile[x + i, y + j + 1].WallType != (ushort)wallType)
+								{
+									continue;
+								}
+							}
+							counter++;
                             if (counter > countTo)
 							{
 								int defaultSpikeWidth = spikeWidth == 1 ? WorldGen.genRand.Next(15, 21) : spikeWidth;
@@ -95,24 +105,24 @@ public class Utils
             }
             if (i % 2 == 0)
             {
-                WorldGen.PlaceTile(x + i - 1, y, tileType, true, true);
+				WorldGen.PlaceTile(x + i - 1, y, tileType, true, true);
                 if (!Main.tile[x, y - 1].HasTile)
                 {
-                    WorldGen.PlaceTile(x + i - 1, y - 1, tileType, true, true);
+					WorldGen.PlaceTile(x + i - 1, y - 1, tileType, true, true);
                     ResetSlope(x + i - 1, y - 1);
                     if (WorldGen.genRand.NextBool(2) && i > 2 && i < length - 1)
                     {
-                        WorldGen.PlaceTile(x + i - 1, y - 2, tileType, true, true);
+						WorldGen.PlaceTile(x + i - 1, y - 2, tileType, true, true);
                         ResetSlope(x + i - 1, y - 2);
                     }
                 }
                 else
                 {
-                    WorldGen.PlaceTile(x + i - 1, y + 1, tileType, true, true);
+					WorldGen.PlaceTile(x + i - 1, y + 1, tileType, true, true);
                     ResetSlope(x + i - 1, y + 1);
                     if (WorldGen.genRand.NextBool(2) && i > 2 && i < length - 1)
                     {
-                        WorldGen.PlaceTile(x + i - 1, y + 2, tileType, true, true);
+						WorldGen.PlaceTile(x + i - 1, y + 2, tileType, true, true);
                         ResetSlope(x + i - 1, y + 2);
                     }
                 }
