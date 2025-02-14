@@ -89,7 +89,7 @@ public class Cougher : ModNPC
 					texture = textureWhite;
                     break;
             }
-            Main.spriteBatch.Draw(texture.Value, drawPos2, frame, Color.White, NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(texture.Value, drawPos2, frame, drawColor, NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
         }
     }
     public override void SetDefaults()
