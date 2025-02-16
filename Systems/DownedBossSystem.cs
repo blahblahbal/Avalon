@@ -105,6 +105,7 @@ public class DownedBossSystem : ModSystem
 
         writer.Write(Common.AvalonWorld.tSick); //Putting this here since NetSend and NetRecieve are never used anywhere else
 		writer.Write(Common.AvalonWorld.retroWorld);
+		writer.Write(Common.AvalonWorld.cavesWorld);
 	}
 
     public override void NetReceive(BinaryReader reader)
@@ -121,5 +122,6 @@ public class DownedBossSystem : ModSystem
 
         Common.AvalonWorld.tSick = reader.ReadByte();
 		Common.AvalonWorld.retroWorld = reader.ReadBoolean();
+		Common.AvalonWorld.cavesWorld = reader.ReadBoolean();
 	}
 }

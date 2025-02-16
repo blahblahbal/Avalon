@@ -423,7 +423,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 							Main.worldSurface = 30;
 							Main.rockLayer = 50;
 						})));
-						//tasks.RemoveAt(index);
+						//tasks.RemoveAt(index2);
 					}
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Spawn Point"));
 					if (index2 != -1)

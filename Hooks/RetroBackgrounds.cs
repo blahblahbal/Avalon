@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Reflection;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -40,7 +41,8 @@ namespace Avalon.Hooks
 		private void FixRetroHellLight(On_TileLightScanner.orig_ApplyHellLight orig, TileLightScanner self, Tile tile, int x, int y, ref Vector3 lightColor)
 		{
 			orig.Invoke(self, tile, x, y, ref lightColor);
-			lightColor = Vector3.Zero;
+			if (AvalonWorld.retroWorld)
+				lightColor = Vector3.Zero;
 		}
 
 		private void stopRenderinRetro(On_Main.orig_DrawUnderworldBackground orig, Main self, bool flat)
@@ -92,9 +94,13 @@ namespace Avalon.Hooks
 				float num5;
 				float num6 = (num5 = (num4 = 0.9f));
 				float num7 = 0f;
-				if (Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.EvilTileCount && Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.HolyTileCount)
+				if (ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.EvilTileCount && ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.HolyTileCount && ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.BloodTileCount)
 				{
-					num7 = Main.SceneMetrics.BloodTileCount;
+					num7 = (float)ModContent.GetInstance<BiomeTileCounts>().ContagionTiles / 800;
+				}
+				else if (Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.EvilTileCount && Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.HolyTileCount)
+				{
+					num7 = (float)Main.SceneMetrics.BloodTileCount / 800;
 				}
 				else if (Main.SceneMetrics.HolyTileCount > Main.SceneMetrics.EvilTileCount)
 				{
@@ -134,7 +140,13 @@ namespace Avalon.Hooks
 				{
 					num10 = 1f;
 				}
-				if (Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.EvilTileCount && Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.HolyTileCount)
+				if (ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.EvilTileCount && ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.HolyTileCount && ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.BloodTileCount)
+				{
+					num4 = 0.54f * num7 + num4 * (1f - num7);
+					num5 = 0.78f * num7 + num5 * (1f - num7);
+					num6 = 0.62f * num7 + num6 * (1f - num7);
+				}
+				else if (Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.EvilTileCount && Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.HolyTileCount)
 				{
 					num4 = 1f * num7 + num4 * (1f - num7);
 					num5 = 0.55f * num7 + num5 * (1f - num7);

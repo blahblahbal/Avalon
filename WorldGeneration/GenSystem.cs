@@ -45,7 +45,7 @@ public class GenSystem : ModSystem
 				if (index != -1)
 				{
 					// Replace corruption task with contagion task
-					tasks[index] = new Contagion("Contagion", 80f);
+					tasks[index] = new Contagion("Corruption", 80f); //DONT RENAME THE PASS YOUR REPLACING BRUH
 				}
 				index = tasks.FindIndex(genpass => genpass.Name.Equals("Altars"));
 				if (index != -1)

@@ -73,6 +73,16 @@ namespace Avalon.Hooks
 							};
 							_worldIcon.Append(element);
 						}
+						else if (_avalonData.GetBool("Avalon:CavesSecretSeed"))
+						{
+							UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconOverlayContagionCaves", AssetRequestMode.ImmediateLoad))
+							{
+								Top = new StyleDimension(0f, 0f),
+								Left = new StyleDimension(0f, 0f),
+								IgnoresMouseInteraction = true
+							};
+							_worldIcon.Append(element);
+						}
 						else
 						{
 							UIImage element = new UIImage(GetAvalonOverlaySeedvariants(_data, "Contagion"))
@@ -164,6 +174,10 @@ namespace Avalon.Hooks
 				if (_data.GetBool("Avalon:RetroSecretSeed"))
 				{
 					return GetAvalonSeedIcon(self, "Retro"); //forcibly changes the icon rather than being an overlay
+				}
+				else if (_data.GetBool("Avalon:CavesSecretSeed"))
+				{
+					return GetAvalonSeedIcon(self, "Caves");
 				}
 			}
 			return orig.Invoke(self);
