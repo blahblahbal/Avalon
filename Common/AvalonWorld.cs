@@ -95,8 +95,7 @@ public class AvalonWorld : ModSystem
 
     public WorldJungle WorldJungle;
 
-	public static bool OopsAllCaves;
-	public static bool OopsAllCavesGen;
+	public static bool cavesWorld;
 
 	public static bool retroWorld;
 
@@ -176,7 +175,7 @@ public class AvalonWorld : ModSystem
 
 		ModContent.GetInstance<Relics>().Coordinates = new();
 
-		OopsAllCaves = false;
+		cavesWorld = false;
 		retroWorld = false;
 		tSick = 0;
 		totalSick = 0;
@@ -222,7 +221,7 @@ public class AvalonWorld : ModSystem
 
         tag["Avalon:JungleX"] = JungleLocationX;
 
-		tag["Avalon:OopsAllCaves"] = OopsAllCaves;
+		tag["Avalon:CavesSecretSeed"] = cavesWorld;
 		tag["Avalon:RetroSecretSeed"] = retroWorld;
 
 		AvalonTileData[] myData = Main.tile.GetData<AvalonTileData>(); //Coppied from SLR because I havent worked with pointers much
@@ -244,13 +243,14 @@ public class AvalonWorld : ModSystem
         tag["Avalon:WorldEvil"] = (byte)WorldEvil;
         tag["Avalon:WorldJungle"] = (byte)WorldJungle;
 		tag["Avalon:RetroSecretSeed"] = retroWorld;
+		tag["Avalon:CavesSecretSeed"] = cavesWorld;
 	}
 
     public override void LoadWorldData(TagCompound tag)
     {
-		if (tag.ContainsKey("Avalon:OopsAllCaves"))
+		if (tag.ContainsKey("Avalon:CavesSecretSeed"))
 		{
-			OopsAllCaves = tag.GetBool("Avalon:OopsAllCaves");
+			cavesWorld = tag.GetBool("Avalon:CavesSecretSeed");
 		}
 
 		if (tag.ContainsKey("Avalon:RetroSecretSeed"))

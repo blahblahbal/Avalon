@@ -34,7 +34,7 @@ public class UIGenProgressBarEdit : ModHook
 	private void EditRetroText(On_UIWorldLoad.orig_DrawSelf orig, UIWorldLoad self, SpriteBatch spriteBatch)
 	{
 		orig.Invoke(self, spriteBatch);
-		if (secretSeedSystem.isGeneratingOldWorld)
+		if (retroWorldGen.isGeneratingOldWorld)
 		{
 			UIHeader _progressMessage = self.GetProgressMessage();
 			_progressMessage.Text = Main.statusText;
@@ -43,7 +43,7 @@ public class UIGenProgressBarEdit : ModHook
 
 	private void PreventDrawingRetro(On_UIGenProgressBar.orig_DrawSelf orig, UIGenProgressBar self, SpriteBatch spriteBatch)
 	{
-		if (!secretSeedSystem.isGeneratingOldWorld)
+		if (!retroWorldGen.isGeneratingOldWorld)
 		{
 			orig.Invoke(self, spriteBatch);
 		}

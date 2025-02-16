@@ -162,6 +162,7 @@ public class ExxoAvalonOrigins : Mod
             ReplaceVanillaTextures();
         }
 		AWorldListItemHelper.Load();
+		BackgroundHelper.Load();
         Asset<Effect> shader =
             ModContent.Request<Effect>("Avalon/Effects/DarkMatterSkyShader", AssetRequestMode.ImmediateLoad);
         SkyManager.Instance["Avalon:DarkMatter"] = new DarkMatterSky();
@@ -197,6 +198,7 @@ public class ExxoAvalonOrigins : Mod
         }
 
 		AWorldListItemHelper.Unload();
+		BackgroundHelper.Unload();
 
 		Mod = null!;
     }
