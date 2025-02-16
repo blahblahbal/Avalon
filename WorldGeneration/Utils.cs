@@ -458,19 +458,19 @@ public class Utils
         {
             for (int l = y - r; l <= y + r; l++)
             {
-                    if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < r)
-                    {
-                        Tile t = Framing.GetTileSafely(k, l);
-                        t.HasTile = true;
-                        t.IsHalfBlock = false;
-                        t.Slope = SlopeType.Solid;
-                        Main.tile[k, l].TileType = tileType;
-                        WorldGen.SquareTileFrame(k, l);
-                    }
-                    if (wallType != 0 && k > 0 && l > 0)
-                    {
-                        Main.tile[k, l].WallType = wallType;
-                    }
+                if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < r)
+                {
+                    Tile t = Framing.GetTileSafely(k, l);
+                    t.HasTile = true;
+                    t.IsHalfBlock = false;
+                    t.Slope = SlopeType.Solid;
+                    Main.tile[k, l].TileType = tileType;
+                    WorldGen.SquareTileFrame(k, l);
+                }
+                if (wallType != 0 && k > 0 && l > 0)
+                {
+                    Main.tile[k, l].WallType = wallType;
+                }
             }
         }
     }

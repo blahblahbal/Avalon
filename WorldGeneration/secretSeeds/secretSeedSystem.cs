@@ -363,7 +363,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Planting Trees"));
 					ReplaceGenpass(ref tasks, index2, "Planting Trees", new WorldGenLegacyMethod(PlantingTreesZenith));
-					
+
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Remove Broken Traps"));
 					if (index2 != -1)
 					{
@@ -415,7 +415,6 @@ namespace Avalon.WorldGeneration.secretSeeds
 		private static double surfaceVariance2;
 		private static double undergroundVariance;
 		private static double undergroundVariance2;
-		private static int dungeonSide; //num9
 		private static int beachYPos; //beach pos to prevent gem spawning
 		private static int beach2YPos;
 		private static int beachXPos;
@@ -641,12 +640,12 @@ namespace Avalon.WorldGeneration.secretSeeds
 			surfaceVariance2 = num6;
 			undergroundVariance = num7;
 			undergroundVariance2 = num8;
-			dungeonSide = num9;
+			GenVars.dungeonSide = num9;
 		}
 
 		private static void Dunes(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num9 = dungeonSide;
+			int num9 = GenVars.dungeonSide;
 
 			Main.statusText = (string)Lang.gen[1];
 			int num15 = WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.0008), (int)((double)Main.maxTilesX * 0.0025));
@@ -1144,7 +1143,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Jungle(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num9 = dungeonSide;
+			int num9 = GenVars.dungeonSide;
 
 			Main.statusText = Lang.gen[11] + " 0%";
 			float num76 = Main.maxTilesX / 4200;
@@ -1752,7 +1751,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Dungeon(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num9 = dungeonSide;
+			int num9 = GenVars.dungeonSide;
 
 			int num168 = 0;
 			if (num9 == -1)
@@ -1768,7 +1767,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			int y = (int)((Main.rockLayer + (double)Main.maxTilesY) / 2.0) + WorldGen.genRand.Next(-200, 200);
 			MakeDungeon(num168, y);
 
-			dungeonSide = num9;
+			GenVars.dungeonSide = num9;
 		}
 
 		private static void Corruption(GenerationProgress progres, GameConfiguration configurations)
@@ -1991,7 +1990,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void Beaches(GenerationProgress progres, GameConfiguration configurations)
 		{
-			int num9 = dungeonSide;
+			int num9 = GenVars.dungeonSide;
 
 			int num197 = 0;
 			int num198 = 0;
@@ -3230,6 +3229,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private static void FinalCleanup(GenerationProgress progres, GameConfiguration configurations)
 		{
+			GenerateShimmer(); //Added to generate shimmer
 			isGeneratingOldWorld = false;
 			WorldGen.gen = false;
 		}
@@ -5782,7 +5782,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		public static void ChasmRunner(int i, int j, int steps, bool makeOrb = false)
 		{
-			
+
 			WorldEvil evil = ModContent.GetInstance<AvalonWorld>().WorldEvil;
 			ushort altar = TileID.DemonAltar;
 			int altarStyle = 0;
@@ -9767,7 +9767,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			placeBlockX = templeLength - 3;
 			placeBlockY = -11;
 			//Right side
-			while (placeBlockX > halfsize) 
+			while (placeBlockX > halfsize)
 			{
 				for (int up = 0; up <= 3; up++)
 				{
@@ -9941,6 +9941,198 @@ namespace Avalon.WorldGeneration.secretSeeds
 					tile.TileType = (ushort)type;
 				}
 			}
+		}
+
+		public static void GenerateShimmer()
+		{
+			int num683 = 50;
+			int num684 = (int)(Main.worldSurface + Main.rockLayer) / 2 + num683;
+			int num685 = (int)((double)((Main.maxTilesY - 250) * 2) + Main.rockLayer) / 3;
+			if (num685 > Main.maxTilesY - 330 - 100 - 30)
+			{
+				num685 = Main.maxTilesY - 330 - 100 - 30;
+			}
+			if (num685 <= num684)
+			{
+				num685 = num684 + 50;
+			}
+			int num686 = WorldGen.genRand.Next(num684, num685);
+			int num687 = ((GenVars.dungeonSide < 0) ? WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.89), Main.maxTilesX - 200) : WorldGen.genRand.Next(200, (int)((double)Main.maxTilesX * 0.11)));
+			int num688 = (int)Main.worldSurface + 150;
+			int num689 = (int)(Main.rockLayer + Main.worldSurface + 200.0) / 2;
+			if (num689 <= num688)
+			{
+				num689 = num688 + 50;
+			}
+			int num690 = 0;
+			while (!ShimmerMakeBiome(num687, num686))
+			{
+				num690++;
+				if (num690 > 20000)
+				{
+					num686 = WorldGen.genRand.Next((int)Main.worldSurface + 100 + 20, num685);
+					num687 = ((GenVars.dungeonSide < 0) ? WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.8), Main.maxTilesX - 200) : WorldGen.genRand.Next(200, (int)((double)Main.maxTilesX * 0.2)));
+				}
+				else
+				{
+					num686 = WorldGen.genRand.Next((int)(Main.worldSurface + Main.rockLayer) / 2 + 20, num685);
+					num687 = ((GenVars.dungeonSide < 0) ? WorldGen.genRand.Next((int)((double)Main.maxTilesX * 0.89), Main.maxTilesX - 200) : WorldGen.genRand.Next(200, (int)((double)Main.maxTilesX * 0.11)));
+				}
+			}
+			GenVars.shimmerPosition = new Vector2D((double)num687, (double)num686);
+			int num691 = 200;
+			GenVars.structures.AddProtectedStructure(new Rectangle(num687 - num691 / 2, num686 - num691 / 2, num691, num691));
+		}
+
+		public static bool ShimmerMakeBiome(int X, int Y)
+		{
+			int radious = 130;
+			for (int i = X - radious; i <= X + radious; i++)
+			{
+				for (int j = Y - radious; j <= Y + radious; j++)
+				{
+					if (!WorldGen.InWorld(i, j))
+					{
+						return false;
+					}
+					if (Main.tile[i, j].TileType == 203 || Main.tile[i, j].TileType == 25)
+					{
+						return false;
+					}
+					if (Vector2.Distance(new Vector2(i, j), new Vector2(X, Y)) < radious)
+					{
+						Tile tile = Framing.GetTileSafely(i, j);
+						tile.HasTile = true;
+						tile.TileType = TileID.Stone;
+						WorldGen.SquareTileFrame(i, j);
+					}
+				}
+			}
+			int radiousShimmer = radious - 75;
+			for (int i = X - radiousShimmer; i <= X + radiousShimmer; i++)
+			{
+				for (int j = Y - radiousShimmer; j <= Y + radiousShimmer; j++)
+				{
+					if (Vector2.Distance(new Vector2(i, j), new Vector2(X, Y)) < radiousShimmer)
+					{
+						Tile tile = Framing.GetTileSafely(i, j);
+						tile.LiquidAmount = 255;
+						tile.LiquidType = LiquidID.Shimmer;
+					}
+				} 
+			}
+			int num20 = 0;
+			int num23 = WorldGen.genRand.Next(15, 23);
+			ShimmerMakeBiomeOpening(-1, X - num20, Y, num23);
+			ShimmerMakeBiomeOpening(1, X + num20, Y, num23);
+			for (int i = X - radiousShimmer; i <= X + radiousShimmer; i++)
+			{
+				for (int j = Y - radiousShimmer; j <= Y + radiousShimmer; j++)
+				{
+					if (Vector2.Distance(new Vector2(i, j), new Vector2(X, Y)) < radiousShimmer)
+					{
+						WorldGen.KillTile(i, j);
+					}
+					if (j < Y)
+					{
+						WorldGen.EmptyLiquid(i, j);
+					}
+				}
+			}
+			return true;
+		}
+
+		private static void ShimmerMakeBiomeOpening(int direction, int X, int y, int caveOpenningSize)
+		{
+			int Y = y;
+			int num = X;
+			caveOpenningSize--;
+			bool flag;
+			bool forcibleGrowUp = false;
+			bool forcibleGrowDown = false;
+			bool liquid = false;
+			do
+			{
+				num += direction;
+				flag = true;
+				for (int i = Y - caveOpenningSize + 1; i < Y - 1; i++)
+				{
+					if (Framing.GetTileSafely(num, i).TileType == TileID.Stone)
+					{
+						flag = false;
+					}
+					if (Framing.GetTileSafely(num + direction, i). TileType == TileID.Stone)
+					{
+						flag = false;
+					}
+					if (Framing.GetTileSafely(num + direction * 2, i).TileType == TileID.Stone)
+					{
+						flag = false;
+					}
+					if (Framing.GetTileSafely(num, i).LiquidAmount > 0)
+					{
+						flag = false;
+						liquid = true;
+					}
+					if (Framing.GetTileSafely(num + direction, i).LiquidAmount > 0)
+					{
+						flag = false;
+						liquid = true;
+					}
+					if (Framing.GetTileSafely(num + direction * 2, i).LiquidAmount > 0)
+					{
+						flag = false;
+						liquid = true;
+					}
+					Tile tile2 = Main.tile[num, i];
+					tile2.HasTile = false;
+					tile2.LiquidAmount = 0;
+					tile2.LiquidType = 0;
+				}
+				for (int j = Y - caveOpenningSize; j < Y; j++)
+				{
+					Tile tile = Main.tile[num - direction, j];
+					tile.HasTile = false;
+					tile.LiquidAmount = 0;
+					tile.LiquidType = 0;
+				}
+				if (Framing.GetTileSafely(num - direction, Y - caveOpenningSize - 1).TileType == TileID.Stone)
+				{
+					Main.tile[num - direction, Y - caveOpenningSize - 1].WallType = 0;
+				}
+				if (Framing.GetTileSafely(num - direction, Y).TileType == TileID.Stone)
+				{
+					Main.tile[num - direction, Y].WallType = 0;
+				}
+				if (WorldGen.genRand.Next(2) == 0 && !liquid)
+				{
+					if (forcibleGrowDown && y != Y)
+					{
+						Y += 1;
+					}
+					else if (forcibleGrowUp && y != Y)
+					{
+						Y += -1;
+					}
+					else
+					{
+						forcibleGrowDown = false;
+						forcibleGrowUp = false;
+						Y += WorldGen.genRand.Next(-1, 2);
+					}
+
+					if (Y > y - 5)
+					{
+						forcibleGrowDown = false;
+					}
+					if (Y < y + 5)
+					{
+						forcibleGrowDown = true;
+					}
+				}
+				liquid = false;
+			}
+			while (!flag && num >= 100 && num <= Main.maxTilesX - 25 && Math.Abs(num - X) <= 130);
 		}
 		#endregion
 
