@@ -1,6 +1,7 @@
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Tiles;
@@ -14,6 +15,7 @@ public class UltraResistantWood : ModTile
         Main.tileMergeDirt[Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileBrick[Type] = true;
+		TileID.Sets.DisableSmartCursor[Type] = true;
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.ResistantWood>());
         DustType = ModContent.DustType<ResistantWoodDust>();
         //MinPick = 225;
