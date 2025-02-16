@@ -14,6 +14,8 @@ using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Fish;
 using Avalon.Items.Consumables;
 using Avalon.Items.OreChunks;
+using Terraria.Localization;
+using Avalon.Common;
 
 namespace Avalon.Systems.Recipes;
 
@@ -266,6 +268,15 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Vine, 3)
 			.AddTile(TileID.WorkBenches)
 			.SortAfterFirstRecipesOf(ItemID.AcornAxe)
+			.Register();
+
+		Recipe.Create(ItemID.LihzahrdPowerCell)
+			.AddIngredient(ItemID.Glass, 10)
+			.AddIngredient(ItemID.FallenStar, 25)
+			.AddRecipeGroup("AdamantiteBar", 10)
+			.AddTile(TileID.WorkBenches)
+			.AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.retroWorld")), () => AvalonWorld.retroWorld)
+			.SortAfterFirstRecipesOf(ItemID.SolarTablet)
 			.Register();
 		#endregion
 
@@ -1125,6 +1136,51 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.Stinkbug, 5)
 			.AddCondition(Condition.NearHoney)
 			.SortAfterFirstRecipesOf(ItemID.Flymeal)
+			.Register();
+		#endregion
+
+		#region Heavy Workbench
+		Recipe templeTraps = Recipe.Create(ItemID.LihzahrdPressurePlate, 10)
+			.AddIngredient(ItemID.BrownPressurePlate, 10)
+			.AddIngredient(ItemID.LihzahrdBrick, 2)
+			.AddTile(TileID.HeavyWorkBench)
+			.DisableDecraft()
+			.SortAfterFirstRecipesOf(ItemID.VenomDartTrap)
+			.Register();
+		Recipe templeTraps2 = Recipe.Create(ItemID.WoodenSpike, 50)
+			.AddIngredient(ItemID.Spike, 50)
+			.AddIngredient(ItemID.LihzahrdBrick, 10)
+			.AddTile(TileID.HeavyWorkBench)
+			.DisableDecraft()
+			.SortAfter(templeTraps)
+			.Register();
+		templeTraps = Recipe.Create(ItemID.SuperDartTrap)
+			.AddIngredient(ItemID.DartTrap)
+			.AddIngredient(ItemID.LihzahrdBrick, 10)
+			.AddTile(TileID.HeavyWorkBench)
+			.DisableDecraft()
+			.SortAfter(templeTraps2)
+			.Register();
+		templeTraps2 = Recipe.Create(ItemID.FlameTrap)
+			.AddIngredient(ItemID.DartTrap)
+			.AddIngredient(ItemID.LihzahrdBrick, 10)
+			.AddTile(TileID.HeavyWorkBench)
+			.DisableDecraft()
+			.SortAfter(templeTraps)
+			.Register();
+		templeTraps = Recipe.Create(ItemID.SpikyBallTrap)
+			.AddIngredient(ItemID.DartTrap)
+			.AddIngredient(ItemID.LihzahrdBrick, 10)
+			.AddTile(TileID.HeavyWorkBench)
+			.DisableDecraft()
+			.SortAfter(templeTraps2)
+			.Register();
+		templeTraps2 = Recipe.Create(ItemID.SpearTrap)
+			.AddIngredient(ItemID.DartTrap)
+			.AddIngredient(ItemID.LihzahrdBrick, 10)
+			.AddTile(TileID.HeavyWorkBench)
+			.DisableDecraft()
+			.SortAfter(templeTraps)
 			.Register();
 		#endregion
 	}

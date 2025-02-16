@@ -1,3 +1,4 @@
+using Avalon.Assets;
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
@@ -9,8 +10,10 @@ using Avalon.Tiles.Furniture.PurpleDungeon;
 using Avalon.Tiles.Furniture.YellowDungeon;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -68,7 +71,14 @@ public class AvalonGlobalTile : GlobalTile
 
 	public override void SetStaticDefaults()
     {
-        int[] spelunkers = { TileID.Crimtane, TileID.Meteorite, TileID.Obsidian, TileID.Hellstone };
+		Main.tileDungeon[TileID.AncientBlueBrick] = true; //a sincier fuck you to all builders
+		Main.tileDungeon[TileID.AncientGreenBrick] = true;
+		Main.tileDungeon[TileID.AncientPinkBrick] = true;
+		TileID.Sets.DungeonBiome[TileID.AncientBlueBrick] = 1;
+		TileID.Sets.DungeonBiome[TileID.AncientGreenBrick] = 1;
+		TileID.Sets.DungeonBiome[TileID.AncientPinkBrick] = 1;
+
+		int[] spelunkers = { TileID.Crimtane, TileID.Meteorite, TileID.Obsidian, TileID.Hellstone };
         int[] ores = { TileID.Topaz, TileID.Ruby, TileID.Amethyst, TileID.Diamond, TileID.Emerald, TileID.Sapphire, TileID.AmberStoneBlock };
         foreach (int tile in spelunkers)
         {
@@ -79,7 +89,8 @@ public class AvalonGlobalTile : GlobalTile
             TileID.Sets.Ore[tile] = true;
         }
     }
-    public override void PostDraw(int i, int j, int type, SpriteBatch spriteBatch)
+
+	public override void PostDraw(int i, int j, int type, SpriteBatch spriteBatch)
     {
         // add back when hardmode/hidden temple is released
         if (false) //Main.tile[i, j].TileType == TileID.LihzahrdAltar && NPC.downedGolemBoss)

@@ -51,7 +51,7 @@ public class MagicCleaver : ModProjectile
         width = 25;
         return true;
     }
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
         for (int num410 = 0; num410 < 10; num410++)

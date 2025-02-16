@@ -372,7 +372,7 @@ internal class Contagion : GenPass
     /// <param name="j">The y coordinate to start the generation at.</param>
     public static void ContagionRunner(int i, int j)
     {
-		if (AvalonWorld.OopsAllCavesGen)
+		if (AvalonWorld.cavesWorld)
 		{
 			j += 40;
 		}

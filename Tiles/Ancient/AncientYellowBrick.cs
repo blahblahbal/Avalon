@@ -17,8 +17,9 @@ public class AncientYellowBrick : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileDungeon[Type] = true;
-        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.AncientYellowBrick>();
-        HitSound = SoundID.Tink;
+		TileID.Sets.DungeonBiome[Type] = 1;
+		//ItemDrop = ModContent.ItemType<Items.Placeable.Tile.AncientYellowBrick>();
+		HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.YellowDungeonDust>();
     }
 }

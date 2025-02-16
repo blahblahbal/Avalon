@@ -1,5 +1,7 @@
 using Avalon.Common;
+using Avalon.Reflection;
 using Avalon.WorldGeneration.Enums;
+using Avalon.WorldGeneration.secretSeeds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
@@ -7,6 +9,7 @@ using MonoMod.Cil;
 using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
+using Terraria.GameContent.UI.States;
 using Terraria.ModLoader;
 
 namespace Avalon.Hooks;
@@ -15,7 +18,7 @@ namespace Avalon.Hooks;
 public class UIGenProgressBarEdit : ModHook
 {
     private Asset<Texture2D> texOuterContagion = null!;
-    
+
     public override void Load()
     {
         texOuterContagion = Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/LoadingOuterContagion");
@@ -24,9 +27,29 @@ public class UIGenProgressBarEdit : ModHook
     protected override void Apply()
     {
         IL_UIGenProgressBar.DrawSelf += IL_DrawSelf;
+		On_UIGenProgressBar.DrawSelf += PreventDrawingRetro;
+		On_UIWorldLoad.DrawSelf += EditRetroText;
     }
-    
-    private void IL_DrawSelf(ILContext il)
+
+	private void EditRetroText(On_UIWorldLoad.orig_DrawSelf orig, UIWorldLoad self, SpriteBatch spriteBatch)
+	{
+		orig.Invoke(self, spriteBatch);
+		if (retroWorldGen.isGeneratingOldWorld)
+		{
+			UIHeader _progressMessage = self.GetProgressMessage();
+			_progressMessage.Text = Main.statusText;
+		}
+	}
+
+	private void PreventDrawingRetro(On_UIGenProgressBar.orig_DrawSelf orig, UIGenProgressBar self, SpriteBatch spriteBatch)
+	{
+		if (!retroWorldGen.isGeneratingOldWorld)
+		{
+			orig.Invoke(self, spriteBatch);
+		}
+	}
+
+	private void IL_DrawSelf(ILContext il)
     {
         var cursor = new ILCursor(il);
 

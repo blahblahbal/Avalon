@@ -17,8 +17,9 @@ public class AncientPurpleBrick : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileDungeon[Type] = true;
-        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.AncientPurpleBrick>();
-        HitSound = SoundID.Tink;
+		TileID.Sets.DungeonBiome[Type] = 1;
+		//ItemDrop = ModContent.ItemType<Items.Placeable.Tile.AncientPurpleBrick>();
+		HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.PurpleDungeonDust>();
         TileID.Sets.GeneralPlacementTiles[Type] = false;
     }
