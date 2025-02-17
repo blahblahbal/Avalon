@@ -4,19 +4,13 @@ using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using Steamworks;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.Skies;
 using Terraria.Graphics.Light;
 using Terraria.ModLoader;
-using ThoriumMod.Projectiles;
 
 namespace Avalon.Hooks
 {
