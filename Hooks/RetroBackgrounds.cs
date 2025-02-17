@@ -16,6 +16,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Skies;
 using Terraria.Graphics.Light;
 using Terraria.ModLoader;
+using ThoriumMod.Projectiles;
 
 namespace Avalon.Hooks
 {
@@ -27,6 +28,30 @@ namespace Avalon.Hooks
 			On_Main.DrawUnderworldBackground += stopRenderinRetro;
 			On_TileLightScanner.ApplyHellLight += FixRetroHellLight;
 			On_AmbientSky.HellBatsGoupSkyEntity.Helper_GetOpacityWithAccountingForBackgroundsOff += stopRenderingRetroBats;
+			On_Main.CalculateWaterStyle += PreventWaterstylesRetro;
+			On_Player.UpdateBiomes += AttemptRetroBloodmoonRemoval;
+		}
+
+		private void AttemptRetroBloodmoonRemoval(On_Player.orig_UpdateBiomes orig, Player self)
+		{
+			orig.Invoke(self);
+			if (Terraria.Graphics.Effects.Filters.Scene["BloodMoon"].IsActive() && AvalonWorld.retroWorld)
+			{
+				Terraria.Graphics.Effects.Filters.Scene["BloodMoon"].Deactivate();
+			}
+		}
+
+		private int PreventWaterstylesRetro(On_Main.orig_CalculateWaterStyle orig, bool ignoreFountains)
+		{
+			if (Main.SceneMetrics.ActiveFountainColor >= 0 && !ignoreFountains)
+			{
+				return Main.SceneMetrics.ActiveFountainColor;
+			}
+			if (AvalonWorld.retroWorld)
+			{
+				return 0;
+			}
+			return orig.Invoke(ignoreFountains);
 		}
 
 		private float stopRenderingRetroBats(On_AmbientSky.HellBatsGoupSkyEntity.orig_Helper_GetOpacityWithAccountingForBackgroundsOff orig, object self)
@@ -142,9 +167,9 @@ namespace Avalon.Hooks
 				}
 				if (ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.EvilTileCount && ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.HolyTileCount && ModContent.GetInstance<BiomeTileCounts>().ContagionTiles > Main.SceneMetrics.BloodTileCount)
 				{
-					num4 = 0.54f * num7 + num4 * (1f - num7);
+					num4 = 0.56f * num7 + num4 * (1f - num7);
 					num5 = 0.78f * num7 + num5 * (1f - num7);
-					num6 = 0.62f * num7 + num6 * (1f - num7);
+					num6 = 0.6f * num7 + num6 * (1f - num7);
 				}
 				else if (Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.EvilTileCount && Main.SceneMetrics.BloodTileCount > Main.SceneMetrics.HolyTileCount)
 				{

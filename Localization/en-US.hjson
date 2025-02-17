@@ -213,8 +213,11 @@ Mods: {
 			InSavanna: ""
 		}
 
-		#for giving recipe conditions translations
-		RecipeConditions.retroWorld: In Retro Worlds
+		RecipeConditions: {
+			#for giving recipe conditions translations
+			retroWorld: In Retro Worlds
+			notRetroWorld: Not In Retro Worlds
+		}
 
 		BuilderToggles: {
 			CloudGloveBuilderToggle: {

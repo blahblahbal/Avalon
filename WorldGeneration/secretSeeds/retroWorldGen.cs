@@ -10743,7 +10743,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 			ushort type = (ushort)ModContent.TileType<BrimstoneBlock>();
 			ushort type2 = (ushort)ModContent.TileType<ImperviousBrick>();
 			ushort type3 = (ushort)ModContent.TileType<CaesiumOre>();
-			ushort type4 = (ushort)ModContent.TileType<ResistantWood>();
+			ushort type4 = (ushort)ModContent.TileType<UltraResistantWood>();
 			ushort type5 = (ushort)ModContent.TileType<PoisonSpike>();
 			int num = WorldGen.genRand.Next(150, Main.maxTilesX / 3);
 			int num2 = Main.maxTilesY - 150;
