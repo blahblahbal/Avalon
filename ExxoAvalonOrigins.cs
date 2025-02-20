@@ -11,6 +11,7 @@ using Avalon.Items.Accessories.Info;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Network;
+using Avalon.Reflection;
 using Avalon.UI;
 using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
@@ -111,9 +112,9 @@ public class ExxoAvalonOrigins : Mod
 	internal CalcSpec calcSpec;
     private static readonly Func<Dictionary<int, FinalFractalProfile>> getFinalFractalHelperFractalProfiles = Reflection.Utilities.CreateFieldReader<Dictionary<int, FinalFractalProfile>>(typeof(FinalFractalHelper).GetField("_fractalProfiles", BindingFlags.Static | BindingFlags.NonPublic)!);
 
-    //internal UserInterface statDisplayInterface;
-    //internal StatDisplayUIState statDisplay;
-    public override void Load()
+	//internal UserInterface statDisplayInterface;
+	//internal StatDisplayUIState statDisplay;
+	public override void Load()
     {
         JungleGenMessage = Lang.gen[11].Value;
         //Additional swords to the zenith's projectiles with both their texture, size and trail color
@@ -160,6 +161,8 @@ public class ExxoAvalonOrigins : Mod
         {
             ReplaceVanillaTextures();
         }
+		AWorldListItemHelper.Load();
+		BackgroundHelper.Load();
         Asset<Effect> shader =
             ModContent.Request<Effect>("Avalon/Effects/DarkMatterSkyShader", AssetRequestMode.ImmediateLoad);
         SkyManager.Instance["Avalon:DarkMatter"] = new DarkMatterSky();
@@ -193,8 +196,11 @@ public class ExxoAvalonOrigins : Mod
         {
             assetReplacer.RestoreAssets();
         }
-        
-        Mod = null!;
+
+		AWorldListItemHelper.Unload();
+		BackgroundHelper.Unload();
+
+		Mod = null!;
     }
     public override void PostSetupContent()
     {

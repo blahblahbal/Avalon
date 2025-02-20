@@ -1,6 +1,8 @@
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
@@ -34,7 +36,9 @@ class Heartstone : ModItem
 
     public override void AddRecipes()
     {
-        Recipe.Create(ItemID.LifeCrystal).AddIngredient(this, 45).AddTile(TileID.Furnaces).Register();
-        Recipe.Create(Type, 45).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.Furnaces).Register();
-    }
+        Recipe.Create(ItemID.LifeCrystal).AddIngredient(this, 45).AddTile(TileID.Furnaces).AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.notRetroWorld")), () => !AvalonWorld.retroWorld).Register();
+		Recipe.Create(ItemID.LifeCrystal).AddIngredient(this, 120).AddTile(TileID.Furnaces).AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.retroWorld")), () => AvalonWorld.retroWorld).Register();
+		Recipe.Create(Type, 45).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.Furnaces).AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.notRetroWorld")), () => !AvalonWorld.retroWorld).Register();
+		Recipe.Create(Type, 120).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.Furnaces).AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.retroWorld")), () => AvalonWorld.retroWorld).Register();
+	}
 }

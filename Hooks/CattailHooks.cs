@@ -22,7 +22,6 @@ internal class CattailHooks : ModHook
 		//On_WorldGen.IsFitToPlaceFlowerIn += Flowerplacement;
 		On_WorldGen.PlaceTile += PlaceTile;
 		//IL_WorldGen.TileFrame += VineTileFrame;
-		IL_MapHelper.CreateMapTile += CactusMapColor;
 		On_WorldGen.PlaceLilyPad += LilyPadPreventer;
 		IL_WorldGen.CheckCatTail += CheckCattailEdit;
 		IL_WorldGen.PlaceCatTail += PlaceCattailEdit;
@@ -78,69 +77,6 @@ internal class CattailHooks : ModHook
 			}
 		}
 		return orig.Invoke(i, j, Type, mute, forced, plr, style);
-	}
-	private void CactusMapColor(ILContext il)
-	{
-		ILCursor c = new(il);
-		c.GotoNext(
-			MoveType.After,
-			i => i.MatchLdsfld("Terraria.Map.MapHelper", "tileLookup"),
-			i => i.MatchLdloc(7),
-			i => i.MatchLdelemU2(),
-			i => i.MatchStloc3());
-		c.EmitLdarg0(); //i (aka X)
-		c.EmitLdarg1(); //j (aka Y)
-		c.EmitLdloca(3); //num5
-		c.EmitDelegate((int i, int j, ref int num5) => {
-			Tile tile = Main.tile[i, j];
-			if (tile != null)
-			{ //somehow still out of bounds
-				GetCactusType(i, j, tile.TileFrameX, tile.TileFrameY, out var sandType);
-				if (Main.tile[i, j].TileType == TileID.Cactus && TileLoader.CanGrowModCactus(sandType) && sandType == ModContent.TileType<Snotsand>())
-				{
-					num5 = MapHelper.tileLookup[ModContent.TileType<IckyCactusDummyTile>()];
-				}
-			}
-		});
-	}
-
-	/// Copied from vanilla's WorldGen.GetCactusType due to a critical issue where this is no prevention for checking out of bounds for cacti - Lion8cake
-	public static void GetCactusType(int tileX, int tileY, int frameX, int frameY, out int type)
-	{
-		type = 0;
-		int num = tileX;
-		if (frameX == 36)
-			num--;
-
-		if (frameX == 54)
-			num++;
-
-		if (frameX == 108)
-			num = ((frameY != 18) ? (num + 1) : (num - 1));
-
-		int num2 = tileY;
-		bool flag = false;
-		Tile tile = Main.tile[num, num2];
-		if (tile == null)
-			return;
-
-		if (tile.TileType == 80 && tile.HasTile)
-			flag = true;
-
-		while (tile != null && (!tile.HasTile || !Main.tileSolid[tile.TileType] || !flag))
-		{
-			if (tile.TileType == 80 && tile.HasTile)
-				flag = true;
-
-			num2++;
-			if (num2 > tileY + 20)
-				break;
-
-			if (num < Main.maxTilesX && num2 < Main.maxTilesY)
-				tile = Main.tile[num, num2];
-		}
-
-		type = tile.TileType;
 	}
 
 	private void PlaceLilyPadEdit(ILContext il)

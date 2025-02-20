@@ -213,6 +213,12 @@ Mods: {
 			InSavanna: ""
 		}
 
+		RecipeConditions: {
+			#for giving recipe conditions translations
+			retroWorld: In Retro Worlds
+			notRetroWorld: Not In Retro Worlds
+		}
+
 		BuilderToggles: {
 			CloudGloveBuilderToggle: {
 				OnText: Cloud Glove On
@@ -9595,6 +9601,56 @@ Mods: {
 					Grants increased enemy spawn rates and minor improvements to all stats
 					'''
 			}
+
+			MirageChest: {
+				DisplayName: Mirage Chest
+				Tooltip: Unfortunately, the chest is not real
+			}
+
+			UnsafeAncientBlueBrickWall: {
+				DisplayName: Unsafe Ancient Blue Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientGreenBrickWall: {
+				DisplayName: Unsafe Ancient Green Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientPinkBrickWall: {
+				DisplayName: Unsafe Ancient Pink Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientHellstoneBrickWall: {
+				DisplayName: Unsafe Ancient Hellstone Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientObsidianBrickWall: {
+				DisplayName: Unsafe Ancient Obsidian Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientOrangeBrickWall: {
+				DisplayName: Unsafe Ancient Orange Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientPurpleBrickWall: {
+				DisplayName: Unsafe Ancient Purple Brick Wall
+				Tooltip: ""
+			}
+
+			UnsafeAncientYellowBrickWall: {
+				DisplayName: Unsafe Ancient Yellow Brick Wall
+				Tooltip: ""
+			}
+
+			HydrolythOre: {
+				DisplayName: Hydrolyth Ore
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -11384,6 +11440,9 @@ Mods: {
 			SavannaPylon.MapEntry: Savanna Pylon
 			PoisonSpike.MapEntry: Poison Spike
 			SilenceCandle.MapEntry: Mods.Avalon.Tiles.SilenceCandle.MapEntry
+			#intentionally lowercase to allow players an alternate way to find angel chests
+			AngelChest.MapEntry: gold chest
+			HydrolythOre.MapEntry: Mods.Avalon.Tiles.HydrolythOre.MapEntry
 		}
 
 		Prefixes: {
@@ -11587,6 +11646,11 @@ Mods: {
 					PlatformLeaves: Placing platform leaf traps
 					Chests: Adding savanna chests
 					Nests: Adding nests
+				}
+
+				Retro: {
+					AddingAngels: Making Chests Heavenly.
+					UnslopingSlopes: Making the world blocky.
 				}
 
 				Contagion.Message: Making the world gross
