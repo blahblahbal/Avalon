@@ -265,6 +265,11 @@ Mods: {
 				Description: Craft Aeon's Eternity.
 			}
 
+			Unification: {
+				Name: Unification
+				Description: Craft Vertex of Excalibur, the unification of dark and light.
+			}
+
 			Boosted: {
 				Name: Boosted!
 				Description: Use a Stamina Crystal to increase your Stamina.

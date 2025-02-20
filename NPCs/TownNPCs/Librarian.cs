@@ -134,7 +134,6 @@ public class Librarian : ModNPC
     {
         return new List<string>
         {
-            "Juisefuss",
             "Rob",
             "Nasard",
             "Helafrin",

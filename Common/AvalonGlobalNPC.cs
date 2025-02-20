@@ -268,6 +268,13 @@ public class AvalonGlobalNPC : GlobalNPC
 				shopCustomPrice = Item.buyPrice(0, 4),
 			}, Condition.DownedPirates);
 		}
+		if (shop.NpcType == NPCID.Cyborg)
+		{
+			shop.Add(new Item(ModContent.ItemType<MartianPeaceTreaty>())
+			{
+				shopCustomPrice = Item.buyPrice(0, 4),
+			}, Condition.DownedMartians);
+		}
 		if (shop.NpcType == NPCID.GoblinTinkerer)
 		{
 			shop.Add(new Item(ModContent.ItemType<RocketinaBottle>())

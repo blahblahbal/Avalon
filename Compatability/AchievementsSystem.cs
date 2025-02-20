@@ -1,5 +1,6 @@
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material;
+using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Tiles;
 using Terraria.Achievements;
@@ -28,5 +29,7 @@ internal class AchievementsSystem : ModSystem
 		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Fatality", AchievementCategory.Slayer, "Avalon/Assets/Textures/Achievements/Fatality", null, false, false, 5f, new string[] { "Event_DrinkBottledLava" });
 		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Gems", AchievementCategory.Collector, "Avalon/Assets/Textures/Achievements/Gems", null, false, false, 10f, new string[] { "Event_HaveAllLargeGems" });
 		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Hellevator", AchievementCategory.Explorer, "Avalon/Assets/Textures/Achievements/Hellevator", null, false, false, 12f, new string[] { "Event_Hellevator" });
+
+		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Unification", AchievementCategory.Collector, "Avalon/Assets/Textures/Achievements/Unification", null, false, false, 41.5f, new string[] { "Craft_" + ModContent.ItemType<VertexOfExcalibur>() });
 	}
 }
