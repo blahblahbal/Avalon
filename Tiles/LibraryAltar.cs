@@ -12,16 +12,24 @@ namespace Avalon.Tiles;
 
 public class LibraryAltar : ModTile
 {
-    public override void SetStaticDefaults()
-    {
-        Main.tileFrameImportant[Type] = true;
-        Main.tileNoAttach[Type] = true;
-        Main.tileLavaDeath[Type] = false;
-        TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
-        TileObjectData.addTile(Type);
-        AddMapEntry(Color.Gray);
-        DustType = DustID.Stone;
-    }
+	public override void SetStaticDefaults()
+	{
+		Main.tileFrameImportant[Type] = true;
+		Main.tileNoAttach[Type] = true;
+		Main.tileLavaDeath[Type] = false;
+		Main.tileSolidTop[Type] = true;
+		Main.tileTable[Type] = true;
+		TileID.Sets.IgnoredByNpcStepUp[Type] = true;
+
+		DustType = DustID.Stone;
+		AdjTiles = [TileID.Bookcases];
+
+		TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
+		TileObjectData.addTile(Type);
+
+		AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+		AddMapEntry(Color.Gray);
+	}
 	public override void MouseOver(int i, int j)
 	{
 		Main.LocalPlayer.cursorItemIconEnabled = true;
