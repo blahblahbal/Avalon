@@ -13,7 +13,7 @@ using Avalon.Items.Placeable.Painting;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Potions.Buff;
-using Avalon.Items.Tokens;
+using Avalon.ModSupport.Tokens;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.Hardmode;

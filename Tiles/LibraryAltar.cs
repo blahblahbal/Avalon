@@ -37,8 +37,14 @@ public class LibraryAltar : ModTile
 	}
 	public override bool RightClick(int i, int j)
 	{
-		if (Main.LocalPlayer.HeldItem.type == ModContent.ItemType<EctoplasmicBeacon>())
+		int index = Main.LocalPlayer.FindItem(ModContent.ItemType<EctoplasmicBeacon>());
+		if (index > -1)
 		{
+			Main.LocalPlayer.inventory[index].stack--;
+			if (Main.LocalPlayer.inventory[index].stack <= 0)
+			{
+				Main.LocalPlayer.inventory[index].SetDefaults();
+			}
 			Vector2 vector = new Point(i, j).ToWorldCoordinates();
 
 			Main.NewText(Main.tile[i, j].TileFrameY);

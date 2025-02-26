@@ -103,17 +103,17 @@ namespace Avalon.Common.Players
 
         public static List<int> AvalonTracks = new List<int>
         {
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxArmageddonSlime>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxBacteriumPrime>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxContagion>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxDarkMatter>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeak>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxHellCastle>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxPhantasm>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxSkyFortress>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxTuhrtlOutpost>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxUndergroundContagion>(),
-            ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeakOtherworldly>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxArmageddonSlime>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxBacteriumPrime>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxContagion>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDarkMatter>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDesertBeak>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxHellCastle>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxPhantasm>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxSkyFortress>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxTuhrtlOutpost>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxUndergroundContagion>(),
+            ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDesertBeakOtherworldly>(),
         };
 
         public static Dictionary<int, int> TracksByItemID = new Dictionary<int, int>

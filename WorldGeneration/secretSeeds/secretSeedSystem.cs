@@ -10,9 +10,9 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 
-namespace Avalon.WorldGeneration.secretSeeds
+namespace Avalon.WorldGeneration.SecretSeeds
 {
-	public class secretSeedSystem : ModSystem
+	public class SecretSeedSystem : ModSystem
 	{
 		private static readonly string[] vanillaGenpasses = new string[] { "Reset", "Terrain", "Dunes", "Ocean Sand", "Sand Patches", "Tunnels", "Mount Caves", "Dirt Wall Backgrounds", "Rocks In Dirt", "Dirt In Rocks", "Clay", "Small Holes", "Dirt Layer Caves", "Rock Layer Caves", "Surface Caves",
 				"Wavy Caves", "Generate Ice Biome", "Grass", "Jungle", "Mud Caves To Grass", "Full Desert", "Floating Islands", "Mushroom Patches", "Marble", "Granite", "Dirt To Mud", "Silt", "Shinies", "Webs", "Underworld", "Corruption", "Lakes", "Dungeon", "Slush", "Mountain Caves",
@@ -135,115 +135,115 @@ namespace Avalon.WorldGeneration.secretSeeds
 							switch (str)
 							{
 								case "Reset":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Reset);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Reset);
 									break;
 								case "Terrain":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Terrain);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Terrain);
 									break;
 								case "Dunes":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Dunes);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Dunes);
 									break;
 								case "Mount Caves":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.MountCaves);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.MountCaves);
 									break;
 								case "Dirt Wall Backgrounds":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.DirtWallBackgrounds);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.DirtWallBackgrounds);
 									break;
 								case "Rocks In Dirt":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.RocksInDirt);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.RocksInDirt);
 									break;
 								case "Dirt In Rocks":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.DirtInRocks);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.DirtInRocks);
 									break;
 								case "Clay":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Clay);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Clay);
 									break;
 								case "Small Holes":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.SmallHoles);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.SmallHoles);
 									break;
 								case "Dirt Layer Caves":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.DirtLayerCaves);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.DirtLayerCaves);
 									break;
 								case "Rock Layer Caves":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.RockLayerCaves);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.RockLayerCaves);
 									break;
 								case "Surface Caves":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.SurfaceCaves);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.SurfaceCaves);
 									break;
 								case "Jungle":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Jungle); //added hives to wg to provide hive tiles/items
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Jungle); //added hives to wg to provide hive tiles/items
 									break;
 								case "Floating Islands":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.FloatingIslands);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.FloatingIslands);
 									break;
 								case "Mushroom Patches":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.MushroomPatches);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.MushroomPatches);
 									break;
 								case "Dirt To Mud":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.DirtToMud);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.DirtToMud);
 									break;
 								case "Silt":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Silt);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Silt);
 									break;
 								case "Shinies":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Shinies);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Shinies);
 									break;
 								case "Webs":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Webs);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Webs);
 									break;
 								case "Underworld":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Underworld);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Underworld);
 									break;
 								case "Mountain Caves":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.MountainCaves);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.MountainCaves);
 									break;
 								case "Beaches":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Beaches);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Beaches);
 									break;
 								case "Gems":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Gems);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Gems);
 									break;
 								case "Gravitating Sand":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.GravitatingSand);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.GravitatingSand);
 									break;
 								case "Clean Up Dirt":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.CleanUpDirt);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.CleanUpDirt);
 									break;
 								case "Altars":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Altars);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Altars);
 									break;
 								case "Wet Jungle":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.WetJungle);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.WetJungle);
 									break;
 								case "Life Crystals":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.LifeCrystals);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.LifeCrystals);
 									break;
 								case "Statues":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.Statues);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.Statues);
 									break;
 								case "Buried Chests":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.BuriedChests);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.BuriedChests);
 									break;
 								case "Surface Chests":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.SurfaceChests);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.SurfaceChests);
 									break;
 								case "Jungle Chests Placement":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.JungleChestsPlacement);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.JungleChestsPlacement);
 									break;
 								case "Water Chests":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.WaterChests);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.WaterChests);
 									break;
 								case "Floating Island Houses":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.FloatingIslandHouses);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.FloatingIslandHouses);
 									break;
 								case "Jungle Temple":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.JungleTemple);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.JungleTemple);
 									break;
 								case "Lihzahrd Altars":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.LihzahrdAltars);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.LihzahrdAltars);
 									break;
 								case "Final Cleanup":
-									editedGenpass = new WorldGenLegacyMethod(retroWorldGen.FinalCleanup);
+									editedGenpass = new WorldGenLegacyMethod(RetroWorldGen.FinalCleanup);
 									break;
 								default:
 									editedGenpass = new WorldGenLegacyMethod(EmptyPass); //includes added shimmer wg
@@ -257,14 +257,14 @@ namespace Avalon.WorldGeneration.secretSeeds
 					int index2 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[0])); //for some reason corruption was moved down before lakes in later updates
 					int index3 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[1]));
 					int index4 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[2]));
-					ReplaceGenpass(ref tasks, index2, "Lakes", new WorldGenLegacyMethod(retroWorldGen.Lakes));
-					ReplaceGenpass(ref tasks, index3, "Dungeon", new WorldGenLegacyMethod(retroWorldGen.Dungeon));
-					ReplaceGenpass(ref tasks, index4, "Corruption", new WorldGenLegacyMethod(retroWorldGen.Corruption));
+					ReplaceGenpass(ref tasks, index2, "Lakes", new WorldGenLegacyMethod(RetroWorldGen.Lakes));
+					ReplaceGenpass(ref tasks, index3, "Dungeon", new WorldGenLegacyMethod(RetroWorldGen.Dungeon));
+					ReplaceGenpass(ref tasks, index4, "Corruption", new WorldGenLegacyMethod(RetroWorldGen.Corruption));
 
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[3])); //swapped sand water removal and settle liquids
 					index3 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[4]));
-					ReplaceGenpass(ref tasks, index2, "Remove Water From Sand", new WorldGenLegacyMethod(retroWorldGen.RemoveWaterFromSand));
-					ReplaceGenpass(ref tasks, index3, "Settle Liquids", new WorldGenLegacyMethod(retroWorldGen.SettleLiquids));
+					ReplaceGenpass(ref tasks, index2, "Remove Water From Sand", new WorldGenLegacyMethod(RetroWorldGen.RemoveWaterFromSand));
+					ReplaceGenpass(ref tasks, index3, "Settle Liquids", new WorldGenLegacyMethod(RetroWorldGen.SettleLiquids));
 
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[5])); //Traps was also moved from pre-pots to post fallen log/speading grass
 					index3 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[6]));
@@ -272,10 +272,10 @@ namespace Avalon.WorldGeneration.secretSeeds
 					int index5 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[8]));
 					int index6 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[9]));
 					int index7 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[10]));
-					ReplaceGenpass(ref tasks, index2, "Traps", new WorldGenLegacyMethod(retroWorldGen.Traps));
-					ReplaceGenpass(ref tasks, index3, "Pots", new WorldGenLegacyMethod(retroWorldGen.Pots));
-					ReplaceGenpass(ref tasks, index4, "Hellforge", new WorldGenLegacyMethod(retroWorldGen.Hellforge));
-					ReplaceGenpass(ref tasks, index5, "Spreading Grass", new WorldGenLegacyMethod(retroWorldGen.SpreadingGrass));
+					ReplaceGenpass(ref tasks, index2, "Traps", new WorldGenLegacyMethod(RetroWorldGen.Traps));
+					ReplaceGenpass(ref tasks, index3, "Pots", new WorldGenLegacyMethod(RetroWorldGen.Pots));
+					ReplaceGenpass(ref tasks, index4, "Hellforge", new WorldGenLegacyMethod(RetroWorldGen.Hellforge));
+					ReplaceGenpass(ref tasks, index5, "Spreading Grass", new WorldGenLegacyMethod(RetroWorldGen.SpreadingGrass));
 					ReplaceGenpass(ref tasks, index6, "Surface Ore and Stone", new WorldGenLegacyMethod(EmptyPass));
 					ReplaceGenpass(ref tasks, index7, "Place Fallen Log", new WorldGenLegacyMethod(EmptyPass));
 
@@ -300,21 +300,21 @@ namespace Avalon.WorldGeneration.secretSeeds
 					int index20 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[29]));
 					int index21 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[30]));
 					int index22 = tasks.FindIndex(genpass => genpass.Name.Equals(blockedGenpass[31]));
-					ReplaceGenpass(ref tasks, index2, "Cactus, Palm Trees, & Coral", new WorldGenLegacyMethod(retroWorldGen.CactusPalmTreesCoral));
-					ReplaceGenpass(ref tasks, index3, "Spawn Point", new WorldGenLegacyMethod(retroWorldGen.SpawnPoint));
+					ReplaceGenpass(ref tasks, index2, "Cactus, Palm Trees, & Coral", new WorldGenLegacyMethod(RetroWorldGen.CactusPalmTreesCoral));
+					ReplaceGenpass(ref tasks, index3, "Spawn Point", new WorldGenLegacyMethod(RetroWorldGen.SpawnPoint));
 					ReplaceGenpass(ref tasks, index4, "Grass Wall", new WorldGenLegacyMethod(EmptyPass));
-					ReplaceGenpass(ref tasks, index5, "Guide", new WorldGenLegacyMethod(retroWorldGen.Guide)); //Added forced name all worlds created to give the name brian
-					ReplaceGenpass(ref tasks, index6, "Sunflowers", new WorldGenLegacyMethod(retroWorldGen.Sunflowers));
-					ReplaceGenpass(ref tasks, index7, "Planting Trees", new WorldGenLegacyMethod(retroWorldGen.PlantingTrees));
-					ReplaceGenpass(ref tasks, index8, "Herbs", new WorldGenLegacyMethod(retroWorldGen.Herbs));
+					ReplaceGenpass(ref tasks, index5, "Guide", new WorldGenLegacyMethod(RetroWorldGen.Guide)); //Added forced name all worlds created to give the name brian
+					ReplaceGenpass(ref tasks, index6, "Sunflowers", new WorldGenLegacyMethod(RetroWorldGen.Sunflowers));
+					ReplaceGenpass(ref tasks, index7, "Planting Trees", new WorldGenLegacyMethod(RetroWorldGen.PlantingTrees));
+					ReplaceGenpass(ref tasks, index8, "Herbs", new WorldGenLegacyMethod(RetroWorldGen.Herbs));
 					ReplaceGenpass(ref tasks, index9, "Dye Plants", new WorldGenLegacyMethod(EmptyPass));
 					ReplaceGenpass(ref tasks, index10, "Webs And Honey", new WorldGenLegacyMethod(EmptyPass));
-					ReplaceGenpass(ref tasks, index11, "Weeds", new WorldGenLegacyMethod(retroWorldGen.Weeds));
+					ReplaceGenpass(ref tasks, index11, "Weeds", new WorldGenLegacyMethod(RetroWorldGen.Weeds));
 					ReplaceGenpass(ref tasks, index12, "Glowing Mushrooms and Jungle Plants", new WorldGenLegacyMethod(EmptyPass));
 					ReplaceGenpass(ref tasks, index13, "Jungle Plants", new WorldGenLegacyMethod(EmptyPass));
-					ReplaceGenpass(ref tasks, index14, "Vines", new WorldGenLegacyMethod(retroWorldGen.Vines));
-					ReplaceGenpass(ref tasks, index15, "Flowers", new WorldGenLegacyMethod(retroWorldGen.Flowers));
-					ReplaceGenpass(ref tasks, index16, "Mushrooms", new WorldGenLegacyMethod(retroWorldGen.Mushrooms));
+					ReplaceGenpass(ref tasks, index14, "Vines", new WorldGenLegacyMethod(RetroWorldGen.Vines));
+					ReplaceGenpass(ref tasks, index15, "Flowers", new WorldGenLegacyMethod(RetroWorldGen.Flowers));
+					ReplaceGenpass(ref tasks, index16, "Mushrooms", new WorldGenLegacyMethod(RetroWorldGen.Mushrooms));
 					ReplaceGenpass(ref tasks, index17, "Gems In Ice Biome", new WorldGenLegacyMethod(EmptyPass));
 					ReplaceGenpass(ref tasks, index18, "Random Gems", new WorldGenLegacyMethod(EmptyPass));
 					ReplaceGenpass(ref tasks, index19, "Moss Grass", new WorldGenLegacyMethod(EmptyPass));
@@ -325,23 +325,23 @@ namespace Avalon.WorldGeneration.secretSeeds
 					int indexMod = tasks.FindIndex(genpass => genpass.Name.Equals("Remove Broken Traps")); //modded WG
 					if (indexMod != -1)
 					{
-						tasks.Insert(indexMod + 1, new PassLegacy("Make Clouds", new WorldGenLegacyMethod(retroWorldGen.MakeCloudPass)));
-						tasks.Insert(indexMod + 2, new PassLegacy("Titanium Ore", new WorldGenLegacyMethod(retroWorldGen.TitaniumOrePass)));
-						tasks.Insert(indexMod + 3, new PassLegacy("Add Motherloads", new WorldGenLegacyMethod(retroWorldGen.AddMotherloadsPass)));
-						//tasks.Insert(indexMod + 1, new PassLegacy("Add Coal", new WorldGenLegacyMethod(retroWorldGen.AddCoalPass)));
-						//tasks.Insert(indexMod + 1, new PassLegacy("Add Darkstone", new WorldGenLegacyMethod(retroWorldGen.AddDarkStonePass)));
-						//tasks.Insert(indexMod + 1, new PassLegacy("Add Salt", new WorldGenLegacyMethod(retroWorldGen.AddSaltPass)));
-						//tasks.Insert(indexMod + 1, new PassLegacy("Add Hardsalt", new WorldGenLegacyMethod(retroWorldGen.AddHardSaltPass)));
-						//tasks.Insert(indexMod + 1, new PassLegacy("Add Jungle Ore", new WorldGenLegacyMethod(retroWorldGen.AddJungleOrePass)));
-						tasks.Insert(indexMod + 4, new PassLegacy("Ice Shrine", new WorldGenLegacyMethod(retroWorldGen.IceShrinePass)));
-						tasks.Insert(indexMod + 5, new PassLegacy("Caesium Ore", new WorldGenLegacyMethod(retroWorldGen.CaesiumOrePass)));
-						tasks.Insert(indexMod + 6, new PassLegacy("HellCastle", new WorldGenLegacyMethod(retroWorldGen.HellCastlePass)));
-						//tasks.Insert(indexMod + 1, new PassLegacy("Hallowed Altars", new WorldGenLegacyMethod(retroWorldGen.HallowedAltarPass)));
-						tasks.Insert(indexMod + 7, new PassLegacy("Heartstone Patch", new WorldGenLegacyMethod(retroWorldGen.HeartStonePatchPass)));
-						tasks.Insert(indexMod + 8, new PassLegacy("Make Ice Cave", new WorldGenLegacyMethod(retroWorldGen.MakeIceCavePass)));
-						tasks.Insert(indexMod + 9, new PassLegacy("Replace Chest Contents", new WorldGenLegacyMethod(retroWorldGen.ReplaceChestContentsPass)));
-						tasks.Insert(indexMod + 10, new PassLegacy("WG Replace Chests", new WorldGenLegacyMethod(retroWorldGen.WGReplaceChestsPass)));
-						tasks.Insert(indexMod + 11, new PassLegacy("WG Place Custom Statues", new WorldGenLegacyMethod(retroWorldGen.WGPlaceCustomStatuesPass)));
+						tasks.Insert(indexMod + 1, new PassLegacy("Make Clouds", new WorldGenLegacyMethod(RetroWorldGen.MakeCloudPass)));
+						tasks.Insert(indexMod + 2, new PassLegacy("Titanium Ore", new WorldGenLegacyMethod(RetroWorldGen.TitaniumOrePass)));
+						tasks.Insert(indexMod + 3, new PassLegacy("Add Motherloads", new WorldGenLegacyMethod(RetroWorldGen.AddMotherloadsPass)));
+						//tasks.Insert(indexMod + 1, new PassLegacy("Add Coal", new WorldGenLegacyMethod(RetroWorldGen.AddCoalPass)));
+						//tasks.Insert(indexMod + 1, new PassLegacy("Add Darkstone", new WorldGenLegacyMethod(RetroWorldGen.AddDarkStonePass)));
+						//tasks.Insert(indexMod + 1, new PassLegacy("Add Salt", new WorldGenLegacyMethod(RetroWorldGen.AddSaltPass)));
+						//tasks.Insert(indexMod + 1, new PassLegacy("Add Hardsalt", new WorldGenLegacyMethod(RetroWorldGen.AddHardSaltPass)));
+						//tasks.Insert(indexMod + 1, new PassLegacy("Add Jungle Ore", new WorldGenLegacyMethod(RetroWorldGen.AddJungleOrePass)));
+						tasks.Insert(indexMod + 4, new PassLegacy("Ice Shrine", new WorldGenLegacyMethod(RetroWorldGen.IceShrinePass)));
+						tasks.Insert(indexMod + 5, new PassLegacy("Caesium Ore", new WorldGenLegacyMethod(RetroWorldGen.CaesiumOrePass)));
+						tasks.Insert(indexMod + 6, new PassLegacy("HellCastle", new WorldGenLegacyMethod(RetroWorldGen.HellCastlePass)));
+						//tasks.Insert(indexMod + 1, new PassLegacy("Hallowed Altars", new WorldGenLegacyMethod(RetroWorldGen.HallowedAltarPass)));
+						tasks.Insert(indexMod + 7, new PassLegacy("Heartstone Patch", new WorldGenLegacyMethod(RetroWorldGen.HeartStonePatchPass)));
+						tasks.Insert(indexMod + 8, new PassLegacy("Make Ice Cave", new WorldGenLegacyMethod(RetroWorldGen.MakeIceCavePass)));
+						tasks.Insert(indexMod + 9, new PassLegacy("Replace Chest Contents", new WorldGenLegacyMethod(RetroWorldGen.ReplaceChestContentsPass)));
+						tasks.Insert(indexMod + 10, new PassLegacy("WG Replace Chests", new WorldGenLegacyMethod(RetroWorldGen.WGReplaceChestsPass)));
+						tasks.Insert(indexMod + 11, new PassLegacy("WG Place Custom Statues", new WorldGenLegacyMethod(RetroWorldGen.WGPlaceCustomStatuesPass)));
 					}
 				}
 				else
@@ -350,29 +350,29 @@ namespace Avalon.WorldGeneration.secretSeeds
 					int index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Reset"));
 					if (index2 != -1)
 					{
-						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Reset Secret Seed stuff", new WorldGenLegacyMethod(retroWorldGen.ResetZenith)));
+						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Reset Secret Seed stuff", new WorldGenLegacyMethod(RetroWorldGen.ResetZenith)));
 					}
 
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Planting Trees"));
-					ReplaceGenpass(ref tasks, index2, "Planting Trees", new WorldGenLegacyMethod(retroWorldGen.PlantingTreesZenith));
+					ReplaceGenpass(ref tasks, index2, "Planting Trees", new WorldGenLegacyMethod(RetroWorldGen.PlantingTreesZenith));
 
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Remove Broken Traps"));
 					if (index2 != -1)
 					{
-						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Unhammer hammered tiles", new WorldGenLegacyMethod(retroWorldGen.RemoveSlopesSlabsZenith)));
+						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Unhammer hammered tiles", new WorldGenLegacyMethod(RetroWorldGen.RemoveSlopesSlabsZenith)));
 					}
 
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Islands"));
-					ReplaceGenpass(ref tasks, index2, "Floating Islands", new WorldGenLegacyMethod(retroWorldGen.FloatingIslandsZenith));
+					ReplaceGenpass(ref tasks, index2, "Floating Islands", new WorldGenLegacyMethod(RetroWorldGen.FloatingIslandsZenith));
 
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Final Cleanup"));
 					if (index2 != -1)
 					{
-						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Angel-ify chests", new WorldGenLegacyMethod(retroWorldGen.ReplaceGoldChestsWithStatues)));
+						tasks.Insert(index2 + 1, new PassLegacy("Avalon: Angel-ify chests", new WorldGenLegacyMethod(RetroWorldGen.ReplaceGoldChestsWithStatues)));
 					}
 
 					index2 = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Island Houses"));
-					ReplaceGenpass(ref tasks, index2, "Floating Island Houses", new WorldGenLegacyMethod(retroWorldGen.FloatingIslandHousesZenith));
+					ReplaceGenpass(ref tasks, index2, "Floating Island Houses", new WorldGenLegacyMethod(RetroWorldGen.FloatingIslandHousesZenith));
 				}
 			}
 			else if (AvalonWorld.cavesWorld)
@@ -431,7 +431,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 						tasks.Insert(index2 + 1, new PassLegacy("Adding Underground Spawnpoint", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration config)
 						{
 							Main.spawnTileY += 300;
-							cavesWorldGen.GenerateSpawnArea(Main.spawnTileX - 5, Main.spawnTileY - 6);
+							CavesWorldGen.GenerateSpawnArea(Main.spawnTileX - 5, Main.spawnTileY - 6);
 						})));
 					}
 

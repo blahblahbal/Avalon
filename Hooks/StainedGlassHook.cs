@@ -26,7 +26,7 @@ namespace Avalon.Hooks
                (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>() ||
                tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>() ||
                tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>() ||
-				(ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())) && tile.LiquidAmount < 255)
+				(ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>())) && tile.LiquidAmount < 255)
             {
                 finalR = num4;
                 finalG = num4 * 0.6f;
@@ -49,7 +49,7 @@ namespace Avalon.Hooks
                     finalG *= 1f;
                     finalB *= 1f;
                 }
-                else if (tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())
+                else if (tile.WallType == ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>())
                 {
                     finalR *= 0.745f;
                     finalG *= 0.925f;
@@ -83,7 +83,7 @@ namespace Avalon.Hooks
 				(tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>() ||
 				tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>() ||
 				tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>() ||
-				(ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())) && tile.LiquidAmount < 255)
+				(ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>())) && tile.LiquidAmount < 255)
 			{
 				finalR = num6;
 				finalG = num7;
@@ -106,7 +106,7 @@ namespace Avalon.Hooks
 					finalG *= 1f;
 					finalB *= 1f;
 				}
-				else if (tile.WallType == ModContent.WallType<Compatability.Thorium.Walls.ChartreuseStainedGlass>())
+				else if (tile.WallType == ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>())
 				{
 					finalR *= 0.745f;
 					finalG *= 0.925f;

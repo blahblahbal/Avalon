@@ -20,7 +20,7 @@ using Terraria.Localization;
 using Avalon.Items.Placeable.Furniture.Gem;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Food;
-using Avalon.Compatability.Thorium.Items.Placeable.Furniture.Gem;
+using Avalon.ModSupport.Thorium.Items.Placeable.Furniture.Gem;
 using SDL2;
 
 namespace Avalon.Systems.Recipes;

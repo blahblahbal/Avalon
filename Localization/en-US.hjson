@@ -9656,6 +9656,11 @@ Mods: {
 				DisplayName: Hydrolyth Ore
 				Tooltip: ""
 			}
+
+			MartianPeaceTreaty: {
+				DisplayName: Martian Peace Treaty
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

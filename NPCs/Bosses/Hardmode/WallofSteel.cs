@@ -25,11 +25,6 @@ namespace Avalon.NPCs.Bosses.Hardmode;
 [AutoloadBossHead]
 public class WallofSteel : ModNPC
 {
-	public override bool IsLoadingEnabled(Mod mod)
-	{
-		return false;
-	}
-
 	private static Asset<Texture2D> wosTexture;
 	private static Asset<Texture2D> mechaHungryChainTexture;
 	private int TopEyeHP;

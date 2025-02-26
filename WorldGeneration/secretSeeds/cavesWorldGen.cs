@@ -1,10 +1,6 @@
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.Biomes;
 using Terraria.GameContent.UI.States;
@@ -13,9 +9,9 @@ using Terraria.IO;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 
-namespace Avalon.WorldGeneration.secretSeeds
+namespace Avalon.WorldGeneration.SecretSeeds
 {
-	public class cavesWorldGen : ModHook
+	public class CavesWorldGen : ModHook
 	{
 		protected override void Apply()
 		{
@@ -35,7 +31,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 		#region caves wg
 		private bool On_EnchantedSwordBiome_Place(On_EnchantedSwordBiome.orig_Place orig, EnchantedSwordBiome self, Point origin, StructureMap structures)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				//if (!WorldGen.InWorld(origin.X, origin.Y))
 				{
@@ -47,7 +43,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private bool On_HoneyPatchBiome_Place(On_HoneyPatchBiome.orig_Place orig, HoneyPatchBiome self, Point origin, StructureMap structures)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				if (!WorldGen.InWorld(origin.X, origin.Y))
 				{
@@ -59,7 +55,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private void On_WorldGen_SonOfLakinater(On_WorldGen.orig_SonOfLakinater orig, int i, int j, double strengthMultiplier)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				orig.Invoke(i, j + 40, strengthMultiplier);
 			}
@@ -68,7 +64,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private void On_WorldGen_ChasmRunner(On_WorldGen.orig_ChasmRunner orig, int i, int j, int steps, bool makeOrb)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				orig.Invoke(i, j + 40, steps, makeOrb);
 			}
@@ -77,7 +73,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private void On_WorldGen_CrimStart(On_WorldGen.orig_CrimStart orig, int i, int j)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				orig.Invoke(i, j + 40);
 			}
@@ -86,7 +82,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private bool On_DesertBiome_Place(On_DesertBiome.orig_Place orig, DesertBiome self, Point origin, StructureMap structures)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				Point newPoint = origin + new Point(0, 50);
 				return orig.Invoke(self, newPoint, structures);
@@ -96,7 +92,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private void On_TerrainPass_FillColumn(On_TerrainPass.orig_FillColumn orig, int x, double worldSurface, double rockLayer)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				worldSurface = 20;
 				for (int i = 0; i < worldSurface; i++)
@@ -122,7 +118,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 		private void On_TerrainPass_ApplyPass(On_TerrainPass.orig_ApplyPass orig, TerrainPass self, GenerationProgress progress, GameConfiguration configuration)
 		{
 			orig.Invoke(self, progress, configuration);
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				GenVars.rockLayer = 50;
 				GenVars.rockLayerHigh = 55;
@@ -135,7 +131,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private void On_WorldGen_DungeonEnt(On_WorldGen.orig_DungeonEnt orig, int i, int j, ushort tileType, int wallType)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				WorldGen.drunkWorldGen = true;
 				orig.Invoke(i, j + 150, tileType, wallType);
@@ -146,7 +142,7 @@ namespace Avalon.WorldGeneration.secretSeeds
 
 		private void On_WorldGen_MakeDungeon(On_WorldGen.orig_MakeDungeon orig, int x, int y)
 		{
-			if (secretSeedSystem.GetCavesWorldGen)
+			if (SecretSeedSystem.GetCavesWorldGen)
 			{
 				y += 250;
 			}

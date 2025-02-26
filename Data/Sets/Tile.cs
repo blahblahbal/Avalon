@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material.Bars;
-using Avalon.Items.OreChunks;
+using Avalon.Items.Material.OreChunks;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Ores;

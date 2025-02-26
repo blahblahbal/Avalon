@@ -28,9 +28,9 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
 using Terraria.Localization;
 
-namespace Avalon.WorldGeneration.secretSeeds
+namespace Avalon.WorldGeneration.SecretSeeds
 {
-	public class retroWorldGen : ModHook
+	public class RetroWorldGen : ModHook
 	{
 		internal static bool isGeneratingOldWorld = false;
 

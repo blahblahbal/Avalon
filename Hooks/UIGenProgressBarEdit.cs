@@ -1,7 +1,7 @@
 using Avalon.Common;
 using Avalon.Reflection;
 using Avalon.WorldGeneration.Enums;
-using Avalon.WorldGeneration.secretSeeds;
+using Avalon.WorldGeneration.SecretSeeds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
@@ -34,7 +34,7 @@ public class UIGenProgressBarEdit : ModHook
 	private void EditRetroText(On_UIWorldLoad.orig_DrawSelf orig, UIWorldLoad self, SpriteBatch spriteBatch)
 	{
 		orig.Invoke(self, spriteBatch);
-		if (retroWorldGen.isGeneratingOldWorld)
+		if (RetroWorldGen.isGeneratingOldWorld)
 		{
 			UIHeader _progressMessage = self.GetProgressMessage();
 			_progressMessage.Text = Main.statusText;
@@ -43,7 +43,7 @@ public class UIGenProgressBarEdit : ModHook
 
 	private void PreventDrawingRetro(On_UIGenProgressBar.orig_DrawSelf orig, UIGenProgressBar self, SpriteBatch spriteBatch)
 	{
-		if (!retroWorldGen.isGeneratingOldWorld)
+		if (!RetroWorldGen.isGeneratingOldWorld)
 		{
 			orig.Invoke(self, spriteBatch);
 		}

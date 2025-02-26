@@ -13,7 +13,7 @@ using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Fish;
 using Avalon.Items.Consumables;
-using Avalon.Items.OreChunks;
+using Avalon.Items.Material.OreChunks;
 using Terraria.Localization;
 using Avalon.Common;
 

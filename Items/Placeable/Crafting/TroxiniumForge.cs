@@ -1,4 +1,4 @@
-using Avalon.Items.OreChunks;
+using Avalon.Items.Material.OreChunks;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;

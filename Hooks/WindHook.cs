@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
-using Avalon.Compatability.Thorium.Tiles;
+using Avalon.ModSupport.Thorium.Tiles;
 
 namespace Avalon.Hooks
 {

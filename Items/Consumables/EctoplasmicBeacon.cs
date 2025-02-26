@@ -14,7 +14,6 @@ public class EctoplasmicBeacon : ModItem
     {
         Item.ResearchUnlockCount = 3;
     }
-
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

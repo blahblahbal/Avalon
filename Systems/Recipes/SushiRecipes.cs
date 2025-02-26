@@ -6,7 +6,7 @@ using Avalon.Items.Material.Ores;
 using Avalon.Items.Other;
 using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Tile;
-using Avalon.Items.Tokens;
+using Avalon.ModSupport.Tokens;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
@@ -136,25 +136,25 @@ public static class SushiRecipes
 		//Recipe.Create(imk.Find<ModItem>("JungleToken").Type).AddIngredient(ModContent.ItemType<TropicsToken>()).AddTile(TileID.MythrilAnvil).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<TropicsToken>()).AddIngredient(imk.Find<ModItem>("JungleToken").Type).AddTile(TileID.MythrilAnvil).DisableDecraft().Register();
 		
-		//Recipe.Create(ModContent.ItemType<Items.Weapons.Magic.MagicCleaver>()).AddIngredient(ModContent.ItemType<Items.Tokens.SuperhardmodeToken>(), 25).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Weapons.Ranged.FleshBoiler>()).AddIngredient(ModContent.ItemType<Items.Tokens.SuperhardmodeToken>(), 25).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Accessories.BubbleBoost>()).AddIngredient(ModContent.ItemType<Items.Tokens.SuperhardmodeToken>(), 25).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Weapons.Magic.MagicCleaver>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 25).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Weapons.Ranged.FleshBoiler>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 25).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Accessories.BubbleBoost>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 25).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		
-		//Recipe.Create(ModContent.ItemType<Items.Material.SpikedBlastShell>()).AddIngredient(ModContent.ItemType<Items.Tokens.SuperhardmodeToken>(), 10).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Material.PointingLaser>()).AddIngredient(ModContent.ItemType<Items.Tokens.SuperhardmodeToken>(), 50).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Material.AlienDevice>()).AddIngredient(ModContent.ItemType<Items.Tokens.SuperhardmodeToken>(), 60).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Material.Rock>()).AddIngredient(ModContent.ItemType<Items.Tokens.SuperhardmodeToken>(), 40).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Material.SpikedBlastShell>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 10).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Material.PointingLaser>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 50).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Material.AlienDevice>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 60).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Material.Rock>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 40).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		Recipe.Create(ModContent.ItemType<GhostintheMachine>()).AddIngredient(ModContent.ItemType<HellcastleToken>(), 10).AddTile(ModContent.TileType<Tiles.CaesiumForge>()).DisableDecraft().Register();
 		Recipe.Create(ModContent.ItemType<Boomlash>()).AddIngredient(ModContent.ItemType<HellcastleToken>(), 30).AddTile(ModContent.TileType<Tiles.CaesiumForge>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Weapons.Magic.Terraspin>()).AddIngredient(ModContent.ItemType<Items.Tokens.MechastingToken>(), 60).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Weapons.Ranged.QuadroCannon>()).AddIngredient(ModContent.ItemType<Items.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Weapons.Summon.ReflectorStaff>()).AddIngredient(ModContent.ItemType<Items.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Accessories.DragonStone>()).AddIngredient(ModContent.ItemType<Items.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Weapons.Melee.Infernasword>()).AddIngredient(ModContent.ItemType<Items.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Weapons.Magic.MagmafrostBolt>()).AddIngredient(ModContent.ItemType<Items.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Weapons.Magic.Terraspin>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 60).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Weapons.Ranged.QuadroCannon>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Weapons.Summon.ReflectorStaff>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Accessories.DragonStone>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Weapons.Melee.Infernasword>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Weapons.Magic.MagmafrostBolt>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<HellcastleToken>()).AddIngredient(ModContent.ItemType<SuperhardmodeToken>()).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<SuperhardmodeToken>()).AddIngredient(ModContent.ItemType<DarkMatterToken>()).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		//Recipe.Create(ModContent.ItemType<Items.Accessories.VampireHarpyWings>()).AddIngredient(ModContent.ItemType<Items.Tokens.DarkMatterToken>(), 75).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
+		//Recipe.Create(ModContent.ItemType<Items.Accessories.VampireHarpyWings>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.DarkMatterToken>(), 75).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<DarkMatterToken>()).AddIngredient(ModContent.ItemType<MechastingToken>()).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 
 	}

@@ -38,40 +38,40 @@ public class MusicBoxes : ModTile
         switch (t.TileFrameY / 36)
         {
             case 0:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxContagion>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxContagion>();
                 break;
             case 1:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxBacteriumPrime>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxBacteriumPrime>();
                 break;
             case 2:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxArmageddonSlime>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxArmageddonSlime>();
                 break;
             case 3:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeak>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDesertBeak>();
                 break;
             case 4:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxUndergroundContagion>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxUndergroundContagion>();
                 break;
             case 5:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxTropics>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxTropics>();
                 break;
             case 6:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxPhantasm>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxPhantasm>();
                 break;
             case 7:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxDarkMatter>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDarkMatter>();
                 break;
             case 8:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxHellCastle>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxHellCastle>();
                 break;
             case 9:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxTuhrtlOutpost>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxTuhrtlOutpost>();
                 break;
             case 10:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxSkyFortress>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxSkyFortress>();
                 break;
             case 11:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeakOtherworldly>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDesertBeakOtherworldly>();
                 break;
         }
         yield return new Item(item);
@@ -160,40 +160,40 @@ public class MusicBoxes : ModTile
         switch (Main.tile[i, j].TileFrameY / 36)
         {
             case 0:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxContagion>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxContagion>();
                 break;
             case 1:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxBacteriumPrime>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxBacteriumPrime>();
                 break;
             case 2:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxArmageddonSlime>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxArmageddonSlime>();
                 break;
             case 3:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeak>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDesertBeak>();
                 break;
             case 4:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxUndergroundContagion>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxUndergroundContagion>();
                 break;
             case 5:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxTropics>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxTropics>();
                 break;
             case 6:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxPhantasm>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxPhantasm>();
                 break;
             case 7:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxDarkMatter>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDarkMatter>();
                 break;
             case 8:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxHellCastle>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxHellCastle>();
                 break;
             case 9:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxTuhrtlOutpost>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxTuhrtlOutpost>();
                 break;
             case 10:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxSkyFortress>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxSkyFortress>();
                 break;
             case 11:
-                item = ModContent.ItemType<Items.MusicBoxes.MusicBoxDesertBeakOtherworldly>();
+                item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDesertBeakOtherworldly>();
                 break;
         }
         Player player = Main.LocalPlayer;

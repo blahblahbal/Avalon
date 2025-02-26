@@ -491,7 +491,7 @@ public class HerbologyUIState : ExxoUIState
 
         if (ExxoAvalonOrigins.ThoriumContentEnabled)
         {
-            Compatability.Thorium.ThoriumHerbologyAdditions.Initialize();
+            ModSupport.Thorium.ThoriumHerbologyAdditions.Initialize();
         }
         RefreshHerbList(herbExchange.Toggle.Toggled);
         RefreshPotionList(potionExchange.Toggle.Toggled);

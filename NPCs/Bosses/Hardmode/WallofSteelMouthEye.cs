@@ -15,11 +15,6 @@ namespace Avalon.NPCs.Bosses.Hardmode;
 
 internal class WallofSteelMouthEye : ModNPC
 {
-	public override bool IsLoadingEnabled(Mod mod)
-	{
-		return false;
-	}
-
 	private byte ModeChangeCounter = 0;
 	private byte Phase = 0;
 	private byte Phase1FireballCounter = 0;
