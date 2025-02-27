@@ -86,8 +86,6 @@ public class ExxoAvalonOrigins : Mod
     /// </summary>
     public static readonly Mod? MusicMod = ModLoader.TryGetMod("AvalonMusic", out Mod obtainedMod) ? obtainedMod : null;
 
-    public static HellcastleFogSystem hellcastleFog = new HellcastleFogSystem();
-
     /// <summary>
     ///     Gets the instance of the Tokens mod.
     /// </summary>
@@ -97,6 +95,13 @@ public class ExxoAvalonOrigins : Mod
 	///     Gets the instance of the Biome Lava mod.
 	/// </summary>
 	public static readonly Mod? BiomeLava = ModLoader.TryGetMod("BiomeLava", out Mod obtainedMod) ? obtainedMod : null;
+
+	/// <summary>
+	///     Gets the instance of the Ophioid mod.
+	/// </summary>
+	public static readonly Mod? OphioidMod = ModLoader.TryGetMod("OphioidMod", out Mod obtainedMod) ? obtainedMod : null;
+
+	public static HellcastleFogSystem hellcastleFog = new HellcastleFogSystem();
 
 	public static Color LastDiscoRGB;
 

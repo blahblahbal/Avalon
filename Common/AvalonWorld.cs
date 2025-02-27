@@ -332,9 +332,17 @@ public class AvalonWorld : ModSystem
 			}
 		}
 		WorldGen.AddUpAlignmentCounts(true);
+
+		#region Ophioid boss message stuff
+		// the string is unset in the OnWorldUnload method in CreepingColony.cs
+		if (ExxoAvalonOrigins.OphioidMod != null && WorldEvil == WorldEvil.Contagion)
+		{
+			ExxoAvalonOrigins.OphioidMod.Call("SetCustomWorldEvilForDeathMessage", Language.GetText("Mods.Avalon.Biomes.Contagion.DisplayName"));
+		}
+		#endregion
 	}
 
-    public override void PreUpdateWorld()
+	public override void PreUpdateWorld()
     {
         Main.tileSolidTop[ModContent.TileType<FallenStarTile>()] = Main.dayTime;
     }
