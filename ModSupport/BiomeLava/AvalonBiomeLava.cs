@@ -20,10 +20,10 @@ namespace Avalon.ModSupport.BiomeLava
 
 			Mod mod = Mod;
 			string name = "contagionlava";
-			string texture = Mod.Name + "/Compatability/BiomeLava/ContagionLavaStyle";
-			string block = Mod.Name + "/Compatability/BiomeLava/ContagionLavaStyle_Block";
-			string slope = Mod.Name + "/Compatability/BiomeLava/ContagionLavaStyle_Slope";
-			string waterfall = Mod.Name + "/Compatability/BiomeLava/ContagionLavaStyle_Waterfall";
+			string texture = Mod.Name + "/ModSupport/BiomeLava/ContagionLavaStyle";
+			string block = Mod.Name + "/ModSupport/BiomeLava/ContagionLavaStyle_Block";
+			string slope = Mod.Name + "/ModSupport/BiomeLava/ContagionLavaStyle_Slope";
+			string waterfall = Mod.Name + "/ModSupport/BiomeLava/ContagionLavaStyle_Waterfall";
 			Func<int> dust = GetSplashDust;
 			Func<int> gore = GetDropletGore;
 			Func<int, int, float, float, float, Vector3> color = ModifyLight;
@@ -97,10 +97,10 @@ namespace Avalon.ModSupport.BiomeLava
 
 			Mod mod = Mod;
 			string name = "phantomovergrowthlava";
-			string texture = Mod.Name + "/Compatability/BiomeLava/PhantomOvergrowthLavaStyle";
-			string block = Mod.Name + "/Compatability/BiomeLava/PhantomOvergrowthLavaStyle_Block";
-			string slope = Mod.Name + "/Compatability/BiomeLava/PhantomOvergrowthLavaStyle_Slope";
-			string waterfall = Mod.Name + "/Compatability/BiomeLava/PhantomOvergrowthLavaStyle_Waterfall";
+			string texture = Mod.Name + "/ModSupport/BiomeLava/PhantomOvergrowthLavaStyle";
+			string block = Mod.Name + "/ModSupport/BiomeLava/PhantomOvergrowthLavaStyle_Block";
+			string slope = Mod.Name + "/ModSupport/BiomeLava/PhantomOvergrowthLavaStyle_Slope";
+			string waterfall = Mod.Name + "/ModSupport/BiomeLava/PhantomOvergrowthLavaStyle_Waterfall";
 			Func<int> dust = GetSplashDust;
 			Func<int> gore = GetDropletGore;
 			Func<int, int, float, float, float, Vector3> color = ModifyLight;
@@ -174,10 +174,10 @@ namespace Avalon.ModSupport.BiomeLava
 
 			Mod mod = Mod;
 			string name = "caesiumblastplainslava";
-			string texture = Mod.Name + "/Compatability/BiomeLava/CaesiumBlastplainsLavaStyle";
-			string block = Mod.Name + "/Compatability/BiomeLava/CaesiumBlastplainsLavaStyle_Block";
-			string slope = Mod.Name + "/Compatability/BiomeLava/CaesiumBlastplainsLavaStyle_Slope";
-			string waterfall = Mod.Name + "/Compatability/BiomeLava/CaesiumBlastplainsLavaStyle_Waterfall";
+			string texture = Mod.Name + "/ModSupport/BiomeLava/CaesiumBlastplainsLavaStyle";
+			string block = Mod.Name + "/ModSupport/BiomeLava/CaesiumBlastplainsLavaStyle_Block";
+			string slope = Mod.Name + "/ModSupport/BiomeLava/CaesiumBlastplainsLavaStyle_Slope";
+			string waterfall = Mod.Name + "/ModSupport/BiomeLava/CaesiumBlastplainsLavaStyle_Waterfall";
 			Func<int> dust = GetSplashDust;
 			Func<int> gore = GetDropletGore;
 			Func<int, int, float, float, float, Vector3> color = ModifyLight;
@@ -251,10 +251,10 @@ namespace Avalon.ModSupport.BiomeLava
 
 			Mod mod = Mod;
 			string name = "savannalava";
-			string texture = Mod.Name + "/Compatability/BiomeLava/SavannaLavaStyle";
-			string block = Mod.Name + "/Compatability/BiomeLava/SavannaLavaStyle_Block";
-			string slope = Mod.Name + "/Compatability/BiomeLava/SavannaLavaStyle_Slope";
-			string waterfall = Mod.Name + "/Compatability/BiomeLava/SavannaLavaStyle_Waterfall";
+			string texture = Mod.Name + "/ModSupport/BiomeLava/SavannaLavaStyle";
+			string block = Mod.Name + "/ModSupport/BiomeLava/SavannaLavaStyle_Block";
+			string slope = Mod.Name + "/ModSupport/BiomeLava/SavannaLavaStyle_Slope";
+			string waterfall = Mod.Name + "/ModSupport/BiomeLava/SavannaLavaStyle_Waterfall";
 			Func<int> dust = GetSplashDust;
 			Func<int> gore = GetDropletGore;
 			Func<int, int, float, float, float, Vector3> color = ModifyLight;

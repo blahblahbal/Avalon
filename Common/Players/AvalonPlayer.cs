@@ -2325,7 +2325,17 @@ public class AvalonPlayer : ModPlayer
     }
     public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
     {
-        if (Berserk)
+		#region it burns x4 achievement
+		if ((target.HasBuff(BuffID.OnFire) || target.HasBuff(BuffID.OnFire3)) && target.HasBuff(BuffID.CursedInferno) && (target.HasBuff(BuffID.Frostburn) || target.HasBuff(BuffID.Frostburn2)) && target.HasBuff(BuffID.ShadowFlame))
+		{
+			if (ExxoAvalonOrigins.Achievements != null)
+			{
+				ExxoAvalonOrigins.Achievements.Call("Event", "ItBurnsBurnsBurnsBurns");
+			}
+		}
+		#endregion
+
+		if (Berserk)
         {
             MeleeCritDamage += 1.5f;
             MaxMeleeCrit -= 20;

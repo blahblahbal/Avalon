@@ -23,9 +23,9 @@ namespace Avalon.ModSupport.Thorium.Common
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			cursedSickle = ModContent.Request<Texture2D>("Avalon/Compatability/Thorium/Assets/Projectiles/CursedSickle");
-			ichorSickle = ModContent.Request<Texture2D>("Avalon/Compatability/Thorium/Assets/Projectiles/IchorSickle");
-			pathogenSickle = ModContent.Request<Texture2D>("Avalon/Compatability/Thorium/Assets/Projectiles/PathogenSickle");
+			cursedSickle = ModContent.Request<Texture2D>("Avalon/ModSupport/Thorium/Assets/Projectiles/CursedSickle");
+			ichorSickle = ModContent.Request<Texture2D>("Avalon/ModSupport/Thorium/Assets/Projectiles/IchorSickle");
+			pathogenSickle = ModContent.Request<Texture2D>("Avalon/ModSupport/Thorium/Assets/Projectiles/PathogenSickle");
 			ProjectileID.Sets.TrailCacheLength[ModContent.ProjectileType<CursedSicklePro>()] = 6;
 			ProjectileID.Sets.TrailingMode[ModContent.ProjectileType<CursedSicklePro>()] = 2;
 			ProjectileID.Sets.TrailCacheLength[ModContent.ProjectileType<IchorSicklePro>()] = 6;

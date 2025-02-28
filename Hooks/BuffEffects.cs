@@ -4,6 +4,7 @@ using Avalon.Buffs.Debuffs;
 using Avalon.Common;
 using Avalon.Common.Players;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
@@ -120,6 +121,16 @@ public class BuffEffects : ModHook
 
     private static void OnAddBuffNPC(On_NPC.orig_AddBuff orig, NPC self, int type, int time, bool quiet = false)
     {
+		if (ExxoAvalonOrigins.Achievements != null)
+		{
+			if (((self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) && self.HasBuff(BuffID.CursedInferno) && (self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) && type == BuffID.ShadowFlame) ||
+			(self.HasBuff(BuffID.ShadowFlame) && self.HasBuff(BuffID.CursedInferno) && (self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) && (type == BuffID.OnFire || type == BuffID.OnFire3)) ||
+			(self.HasBuff(BuffID.ShadowFlame) && self.HasBuff(BuffID.CursedInferno) && (self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) && (type == BuffID.Frostburn || type == BuffID.Frostburn2)) ||
+			((self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) && self.HasBuff(BuffID.ShadowFlame) && (self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) && type == BuffID.CursedInferno))
+			{
+				ExxoAvalonOrigins.Achievements.Call("Event", "ItBurnsBurnsBurnsBurns");
+			}
+		}
         for (int j = 0; j < 5; j++)
         {
             if (self.buffType[j] == type)

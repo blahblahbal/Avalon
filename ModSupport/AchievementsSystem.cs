@@ -31,5 +31,6 @@ internal class AchievementsSystem : ModSystem
 		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Hellevator", AchievementCategory.Explorer, "Avalon/Assets/Textures/Achievements/Hellevator", null, false, false, 12f, new string[] { "Event_Hellevator" });
 
 		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Unification", AchievementCategory.Collector, "Avalon/Assets/Textures/Achievements/Unification", null, false, false, 41.5f, new string[] { "Craft_" + ModContent.ItemType<VertexOfExcalibur>() });
+		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "It Burns, Burns, Burns, Burns!", AchievementCategory.Slayer, "Avalon/Assets/Textures/Achievements/StaminaCrystal", null, false, false, 36.5f, new string[] { "Event_ItBurnsBurnsBurnsBurns" });
 	}
 }
