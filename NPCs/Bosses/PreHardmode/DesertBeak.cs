@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Avalon.Common;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy.Relics;
@@ -23,8 +22,6 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Avalon.Items.Material.Ores;
 using Avalon.DropConditions;
-using Terraria.Chat;
-using ReLogic.Content;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 
@@ -36,7 +33,7 @@ public class DesertBeak : ModNPC
 	public override void SetStaticDefaults()
 	{
 		NPCID.Sets.MPAllowedEnemies[Type] = true;
-
+		NPCID.Sets.BossBestiaryPriority.Add(Type);
 		Main.npcFrameCount[NPC.type] = 8;
 
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
