@@ -45,7 +45,7 @@ public class ChaosBolt : ModProjectile
             Projectile.velocity.Y = 16f;
             return;
         }
-        if (Main.tile[Projectile.Center.ToTileCoordinates()].HasTile)
+        if (Main.tile[Projectile.Center.ToTileCoordinates()].HasUnactuatedTile)
         {
             Projectile.ai[2]++;
             dustAmount = 1;
