@@ -21,8 +21,10 @@ class AdvFrenzyPotion : FrenzyPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<FrenzyPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<FrenzyPotion>(), ModContent.BuffType<AdvFrenzy>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

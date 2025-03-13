@@ -22,8 +22,10 @@ class AdvCreativityPotion : ModItem
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<CreativityPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<CreativityPotion>(), ModContent.BuffType<AdvCreativity>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         Item.width = 20;
         Item.height = 20;

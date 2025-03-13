@@ -30,6 +30,7 @@ using ThoriumMod.Items.Thorium;
 using ThoriumMod.Items.ThrownItems;
 using ThoriumMod.NPCs;
 using ThoriumMod.NPCs.Depths;
+using Avalon.Items.Placeable.Crafting;
 
 namespace Avalon.ModSupport.Thorium;
 
@@ -290,6 +291,13 @@ public class ThoriumTweaksRecipeSystem : ModSystem
     }
     public override void AddRecipes()
     {
+		// thorium anvil
+		Recipe.Create(ModContent.ItemType<ThoriumAnvil>())
+			.AddIngredient(ModContent.ItemType<NickelAnvil>())
+			.AddIngredient(ModContent.ItemType<ThoriumOre>(), 10)
+			.AddTile(TileID.WorkBenches)
+			.Register();
+
         // Enchanted items
         Recipe.Create(ModContent.ItemType<EnchantedPickaxe>())
             .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.EnchantedBar>(), 8)

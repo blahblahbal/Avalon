@@ -22,8 +22,10 @@ class AdvBouncingFlamePotion : BouncingFlamePotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<BouncingFlamePotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<BouncingFlamePotion>(), ModContent.BuffType<AdvBouncingFlame>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

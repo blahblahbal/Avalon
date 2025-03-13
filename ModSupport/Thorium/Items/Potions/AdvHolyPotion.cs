@@ -23,8 +23,10 @@ class AdvHolyPotion : HolyPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<HolyPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<HolyPotion>(), ModContent.BuffType<AdvHoly>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

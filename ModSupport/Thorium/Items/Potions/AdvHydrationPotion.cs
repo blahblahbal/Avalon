@@ -23,8 +23,10 @@ class AdvHydrationPotion : HydrationPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<HydrationBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<HydrationPotion>(), ModContent.BuffType<AdvHydration>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

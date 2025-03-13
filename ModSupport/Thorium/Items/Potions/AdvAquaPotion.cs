@@ -22,8 +22,10 @@ class AdvAquaPotion : AquaPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<AquaAffinity>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<AquaPotion>(), ModContent.BuffType<AdvAquaAffinity>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

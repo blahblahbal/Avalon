@@ -22,8 +22,10 @@ class AdvArcanePotion : ArcanePotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ArcanePotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<ArcanePotion>(), ModContent.BuffType<AdvArcane>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

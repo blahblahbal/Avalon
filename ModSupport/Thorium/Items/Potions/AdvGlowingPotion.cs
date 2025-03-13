@@ -22,8 +22,10 @@ class AdvGlowingPotion : GlowingPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<GlowingPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<GlowingPotion>(), ModContent.BuffType<AdvGlowing>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

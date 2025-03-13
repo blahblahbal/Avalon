@@ -10450,7 +10450,7 @@ Mods: {
 
 			AmberShardBuff: {
 				DisplayName: Attack Speed Up
-				Description: 15% increased damage
+				Description: 15% increased attack speed
 			}
 
 			AmethystShardBuff: {
@@ -10544,7 +10544,7 @@ Mods: {
 			}
 
 			Strong: {
-				DisplayName: Strong
+				DisplayName: Strength
 				Description: Increased stats
 			}
 
@@ -10599,7 +10599,7 @@ Mods: {
 			}
 
 			AdvCalming: {
-				DisplayName: Advanced Calming
+				DisplayName: Advanced Calm
 				Description: Reduced enemy aggression
 			}
 

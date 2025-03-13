@@ -22,8 +22,10 @@ class AdvBloodPotion : BloodPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<BloodRush>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<BloodPotion>(), ModContent.BuffType<AdvBloodRush>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

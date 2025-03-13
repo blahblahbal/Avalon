@@ -22,8 +22,10 @@ class AdvAssassinPotion : AssassinPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<AssassinPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<AssassinPotion>(), ModContent.BuffType<AdvAssassin>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

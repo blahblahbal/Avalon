@@ -22,8 +22,10 @@ class AdvKineticPotion : KineticPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<KineticPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<KineticPotion>(), ModContent.BuffType<AdvKinetic>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

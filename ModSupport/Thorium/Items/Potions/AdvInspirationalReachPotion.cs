@@ -22,8 +22,10 @@ class AdvInspirationalReachPotion : ModItem
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<InspirationReachPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<InspirationReachPotion>(), ModContent.BuffType<AdvInspirationalReach>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         Item.width = 20;
         Item.height = 20;

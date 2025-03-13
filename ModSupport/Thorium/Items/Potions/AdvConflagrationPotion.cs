@@ -22,8 +22,10 @@ class AdvConflagrationPotion : ConflagrationPotion
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ConflagrationPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<ConflagrationPotion>(), ModContent.BuffType<AdvConflagration>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         base.SetDefaults();
         Item.rare = ItemRarityID.Lime;

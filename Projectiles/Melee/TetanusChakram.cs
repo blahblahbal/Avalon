@@ -9,6 +9,7 @@ namespace Avalon.Projectiles.Melee
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.ThornChakram);
+			Projectile.width = Projectile.height = 14;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

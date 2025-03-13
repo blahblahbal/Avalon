@@ -22,8 +22,10 @@ class AdvEarwormPotion : ModItem
         Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<EarwormPotionBuff>());
         Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<EarwormPotion>(), ModContent.BuffType<AdvEarworm>());
     }
-
-    public override void SetDefaults()
+	public override void AddRecipes()
+	{
+	}
+	public override void SetDefaults()
     {
         Item.width = 20;
         Item.height = 20;
