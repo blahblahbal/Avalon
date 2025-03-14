@@ -42,7 +42,7 @@ public class CalculatorSpectacles : ModItem
 	//public override void AddRecipes()
 	//{
 	//	CreateRecipe()
-	//		.AddRecipeGroup("Avalon:SilverBar", 10)
+	//		.AddRecipeGroup("SilverBar", 10)
 	//		.AddIngredient(ItemID.Lens, 2)
 	//		.AddIngredient()
 	//}

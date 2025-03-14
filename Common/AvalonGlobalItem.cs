@@ -210,6 +210,7 @@ public class AvalonGlobalItem : GlobalItem
 
         Item.staff[ItemID.Vilethorn] = true;
 		Item.staff[ItemID.HiveWand] = true;
+		ItemID.Sets.CanGetPrefixes[ItemID.HiveWand] = true;
     }
 	public override void PostUpdate(Item item)
 	{

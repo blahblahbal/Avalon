@@ -24,10 +24,10 @@ class Timechanger : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddRecipeGroup("Avalon:GoldBar", 30)
+            .AddRecipeGroup("GoldBar", 30)
             .AddIngredient(ItemID.SoulofLight, 15)
             .AddIngredient(ItemID.SoulofNight, 15)
-            .AddRecipeGroup("Avalon:Tier3Watch")
+            .AddRecipeGroup("GoldWatch")
             .AddTile(TileID.MythrilAnvil)
             .Register();
     }

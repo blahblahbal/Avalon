@@ -24,7 +24,7 @@ class Rainbringer : ModItem
     {
         CreateRecipe()
             .AddIngredient(ItemID.RainCloud, 50)
-            .AddRecipeGroup("Avalon:CopperBar", 10)
+            .AddRecipeGroup("CopperBar", 10)
             .AddIngredient(ItemID.SoulofNight, 10)
             .AddTile(TileID.MythrilAnvil)
             .Register();

@@ -25,7 +25,7 @@ public class Jukebox : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddRecipeGroup("Avalon:MusicBoxes", 3)
+            .AddRecipeGroup("MusicBoxes", 3)
             .AddIngredient(ItemID.LunarBar, 20)
             .AddRecipeGroup(RecipeGroupID.Wood, 30)
             .AddTile(TileID.TinkerersWorkbench)

@@ -17,7 +17,7 @@ class PocketStation : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddRecipeGroup("Avalon:WorkBenches")
+            .AddRecipeGroup("WorkBenches")
             .AddIngredient(ItemID.MeteoriteBar, 10)
             .AddIngredient(ItemID.Wire, 10)
             .AddTile(TileID.TinkerersWorkbench)

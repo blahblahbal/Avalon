@@ -87,7 +87,7 @@ public class VanillaItemRecipeCreator : ModSystem
 
 		#region Anvils
 		Recipe.Create(ItemID.Aglet)
-			.AddRecipeGroup("Avalon:CopperBar")
+			.AddRecipeGroup("CopperBar")
 			.AddRecipeGroup("Wood", 6)
 			.AddTile(TileID.Anvils)
 			.Register();
@@ -365,7 +365,7 @@ public class VanillaItemRecipeCreator : ModSystem
 
 		Recipe.Create(ItemID.BandofRegeneration)
 			.AddIngredient(ItemID.LifeCrystal, 3)
-			.AddRecipeGroup("Avalon:GoldBar", 4)
+			.AddRecipeGroup("GoldBar", 4)
 			.AddIngredient(ItemID.HealingPotion, 2)
 			.AddTile(TileID.TinkerersWorkbench)
 			.Register();

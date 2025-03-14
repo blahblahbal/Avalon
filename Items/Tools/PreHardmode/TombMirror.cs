@@ -35,8 +35,8 @@ public class TombMirror : ModItem
     {
         Recipe.Create(Type)
             .AddIngredient(ItemID.RecallPotion, 3)
-            .AddRecipeGroup("Avalon:Tombstones", 10)
-            .AddRecipeGroup("Avalon:Herbs", 5)
+            .AddRecipeGroup("Tombstones", 10)
+            .AddRecipeGroup("Herbs", 5)
             .AddTile(TileID.Furnaces)
             .Register();
     }

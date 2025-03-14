@@ -53,7 +53,7 @@ public class RecipeChanger : ModSystem
                     if (recipe.TryGetIngredient(ItemID.GoldWatch, out Item ing))
                     {
                         recipe.RemoveIngredient(ing);
-                        recipe.AddRecipeGroup("Avalon:Tier3Watch");
+                        recipe.AddRecipeGroup("GoldWatch");
                     }
                     if (recipe.TryGetIngredient(ItemID.PlatinumWatch, out Item ing2))
                     {
@@ -66,7 +66,7 @@ public class RecipeChanger : ModSystem
                     if (recipe.TryGetIngredient(ItemID.GoldBar, out Item ing))
                     {
                         recipe.RemoveIngredient(ing);
-                        recipe.AddRecipeGroup("Avalon:GoldBar", 8);
+                        recipe.AddRecipeGroup("GoldBar", 8);
                     }
                     if (recipe.TryGetIngredient(ItemID.PlatinumBar, out Item ing2))
                     {
@@ -121,7 +121,7 @@ public class RecipeChanger : ModSystem
                     if (recipe.TryGetIngredient(ItemID.DemoniteBar, out Item ing))
                     {
                         recipe.RemoveIngredient(ing);
-                        recipe.AddRecipeGroup("Avalon:DemoniteBar", 12);
+                        recipe.AddRecipeGroup("DemoniteBar", 12);
                     }
                     if (recipe.TryGetIngredient(ItemID.CrimtaneBar, out Item ing2))
                     {
@@ -134,7 +134,7 @@ public class RecipeChanger : ModSystem
                     if (recipe.TryGetIngredient(ItemID.DemoniteBar, out Item ing))
                     {
                         recipe.RemoveIngredient(ing);
-                        recipe.AddRecipeGroup("Avalon:DemoniteBar", 3);
+                        recipe.AddRecipeGroup("DemoniteBar", 3);
                     }
                     if (recipe.TryGetIngredient(ItemID.CrimtaneBar, out Item ing2))
                     {

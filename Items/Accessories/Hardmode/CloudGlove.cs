@@ -40,7 +40,7 @@ public class CloudGlove : ModItem
             .AddIngredient(ItemID.Silk, 15)
             .AddIngredient(ItemID.Cloud, 25)
             .AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
-            .AddRecipeGroup("Avalon:GoldBar", 5)
+            .AddRecipeGroup("GoldBar", 5)
             .AddIngredient(ItemID.SunplateBlock, 10)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
@@ -49,7 +49,7 @@ public class CloudGlove : ModItem
             .AddIngredient(ItemID.Silk, 15)
             .AddIngredient(ItemID.Cloud, 25)
             .AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
-            .AddRecipeGroup("Avalon:GoldBar", 5)
+            .AddRecipeGroup("GoldBar", 5)
             .AddIngredient(ModContent.ItemType<Placeable.Tile.MoonplateBlock>(), 10)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
@@ -58,7 +58,7 @@ public class CloudGlove : ModItem
             .AddIngredient(ItemID.Silk, 15)
             .AddIngredient(ItemID.Cloud, 25)
             .AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
-            .AddRecipeGroup("Avalon:GoldBar", 5)
+            .AddRecipeGroup("GoldBar", 5)
             .AddIngredient(ModContent.ItemType<Placeable.Tile.DuskplateBlock>(), 10)
             .AddTile(TileID.TinkerersWorkbench)
             .Register();

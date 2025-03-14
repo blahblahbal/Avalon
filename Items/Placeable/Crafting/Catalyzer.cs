@@ -30,9 +30,9 @@ public class Catalyzer : ModItem
     //{
     //    Recipe.Create(Type)
     //        .AddRecipeGroup(RecipeGroupID.Wood, 20)
-    //        .AddRecipeGroup("Avalon:EvilBar", 5)
+    //        .AddRecipeGroup("DemoniteBar", 5)
     //        .AddRecipeGroup(RecipeGroupID.IronBar, 15)
-    //        .AddRecipeGroup("Avalon:WorkBenches")
+    //        .AddRecipeGroup("WorkBenches")
     //        .AddCondition(Condition.NearShimmer)
     //        .AddTile(TileID.Anvils)
     //        .Register();

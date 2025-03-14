@@ -36,7 +36,7 @@ class EnchantedBar : ModItem
     {
         Recipe.Create(Type)
             .AddIngredient(ItemID.FallenStar, 2)
-            .AddRecipeGroup("Avalon:GoldBar")
+            .AddRecipeGroup("GoldBar")
             .AddTile(TileID.Furnaces).Register();
     }
 }

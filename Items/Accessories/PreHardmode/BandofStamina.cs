@@ -30,7 +30,7 @@ public class BandofStamina : ModItem
     {
         Recipe.Create(Type)
             .AddIngredient(ModContent.ItemType<StaminaCrystal>(), 3)
-            .AddRecipeGroup("Avalon:GoldBar", 4)
+            .AddRecipeGroup("GoldBar", 4)
             .AddIngredient(ModContent.ItemType<StaminaPotion>(), 2)
             .AddTile(TileID.TinkerersWorkbench).Register();
     }

@@ -301,7 +301,7 @@ public class ThoriumTweaksRecipeSystem : ModSystem
         // Enchanted items
         Recipe.Create(ModContent.ItemType<EnchantedPickaxe>())
             .AddIngredient(ModContent.ItemType<Avalon.Items.Material.Bars.EnchantedBar>(), 8)
-            .AddRecipeGroup("Avalon:GoldPickaxe")
+            .AddRecipeGroup("GoldPickaxe")
             .AddTile(TileID.Anvils)
             .Register();
 

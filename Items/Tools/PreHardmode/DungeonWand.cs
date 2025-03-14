@@ -21,7 +21,7 @@ class DungeonWand : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddRecipeGroup("Avalon:DungeonBrick", 50)
+            .AddRecipeGroup("DungeonBrick", 50)
             .AddIngredient(ItemID.GoldenKey, 2)
             .AddIngredient(ItemID.Bone, 20)
             .AddTile(TileID.BoneWelder)

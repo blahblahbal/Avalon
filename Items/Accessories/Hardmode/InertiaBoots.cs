@@ -30,7 +30,7 @@ class InertiaBoots : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddRecipeGroup("Avalon:Wings")
+            .AddRecipeGroup("Wings")
             .AddIngredient(ItemID.FrostsparkBoots)
             .AddIngredient(ItemID.BlackBelt)
             .AddIngredient(ItemID.LunarBar, 2)

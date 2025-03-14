@@ -15,6 +15,10 @@ public class PoisonSpike : ModTile
 		HitSound = SoundID.Tink;
 		DustType = DustID.Grass;
 	}
+	public override bool IsTileDangerous(int i, int j, Player player)
+	{
+		return true;
+	}
 	public override bool Slope(int i, int j)
 	{
 		return false;

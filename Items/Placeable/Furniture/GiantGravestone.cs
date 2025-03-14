@@ -25,7 +25,7 @@ public class GiantGravestone : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddRecipeGroup("Avalon:Tombstones", 7)
+            .AddRecipeGroup("Tombstones", 7)
             .AddTile(TileID.HeavyWorkBench)
             .Register();
     }

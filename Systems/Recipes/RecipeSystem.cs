@@ -157,7 +157,7 @@ public class RecipeSystem : ModSystem
         int[] boxes = boxesList.ToArray();
 
         var groupMusicBoxes = new RecipeGroup(() => $"{any} Music Box", boxes);
-        RecipeGroup.RegisterGroup("Avalon:MusicBoxes", groupMusicBoxes);
+        RecipeGroup.RegisterGroup("MusicBoxes", groupMusicBoxes);
 
         #region Balloons
         var groupFartBalloons = new RecipeGroup(() => $"{any} Fart Balloon", new int[]

@@ -30,7 +30,7 @@ public class RubberGloves : ModItem
     //{
     //    Recipe.Create(Type).AddTile(TileID.WorkBenches)
     //        .AddIngredient(ModContent.ItemType<StaminaCrystal>(), 3)
-    //        .AddRecipeGroup("Avalon:GoldBar", 4)
+    //        .AddRecipeGroup("GoldBar", 4)
     //        .AddIngredient(ModContent.ItemType<StaminaPotion>(), 2)
     //        .AddTile(TileID.TinkerersWorkbench).Register();
     //}

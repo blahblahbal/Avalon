@@ -25,7 +25,7 @@ class Moonphaser : ModItem
             .AddIngredient(ItemID.Lens, 5)
             .AddIngredient(ItemID.SoulofLight, 10)
             .AddIngredient(ItemID.SoulofNight, 10)
-            .AddRecipeGroup("Avalon:GoldBar", 20)
+            .AddRecipeGroup("GoldBar", 20)
             .AddIngredient(ItemID.BlackLens)
             .AddIngredient(ModContent.ItemType<Material.BloodshotLens>(), 4)
             .AddTile(TileID.WorkBenches)

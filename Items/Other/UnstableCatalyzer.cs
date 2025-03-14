@@ -23,9 +23,9 @@ public class UnstableCatalyzer : ModItem
     {
         Recipe.Create(Type)
             .AddRecipeGroup(RecipeGroupID.Wood, 20)
-            .AddRecipeGroup("Avalon:DemoniteBar", 5)
+            .AddRecipeGroup("DemoniteBar", 5)
             .AddRecipeGroup(RecipeGroupID.IronBar, 15)
-            .AddRecipeGroup("Avalon:WorkBenches")
+            .AddRecipeGroup("WorkBenches")
             .AddTile(TileID.Anvils)
             .DisableDecraft()
             .Register();

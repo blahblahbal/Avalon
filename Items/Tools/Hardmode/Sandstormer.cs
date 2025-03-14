@@ -24,7 +24,7 @@ class Sandstormer : ModItem
     {
         CreateRecipe()
             .AddRecipeGroup(RecipeGroupID.Sand, 75)
-            .AddRecipeGroup("Avalon:GoldBar", 8)
+            .AddRecipeGroup("GoldBar", 8)
             .AddIngredient(ItemID.SoulofLight, 10)
             .AddTile(TileID.MythrilAnvil)
             .Register();
