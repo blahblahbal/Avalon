@@ -42,8 +42,8 @@ public class KingSting : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 8;
-
-        NPCID.Sets.TrailCacheLength[NPC.type] = 4;
+		NPCID.Sets.BossBestiaryPriority.Add(Type);
+		NPCID.Sets.TrailCacheLength[NPC.type] = 4;
         NPCID.Sets.TrailingMode[NPC.type] = 3;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{
