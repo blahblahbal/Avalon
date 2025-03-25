@@ -33,12 +33,16 @@ public class Lacerated : ModBuff
     }
 
     public override bool ReApply(NPC npc, int time, int buffIndex)
-    {
-        if (npc.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks < 3)
+	{
+		npc.buffTime[buffIndex] += time;
+		if (npc.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks < 3)
         {
             npc.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks++;
-        }
-
-        return false;
+		}
+		if (npc.buffTime[buffIndex] > AvalonGlobalNPC.BleedTime)
+		{
+			npc.buffTime[buffIndex] = AvalonGlobalNPC.BleedTime;
+		}
+		return false;
     }
 }

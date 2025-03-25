@@ -63,46 +63,22 @@ public class BuffEffects : ModHook
 
 	private static void OnAddBuffNPC(On_NPC.orig_AddBuff orig, NPC self, int type, int time, bool quiet = false)
 	{
+		if (self.GetGlobalNPC<AvalonGlobalNPCInstance>().Pathogen && Main.debuff[type])
+		{
+			time *= 2;
+		}
+		orig(self, type, time, quiet);
+
 		if (ExxoAvalonOrigins.Achievements != null)
 		{
-			if (((self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) && self.HasBuff(BuffID.CursedInferno) && (self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) && type == BuffID.ShadowFlame) ||
-			(self.HasBuff(BuffID.ShadowFlame) && self.HasBuff(BuffID.CursedInferno) && (self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) && (type == BuffID.OnFire || type == BuffID.OnFire3)) ||
-			(self.HasBuff(BuffID.ShadowFlame) && self.HasBuff(BuffID.CursedInferno) && (self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) && (type == BuffID.Frostburn || type == BuffID.Frostburn2)) ||
-			((self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) && self.HasBuff(BuffID.ShadowFlame) && (self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) && type == BuffID.CursedInferno))
+			if ((self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) &&
+				self.HasBuff(BuffID.CursedInferno) &&
+				(self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) &&
+				self.HasBuff(BuffID.ShadowFlame))
 			{
 				ExxoAvalonOrigins.Achievements.Call("Event", "ItBurnsBurnsBurnsBurns");
 			}
 		}
-		for (int j = 0; j < 5; j++)
-		{
-			if (self.buffType[j] == type)
-			{
-				if (type == ModContent.BuffType<Lacerated>())
-				{
-					self.buffTime[j] += time;
-					if (self.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks < 3)
-					{
-						self.GetGlobalNPC<AvalonGlobalNPCInstance>().LacerateStacks++;
-					}
-					if (self.buffTime[j] > AvalonGlobalNPC.BleedTime)
-					{
-						self.buffTime[j] = AvalonGlobalNPC.BleedTime;
-						return;
-					}
-				}
-				else if (self.buffTime[j] < time)
-				{
-					self.buffTime[j] = time;
-				}
-				return;
-			}
-			if (self.GetGlobalNPC<AvalonGlobalNPCInstance>().Pathogen && Main.debuff[self.buffType[j]])
-			{
-				if(self.buffTime[j] < time * 2)
-					self.buffTime[j] = time * 2;
-			}
-	}
-		orig(self, type, time, quiet);
 	}
 
 	//private static void OnFishingCheckRollDropLevels(
