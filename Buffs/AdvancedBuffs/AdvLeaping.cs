@@ -1,4 +1,5 @@
-﻿using Terraria;
+using Avalon.Common.Players;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Avalon.Buffs.AdvancedBuffs;
@@ -43,5 +44,10 @@ public class AdvLeaping : ModBuff
                 }
             }
         }
-    }
+	}
+	public override bool ReApply(Player player, int time, int buffIndex)
+	{
+		player.GetModPlayer<AvalonPlayer>().IcarusTimer = 0;
+		return false;
+	}
 }

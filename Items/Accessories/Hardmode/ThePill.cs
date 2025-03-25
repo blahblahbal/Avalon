@@ -1,6 +1,8 @@
 using Avalon.Buffs;
 using Avalon.Common.Players;
+using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Potions.Buff;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -37,4 +39,27 @@ namespace Avalon.Items.Accessories.Hardmode
             return base.UseItem(item, player);
         }
     }
+}
+
+public class ThePillPlayer : ModPlayer
+{
+	public bool DoUpdateDebuffTime;
+	public override void PostUpdate()
+	{
+		DoUpdateDebuffTime = Player.GetModPlayer<AvalonPlayer>().ThePill;
+	}
+	public override void PostUpdateEquips()
+	{
+		if (DoUpdateDebuffTime != Player.GetModPlayer<AvalonPlayer>().ThePill)
+		{
+			//Main.NewText(Player.GetModPlayer<AvalonPlayer>().ThePill ? $"[i:{ModContent.ItemType<ThePill>()}]True" : $"[i:{ModContent.ItemType<ThePill>()}]False", Player.GetModPlayer<AvalonPlayer>().ThePill ? Color.Lime : Color.DarkRed);
+			for (int i = 0; i < Player.MaxBuffs; i++)
+			{
+				if (Main.debuff[Player.buffType[i]] && Player.buffType[i] != BuffID.PotionSickness)
+				{
+					Player.buffTime[i] = Player.GetModPlayer<AvalonPlayer>().ThePill ? (int)(Player.buffTime[i] * 0.8f) : (int)(Player.buffTime[i] / 0.8f);
+				}
+			}
+		}
+	}
 }

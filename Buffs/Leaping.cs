@@ -49,4 +49,9 @@ public class Leaping : ModBuff
 			}
 		}
 	}
+	public override bool ReApply(Player player, int time, int buffIndex)
+	{
+		player.GetModPlayer<AvalonPlayer>().IcarusTimer = 0;
+		return false;
+	}
 }
