@@ -1,6 +1,5 @@
 using System;
 using Avalon.Items.Material;
-using Avalon.Items.Potions;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -11,7 +10,6 @@ using Terraria.Audio;
 using Terraria.GameContent.ItemDropRules;
 using Avalon.Items.Vanity;
 using System.IO;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
