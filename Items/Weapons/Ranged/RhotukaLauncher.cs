@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -8,7 +7,7 @@ namespace Avalon.Items.Weapons.Ranged;
 
 public class RhotukaLauncher : ModItem
 {
-    public override bool IsLoadingEnabled(Mod mod)
+	public override bool IsLoadingEnabled(Mod mod)
     {
         return false;
     }
@@ -24,7 +23,7 @@ public class RhotukaLauncher : ModItem
         Item.UseSound = SoundID.Item34;
         Item.damage = 30;
         Item.autoReuse = false;
-        Item.useAmmo = ModContent.ItemType<Ammo.RhotukaSpinner>();
+		Item.useAmmo = ModContent.ItemType<Ammo.RhotukaSpinner>();
         Item.shootSpeed = 5f;
         Item.DamageType = DamageClass.Ranged;
         Item.noMelee = true;
@@ -36,5 +35,5 @@ public class RhotukaLauncher : ModItem
         Item.value = 1000000;
         Item.useAnimation = 20;
     }
-    public override Vector2? HoldoutOffset() => new Vector2(-10, 0);
+	public override Vector2? HoldoutOffset() => new Vector2(-10, 0);
 }

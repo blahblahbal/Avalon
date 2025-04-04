@@ -371,7 +371,7 @@ Mods: {
 		DeathText: {
 			BloodBarrage_1: "{0} forgot their blood is necessary."
 			BloodCasting_1: "{0} had their heart in the wrong place."
-			CaesiumPoison_1: "{0} was poisoned by the Caesium."
+			CaesiumPoison_1: "{0} was poisoned by the caesium."
 			Drowned_1: "{0} blub blub blub..."
 			Drowned_2: "{0} thought they could breathe water."
 			Drowned_3: "{0} asphyxiated."
@@ -9668,6 +9668,15 @@ Mods: {
 			MartianPeaceTreaty: {
 				DisplayName: Martian Peace Treaty
 				Tooltip: ""
+			}
+
+			TwilightShooter: {
+				DisplayName: Twilight Shooter
+				Tooltip:
+				'''
+				Can shoot various ammo types
+				Ammo type determines fire rate and projectile velocity
+				'''
 			}
 		}
 
