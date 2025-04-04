@@ -262,7 +262,6 @@ public class AvalonPlayer : ModPlayer
     public bool HeartGolem;
     public bool EtherealHeart;
     public bool BloodyWhetstone;
-    public bool FrostGauntlet;
     public bool SlimeBand;
     public bool NoSticky;
     public bool VampireTeeth;
@@ -326,7 +325,6 @@ public class AvalonPlayer : ModPlayer
     public bool Ward;
     public int WardCurseDOT;
     public bool CaesiumPoison;
-    public bool PathogenImbue;
     public bool Pathogen;
     public bool BloodCasting;
     public bool Vision;
@@ -472,7 +470,6 @@ public class AvalonPlayer : ModPlayer
         HeartsickElixir = false;
         CaesiumPoison = false;
         Pathogen = false;
-        PathogenImbue = false;
         HungryMinion = false;
         PrimeMinion = false;
         GastroMinion = false;
@@ -503,7 +500,6 @@ public class AvalonPlayer : ModPlayer
         CloudGlove = false;
         BadgeOfBacteria = false;
         BacterialEndurance = false;
-        FrostGauntlet = false;
         SlimeBand = false;
         NoSticky = false;
         VampireTeeth = false;
@@ -2371,14 +2367,6 @@ public class AvalonPlayer : ModPlayer
 
             target.AddBuff(ModContent.BuffType<Lacerated>(), 120);
         }
-        if (FrostGauntlet)
-        {
-            target.AddBuff(BuffID.Frostburn2, 60 * 4);
-        }
-        if (PathogenImbue)
-        {
-            target.AddBuff(ModContent.BuffType<Pathogen>(), 60 * Main.rand.Next(3, 7));
-        }
     }
     public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
     {
@@ -2407,7 +2395,7 @@ public class AvalonPlayer : ModPlayer
                 }
             }
         }
-    }
+	}
     public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
     {
         if (DoubleDamage && !Player.immune && !npc.dontTakeDamage)
@@ -2735,35 +2723,7 @@ public class AvalonPlayer : ModPlayer
             modifiers.CritDamage += RangedCritDamage;
         }
     }
-    public override void MeleeEffects(Item item, Rectangle hitbox)
-    {
-        if (item.DamageType == DamageClass.Melee && !item.noMelee && !item.noUseGraphic)
-        {
-            if (PathogenImbue)
-            {
-                if (Main.rand.NextBool(3))
-                {
-                    int num21 = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, ModContent.DustType<PathogenDust>(), Player.velocity.X * 0.2f + (float)(Player.direction * 3), Player.velocity.Y * 0.2f, 128);
-                    Main.dust[num21].noGravity = true;
-                    Main.dust[num21].fadeIn = 1.5f;
-                    Main.dust[num21].velocity *= 0.25f;
-                }
-            }
-            if (FrostGauntlet)
-            {
-                if (Main.rand.NextBool(3))
-                {
-                    int num21 = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.IceTorch, Player.velocity.X * 0.2f + (float)(Player.direction * 3), Player.velocity.Y * 0.2f, 100);
-                    Main.dust[num21].noGravity = true;
-                    Main.dust[num21].fadeIn = 1.5f;
-                    Main.dust[num21].velocity *= 0.25f;
-                    Main.dust[num21].velocity *= 0.7f;
-                    Main.dust[num21].velocity.Y -= 0.5f;
-                }
-            }
-        }
-    }
-    public override void OnHurt(Player.HurtInfo info)
+	public override void OnHurt(Player.HurtInfo info)
     {
         if (BenevolentWard && Main.rand.NextBool(100) && !Player.HasBuff(ModContent.BuffType<Buffs.BenevolentWard>()) &&
             !Player.HasBuff(ModContent.BuffType<WardCurse>()))
