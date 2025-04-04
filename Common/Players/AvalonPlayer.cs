@@ -1109,15 +1109,8 @@ public class AvalonPlayer : ModPlayer
             }
             return false;
         }
-        if (Malaria)
-        {
-            damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was bitten by a mosquito.");
-        }
-        if (Electrified)
-        {
-            damageSource = PlayerDeathReason.ByCustomReason(Player.name + " had an electrifying personality.");
-        }
-        return true;
+
+		return true;
     }
     public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
     {
@@ -1168,7 +1161,7 @@ public class AvalonPlayer : ModPlayer
             CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.DamagedFriendly, hp);
             if (Player.statLife <= 0)
             {
-                Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} had their heart in the wrong place."), 1, 0);
+                Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.BloodCasting_1", $"{Player.name}")), 1, 0);
             }
         }
     }
@@ -2533,8 +2526,8 @@ public class AvalonPlayer : ModPlayer
                     Damage = (int)(dmg / 2),
                     Knockback = 2f,
                     Dodgeable = false,
-                    DamageSource = PlayerDeathReason.ByCustomReason(Player.name + " gambled with their life.")
-                };
+					DamageSource = PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Gambler_1", $"{Player.name}"))
+				};
                 Player.Hurt(hit);
             }
         }
@@ -2618,7 +2611,7 @@ public class AvalonPlayer : ModPlayer
                     Damage = (int)(dmg / 4),
                     Knockback = 2f,
                     Dodgeable = false,
-                    DamageSource = PlayerDeathReason.ByCustomReason(Player.name + " gambled with their life.")
+                    DamageSource = PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Gambler_1", $"{Player.name}"))
                 };
                 Player.Hurt(hit);
             }
