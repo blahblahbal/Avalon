@@ -149,7 +149,6 @@ public class AvalonWorld : ModSystem
         ModContent.GetInstance<HeartstoneLantern>().Coordinates = new();
         ModContent.GetInstance<ResistantWoodLantern>().Coordinates = new();
 
-		ModContent.GetInstance<Relics>().Coordinates = new();
 		//Im not too fimiliar how contagion world tags work but imo it would be best if it was reset in an OnWorldUnload and OnWorldLoad somewhere
 		retroWorld = false;
 	}
@@ -172,8 +171,6 @@ public class AvalonWorld : ModSystem
         ModContent.GetInstance<CoughwoodLantern>().Coordinates = new();
         ModContent.GetInstance<HeartstoneLantern>().Coordinates = new();
         ModContent.GetInstance<ResistantWoodLantern>().Coordinates = new();
-
-		ModContent.GetInstance<Relics>().Coordinates = new();
 
 		cavesWorld = false;
 		retroWorld = false;

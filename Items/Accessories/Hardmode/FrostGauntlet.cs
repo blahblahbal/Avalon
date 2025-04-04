@@ -32,7 +32,7 @@ class FrostGauntlet : ModItem
         {
             player.AddBuff(62, 5, true);
         }
-        player.GetModPlayer<AvalonPlayer>().FrostGauntlet = true;
+        player.GetModPlayer<AvalonEnchantPlayer>().FrostGauntlet = true;
         player.kbGlove = true;
         player.GetAttackSpeed(DamageClass.Melee) += 0.12f;
         player.GetDamage(DamageClass.Melee) += 0.12f;
