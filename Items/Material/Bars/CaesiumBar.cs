@@ -14,7 +14,7 @@ class CaesiumBar : ModItem
     }
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {
-        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.HardmodeBars;
+        itemGroup = Data.Sets.ItemGroupValues.HardmodeBars;
     }
     public override void SetDefaults()
     {

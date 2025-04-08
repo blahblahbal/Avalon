@@ -17,7 +17,7 @@ class Chrysoberyl : ModItem
 	}
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {
-        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.Gems;
+        itemGroup = Data.Sets.ItemGroupValues.Gems;
     }
     public override void SetDefaults()
     {

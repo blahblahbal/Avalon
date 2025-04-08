@@ -17,6 +17,9 @@
 		<None Remove="DrawMagics\**" />
 	</ItemGroup>
 	<ItemGroup>
+	  <AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\HierarchyCache.v1.txt" />
+	</ItemGroup>
+	<ItemGroup>
 		<None Remove="effects\PixelChange.fx" />
 		<None Remove="Projectiles\Melee\HallowedRapierProj.png" />
 		<None Remove="Projectiles\Melee\HallowedRapierVis.png" />
@@ -25,6 +28,7 @@
 		<PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
 	</ItemGroup>
 	<ItemGroup>
+		<Folder Include=".vs\ExxoAvalonOrigins\v17\" />
 		<Folder Include="Items\Placeable\Furniture\Coughwood\" />
 		<Folder Include="Items\Weapons\Summon\PreHardmode\" />
 		<Folder Include="Mounts\" />

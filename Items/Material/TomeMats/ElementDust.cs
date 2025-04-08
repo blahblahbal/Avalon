@@ -15,7 +15,7 @@ class ElementDust : ModItem
     }
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {
-        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.DroppedTomeMats;
+        itemGroup = Data.Sets.ItemGroupValues.DroppedTomeMats;
     }
     public override Color? GetAlpha(Color lightColor)
     {

@@ -10,28 +10,25 @@ using Terraria.ModLoader;
 
 namespace Avalon.Particles
 {
+	public enum ParticleType : byte
+	{
+		SanguineCuts = 0,
+		CrystalSparkle = 1,
+		MidnightRazorSlash = 2
+	}
 	public class ParticleSystem : ModSystem
 	{
 		static List<Particle> Particles;
-		static int MaxParticles = 3000;
-
-		public enum ParticleType : byte
-		{
-			SanguineCuts = 0,
-			CrystalSparkle = 1
-		}
+		const int MaxParticles = 3000;
 		public static void ParticleIDtoType(in byte particleID, out Particle particle)
 		{
-			particle = new SanguineCuts(); // default
-			switch (particleID)
+			particle = particleID switch
 			{
-				case 0:
-					particle = new SanguineCuts();
-					break;
-				case 1:
-					particle = new CrystalSparkle();
-					break;
-			}
+				0 => new SanguineCuts(),
+				1 => new CrystalSparkle(),
+				2 => new MidnightRazorSlash(),
+				_ => throw new NotImplementedException()
+			};
 		}
 
 		public override void Load()
@@ -134,8 +131,7 @@ namespace Avalon.Particles
 		/// <returns></returns>
 		public static Particle AddParticle(byte particleID, Vector2 position, Vector2 velocity, Color color, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 1f)
 		{
-			Particle type;
-			ParticleIDtoType(particleID, out type);
+			ParticleIDtoType(particleID, out Particle type);
 			if (Particles.Count == MaxParticles)
 			{
 				Particles.Remove(Particles.First());

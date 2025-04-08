@@ -13,7 +13,7 @@ class BacciliteOre : ModItem
     }
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {
-        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.PrehardmodeOres;
+        itemGroup = Data.Sets.ItemGroupValues.PrehardmodeOres;
     }
     public override void SetDefaults()
     {

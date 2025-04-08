@@ -12,7 +12,7 @@ class FrostShard : ModItem
     }
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {
-        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.Shards;
+        itemGroup = Data.Sets.ItemGroupValues.Shards;
     }
     public override void SetDefaults()
     {

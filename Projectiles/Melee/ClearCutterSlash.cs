@@ -60,7 +60,7 @@ public class ClearCutterSlash : EnergySlashTemplate
 		ParticleSystem.AddParticle(new CrystalSparkle(), positionslansdglag, Vector2.Zero, default);
 		if (Main.netMode == NetmodeID.MultiplayerClient)
 		{
-			Network.SyncParticles.SendPacket((byte)ParticleSystem.ParticleType.CrystalSparkle, positionslansdglag, Vector2.Zero, default, Projectile.owner);
+			Network.SyncParticles.SendPacket(ParticleType.CrystalSparkle, positionslansdglag, Vector2.Zero, default, Projectile.owner);
 		}
 		for (int i = 0; i < Main.rand.Next(1, 3); i++)
 		{

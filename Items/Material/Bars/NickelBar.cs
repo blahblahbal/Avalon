@@ -13,7 +13,7 @@ class NickelBar : ModItem
     }
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {
-        itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.PrehardmodeBars;
+        itemGroup = Data.Sets.ItemGroupValues.PrehardmodeBars;
     }
     public override void SetDefaults()
     {

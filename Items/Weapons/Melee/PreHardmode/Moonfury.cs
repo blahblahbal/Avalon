@@ -28,7 +28,7 @@ class Moonfury : ModItem
         Item.shoot = ModContent.ProjectileType<Projectiles.Melee.Moonfury>();
         Item.DamageType = DamageClass.Melee;
         Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = 54000;
+        Item.value = Item.sellPrice(0, 4, 0, 0);
         Item.useAnimation = 42;
     }
     public override void AddRecipes()

@@ -14,14 +14,14 @@ internal class SyncParticles
 	/// Simply returns before doing anything when called in singleplayer, so you can safely call this whenever.<br></br>
 	/// Might still want to check if Main.netMode == NetmodeID.MultiplayerClient so the method doesn't run at all though, idk.
 	/// </summary>
-	public static void SendPacket(byte type, Vector2 position, Vector2 velocity, int toClient = -1, int ignoreClient = -1)
+	public static void SendPacket(ParticleType type, Vector2 position, Vector2 velocity, int toClient = -1, int ignoreClient = -1)
 	{
 		if (Main.netMode == NetmodeID.SinglePlayer)
 		{
 			return; // no sending packets in singleplayer :D
 		}
 		ModPacket packet = MessageHandler.GetPacket(MessageID.SyncParticle);
-		packet.Write(type);
+		packet.Write((byte)type);
 		packet.WriteVector2(position);
 		packet.WriteVector2(velocity);
 		packet.Send(toClient, ignoreClient);
@@ -34,7 +34,7 @@ internal class SyncParticles
 
 		if (Main.netMode == NetmodeID.Server)
 		{
-			SendPacket(type, pos, vel, -1, fromWho);
+			SendPacket((ParticleType)type, pos, vel, -1, fromWho);
 		}
 		else
 		{

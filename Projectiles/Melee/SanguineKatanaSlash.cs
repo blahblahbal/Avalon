@@ -64,7 +64,7 @@ public class SanguineKatanaSlash : EnergySlashTemplate
 		ParticleSystem.AddParticle(new SanguineCuts(), pos, vel, default);
 		if (Main.netMode == NetmodeID.MultiplayerClient)
 		{
-			Network.SyncParticles.SendPacket((byte)ParticleSystem.ParticleType.SanguineCuts, pos, vel, default, Projectile.owner);
+			Network.SyncParticles.SendPacket(ParticleType.SanguineCuts, pos, vel, default, Projectile.owner);
 		}
 	}
 	public override void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawpos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness)

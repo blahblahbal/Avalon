@@ -12,7 +12,7 @@ class WaspFiber : ModItem
     }
     //public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     //{
-    //    itemGroup = (ContentSamples.CreativeHelper.ItemGroup)Data.Sets.ItemGroupValues.Contagion;
+    //    itemGroup = Data.Sets.ItemGroupValues.Contagion;
     //}
     public override void SetDefaults()
     {

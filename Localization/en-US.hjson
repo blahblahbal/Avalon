@@ -9673,10 +9673,15 @@ Mods: {
 			TwilightShooter: {
 				DisplayName: Twilight Shooter
 				Tooltip:
-				'''
-				Can shoot various ammo types
-				Ammo type determines fire rate and projectile velocity
-				'''
+					'''
+					Can shoot various ammo types
+					Ammo type determines fire rate and projectile velocity
+					'''
+			}
+
+			MidnightsRazor: {
+				DisplayName: Midnight's Razor
+				Tooltip: ""
 			}
 		}
 
@@ -9975,6 +9980,7 @@ Mods: {
 			RhodiumBolt.DisplayName: Rhodium Bolt
 			PathogenSickle.DisplayName: Pathogen Sickle
 			PhantomBlade.DisplayName: Phantom Blade
+			MidnightsRazor.DisplayName: Midnight's Razor
 		}
 
 		NPCs: {
