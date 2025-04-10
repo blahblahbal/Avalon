@@ -1,4 +1,3 @@
-using System;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Systems;
@@ -7,12 +6,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using System.Linq;
 using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.GameContent.ItemDropRules;
 using Microsoft.Xna.Framework.Graphics;
-using Avalon.Common.Players;
 using Avalon.Common;
 using ReLogic.Content;
 using Terraria.GameContent;
@@ -30,9 +27,10 @@ public partial class Phantasm : ModNPC
 {
 	public override void SetStaticDefaults()
 	{
-		Main.npcFrameCount[NPC.type] = 16;
-		NPCID.Sets.TrailingMode[NPC.type] = 0;
-		NPCID.Sets.TrailCacheLength[NPC.type] = 4;
+		Main.npcFrameCount[Type] = 16;
+		NPCID.Sets.TrailingMode[Type] = 0;
+		NPCID.Sets.TrailCacheLength[Type] = 4;
+		NPCID.Sets.MPAllowedEnemies[Type] = true;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{
 			Position = new Vector2(0, -16f),
