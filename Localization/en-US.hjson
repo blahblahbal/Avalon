@@ -329,6 +329,11 @@ Mods: {
 				Name: Look Out Below
 				Description: Fall all the way from the surface to the Underworld without touching the ground.
 			}
+
+			ItBurnsBurnsBurnsBurns: {
+				Name: It Burns, Burns, Burns, Burns!
+				Description: Inflict On Fire, Frostburn, Cursed Inferno, and Shadowflame on a single enemy all at once.
+			}
 		}
 
 		Potions: Potions

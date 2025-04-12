@@ -1,3 +1,5 @@
+using Avalon.Common;
+using Avalon.WorldGeneration.Enums;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
@@ -44,6 +46,7 @@ public class DownedBossSystem : ModSystem
         tag["DownedOblivion"] = DownedOblivion;
         tag["DownedKingSting"] = DownedKingSting;
         tag["DownedArmageddon"] = DownedArmageddon;
+		tag["WorldEvil"] = ModContent.GetInstance<AvalonWorld>().WorldEvil;
     }
     public override void LoadWorldData(TagCompound tag)
     {
@@ -86,6 +89,11 @@ public class DownedBossSystem : ModSystem
         {
             DownedArmageddon = tag.Get<bool>("DownedArmageddon");
         }
+
+		if (tag.ContainsKey("WorldEvil"))
+		{
+			ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)tag.Get<int>("WorldEvil");
+		}
     }
 
     public override void NetSend(BinaryWriter writer)
