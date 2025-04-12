@@ -46,7 +46,7 @@ public class DownedBossSystem : ModSystem
         tag["DownedOblivion"] = DownedOblivion;
         tag["DownedKingSting"] = DownedKingSting;
         tag["DownedArmageddon"] = DownedArmageddon;
-		tag["WorldEvil"] = ModContent.GetInstance<AvalonWorld>().WorldEvil;
+		tag["WorldEvil"] = (int)ModContent.GetInstance<AvalonWorld>().WorldEvil;
     }
     public override void LoadWorldData(TagCompound tag)
     {
