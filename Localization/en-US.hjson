@@ -4151,7 +4151,7 @@ Mods: {
 
 			HellboundHalberd: {
 				DisplayName: Hellbound Halberd
-				Tooltip: <right> while holding for an alternate attack!
+				Tooltip: <right> to use like a spear
 			}
 
 			Pathogen: {
