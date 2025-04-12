@@ -152,7 +152,7 @@ public class AvalonMobDrops : GlobalNPC
 				break;
 			case NPCID.Retinazer:
 			case NPCID.Spazmatism:
-				npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SonicShirt>(), 25, 1, 1));
+				npcLoot.Add(ItemDropRule.ByCondition(new Conditions.MissingTwin(), ModContent.ItemType<SonicShirt>(), 25, 1, 1));
 				break;
 			case NPCID.SkeletronPrime:
 				npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SonicShoes>(), 25, 1, 1));
@@ -502,9 +502,13 @@ public class AvalonMobDrops : GlobalNPC
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<StrongVenom>(), 7));
 		}
 
-		if (npc.type is NPCID.Retinazer or NPCID.Spazmatism or NPCID.SkeletronPrime or NPCID.TheDestroyer)
+		if (npc.type is NPCID.SkeletronPrime or NPCID.TheDestroyer)
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ScrollofTome>(), 3));
+		}
+		if (npc.type is NPCID.Retinazer or NPCID.Spazmatism)
+		{
+			npcLoot.Add(ItemDropRule.ByCondition(new Conditions.MissingTwin(), ModContent.ItemType<ScrollofTome>(), 3));
 		}
 
 		if (npc.type is NPCID.CorruptSlime or NPCID.Gastropod or NPCID.IlluminantSlime or NPCID.ToxicSludge
