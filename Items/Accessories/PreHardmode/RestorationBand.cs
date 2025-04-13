@@ -13,10 +13,10 @@ public class RestorationBand : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Orange;
-        Item.width = dims.Width;
+        Item.width = 30;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 1);
-        Item.height = dims.Height;
+        Item.height = 26;
     }
 
     public override void AddRecipes()

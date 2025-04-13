@@ -13,10 +13,10 @@ class GloveofCreation : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Yellow;
-        Item.width = dims.Width;
+        Item.width = 32;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 10);
-        Item.height = dims.Height;
+        Item.height = 34;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
     public override void UpdateAccessory(Player player, bool hideVisual)

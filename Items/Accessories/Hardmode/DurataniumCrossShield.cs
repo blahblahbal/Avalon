@@ -14,10 +14,10 @@ class DurataniumCrossShield : ModItem
         Rectangle dims = this.GetDims();
         Item.defense = 2;
         Item.rare = ItemRarityID.LightRed;
-        Item.width = dims.Width;
+        Item.width = 30;
         Item.value = 54000;
         Item.accessory = true;
-        Item.height = dims.Height;
+        Item.height = 32;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

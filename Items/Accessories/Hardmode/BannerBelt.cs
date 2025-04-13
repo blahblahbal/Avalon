@@ -14,8 +14,8 @@ public class BannerBelt : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 30;
-        Item.height = 30;
+        Item.width = 36;
+        Item.height = 20;
         Item.rare = ItemRarityID.Lime;
         Item.accessory = true;
         Item.value = Item.sellPrice(gold: 5);

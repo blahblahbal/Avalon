@@ -9,8 +9,8 @@ class BronzeWatch : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 24;
-        Item.height = 28;
+        Item.width = 30;
+        Item.height = 30;
         Item.rare = ItemRarityID.White;
         Item.value = Item.sellPrice(0, 0, 4, 0);
         Item.accessory = true;

@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,13 +13,12 @@ public class AlchemicalSkull : ModItem
     }
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
         Item.defense = 8;
         Item.rare = ItemRarityID.LightRed;
-        Item.width = dims.Width;
+        Item.width = 22;
         Item.accessory = true;
         Item.value = 150000;
-        Item.height = dims.Height;
+        Item.height = 26;
     }
     public override void AddRecipes()
     {

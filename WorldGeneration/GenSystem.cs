@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.World.Passes;
 using Avalon.WorldGeneration.Enums;
 using Avalon.WorldGeneration.Passes;
 using System.Collections.Generic;
@@ -327,9 +328,12 @@ public class GenSystem : ModSystem
 					tasks.Insert(index + 4, currentPass);
 					totalWeight += currentPass.Weight;
 				}
-				//currentPass = new CrystalMinesPass();
-				//tasks.Insert(index + 4, currentPass);
-				//totalWeight += currentPass.Weight;
+				if (ModContent.GetInstance<AvalonClientConfig>().SuperhardmodeStuff)
+				{
+					currentPass = new CrystalMinesPass();
+					tasks.Insert(index + 4, currentPass);
+					totalWeight += currentPass.Weight;
+				}
 			}
 		}
     }

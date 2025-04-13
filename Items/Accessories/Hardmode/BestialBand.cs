@@ -13,10 +13,10 @@ public class BestialBand : ModItem
         Rectangle dims = this.GetDims();
         Item.defense = 2;
         Item.rare = ItemRarityID.Cyan;
-        Item.width = dims.Width;
+        Item.width = 30;
         Item.value = Item.sellPrice(0, 10);
         Item.accessory = true;
-        Item.height = dims.Height;
+        Item.height = 36;
     }
     public override void AddRecipes()
     {

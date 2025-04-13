@@ -13,10 +13,10 @@ class SoullessLocket : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.LightRed;
-        Item.width = dims.Width;
+        Item.width = 22;
         Item.value = Item.sellPrice(0, 0, 50);
         Item.accessory = true;
-        Item.height = dims.Height;
+        Item.height = 34;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

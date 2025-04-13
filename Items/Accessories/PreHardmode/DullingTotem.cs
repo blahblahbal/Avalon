@@ -11,10 +11,10 @@ class DullingTotem : ModItem
         Item.lifeRegen = 2;
         Item.defense = 10;
         Item.rare = ItemRarityID.LightRed;
-        Item.width = 20;
+        Item.width = 26;
         Item.value = Item.sellPrice(0, 1, 63, 0);
         Item.accessory = true;
-        Item.height = 26;
+        Item.height = 24;
     }
     public override void AddRecipes()
     {

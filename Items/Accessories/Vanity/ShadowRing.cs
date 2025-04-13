@@ -15,10 +15,10 @@ class ShadowRing : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.LightPurple;
-        Item.width = dims.Width;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 5, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 24;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
     public override void AddRecipes()

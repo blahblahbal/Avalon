@@ -12,10 +12,10 @@ class CloakofAssists : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Yellow;
-        Item.width = dims.Width;
+        Item.width = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 8, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 32;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

@@ -15,10 +15,10 @@ class NerveNumbNecklace : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Blue;
-        Item.width = dims.Width;
+        Item.width = 30;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 1, 50);
-        Item.height = dims.Height;
+        Item.height = 32;
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

@@ -12,10 +12,10 @@ public class AmethystAmulet : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Blue;
-        Item.width = dims.Width;
+        Item.width = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 30);
-        Item.height = dims.Height;
+        Item.height = 34;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

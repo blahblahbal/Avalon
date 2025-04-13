@@ -9,8 +9,8 @@ class NuclearExtinguisher : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 16;
-        Item.height = 24;
+        Item.width = 36;
+        Item.height = 38;
         Item.rare = ItemRarityID.Yellow;
         Item.accessory = true;
         Item.value = 200000;

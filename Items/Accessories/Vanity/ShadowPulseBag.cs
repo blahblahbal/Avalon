@@ -17,11 +17,11 @@ class ShadowPulseBag : ModItem
 	{
 		Rectangle dims = this.GetDims();
 		Item.rare = ItemRarityID.Lime;
-		Item.width = dims.Width;
+		Item.width = 32;
 		Item.accessory = true;
 		Item.vanity = true;
 		Item.value = Item.sellPrice(0, 2, 0, 0);
-		Item.height = dims.Height;
+		Item.height = 36;
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
 	public override void AddRecipes()

@@ -1,6 +1,5 @@
 using Avalon.Buffs;
 using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -10,13 +9,12 @@ public class AIController : ModItem
 {
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
         Item.rare = -12;
-        Item.width = dims.Width;
+        Item.width = 22;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 15);
         Item.buffType = ModContent.BuffType<StingerProbe>();
-        Item.height = dims.Height;
+        Item.height = 28;
         Item.expert = true;
         Item.damage = 134;
         Item.DamageType = DamageClass.Summon;

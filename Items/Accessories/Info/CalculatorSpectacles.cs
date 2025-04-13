@@ -22,10 +22,10 @@ public class CalculatorSpectacles : ModItem
 	{
 		Rectangle dims = this.GetDims();
 		Item.rare = ItemRarityID.LightRed;
-		Item.width = dims.Width;
+		Item.width = 40;
 		Item.accessory = true;
 		Item.value = Item.sellPrice(0, 2, 0, 0);
-		Item.height = dims.Height;
+		Item.height = 20;
 	}
 	public override void UpdateInfoAccessory(Player player)
 	{

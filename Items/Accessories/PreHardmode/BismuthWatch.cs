@@ -9,8 +9,8 @@ class BismuthWatch : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 24;
-        Item.height = 28;
+        Item.width = 30;
+        Item.height = 30;
         Item.rare = ItemRarityID.Blue;
         Item.value = Item.sellPrice(0, 0, 25, 0);
         Item.accessory = true;

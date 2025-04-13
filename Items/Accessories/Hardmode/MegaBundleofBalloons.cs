@@ -12,10 +12,10 @@ public class MegaBundleofBalloons : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Cyan;
-        Item.width = dims.Width;
+        Item.width = 34;
         Item.accessory = true;
         Item.value = Item.sellPrice(gold: 5);
-        Item.height = dims.Height;
+        Item.height = 46;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

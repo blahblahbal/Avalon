@@ -15,10 +15,10 @@ public class RocketinaBottle : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Green;
-        Item.width = dims.Width;
+        Item.width = 22;
         Item.accessory = true;
         Item.value = Item.sellPrice(gold: 2);
-        Item.height = dims.Height;
+        Item.height = 30;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

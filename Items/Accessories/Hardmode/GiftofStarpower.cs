@@ -11,10 +11,10 @@ class GiftofStarpower : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Lime;
-        Item.width = dims.Width;
+        Item.width = 34;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 8, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 26;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

@@ -14,10 +14,10 @@ class GuardianBoots : ModItem
         Rectangle dims = this.GetDims();
         Item.defense = 2;
         Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
+        Item.width = 36;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 1, 44, 0);
-        Item.height = dims.Height;
+        Item.height = 28;
     }
     public override void AddRecipes()
     {

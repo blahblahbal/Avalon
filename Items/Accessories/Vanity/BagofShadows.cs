@@ -17,11 +17,11 @@ public class BagofShadows : ModItem
 	public override void SetDefaults()
 	{
 		Item.rare = ItemRarityID.Blue;
-		Item.width = 20;
+		Item.width = 24;
 		Item.accessory = true;
 		Item.vanity = true;
 		Item.value = Item.sellPrice(0, 1);
-		Item.height = 20;
+		Item.height = 28;
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
 

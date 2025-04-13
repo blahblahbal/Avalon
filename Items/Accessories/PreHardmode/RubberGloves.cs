@@ -15,10 +15,10 @@ public class RubberGloves : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Orange;
-        Item.width = dims.Width;
+        Item.width = 24;
         Item.accessory = true;
         Item.value = Item.sellPrice(gold: 1);
-        Item.height = dims.Height;
+        Item.height = 28;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

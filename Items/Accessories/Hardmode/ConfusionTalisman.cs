@@ -12,10 +12,10 @@ class ConfusionTalisman : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
+        Item.width = 32;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 3, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 24;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

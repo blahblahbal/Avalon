@@ -10,12 +10,11 @@ class CrystalSkull : ModItem
 {
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
+        Item.width = 42;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 2);
-        Item.height = dims.Height;
+        Item.height = 30;
         Item.defense = 4;
 		Item.expert = true;
     }

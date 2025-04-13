@@ -14,10 +14,10 @@ class ZirconAmulet : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Green;
-        Item.width = dims.Width;
+        Item.width = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 70);
-        Item.height = dims.Height;
+        Item.height = 36;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

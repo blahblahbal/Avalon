@@ -47,11 +47,14 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using System.Diagnostics.Metrics;
 
 namespace Avalon.Common;
 
 public class AvalonGlobalItem : GlobalItem
 {
+	public static int ShroomiteAmmoCounter = 0;
+
     private static readonly List<int> nonSolidExceptions = new()
     {
         TileID.Cobweb,
@@ -2471,11 +2474,15 @@ public class AvalonGlobalItem : GlobalItem
                         && (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
                 if (index != -1)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccDefense", "+3 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccCritBonus", "+2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.CritChance"))
                     {
                         IsModifier = true
                     });
-                }
+					tooltips.Insert(index + 2, new TooltipLine(Mod, "PrefixAccDefense", "+2 " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.Defense"))
+					{
+						IsModifier = true
+					});
+				}
             }
             if (item.prefix == ModContent.PrefixType<Hoarding>())
             {
@@ -3090,7 +3097,31 @@ public class AvalonGlobalItem : GlobalItem
         else if (type == ModContent.ItemType<Items.Placeable.Wall.YellowTiledWall>()) return ModContent.WallType<Walls.YellowTiledWallUnsafe>();
         return 0;
     }
-    public override bool CanUseItem(Item item, Player player)
+	public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+	{
+		if (item.useAmmo == AmmoID.Arrow || item.useAmmo == AmmoID.Bullet || item.useAmmo == AmmoID.Rocket)
+		{
+			if (type == ModContent.ProjectileType<Projectiles.Ranged.ShroomiteArrow>())
+			{
+				ShroomiteAmmoCounter++;
+				if (ShroomiteAmmoCounter == 1)
+				{
+					type = ModContent.ProjectileType<Projectiles.Ranged.ShroomiteBullet>();
+				}
+				else if (ShroomiteAmmoCounter == 2)
+				{
+					type = ModContent.ProjectileType<Projectiles.Ranged.ShroomiteRocket>();
+				}
+				else if (ShroomiteAmmoCounter == 3)
+				{
+					type = ModContent.ProjectileType<Projectiles.Ranged.ShroomiteArrow>();
+					ShroomiteAmmoCounter = 0;
+				}
+			}
+		}
+		base.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockback);
+	}
+	public override bool CanUseItem(Item item, Player player)
     {
 		// potion/elixir usage lockout
 		if (Data.Sets.Item.ElixirToPotionBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.ElixirToPotionBuffID[item.type]) ||

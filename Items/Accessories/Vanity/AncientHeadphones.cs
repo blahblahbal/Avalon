@@ -13,11 +13,11 @@ class AncientHeadphones : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Green;
-        Item.width = dims.Width;
+        Item.width = 34;
         Item.accessory = true;
         Item.vanity = true;
         Item.value = Item.sellPrice(0, 2, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 32;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
     /*public override void AddRecipes()

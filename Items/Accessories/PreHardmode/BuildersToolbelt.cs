@@ -12,10 +12,10 @@ class BuildersToolbelt : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Purple;
-        Item.width = dims.Width;
+        Item.width = 40;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 30, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 28;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

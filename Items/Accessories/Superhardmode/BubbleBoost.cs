@@ -12,10 +12,10 @@ public class BubbleBoost : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ModContent.RarityType<BlueRarity>();
-        Item.width = dims.Width;
+        Item.width = 32;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 15);
-        Item.height = dims.Height;
+        Item.height = 32;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

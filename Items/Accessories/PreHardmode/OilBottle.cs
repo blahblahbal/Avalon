@@ -10,10 +10,10 @@ public class OilBottle : ModItem
     public override void SetDefaults()
     {
         Item.rare = ItemRarityID.Orange;
-        Item.width = 20;
+        Item.width = 22;
         Item.accessory = true;
         Item.value = 50000;
-        Item.height = 20;
+		Item.height = 28;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

@@ -17,11 +17,11 @@ public class BagofFire : ModItem
 	public override void SetDefaults()
 	{
 		Item.rare = ItemRarityID.Green;
-		Item.width = 20;
+		Item.width = 24;
 		Item.accessory = true;
 		Item.vanity = true;
 		Item.value = Item.sellPrice(0, 1);
-		Item.height = 20;
+		Item.height = 28;
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
 

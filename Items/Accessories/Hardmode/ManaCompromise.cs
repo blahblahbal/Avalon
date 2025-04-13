@@ -11,10 +11,10 @@ class ManaCompromise : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
+        Item.width = 30;
         Item.value = Item.sellPrice(0, 6, 70, 0);
         Item.accessory = true;
-        Item.height = dims.Height;
+        Item.height = 50;
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

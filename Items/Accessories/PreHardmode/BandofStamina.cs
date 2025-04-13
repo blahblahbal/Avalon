@@ -16,10 +16,10 @@ public class BandofStamina : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Blue;
-        Item.width = dims.Width;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = 50000;
-        Item.height = dims.Height;
+        Item.height = 20;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

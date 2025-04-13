@@ -9,10 +9,10 @@ public class SummonerScroll : ModItem
     public override void SetDefaults()
     {
         Item.rare = ItemRarityID.Green;
-        Item.width = 20;
+        Item.width = 42;
         Item.value = Item.sellPrice(0, 2);
         Item.accessory = true;
-        Item.height = 20;
+        Item.height = 40;
     }
     public override void AddRecipes()
     {

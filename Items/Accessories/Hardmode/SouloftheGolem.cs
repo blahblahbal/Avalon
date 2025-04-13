@@ -12,10 +12,10 @@ class SouloftheGolem : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Cyan;
-        Item.width = dims.Width;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 3, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 44;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

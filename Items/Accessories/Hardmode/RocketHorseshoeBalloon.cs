@@ -12,10 +12,10 @@ public class RocketHorseshoeBalloon : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.LightRed;
-        Item.width = dims.Width;
+		Item.width = 28;
         Item.accessory = true;
         Item.value = Item.sellPrice(gold: 3);
-        Item.height = dims.Height;
+        Item.height = 48;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

@@ -1044,6 +1044,19 @@ public class Utils
                                 }
                                 break;
                         }
+						if (tile.TileType == TileID.Statues || tile.TileType == TileID.Boulder || tile.TileType == TileID.Pots || tile.TileType == TileID.Cobweb)
+						{
+							WorldGen.KillTile(k, l);
+						}
+						if (tile.TileType == TileID.Containers || tile.TileType == TileID.Containers2)
+						{
+							int chest = Chest.FindChestByGuessing(k, l);
+							foreach (Item item in Main.chest[chest].item)
+							{
+								item.TurnToAir();
+							}
+							WorldGen.KillTile(k, l);
+						}
                         if (Main.tileDungeon[tile.TileType] || Main.wallDungeon[tile.WallType] || TileID.Sets.IsVine[tile.TileType] ||
                             TileID.Sets.IsATreeTrunk[tile.TileType] || TileID.Sets.CountsAsGemTree[tile.TileType] ||
                             tile.TileType == TileID.LihzahrdBrick || Main.tileFrameImportant[tile.TileType] ||

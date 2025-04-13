@@ -13,10 +13,10 @@ class AmuletofPower : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.LightRed;
-        Item.width = dims.Width;
+        Item.width = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 90);
-        Item.height = dims.Height;
+        Item.height = 38;
         Item.defense = 3;
     }
 

@@ -14,10 +14,10 @@ class ReflexShield : ModItem
         Rectangle dims = this.GetDims();
         Item.defense = 6;
         Item.rare = ItemRarityID.Cyan;
-        Item.width = dims.Width;
+        Item.width = 34;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 10);
-        Item.height = dims.Height;
+        Item.height = 32;
     }
     public override void AddRecipes()
     {

@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -9,12 +8,11 @@ public class BadgeOfBacteria : ModItem
 {
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
         Item.rare = 2;
-        Item.width = dims.Width;
+        Item.width = 22;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 2);
-        Item.height = dims.Height;
+        Item.height = 30;
         Item.expert = true;
     }
 

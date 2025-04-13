@@ -13,10 +13,10 @@ class FrostGauntlet : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Cyan;
-        Item.width = dims.Width;
+        Item.width = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 10, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 46;
     }
     public override void AddRecipes()
     {

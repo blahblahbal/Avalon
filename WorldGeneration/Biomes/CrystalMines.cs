@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Avalon.Tiles.CrystalMines;
+using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -39,26 +42,157 @@ internal class CrystalMines
         int width = WorldGen.genRand.Next(100, 120);
         int height = 90;// WorldGen.genRand.Next(70, 90);
 
-        WorldGeneration.Utils.TileRunnerSpecial(origin.X - width / 4, origin.Y - height / 4, WorldGen.genRand.Next(55, 65), WorldGen.genRand.Next(55, 65), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
-        WorldGeneration.Utils.TileRunnerSpecial(origin.X + width / 4, origin.Y - height / 4, WorldGen.genRand.Next(55, 65), WorldGen.genRand.Next(55, 65), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
-        WorldGeneration.Utils.TileRunnerSpecial(origin.X - width / 4, origin.Y + height / 4, WorldGen.genRand.Next(55, 65), WorldGen.genRand.Next(55, 65), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
-        WorldGeneration.Utils.TileRunnerSpecial(origin.X + width / 4, origin.Y + height / 4, WorldGen.genRand.Next(55, 65), WorldGen.genRand.Next(55, 65), ModContent.TileType<Tiles.CrystalMines.CrystalStone>());
+        WorldGeneration.Utils.TileRunnerSpecial(origin.X - width / 4, origin.Y - height / 4, WorldGen.genRand.Next(60, 70), WorldGen.genRand.Next(60, 70), ModContent.TileType<CrystalStone>(), true);
+        WorldGeneration.Utils.TileRunnerSpecial(origin.X + width / 4, origin.Y - height / 4, WorldGen.genRand.Next(60, 70), WorldGen.genRand.Next(60, 70), ModContent.TileType<CrystalStone>(), true);
+        WorldGeneration.Utils.TileRunnerSpecial(origin.X - width / 4, origin.Y + height / 4, WorldGen.genRand.Next(60, 70), WorldGen.genRand.Next(60, 70), ModContent.TileType<CrystalStone>(), true);
+        WorldGeneration.Utils.TileRunnerSpecial(origin.X + width / 4, origin.Y + height / 4, WorldGen.genRand.Next(60, 70), WorldGen.genRand.Next(60, 70), ModContent.TileType<CrystalStone>(), true);
 
-        for (int i = origin.X - width / 2; i < origin.X + width / 2; i++)
+		WorldGeneration.Utils.TileRunnerSpecial(origin.X, origin.Y + height / 2 - 5, WorldGen.genRand.Next(25, 35), WorldGen.genRand.Next(25, 35), ModContent.TileType<CrystalStone>(), true);
+		WorldGeneration.Utils.TileRunnerSpecial(origin.X, origin.Y - height / 2 + 5, WorldGen.genRand.Next(25, 35), WorldGen.genRand.Next(25, 35), ModContent.TileType<CrystalStone>(), true);
+		WorldGeneration.Utils.TileRunnerSpecial(origin.X + width / 2 - 5, origin.Y, WorldGen.genRand.Next(25, 35), WorldGen.genRand.Next(25, 35), ModContent.TileType<CrystalStone>(), true);
+		WorldGeneration.Utils.TileRunnerSpecial(origin.X - width / 2 + 5, origin.Y, WorldGen.genRand.Next(25, 35), WorldGen.genRand.Next(25, 35), ModContent.TileType<CrystalStone>(), true);
+
+		for (int i = origin.X - width / 2; i < origin.X + width / 2; i++)
         {
             for (int j = origin.Y - height / 2; j < origin.Y + height / 2; j++)
             {
                 if (WorldGen.genRand.NextBool(200))
                 {
-                    WorldGeneration.Utils.TileRunnerSpecial(i, j, WorldGen.genRand.Next(10, 15), WorldGen.genRand.Next(10, 15), ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>());
+                    WorldGeneration.Utils.TileRunnerSpecial(i, j, WorldGen.genRand.Next(10, 15), WorldGen.genRand.Next(10, 15), ModContent.TileType<CrystalStoneCrystals>(), true);
                 }
             }
         }
 
+		for (int i = origin.X - width / 4; i < origin.X + width / 4; i++)
+		{
+			for (int j = origin.Y - height / 4; j < origin.Y + height / 4; j++)
+			{
+				if (Main.tile[i, j].TileType != ModContent.TileType<CrystalStone>() && Main.tile[i, j].TileType != ModContent.TileType<CrystalStoneCrystals>())
+				{
+					Main.tile[i, j].TileType = (ushort)ModContent.TileType<CrystalStone>();
+					WorldGen.SquareTileFrame(i, j);
+				}
+				Main.tile[i, j].WallType = (ushort)ModContent.WallType<CrystalStoneWall>();
+				WorldGen.SquareWallFrame(i, j);
+			}
+		}
+		int ystep = 11;
+		int ypos = origin.Y - height / 2;
+		int pillarMod = WorldGen.genRand.Next(10, 14);
+
+		List<Point> leftSideCenters = new();
+		List<Point> rightSideCenters = new();
+
+		List<int> yCoords = new();
+
+		for (int floor = 0; floor < 4; floor++)
+		{
+			for (int x = origin.X - width / 2 + 6; x < origin.X + width / 2 - 6; x++)
+			{
+				for (int y = ypos + ystep * (floor + 1); y < ypos + ystep * (floor + 2); y++)
+				{
+					if (y == ypos + ystep * (floor + 1) || y == ypos + ystep * (floor + 2) - 1)
+					{
+						if (y != ypos + ystep * (floor + 2) - 1)
+						{
+							if (!yCoords.Contains(y + 6))
+							{
+								yCoords.Add(y + 6);
+							}
+						}
+						WorldGen.PlaceTile(x, y, ModContent.TileType<CrystalStoneCrystals>(), forced: true);
+					}
+					else
+					{
+						WorldGen.KillTile(x, y);
+						if (x % pillarMod == 0)
+						{
+							WorldGen.PlaceTile(x, y, ModContent.TileType<CrystalColumn>());
+						}
+					}
+				}
+			}
+			ypos += ystep;
+			pillarMod = WorldGen.genRand.Next(10, 14);
+		}
+
+		for (int centers = 0; centers < 4; centers++)
+		{
+			leftSideCenters.Add(new Point(origin.X - width / 2 + 6, yCoords[centers]));
+			rightSideCenters.Add(new Point(origin.X + width / 2 + 6, yCoords[centers]));
+		}
+
+		for (int q = 0; q < 4; q++)
+		{
+			int leftEndX = leftSideCenters[q].X - WorldGen.genRand.Next(15, 20);
+			int leftEndY = leftSideCenters[q].Y + WorldGen.genRand.Next(-5, 6);
+
+			int rightEndX = rightSideCenters[q].X - WorldGen.genRand.Next(15, 20);
+			int rightEndY = rightSideCenters[q].Y + WorldGen.genRand.Next(-5, 6);
+
+			BoreWavyTunnel(leftSideCenters[q].X, leftSideCenters[q].Y, leftEndX, leftEndY, 50, 4, 4);
+			BoreWavyTunnel(rightSideCenters[q].X, rightSideCenters[q].Y, rightEndX, rightEndY, 50, 4, 4);
+		}
+
+		for (int i = origin.X - width / 2; i < origin.X + width / 2; i++)
+		{
+			for (int j = origin.Y - height / 2; j < origin.Y + height / 2; j++)
+			{
+				if (!Main.tile[i, j].HasTile && Main.tile[i, j + 1].HasTile && (Main.tile[i, j + 1].TileType == ModContent.TileType<CrystalStone>() ||
+					Main.tile[i, j + 1].TileType == ModContent.TileType<CrystalStoneCrystals>()))
+				{
+					if (Main.tile[i, j].TileType != ModContent.TileType<ShatterShards>())
+					{
+						if (WorldGen.genRand.NextBool(8))
+						{
+							WorldGen.PlaceTile(i, j, ModContent.TileType<ShatterShards>(), style: WorldGen.genRand.Next(3));
+						}
+					}
+				}
+			}
+		}
+
         WorldGeneration.Utils.SquareTileFrameArea(origin.X - width / 2, origin.Y - height / 2, width, height);
         return true;
     }
-    public static void CrystalsFloor(int x, int y, int mult, int multAdd)
+
+	public static void BoreWavyTunnel(int startX, int startY, int endX, int endY, int wavelength, float amplitude, int radius)
+	{
+		float length = Vector2.Distance(new Vector2(startX, startY), new Vector2(endX, endY));
+		float direction = (float)Math.Atan2(endY - startY, endX - startX);
+		float t = 0f;
+
+		while (t <= 1f)
+		{
+			int x = (int)MathHelper.Lerp(startX, endX, t);
+			int y = (int)MathHelper.Lerp(startY, endY, t) + (int)(Math.Sin(t * length / wavelength * MathHelper.TwoPi) * amplitude);
+
+			// Place the desired tile or perform any other action
+			BoreCircle(x, y, radius + WorldGen.genRand.Next(-2, 3));
+
+			t += 1f / length;
+		}
+	}
+
+	public static void BoreCircle(int x, int y, float r)
+	{
+		int num = (int)(x - r);
+		int num2 = (int)(y - r);
+		int num3 = (int)(x + r);
+		int num4 = (int)(y + r);
+		for (int i = num; i < num3 + 1; i++)
+		{
+			for (int j = num2; j < num4 + 1; j++)
+			{
+				if (Vector2.Distance(new Vector2(i, j), new Vector2(x, y)) <= r)
+				{
+					Main.tile[i, j].Active(false);
+				}
+			}
+		}
+	}
+
+	public static void CrystalsFloor(int x, int y, int mult, int multAdd)
     {
         //int mult = WorldGen.genRand.Next(2, 4);
         // multadd = WorldGen.genRand.Next(1, 6);
@@ -68,7 +202,7 @@ internal class CrystalMines
         {
             for (int pyX = x - pstep + WorldGen.genRand.Next(1, 4); pyX <= x + pstep + WorldGen.genRand.Next(1, 4); pyX++)
             {
-                WorldGen.PlaceTile(pyX, pyY, ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>(), forced: true);
+                WorldGen.PlaceTile(pyX, pyY, ModContent.TileType<CrystalStoneCrystals>(), forced: true);
             }
             pstep++;
         }
@@ -84,14 +218,14 @@ internal class CrystalMines
         {
             for (int pyX = x - pstep + WorldGen.genRand.Next(1, 4); pyX <= x + pstep + WorldGen.genRand.Next(1, 4); pyX++)
             {
-                WorldGen.PlaceTile(pyX, pyY, ModContent.TileType<Tiles.CrystalMines.CrystalStoneCrystals>(), forced: true);
+                WorldGen.PlaceTile(pyX, pyY, ModContent.TileType<CrystalStoneCrystals>(), forced: true);
             }
             pstep++;
         }
     }
     public static bool Place(Point origin)
     {
-        int width = WorldGen.genRand.Next(250, 280);
+        int width = WorldGen.genRand.Next(100, 150);
         int height = 90;// WorldGen.genRand.Next(70, 90);
 
         for (int i = origin.X; i < origin.X + width; i++)

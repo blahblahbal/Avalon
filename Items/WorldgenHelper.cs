@@ -53,44 +53,46 @@ class WorldgenHelper : ModItem
 			//	AvalonGlobalTile.TileVisibilityState = 0;
 			//}
 
+			#region sky fortress shit
+
 			// with these parameters, the top floor will always have space for two of the hidden rooms (technically more, but at least 2)
 			// these guaranteed free spots should be checked for after the middle floors though, so that it's likely that at least 1 of the rooms generates in those instead
 
-			(bool X, bool Y) smallWorld = (Main.maxTilesX < 6300, Main.maxTilesY < 1800);
-			//smallWorld = (true, true);
-			(bool X, bool Y) mediumWorld = (Main.maxTilesX is >= 6300 and < 8400, Main.maxTilesY is >= 1800 and < 2400);
-			//mediumWorld = (true, true);
-			//(bool X, bool Y) largeWorld = (smallWorld.Item1 == false && mediumWorld.Item1 == false, smallWorld.Item2 == false && mediumWorld.Item2 == false);
+			//(bool X, bool Y) smallWorld = (Main.maxTilesX < 6300, Main.maxTilesY < 1800);
+			////smallWorld = (true, true);
+			//(bool X, bool Y) mediumWorld = (Main.maxTilesX is >= 6300 and < 8400, Main.maxTilesY is >= 1800 and < 2400);
+			////mediumWorld = (true, true);
+			////(bool X, bool Y) largeWorld = (smallWorld.Item1 == false && mediumWorld.Item1 == false, smallWorld.Item2 == false && mediumWorld.Item2 == false);
 
 
-			//int totalSegments = Main.maxTilesX < 6300 ? /*small: */ 10 : (Main.maxTilesX < 8400 ? /*medium: */ 14 : /*large: */ 16);
-			//int lowerHallsFloorCount = Main.maxTilesY < 1800 ? /*small: */ 1 : (Main.maxTilesY < 2400 ? /*medium: */ 1 : /*large: */ 2);
+			////int totalSegments = Main.maxTilesX < 6300 ? /*small: */ 10 : (Main.maxTilesX < 8400 ? /*medium: */ 14 : /*large: */ 16);
+			////int lowerHallsFloorCount = Main.maxTilesY < 1800 ? /*small: */ 1 : (Main.maxTilesY < 2400 ? /*medium: */ 1 : /*large: */ 2);
+			////int middleHallsFloorCount = 2;
+			////int upperHallsFloorCount = Main.maxTilesY < 1800 ? /*small: */ 1 : (Main.maxTilesY < 2400 ? /*medium: */ 2 : /*large: */ 2);
+
+			//int totalSegments = smallWorld.X ? 12 : (mediumWorld.X ? 14 : 16);
+			//int lowerHallsFloorCount = smallWorld.Y ? 1 : (mediumWorld.Y ? 1 : 2);
 			//int middleHallsFloorCount = 2;
-			//int upperHallsFloorCount = Main.maxTilesY < 1800 ? /*small: */ 1 : (Main.maxTilesY < 2400 ? /*medium: */ 2 : /*large: */ 2);
+			//int upperHallsFloorCount = smallWorld.Y ? 1 : (mediumWorld.Y ? 2 : 2);
 
-			int totalSegments = smallWorld.X ? 12 : (mediumWorld.X ? 14 : 16);
-			int lowerHallsFloorCount = smallWorld.Y ? 1 : (mediumWorld.Y ? 1 : 2);
-			int middleHallsFloorCount = 2;
-			int upperHallsFloorCount = smallWorld.Y ? 1 : (mediumWorld.Y ? 2 : 2);
+			//// chance that a dividing wall will be created for each cell, given the below conditions are satisfied
+			//int wallChanceDenominator = 8;
+			//// how many vertical dividing walls are on each floor
+			//int maxWallsPerFloor = smallWorld.X ? 1 : 2;
+			//int topFloorMaxWalls = smallWorld.X ? 0 : 2;
+			//// the minimum gap in cells between dividing walls
+			//int minGapBetweenWalls = 5;
+			//// pretty sure these next two values are not working properly rn, I'll just fix it later
+			//// used for the far left side of the structure
+			//int initialGapBetweenWalls = 2;
+			//// used for the far right side of the structure
+			//int finalGapBetweenWalls = 2;
 
-			// chance that a dividing wall will be created for each cell, given the below conditions are satisfied
-			int wallChanceDenominator = 8;
-			// how many vertical dividing walls are on each floor
-			int maxWallsPerFloor = smallWorld.X ? 1 : 2;
-			int topFloorMaxWalls = smallWorld.X ? 0 : 2;
-			// the minimum gap in cells between dividing walls
-			int minGapBetweenWalls = 5;
-			// pretty sure these next two values are not working properly rn, I'll just fix it later
-			// used for the far left side of the structure
-			int initialGapBetweenWalls = 2;
-			// used for the far right side of the structure
-			int finalGapBetweenWalls = 2;
+			//initialGapBetweenWalls = Math.Clamp(initialGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
+			//finalGapBetweenWalls = Math.Clamp(finalGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
 
-			initialGapBetweenWalls = Math.Clamp(initialGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
-			finalGapBetweenWalls = Math.Clamp(finalGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
-
-			WorldGeneration.Structures.ChainedArrayBuilder.NewChainedStructure(x, y, totalSegments, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, wallChanceDenominator, maxWallsPerFloor, topFloorMaxWalls, minGapBetweenWalls, initialGapBetweenWalls, finalGapBetweenWalls);
-
+			//WorldGeneration.Structures.ChainedArrayBuilder.NewChainedStructure(x, y, totalSegments, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, wallChanceDenominator, maxWallsPerFloor, topFloorMaxWalls, minGapBetweenWalls, initialGapBetweenWalls, finalGapBetweenWalls);
+			#endregion
 			//for (int i = 0; i < Main.item.Length - 1; i++)
 			//{
 			//	if (Main.item[i].type > ItemID.None)
@@ -107,6 +109,8 @@ class WorldgenHelper : ModItem
 			//WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);
 			//Crystals(x, y);
 			//World.Biomes.CrystalMines.Place(new Point(x, y));
+
+			World.Biomes.CrystalMines.PlaceNew(new Point(x, y));
 
 			//WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
 

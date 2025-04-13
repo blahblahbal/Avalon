@@ -16,10 +16,10 @@ class LightninginaBottle : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
+        Item.width = 20;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 3);
-        Item.height = dims.Height;
+        Item.height = 24;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

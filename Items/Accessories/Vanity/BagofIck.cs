@@ -17,11 +17,11 @@ public class BagofIck : ModItem
 	{
 		Rectangle dims = this.GetDims();
 		Item.rare = ItemRarityID.Green;
-		Item.width = dims.Width;
+		Item.width = 24;
 		Item.accessory = true;
 		Item.vanity = true;
 		Item.value = Item.sellPrice(0, 1);
-		Item.height = dims.Height;
+		Item.height = 28;
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
 

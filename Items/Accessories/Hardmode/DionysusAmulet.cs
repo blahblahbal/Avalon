@@ -12,10 +12,10 @@ class DionysusAmulet : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
+        Item.width = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 2);
-        Item.height = dims.Height;
+        Item.height = 34;
         Item.defense = 3;
     }
 

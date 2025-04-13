@@ -22,10 +22,10 @@ class RiftGoggles : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Lime;
-        Item.width = dims.Width;
+        Item.width = 26;
         Item.accessory = true;
         Item.value = 50000;
-        Item.height = dims.Height;
+        Item.height = 22;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

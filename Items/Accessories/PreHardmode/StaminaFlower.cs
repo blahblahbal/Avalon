@@ -13,10 +13,10 @@ public class StaminaFlower : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
+        Item.width = 20;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 54);
-        Item.height = dims.Height;
+        Item.height = 44;
     }
 
     public override void AddRecipes()

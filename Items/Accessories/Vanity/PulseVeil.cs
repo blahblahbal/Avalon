@@ -13,10 +13,10 @@ class PulseVeil : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ModContent.RarityType<Rarities.QuibopsRarity>();
-        Item.width = dims.Width;
+        Item.width = 24;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 45);
-        Item.height = dims.Height;
+        Item.height = 24;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
     public override void UpdateVanity(Player player)

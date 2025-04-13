@@ -25,10 +25,10 @@ public class BlahsWings : ModItem
         Rectangle dims = this.GetDims();
         Item.defense = 4;
         Item.rare = ModContent.RarityType<BlahRarity>();
-        Item.width = dims.Width;
+        Item.width = 32;
         Item.value = Item.sellPrice(2);
         Item.accessory = true;
-        Item.height = dims.Height;
+        Item.height = 32;
     }
 
     //public override void AddRecipes()

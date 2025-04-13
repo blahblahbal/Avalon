@@ -9,8 +9,8 @@ class RubberBoot : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 16;
-        Item.height = 24;
+        Item.width = 26;
+        Item.height = 28;
         Item.rare = ItemRarityID.LightRed;
         Item.accessory = true;
         Item.value = 100000;

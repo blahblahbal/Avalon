@@ -12,10 +12,10 @@ class CrystalEdge : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Cyan;
-        Item.width = dims.Width;
+        Item.width = 32;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 4, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 34;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

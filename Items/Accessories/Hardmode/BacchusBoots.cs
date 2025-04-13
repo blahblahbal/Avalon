@@ -14,10 +14,10 @@ class BacchusBoots : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.LightPurple;
-        Item.width = dims.Width;
+        Item.width = 30;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 2);
-        Item.height = dims.Height;
+        Item.height = 28;
         Item.defense = 3;
     }
 

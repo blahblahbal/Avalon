@@ -11,10 +11,10 @@ class SandyStormcloudinaBottle : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Orange;
-        Item.width = dims.Width;
+        Item.width = 20;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 3, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 26;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

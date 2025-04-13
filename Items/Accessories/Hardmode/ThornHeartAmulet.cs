@@ -13,10 +13,10 @@ class ThornHeartAmulet : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.LightRed;
-        Item.width = dims.Width;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 2);
-        Item.height = dims.Height;
+        Item.height = 38;
     }
     public override void AddRecipes()
     {

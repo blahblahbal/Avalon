@@ -12,10 +12,10 @@ class DiamondAmulet : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Green;
-        Item.width = dims.Width;
+        Item.width = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 0, 50);
-        Item.height = dims.Height;
+        Item.height = 34;
         Item.defense = 5;
     }
     public override void AddRecipes()

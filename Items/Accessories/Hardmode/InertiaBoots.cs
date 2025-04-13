@@ -21,10 +21,10 @@ class InertiaBoots : ModItem
     {
         Item.defense = 4;
         Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
-        Item.width = 30;
+        Item.width = 34;
         Item.value = Item.sellPrice(0, 16, 45, 0);
         Item.accessory = true;
-        Item.height = 30;
+        Item.height = 32;
     }
 
     public override void AddRecipes()

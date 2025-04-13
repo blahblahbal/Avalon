@@ -16,10 +16,10 @@ public class ReflexCharm : ModItem
         Rectangle dims = this.GetDims();
         Item.defense = 2;
         Item.rare = ItemRarityID.LightRed;
-        Item.width = dims.Width;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 1, 8);
-        Item.height = dims.Height;
+        Item.height = 32;
     }
     public override void AddRecipes()
     {

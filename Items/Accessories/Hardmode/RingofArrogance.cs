@@ -10,10 +10,10 @@ class RingofArrogance : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
-        Item.width = dims.Width;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 4);
-        Item.height = dims.Height;
+        Item.height = 28;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

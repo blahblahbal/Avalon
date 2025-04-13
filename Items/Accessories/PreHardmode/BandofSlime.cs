@@ -9,10 +9,10 @@ public class BandofSlime : ModItem
     public override void SetDefaults()
     {
         Item.rare = ItemRarityID.Blue;
-        Item.width = 20;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = 50000;
-        Item.height = 20;
+        Item.height = 30;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

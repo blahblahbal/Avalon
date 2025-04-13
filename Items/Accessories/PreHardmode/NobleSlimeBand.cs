@@ -11,10 +11,10 @@ class NobleSlimeBand : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Orange;
-        Item.width = dims.Width;
+        Item.width = 34;
         Item.accessory = true;
         Item.value = 200000;
-        Item.height = dims.Height;
+        Item.height = 36;
     }
     public override void AddRecipes()
     {

@@ -9,8 +9,8 @@ class GreekExtinguisher : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 16;
-        Item.height = 24;
+        Item.width = 36;
+        Item.height = 38;
         Item.rare = ItemRarityID.LightPurple;
         Item.accessory = true;
         Item.value = 100000;

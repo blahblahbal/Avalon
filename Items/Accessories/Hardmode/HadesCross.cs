@@ -9,8 +9,8 @@ public class HadesCross : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 24;
-        Item.height = 28;
+        Item.width = 42;
+		Item.height = 46;
         Item.accessory = true;
         Item.value = Item.buyPrice(0, 9);
         Item.rare = ItemRarityID.Yellow;

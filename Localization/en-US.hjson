@@ -9688,6 +9688,11 @@ Mods: {
 				DisplayName: Midnight's Razor
 				Tooltip: ""
 			}
+
+			ShroomiteAmmunition: {
+				DisplayName: Shroomite Ammunition
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9986,6 +9991,9 @@ Mods: {
 			PathogenSickle.DisplayName: Pathogen Sickle
 			PhantomBlade.DisplayName: Phantom Blade
 			MidnightsRazor.DisplayName: Midnight's Razor
+			ShroomiteArrow.DisplayName: Shroomite Arrow
+			ShroomiteBullet.DisplayName: Shroomite Bullet
+			ShroomiteRocket.DisplayName: Shroomite Rocket
 		}
 
 		NPCs: {
@@ -11238,6 +11246,11 @@ Mods: {
 			SilenceCandleBuff: {
 				DisplayName: Silence Candle Buff
 				Description: Mods.Avalon.Buffs.SilenceCandleBuff.Description
+			}
+
+			ShroomiteFullbright: {
+				DisplayName: Shroomite Fullbright
+				Description: Mods.Avalon.Buffs.ShroomiteFullbright.Description
 			}
 		}
 

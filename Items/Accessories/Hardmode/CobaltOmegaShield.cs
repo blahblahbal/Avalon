@@ -14,10 +14,10 @@ class CobaltOmegaShield : ModItem
         Rectangle dims = this.GetDims();
         Item.defense = 4;
         Item.rare = ItemRarityID.Yellow;
-        Item.width = dims.Width;
+        Item.width = 38;
         Item.value = 100000;
         Item.accessory = true;
-        Item.height = dims.Height;
+        Item.height = 34;
     }
     public override void AddRecipes()
     {

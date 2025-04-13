@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -12,12 +11,11 @@ public class AstrallineArtifact : ModItem
 
     public override void SetDefaults()
     {
-        Rectangle dims = this.GetDims();
         Item.rare = 1;
-        Item.width = dims.Width;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 15);
-        Item.height = dims.Height;
+        Item.height = 38;
         Item.expert = true;
     }
 

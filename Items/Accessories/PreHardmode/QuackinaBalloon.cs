@@ -12,10 +12,10 @@ class QuackinaBalloon : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ModContent.RarityType<Rarities.AvalonRarity>();
-        Item.width = dims.Width;
+        Item.width = 22;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 1, 0, 0);
-        Item.height = dims.Height;
+        Item.height = 28;
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

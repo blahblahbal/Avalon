@@ -17,10 +17,10 @@ public class PygmyShield : ModItem
     {
         Item.defense = 3;
         Item.rare = ItemRarityID.Green;
-        Item.width = 20;
+        Item.width = 30;
         Item.value = Item.sellPrice(0, 0, 75);
         Item.accessory = true;
-        Item.height = 20;
+        Item.height = 46;
     }
     public override void AddRecipes()
     {

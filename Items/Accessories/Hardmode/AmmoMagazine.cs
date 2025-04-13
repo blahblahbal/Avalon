@@ -9,8 +9,8 @@ class AmmoMagazine : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 16;
-        Item.height = 24;
+        Item.width = 22;
+        Item.height = 30;
         Item.rare = ItemRarityID.LightRed;
         Item.accessory = true;
         Item.value = 100000;

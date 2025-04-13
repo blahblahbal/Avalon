@@ -8,8 +8,8 @@ namespace Avalon.Items.Accessories.Hardmode;
 class OxygenTank : ModItem
 {    public override void SetDefaults()
     {
-        Item.width = 16;
-        Item.height = 24;
+        Item.width = 44;
+        Item.height = 42;
         Item.rare = ItemRarityID.Yellow;
         Item.accessory = true;
         Item.value = 100000;

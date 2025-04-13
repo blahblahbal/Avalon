@@ -12,10 +12,10 @@ class ChaosEye : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Cyan;
-        Item.width = dims.Width;
+        Item.width = 34;
         Item.value = 400000;
         Item.accessory = true;
-        Item.height = dims.Height;
+        Item.height = 34;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

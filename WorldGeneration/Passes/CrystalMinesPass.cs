@@ -42,7 +42,7 @@ internal class CrystalMinesPass : GenPass
             //num614++;
             WorldGenConfiguration config = WorldGenConfiguration.FromEmbeddedPath("Terraria.GameContent.WorldBuilding.Configuration.json");
             //World.Biomes.CrystalMines crystalMines = config.CreateBiome<Biomes.CrystalMines>();
-            if (Biomes.CrystalMines.Place(point))//World.Biomes.CrystalMinesTest
+            if (Biomes.CrystalMines.PlaceNew(point))//World.Biomes.CrystalMinesTest
             {
                 Biomes.CrystalMinesHouseBiome crystalHouse = config.CreateBiome<Biomes.CrystalMinesHouseBiome>();
                 int xpos = WorldGen.genRand.Next(point.X + 20, point.X + 30);

@@ -13,8 +13,8 @@ class SixHundredWattLightbulb : ModItem
     }
     public override void SetDefaults()
     {
-        Item.width = 16;
-        Item.height = 24;
+        Item.width = 24;
+        Item.height = 32;
         Item.rare = ItemRarityID.Cyan;
         Item.accessory = true;
         Item.value = 100000;

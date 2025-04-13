@@ -13,10 +13,10 @@ class ObsidianGlove : ModItem
     {
         Rectangle dims = this.GetDims();
         Item.rare = ItemRarityID.Lime;
-        Item.width = dims.Width;
+        Item.width = 28;
         Item.accessory = true;
         Item.value = Item.sellPrice(0, 2);
-        Item.height = dims.Height;
+        Item.height = 22;
         Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
