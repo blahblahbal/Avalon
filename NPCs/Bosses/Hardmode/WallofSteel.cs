@@ -44,6 +44,8 @@ public class WallofSteel : ModNPC
 	public override void SetStaticDefaults()
 	{
 		Main.npcFrameCount[NPC.type] = 1;
+		NPCID.Sets.MPAllowedEnemies[Type] = true;
+		NPCID.Sets.BossBestiaryPriority.Add(Type);
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
