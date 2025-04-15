@@ -1,17 +1,17 @@
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria;
 using Avalon.Common;
 using Avalon.Common.Players;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Items.Pets;
 
-internal class Paramount : ModItem
+public class Paramount : ModItem
 {
 	public override void SetDefaults()
 	{
 		Item.CloneDefaults(ItemID.WispinaBottle);
-		Item.shoot = 0;
+		Item.shoot = ProjectileID.None;
 		Item.buffType = 0;
 		Item.value = Item.buyPrice(0, 20);
 		Item.rare = ItemRarityID.Green;

@@ -6,7 +6,7 @@ using Avalon.Common.Players;
 
 namespace Avalon.Items.Pets;
 
-internal class SpiritofOriginal : ModItem
+public class SpiritofOriginal : ModItem
 {
 	public override void SetDefaults()
 	{

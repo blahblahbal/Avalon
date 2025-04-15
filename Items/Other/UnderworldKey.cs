@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Other;
 
-internal class UnderworldKey : ModItem
+public class UnderworldKey : ModItem
 {
     public override void SetDefaults()
     {

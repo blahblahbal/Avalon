@@ -6,7 +6,7 @@ using Avalon.Common.Players;
 
 namespace Avalon.Items.Pets;
 
-internal class Zeal : ModItem
+public class Zeal : ModItem
 {
 	public override void SetDefaults()
 	{
