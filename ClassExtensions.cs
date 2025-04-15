@@ -893,7 +893,7 @@ public static class ClassExtensions
 	/// Specifically: <code>
 	/// width = 26;
 	/// height = 26;
-	/// ammo = <see cref="ModContent.ItemType<RhotukaSpinner>()"/>;
+	/// ammo = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="RhotukaSpinner"/>)
 	/// DamageType = DamageClass.Ranged;
 	/// maxStack = Item.CommonMaxStack;
 	/// damage = <paramref name="damage"/>;
