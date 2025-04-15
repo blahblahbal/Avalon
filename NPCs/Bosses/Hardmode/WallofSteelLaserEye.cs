@@ -1,20 +1,17 @@
 using Avalon.Common;
 using Avalon.Projectiles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
-internal class WallofSteelLaserEye : ModNPC
+public class WallofSteelLaserEye : ModNPC
 {
 	private byte ModeChangeCounter = 0;
 	private byte Phase = 0;
@@ -220,7 +217,6 @@ internal class WallofSteelLaserEye : ModNPC
 		if (NPC.ai[2] == 10)
 		{
 			int fire;
-			float f = 0f;
 			//var laserPos = new Vector2(NPC.Center.X + NPC.Center.DirectionTo(NPC.PlayerTarget().Center).X * 40f, NPC.Center.Y + NPC.Center.DirectionTo(NPC.PlayerTarget().Center).Y * 40f);
 			var laserPos = NPC.Center;
 			float rotation = (float)Math.Atan2(laserPos.Y - NPC.PlayerTarget().Center.Y, laserPos.X - NPC.PlayerTarget().Center.X);

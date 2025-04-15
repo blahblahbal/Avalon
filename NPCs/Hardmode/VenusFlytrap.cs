@@ -1,18 +1,18 @@
-using System;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria;
+using Avalon.Buffs.Debuffs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.IO;
-using Terraria.Localization;
-using Avalon.Buffs.Debuffs;
 using ReLogic.Content;
+using System;
+using System.IO;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Hardmode;
 
-internal class VenusFlytrap : ModNPC
+public class VenusFlytrap : ModNPC
 {
 	public int leftHead = -1;
 	public int rightHead = -1;
@@ -20,9 +20,9 @@ internal class VenusFlytrap : ModNPC
 	private bool spawn = false;
 	private float PosX = 0f;
 	private float PosY = 0f;
-	private static Asset<Texture2D> bestiaryTexture0;
-	private static Asset<Texture2D> bestiaryTexture1;
-	private static Asset<Texture2D> bestiaryTexture2;
+	private static Asset<Texture2D>? bestiaryTexture0;
+	private static Asset<Texture2D>? bestiaryTexture1;
+	private static Asset<Texture2D>? bestiaryTexture2;
 	public override void SetStaticDefaults()
 	{
 		bestiaryTexture0 = ModContent.Request<Texture2D>(Texture + "_Bestiary0");
@@ -192,7 +192,7 @@ internal class VenusFlytrap : ModNPC
 
 		Main.npc[leftHead].ai[0] = rightHead;
 		Main.npc[rightHead].ai[0] = leftHead;
-		
+
 		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, leftHead);
 		NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, rightHead);
 	}

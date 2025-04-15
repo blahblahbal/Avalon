@@ -13,7 +13,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
-internal class WallofSteelMouthEye : ModNPC
+public class WallofSteelMouthEye : ModNPC
 {
 	private byte ModeChangeCounter = 0;
 	private byte Phase = 0;

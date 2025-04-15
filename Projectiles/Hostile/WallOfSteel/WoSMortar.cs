@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile.WallOfSteel;
 
-internal class WoSMortar : ModProjectile
+public class WoSMortar : ModProjectile
 {
 	public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.Bomb;
 

@@ -1,15 +1,13 @@
 using Microsoft.Xna.Framework;
-using System.IO;
 using Terraria;
 using Terraria.Audio;
-using Terraria.Chat;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 
-internal class DesertBeakWingNPC : ModNPC
+public class DesertBeakWingNPC : ModNPC
 {
 	public override void SetStaticDefaults()
 	{
