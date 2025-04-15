@@ -65,7 +65,7 @@ using Avalon.Buffs;
 
 namespace Avalon.Data.Sets
 {
-	internal class Item
+	internal class ItemSets
 	{
 		public static bool[] VanillaBarItems = ItemID.Sets.Factory.CreateBoolSet(false,
 			ItemID.CopperBar, ItemID.TinBar, ItemID.IronBar, ItemID.LeadBar, ItemID.SilverBar,

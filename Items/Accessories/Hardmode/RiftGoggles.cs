@@ -128,14 +128,14 @@ class RiftGogglesPlayer : ModPlayer
 				Point pt = pposTile2.ToTileCoordinates();
 				for (int q = 0; q < 50; q++)
 				{
-					if (!Data.Sets.Tile.RiftOres[Main.tile[pt.X, pt.Y].TileType])
+					if (!Data.Sets.TileSets.RiftOres[Main.tile[pt.X, pt.Y].TileType])
 					{
 						pposTile2 = Player.position + new Vector2(Main.rand.Next(-50 * 16, 50 * 16), Main.rand.Next(-35 * 16, 35 * 16));
 						pt = pposTile2.ToTileCoordinates();
 					}
 					else break;
 				}
-				if (Data.Sets.Tile.RiftOres[Main.tile[pt.X, pt.Y].TileType])
+				if (Data.Sets.TileSets.RiftOres[Main.tile[pt.X, pt.Y].TileType])
 				{
 					#region copper
 					if (Main.tile[pt.X, pt.Y].TileType == TileID.Copper)
@@ -375,7 +375,7 @@ class RiftGogglesGlobalTile : GlobalTile
 		{
 			return;
 		}
-		if (Main.tile[i, j].HasTile && Data.Sets.Tile.RiftOres[Main.tile[i, j].TileType])
+		if (Main.tile[i, j].HasTile && Data.Sets.TileSets.RiftOres[Main.tile[i, j].TileType])
 		{
 			Tile tile = Main.tile[i, j];
 			var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);

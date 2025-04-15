@@ -25,7 +25,7 @@ public class IrateBones : ModNPC
             Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-		Data.Sets.NPC.Undead[NPC.type] = true;
+		Data.Sets.NPCSets.Undead[NPC.type] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
 	}
 

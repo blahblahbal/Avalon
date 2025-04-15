@@ -20,7 +20,7 @@ public class CursedFlamer : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
-        Data.Sets.NPC.Wicked[NPC.type] = true;
+        Data.Sets.NPCSets.Wicked[NPC.type] = true;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{
 			// Influences how the NPC looks in the Bestiary

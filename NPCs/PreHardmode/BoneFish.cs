@@ -19,7 +19,7 @@ public class BoneFish : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 6;
-        Data.Sets.NPC.Undead[NPC.type] = true;
+        Data.Sets.NPCSets.Undead[NPC.type] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()

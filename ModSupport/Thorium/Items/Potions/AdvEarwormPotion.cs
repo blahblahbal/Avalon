@@ -20,8 +20,8 @@ public class AdvEarwormPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<EarwormPotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<EarwormPotion>(), ModContent.BuffType<AdvEarworm>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<EarwormPotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<EarwormPotion>(), ModContent.BuffType<AdvEarworm>());
 	}
 	public override void AddRecipes()
 	{

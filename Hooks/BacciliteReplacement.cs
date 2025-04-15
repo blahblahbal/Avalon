@@ -43,19 +43,19 @@ namespace Avalon.Hooks
 
         private void IL_WorldGen_GERunner(ILContext il)
         {
-            Utilities.AddAlternativeIdChecks(il, TileID.Crimstone, id => Data.Sets.Tile.Chunkstone[id]);
+            Utilities.AddAlternativeIdChecks(il, TileID.Crimstone, id => Data.Sets.TileSets.Chunkstone[id]);
         }
 
         private void IL_WorldGen_badOceanCaveTiles(ILContext il)
         {
-            Utilities.AddAlternativeIdChecks(il, TileID.Ebonstone, id => Data.Sets.Tile.Chunkstone[id]);
-            Utilities.AddAlternativeIdChecks(il, TileID.DemonAltar, id => Data.Sets.Tile.Altar[id]);
-            Utilities.AddAlternativeIdChecks(il, TileID.ShadowOrbs, id => Data.Sets.Tile.Orb[id]);
-            Utilities.AddAlternativeIdChecks(il, WallID.EbonstoneUnsafe, id => Data.Sets.Wall.Chunkstone[id]);
+            Utilities.AddAlternativeIdChecks(il, TileID.Ebonstone, id => Data.Sets.TileSets.Chunkstone[id]);
+            Utilities.AddAlternativeIdChecks(il, TileID.DemonAltar, id => Data.Sets.TileSets.Altar[id]);
+            Utilities.AddAlternativeIdChecks(il, TileID.ShadowOrbs, id => Data.Sets.TileSets.Orb[id]);
+            Utilities.AddAlternativeIdChecks(il, WallID.EbonstoneUnsafe, id => Data.Sets.WallSets.Chunkstone[id]);
         }
 
         public static void AddShimmerAlternativeChecks(ILContext il) =>
-            Utilities.AddAlternativeIdChecks(il, TileID.Ebonstone, id => Data.Sets.Tile.Chunkstone[id]);
+            Utilities.AddAlternativeIdChecks(il, TileID.Ebonstone, id => Data.Sets.TileSets.Chunkstone[id]);
 
         private void On_WorldGen_TileRunner(On_WorldGen.orig_TileRunner orig, int i, int j, double strength, int steps, int type, bool addTile, double speedX, double speedY, bool noYChange, bool overRide, int ignoreTileType)
         {

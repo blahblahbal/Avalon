@@ -6,7 +6,7 @@ using MonoMod.Cil;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Tile = Avalon.Data.Sets.Tile;
+using TileSets = Avalon.Data.Sets.TileSets;
 
 namespace Avalon.Hooks;
 
@@ -150,7 +150,7 @@ internal class ContagionConversionHook : ModHook
 
     private static void IL_AddStalacCheck(ILContext il)
     {
-        Utilities.AddAlternativeIdChecks(il, TileID.Stalactite, id => Tile.Stalac.Contains(id));
+        Utilities.AddAlternativeIdChecks(il, TileID.Stalactite, id => TileSets.Stalac.Contains(id));
     }
 
     private static void On_WorldGen_GetDesiredStalactiteStyle(On_WorldGen.orig_GetDesiredStalagtiteStyle orig, int x, int j, out bool fail, out int desiredStyle, out int height, out int y)

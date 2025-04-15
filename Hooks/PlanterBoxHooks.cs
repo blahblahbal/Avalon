@@ -20,7 +20,7 @@ namespace Avalon.Hooks
 
         private bool On_WorldGen_PlaceTile(On_WorldGen.orig_PlaceTile orig, int i, int j, int Type, bool mute, bool forced, int plr, int style)
         {
-            if (Data.Sets.Tile.AvalonPlanterBoxes[Main.tile[i, j + 1].TileType] &&
+            if (Data.Sets.TileSets.AvalonPlanterBoxes[Main.tile[i, j + 1].TileType] &&
                 (Main.tile[i, j].TileType == TileID.ImmatureHerbs || Main.tile[i, j].TileType == TileID.MatureHerbs ||
                 Main.tile[i, j].TileType == TileID.BloomingHerbs || Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>() ||
                 Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Bloodberry>() || Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Holybird>() ||
@@ -33,7 +33,7 @@ namespace Avalon.Hooks
 
         private bool On_WorldGen_CanCutTile(On_WorldGen.orig_CanCutTile orig, int x, int y, TileCuttingContext context)
         {
-            if (Data.Sets.Tile.AvalonPlanterBoxes[Main.tile[x, y + 1].TileType])
+            if (Data.Sets.TileSets.AvalonPlanterBoxes[Main.tile[x, y + 1].TileType])
             {
                 return false;
             }
@@ -42,7 +42,7 @@ namespace Avalon.Hooks
         
         private static bool OnPlaceAlch(On_WorldGen.orig_PlaceAlch orig, int x, int y, int style)
         {
-            if (Data.Sets.Tile.AvalonPlanterBoxes[Main.tile[x, y + 1].TileType])
+            if (Data.Sets.TileSets.AvalonPlanterBoxes[Main.tile[x, y + 1].TileType])
             {
                 Main.tile[x, y].Active(true);
                 Main.tile[x, y].TileType = TileID.ImmatureHerbs;
@@ -63,7 +63,7 @@ namespace Avalon.Hooks
             {
                 flag = true;
             }
-            if (!Data.Sets.Tile.AvalonPlanterBoxes[Main.tile[x, y + 1].TileType])
+            if (!Data.Sets.TileSets.AvalonPlanterBoxes[Main.tile[x, y + 1].TileType])
             {
                 flag = true;
             }

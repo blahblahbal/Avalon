@@ -151,7 +151,7 @@ public class OreSlime : ModNPC
 	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 2;
-        Data.Sets.NPC.Earthen[NPC.type] = true;
+        Data.Sets.NPCSets.Earthen[NPC.type] = true;
 		BronzeOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.BronzeOre>()];
 		NickelOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.NickelOre>()];
 		ZincOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.ZincOre>()];

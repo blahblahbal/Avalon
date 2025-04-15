@@ -147,11 +147,11 @@ public class CalcSpecGlobalItem : GlobalItem
 				}
 				else
 				{
-					foreach (int itemID in Data.Sets.Tile.VanillaOreTilesToBarItems.Values)
+					foreach (int itemID in Data.Sets.TileSets.VanillaOreTilesToBarItems.Values)
 					{
 						if (recipe.TryGetResult(itemID, out _))
 						{
-							if (Data.Sets.Item.VanillaBarItems[itemID])
+							if (Data.Sets.ItemSets.VanillaBarItems[itemID])
 							{
 								if (recipe.TryGetIngredient(item.type, out Item ingr))
 								{
@@ -260,26 +260,26 @@ internal class CalcSpec : UIState
 					// if the tile is vanilla
 					else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
 					{
-						if (Data.Sets.Tile.ThreeOrePerBar.Contains(type))
+						if (Data.Sets.TileSets.ThreeOrePerBar.Contains(type))
 						{
 							remainder = bars % 3;
 							bars /= 3;
 							remainderDenominator = 3;
-							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
+							barType = Data.Sets.TileSets.VanillaOreTilesToBarItems[type];
 						}
-						else if (Data.Sets.Tile.FourOrePerBar.Contains(type))
+						else if (Data.Sets.TileSets.FourOrePerBar.Contains(type))
 						{
 							remainder = bars % 4;
 							bars /= 4;
 							remainderDenominator = 4;
-							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
+							barType = Data.Sets.TileSets.VanillaOreTilesToBarItems[type];
 						}
-						else if (Data.Sets.Tile.FiveOrePerBar.Contains(type))
+						else if (Data.Sets.TileSets.FiveOrePerBar.Contains(type))
 						{
 							remainder = bars % 5;
 							bars /= 5;
 							remainderDenominator = 5;
-							barType = Data.Sets.Tile.VanillaOreTilesToBarItems[type];
+							barType = Data.Sets.TileSets.VanillaOreTilesToBarItems[type];
 						}
 						else return;
 					}
@@ -332,7 +332,7 @@ internal class CalcSpec : UIState
 					recipe.requiredTile.Contains(TileID.AdamantiteForge) ||
 					recipe.requiredTile.Contains(ModContent.TileType<CaesiumForge>()))
 				{
-					if (!Data.Sets.Tile.OresToChunks.ContainsValue(ing.type))
+					if (!Data.Sets.TileSets.OresToChunks.ContainsValue(ing.type))
 					{
 						if (recipe.requiredItem.Count > 1 || ing.createTile == -1 || !TileID.Sets.Ore[ing.createTile] || ing.stack < 2) continue;
 					}

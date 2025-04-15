@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets;
 
-public static class Projectile
+public static class ProjectileSets
 {
     public static readonly bool[] DontReflect = ProjectileID.Sets.Factory.CreateBoolSet(
         ProjectileID.Stinger,

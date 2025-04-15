@@ -24,7 +24,7 @@ internal class WallWandHook : ModHook
             for (int q = 0; q < Main.LocalPlayer.inventory.Length; q++)
             {
                 int itemType = Main.LocalPlayer.inventory[q].type;
-                if (Data.Sets.Item.DungeonWallItems[itemType]) // TYPE == ItemID.GreenTiledWall || TYPE == ItemID.GreenBrickWall || TYPE == ItemID.GreenSlabWall)
+                if (Data.Sets.ItemSets.DungeonWallItems[itemType]) // TYPE == ItemID.GreenTiledWall || TYPE == ItemID.GreenBrickWall || TYPE == ItemID.GreenSlabWall)
                 {
                     Main.LocalPlayer.inventory[q].stack--;
                     if (Main.LocalPlayer.inventory[q].stack <= 0)

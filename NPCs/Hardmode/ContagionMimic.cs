@@ -26,7 +26,7 @@ public class ContagionMimic : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
-        Data.Sets.NPC.Wicked[NPC.type] = true;
+        Data.Sets.NPCSets.Wicked[NPC.type] = true;
         NPCID.Sets.TrailingMode[NPC.type] = 7;
         ItemID.Sets.KillsToBanner[ModContent.ItemType<ContagionMimicBanner>()] = 25;
     }

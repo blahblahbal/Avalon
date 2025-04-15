@@ -21,8 +21,8 @@ class AdvHolyPotion : HolyPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<HolyPotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<HolyPotion>(), ModContent.BuffType<AdvHoly>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<HolyPotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<HolyPotion>(), ModContent.BuffType<AdvHoly>());
 	}
 	public override void AddRecipes()
 	{

@@ -187,7 +187,7 @@ public class EvilAltar : ModHook
 
 	private void IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool(ILContext il)
     {
-        Utilities.AddAlternativeIdChecks(il, TileID.DemonAltar, id => Data.Sets.Tile.IckyAltar.Contains(id));
+        Utilities.AddAlternativeIdChecks(il, TileID.DemonAltar, id => Data.Sets.TileSets.IckyAltar.Contains(id));
     }
 
     private void On_WorldGen_SmashAltar(On_WorldGen.orig_SmashAltar orig, int i, int j)

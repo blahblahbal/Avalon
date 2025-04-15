@@ -146,7 +146,7 @@ public class MineralSlime : ModNPC
 	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 2;
-        Data.Sets.NPC.Earthen[NPC.type] = true;
+        Data.Sets.NPCSets.Earthen[NPC.type] = true;
 		DurataniumOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.DurataniumOre>()];
 		NaquadahOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.NaquadahOre>()];
 		TroxiniumOreTexture = TextureAssets.Item[ModContent.ItemType<Items.Material.Ores.TroxiniumOre>()];

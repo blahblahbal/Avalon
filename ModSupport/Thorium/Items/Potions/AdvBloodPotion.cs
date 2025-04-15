@@ -20,8 +20,8 @@ class AdvBloodPotion : BloodPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<BloodRush>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<BloodPotion>(), ModContent.BuffType<AdvBloodRush>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<BloodRush>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<BloodPotion>(), ModContent.BuffType<AdvBloodRush>());
 	}
 	public override void AddRecipes()
 	{

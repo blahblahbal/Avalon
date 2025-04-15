@@ -481,7 +481,7 @@ public class AvalonGlobalTile : GlobalTile
     }
     public override bool CanPlace(int i, int j, int type)
     {
-        if (Data.Sets.Tile.AvalonPlanterBoxes[Main.tile[i, j + 1].TileType] &&
+        if (Data.Sets.TileSets.AvalonPlanterBoxes[Main.tile[i, j + 1].TileType] &&
             (Main.tile[i, j].TileType == TileID.ImmatureHerbs || Main.tile[i, j].TileType == TileID.MatureHerbs ||
             Main.tile[i, j].TileType == TileID.BloomingHerbs || Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>() ||
             Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Bloodberry>() || Main.tile[i, j].TileType == ModContent.TileType<Tiles.Herbs.Holybird>() ||
@@ -500,9 +500,9 @@ public class AvalonGlobalTile : GlobalTile
             {
                 if (Main.player[pid].GetModPlayer<AvalonPlayer>().OreDupe && Main.player[pid].HeldItem.pick >= ClassExtensions.GetPickaxePower(Main.tile[i, j].TileType, j))
                 {
-                    if (Data.Sets.Tile.OresToChunks.ContainsKey(Main.tile[i, j].TileType) && !fail)
+                    if (Data.Sets.TileSets.OresToChunks.ContainsKey(Main.tile[i, j].TileType) && !fail)
                     {
-                        int drop = Data.Sets.Tile.OresToChunks[Main.tile[i, j].TileType];
+                        int drop = Data.Sets.TileSets.OresToChunks[Main.tile[i, j].TileType];
                         int stack = 1;
                         if (Main.rand.NextBool(3))
                         {

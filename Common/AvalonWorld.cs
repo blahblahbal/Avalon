@@ -612,7 +612,7 @@ public class AvalonWorld : ModSystem
                 WorldGen.KillTile(xCoord, yCoord);
             }
             // kill barfbush if block below isn't contagion grass or chunkstone
-            if (!(Main.tile[xCoord, num11].TileType == ModContent.TileType<Ickgrass>() || Main.tile[xCoord, num11].TileType == ModContent.TileType<ContagionJungleGrass>() || Main.tile[xCoord, num11].TileType == ModContent.TileType<Chunkstone>() || Data.Sets.Tile.SuitableForPlantingHerbs[Main.tile[xCoord, num11].TileType]) &&
+            if (!(Main.tile[xCoord, num11].TileType == ModContent.TileType<Ickgrass>() || Main.tile[xCoord, num11].TileType == ModContent.TileType<ContagionJungleGrass>() || Main.tile[xCoord, num11].TileType == ModContent.TileType<Chunkstone>() || Data.Sets.TileSets.SuitableForPlantingHerbs[Main.tile[xCoord, num11].TileType]) &&
                 Main.tile[xCoord, yCoord].TileType == ModContent.TileType<Barfbush>())
             {
                 WorldGen.KillTile(xCoord, yCoord);

@@ -28,7 +28,7 @@ public class Cougher : ModNPC
 	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 3;
-        Data.Sets.NPC.Wicked[NPC.type] = true;
+        Data.Sets.NPCSets.Wicked[NPC.type] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		textureBlue = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/BluePartyHat");
 		textureCyan = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Costumes/CyanPartyHat");

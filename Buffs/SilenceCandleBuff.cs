@@ -31,7 +31,7 @@ public class SilenceCandleHook : ModHook
 				continue;
 
 			if (Main.player[k].HasBuff(ModContent.BuffType<SilenceCandleBuff>()) && ((!NPCID.Sets.CountsAsCritter[Type] &&
-				!npc.townNPC && !NPCID.Sets.TownCritter[Type] && !npc.boss && source is EntitySource_SpawnNPC) || Data.Sets.NPC.SilenceCandleStopSpawns[Type]))
+				!npc.townNPC && !NPCID.Sets.TownCritter[Type] && !npc.boss && source is EntitySource_SpawnNPC) || Data.Sets.NPCSets.SilenceCandleStopSpawns[Type]))
 			{
 				return 200;
 			}

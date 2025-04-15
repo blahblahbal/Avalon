@@ -14,7 +14,7 @@ public class AdvForceField : ModBuff
         for (int l = 0; l < projectile.Length; l++)
         {
             Projectile Pr = projectile[l];
-            if (!Pr.friendly && !Pr.bobber && !Data.Sets.Projectile.DontReflect[Pr.type])
+            if (!Pr.friendly && !Pr.bobber && !Data.Sets.ProjectileSets.DontReflect[Pr.type])
             {
                 var rectangle = new Rectangle((int)Pr.position.X, (int)Pr.position.Y, Pr.width, Pr.height);
                 if (rectangle.Intersects(value))

@@ -51,7 +51,7 @@ public class BaskingSpewer : ModNPC
 		Main.npcFrameCount[Type] = 4;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		NPCID.Sets.TrailingMode[Type] = 6;
-		Data.Sets.NPC.Wicked[NPC.type] = true;
+		Data.Sets.NPCSets.Wicked[NPC.type] = true;
 
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{

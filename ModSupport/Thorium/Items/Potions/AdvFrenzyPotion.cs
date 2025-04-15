@@ -19,8 +19,8 @@ class AdvFrenzyPotion : FrenzyPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<FrenzyPotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<FrenzyPotion>(), ModContent.BuffType<AdvFrenzy>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<FrenzyPotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<FrenzyPotion>(), ModContent.BuffType<AdvFrenzy>());
 	}
 	public override void AddRecipes()
 	{

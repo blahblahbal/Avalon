@@ -102,7 +102,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 	public override bool CanHitPlayer(Projectile projectile, Player target)
 	{
 		if (target.GetModPlayer<AvalonPlayer>().TrapImmune && (ProjectileID.Sets.IsAGravestone[projectile.type] ||
-			Data.Sets.Projectile.TrapProjectiles[projectile.type]))
+			Data.Sets.ProjectileSets.TrapProjectiles[projectile.type]))
 		{
 			return false;
 		}

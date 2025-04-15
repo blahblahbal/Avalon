@@ -20,8 +20,8 @@ class AdvWarmongerPotion : WarmongerPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<WarmongerBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<WarmongerPotion>(), ModContent.BuffType<AdvWarmonger>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<WarmongerBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<WarmongerPotion>(), ModContent.BuffType<AdvWarmonger>());
 	}
 	public override void AddRecipes()
 	{

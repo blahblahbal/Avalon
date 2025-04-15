@@ -5,7 +5,7 @@ using Avalon.Walls;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Tile = Avalon.Data.Sets.Tile;
+using TileSets = Avalon.Data.Sets.TileSets;
 
 namespace Avalon.WorldGeneration.Helpers;
 
@@ -36,7 +36,7 @@ public static class ConversionHelper
                     ConvertTile(x, y, type => TileID.Sets.Conversion.Sandstone[type], TileID.Sandstone, false);
 
                 // TODO: This isn't how plants should be converted
-                if (Tile.Conversion.ShortGrass[Main.tile[x, y].TileType])
+                if (TileSets.Conversion.ShortGrass[Main.tile[x, y].TileType])
                 {
                     Main.tile[x, y].TileType = TileID.JunglePlants;
                     WorldGen.SquareTileFrame(x, y);

@@ -13,7 +13,7 @@ public class NaquadahOre : ModTile
     {
         MineResist = 3f;
         AddMapEntry(Color.Blue, this.GetLocalization("MapEntry"));
-        Data.Sets.Tile.RiftOres[Type] = true;
+        Data.Sets.TileSets.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileSpelunker[Type] = true;

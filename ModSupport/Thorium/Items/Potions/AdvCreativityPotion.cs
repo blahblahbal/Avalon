@@ -20,8 +20,8 @@ public class AdvCreativityPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<CreativityPotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<CreativityPotion>(), ModContent.BuffType<AdvCreativity>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<CreativityPotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<CreativityPotion>(), ModContent.BuffType<AdvCreativity>());
 	}
 	public override void AddRecipes()
 	{

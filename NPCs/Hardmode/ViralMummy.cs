@@ -23,8 +23,8 @@ public class ViralMummy : ModNPC
             Velocity = 0.5f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        Data.Sets.NPC.Undead[NPC.type] = true;
-        Data.Sets.NPC.Wicked[NPC.type] = true;
+        Data.Sets.NPCSets.Undead[NPC.type] = true;
+        Data.Sets.NPCSets.Wicked[NPC.type] = true;
     }
     public override void SetDefaults()
     {

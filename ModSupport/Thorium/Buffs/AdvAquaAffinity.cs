@@ -11,7 +11,7 @@ public class AdvAquaAffinity : ModBuff
     }
     public override void SetStaticDefaults()
     {
-        Data.Sets.Buffs.Elixir[Type] = true;
+        Data.Sets.BuffSets.Elixir[Type] = true;
     }
     public override void Update(Player player, ref int buffIndex)
     {

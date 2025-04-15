@@ -20,8 +20,8 @@ class AdvBouncingFlamePotion : BouncingFlamePotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<BouncingFlamePotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<BouncingFlamePotion>(), ModContent.BuffType<AdvBouncingFlame>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<BouncingFlamePotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<BouncingFlamePotion>(), ModContent.BuffType<AdvBouncingFlame>());
 	}
 	public override void AddRecipes()
 	{

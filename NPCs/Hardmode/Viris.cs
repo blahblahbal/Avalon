@@ -23,7 +23,7 @@ public class Viris : ModNPC
         Main.npcFrameCount[NPC.type] = 8;
         NPCID.Sets.TrailCacheLength[NPC.type] = 5;
         NPCID.Sets.TrailingMode[NPC.type] = 7;
-        Data.Sets.NPC.Wicked[NPC.type] = true;
+        Data.Sets.NPCSets.Wicked[NPC.type] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         texture = TextureAssets.Npc[Type];
 	}

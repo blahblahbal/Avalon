@@ -13,7 +13,7 @@ public class DurataniumOre : ModTile
     {
         MineResist = 2f;
         AddMapEntry(new Color(107, 20, 80), this.GetLocalization("MapEntry"));
-        Data.Sets.Tile.RiftOres[Type] = true;
+        Data.Sets.TileSets.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileSpelunker[Type] = true;

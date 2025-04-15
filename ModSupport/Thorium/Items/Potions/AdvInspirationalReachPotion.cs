@@ -20,8 +20,8 @@ public class AdvInspirationalReachPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<InspirationReachPotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<InspirationReachPotion>(), ModContent.BuffType<AdvInspirationalReach>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<InspirationReachPotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<InspirationReachPotion>(), ModContent.BuffType<AdvInspirationalReach>());
 	}
 	public override void AddRecipes()
 	{

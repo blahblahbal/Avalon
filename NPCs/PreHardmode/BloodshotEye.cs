@@ -29,7 +29,7 @@ public class BloodshotEye : ModNPC
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         Main.npcFrameCount[NPC.type] = 3;
-        Data.Sets.NPC.Flyer[NPC.type] = true;
+        Data.Sets.NPCSets.Flyer[NPC.type] = true;
     }
 
     public override void SetDefaults()

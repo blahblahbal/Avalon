@@ -15,7 +15,7 @@ namespace Avalon.Common
                 tip = tip.Replace(Language.GetTextValue("BuffDescription.MonsterBanner"), Language.GetTextValue("Mods.Avalon.TooltipEdits.MonsterBanner"));
             }
 
-            if (Data.Sets.Buffs.Elixir[type])
+            if (Data.Sets.BuffSets.Elixir[type])
             {
                 rare = ModContent.RarityType<ElixirBuffNameRarity>();
             }

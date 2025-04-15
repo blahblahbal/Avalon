@@ -31,9 +31,9 @@ public class BiomeLockbox : ModItem
 		{
 			for (int i = 0; i < 50; i++)
 			{
-				for (int j = 0; j < Data.Sets.Item.BiomeLockboxCollection.Count; j++)
+				for (int j = 0; j < Data.Sets.ItemSets.BiomeLockboxCollection.Count; j++)
 				{
-					if (player.inventory[i].type == Data.Sets.Item.BiomeLockboxCollection[j][0])
+					if (player.inventory[i].type == Data.Sets.ItemSets.BiomeLockboxCollection[j][0])
 					{
 						OpenBiomeLockbox(player.inventory[i], player);
 						i = 50;
@@ -45,9 +45,9 @@ public class BiomeLockbox : ModItem
 		}
 		else
 		{
-			for (int j = 0; j < Data.Sets.Item.BiomeLockboxCollection.Count; j++)
+			for (int j = 0; j < Data.Sets.ItemSets.BiomeLockboxCollection.Count; j++)
 			{
-				if (Main.mouseItem.type == Data.Sets.Item.BiomeLockboxCollection[j][0])
+				if (Main.mouseItem.type == Data.Sets.ItemSets.BiomeLockboxCollection[j][0])
 				{
 					OpenBiomeLockbox(Main.mouseItem, player);
 					break;
@@ -61,13 +61,13 @@ public class BiomeLockbox : ModItem
 	}
 	private void OpenBiomeLockbox(Item key, Player player)
 	{
-		for (int i = 0; i < Data.Sets.Item.BiomeLockboxCollection.Count; i++)
+		for (int i = 0; i < Data.Sets.ItemSets.BiomeLockboxCollection.Count; i++)
 		{
-			if (key.type == Data.Sets.Item.BiomeLockboxCollection[i][0])
+			if (key.type == Data.Sets.ItemSets.BiomeLockboxCollection[i][0])
 			{
 				player.QuickSpawnItem(
 					player.GetSource_FromThis(),
-					Main.rand.NextFromList(Data.Sets.Item.BiomeLockboxCollection[i].GetRange(1, Data.Sets.Item.BiomeLockboxCollection[i].Count - 1).ToArray()));
+					Main.rand.NextFromList(Data.Sets.ItemSets.BiomeLockboxCollection[i].GetRange(1, Data.Sets.ItemSets.BiomeLockboxCollection[i].Count - 1).ToArray()));
 			}
 		}
 		key.stack--;

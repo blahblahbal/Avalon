@@ -16,8 +16,8 @@ internal class GemRobeTimSpawning : ModHook
 
     private void SlabAndTiledWallHMDungeonFix(ILContext il)
     {
-        Utilities.AddAlternativeIdChecks(il, WallID.PinkDungeonSlabUnsafe, id => Data.Sets.Wall.UnsafeSlabWalls[id]);
-        Utilities.AddAlternativeIdChecks(il, WallID.PinkDungeonTileUnsafe, id => Data.Sets.Wall.UnsafeTiledWalls[id]);
+        Utilities.AddAlternativeIdChecks(il, WallID.PinkDungeonSlabUnsafe, id => Data.Sets.WallSets.UnsafeSlabWalls[id]);
+        Utilities.AddAlternativeIdChecks(il, WallID.PinkDungeonTileUnsafe, id => Data.Sets.WallSets.UnsafeTiledWalls[id]);
     }
 
     private void RobeTimIncrease(ILContext il)

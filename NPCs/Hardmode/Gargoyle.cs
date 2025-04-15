@@ -23,7 +23,7 @@ public class Gargoyle : ModNPC
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
-        Data.Sets.NPC.Earthen[NPC.type] = true;
+        Data.Sets.NPCSets.Earthen[NPC.type] = true;
     }
     public override void SetDefaults()
 	{

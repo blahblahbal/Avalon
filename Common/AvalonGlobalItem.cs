@@ -1919,7 +1919,7 @@ public class AvalonGlobalItem : GlobalItem
     public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         #region split projectile bonus
-        if (player.GetModPlayer<AvalonPlayer>().SplitProj && Main.rand.NextBool(7) && item.DamageType == DamageClass.Ranged && item.useAmmo > 0 && !Data.Sets.Item.Longbows[item.type])
+        if (player.GetModPlayer<AvalonPlayer>().SplitProj && Main.rand.NextBool(7) && item.DamageType == DamageClass.Ranged && item.useAmmo > 0 && !Data.Sets.ItemSets.Longbows[item.type])
         {
             for (int num122 = 0; num122 < 2; num122++)
             {
@@ -2097,7 +2097,7 @@ public class AvalonGlobalItem : GlobalItem
 		//        tooltips.Insert(index + 1, new TooltipLine(Mod, "Tooltip5", NetworkText.FromKey("Mods.Avalon.TooltipEdits.HandofCreation").ToString()));
 		//    }
 		//}
-		if (Data.Sets.Item.Herbs[item.type])
+		if (Data.Sets.ItemSets.Herbs[item.type])
         {
             int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name)) && tt.Name.Equals("Material"));
             if (index != -1)
@@ -2105,7 +2105,7 @@ public class AvalonGlobalItem : GlobalItem
                 tooltips.Insert(index + 1, new TooltipLine(Mod, "Material", NetworkText.FromKey("Mods.Avalon.TooltipEdits.HerbologyLine").ToString()));
             }
         }
-        if (Data.Sets.Item.Potions[item.type])
+        if (Data.Sets.ItemSets.Potions[item.type])
         {
             int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name)) && tt.Name.Equals("Tooltip0"));
             if (index != -1)
@@ -3124,8 +3124,8 @@ public class AvalonGlobalItem : GlobalItem
 	public override bool CanUseItem(Item item, Player player)
     {
 		// potion/elixir usage lockout
-		if (Data.Sets.Item.ElixirToPotionBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.ElixirToPotionBuffID[item.type]) ||
-			Data.Sets.Item.PotionToElixirBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.Item.PotionToElixirBuffID[item.type]))
+		if (Data.Sets.ItemSets.ElixirToPotionBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.ItemSets.ElixirToPotionBuffID[item.type]) ||
+			Data.Sets.ItemSets.PotionToElixirBuffID.ContainsKey(item.type) && player.HasBuff(Data.Sets.ItemSets.PotionToElixirBuffID[item.type]))
 		{
 			return false;
 		}

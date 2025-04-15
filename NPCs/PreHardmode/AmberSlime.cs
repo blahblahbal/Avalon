@@ -12,7 +12,7 @@ public class AmberSlime : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 2;
-        Data.Sets.NPC.Toxic[NPC.type] = true;
+        Data.Sets.NPCSets.Toxic[NPC.type] = true;
     }
 
     public override void SetDefaults()

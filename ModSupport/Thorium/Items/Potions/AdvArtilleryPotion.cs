@@ -20,8 +20,8 @@ class AdvArtilleryPotion : ArtilleryPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ArtilleryBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<ArtilleryPotion>(), ModContent.BuffType<AdvArtillery>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ArtilleryBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<ArtilleryPotion>(), ModContent.BuffType<AdvArtillery>());
 	}
 	public override void AddRecipes()
 	{

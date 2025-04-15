@@ -26,7 +26,7 @@ public class FallenHero : ModNPC
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
         Main.npcFrameCount[NPC.type] = 3;
-        Data.Sets.NPC.Undead[NPC.type] = true;
+        Data.Sets.NPCSets.Undead[NPC.type] = true;
     }
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>

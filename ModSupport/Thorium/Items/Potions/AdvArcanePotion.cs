@@ -20,8 +20,8 @@ class AdvArcanePotion : ArcanePotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ArcanePotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<ArcanePotion>(), ModContent.BuffType<AdvArcane>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ArcanePotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<ArcanePotion>(), ModContent.BuffType<AdvArcane>());
 	}
 	public override void AddRecipes()
 	{

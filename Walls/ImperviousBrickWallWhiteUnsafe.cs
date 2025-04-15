@@ -13,7 +13,7 @@ public class ImperviousBrickWallWhiteUnsafe : ModWall
         Main.wallHouse[Type] = false;
         AddMapEntry(new Color(112, 112, 109));
         DustType = DustID.Stone;
-        Data.Sets.Wall.Hellcastle[Type] = true;
+        Data.Sets.WallSets.Hellcastle[Type] = true;
     }
     public override void KillWall(int i, int j, ref bool fail)
     {

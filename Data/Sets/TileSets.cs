@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets
 {
-    internal class Tile
+    internal class TileSets
     {
         public static List<int> ThreeOrePerBar = new() { TileID.Copper, TileID.Tin, TileID.Meteorite,
             TileID.Demonite, TileID.Crimtane, TileID.Hellstone, TileID.Cobalt, TileID.Palladium, TileID.Iron, TileID.Lead

@@ -20,8 +20,8 @@ class AdvConflagrationPotion : ConflagrationPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ConflagrationPotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<ConflagrationPotion>(), ModContent.BuffType<AdvConflagration>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<ConflagrationPotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<ConflagrationPotion>(), ModContent.BuffType<AdvConflagration>());
 	}
 	public override void AddRecipes()
 	{

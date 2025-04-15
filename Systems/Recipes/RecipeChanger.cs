@@ -28,9 +28,9 @@ public class RecipeChanger : ModSystem
                 {
                     if (recipe.requiredTile[j] != -1)
                     {
-                        if (!Data.Sets.Tile.CraftingStations.Contains(recipe.requiredTile[j]))
+                        if (!Data.Sets.TileSets.CraftingStations.Contains(recipe.requiredTile[j]))
                         {
-                            Data.Sets.Tile.CraftingStations.Add(recipe.requiredTile[j]);
+                            Data.Sets.TileSets.CraftingStations.Add(recipe.requiredTile[j]);
                         }
                     }
                 }
@@ -349,9 +349,9 @@ public class RecipeChanger : ModSystem
         #region pocket station adding station item ids
         for (int i = 0; i < ItemLoader.ItemCount; i++)
         {
-            if (Data.Sets.Tile.CraftingStations.Contains(ContentSamples.ItemsByType[i].createTile))
+            if (Data.Sets.TileSets.CraftingStations.Contains(ContentSamples.ItemsByType[i].createTile))
             {
-                Data.Sets.Item.CraftingStationsItemID.Add(ContentSamples.ItemsByType[i].type);
+                Data.Sets.ItemSets.CraftingStationsItemID.Add(ContentSamples.ItemsByType[i].type);
             }
         }
         #endregion

@@ -20,8 +20,8 @@ class AdvGlowingPotion : GlowingPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<GlowingPotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<GlowingPotion>(), ModContent.BuffType<AdvGlowing>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<GlowingPotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<GlowingPotion>(), ModContent.BuffType<AdvGlowing>());
 	}
 	public override void AddRecipes()
 	{

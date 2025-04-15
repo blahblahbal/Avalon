@@ -20,7 +20,7 @@ public class ContaminatedGhoul : ModNPC
 	public override void SetStaticDefaults()
     {
         Main.npcFrameCount[Type] = 8;
-        Data.Sets.NPC.Wicked[NPC.type] = true;
+        Data.Sets.NPCSets.Wicked[NPC.type] = true;
         NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
         {
             // Influences how the NPC looks in the Bestiary

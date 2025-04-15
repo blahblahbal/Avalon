@@ -14,7 +14,7 @@ public class AdvHoly: ModBuff
     }
     public override void SetStaticDefaults()
     {
-        Data.Sets.Buffs.Elixir[Type] = true;
+        Data.Sets.BuffSets.Elixir[Type] = true;
     }
     public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
     {

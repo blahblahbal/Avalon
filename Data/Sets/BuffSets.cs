@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets;
 
-public static class Buffs
+public static class BuffSets
 {
     public static bool[] Elixir = BuffID.Sets.Factory.CreateBoolSet(
         ModContent.BuffType<AdvAmmoReservation>(),

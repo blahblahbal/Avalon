@@ -61,7 +61,7 @@ public abstract class ModHerb : ModTile
 	}
     public override bool CanPlace(int i, int j)
     {
-        return Data.Sets.Tile.SuitableForPlantingHerbs[Main.tile[i, j + 1].TileType] &&
+        return Data.Sets.TileSets.SuitableForPlantingHerbs[Main.tile[i, j + 1].TileType] &&
                (!Main.tile[i, j].HasTile || Main.tile[i, j].TileType == TileID.Plants || Main.tile[i, j].TileType == Type);
     }
     public override bool IsTileSpelunkable(int i, int j)

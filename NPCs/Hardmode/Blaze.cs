@@ -28,7 +28,7 @@ public class Blaze : ModNPC
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
-        Data.Sets.NPC.Fiery[NPC.type] = true;
+        Data.Sets.NPCSets.Fiery[NPC.type] = true;
 		glowTexture = ModContent.Request<Texture2D>(Texture + "Glow");
     }
 

@@ -26,27 +26,27 @@ public static class ClassExtensions
 		{
 			if (list2[0] == ItemID.HallowedKey)
 			{
-				Data.Sets.Item.HallowedChest.Add(list2[1]);
+				Data.Sets.ItemSets.HallowedChest.Add(list2[1]);
 			}
 			if (list2[0] == ItemID.CorruptionKey)
 			{
-				Data.Sets.Item.CorruptionChest.Add(list2[1]);
+				Data.Sets.ItemSets.CorruptionChest.Add(list2[1]);
 			}
 			if (list2[0] == ItemID.CrimsonKey)
 			{
-				Data.Sets.Item.CrimsonChest.Add(list2[1]);
+				Data.Sets.ItemSets.CrimsonChest.Add(list2[1]);
 			}
 			if (list2[0] == ItemID.DungeonDesertKey)
 			{
-				Data.Sets.Item.DesertChest.Add(list2[1]);
+				Data.Sets.ItemSets.DesertChest.Add(list2[1]);
 			}
 			if (list2[0] == ItemID.JungleKey)
 			{
-				Data.Sets.Item.JungleChest.Add(list2[1]);
+				Data.Sets.ItemSets.JungleChest.Add(list2[1]);
 			}
 			if (list2[0] == ItemID.FrozenKey)
 			{
-				Data.Sets.Item.FrozenChest.Add(list2[1]);
+				Data.Sets.ItemSets.FrozenChest.Add(list2[1]);
 			}
 		}
 		return list;

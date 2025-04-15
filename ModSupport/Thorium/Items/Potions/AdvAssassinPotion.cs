@@ -20,8 +20,8 @@ class AdvAssassinPotion : AssassinPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<AssassinPotionBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<AssassinPotion>(), ModContent.BuffType<AdvAssassin>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<AssassinPotionBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<AssassinPotion>(), ModContent.BuffType<AdvAssassin>());
 	}
 	public override void AddRecipes()
 	{

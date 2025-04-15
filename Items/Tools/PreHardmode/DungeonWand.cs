@@ -36,7 +36,7 @@ public class DungeonWand : ModItem
             for (int q = 0; q < player.inventory.Length; q++)
             {
                 int type = player.inventory[q].type;
-                if (Data.Sets.Item.DungeonWallItems[type])
+                if (Data.Sets.ItemSets.DungeonWallItems[type])
                 {
                     wall = AvalonGlobalItem.DungeonWallItemToBackwallID(type);
                     break;

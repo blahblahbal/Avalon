@@ -41,7 +41,7 @@ public class EctoHand : ModNPC
 			Position = new Vector2(4f, -6f),
         };
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
-        Data.Sets.NPC.Undead[NPC.type] = true;
+        Data.Sets.NPCSets.Undead[NPC.type] = true;
 		NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
 	}
     public override void SetDefaults()

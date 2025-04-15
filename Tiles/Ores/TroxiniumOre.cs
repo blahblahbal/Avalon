@@ -18,7 +18,7 @@ public class TroxiniumOre : ModTile
 
         MineResist = 4f;
         AddMapEntry(Color.Goldenrod, this.GetLocalization("MapEntry"));
-        Data.Sets.Tile.RiftOres[Type] = true;
+        Data.Sets.TileSets.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileSpelunker[Type] = true;

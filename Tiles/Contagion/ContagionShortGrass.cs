@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Tile = Avalon.Data.Sets.Tile;
+using TileSets = Avalon.Data.Sets.TileSets;
 
 namespace Avalon.Tiles.Contagion;
 
@@ -31,7 +31,7 @@ public class ContagionShortGrass : ModTile
         Main.tileNoFail[Type] = true;
         DustType = ModContent.DustType<ContagionDust>();
         HitSound = SoundID.Grass;
-        Tile.Conversion.ShortGrass[Type] = true;
+        TileSets.Conversion.ShortGrass[Type] = true;
         AddMapEntry(new Color(133, 150, 39));
     }
 

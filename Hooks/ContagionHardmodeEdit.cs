@@ -180,9 +180,9 @@ namespace Avalon.Hooks
                         {
                             Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionBoilWallUnsafe>();
                         }
-                        else if (Data.Sets.Wall.ConvertsToContagionWall[Main.tile[m, n].WallType] >= 0)
+                        else if (Data.Sets.WallSets.ConvertsToContagionWall[Main.tile[m, n].WallType] >= 0)
                         {
-                            Main.tile[m, n].WallType = (ushort)Data.Sets.Wall.ConvertsToContagionWall[Main.tile[m, n].WallType];
+                            Main.tile[m, n].WallType = (ushort)Data.Sets.WallSets.ConvertsToContagionWall[Main.tile[m, n].WallType];
                             WorldGen.SquareTileFrame(m, n);
                         }
 
@@ -260,9 +260,9 @@ namespace Avalon.Hooks
                             Main.tile[m, n].TileType = (ushort)ModContent.TileType<Snotsandstone>();
                             WorldGen.SquareTileFrame(m, n);
                         }
-                        else if (Data.Sets.Tile.ConvertsToContagion[type] >= 0)
+                        else if (Data.Sets.TileSets.ConvertsToContagion[type] >= 0)
                         {
-                            Main.tile[m, n].TileType = (ushort)Data.Sets.Tile.ConvertsToContagion[Main.tile[m, n].TileType];
+                            Main.tile[m, n].TileType = (ushort)Data.Sets.TileSets.ConvertsToContagion[Main.tile[m, n].TileType];
                             WorldGen.SquareTileFrame(m, n);
                         }
                     }

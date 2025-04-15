@@ -226,11 +226,11 @@ public class ExxoAvalonOrigins : Mod
 			["SetWorldEvil", int value] => ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)value,
 
 			// biome chest loot for the biome lockbox
-			["AddBiomeChest", List<int> value] => Data.Sets.Item.BiomeLockboxCollection.AddToListAndReturnIt(value),
+			["AddBiomeChest", List<int> value] => Data.Sets.ItemSets.BiomeLockboxCollection.AddToListAndReturnIt(value),
 
 			//IDs
-			["ConvertsToContagion", int tileID, int num] => Data.Sets.Tile.ConvertsToContagion[tileID] = num,
-			["ConvertsToContagionWall", int wallID, int num] => Data.Sets.Wall.ConvertsToContagionWall[wallID] = num,
+			["ConvertsToContagion", int tileID, int num] => Data.Sets.TileSets.ConvertsToContagion[tileID] = num,
+			["ConvertsToContagionWall", int wallID, int num] => Data.Sets.WallSets.ConvertsToContagionWall[wallID] = num,
 			_ => throw new Exception("ExxoAvalonOrigins: Unknown mod call, make sure you are calling the right method/field with the right parameters!")
 		};
     }

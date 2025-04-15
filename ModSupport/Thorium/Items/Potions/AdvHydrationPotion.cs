@@ -21,8 +21,8 @@ class AdvHydrationPotion : HydrationPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<HydrationBuff>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<HydrationPotion>(), ModContent.BuffType<AdvHydration>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<HydrationBuff>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<HydrationPotion>(), ModContent.BuffType<AdvHydration>());
 	}
 	public override void AddRecipes()
 	{

@@ -83,7 +83,7 @@ public class AvalonMobDrops : GlobalNPC
 		{
 			npcLoot.Add(ItemDropRule.StatusImmunityItem(ItemID.HandWarmer, 100));
 		}
-		if (Data.Sets.NPC.Undead[npc.type])
+		if (Data.Sets.NPCSets.Undead[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.ByCondition(hardModeCondition, ModContent.ItemType<SoullessLocket>(), 550));
 		}
@@ -526,47 +526,47 @@ public class AvalonMobDrops : GlobalNPC
 		#endregion
 
 		#region shards
-		if (Data.Sets.NPC.Toxic[npc.type])
+		if (Data.Sets.NPCSets.Toxic[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ToxinShard>(), 8));
 		}
 
-		if (Data.Sets.NPC.Undead[npc.type])
+		if (Data.Sets.NPCSets.Undead[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<UndeadShard>(), 11));
 		}
 
-		if (Data.Sets.NPC.Fiery[npc.type])
+		if (Data.Sets.NPCSets.Fiery[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FireShard>(), 8));
 		}
 
-		if (Data.Sets.NPC.Watery[npc.type])
+		if (Data.Sets.NPCSets.Watery[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WaterShard>(), 8));
 		}
 
-		if (Data.Sets.NPC.Earthen[npc.type])
+		if (Data.Sets.NPCSets.Earthen[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EarthShard>(), 12));
 		}
 
-		if (Data.Sets.NPC.Flyer[npc.type])
+		if (Data.Sets.NPCSets.Flyer[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BreezeShard>(), 13));
 		}
 
-		if (Data.Sets.NPC.Frozen[npc.type])
+		if (Data.Sets.NPCSets.Frozen[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FrostShard>(), 10));
 		}
 
-		if (Data.Sets.NPC.Wicked[npc.type])
+		if (Data.Sets.NPCSets.Wicked[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CorruptShard>(), 9));
 		}
 
-		if (Data.Sets.NPC.Arcane[npc.type])
+		if (Data.Sets.NPCSets.Arcane[npc.type])
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ArcaneShard>(), 7));
 		}

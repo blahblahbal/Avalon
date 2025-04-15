@@ -13,7 +13,7 @@ public class ImperviousBrickWallEctoUnsafe : ModWall
         Main.wallHouse[Type] = false;
         AddMapEntry(new Color(27, 194, 254));
         DustType = DustID.DungeonSpirit;
-        Data.Sets.Wall.Hellcastle[Type] = true;
+        Data.Sets.WallSets.Hellcastle[Type] = true;
     }
     public override void KillWall(int i, int j, ref bool fail)
     {

@@ -11,7 +11,7 @@ public class BronzeOre : ModTile
     public override void SetStaticDefaults()
     {
         AddMapEntry(new Color(121, 50, 42), this.GetLocalization("MapEntry"));
-        Data.Sets.Tile.RiftOres[Type] = true;
+        Data.Sets.TileSets.RiftOres[Type] = true;
         Main.tileSolid[Type] = true;
         Main.tileMergeDirt[Type] = true;
         Main.tileShine2[Type] = true;

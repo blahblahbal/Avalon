@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets;
 
-public static class NPC
+public static class NPCSets
 {
 	//public static bool[] DontDropPotions = NPCID.Sets.Factory.CreateBoolSet(false, ModContent.NPCType<HomingRocket>());
 

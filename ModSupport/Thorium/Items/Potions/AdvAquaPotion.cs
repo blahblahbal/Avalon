@@ -20,8 +20,8 @@ class AdvAquaPotion : AquaPotion
 	{
 		base.SetStaticDefaults();
 		Item.ResearchUnlockCount = 30;
-		Data.Sets.Item.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<AquaAffinity>());
-		Data.Sets.Item.PotionToElixirBuffID.Add(ModContent.ItemType<AquaPotion>(), ModContent.BuffType<AdvAquaAffinity>());
+		Data.Sets.ItemSets.ElixirToPotionBuffID.Add(Type, ModContent.BuffType<AquaAffinity>());
+		Data.Sets.ItemSets.PotionToElixirBuffID.Add(ModContent.ItemType<AquaPotion>(), ModContent.BuffType<AdvAquaAffinity>());
 	}
 	public override void AddRecipes()
 	{

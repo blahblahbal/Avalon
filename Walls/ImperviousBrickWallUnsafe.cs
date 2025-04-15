@@ -14,7 +14,7 @@ public class ImperviousBrickWallUnsafe : ModWall
         AddMapEntry(new Color(51, 44, 48));
         RegisterItemDrop(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>());
         DustType = DustID.Wraith;
-        Data.Sets.Wall.Hellcastle[Type] = true;
+        Data.Sets.WallSets.Hellcastle[Type] = true;
     }
     public override void KillWall(int i, int j, ref bool fail)
     {

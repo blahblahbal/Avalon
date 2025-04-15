@@ -174,7 +174,7 @@ public class Reflector : ModProjectile
             {
                 Rectangle proj = new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, Projectile.width, Projectile.height);
                 Rectangle targetProj = new Rectangle((int)targ.position.X, (int)targ.position.Y, targ.width, targ.height);
-                if (proj.Intersects(targetProj) && !targ.bobber && !Data.Sets.Projectile.DontReflect[targ.type])
+                if (proj.Intersects(targetProj) && !targ.bobber && !Data.Sets.ProjectileSets.DontReflect[targ.type])
                 {
                     targ.hostile = false;
                     targ.friendly = true;

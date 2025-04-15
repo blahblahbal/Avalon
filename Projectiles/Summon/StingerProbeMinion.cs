@@ -158,7 +158,7 @@ public class StingerProbeMinion : ModProjectile
         var projWS = new Rectangle((int)Projectile.Center.X - 32, (int)Projectile.Center.Y - 32, 64, 64);
         foreach (Projectile Pr in Main.projectile)
         {
-            if (!Pr.friendly && !Pr.bobber && !Data.Sets.Projectile.DontReflect[Pr.type])
+            if (!Pr.friendly && !Pr.bobber && !Data.Sets.ProjectileSets.DontReflect[Pr.type])
             {
                 var proj2 = new Rectangle((int)Pr.position.X, (int)Pr.position.Y, Pr.width, Pr.height);
                 bool reflect = false, check = false;

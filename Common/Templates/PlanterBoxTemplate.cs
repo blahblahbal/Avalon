@@ -22,7 +22,7 @@ public abstract class PlanterBoxTemplate : ModTile
         TileID.Sets.DisableSmartCursor[Type] = true;
         AdjTiles = new int[] { TileID.PlanterBox };
         DustType = DustID.Dirt;
-        Data.Sets.Tile.SuitableForPlantingHerbs[Type] = true;
+        Data.Sets.TileSets.SuitableForPlantingHerbs[Type] = true;
         RegisterItemDrop(DropItem);
     }
     public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)

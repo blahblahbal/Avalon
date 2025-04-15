@@ -2477,7 +2477,7 @@ public class AvalonPlayer : ModPlayer
 		if (UndeadImmune)
 		{
 			int dmgPlaceholder = npc.damage;
-			if (Data.Sets.NPC.Undead[npc.type])
+			if (Data.Sets.NPCSets.Undead[npc.type])
 			{
 				modifiers.SetMaxDamage(dmgPlaceholder - ((Player.statDefense / 2) + 10));
 			}
@@ -2496,7 +2496,7 @@ public class AvalonPlayer : ModPlayer
 		}
 		if (EarthInsig)
 		{
-			if (Data.Sets.Item.EarthRelatedItems[item.type])
+			if (Data.Sets.ItemSets.EarthRelatedItems[item.type])
 			{
 				modifiers.FinalDamage *= 1.2f;
 			}
@@ -2579,7 +2579,7 @@ public class AvalonPlayer : ModPlayer
 	{
 		if (EarthInsig)
 		{
-			if (Data.Sets.Projectile.EarthRelatedItems[proj.type])
+			if (Data.Sets.ProjectileSets.EarthRelatedItems[proj.type])
 			{
 				modifiers.FinalDamage *= 1.2f;
 			}
@@ -2743,7 +2743,7 @@ public class AvalonPlayer : ModPlayer
 			if (damageSource.SourceNPCIndex >= 0)
 			{
 				NPC N = Main.npc[damageSource.SourceNPCIndex];
-				if (Data.Sets.NPC.Undead[N.type])
+				if (Data.Sets.NPCSets.Undead[N.type])
 				{
 					if (N.damage - ((Player.statDefense / 2) + 10) <= 0)
 					{
@@ -2757,7 +2757,7 @@ public class AvalonPlayer : ModPlayer
 			if (damageSource.SourceProjectileLocalIndex > -1)
 			{
 				Projectile proj = Main.projectile[damageSource.SourceProjectileLocalIndex];
-				if (!proj.friendly && !proj.bobber && !Data.Sets.Projectile.DontReflect[proj.type])
+				if (!proj.friendly && !proj.bobber && !Data.Sets.ProjectileSets.DontReflect[proj.type])
 				{
 					if (Main.rand.NextBool(4))
 					{
@@ -2790,7 +2790,7 @@ public class AvalonPlayer : ModPlayer
 			if (damageSource.SourceProjectileLocalIndex > -1)
 			{
 				Projectile proj = Main.projectile[damageSource.SourceProjectileLocalIndex];
-				if (!proj.friendly && !proj.bobber && !Data.Sets.Projectile.DontReflect[proj.type])
+				if (!proj.friendly && !proj.bobber && !Data.Sets.ProjectileSets.DontReflect[proj.type])
 				{
 					if (Main.rand.NextBool(2))
 					{

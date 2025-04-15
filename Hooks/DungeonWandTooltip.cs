@@ -31,7 +31,7 @@ internal class DungeonWandTooltip : ModHook
                 amt = 0;
                 for (int j = 0; j < 58; j++)
                 {
-                    if (inv[j].stack > 0 && Data.Sets.Item.DungeonWallItems[inv[j].type])
+                    if (inv[j].stack > 0 && Data.Sets.ItemSets.DungeonWallItems[inv[j].type])
                     {
                         amt += inv[j].stack;
                     }
