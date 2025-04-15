@@ -72,7 +72,7 @@ public class BlahsEnergyBlade : ModItem
     {
         float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem) * 1.4f;
         Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1.2f, adjustedItemScale5 * 1.4f);
-        NetMessage.SendData(13, -1, -1, null, player.whoAmI);
+        NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI);
         for (int num194 = 0; num194 < 4; num194++)
         {
             float num195 = velocity.X;
@@ -83,4 +83,8 @@ public class BlahsEnergyBlade : ModItem
         }
         return false;
     }
+	public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+	{
+		player.VampireHeal(hit.Damage, target.position);
+	}
 }

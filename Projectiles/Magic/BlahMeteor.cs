@@ -126,6 +126,7 @@ public class BlahMeteor : ModProjectile
             Main.projectile[p].friendly = true;
             Main.projectile[p].hostile = false;
             Main.projectile[p].owner = Projectile.owner;
+			Main.projectile[p].DamageType = DamageClass.Magic;
         }
         if (Projectile.ai[0] == 40)
         {
@@ -135,7 +136,8 @@ public class BlahMeteor : ModProjectile
             Main.projectile[p].friendly = true;
             Main.projectile[p].hostile = false;
             Main.projectile[p].owner = Projectile.owner;
-            Projectile.ai[0] = 0;
+			Main.projectile[p].DamageType = DamageClass.Magic;
+			Projectile.ai[0] = 0;
         }
     }
 }

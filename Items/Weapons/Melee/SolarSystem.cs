@@ -9,7 +9,7 @@ public class SolarSystem : ModItem
 	// loading enabled
     public override bool IsLoadingEnabled(Mod mod)
     {
-        return false;
+        return true;
     }
     public override void SetDefaults()
     {

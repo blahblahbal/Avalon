@@ -26,6 +26,16 @@ public class ShroomiteAmmunition : ModItem
 		Item.maxStack = 9999;
 		Item.height = 16;
 	}
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ItemID.ShroomiteBar, 2)
+			.AddIngredient(ItemID.MusketBall, 33)
+			.AddIngredient(ItemID.WoodenArrow, 33)
+			.AddIngredient(ItemID.RocketI, 33)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+	}
 	public override bool? CanBeChosenAsAmmo(Item weapon, Player player)
 	{
 		return weapon.useAmmo == AmmoID.Arrow || weapon.useAmmo == AmmoID.Bullet || weapon.useAmmo == AmmoID.Rocket;

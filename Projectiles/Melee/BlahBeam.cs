@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using System.IO;
+using Avalon.Projectiles.Magic;
 
 namespace Avalon.Projectiles.Melee;
 
@@ -15,6 +16,7 @@ public class BlahBeam : ModProjectile
     public float homeDistance = 600;
     public float homeStrength = 5f;
     public float homeDelay;
+	public byte timer;
     public override void SetDefaults()
     {
         Projectile.width = 16;
@@ -45,15 +47,18 @@ public class BlahBeam : ModProjectile
         writer.Write(tileCollideCounter);
         writer.Write(readyToHome);
         writer.Write(homeDelay);
+		writer.Write(timer);
     }
     public override void ReceiveExtraAI(BinaryReader reader)
     {
         tileCollideCounter = reader.ReadInt32();
         readyToHome = reader.ReadBoolean();
         homeDelay = reader.ReadSingle();
+		timer = reader.ReadByte();
     }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
+		timer++;
         int randomNum = Main.rand.Next(7);
         if (randomNum == 0) target.AddBuff(20, 300);
         else if (randomNum == 1) target.AddBuff(24, 200);
@@ -62,7 +67,18 @@ public class BlahBeam : ModProjectile
         else if (randomNum == 4) target.AddBuff(44, 300);
         else if (randomNum == 5) target.AddBuff(70, 240);
         else if (randomNum == 6) target.AddBuff(69, 300);
-        readyToHome = false;
+
+		//SoundEngine.PlaySound(SoundID.Item9, Projectile.position);
+		if (timer == 1)
+		{
+			Vector2 StarSpawn = Projectile.position - new Vector2(Main.rand.Next(60, 180) * Projectile.Owner().direction, Main.rand.Next(-75, 75)).RotatedByRandom(MathHelper.TwoPi * 4);
+			Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), StarSpawn, StarSpawn.DirectionTo(target.Center) * 10f, ModContent.ProjectileType<BlahStar>(), (int)(Projectile.damage * 0.6f), Projectile.knockBack * 0.1f, Projectile.owner, 0, Main.rand.Next(-20, -10), 1);
+			P.DamageType = DamageClass.Melee;
+			P.tileCollide = false;
+			P.timeLeft = 420;
+			timer = 0;
+		}
+		readyToHome = false;
     }
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
