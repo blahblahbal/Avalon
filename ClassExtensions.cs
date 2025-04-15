@@ -921,5 +921,53 @@ public static class ClassExtensions
 		item.knockBack = knockBack;
 		item.consumable = consumable;
 	}
+	/// <summary>
+	/// This method sets a variety of Item values common to rhotuka spinner items.<br/>
+	/// Specifically: <code>
+	/// width = 10;
+	/// height = 12;
+	/// ammo = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="Canister"/>)
+	/// DamageType = DamageClass.Ranged;
+	/// maxStack = Item.CommonMaxStack;
+	/// damage = <paramref name="damage"/>;
+	/// shoot = <paramref name="projectile"/>;
+	/// shootSpeed = 0f;
+	/// knockBack = 0f;
+	/// consumable = <paramref name="consumable"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="damage"></param>
+	/// <param name="projectile"></param>
+	/// <param name="shootSpeed"></param>
+	/// <param name="knockBack"></param>
+	/// <param name="consumable"></param>
+	public static void DefaultToCanister(this Item item, int damage, int projectile, bool consumable = true)
+	{
+		item.width = 10;
+		item.height = 12;
+		item.ammo = ModContent.ItemType<Canister>();
+		item.DamageType = DamageClass.Ranged;
+		item.maxStack = Item.CommonMaxStack;
+		item.damage = damage;
+		item.shoot = projectile;
+		item.shootSpeed = 0f;
+		item.knockBack = 0f;
+		item.consumable = consumable;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to armor items.<br/>
+	/// Specifically: <code>
+	/// width = 16;
+	/// height = 16;
+	/// defense = <paramref name="defense"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="defense"></param>
+	public static void DefaultToArmor(this Item item, int defense)
+	{
+		item.width = 16;
+		item.height = 16;
+		item.defense = defense;
+	}
 	#endregion Item DefaultToX() methods
 }

@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -10,20 +9,17 @@ namespace Avalon.Items.Armor.Hardmode;
 [AutoloadEquip(EquipType.Head)]
 public class XanthophyteHelm : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.defense = 22;
-        Item.rare = ItemRarityID.Yellow;
-        Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 6);
-        Item.height = dims.Height;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToArmor(22);
+		Item.rare = ItemRarityID.Yellow;
+		Item.value = Item.sellPrice(0, 6);
+	}
 
-    public override bool IsArmorSet(Item head, Item body, Item legs)
-    {
-        return body.type == ModContent.ItemType<XanthophytePlate>() && legs.type == ModContent.ItemType<XanthophyteLeggings>();
-    }
+	public override bool IsArmorSet(Item head, Item body, Item legs)
+	{
+		return body.type == ModContent.ItemType<XanthophytePlate>() && legs.type == ModContent.ItemType<XanthophyteLeggings>();
+	}
 
 	public override void UpdateArmorSet(Player player)
 	{
@@ -36,16 +32,16 @@ public class XanthophyteHelm : ModItem
 	}
 
 	public override void UpdateEquip(Player player)
-    {
-        player.GetCritChance(DamageClass.Melee) += 7;
-        player.GetDamage(DamageClass.Melee) += 0.18f;
-    }
-    public override void AddRecipes()
-    {
-        Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.XanthophyteBar>(), 12)
-            .AddIngredient(ModContent.ItemType<Material.Shards.VenomShard>())
-            .AddTile(TileID.MythrilAnvil)
-            .Register();
-    }
+	{
+		player.GetCritChance(DamageClass.Melee) += 7;
+		player.GetDamage(DamageClass.Melee) += 0.18f;
+	}
+	public override void AddRecipes()
+	{
+		Recipe.Create(Type)
+			.AddIngredient(ModContent.ItemType<Material.Bars.XanthophyteBar>(), 12)
+			.AddIngredient(ModContent.ItemType<Material.Shards.VenomShard>())
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+	}
 }

@@ -12,27 +12,24 @@ namespace Avalon.Items.Armor.Hardmode;
 [AutoloadEquip(EquipType.Legs)]
 public class TroxiniumCuisses : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.defense = 13;
-        Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 2, 30);
-        Item.height = dims.Height;
-    }
-    public override Color? GetAlpha(Color lightColor)
-    {
-        return lightColor * 4f;
-    }
-    public override void DrawArmorColor(Player drawPlayer, float shadow, ref Color color, ref int glowMask, ref Color glowMaskColor)
-    {
-        if (!Main.gameMenu)
+	public override void SetDefaults()
+	{
+		Item.DefaultToArmor(13);
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 2, 30);
+	}
+	public override Color? GetAlpha(Color lightColor)
+	{
+		return lightColor * 4f;
+	}
+	public override void DrawArmorColor(Player drawPlayer, float shadow, ref Color color, ref int glowMask, ref Color glowMaskColor)
+	{
+		if (!Main.gameMenu)
 		{
 			color *= 4f;
 		}
-    }
-	private static Asset<Texture2D> glow;
+	}
+	private static Asset<Texture2D>? glow;
 	public override void SetStaticDefaults()
 	{
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
@@ -55,13 +52,13 @@ public class TroxiniumCuisses : ModItem
 		spriteBatch.Draw(glow.Value, vector2, new Rectangle(0, 0, glow.Width(), glow.Height()), new Color(255, 255, 255, 0), num, vector, scale, SpriteEffects.None, 0f);
 	}
 	public override void UpdateEquip(Player player)
-    {
-        player.GetCritChance(DamageClass.Generic) += 5;
-    }
-    public override void AddRecipes()
-    {
-        Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>(), 18)
-            .AddTile(TileID.MythrilAnvil).Register();
-    }
+	{
+		player.GetCritChance(DamageClass.Generic) += 5;
+	}
+	public override void AddRecipes()
+	{
+		Recipe.Create(Type)
+			.AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>(), 18)
+			.AddTile(TileID.MythrilAnvil).Register();
+	}
 }
