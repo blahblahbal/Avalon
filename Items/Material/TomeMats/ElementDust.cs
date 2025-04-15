@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class ElementDust : ModItem
+public class ElementDust : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class Sandstone : ModItem
+public class Sandstone : ModItem
 {
     public override void SetStaticDefaults()
     {

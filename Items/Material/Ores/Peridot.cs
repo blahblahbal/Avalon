@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class Peridot : ModItem
+public class Peridot : ModItem
 {
     public override void SetStaticDefaults()
     {

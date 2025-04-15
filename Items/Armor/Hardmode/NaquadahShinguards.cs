@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class NaquadahShinguards : ModItem
+public class NaquadahShinguards : ModItem
 {
     public override void SetDefaults()
     {

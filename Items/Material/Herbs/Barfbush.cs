@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Herbs;
 
-class Barfbush : ModItem
+public class Barfbush : ModItem
 {
     public override void SetStaticDefaults()
     {

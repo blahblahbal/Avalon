@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class EnergyRevolver : ModItem
+public class EnergyRevolver : ModItem
 {
     SoundStyle LaserNoise = new SoundStyle("Terraria/Sounds/Item_91")
     {

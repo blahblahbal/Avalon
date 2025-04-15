@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class RhodiumHeadgear : ModItem
+public class RhodiumHeadgear : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
-class ResistantWoodLantern : ModItem
+public class ResistantWoodLantern : ModItem
 {
     public override void SetStaticDefaults()
     {

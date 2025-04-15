@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class TurretStatue : ModItem
+public class TurretStatue : ModItem
 {
     public override void SetDefaults()
     {

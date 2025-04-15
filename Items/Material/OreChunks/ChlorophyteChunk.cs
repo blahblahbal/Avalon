@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Material.OreChunks;
 
-class ChlorophyteChunk : ModItem
+public class ChlorophyteChunk : ModItem
 {
     public override void SetStaticDefaults()
     {

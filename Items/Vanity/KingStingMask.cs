@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class KingStingMask : ModItem
+public class KingStingMask : ModItem
 {
     public override void SetDefaults()
     {

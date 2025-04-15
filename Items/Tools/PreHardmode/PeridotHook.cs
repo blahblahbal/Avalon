@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class PeridotHook : ModItem
+public class PeridotHook : ModItem
 {
     public override void SetDefaults()
     {

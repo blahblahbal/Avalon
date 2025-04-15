@@ -6,7 +6,7 @@ using Avalon.Items.Material.Herbs;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class CrimsonAltar : ModItem
+public class CrimsonAltar : ModItem
 {
     public override void SetDefaults()
     {

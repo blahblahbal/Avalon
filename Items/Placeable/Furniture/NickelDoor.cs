@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class NickelDoor : ModItem
+public class NickelDoor : ModItem
 {
     public override void SetDefaults()
     {

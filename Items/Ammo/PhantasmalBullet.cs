@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-class PhantasmalBullet : ModItem
+public class PhantasmalBullet : ModItem
 {
     public override void SetStaticDefaults()
     {

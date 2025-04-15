@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
-class LargeBarfbush : ModItem
+public class LargeBarfbush : ModItem
 {
     public override void SetStaticDefaults()
     {

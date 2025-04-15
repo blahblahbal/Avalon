@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Superhardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class BlahsCuisses : ModItem
+public class BlahsCuisses : ModItem
 {
     public override void SetDefaults()
     {

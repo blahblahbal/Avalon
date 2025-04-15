@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class MysticalTotem : ModItem
+public class MysticalTotem : ModItem
 {
     public override void SetStaticDefaults()
     {

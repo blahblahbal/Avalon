@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tomes.PreHardmode;
 
-class TheHeavenlyScent : ModItem
+public class TheHeavenlyScent : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

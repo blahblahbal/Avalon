@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class BiomeLockbox : ModItem
+public class BiomeLockbox : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Thorium.Items.Placeable.Tile;
 
-class LargeMarineKelpSeed : ModItem
+public class LargeMarineKelpSeed : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{

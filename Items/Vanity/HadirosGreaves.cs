@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Legs)]
-class HadirosGreaves : ModItem
+public class HadirosGreaves : ModItem
 {
     public override void SetDefaults()
     {

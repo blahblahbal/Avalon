@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class ShadowPhone : ModItem
+public class ShadowPhone : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -54,7 +54,7 @@ class ShadowPhone : ModItem
     }
 }
 
-class ShadowPhoneSurface : ModItem
+public class ShadowPhoneSurface : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -130,7 +130,7 @@ class ShadowPhoneSurface : ModItem
     }
 }
 
-class ShadowPhoneDungeon : ModItem
+public class ShadowPhoneDungeon : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -227,7 +227,7 @@ class ShadowPhoneDungeon : ModItem
     }
 }
 
-class ShadowPhoneOcean : ModItem
+public class ShadowPhoneOcean : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -272,7 +272,7 @@ class ShadowPhoneOcean : ModItem
     }
 }
 
-class ShadowPhoneHell : ModItem
+public class ShadowPhoneHell : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -317,7 +317,7 @@ class ShadowPhoneHell : ModItem
     }
 }
 
-class ShadowPhoneJungleTropics : ModItem
+public class ShadowPhoneJungleTropics : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -417,7 +417,7 @@ class ShadowPhoneJungleTropics : ModItem
     }
 }
 
-class ShadowPhoneRandom : ModItem
+public class ShadowPhoneRandom : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -463,7 +463,7 @@ class ShadowPhoneRandom : ModItem
     }
 }
 
-class ShadowPhoneHome : ModItem
+public class ShadowPhoneHome : ModItem
 {
     public override void SetStaticDefaults()
     {

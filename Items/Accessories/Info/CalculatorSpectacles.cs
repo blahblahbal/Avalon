@@ -1,18 +1,18 @@
-using System.Collections.Generic;
-using Terraria.ID;
-using Terraria;
-using Microsoft.Xna.Framework;
-using Terraria.ModLoader;
 using Avalon.Common.Players;
-using Terraria.GameContent;
+using Avalon.Tiles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
-using Terraria.UI;
-using Terraria.Localization;
-using Avalon.Tiles;
-using Terraria.UI.Chat;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.GameContent;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using Terraria.UI;
+using Terraria.UI.Chat;
 
 namespace Avalon.Items.Accessories.Info;
 
@@ -20,12 +20,9 @@ public class CalculatorSpectacles : ModItem
 {
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
+		Item.DefaultToAccessory();
 		Item.rare = ItemRarityID.LightRed;
-		Item.width = 40;
-		Item.accessory = true;
-		Item.value = Item.sellPrice(0, 2, 0, 0);
-		Item.height = 20;
+		Item.value = Item.sellPrice(0, 2);
 	}
 	public override void UpdateInfoAccessory(Player player)
 	{

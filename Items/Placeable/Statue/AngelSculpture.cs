@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class AngelSculpture : ModItem
+public class AngelSculpture : ModItem
 {
     public override void SetDefaults()
     {

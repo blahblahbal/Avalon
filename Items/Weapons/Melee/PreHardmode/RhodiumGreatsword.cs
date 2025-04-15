@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class RhodiumGreatsword : ModItem
+public class RhodiumGreatsword : ModItem
 {
     public override void SetDefaults()
     {

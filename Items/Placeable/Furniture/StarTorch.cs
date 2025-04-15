@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class StarTorch : ModItem
+public class StarTorch : ModItem
 {
     public override void SetStaticDefaults()
     {

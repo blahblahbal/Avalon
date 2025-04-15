@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class SonicScrewdriverMkII : ModItem
+public class SonicScrewdriverMkII : ModItem
 {
     public override void SetDefaults()
     {

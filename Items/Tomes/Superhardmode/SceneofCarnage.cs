@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tomes.Superhardmode;
 
-class SceneofCarnage : ModItem
+public class SceneofCarnage : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

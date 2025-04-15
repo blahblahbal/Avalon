@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class NickelPickaxe : ModItem
+public class NickelPickaxe : ModItem
 {
     public override void SetDefaults()
     {

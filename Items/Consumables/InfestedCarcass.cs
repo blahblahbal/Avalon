@@ -9,7 +9,7 @@ using Avalon.Items.Material;
 
 namespace Avalon.Items.Consumables;
 
-class InfestedCarcass : ModItem
+public class InfestedCarcass : ModItem
 {
     public override void SetStaticDefaults()
     {

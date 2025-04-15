@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class HeartsickPotion : ModItem
+public class HeartsickPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

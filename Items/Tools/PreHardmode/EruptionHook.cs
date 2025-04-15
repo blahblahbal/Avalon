@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class EruptionHook : ModItem
+public class EruptionHook : ModItem
 {
     public override void SetDefaults()
     {

@@ -12,7 +12,7 @@ using Terraria.DataStructures;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class TroxiniumHeadpiece : ModItem
+public class TroxiniumHeadpiece : ModItem
 {
     public override void SetDefaults()
     {

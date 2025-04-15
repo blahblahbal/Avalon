@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Material.OreChunks;
 
-class UnvolanditeChunk : ModItem
+public class UnvolanditeChunk : ModItem
 {
     // remove after this is added
     public override bool IsLoadingEnabled(Mod mod)

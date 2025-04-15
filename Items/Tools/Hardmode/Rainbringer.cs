@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class Rainbringer : ModItem
+public class Rainbringer : ModItem
 {
     public override void SetDefaults()
     {

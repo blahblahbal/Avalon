@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.BleachedEbony;
 
-class BleachedEbonyBathtub : ModItem
+public class BleachedEbonyBathtub : ModItem
 {
     public override void SetDefaults()
     {

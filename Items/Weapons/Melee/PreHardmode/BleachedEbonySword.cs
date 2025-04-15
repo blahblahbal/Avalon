@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class BleachedEbonySword : ModItem
+public class BleachedEbonySword : ModItem
 {
     public override void SetDefaults()
     {

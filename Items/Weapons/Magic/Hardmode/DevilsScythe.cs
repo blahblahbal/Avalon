@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class DevilsScythe : ModItem
+public class DevilsScythe : ModItem
 {
     public override void SetDefaults()
     {

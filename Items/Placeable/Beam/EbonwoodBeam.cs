@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class EbonwoodBeam : ModItem
+public class EbonwoodBeam : ModItem
 {
     public override void SetDefaults()
     {

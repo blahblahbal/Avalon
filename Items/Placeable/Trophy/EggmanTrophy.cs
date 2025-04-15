@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trophy;
 
-class EggmanTrophy : ModItem
+public class EggmanTrophy : ModItem
 {
     public override void SetDefaults()
     {

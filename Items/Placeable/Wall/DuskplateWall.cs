@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class DuskplateWall : ModItem
+public class DuskplateWall : ModItem
 {
     public override void SetStaticDefaults()
     {

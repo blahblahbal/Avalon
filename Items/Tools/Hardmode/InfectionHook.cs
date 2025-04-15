@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class InfectionHook : ModItem
+public class InfectionHook : ModItem
 {
     public override void SetDefaults()
     {

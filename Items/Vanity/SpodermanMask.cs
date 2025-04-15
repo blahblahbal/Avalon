@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class SpodermanMask : ModItem
+public class SpodermanMask : ModItem
 {
     public override void SetDefaults()
     {

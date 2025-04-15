@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class FreezeBolt : ModItem
+public class FreezeBolt : ModItem
 {
     public override void SetDefaults()
     {

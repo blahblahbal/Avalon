@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Other;
 
-class ImmortalityPotion : ModItem
+public class ImmortalityPotion : ModItem
 {
     public override void SetStaticDefaults()
     {

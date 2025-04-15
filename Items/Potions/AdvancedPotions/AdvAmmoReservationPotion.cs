@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvAmmoReservationPotion : ModItem
+public class AdvAmmoReservationPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

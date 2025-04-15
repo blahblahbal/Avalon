@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Seed;
 
-class LargeFireblossomSeed : ModItem
+public class LargeFireblossomSeed : ModItem
 {
     public override void SetStaticDefaults()
     {

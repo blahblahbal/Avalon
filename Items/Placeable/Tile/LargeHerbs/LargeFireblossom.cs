@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
-class LargeFireblossom : ModItem
+public class LargeFireblossom : ModItem
 {
     public override void SetStaticDefaults()
     {

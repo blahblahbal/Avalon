@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class BleachedEbony : ModItem
+public class BleachedEbony : ModItem
 {
     public override void SetStaticDefaults()
     {

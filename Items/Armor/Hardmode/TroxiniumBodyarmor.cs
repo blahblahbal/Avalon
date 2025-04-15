@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class TroxiniumBodyarmor : ModItem
+public class TroxiniumBodyarmor : ModItem
 {
     public override void SetDefaults()
     {

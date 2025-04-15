@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.WildMushroom;
 
-class WildMushroomClock : ModItem
+public class WildMushroomClock : ModItem
 {
     public override void SetDefaults()
     {

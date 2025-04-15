@@ -6,7 +6,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Other;
 
-class PlatinumApple : ModItem
+public class PlatinumApple : ModItem
 {
     public override void SetStaticDefaults()
     {

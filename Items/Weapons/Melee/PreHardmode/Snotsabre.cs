@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class Snotsabre : ModItem
+public class Snotsabre : ModItem
 {
     public override void SetDefaults()
     {

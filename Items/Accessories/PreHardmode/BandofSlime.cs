@@ -6,20 +6,18 @@ namespace Avalon.Items.Accessories.PreHardmode;
 
 public class BandofSlime : ModItem
 {
-    public override void SetDefaults()
-    {
-        Item.rare = ItemRarityID.Blue;
-        Item.width = 28;
-        Item.accessory = true;
-        Item.value = 50000;
-        Item.height = 30;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToAccessory();
+		Item.rare = ItemRarityID.Blue;
+		Item.value = Item.sellPrice(0, 1);
+	}
 
-    public override void UpdateAccessory(Player player, bool hideVisual)
-    {
-        player.endurance += 0.05f;
-        player.noFallDmg = true;
-        player.slippy = true;
-        player.slippy2 = true;
-    }
+	public override void UpdateAccessory(Player player, bool hideVisual)
+	{
+		player.endurance += 0.05f;
+		player.noFallDmg = true;
+		player.slippy = true;
+		player.slippy2 = true;
+	}
 }

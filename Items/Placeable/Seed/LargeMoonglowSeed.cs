@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Seed;
 
-class LargeMoonglowSeed : ModItem
+public class LargeMoonglowSeed : ModItem
 {
     public override void SetStaticDefaults()
     {

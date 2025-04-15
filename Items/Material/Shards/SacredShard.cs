@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class SacredShard : ModItem
+public class SacredShard : ModItem
 {
     public override void SetStaticDefaults()
     {

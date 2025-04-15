@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class BacciliteBar : ModItem
+public class BacciliteBar : ModItem
 {
     public override void SetStaticDefaults()
     {

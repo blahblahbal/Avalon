@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
-class ResistantWoodWorkBench : ModItem
+public class ResistantWoodWorkBench : ModItem
 {
     public override void SetStaticDefaults()
     {

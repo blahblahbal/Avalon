@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class HallowedThorn : ModItem
+public class HallowedThorn : ModItem
 {
     public override void SetDefaults()
     {

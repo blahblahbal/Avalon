@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class RhodiumBrick : ModItem
+public class RhodiumBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

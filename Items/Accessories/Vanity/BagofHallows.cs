@@ -1,10 +1,10 @@
 using Avalon.Common;
+using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Graphics.Shaders;
-using Avalon.Items.Material.Shards;
 
 namespace Avalon.Items.Accessories.Vanity;
 
@@ -16,13 +16,10 @@ public class BagofHallows : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
+		Item.DefaultToAccessory();
 		Item.rare = ItemRarityID.LightPurple;
-		Item.width = 24;
-		Item.accessory = true;
 		Item.vanity = true;
 		Item.value = Item.sellPrice(0, 1);
-		Item.height = 28;
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
 

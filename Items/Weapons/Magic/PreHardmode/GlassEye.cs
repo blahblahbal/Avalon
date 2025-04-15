@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class GlassEye : ModItem
+public class GlassEye : ModItem
 {
     public override void SetDefaults()
     {

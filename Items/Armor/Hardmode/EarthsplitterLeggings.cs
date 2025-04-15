@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class EarthsplitterLeggings : ModItem
+public class EarthsplitterLeggings : ModItem
 {
     public override void SetDefaults()
     {

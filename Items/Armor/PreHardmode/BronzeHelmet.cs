@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class BronzeHelmet : ModItem
+public class BronzeHelmet : ModItem
 {
     public override void SetDefaults()
     {

@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class PossessedFlamesaw : ModItem
+public class PossessedFlamesaw : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

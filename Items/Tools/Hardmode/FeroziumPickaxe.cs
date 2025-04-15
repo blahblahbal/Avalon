@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class FeroziumPickaxe : ModItem
+public class FeroziumPickaxe : ModItem
 {
     public override void SetDefaults()
     {

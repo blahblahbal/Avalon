@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class Shurikerang : ModItem
+public class Shurikerang : ModItem
 {
     public override void SetDefaults()
     {

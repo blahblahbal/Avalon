@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class Starstone : ModItem
+public class Starstone : ModItem
 {
     public override void SetStaticDefaults()
     {

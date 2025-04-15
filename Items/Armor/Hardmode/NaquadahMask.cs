@@ -8,7 +8,7 @@ using Terraria.Localization;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class NaquadahMask : ModItem
+public class NaquadahMask : ModItem
 {
     public override void SetDefaults()
     {

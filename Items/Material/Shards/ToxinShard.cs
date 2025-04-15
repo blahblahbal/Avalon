@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class ToxinShard : ModItem
+public class ToxinShard : ModItem
 {
     public override void SetStaticDefaults()
     {

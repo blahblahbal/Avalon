@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace Avalon.ModSupport.Thorium.Items.Armor;
 
 [AutoloadEquip(EquipType.Body)]
-class ChrysoberylRobe : ModItem
+public class ChrysoberylRobe : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

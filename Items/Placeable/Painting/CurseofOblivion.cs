@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class CurseofOblivion : ModItem
+public class CurseofOblivion : ModItem
 {
     public override void SetDefaults()
     {

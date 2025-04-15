@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class CordycepsWrappings : ModItem
+public class CordycepsWrappings : ModItem
 {
     public override void SetDefaults()
     {

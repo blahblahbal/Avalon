@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class CursedFlamelash : ModItem
+public class CursedFlamelash : ModItem
 {
     public override void SetDefaults()
     {

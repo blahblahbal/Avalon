@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvMagnetPotion : ModItem
+public class AdvMagnetPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

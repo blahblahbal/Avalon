@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class Dirtalier : ModItem
+public class Dirtalier : ModItem
 {
     public override void SetDefaults()
     {

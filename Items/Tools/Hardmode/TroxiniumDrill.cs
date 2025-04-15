@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class TroxiniumDrill : ModItem
+public class TroxiniumDrill : ModItem
 {
 	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()

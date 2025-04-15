@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.BleachedEbony;
 
-class BleachedEbonyWorkBench : ModItem
+public class BleachedEbonyWorkBench : ModItem
 {
     public override void SetDefaults()
     {

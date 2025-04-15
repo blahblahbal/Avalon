@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class BasaltObelisk : ModItem
+public class BasaltObelisk : ModItem
 {
 	public override void SetDefaults()
 	{

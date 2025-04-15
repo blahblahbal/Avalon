@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class NaquadahBreastplate : ModItem
+public class NaquadahBreastplate : ModItem
 {
     public override void SetDefaults()
     {

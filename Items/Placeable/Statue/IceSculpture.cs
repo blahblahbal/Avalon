@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class IceSculpture : ModItem
+public class IceSculpture : ModItem
 {
     public override void SetDefaults()
     {

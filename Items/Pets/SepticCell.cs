@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Pets;
 
-class SepticCell : ModItem
+public class SepticCell : ModItem
 {
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {

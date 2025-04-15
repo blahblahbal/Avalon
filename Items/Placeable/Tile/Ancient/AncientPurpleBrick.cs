@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.Ancient;
 
-class AncientPurpleBrick : ModItem
+public class AncientPurpleBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class BismuthOre : ModItem
+public class BismuthOre : ModItem
 {
     public override void SetStaticDefaults()
     {

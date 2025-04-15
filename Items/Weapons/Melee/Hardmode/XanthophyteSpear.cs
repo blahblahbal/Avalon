@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class XanthophyteSpear : ModItem
+public class XanthophyteSpear : ModItem
 {
     public override void SetDefaults()
     {

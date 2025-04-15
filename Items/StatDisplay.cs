@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items;
 
-class StatDisplay : ModItem
+public class StatDisplay : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

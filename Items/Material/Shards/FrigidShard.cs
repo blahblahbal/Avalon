@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class FrigidShard : ModItem
+public class FrigidShard : ModItem
 {
     public override void SetStaticDefaults()
     {

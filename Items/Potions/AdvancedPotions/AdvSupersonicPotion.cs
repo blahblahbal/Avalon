@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvSupersonicPotion : ModItem
+public class AdvSupersonicPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

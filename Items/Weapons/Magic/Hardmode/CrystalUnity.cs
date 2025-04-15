@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class CrystalUnity : ModItem
+public class CrystalUnity : ModItem
 {
     public override void SetStaticDefaults()
     {

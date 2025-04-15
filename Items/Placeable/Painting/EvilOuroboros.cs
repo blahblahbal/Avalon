@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class EvilOuroboros : ModItem
+public class EvilOuroboros : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items;
 
-class IconItem : ModItem
+public class IconItem : ModItem
 {
     public override string Texture => "Avalon/icon_small";
     public override void SetDefaults()

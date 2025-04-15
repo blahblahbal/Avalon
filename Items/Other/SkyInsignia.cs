@@ -8,7 +8,7 @@ using Avalon.Common.Players;
 
 namespace Avalon.Items.Other;
 
-class SkyInsignia : ModItem
+public class SkyInsignia : ModItem
 {
     public override void SetStaticDefaults()
     {

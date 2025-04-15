@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools;
 
-class TeamMirror : ModItem
+public class TeamMirror : ModItem
 {
     public override void SetDefaults()
     {

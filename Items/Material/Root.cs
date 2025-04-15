@@ -4,7 +4,7 @@ using Terraria;
 
 namespace Avalon.Items.Material;
 
-class Root : ModItem
+public class Root : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class LivingLightningBlock : ModItem
+public class LivingLightningBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

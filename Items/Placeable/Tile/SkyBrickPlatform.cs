@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class SkyBrickPlatform : ModItem
+public class SkyBrickPlatform : ModItem
 {
     public override void SetStaticDefaults()
     {

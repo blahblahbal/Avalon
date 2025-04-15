@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
-class LargeSweetstem : ModItem
+public class LargeSweetstem : ModItem
 {
     public override void SetStaticDefaults()
     {

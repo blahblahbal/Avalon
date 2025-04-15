@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class OrangeSlabWall : ModItem
+public class OrangeSlabWall : ModItem
 {
     public override void SetStaticDefaults()
     {

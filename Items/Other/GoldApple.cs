@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Avalon.Items.Other;
 
-class GoldApple : ModItem
+public class GoldApple : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Other;
 
-class GoldCandyCane : ModItem
+public class GoldCandyCane : ModItem
 {
     public override void SetStaticDefaults()
     {

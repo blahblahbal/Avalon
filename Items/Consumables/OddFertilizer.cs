@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class OddFertilizer : ModItem
+public class OddFertilizer : ModItem
 {
     public override void SetStaticDefaults()
     {

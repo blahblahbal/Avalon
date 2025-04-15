@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class FineLumber : ModItem
+public class FineLumber : ModItem
 {
     public override void SetStaticDefaults()
     {

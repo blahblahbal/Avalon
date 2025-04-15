@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class NaquadahAnvil : ModItem
+public class NaquadahAnvil : ModItem
 {
     public override void SetStaticDefaults()
     {

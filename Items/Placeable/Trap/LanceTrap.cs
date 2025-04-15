@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trap;
 
-class LanceTrap : ModItem
+public class LanceTrap : ModItem
 {
     public override void SetStaticDefaults()
     {

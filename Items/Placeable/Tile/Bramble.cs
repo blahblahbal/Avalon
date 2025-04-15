@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class Bramble : ModItem
+public class Bramble : ModItem
 {
     public override void SetStaticDefaults()
     {

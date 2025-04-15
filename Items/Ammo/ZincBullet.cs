@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-class ZincBullet : ModItem
+public class ZincBullet : ModItem
 {
     public override void SetStaticDefaults()
     {

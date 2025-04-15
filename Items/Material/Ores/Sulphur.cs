@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class Sulphur : ModItem
+public class Sulphur : ModItem
 {
     public override void SetStaticDefaults()
     {

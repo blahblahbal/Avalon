@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class Blahtue : ModItem
+public class Blahtue : ModItem
 {
     public override void SetDefaults()
     {

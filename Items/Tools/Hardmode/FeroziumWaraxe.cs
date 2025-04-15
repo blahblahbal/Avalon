@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class FeroziumWaraxe : ModItem
+public class FeroziumWaraxe : ModItem
 {
     public override void SetDefaults()
     {

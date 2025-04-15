@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Fish;
 
-class Ickfish : ModItem
+public class Ickfish : ModItem
 {
     public override void SetStaticDefaults()
     {

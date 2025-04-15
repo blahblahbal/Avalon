@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class Rock : ModItem
+public class Rock : ModItem
 {
     public override void SetStaticDefaults()
     {

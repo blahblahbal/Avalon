@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class Tourmaline : ModItem
+public class Tourmaline : ModItem
 {
     public override void SetStaticDefaults()
     {

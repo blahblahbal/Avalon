@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trap;
 
-class PoisonGasTrap : ModItem
+public class PoisonGasTrap : ModItem
 {
     public override void SetStaticDefaults()
     {

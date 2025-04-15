@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class FakeFourLeafClover : ModItem
+public class FakeFourLeafClover : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class BronzeBow : ModItem
+public class BronzeBow : ModItem
 {
     public override void SetDefaults()
     {

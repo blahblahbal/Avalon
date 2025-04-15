@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class RingofDisgust : ModItem
+public class RingofDisgust : ModItem
 {
     public override void SetDefaults()
     {

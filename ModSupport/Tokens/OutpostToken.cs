@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Tokens;
 
-class OutpostToken : ModItem
+public class OutpostToken : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{

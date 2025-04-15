@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Fish;
 
-class NauSeaFish : ModItem
+public class NauSeaFish : ModItem
 {
     public override void SetStaticDefaults()
     {

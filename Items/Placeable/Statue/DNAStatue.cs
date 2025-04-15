@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class DNAStatue : ModItem
+public class DNAStatue : ModItem
 {
     public override void SetDefaults()
     {

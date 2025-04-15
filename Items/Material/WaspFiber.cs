@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class WaspFiber : ModItem
+public class WaspFiber : ModItem
 {
     public override void SetStaticDefaults()
     {

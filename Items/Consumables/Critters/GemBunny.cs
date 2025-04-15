@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables.Critters;
 
-class PeridotBunny : ModItem
+public class PeridotBunny : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -17,7 +17,7 @@ class PeridotBunny : ModItem
         Item.makeNPC = ModContent.NPCType<NPCs.Critters.PeridotBunny>();
     }
 }
-class TourmalineBunny : ModItem
+public class TourmalineBunny : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -30,7 +30,7 @@ class TourmalineBunny : ModItem
         Item.makeNPC = ModContent.NPCType<NPCs.Critters.TourmalineBunny>();
     }
 }
-class ZirconBunny : ModItem
+public class ZirconBunny : ModItem
 {
     public override void SetStaticDefaults()
     {

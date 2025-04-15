@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trophy;
 
-class PhantasmTrophy : ModItem
+public class PhantasmTrophy : ModItem
 {
     public override void SetDefaults()
     {

@@ -7,7 +7,7 @@ using Avalon.Common.Players;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class ToxinStaff : ModItem
+public class ToxinStaff : ModItem
 {
     public override void SetStaticDefaults()
     {

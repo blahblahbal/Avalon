@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tomes.PreHardmode;
 
-class EternitysMoon : ModItem
+public class EternitysMoon : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

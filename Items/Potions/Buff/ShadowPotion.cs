@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class ShadowPotion : ModItem
+public class ShadowPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

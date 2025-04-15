@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.YellowDungeon;
 
-class YellowDungeonToilet : ModItem
+public class YellowDungeonToilet : ModItem
 {
     public override void SetDefaults()
     {

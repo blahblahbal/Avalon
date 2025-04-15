@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class XanthophyteDrill : ModItem
+public class XanthophyteDrill : ModItem
 {
     public override void SetDefaults()
     {

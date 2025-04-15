@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class FightoftheBumblebee : ModItem
+public class FightoftheBumblebee : ModItem
 {
     public override void SetDefaults()
     {

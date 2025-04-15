@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class ResistantWoodBeam : ModItem
+public class ResistantWoodBeam : ModItem
 {
     public override void SetStaticDefaults()
     {

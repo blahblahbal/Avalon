@@ -6,7 +6,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Consumables;
 
-class MechanicalWasp : ModItem
+public class MechanicalWasp : ModItem
 {
     public override void SetStaticDefaults()
     {

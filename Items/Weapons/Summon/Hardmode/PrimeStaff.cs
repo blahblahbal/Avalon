@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Summon.Hardmode;
 
-class PrimeStaff : ModItem
+public class PrimeStaff : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class NinjaPotion : ModItem
+public class NinjaPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

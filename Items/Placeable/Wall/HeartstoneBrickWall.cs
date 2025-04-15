@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class HeartstoneBrickWall : ModItem
+public class HeartstoneBrickWall : ModItem
 {
     public override void SetStaticDefaults()
     {

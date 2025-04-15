@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class XanthophyteSaber : ModItem
+public class XanthophyteSaber : ModItem
 {
     // TODO: ADD PROJECTILE
     public override void SetDefaults()

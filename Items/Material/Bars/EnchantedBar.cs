@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class EnchantedBar : ModItem
+public class EnchantedBar : ModItem
 {
     public override void SetStaticDefaults()
     {

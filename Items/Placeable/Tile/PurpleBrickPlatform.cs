@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class PurpleBrickPlatform : ModItem
+public class PurpleBrickPlatform : ModItem
 {
     public override void SetStaticDefaults()
     {

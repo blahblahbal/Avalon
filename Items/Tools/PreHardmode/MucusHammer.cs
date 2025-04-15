@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class MucusHammer : ModItem
+public class MucusHammer : ModItem
 {
     public override void SetDefaults()
     {

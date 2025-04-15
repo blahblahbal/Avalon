@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class CoughwoodHammer : ModItem
+public class CoughwoodHammer : ModItem
 {
     public override void SetDefaults()
     {

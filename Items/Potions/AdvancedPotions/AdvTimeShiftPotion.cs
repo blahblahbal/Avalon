@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvTimeShiftPotion : ModItem
+public class AdvTimeShiftPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

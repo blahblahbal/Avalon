@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.ModSupport.Thorium.Items.Placeable.Wall;
 
-class ChartreuseStainedGlass : ModItem
+public class ChartreuseStainedGlass : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

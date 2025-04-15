@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tomes.PreHardmode;
 
-class MediationsFlame : ModItem
+public class MediationsFlame : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class RhodiumGreaves : ModItem
+public class RhodiumGreaves : ModItem
 {
     public override void SetDefaults()
     {

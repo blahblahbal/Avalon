@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class FallenStarBlock : ModItem
+public class FallenStarBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

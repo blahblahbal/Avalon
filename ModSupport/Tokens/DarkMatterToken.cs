@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Tokens;
 
-class DarkMatterToken : ModItem
+public class DarkMatterToken : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{

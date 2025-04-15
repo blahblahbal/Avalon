@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
-class ResistantWoodCandelabra : ModItem
+public class ResistantWoodCandelabra : ModItem
 {
     public override void SetStaticDefaults()
     {

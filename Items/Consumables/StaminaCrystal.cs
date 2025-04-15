@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class StaminaCrystal : ModItem
+public class StaminaCrystal : ModItem
 {
     public override void SetStaticDefaults()
     {

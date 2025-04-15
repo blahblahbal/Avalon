@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class Moonfury : ModItem
+public class Moonfury : ModItem
 {
     public override void SetStaticDefaults()
     {

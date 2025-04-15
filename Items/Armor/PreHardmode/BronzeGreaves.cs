@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class BronzeGreaves : ModItem
+public class BronzeGreaves : ModItem
 {
     public override void AddRecipes()
     {

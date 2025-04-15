@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.MusicBoxes;
 
-class MusicBoxContagion : ModItem
+public class MusicBoxContagion : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class TourmalineStaff : ModItem
+public class TourmalineStaff : ModItem
 {
     public override void SetStaticDefaults()
     {

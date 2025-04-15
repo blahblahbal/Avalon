@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class Clarent : ModItem
+public class Clarent : ModItem
 {
     public override void SetStaticDefaults()
     {

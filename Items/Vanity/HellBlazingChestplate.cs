@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Body)]
-class HellBlazingChestplate : ModItem
+public class HellBlazingChestplate : ModItem
 {
     public override void SetDefaults()
     {

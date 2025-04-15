@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class MoonplateBlock : ModItem
+public class MoonplateBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

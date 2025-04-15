@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.WildMushroom;
 
-class WildMushroomPlatform : ModItem
+public class WildMushroomPlatform : ModItem
 {
     public override void SetStaticDefaults()
     {

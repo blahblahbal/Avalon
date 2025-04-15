@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-class PathogenicBullet : ModItem
+public class PathogenicBullet : ModItem
 {
     public override void SetStaticDefaults()
     {

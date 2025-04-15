@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Thorium.Items.Weapons.Magic;
 
-class ChrysoberylStaff : ModItem
+public class ChrysoberylStaff : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

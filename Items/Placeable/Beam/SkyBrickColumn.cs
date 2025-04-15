@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class SkyBrickColumn : ModItem
+public class SkyBrickColumn : ModItem
 {
     public override void SetStaticDefaults()
     {

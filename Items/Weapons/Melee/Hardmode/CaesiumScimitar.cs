@@ -7,7 +7,7 @@ using Avalon.Projectiles.Melee;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class CaesiumScimitar : ModItem
+public class CaesiumScimitar : ModItem
 {
     public override void SetDefaults()
     {

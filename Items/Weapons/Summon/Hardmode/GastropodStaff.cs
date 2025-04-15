@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Summon.Hardmode;
 
-class GastropodStaff : ModItem
+public class GastropodStaff : ModItem
 {
     public override void SetDefaults()
     {

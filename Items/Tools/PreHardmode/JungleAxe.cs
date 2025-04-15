@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class JungleAxe : ModItem
+public class JungleAxe : ModItem
 {
     public override void SetDefaults()
     {

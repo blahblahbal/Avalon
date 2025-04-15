@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Legs)]
-class RustedArmyGreaves : ModItem
+public class RustedArmyGreaves : ModItem
 {
     public override void SetDefaults()
     {

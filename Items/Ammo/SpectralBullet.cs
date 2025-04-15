@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-class SpectralBullet : ModItem
+public class SpectralBullet : ModItem
 {
     public override void SetStaticDefaults()
     {

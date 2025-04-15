@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class TuhrtlBrickWall : ModItem
+public class TuhrtlBrickWall : ModItem
 {
     public override void SetStaticDefaults()
     {

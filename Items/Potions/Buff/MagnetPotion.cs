@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class MagnetPotion : ModItem
+public class MagnetPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

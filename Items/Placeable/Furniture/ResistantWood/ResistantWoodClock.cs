@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
-class ResistantWoodClock : ModItem
+public class ResistantWoodClock : ModItem
 {
     public override void SetStaticDefaults()
     {

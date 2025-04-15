@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
-class LargeShiverthorn : ModItem
+public class LargeShiverthorn : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class BleachedEbonyBeam : ModItem
+public class BleachedEbonyBeam : ModItem
 {
     public override void SetStaticDefaults()
     {

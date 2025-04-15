@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Tokens;
 
-class HellcastleToken : ModItem
+public class HellcastleToken : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class LivingPathogenBlock : ModItem
+public class LivingPathogenBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

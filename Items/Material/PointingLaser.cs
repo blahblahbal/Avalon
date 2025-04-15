@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class PointingLaser : ModItem
+public class PointingLaser : ModItem
 {
 	private static Asset<Texture2D> glow;
 	public override void Load()

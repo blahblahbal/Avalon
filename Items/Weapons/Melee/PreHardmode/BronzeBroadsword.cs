@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class BronzeBroadsword : ModItem
+public class BronzeBroadsword : ModItem
 {
     public override void SetDefaults()
     {

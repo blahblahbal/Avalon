@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class XanthophyteClub : ModItem
+public class XanthophyteClub : ModItem
 {
     // TODO: ADD PROJECTILE
     public override void SetDefaults()

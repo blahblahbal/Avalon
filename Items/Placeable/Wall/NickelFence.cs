@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class NickelFence : ModItem
+public class NickelFence : ModItem
 {
     public override void SetStaticDefaults()
     {

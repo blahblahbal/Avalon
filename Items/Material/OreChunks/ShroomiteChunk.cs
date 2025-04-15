@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Material.OreChunks;
 
-class ShroomiteChunk : ModItem
+public class ShroomiteChunk : ModItem
 {
     public override void SetStaticDefaults()
     {

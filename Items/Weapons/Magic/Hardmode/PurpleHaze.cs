@@ -8,7 +8,7 @@ using Avalon.Items.Material;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class PurpleHaze : ModItem
+public class PurpleHaze : ModItem
 {
     public SoundStyle gas = new SoundStyle("Terraria/Sounds/Item_34")
     {

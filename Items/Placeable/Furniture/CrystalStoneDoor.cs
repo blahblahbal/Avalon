@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class CrystalStoneDoor : ModItem
+public class CrystalStoneDoor : ModItem
 {
     public override void SetDefaults()
     {

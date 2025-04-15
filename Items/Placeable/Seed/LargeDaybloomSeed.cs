@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Seed;
 
-class LargeDaybloomSeed : ModItem
+public class LargeDaybloomSeed : ModItem
 {
     public override void SetStaticDefaults()
     {

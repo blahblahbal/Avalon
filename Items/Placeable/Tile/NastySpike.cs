@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class NastySpike : ModItem
+public class NastySpike : ModItem
 {
     public override void SetStaticDefaults()
     {

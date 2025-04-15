@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.StaminaScrolls;
 
-class WallSlidingScroll : ModItem
+public class WallSlidingScroll : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

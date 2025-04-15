@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class PurpleSlabWallUnsafe : ModItem
+public class PurpleSlabWallUnsafe : ModItem
 {
     public override void SetStaticDefaults()
     {

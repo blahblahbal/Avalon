@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class ImperviousBrick : ModItem
+public class ImperviousBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

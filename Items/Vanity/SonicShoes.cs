@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Legs)]
-class SonicShoes : ModItem
+public class SonicShoes : ModItem
 {
     public override void SetDefaults()
     {

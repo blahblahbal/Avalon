@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Fish.Quest;
 
-class Snotpiranha : ModItem
+public class Snotpiranha : ModItem
 {
     public override void SetDefaults()
     {

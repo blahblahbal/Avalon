@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.PurpleDungeon;
 
-class PurpleDungeonBathtub : ModItem
+public class PurpleDungeonBathtub : ModItem
 {
     public override void SetDefaults()
     {

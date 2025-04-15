@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Other;
 
-class CompressedExtractinationBlock : ModItem
+public class CompressedExtractinationBlock : ModItem
 {
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {

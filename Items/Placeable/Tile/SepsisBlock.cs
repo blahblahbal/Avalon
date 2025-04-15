@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class SepsisBlock : ModItem
+public class SepsisBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

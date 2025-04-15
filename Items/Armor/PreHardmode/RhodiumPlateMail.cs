@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class RhodiumPlateMail : ModItem
+public class RhodiumPlateMail : ModItem
 {
     public override void SetDefaults()
     {

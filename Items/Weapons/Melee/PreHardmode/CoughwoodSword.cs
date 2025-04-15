@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class CoughwoodSword : ModItem
+public class CoughwoodSword : ModItem
 {
     public override void SetDefaults()
     {

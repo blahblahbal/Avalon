@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class Heartstone : ModItem
+public class Heartstone : ModItem
 {
     public override void SetStaticDefaults()
     {

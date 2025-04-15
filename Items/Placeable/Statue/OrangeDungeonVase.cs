@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class OrangeDungeonVase : ModItem
+public class OrangeDungeonVase : ModItem
 {
     public override void SetDefaults()
     {

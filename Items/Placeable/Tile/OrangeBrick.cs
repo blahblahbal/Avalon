@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class OrangeBrick : ModItem
+public class OrangeBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

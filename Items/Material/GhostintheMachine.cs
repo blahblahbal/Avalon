@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class GhostintheMachine : ModItem
+public class GhostintheMachine : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Superhardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class BlahsHauberk : ModItem
+public class BlahsHauberk : ModItem
 {
     public override void SetDefaults()
     {

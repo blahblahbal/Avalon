@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class Boomlash : ModItem
+public class Boomlash : ModItem
 {
     public override void SetDefaults()
     {

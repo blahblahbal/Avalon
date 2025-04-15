@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Tomes.Superhardmode;
 
-class TheWorld : ModItem
+public class TheWorld : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

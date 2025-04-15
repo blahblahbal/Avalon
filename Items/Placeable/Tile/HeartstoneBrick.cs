@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class HeartstoneBrick : ModItem
+public class HeartstoneBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class ScrollofTome : ModItem
+public class ScrollofTome : ModItem
 {
     public override void SetStaticDefaults()
     {

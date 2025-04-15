@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tomes.PreHardmode;
 
-class TomorrowsPhoenix : ModItem
+public class TomorrowsPhoenix : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

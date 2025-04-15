@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class GoldminePickaxe : ModItem
+public class GoldminePickaxe : ModItem
 {
     public override void SetDefaults()
     {

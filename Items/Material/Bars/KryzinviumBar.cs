@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class KryzinviumBar : ModItem
+public class KryzinviumBar : ModItem
 {
 	public override void SetStaticDefaults()
 	{

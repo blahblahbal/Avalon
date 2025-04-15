@@ -9,7 +9,7 @@ using Avalon.Items.Material.Shards;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class UrchinMace : ModItem
+public class UrchinMace : ModItem
 {
     //public override void SetStaticDefaults()1
     //{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class MoonWallItem : ModItem
+public class MoonWallItem : ModItem
 {
     public override void SetStaticDefaults()
     {

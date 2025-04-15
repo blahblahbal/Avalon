@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Seed;
 
-class LargeShiverthornSeed : ModItem
+public class LargeShiverthornSeed : ModItem
 {
     public override void SetStaticDefaults()
     {

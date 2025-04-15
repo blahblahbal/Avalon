@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Herbs;
 
-class TwilightPlumeSeeds : ModItem
+public class TwilightPlumeSeeds : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class Starstorm : ModItem
+public class Starstorm : ModItem
 {
     public override Color? GetAlpha(Color lightColor)
     {

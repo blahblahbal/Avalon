@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class DesertFeather : ModItem
+public class DesertFeather : ModItem
 {
     public override void SetStaticDefaults()
     {

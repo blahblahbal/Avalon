@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvObsidianSkinPotion : ModItem
+public class AdvObsidianSkinPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

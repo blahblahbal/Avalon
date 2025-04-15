@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class BismuthPickaxe : ModItem
+public class BismuthPickaxe : ModItem
 {
     public override void SetDefaults()
     {

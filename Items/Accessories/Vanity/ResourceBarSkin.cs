@@ -1,28 +1,20 @@
 using Avalon.Common;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.GameContent;
-using Terraria.GameContent.UI.ResourceSets;
-using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Vanity;
 
 [AutoloadEquip(EquipType.Neck)]
-class ResourceBarSkin : ModItem
+public class ResourceBarSkin : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Green;
-        Item.width = 26;
-        Item.accessory = true;
-        Item.value = Item.sellPrice(0, 0, 45);
-        Item.height = 26;
-        Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToAccessory();
+		Item.rare = ItemRarityID.Green;
+		Item.value = Item.sellPrice(0, 0, 45);
+		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
+	}
 }
 
 class ResourceSkinOverlay : ModResourceOverlay

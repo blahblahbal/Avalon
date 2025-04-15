@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class MagicGrenade : ModItem
+public class MagicGrenade : ModItem
 {
     public override void SetDefaults()
     {

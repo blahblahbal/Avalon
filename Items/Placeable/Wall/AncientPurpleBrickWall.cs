@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class AncientPurpleBrickWall : ModItem
+public class AncientPurpleBrickWall : ModItem
 {
     public override void SetStaticDefaults()
     {

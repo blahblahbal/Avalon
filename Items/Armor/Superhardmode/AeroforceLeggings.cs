@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Superhardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class AeroforceLeggings : ModItem
+public class AeroforceLeggings : ModItem
 {
     public override void SetDefaults()
     {

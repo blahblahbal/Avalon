@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class CarbonSteel : ModItem
+public class CarbonSteel : ModItem
 {
     public override void SetStaticDefaults()
     {

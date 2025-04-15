@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class CaesiumPike : ModItem
+public class CaesiumPike : ModItem
 {
     public override void SetStaticDefaults()
     {

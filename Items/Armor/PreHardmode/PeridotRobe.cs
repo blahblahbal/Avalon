@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class PeridotRobe : ModItem
+public class PeridotRobe : ModItem
 {
     public override void SetDefaults()
     {

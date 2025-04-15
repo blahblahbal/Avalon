@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class BacciliteOre : ModItem
+public class BacciliteOre : ModItem
 {
     public override void SetStaticDefaults()
     {

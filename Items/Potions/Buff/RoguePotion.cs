@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class RoguePotion : ModItem
+public class RoguePotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class Beak : ModItem
+public class Beak : ModItem
 {
     public override void SetStaticDefaults()
     {

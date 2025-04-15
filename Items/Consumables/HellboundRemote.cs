@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class HellboundRemote : ModItem
+public class HellboundRemote : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.Hardmode;
 
-class NaquadahRepeater : ModItem
+public class NaquadahRepeater : ModItem
 {
     public override void SetDefaults()
     {

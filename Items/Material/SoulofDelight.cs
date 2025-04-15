@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class SoulofDelight : ModItem
+public class SoulofDelight : ModItem
 {
     public override void SetStaticDefaults()
     {

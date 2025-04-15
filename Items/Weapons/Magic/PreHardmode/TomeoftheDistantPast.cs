@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class TomeoftheDistantPast : ModItem
+public class TomeoftheDistantPast : ModItem
 {
     public override void SetDefaults()
     {

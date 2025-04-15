@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class BronzeOre : ModItem
+public class BronzeOre : ModItem
 {
     public override void SetStaticDefaults()
     {

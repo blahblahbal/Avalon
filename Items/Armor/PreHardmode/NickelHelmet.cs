@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class NickelHelmet : ModItem
+public class NickelHelmet : ModItem
 {
     public override void SetDefaults()
     {

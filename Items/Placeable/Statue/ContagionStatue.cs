@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class ContagionStatue : ModItem
+public class ContagionStatue : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.Hardmode;
 
-class RottenApple : ModItem
+public class RottenApple : ModItem
 {
     public override void SetStaticDefaults()
     {

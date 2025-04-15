@@ -9,7 +9,7 @@ using Avalon.Items.Weapons.Melee.PreHardmode;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class CraniumCrusher : ModItem
+public class CraniumCrusher : ModItem
 {
     //public override void SetStaticDefaults()1
     //{

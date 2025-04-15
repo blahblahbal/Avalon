@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class FrozenLyre : ModItem
+public class FrozenLyre : ModItem
 {
     public override void SetDefaults()
     {

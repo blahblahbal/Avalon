@@ -8,7 +8,7 @@ using Avalon.Items.Material;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class SackofToys : ModItem
+public class SackofToys : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

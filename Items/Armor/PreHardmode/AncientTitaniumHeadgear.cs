@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class AncientTitaniumHeadgear : ModItem
+public class AncientTitaniumHeadgear : ModItem
 {
     public override void SetDefaults()
     {

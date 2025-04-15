@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class LimeStainedGlass : ModItem
+public class LimeStainedGlass : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -34,7 +34,7 @@ class LimeStainedGlass : ModItem
     }
 }
 
-class CyanStainedGlass : ModItem
+public class CyanStainedGlass : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -63,7 +63,7 @@ class CyanStainedGlass : ModItem
     }
 }
 
-class BrownStainedGlass : ModItem
+public class BrownStainedGlass : ModItem
 {
     public override void SetStaticDefaults()
     {

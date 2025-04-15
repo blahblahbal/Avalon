@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class Ancient : ModItem
+public class Ancient : ModItem
 {
     public override void SetDefaults()
     {

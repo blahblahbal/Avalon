@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class NaquadahBrickWall : ModItem
+public class NaquadahBrickWall : ModItem
 {
     public override void SetStaticDefaults()
     {

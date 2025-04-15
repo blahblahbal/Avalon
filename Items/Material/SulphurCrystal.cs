@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class SulphurCrystal : ModItem
+public class SulphurCrystal : ModItem
 {
     public override void SetStaticDefaults()
     {

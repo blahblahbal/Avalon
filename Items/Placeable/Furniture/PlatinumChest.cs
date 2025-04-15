@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class PlatinumChest : ModItem
+public class PlatinumChest : ModItem
 {
     public override void SetDefaults()
     {

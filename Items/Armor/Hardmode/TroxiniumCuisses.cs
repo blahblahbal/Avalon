@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class TroxiniumCuisses : ModItem
+public class TroxiniumCuisses : ModItem
 {
     public override void SetDefaults()
     {

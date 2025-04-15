@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvWaterWalkingPotion : ModItem
+public class AdvWaterWalkingPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

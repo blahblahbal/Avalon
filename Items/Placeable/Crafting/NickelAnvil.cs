@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class NickelAnvil : ModItem
+public class NickelAnvil : ModItem
 {
     public override void SetDefaults()
     {

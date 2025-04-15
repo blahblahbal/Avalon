@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class FlowerofTheJungle : ModItem
+public class FlowerofTheJungle : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trophy;
 
-class BacteriumPrimeTrophy : ModItem
+public class BacteriumPrimeTrophy : ModItem
 {
     public override void SetDefaults()
     {

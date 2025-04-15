@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvDangersensePotion : ModItem
+public class AdvDangersensePotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class PlanterasRage : ModItem
+public class PlanterasRage : ModItem
 {
     public override void SetDefaults()
     {

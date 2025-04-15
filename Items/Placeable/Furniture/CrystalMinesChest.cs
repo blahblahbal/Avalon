@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class CrystalMinesChest : ModItem
+public class CrystalMinesChest : ModItem
 {
     public override void SetDefaults()
     {

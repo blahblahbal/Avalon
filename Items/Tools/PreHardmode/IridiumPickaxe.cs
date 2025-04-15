@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class IridiumPickaxe : ModItem
+public class IridiumPickaxe : ModItem
 {
     public override void SetDefaults()
     {

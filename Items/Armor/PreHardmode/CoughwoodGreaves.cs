@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class CoughwoodGreaves : ModItem
+public class CoughwoodGreaves : ModItem
 {
     public override void SetDefaults()
     {

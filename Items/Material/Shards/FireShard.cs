@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class FireShard : ModItem
+public class FireShard : ModItem
 {
     public override void SetStaticDefaults()
     {

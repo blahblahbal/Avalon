@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Herbs;
 
-class TwilightPlume : ModItem
+public class TwilightPlume : ModItem
 {
     public override void SetStaticDefaults()
     {

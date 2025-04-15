@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class CrimstoneColumn : ModItem
+public class CrimstoneColumn : ModItem
 {
     public override void SetStaticDefaults()
     {

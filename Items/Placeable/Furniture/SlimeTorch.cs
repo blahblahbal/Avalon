@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class SlimeTorch : ModItem
+public class SlimeTorch : ModItem
 {
     public override void SetStaticDefaults()
     {

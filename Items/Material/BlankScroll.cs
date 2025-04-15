@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class BlankScroll : ModItem
+public class BlankScroll : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class UndeadShard : ModItem
+public class UndeadShard : ModItem
 {
     public override void SetStaticDefaults()
     {

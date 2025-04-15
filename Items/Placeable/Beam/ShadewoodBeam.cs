@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class ShadewoodBeam : ModItem
+public class ShadewoodBeam : ModItem
 {
     public override void SetDefaults()
     {

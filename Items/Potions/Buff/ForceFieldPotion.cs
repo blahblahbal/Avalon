@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class ForceFieldPotion : ModItem
+public class ForceFieldPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

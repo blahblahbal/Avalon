@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class CoughwoodBreastplate : ModItem
+public class CoughwoodBreastplate : ModItem
 {
     public override void SetDefaults()
     {

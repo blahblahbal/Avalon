@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class BleachedEbonyBreastplate : ModItem
+public class BleachedEbonyBreastplate : ModItem
 {
     public override void SetDefaults()
     {

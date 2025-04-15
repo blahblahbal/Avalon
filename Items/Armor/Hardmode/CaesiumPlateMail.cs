@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class CaesiumPlateMail : ModItem
+public class CaesiumPlateMail : ModItem
 {
     public override void SetDefaults()
     {

@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class SweetstemPlanterBox : ModItem
+public class SweetstemPlanterBox : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Consumables;
 
-class FalseTreasureMap : ModItem
+public class FalseTreasureMap : ModItem
 {
     public override void SetStaticDefaults()
     {

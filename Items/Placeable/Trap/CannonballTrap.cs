@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trap;
 
-class CannonballTrap : ModItem
+public class CannonballTrap : ModItem
 {
     public override void SetStaticDefaults()
     {

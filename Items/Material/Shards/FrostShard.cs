@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class FrostShard : ModItem
+public class FrostShard : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class BismuthHelmet : ModItem
+public class BismuthHelmet : ModItem
 {
     public override void SetDefaults()
     {

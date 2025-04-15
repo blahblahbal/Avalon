@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class BacciliteBrickWall : ModItem
+public class BacciliteBrickWall : ModItem
 {
     public override void SetStaticDefaults()
     {

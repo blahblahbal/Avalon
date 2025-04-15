@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class NaquadahGreataxe : ModItem
+public class NaquadahGreataxe : ModItem
 {
     public override void SetDefaults()
     {

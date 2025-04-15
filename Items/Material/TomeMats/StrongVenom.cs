@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class StrongVenom : ModItem
+public class StrongVenom : ModItem
 {
     public override void SetStaticDefaults()
     {

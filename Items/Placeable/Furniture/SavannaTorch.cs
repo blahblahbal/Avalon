@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class SavannaTorch : ModItem
+public class SavannaTorch : ModItem
 {
     public override void SetStaticDefaults()
     {

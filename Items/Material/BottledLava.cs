@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class BottledLava : ModItem
+public class BottledLava : ModItem
 {
     public override void SetStaticDefaults()
     {

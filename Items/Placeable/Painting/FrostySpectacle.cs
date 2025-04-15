@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class FrostySpectacle : ModItem
+public class FrostySpectacle : ModItem
 {
     public override void SetDefaults()
     {

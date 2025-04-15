@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class DemonAltar : ModItem
+public class DemonAltar : ModItem
 {
     public override void SetDefaults()
     {

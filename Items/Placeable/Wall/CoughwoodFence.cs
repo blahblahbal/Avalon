@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class CoughwoodFence : ModItem
+public class CoughwoodFence : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class CaesiumBar : ModItem
+public class CaesiumBar : ModItem
 {
     public override void SetStaticDefaults()
     {

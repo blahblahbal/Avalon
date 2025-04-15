@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class ShockwavePotion : ModItem
+public class ShockwavePotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

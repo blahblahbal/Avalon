@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class TroxiniumOre : ModItem
+public class TroxiniumOre : ModItem
 {
     private static Asset<Texture2D> glow;
 	public override void Load()

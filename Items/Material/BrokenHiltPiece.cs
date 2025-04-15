@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class BrokenHiltPiece : ModItem
+public class BrokenHiltPiece : ModItem
 {
     public override void SetStaticDefaults()
     {

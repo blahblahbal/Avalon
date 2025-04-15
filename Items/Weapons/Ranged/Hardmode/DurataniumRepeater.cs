@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.Hardmode;
 
-class DurataniumRepeater : ModItem
+public class DurataniumRepeater : ModItem
 {
     public override void SetDefaults()
     {

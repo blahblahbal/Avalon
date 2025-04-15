@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.SoulCandles;
 
-class FrightCandle : ModItem
+public class FrightCandle : ModItem
 {
     public override void SetDefaults()
     {

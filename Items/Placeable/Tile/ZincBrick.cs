@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class ZincBrick : ModItem
+public class ZincBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

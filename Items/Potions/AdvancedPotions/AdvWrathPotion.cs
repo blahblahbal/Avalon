@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvWrathPotion : ModItem
+public class AdvWrathPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

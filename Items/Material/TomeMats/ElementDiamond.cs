@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class ElementDiamond : ModItem
+public class ElementDiamond : ModItem
 {
     public override void SetStaticDefaults()
     {

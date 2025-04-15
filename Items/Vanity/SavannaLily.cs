@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class SavannaLily : ModItem
+public class SavannaLily : ModItem
 {
     public override void SetStaticDefaults()
 	{

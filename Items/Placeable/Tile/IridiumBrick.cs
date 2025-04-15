@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class IridiumBrick : ModItem
+public class IridiumBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

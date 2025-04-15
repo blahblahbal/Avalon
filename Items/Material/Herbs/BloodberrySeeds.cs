@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Herbs;
 
-class BloodberrySeeds : ModItem
+public class BloodberrySeeds : ModItem
 {
     public override void SetStaticDefaults()
     {

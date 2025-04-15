@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class TwilightPlumePlanterBox : ModItem
+public class TwilightPlumePlanterBox : ModItem
 {
     public override void SetStaticDefaults()
     {

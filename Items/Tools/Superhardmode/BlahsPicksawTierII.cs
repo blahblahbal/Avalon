@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Superhardmode;
 
-class BlahsPicksawTierII : ModItem
+public class BlahsPicksawTierII : ModItem
 {
 	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()

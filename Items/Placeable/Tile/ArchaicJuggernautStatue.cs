@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class ArchaicJuggernautStatue : ModItem
+public class ArchaicJuggernautStatue : ModItem
 {
     public override void SetDefaults()
     {

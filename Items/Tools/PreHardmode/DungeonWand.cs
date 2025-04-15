@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class DungeonWand : ModItem
+public class DungeonWand : ModItem
 {
     public override void SetDefaults()
     {

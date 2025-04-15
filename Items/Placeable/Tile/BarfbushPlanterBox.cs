@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class BarfbushPlanterBox : ModItem
+public class BarfbushPlanterBox : ModItem
 {
     public override void SetStaticDefaults()
     {

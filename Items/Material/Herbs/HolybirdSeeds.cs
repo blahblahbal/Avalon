@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Herbs;
 
-class HolybirdSeeds : ModItem
+public class HolybirdSeeds : ModItem
 {
     public override void SetStaticDefaults()
     {

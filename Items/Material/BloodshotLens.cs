@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class BloodshotLens : ModItem
+public class BloodshotLens : ModItem
 {
     public override void SetStaticDefaults()
     {

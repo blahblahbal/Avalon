@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Body)]
-class PaladinPlate : ModItem
+public class PaladinPlate : ModItem
 {
     public override void SetDefaults()
     {

@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class GlacierStaff : ModItem
+public class GlacierStaff : ModItem
 {
     public override void SetStaticDefaults()
     {

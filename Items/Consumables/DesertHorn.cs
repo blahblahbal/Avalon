@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class DesertHorn : ModItem
+public class DesertHorn : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class DemonicShard : ModItem
+public class DemonicShard : ModItem
 {
     public override void SetStaticDefaults()
     {

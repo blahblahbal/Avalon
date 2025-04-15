@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class DesertBeakMask : ModItem
+public class DesertBeakMask : ModItem
 {
     public override void SetDefaults()
     {

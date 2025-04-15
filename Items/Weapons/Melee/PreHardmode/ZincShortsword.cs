@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class ZincShortsword : ModItem
+public class ZincShortsword : ModItem
 {
     public override void SetDefaults()
     {

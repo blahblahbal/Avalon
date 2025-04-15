@@ -9,7 +9,7 @@ using Avalon.Items.Placeable.Tile;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class IckyAltar : ModItem
+public class IckyAltar : ModItem
 {
     public override void SetDefaults()
     {

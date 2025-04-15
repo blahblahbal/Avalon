@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-class PathogenicDart : ModItem
+public class PathogenicDart : ModItem
 {
     public override void SetStaticDefaults()
     {

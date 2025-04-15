@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvFeatherfallPotion : ModItem
+public class AdvFeatherfallPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Superhardmode;
 
-class BlahsWarhammer : ModItem
+public class BlahsWarhammer : ModItem
 {
 	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvHeartsickPotion : ModItem
+public class AdvHeartsickPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

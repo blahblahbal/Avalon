@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class Gravel : ModItem
+public class Gravel : ModItem
 {
     public override void SetStaticDefaults()
     {

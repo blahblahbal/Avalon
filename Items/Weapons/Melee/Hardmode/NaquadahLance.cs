@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class NaquadahLance : ModItem
+public class NaquadahLance : ModItem
 {
     public override void SetStaticDefaults()
     {

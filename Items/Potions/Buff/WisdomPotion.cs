@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class WisdomPotion : ModItem
+public class WisdomPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

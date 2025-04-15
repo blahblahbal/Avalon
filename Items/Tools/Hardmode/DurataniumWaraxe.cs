@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class DurataniumWaraxe : ModItem
+public class DurataniumWaraxe : ModItem
 {
     public override void SetDefaults()
     {

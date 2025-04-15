@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
-class ResistantWoodBathtub : ModItem
+public class ResistantWoodBathtub : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-class RhotukaSpinner : ModItem
+public class RhotukaSpinner : ModItem
 {
     public override void SetStaticDefaults()
     {

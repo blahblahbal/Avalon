@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class SkyBrickWall : ModItem
+public class SkyBrickWall : ModItem
 {
     public override void SetStaticDefaults()
     {

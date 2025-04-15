@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Heartstone;
 
-class HeartstoneDoor : ModItem
+public class HeartstoneDoor : ModItem
 {
     public override void SetDefaults()
     {

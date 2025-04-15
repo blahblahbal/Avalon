@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-class UltrabrightRazorbladeBullet : ModItem
+public class UltrabrightRazorbladeBullet : ModItem
 {
     public override void SetStaticDefaults()
     {

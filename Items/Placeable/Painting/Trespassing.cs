@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class Trespassing : ModItem
+public class Trespassing : ModItem
 {
     public override void SetDefaults()
     {

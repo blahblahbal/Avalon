@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class RustyHelmet : ModItem
+public class RustyHelmet : ModItem
 {
     public override void SetDefaults()
     {

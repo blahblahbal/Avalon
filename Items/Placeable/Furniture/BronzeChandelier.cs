@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class BronzeChandelier : ModItem
+public class BronzeChandelier : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
-class ResistantWoodPiano : ModItem
+public class ResistantWoodPiano : ModItem
 {
     public override void SetStaticDefaults()
     {

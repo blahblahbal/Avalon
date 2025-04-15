@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class ObsidianGlaive : ModItem // Obisidian Glaive
+public class ObsidianGlaive : ModItem // Obisidian Glaive
 {
     int ShootTimes;
     public override void SetStaticDefaults()

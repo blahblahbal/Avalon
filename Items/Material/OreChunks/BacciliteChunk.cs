@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Material.OreChunks;
 
-class BacciliteChunk : ModItem
+public class BacciliteChunk : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class RuinedCivilization : ModItem
+public class RuinedCivilization : ModItem
 {
     public override void SetDefaults()
     {

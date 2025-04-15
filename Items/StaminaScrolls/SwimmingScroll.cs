@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.StaminaScrolls;
 
-class SwimmingScroll : ModItem
+public class SwimmingScroll : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

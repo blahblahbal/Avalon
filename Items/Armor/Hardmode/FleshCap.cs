@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class FleshCap : ModItem
+public class FleshCap : ModItem
 {
     public override void SetDefaults()
     {

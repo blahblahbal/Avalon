@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class ZirconStaff : ModItem
+public class ZirconStaff : ModItem
 {
     public override void SetStaticDefaults()
     {

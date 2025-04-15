@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class HangingBarfbush : ModItem
+public class HangingBarfbush : ModItem
 {
     public override void SetDefaults()
     {
@@ -33,7 +33,7 @@ class HangingBarfbush : ModItem
     }
 }
 
-class HangingSweetstem : ModItem
+public class HangingSweetstem : ModItem
 {
     public override void SetDefaults()
     {
@@ -60,7 +60,7 @@ class HangingSweetstem : ModItem
 			.Register();
     }
 }
-class HangingBloodberry : ModItem
+public class HangingBloodberry : ModItem
 {
     public override void SetDefaults()
     {
@@ -87,7 +87,7 @@ class HangingBloodberry : ModItem
 			.Register();
     }
 }
-class HangingHolybird : ModItem
+public class HangingHolybird : ModItem
 {
     public override void SetDefaults()
     {

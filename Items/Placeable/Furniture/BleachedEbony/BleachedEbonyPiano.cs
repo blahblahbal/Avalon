@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.BleachedEbony;
 
-class BleachedEbonyPiano : ModItem
+public class BleachedEbonyPiano : ModItem
 {
     public override void SetDefaults()
     {

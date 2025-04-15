@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class XanthophytePickaxe : ModItem
+public class XanthophytePickaxe : ModItem
 {
     public override void SetDefaults()
     {

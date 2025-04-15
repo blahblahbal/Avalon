@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class IridiumGreatsword : ModItem
+public class IridiumGreatsword : ModItem
 {
     public override void SetDefaults()
     {

@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Fish.Quest;
 
-class Pathofish : ModItem
+public class Pathofish : ModItem
 {
 	public override void SetDefaults()
 	{

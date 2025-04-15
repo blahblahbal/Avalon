@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class WickedShard : ModItem
+public class WickedShard : ModItem
 {
     public override void SetStaticDefaults()
     {

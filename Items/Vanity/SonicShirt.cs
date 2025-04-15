@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Body)]
-class SonicShirt : ModItem
+public class SonicShirt : ModItem
 {
     public override void SetDefaults()
     {

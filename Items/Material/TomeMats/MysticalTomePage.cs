@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class MysticalTomePage : ModItem
+public class MysticalTomePage : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Material.OreChunks;
 
-class CobaltChunk : ModItem
+public class CobaltChunk : ModItem
 {
     public override void SetStaticDefaults()
     {

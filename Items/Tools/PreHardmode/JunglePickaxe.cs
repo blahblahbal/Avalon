@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class JunglePickaxe : ModItem
+public class JunglePickaxe : ModItem
 {
     public override void SetDefaults()
     {

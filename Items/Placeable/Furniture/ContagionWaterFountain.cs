@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class ContagionWaterFountain : ModItem
+public class ContagionWaterFountain : ModItem
 {
     public override void SetDefaults()
     {

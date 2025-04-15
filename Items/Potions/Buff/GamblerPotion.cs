@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class GamblerPotion : ModItem
+public class GamblerPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

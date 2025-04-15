@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class NaquadahOre : ModItem
+public class NaquadahOre : ModItem
 {
     public override void SetStaticDefaults()
     {

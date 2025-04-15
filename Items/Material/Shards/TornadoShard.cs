@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class TornadoShard : ModItem
+public class TornadoShard : ModItem
 {
     public override void SetStaticDefaults()
     {

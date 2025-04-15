@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class FleshPants : ModItem
+public class FleshPants : ModItem
 {
     public override void SetDefaults()
     {

@@ -2,9 +2,9 @@ using Avalon.Common;
 using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Graphics.Shaders;
 
 namespace Avalon.Items.Accessories.Vanity;
 
@@ -16,12 +16,10 @@ public class BagofShadows : ModItem
 	}
 	public override void SetDefaults()
 	{
+		Item.DefaultToAccessory();
 		Item.rare = ItemRarityID.Blue;
-		Item.width = 24;
-		Item.accessory = true;
 		Item.vanity = true;
 		Item.value = Item.sellPrice(0, 1);
-		Item.height = 28;
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
 

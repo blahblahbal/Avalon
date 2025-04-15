@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class Sandstormer : ModItem
+public class Sandstormer : ModItem
 {
     public override void SetDefaults()
     {

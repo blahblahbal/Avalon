@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class ShellStatue : ModItem
+public class ShellStatue : ModItem
 {
     public override void SetDefaults()
     {

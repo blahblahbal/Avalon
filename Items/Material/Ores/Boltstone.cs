@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class Boltstone : ModItem
+public class Boltstone : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class ZincBow : ModItem
+public class ZincBow : ModItem
 {
     public override void SetDefaults()
     {

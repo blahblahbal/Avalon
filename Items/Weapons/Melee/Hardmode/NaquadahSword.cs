@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class NaquadahSword : ModItem
+public class NaquadahSword : ModItem
 {
     public override void SetDefaults()
     {

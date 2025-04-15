@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class PeridotStaff : ModItem
+public class PeridotStaff : ModItem
 {
     public override void SetStaticDefaults()
     {

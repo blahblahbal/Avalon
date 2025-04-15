@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class DurataniumPickaxe : ModItem
+public class DurataniumPickaxe : ModItem
 {
     public override void SetDefaults()
     {

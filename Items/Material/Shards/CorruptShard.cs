@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class CorruptShard : ModItem
+public class CorruptShard : ModItem
 {
     public override void SetStaticDefaults()
     {

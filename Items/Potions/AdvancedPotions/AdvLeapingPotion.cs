@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvLeapingPotion : ModItem
+public class AdvLeapingPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

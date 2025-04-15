@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class TourmalineHook : ModItem
+public class TourmalineHook : ModItem
 {
     public override void SetDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvGPSPotion : ModItem
+public class AdvGPSPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

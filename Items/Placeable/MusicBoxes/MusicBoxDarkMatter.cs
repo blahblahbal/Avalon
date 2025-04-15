@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.MusicBoxes;
 
-class MusicBoxDarkMatter : ModItem
+public class MusicBoxDarkMatter : ModItem
 {
     public override void SetStaticDefaults()
     {

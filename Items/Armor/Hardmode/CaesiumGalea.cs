@@ -10,7 +10,7 @@ using Avalon.Buffs;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class CaesiumGalea : ModItem
+public class CaesiumGalea : ModItem
 {
     public override void SetDefaults()
     {

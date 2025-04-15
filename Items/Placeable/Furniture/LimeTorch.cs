@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class LimeTorch : ModItem
+public class LimeTorch : ModItem
 {
     public override void SetStaticDefaults()
     {

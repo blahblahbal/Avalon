@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class PearlstoneColumn : ModItem
+public class PearlstoneColumn : ModItem
 {
     public override void SetDefaults()
     {

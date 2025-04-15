@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class TheCell : ModItem
+public class TheCell : ModItem
 {
     public override void SetStaticDefaults()
     {

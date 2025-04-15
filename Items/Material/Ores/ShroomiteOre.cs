@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class ShroomiteOre : ModItem
+public class ShroomiteOre : ModItem
 {
     public override void SetStaticDefaults()
     {

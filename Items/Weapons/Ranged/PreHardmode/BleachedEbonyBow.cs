@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class BleachedEbonyBow : ModItem
+public class BleachedEbonyBow : ModItem
 {
     public override void SetDefaults()
     {

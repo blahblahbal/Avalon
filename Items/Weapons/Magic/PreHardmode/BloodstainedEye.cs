@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class BloodstainedEye : ModItem
+public class BloodstainedEye : ModItem
 {
     public override void SetDefaults()
     {

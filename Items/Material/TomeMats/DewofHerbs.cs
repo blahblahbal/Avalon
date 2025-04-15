@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class DewofHerbs : ModItem
+public class DewofHerbs : ModItem
 {
     public override void SetStaticDefaults()
     {

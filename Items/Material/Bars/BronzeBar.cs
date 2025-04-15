@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class BronzeBar : ModItem
+public class BronzeBar : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class CordycepsLeggings : ModItem
+public class CordycepsLeggings : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class Wheezebow : ModItem
+public class Wheezebow : ModItem
 {
     public override void SetDefaults()
     {

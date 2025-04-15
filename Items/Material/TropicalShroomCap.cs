@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class TropicalShroomCap : ModItem
+public class TropicalShroomCap : ModItem
 {
     public override void SetStaticDefaults()
     {

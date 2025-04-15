@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class LeapingPotion : ModItem
+public class LeapingPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trophy;
 
-class DesertBeakTrophy : ModItem
+public class DesertBeakTrophy : ModItem
 {
     public override void SetDefaults()
     {

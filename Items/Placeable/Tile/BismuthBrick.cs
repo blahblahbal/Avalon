@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class BismuthBrick : ModItem
+public class BismuthBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

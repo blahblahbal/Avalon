@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class BismuthGreaves : ModItem
+public class BismuthGreaves : ModItem
 {
     public override void AddRecipes()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Superhardmode;
 
-class MagmafrostBolt : ModItem
+public class MagmafrostBolt : ModItem
 {
     public override void SetDefaults()
     {

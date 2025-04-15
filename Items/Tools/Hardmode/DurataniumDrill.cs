@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class DurataniumDrill : ModItem
+public class DurataniumDrill : ModItem
 {
 	public override void SetStaticDefaults()
 	{

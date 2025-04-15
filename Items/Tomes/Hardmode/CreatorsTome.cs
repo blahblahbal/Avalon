@@ -8,7 +8,7 @@ using Avalon.Items.Material.TomeMats;
 
 namespace Avalon.Items.Tomes.Hardmode;
 
-class CreatorsTome : ModItem
+public class CreatorsTome : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{

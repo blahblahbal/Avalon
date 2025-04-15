@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.YellowDungeon;
 
-class YellowDungeonPiano : ModItem
+public class YellowDungeonPiano : ModItem
 {
     public override void SetDefaults()
     {

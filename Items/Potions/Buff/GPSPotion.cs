@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class GPSPotion : ModItem
+public class GPSPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

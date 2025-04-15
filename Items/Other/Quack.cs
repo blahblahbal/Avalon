@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Other;
 
-class Quack : ModItem
+public class Quack : ModItem
 {
     public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
     {

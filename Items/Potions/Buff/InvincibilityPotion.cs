@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class InvincibilityPotion : ModItem
+public class InvincibilityPotion : ModItem
 {
     public override void SetStaticDefaults()
     {

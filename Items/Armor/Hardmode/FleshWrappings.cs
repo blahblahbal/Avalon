@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class FleshWrappings : ModItem
+public class FleshWrappings : ModItem
 {
     public override void SetDefaults()
     {

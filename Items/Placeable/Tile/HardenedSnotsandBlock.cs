@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class HardenedSnotsandBlock : ModItem
+public class HardenedSnotsandBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

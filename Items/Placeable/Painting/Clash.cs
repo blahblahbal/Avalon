@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class Clash : ModItem
+public class Clash : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class BleachedEbonyHammer : ModItem
+public class BleachedEbonyHammer : ModItem
 {
     public override void SetDefaults()
     {

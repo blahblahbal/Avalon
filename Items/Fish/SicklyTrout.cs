@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Fish;
 
-class SicklyTrout : ModItem
+public class SicklyTrout : ModItem
 {
     public override void SetStaticDefaults()
     {

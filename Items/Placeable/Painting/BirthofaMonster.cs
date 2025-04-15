@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class BirthofaMonster : ModItem
+public class BirthofaMonster : ModItem
 {
     public override void SetDefaults()
     {

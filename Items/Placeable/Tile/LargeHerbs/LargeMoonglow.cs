@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
-class LargeMoonglow : ModItem
+public class LargeMoonglow : ModItem
 {
     public override void SetStaticDefaults()
     {

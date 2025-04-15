@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class RevenantHelm : ModItem
+public class RevenantHelm : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.BleachedEbony;
 
-class BleachedEbonyClock : ModItem
+public class BleachedEbonyClock : ModItem
 {
     public override void SetDefaults()
     {

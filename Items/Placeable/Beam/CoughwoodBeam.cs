@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class CoughwoodBeam : ModItem
+public class CoughwoodBeam : ModItem
 {
     public override void SetDefaults()
     {

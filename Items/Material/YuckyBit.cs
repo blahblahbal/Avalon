@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class YuckyBit : ModItem
+public class YuckyBit : ModItem
 {
 	public override void SetStaticDefaults()
 	{

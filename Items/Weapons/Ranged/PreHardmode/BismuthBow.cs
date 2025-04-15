@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class BismuthBow : ModItem
+public class BismuthBow : ModItem
 {
     public override void SetDefaults()
     {

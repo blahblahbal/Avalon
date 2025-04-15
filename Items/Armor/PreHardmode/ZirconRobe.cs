@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class ZirconRobe : ModItem
+public class ZirconRobe : ModItem
 {
     public override void Load()
     {

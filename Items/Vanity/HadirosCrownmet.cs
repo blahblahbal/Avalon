@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class HadirosCrownmet : ModItem
+public class HadirosCrownmet : ModItem
 {
     public override void SetDefaults()
     {

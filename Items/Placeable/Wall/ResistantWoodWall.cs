@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class ResistantWoodWall : ModItem
+public class ResistantWoodWall : ModItem
 {
     public override void SetStaticDefaults()
     {

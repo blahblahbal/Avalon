@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.OrangeDungeon;
 
-class OrangeDungeonBathtub : ModItem
+public class OrangeDungeonBathtub : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trophy;
 
-class WallofSteelTrophy : ModItem
+public class WallofSteelTrophy : ModItem
 {
     public override void SetDefaults()
     {

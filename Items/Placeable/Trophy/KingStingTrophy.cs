@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trophy;
 
-class KingStingTrophy : ModItem
+public class KingStingTrophy : ModItem
 {
     public override void SetDefaults()
     {

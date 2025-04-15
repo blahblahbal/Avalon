@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class BronzeHammer : ModItem
+public class BronzeHammer : ModItem
 {
     public override void SetDefaults()
     {

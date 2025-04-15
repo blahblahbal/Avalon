@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class PeridotGemsparkWall : ModItem
+public class PeridotGemsparkWall : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -42,7 +42,7 @@ class PeridotGemsparkWall : ModItem
         Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 0.714f * 0.8f, 1f * 0.8f, 0);
     }
 }
-class PeridotGemsparkWallOff : ModItem
+public class PeridotGemsparkWallOff : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -76,7 +76,7 @@ class PeridotGemsparkWallOff : ModItem
     }
 }
 
-class TourmalineGemsparkWall : ModItem
+public class TourmalineGemsparkWall : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -113,7 +113,7 @@ class TourmalineGemsparkWall : ModItem
         Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 0, 1f * 0.8f, 1f * 0.8f);
     }
 }
-class TourmalineGemsparkWallOff : ModItem
+public class TourmalineGemsparkWallOff : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -147,7 +147,7 @@ class TourmalineGemsparkWallOff : ModItem
     }
 }
 
-class ZirconGemsparkWall : ModItem
+public class ZirconGemsparkWall : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -184,7 +184,7 @@ class ZirconGemsparkWall : ModItem
         Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1.1f * 0.8f, 0.8f * 0.8f, 0.4f);
     }
 }
-class ZirconGemsparkWallOff : ModItem
+public class ZirconGemsparkWallOff : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class DewOrb : ModItem
+public class DewOrb : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Heartstone;
 
-class HeartstoneClock : ModItem
+public class HeartstoneClock : ModItem
 {
     public override void SetDefaults()
     {

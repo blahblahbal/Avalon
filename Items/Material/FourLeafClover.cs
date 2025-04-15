@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class FourLeafClover : ModItem
+public class FourLeafClover : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvHeartreachPotion : ModItem
+public class AdvHeartreachPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

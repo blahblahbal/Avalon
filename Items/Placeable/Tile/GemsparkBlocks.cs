@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class PeridotGemsparkBlock : ModItem
+public class PeridotGemsparkBlock : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -42,7 +42,7 @@ class PeridotGemsparkBlock : ModItem
     }
 }
 
-class TourmalineGemsparkBlock : ModItem
+public class TourmalineGemsparkBlock : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -79,7 +79,7 @@ class TourmalineGemsparkBlock : ModItem
     }
 }
 
-class ZirconGemsparkBlock : ModItem
+public class ZirconGemsparkBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

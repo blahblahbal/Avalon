@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class BronzePlating : ModItem
+public class BronzePlating : ModItem
 {
     public override void SetStaticDefaults()
     {

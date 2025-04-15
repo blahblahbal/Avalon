@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class NaquadahDrill : ModItem
+public class NaquadahDrill : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.PurpleDungeon;
 
-class PurpleDungeonDoor : ModItem
+public class PurpleDungeonDoor : ModItem
 {
     public override void SetDefaults()
     {

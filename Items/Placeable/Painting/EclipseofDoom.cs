@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class EclipseofDoom : ModItem
+public class EclipseofDoom : ModItem
 {
     public override void SetDefaults()
     {

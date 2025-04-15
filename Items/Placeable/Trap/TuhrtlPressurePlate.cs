@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trap;
 
-class TuhrtlPressurePlate : ModItem
+public class TuhrtlPressurePlate : ModItem
 {
     public override void SetStaticDefaults()
     {

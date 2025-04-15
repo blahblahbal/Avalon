@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class CrimsonStatue : ModItem
+public class CrimsonStatue : ModItem
 {
     public override void SetDefaults()
     {

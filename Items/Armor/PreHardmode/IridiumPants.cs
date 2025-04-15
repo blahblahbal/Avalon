@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class IridiumPants : ModItem
+public class IridiumPants : ModItem
 {
     public override void SetDefaults()
     {

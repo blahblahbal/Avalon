@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class EyeoftheUniverse : ModItem
+public class EyeoftheUniverse : ModItem
 {
     public override void SetDefaults()
     {

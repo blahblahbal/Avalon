@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class IridiumOre : ModItem
+public class IridiumOre : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class ChaosTome : ModItem
+public class ChaosTome : ModItem
 {
     public override void SetDefaults()
     {

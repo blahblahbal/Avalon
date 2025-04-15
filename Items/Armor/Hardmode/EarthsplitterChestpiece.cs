@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class EarthsplitterChestpiece : ModItem
+public class EarthsplitterChestpiece : ModItem
 {
     public override void SetDefaults()
     {

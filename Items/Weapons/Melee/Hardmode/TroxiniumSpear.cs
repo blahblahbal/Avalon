@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class TroxiniumSpear : ModItem
+public class TroxiniumSpear : ModItem
 {
 	private static Asset<Texture2D> glow;
 	public override void Load()

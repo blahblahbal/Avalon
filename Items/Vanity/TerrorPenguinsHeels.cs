@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Legs)]
-class TerrorPenguinsHeels : ModItem
+public class TerrorPenguinsHeels : ModItem
 {
     public override void SetDefaults()
     {

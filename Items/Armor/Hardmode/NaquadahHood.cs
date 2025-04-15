@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class NaquadahHood : ModItem
+public class NaquadahHood : ModItem
 {
     public override void SetDefaults()
     {

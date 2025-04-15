@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Seed;
 
-class LargeBlinkrootSeed : ModItem
+public class LargeBlinkrootSeed : ModItem
 {
     public override void SetStaticDefaults()
     {

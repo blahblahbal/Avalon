@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Unobtainable;
 
 [AutoloadEquip(EquipType.Legs)]
-class UnderwearMale : ModItem
+public class UnderwearMale : ModItem
 {
     public override void SetDefaults()
     {

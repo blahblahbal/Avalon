@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class VisionPotion : ModItem
+public class VisionPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

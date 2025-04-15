@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Seed;
 
-class LargeHolybirdSeed : ModItem
+public class LargeHolybirdSeed : ModItem
 {
     public override void SetStaticDefaults()
     {

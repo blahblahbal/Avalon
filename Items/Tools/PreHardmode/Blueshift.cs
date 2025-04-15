@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class Blueshift : ModItem
+public class Blueshift : ModItem
 {
     int useTimer = 0;
     public override void SetDefaults()

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class CloverPotion : ModItem
+public class CloverPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

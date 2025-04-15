@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class SupersonicPotion : ModItem
+public class SupersonicPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class CrystalStoneBlock : ModItem
+public class CrystalStoneBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

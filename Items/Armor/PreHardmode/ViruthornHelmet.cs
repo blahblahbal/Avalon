@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class ViruthornHelmet : ModItem
+public class ViruthornHelmet : ModItem
 {
     public override void SetDefaults()
     {

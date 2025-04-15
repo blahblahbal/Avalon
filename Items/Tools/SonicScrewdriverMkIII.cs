@@ -10,7 +10,7 @@ using Terraria.ObjectData;
 
 namespace Avalon.Items.Tools;
 
-class SonicScrewdriverMkIII : ModItem
+public class SonicScrewdriverMkIII : ModItem
 {
     public override void SetDefaults()
     {

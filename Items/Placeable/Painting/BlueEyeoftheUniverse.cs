@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class BlueEyeoftheUniverse : ModItem
+public class BlueEyeoftheUniverse : ModItem
 {
     public override void SetDefaults()
     {

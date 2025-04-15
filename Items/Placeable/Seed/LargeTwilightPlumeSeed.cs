@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Seed;
 
-class LargeTwilightPlumeSeed : ModItem
+public class LargeTwilightPlumeSeed : ModItem
 {
     public override void SetStaticDefaults()
     {

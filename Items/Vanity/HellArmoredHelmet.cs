@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class HellArmoredHelmet : ModItem
+public class HellArmoredHelmet : ModItem
 {
     public override void SetDefaults()
     {

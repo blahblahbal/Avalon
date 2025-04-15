@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class BleachedEbonyHelmet : ModItem
+public class BleachedEbonyHelmet : ModItem
 {
     public override void SetDefaults()
     {

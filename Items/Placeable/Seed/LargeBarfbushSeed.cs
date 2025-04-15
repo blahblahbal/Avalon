@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Seed;
 
-class LargeBarfbushSeed : ModItem
+public class LargeBarfbushSeed : ModItem
 {
     public override void SetStaticDefaults()
     {

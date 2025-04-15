@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class ZincChandelier : ModItem
+public class ZincChandelier : ModItem
 {
     public override void SetDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class HemorrhagingHalberd : ModItem
+public class HemorrhagingHalberd : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Blah;
 
-class BlahsEnergyBlade : ModItem
+public class BlahsEnergyBlade : ModItem
 {
 	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()

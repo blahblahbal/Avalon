@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class BronzePlatingWall : ModItem
+public class BronzePlatingWall : ModItem
 {
     public override void SetStaticDefaults()
     {

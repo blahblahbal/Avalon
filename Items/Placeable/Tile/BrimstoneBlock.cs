@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class BrimstoneBlock : ModItem
+public class BrimstoneBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

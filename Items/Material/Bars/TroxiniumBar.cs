@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class TroxiniumBar : ModItem
+public class TroxiniumBar : ModItem
 {
     private static Asset<Texture2D> glow;
 	public override void Load()

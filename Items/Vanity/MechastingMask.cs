@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class MechastingMask : ModItem
+public class MechastingMask : ModItem
 {
     public override void SetDefaults()
     {

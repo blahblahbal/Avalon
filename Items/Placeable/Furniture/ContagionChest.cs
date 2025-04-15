@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class ContagionChest : ModItem
+public class ContagionChest : ModItem
 {
     public override void SetDefaults()
     {

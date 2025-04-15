@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class TuhrtlBrick : ModItem
+public class TuhrtlBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

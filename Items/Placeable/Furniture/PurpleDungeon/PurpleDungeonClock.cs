@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.PurpleDungeon;
 
-class PurpleDungeonClock : ModItem
+public class PurpleDungeonClock : ModItem
 {
     public override void SetDefaults()
     {

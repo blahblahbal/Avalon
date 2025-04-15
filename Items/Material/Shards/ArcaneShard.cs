@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class ArcaneShard : ModItem
+public class ArcaneShard : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class ApocalyptusWood : ModItem
+public class ApocalyptusWood : ModItem
 {
     public override void SetStaticDefaults()
     {

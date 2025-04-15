@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class PathogenCampfire : ModItem
+public class PathogenCampfire : ModItem
 {
     public override void SetDefaults()
     {

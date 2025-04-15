@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
-class BloodBarrage : ModItem
+public class BloodBarrage : ModItem
 {
 	public override void SetDefaults()
 	{

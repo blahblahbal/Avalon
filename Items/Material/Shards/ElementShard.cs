@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class ElementShard : ModItem
+public class ElementShard : ModItem
 {
     public override void SetStaticDefaults()
     {

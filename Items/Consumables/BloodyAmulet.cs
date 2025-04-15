@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class BloodyAmulet : ModItem
+public class BloodyAmulet : ModItem
 {
     public override void SetStaticDefaults()
     {

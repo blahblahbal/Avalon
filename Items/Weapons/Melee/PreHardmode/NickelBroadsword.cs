@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class NickelBroadsword : ModItem
+public class NickelBroadsword : ModItem
 {
     public override void SetDefaults()
     {

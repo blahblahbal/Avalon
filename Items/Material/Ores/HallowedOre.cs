@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class HallowedOre : ModItem
+public class HallowedOre : ModItem
 {
     public override void SetStaticDefaults()
     {

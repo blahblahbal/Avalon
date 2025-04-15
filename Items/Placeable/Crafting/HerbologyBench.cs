@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class HerbologyBench : ModItem
+public class HerbologyBench : ModItem
 {
     public override void SetDefaults()
     {

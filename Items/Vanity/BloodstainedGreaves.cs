@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Legs)]
-class BloodstainedGreaves : ModItem
+public class BloodstainedGreaves : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class DurataniumGlaive : ModItem
+public class DurataniumGlaive : ModItem
 {
     public override void SetStaticDefaults()
     {

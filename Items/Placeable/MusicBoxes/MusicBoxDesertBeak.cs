@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.MusicBoxes;
 
-class MusicBoxDesertBeak : ModItem
+public class MusicBoxDesertBeak : ModItem
 {
     public override void SetStaticDefaults()
     {

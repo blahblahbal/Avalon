@@ -6,7 +6,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class ImperviousBrickWallItem : ModItem
+public class ImperviousBrickWallItem : ModItem
 {
     public override void SetStaticDefaults()
     {

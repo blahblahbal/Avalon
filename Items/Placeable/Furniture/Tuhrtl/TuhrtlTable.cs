@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Tuhrtl;
 
-class TuhrtlTable : ModItem
+public class TuhrtlTable : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
-class ResistantWoodDoor : ModItem
+public class ResistantWoodDoor : ModItem
 {
     public override void SetStaticDefaults()
     {

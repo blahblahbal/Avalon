@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class BlueLihzahrdStatue : ModItem
+public class BlueLihzahrdStatue : ModItem
 {
     public override void SetDefaults()
     {

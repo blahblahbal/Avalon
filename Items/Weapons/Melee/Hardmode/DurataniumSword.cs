@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class DurataniumSword : ModItem
+public class DurataniumSword : ModItem
 {
     public override void SetDefaults()
     {

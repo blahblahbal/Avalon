@@ -6,7 +6,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Consumables;
 
-class GoblinRetreatOrder : ModItem
+public class GoblinRetreatOrder : ModItem
 {
     public override void SetStaticDefaults()
     {

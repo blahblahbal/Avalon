@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class DurataniumOre : ModItem
+public class DurataniumOre : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class BleachedEbonyWall : ModItem
+public class BleachedEbonyWall : ModItem
 {
     public override void SetStaticDefaults()
     {

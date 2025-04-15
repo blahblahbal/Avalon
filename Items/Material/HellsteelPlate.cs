@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class HellsteelPlate : ModItem
+public class HellsteelPlate : ModItem
 {
     public override void SetStaticDefaults()
     {

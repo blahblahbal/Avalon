@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Body)]
-class PhantomShirt : ModItem
+public class PhantomShirt : ModItem
 {
     public override void SetDefaults()
     {

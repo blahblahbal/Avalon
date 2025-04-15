@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class XanthophyteWarhammer : ModItem
+public class XanthophyteWarhammer : ModItem
 {
     public override void SetDefaults()
     {

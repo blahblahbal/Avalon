@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class MosquitoProboscis : ModItem
+public class MosquitoProboscis : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class ZirconHook : ModItem
+public class ZirconHook : ModItem
 {
     public override void SetDefaults()
     {

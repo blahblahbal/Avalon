@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class RubybeadHerb : ModItem
+public class RubybeadHerb : ModItem
 {
     public override void SetStaticDefaults()
     {

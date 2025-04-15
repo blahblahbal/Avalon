@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class HallowedBrick : ModItem
+public class HallowedBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

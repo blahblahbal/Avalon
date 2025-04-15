@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class NaquadahChainsaw : ModItem
+public class NaquadahChainsaw : ModItem
 {
     public override void SetDefaults()
     {

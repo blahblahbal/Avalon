@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class EnchantedShuriken : ModItem
+public class EnchantedShuriken : ModItem
 {
     public override void SetDefaults()
     {

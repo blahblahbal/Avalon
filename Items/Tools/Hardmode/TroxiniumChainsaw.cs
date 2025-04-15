@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class TroxiniumChainsaw : ModItem
+public class TroxiniumChainsaw : ModItem
 {
 	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()

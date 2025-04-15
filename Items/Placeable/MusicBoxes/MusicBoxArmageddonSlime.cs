@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.MusicBoxes;
 
-class MusicBoxArmageddonSlime : ModItem
+public class MusicBoxArmageddonSlime : ModItem
 {
     public override void SetStaticDefaults()
     {

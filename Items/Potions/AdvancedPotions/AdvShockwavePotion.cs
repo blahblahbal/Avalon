@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvShockwavePotion : ModItem
+public class AdvShockwavePotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

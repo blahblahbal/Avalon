@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class TourmalineGemcorn : ModItem
+public class TourmalineGemcorn : ModItem
 {
     public override void SetStaticDefaults()
     {

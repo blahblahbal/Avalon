@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class RhodiumPickaxe : ModItem
+public class RhodiumPickaxe : ModItem
 {
     public override void SetDefaults()
     {

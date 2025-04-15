@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class Timechanger : ModItem
+public class Timechanger : ModItem
 {
     public override void SetDefaults()
     {

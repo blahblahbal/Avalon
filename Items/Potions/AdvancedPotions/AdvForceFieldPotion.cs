@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvForceFieldPotion : ModItem
+public class AdvForceFieldPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class ViruthornGreaves : ModItem
+public class ViruthornGreaves : ModItem
 {
     public override void SetDefaults()
     {

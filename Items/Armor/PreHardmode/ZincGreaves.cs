@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class ZincGreaves : ModItem
+public class ZincGreaves : ModItem
 {
     public override void AddRecipes()
     {

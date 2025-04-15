@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class ViruthornScalemail : ModItem
+public class ViruthornScalemail : ModItem
 {
     public override void SetDefaults()
     {

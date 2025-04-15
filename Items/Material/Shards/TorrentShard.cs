@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class TorrentShard : ModItem
+public class TorrentShard : ModItem
 {
     public override void SetStaticDefaults()
     {

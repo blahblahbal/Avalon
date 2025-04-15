@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Superhardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class AeroforceProtector : ModItem
+public class AeroforceProtector : ModItem
 {
     public override void SetDefaults()
     {

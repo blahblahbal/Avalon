@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class NaquadahPickaxe : ModItem
+public class NaquadahPickaxe : ModItem
 {
     public override void SetDefaults()
     {

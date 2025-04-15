@@ -1,7 +1,5 @@
-using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Armor.Hardmode;
-using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -10,38 +8,36 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Accessories.Hardmode;
 
 [AutoloadEquip(EquipType.Shoes, EquipType.Wings)]
-class InertiaBoots : ModItem
+public class InertiaBoots : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(1000, 9f, 1.2f, true);
-    }
+	public override void SetStaticDefaults()
+	{
+		ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(1000, 9f, 1.2f, true);
+	}
 
-    public override void SetDefaults()
-    {
-        Item.defense = 4;
-        Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
-        Item.width = 34;
-        Item.value = Item.sellPrice(0, 16, 45, 0);
-        Item.accessory = true;
-        Item.height = 32;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToAccessory();
+		Item.defense = 4;
+		Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
+		Item.value = Item.sellPrice(0, 16, 45);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddRecipeGroup("Wings")
-            .AddIngredient(ItemID.FrostsparkBoots)
-            .AddIngredient(ItemID.BlackBelt)
-            .AddIngredient(ItemID.LunarBar, 2)
-            .AddTile(TileID.TinkerersWorkbench)
-            .Register();
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddRecipeGroup("Wings")
+			.AddIngredient(ItemID.FrostsparkBoots)
+			.AddIngredient(ItemID.BlackBelt)
+			.AddIngredient(ItemID.LunarBar, 2)
+			.AddTile(TileID.TinkerersWorkbench)
+			.Register();
 
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<InertiaBootsSlower>())
-            .AddTile(TileID.TinkerersWorkbench)
-            .Register();
-    }
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<InertiaBootsSlower>())
+			.AddTile(TileID.TinkerersWorkbench)
+			.Register();
+	}
 	// TO-DO: Hoverboard style movement (not currently possible with tmod, but just search "1E-05f" in vanilla player.cs to find the vanilla logic if you wanna try your luck)
 	public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
 	{
@@ -156,27 +152,27 @@ class InertiaBoots : ModItem
 				reducedAccelX = 0.39f;
 			}
 			if (player.controlLeft)
-            {
-                if (player.velocity.X > (player.vortexStealthActive ? -1f : -(maxSpeedX / 2f)))
-                {
-                    player.velocity.X -= player.vortexStealthActive ? 0.06f : startAccelX;
-                }
-                if (player.velocity.X < (player.vortexStealthActive ? -1f : -(maxSpeedX / 2f)) && player.velocity.X > (player.vortexStealthActive ? -2f : -maxSpeedX))
-                {
-                    player.velocity.X -= player.vortexStealthActive ? 0.04f : reducedAccelX;
-                }
-            }
-            if (player.controlRight)
-            {
-                if (player.velocity.X < (player.vortexStealthActive ? 1f : maxSpeedX / 2f))
-                {
-                    player.velocity.X += player.vortexStealthActive ? 0.06f : startAccelX;
-                }
-                if (player.velocity.X > (player.vortexStealthActive ? 1f : maxSpeedX / 2f) && player.velocity.X < (player.vortexStealthActive ? 2f : maxSpeedX))
-                {
-                    player.velocity.X += player.vortexStealthActive ? 0.04f : reducedAccelX;
-                }
-            }
-        }
-    }
+			{
+				if (player.velocity.X > (player.vortexStealthActive ? -1f : -(maxSpeedX / 2f)))
+				{
+					player.velocity.X -= player.vortexStealthActive ? 0.06f : startAccelX;
+				}
+				if (player.velocity.X < (player.vortexStealthActive ? -1f : -(maxSpeedX / 2f)) && player.velocity.X > (player.vortexStealthActive ? -2f : -maxSpeedX))
+				{
+					player.velocity.X -= player.vortexStealthActive ? 0.04f : reducedAccelX;
+				}
+			}
+			if (player.controlRight)
+			{
+				if (player.velocity.X < (player.vortexStealthActive ? 1f : maxSpeedX / 2f))
+				{
+					player.velocity.X += player.vortexStealthActive ? 0.06f : startAccelX;
+				}
+				if (player.velocity.X > (player.vortexStealthActive ? 1f : maxSpeedX / 2f) && player.velocity.X < (player.vortexStealthActive ? 2f : maxSpeedX))
+				{
+					player.velocity.X += player.vortexStealthActive ? 0.04f : reducedAccelX;
+				}
+			}
+		}
+	}
 }

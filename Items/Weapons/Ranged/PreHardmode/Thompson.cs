@@ -6,7 +6,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class Thompson : ModItem
+public class Thompson : ModItem
 {
     public override void SetDefaults()
     {

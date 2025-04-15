@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class BronzeAxe : ModItem
+public class BronzeAxe : ModItem
 {
     public override void SetDefaults()
     {

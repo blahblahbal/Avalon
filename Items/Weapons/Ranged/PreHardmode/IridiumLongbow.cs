@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class IridiumLongbow : ModItem
+public class IridiumLongbow : ModItem
 {
     public override void SetDefaults()
     {

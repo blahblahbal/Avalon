@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.TomeMats;
 
-class MysticalClaw : ModItem
+public class MysticalClaw : ModItem
 {
     public override void SetStaticDefaults()
     {

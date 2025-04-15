@@ -16,7 +16,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items;
 
-class StructureSaver : ModItem
+public class StructureSaver : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{

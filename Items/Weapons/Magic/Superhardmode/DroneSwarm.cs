@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Superhardmode;
 
-class DroneSwarm : ModItem
+public class DroneSwarm : ModItem
 {
     public override void SetStaticDefaults()
     {

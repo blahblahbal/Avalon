@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class ZincPickaxe : ModItem
+public class ZincPickaxe : ModItem
 {
     public override void SetDefaults()
     {

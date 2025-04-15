@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Body)]
-class HadirosBodyplate : ModItem
+public class HadirosBodyplate : ModItem
 {
     public override void SetDefaults()
     {

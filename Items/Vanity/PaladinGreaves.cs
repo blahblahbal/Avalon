@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Legs)]
-class PaladinGreaves : ModItem
+public class PaladinGreaves : ModItem
 {
     public override void SetDefaults()
     {

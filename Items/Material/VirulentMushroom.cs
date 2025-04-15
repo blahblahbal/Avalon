@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class VirulentMushroom : ModItem
+public class VirulentMushroom : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class IridiumHamaxe : ModItem
+public class IridiumHamaxe : ModItem
 {
     public override void SetDefaults()
     {

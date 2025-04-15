@@ -8,7 +8,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class MarrowMasher : ModItem
+public class MarrowMasher : ModItem
 {
     //public override void SetStaticDefaults()1
     //{

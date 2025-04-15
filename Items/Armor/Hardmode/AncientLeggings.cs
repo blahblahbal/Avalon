@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class AncientLeggings : ModItem
+public class AncientLeggings : ModItem
 {
     public override void SetDefaults()
     {

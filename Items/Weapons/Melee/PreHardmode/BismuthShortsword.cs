@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class BismuthShortsword : ModItem
+public class BismuthShortsword : ModItem
 {
     public override void SetDefaults()
     {

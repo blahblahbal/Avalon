@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Thorium.Items.Placeable.Tile;
 
-class ChrysoberylGemsparkBlock : ModItem
+public class ChrysoberylGemsparkBlock : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

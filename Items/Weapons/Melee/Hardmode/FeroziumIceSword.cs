@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class FeroziumIceSword : ModItem
+public class FeroziumIceSword : ModItem
 {
     public override void SetDefaults()
     {

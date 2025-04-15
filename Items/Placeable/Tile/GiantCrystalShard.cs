@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class GiantCrystalShard : ModItem
+public class GiantCrystalShard : ModItem
 {
     public override void SetStaticDefaults()
     {

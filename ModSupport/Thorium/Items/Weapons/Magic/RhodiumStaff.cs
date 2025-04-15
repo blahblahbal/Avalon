@@ -8,7 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Thorium.Items.Weapons.Magic;
-class RhodiumStaff : ModItem
+public class RhodiumStaff : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

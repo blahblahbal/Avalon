@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Painting;
 
-class CrossingtheTropics : ModItem
+public class CrossingtheTropics : ModItem
 {
     public override void SetDefaults()
     {

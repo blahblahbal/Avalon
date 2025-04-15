@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class XanthophyteHat : ModItem
+public class XanthophyteHat : ModItem
 {
     public override void SetDefaults()
     {

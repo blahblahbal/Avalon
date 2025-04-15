@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class LoamBlock : ModItem
+public class LoamBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

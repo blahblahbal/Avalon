@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class XanthophyteChainsaw : ModItem
+public class XanthophyteChainsaw : ModItem
 {
     public override void SetDefaults()
     {

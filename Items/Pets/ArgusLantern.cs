@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Pets;
 
-class ArgusLantern : ModItem
+public class ArgusLantern : ModItem
 {
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {

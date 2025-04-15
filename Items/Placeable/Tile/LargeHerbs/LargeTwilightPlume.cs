@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
-class LargeTwilightPlume : ModItem
+public class LargeTwilightPlume : ModItem
 {
     public override void SetStaticDefaults()
     {

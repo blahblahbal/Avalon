@@ -11,7 +11,7 @@ using ThoriumMod.Items.Depths;
 namespace Avalon.ModSupport.Thorium.Items.Potions;
 
 [ExtendsFromMod("ThoriumMod")]
-class AdvInspirationalReachPotion : ModItem
+public class AdvInspirationalReachPotion : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{

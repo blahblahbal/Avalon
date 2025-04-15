@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Summon.Hardmode;
 
-class HungryStaff : ModItem
+public class HungryStaff : ModItem
 {
     public override void SetStaticDefaults()
     {

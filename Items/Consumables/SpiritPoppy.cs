@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Consumables;
 
-class SpiritPoppy : ModItem
+public class SpiritPoppy : ModItem
 {
     public override void SetStaticDefaults()
     {

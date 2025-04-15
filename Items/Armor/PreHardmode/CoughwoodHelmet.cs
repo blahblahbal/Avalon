@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class CoughwoodHelmet : ModItem
+public class CoughwoodHelmet : ModItem
 {
     public override void SetDefaults()
     {

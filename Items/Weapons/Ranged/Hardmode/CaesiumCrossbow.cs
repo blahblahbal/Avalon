@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.Hardmode;
 
-class CaesiumCrossbow : ModItem
+public class CaesiumCrossbow : ModItem
 {
     public override void SetDefaults()
     {

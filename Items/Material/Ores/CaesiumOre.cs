@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class CaesiumOre : ModItem
+public class CaesiumOre : ModItem
 {
     public override void SetStaticDefaults()
     {

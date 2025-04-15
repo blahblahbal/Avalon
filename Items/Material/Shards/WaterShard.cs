@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class WaterShard : ModItem
+public class WaterShard : ModItem
 {
     public override void SetStaticDefaults()
     {

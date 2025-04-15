@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class PlasmaLamp : ModItem
+public class PlasmaLamp : ModItem
 {
     public override void SetDefaults()
     {

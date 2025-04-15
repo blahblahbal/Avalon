@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class Sporalash : ModItem
+public class Sporalash : ModItem
 {
     public override void SetStaticDefaults()
     {

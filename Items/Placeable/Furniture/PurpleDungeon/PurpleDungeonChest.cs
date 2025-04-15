@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.PurpleDungeon;
 
-class PurpleDungeonChest : ModItem
+public class PurpleDungeonChest : ModItem
 {
     public override void SetDefaults()
     {

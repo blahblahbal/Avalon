@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.OrangeDungeon;
 
-class OrangeDungeonCandelabra : ModItem
+public class OrangeDungeonCandelabra : ModItem
 {
     public override void SetDefaults()
     {

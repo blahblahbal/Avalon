@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class BloodCastPotion : ModItem
+public class BloodCastPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

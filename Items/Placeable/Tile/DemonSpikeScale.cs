@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class DemonSpikeScale : ModItem
+public class DemonSpikeScale : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class ZincHammer : ModItem
+public class ZincHammer : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class BacciliteBrick : ModItem
+public class BacciliteBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

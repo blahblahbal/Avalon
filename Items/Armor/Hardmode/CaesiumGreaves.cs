@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class CaesiumGreaves : ModItem
+public class CaesiumGreaves : ModItem
 {
     public override void SetDefaults()
     {

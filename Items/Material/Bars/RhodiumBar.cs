@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class RhodiumBar : ModItem
+public class RhodiumBar : ModItem
 {
     public override void SetStaticDefaults()
     {

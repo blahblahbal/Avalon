@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Other;
 
-class LesserStaminaPotion : ModItem
+public class LesserStaminaPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Tokens;
 
-class ContagionToken : ModItem
+public class ContagionToken : ModItem
 {
     public override bool IsLoadingEnabled(Mod mod)
     {

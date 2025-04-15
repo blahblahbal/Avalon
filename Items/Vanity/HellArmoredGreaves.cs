@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Legs)]
-class HellArmoredGreaves : ModItem
+public class HellArmoredGreaves : ModItem
 {
     public override void SetDefaults()
     {

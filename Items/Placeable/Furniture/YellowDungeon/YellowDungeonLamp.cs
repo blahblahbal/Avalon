@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.YellowDungeon;
 
-class YellowDungeonLamp : ModItem
+public class YellowDungeonLamp : ModItem
 {
     public override void SetDefaults()
     {

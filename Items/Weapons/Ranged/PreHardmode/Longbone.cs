@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class Longbone : ModItem
+public class Longbone : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class TitanskinPotion : ModItem
+public class TitanskinPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

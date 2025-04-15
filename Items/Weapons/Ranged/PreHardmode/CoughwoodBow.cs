@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class CoughwoodBow : ModItem
+public class CoughwoodBow : ModItem
 {
     public override void SetDefaults()
     {

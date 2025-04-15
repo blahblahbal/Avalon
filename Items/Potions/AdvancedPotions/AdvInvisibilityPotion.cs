@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvInvisibilityPotion : ModItem
+public class AdvInvisibilityPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class DurataniumChainsaw : ModItem
+public class DurataniumChainsaw : ModItem
 {
     public override void SetDefaults()
     {

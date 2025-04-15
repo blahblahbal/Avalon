@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Ammo;
 
-class IckyArrow : ModItem
+public class IckyArrow : ModItem
 {
     public override void SetStaticDefaults()
     {

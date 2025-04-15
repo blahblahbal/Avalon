@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class TerrorPenguinsEarpiece : ModItem
+public class TerrorPenguinsEarpiece : ModItem
 {
     public override void SetStaticDefaults()
     {

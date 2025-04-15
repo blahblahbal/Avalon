@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class PathogenTorch : ModItem
+public class PathogenTorch : ModItem
 {
     public override void SetStaticDefaults()
     {

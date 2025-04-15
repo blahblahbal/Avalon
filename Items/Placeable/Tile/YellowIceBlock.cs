@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class YellowIceBlock : ModItem
+public class YellowIceBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

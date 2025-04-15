@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class TourmalineStoneBlock : ModItem
+public class TourmalineStoneBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

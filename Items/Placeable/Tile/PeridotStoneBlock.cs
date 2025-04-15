@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class PeridotStoneBlock : ModItem
+public class PeridotStoneBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

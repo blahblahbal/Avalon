@@ -6,7 +6,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Other;
 
-class GoldHeart : ModItem
+public class GoldHeart : ModItem
 {
     public override void SetStaticDefaults()
     {

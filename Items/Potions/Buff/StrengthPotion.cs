@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class StrengthPotion : ModItem
+public class StrengthPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

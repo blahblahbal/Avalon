@@ -8,7 +8,7 @@ using Avalon.Systems;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class RodofCoalescence : ModItem
+public class RodofCoalescence : ModItem
 {
     public override void SetDefaults()
     {

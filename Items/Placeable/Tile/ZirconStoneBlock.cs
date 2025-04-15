@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class ZirconStoneBlock : ModItem
+public class ZirconStoneBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class BloodiedSpike : ModItem
+public class BloodiedSpike : ModItem
 {
     public override void SetStaticDefaults()
     {

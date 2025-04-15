@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Trophy;
 
-class MechastingTrophy : ModItem
+public class MechastingTrophy : ModItem
 {
     public override void SetDefaults()
     {

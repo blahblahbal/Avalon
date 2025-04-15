@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.SoulCandles;
 
-class MightCandle : ModItem
+public class MightCandle : ModItem
 {
     public override void SetDefaults()
     {

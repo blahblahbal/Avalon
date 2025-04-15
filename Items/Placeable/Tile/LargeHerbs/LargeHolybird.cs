@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
-class LargeHolybird : ModItem
+public class LargeHolybird : ModItem
 {
     public override void SetStaticDefaults()
     {

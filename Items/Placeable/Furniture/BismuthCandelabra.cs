@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class BismuthCandelabra : ModItem
+public class BismuthCandelabra : ModItem
 {
     public override void SetDefaults()
     {

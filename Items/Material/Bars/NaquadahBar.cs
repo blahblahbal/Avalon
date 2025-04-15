@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class NaquadahBar : ModItem
+public class NaquadahBar : ModItem
 {
     public override void SetStaticDefaults()
     {

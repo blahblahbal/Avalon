@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode;
 
-class Icicle : ModItem
+public class Icicle : ModItem
 {
     public override void SetStaticDefaults()
     {

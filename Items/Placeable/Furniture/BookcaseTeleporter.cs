@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class BookcaseTeleporter : ModItem
+public class BookcaseTeleporter : ModItem
 {
     public override void SetDefaults()
     {

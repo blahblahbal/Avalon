@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class BismuthBar : ModItem
+public class BismuthBar : ModItem
 {
     public override void SetStaticDefaults()
     {

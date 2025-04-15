@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class HolybirdPlanterBox : ModItem
+public class HolybirdPlanterBox : ModItem
 {
     public override void SetStaticDefaults()
     {

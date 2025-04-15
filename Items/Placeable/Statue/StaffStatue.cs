@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Statue;
 
-class StaffStatue : ModItem
+public class StaffStatue : ModItem
 {
     public override void SetDefaults()
     {

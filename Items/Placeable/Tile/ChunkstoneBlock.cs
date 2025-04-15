@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class ChunkstoneBlock : ModItem
+public class ChunkstoneBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

@@ -9,7 +9,7 @@ using System;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode;
 
-class Sunstorm : ModItem
+public class Sunstorm : ModItem
 {
     public override void SetStaticDefaults()
     {

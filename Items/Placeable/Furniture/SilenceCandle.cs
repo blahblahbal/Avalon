@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class SilenceCandle : ModItem
+public class SilenceCandle : ModItem
 {
     public override void SetDefaults()
     {

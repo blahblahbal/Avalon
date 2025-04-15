@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Heartstone;
 
-class HeartstoneToilet : ModItem
+public class HeartstoneToilet : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
-class AxeofEmancipation : ModItem
+public class AxeofEmancipation : ModItem
 {
     public override void SetDefaults()
     {

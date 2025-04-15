@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Coughwood;
 
-class CoughwoodClock : ModItem
+public class CoughwoodClock : ModItem
 {
     public override void SetDefaults()
     {

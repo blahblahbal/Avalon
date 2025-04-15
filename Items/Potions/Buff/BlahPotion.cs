@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class BlahPotion : ModItem
+public class BlahPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

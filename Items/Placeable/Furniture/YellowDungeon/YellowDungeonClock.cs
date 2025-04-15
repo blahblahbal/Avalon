@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.YellowDungeon;
 
-class YellowDungeonClock : ModItem
+public class YellowDungeonClock : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class TimeShiftPotion : ModItem
+public class TimeShiftPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Shards;
 
-class BreezeShard : ModItem
+public class BreezeShard : ModItem
 {
     public override void SetStaticDefaults()
     {

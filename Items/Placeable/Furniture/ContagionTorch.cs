@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class ContagionTorch : ModItem
+public class ContagionTorch : ModItem
 {
     public override void SetStaticDefaults()
     {

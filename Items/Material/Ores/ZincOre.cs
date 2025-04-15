@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Ores;
 
-class ZincOre : ModItem
+public class ZincOre : ModItem
 {
     public override void SetStaticDefaults()
     {

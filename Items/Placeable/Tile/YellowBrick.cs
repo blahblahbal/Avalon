@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class YellowBrick : ModItem
+public class YellowBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

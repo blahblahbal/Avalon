@@ -1,9 +1,9 @@
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Graphics.Shaders;
 
 namespace Avalon.Items.Accessories.Vanity;
 
@@ -15,13 +15,10 @@ public class BagofIck : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
+		Item.DefaultToAccessory();
 		Item.rare = ItemRarityID.Green;
-		Item.width = 24;
-		Item.accessory = true;
 		Item.vanity = true;
 		Item.value = Item.sellPrice(0, 1);
-		Item.height = 28;
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
 

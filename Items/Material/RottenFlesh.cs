@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class RottenFlesh : ModItem
+public class RottenFlesh : ModItem
 {
     public override void SetStaticDefaults()
     {

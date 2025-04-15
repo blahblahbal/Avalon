@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.Tokens;
 
-class TropicsToken : ModItem
+public class TropicsToken : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
 	{

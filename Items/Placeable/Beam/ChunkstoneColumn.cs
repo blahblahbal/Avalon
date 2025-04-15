@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Beam;
 
-class ChunkstoneColumn : ModItem
+public class ChunkstoneColumn : ModItem
 {
     public override void SetStaticDefaults()
     {

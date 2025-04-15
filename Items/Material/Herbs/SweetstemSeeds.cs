@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Herbs;
 
-class SweetstemSeeds : ModItem
+public class SweetstemSeeds : ModItem
 {
     public override void SetStaticDefaults()
     {

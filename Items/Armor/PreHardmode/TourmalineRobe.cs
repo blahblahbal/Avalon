@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class TourmalineRobe : ModItem
+public class TourmalineRobe : ModItem
 {
     public override void SetDefaults()
     {

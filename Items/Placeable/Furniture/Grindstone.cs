@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class Grindstone : ModItem
+public class Grindstone : ModItem
 {
     public override void SetDefaults()
     {

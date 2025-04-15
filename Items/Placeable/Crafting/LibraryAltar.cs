@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class LibraryAltar : ModItem
+public class LibraryAltar : ModItem
 {
     public override void SetDefaults()
     {

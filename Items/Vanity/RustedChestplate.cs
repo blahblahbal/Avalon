@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Body)]
-class RustedChestplate : ModItem
+public class RustedChestplate : ModItem
 {
     public override void SetDefaults()
     {

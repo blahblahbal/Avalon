@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
 
-class LargeBlinkroot : ModItem
+public class LargeBlinkroot : ModItem
 {
     public override void SetStaticDefaults()
     {

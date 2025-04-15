@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class GauntletPotion : ModItem
+public class GauntletPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

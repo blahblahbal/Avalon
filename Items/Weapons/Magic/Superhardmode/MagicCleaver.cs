@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Superhardmode;
 
-class MagicCleaver : ModItem
+public class MagicCleaver : ModItem
 {
     public override void SetDefaults()
     {

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class DurataniumPipe : ModItem
+public class DurataniumPipe : ModItem
 {
     public override void SetStaticDefaults()
     {

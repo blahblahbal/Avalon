@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class BronzeChainmail : ModItem
+public class BronzeChainmail : ModItem
 {
     public override void AddRecipes()
     {

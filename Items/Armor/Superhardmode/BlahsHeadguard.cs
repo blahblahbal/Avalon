@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Superhardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class BlahsHeadguard : ModItem
+public class BlahsHeadguard : ModItem
 {
     public override void SetDefaults()
     {

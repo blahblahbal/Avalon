@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class BloodstainedHelmet : ModItem
+public class BloodstainedHelmet : ModItem
 {
     public override void SetDefaults()
     {

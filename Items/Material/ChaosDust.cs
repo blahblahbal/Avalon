@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class ChaosDust : ModItem
+public class ChaosDust : ModItem
 {
     public override void SetDefaults()
     {

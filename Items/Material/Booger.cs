@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class Booger : ModItem
+public class Booger : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.Hardmode;
 
 [AutoloadEquip(EquipType.Body)]
-class AncientBodyplate : ModItem
+public class AncientBodyplate : ModItem
 {
     public override void SetDefaults()
     {

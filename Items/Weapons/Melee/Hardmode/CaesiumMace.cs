@@ -6,7 +6,7 @@ using Avalon.Items.Material.Bars;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode;
 
-class CaesiumMace : ModItem
+public class CaesiumMace : ModItem
 {
     public override void SetStaticDefaults()
     {

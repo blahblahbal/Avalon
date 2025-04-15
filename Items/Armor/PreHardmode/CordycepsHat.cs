@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Head)]
-class CordycepsHat : ModItem
+public class CordycepsHat : ModItem
 {
     public override void SetDefaults()
     {

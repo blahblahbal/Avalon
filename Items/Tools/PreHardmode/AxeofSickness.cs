@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class AxeofSickness : ModItem
+public class AxeofSickness : ModItem
 {
     public override void SetDefaults()
     {

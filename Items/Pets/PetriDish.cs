@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Pets;
 
-class PetriDish : ModItem
+public class PetriDish : ModItem
 {
     public override void UseStyle(Player player, Rectangle heldItemFrame)
     {

@@ -8,7 +8,7 @@ using ReLogic.Content;
 
 namespace Avalon.Items.Material.OreChunks;
 
-class TroxiniumChunk : ModItem
+public class TroxiniumChunk : ModItem
 {
 	private static Asset<Texture2D> glow;
 	public override void SetStaticDefaults()

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Legs)]
-class AncientTitaniumGreaves : ModItem
+public class AncientTitaniumGreaves : ModItem
 {
     public override void SetDefaults()
     {

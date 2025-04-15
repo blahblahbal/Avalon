@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvShadowPotion : ModItem
+public class AdvShadowPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class VirulentPowder : ModItem
+public class VirulentPowder : ModItem
 {
 	public override void SetStaticDefaults()
 	{

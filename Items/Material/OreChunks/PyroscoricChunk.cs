@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace Avalon.Items.Material.OreChunks;
 
-class PyroscoricChunk : ModItem
+public class PyroscoricChunk : ModItem
 {
     // remove after this is added
     public override bool IsLoadingEnabled(Mod mod)

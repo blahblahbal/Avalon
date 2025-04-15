@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class RhodiumHamaxe : ModItem
+public class RhodiumHamaxe : ModItem
 {
     public override void SetDefaults()
     {

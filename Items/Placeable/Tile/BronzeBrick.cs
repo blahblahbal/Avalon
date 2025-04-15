@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class BronzeBrick : ModItem
+public class BronzeBrick : ModItem
 {
     public override void SetStaticDefaults()
     {

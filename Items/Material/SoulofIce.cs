@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class SoulofIce : ModItem
+public class SoulofIce : ModItem
 {
     public override void SetStaticDefaults()
     {

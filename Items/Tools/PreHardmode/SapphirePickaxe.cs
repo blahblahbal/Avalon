@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class SapphirePickaxe : ModItem
+public class SapphirePickaxe : ModItem
 {
     int useTimer = 0;
     public override void SetDefaults()

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class GoblinDagger : ModItem
+public class GoblinDagger : ModItem
 {
     public override void SetDefaults()
     {

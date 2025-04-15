@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
-class TetanusChakram : ModItem
+public class TetanusChakram : ModItem
 {
     int ShootTimes;
     public override void SetDefaults()

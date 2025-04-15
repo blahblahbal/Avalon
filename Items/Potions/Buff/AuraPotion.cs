@@ -7,7 +7,7 @@ using Avalon.Common;
 
 namespace Avalon.Items.Potions.Buff;
 
-class AuraPotion : ModItem
+public class AuraPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

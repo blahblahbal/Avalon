@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvFlipperPotion : ModItem
+public class AdvFlipperPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

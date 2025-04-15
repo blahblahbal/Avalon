@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.AdvancedPotions;
 
-class AdvMiningPotion : ModItem
+public class AdvMiningPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

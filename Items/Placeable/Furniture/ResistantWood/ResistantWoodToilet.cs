@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
-class ResistantWoodToilet : ModItem
+public class ResistantWoodToilet : ModItem
 {
     public override void SetStaticDefaults()
     {

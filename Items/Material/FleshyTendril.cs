@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
-class FleshyTendril : ModItem
+public class FleshyTendril : ModItem
 {
     public override void SetStaticDefaults()
     {

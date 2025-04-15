@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Body)]
-class DungeonPlateMail : ModItem
+public class DungeonPlateMail : ModItem
 {
     public override void SetDefaults()
     {

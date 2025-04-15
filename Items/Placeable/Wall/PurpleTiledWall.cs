@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class PurpleTiledWall : ModItem
+public class PurpleTiledWall : ModItem
 {
     public override void SetStaticDefaults()
     {

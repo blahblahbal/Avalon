@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class FlaskOfPathogens : ModItem
+public class FlaskOfPathogens : ModItem
 {
 	public override void SetStaticDefaults()
 	{

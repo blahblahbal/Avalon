@@ -1,13 +1,12 @@
-using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Avalon.Common;
+using Avalon.Common.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Accessories.Vanity;
 
-class ShadowPulseBag : ModItem
+public class ShadowPulseBag : ModItem
 {
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{
@@ -15,13 +14,10 @@ class ShadowPulseBag : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
+		Item.DefaultToAccessory();
 		Item.rare = ItemRarityID.Lime;
-		Item.width = 32;
-		Item.accessory = true;
 		Item.vanity = true;
-		Item.value = Item.sellPrice(0, 2, 0, 0);
-		Item.height = 36;
+		Item.value = Item.sellPrice(0, 2);
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
 	public override void AddRecipes()

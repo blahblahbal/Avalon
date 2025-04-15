@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class TomeForge : ModItem
+public class TomeForge : ModItem
 {
     public override void SetDefaults()
     {

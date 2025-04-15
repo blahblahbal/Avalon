@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture;
 
-class CyanTorch : ModItem
+public class CyanTorch : ModItem
 {
     public override void SetStaticDefaults()
     {

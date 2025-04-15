@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class StarbrightPotion : ModItem
+public class StarbrightPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{

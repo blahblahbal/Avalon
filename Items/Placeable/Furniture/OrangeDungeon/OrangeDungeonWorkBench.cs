@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.OrangeDungeon;
 
-class OrangeDungeonWorkBench : ModItem
+public class OrangeDungeonWorkBench : ModItem
 {
     public override void SetDefaults()
     {

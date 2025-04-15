@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Legs)]
-class SpodermanPants : ModItem
+public class SpodermanPants : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.Bars;
 
-class NickelBar : ModItem
+public class NickelBar : ModItem
 {
     public override void SetStaticDefaults()
     {

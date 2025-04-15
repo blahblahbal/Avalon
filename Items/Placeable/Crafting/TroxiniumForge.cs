@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Crafting;
 
-class TroxiniumForge : ModItem
+public class TroxiniumForge : ModItem
 {
     public override void SetDefaults()
     {

@@ -6,7 +6,7 @@ using Terraria.Audio;
 
 namespace Avalon.Items.Consumables;
 
-class MartianPeaceTreaty : ModItem
+public class MartianPeaceTreaty : ModItem
 {
 	public override void SetStaticDefaults()
 	{

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Wall;
 
-class VoltBrickWall : ModItem
+public class VoltBrickWall : ModItem
 {
     public override void SetStaticDefaults()
     {

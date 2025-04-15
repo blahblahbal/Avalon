@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-class RejuvenationPotion : ModItem
+public class RejuvenationPotion : ModItem
 {
     public override void SetStaticDefaults()
     {

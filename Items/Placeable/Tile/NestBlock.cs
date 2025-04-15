@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class NestBlock : ModItem
+public class NestBlock : ModItem
 {
     public override void SetStaticDefaults()
     {

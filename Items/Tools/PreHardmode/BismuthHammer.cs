@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.PreHardmode;
 
-class BismuthHammer : ModItem
+public class BismuthHammer : ModItem
 {
     public override void SetDefaults()
     {

@@ -5,7 +5,7 @@ using Terraria;
 
 namespace Avalon.Items.Placeable.Tile;
 
-class DarkMatterMonolith : ModItem
+public class DarkMatterMonolith : ModItem
 {
     public override void SetDefaults()
     {

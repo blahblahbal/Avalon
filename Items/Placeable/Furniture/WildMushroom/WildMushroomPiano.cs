@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.WildMushroom;
 
-class WildMushroomPiano : ModItem
+public class WildMushroomPiano : ModItem
 {
     public override void SetDefaults()
     {

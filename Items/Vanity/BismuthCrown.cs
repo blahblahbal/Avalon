@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Vanity;
 
 [AutoloadEquip(EquipType.Head)]
-class BismuthCrown : ModItem
+public class BismuthCrown : ModItem
 {
     public override void SetStaticDefaults()
     {
