@@ -1,7 +1,3 @@
-using Avalon.Items.Other;
-using Avalon.Items.Weapons.Melee.Hardmode;
-using Avalon.Items.Weapons.Ranged.Hardmode;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,21 +6,19 @@ namespace Avalon.Items.Consumables;
 
 public class BiomeLockbox : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 5;
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 5;
+	}
 
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.consumable = true;
-        Item.rare = ItemRarityID.Yellow;
-        Item.width = dims.Width;
-        Item.maxStack = 9999;
+	public override void SetDefaults()
+	{
+		Item.width = 12;
+		Item.height = 12;
+		Item.maxStack = Item.CommonMaxStack;
+		Item.rare = ItemRarityID.Yellow;
 		Item.value = Item.sellPrice(gold: 3);
-        Item.height = dims.Height;
-    }
+	}
 	public override void RightClick(Player player)
 	{
 		if (Main.mouseItem.type == ItemID.None)
@@ -41,7 +35,7 @@ public class BiomeLockbox : ModItem
 					}
 				}
 			}
-			
+
 		}
 		else
 		{
@@ -59,7 +53,7 @@ public class BiomeLockbox : ModItem
 	{
 		return true;
 	}
-	private void OpenBiomeLockbox(Item key, Player player)
+	private static void OpenBiomeLockbox(Item key, Player player)
 	{
 		for (int i = 0; i < Data.Sets.ItemSets.BiomeLockboxCollection.Count; i++)
 		{

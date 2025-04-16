@@ -995,5 +995,41 @@ public static class ClassExtensions
 		item.rare = ItemRarityID.Blue;
 		item.value = Item.buyPrice(silver: 10);
 	}
+	public enum TreasureBagRarities : int
+	{
+		EyeTier = ItemRarityID.Blue,
+		EvilTier = ItemRarityID.Green,
+		SkeleTier = ItemRarityID.Orange,
+		WofTier = ItemRarityID.LightRed,
+		MechTier = ItemRarityID.Pink,
+		PlantTier = ItemRarityID.LightPurple,
+		GolemTier = ItemRarityID.Lime,
+		LunarTier = ItemRarityID.Yellow,
+		// below are maybe temp values, change them if you think they should use custom rarities
+		WosTier = ItemRarityID.Cyan,
+		earlySHMTier = ItemRarityID.Red,
+		ArmaTier = ItemRarityID.Purple
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to treasure bag items.<br/>
+	/// Specifically:<code>
+	/// width = 24;
+	/// height = 24;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// consumable = true;
+	/// rare = (<see cref="int"/>)<paramref name="rarity"/>;
+	/// expert = true;
+	/// </code>
+	/// </summary>
+	/// <param name="rarity"></param>
+	public static void DefaultToTreasureBag(this Item item, TreasureBagRarities rarity)
+	{
+		item.width = 24;
+		item.height = 24;
+		item.maxStack = Item.CommonMaxStack;
+		item.consumable = true;
+		item.rare = (int)rarity;
+		item.expert = true;
+	}
 	#endregion Item DefaultToX() methods
 }
