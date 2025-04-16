@@ -56,6 +56,10 @@ public class AvalonMobDrops : GlobalNPC
 		//    var hardmodePreSuperHardmodeCondition =
 		//        new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
 
+		if (npc.type is NPCID.HallowBoss)
+		{
+			npcLoot.Add(ItemDropRule.Common(ItemID.EmpressFlightBooster, 3));
+		}
 		if (npc.type is NPCID.Paladin)
 		{
 			npcLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(10, ModContent.ItemType<PaladinHelm>(), ModContent.ItemType<PaladinPlate>(), ModContent.ItemType<PaladinGreaves>()));

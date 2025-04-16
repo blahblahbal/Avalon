@@ -48,6 +48,8 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using System.Diagnostics.Metrics;
+using ThoriumMod.Core.ItemDropRules;
+using Avalon.Items.Accessories.Expert;
 
 namespace Avalon.Common;
 
@@ -879,6 +881,29 @@ public class AvalonGlobalItem : GlobalItem
 		if (ItemID.Sets.BossBag[item.type] == true)
 		{
 			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<StaminaCrystal>(), 4));
+		}
+		if (item.type == ItemID.FairyQueenBossBag)
+		{
+			
+			CommonDrop? d = null;
+			foreach (IItemDropRule item2 in itemLoot.Get(false))
+			{
+				if (item2 is not CommonDrop drop)
+				{
+					continue;
+				}
+				d = drop;
+				if (d != null)
+				{
+					if (d.itemId == ItemID.EmpressFlightBooster)
+					{
+						d.itemId = ModContent.ItemType<CrystalSkull>();
+					}
+					
+				}
+			}
+
+			itemLoot.Add(ItemDropRule.Common(ItemID.EmpressFlightBooster, 3));
 		}
         // wooden crate
         if (item.type == ItemID.WoodenCrate)
@@ -1886,7 +1911,11 @@ public class AvalonGlobalItem : GlobalItem
             case ItemID.Vilethorn:
                 item.useStyle = ItemUseStyleID.Shoot;
                 break;
-            #endregion miscellaneous changes
+			#endregion miscellaneous changes
+			case ItemID.EmpressFlightBooster:
+				item.rare = ItemRarityID.Yellow;
+				item.expert = false;
+				break;
             #region ML item rebalance
             case ItemID.Meowmere:
                 item.damage = 145;
