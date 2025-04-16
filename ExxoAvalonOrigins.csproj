@@ -21,6 +21,8 @@
 	</ItemGroup>
 	<ItemGroup>
 		<None Remove="effects\PixelChange.fx" />
+		<None Remove="Items\Weapons\Magic\AquaImpact.png" />
+		<None Remove="Projectiles\Magic\AquaBlast.png" />
 		<None Remove="Projectiles\Melee\HallowedRapierProj.png" />
 		<None Remove="Projectiles\Melee\HallowedRapierVis.png" />
 	</ItemGroup>

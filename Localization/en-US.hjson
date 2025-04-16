@@ -338,7 +338,7 @@ Mods: {
 
 		Potions: Potions
 		ContagionKey.AfterPlantera: Unlocks a Contagion Chest in the dungeon
-		Underworld.AfterPlantera: Unlocks an Underworld Chest in the dungeon
+		UnderworldKey.AfterPlantera: Unlocks an Underworld Chest in the dungeon
 
 		RejuvenationPotion: {
 			NoThePill:
@@ -9289,7 +9289,7 @@ Mods: {
 
 			UnderworldKey: {
 				DisplayName: Underworld Key
-				Tooltip: Unlocks an Underworld Chest in the dungeon
+				Tooltip: ""
 			}
 
 			Hellrazer: {
@@ -9693,6 +9693,16 @@ Mods: {
 				DisplayName: Shroomite Ammunition
 				Tooltip: ""
 			}
+
+			AquaImpact: {
+				DisplayName: Aqua Impact
+				Tooltip: ""
+			}
+
+			HallowedAltar: {
+				DisplayName: Hallowed Altar
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -9994,6 +10004,7 @@ Mods: {
 			ShroomiteArrow.DisplayName: Shroomite Arrow
 			ShroomiteBullet.DisplayName: Shroomite Bullet
 			ShroomiteRocket.DisplayName: Shroomite Rocket
+			AquaBlast.DisplayName: Aqua Blast
 		}
 
 		NPCs: {
