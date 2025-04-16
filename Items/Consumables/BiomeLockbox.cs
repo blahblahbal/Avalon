@@ -19,8 +19,11 @@ public class BiomeLockbox : ModItem
 		Item.rare = ItemRarityID.Yellow;
 		Item.value = Item.sellPrice(gold: 3);
 	}
-	public override void RightClick(Player player)
+	private static Item? keyUsed;
+	public override bool CanRightClick()
 	{
+		keyUsed = null;
+		Player player = Main.LocalPlayer;
 		if (Main.mouseItem.type == ItemID.None)
 		{
 			for (int i = 0; i < 50; i++)
@@ -29,13 +32,12 @@ public class BiomeLockbox : ModItem
 				{
 					if (player.inventory[i].type == Data.Sets.ItemSets.BiomeLockboxCollection[j][0])
 					{
-						OpenBiomeLockbox(player.inventory[i], player);
+						keyUsed = player.inventory[i];
 						i = 50;
 						break;
 					}
 				}
 			}
-
 		}
 		else
 		{
@@ -43,15 +45,16 @@ public class BiomeLockbox : ModItem
 			{
 				if (Main.mouseItem.type == Data.Sets.ItemSets.BiomeLockboxCollection[j][0])
 				{
-					OpenBiomeLockbox(Main.mouseItem, player);
+					keyUsed = Main.mouseItem;
 					break;
 				}
 			}
 		}
+		return keyUsed != null;
 	}
-	public override bool CanRightClick()
+	public override void RightClick(Player player)
 	{
-		return true;
+		OpenBiomeLockbox(keyUsed, player);
 	}
 	private static void OpenBiomeLockbox(Item key, Player player)
 	{
