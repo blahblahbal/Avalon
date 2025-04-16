@@ -3,6 +3,7 @@ using Avalon.Common.Players;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Ammo;
 using Avalon.Items.Material.Ores;
+using Avalon.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -828,8 +829,8 @@ public static class ClassExtensions
 	/// width = 10;
 	/// height = 28;
 	/// ammo = <see cref="AmmoID.Arrow"/>;
-	/// DamageType = DamageClass.Ranged;
-	/// maxStack = Item.CommonMaxStack;
+	/// DamageType = <see cref="DamageClass.Ranged"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// damage = <paramref name="damage"/>;
 	/// shoot = <paramref name="projectile"/>;
 	/// shootSpeed = <paramref name="shootSpeed"/>;
@@ -861,8 +862,8 @@ public static class ClassExtensions
 	/// width = 8;
 	/// height = 8;
 	/// ammo = <see cref="AmmoID.Bullet"/>;
-	/// DamageType = DamageClass.Ranged;
-	/// maxStack = Item.CommonMaxStack;
+	/// DamageType = <see cref="DamageClass.Ranged"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// damage = <paramref name="damage"/>;
 	/// shoot = <paramref name="projectile"/>;
 	/// shootSpeed = <paramref name="shootSpeed"/>;
@@ -894,8 +895,8 @@ public static class ClassExtensions
 	/// width = 26;
 	/// height = 26;
 	/// ammo = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="RhotukaSpinner"/>)
-	/// DamageType = DamageClass.Ranged;
-	/// maxStack = Item.CommonMaxStack;
+	/// DamageType = <see cref="DamageClass.Ranged"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// damage = <paramref name="damage"/>;
 	/// shoot = <paramref name="projectile"/>;
 	/// shootSpeed = <paramref name="shootSpeed"/>;
@@ -927,8 +928,8 @@ public static class ClassExtensions
 	/// width = 10;
 	/// height = 12;
 	/// ammo = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="Canister"/>)
-	/// DamageType = DamageClass.Ranged;
-	/// maxStack = Item.CommonMaxStack;
+	/// DamageType = <see cref="DamageClass.Ranged"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// damage = <paramref name="damage"/>;
 	/// shoot = <paramref name="projectile"/>;
 	/// shootSpeed = 0f;
@@ -938,8 +939,6 @@ public static class ClassExtensions
 	/// </summary>
 	/// <param name="damage"></param>
 	/// <param name="projectile"></param>
-	/// <param name="shootSpeed"></param>
-	/// <param name="knockBack"></param>
 	/// <param name="consumable"></param>
 	public static void DefaultToCanister(this Item item, int damage, int projectile, bool consumable = true)
 	{
@@ -968,6 +967,33 @@ public static class ClassExtensions
 		item.width = 16;
 		item.height = 16;
 		item.defense = defense;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to monster banner items.<br/>
+	/// Specifically:<code>
+	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="MonsterBanner"/>)
+	/// placeStyle = <paramref name="tileStyleToPlace"/>;
+	/// width = 10;
+	/// height = 24;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// useAnimation = 15;
+	/// useTime = 10;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// useTurn = true;
+	/// autoReuse = true;
+	/// consumable = true;
+	/// rare = <see cref="ItemRarityID.Blue"/>;
+	/// value = 10 silver;
+	/// </code>
+	/// </summary>
+	/// <param name="tileStyleToPlace"></param>
+	public static void DefaultToMonsterBanner(this Item item, int tileStyleToPlace)
+	{
+		item.DefaultToPlaceableTile(ModContent.TileType<MonsterBanner>(), tileStyleToPlace);
+		item.width = 10;
+		item.height = 24;
+		item.rare = ItemRarityID.Blue;
+		item.value = Item.buyPrice(silver: 10);
 	}
 	#endregion Item DefaultToX() methods
 }
