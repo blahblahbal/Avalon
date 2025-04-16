@@ -1,5 +1,3 @@
-using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -8,18 +6,15 @@ namespace Avalon.Items.Armor.Superhardmode;
 [AutoloadEquip(EquipType.Head)]
 public class BlahsHeadguard : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.defense = 100;
-        Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
-        Item.width = dims.Width;
-        Item.value = Item.sellPrice(0, 40);
-        Item.height = dims.Height;
-    }
-    public override void UpdateEquip(Player player)
-    {
-        player.GetDamage(DamageClass.Generic) += 0.35f;
-        player.GetCritChance(DamageClass.Generic) += 11;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToArmor(100);
+		Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
+		Item.value = Item.sellPrice(0, 40);
+	}
+	public override void UpdateEquip(Player player)
+	{
+		player.GetDamage(DamageClass.Generic) += 0.35f;
+		player.GetCritChance(DamageClass.Generic) += 11;
+	}
 }

@@ -1,7 +1,3 @@
-using Avalon.Items.Other;
-using Avalon.Items.Weapons.Melee.Hardmode;
-using Avalon.Items.Weapons.Ranged.Hardmode;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,23 +6,24 @@ namespace Avalon.Items.Consumables;
 
 public class BiomeLockbox : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 5;
-    }
-
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.consumable = true;
-        Item.rare = ItemRarityID.Yellow;
-        Item.width = dims.Width;
-        Item.maxStack = 9999;
-		Item.value = Item.sellPrice(gold: 3);
-        Item.height = dims.Height;
-    }
-	public override void RightClick(Player player)
+	public override void SetStaticDefaults()
 	{
+		Item.ResearchUnlockCount = 5;
+	}
+
+	public override void SetDefaults()
+	{
+		Item.width = 12;
+		Item.height = 12;
+		Item.maxStack = Item.CommonMaxStack;
+		Item.rare = ItemRarityID.Yellow;
+		Item.value = Item.sellPrice(gold: 3);
+	}
+	private static Item? keyUsed;
+	public override bool CanRightClick()
+	{
+		keyUsed = null;
+		Player player = Main.LocalPlayer;
 		if (Main.mouseItem.type == ItemID.None)
 		{
 			for (int i = 0; i < 50; i++)
@@ -35,13 +32,12 @@ public class BiomeLockbox : ModItem
 				{
 					if (player.inventory[i].type == Data.Sets.ItemSets.BiomeLockboxCollection[j][0])
 					{
-						OpenBiomeLockbox(player.inventory[i], player);
+						keyUsed = player.inventory[i];
 						i = 50;
 						break;
 					}
 				}
 			}
-			
 		}
 		else
 		{
@@ -49,17 +45,18 @@ public class BiomeLockbox : ModItem
 			{
 				if (Main.mouseItem.type == Data.Sets.ItemSets.BiomeLockboxCollection[j][0])
 				{
-					OpenBiomeLockbox(Main.mouseItem, player);
+					keyUsed = Main.mouseItem;
 					break;
 				}
 			}
 		}
+		return keyUsed != null;
 	}
-	public override bool CanRightClick()
+	public override void RightClick(Player player)
 	{
-		return true;
+		OpenBiomeLockbox(keyUsed, player);
 	}
-	private void OpenBiomeLockbox(Item key, Player player)
+	private static void OpenBiomeLockbox(Item key, Player player)
 	{
 		for (int i = 0; i < Data.Sets.ItemSets.BiomeLockboxCollection.Count; i++)
 		{

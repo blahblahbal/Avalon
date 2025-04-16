@@ -1,11 +1,11 @@
+using Avalon.Items.Accessories.Superhardmode;
 using Avalon.Items.Material;
+using Avalon.Items.Weapons.Magic.Superhardmode;
+using Avalon.Items.Weapons.Ranged.Superhardmode;
 using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent.ItemDropRules;
-using Avalon.Items.Weapons.Ranged.Superhardmode;
-using Avalon.Items.Accessories.Superhardmode;
-using Avalon.Items.Weapons.Magic.Superhardmode;
 
 namespace Avalon.Items.BossBags;
 
@@ -19,12 +19,7 @@ public class WallofSteelBossBag : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.maxStack = 9999;
-		Item.consumable = true;
-		Item.width = 36;
-		Item.height = 34;
-		Item.rare = ItemRarityID.Purple;
-		Item.expert = true;
+		Item.DefaultToTreasureBag(ClassExtensions.TreasureBagRarities.WosTier);
 	}
 
 	public override bool CanRightClick()
