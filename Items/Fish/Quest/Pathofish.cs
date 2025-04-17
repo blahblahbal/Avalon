@@ -1,7 +1,5 @@
 using Avalon.Common;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -11,14 +9,7 @@ public class Pathofish : ModItem
 {
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.width = dims.Width;
-		Item.value = 10;
-		Item.maxStack = 1;
-		Item.height = dims.Height;
-		Item.questItem = true;
-		Item.rare = ItemRarityID.Quest;
-		Item.uniqueStack = true;
+		Item.DefaultToQuestFish();
 	}
 	public override bool IsQuestFish()
 	{

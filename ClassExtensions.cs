@@ -838,6 +838,7 @@ public static class ClassExtensions
 	/// consumable = <paramref name="consumable"/>;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="damage"></param>
 	/// <param name="projectile"></param>
 	/// <param name="shootSpeed"></param>
@@ -871,6 +872,7 @@ public static class ClassExtensions
 	/// consumable = <paramref name="consumable"/>;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="damage"></param>
 	/// <param name="projectile"></param>
 	/// <param name="shootSpeed"></param>
@@ -904,6 +906,7 @@ public static class ClassExtensions
 	/// consumable = <paramref name="consumable"/>;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="damage"></param>
 	/// <param name="projectile"></param>
 	/// <param name="shootSpeed"></param>
@@ -937,6 +940,7 @@ public static class ClassExtensions
 	/// consumable = <paramref name="consumable"/>;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="damage"></param>
 	/// <param name="projectile"></param>
 	/// <param name="consumable"></param>
@@ -961,6 +965,7 @@ public static class ClassExtensions
 	/// defense = <paramref name="defense"/>;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="defense"></param>
 	public static void DefaultToArmor(this Item item, int defense)
 	{
@@ -986,6 +991,7 @@ public static class ClassExtensions
 	/// value = 10 silver;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="tileStyleToPlace"></param>
 	public static void DefaultToMonsterBanner(this Item item, int tileStyleToPlace)
 	{
@@ -1021,6 +1027,7 @@ public static class ClassExtensions
 	/// expert = true;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="rarity"></param>
 	public static void DefaultToTreasureBag(this Item item, TreasureBagRarities rarity)
 	{
@@ -1043,6 +1050,7 @@ public static class ClassExtensions
 	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="consumable"></param>
 	/// <param name="useAnim"></param>
 	/// <param name="useTime"></param>
@@ -1064,6 +1072,7 @@ public static class ClassExtensions
 	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
 	/// </code>
 	/// </summary>
+	/// <param name="item"></param>
 	/// <param name="consumable"></param>
 	/// <param name="useAnim"></param>
 	/// <param name="useTime"></param>
@@ -1078,6 +1087,23 @@ public static class ClassExtensions
 		item.useAnimation = useAnim;
 		item.useTime = useTime;
 		item.useStyle = ItemUseStyleID.HoldUp;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to fish items.<br/>
+	/// Specifically:<code>
+	/// width = 26;
+	/// height = 26;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// value = 25 silver;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	public static void DefaultToFish(this Item item)
+	{
+		item.width = 26;
+		item.height = 26;
+		item.maxStack = Item.CommonMaxStack;
+		item.value = Item.sellPrice(0, 0, 5);
 	}
 	#endregion Item DefaultToX() methods
 }
