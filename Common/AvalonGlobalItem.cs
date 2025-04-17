@@ -50,6 +50,7 @@ using Terraria.Utilities;
 using System.Diagnostics.Metrics;
 using ThoriumMod.Core.ItemDropRules;
 using Avalon.Items.Accessories.Expert;
+using Avalon.Projectiles.Tools;
 
 namespace Avalon.Common;
 
@@ -360,7 +361,7 @@ public class AvalonGlobalItem : GlobalItem
                 item.Prefix(pfix);
                 return false;
             }
-            if (item.type == ModContent.ItemType<AccelerationDrill>())
+            if (item.type == ModContent.ItemType<Items.Tools.Superhardmode.AccelerationDrill>())
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
                 int pfix = item.prefix;
@@ -372,7 +373,7 @@ public class AvalonGlobalItem : GlobalItem
             {
                 SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
                 int pfix = item.prefix;
-                item.ChangeItemType(ModContent.ItemType<AccelerationDrill>());
+                item.ChangeItemType(ModContent.ItemType<Items.Tools.Superhardmode.AccelerationDrill>());
                 item.Prefix(pfix);
                 return false;
             }
@@ -1778,6 +1779,12 @@ public class AvalonGlobalItem : GlobalItem
         }
         switch (item.type)
         {
+			case ItemID.BloodMoonStarter:
+				item.DefaultToSpawner(useAnim: 15, useTime: 30);
+				item.shoot = ModContent.ProjectileType<Projectiles.Tools.BloodyAmulet>();
+				item.rare = ItemRarityID.Green;
+				item.UseSound = SoundID.Item4;
+				break;
 			case ItemID.Hive:
 				item.createTile = TileID.Hive;
 				item.useTime = 10;

@@ -69,4 +69,8 @@ public class AvalonClientConfig : ModConfig
 	[DefaultValue(false)]
 	[ReloadRequired]
 	public bool SuperhardmodeStuff;
+
+	[DefaultValue(true)]
+	[ReloadRequired]
+	public bool BloodyAmulet;
 }

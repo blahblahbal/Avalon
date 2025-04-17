@@ -31,7 +31,7 @@ public class BloodyAmulet : ModProjectile
 		{
 			Main.NewText(Lang.misc[8].Value, 50, byte.MaxValue, 130);
 		}
-		else
+		else if (Main.netMode == NetmodeID.Server)
 		{
 			ChatHelper.BroadcastChatMessage(Lang.misc[8].ToNetworkText(), new Color(50, 255, 130));
 		}

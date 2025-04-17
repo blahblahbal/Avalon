@@ -11760,6 +11760,11 @@ Mods: {
 					Label: Superhardmode Stuff
 					Tooltip: Enables generation of the Caesium Blastplains.
 				}
+
+				BloodyAmulet: {
+					Label: Bloody Amulet
+					Tooltip: Changes the Bloody Tear to the Bloody Amulet (name and sprite)
+				}
 			}
 
 			AvalonConfig: {

@@ -166,6 +166,10 @@ public class ExxoAvalonOrigins : Mod
         {
             ReplaceVanillaTextures();
         }
+		if (ModContent.GetInstance<AvalonClientConfig>().BloodyAmulet)
+		{
+			ReplaceBloodyAmulet();
+		}
 		AWorldListItemHelper.Load();
 		BackgroundHelper.Load();
         Asset<Effect> shader =
@@ -234,6 +238,12 @@ public class ExxoAvalonOrigins : Mod
 			_ => throw new Exception("ExxoAvalonOrigins: Unknown mod call, make sure you are calling the right method/field with the right parameters!")
 		};
     }
+	private void ReplaceBloodyAmulet()
+	{
+		var itemReplacer = new VanillaAssetReplacer<Texture2D>(() => TextureAssets.Item);
+		assetReplacers.Add(itemReplacer);
+		itemReplacer.ReplaceAsset(ItemID.BloodMoonStarter, Assets.Request<Texture2D>("Assets/Vanilla/Items/BloodyAmulet"));
+	}
     private void ReplaceVanillaTextures()
     {
         //if (DragonLens != null)
@@ -260,7 +270,6 @@ public class ExxoAvalonOrigins : Mod
         itemReplacer.ReplaceAsset(ItemID.CrimtaneBar, Assets.Request<Texture2D>("Assets/Vanilla/Items/CrimtaneBar"));
         itemReplacer.ReplaceAsset(ItemID.HellstoneBar, Assets.Request<Texture2D>("Assets/Vanilla/Items/HellstoneBar"));
         itemReplacer.ReplaceAsset(ItemID.ShroomiteDiggingClaw, Assets.Request<Texture2D>("Assets/Vanilla/Items/ShroomiteDiggingClaws"));
-        itemReplacer.ReplaceAsset(ItemID.BloodMoonStarter, Assets.Request<Texture2D>("Assets/Vanilla/Items/BloodyAmulet"));
         itemReplacer.ReplaceAsset(ItemID.PulseBow, Assets.Request<Texture2D>("Assets/Vanilla/Items/PulseBow"));
         itemReplacer.ReplaceAsset(ItemID.Bell, Assets.Request<Texture2D>("Assets/Vanilla/Items/Bell"));
         itemReplacer.ReplaceAsset(ItemID.FairyBell, Assets.Request<Texture2D>("Assets/Vanilla/Items/FairyBell"));

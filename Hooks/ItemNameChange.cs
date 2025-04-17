@@ -16,7 +16,7 @@ internal class ItemNameChange : ModHook
 
     private LocalizedText On_Lang_GetItemName(On_Lang.orig_GetItemName orig, int id)
 	{
-		if (ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement)
+		if (ModContent.GetInstance<AvalonClientConfig>().BloodyAmulet)
 		{
 			if (id == ItemID.BloodMoonStarter)
 			{
@@ -55,8 +55,6 @@ internal class ItemNameChange : ModHook
                 return Language.GetText("Mods.Avalon.VanillaItemRenames.HandOfCreation");
             if (id == ItemID.HighTestFishingLine)
                 return Language.GetText("Mods.Avalon.VanillaItemRenames.FishingLine");
-            if (id == ItemID.BloodMoonStarter)
-                return Language.GetText("Mods.Avalon.VanillaItemRenames.BloodyTear");
         }
         return orig.Invoke(id);
     }
