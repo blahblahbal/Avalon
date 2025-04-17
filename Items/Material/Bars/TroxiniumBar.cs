@@ -10,14 +10,14 @@ namespace Avalon.Items.Material.Bars;
 
 public class TroxiniumBar : ModItem
 {
-    private static Asset<Texture2D> glow;
+	private static Asset<Texture2D>? glow;
 	public override void Load()
 	{
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}
 	public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 25;
+	{
+		Item.ResearchUnlockCount = 25;
 	}
 	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 	{
@@ -28,37 +28,26 @@ public class TroxiniumBar : ModItem
 		spriteBatch.Draw(glow.Value, vector2, new Rectangle(0, 0, glow.Width(), glow.Height()), new Color(255, 255, 255, 0), num, vector, scale, SpriteEffects.None, 0f);
 	}
 	public override void SetDefaults()
-    {
-		Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.useTurn = true;
-        Item.maxStack = 9999;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.PlacedBars>();
-        Item.placeStyle = 11;
-        Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
-        Item.useTime = 10;
-        Item.value = Item.sellPrice(0, 0, 75);
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-		
+	{
+		Item.DefaultToBar(11);
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 0, 75);
+
 		if (!Main.dedServ)
-        {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
-        }
-        Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
-    }
-    public override Color? GetAlpha(Color lightColor)
-    {
-        return lightColor * 4f;
-    }
-    public override void AddRecipes()
-    {
-        Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Ores.TroxiniumOre>(), 4)
-            .AddTile(TileID.AdamantiteForge)
-            .Register();
-    }
+		{
+			Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
+		}
+		Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
+	}
+	public override Color? GetAlpha(Color lightColor)
+	{
+		return lightColor * 4f;
+	}
+	public override void AddRecipes()
+	{
+		Recipe.Create(Type)
+			.AddIngredient(ModContent.ItemType<Ores.TroxiniumOre>(), 4)
+			.AddTile(TileID.AdamantiteForge)
+			.Register();
+	}
 }

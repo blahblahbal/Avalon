@@ -21,7 +21,7 @@ public class RhodiumOre : ModItem
         Item.autoReuse = true;
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.Ores.RhodiumOre>();
-        Item.rare = ItemRarityID.Orange;
+        Item.rare = ItemRarityID.Green;
         Item.width = dims.Width;
         Item.useTime = 10;
         Item.useTurn = true;

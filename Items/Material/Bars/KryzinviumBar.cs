@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -17,20 +16,9 @@ public class KryzinviumBar : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.autoReuse = true;
-		Item.useTurn = true;
-		Item.maxStack = 9999;
-		Item.consumable = true;
-		Item.createTile = ModContent.TileType<Tiles.PlacedBars>();
-		Item.placeStyle = 15;
+		Item.DefaultToBar(15);
 		Item.rare = ItemRarityID.Red;
-		Item.width = dims.Width;
-		Item.useTime = 10;
-		Item.value = Item.sellPrice(0, 1, 30, 0);
-		Item.useStyle = ItemUseStyleID.Swing;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
+		Item.value = Item.sellPrice(0, 1, 30);
 	}
 	//public override void AddRecipes()
 	//{

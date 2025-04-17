@@ -20,7 +20,7 @@ public class OsmiumOre : ModItem
         Item.autoReuse = true;
         Item.consumable = true;
         Item.createTile = ModContent.TileType<Tiles.Ores.OsmiumOre>();
-        Item.rare = ItemRarityID.Orange;
+        Item.rare = ItemRarityID.Green;
         Item.useTime = 10;
         Item.useTurn = true;
         Item.useStyle = ItemUseStyleID.Swing;

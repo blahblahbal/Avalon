@@ -1105,5 +1105,29 @@ public static class ClassExtensions
 		item.maxStack = Item.CommonMaxStack;
 		item.value = Item.sellPrice(0, 0, 5);
 	}
+	/// <summary>
+	/// This method sets a variety of Item values common to bar items.<br/>
+	/// Specifically:<code>
+	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="PlacedBars"/>)
+	/// placeStyle = <paramref name="tileStyleToPlace"/>;
+	/// width = 20;
+	/// height = 20;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// useAnimation = 15;
+	/// useTime = 10;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// useTurn = true;
+	/// autoReuse = true;
+	/// consumable = true;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="tileStyleToPlace"></param>
+	public static void DefaultToBar(this Item item, int tileStyleToPlace)
+	{
+		item.DefaultToPlaceableTile(ModContent.TileType<PlacedBars>(), tileStyleToPlace);
+		item.width = 20;
+		item.height = 20;
+	}
 	#endregion Item DefaultToX() methods
 }
