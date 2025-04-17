@@ -6,29 +6,20 @@ namespace Avalon.Items.Material.Shards;
 
 public class ElementShard : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 25;
-    }
-    public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-    {
-        itemGroup = Data.Sets.ItemGroupValues.Shards;
-    }
-    public override void SetDefaults()
-    {
-        Item.autoReuse = true;
-        Item.useTurn = true;
-        Item.consumable = true;
-        Item.useTime = 10;
-        Item.useAnimation = 15;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.createTile = ModContent.TileType<Tiles.ShardsTier2>();
-        Item.placeStyle = 9 + 10;
-        Item.rare = ItemRarityID.Cyan;
-        Item.Size = new(20);
-        Item.maxStack = 9999;
-        Item.value = Item.sellPrice(0, 0, 24, 0);
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 25;
+	}
+	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
+	{
+		itemGroup = Data.Sets.ItemGroupValues.Shards;
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToShard(9 + 10, true);
+		Item.rare = ItemRarityID.Cyan;
+		Item.value = Item.sellPrice(0, 0, 24);
+	}
 
 	// legacy code from when tmod's canplace hook literally didn't work
 	//public override bool? UseItem(Player player)
@@ -47,19 +38,19 @@ public class ElementShard : ModItem
 	//	}
 	//	return null;
 	//}
-    public override void AddRecipes()
-    {
-        CreateRecipe(10)
-            .AddIngredient(ModContent.ItemType<BlastShard>(), 3)
-            .AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
-            .AddIngredient(ModContent.ItemType<VenomShard>(), 3)
-            .AddIngredient(ModContent.ItemType<WickedShard>(), 3)
-            .AddIngredient(ModContent.ItemType<SacredShard>(), 3)
-            .AddIngredient(ModContent.ItemType<CoreShard>(), 3)
-            .AddIngredient(ModContent.ItemType<TorrentShard>(), 3)
-            .AddIngredient(ModContent.ItemType<DemonicShard>(), 3)
-            .AddIngredient(ModContent.ItemType<FrigidShard>(), 3)
-            .AddTile(TileID.MythrilAnvil)
-            .Register();
-    }
+	public override void AddRecipes()
+	{
+		CreateRecipe(10)
+			.AddIngredient(ModContent.ItemType<BlastShard>(), 3)
+			.AddIngredient(ModContent.ItemType<TornadoShard>(), 3)
+			.AddIngredient(ModContent.ItemType<VenomShard>(), 3)
+			.AddIngredient(ModContent.ItemType<WickedShard>(), 3)
+			.AddIngredient(ModContent.ItemType<SacredShard>(), 3)
+			.AddIngredient(ModContent.ItemType<CoreShard>(), 3)
+			.AddIngredient(ModContent.ItemType<TorrentShard>(), 3)
+			.AddIngredient(ModContent.ItemType<DemonicShard>(), 3)
+			.AddIngredient(ModContent.ItemType<FrigidShard>(), 3)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+	}
 }

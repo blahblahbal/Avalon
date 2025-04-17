@@ -1146,5 +1146,53 @@ public static class ClassExtensions
 		item.maxStack = Item.CommonMaxStack;
 		item.value = Item.sellPrice(0, 0, 0, 20);
 	}
+	/// <summary>
+	/// This method sets a variety of Item values common to shard items.<br/>
+	/// Specifically:<code>
+	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <paramref name="tier2"/> ? <see cref="ShardsTier2"/> : <see cref="Shards"/>)
+	/// placeStyle = <paramref name="tileStyleToPlace"/>;
+	/// width = 20;
+	/// height = 20;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// useAnimation = 15;
+	/// useTime = 10;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// useTurn = true;
+	/// autoReuse = true;
+	/// consumable = true;
+	/// rare = <paramref name="tier2"/> ? <see cref="ItemRarityID.Lime"/> : <see cref="ItemRarityID.Green"/>;
+	/// value = <paramref name="tier2"/> ? 60 silver : 30 silver;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="tileStyleToPlace"></param>
+	public static void DefaultToShard(this Item item, int tileStyleToPlace, bool tier2 = false)
+	{
+		item.DefaultToPlaceableTile(tier2 ? ModContent.TileType<ShardsTier2>() : ModContent.TileType<Shards>(), tileStyleToPlace);
+		item.width = 20;
+		item.height = 20;
+		item.rare = tier2 ? ItemRarityID.Lime : ItemRarityID.Green;
+		item.value = Item.sellPrice(0, 0, tier2 ? 12 : 6);
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to shard items.<br/>
+	/// Specifically:<code>
+	/// width = 16;
+	/// height = 20;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// value = 10 silver;<br/>
+	/// <see cref="Item.GetGlobalItem{}"/>.TomeMaterial = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="tileStyleToPlace"></param>
+	public static void DefaultToTomeMaterial(this Item item)
+	{
+		item.width = 16;
+		item.height = 20;
+		item.maxStack = Item.CommonMaxStack;
+		item.value = Item.sellPrice(0, 0, 2);
+		item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial = true;
+	}
 	#endregion Item DefaultToX() methods
 }
