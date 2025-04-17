@@ -1,7 +1,6 @@
 using Avalon.Rarities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using Terraria;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -19,9 +18,7 @@ public class InvulnoplasmalDye : ModItem
 			// The following code creates an effect (shader) reference and associates it with this item's type ID.
 			GameShaders.Armor.BindShader(
 				Item.type,
-				new ArmorShaderData(
-					new Ref<Effect>(Mod.Assets.Request<Effect>("Effects/EctoplasmalDye", AssetRequestMode.ImmediateLoad)
-						.Value), "EctoplasmalDye").UseImage(ModContent.Request<Texture2D>("Avalon/Assets/Shaders/ScaryGhostTexture")).UseColor(Color.Magenta).UseSecondaryColor(new Color(0,0,200)) // Be sure to update the effect path and pass name here.
+				new ArmorShaderData(Mod.Assets.Request<Effect>("Effects/EctoplasmalDye"), "EctoplasmalDye").UseImage(ModContent.Request<Texture2D>("Avalon/Assets/Shaders/ScaryGhostTexture")).UseColor(Color.Magenta).UseSecondaryColor(new Color(0, 0, 200)) // Be sure to update the effect path and pass name here.
 			);
 		}
 
@@ -29,13 +26,13 @@ public class InvulnoplasmalDye : ModItem
 	}
 
 	public override void SetDefaults()
-    {
-        // Item.dye will already be assigned to this item prior to SetDefaults because of the above GameShaders.Armor.BindShader code in Load().
-        // This code here remembers Item.dye so that information isn't lost during CloneDefaults.
-        int dye = Item.dye;
+	{
+		// Item.dye will already be assigned to this item prior to SetDefaults because of the above GameShaders.Armor.BindShader code in Load().
+		// This code here remembers Item.dye so that information isn't lost during CloneDefaults.
+		int dye = Item.dye;
 
-        Item.CloneDefaults(ItemID.GelDye);
-        Item.rare = ModContent.RarityType<BlueRarity>();
-        Item.dye = dye;
-    }
+		Item.CloneDefaults(ItemID.GelDye);
+		Item.rare = ModContent.RarityType<BlueRarity>();
+		Item.dye = dye;
+	}
 }

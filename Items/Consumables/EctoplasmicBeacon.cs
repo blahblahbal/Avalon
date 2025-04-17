@@ -1,8 +1,5 @@
-using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.Tiles;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,23 +7,17 @@ namespace Avalon.Items.Consumables;
 
 public class EctoplasmicBeacon : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 3;
-    }
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.consumable = true;
-        Item.width = dims.Width;
-        Item.useTime = 45;
-        //Item.useStyle = ItemUseStyleID.HoldUp;
-        Item.value = 0;
-        Item.maxStack = Item.CommonMaxStack;
-        Item.useAnimation = 45;
-        Item.height = dims.Height;
-        Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 3;
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToSpawner(width: 14, height: 28);
+		Item.useStyle = ItemUseStyleID.None;
+		//Item.useStyle = ItemUseStyleID.HoldUp;
+		Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
+	}
 
 	//public override bool CanUseItem(Player player)
 	//{
@@ -42,12 +33,12 @@ public class EctoplasmicBeacon : ModItem
 	//}
 
 	public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ItemID.Ectoplasm, 10)
-            .AddIngredient(ItemID.LunarBar, 5)
-            .AddIngredient(ItemID.BeetleHusk, 8) // might change later lol
-            .AddTile(ModContent.TileType<LibraryAltar>())
-            .Register();
-    }
+	{
+		CreateRecipe()
+			.AddIngredient(ItemID.Ectoplasm, 10)
+			.AddIngredient(ItemID.LunarBar, 5)
+			.AddIngredient(ItemID.BeetleHusk, 8) // might change later lol
+			.AddTile(ModContent.TileType<LibraryAltar>())
+			.Register();
+	}
 }

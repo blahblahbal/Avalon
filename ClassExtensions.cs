@@ -1031,5 +1031,53 @@ public static class ClassExtensions
 		item.rare = (int)rarity;
 		item.expert = true;
 	}
+	/// <summary>
+	/// This method sets a variety of Item values common to summoning items.<br/>
+	/// Specifically:<code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// consumable = <paramref name="consumable"/>;
+	/// useAnimation = <paramref name="useAnim"/>;
+	/// useTime = <paramref name="useTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="consumable"></param>
+	/// <param name="useAnim"></param>
+	/// <param name="useTime"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	public static void DefaultToSpawner(this Item item, bool consumable = true, int useAnim = 45, int useTime = 45, int width = 22, int height = 14)
+	{
+		item.DefaultToConsumable(consumable, useAnim, useTime, width, height);
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to consumable items.<br/>
+	/// Specifically:<code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// consumable = <paramref name="consumable"/>;
+	/// useAnimation = <paramref name="useAnim"/>;
+	/// useTime = <paramref name="useTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="consumable"></param>
+	/// <param name="useAnim"></param>
+	/// <param name="useTime"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	public static void DefaultToConsumable(this Item item, bool consumable = true, int useAnim = 30, int useTime = 30, int width = 18, int height = 18)
+	{
+		item.width = width;
+		item.height = height;
+		item.maxStack = Item.CommonMaxStack;
+		item.consumable = consumable;
+		item.useAnimation = useAnim;
+		item.useTime = useTime;
+		item.useStyle = ItemUseStyleID.HoldUp;
+	}
 	#endregion Item DefaultToX() methods
 }

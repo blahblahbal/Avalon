@@ -1,8 +1,7 @@
-using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
 
 namespace Avalon.Items.Consumables;
 
@@ -15,16 +14,7 @@ public class MartianPeaceTreaty : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.White;
-		Item.width = dims.Width;
-		Item.useTime = 45;
-		Item.useStyle = ItemUseStyleID.HoldUp;
-		Item.value = 0;
-		Item.maxStack = 9999;
-		Item.useAnimation = 45;
-		Item.height = dims.Height;
+		Item.DefaultToSpawner();
 	}
 
 	public override bool CanUseItem(Player player)
