@@ -79,6 +79,7 @@ public class DeathMessages : ModHook
 				case 30:
 				case 31:
 				case 33:
+				case 34:
                     empty = NetworkText.FromKey("Mods.Avalon.DeathText.Generic_" + msg, deadPlayerName);
                     break;
                 case 8:
@@ -399,7 +400,13 @@ public class DeathMessages : ModHook
                     case 8:
                         result = NetworkText.FromKey("Mods.Avalon.DeathText.Space_3", deadPlayerName, Main.worldName);
                         break;
-                }
+					case 9:
+						result = NetworkText.FromKey("Mods.Avalon.DeathText.Space_4", deadPlayerName, Main.worldName);
+						break;
+					case 10:
+						result = NetworkText.FromKey("Mods.Avalon.DeathText.Space_5", deadPlayerName, Main.worldName);
+						break;
+				}
             }
             #endregion
             #region teleport

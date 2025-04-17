@@ -1,10 +1,7 @@
-using Avalon.Buffs;
-using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Common.Players;
 using Avalon.DropConditions;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
-using Avalon.Items.Potions.AdvancedPotions;
 using Avalon.Items.Ammo;
 using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
@@ -22,7 +19,6 @@ using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Placeable.Tile.Ancient;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Potions.Other;
-using Avalon.Items.Tools;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
@@ -30,7 +26,6 @@ using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Reflection;
-using Avalon.Systems;
 using Avalon.Tiles;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
@@ -47,10 +42,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using System.Diagnostics.Metrics;
-using ThoriumMod.Core.ItemDropRules;
 using Avalon.Items.Accessories.Expert;
-using Avalon.Projectiles.Tools;
 
 namespace Avalon.Common;
 
@@ -1777,7 +1769,7 @@ public class AvalonGlobalItem : GlobalItem
         {
             item.accessory = true;
         }
-        switch (item.type)
+		switch (item.type)
         {
 			case ItemID.BloodMoonStarter:
 				item.DefaultToSpawner(useAnim: 15, useTime: 30);

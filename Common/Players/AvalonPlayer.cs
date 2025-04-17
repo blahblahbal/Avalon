@@ -5,6 +5,7 @@ using Avalon.Dusts;
 using Avalon.Hooks;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Consumables;
 using Avalon.Items.Other;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
@@ -1427,6 +1428,43 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void LoadData(TagCompound tag)
 	{
+		for (int i = 0; i < Player.inventory.Length; i++)
+		{
+			if (Player.inventory[i].type == ModContent.ItemType<Items.Consumables.BloodyAmulet>())
+			{
+				int stack = Player.inventory[i].stack;
+				Player.inventory[i].SetDefaults(ItemID.BloodMoonStarter);
+				Player.inventory[i].stack = stack;
+			}
+		}
+		for (int i = 0; i < Player.bank.item.Length; i++)
+		{
+			if (Player.bank.item[i].type == ModContent.ItemType<Items.Consumables.BloodyAmulet>())
+			{
+				int stack = Player.bank.item[i].stack;
+				Player.bank.item[i].SetDefaults(ItemID.BloodMoonStarter);
+				Player.bank.item[i].stack = stack;
+			}
+			if (Player.bank2.item[i].type == ModContent.ItemType<Items.Consumables.BloodyAmulet>())
+			{
+				int stack = Player.bank2.item[i].stack;
+				Player.bank2.item[i].SetDefaults(ItemID.BloodMoonStarter);
+				Player.bank2.item[i].stack = stack;
+			}
+			if (Player.bank3.item[i].type == ModContent.ItemType<Items.Consumables.BloodyAmulet>())
+			{
+				int stack = Player.bank3.item[i].stack;
+				Player.bank3.item[i].SetDefaults(ItemID.BloodMoonStarter);
+				Player.bank3.item[i].stack = stack;
+			}
+			if (Player.bank4.item[i].type == ModContent.ItemType<Items.Consumables.BloodyAmulet>())
+			{
+				int stack = Player.bank4.item[i].stack;
+				Player.bank4.item[i].SetDefaults(ItemID.BloodMoonStarter);
+				Player.bank4.item[i].stack = stack;
+			}
+		}
+
 		if (tag.ContainsKey("Avalon:StatStam"))
 		{
 			Player.GetModPlayer<AvalonStaminaPlayer>().StatStam = tag.Get<int>("Avalon:StatStam");
