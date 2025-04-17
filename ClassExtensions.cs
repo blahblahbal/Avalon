@@ -1129,5 +1129,22 @@ public static class ClassExtensions
 		item.width = 20;
 		item.height = 20;
 	}
+	/// <summary>
+	/// This method sets a variety of Item values common to herb items.<br/>
+	/// Specifically:<code>
+	/// width = 12;
+	/// height = 14;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// value = 20 copper;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	public static void DefaultToHerb(this Item item)
+	{
+		item.width = 12;
+		item.height = 14;
+		item.maxStack = Item.CommonMaxStack;
+		item.value = Item.sellPrice(0, 0, 0, 20);
+	}
 	#endregion Item DefaultToX() methods
 }
