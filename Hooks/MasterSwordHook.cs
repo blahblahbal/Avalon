@@ -42,6 +42,21 @@ namespace Avalon.Hooks
 			}
 		}
 	}
+	//public class MSPlayer : ModPlayer
+	//{
+	//	public override void PostUpdate()
+	//	{
+	//		if (MasterSwordHook.allMechsSpawned)
+	//		{
+	//			Main.NewText("____________", Main.DiscoColor);
+	//			Main.NewText("", Main.DiscoColor);
+	//			Main.NewText("allMechs: " + MasterSwordHook.allMechsSpawned, Main.DiscoColor);
+	//			Main.NewText("twins: " + MasterSwordHook.killedTwins, Main.DiscoColor);
+	//			Main.NewText("prime: " + MasterSwordHook.killedPrime, Main.DiscoColor);
+	//			Main.NewText("destr: " + MasterSwordHook.killedDestroyer, Main.DiscoColor);
+	//		}
+	//	}
+	//}
 	public class MasterSwordHook : ModHook
 	{
 		internal static bool killedTwins;
@@ -66,27 +81,37 @@ namespace Avalon.Hooks
 			if (Type is NPCID.Spazmatism or NPCID.Retinazer)
 			{
 				twins = true;
+				if (killedTwins)
+				{
+					prime = killedPrime;
+					destroyer = killedDestroyer;
+				}
 			}
-			else
-			{
-				twins = killedTwins;
-			}
-			if (Type is NPCID.SkeletronPrime)
+			else if (Type is NPCID.SkeletronPrime)
 			{
 				prime = true;
+				if (killedPrime)
+				{
+					twins = killedTwins;
+					destroyer = killedDestroyer;
+				}
 			}
-			else
-			{
-				prime = killedPrime;
-			}
-			if (Type is NPCID.TheDestroyer)
+			else if (Type is NPCID.TheDestroyer)
 			{
 				destroyer = true;
+				if (killedDestroyer)
+				{
+					twins = killedTwins;
+					prime = killedPrime;
+				}
 			}
 			else
 			{
-				destroyer = killedDestroyer;
+				orig(spawnPositionX, spawnPositionY, Type, targetPlayerIndex);
+				return;
 			}
+
+
 			if (!twins && !killedTwins)
 			{
 				bool retAlive = NPC.AnyNPCs(NPCID.Retinazer);
@@ -119,6 +144,12 @@ namespace Avalon.Hooks
 			{
 				destroyer = true;
 			}
+
+			//Main.NewText("____________", Color.Gray);
+			//Main.NewText("", Color.Gray);
+			//Main.NewText("twins: " + twins, Color.Gray);
+			//Main.NewText("prime: " + prime, Color.Gray);
+			//Main.NewText("destr: " + destroyer, Color.Gray);
 
 			allMechsSpawned = (twins && prime && destroyer);
 			if (!allMechsSpawned)
