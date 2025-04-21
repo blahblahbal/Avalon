@@ -7,6 +7,11 @@ namespace Avalon.Hooks
 {
 	public class MasterSwordNPC : GlobalNPC
 	{
+		public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
+		{
+			return entity.type is NPCID.Spazmatism or NPCID.Retinazer or NPCID.SkeletronPrime or NPCID.TheDestroyer;
+		}
+
 		internal static bool[] hitTwins = new bool[Main.maxPlayers];
 		internal static bool[] hitPrime = new bool[Main.maxPlayers];
 		internal static bool[] hitDestroyer = new bool[Main.maxPlayers];
