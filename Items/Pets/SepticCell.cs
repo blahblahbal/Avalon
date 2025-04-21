@@ -7,20 +7,18 @@ namespace Avalon.Items.Pets;
 
 public class SepticCell : ModItem
 {
-    public override void UseStyle(Player player, Rectangle heldItemFrame)
-    {
-        if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
-        {
-            player.AddBuff(Item.buffType, 3600);
-        }
-    }
-    public override void SetDefaults()
-    {
-        Item.CloneDefaults(ItemID.WispinaBottle);
-        Item.shoot = ModContent.ProjectileType<Projectiles.Pets.SnotOrb>();
+	public override void UseStyle(Player player, Rectangle heldItemFrame)
+	{
+		if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
+		{
+			player.AddBuff(Item.buffType, 3600);
+		}
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToVanitypet(ModContent.ProjectileType<Projectiles.Pets.SnotOrb>(), ModContent.BuffType<Buffs.Pets.SnotOrb>());
 		Item.UseSound = SoundID.Item8;
-        Item.buffType = ModContent.BuffType<Buffs.Pets.SnotOrb>();
-        Item.value = Item.sellPrice(0, 1, 50);
-        Item.rare = ItemRarityID.Blue;
-    }
+		Item.rare = ItemRarityID.Blue;
+		Item.value = Item.sellPrice(0, 1, 50);
+	}
 }

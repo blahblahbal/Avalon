@@ -1265,5 +1265,33 @@ public static class ClassExtensions
 		item.height = height;
 		item.maxStack = Item.CommonMaxStack;
 	}
+	/// <summary>
+	/// This method sets a variety of Item values common to genie items. (Genies are planned to be pet-like, hence all the redundant values being set)<br/>
+	/// Specifically:<code>
+	/// width = 16;
+	/// height = 30;
+	/// accessory = true;
+	/// damage = 0
+	/// noMelee = true;
+	/// useAnimation = 20;
+	/// useTime = 20;
+	/// buffType = 0;
+	/// shoot = 0;
+	/// rare = <see cref="ItemRarityID.Green"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// UseSound = <see cref="SoundID.Item2"/>;
+	/// value = 20 gold;<br/>
+	/// <see cref="Item.GetGlobalItem"/>.Genie = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	public static void DefaultToGenie(this Item item)
+	{
+		item.DefaultToVanitypet(0, 0);
+		item.accessory = true;
+		item.rare = ItemRarityID.Green;
+		item.value = Item.buyPrice(0, 20);
+		item.GetGlobalItem<AvalonGlobalItemInstance>().Genie = true;
+	}
 	#endregion Item DefaultToX() methods
 }
