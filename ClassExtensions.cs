@@ -2,6 +2,7 @@ using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Ammo;
+using Avalon.Items.Material;
 using Avalon.Items.Material.Ores;
 using Avalon.Tiles;
 using Microsoft.Xna.Framework;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -896,7 +898,7 @@ public static class ClassExtensions
 	/// Specifically: <code>
 	/// width = 26;
 	/// height = 26;
-	/// ammo = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="RhotukaSpinner"/>)
+	/// ammo = <see cref="ModContent.ItemType"/>; (Where <typeparamref name="T"/> is <see cref="RhotukaSpinner"/>)
 	/// DamageType = <see cref="DamageClass.Ranged"/>;
 	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// damage = <paramref name="damage"/>;
@@ -1181,11 +1183,10 @@ public static class ClassExtensions
 	/// height = 20;
 	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// value = 10 silver;<br/>
-	/// <see cref="Item.GetGlobalItem{}"/>.TomeMaterial = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// <see cref="Item.GetGlobalItem"/>.TomeMaterial = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
 	/// </code>
 	/// </summary>
 	/// <param name="item"></param>
-	/// <param name="tileStyleToPlace"></param>
 	public static void DefaultToTomeMaterial(this Item item)
 	{
 		item.width = 16;
@@ -1193,6 +1194,44 @@ public static class ClassExtensions
 		item.maxStack = Item.CommonMaxStack;
 		item.value = Item.sellPrice(0, 0, 2);
 		item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial = true;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to shard items.<br/>
+	/// Specifically:<code>
+	/// width = 20;
+	/// height = 20;
+	/// accessory = true;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// rare = <see cref="ItemRarityID.Green"/>;
+	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
+	/// UseSound = new <see cref="SoundStyle"/>("Avalon/Sounds/Item/Scroll");<br></br>
+	/// <see cref="Item.GetGlobalItem"/>.StaminaScroll = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	public static void DefaultToStaminaScroll(this Item item)
+	{
+		item.CloneDefaults(ModContent.ItemType<BlankScroll>());
+		item.accessory = true;
+		item.rare = ItemRarityID.Green;
+		item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to shard items.<br/>
+	/// Specifically:<code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	public static void DefaultToMisc(this Item item, int width = 16, int height = 16)
+	{
+		item.width = width;
+		item.height = height;
+		item.maxStack = Item.CommonMaxStack;
 	}
 	#endregion Item DefaultToX() methods
 }

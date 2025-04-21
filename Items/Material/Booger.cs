@@ -1,5 +1,4 @@
-using Avalon.Tiles;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,18 +16,8 @@ public class Booger : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Booger>());
 		Item.rare = ItemRarityID.Blue;
-		Item.width = dims.Width;
-		Item.maxStack = 9999;
-		Item.value = 750;
-		Item.height = dims.Height;
-		Item.useStyle = ItemUseStyleID.Swing;
-		Item.useAnimation = 15;
-		Item.useTime = 10;
-		Item.consumable = true;
-		Item.useTurn = true;
-		Item.autoReuse = true;
-		Item.createTile = ModContent.TileType<Tiles.Booger>();
+		Item.value = Item.sellPrice(0, 0, 1, 50);
 	}
 }
