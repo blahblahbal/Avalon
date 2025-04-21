@@ -79,34 +79,18 @@ namespace Avalon.Hooks
 			}
 		}
 	}
-	//public class MSPlayer : ModPlayer
-	//{
-	//	public override void PostUpdate()
-	//	{
-	//		if (MasterSwordHook.allMechsSpawned)
-	//		{
-	//			Main.NewText("____________", Main.DiscoColor);
-	//			Main.NewText("", Main.DiscoColor);
-	//			Main.NewText("allMechs: " + MasterSwordHook.allMechsSpawned, Main.DiscoColor);
-	//			Main.NewText("twins: " + MasterSwordHook.killedTwins, Main.DiscoColor);
-	//			Main.NewText("prime: " + MasterSwordHook.killedPrime, Main.DiscoColor);
-	//			Main.NewText("destr: " + MasterSwordHook.killedDestroyer, Main.DiscoColor);
-	//		}
-	//	}
-	//}
 	public class MasterSwordHook : ModHook
 	{
 		internal static bool killedTwins;
 		internal static bool killedPrime;
 		internal static bool killedDestroyer;
-		// todo: set this to true for the client if they join a server while all 3 mechanical bosses are alive (and if below is done, then only if above the HP threshold)
 		internal static bool allMechsSpawned;
 		protected override void Apply()
 		{
 			On_NPC.SpawnBoss += On_NPC_SpawnBoss;
 		}
 
-		// todo: check if the other bosses are above a certain HP threshold? (like 90%?)
+		// todo: maybe check if the other bosses are above a certain HP threshold? (like 90%?)
 		// this would prevent cheesing by getting two really low, then spawning the last and then killing the first two
 		// might be a little superfluous though
 		private void On_NPC_SpawnBoss(On_NPC.orig_SpawnBoss orig, int spawnPositionX, int spawnPositionY, int Type, int targetPlayerIndex)
@@ -184,12 +168,6 @@ namespace Avalon.Hooks
 			{
 				destroyer = true;
 			}
-
-			//Main.NewText("____________", Color.Gray);
-			//Main.NewText("", Color.Gray);
-			//Main.NewText("twins: " + twins, Color.Gray);
-			//Main.NewText("prime: " + prime, Color.Gray);
-			//Main.NewText("destr: " + destroyer, Color.Gray);
 
 			allMechsSpawned = (twins && prime && destroyer);
 			if (!allMechsSpawned)
