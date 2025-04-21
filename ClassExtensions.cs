@@ -1091,6 +1091,38 @@ public static class ClassExtensions
 		item.useStyle = ItemUseStyleID.HoldUp;
 	}
 	/// <summary>
+	/// This method sets a variety of Item values common to useable items.<br/>
+	/// Specifically:<code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// autoReuse = true;
+	/// useTurn = true;
+	/// consumable = <paramref name="consumable"/>;
+	/// useAnimation = <paramref name="useAnim"/>;
+	/// useTime = <paramref name="useTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="consumable"></param>
+	/// <param name="useAnim"></param>
+	/// <param name="useTime"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	public static void DefaultToUseable(this Item item, bool consumable = true, int useAnim = 15, int useTime = 15, int width = 20, int height = 20)
+	{
+		item.width = width;
+		item.height = height;
+		item.maxStack = Item.CommonMaxStack;
+		item.autoReuse = true;
+		item.useTurn = true;
+		item.consumable = consumable;
+		item.useAnimation = useAnim;
+		item.useTime = useTime;
+		item.useStyle = ItemUseStyleID.Swing;
+	}
+	/// <summary>
 	/// This method sets a variety of Item values common to fish items.<br/>
 	/// Specifically:<code>
 	/// width = 26;
@@ -1177,7 +1209,7 @@ public static class ClassExtensions
 		item.value = Item.sellPrice(0, 0, tier2 ? 12 : 6);
 	}
 	/// <summary>
-	/// This method sets a variety of Item values common to shard items.<br/>
+	/// This method sets a variety of Item values common to tome material items.<br/>
 	/// Specifically:<code>
 	/// width = 16;
 	/// height = 20;
@@ -1196,7 +1228,7 @@ public static class ClassExtensions
 		item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial = true;
 	}
 	/// <summary>
-	/// This method sets a variety of Item values common to shard items.<br/>
+	/// This method sets a variety of Item values common to stamina scroll items.<br/>
 	/// Specifically:<code>
 	/// width = 20;
 	/// height = 20;
@@ -1217,7 +1249,7 @@ public static class ClassExtensions
 		item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
 	}
 	/// <summary>
-	/// This method sets a variety of Item values common to shard items.<br/>
+	/// This method sets a variety of Item values common to miscellaneous items.<br/>
 	/// Specifically:<code>
 	/// width = <paramref name="width"/>;
 	/// height = <paramref name="height"/>;

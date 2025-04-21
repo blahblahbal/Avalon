@@ -16,18 +16,12 @@ public class VirulentPowder : ModItem
 	}
 	public override void SetDefaults()
 	{
+		Item.DefaultToUseable(width: 16, height: 24);
+		Item.UseSound = SoundID.Item1;
 		Item.damage = 0;
-		Item.useStyle = ItemUseStyleID.Swing;
+		Item.noMelee = true;
 		Item.shootSpeed = 4f;
 		Item.shoot = ModContent.ProjectileType<Projectiles.VirulentPowder>();
-		Item.width = 16;
-		Item.height = 24;
-		Item.maxStack = Item.CommonMaxStack;
-		Item.consumable = true;
-		Item.UseSound = SoundID.Item1;
-		Item.useAnimation = 15;
-		Item.useTime = 15;
-		Item.noMelee = true;
 		Item.value = Item.sellPrice(copper: 20);
 	}
 

@@ -13,14 +13,11 @@ public class Rock : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToMisc();
-		Item.rare = ItemRarityID.Blue;
-		Item.useTime = 25;
-		Item.useAnimation = 25;
-		Item.noUseGraphic = true;
+		Item.DefaultToUseable(false, 25, 25, 16, 16);
 		Item.UseSound = SoundID.Item1;
-		Item.useStyle = ItemUseStyleID.Swing;
+		Item.noUseGraphic = true;
 		Item.shootSpeed = 7f;
+		Item.rare = ItemRarityID.Blue;
 		Item.shoot = ModContent.ProjectileType<Projectiles.ThrowingRock>();
 	}
 }

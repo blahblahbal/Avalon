@@ -12,12 +12,7 @@ public class ShimmerBucket : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToMisc(20, 20);
-		Item.useAnimation = 15;
-		Item.useTime = 10;
-		Item.autoReuse = true;
-		Item.useTurn = true;
-		Item.useStyle = ItemUseStyleID.Swing;
+		Item.DefaultToUseable(false, 15, 10);
 		Item.rare = ItemRarityID.Orange;
 	}
 	public override void HoldItem(Player player)

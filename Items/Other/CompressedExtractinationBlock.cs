@@ -14,12 +14,7 @@ public class CompressedExtractinationBlock : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToMisc(20, 20);
-		Item.autoReuse = true;
-		Item.useTurn = true;
-		Item.useTime = 15;
-		Item.useAnimation = 15;
-		Item.useStyle = ItemUseStyleID.Swing;
+		Item.DefaultToUseable(false, 15, 15);
 		Item.rare = ItemRarityID.Blue;
 	}
 	public override void AddRecipes()
