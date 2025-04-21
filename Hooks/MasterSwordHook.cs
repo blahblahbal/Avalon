@@ -7,6 +7,9 @@ namespace Avalon.Hooks
 {
 	public class MasterSwordNPC : GlobalNPC
 	{
+		internal static bool[] hitTwins = new bool[Main.maxPlayers];
+		internal static bool[] hitPrime = new bool[Main.maxPlayers];
+		internal static bool[] hitDestroyer = new bool[Main.maxPlayers];
 		public override void OnKill(NPC npc)
 		{
 			if (MasterSwordHook.allMechsSpawned)
@@ -16,28 +19,62 @@ namespace Avalon.Hooks
 					if (!NPC.AnyNPCs((npc.type == NPCID.Spazmatism) ? NPCID.Retinazer : NPCID.Spazmatism))
 					{
 						MasterSwordHook.killedTwins = true;
+						foreach (Player p in Main.ActivePlayers)
+						{
+							if (!hitTwins[p.whoAmI])
+							{
+								hitTwins[p.whoAmI] = npc.playerInteraction[p.whoAmI];
+							}
+						}
 					}
 				}
 				else if (npc.type is NPCID.SkeletronPrime)
 				{
 					MasterSwordHook.killedPrime = true;
+					foreach (Player p in Main.ActivePlayers)
+					{
+						if (!hitPrime[p.whoAmI])
+						{
+							hitPrime[p.whoAmI] = npc.playerInteraction[p.whoAmI];
+						}
+					}
 				}
 				else if (npc.type is NPCID.TheDestroyer)
 				{
 					MasterSwordHook.killedDestroyer = true;
+					foreach (Player p in Main.ActivePlayers)
+					{
+						if (!hitDestroyer[p.whoAmI])
+						{
+							hitDestroyer[p.whoAmI] = npc.playerInteraction[p.whoAmI];
+						}
+					}
 				}
 
 				if (MasterSwordHook.killedTwins && MasterSwordHook.killedPrime && MasterSwordHook.killedDestroyer)
 				{
-					// todo: check if the player has dealt damage to all of the bosses, like for treasure bags
-					// also need to check if this works in multiplayer at all
-					int i = Item.NewItem(Player.GetSource_NaturalSpawn(), Main.LocalPlayer.position, ModContent.ItemType<Items.Weapons.Melee.Hardmode.MasterSword>(), prefixGiven: -2);
-					Main.item[i].playerIndexTheItemIsReservedFor = Main.LocalPlayer.whoAmI;
+					foreach (Player p in Main.ActivePlayers)
+					{
+						if (hitTwins[p.whoAmI] && hitPrime[p.whoAmI] && hitDestroyer[p.whoAmI])
+						{
+							int item = Item.NewItem(Player.GetSource_NaturalSpawn(), p.position, ModContent.ItemType<Items.Weapons.Melee.Hardmode.MasterSword>(), noBroadcast: true, prefixGiven: -2);
+							Main.timeItemSlotCannotBeReusedFor[item] = TimeUtils.MinutesToTicks(15);
+							//Main.item[item].playerIndexTheItemIsReservedFor = p.whoAmI;
+							if (Main.netMode == NetmodeID.Server)
+							{
+								NetMessage.SendData(MessageID.InstancedItem, p.whoAmI, -1, null, item);
+								Main.item[item].active = false;
+							}
+						}
+					}
 
 					MasterSwordHook.killedTwins = false;
 					MasterSwordHook.killedPrime = false;
 					MasterSwordHook.killedDestroyer = false;
 					MasterSwordHook.allMechsSpawned = false;
+					hitTwins.Initialize();
+					hitPrime.Initialize();
+					hitDestroyer.Initialize();
 				}
 			}
 		}
@@ -123,6 +160,9 @@ namespace Avalon.Hooks
 						killedPrime = false;
 						killedDestroyer = false;
 						allMechsSpawned = false;
+						MasterSwordNPC.hitTwins.Initialize();
+						MasterSwordNPC.hitPrime.Initialize();
+						MasterSwordNPC.hitDestroyer.Initialize();
 						orig(spawnPositionX, spawnPositionY, Type, targetPlayerIndex);
 						return;
 					}
@@ -157,6 +197,9 @@ namespace Avalon.Hooks
 				killedTwins = false;
 				killedPrime = false;
 				killedDestroyer = false;
+				MasterSwordNPC.hitTwins.Initialize();
+				MasterSwordNPC.hitPrime.Initialize();
+				MasterSwordNPC.hitDestroyer.Initialize();
 			}
 
 			orig(spawnPositionX, spawnPositionY, Type, targetPlayerIndex);
