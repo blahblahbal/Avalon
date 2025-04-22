@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,7 +11,7 @@ public class BasaltObelisk : ModItem
 		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.BasaltObelisk>());
 		Item.width = 26;
 		Item.height = 36;
-		Item.value = Item.sellPrice(0, 1, 0, 0);
 		Item.rare = ItemRarityID.Orange;
+		Item.value = Item.sellPrice(0, 1);
 	}
 }
