@@ -5,7 +5,10 @@ using Avalon.Tiles.CrystalMines;
 using Avalon.Tiles.Savanna;
 using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
+using Steamworks;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -37,6 +40,7 @@ class WorldgenHelper : ModItem
         float diff_y = a.Y - b.Y;
         return (float)Math.Sqrt(diff_x * diff_x + diff_y * diff_y);
     }
+	
     public override bool? UseItem(Player player)
     {
         int x = (int)Main.MouseWorld.X / 16;
@@ -110,7 +114,8 @@ class WorldgenHelper : ModItem
 			//Crystals(x, y);
 			//World.Biomes.CrystalMines.Place(new Point(x, y));
 
-			World.Biomes.CrystalMines.PlaceNew(new Point(x, y));
+			//WorldGeneration.Biomes.Rhyolite.PlaceRhyolite(x, y);
+			//World.Biomes.CrystalMines.PlaceNew(new Point(x, y));
 
 			//WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
 

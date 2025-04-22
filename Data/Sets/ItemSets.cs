@@ -58,10 +58,11 @@ using Avalon.Items.Weapons.Ranged.Superhardmode;
 using Avalon.Items.Weapons.Summon.Hardmode;
 using System.Collections.Generic;
 using Terraria.ID;
-using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs;
+using Microsoft.Xna.Framework;
+using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets
 {
@@ -75,6 +76,42 @@ namespace Avalon.Data.Sets
 			ItemID.TitaniumBar, ItemID.HallowedBar, ItemID.ChlorophyteBar, ItemID.ShroomiteBar,
 			ItemID.LunarBar
 		);
+
+		public static Dictionary<int, Vector3> TorchLauncherItemToProjColor = new Dictionary<int, Vector3>()
+		{
+			{ ItemID.Torch, new Vector3(1f, 0.95f, 0.8f) },
+			{ ItemID.BlueTorch, new Vector3(0f, 0.1f, 1.3f) },
+			{ ItemID.RedTorch, new Vector3(1f, 0.1f, 0.1f) },
+			{ ItemID.GreenTorch, new Vector3(0f, 1f, 0.1f) },
+			{ ItemID.PurpleTorch, new Vector3(0.9f, 0f, 0.9f) },
+			{ ItemID.WhiteTorch, new Vector3(1.3f, 1.3f, 1.3f) },
+			{ ItemID.YellowTorch, new Vector3(0.9f, 0.9f, 0f) },
+			{ ItemID.DemonTorch, new Vector3(0f, 0f, 0f) }, //
+			{ ItemID.CursedTorch, new Vector3(0.7f, 0.85f, 1f) },
+			{ ItemID.IceTorch, new Vector3(0.75f, 0.85f, 1.4f) },
+			{ ItemID.OrangeTorch, new Vector3(1f, 0.5f, 0f) },
+			{ ItemID.IchorTorch, new Vector3(1f, 0.5f, 0f) },
+			{ ItemID.UltrabrightTorch, new Vector3(0.75f, 1.3499999f, 1.5f) },
+			{ ItemID.BoneTorch, new Vector3(0.95f, 0.75f, 1.3f) },
+			{ ItemID.RainbowTorch, new Vector3(0f, 0f, 0f) }, //
+			{ ItemID.PinkTorch, new Vector3(1f, 0f, 1f) },
+			{ ItemID.DesertTorch, new Vector3(1.4f, 0.85f, 0.55f) },
+			{ ItemID.CoralTorch, new Vector3(0.25f, 1.3f, 0.8f) },
+			{ ItemID.CorruptTorch, new Vector3(0.95f, 0.4f, 1.4f) },
+			{ ItemID.CrimsonTorch, new Vector3(1.4f, 0.7f, 0.5f) },
+			{ ItemID.HallowedTorch, new Vector3(1.25f, 0.6f, 1.2f) },
+			{ ItemID.JungleTorch, new Vector3(0.75f, 1.45f, 0.9f) },
+			{ ItemID.MushroomTorch, new Vector3(0.3f, 0.78f, 1.2f) },
+			{ ItemID.ShimmerTorch, new Vector3(0f, 0f, 0f) }, //
+			{ ItemType<BrownTorch>(), new Vector3(1.1f, 0.75f, 0.5f) },
+			{ ItemType<ContagionTorch>(), new Vector3(0.8f, 1.4f, 0f) },
+			{ ItemType<CyanTorch>(), new Vector3(0f, 1f, 1f) },
+			{ ItemType<LimeTorch>(), new Vector3(0.714f, 1f, 0f) },
+			{ ItemType<PathogenTorch>(), new Vector3(0.5f, 0f, 2f) },
+			{ ItemType<SavannaTorch>(), new Vector3(0.69f, 1f, 0.42f) },
+			{ ItemType<SlimeTorch>(), new Vector3(0.25f, 0.72f, 1f) },
+			{ ItemType<StarTorch>(), new Vector3(1f, 0.945f, 0.2f) }
+		};
 
 		/// <summary>
 		/// Add to this if your mod adds potions/elixirs; used for potion/elixir usage lockout

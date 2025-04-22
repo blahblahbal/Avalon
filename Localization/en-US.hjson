@@ -9705,6 +9705,11 @@ Mods: {
 				DisplayName: Hallowed Altar
 				Tooltip: ""
 			}
+
+			TorchLauncher: {
+				DisplayName: Torch Launcher
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10007,6 +10012,7 @@ Mods: {
 			ShroomiteBullet.DisplayName: Shroomite Bullet
 			ShroomiteRocket.DisplayName: Shroomite Rocket
 			AquaBlast.DisplayName: Aqua Blast
+			Torch.DisplayName: Torch
 		}
 
 		NPCs: {

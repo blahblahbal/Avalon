@@ -1943,7 +1943,13 @@ public class AvalonGlobalItem : GlobalItem
             #endregion ML item rebalance
         }
         item.GetGlobalItem<AvalonGlobalItemInstance>().TileBoostSaved = item.tileBoost;
-    }
+
+		if (ItemID.Sets.Torches[item.type])
+		{
+			item.ammo = ItemID.Torch;
+			item.notAmmo = true;
+		}
+	}
     public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         #region split projectile bonus

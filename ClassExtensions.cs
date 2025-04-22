@@ -20,6 +20,14 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
+	public static Rectangle Expand(this Rectangle r, int xDist, int yDist)
+	{
+		r.X -= xDist;
+		r.Y -= yDist;
+		r.Width += xDist * 2;
+		r.Height += yDist * 2;
+		return r;
+	}
 	public static List<List<int>> AddToListAndReturnIt(this List<List<int>> list, List<int> list2)
 	{
 		list.Add(list2);

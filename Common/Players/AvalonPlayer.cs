@@ -7,6 +7,7 @@ using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Other;
+using Avalon.Items.Tools;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
@@ -717,6 +718,55 @@ public class AvalonPlayer : ModPlayer
 			Player.velocity.Y = 1E-05f;
 		}
 		//Player.gfxOffY = 0;
+	}
+	public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+	{
+		#region torch launcher logic
+		if (item.type == ModContent.ItemType<TorchLauncher>())
+		{
+			var item2 = new Item();
+			bool flag7 = false;
+			bool inAmmoSlots = false;
+			for (int i = 54; i < 58; i++)
+			{
+				if (Player.inventory[i].ammo == Player.inventory[Player.selectedItem].useAmmo &&
+					Player.inventory[i].stack > 0)
+				{
+					item2 = Player.inventory[i];
+					flag7 = true;
+					inAmmoSlots = true;
+					break;
+				}
+			}
+
+			if (!inAmmoSlots)
+			{
+				for (int i = 0; i < 54; i++)
+				{
+					if (Player.inventory[i].ammo == Player.inventory[Player.selectedItem].useAmmo &&
+						Player.inventory[i].stack > 0)
+					{
+						item2 = Player.inventory[i];
+						flag7 = true;
+						break;
+					}
+				}
+			}
+
+			if (flag7)
+			{
+				if (Player.inventory[Player.selectedItem].useAmmo == ItemID.Torch)
+				{
+					Projectile.NewProjectile(
+						Player.GetSource_ItemUse_WithPotentialAmmo(ModContent.GetInstance<TorchLauncher>().Item,
+							ModContent.GetInstance<TorchLauncher>().Item.ammo), position,
+						new Vector2(velocity.X, velocity.Y), ModContent.ProjectileType<Torch>(), 0, 0, ai2: item2.type);
+					return false;
+				}
+			}
+		}
+		#endregion
+		return base.Shoot(item, source, position, velocity, type, damage, knockback);
 	}
 	public override void PostUpdate()
 	{
