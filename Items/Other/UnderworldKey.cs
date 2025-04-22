@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -9,14 +8,11 @@ namespace Avalon.Items.Other;
 
 public class UnderworldKey : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.rare = ItemRarityID.Yellow;
-        Item.width = dims.Width;
-        Item.maxStack = 9999;
-        Item.height = dims.Height;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToMisc(14, 20);
+		Item.rare = ItemRarityID.Yellow;
+	}
 
 	public override bool ConsumeItem(Player player)
 	{

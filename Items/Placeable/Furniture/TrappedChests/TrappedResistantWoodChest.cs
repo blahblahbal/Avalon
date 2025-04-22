@@ -1,5 +1,5 @@
 using Avalon.Items.Placeable.Furniture.ResistantWood;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -12,28 +12,19 @@ public class TrappedResistantWoodChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-		Item.placeStyle = 7;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 7);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<ResistantWoodChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<ResistantWoodChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }

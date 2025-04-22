@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,16 +6,15 @@ namespace Avalon.Items.Material;
 
 public class LifeDew : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 25;
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 25;
+	}
 
-    public override void SetDefaults()
-    { 
-        Item.rare = ItemRarityID.Yellow;
-        Item.maxStack = 9999;
-        Item.value = 400000;
-        Item.Size = new Vector2(24);
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToMisc();
+		Item.rare = ItemRarityID.Yellow;
+		Item.value = Item.sellPrice(0, 8);
+	}
 }

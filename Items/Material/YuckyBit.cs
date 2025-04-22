@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,10 +17,6 @@ public class YuckyBit : ModItem
 	public override void SetDefaults()
 	{
 		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.YuckyBit>());
-		Rectangle dims = this.GetDims();
-		Item.width = dims.Width;
-		Item.maxStack = 9999;
-		Item.value = 750;
-		Item.height = dims.Height;
+		Item.value = Item.sellPrice(0, 0, 1, 50);
 	}
 }

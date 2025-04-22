@@ -1,6 +1,5 @@
 using Avalon.Items.Placeable.Furniture.Gem;
-using Avalon.Items.Placeable.Tile;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,30 +12,21 @@ public class TrappedAmberChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 11;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 11);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<AmberChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<AmberChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedAmethystChest : ModItem
@@ -46,30 +36,21 @@ public class TrappedAmethystChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 12;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 12);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<AmethystChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<AmethystChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedDiamondChest : ModItem
@@ -79,30 +60,21 @@ public class TrappedDiamondChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 13;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 13);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<DiamondChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<DiamondChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedEmeraldChest : ModItem
@@ -112,30 +84,21 @@ public class TrappedEmeraldChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 14;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 14);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<EmeraldChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<EmeraldChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedPeridotChest : ModItem
@@ -145,30 +108,21 @@ public class TrappedPeridotChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 15;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 15);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<PeridotChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<PeridotChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedRubyChest : ModItem
@@ -178,30 +132,21 @@ public class TrappedRubyChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 16;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 16);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<RubyChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<RubyChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedSapphireChest : ModItem
@@ -211,30 +156,21 @@ public class TrappedSapphireChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 17;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 17);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<SapphireChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<SapphireChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedTopazChest : ModItem
@@ -244,30 +180,21 @@ public class TrappedTopazChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 18;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 18);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<TopazChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<TopazChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedTourmalineChest : ModItem
@@ -277,30 +204,21 @@ public class TrappedTourmalineChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 19;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 19);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<TourmalineChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<TourmalineChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }
 
 public class TrappedZirconChest : ModItem
@@ -310,28 +228,19 @@ public class TrappedZirconChest : ModItem
 		ItemID.Sets.TrapSigned[Type] = true;
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.TrappedChests>();
-        Item.placeStyle = 20;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 20);
+		Item.width = 26;
+		Item.height = 22;
+		Item.value = Item.sellPrice(silver: 1);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<ZirconChest>())
-            .AddIngredient(ItemID.Wire, 10)
-            .AddTile(TileID.HeavyWorkBench)
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<ZirconChest>())
+			.AddIngredient(ItemID.Wire, 10)
+			.AddTile(TileID.HeavyWorkBench)
 			.Register();
-    }
+	}
 }

@@ -1,12 +1,8 @@
-using Avalon.Common;
 using Avalon.Items.Material;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.IO;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace Avalon.ModSupport.Ophioid.Items
 {
@@ -33,7 +29,7 @@ namespace Avalon.ModSupport.Ophioid.Items
 	}
 
 	[ExtendsFromMod("OphioidMod")]
-	class CreepingColony : ModItem
+	public class CreepingColony : ModItem
 	{
 		public override void SetStaticDefaults()
 		{

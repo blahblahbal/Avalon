@@ -17,12 +17,9 @@ public class Pathogen : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
+		Item.DefaultToMisc();
 		Item.rare = ItemRarityID.Orange;
-		Item.width = dims.Width;
-		Item.maxStack = 9999;
-		Item.value = 4500;
-		Item.height = dims.Height;
+		Item.value = Item.sellPrice(0, 0, 9);
 	}
 
 	public override Color? GetAlpha(Color lightColor)

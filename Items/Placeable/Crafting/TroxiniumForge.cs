@@ -1,5 +1,5 @@
 using Avalon.Items.Material.OreChunks;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,28 +7,20 @@ namespace Avalon.Items.Placeable.Crafting;
 
 public class TroxiniumForge : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.useTurn = true;
-        Item.maxStack = 9999;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.TroxiniumForge>();
-        Item.rare = ItemRarityID.Pink;
-        Item.width = dims.Width;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = 50000;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Ores.TroxiniumOre>(), 30)
-            .AddIngredient(ItemID.Hellforge)
-            .AddTile(TileID.MythrilAnvil)
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.TroxiniumForge>());
+		Item.width = 44;
+		Item.height = 30;
+		Item.rare = ItemRarityID.Orange;
+		Item.value = Item.sellPrice(0, 1);
+	}
+	public override void AddRecipes()
+	{
+		Terraria.Recipe.Create(Type)
+			.AddIngredient(ModContent.ItemType<Material.Ores.TroxiniumOre>(), 30)
+			.AddIngredient(ItemID.Hellforge)
+			.AddTile(TileID.MythrilAnvil)
 			.SortAfterFirstRecipesOf(ItemID.AdamantiteForge)
 			.Register();
 
@@ -38,5 +30,5 @@ public class TroxiniumForge : ModItem
 			.AddTile(TileID.MythrilAnvil)
 			.SortAfterFirstRecipesOf(Type)
 			.Register();
-    }
+	}
 }

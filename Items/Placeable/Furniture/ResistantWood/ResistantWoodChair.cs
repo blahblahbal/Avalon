@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,30 +6,23 @@ namespace Avalon.Items.Placeable.Furniture.ResistantWood;
 
 public class ResistantWoodChair : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        ItemID.Sets.IsLavaImmuneRegardlessOfRarity[Type] = true;
-    }
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.IsLavaImmuneRegardlessOfRarity[Type] = true;
+	}
 
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChair>();
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodChair>());
+		Item.width = 12;
+		Item.height = 30;
+		Item.value = Item.sellPrice(copper: 30);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 4)
-            .AddTile(TileID.WorkBenches).Register();
-    }
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 4)
+			.AddTile(TileID.WorkBenches).Register();
+	}
 }

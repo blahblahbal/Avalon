@@ -7,19 +7,17 @@ namespace Avalon.Items.Pets;
 
 public class PetriDish : ModItem
 {
-    public override void UseStyle(Player player, Rectangle heldItemFrame)
-    {
-        if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
-        {
-            player.AddBuff(Item.buffType, 3600);
-        }
-    }
-    public override void SetDefaults()
-    {
-        Item.CloneDefaults(ItemID.WispinaBottle);
-        Item.rare = ItemRarityID.Master;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Pets.BacteriumPet>();
-        Item.buffType = ModContent.BuffType<Buffs.Pets.Bacterium>();
-        Item.value = Item.sellPrice(0, 1, 50);
-    }
+	public override void UseStyle(Player player, Rectangle heldItemFrame)
+	{
+		if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
+		{
+			player.AddBuff(Item.buffType, 3600);
+		}
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToVanitypet(ModContent.ProjectileType<Projectiles.Pets.BacteriumPet>(), ModContent.BuffType<Buffs.Pets.Bacterium>());
+		Item.rare = ItemRarityID.Master;
+		Item.value = Item.sellPrice(0, 1, 50);
+	}
 }

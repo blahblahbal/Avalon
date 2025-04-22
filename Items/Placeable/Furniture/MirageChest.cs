@@ -1,14 +1,12 @@
+using Avalon.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
-using Terraria;
-using Terraria.ModLoader;
-using Avalon.Data.Sets;
-using Terraria.ID;
-using Avalon.Tiles;
 using ReLogic.Content;
-using Avalon.Common.Players;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture
 {
@@ -23,17 +21,10 @@ namespace Avalon.Items.Placeable.Furniture
 
 		public override void SetDefaults()
 		{
-			Item.useStyle = 1;
-			Item.useTurn = true;
-			Item.useAnimation = 15;
-			Item.useTime = 10;
-			Item.autoReuse = true;
-			Item.maxStack = Terraria.Item.CommonMaxStack;
-			Item.consumable = true;
-			Item.createTile = ModContent.TileType<AngelChest>();
+			Item.DefaultToPlaceableTile(ModContent.TileType<AngelChest>());
 			Item.width = 26;
 			Item.height = 22;
-			Item.value = 500;
+			Item.value = Item.sellPrice(silver: 1);
 		}
 
 		public override void HoldItem(Player player)
@@ -54,7 +45,7 @@ namespace Avalon.Items.Placeable.Furniture
 			Vector2 vector2 = new((float)(Item.width / 2) - vector.X, (float)(Item.height - frame.Height));
 			Vector2 vector3 = Item.position - Main.screenPosition + vector + vector2;
 			spriteBatch.Draw(texture, vector3, (Rectangle?)frame, alphaColor, rotation, vector, scale, (SpriteEffects)0, 0f);
-			
+
 			Vector2 vector4 = new Vector2(-4f, -4f) * scale;
 			Texture2D value = ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/AngelIcon", AssetRequestMode.ImmediateLoad).Value;
 			Rectangle rectangle = value.Frame();

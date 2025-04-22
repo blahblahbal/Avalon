@@ -2,6 +2,7 @@ using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Ammo;
+using Avalon.Items.Material;
 using Avalon.Items.Material.Ores;
 using Avalon.Tiles;
 using Microsoft.Xna.Framework;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -904,7 +906,7 @@ public static class ClassExtensions
 	/// Specifically: <code>
 	/// width = 26;
 	/// height = 26;
-	/// ammo = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="RhotukaSpinner"/>)
+	/// ammo = <see cref="ModContent.ItemType"/>; (Where <typeparamref name="T"/> is <see cref="RhotukaSpinner"/>)
 	/// DamageType = <see cref="DamageClass.Ranged"/>;
 	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// damage = <paramref name="damage"/>;
@@ -1097,6 +1099,38 @@ public static class ClassExtensions
 		item.useStyle = ItemUseStyleID.HoldUp;
 	}
 	/// <summary>
+	/// This method sets a variety of Item values common to useable items.<br/>
+	/// Specifically:<code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// autoReuse = true;
+	/// useTurn = true;
+	/// consumable = <paramref name="consumable"/>;
+	/// useAnimation = <paramref name="useAnim"/>;
+	/// useTime = <paramref name="useTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="consumable"></param>
+	/// <param name="useAnim"></param>
+	/// <param name="useTime"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	public static void DefaultToUseable(this Item item, bool consumable = true, int useAnim = 15, int useTime = 15, int width = 20, int height = 20)
+	{
+		item.width = width;
+		item.height = height;
+		item.maxStack = Item.CommonMaxStack;
+		item.autoReuse = true;
+		item.useTurn = true;
+		item.consumable = consumable;
+		item.useAnimation = useAnim;
+		item.useTime = useTime;
+		item.useStyle = ItemUseStyleID.Swing;
+	}
+	/// <summary>
 	/// This method sets a variety of Item values common to fish items.<br/>
 	/// Specifically:<code>
 	/// width = 26;
@@ -1183,17 +1217,16 @@ public static class ClassExtensions
 		item.value = Item.sellPrice(0, 0, tier2 ? 12 : 6);
 	}
 	/// <summary>
-	/// This method sets a variety of Item values common to shard items.<br/>
+	/// This method sets a variety of Item values common to tome material items.<br/>
 	/// Specifically:<code>
 	/// width = 16;
 	/// height = 20;
 	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// value = 10 silver;<br/>
-	/// <see cref="Item.GetGlobalItem{}"/>.TomeMaterial = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// <see cref="Item.GetGlobalItem"/>.TomeMaterial = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
 	/// </code>
 	/// </summary>
 	/// <param name="item"></param>
-	/// <param name="tileStyleToPlace"></param>
 	public static void DefaultToTomeMaterial(this Item item)
 	{
 		item.width = 16;
@@ -1201,6 +1234,72 @@ public static class ClassExtensions
 		item.maxStack = Item.CommonMaxStack;
 		item.value = Item.sellPrice(0, 0, 2);
 		item.GetGlobalItem<AvalonGlobalItemInstance>().TomeMaterial = true;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to stamina scroll items.<br/>
+	/// Specifically:<code>
+	/// width = 20;
+	/// height = 20;
+	/// accessory = true;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// rare = <see cref="ItemRarityID.Green"/>;
+	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
+	/// UseSound = new <see cref="SoundStyle"/>("Avalon/Sounds/Item/Scroll");<br></br>
+	/// <see cref="Item.GetGlobalItem"/>.StaminaScroll = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	public static void DefaultToStaminaScroll(this Item item)
+	{
+		item.CloneDefaults(ModContent.ItemType<BlankScroll>());
+		item.accessory = true;
+		item.rare = ItemRarityID.Green;
+		item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to miscellaneous items.<br/>
+	/// Specifically:<code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	public static void DefaultToMisc(this Item item, int width = 16, int height = 16)
+	{
+		item.width = width;
+		item.height = height;
+		item.maxStack = Item.CommonMaxStack;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to genie items. (Genies are planned to be pet-like, hence all the redundant values being set)<br/>
+	/// Specifically:<code>
+	/// width = 16;
+	/// height = 30;
+	/// accessory = true;
+	/// damage = 0
+	/// noMelee = true;
+	/// useAnimation = 20;
+	/// useTime = 20;
+	/// buffType = 0;
+	/// shoot = 0;
+	/// rare = <see cref="ItemRarityID.Green"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// UseSound = <see cref="SoundID.Item2"/>;
+	/// value = 20 gold;<br/>
+	/// <see cref="Item.GetGlobalItem"/>.Genie = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	public static void DefaultToGenie(this Item item)
+	{
+		item.DefaultToVanitypet(0, 0);
+		item.accessory = true;
+		item.rare = ItemRarityID.Green;
+		item.value = Item.buyPrice(0, 20);
+		item.GetGlobalItem<AvalonGlobalItemInstance>().Genie = true;
 	}
 	#endregion Item DefaultToX() methods
 }

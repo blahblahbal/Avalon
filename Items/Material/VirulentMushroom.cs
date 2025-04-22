@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,10 +16,7 @@ public class VirulentMushroom : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.width = dims.Width;
-		Item.maxStack = 9999;
-		Item.value = 50;
-		Item.height = dims.Height;
+		Item.DefaultToMisc(14, 22);
+		Item.value = Item.sellPrice(copper: 10);
 	}
 }

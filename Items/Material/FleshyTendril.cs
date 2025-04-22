@@ -1,22 +1,19 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Material;
 
 public class FleshyTendril : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        //DisplayName.SetDefault("Fleshy Tendril");
-        Item.ResearchUnlockCount = 25;
-    }
+	public override void SetStaticDefaults()
+	{
+		//DisplayName.SetDefault("Fleshy Tendril");
+		Item.ResearchUnlockCount = 25;
+	}
 
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.width = dims.Width;
-        Item.value = 50;
-        Item.maxStack = 9999;
-        Item.height = dims.Height;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToMisc();
+		Item.value = Item.sellPrice(0, 0, 0, 10);
+	}
 }

@@ -1,7 +1,5 @@
-using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria;
-using Avalon.Common;
+using Terraria.ModLoader;
 
 namespace Avalon.Items.Other
 {
@@ -10,11 +8,8 @@ namespace Avalon.Items.Other
 		public override void SetDefaults()
 		{
 			Item.paintCoating = Data.Sets.AvalonCoatingsID.ActuatorCoating;
-			Item.width = 24;
-			Item.height = 24;
+			Item.DefaultToMisc(24, 24);
 			Item.value = Item.buyPrice(0, 0, 2);
-			Item.buyPrice(silver: 2);
-			Item.maxStack = Item.CommonMaxStack;
 		}
 	}
 }
