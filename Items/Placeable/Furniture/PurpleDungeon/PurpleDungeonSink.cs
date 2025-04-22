@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,27 +6,19 @@ namespace Avalon.Items.Placeable.Furniture.PurpleDungeon;
 
 public class PurpleDungeonSink : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.PurpleDungeon.PurpleDungeonSink>();
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 300;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.PurpleDungeon.PurpleDungeonSink>());
+		Item.width = 20;
+		Item.height = 20;
+		Item.value = Item.sellPrice(copper: 60);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<Tile.PurpleBrick>(), 6)
-            .AddIngredient(ItemID.WaterBucket)
-            .AddTile(TileID.WorkBenches).Register();
-    }
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<Tile.PurpleBrick>(), 6)
+			.AddIngredient(ItemID.WaterBucket)
+			.AddTile(TileID.WorkBenches).Register();
+	}
 }

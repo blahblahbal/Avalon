@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,27 +6,19 @@ namespace Avalon.Items.Placeable.Furniture.OrangeDungeon;
 
 public class OrangeDungeonLamp : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.OrangeDungeon.OrangeDungeonLamp>();
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 500;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        CreateRecipe(1)
-            .AddIngredient(ItemID.Torch)
-            .AddIngredient(ModContent.ItemType<Tile.OrangeBrick>(), 3)
-            .AddTile(TileID.BoneWelder)
-            .Register();
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.OrangeDungeon.OrangeDungeonLamp>());
+		Item.width = 10;
+		Item.height = 24;
+		Item.value = Item.sellPrice(silver: 1);
+	}
+	public override void AddRecipes()
+	{
+		CreateRecipe(1)
+			.AddIngredient(ItemID.Torch)
+			.AddIngredient(ModContent.ItemType<Tile.OrangeBrick>(), 3)
+			.AddTile(TileID.BoneWelder)
+			.Register();
+	}
 }

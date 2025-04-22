@@ -1,5 +1,5 @@
 using Avalon.Items.Material;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,39 +7,31 @@ namespace Avalon.Items.Placeable.Furniture.WildMushroom;
 
 public class WildMushroomChair : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.WildMushroom.WildMushroomChair>();
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 200;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
-            .AddIngredient(ItemID.VileMushroom)
-            .AddTile(TileID.WorkBenches)
-            .Register();
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.WildMushroom.WildMushroomChair>());
+		Item.width = 12;
+		Item.height = 30;
+		Item.value = Item.sellPrice(copper: 30);
+	}
+	public override void AddRecipes()
+	{
+		CreateRecipe(1)
+			.AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
+			.AddIngredient(ItemID.VileMushroom)
+			.AddTile(TileID.WorkBenches)
+			.Register();
 
-        CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
-            .AddIngredient(ItemID.ViciousMushroom)
-            .AddTile(TileID.WorkBenches)
-            .Register();
+		CreateRecipe(1)
+			.AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
+			.AddIngredient(ItemID.ViciousMushroom)
+			.AddTile(TileID.WorkBenches)
+			.Register();
 
-        CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
-            .AddIngredient(ModContent.ItemType<VirulentMushroom>())
-            .AddTile(TileID.WorkBenches)
-            .Register();
-    }
+		CreateRecipe(1)
+			.AddIngredient(ModContent.ItemType<Material.WildMushroom>(), 4)
+			.AddIngredient(ModContent.ItemType<VirulentMushroom>())
+			.AddTile(TileID.WorkBenches)
+			.Register();
+	}
 }

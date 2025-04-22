@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,27 +6,20 @@ namespace Avalon.Items.Placeable.Furniture;
 
 public class BismuthChandelier : ModItem
 {
-    public override void SetDefaults()
-    {
-        Item.width = 26;
-        Item.height = 26;
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.BismuthChandelier>();
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 30000;
-        Item.useAnimation = 15;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.BismuthChandelier>());
+		Item.width = 26;
+		Item.height = 26;
+		Item.value = Item.sellPrice(silver: 60);
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-            .AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>(), 4)
-            .AddIngredient(ItemID.Torch, 4)
-            .AddIngredient(ItemID.Chain)
-            .AddTile(TileID.Anvils).Register();
-    }
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<Material.Bars.BismuthBar>(), 4)
+			.AddIngredient(ItemID.Torch, 4)
+			.AddIngredient(ItemID.Chain)
+			.AddTile(TileID.Anvils).Register();
+	}
 }

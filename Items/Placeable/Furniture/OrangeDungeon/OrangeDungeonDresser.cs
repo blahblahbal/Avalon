@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,26 +6,18 @@ namespace Avalon.Items.Placeable.Furniture.OrangeDungeon;
 
 public class OrangeDungeonDresser : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Furniture.OrangeDungeon.OrangeDungeonDresser>();
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.value = 300;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        CreateRecipe(1)
-            .AddIngredient(ModContent.ItemType<Tile.OrangeBrick>(), 16)
-            .AddTile(TileID.BoneWelder)
-            .Register();
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.OrangeDungeon.OrangeDungeonDresser>());
+		Item.width = 20;
+		Item.height = 20;
+		Item.value = Item.sellPrice(copper: 60);
+	}
+	public override void AddRecipes()
+	{
+		CreateRecipe(1)
+			.AddIngredient(ModContent.ItemType<Tile.OrangeBrick>(), 16)
+			.AddTile(TileID.BoneWelder)
+			.Register();
+	}
 }
