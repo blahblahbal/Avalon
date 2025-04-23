@@ -940,7 +940,7 @@ public static class ClassExtensions
 	/// Specifically: <code>
 	/// width = 10;
 	/// height = 12;
-	/// ammo = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="Canister"/>)
+	/// ammo = <see cref="ModContent.ItemType"/>; (Where <typeparamref name="T"/> is <see cref="Canister"/>)
 	/// DamageType = <see cref="DamageClass.Ranged"/>;
 	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// damage = <paramref name="damage"/>;
@@ -986,7 +986,7 @@ public static class ClassExtensions
 	/// <summary>
 	/// This method sets a variety of Item values common to monster banner items.<br/>
 	/// Specifically:<code>
-	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="MonsterBanner"/>)
+	/// createTile = <see cref="ModContent.TileType"/>; (Where <typeparamref name="T"/> is <see cref="MonsterBanner"/>)
 	/// placeStyle = <paramref name="tileStyleToPlace"/>;
 	/// width = 10;
 	/// height = 24;
@@ -1150,7 +1150,7 @@ public static class ClassExtensions
 	/// <summary>
 	/// This method sets a variety of Item values common to bar items.<br/>
 	/// Specifically:<code>
-	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="PlacedBars"/>)
+	/// createTile = <see cref="ModContent.TileType"/>; (Where <typeparamref name="T"/> is <see cref="PlacedBars"/>)
 	/// placeStyle = <paramref name="tileStyleToPlace"/>;
 	/// width = 20;
 	/// height = 20;
@@ -1191,7 +1191,7 @@ public static class ClassExtensions
 	/// <summary>
 	/// This method sets a variety of Item values common to shard items.<br/>
 	/// Specifically:<code>
-	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <paramref name="tier2"/> ? <see cref="ShardsTier2"/> : <see cref="Shards"/>)
+	/// createTile = <see cref="ModContent.TileType"/>; (Where <typeparamref name="T"/> is <paramref name="tier2"/> ? <see cref="ShardsTier2"/> : <see cref="Shards"/>)
 	/// placeStyle = <paramref name="tileStyleToPlace"/>;
 	/// width = 20;
 	/// height = 20;
@@ -1215,6 +1215,33 @@ public static class ClassExtensions
 		item.height = 20;
 		item.rare = tier2 ? ItemRarityID.Lime : ItemRarityID.Green;
 		item.value = Item.sellPrice(0, 0, tier2 ? 12 : 6);
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to painting items.<br/>
+	/// Specifically:<code>
+	/// createTile = <paramref name="tileIDToPlace"/>;
+	/// placeStyle = <paramref name="tileStyleToPlace"/>;
+	/// width = 30;
+	/// height = 30;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// useAnimation = 15;
+	/// useTime = 10;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// useTurn = true;
+	/// autoReuse = true;
+	/// consumable = true;
+	/// value = 50 silver;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="tileIDToPlace"></param>
+	/// <param name="tileStyleToPlace"></param>
+	public static void DefaultToPainting(this Item item, int tileIDToPlace, int tileStyleToPlace)
+	{
+		item.DefaultToPlaceableTile(tileIDToPlace, tileStyleToPlace);
+		item.width = 30;
+		item.height = 30;
+		item.value = Item.sellPrice(0, 0, 10);
 	}
 	/// <summary>
 	/// This method sets a variety of Item values common to tome material items.<br/>
@@ -1241,7 +1268,6 @@ public static class ClassExtensions
 	/// width = 20;
 	/// height = 20;
 	/// accessory = true;
-	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// rare = <see cref="ItemRarityID.Green"/>;
 	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
 	/// UseSound = new <see cref="SoundStyle"/>("Avalon/Sounds/Item/Scroll");<br></br>
@@ -1252,6 +1278,7 @@ public static class ClassExtensions
 	public static void DefaultToStaminaScroll(this Item item)
 	{
 		item.CloneDefaults(ModContent.ItemType<BlankScroll>());
+		item.maxStack = 1;
 		item.accessory = true;
 		item.rare = ItemRarityID.Green;
 		item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
@@ -1300,6 +1327,91 @@ public static class ClassExtensions
 		item.rare = ItemRarityID.Green;
 		item.value = Item.buyPrice(0, 20);
 		item.GetGlobalItem<AvalonGlobalItemInstance>().Genie = true;
+	}
+	public enum PotionCorkType : int
+	{
+		None = ItemRarityID.White,
+		Default = ItemRarityID.Blue,
+		Obsidian = ItemRarityID.Green,
+		Elixir = ItemRarityID.Lime
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to buff potion items.<br/>
+	/// Specifically: <code>
+	/// width = 14;
+	/// height = 24;
+	/// UseSound = <see cref="SoundID.Item3"/>;
+	/// useStyle = <see cref="ItemUseStyleID.DrinkLiquid"/>;
+	/// useTurn = true;
+	/// useAnimation = 17;
+	/// useTime = 17;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// consumable = true;
+	/// buffType = <paramref name="buffType"/>;
+	/// buffTime = <paramref name="buffDuration"/>;
+	/// rare = (<see cref="int"/>)<paramref name="cork"/>;
+	/// if (<paramref name="cork"/> == <see cref="PotionCorkType.None"/>) value = 0;
+	/// if (<paramref name="cork"/> == <see cref="PotionCorkType.Default"/>) value = 10 silver;
+	/// if (<paramref name="cork"/> == <see cref="PotionCorkType.Obsidian"/>) value = 20 silver;
+	/// if (<paramref name="cork"/> == <see cref="PotionCorkType.Elixir"/>) value = 50 silver;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="buffType"></param>
+	/// <param name="buffDuration"></param>
+	/// <param name="cork"></param>
+	public static void DefaultToBuffPotion(this Item item, int buffType, int buffDuration, PotionCorkType cork = PotionCorkType.Default)
+	{
+		item.width = 14;
+		item.height = 24;
+		item.UseSound = SoundID.Item3;
+		item.useStyle = ItemUseStyleID.DrinkLiquid;
+		item.useTurn = true;
+		item.useAnimation = 17;
+		item.useTime = 17;
+		item.maxStack = Item.CommonMaxStack;
+		item.consumable = true;
+		item.buffType = buffType;
+		item.buffTime = buffDuration;
+		item.rare = (int)cork;
+		item.value = cork switch
+		{
+			PotionCorkType.None => 0,
+			PotionCorkType.Default => Item.sellPrice(silver: 2),
+			PotionCorkType.Obsidian => Item.sellPrice(silver: 4),
+			PotionCorkType.Elixir => Item.sellPrice(silver: 10),
+			_ => 0,
+		};
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to buff potion items.<br/>
+	/// Specifically: <code>
+	/// width = 14;
+	/// height = 24;
+	/// UseSound = <see cref="SoundID.Item3"/>;
+	/// useStyle = <see cref="ItemUseStyleID.DrinkLiquid"/>;
+	/// useTurn = true;
+	/// useAnimation = 17;
+	/// useTime = 17;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// consumable = true;<br></br>
+	/// <see cref="Item.GetGlobalItem"/>.HealStamina = <paramref name="staminaAmount"/>; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="staminaAmount"></param>
+	public static void DefaultToStaminaPotion(this Item item, int staminaAmount)
+	{
+		item.width = 14;
+		item.height = 24;
+		item.UseSound = SoundID.Item3;
+		item.useStyle = ItemUseStyleID.DrinkLiquid;
+		item.useTurn = true;
+		item.useAnimation = 17;
+		item.useTime = 17;
+		item.maxStack = Item.CommonMaxStack;
+		item.consumable = true;
+		item.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina = staminaAmount;
 	}
 	#endregion Item DefaultToX() methods
 }

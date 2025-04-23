@@ -9,33 +9,26 @@ namespace Avalon.Items.Potions.Buff;
 
 public class InvincibilityPotion : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 20;
-        ItemID.Sets.DrinkParticleColors[Type] = new Color[2] { Color.Indigo, Color.Purple };
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 20;
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(122, 15, 250),
+			new Color(146, 60, 250),
+			new Color(177, 120, 250)
+		];
+	}
 
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        //item.buffType = ModContent.BuffType<Buffs.Invincibility>();
-        Item.consumable = true;
-        Item.rare = ItemRarityID.Green;
-        Item.width = dims.Width;
-        Item.useTime = 17;
-        Item.useStyle = ItemUseStyleID.DrinkLiquid;
-        Item.maxStack = 9999;
-        Item.useAnimation = 17;
-        Item.height = dims.Height;
-        Item.potion = true;
-        Item.UseSound = SoundID.Item3;
-        //Item.potionDelay = 60 * 30;
-        Item.healLife = 25;
-    }
-    public override bool? UseItem(Player player)
-    {
-        player.immune = true;
-        player.immuneTime = (int)(80 * (player.GetModPlayer<AvalonPlayer>().ThePill ? ThePill.LifeBonusAmount : 1));
-        return base.UseItem(player);
-    }
+	public override void SetDefaults()
+	{
+		//item.buffType = ModContent.BuffType<Buffs.Invincibility>();
+		Item.DefaultToHealingPotion(14, 24, 25);
+		//Item.potionDelay = 60 * 30;
+	}
+	public override bool? UseItem(Player player)
+	{
+		player.immune = true;
+		player.immuneTime = (int)(80 * (player.GetModPlayer<AvalonPlayer>().ThePill ? ThePill.LifeBonusAmount : 1));
+		return base.UseItem(player);
+	}
 }

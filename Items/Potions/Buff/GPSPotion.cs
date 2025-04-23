@@ -11,28 +11,16 @@ public class GPSPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[2]
-		{
-			Color.Red,
-			Color.Blue
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(152, 152, 152),
+			new Color(81, 136, 246),
+			new Color(255, 148, 148)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.GPS>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Blue;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.value = 2000;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(5);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.GPS>(), TimeUtils.MinutesToTicks(5));
 	}
 	public override void AddRecipes()
 	{

@@ -11259,17 +11259,17 @@ Mods: {
 
 			Toxic: {
 				DisplayName: Toxic
-				Description: Mods.Avalon.Buffs.Toxic.Description
+				Description: Losing life
 			}
 
 			SilenceCandleBuff: {
-				DisplayName: Silence Candle Buff
-				Description: Mods.Avalon.Buffs.SilenceCandleBuff.Description
+				DisplayName: Silence Candle
+				Description: Monster spawns disabled
 			}
 
 			ShroomiteFullbright: {
 				DisplayName: Shroomite Fullbright
-				Description: Mods.Avalon.Buffs.ShroomiteFullbright.Description
+				Description: You have been revealed
 			}
 		}
 

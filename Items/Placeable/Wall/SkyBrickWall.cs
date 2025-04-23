@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,28 +5,18 @@ namespace Avalon.Items.Placeable.Wall;
 
 public class SkyBrickWall : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 400;
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 400;
+	}
 
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 7;
-        Item.createWall = ModContent.WallType<Walls.SkyBrickWallUnsafe>();
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.SkyBrick>()).AddTile(TileID.WorkBenches).Register();
-        CreateRecipe(1).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableWall(ModContent.WallType<Walls.SkyBrickWallUnsafe>());
+	}
+	public override void AddRecipes()
+	{
+		CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.SkyBrick>()).AddTile(TileID.WorkBenches).Register();
+		CreateRecipe(1).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+	}
 }

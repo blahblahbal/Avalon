@@ -11,23 +11,15 @@ public class AdvLeapingPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 30;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[1] { Color.DarkOrange };
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(137, 93, 13),
+			new Color(198, 137, 23),
+			new Color(246, 172, 34)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.AdvancedBuffs.AdvLeaping>();
-		Item.UseSound = SoundID.Item3;
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Lime;
-		Item.width = dims.Width;
-		Item.useTime = 15;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.value = Item.sellPrice(0, 0, 4, 0);
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(12);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.AdvancedBuffs.AdvLeaping>(), TimeUtils.MinutesToTicks(12), ClassExtensions.PotionCorkType.Elixir);
 	}
 }

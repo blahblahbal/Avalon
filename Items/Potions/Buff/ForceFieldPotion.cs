@@ -1,7 +1,4 @@
 using Avalon.Common;
-using Avalon.Items.Material;
-using Avalon.Items.Material.Herbs;
-using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -14,26 +11,16 @@ public class ForceFieldPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[2] {
-			Color.Orange,
-			Color.Goldenrod
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(137, 93, 13),
+			new Color(198, 137, 23),
+			new Color(246, 172, 34)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.ForceField>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.LightRed;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(5);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.ForceField>(), TimeUtils.MinutesToTicks(5), ClassExtensions.PotionCorkType.Obsidian);
 	}
 
 	//public override void AddRecipes()

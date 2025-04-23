@@ -1,6 +1,5 @@
 using Avalon.Common;
-using Microsoft.Xna.Framework;
-using Terraria.ID;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Tile.LargeHerbs;
@@ -9,23 +8,15 @@ public class LargeDeathweed : ModItem
 {
 	public override string Texture => ModContent.GetInstance<AvalonConfig>().VanillaTextureReplacement ? $"Avalon/Items/Placeable/Tile/LargeHerbs/{Name}_Alt" : base.Texture;
 	public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 15;
-    }
+	{
+		Item.ResearchUnlockCount = 15;
+	}
 
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.createTile = ModContent.TileType<Tiles.Herbs.LargeHerbsStage4>();
-        Item.placeStyle = 3;
-        Item.width = dims.Width;
-        Item.useTurn = true;
-        Item.useTime = 10;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.useAnimation = 15;
-        Item.height = dims.Height;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Herbs.LargeHerbsStage4>(), 3);
+		Item.width = 10;
+		Item.height = 24;
+		Item.value = Item.sellPrice(copper: 60);
+	}
 }

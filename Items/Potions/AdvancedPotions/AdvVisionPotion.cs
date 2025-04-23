@@ -9,27 +9,16 @@ public class AdvVisionPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{
-		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[1]
-		{
-			Color.Green
-		};
+		Item.ResearchUnlockCount = 30;
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(22, 90, 75),
+			new Color(94, 163, 99),
+			new Color(176, 247, 126)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.AdvancedBuffs.AdvVision>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Green;
-		Item.width = dims.Width;
-		Item.useTime = 15;
-		Item.value = 2000;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(8);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.AdvancedBuffs.AdvVision>(), TimeUtils.MinutesToTicks(8), ClassExtensions.PotionCorkType.Elixir);
 	}
 }

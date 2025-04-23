@@ -10,26 +10,16 @@ public class RoguePotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[1]
-		{
-			Color.Red
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(99, 11, 9),
+			new Color(184, 16, 12),
+			new Color(255, 99, 95)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.Rogue>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Orange;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.TimeToTicks(0, 0, 4, 30);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Rogue>(), TimeUtils.TimeToTicks(0, 0, 4, 30), ClassExtensions.PotionCorkType.Obsidian);
 	}
 	public override void AddRecipes()
 	{

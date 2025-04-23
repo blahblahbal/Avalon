@@ -11,23 +11,16 @@ public class AdvShockwavePotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 30;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[2] { Color.Brown, Color.Green };
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(91, 54, 36),
+			new Color(192, 128, 97),
+
+			new Color(59, 114, 32)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.AdvancedBuffs.AdvShockwave>();
-		Item.UseSound = SoundID.Item3;
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Lime;
-		Item.width = dims.Width;
-		Item.useTime = 15;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.value = Item.sellPrice(0, 0, 4, 0);
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(14);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.AdvancedBuffs.AdvShockwave>(), TimeUtils.MinutesToTicks(14), ClassExtensions.PotionCorkType.Elixir);
 	}
 }

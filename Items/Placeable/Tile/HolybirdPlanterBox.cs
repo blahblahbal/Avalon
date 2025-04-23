@@ -5,15 +5,15 @@ namespace Avalon.Items.Placeable.Tile;
 
 public class HolybirdPlanterBox : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 25;
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 25;
+	}
 
-    public override void SetDefaults()
-    {
-        Item.CloneDefaults(ItemID.BlinkrootPlanterBox);
-        Item.createTile = ModContent.TileType<Tiles.Herbs.HolybirdPlanterBox>();
-        Item.placeStyle = 0;
-    }
+	public override void SetDefaults()
+	{
+		Item.CloneDefaults(ItemID.BlinkrootPlanterBox);
+		Item.createTile = ModContent.TileType<Tiles.Herbs.HolybirdPlanterBox>();
+		Item.placeStyle = 0;
+	}
 }

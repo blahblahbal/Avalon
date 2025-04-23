@@ -1,4 +1,3 @@
-using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -12,7 +11,11 @@ public class StaminaPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 30;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[1] { Color.Green };
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(29, 112, 37),
+			new Color(30, 133, 39),
+			new Color(98, 189, 106)
+		];
 	}
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{
@@ -20,19 +23,9 @@ public class StaminaPotion : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Green;
-		Item.width = dims.Width;
-		Item.useTurn = true;
-		Item.useTime = 17;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina = 55;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.value = 900;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToStaminaPotion(55);
+		Item.rare = ItemRarityID.Blue;
+		Item.value = Item.sellPrice(silver: 1);
 	}
 	public override void AddRecipes()
 	{

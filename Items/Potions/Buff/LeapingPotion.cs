@@ -10,27 +10,16 @@ public class LeapingPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[1]
-		{
-			Color.DarkOrange
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(137, 93, 13),
+			new Color(198, 137, 23),
+			new Color(246, 172, 34)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.Leaping>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Orange;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.value = 2000;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(6);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Leaping>(), TimeUtils.MinutesToTicks(6), ClassExtensions.PotionCorkType.Obsidian);
 	}
 	//public override void AddRecipes()
 	//{

@@ -11,27 +11,16 @@ public class CloverPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[2]
-		{
-			Color.Lime,
-			Color.Yellow
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(68, 84, 16),
+			new Color(109, 157, 32),
+			new Color(203, 229, 87)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.Clover>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Green;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(30);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Clover>(), TimeUtils.MinutesToTicks(30), ClassExtensions.PotionCorkType.Obsidian);
 	}
 
 	public override void AddRecipes()

@@ -11,23 +11,18 @@ public class AdvMagnetPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 30;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[2] { Color.Red, Color.Blue };
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(127, 127, 127),
+			new Color(195, 195, 195),
+			new Color(255, 255, 255),
+
+			new Color(116, 188, 255),
+			new Color(246, 108, 126)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.AdvancedBuffs.AdvMagnet>();
-		Item.UseSound = SoundID.Item3;
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Lime;
-		Item.width = dims.Width;
-		Item.useTime = 15;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.value = Item.sellPrice(0, 0, 4, 0);
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(8);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.AdvancedBuffs.AdvMagnet>(), TimeUtils.MinutesToTicks(8), ClassExtensions.PotionCorkType.Elixir);
 	}
 }
