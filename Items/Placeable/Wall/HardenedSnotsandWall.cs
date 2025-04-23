@@ -1,44 +1,35 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria;
 
 namespace Avalon.Items.Placeable.Wall;
 
 public class HardenedSnotsandWall : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 400;
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 400;
+	}
 
-    public override void SetDefaults()
-    {
-        Item.Size = new Vector2(12);
-        Item.autoReuse = true;
-        Item.consumable = true;
-        Item.useTurn = true;
-        Item.useTime = 7;
-        Item.createWall = ModContent.WallType<Walls.HardenedSnotsandWall>();
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.maxStack = 9999;
-        Item.useAnimation = 15;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPlaceableWall(ModContent.WallType<Walls.HardenedSnotsandWall>());
+	}
 
-    public override void AddRecipes()
-    {
-        CreateRecipe(4)
+	public override void AddRecipes()
+	{
+		CreateRecipe(4)
 			.AddIngredient(ModContent.ItemType<Tile.HardenedSnotsandBlock>())
 			.AddCondition(Condition.InGraveyard)
 			.AddTile(TileID.WorkBenches)
 			.SortAfterFirstRecipesOf(ItemID.CrimsonHardenedSand)
 			.Register();
 
-        Recipe.Create(ModContent.ItemType<Tile.HardenedSnotsandBlock>())
+		Recipe.Create(ModContent.ItemType<Tile.HardenedSnotsandBlock>())
 			.AddIngredient(this, 4)
 			.AddTile(TileID.WorkBenches)
 			.DisableDecraft()
 			.SortAfterFirstRecipesOf(ModContent.ItemType<HardenedSnotsandWall>())
 			.Register();
-    }
+	}
 }

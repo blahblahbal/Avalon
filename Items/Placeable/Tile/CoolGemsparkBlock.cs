@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,17 +14,7 @@ public class CoolGemsparkBlock : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.autoReuse = true;
-		Item.consumable = true;
-		Item.createTile = ModContent.TileType<Tiles.CoolGemsparkBlock>();
-		Item.width = dims.Width;
-		Item.useTurn = true;
-		Item.useTime = 10;
-		Item.useStyle = ItemUseStyleID.Swing;
-		Item.maxStack = 9999;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.CoolGemsparkBlock>());
 	}
 	public override void AddRecipes()
 	{

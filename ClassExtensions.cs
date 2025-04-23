@@ -940,7 +940,7 @@ public static class ClassExtensions
 	/// Specifically: <code>
 	/// width = 10;
 	/// height = 12;
-	/// ammo = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="Canister"/>)
+	/// ammo = <see cref="ModContent.ItemType"/>; (Where <typeparamref name="T"/> is <see cref="Canister"/>)
 	/// DamageType = <see cref="DamageClass.Ranged"/>;
 	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// damage = <paramref name="damage"/>;
@@ -986,7 +986,7 @@ public static class ClassExtensions
 	/// <summary>
 	/// This method sets a variety of Item values common to monster banner items.<br/>
 	/// Specifically:<code>
-	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="MonsterBanner"/>)
+	/// createTile = <see cref="ModContent.TileType"/>; (Where <typeparamref name="T"/> is <see cref="MonsterBanner"/>)
 	/// placeStyle = <paramref name="tileStyleToPlace"/>;
 	/// width = 10;
 	/// height = 24;
@@ -1150,7 +1150,7 @@ public static class ClassExtensions
 	/// <summary>
 	/// This method sets a variety of Item values common to bar items.<br/>
 	/// Specifically:<code>
-	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <see cref="PlacedBars"/>)
+	/// createTile = <see cref="ModContent.TileType"/>; (Where <typeparamref name="T"/> is <see cref="PlacedBars"/>)
 	/// placeStyle = <paramref name="tileStyleToPlace"/>;
 	/// width = 20;
 	/// height = 20;
@@ -1191,7 +1191,7 @@ public static class ClassExtensions
 	/// <summary>
 	/// This method sets a variety of Item values common to shard items.<br/>
 	/// Specifically:<code>
-	/// createTile = <see cref="ModContent.ItemType{}"/>; (Where <typeparamref name="T"/> is <paramref name="tier2"/> ? <see cref="ShardsTier2"/> : <see cref="Shards"/>)
+	/// createTile = <see cref="ModContent.TileType"/>; (Where <typeparamref name="T"/> is <paramref name="tier2"/> ? <see cref="ShardsTier2"/> : <see cref="Shards"/>)
 	/// placeStyle = <paramref name="tileStyleToPlace"/>;
 	/// width = 20;
 	/// height = 20;
@@ -1215,6 +1215,33 @@ public static class ClassExtensions
 		item.height = 20;
 		item.rare = tier2 ? ItemRarityID.Lime : ItemRarityID.Green;
 		item.value = Item.sellPrice(0, 0, tier2 ? 12 : 6);
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to painting items.<br/>
+	/// Specifically:<code>
+	/// createTile = <paramref name="tileIDToPlace"/>;
+	/// placeStyle = <paramref name="tileStyleToPlace"/>;
+	/// width = 30;
+	/// height = 30;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// useAnimation = 15;
+	/// useTime = 10;
+	/// maxStack = <see cref="Item.CommonMaxStack"/>;
+	/// useTurn = true;
+	/// autoReuse = true;
+	/// consumable = true;
+	/// value = 50 silver;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="tileIDToPlace"></param>
+	/// <param name="tileStyleToPlace"></param>
+	public static void DefaultToPainting(this Item item, int tileIDToPlace, int tileStyleToPlace)
+	{
+		item.DefaultToPlaceableTile(tileIDToPlace, tileStyleToPlace);
+		item.width = 30;
+		item.height = 30;
+		item.value = Item.sellPrice(0, 0, 10);
 	}
 	/// <summary>
 	/// This method sets a variety of Item values common to tome material items.<br/>
