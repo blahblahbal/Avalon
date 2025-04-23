@@ -10,26 +10,16 @@ public class TitanskinPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[1]
-		{
-			Color.LightGray
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(74, 74, 74),
+			new Color(135, 135, 135),
+			new Color(217, 217, 217)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.Titanskin>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.LightRed;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(4);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Titanskin>(), TimeUtils.MinutesToTicks(4), ClassExtensions.PotionCorkType.Obsidian);
 	}
 	public override void AddRecipes()
 	{

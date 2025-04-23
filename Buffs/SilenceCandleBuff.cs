@@ -35,7 +35,6 @@ public class SilenceCandleHook : ModHook
 
 	private int On_NPC_NewNPC(On_NPC.orig_NewNPC orig, IEntitySource source, int X, int Y, int Type, int Start, float ai0, float ai1, float ai2, float ai3, int Target)
 	{
-		Main.NewText(SilenceCandleGlobalNPC.NPCSpawnPlayerID);
 		if (SilenceCandleGlobalNPC.NPCSpawnPlayerID != -1 &&
 			Main.player[SilenceCandleGlobalNPC.NPCSpawnPlayerID].active &&
 			!Main.player[SilenceCandleGlobalNPC.NPCSpawnPlayerID].dead &&

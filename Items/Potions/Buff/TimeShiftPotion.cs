@@ -10,27 +10,16 @@ public class TimeShiftPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[1]
-		{
-			Color.Tan
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(78, 42, 35),
+			new Color(158, 113, 86),
+			new Color(234, 199, 138)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.TimeShift>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.LightRed;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.value = 2000;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(9);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.TimeShift>(), TimeUtils.MinutesToTicks(9));
 	}
 	public override void AddRecipes()
 	{

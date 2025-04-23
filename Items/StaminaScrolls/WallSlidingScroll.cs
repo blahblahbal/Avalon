@@ -1,9 +1,5 @@
-using Avalon.Common;
 using Avalon.Common.Players;
-using Avalon.Items.Consumables;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,14 +13,7 @@ public class WallSlidingScroll : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.width = dims.Width;
-		Item.rare = ItemRarityID.Green;
-		Item.useStyle = ItemUseStyleID.HoldUp;
-		Item.UseSound = new SoundStyle("Avalon/Sounds/Item/Scroll");
-		Item.accessory = true;
-		Item.height = dims.Height;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().StaminaScroll = true;
+		Item.DefaultToStaminaScroll();
 	}
 	public override void AddRecipes()
 	{

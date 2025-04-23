@@ -11,23 +11,15 @@ public class AdvLuckPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 30;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[2] { Color.Lime, Color.Yellow };
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(68, 84, 16),
+			new Color(109, 157, 32),
+			new Color(203, 229, 87)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.AdvancedBuffs.AdvLuck>();
-		Item.UseSound = SoundID.Item3;
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Lime;
-		Item.width = dims.Width;
-		Item.useTime = 15;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.value = Item.sellPrice(0, 0, 4, 0);
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.HoursToTicks(1);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.AdvancedBuffs.AdvLuck>(), TimeUtils.HoursToTicks(1), ClassExtensions.PotionCorkType.Elixir);
 	}
 }

@@ -9,12 +9,11 @@ public class BlahPotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[3]
-		{
+		ItemID.Sets.DrinkParticleColors[Type] = [
 			Color.Orange,
 			Color.LightGray,
 			Color.Goldenrod
-		};
+		];
 	}
 	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
 	{
@@ -22,17 +21,9 @@ public class BlahPotion : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.Blah>();
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Blah>(), TimeUtils.HoursToTicks(5), ClassExtensions.PotionCorkType.None);
+		Item.maxStack = 1;
 		Item.consumable = false;
 		Item.rare = ModContent.RarityType<Rarities.BlahRarity>();
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 1;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.HoursToTicks(5);
 	}
 }

@@ -10,27 +10,16 @@ public class StrengthPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[1]
-		{
-			Color.DarkBlue
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(37, 16, 164),
+			new Color(89, 78, 244),
+			new Color(175, 163, 255)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.Strong>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.Orange;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.value = 2000;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(9);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Strong>(), TimeUtils.MinutesToTicks(9), ClassExtensions.PotionCorkType.Obsidian);
 	}
 	public override void AddRecipes()
 	{

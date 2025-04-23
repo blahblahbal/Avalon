@@ -11,10 +11,10 @@ public class FlaskOfPathogens : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] =
-		[
-			Color.Purple,
-			Color.MediumPurple
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(109, 72, 182),
+			new Color(134, 136, 192),
+			new Color(210, 182, 239)
 		];
 	}
 

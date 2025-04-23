@@ -11,26 +11,16 @@ public class GamblerPotion : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 20;
-		ItemID.Sets.DrinkParticleColors[Type] = new Color[2] {
-			Color.Yellow,
-			Color.LightYellow
-		};
+		ItemID.Sets.DrinkParticleColors[Type] = [
+			new Color(137, 126, 13),
+			new Color(198, 184, 23),
+			new Color(246, 229, 34)
+		];
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.buffType = ModContent.BuffType<Buffs.Gambler>();
-		Item.consumable = true;
-		Item.rare = ItemRarityID.LightRed;
-		Item.width = dims.Width;
-		Item.useTime = 17;
-		Item.useStyle = ItemUseStyleID.DrinkLiquid;
-		Item.maxStack = 9999;
-		Item.useAnimation = 17;
-		Item.height = dims.Height;
-		Item.buffTime = TimeUtils.MinutesToTicks(4);
-		Item.UseSound = SoundID.Item3;
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Gambler>(), TimeUtils.MinutesToTicks(4), ClassExtensions.PotionCorkType.Obsidian);
 	}
 	public override void AddRecipes()
 	{
