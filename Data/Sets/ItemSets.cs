@@ -62,7 +62,6 @@ using static Terraria.ModLoader.ModContent;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs;
 using Microsoft.Xna.Framework;
-using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets
 {
@@ -77,6 +76,48 @@ namespace Avalon.Data.Sets
 			ItemID.LunarBar
 		);
 
+		/// <summary>
+		/// Dictionary that holds torch dust types. Used for the Torch Launcher.
+		/// </summary>
+		public static Dictionary<int, int> TorchLauncherDust = new Dictionary<int, int>()
+		{
+			{ ItemID.Torch, -1 },
+			{ ItemID.BlueTorch, -1 },
+			{ ItemID.RedTorch, -1 },
+			{ ItemID.GreenTorch, -1 },
+			{ ItemID.PurpleTorch, -1 },
+			{ ItemID.WhiteTorch, -1 },
+			{ ItemID.YellowTorch, -1 },
+			{ ItemID.DemonTorch, -1 },
+			{ ItemID.CursedTorch, -1 },
+			{ ItemID.IceTorch, -1 },
+			{ ItemID.OrangeTorch, -1 },
+			{ ItemID.IchorTorch, -1 },
+			{ ItemID.UltrabrightTorch, -1 },
+			{ ItemID.BoneTorch, -1 },
+			{ ItemID.RainbowTorch, -1 },
+			{ ItemID.PinkTorch, -1 },
+			{ ItemID.DesertTorch, -1 },
+			{ ItemID.CoralTorch, -1 },
+			{ ItemID.CorruptTorch, -1 },
+			{ ItemID.CrimsonTorch, -1 },
+			{ ItemID.HallowedTorch, -1 },
+			{ ItemID.JungleTorch, -1 },
+			{ ItemID.MushroomTorch, -1 },
+			{ ItemID.ShimmerTorch, -1 },
+			{ ItemType<BrownTorch>(), -1 },
+			{ ItemType<ContagionTorch>(), -1 },
+			{ ItemType<CyanTorch>(), -1 },
+			{ ItemType<LimeTorch>(), -1 },
+			{ ItemType<PathogenTorch>(), -1 },
+			{ ItemType<SavannaTorch>(), -1 },
+			{ ItemType<SlimeTorch>(), -1 },
+			{ ItemType<StarTorch>(), -2 }
+		};
+
+		/// <summary>
+		/// Dictionary that holds torch light colors. Used for the Torch Launcher.
+		/// </summary>
 		public static Dictionary<int, Vector3> TorchLauncherItemToProjColor = new Dictionary<int, Vector3>()
 		{
 			{ ItemID.Torch, new Vector3(1f, 0.95f, 0.8f) },
@@ -1201,7 +1242,7 @@ namespace Avalon.Data.Sets
             //{ 3553, ItemType<RainbowCandyCaneWall>() },
             { 3554, ItemType<NastySpike>() },
             //{ 3555, ItemType<EyesPamphlet>() },
-            { 3556, ItemID.None }, // aqua impact
+            { 3556, ItemType<AquaImpact>() }, // aqua impact
             //{ 3557, ItemType<MissileBolt>() },
             //{ 3558, ItemType<PhantomKnives>() },
             //{ 3559, ItemType<EctoplasmBathtub>() },
@@ -1327,7 +1368,7 @@ namespace Avalon.Data.Sets
             //{ 3679, ItemType<KunziteGemsparkBlock>() },
             //{ 3680, ItemType<EctoplasmWall>() },
             //{ 3681, ItemType<OblivionBrickWall>() },
-            //{ 3682, ItemType<HellstoneBlowpipe>() },
+            { 3682, ItemType<Boompipe>() },
             { 3683,ItemID.RichGravestone1},
 			{ 3684,ItemID.RichGravestone2},
 			{ 3685,ItemID.RichGravestone3},

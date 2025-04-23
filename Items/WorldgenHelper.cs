@@ -114,8 +114,7 @@ class WorldgenHelper : ModItem
 			//Crystals(x, y);
 			//World.Biomes.CrystalMines.Place(new Point(x, y));
 
-			//WorldGeneration.Biomes.Rhyolite.PlaceRhyolite(x, y);
-			//World.Biomes.CrystalMines.PlaceNew(new Point(x, y));
+			World.Biomes.CrystalMines.PlaceNew(new Point(x, y));
 
 			//WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
 
