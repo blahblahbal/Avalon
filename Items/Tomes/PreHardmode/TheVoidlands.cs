@@ -1,6 +1,4 @@
-using Avalon.Common;
 using Avalon.Items.Material.TomeMats;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,13 +13,7 @@ public class TheVoidlands : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Orange;
-		Item.width = dims.Width;
-		Item.value = 105000;
-		Item.height = dims.Height;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 3;
+		Item.DefaultToTome(3);
 	}
 
 	public override void UpdateAccessory(Player player, bool hideVisual)

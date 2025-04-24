@@ -1,6 +1,4 @@
-using Avalon.Common;
 using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,14 +13,8 @@ public class Emperor : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Cyan;
-		Item.width = dims.Width;
-		Item.value = 250000;
-		Item.height = dims.Height;
+		Item.DefaultToTome(7, 2);
 		Item.defense = 14;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 7;
 	}
 
 	public override void UpdateAccessory(Player player, bool hideVisual)

@@ -1,9 +1,7 @@
 using Avalon.Common.Players;
-using Avalon.Common;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ModLoader;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Items.Tomes.Superhardmode;
 
@@ -15,14 +13,9 @@ public class TheWorld : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ModContent.RarityType<Rarities.AvalonRarity>();
-		Item.width = dims.Width;
-		Item.value = 250000;
-		Item.height = dims.Height;
+		Item.DefaultToTome(8, 1);
 		Item.defense = 18;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 8;
+		Item.rare = ModContent.RarityType<Rarities.AvalonRarity>();
 	}
 
 	public override void UpdateAccessory(Player player, bool hideVisual)

@@ -1,11 +1,5 @@
-using Avalon.Common;
-using Avalon.Data.Sets;
 using Avalon.Items.Material.TomeMats;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,13 +13,7 @@ public class TaleoftheRedLotus : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Green;
-		Item.width = dims.Width;
-		Item.value = 5000;
-		Item.height = dims.Height;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 1;
+		Item.DefaultToTome(1, 1);
 	}
 
 	//public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

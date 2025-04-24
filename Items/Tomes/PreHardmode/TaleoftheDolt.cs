@@ -1,5 +1,3 @@
-using Avalon.Common;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,13 +12,7 @@ public class TaleoftheDolt : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Blue;
-		Item.width = dims.Width;
-		Item.value = 15000;
-		Item.height = dims.Height;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 2;
+		Item.DefaultToTome(2, -1);
 	}
 
 	public override void UpdateAccessory(Player player, bool hideVisual)

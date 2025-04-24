@@ -1,4 +1,3 @@
-using Avalon.Common;
 using Avalon.Items.Material.TomeMats;
 using Terraria;
 using Terraria.ID;
@@ -14,11 +13,7 @@ public class MediationsFlame : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.rare = ItemRarityID.Green;
-		Item.Size = new(30);
-		Item.value = 5000;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 1;
+		Item.DefaultToTome(1, 1);
 	}
 
 	public override void UpdateAccessory(Player player, bool hideVisual)

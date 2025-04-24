@@ -1,5 +1,3 @@
-using Avalon.Common;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,14 +12,8 @@ public class TheThreeScholars : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Yellow;
-		Item.width = dims.Width;
-		Item.value = 150000;
-		Item.height = dims.Height;
+		Item.DefaultToTome(5, 3);
 		Item.defense = 20;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 5;
 	}
 
 	//public override void AddRecipes()

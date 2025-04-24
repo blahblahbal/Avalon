@@ -1,6 +1,3 @@
-using Avalon.Common;
-using Avalon.Items.Material.TomeMats;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,13 +12,7 @@ public class AFlowerlessPlant : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Blue;
-		Item.width = dims.Width;
-		Item.value = 15000;
-		Item.height = dims.Height;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = ItemID.None;
+		Item.DefaultToTome(0, 1);
 	}
 
 	public override void UpdateAccessory(Player player, bool hideVisual)

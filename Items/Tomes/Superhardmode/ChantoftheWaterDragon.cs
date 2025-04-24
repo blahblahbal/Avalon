@@ -1,5 +1,3 @@
-using Avalon.Common;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,13 +12,7 @@ public class ChantoftheWaterDragon : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Yellow;
-		Item.width = dims.Width;
-		Item.value = 150000;
-		Item.height = dims.Height;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
-		Item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = 5;
+		Item.DefaultToTome(5, 3);
 	}
 
 	public override void UpdateAccessory(Player player, bool hideVisual)

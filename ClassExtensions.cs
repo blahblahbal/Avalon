@@ -1384,7 +1384,7 @@ public static class ClassExtensions
 		};
 	}
 	/// <summary>
-	/// This method sets a variety of Item values common to buff potion items.<br/>
+	/// This method sets a variety of Item values common to stamina potion items.<br/>
 	/// Specifically: <code>
 	/// width = 14;
 	/// height = 24;
@@ -1412,6 +1412,41 @@ public static class ClassExtensions
 		item.maxStack = Item.CommonMaxStack;
 		item.consumable = true;
 		item.GetGlobalItem<AvalonGlobalItemInstance>().HealStamina = staminaAmount;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to tome items.<br/>
+	/// Specifically: <code>
+	/// width = 24;
+	/// height = 24;
+	/// rare = Math.Min(<paramref name="grade"/> + <paramref name="rarityBonus"/>, <see cref="ItemRarityID.Purple"/>);<br></br>
+	/// <see cref="Item.GetGlobalItem"/>.Tome = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)<br></br>
+	/// <see cref="Item.GetGlobalItem"/>.TomeGrade = <paramref name="grade"/>; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
+	/// if (<paramref name="grade"/> + <paramref name="rarityBonus"/> == 1) value = 1 gold 50 silver;
+	/// if (<paramref name="grade"/> + <paramref name="rarityBonus"/> == 2) value = 3 gold;
+	/// if (<paramref name="grade"/> + <paramref name="rarityBonus"/> &gt;= 3 and &lt;= 7) value = 10 gold;
+	/// if (<paramref name="grade"/> + <paramref name="rarityBonus"/> &gt;= 8) value = 15 gold;
+	/// if (<paramref name="grade"/> + <paramref name="rarityBonus"/> &gt;= 9) value = 25 gold;
+	/// </code>
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="grade"></param>
+	/// <param name="rarityBonus"></param>
+	public static void DefaultToTome(this Item item, int grade, int rarityBonus = 0)
+	{
+		item.width = 24;
+		item.height = 24;
+		item.rare = Math.Min(grade + rarityBonus, ItemRarityID.Purple);
+		item.GetGlobalItem<AvalonGlobalItemInstance>().Tome = true;
+		item.GetGlobalItem<AvalonGlobalItemInstance>().TomeGrade = grade;
+		item.value = item.rare switch
+		{
+			1 => Item.sellPrice(silver: 30),
+			2 => Item.sellPrice(silver: 60),
+			>= 3 and <= 7 => Item.sellPrice(gold: 2),
+			8 => Item.sellPrice(gold: 3),
+			>= 9 => Item.sellPrice(gold: 5),
+			_ => 0,
+		};
 	}
 	#endregion Item DefaultToX() methods
 }
