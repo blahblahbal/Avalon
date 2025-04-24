@@ -2,6 +2,7 @@ using Avalon.Common.Players;
 using Avalon.Items.Placeable.Furniture;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
@@ -43,6 +44,28 @@ public class Torch : ModProjectile
 	public override void OnSpawn(IEntitySource source)
 	{
 		starTorchPos = Projectile.Owner().GetModPlayer<AvalonPlayer>().MousePosition;
+	}
+	public override bool PreDraw(ref Color lightColor)
+	{
+		Texture2D flameTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Flame").Value;
+		Texture2D shimmerFlameTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Flame_Shimmer").Value;
+		Texture2D stickTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Stick").Value;
+
+		Vector2 DrawPos = Projectile.Center - Main.screenPosition;
+		Color flameColor = Color.White;
+		Color stickColor = Color.White;
+		if (Data.Sets.ItemSets.TorchLauncherFlameColors.ContainsKey(itemType))
+		{
+			flameColor = Data.Sets.ItemSets.TorchLauncherFlameColors[itemType];
+			stickColor = Data.Sets.ItemSets.TorchLauncherStickColors[itemType];
+			if (itemType == ItemID.RainbowTorch)
+			{
+				flameColor = Main.DiscoColor;
+			}
+		}
+		Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, DrawPos, new Rectangle(0, 0, flameTex.Width, flameTex.Height), flameColor, Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
+		Main.EntitySpriteDraw(stickTex, DrawPos, new Rectangle(0, 0, stickTex.Width, stickTex.Height), stickColor, Projectile.rotation, new Vector2(stickTex.Width, stickTex.Height) / 2, 1f, SpriteEffects.None);
+		return false;
 	}
 	public override void AI()
 	{
@@ -89,7 +112,7 @@ public class Torch : ModProjectile
 		{
 			if (Data.Sets.ItemSets.TorchLauncherDust[itemType] > -1)
 			{
-				Dust D = Dust.NewDustDirect(Projectile.position, 8, 8, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, Scale: 0.75f);
+				Dust D = Dust.NewDustDirect(Projectile.Center, 8, 8, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, Scale: 0.75f);
 				D.noGravity = true;
 			}
 			else if (Data.Sets.ItemSets.TorchLauncherDust[itemType] == -2)

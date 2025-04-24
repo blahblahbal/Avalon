@@ -30,6 +30,13 @@ public static class ClassExtensions
 		r.Height += yDist * 2;
 		return r;
 	}
+
+	public static Dictionary<TKey, TValue> TorchLauncherAdding<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)
+		where TKey : notnull where TValue : notnull
+	{
+		dict.Add(key, value);
+		return dict;
+	}
 	public static List<List<int>> AddToListAndReturnIt(this List<List<int>> list, List<int> list2)
 	{
 		list.Add(list2);

@@ -233,7 +233,10 @@ public class ExxoAvalonOrigins : Mod
 			["AddBiomeChest", List<int> value] => Data.Sets.ItemSets.BiomeLockboxCollection.AddToListAndReturnIt(value),
 
 			// Torch launcher stuff
-			//["AddTorchLauncherColor", int key, Vector3 value] => Data.Sets.ItemSets.TorchLauncherItemToProjColor.Add(key, value),
+			["AddTorchLauncherLightColor", int key, Vector3 value] => Data.Sets.ItemSets.TorchLauncherItemToProjColor.TorchLauncherAdding(key, value),
+			["AddTorchLauncherDust", int key, int value] => Data.Sets.ItemSets.TorchLauncherDust.TorchLauncherAdding(key, value),
+			["AddTorchLauncherFlameColor", int key, Color value] => Data.Sets.ItemSets.TorchLauncherFlameColors.TorchLauncherAdding(key, value),
+			["AddTorchLauncherStickColor", int key, Color value] => Data.Sets.ItemSets.TorchLauncherStickColors.TorchLauncherAdding(key, value),
 
 			//IDs
 			["ConvertsToContagion", int tileID, int num] => Data.Sets.TileSets.ConvertsToContagion[tileID] = num,

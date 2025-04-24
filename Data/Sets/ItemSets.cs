@@ -77,12 +77,90 @@ namespace Avalon.Data.Sets
 		);
 
 		/// <summary>
+		/// Dictionary that holds torch stick colors. Used for the Torch Launcher.
+		/// </summary>
+		public static Dictionary<int, Color> TorchLauncherStickColors = new Dictionary<int, Color>()
+		{
+			{ ItemID.Torch,					new Color(151, 107, 75) },
+			{ ItemID.BlueTorch,				new Color(33, 58, 171) },
+			{ ItemID.RedTorch,				new Color(171, 33, 35) },
+			{ ItemID.GreenTorch,			new Color(16, 87, 36) },
+			{ ItemID.PurpleTorch,			new Color(106, 23, 96) },
+			{ ItemID.WhiteTorch,			new Color(64, 63, 118) },
+			{ ItemID.YellowTorch,			new Color(194, 87, 15) },
+			{ ItemID.DemonTorch,			new Color(43, 43, 43) },
+			{ ItemID.CursedTorch,			new Color(114, 106, 150) },
+			{ ItemID.IceTorch,				new Color(24, 120, 178) },
+			{ ItemID.OrangeTorch,			new Color(191, 108, 0) },
+			{ ItemID.IchorTorch,			new Color(149, 48, 48) },
+			{ ItemID.UltrabrightTorch,		new Color(7, 145, 142) },
+			{ ItemID.BoneTorch,				new Color(91, 91, 61) },
+			{ ItemID.RainbowTorch,			new Color(128, 59, 190) },
+			{ ItemID.PinkTorch,				new Color(150, 2, 80) },
+			{ ItemID.DesertTorch,			new Color(172, 125, 66) },
+			{ ItemID.CoralTorch,			new Color(235, 114, 80) },
+			{ ItemID.CorruptTorch,			new Color(84, 60, 80) },
+			{ ItemID.CrimsonTorch,			new Color(149, 48, 48) },
+			{ ItemID.HallowedTorch,			new Color(89, 68, 113) },
+			{ ItemID.JungleTorch,			new Color(145, 81, 85) },
+			{ ItemID.MushroomTorch,			new Color(122, 116, 84) },
+			{ ItemID.ShimmerTorch,			new Color(255, 115, 115) },
+			{ ItemType<BrownTorch>(),		new Color(92, 69, 56) },
+			{ ItemType<ContagionTorch>(),	new Color(80, 99, 56) },
+			{ ItemType<CyanTorch>(),		new Color(15, 113, 78) },
+			{ ItemType<LimeTorch>(),		new Color(45, 108, 20) },
+			{ ItemType<PathogenTorch>(),	new Color(80, 99, 56) },
+			{ ItemType<SavannaTorch>(),		new Color(145, 73, 37) },
+			{ ItemType<SlimeTorch>(),		new Color(50, 106, 219) },
+			{ ItemType<StarTorch>(),        new Color(21, 109, 177) }
+		};
+
+		/// <summary>
+		/// Dictionary that holds torch flame colors. Used for the Torch Launcher.
+		/// </summary>
+		public static Dictionary<int, Color> TorchLauncherFlameColors = new Dictionary<int, Color>()
+		{
+			{ ItemID.Torch, new Color(254, 121, 2) },
+			{ ItemID.BlueTorch, new Color(47, 163, 255) },
+			{ ItemID.RedTorch, new Color(252, 108, 11) },
+			{ ItemID.GreenTorch, new Color(14, 220, 50) },
+			{ ItemID.PurpleTorch, new Color(210, 97, 255) },
+			{ ItemID.WhiteTorch, new Color(185, 183, 197) },
+			{ ItemID.YellowTorch, new Color(230, 212, 10) },
+			{ ItemID.DemonTorch, new Color(105, 74, 202) },
+			{ ItemID.CursedTorch, new Color(179, 252, 0) },
+			{ ItemID.IceTorch, new Color(29, 240, 255) },
+			{ ItemID.OrangeTorch, new Color(255, 169, 47) },
+			{ ItemID.IchorTorch, new Color(254, 202, 80) },
+			{ ItemID.UltrabrightTorch, new Color(131, 252, 245) },
+			{ ItemID.BoneTorch, new Color(163, 124, 243) },
+			{ ItemID.RainbowTorch, new Color(212, 212, 212) },
+			{ ItemID.PinkTorch, new Color(254, 149, 210) },
+			{ ItemID.DesertTorch, new Color(254, 70, 0) },
+			{ ItemID.CoralTorch, new Color(105, 255, 146) },
+			{ ItemID.CorruptTorch, new Color(156, 70, 238) },
+			{ ItemID.CrimsonTorch, new Color(235, 77, 89) },
+			{ ItemID.HallowedTorch, new Color(255, 51, 186) },
+			{ ItemID.JungleTorch, new Color(141, 239, 34) },
+			{ ItemID.MushroomTorch, new Color(62, 153, 255) },
+			{ ItemID.ShimmerTorch, new Color(212, 212, 212) },
+			{ ItemType<BrownTorch>(), new Color(225, 172, 137) },
+			{ ItemType<ContagionTorch>(), new Color(201, 243, 0) },
+			{ ItemType<CyanTorch>(), new Color(107, 244, 203) },
+			{ ItemType<LimeTorch>(), new Color(78, 241, 7) },
+			{ ItemType<PathogenTorch>(), new Color(189, 161, 215) },
+			{ ItemType<SavannaTorch>(), new Color(130, 191, 78) },
+			{ ItemType<SlimeTorch>(), new Color(125, 206, 255) },
+			{ ItemType<StarTorch>(), new Color(240, 213, 34) }
+		};
+
+		/// <summary>
 		/// Dictionary that holds torch dust types. Used for the Torch Launcher.
 		/// </summary>
 		public static Dictionary<int, int> TorchLauncherDust = new Dictionary<int, int>()
 		{
 			//{ ItemID.None, -1 },
-			{ ItemID.Torch, -1 },
+			{ ItemID.Torch, DustID.Torch },
 			{ ItemID.BlueTorch, -1 },
 			{ ItemID.RedTorch, -1 },
 			{ ItemID.GreenTorch, -1 },
