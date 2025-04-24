@@ -81,6 +81,7 @@ namespace Avalon.Data.Sets
 		/// </summary>
 		public static Dictionary<int, int> TorchLauncherDust = new Dictionary<int, int>()
 		{
+			//{ ItemID.None, -1 },
 			{ ItemID.Torch, -1 },
 			{ ItemID.BlueTorch, -1 },
 			{ ItemID.RedTorch, -1 },
@@ -120,6 +121,7 @@ namespace Avalon.Data.Sets
 		/// </summary>
 		public static Dictionary<int, Vector3> TorchLauncherItemToProjColor = new Dictionary<int, Vector3>()
 		{
+			//{ ItemID.None, Vector3.Zero },
 			{ ItemID.Torch, new Vector3(1f, 0.95f, 0.8f) },
 			{ ItemID.BlueTorch, new Vector3(0f, 0.1f, 1.3f) },
 			{ ItemID.RedTorch, new Vector3(1f, 0.1f, 0.1f) },

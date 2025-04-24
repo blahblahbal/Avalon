@@ -757,10 +757,10 @@ public class AvalonPlayer : ModPlayer
 			{
 				if (Player.inventory[Player.selectedItem].useAmmo == ItemID.Torch)
 				{
-					Projectile.NewProjectile(
+					int p = Projectile.NewProjectile(
 						Player.GetSource_ItemUse_WithPotentialAmmo(ModContent.GetInstance<TorchLauncher>().Item,
 							ModContent.GetInstance<TorchLauncher>().Item.ammo), position,
-						new Vector2(velocity.X, velocity.Y), ModContent.ProjectileType<Torch>(), 0, 0, ai2: item2.type);
+						new Vector2(velocity.X, velocity.Y), ModContent.ProjectileType<Torch>(), 0, 0, Main.myPlayer, ai2: item2.type);
 					return false;
 				}
 			}

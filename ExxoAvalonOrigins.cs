@@ -232,6 +232,9 @@ public class ExxoAvalonOrigins : Mod
 			// biome chest loot for the biome lockbox
 			["AddBiomeChest", List<int> value] => Data.Sets.ItemSets.BiomeLockboxCollection.AddToListAndReturnIt(value),
 
+			// Torch launcher stuff
+			//["AddTorchLauncherColor", int key, Vector3 value] => Data.Sets.ItemSets.TorchLauncherItemToProjColor.Add(key, value),
+
 			//IDs
 			["ConvertsToContagion", int tileID, int num] => Data.Sets.TileSets.ConvertsToContagion[tileID] = num,
 			["ConvertsToContagionWall", int wallID, int num] => Data.Sets.WallSets.ConvertsToContagionWall[wallID] = num,

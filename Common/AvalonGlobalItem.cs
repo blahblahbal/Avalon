@@ -1953,7 +1953,7 @@ public class AvalonGlobalItem : GlobalItem
     public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
     {
         #region split projectile bonus
-        if (player.GetModPlayer<AvalonPlayer>().SplitProj && Main.rand.NextBool(7) && item.DamageType == DamageClass.Ranged && item.useAmmo > 0 && !Data.Sets.ItemSets.Longbows[item.type])
+        if (player.GetModPlayer<AvalonPlayer>().SplitProj && Main.rand.NextBool(7) && item.DamageType == DamageClass.Ranged && item.type != ModContent.ItemType<TorchLauncher>() && item.useAmmo > 0 && !Data.Sets.ItemSets.Longbows[item.type])
         {
             for (int num122 = 0; num122 < 2; num122++)
             {
