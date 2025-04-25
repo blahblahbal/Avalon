@@ -65,7 +65,19 @@ public class Torch : ModProjectile
 			}
 		}
 		Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, DrawPos, new Rectangle(0, 0, flameTex.Width, flameTex.Height), flameColor, Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
-		Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, DrawPos, new Rectangle(0, 0, flameTex.Width, flameTex.Height), new Color(flameColor.R, flameColor.G, flameColor.B, 0), Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
+
+		var randSeed = Main.TileFrameSeed ^ (ulong)((long)DrawPos.Y << 32 | (long)(ulong)DrawPos.X);
+		var width = 20;
+		var offsetY = 0;
+		var height = 20;
+		for (var k = 0; k < 7; k++)
+		{
+			var x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
+			var y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
+			Vector2 v = new Vector2(DrawPos.X + (width - 16f) / 2f + x, DrawPos.Y + offsetY + y);
+			Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, v, new Rectangle(0, 0, flameTex.Width, flameTex.Height), new Color(flameColor.R, flameColor.G, flameColor.B, 0), Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
+		}
+
 		Main.EntitySpriteDraw(stickTex, DrawPos, new Rectangle(0, 0, stickTex.Width, stickTex.Height), stickColor, Projectile.rotation, new Vector2(stickTex.Width, stickTex.Height) / 2, 1f, SpriteEffects.None);
 		return false;
 	}
@@ -114,22 +126,11 @@ public class Torch : ModProjectile
 		{
 			if (Data.Sets.ItemSets.TorchLauncherDust[itemType] > -1)
 			{
-				for (var num917 = 0; num917 < 1; num917++)
-				{
-					var num918 = Projectile.velocity.X / 3f * num917;
-					var num919 = Projectile.velocity.Y / 3f * num917;
-					var num920 = 4;
-					var num921 = Dust.NewDust(new Vector2(Projectile.position.X + num920, Projectile.position.Y + num920), Projectile.width - num920 * 2, Projectile.height - num920 * 2, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, 100, default, 1.2f);
-					Main.dust[num921].noGravity = true;
-					Main.dust[num921].velocity *= 0.1f;
-					Main.dust[num921].velocity += Projectile.velocity * 0.1f;
-					var dust105 = Main.dust[num921];
-					dust105.position.X = dust105.position.X - num918;
-					var dust106 = Main.dust[num921];
-					dust106.position.Y = dust106.position.Y - num919;
-				}
-
-
+				var num920 = 4;
+				int dust = Dust.NewDust(new Vector2(Projectile.position.X + num920, Projectile.position.Y + num920), Projectile.width - num920 * 2, Projectile.height - num920 * 2, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, 100, default, 1.2f);
+				Main.dust[dust].noGravity = true;
+				Main.dust[dust].velocity *= 0.1f;
+				Main.dust[dust].velocity += Projectile.velocity * 0.1f;
 				//Dust D = Dust.NewDustDirect(Projectile.Center, 8, 8, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, Scale: 0.75f);
 				//D.noGravity = true;
 			}
@@ -149,6 +150,17 @@ public class Torch : ModProjectile
 				}
 			}
 		}
+	}
+	private bool CheckTiles(int x, int y)
+	{
+		for (int i = x - 1; i <= x + 1; i++)
+		{
+			for (int j = y - 1; j <= y + 1; j++)
+			{
+
+			}
+		}
+		return false;
 	}
 	public override void OnKill(int timeLeft)
 	{
@@ -172,22 +184,33 @@ public class Torch : ModProjectile
 			return;
 		}
 
-		if ((Main.tile[TileX - 1, TileY + 1].HasTile && !Main.tile[TileX, TileY + 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftdown active, down off, left off
+		if (Main.tile[TileX, TileY].WallType != 0 && !Main.tile[TileX, TileY].HasTile)
+		{
+			goto placeOnWall;
+		}
+		else if (((Main.tile[TileX - 1, TileY + 1].HasTile && !Main.tile[TileX, TileY + 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftdown active, down off, left off
 			(Main.tile[TileX + 1, TileY + 1].HasTile && !Main.tile[TileX, TileY + 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightdown active, down off, right off
 			(Main.tile[TileX - 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftup active, up off, left off
 			(Main.tile[TileX + 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightup active, up off, right off
 			(Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType]) ||                                    // current tile non-solid
-			// down on and non-solid, left OR right on and non-solid
+																																		 // down on and non-solid, left OR right on and non-solid
 			(Main.tile[TileX, TileY + 1].HasTile && !Main.tileSolid[Main.tile[TileX, TileY + 1].TileType] && ((Main.tile[TileX - 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX - 1, TileY].TileType]) || (Main.tile[TileX + 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX + 1, TileY].TileType]))) ||
 			// (up on, ((left off OR right off) OR (current tile active and non-solid))
-			(Main.tile[TileX, TileY - 1].HasTile && ((!Main.tile[TileX - 1, TileY].HasTile || !Main.tile[TileX + 1, TileY].HasTile) || (Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType]))))
+			(Main.tile[TileX, TileY - 1].HasTile && ((!Main.tile[TileX - 1, TileY].HasTile || !Main.tile[TileX + 1, TileY].HasTile) || (Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType])))))
 		{
 			// create dropped torch item
 			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
 			Projectile.active = false;
 			return;
 		}
+		else if (Main.tile[TileX, TileY].IsHalfBlock || Main.tile[TileX, TileY].Slope != SlopeType.Solid || (Main.tile[TileX, TileY + 1].Slope != SlopeType.Solid && !Main.tile[TileX, TileY].HasTile))
+		{
+			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
+			Projectile.active = false;
+			return;
+		}
 
+		placeOnWall:
 		if (!Main.tile[TileX, TileY].HasTile || Main.tileCut[Main.tile[TileX, TileY].TileType] || (Main.tile[TileX, TileY].LiquidAmount > 0 && item.type != ItemID.CursedTorch))
 		{
 			if (itemType != ItemID.None)
