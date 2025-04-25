@@ -62,6 +62,8 @@ using static Terraria.ModLoader.ModContent;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs;
 using Microsoft.Xna.Framework;
+using Terraria.ModLoader;
+using Avalon.Dusts;
 
 namespace Avalon.Data.Sets
 {
@@ -161,36 +163,36 @@ namespace Avalon.Data.Sets
 		{
 			//{ ItemID.None, -1 },
 			{ ItemID.Torch, DustID.Torch },
-			{ ItemID.BlueTorch, -1 },
-			{ ItemID.RedTorch, -1 },
-			{ ItemID.GreenTorch, -1 },
-			{ ItemID.PurpleTorch, -1 },
-			{ ItemID.WhiteTorch, -1 },
-			{ ItemID.YellowTorch, -1 },
-			{ ItemID.DemonTorch, -1 },
-			{ ItemID.CursedTorch, -1 },
-			{ ItemID.IceTorch, -1 },
-			{ ItemID.OrangeTorch, -1 },
-			{ ItemID.IchorTorch, -1 },
-			{ ItemID.UltrabrightTorch, -1 },
-			{ ItemID.BoneTorch, -1 },
-			{ ItemID.RainbowTorch, -1 },
-			{ ItemID.PinkTorch, -1 },
-			{ ItemID.DesertTorch, -1 },
-			{ ItemID.CoralTorch, -1 },
-			{ ItemID.CorruptTorch, -1 },
-			{ ItemID.CrimsonTorch, -1 },
-			{ ItemID.HallowedTorch, -1 },
-			{ ItemID.JungleTorch, -1 },
-			{ ItemID.MushroomTorch, -1 },
-			{ ItemID.ShimmerTorch, -1 },
-			{ ItemType<BrownTorch>(), -1 },
-			{ ItemType<ContagionTorch>(), -1 },
-			{ ItemType<CyanTorch>(), -1 },
-			{ ItemType<LimeTorch>(), -1 },
-			{ ItemType<PathogenTorch>(), -1 },
-			{ ItemType<SavannaTorch>(), -1 },
-			{ ItemType<SlimeTorch>(), -1 },
+			{ ItemID.BlueTorch, DustID.BlueTorch },
+			{ ItemID.RedTorch, DustID.RedTorch },
+			{ ItemID.GreenTorch, DustID.GreenTorch },
+			{ ItemID.PurpleTorch, DustID.PurpleTorch },
+			{ ItemID.WhiteTorch, DustID.WhiteTorch },
+			{ ItemID.YellowTorch, DustID.YellowTorch },
+			{ ItemID.DemonTorch, DustID.DemonTorch },
+			{ ItemID.CursedTorch, DustID.CursedTorch },
+			{ ItemID.IceTorch, DustID.IceTorch },
+			{ ItemID.OrangeTorch, DustID.OrangeTorch },
+			{ ItemID.IchorTorch, DustID.IchorTorch },
+			{ ItemID.UltrabrightTorch, DustID.UltraBrightTorch },
+			{ ItemID.BoneTorch, DustID.BoneTorch },
+			{ ItemID.RainbowTorch, DustID.RainbowTorch },
+			{ ItemID.PinkTorch, DustID.PinkTorch },
+			{ ItemID.DesertTorch, DustID.DesertTorch },
+			{ ItemID.CoralTorch, DustID.CoralTorch },
+			{ ItemID.CorruptTorch, DustID.CorruptTorch },
+			{ ItemID.CrimsonTorch, DustID.CrimsonTorch },
+			{ ItemID.HallowedTorch, DustID.HallowedTorch },
+			{ ItemID.JungleTorch, DustID.JungleTorch },
+			{ ItemID.MushroomTorch, DustID.MushroomTorch },
+			{ ItemID.ShimmerTorch, DustID.ShimmerTorch },
+			{ ItemType<BrownTorch>(), ModContent.DustType<BrownTorchDust>() },
+			{ ItemType<ContagionTorch>(), DustID.JungleTorch },
+			{ ItemType<CyanTorch>(), ModContent.DustType<CyanTorchDust>() },
+			{ ItemType<LimeTorch>(), ModContent.DustType<LimeTorchDust>() },
+			{ ItemType<PathogenTorch>(), ModContent.DustType<PathogenDust>() },
+			{ ItemType<SavannaTorch>(), DustID.JungleTorch },
+			{ ItemType<SlimeTorch>(), DustID.t_Slime },
 			{ ItemType<StarTorch>(), -2 }
 		};
 
@@ -356,7 +358,7 @@ namespace Avalon.Data.Sets
 			{ ItemType<TimeShiftPotion>(), BuffType<AdvTimeShift>() },
 			{ ItemID.TitanPotion, BuffType<AdvTitan>() },
 			{ ItemType<TitanskinPotion>(), BuffType<AdvTitanskin>() },
-			{ ItemType<VisionPotion>(), BuffType<AdvVision>() },
+			{ ItemType<Items.Potions.Buff.VisionPotion>(), BuffType<AdvVision>() },
 			{ ItemID.WarmthPotion, BuffType<AdvWarmth>() },
 			{ ItemID.WaterWalkingPotion, BuffType<AdvWaterWalking>() },
 			{ ItemType<WisdomPotion>(), BuffType<AdvWisdom>() },
@@ -509,7 +511,7 @@ namespace Avalon.Data.Sets
 			ItemType<StarbrightPotion>(), ItemType<StrengthPotion>(), ItemID.SummoningPotion,
 			ItemType<SupersonicPotion>(), ItemID.SwiftnessPotion, ItemID.ThornsPotion,
 			ItemType<TimeShiftPotion>(), ItemID.TitanPotion, ItemType<TitanskinPotion>(),
-			ItemType<VisionPotion>(), ItemID.WarmthPotion, ItemID.WaterWalkingPotion,
+			ItemType<Items.Potions.Buff.VisionPotion>(), ItemID.WarmthPotion, ItemID.WaterWalkingPotion,
 			ItemType<WisdomPotion>(), ItemID.WrathPotion
 		);
 
@@ -639,7 +641,7 @@ namespace Avalon.Data.Sets
 			{ 2870, ItemType<DevilsScythe>() },
             //{ 2871, ItemType<HeavensTear>() },
             { 2872, ItemType<HallowedThorn>() },
-			{ 2873, ItemType<VisionPotion>() },
+			{ 2873, ItemType<Items.Potions.Buff.VisionPotion>() },
 			{ 2874, ItemID.FieryGreatsword },
 			{ 2875, ItemType<Moonfury>() },
 			{ 2876, ItemType<Sporalash>() },

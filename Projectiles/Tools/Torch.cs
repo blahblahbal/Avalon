@@ -3,6 +3,7 @@ using Avalon.Items.Placeable.Furniture;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
@@ -51,7 +52,7 @@ public class Torch : ModProjectile
 		Texture2D shimmerFlameTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Flame_Shimmer").Value;
 		Texture2D stickTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Stick").Value;
 
-		Vector2 DrawPos = Projectile.Center - Main.screenPosition;
+		Vector2 DrawPos = Projectile.position - Main.screenPosition + new Vector2(stickTex.Width, stickTex.Height) / 2;
 		Color flameColor = Color.White;
 		Color stickColor = Color.White;
 		if (Data.Sets.ItemSets.TorchLauncherFlameColors.ContainsKey(itemType))
@@ -64,6 +65,7 @@ public class Torch : ModProjectile
 			}
 		}
 		Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, DrawPos, new Rectangle(0, 0, flameTex.Width, flameTex.Height), flameColor, Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
+		Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, DrawPos, new Rectangle(0, 0, flameTex.Width, flameTex.Height), new Color(flameColor.R, flameColor.G, flameColor.B, 0), Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
 		Main.EntitySpriteDraw(stickTex, DrawPos, new Rectangle(0, 0, stickTex.Width, stickTex.Height), stickColor, Projectile.rotation, new Vector2(stickTex.Width, stickTex.Height) / 2, 1f, SpriteEffects.None);
 		return false;
 	}
@@ -112,8 +114,24 @@ public class Torch : ModProjectile
 		{
 			if (Data.Sets.ItemSets.TorchLauncherDust[itemType] > -1)
 			{
-				Dust D = Dust.NewDustDirect(Projectile.Center, 8, 8, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, Scale: 0.75f);
-				D.noGravity = true;
+				for (var num917 = 0; num917 < 1; num917++)
+				{
+					var num918 = Projectile.velocity.X / 3f * num917;
+					var num919 = Projectile.velocity.Y / 3f * num917;
+					var num920 = 4;
+					var num921 = Dust.NewDust(new Vector2(Projectile.position.X + num920, Projectile.position.Y + num920), Projectile.width - num920 * 2, Projectile.height - num920 * 2, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, 100, default, 1.2f);
+					Main.dust[num921].noGravity = true;
+					Main.dust[num921].velocity *= 0.1f;
+					Main.dust[num921].velocity += Projectile.velocity * 0.1f;
+					var dust105 = Main.dust[num921];
+					dust105.position.X = dust105.position.X - num918;
+					var dust106 = Main.dust[num921];
+					dust106.position.Y = dust106.position.Y - num919;
+				}
+
+
+				//Dust D = Dust.NewDustDirect(Projectile.Center, 8, 8, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, Scale: 0.75f);
+				//D.noGravity = true;
 			}
 			else if (Data.Sets.ItemSets.TorchLauncherDust[itemType] == -2)
 			{
@@ -158,7 +176,9 @@ public class Torch : ModProjectile
 			(Main.tile[TileX + 1, TileY + 1].HasTile && !Main.tile[TileX, TileY + 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightdown active, down off, right off
 			(Main.tile[TileX - 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftup active, up off, left off
 			(Main.tile[TileX + 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightup active, up off, right off
-			(Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType]) ||									 // current tile non-solid
+			(Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType]) ||                                    // current tile non-solid
+			// down on and non-solid, left OR right on and non-solid
+			(Main.tile[TileX, TileY + 1].HasTile && !Main.tileSolid[Main.tile[TileX, TileY + 1].TileType] && ((Main.tile[TileX - 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX - 1, TileY].TileType]) || (Main.tile[TileX + 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX + 1, TileY].TileType]))) ||
 			// (up on, ((left off OR right off) OR (current tile active and non-solid))
 			(Main.tile[TileX, TileY - 1].HasTile && ((!Main.tile[TileX - 1, TileY].HasTile || !Main.tile[TileX + 1, TileY].HasTile) || (Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType]))))
 		{
