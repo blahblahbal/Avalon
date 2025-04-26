@@ -1,5 +1,5 @@
 using Avalon.Projectiles.Tools;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -9,22 +9,9 @@ internal class TorchLauncher : ModItem
 {
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.damage = 1;
-		Item.UseSound = SoundID.Item5;
-		Item.shootSpeed = 8f;
-		Item.useAmmo = 8;
-		Item.DamageType = DamageClass.Ranged;
-		Item.noMelee = true;
+		Item.DefaultToGun(ModContent.ProjectileType<Torch>(), ItemID.Torch, 1, 0f, 8f, 16, 16, width: 24);
 		Item.rare = ItemRarityID.Green;
-		Item.width = dims.Width;
-		Item.useTime = 16;
-		Item.knockBack = 0f;
-		Item.shoot = ModContent.ProjectileType<Torch>();
-		Item.value = 39000;
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useAnimation = 16;
-		Item.height = dims.Height;
+		Item.value = Item.sellPrice(silver: 78);
 	}
 
 	public override void AddRecipes()

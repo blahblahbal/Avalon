@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,22 +6,10 @@ namespace Avalon.Items.Tools.Hardmode;
 
 public class InfectionHook : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.noUseGraphic = true;
-        Item.useTurn = true;
-        Item.shootSpeed = 15f;
-        Item.rare = ItemRarityID.LightPurple;
-        Item.noMelee = true;
-        Item.width = dims.Width;
-        Item.knockBack = 7f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Tools.InfectionHook>();
-        Item.value = Item.sellPrice(0, 6);
-		Item.UseSound = SoundID.Item1;
-		Item.height = dims.Height;
-        Item.useStyle = ItemUseStyleID.None;
-        Item.useTime = 0;
-        Item.useAnimation = 0;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToGrapplingHook(ModContent.ProjectileType<Projectiles.Tools.InfectionHook>(), 15f);
+		Item.rare = ItemRarityID.LightPurple;
+		Item.value = Item.sellPrice(0, 6);
+	}
 }

@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,24 +6,10 @@ namespace Avalon.Items.Tools.PreHardmode;
 
 public class MinersPickaxe : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.damage = 10;
-        Item.autoReuse = true;
-        Item.useTurn = true;
-        Item.scale = 1f;
-        Item.pick = 60;
-        Item.rare = ItemRarityID.Orange;
-        Item.width = dims.Width;
-        Item.useTime = 18;
-        Item.knockBack = 3.5f;
-        Item.DamageType = DamageClass.Melee;
-        Item.tileBoost += 1;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = 16000;
-        Item.useAnimation = 19;
-        Item.height = dims.Height;
-        Item.UseSound = SoundID.Item1;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToPickaxe(60, 10, 3.5f, 18, 19, 1);
+		Item.rare = ItemRarityID.Orange;
+		Item.value = Item.sellPrice(silver: 32);
+	}
 }

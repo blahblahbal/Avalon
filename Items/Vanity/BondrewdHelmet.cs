@@ -9,9 +9,9 @@ namespace Avalon.Items.Vanity
 	{
 		public override void SetDefaults()
 		{
-			Item.value = Item.sellPrice(0, 1, 20);
+			Item.DefaultToVanity();
 			Item.rare = ItemRarityID.Pink;
-			Item.vanity = true;
+			Item.value = Item.sellPrice(0, 1, 20);
 		}
 	}
 }

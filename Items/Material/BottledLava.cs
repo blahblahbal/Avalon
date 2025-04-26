@@ -13,7 +13,7 @@ public class BottledLava : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToConsumable(true, 17, 17, 14, 24);
+		Item.DefaultToConsumable(true, 17, 17, false, 14, 24);
 		Item.value = Item.sellPrice(0, 0, 1);
 		Item.useTurn = true;
 		Item.useStyle = ItemUseStyleID.DrinkLiquid;

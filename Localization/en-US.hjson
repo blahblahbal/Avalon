@@ -6255,38 +6255,8 @@ Mods: {
 				Tooltip:
 					'''
 					Teleports you to a saved location
+					<right> to set a waypoint at your current location
 					Maximum of 3 saved locations
-					<right> to set a waypoint
-					'''
-			}
-
-			PortablePylonMkIIPoint1: {
-				DisplayName: Portable Pylon Mk II (Waypoint 1)
-				Tooltip:
-					'''
-					Teleports you to a saved location
-					Maximum of 3 saved locations
-					<right> in your inventory to change waypoints
-					'''
-			}
-
-			PortablePylonMkIIPoint2: {
-				DisplayName: Portable Pylon Mk II (Waypoint 2)
-				Tooltip:
-					'''
-					Teleports you to a saved location
-					Maximum of 3 saved locations
-					<right> in your inventory to change waypoints
-					'''
-			}
-
-			PortablePylonMkIIPoint3: {
-				DisplayName: Portable Pylon Mk II (Waypoint 3)
-				Tooltip:
-					'''
-					Teleports you to a saved location
-					Maximum of 3 saved locations
-					<right> in your inventory to change waypoints
 					'''
 			}
 

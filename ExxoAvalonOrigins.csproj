@@ -15,9 +15,8 @@
 		<Compile Remove="DrawMagics\**" />
 		<EmbeddedResource Remove="DrawMagics\**" />
 		<None Remove="DrawMagics\**" />
-	</ItemGroup>
-	<ItemGroup>
-	  <AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\HierarchyCache.v1.txt" />
+		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />
+		<AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Remove="effects\PixelChange.fx" />
@@ -28,12 +27,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include=".vs\ExxoAvalonOrigins\v17\" />
-		<Folder Include="Items\Placeable\Furniture\Coughwood\" />
-		<Folder Include="Items\Weapons\Summon\PreHardmode\" />
-		<Folder Include="Mounts\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="Microsoft.Xna.Framework.Input.Touch">

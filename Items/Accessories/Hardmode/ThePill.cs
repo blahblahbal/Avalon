@@ -36,27 +36,27 @@ namespace Avalon.Items.Accessories.Hardmode
 			return base.UseItem(item, player);
 		}
 	}
-}
-
-public class ThePillPlayer : ModPlayer
-{
-	public bool DoUpdateDebuffTime;
-	public override void PostUpdate()
+	public class ThePillPlayer : ModPlayer
 	{
-		DoUpdateDebuffTime = Player.GetModPlayer<AvalonPlayer>().ThePill;
-	}
-	public override void PostUpdateEquips()
-	{
-		if (DoUpdateDebuffTime != Player.GetModPlayer<AvalonPlayer>().ThePill)
+		public bool DoUpdateDebuffTime;
+		public override void PostUpdate()
 		{
-			//Main.NewText(Player.GetModPlayer<AvalonPlayer>().ThePill ? $"[i:{ModContent.ItemType<ThePill>()}]True" : $"[i:{ModContent.ItemType<ThePill>()}]False", Player.GetModPlayer<AvalonPlayer>().ThePill ? Color.Lime : Color.DarkRed);
-			for (int i = 0; i < Player.MaxBuffs; i++)
+			DoUpdateDebuffTime = Player.GetModPlayer<AvalonPlayer>().ThePill;
+		}
+		public override void PostUpdateEquips()
+		{
+			if (DoUpdateDebuffTime != Player.GetModPlayer<AvalonPlayer>().ThePill)
 			{
-				if (Main.debuff[Player.buffType[i]] && Player.buffType[i] != BuffID.PotionSickness)
+				//Main.NewText(Player.GetModPlayer<AvalonPlayer>().ThePill ? $"[i:{ModContent.ItemType<ThePill>()}]True" : $"[i:{ModContent.ItemType<ThePill>()}]False", Player.GetModPlayer<AvalonPlayer>().ThePill ? Color.Lime : Color.DarkRed);
+				for (int i = 0; i < Player.MaxBuffs; i++)
 				{
-					Player.buffTime[i] = Player.GetModPlayer<AvalonPlayer>().ThePill ? (int)(Player.buffTime[i] * 0.8f) : (int)(Player.buffTime[i] / 0.8f);
+					if (Main.debuff[Player.buffType[i]] && Player.buffType[i] != BuffID.PotionSickness)
+					{
+						Player.buffTime[i] = Player.GetModPlayer<AvalonPlayer>().ThePill ? (int)(Player.buffTime[i] * 0.8f) : (int)(Player.buffTime[i] / 0.8f);
+					}
 				}
 			}
 		}
 	}
 }
+

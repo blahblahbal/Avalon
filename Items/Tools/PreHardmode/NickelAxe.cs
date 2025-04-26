@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,31 +6,17 @@ namespace Avalon.Items.Tools.PreHardmode;
 
 public class NickelAxe : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.UseSound = SoundID.Item1;
-        Item.damage = 7;
-        Item.autoReuse = true;
-        Item.useTurn = true;
-        Item.scale = 1;
-        Item.axe = 10;
-        Item.width = dims.Width;
-        Item.useTime = 18;
-        Item.knockBack = 4f;
-        Item.DamageType = DamageClass.Melee;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = 2000;
-        Item.UseSound = SoundID.Item1;
-        Item.useAnimation = 26;
-        Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 8)
-            .AddRecipeGroup(RecipeGroupID.Wood, 3)
-            .AddTile(TileID.Anvils)
-            .Register();
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToAxe(50, 7, 4.5f, 18, 26);
+		Item.value = Item.sellPrice(silver: 4);
+	}
+	public override void AddRecipes()
+	{
+		Recipe.Create(Type)
+			.AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 8)
+			.AddRecipeGroup(RecipeGroupID.Wood, 3)
+			.AddTile(TileID.Anvils)
+			.Register();
+	}
 }

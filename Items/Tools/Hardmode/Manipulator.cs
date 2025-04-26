@@ -1,8 +1,7 @@
-using Microsoft.Xna.Framework;
-using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
 
@@ -17,16 +16,11 @@ public class ManipulatorTime : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Pink;
-		Item.width = dims.Width;
-		Item.useTime = 30;
-		Item.useTurn = true;
-		Item.value = Item.sellPrice(0, 5);
-		Item.useStyle = ItemUseStyleID.HoldUp;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
+		Item.DefaultToConsumable(false, 15, 30, true);
 		Item.shoot = ModContent.ProjectileType<Projectiles.Tools.Timechanger>();
+		Item.maxStack = 1;
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 5);
 	}
 	public override void HoldItem(Player player)
 	{
@@ -64,16 +58,11 @@ public class ManipulatorMoon : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Pink;
-		Item.width = dims.Width;
-		Item.useTime = 30;
-		Item.useTurn = true;
-		Item.value = Item.sellPrice(0, 5);
-		Item.useStyle = ItemUseStyleID.HoldUp;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
+		Item.DefaultToSpawner(false, 15, 30, true);
 		Item.shoot = ModContent.ProjectileType<Projectiles.Tools.Moonphaser>();
+		Item.maxStack = 1;
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 5);
 	}
 	public override void HoldItem(Player player)
 	{
@@ -100,16 +89,11 @@ public class ManipulatorRain : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Pink;
-		Item.width = dims.Width;
-		Item.useTime = 30;
-		Item.useTurn = true;
-		Item.value = Item.sellPrice(0, 5);
-		Item.useStyle = ItemUseStyleID.HoldUp;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
+		Item.DefaultToSpawner(false, 15, 30, true);
 		Item.shoot = ModContent.ProjectileType<Projectiles.Tools.Rainbringer>();
+		Item.maxStack = 1;
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 5);
 	}
 	public override void HoldItem(Player player)
 	{
@@ -136,16 +120,11 @@ public class ManipulatorSand : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.rare = ItemRarityID.Pink;
-		Item.width = dims.Width;
-		Item.useTime = 30;
-		Item.useTurn = true;
-		Item.value = Item.sellPrice(0, 5);
-		Item.useStyle = ItemUseStyleID.HoldUp;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
+		Item.DefaultToSpawner(false, 15, 30, true);
 		Item.shoot = ModContent.ProjectileType<Projectiles.Tools.Sandstormer>();
+		Item.maxStack = 1;
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 5);
 	}
 	public override void HoldItem(Player player)
 	{
