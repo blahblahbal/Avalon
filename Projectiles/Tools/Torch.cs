@@ -56,11 +56,14 @@ public class Torch : ModProjectile
 		if (Data.Sets.ItemSets.TorchLauncherFlameColors.TryGetValue(itemType, out Color dictFlameColor))
 		{
 			flameColor = dictFlameColor;
-			stickColor = Data.Sets.ItemSets.TorchLauncherStickColors[itemType];
 			if (itemType == ItemID.RainbowTorch)
 			{
 				flameColor = Main.DiscoColor;
 			}
+		}
+		if (Data.Sets.ItemSets.TorchLauncherStickColors.TryGetValue(itemType, out Color dictStickColor))
+		{
+			stickColor = dictStickColor;
 		}
 		Main.EntitySpriteDraw(stickTex, DrawPos, new Rectangle(0, 0, stickTex.Width, stickTex.Height), stickColor, Projectile.rotation, new Vector2(stickTex.Width, stickTex.Height) / 2, 1f, SpriteEffects.None);
 
