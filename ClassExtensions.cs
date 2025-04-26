@@ -1691,7 +1691,7 @@ public static class ClassExtensions
 		item.width = width;
 		item.height = height;
 		item.pick = pickaxePower;
-		item.hammer = axePowerTimes5;
+		item.axe = axePowerTimes5 / 5;
 		item.autoReuse = true;
 		item.damage = damage;
 		item.DamageType = DamageClass.Melee;

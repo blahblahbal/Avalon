@@ -1,9 +1,7 @@
 using Avalon.Common.Players;
-using Avalon.Items.Placeable.Furniture;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
@@ -20,7 +18,7 @@ public class Torch : ModProjectile
 	public override void SetDefaults()
 	{
 		Projectile.width = 6;
-		Projectile.height = 14;
+		Projectile.height = 6;
 		Projectile.aiStyle = -1;
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
@@ -52,37 +50,40 @@ public class Torch : ModProjectile
 		Texture2D shimmerFlameTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Flame_Shimmer").Value;
 		Texture2D stickTex = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Stick").Value;
 
-		Vector2 DrawPos = Projectile.position - Main.screenPosition + new Vector2(stickTex.Width, stickTex.Height) / 2;
+		Vector2 DrawPos = Projectile.position - Main.screenPosition + (Projectile.Size / 2f);
 		Color flameColor = Color.White;
 		Color stickColor = Color.White;
-		if (Data.Sets.ItemSets.TorchLauncherFlameColors.ContainsKey(itemType))
+		if (Data.Sets.ItemSets.TorchLauncherFlameColors.TryGetValue(itemType, out Color dictFlameColor))
 		{
-			flameColor = Data.Sets.ItemSets.TorchLauncherFlameColors[itemType];
+			flameColor = dictFlameColor;
 			stickColor = Data.Sets.ItemSets.TorchLauncherStickColors[itemType];
 			if (itemType == ItemID.RainbowTorch)
 			{
 				flameColor = Main.DiscoColor;
 			}
 		}
+		Main.EntitySpriteDraw(stickTex, DrawPos, new Rectangle(0, 0, stickTex.Width, stickTex.Height), stickColor, Projectile.rotation, new Vector2(stickTex.Width, stickTex.Height) / 2, 1f, SpriteEffects.None);
+
 		Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, DrawPos, new Rectangle(0, 0, flameTex.Width, flameTex.Height), flameColor, Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
 
 		var randSeed = Main.TileFrameSeed ^ (ulong)((long)DrawPos.Y << 32 | (long)(ulong)DrawPos.X);
-		var width = 20;
-		var offsetY = 0;
-		var height = 20;
 		for (var k = 0; k < 7; k++)
 		{
 			var x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 			var y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-			Vector2 v = new Vector2(DrawPos.X + (width - 16f) / 2f + x, DrawPos.Y + offsetY + y);
-			Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, v, new Rectangle(0, 0, flameTex.Width, flameTex.Height), new Color(flameColor.R, flameColor.G, flameColor.B, 0), Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
+			Vector2 FlamePos = DrawPos + new Vector2(x, y).RotatedBy(Projectile.rotation);
+			Main.EntitySpriteDraw(itemType == ItemID.ShimmerTorch ? shimmerFlameTex : flameTex, FlamePos, new Rectangle(0, 0, flameTex.Width, flameTex.Height), new Color(flameColor.R, flameColor.G, flameColor.B, 80), Projectile.rotation, new Vector2(flameTex.Width, flameTex.Height) / 2, 1f, SpriteEffects.None);
 		}
-
-		Main.EntitySpriteDraw(stickTex, DrawPos, new Rectangle(0, 0, stickTex.Width, stickTex.Height), stickColor, Projectile.rotation, new Vector2(stickTex.Width, stickTex.Height) / 2, 1f, SpriteEffects.None);
 		return false;
 	}
 	public override void AI()
 	{
+		if (Projectile.ai[0] == 0)
+		{
+			// set rotation to 0 on the first frame
+			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+			Projectile.ai[0]++;
+		}
 		if (itemType == ModContent.ItemType<Items.Placeable.Furniture.StarTorch>())
 		{
 			Projectile.velocity = Vector2.Normalize(starTorchPos - Projectile.Owner().Center) * 8f;
@@ -94,13 +95,13 @@ public class Torch : ModProjectile
 		else
 		{
 			Projectile.ai[0]++;
-			if (Projectile.ai[0] > 15)
+			if (Projectile.ai[0] > 16)
 			{
 				Projectile.velocity.Y += 0.8f;
-				Projectile.ai[0] = 0;
+				Projectile.ai[0] = 1;
 			}
 		}
-		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+		Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.velocity.ToRotation() + MathHelper.PiOver2, 0.05f);
 
 		if (itemType == ItemID.DemonTorch)
 		{
@@ -116,31 +117,28 @@ public class Torch : ModProjectile
 		}
 		else
 		{
-			if (Data.Sets.ItemSets.TorchLauncherItemToProjColor.ContainsKey(itemType))
+			if (Data.Sets.ItemSets.TorchLauncherItemToProjColor.TryGetValue(itemType, out Vector3 lightColor))
 			{
-				Vector3 v = Data.Sets.ItemSets.TorchLauncherItemToProjColor[itemType];
-				Lighting.AddLight(Projectile.Center, v.X, v.Y, v.Z);
+				Lighting.AddLight(Projectile.Center, lightColor.X, lightColor.Y, lightColor.Z);
 			}
 		}
-		if (Data.Sets.ItemSets.TorchLauncherDust.ContainsKey(itemType))
+		if (Data.Sets.ItemSets.TorchLauncherDust.TryGetValue(itemType, out int dustType))
 		{
-			if (Data.Sets.ItemSets.TorchLauncherDust[itemType] > -1)
+			if (dustType > -1)
 			{
-				var num920 = 4;
-				int dust = Dust.NewDust(new Vector2(Projectile.position.X + num920, Projectile.position.Y + num920), Projectile.width - num920 * 2, Projectile.height - num920 * 2, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, 100, default, 1.2f);
+				int posOffset = 2;
+				int dust = Dust.NewDust(new Vector2(Projectile.position.X - posOffset, Projectile.position.Y - posOffset) + new Vector2(0, -5f).RotatedBy(Projectile.rotation), 4 + posOffset, 4 + posOffset, dustType, 0f, 0f, 100, default, Main.rand.NextFloat(1.25f, 1.6f));
 				Main.dust[dust].noGravity = true;
 				Main.dust[dust].velocity *= 0.1f;
 				Main.dust[dust].velocity += Projectile.velocity * 0.1f;
-				//Dust D = Dust.NewDustDirect(Projectile.Center, 8, 8, Data.Sets.ItemSets.TorchLauncherDust[itemType], 0f, 0f, Scale: 0.75f);
+				//Dust D = Dust.NewDustDirect(Projectile.Center, 8, 8, dustType, 0f, 0f, Scale: 0.75f);
 				//D.noGravity = true;
 			}
-			else if (Data.Sets.ItemSets.TorchLauncherDust[itemType] == -2)
+			else if (dustType == -2)
 			{
-				if (counter > 0) counter--;
-				if (Main.rand.NextBool(2) && Main.hasFocus && counter < 25)
+				if (Main.rand.NextBool(15) && Main.hasFocus)
 				{
-					counter += 26;
-					ParticleSystem.AddParticle(new Particles.StarTorch(),
+					ParticleSystem.AddParticle(new StarTorch(),
 						Projectile.Center + new Vector2(Main.rand.Next(4, 13), Main.rand.Next(2, 6)), // position
 						new Vector2(Main.rand.NextFloat(-0.02f, 0.03f), Main.rand.NextFloat(-0.4f, -0.5f)), // velocity
 						Color.White, // color
@@ -210,7 +208,7 @@ public class Torch : ModProjectile
 			return;
 		}
 
-		placeOnWall:
+	placeOnWall:
 		if (!Main.tile[TileX, TileY].HasTile || Main.tileCut[Main.tile[TileX, TileY].TileType] || (Main.tile[TileX, TileY].LiquidAmount > 0 && item.type != ItemID.CursedTorch))
 		{
 			if (itemType != ItemID.None)
