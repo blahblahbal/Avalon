@@ -1,9 +1,11 @@
+using Avalon.Buffs;
+using Avalon.Buffs.AdvancedBuffs;
+using Avalon.Dusts;
 using Avalon.Items.Accessories.Hardmode;
+using Avalon.Items.Accessories.Info;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Accessories.Superhardmode;
 using Avalon.Items.Accessories.Vanity;
-using Avalon.Items.Accessories.Info;
-using Avalon.Items.Potions.AdvancedPotions;
 using Avalon.Items.Ammo;
 using Avalon.Items.Armor.Hardmode;
 using Avalon.Items.Armor.PreHardmode;
@@ -18,7 +20,6 @@ using Avalon.Items.Material.Herbs;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
-using Avalon.Items.Placeable.MusicBoxes;
 using Avalon.Items.Other;
 using Avalon.Items.Placeable.Beam;
 using Avalon.Items.Placeable.Crafting;
@@ -28,6 +29,7 @@ using Avalon.Items.Placeable.Furniture.Heartstone;
 using Avalon.Items.Placeable.Furniture.OrangeDungeon;
 using Avalon.Items.Placeable.Furniture.PurpleDungeon;
 using Avalon.Items.Placeable.Furniture.ResistantWood;
+using Avalon.Items.Placeable.MusicBoxes;
 using Avalon.Items.Placeable.Painting;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Statue;
@@ -35,6 +37,7 @@ using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Placeable.Tile.LargeHerbs;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Placeable.Wall;
+using Avalon.Items.Potions.AdvancedPotions;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Potions.Other;
 using Avalon.Items.Tomes.Hardmode;
@@ -56,14 +59,10 @@ using Avalon.Items.Weapons.Ranged.Hardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Items.Weapons.Ranged.Superhardmode;
 using Avalon.Items.Weapons.Summon.Hardmode;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.ID;
 using static Terraria.ModLoader.ModContent;
-using Avalon.Buffs.AdvancedBuffs;
-using Avalon.Buffs;
-using Microsoft.Xna.Framework;
-using Terraria.ModLoader;
-using Avalon.Dusts;
 
 namespace Avalon.Data.Sets
 {
@@ -83,37 +82,37 @@ namespace Avalon.Data.Sets
 		/// </summary>
 		public static Dictionary<int, Color> TorchLauncherStickColors = new Dictionary<int, Color>()
 		{
-			{ ItemID.Torch,					new Color(151, 107, 75) },
-			{ ItemID.BlueTorch,				new Color(33, 58, 171) },
-			{ ItemID.RedTorch,				new Color(171, 33, 35) },
-			{ ItemID.GreenTorch,			new Color(16, 87, 36) },
-			{ ItemID.PurpleTorch,			new Color(106, 23, 96) },
-			{ ItemID.WhiteTorch,			new Color(64, 63, 118) },
-			{ ItemID.YellowTorch,			new Color(194, 87, 15) },
-			{ ItemID.DemonTorch,			new Color(43, 43, 43) },
-			{ ItemID.CursedTorch,			new Color(114, 106, 150) },
-			{ ItemID.IceTorch,				new Color(24, 120, 178) },
-			{ ItemID.OrangeTorch,			new Color(191, 108, 0) },
-			{ ItemID.IchorTorch,			new Color(149, 48, 48) },
-			{ ItemID.UltrabrightTorch,		new Color(7, 145, 142) },
-			{ ItemID.BoneTorch,				new Color(91, 91, 61) },
-			{ ItemID.RainbowTorch,			new Color(128, 59, 190) },
-			{ ItemID.PinkTorch,				new Color(150, 2, 80) },
-			{ ItemID.DesertTorch,			new Color(172, 125, 66) },
-			{ ItemID.CoralTorch,			new Color(235, 114, 80) },
-			{ ItemID.CorruptTorch,			new Color(84, 60, 80) },
-			{ ItemID.CrimsonTorch,			new Color(149, 48, 48) },
-			{ ItemID.HallowedTorch,			new Color(89, 68, 113) },
-			{ ItemID.JungleTorch,			new Color(145, 81, 85) },
-			{ ItemID.MushroomTorch,			new Color(122, 116, 84) },
-			{ ItemID.ShimmerTorch,			new Color(255, 115, 115) },
-			{ ItemType<BrownTorch>(),		new Color(92, 69, 56) },
-			{ ItemType<ContagionTorch>(),	new Color(80, 99, 56) },
-			{ ItemType<CyanTorch>(),		new Color(15, 113, 78) },
-			{ ItemType<LimeTorch>(),		new Color(45, 108, 20) },
-			{ ItemType<PathogenTorch>(),	new Color(80, 99, 56) },
-			{ ItemType<SavannaTorch>(),		new Color(145, 73, 37) },
-			{ ItemType<SlimeTorch>(),		new Color(50, 106, 219) },
+			{ ItemID.Torch,                 new Color(151, 107, 75) },
+			{ ItemID.BlueTorch,             new Color(33, 58, 171) },
+			{ ItemID.RedTorch,              new Color(171, 33, 35) },
+			{ ItemID.GreenTorch,            new Color(16, 87, 36) },
+			{ ItemID.PurpleTorch,           new Color(106, 23, 96) },
+			{ ItemID.WhiteTorch,            new Color(64, 63, 118) },
+			{ ItemID.YellowTorch,           new Color(194, 87, 15) },
+			{ ItemID.DemonTorch,            new Color(43, 43, 43) },
+			{ ItemID.CursedTorch,           new Color(114, 106, 150) },
+			{ ItemID.IceTorch,              new Color(24, 120, 178) },
+			{ ItemID.OrangeTorch,           new Color(191, 108, 0) },
+			{ ItemID.IchorTorch,            new Color(149, 48, 48) },
+			{ ItemID.UltrabrightTorch,      new Color(7, 145, 142) },
+			{ ItemID.BoneTorch,             new Color(91, 91, 61) },
+			{ ItemID.RainbowTorch,          new Color(128, 59, 190) },
+			{ ItemID.PinkTorch,             new Color(150, 2, 80) },
+			{ ItemID.DesertTorch,           new Color(172, 125, 66) },
+			{ ItemID.CoralTorch,            new Color(235, 114, 80) },
+			{ ItemID.CorruptTorch,          new Color(84, 60, 80) },
+			{ ItemID.CrimsonTorch,          new Color(149, 48, 48) },
+			{ ItemID.HallowedTorch,         new Color(89, 68, 113) },
+			{ ItemID.JungleTorch,           new Color(145, 81, 85) },
+			{ ItemID.MushroomTorch,         new Color(122, 116, 84) },
+			{ ItemID.ShimmerTorch,          new Color(255, 115, 115) },
+			{ ItemType<BrownTorch>(),       new Color(92, 69, 56) },
+			{ ItemType<ContagionTorch>(),   new Color(80, 99, 56) },
+			{ ItemType<CyanTorch>(),        new Color(15, 113, 78) },
+			{ ItemType<LimeTorch>(),        new Color(45, 108, 20) },
+			{ ItemType<PathogenTorch>(),    new Color(80, 99, 56) },
+			{ ItemType<SavannaTorch>(),     new Color(145, 73, 37) },
+			{ ItemType<SlimeTorch>(),       new Color(50, 106, 219) },
 			{ ItemType<StarTorch>(),        new Color(21, 109, 177) }
 		};
 
@@ -124,7 +123,7 @@ namespace Avalon.Data.Sets
 		{
 			{ ItemID.Torch, new Color(254, 121, 2) },
 			{ ItemID.BlueTorch, new Color(47, 163, 255) },
-			{ ItemID.RedTorch, new Color(252, 108, 11) },
+			{ ItemID.RedTorch, new Color(252, 108, 111) },
 			{ ItemID.GreenTorch, new Color(14, 220, 50) },
 			{ ItemID.PurpleTorch, new Color(210, 97, 255) },
 			{ ItemID.WhiteTorch, new Color(185, 183, 197) },
@@ -176,7 +175,7 @@ namespace Avalon.Data.Sets
 			{ ItemID.IchorTorch, DustID.IchorTorch },
 			{ ItemID.UltrabrightTorch, DustID.UltraBrightTorch },
 			{ ItemID.BoneTorch, DustID.BoneTorch },
-			{ ItemID.RainbowTorch, DustID.RainbowTorch },
+			{ ItemID.RainbowTorch, DustID.RainbowMk2 }, // shows up a much more vibrant colour than the actual rainbow torch dust, looks better as the trail
 			{ ItemID.PinkTorch, DustID.PinkTorch },
 			{ ItemID.DesertTorch, DustID.DesertTorch },
 			{ ItemID.CoralTorch, DustID.CoralTorch },
@@ -186,11 +185,11 @@ namespace Avalon.Data.Sets
 			{ ItemID.JungleTorch, DustID.JungleTorch },
 			{ ItemID.MushroomTorch, DustID.MushroomTorch },
 			{ ItemID.ShimmerTorch, DustID.ShimmerTorch },
-			{ ItemType<BrownTorch>(), ModContent.DustType<BrownTorchDust>() },
+			{ ItemType<BrownTorch>(), DustType<BrownTorchDust>() },
 			{ ItemType<ContagionTorch>(), DustID.JungleTorch },
-			{ ItemType<CyanTorch>(), ModContent.DustType<CyanTorchDust>() },
-			{ ItemType<LimeTorch>(), ModContent.DustType<LimeTorchDust>() },
-			{ ItemType<PathogenTorch>(), ModContent.DustType<PathogenDust>() },
+			{ ItemType<CyanTorch>(), DustType<CyanTorchDust>() },
+			{ ItemType<LimeTorch>(), DustType<LimeTorchDust>() },
+			{ ItemType<PathogenTorch>(), DustType<PathogenDust>() },
 			{ ItemType<SavannaTorch>(), DustID.JungleTorch },
 			{ ItemType<SlimeTorch>(), DustID.t_Slime },
 			{ ItemType<StarTorch>(), -2 }
@@ -669,7 +668,7 @@ namespace Avalon.Data.Sets
 			{ 2898,ItemID.EyezorBanner},
 			{ 2899,ItemID.IceGolemBanner},
 			{ 2900, ItemType<BagofBlood>() },
-            { 2901, ItemID.BeetleHusk }, // Earth Stones
+			{ 2901, ItemID.BeetleHusk }, // Earth Stones
             { 2902, ItemType<ElementShard>() },
             //{ 2903, ItemType<ElementalRod>() },
             { 2904, ItemType<DNAStatue>() },
@@ -733,7 +732,7 @@ namespace Avalon.Data.Sets
 			{ 2962, ItemType<RhodiumPlateMail>() },
 			{ 2963, ItemType<RhodiumGreaves>() },
 			{ 2964, ItemType<DesertFeather>() },
-            { 2965, ItemID.None }, // Empty Xeradon Bucket
+			{ 2965, ItemID.None }, // Empty Xeradon Bucket
             { 2966, ItemID.None }, // Water Xeradon Bucket
             { 2967, ItemID.None }, // Lava Xeradon Bucket
             { 2968, ItemID.None }, // Honey Xeradon Bucket
@@ -825,8 +824,8 @@ namespace Avalon.Data.Sets
 			{ 3054, ItemType<RubybeadHerb>() },
 			{ 3055, ItemType<StrongVenom>() },
 			{ 3056, ItemType<Sandstone>() },
-            { 3057, ItemID.None },
-            { 3058, ItemType<ScrollofTome>() },
+			{ 3057, ItemID.None },
+			{ 3058, ItemType<ScrollofTome>() },
 			{ 3059, ItemType<DragonOrb>() },
 			{ 3060, ItemType<CreatorsTome>() },
 			{ 3061, ItemType<LoveUpandDown>() },
@@ -918,7 +917,7 @@ namespace Avalon.Data.Sets
             { 3147, ItemType<HellArmoredHelmet>() },
 			{ 3148, ItemType<HellBlazingChestplate>() },
 			{ 3149, ItemType<HellArmoredGreaves>() },
-            { 3150, ItemID.None }, // solarium rod
+			{ 3150, ItemID.None }, // solarium rod
             { 3151, ItemID.None }, // solarium ore
             { 3152, ItemID.None }, // solarium star
             //{ 3153, ItemType<SolariumStaff>() },
@@ -929,7 +928,7 @@ namespace Avalon.Data.Sets
             { 3158, ItemType<PossessedFlamesaw>() },
             //{ 3159, ItemType<Starfall>() },
             { 3160, ItemType<NaturesEndowment>() },
-            { 3161, ItemType<GiftofStarpower>() },
+			{ 3161, ItemType<GiftofStarpower>() },
 			{ 3162, ItemType<StaminaCrystal>() },
 			{ 3163, ItemType<Boltstone>() },
 			{ 3164, ItemType<LesserStaminaPotion>() },
@@ -982,7 +981,7 @@ namespace Avalon.Data.Sets
             { 3211, ItemType<GastropodStaff>() },
 			{ 3212, ItemType<Quack>() },
 			{ 3213, ItemType<BlahPotion>() },
-            { 3214, ItemID.None }, // santa's beard
+			{ 3214, ItemID.None }, // santa's beard
             //{ 3215, ItemType<CandyCane>() },
             //{ 3216, ItemType<ChocolateCandyCaneBlock>() },
             //{ 3217, ItemType<ChocolateCandyCaneWall>() },
@@ -1023,10 +1022,10 @@ namespace Avalon.Data.Sets
             { 3252,ItemID.FlareGun},
 			{ 3253, ItemType<ChaosDust>() },
 			{ 3254, ItemType<SolarSystem>() },
-            { 3255, ItemID.None }, // nil shrine
+			{ 3255, ItemID.None }, // nil shrine
             //{ 3256, ItemType<SoulofDelight>() },
             { 3257, ItemType<LightninginaBottle>() },
-            { 3258, ItemID.None }, // rotten crate
+			{ 3258, ItemID.None }, // rotten crate
             { 3259, ItemID.None }, // flesh crate
             { 3260, ItemType<Sweetstem>() },
 			{ 3261, ItemType<SweetstemSeeds>() },
@@ -1123,15 +1122,15 @@ namespace Avalon.Data.Sets
 			{ 3352, ItemType<CobaltOmegaShield>() },
 			{ 3353, ItemType<PalladiumOmegaShield>() },
 			{ 3354, ItemType<DurataniumOmegaShield>() },
-            { 3355, ItemID.SolarTablet },
-            { 3356, ItemID.LunarTabletFragment }, // solar fragment
+			{ 3355, ItemID.SolarTablet },
+			{ 3356, ItemID.LunarTabletFragment }, // solar fragment
             { 3357, ItemType<LargeTourmaline>() },
 			{ 3358, ItemType<TourmalineHook>() },
 			{ 3359, ItemType<LargePeridot>() },
 			{ 3360, ItemType<PeridotHook>() },
 			{ 3361, ItemType<TourmalineRobe>() },
 			{ 3362, ItemType<PeridotRobe>() },
-            { 3363, ItemID.None }, // totem of the golem
+			{ 3363, ItemID.None }, // totem of the golem
             { 3364, ItemType<ViruthornHelmet>() },
 			{ 3365, ItemType<ViruthornScalemail>() },
 			{ 3366, ItemType<ViruthornGreaves>() },
@@ -1232,17 +1231,17 @@ namespace Avalon.Data.Sets
 			{ 3461, ItemID.LeadBrickWall },
 			{ 3462, ItemID.IronBrickWall },
 			{ 3463, ItemType<EyeoftheGods>() },
-            { 3464, ItemID.None }, // ferozium brick
+			{ 3464, ItemID.None }, // ferozium brick
             //{ 3465, ItemType<FocusBeam>() },
             { 3466, ItemType<SonicScrewdriverMkI>() },
 			{ 3467, ItemType<SonicScrewdriverMkII>() },
 			{ 3468, ItemType<SonicScrewdriverMkIII>() },
-            { 3469, ItemID.None }, // ferozium brick wall
+			{ 3469, ItemID.None }, // ferozium brick wall
             //{ 3470, ItemType<PyroscoricBrickWall>() },
             { 3471, ItemType<RingofDisgust>() },
 			{ 3472,ItemID.BeetleHusk},
-            { 3473, ItemType<DurataniumPipe>() },
-            { 3474, ItemType<NaquadahBrick>() },
+			{ 3473, ItemType<DurataniumPipe>() },
+			{ 3474, ItemType<NaquadahBrick>() },
             //{ 3475, ItemType<TroxiniumBrick>() },
             //{ 3476, ItemType<DurataniumBrickWall>() },
             { 3477, ItemType<NaquadahBrickWall>() },
@@ -1257,7 +1256,7 @@ namespace Avalon.Data.Sets
             //{ 3486, ItemType<AmethystWall>() },
             //{ 3487, ItemType<DiamondWall>() },
             { 3488, ItemType<ImperviousBrickWallItem>() },
-            { 3489, ItemID.None }, // gem wand
+			{ 3489, ItemID.None }, // gem wand
             //{ 3490, ItemType<VertebraeBookcase>() },
             //{ 3491, ItemType<VertebraeCandle>() },
             //{ 3492, ItemType<VertebraeChair>() },
@@ -1303,7 +1302,7 @@ namespace Avalon.Data.Sets
 			{ 3532, ItemType<DesertBeakMask>() },
             //{ 3533, ItemType<OpalGemsparkBlock>() },
             { 3534, ItemType<GoldBarbedNet>() },
-            { 3535, ItemType<Clarent>() },
+			{ 3535, ItemType<Clarent>() },
             //{ 3536, ItemType<Oblivionet>() },
             //{ 3537, ItemType<TerraClaws>() },
             //{ 3538, ItemType<OblivionTrophy>() },
@@ -1360,16 +1359,16 @@ namespace Avalon.Data.Sets
             //{ 3589, ItemType<Infernasword>() },
             { 3590, ItemType<FlowerofTheJungle>() },
 			{ 3591, ItemType<EnergyRevolver>() },
-            { 3592, ItemType<EbonwoodBeam>() },
-            { 3593, ItemType<ShadewoodBeam>() },
-            { 3594, ItemType<PearlwoodBeam>() },
-            { 3595,ItemID.RichMahoganyBeam},
+			{ 3592, ItemType<EbonwoodBeam>() },
+			{ 3593, ItemType<ShadewoodBeam>() },
+			{ 3594, ItemType<PearlwoodBeam>() },
+			{ 3595,ItemID.RichMahoganyBeam},
 			{ 3596,ItemID.BorealBeam},
-            { 3597, ItemType<PalmWoodBeam>() },
-            { 3598, ItemType<CoughwoodBeam>() },
-            { 3599, ItemID.SandstoneColumn },
-            { 3600, ItemType<PearlstoneColumn>() },
-            { 3601, ItemType<CrimstoneColumn>() },
+			{ 3597, ItemType<PalmWoodBeam>() },
+			{ 3598, ItemType<CoughwoodBeam>() },
+			{ 3599, ItemID.SandstoneColumn },
+			{ 3600, ItemType<PearlstoneColumn>() },
+			{ 3601, ItemType<CrimstoneColumn>() },
 			{ 3602, ItemType<EbonstoneColumn>() },
 			{ 3603, ItemType<ChunkstoneColumn>() },
             //{ 3604, ItemType<DarkMatterWood>() },
@@ -1379,13 +1378,13 @@ namespace Avalon.Data.Sets
             //{ 3608, ItemType<DarkMatterBlock>() },
             //{ 3609, ItemType<BlackIceBlock>() },
             { 3610, ItemType<LivingLightningBlock>() },
-            { 3611, ItemID.CloudinaBottle }, // thunderbolt in a bottle?
+			{ 3611, ItemID.CloudinaBottle }, // thunderbolt in a bottle?
             //{ 3612, ItemType<PlasmaLamp>() },
             //{ 3613, ItemType<VoltBrick>() },
             { 3614, ItemType<FlaskOfPathogens>() },
 			{ 3615, ItemType<MysticalTomePage>() },
 			{ 3616, ItemType<RestorationBand>() },
-            { 3617, ItemID.None }, // effect ring
+			{ 3617, ItemID.None }, // effect ring
             //{ 3618, ItemType<MineralSlimeBanner>() },
             //{ 3619, ItemType<MineralSlimeBanner>() },
             //{ 3620, ItemType<MineralSlimeBanner>() },
@@ -1451,7 +1450,7 @@ namespace Avalon.Data.Sets
             //{ 3680, ItemType<EctoplasmWall>() },
             //{ 3681, ItemType<OblivionBrickWall>() },
             { 3682, ItemType<Boompipe>() },
-            { 3683,ItemID.RichGravestone1},
+			{ 3683,ItemID.RichGravestone1},
 			{ 3684,ItemID.RichGravestone2},
 			{ 3685,ItemID.RichGravestone3},
 			{ 3686,ItemID.RichGravestone4},
@@ -1465,8 +1464,8 @@ namespace Avalon.Data.Sets
             //{ 3694, ItemType<RhotukaSpinnerWeaken>() },
             //{ 3695, ItemType<RhotukaLauncher>() },
             { 3696, ItemType<DungeonWand>() },
-            { 3697, ItemType<CurseofOblivion>() },
-            { 3698, ItemType<BacteriumPrimeTrophy>() },
+			{ 3697, ItemType<CurseofOblivion>() },
+			{ 3698, ItemType<BacteriumPrimeTrophy>() },
 			{ 3699, ItemType<ShellHammer>() },
 			{ 3700, ItemType<LargeDaybloom>() },
 			{ 3701, ItemType<LargeMoonglow>() },
@@ -1493,15 +1492,15 @@ namespace Avalon.Data.Sets
             //{ 3722, ItemType<TropicStone>() }, // tropic stone
             { 3723, ItemType<LoamBlock>() },
 			{ 3724, ItemType<BleachedEbony>() },
-            { 3725, ItemType<TwilightPlumeSeeds>() },
-            { 3726, ItemType<TwilightPlume>() },
+			{ 3725, ItemType<TwilightPlumeSeeds>() },
+			{ 3726, ItemType<TwilightPlume>() },
             //{ 3727, ItemType<BlackSandBlock>() },
             //{ 3728, ItemType<SavannaGrassSeeds>() },
             { 3729, ItemType<Smogscreen>() },
 			{ 3730, ItemType<Catalyzer>() },
 			{ 3731, ItemType<Sulphur>() },
 			{ 3732, ItemType<Clash>() },
-            { 3733, ItemID.None }, // molten crown
+			{ 3733, ItemID.None }, // molten crown
             { 3734, ItemID.None }, // molten headgear
             { 3735, ItemType<ContagionCrate>() },
 			{ 3736,ItemID.OceanCrate},
@@ -1521,10 +1520,10 @@ namespace Avalon.Data.Sets
             //{ 3750, ItemType<ReflectorStaff>() },
             //{ 3751, ItemType<MechanicalWasp>() },
             { 3752, ItemType<SkyBrick>() },
-            { 3753, ItemType<EctoplasmicBeacon>() },
-            { 3754, ItemType<LibraryAltar>() },
+			{ 3753, ItemType<EctoplasmicBeacon>() },
+			{ 3754, ItemType<LibraryAltar>() },
 			{ 3755, ItemType<VampireTeeth>() },
-            { 3756, ItemType<GhostintheMachine>() },
+			{ 3756, ItemType<GhostintheMachine>() },
             //{ 3757, ItemType<ImperviousDoor>() },
             //{ 3758, ItemType<ImperviousKey>() },
             //{ 3759, ItemType<AlienApparatus>() },
@@ -1580,8 +1579,8 @@ namespace Avalon.Data.Sets
 			{ 3809, ItemType<NickelBar>() },
 			{ 3810, ItemType<NickelAnvil>() },
 			{ 3811, ItemType<NickelFence>() },
-            { 3812, ItemType<NickelDoor>() },
-            { 3813, ItemType<NickelBrick>() },
+			{ 3812, ItemType<NickelDoor>() },
+			{ 3813, ItemType<NickelBrick>() },
 			{ 3814, ItemType<NickelBrickWall>() },
 			{ 3815, ItemType<ZincPickaxe>() },
 			{ 3816, ItemType<ZincAxe>() },
@@ -1636,11 +1635,11 @@ namespace Avalon.Data.Sets
             //{ 3865, ItemType<HalloworBanner>() },
             //{ 3866, ItemType<ManofWarBanner>() },
             { 3867, ItemType<IrateBonesBanner>() },
-            { 3868, ItemType<AegisHalloworBanner>() },
-            { 3869, ItemType<HellboundLizardBanner>() },
-            { 3870, ItemType<GargoyleBanner>() },
-            { 3871, ItemType<CursedScepterBanner>() },
-            { 3872, ItemType<MechastingTrophy>() },
+			{ 3868, ItemType<AegisHalloworBanner>() },
+			{ 3869, ItemType<HellboundLizardBanner>() },
+			{ 3870, ItemType<GargoyleBanner>() },
+			{ 3871, ItemType<CursedScepterBanner>() },
+			{ 3872, ItemType<MechastingTrophy>() },
 			{ 3873, ItemType<AdvObsidianSkinPotion>() },
 			{ 3874, ItemType<AdvRegenerationPotion>() },
 			{ 3875, ItemType<AdvSwiftnessPotion>() },
@@ -1682,8 +1681,8 @@ namespace Avalon.Data.Sets
 			{ 3911, ItemType<AdvLuckPotion>() },
 			{ 3912, ItemType<AdvBloodCastPotion>() },
 			{ 3913, ItemType<AdvStarbrightPotion>() },
-            { 3914, ItemType<AdvVisionPotion>() },
-            { 3915, ItemType<AdvStrengthPotion>() },
+			{ 3914, ItemType<AdvVisionPotion>() },
+			{ 3915, ItemType<AdvStrengthPotion>() },
 			{ 3916, ItemType<AdvGPSPotion>() },
 			{ 3917, ItemType<AdvTimeShiftPotion>() },
 			{ 3918, ItemType<AdvShadowPotion>() },
@@ -1691,7 +1690,7 @@ namespace Avalon.Data.Sets
 			{ 3920, ItemType<AdvGauntletPotion>() },
 			{ 3921, ItemType<AdvWisdomPotion>() },
 			{ 3922, ItemType<AdvTitanskinPotion>() },
-            { 3923, ItemID.None }, // invincibility elixir
+			{ 3923, ItemID.None }, // invincibility elixir
             { 3924, ItemType<AdvForceFieldPotion>() },
 			{ 3925, ItemType<AdvMagnetPotion>() },
             //{ 3926, ItemType<TritanoriumBrick>() },

@@ -22,3 +22,9 @@ charset = utf-8
 
 # IDE0002: Simplify Member Access
 dotnet_diagnostic.IDE0002.severity = warning
+
+# CS0168: Variable is declared but never used
+dotnet_diagnostic.CS0168.severity = suggestion
+
+# CS0219: Variable is assigned but its value is never used
+dotnet_diagnostic.CS0219.severity = suggestion

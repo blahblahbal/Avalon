@@ -1,5 +1,7 @@
 using Avalon.Projectiles.Tools;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,7 +15,16 @@ internal class TorchLauncher : ModItem
 		Item.rare = ItemRarityID.Green;
 		Item.value = Item.sellPrice(silver: 78);
 	}
-
+	private int ammoItem;
+	public override void OnConsumeAmmo(Item ammo, Player player)
+	{
+		ammoItem = ammo.type;
+	}
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+	{
+		Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, ai2: ammoItem);
+		return false;
+	}
 	public override void AddRecipes()
 	{
 		CreateRecipe()
