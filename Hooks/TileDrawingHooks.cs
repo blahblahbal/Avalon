@@ -20,7 +20,7 @@ namespace Avalon.Hooks
 		protected override void Apply()
 		{
 			IL_TileDrawing.DrawSingleTile += BetterDrawEffects;
-			IL_TileDrawing.DrawTiles_EmitParticles += TintTileSparkle;
+			//IL_TileDrawing.DrawTiles_EmitParticles += TintTileSparkle;
 		}
 		private void BetterDrawEffects(ILContext il)
 		{

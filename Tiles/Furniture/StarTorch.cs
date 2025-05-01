@@ -37,11 +37,11 @@ namespace Avalon.Tiles.Furniture
             TileID.Sets.DisableSmartCursor[Type] = true;
             TileID.Sets.FramesOnKillWall[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.StyleTorch);
-            TileObjectData.newTile.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+            TileObjectData.newTile.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
             TileObjectData.newTile.WaterDeath = WaterDeath;
             TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.EmptyTile, TileObjectData.newTile.Width, 0);
             TileObjectData.newAlternate.CopyFrom(TileObjectData.StyleTorch);
-            TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+            TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
             TileObjectData.newAlternate.WaterDeath = WaterDeath;
             TileObjectData.newAlternate.AnchorLeft = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.Tree | AnchorType.AlternateTile | AnchorType.EmptyTile, TileObjectData.newTile.Height, 0);
             TileObjectData.newAlternate.AnchorAlternateTiles = new int[7] {
@@ -55,7 +55,7 @@ namespace Avalon.Tiles.Furniture
             };
             TileObjectData.addAlternate(1);
             TileObjectData.newAlternate.CopyFrom(TileObjectData.StyleTorch);
-            TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+            TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
             TileObjectData.newAlternate.WaterDeath = WaterDeath;
             TileObjectData.newAlternate.AnchorRight = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.Tree | AnchorType.AlternateTile | AnchorType.EmptyTile, TileObjectData.newTile.Height, 0);
             TileObjectData.newAlternate.AnchorAlternateTiles = new int[7] {
@@ -69,7 +69,7 @@ namespace Avalon.Tiles.Furniture
             };
             TileObjectData.addAlternate(2);
             TileObjectData.newAlternate.CopyFrom(TileObjectData.StyleTorch);
-            TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+            TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
             TileObjectData.newAlternate.WaterDeath = WaterDeath;
             //TileObjectData.newAlternate.AnchorWall = true;
             TileObjectData.addAlternate(0);

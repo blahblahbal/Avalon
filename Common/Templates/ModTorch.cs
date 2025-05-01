@@ -1,8 +1,5 @@
-using Avalon.Items.Potions.Other;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -41,23 +38,23 @@ public abstract class ModTorch : SpecialLight
         TileID.Sets.DisableSmartCursor[Type] = true;
         TileID.Sets.FramesOnKillWall[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.StyleTorch);
-        TileObjectData.newTile.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+        TileObjectData.newTile.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
         TileObjectData.newTile.WaterDeath = WaterDeath;
         TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
         TileObjectData.newAlternate.CopyFrom(TileObjectData.StyleTorch);
-        TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+        TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
         TileObjectData.newAlternate.WaterDeath = WaterDeath;
         TileObjectData.newAlternate.AnchorLeft = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.Tree | AnchorType.AlternateTile, TileObjectData.newTile.Height, 0);
         TileObjectData.newAlternate.AnchorAlternateTiles = new[] { 124 };
         TileObjectData.addAlternate(1);
         TileObjectData.newAlternate.CopyFrom(TileObjectData.StyleTorch);
-        TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+        TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
         TileObjectData.newAlternate.WaterDeath = WaterDeath;
         TileObjectData.newAlternate.AnchorRight = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.Tree | AnchorType.AlternateTile, TileObjectData.newTile.Height, 0);
         TileObjectData.newAlternate.AnchorAlternateTiles = new[] { 124 };
         TileObjectData.addAlternate(2);
         TileObjectData.newAlternate.CopyFrom(TileObjectData.StyleTorch);
-        TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+        TileObjectData.newAlternate.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
         TileObjectData.newAlternate.WaterDeath = WaterDeath;
         TileObjectData.newAlternate.AnchorWall = true;
         TileObjectData.addAlternate(0);
@@ -210,7 +207,7 @@ public abstract class ModCampfire : SpecialLight
         //  This is what is copied from the Campfire tile
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
         TileObjectData.newTile.StyleWrapLimit = 16;
-        TileObjectData.newTile.WaterPlacement = (LiquidPlacement)Convert.ToInt32(WaterDeath);
+        TileObjectData.newTile.WaterPlacement = (LiquidPlacement)System.Convert.ToInt32(WaterDeath);
         TileObjectData.newTile.WaterDeath = WaterDeath;
         TileObjectData.newTile.LavaPlacement = LiquidPlacement.NotAllowed;
         TileObjectData.newTile.LavaDeath = true;

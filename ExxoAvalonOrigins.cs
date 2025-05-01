@@ -233,10 +233,11 @@ public class ExxoAvalonOrigins : Mod
 			["AddBiomeChest", List<int> value] => Data.Sets.ItemSets.BiomeLockboxCollection.AddToListAndReturnIt(value),
 
 			// Torch launcher stuff
-			["AddTorchLauncherLightColor", int key, Vector3 value] => Data.Sets.ItemSets.TorchLauncherItemToProjColor.TorchLauncherAdding(key, value),
-			["AddTorchLauncherDust", int key, int value] => Data.Sets.ItemSets.TorchLauncherDust.TorchLauncherAdding(key, value),
-			["AddTorchLauncherFlameColor", int key, Color value] => Data.Sets.ItemSets.TorchLauncherFlameColors.TorchLauncherAdding(key, value),
-			["AddTorchLauncherStickColor", int key, Color value] => Data.Sets.ItemSets.TorchLauncherStickColors.TorchLauncherAdding(key, value),
+			["AddTorchLauncherLightColor", int key, Vector3 value] => Data.Sets.TorchLauncherSets.LightColor.TorchLauncherAdding(key, value),
+			["AddTorchLauncherDust", int key, int value] => Data.Sets.TorchLauncherSets.Dust.TorchLauncherAdding(key, value),
+			["AddTorchLauncherTexture", int key, string value] => Data.Sets.TorchLauncherSets.Texture.TorchLauncherAdding(key, value),
+			["AddTorchLauncherFlameTexture", int key, string value] => Data.Sets.TorchLauncherSets.FlameTexture.TorchLauncherAdding(key, value),
+			["AddTorchLauncherDebuffType", int key, int value] => Data.Sets.TorchLauncherSets.DebuffType.TorchLauncherAdding(key, value),
 
 			//IDs
 			["ConvertsToContagion", int tileID, int num] => Data.Sets.TileSets.ConvertsToContagion[tileID] = num,
