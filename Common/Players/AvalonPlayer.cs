@@ -5,9 +5,7 @@ using Avalon.Dusts;
 using Avalon.Hooks;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
-using Avalon.Items.Consumables;
 using Avalon.Items.Other;
-using Avalon.Items.Tools;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
@@ -3318,7 +3316,7 @@ public class AvalonPlayer : ModPlayer
 
 		if (Player.whoAmI == Main.myPlayer)
 		{
-			NetMessage.SendData(Terraria.ID.MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
+			NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
 		}
 	}
 	public static void StayInBounds(Vector2 pos)

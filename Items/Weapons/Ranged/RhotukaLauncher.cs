@@ -8,32 +8,19 @@ namespace Avalon.Items.Weapons.Ranged;
 public class RhotukaLauncher : ModItem
 {
 	public override bool IsLoadingEnabled(Mod mod)
-    {
-        return false;
-    }
-    public override void SetStaticDefaults()
-    {
-        Item.staff[Type] = true;
-    }
-
-    public override void SetDefaults()
-    {
-        Item.width = 42;
-        Item.height = 18;
-        Item.UseSound = SoundID.Item34;
-        Item.damage = 30;
-        Item.autoReuse = false;
-		Item.useAmmo = ModContent.ItemType<Ammo.RhotukaSpinner>();
-        Item.shootSpeed = 5f;
-        Item.DamageType = DamageClass.Ranged;
-        Item.noMelee = true;
-        Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
-        Item.useTime = 20;
-        Item.knockBack = 0.625f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.RhotukaSpinnerScrambler>();
-        Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = 1000000;
-        Item.useAnimation = 20;
-    }
+	{
+		return false;
+	}
+	public override void SetStaticDefaults()
+	{
+		Item.staff[Type] = true;
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToRangedWeapon(26, 32, ModContent.ProjectileType<Projectiles.Ranged.RhotukaSpinnerScrambler>(), ModContent.ItemType<Ammo.RhotukaSpinner>(), 30, 0f, 14f, 22, 22);
+		Item.rare = ItemRarityID.Green;
+		Item.value = Item.sellPrice(0, 2);
+		Item.UseSound = SoundID.Item39;
+	}
 	public override Vector2? HoldoutOffset() => new Vector2(-10, 0);
 }

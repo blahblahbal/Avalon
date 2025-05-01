@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,33 +6,18 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class CaesiumPike : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        ItemID.Sets.Spears[Item.type] = true;
-    }
-    public override void SetDefaults()
-    {
-        Item.width = 38;
-        Item.height = 40;
-        Item.damage = 120;
-        Item.UseSound = SoundID.Item1;
-        Item.noUseGraphic = true;
-        Item.scale = 1f;
-        Item.shootSpeed = 4f;
-        Item.rare = ItemRarityID.Lime;
-        Item.noMelee = true;
-        Item.useTime = 30;
-        Item.useAnimation = 30;
-        Item.knockBack = 4.5f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Melee.CaesiumPike>();
-        Item.DamageType = DamageClass.Melee;
-        Item.autoReuse = true;
-        Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = Item.sellPrice(0, 20, 0, 0);
-        Item.UseSound = SoundID.Item1;
-    }
-    public override bool CanUseItem(Player player)
-    {
-        return player.ownedProjectileCounts[Item.shoot] < 1;
-    }
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.Spears[Item.type] = true;
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToSpear(ModContent.ProjectileType<Projectiles.Melee.CaesiumPike>(), 120, 4.5f, 30, 4f, true, scale: 1.1f);
+		Item.rare = ItemRarityID.Lime;
+		Item.value = Item.sellPrice(0, 20);
+	}
+	public override bool CanUseItem(Player player)
+	{
+		return player.ownedProjectileCounts[Item.shoot] < 1;
+	}
 }

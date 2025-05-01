@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,27 +6,16 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 public class NickelBroadsword : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.damage = 14;
-        Item.useTurn = true;
-        Item.scale = 1f;
-        Item.width = dims.Width;
-        Item.useTime = 20;
-        Item.knockBack = 5.5f;
-        Item.DamageType = DamageClass.Melee;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = 2250;
-        Item.useAnimation = 20;
-        Item.height = dims.Height;
-        Item.UseSound = SoundID.Item1;
-    }
-    public override void AddRecipes()
-    {
-        Terraria.Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 8)
-            .AddTile(TileID.Anvils)
-            .Register();
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToSword(14, 5.5f, 20, false, width: 24, height: 28);
+		Item.value = Item.sellPrice(silver: 4, copper: 50);
+	}
+	public override void AddRecipes()
+	{
+		Recipe.Create(Type)
+			.AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>(), 8)
+			.AddTile(TileID.Anvils)
+			.Register();
+	}
 }

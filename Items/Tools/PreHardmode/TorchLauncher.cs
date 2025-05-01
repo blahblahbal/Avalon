@@ -11,7 +11,7 @@ internal class TorchLauncher : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToGun(ModContent.ProjectileType<Torch>(), ItemID.Torch, 1, 0f, 8f, 16, 16, width: 24);
+		Item.DefaultToRangedWeapon(24, 14, ModContent.ProjectileType<Torch>(), ItemID.Torch, 1, 0f, 8f, 16, 16);
 		Item.rare = ItemRarityID.Green;
 		Item.value = Item.sellPrice(silver: 78);
 	}

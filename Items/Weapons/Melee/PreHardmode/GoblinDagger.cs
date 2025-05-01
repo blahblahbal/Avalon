@@ -6,14 +6,10 @@ namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 public class GoblinDagger : ModItem
 {
-    public override void SetDefaults()
-    {
-        Item.CloneDefaults(ItemID.GoldShortsword);
-        Item.damage = 30;
-        Item.shootSpeed = 2.1f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Melee.GoblinDagger>();
-        Item.scale = 0.95f;
-        Item.value = Item.sellPrice(0, 0, 50, 0);
-        Item.rare = ItemRarityID.Green;
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToShortsword(ModContent.ProjectileType<Projectiles.Melee.GoblinDagger>(), 30, 5f, 11, 2.1f, scale: 0.95f);
+		Item.rare = ItemRarityID.Green;
+		Item.value = Item.sellPrice(silver: 54);
+	}
 }

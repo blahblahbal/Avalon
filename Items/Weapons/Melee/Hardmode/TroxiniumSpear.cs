@@ -1,4 +1,3 @@
-using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -10,50 +9,37 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class TroxiniumSpear : ModItem
 {
-	private static Asset<Texture2D> glow;
+	private static Asset<Texture2D>? glow;
 	public override void Load()
 	{
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}
 	public override void SetStaticDefaults()
-    {
+	{
 		ItemID.Sets.Spears[Item.type] = true;
-    }
-    public override void SetDefaults()
-    {
-        Item.width = 36;
-        Item.height = 40;
-        Item.UseSound = SoundID.Item1;
-        Item.damage = 50;
-        Item.noUseGraphic = true;
-        Item.scale = 1.1f;
-        Item.shootSpeed = 5f;
-        Item.rare = ItemRarityID.Pink;
-        Item.noMelee = true;
-        Item.useTime = 23;
-        Item.knockBack = 5.6f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Melee.TroxiniumSpear>();
-        Item.DamageType = DamageClass.Melee;
-        Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = 100000;
-        Item.useAnimation = 23;
-        //if (!Main.dedServ)
-        //{
-        //    Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-        //}
-        //Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
-    }
-    public override Color? GetAlpha(Color lightColor)
-    {
-        return lightColor * 4f;
-    }
-    public override void AddRecipes()
-    {
-        Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>(), 12)
-            .AddTile(TileID.MythrilAnvil)
-            .Register();
-    }
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToSpear(ModContent.ProjectileType<Projectiles.Melee.TroxiniumSpear>(), 50, 5.6f, 23, 5f);
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 2);
+		//if (!Main.dedServ)
+		//{
+		//    Item.GetGlobalItem<ItemGlowmask>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+		//}
+		//Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
+	}
+	public override Color? GetAlpha(Color lightColor)
+	{
+		return lightColor * 4f;
+	}
+	public override void AddRecipes()
+	{
+		Recipe.Create(Type)
+			.AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>(), 12)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+	}
 	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 	{
 		Vector2 vector = glow.Size() / 2f;

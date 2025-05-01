@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,28 +7,15 @@ namespace Avalon.Items.Weapons.Magic.PreHardmode;
 
 public class ChaosTome : ModItem
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.UseSound = SoundID.Item20;
-        Item.DamageType = DamageClass.Magic;
-        Item.damage = 21;
-        Item.autoReuse = true;
-        Item.shootSpeed = 8f;
-        Item.mana = 8;
-        Item.noMelee = true;
-        Item.rare = ItemRarityID.Green;
-        Item.width = dims.Width;
-        Item.useTime = 25;
-        Item.knockBack = 4f;
-        Item.shoot = ModContent.ProjectileType<Projectiles.Magic.ChaosBolt>();
-        Item.useStyle = ItemUseStyleID.Shoot;
-        Item.value = 18400;
-        Item.useAnimation = 25;
-        Item.height = dims.Height;
-    }
-    public override Vector2? HoldoutOffset()
-    {
-        return new Vector2(10, 0);
-    }
+	public override void SetDefaults()
+	{
+		Item.DefaultToSpellBook(ModContent.ProjectileType<Projectiles.Magic.ChaosBolt>(), 21, 4f, 8, 8f, 25, 25);
+		Item.rare = ItemRarityID.Green;
+		Item.value = Item.sellPrice(silver: 54);
+		Item.UseSound = SoundID.Item20;
+	}
+	public override Vector2? HoldoutOffset()
+	{
+		return new Vector2(10, 0);
+	}
 }

@@ -10,45 +10,33 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class TroxiniumSword : ModItem
 {
-	private static Asset<Texture2D> glow;
+	private static Asset<Texture2D>? glow;
 	public override void Load()
 	{
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}
 
 	public override void SetDefaults()
-    {
-        Item.width = 36;
-        Item.height = 40;
-        Item.UseSound = SoundID.Item1;
-        Item.damage = 63;
-        Item.useTurn = true;
-        Item.autoReuse = true;
-        //Item.scale = 1.3f;
-        Item.rare = ItemRarityID.Pink;
-        Item.autoReuse = true;
-        Item.useTime = 24;
-        Item.knockBack = 4f;
-        Item.DamageType = DamageClass.Melee;
-        Item.useStyle = ItemUseStyleID.Swing;
-        Item.value = Item.sellPrice(0, 3, 0, 0);
-        Item.useAnimation = 24;
-        if (!Main.dedServ)
-        {
-            Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
-        }
-        Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
-    }
-    public override Color? GetAlpha(Color lightColor)
-    {
-        return lightColor * 4f;
-    }
-    public override void AddRecipes()
-    {
-        Recipe.Create(Type)
-            .AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>(), 12)
-            .AddTile(TileID.MythrilAnvil).Register();
-    }
+	{
+		Item.DefaultToSword(63, 4f, 24);
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 3);
+		if (!Main.dedServ)
+		{
+			Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
+		}
+		Item.GetGlobalItem<ItemGlowmask>().glowAlpha = 0;
+	}
+	public override Color? GetAlpha(Color lightColor)
+	{
+		return lightColor * 4f;
+	}
+	public override void AddRecipes()
+	{
+		Recipe.Create(Type)
+			.AddIngredient(ModContent.ItemType<Material.Bars.TroxiniumBar>(), 12)
+			.AddTile(TileID.MythrilAnvil).Register();
+	}
 	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 	{
 		Vector2 vector = glow.Size() / 2f;

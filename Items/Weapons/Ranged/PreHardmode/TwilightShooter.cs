@@ -19,22 +19,10 @@ public class TwilightShooter : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.width = 42;
-		Item.height = 18;
-		Item.UseSound = SoundID.Item34;
-		Item.damage = 24;
-		Item.autoReuse = false;
-		Item.useAmmo = AmmoID.Bullet;
-		Item.shootSpeed = 5f;
-		Item.DamageType = DamageClass.Ranged;
-		Item.noMelee = true;
+		Item.DefaultToRangedWeapon(44, 14, ProjectileID.PurificationPowder, AmmoID.Bullet, 24, 0.625f, 5f, 20, 20);
 		Item.rare = ItemRarityID.Orange;
-		Item.useTime = 20;
-		Item.knockBack = 0.625f;
-		Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.RhotukaSpinnerScrambler>();
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.value = 1000000;
-		Item.useAnimation = 20;
+		Item.value = Item.sellPrice(0, 4);
+		Item.UseSound = SoundID.Item34;
 	}
 	public override void HoldItem(Player player)
 	{
@@ -65,7 +53,7 @@ public class TwilightShooter : ModItem
 			Item.shootSpeed = 11f;
 		}
 	}
-	private AmmoType Style(Player player)
+	private static AmmoType Style(Player player)
 	{
 		bool flag = false;
 		for (int j = 54; j < 58; j++)

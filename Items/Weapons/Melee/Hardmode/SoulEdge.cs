@@ -7,8 +7,6 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -31,7 +29,7 @@ public class SoulEdgeLayer : PlayerDrawLayer
 	{
 		return drawInfo.drawPlayer.HeldItem.type == ModContent.ItemType<SoulEdge>() && drawInfo.drawPlayer.ItemAnimationActive;
 	}
-	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D>? texture;
 	public override void Load()
 	{
 		texture = ModContent.Request<Texture2D>("Avalon/Items/Weapons/Melee/Hardmode/SoulEdgeGlow");
@@ -68,30 +66,16 @@ public class SoulEdgeLayer : PlayerDrawLayer
 	{
 		public override void SetDefaults()
 		{
-			Item.width = 40;
-			Item.height = 42;
-			Item.UseSound = SoundID.Item1;
-			Item.damage = 292;
-			Item.autoReuse = true;
-			Item.scale = 1f;
-			Item.shootSpeed = 1f;
-			Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
-			Item.knockBack = 6.5f;
-			Item.shoot = ModContent.ProjectileType<SoulEdgeSlash>();
-			Item.DamageType = DamageClass.Melee;
-			Item.useStyle = ItemUseStyleID.Swing;
-			Item.value = Item.sellPrice(0, 30);
-			Item.useAnimation = 20;
-			Item.useTime = 20;
-			Item.shootsEveryUse = true;
-			Item.noMelee = true;
+			Item.DefaultToProjectileSword(ModContent.ProjectileType<SoulEdgeSlash>(), 292, 6.5f, 1f, 20, 20, shootsEveryUse: true, noMelee: true, width: 56, height: 62);
 			Item.noUseGraphic = true;
+			Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
+			Item.value = Item.sellPrice(0, 30);
 		}
 		public override void MeleeEffects(Player player, Rectangle hitbox)
 		{
 			int DustType = DustID.SpectreStaff;
 			if (Main.rand.NextBool())
-				DustType = (Main.rand.NextFloat() > (player.GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage / (float)SoulEdgePlayer.maxSoulEdge)? DustID.DungeonSpirit : ModContent.DustType<PhantoplasmDust>());
+				DustType = (Main.rand.NextFloat() > (player.GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage / (float)SoulEdgePlayer.maxSoulEdge) ? DustID.DungeonSpirit : ModContent.DustType<PhantoplasmDust>());
 
 			for (int j = 0; j < 2; j++)
 			{
@@ -120,7 +104,7 @@ public class SoulEdgeLayer : PlayerDrawLayer
 			if (player.altFunctionUse == 2)
 			{
 				SoundEngine.PlaySound(SoundID.Zombie53, player.position);
-				Projectile.NewProjectile(source, position, velocity * 8, ModContent.ProjectileType<SoulEdgeDash>(),damage * 3, knockback * 2, player.whoAmI);
+				Projectile.NewProjectile(source, position, velocity * 8, ModContent.ProjectileType<SoulEdgeDash>(), damage * 3, knockback * 2, player.whoAmI);
 				return false;
 			}
 

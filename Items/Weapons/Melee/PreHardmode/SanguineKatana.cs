@@ -1,8 +1,6 @@
-using System;
-using System.Reflection;
-using Avalon.Common.Players;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -10,7 +8,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Melee.PreHardmode; 
+namespace Avalon.Items.Weapons.Melee.PreHardmode;
 
 public class SanguineKatana : ModItem
 {
@@ -20,21 +18,9 @@ public class SanguineKatana : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.width = 34;
-		Item.height = 36;
-		Item.damage = 22;
-		Item.scale = 1f;
-		Item.DamageType = DamageClass.Melee;
-		Item.autoReuse = true;
+		Item.DefaultToProjectileSword(ModContent.ProjectileType<SanguineKatanaSlash>(), 22, 5f, 16f, 24, 24, useTurn: true);
 		Item.rare = ItemRarityID.Orange;
-		Item.useTime = 24;
-		Item.useAnimation = 24;
-		Item.useStyle = ItemUseStyleID.Swing;
-		Item.knockBack = 5f;
-		Item.UseSound = SoundID.Item1;
-		Item.value = Item.sellPrice(0, 1, 0, 0);
-		Item.shootSpeed = 16;
-		Item.shoot = ModContent.ProjectileType<SanguineKatanaSlash>();
+		Item.value = Item.sellPrice(0, 1);
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{

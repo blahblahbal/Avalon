@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -101,25 +100,10 @@ public class HallowedClaymore : ModItem
 	//}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.UseSound = SoundID.Item1;
-		Item.DamageType = DamageClass.Melee;
-		Item.damage = 88;
-		Item.autoReuse = true;
-		Item.scale = scaleMult;
-		Item.crit = 6;
-		Item.shootSpeed = 6f; // so the knockback works properly
+		Item.DefaultToMace(ModContent.ProjectileType<Projectiles.Melee.HallowedClaymore>(), 88, 8f, scaleMult, 22, width: 56, height: 62);
+		Item.ArmorPenetration = 15;
 		Item.rare = ItemRarityID.Pink;
-		Item.noUseGraphic = true;
-		Item.noMelee = true;
-		Item.width = dims.Width;
-		Item.height = dims.Height;
-		Item.useTime = Item.useAnimation = 22;
-		Item.knockBack = 8f;
-		Item.shoot = ModContent.ProjectileType<Projectiles.Melee.HallowedClaymore>();
-		Item.useStyle = ItemUseStyleID.Shoot;
 		Item.value = Item.sellPrice(0, 5);
-		Item.ArmorPenetration += 15;
 	}
 
 	public override bool MeleePrefix()

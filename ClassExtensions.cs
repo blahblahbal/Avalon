@@ -855,12 +855,6 @@ public static class ClassExtensions
 	/// consumable = <paramref name="consumable"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="damage"></param>
-	/// <param name="projectile"></param>
-	/// <param name="shootSpeed"></param>
-	/// <param name="knockback"></param>
-	/// <param name="consumable"></param>
 	public static void DefaultToArrow(this Item item, int damage, int projectile, float shootSpeed, float knockback, bool consumable = true)
 	{
 		item.width = 10;
@@ -889,12 +883,6 @@ public static class ClassExtensions
 	/// consumable = <paramref name="consumable"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="damage"></param>
-	/// <param name="projectile"></param>
-	/// <param name="shootSpeed"></param>
-	/// <param name="knockback"></param>
-	/// <param name="consumable"></param>
 	public static void DefaultToBullet(this Item item, int damage, int projectile, float shootSpeed, float knockback, bool consumable = true)
 	{
 		item.width = 8;
@@ -923,12 +911,6 @@ public static class ClassExtensions
 	/// consumable = <paramref name="consumable"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="damage"></param>
-	/// <param name="projectile"></param>
-	/// <param name="shootSpeed"></param>
-	/// <param name="knockback"></param>
-	/// <param name="consumable"></param>
 	public static void DefaultToSpinner(this Item item, int damage, int projectile, float shootSpeed, float knockback, bool consumable = true)
 	{
 		item.width = 26;
@@ -957,10 +939,6 @@ public static class ClassExtensions
 	/// consumable = <paramref name="consumable"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="damage"></param>
-	/// <param name="projectile"></param>
-	/// <param name="consumable"></param>
 	public static void DefaultToCanister(this Item item, int damage, int projectile, bool consumable = true)
 	{
 		item.width = 10;
@@ -982,8 +960,6 @@ public static class ClassExtensions
 	/// defense = <paramref name="defense"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="defense"></param>
 	public static void DefaultToArmor(this Item item, int defense)
 	{
 		item.width = 16;
@@ -1008,8 +984,6 @@ public static class ClassExtensions
 	/// value = 10 silver;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="tileStyleToPlace"></param>
 	public static void DefaultToMonsterBanner(this Item item, int tileStyleToPlace)
 	{
 		item.DefaultToPlaceableTile(ModContent.TileType<MonsterBanner>(), tileStyleToPlace);
@@ -1044,8 +1018,6 @@ public static class ClassExtensions
 	/// expert = true;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="rarity"></param>
 	public static void DefaultToTreasureBag(this Item item, TreasureBagRarities rarity)
 	{
 		item.width = 24;
@@ -1068,13 +1040,6 @@ public static class ClassExtensions
 	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="consumable"></param>
-	/// <param name="useAnim"></param>
-	/// <param name="useTurn"></param>
-	/// <param name="useTime"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToSpawner(this Item item, bool consumable = true, int useAnim = 45, int useTime = 45, bool useTurn = false, int width = 22, int height = 14)
 	{
 		item.DefaultToConsumable(consumable, useAnim, useTime, useTurn, width, height);
@@ -1092,13 +1057,6 @@ public static class ClassExtensions
 	/// useStyle = <see cref="ItemUseStyleID.HoldUp"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="consumable"></param>
-	/// <param name="useAnim"></param>
-	/// <param name="useTurn"></param>
-	/// <param name="useTime"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToConsumable(this Item item, bool consumable = true, int useAnim = 30, int useTime = 30, bool useTurn = false, int width = 18, int height = 18)
 	{
 		item.width = width;
@@ -1125,13 +1083,6 @@ public static class ClassExtensions
 	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="consumable"></param>
-	/// <param name="useAnim"></param>
-	/// <param name="useTurn"></param>
-	/// <param name="useTime"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToUseable(this Item item, bool consumable = true, int useAnim = 15, int useTime = 15, bool useTurn = false, int width = 20, int height = 20)
 	{
 		item.width = width;
@@ -1154,7 +1105,6 @@ public static class ClassExtensions
 	/// value = 25 silver;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
 	public static void DefaultToFish(this Item item)
 	{
 		item.width = 26;
@@ -1178,8 +1128,6 @@ public static class ClassExtensions
 	/// consumable = true;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="tileStyleToPlace"></param>
 	public static void DefaultToBar(this Item item, int tileStyleToPlace)
 	{
 		item.DefaultToPlaceableTile(ModContent.TileType<PlacedBars>(), tileStyleToPlace);
@@ -1195,7 +1143,6 @@ public static class ClassExtensions
 	/// value = 20 copper;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
 	public static void DefaultToHerb(this Item item)
 	{
 		item.width = 12;
@@ -1221,8 +1168,6 @@ public static class ClassExtensions
 	/// value = <paramref name="tier2"/> ? 60 silver : 30 silver;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="tileStyleToPlace"></param>
 	public static void DefaultToShard(this Item item, int tileStyleToPlace, bool tier2 = false)
 	{
 		item.DefaultToPlaceableTile(tier2 ? ModContent.TileType<ShardsTier2>() : ModContent.TileType<Shards>(), tileStyleToPlace);
@@ -1248,9 +1193,6 @@ public static class ClassExtensions
 	/// value = 50 silver;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="tileIDToPlace"></param>
-	/// <param name="tileStyleToPlace"></param>
 	public static void DefaultToPainting(this Item item, int tileIDToPlace, int tileStyleToPlace)
 	{
 		item.DefaultToPlaceableTile(tileIDToPlace, tileStyleToPlace);
@@ -1268,7 +1210,6 @@ public static class ClassExtensions
 	/// <see cref="Item.GetGlobalItem"/>.TomeMaterial = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
 	public static void DefaultToTomeMaterial(this Item item)
 	{
 		item.width = 16;
@@ -1289,7 +1230,6 @@ public static class ClassExtensions
 	/// <see cref="Item.GetGlobalItem"/>.StaminaScroll = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
 	public static void DefaultToStaminaScroll(this Item item)
 	{
 		item.CloneDefaults(ModContent.ItemType<BlankScroll>());
@@ -1306,9 +1246,6 @@ public static class ClassExtensions
 	/// maxStack = <see cref="Item.CommonMaxStack"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToMisc(this Item item, int width = 16, int height = 16)
 	{
 		item.width = width;
@@ -1334,7 +1271,6 @@ public static class ClassExtensions
 	/// <see cref="Item.GetGlobalItem"/>.Genie = true; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
 	public static void DefaultToGenie(this Item item)
 	{
 		item.DefaultToVanitypet(0, 0);
@@ -1371,10 +1307,6 @@ public static class ClassExtensions
 	/// if (<paramref name="cork"/> == <see cref="PotionCorkType.Elixir"/>) value = 50 silver;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="buffType"></param>
-	/// <param name="buffDuration"></param>
-	/// <param name="cork"></param>
 	public static void DefaultToBuffPotion(this Item item, int buffType, int buffDuration, PotionCorkType cork = PotionCorkType.Default)
 	{
 		item.width = 14;
@@ -1413,8 +1345,6 @@ public static class ClassExtensions
 	/// <see cref="Item.GetGlobalItem"/>.HealStamina = <paramref name="staminaAmount"/>; (Where <typeparamref name="T"/> is <see cref="AvalonGlobalItemInstance"/>)
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="staminaAmount"></param>
 	public static void DefaultToStaminaPotion(this Item item, int staminaAmount)
 	{
 		item.width = 14;
@@ -1443,9 +1373,6 @@ public static class ClassExtensions
 	/// if (<paramref name="grade"/> + <paramref name="rarityBonus"/> &gt;= 9) value = 25 gold;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="grade"></param>
-	/// <param name="rarityBonus"></param>
 	public static void DefaultToTome(this Item item, int grade, int rarityBonus = 0)
 	{
 		item.width = 24;
@@ -1482,17 +1409,6 @@ public static class ClassExtensions
 	/// UseSound = <see cref="SoundID.Item1"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="axePowerTimes5"></param>
-	/// <param name="damage"></param>
-	/// <param name="knockback"></param>
-	/// <param name="miningSpeed"></param>
-	/// <param name="useAnimation"></param>
-	/// <param name="useTurn"></param>
-	/// <param name="tileRangeModifier"></param>
-	/// <param name="scale"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToAxe(this Item item, int axePowerTimes5, int damage, float knockback, int miningSpeed, int useAnimation, int tileRangeModifier = 0, float scale = 1f, bool useTurn = true, int width = 24, int height = 28)
 	{
 		item.width = width;
@@ -1529,17 +1445,6 @@ public static class ClassExtensions
 	/// UseSound = <see cref="SoundID.Item1"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="pickaxePower"></param>
-	/// <param name="damage"></param>
-	/// <param name="knockback"></param>
-	/// <param name="miningSpeed"></param>
-	/// <param name="useAnimation"></param>
-	/// <param name="useTurn"></param>
-	/// <param name="tileRangeModifier"></param>
-	/// <param name="scale"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToPickaxe(this Item item, int pickaxePower, int damage, float knockback, int miningSpeed, int useAnimation, int tileRangeModifier = 0, float scale = 1f, bool useTurn = true, int width = 24, int height = 28)
 	{
 		item.width = width;
@@ -1576,17 +1481,6 @@ public static class ClassExtensions
 	/// UseSound = <see cref="SoundID.Item1"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="hammerPower"></param>
-	/// <param name="damage"></param>
-	/// <param name="knockback"></param>
-	/// <param name="miningSpeed"></param>
-	/// <param name="useAnimation"></param>
-	/// <param name="useTurn"></param>
-	/// <param name="tileRangeModifier"></param>
-	/// <param name="scale"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToHammer(this Item item, int hammerPower, int damage, float knockback, int miningSpeed, int useAnimation, int tileRangeModifier = 0, float scale = 1f, bool useTurn = true, int width = 24, int height = 28)
 	{
 		item.width = width;
@@ -1624,18 +1518,6 @@ public static class ClassExtensions
 	/// UseSound = <see cref="SoundID.Item1"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="hammerPower"></param>
-	/// <param name="axePowerTimes5"></param>
-	/// <param name="damage"></param>
-	/// <param name="knockback"></param>
-	/// <param name="miningSpeed"></param>
-	/// <param name="useAnimation"></param>
-	/// <param name="useTurn"></param>
-	/// <param name="tileRangeModifier"></param>
-	/// <param name="scale"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToHamaxe(this Item item, int hammerPower, int axePowerTimes5, int damage, float knockback, int miningSpeed, int useAnimation, int tileRangeModifier = 0, float scale = 1f, bool useTurn = true, int width = 24, int height = 28)
 	{
 		item.width = width;
@@ -1674,18 +1556,6 @@ public static class ClassExtensions
 	/// UseSound = <see cref="SoundID.Item1"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="pickaxePower"></param>
-	/// <param name="axePowerTimes5"></param>
-	/// <param name="damage"></param>
-	/// <param name="knockback"></param>
-	/// <param name="miningSpeed"></param>
-	/// <param name="useAnimation"></param>
-	/// <param name="tileRangeModifier"></param>
-	/// <param name="scale"></param>
-	/// <param name="useTurn"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToPickaxeAxe(this Item item, int pickaxePower, int axePowerTimes5, int damage, float knockback, int miningSpeed, int useAnimation, int tileRangeModifier = 0, float scale = 1f, bool useTurn = true, int width = 24, int height = 28)
 	{
 		item.width = width;
@@ -1725,17 +1595,6 @@ public static class ClassExtensions
 	/// shootSpeed = <paramref name="projectile"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="projectile"></param>
-	/// <param name="axePowerTimes5"></param>
-	/// <param name="damage"></param>
-	/// <param name="knockback"></param>
-	/// <param name="miningSpeed"></param>
-	/// <param name="useAnimation"></param>
-	/// <param name="tileRangeModifier"></param>
-	/// <param name="shootSpeed"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToChainsaw(this Item item, int projectile, int axePowerTimes5, int damage, float knockback, int miningSpeed, int tileRangeModifier = 0, int useAnimation = 15, float shootSpeed = 40f, int width = 20, int height = 12)
 	{
 		item.width = width;
@@ -1776,17 +1635,6 @@ public static class ClassExtensions
 	/// shootSpeed = <paramref name="projectile"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="projectile"></param>
-	/// <param name="pickPower"></param>
-	/// <param name="damage"></param>
-	/// <param name="miningSpeed"></param>
-	/// <param name="useAnimation"></param>
-	/// <param name="tileRangeModifier"></param>
-	/// <param name="shootSpeed"></param>
-	/// <param name="knockback"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	public static void DefaultToDrill(this Item item, int projectile, int pickPower, int damage, int miningSpeed, int tileRangeModifier = 0, int useAnimation = 15, float shootSpeed = 32f, float knockback = 0.5f, int width = 20, int height = 12)
 	{
 		item.width = width;
@@ -1823,9 +1671,6 @@ public static class ClassExtensions
 	/// UseSound = <see cref="SoundID.Item1"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="projectile"></param>
-	/// <param name="shootSpeed"></param>
 	public static void DefaultToGrapplingHook(this Item item, int projectile, float shootSpeed)
 	{
 		item.width = 18;
@@ -1856,10 +1701,6 @@ public static class ClassExtensions
 	/// UseSound = <see cref="SoundID.Item1"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="projectile"></param>
-	/// <param name="fishingPower"></param>
-	/// <param name="shootSpeed"></param>
 	public static void DefaultToFishingPole(this Item item, int projectile, int fishingPower, float shootSpeed)
 	{
 		item.width = 24;
@@ -1873,12 +1714,11 @@ public static class ClassExtensions
 		item.UseSound = SoundID.Item1;
 	}
 	/// <summary>
-	/// This method sets a variety of Item values common to fishing pole items.<br/>
+	/// This method sets a variety of Item values common to ranged weapons.<br/>
 	/// Specifically: <code>
-	/// width = 20;
-	/// height = 12;
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
 	/// autoReuse = <paramref name="autoReuse"/>;
-	/// useAmmo = <paramref name="ammoID"/>;
 	/// crit = <paramref name="crit"/>;
 	/// damage = <paramref name="damage"/>;
 	/// DamageType = <see cref="DamageClass.Ranged"/>;
@@ -1889,24 +1729,11 @@ public static class ClassExtensions
 	/// reuseDelay = <paramref name="reuseDelay"/>;
 	/// useTime = <paramref name="useTime"/>;
 	/// useAnimation = <paramref name="useAnimation"/>;
+	/// useAmmo = <paramref name="ammoID"/>;
 	/// useStyle = <see cref="ItemUseStyleID.Shoot"/>;
-	/// UseSound = <see cref="SoundID.Item5"/>;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="baseProjType"></param>
-	/// <param name="ammoID"></param>
-	/// <param name="damage"></param>
-	/// <param name="knockback"></param>
-	/// <param name="shootSpeed"></param>
-	/// <param name="useTime"></param>
-	/// <param name="useAnimation"></param>
-	/// <param name="autoReuse"></param>
-	/// <param name="reuseDelay"></param>
-	/// <param name="crit"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
-	public static void DefaultToGun(this Item item, int baseProjType, int ammoID, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool autoReuse = false, int reuseDelay = 0, int crit = 0, int width = 50, int height = 14)
+	public static void DefaultToRangedWeapon(this Item item, int width, int height, int baseProjType, int ammoID, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool autoReuse = false, int reuseDelay = 0, int crit = 0)
 	{
 		item.DefaultToRangedWeapon(baseProjType, ammoID, useTime, shootSpeed, autoReuse);
 		item.width = width;
@@ -1916,7 +1743,145 @@ public static class ClassExtensions
 		item.knockBack = knockback;
 		item.reuseDelay = reuseDelay;
 		item.useAnimation = useAnimation;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToRangedWeapon"/>
+	/// Additional values specific to guns:
+	/// <code>
+	/// shoot = <see cref="ProjectileID.Bullet"/>;
+	/// useAmmo = <see cref="AmmoID.Bullet"/>;
+	/// UseSound = <see cref="SoundID.Item11"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToGun(this Item item, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool autoReuse = false, int reuseDelay = 0, int crit = 0, int width = 50, int height = 14)
+	{
+		item.DefaultToRangedWeapon(width, height, ProjectileID.Bullet, AmmoID.Bullet, damage, knockback, shootSpeed, useTime, useAnimation, autoReuse, reuseDelay, crit);
+		item.UseSound = SoundID.Item11;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToRangedWeapon"/>
+	/// Additional values specific to repeaters:
+	/// <code>
+	/// shoot = <see cref="ProjectileID.WoodenArrowFriendly"/>;
+	/// useAmmo = <see cref="AmmoID.Arrow"/>;
+	/// UseSound = <see cref="SoundID.Item5"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToRepeater(this Item item, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool autoReuse = true, int reuseDelay = 0, int crit = 0, int width = 50, int height = 18)
+	{
+		item.DefaultToRangedWeapon(width, height, ProjectileID.WoodenArrowFriendly, AmmoID.Arrow, damage, knockback, shootSpeed, useTime, useAnimation, autoReuse, reuseDelay, crit);
 		item.UseSound = SoundID.Item5;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToRangedWeapon"/>
+	/// Additional values specific to launchers:
+	/// <code>
+	/// shoot = <see cref="ProjectileID.RocketI"/>;
+	/// useAmmo = <see cref="AmmoID.Rocket"/>;
+	/// UseSound = <see cref="SoundID.Item11"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToLauncher(this Item item, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool autoReuse = true, int reuseDelay = 0, int crit = 0, int width = 50, int height = 20)
+	{
+		item.DefaultToRangedWeapon(width, height, ProjectileID.RocketI, AmmoID.Rocket, damage, knockback, shootSpeed, useTime, useAnimation, autoReuse, reuseDelay, crit);
+		item.UseSound = SoundID.Item11;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToRangedWeapon"/>
+	/// Additional values specific to blowpipes:
+	/// <code>
+	/// shoot = <see cref="ProjectileID.PurificationPowder"/>; (vanilla sets it to this for blowpipes, functionally should be no difference to if it were set to <see cref="ProjectileID.Seed"/>)
+	/// useAmmo = <see cref="AmmoID.Dart"/>;
+	/// UseSound = <see cref="SoundID.Item63"/>; (note that all vanilla dart weapons use a unique sound; this is just a placeholder)
+	/// </code>
+	/// </summary>
+	public static void DefaultToBlowpipe(this Item item, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool autoReuse = true, int reuseDelay = 0, int crit = 0, int width = 38, int height = 6)
+	{
+		item.DefaultToRangedWeapon(width, height, ProjectileID.PurificationPowder, AmmoID.Dart, damage, knockback, shootSpeed, useTime, useAnimation, autoReuse, reuseDelay, crit);
+		item.UseSound = SoundID.Item63;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToRangedWeapon"/>
+	/// Additional values specific to bows:
+	/// <code>
+	/// shoot = <see cref="ProjectileID.WoodenArrowFriendly"/>;
+	/// useAmmo = <see cref="AmmoID.Arrow"/>;
+	/// UseSound = <see cref="SoundID.Item5"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToBow(this Item item, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool autoReuse = false, int reuseDelay = 0, int crit = 0, int width = 14, int height = 30)
+	{
+		item.DefaultToRangedWeapon(width, height, ProjectileID.WoodenArrowFriendly, AmmoID.Arrow, damage, knockback, shootSpeed, useTime, useAnimation, autoReuse, reuseDelay, crit);
+		item.UseSound = SoundID.Item5;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToRangedWeapon"/>
+	/// Additional values specific to longbows:
+	/// <code>
+	/// channel = true;
+	/// noUseGraphic = true;
+	/// shoot = <see cref="ProjectileID.WoodenArrowFriendly"/>;
+	/// useAmmo = <see cref="AmmoID.Arrow"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToLongbow(this Item item, int damage, float knockback, float shootSpeed, int singleUseTime, int crit = 0, int width = 16, int height = 50)
+	{
+		item.DefaultToRangedWeapon(width, height, ProjectileID.WoodenArrowFriendly, AmmoID.Arrow, damage, knockback, shootSpeed, singleUseTime, singleUseTime, false, 0, crit);
+		item.channel = true;
+		item.noUseGraphic = true;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToRangedWeapon"/>
+	/// Additional values specific to flamethrowers:
+	/// <code>
+	/// consumeAmmoOnFirstShotOnly = <paramref name="consumeAmmoOnFirstShotOnly"/>;
+	/// shoot = <paramref name="projectile"/>;
+	/// useAmmo = <see cref="AmmoID.Gel"/>;
+	/// UseSound = <see cref="SoundID.Item34"/>;
+	/// </code>
+	/// </summary>
+	/// <param name="consumeAmmoOnFirstShotOnly">Set this to false if you have custom logic inside <see cref="ModItem.CanConsumeAmmo"/></param>
+	public static void DefaultToFlamethrower(this Item item, int projectile, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool consumeAmmoOnFirstShotOnly = true, int crit = 0, int width = 50, int height = 18)
+	{
+		item.DefaultToRangedWeapon(width, height, projectile, AmmoID.Gel, damage, knockback, shootSpeed, useTime, useAnimation, true, 0, crit);
+		item.consumeAmmoOnFirstShotOnly = consumeAmmoOnFirstShotOnly;
+		item.UseSound = SoundID.Item34;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to thrown weapons.<br/>
+	/// Specifically: <code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// autoReuse = <paramref name="autoReuse"/>;
+	/// crit = <paramref name="crit"/>;
+	/// damage = <paramref name="damage"/>;
+	/// DamageType = <see cref="DamageClass.Ranged"/>;
+	/// knockBack = <paramref name="knockback"/>;
+	/// maxStack = <paramref name="consumable"/> ? <see cref="Item.CommonMaxStack"/> : 1;
+	/// noMelee = true;
+	/// noUseGraphic = true;
+	/// shootSpeed = <paramref name="shootSpeed"/>;
+	/// shoot = <paramref name="projectile"/>;
+	/// reuseDelay = <paramref name="reuseDelay"/>;
+	/// useTime = <paramref name="singleUseTime"/>;
+	/// useAnimation = <paramref name="singleUseTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// UseSound = <see cref="SoundID.Item1"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToThrownWeapon(this Item item, int projectile, int damage, float knockback, float shootSpeed, int singleUseTime, bool autoReuse = true, bool consumable = true, int reuseDelay = 0, int crit = 0, int width = 18, int height = 20)
+	{
+		item.DefaultToThrownWeapon(projectile, singleUseTime, shootSpeed, autoReuse);
+		item.width = width;
+		item.height = height;
+		item.consumable = consumable;
+		item.crit = crit;
+		item.damage = damage;
+		item.knockBack = knockback;
+		item.maxStack = consumable ? Item.CommonMaxStack : 1;
+		item.noUseGraphic = true;
+		item.reuseDelay = reuseDelay;
+		item.UseSound = SoundID.Item1;
 	}
 	/// <summary>
 	/// This method sets a variety of Item values common to vanity items.<br/>
@@ -1926,7 +1891,6 @@ public static class ClassExtensions
 	/// vanity = true;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
 	public static void DefaultToVanity(this Item item)
 	{
 		item.width = 18;
@@ -1943,12 +1907,381 @@ public static class ClassExtensions
 	/// vanity = true;
 	/// </code>
 	/// </summary>
-	/// <param name="item"></param>
 	public static void DefaultToBossMask(this Item item)
 	{
 		item.DefaultToVanity();
 		item.rare = ItemRarityID.Blue;
 		item.value = Item.sellPrice(silver: 75);
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to sword weapons.<br/>
+	/// Specifically: <code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// autoReuse = <paramref name="autoReuse"/>;
+	/// crit = <paramref name="crit"/>;
+	/// damage = <paramref name="damage"/>;
+	/// DamageType = <see cref="DamageClass.Melee"/>;
+	/// knockBack = <paramref name="knockback"/>;
+	/// scale = <paramref name="scale"/>;
+	/// useTime = <paramref name="singleUseTime"/>;
+	/// useAnimation = <paramref name="singleUseTime"/>;
+	/// useTurn = <paramref name="useTurn"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// UseSound = <see cref="SoundID.Item1"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToSword(this Item item, int damage, float knockback, int singleUseTime, bool autoReuse = true, int crit = 0, float scale = 1f, bool useTurn = true, int width = 40, int height = 40)
+	{
+		item.width = width;
+		item.height = height;
+		item.autoReuse = autoReuse;
+		item.crit = crit;
+		item.damage = damage;
+		item.DamageType = DamageClass.Melee;
+		item.knockBack = knockback;
+		item.scale = scale;
+		item.useTime = singleUseTime;
+		item.useAnimation = singleUseTime;
+		item.useTurn = useTurn;
+		item.useStyle = ItemUseStyleID.Swing;
+		item.UseSound = SoundID.Item1;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToSword"/>
+	/// Additional values specific to beam swords:
+	/// <code>
+	/// noMelee = <paramref name="noMelee"/>;
+	/// shoot = <paramref name="projectile"/>;
+	/// shootSpeed = <paramref name="shootSpeed"/>;
+	/// shootsEveryUse = <paramref name="shootsEveryUse"/>;
+	/// useTime = <paramref name="useTime"/>;
+	/// useAnimation = <paramref name="useAnimation"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToProjectileSword(this Item item, int projectile, int damage, float knockback, float shootSpeed, int useTime, int useAnimation, bool autoReuse = true, bool shootsEveryUse = false, bool noMelee = false, int crit = 0, float scale = 1f, bool useTurn = false, int width = 40, int height = 40)
+	{
+		item.DefaultToSword(damage, knockback, useAnimation, autoReuse, crit, scale, useTurn, width, height);
+		item.noMelee = noMelee;
+		item.shoot = projectile;
+		item.shootSpeed = shootSpeed;
+		item.shootsEveryUse = shootsEveryUse;
+		item.useTime = useTime;
+	}
+	/// <summary>
+	/// <inheritdoc cref="DefaultToSword"/>
+	/// Additional values specific to maces:
+	/// <code>
+	/// noMelee = true;
+	/// noUseGraphic = true;
+	/// shoot = <paramref name="projectile"/>;
+	/// shootSpeed = 6;
+	/// useTurn = false;
+	/// useStyle = <see cref="ItemUseStyleID.Shoot"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToMace(this Item item, int projectile, int damage, float knockback, float scale, int singleUseTime, bool autoReuse = true, int crit = 6, int width = 40, int height = 40)
+	{
+		item.DefaultToSword(damage, knockback, singleUseTime, autoReuse, crit, scale, false, width, height);
+		item.noMelee = true;
+		item.noUseGraphic = true;
+		item.shoot = projectile;
+		item.shootSpeed = 6f;
+		item.useStyle = ItemUseStyleID.Shoot;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to flail weapons.<br/>
+	/// Specifically: <code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// channel = true;
+	/// crit = <paramref name="crit"/>;
+	/// damage = <paramref name="damage"/>;
+	/// DamageType = <see cref="DamageClass.Melee"/>;
+	/// knockBack = <paramref name="knockback"/>;
+	/// noMelee = true;
+	/// noUseGraphic = true;
+	/// scale = <paramref name="scale"/>;
+	/// shoot = <paramref name="projectile"/>;
+	/// shootSpeed = <paramref name="shootSpeed"/>;
+	/// useTime = <paramref name="singleUseTime"/>;
+	/// useAnimation = <paramref name="singleUseTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Shoot"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToFlail(this Item item, int projectile, int damage, float knockback, int singleUseTime, float shootSpeed, int crit = 0, float scale = 1.1f, int width = 28, int height = 28)
+	{
+		item.width = width;
+		item.height = height;
+		item.channel = true;
+		item.crit = crit;
+		item.damage = damage;
+		item.DamageType = DamageClass.Melee;
+		item.knockBack = knockback;
+		item.noMelee = true;
+		item.noUseGraphic = true;
+		item.scale = scale;
+		item.shootSpeed = shootSpeed;
+		item.shoot = projectile;
+		item.useTime = singleUseTime;
+		item.useAnimation = singleUseTime;
+		item.useStyle = ItemUseStyleID.Shoot;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to yoyo weapons.<br/>
+	/// Specifically: <code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// channel = true;
+	/// crit = <paramref name="crit"/>;
+	/// damage = <paramref name="damage"/>;
+	/// DamageType = <see cref="DamageClass.Melee"/>;
+	/// knockBack = <paramref name="knockback"/>;
+	/// noMelee = true;
+	/// noUseGraphic = true;
+	/// shoot = <paramref name="projectile"/>;
+	/// shootSpeed = <paramref name="shootSpeed"/>;
+	/// useTime = 25;
+	/// useAnimation = 25;
+	/// useStyle = <see cref="ItemUseStyleID.Shoot"/>;
+	/// UseSound = <see cref="SoundID.Item1"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToYoyo(this Item item, int projectile, int damage, float knockback, float shootSpeed, int crit = 0, int width = 24, int height = 24)
+	{
+		item.width = width;
+		item.height = height;
+		item.channel = true;
+		item.crit = crit;
+		item.damage = damage;
+		item.DamageType = DamageClass.Melee;
+		item.knockBack = knockback;
+		item.noMelee = true;
+		item.noUseGraphic = true;
+		item.shootSpeed = shootSpeed;
+		item.shoot = projectile;
+		item.useTime = 25;
+		item.useAnimation = 25;
+		item.useStyle = ItemUseStyleID.Shoot;
+		item.UseSound = SoundID.Item1;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to spear weapons.<br/>
+	/// Specifically: <code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// autoReuse = <paramref name="autoReuse"/>;
+	/// crit = <paramref name="crit"/>;
+	/// damage = <paramref name="damage"/>;
+	/// DamageType = <see cref="DamageClass.Melee"/>;
+	/// knockBack = <paramref name="knockback"/>;
+	/// noMelee = true;
+	/// noUseGraphic = true;
+	/// scale = <paramref name="scale"/>;
+	/// shoot = <paramref name="projectile"/>;
+	/// shootSpeed = <paramref name="shootSpeed"/>;
+	/// useTime = <paramref name="singleUseTime"/>;
+	/// useAnimation = <paramref name="singleUseTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Shoot"/>;
+	/// UseSound = <see cref="SoundID.Item1"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToSpear(this Item item, int projectile, int damage, float knockback, int singleUseTime, float shootSpeed, bool autoReuse = false, int crit = 0, float scale = 1f, int width = 40, int height = 40)
+	{
+		item.DefaultToSpear(projectile, shootSpeed, singleUseTime);
+		item.width = width;
+		item.height = height;
+		item.autoReuse = autoReuse;
+		item.crit = crit;
+		item.damage = damage;
+		item.knockBack = knockback;
+		item.scale = scale;
+	}
+	/// <summary>
+	/// <inheritdoc	cref="DefaultToSpear"/>
+	/// Additional values specific to shortswords:
+	/// <code>
+	/// useStyle = <see cref="ItemUseStyleID.Rapier"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToShortsword(this Item item, int projectile, int damage, float knockback, int singleUseTime, float shootSpeed, bool autoReuse = false, int crit = 0, float scale = 1f, int width = 24, int height = 28)
+	{
+		item.DefaultToSpear(projectile, damage, knockback, singleUseTime, shootSpeed, autoReuse, crit, scale, width, height);
+		item.useStyle = ItemUseStyleID.Rapier;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to boomerang weapons.<br/>
+	/// Specifically: <code>
+	/// width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// autoReuse = <paramref name="autoReuse"/>;
+	/// crit = <paramref name="crit"/>;
+	/// damage = <paramref name="damage"/>;
+	/// DamageType = <see cref="DamageClass.Melee"/>;
+	/// knockBack = <paramref name="knockback"/>;
+	/// noMelee = true;
+	/// noUseGraphic = true;
+	/// shoot = <paramref name="projectile"/>;
+	/// shootSpeed = <paramref name="shootSpeed"/>;
+	/// useTime = <paramref name="singleUseTime"/>;
+	/// useAnimation = <paramref name="singleUseTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// UseSound = <see cref="SoundID.Item1"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToBoomerang(this Item item, int projectile, int damage, float knockback, int singleUseTime, float shootSpeed, bool autoReuse = false, int crit = 0, int width = 14, int height = 28)
+	{
+		item.width = width;
+		item.height = height;
+		item.autoReuse = autoReuse;
+		item.crit = crit;
+		item.damage = damage;
+		item.DamageType = DamageClass.Melee;
+		item.knockBack = knockback;
+		item.noMelee = true;
+		item.noUseGraphic = true;
+		item.shoot = projectile;
+		item.shootSpeed = shootSpeed;
+		item.useTime = singleUseTime;
+		item.useAnimation = singleUseTime;
+		item.useStyle = ItemUseStyleID.Swing;
+		item.UseSound = SoundID.Item1;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to magic weapons.<br/>
+	/// Specifically: <code>width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// autoReuse = <paramref name="autoReuse"/>;
+	/// crit = <paramref name="crit"/>;
+	/// damage = <paramref name="damage"/>;
+	/// DamageType = <see cref="DamageClass.Magic"/>;
+	/// knockBack = <paramref name="knockback"/>;
+	/// mana = <paramref name="manaUsed"/>;
+	/// noMelee = true;
+	/// shootSpeed = <paramref name="shootSpeed"/>;
+	/// shoot = <paramref name="projectile"/>;
+	/// useTime = <paramref name="useTime"/>;
+	/// useAnimation = <paramref name="useAnimation"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Shoot"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToMagicWeapon(this Item item, int width, int height, int projectile, int damage, float knockback, int manaUsed, float shootSpeed, int useTime, int useAnimation, bool autoReuse = false, int crit = 0)
+	{
+		item.width = width;
+		item.height = height;
+		item.autoReuse = autoReuse;
+		item.crit = crit;
+		item.damage = damage;
+		item.DamageType = DamageClass.Magic;
+		item.knockBack = knockback;
+		item.mana = manaUsed;
+		item.noMelee = true;
+		item.shootSpeed = shootSpeed;
+		item.shoot = projectile;
+		item.useTime = useTime;
+		item.useAnimation = useAnimation;
+		item.useStyle = ItemUseStyleID.Shoot;
+	}
+	/// <summary>
+	/// <inheritdoc	cref="DefaultToMagicWeapon"/>
+	/// Additional values specific to spell books:
+	/// <code>
+	/// autoReuse = true;
+	/// scale = <paramref name="scale"/>
+	/// </code>
+	/// </summary>
+	public static void DefaultToSpellBook(this Item item, int projectile, int damage, float knockback, int manaUsed, float shootSpeed, int useTime, int useAnimation, float scale = 0.9f, int crit = 0, int width = 24, int height = 28)
+	{
+		item.DefaultToMagicWeapon(width, height, projectile, damage, knockback, manaUsed, shootSpeed, useTime, useAnimation, true, crit);
+		item.scale = scale;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to magic staff weapons.<br/>
+	/// Specifically: <code>
+	/// <inheritdoc	cref="DefaultToMagicWeapon"/>
+	/// </code>
+	/// </summary>
+	public static void DefaultToStaff(this Item item, int projectile, int damage, float knockback, int manaUsed, float shootSpeed, int useTime, int useAnimation, bool autoReuse = false, int crit = 0, int width = 40, int height = 40)
+	{
+		item.DefaultToMagicWeapon(width, height, projectile, damage, knockback, manaUsed, shootSpeed, useTime, useAnimation, autoReuse, crit);
+	}
+	/// <summary>
+	/// <inheritdoc	cref="DefaultToMagicWeapon"/>
+	/// Additional values specific to channeling:
+	/// <code>
+	/// autoReuse = false;
+	/// channel = true;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToMagicWeaponChanneled(this Item item, int projectile, int damage, float knockback, int manaUsed, float shootSpeed, int singleUseTime, int crit = 0, int width = 26, int height = 28)
+	{
+		item.DefaultToMagicWeapon(width, height, projectile, damage, knockback, manaUsed, shootSpeed, singleUseTime, singleUseTime, false, crit);
+		item.channel = true;
+		item.useStyle = ItemUseStyleID.Swing;
+	}
+	/// <summary>
+	/// <inheritdoc	cref="DefaultToMagicWeapon"/>
+	/// Additional values specific to swung weapons:
+	/// <code>
+	/// noUseGraphic = <paramref name="noUseGraphic"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Swing"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToMagicWeaponSwing(this Item item, int projectile, int damage, float knockback, int manaUsed, float shootSpeed, int singleUseTime, bool autoReuse = false, int crit = 0, bool noUseGraphic = false, int width = 26, int height = 28)
+	{
+		item.DefaultToMagicWeapon(width, height, projectile, damage, knockback, manaUsed, shootSpeed, singleUseTime, singleUseTime, autoReuse, crit);
+		item.noUseGraphic = noUseGraphic;
+		item.useStyle = ItemUseStyleID.Swing;
+	}
+	/// <summary>
+	/// This method sets a variety of Item values common to minion weapons.<br/>
+	/// Specifically: <code>width = <paramref name="width"/>;
+	/// height = <paramref name="height"/>;
+	/// autoReuse = true;
+	/// buffType = <paramref name="buff"/>;
+	/// damage = <paramref name="damage"/>;
+	/// DamageType = <see cref="DamageClass.Summon"/>;
+	/// knockBack = <paramref name="knockback"/>;
+	/// mana = <paramref name="manaUsed"/>;
+	/// noMelee = true;
+	/// reuseDelay = 2;
+	/// shootSpeed = 10;
+	/// shoot = <paramref name="projectile"/>;
+	/// useTime = <paramref name="singleUseTime"/>;
+	/// useAnimation = <paramref name="singleUseTime"/>;
+	/// useStyle = <see cref="ItemUseStyleID.Shoot"/>;
+	/// </code>
+	/// </summary>
+	public static void DefaultToMinionWeapon(this Item item, int projectile, int buff, int damage, float knockback, int singleUseTime = 36, int manaUsed = 10, int width = 26, int height = 28)
+	{
+		item.width = width;
+		item.height = height;
+		item.autoReuse = true;
+		item.buffType = buff;
+		item.damage = damage;
+		item.DamageType = DamageClass.Summon;
+		item.knockBack = knockback;
+		item.mana = manaUsed;
+		item.noMelee = true;
+		item.reuseDelay = 2;
+		item.shootSpeed = 10f;
+		item.shoot = projectile;
+		item.useTime = singleUseTime;
+		item.useAnimation = singleUseTime;
+		item.useStyle = ItemUseStyleID.Swing;
+	}
+	/// <summary>
+	/// <inheritdoc	cref="DefaultToMinionWeapon"/>
+	/// Additional values specific to upgradeable minion weapons:
+	/// <code>
+	/// buffType = 0; (buff added in the counter projectile's AI)
+	/// shoot = 0; (based on how our prime staff currently works, if it calls ModItem.Shoot, the arms will disappear and reappear on alternating uses after exceeding the player's max minion count)
+	/// </code>
+	/// </summary>
+	public static void DefaultToMinionWeaponUpgradeable(this Item item, int damage, float knockback, int singleUseTime = 36, int manaUsed = 10, int width = 26, int height = 28)
+	{
+		item.DefaultToMinionWeapon(0, 0, damage, knockback, singleUseTime, manaUsed, width, height);
 	}
 	#endregion Item DefaultToX() methods
 }

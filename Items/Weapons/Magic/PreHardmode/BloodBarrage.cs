@@ -1,6 +1,4 @@
 using Avalon.Projectiles.Magic;
-using Avalon.Projectiles.Melee;
-using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -15,20 +13,10 @@ public class BloodBarrage : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DamageType = DamageClass.Magic;
-		Item.damage = 16;
-		Item.autoReuse = true;
-		Item.scale = 0.9f;
-		Item.shootSpeed = 12f;
-		Item.mana = 8;
-		Item.rare = ItemRarityID.Orange;
-		Item.Size = new Vector2(32);
-		Item.knockBack = 4f;
-		Item.shoot = ModContent.ProjectileType<Projectiles.Magic.BloodBlob>();
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.value = 50000;
-		Item.useAnimation = 24;
+		Item.DefaultToSpellBook(ModContent.ProjectileType<BloodBlob>(), 16, 4f, 8, 12f, 12 /* set in UseItem, this value is just so it doesn't attempt to divide by 0 */, 24);
 		Item.reuseDelay = 20;
+		Item.rare = ItemRarityID.Orange;
+		Item.value = Item.sellPrice(0, 1);
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{

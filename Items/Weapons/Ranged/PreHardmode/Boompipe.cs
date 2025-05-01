@@ -15,24 +15,10 @@ public class Boompipe : ModItem
 {
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.UseSound = new SoundStyle($"{nameof(Avalon)}/Sounds/Item/Boompipe");
-		Item.autoReuse = true;
-		Item.damage = 11;
-		Item.scale = 1f;
-		Item.shootSpeed = 14.5f;
-		Item.useAmmo = AmmoID.Dart;
-		Item.DamageType = DamageClass.Ranged;
-		Item.noMelee = true;
-		Item.width = dims.Width;
-		Item.useTime = 40;
-		Item.knockBack = 3.5f;
-		Item.shoot = ProjectileID.Seed;
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.value = 24000;
-		Item.useAnimation = 40;
-		Item.height = dims.Height;
+		Item.DefaultToBlowpipe(11, 3.5f, 14.5f, 40, 40);
 		Item.rare = ItemRarityID.Orange;
+		Item.value = 24000;
+		Item.UseSound = new SoundStyle($"{nameof(Avalon)}/Sounds/Item/Boompipe");
 	}
 	public override void UseItemFrame(Player player)
 	{
@@ -66,7 +52,7 @@ public class Boompipe : ModItem
 	}
 	public override void AddRecipes()
 	{
-		Terraria.Recipe.Create(Type)
+		Recipe.Create(Type)
 			.AddIngredient(ItemID.HellstoneBar, 15)
 			.AddIngredient(ModContent.ItemType<FireShard>(), 1)
 			.AddTile(TileID.Anvils)
