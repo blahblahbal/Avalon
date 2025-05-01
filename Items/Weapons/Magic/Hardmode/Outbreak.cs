@@ -1,4 +1,5 @@
 using Avalon.Buffs.Debuffs;
+using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;

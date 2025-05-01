@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Rarities;
 using Terraria;
 using Terraria.ID;

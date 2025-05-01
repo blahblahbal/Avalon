@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Accessories.Superhardmode;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Magic.Superhardmode;
@@ -19,7 +20,7 @@ public class WallofSteelBossBag : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToTreasureBag(ClassExtensions.TreasureBagRarities.WosTier);
+		Item.DefaultToTreasureBag(TreasureBagRarities.WosTier);
 	}
 
 	public override bool CanRightClick()

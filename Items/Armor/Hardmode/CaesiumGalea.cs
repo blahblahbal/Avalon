@@ -1,4 +1,5 @@
 using Avalon.Buffs;
+using Avalon.Common.Extensions;
 using Avalon.Items.Material.Bars;
 using Terraria;
 using Terraria.ID;

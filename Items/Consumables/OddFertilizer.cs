@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Material;
 using Terraria;
 using Terraria.Audio;

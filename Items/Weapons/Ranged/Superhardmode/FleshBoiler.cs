@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Ammo;
 using Avalon.Rarities;
 using Microsoft.Xna.Framework;

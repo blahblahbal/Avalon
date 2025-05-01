@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Material;
 using Avalon.Items.Vanity;
@@ -20,7 +21,7 @@ public class DesertBeakBossBag : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToTreasureBag(ClassExtensions.TreasureBagRarities.SkeleTier);
+		Item.DefaultToTreasureBag(TreasureBagRarities.SkeleTier);
 	}
 
 	public override bool CanRightClick()

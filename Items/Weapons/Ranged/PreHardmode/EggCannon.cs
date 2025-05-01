@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
 using Avalon.Projectiles.Ranged;
 using Microsoft.Xna.Framework;

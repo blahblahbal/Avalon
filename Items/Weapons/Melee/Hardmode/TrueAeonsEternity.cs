@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;

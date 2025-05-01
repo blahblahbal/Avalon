@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -19,7 +20,7 @@ public class HeartsickPotion : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Heartsick>(), TimeUtils.MinutesToTicks(6), ClassExtensions.PotionCorkType.Obsidian);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Heartsick>(), TimeUtils.MinutesToTicks(6), PotionCorkType.Obsidian);
 	}
 
 	public override void AddRecipes()

@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Ores;
@@ -19,7 +20,7 @@ public class BacteriumPrimeBossBag : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToTreasureBag(ClassExtensions.TreasureBagRarities.EvilTier);
+		Item.DefaultToTreasureBag(TreasureBagRarities.EvilTier);
 	}
 	public override bool CanRightClick()
 	{

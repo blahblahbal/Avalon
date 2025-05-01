@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

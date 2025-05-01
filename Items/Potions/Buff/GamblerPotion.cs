@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
@@ -20,7 +21,7 @@ public class GamblerPotion : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Gambler>(), TimeUtils.MinutesToTicks(4), ClassExtensions.PotionCorkType.Obsidian);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Gambler>(), TimeUtils.MinutesToTicks(4), PotionCorkType.Obsidian);
 	}
 	public override void AddRecipes()
 	{

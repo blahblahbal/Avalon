@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,7 +18,7 @@ public class ArmageddonSlimeBossBag : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToTreasureBag(ClassExtensions.TreasureBagRarities.ArmaTier);
+		Item.DefaultToTreasureBag(TreasureBagRarities.ArmaTier);
 	}
 	public override bool CanRightClick()
 	{

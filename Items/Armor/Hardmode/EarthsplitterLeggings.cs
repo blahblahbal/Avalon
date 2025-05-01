@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Armor.PreHardmode;
 using Terraria;
 using Terraria.ID;

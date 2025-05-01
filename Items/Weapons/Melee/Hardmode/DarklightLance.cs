@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Projectiles.Melee;
 using Terraria;
 using Terraria.Audio;

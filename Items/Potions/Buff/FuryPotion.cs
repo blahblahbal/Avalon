@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Items.Fish;
 using Avalon.Items.Material.Herbs;
 using Microsoft.Xna.Framework;

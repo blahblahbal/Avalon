@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Tiles;
 using Terraria;
 using Terraria.ModLoader;

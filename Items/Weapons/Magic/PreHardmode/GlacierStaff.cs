@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Microsoft.Xna.Framework;

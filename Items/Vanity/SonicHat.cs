@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,7 +10,6 @@ namespace Avalon.Items.Vanity
 	{
 		public override void SetDefaults()
 		{
-			//https://cdn.discordapp.com/attachments/1083705573528326204/1161441714163163246/Mosquitio.mp4
 			Item.DefaultToVanity();
 			Item.rare = ItemRarityID.Blue;
 			Item.value = Item.sellPrice(0, 0, 50);

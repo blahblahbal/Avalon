@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Avalon.Items.Material.Shards;
 using Terraria;

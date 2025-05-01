@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

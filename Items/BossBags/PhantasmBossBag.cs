@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Material;
@@ -22,7 +23,7 @@ public class PhantasmBossBag : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToTreasureBag(ClassExtensions.TreasureBagRarities.LunarTier);
+		Item.DefaultToTreasureBag(TreasureBagRarities.LunarTier);
 	}
 
 	public override bool CanRightClick()

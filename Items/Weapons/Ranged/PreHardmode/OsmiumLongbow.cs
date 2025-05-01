@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Material.Bars;
 using Avalon.Projectiles.Ranged.Held;
 using Microsoft.Xna.Framework;

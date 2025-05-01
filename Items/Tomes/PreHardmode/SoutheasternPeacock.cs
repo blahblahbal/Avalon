@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Tiles;
 using Terraria;

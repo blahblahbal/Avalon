@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Projectiles.Tools;
 using Microsoft.Xna.Framework;
 using Terraria;

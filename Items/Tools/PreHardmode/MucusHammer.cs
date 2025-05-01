@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using System;

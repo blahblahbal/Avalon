@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Items.Material.Herbs;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
@@ -20,7 +21,7 @@ public class CloverPotion : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Clover>(), TimeUtils.MinutesToTicks(30), ClassExtensions.PotionCorkType.Obsidian);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Clover>(), TimeUtils.MinutesToTicks(30), PotionCorkType.Obsidian);
 	}
 
 	public override void AddRecipes()

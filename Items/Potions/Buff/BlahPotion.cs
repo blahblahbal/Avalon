@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -21,7 +22,7 @@ public class BlahPotion : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Blah>(), TimeUtils.HoursToTicks(5), ClassExtensions.PotionCorkType.None);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Blah>(), TimeUtils.HoursToTicks(5), PotionCorkType.None);
 		Item.maxStack = 1;
 		Item.consumable = false;
 		Item.rare = ModContent.RarityType<Rarities.BlahRarity>();

@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;

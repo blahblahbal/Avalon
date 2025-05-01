@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

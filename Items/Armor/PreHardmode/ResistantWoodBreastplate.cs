@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Placeable.Tile;
 using Terraria.ID;
 using Terraria.ModLoader;

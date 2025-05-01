@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -20,7 +21,7 @@ public class BloodCastPotion : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.BloodCast>(), TimeUtils.MinutesToTicks(5), ClassExtensions.PotionCorkType.Obsidian);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.BloodCast>(), TimeUtils.MinutesToTicks(5), PotionCorkType.Obsidian);
 	}
 	public override void AddRecipes()
 	{

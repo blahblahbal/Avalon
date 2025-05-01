@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Material;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
@@ -17,7 +18,7 @@ public class KingStingBossBag : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToTreasureBag(ClassExtensions.TreasureBagRarities.SkeleTier);
+		Item.DefaultToTreasureBag(TreasureBagRarities.SkeleTier);
 	}
 
 	public override bool CanRightClick()

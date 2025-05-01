@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Items.Material.Herbs;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -21,7 +22,7 @@ public class AuraPotion : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.CrimsonDrain>(), TimeUtils.MinutesToTicks(5), ClassExtensions.PotionCorkType.Obsidian);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.CrimsonDrain>(), TimeUtils.MinutesToTicks(5), PotionCorkType.Obsidian);
 	}
 	public override void AddRecipes()
 	{

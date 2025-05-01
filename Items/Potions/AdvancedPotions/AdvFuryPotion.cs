@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -20,6 +21,6 @@ public class AdvFuryPotion : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.AdvancedBuffs.AdvFury>(), TimeUtils.MinutesToTicks(8), ClassExtensions.PotionCorkType.Elixir);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.AdvancedBuffs.AdvFury>(), TimeUtils.MinutesToTicks(8), PotionCorkType.Elixir);
 	}
 }

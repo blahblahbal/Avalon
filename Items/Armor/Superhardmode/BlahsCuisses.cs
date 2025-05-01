@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Terraria;
 using Terraria.ModLoader;

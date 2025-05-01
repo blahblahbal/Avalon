@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Terraria;
 using Terraria.Audio;

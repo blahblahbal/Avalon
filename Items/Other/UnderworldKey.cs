@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;

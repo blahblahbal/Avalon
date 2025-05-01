@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Items.Material.Ores;
 using Microsoft.Xna.Framework;
 using Terraria.ID;

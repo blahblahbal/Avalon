@@ -1,4 +1,5 @@
 using Avalon.Buffs;
+using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Avalon.Items.Material.Herbs;
 using Microsoft.Xna.Framework;

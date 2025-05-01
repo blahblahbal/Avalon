@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Projectiles.Ranged;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -11,7 +12,6 @@ public class SunsShadow : ModItem
 {
 	public override void SetDefaults()
 	{
-		// todo: custom use sound
 		Item.DefaultToBlowpipe(27, 3.5f, 4.5f, 40, 40);
 		Item.rare = ItemRarityID.Lime;
 		Item.value = Item.sellPrice(0, 7);

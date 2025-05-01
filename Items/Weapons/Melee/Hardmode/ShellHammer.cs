@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Items.Material.Shards;
 using Microsoft.Xna.Framework;
 using Terraria;
