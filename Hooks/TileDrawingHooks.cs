@@ -20,7 +20,7 @@ namespace Avalon.Hooks
 		protected override void Apply()
 		{
 			IL_TileDrawing.DrawSingleTile += BetterDrawEffects;
-			//IL_TileDrawing.DrawTiles_EmitParticles += TintTileSparkle;
+			IL_TileDrawing.DrawTiles_EmitParticles += TintTileSparkle;
 		}
 		private void BetterDrawEffects(ILContext il)
 		{
@@ -46,15 +46,18 @@ namespace Avalon.Hooks
 				}
 			});
 		}
+
 		private void TintTileSparkle(ILContext il)
 		{
 			ILCursor c = new(il);
-			c.GotoNext(MoveType.After, i => i.MatchCall<Color>("get_White"), i => i.MatchStloc(55));
+			int newColorvar = -1;
+
+			c.GotoNext(MoveType.After, i => i.MatchRet(), i => i.MatchCall<Color>("get_White"), i => i.MatchStloc(out newColorvar));
 			c.EmitLdarg(1); //x
 			c.EmitLdarg(2); //y
 			c.EmitLdarg(3); //tileCache
 			c.EmitLdarg(4); //typeCache
-			c.EmitLdloca(55); //ref newColor
+			c.EmitLdloca(newColorvar); //ref newColor
 			c.EmitDelegate((int i, int j, Tile tileCache, int typeCache, ref Color tileShineColor) =>
 			{
 				// tileShineColor doesn't show clearly with desaturated colours, so make sure to modify whatever colour you're using so the highest value is 255 or close

@@ -16,7 +16,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Hooks
 {
-    internal class MapTIleEdits : ModHook
+    internal class MapTileEdits : ModHook
     {
         protected override void Apply()
         {
