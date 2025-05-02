@@ -131,19 +131,6 @@ public class AvalonWorld : ModSystem
 
     public override void OnWorldUnload() //Here we reset the numbers for the calculations to make sure they dont carry over to other worlds
     {
-        ModContent.GetInstance<BismuthChandelier>().Coordinates = new();
-        ModContent.GetInstance<BleachedEbonyChandelier>().Coordinates = new();
-        ModContent.GetInstance<BronzeChandelier>().Coordinates = new();
-        ModContent.GetInstance<CoughwoodChandelier>().Coordinates = new();
-        ModContent.GetInstance<Dirtalier>().Coordinates = new();
-        ModContent.GetInstance<HeartstoneChandelier>().Coordinates = new();
-        ModContent.GetInstance<OrangeDungeonChandelier>().Coordinates = new();
-        ModContent.GetInstance<PurpleDungeonChandelier>().Coordinates = new();
-        ModContent.GetInstance<ResistantWoodChandelier>().Coordinates = new();
-        ModContent.GetInstance<WildMushroomChandelier>().Coordinates = new();
-        ModContent.GetInstance<YellowDungeonChandelier>().Coordinates = new();
-        ModContent.GetInstance<ZincChandelier>().Coordinates = new();
-
         ModContent.GetInstance<BleachedEbonyLantern>().Coordinates = new();
         ModContent.GetInstance<CoughwoodLantern>().Coordinates = new();
         ModContent.GetInstance<HeartstoneLantern>().Coordinates = new();
@@ -154,19 +141,6 @@ public class AvalonWorld : ModSystem
 	}
     public override void ClearWorld()
     {
-        ModContent.GetInstance<BismuthChandelier>().Coordinates = new();
-        ModContent.GetInstance<BleachedEbonyChandelier>().Coordinates = new();
-        ModContent.GetInstance<BronzeChandelier>().Coordinates = new();
-        ModContent.GetInstance<CoughwoodChandelier>().Coordinates = new();
-        ModContent.GetInstance<Dirtalier>().Coordinates = new();
-        ModContent.GetInstance<HeartstoneChandelier>().Coordinates = new();
-        ModContent.GetInstance<OrangeDungeonChandelier>().Coordinates = new();
-        ModContent.GetInstance<PurpleDungeonChandelier>().Coordinates = new();
-        ModContent.GetInstance<ResistantWoodChandelier>().Coordinates = new();
-        ModContent.GetInstance<WildMushroomChandelier>().Coordinates = new();
-        ModContent.GetInstance<YellowDungeonChandelier>().Coordinates = new();
-        ModContent.GetInstance<ZincChandelier>().Coordinates = new();
-
         ModContent.GetInstance<BleachedEbonyLantern>().Coordinates = new();
         ModContent.GetInstance<CoughwoodLantern>().Coordinates = new();
         ModContent.GetInstance<HeartstoneLantern>().Coordinates = new();
