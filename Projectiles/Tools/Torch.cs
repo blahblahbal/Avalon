@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Avalon.Common.Templates;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -214,16 +213,23 @@ public class Torch : ModProjectile
 			return;
 		}
 
+		if (Main.tile[TileX, TileY].LiquidAmount > 0 && TileObjectData.GetTileData(item.createTile, item.placeStyle).WaterDeath)
+		{
+			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
+			Projectile.active = false;
+			return;
+		}
+
 		if (Main.tile[TileX, TileY].WallType != 0 && !Main.tile[TileX, TileY].HasTile)
 		{
-			goto placeOnWall;
+			goto placeTorch;
 		}
 		else if (((Main.tile[TileX - 1, TileY + 1].HasTile && !Main.tile[TileX, TileY + 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftdown active, down off, left off
 			(Main.tile[TileX + 1, TileY + 1].HasTile && !Main.tile[TileX, TileY + 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightdown active, down off, right off
 			(Main.tile[TileX - 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftup active, up off, left off
 			(Main.tile[TileX + 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightup active, up off, right off
 			(Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType]) ||                                    // current tile non-solid
-																																		 // down on and non-solid, left OR right on and non-solid
+																																			// down on and non-solid, left OR right on and non-solid
 			(Main.tile[TileX, TileY + 1].HasTile && !Main.tileSolid[Main.tile[TileX, TileY + 1].TileType] && ((Main.tile[TileX - 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX - 1, TileY].TileType]) || (Main.tile[TileX + 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX + 1, TileY].TileType]))) ||
 			// (up on, ((left off OR right off) OR (current tile active and non-solid))
 			(Main.tile[TileX, TileY - 1].HasTile && ((!Main.tile[TileX - 1, TileY].HasTile || !Main.tile[TileX + 1, TileY].HasTile) || (Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType])))))
@@ -240,7 +246,7 @@ public class Torch : ModProjectile
 			return;
 		}
 
-	placeOnWall:
+	placeTorch:
 		if (!Main.tile[TileX, TileY].HasTile || Main.tileCut[Main.tile[TileX, TileY].TileType] || (Main.tile[TileX, TileY].LiquidAmount > 0 && item.type != ItemID.CursedTorch))
 		{
 			if (ItemType != ItemID.None)

@@ -12,7 +12,6 @@ using Terraria.GameContent.UI.ResourceSets;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ThoriumMod.NPCs;
 
 namespace Avalon.Hooks;
 

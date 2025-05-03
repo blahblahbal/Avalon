@@ -59,7 +59,7 @@ public class ExxoAvalonOrigins : Mod
 	/// <summary>
 	///		Debug option to entirely enable/disable thorium x avalon compatibility content
 	/// </summary>
-	public static bool ThoriumContentEnabled = ModLoader.HasMod("ThoriumMod");
+	public static bool ThoriumContentEnabled = false; // ModLoader.HasMod("ThoriumMod");
 
     /// <summary>
     ///     Gets the instance of Fargo's Mod.
