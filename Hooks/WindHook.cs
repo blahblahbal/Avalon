@@ -1,10 +1,6 @@
 using Avalon.Common;
 using Avalon.ModSupport.Thorium.Tiles;
 using Avalon.Tiles.Furniture;
-using Avalon.Tiles.Furniture.BleachedEbony;
-using Avalon.Tiles.Furniture.Coughwood;
-using Avalon.Tiles.Furniture.Heartstone;
-using Avalon.Tiles.Furniture.ResistantWood;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
@@ -19,7 +15,6 @@ namespace Avalon.Hooks
 		protected override void Apply()
 		{
 			On_TileDrawing.DrawMultiTileVinesInWind += On_TileDrawing_DrawMultiTileVinesInWind;
-			On_TileDrawing.PostDrawTiles += On_TileDrawing_PostDrawTiles;
 			IL_TileDrawing.DrawMultiTileGrassInWind += IL_TileDrawing_DrawMultiTileGrassInWind;
 		}
 
@@ -91,47 +86,12 @@ namespace Avalon.Hooks
 			{
 				sizeY = 3;
 			}
-			else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<ResistantWoodLantern>() ||
-				Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<CoughwoodLantern>() ||
-				Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<BleachedEbonyLantern>())
-			{
-				sizeY = 2;
-			}
 			else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<HangingPots>())
 			{
 				sizeX = 2;
 				sizeY = 3;
 			}
 			orig.Invoke(self, screenPosition, offSet, topLeftX, topLeftY, sizeX, sizeY);
-		}
-		private void On_TileDrawing_PostDrawTiles(On_TileDrawing.orig_PostDrawTiles orig, TileDrawing self, bool solidLayer, bool forRenderTargets, bool intoRenderTargets)
-		{
-			orig.Invoke(self, solidLayer, forRenderTargets, intoRenderTargets);
-			if (!solidLayer && !intoRenderTargets)
-			{
-				Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-				DrawLanterns();
-				Main.spriteBatch.End();
-			}
-		}
-		private void DrawLanterns()
-		{
-			for (int i = 0; i < ModContent.GetInstance<BleachedEbonyLantern>().Coordinates.Count; i++)
-			{
-				ModContent.GetInstance<BleachedEbonyLantern>().DrawMultiTileVines(ModContent.GetInstance<BleachedEbonyLantern>().Coordinates[i].X, ModContent.GetInstance<BleachedEbonyLantern>().Coordinates[i].Y, Main.spriteBatch);
-			}
-			for (int i = 0; i < ModContent.GetInstance<CoughwoodLantern>().Coordinates.Count; i++)
-			{
-				ModContent.GetInstance<CoughwoodLantern>().DrawMultiTileVines(ModContent.GetInstance<CoughwoodLantern>().Coordinates[i].X, ModContent.GetInstance<CoughwoodLantern>().Coordinates[i].Y, Main.spriteBatch);
-			}
-			for (int i = 0; i < ModContent.GetInstance<HeartstoneLantern>().Coordinates.Count; i++)
-			{
-				ModContent.GetInstance<HeartstoneLantern>().DrawMultiTileVines(ModContent.GetInstance<HeartstoneLantern>().Coordinates[i].X, ModContent.GetInstance<HeartstoneLantern>().Coordinates[i].Y, Main.spriteBatch);
-			}
-			for (int i = 0; i < ModContent.GetInstance<ResistantWoodLantern>().Coordinates.Count; i++)
-			{
-				ModContent.GetInstance<ResistantWoodLantern>().DrawMultiTileVines(ModContent.GetInstance<ResistantWoodLantern>().Coordinates[i].X, ModContent.GetInstance<ResistantWoodLantern>().Coordinates[i].Y, Main.spriteBatch);
-			}
 		}
 	}
 }

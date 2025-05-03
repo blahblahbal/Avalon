@@ -817,6 +817,8 @@ namespace Avalon.Common.Templates
 		public virtual Color FlameColor => new(100, 100, 100, 0);
 		public virtual float FlameJitterMultX => 0.15f;
 		public virtual float FlameJitterMultY => 0.35f;
+
+		// Flame dust fields
 		public virtual int FlameDust => -1;
 		public enum FlameDustPlacements : ushort
 		{
@@ -869,8 +871,8 @@ namespace Avalon.Common.Templates
 		public override void HitWire(int i, int j)
 		{
 			Tile tile = Main.tile[i, j];
-			int topX = i - tile.TileFrameX % 54 / 18;
-			int topY = j - tile.TileFrameY % 54 / 18;
+			int topX = i - tile.TileFrameX / 18 % 3;
+			int topY = j - tile.TileFrameY / 18 % 3;
 
 			short frameAdjustment = (short)(tile.TileFrameX >= 54 ? -54 : 54);
 
@@ -906,7 +908,6 @@ namespace Avalon.Common.Templates
 				{
 					int tileColumn = tileFrameX / 18 % 3;
 					int tileRow = tileFrameY / 18 % 3;
-					bool canSpawnDust = false;
 					// Check if the current segment has been set to spawn dust in the chandelier's file
 					for (int k = 0; k < 9; k++)
 					{
@@ -914,24 +915,19 @@ namespace Avalon.Common.Templates
 						int Y = k / 3;
 						if (X == tileColumn && Y == tileRow)
 						{
-							if ((Enum.GetValues<FlameDustPlacements>()[k + 1] & FlameDustPositions) > 0)
+							if ((Enum.GetValues<FlameDustPlacements>()[k + 1] & FlameDustPositions) != 0)
 							{
-								canSpawnDust = true;
+								Dust dust = Terraria.Dust.NewDustDirect(new Vector2(i * 16, j * 16 + 2), 14, 6, FlameDust, 0f, 0f, 100);
+								if (Main.rand.NextBool(3))
+								{
+									dust.noGravity = true;
+								}
+
+								dust.velocity *= 0.3f;
+								dust.velocity.Y -= 1.5f;
 								break;
 							}
 						}
-					}
-
-					if (canSpawnDust)
-					{
-						Dust dust = Terraria.Dust.NewDustDirect(new Vector2(i * 16, j * 16 + 2), 14, 6, FlameDust, 0f, 0f, 100);
-						if (Main.rand.NextBool(3))
-						{
-							dust.noGravity = true;
-						}
-
-						dust.velocity *= 0.3f;
-						dust.velocity.Y -= 1.5f;
 					}
 				}
 			}
@@ -978,17 +974,6 @@ namespace Avalon.Common.Templates
 			tileFlameData.flameRangeYMax = 1;
 			tileFlameData.flameRangeMultX = FlameJitterMultX;
 			tileFlameData.flameRangeMultY = FlameJitterMultY;
-		}
-
-		public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
-		{
-			Tile tile = Main.tile[i, j];
-			int topX = i - tile.TileFrameX % 54 / 18;
-			int topY = j - tile.TileFrameY % 54 / 18;
-			if (tile.TileFrameX / 54 == 0 && Animation.GetTemporaryFrame(topX, topY, out int frameData))
-			{
-				frameXOffset = 54 * frameData;
-			}
 		}
 	}
 	public abstract class ChairTemplate : FurnitureTemplate
@@ -1095,21 +1080,40 @@ namespace Avalon.Common.Templates
 	}
 	public abstract class CandleTemplate : FurnitureTemplate
 	{
+		public virtual Vector3 LightColor => new(1f, 0.95f, 0.65f);
+
+		// Flame texture fields
+		public virtual bool HasFlameTexture => true;
+		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		public virtual Color FlameColor => new(100, 100, 100, 0);
+		public virtual float FlameJitterMultX => 0.15f;
+		public virtual float FlameJitterMultY => 0.35f;
+
+		// Flame dust fields (unused by candles)
+		//public virtual int FlameDust => -1;
+
+		// Glow texture fields
+		public virtual bool HasGlowTexture => false;
+		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		public virtual Color GlowColor => Color.White;
 		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[Type] = true;
 			Main.tileLavaDeath[Type] = LavaDeath;
+			Main.tileLighted[Type] = true;
+
+			DustType = Dust;
+
 			TileObjectData.newTile.CopyFrom(TileObjectData.StyleOnTable1x1);
-			TileObjectData.newTile.StyleHorizontal = true;
-			TileObjectData.newTile.StyleWrapLimit = 36;
-			TileObjectData.newTile.CoordinateHeights = new int[] { 20 };
+			TileObjectData.newTile.CoordinateHeights = [20];
 			TileObjectData.newTile.DrawYOffset = -4;
 			TileObjectData.newTile.LavaDeath = LavaDeath;
+			TileObjectData.newTile.StyleHorizontal = true;
+			TileObjectData.newTile.StyleWrapLimit = 36;
 			TileObjectData.addTile(Type);
-			Main.tileLighted[Type] = true;
+
 			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Candle"));
-			DustType = Dust;
 			RegisterItemDrop(DropItem);
 		}
 
@@ -1123,94 +1127,393 @@ namespace Avalon.Common.Templates
 		public override bool RightClick(int i, int j)
 		{
 			Tile tile = Main.tile[i, j];
-			int topY = j - tile.TileFrameY / 18;
-			short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
-			Main.tile[i, topY].TileFrameX += frameAdjustment;
-			NetMessage.SendTileSquare(-1, i, topY, 1);
+			short frameAdjustment = (short)(tile.TileFrameX >= 18 ? -18 : 18);
+			Main.tile[i, j].TileFrameX += frameAdjustment;
+			NetMessage.SendTileSquare(-1, i, j, 1);
 			return true;
 		}
 		public override void HitWire(int i, int j)
 		{
 			Tile tile = Main.tile[i, j];
-			int topY = j - tile.TileFrameY / 18;
-			short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
-			Main.tile[i, topY].TileFrameX += frameAdjustment;
-			NetMessage.SendTileSquare(-1, i, topY, 1);
+			short frameAdjustment = (short)(tile.TileFrameX >= 18 ? -18 : 18);
+			Main.tile[i, j].TileFrameX += frameAdjustment;
+			NetMessage.SendTileSquare(-1, i, j, 1);
+		}
+		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+		{
+			if (Main.tile[i, j].TileFrameX / 18 != 0)
+			{
+				return;
+			}
+			r = LightColor.X;
+			g = LightColor.Y;
+			b = LightColor.Z;
+		}
+		//public override void EmitParticles(int i, int j, Tile tileCache, short tileFrameX, short tileFrameY, Color tileLight, bool visible)
+		//{
+		//	if (FlameDust != -1)
+		//	{
+		//		if (Main.rand.NextBool(40) && tileFrameX < 18)
+		//		{
+		//			Dust dust = Terraria.Dust.NewDustDirect(new Vector2(i * 16, j * 16 + 2), 14, 6, FlameDust, 0f, 0f, 100);
+		//			if (Main.rand.NextBool(3))
+		//			{
+		//				dust.noGravity = true;
+		//			}
+
+		//			dust.velocity *= 0.3f;
+		//			dust.velocity.Y -= 1.5f;
+		//		}
+		//	}
+		//}
+		public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
+		{
+			if (GlowTexture() != null)
+			{
+				drawData.glowTexture = GlowTexture().Value;
+				drawData.glowColor = GlowColor;
+			}
+		}
+		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+		{
+			if (FlameTexture() == null)
+			{
+				return;
+			}
+
+			Tile tile = Main.tile[i, j];
+
+			if (!TileDrawing.IsVisible(tile))
+			{
+				return;
+			}
+
+			Vector2 zero = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
+
+			int width = 18;
+			int offsetY = -4;
+			int height = 20;
+			short frameX = tile.TileFrameX;
+			short frameY = tile.TileFrameY;
+
+			TileLoader.SetDrawPositions(i, j, ref width, ref offsetY, ref height, ref frameX, ref frameY);
+
+			ulong randSeed = Main.TileFrameSeed ^ (ulong)(((long)i << 32) | (uint)j);
+
+			for (int k = 0; k < 7; k++)
+			{
+				float shakeX = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
+				float shakeY = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
+
+				spriteBatch.Draw(FlameTexture().Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
+			}
 		}
 	}
 	public abstract class CandelabraTemplate : FurnitureTemplate
 	{
+		public virtual Vector3 LightColor => new(1f, 0.95f, 0.65f);
+
+		// Flame texture fields
+		public virtual bool HasFlameTexture => true;
+		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		public virtual Color FlameColor => new(100, 100, 100, 0);
+		public virtual float FlameJitterMultX => 0.15f;
+		public virtual float FlameJitterMultY => 0.35f;
+
+		// Flame dust fields
+		public virtual int FlameDust => -1;
+
+		// Glow texture fields
+		public virtual bool HasGlowTexture => false;
+		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		public virtual Color GlowColor => Color.White;
 		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[Type] = true;
 			Main.tileLavaDeath[Type] = LavaDeath;
-			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
-			TileObjectData.newTile.StyleHorizontal = true;
-			//TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.Table, TileObjectData.newTile.Width, 0);
-			TileObjectData.newTile.StyleWrapLimit = 36;
-			TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
-			TileObjectData.newTile.LavaDeath = LavaDeath;
-			TileObjectData.addTile(Type);
 			Main.tileLighted[Type] = true;
+
+			DustType = Dust;
+
+			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
+			//TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.Table, TileObjectData.newTile.Width, 0);
+			TileObjectData.newTile.CoordinateHeights = [16, 18];
+			TileObjectData.newTile.DrawYOffset = 2;
+			TileObjectData.newTile.LavaDeath = LavaDeath;
+			TileObjectData.newTile.StyleHorizontal = true;
+			TileObjectData.newTile.StyleWrapLimit = 36;
+			TileObjectData.addTile(Type);
+
 			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Candelabra"));
-			DustType = Dust;
 			RegisterItemDrop(DropItem);
 		}
 		public override void HitWire(int i, int j)
 		{
-			int x = i - Main.tile[i, j].TileFrameX / 18 % 2;
-			int y = j - Main.tile[i, j].TileFrameY / 18 % 2;
-			for (int l = x; l < x + 2; l++)
+			Tile tile = Main.tile[i, j];
+			int topX = i - tile.TileFrameX / 18 % 2;
+			int topY = j - tile.TileFrameY / 18 % 2;
+
+			short frameAdjustment = (short)(tile.TileFrameX >= 36 ? -36 : 36);
+
+			for (int x = topX; x < topX + 2; x++)
 			{
-				for (int m = y; m < y + 2; m++)
+				for (int y = topY; y < topY + 2; y++)
 				{
-					if (Main.tile[l, m].HasTile && Main.tile[l, m].TileType == Type)
-					{
-						if (Main.tile[l, m].TileFrameX < 36)
-						{
-							Main.tile[l, m].TileFrameX += 36;
-						}
-						else
-						{
-							Main.tile[l, m].TileFrameX -= 36;
-						}
-					}
+					Main.tile[x, y].TileFrameX += frameAdjustment;
+					Wiring.SkipWire(x, y);
 				}
 			}
-			if (Wiring.running)
+
+			if (Main.netMode != NetmodeID.SinglePlayer)
 			{
-				Wiring.SkipWire(x, y);
-				Wiring.SkipWire(x, y + 1);
-				Wiring.SkipWire(x + 1, y);
-				Wiring.SkipWire(x + 1, y + 1);
+				NetMessage.SendTileSquare(-1, topX, topY, 2, 2);
 			}
-			NetMessage.SendTileSquare(-1, x, y, 2);
-			NetMessage.SendTileSquare(-1, x, y + 1, 2);
-			NetMessage.SendTileSquare(-1, x + 1, y, 2);
-			NetMessage.SendTileSquare(-1, x + 1, y + 1, 2);
+		}
+		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+		{
+			if (Main.tile[i, j].TileFrameX / 36 != 0)
+			{
+				return;
+			}
+			r = LightColor.X;
+			g = LightColor.Y;
+			b = LightColor.Z;
+		}
+		public override void EmitParticles(int i, int j, Tile tileCache, short tileFrameX, short tileFrameY, Color tileLight, bool visible)
+		{
+			// The following math makes dust only spawn at the tile coordinates of the flames:
+			// OO
+			// --
+			if (FlameDust != -1)
+			{
+				if (Main.rand.NextBool(40) && tileFrameX < 36 && tileFrameY < 18)
+				{
+					Dust dust = Terraria.Dust.NewDustDirect(new Vector2(i * 16, j * 16 + 2), 14, 6, FlameDust, 0f, 0f, 100);
+					if (Main.rand.NextBool(3))
+					{
+						dust.noGravity = true;
+					}
+
+					dust.velocity *= 0.3f;
+					dust.velocity.Y -= 1.5f;
+				}
+			}
+		}
+		public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
+		{
+			if (GlowTexture() != null)
+			{
+				drawData.glowTexture = GlowTexture().Value;
+				drawData.glowColor = GlowColor;
+			}
+		}
+		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+		{
+			if (FlameTexture() == null)
+			{
+				return;
+			}
+
+			Tile tile = Main.tile[i, j];
+
+			if (!TileDrawing.IsVisible(tile))
+			{
+				return;
+			}
+
+			Vector2 zero = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
+
+			int width = 18;
+			int offsetY = 2;
+			int height = 18;
+			short frameX = tile.TileFrameX;
+			short frameY = tile.TileFrameY;
+
+			TileLoader.SetDrawPositions(i, j, ref width, ref offsetY, ref height, ref frameX, ref frameY);
+
+			ulong randSeed = Main.TileFrameSeed ^ (ulong)(((long)i << 32) | (uint)j);
+
+			for (int k = 0; k < 7; k++)
+			{
+				float shakeX = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
+				float shakeY = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
+
+				spriteBatch.Draw(FlameTexture().Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
+			}
+		}
+	}
+	public abstract class LampTemplate : FurnitureTemplate
+	{
+		public virtual Vector3 LightColor => new(1f, 0.95f, 0.65f);
+
+		// Flame texture fields
+		public virtual bool HasFlameTexture => true;
+		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		public virtual Color FlameColor => new(100, 100, 100, 0);
+		public virtual float FlameJitterMultX => 0.15f;
+		public virtual float FlameJitterMultY => 0.35f;
+
+		// Flame dust fields
+		public virtual int FlameDust => -1;
+
+		// Glow texture fields
+		public virtual bool HasGlowTexture => false;
+		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		public virtual Color GlowColor => Color.White;
+		public override void SetStaticDefaults()
+		{
+			Main.tileFrameImportant[Type] = true;
+			Main.tileLavaDeath[Type] = LavaDeath;
+			Main.tileWaterDeath[Type] = WaterDeath;
+			Main.tileLighted[Type] = true;
+
+			DustType = Dust;
+
+			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);
+			TileObjectData.newTile.CoordinateHeights = [16, 16, 16];
+			TileObjectData.newTile.DrawYOffset = 2;
+			TileObjectData.newTile.Height = 3;
+			TileObjectData.newTile.LavaDeath = LavaDeath;
+			TileObjectData.newTile.StyleHorizontal = true;
+			TileObjectData.newTile.StyleWrapLimit = 36;
+			TileObjectData.newTile.WaterDeath = WaterDeath;
+			TileObjectData.addTile(Type);
+
+			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+			AddMapEntry(new Color(253, 221, 3), Language.GetText("MapObject.FloorLamp"));
+			RegisterItemDrop(DropItem);
+		}
+		public override void HitWire(int i, int j)
+		{
+			Tile tile = Main.tile[i, j];
+			int topY = j - tile.TileFrameY / 18 % 3;
+
+			short frameAdjustment = (short)(tile.TileFrameX >= 18 ? -18 : 18);
+
+			for (int y = topY; y < topY + 3; y++)
+			{
+				Main.tile[i, y].TileFrameX += frameAdjustment;
+				Wiring.SkipWire(i, y);
+			}
+
+			if (Main.netMode != NetmodeID.SinglePlayer)
+			{
+				NetMessage.SendTileSquare(-1, i, topY, 1, 3);
+			}
+		}
+		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+		{
+			if (Main.tile[i, j].TileFrameX / 18 != 0)
+			{
+				return;
+			}
+			r = LightColor.X;
+			g = LightColor.Y;
+			b = LightColor.Z;
+		}
+		public override void EmitParticles(int i, int j, Tile tileCache, short tileFrameX, short tileFrameY, Color tileLight, bool visible)
+		{
+			// The following math makes dust only spawn at the tile coordinates of the flames:
+			// O
+			// -
+			// -
+			if (FlameDust != -1)
+			{
+				if (Main.rand.NextBool(40) && tileFrameX < 18 && tileFrameY < 18)
+				{
+					Dust dust = Terraria.Dust.NewDustDirect(new Vector2(i * 16, j * 16 + 2), 14, 6, FlameDust, 0f, 0f, 100);
+					if (Main.rand.NextBool(3))
+					{
+						dust.noGravity = true;
+					}
+
+					dust.velocity *= 0.3f;
+					dust.velocity.Y -= 1.5f;
+				}
+			}
+		}
+		public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
+		{
+			if (GlowTexture() != null)
+			{
+				drawData.glowTexture = GlowTexture().Value;
+				drawData.glowColor = GlowColor;
+			}
+		}
+		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+		{
+			if (FlameTexture() == null)
+			{
+				return;
+			}
+
+			Tile tile = Main.tile[i, j];
+
+			if (!TileDrawing.IsVisible(tile))
+			{
+				return;
+			}
+
+			Vector2 zero = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
+
+			int width = 18;
+			int offsetY = 0;
+			int height = 18;
+			short frameX = tile.TileFrameX;
+			short frameY = tile.TileFrameY;
+
+			TileLoader.SetDrawPositions(i, j, ref width, ref offsetY, ref height, ref frameX, ref frameY);
+
+			ulong randSeed = Main.TileFrameSeed ^ (ulong)(((long)i << 32) | (uint)j);
+
+			for (int k = 0; k < 7; k++)
+			{
+				float shakeX = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
+				float shakeY = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
+
+				spriteBatch.Draw(FlameTexture().Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
+			}
 		}
 	}
 	public abstract class LanternTemplate : FurnitureTemplate
 	{
-		public virtual Color FlameColor => new Color(100, 100, 100, 0);
+		public virtual Vector3 LightColor => new(1f, 0.95f, 0.65f);
+
+		// Flame texture fields
+		public virtual bool HasFlameTexture => true;
+		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		public virtual Color FlameColor => new(100, 100, 100, 0);
 		public virtual float FlameJitterMultX => 0.15f;
 		public virtual float FlameJitterMultY => 0.35f;
-		public virtual bool HasFlame => true;
+
+		// Flame dust fields
+		public virtual int FlameDust => -1;
+
+		// Glow texture fields
+		public virtual bool HasGlowTexture => false;
+		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		public virtual Color GlowColor => Color.White;
 		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[Type] = true;
 			Main.tileNoAttach[Type] = true;
 			Main.tileLavaDeath[Type] = LavaDeath;
+			Main.tileLighted[Type] = true;
+
+			TileID.Sets.MultiTileSway[Type] = true;
+			TileID.Sets.IsAMechanism[Type] = true;
+
+			DustType = Dust;
+
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);
 			TileObjectData.newTile.Height = 2;
-			TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
+			TileObjectData.newTile.CoordinateHeights = [16, 16];
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleWrapLimit = 111;
 			TileObjectData.newTile.LavaDeath = LavaDeath;
 			TileObjectData.addTile(Type);
-			DustType = Dust;
-			Main.tileLighted[Type] = true;
+
 			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			AddMapEntry(new Color(251, 235, 127), Language.GetText("MapObject.Lantern"));
 			RegisterItemDrop(DropItem);
@@ -1219,12 +1522,88 @@ namespace Avalon.Common.Templates
 		{
 			Tile tile = Main.tile[i, j];
 			int topY = j - tile.TileFrameY / 18 % 2;
-			short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
-			Main.tile[i, topY].TileFrameX += frameAdjustment;
-			Main.tile[i, topY + 1].TileFrameX += frameAdjustment;
-			Wiring.SkipWire(i, topY);
-			Wiring.SkipWire(i, topY + 1);
-			NetMessage.SendTileSquare(-1, i, topY + 1, 2, TileChangeType.None);
+
+			short frameAdjustment = (short)(tile.TileFrameX >= 18 ? -18 : 18);
+
+			for (int y = topY; y < topY + 2; y++)
+			{
+				Main.tile[i, y].TileFrameX += frameAdjustment;
+				Wiring.SkipWire(i, y);
+			}
+
+			if (Main.netMode != NetmodeID.SinglePlayer)
+			{
+				NetMessage.SendTileSquare(-1, i, topY, 1, 2);
+			}
+		}
+		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+		{
+			if (Main.tile[i, j].TileFrameX / 18 != 0)
+			{
+				return;
+			}
+			r = LightColor.X;
+			g = LightColor.Y;
+			b = LightColor.Z;
+		}
+		public override void EmitParticles(int i, int j, Tile tileCache, short tileFrameX, short tileFrameY, Color tileLight, bool visible)
+		{
+			// The following math makes dust only spawn at the tile coordinates of the flames:
+			// -
+			// O
+			if (FlameDust != -1)
+			{
+				if (Main.rand.NextBool(40) && tileFrameX < 18 && tileFrameY >= 18)
+				{
+					Dust dust = Terraria.Dust.NewDustDirect(new Vector2(i * 16, j * 16 + 2), 14, 6, FlameDust, 0f, 0f, 100);
+					if (Main.rand.NextBool(3))
+					{
+						dust.noGravity = true;
+					}
+
+					dust.velocity *= 0.3f;
+					dust.velocity.Y -= 1.5f;
+				}
+			}
+		}
+		public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
+		{
+			if (TileObjectData.IsTopLeft(Main.tile[i, j]))
+			{
+				Main.instance.TilesRenderer.AddSpecialPoint(i, j, TileDrawing.TileCounterType.MultiTileVine);
+			}
+			return false;
+		}
+		public override void AdjustMultiTileVineParameters(int i, int j, ref float? overrideWindCycle, ref float windPushPowerX, ref float windPushPowerY, ref bool dontRotateTopTiles, ref float totalWindMultiplier, ref Texture2D glowTexture, ref Color glowColor)
+		{
+			// Vanilla lanterns all share these parameters.
+			overrideWindCycle = 1f;
+			windPushPowerY = 0;
+			if (GlowTexture() != null)
+			{
+				glowTexture = GlowTexture().Value;
+				glowColor = GlowColor;
+			}
+		}
+		public override void GetTileFlameData(int i, int j, ref TileDrawing.TileFlameData tileFlameData)
+		{
+			if (FlameTexture() == null)
+			{
+				return;
+			}
+
+			ulong flameSeed = Main.TileFrameSeed ^ (ulong)(((long)i << 32) | (uint)j);
+
+			tileFlameData.flameTexture = FlameTexture().Value;
+			tileFlameData.flameSeed = flameSeed;
+			tileFlameData.flameCount = 7;
+			tileFlameData.flameColor = FlameColor;
+			tileFlameData.flameRangeXMin = -10;
+			tileFlameData.flameRangeXMax = 11;
+			tileFlameData.flameRangeYMin = -10;
+			tileFlameData.flameRangeYMax = 1;
+			tileFlameData.flameRangeMultX = FlameJitterMultX;
+			tileFlameData.flameRangeMultY = FlameJitterMultY;
 		}
 	}
 	public abstract class BookcaseTemplate : FurnitureTemplate
@@ -1585,41 +1964,6 @@ namespace Avalon.Common.Templates
 			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
 			AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Piano"));
 			DustType = Dust;
-		}
-	}
-	public abstract class LampTemplate : FurnitureTemplate
-	{
-		public override void SetStaticDefaults()
-		{
-			Main.tileFrameImportant[Type] = true;
-			Main.tileLavaDeath[Type] = LavaDeath;
-			Main.tileWaterDeath[Type] = WaterDeath;
-			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);
-			TileObjectData.newTile.Height = 3;
-			TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16 };
-			TileObjectData.newTile.StyleHorizontal = true;
-			TileObjectData.newTile.StyleWrapLimit = 36;
-			TileObjectData.newTile.LavaDeath = LavaDeath;
-			TileObjectData.newTile.WaterDeath = WaterDeath;
-			TileObjectData.addTile(Type);
-			Main.tileLighted[Type] = true;
-			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			AddMapEntry(new Color(253, 221, 3), Language.GetText("MapObject.FloorLamp"));
-			DustType = Dust;
-			RegisterItemDrop(DropItem);
-		}
-		public override void HitWire(int i, int j)
-		{
-			Tile tile = Main.tile[i, j];
-			int topY = j - tile.TileFrameY / 18 % 3;
-			short frameAdjustment = (short)(tile.TileFrameX > 0 ? -18 : 18);
-			Main.tile[i, topY].TileFrameX += frameAdjustment;
-			Main.tile[i, topY + 1].TileFrameX += frameAdjustment;
-			Main.tile[i, topY + 2].TileFrameX += frameAdjustment;
-			Wiring.SkipWire(i, topY);
-			Wiring.SkipWire(i, topY + 1);
-			Wiring.SkipWire(i, topY + 2);
-			NetMessage.SendTileSquare(-1, i, topY + 1, 3, TileChangeType.None);
 		}
 	}
 	public abstract class ClockTemplate : FurnitureTemplate
