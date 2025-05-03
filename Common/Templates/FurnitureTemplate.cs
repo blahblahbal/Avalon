@@ -1509,6 +1509,7 @@ namespace Avalon.Common.Templates
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);
 			TileObjectData.newTile.Height = 2;
 			TileObjectData.newTile.CoordinateHeights = [16, 16];
+			TileObjectData.newTile.DrawYOffset = -2;
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleWrapLimit = 111;
 			TileObjectData.newTile.LavaDeath = LavaDeath;
@@ -1565,6 +1566,10 @@ namespace Avalon.Common.Templates
 					dust.velocity.Y -= 1.5f;
 				}
 			}
+		}
+		public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
+		{
+			offsetY = 0;
 		}
 		public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
 		{
