@@ -1,6 +1,5 @@
 using Avalon.Common;
 using Avalon.ModSupport.Thorium.Tiles;
-using Avalon.Tiles.Furniture;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
@@ -14,7 +13,6 @@ namespace Avalon.Hooks
 	{
 		protected override void Apply()
 		{
-			On_TileDrawing.DrawMultiTileVinesInWind += On_TileDrawing_DrawMultiTileVinesInWind;
 			IL_TileDrawing.DrawMultiTileGrassInWind += IL_TileDrawing_DrawMultiTileGrassInWind;
 		}
 
@@ -78,20 +76,6 @@ namespace Avalon.Hooks
 					overlayTexture = ModContent.Request<Texture2D>(TileLoader.GetTile(ModContent.TileType<LargeMarineKelpStage4>()).Texture + "_Glow").Value;
 				}
 			}
-		}
-
-		private void On_TileDrawing_DrawMultiTileVinesInWind(On_TileDrawing.orig_DrawMultiTileVinesInWind orig, TileDrawing self, Vector2 screenPosition, Vector2 offSet, int topLeftX, int topLeftY, int sizeX, int sizeY)
-		{
-			if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.MonsterBanner>())
-			{
-				sizeY = 3;
-			}
-			else if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<HangingPots>())
-			{
-				sizeX = 2;
-				sizeY = 3;
-			}
-			orig.Invoke(self, screenPosition, offSet, topLeftX, topLeftY, sizeX, sizeY);
 		}
 	}
 }
