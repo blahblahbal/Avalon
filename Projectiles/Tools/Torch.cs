@@ -49,8 +49,8 @@ public class Torch : ModProjectile
 	public override bool PreDraw(ref Color lightColor)
 	{
 
-		Texture2D TEX = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Flame").Value;
-		Texture2D FlameTEX = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch_Flame").Value;
+		Texture2D TEX = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch").Value;
+		Texture2D FlameTEX = ModContent.Request<Texture2D>("Avalon/Projectiles/Tools/Torch").Value;
 		Rectangle frame = new Rectangle();
 		Rectangle flameFrame = new Rectangle();
 
@@ -220,7 +220,18 @@ public class Torch : ModProjectile
 			return;
 		}
 
+		if (Main.tileSolidTop[Main.tile[TileX, TileY].TileType] && Main.tileSolid[Main.tile[TileX, TileY + 1].TileType])
+		{
+			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
+			Projectile.active = false;
+			return;
+		}
+
 		if (Main.tile[TileX, TileY].WallType != 0 && !Main.tile[TileX, TileY].HasTile)
+		{
+			goto placeTorch;
+		}
+		else if (!Main.tile[TileX, TileY].HasTile && Main.tile[TileX, TileY - 1].HasTile && (!Main.tileNoAttach[Main.tile[TileX - 1, TileY].TileType] || !Main.tileNoAttach[Main.tile[TileX + 1, TileY].TileType]))
 		{
 			goto placeTorch;
 		}
@@ -229,7 +240,7 @@ public class Torch : ModProjectile
 			(Main.tile[TileX - 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftup active, up off, left off
 			(Main.tile[TileX + 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightup active, up off, right off
 			(Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType]) ||                                    // current tile non-solid
-																																			// down on and non-solid, left OR right on and non-solid
+																																		 // down on and non-solid, left OR right on and non-solid
 			(Main.tile[TileX, TileY + 1].HasTile && !Main.tileSolid[Main.tile[TileX, TileY + 1].TileType] && ((Main.tile[TileX - 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX - 1, TileY].TileType]) || (Main.tile[TileX + 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX + 1, TileY].TileType]))) ||
 			// (up on, ((left off OR right off) OR (current tile active and non-solid))
 			(Main.tile[TileX, TileY - 1].HasTile && ((!Main.tile[TileX - 1, TileY].HasTile || !Main.tile[TileX + 1, TileY].HasTile) || (Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType])))))
