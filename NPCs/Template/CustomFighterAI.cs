@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Template;
@@ -18,6 +19,8 @@ public abstract class CustomFighterAI : ModNPC
 	public virtual int NumberOfJumpsAgainstWall { get; set; } = 4;
 	public virtual int TimeBeforeTurningAround { get; set; } = 180;
 
+	public float PreviousDirection;
+
 	public float NumJumps
 	{
 		get => NPC.ai[0];
@@ -33,6 +36,9 @@ public abstract class CustomFighterAI : ModNPC
 		get => NPC.ai[2];
 		set => NPC.ai[2] = value;
 	}
+
+	public ref float SavePrevDir => ref NPC.ai[3];
+
 	public override bool? CanFallThroughPlatforms()
 	{
 		Player player = Main.player[NPC.FindClosestPlayer()];
@@ -49,6 +55,7 @@ public abstract class CustomFighterAI : ModNPC
 		writer.Write(JumpRadius);
 		writer.Write(Acceleration);
 		writer.Write(AirAcceleration);
+		writer.Write(PreviousDirection);
 	}
 	public override void ReceiveExtraAI(BinaryReader reader)
 	{
@@ -58,6 +65,7 @@ public abstract class CustomFighterAI : ModNPC
 		JumpRadius = reader.ReadSingle();
 		Acceleration = reader.ReadSingle();
 		AirAcceleration = reader.ReadSingle();
+		PreviousDirection = reader.ReadSingle();
 	}
 	public virtual void CustomBehavior()
 	{
@@ -69,16 +77,57 @@ public abstract class CustomFighterAI : ModNPC
 	{
 		Player player = Main.player[NPC.FindClosestPlayer()];
 		float distanceBetweenPlayer = Vector2.Distance(player.Center, NPC.Center);
-		float dir = NPC.Center.X - player.Center.X;
+		float dir;
+
+		if (NPC.confused)
+		{
+			int bindex = NPC.FindBuffIndex(BuffID.Confused);
+			if (bindex > -1)
+			{
+				if (NPC.buffTime[bindex] > 1)
+				{
+					RunningMode = 1;
+					NumJumps = 0;
+				}
+				else if (NPC.buffTime[bindex] == 1)
+				{
+					RunningMode = 0;
+					NumJumps = 0;
+				}
+			}
+		}
+		if (!NPC.confused && NPC.justHit)
+		{
+			RunningMode = 0;
+			NumJumps = 0;
+		}
+		if (RunningMode == 0)
+		{
+			dir = NPC.Center.X - player.Center.X;
+		}
+		else
+		{
+			if (SavePrevDir == 0)
+			{
+				dir = NPC.Center.X - player.Center.X;
+				PreviousDirection = dir;
+				SavePrevDir = 1;
+			}
+			else
+			{
+				dir = PreviousDirection;
+			}
+		}
 		float upOrDown = NPC.Center.Y - player.Center.Y;
 
 		dir = Math.Sign(dir);
 
-		if (NPC.confused) RunningMode = 1;
-
 		//movement stuff you don't need to worry about... unless you do then just figure it out lol
 		float moveSpeedMulti;
 		float airSpeedMulti;
+
+		
+
 		if (RunningMode == 0)
 		{
 			moveSpeedMulti = NPC.velocity.X + (Acceleration * -dir);
@@ -119,40 +168,50 @@ public abstract class CustomFighterAI : ModNPC
 		if (RunningMode == 1 && !NPC.confused)
 		{
 			RunningModeTimer++;
-			if (RunningModeTimer > TimeBeforeTurningAround)
+			if (RunningModeTimer > TimeBeforeTurningAround && NPC.collideY)
 			{
 				RunningMode = 0;
 				RunningModeTimer = 0;
+				SavePrevDir = 0;
+				NumJumps = 0;
 				return;
 			}
 		}
 		//if the player is above the npc and in range (JumpRadius) and there is also a line between the player and the npc
-		if (distanceBetweenPlayer < JumpRadius && NPC.collideY && upOrDown > 1 && Collision.CanHitLine(NPC.position, NPC.width, NPC.height, player.position, player.width, player.height) && RunningMode == 0)
+		if (distanceBetweenPlayer < JumpRadius && NPC.collideY && upOrDown > 1 && Collision.CanHitLine(NPC.position, NPC.width, NPC.height, player.position, player.width, player.height))
 		{
 			Jump(MaxJumpHeight);
+			NumJumps = 0;
 		}
-
 		Point a = NPC.Bottom.ToTileCoordinates();
 		float height = 0;
+		
 		// if its on the ground and touching a wall
-		if ((NPC.collideY || Main.tileSolid[Main.tile[a.X, a.Y].TileType] && Main.tile[a.X, a.Y].HasTile && !Main.tileSolidTop[Main.tile[a.X, a.Y].TileType]) && NPC.collideX && NumJumps < NumberOfJumpsAgainstWall && RunningMode == 0)
+		if ((NPC.collideY || Main.tileSolid[Main.tile[a.X, a.Y].TileType] && Main.tile[a.X, a.Y].HasTile && !Main.tileSolidTop[Main.tile[a.X, a.Y].TileType]) && NPC.collideX && NumJumps <= NumberOfJumpsAgainstWall)
 		{
 			//check for the height of the wall infront
 			for (int i = 0; i < 10; i++)
 			{
-				if (Main.tile[a.X + 1 * -(int)dir, a.Y - i].HasTile && Main.tileSolid[Main.tile[a.X + 1 * -(int)dir, a.Y - i].TileType])
+				if (Main.tile[a.X + 1 * -(int)dir * NPC.spriteDirection, a.Y - i].HasTile && Main.tileSolid[Main.tile[a.X + 1 * -(int)dir * NPC.spriteDirection, a.Y - i].TileType])
 				{
 					height = i + 1;
 				}
 			}
 			//jumps with the right height
-			Jump(height);
+			if (NumJumps < NumberOfJumpsAgainstWall)
+				Jump(height);
+			else
+			{
+				if (RunningMode == 0) RunningMode = 1;
+				else if (RunningMode == 1) RunningMode = 0;
+				NumJumps = 0;
+			}
 		}
-		else if (NumJumps == NumberOfJumpsAgainstWall && NPC.velocity.Y == 0f)
-		{
-			RunningMode = 1;
-			NumJumps = 0;
-		}
+		//else if (NumJumps == NumberOfJumpsAgainstWall && NPC.velocity.Y == 0f)
+		//{
+		//	RunningMode = 1;
+		//	NumJumps = 0;
+		//}
 		//if its on the ground
 		if (NPC.collideY || Main.tileSolid[Main.tile[a.X, a.Y].TileType] && Main.tile[a.X, a.Y].HasTile)
 		{
@@ -168,6 +227,7 @@ public abstract class CustomFighterAI : ModNPC
 			if ((!Main.tileSolid[Main.tile[a.X + 1 * -(int)dir, a.Y].TileType] || !Main.tile[a.X + 1 * -(int)dir, a.Y].HasTile) && (!Main.tileSolid[Main.tile[a.X + 2 * -(int)dir, a.Y].TileType] || !Main.tile[a.X + 2 * -(int)dir, a.Y].HasTile) && upOrDown > -20 && JumpOverDrop)
 			{
 				Jump(MaxJumpHeight);
+				NumJumps = 0;
 			}
 		}
 		else
