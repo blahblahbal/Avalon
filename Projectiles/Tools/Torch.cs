@@ -201,79 +201,12 @@ public class Torch : ModProjectile
 
 		if (TileX < 0 || TileX >= Main.maxTilesX || TileY < 0 || TileY >= Main.maxTilesY)
 		{
-			Projectile.active = false;
 			return;
 		}
 
-		if ((TileX < 1 || Main.tileNoAttach[Main.tile[TileX - 1, TileY].TileType]) && (TileX >= Main.maxTilesX - 1 || Main.tileNoAttach[Main.tile[TileX + 1, TileY].TileType]) && (TileY < 1 || Main.tileNoAttach[Main.tile[TileX, TileY - 1].TileType]) && (TileY >= Main.maxTilesY - 1 || Main.tileNoAttach[Main.tile[TileX, TileY + 1].TileType]))
-		{
-			// create dropped torch item
-			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
-			Projectile.active = false;
-			return;
-		}
-
-		if (Main.tile[TileX, TileY].LiquidAmount > 0 && TileObjectData.GetTileData(item.createTile, item.placeStyle).WaterDeath)
+		if (!WorldGen.PlaceObject(TileX, TileY, item.createTile, false, item.placeStyle, 0))
 		{
 			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
-			Projectile.active = false;
-			return;
-		}
-
-		if (Main.tileSolidTop[Main.tile[TileX, TileY].TileType] && Main.tileSolid[Main.tile[TileX, TileY + 1].TileType])
-		{
-			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
-			Projectile.active = false;
-			return;
-		}
-
-		if (Main.tile[TileX, TileY].WallType != 0 && !Main.tile[TileX, TileY].HasTile)
-		{
-			goto placeTorch;
-		}
-		else if (!Main.tile[TileX, TileY].HasTile && Main.tile[TileX, TileY - 1].HasTile && (!Main.tileNoAttach[Main.tile[TileX - 1, TileY].TileType] || !Main.tileNoAttach[Main.tile[TileX + 1, TileY].TileType]))
-		{
-			goto placeTorch;
-		}
-		else if (((Main.tile[TileX - 1, TileY + 1].HasTile && !Main.tile[TileX, TileY + 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftdown active, down off, left off
-			(Main.tile[TileX + 1, TileY + 1].HasTile && !Main.tile[TileX, TileY + 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightdown active, down off, right off
-			(Main.tile[TileX - 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX - 1, TileY].HasTile) || // leftup active, up off, left off
-			(Main.tile[TileX + 1, TileY - 1].HasTile && !Main.tile[TileX, TileY - 1].HasTile && !Main.tile[TileX + 1, TileY].HasTile) || // rightup active, up off, right off
-			(Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType]) ||                                    // current tile non-solid
-																																		 // down on and non-solid, left OR right on and non-solid
-			(Main.tile[TileX, TileY + 1].HasTile && !Main.tileSolid[Main.tile[TileX, TileY + 1].TileType] && ((Main.tile[TileX - 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX - 1, TileY].TileType]) || (Main.tile[TileX + 1, TileY].HasTile && !Main.tileSolid[Main.tile[TileX + 1, TileY].TileType]))) ||
-			// (up on, ((left off OR right off) OR (current tile active and non-solid))
-			(Main.tile[TileX, TileY - 1].HasTile && ((!Main.tile[TileX - 1, TileY].HasTile || !Main.tile[TileX + 1, TileY].HasTile) || (Main.tile[TileX, TileY].HasTile && !Main.tileSolid[Main.tile[TileX, TileY].TileType])))))
-		{
-			// create dropped torch item
-			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
-			Projectile.active = false;
-			return;
-		}
-		else if (Main.tile[TileX, TileY].IsHalfBlock || Main.tile[TileX, TileY].Slope != SlopeType.Solid || (Main.tile[TileX, TileY + 1].Slope != SlopeType.Solid && !Main.tile[TileX, TileY].HasTile))
-		{
-			Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, 8, 8, item.type);
-			Projectile.active = false;
-			return;
-		}
-
-	placeTorch:
-		if (!Main.tile[TileX, TileY].HasTile || Main.tileCut[Main.tile[TileX, TileY].TileType] || (Main.tile[TileX, TileY].LiquidAmount > 0 && item.type != ItemID.CursedTorch))
-		{
-			if (ItemType != ItemID.None)
-			{
-				WorldGen.PlaceTile(TileX, TileY, item.createTile, false, true, -1, item.placeStyle);
-				if (Main.netMode != NetmodeID.SinglePlayer)
-				{
-					NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, TileX, TileY, item.createTile);
-				}
-				if (Main.tile[TileX, TileY].TileType == item.createTile)
-				{
-					WorldGen.TileFrame(TileX, TileY);
-					Main.tile[TileX, TileY].TileFrameY = (short)(22 * item.placeStyle);
-					Projectile.active = false;
-				}
-			}
 		}
 	}
 }
