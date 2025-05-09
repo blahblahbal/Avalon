@@ -26,6 +26,10 @@ public abstract class CustomFighterAI : ModNPC
 		get => NPC.ai[0];
 		set => NPC.ai[0] = value;
 	}
+	/// <summary>
+	/// RunningMode 0 is Targeting player
+	/// RunningMode 1 is Running away
+	/// </summary>
 	public float RunningMode
 	{
 		get => NPC.ai[1];
@@ -79,6 +83,8 @@ public abstract class CustomFighterAI : ModNPC
 		float distanceBetweenPlayer = Vector2.Distance(player.Center, NPC.Center);
 		float dir;
 
+		// if confused and the buff has more than 1 tick left on it, set RunningMode to 1 (running away)
+		// if confused and buff has exactly 1 tick left, set RunningMode to 0 (targeting the closest player)
 		if (NPC.confused)
 		{
 			int bindex = NPC.FindBuffIndex(BuffID.Confused);
@@ -96,11 +102,14 @@ public abstract class CustomFighterAI : ModNPC
 				}
 			}
 		}
+		// set running mode to 0 if just hit
 		if (!NPC.confused && NPC.justHit)
 		{
 			RunningMode = 0;
 			NumJumps = 0;
 		}
+		// some annoying logic to allow the npc to save the direction it's going during running away mode
+		// (so it doesn't always face away from the player if you happen to run to the other side of it while it's in this mode)
 		if (RunningMode == 0)
 		{
 			dir = NPC.Center.X - player.Center.X;
@@ -126,8 +135,7 @@ public abstract class CustomFighterAI : ModNPC
 		float moveSpeedMulti;
 		float airSpeedMulti;
 
-		
-
+		// set multipliers based on running mode
 		if (RunningMode == 0)
 		{
 			moveSpeedMulti = NPC.velocity.X + (Acceleration * -dir);
@@ -141,6 +149,7 @@ public abstract class CustomFighterAI : ModNPC
 		moveSpeedMulti = Math.Clamp(moveSpeedMulti, -MaxMoveSpeed, MaxMoveSpeed);
 		airSpeedMulti = Math.Clamp(airSpeedMulti, -MaxAirSpeed, MaxAirSpeed);
 
+		// set X velocity based on running mode
 		if (RunningMode == 0)
 		{
 			NPC.spriteDirection = -(int)dir;
@@ -165,6 +174,7 @@ public abstract class CustomFighterAI : ModNPC
 				NPC.velocity.X = -airSpeedMulti;
 			}
 		}
+		// increment running mode timer
 		if (RunningMode == 1 && !NPC.confused)
 		{
 			RunningModeTimer++;
@@ -192,7 +202,9 @@ public abstract class CustomFighterAI : ModNPC
 			//check for the height of the wall infront
 			for (int i = 0; i < 10; i++)
 			{
-				if (Main.tile[a.X + 1 * -(int)dir * NPC.spriteDirection, a.Y - i].HasTile && Main.tileSolid[Main.tile[a.X + 1 * -(int)dir * NPC.spriteDirection, a.Y - i].TileType])
+				int modifier = 1;
+				if (RunningMode == 1) modifier = -1;
+				if (Main.tile[a.X + 1 * -(int)dir * modifier, a.Y - i].HasTile && Main.tileSolid[Main.tile[a.X + 1 * -(int)dir * modifier, a.Y - i].TileType])
 				{
 					height = i + 1;
 				}
@@ -202,16 +214,13 @@ public abstract class CustomFighterAI : ModNPC
 				Jump(height);
 			else
 			{
+				// swap the running mode and set num jumps to 0
 				if (RunningMode == 0) RunningMode = 1;
 				else if (RunningMode == 1) RunningMode = 0;
 				NumJumps = 0;
 			}
 		}
-		//else if (NumJumps == NumberOfJumpsAgainstWall && NPC.velocity.Y == 0f)
-		//{
-		//	RunningMode = 1;
-		//	NumJumps = 0;
-		//}
+
 		//if its on the ground
 		if (NPC.collideY || Main.tileSolid[Main.tile[a.X, a.Y].TileType] && Main.tile[a.X, a.Y].HasTile)
 		{
@@ -255,6 +264,11 @@ public abstract class CustomFighterAI : ModNPC
 			jumpdelay = 3;
 			NumJumps++;
 		}
+	}
+	public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
+	{
+		if (!NPC.confused)
+			RunningMode = 0;
 	}
 	/*public override void OnHitByItem(Player player, Item item, int damage, float knockback, bool crit)
 	{
