@@ -1,30 +1,29 @@
-using System;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
+using System.Collections.Generic;
+using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
-using Terraria;
 using Terraria.ModLoader;
 
 namespace Avalon.Common.Templates;
 
 public abstract class FlailTemplate : ModProjectile
 {
-	private static Asset<Texture2D> chainTexture;
-	public virtual string ChainTexturePath { get; set; } = "Avalon/Projectiles/Melee/CaesiumMace_Chain";
-	public virtual int LaunchTimeLimit { get; set; } = 20;
-	public virtual float LaunchSpeed { get; set; } = 24f;
-	public virtual float MaxLaunchLength { get; set; } = 1200f;
-	public virtual float RetractAcceleration { get; set; } = 5f;
-	public virtual float MaxRetractSpeed { get; set; } = 16f;
-	public virtual float ForcedRetractAcceleration { get; set; } = 6f;
-	public virtual float MaxForcedRetractSpeed { get; set; } = 48f;
-	public virtual int DefaultHitCooldown { get; set; } = 10;
-	public virtual int SpinHitCooldown { get; set; } = 20;
-	public virtual int MovingHitCooldown { get; set; } = 10;
-	public virtual int DustType { get; set; } = -1;
+	public virtual int LaunchTimeLimit => 20;
+	public virtual float LaunchSpeed => 24f;
+	public virtual float MaxLaunchLength => 1200f;
+	public virtual float RetractAcceleration => 5f;
+	public virtual float MaxRetractSpeed => 16f;
+	public virtual float ForcedRetractAcceleration => 6f;
+	public virtual float MaxForcedRetractSpeed => 48f;
+	public virtual int DefaultHitCooldown => 10;
+	public virtual int SpinHitCooldown => 20;
+	public virtual int MovingHitCooldown => 10;
+	public virtual int DustType => -1;
 	private enum AIState
 	{
 		Spinning,
@@ -35,7 +34,7 @@ public abstract class FlailTemplate : ModProjectile
 		Ricochet,
 		Dropping
 	}
-	
+
 	// These properties wrap the usual ai and localAI arrays for cleaner and easier to understand code.
 	private AIState CurrentAIState
 	{
@@ -46,9 +45,15 @@ public abstract class FlailTemplate : ModProjectile
 	public ref float CollisionCounter => ref Projectile.localAI[0];
 	public ref float SpinningStateTimer => ref Projectile.localAI[1];
 
+	public virtual bool HasChainTexture => true;
+	private static Dictionary<string, Asset<Texture2D>> ChainTextures = [];
+
 	public override void SetStaticDefaults()
 	{
-		chainTexture = ModContent.Request<Texture2D>(ChainTexturePath); // The folder path to the flail chain sprite
+		if (HasChainTexture)
+		{
+			ChainTextures.Add(Name, ModContent.Request<Texture2D>(Texture + "_Chain"));
+		}
 	}
 
 	public override void SetDefaults()
@@ -93,7 +98,7 @@ public abstract class FlailTemplate : ModProjectile
 			if (Projectile.ai[0] == 0)
 				d.velocity = new Vector2(0, -2 * player.direction).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation());
 		}
-		
+
 
 		Vector2 mountedCenter = player.MountedCenter;
 		//bool doFastThrowDust = false;
@@ -481,66 +486,70 @@ public abstract class FlailTemplate : ModProjectile
 		// This fixes a vanilla GetPlayerArmPosition bug causing the chain to draw incorrectly when stepping up slopes. The flail itself still draws incorrectly due to another similar bug. This should be removed once the vanilla bug is fixed.
 		playerArmPosition.Y -= Main.player[Projectile.owner].gfxOffY;
 
-		Rectangle? chainSourceRectangle = null;
-		// Drippler Crippler customizes sourceRectangle to cycle through sprite frames: sourceRectangle = asset.Frame(1, 6);
-		float chainHeightAdjustment = 0f; // Use this to adjust the chain overlap. 
-
-		Vector2 chainOrigin = chainSourceRectangle.HasValue ? (chainSourceRectangle.Value.Size() / 2f) : (chainTexture.Size() / 2f);
-		Vector2 chainDrawPosition = Projectile.Center;
-		Vector2 vectorFromProjectileToPlayerArms = playerArmPosition.MoveTowards(chainDrawPosition, 4f) - chainDrawPosition;
-		Vector2 unitVectorFromProjectileToPlayerArms = vectorFromProjectileToPlayerArms.SafeNormalize(Vector2.Zero);
-		float chainSegmentLength = (chainSourceRectangle.HasValue ? chainSourceRectangle.Value.Height : chainTexture.Height()) + chainHeightAdjustment;
-		if (chainSegmentLength == 0)
+		if (ChainTextures.TryGetValue(Name, out Asset<Texture2D> chainTexture))
 		{
-			chainSegmentLength = 10; // When the chain texture is being loaded, the height is 0 which would cause infinite loops.
-		}
-		float chainRotation = unitVectorFromProjectileToPlayerArms.ToRotation() + MathHelper.PiOver2;
-		int chainCount = 0;
-		float chainLengthRemainingToDraw = vectorFromProjectileToPlayerArms.Length() + chainSegmentLength / 2f;
+			Rectangle? chainSourceRectangle = null;
+			// Drippler Crippler customizes sourceRectangle to cycle through sprite frames: sourceRectangle = asset.Frame(1, 6);
+			float chainHeightAdjustment = 0f; // Use this to adjust the chain overlap. 
 
-		// This while loop draws the chain texture from the projectile to the player, looping to draw the chain texture along the path
-		while (chainLengthRemainingToDraw > 0f)
-		{
-			// This code gets the lighting at the current tile coordinates
-			Color chainDrawColor = Lighting.GetColor((int)chainDrawPosition.X / 16, (int)(chainDrawPosition.Y / 16f));
+			Vector2 chainOrigin = chainSourceRectangle.HasValue ? (chainSourceRectangle.Value.Size() / 2f) : (chainTexture.Size() / 2f);
+			//Vector2 chainOrigin = chainSourceRectangle.HasValue ? (chainSourceRectangle.Value.Size() / 2f) : (Main.Assets.Request<Texture2D>("Images/Chain_"));
+			Vector2 chainDrawPosition = Projectile.Center;
+			Vector2 vectorFromProjectileToPlayerArms = playerArmPosition.MoveTowards(chainDrawPosition, 4f) - chainDrawPosition;
+			Vector2 unitVectorFromProjectileToPlayerArms = vectorFromProjectileToPlayerArms.SafeNormalize(Vector2.Zero);
+			float chainSegmentLength = (chainSourceRectangle.HasValue ? chainSourceRectangle.Value.Height : chainTexture.Height()) + chainHeightAdjustment;
+			if (chainSegmentLength == 0)
+			{
+				chainSegmentLength = 10; // When the chain texture is being loaded, the height is 0 which would cause infinite loops.
+			}
+			float chainRotation = unitVectorFromProjectileToPlayerArms.ToRotation() + MathHelper.PiOver2;
+			int chainCount = 0;
+			float chainLengthRemainingToDraw = vectorFromProjectileToPlayerArms.Length() + chainSegmentLength / 2f;
 
-			// Flaming Mace and Drippler Crippler use code here to draw custom sprite frames with custom lighting.
-			// Cycling through frames: sourceRectangle = asset.Frame(1, 6, 0, chainCount % 6);
-			// This example shows how Flaming Mace works. It checks chainCount and changes chainTexture and draw color at different values
+			// This while loop draws the chain texture from the projectile to the player, looping to draw the chain texture along the path
+			while (chainLengthRemainingToDraw > 0f)
+			{
+				// This code gets the lighting at the current tile coordinates
+				Color chainDrawColor = Lighting.GetColor((int)chainDrawPosition.X / 16, (int)(chainDrawPosition.Y / 16f));
 
-			var chainTextureToDraw = chainTexture;
-			//if (chainCount >= 4)
-			//{
-			//    // Use normal chainTexture and lighting, no changes
-			//}
-			//else if (chainCount >= 2)
-			//{
-			//    // Near to the ball, we draw a custom chain texture and slightly make it glow if unlit.
-			//    chainTextureToDraw = chainTextureExtra;
-			//    byte minValue = 140;
-			//    if (chainDrawColor.R < minValue)
-			//        chainDrawColor.R = minValue;
+				// Flaming Mace and Drippler Crippler use code here to draw custom sprite frames with custom lighting.
+				// Cycling through frames: sourceRectangle = asset.Frame(1, 6, 0, chainCount % 6);
+				// This example shows how Flaming Mace works. It checks chainCount and changes chainTexture and draw color at different values
 
-			//    if (chainDrawColor.G < minValue)
-			//        chainDrawColor.G = minValue;
+				var chainTextureToDraw = chainTexture;
+				//if (chainCount >= 4)
+				//{
+				//    // Use normal chainTexture and lighting, no changes
+				//}
+				//else if (chainCount >= 2)
+				//{
+				//    // Near to the ball, we draw a custom chain texture and slightly make it glow if unlit.
+				//    chainTextureToDraw = chainTextureExtra;
+				//    byte minValue = 140;
+				//    if (chainDrawColor.R < minValue)
+				//        chainDrawColor.R = minValue;
 
-			//    if (chainDrawColor.B < minValue)
-			//        chainDrawColor.B = minValue;
-			//}
-			//else
-			//{
-			//    // Close to the ball, we draw a custom chain texture and draw it at full brightness glow.
-			//    chainTextureToDraw = chainTextureExtra;
-			//    chainDrawColor = Color.White;
-			//}
+				//    if (chainDrawColor.G < minValue)
+				//        chainDrawColor.G = minValue;
 
-			// Here, we draw the chain texture at the coordinates
-			Main.spriteBatch.Draw(chainTextureToDraw.Value, chainDrawPosition - Main.screenPosition, chainSourceRectangle, chainDrawColor, chainRotation, chainOrigin, 1f, SpriteEffects.None, 0f);
+				//    if (chainDrawColor.B < minValue)
+				//        chainDrawColor.B = minValue;
+				//}
+				//else
+				//{
+				//    // Close to the ball, we draw a custom chain texture and draw it at full brightness glow.
+				//    chainTextureToDraw = chainTextureExtra;
+				//    chainDrawColor = Color.White;
+				//}
 
-			// chainDrawPosition is advanced along the vector back to the player by the chainSegmentLength
-			chainDrawPosition += unitVectorFromProjectileToPlayerArms * chainSegmentLength;
-			chainCount++;
-			chainLengthRemainingToDraw -= chainSegmentLength;
+				// Here, we draw the chain texture at the coordinates
+				Main.spriteBatch.Draw(chainTextureToDraw.Value, chainDrawPosition - Main.screenPosition, chainSourceRectangle, chainDrawColor, chainRotation, chainOrigin, 1f, SpriteEffects.None, 0f);
+
+				// chainDrawPosition is advanced along the vector back to the player by the chainSegmentLength
+				chainDrawPosition += unitVectorFromProjectileToPlayerArms * chainSegmentLength;
+				chainCount++;
+				chainLengthRemainingToDraw -= chainSegmentLength;
+			}
 		}
 
 		// Add a motion trail when moving forward, like most flails do (don't add trail if already hit a tile)

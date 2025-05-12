@@ -813,7 +813,7 @@ namespace Avalon.Common.Templates
 
 		// Flame texture fields
 		public virtual bool HasFlameTexture => true;
-		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		private Asset<Texture2D>? FlameTexture;
 		public virtual Color FlameColor => new(100, 100, 100, 0);
 		public virtual float FlameJitterMultX => 0.15f;
 		public virtual float FlameJitterMultY => 0.35f;
@@ -838,11 +838,14 @@ namespace Avalon.Common.Templates
 
 		// Glow texture fields
 		public virtual bool HasGlowTexture => false;
-		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		private Asset<Texture2D>? GlowTexture;
 		public virtual Color GlowColor => Color.White;
 
 		public override void SetStaticDefaults()
 		{
+			FlameTexture = HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+			GlowTexture = HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+
 			Main.tileFrameImportant[Type] = true;
 			Main.tileNoAttach[Type] = true;
 			Main.tileLavaDeath[Type] = LavaDeath;
@@ -949,22 +952,22 @@ namespace Avalon.Common.Templates
 			// Vanilla chandeliers all share these parameters.
 			overrideWindCycle = 1f;
 			windPushPowerY = 0;
-			if (GlowTexture() != null)
+			if (GlowTexture != null)
 			{
-				glowTexture = GlowTexture().Value;
+				glowTexture = GlowTexture.Value;
 				glowColor = GlowColor;
 			}
 		}
 		public override void GetTileFlameData(int i, int j, ref TileDrawing.TileFlameData tileFlameData)
 		{
-			if (FlameTexture() == null)
+			if (FlameTexture == null)
 			{
 				return;
 			}
 
 			ulong flameSeed = Main.TileFrameSeed ^ (ulong)(((long)i << 32) | (uint)j);
 
-			tileFlameData.flameTexture = FlameTexture().Value;
+			tileFlameData.flameTexture = FlameTexture.Value;
 			tileFlameData.flameSeed = flameSeed;
 			tileFlameData.flameCount = 7;
 			tileFlameData.flameColor = FlameColor;
@@ -1084,7 +1087,7 @@ namespace Avalon.Common.Templates
 
 		// Flame texture fields
 		public virtual bool HasFlameTexture => true;
-		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		private Asset<Texture2D>? FlameTexture;
 		public virtual Color FlameColor => new(100, 100, 100, 0);
 		public virtual float FlameJitterMultX => 0.15f;
 		public virtual float FlameJitterMultY => 0.35f;
@@ -1094,10 +1097,13 @@ namespace Avalon.Common.Templates
 
 		// Glow texture fields
 		public virtual bool HasGlowTexture => false;
-		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		private Asset<Texture2D>? GlowTexture;
 		public virtual Color GlowColor => Color.White;
 		public override void SetStaticDefaults()
 		{
+			FlameTexture = HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+			GlowTexture = HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+
 			Main.tileFrameImportant[Type] = true;
 			Main.tileLavaDeath[Type] = LavaDeath;
 			Main.tileLighted[Type] = true;
@@ -1168,15 +1174,15 @@ namespace Avalon.Common.Templates
 		//}
 		public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
 		{
-			if (GlowTexture() != null)
+			if (GlowTexture != null)
 			{
-				drawData.glowTexture = GlowTexture().Value;
+				drawData.glowTexture = GlowTexture.Value;
 				drawData.glowColor = GlowColor;
 			}
 		}
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
-			if (FlameTexture() == null)
+			if (FlameTexture == null)
 			{
 				return;
 			}
@@ -1205,7 +1211,7 @@ namespace Avalon.Common.Templates
 				float shakeX = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 				float shakeY = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
 
-				spriteBatch.Draw(FlameTexture().Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(FlameTexture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
 			}
 		}
 	}
@@ -1215,7 +1221,7 @@ namespace Avalon.Common.Templates
 
 		// Flame texture fields
 		public virtual bool HasFlameTexture => true;
-		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		private Asset<Texture2D>? FlameTexture;
 		public virtual Color FlameColor => new(100, 100, 100, 0);
 		public virtual float FlameJitterMultX => 0.15f;
 		public virtual float FlameJitterMultY => 0.35f;
@@ -1225,10 +1231,13 @@ namespace Avalon.Common.Templates
 
 		// Glow texture fields
 		public virtual bool HasGlowTexture => false;
-		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		private Asset<Texture2D>? GlowTexture;
 		public virtual Color GlowColor => Color.White;
 		public override void SetStaticDefaults()
 		{
+			FlameTexture = HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+			GlowTexture = HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+
 			Main.tileFrameImportant[Type] = true;
 			Main.tileLavaDeath[Type] = LavaDeath;
 			Main.tileLighted[Type] = true;
@@ -1302,15 +1311,15 @@ namespace Avalon.Common.Templates
 		}
 		public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
 		{
-			if (GlowTexture() != null)
+			if (GlowTexture != null)
 			{
-				drawData.glowTexture = GlowTexture().Value;
+				drawData.glowTexture = GlowTexture.Value;
 				drawData.glowColor = GlowColor;
 			}
 		}
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
-			if (FlameTexture() == null)
+			if (FlameTexture == null)
 			{
 				return;
 			}
@@ -1339,7 +1348,7 @@ namespace Avalon.Common.Templates
 				float shakeX = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 				float shakeY = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
 
-				spriteBatch.Draw(FlameTexture().Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(FlameTexture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
 			}
 		}
 	}
@@ -1349,7 +1358,7 @@ namespace Avalon.Common.Templates
 
 		// Flame texture fields
 		public virtual bool HasFlameTexture => true;
-		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		private Asset<Texture2D>? FlameTexture;
 		public virtual Color FlameColor => new(100, 100, 100, 0);
 		public virtual float FlameJitterMultX => 0.15f;
 		public virtual float FlameJitterMultY => 0.35f;
@@ -1359,10 +1368,13 @@ namespace Avalon.Common.Templates
 
 		// Glow texture fields
 		public virtual bool HasGlowTexture => false;
-		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		private Asset<Texture2D>? GlowTexture;
 		public virtual Color GlowColor => Color.White;
 		public override void SetStaticDefaults()
 		{
+			FlameTexture = HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+			GlowTexture = HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+
 			Main.tileFrameImportant[Type] = true;
 			Main.tileLavaDeath[Type] = LavaDeath;
 			Main.tileWaterDeath[Type] = WaterDeath;
@@ -1435,15 +1447,15 @@ namespace Avalon.Common.Templates
 		}
 		public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
 		{
-			if (GlowTexture() != null)
+			if (GlowTexture != null)
 			{
-				drawData.glowTexture = GlowTexture().Value;
+				drawData.glowTexture = GlowTexture.Value;
 				drawData.glowColor = GlowColor;
 			}
 		}
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
-			if (FlameTexture() == null)
+			if (FlameTexture == null)
 			{
 				return;
 			}
@@ -1472,7 +1484,7 @@ namespace Avalon.Common.Templates
 				float shakeX = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 				float shakeY = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
 
-				spriteBatch.Draw(FlameTexture().Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(FlameTexture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X - (width - 16f) / 2f + shakeX, j * 16 - (int)Main.screenPosition.Y + offsetY + shakeY) + zero, new Rectangle(frameX, frameY, width, height), FlameColor, 0f, default, 1f, SpriteEffects.None, 0f);
 			}
 		}
 	}
@@ -1482,7 +1494,7 @@ namespace Avalon.Common.Templates
 
 		// Flame texture fields
 		public virtual bool HasFlameTexture => true;
-		private Asset<Texture2D>? FlameTexture() => HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+		private Asset<Texture2D>? FlameTexture;
 		public virtual Color FlameColor => new(100, 100, 100, 0);
 		public virtual float FlameJitterMultX => 0.15f;
 		public virtual float FlameJitterMultY => 0.35f;
@@ -1492,10 +1504,13 @@ namespace Avalon.Common.Templates
 
 		// Glow texture fields
 		public virtual bool HasGlowTexture => false;
-		private Asset<Texture2D>? GlowTexture() => HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+		private Asset<Texture2D>? GlowTexture;
 		public virtual Color GlowColor => Color.White;
 		public override void SetStaticDefaults()
 		{
+			FlameTexture = HasFlameTexture ? ModContent.Request<Texture2D>(Texture + "_Flame") : null;
+			GlowTexture = HasGlowTexture ? ModContent.Request<Texture2D>(Texture + "_Glow") : null;
+
 			Main.tileFrameImportant[Type] = true;
 			Main.tileNoAttach[Type] = true;
 			Main.tileLavaDeath[Type] = LavaDeath;
@@ -1584,22 +1599,22 @@ namespace Avalon.Common.Templates
 			// Vanilla lanterns all share these parameters.
 			overrideWindCycle = 1f;
 			windPushPowerY = 0;
-			if (GlowTexture() != null)
+			if (GlowTexture != null)
 			{
-				glowTexture = GlowTexture().Value;
+				glowTexture = GlowTexture.Value;
 				glowColor = GlowColor;
 			}
 		}
 		public override void GetTileFlameData(int i, int j, ref TileDrawing.TileFlameData tileFlameData)
 		{
-			if (FlameTexture() == null)
+			if (FlameTexture == null)
 			{
 				return;
 			}
 
 			ulong flameSeed = Main.TileFrameSeed ^ (ulong)(((long)i << 32) | (uint)j);
 
-			tileFlameData.flameTexture = FlameTexture().Value;
+			tileFlameData.flameTexture = FlameTexture.Value;
 			tileFlameData.flameSeed = flameSeed;
 			tileFlameData.flameCount = 7;
 			tileFlameData.flameColor = FlameColor;
