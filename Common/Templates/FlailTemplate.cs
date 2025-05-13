@@ -23,8 +23,16 @@ public abstract class FlailTemplate : ModProjectile
 	public virtual int DefaultHitCooldown => 10;
 	public virtual int SpinHitCooldown => 20;
 	public virtual int MovingHitCooldown => 10;
-	public virtual int DustType => -1;
-	private enum AIState
+	public virtual int ExtraProjectile => -1;
+	public enum HeadRotationStyle : byte
+	{
+		None = 0,
+		Circular = 1,
+		Asymmetric = 2,
+		AlwaysFacePlayer = 3
+	}
+	public virtual HeadRotationStyle CurrentRotationStyle => HeadRotationStyle.Circular;
+	public enum AIState
 	{
 		Spinning,
 		LaunchingForward,
@@ -36,7 +44,7 @@ public abstract class FlailTemplate : ModProjectile
 	}
 
 	// These properties wrap the usual ai and localAI arrays for cleaner and easier to understand code.
-	private AIState CurrentAIState
+	public AIState CurrentAIState
 	{
 		get => (AIState)Projectile.ai[0];
 		set => Projectile.ai[0] = (float)value;
@@ -46,19 +54,18 @@ public abstract class FlailTemplate : ModProjectile
 	public ref float SpinningStateTimer => ref Projectile.localAI[1];
 
 	public virtual bool HasChainTexture => true;
-	private static Dictionary<string, Asset<Texture2D>> ChainTextures = [];
+	private static Dictionary<int, Asset<Texture2D>> ChainTextures = [];
 
 	public override void SetStaticDefaults()
 	{
 		if (HasChainTexture)
 		{
-			ChainTextures.Add(Name, ModContent.Request<Texture2D>(Texture + "_Chain"));
+			ChainTextures.Add(Type, ModContent.Request<Texture2D>(Texture + "_Chain"));
 		}
 	}
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
 		Projectile.netImportant = true; // This ensures that the projectile is synced when other players join the world.
 		Projectile.width = 28; // The width of your projectile
 		Projectile.height = 28; // The height of your projectile
@@ -67,8 +74,6 @@ public abstract class FlailTemplate : ModProjectile
 		Projectile.DamageType = DamageClass.Melee; // Deals melee damage
 		Projectile.usesLocalNPCImmunity = true; // Used for hit cooldown changes in the ai hook
 		Projectile.localNPCHitCooldown = 10; // This facilitates custom hit cooldown logic
-		DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-		DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
 
 		// Vanilla flails all use aiStyle 15, but the code isn't customizable so an adaption of that aiStyle is used in the AI method
 	}
@@ -88,17 +93,6 @@ public abstract class FlailTemplate : ModProjectile
 			Projectile.Kill();
 			return;
 		}
-
-		if (DustType != -1 && Main.rand.NextBool())
-		{
-			Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(6, 6), DustType, Projectile.velocity.RotatedByRandom(1f) * 0.2f, 128);
-			d.fadeIn = 1;
-			d.noGravity = true;
-			d.scale = 1.5f;
-			if (Projectile.ai[0] == 0)
-				d.velocity = new Vector2(0, -2 * player.direction).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation());
-		}
-
 
 		Vector2 mountedCenter = player.MountedCenter;
 		//bool doFastThrowDust = false;
@@ -177,11 +171,13 @@ public abstract class FlailTemplate : ModProjectile
 						StateTimer = 0f;
 						Projectile.netUpdate = true;
 						Projectile.velocity *= 0.2f;
+
 						// This is where Drippler Crippler spawns its projectile
-						/*
-						if (Main.myPlayer == Projectile.owner)
-							Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, Projectile.velocity, 928, Projectile.damage, Projectile.knockBack, Main.myPlayer);
-						*/
+						if (ExtraProjectile != -1 && Main.myPlayer == Projectile.owner)
+						{
+							Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ExtraProjectile, Projectile.damage, Projectile.knockBack, Main.myPlayer);
+						}
+
 						break;
 					}
 					if (shouldSwitchToRetracting)
@@ -190,7 +186,12 @@ public abstract class FlailTemplate : ModProjectile
 						StateTimer = 0f;
 						Projectile.netUpdate = true;
 						Projectile.velocity *= 0.3f;
+
 						// This is also where Drippler Crippler spawns its projectile, see above code.
+						if (ExtraProjectile != -1 && Main.myPlayer == Projectile.owner)
+						{
+							Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ExtraProjectile, Projectile.damage, Projectile.knockBack, Main.myPlayer);
+						}
 					}
 					player.ChangeDir((player.Center.X < Projectile.Center.X).ToDirectionInt());
 					Projectile.localNPCHitCooldown = movingHitCooldown;
@@ -321,38 +322,81 @@ public abstract class FlailTemplate : ModProjectile
 		Projectile.spriteDirection = Projectile.direction;
 		Projectile.ownerHitCheck = shouldOwnerHitCheck; // This prevents attempting to damage enemies without line of sight to the player. The custom Colliding code for spinning makes this necessary.
 
-		// This rotation code is unique to this flail, since the sprite isn't rotationally symmetric and has tip.
-		bool freeRotation = CurrentAIState == AIState.Ricochet || CurrentAIState == AIState.Dropping;
-		if (freeRotation)
+		switch (CurrentRotationStyle)
 		{
-			if (Projectile.velocity.Length() > 1f)
-				Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
-			else
-				Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
-		}
-		else
-		{
-			Vector2 vectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
-			Projectile.rotation = vectorTowardsPlayer.ToRotation() + MathHelper.PiOver2;
-		}
+			case HeadRotationStyle.None:
+				break;
 
-		// If you have a ball shaped flail, you can use this simplified rotation code instead
-		/*
-		if (Projectile.velocity.Length() > 1f)
-			Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
-		else
-			Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
-		*/
+			case HeadRotationStyle.Circular:
+				bool freeRotation = CurrentAIState == AIState.Ricochet || CurrentAIState == AIState.Dropping;
+				if (freeRotation)
+				{
+					if (Projectile.velocity.Length() > 1f)
+					{
+						Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
+					}
+					else
+					{
+						Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
+					}
+				}
+				else
+				{
+					Projectile.rotation = Projectile.SafeDirectionTo(mountedCenter).ToRotation() + MathHelper.PiOver2;
+				}
+				break;
+
+			case HeadRotationStyle.Asymmetric:
+				if (Projectile.velocity.Length() > 1f)
+				{
+					Projectile.rotation = Projectile.velocity.ToRotation() + Projectile.velocity.X * 0.1f; // skid
+				}
+				else
+				{
+					Projectile.rotation += Projectile.velocity.X * 0.1f; // roll
+				}
+				break;
+
+			case HeadRotationStyle.AlwaysFacePlayer:
+				Projectile.rotation = Projectile.SafeDirectionTo(mountedCenter).ToRotation() + MathHelper.PiOver2;
+				break;
+		}
 
 		Projectile.timeLeft = 2; // Makes sure the flail doesn't die (good when the flail is resting on the ground)
 		player.heldProj = Projectile.whoAmI;
 		player.SetDummyItemTime(2); //Add a delay so the player can't button mash the flail
-		player.itemRotation = Projectile.DirectionFrom(mountedCenter).ToRotation();
+		player.itemRotation = Projectile.SafeDirectionFrom(mountedCenter).ToRotation();
 		if (Projectile.Center.X < mountedCenter.X)
 		{
-			player.itemRotation += (float)Math.PI;
+			player.itemRotation += MathF.PI;
 		}
 		player.itemRotation = MathHelper.WrapAngle(player.itemRotation);
+
+		// Spawning dust
+		EmitDust();
+	}
+
+	/// <summary>
+	/// <paramref name="alpha"/>:<br></br>
+	/// <inheritdoc cref="Dust.alpha"/>
+	/// </summary>
+	/// <returns>Whether it spawned a dust or not.</returns>
+	public virtual bool EmitDust(int dustType = -1, int antecedent = 1, int consequent = 1, float fadeIn = 1f, bool noGravity = true, float scale = 1f, byte alpha = 0)
+	{
+		if (dustType == -1 || !Main.rand.NextBool(antecedent, consequent)) return false;
+
+		Player player = Main.player[Projectile.owner];
+
+		Dust dust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(6, 6), dustType, Projectile.velocity.RotatedByRandom(1f) * 0.2f, alpha);
+		dust.fadeIn = fadeIn;
+		dust.noGravity = noGravity;
+		dust.scale = scale;
+		if (CurrentAIState == AIState.Spinning)
+		{
+			dust.velocity = new Vector2(0, -2 * player.direction).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation());
+		}
+
+		return true;
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity)
@@ -486,7 +530,7 @@ public abstract class FlailTemplate : ModProjectile
 		// This fixes a vanilla GetPlayerArmPosition bug causing the chain to draw incorrectly when stepping up slopes. The flail itself still draws incorrectly due to another similar bug. This should be removed once the vanilla bug is fixed.
 		playerArmPosition.Y -= Main.player[Projectile.owner].gfxOffY;
 
-		if (ChainTextures.TryGetValue(Name, out Asset<Texture2D> chainTexture))
+		if (ChainTextures.TryGetValue(Type, out Asset<Texture2D> chainTexture))
 		{
 			Rectangle? chainSourceRectangle = null;
 			// Drippler Crippler customizes sourceRectangle to cycle through sprite frames: sourceRectangle = asset.Frame(1, 6);
@@ -552,21 +596,32 @@ public abstract class FlailTemplate : ModProjectile
 			}
 		}
 
+		Texture2D projectileTexture = TextureAssets.Projectile[Projectile.type].Value;
+		Vector2 drawOrigin = projectileTexture.Size() * 0.5f;
+		SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+		Vector2 drawPos;
+
 		// Add a motion trail when moving forward, like most flails do (don't add trail if already hit a tile)
 		if (CurrentAIState == AIState.LaunchingForward)
 		{
-			Texture2D projectileTexture = TextureAssets.Projectile[Projectile.type].Value;
-			Vector2 drawOrigin = new Vector2(projectileTexture.Width * 0.5f, projectileTexture.Height * 0.5f);
-			SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 			for (int k = 0; k < Projectile.oldPos.Length && k < StateTimer; k++)
 			{
-				//Projectile.GetAlpha(lightColor)
-				Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(DrawOffsetX, Projectile.gfxOffY);
-				drawPos.Y -= (projectileTexture.Height / 4) - 1;
-				Color color = new Color(75, 75, 75, 0) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-				Main.spriteBatch.Draw(projectileTexture, drawPos, null, color, Projectile.rotation, drawOrigin, (Projectile.scale + 0.1f) - k / (float)Projectile.oldPos.Length, spriteEffects, 0f);
+				Color color = new Color(75, 75, 75, 75).MultiplyRGBA(Projectile.GetAlpha(lightColor)) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+				drawPos = Projectile.oldPos[k] + Projectile.Size * 0.5f - Main.screenPosition;
+				float scale = (Projectile.scale + 0.1f) - k / (float)Projectile.oldPos.Length;
+				DrawTrail(projectileTexture, drawPos, drawOrigin, color, scale, k, spriteEffects);
 			}
 		}
-		return true;
+		drawPos = Projectile.Center - Main.screenPosition;
+		DrawHead(projectileTexture, drawPos, drawOrigin, lightColor, 1f, spriteEffects);
+		return false;
+	}
+	public virtual void DrawTrail(Texture2D projectileTexture, Vector2 drawPos, Vector2 drawOrigin, Color color, float scale, int loopIteration, SpriteEffects spriteEffects)
+	{
+		Main.spriteBatch.Draw(projectileTexture, drawPos, null, color, Projectile.rotation, drawOrigin, scale, spriteEffects, 0f);
+	}
+	public virtual void DrawHead(Texture2D projectileTexture, Vector2 drawPos, Vector2 drawOrigin, Color color, float scale, SpriteEffects spriteEffects)
+	{
+		Main.spriteBatch.Draw(projectileTexture, drawPos, null, color, Projectile.rotation, drawOrigin, Projectile.scale, spriteEffects, 0f);
 	}
 }

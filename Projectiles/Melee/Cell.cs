@@ -1,6 +1,5 @@
 using Avalon.Common.Templates;
 using Avalon.Dusts;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -19,7 +18,6 @@ public class Cell : FlailTemplate
 	public override int DefaultHitCooldown => 10;
 	public override int SpinHitCooldown => 20;
 	public override int MovingHitCooldown => 10;
-	public override int DustType => ModContent.DustType<ContagionWeapons>();
 
 	public override void SetStaticDefaults()
 	{
@@ -32,16 +30,16 @@ public class Cell : FlailTemplate
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Projectile.netImportant = true; // This ensures that the projectile is synced when other players join the world.
-		Projectile.width = 20; // The width of your projectile
-		Projectile.height = 20; // The height of your projectile
-		Projectile.friendly = true; // Deals damage to enemies
-		Projectile.penetrate = -1; // Infinite pierce
-		Projectile.DamageType = DamageClass.Melee; // Deals melee damage
-		Projectile.usesLocalNPCImmunity = true; // Used for hit cooldown changes in the ai hook
-		Projectile.localNPCHitCooldown = 10; // This facilitates custom hit cooldown logic
-		DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-		DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
+		base.SetDefaults();
+		Projectile.width = 20;
+		Projectile.height = 20;
+	}
+
+	public override bool EmitDust(int dustType, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
+	{
+		dustType = ModContent.DustType<ContagionWeapons>();
+		scale = 1.5f;
+		alpha = 128;
+		return base.EmitDust(dustType, antecedent, consequent, fadeIn, noGravity, scale, alpha);
 	}
 }

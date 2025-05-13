@@ -1,5 +1,5 @@
+using Avalon.Common;
 using Avalon.Common.Templates;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -31,23 +31,24 @@ public class CaesiumMace : FlailTemplate
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Projectile.netImportant = true;
+		base.SetDefaults();
 		Projectile.width = 28;
 		Projectile.height = 28;
-		Projectile.friendly = true;
-		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Melee;
-		Projectile.usesLocalNPCImmunity = true;
-		Projectile.localNPCHitCooldown = 10;
-		DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-		DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{
 		SoundEngine.PlaySound(SoundID.Item14, target.position);
 		Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center.X, target.Center.Y, 0, 0, ModContent.ProjectileType<CaesiumExplosion>(), Projectile.damage, 5f, Projectile.owner);
-		target.AddBuff(BuffID.OnFire3, 60 * 5);
+		target.AddBuff(BuffID.OnFire3, TimeUtils.SecondsToTicks(5));
+		base.OnHitNPC(target, hit, damageDone);
+	}
+
+	public override void OnHitPlayer(Player target, Player.HurtInfo info)
+	{
+		SoundEngine.PlaySound(SoundID.Item14, target.position);
+		Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center.X, target.Center.Y, 0, 0, ModContent.ProjectileType<CaesiumExplosion>(), Projectile.damage, 5f, Projectile.owner);
+		target.AddBuff(BuffID.OnFire3, TimeUtils.SecondsToTicks(5));
+		base.OnHitPlayer(target, info);
 	}
 }
