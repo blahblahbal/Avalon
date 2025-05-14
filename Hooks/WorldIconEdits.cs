@@ -1,18 +1,14 @@
 using Avalon.Common;
-using Avalon.Data.Sets;
 using Avalon.Reflection;
 using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ID;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -21,12 +17,99 @@ namespace Avalon.Hooks
 {
 	public class WorldIconEdits : ModHook
 	{
+		private static Dictionary<string, Asset<Texture2D>> WorldIconTextures = [];
+		public override void Load()
+		{
+			if (Main.netMode == NetmodeID.Server)
+			{
+				return;
+			}
+			AddIconTextures("IconEverythingContagion");
+			AddIconTextures("IconOverlayContagion");
+			AddIconTextures("IconOverlayContagionRetro");
+			AddIconTextures("IconOverlayContagionCaves");
+			AddIconTextures("IconOverlayContagionFTW");
+			AddIconTextures("IconOverlayContagionNotTheBees");
+			AddIconTextures("IconOverlayContagionAnniversary");
+			AddIconTextures("IconOverlayContagionDST");
+			AddIconTextures("IconOverlayContagionRemix");
+			AddIconTextures("IconOverlayContagionTraps");
+			AddIconTextures("IconOverlaySavanna");
+			AddIconTextures("IconOverlayJungle");
+			AddIconTextures("IconOverlaySavannaCompletion");
+			AddIconTextures("IconOverlayJungleCompletion");
+			for (int i = 0; i < 2; i++)
+			{
+				string specialSeed = i switch
+				{
+					0 => "Caves",
+					1 => "Retro",
+					_ => throw new System.NotImplementedException()
+				};
+				AddIconTextures($"IconCorruption{specialSeed}");
+				AddIconTextures($"IconCrimson{specialSeed}");
+				AddIconTextures($"IconHallowCorruption{specialSeed}");
+				AddIconTextures($"IconHallowCrimson{specialSeed}");
+			}
+		}
+
+		private static void AddIconTextures(string name)
+		{
+			WorldIconTextures.Add(name, ModContent.Request<Texture2D>($"Avalon/Assets/Textures/UI/WorldCreation/{name}"));
+		}
+
+		private static Asset<Texture2D> GetAvalonSeedIcon(AWorldListItem self, string seed)
+		{
+			WorldFileData data = self.GetWorldListItemData();
+			WorldIconTextures.TryGetValue("Icon" + (data.IsHardMode ? "Hallow" : "") + (data.HasCorruption ? "Corruption" : "Crimson") + seed, out Asset<Texture2D> icon);
+			return icon;
+		}
+
+		private static Asset<Texture2D> GetAvalonOverlaySeedvariants(WorldFileData _data, string overlayName)
+		{
+			WorldIconTextures.TryGetValue("IconOverlay" +
+				overlayName +
+				(_data.ForTheWorthy ? "FTW" : "") +
+				(_data.NotTheBees ? "NotTheBees" : "") +
+				(_data.Anniversary ? "Anniversary" : "") +
+				(_data.DontStarve ? "DST" : "") +
+				(_data.RemixWorld ? "Remix" : "") +
+				(_data.NoTrapsWorld ? "Traps" : ""),
+				out Asset<Texture2D> icon);
+			return icon;
+		}
+
+		private static Asset<Texture2D> GetJungleOverlay(byte jungleVariant, bool isCompletion)
+		{
+			WorldIconTextures.TryGetValue("IconOverlay" + (jungleVariant == (byte)WorldJungle.Tropics ? "Savanna" : "Jungle") + (isCompletion ? "Completion" : ""), out Asset<Texture2D> icon);
+			return icon;
+		}
+
 		protected override void Apply()
 		{
 			On_AWorldListItem.GetIcon += ReplaceIcon;
 			IL_UIWorldListItem.ctor += IconOverlays;
 		}
 
+		// Replaces textures
+		private Asset<Texture2D> ReplaceIcon(On_AWorldListItem.orig_GetIcon orig, AWorldListItem self)
+		{
+			bool hasAvalonData = self.GetWorldListItemData().TryGetHeaderData(ModContent.GetInstance<AvalonWorld>(), out var _data);
+			if (hasAvalonData)
+			{
+				if (_data.GetBool("Avalon:RetroSecretSeed"))
+				{
+					return GetAvalonSeedIcon(self, "Retro"); //forcibly changes the icon rather than being an overlay
+				}
+				else if (_data.GetBool("Avalon:CavesSecretSeed"))
+				{
+					return GetAvalonSeedIcon(self, "Caves");
+				}
+			}
+			return orig.Invoke(self);
+		}
+
+		// Draws the overlays
 		private void IconOverlays(ILContext il)
 		{
 			ILCursor c = new(il);
@@ -43,15 +126,18 @@ namespace Avalon.Hooks
 				_worldIcon.RemoveAllChildren();
 				if (_data.DrunkWorld && _data.RemixWorld)
 				{
-					Asset<Texture2D> obj = ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconEverythingContagion", AssetRequestMode.ImmediateLoad);
-					UIImageFramed uIImageFramed = new UIImageFramed(obj, obj.Frame(7, 16));
-					uIImageFramed.Left = new StyleDimension(0f, 0f);
+					WorldIconTextures.TryGetValue("IconEverythingContagion", out Asset<Texture2D> icon);
+					UIImageFramed uIImageFramed = new(icon, icon.Frame(7, 16))
+					{
+						Left = new StyleDimension(0f, 0f)
+					};
 					uIImageFramed.OnUpdate += self.UpdateAvalonGlitchAnimation;
 					_worldIcon.Append(uIImageFramed);
 				}
 				else if (_data.DrunkWorld)
 				{
-					UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconOverlayContagion", AssetRequestMode.ImmediateLoad))
+					WorldIconTextures.TryGetValue("IconOverlayContagion", out Asset<Texture2D> icon);
+					UIImage element = new(icon)
 					{
 						Top = new StyleDimension(0f, 0f),
 						Left = new StyleDimension(0f, 0f),
@@ -65,7 +151,8 @@ namespace Avalon.Hooks
 					{
 						if (_avalonData.GetBool("Avalon:RetroSecretSeed"))
 						{
-							UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconOverlayContagionRetro", AssetRequestMode.ImmediateLoad))
+							WorldIconTextures.TryGetValue("IconOverlayContagionRetro", out Asset<Texture2D> icon);
+							UIImage element = new(icon)
 							{
 								Top = new StyleDimension(0f, 0f),
 								Left = new StyleDimension(0f, 0f),
@@ -75,7 +162,8 @@ namespace Avalon.Hooks
 						}
 						else if (_avalonData.GetBool("Avalon:CavesSecretSeed"))
 						{
-							UIImage element = new UIImage(ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconOverlayContagionCaves", AssetRequestMode.ImmediateLoad))
+							WorldIconTextures.TryGetValue("IconOverlayContagionCaves", out Asset<Texture2D> icon);
+							UIImage element = new(icon)
 							{
 								Top = new StyleDimension(0f, 0f),
 								Left = new StyleDimension(0f, 0f),
@@ -85,7 +173,7 @@ namespace Avalon.Hooks
 						}
 						else
 						{
-							UIImage element = new UIImage(GetAvalonOverlaySeedvariants(_data, "Contagion"))
+							UIImage element = new(GetAvalonOverlaySeedvariants(_data, "Contagion"))
 							{
 								Top = new StyleDimension(0f, 0f),
 								Left = new StyleDimension(0f, 0f),
@@ -97,10 +185,10 @@ namespace Avalon.Hooks
 					if (_avalonData.GetByte("Avalon:WorldJungle") <= (byte)WorldJungle.Tropics || _avalonData.GetByte("Avalon:WorldJungle") >= (byte)WorldJungle.Jungle)
 					{
 						if (!_data.NotTheBees && !_data.ZenithWorld) //I think a zenith version that glitches would be cool
-						{											 //if done, I (lion8cake) will make a glitch one for the depths too
+						{                                            //if done, I (lion8cake) will make a glitch one for the depths too
 							if (!_data.DefeatedMoonlord)
 							{
-								UIImage element = new UIImage(GetJungleOverlay(_avalonData.GetByte("Avalon:WorldJungle"), _data.DefeatedMoonlord))
+								UIImage element = new(GetJungleOverlay(_avalonData.GetByte("Avalon:WorldJungle"), _data.DefeatedMoonlord))
 								{
 									Top = new StyleDimension(-4f, 0f),
 									Left = new StyleDimension(0f, 0f),
@@ -110,7 +198,7 @@ namespace Avalon.Hooks
 							}
 							else
 							{
-								UIImage element = new UIImage(GetJungleOverlay(_avalonData.GetByte("Avalon:WorldJungle"), _data.DefeatedMoonlord))
+								UIImage element = new(GetJungleOverlay(_avalonData.GetByte("Avalon:WorldJungle"), _data.DefeatedMoonlord))
 								{
 									Top = new StyleDimension(-10f, 0f),
 									Left = new StyleDimension(-3f, 0f),
@@ -140,7 +228,7 @@ namespace Avalon.Hooks
 						{                                            //if done, I (lion8cake) will make a glitch one for the depths too
 							if (!_data.DefeatedMoonlord)
 							{
-								UIImage element = new UIImage(GetJungleOverlay(_avalonData.GetByte("Avalon:WorldJungle"), _data.DefeatedMoonlord))
+								UIImage element = new(GetJungleOverlay(_avalonData.GetByte("Avalon:WorldJungle"), _data.DefeatedMoonlord))
 								{
 									Top = new StyleDimension(-4f, 0f),
 									Left = new StyleDimension(0f, 0f),
@@ -150,7 +238,7 @@ namespace Avalon.Hooks
 							}
 							else
 							{
-								UIImage element = new UIImage(GetJungleOverlay(_avalonData.GetByte("Avalon:WorldJungle"), _data.DefeatedMoonlord))
+								UIImage element = new(GetJungleOverlay(_avalonData.GetByte("Avalon:WorldJungle"), _data.DefeatedMoonlord))
 								{
 									Top = new StyleDimension(-10f, 0f),
 									Left = new StyleDimension(-3f, 0f),
@@ -163,46 +251,6 @@ namespace Avalon.Hooks
 					}
 				}
 			});
-		}
-
-		//Replaces textures
-		private Asset<Texture2D> ReplaceIcon(On_AWorldListItem.orig_GetIcon orig, AWorldListItem self)
-		{
-			bool hasAvalonData = self.GetWorldListItemData().TryGetHeaderData(ModContent.GetInstance<AvalonWorld>(), out var _data);
-			if (hasAvalonData)
-			{
-				if (_data.GetBool("Avalon:RetroSecretSeed"))
-				{
-					return GetAvalonSeedIcon(self, "Retro"); //forcibly changes the icon rather than being an overlay
-				}
-				else if (_data.GetBool("Avalon:CavesSecretSeed"))
-				{
-					return GetAvalonSeedIcon(self, "Caves");
-				}
-			}
-			return orig.Invoke(self);
-		}
-
-		private Asset<Texture2D> GetAvalonSeedIcon(AWorldListItem self, string seed)
-		{
-			WorldFileData data = self.GetWorldListItemData();
-			return ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/Icon" + (data.IsHardMode ? "Hallow" : "") + (data.HasCorruption ? "Corruption" : "Crimson") + seed, AssetRequestMode.ImmediateLoad);
-		}
-
-		private Asset<Texture2D> GetAvalonOverlaySeedvariants(WorldFileData _data, string overlayName)
-		{
-			return ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconOverlay" + overlayName + 
-				(_data.ForTheWorthy ? "FTW" : "") + 
-				(_data.NotTheBees ? "NotTheBees" : "") + 
-				(_data.Anniversary ? "Anniversary" : "") + 
-				(_data.DontStarve ? "DST" : "") +
-				(_data.RemixWorld ? "Remix" : "") +
-				(_data.NoTrapsWorld ? "Traps" : ""), AssetRequestMode.ImmediateLoad);
-		}
-
-		private Asset<Texture2D> GetJungleOverlay(byte jungleVariant, bool isCompletion)
-		{
-			return ModContent.Request<Texture2D>("Avalon/Assets/Textures/UI/WorldCreation/IconOverlay" + (jungleVariant == (byte)WorldJungle.Tropics ? "Savanna" : "Jungle") + (isCompletion ? "Completion" : ""), AssetRequestMode.ImmediateLoad);
 		}
 	}
 }
