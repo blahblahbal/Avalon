@@ -17,6 +17,7 @@ public class Sporalash : FlailTemplate
 	public override int DefaultHitCooldown => 10;
 	public override int SpinHitCooldown => 20;
 	public override int MovingHitCooldown => 10;
+	public override int ChainVariants => 16;
 
 	public override void SetStaticDefaults()
 	{
@@ -36,9 +37,13 @@ public class Sporalash : FlailTemplate
 
 	public override bool EmitDust(int dustType, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
 	{
-		dustType = DustID.JunglePlants;
-		fadeIn = 1.3f;
-		return base.EmitDust(dustType, antecedent, consequent, fadeIn, noGravity, scale, alpha);
+		if (Projectile.velocity.Length() > 3 || CurrentAIState == AIState.Spinning) // The base method does not specify conditions for spawning the dust, so you are able to specify anything here
+		{
+			dustType = DustID.JunglePlants;
+			fadeIn = 1.3f;
+			return base.EmitDust(dustType, antecedent, consequent, fadeIn, noGravity, scale, alpha);
+		}
+		return false;
 	}
 
 	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

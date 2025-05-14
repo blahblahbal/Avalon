@@ -102,6 +102,7 @@ public class Moonfury : FlailTemplate
 	{
 		color = new Color(55, 33, 75, 0) * ((float)(Projectile.oldPos.Length - loopIteration) / (float)Projectile.oldPos.Length);
 		drawPos += Vector2.Normalize(Projectile.velocity) * 8;
+		scale = (Projectile.scale + 0.1f) - loopIteration / (float)Projectile.oldPos.Length;
 		scale *= 1.4f;
 		base.DrawTrail(projectileTexture, drawPos, drawOrigin, color, scale, loopIteration, spriteEffects);
 	}

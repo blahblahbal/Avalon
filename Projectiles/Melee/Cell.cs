@@ -37,9 +37,13 @@ public class Cell : FlailTemplate
 
 	public override bool EmitDust(int dustType, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
 	{
-		dustType = ModContent.DustType<ContagionWeapons>();
-		scale = 1.5f;
-		alpha = 128;
-		return base.EmitDust(dustType, antecedent, consequent, fadeIn, noGravity, scale, alpha);
+		if (Projectile.velocity.Length() > 3 || CurrentAIState == AIState.Spinning) // The base method does not specify conditions for spawning the dust, so you are able to specify anything here
+		{
+			dustType = ModContent.DustType<ContagionWeapons>();
+			scale = 1.5f;
+			alpha = 128;
+			return base.EmitDust(dustType, antecedent, consequent, fadeIn, noGravity, scale, alpha);
+		}
+		return false;
 	}
 }

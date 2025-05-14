@@ -8,6 +8,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace Avalon.Common.Templates;
 
@@ -55,7 +56,7 @@ public abstract class FlailTemplate : ModProjectile
 
 	public virtual bool HasChainTexture => true;
 	private static Dictionary<int, Asset<Texture2D>> ChainTextures = [];
-
+	public virtual int ChainVariants => 1;
 	public override void SetStaticDefaults()
 	{
 		if (HasChainTexture)
@@ -522,6 +523,8 @@ public abstract class FlailTemplate : ModProjectile
 		base.ModifyHitNPC(target, ref modifiers);
 	}
 
+	private readonly UnifiedRandom chainSeed = new();
+
 	// PreDraw is used to draw a chain and trail before the projectile is drawn normally.
 	public override bool PreDraw(ref Color lightColor)
 	{
@@ -536,12 +539,12 @@ public abstract class FlailTemplate : ModProjectile
 			// Drippler Crippler customizes sourceRectangle to cycle through sprite frames: sourceRectangle = asset.Frame(1, 6);
 			float chainHeightAdjustment = 0f; // Use this to adjust the chain overlap. 
 
-			Vector2 chainOrigin = chainSourceRectangle.HasValue ? (chainSourceRectangle.Value.Size() / 2f) : (chainTexture.Size() / 2f);
+			Vector2 chainOrigin = chainSourceRectangle.HasValue ? (chainSourceRectangle.Value.Size() / 2f) : (new Vector2(chainTexture.Width() / 2f, (ChainVariants == 1 ? chainTexture.Height() : (chainTexture.Height() / ChainVariants - 2)) / 2f));
 			//Vector2 chainOrigin = chainSourceRectangle.HasValue ? (chainSourceRectangle.Value.Size() / 2f) : (Main.Assets.Request<Texture2D>("Images/Chain_"));
 			Vector2 chainDrawPosition = Projectile.Center;
 			Vector2 vectorFromProjectileToPlayerArms = playerArmPosition.MoveTowards(chainDrawPosition, 4f) - chainDrawPosition;
 			Vector2 unitVectorFromProjectileToPlayerArms = vectorFromProjectileToPlayerArms.SafeNormalize(Vector2.Zero);
-			float chainSegmentLength = (chainSourceRectangle.HasValue ? chainSourceRectangle.Value.Height : chainTexture.Height()) + chainHeightAdjustment;
+			float chainSegmentLength = (chainSourceRectangle.HasValue ? chainSourceRectangle.Value.Height : ChainVariants == 1 ? chainTexture.Height() : (chainTexture.Height() / ChainVariants - 2)) + chainHeightAdjustment;
 			if (chainSegmentLength == 0)
 			{
 				chainSegmentLength = 10; // When the chain texture is being loaded, the height is 0 which would cause infinite loops.
@@ -549,6 +552,12 @@ public abstract class FlailTemplate : ModProjectile
 			float chainRotation = unitVectorFromProjectileToPlayerArms.ToRotation() + MathHelper.PiOver2;
 			int chainCount = 0;
 			float chainLengthRemainingToDraw = vectorFromProjectileToPlayerArms.Length() + chainSegmentLength / 2f;
+
+			UnifiedRandom? currentChainSeed = null;
+			if (ChainVariants > 1)
+			{
+				currentChainSeed = new(chainSeed.GetHashCode());
+			}
 
 			// This while loop draws the chain texture from the projectile to the player, looping to draw the chain texture along the path
 			while (chainLengthRemainingToDraw > 0f)
@@ -586,6 +595,12 @@ public abstract class FlailTemplate : ModProjectile
 				//    chainDrawColor = Color.White;
 				//}
 
+				if (ChainVariants > 1)
+				{
+					int variant = currentChainSeed.Next(ChainVariants);
+					chainSourceRectangle = new Rectangle(0, chainTexture.Height() / ChainVariants * variant, chainTexture.Width(), chainTexture.Height() / ChainVariants - 2);
+				}
+
 				// Here, we draw the chain texture at the coordinates
 				Main.spriteBatch.Draw(chainTextureToDraw.Value, chainDrawPosition - Main.screenPosition, chainSourceRectangle, chainDrawColor, chainRotation, chainOrigin, 1f, SpriteEffects.None, 0f);
 
@@ -606,9 +621,13 @@ public abstract class FlailTemplate : ModProjectile
 		{
 			for (int k = 0; k < Projectile.oldPos.Length && k < StateTimer; k++)
 			{
-				Color color = new Color(75, 75, 75, 75).MultiplyRGBA(Projectile.GetAlpha(lightColor)) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+				float trailRemap = ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+				Color color = Projectile.GetAlpha(lightColor);
+				color.A = 127;
+				color *= 0.5f;
+				color *= trailRemap;
 				drawPos = Projectile.oldPos[k] + Projectile.Size * 0.5f - Main.screenPosition;
-				float scale = (Projectile.scale + 0.1f) - k / (float)Projectile.oldPos.Length;
+				float scale = Projectile.scale * 1.15f * MathHelper.Lerp(0.5f, 1f, trailRemap);
 				DrawTrail(projectileTexture, drawPos, drawOrigin, color, scale, k, spriteEffects);
 			}
 		}
