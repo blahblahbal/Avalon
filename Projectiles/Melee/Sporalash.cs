@@ -39,8 +39,17 @@ public class Sporalash : FlailTemplate
 	{
 		if (Projectile.velocity.Length() > 3 || CurrentAIState == AIState.Spinning) // The base method does not specify conditions for spawning the dust, so you are able to specify anything here
 		{
+			if (CurrentAIState == AIState.Spinning)
+			{
+				fadeIn = Main.rand.NextFloat(0.7f, 1.2f);
+			}
+			else
+			{
+				fadeIn = Main.rand.NextFloat(0.9f, 1.3f);
+			}
+			antecedent = 2;
+			consequent = 3;
 			dustType = DustID.JunglePlants;
-			fadeIn = 1.3f;
 			return base.EmitDust(dustType, antecedent, consequent, fadeIn, noGravity, scale, alpha);
 		}
 		return false;

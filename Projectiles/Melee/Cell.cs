@@ -39,6 +39,10 @@ public class Cell : FlailTemplate
 	{
 		if (Projectile.velocity.Length() > 3 || CurrentAIState == AIState.Spinning) // The base method does not specify conditions for spawning the dust, so you are able to specify anything here
 		{
+			if (CurrentAIState == AIState.Spinning)
+			{
+				consequent = 2;
+			}
 			dustType = ModContent.DustType<ContagionWeapons>();
 			scale = 1.5f;
 			alpha = 128;
