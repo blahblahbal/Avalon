@@ -5,103 +5,114 @@ using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles;
 
 public class PointingLaser : ModProjectile
 {
-	private static Asset<Texture2D> texture;
+	private static Asset<Texture2D>? LaserEnd;
 	public override void SetStaticDefaults()
 	{
-        texture = TextureAssets.Projectile[Type];
+		LaserEnd = ModContent.Request<Texture2D>(Texture + "End");
 	}
 	public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width * 4 / 1;
-        Projectile.height = dims.Height * 4 / 1 / Main.projFrames[Projectile.type];
-        Projectile.aiStyle = -1;
-        Projectile.friendly = true;
-        Projectile.tileCollide = false;
-        Projectile.DamageType = DamageClass.Ranged;
-        Projectile.MaxUpdates = 1;
-        Projectile.extraUpdates = 1;
-        Projectile.alpha = 255;
-        Projectile.timeLeft = 9;
-        Projectile.damage = 0;
-        Projectile.penetrate = -1;
-    }
-    public override bool? CanCutTiles()
-    {
-        return false;
-    }
+	{
+		Projectile.width = 16;
+		Projectile.height = 16;
+		Projectile.aiStyle = -1;
+		Projectile.friendly = true;
+		Projectile.tileCollide = false;
+		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.MaxUpdates = 1;
+		Projectile.extraUpdates = 1;
+		Projectile.alpha = 255;
+		Projectile.damage = 0;
+		Projectile.penetrate = -1;
+	}
+	public override bool? CanCutTiles()
+	{
+		return false;
+	}
+	public override bool PreDraw(ref Color lightColor)
+	{
+		Player player = Main.player[Projectile.owner];
+		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
+		Vector2 playerCenter = player.RotatedRelativePoint(player.MountedCenter);
+		float length = playerCenter.Distance(mousePosClamped);
+		float rotation = playerCenter.SafeDirectionTo(mousePosClamped).ToRotation() + MathHelper.PiOver2;
+		// Draw laser
+		Main.spriteBatch.Draw
+		(
+			TextureAssets.Projectile[Type].Value,
+			playerCenter + (playerCenter.SafeDirectionTo(mousePosClamped) * 41f) - Main.screenPosition,
+			new Rectangle(0, 0, TextureAssets.Projectile[Type].Value.Width, TextureAssets.Projectile[Type].Value.Height),
+			Items.Material.PointingLaser.TeamColor(player),
+			rotation,
+			new Vector2(TextureAssets.Projectile[Type].Value.Width / 2f, TextureAssets.Projectile[Type].Value.Height),
+			new Vector2(2f, length - 48f),
+			SpriteEffects.None,
+			1f
+		);
+		// Draw laser end
+		float scale = 2f;
+		float maxLength = 46f;
+		if (length < maxLength)
+		{
+			scale *= length / maxLength;
+			length = maxLength;
+		}
+		Main.spriteBatch.Draw
+		(
+			LaserEnd!.Value,
+			playerCenter + (playerCenter.SafeDirectionTo(mousePosClamped) * length) - Main.screenPosition + new Vector2(-2f, -6f).RotatedBy(rotation) * (scale / 2f),
+			new Rectangle(0, 0, LaserEnd!.Value.Width, LaserEnd!.Value.Height),
+			Items.Material.PointingLaser.TeamColor(player),
+			rotation,
+			TextureAssets.Projectile[Type].Size() / 2f,
+			scale,
+			SpriteEffects.None,
+			1f
+		);
+		return false;
+	}
 
-    public void DrawChain(Vector2 start, Vector2 end)
-    {
-        start -= Main.screenPosition;
-        end -= Main.screenPosition;
-        int linklength = texture.Value.Height;
-        Vector2 chain = end - start;
+	public override void AI()
+	{
+		Player player = Main.player[Projectile.owner];
+		if (!player.active || player.dead || player.noItems || player.CCed)
+		{
+			Projectile.Kill();
+			return;
+		}
+		if (Main.myPlayer == Projectile.owner && Main.mapFullscreen)
+		{
+			Projectile.Kill();
+			return;
+		}
+		if (!player.channel)
+		{
+			Projectile.Kill();
+			return;
+		}
 
-        float length = (float)chain.Length();
-        int numlinks = (int)Math.Ceiling(length / linklength);
-        Vector2[] links = new Vector2[numlinks];
-        float rotation = (float)Math.Atan2(chain.Y, chain.X);
-        Projectile P = Projectile;
-        Player Pr = Main.player[P.owner];
-        Player MyPr = Main.player[Main.myPlayer];
-        for (int i = 0; i < numlinks; i++)
-        {
-            links[i] = start + chain / numlinks * i;
+		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
+		Vector2 playerCenter = player.RotatedRelativePoint(player.MountedCenter);
+		Projectile.velocity = playerCenter.SafeDirectionTo(mousePosClamped) * Projectile.velocity.Length();
+		Projectile.Center = playerCenter + Projectile.velocity;
+		player.ChangeDir(MathF.Sign(Projectile.SafeDirectionFrom(playerCenter).X) == 1 ? 1 : -1); // Dunno if this should be 1 or -1 when the sign is 0 :shrug:
 
-            #region color determination
-            Player p = Main.player[Projectile.owner];
-            Color c = Color.White;
-            if (p.team == (int)Terraria.Enums.Team.Pink)
-            {
-                c = new Color(171, 59, 218);
-            }
-            else if (p.team == (int)Terraria.Enums.Team.Green)
-            {
-                c = Color.Green; // new Color(59, 218, 85);
-            }
-            else if (p.team == (int)Terraria.Enums.Team.Blue)
-            {
-                c = Color.Blue; // new Color(59, 149, 218);
-            }
-            else if (p.team == (int)Terraria.Enums.Team.Yellow)
-            {
-                c = Color.Yellow; // new Color(218, 183, 59);
-            }
-            else if (p.team == (int)Terraria.Enums.Team.Red || Main.netMode == NetmodeID.SinglePlayer)
-            {
-                c = Color.Red;
-            }
-            #endregion
-            c.A = 255;
-            Main.spriteBatch.Draw(texture.Value, links[i], new Rectangle(0, 0, texture.Value.Width, linklength), c, rotation + 1.57f, new Vector2(texture.Value.Width / 2f, linklength), 2f,
-                SpriteEffects.None, 1f);
-        }
-    }
-    public override bool PreDraw(ref Color lightColor)
-    {
-        Player p = Main.player[Projectile.owner];
-        if (Projectile.ai[0] > 0)
-        {
-            if (Vector2.Distance(Projectile.position, p.position) < Vector2.Distance(p.GetModPlayer<AvalonPlayer>().MousePosition, p.position))
-            {
-                DrawChain(p.RotatedRelativePoint(p.MountedCenter) + new Vector2(50, 0).RotatedBy(p.AngleTo(p.GetModPlayer<AvalonPlayer>().MousePosition)), p.GetModPlayer<AvalonPlayer>().MousePosition);
-            }
-        }
-        return false;
-    }
+		// Copied from FlailTemplate/ExampleAdvancedFlail
+		Projectile.timeLeft = 2; // Makes sure the flail doesn't die (good when the flail is resting on the ground)
+		player.heldProj = Projectile.whoAmI;
+		player.SetDummyItemTime(2); //Add a delay so the player can't button mash the flail
+		player.itemRotation = Projectile.SafeDirectionFrom(playerCenter).ToRotation() - player.fullRotation; // subtract player.fullRotation to fix rotation while laying in beds
+		if (Projectile.Center.X < playerCenter.X)
+		{
+			player.itemRotation += MathF.PI;
+		}
+		player.itemRotation = MathHelper.WrapAngle(player.itemRotation);
 
-    public override void AI()
-    {
-        Projectile.ai[0]++;
-        Player p = Main.player[Projectile.owner];
-        if (!p.channel) Projectile.Kill();
-    }
+		Lighting.AddLight(Projectile.Center, Items.Material.PointingLaser.TeamColor(Main.LocalPlayer).ToVector3() * 0.2f);
+	}
 }

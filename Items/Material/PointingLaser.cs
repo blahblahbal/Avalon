@@ -1,4 +1,3 @@
-using Avalon.Common.Players;
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,16 +22,20 @@ public class PointingLaser : ModItem
 		Item.width = 26;
 		Item.height = 30;
 		Item.maxStack = Item.CommonMaxStack;
-		Item.useAnimation = 2;
-		Item.useTime = 2;
+		Item.useAnimation = 1;
+		Item.useTime = 1;
 		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.shootSpeed = 6f;
+		Item.shootSpeed = 48f;
 		Item.autoReuse = true;
 		Item.channel = true;
 		Item.shoot = ModContent.ProjectileType<Projectiles.PointingLaser>();
 		Item.rare = ItemRarityID.Pink;
 
 		Item.GetGlobalItem<ItemGlowmask>().CustomPostDrawInWorld = true;
+	}
+	public override bool CanShoot(Player player)
+	{
+		return player.ownedProjectileCounts[Item.shoot] < 1;
 	}
 	public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 	{
@@ -53,7 +56,6 @@ public class PointingLaser : ModItem
 	}
 	public override bool? UseItem(Player player)
 	{
-		Lighting.AddLight(player.Center + (player.Center.SafeDirectionTo(player.GetModPlayer<AvalonPlayer>().MousePosition) * 50f), TeamColor(Main.LocalPlayer).ToVector3() * 0.2f);
 		return base.UseItem(player);
 	}
 	public static Color TeamColor(Player player)
@@ -63,10 +65,10 @@ public class PointingLaser : ModItem
 		return player.team switch
 		{
 			(int)Terraria.Enums.Team.Red => new Color(218, 59, 59),
-			(int)Terraria.Enums.Team.Yellow => new Color(218, 183, 59),
 			(int)Terraria.Enums.Team.Green => new Color(59, 218, 85),
-			(int)Terraria.Enums.Team.Blue => new Color(59, 149, 218),
-			(int)Terraria.Enums.Team.Pink => new Color(171, 59, 218),
+			(int)Terraria.Enums.Team.Blue => new Color(68, 129, 255),
+			(int)Terraria.Enums.Team.Yellow => new Color(218, 183, 59),
+			(int)Terraria.Enums.Team.Pink => new Color(224, 100, 242),
 			_ => Color.White
 		};
 	}
