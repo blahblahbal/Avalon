@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,29 +47,27 @@ public class PointingLaser : ModItem
 		Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
 		spriteBatch.Draw(texture.Value, vector2, new Rectangle(0, 0, texture.Width(), texture.Height()), TeamColor(Main.LocalPlayer), rotation, vector, scale, SpriteEffects.None, 0f);
 	}
+	public override void PostUpdate()
+	{
+		Lighting.AddLight(Item.Center, TeamColor(Main.LocalPlayer).ToVector3() * 0.2f);
+	}
+	public override bool? UseItem(Player player)
+	{
+		Lighting.AddLight(player.Center + (player.Center.SafeDirectionTo(player.GetModPlayer<AvalonPlayer>().MousePosition) * 50f), TeamColor(Main.LocalPlayer).ToVector3() * 0.2f);
+		return base.UseItem(player);
+	}
 	public static Color TeamColor(Player player)
 	{
-		Color c = Color.White;
-		if (Main.LocalPlayer.team == (int)Terraria.Enums.Team.Red || Main.netMode == NetmodeID.SinglePlayer)
+		if (Main.netMode == NetmodeID.SinglePlayer) return new Color(218, 59, 59);
+
+		return player.team switch
 		{
-			c = new Color(218, 59, 59);
-		}
-		if (Main.LocalPlayer.team == (int)Terraria.Enums.Team.Yellow)
-		{
-			c = new Color(218, 183, 59);
-		}
-		if (Main.LocalPlayer.team == (int)Terraria.Enums.Team.Green)
-		{
-			c = new Color(59, 218, 85);
-		}
-		if (Main.LocalPlayer.team == (int)Terraria.Enums.Team.Blue)
-		{
-			c = new Color(59, 149, 218);
-		}
-		if (Main.LocalPlayer.team == (int)Terraria.Enums.Team.Pink)
-		{
-			c = new Color(171, 59, 218);
-		}
-		return c;
+			(int)Terraria.Enums.Team.Red => new Color(218, 59, 59),
+			(int)Terraria.Enums.Team.Yellow => new Color(218, 183, 59),
+			(int)Terraria.Enums.Team.Green => new Color(59, 218, 85),
+			(int)Terraria.Enums.Team.Blue => new Color(59, 149, 218),
+			(int)Terraria.Enums.Team.Pink => new Color(171, 59, 218),
+			_ => Color.White
+		};
 	}
 }
