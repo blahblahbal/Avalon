@@ -10,7 +10,7 @@ namespace Avalon.PlayerDrawLayers
 	//Items manually register data which this layer is using
 	public sealed class HeadLayer : PlayerDrawLayer
 	{
-		private static Dictionary<int, DrawLayerData> HeadLayerData { get; set; }
+		private static Dictionary<int, DrawLayerData>? HeadLayerData { get; set; }
 
 		/// <summary>
 		/// Add data associated with the head equip slot here, usually in <see cref="ModType.SetStaticDefaults"/>.
@@ -20,7 +20,7 @@ namespace Avalon.PlayerDrawLayers
 		/// <param name="data">Data</param>
 		public static void RegisterData(int headSlot, DrawLayerData data)
 		{
-			if (!HeadLayerData.ContainsKey(headSlot))
+			if (!Main.dedServ && !HeadLayerData.ContainsKey(headSlot))
 			{
 				HeadLayerData.Add(headSlot, data);
 			}
@@ -28,12 +28,18 @@ namespace Avalon.PlayerDrawLayers
 
 		public override void Load()
 		{
-			HeadLayerData = new Dictionary<int, DrawLayerData>();
+			if (!Main.dedServ)
+			{
+				HeadLayerData = new Dictionary<int, DrawLayerData>();
+			}
 		}
 
 		public override void Unload()
 		{
-			HeadLayerData = null;
+			if (!Main.dedServ)
+			{
+				HeadLayerData = null;
+			}
 		}
 
 		public override Position GetDefaultPosition()

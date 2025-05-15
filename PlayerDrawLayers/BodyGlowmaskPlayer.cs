@@ -9,7 +9,7 @@ namespace Avalon.PlayerDrawLayers
 {
 	public class BodyGlowmaskPlayer : ModPlayer
 	{
-		private static Dictionary<int, Func<Color>> BodyColor { get; set; }
+		private static Dictionary<int, Func<Color>>? BodyColor { get; set; }
 
 		/// <summary>
 		/// Add glowmask color associated with the body equip slot here, usually in <see cref="ModType.SetStaticDefaults"/>.
@@ -19,7 +19,7 @@ namespace Avalon.PlayerDrawLayers
 		/// <param name="color">Color</param>
 		public static void RegisterData(int bodySlot, Func<Color> color)
 		{
-			if (!BodyColor.ContainsKey(bodySlot))
+			if (!Main.dedServ && !BodyColor.ContainsKey(bodySlot))
 			{
 				BodyColor.Add(bodySlot, color);
 			}
@@ -27,12 +27,18 @@ namespace Avalon.PlayerDrawLayers
 
 		public override void Load()
 		{
-			BodyColor = new Dictionary<int, Func<Color>>();
+			if (!Main.dedServ)
+			{
+				BodyColor = new Dictionary<int, Func<Color>>();
+			}
 		}
 
 		public override void Unload()
 		{
-			BodyColor = null;
+			if (!Main.dedServ)
+			{
+				BodyColor = null;
+			}
 		}
 
 		public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)

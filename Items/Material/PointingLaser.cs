@@ -10,17 +10,13 @@ namespace Avalon.Items.Material;
 
 public class PointingLaser : ModItem
 {
-	private static Asset<Texture2D>? glow;
-	public override void Load()
-	{
-		glow = Mod.Assets.Request<Texture2D>("Items/Material/PointingLaser_Glow");
-	}
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 25;
 		Item.staff[Item.type] = true;
-	}
 
+		ItemGlowmask.AddGlow(this);
+	}
 	public override void SetDefaults()
 	{
 		Item.width = 26;
@@ -34,12 +30,23 @@ public class PointingLaser : ModItem
 		Item.channel = true;
 		Item.shoot = ModContent.ProjectileType<Projectiles.PointingLaser>();
 		Item.rare = ItemRarityID.Pink;
-		if (!Main.dedServ)
-		{
-			Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
-		}
+
+		Item.GetGlobalItem<ItemGlowmask>().CustomPostDrawInWorld = true;
 	}
 	public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+	{
+		ItemGlowmask.GlowTextures.TryGetValue(Type, out Asset<Texture2D> glow);
+		spriteBatch.Draw(glow.Value, position, frame, TeamColor(Main.LocalPlayer), 0f, origin, scale, SpriteEffects.None, 0f);
+	}
+	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+	{
+		ItemGlowmask.GlowTextures.TryGetValue(Type, out var texture);
+		Vector2 vector = texture.Size() / 2f;
+		Vector2 value = new((float)(Item.width / 2) - vector.X, Item.height - texture.Height());
+		Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
+		spriteBatch.Draw(texture.Value, vector2, new Rectangle(0, 0, texture.Width(), texture.Height()), TeamColor(Main.LocalPlayer), rotation, vector, scale, SpriteEffects.None, 0f);
+	}
+	public static Color TeamColor(Player player)
 	{
 		Color c = Color.White;
 		if (Main.LocalPlayer.team == (int)Terraria.Enums.Team.Red || Main.netMode == NetmodeID.SinglePlayer)
@@ -62,6 +69,6 @@ public class PointingLaser : ModItem
 		{
 			c = new Color(171, 59, 218);
 		}
-		spriteBatch.Draw(glow.Value, position, frame, c, 0f, origin, scale, SpriteEffects.None, 0f);
+		return c;
 	}
 }

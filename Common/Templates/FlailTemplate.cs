@@ -59,7 +59,7 @@ public abstract class FlailTemplate : ModProjectile
 	public virtual int ChainVariants => 1;
 	public override void SetStaticDefaults()
 	{
-		if (HasChainTexture)
+		if (!Main.dedServ && HasChainTexture)
 		{
 			ChainTextures.Add(Type, ModContent.Request<Texture2D>(Texture + "_Chain"));
 		}
@@ -632,14 +632,14 @@ public abstract class FlailTemplate : ModProjectile
 			}
 		}
 		drawPos = Projectile.Center - Main.screenPosition;
-		DrawHead(projectileTexture, drawPos, drawOrigin, lightColor, 1f, spriteEffects);
+		DrawHead(projectileTexture, drawPos, drawOrigin, lightColor, spriteEffects);
 		return false;
 	}
 	public virtual void DrawTrail(Texture2D projectileTexture, Vector2 drawPos, Vector2 drawOrigin, Color color, float scale, int loopIteration, SpriteEffects spriteEffects)
 	{
 		Main.spriteBatch.Draw(projectileTexture, drawPos, null, color, Projectile.rotation, drawOrigin, scale, spriteEffects, 0f);
 	}
-	public virtual void DrawHead(Texture2D projectileTexture, Vector2 drawPos, Vector2 drawOrigin, Color color, float scale, SpriteEffects spriteEffects)
+	public virtual void DrawHead(Texture2D projectileTexture, Vector2 drawPos, Vector2 drawOrigin, Color color, SpriteEffects spriteEffects)
 	{
 		Main.spriteBatch.Draw(projectileTexture, drawPos, null, color, Projectile.rotation, drawOrigin, Projectile.scale, spriteEffects, 0f);
 	}

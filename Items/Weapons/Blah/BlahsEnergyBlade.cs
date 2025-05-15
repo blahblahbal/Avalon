@@ -1,8 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -12,14 +10,9 @@ namespace Avalon.Items.Weapons.Blah;
 
 public class BlahsEnergyBlade : ModItem
 {
-	private static Asset<Texture2D>? glow;
 	public override void SetStaticDefaults()
 	{
-		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
-		if (!Main.dedServ)
-		{
-			Item.GetGlobalItem<ItemGlowmask>().glowTexture = glow;
-		}
+		ItemGlowmask.AddGlow(this, new Color(250, 250, 250, 250));
 	}
 	public override void SetDefaults()
 	{
@@ -47,15 +40,6 @@ public class BlahsEnergyBlade : ModItem
 	//        .AddTile(ModContent.TileType<Tiles.SolariumAnvil>())
 	//        .Register();
 	//}
-	public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
-	{
-		Rectangle dims = this.GetDims();
-		Vector2 vector = dims.Size() / 2f;
-		Vector2 value = new Vector2((float)(Item.width / 2) - vector.X, Item.height - dims.Height);
-		Vector2 vector2 = Item.position - Main.screenPosition + vector + value;
-		float num = Item.velocity.X * 0.2f;
-		spriteBatch.Draw(glow.Value, vector2, dims, new Color(250, 250, 250, 250), num, vector, scale, SpriteEffects.None, 0f);
-	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
 		float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem) * 1.4f;

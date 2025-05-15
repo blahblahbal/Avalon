@@ -10,7 +10,7 @@ namespace Avalon.PlayerDrawLayers
 	//Items manually register data which this layer is using
 	public sealed class LegsLayer : PlayerDrawLayer
 	{
-		private static Dictionary<int, DrawLayerData> LegsLayerData { get; set; }
+		private static Dictionary<int, DrawLayerData>? LegsLayerData { get; set; }
 
 		/// <summary>
 		/// Add data associated with the leg equip slot here, usually in <see cref="ModType.SetStaticDefaults"/>.
@@ -20,7 +20,7 @@ namespace Avalon.PlayerDrawLayers
 		/// <param name="data">Data</param>
 		public static void RegisterData(int legSlot, DrawLayerData data)
 		{
-			if (!LegsLayerData.ContainsKey(legSlot))
+			if (!Main.dedServ && !LegsLayerData.ContainsKey(legSlot))
 			{
 				LegsLayerData.Add(legSlot, data);
 			}
@@ -28,12 +28,18 @@ namespace Avalon.PlayerDrawLayers
 
 		public override void Load()
 		{
-			LegsLayerData = new Dictionary<int, DrawLayerData>();
+			if (!Main.dedServ)
+			{
+				LegsLayerData = new Dictionary<int, DrawLayerData>();
+			}
 		}
 
 		public override void Unload()
 		{
-			LegsLayerData = null;
+			if (!Main.dedServ)
+			{
+				LegsLayerData = null;
+			}
 		}
 
 		public override Position GetDefaultPosition()
