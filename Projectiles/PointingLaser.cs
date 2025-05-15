@@ -37,7 +37,7 @@ public class PointingLaser : ModProjectile
 	public override bool PreDraw(ref Color lightColor)
 	{
 		Player player = Main.player[Projectile.owner];
-		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
+		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition + player.velocity, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
 		Vector2 playerCenter = player.RotatedRelativePoint(player.MountedCenter);
 		float length = playerCenter.Distance(mousePosClamped);
 		float rotation = playerCenter.SafeDirectionTo(mousePosClamped).ToRotation() + MathHelper.PiOver2;
@@ -96,7 +96,7 @@ public class PointingLaser : ModProjectile
 			return;
 		}
 
-		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
+		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition + player.velocity, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
 		Vector2 playerCenter = player.RotatedRelativePoint(player.MountedCenter);
 		Projectile.velocity = playerCenter.SafeDirectionTo(mousePosClamped) * Projectile.velocity.Length();
 		Projectile.Center = playerCenter + Projectile.velocity;
