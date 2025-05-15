@@ -41,7 +41,7 @@ public class Moonfury : FlailTemplate
 		Projectile.localNPCHitCooldown = 40; // This facilitates custom hit cooldown logic
 	}
 
-	public override bool EmitDust(int dustType, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
+	public override bool EmitDust(int dustType, Vector2? posMod, Vector2? velMod, float velMaxRadians, float velMult, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
 	{
 		Player player = Main.player[Projectile.owner];
 

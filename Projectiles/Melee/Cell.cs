@@ -1,5 +1,6 @@
 using Avalon.Common.Templates;
 using Avalon.Dusts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -35,19 +36,21 @@ public class Cell : FlailTemplate
 		Projectile.height = 20;
 	}
 
-	public override bool EmitDust(int dustType, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
+	public override bool EmitDust(int dustType, Vector2? posMod, Vector2? velMod, float velMaxRadians, float velMult, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
 	{
-		if (Projectile.velocity.Length() > 3 || CurrentAIState == AIState.Spinning) // The base method does not specify conditions for spawning the dust, so you are able to specify anything here
+		dustType = ModContent.DustType<ContagionWeapons>();
+		scale = 1.5f;
+		alpha = 128;
+		if (CurrentAIState == AIState.Spinning) // The base method does not specify conditions for spawning the dust, so you are able to specify anything here
 		{
-			if (CurrentAIState == AIState.Spinning)
-			{
-				consequent = 2;
-			}
-			dustType = ModContent.DustType<ContagionWeapons>();
-			scale = 1.5f;
-			alpha = 128;
-			return base.EmitDust(dustType, antecedent, consequent, fadeIn, noGravity, scale, alpha);
+			consequent = 2;
 		}
-		return false;
+		else if (Projectile.velocity.Length() <= 3)
+		{
+			velMaxRadians = MathHelper.TwoPi;
+			velMult = 1.5f;
+			consequent = 5;
+		}
+		return base.EmitDust(dustType, posMod, velMod, velMaxRadians, velMult, antecedent, consequent, fadeIn, noGravity, scale, alpha);
 	}
 }

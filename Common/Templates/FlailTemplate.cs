@@ -382,19 +382,19 @@ public abstract class FlailTemplate : ModProjectile
 	/// <inheritdoc cref="Dust.alpha"/>
 	/// </summary>
 	/// <returns>Whether it spawned a dust or not.</returns>
-	public virtual bool EmitDust(int dustType = -1, int antecedent = 1, int consequent = 1, float fadeIn = 1f, bool noGravity = true, float scale = 1f, byte alpha = 0)
+	public virtual bool EmitDust(int dustType = -1, Vector2? posMod = null, Vector2? velMod = null, float velMaxRadians = 1f, float velMult = 0.2f, int antecedent = 1, int consequent = 1, float fadeIn = 1f, bool noGravity = true, float scale = 1f, byte alpha = 0)
 	{
 		if (dustType == -1 || !Main.rand.NextBool(antecedent, consequent)) return false;
 
 		Player player = Main.player[Projectile.owner];
 
-		Dust dust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(6, 6), dustType, Projectile.velocity.RotatedByRandom(1f) * 0.2f, alpha);
+		Dust dust = Dust.NewDustPerfect((Vector2)(Projectile.Center + (posMod.HasValue ? posMod : Main.rand.NextVector2Circular(6, 6))), dustType, ((Vector2)(Projectile.velocity + (velMod.HasValue ? velMod : Vector2.Zero))).RotatedByRandom(velMaxRadians) * velMult, alpha);
 		dust.fadeIn = fadeIn;
 		dust.noGravity = noGravity;
 		dust.scale = scale;
 		if (CurrentAIState == AIState.Spinning)
 		{
-			dust.velocity = new Vector2(0, -2 * player.direction).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation());
+			dust.velocity = ((Vector2)(new Vector2(0, -2 * player.direction) + (velMod.HasValue ? velMod : Vector2.Zero))).RotatedBy(Projectile.Center.DirectionTo(player.Center).ToRotation());
 		}
 
 		return true;
@@ -597,7 +597,7 @@ public abstract class FlailTemplate : ModProjectile
 
 				if (ChainVariants > 1)
 				{
-					int variant = currentChainSeed.Next(ChainVariants);
+					int variant = currentChainSeed!.Next(ChainVariants);
 					chainSourceRectangle = new Rectangle(0, chainTexture.Height() / ChainVariants * variant, chainTexture.Width(), chainTexture.Height() / ChainVariants - 2);
 				}
 

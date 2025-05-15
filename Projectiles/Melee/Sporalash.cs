@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Templates;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 
@@ -35,24 +36,27 @@ public class Sporalash : FlailTemplate
 		Projectile.height = 24;
 	}
 
-	public override bool EmitDust(int dustType, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
+	public override bool EmitDust(int dustType, Vector2? posMod, Vector2? velMod, float velMaxRadians, float velMult, int antecedent, int consequent, float fadeIn, bool noGravity, float scale, byte alpha)
 	{
-		if (Projectile.velocity.Length() > 3 || CurrentAIState == AIState.Spinning) // The base method does not specify conditions for spawning the dust, so you are able to specify anything here
+		dustType = DustID.JunglePlants;
+		fadeIn = Main.rand.NextFloat(0.9f, 1.3f);
+		antecedent = 2;
+		consequent = 3;
+		if (CurrentAIState == AIState.Spinning) // The base method does not specify conditions for spawning the dust, so you are able to specify anything here
 		{
-			if (CurrentAIState == AIState.Spinning)
-			{
-				fadeIn = Main.rand.NextFloat(0.7f, 1.2f);
-			}
-			else
-			{
-				fadeIn = Main.rand.NextFloat(0.9f, 1.3f);
-			}
-			antecedent = 2;
-			consequent = 3;
-			dustType = DustID.JunglePlants;
-			return base.EmitDust(dustType, antecedent, consequent, fadeIn, noGravity, scale, alpha);
+			fadeIn = Main.rand.NextFloat(0.7f, 1.2f);
 		}
-		return false;
+		else if (Projectile.velocity.Length() <= 3)
+		{
+			fadeIn = Main.rand.NextFloat(0.7f, 1.2f);
+			velMult = 0.5f;
+			consequent = 14;
+		}
+		if (CurrentAIState != AIState.Spinning)
+		{
+			posMod = Main.rand.NextVector2CircularEdge(12, 12) + Main.rand.NextVector2Circular(6, 6);
+		}
+		return base.EmitDust(dustType, posMod, velMod, velMaxRadians, velMult, antecedent, consequent, fadeIn, noGravity, scale, alpha);
 	}
 
 	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
