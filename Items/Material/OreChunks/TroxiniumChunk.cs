@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -17,12 +18,9 @@ public class TroxiniumChunk : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.width = dims.Width;
-		Item.maxStack = 9999;
-		Item.value = 100;
-		Item.height = dims.Height;
+		Item.DefaultToMisc(14, 14);
 		Item.rare = ItemRarityID.LightRed;
+		Item.value = Item.sellPrice(silver: 7, copper: 50);
 	}
 	public override Color? GetAlpha(Color lightColor)
 	{
@@ -30,10 +28,10 @@ public class TroxiniumChunk : ModItem
 	}
 	public override void AddRecipes()
 	{
-		Recipe.Create(ModContent.ItemType<Material.Bars.TroxiniumBar>())
+		Recipe.Create(ModContent.ItemType<Bars.TroxiniumBar>())
 			.AddIngredient(Type, 4)
 			.AddTile(TileID.AdamantiteForge)
-			.SortAfterFirstRecipesOf(ModContent.ItemType<Material.Bars.TroxiniumBar>())
+			.SortAfterFirstRecipesOf(ModContent.ItemType<Bars.TroxiniumBar>())
 			.Register();
 	}
 }

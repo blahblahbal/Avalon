@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,7 +17,7 @@ public class PeridotGemsparkBlock : ModItem
 	}
 	public override void AddRecipes()
 	{
-		Terraria.Recipe.Create(Type, 20)
+		Recipe.Create(Type, 20)
 			.AddIngredient(ItemID.Glass, 20)
 			.AddIngredient(ModContent.ItemType<Material.Ores.Peridot>())
 			.AddTile(TileID.WorkBenches)
@@ -41,21 +40,11 @@ public class TourmalineGemsparkBlock : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.autoReuse = true;
-		Item.consumable = true;
-		Item.createTile = ModContent.TileType<Tiles.TourmalineGemspark>();
-		Item.width = dims.Width;
-		Item.useTurn = true;
-		Item.useTime = 10;
-		Item.useStyle = ItemUseStyleID.Swing;
-		Item.maxStack = 9999;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.TourmalineGemspark>());
 	}
 	public override void AddRecipes()
 	{
-		Terraria.Recipe.Create(Type, 20)
+		Recipe.Create(Type, 20)
 			.AddIngredient(ItemID.Glass, 20)
 			.AddIngredient(ModContent.ItemType<Material.Ores.Tourmaline>())
 			.AddTile(TileID.WorkBenches)
@@ -78,21 +67,11 @@ public class ZirconGemsparkBlock : ModItem
 
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Item.autoReuse = true;
-		Item.consumable = true;
-		Item.createTile = ModContent.TileType<Tiles.ZirconGemspark>();
-		Item.width = dims.Width;
-		Item.useTurn = true;
-		Item.useTime = 10;
-		Item.useStyle = ItemUseStyleID.Swing;
-		Item.maxStack = 9999;
-		Item.useAnimation = 15;
-		Item.height = dims.Height;
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.ZirconGemspark>());
 	}
 	public override void AddRecipes()
 	{
-		Terraria.Recipe.Create(Type, 20)
+		Recipe.Create(Type, 20)
 			.AddIngredient(ItemID.Glass, 20)
 			.AddIngredient(ModContent.ItemType<Material.Ores.Zircon>())
 			.AddTile(TileID.WorkBenches)

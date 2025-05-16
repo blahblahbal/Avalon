@@ -15,7 +15,7 @@ public class HallowedOre : ModItem
 	{
 		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Ores.HallowedOre>());
 		Item.rare = ItemRarityID.Pink;
-		Item.value = Item.sellPrice(0, 0, 50);
+		Item.value = Item.sellPrice(0, 0, 8);
 	}
 
 	public override void AddRecipes()

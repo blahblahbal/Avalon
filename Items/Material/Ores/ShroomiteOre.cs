@@ -15,7 +15,7 @@ public class ShroomiteOre : ModItem
 	{
 		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Ores.ShroomiteOre>());
 		Item.rare = ItemRarityID.Lime;
-		Item.value = Item.sellPrice(0, 0, 40);
+		Item.value = Item.sellPrice(0, 0, 20);
 	}
 	public override void AddRecipes()
 	{

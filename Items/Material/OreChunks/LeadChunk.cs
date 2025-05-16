@@ -1,31 +1,28 @@
-using Microsoft.Xna.Framework;
-using Terraria.ModLoader;
+using Avalon.Common.Extensions;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Items.Material.OreChunks;
 
 public class LeadChunk : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 200;
-    }
+	public override void SetStaticDefaults()
+	{
+		Item.ResearchUnlockCount = 200;
+	}
 
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Item.width = dims.Width;
-        Item.maxStack = 9999;
-        Item.value = 100;
-        Item.height = dims.Height;
-    }
-    public override void AddRecipes()
-    {
-        Recipe.Create(ItemID.LeadBar)
-            .AddIngredient(Type, 3)
-            .AddTile(TileID.Furnaces)
+	public override void SetDefaults()
+	{
+		Item.DefaultToMisc(14, 14);
+		Item.value = Item.sellPrice(silver: 1, copper: 25);
+	}
+	public override void AddRecipes()
+	{
+		Recipe.Create(ItemID.LeadBar)
+			.AddIngredient(Type, 3)
+			.AddTile(TileID.Furnaces)
 			.SortAfterFirstRecipesOf(ItemID.LeadBar)
 			.Register();
-    }
+	}
 }
