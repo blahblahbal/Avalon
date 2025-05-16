@@ -308,6 +308,28 @@ public static class ClassExtensions
 		else if (vector.Length() < min) return Vector2.Normalize(vector) * min;
 		else return vector;
 	}
+	/// <summary>
+	/// <para/> Uses <see cref="Utils.SafeNormalize"/> instead of <see cref="Vector2.Normalize()"/> to ensure it doesn't return a value which is not a number.
+	/// <para/> If the two provided Vector2 positions are the same, <see cref="Vector2.Zero"/> will be returned instead as a fallback.
+	/// <para/> Using SafeDirectionTo instead of DirectionTo avoids many difficult to anticipate issues that would cause bugs.
+	/// </summary>
+	public static Vector2 SafeDirectionTo(this Vector2 Origin, Vector2 Target) => Utils.SafeNormalize(Target - Origin, Vector2.Zero);
+	/// <summary>
+	/// <inheritdoc cref="SafeDirectionTo(Vector2, Vector2)"/><para></para>
+	/// Uses the Center of the provided Entity.
+	/// </summary>
+	public static Vector2 SafeDirectionTo(this Entity Entity, Vector2 Target) => Utils.SafeNormalize(Target - Entity.Center, Vector2.Zero);
+	/// <summary>
+	/// <para/> Uses <see cref="Utils.SafeNormalize"/> instead of <see cref="Vector2.Normalize()"/> to ensure it doesn't return a value which is not a number.
+	/// <para/> If the two provided Vector2 positions are the same, <see cref="Vector2.Zero"/> will be returned instead as a fallback.
+	/// <para/> Using SafeDirectionFrom instead of DirectionFrom avoids many difficult to anticipate issues that would cause bugs.
+	/// </summary>
+	public static Vector2 SafeDirectionFrom(this Vector2 Origin, Vector2 Target) => Utils.SafeNormalize(Origin - Target, Vector2.Zero);
+	/// <summary>
+	/// <inheritdoc cref="SafeDirectionFrom(Vector2, Vector2)"/><para></para>
+	/// Uses the Center of the provided Entity.
+	/// </summary>
+	public static Vector2 SafeDirectionFrom(this Entity Entity, Vector2 Target) => Utils.SafeNormalize(Entity.Center - Target, Vector2.Zero);
 	//public static bool AnyOreRiftsInRange(int x, int y, Item )
 	//{
 	//    for (int i = 0; i < 400; i++)
