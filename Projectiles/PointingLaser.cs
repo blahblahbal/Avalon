@@ -5,6 +5,7 @@ using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles;
@@ -15,6 +16,9 @@ public class PointingLaser : ModProjectile
 	public override void SetStaticDefaults()
 	{
 		LaserEnd = ModContent.Request<Texture2D>(Texture + "End");
+
+		ProjectileID.Sets.CanDistortWater[Type] = false;
+		ProjectileID.Sets.NoLiquidDistortion[Type] = true;
 	}
 	public override void SetDefaults()
 	{
@@ -36,9 +40,12 @@ public class PointingLaser : ModProjectile
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
+		// todo: fix this using the player's velocity as an offset while at the borders of the map, causing desync from cursor position
 		Player player = Main.player[Projectile.owner];
-		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition + player.velocity, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
 		Vector2 playerCenter = player.RotatedRelativePoint(player.MountedCenter);
+		float distToPlayer = playerCenter.DistanceSQ(player.GetModPlayer<AvalonPlayer>().MousePosition);
+		Vector2 playerVelMod = player.velocity * Utils.Remap(distToPlayer / 2116f, 0.4f, 1f, 0f, 1f);
+		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition + playerVelMod, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
 		float length = playerCenter.Distance(mousePosClamped);
 		float rotation = playerCenter.SafeDirectionTo(mousePosClamped).ToRotation() + MathHelper.PiOver2;
 		// Draw laser
@@ -79,6 +86,8 @@ public class PointingLaser : ModProjectile
 
 	public override void AI()
 	{
+		Projectile.velocity = Vector2.Zero;
+
 		Player player = Main.player[Projectile.owner];
 		if (!player.active || player.dead || player.noItems || player.CCed)
 		{
@@ -95,11 +104,12 @@ public class PointingLaser : ModProjectile
 			Projectile.Kill();
 			return;
 		}
-
-		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition + player.velocity, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
 		Vector2 playerCenter = player.RotatedRelativePoint(player.MountedCenter);
-		Projectile.velocity = playerCenter.SafeDirectionTo(mousePosClamped) * Projectile.velocity.Length();
-		Projectile.Center = playerCenter + Projectile.velocity;
+		float distToPlayer = playerCenter.DistanceSQ(player.GetModPlayer<AvalonPlayer>().MousePosition);
+		Vector2 playerVelMod = player.velocity * Utils.Remap(distToPlayer / 2116f, 0.4f, 1f, 0f, 1f);
+		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition + playerVelMod, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
+		Vector2 dirToMouse = playerCenter.SafeDirectionTo(mousePosClamped) * 16f;
+		Projectile.Center = playerCenter + dirToMouse;
 		player.ChangeDir(MathF.Sign(Projectile.SafeDirectionFrom(playerCenter).X) == 1 ? 1 : -1); // Dunno if this should be 1 or -1 when the sign is 0 :shrug:
 
 		// Copied from FlailTemplate/ExampleAdvancedFlail

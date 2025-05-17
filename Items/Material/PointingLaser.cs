@@ -25,7 +25,7 @@ public class PointingLaser : ModItem
 		Item.useAnimation = 1;
 		Item.useTime = 1;
 		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.shootSpeed = 48f;
+		Item.shootSpeed = 16f;
 		Item.autoReuse = true;
 		Item.channel = true;
 		Item.shoot = ModContent.ProjectileType<Projectiles.PointingLaser>();
