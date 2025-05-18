@@ -110,7 +110,7 @@ public class PointingLaser : ModProjectile
 		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition + playerVelMod, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
 		Vector2 dirToMouse = playerCenter.SafeDirectionTo(mousePosClamped) * 16f;
 		Projectile.Center = playerCenter + dirToMouse;
-		player.ChangeDir(MathF.Sign(Projectile.SafeDirectionFrom(playerCenter).X) == 1 ? 1 : -1); // Dunno if this should be 1 or -1 when the sign is 0 :shrug:
+		player.ChangeDir(MathF.Sign(Projectile.SafeDirectionFrom(playerCenter).X) == -1 ? -1 : 1); // 0 or 1 both return 1, if 0 returns -1 then the rotation will be incorrect
 
 		// Copied from FlailTemplate/ExampleAdvancedFlail
 		Projectile.timeLeft = 2; // Makes sure the flail doesn't die (good when the flail is resting on the ground)
