@@ -22,7 +22,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -684,13 +683,6 @@ public class AvalonPlayer : ModPlayer
 		}
 
 		WOSTongue();
-
-		#region mouseposition
-		if (Player.whoAmI == Main.myPlayer)
-		{
-			MousePosition = Main.MouseWorld;
-		}
-		#endregion
 
 		tpStam = !TeleportV;
 		if (TeleportV)
@@ -3100,11 +3092,6 @@ public class AvalonPlayer : ModPlayer
 
 			Player.GetDamage(DamageClass.Ranged) += damagePercent / 100f;
 		}
-
-		if (Player.whoAmI == Main.myPlayer && Main.netMode == NetmodeID.MultiplayerClient)
-		{
-			SyncMouseCursor(server: false);
-		}
 		UpdateMana();
 	}
 	public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
@@ -3384,20 +3371,6 @@ public class AvalonPlayer : ModPlayer
 	}
 	#endregion crit dmg stuff
 
-	internal void HandleMouseCursor(BinaryReader reader)
-	{
-		MousePosition = reader.ReadVector2();
-		if (Main.netMode == NetmodeID.Server)
-			SyncMouseCursor(server: true);
-	}
-	public void SyncMouseCursor(bool server)
-	{
-		ModPacket packet = Mod.GetPacket();
-		packet.Write((int)Network.MessageID.CursorPosition);
-		packet.Write(Player.whoAmI);
-		packet.WriteVector2(MousePosition);
-		Player.SendPacket(packet, server);
-	}
 	public void LevelUpSkyBlessing()
 	{
 		Player.AddBuff(ModContent.BuffType<SkyBlessing>(), 60 * 7);
