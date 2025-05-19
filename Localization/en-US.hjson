@@ -11416,6 +11416,11 @@ Mods: {
 				MapEntry1: Locked Contagion Chest
 			}
 
+			UnderworldChest: {
+				MapEntry0: Underworld Chest
+				MapEntry1: Locked Underworld Chest
+			}
+
 			ContagionPot.MapEntry: Pot
 			PeridotTree.MapEntry: Tree
 			TourmalineTree.MapEntry: Tree
@@ -11476,7 +11481,6 @@ Mods: {
 			SavannaPot.MapEntry: Pot
 			SavannaSapling.MapEntry: Sapling
 			SavannaShortGrass.MapEntry1: ""
-			UnderworldChest.MapEntry0: Underworld Chest
 			SavannaPylon.MapEntry: Savanna Pylon
 			PoisonSpike.MapEntry: Poison Spike
 			SilenceCandle.MapEntry: Mods.Avalon.Tiles.SilenceCandle.MapEntry

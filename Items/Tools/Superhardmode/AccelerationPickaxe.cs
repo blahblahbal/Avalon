@@ -1,5 +1,4 @@
 using Avalon.Common.Extensions;
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -76,28 +75,31 @@ public class AccelerationPickaxeSpeed : ModItem
 
 	public override void HoldItem(Player player)
 	{
-		if (!Main.GamepadDisableCursorItemIcon && player.position.X / 16f - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetX && (player.position.X + player.width) / 16f + Player.tileRangeX + player.inventory[player.selectedItem].tileBoost - 1f >= Player.tileTargetX && player.position.Y / 16f - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetY && (player.position.Y + player.height) / 16f + Player.tileRangeY + player.inventory[player.selectedItem].tileBoost - 2f >= Player.tileTargetY)
+		if (Main.myPlayer == player.whoAmI)
 		{
-			player.cursorItemIconEnabled = true;
-			Main.ItemIconCacheUpdate(Type);
-		}
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
-		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			int pfix = Item.prefix;
-			Item.ChangeItemType(ModContent.ItemType<AccelerationPickaxe>());
-			Item.Prefix(pfix);
-		}
-		if (player.controlUseItem && player.whoAmI == Main.myPlayer)
-		{
-			if (player.position.X / 16f - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetX && (player.position.X + player.width) / 16f + Player.tileRangeX + player.inventory[player.selectedItem].tileBoost - 1f >= Player.tileTargetX && player.position.Y / 16f - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetY && (player.position.Y + player.height) / 16f + Player.tileRangeY + player.inventory[player.selectedItem].tileBoost - 2f >= Player.tileTargetY)
+			if (!Main.GamepadDisableCursorItemIcon && player.position.X / 16f - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetX && (player.position.X + player.width) / 16f + Player.tileRangeX + player.inventory[player.selectedItem].tileBoost - 1f >= Player.tileTargetX && player.position.Y / 16f - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetY && (player.position.Y + player.height) / 16f + Player.tileRangeY + player.inventory[player.selectedItem].tileBoost - 2f >= Player.tileTargetY)
 			{
-				Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-				for (int x = p.X - 1; x <= p.X + 1; x++)
+				player.cursorItemIconEnabled = true;
+				Main.ItemIconCacheUpdate(Type);
+			}
+			if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, player.position);
+				int pfix = Item.prefix;
+				Item.ChangeItemType(ModContent.ItemType<AccelerationPickaxe>());
+				Item.Prefix(pfix);
+			}
+			if (player.controlUseItem && player.whoAmI == Main.myPlayer)
+			{
+				if (player.position.X / 16f - Player.tileRangeX - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetX && (player.position.X + player.width) / 16f + Player.tileRangeX + player.inventory[player.selectedItem].tileBoost - 1f >= Player.tileTargetX && player.position.Y / 16f - Player.tileRangeY - player.inventory[player.selectedItem].tileBoost <= Player.tileTargetY && (player.position.Y + player.height) / 16f + Player.tileRangeY + player.inventory[player.selectedItem].tileBoost - 2f >= Player.tileTargetY)
 				{
-					for (int y = p.Y - 1; y <= p.Y + 1; y++)
+					Point p = Main.MouseWorld.ToTileCoordinates();
+					for (int x = p.X - 1; x <= p.X + 1; x++)
 					{
-						player.PickTile(x, y, 400);
+						for (int y = p.Y - 1; y <= p.Y + 1; y++)
+						{
+							player.PickTile(x, y, 400);
+						}
 					}
 				}
 			}

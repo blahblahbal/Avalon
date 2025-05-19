@@ -1,4 +1,3 @@
-using Avalon.Common.Players;
 using Avalon.Dusts;
 using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
@@ -47,7 +46,7 @@ public class StarTorch : ModItem
 	{
 		if (Main.myPlayer == player.whoAmI && Main.mouseLeft)
 		{
-			Point tilePos = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+			Point tilePos = Main.MouseWorld.ToTileCoordinates();
 			bool inrange = player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple);
 			if (inrange)
 			{

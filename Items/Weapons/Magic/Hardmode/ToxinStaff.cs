@@ -1,5 +1,4 @@
 using Avalon.Common.Extensions;
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -32,7 +31,7 @@ public class ToxinStaff : ModItem
 	}
 	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 	{
-		position = player.Center + new Vector2(65, 0).RotatedBy(player.AngleTo(player.GetModPlayer<AvalonPlayer>().MousePosition));
+		position = player.Center + new Vector2(65, 0).RotatedBy(player.AngleTo(Main.MouseWorld));
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{

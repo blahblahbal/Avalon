@@ -1,4 +1,3 @@
-using Avalon.Common.Players;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -44,7 +43,7 @@ public class Torch : ModProjectile
 	}
 	public override void OnSpawn(IEntitySource source)
 	{
-		starTorchPos = Projectile.Owner().GetModPlayer<AvalonPlayer>().MousePosition;
+		starTorchPos = Main.MouseWorld;
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{

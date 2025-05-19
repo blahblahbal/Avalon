@@ -1,5 +1,4 @@
 using Avalon.Common.Extensions;
-using Avalon.Common.Players;
 using Avalon.Particles;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
@@ -45,8 +44,9 @@ public class AeonsEternity : ModItem
 			Vector2 velRand = velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f);
 
 			// possibly fucky way of 
-			float radX = (float)Math.Cos(player.position.AngleTo(player.GetModPlayer<AvalonPlayer>().MousePosition));
-			float radY = (float)Math.Sin(player.position.AngleTo(player.GetModPlayer<AvalonPlayer>().MousePosition));
+			float angle = player.AngleTo(Main.MouseWorld);
+			float radX = MathF.Cos(angle);
+			float radY = MathF.Sin(angle);
 			int radDirX = MathF.Sign(radX);
 			int radDirY = MathF.Sign(radY);
 			// X
@@ -57,10 +57,10 @@ public class AeonsEternity : ModItem
 			Vector2 velMult = new(velMultX, velMultY);
 
 
-			int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velRand + velMult * 0.8f + player.velocity * 0.2f, ModContent.ProjectileType<AeonStar>(), damage / 5, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
-			Main.projectile[P].scale = Main.rand.NextFloat(0.9f, 1.1f);
-			Main.projectile[P].rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
-			lastStar = P;
+			Projectile p = Projectile.NewProjectileDirect(Item.GetSource_FromThis(), position, velRand + velMult * 0.8f + player.velocity * 0.2f, ModContent.ProjectileType<AeonStar>(), damage / 5, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
+			p.scale = Main.rand.NextFloat(0.9f, 1.1f);
+			p.rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
+			lastStar = p.whoAmI;
 		}
 		for (int i = 0; i < 2; i++)
 		{

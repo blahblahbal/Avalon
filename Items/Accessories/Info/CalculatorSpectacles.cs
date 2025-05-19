@@ -1,4 +1,3 @@
-using Avalon.Common.Players;
 using Avalon.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -229,7 +228,7 @@ internal class CalcSpec : UIState
 			// get the tile
 			if (!itemAlreadyAssigned)
 			{
-				Point tilepos = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+				Point tilepos = Main.MouseWorld.ToTileCoordinates();
 				if (!WorldGen.InWorld(tilepos.X, tilepos.Y)) return;
 				Color c = Lighting.GetColor(tilepos);
 				if ((TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] || Main.tile[tilepos.X, tilepos.Y].TileType == TileID.LunarOre)/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&

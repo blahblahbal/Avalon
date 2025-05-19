@@ -1,5 +1,4 @@
 using Avalon.Common.Extensions;
-using Avalon.Common.Players;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using System;
@@ -53,7 +52,7 @@ public class RodofCoalescence : ModItem
 	}
 	public static bool TeleportPlayer(Player player)
 	{
-		Vector2 pointPosition = player.GetModPlayer<AvalonPlayer>().MousePosition;
+		Vector2 pointPosition = Main.MouseWorld;
 		if (player.gravDir == 1f)
 		{
 			pointPosition.Y -= player.height;

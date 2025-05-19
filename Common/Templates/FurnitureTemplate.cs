@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
 using Terraria.Audio;
@@ -529,51 +530,54 @@ namespace Avalon.Common.Templates
 			TileID.Sets.IsAContainer[Type] = true;
 			TileID.Sets.FriendlyFairyCanLureTo[Type] = true;
 
-			//DustType = ModContent.DustType<Sparkle>();
 			DustType = Dust;
-			AdjTiles = new int[] { TileID.Containers };
+			AdjTiles = [TileID.Containers];
 
 			// Other tiles with just one map entry use CreateMapEntryName() to use the default translationkey, "MapEntry"
 			// Since ExampleChest needs multiple, we register our own MapEntry keys
-			AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-			//AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry1"), MapChestName);
-			//AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry2"), MapChestName);
+			if (CanBeUnlockedNormally)
+			{
+				AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+				if (CanBeLocked)
+				{
+					AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry1"), MapChestName);
+				}
+			}
 
 			// Placement
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
 			TileObjectData.newTile.Origin = new Point16(0, 1);
-			TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
+			TileObjectData.newTile.CoordinateHeights = [16, 18];
 			TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(Chest.FindEmptyChest, -1, 0, true);
 			TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(Chest.AfterPlacement_Hook, -1, 0, false);
-			TileObjectData.newTile.AnchorInvalidTiles = new int[] {
+			TileObjectData.newTile.AnchorInvalidTiles = [
 				TileID.MagicalIceBlock,
 				TileID.Boulder,
 				TileID.BouncyBoulder,
 				TileID.LifeCrystalBoulder,
 				TileID.RollingCactus
-			};
+			];
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
 			TileObjectData.addTile(Type);
 		}
 
-		// This example shows using GetItemDrops to manually decide item drops. This example is for a tile with a TileObjectData.
-		//public override IEnumerable<Item> GetItemDrops(int i, int j)
-		//{
-		//    Tile tile = Main.tile[i, j];
-		//    int style = TileObjectData.GetTileStyle(tile);
-		//    if (style == 0)
-		//    {
-		//        yield return new Item(DropItem);
-		//    }
-		//    if (style == 1)
-		//    {
-		//        // Style 1 is ExampleChest when locked. We want that tile style to drop the ExampleChest item as well. Use the Chest Lock item to lock this chest.
-		//        // No item places ExampleChest in the locked style, so the automatic item drop is unknown, this is why GetItemDrops is necessary in this situation. 
-		//        yield return new Item(DropItem);
-		//    }
-		//}
+		public override IEnumerable<Item> GetItemDrops(int i, int j)
+		{
+			int type = 0;
+			switch (TileObjectData.GetTileStyle(Main.tile[i, j]))
+			{
+				case 0: // Unlocked
+				case 1: // Locked
+					type = DropItem;
+					break;
+			}
+			if (type > 0)
+			{
+				yield return new Item(type);
+			}
+		}
 
 		public override ushort GetMapOption(int i, int j)
 		{
@@ -589,6 +593,32 @@ namespace Avalon.Common.Templates
 		public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
 		{
 			return true;
+		}
+
+		public override bool IsLockedChest(int i, int j)
+		{
+			return (Main.tile[i, j].TileFrameX / 36 == 1 || !CanBeUnlockedNormally);
+		}
+
+		public override bool UnlockChest(int i, int j, ref short frameXAdjustment, ref int dustType, ref bool manual)
+		{
+			if (!CanBeUnlockedNormally)
+			{
+				frameXAdjustment = 0;
+			}
+			return true;
+		}
+
+		public override bool LockChest(int i, int j, ref short frameXAdjustment, ref bool manual)
+		{
+			int style = TileObjectData.GetTileStyle(Main.tile[i, j]);
+			// We need to return true only if the tile style is the unlocked variant of a chest that supports locking. 
+			if (style == 0 && CanBeUnlockedNormally)
+			{
+				// We can check other conditions as well, such as how biome chests can't be locked until Plantera is defeated
+				return true;
+			}
+			return false;
 		}
 
 		public static string MapChestName(string name, int i, int j)
@@ -627,10 +657,6 @@ namespace Avalon.Common.Templates
 
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			//if (!WorldGen.generatingWorld)
-			//{
-			//    Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 32, 32, DropItem);
-			//}
 			// We override KillMultiTile to handle additional logic other than the item drop. In this case, unregistering the Chest from the world
 			Chest.DestroyChest(i, j);
 		}
@@ -670,7 +696,8 @@ namespace Avalon.Common.Templates
 			}
 
 			bool isLocked = Chest.IsLocked(left, top);
-			if (Main.netMode == NetmodeID.MultiplayerClient && !isLocked)
+
+			if (!isLocked && Main.netMode == NetmodeID.MultiplayerClient)
 			{
 				if (left == player.chestX && top == player.chestY && player.chest != -1)
 				{
@@ -686,69 +713,42 @@ namespace Avalon.Common.Templates
 			}
 			else if (isLocked && CanBeUnlockedNormally)
 			{
-				if (player.ConsumeItem(ChestKeyItemId) && Chest.Unlock(left, top) &&
-					Main.netMode == NetmodeID.MultiplayerClient)
+				if (player.HasItemInInventoryOrOpenVoidBag(ChestKeyItemId) && Chest.Unlock(left, top) && player.ConsumeItem(ChestKeyItemId))
 				{
-					NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1f, left, top);
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1f, left, top);
+					}
 				}
 			}
-			else if (!CanBeUnlockedNormally && isLocked)
+			else if (isLocked && !CanBeUnlockedNormally)
 			{
-				if (player.ConsumeItem(ChestKeyItemId) && Tiles.Furniture.LockedChests.Unlock(left, top) &&
-					Main.netMode != NetmodeID.SinglePlayer)
+				if (player.HasItemInInventoryOrOpenVoidBag(ChestKeyItemId) && Tiles.Furniture.LockedChests.Unlock(left, top) && player.ConsumeItem(ChestKeyItemId))
 				{
-					Network.SyncLockUnlock.SendPacket(1, left, top);
-					NetMessage.SendTileSquare(-1, left, top);
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						Network.SyncLockUnlock.SendPacket(Network.SyncLockUnlock.Unlock, left, top);
+					}
 				}
 			}
 			else if (!isLocked)
 			{
-				//if (player.inventory[player.selectedItem].type == ItemID.ChestLock && 
-				//	(tile.TileType == ModContent.TileType<OrangeDungeonChest>() ||
-				//	tile.TileType == ModContent.TileType<PurpleDungeonChest>() ||
-				//	tile.TileType == ModContent.TileType<YellowDungeonChest>()) &&
-				//	tile.TileFrameX == 0)
-				//{
-				//	SoundEngine.PlaySound(SoundID.Unlock, new Vector2(left * 16, top * 16));
-				//	for (int q = left; q <= left + 1; q++)
-				//	{
-				//		for (int z = top; z <= top + 1; z++)
-				//		{
-				//			Tile tileSafely2 = Framing.GetTileSafely(i, z);
-				//			if (tileSafely2.TileType == ModContent.TileType<OrangeDungeonChest>() ||
-				//				tileSafely2.TileType == ModContent.TileType<PurpleDungeonChest>() ||
-				//				tileSafely2.TileType == ModContent.TileType<YellowDungeonChest>())
-				//			{
-				//				tileSafely2.TileFrameX += 36;
-				//			}
-				//		}
-				//	}
-				//	player.inventory[player.selectedItem].stack--;
-				//	if (player.inventory[player.selectedItem].stack <= 0)
-				//		player.inventory[player.selectedItem] = new Item();
-
-				//	if (Main.netMode == NetmodeID.MultiplayerClient)
-				//		NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3f, left, top);
-				//}
-				//else
+				int chest = Chest.FindChest(left, top);
+				if (chest != -1)
 				{
-					int chest = Chest.FindChest(left, top);
-					if (chest != -1)
+					Main.stackSplit = 600;
+					if (chest == player.chest)
 					{
-						Main.stackSplit = 600;
-						if (chest == player.chest)
-						{
-							player.chest = -1;
-							SoundEngine.PlaySound(SoundID.MenuClose);
-						}
-						else
-						{
-							SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
-							player.OpenChest(left, top, chest);
-						}
-
-						Recipe.FindRecipes();
+						player.chest = -1;
+						SoundEngine.PlaySound(SoundID.MenuClose);
 					}
+					else
+					{
+						SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
+						player.OpenChest(left, top, chest);
+					}
+
+					Recipe.FindRecipes();
 				}
 			}
 

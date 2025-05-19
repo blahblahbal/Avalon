@@ -1,6 +1,4 @@
 using Avalon.Common;
-using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -33,18 +31,20 @@ public class ContagionSeeds : ModItem
 
 	public override void HoldItem(Player player)
 	{
-		if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+		if (Main.myPlayer == player.whoAmI)
 		{
-			Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-			player.cursorItemIconEnabled = true;
-			player.cursorItemIconID = Type;
+			if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+			{
+				player.cursorItemIconEnabled = true;
+				player.cursorItemIconID = Type;
+			}
 		}
 	}
 
 	public override bool? UseItem(Player player)
 	{
 		Terraria.Tile tile = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
-		if (tile.HasTile && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple))
+		if (tile.HasTile && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
 		{
 			if (tile.TileType == TileID.Dirt)
 			{

@@ -29,9 +29,6 @@ using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Reflection;
 using Avalon.Tiles;
-using Avalon.Tiles.Furniture.OrangeDungeon;
-using Avalon.Tiles.Furniture.PurpleDungeon;
-using Avalon.Tiles.Furniture.YellowDungeon;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -611,246 +608,215 @@ public class AvalonGlobalItem : GlobalItem
 	}
 	public override void HoldItem(Item item, Player player)
 	{
-		Vector2 pos = Main.ReverseGravitySupport(player.GetModPlayer<AvalonPlayer>().MousePosition);
-		Point tilePos = pos.ToTileCoordinates();
-
-		#region contagion chest lock locking
-		if (item.type == ItemID.ChestLock && player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
-			player.whoAmI == Main.myPlayer && player.ItemTimeIsZero && player.itemAnimation > 0 && Main.mouseLeft && Main.mouseLeftRelease)
+		// Tile interactions
+		#region Tile interactions
+		if (Main.myPlayer == player.whoAmI) // Make sure we're only doing all of this for the player holding the item, syncing manually
 		{
-			Tile tileSafely = Framing.GetTileSafely(tilePos.X, tilePos.Y);
-			if (tileSafely.TileType == ModContent.TileType<Tiles.Contagion.ContagionChest>() ||
-				tileSafely.TileType == ModContent.TileType<OrangeDungeonChest>() ||
-				tileSafely.TileType == ModContent.TileType<PurpleDungeonChest>() ||
-				tileSafely.TileType == ModContent.TileType<YellowDungeonChest>())
+			Point tilePos = Main.MouseWorld.ToTileCoordinates();
+			Tile tile = Main.tile[tilePos];
+			Tile tileSafe = Framing.GetTileSafely(tilePos);
+
+			#region sponges 3x3
+			if (Main.mouseRight && !Main.mouseLeft && player.cursorItemIconID == 0 && !player.mouseInterface &&
+				player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
+				(item.type is ItemID.SuperAbsorbantSponge or ItemID.LavaAbsorbantSponge or ItemID.HoneyAbsorbantSponge or ItemID.UltraAbsorbantSponge))
 			{
-				int xpos;
-				for (xpos = Main.tile[tilePos.X, tilePos.Y].TileFrameX / 18; xpos > 1; xpos -= 2)
+				for (int i = tilePos.X - 1; i <= tilePos.X + 1; i++)
 				{
-				}
-				xpos = tilePos.X - xpos;
-				int ypos = tilePos.Y - Main.tile[tilePos.X, tilePos.Y].TileFrameY / 18;
-
-				if (AvalonGlobalTile.LockOrUnlock(xpos, ypos))
-				{
-					item.stack--;
-					if (item.stack <= 0)
+					for (int j = tilePos.Y - 1; j <= tilePos.Y + 1; j++)
 					{
-						item = new Item();
-					}
-					NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3, xpos, ypos);
-				}
-			}
-		}
-		#endregion
-
-		#region sponges 3x3
-		if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.cursorItemIconID == 0 && !player.mouseInterface &&
-			player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
-			(item.type is ItemID.SuperAbsorbantSponge or ItemID.LavaAbsorbantSponge or ItemID.HoneyAbsorbantSponge or ItemID.UltraAbsorbantSponge))
-		{
-			for (int z = tilePos.X - 1; z <= tilePos.X + 1; z++)
-			{
-				for (int w = tilePos.Y - 1; w <= tilePos.Y + 1; w++)
-				{
-					if ((item.type == ItemID.SuperAbsorbantSponge && (Main.tile[z, w].LiquidType == LiquidID.Water || Main.tile[z, w].LiquidType == LiquidID.Shimmer)) ||
-						item.type == ItemID.LavaAbsorbantSponge && Main.tile[z, w].LiquidType == LiquidID.Lava ||
-						item.type == ItemID.HoneyAbsorbantSponge && Main.tile[z, w].LiquidType == LiquidID.Honey ||
-						item.type == ItemID.UltraAbsorbantSponge)
-					{
-						SoundStyle s = new SoundStyle("Terraria/Sounds/Splash_1");
-						SoundEngine.PlaySound(s, player.position);
-
-						Tile t = Main.tile[z, w];
-						t.LiquidAmount = 0;
-						WorldGen.SquareTileFrame(z, w, true);
-						if (Main.netMode == NetmodeID.MultiplayerClient)
+						Tile tile2 = Main.tile[i, j];
+						if ((item.type == ItemID.SuperAbsorbantSponge && (tile2.LiquidType == LiquidID.Water || tile2.LiquidType == LiquidID.Shimmer)) ||
+							item.type == ItemID.LavaAbsorbantSponge && tile2.LiquidType == LiquidID.Lava ||
+							item.type == ItemID.HoneyAbsorbantSponge && tile2.LiquidType == LiquidID.Honey ||
+							item.type == ItemID.UltraAbsorbantSponge)
 						{
-							NetMessage.sendWater(z, w);
+							SoundEngine.PlaySound(SoundID.SplashWeak, player.position);
+
+							tile2.LiquidAmount = 0;
+							WorldGen.SquareTileFrame(i, j, true);
+							if (Main.netMode == NetmodeID.MultiplayerClient)
+							{
+								NetMessage.sendWater(i, j);
+							}
 						}
 					}
 				}
 			}
-		}
-		#endregion
+			#endregion
 
-		#region right click bottomless buckets to do 3x3
-		if (Main.mouseRight && !Main.mouseLeft && player.whoAmI == Main.myPlayer && player.cursorItemIconID == 0 && !player.mouseInterface &&
-			player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
-			(item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket))
-		{
-			int liquidID = LiquidID.Water;
-			if (item.type == ItemID.BottomlessLavaBucket) liquidID = LiquidID.Lava;
-			if (item.type == ItemID.BottomlessHoneyBucket) liquidID = LiquidID.Honey;
-			if (item.type == ItemID.BottomlessShimmerBucket) liquidID = LiquidID.Shimmer;
-
-			for (int z = tilePos.X - 1; z <= tilePos.X + 1; z++)
+			#region right click bottomless buckets to do 3x3
+			if (Main.mouseRight && !Main.mouseLeft && player.cursorItemIconID == 0 && !player.mouseInterface &&
+				player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
+				(item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket))
 			{
-				for (int w = tilePos.Y - 1; w <= tilePos.Y + 1; w++)
+				int liquidID = LiquidID.Water;
+				if (item.type == ItemID.BottomlessLavaBucket) liquidID = LiquidID.Lava;
+				if (item.type == ItemID.BottomlessHoneyBucket) liquidID = LiquidID.Honey;
+				if (item.type == ItemID.BottomlessShimmerBucket) liquidID = LiquidID.Shimmer;
+
+				for (int i = tilePos.X - 1; i <= tilePos.X + 1; i++)
 				{
-					if (Main.tile[z, w].LiquidType != liquidID && Main.tile[z, w].LiquidAmount > 0)
+					for (int j = tilePos.Y - 1; j <= tilePos.Y + 1; j++)
 					{
-						return;
-					}
-				}
-			}
-
-			for (int z = tilePos.X - 1; z <= tilePos.X + 1; z++)
-			{
-				for (int w = tilePos.Y - 1; w <= tilePos.Y + 1; w++)
-				{
-					SoundStyle s = new SoundStyle("Terraria/Sounds/Splash_1");
-					SoundEngine.PlaySound(s, player.position);
-
-					Tile t = Main.tile[z, w];
-					t.LiquidType = liquidID;
-					t.LiquidAmount = 255;
-					WorldGen.SquareTileFrame(z, w, true);
-					if (Main.netMode == NetmodeID.MultiplayerClient)
-					{
-						NetMessage.sendWater(z, w);
-					}
-				}
-			}
-		}
-		#endregion
-
-		#region shimmer bucket
-		if (item.type == ItemID.EmptyBucket)
-		{
-			//Vector2 pos = player.GetModPlayer<AvalonPlayer>().MousePosition;
-			//Point tilePos = pos.ToTileCoordinates();
-			if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !Main.tile[tilePos.X, tilePos.Y].HasTile &&
-				Main.tile[tilePos.X, tilePos.Y].LiquidAmount > 200 && Main.tile[tilePos.X, tilePos.Y].LiquidType == LiquidID.Shimmer)
-			{
-				player.cursorItemIconEnabled = true;
-				player.cursorItemIconID = item.type;
-				if (player.itemTime == 0 && player.itemAnimation > 0 && player.controlUseItem)
-				{
-					int liquidType = Main.tile[tilePos.X, tilePos.Y].LiquidType;
-					int liquidAmt = Main.tile[tilePos.X, tilePos.Y].LiquidAmount;
-
-					if (liquidAmt > 100 && liquidType == LiquidID.Shimmer)
-					{
-						SoundStyle s = new SoundStyle("Terraria/Sounds/Splash_1");
-						SoundEngine.PlaySound(s, player.position);
-						item.stack--;
-						player.PutItemInInventoryFromItemUsage(ModContent.ItemType<ShimmerBucket>(), player.selectedItem);
-						player.itemTime = player.inventory[player.selectedItem].useTime;
-
-						int num3 = Main.tile[tilePos.X, tilePos.Y].LiquidAmount;
-						Tile t = Main.tile[tilePos.X, tilePos.Y];
-						t.LiquidAmount = 0;
-						t.LiquidType = LiquidID.Water;
-						WorldGen.SquareTileFrame(tilePos.X, tilePos.Y, resetFrame: false);
-						if (Main.netMode == NetmodeID.MultiplayerClient)
-							NetMessage.sendWater(tilePos.X, tilePos.Y);
-						else
-							Liquid.AddWater(tilePos.X, tilePos.Y);
-
-						if (num3 >= 255)
-							return;
-
-						for (int k = tilePos.X - 1; k <= tilePos.Y + 1; k++)
+						Tile tile2 = Main.tile[i, j];
+						if (tile2.LiquidType != liquidID && tile2.LiquidAmount > 0)
 						{
-							for (int l = tilePos.X - 1; l <= tilePos.Y + 1; l++)
+							return;
+						}
+
+						SoundEngine.PlaySound(SoundID.SplashWeak, player.position);
+
+						tile2.LiquidType = liquidID;
+						tile2.LiquidAmount = 255;
+						WorldGen.SquareTileFrame(i, j, true);
+						if (Main.netMode == NetmodeID.MultiplayerClient)
+						{
+							NetMessage.sendWater(i, j);
+						}
+					}
+				}
+			}
+			#endregion
+
+			#region shimmer bucket
+			if (item.type == ItemID.EmptyBucket)
+			{
+				int liquidAmount = tile.LiquidAmount;
+
+				if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !tile.HasTile &&
+					liquidAmount > 200 && tile.LiquidType == LiquidID.Shimmer)
+				{
+					player.cursorItemIconEnabled = true;
+					player.cursorItemIconID = item.type;
+					if (player.itemTime == 0 && player.itemAnimation > 0 && player.controlUseItem)
+					{
+						if (liquidAmount > 100 && tile.LiquidType == LiquidID.Shimmer)
+						{
+							SoundEngine.PlaySound(SoundID.SplashWeak, player.position);
+							item.stack--;
+							player.PutItemInInventoryFromItemUsage(ModContent.ItemType<ShimmerBucket>(), player.selectedItem);
+							player.itemTime = player.inventory[player.selectedItem].useTime;
+
+							tile.LiquidAmount = 0;
+							tile.LiquidType = LiquidID.Water;
+							WorldGen.SquareTileFrame(tilePos.X, tilePos.Y, resetFrame: false);
+							if (Main.netMode == NetmodeID.MultiplayerClient)
 							{
-								if ((k != tilePos.X || l != tilePos.Y) && Main.tile[k, l].LiquidAmount > 0 && Main.tile[k, l].LiquidType == LiquidID.Shimmer)
+								NetMessage.sendWater(tilePos.X, tilePos.Y);
+							}
+							else
+							{
+								Liquid.AddWater(tilePos.X, tilePos.Y);
+							}
+
+							if (liquidAmount >= 255)
+							{
+								return;
+							}
+
+							for (int i = tilePos.X - 1; i <= tilePos.Y + 1; i++)
+							{
+								for (int j = tilePos.X - 1; j <= tilePos.Y + 1; j++)
 								{
-									int num4 = Main.tile[k, l].LiquidAmount;
-									if (num4 + num3 > 255)
-										num4 = 255 - num3;
-
-									num3 += num4;
-									Tile t2 = Main.tile[k, l];
-									t2.LiquidAmount -= (byte)num4;
-									t2.LiquidType = LiquidID.Shimmer;
-									if (t2.LiquidAmount == 0)
+									Tile tile2 = Main.tile[i, j];
+									if ((i != tilePos.X || j != tilePos.Y) && tile2.LiquidAmount > 0 && tile2.LiquidType == LiquidID.Shimmer)
 									{
-										t2.LiquidType = LiquidID.Water;
-									}
+										int liquidAmount2 = tile2.LiquidAmount;
+										if (liquidAmount2 + liquidAmount > 255)
+											liquidAmount2 = 255 - liquidAmount;
 
-									WorldGen.SquareTileFrame(k, l, resetFrame: false);
-									if (Main.netMode == NetmodeID.MultiplayerClient)
-										NetMessage.sendWater(k, l);
-									else
-										Liquid.AddWater(k, l);
+										liquidAmount += liquidAmount2;
+										tile2.LiquidAmount -= (byte)liquidAmount2;
+										tile2.LiquidType = LiquidID.Shimmer;
+										if (tile2.LiquidAmount == 0)
+										{
+											tile2.LiquidType = LiquidID.Water;
+										}
+
+										WorldGen.SquareTileFrame(i, j, resetFrame: false);
+										if (Main.netMode == NetmodeID.MultiplayerClient)
+										{
+											NetMessage.sendWater(i, j);
+										}
+										else
+										{
+											Liquid.AddWater(i, j);
+										}
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-		}
-		#endregion
+			#endregion
 
-		#region prefix removal
-		if (item.prefix > 0)
-		{
-			Point p = pos.ToTileCoordinates();
-			Tile t = Framing.GetTileSafely(p);
-			if (player.IsInTileInteractionRange(p.X, p.Y, TileReachCheckSettings.Simple) &&
-				t.TileType == ModContent.TileType<Tiles.Furniture.Grindstone>())
+			#region prefix removal
+			if (item.prefix > 0)
 			{
-				player.noThrow = 2;
-				player.cursorItemIconEnabled = true;
-				player.cursorItemIconID = item.type;
-				if (Main.mouseRight && Main.mouseRightRelease)
+				Tile tilePosSafe = Framing.GetTileSafely(tilePos);
+				if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
+					tilePosSafe.TileType == ModContent.TileType<Tiles.Furniture.Grindstone>())
 				{
-					Item item2 = new Item();
-					item2.SetDefaults(item.type);
-
-					if (item2.value < item.value)
+					player.noThrow = 2;
+					player.cursorItemIconEnabled = true;
+					player.cursorItemIconID = item.type;
+					if (Main.mouseRight && Main.mouseRightRelease)
 					{
-						int money = (int)(item.value / 4 * Main.rand.NextFloat(0.5f, 1.5f)) / 5;
-						ClassExtensions.DropCoinsProperly(money, (int)player.position.X, (int)player.position.Y);
-					}
-					SoundEngine.PlaySound(SoundID.Item37);
-					item.ResetPrefix();
-					if (Main.mouseItem.type == item.type)
-					{
-						Main.mouseItem.ResetPrefix();
+						if (ContentSamples.ItemsByType[item.type].value < item.value)
+						{
+							int money = (int)(item.value / 4 * Main.rand.NextFloat(0.5f, 1.5f)) / 5;
+							ClassExtensions.DropCoinsProperly(money, (int)player.position.X, (int)player.position.Y);
+						}
+						SoundEngine.PlaySound(SoundID.Item37);
+						item.ResetPrefix();
+						if (Main.mouseItem.type == item.type)
+						{
+							Main.mouseItem.ResetPrefix();
+						}
 					}
 				}
 			}
+			#endregion
+
+			#region herb seed block swap
+			/*if (Data.Sets.Item.HerbSeeds[item.type])
+			{
+				Point mpTile = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+
+				if ((Main.tile[mpTile.X, mpTile.Y].TileType == TileID.BloomingHerbs ||
+					 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>() &&
+					  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
+					 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Bloodberry>() &&
+					  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
+					 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Sweetstem>() &&
+					  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
+					 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Holybird>() &&
+					  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36)) &&
+					(Main.tile[mpTile.X, mpTile.Y + 1].TileType == TileID.ClayPot ||
+					 Main.tile[mpTile.X, mpTile.Y + 1].TileType == TileID.PlanterBox ||
+					 Main.tile[mpTile.X, mpTile.Y + 1].TileType == ModContent.TileType<PlanterBoxes>()) && Main.mouseLeft)
+				{
+					WorldGen.KillTile(mpTile.X, mpTile.Y);
+					if (!Main.tile[mpTile.X, mpTile.Y].HasTile && Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 0, mpTile.X, mpTile.Y);
+					}
+
+					WorldGen.PlaceTile(mpTile.X, mpTile.Y, item.createTile, style: item.placeStyle);
+					if (Main.tile[mpTile.X, mpTile.Y].HasTile && Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 1, mpTile.X, mpTile.Y,
+							item.createTile, item.placeStyle);
+					}
+
+					item.stack--;
+				}
+			}*/
+			#endregion herb seed block swap
 		}
-		#endregion
-
-		#region herb seed block swap
-		/*if (Data.Sets.Item.HerbSeeds[item.type])
-        {
-            Point mpTile = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-
-            if ((Main.tile[mpTile.X, mpTile.Y].TileType == TileID.BloomingHerbs ||
-                 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Barfbush>() &&
-                  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
-                 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Bloodberry>() &&
-                  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
-                 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Sweetstem>() &&
-                  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36) ||
-                 (Main.tile[mpTile.X, mpTile.Y].TileType == ModContent.TileType<Tiles.Herbs.Holybird>() &&
-                  Main.tile[mpTile.X, mpTile.Y].TileFrameX == 36)) &&
-                (Main.tile[mpTile.X, mpTile.Y + 1].TileType == TileID.ClayPot ||
-                 Main.tile[mpTile.X, mpTile.Y + 1].TileType == TileID.PlanterBox ||
-                 Main.tile[mpTile.X, mpTile.Y + 1].TileType == ModContent.TileType<PlanterBoxes>()) && Main.mouseLeft)
-            {
-                WorldGen.KillTile(mpTile.X, mpTile.Y);
-                if (!Main.tile[mpTile.X, mpTile.Y].HasTile && Main.netMode != NetmodeID.SinglePlayer)
-                {
-                    NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 0, mpTile.X, mpTile.Y);
-                }
-
-                WorldGen.PlaceTile(mpTile.X, mpTile.Y, item.createTile, style: item.placeStyle);
-                if (Main.tile[mpTile.X, mpTile.Y].HasTile && Main.netMode != NetmodeID.SinglePlayer)
-                {
-                    NetMessage.SendData(Terraria.ID.MessageID.TileManipulation, -1, -1, null, 1, mpTile.X, mpTile.Y,
-                        item.createTile, item.placeStyle);
-                }
-
-                item.stack--;
-            }
-        }*/
-		#endregion herb seed block swap
+		#endregion Tile interactions
 	}
 	public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
 	{
@@ -2864,7 +2830,7 @@ public class AvalonGlobalItem : GlobalItem
 			{
 				if (item.pick > 0)
 				{
-					Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+					Point p = Main.MouseWorld.ToTileCoordinates();
 					if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
 					{
 						for (int x = p.X; x <= p.X + 1; x++)
@@ -2887,7 +2853,7 @@ public class AvalonGlobalItem : GlobalItem
 				if (item.axe > 0)
 				{
 					int dmgAmt = (int)(item.axe * 1.2f);
-					Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+					Point tilePosPoint = Main.MouseWorld.ToTileCoordinates();
 					if (player.IsInTileInteractionRange(tilePosPoint.X, tilePosPoint.Y, TileReachCheckSettings.Simple))
 					{
 						for (int x = tilePosPoint.X; x <= tilePosPoint.X + 1; x++)
@@ -2923,7 +2889,7 @@ public class AvalonGlobalItem : GlobalItem
 				if (item.hammer > 0)
 				{
 					int dmgAmt = (int)(item.hammer * 1.5f);
-					Point tilePosPoint = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+					Point tilePosPoint = Main.MouseWorld.ToTileCoordinates();
 					if (player.IsInTileInteractionRange(tilePosPoint.X, tilePosPoint.Y, TileReachCheckSettings.Simple))
 					{
 						for (int x = tilePosPoint.X; x <= tilePosPoint.X + 1; x++)

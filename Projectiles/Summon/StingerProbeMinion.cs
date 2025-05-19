@@ -246,8 +246,7 @@ public class StingerProbeMinion : ModProjectile
 
 		#region projectile
 
-		Vector2 dirToCursor =
-			(player.GetModPlayer<AvalonPlayer>().MousePosition - Projectile.Center).SafeNormalize(-Vector2.UnitY);
+		Vector2 dirToCursor = (player.GetModPlayer<AvalonPlayer>().MousePosition - Projectile.Center).SafeNormalize(-Vector2.UnitY);
 		Projectile.rotation = dirToCursor.ToRotation() + MathHelper.ToRadians(180f);
 
 		if (ProjTimer-- < 0)

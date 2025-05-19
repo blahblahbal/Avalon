@@ -1,5 +1,4 @@
 using Avalon.Common.Extensions;
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -48,16 +47,19 @@ public class PickaxeofDusk : ModItem
 	}
 	public override void HoldItem(Player player)
 	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+		if (Main.myPlayer == player.whoAmI)
 		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			int pfix = Item.prefix;
-			Item.ChangeItemType(ModContent.ItemType<PickaxeofDusk3x3>());
-			Item.Prefix(pfix);
-		}
-		if (player.inventory[player.selectedItem].type == Type)
-		{
-			player.pickSpeed -= 0.3f;
+			if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, player.position);
+				int pfix = Item.prefix;
+				Item.ChangeItemType(ModContent.ItemType<PickaxeofDusk3x3>());
+				Item.Prefix(pfix);
+			}
+			if (player.inventory[player.selectedItem].type == Type)
+			{
+				player.pickSpeed -= 0.3f;
+			}
 		}
 	}
 	public override void MeleeEffects(Player player, Rectangle hitbox)
@@ -97,7 +99,7 @@ public class PickaxeofDusk3x3 : ModItem
 		{
 			if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
 			{
-				Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
+				Point p = Main.MouseWorld.ToTileCoordinates();
 				for (int x = p.X - 1; x <= p.X + 1; x++)
 				{
 					for (int y = p.Y - 1; y <= p.Y + 1; y++)
@@ -111,18 +113,21 @@ public class PickaxeofDusk3x3 : ModItem
 	}
 	public override void HoldItem(Player player)
 	{
-		if (!Main.GamepadDisableCursorItemIcon && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+		if (Main.myPlayer == player.whoAmI)
 		{
-			Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-			player.cursorItemIconEnabled = true;
-			Main.ItemIconCacheUpdate(Type);
-		}
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
-		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			int pfix = Item.prefix;
-			Item.ChangeItemType(ModContent.ItemType<PickaxeofDusk>());
-			Item.Prefix(pfix);
+			if (!Main.GamepadDisableCursorItemIcon && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+			{
+				Point p = Main.MouseWorld.ToTileCoordinates();
+				player.cursorItemIconEnabled = true;
+				Main.ItemIconCacheUpdate(Type);
+			}
+			if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, player.position);
+				int pfix = Item.prefix;
+				Item.ChangeItemType(ModContent.ItemType<PickaxeofDusk>());
+				Item.Prefix(pfix);
+			}
 		}
 	}
 	public override void MeleeEffects(Player player, Rectangle hitbox)

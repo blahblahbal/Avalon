@@ -744,7 +744,7 @@ public class AvalonPlayer : ModPlayer
 			{
 				NPC laserEye = Main.npc[laser];
 
-				if (laserEye.Hitbox.Contains((int)MousePosition.X, (int)MousePosition.Y))
+				if (laserEye.Hitbox.Contains((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y))
 				{
 					WOSRenderHPText = true;
 					WOSLaserEyeIndex = laser;
@@ -756,7 +756,7 @@ public class AvalonPlayer : ModPlayer
 			{
 				NPC mouthEye = Main.npc[mouth];
 
-				if (mouthEye.Hitbox.Contains((int)MousePosition.X, (int)MousePosition.Y))
+				if (mouthEye.Hitbox.Contains((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y))
 				{
 					WOSRenderHPText = true;
 					WOSLaserEyeIndex = mouth;
@@ -841,7 +841,7 @@ public class AvalonPlayer : ModPlayer
 			{
 				NPC n = Main.npc[i];
 				if (n.dontTakeDamage) continue;
-				if (Vector2.Distance(n.Center, MousePosition) < 16 * 15)
+				if (Vector2.Distance(n.Center, Main.MouseWorld) < 16 * 15)
 				{
 					n.SimpleStrikeNPC(15 + n.defense / 2, 0);
 					n.AddBuff(BuffID.OnFire3, 60 * 3);
@@ -3097,15 +3097,18 @@ public class AvalonPlayer : ModPlayer
 	public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
 	{
 		#region hellbound halberd weird shit
-		if (drawInfo.drawPlayer.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] > 0 && Main.mouseRight && !Main.mouseLeft && Main.myPlayer == drawInfo.drawPlayer.whoAmI)
+		if (Main.myPlayer == drawInfo.drawPlayer.whoAmI)
 		{
-			if (Math.Sign(Player.Center.X - MousePosition.X) < 0)
+			if (drawInfo.drawPlayer.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] > 0 && Main.mouseRight && !Main.mouseLeft)
 			{
-				drawInfo.playerEffect = SpriteEffects.None;
-			}
-			if (Math.Sign(Player.Center.X - MousePosition.X) > 0)
-			{
-				drawInfo.playerEffect = SpriteEffects.FlipHorizontally;
+				if (Math.Sign(Player.Center.X - Main.MouseWorld.X) < 0)
+				{
+					drawInfo.playerEffect = SpriteEffects.None;
+				}
+				if (Math.Sign(Player.Center.X - Main.MouseWorld.X) > 0)
+				{
+					drawInfo.playerEffect = SpriteEffects.FlipHorizontally;
+				}
 			}
 		}
 		#endregion

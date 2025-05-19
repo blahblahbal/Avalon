@@ -1,6 +1,5 @@
 using Avalon.Common;
 using Avalon.Common.Extensions;
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -47,12 +46,15 @@ public class Breakdawn : ModItem
 	}
 	public override void HoldItem(Player player)
 	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
+		if (Main.myPlayer == player.whoAmI)
 		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			int pfix = Item.prefix;
-			Item.ChangeItemType(ModContent.ItemType<Breakdawn3x3>());
-			Item.Prefix(pfix);
+			if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory && !player.controlUseItem)
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, player.position);
+				int pfix = Item.prefix;
+				Item.ChangeItemType(ModContent.ItemType<Breakdawn3x3>());
+				Item.Prefix(pfix);
+			}
 		}
 		//if (player.whoAmI == Main.myPlayer && player.ItemAnimationJustStarted)
 		//{
@@ -201,39 +203,42 @@ public class Breakdawn3x3 : ModItem
 	}
 	public override void HoldItem(Player player)
 	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+		if (Main.myPlayer == player.whoAmI)
 		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			int pfix = Item.prefix;
-			Item.ChangeItemType(ModContent.ItemType<Breakdawn>());
-			Item.Prefix(pfix);
-		}
-		if (player.controlUseItem)
-		{
-			if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
+			if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
 			{
-				Point p = player.GetModPlayer<AvalonPlayer>().MousePosition.ToTileCoordinates();
-				for (int x = p.X - 1; x <= p.X + 1; x++)
+				SoundEngine.PlaySound(SoundID.Unlock, player.position);
+				int pfix = Item.prefix;
+				Item.ChangeItemType(ModContent.ItemType<Breakdawn>());
+				Item.Prefix(pfix);
+			}
+			if (player.controlUseItem)
+			{
+				if (player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple))
 				{
-					for (int y = p.Y - 1; y <= p.Y + 1; y++)
+					Point p = Main.MouseWorld.ToTileCoordinates();
+					for (int x = p.X - 1; x <= p.X + 1; x++)
 					{
-						if (Main.tile[x, y].HasTile && Main.tileAxe[Main.tile[x, y].TileType])
+						for (int y = p.Y - 1; y <= p.Y + 1; y++)
 						{
-							if (!TileID.Sets.BasicChest[Main.tile[x, y].TileType])
+							if (Main.tile[x, y].HasTile && Main.tileAxe[Main.tile[x, y].TileType])
 							{
-								WorldGen.KillTile(x, y);
-								if (Main.netMode != NetmodeID.SinglePlayer)
+								if (!TileID.Sets.BasicChest[Main.tile[x, y].TileType])
 								{
-									NetMessage.SendData(MessageID.TileManipulation, -1, -1, NetworkText.Empty, 0, x, y);
+									WorldGen.KillTile(x, y);
+									if (Main.netMode != NetmodeID.SinglePlayer)
+									{
+										NetMessage.SendData(MessageID.TileManipulation, -1, -1, NetworkText.Empty, 0, x, y);
+									}
 								}
 							}
-						}
-						if (Main.tile[x, y].WallType > 0)
-						{
-							WorldGen.KillWall(x, y);
-							if (Main.netMode != NetmodeID.SinglePlayer)
+							if (Main.tile[x, y].WallType > 0)
 							{
-								NetMessage.SendData(MessageID.TileManipulation, -1, -1, NetworkText.Empty, 2, x, y);
+								WorldGen.KillWall(x, y);
+								if (Main.netMode != NetmodeID.SinglePlayer)
+								{
+									NetMessage.SendData(MessageID.TileManipulation, -1, -1, NetworkText.Empty, 2, x, y);
+								}
 							}
 						}
 					}
