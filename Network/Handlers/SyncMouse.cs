@@ -12,6 +12,10 @@ public class SyncMouse
 {
 	public static void SendPacket(Vector2 mousePosition, int playerIndex, int toClient = -1, int ignoreClient = -1)
 	{
+		if (Main.netMode == NetmodeID.SinglePlayer)
+		{
+			return; // no sending packets in singleplayer :D
+		}
 		ModPacket message = MessageHandler.GetPacket(MessageID.SyncMouse);
 		message.WriteVector2(mousePosition);
 		message.Write(playerIndex);
