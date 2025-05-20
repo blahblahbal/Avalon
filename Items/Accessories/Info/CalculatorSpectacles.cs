@@ -231,16 +231,17 @@ internal class CalcSpec : UIState
 				Point tilepos = Main.MouseWorld.ToTileCoordinates();
 				if (!WorldGen.InWorld(tilepos.X, tilepos.Y)) return;
 				Color c = Lighting.GetColor(tilepos);
-				if ((TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] || Main.tile[tilepos.X, tilepos.Y].TileType == TileID.LunarOre)/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&
-					(Main.LocalPlayer.findTreasure || (c.R > 5 && c.G > 5 && c.B > 5)))
+				Tile tile = Main.tile[tilepos];
+				bool visible = Main.LocalPlayer.findTreasure || (c.R + c.G + c.B > 15);
+				if (visible && (TileID.Sets.Ore[tile.TileType] || tile.TileType == TileID.LunarOre)/* && tile.TileType != ModContent.TileType<SulphurOre>()*/)
 				{
-					ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
+					ushort type = tile.TileType;
 					bars = CalculatorSpectacles.CountOres(tilepos, type, 700);
 					remainder = 0;
 					remainderDenominator = 3;
 
 					// grab the modded tile at the cursor's position
-					ModTile t = TileLoader.GetTile(Main.tile[tilepos.X, tilepos.Y].TileType);
+					ModTile t = TileLoader.GetTile(tile.TileType);
 					if (t != null)
 					{
 						// grab the drops of the tile
@@ -257,7 +258,7 @@ internal class CalcSpec : UIState
 						remainderDenominator = amtOfOre;
 					}
 					// if the tile is vanilla
-					else if (Main.tile[tilepos.X, tilepos.Y].TileType < TileID.Count)
+					else if (tile.TileType < TileID.Count)
 					{
 						if (Data.Sets.TileSets.ThreeOrePerBar.Contains(type))
 						{
