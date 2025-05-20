@@ -48,11 +48,6 @@ public class YellowDungeonChest : ChestTemplate
 {
 	protected override bool CanBeLocked => true;
 	protected override int ChestKeyItemId => ItemID.GoldenKey;
-	public override void SetStaticDefaults()
-	{
-		base.SetStaticDefaults();
-		AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry1"), MapChestName);
-	}
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.YellowDungeon.YellowDungeonChest>();
 }
 

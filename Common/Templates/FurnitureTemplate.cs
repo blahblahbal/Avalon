@@ -597,7 +597,7 @@ namespace Avalon.Common.Templates
 
 		public override bool IsLockedChest(int i, int j)
 		{
-			return (Main.tile[i, j].TileFrameX / 36 == 1 || !CanBeUnlockedNormally);
+			return ((CanBeLocked && Main.tile[i, j].TileFrameX / 36 == 1) || !CanBeUnlockedNormally);
 		}
 
 		public override bool UnlockChest(int i, int j, ref short frameXAdjustment, ref int dustType, ref bool manual)
@@ -606,14 +606,14 @@ namespace Avalon.Common.Templates
 			{
 				frameXAdjustment = 0;
 			}
-			return true;
+			return IsLockedChest(i, j);
 		}
 
 		public override bool LockChest(int i, int j, ref short frameXAdjustment, ref bool manual)
 		{
 			int style = TileObjectData.GetTileStyle(Main.tile[i, j]);
 			// We need to return true only if the tile style is the unlocked variant of a chest that supports locking. 
-			if (style == 0 && CanBeUnlockedNormally)
+			if (style == 0 && CanBeLocked && CanBeUnlockedNormally)
 			{
 				// We can check other conditions as well, such as how biome chests can't be locked until Plantera is defeated
 				return true;

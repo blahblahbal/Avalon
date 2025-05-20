@@ -13,9 +13,13 @@ namespace Avalon.Tiles.Furniture
 		{
 			return NPC.downedPlantBoss;
 		}
-		public override ushort GetMapOption(int i, int j)
+		public override bool LockChest(int i, int j, ref short frameXAdjustment, ref bool manual)
 		{
-			return (ushort)(Main.tile[i, j].TileFrameX / 36);
+			if (!NPC.downedPlantBoss)
+			{
+				return false;
+			}
+			return base.LockChest(i, j, ref frameXAdjustment, ref manual);
 		}
 	}
 }
