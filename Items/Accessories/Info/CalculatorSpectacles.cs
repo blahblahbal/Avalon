@@ -232,7 +232,7 @@ internal class CalcSpec : UIState
 				if (!WorldGen.InWorld(tilepos.X, tilepos.Y)) return;
 				Color c = Lighting.GetColor(tilepos);
 				if ((TileID.Sets.Ore[Main.tile[tilepos.X, tilepos.Y].TileType] || Main.tile[tilepos.X, tilepos.Y].TileType == TileID.LunarOre)/* && Main.tile[tilepos.X, tilepos.Y].TileType != ModContent.TileType<SulphurOre>()*/ &&
-					c.R > 5 && c.G > 5 && c.B > 5)
+					(Main.LocalPlayer.findTreasure || (c.R > 5 && c.G > 5 && c.B > 5)))
 				{
 					ushort type = Main.tile[tilepos.X, tilepos.Y].TileType;
 					bars = CalculatorSpectacles.CountOres(tilepos, type, 700);
