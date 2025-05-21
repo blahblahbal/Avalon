@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -56,207 +57,149 @@ namespace Avalon.Tiles.Furniture
 			}
 		}
 
-		public static bool Unlock(int X, int Y)
-		{
-			if (Main.tile[X, Y] == null || Main.tile[X + 1, Y] == null || Main.tile[X, Y + 1] == null || Main.tile[X + 1, Y + 1] == null)
-			{
-				return false;
-			}
-			int dustType = DustID.Stone;
-			Tile tileSafely = Framing.GetTileSafely(X, Y);
-			if (tileSafely.TileType != ModContent.TileType<LockedChests>()) return false;
-			int type2 = tileSafely.TileType;
-			int num2 = tileSafely.TileFrameX / 36;
-
-			SoundEngine.PlaySound(SoundID.Unlock, new(X * 16, Y * 16));
-
-			if (tileSafely.TileFrameX == 0)
-			{
-				for (int i = X; i <= X + 1; i++)
-				{
-					for (int j = Y; j <= Y + 1; j++)
-					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						Main.tile[i, j].TileType = TileID.Containers;
-						tileSafely2.TileFrameX += 11 * 36;
-						for (int k = 0; k < 4; k++)
-						{
-							Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, dustType);
-						}
-					}
-				}
-			}
-			else if (tileSafely.TileFrameX == 36)
-			{
-				for (int i = X; i <= X + 1; i++)
-				{
-					for (int j = Y; j <= Y + 1; j++)
-					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						Main.tile[i, j].TileType = TileID.Containers;
-						Main.tile[i, j].TileFrameX -= 36;
-						for (int k = 0; k < 4; k++)
-						{
-							Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, dustType);
-						}
-					}
-				}
-			}
-			else if (tileSafely.TileFrameX == 72)
-			{
-				for (int i = X; i <= X + 1; i++)
-				{
-					for (int j = Y; j <= Y + 1; j++)
-					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = TileID.Containers;
-						tileSafely2.TileFrameX += 10 * 36;
-						for (int k = 0; k < 4; k++)
-						{
-							Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, dustType);
-						}
-					}
-				}
-			}
-			else if (tileSafely.TileFrameX >= 108 && tileSafely.TileFrameX <= 216)
-			{
-				for (int i = X; i <= X + 1; i++)
-				{
-					for (int j = Y; j <= Y + 1; j++)
-					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = TileID.Containers;
-						tileSafely2.TileFrameX += 4 * 36;
-						for (int k = 0; k < 4; k++)
-						{
-							Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, dustType);
-						}
-					}
-				}
-			}
-			else if (tileSafely.TileFrameX >= 252 && tileSafely.TileFrameX <= 360)
-			{
-				for (int i = X; i <= X + 1; i++)
-				{
-					for (int j = Y; j <= Y + 1; j++)
-					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = TileID.Containers;
-						tileSafely2.TileFrameX += 6 * 36;
-						for (int k = 0; k < 4; k++)
-						{
-							Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, dustType);
-						}
-					}
-				}
-			}
-			else if (tileSafely.TileFrameX == 936)
-			{
-				for (int i = X; i <= X + 1; i++)
-				{
-					for (int j = Y; j <= Y + 1; j++)
-					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = TileID.Containers;
-						tileSafely2.TileFrameX += 22 * 36;
-						for (int k = 0; k < 4; k++)
-						{
-							Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, dustType);
-						}
-					}
-				}
-			}
-
-			return true;
-		}
-
 		public static bool Lock(int X, int Y)
 		{
-			if (Main.tile[X, Y] == null || Main.tile[X + 1, Y] == null || Main.tile[X, Y + 1] == null || Main.tile[X + 1, Y + 1] == null)
-			{
-				return false;
-			}
-			short num = 0;
 			Tile tileSafely = Framing.GetTileSafely(X, Y);
-			if (tileSafely.TileType != TileID.Containers) return false;
-			int type = tileSafely.TileType;
-			int num2 = tileSafely.TileFrameX / 36;
+			int style = TileObjectData.GetTileStyle(tileSafely);
 
+			if (style is 0 or (>= 7 and <= 17) or 48)
+			{
+				for (int i = X; i <= X + 1; i++)
+				{
+					for (int j = Y; j <= Y + 1; j++)
+					{
+						Tile tileSafely2 = Framing.GetTileSafely(i, j);
+						tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
+						tileSafely2.TileFrameX -= style switch
+						{
+							0 => -36,
+							>= 7 and <= 10 => 4 * 36,
+							11 => 11 * 36,
+							12 => 10 * 36,
+							>= 13 and <= 17 => 6 * 36,
+							48 => 22 * 36,
+							_ => throw new System.NotImplementedException(),
+						};
+					}
+				}
 
-			SoundEngine.PlaySound(SoundID.Unlock, new(X * 16, Y * 16));
-			if (tileSafely.TileFrameX == 0)
+				SoundEngine.PlaySound(SoundID.Unlock, new(X * 16, Y * 16));
+				return true;
+			}
+			return false;
+		}
+		public static bool Unlock(int X, int Y)
+		{
+			Tile tileSafely = Framing.GetTileSafely(X, Y);
+			int style = TileObjectData.GetTileStyle(tileSafely);
+
+			if (style is (>= 0 and <= 11) or 26)
 			{
+				int dustType = DustID.Stone;
 				for (int i = X; i <= X + 1; i++)
 				{
 					for (int j = Y; j <= Y + 1; j++)
 					{
 						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-						tileSafely2.TileFrameX += 36;
+						tileSafely2.TileType = TileID.Containers;
+						tileSafely2.TileFrameX += style switch
+						{
+							0 => 11 * 36,
+							1 => -36,
+							2 => 10 * 36,
+							>= 3 and <= 6 => 4 * 36,
+							>= 7 and <= 11 => 6 * 36,
+							26 => 22 * 36,
+							_ => throw new System.NotImplementedException(),
+						};
+
+						for (int k = 0; k < 4; k++)
+						{
+							Terraria.Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, dustType);
+						}
 					}
 				}
+
+				SoundEngine.PlaySound(SoundID.Unlock, new(X * 16, Y * 16));
+				return true;
 			}
-			else if (tileSafely.TileFrameX == 396)
+			return false;
+		}
+	}
+	public class VanillaChestLocking : ModHook
+	{
+		protected override void Apply()
+		{
+			On_Chest.Lock += On_Chest_Lock;
+			On_Chest.Unlock += On_Chest_Unlock;
+
+			On_Player.PlaceThing_LockChest += On_Player_PlaceThing_LockChest;
+		}
+
+		private bool On_Chest_Lock(On_Chest.orig_Lock orig, int X, int Y)
+		{
+			if (!(Main.tile[X, Y] == null || Main.tile[X + 1, Y] == null || Main.tile[X, Y + 1] == null || Main.tile[X + 1, Y + 1] == null))
 			{
-				for (int i = X; i <= X + 1; i++)
+				if (Main.tile[X, Y].TileType == TileID.Containers)
 				{
-					for (int j = Y; j <= Y + 1; j++)
+					if (LockedChests.Lock(X, Y))
 					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-						tileSafely2.TileFrameX -= 11 * 36;
+						return true;
 					}
 				}
 			}
-			else if (tileSafely.TileFrameX == 432)
+			return orig(X, Y);
+		}
+
+		private bool On_Chest_Unlock(On_Chest.orig_Unlock orig, int X, int Y)
+		{
+			if (!(Main.tile[X, Y] == null || Main.tile[X + 1, Y] == null || Main.tile[X, Y + 1] == null || Main.tile[X + 1, Y + 1] == null))
 			{
-				for (int i = X; i <= X + 1; i++)
+				if (Main.tile[X, Y].TileType == (ushort)ModContent.TileType<LockedChests>())
 				{
-					for (int j = Y; j <= Y + 1; j++)
+					if (LockedChests.Unlock(X, Y))
 					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-						tileSafely2.TileFrameX -= 10 * 36;
+						return true;
 					}
 				}
 			}
-			else if (tileSafely.TileFrameX >= 252 && tileSafely.TileFrameX <= 360)
+			return orig(X, Y);
+		}
+
+		private void On_Player_PlaceThing_LockChest(On_Player.orig_PlaceThing_LockChest orig, Player self)
+		{
+			Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
+			Item item = self.inventory[self.selectedItem];
+			if (!(!tile.HasTile || item.type != ItemID.ChestLock || tile.TileType != TileID.Containers || !(self.position.X / 16f - (float)Player.tileRangeX - (float)item.tileBoost - (float)self.blockRange <= (float)Player.tileTargetX) || !((self.position.X + (float)self.width) / 16f + (float)Player.tileRangeX + (float)item.tileBoost - 1f + (float)self.blockRange >= (float)Player.tileTargetX) || !(self.position.Y / 16f - (float)Player.tileRangeY - (float)item.tileBoost - (float)self.blockRange <= (float)Player.tileTargetY) || !((self.position.Y + (float)self.height) / 16f + (float)Player.tileRangeY + (float)item.tileBoost - 2f + (float)self.blockRange >= (float)Player.tileTargetY) || !self.ItemTimeIsZero || self.itemAnimation <= 0 || !self.controlUseItem))
 			{
-				for (int i = X; i <= X + 1; i++)
+				Tile tileSafely = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
+				int style = tileSafely.TileFrameX / 36;
+
+				if (style is 0 or (>= 7 and <= 17) or 48)
 				{
-					for (int j = Y; j <= Y + 1; j++)
+					if (self.inventory[self.selectedItem].stack <= 0)
 					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-						tileSafely2.TileFrameX -= 4 * 36;
+						orig(self); // Probably redundant, just don't wanna return without calling orig
+						return;
+					}
+					int xpos = Player.tileTargetX - (tile.TileFrameX / 18 % 2);
+					int ypos = Player.tileTargetY - (tile.TileFrameY / 18);
+					if (Chest.Lock(xpos, ypos))
+					{
+						self.inventory[self.selectedItem].stack--;
+						if (self.inventory[self.selectedItem].stack <= 0)
+						{
+							self.inventory[self.selectedItem] = new Item();
+						}
+						if (Main.netMode == NetmodeID.MultiplayerClient)
+						{
+							NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, self.whoAmI, 3f, xpos, ypos);
+						}
 					}
 				}
 			}
-			else if (tileSafely.TileFrameX >= 468 && tileSafely.TileFrameX <= 576)
-			{
-				for (int i = X; i <= X + 1; i++)
-				{
-					for (int j = Y; j <= Y + 1; j++)
-					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-						tileSafely2.TileFrameX -= 6 * 36;
-					}
-				}
-			}
-			else if (tileSafely.TileFrameX == 1728)
-			{
-				for (int i = X; i <= X + 1; i++)
-				{
-					for (int j = Y; j <= Y + 1; j++)
-					{
-						Tile tileSafely2 = Framing.GetTileSafely(i, j);
-						tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-						tileSafely2.TileFrameX -= 22 * 36;
-					}
-				}
-			}
-			return true;
+			orig(self);
 		}
 	}
 }
+

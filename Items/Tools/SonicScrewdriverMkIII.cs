@@ -1,10 +1,8 @@
-using Avalon.Tiles.Furniture;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
 
 namespace Avalon.Items.Tools;
 
@@ -27,86 +25,53 @@ public class SonicScrewdriverMkIII : ModItem
 	{
 		if (Main.myPlayer == player.whoAmI)
 		{
-			if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl))
+			Point c = Main.MouseWorld.ToTileCoordinates();
+
+			Tile tile = Main.tile[c];
+			int xpos = Player.tileTargetX - (tile.TileFrameX / 18 % 2);
+			int ypos = Player.tileTargetY - (tile.TileFrameY / 18);
+
+			bool isLocked = Chest.IsLocked(xpos, ypos);
+
+			if (isLocked)
 			{
-				Point c = Main.MouseWorld.ToTileCoordinates();
-
-				Tile tile = Main.tile[c];
-				int xpos = Player.tileTargetX - (tile.TileFrameX / 18 % 2);
-				int ypos = Player.tileTargetY - (tile.TileFrameY / 18);
-
-				bool isLocked = Chest.IsLocked(xpos, ypos);
-
-				if (isLocked)
+				// Allows us to open chests that otherwise would require plantera to be defeated, unfortunately not possible to allow every single modded chest to be opened (would not be able to ensure their TileLoader.UnlockChest code functions as intended)
+				bool returnflag = false;
+				if (!NPC.downedPlantBoss)
 				{
-					if (tile.TileType == ModContent.TileType<LockedChests>()) // Temporary until the unlock method for this tile has been changed to use the tmod method
+					returnflag = true;
+					NPC.downedPlantBoss = true;
+				}
+				if (Chest.Unlock(xpos, ypos))
+				{
+					if (Main.netMode == NetmodeID.MultiplayerClient)
 					{
-						if (LockedChests.Unlock(xpos, ypos))
-						{
-							if (Main.netMode != NetmodeID.SinglePlayer)
-							{
-								Network.SyncLockUnlock.SendPacket(Network.SyncLockUnlock.Unlock, xpos, ypos);
-							}
-						}
-					}
-					else
-					{
-						// Allows us to open chests that otherwise would require plantera to be defeated, unfortunately not possible to allow every single modded chest to be opened (would not be able to ensure their TileLoader.UnlockChest code functions as intended)
-						// Does not work in MP
-						bool returnflag = false;
-						if (!NPC.downedPlantBoss)
-						{
-							returnflag = true;
-							NPC.downedPlantBoss = true;
-						}
-						if (Chest.Unlock(xpos, ypos))
-						{
-							if (Main.netMode == NetmodeID.MultiplayerClient)
-							{
-								NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1f, xpos, ypos);
-							}
-						}
-						if (returnflag)
-						{
-							NPC.downedPlantBoss = false;
-						}
+						Network.SyncLockUnlock.SendPacket(Network.SyncLockUnlock.Unlock, xpos, ypos, -1, player.whoAmI); // Custom net message which temporarily sets NPC.downedPlantBoss on server and other clients
 					}
 				}
-				else if (Chest.FindChest(xpos, ypos) >= 0) // Not strictly needed, only prevents the game from playing the lock clicking sound when you click off of a chest tile
+				if (returnflag)
 				{
-					int style = TileObjectData.GetTileStyle(tile);
-					if ((style == 0 || style >= 7 && style <= 16 || style == 48) && tile.TileType == TileID.Containers) // Temporary until the lock method for this tile has been changed to use the tmod method (hopefully possible)
+					NPC.downedPlantBoss = false;
+				}
+			}
+			else if (Chest.FindChest(xpos, ypos) >= 0) // Not strictly needed, only prevents the game from playing the lock clicking sound when you click off of a chest tile
+			{
+				bool returnflag = false;
+				if (!NPC.downedPlantBoss)
+				{
+					returnflag = true;
+					NPC.downedPlantBoss = true;
+				}
+				if (Chest.Lock(xpos, ypos))
+				{
+					if (Main.netMode == NetmodeID.MultiplayerClient)
 					{
-						if (LockedChests.Lock(xpos, ypos))
-						{
-							if (Main.netMode != NetmodeID.SinglePlayer)
-							{
-								Network.SyncLockUnlock.SendPacket(0, xpos, ypos);
-								NetMessage.SendTileSquare(-1, xpos, ypos);
-							}
-						}
+						Network.SyncLockUnlock.SendPacket(Network.SyncLockUnlock.Lock, xpos, ypos, -1, player.whoAmI);
 					}
-					else
-					{
-						// Does not work in MP
-						bool returnflag = false;
-						if (!NPC.downedPlantBoss)
-						{
-							returnflag = true;
-							NPC.downedPlantBoss = true;
-						}
-						if (Chest.Lock(xpos, ypos))
-						{
-							if (Main.netMode == NetmodeID.MultiplayerClient)
-							{
-								NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 3, xpos, ypos);
-							}
-						}
-						if (returnflag)
-						{
-							NPC.downedPlantBoss = false;
-						}
-					}
+				}
+				if (returnflag)
+				{
+					NPC.downedPlantBoss = false;
 				}
 			}
 		}

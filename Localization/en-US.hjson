@@ -4046,8 +4046,7 @@ Mods: {
 					'''
 					Reveals treasures, ores, and enemies
 					Tells the time
-					Can lock and unlock chests
-					Hold LEFT CTRL and click on chests
+					<left> on a chest to lock or unlock
 					'''
 			}
 

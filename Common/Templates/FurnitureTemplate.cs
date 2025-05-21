@@ -697,21 +697,8 @@ namespace Avalon.Common.Templates
 
 			bool isLocked = Chest.IsLocked(left, top);
 
-			if (!isLocked && Main.netMode == NetmodeID.MultiplayerClient)
-			{
-				if (left == player.chestX && top == player.chestY && player.chest != -1)
-				{
-					player.chest = -1;
-					Recipe.FindRecipes();
-					SoundEngine.PlaySound(SoundID.MenuClose);
-				}
-				else
-				{
-					NetMessage.SendData(MessageID.RequestChestOpen, -1, -1, null, left, top);
-					Main.stackSplit = 600;
-				}
-			}
-			else if (isLocked && CanBeUnlockedNormally)
+
+			if (isLocked)
 			{
 				if (player.HasItemInInventoryOrOpenVoidBag(ChestKeyItemId) && Chest.Unlock(left, top) && player.ConsumeItem(ChestKeyItemId))
 				{
@@ -721,34 +708,41 @@ namespace Avalon.Common.Templates
 					}
 				}
 			}
-			else if (isLocked && !CanBeUnlockedNormally)
+			else
 			{
-				if (player.HasItemInInventoryOrOpenVoidBag(ChestKeyItemId) && Tiles.Furniture.LockedChests.Unlock(left, top) && player.ConsumeItem(ChestKeyItemId))
+				if (Main.netMode == NetmodeID.MultiplayerClient)
 				{
-					if (Main.netMode != NetmodeID.SinglePlayer)
-					{
-						Network.SyncLockUnlock.SendPacket(Network.SyncLockUnlock.Unlock, left, top);
-					}
-				}
-			}
-			else if (!isLocked)
-			{
-				int chest = Chest.FindChest(left, top);
-				if (chest != -1)
-				{
-					Main.stackSplit = 600;
-					if (chest == player.chest)
+					if (left == player.chestX && top == player.chestY && player.chest != -1)
 					{
 						player.chest = -1;
+						Recipe.FindRecipes();
 						SoundEngine.PlaySound(SoundID.MenuClose);
 					}
 					else
 					{
-						SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
-						player.OpenChest(left, top, chest);
+						NetMessage.SendData(MessageID.RequestChestOpen, -1, -1, null, left, top);
+						Main.stackSplit = 600;
 					}
+				}
+				else
+				{
+					int chest = Chest.FindChest(left, top);
+					if (chest != -1)
+					{
+						Main.stackSplit = 600;
+						if (chest == player.chest)
+						{
+							player.chest = -1;
+							SoundEngine.PlaySound(SoundID.MenuClose);
+						}
+						else
+						{
+							SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
+							player.OpenChest(left, top, chest);
+						}
 
-					Recipe.FindRecipes();
+						Recipe.FindRecipes();
+					}
 				}
 			}
 

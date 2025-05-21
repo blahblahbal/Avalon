@@ -5,6 +5,10 @@ using Terraria.ModLoader;
 
 namespace Avalon.Network;
 
+/// <summary>
+/// This class handes locking/unlocking for the sonic screwdriver, which requires that the server temporarily sets <see cref="NPC.downedPlantBoss"/> to true.<para></para>
+/// Copies the functionality of the vanilla <see cref="Terraria.ID.MessageID.LockAndUnlock"/> net message.
+/// </summary>
 public class SyncLockUnlock
 {
 	public const byte Lock = 0;
@@ -22,18 +26,36 @@ public class SyncLockUnlock
 		byte lockAction = reader.ReadByte();
 		int x = reader.ReadInt16();
 		int y = reader.ReadInt16();
+
+		bool returnflag = false;
+		if (!NPC.downedPlantBoss)
+		{
+			returnflag = true;
+			NPC.downedPlantBoss = true;
+		}
+
 		if (lockAction == Lock)
 		{
-			Tiles.Furniture.LockedChests.Lock(x, y);
+			Chest.Lock(x, y);
+			if (Main.netMode == NetmodeID.Server)
+			{
+				SendPacket(Lock, x, y, -1, fromWho);
+				NetMessage.SendTileSquare(-1, x, y, 2);
+			}
 		}
-		else if (lockAction == Unlock)
+		if (lockAction == Unlock)
 		{
-			Tiles.Furniture.LockedChests.Unlock(x, y);
+			Chest.Unlock(x, y);
+			if (Main.netMode == NetmodeID.Server)
+			{
+				SendPacket(Unlock, x, y, -1, fromWho);
+				NetMessage.SendTileSquare(-1, x, y, 2);
+			}
 		}
-		if (Main.netMode == NetmodeID.Server)
+
+		if (returnflag)
 		{
-			SendPacket(lockAction, x, y, -1, fromWho);
-			NetMessage.SendTileSquare(-1, x, y, 2);
+			NPC.downedPlantBoss = false;
 		}
 	}
 }
