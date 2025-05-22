@@ -170,7 +170,7 @@ namespace Avalon.Tiles.Furniture
 		{
 			Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
 			Item item = self.inventory[self.selectedItem];
-			if (!(!tile.HasTile || item.type != ItemID.ChestLock || tile.TileType != TileID.Containers || !(self.position.X / 16f - Player.tileRangeX - item.tileBoost - self.blockRange <= Player.tileTargetX) || !((self.position.X + self.width) / 16f + Player.tileRangeX + item.tileBoost - 1f + self.blockRange >= Player.tileTargetX) || !(self.position.Y / 16f - Player.tileRangeY - item.tileBoost - self.blockRange <= Player.tileTargetY) || !((self.position.Y + self.height) / 16f + Player.tileRangeY + item.tileBoost - 2f + self.blockRange >= Player.tileTargetY) || !self.ItemTimeIsZero || self.itemAnimation <= 0 || !self.controlUseItem))
+			if (!(!tile.HasTile || item.type != ItemID.ChestLock || tile.TileType != TileID.Containers || !self.IsTargetTileInItemRange_AndPlayerBlockRange(item) || !self.ItemTimeIsZero || self.itemAnimation <= 0 || !self.controlUseItem))
 			{
 				Tile tileSafely = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
 				int style = tileSafely.TileFrameX / 36;

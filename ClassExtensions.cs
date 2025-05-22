@@ -520,6 +520,17 @@ public static class ClassExtensions
 	{
 		return item.pick > 0 || item.axe > 0 || item.hammer > 0;
 	}
+	public static bool IsTargetTileInItemRange_AndPlayerBlockRange(this Player player, Item item)
+	{
+		if (player.position.X / 16f - Player.tileRangeX - item.tileBoost - player.blockRange <= Player.tileTargetX &&
+		(player.position.X + player.width) / 16f + Player.tileRangeX + item.tileBoost - 1f + player.blockRange >= Player.tileTargetX &&
+		player.position.Y / 16f - Player.tileRangeY - item.tileBoost - player.blockRange <= Player.tileTargetY &&
+		(player.position.Y + player.height) / 16f + Player.tileRangeY + item.tileBoost - 2f + player.blockRange >= Player.tileTargetY)
+		{
+			return true;
+		}
+		return false;
+	}
 
 	public static void Active(this Tile t, bool a) => t.HasTile = a;
 
