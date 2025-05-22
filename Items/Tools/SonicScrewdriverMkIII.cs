@@ -25,6 +25,10 @@ public class SonicScrewdriverMkIII : ModItem
 	{
 		if (Main.myPlayer == player.whoAmI)
 		{
+			if (!(player.position.X / 16f - Player.tileRangeX - Item.tileBoost - player.blockRange <= Player.tileTargetX) || !((player.position.X + player.width) / 16f + Player.tileRangeX + Item.tileBoost - 1f + player.blockRange >= Player.tileTargetX) || !(player.position.Y / 16f - Player.tileRangeY - Item.tileBoost - player.blockRange <= Player.tileTargetY) || !((player.position.Y + player.height) / 16f + Player.tileRangeY + Item.tileBoost - 2f + player.blockRange >= Player.tileTargetY) || !player.ItemTimeIsZero || player.itemAnimation <= 0 || !player.controlUseItem)
+			{
+				return true;
+			}
 			Point c = Main.MouseWorld.ToTileCoordinates();
 
 			Tile tile = Main.tile[c];
