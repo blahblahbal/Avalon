@@ -402,7 +402,7 @@ internal class CalcSpec : UIState
 		Color color = new Color(mouseTextColorRemapped, mouseTextColorRemapped, mouseTextColorRemappedBlue, Main.mouseTextColor / 255f);
 
 		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+		spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Main.UIScaleMatrix);
 		if (bars > 0)
 		{
 			//DrawOutlinedString(spriteBatch, tempFont, $"{bars}", pos3, Color.Yellow, Color.Black, tempStrength, scale: 1f * tempModScale, outlineSmoothness: tempSmooth);
@@ -432,8 +432,6 @@ internal class CalcSpec : UIState
 			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{remainder}", pos3 + new Vector2(xmod, 0), color, 0f, default, new Vector2(0.6f), spread: 1.4f);
 			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, tempFont, $"{remainderDenominator}", pos3 + new Vector2(5, 10), color, 0f, default, new Vector2(0.6f), spread: 1.4f);
 		}
-		spriteBatch.End();
-		spriteBatch.Begin();
 
 		// draw the sprite
 		DrawOutlinedTexture(spriteBatch, TextureAssets.Item[barType].Value, posModified + new Vector2(FontAssets.MouseText.Value.MeasureString(text).X + 10, 0), Color.White);
@@ -526,10 +524,6 @@ internal class CalcSpec : UIState
 	{
 		if (tex == null) return;
 
-		// end the sprite batch and begin again to make it draw in the right position
-		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
-
 		// code yoinked from vanilla; this draws the outer black outline
 		int num = 2;
 		int num2 = num * 2;
@@ -546,7 +540,7 @@ internal class CalcSpec : UIState
 
 		// end the spritebatch and begin again, using the shader this time (so it draws the sprite full white)
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.UIScaleMatrix);
+		sb.Begin(SpriteSortMode.Deferred, null, null, null, null, ExxoAvalonOrigins.CalculatorSpectaclesEffect, Main.UIScaleMatrix);
 
 		// code yoinked from vanilla; this draws the inner white outline 
 		num2 = num;
@@ -563,7 +557,7 @@ internal class CalcSpec : UIState
 
 		// end the sprite batch and begin again, so it draws normally without the shader now
 		sb.End();
-		sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, Main.Rasterizer, null, Main.UIScaleMatrix);
+		sb.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Main.UIScaleMatrix);
 
 		// draw the actual texture with normal colors
 		sb.Draw(tex, pos, color);
