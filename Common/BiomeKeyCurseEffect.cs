@@ -12,7 +12,7 @@ namespace Avalon.Common
 	{
 		public override bool AppliesToEntity(Item entity, bool lateInstantiation)
 		{
-			return entity.netID is ItemID.CorruptionKey or ItemID.CrimsonKey or ItemID.DungeonDesertKey or ItemID.FrozenKey or ItemID.JungleKey or ItemID.HallowedKey || entity.type == ModContent.ItemType<Items.Other.ContagionKey>();
+			return entity.netID is ItemID.CorruptionKey or ItemID.CrimsonKey or ItemID.DungeonDesertKey or ItemID.FrozenKey or ItemID.JungleKey or ItemID.HallowedKey || entity.type == ModContent.ItemType<Items.Other.ContagionKey>() || entity.type == ModContent.ItemType<Items.Other.UnderworldKey>();
 		}
 		public override bool PreDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 		{
