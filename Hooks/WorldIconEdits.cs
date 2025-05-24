@@ -66,25 +66,21 @@ namespace Avalon.Hooks
 		private static Asset<Texture2D> GetAvalonSeedIcon(AWorldListItem self, string seed)
 		{
 			WorldFileData data = self.GetWorldListItemData();
-			IconTextures.TryGetValue((data.IsHardMode ? "Hallow" : "") + (data.HasCorruption ? "Corruption" : "Crimson") + seed, out Asset<Texture2D> icon);
-			return icon;
+			return IconTextures[(data.IsHardMode ? "Hallow" : "") + (data.HasCorruption ? "Corruption" : "Crimson") + seed];
 		}
 		private static Asset<Texture2D> GetAvalonOverlaySeedvariants(WorldFileData _data, string overlayName)
 		{
-			OverlayTextures.TryGetValue(overlayName +
+			return OverlayTextures[overlayName +
 				(_data.ForTheWorthy ? "FTW" : "") +
 				(_data.NotTheBees ? "NotTheBees" : "") +
 				(_data.Anniversary ? "Anniversary" : "") +
 				(_data.DontStarve ? "DST" : "") +
 				(_data.RemixWorld ? "Remix" : "") +
-				(_data.NoTrapsWorld ? "Traps" : ""),
-				out Asset<Texture2D> overlay);
-			return overlay;
+				(_data.NoTrapsWorld ? "Traps" : "")];
 		}
 		private static Asset<Texture2D> GetJungleOverlay(byte jungleVariant, bool isCompletion)
 		{
-			OverlayTextures.TryGetValue((jungleVariant == (byte)WorldJungle.Tropics ? "Savanna" : "Jungle") + (isCompletion ? "Completion" : ""), out Asset<Texture2D> overlay);
-			return overlay;
+			return OverlayTextures[(jungleVariant == (byte)WorldJungle.Tropics ? "Savanna" : "Jungle") + (isCompletion ? "Completion" : "")];
 		}
 
 		protected override void Apply()
@@ -136,8 +132,7 @@ namespace Avalon.Hooks
 				}
 				else if (_data.DrunkWorld)
 				{
-					OverlayTextures.TryGetValue("Contagion", out Asset<Texture2D> overlay);
-					UIImage element = new(overlay)
+					UIImage element = new(OverlayTextures["Contagion"])
 					{
 						Top = new StyleDimension(0f, 0f),
 						Left = new StyleDimension(0f, 0f),
@@ -151,8 +146,7 @@ namespace Avalon.Hooks
 					{
 						if (_avalonData.GetBool("Avalon:RetroSecretSeed"))
 						{
-							OverlayTextures.TryGetValue("ContagionRetro", out Asset<Texture2D> overlay);
-							UIImage element = new(overlay)
+							UIImage element = new(OverlayTextures["ContagionRetro"])
 							{
 								Top = new StyleDimension(0f, 0f),
 								Left = new StyleDimension(0f, 0f),
@@ -162,8 +156,7 @@ namespace Avalon.Hooks
 						}
 						else if (_avalonData.GetBool("Avalon:CavesSecretSeed"))
 						{
-							OverlayTextures.TryGetValue("ContagionCaves", out Asset<Texture2D> overlay);
-							UIImage element = new(overlay)
+							UIImage element = new(OverlayTextures["ContagionCaves"])
 							{
 								Top = new StyleDimension(0f, 0f),
 								Left = new StyleDimension(0f, 0f),

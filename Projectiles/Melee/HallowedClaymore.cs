@@ -1,24 +1,18 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Avalon.Items.Weapons.Melee.Hardmode;
-using System.Runtime.CompilerServices;
-using Terraria.GameContent.Drawing;
-using Terraria.GameContent;
 namespace Avalon.Projectiles.Melee;
 
 public class HallowedClaymore : ModProjectile
 {
-	private static Asset<Texture2D> texture;
 	public override void SetStaticDefaults()
 	{
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
 		ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
-		texture = TextureAssets.Projectile[Type];
 	}
 	public Player player => Main.player[Projectile.owner];
 	public int SwingSpeed = 40;
@@ -193,11 +187,11 @@ public class HallowedClaymore : ModProjectile
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		Rectangle frame = texture.Frame();
+		Rectangle frame = TextureAssets.Projectile[Type].Frame();
 		Vector2 drawPos = Projectile.Center - Main.screenPosition;
-		Vector2 offset = new Vector2((float)(texture.Value.Width * 1.2f * 0.25f), -(float)(texture.Value.Height * 1.2f * 0.25f));
+		Vector2 offset = new Vector2((float)(TextureAssets.Projectile[Type].Value.Width * 1.2f * 0.25f), -(float)(TextureAssets.Projectile[Type].Value.Height * 1.2f * 0.25f));
 
-		Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2f + offset, Projectile.scale, SpriteEffects.None, 0);
 
 		return false;
 	}

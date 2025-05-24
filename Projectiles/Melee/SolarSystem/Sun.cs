@@ -16,7 +16,6 @@ public class Sun : ModProjectile
 	private static Asset<Texture2D>? textureChain1;
 	private static Asset<Texture2D>? textureChain2;
 	private static Asset<Texture2D>? textureChain3;
-	private static Asset<Texture2D>? sunTexture;
 	private static Asset<Texture2D>? backTexture;
 
 	Vector2 mousePosition = Vector2.Zero;
@@ -30,7 +29,6 @@ public class Sun : ModProjectile
 		textureChain1 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain");
 		textureChain2 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain2");
 		textureChain3 = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/SolarSystem_Chain3");
-		sunTexture = TextureAssets.Projectile[Type];
 		backTexture = ModContent.Request<Texture2D>("Avalon/Projectiles/Melee/SolarSystem/Sun_Back");
 	}
 	public override void SetDefaults()
@@ -419,11 +417,11 @@ public class Sun : ModProjectile
 		//    }
 		//}
 
-		Rectangle sunFrame = sunTexture.Frame();
+		Rectangle sunFrame = TextureAssets.Projectile[Type].Frame();
 		Vector2 sunFrameOrigin = sunFrame.Size() / 2f;
 		Rectangle backFrame = backTexture.Frame();
 		Vector2 backFrameOrigin = backFrame.Size() / 2f;
-		Main.EntitySpriteDraw(sunTexture.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 0.9f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.position - Main.screenPosition + sunFrameOrigin, sunFrame, Color.White, Projectile.rotation, sunFrameOrigin, 0.9f, SpriteEffects.None, 0);
 		Main.EntitySpriteDraw(backTexture.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(180, 180, 180, 180), Projectile.rotation, backFrameOrigin, 1f, SpriteEffects.None, 0);
 		Main.EntitySpriteDraw(backTexture.Value, Projectile.position - Main.screenPosition + sunFrameOrigin, backFrame, new Color(70, 70, 70, 70), Projectile.rotation + MathHelper.PiOver4 / 2, backFrameOrigin, 1.5f, SpriteEffects.None, 0);
 
