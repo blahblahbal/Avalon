@@ -24,6 +24,10 @@ public class Ancient : ModItem
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
+		player.itemRotation = Utils.AngleLerp(player.itemRotation, 0f, 0.9f);
+		NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI);
+		NetMessage.SendData(MessageID.ShotAnimationAndSound, -1, -1, null, player.whoAmI);
+
 		// possibly fucky way of 
 		float angle = player.AngleTo(Main.MouseWorld);
 		float radX = MathF.Cos(angle);

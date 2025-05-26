@@ -1,12 +1,17 @@
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Magic;
 
 public class AncientSandstorm : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileID.Sets.NoLiquidDistortion[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = 36;
@@ -91,6 +96,10 @@ public class AncientSandstorm : ModProjectile
 	public override bool OnTileCollide(Vector2 oldVelocity)
 	{
 		Projectile.velocity = Projectile.oldVelocity * 0.7f;
+		return false;
+	}
+	public override bool? CanCutTiles()
+	{
 		return false;
 	}
 }

@@ -7,6 +7,10 @@ namespace Avalon.Projectiles
 {
 	public class PlayerCough : ModProjectile
 	{
+		public override void SetStaticDefaults()
+		{
+			ProjectileID.Sets.NoLiquidDistortion[Type] = true;
+		}
 		public override void SetDefaults()
 		{
 			Projectile.width = 24;
@@ -78,6 +82,10 @@ namespace Avalon.Projectiles
 				}
 				Projectile.ai[2]++;
 			}
+		}
+		public override bool? CanCutTiles()
+		{
+			return false;
 		}
 	}
 }
