@@ -13,7 +13,7 @@ public class Ancient : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToSpellBook(ModContent.ProjectileType<Projectiles.Magic.AncientSandstorm>(), 46, 4f, 40, 10f, 25, 25, 1f, 2);
+		Item.DefaultToSpellBook(ModContent.ProjectileType<Projectiles.Magic.AncientSandstorm>(), 46, 4f, 40, 21f, 25, 25, 1f, 2);
 		Item.rare = ItemRarityID.Yellow;
 		Item.value = Item.sellPrice(0, 25);
 		Item.UseSound = SoundID.Item34;
@@ -24,27 +24,49 @@ public class Ancient : ModItem
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
-		float num175 = 14f;
-		float num176 = (float)Main.mouseX + Main.screenPosition.X - (player.position.X + (float)player.width * 0.5f) + (float)Main.rand.Next(-10, 11);
-		float num177 = (float)Main.mouseY + Main.screenPosition.Y - (player.position.Y + (float)player.height * 0.5f) + (float)Main.rand.Next(-10, 11);
-		float num178 = (float)Math.Sqrt((double)(num176 * num176 + num177 * num177));
-		num178 = num175 / num178;
-		num176 *= num178;
-		num177 *= num178;
-		for (int num179 = 0; num179 < 2; num179++)
-		{
-			float num180 = velocity.X;
-			float num181 = velocity.Y;
-			num180 += (float)Main.rand.Next(-15, 16) * 0.05f;
-			num181 += (float)Main.rand.Next(-15, 16) * 0.05f;
-			Projectile.NewProjectile(source, position.X, position.Y, num176, num177, type, damage, knockback, player.whoAmI, 0f, 0f);
-		}
+		// possibly fucky way of 
+		float angle = player.AngleTo(Main.MouseWorld);
+		float radX = MathF.Cos(angle);
+		float radY = MathF.Sin(angle);
+		int radDirX = MathF.Sign(radX);
+		int radDirY = MathF.Sign(radY);
+		// X
+		float velMultX = player.velocity.X * (radX * radDirX);
+		// Y
+		float velMultY = player.velocity.Y * (radY * radDirY);
 
+		Vector2 velMult = new(velMultX, velMultY);
+
+		int projCount = 5;
+		for (int i = 1; i <= projCount; i++)
+		{
+			float distToMouseScaled = position.Distance(Main.MouseWorld);
+			float zoomScale = Main.screenHeight / Main.GameViewMatrix.Zoom.Y;
+			distToMouseScaled /= zoomScale / 2f;
+			if (distToMouseScaled > 1f)
+			{
+				distToMouseScaled = 1f;
+			}
+			float radius = MathF.Pow(1f - distToMouseScaled, 4f);
+			radius = Utils.Remap(radius, 0f, 0.7f, 0.005f, 0.4f);
+			int projNumOffset = (int)(i - 0.5f - (projCount / 2f));
+			Vector2 dir = Vector2.Normalize(velocity).RotatedBy(projNumOffset * radius).RotatedByRandom(0.05f);
+
+			float distVelMod = Math.Clamp(distToMouseScaled, 0.3f, 1f);
+			float projNumVelMod = (1f - (Math.Abs(projNumOffset) * 0.1f)) * Main.rand.NextFloat(0.5f, 1f);
+			Vector2 vel = dir * velocity.Length() * distVelMod * projNumVelMod;
+
+			vel += ((velMult * 0.7f) + (player.velocity * 0.1f)) * Math.Clamp(distToMouseScaled, 0.7f, 1f);
+
+			Projectile.NewProjectile(source, position, vel, type, damage, knockback, player.whoAmI, (i + 1) % 2);
+		}
 		return false;
 	}
 	public override void ModifyManaCost(Player player, ref float reduce, ref float mult)
 	{
 		if (player.GetModPlayer<AvalonPlayer>().AncientLessCost)
+		{
 			mult *= 0.5f;
+		}
 	}
 }
