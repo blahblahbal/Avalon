@@ -1,9 +1,12 @@
 using Avalon.Common;
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -37,9 +40,12 @@ namespace Avalon.Tiles.Furniture
 		public override int Dust => DustID.Stone; // todo: give them each unique dusts (if the vanilla equivalent has them)
 		protected override int ChestKeyItemId => ItemID.GoldenKey;
 		public override bool CanBeUnlockedNormally => false;
+		private static Asset<Texture2D>? glowTexture;
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
+
+			glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow");
 
 			for (int i = 0; i < 27; i++) // End at 26 which is the martian chest's position
 			{
@@ -54,6 +60,17 @@ namespace Avalon.Tiles.Furniture
 			if (type > 0)
 			{
 				yield return new Item(type);
+			}
+		}
+
+		public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
+		{
+			if (GetChestType(drawData.tileFrameX / 36) == ItemID.MartianChest)
+			{
+				byte b = (byte)(100f + 150f * Main.martianLight);
+				drawData.glowColor = new Color(b, b, b, 0);
+				drawData.glowSourceRect = new Rectangle(drawData.tileFrameX + drawData.addFrX, drawData.tileFrameY + drawData.addFrY, drawData.tileWidth, drawData.tileHeight);
+				drawData.glowTexture = glowTexture.Value;
 			}
 		}
 
