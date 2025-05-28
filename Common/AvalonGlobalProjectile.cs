@@ -1,9 +1,9 @@
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
-using Avalon.Dusts;
+using Avalon.Projectiles.Melee;
+using Avalon.Tiles.Contagion;
 using Avalon.Tiles.GemTrees;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -11,9 +11,6 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Avalon.Tiles.Contagion;
-using Avalon.NPCs.Bosses.PreHardmode;
-using Avalon.Projectiles.Melee;
 
 namespace Avalon.Common;
 
@@ -46,7 +43,67 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 			p.scale += scaleMod * (Main.player[p.owner].ownedProjectileCounts[ownedCounts] - 4);
 		}
 	}
-
+	public static void AvoidOtherGas(Projectile proj, Vector2? size = null, Vector2? otherSize = null, float strength = 1f)
+	{
+		if (size == null)
+		{
+			size = proj.Size;
+		}
+		Rectangle hitbox = new((int)(proj.Center.X - size.Value.X / 2), (int)(proj.Center.Y - size.Value.Y / 2), (int)size.Value.X, (int)size.Value.Y);
+		foreach (Projectile otherProj in Main.ActiveProjectiles)
+		{
+			if (otherProj.whoAmI == proj.whoAmI || otherProj.type != proj.type)
+			{
+				continue;
+			}
+			if (otherSize == null)
+			{
+				otherSize = proj.Size;
+			}
+			Rectangle otherHitbox = new((int)(otherProj.Center.X - otherSize.Value.X / 2), (int)(otherProj.Center.Y - otherSize.Value.Y / 2), (int)otherSize.Value.X, (int)otherSize.Value.Y);
+			if (!hitbox.Intersects(otherHitbox))
+			{
+				continue;
+			}
+			Vector2 dist = otherProj.Center - proj.Center;
+			if (dist == Vector2.Zero)
+			{
+				if (otherProj.whoAmI < proj.whoAmI)
+				{
+					dist.X = -1f;
+					dist.Y = 1f;
+				}
+				else
+				{
+					dist.X = 1f;
+					dist.Y = -1f;
+				}
+			}
+			Vector2 velMod = dist.SafeNormalize(Vector2.UnitX) * (0.005f * strength);
+			proj.velocity = Vector2.Lerp(proj.velocity, proj.velocity - velMod, 0.6f);
+			otherProj.velocity = Vector2.Lerp(otherProj.velocity, otherProj.velocity + velMod, 0.6f);
+		}
+	}
+	public static bool GasAvoidTiles(Projectile proj, bool fastProj = false)
+	{
+		Vector2 velSafe = proj.velocity.SafeNormalize(Vector2.Zero);
+		Vector2 pos = proj.Center + velSafe * 16f;
+		bool hitTile = false;
+		if (fastProj)
+		{
+			while (proj.velocity.Length() >= 1f && !Collision.CanHit(proj.Center, 0, 0, proj.Center + proj.velocity, 0, 0))
+			{
+				proj.velocity = Vector2.Lerp(proj.velocity, proj.velocity - velSafe * 1f, 0.5f);
+				hitTile = true;
+			}
+		}
+		if (Collision.IsWorldPointSolid(pos, treatPlatformsAsNonSolid: true))
+		{
+			proj.velocity = Vector2.Lerp(proj.velocity, proj.velocity - velSafe * 1f, 0.5f);
+			hitTile = true;
+		}
+		return hitTile;
+	}
 	public override void OnSpawn(Projectile projectile, IEntitySource source)
 	{
 		if ((projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.Flail ||
@@ -54,7 +111,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 		{
 			projectile.usesLocalNPCImmunity = true;
 			projectile.localNPCHitCooldown = 4;
-		}	
+		}
 		if (source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.HasBuff(BuffID.Cursed))
 		{
 			projectile.Kill();
@@ -301,7 +358,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 		#endregion
 		if (projectile.type == ProjectileID.PaladinsHammerFriendly)
 		{
-			if(Main.timeForVisualEffects % 2 == 0 && projectile.ai[1] != 0 && projectile.timeLeft > 3590)
+			if (Main.timeForVisualEffects % 2 == 0 && projectile.ai[1] != 0 && projectile.timeLeft > 3590)
 			{
 				ParticleOrchestraSettings particleOrchestraSettings = default(ParticleOrchestraSettings);
 				particleOrchestraSettings.PositionInWorld = projectile.Center;

@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -30,9 +31,7 @@ public class AncientSandstorm : ModProjectile
 		Projectile.localNPCHitCooldown = -1;
 		//Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
 	}
-
 	public bool CanSpawnChild { get => Convert.ToBoolean(Projectile.ai[0]); set => Projectile.ai[0] = value.ToInt(); }
-
 	public override void AI()
 	{
 		Projectile.ai[1]++;
@@ -56,8 +55,13 @@ public class AncientSandstorm : ModProjectile
 
 		Projectile.velocity = Projectile.velocity.RotatedByRandom(CanSpawnChild ? 0.025f : 0.05f) * 0.985f;
 		Projectile.rotation += MathHelper.Clamp(Projectile.velocity.Length() * 0.03f, -0.3f, 0.3f);
-		Projectile.scale += Projectile.ai[0] == 0f ? 0.02f : 0.01f;
-		Projectile.Resize((int)(32 * Projectile.scale), (int)(32 * Projectile.scale));
+
+		AvalonGlobalProjectile.AvoidOtherGas(Projectile, new Vector2(32), new Vector2(32), 0.5f);
+		if (!AvalonGlobalProjectile.GasAvoidTiles(Projectile, true) || Projectile.scale < 1f)
+		{
+			Projectile.scale += Projectile.ai[0] == 0f ? 0.02f : 0.01f;
+			Projectile.Resize((int)(32 * Projectile.scale), (int)(32 * Projectile.scale));
+		}
 
 		int rand = (int)(250 / Utils.Remap(Projectile.velocity.Length(), 0f, 10f, 1.5f, 50f));
 		if (Main.rand.NextBool(rand + ((255 - Projectile.alpha) / 15)))
@@ -96,7 +100,14 @@ public class AncientSandstorm : ModProjectile
 	public override bool OnTileCollide(Vector2 oldVelocity)
 	{
 		Projectile.velocity = Projectile.oldVelocity * 0.7f;
+		AvalonGlobalProjectile.GasAvoidTiles(Projectile, true); // I could NOT find a way to make it not go through tiles sometimes without calling this method both here and in AI
 		return false;
+	}
+	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+	{
+		width = 32;
+		height = 32;
+		return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
 	}
 	public override bool? CanCutTiles()
 	{
