@@ -15,7 +15,7 @@ namespace Avalon.Tiles.Furniture
 {
 	public class LockedChests : ChestTemplate
 	{
-		private static int GetChestType(int type)
+		public static int GetChestType(int type)
 		{
 			return type switch
 			{
@@ -36,7 +36,7 @@ namespace Avalon.Tiles.Furniture
 			};
 		}
 
-		private static int GetDustType(int type)
+		public static int GetDustType(int type)
 		{
 			return type switch
 			{
@@ -234,7 +234,7 @@ namespace Avalon.Tiles.Furniture
 				Tile tileSafely = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
 				int style = tileSafely.TileFrameX / 36;
 
-				if (style is 0 or (>= 7 and <= 17) or 48)
+				if (LockedChests.GetChestType(style) != ItemID.None)
 				{
 					if (self.inventory[self.selectedItem].stack <= 0)
 					{
