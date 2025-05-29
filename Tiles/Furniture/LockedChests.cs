@@ -36,16 +36,35 @@ namespace Avalon.Tiles.Furniture
 			};
 		}
 
+		private static int GetDustType(int type)
+		{
+			return type switch
+			{
+				0 or 11 => DustID.Silver,
+				1 or 2 => DustID.WoodFurniture,
+				3 => DustID.Ebonwood,
+				4 => DustID.RichMahogany,
+				5 => DustID.Pearlwood,
+				6 => DustID.Gold,
+				7 => DustID.Skyware,
+				8 => DustID.Shadewood,
+				9 => DustID.Bone,
+				10 => DustID.Lihzahrd,
+				_ => -1,
+			};
+		}
+
 		protected override bool CanBeLocked => base.CanBeLocked;
-		public override int Dust => DustID.Stone; // todo: give them each unique dusts (if the vanilla equivalent has them)
 		protected override int ChestKeyItemId => ItemID.GoldenKey;
 		public override bool CanBeUnlockedNormally => false;
 		private static Asset<Texture2D>? glowTexture;
+		private static Asset<Texture2D>? glowTexture2;
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
 
 			glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow");
+			glowTexture2 = ModContent.Request<Texture2D>(Texture + "_Glow2");
 
 			for (int i = 0; i < 27; i++) // End at 26 which is the martian chest's position
 			{
@@ -58,6 +77,18 @@ namespace Avalon.Tiles.Furniture
 				AddMapEntry(color, this.GetLocalization($"MapEntry{i}"), MapChestName);
 			}
 		}
+
+		public override void NumDust(int i, int j, bool fail, ref int num)
+		{
+			num = fail ? 3 : 10;
+		}
+
+		public override bool CreateDust(int i, int j, ref int type)
+		{
+			type = GetDustType(TileObjectData.GetTileStyle(Main.tile[i, j]));
+			return base.CreateDust(i, j, ref type);
+		}
+
 		public override IEnumerable<Item> GetItemDrops(int i, int j)
 		{
 			int type = GetChestType(TileObjectData.GetTileStyle(Main.tile[i, j]));
@@ -75,6 +106,25 @@ namespace Avalon.Tiles.Furniture
 				drawData.glowColor = new Color(b, b, b, 0);
 				drawData.glowSourceRect = new Rectangle(drawData.tileFrameX + drawData.addFrX, drawData.tileFrameY + drawData.addFrY, drawData.tileWidth, drawData.tileHeight);
 				drawData.glowTexture = glowTexture.Value;
+			}
+		}
+
+		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+		{
+			Tile tile = Main.tile[i, j];
+			if (GetChestType(tile.TileFrameX / 36) == ItemID.MartianChest)
+			{
+				var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+				if (Main.drawToScreen)
+				{
+					zero = Vector2.Zero;
+				}
+
+				Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
+				var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
+				byte b = (byte)(100f + 150f * Main.martianLight);
+				Color color = new Color(b, b, b, 100);
+				spriteBatch.Draw(glowTexture2.Value, pos, frame, color);
 			}
 		}
 
