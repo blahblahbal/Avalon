@@ -49,9 +49,13 @@ namespace Avalon.Tiles.Furniture
 
 			for (int i = 0; i < 27; i++) // End at 26 which is the martian chest's position
 			{
-				// todo: set colour to the same as 
-				// todo: give them each unique localisation entries
-				AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+				Color color = i switch
+				{
+					0 or 11 => new(106, 210, 255),
+					6 or 7 or 9 => new(233, 207, 94),
+					_ => new(174, 129, 92)
+				};
+				AddMapEntry(color, this.GetLocalization($"MapEntry{i}"), MapChestName);
 			}
 		}
 		public override IEnumerable<Item> GetItemDrops(int i, int j)
@@ -112,7 +116,13 @@ namespace Avalon.Tiles.Furniture
 
 			if (style is (>= 0 and <= 11) or 26)
 			{
-				int dustType = DustID.Stone;
+				int dustType = style switch
+				{
+					10 => DustID.Gold,
+					11 => DustID.SeaOatsOasis,
+					26 => DustID.t_Martian,
+					_ => DustID.Stone
+				};
 				for (int i = X; i <= X + 1; i++)
 				{
 					for (int j = Y; j <= Y + 1; j++)

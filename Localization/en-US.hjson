@@ -11405,7 +11405,33 @@ Mods: {
 
 			LockedChests: {
 				$parentVal: MapEntry0: Locked Chest
-				MapEntry0: Locked Chest
+				MapEntry0: Locked Frozen Chest
+				MapEntry1: Locked Chest
+				MapEntry2: Locked Living Wood Chest
+				MapEntry3: Locked Ebonwood Chest
+				MapEntry4: Locked Rich Mahogany Chest
+				MapEntry5: Locked Pearlwood Chest
+				MapEntry6: Locked Ivy Chest
+				MapEntry7: Locked Skyware Chest
+				MapEntry8: Locked Shadewood Chest
+				MapEntry9: Locked Web Covered Chest
+				MapEntry10: Locked Lihzahrd Chest
+				MapEntry11: Locked Water Chest
+				MapEntry12: Mods.Avalon.Tiles.LockedChests.MapEntry12
+				MapEntry13: Mods.Avalon.Tiles.LockedChests.MapEntry13
+				MapEntry14: Mods.Avalon.Tiles.LockedChests.MapEntry14
+				MapEntry15: Mods.Avalon.Tiles.LockedChests.MapEntry15
+				MapEntry16: Mods.Avalon.Tiles.LockedChests.MapEntry16
+				MapEntry17: Mods.Avalon.Tiles.LockedChests.MapEntry17
+				MapEntry18: Mods.Avalon.Tiles.LockedChests.MapEntry18
+				MapEntry19: Mods.Avalon.Tiles.LockedChests.MapEntry19
+				MapEntry20: Mods.Avalon.Tiles.LockedChests.MapEntry20
+				MapEntry21: Mods.Avalon.Tiles.LockedChests.MapEntry21
+				MapEntry22: Mods.Avalon.Tiles.LockedChests.MapEntry22
+				MapEntry23: Mods.Avalon.Tiles.LockedChests.MapEntry23
+				MapEntry24: Mods.Avalon.Tiles.LockedChests.MapEntry24
+				MapEntry25: Mods.Avalon.Tiles.LockedChests.MapEntry25
+				MapEntry26: Locked Martian Chest
 			}
 
 			Crates.MapEntry: Crates
