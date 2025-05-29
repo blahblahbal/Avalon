@@ -135,7 +135,7 @@ namespace Avalon.Tiles.Furniture
 			Tile tileSafely = Framing.GetTileSafely(X, Y);
 			int style = TileObjectData.GetTileStyle(tileSafely);
 
-			if (style is 0 or (>= 7 and <= 17) or 48)
+			if (GetChestType(style) != ItemID.None)
 			{
 				for (int i = X; i <= X + 1; i++)
 				{
@@ -156,7 +156,7 @@ namespace Avalon.Tiles.Furniture
 			Tile tileSafely = Framing.GetTileSafely(X, Y);
 			int style = TileObjectData.GetTileStyle(tileSafely);
 
-			if (style is 0 or (>= 7 and <= 17) or 48)
+			if (GetChestType(style) != ItemID.None)
 			{
 				int dustType = style switch
 				{
