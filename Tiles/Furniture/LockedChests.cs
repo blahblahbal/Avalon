@@ -19,19 +19,19 @@ namespace Avalon.Tiles.Furniture
 		{
 			return type switch
 			{
-				0 => ItemID.IceChest,
-				1 => ItemID.Chest,
-				2 => ItemID.LivingWoodChest,
-				3 => ItemID.EbonwoodChest,
-				4 => ItemID.RichMahoganyChest,
-				5 => ItemID.PearlwoodChest,
-				6 => ItemID.IvyChest,
-				7 => ItemID.SkywareChest,
-				8 => ItemID.ShadewoodChest,
-				9 => ItemID.WebCoveredChest,
-				10 => ItemID.LihzahrdChest,
-				11 => ItemID.WaterChest,
-				26 => ItemID.MartianChest,
+				0 => ItemID.Chest,
+				7 => ItemID.EbonwoodChest,
+				8 => ItemID.RichMahoganyChest,
+				9 => ItemID.PearlwoodChest,
+				10 => ItemID.IvyChest,
+				11 => ItemID.IceChest,
+				12 => ItemID.LivingWoodChest,
+				13 => ItemID.SkywareChest,
+				14 => ItemID.ShadewoodChest,
+				15 => ItemID.WebCoveredChest,
+				16 => ItemID.LihzahrdChest,
+				17 => ItemID.WaterChest,
+				48 => ItemID.MartianChest,
 				_ => ItemID.None,
 			};
 		}
@@ -40,16 +40,16 @@ namespace Avalon.Tiles.Furniture
 		{
 			return type switch
 			{
-				0 or 11 => DustID.Silver,
-				1 or 2 => DustID.WoodFurniture,
-				3 => DustID.Ebonwood,
-				4 => DustID.RichMahogany,
-				5 => DustID.Pearlwood,
-				6 => DustID.Gold,
-				7 => DustID.Skyware,
-				8 => DustID.Shadewood,
-				9 => DustID.Bone,
-				10 => DustID.Lihzahrd,
+				0 or 12 => DustID.WoodFurniture,
+				7 => DustID.Ebonwood,
+				8 => DustID.RichMahogany,
+				9 => DustID.Pearlwood,
+				10 => DustID.Gold,
+				11 or 17 => DustID.Silver,
+				13 => DustID.Skyware,
+				14 => DustID.Shadewood,
+				15 => DustID.Bone,
+				16 => DustID.Lihzahrd,
 				_ => -1,
 			};
 		}
@@ -66,12 +66,12 @@ namespace Avalon.Tiles.Furniture
 			glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow");
 			glowTexture2 = ModContent.Request<Texture2D>(Texture + "_Glow2");
 
-			for (int i = 0; i < 27; i++) // End at 26 which is the martian chest's position
+			for (int i = 0; i < 49; i++) // End at 48 which is the martian chest's position
 			{
 				Color color = i switch
 				{
-					0 or 11 => new(106, 210, 255),
-					6 or 7 or 9 => new(233, 207, 94),
+					11 or 17 => new(106, 210, 255),
+					10 or 13 or 15 => new(233, 207, 94),
 					_ => new(174, 129, 92)
 				};
 				AddMapEntry(color, this.GetLocalization($"MapEntry{i}"), MapChestName);
@@ -98,13 +98,15 @@ namespace Avalon.Tiles.Furniture
 			}
 		}
 
+		private int correctFrameY;
 		public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
 		{
 			if (GetChestType(drawData.tileFrameX / 36) == ItemID.MartianChest)
 			{
 				byte b = (byte)(100f + 150f * Main.martianLight);
 				drawData.glowColor = new Color(b, b, b, 0);
-				drawData.glowSourceRect = new Rectangle(drawData.tileFrameX + drawData.addFrX, drawData.tileFrameY + drawData.addFrY, drawData.tileWidth, drawData.tileHeight);
+				correctFrameY = drawData.tileFrameY + drawData.addFrY;
+				drawData.glowSourceRect = new Rectangle(drawData.tileFrameX + drawData.addFrX, correctFrameY, drawData.tileWidth, drawData.tileHeight);
 				drawData.glowTexture = glowTexture.Value;
 			}
 		}
@@ -121,9 +123,9 @@ namespace Avalon.Tiles.Furniture
 				}
 
 				Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
-				var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
+				var frame = new Rectangle(tile.TileFrameX, correctFrameY, 16, 16);
 				byte b = (byte)(100f + 150f * Main.martianLight);
-				Color color = new Color(b, b, b, 100);
+				Color color = new(b, b, b, 100);
 				spriteBatch.Draw(glowTexture2.Value, pos, frame, color);
 			}
 		}
@@ -141,16 +143,6 @@ namespace Avalon.Tiles.Furniture
 					{
 						Tile tileSafely2 = Framing.GetTileSafely(i, j);
 						tileSafely2.TileType = (ushort)ModContent.TileType<LockedChests>();
-						tileSafely2.TileFrameX -= style switch
-						{
-							0 => -36,
-							>= 7 and <= 10 => 4 * 36,
-							11 => 11 * 36,
-							12 => 10 * 36,
-							>= 13 and <= 17 => 6 * 36,
-							48 => 22 * 36,
-							_ => throw new System.NotImplementedException(),
-						};
 					}
 				}
 
@@ -164,13 +156,13 @@ namespace Avalon.Tiles.Furniture
 			Tile tileSafely = Framing.GetTileSafely(X, Y);
 			int style = TileObjectData.GetTileStyle(tileSafely);
 
-			if (style is (>= 0 and <= 11) or 26)
+			if (style is 0 or (>= 7 and <= 17) or 48)
 			{
 				int dustType = style switch
 				{
-					10 => DustID.Gold,
-					11 => DustID.SeaOatsOasis,
-					26 => DustID.t_Martian,
+					16 => DustID.Gold,
+					17 => DustID.SeaOatsOasis,
+					48 => DustID.t_Martian,
 					_ => DustID.Stone
 				};
 				for (int i = X; i <= X + 1; i++)
@@ -179,16 +171,6 @@ namespace Avalon.Tiles.Furniture
 					{
 						Tile tileSafely2 = Framing.GetTileSafely(i, j);
 						tileSafely2.TileType = TileID.Containers;
-						tileSafely2.TileFrameX += style switch
-						{
-							0 => 11 * 36,
-							1 => -36,
-							2 => 10 * 36,
-							>= 3 and <= 6 => 4 * 36,
-							>= 7 and <= 11 => 6 * 36,
-							26 => 22 * 36,
-							_ => throw new System.NotImplementedException(),
-						};
 
 						for (int k = 0; k < 4; k++)
 						{
