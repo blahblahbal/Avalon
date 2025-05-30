@@ -1,5 +1,6 @@
 using Avalon.Hooks;
 using Avalon.Logic;
+using Avalon.ModSupport;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.Reflection;
@@ -290,6 +291,7 @@ public class AvalonWorld : ModSystem
 	/// <inheritdoc />
 	public override void PreWorldGen()
 	{
+		if (AltLibrarySupport.PreWorldGen(this)) return;
 		WorldEvil = ModContent.GetInstance<ContagionSelectionMenu>().SelectedWorldEvil switch
 		{
 			ContagionSelectionMenu.WorldEvilSelection.Random => Main.rand.Next(Enum.GetValues<WorldEvil>()),

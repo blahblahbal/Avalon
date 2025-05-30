@@ -11871,15 +11871,6 @@ Mods: {
 			}
 		}
 
-		AltBiomes: {
-			ContagionAltBiome: {
-				DisplayName: Contagion Alt Biome
-				Description: Contagion Alt Biome
-				GenPassName: Contagion Alt Biome
-				DryadTextDescriptor: Contagion Alt Biome
-			}
-		}
-
 		ItemSourceFilter: {
 			BlueRarity.DisplayName: Blue
 			AvalonRarity.DisplayName: Avalon

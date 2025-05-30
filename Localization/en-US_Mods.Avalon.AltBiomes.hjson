@@ -1,0 +1,6 @@
+ContagionAltBiome: {
+	DisplayName: "{$World.EvilSelection.Contagion.Title}"
+	Description: "{$World.EvilSelection.Contagion.Description}"
+	GenPassName: "{$World.Generation.Contagion.Message}"
+	DryadTextDescriptor: contagion
+}

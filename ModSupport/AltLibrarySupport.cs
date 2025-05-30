@@ -27,15 +27,66 @@ using Avalon.Items.Material.Bars;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Material.Herbs;
+using Avalon.Walls;
+using Avalon.WorldGeneration.Enums;
+using Avalon.Common;
+using AltLibrary.Common.Conditions;
+using Avalon.Biomes;
 
 // Y'all should really have an editorconfig file, but I'm going to try to minimize what I change in other files at all, so you should be able to make everything consistent with one Ctrl+K, Ctrl+D
 namespace Avalon.ModSupport {
-	public class AltLibrarySupport : ILoadable {
+	public class AltLibrarySupport : ModSystem {
 		static bool? enabled = null;
 		public static bool Enabled => enabled ??= ModLoader.HasMod(nameof(AltLibrary));
-		public void Load(Mod mod) { }
-		public void Unload() {
+		public override void Unload() {
 			enabled = null;
+		}
+		public override void PostSetupContent() {
+			ModContent.GetInstance<CrimsonAltBiome>().ArrowType = ModContent.ItemType<Items.Ammo.BloodyArrow>();
+		}
+		public override void PostUpdateTime() {
+			if (!Enabled) return;
+			Do();
+			[JITWhenModsEnabled(nameof(AltLibrary))]
+			static void Do() {
+				AltBiome evil = WorldBiomeManager.GetWorldEvil(true, true);
+				ref WorldEvil worldEvil = ref ModContent.GetInstance<AvalonWorld>().WorldEvil;
+				if (evil is ContagionAltBiome) worldEvil = WorldEvil.Contagion;
+				else if (evil is CrimsonAltBiome) worldEvil = WorldEvil.Crimson;
+				else worldEvil = WorldEvil.Corruption;
+			}
+		}
+		public static bool PreWorldGen(AvalonWorld world) {
+			if (!Enabled) return false;
+			Do(world);
+			[JITWhenModsEnabled(nameof(AltLibrary))]
+			static void Do(AvalonWorld world) {
+				if (WorldBiomeManager.GetWorldEvil(true) == ModContent.GetInstance<ContagionAltBiome>()) {
+					world.SecondaryContagionBG = WorldGen.genRand.NextBool(2) ? 1 : 0;
+				}
+			}
+			return true;
+		}
+
+		public static void ReplaceShopConditions(ref Condition corruption, ref Condition crimson, ref Condition contagion) {
+			if (!Enabled) return;
+			Do(ref corruption, ref crimson, ref contagion);
+			[JITWhenModsEnabled(nameof(AltLibrary))]
+			static void Do(ref Condition corruption, ref Condition crimson, ref Condition contagion) {
+				corruption = ShopConditions.GetWorldEvilCondition<CorruptionAltBiome>();
+				crimson = ShopConditions.GetWorldEvilCondition<CrimsonAltBiome>();
+				contagion = ShopConditions.GetWorldEvilCondition<ContagionAltBiome>();
+			}
+		}
+
+		public static bool EvilBiomeArrow(ref int itemType) {
+			if (!Enabled) return false;
+			Do(ref itemType);
+			[JITWhenModsEnabled(nameof(AltLibrary))]
+			static void Do(ref int itemType) {
+				itemType = WorldBiomeManager.GetWorldEvil(true, true).ArrowType ?? ItemID.UnholyArrow;
+			}
+			return true;
 		}
 	}
 	[ExtendsFromMod(nameof(AltLibrary))]
@@ -45,7 +96,7 @@ namespace Avalon.ModSupport {
 		public override string IconSmall => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/IconContagion";
 		public override Color OuterColor => new(175, 148, 199);
 		public override IShoppingBiome Biome => ModContent.GetInstance<Biomes.Contagion>();
-
+		public override Color NameColor => Color.Green;
 		public override void SetStaticDefaults() {
 			BiomeType = BiomeType.Evil;
 
@@ -80,6 +131,7 @@ namespace Avalon.ModSupport {
 			BiomeOre = ModContent.TileType<Tiles.Ores.BacciliteOre>();
 			BiomeOreItem = ModContent.ItemType<BacciliteOre>();
 			BiomeOreBrick = ModContent.TileType<Tiles.BacciliteBrick>();
+			ArrowType = ModContent.ItemType<Items.Ammo.IckyArrow>();
 			AltarTile = ModContent.TileType<IckyAltar>();
 
 			BiomeChestItem = ModContent.ItemType<VirulentScythe>();
@@ -93,43 +145,40 @@ namespace Avalon.ModSupport {
 			BloodPenguin = ModContent.NPCType<ContaminatedPenguin>();
 			BloodGoldfish = ModContent.NPCType<ContaminatedGoldfish>();
 
-			/*AddWallConversions<ContagionWall>(
-				WallID.Stone,
-				WallID.CaveUnsafe,
-				WallID.Cave2Unsafe,
+			AddWallConversions<ContagionLumpWallUnsafe>(
+				WallID.RocksUnsafe3
+			);
+			AddWallConversions<ContagionMouldWallUnsafe>(
 				WallID.Cave3Unsafe,
+				WallID.RocksUnsafe2
+			);
+			AddWallConversions<ContagionCystWallUnsafe>(
 				WallID.Cave4Unsafe,
 				WallID.Cave5Unsafe,
-				WallID.Cave6Unsafe,
-				WallID.Cave7Unsafe,
-				WallID.Cave8Unsafe,
-				WallID.EbonstoneUnsafe,
-				WallID.CorruptionUnsafe1,
-				WallID.CorruptionUnsafe2,
-				WallID.CorruptionUnsafe3,
-				WallID.CorruptionUnsafe4,
-				WallID.CrimstoneUnsafe,
-				WallID.CrimsonUnsafe1,
-				WallID.CrimsonUnsafe2,
-				WallID.CrimsonUnsafe3,
-				WallID.CrimsonUnsafe4
+				WallID.RocksUnsafe1
 			);
-			AddWallConversions<Defiled_Sandstone_Wall>(
+			AddWallConversions<ContagionBoilWallUnsafe>(
+				WallID.Cave8Unsafe,
+				WallID.RocksUnsafe4
+			);
+			AddWallConversions<SnotsandstoneWallUnsafe>(
 				WallID.Sandstone,
 				WallID.CorruptSandstone,
 				WallID.CrimsonSandstone,
 				WallID.HallowSandstone
 			);
-			AddWallConversions<Hardened_Defiled_Sand_Wall>(
+			AddWallConversions<HardenedSnotsandWallUnsafe>(
 				WallID.HardenedSand,
 				WallID.CorruptHardenedSand,
 				WallID.CrimsonHardenedSand,
 				WallID.HallowHardenedSand
 			);
-			/*AddWallConversions<IckgrassWall>(
+			AddWallConversions<ContagionGrassWall>(
 				WallID.GrassUnsafe,
-				WallID.Grass
-			);*/
+				WallID.Grass,
+				WallID.FlowerUnsafe,
+				WallID.Flower
+			);
 
 			EvilBiomeGenerationPass = new ContagionGenerationPass();
 		}
@@ -146,12 +195,13 @@ namespace Avalon.ModSupport {
 				return context;
 			}
 		}
+		[ExtendsFromMod(nameof(AltLibrary))]
 		public class ContagionGenerationPass : EvilBiomeGenerationPass {
 			public override string ProgressMessage => Language.GetTextValue("Mods.Avalon.World.Generation.Contagion.Message");
 			public override void GenerateEvil(int evilBiomePosition, int evilBiomePositionWestBound, int evilBiomePositionEastBound) {
 				WorldBiomeGeneration.ChangeRange.ResetRange();
 
-				Contagion.ContagionRunner(evilBiomePosition, (int)GenVars.worldSurfaceLow - 10 + (Main.maxTilesY / 8));
+				WorldGeneration.Passes.Contagion.ContagionRunner(evilBiomePosition, (int)GenVars.worldSurfaceLow - 10 + (Main.maxTilesY / 8));
 				for (int i = evilBiomePositionWestBound; i < evilBiomePositionEastBound; i++) {
 					int j = (int)GenVars.worldSurfaceLow;
 					while (j < Main.worldSurface - 1.0) {

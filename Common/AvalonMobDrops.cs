@@ -42,7 +42,9 @@ public class AvalonMobDrops : GlobalNPC
 		var notExpertCondition = new Conditions.NotExpert();
 		var contagionCondition = new IsContagion();
 		var corruptionCondition = new Conditions.IsCorruptionAndNotExpert();
-		var crimsonNotExpert = new Combine(true, null, notExpertCondition, new CrimsonNotContagion());
+		var crimsonCondition = new CrimsonNotContagion();
+
+		var crimsonNotExpert = new Combine(true, null, notExpertCondition, crimsonCondition);
 		var contagionNotExpert = new Combine(true, null, notExpertCondition, contagionCondition);
 		var corruptionNotContagion = new Combine(true, null, new Invert(contagionNotExpert), corruptionCondition);
 
