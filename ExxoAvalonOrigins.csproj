@@ -36,5 +36,9 @@
 			<HintPath Condition="Exists('..\ModAssemblies')">..\ModAssemblies\ThoriumMod.dll</HintPath>
 			<HintPath Condition="Exists('..\..\ModAssemblies')">..\..\ModAssemblies\ThoriumMod.dll</HintPath>
 		</Reference>
+		<Reference Include="AltLibrary">
+			<HintPath Condition="Exists('..\ModAssemblies')">..\ModAssemblies\AltLibrary_v2.0.2.1.dll</HintPath>
+			<HintPath Condition="Exists('..\..\ModAssemblies')">..\..\ModAssemblies\AltLibrary_v2.0.2.1.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 </Project>

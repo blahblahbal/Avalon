@@ -11,11 +11,13 @@ using Avalon.WorldGeneration.Enums;
 using ReLogic.Utilities;
 using System;
 using Avalon.Tiles;
+using Avalon.ModSupport;
 
 namespace Avalon.Hooks
 {
     internal class ContagionHardmodeEdit : ModHook
     {
+	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
         protected override void Apply()
         {
             On_WorldGen.GERunner += On_WorldGen_GERunner;

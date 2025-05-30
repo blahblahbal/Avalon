@@ -11870,5 +11870,30 @@ Mods: {
 				WaypointMode: "Waypoint mode: "
 			}
 		}
+
+		AltBiomes: {
+			ContagionAltBiome: {
+				DisplayName: Contagion Alt Biome
+				Description: Contagion Alt Biome
+				GenPassName: Contagion Alt Biome
+				DryadTextDescriptor: Contagion Alt Biome
+			}
+		}
+
+		ItemSourceFilter: {
+			BlueRarity.DisplayName: Blue
+			AvalonRarity.DisplayName: Avalon
+			BlahRarity.DisplayName: Blah
+			QuibopsRarity.DisplayName: Quibops
+			CrispyRarity.DisplayName: Crispy
+			CrabbyRarity.DisplayName: Crabby
+			DarkGreenRarity.DisplayName: Dark Green
+			FireOrangeRarity.DisplayName: Fire Orange
+			TealRarity.DisplayName: Teal
+			MagentaRarity.DisplayName: Magenta
+			DarkRedRarity.DisplayName: Dark Red
+			FractureRarity.DisplayName: Fracture
+			QuantumRarity.DisplayName: Quantum
+		}
 	}
 }
