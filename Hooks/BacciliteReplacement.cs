@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Avalon.Tiles.Ores;
 using Terraria.ID;
 using MonoMod.Cil;
+using Avalon.ModSupport;
 
 namespace Avalon.Hooks
 {
@@ -11,7 +12,7 @@ namespace Avalon.Hooks
     {
         protected override void Apply()
         {
-            On_WorldGen.TileRunner += On_WorldGen_TileRunner;
+			if (!AltLibrarySupport.Enabled) On_WorldGen.TileRunner += On_WorldGen_TileRunner;
             IL_WorldGen.ShimmerMakeBiome += AddShimmerAlternativeChecks;
             IL_WorldGen.badOceanCaveTiles += IL_WorldGen_badOceanCaveTiles;
             IL_WorldGen.GERunner += IL_WorldGen_GERunner;

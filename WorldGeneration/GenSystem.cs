@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.ModSupport;
 using Avalon.World.Passes;
 using Avalon.WorldGeneration.Enums;
 using Avalon.WorldGeneration.Passes;
@@ -40,192 +41,200 @@ public class GenSystem : ModSystem
 			//}
 
 			int evil = WorldGen.WorldGenParam_Evil;
-			if (evil == (int)WorldEvil.Contagion && !Main.zenithWorld)
+			if (!AltLibrarySupport.Enabled)
 			{
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Corruption"));
-				if (index != -1)
+				if (evil == (int)WorldEvil.Contagion && !Main.zenithWorld)
 				{
-					// Replace corruption task with contagion task
-					tasks[index] = new Contagion("Corruption", 80f); //DONT RENAME THE PASS YOUR REPLACING BRUH
+					index = tasks.FindIndex(genpass => genpass.Name.Equals("Corruption"));
+					if (index != -1)
+					{
+						// Replace corruption task with contagion task
+						tasks[index] = new Contagion("Corruption", 80f); //DONT RENAME THE PASS YOUR REPLACING BRUH
+					}
+					index = tasks.FindIndex(genpass => genpass.Name.Equals("Altars"));
+					if (index != -1)
+					{
+						tasks[index] = new IckyAltars();
+					}
 				}
-				index = tasks.FindIndex(genpass => genpass.Name.Equals("Altars"));
-				if (index != -1)
+
+				if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
 				{
-					tasks[index] = new IckyAltars();
+					int jungleIndex = tasks.FindIndex(i => i.Name.Equals("Wet Jungle"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
+					}
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Ice"));
+					if (jungleIndex != -1)
+					{
+						tasks.Insert(jungleIndex + 1, new PassLegacy("Tuhrtl Brick Unsolid", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration config)
+						{
+							Main.tileSolid[ModContent.TileType<Tiles.Savanna.TuhrtlBrick>()] = false;
+							Main.tileSolid[ModContent.TileType<Tiles.Savanna.BrambleSpikes>()] = false;
+						})));
+					}
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Mud Caves To Grass"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Loam Caves To Grass", new WorldGenLegacyMethod(Tropics.JunglesGrassTask));
+						tasks.Insert(jungleIndex, new PassLegacy("Loam", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration configuration)
+						{
+							int tile = ModContent.TileType<Tiles.Savanna.Loam>();
+							for (int i = 0; i < Main.maxTilesX; i++)
+							{
+								for (int j = 0; j < Main.maxTilesY; j++)
+								{
+									if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Mud)
+									{
+										Main.tile[i, j].TileType = (ushort)tile;
+									}
+								}
+							}
+						})));
+					}
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Temple"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Tuhrtl Outpost", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostTask));
+						tasks.Insert(jungleIndex + 1, new PassLegacy("Outpost Traps", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostReplaceTraps)));
+					}
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Hives"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Wasp Nests", new WorldGenLegacyMethod(Tropics.WaspNests));
+					}
+
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Chests"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Tropics Sanctums", new WorldGenLegacyMethod(Tropics.TropicsSanctumTask));
+					}
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Muds Walls In Jungle"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Loam Walls in Tropics", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration passConfig)
+						{
+							progress.Set(1.0);
+							int num171 = 0;
+							int num172 = 0;
+							bool flag4 = false;
+							for (int num173 = 5; num173 < Main.maxTilesX - 5; num173++)
+							{
+								for (int num174 = 0; num174 < Main.worldSurface + 20.0; num174++)
+								{
+									if (Main.tile[num173, num174].HasTile && Main.tile[num173, num174].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
+									{
+										num171 = num173;
+										flag4 = true;
+										break;
+									}
+								}
+
+								if (flag4)
+									break;
+							}
+
+							flag4 = false;
+							for (int num175 = Main.maxTilesX - 5; num175 > 5; num175--)
+							{
+								for (int num176 = 0; num176 < Main.worldSurface + 20.0; num176++)
+								{
+									if (Main.tile[num175, num176].HasTile && Main.tile[num175, num176].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
+									{
+										num172 = num175;
+										flag4 = true;
+										break;
+									}
+								}
+
+								if (flag4)
+									break;
+							}
+							GenVars.jungleMinX = num171;
+							GenVars.jungleMaxX = num172;
+							for (int num177 = num171; num177 <= num172; num177++)
+							{
+								for (int num178 = 0; (double)num178 < Main.maxTilesY - 200; num178++)
+								{
+									if (((num177 >= num171 + 2 && num177 <= num172 - 2) || !WorldGen.genRand.NextBool(2)) &&
+										((num177 >= num171 + 3 && num177 <= num172 - 3) || !WorldGen.genRand.NextBool(3)) &&
+										(Main.tile[num177, num178].WallType == WallID.DirtUnsafe || Main.tile[num177, num178].WallType == WallID.Cave6Unsafe ||
+										Main.tile[num177, num178].WallType == WallID.MudUnsafe))
+									{
+										Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.TropicalMudWall>();
+									}
+								}
+							}
+							for (int q = GenVars.jungleMinX; q <= GenVars.jungleMaxX; q++)
+							{
+								for (int z = 0; (double)z < Main.maxTilesY - 200; z++)
+								{
+									if ((q < GenVars.jungleMinX + 75 && q >= GenVars.jungleMinX + 50) ||
+										(q > GenVars.jungleMaxX - 75 && q <= GenVars.jungleMaxX - 50) &&
+										z < Main.rockLayer && z > 250)
+									{
+										if (Main.tile[q, z].HasTile && WorldGen.genRand.NextBool(10))
+										{
+											if (Main.tile[q, z].TileType == TileID.Grass)
+											{
+												Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>();
+											}
+											if (Main.tile[q, z].TileType == TileID.Dirt)
+											{
+												Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.Loam>();
+											}
+										}
+									}
+
+									if (q >= GenVars.jungleMinX + 75 && q <= GenVars.jungleMaxX - 75 && z < Main.rockLayer && z > 250)
+									{
+										if (Main.tile[q, z].HasTile)
+										{
+											if (Main.tile[q, z].TileType == TileID.Grass)
+											{
+												Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>();
+											}
+											if (Main.tile[q, z].TileType == TileID.Dirt)
+											{
+												Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.Loam>();
+											}
+											if (Main.tile[q, z].TileType == TileID.Plants)
+											{
+												Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaShortGrass>();
+											}
+											if (Main.tile[q, z].TileType == TileID.Plants2)
+											{
+												Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaLongGrass>();
+											}
+										}
+									}
+								}
+							}
+						}));
+					}
+
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Temple"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Re-solidify Lihzahrd Brick", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask));
+					}
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Glowing Mushrooms and Jungle Plants"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Glowing Mushrooms and Tropics Plants", new WorldGenLegacyMethod(Tropics.GlowingMushroomsandJunglePlantsTask));
+					}
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Plants"));
+					if (jungleIndex != -1)
+					{
+						tasks[jungleIndex] = new PassLegacy("Tropics Plants", new WorldGenLegacyMethod(Tropics.JungleBushesTask));
+					}
 				}
 			}
-
-			if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
+			else
 			{
-				int jungleIndex = tasks.FindIndex(i => i.Name.Equals("Wet Jungle"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
-				}
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Ice"));
-				if (jungleIndex != -1)
-				{
-					tasks.Insert(jungleIndex + 1, new PassLegacy("Tuhrtl Brick Unsolid", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration config)
-					{
-						Main.tileSolid[ModContent.TileType<Tiles.Savanna.TuhrtlBrick>()] = false;
-						Main.tileSolid[ModContent.TileType<Tiles.Savanna.BrambleSpikes>()] = false;
-					})));
-				}
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Mud Caves To Grass"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Loam Caves To Grass", new WorldGenLegacyMethod(Tropics.JunglesGrassTask));
-					tasks.Insert(jungleIndex, new PassLegacy("Loam", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration configuration)
-					{
-						int tile = ModContent.TileType<Tiles.Savanna.Loam>();
-						for (int i = 0; i < Main.maxTilesX; i++)
-						{
-							for (int j = 0; j < Main.maxTilesY; j++)
-							{
-								if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Mud)
-								{
-									Main.tile[i, j].TileType = (ushort)tile;
-								}
-							}
-						}
-					})));
-				}
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Temple"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Tuhrtl Outpost", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostTask));
-					tasks.Insert(jungleIndex + 1, new PassLegacy("Outpost Traps", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostReplaceTraps)));
-				}
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Hives"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Wasp Nests", new WorldGenLegacyMethod(Tropics.WaspNests));
-				}
-
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Chests"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Tropics Sanctums", new WorldGenLegacyMethod(Tropics.TropicsSanctumTask));
-				}
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Muds Walls In Jungle"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Loam Walls in Tropics", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration passConfig)
-					{
-						progress.Set(1.0);
-						int num171 = 0;
-						int num172 = 0;
-						bool flag4 = false;
-						for (int num173 = 5; num173 < Main.maxTilesX - 5; num173++)
-						{
-							for (int num174 = 0; num174 < Main.worldSurface + 20.0; num174++)
-							{
-								if (Main.tile[num173, num174].HasTile && Main.tile[num173, num174].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
-								{
-									num171 = num173;
-									flag4 = true;
-									break;
-								}
-							}
-
-							if (flag4)
-								break;
-						}
-
-						flag4 = false;
-						for (int num175 = Main.maxTilesX - 5; num175 > 5; num175--)
-						{
-							for (int num176 = 0; num176 < Main.worldSurface + 20.0; num176++)
-							{
-								if (Main.tile[num175, num176].HasTile && Main.tile[num175, num176].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
-								{
-									num172 = num175;
-									flag4 = true;
-									break;
-								}
-							}
-
-							if (flag4)
-								break;
-						}
-						GenVars.jungleMinX = num171;
-						GenVars.jungleMaxX = num172;
-						for (int num177 = num171; num177 <= num172; num177++)
-						{
-							for (int num178 = 0; (double)num178 < Main.maxTilesY - 200; num178++)
-							{
-								if (((num177 >= num171 + 2 && num177 <= num172 - 2) || !WorldGen.genRand.NextBool(2)) &&
-									((num177 >= num171 + 3 && num177 <= num172 - 3) || !WorldGen.genRand.NextBool(3)) &&
-									(Main.tile[num177, num178].WallType == WallID.DirtUnsafe || Main.tile[num177, num178].WallType == WallID.Cave6Unsafe ||
-									Main.tile[num177, num178].WallType == WallID.MudUnsafe))
-								{
-									Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.TropicalMudWall>();
-								}
-							}
-						}
-						for (int q = GenVars.jungleMinX; q <= GenVars.jungleMaxX; q++)
-						{
-							for (int z = 0; (double)z < Main.maxTilesY - 200; z++)
-							{
-								if ((q < GenVars.jungleMinX + 75 && q >= GenVars.jungleMinX + 50) ||
-									(q > GenVars.jungleMaxX - 75 && q <= GenVars.jungleMaxX - 50) &&
-									z < Main.rockLayer && z > 250)
-								{
-									if (Main.tile[q, z].HasTile && WorldGen.genRand.NextBool(10))
-									{
-										if (Main.tile[q, z].TileType == TileID.Grass)
-										{
-											Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>();
-										}
-										if (Main.tile[q, z].TileType == TileID.Dirt)
-										{
-											Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.Loam>();
-										}
-									}
-								}
-
-								if (q >= GenVars.jungleMinX + 75 && q <= GenVars.jungleMaxX - 75 && z < Main.rockLayer && z > 250)
-								{
-									if (Main.tile[q, z].HasTile)
-									{
-										if (Main.tile[q, z].TileType == TileID.Grass)
-										{
-											Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>();
-										}
-										if (Main.tile[q, z].TileType == TileID.Dirt)
-										{
-											Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.Loam>();
-										}
-										if (Main.tile[q, z].TileType == TileID.Plants)
-										{
-											Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaShortGrass>();
-										}
-										if (Main.tile[q, z].TileType == TileID.Plants2)
-										{
-											Main.tile[q, z].TileType = (ushort)ModContent.TileType<Tiles.Savanna.SavannaLongGrass>();
-										}
-									}
-								}
-							}
-						}
-					}));
-				}
-
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Temple"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Re-solidify Lihzahrd Brick", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask));
-				}
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Glowing Mushrooms and Jungle Plants"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Glowing Mushrooms and Tropics Plants", new WorldGenLegacyMethod(Tropics.GlowingMushroomsandJunglePlantsTask));
-				}
-				jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Plants"));
-				if (jungleIndex != -1)
-				{
-					tasks[jungleIndex] = new PassLegacy("Tropics Plants", new WorldGenLegacyMethod(Tropics.JungleBushesTask));
-				}
+				AltLibrarySupport.UpdateBiomeFields();
+				evil = (int)ModContent.GetInstance<AvalonWorld>().WorldEvil;
 			}
 
 			index = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));

@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.ModSupport;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,8 +7,9 @@ using Terraria.ModLoader;
 namespace Avalon.Hooks
 {
     internal class BloodMoonTranforms : ModHook
-    {
-        protected override void Apply()
+	{
+		public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
+		protected override void Apply()
         {
             On_NPC.UpdateNPC_BloodMoonTransformations += OnBloodMoonTransformations;
         }

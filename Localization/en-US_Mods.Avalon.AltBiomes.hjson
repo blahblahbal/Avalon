@@ -4,3 +4,10 @@ ContagionAltBiome: {
 	GenPassName: "{$World.Generation.Contagion.Message}"
 	DryadTextDescriptor: contagion
 }
+
+SavannaAltBiome: {
+	DisplayName: "{$JungleSelection.Tropics.Title}"
+	Description: "{$JungleSelection.Tropics.Description}"
+	GenPassName: "{$World.Generation.Tropics.Message}"
+	DryadTextDescriptor: Savanna Alt Biome
+}

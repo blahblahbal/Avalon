@@ -29,6 +29,7 @@ using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.ModSupport;
 
 namespace Avalon.Common;
 
@@ -436,38 +437,40 @@ public class AvalonMobDrops : GlobalNPC
 
 		if (npc.type == NPCID.EyeofCthulhu)
 		{
-			// remove corruption loot
-			npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.DemoniteOre);
-			npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CorruptSeeds);
-			npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.UnholyArrow);
+			if (!AltLibrarySupport.Enabled)
+			{
+				// remove corruption loot
+				npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.DemoniteOre);
+				npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CorruptSeeds);
+				npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.UnholyArrow);
 
-			// remove crimson loot
-			npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CrimtaneOre);
-			npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CrimsonSeeds);
+				// remove crimson loot
+				npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CrimtaneOre);
+				npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.itemId == ItemID.CrimsonSeeds);
 
-			// add corruption loot back
-			LeadingConditionRule corruptionRule = new LeadingConditionRule(corruptionNotContagion);
-			corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
-			corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
-			corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.UnholyArrow, 1, 20, 50));
-			corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
-			npcLoot.Add(corruptionRule);
+				// add corruption loot back
+				LeadingConditionRule corruptionRule = new LeadingConditionRule(corruptionNotContagion);
+				corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.DemoniteOre, 1, 30, 90));
+				corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.CorruptSeeds, 1, 1, 3));
+				corruptionRule.OnSuccess(ItemDropRule.Common(ItemID.UnholyArrow, 1, 20, 50));
+				npcLoot.Add(corruptionRule);
 
-			// add crimson loot back
-			LeadingConditionRule crimsonRule = new LeadingConditionRule(crimsonNotExpert);
-			crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
-			crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
-			crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
-			crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
-			npcLoot.Add(crimsonRule);
+				// add crimson loot back
+				LeadingConditionRule crimsonRule = new LeadingConditionRule(crimsonNotExpert);
+				crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
+				crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
+				crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
+				npcLoot.Add(crimsonRule);
 
-			// add contagion loot
-			LeadingConditionRule contagionRule = new LeadingConditionRule(contagionNotExpert);
-			contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
-			contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
-			contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<IckyArrow>(), 1, 20, 50));
-			contagionRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
-			npcLoot.Add(contagionRule);
+				// add contagion loot
+				LeadingConditionRule contagionRule = new LeadingConditionRule(contagionNotExpert);
+				contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
+				contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
+				contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<IckyArrow>(), 1, 20, 50));
+				npcLoot.Add(contagionRule);
+			}
+
+			npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ItemID.BloodMoonStarter, 12));
 		}
 
 		// blood moon loot
