@@ -165,19 +165,7 @@ public class AvalonWorld : ModSystem
 		tag["Avalon:CavesSecretSeed"] = cavesWorld;
 		tag["Avalon:RetroSecretSeed"] = retroWorld;
 
-		AvalonTileData[] myData = Main.tile.GetData<AvalonTileData>(); //Coppied from SLR because I havent worked with pointers much
-		byte[] data = new byte[myData.Length];
-		unsafe
-		{
-			fixed (AvalonTileData* ptr = myData)
-			{
-				byte* bytePtr = (byte*)ptr;
-				var span = new Span<byte>(bytePtr, myData.Length);
-				var target = new Span<byte>(data);
-				span.CopyTo(target);
-			}
-		}
-		tag.Add("Avalon:TileData", data);
+		SaveUnsafeTileData(tag);
 	}
 	public override void SaveWorldHeader(TagCompound tag)
 	{
@@ -230,19 +218,7 @@ public class AvalonWorld : ModSystem
 				if (ContagionCountCollection.Contains(Main.tile[i, j].TileType)) //Better calculations, this is only loaded when the world is loaded
 					totalSick2++;                                                //to make sure that the world doesn't lag when calculating normally
 
-		AvalonTileData[] targetData = Main.tile.GetData<AvalonTileData>(); //Coppied from SLR because I havent worked with pointers much
-		byte[] data = tag.GetByteArray("Avalon:TileData");
-
-		unsafe
-		{
-			fixed (AvalonTileData* ptr = targetData)
-			{
-				byte* bytePtr = (byte*)ptr;
-				var span = new Span<byte>(bytePtr, targetData.Length);
-				var target = new Span<byte>(data);
-				target.CopyTo(span);
-			}
-		}
+		LoadUnsafeTileData(tag);
 
 		//Love terraria hardcoding how % are caculated, re-caculated here because the current caculations earlier in the file saving are so early they cant caculate modded tiles (as modded tiles haddent loaded at that point)
 		for (int x = 0; x < Main.maxTilesX; x++)
@@ -281,6 +257,48 @@ public class AvalonWorld : ModSystem
 			ExxoAvalonOrigins.OphioidMod.Call("SetCustomWorldEvilForDeathMessage", Language.GetText("Mods.Avalon.Biomes.Contagion.DisplayName"));
 		}
 		#endregion
+	}
+	public static bool failedUnsafeLoad = false;
+	private unsafe void SaveUnsafeTileData(TagCompound tag) //Copied from Starlight River's AuroraWaterSystem.cs because I havent worked with pointers much
+	{
+		if (failedUnsafeLoad)
+		{
+			Mod.Logger.Info("Did not save Avalon:TileData as it previously failed to load.");
+			failedUnsafeLoad = false;
+			return;
+		}
+
+		AvalonTileData[] myData = Main.tile.GetData<AvalonTileData>();
+		byte[] data = new byte[myData.Length];
+
+		fixed (AvalonTileData* ptr = myData)
+		{
+			byte* bytePtr = (byte*)ptr;
+			var span = new Span<byte>(bytePtr, myData.Length);
+			var target = new Span<byte>(data);
+			span.CopyTo(target);
+		}
+		tag.Add("Avalon:TileData", data);
+	}
+	private unsafe void LoadUnsafeTileData(TagCompound tag) //Copied from Starlight River's AuroraWaterSystem.cs because I havent worked with pointers much
+	{
+		AvalonTileData[] targetData = Main.tile.GetData<AvalonTileData>();
+		byte[] data = tag.GetByteArray("Avalon:TileData");
+
+		if (targetData.Length != data.Length)
+		{
+			Mod.Logger.Error($"Failed to load Avalon:TileData raw data, saved data was of incorrect size. Loaded data was {data.Length}, expected {targetData.Length}. Avalon:TileData will not be loaded.");
+			failedUnsafeLoad = true;
+			return;
+		}
+
+		fixed (AvalonTileData* ptr = targetData)
+		{
+			byte* bytePtr = (byte*)ptr;
+			var span = new Span<byte>(bytePtr, targetData.Length);
+			var target = new Span<byte>(data);
+			target.CopyTo(span);
+		}
 	}
 
 	public override void PreUpdateWorld()

@@ -33,7 +33,7 @@ Comentdude for some code
 GreenTea for some code
 Jeo for some sprites and a lot of code, and for coughing
 Blasfah for many sprites, and some code
-TerrorPenguin for many sprites
+TerrorPenguin for lots of sprites and code
 Fred for some sprites
 Jace for many potion sprites
 PhilCo for some sprites
@@ -45,6 +45,7 @@ All the beta testers and discord members for general help with testing the mod
 Relxs, Hadiros, and Lion8cake for assisting with the Sky Fortress construction
 Clicker Class for the armor glowmask code
 Thorium for parent/child projectile syncing code, and various miscellaneous bits of code used for compatibility
+Starlight River for its unsafe TileData saving/loading code
 
 
 Bubbles.ogg from https://freesound.org/people/Avaruusnuija/sounds/476618/
