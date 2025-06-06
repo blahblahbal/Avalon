@@ -156,11 +156,17 @@ public class AltLibrarySupport : ModSystem
 	}
 	[JITWhenModsEnabled(nameof(AltLibrary))]
 	public static void AddStalactite(int stalactite, params int[] anchors) => AltStalactites.AddStalactite(stalactite, anchors);
+	public static void TryAddVine(int stalactite, params int[] anchors)
+	{
+		if (Enabled) AddVine(stalactite, anchors);
+	}
+	[JITWhenModsEnabled(nameof(AltLibrary))]
+	public static void AddVine(int stalactite, params int[] anchors) => AltVines.AddVine(stalactite, anchors);
 }
 [ExtendsFromMod(nameof(AltLibrary))]
 public class ContagionAltBiome : AltBiome
 {
-	public override string IconLarge => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/IconOverlayContagion";
+	public override string WorldIcon => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/IconOverlayContagion";
 	public override string OuterTexture => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/LoadingOuterContagion";
 	public override string IconSmall => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/IconContagion";
 	public override Color OuterColor => new(175, 148, 199);
@@ -407,8 +413,7 @@ public class ContagionAltBiome : AltBiome
 [ExtendsFromMod(nameof(AltLibrary))]
 public class SavannaAltBiome : AltBiome
 {
-	public override string IconLarge => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/IconOverlayContagion";
-	public override string IconSmall => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/IconContagion";
+	public override string IconSmall => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldIcons/IconTropics";
 	public override Color OuterColor => new(175, 148, 199);
 	public override IShoppingBiome Biome => ModContent.GetInstance<Biomes.Tropics>();
 	public override Color NameColor => new(191, 162, 78);
