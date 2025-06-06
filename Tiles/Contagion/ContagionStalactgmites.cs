@@ -1,4 +1,5 @@
 using Avalon.Dusts;
+using Avalon.ModSupport;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -19,7 +20,8 @@ public class ContagionStalactgmites : ModTile
         Main.tileMerge[Type][ModContent.TileType<Chunkstone>()] = true;
         DustType = ModContent.DustType<ContagionDust>();
         AddMapEntry(new Color(83, 103, 76));
-    }
+		AltLibrarySupport.TryAddStalactite(Type, ModContent.TileType<Chunkstone>(), ModContent.TileType<HardenedSnotsand>(), ModContent.TileType<Snotsandstone>());
+	}
     public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
     {
         switch (tileFrameY)

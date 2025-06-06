@@ -37,6 +37,7 @@ using Terraria.IO;
 using Tropics = Avalon.WorldGeneration.Passes.Tropics;
 using AltLibrary.Common.AltOres;
 using Avalon.Items.Accessories.PreHardmode;
+using AltLibrary.Common.Hooks;
 
 namespace Avalon.ModSupport;
 
@@ -149,6 +150,12 @@ public class AltLibrarySupport : ModSystem
 		}
 		return true;
 	}
+	public static void TryAddStalactite(int stalactite, params int[] anchors)
+	{
+		if (Enabled) AddStalactite(stalactite, anchors);
+	}
+	[JITWhenModsEnabled(nameof(AltLibrary))]
+	public static void AddStalactite(int stalactite, params int[] anchors) => AltStalactites.AddStalactite(stalactite, anchors);
 }
 [ExtendsFromMod(nameof(AltLibrary))]
 public class ContagionAltBiome : AltBiome
