@@ -1049,7 +1049,7 @@ public class Utils
 						}
 						if (tile.TileType == TileID.Containers || tile.TileType == TileID.Containers2)
 						{
-							int chest = Chest.FindChestByGuessing(k, l);
+							int chest = FindChestGetTopLeft(k, l);
 							if (chest != -1)
 							{
 								foreach (Item item in Main.chest[chest].item)
@@ -1240,5 +1240,25 @@ public class Utils
 				}
 			}
 		}
+	}
+
+	/// <summary>
+	/// Tries to find a <see cref="Chest"/>, getting the top left automatically using the given (<paramref name="X"/>, <paramref name="Y"/>) (tile coordinates).
+	/// </summary>
+	/// <param name="X">The x-coordinate of a chest tile, in tile coordinates.</param>
+	/// <param name="Y">The y-coordinate of a chest tile, in tile coordinates.</param>
+	/// <returns>The index in <see cref="Main.chest"/> of the chest using the top left found with the given (<paramref name="X"/>, <paramref name="Y"/>), or <c>-1</c> if one doesn't exist.</returns>
+	/// <remarks>
+	/// Do NOT use <see cref="Chest.FindChestByGuessing(int, int)"/>, it does not work as described in the documentation.
+	/// </remarks>
+	public static int FindChestGetTopLeft(int X, int Y)
+	{
+		Tile tile = Main.tile[X, Y];
+		if (tile == null) return -1;
+
+		X -= (tile.TileFrameX / 18 % 2);
+		Y -= (tile.TileFrameY / 18);
+
+		return Chest.FindChest(X, Y);
 	}
 }
