@@ -26,9 +26,6 @@ public class SprintScroll : ModItem
 	}
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
-		if (!hideVisual)
-		{
-			player.GetModPlayer<AvalonStaminaPlayer>().SprintUnlocked = true;
-		}
+		player.GetModPlayer<AvalonStaminaPlayer>().SprintUnlocked = player.GetModPlayer<AvalonPlayer>().StaminaAbilitiesEnabled;
 	}
 }

@@ -27,9 +27,6 @@ public class WallSlidingScroll : ModItem
 	}
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
-		if (!hideVisual)
-		{
-			player.GetModPlayer<AvalonStaminaPlayer>().WallSlidingUnlocked = true;
-		}
+		player.GetModPlayer<AvalonStaminaPlayer>().WallSlidingUnlocked = player.GetModPlayer<AvalonPlayer>().StaminaAbilitiesEnabled;
 	}
 }

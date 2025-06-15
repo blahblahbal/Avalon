@@ -200,7 +200,7 @@ public class Librarian : ModNPC
 
     public override bool CanTownNPCSpawn(int numTownNPCs)
     {
-        return NPC.downedBoss1;
+		return ClassExtensions.DownedAnyPHMBoss();
     }
 
     public override void OnChatButtonClicked(bool firstButton, ref string shop)

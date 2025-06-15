@@ -27,9 +27,6 @@ public class MiningScroll : ModItem
 	}
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
-		if (!hideVisual)
-		{
-			player.GetModPlayer<AvalonStaminaPlayer>().MiningSpeedUnlocked = true;
-		}
+		player.GetModPlayer<AvalonStaminaPlayer>().MiningSpeedUnlocked = player.GetModPlayer<AvalonPlayer>().StaminaAbilitiesEnabled;
 	}
 }

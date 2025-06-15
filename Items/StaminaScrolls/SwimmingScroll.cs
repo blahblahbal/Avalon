@@ -27,9 +27,6 @@ public class SwimmingScroll : ModItem
 	}
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
-		if (!hideVisual)
-		{
-			player.GetModPlayer<AvalonStaminaPlayer>().SwimmingUnlocked = true;
-		}
+		player.GetModPlayer<AvalonStaminaPlayer>().SwimmingUnlocked = player.GetModPlayer<AvalonPlayer>().StaminaAbilitiesEnabled;
 	}
 }

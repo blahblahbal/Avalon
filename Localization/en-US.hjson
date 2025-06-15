@@ -566,6 +566,7 @@ Mods: {
 			"Assign Waypoint.DisplayName": Assign Waypoint
 			"Trigger Genie Effect.DisplayName": Trigger  Genie  Effect
 			"Change Lighting Mode.DisplayName": Change  Lighting  Mode
+			"Toggle Stamina Abilities.DisplayName": Toggle Stamina Abilities
 		}
 
 		CommonItemTooltip: {
@@ -9679,6 +9680,11 @@ Mods: {
 				DisplayName: Torch Launcher
 				Tooltip: ""
 			}
+
+			DuplicationPotion: {
+				DisplayName: Duplication Potion
+				Tooltip: Has a chance to duplicate enemy and fishing item drops
+			}
 		}
 
 		InfoDisplays: {
@@ -10317,7 +10323,7 @@ Mods: {
 
 			Librarian: {
 				DisplayName: Librarian
-				Bestiary: The Librarian fled his homeland when mysterious otherwordly beings invaded. He seems to be much happier here.
+				Bestiary: The Librarian fled his homeland when mysterious otherworldly beings invaded. He seems to be much happier here.
 
 				Dialogue: {
 					First: My home is fraught with Wraiths. I'm deathly afraid of them; please keep them away.
@@ -10356,7 +10362,7 @@ Mods: {
 					Princess_LovesNPC: I like {NPCName}.
 				}
 
-				Census.SpawnCondition: Conditions unknown
+				Census.SpawnCondition: Defeat any pre-Hardmode boss
 
 				DeathText: {
 					0: " was nuked by a full squad."
@@ -11239,6 +11245,11 @@ Mods: {
 			ShroomiteFullbright: {
 				DisplayName: Shroomite Fullbright
 				Description: You have been revealed
+			}
+
+			Dupe: {
+				DisplayName: Dupe
+				Description: You have a chance to duplicate drops
 			}
 		}
 

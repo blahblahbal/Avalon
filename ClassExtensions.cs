@@ -2,6 +2,7 @@ using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Material.Ores;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -25,6 +26,13 @@ public static class ClassExtensions
 		r.Width += xDist * 2;
 		r.Height += yDist * 2;
 		return r;
+	}
+
+	public static bool DownedAnyPHMBoss()
+	{
+		return NPC.downedBoss1 || NPC.downedSlimeKing || NPC.downedBoss2 || NPC.downedBoss3 || NPC.downedQueenBee ||
+			NPC.downedDeerclops || ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak ||
+			ModContent.GetInstance<DownedBossSystem>().DownedKingSting;
 	}
 
 	public static Dictionary<TKey, TValue> TorchLauncherAdding<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)

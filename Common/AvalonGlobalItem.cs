@@ -74,6 +74,31 @@ public class AvalonGlobalItem : GlobalItem
 			player.discountEquipped = true;
 		}
 	}
+
+	public override void OnSpawn(Item item, IEntitySource source)
+	{
+		if (source is EntitySource_ItemOpen)
+		{
+			EntitySource_ItemOpen newSource = (EntitySource_ItemOpen)source;
+			if (!ItemID.Sets.BossBag[newSource.ItemType])
+			{
+				if (newSource.Player.GetModPlayer<AvalonPlayer>().DupeLoot && Main.rand.NextBool(1))
+				{
+					Item.NewItem(new EntitySource_OverfullInventory(newSource.Player), item.position, item.type, item.stack);
+				}
+			}
+		}
+		if (source is EntitySource_Loot)
+		{
+			if (((EntitySource_Loot)source).Entity is NPC npc)
+			{
+				if (Main.player[npc.lastInteraction].GetModPlayer<AvalonPlayer>().DupeLoot && Main.rand.NextBool(30) && !npc.boss)
+				{
+					Item.NewItem(new EntitySource_DropAsItem(npc), item.position, item.type, item.stack);
+				}
+			}
+		}
+	}
 	public override void SetStaticDefaults()
 	{
 		#region Shimmer
@@ -820,7 +845,7 @@ public class AvalonGlobalItem : GlobalItem
 	}
 	public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
 	{
-		if (ItemID.Sets.BossBag[item.type] == true)
+		if (ItemID.Sets.BossBag[item.type])
 		{
 			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<StaminaCrystal>(), 4));
 		}

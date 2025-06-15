@@ -27,9 +27,6 @@ public class TeleportScroll : ModItem
 	}
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
-		if (!hideVisual)
-		{
-			player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked = true;
-		}
+		player.GetModPlayer<AvalonStaminaPlayer>().TeleportUnlocked = player.GetModPlayer<AvalonPlayer>().StaminaAbilitiesEnabled;
 	}
 }

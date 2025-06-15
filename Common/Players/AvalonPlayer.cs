@@ -136,6 +136,9 @@ public class AvalonPlayer : ModPlayer
 	}
 	#endregion
 
+	public bool StaminaAbilitiesEnabled = true;
+	public bool DupeLoot = false;
+
 	public bool WOSRenderHPText = false;
 	public int WOSLaserEyeIndex = -1;
 	public int WOSMouthEyeIndex = -1;
@@ -472,6 +475,7 @@ public class AvalonPlayer : ModPlayer
 		Gambler = false;
 		Malaria = false;
 		AdvGambler = false;
+		DupeLoot = false;
 
 		// accessories
 		TrapImmune = false;
@@ -2885,6 +2889,10 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void ProcessTriggers(TriggersSet triggersSet)
 	{
+		if (KeybindSystem.ToggleStaminaAbilities.JustPressed)
+		{
+			StaminaAbilitiesEnabled = !StaminaAbilitiesEnabled;
+		}
 		if (AstralProject && KeybindSystem.AstralHotkey.JustPressed)
 		{
 			if (Player.HasBuff<AstralProjecting>())

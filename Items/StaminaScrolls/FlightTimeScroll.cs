@@ -27,9 +27,6 @@ public class FlightTimeScroll : ModItem
 	}
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
-		if (!hideVisual)
-		{
-			player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreUnlocked = true;
-		}
+		player.GetModPlayer<AvalonStaminaPlayer>().FlightRestoreUnlocked = player.GetModPlayer<AvalonPlayer>().StaminaAbilitiesEnabled;
 	}
 }
