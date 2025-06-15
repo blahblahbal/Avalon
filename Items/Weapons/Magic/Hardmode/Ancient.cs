@@ -28,18 +28,8 @@ public class Ancient : ModItem
 		NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI);
 		NetMessage.SendData(MessageID.ShotAnimationAndSound, -1, -1, null, player.whoAmI);
 
-		// possibly fucky way of 
-		float angle = player.AngleTo(Main.MouseWorld);
-		float radX = MathF.Cos(angle);
-		float radY = MathF.Sin(angle);
-		int radDirX = MathF.Sign(radX);
-		int radDirY = MathF.Sign(radY);
-		// X
-		float velMultX = player.velocity.X * (radX * radDirX);
-		// Y
-		float velMultY = player.velocity.Y * (radY * radDirY);
-
-		Vector2 velMult = new(velMultX, velMultY);
+		Vector2 dirToMouse = player.SafeDirectionTo(Main.MouseWorld);
+		Vector2 velMult = player.velocity * new Vector2(MathF.Abs(dirToMouse.X), MathF.Abs(dirToMouse.Y)); // The player's current velocity, multiplied by the unsigned cosine & sine of the angle to the mouse
 
 		int projCount = 5;
 		for (int i = 1; i <= projCount; i++)

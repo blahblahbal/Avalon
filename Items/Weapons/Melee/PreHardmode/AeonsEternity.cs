@@ -43,19 +43,8 @@ public class AeonsEternity : ModItem
 		{
 			Vector2 velRand = velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f);
 
-			// possibly fucky way of 
-			float angle = player.AngleTo(Main.MouseWorld);
-			float radX = MathF.Cos(angle);
-			float radY = MathF.Sin(angle);
-			int radDirX = MathF.Sign(radX);
-			int radDirY = MathF.Sign(radY);
-			// X
-			float velMultX = player.velocity.X * (radX * radDirX);
-			// Y
-			float velMultY = player.velocity.Y * (radY * radDirY);
-
-			Vector2 velMult = new(velMultX, velMultY);
-
+			Vector2 dirToMouse = player.SafeDirectionTo(Main.MouseWorld);
+			Vector2 velMult = player.velocity * new Vector2(MathF.Abs(dirToMouse.X), MathF.Abs(dirToMouse.Y)); // The player's current velocity, multiplied by the unsigned cosine & sine of the angle to the mouse
 
 			Projectile p = Projectile.NewProjectileDirect(Item.GetSource_FromThis(), position, velRand + velMult * 0.8f + player.velocity * 0.2f, ModContent.ProjectileType<AeonStar>(), damage / 5, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.timeForVisualEffects);
 			p.scale = Main.rand.NextFloat(0.9f, 1.1f);
