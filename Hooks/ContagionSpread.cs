@@ -4,17 +4,21 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Avalon.Walls;
 using Avalon.Tiles.Contagion;
+using Avalon.ModSupport;
 
 namespace Avalon.Hooks
 {
     internal class ContagionSpread : ModHook
     {
-        protected override void Apply()
+		protected override void Apply()
         {
-            On_WorldGen.hardUpdateWorld += On_WorldGen_hardUpdateWorld; //This contaions tile spreading
-            On_WorldGen.UpdateWorld_OvergroundTile += On_WorldGen_UpdateWorld_OvergroundTile; //these contain wall spreading
-            On_WorldGen.UpdateWorld_UndergroundTile += On_WorldGen_UpdateWorld_UndergroundTile;
-            On_WorldGen.SpreadDesertWalls += On_WorldGen_SpreadDesertWalls; //this contains desert wall spreading
+			if (!AltLibrarySupport.Enabled)
+			{
+				On_WorldGen.hardUpdateWorld += On_WorldGen_hardUpdateWorld; //This contaions tile spreading
+				On_WorldGen.UpdateWorld_OvergroundTile += On_WorldGen_UpdateWorld_OvergroundTile; //these contain wall spreading
+				On_WorldGen.UpdateWorld_UndergroundTile += On_WorldGen_UpdateWorld_UndergroundTile;
+				On_WorldGen.SpreadDesertWalls += On_WorldGen_SpreadDesertWalls; //this contains desert wall spreading
+			}
             IL_WorldGen.GrowCactus += IL_WorldGen_GrowCactus;
             IL_WorldGen.StonePatch += IL_WorldGen_StonePatch;
         }

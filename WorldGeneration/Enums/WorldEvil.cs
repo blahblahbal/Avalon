@@ -4,4 +4,5 @@ public enum WorldEvil {
     Corruption,
     Crimson,
     Contagion,
+	External
 }

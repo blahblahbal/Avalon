@@ -1,4 +1,5 @@
 using Avalon.Dusts;
+using Avalon.ModSupport;
 using Avalon.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,7 +29,8 @@ public class ContagionVines : ModTile
         HitSound = SoundID.Grass;
         DustType = ModContent.DustType<ContagionDust>();
         AddMapEntry(new Color(117, 131, 37));
-    }
+		AltLibrarySupport.TryAddVine(Type, ModContent.TileType<Ickgrass>(), ModContent.TileType<ContagionJungleGrass>());
+	}
 
     public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
     {

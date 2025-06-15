@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.ModSupport;
 using Avalon.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +18,8 @@ namespace Avalon.Hooks;
 
 public class JungleSelectionMenu : ModHook
 {
-    protected override void Apply()
+	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
+	protected override void Apply()
     {
 		if (ModContent.GetInstance<AvalonClientConfig>().BetaTropicsGen)
 		{

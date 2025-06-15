@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.ModSupport;
 using Avalon.Reflection;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
@@ -32,7 +33,8 @@ public class DungeonRework : ModHook
 }
 public class DungeonContagionChest : ModHook
 {
-    protected override void Apply()
+	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
+	protected override void Apply()
     {
         On_WorldGen.AddBuriedChest_int_int_int_bool_int_bool_ushort += On_WorldGen_AddBuriedChest_int_int_int_bool_int_bool_ushort;
     }

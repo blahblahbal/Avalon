@@ -69,6 +69,7 @@ public class MobRift : ModNPC
             if (NPC.ai[0] % 60 == 0)
             {
                 Player p = Main.player[Player.FindClosest(NPC.position, NPC.width, NPC.height)];
+				//TODO: altlib support
                 if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Corruption)
                 {
                     if (Main.rand.NextBool(2)) // crimson mobs
