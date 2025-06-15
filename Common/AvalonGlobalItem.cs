@@ -206,7 +206,7 @@ public class AvalonGlobalItem : GlobalItem
 
 		Item.staff[ItemID.Vilethorn] = true;
 		Item.staff[ItemID.HiveWand] = true;
-		ItemID.Sets.CanGetPrefixes[ItemID.HiveWand] = true;
+		ContentSamples.ItemsByType[ItemID.HiveWand].GetPrefixCategories().AddRange([PrefixCategory.Magic]);
 	}
 	public override void PostUpdate(Item item)
 	{
@@ -826,7 +826,6 @@ public class AvalonGlobalItem : GlobalItem
 		}
 		if (item.type == ItemID.FairyQueenBossBag)
 		{
-
 			CommonDrop? d = null;
 			foreach (IItemDropRule item2 in itemLoot.Get(false))
 			{
@@ -841,7 +840,6 @@ public class AvalonGlobalItem : GlobalItem
 					{
 						d.itemId = ModContent.ItemType<CrystalSkull>();
 					}
-
 				}
 			}
 
