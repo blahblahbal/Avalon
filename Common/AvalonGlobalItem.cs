@@ -82,7 +82,7 @@ public class AvalonGlobalItem : GlobalItem
 			EntitySource_ItemOpen newSource = (EntitySource_ItemOpen)source;
 			if (!ItemID.Sets.BossBag[newSource.ItemType])
 			{
-				if (newSource.Player.GetModPlayer<AvalonPlayer>().DupeLoot && Main.rand.NextBool(1))
+				if (newSource.Player.GetModPlayer<AvalonPlayer>().DupeLoot && Main.rand.NextBool(30))
 				{
 					Item.NewItem(new EntitySource_OverfullInventory(newSource.Player), item.position, item.type, item.stack);
 				}
