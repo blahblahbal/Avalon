@@ -138,6 +138,7 @@ public class AvalonPlayer : ModPlayer
 
 	public bool StaminaAbilitiesEnabled = true;
 	public bool DupeLoot = false;
+	public bool AdvDupeLoot = false;
 
 	public bool WOSRenderHPText = false;
 	public int WOSLaserEyeIndex = -1;
@@ -476,6 +477,7 @@ public class AvalonPlayer : ModPlayer
 		Malaria = false;
 		AdvGambler = false;
 		DupeLoot = false;
+		AdvDupeLoot = false;
 
 		// accessories
 		TrapImmune = false;

@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Potions.Buff;
 
-public class DuplicationPotion : ModItem
+public class FortunePotion : ModItem
 {
 	public override void SetStaticDefaults()
 	{
@@ -23,7 +23,7 @@ public class DuplicationPotion : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Dupe>(), TimeUtils.MinutesToTicks(8));
+		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Dupe>(), TimeUtils.MinutesToTicks(5));
 	}
 	public override void AddRecipes()
 	{

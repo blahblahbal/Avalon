@@ -1,4 +1,5 @@
 ﻿using Avalon.Common;
+using Avalon.Common.Players;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -62,7 +63,11 @@ internal class DupePotionHook : ModHook
 			}
 			stack = num2;
 		}
-		if (Main.rand.NextBool(30))
+		if (thePlayer.GetModPlayer<AvalonPlayer>().DupeLoot && Main.rand.NextBool(30))
+		{
+			Item.NewItem(new EntitySource_OverfullInventory(thePlayer), self.position, itemType, stack);
+		}
+		if (thePlayer.GetModPlayer<AvalonPlayer>().AdvDupeLoot && Main.rand.NextBool(20))
 		{
 			Item.NewItem(new EntitySource_OverfullInventory(thePlayer), self.position, itemType, stack);
 		}

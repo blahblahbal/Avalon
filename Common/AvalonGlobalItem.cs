@@ -86,6 +86,10 @@ public class AvalonGlobalItem : GlobalItem
 				{
 					Item.NewItem(new EntitySource_OverfullInventory(newSource.Player), item.position, item.type, item.stack);
 				}
+				if (newSource.Player.GetModPlayer<AvalonPlayer>().AdvDupeLoot && Main.rand.NextBool(20))
+				{
+					Item.NewItem(new EntitySource_OverfullInventory(newSource.Player), item.position, item.type, item.stack);
+				}
 			}
 		}
 		if (source is EntitySource_Loot)
@@ -93,6 +97,10 @@ public class AvalonGlobalItem : GlobalItem
 			if (((EntitySource_Loot)source).Entity is NPC npc)
 			{
 				if (Main.player[npc.lastInteraction].GetModPlayer<AvalonPlayer>().DupeLoot && Main.rand.NextBool(30) && !npc.boss)
+				{
+					Item.NewItem(new EntitySource_DropAsItem(npc), item.position, item.type, item.stack);
+				}
+				if (Main.player[npc.lastInteraction].GetModPlayer<AvalonPlayer>().AdvDupeLoot && Main.rand.NextBool(20) && !npc.boss)
 				{
 					Item.NewItem(new EntitySource_DropAsItem(npc), item.position, item.type, item.stack);
 				}

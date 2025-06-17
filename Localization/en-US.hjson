@@ -9681,9 +9681,14 @@ Mods: {
 				Tooltip: ""
 			}
 
-			DuplicationPotion: {
-				DisplayName: Duplication Potion
-				Tooltip: Has a chance to duplicate enemy and fishing item drops
+			FortunePotion: {
+				DisplayName: Fortune Potion
+				Tooltip: Has a chance to duplicate enemy, crate, and fishing item drops
+			}
+
+			AdvFortunePotion: {
+				DisplayName: Fortune Elixir
+				Tooltip: Has a better chance to duplicate enemy, crate, and fishing item drops
 			}
 		}
 
@@ -11248,8 +11253,13 @@ Mods: {
 			}
 
 			Dupe: {
-				DisplayName: Dupe
+				DisplayName: Fortune
 				Description: You have a chance to duplicate drops
+			}
+
+			AdvDupe: {
+				DisplayName: Advanced Fortune
+				Description: You have a better chance to duplicate drops
 			}
 		}
 
