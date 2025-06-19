@@ -11,146 +11,206 @@ namespace Avalon.Projectiles.Summon;
 
 public class PriminiLaser : ModProjectile
 {
-    int scaleSize1;
-    int scaleSize2;
-    public override void SetStaticDefaults()
-    {
-        ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
-        Main.projPet[Projectile.type] = true;
-        Main.projFrames[Projectile.type] = 3;
-    }
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Projectile.netImportant = true;
-        Projectile.width = 30;
-        Projectile.height = 30;
-        Projectile.aiStyle = -1;
-        Projectile.penetrate = -1;
-        Projectile.timeLeft *= 5;
-        Projectile.minion = true;
-        Projectile.minionSlots = 0f;
-        Projectile.tileCollide = false;
-        Projectile.ignoreWater = true;
-        Projectile.friendly = true;
-        Main.projPet[Projectile.type] = true;
-        scaleSize1 = (int)(Projectile.width * 1.35f);
-        scaleSize2 = (int)(Projectile.height * 1.7f);
-    }
-    public override bool PreDraw(ref Color lightColor)
-    {
-        var tex = TextureAssets.Projectile[Type].Value;
-        Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition,
-            new Rectangle(0, tex.Height / 3 * Projectile.frame, tex.Width, tex.Height / 3),
-            lightColor, Projectile.rotation, new Vector2(tex.Width / 2, tex.Height / 6),
-            Projectile.scale, SpriteEffects.None);
-        return false;
-    }
-    public override bool MinionContactDamage()
-    {
-        return false;
-    }
-    public override void AI()
-    {
-        Player owner = Main.player[Projectile.owner];
-        if (owner.dead)
-        {
-            owner.GetModPlayer<AvalonPlayer>().PrimeMinion = false;
-        }
-        if (owner.GetModPlayer<AvalonPlayer>().PrimeMinion)
-        {
-            Projectile.timeLeft = 2;
-        }
-        AvalonGlobalProjectile.ModifyProjectileStats(Projectile, ModContent.ProjectileType<PrimeArmsCounter>(), 50, 3, 1f, 0.1f);
+	int scaleSize1;
+	int scaleSize2;
+	public override void SetStaticDefaults()
+	{
+		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
+		ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
 
-        if (Projectile.frame == 1)
-        {
-            Projectile.Hitbox = new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, scaleSize1, scaleSize1);
-        }
-        if (Projectile.frame == 2)
-        {
-            Projectile.Hitbox = new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, scaleSize2, scaleSize2);
-        }
+		ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
+		Main.projPet[Projectile.type] = true;
+		Main.projFrames[Projectile.type] = 3;
+	}
+	public override void SetDefaults()
+	{
+		Projectile.netImportant = true;
+		Projectile.width = 30;
+		Projectile.height = 30;
+		Projectile.aiStyle = -1;
+		Projectile.penetrate = -1;
+		Projectile.timeLeft *= 5;
+		Projectile.minion = true;
+		Projectile.minionSlots = 0f;
+		Projectile.tileCollide = false;
+		Projectile.ignoreWater = true;
+		Projectile.friendly = true;
+		scaleSize1 = (int)(Projectile.width * 1.35f);
+		scaleSize2 = (int)(Projectile.height * 1.7f);
+	}
+	public ref float ShootDelay => ref Projectile.ai[1];
+	public override void AI()
+	{
+		Player owner = Main.player[Projectile.owner];
+		if (owner.dead)
+		{
+			owner.GetModPlayer<AvalonPlayer>().PrimeMinion = false;
+		}
+		if (owner.GetModPlayer<AvalonPlayer>().PrimeMinion)
+		{
+			Projectile.timeLeft = 2;
+		}
+		PrimeArmsCounter.ModifyPrimeMinionStats(Projectile, owner);
 
-        if (Projectile.position.Y > Main.player[Projectile.owner].Center.Y + Main.rand.Next(-5, 5) + Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
-        {
-            if (Projectile.velocity.Y > 0f)
-            {
-                Projectile.velocity.Y *= 0.96f;
-            }
-            Projectile.velocity.Y -= 0.3f;
-            if (Projectile.velocity.Y > 6f)
-            {
-                Projectile.velocity.Y = 6f;
-            }
-        }
-        else if (Projectile.position.Y < Main.player[Projectile.owner].Center.Y + Main.rand.Next(-5, 5) + Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
-        {
-            if (Projectile.velocity.Y < 0f)
-            {
-                Projectile.velocity.Y *= 0.96f;
-            }
-            Projectile.velocity.Y += 0.2f;
-            if (Projectile.velocity.Y < -6f)
-            {
-                Projectile.velocity.Y = -6f;
-            }
-        }
-        if (Projectile.Center.X > Main.player[Projectile.owner].Center.X - Main.rand.Next(35, 55) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
-        {
-            if (Projectile.velocity.X > 0f)
-            {
-                Projectile.velocity.X *= 0.94f;
-            }
-            Projectile.velocity.X -= 0.3f;
-            if (Projectile.velocity.X > 9f)
-            {
-                Projectile.velocity.X = 9f;
-            }
-        }
-        if (Projectile.Center.X < Main.player[Projectile.owner].Center.X - Main.rand.Next(35, 55) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
-        {
-            if (Projectile.velocity.X < 0f)
-            {
-                Projectile.velocity.X *= 0.94f;
-            }
-            Projectile.velocity.X += 0.2f;
-            if (Projectile.velocity.X < -8f)
-            {
-                Projectile.velocity.X = -8f;
-            }
-        }
-        var num957 = Projectile.FindClosestNPC(640, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly);
-        if (num957 == -1)
-        {
-            Projectile.rotation = -0.785398164f; // -2.3561945f;
-            return;
-        }
-        Projectile.rotation = Vector2.Normalize(Main.npc[num957].Center - Projectile.Center).ToRotation() + MathHelper.Pi;
-        if (Collision.CanHit(Projectile.position, Projectile.width, Projectile.height, Main.npc[num957].position, Main.npc[num957].width, Main.npc[num957].height))
-        {
-            if (!Main.npc[num957].active)
-            {
-                Projectile.ai[1] = 0f;
-                return;
-            }
-            Projectile.ai[1]++;
-            if (Projectile.ai[1] <= 50f)
-            {
-                Projectile.velocity = Vector2.Normalize(Main.npc[num957].Center - Projectile.Center) * 9f;
-                if (Projectile.ai[1] == 50f)
-                {
-                    Projectile.ai[1] = 95f;
-                    return;
-                }
-            }
-            else if (Projectile.ai[1] >= 95f)
-            {
-                var num958 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X, Projectile.position.Y, 1.5f, 1.5f, ProjectileID.MiniRetinaLaser, 70, 4.5f, Projectile.owner, 0f, 0f);
-                Main.projectile[num958].velocity = Vector2.Normalize(Main.npc[num957].Center - Projectile.Center) * 8f;
-                Projectile.ai[1] = 51f;
-                return;
-            }
-        }
-    }
+		if (Projectile.frame == 1)
+		{
+			Projectile.Resize(scaleSize1, scaleSize1);
+		}
+		if (Projectile.frame == 2)
+		{
+			Projectile.Resize(scaleSize2, scaleSize2);
+		}
+
+		SurroundOwner(owner);
+
+		float maxDist = 800f;
+		AvalonGlobalProjectile.GetMinionTarget(Projectile, owner, out bool hasTarget, out NPC target, out float targetDist, maxDist);
+		if (!hasTarget || targetDist > maxDist || owner.Center.Distance(target.Center) > maxDist) // todo: replace last check with IsPlayerTooFarFromNPC method inside the gastromini minion
+		{
+			if (Projectile.Center.Distance(owner.Center) < 400f)
+			{
+				//Projectile.rotation = Projectile.Center.AngleTo(owner.Center);
+				Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.Center.AngleTo(owner.Center), 0.1f);
+			}
+			else
+			{
+				Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.Center.AngleTo(owner.Center), 0.1f);
+			}
+			if (ShootDelay > 0)
+			{
+				ShootDelay -= 0.5f;
+			}
+			//Projectile.rotation = MathHelper.PiOver4;
+			//Projectile.rotation = 0f;
+			return;
+		}
+		AvalonGlobalProjectile.AvoidOwnedMinions(Projectile);
+		//SurroundTarget(target, targetDist);
+		Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.Center.AngleTo(target.Center) + MathHelper.Pi, 0.1f);
+
+		ShootDelay++;
+		if (ShootDelay >= 95f/* && Collision.CanHit(Projectile, target)*/)
+		{
+			var proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileID.MiniRetinaLaser, Projectile.damage, 0f, Projectile.owner, 0f, 0f);
+			proj.velocity = Projectile.Center.SafeDirectionTo(target.Center) * 8f;
+			ShootDelay = 51f;
+		}
+	}
+	//private void SurroundTarget(NPC target, float targetDist) // todo: move this to avalonglobalprojectile? (gastromini version has unique behaviour, though)
+	//{
+	//	Vector2 targetDir = Projectile.Center.SafeDirectionTo(target.Center);
+	//	if (targetDist > 200f)
+	//	{
+	//		float dirMult = 8f;
+	//		targetDir *= dirMult;
+	//		Projectile.velocity = (Projectile.velocity * 40f + targetDir) / 41f;
+	//	}
+	//	else
+	//	{
+	//		float dirMult = 4f;
+	//		targetDir *= -dirMult;
+	//		Projectile.velocity = (Projectile.velocity * 40f + targetDir) / 41f;
+	//	}
+	//}
+	private void SurroundOwner(Player owner)
+	{
+		if (Projectile.BottomRight.Y > owner.Center.Y - Main.rand.Next(28, 33) - 1f - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+		{
+			if (Projectile.velocity.Y > 0f)
+			{
+				Projectile.velocity.Y *= 0.96f;
+			}
+			Projectile.velocity.Y -= 0.2f;
+			if (Projectile.velocity.Y > 6f)
+			{
+				Projectile.velocity.Y = 6f;
+			}
+		}
+		else if (Projectile.BottomRight.Y < owner.Center.Y - Main.rand.Next(28, 33) - 1f - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+		{
+			if (Projectile.velocity.Y < 0f)
+			{
+				Projectile.velocity.Y *= 0.96f;
+			}
+			Projectile.velocity.Y += 0.2f;
+			if (Projectile.velocity.Y < -6f)
+			{
+				Projectile.velocity.Y = -6f;
+			}
+		}
+		if (Projectile.BottomRight.X > owner.Center.X - Main.rand.Next(38, 43) - 2f - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+		{
+			if (Projectile.velocity.X > 0f)
+			{
+				Projectile.velocity.X *= 0.94f;
+			}
+			Projectile.velocity.X -= 0.2f;
+			if (Projectile.velocity.X > 8f)
+			{
+				Projectile.velocity.X = 8f;
+			}
+		}
+		else if (Projectile.BottomRight.X < owner.Center.X - Main.rand.Next(38, 43) - 2f - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+		{
+			if (Projectile.velocity.X < 0f)
+			{
+				Projectile.velocity.X *= 0.94f;
+			}
+			Projectile.velocity.X += 0.2f;
+			if (Projectile.velocity.X < -8f)
+			{
+				Projectile.velocity.X = -8f;
+			}
+		}
+		//Projectile.BottomRight = owner.Center + new Vector2(-55f, -70f) + new Vector2(-2f, -1f);
+		//Projectile.velocity = Vector2.Zero;
+	}
+	public override bool? CanCutTiles()
+	{
+		return false;
+	}
+	public override bool MinionContactDamage()
+	{
+		return false;
+	}
+	public override bool PreDraw(ref Color lightColor)
+	{
+		var tex = TextureAssets.Projectile[Type].Value;
+		Rectangle sourceRect = new(0, tex.Height / 3 * Projectile.frame, tex.Width, tex.Height / 3);
+		Vector2 drawOrigin = new(tex.Width / 2, tex.Height / 6);
+
+		for (int k = Projectile.oldPos.Length - 1; k >= 0; k -= 2)
+		{
+			Color color = Projectile.GetAlpha(lightColor);
+			color.R = (byte)(color.R * (10 - k) / 20);
+			color.G = (byte)(color.G * (10 - k) / 20);
+			color.B = (byte)(color.B * (10 - k) / 20);
+			color.A = (byte)(color.A * (10 - k) / 20);
+			Vector2 drawPos = Projectile.oldPos[k] + Projectile.Size * 0.5f - Main.screenPosition;
+			Main.EntitySpriteDraw
+			(
+				tex,
+				drawPos,
+				sourceRect,
+				color, Projectile.rotation,
+				drawOrigin,
+				Projectile.scale,
+				SpriteEffects.None,
+				0f
+			);
+		}
+
+		Main.EntitySpriteDraw
+		(
+			tex,
+			Projectile.Center - Main.screenPosition,
+			sourceRect,
+			lightColor,
+			Projectile.rotation,
+			drawOrigin,
+			Projectile.scale,
+			SpriteEffects.None
+		);
+		return false;
+	}
 }

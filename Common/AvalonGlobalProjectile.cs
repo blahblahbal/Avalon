@@ -5,6 +5,7 @@ using Avalon.Tiles.Contagion;
 using Avalon.Tiles.GemTrees;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -16,31 +17,101 @@ namespace Avalon.Common;
 
 internal class AvalonGlobalProjectile : GlobalProjectile
 {
-	public static void ModifyProjectileStats(Projectile p, int ownedCounts, int origDmg, int dmgMod, float origScale, float scaleMod)
+	private static List<int> _blacklistedTargets = new List<int>();
+	public static void UpgradeableMinionCounterAI(Projectile projectile, Player owner, int buffType, ref bool playerMinionBool)
 	{
-		p.damage = (int)Main.player[p.owner].GetDamage(DamageClass.Summon).ApplyTo(origDmg);
-		p.damage += Main.player[p.owner].ownedProjectileCounts[ownedCounts] * dmgMod;
-		p.scale = origScale;
-		p.scale += scaleMod * Main.player[p.owner].ownedProjectileCounts[ownedCounts];
-		if (Main.player[p.owner].ownedProjectileCounts[ownedCounts] > 7)
+		owner.AddBuff(buffType, 3600);
+		projectile.position = owner.position;
+		projectile.damage = 0;
+		if (owner.dead)
 		{
-			p.frame = 2;
-			p.scale = origScale;
-			if (Main.player[p.owner].ownedProjectileCounts[ownedCounts] < 10)
-			{
-				p.scale += scaleMod * (Main.player[p.owner].ownedProjectileCounts[ownedCounts] - 7);
-			}
-			else
-			{
-				p.scale += scaleMod * 2;
-			}
-
+			playerMinionBool = false;
 		}
-		else if (Main.player[p.owner].ownedProjectileCounts[ownedCounts] > 4)
+		if (playerMinionBool)
 		{
-			p.frame = 1;
-			p.scale = origScale;
-			p.scale += scaleMod * (Main.player[p.owner].ownedProjectileCounts[ownedCounts] - 4);
+			projectile.timeLeft = 2;
+		}
+
+		List<int> blacklistedTargets = _blacklistedTargets;
+		blacklistedTargets.Clear();
+		AI_GetMyGroupIndexAndFillBlackList(projectile, blacklistedTargets, out int index, out int totalIndexesInGroup);
+
+		Vector2 center2 = Projectile.AI_164_GetHomeLocation(owner, index, totalIndexesInGroup);
+		projectile.Center = center2;
+	}
+	public static void AI_GetMyGroupIndexAndFillBlackList(Projectile projectile, List<int> blackListedTargets, out int index, out int totalIndexesInGroup)
+	{
+		index = 0;
+		totalIndexesInGroup = 0;
+		foreach (Projectile otherProj in Main.ActiveProjectiles)
+		{
+			if (otherProj.owner == projectile.owner && otherProj.type == projectile.type)
+			{
+				if (projectile.whoAmI > otherProj.whoAmI)
+				{
+					index++;
+				}
+				totalIndexesInGroup++;
+			}
+		}
+	}
+	public static void GetMinionTarget(Projectile minion, Player owner, out bool hasTarget, out NPC target, out float targetDist, float maxDist = 800f, bool ignoreTiles = false)
+	{
+		target = new NPC();
+		targetDist = maxDist;
+		hasTarget = false;
+
+		if (owner.HasMinionAttackTargetNPC)
+		{
+			NPC npc = Main.npc[owner.MinionAttackTargetNPC];
+			if (ignoreTiles || Collision.CanHitLine(minion.position, minion.width, minion.height, npc.position, npc.width, npc.height))
+			{
+				target = npc;
+				targetDist = Vector2.Distance(minion.Center, target.Center);
+				hasTarget = true;
+			}
+		}
+		if (!owner.HasMinionAttackTargetNPC || !hasTarget)
+		{
+			foreach (var npc in Main.ActiveNPCs)
+			{
+				if (npc.CanBeChasedBy(minion.ModProjectile, false))
+				{
+					float distance = Vector2.Distance(npc.Center, minion.Center);
+					if ((distance < targetDist || !hasTarget) && (ignoreTiles || Collision.CanHitLine(minion.position, minion.width, minion.height, npc.position, npc.width, npc.height)))
+					{
+						targetDist = distance;
+						target = npc;
+						hasTarget = true;
+					}
+				}
+			}
+		}
+	}
+	public static void AvoidOwnedMinions(Projectile minion)
+	{
+		float idleAccel = 0.05f;
+		foreach (var otherProj in Main.ActiveProjectiles)
+		{
+			if (otherProj.whoAmI != minion.whoAmI && otherProj.owner == minion.owner && Math.Abs(minion.position.X - otherProj.position.X) + Math.Abs(minion.position.Y - otherProj.position.Y) < minion.width)
+			{
+				if (minion.position.X < otherProj.position.X)
+				{
+					minion.velocity.X -= idleAccel;
+				}
+				else
+				{
+					minion.velocity.X += idleAccel;
+				}
+				if (minion.position.Y < otherProj.position.Y)
+				{
+					minion.velocity.Y -= idleAccel;
+				}
+				else
+				{
+					minion.velocity.Y += idleAccel;
+				}
+			}
 		}
 	}
 	public static void AvoidOtherGas(Projectile proj, Vector2? size = null, Vector2? otherSize = null, float strength = 1f)

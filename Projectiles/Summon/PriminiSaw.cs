@@ -11,175 +11,236 @@ namespace Avalon.Projectiles.Summon;
 
 public class PriminiSaw : ModProjectile
 {
-    int scaleSize1;
-    int scaleSize2;
-    public override void SetStaticDefaults()
-    {
-        ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
-        Main.projPet[Projectile.type] = true;
-        Main.projFrames[Projectile.type] = 3;
-    }
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Projectile.netImportant = true;
-        Projectile.width = 42;
-        Projectile.height = 42;
-        Projectile.aiStyle = -1;
-        Projectile.penetrate = -1;
-        Projectile.timeLeft *= 5;
-        Projectile.minion = true;
-        Projectile.minionSlots = 0f;
-        Projectile.tileCollide = false;
-        Projectile.ignoreWater = true;
-        Projectile.friendly = true;
-        Main.projPet[Projectile.type] = true;
-        scaleSize1 = (int)(Projectile.width * 1.35f);
-        scaleSize2 = (int)(Projectile.height * 1.7f);
-    }
-    public override bool MinionContactDamage()
-    {
-        return true;
-    }
-    public override bool PreDraw(ref Color lightColor)
-    {
-        var tex = TextureAssets.Projectile[Type].Value;
-        Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition,
-            new Rectangle(0, tex.Height / 3 * Projectile.frame, tex.Width, tex.Height / 3),
-            lightColor, Projectile.rotation, new Vector2(tex.Width / 2, tex.Height / 6),
-            Projectile.scale, SpriteEffects.None);
-        return false;
-    }
-    public override bool? CanHitNPC(NPC target)
-    {
-        if (target.type == NPCID.TargetDummy) return false;
-        return base.CanHitNPC(target);
-    }
-    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-    {
-        readyToHome = false;
-    }
-    public float maxSpeed = 10f + Main.rand.NextFloat(10f);
-    public float homeDistance = 300;
-    public float homeStrength = 3f;
-    public float homeDelay;
-    public bool readyToHome = true;
-    public override void AI()
-    {
-        Player owner = Main.player[Projectile.owner];
-        if (owner.dead)
-        {
-            owner.GetModPlayer<AvalonPlayer>().PrimeMinion = false;
-        }
-        if (owner.GetModPlayer<AvalonPlayer>().PrimeMinion)
-        {
-            Projectile.timeLeft = 2;
-        }
-        AvalonGlobalProjectile.ModifyProjectileStats(Projectile, ModContent.ProjectileType<PrimeArmsCounter>(), 50, 3, 1f, 0.1f);
+	int scaleSize1;
+	int scaleSize2;
+	public override void SetStaticDefaults()
+	{
+		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
+		ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
 
-        if (Projectile.frame == 1)
-        {
-            Projectile.Hitbox = new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, scaleSize1, scaleSize1);
-        }
-        if (Projectile.frame == 2)
-        {
-            Projectile.Hitbox = new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, scaleSize2, scaleSize2);
-        }
+		ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
+		Main.projPet[Projectile.type] = true;
+		Main.projFrames[Projectile.type] = 3;
+	}
+	public override void SetDefaults()
+	{
+		Projectile.netImportant = true;
+		Projectile.width = 42;
+		Projectile.height = 42;
+		Projectile.aiStyle = -1;
+		Projectile.penetrate = -1;
+		Projectile.timeLeft *= 5;
+		Projectile.minion = true;
+		Projectile.minionSlots = 0f;
+		Projectile.tileCollide = false;
+		Projectile.ignoreWater = true;
+		Projectile.friendly = true;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = 30;
+		scaleSize1 = (int)(Projectile.width * 1.35f);
+		scaleSize2 = (int)(Projectile.height * 1.7f);
+	}
+	public ref float AttackDelay => ref Projectile.ai[1];
+	public ref float ChargeAngle => ref Projectile.ai[2];
+	public override void AI()
+	{
+		Player owner = Main.player[Projectile.owner];
+		if (owner.dead)
+		{
+			owner.GetModPlayer<AvalonPlayer>().PrimeMinion = false;
+		}
+		if (owner.GetModPlayer<AvalonPlayer>().PrimeMinion)
+		{
+			Projectile.timeLeft = 2;
+		}
+		PrimeArmsCounter.ModifyPrimeMinionStats(Projectile, owner);
 
-        if (Projectile.position.Y > Main.player[Projectile.owner].Center.Y - Main.rand.Next(60, 80) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
-        {
-            if (Projectile.velocity.Y > 0f)
-            {
-                Projectile.velocity.Y *= 0.96f;
-            }
-            Projectile.velocity.Y -= 0.3f;
-            if (Projectile.velocity.Y > 6f)
-            {
-                Projectile.velocity.Y = 6f;
-            }
-        }
-        else if (Projectile.position.Y < Main.player[Projectile.owner].Center.Y - Main.rand.Next(60, 80) - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
-        {
-            if (Projectile.velocity.Y < 0f)
-            {
-                Projectile.velocity.Y *= 0.96f;
-            }
-            Projectile.velocity.Y += 0.2f;
-            if (Projectile.velocity.Y < -6f)
-            {
-                Projectile.velocity.Y = -6f;
-            }
-        }
-        if (Projectile.Center.X > Main.player[Projectile.owner].Center.X + Main.rand.Next(45, 65) + Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
-        {
-            if (Projectile.velocity.X > 0f)
-            {
-                Projectile.velocity.X *= 0.94f;
-            }
-            Projectile.velocity.X -= 0.3f;
-            if (Projectile.velocity.X > 9f)
-            {
-                Projectile.velocity.X = 9f;
-            }
-        }
-        if (Projectile.Center.X < Main.player[Projectile.owner].Center.X + Main.rand.Next(45, 65) + Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
-        {
-            if (Projectile.velocity.X < 0f)
-            {
-                Projectile.velocity.X *= 0.94f;
-            }
-            Projectile.velocity.X += 0.2f;
-            if (Projectile.velocity.X < -8f)
-            {
-                Projectile.velocity.X = -8f;
-            }
-        }
+		if (Projectile.frame == 1)
+		{
+			Projectile.Resize(scaleSize1, scaleSize1);
+		}
+		if (Projectile.frame == 2)
+		{
+			Projectile.Resize(scaleSize2, scaleSize2);
+		}
 
-        if (!readyToHome)
-        {
-            homeDelay++;
-            if (homeDelay >= 20)
-            {
-                readyToHome = true;
-                homeDelay = 0;
-            }
-        }
+		// todo: have it ignore tiles as it only attacks nearby enemies
+		float maxDist = 400f;
+		AvalonGlobalProjectile.GetMinionTarget(Projectile, owner, out bool hasTarget, out NPC target, out float targetDist, maxDist, true);
+		if (!hasTarget || targetDist > maxDist || owner.Center.Distance(target.Center) > maxDist)
+		{
+			if (Projectile.Center.Distance(owner.Center) < 400f)
+			{
+				//Projectile.rotation = Projectile.Center.AngleTo(owner.Center);
+				Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.Center.AngleTo(owner.Center), 0.1f);
+			}
+			else
+			{
+				Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.Center.AngleTo(owner.Center), 0.1f);
+			}
+			AttackDelay = 0f;
+			ChargeAngle = 0f;
+			SurroundOwner(owner);
+			return;
+		}
 
-        var closest = Projectile.FindClosestNPC(640, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly);
-        if (closest == -1)
-        {
-            Projectile.rotation = 2.35619449f; // +
-            return;
-        }
-        Vector2 startPosition = Projectile.Center;
-        Projectile.rotation = Vector2.Normalize(Main.npc[closest].Center - Projectile.Center).ToRotation() + MathHelper.Pi;
-        if (Collision.CanHit(Main.npc[closest], Projectile))
-        {
-            Vector2 target = Main.npc[closest].Center;
-            float distance = Vector2.Distance(target, startPosition);
-            Vector2 goTowards = Vector2.Normalize(target - startPosition) * ((homeDistance - distance) / (homeDistance / homeStrength));
+		AvalonGlobalProjectile.AvoidOwnedMinions(Projectile);
+		//SurroundTarget(target, targetDist);
 
-            Projectile.velocity += goTowards;
+		Vector2 rotationTarget = target.Center;
+		float rotationMod = 0f;
+		float rotationAmount = 0.1f;
+		if (targetDist < 250f)
+		{
+			if (AttackDelay < 50f)
+			{
+				AttackDelay += 1f;
+				rotationTarget = target.Top;
+				if (Projectile.velocity.Length() > 2f)
+				{
+					Projectile.velocity *= 0.95f;
+				}
+				if (AttackDelay == 50f)
+				{
+					ChargeAngle = Projectile.Center.AngleTo(target.Center);
+				}
+			}
+			else if (AttackDelay < 65f)
+			{
+				AttackDelay += 1f;
+				rotationAmount = 0.2f;
+				Projectile.velocity = Vector2.Lerp(Projectile.velocity, ChargeAngle.ToRotationVector2() * 15f, 0.1f);
+			}
+			// todo: fix this shit, I want it to slash at the enemy once and then just move to its centre
+			// what I should probably do is use an ai[] field to set an angle to charge towards while AttackDelay is between certain values
+			//else if (targetDist >= 20f)
+			//{
+			//	//Projectile.velocity *= 0.003f;
+			//}
+			//else
+			//{
+			//	Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.SafeDirectionTo(rotationTarget) * 4f, 0.1f);
+			//}
+			else if (targetDist >= 20f)
+			{
+				Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.SafeDirectionTo(rotationTarget) * 4f, 0.1f);
+			}
+		}
+		else
+		{
+			AttackDelay = 0f;
+			ChargeAngle = 0f;
+			rotationTarget = target.Top + new Vector2(0, -50);
+			Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.Center.SafeDirectionTo(rotationTarget) * 9f, 0.1f);
+		}
+		Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.Center.AngleFrom(rotationTarget) + rotationMod, rotationAmount);
+	}
+	private void SurroundOwner(Player owner)
+	{
+		if (Projectile.TopRight.Y > owner.Center.Y + Main.rand.Next(23, 28) - 12f + Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+		{
+			if (Projectile.velocity.Y > 0f)
+			{
+				Projectile.velocity.Y *= 0.96f;
+			}
+			Projectile.velocity.Y -= 0.2f;
+			if (Projectile.velocity.Y > 6f)
+			{
+				Projectile.velocity.Y = 6f;
+			}
+		}
+		else if (Projectile.TopRight.Y < owner.Center.Y + Main.rand.Next(23, 28) - 12f + Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+		{
+			if (Projectile.velocity.Y < 0f)
+			{
+				Projectile.velocity.Y *= 0.96f;
+			}
+			Projectile.velocity.Y += 0.2f;
+			if (Projectile.velocity.Y < -6f)
+			{
+				Projectile.velocity.Y = -6f;
+			}
+		}
+		if (Projectile.TopRight.X > owner.Center.X - Main.rand.Next(28, 33) - 2f - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+		{
+			if (Projectile.velocity.X > 0f)
+			{
+				Projectile.velocity.X *= 0.94f;
+			}
+			Projectile.velocity.X -= 0.2f;
+			if (Projectile.velocity.X > 8f)
+			{
+				Projectile.velocity.X = 8f;
+			}
+		}
+		else if (Projectile.TopRight.X < owner.Center.X - Main.rand.Next(28, 33) - 2f - Projectile.OwnerProjCounts(ModContent.ProjectileType<PrimeArmsCounter>()) * 2)
+		{
+			if (Projectile.velocity.X < 0f)
+			{
+				Projectile.velocity.X *= 0.94f;
+			}
+			Projectile.velocity.X += 0.2f;
+			if (Projectile.velocity.X < -8f)
+			{
+				Projectile.velocity.X = -8f;
+			}
+		}
+		//Projectile.TopRight = owner.Center + new Vector2(-55f, 55f) + new Vector2(-2f, -12f);
+		////Projectile.rotation = 0f;
+		////Projectile.rotation = -MathHelper.PiOver4;
+		//Projectile.velocity = Vector2.Zero;
+	}
+	public override bool? CanCutTiles()
+	{
+		return false;
+	}
+	public override bool MinionContactDamage()
+	{
+		return true;
+	}
+	public override bool? CanHitNPC(NPC target)
+	{
+		if (target.type == NPCID.TargetDummy) return false;
+		return base.CanHitNPC(target);
+	}
+	public override bool PreDraw(ref Color lightColor)
+	{
+		var tex = TextureAssets.Projectile[Type].Value;
+		Rectangle sourceRect = new(0, tex.Height / 3 * Projectile.frame, tex.Width, tex.Height / 3);
+		Vector2 drawOrigin = new(tex.Width / 2, tex.Height / 6);
 
-            if (Projectile.velocity.Length() > maxSpeed)
-            {
-                Projectile.velocity = Vector2.Normalize(Projectile.velocity) * maxSpeed;
-            }
-        }
+		for (int k = Projectile.oldPos.Length - 1; k >= 0; k -= 2)
+		{
+			Color color = Projectile.GetAlpha(lightColor);
+			color.R = (byte)(color.R * (10 - k) / 20);
+			color.G = (byte)(color.G * (10 - k) / 20);
+			color.B = (byte)(color.B * (10 - k) / 20);
+			color.A = (byte)(color.A * (10 - k) / 20);
+			Vector2 drawPos = Projectile.oldPos[k] + Projectile.Size * 0.5f - Main.screenPosition;
+			Main.EntitySpriteDraw
+			(
+				tex,
+				drawPos,
+				sourceRect,
+				color, Projectile.rotation,
+				drawOrigin,
+				Projectile.scale,
+				SpriteEffects.None,
+				0f
+			);
+		}
 
-        //if (Collision.CanHit(Projectile.position, Projectile.width, Projectile.height, Main.npc[closest].position, Main.npc[closest].width, Main.npc[closest].height))
-        //{
-        //    if (!Main.npc[closest].active)
-        //    {
-        //        Projectile.ai[1] = 0f;
-        //        return;
-        //    }
-        //    Projectile.ai[1]++;
-        //    if (Projectile.ai[1] >= 50f)
-        //    {
-        //        Projectile.velocity = Vector2.Normalize(Main.npc[closest].Center - Projectile.Center) * 9f;
-        //        return;
-        //    }
-        //}
-    }
+		Main.EntitySpriteDraw
+		(
+			tex,
+			Projectile.Center - Main.screenPosition,
+			sourceRect,
+			lightColor,
+			Projectile.rotation,
+			drawOrigin,
+			Projectile.scale,
+			SpriteEffects.None
+		);
+		return false;
+	}
 }

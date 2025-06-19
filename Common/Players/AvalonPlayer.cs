@@ -13,6 +13,7 @@ using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Prefixes;
 using Avalon.Projectiles;
+using Avalon.Projectiles.Summon;
 using Avalon.Projectiles.Tools;
 using Avalon.Systems;
 using Avalon.Tiles.Furniture;
@@ -136,6 +137,9 @@ public class AvalonPlayer : ModPlayer
 	}
 	#endregion
 
+	public int highestPrimeCounterOriginalDamage;
+	public float primeMinionKnockback;
+
 	public bool StaminaAbilitiesEnabled = true;
 	public bool DupeLoot = false;
 	public bool AdvDupeLoot = false;
@@ -153,6 +157,10 @@ public class AvalonPlayer : ModPlayer
 
 	public bool InBossFight;
 
+	/// <summary>
+	/// Fetches the position of the mouse cursor in the world, instanced per player.<br/>
+	/// Useful for making things happen near the cursor without the need for manually syncing, such as the pointing laser's beam or the solar system's sun target.<br/>
+	/// </summary>
 	public Vector2 MousePosition;
 	public float MagicCritDamage = 1f;
 	public float MeleeCritDamage = 1f;
@@ -375,29 +383,38 @@ public class AvalonPlayer : ModPlayer
 			projectile.timeLeft = 2;
 		}
 	}
-	public void UpdatePrimeMinionStatus(IEntitySource source)
+	public void UpdatePrimeMinionStatus()
 	{
-		int firstMinion = ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>();
-		if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>()] < 1)
+		if (Player.ownedProjectileCounts[ModContent.ProjectileType<PrimeArmsCounter>()] < 1)
 		{
 			foreach (var projectile in Main.ActiveProjectiles)
 			{
-				if (projectile.owner == Player.whoAmI && projectile.type != firstMinion)
+				if (projectile.owner == Player.whoAmI)
 				{
-					projectile.Kill();
+					if (projectile.type == ModContent.ProjectileType<PriminiCannon>() || projectile.type == ModContent.ProjectileType<PriminiLaser>() || projectile.type == ModContent.ProjectileType<PriminiSaw>() || projectile.type == ModContent.ProjectileType<PriminiVice>())
+					{
+						projectile.Kill();
+					}
 				}
 			}
 		}
-		if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>()] < Player.maxMinions)
+		else if (Player.ownedProjectileCounts[ModContent.ProjectileType<PriminiCannon>()] < 1)
 		{
-			Projectile.NewProjectile(source, Player.position, Vector2.Zero, ModContent.ProjectileType<Projectiles.Summon.PrimeArmsCounter>(), 0, 0, Player.whoAmI);
-		}
-		if (Player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>()] < 1)
-		{
-			Projectile.NewProjectile(source, Player.Center.X - 40f, Player.Center.Y - 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiCannon>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
-			Projectile.NewProjectile(source, Player.Center.X - 40f, Player.Center.Y + 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiLaser>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
-			Projectile.NewProjectile(source, Player.Center.X + 40f, Player.Center.Y - 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiSaw>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
-			Projectile.NewProjectile(source, Player.Center.X + 40f, Player.Center.Y + 40f, 0f, 0f, ModContent.ProjectileType<Projectiles.Summon.PriminiVice>(), 50, 6.5f, Player.whoAmI, 0f, 0f);
+			IEntitySource source = Player.GetSource_Misc("PrimeTierSwap");
+
+			Vector2 cannonPos = Player.Center + new Vector2(40f, -40f);
+			Vector2 laserPos = Player.Center + new Vector2(-40f);
+			Vector2 sawPos = Player.Center + new Vector2(-40f, 40f);
+			Vector2 vicePos = Player.Center + new Vector2(40f);
+
+			Projectile p1 = Projectile.NewProjectileDirect(source, cannonPos, Vector2.Zero, ModContent.ProjectileType<PriminiCannon>(), 0, 0f, Player.whoAmI);
+			Projectile p2 = Projectile.NewProjectileDirect(source, laserPos, Vector2.Zero, ModContent.ProjectileType<PriminiLaser>(), 0, 0f, Player.whoAmI);
+			Projectile p3 = Projectile.NewProjectileDirect(source, sawPos, Vector2.Zero, ModContent.ProjectileType<PriminiSaw>(), 0, 0f, Player.whoAmI);
+			Projectile p4 = Projectile.NewProjectileDirect(source, vicePos, Vector2.Zero, ModContent.ProjectileType<PriminiVice>(), 0, 0f, Player.whoAmI);
+			p1.rotation = p1.Center.AngleTo(Player.Center);
+			p2.rotation = p2.Center.AngleTo(Player.Center);
+			p3.rotation = p3.Center.AngleTo(Player.Center);
+			p4.rotation = p4.Center.AngleTo(Player.Center);
 		}
 	}
 	public override void Load()

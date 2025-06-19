@@ -77,9 +77,8 @@ public class AvalonGlobalItem : GlobalItem
 
 	public override void OnSpawn(Item item, IEntitySource source)
 	{
-		if (source is EntitySource_ItemOpen)
+		if (source is EntitySource_ItemOpen newSource)
 		{
-			EntitySource_ItemOpen newSource = (EntitySource_ItemOpen)source;
 			if (!ItemID.Sets.BossBag[newSource.ItemType])
 			{
 				if (newSource.Player.GetModPlayer<AvalonPlayer>().DupeLoot && Main.rand.NextBool(30))
@@ -92,9 +91,9 @@ public class AvalonGlobalItem : GlobalItem
 				}
 			}
 		}
-		if (source is EntitySource_Loot)
+		if (source is EntitySource_Loot loot)
 		{
-			if (((EntitySource_Loot)source).Entity is NPC npc)
+			if (loot.Entity is NPC npc)
 			{
 				if (Main.player[npc.lastInteraction].GetModPlayer<AvalonPlayer>().DupeLoot && Main.rand.NextBool(30) && !npc.boss)
 				{
