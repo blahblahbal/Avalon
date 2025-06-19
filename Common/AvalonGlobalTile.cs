@@ -495,8 +495,8 @@ public class AvalonGlobalTile : GlobalTile
     {
         int pid = Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16);
         if (pid >= 0)
-        {
-            if (TileID.Sets.Ore[Main.tile[i, j].TileType])
+		{
+			if (TileID.Sets.Ore[Main.tile[i, j].TileType])
             {
                 if (Main.player[pid].GetModPlayer<AvalonPlayer>().OreDupe && Main.player[pid].HeldItem.pick >= ClassExtensions.GetPickaxePower(Main.tile[i, j].TileType, j))
                 {

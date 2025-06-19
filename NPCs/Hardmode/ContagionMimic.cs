@@ -5,6 +5,7 @@ using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Ranged.Hardmode;
+using Avalon.ModSupport;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -97,6 +98,7 @@ public class ContagionMimic : ModNPC
 }
 public class ContagionMimicHook : ModHook
 {
+	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
     protected override void Apply()
     {
         On_NPC.NewNPC += On_NPC_NewNPC;

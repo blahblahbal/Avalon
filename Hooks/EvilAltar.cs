@@ -10,6 +10,7 @@ using Avalon.Tiles.Ores;
 using Terraria.Chat;
 using Terraria.Localization;
 using Terraria.GameContent.Achievements;
+using Avalon.ModSupport;
 
 namespace Avalon.Hooks;
 
@@ -17,9 +18,12 @@ public class EvilAltar : ModHook
 {
     protected override void Apply()
     {
-		IL_WorldGen.SmashAltar += EditAltarSpawn;
-        //IL_WorldGen.SmashAltar += WorldGen_SmashAltar;
-        On_WorldGen.SmashAltar += On_WorldGen_SmashAltar;
+		if (!AltLibrarySupport.Enabled)
+		{
+			IL_WorldGen.SmashAltar += EditAltarSpawn;
+			//IL_WorldGen.SmashAltar += WorldGen_SmashAltar;
+			On_WorldGen.SmashAltar += On_WorldGen_SmashAltar;
+		}
         IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool;
     }
 
