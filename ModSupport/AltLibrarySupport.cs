@@ -2,13 +2,8 @@ using AltLibrary;
 using AltLibrary.Common.AltBiomes;
 using AltLibrary.Common.Systems;
 using AltLibrary.Core.Generation;
-using AltLibrary.Core;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.Personalities;
 using Terraria.ID;
@@ -16,7 +11,6 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Avalon.Tiles.Contagion;
-using Avalon.WorldGeneration.Passes;
 using Avalon.Items.Other;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Material.Ores;
@@ -31,7 +25,6 @@ using Avalon.Walls;
 using Avalon.WorldGeneration.Enums;
 using Avalon.Common;
 using AltLibrary.Common.Conditions;
-using Avalon.Biomes;
 using Terraria.GameContent.Generation;
 using Terraria.IO;
 using Tropics = Avalon.WorldGeneration.Passes.Tropics;
@@ -634,6 +627,36 @@ public class BismuthAltOre : AltOre
 		ore = ModContent.TileType<Tiles.Ores.BismuthOre>();
 		bar = ModContent.ItemType<BismuthBar>();
 		Watch = ModContent.ItemType<BismuthWatch>();
+	}
+}
+[ExtendsFromMod(nameof(AltLibrary))]
+public class DuritaniumAltOre : AltOre
+{
+	public override OreSlot OreSlot => ModContent.GetInstance<CobaltOreSlot>();
+	public override void SetStaticDefaults()
+	{
+		ore = ModContent.TileType<Tiles.Ores.DurataniumOre>();
+		bar = ModContent.ItemType<DurataniumBar>();
+	}
+}
+[ExtendsFromMod(nameof(AltLibrary))]
+public class NaquadahAltOre : AltOre
+{
+	public override OreSlot OreSlot => ModContent.GetInstance<MythrilOreSlot>();
+	public override void SetStaticDefaults()
+	{
+		ore = ModContent.TileType<Tiles.Ores.NaquadahOre>();
+		bar = ModContent.ItemType<NaquadahBar>();
+	}
+}
+[ExtendsFromMod(nameof(AltLibrary))]
+public class TroxiniumAltOre : AltOre
+{
+	public override OreSlot OreSlot => ModContent.GetInstance<AdamantiteOreSlot>();
+	public override void SetStaticDefaults()
+	{
+		ore = ModContent.TileType<Tiles.Ores.TroxiniumOre>();
+		bar = ModContent.ItemType<TroxiniumBar>();
 	}
 }
 // it would be possible to add support for other mods to add their own Rhodium variants by extending OreSlot

@@ -17,3 +17,18 @@ ZincAltOre: {
 	DisplayName: Zinc
 	Description: ""
 }
+
+DuritaniumAltOre: {
+	DisplayName: Duritanium
+	Description: ""
+}
+
+NaquadahAltOre: {
+	DisplayName: Naquadah
+	Description: ""
+}
+
+TroxiniumAltOre: {
+	DisplayName: Troxinium
+	Description: ""
+}
