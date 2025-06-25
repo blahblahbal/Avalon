@@ -135,6 +135,7 @@ public class HungrySummon : ModProjectile
 			{
 				Projectile.tileCollide = false;
 			}
+			Latched = false;
 		}
 		if (player.HasMinionAttackTargetNPC)
 		{
