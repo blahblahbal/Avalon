@@ -15,7 +15,7 @@ public class PriminiCannon : ModProjectile
 	int scaleSize2;
 	public override void SetStaticDefaults()
 	{
-		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
+		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
 		ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
 
 		ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -182,13 +182,14 @@ public class PriminiCannon : ModProjectile
 		Rectangle sourceRect = new(0, tex.Height / 3 * Projectile.frame, tex.Width, tex.Height / 3);
 		Vector2 drawOrigin = new(tex.Width / 2, tex.Height / 6);
 
-		for (int k = Projectile.oldPos.Length - 1; k >= 0; k -= 2)
+		for (int k = Projectile.oldPos.Length - 1; k >= 0; k--)
 		{
 			Color color = Projectile.GetAlpha(lightColor);
-			color.R = (byte)(color.R * (10 - k) / 20);
-			color.G = (byte)(color.G * (10 - k) / 20);
-			color.B = (byte)(color.B * (10 - k) / 20);
-			color.A = (byte)(color.A * (10 - k) / 20);
+			int alphaMod = 10 - (k * 2 + 1);
+			color.R = (byte)(color.R * alphaMod / 20);
+			color.G = (byte)(color.G * alphaMod / 20);
+			color.B = (byte)(color.B * alphaMod / 20);
+			color.A = (byte)(color.A * alphaMod / 20);
 			Vector2 drawPos = Projectile.oldPos[k] + Projectile.Size * 0.5f - Main.screenPosition;
 			Main.EntitySpriteDraw
 			(
