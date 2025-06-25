@@ -13,6 +13,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Placeable.Wall;
+using Avalon.ModSupport;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.NPCs.TownNPCs;
@@ -240,6 +241,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		Condition corruption = new Condition("Corruption", () => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Corruption);
 		Condition crimson = new Condition("Crimson", () => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Crimson);
 		Condition contagion = new Condition("Contagion", () => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion);
+		AltLibrarySupport.ReplaceShopConditions(ref corruption, ref crimson, ref contagion);
 		Condition notContagion = new Condition("Not Contagion", () => !contagion.IsMet());
 		Condition downedBP = new Condition("BacteriumPrime", () => ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime);
 

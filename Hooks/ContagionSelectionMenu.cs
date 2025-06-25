@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Reflection;
 using Avalon.Common;
+using Avalon.ModSupport;
 using Avalon.UI.Next;
 using Avalon.UI.Next.Enums;
 using Avalon.UI.Next.Structs;
@@ -20,7 +21,8 @@ namespace Avalon.Hooks;
 
 [Autoload(Side = ModSide.Client)]
 public class ContagionSelectionMenu : ModHook {
-    public enum WorldEvilSelection {
+	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
+	public enum WorldEvilSelection {
         Random,
         Corruption,
         Crimson,

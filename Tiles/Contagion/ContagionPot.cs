@@ -9,6 +9,7 @@ using Terraria.Localization;
 using Avalon.Common;
 using Avalon.WorldGeneration.Enums;
 using Avalon.Items.Placeable.Furniture;
+using Avalon.ModSupport;
 
 namespace Avalon.Tiles.Contagion;
 
@@ -262,10 +263,13 @@ public class ContagionPot : ModTile
                         }
                         else
                         {
-                            if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Corruption) type2 = ItemID.UnholyArrow;
-                            else if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Crimson) type2 = ModContent.ItemType<Items.Ammo.BloodyArrow>();
-                            else if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion) type2 = ModContent.ItemType<Items.Ammo.IckyArrow>(); // contagion arrow
-                        }
+							if (!AltLibrarySupport.EvilBiomeArrow(ref type2))
+							{
+								if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Corruption) type2 = ItemID.UnholyArrow;
+								else if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Crimson) type2 = ModContent.ItemType<Items.Ammo.BloodyArrow>();
+								else if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion) type2 = ModContent.ItemType<Items.Ammo.IckyArrow>(); // contagion arrow
+							}
+						}
                     }
                     Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, type2, stack2, false, 0, false);
                 }

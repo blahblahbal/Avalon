@@ -1,8 +1,16 @@
+using Avalon.ModSupport;
+using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
+using ReLogic.Content;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using Terraria.GameContent;
+using Terraria;
 using Terraria.ModLoader.Config;
+using Terraria.ModLoader.Config.UI;
+using Terraria.UI;
+using Microsoft.Xna.Framework;
 
 namespace Avalon.Common;
 public class AvalonConfig : ModConfig
@@ -59,7 +67,7 @@ public class AvalonClientConfig : ModConfig
     public bool AdditionalScreenshakes;
 
 	[DefaultValue(false)]
-	[ReloadRequired]
+	[CustomModConfigItem(typeof(NeedsReloadIfNoAltLibBooleanElement))]
 	public bool BetaTropicsGen;
 
 	[DefaultValue(false)]
@@ -73,4 +81,36 @@ public class AvalonClientConfig : ModConfig
 	[DefaultValue(true)]
 	[ReloadRequired]
 	public bool BloodyAmulet;
+
+	public override bool NeedsReload(ModConfig pendingConfig)
+	{
+		AvalonClientConfig pendingAvalonConfig = (AvalonClientConfig)pendingConfig;
+		if (!AltLibrarySupport.Enabled && pendingAvalonConfig.BetaTropicsGen != BetaTropicsGen) return true;
+		return base.NeedsReload(pendingConfig);
+	}
+
+	internal class NeedsReloadIfNoAltLibBooleanElement : ConfigElement<bool>
+	{
+		private Asset<Texture2D>? _toggleTexture;
+
+		public override void OnBind()
+		{
+			base.OnBind();
+			_toggleTexture = Main.Assets.Request<Texture2D>("Images/UI/Settings_Toggle");
+
+			OnLeftClick += (ev, v) => Value = !Value;
+			ShowReloadRequiredTooltip = !AltLibrarySupport.Enabled;
+		}
+
+		protected override void DrawSelf(SpriteBatch spriteBatch)
+		{
+			base.DrawSelf(spriteBatch);
+			CalculatedStyle dimensions = GetDimensions();
+			// "Yes" and "No" since no "True" and "False" translation available
+			Terraria.UI.Chat.ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, Value ? Lang.menu[126].Value : Lang.menu[124].Value, new Vector2(dimensions.X + dimensions.Width - 60, dimensions.Y + 8f), Color.White, 0f, Vector2.Zero, new Vector2(0.8f));
+			Rectangle sourceRectangle = new Rectangle(Value ? ((_toggleTexture.Width() - 2) / 2 + 2) : 0, 0, (_toggleTexture.Width() - 2) / 2, _toggleTexture.Height());
+			Vector2 drawPosition = new Vector2(dimensions.X + dimensions.Width - sourceRectangle.Width - 10f, dimensions.Y + 8f);
+			spriteBatch.Draw(_toggleTexture!.Value, drawPosition, sourceRectangle, Color.White, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, 0f);
+		}
+	}
 }
