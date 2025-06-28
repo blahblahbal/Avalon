@@ -101,13 +101,13 @@ public static class ProjectileSets
     );
 
     public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
-        ModContent.ProjectileType<WoodenClub>(),
-        ModContent.ProjectileType<MarrowMasher>(),
-        ModContent.ProjectileType<UrchinMace>(),
+        ModContent.ProjectileType<WoodenClubProj>(),
+        ModContent.ProjectileType<MarrowMasherProj>(),
+        ModContent.ProjectileType<UrchinMaceProj>(),
         ModContent.ProjectileType<HallowedRapierProj>(),
 		ModContent.ProjectileType<HallowedRapierVis>(),
-		ModContent.ProjectileType<CraniumCrusher>(),
-        ModContent.ProjectileType<HellboundHalberd>());
+		ModContent.ProjectileType<CraniumCrusherProj>(),
+        ModContent.ProjectileType<HellboundHalberdProj>());
 
     public static readonly bool[] EarthRelatedItems = ProjectileID.Sets.Factory.CreateBoolSet(
         ProjectileID.BoulderStaffOfEarth,

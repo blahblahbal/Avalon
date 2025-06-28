@@ -9761,7 +9761,6 @@ Mods: {
 			DesertBeakFeather.DisplayName: Beak's Feather
 			DesertBeakSandstorm.DisplayName: Beak's Sandstorm
 			Pluto.DisplayName: Pluto
-			HellboundHalberd.DisplayName: Hellbound Halberd
 			Boomlash.DisplayName: Boomlash
 			PossessedFlamesaw.DisplayName: Possessed Flamesaw
 			PossessedFlamesawChop.DisplayName: Possessed Flamesaw
@@ -9901,11 +9900,7 @@ Mods: {
 			DarkeningInk.DisplayName: Darkening Ink
 			BloodyTear.DisplayName: Bloody Tear
 			Tear.DisplayName: Tear
-			MarrowMasher.DisplayName: Marrow Masher
-			CraniumCrusher.DisplayName: Cranium Crusher
-			UrchinMace.DisplayName: Urchin Uppercutter
 			SnotsabreShot.DisplayName: Snotsabre Shot
-			WoodenClub.DisplayName: Wooden Club
 			RottenApple.DisplayName: Rotten Apple
 			JunglePetal.DisplayName: Jungle Petal
 			MagicGrenade.DisplayName: Magic Grenade
@@ -9919,7 +9914,6 @@ Mods: {
 			HomingRocket.DisplayName: Homing Rocket
 			Mechastinger.DisplayName: Mechastinger
 			StingerLaser.DisplayName: Stinger Laser
-			HellboundHalberdSpear.DisplayName: Hellbound Halberd Spear
 			Lightning.DisplayName: Lightning
 			LightningCloud.DisplayName: Lightning Cloud
 			SoulDagger.DisplayName: Soul Dagger
@@ -9993,6 +9987,12 @@ Mods: {
 			ShroomiteRocket.DisplayName: Shroomite Rocket
 			AquaBlast.DisplayName: Aqua Blast
 			Torch.DisplayName: Torch
+			CraniumCrusherProj.DisplayName: Cranium Crusher
+			HellboundHalberdProj.DisplayName: Hellbound Halberd Mace
+			HellboundHalberdSpear.DisplayName: Hellbound Halberd Spear
+			MarrowMasherProj.DisplayName: Marrow Masher
+			UrchinMaceProj.DisplayName: Urchin Uppercutter
+			WoodenClubProj.DisplayName: Wooden Club
 		}
 
 		NPCs: {

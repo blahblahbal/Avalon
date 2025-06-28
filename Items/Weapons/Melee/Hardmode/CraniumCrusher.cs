@@ -2,6 +2,7 @@ using Avalon.Common.Extensions;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -9,10 +10,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 
 public class CraniumCrusher : ModItem
 {
-	public float scaleMult = 1.35f; // set this to same as in the projectile file
+	public const float ScaleMult = 1.35f;
 	public override void SetDefaults()
 	{
-		Item.DefaultToMace(ModContent.ProjectileType<Projectiles.Melee.CraniumCrusher>(), 128, 9.5f, scaleMult, 30);
+		Item.DefaultToMace(ModContent.ProjectileType<Projectiles.Melee.CraniumCrusherProj>(), 128, 9.5f, ScaleMult, 30);
 		Item.ArmorPenetration = 15;
 		Item.rare = ItemRarityID.Yellow;
 		Item.value = Item.sellPrice(0, 0, 40);
@@ -25,24 +26,20 @@ public class CraniumCrusher : ModItem
 	public int swing;
 	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 	{
-		Rectangle dims = this.GetDims();
-		float posMult = 1 + (dims.Height * scaleMult - 26) / 26 * 0.1f;
 		velocity = Vector2.Zero;
-		int height = dims.Height;
-		if (player.gravDir == -1)
-		{
-			height = -dims.Height;
-		}
 		if (swing == 1)
 		{
-			swing--;
-			position = player.Center + new Vector2(0, height * Item.scale * posMult);
+			swing = -1;
 		}
 		else
 		{
-			swing++;
-			position = player.Center + new Vector2(0, -height * Item.scale * posMult);
+			swing = 1;
 		}
+	}
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+	{
+		Projectile.NewProjectile(source, position, velocity, type, damage, knockback, Main.myPlayer, swing, Main.LocalPlayer.MountedCenter.AngleTo(Main.MouseWorld));
+		return false;
 	}
 	public override bool CanUseItem(Player player)
 	{

@@ -442,8 +442,8 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
 	{
 		if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.Drill || projectile.type == ModContent.ProjectileType<HallowedClaymore>() ||
-			projectile.type == ModContent.ProjectileType<MarrowMasher>() || projectile.type == ModContent.ProjectileType<CraniumCrusher>() ||
-			projectile.type == ModContent.ProjectileType<UrchinMace>() || projectile.type == ModContent.ProjectileType<WoodenClub>() ||
+			projectile.type == ModContent.ProjectileType<MarrowMasherProj>() || projectile.type == ModContent.ProjectileType<CraniumCrusherProj>() ||
+			projectile.type == ModContent.ProjectileType<UrchinMaceProj>() || projectile.type == ModContent.ProjectileType<WoodenClubProj>() ||
 			((projectile.type == ModContent.ProjectileType<CaesiumMace>() || projectile.type == ModContent.ProjectileType<Sporalash>() ||
 			projectile.type == ModContent.ProjectileType<Cell>()) && projectile.ai[0] == 0) || (projectile.aiStyle == ProjAIStyleID.Flail && projectile.ai[0] == 0))
 		{
