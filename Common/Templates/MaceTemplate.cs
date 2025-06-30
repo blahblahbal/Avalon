@@ -4,6 +4,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Enums;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -157,7 +158,7 @@ public abstract class MaceTemplate : ModProjectile
 		float initialRotOffset = StartRotationLimit.HasValue ? Math.Clamp(MaxRotation * 0.5f, 0, StartRotationLimit.Value) : MaxRotation * 0.5f;
 		Projectile.Center = HandPosition + (AngleToMouse.ToRotationVector2() * swingRadius * Projectile.scale).RotatedBy((MaxRotation * easedRotProgress - initialRotOffset) * Owner.direction * SwingDirection * Owner.gravDir);
 
-		Projectile.rotation = Vector2.Normalize(Projectile.Center - HandPosition).ToRotation() + (45 * (MathHelper.Pi / 180));
+		Projectile.rotation = Projectile.AngleFrom(HandPosition) + MathHelper.PiOver4;
 		Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * Owner.gravDir + (Owner.gravDir == -1 ? MathHelper.Pi : 0) - Owner.fullRotation);
 
 		EmitDust(HandPosition, swingRadius, curRotProgress, easedRotProgress);
@@ -207,5 +208,17 @@ public abstract class MaceTemplate : ModProjectile
 		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection);
 
 		return false;
+	}
+	public override void CutTiles()
+	{
+		// tilecut_0 is an unnamed decompiled variable which tells CutTiles how the tiles are being cut (in this case, via a Projectile).
+		DelegateMethods.tilecut_0 = TileCuttingContext.AttackProjectile;
+		Utils.TileActionAttempt cut = new(DelegateMethods.CutTiles);
+		Vector2 beamStartPos = Projectile.Center;
+		Vector2 beamEndPos = Owner.MountedCenter;
+
+		// PlotTileLine is a function which performs the specified action to all tiles along a drawn line, with a specified width.
+		// In this case, it is cutting all tiles which can be destroyed by Projectiles, for example grass or pots.
+		Utils.PlotTileLine(beamStartPos, beamEndPos, Projectile.width, cut);
 	}
 }
