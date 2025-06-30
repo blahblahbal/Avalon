@@ -92,7 +92,7 @@ public abstract class MaceTemplate : ModProjectile
 		Projectile.height = 26;
 		Projectile.aiStyle = -1;
 		Projectile.DamageType = DamageClass.Melee;
-		Projectile.alpha = 255;
+		Projectile.hide = true;
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.tileCollide = false;
@@ -158,7 +158,7 @@ public abstract class MaceTemplate : ModProjectile
 		Projectile.Center = HandPosition + (AngleToMouse.ToRotationVector2() * swingRadius * Projectile.scale).RotatedBy((MaxRotation * easedRotProgress - initialRotOffset) * Owner.direction * SwingDirection * Owner.gravDir);
 
 		Projectile.rotation = Vector2.Normalize(Projectile.Center - HandPosition).ToRotation() + (45 * (MathHelper.Pi / 180));
-		Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * Owner.gravDir + (Owner.gravDir == -1 ? MathHelper.Pi : 0));
+		Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, (Projectile.rotation + MathHelper.PiOver4 + MathHelper.Pi) * Owner.gravDir + (Owner.gravDir == -1 ? MathHelper.Pi : 0) - Owner.fullRotation);
 
 		EmitDust(HandPosition, swingRadius, curRotProgress, easedRotProgress);
 	}
@@ -201,10 +201,10 @@ public abstract class MaceTemplate : ModProjectile
 			for (int i = 0; i < Projectile.oldPos.Length; i++)
 			{
 				Vector2 drawPosOld = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
-				Main.EntitySpriteDraw(TrailTextures[Type].Value, drawPosOld, frame, (TrailColor ?? lightColor) * (1 - ((float)i / (Projectile.oldPos.Length - 1))) * 0.25f, Projectile.oldRot[i] + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection, 0);
+				Main.EntitySpriteDraw(TrailTextures[Type].Value, drawPosOld, frame, (TrailColor ?? lightColor) * (1 - ((float)i / (Projectile.oldPos.Length - 1))) * 0.25f, Projectile.oldRot[i] + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection);
 			}
 		}
-		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection, 0);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection);
 
 		return false;
 	}
