@@ -35,4 +35,12 @@ public class UrchinMaceProj : MaceTemplate
 		d3.alpha = 128;
 		d3.noGravity = true;
 	}
+	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+	{
+		target.AddBuff(BuffID.Poisoned, TimeUtils.SecondsToTicks(Main.rand.NextBool(3) ? 3 : 1));
+	}
+	public override void OnHitPlayer(Player target, Player.HurtInfo info)
+	{
+		target.AddBuff(BuffID.Poisoned, TimeUtils.SecondsToTicks(Main.rand.NextBool(3) ? 3 : 1));
+	}
 }
