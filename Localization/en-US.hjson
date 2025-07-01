@@ -18,6 +18,46 @@ Mods: {
 		}
 	}
 
+	AltLibrary: {
+		AltOres: {
+			CobaltAltOre: {
+				DisplayName: Cobalt
+				Description: ""
+				BlessMessage: "[c/1A69A1:Your world has been blessed with Cobalt!]"
+			}
+
+			PalladiumAltOre: {
+				DisplayName: Palladium
+				Description: ""
+				BlessMessage: "[c/EB572F:Your world has been blessed with Palladium!]"
+			}
+
+			MythrilAltOre: {
+				DisplayName: Mythril
+				Description: ""
+				BlessMessage: "[c/5D9358:Your world has been blessed with Mythril!]"
+			}
+
+			OrichalcumAltOre: {
+				DisplayName: Orichalcum
+				Description: ""
+				BlessMessage: "[c/A3169E:Your world has been blessed with Orichalcum!]"
+			}
+
+			AdamantiteAltOre: {
+				DisplayName: Adamantite
+				Description: ""
+				BlessMessage: "[c/DD5598:Your world has been blessed with Adamantite!]"
+			}
+
+			TitaniumAltOre: {
+				DisplayName: Titanium
+				Description: ""
+				BlessMessage: "[c/B9C2D7:Your world has been blessed with Titanium!]"
+			}
+		}
+	}
+
 	ThoriumMod: {
 		Items: {
 			IronShield: {
