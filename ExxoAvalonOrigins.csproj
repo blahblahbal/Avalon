@@ -29,6 +29,9 @@
 		<PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
 	</ItemGroup>
 	<ItemGroup>
+		<Reference Include="AltLibrary">
+		  <HintPath>..\..\ModReader\AltLibrary\AltLibrary.dll</HintPath>
+		</Reference>
 		<Reference Include="Microsoft.Xna.Framework.Input.Touch">
 			<HintPath>S:\terraria stuff\Terraria Remaster\github\1.1AvalonRemaster\bin\Debug\net40\Microsoft.Xna.Framework.Input.Touch.dll</HintPath>
 		</Reference>
