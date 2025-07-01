@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.ModSupport;
 using Avalon.Reflection;
 using Avalon.WorldGeneration.Enums;
 using Avalon.WorldGeneration.SecretSeeds;
@@ -18,8 +19,8 @@ namespace Avalon.Hooks;
 public class UIGenProgressBarEdit : ModHook
 {
     private Asset<Texture2D> texOuterContagion = null!;
-
-    public override void Load()
+	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled; 
+	public override void Load()
     {
         texOuterContagion = Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/LoadingOuterContagion");
     }

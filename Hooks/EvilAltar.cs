@@ -1,15 +1,13 @@
-using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using System;
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Tiles.Ores;
-using Terraria.Chat;
 using Terraria.Localization;
 using Terraria.GameContent.Achievements;
+using Avalon.ModSupport;
 
 namespace Avalon.Hooks;
 
@@ -17,10 +15,12 @@ public class EvilAltar : ModHook
 {
     protected override void Apply()
     {
-		IL_WorldGen.SmashAltar += EditAltarSpawn;
-        //IL_WorldGen.SmashAltar += WorldGen_SmashAltar;
-        On_WorldGen.SmashAltar += On_WorldGen_SmashAltar;
-        IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool;
+		if (!AltLibrarySupport.Enabled)
+		{
+			IL_WorldGen.SmashAltar += EditAltarSpawn;
+			On_WorldGen.SmashAltar += On_WorldGen_SmashAltar;
+		}
+		IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += IL_Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool;
     }
 
 	private void EditAltarSpawn(ILContext il)

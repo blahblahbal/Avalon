@@ -3,6 +3,7 @@ using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Magic.PreHardmode;
+using Avalon.ModSupport;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -18,8 +19,9 @@ public class ReplaceChestItems : GenPass
 
     }
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
-    {
-        foreach (Chest c in Main.chest)
+	{
+		AltLibrarySupport.UpdateBiomeFields();
+		foreach (Chest c in Main.chest)
         {
             if (c != null)
             {

@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.ModSupport;
 using Avalon.Tiles.Contagion;
 using MonoMod.Cil;
 using System;
@@ -14,6 +15,7 @@ namespace Avalon.Hooks
 {
     internal class DryadTextDetour : ModHook
     {
+		public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
         protected override void Apply()
         {
 			IL_Lang.GetDryadWorldStatusDialog += DryadWorldStatusEdit;

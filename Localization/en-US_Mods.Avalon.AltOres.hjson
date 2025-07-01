@@ -1,0 +1,37 @@
+BismuthAltOre: {
+	DisplayName: Bismuth
+	Description: ""
+}
+
+BronzeAltOre: {
+	DisplayName: Bronze
+	Description: ""
+}
+
+NickelAltOre: {
+	DisplayName: Nickel
+	Description: ""
+}
+
+ZincAltOre: {
+	DisplayName: Zinc
+	Description: ""
+}
+
+DuritaniumAltOre: {
+	DisplayName: Duritanium
+	Description: ""
+	BlessMessage: "[c/895159:Your world has been blessed with Duritanium!]"
+}
+
+NaquadahAltOre: {
+	DisplayName: Naquadah
+	Description: ""
+	BlessMessage: "[c/0026FF:Your world has been blessed with Naquadah!]"
+}
+
+TroxiniumAltOre: {
+	DisplayName: Troxinium
+	BlessMessage: "[c/C1DA48:Your world has been blessed with Troxinium!]"
+	Description: ""
+}

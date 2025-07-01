@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.ModSupport;
 using Avalon.WorldGeneration.Enums;
 using System.IO;
 using Terraria;
@@ -94,7 +95,8 @@ public class DownedBossSystem : ModSystem
 		{
 			ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)tag.Get<int>("WorldEvil");
 		}
-    }
+		if (!tag.ContainsKey("HadAltLib") && AltLibrarySupport.Enabled) AltLibrarySupport.ImportSaveData();
+	}
 
     public override void NetSend(BinaryWriter writer)
     {
