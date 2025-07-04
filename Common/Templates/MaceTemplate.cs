@@ -74,9 +74,16 @@ public abstract class MaceTemplate : ModProjectile
 	/// Defaults to null, which uses the lightColor param.
 	/// </remarks>
 	public virtual Color? TrailColor => null;
+	/// <summary>
+	/// Makes the trail correctly follow the player so it looks the same regardless of the player's movement.
+	/// </summary>
+	/// <remarks>
+	/// Defaults to true, maybe set to false if you wanted like a ghostly looking afterimage for your mace idk.
+	/// </remarks>
+	public virtual bool TrailFollowsPlayer => true;
 	public virtual Func<(SpriteEffects, float, Vector2), (SpriteEffects, float, Vector2)> SpriteEffectsFunc => spriteEffectsTuple => spriteEffectsTuple;
 
-	private static Dictionary<int, Asset<Texture2D>> TrailTextures = [];
+	private static readonly Dictionary<int, Asset<Texture2D>> TrailTextures = [];
 	public override void SetStaticDefaults()
 	{
 		if (!Main.dedServ && TrailLength > 0)
@@ -199,9 +206,18 @@ public abstract class MaceTemplate : ModProjectile
 
 		if (TrailLength > 0)
 		{
+			Vector2 HandPosition = Owner.RotatedRelativePoint(Owner.MountedCenter) + new Vector2(Owner.direction * -4f, 0);
 			for (int i = 0; i < Projectile.oldPos.Length; i++)
 			{
-				Vector2 drawPosOld = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
+				Vector2 drawPosOld;
+				if (!TrailFollowsPlayer || (Projectile.oldPos[i] == Vector2.Zero && Projectile.oldRot[i] == 0)) // janky workaround to prevent it drawing at incorrect positions (rly wish vanilla nulled these fields now that I'm thinking about it)
+				{
+					drawPosOld = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
+				}
+				else
+				{
+					drawPosOld = (HandPosition - Main.screenPosition) + ((Projectile.oldRot[i] - MathHelper.PiOver4).ToRotationVector2() * (Projectile.Center - HandPosition).Length());
+				}
 				Main.EntitySpriteDraw(TrailTextures[Type].Value, drawPosOld, frame, (TrailColor ?? lightColor) * (1 - ((float)i / (Projectile.oldPos.Length - 1))) * 0.25f, Projectile.oldRot[i] + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection);
 			}
 		}
