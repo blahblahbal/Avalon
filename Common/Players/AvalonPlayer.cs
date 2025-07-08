@@ -446,6 +446,8 @@ public class AvalonPlayer : ModPlayer
 		TextureAssets.Wall[WallID.AncientBlueBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientBlueBrickWall);
 		TextureAssets.Wall[WallID.AncientGreenBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientGreenBrickWall);
 		TextureAssets.Wall[WallID.AncientPinkBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientPinkBrickWall);
+
+		// crashes the game on unloading mods for some reason
 		//TextureAssets.Wall[ModContent.WallType<UnsafeAncientBlueBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientBlueBrickWall");
 		//TextureAssets.Wall[ModContent.WallType<UnsafeAncientGreenBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientGreenBrickWall");
 		//TextureAssets.Wall[ModContent.WallType<UnsafeAncientPinkBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientPinkBrickWall");
