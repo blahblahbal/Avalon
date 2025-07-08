@@ -26,7 +26,6 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -436,21 +435,6 @@ public class AvalonPlayer : ModPlayer
 		EquipLoader.AddEquipTexture(
 			Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Legs", EquipType.Legs,
 			null, LavaMermanName);
-	}
-	public override void Unload()
-	{
-		TextureAssets.Tile[TileID.AncientBlueBrick] = Main.Assets.Request<Texture2D>("Images/Tiles_" + TileID.AncientBlueBrick);
-		TextureAssets.Tile[TileID.AncientGreenBrick] = Main.Assets.Request<Texture2D>("Images/Tiles_" + TileID.AncientGreenBrick);
-		TextureAssets.Tile[TileID.AncientPinkBrick] = Main.Assets.Request<Texture2D>("Images/Tiles_" + TileID.AncientPinkBrick);
-
-		TextureAssets.Wall[WallID.AncientBlueBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientBlueBrickWall);
-		TextureAssets.Wall[WallID.AncientGreenBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientGreenBrickWall);
-		TextureAssets.Wall[WallID.AncientPinkBrickWall] = Main.Assets.Request<Texture2D>("Images/Wall_" + WallID.AncientPinkBrickWall);
-
-		// crashes the game on unloading mods for some reason
-		//TextureAssets.Wall[ModContent.WallType<UnsafeAncientBlueBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientBlueBrickWall");
-		//TextureAssets.Wall[ModContent.WallType<UnsafeAncientGreenBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientGreenBrickWall");
-		//TextureAssets.Wall[ModContent.WallType<UnsafeAncientPinkBrickWall>()] = ModContent.GetInstance<ExxoAvalonOrigins>().Assets.Request<Texture2D>("Walls/UnsafeAncientPinkBrickWall");
 	}
 	public override void ResetEffects()
 	{
