@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Avalon.Common;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy.Relics;
@@ -23,8 +22,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Avalon.Items.Material.Ores;
 using Avalon.DropConditions;
-using Terraria.Chat;
-using ReLogic.Content;
+using Avalon.Reflection;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 
@@ -69,7 +67,7 @@ public class DesertBeak : ModNPC
 		NPC.knockBackResist = 0f;
 		NPC.HitSound = new SoundStyle("Terraria/Sounds/NPC_Hit_28") { Pitch = -0.09f };
 		NPC.DeathSound = new SoundStyle("Terraria/Sounds/NPC_Killed_31") { Pitch = -0.09f };
-		Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeak") : MusicID.Boss4;
+		Music = ExxoAvalonOrigins.MusicMod != null ? MainHelper.GetSwapMusic() ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeakEnnway") : MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeak") : MusicID.Boss4;
 		NPC.scale = 1f;
 		phase = 0;
 		FlapMultiplier = 1;
