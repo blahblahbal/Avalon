@@ -41,6 +41,13 @@ namespace Avalon.WorldGeneration.SecretSeeds
 		protected override void Apply()
 		{
 			On_CaveHouseBiome.Place += ReplaceHousesInSpecialSeeds;
+			On_Recipe.PlayerMeetsEnvironmentConditions += On_Recipe_PlayerMeetsEnvironmentConditions;
+		}
+
+		private bool On_Recipe_PlayerMeetsEnvironmentConditions(On_Recipe.orig_PlayerMeetsEnvironmentConditions orig, Player player, Recipe tempRec)
+		{
+			bool retro = !tempRec.Conditions.Contains(Items.Material.Ores.Heartstone.RetroWorld) || AvalonWorld.retroWorld;
+			return retro && orig.Invoke(player, tempRec);
 		}
 
 		#region 1.1 Worldgen

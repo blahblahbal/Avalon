@@ -8,6 +8,8 @@ namespace Avalon.Items.Material.Ores;
 
 public class Heartstone : ModItem
 {
+	public static Condition RetroWorld = new(Language.GetTextValue("Mods.Avalon.RecipeConditions.retroWorld"), () => AvalonWorld.retroWorld);
+	public static Condition NotRetroWorld = new(Language.GetTextValue("Mods.Avalon.RecipeConditions.notRetroWorld"), () => !AvalonWorld.retroWorld);
 	public override void SetStaticDefaults()
 	{
 		Item.ResearchUnlockCount = 100;
@@ -25,9 +27,9 @@ public class Heartstone : ModItem
 
 	public override void AddRecipes()
 	{
-		Recipe.Create(ItemID.LifeCrystal).AddIngredient(this, 45).AddTile(TileID.Furnaces).AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.notRetroWorld")), () => !AvalonWorld.retroWorld).Register();
-		Recipe.Create(ItemID.LifeCrystal).AddIngredient(this, 120).AddTile(TileID.Furnaces).AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.retroWorld")), () => AvalonWorld.retroWorld).Register();
-		Recipe.Create(Type, 45).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.Furnaces).AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.notRetroWorld")), () => !AvalonWorld.retroWorld).Register();
-		Recipe.Create(Type, 120).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.Furnaces).AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.retroWorld")), () => AvalonWorld.retroWorld).Register();
+		Recipe.Create(ItemID.LifeCrystal).AddIngredient(this, 45).AddTile(TileID.Furnaces).AddCondition(NotRetroWorld).Register();
+		Recipe.Create(ItemID.LifeCrystal).AddIngredient(this, 120).AddTile(TileID.Furnaces).AddCondition(RetroWorld).Register();
+		Recipe.Create(Type, 45).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.Furnaces).AddCondition(NotRetroWorld).Register();
+		Recipe.Create(Type, 120).AddIngredient(ItemID.LifeCrystal).AddTile(TileID.Furnaces).AddCondition(RetroWorld).Register();
 	}
 }

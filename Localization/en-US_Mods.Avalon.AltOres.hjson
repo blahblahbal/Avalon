@@ -21,17 +21,17 @@ ZincAltOre: {
 DuritaniumAltOre: {
 	DisplayName: Duritanium
 	Description: ""
-	BlessMessage: "[c/895159:Your world has been blessed with Duritanium!]"
+	BlessMessage: "[c/895159:{$Mods.AltLibrary.BlessBase}]"
 }
 
 NaquadahAltOre: {
 	DisplayName: Naquadah
 	Description: ""
-	BlessMessage: "[c/0026FF:Your world has been blessed with Naquadah!]"
+	BlessMessage: "[c/0026FF:{$Mods.AltLibrary.BlessBase}]"
 }
 
 TroxiniumAltOre: {
 	DisplayName: Troxinium
-	BlessMessage: "[c/C1DA48:Your world has been blessed with Troxinium!]"
+	BlessMessage: "[c/C1DA48:{$Mods.AltLibrary.BlessBase}]"
 	Description: ""
 }

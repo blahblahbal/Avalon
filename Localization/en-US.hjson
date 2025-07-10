@@ -23,37 +23,37 @@ Mods: {
 			CobaltAltOre: {
 				DisplayName: Cobalt
 				Description: ""
-				BlessMessage: "[c/1A69A1:Your world has been blessed with Cobalt!]"
+				BlessMessage: "[c/1A69A1:{$Mods.AltLibrary.BlessBase}]"
 			}
 
 			PalladiumAltOre: {
 				DisplayName: Palladium
 				Description: ""
-				BlessMessage: "[c/EB572F:Your world has been blessed with Palladium!]"
+				BlessMessage: "[c/EB572F:{$Mods.AltLibrary.BlessBase}]"
 			}
 
 			MythrilAltOre: {
 				DisplayName: Mythril
 				Description: ""
-				BlessMessage: "[c/5D9358:Your world has been blessed with Mythril!]"
+				BlessMessage: "[c/5D9358:{$Mods.AltLibrary.BlessBase}]"
 			}
 
 			OrichalcumAltOre: {
 				DisplayName: Orichalcum
 				Description: ""
-				BlessMessage: "[c/A3169E:Your world has been blessed with Orichalcum!]"
+				BlessMessage: "[c/A3169E:{$Mods.AltLibrary.BlessBase}]"
 			}
 
 			AdamantiteAltOre: {
 				DisplayName: Adamantite
 				Description: ""
-				BlessMessage: "[c/DD5598:Your world has been blessed with Adamantite!]"
+				BlessMessage: "[c/DD5598:{$Mods.AltLibrary.BlessBase}]"
 			}
 
 			TitaniumAltOre: {
 				DisplayName: Titanium
 				Description: ""
-				BlessMessage: "[c/B9C2D7:Your world has been blessed with Titanium!]"
+				BlessMessage: "[c/B9C2D7:{$Mods.AltLibrary.BlessBase}]"
 			}
 		}
 	}
