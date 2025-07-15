@@ -205,7 +205,7 @@ namespace Avalon.Hooks
 			{
 				for (int i = firstTileY; i < lastTileY + 4; i++)
 				{
-					Tile tile = Framing.GetTileSafely(j, i);
+					Tile tile = Main.tile[j, i];
 					if (tile.HasTile)
 					{
 						if (tile.Get<AvalonTileData>().IsTileActupainted)
