@@ -17,7 +17,7 @@ namespace Avalon.Hooks
 		private void On_TileDrawing_GetScreenDrawArea(On_TileDrawing.orig_GetScreenDrawArea orig, TileDrawing self, Vector2 screenPosition, Vector2 offSet, out int firstTileX, out int lastTileX, out int firstTileY, out int lastTileY)
 		{
 			orig(self, screenPosition, offSet, out firstTileX, out lastTileX, out firstTileY, out lastTileY);
-			if (Main.player[Main.myPlayer].GetModPlayer<AvalonPlayer>().Vision)
+			if (!Main.gamePaused && Main.player[Main.myPlayer].GetModPlayer<AvalonPlayer>().Vision)
 			{
 				firstTileX -= 2;
 				lastTileX += 2;
@@ -37,7 +37,7 @@ namespace Avalon.Hooks
 								{
 									diff = 1;
 								}
-								if (!Main.gamePaused && Main.rand.NextBool(300 + diff * 75))
+								if (Main.rand.NextBool(300 + diff * 75))
 								{
 									float brightness = Lighting.Brightness(j, i);
 									if (brightness < 0.5f)
@@ -60,7 +60,7 @@ namespace Avalon.Hooks
 
 							if (!tile.HasTile)
 							{
-								if (!Main.gamePaused && Main.rand.NextBool(300))
+								if (Main.rand.NextBool(300))
 								{
 									float brightness = Lighting.Brightness(j, i);
 									if (brightness < 0.5f)
