@@ -1,24 +1,15 @@
 using Avalon.Common;
-using Avalon.Items.Other;
-using Avalon.Systems;
-using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
-using MonoMod.Cil;
 using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
-using Terraria.GameContent.Drawing;
-using Terraria.Graphics;
 using Terraria.Graphics.Light;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Avalon.Hooks
 {
 	public class ModCoatingEdits : ModHook
 	{
-		public static bool[][]? IsActuated;
-
 		protected override void Apply()
 		{
 			On_Main.DrawTileEntities += SetDrawTileEntitiesActuator;
@@ -208,49 +199,43 @@ namespace Avalon.Hooks
 			ResetActuators(firstTileX, firstTileY, lastTileX, lastTileY);
 		}
 
-		private void SetVisualActuation(int firstTileX, int firstTileY, int lastTileX, int lastTileY)
+		private static void SetVisualActuation(int firstTileX, int firstTileY, int lastTileX, int lastTileY)
 		{
 			for (int j = firstTileX - 2; j < lastTileX + 2; j++)
 			{
 				for (int i = firstTileY; i < lastTileY + 4; i++)
 				{
 					Tile tile = Framing.GetTileSafely(j, i);
-					if (tile != null)
+					if (tile.HasTile)
 					{
-						if (IsActuated == null || IsActuated.Length != Main.maxTilesX || IsActuated[1].Length != Main.maxTilesY)
+						if (tile.Get<AvalonTileData>().IsTileActupainted)
 						{
-							ResizeActuators(Main.maxTilesX, Main.maxTilesY);
-						}
-						else
-						{
-							IsActuated[j][i] = tile.IsActuated;
-							if (tile.Get<AvalonTileData>().IsTileActupainted)
-							{
-								tile.IsActuated = !tile.IsActuated;
-							}
+							tile.IsActuated = !tile.IsActuated;
 						}
 					}
 				}
 			}
 		}
 
-		private void ResetActuators(int firstTileX, int firstTileY, int lastTileX, int lastTileY)
+		private static void ResetActuators(int firstTileX, int firstTileY, int lastTileX, int lastTileY)
 		{
-			
 			for (int j = firstTileX - 2; j < lastTileX + 2; j++)
 			{
 				for (int i = firstTileY; i < lastTileY + 4; i++)
 				{
 					Tile tile = Main.tile[j, i];
-					if (tile != null && IsActuated != null)
+					if (tile.HasTile)
 					{
-						tile.IsActuated = IsActuated[j][i];
+						if (tile.Get<AvalonTileData>().IsTileActupainted)
+						{
+							tile.IsActuated = !tile.IsActuated;
+						}
 					}
 				}
 			}
 		}
 
-		private void GetScreenDrawArea(Vector2 screenPosition, Vector2 offSet, out int firstTileX, out int lastTileX, out int firstTileY, out int lastTileY)
+		private static void GetScreenDrawArea(Vector2 screenPosition, Vector2 offSet, out int firstTileX, out int lastTileX, out int firstTileY, out int lastTileY)
 		{
 			firstTileX = (int)((screenPosition.X - offSet.X) / 16f - 1f);
 			lastTileX = (int)((screenPosition.X + (float)Main.screenWidth + offSet.X) / 16f) + 2;
@@ -281,19 +266,6 @@ namespace Avalon.Hooks
 			if (Main.sectionManager.AnyNeedRefresh)
 			{
 				WorldGen.RefreshSections(firstTileX, firstTileY, lastTileX, lastTileY);
-			}
-		}
-
-		private static void ResizeActuators(int maxX, int maxY)
-		{
-			IsActuated = new bool[maxX][];
-			for (int i = 0; i < IsActuated.Length; i++)
-			{
-				IsActuated[i] = new bool[maxY];
-				for (int j = 0; j < IsActuated[i].Length; j++)
-				{
-					IsActuated[i][j] = false;
-				}
 			}
 		}
 
