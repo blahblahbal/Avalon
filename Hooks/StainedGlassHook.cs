@@ -15,138 +15,110 @@ namespace Avalon.Hooks
 			On_TileLightScanner.ApplyHellLight += On_TileLightScanner_ApplyHellLight;
 		}
 
-		private static int BrownSG;
-		private static int LimeSG;
-		private static int CyanSG;
-		private static int ChartreuseSG;
+		private static ushort BrownSG;
+		private static ushort LimeSG;
+		private static ushort CyanSG;
+		private static ushort ChartreuseSG;
 
 		public override void SetStaticDefaults()
 		{
 			// Reduces lag, trust me bro
-			BrownSG = ModContent.WallType<Walls.BrownStainedGlass>();
-			LimeSG = ModContent.WallType<Walls.LimeStainedGlass>();
-			CyanSG = ModContent.WallType<Walls.CyanStainedGlass>();
+			BrownSG = (ushort)ModContent.WallType<Walls.BrownStainedGlass>();
+			LimeSG = (ushort)ModContent.WallType<Walls.LimeStainedGlass>();
+			CyanSG = (ushort)ModContent.WallType<Walls.CyanStainedGlass>();
 			if (ExxoAvalonOrigins.ThoriumContentEnabled)
 			{
-				ChartreuseSG = ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>();
+				ChartreuseSG = (ushort)ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>();
 			}
 		}
 
 		private void On_TileLightScanner_ApplyHellLight(On_TileLightScanner.orig_ApplyHellLight orig, TileLightScanner self, Tile tile, int x, int y, ref Vector3 lightColor)
 		{
 			orig.Invoke(self, tile, x, y, ref lightColor);
-			float finalR = 0f;
-			float finalG = 0f;
-			float finalB = 0f;
-			float num4 = 0.55f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f) * 0.08f;
 
-			if ((!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) &&
-				(tile.WallType == BrownSG ||
-				tile.WallType == LimeSG ||
-				tile.WallType == CyanSG ||
-				(ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ChartreuseSG)) && tile.LiquidAmount < 255)
+			float num4 = 0.55f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f) * 0.08f;
+			float finalR = num4;
+			float finalG = num4 * 0.6f;
+			float finalB = num4 * 0.2f;
+
+			if (CombinedGlassHooks(tile, ref finalR, ref finalG, ref finalB))
 			{
-				finalR = num4;
-				finalG = num4 * 0.6f;
-				finalB = num4 * 0.2f;
-				if (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>())
+				if (lightColor.X < finalR)
+				{
+					lightColor.X = finalR;
+				}
+				if (lightColor.Y < finalG)
+				{
+					lightColor.Y = finalG;
+				}
+				if (lightColor.Z < finalB)
+				{
+					lightColor.Z = finalB;
+				}
+			}
+		}
+
+		private static bool CombinedGlassHooks(Tile tile, ref float finalR, ref float finalG, ref float finalB)
+		{
+			if ((!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) && tile.LiquidAmount < 255)
+			{
+				if (tile.WallType == BrownSG)
 				{
 					finalR *= 1.1f;
 					finalG *= 0.75f;
 					finalB *= 0.5f;
+					return true;
 				}
-				else if (tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>())
+				else if (tile.WallType == LimeSG)
 				{
 					finalR *= 0.714f;
 					finalG *= 1f;
 					finalB *= 0f;
+					return true;
 				}
-				else if (tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>())
+				else if (tile.WallType == CyanSG)
 				{
 					finalR *= 0f;
 					finalG *= 1f;
 					finalB *= 1f;
+					return true;
 				}
-				else if (tile.WallType == ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>())
+				else if (ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ChartreuseSG)
 				{
 					finalR *= 0.745f;
 					finalG *= 0.925f;
 					finalB *= 0.1f;
+					return true;
 				}
 			}
-			if (lightColor.X < finalR)
-			{
-				lightColor.X = finalR;
-			}
-			if (lightColor.Y < finalG)
-			{
-				lightColor.Y = finalG;
-			}
-			if (lightColor.Z < finalB)
-			{
-				lightColor.Z = finalB;
-			}
+			return false;
 		}
 
 		private void On_TileLightScanner_ApplySurfaceLight(On_TileLightScanner.orig_ApplySurfaceLight orig, TileLightScanner self, Tile tile, int x, int y, ref Vector3 lightColor)
 		{
 			orig.Invoke(self, tile, x, y, ref lightColor);
-			float finalR = 0f;
-			float finalG = 0f;
-			float finalB = 0f;
-			float num6 = Main.tileColor.R / 255f;
-			float num7 = Main.tileColor.G / 255f;
-			float num8 = Main.tileColor.B / 255f;
+			float finalR = Main.tileColor.R / 255f;
+			float finalG = Main.tileColor.G / 255f;
+			float finalB = Main.tileColor.B / 255f;
 
-			if ((!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) &&
-				(tile.WallType == BrownSG ||
-				tile.WallType == LimeSG ||
-				tile.WallType == CyanSG ||
-				(ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ChartreuseSG)) && tile.LiquidAmount < 255)
+			if (CombinedGlassHooks(tile, ref finalR, ref finalG, ref finalB))
 			{
-				finalR = num6;
-				finalG = num7;
-				finalB = num8;
-				if (tile.WallType == ModContent.WallType<Walls.BrownStainedGlass>())
+				float num3 = 1f - Main.shimmerDarken;
+				finalR *= num3;
+				finalG *= num3;
+				finalB *= num3;
+				if (lightColor.X < finalR)
 				{
-					finalR *= 1.1f;
-					finalG *= 0.75f;
-					finalB *= 0.5f;
+					lightColor.X = finalR;
 				}
-				else if (tile.WallType == ModContent.WallType<Walls.LimeStainedGlass>())
+				if (lightColor.Y < finalG)
 				{
-					finalR *= 0.714f;
-					finalG *= 1f;
-					finalB *= 0f;
+					lightColor.Y = finalG;
 				}
-				else if (tile.WallType == ModContent.WallType<Walls.CyanStainedGlass>())
+				if (lightColor.Z < finalB)
 				{
-					finalR *= 0f;
-					finalG *= 1f;
-					finalB *= 1f;
+					lightColor.Z = finalB;
 				}
-				else if (tile.WallType == ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>())
-				{
-					finalR *= 0.745f;
-					finalG *= 0.925f;
-					finalB *= 0.1f;
-				}
-			}
-			float num3 = 1f - Main.shimmerDarken;
-			finalR *= num3;
-			finalG *= num3;
-			finalB *= num3;
-			if (lightColor.X < finalR)
-			{
-				lightColor.X = finalR;
-			}
-			if (lightColor.Y < finalG)
-			{
-				lightColor.Y = finalG;
-			}
-			if (lightColor.Z < finalB)
-			{
-				lightColor.Z = finalB;
 			}
 		}
 	}
