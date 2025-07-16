@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -135,26 +134,26 @@ public class DarkMatterSky : CustomSky
 		// Redraw stars that are in the background
 		Vector2 origin = default;
 		Vector2 position = default;
-		for (int i = 0; i < Main.star.Length; i++)
-		{
-			Star star = Main.star[i];
-			if (star != null)
-			{
-				Texture2D starTex = TextureAssets.Star[star.type].Value;
-				origin = new Vector2(starTex.Width * 0.5f, starTex.Height * 0.5f);
-				int bgTop = (int)((0f - Main.screenPosition.Y) / ((Main.worldSurface * 16.0) - 600.0) * 200.0);
-				float posX = star.position.X * (Main.screenWidth / 800f);
-				float posY = star.position.Y * (Main.screenHeight / 600f);
-				position = new Vector2(posX + origin.X, posY + origin.Y + bgTop);
-				spriteBatch.Draw(starTex, position, new Rectangle(0, 0, starTex.Width, starTex.Height),
-					Color.White * star.twinkle * 0.952f * opacity, star.rotation, origin, star.scale * star.twinkle,
-					SpriteEffects.None, 0f);
-			}
-		}
+		//for (int i = 0; i < Main.star.Length; i++)
+		//{
+		//	Star star = Main.star[i];
+		//	if (star != null)
+		//	{
+		//		Texture2D starTex = TextureAssets.Star[star.type].Value;
+		//		origin = new Vector2(starTex.Width * 0.5f, starTex.Height * 0.5f);
+		//		int bgTop = (int)((0f - Main.screenPosition.Y) / ((Main.worldSurface * 16.0) - 600.0) * 200.0);
+		//		float posX = star.position.X * (Main.screenWidth / 800f);
+		//		float posY = star.position.Y * (Main.screenHeight / 600f);
+		//		position = new Vector2(posX + origin.X, posY + origin.Y + bgTop);
+		//		spriteBatch.Draw(starTex, position, new Rectangle(0, 0, starTex.Width, starTex.Height),
+		//			Color.White * star.twinkle * 0.952f * opacity, star.rotation, origin, star.scale * star.twinkle,
+		//			SpriteEffects.None, 0f);
+		//	}
+		//}
 
 		// End the spritebatch and begin again to allow for drawing the black hole center without transparency
 		spriteBatch.End();
-		spriteBatch.Begin();
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.Transform);
 
 		// Draw the black hole's center
 		spriteBatch.Draw(darkMatterBlackHole2.Value, new Vector2(xPos, yPos), null,
@@ -164,7 +163,7 @@ public class DarkMatterSky : CustomSky
 
 		// End and begin again, allowing transparency and non-blurry scaling
 		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, null);
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.Transform);
 
 		// Draw the black hole
 		spriteBatch.Draw(darkMatterBlackHole.Value, new Vector2(xPos, yPos), null, Color.White * opacity, 0f,
