@@ -69,7 +69,7 @@ public class DarkMatterSky : CustomSky
 		Matrix matrix = spriteBatch.transformMatrix;
 		// End the spritebatch and begin again to draw with transparency and non-blurry scaling
 		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, null);
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.Transform);
 
 		// Draw the sky texture
 		spriteBatch.Draw(darkMatterSky.Value, new Rectangle(0, 0, Main.PendingResolutionWidth, Main.PendingResolutionHeight),
