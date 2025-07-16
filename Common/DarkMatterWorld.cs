@@ -1,5 +1,4 @@
 using Avalon.Common.Players;
-using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -7,14 +6,27 @@ using Terraria.ModLoader;
 
 namespace Avalon.Common
 {
-    internal class DarkMatterWorld : ModSystem
-    {
-        public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
-        {
-            float DarkMatterStrength = 0; // Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith && MonolithTilesInRange(Main.LocalPlayer) ? ModContent.GetInstance<BiomeTileCounts>().DarkMonolithTiles / 1 : 0;
-            if (MonolithTilesInRange(Main.LocalPlayer))
-            {
-				DarkMatterStrength = 1f;
+	internal class DarkMatterWorld : ModSystem
+	{
+		/// <summary>
+		///  Retains the player's DarkMatterMonolith value for two updates; Does this because the stupid monolith bool is false 1/4 times on color lighting, and 2/5 times on others
+		/// </summary>
+		private static readonly bool[] InAreaArray = new bool[3];
+		public static bool InArea;
+		public static float DarkMatterStrength;
+		public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
+		{
+			InAreaArray[2] = InAreaArray[1];
+			InAreaArray[1] = InAreaArray[0];
+			InAreaArray[0] = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith;
+			InArea = InAreaArray[0] || InAreaArray[1] || InAreaArray[2];
+			if (InArea)
+			{
+				DarkMatterStrength = MathHelper.Lerp(DarkMatterStrength, 1f, 0.1f);
+			}
+			else
+			{
+				DarkMatterStrength = MathHelper.Lerp(DarkMatterStrength, 0f, 0.1f);
 			}
 			if (DarkMatterStrength != 0)
 			{
@@ -58,27 +70,9 @@ namespace Avalon.Common
 				tileColor.B = (byte)Math.Clamp(tileColor.B <= tileTint_B ? 1 : tileColor.B - tileTint_B, DarkMatterStrength * 20f, Math.Clamp(255 - (DarkMatterStrength * 255), 20, 255));
 			}
 		}
-        public override void ModifyLightingBrightness(ref float scale)
-        {
-            if (MonolithTilesInRange(Main.LocalPlayer))
-            {
-                scale = 0.8f;
-			}
-        }
-        public static bool MonolithTilesInRange(Player p)
-        {
-            for (int i = (int)(p.position.X - 88.375f * 16) >> 4; i < (int)(p.position.X + 90.625f * 16) >> 4; i++)
-            {
-                for (int j = (int)(p.position.Y - 60.625f * 16) >> 4; j < (int)(p.position.Y + 64.375f * 16) >> 4; j++)
-                {
-                    Tile t = Framing.GetTileSafely(i, j);
-                    if (t.TileType == ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>() && t.TileFrameX >= 36)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-    }
+		public override void ModifyLightingBrightness(ref float scale)
+		{
+			scale = MathHelper.Lerp(scale, 0.8f, DarkMatterStrength);
+		}
+	}
 }

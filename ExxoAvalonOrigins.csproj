@@ -26,7 +26,13 @@
 		<None Remove="Projectiles\Melee\HallowedRapierVis.png" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="Krafs.Publicizer" Version="2.3.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
+
+		<Publicize Include="FNA" MemberPattern="^Microsoft.Xna.Framework.Graphics\.SpriteBatch\..*" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="AltLibrary">
