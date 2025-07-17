@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace Avalon.Effects;
 
@@ -17,12 +18,14 @@ public class DarkMatterSky : CustomSky
 	private static int surfaceFrame;
 	private static int surfaceFrameCounter;
 	private readonly Asset<Texture2D>[] darkMatterBackgrounds = new Asset<Texture2D>[25];
+	private readonly Asset<Texture2D>[] darkMatterNimbuses = new Asset<Texture2D>[13];
 	private Asset<Texture2D>? darkMatterBlackHole;
 	private Asset<Texture2D>? darkMatterBlackHole2;
 	private Asset<Texture2D>? darkMatterSky;
 	private float opacity;
 	private bool skyActive;
 
+	private readonly UnifiedRandom CloudSeed = new();
 	public override void OnLoad()
 	{
 		darkMatterSky = ModContent.Request<Texture2D>("Avalon/Backgrounds/DarkMatter/DarkMatterSky");
@@ -30,8 +33,11 @@ public class DarkMatterSky : CustomSky
 		darkMatterBlackHole2 = ModContent.Request<Texture2D>("Avalon/Backgrounds/DarkMatter/DarkMatterBGBlackHole2");
 		for (int i = 0; i < darkMatterBackgrounds.Length; i++)
 		{
-			darkMatterBackgrounds[i] =
-				ModContent.Request<Texture2D>($"Avalon/Backgrounds/DarkMatter/DarkMatterCloud{i}");
+			darkMatterBackgrounds[i] = ModContent.Request<Texture2D>($"Avalon/Backgrounds/DarkMatter/DarkMatterCloud{i}");
+		}
+		for (int i = 0; i < darkMatterNimbuses.Length; i++)
+		{
+			darkMatterNimbuses[i] = ModContent.Request<Texture2D>($"Avalon/Backgrounds/DarkMatter/Nimbus/DarkMatterNimbus{i}");
 		}
 	}
 
@@ -80,18 +86,21 @@ public class DarkMatterSky : CustomSky
 			return;
 		}
 
-		// Surface frame counter
-		if (++surfaceFrameCounter > 3)
+		if (!Main.gamePaused)
 		{
-			surfaceFrame = (surfaceFrame + 1) % 25;
-			surfaceFrameCounter = 0;
-		}
+			// Surface frame counter
+			if (++surfaceFrameCounter > 3)
+			{
+				surfaceFrame = (surfaceFrame + 1) % 25;
+				surfaceFrameCounter = 0;
+			}
 
-		// Black hole pulse timer
-		if (++blackHoleCounter > 2)
-		{
-			blackHoleFrame = (blackHoleFrame + 1) % 10;
-			blackHoleCounter = 0;
+			// Black hole pulse timer
+			if (++blackHoleCounter > 2)
+			{
+				blackHoleFrame = (blackHoleFrame + 1) % 10;
+				blackHoleCounter = 0;
+			}
 		}
 
 		// Math to allow the pulsing to work
@@ -155,6 +164,30 @@ public class DarkMatterSky : CustomSky
 		spriteBatch.End();
 		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
 
+		//for (int i = 0; i < 200; i++)
+		//{
+		//	for (int j = 1; j < 3; j++)
+		//	{
+		//		float mult = 300f;
+		//		float div = 150f;
+		//		spriteBatch.Draw(TextureAssets.Cloud[17].Value, new Vector2(xPos + MathF.Sin((float)Main.timeForVisualEffects / div + i) * mult, yPos + MathF.Sin((float)Main.timeForVisualEffects / div + i + j) * mult),
+		//		TextureAssets.Cloud[17].Value.Bounds, Color.White * opacity * MathF.Sin(((float)Main.timeForVisualEffects / div + i + j) / 2f), 0, TextureAssets.Cloud[17].Value.Size() / 2f,
+		//		highResScale * 0.25f, SpriteEffects.None, 0);
+		//	}
+		//}
+		//for (int i = 0; i < 200; i++)
+		//{
+		//	float mult = 300f;
+		//	float div = 150f;
+		//	spriteBatch.Draw(TextureAssets.Cloud[17].Value, new Vector2(xPos + MathF.Sin((float)Main.timeForVisualEffects / div + i) * mult, yPos + MathF.Sin((float)Main.timeForVisualEffects / div + i + 1) * mult),
+		//	TextureAssets.Cloud[17].Value.Bounds, Color.White * opacity * MathF.Sin(((float)Main.timeForVisualEffects / div + i - 1.5f) / 2f), 0, TextureAssets.Cloud[17].Value.Size() / 2f,
+		//	highResScale * 0.25f, SpriteEffects.None, 0);
+
+		//	spriteBatch.Draw(TextureAssets.Cloud[17].Value, new Vector2(xPos + MathF.Sin((float)Main.timeForVisualEffects / div + i) * mult, yPos + MathF.Sin((float)Main.timeForVisualEffects / div + i + 2) * mult),
+		//	TextureAssets.Cloud[17].Value.Bounds, Color.White * opacity * MathF.Sin(((float)Main.timeForVisualEffects / div + i + 3) / 2f), 0, TextureAssets.Cloud[17].Value.Size() / 2f,
+		//	highResScale * 0.25f, SpriteEffects.None, 0);
+		//}
+
 		// Draw the black hole's center
 		spriteBatch.Draw(darkMatterBlackHole2.Value, new Vector2(xPos, yPos), null,
 			Color.White * opacity, 0f,
@@ -170,10 +203,91 @@ public class DarkMatterSky : CustomSky
 			new Vector2(darkMatterBlackHole2.Width() >> 1, darkMatterBlackHole2.Height() >> 1),
 			0.25f * highResScale + scaleMod, SpriteEffects.None, 1f);
 
-		// Draw the spiral clouds
-		spriteBatch.Draw(darkMatterBackgrounds[surfaceFrame].Value, new Vector2(xPos, yPos),
-			new Rectangle(0, 0, 819, 819), Color.White * opacity, 0, new Vector2(819, 819) / 2f,
-			3.011f * highResScale, SpriteEffects.None, 0);
+		// temporary to toggle between old and new clouds, until the new ones are perfect
+		if (true)
+		{
+			// Draw the spiral clouds
+			spriteBatch.Draw(darkMatterBackgrounds[surfaceFrame].Value, new Vector2(xPos, yPos),
+				new Rectangle(0, 0, 819, 819), Color.White * opacity, 0, new Vector2(819, 819) / 2f,
+				3.011f * highResScale, SpriteEffects.None, 0);
+		}
+		else
+		{
+			UnifiedRandom? currentCloudSeed = new(CloudSeed.GetHashCode());
+
+			int loops2 = 500;
+			for (int i = 0; i < loops2; i++)
+			{
+				for (int j = 0; j < 4; j++)
+				{
+					int tempJ = j;
+
+					float radius = currentCloudSeed.NextFloat(700, 1250) * highResScale;
+					float inverseSpeed = 150f;
+					//float radiusMult = currentCloudSeed.NextFloat(-);
+					int cloud = currentCloudSeed.Next(13);
+					//if (cloud > 8)
+					//{
+					//	cloud += 5;
+					//}
+					//Texture2D tex = TextureAssets.Cloud[cloud].Value;
+					Texture2D tex = darkMatterNimbuses[cloud].Value;
+					//Color color = new Color(255, 150, 225, 108);
+					Color color = new Color(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 200);
+					//Color color = Color.White;
+					float time = (float)Main.timeForVisualEffects / inverseSpeed + i;
+					float spiralMult = MathF.Pow(Utils.Remap(MathF.Atan2(MathF.Cos(time + (MathHelper.PiOver2 * tempJ)), MathF.Sin(time + (MathHelper.PiOver2 * tempJ))), -MathHelper.Pi, MathHelper.Pi, 0f, 1f), 2.75f);
+					float finalXPos = xPos + MathF.Cos(time) * radius * spiralMult;
+					float finalYPos = yPos - MathF.Sin(time) * radius * spiralMult;
+					float rot = currentCloudSeed.NextFloat(-0.3f, 0.3f);
+					float distanceMult = Utils.Remap(MathF.Pow(1f + spiralMult, 2.5f), 0, 5f, 0, 1f);
+					if (distanceMult < 0.25f)
+					{
+						distanceMult = Easings.PowIn(distanceMult, 2f);
+					}
+					//distanceMult = Easings.ExpoOut(spiralMult * 0.4f) * 0.4f;
+
+					spriteBatch.Draw(tex, new Vector2(finalXPos, finalYPos),
+					tex.Bounds, color * opacity * distanceMult, rot, tex.Size() / 2f,
+					1f * highResScale * distanceMult, SpriteEffects.None, 0);
+				}
+			}
+			int loops = 100;
+			for (int i = 0; i < loops; i++)
+			{
+				float radius = 144f * highResScale;
+				float inverseSpeed = 150f;
+				float radiusYMult = 0.75f;
+				int cloud = currentCloudSeed.Next(13);
+				//if (cloud > 8)
+				//{
+				//	cloud += 5;
+				//}
+				//Texture2D tex = TextureAssets.Cloud[cloud].Value;
+				Texture2D tex = darkMatterNimbuses[cloud].Value;
+				//Color color = new Color(255, 150, 225, 108);
+				Color color = new Color(255, 200, 235, 200);
+				//Color color = Color.White;
+				float time = (float)Main.timeForVisualEffects / inverseSpeed + i;
+				float finalXPos = xPos + MathF.Sin(time) * radius;
+				//float funRadiusMod = (radius * Utils.Remap(MathF.Sin(time), -1f, 1f, 0f, 1f));
+				//float finalYPos = yPos + MathF.Sin(time + MathHelper.Pi / 3f) * funRadiusMod * radiusYMult;
+				float finalYPos = yPos + MathF.Sin(time + MathHelper.Pi / 3f) * radius * radiusYMult;
+				float rot = MathHelper.PiOver4 * radiusYMult + currentCloudSeed.NextFloat(-0.3f, 0.3f);
+				float distanceMult = MathF.Sin((time + MathHelper.Pi) / 2f);
+
+				spriteBatch.Draw(tex, new Vector2(finalXPos, finalYPos),
+				tex.Bounds, color * opacity * distanceMult, rot, tex.Size() / 2f,
+				0.455f * highResScale * distanceMult, SpriteEffects.None, 0);
+				//spriteBatch.Draw(tex, new Vector2(finalXPos, finalYPos),
+				//tex.Bounds, color * opacity * distanceMult, rot, tex.Size() / 2f,
+				//0.35f * highResScale * Utils.Remap(distanceMult, -1f, 1f, -0.5f, 1f), SpriteEffects.None, 0);
+
+				//spriteBatch.Draw(tex, new Vector2(xPos + MathF.Sin((float)Main.timeForVisualEffects / inverseSpeed + i) * radius, yPos + MathF.Sin((float)Main.timeForVisualEffects / inverseSpeed + i + MathHelper.PiOver4 * 3f) * radius),
+				//tex.Bounds, color * opacity * MathF.Sin(((float)Main.timeForVisualEffects / inverseSpeed + i + MathF.PI) / 2f), -MathHelper.PiOver4, tex.Size() / 2f,
+				//highResScale * 0.35f, SpriteEffects.None, 0);
+			}
+		}
 
 
 		//spriteBatch.Draw(darkMatterBackgrounds[surfaceFrame].Value, new Vector2(xPos, yPos), null,
