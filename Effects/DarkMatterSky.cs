@@ -69,7 +69,7 @@ public class DarkMatterSky : CustomSky
 		Matrix matrix = spriteBatch.transformMatrix;
 		// End the spritebatch and begin again to draw with transparency and non-blurry scaling
 		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.Transform);
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
 
 		// Draw the sky texture
 		spriteBatch.Draw(darkMatterSky.Value, new Rectangle(0, 0, Main.PendingResolutionWidth, Main.PendingResolutionHeight),
@@ -153,7 +153,7 @@ public class DarkMatterSky : CustomSky
 
 		// End the spritebatch and begin again to allow for drawing the black hole center without transparency
 		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.Transform);
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
 
 		// Draw the black hole's center
 		spriteBatch.Draw(darkMatterBlackHole2.Value, new Vector2(xPos, yPos), null,
@@ -163,7 +163,7 @@ public class DarkMatterSky : CustomSky
 
 		// End and begin again, allowing transparency and non-blurry scaling
 		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.Transform);
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
 
 		// Draw the black hole
 		spriteBatch.Draw(darkMatterBlackHole.Value, new Vector2(xPos, yPos), null, Color.White * opacity, 0f,
