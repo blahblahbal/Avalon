@@ -68,7 +68,7 @@ public class DarkMatterSky : CustomSky
 
 	public override void Draw(SpriteBatch spriteBatch, float minDepth, float maxDepth)
 	{
-		if (!(maxDepth >= float.MaxValue) || !(minDepth < float.MaxValue) || !Main.BackgroundEnabled)
+		if (!(maxDepth >= float.MaxValue) || !(minDepth < float.MaxValue))
 		{
 			return;
 		}
@@ -76,11 +76,18 @@ public class DarkMatterSky : CustomSky
 		Matrix matrix = spriteBatch.transformMatrix;
 		// End the spritebatch and begin again to draw with transparency and non-blurry scaling
 		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.AnisotropicClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
 
 		// Draw the sky texture
 		spriteBatch.Draw(darkMatterSky.Value, new Rectangle(0, 0, Main.PendingResolutionWidth, Main.PendingResolutionHeight),
 			new Color(51, 41, 48) * opacity); // Main.ColorOfTheSkies
+
+		if (!Main.BackgroundEnabled)
+		{
+			spriteBatch.End();
+			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.Default, RasterizerState.CullNone, null, matrix);
+			return;
+		}
 
 		if (Main.netMode == NetmodeID.Server)
 		{
