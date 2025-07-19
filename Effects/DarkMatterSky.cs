@@ -132,7 +132,7 @@ public class DarkMatterSky : CustomSky
 		}
 
 		// Create a variable for the percentage to scale the textures by
-		var percentage = new Vector2(3840 / (float)Main.PendingResolutionWidth, 2160 / (float)Main.PendingResolutionHeight); // FIX FOR 4k LATER 3840x2160
+		var percentage = new Vector2(3840 / (float)Main.PendingResolutionWidth, 2160 / (float)Main.PendingResolutionHeight);
 
 		// Create the modifier for the X coordinate of the black hole
 		int xModifier = (int)(modifier * percentage.X);
@@ -180,7 +180,9 @@ public class DarkMatterSky : CustomSky
 		for (int i = 0; i < 1500; i++)
 		{
 			float radius = currentCloudSeed.NextFloat(1920f, 3000f) * highResScale;
-			float time2 = ((time1 + i) % MathF.Tau) - MathHelper.PiOver2;
+			//float time2 = ((time1 + i) % MathF.Tau) - MathHelper.PiOver2;
+			float timePow = 2.5f;
+			float time2 = Utils.Remap(MathF.Pow(((time1 + i) % MathF.Tau), timePow), 0f, MathF.Pow(MathF.Tau, timePow), 0f, MathF.Tau) - MathHelper.PiOver2;
 			float spiral = MathF.Atan2(MathF.Cos(time2), MathF.Sin(time2));
 			float spiralMult = Utils.Remap(Ease(Utils.Remap(spiral, -MathF.PI, MathF.PI, endRadius, 1f)), Ease(endRadius), 1f, endRadius, 1f);
 			Color color = new(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 200);
@@ -242,7 +244,8 @@ public class DarkMatterSky : CustomSky
 		}
 
 		float radiusInner = 144f * highResScale;
-		float inverseSpeedInner = 150f;
+		//float inverseSpeedInner = 150f;
+		float inverseSpeedInner = 125f;
 		float radiusYMult = 0.75f;
 		float timeInner1 = (float)Main.timeForVisualEffects / inverseSpeedInner * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
 		float scaleInner = 0.455f * highResScale;
