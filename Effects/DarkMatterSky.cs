@@ -169,30 +169,33 @@ public class DarkMatterSky : CustomSky
 
 		UnifiedRandom? currentCloudSeed = new(CloudSeed.GetHashCode());
 
-		int loops2 = 1500;
-		for (int i = 0; i < loops2; i++)
+		static float Ease(float x) => Easings.PowIn(x, 7.5f);
+		float endRadius = 0.01f;
+		float spiralTwist = 2.5f;
+		float inverseSpeed = 500f;
+		float cull = 50f * highResScale;
+		byte rockAlpha = (byte)Math.Clamp(255 * opacity, 0, 255);
+		float time1 = (float)Main.timeForVisualEffects / inverseSpeed * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
+
+		for (int i = 0; i < 1500; i++)
 		{
+			float radius = currentCloudSeed.NextFloat(1920f, 3000f) * highResScale;
+			float time2 = ((time1 + i) % MathF.Tau) - MathHelper.PiOver2;
+			float spiral = MathF.Atan2(MathF.Cos(time2), MathF.Sin(time2));
+			float spiralMult = Utils.Remap(Ease(Utils.Remap(spiral, -MathF.PI, MathF.PI, endRadius, 1f)), Ease(endRadius), 1f, endRadius, 1f);
+			Color color = new(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 200);
+
 			for (int j = 0; j < 4; j++)
 			{
 				float rot = MathHelper.PiOver2 * j - MathF.PI / 2.25f;
-				float radius = currentCloudSeed.NextFloat(1920f, 3000f) * highResScale;
-				float endRadius = 0.01f;
-				float spiralTwist = 2.5f;
-				//float endPointFix = 0.05f / spiralTwist;
-				float inverseSpeed = 500f;
-				float time = ((((float)Main.timeForVisualEffects / inverseSpeed) * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed + i) % MathF.Tau) - MathHelper.PiOver2;
 
 				bool rock = currentCloudSeed.NextBool(20);
 				int cloud = currentCloudSeed.Next(rock ? darkMatterRocks.Length : darkMatterNimbuses.Length);
 				Texture2D tex = rock ? darkMatterRocks[cloud].Value : darkMatterNimbuses[cloud].Value;
-				Color color = new Color(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 200);
 
-				float spiral = MathF.Atan2(MathF.Cos(time), MathF.Sin(time));
-				static float Ease(float x) => Easings.PowIn(x, 7.5f);
-				float spiralMult = Utils.Remap(Ease(Utils.Remap(spiral, -MathF.PI, MathF.PI, endRadius, 1f)), Ease(endRadius), 1f, endRadius, 1f);
-				float finalSpiralTwist = (MathHelper.PiOver2 * (spiralTwist - 1f) + rot);
-				float finalXPos = xPos + MathF.Cos(time * spiralTwist + finalSpiralTwist) * radius * spiralMult;
-				float finalYPos = yPos - MathF.Sin(time * spiralTwist + finalSpiralTwist) * radius * spiralMult;
+				float finalSpiralTwist = MathHelper.PiOver2 * (spiralTwist - 1f) + rot;
+				float finalXPos = xPos + MathF.Cos(time2 * spiralTwist + finalSpiralTwist) * radius * spiralMult;
+				float finalYPos = yPos - MathF.Sin(time2 * spiralTwist + finalSpiralTwist) * radius * spiralMult;
 
 				float distanceMult = Easings.ExpoOut(spiralMult * 0.65f);
 
@@ -200,12 +203,11 @@ public class DarkMatterSky : CustomSky
 				Color finalColor = color * opacity * distanceMult;
 				if (rock)
 				{
-					finalColor.A = (byte)Math.Clamp(255 * opacity, 0, 255);
+					finalColor.A = rockAlpha;
 				}
-				float cloudRot = currentCloudSeed.NextFloat(-0.3f, 0.3f) + (rock ? -time * currentCloudSeed.NextFloat(-2f, 8f) : 0);
+				float cloudRot = currentCloudSeed.NextFloat(-0.3f, 0.3f) + (rock ? -time2 * currentCloudSeed.NextFloat(-2f, 8f) : 0);
 
 				// prevent drawing inside black hole
-				float cull = 50f * highResScale;
 				if (Math.Abs(finalXPos - xPos) < cull && Math.Abs(finalYPos - yPos) < cull)
 				{
 					continue;
@@ -215,7 +217,7 @@ public class DarkMatterSky : CustomSky
 				Vector2 texSizeRotated = tex.Size() * scale * new Vector2(1f - MathF.Abs(MathF.Cos(cloudRot)), 1f - MathF.Abs(MathF.Sin(cloudRot)));
 
 				// prevent drawing outside the screen
-				if (((pos + (texSizeRotated / 2f)).X < 0 && (pos + (texSizeRotated / 2f)).Y < 0) || ((pos - (texSizeRotated / 2f)).X > Main.PendingResolutionWidth && (pos - (texSizeRotated / 2f)).Y > Main.PendingResolutionHeight))
+				if (((pos + (texSizeRotated / 2f)).X < 0 && (pos + (texSizeRotated / 2f)).Y < 0) || ((pos - (texSizeRotated / 2f)).X > 1000 && (pos - (texSizeRotated / 2f)).Y > 1000))
 				{
 					continue;
 				}
@@ -237,24 +239,27 @@ public class DarkMatterSky : CustomSky
 				}
 			}
 		}
-		int loops = 100;
-		for (int i = 0; i < loops; i++)
+
+		float radiusInner = 144f * highResScale;
+		float inverseSpeedInner = 150f;
+		float radiusYMult = 0.75f;
+		float timeInner1 = (float)Main.timeForVisualEffects / inverseSpeedInner * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
+		float scaleInner = 0.455f * highResScale;
+		Color colorInner = new(255, 200, 235, 200);
+
+		for (int i = 0; i < 100; i++)
 		{
-			float radius = 144f * highResScale;
-			float inverseSpeed = 150f;
-			float radiusYMult = 0.75f;
 			int cloud = currentCloudSeed.Next(13);
 			Texture2D tex = darkMatterNimbuses[cloud].Value;
-			Color color = new Color(255, 200, 235, 200);
-			float time = ((float)Main.timeForVisualEffects / inverseSpeed) * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed + i;
-			float finalXPos = xPos + MathF.Sin(time) * radius;
-			float finalYPos = yPos + MathF.Sin(time + MathHelper.Pi / 3f) * radius * radiusYMult;
+			float timeInner2 = timeInner1 + i;
+			float finalXPos = xPos + MathF.Sin(timeInner2) * radiusInner;
+			float finalYPos = yPos + MathF.Sin(timeInner2 + MathHelper.Pi / 3f) * radiusInner * radiusYMult;
 			float rot = MathHelper.PiOver4 * radiusYMult + currentCloudSeed.NextFloat(-0.3f, 0.3f);
-			float distanceMult = MathF.Sin((time + MathHelper.Pi) / 2f);
+			float distanceMult = MathF.Sin((timeInner2 + MathHelper.Pi) / 2f);
 
 			spriteBatch.Draw(tex, new Vector2(finalXPos, finalYPos),
-			tex.Bounds, color * opacity * distanceMult, rot, tex.Size() / 2f,
-			0.455f * highResScale * distanceMult, SpriteEffects.None, 0);
+			tex.Bounds, colorInner * opacity * distanceMult, rot, tex.Size() / 2f,
+			scaleInner * distanceMult, SpriteEffects.None, 0);
 		}
 
 		spriteBatch.End();
