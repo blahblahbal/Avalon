@@ -214,10 +214,11 @@ public class DarkMatterSky : CustomSky
 				}
 
 				float scale = highResScale * distanceMult;
-				Vector2 texSizeRotated = tex.Size() * scale * new Vector2(1f - MathF.Abs(MathF.Cos(cloudRot)), 1f - MathF.Abs(MathF.Sin(cloudRot)));
+				Vector2 texSizeScaled = tex.Size() * scale;
+				float texMaxBound = MathF.Max(MathF.Abs(texSizeScaled.X * MathF.Cos(cloudRot) - texSizeScaled.Y * MathF.Sin(cloudRot)), MathF.Abs(texSizeScaled.Y * MathF.Cos(cloudRot) + texSizeScaled.X * MathF.Sin(cloudRot)));
 
 				// prevent drawing outside the screen
-				if (((pos + (texSizeRotated / 2f)).X < 0 && (pos + (texSizeRotated / 2f)).Y < 0) || ((pos - (texSizeRotated / 2f)).X > Main.PendingResolutionWidth && (pos - (texSizeRotated / 2f)).Y > Main.PendingResolutionHeight))
+				if (((pos.X + (texMaxBound / 2f)) < 0 || (pos.Y + (texMaxBound / 2f)) < 0) || ((pos.X - (texMaxBound / 2f)) > Main.PendingResolutionWidth || (pos.Y - (texMaxBound / 2f)) > Main.PendingResolutionHeight))
 				{
 					continue;
 				}
