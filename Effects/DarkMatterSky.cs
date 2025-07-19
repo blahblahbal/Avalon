@@ -180,7 +180,7 @@ public class DarkMatterSky : CustomSky
 				float spiralTwist = 2.5f;
 				//float endPointFix = 0.05f / spiralTwist;
 				float inverseSpeed = 500f;
-				float time = (((float)Main.timeForVisualEffects / inverseSpeed + i) % MathF.Tau) - MathHelper.PiOver2;
+				float time = ((((float)Main.timeForVisualEffects / inverseSpeed) * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed + i) % MathF.Tau) - MathHelper.PiOver2;
 
 				bool rock = currentCloudSeed.NextBool(20);
 				int cloud = currentCloudSeed.Next(rock ? darkMatterRocks.Length : darkMatterNimbuses.Length);
@@ -246,7 +246,7 @@ public class DarkMatterSky : CustomSky
 			int cloud = currentCloudSeed.Next(13);
 			Texture2D tex = darkMatterNimbuses[cloud].Value;
 			Color color = new Color(255, 200, 235, 200);
-			float time = (float)Main.timeForVisualEffects / inverseSpeed + i;
+			float time = ((float)Main.timeForVisualEffects / inverseSpeed) * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed + i;
 			float finalXPos = xPos + MathF.Sin(time) * radius;
 			float finalYPos = yPos + MathF.Sin(time + MathHelper.Pi / 3f) * radius * radiusYMult;
 			float rot = MathHelper.PiOver4 * radiusYMult + currentCloudSeed.NextFloat(-0.3f, 0.3f);

@@ -11855,6 +11855,11 @@ Mods: {
 					Label: Bloody Amulet
 					Tooltip: Changes the Bloody Tear to the Bloody Amulet (name and sprite)
 				}
+
+				DarkMatterVortexSpeed: {
+					Label: Dark Matter Vortex Speed
+					Tooltip: Adjusts the rate at which the vortices spin.
+				}
 			}
 
 			AvalonConfig: {
