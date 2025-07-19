@@ -217,7 +217,7 @@ public class DarkMatterSky : CustomSky
 				Vector2 texSizeRotated = tex.Size() * scale * new Vector2(1f - MathF.Abs(MathF.Cos(cloudRot)), 1f - MathF.Abs(MathF.Sin(cloudRot)));
 
 				// prevent drawing outside the screen
-				if (((pos + (texSizeRotated / 2f)).X < 0 && (pos + (texSizeRotated / 2f)).Y < 0) || ((pos - (texSizeRotated / 2f)).X > 1000 && (pos - (texSizeRotated / 2f)).Y > 1000))
+				if (((pos + (texSizeRotated / 2f)).X < 0 && (pos + (texSizeRotated / 2f)).Y < 0) || ((pos - (texSizeRotated / 2f)).X > Main.PendingResolutionWidth && (pos - (texSizeRotated / 2f)).Y > Main.PendingResolutionHeight))
 				{
 					continue;
 				}
