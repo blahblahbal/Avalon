@@ -148,10 +148,6 @@ public class DarkMatterSky : CustomSky
 			highResScale = maxWidthHeightMinusPos / 1233f;
 		}
 
-		// Redraw stars that are in the background
-		Vector2 origin = default;
-		Vector2 position = default;
-
 		// End the spritebatch and begin again to allow for drawing the black hole center without transparency
 		spriteBatch.End();
 		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
