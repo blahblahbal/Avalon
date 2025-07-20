@@ -165,7 +165,6 @@ public class DarkMatterSky : CustomSky
 
 		UnifiedRandom? currentCloudSeed = new(CloudSeed.GetHashCode());
 
-		static float Ease(float x) => Easings.PowIn(x, 7.5f);
 		float endRadius = 0.01f;
 		float spiralTwist = 2.5f;
 		float inverseSpeed = 500f;
@@ -223,7 +222,7 @@ public class DarkMatterSky : CustomSky
 				float finalTime = Utils.Remap(MathF.Pow(time2, 2.5f), 0f, tauPow, 0f, MathF.Tau, false) - MathHelper.PiOver2;
 
 				float spiral = MathF.Atan2(MathF.Cos(finalTime), MathF.Sin(finalTime));
-				float spiralMult = Utils.Remap(Ease(Utils.Remap(spiral, -MathF.PI, MathF.PI, endRadius, 1f)), Ease(endRadius), 1f, endRadius, 1f);
+				float spiralMult = Utils.Remap(Easings.PowIn(Utils.Remap(spiral, -MathF.PI, MathF.PI, endRadius, 1f), 7.5f), 0f, 1f, endRadius, 1f);
 
 				float rot = MathHelper.PiOver2 * j - MathF.PI / 2.25f;
 
