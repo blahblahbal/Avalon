@@ -34,6 +34,6 @@ internal class AchievementsSystem : ModSystem
 		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "Unification", AchievementCategory.Collector, "Avalon/Assets/Textures/Achievements/Unification", null, false, false, 41.5f, new string[] { "Craft_" + ModContent.ItemType<VertexOfExcalibur>() });
 		
 		// change later
-		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "ItBurnsBurnsBurnsBurns!", AchievementCategory.Slayer, "Avalon/Assets/Textures/Achievements/StaminaCrystal", null, false, false, 36.5f, new string[] { "Event_ItBurnsBurnsBurnsBurns" });
+		ExxoAvalonOrigins.Achievements.Call("AddAchievement", ExxoAvalonOrigins.Mod, "ItBurnsBurnsBurnsBurns!", AchievementCategory.Slayer, "Avalon/Assets/Textures/Achievements/ItBurnsX4", null, false, false, 36.5f, new string[] { "Event_ItBurnsBurnsBurnsBurns" });
 	}
 }
