@@ -167,6 +167,9 @@ public class DarkMatterSky : CustomSky
 			new Vector2(darkMatterBlackHole2.Width() >> 1, darkMatterBlackHole2.Height() >> 1),
 			0.25f * highResScale + scaleMod, SpriteEffects.None, 1f);
 
+		spriteBatch.End();
+		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
+
 		UnifiedRandom? currentCloudSeed = new(CloudSeed.GetHashCode());
 
 		static float Ease(float x) => Easings.PowIn(x, 7.5f);
@@ -207,6 +210,11 @@ public class DarkMatterSky : CustomSky
 				{
 					finalColor.A = rockAlpha;
 				}
+				else
+				{
+					finalColor = finalColor.MultiplyRGBByFloat(distanceMult);
+					finalColor.A = 0;
+				}
 				float cloudRot = currentCloudSeed.NextFloat(-0.3f, 0.3f) + (rock ? -time2 * currentCloudSeed.NextFloat(-2f, 8f) : 0);
 
 				// prevent drawing inside black hole
@@ -225,21 +233,9 @@ public class DarkMatterSky : CustomSky
 					continue;
 				}
 
-				if (rock)
-				{
-					spriteBatch.End();
-					spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
-				}
-
 				spriteBatch.Draw(tex, pos,
 				tex.Bounds, finalColor, cloudRot, tex.Size() / 2f,
 				scale, SpriteEffects.None, 0);
-
-				if (rock)
-				{
-					spriteBatch.End();
-					spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
-				}
 			}
 		}
 
@@ -260,9 +256,11 @@ public class DarkMatterSky : CustomSky
 			float finalYPos = yPos + MathF.Sin(timeInner2 + MathHelper.Pi / 3f) * radiusInner * radiusYMult;
 			float rot = MathHelper.PiOver4 * radiusYMult + currentCloudSeed.NextFloat(-0.3f, 0.3f);
 			float distanceMult = MathF.Sin((timeInner2 + MathHelper.Pi) / 2f);
+			Color finalColor = (colorInner * opacity * distanceMult).MultiplyRGBByFloat(distanceMult);
+			finalColor.A = 0;
 
 			spriteBatch.Draw(tex, new Vector2(finalXPos, finalYPos),
-			tex.Bounds, colorInner * opacity * distanceMult, rot, tex.Size() / 2f,
+			tex.Bounds, finalColor, rot, tex.Size() / 2f,
 			scaleInner * distanceMult, SpriteEffects.None, 0);
 		}
 
