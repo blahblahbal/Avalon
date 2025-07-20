@@ -135,7 +135,7 @@ public class DarkMatterSky : CustomSky
 		var percentage = new Vector2(3840 / (float)Main.PendingResolutionWidth, 2160 / (float)Main.PendingResolutionHeight);
 
 		// Create the modifier for the X coordinate of the black hole
-		int xModifier = (int)(modifier * percentage.X);
+		int xModifier = Math.Min((int)(modifier * percentage.X), xCenter);
 
 		// Assign positions for the black hole and spiral clouds
 		int xPos = (xCenter - (darkMatterBlackHole.Value.Width / 100) + xModifier) / 2;
@@ -158,17 +158,10 @@ public class DarkMatterSky : CustomSky
 			new Vector2(darkMatterBlackHole2.Width() >> 1, darkMatterBlackHole2.Height() >> 1),
 			0.25f * highResScale + scaleMod, SpriteEffects.None, 1f);
 
-		// End and begin again, allowing transparency and non-blurry scaling
-		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
-
 		// Draw the black hole
-		spriteBatch.Draw(darkMatterBlackHole.Value, new Vector2(xPos, yPos), null, Color.White * opacity, 0f,
+		spriteBatch.Draw(darkMatterBlackHole.Value, new Vector2(xPos, yPos), null, new Color(255, 255, 255, 0) * opacity, 0f,
 			new Vector2(darkMatterBlackHole2.Width() >> 1, darkMatterBlackHole2.Height() >> 1),
 			0.25f * highResScale + scaleMod, SpriteEffects.None, 1f);
-
-		spriteBatch.End();
-		spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, RasterizerState.CullNone, null, Main.BackgroundViewMatrix.EffectMatrix);
 
 		UnifiedRandom? currentCloudSeed = new(CloudSeed.GetHashCode());
 
@@ -176,31 +169,69 @@ public class DarkMatterSky : CustomSky
 		float endRadius = 0.01f;
 		float spiralTwist = 2.5f;
 		float inverseSpeed = 500f;
-		float cull = 50f * highResScale;
 		byte rockAlpha = (byte)Math.Clamp(255 * opacity, 0, 255);
+		float tauPow = MathF.Pow(MathF.Tau, 2.5f);
 		float time1 = (float)Main.timeForVisualEffects / inverseSpeed * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
 
 		for (int i = 0; i < 1500; i++)
 		{
 			float radius = currentCloudSeed.NextFloat(1920f, 3000f) * highResScale;
-			//float time2 = ((time1 + i) % MathF.Tau) - MathHelper.PiOver2;
-			float timePow = 2.5f;
-			float time2 = Utils.Remap(MathF.Pow(((time1 + i) % MathF.Tau), timePow), 0f, MathF.Pow(MathF.Tau, timePow), 0f, MathF.Tau) - MathHelper.PiOver2;
-			float spiral = MathF.Atan2(MathF.Cos(time2), MathF.Sin(time2));
-			float spiralMult = Utils.Remap(Ease(Utils.Remap(spiral, -MathF.PI, MathF.PI, endRadius, 1f)), Ease(endRadius), 1f, endRadius, 1f);
-			Color color = new(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 200);
-
+			float cloudRotRand = currentCloudSeed.NextFloat(-0.3f, 0.3f);
+			Color color = new(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 0);
 			for (int j = 0; j < 4; j++)
 			{
+				bool rock = currentCloudSeed.NextBool(20);
+				float rockRotRand = rock ? currentCloudSeed.NextFloat(-2f, 8f) : 0f;
+				int cloud = currentCloudSeed.Next(rock ? darkMatterRocks.Length : darkMatterNimbuses.Length);
+				float time2 = (time1 + i) % MathF.Tau;
+
+				// prevent drawing inside black hole
+				if (time2 is > MathF.Tau - 1.75f)
+				{
+					continue;
+				}
+
+				// prevent drawing outside the screen, visualisation of texture/screen bounds over time can be played with here https://www.desmos.com/calculator/zwdebhrpie
+				switch (j)
+				{
+					case 0:
+						if (time2 is < 2f)
+						{
+							continue;
+						}
+						break;
+					case 1:
+						if (time2 is < 1.7f or (> 2.75f and < 3.3f))
+						{
+							continue;
+						}
+						break;
+					case 2:
+						if (time2 is < 2.8f)
+						{
+							continue;
+						}
+						break;
+					case 3:
+						if (time2 is < 2.25f)
+						{
+							continue;
+						}
+						break;
+				}
+
+				float finalTime = Utils.Remap(MathF.Pow(time2, 2.5f), 0f, tauPow, 0f, MathF.Tau, false) - MathHelper.PiOver2;
+
+				float spiral = MathF.Atan2(MathF.Cos(finalTime), MathF.Sin(finalTime));
+				float spiralMult = Utils.Remap(Ease(Utils.Remap(spiral, -MathF.PI, MathF.PI, endRadius, 1f)), Ease(endRadius), 1f, endRadius, 1f);
+
 				float rot = MathHelper.PiOver2 * j - MathF.PI / 2.25f;
 
-				bool rock = currentCloudSeed.NextBool(20);
-				int cloud = currentCloudSeed.Next(rock ? darkMatterRocks.Length : darkMatterNimbuses.Length);
 				Texture2D tex = rock ? darkMatterRocks[cloud].Value : darkMatterNimbuses[cloud].Value;
 
 				float finalSpiralTwist = MathHelper.PiOver2 * (spiralTwist - 1f) + rot;
-				float finalXPos = xPos + MathF.Cos(time2 * spiralTwist + finalSpiralTwist) * radius * spiralMult;
-				float finalYPos = yPos - MathF.Sin(time2 * spiralTwist + finalSpiralTwist) * radius * spiralMult;
+				float finalXPos = xPos + MathF.Cos(finalTime * spiralTwist + finalSpiralTwist) * radius * spiralMult;
+				float finalYPos = yPos - MathF.Sin(finalTime * spiralTwist + finalSpiralTwist) * radius * spiralMult;
 
 				float distanceMult = Easings.ExpoOut(spiralMult * 0.65f);
 
@@ -213,29 +244,11 @@ public class DarkMatterSky : CustomSky
 				else
 				{
 					finalColor = finalColor.MultiplyRGBByFloat(distanceMult);
-					finalColor.A = 0;
-				}
-				float cloudRot = currentCloudSeed.NextFloat(-0.3f, 0.3f) + (rock ? -time2 * currentCloudSeed.NextFloat(-2f, 8f) : 0);
-
-				// prevent drawing inside black hole
-				if (Math.Abs(finalXPos - xPos) < cull && Math.Abs(finalYPos - yPos) < cull)
-				{
-					continue;
-				}
-
-				float scale = highResScale * distanceMult;
-				Vector2 texSizeScaled = tex.Size() * scale;
-				float texMaxBound = MathF.Max(MathF.Abs(texSizeScaled.X * MathF.Cos(cloudRot) - texSizeScaled.Y * MathF.Sin(cloudRot)), MathF.Abs(texSizeScaled.Y * MathF.Cos(cloudRot) + texSizeScaled.X * MathF.Sin(cloudRot)));
-
-				// prevent drawing outside the screen
-				if (((pos.X + (texMaxBound / 2f)) < 0 || (pos.Y + (texMaxBound / 2f)) < 0) || ((pos.X - (texMaxBound / 2f)) > Main.PendingResolutionWidth || (pos.Y - (texMaxBound / 2f)) > Main.PendingResolutionHeight))
-				{
-					continue;
 				}
 
 				spriteBatch.Draw(tex, pos,
-				tex.Bounds, finalColor, cloudRot, tex.Size() / 2f,
-				scale, SpriteEffects.None, 0);
+				tex.Bounds, finalColor, cloudRotRand + (rock ? -finalTime * rockRotRand : 0), tex.Size() / 2f,
+				highResScale * distanceMult, SpriteEffects.None, 0);
 			}
 		}
 
