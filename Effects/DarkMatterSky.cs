@@ -172,17 +172,17 @@ public class DarkMatterSky : CustomSky
 		float tauPow = MathF.Pow(MathF.Tau, 2.5f);
 		float time1 = (float)Main.timeForVisualEffects / inverseSpeed * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
 		int drawCount = 10;
+		Color color = new(244, 195, 232, 0);
+		float cullRange = 1920 * highResScale;
 
 		for (float i = 0; i < MathF.Tau; i += MathF.Tau / 150f)
 		{
 			float[] radius = new float[drawCount];
 			float[] cloudRotRand = new float[drawCount];
-			Color[] color = new Color[drawCount];
 			for (int r = 0; r < drawCount; r++)
 			{
 				radius[r] = currentCloudSeed.NextFloat(1920f, 3000f) * highResScale;
 				cloudRotRand[r] = currentCloudSeed.NextFloat(-0.3f, 0.3f);
-				color[r] = new(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 0);
 			}
 			for (int j = 0; j < 4; j++)
 			{
@@ -248,14 +248,20 @@ public class DarkMatterSky : CustomSky
 
 				float distanceMult = Easings.ExpoOut(spiralMult * 0.65f);
 
+				float finalPosCos = MathF.Cos(finalTime * spiralTwist + finalSpiralTwist) * spiralMult;
+				float finalPosSin = MathF.Sin(finalTime * spiralTwist + finalSpiralTwist) * spiralMult;
+
+				// prevent drawing outside the screen again, this time using actual positions and hardcoded estimates of the maximum image bounds rotated by 0.3rad, so it's more accurate than the other culling, but requires you to calculate everything above first
+				if (xPos + finalPosCos * cullRange + 175 < 0 || yPos - finalPosSin * cullRange + 125 < 0 || xPos + finalPosCos * cullRange - 175 > Main.PendingResolutionWidth || yPos - finalPosSin * cullRange - 125 > Main.PendingResolutionHeight)
+				{
+					continue;
+				}
+
 				for (int r = 0; r < drawCount; r++)
 				{
 					Texture2D tex = rock[r] ? darkMatterRocks[cloud[r]].Value : darkMatterNimbuses[cloud[r]].Value;
 
-					float finalXPos = xPos + MathF.Cos(finalTime * spiralTwist + finalSpiralTwist) * radius[r] * spiralMult;
-					float finalYPos = yPos - MathF.Sin(finalTime * spiralTwist + finalSpiralTwist) * radius[r] * spiralMult;
-
-					Color finalColor = color[r] * opacity * distanceMult;
+					Color finalColor = color * opacity * distanceMult;
 					if (rock[r])
 					{
 						finalColor.A = rockAlpha;
@@ -265,7 +271,7 @@ public class DarkMatterSky : CustomSky
 						finalColor = finalColor.MultiplyRGBByFloat(distanceMult);
 					}
 
-					spriteBatch.Draw(tex, new Vector2(finalXPos, finalYPos),
+					spriteBatch.Draw(tex, new Vector2(xPos + finalPosCos * radius[r], yPos - finalPosSin * radius[r]),
 					tex.Bounds, finalColor, cloudRotRand[r] + (rock[r] ? -finalTime * rockRotRand[r] : 0), tex.Size() / 2f,
 					highResScale * distanceMult, SpriteEffects.None, 0);
 				}
