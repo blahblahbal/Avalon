@@ -171,17 +171,30 @@ public class DarkMatterSky : CustomSky
 		byte rockAlpha = (byte)Math.Clamp(255 * opacity, 0, 255);
 		float tauPow = MathF.Pow(MathF.Tau, 2.5f);
 		float time1 = (float)Main.timeForVisualEffects / inverseSpeed * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
+		int drawCount = 10;
 
-		for (int i = 0; i < 1500; i++)
+		for (float i = 0; i < MathF.Tau; i += MathF.Tau / 150f)
 		{
-			float radius = currentCloudSeed.NextFloat(1920f, 3000f) * highResScale;
-			float cloudRotRand = currentCloudSeed.NextFloat(-0.3f, 0.3f);
-			Color color = new(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 0);
+			float[] radius = new float[drawCount];
+			float[] cloudRotRand = new float[drawCount];
+			Color[] color = new Color[drawCount];
+			for (int r = 0; r < drawCount; r++)
+			{
+				radius[r] = currentCloudSeed.NextFloat(1920f, 3000f) * highResScale;
+				cloudRotRand[r] = currentCloudSeed.NextFloat(-0.3f, 0.3f);
+				color[r] = new(currentCloudSeed.Next(240, 256), currentCloudSeed.Next(190, 211), currentCloudSeed.Next(225, 246), 0);
+			}
 			for (int j = 0; j < 4; j++)
 			{
-				bool rock = currentCloudSeed.NextBool(20);
-				float rockRotRand = rock ? currentCloudSeed.NextFloat(-2f, 8f) : 0f;
-				int cloud = currentCloudSeed.Next(rock ? darkMatterRocks.Length : darkMatterNimbuses.Length);
+				bool[] rock = new bool[drawCount];
+				float[] rockRotRand = new float[drawCount];
+				int[] cloud = new int[drawCount];
+				for (int r = 0; r < drawCount; r++)
+				{
+					rock[r] = currentCloudSeed.NextBool(20);
+					rockRotRand[r] = rock[r] ? currentCloudSeed.NextFloat(-2f, 8f) : 0f;
+					cloud[r] = currentCloudSeed.Next(rock[r] ? darkMatterRocks.Length : darkMatterNimbuses.Length);
+				}
 				float time2 = (time1 + i) % MathF.Tau;
 
 				// prevent drawing inside black hole
@@ -191,6 +204,7 @@ public class DarkMatterSky : CustomSky
 				}
 
 				// prevent drawing outside the screen, visualisation of texture/screen bounds over time can be played with here https://www.desmos.com/calculator/zwdebhrpie
+				// todo: automatically scale based on resolution
 				switch (j)
 				{
 					case 0:
@@ -200,7 +214,11 @@ public class DarkMatterSky : CustomSky
 						}
 						break;
 					case 1:
-						if (time2 is < 1.7f or (> 2.75f and < 3.3f))
+						//if (time2 is < 1.7f or (> 2.75f and < 3.3f))
+						//{
+						//	continue;
+						//}
+						if (time2 < 1.4f) // this fucker just couldn't be consistent on higher resolutions so it needs to WASTE time rendering just to support them
 						{
 							continue;
 						}
@@ -226,28 +244,31 @@ public class DarkMatterSky : CustomSky
 
 				float rot = MathHelper.PiOver2 * j - MathF.PI / 2.25f;
 
-				Texture2D tex = rock ? darkMatterRocks[cloud].Value : darkMatterNimbuses[cloud].Value;
-
 				float finalSpiralTwist = MathHelper.PiOver2 * (spiralTwist - 1f) + rot;
-				float finalXPos = xPos + MathF.Cos(finalTime * spiralTwist + finalSpiralTwist) * radius * spiralMult;
-				float finalYPos = yPos - MathF.Sin(finalTime * spiralTwist + finalSpiralTwist) * radius * spiralMult;
 
 				float distanceMult = Easings.ExpoOut(spiralMult * 0.65f);
 
-				Vector2 pos = new(finalXPos, finalYPos);
-				Color finalColor = color * opacity * distanceMult;
-				if (rock)
+				for (int r = 0; r < drawCount; r++)
 				{
-					finalColor.A = rockAlpha;
-				}
-				else
-				{
-					finalColor = finalColor.MultiplyRGBByFloat(distanceMult);
-				}
+					Texture2D tex = rock[r] ? darkMatterRocks[cloud[r]].Value : darkMatterNimbuses[cloud[r]].Value;
 
-				spriteBatch.Draw(tex, pos,
-				tex.Bounds, finalColor, cloudRotRand + (rock ? -finalTime * rockRotRand : 0), tex.Size() / 2f,
-				highResScale * distanceMult, SpriteEffects.None, 0);
+					float finalXPos = xPos + MathF.Cos(finalTime * spiralTwist + finalSpiralTwist) * radius[r] * spiralMult;
+					float finalYPos = yPos - MathF.Sin(finalTime * spiralTwist + finalSpiralTwist) * radius[r] * spiralMult;
+
+					Color finalColor = color[r] * opacity * distanceMult;
+					if (rock[r])
+					{
+						finalColor.A = rockAlpha;
+					}
+					else
+					{
+						finalColor = finalColor.MultiplyRGBByFloat(distanceMult);
+					}
+
+					spriteBatch.Draw(tex, new Vector2(finalXPos, finalYPos),
+					tex.Bounds, finalColor, cloudRotRand[r] + (rock[r] ? -finalTime * rockRotRand[r] : 0), tex.Size() / 2f,
+					highResScale * distanceMult, SpriteEffects.None, 0);
+				}
 			}
 		}
 
