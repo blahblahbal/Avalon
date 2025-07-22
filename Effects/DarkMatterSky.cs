@@ -17,11 +17,12 @@ public class DarkMatterSky : CustomSky
 	private static int blackHoleFrame;
 	private static int surfaceFrame;
 	private static int surfaceFrameCounter;
-	private readonly Asset<Texture2D>[] darkMatterBackgrounds = new Asset<Texture2D>[25];
 	private readonly Asset<Texture2D>[] darkMatterNimbuses = new Asset<Texture2D>[13];
+	private readonly Asset<Texture2D>[] darkMatterNimbusesBig = new Asset<Texture2D>[6];
 	private readonly Asset<Texture2D>[] darkMatterRocks = new Asset<Texture2D>[20];
 	private Asset<Texture2D>? darkMatterBlackHole;
 	private Asset<Texture2D>? darkMatterBlackHole2;
+	private Asset<Texture2D>? darkMatterBlackHole3;
 	private Asset<Texture2D>? darkMatterSky;
 	private float opacity;
 	private bool skyActive;
@@ -32,9 +33,14 @@ public class DarkMatterSky : CustomSky
 		darkMatterSky = ModContent.Request<Texture2D>("Avalon/Backgrounds/DarkMatter/DarkMatterSky");
 		darkMatterBlackHole = ModContent.Request<Texture2D>("Avalon/Backgrounds/DarkMatter/DarkMatterBGBlackHole");
 		darkMatterBlackHole2 = ModContent.Request<Texture2D>("Avalon/Backgrounds/DarkMatter/DarkMatterBGBlackHole2");
+		darkMatterBlackHole3 = ModContent.Request<Texture2D>("Avalon/Backgrounds/DarkMatter/DarkMatterBGBlackHole3");
 		for (int i = 0; i < darkMatterNimbuses.Length; i++)
 		{
 			darkMatterNimbuses[i] = ModContent.Request<Texture2D>($"Avalon/Backgrounds/DarkMatter/Nimbus/DarkMatterNimbus{i}");
+		}
+		for (int i = 0; i < darkMatterNimbusesBig.Length; i++)
+		{
+			darkMatterNimbusesBig[i] = ModContent.Request<Texture2D>($"Avalon/Backgrounds/DarkMatter/NimbusBig/DarkMatterNimbusBig{i}");
 		}
 		for (int i = 0; i < darkMatterRocks.Length; i++)
 		{
@@ -171,17 +177,17 @@ public class DarkMatterSky : CustomSky
 		byte rockAlpha = (byte)Math.Clamp(255 * opacity, 0, 255);
 		float tauPow = MathF.Pow(MathF.Tau, 2.5f);
 		float time1 = (float)Main.timeForVisualEffects / inverseSpeed * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
-		int drawCount = 10;
+		int drawCount = 7;
+		int bigDrawCount = 3;
 		Color color = new(244, 195, 232, 0);
-		float cullRange = 1920 * highResScale;
 
-		for (float i = 0; i < MathF.Tau; i += MathF.Tau / 150f)
+		for (float i = 0; i < MathF.Tau; i += MathF.Tau / 75f)
 		{
 			float[] radius = new float[drawCount];
 			float[] cloudRotRand = new float[drawCount];
 			for (int r = 0; r < drawCount; r++)
 			{
-				radius[r] = currentCloudSeed.NextFloat(1920f, 3000f) * highResScale;
+				radius[r] = (r < bigDrawCount ? currentCloudSeed.NextFloat(2400f, 2700f) : currentCloudSeed.NextFloat(1920f, 3250f)) * highResScale;
 				cloudRotRand[r] = currentCloudSeed.NextFloat(-0.3f, 0.3f);
 			}
 			for (int j = 0; j < 4; j++)
@@ -191,7 +197,7 @@ public class DarkMatterSky : CustomSky
 				int[] cloud = new int[drawCount];
 				for (int r = 0; r < drawCount; r++)
 				{
-					rock[r] = currentCloudSeed.NextBool(20);
+					rock[r] = currentCloudSeed.NextBool(7);
 					rockRotRand[r] = rock[r] ? currentCloudSeed.NextFloat(-2f, 8f) : 0f;
 					cloud[r] = currentCloudSeed.Next(rock[r] ? darkMatterRocks.Length : darkMatterNimbuses.Length);
 				}
@@ -203,8 +209,8 @@ public class DarkMatterSky : CustomSky
 					continue;
 				}
 
-				// prevent drawing outside the screen, visualisation of texture/screen bounds over time can be played with here https://www.desmos.com/calculator/zwdebhrpie
-				// todo: automatically scale based on resolution
+				// primitive prevention of drawing outside the screen, visualisation of texture/screen bounds over time can be played with here https://www.desmos.com/calculator/zwdebhrpie
+				// todo: automatically scale based on resolution (how?)
 				switch (j)
 				{
 					case 0:
@@ -214,11 +220,7 @@ public class DarkMatterSky : CustomSky
 						}
 						break;
 					case 1:
-						//if (time2 is < 1.7f or (> 2.75f and < 3.3f))
-						//{
-						//	continue;
-						//}
-						if (time2 < 1.4f) // this fucker just couldn't be consistent on higher resolutions so it needs to WASTE time rendering just to support them
+						if (time2 < 1.4f)
 						{
 							continue;
 						}
@@ -251,15 +253,31 @@ public class DarkMatterSky : CustomSky
 				float finalPosCos = MathF.Cos(finalTime * spiralTwist + finalSpiralTwist) * spiralMult;
 				float finalPosSin = MathF.Sin(finalTime * spiralTwist + finalSpiralTwist) * spiralMult;
 
-				// prevent drawing outside the screen again, this time using actual positions and hardcoded estimates of the maximum image bounds rotated by 0.3rad, so it's more accurate than the other culling, but requires you to calculate everything above first
-				if (xPos + finalPosCos * cullRange + 175 < 0 || yPos - finalPosSin * cullRange + 125 < 0 || xPos + finalPosCos * cullRange - 175 > Main.PendingResolutionWidth || yPos - finalPosSin * cullRange - 125 > Main.PendingResolutionHeight)
-				{
-					continue;
-				}
-
 				for (int r = 0; r < drawCount; r++)
 				{
-					Texture2D tex = rock[r] ? darkMatterRocks[cloud[r]].Value : darkMatterNimbuses[cloud[r]].Value;
+					bool big = r < bigDrawCount && !rock[r];
+
+					// prevent drawing outside the screen again, this time using actual positions and hardcoded estimates of the maximum image bounds rotated by 0.3rad, so it's more accurate than the other culling, but requires you to calculate everything above first
+					// ignores rock sizes, but they're all smaller than the clouds anyways so should be fine even though they can rotate completely around
+					float scale = highResScale * distanceMult;
+					float cullX = xPos + finalPosCos * radius[r];
+					float cullTexX = (big ? 250 : 175) * scale;
+					float cullY = yPos - finalPosSin * radius[r];
+					float cullTexY = (big ? 250 : 125) * scale;
+					if (cullX + cullTexX < 0 || cullY + cullTexY < 0 || cullX - cullTexX > Main.PendingResolutionWidth || cullY - cullTexY > Main.PendingResolutionHeight)
+					{
+						continue;
+					}
+
+					Texture2D tex;
+					if (big)
+					{
+						tex = darkMatterNimbusesBig[cloud[r] % 6].Value;
+					}
+					else
+					{
+						tex = rock[r] ? darkMatterRocks[cloud[r]].Value : darkMatterNimbuses[cloud[r]].Value;
+					}
 
 					Color finalColor = color * opacity * distanceMult;
 					if (rock[r])
@@ -273,10 +291,15 @@ public class DarkMatterSky : CustomSky
 
 					spriteBatch.Draw(tex, new Vector2(xPos + finalPosCos * radius[r], yPos - finalPosSin * radius[r]),
 					tex.Bounds, finalColor, cloudRotRand[r] + (rock[r] ? -finalTime * rockRotRand[r] : 0), tex.Size() / 2f,
-					highResScale * distanceMult, SpriteEffects.None, 0);
+					scale, SpriteEffects.None, 0);
 				}
 			}
 		}
+
+		// Draw the black hole's center (again, but only the black part!)
+		spriteBatch.Draw(darkMatterBlackHole3.Value, new Vector2(xPos, yPos), null, Color.White * opacity, 0f,
+			new Vector2(darkMatterBlackHole2.Width() >> 1, darkMatterBlackHole2.Height() >> 1),
+			0.25f * highResScale + scaleMod, SpriteEffects.None, 1f);
 
 		float radiusInner = 144f * highResScale;
 		//float inverseSpeedInner = 150f;
