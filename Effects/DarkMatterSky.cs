@@ -20,7 +20,7 @@ public class DarkMatterSky : CustomSky
 	private readonly Asset<Texture2D>[] darkMatterNimbuses = new Asset<Texture2D>[13];
 	private readonly Asset<Texture2D>[] darkMatterNimbusesBig = new Asset<Texture2D>[6];
 	private readonly Asset<Texture2D>[] darkMatterRocks = new Asset<Texture2D>[20];
-	private readonly Asset<Texture2D>[] darkMatterDebris = new Asset<Texture2D>[1];
+	private readonly Asset<Texture2D>[] darkMatterDebris = new Asset<Texture2D>[3];
 	private Asset<Texture2D>? darkMatterBlackHole;
 	private Asset<Texture2D>? darkMatterBlackHole2;
 	private Asset<Texture2D>? darkMatterBlackHole3;
