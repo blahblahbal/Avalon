@@ -20,14 +20,13 @@ public class DarkMatterSky : CustomSky
 	private readonly Asset<Texture2D>[] darkMatterNimbuses = new Asset<Texture2D>[13];
 	private readonly Asset<Texture2D>[] darkMatterNimbusesBig = new Asset<Texture2D>[6];
 	private readonly Asset<Texture2D>[] darkMatterRocks = new Asset<Texture2D>[20];
+	private readonly Asset<Texture2D>[] darkMatterDebris = new Asset<Texture2D>[1];
 	private Asset<Texture2D>? darkMatterBlackHole;
 	private Asset<Texture2D>? darkMatterBlackHole2;
 	private Asset<Texture2D>? darkMatterBlackHole3;
 	private Asset<Texture2D>? darkMatterSky;
 	private float opacity;
 	private bool skyActive;
-
-	private readonly UnifiedRandom CloudSeed = new();
 	public override void OnLoad()
 	{
 		darkMatterSky = ModContent.Request<Texture2D>("Avalon/Backgrounds/DarkMatter/DarkMatterSky");
@@ -45,6 +44,10 @@ public class DarkMatterSky : CustomSky
 		for (int i = 0; i < darkMatterRocks.Length; i++)
 		{
 			darkMatterRocks[i] = ModContent.Request<Texture2D>($"Avalon/Backgrounds/DarkMatter/Rocks/DarkMatterRock{i}");
+		}
+		for (int i = 0; i < darkMatterDebris.Length; i++)
+		{
+			darkMatterDebris[i] = ModContent.Request<Texture2D>($"Avalon/Backgrounds/DarkMatter/Debris/DarkMatterDebris{i}");
 		}
 	}
 
@@ -169,7 +172,7 @@ public class DarkMatterSky : CustomSky
 			new Vector2(darkMatterBlackHole2.Width() >> 1, darkMatterBlackHole2.Height() >> 1),
 			0.25f * highResScale + scaleMod, SpriteEffects.None, 1f);
 
-		UnifiedRandom? currentCloudSeed = new(CloudSeed.GetHashCode());
+		UnifiedRandom? currentCloudSeed = new(Main.ActiveWorldFileData.Seed);
 
 		float endRadius = 0.01f;
 		float spiralTwist = 2.5f;
@@ -193,13 +196,15 @@ public class DarkMatterSky : CustomSky
 			for (int j = 0; j < 4; j++)
 			{
 				bool[] rock = new bool[drawCount];
+				bool[] debris = new bool[drawCount];
 				float[] rockRotRand = new float[drawCount];
 				int[] cloud = new int[drawCount];
 				for (int r = 0; r < drawCount; r++)
 				{
 					rock[r] = currentCloudSeed.NextBool(7);
+					debris[r] = rock[r] && currentCloudSeed.NextBool(50);
 					rockRotRand[r] = rock[r] ? currentCloudSeed.NextFloat(-2f, 8f) : 0f;
-					cloud[r] = currentCloudSeed.Next(rock[r] ? darkMatterRocks.Length : darkMatterNimbuses.Length);
+					cloud[r] = currentCloudSeed.Next(debris[r] ? darkMatterDebris.Length : rock[r] ? darkMatterRocks.Length : darkMatterNimbuses.Length);
 				}
 				float time2 = (time1 + i) % MathF.Tau;
 
@@ -276,7 +281,7 @@ public class DarkMatterSky : CustomSky
 					}
 					else
 					{
-						tex = rock[r] ? darkMatterRocks[cloud[r]].Value : darkMatterNimbuses[cloud[r]].Value;
+						tex = debris[r] ? darkMatterDebris[cloud[r]].Value : rock[r] ? darkMatterRocks[cloud[r]].Value : darkMatterNimbuses[cloud[r]].Value;
 					}
 
 					Color finalColor = color * opacity * distanceMult;
