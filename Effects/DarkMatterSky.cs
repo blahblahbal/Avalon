@@ -20,7 +20,7 @@ public class DarkMatterSky : CustomSky
 	private readonly Asset<Texture2D>[] darkMatterNimbuses = new Asset<Texture2D>[13];
 	private readonly Asset<Texture2D>[] darkMatterNimbusesBig = new Asset<Texture2D>[6];
 	private readonly Asset<Texture2D>[] darkMatterRocks = new Asset<Texture2D>[20];
-	private readonly Asset<Texture2D>[] darkMatterDebris = new Asset<Texture2D>[3];
+	private readonly Asset<Texture2D>[] darkMatterDebris = new Asset<Texture2D>[4];
 	private Asset<Texture2D>? darkMatterBlackHole;
 	private Asset<Texture2D>? darkMatterBlackHole2;
 	private Asset<Texture2D>? darkMatterBlackHole3;
@@ -183,6 +183,7 @@ public class DarkMatterSky : CustomSky
 		int drawCount = 7;
 		int bigDrawCount = 3;
 		Color color = new(244, 195, 232, 0);
+		//int debrisCount = 0;
 
 		for (float i = 0; i < MathF.Tau; i += MathF.Tau / 75f)
 		{
@@ -205,6 +206,12 @@ public class DarkMatterSky : CustomSky
 					debris[r] = rock[r] && currentCloudSeed.NextBool(50);
 					rockRotRand[r] = rock[r] ? currentCloudSeed.NextFloat(-2f, 8f) : 0f;
 					cloud[r] = currentCloudSeed.Next(debris[r] ? darkMatterDebris.Length : rock[r] ? darkMatterRocks.Length : darkMatterNimbuses.Length);
+					//if (debris[r])
+					//{
+					//	cloud[r] = 3;
+					//	Main.NewText(cloud[r]);
+					//	debrisCount++;
+					//}
 				}
 				float time2 = (time1 + i) % MathF.Tau;
 
@@ -300,6 +307,7 @@ public class DarkMatterSky : CustomSky
 				}
 			}
 		}
+		//Main.NewText(debrisCount);
 
 		// Draw the black hole's center (again, but only the black part!)
 		spriteBatch.Draw(darkMatterBlackHole3.Value, new Vector2(xPos, yPos), null, Color.White * opacity, 0f,
