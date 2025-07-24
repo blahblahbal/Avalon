@@ -320,7 +320,7 @@ public class DarkMatterSky : CustomSky
 		float radiusYMult = 0.75f;
 		float timeInner1 = (float)Main.timeForVisualEffects / inverseSpeedInner * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
 		float scaleInner = 0.455f * highResScale;
-		Color colorInner = new(255, 200, 235, 200);
+		Color colorInner = new Color(255, 200, 235, 0) * opacity;
 
 		for (int i = 0; i < 100; i++)
 		{
@@ -331,8 +331,7 @@ public class DarkMatterSky : CustomSky
 			float finalYPos = yPos + MathF.Sin(timeInner2 + MathHelper.Pi / 3f) * radiusInner * radiusYMult;
 			float rot = MathHelper.PiOver4 * radiusYMult + currentCloudSeed.NextFloat(-0.3f, 0.3f);
 			float distanceMult = MathF.Sin((timeInner2 + MathHelper.Pi) / 2f);
-			Color finalColor = (colorInner * opacity * distanceMult).MultiplyRGBByFloat(distanceMult);
-			finalColor.A = 0;
+			Color finalColor = (colorInner * distanceMult).MultiplyRGBByFloat(distanceMult);
 
 			spriteBatch.Draw(tex, new Vector2(finalXPos, finalYPos),
 			tex.Bounds, finalColor, rot, tex.Size() / 2f,
