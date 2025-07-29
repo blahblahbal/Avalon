@@ -552,24 +552,24 @@ public class Utils
 			}
 		}
 	}
-	public static void MakeSquare(int x, int y, int s, int type)
-	{
-		for (int i = x - s / 2; i < x + s / 2; i++)
-		{
-			for (int j = y; j < y + s; j++)
-			{
-				if (Main.tile[i, j].TileType != TileID.WoodBlock)
-				{
-					Tile t = Main.tile[i, j];
-					t.HasTile = true;
-					t.IsHalfBlock = false;
-					t.Slope = SlopeType.Solid;
-					Main.tile[i, j].TileType = (ushort)type;
-					WorldGen.SquareTileFrame(i, j);
-				}
-			}
-		}
-	}
+	//public static void MakeSquare(int x, int y, int s, int type)
+	//{
+	//	for (int i = x - s / 2; i < x + s / 2; i++)
+	//	{
+	//		for (int j = y; j < y + s; j++)
+	//		{
+	//			if (Main.tile[i, j].TileType != TileID.WoodBlock)
+	//			{
+	//				Tile t = Main.tile[i, j];
+	//				t.HasTile = true;
+	//				t.IsHalfBlock = false;
+	//				t.Slope = SlopeType.Solid;
+	//				Main.tile[i, j].TileType = (ushort)type;
+	//				WorldGen.SquareTileFrame(i, j);
+	//			}
+	//		}
+	//	}
+	//}
 	//public static void MakeCircle(int x, int y, int radius, int tileType, bool walls = false, int wallType = WallID.Dirt)
 	//{
 	//	for (int k = x - (int)(radius * 0.25); k <= x + (int)(radius * 0.25); k++)
