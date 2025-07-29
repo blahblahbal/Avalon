@@ -1,11 +1,9 @@
 using Avalon.Biomes;
-using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.Info;
-using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Accessories.Vanity;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
@@ -146,7 +144,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		catch
 		{
 		}
-		IL_162:
+	IL_162:
 		num3 = num5 * 16;
 		int num7 = NPC.NewNPC(NPC.GetBossSpawnSource(Player.FindClosest(pos, 32, 32)), num2, num3, ModContent.NPCType<NPCs.Bosses.Hardmode.WallofSteel>(), 0);
 		if (Main.netMode == NetmodeID.Server && num7 < 200)
@@ -201,11 +199,11 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		if (npc.type == NPCID.MoonLordCore && !NPC.downedMoonlord)
 		{
-			if (Main.netMode == 0)
+			if (Main.netMode == NetmodeID.SinglePlayer)
 			{
 				Main.NewText(Language.GetTextValue("Mods.Avalon.BossDefeatedBlurbs.MoonLord"), 50, 255, 130);
 			}
-			else if (Main.netMode == 2)
+			else if (Main.netMode == NetmodeID.Server)
 			{
 				ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.Avalon.BossDefeatedBlurbs.MoonLord"), new Color(50, 255, 130));
 			}
@@ -323,7 +321,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			{
 				shopCustomPrice = Item.buyPrice(silver: 5)
 			}, corruption, Condition.InGraveyard, Condition.Hardmode);
-			
+
 			shop.InsertAfter(ItemID.CorruptSeeds, new Item(ModContent.ItemType<ContagionSeeds>())
 			{
 				shopCustomPrice = Item.buyPrice(silver: 5)
@@ -602,7 +600,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			pool.Add(ModContent.NPCType<MosquitoDroopy>(), 0.6f);
 			pool.Add(ModContent.NPCType<MosquitoSmall>(), 0.6f);
 			pool.Add(ModContent.NPCType<MosquitoPainted>(), 0.6f);
-			
+
 			if (Main.hardMode)
 			{
 				pool.Add(ModContent.NPCType<PoisonDartFrog>(), 0.4f);
@@ -767,30 +765,33 @@ public class AvalonGlobalNPC : GlobalNPC
 		#region platform leaf
 		Point tile = npc.position.ToTileCoordinates() + new Point(0, npc.height / 16 + 1);
 		Point tile2 = npc.position.ToTileCoordinates() + new Point(npc.width / 16, npc.height / 16 + 1);
-		int xpos;
-		int ypos;
-		for (xpos = Main.tile[tile.X, tile.Y].TileFrameX / 18; xpos > 2; xpos -= 3) { }
-		for (ypos = Main.tile[tile.X, tile.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
-		xpos = tile.X - xpos;
-		ypos = tile.Y - ypos;
-		if (npc.velocity.Y > 4.85f && !npc.noGravity && !npc.noTileCollide)
+		if (WorldGen.InWorld(tile.X, tile.Y) && WorldGen.InWorld(tile2.X, tile2.Y))
 		{
-			if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Savanna.PlatformLeaf>() &&
-				Main.tile[tile2.X, tile2.Y].TileType == ModContent.TileType<Tiles.Savanna.PlatformLeaf>() && Main.tile[tile.X, tile.Y].TileFrameY < 74)
+			int xpos;
+			int ypos;
+			for (xpos = Main.tile[tile.X, tile.Y].TileFrameX / 18; xpos > 2; xpos -= 3) { }
+			for (ypos = Main.tile[tile.X, tile.Y].TileFrameY / 18; ypos > 3; ypos -= 4) { }
+			xpos = tile.X - xpos;
+			ypos = tile.Y - ypos;
+			if (npc.velocity.Y > 4.85f && !npc.noGravity && !npc.noTileCollide)
 			{
-				for (int i = xpos; i < xpos + 3; i++)
+				if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Savanna.PlatformLeaf>() &&
+					Main.tile[tile2.X, tile2.Y].TileType == ModContent.TileType<Tiles.Savanna.PlatformLeaf>() && Main.tile[tile.X, tile.Y].TileFrameY < 74)
 				{
-					for (int j = ypos; j < ypos + 4; j++)
+					for (int i = xpos; i < xpos + 3; i++)
 					{
-						Main.tile[i, j].TileType = (ushort)ModContent.TileType<PlatformLeafCollapsed>();
+						for (int j = ypos; j < ypos + 4; j++)
+						{
+							Main.tile[i, j].TileType = (ushort)ModContent.TileType<PlatformLeafCollapsed>();
+						}
 					}
+					SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.8f };
+					SoundEngine.PlaySound(s, new Vector2((tile.X + 1) * 16, tile.Y * 16));
+					WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<SavannaTreeLeaf>(), true);
 				}
-				SoundStyle s = new SoundStyle("Terraria/Sounds/Grass") { Pitch = -0.8f };
-				SoundEngine.PlaySound(s, new Vector2((tile.X + 1) * 16, tile.Y * 16));
-				WorldGen.TreeGrowFX(xpos + 1, ypos, 2, ModContent.GoreType<SavannaTreeLeaf>(), true);
 			}
 		}
-		#endregion 
+		#endregion
 	}
 	public override bool CheckDead(NPC npc)
 	{
@@ -882,7 +883,7 @@ public class AvalonGlobalNPC : GlobalNPC
 	}
 	public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{
-		if(npc.netID is 529 or 533)
+		if (npc.netID is 529 or 533)
 		{
 			bestiaryEntry.Info.Add(new ModBiomeBestiaryInfoElement(Mod, ModContent.GetInstance<ContagionCaveDesert>().DisplayName.Value, ModContent.GetInstance<ContagionCaveDesert>().BestiaryIcon, "Assets/Bestiary/ContagionBG", null));
 		}
