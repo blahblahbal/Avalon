@@ -14,15 +14,15 @@ namespace Avalon.WorldGeneration.Passes;
 
 internal class Underworld : GenPass
 {
-    public Underworld() : base("Avalon Underworld", 120f) { }
+	public Underworld() : base("Avalon Underworld", 120f) { }
 
-    protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
-    {
+	protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
+	{
 		#region caesium blastplains
 		if (ModContent.GetInstance<AvalonClientConfig>().SuperhardmodeStuff)
 		{
 			progress.Message = "Generating Caesium Blastplains";
-			
+
 			int caesiumXPosLeft = Main.maxTilesX - (Main.maxTilesX / 5) - 15;
 			int caesiumXPosRight = Main.maxTilesX - (Main.maxTilesX / 5);
 			int caesiumMaxRight = Main.maxTilesX - 20;
@@ -302,7 +302,7 @@ internal class Underworld : GenPass
 						//	Utils.OreRunner(q, z, WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(5, 8), (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>());
 					}
 				}
-				
+
 				//for (int q = caesiumXPosRight; q < caesiumMaxRight; q++)
 				//{
 				//	for (int z = Main.maxTilesY - 250; z < Main.maxTilesY - 20; z++)
@@ -335,12 +335,12 @@ internal class Underworld : GenPass
 				}
 			}
 		}
-        #endregion
+		#endregion
 
-        progress.Message = "Generating Hellcastle and the Phantom Garden";
-        int hellcastleOriginX = (Main.maxTilesX / 2) - 200;
-        int ashenLeft = hellcastleOriginX - 125;
-        int ashenRight = hellcastleOriginX + 525;
+		progress.Message = "Generating Hellcastle and the Phantom Garden";
+		int hellcastleOriginX = (Main.maxTilesX / 2) - 200;
+		int ashenLeft = hellcastleOriginX - 125;
+		int ashenRight = hellcastleOriginX + 525;
 
 
 		//if (Main.drunkWorld)
@@ -409,65 +409,65 @@ internal class Underworld : GenPass
 		#endregion
 	}
 
-    public static void MakeSpike2(int x, int y, ushort type, int lengthMin, int lengthMax)
-    {
-        int xmin = (int)(x) - WorldGen.genRand.Next(-15, 1) - 5;
-        int xmax = (int)(x) + WorldGen.genRand.Next(0, 16);
-        int m = xmin;
-        int num8 = 0;
-        
-        for (; m < xmax; m += WorldGen.genRand.Next(8, 12))
-        {
-            int ystart = y - 3;
-            while (!Main.tile[m, ystart].HasTile)
-            {
-                ystart--;
-            }
-            ystart -= 4;
-            int num10 = WorldGen.genRand.Next(4, 8);
-            int num11 = WorldGen.genRand.Next(5, 10);
+	public static void MakeSpike2(int x, int y, ushort type, int lengthMin, int lengthMax)
+	{
+		int xmin = (int)(x) - WorldGen.genRand.Next(-15, 1) - 5;
+		int xmax = (int)(x) + WorldGen.genRand.Next(0, 16);
+		int m = xmin;
+		int num8 = 0;
 
-            int n = m - num10;
-            while (num10 > 0)
-            {
-                for (n = m - num10; n < m + num10; n++)
-                {
-                    Tile t = Main.tile[n, ystart];
-                    t.HasTile = true;
-                    t.TileType = type;
-                }
-                num8++;
-                if (WorldGen.genRand.Next(3) < num8)
-                {
-                    num8 = 0;
-                    num10--;
-                    m += WorldGen.genRand.Next(-1, 2);
-                }
-                if (num11 <= 0)
-                {
-                    num10--;
-                }
-                num11--;
-                ystart++;
-            }
-            n -= WorldGen.genRand.Next(1, 3);
-            Tile t0 = Main.tile[n, ystart - 3];
-            Tile t1 = Main.tile[n, ystart - 2];
-            Tile t2 = Main.tile[n, ystart - 1];
-            Tile t3 = Main.tile[n, ystart];
-            t0.HasTile = true;
-            t0.TileType = type;
-            t1.HasTile = true;
-            t1.TileType = type;
-            t2.HasTile = true;
-            t2.TileType = type;
-            t3.HasTile = true;
-            t3.TileType = type;
-            WorldGen.SquareTileFrame(n, ystart - 2);
-            WorldGen.SquareTileFrame(n, ystart - 1);
-            WorldGen.SquareTileFrame(n, ystart);
-        }
-    }
+		for (; m < xmax; m += WorldGen.genRand.Next(8, 12))
+		{
+			int ystart = y - 3;
+			while (!Main.tile[m, ystart].HasTile)
+			{
+				ystart--;
+			}
+			ystart -= 4;
+			int num10 = WorldGen.genRand.Next(4, 8);
+			int num11 = WorldGen.genRand.Next(5, 10);
+
+			int n = m - num10;
+			while (num10 > 0)
+			{
+				for (n = m - num10; n < m + num10; n++)
+				{
+					Tile t = Main.tile[n, ystart];
+					t.HasTile = true;
+					t.TileType = type;
+				}
+				num8++;
+				if (WorldGen.genRand.Next(3) < num8)
+				{
+					num8 = 0;
+					num10--;
+					m += WorldGen.genRand.Next(-1, 2);
+				}
+				if (num11 <= 0)
+				{
+					num10--;
+				}
+				num11--;
+				ystart++;
+			}
+			n -= WorldGen.genRand.Next(1, 3);
+			Tile t0 = Main.tile[n, ystart - 3];
+			Tile t1 = Main.tile[n, ystart - 2];
+			Tile t2 = Main.tile[n, ystart - 1];
+			Tile t3 = Main.tile[n, ystart];
+			t0.HasTile = true;
+			t0.TileType = type;
+			t1.HasTile = true;
+			t1.TileType = type;
+			t2.HasTile = true;
+			t2.TileType = type;
+			t3.HasTile = true;
+			t3.TileType = type;
+			WorldGen.SquareTileFrame(n, ystart - 2);
+			WorldGen.SquareTileFrame(n, ystart - 1);
+			WorldGen.SquareTileFrame(n, ystart);
+		}
+	}
 
 	/// <summary>
 	/// Makes a spike at the given coordinates.
@@ -524,14 +524,14 @@ internal class Underworld : GenPass
 			if (radiusNext > 1)
 			{
 				//Utils.MakeCircle2(betweenXPos, betweenYPos, radius, borderType, centerType, 0.5f);
-				Utils.MakeCircle2(betweenXPos, betweenYPos, radius, borderType, centerType, 0.5f);
+				Utils.MakeCircleBordered(betweenXPos, betweenYPos, radius, borderType, centerType, 3, 0.5f);
 				Tile t = Framing.GetTileSafely(betweenXPos, betweenYPos);
 				t.HasTile = true;
 				t.TileType = centerType;
 
 				// Make a square/circle of the tile
 				//Utils.MakeCircle2(x, y, radius, borderType, centerType, 0.5f);
-				Utils.MakeCircle2(x, y, radius, borderType, centerType, 0.5f);
+				Utils.MakeCircleBordered(x, y, radius, borderType, centerType, 3, 0.5f);
 				Tile t2 = Framing.GetTileSafely(x, y);
 				t2.HasTile = true;
 				t2.TileType = centerType;

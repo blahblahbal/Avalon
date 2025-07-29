@@ -451,48 +451,90 @@ public class Utils
 			}
 		}
 	}
-	public static void MakeCircleNormal(int x, int y, int r, ushort tileType, ushort wallType = 0)
-	{
-		for (int k = x - r; k <= x + r; k++)
-		{
-			for (int l = y - r; l <= y + r; l++)
-			{
-				if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < r)
-				{
-					Tile t = Framing.GetTileSafely(k, l);
-					t.HasTile = true;
-					t.IsHalfBlock = false;
-					t.Slope = SlopeType.Solid;
-					Main.tile[k, l].TileType = tileType;
-					WorldGen.SquareTileFrame(k, l);
-				}
-				if (wallType != 0 && k > 0 && l > 0)
-				{
-					Main.tile[k, l].WallType = wallType;
-				}
-			}
-		}
-	}
-	public static void MakeCircle2(int x, int y, int radius, int outerType, int innerType, float slopeChance = 0f)
+	/// <summary>
+	/// Makes a circle.
+	/// </summary>
+	/// <param name="x">Center X position.</param>
+	/// <param name="y">Center Y position.</param>
+	/// <param name="radius">Half the total width of the circle.</param>
+	/// <param name="tileType"></param>
+	/// <param name="wallType"></param>
+	/// <param name="wallRadDecrease">How inset the walls will be from the outside of the circle, if <paramref name="wallType"/> is set.</param>
+	public static void MakeCircle(int x, int y, int radius, ushort tileType, ushort wallType = 0, int wallRadDecrease = 0)
 	{
 		for (int k = x - radius; k <= x + radius; k++)
 		{
 			for (int l = y - radius; l <= y + radius; l++)
 			{
-				if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius && radius > 1)
+				if (!WorldGen.InWorld(k, l)) continue;
+
+				float dist = Vector2.Distance(new Vector2(k, l), new Vector2(x, y));
+				if (dist < radius)
 				{
-					if (k > 0 && l > 0)
-					{
-						if (Main.tile[k, l].TileType != innerType)
-						{
-							Tile t = Framing.GetTileSafely(k, l);
-							t.HasTile = true;
-							t.IsHalfBlock = false;
-							t.Slope = SlopeType.Solid;
-							Main.tile[k, l].TileType = (ushort)outerType;
-							WorldGen.SquareTileFrame(k, l);
-						}
-					}
+					Tile t = Main.tile[k, l];
+					t.HasTile = true;
+					t.BlockType = BlockType.Solid;
+					Main.tile[k, l].TileType = tileType;
+					WorldGen.SquareTileFrame(k, l);
+				}
+				if (wallType != WallID.None && dist < radius - wallRadDecrease)
+				{
+					Main.tile[k, l].WallType = wallType;
+					WorldGen.SquareWallFrame(k, l);
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// Makes a circle with a border.
+	/// </summary>
+	/// <param name="x">Center X position.</param>
+	/// <param name="y">Center Y position.</param>
+	/// <param name="radius">Half the total width of the circle.</param>
+	/// <param name="outerType">Tile type used for the border.<br></br>Set to -1 for no tile.</param>
+	/// <param name="innerType">Tile type used for the inside.<br></br>Set to -1 for no tile.</param>
+	/// <param name="outerSize">Width of the border.</param>
+	/// <param name="slopeChance">Range from 0-1 that determines how likely the edges are to be sloped</param>
+	/// <param name="outerWallType">Wall type used for the border.</param>
+	/// <param name="innerWallType">Wall type used for the inside.</param>
+	/// <param name="wallRadDecrease">How inset the outer walls will be from the outside of the circle, if <paramref name="outerWallType"/> is set.<br></br>If <paramref name="innerType"/> is -1 and <paramref name="wallRadDecrease"/> is false, then this will affect the inset from the inside of the border too.</param>
+	/// <param name="innerWallRadDecrease">Whether or not the inner walls will be affected by <paramref name="wallRadDecrease"/>.</param>
+	public static void MakeCircleBordered(int x, int y, int radius, int outerType, int innerType, int outerSize = 1, float slopeChance = 0f, ushort outerWallType = 0, ushort innerWallType = 0, int wallRadDecrease = 0, bool innerWallRadDecrease = false)
+	{
+		for (int k = x - radius; k <= x + radius; k++)
+		{
+			for (int l = y - radius; l <= y + radius; l++)
+			{
+				if (!WorldGen.InWorld(k, l)) continue;
+
+				float dist = Vector2.Distance(new Vector2(k, l), new Vector2(x, y));
+				bool isInner = dist < radius - outerSize;
+				if (innerType != -1 && isInner)
+				{
+					Tile t = Main.tile[k, l];
+					t.HasTile = true;
+					t.BlockType = BlockType.Solid;
+					Main.tile[k, l].TileType = (ushort)innerType;
+					WorldGen.SquareTileFrame(k, l);
+				}
+				else if (outerType != -1 && !isInner && dist < radius)
+				{
+					Tile t = Main.tile[k, l];
+					t.HasTile = true;
+					t.BlockType = BlockType.Solid;
+					Main.tile[k, l].TileType = (ushort)outerType;
+					WorldGen.SquareTileFrame(k, l);
+				}
+				bool isInnerWall = dist < radius - outerSize - (innerWallRadDecrease ? wallRadDecrease : (innerType == -1 ? -wallRadDecrease : 0));
+				if (innerWallType != WallID.None && isInnerWall)
+				{
+					Main.tile[k, l].WallType = innerWallType;
+					WorldGen.SquareWallFrame(k, l);
+				}
+				else if (outerWallType != WallID.None && !isInnerWall && dist < radius - wallRadDecrease)
+				{
+					Main.tile[k, l].WallType = outerWallType;
+					WorldGen.SquareWallFrame(k, l);
 				}
 			}
 		}
@@ -505,24 +547,6 @@ public class Utils
 					if (WorldGen.genRand.NextFloat(1f) < slopeChance)
 					{
 						if (WorldGen.InWorld(k, l, 2)) Tile.SmoothSlope(k, l);
-					}
-				}
-			}
-		}
-		for (int k = x - radius; k <= x + radius; k++)
-		{
-			for (int l = y - radius; l <= y + radius; l++)
-			{
-				if (Vector2.Distance(new Vector2(k, l), new Vector2(x, y)) < radius - 3 && radius - 3 > 1)
-				{
-					if (k > 0 && l > 0)
-					{
-						Tile t = Main.tile[k, l];
-						t.HasTile = true;
-						t.IsHalfBlock = false;
-						t.Slope = SlopeType.Solid;
-						Main.tile[k, l].TileType = (ushort)innerType;
-						WorldGen.SquareTileFrame(k, l);
 					}
 				}
 			}
@@ -546,37 +570,37 @@ public class Utils
 			}
 		}
 	}
-	public static void MakeCircle(int x, int y, int radius, int tileType, bool walls = false, int wallType = WallID.Dirt)
-	{
-		for (int k = x - (int)(radius * 0.25); k <= x + (int)(radius * 0.25); k++)
-		{
-			for (int l = y - radius; l <= y + radius; l++)
-			{
-				float dist = Vector2.Distance(new Vector2(k, l), new Vector2(x, y));
-				if (dist <= radius && dist >= (radius - 29))
-				{
-					Tile t = Main.tile[k, l];
-					t.HasTile = false;
-				}
-				if ((dist <= radius && dist >= radius - 7) || (dist <= radius - 22 && dist >= radius - 29))
-				{
-					Tile t = Main.tile[k, l];
-					t.HasTile = false;
-					t.IsHalfBlock = false;
-					t.Slope = SlopeType.Solid;
-					Main.tile[k, l].TileType = (ushort)tileType;
-					WorldGen.SquareTileFrame(k, l);
-				}
-				if (walls)
-				{
-					if (dist <= radius - 6 && dist >= radius - 23)
-					{
-						Main.tile[k, l].WallType = (ushort)wallType;
-					}
-				}
-			}
-		}
-	}
+	//public static void MakeCircle(int x, int y, int radius, int tileType, bool walls = false, int wallType = WallID.Dirt)
+	//{
+	//	for (int k = x - (int)(radius * 0.25); k <= x + (int)(radius * 0.25); k++)
+	//	{
+	//		for (int l = y - radius; l <= y + radius; l++)
+	//		{
+	//			float dist = Vector2.Distance(new Vector2(k, l), new Vector2(x, y));
+	//			if (dist <= radius && dist >= (radius - 29))
+	//			{
+	//				Tile t = Main.tile[k, l];
+	//				t.HasTile = false;
+	//			}
+	//			if ((dist <= radius && dist >= radius - 7) || (dist <= radius - 22 && dist >= radius - 29))
+	//			{
+	//				Tile t = Main.tile[k, l];
+	//				t.HasTile = false;
+	//				t.IsHalfBlock = false;
+	//				t.Slope = SlopeType.Solid;
+	//				Main.tile[k, l].TileType = (ushort)tileType;
+	//				WorldGen.SquareTileFrame(k, l);
+	//			}
+	//			if (walls)
+	//			{
+	//				if (dist <= radius - 6 && dist >= radius - 23)
+	//				{
+	//					Main.tile[k, l].WallType = (ushort)wallType;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 	public static void MakeOblivionOreCircle(int x, int y, int radius, int tileType)
 	{
 		for (int k = x - radius; k <= x + radius; k++)
