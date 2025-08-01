@@ -1,11 +1,11 @@
 using Avalon.Reflection;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria;
-using Microsoft.Xna.Framework;
 
 namespace Avalon.Common.Players;
 
@@ -53,7 +53,7 @@ internal class GenieSlot : ModAccessorySlot
 		int endX = cX;
 		int endY = cY;
 
-		if (item.type != 0)
+		if (item.type != ItemID.None)
 		{
 			cX -= TextureAssets.Item[item.type].Value.Width / 2;
 			cY -= TextureAssets.Item[item.type].Value.Height / 2;

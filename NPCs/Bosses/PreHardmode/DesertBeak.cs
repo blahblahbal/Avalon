@@ -1,9 +1,9 @@
-using System;
-using System.IO;
+using Avalon.DropConditions;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material;
-using Avalon.Items.Placeable.Trophy.Relics;
+using Avalon.Items.Material.Ores;
 using Avalon.Items.Placeable.Trophy;
+using Avalon.Items.Placeable.Trophy.Relics;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
@@ -11,6 +11,8 @@ using Avalon.Projectiles.Hostile.DesertBeak;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -20,9 +22,6 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Avalon.Items.Material.Ores;
-using Avalon.DropConditions;
-using Avalon.Reflection;
 
 namespace Avalon.NPCs.Bosses.PreHardmode;
 
@@ -67,7 +66,7 @@ public class DesertBeak : ModNPC
 		NPC.knockBackResist = 0f;
 		NPC.HitSound = new SoundStyle("Terraria/Sounds/NPC_Hit_28") { Pitch = -0.09f };
 		NPC.DeathSound = new SoundStyle("Terraria/Sounds/NPC_Killed_31") { Pitch = -0.09f };
-		Music = ExxoAvalonOrigins.MusicMod != null ? MainHelper.GetSwapMusic() ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeakEnnway") : MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeak") : MusicID.Boss4;
+		Music = ExxoAvalonOrigins.MusicMod != null ? Main.swapMusic ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeakEnnway") : MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeak") : MusicID.Boss4;
 		NPC.scale = 1f;
 		phase = 0;
 		FlapMultiplier = 1;
@@ -290,7 +289,7 @@ public class DesertBeak : ModNPC
 			if (NPC.ai[0] == DashDelay * 3 - 30) Pulsing = true;
 			if (NPC.ai[0] < DashDelay * 3)
 			{
-				NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-50)) * 0.1f * modifier;
+				NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0, -50)) * 0.1f * modifier;
 				NPC.velocity = NPC.velocity.LengthClamp(5);
 			}
 			else
@@ -300,7 +299,7 @@ public class DesertBeak : ModNPC
 				{
 					if (NPC.ai[0] > DashDelay * 3.1f + 150)
 					{
-						SoundEngine.PlaySound(SoundID.Item7,NPC.position);
+						SoundEngine.PlaySound(SoundID.Item7, NPC.position);
 						int Feathers = Main.rand.Next(2, 3) * 2;
 						for (int i = -Feathers / 2; i < Feathers / 2; i++)
 						{
@@ -323,11 +322,11 @@ public class DesertBeak : ModNPC
 				NPC.velocity *= 0.98f;
 			}
 		}
-		else if(phase == phase1Egg)
+		else if (phase == phase1Egg)
 		{
 			NPC.ai[0]++;
 			NPC.ai[1]++;
-			NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0,-100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f * modifier;
+			NPC.velocity += NPC.Center.DirectionTo(Target.Center + new Vector2(0, -100) + new Vector2(0, 300 + (float)Math.Sin(NPC.ai[0] * 0.02f) * 100).RotatedBy(NPC.ai[0] * 0.1f) * 0.5f) * 0.2f * modifier;
 
 			NPC.velocity = NPC.velocity.LengthClamp(8);
 
@@ -338,9 +337,9 @@ public class DesertBeak : ModNPC
 			if (NPC.ai[1] == 260)
 			{
 				int howManyBirds = 0;
-				for (int i = 0; i < Main.npc.Length; i++) 
+				for (int i = 0; i < Main.npc.Length; i++)
 				{
-					if (Main.npc[i].netID == ModContent.NPCType<DesertTalon>() && Main.npc[i].active) 
+					if (Main.npc[i].netID == ModContent.NPCType<DesertTalon>() && Main.npc[i].active)
 						howManyBirds++;
 				}
 				int eggType = (howManyBirds <= 4) ? ModContent.ProjectileType<VultureEgg>() : ModContent.ProjectileType<ShrapnelEgg>();
@@ -350,7 +349,7 @@ public class DesertBeak : ModNPC
 				int dmg = 44;
 				if (Main.masterMode) dmg = 38;
 				if (Main.netMode != NetmodeID.MultiplayerClient)
-					Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4,4), 3), eggType, (int)(dmg * modifier), 1);
+					Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.NextFloat(-4, 4), 3), eggType, (int)(dmg * modifier), 1);
 				NPC.netUpdate = true;
 			}
 			if (NPC.ai[0] > 1000)
@@ -646,13 +645,13 @@ public class DesertBeak : ModNPC
 			for (int i = 8; i > 0; i--)
 			{
 				alphaThingHackyWow += 0.07f;
-				Main.EntitySpriteDraw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow * MathHelper.Clamp(afterImageTimer * 0.05f,0,1), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
+				Main.EntitySpriteDraw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow * MathHelper.Clamp(afterImageTimer * 0.05f, 0, 1), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
 			}
 		}
 		if (phase > phase1Egg)
 		{
 			float alphaThingHackyWow = 0;
-			for (int i = 8; i > 0; i-= 2)
+			for (int i = 8; i > 0; i -= 2)
 			{
 				alphaThingHackyWow += 0.07f;
 				Main.EntitySpriteDraw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, drawColor * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
@@ -662,7 +661,7 @@ public class DesertBeak : ModNPC
 		{
 			for (int i = 4; i > 0; i--)
 			{
-				Main.EntitySpriteDraw(TextureAssets.Npc[Type].Value, drawPos + new Vector2(0, (float)Math.Sin(pulseTimer) * 8).RotatedBy(MathHelper.PiOver2 * i), frame, new Color(drawColor.R,drawColor.G,drawColor.B,128) * (float)Math.Sin(pulseTimer) * 0.7f, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
+				Main.EntitySpriteDraw(TextureAssets.Npc[Type].Value, drawPos + new Vector2(0, (float)Math.Sin(pulseTimer) * 8).RotatedBy(MathHelper.PiOver2 * i), frame, new Color(drawColor.R, drawColor.G, drawColor.B, 128) * (float)Math.Sin(pulseTimer) * 0.7f, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, effect, 0);
 			}
 		}
 		return true;
@@ -718,7 +717,7 @@ public class DesertBeakIFrames : GlobalNPC
 		if (IsNPCTypeDesertBeak(npc))
 		{
 			desertBeakIFrames[player.whoAmI + Main.maxProjectiles] = player.itemAnimation;
-		}    
+		}
 	}
 	public override bool? CanBeHitByItem(NPC npc, Player player, Item item)
 	{
