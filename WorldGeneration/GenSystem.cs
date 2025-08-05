@@ -31,7 +31,7 @@ public class GenSystem : ModSystem
 			int index = tasks.FindIndex(genpass => genpass.Name.Equals("Reset"));
 			if (index != -1)
 			{
-				tasks.Insert(index + 1, new AvalonReset("Avalon Reset", 1000f));
+				tasks.Insert(index + 1, new AvalonReset("Reset", 1000f));
 			}
 
 			//index = tasks.FindIndex(genpass => genpass.Name.Equals("Generate Ice Biome"));
@@ -63,7 +63,7 @@ public class GenSystem : ModSystem
 					int jungleIndex = tasks.FindIndex(i => i.Name.Equals("Wet Jungle"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
+						tasks[jungleIndex] = new PassLegacy("Wet Jungle", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Ice"));
 					if (jungleIndex != -1)
@@ -77,7 +77,7 @@ public class GenSystem : ModSystem
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Mud Caves To Grass"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Loam Caves To Grass", new WorldGenLegacyMethod(Tropics.JunglesGrassTask));
+						tasks[jungleIndex] = new PassLegacy("Mud Caves To Grass", new WorldGenLegacyMethod(Tropics.JunglesGrassTask));
 						tasks.Insert(jungleIndex, new PassLegacy("Loam", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration configuration)
 						{
 							int tile = ModContent.TileType<Tiles.Savanna.Loam>();
@@ -96,24 +96,24 @@ public class GenSystem : ModSystem
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Temple"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Tuhrtl Outpost", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostTask));
+						tasks[jungleIndex] = new PassLegacy("Jungle Temple", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostTask));
 						tasks.Insert(jungleIndex + 1, new PassLegacy("Outpost Traps", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostReplaceTraps)));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Hives"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Wasp Nests", new WorldGenLegacyMethod(Tropics.WaspNests));
+						tasks[jungleIndex] = new PassLegacy("Hives", new WorldGenLegacyMethod(Tropics.WaspNests));
 					}
 
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Chests"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Tropics Sanctums", new WorldGenLegacyMethod(Tropics.TropicsSanctumTask));
+						tasks[jungleIndex] = new PassLegacy("Jungle Chests", new WorldGenLegacyMethod(Tropics.TropicsSanctumTask));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Muds Walls In Jungle"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Loam Walls in Tropics", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration passConfig)
+						tasks[jungleIndex] = new PassLegacy("Muds Walls In Jungle", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration passConfig)
 						{
 							progress.Set(1.0);
 							int num171 = 0;
@@ -217,17 +217,17 @@ public class GenSystem : ModSystem
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Temple"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Re-solidify Lihzahrd Brick", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask));
+						tasks[jungleIndex] = new PassLegacy("Temple", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Glowing Mushrooms and Jungle Plants"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Glowing Mushrooms and Tropics Plants", new WorldGenLegacyMethod(Tropics.GlowingMushroomsandJunglePlantsTask));
+						tasks[jungleIndex] = new PassLegacy("Glowing Mushrooms and Jungle Plants", new WorldGenLegacyMethod(Tropics.GlowingMushroomsandJunglePlantsTask));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Plants"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Tropics Plants", new WorldGenLegacyMethod(Tropics.JungleBushesTask));
+						tasks[jungleIndex] = new PassLegacy("Jungle Plants", new WorldGenLegacyMethod(Tropics.JungleBushesTask));
 					}
 				}
 			}

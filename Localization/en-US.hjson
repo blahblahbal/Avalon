@@ -519,6 +519,8 @@ Mods: {
 			Acid_0: "{0} was dissolved in acid."
 			Acid_1: "{0} became a skeleton."
 			Acid_2: "{0}'s meat fell off the bone."
+			Acid_3: "{0} did the wrong acid."
+			Acid_4: "{0} dipped the wrong thing in acid."
 		}
 
 		GameTips: {
