@@ -1,6 +1,7 @@
 using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Avalon.DropConditions;
+using Avalon.Hooks;
 using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
@@ -26,10 +27,14 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.ModSupport.MLL.Dusts;
+using Avalon.ModSupport.MLL.Items;
+using Avalon.ModSupport.MLL.Liquids;
 using Avalon.Prefixes;
 using Avalon.Reflection;
 using Avalon.Tiles;
 using Microsoft.Xna.Framework;
+using ModLiquidLib.ModLoader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -242,6 +247,25 @@ public class AvalonGlobalItem : GlobalItem
 	}
 	public override void PostUpdate(Item item)
 	{
+		if (CollisionHooks.AcidCollision(item.position, item.width, item.height))
+		{
+			SoundEngine.PlaySound(SoundID.LiquidsWaterLava, item.position);
+			SoundEngine.PlaySound(SoundID.SplashWeak, item.position);
+
+			for (int n = 0; n < 5; n++)
+			{
+				int num8 = Dust.NewDust(new Vector2(item.position.X - 6f, item.position.Y + item.height / 2 - 8f), item.width + 12, 24, ModContent.DustType<AcidLiquidSplash>());
+				Main.dust[num8].velocity.Y -= 1.5f;
+				Main.dust[num8].velocity.X *= 2.5f;
+				Main.dust[num8].scale = 1.3f;
+				Main.dust[num8].alpha = 100;
+				Main.dust[num8].noGravity = true;
+			}
+			if (item.rare == ItemRarityID.White && !ItemID.Sets.IsLavaImmuneRegardlessOfRarity[item.type])
+			{
+				item.TurnToAir();
+			}
+		}
 		//if (item.lavaWet && item.position.Y / 16 > Main.maxTilesY - 190)
 		//{
 		//	if (item.type == ModContent.ItemType<HellboundRemote>() && Main.hardMode) // &&
@@ -651,7 +675,9 @@ public class AvalonGlobalItem : GlobalItem
 			#region sponges 3x3
 			if (Main.mouseRight && !Main.mouseLeft && player.cursorItemIconID == 0 && !player.mouseInterface &&
 				player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
-				(item.type is ItemID.SuperAbsorbantSponge or ItemID.LavaAbsorbantSponge or ItemID.HoneyAbsorbantSponge or ItemID.UltraAbsorbantSponge))
+				(item.type == ItemID.SuperAbsorbantSponge || item.type == ItemID.LavaAbsorbantSponge ||
+				item.type == ItemID.HoneyAbsorbantSponge || item.type == ItemID.UltraAbsorbantSponge ||
+				item.type == ModContent.ItemType<BloodAbsorbantSponge>()))
 			{
 				for (int i = tilePos.X - 1; i <= tilePos.X + 1; i++)
 				{
@@ -661,6 +687,7 @@ public class AvalonGlobalItem : GlobalItem
 						if ((item.type == ItemID.SuperAbsorbantSponge && (tile2.LiquidType == LiquidID.Water || tile2.LiquidType == LiquidID.Shimmer)) ||
 							item.type == ItemID.LavaAbsorbantSponge && tile2.LiquidType == LiquidID.Lava ||
 							item.type == ItemID.HoneyAbsorbantSponge && tile2.LiquidType == LiquidID.Honey ||
+							item.type == ModContent.ItemType<BloodAbsorbantSponge>() && tile2.LiquidType == LiquidLoader.LiquidType<Blood>() ||
 							item.type == ItemID.UltraAbsorbantSponge)
 						{
 							SoundEngine.PlaySound(SoundID.SplashWeak, player.position);
@@ -680,12 +707,17 @@ public class AvalonGlobalItem : GlobalItem
 			#region right click bottomless buckets to do 3x3
 			if (Main.mouseRight && !Main.mouseLeft && player.cursorItemIconID == 0 && !player.mouseInterface &&
 				player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
-				(item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket))
+				(item.type == ItemID.BottomlessBucket || item.type == ItemID.BottomlessLavaBucket ||
+				item.type == ItemID.BottomlessHoneyBucket || item.type == ItemID.BottomlessShimmerBucket ||
+				item.type == ModContent.ItemType<BottomlessBloodBucket>() ||
+				item.type == ModContent.ItemType<BottomlessAcidBucket>()))
 			{
 				int liquidID = LiquidID.Water;
 				if (item.type == ItemID.BottomlessLavaBucket) liquidID = LiquidID.Lava;
 				if (item.type == ItemID.BottomlessHoneyBucket) liquidID = LiquidID.Honey;
 				if (item.type == ItemID.BottomlessShimmerBucket) liquidID = LiquidID.Shimmer;
+				if (item.type == ModContent.ItemType<BottomlessBloodBucket>()) liquidID = LiquidLoader.LiquidType<Blood>();
+				if (item.type == ModContent.ItemType<BottomlessAcidBucket>()) liquidID = LiquidLoader.LiquidType<Acid>();
 
 				for (int i = tilePos.X - 1; i <= tilePos.X + 1; i++)
 				{

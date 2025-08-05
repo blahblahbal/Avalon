@@ -2,9 +2,9 @@ using Avalon.Biomes;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
+using Avalon.Hooks;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.Info;
-using Avalon.Items.Accessories.Vanity;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Other;
@@ -12,6 +12,7 @@ using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Placeable.Wall;
 using Avalon.ModSupport;
+using Avalon.ModSupport.MLL.Buffs;
 using Avalon.NPCs.Hardmode;
 using Avalon.NPCs.PreHardmode;
 using Avalon.NPCs.TownNPCs;
@@ -52,7 +53,6 @@ public class AvalonGlobalNPC : GlobalNPC
 
 		return 0;
 	}
-
 	public override bool PreAI(NPC npc)
 	{
 		if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -256,7 +256,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		if (shop.NpcType == NPCID.PartyGirl)
 		{
-			shop.Add(new Item(ModContent.ItemType<AncientHeadphones>())
+			shop.Add(new Item(ModContent.ItemType<Items.Accessories.Vanity.AncientHeadphones>())
 			{
 				shopCustomPrice = Item.buyPrice(gold: 12),
 			});
@@ -669,7 +669,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			spawnRate = (int)(spawnRate * 0.65f);
 			maxSpawns = (int)(maxSpawns * 1.3f);
 		}
-		if (player.InModBiome<Tropics>() || player.InModBiome<UndergroundTropics>())
+		if (player.InModBiome<Biomes.Tropics>() || player.InModBiome<UndergroundTropics>())
 		{
 			spawnRate = (int)(spawnRate * 0.4f);
 			maxSpawns = (int)(maxSpawns * 1.5f);
@@ -759,6 +759,21 @@ public class AvalonGlobalNPC : GlobalNPC
 				hit.Knockback = 0;
 				npc.StrikeNPC(hit);
 				npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SpikeTimer = 0;
+			}
+		}
+
+		if (CollisionHooks.AcidCollision(npc.position, npc.width, npc.height))
+		{
+			if (!Data.Sets.NPCSets.NoAcidDamage[npc.type] && !npc.noTileCollide && !npc.boss)
+			{
+				NPC.HitInfo hit = new()
+				{
+					HitDirection = 0,
+					Damage = 65 + npc.defense / 2,
+					Knockback = 0
+				};
+				npc.StrikeNPC(hit);
+				npc.AddBuff(ModContent.BuffType<Dissolving>(), 60 * 7);
 			}
 		}
 

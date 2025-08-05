@@ -3173,7 +3173,7 @@ public class AvalonPlayer : ModPlayer
 		if (Player.mount.Type > 0 && MountID.Sets.Cart[Player.mount.Type] && Math.Abs(Player.velocity.X) > 5f)
 			mounted = true;
 
-		Vector2 vector = CollisionStickyTiles.BrambleTiles(Player.position, Player.velocity, Player.width, Player.height);
+		Vector2 vector = CollisionHooks.BrambleTiles(Player.position, Player.velocity, Player.width, Player.height);
 		if (vector.Y != -1f && vector.X != -1f)
 		{
 			int num3 = (int)vector.X;

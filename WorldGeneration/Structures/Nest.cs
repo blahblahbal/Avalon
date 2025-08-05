@@ -1,4 +1,6 @@
+using Avalon.ModSupport.MLL.Liquids;
 using Microsoft.Xna.Framework;
+using ModLiquidLib.ModLoader;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -30,11 +32,11 @@ public class Nest
                     t.WallType = (ushort)ModContent.WallType<Walls.NestWall>();
                     t.LiquidAmount = 0;
                     WorldGen.SquareWallFrame(tileX, tileY);
-                    if (WorldGen.genRand.NextBool(15))
+                    if (WorldGen.genRand.NextBool(8))
                     {
-                        t.LiquidAmount = 100;
-                        t.LiquidType = LiquidID.Honey;
-                        WorldGen.SquareTileFrame(tileX, tileY);
+						t.LiquidAmount = 160;
+                        t.LiquidType = LiquidLoader.LiquidType<Blood>();
+						WorldGen.SquareTileFrame(tileX, tileY);
                     }
                 }
             }
@@ -67,12 +69,14 @@ public class Nest
                     if (!doWalls)
                     {
                         t.HasTile = true;
+						t.LiquidAmount = 0;
                         t.TileType = (ushort)tileType;
                         WorldGen.SquareTileFrame(tileX, tileY);
                     }
                     else
                     {
-                        t.WallType = (ushort)ModContent.WallType<Walls.NestWall>();
+						t.LiquidAmount = 0;
+						t.WallType = (ushort)ModContent.WallType<Walls.NestWall>();
                         WorldGen.SquareWallFrame(tileX, tileY);
                     }
                 }

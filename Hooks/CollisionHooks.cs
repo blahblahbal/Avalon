@@ -5,17 +5,53 @@ using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using System;
 using Terraria.ID;
+using ModLiquidLib.ModLoader;
+using Avalon.ModSupport.MLL.Liquids;
 
-namespace Avalon.Hooks
+namespace Avalon.Hooks;
+
+internal class CollisionHooks : ModHook
 {
-    internal class CollisionStickyTiles : ModHook
+    protected override void Apply()
     {
-        protected override void Apply()
-        {
-            On_Collision.StickyTiles += On_Collision_StickyTiles;
-        }
+        On_Collision.StickyTiles += On_Collision_StickyTiles;
+    }
 
-        public static Vector2 BrambleTiles(Vector2 Position, Vector2 Velocity, int Width, int Height)
+	public static bool AcidCollision(Vector2 Position, int Width, int Height)
+	{
+		int value = (int)(Position.X / 16f) - 1;
+		int value2 = (int)((Position.X + Width) / 16f) + 2;
+		int value3 = (int)(Position.Y / 16f) - 1;
+		int value4 = (int)((Position.Y + Height) / 16f) + 2;
+		int num = Utils.Clamp(value, 0, Main.maxTilesX - 1);
+		value2 = Utils.Clamp(value2, 0, Main.maxTilesX - 1);
+		value3 = Utils.Clamp(value3, 0, Main.maxTilesY - 1);
+		value4 = Utils.Clamp(value4, 0, Main.maxTilesY - 1);
+		Vector2 vector = default;
+		for (int i = num; i < value2; i++)
+		{
+			for (int j = value3; j < value4; j++)
+			{
+				if (Main.tile[i, j] != null && Main.tile[i, j].LiquidAmount > 0 && Main.tile[i, j].LiquidType == LiquidLoader.LiquidType<Acid>())
+				{
+					vector.X = i * 16;
+					vector.Y = j * 16;
+					int num2 = 16;
+					float num3 = 256 - Main.tile[i, j].LiquidAmount;
+					num3 /= 32f;
+					vector.Y += num3 * 2f;
+					num2 -= (int)(num3 * 2f);
+					if (Position.X + Width > vector.X && Position.X < vector.X + 16f && Position.Y + Height > vector.Y && Position.Y < vector.Y + num2)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	public static Vector2 BrambleTiles(Vector2 Position, Vector2 Velocity, int Width, int Height)
         {
             Vector2 vector = Position;
             int num = (int)(Position.X / 16f) - 1;
@@ -60,13 +96,12 @@ namespace Avalon.Hooks
             return new Vector2(-1, -1);
         }
 
-        private Vector2 On_Collision_StickyTiles(On_Collision.orig_StickyTiles orig, Vector2 Position, Vector2 Velocity, int Width, int Height)
+    private Vector2 On_Collision_StickyTiles(On_Collision.orig_StickyTiles orig, Vector2 Position, Vector2 Velocity, int Width, int Height)
+    {
+        if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().NoSticky)
         {
-            if (Main.LocalPlayer.GetModPlayer<AvalonPlayer>().NoSticky)
-            {
-                return new Vector2(-1f, -1f);
-            }
-            return orig.Invoke(Position, Velocity, Width, Height);
+            return new Vector2(-1f, -1f);
         }
+        return orig.Invoke(Position, Velocity, Width, Height);
     }
 }

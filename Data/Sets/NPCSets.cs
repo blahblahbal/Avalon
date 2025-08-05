@@ -23,6 +23,17 @@ public static class NPCSets
 		ModContent.NPCType<Rafflesia>(), NPCID.RedDevil, NPCID.Demon, NPCID.GiantWalkingAntlion, NPCID.WalkingAntlion,
 		NPCID.Antlion, NPCID.DuneSplicerHead, NPCID.DesertDjinn, NPCID.DesertLamiaDark, NPCID.DesertBeast);
 
+	public static readonly bool[] NoAcidDamage = NPCID.Sets.Factory.CreateBoolSet(
+		NPCID.Skeleton, NPCID.SkeletonAlien, NPCID.SkeletonArcher, NPCID.SkeletonAstonaut, NPCID.SkeletonCommando, NPCID.SkeletonMerchant,
+		NPCID.SkeletonSniper, NPCID.SkeletonTopHat, NPCID.ArmoredSkeleton, NPCID.BoneThrowingSkeleton, NPCID.BoneThrowingSkeleton2,
+		NPCID.BoneThrowingSkeleton3, NPCID.BoneThrowingSkeleton4, NPCID.HeadacheSkeleton, NPCID.GreekSkeleton, NPCID.PantlessSkeleton,
+		NPCID.TacticalSkeleton, NPCID.AngryBones, NPCID.AngryBonesBig, NPCID.AngryBonesBigHelmet, NPCID.AngryBonesBigMuscle,
+		NPCID.HellArmoredBones, NPCID.HellArmoredBonesMace, NPCID.HellArmoredBonesSpikeShield, NPCID.HellArmoredBonesSword,
+		NPCID.BlueArmoredBones, NPCID.BlueArmoredBonesMace, NPCID.BlueArmoredBonesNoPants, NPCID.BlueArmoredBonesSword,
+		NPCID.RustyArmoredBonesAxe, NPCID.RustyArmoredBonesFlail, NPCID.RustyArmoredBonesSword, NPCID.RustyArmoredBonesSwordNoArmor,
+		NPCID.Paladin, NPCID.Necromancer, NPCID.NecromancerArmored, NPCID.RaggedCaster, NPCID.RaggedCasterOpenCoat,
+		NPCID.DiabolistRed, NPCID.DiabolistWhite, NPCID.DarkCaster);
+
     public static readonly bool[] Arcane = NPCID.Sets.Factory.CreateBoolSet(
         NPCID.Pixie,
         NPCID.LightMummy,

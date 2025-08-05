@@ -21,8 +21,8 @@ namespace Avalon.Hooks
 			IL_TileDrawing.DrawMultiTileGrassInWind += ActuatorGrassFix;
 			IL_TileDrawing.DrawGrass += ActuatorBasicGrassFix;
 			IL_TileDrawing.DrawTrees += ActuatedTreesFix;
-			IL_TileDrawing.CrawlToTopOfVineAndAddSpecialPoint += FixVinesJustDisappearing;
-			IL_TileDrawing.CrawlToBottomOfReverseVineAndAddSpecialPoint += FixVinesJustDisappearing;
+			//IL_TileDrawing.CrawlToTopOfVineAndAddSpecialPoint += FixVinesJustDisappearing;
+			//IL_TileDrawing.CrawlToBottomOfReverseVineAndAddSpecialPoint += FixVinesJustDisappearing;
 			IL_TileDrawing.DrawVineStrip += ActuatedVinesFix;
 			IL_TileDrawing.DrawRisingVineStrip += ActuatedVinesFix;
 		}

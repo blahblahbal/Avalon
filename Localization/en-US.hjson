@@ -516,6 +516,9 @@ Mods: {
 			Teleport_5_Female: "{0}'s magic trick did indeed make them disappear."
 			Toxic_1: "{0} was infected."
 			WardCurse_1: "{0} died from extra damage."
+			Acid_0: "{0} was dissolved in acid."
+			Acid_1: "{0} became a skeleton."
+			Acid_2: "{0}'s meat fell off the bone."
 		}
 
 		GameTips: {
@@ -9730,6 +9733,73 @@ Mods: {
 				DisplayName: Fortune Elixir
 				Tooltip: Has a better chance to duplicate enemy, crate, and fishing item drops
 			}
+
+			BloodClotBlock: {
+				DisplayName: Blood Clot Block
+				Tooltip: ""
+			}
+
+			BoiledBloodBlock: {
+				DisplayName: Boiled Blood Block
+				Tooltip: ""
+			}
+
+			CoagulatedBloodBlock: {
+				DisplayName: Coagulated Blood Block
+				Tooltip: ""
+			}
+
+			BloodBucket: {
+				DisplayName: Blood Bucket
+				Tooltip:
+					'''
+					Contains a small amount of blood
+					Can be poured out
+					'''
+			}
+
+			PlasmaBlock: {
+				DisplayName: Plasma Block
+				Tooltip: ""
+			}
+
+			BottomlessBloodBucket: {
+				DisplayName: Bottomless Blood Bucket
+				Tooltip:
+					'''
+					Contains an endless amount of blood
+					Can be poured out
+					Right Click to place a 3x3 area of liquid
+					'''
+			}
+
+			BloodAbsorbantSponge: {
+				DisplayName: Blood Absorbant Sponge
+				Tooltip:
+					'''
+					Capable of soaking up an endless amount of blood
+					Right Click to absorb a 3x3 area of liquid
+					'''
+			}
+
+			AcidBucket: {
+				DisplayName: Acid Bucket
+				Tooltip:
+					'''
+					Contains a small amount of acid
+					Can be poured out
+					'''
+			}
+
+			BottomlessAcidBucket: {
+				DisplayName: Bottomless Acid Bucket
+				Tooltip:
+					'''
+					Contains an endless amount of acid
+					Can be poured out
+					Right Click to place a 3x3 area of liquid
+					'''
+			}
 		}
 
 		InfoDisplays: {
@@ -11301,6 +11371,11 @@ Mods: {
 				DisplayName: Advanced Fortune
 				Description: You have a better chance to duplicate drops
 			}
+
+			Dissolving: {
+				DisplayName: Dissolving
+				Description: Mods.Avalon.Buffs.Dissolving.Description
+			}
 		}
 
 		Tiles: {
@@ -11935,6 +12010,11 @@ Mods: {
 				NoWaypointFound: No waypoint found!
 				WaypointMode: "Waypoint mode: "
 			}
+		}
+
+		Liquids: {
+			Blood.MapEntry: Blood
+			Acid.MapEntry: Acid
 		}
 	}
 }

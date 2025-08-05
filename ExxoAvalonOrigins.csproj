@@ -41,6 +41,9 @@
 		<Reference Include="Microsoft.Xna.Framework.Input.Touch">
 			<HintPath>S:\terraria stuff\Terraria Remaster\github\1.1AvalonRemaster\bin\Debug\net40\Microsoft.Xna.Framework.Input.Touch.dll</HintPath>
 		</Reference>
+		<Reference Include="ModLiquidLib">
+		  <HintPath>..\..\ModReader\ModLiquidLib\ModLiquidLib.dll</HintPath>
+		</Reference>
 		<Reference Include="ThoriumMod">
 			<HintPath Condition="Exists('..\ModAssemblies')">..\ModAssemblies\ThoriumMod.dll</HintPath>
 			<HintPath Condition="Exists('..\..\ModAssemblies')">..\..\ModAssemblies\ThoriumMod.dll</HintPath>

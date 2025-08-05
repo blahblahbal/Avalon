@@ -36,6 +36,7 @@ public class AvalonGlobalNPCInstance : GlobalNPC
     public bool CanDamageMobs { get; set; }
     public int DamageMobsTimer { get; set; }
 	public bool SkellyBanana {  get; set; }
+	public bool Dissolving {  get; set; }
 
     public override void ResetEffects(NPC npc)
     {
@@ -47,6 +48,7 @@ public class AvalonGlobalNPCInstance : GlobalNPC
         Inferno = false;
         Pathogen = false;
         Wormed = false;
+		Dissolving = false;
         BacterialInfection = false;
         //BleedStacks = 1;
     }
@@ -58,6 +60,10 @@ public class AvalonGlobalNPCInstance : GlobalNPC
             drawColor.G = (byte)MathHelper.Clamp(drawColor.G - 76,0,255);
             drawColor.R = (byte)MathHelper.Clamp(drawColor.R - 25,0,255);
         }
+		if (Dissolving)
+		{
+			drawColor.G = 255;
+		}
     }
     public override void PostAI(NPC npc)
     {
@@ -119,7 +125,20 @@ public class AvalonGlobalNPCInstance : GlobalNPC
                 damage = 5;
             }
         }
-        if (Wormed)
+		if (Dissolving)
+		{
+			if (npc.lifeRegen > 0)
+			{
+				npc.lifeRegen = 0;
+			}
+
+			npc.lifeRegen -= 12;
+			if (damage < 3)
+			{
+				damage = 3;
+			}
+		}
+		if (Wormed)
         {
             if (npc.lifeRegen > 0)
             {
