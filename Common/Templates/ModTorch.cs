@@ -169,6 +169,8 @@ public abstract class ModCampfire : SpecialLight
 
 	public override void NearbyEffects(int i, int j, bool closer)
 	{
+		if (closer) return;
+
 		Tile tile = Main.tile[i, j];
 		if (tile.TileFrameY < 36)
 		{
