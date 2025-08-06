@@ -579,12 +579,12 @@ Mods: {
 			Rafflesia: A horrible, large, rotten-smelling plant that seems to constantly produce flies.
 			Fly: Truly-annoying insects that love festering meat and rotten produce. They are as disgusting as they sound.
 			AmberSlime: A simple gelatinous creature that somehow also has the properties of amber. It takes a long time to digest anything.
-			InfestedAmberSlime: Consistent consumption of the bugs in the Tropics caused these slimes to burst into a multitude of them when killed.
+			InfestedAmberSlime: Consistent consumption of the bugs in the Savanna caused these slimes to burst into a multitude of them when killed.
 			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			MineralSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
-			PoisonDartFrog: Highly toxic frogs that have made their home in the tropics. Those that touch their skin are often poisoned to death.
+			PoisonDartFrog: Highly toxic frogs that have made their home in the Savanna. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
-			RedArowana: Normally these fish are quite passive, but something in the Tropics causes them to become aggressive. What makes them behave this way is unknown.
+			RedArowana: Normally these fish are quite passive, but something in the Savanna causes them to become aggressive. What makes them behave this way is unknown.
 			Mime: The Copycat Extraordinaire, the Mime loves to copy what its opponent does. The cruel joke often lands it in lava, though.
 			WallOfSteel: An abandoned creation designed to accomplish what the original Guardian of the Underworld could not - prevent the Terrarian from further destabilizing the world.
 			MechanicalHungry: The Wall of Steel's many mouths, attached by steel cables. As a last resort, they can detach and precisely chase down threats.
@@ -10572,6 +10572,9 @@ Mods: {
 			PhantoplasmaBall.DisplayName: Phantoplasma Ball
 			PhantasmHealthOrbs.DisplayName: Phantasm Health Orbs
 			Sickubus.DisplayName: Sickubus
+			SnakeBody.DisplayName: Snake Body
+			SnakeHead.DisplayName: Snake Head
+			SnakeTail.DisplayName: Snake Tail
 		}
 
 		Buffs: {
@@ -11878,8 +11881,8 @@ Mods: {
 				}
 
 				Retro: {
-					AddingAngels: Making Chests Heavenly.
-					UnslopingSlopes: Making the world blocky.
+					AddingAngels: Making Chests Heavenly
+					UnslopingSlopes: Making the world blocky
 				}
 
 				Contagion.Message: Making the world gross
@@ -11943,8 +11946,13 @@ Mods: {
 				DisplayName: Avalon Config
 
 				RevertDungeonGen: {
-					Label: Dungeon Generation Revert
-					Tooltip: Reverts the normal Dungeon generation to pre-1.4
+					Label: Remove Cracked Bricks in the Dungeon
+					Tooltip: Removes cracked bricks in the Dungeon
+				}
+
+				RevertDungeonGenPitTraps: {
+					Label: Remove Pit Traps in the Dungeon
+					Tooltip: Removes pit traps in the Dungeon
 				}
 
 				VanillaTextureReplacement: {

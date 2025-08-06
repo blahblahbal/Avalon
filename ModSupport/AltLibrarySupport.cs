@@ -27,7 +27,7 @@ using Avalon.Common;
 using AltLibrary.Common.Conditions;
 using Terraria.GameContent.Generation;
 using Terraria.IO;
-using Tropics = Avalon.WorldGeneration.Passes.Tropics;
+using Savanna = Avalon.WorldGeneration.Passes.Savanna;
 using AltLibrary.Common.AltOres;
 using Avalon.Items.Accessories.PreHardmode;
 using AltLibrary.Common.Hooks;
@@ -70,7 +70,7 @@ public class AltLibrarySupport : ModSystem
 
 			AltBiome jungle = WorldBiomeManager.GetWorldJungle(true);
 			ref WorldJungle worldJungle = ref ModContent.GetInstance<AvalonWorld>().WorldJungle;
-			if (jungle is SavannaAltBiome) worldJungle = WorldJungle.Tropics;
+			if (jungle is SavannaAltBiome) worldJungle = WorldJungle.Savanna;
 			else if (jungle is JungleAltBiome) worldJungle = WorldJungle.Jungle;
 			else worldJungle = WorldJungle.External;
 
@@ -100,7 +100,7 @@ public class AltLibrarySupport : ModSystem
 			case WorldJungle.Jungle:
 				WorldBiomeManager.WorldJungle = ModContent.GetInstance<JungleAltBiome>();
 				break;
-			case WorldJungle.Tropics:
+			case WorldJungle.Savanna:
 				WorldBiomeManager.WorldJungle = ModContent.GetInstance<SavannaAltBiome>();
 				break;
 		}
@@ -429,7 +429,7 @@ public class SavannaAltBiome : AltBiome
 		{
 			case "Wet Jungle":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Tropics.JunglesWetTask)));
+				passes.Add(new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Savanna.JunglesWetTask)));
 				break;
 			case "Ice":
 				passes.Add(new PassLegacy("Tuhrtl Brick Unsolid", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration config)
@@ -454,20 +454,20 @@ public class SavannaAltBiome : AltBiome
 						}
 					}
 				})));
-				passes.Add(new PassLegacy("Loam Caves To Grass", new WorldGenLegacyMethod(Tropics.JunglesGrassTask)));
+				passes.Add(new PassLegacy("Loam Caves To Grass", new WorldGenLegacyMethod(Savanna.JunglesGrassTask)));
 				break;
 			case "Jungle Temple":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Tuhrtl Outpost", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostTask)));
-				passes.Add(new PassLegacy("Outpost Traps", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostReplaceTraps)));
+				passes.Add(new PassLegacy("Tuhrtl Outpost", new WorldGenLegacyMethod(Savanna.TuhrtlOutpostTask)));
+				passes.Add(new PassLegacy("Outpost Traps", new WorldGenLegacyMethod(Savanna.TuhrtlOutpostReplaceTraps)));
 				break;
 			case "Hives":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Wasp Nests", new WorldGenLegacyMethod(Tropics.WaspNests)));
+				passes.Add(new PassLegacy("Wasp Nests", new WorldGenLegacyMethod(Savanna.WaspNests)));
 				break;
 			case "Jungle Chests":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Tropics Sanctums", new WorldGenLegacyMethod(Tropics.TropicsSanctumTask)));
+				passes.Add(new PassLegacy("Tropics Sanctums", new WorldGenLegacyMethod(Savanna.SavannaSanctumTask)));
 				break;
 			case "Muds Walls In Jungle":
 				originalPass.Disable();
@@ -573,15 +573,15 @@ public class SavannaAltBiome : AltBiome
 				break;
 			case "Temple":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Re-solidify Lihzahrd Brick", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask)));
+				passes.Add(new PassLegacy("Re-solidify Lihzahrd Brick", new WorldGenLegacyMethod(Savanna.LihzahrdBrickReSolidTask)));
 				break;
 			case "Glowing Mushrooms and Jungle Plants":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Glowing Mushrooms and Tropics Plants", new WorldGenLegacyMethod(Tropics.GlowingMushroomsandJunglePlantsTask)));
+				passes.Add(new PassLegacy("Glowing Mushrooms and Tropics Plants", new WorldGenLegacyMethod(Savanna.GlowingMushroomsandJunglePlantsTask)));
 				break;
 			case "Jungle Plants":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Tropics Plants", new WorldGenLegacyMethod(Tropics.JungleBushesTask)));
+				passes.Add(new PassLegacy("Tropics Plants", new WorldGenLegacyMethod(Savanna.JungleBushesTask)));
 				break;
 		}
 	}

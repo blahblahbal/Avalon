@@ -99,7 +99,7 @@ public class ReplaceChestItems : GenPass
                     #endregion
 
                     #region replace lihzahrd with tuhrtl
-                    if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Tropics)
+                    if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Savanna)
                     {
                         if (Main.tile[c.x, c.y].TileFrameX >= 576 && Main.tile[c.x, c.y].TileFrameX < 612 && Main.tile[c.x, c.y].TileType == 21)
                         {

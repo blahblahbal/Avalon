@@ -12,7 +12,7 @@ using Terraria.Localization;
 
 namespace Avalon.WorldGeneration.Passes;
 
-internal class Tropics
+internal class Savanna
 {
     public static void TuhrtlOutpostReplaceTraps(GenerationProgress progress, GameConfiguration config)
     {
@@ -170,7 +170,7 @@ internal class Tropics
             }
         }
     }
-    public static void TropicsSanctumTask(GenerationProgress progress, GameConfiguration config)
+    public static void SavannaSanctumTask(GenerationProgress progress, GameConfiguration config)
     {
         progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.Chests");
         float amount = WorldGen.genRand.Next(7, 12);

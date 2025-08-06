@@ -80,7 +80,7 @@ namespace Avalon.Hooks
 		}
 		private static Asset<Texture2D> GetJungleOverlay(byte jungleVariant, bool isCompletion)
 		{
-			return OverlayTextures[(jungleVariant == (byte)WorldJungle.Tropics ? "Savanna" : "Jungle") + (isCompletion ? "Completion" : "")];
+			return OverlayTextures[(jungleVariant == (byte)WorldJungle.Savanna ? "Savanna" : "Jungle") + (isCompletion ? "Completion" : "")];
 		}
 
 		protected override void Apply()
@@ -175,7 +175,7 @@ namespace Avalon.Hooks
 							_worldIcon.Append(element);
 						}
 					}
-					if (_avalonData.GetByte("Avalon:WorldJungle") <= (byte)WorldJungle.Tropics || _avalonData.GetByte("Avalon:WorldJungle") >= (byte)WorldJungle.Jungle)
+					if (_avalonData.GetByte("Avalon:WorldJungle") <= (byte)WorldJungle.Savanna || _avalonData.GetByte("Avalon:WorldJungle") >= (byte)WorldJungle.Jungle)
 					{
 						if (!_data.NotTheBees && !_data.ZenithWorld) //I think a zenith version that glitches would be cool
 						{                                            //if done, I (lion8cake) will make a glitch one for the depths too
@@ -215,7 +215,7 @@ namespace Avalon.Hooks
 				bool avalonData = _data.TryGetHeaderData(ModContent.GetInstance<AvalonWorld>(), out var _avalonData);
 				if (avalonData)
 				{
-					if (_avalonData.GetByte("Avalon:WorldJungle") <= (byte)WorldJungle.Tropics || _avalonData.GetByte("Avalon:WorldJungle") >= (byte)WorldJungle.Jungle)
+					if (_avalonData.GetByte("Avalon:WorldJungle") <= (byte)WorldJungle.Savanna || _avalonData.GetByte("Avalon:WorldJungle") >= (byte)WorldJungle.Jungle)
 					{
 						if (!_data.NotTheBees && !_data.ZenithWorld) //I think a zenith version that glitches would be cool
 						{                                            //if done, I (lion8cake) will make a glitch one for the depths too

@@ -20,7 +20,7 @@ internal class ReplacePass : GenPass
         {
             for (int j = 150; j < Main.maxTilesY - 150; j++)
             {
-                if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Tropics)
+                if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Savanna)
                 {
                     if (Main.tile[i, j].TileType == TileID.Platforms && Main.tile[i, j].TileFrameY / 18 == 2)
                     {

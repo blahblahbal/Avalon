@@ -11,8 +11,6 @@ using Terraria.ID;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-//using Avalon.Tiles.Furniture.PurpleDungeon;
-//using Avalon.Tiles.Furniture.OrangeDungeon;
 
 namespace Avalon.Hooks;
 
@@ -30,115 +28,112 @@ public class DungeonRework : ModHook
     //}
     private static bool OnDungeonPitTrap(On_WorldGen.orig_DungeonPitTrap orig, int i, int j, ushort tileType, int wallType)
     {
-		if (ModContent.GetInstance<AvalonConfig>().RevertDungeonGen)
+		if (ModContent.GetInstance<AvalonConfig>().RevertDungeonGenPitTraps)
 		{
-			//if (WorldGen.genRand.NextBool(3))
+			int num = 30;
+			int yPos = j;
+			int initialYPos = yPos;
+			int widthModifier = WorldGen.genRand.Next(8, 19);
+			int heightModifier = WorldGen.genRand.Next(8, 18);
+			int finalWidth = widthModifier + WorldGen.genRand.Next(6, 10);
+			int finalHeight = heightModifier + WorldGen.genRand.Next(4, 7);
+			if (!Main.wallDungeon[Main.tile[i, yPos].WallType])
 			{
-				int num = 30;
-				int yPos = j;
-				int initialYPos = yPos;
-				int widthModifier = WorldGen.genRand.Next(8, 19);
-				int heightModifier = WorldGen.genRand.Next(8, 18);
-				int finalWidth = widthModifier + WorldGen.genRand.Next(6, 10);
-				int finalHeight = heightModifier + WorldGen.genRand.Next(4, 7);
-				if (!Main.wallDungeon[Main.tile[i, yPos].WallType])
+				return false;
+			}
+			if (Main.tile[i, yPos].HasTile)
+			{
+				return false;
+			}
+			for (int k = yPos; k < Main.maxTilesY; k++)
+			{
+				if (k > Main.maxTilesY - 300)
 				{
 					return false;
 				}
-				if (Main.tile[i, yPos].HasTile)
+				if (Main.tile[i, k].HasTile && WorldGen.SolidTile(i, k))
 				{
-					return false;
-				}
-				for (int k = yPos; k < Main.maxTilesY; k++)
-				{
-					if (k > Main.maxTilesY - 300)
+					if (Main.tile[i, k].TileType == TileID.Spikes)
 					{
 						return false;
 					}
-					if (Main.tile[i, k].HasTile && WorldGen.SolidTile(i, k))
+					yPos = k;
+					break;
+				}
+			}
+			if (!Main.wallDungeon[Main.tile[i - widthModifier, yPos].WallType] || !Main.wallDungeon[Main.tile[i + widthModifier, yPos].WallType])
+			{
+				return false;
+			}
+			bool flag = true;
+			for (int l = yPos; l < yPos + num; l++)
+			{
+				flag = true;
+				for (int m = i - widthModifier; m <= i + widthModifier; m++)
+				{
+					Tile tile = Main.tile[m, l];
+					if (tile.HasTile && Main.tileDungeon[tile.TileType])
 					{
-						if (Main.tile[i, k].TileType == TileID.Spikes)
-						{
-							return false;
-						}
-						yPos = k;
-						break;
+						flag = false;
 					}
 				}
-				if (!Main.wallDungeon[Main.tile[i - widthModifier, yPos].WallType] || !Main.wallDungeon[Main.tile[i + widthModifier, yPos].WallType])
+				if (flag)
 				{
-					return false;
+					yPos = l;
+					break;
 				}
-				bool flag = true;
-				for (int l = yPos; l < yPos + num; l++)
+			}
+			for (int n = i - widthModifier; n <= i + widthModifier; n++)
+			{
+				for (int num8 = yPos; num8 <= yPos + heightModifier; num8++)
 				{
-					flag = true;
-					for (int m = i - widthModifier; m <= i + widthModifier; m++)
+					Tile tile2 = Main.tile[n, num8];
+					if (tile2.HasTile && (Main.tileDungeon[tile2.TileType] || tile2.TileType == GenVars.crackedType))
 					{
-						Tile tile = Main.tile[m, l];
-						if (tile.HasTile && Main.tileDungeon[tile.TileType])
-						{
-							flag = false;
-						}
-					}
-					if (flag)
-					{
-						yPos = l;
-						break;
+						return false;
 					}
 				}
-				for (int n = i - widthModifier; n <= i + widthModifier; n++)
+			}
+			for (int x = i - finalWidth; x <= i + finalWidth; x++)
+			{
+				for (int y = initialYPos; y <= yPos + finalHeight; y++)
 				{
-					for (int num8 = yPos; num8 <= yPos + heightModifier; num8++)
+					Tile tile = Main.tile[x, y];
+					tile.LiquidType = LiquidLoader.LiquidType<Acid>();
+					tile.LiquidAmount = 0;
+					if (!Main.wallDungeon[Main.tile[x, y].WallType] && Main.tile[x, y].TileType != GenVars.crackedType)
 					{
-						Tile tile2 = Main.tile[n, num8];
-						if (tile2.HasTile && (Main.tileDungeon[tile2.TileType] || tile2.TileType == GenVars.crackedType))
+						Main.tile[x, y].Clear(TileDataType.Slope);
+						Main.tile[x, y].TileType = tileType;
+						Main.tile[x, y].Active(true);
+						if (x > i - finalWidth && x < i + finalWidth && y < yPos + finalHeight)
 						{
-							return false;
-						}
-					}
-				}
-				for (int x = i - finalWidth; x <= i + finalWidth; x++)
-				{
-					for (int y = initialYPos; y <= yPos + finalHeight; y++)
-					{
-						Tile tile = Main.tile[x, y];
-						tile.LiquidType = LiquidLoader.LiquidType<Acid>();
-						tile.LiquidAmount = 0;
-						if (!Main.wallDungeon[Main.tile[x, y].WallType] && Main.tile[x, y].TileType != GenVars.crackedType)
-						{
-							Main.tile[x, y].Clear(TileDataType.Slope);
-							Main.tile[x, y].TileType = tileType;
-							Main.tile[x, y].Active(true);
-							if (x > i - finalWidth && x < i + finalWidth && y < yPos + finalHeight)
-							{
-								Main.tile[x, y].WallType = (ushort)wallType;
-							}
+							Main.tile[x, y].WallType = (ushort)wallType;
 						}
 					}
 				}
-				for (int x = i - widthModifier; x <= i + widthModifier; x++)
+			}
+			for (int x = i - widthModifier; x <= i + widthModifier; x++)
+			{
+				for (int y = initialYPos; y <= yPos + heightModifier; y++)
 				{
-					for (int y = initialYPos; y <= yPos + heightModifier; y++)
+					if (Main.tile[x, y].TileType != GenVars.crackedType)
 					{
-						if (Main.tile[x, y].TileType != GenVars.crackedType)
+						if (y > yPos + heightModifier / 4)
 						{
-							if (y > yPos + heightModifier / 4)
-							{
-								Main.tile[x, y].LiquidAmount = 255;
-							}
-							if (x == i - widthModifier || x == i + widthModifier || y == yPos + heightModifier)
-							{
-								Main.tile[x, y].TileType = TileID.Spikes;
-							}
-							else if ((x == i - widthModifier + 1 && y % 2 == 0) || (x == i + widthModifier - 1 && y % 2 == 0) || (y == yPos + heightModifier - 1 && x % 2 == 0))
-							{
-								Main.tile[x, y].TileType = TileID.Spikes;
-							}
-							else
-							{
-								Main.tile[x, y].Active(false);
-							}
+							Main.tile[x, y].LiquidAmount = 255;
+						}
+						if (x == i - widthModifier || x == i + widthModifier || y == yPos + heightModifier)
+						{
+							Main.tile[x, y].TileType = TileID.Spikes;
+						}
+						else if ((x == i - widthModifier + 1 && y % 2 == 0) || (x == i + widthModifier - 1 && y % 2 == 0) || (y == yPos + heightModifier - 1 && x % 2 == 0))
+						{
+							Main.tile[x, y].TileType = TileID.Spikes;
+						}
+						else
+						{
+							Main.tile[x, y].Active(false);
 						}
 					}
 				}
@@ -147,133 +142,131 @@ public class DungeonRework : ModHook
 		}
 		else if (WorldGen.genRand.NextBool(3))
 		{
+			int num = 30;
+			int yPos = j;
+			int initialYPos = yPos;
+			int widthModifier = WorldGen.genRand.Next(8, 19);
+			int heightModifier = WorldGen.genRand.Next(8, 18);
+			int finalWidth = widthModifier + WorldGen.genRand.Next(6, 10);
+			int finalHeight = heightModifier + WorldGen.genRand.Next(4, 7);
+			if (!Main.wallDungeon[Main.tile[i, yPos].WallType])
 			{
-				int num = 30;
-				int yPos = j;
-				int initialYPos = yPos;
-				int widthModifier = WorldGen.genRand.Next(8, 19);
-				int heightModifier = WorldGen.genRand.Next(8, 18);
-				int finalWidth = widthModifier + WorldGen.genRand.Next(6, 10);
-				int finalHeight = heightModifier + WorldGen.genRand.Next(4, 7);
-				if (!Main.wallDungeon[Main.tile[i, yPos].WallType])
+				return false;
+			}
+			if (Main.tile[i, yPos].HasTile)
+			{
+				return false;
+			}
+			for (int k = yPos; k < Main.maxTilesY; k++)
+			{
+				if (k > Main.maxTilesY - 300)
 				{
 					return false;
 				}
-				if (Main.tile[i, yPos].HasTile)
+				if (Main.tile[i, k].HasTile && WorldGen.SolidTile(i, k))
 				{
-					return false;
-				}
-				for (int k = yPos; k < Main.maxTilesY; k++)
-				{
-					if (k > Main.maxTilesY - 300)
+					if (Main.tile[i, k].TileType == TileID.Spikes)
 					{
 						return false;
 					}
-					if (Main.tile[i, k].HasTile && WorldGen.SolidTile(i, k))
+					yPos = k;
+					break;
+				}
+			}
+			if (!Main.wallDungeon[Main.tile[i - widthModifier, yPos].WallType] || !Main.wallDungeon[Main.tile[i + widthModifier, yPos].WallType])
+			{
+				return false;
+			}
+			bool flag = true;
+			for (int l = yPos; l < yPos + num; l++)
+			{
+				flag = true;
+				for (int m = i - widthModifier; m <= i + widthModifier; m++)
+				{
+					Tile tile = Main.tile[m, l];
+					if (tile.HasTile && Main.tileDungeon[tile.TileType])
 					{
-						if (Main.tile[i, k].TileType == TileID.Spikes)
-						{
-							return false;
-						}
-						yPos = k;
-						break;
+						flag = false;
 					}
 				}
-				if (!Main.wallDungeon[Main.tile[i - widthModifier, yPos].WallType] || !Main.wallDungeon[Main.tile[i + widthModifier, yPos].WallType])
+				if (flag)
 				{
-					return false;
+					yPos = l;
+					break;
 				}
-				bool flag = true;
-				for (int l = yPos; l < yPos + num; l++)
+			}
+			for (int n = i - widthModifier; n <= i + widthModifier; n++)
+			{
+				for (int num8 = yPos; num8 <= yPos + heightModifier; num8++)
 				{
-					flag = true;
-					for (int m = i - widthModifier; m <= i + widthModifier; m++)
+					Tile tile2 = Main.tile[n, num8];
+					if (tile2.HasTile && (Main.tileDungeon[tile2.TileType] || tile2.TileType == GenVars.crackedType))
 					{
-						Tile tile = Main.tile[m, l];
-						if (tile.HasTile && Main.tileDungeon[tile.TileType])
-						{
-							flag = false;
-						}
-					}
-					if (flag)
-					{
-						yPos = l;
-						break;
+						return false;
 					}
 				}
-				for (int n = i - widthModifier; n <= i + widthModifier; n++)
+			}
+			bool flag2 = true;
+			//if (GenVars.dungeonLake)
+			//{
+			//	flag2 = true;
+			//	GenVars.dungeonLake = false;
+			//}
+			//else if (WorldGen.genRand.NextBool(8))
+			//{
+			//	flag2 = true;
+			//}
+			//for (int num9 = i - num4; num9 <= i + num4; num9++)
+			//{
+			//	for (int num10 = num3; num10 <= num2 + num5; num10++)
+			//	{
+			//		if (Main.tileDungeon[Main.tile[num9, num10].TileType])
+			//		{
+			//			Main.tile[num9, num10].type = GenVars.crackedType;
+			//			Main.tile[num9, num10].wall = (ushort)wallType;
+			//		}
+			//	}
+			//}
+			for (int x = i - finalWidth; x <= i + finalWidth; x++)
+			{
+				for (int y = initialYPos; y <= yPos + finalHeight; y++)
 				{
-					for (int num8 = yPos; num8 <= yPos + heightModifier; num8++)
+					Tile tile = Main.tile[x, y];
+					tile.LiquidType = LiquidLoader.LiquidType<Acid>();
+					tile.LiquidAmount = 0;
+					if (!Main.wallDungeon[Main.tile[x, y].WallType] && Main.tile[x, y].TileType != GenVars.crackedType)
 					{
-						Tile tile2 = Main.tile[n, num8];
-						if (tile2.HasTile && (Main.tileDungeon[tile2.TileType] || tile2.TileType == GenVars.crackedType))
+						Main.tile[x, y].Clear(TileDataType.Slope);
+						Main.tile[x, y].TileType = tileType;
+						Main.tile[x, y].Active(true);
+						if (x > i - finalWidth && x < i + finalWidth && y < yPos + finalHeight)
 						{
-							return false;
-						}
-					}
-				}
-				bool flag2 = true;
-				//if (GenVars.dungeonLake)
-				//{
-				//	flag2 = true;
-				//	GenVars.dungeonLake = false;
-				//}
-				//else if (WorldGen.genRand.NextBool(8))
-				//{
-				//	flag2 = true;
-				//}
-				//for (int num9 = i - num4; num9 <= i + num4; num9++)
-				//{
-				//	for (int num10 = num3; num10 <= num2 + num5; num10++)
-				//	{
-				//		if (Main.tileDungeon[Main.tile[num9, num10].TileType])
-				//		{
-				//			Main.tile[num9, num10].type = GenVars.crackedType;
-				//			Main.tile[num9, num10].wall = (ushort)wallType;
-				//		}
-				//	}
-				//}
-				for (int x = i - finalWidth; x <= i + finalWidth; x++)
-				{
-					for (int y = initialYPos; y <= yPos + finalHeight; y++)
-					{
-						Tile tile = Main.tile[x, y];
-						tile.LiquidType = LiquidLoader.LiquidType<Acid>();
-						tile.LiquidAmount = 0;
-						if (!Main.wallDungeon[Main.tile[x, y].WallType] && Main.tile[x, y].TileType != GenVars.crackedType)
-						{
-							Main.tile[x, y].Clear(TileDataType.Slope);
-							Main.tile[x, y].TileType = tileType;
-							Main.tile[x, y].Active(true);
-							if (x > i - finalWidth && x < i + finalWidth && y < yPos + finalHeight)
-							{
-								Main.tile[x, y].WallType = (ushort)wallType;
-							}
+							Main.tile[x, y].WallType = (ushort)wallType;
 						}
 					}
 				}
-				for (int x = i - widthModifier; x <= i + widthModifier; x++)
+			}
+			for (int x = i - widthModifier; x <= i + widthModifier; x++)
+			{
+				for (int y = initialYPos; y <= yPos + heightModifier; y++)
 				{
-					for (int y = initialYPos; y <= yPos + heightModifier; y++)
+					if (Main.tile[x, y].TileType != GenVars.crackedType)
 					{
-						if (Main.tile[x, y].TileType != GenVars.crackedType)
+						if (y > yPos + heightModifier / 4)
 						{
-							if (y > yPos + heightModifier / 4)
-							{
-								Main.tile[x, y].LiquidAmount = 255;
-							}
-							if (x == i - widthModifier || x == i + widthModifier || y == yPos + heightModifier)
-							{
-								Main.tile[x, y].TileType = TileID.Spikes;
-							}
-							else if ((x == i - widthModifier + 1 && y % 2 == 0) || (x == i + widthModifier - 1 && y % 2 == 0) || (y == yPos + heightModifier - 1 && x % 2 == 0))
-							{
-								Main.tile[x, y].TileType = TileID.Spikes;
-							}
-							else
-							{
-								Main.tile[x, y].Active(false);
-							}
+							Main.tile[x, y].LiquidAmount = 255;
+						}
+						if (x == i - widthModifier || x == i + widthModifier || y == yPos + heightModifier)
+						{
+							Main.tile[x, y].TileType = TileID.Spikes;
+						}
+						else if ((x == i - widthModifier + 1 && y % 2 == 0) || (x == i + widthModifier - 1 && y % 2 == 0) || (y == yPos + heightModifier - 1 && x % 2 == 0))
+						{
+							Main.tile[x, y].TileType = TileID.Spikes;
+						}
+						else
+						{
+							Main.tile[x, y].Active(false);
 						}
 					}
 				}

@@ -146,7 +146,7 @@ public class AvalonWorld : ModSystem
 			worldData.contagion = false;
 		}
 
-		if (WorldJungle == WorldJungle.Tropics)
+		if (WorldJungle == WorldJungle.Savanna)
 		{
 			worldData.tropics = true;
 		}
@@ -327,7 +327,7 @@ public class AvalonWorld : ModSystem
 			{
 				WorldJungleSelection.Random => Main.rand.Next(Enum.GetValues<WorldJungle>()),
 				WorldJungleSelection.Jungle => WorldJungle.Jungle,
-				WorldJungleSelection.Tropics => WorldJungle.Tropics,
+				WorldJungleSelection.Tropics => WorldJungle.Savanna,
 				_ => throw new ArgumentOutOfRangeException(),
 			};
 		}
@@ -342,7 +342,7 @@ public class AvalonWorld : ModSystem
 
 		if (setValue != null)
 		{
-			if (WorldJungle == WorldJungle.Tropics)
+			if (WorldJungle == WorldJungle.Savanna)
 			{
 				setValue.Invoke(Lang.gen[11], [Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.Generating")]);
 			}

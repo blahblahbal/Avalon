@@ -6,9 +6,9 @@ using Terraria.WorldBuilding;
 
 namespace Avalon.WorldGeneration.Passes;
 
-internal class TropicsVines : GenPass
+internal class SavannaVines : GenPass
 {
-    public TropicsVines() : base("Tropics Vines", 600f) { }
+    public SavannaVines() : base("Tropics Vines", 600f) { }
 
     protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
     {

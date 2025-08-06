@@ -107,7 +107,7 @@ public class TropicsCaveHouseHook : ModHook
 
         List<Tuple<HouseType, int>> list = new List<Tuple<HouseType, int>>();
         list.Add(Tuple.Create(HouseType.Wood, dictionary[0] + dictionary[1]));
-        if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Tropics)
+        if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Savanna)
         {
             list.Add(Tuple.Create(HouseType.Jungle, dictionary[(ushort)ModContent.TileType<Loam>()] + dictionary[(ushort)ModContent.TileType<SavannaGrass>()] * 10));
         }
@@ -152,7 +152,7 @@ public class TropicsCaveHouseHook : ModHook
             }
         }
 
-        if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Tropics && houseType == HouseType.Jungle)
+        if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Savanna && houseType == HouseType.Jungle)
         {
             return new TropicsHouseBuilder(list);
         }

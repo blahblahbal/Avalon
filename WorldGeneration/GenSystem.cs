@@ -17,7 +17,7 @@ public class GenSystem : ModSystem
 {
     public static int HellfireItemCount;
 	public static int HellfireItemResult;
-	public static int TropicsItemCount;
+	public static int SavannaItemCount;
     public override void PostWorldGen()
     {
         AvalonWorld.JungleLocationX = GenVars.JungleX;
@@ -58,12 +58,12 @@ public class GenSystem : ModSystem
 					}
 				}
 
-				if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
+				if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Savanna)
 				{
 					int jungleIndex = tasks.FindIndex(i => i.Name.Equals("Wet Jungle"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Wet Jungle", new WorldGenLegacyMethod(Tropics.JunglesWetTask));
+						tasks[jungleIndex] = new PassLegacy("Wet Jungle", new WorldGenLegacyMethod(Savanna.JunglesWetTask));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Ice"));
 					if (jungleIndex != -1)
@@ -77,7 +77,7 @@ public class GenSystem : ModSystem
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Mud Caves To Grass"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Mud Caves To Grass", new WorldGenLegacyMethod(Tropics.JunglesGrassTask));
+						tasks[jungleIndex] = new PassLegacy("Mud Caves To Grass", new WorldGenLegacyMethod(Savanna.JunglesGrassTask));
 						tasks.Insert(jungleIndex, new PassLegacy("Loam", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration configuration)
 						{
 							int tile = ModContent.TileType<Tiles.Savanna.Loam>();
@@ -96,19 +96,19 @@ public class GenSystem : ModSystem
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Temple"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Jungle Temple", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostTask));
-						tasks.Insert(jungleIndex + 1, new PassLegacy("Outpost Traps", new WorldGenLegacyMethod(Tropics.TuhrtlOutpostReplaceTraps)));
+						tasks[jungleIndex] = new PassLegacy("Jungle Temple", new WorldGenLegacyMethod(Savanna.TuhrtlOutpostTask));
+						tasks.Insert(jungleIndex + 1, new PassLegacy("Outpost Traps", new WorldGenLegacyMethod(Savanna.TuhrtlOutpostReplaceTraps)));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Hives"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Hives", new WorldGenLegacyMethod(Tropics.WaspNests));
+						tasks[jungleIndex] = new PassLegacy("Hives", new WorldGenLegacyMethod(Savanna.WaspNests));
 					}
 
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Chests"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Jungle Chests", new WorldGenLegacyMethod(Tropics.TropicsSanctumTask));
+						tasks[jungleIndex] = new PassLegacy("Jungle Chests", new WorldGenLegacyMethod(Savanna.SavannaSanctumTask));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Muds Walls In Jungle"));
 					if (jungleIndex != -1)
@@ -217,17 +217,17 @@ public class GenSystem : ModSystem
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Temple"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Temple", new WorldGenLegacyMethod(Tropics.LihzahrdBrickReSolidTask));
+						tasks[jungleIndex] = new PassLegacy("Temple", new WorldGenLegacyMethod(Savanna.LihzahrdBrickReSolidTask));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Glowing Mushrooms and Jungle Plants"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Glowing Mushrooms and Jungle Plants", new WorldGenLegacyMethod(Tropics.GlowingMushroomsandJunglePlantsTask));
+						tasks[jungleIndex] = new PassLegacy("Glowing Mushrooms and Jungle Plants", new WorldGenLegacyMethod(Savanna.GlowingMushroomsandJunglePlantsTask));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Plants"));
 					if (jungleIndex != -1)
 					{
-						tasks[jungleIndex] = new PassLegacy("Jungle Plants", new WorldGenLegacyMethod(Tropics.JungleBushesTask));
+						tasks[jungleIndex] = new PassLegacy("Jungle Plants", new WorldGenLegacyMethod(Savanna.JungleBushesTask));
 					}
 				}
 			}
@@ -327,13 +327,13 @@ public class GenSystem : ModSystem
 				{
 					tasks.Insert(index + 2, new ContagionVines("Contagion Vines", 25f));
 				}
-				if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Tropics)
+				if (ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Savanna)
 				{
-					currentPass = new TropicsVines();
+					currentPass = new SavannaVines();
 					tasks.Insert(index + 3, currentPass);
 					totalWeight += currentPass.Weight;
 
-					currentPass = new PassLegacy("Savanna Traps", new WorldGenLegacyMethod(Tropics.PlatformLeafTrapTask));
+					currentPass = new PassLegacy("Savanna Traps", new WorldGenLegacyMethod(Savanna.PlatformLeafTrapTask));
 					tasks.Insert(index + 4, currentPass);
 					totalWeight += currentPass.Weight;
 				}
@@ -384,10 +384,10 @@ public class GenSystem : ModSystem
 		}
 	}
 
-	public static int GetNextTropicsChestItem()
+	public static int GetNextSavannaChestItem()
     {
         int result = ModContent.ItemType<Items.Accessories.PreHardmode.RubberGloves>();
-        switch (TropicsItemCount % 4)
+        switch (SavannaItemCount % 4)
         {
             case 0:
                 result = ModContent.ItemType<Items.Accessories.PreHardmode.RubberGloves>();
@@ -410,7 +410,7 @@ public class GenSystem : ModSystem
         else if (WorldGen.genRand.NextBool(20))
             result = ItemID.FlowerBoots;
 
-        TropicsItemCount++;
+        SavannaItemCount++;
         return result;
     }
 }

@@ -51,10 +51,10 @@ public class PyrasiteHead : WormHead
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
-        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-        {
-            new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Pyrasite"))
-        });
+        bestiaryEntry.Info.AddRange(
+		[
+			new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Pyrasite"))
+        ]);
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
