@@ -44,8 +44,8 @@ public class Contagion : ModBiome
     {
         get
         {
-            return ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Contagion") : MusicID.Crimson;
-        }
+            return ExxoAvalonOrigins.MusicMod != null ? Main.swapMusic ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/ContagionEnnway") : MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Contagion") : MusicID.Crimson;
+		}
     }
     public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle
     {

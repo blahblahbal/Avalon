@@ -1,4 +1,5 @@
-﻿using Avalon.ModSupport.MLL.Buffs;
+﻿using Avalon.Common;
+using Avalon.ModSupport.MLL.Buffs;
 using Avalon.ModSupport.MLL.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -33,13 +34,48 @@ internal class Acid : ModLiquid
 		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
 		AddMapEntry(new Color(0, 255, 0), CreateMapEntryName());
 	}
+	public override void EmitEffects(int i, int j, LiquidCache liquidCache)
+	{
+		if (Main.instance.IsActive && !Main.gamePaused && Main.tile[i, j].LiquidType == Type)
+		{
+			if (Main.tile[i, j].LiquidAmount > 200 && Main.rand.NextBool(1))
+			{
+				int D = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<AcidLiquidSplash>());
+			}
+			if (Main.rand.NextBool(350))
+			{
+				int num22 = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 8, ModContent.DustType<AcidLiquidSplash>(), 0f, 0f, 50, default, 1.5f);
+				Dust obj2 = Main.dust[num22];
+				obj2.velocity *= 0.8f;
+				obj2.velocity.X *= 2f;
+				obj2.velocity.Y -= Main.rand.Next(1, 7) * 0.1f;
+				if (Main.rand.NextBool(10))
+				{
+					obj2.velocity.Y *= Main.rand.Next(2, 5);
+				}
+				obj2.noGravity = true;
+			}
+		}
+	}
 	public override bool UpdateLiquid(int i, int j, Liquid liquid)
 	{
-		if (Main.tile[i, j].LiquidType == Type && Main.tile[i, j].LiquidAmount > 64)
+		
+		if (Main.tile[i, j].LiquidType == Type && Main.tile[i, j].LiquidAmount > 64 && AvalonWorld.AcidDestroyTilesTimer % 16 == 0)
 		{
 			if (TileID.Sets.CanBeDugByShovel[Main.tile[i, j + 1].TileType] && Main.tile[i, j + 1].HasTile)
 			{
-				WorldGen.KillTile(i, j + 1, noItem: true);
+				ClassExtensions.KillTileFast(i, j + 1, true);
+				SoundEngine.PlaySound(SoundID.LiquidsWaterLava, new Vector2(i, j + 1) * 16);
+				SoundEngine.PlaySound(SoundID.SplashWeak, new Vector2(i, j + 1) * 16);
+				for (int n = 0; n < 4; n++)
+				{
+					int num8 = Dust.NewDust(new Vector2(i * 16, (j + 1) * 16), 12, 24, DustID.Smoke);
+					Main.dust[num8].color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
+					Main.dust[num8].velocity.Y -= 1.5f;
+					Main.dust[num8].velocity.X *= 1.5f;
+					Main.dust[num8].scale = 1.6f;
+					Main.dust[num8].noGravity = true;
+				}
 				Main.tile[i, j].LiquidAmount -= 64;
 				WorldGen.SquareTileFrame(i, j);
 
@@ -50,20 +86,54 @@ internal class Acid : ModLiquid
 			}
 			if (TileID.Sets.CanBeDugByShovel[Main.tile[i - 1, j].TileType] && Main.tile[i - 1, j].HasTile)
 			{
-				WorldGen.KillTile(i - 1, j, noItem: true);
+				ClassExtensions.KillTileFast(i - 1, j, true);
+				SoundEngine.PlaySound(SoundID.LiquidsWaterLava, new Vector2(i - 1, j) * 16);
+				SoundEngine.PlaySound(SoundID.SplashWeak, new Vector2(i - 1, j) * 16);
+				for (int n = 0; n < 4; n++)
+				{
+					int num8 = Dust.NewDust(new Vector2((i - 1) * 16, j * 16), 12, 24, DustID.Smoke);
+					Main.dust[num8].color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
+					Main.dust[num8].velocity.Y -= 1.5f;
+					Main.dust[num8].velocity.X *= 1.5f;
+					Main.dust[num8].scale = 1.6f;
+					Main.dust[num8].noGravity = true;
+				}
 				Main.tile[i, j].LiquidAmount -= 64;
 				WorldGen.SquareTileFrame(i - 1, j);
+
+				if (Main.netMode != NetmodeID.SinglePlayer)
+				{
+					NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 4);
+				}
 			}
 			if (TileID.Sets.CanBeDugByShovel[Main.tile[i + 1, j].TileType] && Main.tile[i + 1, j].HasTile)
 			{
-				WorldGen.KillTile(i + 1, j, noItem: true);
+				ClassExtensions.KillTileFast(i + 1, j, true);
+				SoundEngine.PlaySound(SoundID.LiquidsWaterLava, new Vector2(i + 1, j) * 16);
+				SoundEngine.PlaySound(SoundID.SplashWeak, new Vector2(i + 1, j) * 16);
+				for (int n = 0; n < 4; n++)
+				{
+					int num8 = Dust.NewDust(new Vector2((i + 1) * 16, j * 16), 12, 24, DustID.Smoke);
+					Main.dust[num8].color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
+					Main.dust[num8].velocity.Y -= 1.5f;
+					Main.dust[num8].velocity.X *= 1.5f;
+					Main.dust[num8].scale = 1.6f;
+					Main.dust[num8].noGravity = true;
+				}
 				Main.tile[i, j].LiquidAmount -= 64;
 				WorldGen.SquareTileFrame(i + 1, j);
+
+				if (Main.netMode != NetmodeID.SinglePlayer)
+				{
+					NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 4);
+				}
 			}
 		}
 		if (Main.tile[i, j].LiquidAmount < 0)
 		{
-			Main.tile[i, j].LiquidAmount = 0;
+			Tile liq = Main.tile[i, j];
+			liq.LiquidAmount = 0;
+			liq.LiquidType = LiquidID.Water;
 		}
 		return base.UpdateLiquid(i, j, liquid);
 	}
@@ -214,8 +284,7 @@ internal class Acid : ModLiquid
 	}
 	public override bool PlayerCollision(Player player, bool fallThrough, bool ignorePlats)
 	{
-
-		player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(3)}", $"{player.name}")), 100 + player.statDefense / 2, 0);
+		player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(5)}", $"{player.name}")), 40 + player.statDefense / 2, 0);
 		float time = 7;
 		if (Main.expertMode) time = 14;
 		if (Main.masterMode) time = 17.5f;

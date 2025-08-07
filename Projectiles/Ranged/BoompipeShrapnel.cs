@@ -3,7 +3,6 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.DataStructures;
-using Avalon.Data.Sets;
 using Avalon.Dusts;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;

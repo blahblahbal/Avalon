@@ -86,6 +86,7 @@ public class AvalonWorld : ModSystem
 	public static int SandstormTimeLeft = 0;
 	public static sbyte SandstormDirection = 1;
 
+	public static int AcidDestroyTilesTimer;
 	public static int WallOfSteel { get; set; } = -1;
 	public static int WallOfSteelB { get; set; }
 	public static int WallOfSteelF { get; set; }
@@ -305,6 +306,8 @@ public class AvalonWorld : ModSystem
 	public override void PreUpdateWorld()
 	{
 		Main.tileSolidTop[ModContent.TileType<FallenStarTile>()] = Main.dayTime;
+		AcidDestroyTilesTimer++;
+		if (AcidDestroyTilesTimer >= 80) AcidDestroyTilesTimer = 0;
 	}
 	/// <inheritdoc />
 	public override void PreWorldGen()
@@ -365,7 +368,7 @@ public class AvalonWorld : ModSystem
 		MethodInfo? setValue = typeof(LocalizedText).GetMethod("SetValue", BindingFlags.NonPublic | BindingFlags.Instance);
 		if (setValue != null)
 		{
-			setValue.Invoke(Lang.gen[11], new object[] { ExxoAvalonOrigins.JungleGenMessage });
+			setValue.Invoke(Lang.gen[11], [ExxoAvalonOrigins.JungleGenMessage]);
 		}
 	}
 	public override void PostUpdateWorld()

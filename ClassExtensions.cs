@@ -19,6 +19,27 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
+	/// <summary>
+	/// Helper method to efficiently remove tiles.
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="frame"></param>
+	public static void KillTileFast(int x, int y, bool frame = false)
+	{
+		Tile t = Main.tile[x, y];
+		if (!t.HasTile) return;
+
+		t.HasTile = false;
+		t.BlockType = BlockType.Solid;
+		t.TileFrameX = -1;
+		t.TileFrameY = -1;
+		t.ClearBlockPaintAndCoating();
+		t.TileFrameNumber = 0;
+		t.TileType = 0;
+		t.IsActuated = false;
+		if (frame) WorldGen.SquareTileFrame(x, y);
+	}
 	public static Rectangle Expand(this Rectangle r, int xDist, int yDist)
 	{
 		r.X -= xDist;
