@@ -18,6 +18,6 @@ public class MoonplateBlock : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.MoonplateBlock>();
         HitSound = SoundID.Tink;
-        DustType = DustID.Ghost;
+		DustType = ModContent.DustType<Dusts.MoonwareDust>();
     }
 }

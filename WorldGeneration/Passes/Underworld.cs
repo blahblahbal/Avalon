@@ -27,6 +27,8 @@ internal class Underworld : GenPass
 			int caesiumXPosRight = Main.maxTilesX - (Main.maxTilesX / 5);
 			int caesiumMaxRight = Main.maxTilesX - 20;
 
+			GenSystem.CaesiumSide = 1;
+
 			//bool smallWorld = Main.maxTilesY < WorldGen.WorldSizeMediumY;
 			//bool mediumWorld = Main.maxTilesY is >= WorldGen.WorldSizeMediumY and < WorldGen.WorldSizeLargeY;
 
@@ -39,12 +41,14 @@ internal class Underworld : GenPass
 				caesiumXPosLeft = Main.maxTilesX - (Main.maxTilesX / 3) - 15;
 				caesiumXPosRight = Main.maxTilesX - (Main.maxTilesX / 3);
 				caesiumMaxRight = Main.maxTilesX - (Main.maxTilesX / 5) + 50;
+				GenSystem.CaesiumSide = 0;
 			}
 			if (GenVars.dungeonSide < 0 && !Main.drunkWorld)
 			{
 				int caesiumLeftSidePosXLeft = Main.maxTilesX / 5;
 				int caesiumLeftSidePosXRight = Main.maxTilesX / 5 + 20;
 				int caesiumMaxLeft = 20;
+				GenSystem.CaesiumSide = -1;
 
 				// make little blobs on the edge
 				for (int q = caesiumLeftSidePosXLeft; q < caesiumLeftSidePosXRight; q++)

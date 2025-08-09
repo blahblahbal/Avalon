@@ -18,6 +18,9 @@ public class GenSystem : ModSystem
     public static int HellfireItemCount;
 	public static int HellfireItemResult;
 	public static int SavannaItemCount;
+
+	public static int CaesiumSide;
+
     public override void PostWorldGen()
     {
         AvalonWorld.JungleLocationX = GenVars.JungleX;
