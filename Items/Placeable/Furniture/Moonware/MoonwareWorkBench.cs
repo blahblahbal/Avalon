@@ -7,7 +7,7 @@ public class MoonwareWorkBench : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Moonware.MoonwareWorkbench>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Moonware.MoonwareWorkBench>());
 		Item.width = 28;
 		Item.height = 14;
 		Item.value = Item.sellPrice(copper: 30);

@@ -98,4 +98,4 @@ public class MoonwareToilet : ToiletTemplate
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Moonware.MoonwareToilet>();
 }
 
-public class MoonwareWorkbench : WorkbenchTemplate { }
+public class MoonwareWorkBench : WorkbenchTemplate { }

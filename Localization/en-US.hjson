@@ -9802,6 +9802,106 @@ Mods: {
 					Right Click to place a 3x3 area of liquid
 					'''
 			}
+
+			MoonwareBathtub: {
+				DisplayName: Moonware Bathtub
+				Tooltip: ""
+			}
+
+			MoonwareBed: {
+				DisplayName: Moonware Bed
+				Tooltip: ""
+			}
+
+			MoonwareBookcase: {
+				DisplayName: Moonware Bookcase
+				Tooltip: ""
+			}
+
+			MoonwareCandelabra: {
+				DisplayName: Moonware Candelabra
+				Tooltip: ""
+			}
+
+			MoonwareCandle: {
+				DisplayName: Moonware Candle
+				Tooltip: ""
+			}
+
+			MoonwareChair: {
+				DisplayName: Moonware Chair
+				Tooltip: ""
+			}
+
+			MoonwareChandelier: {
+				DisplayName: Moonware Chandelier
+				Tooltip: ""
+			}
+
+			MoonwareChest: {
+				DisplayName: Moonware Chest
+				Tooltip: ""
+			}
+
+			MoonwareClock: {
+				DisplayName: Moonware Clock
+				Tooltip: ""
+			}
+
+			MoonwareDoor: {
+				DisplayName: Moonware Door
+				Tooltip: ""
+			}
+
+			MoonwareDresser: {
+				DisplayName: Moonware Dresser
+				Tooltip: ""
+			}
+
+			MoonwareLamp: {
+				DisplayName: Moonware Lamp
+				Tooltip: ""
+			}
+
+			MoonwareLantern: {
+				DisplayName: Moonware Lantern
+				Tooltip: ""
+			}
+
+			MoonwarePiano: {
+				DisplayName: Moonware Piano
+				Tooltip: ""
+			}
+
+			MoonwarePlatform: {
+				DisplayName: Moonware Platform
+				Tooltip: ""
+			}
+
+			MoonwareSink: {
+				DisplayName: Moonware Sink
+				Tooltip: ""
+			}
+
+			MoonwareSofa: {
+				DisplayName: Moonware Sofa
+				Tooltip: ""
+			}
+
+			MoonwareTable: {
+				DisplayName: Moonware Table
+				Tooltip: ""
+			}
+
+			MoonwareToilet: {
+				DisplayName: Moonware Toilet
+				Tooltip: ""
+			}
+
+			MoonwareWorkBench: {
+				DisplayName: Moonware Work Bench
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -11671,10 +11771,12 @@ Mods: {
 			SavannaShortGrass.MapEntry1: ""
 			SavannaPylon.MapEntry: Savanna Pylon
 			PoisonSpike.MapEntry: Poison Spike
-			SilenceCandle.MapEntry: Mods.Avalon.Tiles.SilenceCandle.MapEntry
+			SilenceCandle.MapEntry: Silence Candle
 			#intentionally lowercase to allow players an alternate way to find angel chests
 			AngelChest.MapEntry: gold chest
-			HydrolythOre.MapEntry: Mods.Avalon.Tiles.HydrolythOre.MapEntry
+			HydrolythOre.MapEntry: Hydrolyth
+			MoonwareChest.MapEntry0: Moonware Chest
+			MoonwareDresser.MapEntry: Moonware Dresser
 		}
 
 		Prefixes: {
