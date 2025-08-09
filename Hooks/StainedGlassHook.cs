@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Graphics.Light;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Hooks
@@ -60,7 +61,7 @@ namespace Avalon.Hooks
 
 		private static bool CombinedGlassHooks(Tile tile, ref float finalR, ref float finalG, ref float finalB)
 		{
-			if ((!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) && tile.LiquidAmount < 255)
+			if (tile.WallType != WallID.None && (!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) && tile.LiquidAmount < 255)
 			{
 				if (tile.WallType == BrownSG)
 				{
