@@ -172,7 +172,10 @@ public class DarkMatterSky : CustomSky
 			new Vector2(darkMatterBlackHole2.Width() >> 1, darkMatterBlackHole2.Height() >> 1),
 			0.25f * highResScale + scaleMod, SpriteEffects.None, 1f);
 
-		UnifiedRandom? currentCloudSeed = new(Main.ActiveWorldFileData.Seed);
+		//Stopwatch stopwatch = Stopwatch.StartNew();
+
+		//UnifiedRandom? currentCloudSeed = new(Main.ActiveWorldFileData.Seed);
+		FastRandom currentCloudSeed = new(Main.ActiveWorldFileData.Seed);
 
 		float endRadius = 0.01f;
 		float spiralTwist = 2.5f;
@@ -308,6 +311,9 @@ public class DarkMatterSky : CustomSky
 			}
 		}
 		//Main.NewText(debrisCount);
+
+		//stopwatch.Stop();
+		//Console.WriteLine(stopwatch.Elapsed.ToString());
 
 		// Draw the black hole's center (again, but only the black part!)
 		spriteBatch.Draw(darkMatterBlackHole3.Value, new Vector2(xPos, yPos), null, Color.White * opacity, 0f,

@@ -14,6 +14,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.Utilities;
 
 namespace Avalon;
 
@@ -879,6 +880,35 @@ public static class ClassExtensions
 	{
 		return projectile.DamageType == DamageClass.Melee && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.NightsEdge || projectile.type == ProjectileID.Terragrim || projectile.type == ProjectileID.Arkhalis);
 	}
+
+	/// <inheritdoc cref="Utils.NextFloat(UnifiedRandom, float)"/>
+	public static float NextFloat(this ref FastRandom r, float maxValue)
+		=> r.NextFloat() * maxValue;
+	/// <inheritdoc cref="Utils.NextFloat(UnifiedRandom, float, float)"/>
+	public static float NextFloat(this ref FastRandom r, float minValue, float maxValue)
+		=> r.NextFloat() * (maxValue - minValue) + minValue;
+	/// <inheritdoc cref="Utils.NextBool(UnifiedRandom)"/>
+	public static bool NextBool(this ref FastRandom r)
+		=> r.NextDouble() < .5;
+
+	/// <inheritdoc cref="Utils.NextBool(UnifiedRandom, int)"/>
+	public static bool NextBool(this ref FastRandom r, int consequent)
+	{
+		if (consequent < 1)
+			throw new ArgumentOutOfRangeException(nameof(consequent), "consequent must be greater than or equal to 1.");
+
+		return r.Next(consequent) == 0;
+	}
+
+	/// <inheritdoc cref="Utils.NextBool(UnifiedRandom, int, int)"/>
+	public static bool NextBool(this ref FastRandom r, int antecedent, int consequent)
+	{
+		if (antecedent > consequent)
+			throw new ArgumentOutOfRangeException(nameof(antecedent), "antecedent must be less than or equal to consequent.");
+
+		return r.Next(consequent) < antecedent;
+	}
+
 	public static Rectangle GetDims(this ModTexturedType texturedType) =>
 		Main.netMode == NetmodeID.Server ? Rectangle.Empty : texturedType.GetTexture().Frame();
 
