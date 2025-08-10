@@ -53,7 +53,10 @@ public class MoonwareClock : ClockTemplate
 {
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Moonware.MoonwareClock>();
 }
-
+public class MoonplateClock : ClockTemplate
+{
+	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Moonware.MoonplateClock>();
+}
 public class MoonwareDoorClosed : ClosedDoorTemplate
 {
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.Moonware.MoonwareDoor>();

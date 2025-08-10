@@ -44,110 +44,111 @@ public class WorldgenHelper : ModItem
 
 		if (player.ItemAnimationJustStarted)
 		{
-			//if (AvalonGlobalTile.TileVisibilityState < (int)AvalonGlobalTile.TileVisibilityStateEnum.OnlyTiles)
-			//{
-			//	AvalonGlobalTile.TileVisibilityState++;
-			//}
-			//else
-			//{
-			//	AvalonGlobalTile.TileVisibilityState = 0;
-			//}
+			WorldGeneration.Biomes.Basalt.PlaceBasalt();
+			////if (AvalonGlobalTile.TileVisibilityState < (int)AvalonGlobalTile.TileVisibilityStateEnum.OnlyTiles)
+			////{
+			////	AvalonGlobalTile.TileVisibilityState++;
+			////}
+			////else
+			////{
+			////	AvalonGlobalTile.TileVisibilityState = 0;
+			////}
 
-			#region Sky Castle
-			// with these parameters, the top floor will always have space for two of the hidden rooms (technically more, but at least 2)
-			// these guaranteed free spots should be checked for after the middle floors though, so that it's likely that at least 1 of the rooms generates in those instead
+			//#region Sky Castle
+			//// with these parameters, the top floor will always have space for two of the hidden rooms (technically more, but at least 2)
+			//// these guaranteed free spots should be checked for after the middle floors though, so that it's likely that at least 1 of the rooms generates in those instead
 
-			(bool X, bool Y) smallWorld = (Main.maxTilesX < WorldGen.WorldSizeMediumX, Main.maxTilesY < WorldGen.WorldSizeMediumY);
-			//smallWorld = (true, true);
-			(bool X, bool Y) mediumWorld = (Main.maxTilesX is >= WorldGen.WorldSizeMediumX and < WorldGen.WorldSizeLargeX, Main.maxTilesY is >= WorldGen.WorldSizeMediumY and < WorldGen.WorldSizeLargeY);
-			//mediumWorld = (true, true);
-			//(bool X, bool Y) largeWorld = (smallWorld.Item1 == false && mediumWorld.Item1 == false, smallWorld.Item2 == false && mediumWorld.Item2 == false);
+			//(bool X, bool Y) smallWorld = (Main.maxTilesX < WorldGen.WorldSizeMediumX, Main.maxTilesY < WorldGen.WorldSizeMediumY);
+			////smallWorld = (true, true);
+			//(bool X, bool Y) mediumWorld = (Main.maxTilesX is >= WorldGen.WorldSizeMediumX and < WorldGen.WorldSizeLargeX, Main.maxTilesY is >= WorldGen.WorldSizeMediumY and < WorldGen.WorldSizeLargeY);
+			////mediumWorld = (true, true);
+			////(bool X, bool Y) largeWorld = (smallWorld.Item1 == false && mediumWorld.Item1 == false, smallWorld.Item2 == false && mediumWorld.Item2 == false);
 
 
-			//int totalSegments = Main.maxTilesX < 6300 ? /*small: */ 10 : (Main.maxTilesX < 8400 ? /*medium: */ 14 : /*large: */ 16);
-			//int lowerHallsFloorCount = Main.maxTilesY < 1800 ? /*small: */ 1 : (Main.maxTilesY < 2400 ? /*medium: */ 1 : /*large: */ 2);
+			////int totalSegments = Main.maxTilesX < 6300 ? /*small: */ 10 : (Main.maxTilesX < 8400 ? /*medium: */ 14 : /*large: */ 16);
+			////int lowerHallsFloorCount = Main.maxTilesY < 1800 ? /*small: */ 1 : (Main.maxTilesY < 2400 ? /*medium: */ 1 : /*large: */ 2);
+			////int middleHallsFloorCount = 2;
+			////int upperHallsFloorCount = Main.maxTilesY < 1800 ? /*small: */ 1 : (Main.maxTilesY < 2400 ? /*medium: */ 2 : /*large: */ 2);
+
+			//int totalSegments = smallWorld.X ? 12 : (mediumWorld.X ? 14 : 16);
+			//int lowerHallsFloorCount = smallWorld.Y ? 1 : (mediumWorld.Y ? 1 : 2);
 			//int middleHallsFloorCount = 2;
-			//int upperHallsFloorCount = Main.maxTilesY < 1800 ? /*small: */ 1 : (Main.maxTilesY < 2400 ? /*medium: */ 2 : /*large: */ 2);
+			//int upperHallsFloorCount = smallWorld.Y ? 1 : (mediumWorld.Y ? 2 : 2);
 
-			int totalSegments = smallWorld.X ? 12 : (mediumWorld.X ? 14 : 16);
-			int lowerHallsFloorCount = smallWorld.Y ? 1 : (mediumWorld.Y ? 1 : 2);
-			int middleHallsFloorCount = 2;
-			int upperHallsFloorCount = smallWorld.Y ? 1 : (mediumWorld.Y ? 2 : 2);
+			//// chance that a dividing wall will be created for each cell, given the below conditions are satisfied
+			//int wallChanceDenominator = 8;
+			//// how many vertical dividing walls are on each floor
+			//int maxWallsPerFloor = smallWorld.X ? 1 : 2;
+			//int topFloorMaxWalls = smallWorld.X ? 0 : 2;
+			//// the minimum gap in cells between dividing walls
+			//int minGapBetweenWalls = 5;
+			//// pretty sure these next two values are not working properly rn, I'll just fix it later
+			//// used for the far left side of the structure
+			//int initialGapBetweenWalls = 2;
+			//// used for the far right side of the structure
+			//int finalGapBetweenWalls = 2;
 
-			// chance that a dividing wall will be created for each cell, given the below conditions are satisfied
-			int wallChanceDenominator = 8;
-			// how many vertical dividing walls are on each floor
-			int maxWallsPerFloor = smallWorld.X ? 1 : 2;
-			int topFloorMaxWalls = smallWorld.X ? 0 : 2;
-			// the minimum gap in cells between dividing walls
-			int minGapBetweenWalls = 5;
-			// pretty sure these next two values are not working properly rn, I'll just fix it later
-			// used for the far left side of the structure
-			int initialGapBetweenWalls = 2;
-			// used for the far right side of the structure
-			int finalGapBetweenWalls = 2;
+			//initialGapBetweenWalls = Math.Clamp(initialGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
+			//finalGapBetweenWalls = Math.Clamp(finalGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
 
-			initialGapBetweenWalls = Math.Clamp(initialGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
-			finalGapBetweenWalls = Math.Clamp(finalGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
+			////WorldGeneration.Structures.ChainedArrayBuilder.NewChainedStructure(x, y, totalSegments, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, wallChanceDenominator, maxWallsPerFloor, topFloorMaxWalls, minGapBetweenWalls, initialGapBetweenWalls, finalGapBetweenWalls);
+			//#endregion Sky Castle
 
-			//WorldGeneration.Structures.ChainedArrayBuilder.NewChainedStructure(x, y, totalSegments, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, wallChanceDenominator, maxWallsPerFloor, topFloorMaxWalls, minGapBetweenWalls, initialGapBetweenWalls, finalGapBetweenWalls);
-			#endregion Sky Castle
+			////Tile tile = Framing.GetTileSafely(x, y);
+			////tile.LiquidType = LiquidID.Water;
+			////tile.LiquidAmount++;
+			////Main.NewText(tile.LiquidAmount);
 
-			//Tile tile = Framing.GetTileSafely(x, y);
-			//tile.LiquidType = LiquidID.Water;
-			//tile.LiquidAmount++;
-			//Main.NewText(tile.LiquidAmount);
+			//// 64, then 1px per 16
 
-			// 64, then 1px per 16
+			////for (int i = 0; i < Main.item.Length - 1; i++)
+			////{
+			////	if (Main.item[i].type > ItemID.None)
+			////	{
+			////		Main.NewText(Main.item[i].position + " _ " + i);
+			////		player.Center = Main.item[i].position;
+			////		i = Main.item.Length;
+			////	}
+			////}
+			////Contagion.ContagionRunner(x, y);
+			////AvalonSpecialSeedsGenSystem.GenerateSpawnArea(x, y);
+			////WorldGeneration.Structures.IceShrine.Generate(x, y);
+			////WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
+			////WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);
+			////Crystals(x, y);
+			////World.Biomes.CrystalMines.Place(new Point(x, y));
 
-			//for (int i = 0; i < Main.item.Length - 1; i++)
-			//{
-			//	if (Main.item[i].type > ItemID.None)
-			//	{
-			//		Main.NewText(Main.item[i].position + " _ " + i);
-			//		player.Center = Main.item[i].position;
-			//		i = Main.item.Length;
-			//	}
-			//}
-			//Contagion.ContagionRunner(x, y);
-			//AvalonSpecialSeedsGenSystem.GenerateSpawnArea(x, y);
-			//WorldGeneration.Structures.IceShrine.Generate(x, y);
-			//WorldGeneration.Structures.TuhrtlOutpost.Outpost(x, y);
-			//WorldGeneration.Structures.LeafTrap.CreateLargeLeafTrap(x, y);
-			//Crystals(x, y);
-			//World.Biomes.CrystalMines.Place(new Point(x, y));
+			////WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
 
-			//WorldGeneration.Structures.Nest.CreateWaspNest(x, y);
-
-			//WorldGeneration.Structures.LavaOcean.MakeLavaLake(x, y);
-			//WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
+			////WorldGeneration.Structures.LavaOcean.MakeLavaLake(x, y);
+			////WorldGeneration.Structures.LavaShrine.NewLavaShrine(x - 29, y - 10);
 
 
-			//int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
-			//Main.item[rift].velocity *= 0f;
-			//Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
+			////int rift = Item.NewItem(Item.GetSource_TileInteraction(x, y), x * 16, y * 16, 8, 8, ModContent.ItemType<Accessories.Hardmode.OreRift>());
+			////Main.item[rift].velocity *= 0f;
+			////Main.item[rift].GetGlobalItem<AvalonGlobalItemInstance>().RiftTimeLeft = 300;
 
-			//MakeSpike(x, y, 15, 8, -1);
-			//MakeSpike(x, y, 22, 13, 1);
-			//int width = 13;
-			//int height = WorldGen.genRand.Next(15, 22);
-			//Underworld.MakeSpike(x, y, height - 2, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
-			//Underworld.MakeSpike(x, y, height, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
-			//Main.NewText($"height: {height}");
-			//MakeSpike(x, y, height, width, -1);
-			//MakeSpike(x, y, height - 3, width);
-			//WorldGeneration.Utils.MakeCircle2(x, y, (int)((height - 1) * 0.4f) - 2, ModContent.TileType<SkyBrick>(), ModContent.TileType<SkyBrick>());
-			//WorldGeneration.Utils.MakeCircle2(x, y, 1, ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>());
-			//Main.NewText(WorldGen.WorldSizeMediumX);
-			//Main.NewText(Main.maxTilesX);
+			////MakeSpike(x, y, 15, 8, -1);
+			////MakeSpike(x, y, 22, 13, 1);
+			////int width = 13;
+			////int height = WorldGen.genRand.Next(15, 22);
+			////Underworld.MakeSpike(x, y, height - 2, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), 1);
+			////Underworld.MakeSpike(x, y, height, width, (ushort)ModContent.TileType<CaesiumOre>(), (ushort)ModContent.TileType<CaesiumCrystal>(), -1);
+			////Main.NewText($"height: {height}");
+			////MakeSpike(x, y, height, width, -1);
+			////MakeSpike(x, y, height - 3, width);
+			////WorldGeneration.Utils.MakeCircle2(x, y, (int)((height - 1) * 0.4f) - 2, ModContent.TileType<SkyBrick>(), ModContent.TileType<SkyBrick>());
+			////WorldGeneration.Utils.MakeCircle2(x, y, 1, ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>());
+			////Main.NewText(WorldGen.WorldSizeMediumX);
+			////Main.NewText(Main.maxTilesX);
 
-			//Tile targetTile = Main.tile[x, y + 1];
-			Main.NewText((int)1.5f + " _ " + (int)-1.5f);
-			//Main.NewText(TileLoader.GetTile(targetTile.TileType).GetType().GetType());
+			////Tile targetTile = Main.tile[x, y + 1];
+			//Main.NewText((int)1.5f + " _ " + (int)-1.5f);
+			////Main.NewText(TileLoader.GetTile(targetTile.TileType).GetType().GetType());
 
-			//Main.NewText(FindDerivedTypes(Assembly.GetCallingAssembly(), typeof(ModHerb)));
-			//Main.NewText(typeof(Barfbush).BaseType);
-			//Main.NewText(TileLoader.GetTile(Main.tile[x, y].TileType).GetType().BaseType);
+			////Main.NewText(FindDerivedTypes(Assembly.GetCallingAssembly(), typeof(ModHerb)));
+			////Main.NewText(typeof(Barfbush).BaseType);
+			////Main.NewText(TileLoader.GetTile(Main.tile[x, y].TileType).GetType().BaseType);
 		}
 		return false;
 	}

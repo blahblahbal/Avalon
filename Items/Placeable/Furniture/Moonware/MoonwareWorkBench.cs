@@ -1,4 +1,5 @@
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.Moonware;
@@ -16,6 +17,7 @@ public class MoonwareWorkBench : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.MoonplateBlock>(), 10)
+			.AddTile(TileID.SkyMill)
 			.Register();
 	}
 }

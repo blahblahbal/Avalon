@@ -9902,6 +9902,11 @@ Mods: {
 				DisplayName: Moonware Work Bench
 				Tooltip: ""
 			}
+
+			MoonplateClock: {
+				DisplayName: Moonplate Clock
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
