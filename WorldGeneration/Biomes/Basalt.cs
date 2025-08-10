@@ -2,10 +2,7 @@
 using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,7 +13,7 @@ namespace Avalon.WorldGeneration.Biomes;
 internal class Basalt
 {
 	private static readonly int[] blacklistedTiles = new int[] { 225, 41, 43, 44, 226, 203, 112, 25, 151, ModContent.TileType<TuhrtlBrick>(),
-            ModContent.TileType<OrangeBrick>(), ModContent.TileType<PurpleBrick>(), ModContent.TileType<CrackedOrangeBrick>(), TileID.Dirt, TileID.Stone,
+			ModContent.TileType<OrangeBrick>(), ModContent.TileType<PurpleBrick>(), ModContent.TileType<CrackedOrangeBrick>(), TileID.Dirt, TileID.Stone,
 			ModContent.TileType<CrackedPurpleBrick>(), TileID.WoodenSpikes, ModContent.TileType<ImperviousBrick>(), ModContent.TileType<SavannaGrass>(),
 			ModContent.TileType<VenomSpike>(), TileID.Mud, TileID.JungleGrass, TileID.MushroomGrass, ModContent.TileType<Loam>(),
 			TileID.Silt };
@@ -32,8 +29,8 @@ internal class Basalt
 		WallID.PinkDungeonTileUnsafe,
 		WallID.PinkDungeonUnsafe,
 		WallID.LihzahrdBrickUnsafe,
-        ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>(),
-        ModContent.WallType<Walls.OrangeBrickUnsafe>(),
+		ModContent.WallType<Walls.TuhrtlBrickWallUnsafe>(),
+		ModContent.WallType<Walls.OrangeBrickUnsafe>(),
 		ModContent.WallType<Walls.OrangeTiledUnsafe>(),
 		ModContent.WallType<Walls.OrangeSlabUnsafe>(),
 		ModContent.WallType<Walls.PurpleBrickUnsafe>(),
@@ -48,16 +45,16 @@ internal class Basalt
 	{
 		//if (GenSystem.CaesiumSide == 1)
 		{
-			Point top = new Point(Main.maxTilesX - 20, WorldGen.genRand.Next(Main.maxTilesY - 400, Main.maxTilesY - 385));
-			Point left = new Point(Main.maxTilesX - (Main.maxTilesX / 5), Main.maxTilesY - 200);
+			Point highestPoint = new Point(20, WorldGen.genRand.Next(Main.maxTilesY - 400, Main.maxTilesY - 385));
+			Point lowestPoint = new Point((Main.maxTilesX / 5), Main.maxTilesY - 200);
 			float amplitude = 10f;
 			int waveCount = 4;
 
-			Vector2 path = left.ToVector2() - top.ToVector2();
+			Vector2 path = lowestPoint.ToVector2() - highestPoint.ToVector2();
 			float length = path.Length();
 			Vector2 direction = Vector2.Normalize(path);
 			Vector2 normal = new Vector2(-direction.Y, direction.X);
-			int resolution = (int)length;
+			int resolution = Math.Abs(lowestPoint.X - highestPoint.X);
 
 			// Precompute sine wave heights at each x position
 			int[] sineWaveHeights = new int[Main.maxTilesX];
@@ -66,21 +63,32 @@ internal class Basalt
 				sineWaveHeights[x] = Main.maxTilesY; // Default to bottom of world
 			}
 
-			for (int i = 0; i <= resolution; i++)
+			for (int waveX = 0; waveX <= resolution; waveX++)
 			{
-				float t = (float)i / resolution;
-				Vector2 pointOnLine = top.ToVector2() + direction * (t * length);
+				float t = (float)waveX / resolution;
+				float pointOnLine = highestPoint.Y + direction.Y * (t * length);
 				float sineValue = (float)Math.Sin(t * waveCount * MathHelper.TwoPi);
-				Vector2 offset = normal * (sineValue * amplitude);
-				Vector2 wavePoint = pointOnLine + offset;
+				float offset = normal.Y * (sineValue * amplitude);
+				float wavePoint = pointOnLine + offset;
 
-				int waveX = (int)wavePoint.X;
-				int waveY = (int)wavePoint.Y;
+				int heightMod = (waveX % 6) + WorldGen.genRand.Next(4) + 1;
+				int waveY = (int)wavePoint + WorldGen.genRand.Next(-(heightMod / 3), (heightMod / 3) + 1);
 
 				if (waveX >= 0 && waveX < Main.maxTilesX)
 				{
-					if (waveY < sineWaveHeights[waveX])
-						sineWaveHeights[waveX] = waveY;
+					int curPosX = highestPoint.X;
+					if (lowestPoint.X < highestPoint.X)
+					{
+						curPosX -= waveX;
+					}
+					else
+					{
+						curPosX += waveX;
+					}
+					if (waveY < sineWaveHeights[curPosX])
+					{
+						sineWaveHeights[curPosX] = waveY;
+					}
 				}
 			}
 
