@@ -91,6 +91,10 @@ namespace Avalon.Hooks
 					finalB *= 0.1f;
 					return true;
 				}
+				else
+				{
+					return false;
+				}
 			}
 			return false;
 		}
