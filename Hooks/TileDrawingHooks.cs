@@ -4,13 +4,10 @@ using Avalon.Tiles;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Ores;
 using Microsoft.Xna.Framework;
-using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using Steamworks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
-using Terraria.Graphics;
 using Terraria.ModLoader;
 
 namespace Avalon.Hooks
@@ -53,8 +50,8 @@ namespace Avalon.Hooks
 			int newColorvar = -1;
 
 			c.GotoNext(MoveType.After, i => i.MatchRet(), i => i.MatchCall<Color>("get_White"), i => i.MatchStloc(out newColorvar));
-			c.EmitLdarg(1); //x
-			c.EmitLdarg(2); //y
+			c.EmitLdarg(2); //x
+			c.EmitLdarg(1); //y
 			c.EmitLdarg(3); //tileCache
 			c.EmitLdarg(4); //typeCache
 			c.EmitLdloca(newColorvar); //ref newColor
@@ -76,25 +73,19 @@ namespace Avalon.Hooks
 					tileShineColor = new Color(255, 255, 0, 255);
 				}
 
-				if (i > Main.maxTilesX) i = Main.maxTilesX;
-				if (j > Main.maxTilesY) i = Main.maxTilesY;
-				if (i < 0) i = 0;
-				if (j > 0) i = 0;
-
-				// index oob error, had to comment out
 				// gems
-				//if (typeCache == ModContent.TileType<Tourmaline>() || (typeCache == ModContent.TileType<PlacedGems>() && Main.tile[i, j].TileFrameX / 18 == 3))
-				//{
-				//	tileShineColor = new Color(0, 255, 255, 255);
-				//}
-				//if (typeCache == ModContent.TileType<Peridot>() || (typeCache == ModContent.TileType<PlacedGems>() && Main.tile[i, j].TileFrameX / 18 == 4))
-				//{
-				//	tileShineColor = new Color(235, 255, 0, 255);
-				//}
-				//if (typeCache == ModContent.TileType<Zircon>() || (typeCache == ModContent.TileType<PlacedGems>() && Main.tile[i, j].TileFrameX / 18 == 5))
-				//{
-				//	tileShineColor = new Color(255, 243, 235, 255);
-				//}
+				if (typeCache == ModContent.TileType<Tourmaline>() || (typeCache == ModContent.TileType<PlacedGems>() && tileCache.TileFrameX / 18 == 3))
+				{
+					tileShineColor = new Color(0, 255, 255, 255);
+				}
+				if (typeCache == ModContent.TileType<Peridot>() || (typeCache == ModContent.TileType<PlacedGems>() && tileCache.TileFrameX / 18 == 4))
+				{
+					tileShineColor = new Color(235, 255, 0, 255);
+				}
+				if (typeCache == ModContent.TileType<Zircon>() || (typeCache == ModContent.TileType<PlacedGems>() && tileCache.TileFrameX / 18 == 5))
+				{
+					tileShineColor = new Color(255, 243, 235, 255);
+				}
 
 				// misc
 				if (typeCache == ModContent.TileType<PlacedStaminaCrystal>())
