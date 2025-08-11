@@ -31,7 +31,7 @@ internal class Blood : ModLiquid
 		//This is the opacity of the liquid. How well you can see objects in the liquid.
 		//The SlopeOpacity property is different, as slopes do not render the same as a normal liquid tile
 		//DefaultOpacity in vanilla, can be found at "Terraria.GameContent.Liquid.LiquidRenderer.DEFAULT_OPACITY"
-		DefaultOpacity = 0.95f;
+		DefaultOpacity = 1f;
 		SlopeOpacity = 1f;
 		//To change the old liquid rendering opacity, please see the RetroDrawEffects override.
 

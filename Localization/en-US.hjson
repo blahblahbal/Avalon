@@ -9907,6 +9907,16 @@ Mods: {
 				DisplayName: Moonplate Clock
 				Tooltip: ""
 			}
+
+			MusicBoxContagionOtherworldly: {
+				DisplayName: Music Box Contagion Otherworldly
+				Tooltip: ""
+			}
+
+			MusicBoxUndergroundContagionOtherworldly: {
+				DisplayName: Music Box Underground Contagion Otherworldly
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

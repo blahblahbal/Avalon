@@ -12,13 +12,8 @@ namespace Avalon.WorldGeneration.Biomes;
 
 internal class Basalt
 {
-	private static readonly int[] blacklistedTiles = new int[] { 225, 41, 43, 44, 226, 203, 112, 25, 151, ModContent.TileType<TuhrtlBrick>(),
-			ModContent.TileType<OrangeBrick>(), ModContent.TileType<PurpleBrick>(), ModContent.TileType<CrackedOrangeBrick>(), TileID.Dirt, TileID.Stone,
-			ModContent.TileType<CrackedPurpleBrick>(), TileID.WoodenSpikes, ModContent.TileType<ImperviousBrick>(), ModContent.TileType<SavannaGrass>(),
-			ModContent.TileType<VenomSpike>(), TileID.Mud, TileID.JungleGrass, TileID.MushroomGrass, ModContent.TileType<Loam>(),
-			TileID.Silt };
-	private static readonly int[] blacklistedWalls = new int[]
-	{
+	private static readonly int[] blacklistedWalls =
+	[
 		WallID.BlueDungeonSlabUnsafe,
 		WallID.BlueDungeonTileUnsafe,
 		WallID.BlueDungeonUnsafe,
@@ -39,7 +34,10 @@ internal class Basalt
 		ModContent.WallType<Walls.ImperviousBrickWallUnsafe>(),
 		WallID.HiveUnsafe,
 		ModContent.WallType<Walls.NestWall>(),
-	};
+		WallID.Planked,
+		WallID.GraniteUnsafe,
+		WallID.MarbleUnsafe
+	];
 
 	public static void PlaceBasalt()
 	{
@@ -98,104 +96,17 @@ internal class Basalt
 				int waveY = sineWaveHeights[x];
 				for (int y = waveY; y < Main.maxTilesY - 180; y++)
 				{
-					if (Main.tile[x, y].TileType == TileID.Ash && Main.tile[x, y].HasTile) continue;
-					if (Main.tile[x, y].HasTile && (blacklistedTiles.Contains(Main.tile[x, y].TileType) || TileID.Sets.Ore[Main.tile[x, y].TileType]))
+					if ((Main.tile[x, y].TileType == TileID.Ash || Main.tile[x, y].TileType == TileID.AshGrass ||
+						Main.tile[x, y].TileType == TileID.MinecartTrack) && Main.tile[x, y].HasTile)
+						continue;
+					if (Main.tile[x, y].HasTile &&
+						(Main.tile[x, y].TileType == TileID.Stone || Main.tile[x, y].TileType == TileID.Dirt || Main.tileMoss[Main.tile[x, y].TileType]))
 					{
-						WorldGen.PlaceTile(x, y, ModContent.TileType<Tiles.Basalt>(), mute: true, forced: true);
+						WorldGen.PlaceTile(x, y, ModContent.TileType<BasaltBlock>(), mute: true, forced: true);
 					}
 					if (!blacklistedWalls.Contains(Main.tile[x, y].WallType))
 						WorldGen.KillWall(x, y);
 				}
-			}
-
-			// Fill everything below sine wave with terrain
-			for (int x = 0; x < Main.maxTilesX; x++)
-			{
-				int waveY = sineWaveHeights[x];
-				for (int y = waveY; y < Main.maxTilesY - 180; y++)
-				{
-					if (Main.tile[x, y].TileType == TileID.Ash && Main.tile[x, y].HasTile) continue;
-					if (Main.tile[x, y].HasTile && (blacklistedTiles.Contains(Main.tile[x, y].TileType) || TileID.Sets.Ore[Main.tile[x, y].TileType]))
-					{
-						WorldGen.PlaceTile(x, y, ModContent.TileType<Tiles.Basalt>(), mute: true, forced: true);
-					}
-					if (!blacklistedWalls.Contains(Main.tile[x, y].WallType))
-						WorldGen.KillWall(x, y);
-				}
-			}
-			/*
-			int numCaves = 150; // Total cave "worms"
-			for (int i = 0; i < numCaves; i++)
-			{
-				// Start somewhere below the sine wave
-				int startX = WorldGen.genRand.Next(Main.maxTilesX - (Main.maxTilesX / 5), Main.maxTilesX - 20);
-				int startY = sineWaveHeights[startX] + WorldGen.genRand.Next(20, 120);
-
-				CarveTunnel(startX, startY, WorldGen.genRand);
-			}*/
-
-			// Add scattered ovaloid caves
-			int numOvaloidCaves = 80;
-			for (int i = 0; i < numOvaloidCaves; i++)
-			{
-				int centerX = WorldGen.genRand.Next(Main.maxTilesX / 4, 3 * Main.maxTilesX / 4);
-				int centerY = WorldGen.genRand.Next(Main.maxTilesY / 3, (int)(Main.maxTilesY * 0.85f));
-				int radiusX = WorldGen.genRand.Next(6, 12);
-				int radiusY = WorldGen.genRand.Next(4, 8);
-
-				CarveOvaloidCave(centerX, centerY, radiusX, radiusY, WorldGen.genRand);
-
-				// Optional: Lava pool in some of them
-				if (centerY > Main.maxTilesY * 0.6 && WorldGen.genRand.NextFloat() < 0.25f)
-				{
-					PlaceLavaPool(centerX, centerY + radiusY / 2, WorldGen.genRand);
-				}
-			}
-		}
-	}
-
-	private static void CarveOvaloidCave(int centerX, int centerY, int radiusX, int radiusY, UnifiedRandom rand)
-	{
-		for (int dx = -radiusX; dx <= radiusX; dx++)
-		{
-			for (int dy = -radiusY; dy <= radiusY; dy++)
-			{
-				int x = centerX + dx;
-				int y = centerY + dy;
-
-				if (x < 0 || x >= Main.maxTilesX || y < 0 || y >= Main.maxTilesY) continue;
-
-				// Ellipse equation: (x^2 / a^2) + (y^2 / b^2) <= 1
-				float normX = dx / (float)radiusX;
-				float normY = dy / (float)radiusY;
-
-				float ellipseVal = normX * normX + normY * normY;
-
-				if (ellipseVal <= 1f + rand.NextFloat(-0.15f, 0.1f)) // Add some fuzziness
-				{
-					WorldGen.KillTile(x, y, noItem: true);
-				}
-			}
-		}
-	}
-	private static void PlaceLavaPool(int x, int y, UnifiedRandom rand)
-	{
-		int width = rand.Next(3, 7);
-		int height = rand.Next(2, 4);
-
-		for (int i = -width / 2; i <= width / 2; i++)
-		{
-			for (int j = 0; j < height; j++)
-			{
-				int lx = x + i;
-				int ly = y + j;
-
-				if (lx < 0 || lx >= Main.maxTilesX || ly < 0 || ly >= Main.maxTilesY) continue;
-
-				Tile tile = Main.tile[lx, ly];
-				tile.LiquidType = LiquidID.Lava;
-				tile.LiquidAmount = 255;
-				tile.HasTile = false; // Remove any tile in lava space
 			}
 		}
 	}

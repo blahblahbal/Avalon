@@ -247,7 +247,8 @@ public class AvalonGlobalItem : GlobalItem
 	}
 	public override void PostUpdate(Item item)
 	{
-		if (CollisionHooks.AcidCollision(item.position, item.width, item.height))
+		if (CollisionHooks.AcidCollision(item.position, item.width, item.height) &&
+			item.rare == ItemRarityID.White && !ItemID.Sets.IsLavaImmuneRegardlessOfRarity[item.type])
 		{
 			SoundEngine.PlaySound(SoundID.LiquidsWaterLava, item.position);
 			SoundEngine.PlaySound(SoundID.SplashWeak, item.position);
@@ -271,10 +272,7 @@ public class AvalonGlobalItem : GlobalItem
 				Main.dust[num8].alpha = 100;
 				Main.dust[num8].noGravity = true;
 			}
-			if (item.rare == ItemRarityID.White && !ItemID.Sets.IsLavaImmuneRegardlessOfRarity[item.type])
-			{
-				item.TurnToAir();
-			}
+			item.TurnToAir();
 		}
 		//if (item.lavaWet && item.position.Y / 16 > Main.maxTilesY - 190)
 		//{

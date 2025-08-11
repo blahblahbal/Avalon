@@ -1,4 +1,3 @@
-using Avalon.Backgrounds;
 using Avalon.Systems;
 using Terraria;
 using Terraria.ID;
@@ -19,7 +18,7 @@ public class UndergroundContagionIce : ModBiome
 	{
 		get
 		{
-			return ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Contagion") : MusicID.Crimson;
+			return ExxoAvalonOrigins.MusicMod != null ? Main.swapMusic ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/UndergroundContagionEnnway") : MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/UndergroundContagion") : MusicID.UndergroundCrimson;
 		}
 	}
 	//public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle

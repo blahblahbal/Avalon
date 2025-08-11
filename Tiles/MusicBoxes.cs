@@ -73,7 +73,13 @@ public class MusicBoxes : ModTile
             case 11:
                 item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxDesertBeakOtherworldly>();
                 break;
-        }
+			case 12:
+				item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxContagionOtherworldly>();
+				break;
+			case 13:
+				item = ModContent.ItemType<Items.Placeable.MusicBoxes.MusicBoxUndergroundContagionOtherworldly>();
+				break;
+		}
         yield return new Item(item);
     }
     public override void HitWire(int i, int j)

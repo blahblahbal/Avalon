@@ -38,7 +38,7 @@ internal class Acid : ModLiquid
 	{
 		if (Main.instance.IsActive && !Main.gamePaused && Main.tile[i, j].LiquidType == Type)
 		{
-			if (Main.tile[i, j].LiquidAmount > 200 && Main.rand.NextBool(1))
+			if (Main.tile[i, j].LiquidAmount > 200 && Main.rand.NextBool(350))
 			{
 				int D = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<AcidLiquidSplash>());
 			}
@@ -59,7 +59,6 @@ internal class Acid : ModLiquid
 	}
 	public override bool UpdateLiquid(int i, int j, Liquid liquid)
 	{
-		
 		if (Main.tile[i, j].LiquidType == Type && Main.tile[i, j].LiquidAmount > 64 && AvalonWorld.AcidDestroyTilesTimer % 16 == 0)
 		{
 			if (TileID.Sets.CanBeDugByShovel[Main.tile[i, j + 1].TileType] && Main.tile[i, j + 1].HasTile)
