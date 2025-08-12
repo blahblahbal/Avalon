@@ -520,7 +520,7 @@ public class SavannaAltBiome : AltBiome
 								(Main.tile[num177, num178].WallType == WallID.DirtUnsafe || Main.tile[num177, num178].WallType == WallID.Cave6Unsafe ||
 								Main.tile[num177, num178].WallType == WallID.MudUnsafe))
 							{
-								Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.TropicalMudWall>();
+								Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.LoamWall>();
 							}
 						}
 					}

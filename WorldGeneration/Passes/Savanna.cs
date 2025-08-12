@@ -9,6 +9,13 @@ using Avalon.Common;
 using Avalon.Items;
 using Microsoft.Xna.Framework;
 using Terraria.Localization;
+using Terraria.GameContent.Biomes;
+using Avalon.ModSupport;
+using Avalon.WorldGeneration.Enums;
+using Avalon.Tiles.Savanna;
+using ReLogic.Utilities;
+using Avalon.Hooks;
+using System.Collections.Generic;
 
 namespace Avalon.WorldGeneration.Passes;
 
@@ -395,4 +402,213 @@ internal class Savanna
         WorldGen_ScanTileColumnAndRemoveClumps = null;
     }
     #endregion
+}
+
+internal class SavannaPassHook : ModHook
+{
+	private readonly List<ushort> replaceableTiles = [ (ushort)ModContent.TileType<Loam>() ];
+
+	FieldInfo? worldScale = typeof(JunglePass).GetField("_worldScale", BindingFlags.Instance | BindingFlags.NonPublic);
+	protected override void Apply()
+	{
+		On_JunglePass.ApplyPass += On_JunglePass_ApplyPass;
+		IL_WorldGen.TileRunner += IL_WorldGen_TileRunner;
+	}
+
+
+
+	private void IL_WorldGen_TileRunner(MonoMod.Cil.ILContext il)
+	{
+		Utilities.AddAlternativeIdChecks(il, (int)TileID.Mud, id => id >= 0 && Data.Sets.TileSets.Loam[id]);
+	}
+
+	private void On_JunglePass_ApplyPass(On_JunglePass.orig_ApplyPass orig, JunglePass self, GenerationProgress progress, GameConfiguration configuration)
+	{
+		if (!AltLibrarySupport.Enabled && ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Savanna)
+		{
+			progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.Generating");
+			
+			worldScale?.SetValue(self, Main.maxTilesX / 4200.0 * 1.5);
+			double ws = (double)worldScale?.GetValue(self);
+
+			Point val = CreateStartPoint();
+			int x = val.X;
+			int y = val.Y;
+			Point zero = Point.Zero;
+			ApplyRandomMovement(ref x, ref y, 100, 100, self);
+			zero.X += x;
+			zero.Y += y;
+			PlaceFirstPassMud(x, y, 3, self);
+			PlaceGemsAt(x, y, 63, 2, self);
+			progress.Set(0.15);
+			ApplyRandomMovement(ref x, ref y, 250, 150, self);
+			zero.X += x;
+			zero.Y += y;
+			PlaceFirstPassMud(x, y, 0, self);
+			PlaceGemsAt(x, y, 65, 2, self);
+			progress.Set(0.3);
+			int oldX = x;
+			int oldY = y;
+			ApplyRandomMovement(ref x, ref y, 400, 150, self);
+			zero.X += x;
+			zero.Y += y;
+			PlaceFirstPassMud(x, y, -3, self);
+			PlaceGemsAt(x, y, 67, 2, self);
+			progress.Set(0.45);
+			x = zero.X / 3;
+			y = zero.Y / 3;
+			int num = WorldGen.genRand.Next((int)(400.0 * (double)worldScale?.GetValue(self)), (int)(600.0 * (double)worldScale?.GetValue(self)));
+			int num2 = (int)(25.0 * (double)worldScale?.GetValue(self));
+			x = Terraria.Utils.Clamp(x, GenVars.leftBeachEnd + num / 2 + num2, GenVars.rightBeachStart - num / 2 - num2);
+			GenVars.mudWall = true;
+			WorldGen.TileRunner(x, y, num, 75, ModContent.TileType<Loam>(), addTile: false, 0.0, -20.0, noYChange: true);
+			GenerateTunnelToSurface(x, y);
+			GenVars.mudWall = false;
+			CreateCaves();
+			progress.Set(0.6);
+		}
+		else orig.Invoke(self, progress, configuration);
+	}
+	private void GenerateTunnelToSurface(int i, int j)
+	{
+		double num = WorldGen.genRand.Next(5, 11);
+		Vector2D vector2D = new Vector2D
+		{
+			X = i,
+			Y = j
+		};
+		Vector2D vector2D2 = new Vector2D
+		{
+			X = (double)WorldGen.genRand.Next(-10, 11) * 0.1,
+			Y = (double)WorldGen.genRand.Next(10, 20) * 0.1
+		};
+		int num2 = 0;
+		bool flag = true;
+		while (flag)
+		{
+			if (vector2D.Y < Main.worldSurface)
+			{
+				if (WorldGen.drunkWorldGen)
+				{
+					flag = false;
+				}
+				int value = (int)vector2D.X;
+				int value2 = (int)vector2D.Y;
+				value = Terraria.Utils.Clamp(value, 10, Main.maxTilesX - 10);
+				value2 = Terraria.Utils.Clamp(value2, 10, Main.maxTilesY - 10);
+				if (value2 < 5)
+				{
+					value2 = 5;
+				}
+				if (Main.tile[value, value2].WallType == 0 && !Main.tile[value, value2].HasTile && Main.tile[value, value2 - 3].WallType == 0 && !Main.tile[value, value2 - 3].HasTile && Main.tile[value, value2 - 1].WallType == 0 && !Main.tile[value, value2 - 1].HasTile && Main.tile[value, value2 - 4].WallType == 0 && !Main.tile[value, value2 - 4].HasTile && Main.tile[value, value2 - 2].WallType == 0 && !Main.tile[value, value2 - 2].HasTile && Main.tile[value, value2 - 5].WallType == 0 && !Main.tile[value, value2 - 5].HasTile)
+				{
+					flag = false;
+				}
+			}
+			GenVars.JungleX = (int)vector2D.X;
+			num += (double)WorldGen.genRand.Next(-20, 21) * 0.1;
+			if (num < 5.0)
+			{
+				num = 5.0;
+			}
+			if (num > 10.0)
+			{
+				num = 10.0;
+			}
+			int value3 = (int)(vector2D.X - num * 0.5);
+			int value4 = (int)(vector2D.X + num * 0.5);
+			int value5 = (int)(vector2D.Y - num * 0.5);
+			int value6 = (int)(vector2D.Y + num * 0.5);
+			int num3 = Terraria.Utils.Clamp(value3, 10, Main.maxTilesX - 10);
+			value4 = Terraria.Utils.Clamp(value4, 10, Main.maxTilesX - 10);
+			value5 = Terraria.Utils.Clamp(value5, 10, Main.maxTilesY - 10);
+			value6 = Terraria.Utils.Clamp(value6, 10, Main.maxTilesY - 10);
+			for (int k = num3; k < value4; k++)
+			{
+				for (int l = value5; l < value6; l++)
+				{
+					if (Math.Abs((double)k - vector2D.X) + Math.Abs((double)l - vector2D.Y) < num * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015))
+					{
+						WorldGen.KillTile(k, l);
+					}
+				}
+			}
+			num2++;
+			if (num2 > 10 && WorldGen.genRand.Next(50) < num2)
+			{
+				num2 = 0;
+				int num4 = -2;
+				if (WorldGen.genRand.Next(2) == 0)
+				{
+					num4 = 2;
+				}
+				WorldGen.TileRunner((int)vector2D.X, (int)vector2D.Y, WorldGen.genRand.Next(3, 20), WorldGen.genRand.Next(10, 100), -1, addTile: false, num4);
+			}
+			vector2D += vector2D2;
+			vector2D2.Y += (double)WorldGen.genRand.Next(-10, 11) * 0.01;
+			if (vector2D2.Y > 0.0)
+			{
+				vector2D2.Y = 0.0;
+			}
+			if (vector2D2.Y < -2.0)
+			{
+				vector2D2.Y = -2.0;
+			}
+			vector2D2.X += (double)WorldGen.genRand.Next(-10, 11) * 0.1;
+			if (vector2D.X < (double)(i - 200))
+			{
+				vector2D2.X += (double)WorldGen.genRand.Next(5, 21) * 0.1;
+			}
+			if (vector2D.X > (double)(i + 200))
+			{
+				vector2D2.X -= (double)WorldGen.genRand.Next(5, 21) * 0.1;
+			}
+			if (vector2D2.X > 1.5)
+			{
+				vector2D2.X = 1.5;
+			}
+			if (vector2D2.X < -1.5)
+			{
+				vector2D2.X = -1.5;
+			}
+		}
+	}
+	private Point CreateStartPoint()
+	{
+		return new Point(GenVars.jungleOriginX, (int)((double)Main.maxTilesY + Main.rockLayer) / 2);
+	}
+	private void ApplyRandomMovement(ref int x, ref int y, int xRange, int yRange, JunglePass self)
+	{
+		x += WorldGen.genRand.Next((int)((double)(-xRange) * (double)worldScale?.GetValue(self)), 1 + (int)((double)xRange * (double)worldScale?.GetValue(self)));
+		y += WorldGen.genRand.Next((int)((double)(-yRange) * (double)worldScale?.GetValue(self)), 1 + (int)((double)yRange * (double)worldScale?.GetValue(self)));
+		y = Terraria.Utils.Clamp(y, (int)Main.rockLayer, Main.maxTilesY);
+	}
+	private void PlaceFirstPassMud(int x, int y, int xSpeedScale, JunglePass self)
+	{
+		GenVars.mudWall = true;
+		WorldGen.TileRunner(x, y, WorldGen.genRand.Next((int)(250.0 * (double)worldScale?.GetValue(self)), (int)(500.0 * (double)worldScale?.GetValue(self))), WorldGen.genRand.Next(50, 150), ModContent.TileType<Loam>(), addTile: true, GenVars.dungeonSide * xSpeedScale);
+		GenVars.mudWall = false;
+	}
+
+	private void PlaceGemsAt(int x, int y, ushort baseGem, int gemVariants, JunglePass self)
+	{
+		for (int i = 0; (double)i < 6.0 * (double)worldScale?.GetValue(self); i++)
+		{
+			WorldGen.TileRunner(x + WorldGen.genRand.Next(-(int)(125.0 * (double)worldScale?.GetValue(self)), (int)(125.0 * (double)worldScale?.GetValue(self))), y + WorldGen.genRand.Next(-(int)(125.0 * (double)worldScale?.GetValue(self)), (int)(125.0 * (double)worldScale?.GetValue(self))), WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(3, 8), WorldGen.genRand.Next(baseGem, baseGem + gemVariants));
+		}
+	}
+
+	private void CreateCaves()
+	{
+		for (int x = 0; x < Main.maxTilesX; x++)
+		{
+			for (int y = (int)Main.rockLayer; y < Main.maxTilesY - 200; y++)
+			{
+				if (replaceableTiles.Contains(Main.tile[x, y].TileType) && WorldGen.genRand.NextBool(800))
+				{
+					WorldGen.Cavinator(x, y, WorldGen.genRand.Next(10, 25));
+				}
+			}
+		}
+	}
 }

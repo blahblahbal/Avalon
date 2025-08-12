@@ -37,6 +37,7 @@ public class GenSystem : ModSystem
 				tasks.Insert(index + 1, new AvalonReset("Reset", 1000f));
 			}
 
+
 			//index = tasks.FindIndex(genpass => genpass.Name.Equals("Generate Ice Biome"));
 			//if (index != -1)
 			//{
@@ -52,7 +53,7 @@ public class GenSystem : ModSystem
 					if (index != -1)
 					{
 						// Replace corruption task with contagion task
-						tasks[index] = new Contagion("Corruption", 80f); //DONT RENAME THE PASS YOUR REPLACING BRUH
+						tasks[index] = new Contagion("Corruption", 80f); //DONT RENAME THE PASS YOU'RE REPLACING BRUH
 					}
 					index = tasks.FindIndex(genpass => genpass.Name.Equals("Altars"));
 					if (index != -1)
@@ -88,6 +89,7 @@ public class GenSystem : ModSystem
 							{
 								for (int j = 0; j < Main.maxTilesY; j++)
 								{
+									
 									if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Mud)
 									{
 										Main.tile[i, j].TileType = (ushort)tile;
@@ -165,7 +167,7 @@ public class GenSystem : ModSystem
 										(Main.tile[num177, num178].WallType == WallID.DirtUnsafe || Main.tile[num177, num178].WallType == WallID.Cave6Unsafe ||
 										Main.tile[num177, num178].WallType == WallID.MudUnsafe))
 									{
-										Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.TropicalMudWall>();
+										Main.tile[num177, num178].WallType = (ushort)ModContent.WallType<Walls.LoamWall>();
 									}
 								}
 							}

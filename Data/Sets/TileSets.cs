@@ -5,6 +5,7 @@ using Avalon.Items.Material.OreChunks;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Ores;
+using Avalon.Tiles.Savanna;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -21,6 +22,10 @@ namespace Avalon.Data.Sets
         };
 
         public static List<int> FiveOrePerBar = new() { TileID.Chlorophyte };
+
+		public static readonly bool[] Loam = TileID.Sets.Factory.CreateBoolSet(
+			ModContent.TileType<Loam>()
+		);
 
 		public static List<ushort> LivingBlocks = new()
         {
