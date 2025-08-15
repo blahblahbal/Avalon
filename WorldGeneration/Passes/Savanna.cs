@@ -6,7 +6,6 @@ using System.Reflection;
 using Terraria.ID;
 using System;
 using Avalon.Common;
-using Avalon.Items;
 using Microsoft.Xna.Framework;
 using Terraria.Localization;
 using Terraria.GameContent.Biomes;
@@ -16,11 +15,34 @@ using Avalon.Tiles.Savanna;
 using ReLogic.Utilities;
 using Avalon.Hooks;
 using System.Collections.Generic;
+using ModLiquidLib.ModLoader;
+using Avalon.ModSupport.MLL.Liquids;
 
 namespace Avalon.WorldGeneration.Passes;
 
 internal class Savanna
 {
+	public static void ReplaceLavaWithBlood(GenerationProgress progress, GameConfiguration config)
+	{
+		for (int x = 0; x < Main.maxTilesX; x++)
+		{
+			for (int y = (int)Main.rockLayer; y < Main.maxTilesY - 150; y++)
+			{
+				if (Main.tile[x, y].WallType == ModContent.WallType<Walls.NestWall>())
+				{
+					if (Main.tile[x, y].LiquidAmount > 0)
+					{
+						Main.tile[x, y].Liquid(LiquidLoader.LiquidType<Blood>());
+					}
+					if (WorldGen.genRand.NextBool(3))
+					{
+						Utils.PlaceCustomTight(x, y, (ushort)ModContent.TileType<NestStalac>());
+					}
+				}
+			}
+		}
+	}
+
     public static void TuhrtlOutpostReplaceTraps(GenerationProgress progress, GameConfiguration config)
     {
         for (int x = GenVars.tLeft - 20; x < GenVars.tRight + 20; x++)
@@ -190,7 +212,7 @@ internal class Savanna
             if (Main.tile[num407, num406].HasTile && Main.tile[num407, num406].TileType == (ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>() && GenVars.structures.CanPlace(new(num407, num406, 20, 14)))
             {
                 //flag30 = false;
-                Structures.TropicsSanctum.MakeSanctum(num407, num406);
+                Structures.SavannaSanctum.MakeSanctum(num407, num406);
                 GenVars.structures.AddProtectedStructure(new(num407, num406, 20, 14));
                 amount--;
             }
@@ -465,6 +487,7 @@ internal class SavannaPassHook : ModHook
 			GenerateTunnelToSurface(x, y);
 			GenVars.mudWall = false;
 			CreateCaves();
+			ReplaceJungleWalls();
 			progress.Set(0.6);
 		}
 		else orig.Invoke(self, progress, configuration);
@@ -598,15 +621,37 @@ internal class SavannaPassHook : ModHook
 		}
 	}
 
+	private void ReplaceJungleWalls()
+	{
+		for (int x = 0; x < Main.maxTilesX; x++)
+		{
+			for (int y = (int)Main.worldSurface; y < Main.maxTilesY - 180; y++)
+			{
+				if (Main.tile[x, y].WallType == WallID.JungleUnsafe)
+				{
+					Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.SavannaGrassWall>();
+				}
+				if (Main.tile[x, y].WallType == WallID.MudUnsafe)
+				{
+					Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.LoamWall>();
+				}
+			}
+		}
+	}
+
 	private void CreateCaves()
 	{
 		for (int x = 0; x < Main.maxTilesX; x++)
 		{
 			for (int y = (int)Main.rockLayer; y < Main.maxTilesY - 200; y++)
 			{
-				if (replaceableTiles.Contains(Main.tile[x, y].TileType) && WorldGen.genRand.NextBool(800))
+				if (replaceableTiles.Contains(Main.tile[x, y].TileType) && WorldGen.genRand.NextBool(750))
 				{
 					WorldGen.Cavinator(x, y, WorldGen.genRand.Next(10, 25));
+				}
+				if (Main.tile[x, y].WallType == WallID.JungleUnsafe)
+				{
+					Main.tile[x, y].WallType = (ushort)ModContent.WallType<Walls.SavannaGrassWall>();
 				}
 			}
 		}

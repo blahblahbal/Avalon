@@ -89,7 +89,6 @@ public class GenSystem : ModSystem
 							{
 								for (int j = 0; j < Main.maxTilesY; j++)
 								{
-									
 									if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Mud)
 									{
 										Main.tile[i, j].TileType = (ushort)tile;
@@ -97,6 +96,11 @@ public class GenSystem : ModSystem
 								}
 							}
 						})));
+					}
+					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Webs And Honey"));
+					if (jungleIndex != -1)
+					{
+						tasks.Insert(jungleIndex + 1, new PassLegacy("Replacing lava in nests with blood", new WorldGenLegacyMethod(Savanna.ReplaceLavaWithBlood)));
 					}
 					jungleIndex = tasks.FindIndex(i => i.Name.Equals("Jungle Temple"));
 					if (jungleIndex != -1)

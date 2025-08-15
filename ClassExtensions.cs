@@ -564,6 +564,8 @@ public static class ClassExtensions
 
 	public static void Active(this Tile t, bool a) => t.HasTile = a;
 
+	public static void Liquid(this Tile t, int type) => t.LiquidType = type;
+
 	public static Vector2 ClampToCircle(Vector2 center, float radius, Vector2 pos)
 	{
 		// Calculate the offset vector from the center of the circle to our position

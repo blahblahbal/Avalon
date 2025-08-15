@@ -1,12 +1,10 @@
 ﻿using Avalon.Tiles;
-using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Utilities;
 
 namespace Avalon.WorldGeneration.Biomes;
 

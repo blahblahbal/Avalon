@@ -221,6 +221,14 @@ public class Utils
 		variation = Terraria.Utils.Clamp(variation, 0, 2);
 		if (WorldGen.SolidTile(x, y - 1) && !Main.tile[x, y].HasTile && !Main.tile[x, y + 1].HasTile)
 		{
+			if (Main.tile[x, y - 1].TileType == ModContent.TileType<Nest>())
+			{
+				int num6 = variation * 18;
+				Main.tile[x, y].TileType = type;
+				Main.tile[x, y].Active(true);
+				Main.tile[x, y].TileFrameX = (short)num6;
+				Main.tile[x, y].TileFrameY = 72;
+			}
 			if (Main.tile[x, y - 1].TileType == ModContent.TileType<Chunkstone>() || Main.tile[x, y - 1].TileType == ModContent.TileType<BlastedStone>())
 			{
 				if (preferSmall)
@@ -249,6 +257,14 @@ public class Utils
 		}
 		else if (WorldGen.SolidTile(x, y + 1) && !Main.tile[x, y].HasTile && !Main.tile[x, y - 1].HasTile)
 		{
+			if (Main.tile[x, y + 1].TileType == ModContent.TileType<Nest>())
+			{
+				int num15 = variation * 18;
+				Main.tile[x, y].TileType = type;
+				Main.tile[x, y].Active(true);
+				Main.tile[x, y].TileFrameX = (short)num15;
+				Main.tile[x, y].TileFrameY = 90;
+			}
 			if (Main.tile[x, y + 1].TileType == ModContent.TileType<Chunkstone>() || Main.tile[x, y + 1].TileType == ModContent.TileType<BlastedStone>())
 			{
 				if (preferSmall)

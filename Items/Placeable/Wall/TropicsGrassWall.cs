@@ -12,6 +12,6 @@ public class TropicsGrassWall : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableWall(ModContent.WallType<Walls.TropicalGrassWallSafe>());
+		Item.DefaultToPlaceableWall(ModContent.WallType<Walls.SavannaGrassWallSafe>());
 	}
 }

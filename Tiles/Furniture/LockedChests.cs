@@ -31,6 +31,13 @@ namespace Avalon.Tiles.Furniture
 				15 => ItemID.WebCoveredChest,
 				16 => ItemID.LihzahrdChest,
 				17 => ItemID.WaterChest,
+				28 => ItemID.DynastyChest,
+				29 => ItemID.HoneyChest,
+				30 => ItemID.SteampunkChest,
+				31 => ItemID.PalmWoodChest,
+				33 => ItemID.BorealWoodChest,
+				34 => ItemID.SlimeChest,
+				44 => ItemID.ObsidianChest,
 				48 => ItemID.MartianChest,
 				_ => ItemID.None,
 			};
@@ -50,6 +57,13 @@ namespace Avalon.Tiles.Furniture
 				14 => DustID.Shadewood,
 				15 => DustID.Bone,
 				16 => DustID.Lihzahrd,
+				28 => DustID.DynastyWood,
+				29 => DustID.t_Honey,
+				30 => DustID.t_SteampunkMetal,
+				31 => DustID.PalmWood,
+				33 => DustID.t_BorealWood,
+				34 => DustID.t_Slime,
+				44 => DustID.Obsidian,
 				_ => -1,
 			};
 		}

@@ -1,4 +1,3 @@
-using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -20,4 +19,26 @@ public class Nest : ModTile
         TileID.Sets.ChecksForMerge[Type] = true;
         TileID.Sets.GeneralPlacementTiles[Type] = false;
     }
+	public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
+	{
+		if (!fail && !effectOnly)
+		{
+			if (Main.tile[i, j - 1].TileType == ModContent.TileType<NestStalac>())
+			{
+				WorldGen.KillTile(i, j - 1);
+				if (Main.tile[i, j - 2].TileType == ModContent.TileType<NestStalac>())
+				{
+					WorldGen.KillTile(i, j - 2);
+				}
+			}
+			if (Main.tile[i, j + 1].TileType == ModContent.TileType<NestStalac>())
+			{
+				WorldGen.KillTile(i, j + 1);
+				if (Main.tile[i, j + 2].TileType == ModContent.TileType<NestStalac>())
+				{
+					WorldGen.KillTile(i, j + 2);
+				}
+			}
+		}
+	}
 }

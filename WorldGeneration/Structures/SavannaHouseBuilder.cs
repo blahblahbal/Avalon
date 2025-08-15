@@ -16,9 +16,9 @@ using Terraria.WorldBuilding;
 
 namespace Avalon.WorldGeneration.Structures;
 
-public class TropicsHouseBuilder : HouseBuilder
+public class SavannaHouseBuilder : HouseBuilder
 {
-    public TropicsHouseBuilder(IEnumerable<Rectangle> rooms)
+    public SavannaHouseBuilder(IEnumerable<Rectangle> rooms)
         : base(HouseType.Jungle, rooms)
     {
         TileType = (ushort)ModContent.TileType<Tiles.BleachedEbony>();
@@ -39,10 +39,10 @@ public class TropicsHouseBuilder : HouseBuilder
         WorldUtils.Gen(new Point(room.X, room.Y), new Shapes.Rectangle(room.Width, room.Height), Actions.Chain(new Modifiers.Dither(0.6), new Modifiers.Blotches(2, 0.6), new Modifiers.OnlyTiles(TileType), new Actions.SetTileKeepWall((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>(), setSelfFrames: true), new Modifiers.Dither(0.8), new Actions.SetTileKeepWall((ushort)ModContent.TileType<Tiles.Savanna.Loam>(), setSelfFrames: true)));
         WorldUtils.Gen(new Point(room.X + 1, room.Y), new Shapes.Rectangle(room.Width - 2, 1), Actions.Chain(new Modifiers.Dither(), new Modifiers.OnlyTiles((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>()), new Modifiers.Offset(0, 1), new Modifiers.IsEmpty(), new ActionVines(3, room.Height, ModContent.TileType<Tiles.Savanna.SavannaVines>())));
         WorldUtils.Gen(new Point(room.X + 1, room.Y + room.Height - 1), new Shapes.Rectangle(room.Width - 2, 1), Actions.Chain(new Modifiers.Dither(), new Modifiers.OnlyTiles((ushort)ModContent.TileType<Tiles.Savanna.SavannaGrass>()), new Modifiers.Offset(0, 1), new Modifiers.IsEmpty(), new ActionVines(3, room.Height, ModContent.TileType<Tiles.Savanna.SavannaVines>())));
-        WorldUtils.Gen(new Point(room.X, room.Y), new Shapes.Rectangle(room.Width, room.Height), Actions.Chain(new Modifiers.Dither(0.85), new Modifiers.Blotches(), new Actions.PlaceWall((ushort)ModContent.WallType<Walls.TropicalGrassWall>())));
+        WorldUtils.Gen(new Point(room.X, room.Y), new Shapes.Rectangle(room.Width, room.Height), Actions.Chain(new Modifiers.Dither(0.85), new Modifiers.Blotches(), new Actions.PlaceWall((ushort)ModContent.WallType<Walls.SavannaGrassWall>())));
     }
 }
-public class TropicsCaveHouseHook : ModHook
+public class SavannaCaveHouseHook : ModHook
 {
     private static readonly bool[] BlacklistedTiles = TileID.Sets.Factory.CreateBoolSet(true,
         TileID.Hive, TileID.BlueDungeonBrick, TileID.GreenDungeonBrick, TileID.PinkDungeonBrick, TileID.LihzahrdBrick,
@@ -154,7 +154,7 @@ public class TropicsCaveHouseHook : ModHook
 
         if (ModContent.GetInstance<AvalonWorld>().WorldJungle == Enums.WorldJungle.Savanna && houseType == HouseType.Jungle)
         {
-            return new TropicsHouseBuilder(list);
+            return new SavannaHouseBuilder(list);
         }
         return orig.Invoke(origin, structures);
     }

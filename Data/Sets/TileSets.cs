@@ -47,7 +47,9 @@ namespace Avalon.Data.Sets
 
         public static readonly HashSet<int> Stalac = new() { ModContent.TileType<ContagionStalactgmites>() };
 
-        public static readonly HashSet<int> IckyAltar = new() { ModContent.TileType<IckyAltar>() };
+		public static readonly HashSet<int> Stalac2 = new() { ModContent.TileType<NestStalac>(), ModContent.TileType<BlastedStalac>() };
+
+		public static readonly HashSet<int> IckyAltar = new() { ModContent.TileType<IckyAltar>() };
 
         public static bool[] SuitableForPlantingHerbs = TileID.Sets.Factory.CreateBoolSet(TileID.ClayPot, TileID.PlanterBox);
 
