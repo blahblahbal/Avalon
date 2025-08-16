@@ -669,7 +669,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			spawnRate = (int)(spawnRate * 0.65f);
 			maxSpawns = (int)(maxSpawns * 1.3f);
 		}
-		if (player.InModBiome<Biomes.Tropics>() || player.InModBiome<UndergroundTropics>())
+		if (player.InModBiome<Biomes.Savanna>() || player.InModBiome<UndergroundTropics>())
 		{
 			spawnRate = (int)(spawnRate * 0.4f);
 			maxSpawns = (int)(maxSpawns * 1.5f);

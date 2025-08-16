@@ -9,7 +9,7 @@ namespace Avalon.Biomes;
 public class UndergroundTropics : ModBiome
 {
     public override SceneEffectPriority Priority => SceneEffectPriority.BiomeMedium;
-    public override string BestiaryIcon => ModContent.GetInstance<Tropics>().BestiaryIcon;
+    public override string BestiaryIcon => ModContent.GetInstance<Savanna>().BestiaryIcon;
 	public override ModWaterStyle WaterStyle => ModContent.Find<ModWaterStyle>("Avalon/TropicsWaterStyle");
 	public override string BackgroundPath => base.BackgroundPath;
     public override int BiomeTorchItemType => ModContent.ItemType<Items.Placeable.Furniture.SavannaTorch>();

@@ -74,7 +74,7 @@ public class PoisonDartFrog : ModNPC
         AIInJump = true;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<PoisonDartFrogBanner>();
-		SpawnModBiomes = [ModContent.GetInstance<Biomes.Tropics>().Type];
+		SpawnModBiomes = [ModContent.GetInstance<Biomes.Savanna>().Type];
 	}
 
     public override void AI()

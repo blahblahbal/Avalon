@@ -29,7 +29,7 @@ public class AmberSlime : ModNPC
         NPC.DeathSound = SoundID.NPCDeath1;
 		//Banner = NPC.type;
 		//BannerItem = ModContent.ItemType<AmberSlimeBanner>();
-		SpawnModBiomes = [ModContent.GetInstance<Biomes.Tropics>().Type];
+		SpawnModBiomes = [ModContent.GetInstance<Biomes.Savanna>().Type];
 	}
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
@@ -90,7 +90,7 @@ public class AmberSlime : ModNPC
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        return (spawnInfo.Player.InModBiome<Biomes.Tropics>() || spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>()) && !spawnInfo.Player.ZoneDungeon ? 0.5f : 0f;
+        return (spawnInfo.Player.InModBiome<Biomes.Savanna>() || spawnInfo.Player.InModBiome<Biomes.UndergroundTropics>()) && !spawnInfo.Player.ZoneDungeon ? 0.5f : 0f;
     }
 }
 public class TropicalSlimeGrassy : AmberSlime

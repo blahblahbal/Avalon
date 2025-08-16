@@ -11976,6 +11976,11 @@ Mods: {
 				DisplayName: Silence Candle Biome
 				TownNPCDialogueName: the Silence Candle Biome
 			}
+
+			Savanna: {
+				DisplayName: Savanna
+				TownNPCDialogueName: the Savanna
+			}
 		}
 
 		CaptureBiomeChoice.Contagion: The Contagion

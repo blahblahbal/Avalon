@@ -6,7 +6,7 @@ public class ZoneTropics : IItemDropRuleCondition, IProvideItemConditionDescript
 {
 	public bool CanDrop(DropAttemptInfo info)
 	{
-		return (info.player.InModBiome<Tropics>() || info.player.InModBiome<UndergroundTropics>()) && !info.IsInSimulation && info.npc.value > 0;
+		return (info.player.InModBiome<Savanna>() || info.player.InModBiome<UndergroundTropics>()) && !info.IsInSimulation && info.npc.value > 0;
 	}
 	public bool CanShowItemDropInUI()
 	{

@@ -1,6 +1,8 @@
 ﻿using Avalon.Common;
 using Avalon.ModSupport.MLL.Buffs;
 using Avalon.ModSupport.MLL.Dusts;
+using Avalon.Tiles;
+using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ModLiquidLib.Hooks;
@@ -54,6 +56,40 @@ internal class Acid : ModLiquid
 					obj2.velocity.Y *= Main.rand.Next(2, 5);
 				}
 				obj2.noGravity = true;
+			}
+		}
+	}
+	public override void ModifyNearbyTiles(int i, int j, int liquidX, int liquidY)
+	{
+		Tile tile = Main.tile[i, j];
+		//Grass and mud into dirt
+		if (tile.TileType == TileID.Grass || tile.TileType == TileID.CorruptGrass || tile.TileType == TileID.HallowedGrass || tile.TileType == TileID.CrimsonGrass || tile.TileType == TileID.GolfGrass || tile.TileType == TileID.GolfGrassHallowed || tile.TileType == ModContent.TileType<Ickgrass>())
+		{
+			tile.TileType = TileID.Dirt;
+			WorldGen.SquareTileFrame(i, j);
+			if (Main.netMode == NetmodeID.Server)
+			{
+				NetMessage.SendTileSquare(-1, i, j, 3);
+			}
+		}
+		//jungle grass into mud
+		else if (tile.TileType == TileID.JungleGrass || tile.TileType == TileID.MushroomGrass || tile.TileType == TileID.CorruptJungleGrass || tile.TileType == TileID.CrimsonJungleGrass || tile.TileType == ModContent.TileType<ContagionJungleGrass>())
+		{
+			tile.TileType = TileID.Mud;
+			WorldGen.SquareTileFrame(i, j);
+			if (Main.netMode == NetmodeID.Server)
+			{
+				NetMessage.SendTileSquare(-1, i, j, 3);
+			}
+		}
+		//dirt and ash grass into ash
+		else if (tile.TileType == TileID.AshGrass || tile.TileType == ModContent.TileType<Ectograss>())
+		{
+			tile.TileType = TileID.Ash;
+			WorldGen.SquareTileFrame(i, j);
+			if (Main.netMode == NetmodeID.Server)
+			{
+				NetMessage.SendTileSquare(-1, i, j, 3);
 			}
 		}
 	}

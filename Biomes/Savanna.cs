@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Biomes;
 
-public class Tropics : ModBiome
+public class Savanna : ModBiome
 {
     public override SceneEffectPriority Priority => SceneEffectPriority.BiomeMedium;
     public override ModWaterStyle WaterStyle => ModContent.Find<ModWaterStyle>("Avalon/TropicsWaterStyle");

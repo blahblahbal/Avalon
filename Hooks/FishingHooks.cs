@@ -34,7 +34,7 @@ namespace Avalon.Hooks
 					bool inCorruption = player.ZoneCorrupt;
 					bool inContagion = player.InModBiome<Biomes.Contagion>() || player.InModBiome<Biomes.UndergroundContagion>();
 					bool inJungle = player.ZoneJungle;
-					bool inSavanna = player.InModBiome<Biomes.Tropics>() || player.InModBiome<Biomes.UndergroundTropics>();
+					bool inSavanna = player.InModBiome<Biomes.Savanna>() || player.InModBiome<Biomes.UndergroundTropics>();
 
 					// there's no reason to set modded biome zones to true/false here since their drops are handled afterwards, which is good because I have no idea how to do it!
 					if (inCorruption && !inCrimson && !inContagion)

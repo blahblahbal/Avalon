@@ -215,7 +215,7 @@ public class ContagionPot : ModTile
                     {
                         Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<ContagionTorch>(), torchStack); //Contagion Torches
                     }
-                    else if (Main.LocalPlayer.InModBiome<Biomes.Tropics>() && Main.tile[i, j].LiquidAmount < 0)
+                    else if (Main.LocalPlayer.InModBiome<Biomes.Savanna>() && Main.tile[i, j].LiquidAmount < 0)
                     {
                         Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<Items.Placeable.Furniture.SavannaTorch>(), torchStack); //Tropics Torches
                     }

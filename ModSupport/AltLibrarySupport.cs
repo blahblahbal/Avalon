@@ -408,7 +408,7 @@ public class SavannaAltBiome : AltBiome
 {
 	public override string IconSmall => $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldIcons/IconTropics";
 	public override Color OuterColor => new(175, 148, 199);
-	public override IShoppingBiome Biome => ModContent.GetInstance<Biomes.Tropics>();
+	public override IShoppingBiome Biome => ModContent.GetInstance<Biomes.Savanna>();
 	public override Color NameColor => new(191, 162, 78);
 	public override bool Selectable => ModContent.GetInstance<AvalonClientConfig>().BetaTropicsGen;
 	public override void SetStaticDefaults()
@@ -429,7 +429,7 @@ public class SavannaAltBiome : AltBiome
 		{
 			case "Wet Jungle":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Wet Tropics", new WorldGenLegacyMethod(Savanna.JunglesWetTask)));
+				passes.Add(new PassLegacy("Wet Savanna", new WorldGenLegacyMethod(Savanna.JunglesWetTask)));
 				break;
 			case "Ice":
 				passes.Add(new PassLegacy("Tuhrtl Brick Unsolid", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration config)
@@ -467,11 +467,11 @@ public class SavannaAltBiome : AltBiome
 				break;
 			case "Jungle Chests":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Tropics Sanctums", new WorldGenLegacyMethod(Savanna.SavannaSanctumTask)));
+				passes.Add(new PassLegacy("Savanna Sanctums", new WorldGenLegacyMethod(Savanna.SavannaSanctumTask)));
 				break;
 			case "Muds Walls In Jungle":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Loam Walls in Tropics", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration passConfig)
+				passes.Add(new PassLegacy("Loam Walls in Savanna", new WorldGenLegacyMethod(delegate (GenerationProgress progress, GameConfiguration passConfig)
 				{
 					progress.Set(1.0);
 					int num171 = 0;
@@ -577,11 +577,11 @@ public class SavannaAltBiome : AltBiome
 				break;
 			case "Glowing Mushrooms and Jungle Plants":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Glowing Mushrooms and Tropics Plants", new WorldGenLegacyMethod(Savanna.GlowingMushroomsandJunglePlantsTask)));
+				passes.Add(new PassLegacy("Glowing Mushrooms and Savanna Plants", new WorldGenLegacyMethod(Savanna.GlowingMushroomsandJunglePlantsTask)));
 				break;
 			case "Jungle Plants":
 				originalPass.Disable();
-				passes.Add(new PassLegacy("Tropics Plants", new WorldGenLegacyMethod(Savanna.JungleBushesTask)));
+				passes.Add(new PassLegacy("Savanna Plants", new WorldGenLegacyMethod(Savanna.JungleBushesTask)));
 				break;
 		}
 	}

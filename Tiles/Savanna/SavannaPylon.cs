@@ -77,7 +77,7 @@ public class SavannaPylon : ModPylon
 
 		// We will take that shop entry and add an additional condition to check for ExampleBiome, as this is typical for biome pylons
 		// This does not affect the teleport conditions, only the sale conditions
-		shopEntry.AddCondition(new Condition("Mods.Avalon.Conditions.InSavanna", () => Main.LocalPlayer.InModBiome<Biomes.Tropics>() || Main.LocalPlayer.InModBiome<UndergroundTropics>()));
+		shopEntry.AddCondition(new Condition("Mods.Avalon.Conditions.InSavanna", () => Main.LocalPlayer.InModBiome<Biomes.Savanna>() || Main.LocalPlayer.InModBiome<UndergroundTropics>()));
 
 		// and finally we return the shop entry
 		return shopEntry;
