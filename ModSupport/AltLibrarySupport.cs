@@ -113,7 +113,7 @@ public class AltLibrarySupport : ModSystem
 		{
 			if (WorldBiomeManager.GetWorldEvil(true) == ModContent.GetInstance<ContagionAltBiome>())
 			{
-				world.SecondaryContagionBG = WorldGen.genRand.NextBool(2) ? 1 : 0;
+				AvalonWorld.contagionBG = WorldGen.genRand.Next(4);
 			}
 		}
 		if (!Enabled) return false;

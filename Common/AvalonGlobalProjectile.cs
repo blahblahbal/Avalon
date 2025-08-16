@@ -217,12 +217,22 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 
 	public override void OnKill(Projectile projectile, int timeLeft)
 	{
-		if (projectile.type == ProjectileID.WorldGlobe && Main.player[projectile.owner].InModBiome<Biomes.Contagion>())
+		if (projectile.type == ProjectileID.WorldGlobe)
 		{
-			ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG++;
-			if (ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG > 1)
+			Player player = Main.LocalPlayer;
+			if (Main.netMode != NetmodeID.MultiplayerClient && player.InModBiome<Biomes.Contagion>())
 			{
-				ModContent.GetInstance<AvalonWorld>().SecondaryContagionBG = 0;
+				int rand = Main.rand.Next(4);
+				if (rand == AvalonWorld.contagionBG)
+					rand++;
+				if (rand > 3)
+					rand = 0;
+				AvalonWorld.contagionBG = rand;
+				if (!Main.gameMenu)
+				{
+					AvalonWorld.contagionBGFlash = 1f;
+				}
+				NetMessage.SendData(MessageID.WorldData);
 			}
 		}
 		base.OnKill(projectile, timeLeft);

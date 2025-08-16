@@ -35,22 +35,17 @@
 		<Publicize Include="FNA" MemberPattern="^Microsoft.Xna.Framework.Graphics\.SpriteBatch\..*" />
 	</ItemGroup>
 	<ItemGroup>
-		<Reference Include="AltLibrary">
-		  <HintPath>..\..\ModReader\AltLibrary\AltLibrary.dll</HintPath>
-		</Reference>
 		<Reference Include="Microsoft.Xna.Framework.Input.Touch">
 			<HintPath>S:\terraria stuff\Terraria Remaster\github\1.1AvalonRemaster\bin\Debug\net40\Microsoft.Xna.Framework.Input.Touch.dll</HintPath>
 		</Reference>
+		<Reference Include="AltLibrary">
+			<HintPath>dllReferences\AltLibrary_v2.1.1.3.dll</HintPath>
+		</Reference>
 		<Reference Include="ModLiquidLib">
-		  <HintPath>..\..\ModReader\ModLiquidLib\ModLiquidLib.dll</HintPath>
+			<HintPath>dllReferences\ModLiquidLib_v0.1.1.0.dll</HintPath>
 		</Reference>
 		<Reference Include="ThoriumMod">
-			<HintPath Condition="Exists('..\ModAssemblies')">..\ModAssemblies\ThoriumMod.dll</HintPath>
-			<HintPath Condition="Exists('..\..\ModAssemblies')">..\..\ModAssemblies\ThoriumMod.dll</HintPath>
-		</Reference>
-		<Reference Include="AltLibrary">
-			<HintPath Condition="Exists('..\ModAssemblies')">..\ModAssemblies\AltLibrary_v2.1.dll</HintPath>
-			<HintPath Condition="Exists('..\..\ModAssemblies')">..\..\ModAssemblies\AltLibrary_v2.1.dll</HintPath>
+			<HintPath>dllReferences\ThoriumMod_v1.7.2.4.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 </Project>

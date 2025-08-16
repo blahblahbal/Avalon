@@ -98,7 +98,10 @@ public class AvalonWorld : ModSystem
 	public static GoldVariant GoldOre = GoldVariant.Random;
 	public static RhodiumVariant? RhodiumOre { get; set; }
 
-	public int SecondaryContagionBG { get; set; } = 0;
+	public static int contagionBG { get; set; } = 0;
+
+	public static float contagionBGFlash;
+	
 	public WorldJungleSelection SelectedWorldJungle { get; set; } = WorldJungleSelection.Random;
 
 	public static int totalSick; //Amount of Tiles 
@@ -115,6 +118,7 @@ public class AvalonWorld : ModSystem
 	{
 		//Im not too fimiliar how contagion world tags work but imo it would be best if it was reset in an OnWorldUnload and OnWorldLoad somewhere
 		retroWorld = false;
+		contagionBG = 0;
 	}
 	public override void ClearWorld()
 	{
@@ -133,7 +137,7 @@ public class AvalonWorld : ModSystem
 		tag["Avalon:RhodiumOre"] = (byte?)RhodiumOre;
 		tag["Avalon:WorldEvil"] = (byte)WorldEvil;
 		tag["Avalon:WorldJungle"] = (byte)WorldJungle;
-		tag["Avalon:ContagionBG"] = SecondaryContagionBG;
+		tag["Avalon:ContagionBG"] = contagionBG;
 		AvalonConfig config = ModContent.GetInstance<AvalonConfig>();
 		Dictionary<string, AvalonConfig.WorldDataValues> tempDict = config.GetWorldData();
 		AvalonConfig.WorldDataValues worldData;
@@ -191,7 +195,7 @@ public class AvalonWorld : ModSystem
 
 		if (tag.ContainsKey("Avalon:ContagionBG"))
 		{
-			SecondaryContagionBG = tag.GetAsInt("Avalon:ContagionBG");
+			contagionBG = tag.GetAsInt("Avalon:ContagionBG");
 		}
 
 		if (tag.ContainsKey("Avalon:JungleX"))
@@ -360,8 +364,12 @@ public class AvalonWorld : ModSystem
 
 		if (WorldEvil == WorldEvil.Contagion)
 		{
-			SecondaryContagionBG = WorldGen.genRand.NextBool(2) ? 1 : 0;
+			contagionBG = WorldGen.genRand.Next(4);
 		}
+	}
+	public override void PostUpdateEverything()
+	{
+		contagionBGFlash = MathHelper.Clamp(contagionBGFlash - 0.05f, 0f, 1f);
 	}
 	public override void PostWorldGen()
 	{
