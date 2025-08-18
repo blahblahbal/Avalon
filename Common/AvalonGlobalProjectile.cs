@@ -222,10 +222,10 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 			Player player = Main.LocalPlayer;
 			if (Main.netMode != NetmodeID.MultiplayerClient && player.InModBiome<Biomes.Contagion>())
 			{
-				int rand = Main.rand.Next(4);
+				int rand = Main.rand.Next(AvalonWorld.contagionBGCount);
 				if (rand == AvalonWorld.contagionBG)
 					rand++;
-				if (rand > 3)
+				if (rand > AvalonWorld.contagionBGCount - 1)
 					rand = 0;
 				AvalonWorld.contagionBG = rand;
 				if (!Main.gameMenu)

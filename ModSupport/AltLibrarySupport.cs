@@ -1,36 +1,36 @@
 using AltLibrary;
 using AltLibrary.Common.AltBiomes;
+using AltLibrary.Common.AltOres;
+using AltLibrary.Common.Conditions;
+using AltLibrary.Common.Hooks;
 using AltLibrary.Common.Systems;
 using AltLibrary.Core.Generation;
+using Avalon.Common;
+using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Material;
+using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Herbs;
+using Avalon.Items.Material.Ores;
+using Avalon.Items.Other;
+using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Weapons.Melee.Hardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.NPCs.Critters;
+using Avalon.NPCs.Hardmode;
+using Avalon.Tiles.Contagion;
+using Avalon.Walls;
+using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Generation;
 using Terraria.GameContent.Personalities;
 using Terraria.ID;
+using Terraria.IO;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using Avalon.Tiles.Contagion;
-using Avalon.Items.Other;
-using Avalon.Items.Weapons.Melee.Hardmode;
-using Avalon.Items.Material.Ores;
-using Avalon.NPCs.Hardmode;
-using Avalon.NPCs.Critters;
-using Avalon.Items.Placeable.Seed;
-using Avalon.Items.Material.Bars;
-using Avalon.Items.Material;
-using Avalon.Items.Weapons.Melee.PreHardmode;
-using Avalon.Items.Material.Herbs;
-using Avalon.Walls;
-using Avalon.WorldGeneration.Enums;
-using Avalon.Common;
-using AltLibrary.Common.Conditions;
-using Terraria.GameContent.Generation;
-using Terraria.IO;
 using Savanna = Avalon.WorldGeneration.Passes.Savanna;
-using AltLibrary.Common.AltOres;
-using Avalon.Items.Accessories.PreHardmode;
-using AltLibrary.Common.Hooks;
 
 namespace Avalon.ModSupport;
 
@@ -113,7 +113,7 @@ public class AltLibrarySupport : ModSystem
 		{
 			if (WorldBiomeManager.GetWorldEvil(true) == ModContent.GetInstance<ContagionAltBiome>())
 			{
-				AvalonWorld.contagionBG = WorldGen.genRand.Next(4);
+				AvalonWorld.contagionBG = WorldGen.genRand.Next(AvalonWorld.contagionBGCount);
 			}
 		}
 		if (!Enabled) return false;

@@ -3,7 +3,6 @@ using Avalon.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Reflection;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Graphics.Effects;
@@ -68,30 +67,27 @@ public class ContagionSurfaceBackground : ModSurfaceBackgroundStyle
 		string? closeFarBGPath;
 		switch (AvalonWorld.contagionBG)
 		{
-			case 3:
-			{
-				closeBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground7";
-				closeMidBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground5";
-				closeFarBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground6";
-				break;
-			}
 			case 2:
 			{
-				closeBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground8";
-				closeMidBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground2";
-				closeFarBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground3";
+				// trees
+				closeBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground7";
+				closeMidBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground8";
+				closeFarBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground9";
 				break;
 			}
 			case 1:
 			{
-				closeBGPath = null;
-				closeMidBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground5";
+				// hills
+				closeBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground5";
+				closeMidBGPath = null;
 				closeFarBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground6";
 				break;
 			}
+			case 0:
 			default:
 			{
-				closeBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground1";
+				// pillarous tubes
+				closeBGPath = null;
 				closeMidBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground2";
 				closeFarBGPath = $"{Mod.Name}/Backgrounds/ContagionSurfaceBackground3";
 				break;
@@ -145,9 +141,31 @@ public class ContagionSurfaceBackground : ModSurfaceBackgroundStyle
 			if (closeFarBGPath != null)
 			{
 				Texture2D closeFarBG = ModContent.Request<Texture2D>(closeFarBGPath).Value;
-				bgScale = 1.25f;
-				bgParallax = 0.4;
-				bgTopY = (int)(backgroundTopMagicNumber * 1800.0 + 1500.0) + (int)scAdj + pushBGTopHack;
+				switch (AvalonWorld.contagionBG)
+				{
+					case 2:
+					{
+						bgScale = 1.25f;
+						bgParallax = 0.25;
+						bgTopY = (int)(backgroundTopMagicNumber * 1800.0 + 1300.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+					case 1:
+					{
+						bgScale = 1.25f;
+						bgParallax = 0.255;
+						bgTopY = (int)(backgroundTopMagicNumber * 1800.0 + 1550.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+					case 0:
+					default:
+					{
+						bgScale = 1.25f;
+						bgParallax = 0.245;
+						bgTopY = (int)(backgroundTopMagicNumber * 1800.0 + 1500.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+				}
 				//Main.instance.SetBackgroundOffsets((Texture2D)ModContent.Request<Texture2D>("TheConfectionRebirth/Backgrounds/ConfectionSurfaceClose1"), backgroundTopMagicNumber, pushBGTopHack);
 				bgScale *= bgGlobalScaleMultiplier;
 				//Main.instance.LoadBackground(ModContent.Request<Texture2D>("TheConfectionRebirth/Backgrounds/ConfectionSurfaceClose1").Value);
@@ -169,9 +187,31 @@ public class ContagionSurfaceBackground : ModSurfaceBackgroundStyle
 			if (closeMidBGPath != null)
 			{
 				Texture2D closeMidBG = ModContent.Request<Texture2D>(closeMidBGPath).Value;
-				bgScale = 1.31f;
-				bgParallax = 0.43;
-				bgTopY = (int)(backgroundTopMagicNumber * 1950.0 + 1750.0) + (int)scAdj + pushBGTopHack;
+				switch (AvalonWorld.contagionBG)
+				{
+					case 2:
+					{
+						bgScale = 1.31f;
+						bgParallax = 0.28;
+						bgTopY = (int)(backgroundTopMagicNumber * 1950.0 + 1500.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+					case 1:
+					{
+						bgScale = 1.31f;
+						bgParallax = 0.28;
+						bgTopY = (int)(backgroundTopMagicNumber * 1950.0 + 1750.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+					case 0:
+					default:
+					{
+						bgScale = 1.31f;
+						bgParallax = 0.32;
+						bgTopY = (int)(backgroundTopMagicNumber * 1950.0 + 1850.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+				}
 				//Main.instance.SetBackgroundOffsets(textureSlot2, backgroundTopMagicNumber, pushBGTopHack);
 				bgScale *= bgGlobalScaleMultiplier;
 				//Main.instance.LoadBackground(textureSlot2);
@@ -196,9 +236,31 @@ public class ContagionSurfaceBackground : ModSurfaceBackgroundStyle
 			if (closeBGPath != null)
 			{
 				Texture2D closeBG = ModContent.Request<Texture2D>(closeBGPath).Value;
-				bgScale = 1.34f;
-				bgParallax = 0.49;
-				bgTopY = (int)(backgroundTopMagicNumber * 2100.0 + 2000.0) + (int)scAdj + pushBGTopHack;
+				switch (AvalonWorld.contagionBG)
+				{
+					case 2:
+					{
+						bgScale = 1.34f;
+						bgParallax = 0.34;
+						bgTopY = (int)(backgroundTopMagicNumber * 2100.0 + 1850.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+					case 1:
+					{
+						bgScale = 1.34f;
+						bgParallax = 0.34;
+						bgTopY = (int)(backgroundTopMagicNumber * 2100.0 + 2000.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+					case 0:
+					default:
+					{
+						bgScale = 1.34f;
+						bgParallax = 0.35;
+						bgTopY = (int)(backgroundTopMagicNumber * 2100.0 + 2000.0) + (int)scAdj + pushBGTopHack;
+						break;
+					}
+				}
 				//Main.instance.SetBackgroundOffsets(textureSlot3, backgroundTopMagicNumber, pushBGTopHack);
 				bgScale *= bgGlobalScaleMultiplier;
 				//Main.instance.LoadBackground(textureSlot3);

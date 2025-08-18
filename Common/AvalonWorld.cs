@@ -98,10 +98,11 @@ public class AvalonWorld : ModSystem
 	public static GoldVariant GoldOre = GoldVariant.Random;
 	public static RhodiumVariant? RhodiumOre { get; set; }
 
+	public const int contagionBGCount = 2;
 	public static int contagionBG { get; set; } = 0;
 
 	public static float contagionBGFlash;
-	
+
 	public WorldJungleSelection SelectedWorldJungle { get; set; } = WorldJungleSelection.Random;
 
 	public static int totalSick; //Amount of Tiles 
@@ -364,7 +365,7 @@ public class AvalonWorld : ModSystem
 
 		if (WorldEvil == WorldEvil.Contagion)
 		{
-			contagionBG = WorldGen.genRand.Next(4);
+			contagionBG = WorldGen.genRand.Next(contagionBGCount);
 		}
 	}
 	public override void PostUpdateEverything()
