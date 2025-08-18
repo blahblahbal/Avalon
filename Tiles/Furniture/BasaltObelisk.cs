@@ -1,43 +1,38 @@
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.Enums;
-using System;
-using ReLogic.Content;
-using Terraria.Localization;
-using Terraria.Audio;
-using Terraria.GameContent.ObjectInteractions;
-using Avalon.Waters;
 
 namespace Avalon.Tiles.Furniture
 {
-    public class BasaltObelisk : ModTile
+	public class BasaltObelisk : ModTile
 	{
-		private static Asset<Texture2D> Glow;
+		private static Asset<Texture2D>? Glow;
 		public override void SetStaticDefaults()
-        {
+		{
 			Main.tileFrameImportant[Type] = true; // Any multitile requires this
 			Main.tileLighted[Type] = true;
 			TileID.Sets.InteractibleByNPCs[Type] = true; // Town NPCs will palm their hand at this tile
 
-            DustType = DustID.Wraith;
+			DustType = DustID.Wraith;
 			Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 
-            TileObjectData.newTile.CopyFrom(TileObjectData.GetTileData(TileID.VoidMonolith, 0));
-            TileObjectData.newTile.LavaDeath = false; // Does not break when lava touches it
-            TileObjectData.newTile.DrawYOffset = 2; // So the tile sinks into the ground
+			TileObjectData.newTile.CopyFrom(TileObjectData.GetTileData(TileID.VoidMonolith, 0));
+			TileObjectData.newTile.LavaDeath = false; // Does not break when lava touches it
+			TileObjectData.newTile.DrawYOffset = 2; // So the tile sinks into the ground
 
-            //TileObjectData.newTile.StyleLineSkip = 7; // This needs to be added to work for modded tiles.
+			//TileObjectData.newTile.StyleLineSkip = 7; // This needs to be added to work for modded tiles.
 
-            // Register the tile data itself
-            TileObjectData.addTile(Type);
+			// Register the tile data itself
+			TileObjectData.addTile(Type);
 
-            // Register map name and color
-            AddMapEntry(new Color(59, 62, 66), Language.GetText("MapObject.BasaltObelisk"));
+			// Register map name and color
+			AddMapEntry(new Color(59, 62, 66), Language.GetText("MapObject.BasaltObelisk"));
 		}
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
@@ -71,6 +66,13 @@ namespace Avalon.Tiles.Furniture
 
 			// The flame is manually drawn separate from the tile texture so that it can be drawn at full brightness.
 			Main.spriteBatch.Draw(Glow.Value, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y + offsetY) + zero, drawRectangle, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+		}
+		public override void NearbyEffects(int i, int j, bool closer)
+		{
+			if (closer && BiomeTileCounts.NearbyEffectsRectangle(i, j, 40, 40))
+			{
+				ModContent.GetInstance<BiomeTileCounts>().BasaltObeliskNearby = true;
+			}
 		}
 	}
 }

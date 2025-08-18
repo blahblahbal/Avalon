@@ -33,6 +33,6 @@ public class UndergroundTropics : ModBiome
 
     public override bool IsBiomeActive(Player player)
     {
-        return !player.ZoneDungeon && ModContent.GetInstance<Systems.BiomeTileCounts>().TropicsTiles > 50 && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight);
+        return !player.ZoneDungeon && ModContent.GetInstance<Systems.BiomeTileCounts>().SavannaTiles > 50 && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight);
     }
 }

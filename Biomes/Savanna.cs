@@ -32,6 +32,6 @@ public class Savanna : ModBiome
 
     public override bool IsBiomeActive(Player player)
     {
-        return ModContent.GetInstance<Systems.BiomeTileCounts>().TropicsTiles > 200 && player.ZoneOverworldHeight;
+        return ModContent.GetInstance<Systems.BiomeTileCounts>().SavannaTiles > 200 && player.ZoneOverworldHeight;
     }
 }

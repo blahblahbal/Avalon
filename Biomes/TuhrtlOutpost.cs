@@ -16,6 +16,6 @@ public class TuhrtlOutpost : ModBiome
     {
         Point tileCoordinates = player.Center.ToTileCoordinates();
         ushort wallType = Main.tile[tileCoordinates.X, tileCoordinates.Y].WallType;
-        return ModContent.GetInstance<Systems.BiomeTileCounts>().TropicsTiles > 200 && wallType == ModContent.WallType<TuhrtlBrickWallUnsafe>();
+        return ModContent.GetInstance<Systems.BiomeTileCounts>().SavannaTiles > 200 && wallType == ModContent.WallType<TuhrtlBrickWallUnsafe>();
     }
 }

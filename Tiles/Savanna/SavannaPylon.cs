@@ -105,7 +105,7 @@ public class SavannaPylon : ModPylon
 
 	public override bool ValidTeleportCheck_BiomeRequirements(TeleportPylonInfo pylonInfo, SceneMetrics sceneData)
 	{
-		return ModContent.GetInstance<BiomeTileCounts>().TropicsTiles >= 200;
+		return ModContent.GetInstance<BiomeTileCounts>().SavannaTiles >= 200;
 	}
 
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

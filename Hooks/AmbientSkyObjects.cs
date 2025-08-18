@@ -1,5 +1,7 @@
 using Avalon.Common;
+using Avalon.Systems;
 using Terraria.GameContent.Skies;
+using Terraria.ModLoader;
 
 namespace Avalon.Hooks;
 public class AmbientSkyObjects : ModHook
@@ -11,7 +13,7 @@ public class AmbientSkyObjects : ModHook
 
 	private bool On_AmbientSky_AnActiveSkyConflictsWithAmbience(On_AmbientSky.orig_AnActiveSkyConflictsWithAmbience orig, AmbientSky self)
 	{
-		if (DarkMatterWorld.InArea)
+		if (ModContent.GetInstance<BiomeTileCounts>().DarkMatterMonolithNearby)
 		{
 			return true;
 		}

@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -17,7 +18,7 @@ public class DarkMatterRemoveSun : ModHook
 
 	private static void OnDrawSunAndMoon(On_Main.orig_DrawSunAndMoon orig, Main self, SceneArea sceneArea, Color moonColor, Color sunColor, float tempMushroomInfluence)
 	{
-		if (!gameMenu && DarkMatterWorld.InArea)
+		if (!gameMenu && ModContent.GetInstance<BiomeTileCounts>().DarkMatterMonolithNearby)
 		{
 			return;
 		}

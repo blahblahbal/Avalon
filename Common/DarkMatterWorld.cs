@@ -1,4 +1,4 @@
-using Avalon.Common.Players;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -8,19 +8,10 @@ namespace Avalon.Common
 {
 	internal class DarkMatterWorld : ModSystem
 	{
-		/// <summary>
-		///  Retains the player's DarkMatterMonolith value for two updates; Does this because the stupid monolith bool is false 1/4 times on color lighting, and 2/5 times on others
-		/// </summary>
-		private static readonly bool[] InAreaArray = new bool[3];
-		public static bool InArea;
 		public static float DarkMatterStrength;
 		public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
 		{
-			InAreaArray[2] = InAreaArray[1];
-			InAreaArray[1] = InAreaArray[0];
-			InAreaArray[0] = Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith;
-			InArea = InAreaArray[0] || InAreaArray[1] || InAreaArray[2];
-			if (InArea)
+			if (ModContent.GetInstance<BiomeTileCounts>().DarkMatterMonolithNearby)
 			{
 				DarkMatterStrength = MathHelper.Lerp(DarkMatterStrength, 1f, 0.1f);
 			}

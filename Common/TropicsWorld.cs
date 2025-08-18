@@ -10,7 +10,7 @@ internal class TropicsWorld : ModSystem
 {
     public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
     {
-        float TropicsStrength = (float)ModContent.GetInstance<BiomeTileCounts>().TropicsTiles / 1000f;
+        float TropicsStrength = (float)ModContent.GetInstance<BiomeTileCounts>().SavannaTiles / 1000f;
 		if (TropicsStrength != 0)
 		{
 			TropicsStrength = Math.Min(TropicsStrength, 1f);

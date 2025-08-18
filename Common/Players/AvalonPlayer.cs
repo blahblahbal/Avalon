@@ -151,8 +151,6 @@ public class AvalonPlayer : ModPlayer
 
 	public byte FartTimer = 0;
 	public int RocketDustTimer = 0;
-	public bool DarkMatterMonolith { get; set; }
-	public int DarkMatterTimeOut = 20;
 
 	public bool InBossFight;
 
@@ -442,10 +440,6 @@ public class AvalonPlayer : ModPlayer
 		EfficiencyPrefix = 0;
 
 		CoughCooldown = false;
-		if (DarkMatterTimeOut-- < 0)
-		{
-			DarkMatterMonolith = false;
-		}
 		MagicCritDamage = 0f;
 		MeleeCritDamage = 0f;
 		RangedCritDamage = 0f;

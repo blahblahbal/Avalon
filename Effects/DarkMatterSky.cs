@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -351,7 +352,7 @@ public class DarkMatterSky : CustomSky
 	public override void Update(GameTime gameTime)
 	{
 		//Main.eclipseLight = 1f;
-		if (!DarkMatterWorld.InArea)
+		if (!ModContent.GetInstance<BiomeTileCounts>().DarkMatterMonolithNearby)
 		{
 			skyActive = false;
 		}

@@ -1,5 +1,5 @@
-using Avalon.Common.Players;
 using Avalon.Dusts;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -37,8 +37,7 @@ public class DarkMatterMonolith : ModTile
 	{
 		if (closer && Main.tile[i, j].TileFrameX >= 36)
 		{
-			Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterMonolith = true;
-			Main.LocalPlayer.GetModPlayer<AvalonPlayer>().DarkMatterTimeOut = 2;
+			ModContent.GetInstance<BiomeTileCounts>().DarkMatterMonolithNearby = true;
 		}
 	}
 
