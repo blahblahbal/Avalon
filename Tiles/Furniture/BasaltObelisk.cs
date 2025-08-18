@@ -69,7 +69,7 @@ namespace Avalon.Tiles.Furniture
 		}
 		public override void NearbyEffects(int i, int j, bool closer)
 		{
-			if (closer && BiomeTileCounts.NearbyEffectsRectangle(i, j, 40, 40))
+			if (!closer && BiomeTileCounts.NearbyEffectsRectangle(i, j, 40, 40))
 			{
 				ModContent.GetInstance<BiomeTileCounts>().BasaltObeliskNearby = true;
 			}

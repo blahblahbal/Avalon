@@ -72,7 +72,7 @@ public class DelightCandle : ModTile
 			Main.dust[num162].noGravity = true;
 		}
 
-		if (closer && BiomeTileCounts.NearbyEffectsRectangle(i, j, 30, 30))
+		if (!closer && BiomeTileCounts.NearbyEffectsRectangle(i, j, 30, 30))
 		{
 			ModContent.GetInstance<BiomeTileCounts>().DelightCandleNearby = true;
 		}
