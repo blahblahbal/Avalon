@@ -1,10 +1,9 @@
-using Avalon.Common.Templates;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -12,7 +11,7 @@ namespace Avalon.Tiles.Furniture;
 
 public class SilenceCandle : ModTile
 {
-	private static Asset<Texture2D> flameTexture;
+	private static Asset<Texture2D>? flameTexture;
 	public override void SetStaticDefaults()
 	{
 		Main.tileFrameImportant[Type] = true;
@@ -86,6 +85,13 @@ public class SilenceCandle : ModTile
 			float x = Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 			float y = Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
 			Main.spriteBatch.Draw(flameTexture.Value, new Vector2(i * 16 - (int)Main.screenPosition.X + offsetX - (width - 16f) / 2f + x, j * 16 - (int)Main.screenPosition.Y + offsetY + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+		}
+	}
+	public override void NearbyEffects(int i, int j, bool closer)
+	{
+		if (!closer && TileObjectData.GetTileStyle(Main.tile[i, j]) == 0)
+		{
+			ModContent.GetInstance<BiomeTileCounts>().SilenceCandleNearby = true;
 		}
 	}
 }

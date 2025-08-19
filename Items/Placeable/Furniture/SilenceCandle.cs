@@ -1,3 +1,4 @@
+using Avalon.Buffs;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -65,6 +66,7 @@ public class SilenceCandle : ModItem
 				}
 				Lighting.AddLight(player.RotatedRelativePoint(new Vector2(player.itemLocation.X + 6f + player.velocity.X, player.itemLocation.Y - 14f)), 1f, 0.95f, 0.8f);
 			}
+			player.AddBuff(ModContent.BuffType<SilenceCandleBuff>(), 2);
 		}
 	}
 }

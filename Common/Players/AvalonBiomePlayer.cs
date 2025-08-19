@@ -34,6 +34,7 @@ public class AvalonBiomePlayer : ModPlayer
 	public bool ZoneDelight => Player.InModBiome(ModContent.GetInstance<DelightCandleBiome>());
 	public bool ZoneSight => Player.InModBiome(ModContent.GetInstance<SightCandleBiome>());
 	public bool ZoneBasaltObelisk => Player.InModBiome(ModContent.GetInstance<BasaltObeliskBiome>());
+	public bool ZoneSilence => Player.InModBiome(ModContent.GetInstance<SilenceCandleBiome>());
 	public override void PostUpdate()
 	{
 		if (ZoneAltDungeon)
@@ -84,6 +85,10 @@ public class AvalonBiomePlayer : ModPlayer
 		if (ZoneBasaltObelisk)
 		{
 			Player.AddBuff(ModContent.BuffType<BasaltObeliskBuff>(), 7 * 60);
+		}
+		if (ZoneSilence)
+		{
+			Player.AddBuff(ModContent.BuffType<SilenceCandleBuff>(), 2);
 		}
 	}
 

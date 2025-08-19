@@ -88,6 +88,7 @@ public class BiomeTileCounts : ModSystem
 	public bool MightCandleNearby;
 	public bool NightCandleNearby;
 	public bool SightCandleNearby;
+	public bool SilenceCandleNearby;
 	public override void ResetNearbyTileEffects()
 	{
 		BasaltObeliskNearby = false;
@@ -100,6 +101,7 @@ public class BiomeTileCounts : ModSystem
 		MightCandleNearby = false;
 		NightCandleNearby = false;
 		SightCandleNearby = false;
+		SilenceCandleNearby = false;
 	}
 	public static bool NearbyEffectsRectangle(int i, int j, int xRad, int yRad)
 	{
