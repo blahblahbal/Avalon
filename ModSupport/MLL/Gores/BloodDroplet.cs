@@ -1,5 +1,4 @@
 ﻿using Avalon.Gores;
-using Microsoft.Xna.Framework;
 
 namespace Avalon.ModSupport.MLL.Gores;
 public class BloodDroplet : LiquidDropletGoreBase
@@ -9,5 +8,4 @@ public class BloodDroplet : LiquidDropletGoreBase
 	public override float? FallingFrameTimeMult => 1.25f;
 	public override float? SplashFrameTimeMult => 1.5f;
 	public override float? FallingAccel => 0.19f;
-	public override Vector3? LightColor => new(0f, 1f, 0f);
 }
