@@ -22,11 +22,11 @@ internal class Blood : ModLiquid
 		//This is the viscosity of the liquid, only used visually.
 		//Lava usually has this set to 200, while honey has this set to 240. All other liquids set this to 0 by default.
 		//In Vanilla this property can be found at "Terraria.GameContent.Liquid.LiquidRenderer.VISCOSITY_MASK"
-		VisualViscosity = 200;
+		VisualViscosity = 160;
 
 		//This is the length the liquid will visually have when flowing/falling downwards or if there is a slope underneath.
 		//In Vanilla This property can be found at "Terraria.GameContent.Liquid.LiquidRenderer.WATERFALL_LENGTH"
-		LiquidFallLength = 20;
+		LiquidFallLength = 6;
 
 		//This is the opacity of the liquid. How well you can see objects in the liquid.
 		//The SlopeOpacity property is different, as slopes do not render the same as a normal liquid tile

@@ -18,7 +18,12 @@ public class BloodFall : ModLiquidFall
 	//0 (un-see-able), 1 (fully opaque)
 	public override float? Alpha(int x, int y, float Alpha, int maxSteps, int s, Tile tileCache)
 	{
-		return 1f;
+		float num = 1f;
+		if (s > maxSteps - 10)
+		{
+			num *= (float)(maxSteps - s) / 10f;
+		}
+		return num;
 	}
 
 	//We add light to our waterfall as the liquid tied to this fall also shines a bright white light
