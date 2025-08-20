@@ -57,21 +57,25 @@ namespace Avalon.WorldGeneration.Structures
             
             ushort t = (ushort)WorldGen.genRand.Next(3);
             ushort t2 = 0;
+			ushort wallType = 0;
             if (t == 0)
             {
                 t = TileID.IridescentBrick;
                 t2 = (ushort)ModContent.TileType<Tiles.TwiliplateBlock>();
+				wallType = WallID.IridescentBrick;
             }
             else if (t == 1)
             {
                 t = TileID.PlatinumBrick;
                 t2 = TileID.Sunplate;
-            }
+				wallType = WallID.PlatinumBrick;
+			}
             else if (t == 2)
             {
                 t = (ushort)ModContent.TileType<Loamstone>();
                 t2 = (ushort)ModContent.TileType<Tiles.MoonplateBlock>();
-            }
+				wallType = (ushort)ModContent.WallType<Walls.MoonWall>();
+			}
             //i = vertical, j = horizontal
             for (int confirmPlatforms = 0; confirmPlatforms < 2; confirmPlatforms++)    //Increase the iterations on this outermost for loop if tabletop-objects are not properly spawning
             {
@@ -106,7 +110,7 @@ namespace Avalon.WorldGeneration.Structures
 											tile.HasTile = false;
 											tile.IsHalfBlock = false;
 											tile.Slope = SlopeType.Solid;
-											tile.WallType = (ushort)ModContent.WallType<Walls.SavannaGrassWall>();
+											tile.WallType = wallType;
 										}
 									}
                                     break;
@@ -116,7 +120,7 @@ namespace Avalon.WorldGeneration.Structures
 										tile.HasTile = false;
 										tile.IsHalfBlock = false;
 										tile.Slope = SlopeType.Solid;
-										tile.WallType = (ushort)ModContent.WallType<Walls.SavannaGrassWall>();
+										tile.WallType = wallType;
 										WorldGen.PlaceTile(k, l, ModContent.TileType<SavannaTorch>());
 									}
 									break;
@@ -130,10 +134,10 @@ namespace Avalon.WorldGeneration.Structures
                                     if (tile.TileType != (ushort)ModContent.TileType<TuhrtlBrick>() && confirmPlatforms == 1)
                                         WorldGen.AddBuriedChest(k, l, contain: GenSystem.GetNextSavannaChestItem(), Style: 0, chestTileType: (ushort)ModContent.TileType<Tiles.PlatinumChest>());
                                     if (tile.TileType != (ushort)ModContent.TileType<TuhrtlBrick>())
-                                        tile.WallType = (ushort)ModContent.WallType<Walls.SavannaGrassWall>();
+                                        tile.WallType = wallType;
                                     break;
                                 case 2:
-                                    if (tile.TileType != (ushort)ModContent.TileType<Tiles.Savanna.TuhrtlBrick>())
+                                    if (tile.TileType != (ushort)ModContent.TileType<TuhrtlBrick>())
                                     {
                                         tile.HasTile = true;
                                         tile.TileType = t2;

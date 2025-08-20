@@ -11,6 +11,16 @@ internal class MusicDisplayCompat : ModSystem
 	{
 		if (ExxoAvalonOrigins.MusicMod != null && ExxoAvalonOrigins.MusicDisplay != null)
 		{
+			ExxoAvalonOrigins.MusicDisplay.Call("AddMusic", (short)MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/ContagionEnnway"),
+				Language.GetText("Mods.Avalon.TrackNames.ContagionOtherworldly.Name"),
+				Language.GetText("Mods.Avalon.TrackNames.ContagionOtherworldly.Author"),
+				Language.GetText("Mods.Avalon.TrackNames.ContagionOtherworldly.ModName"));
+
+			ExxoAvalonOrigins.MusicDisplay.Call("AddMusic", (short)MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/UndergroundContagionEnnway"),
+				Language.GetText("Mods.Avalon.TrackNames.UndergroundContagionOtherworldly.Name"),
+				Language.GetText("Mods.Avalon.TrackNames.UndergroundContagionOtherworldly.Author"),
+				Language.GetText("Mods.Avalon.TrackNames.UndergroundContagionOtherworldly.ModName"));
+
 			ExxoAvalonOrigins.MusicDisplay.Call("AddMusic", (short)MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Contagion"),
 				Language.GetText("Mods.Avalon.TrackNames.Contagion.Name"),
 				Language.GetText("Mods.Avalon.TrackNames.Contagion.Author"),
@@ -31,7 +41,7 @@ internal class MusicDisplayCompat : ModSystem
 				Language.GetText("Mods.Avalon.TrackNames.DesertBeak.Author"),
 				Language.GetText("Mods.Avalon.TrackNames.DesertBeak.ModName"));
 
-			ExxoAvalonOrigins.MusicDisplay.Call("AddMusic", (short)MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeakOtherworldly"),
+			ExxoAvalonOrigins.MusicDisplay.Call("AddMusic", (short)MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/DesertBeakEnnway"),
 				Language.GetText("Mods.Avalon.TrackNames.DesertBeakOtherworldly.Name"),
 				Language.GetText("Mods.Avalon.TrackNames.DesertBeakOtherworldly.Author"),
 				Language.GetText("Mods.Avalon.TrackNames.DesertBeakOtherworldly.ModName"));

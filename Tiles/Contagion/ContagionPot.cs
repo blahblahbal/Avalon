@@ -199,25 +199,25 @@ public class ContagionPot : ModTile
                         torchStack = WorldGen.genRand.Next(5, 18);
                         glowstickStack = WorldGen.genRand.Next(3, 11);
                     }
-                    if (Main.LocalPlayer.ZoneCorrupt && Main.tile[i, j].LiquidAmount < 0)
+                    if (Main.LocalPlayer.ZoneCorrupt && Main.tile[i, j].LiquidAmount <= 0)
                     {
                         Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ItemID.CorruptTorch, torchStack); //Corrupt Torches
                     }
-                    else if (Main.LocalPlayer.ZoneCrimson && Main.tile[i, j].LiquidAmount < 0)
+                    else if (Main.LocalPlayer.ZoneCrimson && Main.tile[i, j].LiquidAmount <= 0)
                     {
                         Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ItemID.CrimsonTorch, torchStack); //Crimson Torches
                     }
-                    else if (Main.LocalPlayer.ZoneHallow && Main.tile[i, j].LiquidAmount < 0)
+                    else if (Main.LocalPlayer.ZoneHallow && Main.tile[i, j].LiquidAmount <= 0)
                     {
                         Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ItemID.HallowedTorch, torchStack); //Hallow Torches
                     }
-                    else if (Main.LocalPlayer.InModBiome<Biomes.Contagion>() && Main.tile[i, j].LiquidAmount < 0)
+                    else if ((Main.LocalPlayer.InModBiome<Biomes.Contagion>() || Main.LocalPlayer.InModBiome<Biomes.UndergroundContagion>()) && Main.tile[i, j].LiquidAmount <= 0)
                     {
                         Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<ContagionTorch>(), torchStack); //Contagion Torches
                     }
-                    else if (Main.LocalPlayer.InModBiome<Biomes.Savanna>() && Main.tile[i, j].LiquidAmount < 0)
+                    else if ((Main.LocalPlayer.InModBiome<Biomes.Savanna>() || Main.LocalPlayer.InModBiome<Biomes.UndergroundTropics>()) && Main.tile[i, j].LiquidAmount <= 0)
                     {
-                        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<Items.Placeable.Furniture.SavannaTorch>(), torchStack); //Tropics Torches
+                        Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<SavannaTorch>(), torchStack); //Tropics Torches
                     }
                     else if (Main.tile[i, j].LiquidAmount > 0 && !Main.LocalPlayer.ZoneSnow && !Main.LocalPlayer.ZoneRockLayerHeight)
                     {

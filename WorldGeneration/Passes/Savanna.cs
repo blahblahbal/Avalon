@@ -614,7 +614,6 @@ internal class SavannaPassHookAL : ModHook
 		WorldGen.TileRunner(x, y, WorldGen.genRand.Next((int)(250.0 * (double)worldScale?.GetValue(self)), (int)(500.0 * (double)worldScale?.GetValue(self))), WorldGen.genRand.Next(50, 150), ModContent.TileType<Loam>(), addTile: true, GenVars.dungeonSide * xSpeedScale);
 		GenVars.mudWall = false;
 	}
-
 	private void PlaceGemsAt(int x, int y, ushort baseGem, int gemVariants, JunglePass self)
 	{
 		for (int i = 0; (double)i < 6.0 * (double)worldScale?.GetValue(self); i++)
@@ -622,7 +621,6 @@ internal class SavannaPassHookAL : ModHook
 			WorldGen.TileRunner(x + WorldGen.genRand.Next(-(int)(125.0 * (double)worldScale?.GetValue(self)), (int)(125.0 * (double)worldScale?.GetValue(self))), y + WorldGen.genRand.Next(-(int)(125.0 * (double)worldScale?.GetValue(self)), (int)(125.0 * (double)worldScale?.GetValue(self))), WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(3, 8), WorldGen.genRand.Next(baseGem, baseGem + gemVariants));
 		}
 	}
-
 	private void ReplaceJungleWalls()
 	{
 		for (int x = 0; x < Main.maxTilesX; x++)
@@ -640,16 +638,46 @@ internal class SavannaPassHookAL : ModHook
 			}
 		}
 	}
+	private void CreateOvalCave(int x, int y, int radius)
+	{
+		int radiusX = radius + WorldGen.genRand.Next(-8, 9);
+		int radiusY = radius;
+		float slope = WorldGen.genRand.NextFloat(-0.4f, 0.4f); // range from -0.5 to 0.5
+		float intercept = -5f;
 
+		for (int i = -radiusX; i <= radiusX; i++)
+		{
+			for (int j = -radiusY; j <= radiusY; j++)
+			{
+				double dx = i / (double)radiusX;
+				double dy = j / (double)radiusY;
+
+				if (dx * dx + dy * dy <= 1.0)
+				{
+					float bottomY = i * slope + intercept;
+					if (j > bottomY)
+						continue;
+
+					int worldX = x + i;
+					int worldY = y + j;
+
+					if (WorldGen.InWorld(worldX, worldY))
+					{
+						Main.tile[worldX, worldY].Active(false);
+					}
+				}
+			}
+		}
+	}
 	private void CreateCaves()
 	{
 		for (int x = 0; x < Main.maxTilesX; x++)
 		{
 			for (int y = (int)Main.rockLayer; y < Main.maxTilesY - 200; y++)
 			{
-				if (replaceableTiles.Contains(Main.tile[x, y].TileType) && WorldGen.genRand.NextBool(750))
+				if (replaceableTiles.Contains(Main.tile[x, y].TileType) && WorldGen.genRand.NextBool(950))
 				{
-					WorldGen.Cavinator(x, y, WorldGen.genRand.Next(10, 25));
+					Cavinator(x, y, WorldGen.genRand.Next(10, 25));
 				}
 				if (Main.tile[x, y].WallType == WallID.JungleUnsafe)
 				{
@@ -657,6 +685,72 @@ internal class SavannaPassHookAL : ModHook
 				}
 			}
 		}
+	}
+	private void Cavinator(int i, int j, int steps)
+	{
+		double num = WorldGen.genRand.Next(7, 15);
+		double num2 = num;
+		int num3 = 1;
+		if (WorldGen.genRand.NextBool(2))
+			num3 = -1;
+
+		Vector2D vector2D = default;
+		vector2D.X = i;
+		vector2D.Y = j;
+		int num4 = WorldGen.genRand.Next(20, 40);
+		Vector2D vector2D2 = default;
+		vector2D2.Y = WorldGen.genRand.Next(10, 20) * 0.01;
+		vector2D2.X = num3;
+		while (num4 > 0)
+		{
+			num4--;
+			int num5 = (int)(vector2D.X - num * 0.5);
+			int num6 = (int)(vector2D.X + num * 0.5);
+			int num7 = (int)(vector2D.Y - num * 0.5);
+			int num8 = (int)(vector2D.Y + num * 0.5);
+			if (num5 < 0)
+				num5 = 0;
+
+			if (num6 > Main.maxTilesX)
+				num6 = Main.maxTilesX;
+
+			if (num7 < 0)
+				num7 = 0;
+
+			if (num8 > Main.maxTilesY)
+				num8 = Main.maxTilesY;
+
+			num2 = num * WorldGen.genRand.Next(80, 120) * 0.01;
+			for (int k = num5; k < num6; k++)
+			{
+				for (int l = num7; l < num8; l++)
+				{
+					double num9 = Math.Abs(k - vector2D.X);
+					double num10 = Math.Abs(l - vector2D.Y);
+					if (Math.Sqrt(num9 * num9 + num10 * num10) < num2 * 0.4 && TileID.Sets.CanBeClearedDuringGeneration[Main.tile[k, l].TileType] && Main.tile[k, l].TileType != TileID.Sand)
+						Main.tile[k, l].Active(false);
+				}
+			}
+
+			vector2D += vector2D2;
+			vector2D2.X += WorldGen.genRand.Next(-10, 11) * 0.05;
+			vector2D2.Y += WorldGen.genRand.Next(-10, 11) * 0.05;
+			if (vector2D2.X > num3 + 0.5)
+				vector2D2.X = num3 + 0.5;
+
+			if (vector2D2.X < num3 - 0.5)
+				vector2D2.X = num3 - 0.5;
+
+			if (vector2D2.Y > 2.0)
+				vector2D2.Y = 2.0;
+
+			if (vector2D2.Y < 0.0)
+				vector2D2.Y = 0.0;
+		}
+
+		if (steps > 0 && (int)vector2D.Y < Main.rockLayer + 50.0)
+			Cavinator((int)vector2D.X, (int)vector2D.Y, steps - 1);
+		else CreateOvalCave((int)vector2D.X, (int)vector2D.Y, WorldGen.genRand.Next(10, 25));
 	}
 }
 
@@ -680,7 +774,7 @@ internal class SavannaPassHook : ModHook
 
 	private void On_JunglePass_ApplyPass(On_JunglePass.orig_ApplyPass orig, JunglePass self, GenerationProgress progress, GameConfiguration configuration)
 	{
-		if ((!AltLibrarySupport.Enabled && ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Savanna)) // || (AltLibrarySupport.Enabled && WorldBiomeManager.GetWorldJungle() is SavannaAltBiome))
+		if (!AltLibrarySupport.Enabled && ModContent.GetInstance<AvalonWorld>().WorldJungle == WorldJungle.Savanna) // || (AltLibrarySupport.Enabled && WorldBiomeManager.GetWorldJungle() is SavannaAltBiome))
 		{
 			progress.Message = Language.GetTextValue("Mods.Avalon.World.Generation.Tropics.Generating");
 			
@@ -873,15 +967,50 @@ internal class SavannaPassHook : ModHook
 		}
 	}
 
+	private void CreateOvalCave(int x, int y, int radius, float intercept, float slope, bool top = true)
+	{
+		int radiusX = radius + WorldGen.genRand.Next(-8, 9);
+		int radiusY = radius;
+		//float slope = WorldGen.genRand.NextFloat(-0.4f, 0.4f); // range from -0.5 to 0.5
+		//float intercept = -5f;
+
+		for (int i = -radiusX; i <= radiusX; i++)
+		{
+			for (int j = -radiusY; j <= radiusY; j++)
+			{
+				double dx = i / (double)radiusX;
+				double dy = j / (double)radiusY;
+
+				if (dx * dx + dy * dy <= 1.0)
+				{
+					float bottomY = i * slope + intercept;
+					if (top)
+					{
+						if (j > bottomY)
+							continue;
+					}
+					else if (j < bottomY) continue;
+
+					int worldX = x + i;
+					int worldY = y + j;
+
+					if (WorldGen.InWorld(worldX, worldY))
+					{
+						Main.tile[worldX, worldY].Active(false);
+					}
+				}
+			}
+		}
+	}
 	private void CreateCaves()
 	{
 		for (int x = 0; x < Main.maxTilesX; x++)
 		{
 			for (int y = (int)Main.rockLayer; y < Main.maxTilesY - 200; y++)
 			{
-				if (replaceableTiles.Contains(Main.tile[x, y].TileType) && WorldGen.genRand.NextBool(750))
+				if (replaceableTiles.Contains(Main.tile[x, y].TileType) && WorldGen.genRand.NextBool(950))
 				{
-					WorldGen.Cavinator(x, y, WorldGen.genRand.Next(10, 25));
+					Cavinator(x, y, WorldGen.genRand.Next(10, 25));
 				}
 				if (Main.tile[x, y].WallType == WallID.JungleUnsafe)
 				{
@@ -889,5 +1018,76 @@ internal class SavannaPassHook : ModHook
 				}
 			}
 		}
+	}
+
+	private void Cavinator(int i, int j, int steps)
+	{
+		double num = WorldGen.genRand.Next(7, 15);
+		double num2 = num;
+		int num3 = 1;
+		if (WorldGen.genRand.NextBool(2))
+			num3 = -1;
+
+		Vector2D vector2D = default;
+		vector2D.X = i;
+		vector2D.Y = j;
+		int num4 = WorldGen.genRand.Next(20, 40);
+		Vector2D vector2D2 = default;
+		vector2D2.Y = WorldGen.genRand.Next(10, 20) * 0.01;
+		vector2D2.X = num3;
+		while (num4 > 0)
+		{
+			num4--;
+			int num5 = (int)(vector2D.X - num * 0.5);
+			int num6 = (int)(vector2D.X + num * 0.5);
+			int num7 = (int)(vector2D.Y - num * 0.5);
+			int num8 = (int)(vector2D.Y + num * 0.5);
+			if (num5 < 0)
+				num5 = 0;
+
+			if (num6 > Main.maxTilesX)
+				num6 = Main.maxTilesX;
+
+			if (num7 < 0)
+				num7 = 0;
+
+			if (num8 > Main.maxTilesY)
+				num8 = Main.maxTilesY;
+
+			num2 = num * WorldGen.genRand.Next(80, 120) * 0.01;
+			for (int k = num5; k < num6; k++)
+			{
+				for (int l = num7; l < num8; l++)
+				{
+					double num9 = Math.Abs(k - vector2D.X);
+					double num10 = Math.Abs(l - vector2D.Y);
+					if (Math.Sqrt(num9 * num9 + num10 * num10) < num2 * 0.4 && TileID.Sets.CanBeClearedDuringGeneration[Main.tile[k, l].TileType] && Main.tile[k, l].TileType != TileID.Sand)
+						Main.tile[k, l].Active(false);
+				}
+			}
+
+			vector2D += vector2D2;
+			vector2D2.X += WorldGen.genRand.Next(-10, 11) * 0.05;
+			vector2D2.Y += WorldGen.genRand.Next(-10, 11) * 0.05;
+			if (vector2D2.X > num3 + 0.5)
+				vector2D2.X = num3 + 0.5;
+
+			if (vector2D2.X < num3 - 0.5)
+				vector2D2.X = num3 - 0.5;
+
+			if (vector2D2.Y > 2.0)
+				vector2D2.Y = 2.0;
+
+			if (vector2D2.Y < 0.0)
+				vector2D2.Y = 0.0;
+		}
+
+		if (steps > 0 && (int)vector2D.Y < Main.rockLayer + 50.0)
+			Cavinator((int)vector2D.X, (int)vector2D.Y, steps - 1);
+		else
+		{
+			//bool top = WorldGen.genRand.NextBool();
+			CreateOvalCave((int)vector2D.X, (int)vector2D.Y, WorldGen.genRand.Next(10, 25), -5f, WorldGen.genRand.NextFloat(-.4f, .4f));
+		} 
 	}
 }

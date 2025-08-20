@@ -129,14 +129,14 @@ Mods: {
 
 	Avalon: {
 		TrackNames: {
-			Contagion: {
-				Name: Contagion
+			ContagionOtherworldly: {
+				Name: Otherworldly Contagion
 				Author: by ENNWAY
 				ModName: Avalon
 			}
 
-			UndergroundContagion: {
-				Name: Underground Contagion
+			UndergroundContagionOtherworldly: {
+				Name: Otherworldly Underground Contagion
 				Author: by ENNWAY
 				ModName: Avalon
 			}
@@ -204,6 +204,18 @@ Mods: {
 			Mechasting: {
 				Name: Mechasting
 				Author: by Zemmie
+				ModName: Avalon
+			}
+
+			Contagion: {
+				Name: Contagion
+				Author: by Heart Plus Up!
+				ModName: Avalon
+			}
+
+			UndergroundContagion: {
+				Name: Underground Contagion
+				Author: by Heart Plus Up!
 				ModName: Avalon
 			}
 		}
@@ -9909,12 +9921,12 @@ Mods: {
 			}
 
 			MusicBoxContagionOtherworldly: {
-				DisplayName: Music Box Contagion Otherworldly
+				DisplayName: Otherworldly Music Box (Contagion)
 				Tooltip: ""
 			}
 
 			MusicBoxUndergroundContagionOtherworldly: {
-				DisplayName: Music Box Underground Contagion Otherworldly
+				DisplayName: Otherworldly Music Box (Underground Contagion)
 				Tooltip: ""
 			}
 		}

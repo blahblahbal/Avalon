@@ -1,6 +1,7 @@
 using Avalon.Tiles;
 using Avalon.Tiles.CrystalMines;
 using Avalon.Tiles.Ores;
+using Avalon.WorldGeneration.Passes;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,9 @@ public class WorldgenHelper : ModItem
 
 		if (player.ItemAnimationJustStarted)
 		{
-			WorldGeneration.Biomes.Basalt.PlaceBasalt();
+			bool top = WorldGen.genRand.NextBool();
+			CreateOvalCave(x, y, 20, top ? -5f : 5f, WorldGen.genRand.NextFloat(-.4f, .4f), top);
+			//WorldGeneration.Biomes.Basalt.PlaceBasalt();
 
 			#region old junk
 			////if (AvalonGlobalTile.TileVisibilityState < (int)AvalonGlobalTile.TileVisibilityStateEnum.OnlyTiles)
@@ -116,6 +119,44 @@ public class WorldgenHelper : ModItem
 		return false;
 	}
 
+	public static void CreateOvalCave(int x, int y, int radius, float intercept, float slope, bool top = true)
+	{
+		int radiusX = radius + WorldGen.genRand.Next(-8, 9);
+		int radiusY = radius;
+		//float slope = WorldGen.genRand.NextFloat(-0.4f, 0.4f); // range from -0.5 to 0.5
+		//float intercept = -5f;
+
+		for (int i = -radiusX; i <= radiusX; i++)
+		{
+			for (int j = -radiusY; j <= radiusY; j++)
+			{
+				double dx = i / (double)radiusX;
+				double dy = j / (double)radiusY;
+
+				if (dx * dx + dy * dy <= 1.0)
+				{
+					float bottomY = i * slope + intercept;
+					if (top)
+					{
+						if (j > bottomY)
+							continue;
+					}
+					else if (j < bottomY) continue;
+
+					int worldX = x + i;
+					int worldY = y + j;
+
+					if (WorldGen.InWorld(worldX, worldY))
+					{
+						Main.tile[worldX, worldY].Active(false);
+					}
+				}
+			}
+		}
+	}
+
+
+
 	public IEnumerable<Type> FindDerivedTypes(Assembly assembly, Type baseType)
 	{
 		return assembly.GetTypes().Where(t => t != baseType &&
@@ -123,7 +164,7 @@ public class WorldgenHelper : ModItem
 	}
 
 
-
+	
 	public static void MakeSkyFortress(int x, int y)
 	{
 		// with these parameters, the top floor will always have space for two of the hidden rooms (technically more, but at least 2)
