@@ -9917,6 +9917,16 @@ Mods: {
 				DisplayName: Music Box Underground Contagion Otherworldly
 				Tooltip: ""
 			}
+
+			MagicAcidDropper: {
+				DisplayName: Magic Acid Dropper
+				Tooltip: ""
+			}
+
+			MagicBloodDropper: {
+				DisplayName: Magic Blood Dropper
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -11792,6 +11802,8 @@ Mods: {
 			HydrolythOre.MapEntry: Hydrolyth
 			MoonwareChest.MapEntry0: Moonware Chest
 			MoonwareDresser.MapEntry: Moonware Dresser
+			AcidDropletTile.MapEntry: Dripping Acid
+			BloodDropletTile.MapEntry: Dripping Blood
 		}
 
 		Prefixes: {

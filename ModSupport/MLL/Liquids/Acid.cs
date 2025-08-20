@@ -23,15 +23,15 @@ internal class Acid : ModLiquid
 {
 	public override void SetStaticDefaults()
 	{
-		VisualViscosity = 200;
-		LiquidFallLength = 20;
+		VisualViscosity = 160;
+		LiquidFallLength = 6;
 		DefaultOpacity = 0.95f;
 		SlopeOpacity = 1f;
 		WaterRippleMultiplier = 0.3f;
 		SplashDustType = ModContent.DustType<AcidLiquidSplash>();
 		SplashSound = SoundID.SplashWeak;
 		FallDelay = 2; //The delay when liquids are falling. Liquids will wait this extra amount of frames before falling again.
-		ChecksForDrowning = true; //If the player can drown in this liquid
+		ChecksForDrowning = false; //If the player can drown in this liquid
 		PlayersEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
 		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
 		AddMapEntry(new Color(0, 255, 0), CreateMapEntryName());

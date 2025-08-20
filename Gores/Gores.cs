@@ -1,5 +1,4 @@
-﻿using Avalon.ModSupport.MLL.Gores;
-using Terraria.GameContent;
+﻿using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace Avalon.Gores;
@@ -10,18 +9,6 @@ public class Gores : ModSystem
 		MakeChildSafe<Bubble>();
 		MakeChildSafe<LargeBubble>();
 		MakeChildSafe<SmallBubble>();
-
-		MakeChildSafe<ContagionDroplet>();
-		MakeChildSafe<DarkMatterDroplet>();
-		MakeChildSafe<TropicsDroplet>();
-
-		MakeChildSafe<CaesiumLavaDroplet>();
-		MakeChildSafe<ContagionLavaDroplet>();
-		MakeChildSafe<PhantomLavaDroplet>();
-		MakeChildSafe<SavannaLavaDroplet>();
-
-		MakeChildSafe<AcidDroplet>();
-		MakeChildSafe<BloodDroplet>();
 
 		MakeChildSafe<ContagionPotGore1>();
 		MakeChildSafe<ContagionPotGore2>();
@@ -44,8 +31,8 @@ public class Gores : ModSystem
 		MakeChildSafe("GargoyleGore3");
 		MakeChildSafe("GargoyleGore4");
 		MakeChildSafe("GargoyleGore5");
-		MakeChildSafe("GargoyleGoreHead");
-		MakeChildSafe("GargoyleGoreWing");
+		MakeChildSafe("GargoyleHead");
+		MakeChildSafe("GargoyleWing");
 
 		MakeChildSafe("IrateBonesHelmet");
 
