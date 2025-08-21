@@ -36,6 +36,10 @@ internal class Acid : ModLiquid
 		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
 		AddMapEntry(new Color(0, 255, 0), CreateMapEntryName());
 	}
+	public override bool BlocksTilePlacement(Player player, int i, int j)
+	{
+		return true;
+	}
 	public override void EmitEffects(int i, int j, LiquidCache liquidCache)
 	{
 		if (Main.instance.IsActive && !Main.gamePaused && Main.tile[i, j].LiquidType == Type)

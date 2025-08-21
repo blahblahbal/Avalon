@@ -25,10 +25,4 @@ public class BloodFall : ModLiquidFall
 		}
 		return num;
 	}
-
-	//We add light to our waterfall as the liquid tied to this fall also shines a bright white light
-	public override void AddLight(int i, int j)
-	{
-		Lighting.AddLight(i, j, (float)(200f / 255f), 0f, 0f);
-	}
 }
