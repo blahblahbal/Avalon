@@ -209,11 +209,11 @@ public class TuhrtlPot : ModTile
 					{
 						Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ItemID.HallowedTorch, torchStack); //Hallow Torches
 					}
-					else if (Main.LocalPlayer.InModBiome<Biomes.Contagion>() && Main.tile[i, j].LiquidAmount <= 0)
+					else if ((Main.LocalPlayer.InModBiome<Biomes.Contagion>() || Main.LocalPlayer.InModBiome<Biomes.UndergroundContagion>()) && Main.tile[i, j].LiquidAmount <= 0)
 					{
 						Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<ContagionTorch>(), torchStack); //Contagion Torches
 					}
-					else if (Main.LocalPlayer.InModBiome<Biomes.Savanna>() && Main.tile[i, j].LiquidAmount <= 0)
+					else if ((Main.LocalPlayer.InModBiome<Biomes.Savanna>() || Main.LocalPlayer.InModBiome<Biomes.UndergroundTropics>()) && Main.tile[i, j].LiquidAmount <= 0)
 					{
 						Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, ModContent.ItemType<Items.Placeable.Furniture.SavannaTorch>(), torchStack); //Tropics Torches
 					}
