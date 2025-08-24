@@ -1,4 +1,6 @@
-﻿using Terraria.GameContent;
+﻿using Terraria;
+using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Gores;
@@ -6,6 +8,8 @@ public class Gores : ModSystem
 {
 	public override void SetStaticDefaults()
 	{
+		if (Main.netMode == NetmodeID.Server) return;
+
 		MakeChildSafe<Bubble>();
 		MakeChildSafe<LargeBubble>();
 		MakeChildSafe<SmallBubble>();
