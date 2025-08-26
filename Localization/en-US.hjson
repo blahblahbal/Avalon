@@ -9939,6 +9939,26 @@ Mods: {
 				DisplayName: Magic Blood Dropper
 				Tooltip: ""
 			}
+
+			BloodfallBlock: {
+				DisplayName: Bloodfall Block
+				Tooltip: ""
+			}
+
+			AcidfallBlock: {
+				DisplayName: Acidfall Block
+				Tooltip: ""
+			}
+
+			AcidfallWallItem: {
+				DisplayName: Acidfall Wall
+				Tooltip: ""
+			}
+
+			BloodfallWallItem: {
+				DisplayName: Bloodfall Wall
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -12169,8 +12189,8 @@ Mods: {
 		}
 
 		Liquids: {
-			Blood.MapEntry: Blood
-			Acid.MapEntry: Acid
+			Blood.RecipeEntry: Near blood
+			Acid.RecipeEntry: Near acid
 		}
 	}
 }
