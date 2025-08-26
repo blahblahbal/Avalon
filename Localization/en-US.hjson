@@ -9943,10 +9943,10 @@ Mods: {
 			AcidWaders: {
 				DisplayName: Acid Waders
 				Tooltip:
-				'''
-				Provides the ability to walk on acid
-				Reduces damage taken from touching acid
-				'''
+					'''
+					Provides the ability to walk on acid
+					Reduces damage taken from touching acid
+					'''
 			}
 
 			BloodfallBlock: {

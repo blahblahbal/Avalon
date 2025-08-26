@@ -681,7 +681,7 @@ public class AvalonGlobalItem : GlobalItem
 			Tile tileSafe = Framing.GetTileSafely(tilePos);
 
 			#region sponges 3x3
-			if (Main.mouseRight && !Main.mouseLeft && player.cursorItemIconID == 0 && !player.mouseInterface &&
+			if (Main.mouseRight && !Main.mouseLeft && player.cursorItemIconID == ItemID.None && !player.mouseInterface &&
 				player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
 				(item.type == ItemID.SuperAbsorbantSponge || item.type == ItemID.LavaAbsorbantSponge ||
 				item.type == ItemID.HoneyAbsorbantSponge || item.type == ItemID.UltraAbsorbantSponge ||
@@ -713,7 +713,7 @@ public class AvalonGlobalItem : GlobalItem
 			#endregion
 
 			#region right click bottomless buckets to do 3x3
-			if (Main.mouseRight && !Main.mouseLeft && player.cursorItemIconID == 0 && !player.mouseInterface &&
+			if (Main.mouseRight && !Main.mouseLeft && player.cursorItemIconID == ItemID.None && !player.mouseInterface &&
 				player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
 				(item.type == ItemID.BottomlessBucket || item.type == ItemID.BottomlessLavaBucket ||
 				item.type == ItemID.BottomlessHoneyBucket || item.type == ItemID.BottomlessShimmerBucket ||
@@ -3084,44 +3084,41 @@ public class AvalonGlobalItem : GlobalItem
 		#endregion
 
 		#region cloud/obsidian glove
-		if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>() &&
-			item.tileWand == -1)
+		if (player.GetModPlayer<AvalonPlayer>().CloudGlove && player.whoAmI == Main.myPlayer && Main.mouseLeft && item.type != ModContent.ItemType<DungeonWand>() && item.tileWand == -1)
 		{
 			if (ModContent.GetInstance<CloudGloveBuilderToggle>().CurrentState == 0)
 			{
 				bool inrange = player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, TileReachCheckSettings.Simple);
-				if (item.createTile > -1 &&
-					(Main.tileSolid[item.createTile] || nonSolidExceptions.Contains(item.createTile)) &&
-					(Main.tile[Player.tileTargetX, Player.tileTargetY].LiquidType != LiquidID.Lava ||
-					 player.GetModPlayer<AvalonPlayer>().ObsidianGlove) &&
-					!Main.tile[Player.tileTargetX, Player.tileTargetY].HasTile && inrange)
+				if (inrange)
 				{
-					bool subtractFromStack = WorldGen.PlaceTile(Player.tileTargetX, Player.tileTargetY, item.createTile);
-					if (Main.tile[Player.tileTargetX, Player.tileTargetY].HasTile &&
-						Main.netMode != NetmodeID.SinglePlayer && subtractFromStack)
+					Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
+					if (item.createTile > -1 && !tile.HasTile &&
+						(Main.tileSolid[item.createTile] || nonSolidExceptions.Contains(item.createTile)) &&
+						((tile.LiquidType == LiquidID.Lava && player.GetModPlayer<AvalonPlayer>().ObsidianGlove) || !LiquidLoader.BlocksTilePlacement(player, Player.tileTargetX, Player.tileTargetY, tile.LiquidType)))
 					{
-						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, Player.tileTargetX,
-							Player.tileTargetY, item.createTile);
+						bool subtractFromStack = WorldGen.PlaceTile(Player.tileTargetX, Player.tileTargetY, item.createTile);
+						if (tile.HasTile && Main.netMode != NetmodeID.SinglePlayer && subtractFromStack)
+						{
+							NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, Player.tileTargetX, Player.tileTargetY, item.createTile);
+						}
+
+						if (subtractFromStack)
+						{
+							item.stack--;
+						}
 					}
 
-					if (subtractFromStack)
+					if (item.createWall > 0 && tile.WallType == 0)
 					{
+						WorldGen.PlaceWall(Player.tileTargetX, Player.tileTargetY, item.createWall);
+						if (tile.WallType != 0 && Main.netMode != NetmodeID.SinglePlayer)
+						{
+							NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 3, Player.tileTargetX, Player.tileTargetY, item.createWall);
+						}
+
+						//Main.PlaySound(0, Player.tileTargetX * 16, Player.tileTargetY * 16, 1);
 						item.stack--;
 					}
-				}
-
-				if (item.createWall > 0 && Main.tile[Player.tileTargetX, Player.tileTargetY].WallType == 0 && inrange)
-				{
-					WorldGen.PlaceWall(Player.tileTargetX, Player.tileTargetY, item.createWall);
-					if (Main.tile[Player.tileTargetX, Player.tileTargetY].WallType != 0 &&
-						Main.netMode != NetmodeID.SinglePlayer)
-					{
-						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 3, Player.tileTargetX,
-							Player.tileTargetY, item.createWall);
-					}
-
-					//Main.PlaySound(0, Player.tileTargetX * 16, Player.tileTargetY * 16, 1);
-					item.stack--;
 				}
 			}
 		}
