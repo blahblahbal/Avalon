@@ -35,7 +35,7 @@ internal class Acid : ModLiquid
 		ChecksForDrowning = false; //If the player can drown in this liquid
 		PlayersEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
 		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
-		AddMapEntry(new Color(0, 255, 0), CreateMapEntryName());
+		AddMapEntry(new Color(0, 255, 0));
 	}
 	public override bool BlocksTilePlacement(Player player, int i, int j)
 	{

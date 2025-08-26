@@ -1,6 +1,5 @@
 using Avalon.ModSupport.MLL.Liquids;
 using Avalon.ModSupport.MLL.Tiles;
-using ModLiquidLib.ModLoader;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -34,7 +33,7 @@ public class MagicBloodDropper : ModItem
 	{
 		Recipe recipe = Recipe.Create(Type);
 		recipe.AddIngredient(ItemID.EmptyDropper);
-		recipe.AddCondition(LiquidLoader.NearLiquid(LiquidLoader.LiquidType<Blood>()));
+		recipe.AddLiquid<Blood>();
 		recipe.AddTile(TileID.CrystalBall);
 		recipe.Register();
 	}
