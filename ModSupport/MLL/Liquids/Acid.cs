@@ -1,6 +1,7 @@
 ﻿using Avalon.Common;
 using Avalon.ModSupport.MLL.Buffs;
 using Avalon.ModSupport.MLL.Dusts;
+using Avalon.ModSupport.MLL.Items;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
@@ -178,10 +179,6 @@ internal class Acid : ModLiquid
 	}
 	public override bool PreLiquidMerge(int liquidX, int liquidY, int tileX, int tileY, int otherLiquid)
 	{
-		//if (otherLiquid == LiquidLoader.LiquidType<ExampleCustomMergeLiquid2>()) //check if the other liquid is of the type we can merhe
-		//{
-		//	return false;
-		//}
 		//tile variables, these help us edit the liquid at certain tile positions
 		Tile leftTile = Main.tile[tileX - 1, tileY];
 		Tile rightTile = Main.tile[tileX + 1, tileY];
@@ -323,7 +320,10 @@ internal class Acid : ModLiquid
 	}
 	public override bool PlayerCollision(Player player, bool fallThrough, bool ignorePlats)
 	{
-		player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(5)}", $"{player.name}")), 40 + player.statDefense / 2, 0);
+		int DMG = 40 + player.statDefense / 2;
+		if (player.GetModPlayer<AcidWadersPlayer>().AcidWalk)
+			DMG = 20 + player.statDefense / 2;
+		player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(5)}", $"{player.name}")), DMG, 0);
 		float time = 7;
 		if (Main.expertMode) time = 14;
 		if (Main.masterMode) time = 17.5f;

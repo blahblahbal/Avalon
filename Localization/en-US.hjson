@@ -9939,6 +9939,15 @@ Mods: {
 				DisplayName: Magic Blood Dropper
 				Tooltip: ""
 			}
+
+			AcidWaders: {
+				DisplayName: Acid Waders
+				Tooltip:
+				'''
+				Provides the ability to walk on acid
+				Reduces damage taken from touching acid
+				'''
+			}
 		}
 
 		InfoDisplays: {

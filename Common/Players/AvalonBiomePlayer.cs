@@ -10,6 +10,9 @@ namespace Avalon.Common.Players;
 public class AvalonBiomePlayer : ModPlayer
 {
 	public bool ZoneContagion => Player.InModBiome(ModContent.GetInstance<Contagion>());
+	public bool ZoneAnyContagion => Player.InModBiome(ModContent.GetInstance<Contagion>()) ||
+		Player.InModBiome(ModContent.GetInstance<UndergroundContagion>()) ||
+		Player.InModBiome(ModContent.GetInstance<ContagionDesert>());
 	public bool ZoneCaesium => Player.InModBiome(ModContent.GetInstance<CaesiumBlastplains>());
 	//public bool ZoneCrystal => Player.InModBiome(ModContent.GetInstance<CrystalMines>());
 	public bool ZoneDarkMatter => Player.InModBiome(ModContent.GetInstance<DarkMatter>());
@@ -17,9 +20,11 @@ public class AvalonBiomePlayer : ModPlayer
 	public bool ZoneNearHellcastle => Player.InModBiome(ModContent.GetInstance<NearHellcastle>());
 	public bool ZoneSkyFortress => Player.InModBiome(ModContent.GetInstance<SkyFortress>());
 	public bool ZoneSavanna => Player.InModBiome(ModContent.GetInstance<Savanna>());
+	public bool ZoneAnySavanna => Player.InModBiome(ModContent.GetInstance<Savanna>()) ||
+		Player.InModBiome(ModContent.GetInstance<UndergroundTropics>());
 	//public bool ZoneTuhrtlOutpost => Player.InModBiome(ModContent.GetInstance<TuhrtlOutpost>());
 	public bool ZoneUndergroundContagion => Player.InModBiome(ModContent.GetInstance<UndergroundContagion>());
-	public bool ZoneUndergroundTropics => Player.InModBiome(ModContent.GetInstance<UndergroundTropics>());
+	public bool ZoneUndergroundSavanna => Player.InModBiome(ModContent.GetInstance<UndergroundTropics>());
 	public bool ZoneAltDungeon => Player.InModBiome(ModContent.GetInstance<DungeonAltColors>());
 	public bool ZoneContagionDesert => Player.InModBiome(ModContent.GetInstance<ContagionDesert>());
 	public bool ZoneTime { get; private set; }

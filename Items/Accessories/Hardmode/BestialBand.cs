@@ -1,4 +1,5 @@
 using Avalon.Common.Players;
+using Avalon.ModSupport.MLL.Items;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -19,7 +20,9 @@ public class BestialBand : ModItem
 		Recipe.Create(Type)
 			.AddIngredient(ItemID.CelestialShell)
 			.AddIngredient(ModContent.ItemType<HadesCross>())
-			.AddTile(TileID.TinkerersWorkbench).Register();
+			.AddIngredient(ModContent.ItemType<AcidWaders>())
+			.AddTile(TileID.TinkerersWorkbench)
+			.Register();
 	}
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
@@ -44,5 +47,6 @@ public class BestialBand : ModItem
 		player.GetCritChance(DamageClass.Generic) += 2;
 		player.pickSpeed -= 0.15f;
 		player.GetKnockback(DamageClass.Summon) += 0.5f;
+		player.GetModPlayer<AcidWadersPlayer>().AcidWalk = true;
 	}
 }

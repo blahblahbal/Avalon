@@ -47,7 +47,7 @@ public class Rafflesia : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneSavanna || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundTropics)
+        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneSavanna || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundSavanna)
         {
             if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 2].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>())
                 //&&

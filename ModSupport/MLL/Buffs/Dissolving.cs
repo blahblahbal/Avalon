@@ -4,6 +4,7 @@ using Terraria.DataStructures;
 using Terraria.Localization;
 using Terraria;
 using Avalon.Common;
+using Avalon.ModSupport.MLL.Items;
 
 namespace Avalon.ModSupport.MLL.Buffs;
 
@@ -28,6 +29,7 @@ public class Dissolving : ModBuff
 		if (timer % 10 == 0)
 		{
 			int amt = 4;
+			if (player.GetModPlayer<AcidWadersPlayer>().AcidWalk) amt = 2;
 			player.statLife -= amt;
 			CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
 			if (player.statLife <= 0)
