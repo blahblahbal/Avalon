@@ -9948,7 +9948,6 @@ Mods: {
 				Reduces damage taken from touching acid
 				'''
 			}
-		}
 
 			BloodfallBlock: {
 				DisplayName: Bloodfall Block
