@@ -9,6 +9,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
+using Avalon.ModSupport.MLL.Liquids;
 using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Prefixes;
@@ -20,6 +21,8 @@ using Avalon.Tiles.Savanna;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ModLiquidLib.ModLoader;
+using ModLiquidLib.Utils.LiquidContent;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -246,6 +249,8 @@ public class AvalonPlayer : ModPlayer
 	#endregion
 
 	#region accessories
+	public bool AcidWalk;
+	public bool AcidDmgReduction;
 	public bool PulseCharm;
 	public bool ShadowCharm;
 	public bool CloudGlove;
@@ -309,6 +314,8 @@ public class AvalonPlayer : ModPlayer
 	#endregion
 
 	#region buffs and debuffs
+	public bool Dissolving;
+	public byte DissolvingTimer;
 	public int IcarusTimer;
 	public int InfectDamage;
 	public bool BrokenWeaponry;
@@ -324,6 +331,7 @@ public class AvalonPlayer : ModPlayer
 	public bool Ward;
 	public int WardCurseDOT;
 	public bool CaesiumPoison;
+	public byte CaesiumPoisonTimer;
 	public bool Pathogen;
 	public bool BloodCasting;
 	public bool Vision;
@@ -333,9 +341,11 @@ public class AvalonPlayer : ModPlayer
 	public bool Berserk;
 	public bool SanguineSacrifice;
 	public bool Electrified;
+	public byte ElectrifiedTimer;
 	public bool Gambler;
 	public bool AdvGambler;
 	public bool Malaria;
+	public byte MalariaTimer;
 
 	public bool HungryMinion;
 	public bool GastroMinion;
@@ -474,8 +484,11 @@ public class AvalonPlayer : ModPlayer
 		AdvGambler = false;
 		DupeLoot = false;
 		AdvDupeLoot = false;
+		Dissolving = false;
 
 		// accessories
+		AcidWalk = false;
+		AcidDmgReduction = false;
 		TrapImmune = false;
 		PulseCharm = false;
 		ShadowCharm = false;
@@ -705,6 +718,12 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PreUpdateMovement()
 	{
+		if (Player.gravDir == -1f)
+		{
+			AcidWalk = false;
+		}
+		Player.GetModPlayer<ModLiquidPlayer>().canLiquidBeWalkedOn[LiquidLoader.LiquidType<Acid>()] = AcidWalk;
+
 		if (InertiaBoots && Player.TryingToHoverDown && Player.controlJump && Player.wingTime > 0f && !Player.merman)
 		{
 			Player.velocity.Y = 1E-05f;
@@ -1316,6 +1335,78 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void UpdateBadLifeRegen()
 	{
+		if (Malaria)
+		{
+			MalariaTimer++;
+			if (MalariaTimer % 4 == 0)
+			{
+				int amt = 3;
+				if (DuraShield) amt = 2;
+				else if (DuraOmegaShield) amt = 1;
+				Player.statLife -= amt;
+				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
+				if (Player.statLife <= 0)
+				{
+					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.{Name}_1", $"{Player.name}")), 10, 0);
+				}
+				MalariaTimer = 0;
+			}
+		}
+		if (Electrified)
+		{
+			ElectrifiedTimer++;
+			if (ElectrifiedTimer % 4 == 0)
+			{
+				int amt = 3;
+				if (DuraShield) amt = 2;
+				else if (DuraOmegaShield) amt = 1;
+				if (Player.velocity.Length() != 0)
+				{
+					amt += 3;
+				}
+				Player.statLife -= amt;
+				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
+				if (Player.statLife <= 0)
+				{
+					int type = Main.rand.Next(10) + 1;
+					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey(type > 4 ? $"Mods.Avalon.DeathText.Electrocuted_{type - 4}" : $"DeathText.Electrocuted_{type}", $"{Player.name}")), 10, 0);
+				}
+				ElectrifiedTimer = 0;
+			}
+		}
+		if (Dissolving)
+		{
+			DissolvingTimer++;
+			if (DissolvingTimer % 10 == 0)
+			{
+				int amt = 4;
+				if (AcidDmgReduction)
+					amt = 2;
+				Player.statLife -= amt;
+				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
+				if (Player.statLife <= 0)
+				{
+					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(5)}", $"{Player.name}")), 10, 0);
+				}
+				DissolvingTimer = 0;
+			}
+		}
+		if (CaesiumPoison)
+		{
+			CaesiumPoisonTimer++;
+			if (CaesiumPoisonTimer % 6 == 0)
+			{
+				int amt = 3;
+				if (DuraShield) amt = 2;
+				else if (DuraOmegaShield) amt = 1;
+				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
+				if (Player.statLife <= 0)
+				{
+					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.{Name}_1", $"{Player.name}")), 10, 0);
+				}
+				CaesiumPoisonTimer = 0;
+			}
+		}
 		if (DuraShield)
 		{
 			if (Player.poisoned)

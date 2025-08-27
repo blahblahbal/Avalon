@@ -47,6 +47,7 @@ public class BestialBand : ModItem
 		player.GetCritChance(DamageClass.Generic) += 2;
 		player.pickSpeed -= 0.15f;
 		player.GetKnockback(DamageClass.Summon) += 0.5f;
-		player.GetModPlayer<AcidWadersPlayer>().AcidWalk = true;
+		player.GetModPlayer<AvalonPlayer>().AcidWalk = true;
+		player.GetModPlayer<AvalonPlayer>().AcidDmgReduction = true;
 	}
 }

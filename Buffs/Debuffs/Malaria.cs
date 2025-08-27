@@ -23,25 +23,7 @@ public class Malaria : ModBuff
 		{
 			player.lifeRegen = 0;
 		}
-		timer++;
-		if (timer % 4 == 0)
-		{
-			int amt = 3;
-			if (player.GetModPlayer<AvalonPlayer>().DuraShield)
-			{
-				amt = 2;
-			}
-			else if (player.GetModPlayer<AvalonPlayer>().DuraOmegaShield)
-			{
-				amt = 1;
-			}
-			player.statLife -= amt;
-			CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
-			if (player.statLife <= 0)
-			{
-				player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.{Name}_1", $"{player.name}")), 10, 0);
-			}
-		}
+		
 		player.lifeRegenTime = 0;
 		if (player.buffTime[buffIndex] == 0)
 		{

@@ -1,4 +1,5 @@
 ﻿using Avalon.Common;
+using Avalon.Common.Players;
 using Avalon.ModSupport.MLL.Buffs;
 using Avalon.ModSupport.MLL.Dusts;
 using Avalon.ModSupport.MLL.Items;
@@ -282,7 +283,7 @@ internal class Acid : ModLiquid
 	public override bool PlayerCollision(Player player, bool fallThrough, bool ignorePlats)
 	{
 		int DMG = 40 + player.statDefense / 2;
-		if (player.GetModPlayer<AcidWadersPlayer>().AcidWalk)
+		if (player.GetModPlayer<AvalonPlayer>().AcidDmgReduction)
 			DMG = 20 + player.statDefense / 2;
 		player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(5)}", $"{player.name}")), DMG, 0);
 		float time = 7;
