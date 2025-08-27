@@ -43,31 +43,30 @@ internal class Acid : ModLiquid
 	}
 	public override void EmitEffects(int i, int j, LiquidCache liquidCache)
 	{
-		if (Main.instance.IsActive && !Main.gamePaused && Main.tile[i, j].LiquidType == Type)
+		if (Main.instance.IsActive && !Main.gamePaused && Main.tile[i, j].LiquidType == Type && Main.tile[i, j].LiquidAmount != 0)
 		{
 			if (Main.tile[i, j].LiquidAmount > 200 && Main.rand.NextBool(350))
 			{
-				int D = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<AcidLiquidSplash>());
+				Dust.NewDust(new Vector2(i * 16, j * 16), 16, 16, ModContent.DustType<AcidLiquidSplash>());
 			}
 			if (Main.rand.NextBool(350))
 			{
-				int num22 = Dust.NewDust(new Vector2(i * 16, j * 16), 16, 8, ModContent.DustType<AcidLiquidSplash>(), 0f, 0f, 50, default, 1.5f);
-				Dust obj2 = Main.dust[num22];
-				obj2.velocity *= 0.8f;
-				obj2.velocity.X *= 2f;
-				obj2.velocity.Y -= Main.rand.Next(1, 7) * 0.1f;
+				Dust dust = Dust.NewDustDirect(new Vector2(i * 16, j * 16), 16, 8, ModContent.DustType<AcidLiquidSplash>(), 0f, 0f, 50, default, 1.5f);
+				dust.velocity *= 0.8f;
+				dust.velocity.X *= 2f;
+				dust.velocity.Y -= Main.rand.Next(1, 7) * 0.1f;
 				if (Main.rand.NextBool(10))
 				{
-					obj2.velocity.Y *= Main.rand.Next(2, 5);
+					dust.velocity.Y *= Main.rand.Next(2, 5);
 				}
-				obj2.noGravity = true;
+				dust.noGravity = true;
 			}
 		}
 	}
 	public override void ModifyNearbyTiles(int i, int j, int liquidX, int liquidY)
 	{
 		Tile tile = Main.tile[i, j];
-		//Grass and mud into dirt
+		// grasses into dirt
 		if (tile.TileType == TileID.Grass || tile.TileType == TileID.CorruptGrass || tile.TileType == TileID.HallowedGrass || tile.TileType == TileID.CrimsonGrass || tile.TileType == TileID.GolfGrass || tile.TileType == TileID.GolfGrassHallowed || tile.TileType == ModContent.TileType<Ickgrass>())
 		{
 			tile.TileType = TileID.Dirt;
@@ -77,7 +76,7 @@ internal class Acid : ModLiquid
 				NetMessage.SendTileSquare(-1, i, j, 3);
 			}
 		}
-		//jungle grass into mud
+		// jungle grasses into mud
 		else if (tile.TileType == TileID.JungleGrass || tile.TileType == TileID.MushroomGrass || tile.TileType == TileID.CorruptJungleGrass || tile.TileType == TileID.CrimsonJungleGrass || tile.TileType == ModContent.TileType<ContagionJungleGrass>())
 		{
 			tile.TileType = TileID.Mud;
@@ -87,7 +86,7 @@ internal class Acid : ModLiquid
 				NetMessage.SendTileSquare(-1, i, j, 3);
 			}
 		}
-		//dirt and ash grass into ash
+		// ash grasses into ash
 		else if (tile.TileType == TileID.AshGrass || tile.TileType == ModContent.TileType<Ectograss>())
 		{
 			tile.TileType = TileID.Ash;
@@ -100,76 +99,38 @@ internal class Acid : ModLiquid
 	}
 	public override bool UpdateLiquid(int i, int j, Liquid liquid)
 	{
-		if (Main.tile[i, j].LiquidType == Type && Main.tile[i, j].LiquidAmount > 64 && AvalonWorld.AcidDestroyTilesTimer % 16 == 0)
+		if (Main.tile[i, j].LiquidAmount >= 64 && AvalonWorld.AcidDestroyTilesTimer % 16 == 0)
 		{
-			if (TileID.Sets.CanBeDugByShovel[Main.tile[i, j + 1].TileType] && Main.tile[i, j + 1].HasTile)
+			for (int k = i - 1; k <= i + 1; k++)
 			{
-				ClassExtensions.KillTileFast(i, j + 1, true);
-				SoundEngine.PlaySound(SoundID.LiquidsWaterLava, new Vector2(i, j + 1) * 16);
-				SoundEngine.PlaySound(SoundID.SplashWeak, new Vector2(i, j + 1) * 16);
-				for (int n = 0; n < 4; n++)
-				{
-					int num8 = Dust.NewDust(new Vector2(i * 16, (j + 1) * 16), 12, 24, DustID.Smoke);
-					Main.dust[num8].color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
-					Main.dust[num8].velocity.Y -= 1.5f;
-					Main.dust[num8].velocity.X *= 1.5f;
-					Main.dust[num8].scale = 1.6f;
-					Main.dust[num8].noGravity = true;
-				}
-				Main.tile[i, j].LiquidAmount -= 64;
-				WorldGen.SquareTileFrame(i, j);
+				int l = j + (k == i ? 1 : 0);
+				if (!WorldGen.InWorld(k, l)) return base.UpdateLiquid(i, j, liquid);
 
-				if (Main.netMode != NetmodeID.SinglePlayer)
+				if (Main.tile[k, l].HasTile && TileID.Sets.CanBeDugByShovel[Main.tile[k, l].TileType])
 				{
-					NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 4);
-				}
-			}
-			if (TileID.Sets.CanBeDugByShovel[Main.tile[i - 1, j].TileType] && Main.tile[i - 1, j].HasTile)
-			{
-				ClassExtensions.KillTileFast(i - 1, j, true);
-				SoundEngine.PlaySound(SoundID.LiquidsWaterLava, new Vector2(i - 1, j) * 16);
-				SoundEngine.PlaySound(SoundID.SplashWeak, new Vector2(i - 1, j) * 16);
-				for (int n = 0; n < 4; n++)
-				{
-					int num8 = Dust.NewDust(new Vector2((i - 1) * 16, j * 16), 12, 24, DustID.Smoke);
-					Main.dust[num8].color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
-					Main.dust[num8].velocity.Y -= 1.5f;
-					Main.dust[num8].velocity.X *= 1.5f;
-					Main.dust[num8].scale = 1.6f;
-					Main.dust[num8].noGravity = true;
-				}
-				Main.tile[i, j].LiquidAmount -= 64;
-				WorldGen.SquareTileFrame(i - 1, j);
+					ClassExtensions.KillTileFast(k, l, true);
+					SoundEngine.PlaySound(SoundID.LiquidsWaterLava, new Vector2(k, l) * 16);
+					SoundEngine.PlaySound(SoundID.SplashWeak, new Vector2(k, l) * 16);
+					for (int n = 0; n < 4; n++)
+					{
+						Dust dust = Dust.NewDustDirect(new Vector2(k * 16, l * 16), 12, 24, DustID.Smoke);
+						dust.color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
+						dust.velocity.Y -= 1.5f;
+						dust.velocity.X *= 1.5f;
+						dust.scale = 1.6f;
+						dust.noGravity = true;
+					}
+					Main.tile[i, j].LiquidAmount -= 64;
+					//WorldGen.SquareTileFrame(k, l);
 
-				if (Main.netMode != NetmodeID.SinglePlayer)
-				{
-					NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 4);
-				}
-			}
-			if (TileID.Sets.CanBeDugByShovel[Main.tile[i + 1, j].TileType] && Main.tile[i + 1, j].HasTile)
-			{
-				ClassExtensions.KillTileFast(i + 1, j, true);
-				SoundEngine.PlaySound(SoundID.LiquidsWaterLava, new Vector2(i + 1, j) * 16);
-				SoundEngine.PlaySound(SoundID.SplashWeak, new Vector2(i + 1, j) * 16);
-				for (int n = 0; n < 4; n++)
-				{
-					int num8 = Dust.NewDust(new Vector2((i + 1) * 16, j * 16), 12, 24, DustID.Smoke);
-					Main.dust[num8].color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
-					Main.dust[num8].velocity.Y -= 1.5f;
-					Main.dust[num8].velocity.X *= 1.5f;
-					Main.dust[num8].scale = 1.6f;
-					Main.dust[num8].noGravity = true;
-				}
-				Main.tile[i, j].LiquidAmount -= 64;
-				WorldGen.SquareTileFrame(i + 1, j);
-
-				if (Main.netMode != NetmodeID.SinglePlayer)
-				{
-					NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 4);
+					if (Main.netMode != NetmodeID.SinglePlayer)
+					{
+						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 4, k, l);
+					}
 				}
 			}
 		}
-		if (Main.tile[i, j].LiquidAmount < 0)
+		if (Main.tile[i, j].LiquidAmount <= 0)
 		{
 			Tile liq = Main.tile[i, j];
 			liq.LiquidAmount = 0;
