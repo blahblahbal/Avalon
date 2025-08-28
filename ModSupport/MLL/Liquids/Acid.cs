@@ -2,7 +2,6 @@
 using Avalon.Common.Players;
 using Avalon.ModSupport.MLL.Buffs;
 using Avalon.ModSupport.MLL.Dusts;
-using Avalon.ModSupport.MLL.Items;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
@@ -29,7 +28,7 @@ internal class Acid : ModLiquid
 		LiquidFallLength = 6;
 		DefaultOpacity = 0.95f;
 		SlopeOpacity = 1f;
-		WaterRippleMultiplier = 0.3f;
+		WaterRippleMultiplier = 0.6f;
 		SplashDustType = ModContent.DustType<AcidLiquidSplash>();
 		SplashSound = SoundID.SplashWeak;
 		FallDelay = 2; //The delay when liquids are falling. Liquids will wait this extra amount of frames before falling again.
@@ -280,17 +279,75 @@ internal class Acid : ModLiquid
 			drawData.liquidAlphaMultiplier = 1f;
 		}
 	}
-	public override bool PlayerCollision(Player player, bool fallThrough, bool ignorePlats)
+	public override bool PlayerLiquidMovement(Player player, bool fallThrough, bool ignorePlats)
 	{
 		int DMG = 40 + player.statDefense / 2;
 		if (player.GetModPlayer<AvalonPlayer>().AcidDmgReduction)
+		{
 			DMG = 20 + player.statDefense / 2;
+		}
 		player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(5)}", $"{player.name}")), DMG, 0);
 		float time = 7;
-		if (Main.expertMode) time = 14;
-		if (Main.masterMode) time = 17.5f;
+		if (Main.expertMode)
+		{
+			time = 14;
+		}
+		if (Main.masterMode)
+		{
+			time = 17.5f;
+		}
 		player.AddBuff(ModContent.BuffType<Dissolving>(), (int)(60 * time));
+
 		return true;
+	}
+	public override void NPCLiquidMovement(NPC npc, ref float gravity, ref float maxFallSpeed)
+	{
+		if (!Data.Sets.NPCSets.NoAcidDamage[npc.type] && !npc.noTileCollide && !npc.boss)
+		{
+			npc.SimpleStrikeNPC(65 + npc.defense / 2, 0);
+			npc.AddBuff(ModContent.BuffType<Dissolving>(), 60 * 7);
+		}
+	}
+	public override void ItemLiquidMovement(Item item, ref Vector2 wetVelocity, ref float gravity, ref float maxFallSpeed)
+	{
+		//The following has this liquid delete items of the Blue rarity similar to how lava deletes items of the white rarity
+		//We put this here as liquid movement is called just before lava deletion (Item.CheckLavaDeath)
+		if (!item.beingGrabbed)
+		{
+			if (item.playerIndexTheItemIsReservedFor == Main.myPlayer && item.rare == ItemRarityID.White && item.type >= ItemID.None && !ItemID.Sets.IsLavaImmuneRegardlessOfRarity[item.type])
+			{
+				item.active = false;
+				item.type = ItemID.None;
+				item.stack = 0;
+				if (Main.netMode != NetmodeID.SinglePlayer)
+				{
+					NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item.whoAmI);
+				}
+
+				SoundEngine.PlaySound(SoundID.LiquidsWaterLava, item.position);
+				SoundEngine.PlaySound(SoundID.SplashWeak, item.position);
+
+				for (int n = 0; n < 5; n++)
+				{
+					Dust dust = Dust.NewDustDirect(new Vector2(item.position.X - 6f, item.position.Y + item.height / 2 - 8f), item.width + 12, 24, DustID.Smoke);
+					dust.color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
+					dust.velocity.Y -= 1.5f;
+					dust.velocity.X *= 1.5f;
+					dust.scale = 1.6f;
+					dust.noGravity = true;
+				}
+
+				for (int n = 0; n < 5; n++)
+				{
+					Dust dust = Dust.NewDustDirect(new Vector2(item.position.X - 6f, item.position.Y + item.height / 2 - 8f), item.width + 12, 24, ModContent.DustType<AcidLiquidSplash>());
+					dust.velocity.Y -= 1.5f;
+					dust.velocity.X *= 2.5f;
+					dust.scale = 1.3f;
+					dust.alpha = 100;
+					dust.noGravity = true;
+				}
+			}
+		}
 	}
 
 	//The following region contains all the logic for what this liquid does when being entered and exited by different entities.
@@ -310,12 +367,12 @@ internal class Acid : ModLiquid
 	{
 		for (int i = 0; i < 20; i++)
 		{
-			int dust = Dust.NewDust(new Vector2(player.position.X - 6f, player.position.Y + player.height / 2 - 8f), player.width + 12, 24, SplashDustType);
-			Main.dust[dust].velocity.Y -= 1f;
-			Main.dust[dust].velocity.X *= 2.5f;
-			Main.dust[dust].scale = 1.3f;
-			Main.dust[dust].alpha = 100;
-			Main.dust[dust].noGravity = true;
+			Dust dust = Dust.NewDustDirect(new Vector2(player.position.X - 6f, player.position.Y + player.height / 2 - 8f), player.width + 12, 24, SplashDustType);
+			dust.velocity.Y -= 1f;
+			dust.velocity.X *= 2.5f;
+			dust.scale = 1.3f;
+			dust.alpha = 100;
+			dust.noGravity = true;
 		}
 		SoundEngine.PlaySound(SplashSound, player.position);
 		return false;
@@ -325,12 +382,12 @@ internal class Acid : ModLiquid
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			int dust = Dust.NewDust(new Vector2(npc.position.X - 6f, npc.position.Y + npc.height / 2 - 8f), npc.width + 12, 24, SplashDustType);
-			Main.dust[dust].velocity.Y -= 1f;
-			Main.dust[dust].velocity.X *= 2.5f;
-			Main.dust[dust].scale = 1.3f;
-			Main.dust[dust].alpha = 100;
-			Main.dust[dust].noGravity = true;
+			Dust dust = Dust.NewDustDirect(new Vector2(npc.position.X - 6f, npc.position.Y + npc.height / 2 - 8f), npc.width + 12, 24, SplashDustType);
+			dust.velocity.Y -= 1f;
+			dust.velocity.X *= 2.5f;
+			dust.scale = 1.3f;
+			dust.alpha = 100;
+			dust.noGravity = true;
 		}
 		//only play the sound if the npc isnt a slime, mouse, tortoise, or if it has no gravity
 		if (npc.aiStyle != NPCAIStyleID.Slime &&
@@ -348,12 +405,12 @@ internal class Acid : ModLiquid
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			int dust = Dust.NewDust(new Vector2(proj.position.X - 6f, proj.position.Y + proj.height / 2 - 8f), proj.width + 12, 24, SplashDustType);
-			Main.dust[dust].velocity.Y -= 1f;
-			Main.dust[dust].velocity.X *= 2.5f;
-			Main.dust[dust].scale = 1.3f;
-			Main.dust[dust].alpha = 100;
-			Main.dust[dust].noGravity = true;
+			Dust dust = Dust.NewDustDirect(new Vector2(proj.position.X - 6f, proj.position.Y + proj.height / 2 - 8f), proj.width + 12, 24, SplashDustType);
+			dust.velocity.Y -= 1f;
+			dust.velocity.X *= 2.5f;
+			dust.scale = 1.3f;
+			dust.alpha = 100;
+			dust.noGravity = true;
 		}
 		SoundEngine.PlaySound(SplashSound, proj.position);
 		return false;
@@ -363,12 +420,12 @@ internal class Acid : ModLiquid
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			int dust = Dust.NewDust(new Vector2(item.position.X - 6f, item.position.Y + item.height / 2 - 8f), item.width + 12, 24, SplashDustType);
-			Main.dust[dust].velocity.Y -= 1f;
-			Main.dust[dust].velocity.X *= 2.5f;
-			Main.dust[dust].scale = 1.3f;
-			Main.dust[dust].alpha = 100;
-			Main.dust[dust].noGravity = true;
+			Dust dust = Dust.NewDustDirect(new Vector2(item.position.X - 6f, item.position.Y + item.height / 2 - 8f), item.width + 12, 24, SplashDustType);
+			dust.velocity.Y -= 1f;
+			dust.velocity.X *= 2.5f;
+			dust.scale = 1.3f;
+			dust.alpha = 100;
+			dust.noGravity = true;
 		}
 		SoundEngine.PlaySound(SplashSound, item.position);
 		return false;

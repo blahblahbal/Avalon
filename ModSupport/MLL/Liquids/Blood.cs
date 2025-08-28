@@ -37,7 +37,7 @@ internal class Blood : ModLiquid
 
 		//For the Waves Quality setting, when set to Medium, waves are set to be the same distance no matter the liquid type.
 		//To do this, the game applied a multiplier to make them all consistant between liquids. Here we set our own multiplier to make the waves the same distance.
-		WaterRippleMultiplier = 0.3f;
+		WaterRippleMultiplier = 0.6f;
 
 		//This is used to specify what dust is used when splashing in this liquid.
 		//Normally, when returning false in each OnSplash hook/method, this property is used in the mod liquid's default splash code
@@ -54,6 +54,18 @@ internal class Blood : ModLiquid
 
 		ChecksForDrowning = true; //If the player can drown in this liquid
 		PlayersEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
+
+		//For modders who don't want to reimplement the entire player movement for this liquid, this multiplier is used in the default mod liquid player movement.
+		//Here we make our liquid slow the player down by half what honey would allow the player to move at.
+
+		//Heres the defaults for each liquid:
+		//Water/Lava/Regular modded liquid = 0.5f
+		//Honey = 0.25f
+		//Shimmer = 0.375f
+		PlayerMovementMultiplier = 0.375f;
+		StopWatchMPHMultiplier = PlayerMovementMultiplier; //We set stopwatch to the same multiplier as we don't want a different between whats felt and what the player can read their movement as.
+		NPCMovementMultiplierDefault = PlayerMovementMultiplier; //NPCs have a similar modifier but as a field, here we set the default value as some other NPCs set this multiplier to 0. We set this to PlayerMovementMultiplier as we need them to all be the same.
+		ProjectileMovementMultiplier = PlayerMovementMultiplier; //Simiarly to Players, Projectiles have this property for easy editing of a projectile velocity multiplier without needing to reimplement all of the projectile liquid movement code.
 
 		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
 
@@ -149,6 +161,14 @@ internal class Blood : ModLiquid
 		{
 			drawData.liquidAlphaMultiplier = 1f;
 		}
+	}
+
+	public override void ItemLiquidMovement(Item item, ref Vector2 wetVelocity, ref float gravity, ref float maxFallSpeed)
+	{
+		// same as shimmer values
+		gravity = 0.065f;
+		maxFallSpeed = 4f;
+		wetVelocity = item.velocity * 0.375f;
 	}
 
 	//The following region contains all the logic for what this liquid does when being entered and exited by different entities.

@@ -1,7 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Avalon.DropConditions;
-using Avalon.Hooks;
 using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
@@ -27,7 +26,6 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
-using Avalon.ModSupport.MLL.Dusts;
 using Avalon.ModSupport.MLL.Items;
 using Avalon.ModSupport.MLL.Liquids;
 using Avalon.Prefixes;
@@ -247,33 +245,6 @@ public class AvalonGlobalItem : GlobalItem
 	}
 	public override void PostUpdate(Item item)
 	{
-		if (CollisionHooks.AcidCollision(item.position, item.width, item.height) &&
-			item.rare == ItemRarityID.White && !ItemID.Sets.IsLavaImmuneRegardlessOfRarity[item.type])
-		{
-			SoundEngine.PlaySound(SoundID.LiquidsWaterLava, item.position);
-			SoundEngine.PlaySound(SoundID.SplashWeak, item.position);
-
-			for (int n = 0; n < 5; n++)
-			{
-				int num8 = Dust.NewDust(new Vector2(item.position.X - 6f, item.position.Y + item.height / 2 - 8f), item.width + 12, 24, DustID.Smoke);
-				Main.dust[num8].color = Main.rand.NextFromList(Color.LightGray, Color.Gray);
-				Main.dust[num8].velocity.Y -= 1.5f;
-				Main.dust[num8].velocity.X *= 1.5f;
-				Main.dust[num8].scale = 1.6f;
-				Main.dust[num8].noGravity = true;
-			}
-
-			for (int n = 0; n < 5; n++)
-			{
-				int num8 = Dust.NewDust(new Vector2(item.position.X - 6f, item.position.Y + item.height / 2 - 8f), item.width + 12, 24, ModContent.DustType<AcidLiquidSplash>());
-				Main.dust[num8].velocity.Y -= 1.5f;
-				Main.dust[num8].velocity.X *= 2.5f;
-				Main.dust[num8].scale = 1.3f;
-				Main.dust[num8].alpha = 100;
-				Main.dust[num8].noGravity = true;
-			}
-			item.TurnToAir();
-		}
 		//if (item.lavaWet && item.position.Y / 16 > Main.maxTilesY - 190)
 		//{
 		//	if (item.type == ModContent.ItemType<HellboundRemote>() && Main.hardMode) // &&
