@@ -12,6 +12,20 @@ public class BloodFall : ModLiquidFall
 		return false;
 	}
 
+	public override void AnimateWaterfall(ref int frame, ref int frameBackground, ref int frameCounter)
+	{
+		frameCounter++;
+		if (frameCounter > 4)
+		{
+			frameCounter = 0;
+			frame++;
+			if (frame > 15)
+			{
+				frame = 0;
+			}
+		}
+	}
+
 	//Usually waterfalls draw as a slight opacity
 	//Lava, Honey and shimmer all draw at a slight higher opacity than water
 	//We can modify how strong the alpha is.
