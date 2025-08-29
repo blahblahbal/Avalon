@@ -53,7 +53,7 @@ internal class Blood : ModLiquid
 		FallDelay = 2; //The delay when liquids are falling. Liquids will wait this extra amount of frames before falling again.
 
 		ChecksForDrowning = true; //If the player can drown in this liquid
-		PlayersEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
+		AllowEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
 
 		//For modders who don't want to reimplement the entire player movement for this liquid, this multiplier is used in the default mod liquid player movement.
 		//Here we make our liquid slow the player down by half what honey would allow the player to move at.

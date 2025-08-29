@@ -33,7 +33,7 @@ internal class Acid : ModLiquid
 		SplashSound = SoundID.SplashWeak;
 		FallDelay = 2; //The delay when liquids are falling. Liquids will wait this extra amount of frames before falling again.
 		ChecksForDrowning = false; //If the player can drown in this liquid
-		PlayersEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
+		AllowEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
 		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
 		AddMapEntry(new Color(0, 255, 0));
 	}
@@ -279,7 +279,7 @@ internal class Acid : ModLiquid
 			drawData.liquidAlphaMultiplier = 1f;
 		}
 	}
-	public override bool PlayerLiquidCollision(Player player, bool fallThrough, bool ignorePlats)
+	public override void OnPlayerCollision(Player player)
 	{
 		int DMG = 40 + player.statDefense / 2;
 		if (player.GetModPlayer<AvalonPlayer>().AcidDmgReduction)
@@ -297,10 +297,8 @@ internal class Acid : ModLiquid
 			time = 17.5f;
 		}
 		player.AddBuff(ModContent.BuffType<Dissolving>(), (int)(60 * time));
-
-		return true;
 	}
-	public override bool NPCLiquidCollision(NPC npc, Vector2 dryVelocity)
+	public override void OnNPCCollision(NPC npc)
 	{
 		if (!Data.Sets.NPCSets.NoAcidDamage[npc.type] && !npc.dontTakeDamage && Main.netMode != NetmodeID.MultiplayerClient && npc.immune[255] == 0)
 		{
@@ -308,7 +306,6 @@ internal class Acid : ModLiquid
 			npc.SimpleStrikeNPC(65 + npc.defense / 2, 0, noPlayerInteraction: true);
 			npc.AddBuff(ModContent.BuffType<Dissolving>(), 60 * 7);
 		}
-		return base.NPCLiquidCollision(npc, dryVelocity);
 	}
 	public override void ItemLiquidCollision(Item item, ref Vector2 wetVelocity, ref float gravity, ref float maxFallSpeed)
 	{
