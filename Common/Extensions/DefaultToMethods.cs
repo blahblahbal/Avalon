@@ -617,7 +617,7 @@ namespace Avalon.Common.Extensions
 			item.width = width;
 			item.height = height;
 			item.hammer = hammerPower;
-			item.axe = axePowerTimes5;
+			item.axe = axePowerTimes5 / 5;
 			item.autoReuse = true;
 			item.damage = damage;
 			item.DamageType = DamageClass.Melee;
