@@ -163,7 +163,7 @@ internal class Blood : ModLiquid
 		}
 	}
 
-	public override void ItemLiquidMovement(Item item, ref Vector2 wetVelocity, ref float gravity, ref float maxFallSpeed)
+	public override void ItemLiquidCollision(Item item, ref Vector2 wetVelocity, ref float gravity, ref float maxFallSpeed)
 	{
 		// same as shimmer values
 		gravity = 0.065f;

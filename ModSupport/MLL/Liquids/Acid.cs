@@ -279,7 +279,7 @@ internal class Acid : ModLiquid
 			drawData.liquidAlphaMultiplier = 1f;
 		}
 	}
-	public override bool PlayerLiquidMovement(Player player, bool fallThrough, bool ignorePlats)
+	public override bool PlayerLiquidCollision(Player player, bool fallThrough, bool ignorePlats)
 	{
 		int DMG = 40 + player.statDefense / 2;
 		if (player.GetModPlayer<AvalonPlayer>().AcidDmgReduction)
@@ -300,15 +300,17 @@ internal class Acid : ModLiquid
 
 		return true;
 	}
-	public override void NPCLiquidMovement(NPC npc, ref float gravity, ref float maxFallSpeed)
+	public override bool NPCLiquidCollision(NPC npc, Vector2 dryVelocity)
 	{
-		if (!Data.Sets.NPCSets.NoAcidDamage[npc.type] && !npc.noTileCollide && !npc.boss)
+		if (!Data.Sets.NPCSets.NoAcidDamage[npc.type] && !npc.dontTakeDamage && Main.netMode != NetmodeID.MultiplayerClient && npc.immune[255] == 0)
 		{
-			npc.SimpleStrikeNPC(65 + npc.defense / 2, 0);
+			npc.immune[255] = 30;
+			npc.SimpleStrikeNPC(65 + npc.defense / 2, 0, noPlayerInteraction: true);
 			npc.AddBuff(ModContent.BuffType<Dissolving>(), 60 * 7);
 		}
+		return base.NPCLiquidCollision(npc, dryVelocity);
 	}
-	public override void ItemLiquidMovement(Item item, ref Vector2 wetVelocity, ref float gravity, ref float maxFallSpeed)
+	public override void ItemLiquidCollision(Item item, ref Vector2 wetVelocity, ref float gravity, ref float maxFallSpeed)
 	{
 		//The following has this liquid delete items of the Blue rarity similar to how lava deletes items of the white rarity
 		//We put this here as liquid movement is called just before lava deletion (Item.CheckLavaDeath)
