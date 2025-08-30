@@ -290,7 +290,7 @@ internal class Acid : ModLiquid
 
 	public override void RetroDrawEffects(int i, int j, SpriteBatch spriteBatch, ref RetroLiquidDrawInfo drawData, float liquidAmountModified, int liquidGFXQuality)
 	{
-		drawData.liquidAlphaMultiplier *= 1.8f;
+		drawData.liquidAlphaMultiplier *= 1.7f;
 		if (drawData.liquidAlphaMultiplier > 1f)
 		{
 			drawData.liquidAlphaMultiplier = 1f;
