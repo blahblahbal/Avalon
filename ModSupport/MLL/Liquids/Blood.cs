@@ -6,6 +6,7 @@ using ModLiquidLib.ModLoader;
 using ModLiquidLib.Utils.Structs;
 using Terraria;
 using Terraria.Audio;
+using Terraria.Graphics;
 using Terraria.Graphics.Light;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -31,7 +32,7 @@ internal class Blood : ModLiquid
 		//This is the opacity of the liquid. How well you can see objects in the liquid.
 		//The SlopeOpacity property is different, as slopes do not render the same as a normal liquid tile
 		//DefaultOpacity in vanilla, can be found at "Terraria.GameContent.Liquid.LiquidRenderer.DEFAULT_OPACITY"
-		DefaultOpacity = 1f;
+		DefaultOpacity = 0.9815f;
 		SlopeOpacity = 1f;
 		//To change the old liquid rendering opacity, please see the RetroDrawEffects override.
 
@@ -72,6 +73,14 @@ internal class Blood : ModLiquid
 		//We can add a map entry to our liquid, by doing so we can show where our liquid is on the map.
 		//Unlike vanilla, we can also add a map entry name, which will display a name if the liquid is being selected on the map.
 		AddMapEntry(new Color(200, 0, 0));
+	}
+	public override bool PreSlopeDraw(int i, int j, bool behindBlocks, ref Vector2 drawPosition, ref Rectangle liquidSize, ref VertexColors colors)
+	{
+		colors.TopLeftColor *= DefaultOpacity;
+		colors.TopRightColor *= DefaultOpacity;
+		colors.BottomLeftColor *= DefaultOpacity;
+		colors.BottomRightColor *= DefaultOpacity;
+		return base.PreSlopeDraw(i, j, behindBlocks, ref drawPosition, ref liquidSize, ref colors);
 	}
 
 	//Here with LiquidMerge, we are able to decide when the liquid generates with a different tile.

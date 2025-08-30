@@ -12,6 +12,7 @@ using ModLiquidLib.Utils.Structs;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.Graphics;
 using Terraria.Graphics.Light;
 using Terraria.ID;
 using Terraria.Localization;
@@ -26,7 +27,7 @@ internal class Acid : ModLiquid
 	{
 		VisualViscosity = 160;
 		LiquidFallLength = 6;
-		DefaultOpacity = 0.95f;
+		DefaultOpacity = 0.85f;
 		SlopeOpacity = 1f;
 		WaterRippleMultiplier = 0.6f;
 		SplashDustType = ModContent.DustType<AcidLiquidSplash>();
@@ -35,7 +36,17 @@ internal class Acid : ModLiquid
 		ChecksForDrowning = false; //If the player can drown in this liquid
 		AllowEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
 		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
+		UsesLavaCollisionForWet = true;
+		ExtinguishesOnFireDebuffs = false;
 		AddMapEntry(new Color(0, 255, 0));
+	}
+	public override bool PreSlopeDraw(int i, int j, bool behindBlocks, ref Vector2 drawPosition, ref Rectangle liquidSize, ref VertexColors colors)
+	{
+		colors.TopLeftColor *= DefaultOpacity;
+		colors.TopRightColor *= DefaultOpacity;
+		colors.BottomLeftColor *= DefaultOpacity;
+		colors.BottomRightColor *= DefaultOpacity;
+		return base.PreSlopeDraw(i, j, behindBlocks, ref drawPosition, ref liquidSize, ref colors);
 	}
 	public override bool BlocksTilePlacement(Player player, int i, int j)
 	{
