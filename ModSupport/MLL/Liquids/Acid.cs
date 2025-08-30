@@ -299,14 +299,8 @@ internal class Acid : ModLiquid
 		}
 		player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(5)}", $"{player.name}")), DMG, 0);
 		float time = 7;
-		if (Main.expertMode)
-		{
-			time = 14;
-		}
-		if (Main.masterMode)
-		{
-			time = 17.5f;
-		}
+		if (Main.expertMode) time = 14;
+		if (Main.masterMode) time = 17.5f;
 		player.AddBuff(ModContent.BuffType<Dissolving>(), (int)(60 * time));
 	}
 	public override void OnNPCCollision(NPC npc)
