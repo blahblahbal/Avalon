@@ -165,7 +165,7 @@ internal class Blood : ModLiquid
 	//NOTE: Despite being having RETRO in the name, this also applies to the "Trippy" Lighting style as well.
 	public override void RetroDrawEffects(int i, int j, SpriteBatch spriteBatch, ref RetroLiquidDrawInfo drawData, float liquidAmountModified, int liquidGFXQuality)
 	{
-		drawData.liquidAlphaMultiplier *= 1.8f;
+		drawData.liquidAlphaMultiplier *= 1.9675f;
 		if (drawData.liquidAlphaMultiplier > 1f)
 		{
 			drawData.liquidAlphaMultiplier = 1f;

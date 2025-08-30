@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ModLiquidLib.Hooks;
 using ModLiquidLib.ModLoader;
 using ModLiquidLib.Utils.Structs;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -167,6 +168,7 @@ internal class Acid : ModLiquid
 		//
 		//Here we get which type the merging is based on the liquidY relitive to the tileY.
 		//This is because liquidY and tileY are different in the down merging, but the same in the up/side merging
+		byte reductionDivisor = 8;
 		if (liquidY == tileY)
 		{
 			//This is up/side merging for the liquid
@@ -177,16 +179,19 @@ internal class Acid : ModLiquid
 			if (leftTile.LiquidType != Type)
 			{
 				//liquidCount += leftTile.LiquidAmount;
+				liquidTile.LiquidAmount -= (byte)(Math.Min(leftTile.LiquidAmount, liquidTile.LiquidAmount) / reductionDivisor);
 				leftTile.LiquidAmount = 0;
 			}
 			if (rightTile.LiquidType != Type)
 			{
 				//liquidCount += rightTile.LiquidAmount;
+				liquidTile.LiquidAmount -= (byte)(Math.Min(rightTile.LiquidAmount, liquidTile.LiquidAmount) / reductionDivisor);
 				rightTile.LiquidAmount = 0;
 			}
 			if (upTile.LiquidType != Type)
 			{
 				//liquidCount += upTile.LiquidAmount;
+				liquidTile.LiquidAmount -= (byte)(Math.Min(upTile.LiquidAmount, liquidTile.LiquidAmount) / reductionDivisor);
 				upTile.LiquidAmount = 0;
 			}
 
@@ -227,6 +232,7 @@ internal class Acid : ModLiquid
 			//This is down merging for the liquid
 
 			//remove the liquid amount 
+			liquidTile.LiquidAmount -= (byte)(Math.Min(tile.LiquidAmount, liquidTile.LiquidAmount) / reductionDivisor);
 			tile.LiquidAmount = 0;
 			tile.LiquidType = 0;
 			//play liquid merge sound
