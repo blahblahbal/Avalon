@@ -168,7 +168,7 @@ internal class Acid : ModLiquid
 		//
 		//Here we get which type the merging is based on the liquidY relitive to the tileY.
 		//This is because liquidY and tileY are different in the down merging, but the same in the up/side merging
-		byte reductionDivisor = 8;
+		byte reductionDivisor = 4;
 		if (liquidY == tileY)
 		{
 			//This is up/side merging for the liquid
