@@ -35,4 +35,8 @@ public class AcidFall : ModLiquidFall
 	{
 		Lighting.AddLight(i, j, 0f, 215f / 255f, 0f);
 	}
+	public override void ColorMultiplier(ref float r, ref float g, ref float b, float a)
+	{
+		g = 255f * a;
+	}
 }
