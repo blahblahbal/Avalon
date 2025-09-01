@@ -648,7 +648,6 @@ public class AvalonGlobalItem : GlobalItem
 		if (Main.myPlayer == player.whoAmI) // Make sure we're only doing all of this for the player holding the item, syncing manually
 		{
 			Point tilePos = Main.MouseWorld.ToTileCoordinates();
-			Tile tile = Main.tile[tilePos];
 			Tile tileSafe = Framing.GetTileSafely(tilePos);
 
 			#region sponges 3x3
@@ -725,24 +724,24 @@ public class AvalonGlobalItem : GlobalItem
 			#region shimmer bucket
 			if (item.type == ItemID.EmptyBucket)
 			{
-				int liquidAmount = tile.LiquidAmount;
+				int liquidAmount = tileSafe.LiquidAmount;
 
-				if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !tile.HasTile &&
-					liquidAmount > 200 && tile.LiquidType == LiquidID.Shimmer)
+				if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) && !tileSafe.HasTile &&
+					liquidAmount > 200 && tileSafe.LiquidType == LiquidID.Shimmer)
 				{
 					player.cursorItemIconEnabled = true;
 					player.cursorItemIconID = item.type;
 					if (player.itemTime == 0 && player.itemAnimation > 0 && player.controlUseItem)
 					{
-						if (liquidAmount > 100 && tile.LiquidType == LiquidID.Shimmer)
+						if (liquidAmount > 100 && tileSafe.LiquidType == LiquidID.Shimmer)
 						{
 							SoundEngine.PlaySound(SoundID.SplashWeak, player.position);
 							item.stack--;
 							player.PutItemInInventoryFromItemUsage(ModContent.ItemType<ShimmerBucket>(), player.selectedItem);
 							player.itemTime = player.inventory[player.selectedItem].useTime;
 
-							tile.LiquidAmount = 0;
-							tile.LiquidType = LiquidID.Water;
+							tileSafe.LiquidAmount = 0;
+							tileSafe.LiquidType = LiquidID.Water;
 							WorldGen.SquareTileFrame(tilePos.X, tilePos.Y, resetFrame: false);
 							if (Main.netMode == NetmodeID.MultiplayerClient)
 							{
