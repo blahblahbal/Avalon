@@ -76,18 +76,11 @@ internal class Blood : ModLiquid
 	}
 	public override bool PreSlopeDraw(int i, int j, bool behindBlocks, ref Vector2 drawPosition, ref Rectangle liquidSize, ref VertexColors colors)
 	{
-		Color c = Lighting.GetColor(i, j);
-		colors.BottomLeftColor = c;
-		colors.BottomRightColor = c;
-		colors.TopLeftColor = c;
-		colors.TopRightColor = c;
-		if (!behindBlocks)
-		{
-			colors.TopLeftColor *= DefaultOpacity;
-			colors.TopRightColor *= DefaultOpacity;
-			colors.BottomLeftColor *= DefaultOpacity;
-			colors.BottomRightColor *= DefaultOpacity;
-		}
+		Lighting.GetCornerColors(i, j, out var vertices);
+		colors.TopLeftColor = vertices.TopLeftColor * DefaultOpacity;
+		colors.TopRightColor = vertices.TopRightColor * DefaultOpacity;
+		colors.BottomLeftColor = vertices.BottomLeftColor * DefaultOpacity;
+		colors.BottomRightColor = vertices.BottomRightColor * DefaultOpacity;
 		return base.PreSlopeDraw(i, j, behindBlocks, ref drawPosition, ref liquidSize, ref colors);
 	}
 
