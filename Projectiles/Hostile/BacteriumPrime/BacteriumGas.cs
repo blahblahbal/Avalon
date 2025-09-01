@@ -73,8 +73,8 @@ public class BacteriumGas : ModProjectile
 
 	public override void OnHitPlayer(Player target, Player.HurtInfo info)
 	{
-		if (Main.expertMode && Main.rand.NextBool())
-			target.AddBuff(BuffID.Blackout, 3 * 60);
+		//if (Main.expertMode && Main.rand.NextBool())
+		//	target.AddBuff(BuffID.Blackout, 3 * 60);
 
 		target.AddBuff(BuffID.Darkness, 5 * 60);
 	}

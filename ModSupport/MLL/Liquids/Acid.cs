@@ -321,8 +321,6 @@ internal class Acid : ModLiquid
 	}
 	public override void ItemLiquidCollision(Item item, ref Vector2 wetVelocity, ref float gravity, ref float maxFallSpeed)
 	{
-		//The following has this liquid delete items of the Blue rarity similar to how lava deletes items of the white rarity
-		//We put this here as liquid movement is called just before lava deletion (Item.CheckLavaDeath)
 		if (!item.beingGrabbed)
 		{
 			if (item.playerIndexTheItemIsReservedFor == Main.myPlayer && item.rare == ItemRarityID.White && item.type >= ItemID.None && !ItemID.Sets.IsLavaImmuneRegardlessOfRarity[item.type])
