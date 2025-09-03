@@ -9968,6 +9968,26 @@ Mods: {
 				DisplayName: Bloodfall Wall
 				Tooltip: ""
 			}
+
+			AcidBomb: {
+				DisplayName: Acid Bomb
+				Tooltip: A small explosion that will spread acid
+			}
+
+			BloodBomb: {
+				DisplayName: Blood Bomb
+				Tooltip: A small explosion that will spread blood
+			}
+
+			AcidRocket: {
+				DisplayName: Acid Rocket
+				Tooltip: Spreads acid on impact
+			}
+
+			BloodRocket: {
+				DisplayName: Blood Rocket
+				Tooltip: Spreads blood on impact
+			}
 		}
 
 		InfoDisplays: {
@@ -10271,6 +10291,16 @@ Mods: {
 			MarrowMasherProj.DisplayName: Marrow Masher
 			UrchinMaceProj.DisplayName: Urchin Uppercutter
 			WoodenClubProj.DisplayName: Wooden Club
+			AcidBombProj.DisplayName: Acid Bomb
+			BloodBombProj.DisplayName: Blood Bomb
+			AcidRocketProj.DisplayName: Acid Rocket
+			AcidGrenadeProj.DisplayName: Acid Grenade
+			AcidMineProj.DisplayName: Acid Mine
+			AcidSnowmanRocketProj.DisplayName: Acid Snowman Rocket
+			BloodRocketProj.DisplayName: Blood Rocket
+			BloodGrenadeProj.DisplayName: Blood Grenade
+			BloodMineProj.DisplayName: Blood Mine
+			BloodSnowmanRocketProj.DisplayName: Blood Snowman Rocket
 		}
 
 		NPCs: {
