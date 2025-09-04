@@ -20,7 +20,7 @@ public static class MLLSystems
 
 		return recipe;
 	}
-	public static void PourBucket(Item item, Player player, int liquidType, bool largePour, bool overwriteLiquids = false)
+	public static void PourBucket(Item item, Player player, int liquidType, bool largePour, bool overwriteLiquids = false, bool bottomless = false)
 	{
 		bool placed = false;
 		int radiusMod = largePour ? 1 : 0;
@@ -76,6 +76,11 @@ public static class MLLSystems
 				tile.LiquidType = liquidType;
 				tile.LiquidAmount = byte.MaxValue;
 				WorldGen.SquareTileFrame(i, j);
+				if (!bottomless)
+				{
+					item.stack--;
+					player.PutItemInInventoryFromItemUsage(ItemID.EmptyBucket, player.selectedItem);
+				}
 				player.ApplyItemTime(item);
 				if (Main.netMode == NetmodeID.MultiplayerClient)
 				{

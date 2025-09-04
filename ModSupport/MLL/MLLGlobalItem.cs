@@ -57,7 +57,7 @@ public class MLLGlobalItem : GlobalItem
 				}
 				if (item.type is ItemID.BottomlessBucket or ItemID.BottomlessLavaBucket or ItemID.BottomlessHoneyBucket or ItemID.BottomlessShimmerBucket)
 				{
-					MLLSystems.PourBucket(item, player, GetLiquidType(item.type), true, false);
+					MLLSystems.PourBucket(item, player, GetLiquidType(item.type), true, false, true);
 				}
 				else if (item.type is ItemID.SuperAbsorbantSponge or ItemID.LavaAbsorbantSponge or ItemID.HoneyAbsorbantSponge or ItemID.UltraAbsorbantSponge)
 				{
