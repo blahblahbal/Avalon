@@ -2,8 +2,7 @@
 using ModLiquidLib.ModLoader;
 
 namespace Avalon.ModSupport.MLL.Items;
-public class BottomlessAcidBucket : BottomlessLiquidBucketItemBase
+public class AcidAbsorbantSponge : LiquidSpongeItemBase
 {
 	public override int LiquidType() => LiquidLoader.LiquidType<Acid>();
-	public override bool OverwriteLiquids => true;
 }

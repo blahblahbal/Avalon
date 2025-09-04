@@ -1,11 +1,11 @@
-﻿using ModLiquidLib.ID;
+﻿using Avalon.ModSupport.MLL.Liquids;
+using ModLiquidLib.ID;
 using ModLiquidLib.ModLoader;
+using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria;
-using Avalon.ModSupport.MLL.Liquids;
 
 namespace Avalon.ModSupport.MLL.Items;
 
@@ -42,11 +42,7 @@ public class BloodBucket : ModItem
 			{
 				return;
 			}
-			if (player.noBuilding ||
-				!(player.position.X / 16f - (float)Player.tileRangeX - (float)Item.tileBoost <= (float)Player.tileTargetX) ||
-				!((player.position.X + (float)player.width) / 16f + (float)Player.tileRangeX + (float)Item.tileBoost - 1f >= (float)Player.tileTargetX) ||
-				!(player.position.Y / 16f - (float)Player.tileRangeY - (float)Item.tileBoost <= (float)Player.tileTargetY) ||
-				!((player.position.Y + (float)player.height) / 16f + (float)Player.tileRangeY + (float)Item.tileBoost - 2f >= (float)Player.tileTargetY))
+			if (player.noBuilding || !player.IsTargetTileInItemRange(Item))
 			{
 				return;
 			}

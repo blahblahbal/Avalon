@@ -3176,7 +3176,7 @@ Mods: {
 
 			AdvWisdomPotion: {
 				DisplayName: Wisdom Elixir
-				Tooltip: -4% magic damage, +120 mana
+				Tooltip: +30% magic damage, +25% mana cost
 			}
 
 			AdvWrathPotion: {
@@ -8657,7 +8657,11 @@ Mods: {
 
 			ShimmerBucket: {
 				DisplayName: Shimmer Bucket
-				Tooltip: ""
+				Tooltip:
+					'''
+					Contains a small amount of shimmer
+					Can be poured out
+					'''
 			}
 
 			InsectoidBlade: {
@@ -9787,6 +9791,15 @@ Mods: {
 					'''
 			}
 
+			AcidAbsorbantSponge: {
+				DisplayName: Acid Absorbant Sponge
+				Tooltip:
+					'''
+					Capable of soaking up an endless amount of acid
+					Right Click to absorb a 3x3 area of liquid
+					'''
+			}
+
 			BloodAbsorbantSponge: {
 				DisplayName: Blood Absorbant Sponge
 				Tooltip:
@@ -9987,6 +10000,16 @@ Mods: {
 			BloodRocket: {
 				DisplayName: Blood Rocket
 				Tooltip: Spreads blood on impact
+			}
+
+			AcidSensor: {
+				DisplayName: Liquid Sensor (Acid)
+				Tooltip: ""
+			}
+
+			BloodSensor: {
+				DisplayName: Liquid Sensor (Blood)
+				Tooltip: ""
 			}
 		}
 
@@ -10911,7 +10934,7 @@ Mods: {
 
 			Wisdom: {
 				DisplayName: Wisdom
-				Description: -8% magic damage, +60 mana
+				Description: +25% magic damage, +35% mana cost
 			}
 
 			StaminaDrain: {
@@ -11191,7 +11214,7 @@ Mods: {
 
 			AdvWisdom: {
 				DisplayName: Advanced Wisdom
-				Description: -4% magic damage, +120 mana
+				Description: +30% magic damage, +25% mana cost
 			}
 
 			AdvWrath: {

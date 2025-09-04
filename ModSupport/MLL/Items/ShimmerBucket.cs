@@ -1,6 +1,4 @@
-﻿using Avalon.ModSupport.MLL.Liquids;
 using ModLiquidLib.ID;
-using ModLiquidLib.ModLoader;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.Creative;
@@ -9,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.MLL.Items;
 
-public class AcidBucket : ModItem
+public class ShimmerBucket : ModItem
 {
 	public override void SetStaticDefaults()
 	{
@@ -17,7 +15,7 @@ public class AcidBucket : ModItem
 		ItemID.Sets.AlsoABuildingItem[Type] = true;
 		//ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.WaterBucket;
 		ItemID.Sets.DuplicationMenuToolsFilter[Type] = true;
-		LiquidID_TLmod.Sets.CreateLiquidBucketItem[LiquidLoader.LiquidType<Acid>()] = Type;
+		LiquidID_TLmod.Sets.CreateLiquidBucketItem[LiquidID.Shimmer] = Type;
 
 		CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;
 	}
@@ -32,6 +30,7 @@ public class AcidBucket : ModItem
 		Item.useAnimation = 15;
 		Item.useTime = 10;
 		Item.useStyle = ItemUseStyleID.Swing;
+		Item.rare = ItemRarityID.Orange;
 	}
 
 	public override void HoldItem(Player player)
@@ -75,13 +74,13 @@ public class AcidBucket : ModItem
 			}
 			if (tile.LiquidAmount != 0)
 			{
-				if (tile.LiquidType != LiquidLoader.LiquidType<Acid>())
+				if (tile.LiquidType != LiquidID.Shimmer)
 				{
 					return;
 				}
 			}
 			SoundEngine.PlaySound(SoundID.SplashWeak, player.position);
-			tile.LiquidType = LiquidLoader.LiquidType<Acid>();
+			tile.LiquidType = LiquidID.Shimmer;
 			tile.LiquidAmount = byte.MaxValue;
 			WorldGen.SquareTileFrame(Player.tileTargetX, Player.tileTargetY);
 			Item.stack--;
