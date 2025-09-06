@@ -309,6 +309,11 @@ Mods: {
 				Description: Did you hear the story about a fish filled with 100 pathogens? Well, it exists! I wanna play a prank on someone, so go fetch it for me, but make sure you don't get sick while bringing it to me!
 				CatchLocation: Caught in the Contagion
 			}
+
+			ArmoredBonefish: {
+				Description: I heard from that mechanic what's-her-face that she saw a skeletal fish swimming around in the acid pools of the Dungeon wearing a set of armor! I want to put it on display, but I'm not going anywhere near those dangerous pools, so you go catch it for me!
+				CatchLocation: Caught in the Dungeon in Acid
+			}
 		}
 
 		Achievements: {
@@ -10010,6 +10015,16 @@ Mods: {
 			BloodSensor: {
 				DisplayName: Liquid Sensor (Blood)
 				Tooltip: ""
+			}
+
+			Acidskipper: {
+				DisplayName: Acidskipper
+				Tooltip: ""
+			}
+
+			ArmoredBonefish: {
+				DisplayName: Armored Bonefish
+				Tooltip: "'Caught in the Dungeon in Acid'"
 			}
 		}
 

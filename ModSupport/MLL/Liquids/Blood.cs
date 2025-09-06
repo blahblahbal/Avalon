@@ -141,7 +141,7 @@ internal class Blood : ModLiquid
 	//We set this to none, this is due to the liquid emitting light, needing no special lightMaskMode for its interaction with light.
 	public override LightMaskMode LiquidLightMaskMode(int i, int j)
 	{
-		return LightMaskMode.None;
+		return LightMaskMode.Honey;
 	}
 
 	//ModifyLight allows the liquid to emit light similarly to any tile or wall.
