@@ -2363,7 +2363,6 @@ public class AvalonPlayer : ModPlayer
 		{
 			return;
 		}
-		Main.NewText(isContagionFishingAttempt, Main.DiscoColor);
 
 		if (water)
 		{
