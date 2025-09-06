@@ -311,7 +311,7 @@ Mods: {
 			}
 
 			ArmoredBonefish: {
-				Description: I heard from that mechanic what's-her-face that she saw a skeletal fish swimming around in the acid pools of the Dungeon wearing a set of armor! I want to put it on display, but I'm not going anywhere near those dangerous pools, so you go catch it for me!
+				Description: I've heard there's a skeletal fish swimming around in the acid pools of the Dungeon, and get this - it's wearing a suit of armor! I want to put it on display, but I'm not going anywhere near those dangerous pools, so you go catch it for me!
 				CatchLocation: Caught in the Dungeon in Acid
 			}
 		}
