@@ -2359,7 +2359,7 @@ public class AvalonPlayer : ModPlayer
 				isContagionFishingAttempt = true;
 			}
 		}
-		if (attempt.rolledEnemySpawn > 0)
+		if (npcSpawn > 0)
 		{
 			return;
 		}
