@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using ModLiquidLib.ModLoader;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.ModSupport.MLL;
@@ -21,17 +20,7 @@ public class MLLPlayer : ModPlayer
 		{
 			if (attempt.crate && Player.ZoneDungeon)
 			{
-				if (!attempt.veryrare && !attempt.legendary && attempt.rare && Main.rand.NextBool())
-				{
-					if (Main.hardMode)
-					{
-						itemDrop = ItemID.DungeonFishingCrateHard;
-					}
-					else
-					{
-						itemDrop = ItemID.DungeonFishingCrate;
-					}
-				}
+				return;
 			}
 			else if (attempt.rare && Player.ZoneDungeon && Main.hardMode)
 			{

@@ -1,13 +1,9 @@
 using Avalon.Common;
-using System;
-using Terraria;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework;
 using Avalon.Common.Players;
 using Avalon.Projectiles;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ModLoader;
 
 namespace Avalon.Hooks
 {
@@ -32,9 +28,9 @@ namespace Avalon.Hooks
 					var player = Main.player[self.owner];
 					bool inCrimson = player.ZoneCrimson;
 					bool inCorruption = player.ZoneCorrupt;
-					bool inContagion = player.InModBiome<Biomes.Contagion>() || player.InModBiome<Biomes.UndergroundContagion>();
+					bool inContagion = player.GetModPlayer<AvalonBiomePlayer>().ZoneAnyContagion;
 					bool inJungle = player.ZoneJungle;
-					bool inSavanna = player.InModBiome<Biomes.Savanna>() || player.InModBiome<Biomes.UndergroundTropics>();
+					bool inSavanna = player.GetModPlayer<AvalonBiomePlayer>().ZoneAnySavanna;
 
 					// there's no reason to set modded biome zones to true/false here since their drops are handled afterwards, which is good because I have no idea how to do it!
 					if (inCorruption && !inCrimson && !inContagion)

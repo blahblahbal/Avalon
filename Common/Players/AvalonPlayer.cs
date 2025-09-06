@@ -2336,70 +2336,114 @@ public class AvalonPlayer : ModPlayer
 		bool lava = attempt.inLava;
 
 		Point point = Player.Center.ToTileCoordinates();
-		bool isContagionFishingAttempt = Player.InModBiome<Biomes.Contagion>() || Player.InModBiome<Biomes.UndergroundContagion>() || riftContagionFishing;
 
-		if ((Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) && attempt.uncommon) // not possible via rifts anyways, so doesn't check for it
+		// logic handling randomisation of which evil biome drop you get, hopefully replicates vanilla behaviour properly.
+		bool isContagionFishingAttempt = riftContagionFishing;
+
+		if (Main.remixWorld && attempt.heightLevel == 0)
 		{
-			if (questFish == ModContent.ItemType<Items.Fish.Quest.Snotpiranha>())
+			isContagionFishingAttempt = false;
+		}
+		else if (!isContagionFishingAttempt && Player.GetModPlayer<AvalonBiomePlayer>().ZoneAnyContagion)
+		{
+			if (Player.ZoneCorrupt && Player.ZoneCrimson)
 			{
-				itemDrop = ModContent.ItemType<Items.Fish.Quest.Snotpiranha>();
-				return;
+				isContagionFishingAttempt = Main.rand.NextBool(3);
 			}
-			if (questFish == ModContent.ItemType<Items.Fish.Quest.Pathofish>())
+			else if (Player.ZoneCorrupt || Player.ZoneCrimson)
 			{
-				itemDrop = ModContent.ItemType<Items.Fish.Quest.Pathofish>();
-				return;
+				isContagionFishingAttempt = Main.rand.NextBool(2);
+			}
+			else
+			{
+				isContagionFishingAttempt = true;
 			}
 		}
+		if (attempt.rolledEnemySpawn > 0)
+		{
+			return;
+		}
+		Main.NewText(isContagionFishingAttempt, Main.DiscoColor);
+
 		if (water)
 		{
-			if (attempt.rare && Player.ZoneDungeon && Main.hardMode)
+			if (IsItemFishingJunk(itemDrop)) return; // junk gets decided first before all other items.
+
+			if (IsOceanOrDungeonCrate(itemDrop)) return; // corrupt and crimson crates are dropped immediately after these two; we could also make corr/crim take precedence, but doesn't really matter.
+
+			if (attempt.crate)
 			{
-				itemDrop = ModContent.ItemType<Items.Consumables.BiomeLockbox>();
-				return;
-			}
-			if (attempt.crate && isContagionFishingAttempt)
-			{
-				if (!attempt.veryrare && !attempt.legendary && attempt.rare && Main.rand.NextBool())
+				if (attempt.rare && isContagionFishingAttempt)
 				{
 					if (Main.hardMode)
 					{
 						itemDrop = ModContent.ItemType<Items.Consumables.PlagueCrate>();
-						return;
 					}
 					else
 					{
 						itemDrop = ModContent.ItemType<Items.Consumables.ContagionCrate>();
-						return;
+					}
+				}
+				return;
+			}
+
+			if (IsMiscLegendaryDrop(itemDrop)) return; // a collection of legendary fishing attempt items that take precedence
+
+			if (IsAlchemyTable(itemDrop)) return; // alchemy table takes precedence over everything after this point
+
+			if (Player.ZoneDungeon)
+			{
+				if (attempt.rare && Player.ZoneDungeon && Main.hardMode)
+				{
+					itemDrop = ModContent.ItemType<Items.Consumables.BiomeLockbox>();
+				}
+			}
+			else
+			{
+				if (isContagionFishingAttempt)
+				{
+					if (attempt.legendary && Main.hardMode && Player.ZoneSnow && attempt.heightLevel == 3 && !Main.rand.NextBool(3))
+					{
+						attempt.rolledItemDrop = ItemID.ScalyTruffle;
+					}
+					else if (attempt.legendary && Main.hardMode && Main.rand.NextBool(2))
+					{
+						itemDrop = ModContent.ItemType<Items.Weapons.Summon.Whips.AnchorWhipworm>();
+					}
+					else if (attempt.uncommon && questFish == ModContent.ItemType<Items.Fish.Quest.Snotpiranha>())
+					{
+						itemDrop = ModContent.ItemType<Items.Fish.Quest.Snotpiranha>();
+					}
+					else if (attempt.uncommon && questFish == ModContent.ItemType<Items.Fish.Quest.Pathofish>())
+					{
+						itemDrop = ModContent.ItemType<Items.Fish.Quest.Pathofish>();
+					}
+					else if (attempt.uncommon)
+					{
+						int r = Main.rand.Next(2);
+						if (r == 0)
+						{
+							itemDrop = ModContent.ItemType<Items.Fish.Ickfish>();
+						}
+						//else if (r == 1)
+						//{
+						//    itemDrop = ModContent.ItemType<Items.Fish.NauSeaFish>();
+						//    return;
+						//}
+						else if (r == 1)
+						{
+							itemDrop = ModContent.ItemType<Items.Fish.SicklyTrout>();
+						}
 					}
 				}
 			}
-			if (attempt.legendary && Main.hardMode && isContagionFishingAttempt && Main.rand.NextBool(2))
-			{
-				itemDrop = ModContent.ItemType<Items.Weapons.Summon.Whips.AnchorWhipworm>();
-				return;
-			}
-			if (attempt.uncommon && isContagionFishingAttempt)
-			{
-				int r = Main.rand.Next(2);
-				if (r == 0)
-				{
-					itemDrop = ModContent.ItemType<Items.Fish.Ickfish>();
-					return;
-				}
-				//else if (r == 1)
-				//{
-				//    itemDrop = ModContent.ItemType<Items.Fish.NauSeaFish>();
-				//    return;
-				//}
-				else if (r == 1)
-				{
-					itemDrop = ModContent.ItemType<Items.Fish.SicklyTrout>();
-					return;
-				}
-			}
+			return;
 		}
 	}
+	public static bool IsItemFishingJunk(int itemType) => itemType is >= ItemID.OldShoe and <= ItemID.TinCan or ItemID.JojaCola;
+	public static bool IsOceanOrDungeonCrate(int itemType) => itemType is ItemID.DungeonFishingCrate or ItemID.DungeonFishingCrateHard or ItemID.OceanCrate or ItemID.OceanCrateHard;
+	public static bool IsMiscLegendaryDrop(int itemType) => itemType is ItemID.CombatBook or ItemID.DreadoftheRedSea or ItemID.FrogLeg or ItemID.BalloonPufferfish or ItemID.ZephyrFish or ItemID.BombFish;
+	public static bool IsAlchemyTable(int itemType) => itemType is ItemID.AlchemyTable;
 	public override void OnHitAnything(float x, float y, Entity victim)
 	{
 		if (victim is NPC && Player.HasBuff(ModContent.BuffType<Blah>()))

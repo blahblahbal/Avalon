@@ -5966,7 +5966,7 @@ Mods: {
 
 			Snotpiranha: {
 				DisplayName: Snotpiranha
-				Tooltip: ""
+				Tooltip: "Caught in the Contagion"
 			}
 
 			SicklyTrout: {
@@ -9446,7 +9446,7 @@ Mods: {
 
 			Pathofish: {
 				DisplayName: Pathofish
-				Tooltip: ""
+				Tooltip: "Caught in the Contagion"
 			}
 
 			TrappedBleachedEbonyChest: {
