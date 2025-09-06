@@ -16,7 +16,7 @@ public class ArmoredBonefish : ModItem
 	}
 	public override bool IsAnglerQuestAvailable()
 	{
-		return true;
+		return Main.hardMode && NPC.downedPlantBoss;
 	}
 
 	public override void AnglerQuestChat(ref string description, ref string catchLocation)
