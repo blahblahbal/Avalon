@@ -359,6 +359,8 @@ public class AvalonPlayer : ModPlayer
 	public int EfficiencyPrefix;
 	public float FluidicModifier;
 	#endregion
+
+	public bool InCaesiumGas = false;
 	public int FrameCount { get; set; }
 	public int ShadowCooldown { get; private set; }
 	/// <summary>
@@ -587,6 +589,8 @@ public class AvalonPlayer : ModPlayer
 		MaxMeleeCrit = 100;
 		MaxRangedCrit = 100;
 
+		InCaesiumGas = false;
+
 		Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 = Player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax;
 
 		for (int m = 0; m < 200; m++)
@@ -718,6 +722,11 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PreUpdateMovement()
 	{
+		Main.NewText(Player.gravDir);
+		if (InCaesiumGas)
+		{
+			return;
+		}
 		if (Player.gravDir == -1f)
 		{
 			AcidWalk = false;
@@ -2458,6 +2467,15 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 	{
+		#region it burns x4 achievement
+		if ((target.HasBuff(BuffID.OnFire) || target.HasBuff(BuffID.OnFire3)) && target.HasBuff(BuffID.CursedInferno) && (target.HasBuff(BuffID.Frostburn) || target.HasBuff(BuffID.Frostburn2)) && target.HasBuff(BuffID.ShadowFlame))
+		{
+			if (ExxoAvalonOrigins.Achievements != null)
+			{
+				ExxoAvalonOrigins.Achievements.Call("Event", "ItBurnsBurnsBurnsBurns");
+			}
+		}
+		#endregion
 		if (RoseMagic && proj.DamageType == DamageClass.Magic && Main.rand.NextBool(8) && RoseMagicCooldown <= 0 && target.lifeMax > 5 && target.type != NPCID.TargetDummy)
 		{
 			int num36 = Item.NewItem(Player.GetSource_OnHit(target), (int)target.position.X,
