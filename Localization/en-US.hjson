@@ -10009,12 +10009,12 @@ Mods: {
 
 			AcidSensor: {
 				DisplayName: Liquid Sensor (Acid)
-				Tooltip: ""
+				Tooltip: Activates whenever occupied by acid, deactivates otherwise
 			}
 
 			BloodSensor: {
 				DisplayName: Liquid Sensor (Blood)
-				Tooltip: ""
+				Tooltip: Activates whenever occupied by blood, deactivates otherwise
 			}
 
 			Acidskipper: {
