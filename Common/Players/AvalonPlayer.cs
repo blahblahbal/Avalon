@@ -722,7 +722,7 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void PreUpdateMovement()
 	{
-		Main.NewText(Player.gravDir);
+		//Main.NewText(Player.gravDir);
 		if (InCaesiumGas)
 		{
 			return;

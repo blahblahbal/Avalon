@@ -5966,7 +5966,7 @@ Mods: {
 
 			Snotpiranha: {
 				DisplayName: Snotpiranha
-				Tooltip: "Caught in the Contagion"
+				Tooltip: Caught in the Contagion
 			}
 
 			SicklyTrout: {
@@ -9446,7 +9446,7 @@ Mods: {
 
 			Pathofish: {
 				DisplayName: Pathofish
-				Tooltip: "Caught in the Contagion"
+				Tooltip: Caught in the Contagion
 			}
 
 			TrappedBleachedEbonyChest: {
@@ -10025,6 +10025,11 @@ Mods: {
 			ArmoredBonefish: {
 				DisplayName: Armored Bonefish
 				Tooltip: "'Caught in the Dungeon in Acid'"
+			}
+
+			CaesiumGasBucket: {
+				DisplayName: Caesium Gas Bucket
+				Tooltip: ""
 			}
 		}
 
