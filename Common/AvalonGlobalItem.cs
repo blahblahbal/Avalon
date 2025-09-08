@@ -2929,7 +2929,7 @@ public class AvalonGlobalItem : GlobalItem
 							NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, Player.tileTargetX, Player.tileTargetY, item.createTile);
 						}
 
-						if (subtractFromStack)
+						if (subtractFromStack && item.consumable)
 						{
 							item.stack--;
 						}
@@ -2944,7 +2944,10 @@ public class AvalonGlobalItem : GlobalItem
 						}
 
 						//Main.PlaySound(0, Player.tileTargetX * 16, Player.tileTargetY * 16, 1);
-						item.stack--;
+						if (item.consumable)
+						{
+							item.stack--;
+						}
 					}
 				}
 			}
