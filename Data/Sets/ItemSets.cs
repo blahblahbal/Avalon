@@ -1,6 +1,5 @@
 using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
-using Avalon.Dusts;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.Info;
 using Avalon.Items.Accessories.PreHardmode;
@@ -59,7 +58,7 @@ using Avalon.Items.Weapons.Ranged.Hardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Items.Weapons.Ranged.Superhardmode;
 using Avalon.Items.Weapons.Summon.Hardmode;
-using Microsoft.Xna.Framework;
+using Avalon.ModSupport.MLL.Items;
 using System.Collections.Generic;
 using Terraria.ID;
 using static Terraria.ModLoader.ModContent;
@@ -354,6 +353,13 @@ namespace Avalon.Data.Sets
 			ItemType<TimeShiftPotion>(), ItemID.TitanPotion, ItemType<TitanskinPotion>(),
 			ItemType<Items.Potions.Buff.VisionPotion>(), ItemID.WarmthPotion, ItemID.WaterWalkingPotion,
 			ItemType<WisdomPotion>(), ItemID.WrathPotion
+		);
+
+		public static bool[] CanFishInAcid = ItemID.Sets.Factory.CreateBoolSet(
+		);
+
+		public static bool[] IsAcidBait = ItemID.Sets.Factory.CreateBoolSet(
+			ItemType<AlkalineJellyfish>()
 		);
 
 		public static Dictionary<int, int> OldAvalonItemConversion = new Dictionary<int, int>()

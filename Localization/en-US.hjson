@@ -10031,6 +10031,16 @@ Mods: {
 				DisplayName: Caesium Gas Bucket
 				Tooltip: ""
 			}
+
+			AlkalineJellyfish: {
+				DisplayName: Alkaline Jellyfish
+				Tooltip: ""
+			}
+
+			AlkalineJellyfishJar: {
+				DisplayName: Alkaline Jellyfish Jar
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -11918,6 +11928,7 @@ Mods: {
 			MoonwareDresser.MapEntry: Moonware Dresser
 			AcidDropletTile.MapEntry: Dripping Acid
 			BloodDropletTile.MapEntry: Dripping Blood
+			AlkalineJellyfishJarTile.MapEntry: Alkaline Jellyfish Jar
 		}
 
 		Prefixes: {

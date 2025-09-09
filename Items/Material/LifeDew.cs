@@ -16,6 +16,6 @@ public class LifeDew : ModItem
 	{
 		Item.DefaultToMisc();
 		Item.rare = ItemRarityID.Yellow;
-		Item.value = Item.sellPrice(0, 8);
+		Item.value = Item.sellPrice(0, 0, 50);
 	}
 }

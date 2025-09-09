@@ -26,9 +26,9 @@ public class AcidWaders : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ItemID.WaterWalkingBoots)
-			.AddIngredient(ModContent.ItemType<AcidBucket>(), 3)
+			.AddIngredient(ModContent.ItemType<Acidskipper>(), 3)
 			.AddIngredient(ModContent.ItemType<LifeDew>(), 5)
-			.AddTile(TileID.LunarCraftingStation)
+			.AddTile(TileID.TinkerersWorkbench)
 			.Register();
 	}
 }
