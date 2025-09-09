@@ -13,7 +13,7 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
 	{
 		public override void SetDefaults()
 		{
-			Item.DefaultToRangedWeapon(50, 20, ProjectileID.None, AmmoID.None, 35, 8f, 16f, 35, 35, true);
+			Item.DefaultToRangedWeapon(50, 20, ModContent.ProjectileType<ExplosiveEgg>(), AmmoID.None, 35, 8f, 16f, 35, 35, true);
 			//Item.useAmmo = ItemID.Grenade; // doing this makes it add the damage of grenades lol
 			Item.rare = ItemRarityID.Green;
 			Item.value = Item.sellPrice(silver: 54);

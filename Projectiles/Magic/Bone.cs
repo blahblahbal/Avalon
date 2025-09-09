@@ -42,7 +42,7 @@ public class Bone1 : ModProjectile
 
 		for (int i = 1; i < 4; i++)
 		{
-			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation + (i * -0.3f * Projectile.direction), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
 		}
 		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
 		return false;
@@ -56,7 +56,7 @@ public class Bone1 : ModProjectile
 		SoundEngine.PlaySound(SoundID.NPCHit2, Projectile.Center);
 	}
 }
-public class Bone2 : ModProjectile
+public class Bone2 : Bone1
 {
 	public override void SetDefaults()
 	{
@@ -79,27 +79,6 @@ public class Bone2 : ModProjectile
 			Projectile.velocity.Y += 0.15f;
 		}
 		Projectile.velocity *= 0.99f;
-	}
-	public override bool PreDraw(ref Color lightColor)
-	{
-		Rectangle frame = TextureAssets.Projectile[Type].Frame();
-		Vector2 frameOrigin = frame.Size() / 2f;
-		Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin;
-
-		for (int i = 1; i < 4; i++)
-		{
-			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
-		}
-		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
-		return false;
-	}
-	public override void OnKill(int timeLeft)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Bone, -Projectile.velocity.X * 0.25f, -Projectile.velocity.Y * 0.25f, default, default, 0.9f);
-		}
-		SoundEngine.PlaySound(SoundID.NPCHit2, Projectile.Center);
 	}
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{
@@ -132,7 +111,7 @@ public class Bone2 : ModProjectile
 		return true;
 	}
 }
-public class Bone3 : ModProjectile
+public class Bone3 : Bone1
 {
 	public override void SetDefaults()
 	{
@@ -165,29 +144,8 @@ public class Bone3 : ModProjectile
 		hitbox.Width += size * 2;
 		hitbox.Height += size * 2;
 	}
-	public override bool PreDraw(ref Color lightColor)
-	{
-		Rectangle frame = TextureAssets.Projectile[Type].Frame();
-		Vector2 frameOrigin = frame.Size() / 2f;
-		Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin;
-
-		for (int i = 1; i < 4; i++)
-		{
-			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, new Vector2(drawPos.X - 9, drawPos.Y - 8) + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
-		}
-		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, new Vector2(drawPos.X - 9, drawPos.Y - 8), frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
-		return false;
-	}
-	public override void OnKill(int timeLeft)
-	{
-		for (int i = 0; i < 10; i++)
-		{
-			Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Bone, -Projectile.oldVelocity.X * 0.35f, -Projectile.oldVelocity.Y * 0.35f, default, default, 0.9f);
-		}
-		SoundEngine.PlaySound(SoundID.NPCHit2, Projectile.Center);
-	}
 }
-public class Bone4 : ModProjectile
+public class Bone4 : Bone1
 {
 	public float bounces = 3;
 	public override void SetDefaults()
@@ -213,19 +171,6 @@ public class Bone4 : ModProjectile
 		}
 		Projectile.velocity *= 0.99f;
 	}
-	public override bool PreDraw(ref Color lightColor)
-	{
-		Rectangle frame = TextureAssets.Projectile[Type].Frame();
-		Vector2 frameOrigin = frame.Size() / 2f;
-		Vector2 drawPos = Projectile.position - Main.screenPosition + frameOrigin;
-
-		for (int i = 1; i < 4; i++)
-		{
-			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 2), Projectile.velocity.Y * (-i * 2)), frame, (lightColor * (1 - (i * 0.25f))) * 0.5f, Projectile.rotation * (1 - (i * 0.1f)), frameOrigin, Projectile.scale * (1 - (i * 0.1f)), SpriteEffects.None, 0);
-		}
-		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
-		return false;
-	}
 	public override bool OnTileCollide(Vector2 oldVelocity)
 	{
 		if (bounces == 0)
@@ -244,12 +189,5 @@ public class Bone4 : ModProjectile
 		Projectile.velocity *= 0.99f;
 		SoundEngine.PlaySound(SoundID.NPCHit2, Projectile.Center);
 		return false;
-	}
-	public override void OnKill(int timeLeft)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Bone, -Projectile.velocity.X * 0.25f, -Projectile.velocity.Y * 0.25f, default, default, 0.9f);
-		}
 	}
 }

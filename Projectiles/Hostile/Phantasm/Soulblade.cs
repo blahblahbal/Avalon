@@ -1,4 +1,5 @@
 using Avalon.Buffs.Debuffs;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -33,43 +34,24 @@ public class Soulblade : ModProjectile
 			target.AddBuff(ModContent.BuffType<ShadowCurse>(), 60 * 5);
 		}
 	}
-	public override bool OnTileCollide(Vector2 oldVelocity)
-	{
-		if(Projectile.velocity.Y != Projectile.oldVelocity.Y)
-		{
-			Projectile.velocity.Y = -Projectile.oldVelocity.Y;
-		}
-		if (Projectile.velocity.X != Projectile.oldVelocity.X)
-		{
-			Projectile.velocity.X = -Projectile.oldVelocity.X;
-		}
-		return false;
-	}
 	public override void AI()
 	{
-		if(Projectile.timeLeft == 60 * 8)
+		if (Projectile.timeLeft == 60 * 8)
 		{
 			SoundEngine.PlaySound(SoundID.Zombie54, Projectile.Center);
 		}
 
-		if(Projectile.timeLeft < 60)
+		if (Projectile.timeLeft < 60)
 		{
 			Projectile.alpha += 8;
 		}
-		Projectile.spriteDirection = -Projectile.direction;
 
-		Projectile.rotation += 0.2f * Projectile.direction;
+		Projectile.rotation += 0.2f;
 
 		if (Projectile.alpha > 0)
 			Projectile.alpha -= 4;
 
-		//Projectile.velocity *= 1.02f;
-		Projectile.velocity.Y += 0.3f;
-
-		if (!Projectile.tileCollide && !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
-		{
-			Projectile.tileCollide = true;
-		}
+		Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.TwoPi / (60f * 8));
 
 		Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit);
 		d.noGravity = true;
