@@ -310,7 +310,7 @@ namespace Avalon.Common.Templates
 			if (player.cursorItemIconText == "")
 			{
 				player.cursorItemIconEnabled = false;
-				player.cursorItemIconID = 0;
+				player.cursorItemIconID = ItemID.None;
 			}
 		}
 
@@ -797,7 +797,7 @@ namespace Avalon.Common.Templates
 			if (player.cursorItemIconText == "")
 			{
 				player.cursorItemIconEnabled = false;
-				player.cursorItemIconID = 0;
+				player.cursorItemIconID = ItemID.None;
 			}
 		}
 	}
@@ -1839,7 +1839,7 @@ namespace Avalon.Common.Templates
 	public abstract class SofaTemplate : FurnitureTemplate
 	{
 		public const int NextStyleHeight = 38; // Calculated by adding all CoordinateHeights + CoordinatePaddingFix.Y applied to all of them + 2
-		public virtual float SittingHeight => -1;
+		public virtual float SittingHeight => 0;
 		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[Type] = true;
@@ -1853,6 +1853,7 @@ namespace Avalon.Common.Templates
 
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
 			TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
+			TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.addTile(Type);
 			AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Sofa"));
 			DustType = Dust;
@@ -1999,6 +2000,7 @@ namespace Avalon.Common.Templates
 			16,
 			16
 			};
+			TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.newTile.Origin = new Point16(0, 4);
 			TileObjectData.newTile.LavaDeath = LavaDeath;
 			TileObjectData.addTile(Type);

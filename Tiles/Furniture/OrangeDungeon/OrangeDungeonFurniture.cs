@@ -85,7 +85,7 @@ public class OrangeDungeonSink : SinkTemplate { }
 
 public class OrangeDungeonSofa : SofaTemplate
 {
-	public override float SittingHeight => 0;
+	public override float SittingHeight => 1;
 	public override int DropItem => ModContent.ItemType<Items.Placeable.Furniture.OrangeDungeon.OrangeDungeonSofa>();
 }
 
