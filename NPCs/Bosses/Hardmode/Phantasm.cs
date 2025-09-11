@@ -64,7 +64,7 @@ public partial class Phantasm : ModNPC
 		NPC.HitSound = sound;
 		NPC.DeathSound = SoundID.NPCDeath39;
 		Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Phantasm") : MusicID.EmpressOfLight;
-		SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Hellcastle>().Type };
+		SpawnModBiomes = [ModContent.GetInstance<Biomes.Hellcastle>().Type];
 	}
 	public Vector2 eyePos;
 	public override void OnSpawn(IEntitySource source)
@@ -261,7 +261,7 @@ public partial class Phantasm : ModNPC
 			}
 			for (int i = 0; i < 40; i++)
 			{
-				int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+				int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default, 1f);
 				Main.dust[num891].velocity *= 10f;
 				Main.dust[num891].scale = 1.5f;
 				Main.dust[num891].noGravity = true;

@@ -1,21 +1,9 @@
 using System;
-using Avalon.Items.Material;
-using Avalon.Items.Placeable.Trophy;
-using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using System.Linq;
 using Terraria.Audio;
-using Terraria.Chat;
-using Terraria.GameContent.ItemDropRules;
-using Microsoft.Xna.Framework.Graphics;
-using Avalon.Common.Players;
-using Avalon.Common;
-using ReLogic.Content;
-using Terraria.GameContent;
 using Avalon.Projectiles.Hostile.Phantasm;
 using Terraria.Graphics.CameraModifiers;
 using Avalon.Dusts;
@@ -30,7 +18,8 @@ namespace Avalon.NPCs.Bosses.Hardmode
 		const int projDamage = 20;
 		private void Phase0_Dash()
 		{
-			int dashInterval = 60;
+			int dashInterval = 90;
+			if (Main.expertMode) dashInterval = 60;
 			if (NPC.ai[1] < dashInterval - 30)
 			{
 				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.02f * NPC.direction)) * 0.2f;
@@ -82,7 +71,9 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			NPC.velocity = NPC.velocity.LengthClamp(10);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
-			if (NPC.ai[0] is 0 or 15 or 30 or 45 or 60 or 75)
+			int pause = 20;
+			if (Main.expertMode) pause = 15;
+			if (NPC.ai[0] % pause == 0 && NPC.ai[0] <= pause * 5)
 			{
 				if(Main.netMode != NetmodeID.MultiplayerClient)
 				{
@@ -104,7 +95,9 @@ namespace Avalon.NPCs.Bosses.Hardmode
 		private void Phase2_Hands()
 		{
 			NPC.ai[0]++;
-			NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, 400).RotatedBy(NPC.ai[0] * 0.04f * NPC.direction)) * 1f;
+			float speed = 0.75f;
+			if (Main.expertMode) speed = 1.1f;
+			NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, 400).RotatedBy(NPC.ai[0] * 0.04f * NPC.direction)) * speed;
 			NPC.velocity = NPC.velocity.LengthClamp(12);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
@@ -112,7 +105,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			{
 				if(Main.netMode != NetmodeID.MultiplayerClient)
 				{
-					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(-Math.Sign(NPC.Center.X - target.Center.X) * 2,Main.rand.NextFloat(-0.2f,0.2f)), ModContent.ProjectileType<SoulGrabber>(), handDamage, 1, -1, NPC.whoAmI, NPC.ai[0]);
+					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(-Math.Sign(NPC.Center.X - target.Center.X) * 2, Main.rand.NextFloat(-0.2f, 0.2f)), ModContent.ProjectileType<SoulGrabber>(), handDamage, 1, -1, NPC.whoAmI, NPC.ai[0]);
 				}
 			}
 			if (NPC.ai[0] >= 60 * 10)
@@ -138,7 +131,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				Main.instance.CameraModifiers.Add(modifier);
 				for (int i = 0; i < 40; i++)
 				{
-					int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
+					int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default, 1f);
 					Main.dust[num890].velocity *= 5f;
 					Main.dust[num890].scale = 1.5f;
 					Main.dust[num890].noGravity = true;
@@ -186,7 +179,8 @@ namespace Avalon.NPCs.Bosses.Hardmode
 		}
 		private void Phase4_Dash2()
 		{
-			int dashInterval = 40;
+			int dashInterval = 75;
+			if (Main.expertMode) dashInterval = 40;
 			if (NPC.ai[1] < dashInterval - 30)
 			{
 				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.02f * NPC.direction)) * 0.2f;
@@ -309,7 +303,9 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			NPC.velocity = NPC.velocity.LengthClamp(10);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
-			if (NPC.ai[0] % 10 == 0 && NPC.ai[0] < 90)
+			int pause = 20;
+			if (Main.expertMode) pause = 10;
+			if (NPC.ai[0] % pause == 0 && NPC.ai[0] < pause * 9)
 			{
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
@@ -441,7 +437,8 @@ namespace Avalon.NPCs.Bosses.Hardmode
 		}
 		private void Phase9_Dash3()
 		{
-			int dashInterval = 60;
+			int dashInterval = 90;
+			if (Main.expertMode) dashInterval = 60;
 			if (NPC.ai[1] < dashInterval - 50)
 			{
 				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.04f * NPC.direction)) * 0.3f;
