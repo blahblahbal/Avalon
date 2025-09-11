@@ -34,18 +34,6 @@ public class PhantomBlade : ModProjectile
 			target.AddBuff(ModContent.BuffType<ShadowCurse>(), 60 * 5);
 		}
 	}
-	public override bool OnTileCollide(Vector2 oldVelocity)
-	{
-		if(Projectile.velocity.Y != Projectile.oldVelocity.Y)
-		{
-			Projectile.velocity.Y = -Projectile.oldVelocity.Y;
-		}
-		if (Projectile.velocity.X != Projectile.oldVelocity.X)
-		{
-			Projectile.velocity.X = -Projectile.oldVelocity.X;
-		}
-		return false;
-	}
 	public override void AI()
 	{
 		if(Projectile.timeLeft == 60 * 8)

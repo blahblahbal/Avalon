@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Microsoft.Xna.Framework;
@@ -37,6 +38,7 @@ public class SoulEdgeDash : ModProjectile
 		}
 		player.velocity = Projectile.velocity * new Vector2(4,3);
 		player.heldProj = Projectile.whoAmI;
+		player.GetModPlayer<AvalonPlayer>().TurnOffDownwardsMovementRestrictions = true;
 		player.SetDummyItemTime(2);
 
 		Projectile.velocity *= 0.99f;

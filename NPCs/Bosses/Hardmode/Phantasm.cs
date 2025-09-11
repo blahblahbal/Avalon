@@ -30,6 +30,7 @@ public partial class Phantasm : ModNPC
 {
 	public override void SetStaticDefaults()
 	{
+		NPCID.Sets.MPAllowedEnemies[Type] = true;
 		Main.npcFrameCount[NPC.type] = 16;
 		NPCID.Sets.TrailingMode[NPC.type] = 0;
 		NPCID.Sets.TrailCacheLength[NPC.type] = 4;
@@ -50,8 +51,8 @@ public partial class Phantasm : ModNPC
 		NPC.boss = NPC.noTileCollide = NPC.noGravity = true;
 		NPC.npcSlots = 100f;
 		NPC.damage = 40;
-		NPC.lifeMax = 80000;
-		NPC.defense = 20;
+		NPC.lifeMax = 130000;
+		NPC.defense = 25;
 		NPC.aiStyle = -1;
 		NPC.value = 100000f;
 		NPC.knockBackResist = 0f;
@@ -68,7 +69,7 @@ public partial class Phantasm : ModNPC
 	public Vector2 eyePos;
 	public override void OnSpawn(IEntitySource source)
 	{
-		playPhantasmSound();
+		Transition();
 		eyePos = NPC.Center;
 	}
 	public override void BossLoot(ref string name, ref int potionType)
@@ -128,7 +129,7 @@ public partial class Phantasm : ModNPC
 		//Main.NewText(phase);
 
 		Vector2 vector = NPC.Center;
-		NPC.scale = 1.2f + (0.3f * (NPC.life / (float)NPC.lifeMax));
+		NPC.scale = 0.7f + (0.9f * (NPC.life / (float)NPC.lifeMax));
 		NPC.Size = new Vector2(66 * NPC.scale);
 		NPC.Center = vector;
 
@@ -175,7 +176,7 @@ public partial class Phantasm : ModNPC
 
 				if (NPC.ai[0] > 120)
 				{
-					playPhantasmSound();
+					Transition();
 					NPC.alpha = 0;
 					phase = 0; 
 					NPC.TargetClosest();
@@ -215,14 +216,14 @@ public partial class Phantasm : ModNPC
 				Phase10_ZoinksItsTheGayBlades();
 				break;
 			case 11:
-				Phase11_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELL();
-					break;
+				Phase11_SawHandsScary2();
+				break;
 			case 12:
-				Phase12_SawHandsScary2();
+				Phase12_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELLISeriouslyCannotBelieveThatTheyWouldDoThatLikeReallyWhatTheHellGuysLikeComeOnWTFDudesAndDudettesAndNoneOfTheAbovesTheRenameBoxIsSoLongThatItGoesOffTheScreenWhenYouTryToRenameThisMethodWhichIsKindaFunnyIThinkInMyOpinionIDKThoughItsJustMySenseofHumorNotYoursYouAreAllowedToDisagreeAllYouWantIWontReallyCareAllThatMuchButIMIghtMentallySendNeedlesToYourMindOrSomethingLikeThatIfYouTellMeYouDisagree();
 					break;
 		}
 	}
-	private void playPhantasmSound()
+	private void Transition()
 	{
 		NPC.direction = Main.rand.NextBool() ? 1 : -1;
 		return;

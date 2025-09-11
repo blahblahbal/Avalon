@@ -138,6 +138,8 @@ public class AvalonPlayer : ModPlayer
 	}
 	#endregion
 
+	public bool TurnOffDownwardsMovementRestrictions = false;
+
 	public int highestPrimeCounterOriginalDamage;
 	public float primeMinionKnockback;
 
@@ -447,6 +449,12 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void ResetEffects()
 	{
+		if (TurnOffDownwardsMovementRestrictions)
+		{
+			Player.maxFallSpeed = 1000;
+		}
+		TurnOffDownwardsMovementRestrictions = false;
+
 		WOSRenderHPText = false;
 		EfficiencyPrefix = 0;
 

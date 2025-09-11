@@ -69,14 +69,13 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			}
 			if (NPC.ai[0] > 600 && NPC.ai[1] < dashInterval)
 			{
-				playPhantasmSound();
+				Transition();
 				NPC.TargetClosest();
 				phase = (byte)Main.rand.Next(1,3);
 				NPC.ai[0] = phase == 1 ? Main.rand.Next(-120, -60) : 0;
 				NPC.ai[1] = 0;
 			}
 		}
-
 		private void Phase1_Swords()
 		{
 			NPC.velocity += NPC.Center.DirectionTo(target.Center) * 0.2f;
@@ -89,12 +88,12 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				{
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<SoulDagger>(), swordDamage, 1, -1, NPC.whoAmI, NPC.ai[0]);
 				}
-				SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+				SoundEngine.PlaySound(SoundID.Item8 with { Pitch = -0.5f + (NPC.ai[0] / 75), MaxInstances = 12 }, NPC.position);
 			}
 			NPC.ai[0]++;
 			if (NPC.ai[0] > 300)
 			{
-				playPhantasmSound();
+				Transition();
 				NPC.TargetClosest();
 				phase = (byte)Main.rand.Next(3);
 				NPC.ai[0] = 0;
@@ -118,7 +117,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			}
 			if (NPC.ai[0] >= 60 * 10)
 			{
-				playPhantasmSound();
+				Transition();
 				phase = (byte)Main.rand.Next(2);
 				NPC.ai[1] = 0;
 				NPC.ai[0] = 0;
@@ -172,13 +171,13 @@ namespace Avalon.NPCs.Bosses.Hardmode
 
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
-					NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(),NPC.whoAmI,NPC.whoAmI);
+					//NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(),NPC.whoAmI,NPC.whoAmI);
 					for (int i = 0; i < 12; i++)
 					{
 						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
 					}
 				}
-				playPhantasmSound();
+				Transition();
 				SoundEngine.PlaySound(SoundID.Roar, NPC.position);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = -200;
@@ -187,10 +186,10 @@ namespace Avalon.NPCs.Bosses.Hardmode
 		}
 		private void Phase4_Dash2()
 		{
-			int dashInterval = 30;
+			int dashInterval = 40;
 			if (NPC.ai[1] < dashInterval - 30)
 			{
-				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.03f * NPC.direction)) * 0.2f;
+				NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.02f * NPC.direction)) * 0.2f;
 				NPC.velocity = NPC.velocity.LengthClamp(10);
 				NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 			}
@@ -200,7 +199,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				d.noGravity = true;
 				d.scale = Main.rand.NextFloat(2);
 				d.velocity = NPC.velocity;
-				if (NPC.ai[1] > dashInterval && NPC.ai[1] % 10 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+				if (NPC.ai[1] > dashInterval && NPC.ai[1] % 7 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(-MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
@@ -208,15 +207,15 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			}
 			NPC.ai[0]++;
 			NPC.ai[1]++;
-			if (NPC.ai[1] == dashInterval || NPC.ai[1] == dashInterval * 2)
+			if (NPC.ai[1] == dashInterval)
 			{
 				NPC.rotation = NPC.Center.DirectionTo(target.Center).ToRotation() - MathHelper.PiOver2;
 				SoundEngine.PlaySound(SoundID.NPCDeath39, NPC.position);
-				NPC.velocity = NPC.Center.DirectionTo(target.Center) * 20f;
+				NPC.velocity = NPC.Center.DirectionTo(target.Center) * 25f;
 			}
-			else if (NPC.ai[1] > (dashInterval * 3))
+			else if (NPC.ai[1] > dashInterval + 40)
 			{
-				NPC.ai[1] = Main.rand.Next(-300, -200);
+				NPC.ai[1] = Main.rand.Next(-100, -20);
 				NPC.netUpdate = true;
 			}
 			else if (NPC.ai[1] > dashInterval - 30 && NPC.ai[1] < dashInterval)
@@ -224,14 +223,62 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				NPC.rotation = Utils.AngleLerp(NPC.Center.DirectionTo(target.Center).ToRotation() - MathHelper.PiOver2, NPC.rotation, 0.7f);
 				NPC.velocity *= 0.96f;
 			}
-			if (NPC.ai[0] > 500 && NPC.ai[1] < dashInterval)
+			if (NPC.ai[0] > 600 && NPC.ai[1] < dashInterval)
 			{
 				NPC.TargetClosest();
-				playPhantasmSound();
+				Transition();
 				phase = (byte)Main.rand.Next(4, 8);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
 			}
+
+			// below is the double dash thing
+
+			//int dashInterval = 30;
+			//if (NPC.ai[1] < dashInterval - 30)
+			//{
+			//	NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, -100).RotatedBy(NPC.ai[0] * 0.03f * NPC.direction)) * 0.2f;
+			//	NPC.velocity = NPC.velocity.LengthClamp(10);
+			//	NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
+			//}
+			//else
+			//{
+			//	Dust d = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit);
+			//	d.noGravity = true;
+			//	d.scale = Main.rand.NextFloat(2);
+			//	d.velocity = NPC.velocity;
+			//	if (NPC.ai[1] > dashInterval && NPC.ai[1] % 10 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+			//	{
+			//		Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
+			//		Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(-MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
+			//	}
+			//}
+			//NPC.ai[0]++;
+			//NPC.ai[1]++;
+			//if (NPC.ai[1] == dashInterval || NPC.ai[1] == dashInterval * 2)
+			//{
+			//	NPC.rotation = NPC.Center.DirectionTo(target.Center).ToRotation() - MathHelper.PiOver2;
+			//	SoundEngine.PlaySound(SoundID.NPCDeath39, NPC.position);
+			//	NPC.velocity = NPC.Center.DirectionTo(target.Center) * 20f;
+			//}
+			//else if (NPC.ai[1] > (dashInterval * 3))
+			//{
+			//	NPC.ai[1] = Main.rand.Next(-300, -200);
+			//	NPC.netUpdate = true;
+			//}
+			//else if (NPC.ai[1] > dashInterval - 30 && NPC.ai[1] < dashInterval)
+			//{
+			//	NPC.rotation = Utils.AngleLerp(NPC.Center.DirectionTo(target.Center).ToRotation() - MathHelper.PiOver2, NPC.rotation, 0.7f);
+			//	NPC.velocity *= 0.96f;
+			//}
+			//if (NPC.ai[0] > 500 && NPC.ai[1] < dashInterval)
+			//{
+			//	NPC.TargetClosest();
+			//	playPhantasmSound();
+			//	phase = (byte)Main.rand.Next(4, 8);
+			//	NPC.ai[0] = 0;
+			//	NPC.ai[1] = 0;
+			//}
 		}
 		private void Phase5_Hands2()
 		{
@@ -253,7 +300,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				NPC.ai[1] = 0;
 				NPC.ai[0] = 0;
 				NPC.netUpdate = true;
-				playPhantasmSound();
+				Transition();
 			}
 		}
 		private void Phase6_Swords2()
@@ -268,7 +315,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				{
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PhantomDagger>(), swordDamage, 1, -1, NPC.whoAmI, NPC.ai[0]);
 				}
-				SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+				SoundEngine.PlaySound(SoundID.Item8 with { Pitch = -0.5f + (NPC.ai[0] / 90), MaxInstances = 12 }, NPC.position);
 			}
 			NPC.ai[0]++;
 			if (NPC.ai[0] > 200 && NPC.ai[1] < 3)
@@ -278,7 +325,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			}
 			if (NPC.ai[0] > 400)
 			{
-				playPhantasmSound();
+				Transition();
 				NPC.TargetClosest();
 				phase = (byte)Main.rand.Next(4, 8);
 				NPC.ai[0] = 0;
@@ -305,19 +352,21 @@ namespace Avalon.NPCs.Bosses.Hardmode
 					NPC.ai[0] = 0;
 					NPC.ai[1] = 0;
 					NPC.TargetClosest();
-					playPhantasmSound();
+					Transition();
 					phase = (byte)Main.rand.Next(4, 8);
 					NPC.netUpdate = true;
 					return;
 				}
 
-				if (NPC.ai[1] % 2 == 0)
+				if (NPC.ai[1] % 2 == 0 && NPC.ai[0] == 120)
 				{
-					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom, NPC.Center.DirectionTo(target.Center) * Main.rand.NextFloat(3, 6), ModContent.ProjectileType<Soulblade>(), swordDamage, 1);
+					int iterations = 12;
+					for (int i = 0; i < iterations; i++)
+						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(0, 8).RotatedBy(i * MathHelper.TwoPi / iterations), ModContent.ProjectileType<Soulblade>(), swordDamage, 1);
 				}
-				else
+				else if (NPC.ai[1] % 2 == 1 && NPC.ai[0] % 10 == 0)
 				{
-					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedByRandom(0.2f) * 12, ModContent.ProjectileType<PhantomGrabber>(), handDamage, 1);
+					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.Center.DirectionTo(target.Center).RotatedByRandom(0.5f) * 10, ModContent.ProjectileType<SoulGrabber>(), handDamage, 1);
 				}
 			}
 
@@ -386,8 +435,8 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				SoundEngine.PlaySound(SoundID.Roar, NPC.position);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = -200;
-				playPhantasmSound();
-				phase = 11;
+				Transition();
+				phase = 12;
 			}
 		}
 		private void Phase9_Dash3()
@@ -431,9 +480,9 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			}
 			if (NPC.ai[0] > 500 && NPC.ai[1] < dashInterval)
 			{
-				playPhantasmSound();
+				Transition();
 				NPC.TargetClosest();
-				phase = 10;
+				phase = (byte)Main.rand.Next(9, 13);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
 			}
@@ -450,7 +499,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				{
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PhantomDagger>(), swordDamage, 1, -1, NPC.whoAmI, NPC.ai[0]);
 				}
-				SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+				SoundEngine.PlaySound(SoundID.Item8 with { Pitch = -0.5f + (NPC.ai[0] / 90), MaxInstances = 12}, NPC.position);
 			}
 			NPC.ai[0]++;
 			if (NPC.ai[0] > 200 && NPC.ai[1] < 3)
@@ -460,15 +509,15 @@ namespace Avalon.NPCs.Bosses.Hardmode
 			}
 			if (NPC.ai[0] > 300)
 			{
-				playPhantasmSound();
+				Transition();
 				NPC.TargetClosest();
-				phase = 11;
+				phase = (byte)Main.rand.Next(9, 13);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
 				NPC.netUpdate = true;
 			}
 		}
-		private void Phase11_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELL()
+		private void Phase12_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELLISeriouslyCannotBelieveThatTheyWouldDoThatLikeReallyWhatTheHellGuysLikeComeOnWTFDudesAndDudettesAndNoneOfTheAbovesTheRenameBoxIsSoLongThatItGoesOffTheScreenWhenYouTryToRenameThisMethodWhichIsKindaFunnyIThinkInMyOpinionIDKThoughItsJustMySenseofHumorNotYoursYouAreAllowedToDisagreeAllYouWantIWontReallyCareAllThatMuchButIMIghtMentallySendNeedlesToYourMindOrSomethingLikeThatIfYouTellMeYouDisagree()
 		{
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 			NPC.ai[0]++;
@@ -511,22 +560,23 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/ScaryLaser") {Volume = 0.8f },NPC.position);
 			}
 
-			if (NPC.ai[0] > beamStart && NPC.ai[0] % 30 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
-			{
-				Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2CircularEdge(2,1), ModContent.ProjectileType<PhantomGrabber>(), projDamage, 1, -1, target.whoAmI);
-			}
+			//if (NPC.ai[0] > beamStart && NPC.ai[0] % 30 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+			//{
+			//	Vector2 rotation = Main.rand.NextVector2CircularEdge(1, 1);
+			//	Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + (rotation * 16 * 50), -rotation, ModContent.ProjectileType<PhantomGrabber>(), projDamage, 1, -1, target.whoAmI);
+			//}
 
 			if (NPC.ai[0] > beamStart + ContentSamples.ProjectilesByType[ModContent.ProjectileType<PhantomDeathray>()].timeLeft)
 			{
-				playPhantasmSound();
+				Transition();
 				NPC.TargetClosest();
-				phase = 12;
+				phase = (byte)Main.rand.Next(9, 12);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
 				NPC.netUpdate = true;
 			}
 		}
-		private void Phase12_SawHandsScary2()
+		private void Phase11_SawHandsScary2()
 		{
 			NPC.velocity += NPC.Center.DirectionTo(new Vector2(target.Center.X, MathHelper.Lerp(target.Center.Y, eyePos.Y, 0.6f))) * 0.2f;
 			NPC.velocity = NPC.velocity.LengthClamp(10);
@@ -545,8 +595,8 @@ namespace Avalon.NPCs.Bosses.Hardmode
 					NPC.ai[0] = 0;
 					NPC.ai[1] = 0;
 					NPC.TargetClosest();
-					playPhantasmSound();
-					phase = 9;
+					Transition();
+					phase = (byte)Main.rand.Next(9, 13);
 					NPC.netUpdate = true;
 					return;
 				}
