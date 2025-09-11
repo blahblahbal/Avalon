@@ -19,7 +19,7 @@ public class ObsidianGlaive : ModItem // Obisidian Glaive
 	{
 		Item.DefaultToSpear(ModContent.ProjectileType<Projectiles.Melee.ObsidianGlaive>(), 23, 4.5f, 25, 4f, true);
 		Item.rare = ItemRarityID.Blue;
-		Item.value = Item.sellPrice(0, 20);
+		Item.value = Item.sellPrice(0, 0, 10);
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
