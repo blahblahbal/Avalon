@@ -1227,6 +1227,8 @@ public class AvalonPlayer : ModPlayer
 	}
 	public override void GetDyeTraderReward(List<int> rewardPool)
 	{
+		rewardPool.Add(ModContent.ItemType<Items.Dyes.BlurDye>());
+		rewardPool.Add(ModContent.ItemType<Items.Dyes.IlluminantDye>());
 		rewardPool.Add(ModContent.ItemType<Items.Dyes.HighVisDye>());
 		rewardPool.Add(ModContent.ItemType<Items.Dyes.EbonstoneDye>());
 		rewardPool.Add(ModContent.ItemType<Items.Dyes.CrimstoneDye>());
@@ -1364,7 +1366,7 @@ public class AvalonPlayer : ModPlayer
 				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
 				if (Player.statLife <= 0)
 				{
-					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.{Name}_1", $"{Player.name}")), 10, 0);
+					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Malaria_1", $"{Player.name}")), 10, 0);
 				}
 				MalariaTimer = 0;
 			}
@@ -1419,7 +1421,7 @@ public class AvalonPlayer : ModPlayer
 				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
 				if (Player.statLife <= 0)
 				{
-					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.{Name}_1", $"{Player.name}")), 10, 0);
+					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.CaesiumPoison_1", $"{Player.name}")), 10, 0);
 				}
 				CaesiumPoisonTimer = 0;
 			}

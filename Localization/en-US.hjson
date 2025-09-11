@@ -8994,7 +8994,7 @@ Mods: {
 				DisplayName: Calculator Spectacles
 				Tooltip:
 					'''
-					Displays the bar yield of the ore vein above the cursor
+					Displays the bar yield of the ore vein under the cursor
 					Displays the bar yield of each ore stack in your inventory
 					'''
 			}
@@ -9035,7 +9035,7 @@ Mods: {
 			}
 
 			SpiritPoppy: {
-				DisplayName: Spirit Poopy
+				DisplayName: Spirit Poppy
 				Tooltip:
 					'''
 					Permanently increases maximum mana by 20

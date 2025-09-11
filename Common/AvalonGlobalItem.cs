@@ -7,6 +7,7 @@ using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Ammo;
 using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
+using Avalon.Items.Dyes;
 using Avalon.Items.Food;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Bars;
@@ -130,6 +131,9 @@ public class AvalonGlobalItem : GlobalItem
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<BronzeOre>()] = ItemID.TinOre;
 		// end ores
 
+		ItemID.Sets.ShimmerTransformToItem[ItemID.SilverDye] = ModContent.ItemType<AetheriumDye>();
+		ItemID.Sets.ShimmerTransformToItem[ItemID.BottledWater] = ModContent.ItemType<ShimmerDye>();
+
 		// ancient bricks
 		ItemID.Sets.ShimmerTransformToItem[ItemID.IronBrick] = ModContent.ItemType<AncientIronBrick>();
 		ItemID.Sets.ShimmerTransformToItem[ItemID.AdamantiteBeam] = ModContent.ItemType<AncientAdamantiteBrick>();
@@ -225,6 +229,8 @@ public class AvalonGlobalItem : GlobalItem
 		//ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxTropics>()] = ItemID.MusicBox;
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxTuhrtlOutpost>()] = ItemID.MusicBox;
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxUndergroundContagion>()] = ItemID.MusicBox;
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxUndergroundContagionOtherworldly>()] = ItemID.MusicBox;
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<MusicBoxContagionOtherworldly>()] = ItemID.MusicBox;
 		// end music boxes
 
 		// torches

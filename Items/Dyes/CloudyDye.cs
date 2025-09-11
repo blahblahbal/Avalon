@@ -35,7 +35,7 @@ public class CloudyDye : ModItem
 	}
 	public override void AddRecipes()
 	{
-		CreateRecipe(1)
+		CreateRecipe()
 			.AddIngredient(ItemID.BottledWater)
 			.AddIngredient(ItemID.Cloud)
 			.AddTile(TileID.DyeVat)
