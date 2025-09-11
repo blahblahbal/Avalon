@@ -10041,6 +10041,20 @@ Mods: {
 				DisplayName: Alkaline Jellyfish Jar
 				Tooltip: ""
 			}
+
+			AcidproofFishingHook: {
+				DisplayName: Acidproof Fishing Hook
+				Tooltip: Allows fishing in acid
+			}
+
+			AcidproofTackleBag: {
+				DisplayName: Acidproof Tackle Bag
+				Tooltip:
+					'''
+					Fishing line will never break, decreases chance of bait consumption, increases fishing power by 10
+					Allows fishing in acid and lava
+					'''
+			}
 		}
 
 		InfoDisplays: {

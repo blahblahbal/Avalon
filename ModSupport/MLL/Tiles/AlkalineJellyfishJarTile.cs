@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
-using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -47,10 +46,16 @@ public class AlkalineJellyfishJarTile : ModTile
 		offsetY = 2;
 		Main.critterCage = true;
 	}
+	private static int GetJarFrame(int x, int y, int tileFrameX, int tileFrameY)
+	{
+		int num = x - tileFrameX / 18;
+		int num2 = y - tileFrameY / 18;
+		return num / 2 * (num2 / 2) % Main.cageFrames;
+	}
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 	{
 		Tile tile = Main.tile[i, j];
-		int smallAnimalCageFrame = TileDrawing.GetSmallAnimalCageFrame(i, j, tile.TileFrameX, tile.TileFrameY);
+		int smallAnimalCageFrame = GetJarFrame(i, j, tile.TileFrameX, tile.TileFrameY);
 		bool electrocuting = JellyfishCageMode[smallAnimalCageFrame] == 2;
 		if (electrocuting)
 		{
@@ -68,13 +73,13 @@ public class AlkalineJellyfishJarTile : ModTile
 	public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
 	{
 		Tile tile = Main.tile[i, j];
-		int smallAnimalCageFrame = TileDrawing.GetSmallAnimalCageFrame(i, j, tile.TileFrameX, tile.TileFrameY);
+		int smallAnimalCageFrame = GetJarFrame(i, j, tile.TileFrameX, tile.TileFrameY);
 		frameYOffset = JellyfishCageFrame[smallAnimalCageFrame] * 36;
 	}
 	public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 	{
 		Tile tile = Main.tile[i, j];
-		int smallAnimalCageFrame = TileDrawing.GetSmallAnimalCageFrame(i, j, tile.TileFrameX, tile.TileFrameY);
+		int smallAnimalCageFrame = GetJarFrame(i, j, tile.TileFrameX, tile.TileFrameY);
 		Vector2 screenPosition = Main.Camera.UnscaledPosition;
 		Vector2 screenOffset = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
 		Main.spriteBatch.Draw(glow.Value, new Vector2(i * 16, j * 16 + 2) - screenPosition + screenOffset, new Rectangle(tile.TileFrameX, tile.TileFrameY + JellyfishCageFrame[smallAnimalCageFrame] * 36, 16, 16), new Color(200, 200, 200, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);

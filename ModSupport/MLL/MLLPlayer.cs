@@ -37,6 +37,10 @@ public class MLLPlayer : ModPlayer
 			{
 				return;
 			}
+			else if (attempt.legendary && Main.rand.NextBool(2, 5))
+			{
+				itemDrop = ModContent.ItemType<AcidproofFishingHook>();
+			}
 			else if (attempt.rare && Player.ZoneDungeon && Main.hardMode)
 			{
 				itemDrop = ModContent.ItemType<Avalon.Items.Consumables.BiomeLockbox>();
