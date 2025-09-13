@@ -27,6 +27,8 @@ public class DarkMatterMonolith : ModTile
 		DustType = ModContent.DustType<DarkMatterDust>();
 		AnimationFrameHeight = 56;
 		TileID.Sets.DisableSmartCursor[Type] = true;
+
+		RegisterItemDrop(ModContent.ItemType<Items.Placeable.Tile.DarkMatterMonolith>());
 	}
 
 	//public override void KillMultiTile(int i, int j, int frameX, int frameY) => Item.NewItem(
