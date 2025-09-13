@@ -56,7 +56,7 @@ internal class Acid : ModLiquid
 	}
 	public override void EmitEffects(int i, int j, LiquidCache liquidCache)
 	{
-		if (Main.instance.IsActive && !Main.gamePaused && Main.tile[i, j].LiquidType == Type && Main.tile[i, j].LiquidAmount != 0)
+		if (Main.instance.IsActive && !Main.gamePaused)
 		{
 			if (Main.tile[i, j].LiquidAmount > 200 && Main.rand.NextBool(350))
 			{
