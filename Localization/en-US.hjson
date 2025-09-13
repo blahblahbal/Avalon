@@ -8992,11 +8992,7 @@ Mods: {
 
 			CalculatorSpectacles: {
 				DisplayName: Calculator Spectacles
-				Tooltip:
-					'''
-					Displays the bar yield of the ore vein under the cursor
-					Displays the bar yield of each ore stack in your inventory
-					'''
+				Tooltip: Displays the bar yield of the ore vein or stack that the cursor is hovering over
 			}
 
 			StarTorch: {
