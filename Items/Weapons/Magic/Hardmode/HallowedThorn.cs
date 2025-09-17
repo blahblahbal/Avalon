@@ -7,10 +7,13 @@ namespace Avalon.Items.Weapons.Magic.Hardmode;
 
 public class HallowedThorn : ModItem
 {
-	public override void SetDefaults()
+	public override void SetStaticDefaults()
 	{
 		Item.staff[Type] = true;
-		Item.DefaultToMagicWeapon(26, 28, ModContent.ProjectileType<Projectiles.Magic.HallowedThorn>(), 28, 2f, 20, 32f, 28, 28);
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToMagicWeapon(26, 28, ModContent.ProjectileType<Projectiles.Magic.HallowedThorn>(), 28, 2f, 20, 32f, 28, 28, true);
 		Item.rare = ItemRarityID.Pink;
 		Item.value = Item.sellPrice(silver: 40);
 		Item.UseSound = SoundID.Item8;
