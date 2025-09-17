@@ -17,7 +17,7 @@ public class Noxious : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToYoyo(ModContent.ProjectileType<Projectiles.Melee.Noxious>(), 15, 8.5f, 16f);
+		Item.DefaultToYoyo(ModContent.ProjectileType<Projectiles.Melee.Noxious>(), 15, 5f, 16f);
 		Item.rare = ItemRarityID.Blue;
 		Item.value = Item.sellPrice(0, 1);
 	}

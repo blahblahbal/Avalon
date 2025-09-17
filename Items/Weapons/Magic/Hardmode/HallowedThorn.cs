@@ -9,7 +9,8 @@ public class HallowedThorn : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToMagicWeaponSwing(ModContent.ProjectileType<Projectiles.Magic.HallowedThorn>(), 28, 2f, 20, 32f, 28);
+		Item.staff[Type] = true;
+		Item.DefaultToMagicWeapon(26, 28, ModContent.ProjectileType<Projectiles.Magic.HallowedThorn>(), 28, 2f, 20, 32f, 28, 28);
 		Item.rare = ItemRarityID.Pink;
 		Item.value = Item.sellPrice(silver: 40);
 		Item.UseSound = SoundID.Item8;

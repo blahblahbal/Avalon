@@ -1,116 +1,133 @@
-using System;
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace Avalon.Projectiles.Magic;
 
 public class HallowedThorn : ModProjectile
 {
-    public override void SetDefaults()
-    {
-        Rectangle dims = this.GetDims();
-        Projectile.width = dims.Width * 28 / 32;
-        Projectile.height = dims.Height * 28 / 32 / Main.projFrames[Projectile.type];
-        Projectile.aiStyle = -1;
-        Projectile.friendly = true;
-        Projectile.penetrate = -1;
-        Projectile.tileCollide = false;
-        Projectile.alpha = 255;
-        Projectile.ignoreWater = true;
-        Projectile.DamageType = DamageClass.Magic;
-        Projectile.light = 0.5f;
-    }
+	public override void SetStaticDefaults()
+	{
+		Main.projFrames[Type] = 5;
+	}
+	public override void SetDefaults()
+	{
+		Projectile.width = 26;
+		Projectile.height = 26;
+		Projectile.aiStyle = -1;
+		Projectile.friendly = true;
+		Projectile.penetrate = -1;
+		Projectile.tileCollide = false;
+		Projectile.alpha = 255;
+		Projectile.ignoreWater = true;
+		Projectile.DamageType = DamageClass.Magic;
+		Projectile.light = 0.5f;
+		Projectile.hide = true;
+	}
 
-    public override void AI()
-    {
-        Lighting.AddLight(Projectile.position, 255 / 255f, 255 / 255f, 0);
-        Vector2 vector73 = Projectile.position + new Vector2(Projectile.width / 2, Projectile.height / 2);
-        Projectile.position -= Projectile.velocity;
-        Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + 1.57079637f;
-        if (Projectile.ai[0] == 0f)
-        {
-            Projectile.alpha -= 50;
-            if (Projectile.alpha <= 0)
-            {
-                Projectile.alpha = 0;
-                Projectile.ai[0] = 1f;
-                if (Projectile.ai[1] == 0f)
-                {
-                    Projectile.ai[1] += 1f;
-                    Projectile.position += Projectile.velocity * 1f;
-                }
+	private readonly UnifiedRandom frameSeed = new();
+	private void SetFrame()
+	{
+		UnifiedRandom currentFrameSeed = new(frameSeed.GetHashCode());
 
-                if (Projectile.type == ModContent.ProjectileType<HallowedThorn>() && Main.myPlayer == Projectile.owner)
-                {
-                    int num928 = ModContent.ProjectileType<HallowedThorn>();
-                    if (Projectile.ai[1] >= 11f)
-                    {
-                        num928 = ModContent.ProjectileType<HallowedThornEnd>();
-                    }
-                    else
-                    {
-                        num928 = ModContent.ProjectileType<HallowedThorn>();
-                    }
+		if (Projectile.ai[1] > 2f)
+		{
+			if (currentFrameSeed.NextBool(10))
+			{
+				Projectile.frame = 0;
+			}
+			else
+			{
+				Projectile.frame = 5 - (int)((Projectile.ai[1] + 3) / 3);
+			}
+		}
+		else if (Projectile.ai[1] == 2f)
+		{
+			Projectile.frame = 3;
+		}
+		else if (Projectile.ai[1] == 1f)
+		{
+			Projectile.frame = 4;
+		}
+	}
 
-                    if ((int)Projectile.ai[1] % 3 == 0)
-                    {
-                        var point = new Vector2(Projectile.velocity.X, Projectile.velocity.Y);
-                        float num929 = 0.3926991f * (float)Main.rand.NextDouble();
-                        Projectile.velocity = AvalonGlobalProjectile.RotateAboutOrigin(point, num929);
-                        int num930 = Projectile.NewProjectile(Projectile.GetSource_FromThis(),
-                            vector73.X + Projectile.velocity.X, vector73.Y + Projectile.velocity.Y,
-                            Projectile.velocity.X, Projectile.velocity.Y, num928, Projectile.damage,
-                            Projectile.knockBack, Projectile.owner);
-                        Projectile nprojectile = Main.projectile[num930];
-                        nprojectile.damage = Projectile.damage;
-                        nprojectile.ai[1] = Projectile.ai[1] + 1f;
-                        NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.FromLiteral(""), num930);
-                        num929 = 0.3926991f * (float)Main.rand.NextDouble();
-                        nprojectile.velocity = AvalonGlobalProjectile.RotateAboutOrigin(point, -num929);
-                        num930 = Projectile.NewProjectile(Projectile.GetSource_FromThis(),
-                            vector73.X + Projectile.velocity.X, vector73.Y + Projectile.velocity.Y,
-                            Projectile.velocity.X, Projectile.velocity.Y, num928, Projectile.damage,
-                            Projectile.knockBack, Projectile.owner);
-                        nprojectile = Main.projectile[num930];
-                        nprojectile.damage = Projectile.damage;
-                        nprojectile.ai[1] = Projectile.ai[1] + 1f;
-                        NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.FromLiteral(""), num930);
-                        return;
-                    }
+	public override void AI() // todo: have this draw with the end texture until it spawns the next segment
+	{
+		SetFrame();
 
-                    int num931 = Projectile.NewProjectile(Projectile.GetSource_FromThis(),
-                        vector73.X + Projectile.velocity.X, vector73.Y + Projectile.velocity.Y, Projectile.velocity.X,
-                        Projectile.velocity.Y, num928, Projectile.damage, Projectile.knockBack, Projectile.owner);
-                    Projectile projectile2 = Main.projectile[num931];
-                    projectile2.damage = Projectile.damage;
-                    projectile2.ai[1] = Projectile.ai[1] + 1f;
-                    NetMessage.SendData(MessageID.SyncProjectile, -1, -1, NetworkText.FromLiteral(""), num931);
-                }
-            }
-        }
-        else
-        {
-            if (Projectile.alpha < 170 && Projectile.alpha + 5 >= 170)
-            {
-                for (int num932 = 0; num932 < 3; num932++)
-                {
-                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Enchanted_Gold,
-                        Projectile.velocity.X * 0.025f, Projectile.velocity.Y * 0.025f, 170, default, 1.2f);
-                }
+		Lighting.AddLight(Projectile.position, 255 / 255f, 255 / 255f, 0);
+		Vector2 oldCenter = Projectile.Center;
+		Projectile.position -= Projectile.velocity;
+		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+		if (Projectile.ai[0] == 0f)
+		{
+			Projectile.alpha -= 50;
+			if (Projectile.alpha <= 0)
+			{
+				Projectile.alpha = 0;
+				Projectile.ai[0] = 1f;
+				if (Projectile.ai[1] == 0f)
+				{
+					Projectile.ai[1] += 1f;
+					oldCenter += Projectile.velocity;
+					Projectile.position += Projectile.velocity;
+				}
+				else
+				{
+					Projectile.hide = false;
+				}
 
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Enchanted_Gold, 0f, 0f,
-                    170, default, 1.1f);
-            }
+				if (Main.myPlayer == Projectile.owner)
+				{
+					int type = ModContent.ProjectileType<HallowedThorn>();
+					if (Projectile.ai[1] >= 10f)
+					{
+						type = ModContent.ProjectileType<HallowedThornEnd>();
+					}
 
-            Projectile.alpha += 5;
-            if (Projectile.alpha >= 255)
-            {
-                Projectile.Kill();
-            }
-        }
-    }
+					if ((int)Projectile.ai[1] % 3 == 0) // todo: if the ai[1] % 3 == 2, then do some custom drawing to connect the splits.
+					{
+						Vector2 newVel = AvalonGlobalProjectile.RotateAboutOrigin(Projectile.velocity, -MathHelper.ToRadians(22.5f) * Main.rand.NextFloat(0.33f, 1f));
+						int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), oldCenter + newVel, newVel, type, Projectile.damage, Projectile.knockBack, Projectile.owner, ai1: Projectile.ai[1] + 1f);
+
+						Vector2 newVel2 = AvalonGlobalProjectile.RotateAboutOrigin(Projectile.velocity, MathHelper.ToRadians(22.5f) * Main.rand.NextFloat(0.33f, 1f));
+						int p2 = Projectile.NewProjectile(Projectile.GetSource_FromThis(), oldCenter + newVel2, newVel2, type, Projectile.damage, Projectile.knockBack, Projectile.owner, ai1: Projectile.ai[1] + 1f);
+						return;
+					}
+
+					Projectile.NewProjectile(Projectile.GetSource_FromThis(), oldCenter + Projectile.velocity, Projectile.velocity, type, Projectile.damage, Projectile.knockBack, Projectile.owner, ai1: Projectile.ai[1] + 1f);
+				}
+			}
+		}
+		else
+		{
+			Projectile.hide = false;
+			if (Projectile.alpha < 170 && Projectile.alpha + 5 >= 170)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					if (Main.rand.NextBool((int)((Projectile.ai[1] + 3) / 3)))
+					{
+						Dust d = Dust.NewDustDirect(Projectile.position + Projectile.velocity, Projectile.width, Projectile.height, DustID.Enchanted_Gold, 0f, 0f, 170, default, Main.rand.NextFloat(0.9f, 1.2f));
+						d.velocity = Vector2.Lerp(d.velocity, Projectile.velocity * 0.025f, 0.667f);
+					}
+				}
+
+				if (Main.rand.NextBool((int)((Projectile.ai[1] + 3) / 3)))
+				{
+					Dust d = Dust.NewDustDirect(Projectile.position + Projectile.velocity, Projectile.width, Projectile.height, DustID.Enchanted_Gold, 0f, 0f, 170, default, Main.rand.NextFloat(0.8f, 1.1f));
+					d.velocity = Vector2.Lerp(d.velocity, Vector2.Zero, 0.667f);
+				}
+			}
+
+			Projectile.alpha += 5;
+			if (Projectile.alpha >= 255)
+			{
+				Projectile.Kill();
+			}
+		}
+	}
 }
