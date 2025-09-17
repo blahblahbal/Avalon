@@ -14,7 +14,7 @@ public class ZincBullet : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBullet(11, ModContent.ProjectileType<Projectiles.Ranged.UltrabrightRazorbladeBullet>(), 3.75f, 3f);
+		Item.DefaultToBullet(11, ProjectileID.Bullet, 3.75f, 3f);
 		Item.value = Item.sellPrice(0, 0, 0, 3);
 	}
 	public override void AddRecipes()
