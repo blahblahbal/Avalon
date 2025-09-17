@@ -42,7 +42,7 @@ public class SanguineKatana : ModItem
 			//Item.ChangePlayerDirectionOnShoot = false; // not needed, but is a neat value regardless so just leaving it here for reference lol
 			return false;
 		}
-		else if (player.itemAnimation == Item.useAnimation)
+		else if (player.ItemAnimationJustStarted)
 		{
 			Item.noMelee = true;
 			Item.useTurn = false;
