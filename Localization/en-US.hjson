@@ -3669,8 +3669,8 @@ Mods: {
 			}
 
 			Blunderblight: {
-				Tooltip: ""
 				DisplayName: Blunderblight
+				Tooltip: Fires a spread of bullets
 			}
 
 			DartShotgun: {

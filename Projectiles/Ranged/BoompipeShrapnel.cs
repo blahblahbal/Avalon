@@ -1,19 +1,20 @@
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.DataStructures;
+using Avalon.Common;
 using Avalon.Dusts;
-using Terraria.Audio;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Ranged;
 
 public class BoompipeShrapnel : ModProjectile
 {
-	private static Asset<Texture2D> glow;
+	private static Asset<Texture2D>? glow;
 	public override void SetStaticDefaults()
 	{
 		ProjectileID.Sets.TrailCacheLength[Type] = 1;
@@ -22,13 +23,13 @@ public class BoompipeShrapnel : ModProjectile
 		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 	}
 	public override void SetDefaults()
-    {
-        Projectile.Size = new Vector2(8);
-        Projectile.aiStyle = 1;
-        Projectile.tileCollide = true;
-        Projectile.friendly = true;
-        Projectile.hostile = false;
-        Projectile.DamageType = DamageClass.Ranged;
+	{
+		Projectile.Size = new Vector2(8);
+		Projectile.aiStyle = 1;
+		Projectile.tileCollide = true;
+		Projectile.friendly = true;
+		Projectile.hostile = false;
+		Projectile.DamageType = DamageClass.Ranged;
 	}
 	public float rotation { get => Projectile.ai[0]; set => Projectile.ai[0] = value; }
 	public float initialTimeLeft { get => Projectile.ai[1]; set => Projectile.ai[1] = value; }
@@ -93,5 +94,20 @@ public class BoompipeShrapnel : ModProjectile
 		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, lightColor, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 		Main.EntitySpriteDraw(glow.Value, Projectile.position - Main.screenPosition + (Projectile.Size / 2f), frame, glowLerp, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 		return false;
+	}
+	public static int OnFireCutoff = 35;
+	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+	{
+		if (initialTimeLeft - Projectile.timeLeft <= glowLerpDiv - OnFireCutoff)
+		{
+			target.AddBuff(BuffID.OnFire, (int)Utils.Remap(glowLerpDiv - (initialTimeLeft - Projectile.timeLeft), OnFireCutoff, 60, TimeUtils.SecondsToTicks(1), TimeUtils.SecondsToTicks(3)));
+		}
+	}
+	public override void OnHitPlayer(Player target, Player.HurtInfo info)
+	{
+		if (initialTimeLeft - Projectile.timeLeft <= glowLerpDiv - OnFireCutoff)
+		{
+			target.AddBuff(BuffID.OnFire, (int)Utils.Remap(glowLerpDiv - (initialTimeLeft - Projectile.timeLeft), OnFireCutoff, 60, TimeUtils.SecondsToTicks(1), TimeUtils.SecondsToTicks(3)));
+		}
 	}
 }

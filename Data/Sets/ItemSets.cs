@@ -308,6 +308,13 @@ namespace Avalon.Data.Sets
 			ItemType<Moonforce>()
 		);
 
+		public static readonly bool[] Maces = ItemID.Sets.Factory.CreateBoolSet(
+			ItemType<WoodenClub>(),
+			ItemType<UrchinMace>(),
+			ItemType<MarrowMasher>(),
+			ItemType<CraniumCrusher>()
+		);
+
 		public static readonly bool[] EarthRelatedItems = ItemID.Sets.Factory.CreateBoolSet(
 			ItemID.StaffofEarth,
 			ItemID.Picksaw,

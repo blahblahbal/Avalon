@@ -11,13 +11,13 @@ public class Noxious : ModItem
 	public override void SetStaticDefaults()
 	{
 		ItemID.Sets.Yoyo[Item.type] = true;
-		ItemID.Sets.GamepadExtraRange[Item.type] = 15;
+		ItemID.Sets.GamepadExtraRange[Item.type] = 10;
 		ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
 	}
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToYoyo(ModContent.ProjectileType<Projectiles.Melee.Noxious>(), 15, 5f, 16f);
+		Item.DefaultToYoyo(ModContent.ProjectileType<Projectiles.Melee.Noxious>(), 15, 5.25f, 16f);
 		Item.rare = ItemRarityID.Blue;
 		Item.value = Item.sellPrice(0, 1);
 	}

@@ -12,14 +12,14 @@ public class BloodstainedEye : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToSpellBook(ModContent.ProjectileType<Projectiles.Magic.BloodyTear>(), 34, 2f, 3, 14f, 30, 30, 1.1f, width: 16, height: 16);
+		Item.DefaultToSpellBook(ModContent.ProjectileType<Projectiles.Magic.BloodyTear>(), 32, 2f, 3, 14f, 30, 30, 1.1f, width: 16, height: 16);
 		Item.rare = ItemRarityID.Blue;
 		Item.value = Item.sellPrice(0, 0, 60);
 		Item.UseSound = SoundID.NPCHit1;
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
-		int numberProjectiles = 1 + Main.rand.Next(2);
+		int numberProjectiles = Main.rand.NextBool(3) ? 2 : 1;
 		for (int i = 0; i < numberProjectiles; i++)
 		{
 			Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(8));

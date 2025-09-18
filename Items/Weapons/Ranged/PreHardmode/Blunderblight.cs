@@ -12,7 +12,7 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
 	{
 		public override void SetDefaults()
 		{
-			Item.DefaultToGun(8, 0f, 5f, 50, 50, width: 44);
+			Item.DefaultToGun(9, 0f, 5f, 50, 50, width: 44);
 			Item.rare = ItemRarityID.Blue;
 			Item.value = Item.sellPrice(0, 1, 50);
 			Item.UseSound = SoundID.Item36;

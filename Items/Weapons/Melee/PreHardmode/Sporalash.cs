@@ -14,7 +14,7 @@ public class Sporalash : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToFlail(ModContent.ProjectileType<Projectiles.Melee.Sporalash>(), 26, 6.75f, 46, 10f);
+		Item.DefaultToFlail(ModContent.ProjectileType<Projectiles.Melee.Sporalash>(), 21, 6.75f, 46, 10f);
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(silver: 54);
 	}
