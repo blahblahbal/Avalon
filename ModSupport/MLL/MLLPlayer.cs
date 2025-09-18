@@ -37,9 +37,9 @@ public class MLLPlayer : ModPlayer
 			{
 				return;
 			}
-			else if (attempt.legendary && Main.rand.NextBool(2, 5))
+			else if (attempt.legendary && Main.rand.NextBool(3))
 			{
-				itemDrop = ModContent.ItemType<AcidproofFishingHook>();
+				itemDrop = Main.rand.NextFromList([ModContent.ItemType<BottomlessAcidBucket>(), ModContent.ItemType<AcidAbsorbantSponge>(), ModContent.ItemType<AcidproofFishingHook>()]);
 			}
 			else if (attempt.rare && Player.ZoneDungeon && Main.hardMode)
 			{
