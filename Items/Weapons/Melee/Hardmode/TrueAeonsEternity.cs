@@ -1,5 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Particles;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using System;
@@ -20,7 +21,7 @@ public class TrueAeonsEternity : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToProjectileSword(ModContent.ProjectileType<AeonBeam>(), 64, 5, 8f, 81, 20);
+		Item.DefaultToProjectileSword(ModContent.ProjectileType<AeonStar>(), 64, 5, 8f, 81, 20);
 		Item.rare = ItemRarityID.Yellow;
 		Item.value = Item.sellPrice(0, 10);
 	}
@@ -35,22 +36,6 @@ public class TrueAeonsEternity : ModItem
 			Main.projectile[P].rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
 			lastStar = P;
 		}
-		for (int i = 0; i < 2; i++)
-		{
-			ParticleOrchestraSettings particleOrchestraSettings = default;
-			particleOrchestraSettings.PositionInWorld = player.Center;
-			particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
-			ParticleOrchestraSettings settings = particleOrchestraSettings;
-			ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, player.whoAmI);
-			//particleOrchestraSettings.PositionInWorld = player.Center;
-			//particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
-			//settings = particleOrchestraSettings;
-			//ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PaladinsHammer, settings, player.whoAmI);
-			particleOrchestraSettings.PositionInWorld = player.Center;
-			particleOrchestraSettings.MovementVector = velocity.RotatedByRandom(0.2f) * 2;
-			settings = particleOrchestraSettings;
-			ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, player.whoAmI);
-		}
 		return false;
 	}
 	public override void MeleeEffects(Player player, Rectangle hitbox)
@@ -59,19 +44,10 @@ public class TrueAeonsEternity : ModItem
 		{
 			int type = Main.rand.Next(2);
 			ClassExtensions.GetPointOnSwungItemPath(60f, 60f, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
-			Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * (float)player.direction * player.gravDir);
-			ParticleOrchestraSettings particleOrchestraSettings = default;
-			particleOrchestraSettings.PositionInWorld = location2;
-			particleOrchestraSettings.MovementVector = Vector2.Zero;
-			ParticleOrchestraSettings settings = particleOrchestraSettings;
-			if (type == 0)
-			{
-				ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.StardustPunch, settings, player.whoAmI);
-			}
-			else
-			{
-				ParticleOrchestrator.RequestParticleSpawn(clientOnly: false, ParticleOrchestraType.PrincessWeapon, settings, player.whoAmI);
-			}
+			Vector2 vector2 = outwardDirection2.RotatedBy(-1f * (float)player.direction * player.gravDir) * Main.rand.NextFloat(34,120);
+
+			float percent = player.itemAnimation / (float)player.itemAnimationMax;
+			ParticleSystem.AddParticle(new TrueAeonSlash(vector2,player,Main.rand.NextFloat(0.3f,1f),Main.rand.NextFloat(MathHelper.PiOver2,MathHelper.Pi) * Math.Max(percent,0.5f),player.direction,Main.rand.NextFloat(20f,35f), new Color(Main.rand.Next(200), 100, 255, 0)), player.Center);
 		}
 	}
 	public override void AddRecipes()

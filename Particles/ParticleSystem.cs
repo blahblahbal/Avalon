@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Particles
 {
+	// We should replace this with Terrafirma's at some point.
 	public enum ParticleType : byte
 	{
 		SanguineCuts = 0,
@@ -107,6 +108,16 @@ namespace Avalon.Particles
 
 			Main.spriteBatch.End();
 		}
+		public static Particle AddParticle(Particle type, Vector2 position)
+		{
+			if (Particles.Count == MaxParticles)
+			{
+				Particles.Remove(Particles.First());
+			}
+			Particles.Add(type);
+			Particles.Last().Position = position;
+			return Particles.Last();
+		}
 		public static Particle AddParticle(Particle type, Vector2 position, Vector2 velocity, Color color, float AI1 = 0, float AI2 = 0, float AI3 = 0, float scale = 1f)
 		{
 			if (Particles.Count == MaxParticles)
@@ -162,11 +173,6 @@ namespace Avalon.Particles
 		public float Scale = 1f;
 		public virtual void Update()
 		{
-			//TimeInWorld++;
-			//Position += Velocity;
-
-			//if (TimeInWorld > 30)
-			//    Active = true;
 		}
 		public virtual void OnSpawn()
 		{
