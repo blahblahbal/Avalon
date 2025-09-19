@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
+using Avalon.Dusts;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -28,7 +29,7 @@ public class HallowSpit : ModNPC
         NPC.damage = 65;
         NPC.DeathSound = SoundID.NPCDeath9;
         NPC.lifeMax = 1;
-        NPC.alpha = 80;
+        NPC.hide = true;
         NPC.scale = 0.9f;
         NPC.netAlways = true;
         NPC.noGravity = true;
@@ -50,7 +51,7 @@ public class HallowSpit : ModNPC
             NPC.velocity.X = num158 * num160;
             NPC.velocity.Y = num159 * num160;
         }
-
+		Color color = Color.Lerp(new Color(1f, 0.4f, 1f, 0f), new Color(0.4f, 1f, 1f, 0f),Math.Abs(MathF.Sin((float)Main.timeForVisualEffects * 0.1f)));
         NPC.ai[0] += 1f;
         if (NPC.ai[0] > 3f)
         {
@@ -62,12 +63,15 @@ public class HallowSpit : ModNPC
             SoundEngine.PlaySound(SoundID.NPCDeath9, NPC.position);
             for (int num161 = 0; num161 < 20; num161++)
             {
-                int num162 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y + 2f), NPC.width, NPC.height, DustID.Enchanted_Pink, 0f, 0f, 100, default(Color), 1.8f);
+                int num162 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y + 2f), NPC.width, NPC.height, ModContent.DustType<SimpleColorableGlowyDust>(), 0f, 0f, 100, color, 1.8f);
                 Main.dust[num162].velocity *= 1.3f;
                 Main.dust[num162].velocity += NPC.velocity;
                 Main.dust[num162].noGravity = true;
             }
         }
+
+		NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.Center.DirectionTo(Main.player[NPC.target].Center) * 10,0.01f);
+
         if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
         {
             #region spread hallow code
@@ -168,13 +172,9 @@ public class HallowSpit : ModNPC
         {
             NPC.timeLeft = 100;
         }
-        for (int num168 = 0; num168 < 2; num168++)
-        {
-            int num171 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y + 2f), NPC.width, NPC.height, DustID.Enchanted_Pink, NPC.velocity.X * 0.1f, NPC.velocity.Y * 0.1f, 80, default(Color), 1.3f);
-            Main.dust[num171].velocity *= 0.3f;
-            Main.dust[num171].noGravity = true;
-        }
-        NPC.rotation += 0.4f * (float)NPC.direction;
+		Dust d = Dust.NewDustPerfect(NPC.Center, ModContent.DustType<SimpleColorableGlowyDust>(), NPC.velocity * 0.2f, 80, color, 1.3f);
+		d.noGravity = true;
+		NPC.rotation += 0.4f * (float)NPC.direction;
         return;
     }
 }

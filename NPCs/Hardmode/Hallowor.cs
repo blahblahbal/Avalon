@@ -229,13 +229,14 @@ public class Hallowor : ModNPC
                 NPC.localAI[0] = 0f;
             }
             NPC.localAI[0]++;
-            if (NPC.localAI[0] == 180f)
+            if (NPC.localAI[0] is 180f or 190 or 200)
             {
                 if (Collision.CanHit(NPC.position, NPC.width, NPC.height, Main.player[NPC.target].position, Main.player[NPC.target].width, Main.player[NPC.target].height))
                 {
-                    NPC.NewNPC(NPC.GetSource_FromAI(), (int)(NPC.position.X + NPC.width / 2 + NPC.velocity.X), (int)(NPC.position.Y + NPC.height / 2 + NPC.velocity.Y), ModContent.NPCType<HallowSpit>(), 0);
-                }
-                NPC.localAI[0] = 0f;
+					NPC.NewNPC(NPC.GetSource_FromAI(), (int)(NPC.position.X + NPC.width / 2 + NPC.velocity.X), (int)(NPC.position.Y + NPC.height / 2 + NPC.velocity.Y), ModContent.NPCType<HallowSpit>(), 0);
+				}
+				if (NPC.localAI[0] == 200)
+					NPC.localAI[0] = 0f;
             }
         }
         if (((NPC.velocity.X > 0f && NPC.oldVelocity.X < 0f) || (NPC.velocity.X < 0f && NPC.oldVelocity.X > 0f) || (NPC.velocity.Y > 0f && NPC.oldVelocity.Y < 0f) || (NPC.velocity.Y < 0f && NPC.oldVelocity.Y > 0f)) && !NPC.justHit)

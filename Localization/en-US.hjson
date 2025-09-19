@@ -8269,7 +8269,7 @@ Mods: {
 
 			DelightCandle: {
 				DisplayName: Candle of Delight
-				Tooltip: Increases life regeneration of nearby players
+				Tooltip: Nearby players have increased life regeneration
 			}
 
 			FlightCandle: {
