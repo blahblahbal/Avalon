@@ -2309,7 +2309,7 @@ public class AvalonGlobalItem : GlobalItem
 						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable")));
 				if (index != -1)
 				{
-					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccEndurance", "-3% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.DamageTaken"))
+					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccEndurance", "-2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.DamageTaken"))
 					{
 						IsModifier = true
 					});

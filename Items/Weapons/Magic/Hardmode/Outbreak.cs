@@ -1,6 +1,9 @@
 using Avalon.Buffs.Debuffs;
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -38,33 +41,36 @@ namespace Avalon.Items.Weapons.Magic.Hardmode
 				d.color.A = 200;
 			}
 
-			int Divide = 0;
+			List<NPC> hitTargets = [];
 			foreach (var npc in Main.ActiveNPCs)
 			{
 				if (Vector2.Distance(npc.Center, AttackPosition) < AttackRad && !npc.dontTakeDamage && (!npc.friendly || (npc.type == NPCID.Guide && player.killGuide) || (npc.type == NPCID.Clothier && player.killClothier)))
 				{
-					Divide++;
+					hitTargets.Add(npc);
 				}
 			}
-			if (Divide > 0)
+			if (hitTargets.Count > 0)
 			{
-				foreach (var npc in Main.ActiveNPCs)
+				foreach (var npc in hitTargets)
 				{
-					if (Vector2.Distance(npc.Center, AttackPosition) < AttackRad && !npc.dontTakeDamage && (!npc.friendly || (npc.type == NPCID.Guide && player.killGuide) || (npc.type == NPCID.Clothier && player.killClothier)))
+					int DPS = npc.SimpleStrikeNPC((int)(damage / (1f + (hitTargets.Count - 1) / 10f)), player.direction, Main.rand.NextBool(player.GetWeaponCrit(player.HeldItem), 100), knockback, DamageClass.Magic, true, player.luck);
+					player.addDPS(DPS);
+
+					if (Main.rand.NextBool(5))
 					{
-						int DPS = npc.SimpleStrikeNPC((int)(Item.damage / (1f + Divide / 10f)), player.direction, Main.rand.NextBool(player.GetWeaponCrit(player.HeldItem), 100), Item.knockBack, DamageClass.Magic, true, player.luck);
-						player.addDPS(DPS);
-						if (Main.rand.NextBool(5))
-							npc.AddBuff(ModContent.BuffType<Pathogen>(), 600 / Divide);
-						if (Main.rand.NextBool(3))
-							npc.AddBuff(BuffID.Poisoned, 600 / Divide);
-						for (int j = 0; j < 10; j++)
-						{
-							Dust d = Dust.NewDustPerfect(npc.Center, DustID.Stone, Main.rand.NextVector2Circular(npc.width, npc.height), 0, Color.Lerp(Color.OliveDrab, Color.MediumPurple, Main.rand.NextFloat()), 1.5f);
-							d.velocity *= 0.1f;
-							d.noGravity = true;
-							d.color.A = 200;
-						}
+						npc.AddBuff(ModContent.BuffType<Pathogen>(), Math.Max(TimeUtils.SecondsToTicks(1), (int)(TimeUtils.SecondsToTicks(10) / (1f + (hitTargets.Count - 1) / 5f))));
+					}
+					if (Main.rand.NextBool(3))
+					{
+						npc.AddBuff(BuffID.Poisoned, Math.Max(TimeUtils.SecondsToTicks(1), (int)(TimeUtils.SecondsToTicks(10) / (1f + (hitTargets.Count - 1) / 5f))));
+					}
+
+					for (int j = 0; j < 10; j++)
+					{
+						Dust d = Dust.NewDustPerfect(npc.Center, DustID.Stone, Main.rand.NextVector2Circular(npc.width, npc.height), 0, Color.Lerp(Color.OliveDrab, Color.MediumPurple, Main.rand.NextFloat()), 1.5f);
+						d.velocity *= 0.1f;
+						d.noGravity = true;
+						d.color.A = 200;
 					}
 				}
 			}

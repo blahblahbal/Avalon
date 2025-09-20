@@ -11,15 +11,17 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ItemID.DartPistol);
-			Item.damage = 12;
-			Item.useTime = 50;
-			Item.useAnimation = 50;
-			Item.shootSpeed = 9;
+			Item.damage = 15;
+			Item.useTime = 48;
+			Item.useAnimation = 48;
+			Item.shootSpeed = 11.5f;
 		}
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			for (int i = 0; i < 3; i++)
-				Projectile.NewProjectile(source, position, velocity.RotatedByRandom(0.15f) * Main.rand.NextFloat(0.8f, 1f), type, damage, knockback, player.whoAmI);
+			{
+				Projectile.NewProjectile(source, position, velocity.RotatedByRandom(0.125f) * Main.rand.NextFloat(0.8f, 1f), type, damage, knockback, player.whoAmI);
+			}
 			return false;
 		}
 		public override Vector2? HoldoutOffset()
