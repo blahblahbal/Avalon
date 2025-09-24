@@ -1,5 +1,7 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -22,9 +24,8 @@ public class PhantomKnives : ModItem
 		int numberProjectiles = Main.rand.Next(4, 8);
 		for (int i = 0; i < numberProjectiles; i++)
 		{
-			Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(20));
-			Projectile.NewProjectile(source, position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage,
-				knockback, player.whoAmI);
+			Vector2 perturbedSpeed = AvalonUtils.GetShootSpread(velocity, position, Type, MathHelper.ToRadians(20), random: true, maxRotUnsigned: Math.PI);
+			Projectile.NewProjectile(source, position, perturbedSpeed, type, damage, knockback, player.whoAmI);
 		}
 
 		return false;

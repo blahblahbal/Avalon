@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.PlayerDrawLayers;
 using Microsoft.Xna.Framework;
@@ -45,13 +46,10 @@ public class BlahsEnergyBlade : ModItem
 		float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem) * 1.4f;
 		Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, (float)player.direction * player.gravDir, player.itemAnimationMax * 1.2f, adjustedItemScale5 * 1.4f);
 		NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI);
-		for (int num194 = 0; num194 < 4; num194++)
+		for (int i = 0; i < 4; i++)
 		{
-			float num195 = velocity.X;
-			float num196 = velocity.Y;
-			num195 += Main.rand.Next(-40, 41) * 0.05f;
-			num196 += Main.rand.Next(-40, 41) * 0.05f;
-			Projectile.NewProjectile(source, position.X, position.Y, num195, num196, ModContent.ProjectileType<Projectiles.Melee.BlahBeam>(), damage, knockback, player.whoAmI, 0f, 0f);
+			Vector2 vel = AvalonUtils.GetShootSpread(velocity, position, Type, 0.143f, Main.rand.NextFloat(-2f, 2f), random: true);
+			Projectile.NewProjectile(source, position, vel, ModContent.ProjectileType<Projectiles.Melee.BlahBeam>(), damage, knockback, player.whoAmI);
 		}
 		return false;
 	}

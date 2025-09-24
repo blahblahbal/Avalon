@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
@@ -29,7 +30,10 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
 		{
 			int amount = Main.rand.Next(3, 5);
 			for (int i = 0; i < amount; i++)
-				Projectile.NewProjectile(source, position, velocity.RotatedByRandom(0.168f) * Main.rand.NextFloat(0.7f, 1f), type, damage, knockback, player.whoAmI);
+			{
+				Vector2 vel = AvalonUtils.GetShootSpread(velocity, position, Type, 0.168f, Main.rand.NextFloat(-2.7f, 0f), ItemID.MusketBall, true);
+				Projectile.NewProjectile(source, position, vel, type, damage, knockback, player.whoAmI);
+			}
 			return false;
 		}
 		public override Vector2? HoldoutOffset()

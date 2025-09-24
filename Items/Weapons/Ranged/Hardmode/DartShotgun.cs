@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -20,7 +21,8 @@ namespace Avalon.Items.Weapons.Ranged.Hardmode
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				Projectile.NewProjectile(source, position, velocity.RotatedByRandom(0.125f) * Main.rand.NextFloat(0.8f, 1f), type, damage, knockback, player.whoAmI);
+				Vector2 vel = AvalonUtils.GetShootSpread(velocity, position, Type, 0.125f, Main.rand.NextFloat(-2.7f, 0f), ItemID.PoisonDart, true);
+				Projectile.NewProjectile(source, position, vel, type, damage, knockback, player.whoAmI);
 			}
 			return false;
 		}

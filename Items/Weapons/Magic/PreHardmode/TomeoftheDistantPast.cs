@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -35,7 +36,8 @@ public class TomeoftheDistantPast : ModItem
 				type = ModContent.ProjectileType<Projectiles.Magic.Bone4>();
 				break;
 		}
-		Projectile.NewProjectile(source, position, velocity.RotatedByRandom(0.2f), type, damage, knockback, player.whoAmI);
+		Vector2 vel = AvalonUtils.GetShootSpread(velocity, position, Type, 0.2f, random: true);
+		Projectile.NewProjectile(source, position, vel, type, damage, knockback, player.whoAmI);
 		return false;
 	}
 	public override Vector2? HoldoutOffset()

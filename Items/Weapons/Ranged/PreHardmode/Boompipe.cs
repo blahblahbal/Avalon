@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.Shards;
 using Avalon.Projectiles.Ranged;
@@ -34,17 +35,17 @@ public class Boompipe : ModItem
 		int amount = Main.rand.Next(4, 7);
 		for (int i = 0; i < amount; i++)
 		{
-			Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(14));
+			Vector2 perturbedSpeed = AvalonUtils.GetShootSpread(velocity, position, Type, MathHelper.ToRadians(14), Main.rand.NextFloat(-4.125f, 0f), ItemID.PoisonDart, true);
 			if (i == 0)
 			{
-				perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(5));
-				Projectile P = Projectile.NewProjectileDirect(source, player.RotatedRelativePoint(position - new Vector2(0, 8 * player.gravDir)), perturbedSpeed * Main.rand.NextFloat(0.85f, 1.1f), type, damage, knockback);
+				perturbedSpeed = AvalonUtils.GetShootSpread(velocity, position, Type, MathHelper.ToRadians(5), Main.rand.NextFloat(-2.475f, 1.65f), ItemID.PoisonDart, true);
+				Projectile P = Projectile.NewProjectileDirect(source, player.RotatedRelativePoint(position - new Vector2(0, 8 * player.gravDir)), perturbedSpeed, type, damage, knockback);
 				P.netUpdate = true;
 				P.GetGlobalProjectile<BoompipeProjVisuals>().Shards = true;
 			}
 			else
 			{
-				Projectile P = Projectile.NewProjectileDirect(source, player.RotatedRelativePoint(position - new Vector2(0, 8 * player.gravDir)), perturbedSpeed * Main.rand.NextFloat(0.75f, 1f), ModContent.ProjectileType<BoompipeShrapnel>(), (int)(damage / 2.6f), knockback);
+				Projectile P = Projectile.NewProjectileDirect(source, player.RotatedRelativePoint(position - new Vector2(0, 8 * player.gravDir)), perturbedSpeed, ModContent.ProjectileType<BoompipeShrapnel>(), (int)(damage / 2.6f), knockback);
 				P.netUpdate = true;
 				P.GetGlobalProjectile<BoompipeProjVisuals>().Shards = true;
 			}

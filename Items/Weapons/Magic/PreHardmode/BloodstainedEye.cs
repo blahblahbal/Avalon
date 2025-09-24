@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
@@ -22,9 +23,7 @@ public class BloodstainedEye : ModItem
 		int numberProjectiles = Main.rand.NextBool(3) ? 2 : 1;
 		for (int i = 0; i < numberProjectiles; i++)
 		{
-			Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(8));
-			float scale = 1f - (Main.rand.NextFloat() * .3f);
-			perturbedSpeed = perturbedSpeed * scale;
+			Vector2 perturbedSpeed = AvalonUtils.GetShootSpread(velocity, position, Type, MathHelper.ToRadians(8), Main.rand.NextFloat(-4.2f, 0f), random: true);
 			Projectile.NewProjectile(source, position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockback, player.whoAmI);
 		}
 		return false;

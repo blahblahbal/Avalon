@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
 using Avalon.Projectiles.Ranged;
@@ -29,7 +30,8 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode
 		}
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			Projectile.NewProjectile(source, position, velocity.RotatedByRandom(0.04f), ModContent.ProjectileType<ExplosiveEgg>(), damage, knockback, player.whoAmI, ai2: Main.rand.NextBool(3) ? 1 : 0);
+			Vector2 vel = AvalonUtils.GetShootSpread(velocity, position, Type, 0.04f, random: true);
+			Projectile.NewProjectile(source, position, vel, ModContent.ProjectileType<ExplosiveEgg>(), damage, knockback, player.whoAmI, ai2: Main.rand.NextBool(3) ? 1 : 0);
 			return false;
 		}
 		public override Vector2? HoldoutOffset()

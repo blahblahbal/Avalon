@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -24,7 +25,6 @@ public class Thompson : ModItem
 	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 	{
 		SoundEngine.PlaySound(SoundID.Item11 with { Volume = 0.9f, Pitch = 0.4f }, player.Center);
-		Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(10));
-		velocity = perturbedSpeed;
+		velocity = AvalonUtils.GetShootSpread(velocity, position, Type, MathHelper.ToRadians(10), ammoExtraShootSpeedItemID: ItemID.MusketBall, random: true);
 	}
 }

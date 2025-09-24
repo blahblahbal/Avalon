@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Projectiles.Magic;
 using Microsoft.Xna.Framework;
@@ -77,11 +78,11 @@ public class BloodBarrage : ModItem
 	{
 		if (!player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
 		{
-			velocity = velocity.RotatedByRandom(0.11);
+			velocity = AvalonUtils.GetShootSpread(velocity, position, Type, 0.11, random: true);
 		}
 		else
 		{
-			velocity = velocity.RotatedByRandom(0.17);
+			velocity = AvalonUtils.GetShootSpread(velocity, position, Type, 0.17, random: true);
 		}
 	}
 	public override Vector2? HoldoutOffset()

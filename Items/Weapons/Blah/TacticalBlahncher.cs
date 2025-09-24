@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Rarities;
 using Microsoft.Xna.Framework;
@@ -34,16 +35,13 @@ public class TacticalBlahncher : ModItem
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			float num78 = velocity.X + (Main.rand.Next(-50, 51) * 0.05f);
-			float num79 = velocity.Y + (Main.rand.Next(-50, 51) * 0.05f);
+			Vector2 vel = AvalonUtils.GetShootSpread(velocity, position, Type, 13.05f, Main.rand.NextFloat(-2.5f, 2.5f), ItemID.RocketI, true);
 			if (Main.rand.NextBool(3))
 			{
-				num78 *= 1f + (Main.rand.Next(-40, 41) * 0.02f);
-				num79 *= 1f + (Main.rand.Next(-40, 41) * 0.02f);
+				vel *= Main.rand.NextFloat(0.2f, 1.8f);
 			}
 
-			Projectile.NewProjectile(source, position.X, position.Y, num78, num79,
-				ModContent.ProjectileType<Projectiles.Ranged.Blahcket>(), damage, knockback, player.whoAmI);
+			Projectile.NewProjectile(source, position, vel, ModContent.ProjectileType<Projectiles.Ranged.Blahcket>(), damage, knockback, player.whoAmI);
 		}
 
 		return false;
