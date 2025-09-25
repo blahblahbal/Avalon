@@ -18,15 +18,14 @@ public static class AvalonUtils
 	/// </returns>
 	public static Vector2 GetShootSpread(Vector2 velocity, Vector2 position, float baseSpeed, double rotation, float addMagnitude = 0, float ammoExtraShootSpeed = 0, bool random = false, double maxRotUnsigned = Math.PI / 4)
 	{
-		if (velocity == Vector2.Zero) return velocity;
+		if (velocity == Vector2.Zero || velocity.Length() + addMagnitude <= 0) return Vector2.Zero;
 
 		Vector2 rotatedBy(Vector2 input, double angle) => random ? input.RotatedByRandom(angle) : input.RotatedBy(angle);
 
-		baseSpeed += ammoExtraShootSpeed + addMagnitude;
+		baseSpeed += ammoExtraShootSpeed;
 
 		Vector2 m = Main.MouseWorld - position;
-		float radius = velocity.Length() + addMagnitude;
-		if (radius <= 0) return Vector2.Zero;
+		float radius = velocity.Length();
 		float baseRadius = baseSpeed;
 		float distModBase = baseRadius / m.Length();
 		Vector2 velBase = m * distModBase;
@@ -38,7 +37,11 @@ public static class AvalonUtils
 		float h = MathF.Sqrt(velBaseRotatedDistSquared - MathF.Pow(a, 2f)); // dunno what to name this either
 		float x = radius + a;
 		float y = -h;
-		if (float.IsNaN(x) || float.IsNaN(y)) return rotatedBy(velocity + (Vector2.Normalize(velocity) * addMagnitude), maxRotUnsigned * -Math.Sign(rotation));
+
+		if (float.IsNaN(x) || float.IsNaN(y)) // the intersection can be NaN if baseSpeed is sufficiently larger than the velocity
+		{
+			return rotatedBy(velocity + (Vector2.Normalize(velocity) * addMagnitude), maxRotUnsigned * -Math.Sign(rotation));
+		}
 
 		double newAngle = Math.Atan2(y, x) * -Math.Sign(rotation);
 		Vector2 velFinal = rotatedBy(velocity + (Vector2.Normalize(velocity) * addMagnitude), (newAngle > 0 ? Math.Min(newAngle, maxRotUnsigned) : Math.Max(newAngle, -maxRotUnsigned)));
@@ -49,7 +52,7 @@ public static class AvalonUtils
 	/// <see cref="float"/> <paramref name="ammoExtraShootSpeed"/> = <paramref name="ammoExtraShootSpeedItemID"/> > 0 ? <see cref="ContentSamples.ItemsByType"/>[<paramref name="ammoExtraShootSpeedItemID"/>].shootSpeed : 0
 	/// </summary>
 	/// <returns>
-	/// <inheritdoc cref="GetShootSpread(Vector2, Vector2, float, double, double, float, bool)"/><para></para>
+	/// <inheritdoc cref="GetShootSpread(Vector2, Vector2, float, double, float, float, bool, double)"/><para></para>
 	/// </returns>
 	public static Vector2 GetShootSpread(Vector2 velocity, Vector2 position, int baseSpeedItemID, double rotation, float addMagnitude = 0, int ammoExtraShootSpeedItemID = 0, bool random = false, double maxRotUnsigned = Math.PI / 4)
 	{
