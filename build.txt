@@ -3,4 +3,4 @@ author = blahblahbal
 version = 1.3.5
 weakReferences = ThoriumMod@1.7.1.5, OphioidMod@2.31, AltLibrary@2.1
 modReferences = ModLiquidLib
-buildIgnore = dllReferences\*
+buildIgnore = dllReferences\*, Effects\Compilation Folder\*
