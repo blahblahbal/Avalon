@@ -37,6 +37,8 @@ public class DesertBeakWingNPC : ModNPC
 		NPC.scale = 1f;
 		//NPC.dontTakeDamage = true;
 		NPC.netAlways = true;
+
+		NPC.dontCountMe = true; // don't count with radar
 	}
 	public int MainBody
 	{
