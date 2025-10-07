@@ -3695,7 +3695,11 @@ Mods: {
 
 			Outbreak: {
 				DisplayName: Outbreak
-				Tooltip: Spreads damage to enemies near the cursor
+				Tooltip:
+					'''
+					Spreads damage to enemies near the cursor
+					Infects a struck enemy with a tick
+					'''
 			}
 
 			ACometHasStruckGround: {
@@ -10365,6 +10369,7 @@ Mods: {
 			BloodMineProj.DisplayName: Blood Mine
 			BloodSnowmanRocketProj.DisplayName: Blood Snowman Rocket
 			TrueAeonStarShard.DisplayName: True Aeon Star Shard
+			OutbreakProj.DisplayName: Outbreak Tick
 		}
 
 		NPCs: {
