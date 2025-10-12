@@ -13,42 +13,37 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Liquid;
 using Terraria.Graphics;
 using Terraria.Graphics.Light;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using static ModLiquidLib.ModLiquidLib;
+using static Terraria.GameContent.Liquid.LiquidRenderer;
 
 namespace Avalon.ModSupport.MLL.Liquids;
 
-internal class Acid : ModLiquid
+public class Acid : ModLiquid
 {
 	public override void SetStaticDefaults()
 	{
-		VisualViscosity = 160;
-		LiquidFallLength = 6;
-		DefaultOpacity = 0.85f;
+		VISCOSITY_MASK[Type] = 160;
+		WATERFALL_LENGTH[Type] = 6;
+		DEFAULT_OPACITY[Type] = 0.85f;
 		SlopeOpacity = 1f;
 		WaterRippleMultiplier = 0.6f;
 		SplashDustType = ModContent.DustType<AcidLiquidSplash>();
 		SplashSound = SoundID.SplashWeak;
-		FallDelay = 2; //The delay when liquids are falling. Liquids will wait this extra amount of frames before falling again.
-		ChecksForDrowning = false; //If the player can drown in this liquid
-		AllowEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
-		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
+
+		FallDelay = 2;
+		ChecksForDrowning = false;
+		AllowEmitBreathBubbles = false;
+		FishingPoolSizeMultiplier = 2f;
 		UsesLavaCollisionForWet = true;
 		ExtinguishesOnFireDebuffs = false;
+
 		AddMapEntry(new Color(0, 255, 0));
-	}
-	public override bool PreSlopeDraw(int i, int j, bool behindBlocks, ref Vector2 drawPosition, ref Rectangle liquidSize, ref VertexColors colors)
-	{
-		Lighting.GetCornerColors(i, j, out var vertices);
-		colors.TopLeftColor = vertices.TopLeftColor * DefaultOpacity;
-		colors.TopRightColor = vertices.TopRightColor * DefaultOpacity;
-		colors.BottomLeftColor = vertices.BottomLeftColor * DefaultOpacity;
-		colors.BottomRightColor = vertices.BottomRightColor * DefaultOpacity;
-		return base.PreSlopeDraw(i, j, behindBlocks, ref drawPosition, ref liquidSize, ref colors);
 	}
 	public override bool BlocksTilePlacement(Player player, int i, int j)
 	{

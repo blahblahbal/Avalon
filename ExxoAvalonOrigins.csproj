@@ -42,7 +42,7 @@
 			<HintPath>dllReferences\AltLibrary_v2.1.1.3.dll</HintPath>
 		</Reference>
 		<Reference Include="ModLiquidLib">
-			<HintPath>dllReferences\ModLiquidLib_v2025.7.2.dll</HintPath>
+			<HintPath>dllReferences\ModLiquidLib_v2025.8.9.1.dll</HintPath>
 		</Reference>
 		<Reference Include="ThoriumMod">
 			<HintPath>dllReferences\ThoriumMod_v1.7.2.4.dll</HintPath>

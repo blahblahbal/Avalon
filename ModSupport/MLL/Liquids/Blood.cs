@@ -6,82 +6,44 @@ using ModLiquidLib.ModLoader;
 using ModLiquidLib.Utils.Structs;
 using Terraria;
 using Terraria.Audio;
-using Terraria.Graphics;
 using Terraria.Graphics.Light;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.GameContent.Liquid.LiquidRenderer;
 
 namespace Avalon.ModSupport.MLL.Liquids;
 
-internal class Blood : ModLiquid
+public class Blood : ModLiquid
 {
 	//SetStaticDefaults are the defaults added when the game initially loads.
 	//Here we set a few settings that this liquid will have.
 	//SetStaticDefaults is only ever run once just after all the content from mods are added to the game.
 	public override void SetStaticDefaults()
 	{
-		//This is the viscosity of the liquid, only used visually.
-		//Lava usually has this set to 200, while honey has this set to 240. All other liquids set this to 0 by default.
-		//In Vanilla this property can be found at "Terraria.GameContent.Liquid.LiquidRenderer.VISCOSITY_MASK"
-		VisualViscosity = 160;
-
-		//This is the length the liquid will visually have when flowing/falling downwards or if there is a slope underneath.
-		//In Vanilla This property can be found at "Terraria.GameContent.Liquid.LiquidRenderer.WATERFALL_LENGTH"
-		LiquidFallLength = 6;
-
-		//This is the opacity of the liquid. How well you can see objects in the liquid.
-		//The SlopeOpacity property is different, as slopes do not render the same as a normal liquid tile
-		//DefaultOpacity in vanilla, can be found at "Terraria.GameContent.Liquid.LiquidRenderer.DEFAULT_OPACITY"
-		DefaultOpacity = 0.9815f;
+		VISCOSITY_MASK[Type] = 160;
+		WATERFALL_LENGTH[Type] = 6;
+		DEFAULT_OPACITY[Type] = 0.9815f;
 		SlopeOpacity = 1f;
-		//To change the old liquid rendering opacity, please see the RetroDrawEffects override.
-
-		//For the Waves Quality setting, when set to Medium, waves are set to be the same distance no matter the liquid type.
-		//To do this, the game applied a multiplier to make them all consistant between liquids. Here we set our own multiplier to make the waves the same distance.
 		WaterRippleMultiplier = 0.6f;
-
-		//This is used to specify what dust is used when splashing in this liquid.
-		//Normally, when returning false in each OnSplash hook/method, this property is used in the mod liquid's default splash code
-		//It returns -1 normally, which prevents the liquid from doing any splash dust
-		//Here we set it, as we use the property in our OnSplash hooks to have one central variable that controls which dust ID is used in our custom splash
 		SplashDustType = ModContent.DustType<BloodLiquidSplash>();
-
-		//This is used to specify what sound is played when an entity enters a liquid
-		//Normally this property is used in the mod liquid's default splash code and returns null as no sound is played normally.
-		//Similarly to SplashDustType, we use this to have 1 central place for the splash sound used accross each OnSplash hooks.
 		SplashSound = SoundID.SplashWeak;
 
-		FallDelay = 2; //The delay when liquids are falling. Liquids will wait this extra amount of frames before falling again.
+		FallDelay = 2;
+		ChecksForDrowning = true;
+		AllowEmitBreathBubbles = false;
 
-		ChecksForDrowning = true; //If the player can drown in this liquid
-		AllowEmitBreathBubbles = false; //Bubbles will come out of the player's mouth normally when drowning, here we can stop that by setting it to false.
-
-		//For modders who don't want to reimplement the entire player movement for this liquid, this multiplier is used in the default mod liquid player movement.
-		//Here we make our liquid slow the player down by half what honey would allow the player to move at.
-
-		//Heres the defaults for each liquid:
+		//Defaults for each liquid:
 		//Water/Lava/Regular modded liquid = 0.5f
 		//Honey = 0.25f
 		//Shimmer = 0.375f
 		PlayerMovementMultiplier = 0.375f;
-		StopWatchMPHMultiplier = PlayerMovementMultiplier; //We set stopwatch to the same multiplier as we don't want a different between whats felt and what the player can read their movement as.
-		NPCMovementMultiplierDefault = PlayerMovementMultiplier; //NPCs have a similar modifier but as a field, here we set the default value as some other NPCs set this multiplier to 0. We set this to PlayerMovementMultiplier as we need them to all be the same.
-		ProjectileMovementMultiplier = PlayerMovementMultiplier; //Simiarly to Players, Projectiles have this property for easy editing of a projectile velocity multiplier without needing to reimplement all of the projectile liquid movement code.
+		StopWatchMPHMultiplier = PlayerMovementMultiplier;
+		NPCMovementMultiplierDefault = PlayerMovementMultiplier;
+		ProjectileMovementMultiplier = PlayerMovementMultiplier;
 
-		FishingPoolSizeMultiplier = 2f; //The multiplier used for calculating the size of a fishing pool of this liquid. Here, each liquid tile counts as 2 for every tile in a fished pool.
+		FishingPoolSizeMultiplier = 1.5f;
 
-		//We can add a map entry to our liquid, by doing so we can show where our liquid is on the map.
-		//Unlike vanilla, we can also add a map entry name, which will display a name if the liquid is being selected on the map.
 		AddMapEntry(new Color(200, 0, 0));
-	}
-	public override bool PreSlopeDraw(int i, int j, bool behindBlocks, ref Vector2 drawPosition, ref Rectangle liquidSize, ref VertexColors colors)
-	{
-		Lighting.GetCornerColors(i, j, out var vertices);
-		colors.TopLeftColor = vertices.TopLeftColor * DefaultOpacity;
-		colors.TopRightColor = vertices.TopRightColor * DefaultOpacity;
-		colors.BottomLeftColor = vertices.BottomLeftColor * DefaultOpacity;
-		colors.BottomRightColor = vertices.BottomRightColor * DefaultOpacity;
-		return base.PreSlopeDraw(i, j, behindBlocks, ref drawPosition, ref liquidSize, ref colors);
 	}
 
 	//Here with LiquidMerge, we are able to decide when the liquid generates with a different tile.

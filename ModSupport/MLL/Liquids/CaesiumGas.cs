@@ -12,9 +12,9 @@ using Terraria.Graphics;
 using Terraria.Graphics.Light;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.GameContent.Liquid.LiquidRenderer;
 
 namespace Avalon.ModSupport.MLL.Liquids;
-
 
 internal class GasHook : ModHook
 {
@@ -65,9 +65,9 @@ public class CaesiumGas : ModLiquid
 {
 	public override void SetStaticDefaults()
 	{
-		VisualViscosity = 200;
-		LiquidFallLength = 2;
-		DefaultOpacity = 1f;
+		VISCOSITY_MASK[Type] = 200;
+		WATERFALL_LENGTH[Type] = 2;
+		DEFAULT_OPACITY[Type] = 1f;
 		SlopeOpacity = 1f;
 		WaterRippleMultiplier = 1f;
 		SplashDustType = DustID.Cloud;
@@ -495,7 +495,7 @@ public class CaesiumGas : ModLiquid
 				{
 					transferAmount = left.LiquidAmount + right.LiquidAmount + tile.LiquidAmount + amountOffset;
 					transferAmount = (float)Math.Round(transferAmount / 3f);
-					if (transferAmount == 254f && WorldGen.genRand.Next(30) == 0)
+					if (transferAmount == 254f && WorldGen.genRand.NextBool(30))
 					{
 						transferAmount = 255f;
 					}
