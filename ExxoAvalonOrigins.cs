@@ -4,6 +4,7 @@ using Avalon.Common;
 using Avalon.Effects;
 using Avalon.Items.Accessories.Info;
 using Avalon.Items.Weapons.Melee.Hardmode;
+using Avalon.Items.Weapons.Melee.Hardmode.VertexOfExcalibur;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
 using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;

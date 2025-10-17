@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Items.Weapons.Melee.Hardmode.MasterSword;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -62,7 +63,7 @@ namespace Avalon.Hooks
 					{
 						if (hitTwins[p.whoAmI] && hitPrime[p.whoAmI] && hitDestroyer[p.whoAmI])
 						{
-							int item = Item.NewItem(Player.GetSource_NaturalSpawn(), p.position, ModContent.ItemType<Items.Weapons.Melee.Hardmode.MasterSword>(), noBroadcast: true, prefixGiven: -2);
+							int item = Item.NewItem(Player.GetSource_NaturalSpawn(), p.position, ModContent.ItemType<MasterSword>(), noBroadcast: true, prefixGiven: -2);
 							Main.timeItemSlotCannotBeReusedFor[item] = TimeUtils.MinutesToTicks(15);
 							//Main.item[item].playerIndexTheItemIsReservedFor = p.whoAmI;
 							if (Main.netMode == NetmodeID.Server)

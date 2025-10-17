@@ -3,7 +3,7 @@ using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Banners;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Weapons.Magic.Hardmode;
-using Avalon.Items.Weapons.Melee.Hardmode;
+using Avalon.Items.Weapons.Melee.Hardmode.HemorrhagingHalberd;
 using Avalon.Items.Weapons.Ranged.Hardmode;
 using Avalon.ModSupport;
 using Microsoft.Xna.Framework;

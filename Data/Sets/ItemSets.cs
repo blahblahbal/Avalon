@@ -48,16 +48,28 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Blah;
+using Avalon.Items.Weapons.Blah.EnergyBlade;
 using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Magic.Superhardmode;
 using Avalon.Items.Weapons.Melee;
-using Avalon.Items.Weapons.Melee.Hardmode;
-using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.Hardmode.Clarent;
+using Avalon.Items.Weapons.Melee.Hardmode.DurataniumGlaive;
+using Avalon.Items.Weapons.Melee.Hardmode.DurataniumSword;
+using Avalon.Items.Weapons.Melee.Hardmode.FeroziumIceSword;
+using Avalon.Items.Weapons.Melee.Hardmode.HallowedClaymore;
+using Avalon.Items.Weapons.Melee.Hardmode.NaquadahLance;
+using Avalon.Items.Weapons.Melee.Hardmode.NaquadahSword;
+using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
+using Avalon.Items.Weapons.Melee.Hardmode.ShellHammer;
+using Avalon.Items.Weapons.Melee.Hardmode.TroxiniumSpear;
+using Avalon.Items.Weapons.Melee.Hardmode.TroxiniumSword;
+using Avalon.Items.Weapons.Melee.Hardmode.TrueAeonsEternity;
+using Avalon.Items.Weapons.Melee.Hardmode.VertexOfExcalibur;
+using Avalon.Items.Weapons.Melee.Hardmode.VirulentScythe;
 using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
 using Avalon.Items.Weapons.Melee.PreHardmode.BarbedNets;
 using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;
-using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
 using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
 using Avalon.Items.Weapons.Melee.PreHardmode.Moonfury;
 using Avalon.Items.Weapons.Melee.PreHardmode.OreSwords;
@@ -66,9 +78,8 @@ using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
 using Avalon.Items.Weapons.Melee.PreHardmode.Sporalash;
 using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
 using Avalon.Items.Weapons.Melee.PreHardmode.TheCell;
-using Avalon.Items.Weapons.Melee.PreHardmode.UrchinMace;
-using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClub;
 using Avalon.Items.Weapons.Melee.PreHardmode.WoodSwords;
+using Avalon.Items.Weapons.Melee.SolarSystem;
 using Avalon.Items.Weapons.Ranged.Hardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Items.Weapons.Ranged.Superhardmode;
@@ -484,7 +495,7 @@ namespace Avalon.Data.Sets
 			{ 2849, ItemType<BagofFire>() },
 			{ 2850, ItemType<BagofShadows>() },
 			{ 2851, ItemType<TeamMirror>() },
-			{ 2852, ItemType<HallowedRapier>() },
+			{ 2852, ItemType<HallowedClaymore>() },
             //{ 2853, ItemType<TheBanhammer>() },
             { 2854, ItemType<Heartstone>() },
 			{ 2855, ItemType<HeartstoneBrick>() },

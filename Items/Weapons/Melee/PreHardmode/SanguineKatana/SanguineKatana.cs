@@ -2,7 +2,6 @@ using Avalon;
 using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
 using Avalon.Particles;
-using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;

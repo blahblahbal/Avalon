@@ -10055,6 +10055,11 @@ Mods: {
 					Allows fishing in acid and lava
 					'''
 			}
+
+			HallowedClaymore: {
+				DisplayName: Hallowed Claymore
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10372,6 +10377,7 @@ Mods: {
 			OutbreakProj.DisplayName: Outbreak Tick
 			BismuthShortswordProj.DisplayName: Bismuth Shortsword Proj
 			SporalashProj.DisplayName: Sporalash Proj
+			NaquadahLanceProj.DisplayName: Naquadah Lance Proj
 		}
 
 		NPCs: {

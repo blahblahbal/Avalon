@@ -1,11 +1,13 @@
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
+using Avalon.Items.Weapons.Melee.Hardmode.CaesiumMace;
+using Avalon.Items.Weapons.Melee.Hardmode.CraniumCrusher;
+using Avalon.Items.Weapons.Melee.Hardmode.HallowedClaymore;
 using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
 using Avalon.Items.Weapons.Melee.PreHardmode.Sporalash;
 using Avalon.Items.Weapons.Melee.PreHardmode.TheCell;
 using Avalon.Items.Weapons.Melee.PreHardmode.UrchinMace;
 using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClub;
-using Avalon.Projectiles.Melee;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.GemTrees;
 using Microsoft.Xna.Framework;
@@ -456,10 +458,10 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 	}
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
 	{
-		if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.Drill || projectile.type == ModContent.ProjectileType<HallowedClaymore>() ||
+		if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.Drill || projectile.type == ModContent.ProjectileType<HallowedClaymoreProj>() ||
 			projectile.type == ModContent.ProjectileType<MarrowMasherProj>() || projectile.type == ModContent.ProjectileType<CraniumCrusherProj>() ||
 			projectile.type == ModContent.ProjectileType<UrchinMaceProj>() || projectile.type == ModContent.ProjectileType<WoodenClubProj>() ||
-			((projectile.type == ModContent.ProjectileType<CaesiumMace>() || projectile.type == ModContent.ProjectileType<SporalashProj>() ||
+			((projectile.type == ModContent.ProjectileType<CaesiumMaceProj>() || projectile.type == ModContent.ProjectileType<SporalashProj>() ||
 			projectile.type == ModContent.ProjectileType<Cell>()) && projectile.ai[0] == 0) || (projectile.aiStyle == ProjAIStyleID.Flail && projectile.ai[0] == 0))
 		{
 			if (projectile.Owner().GetModPlayer<AvalonPlayer>().BloodyWhetstone)

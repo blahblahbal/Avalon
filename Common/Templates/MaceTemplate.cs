@@ -85,11 +85,13 @@ public abstract class MaceTemplate : ModProjectile
 	public virtual Func<(SpriteEffects, float, Vector2), (SpriteEffects, float, Vector2)> SpriteEffectsFunc => spriteEffectsTuple => spriteEffectsTuple;
 
 	private static readonly Dictionary<int, Asset<Texture2D>> TrailTextures = [];
+
+	public virtual string TrailTexture => Texture + "_Trail";
 	public override void SetStaticDefaults()
 	{
 		if (!Main.dedServ && TrailLength > 0)
 		{
-			TrailTextures.Add(Type, ModContent.Request<Texture2D>(Texture + "_Trail"));
+			TrailTextures.Add(Type, ModContent.Request<Texture2D>(TrailTexture));
 
 			ProjectileID.Sets.TrailCacheLength[Projectile.type] = TrailLength;
 			ProjectileID.Sets.TrailingMode[Projectile.type] = 4;

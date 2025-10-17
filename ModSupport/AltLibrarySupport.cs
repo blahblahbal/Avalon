@@ -14,6 +14,7 @@ using Avalon.Items.Material.Ores;
 using Avalon.Items.Other;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Weapons.Melee.Hardmode;
+using Avalon.Items.Weapons.Melee.Hardmode.VirulentScythe;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
 using Avalon.NPCs.Critters;

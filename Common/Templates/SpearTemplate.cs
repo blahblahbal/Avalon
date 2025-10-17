@@ -97,7 +97,7 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
         }
     }
 
-    // Jeo make original code challenge IMPOSSIBLE
+    // Jona make original code challenge IMPOSSIBLE
     public static void DrawProj_Spear(Projectile proj, Microsoft.Xna.Framework.Color color, SpriteEffects dir, Vector2 offset)
     {
         dir = SpriteEffects.None;

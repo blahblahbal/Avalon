@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Items.Weapons.Melee.Hardmode.VirulentScythe;
 using Avalon.ModSupport;
 using Avalon.ModSupport.MLL.Liquids;
 using Avalon.Tiles.Furniture.OrangeDungeon;
@@ -287,7 +288,7 @@ public class DungeonContagionChest : ModHook
     {
         if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion && (contain == ItemID.ScourgeoftheCorruptor || contain == ItemID.VampireKnives))
         {
-            contain = ModContent.ItemType<Items.Weapons.Melee.Hardmode.VirulentScythe>();
+            contain = ModContent.ItemType<VirulentScythe>();
             Style = 1;
             chestTileType = (ushort)ModContent.TileType<Tiles.Contagion.ContagionChest>();
         }

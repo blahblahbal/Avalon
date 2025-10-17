@@ -1,7 +1,6 @@
-using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
+using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
 using Avalon.Projectiles.Hostile.Mechasting;
 using Avalon.Projectiles.Hostile.WallOfSteel;
-using Avalon.Projectiles.Melee;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -101,9 +100,7 @@ public static class ProjectileSets
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>()
     );
 
-	public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
-		ModContent.ProjectileType<HallowedRapierProj>(),
-		ModContent.ProjectileType<HallowedRapierVis>());
+	public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet();
 
     public static readonly bool[] EarthRelatedItems = ProjectileID.Sets.Factory.CreateBoolSet(
         ProjectileID.BoulderStaffOfEarth,
@@ -111,7 +108,6 @@ public static class ProjectileSets
         ProjectileID.GolemFist,
         ProjectileID.Stynger,
         ProjectileID.PossessedHatchet,
-        ModContent.ProjectileType<PossessedFlamesaw>(),
-        ModContent.ProjectileType<PossessedFlamesawChop>()
+        ModContent.ProjectileType<PossessedFlamesawProj>()
     );
 }

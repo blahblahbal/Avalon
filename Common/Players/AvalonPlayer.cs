@@ -3243,25 +3243,6 @@ public class AvalonPlayer : ModPlayer
 		}
 		UpdateMana();
 	}
-	public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
-	{
-		#region hellbound halberd weird shit
-		if (Main.myPlayer == drawInfo.drawPlayer.whoAmI)
-		{
-			if (drawInfo.drawPlayer.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Melee.HellboundHalberdSpear>()] > 0 && Main.mouseRight && !Main.mouseLeft)
-			{
-				if (Math.Sign(Player.Center.X - Main.MouseWorld.X) < 0)
-				{
-					drawInfo.playerEffect = SpriteEffects.None;
-				}
-				if (Math.Sign(Player.Center.X - Main.MouseWorld.X) > 0)
-				{
-					drawInfo.playerEffect = SpriteEffects.FlipHorizontally;
-				}
-			}
-		}
-		#endregion
-	}
 	public override void PostUpdateRunSpeeds()
 	{
 		FloorVisualsAvalon(Player.velocity.Y > Player.gravity);

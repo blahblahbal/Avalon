@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Avalon.Items.Potions.Buff;
 using System.Collections.Generic;
 using Terraria.WorldBuilding;
+using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -1312,7 +1313,7 @@ internal class Hellcastle
                     }
                     if (loot == 2)
                     {
-                        Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Hardmode.PossessedFlamesaw>(), false);
+                        Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<PossessedFlamesaw>(), false);
                         Main.chest[num2].item[0].Prefix(-1);
                     }
                     Main.chest[num2].item[1].SetDefaults(ModContent.ItemType<Items.Placeable.Tile.ImperviousBrick>(), false);

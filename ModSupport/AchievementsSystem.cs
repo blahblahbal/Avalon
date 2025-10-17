@@ -1,6 +1,7 @@
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Melee.Hardmode;
+using Avalon.Items.Weapons.Melee.Hardmode.VertexOfExcalibur;
 using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
 using Avalon.Tiles;
 using Terraria.Achievements;
