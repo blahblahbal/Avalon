@@ -15,6 +15,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
 using Avalon.NPCs.Critters;
 using Avalon.NPCs.Hardmode;
 using Avalon.Tiles.Contagion;

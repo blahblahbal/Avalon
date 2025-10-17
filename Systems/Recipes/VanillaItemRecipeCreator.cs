@@ -16,6 +16,8 @@ using Avalon.Items.Consumables;
 using Avalon.Items.Material.OreChunks;
 using Terraria.Localization;
 using Avalon.Common;
+using Avalon.Items.Weapons.Melee.PreHardmode.OreSwords;
+using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
 
 namespace Avalon.Systems.Recipes;
 

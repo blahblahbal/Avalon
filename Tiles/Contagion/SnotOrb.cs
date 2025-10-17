@@ -12,6 +12,7 @@ using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
 
 namespace Avalon.Tiles.Contagion;
 

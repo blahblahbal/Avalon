@@ -15,6 +15,9 @@ using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
+using Avalon.Items.Weapons.Melee.PreHardmode.GoblinDagger;
+using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
 
 namespace Avalon.Systems.Recipes;
 

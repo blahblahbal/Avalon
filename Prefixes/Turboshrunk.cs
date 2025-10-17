@@ -1,3 +1,4 @@
+using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClub;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -11,7 +12,7 @@ public class Turboshrunk : ExxoPrefix
 
     public override bool CanRoll(Item item)
     {
-        if (item.type == ModContent.ItemType<Items.Weapons.Melee.PreHardmode.WoodenClub>()) return false;
+        if (item.type == ModContent.ItemType<WoodenClub>()) return false;
         if (item.width <= 40 && item.height <= 40) return false;
         return item.useTime > 10;
     }

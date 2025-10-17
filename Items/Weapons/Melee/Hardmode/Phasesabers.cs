@@ -2,7 +2,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
-using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode.Phaseblades;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode
 {

@@ -54,6 +54,21 @@ using Avalon.Items.Weapons.Magic.Superhardmode;
 using Avalon.Items.Weapons.Melee;
 using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
+using Avalon.Items.Weapons.Melee.PreHardmode.BarbedNets;
+using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;
+using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
+using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
+using Avalon.Items.Weapons.Melee.PreHardmode.Moonfury;
+using Avalon.Items.Weapons.Melee.PreHardmode.OreSwords;
+using Avalon.Items.Weapons.Melee.PreHardmode.OsmiumTierSwords;
+using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
+using Avalon.Items.Weapons.Melee.PreHardmode.Sporalash;
+using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
+using Avalon.Items.Weapons.Melee.PreHardmode.TheCell;
+using Avalon.Items.Weapons.Melee.PreHardmode.UrchinMace;
+using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClub;
+using Avalon.Items.Weapons.Melee.PreHardmode.WoodSwords;
 using Avalon.Items.Weapons.Ranged.Hardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Items.Weapons.Ranged.Superhardmode;
@@ -308,12 +323,7 @@ namespace Avalon.Data.Sets
 			ItemType<Moonforce>()
 		);
 
-		public static readonly bool[] Maces = ItemID.Sets.Factory.CreateBoolSet(
-			ItemType<WoodenClub>(),
-			ItemType<UrchinMace>(),
-			ItemType<MarrowMasher>(),
-			ItemType<CraniumCrusher>()
-		);
+		public static readonly bool[] Maces = ItemID.Sets.Factory.CreateBoolSet();
 
 		public static readonly bool[] EarthRelatedItems = ItemID.Sets.Factory.CreateBoolSet(
 			ItemID.StaffofEarth,

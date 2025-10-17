@@ -18,7 +18,6 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
-using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Hardmode;
@@ -30,6 +29,10 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.ModSupport;
+using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
+using Avalon.Items.Weapons.Melee.PreHardmode.GoblinDagger;
+using Avalon.Items.Weapons.Melee.PreHardmode.SanguineKatana;
+using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
 
 namespace Avalon.Common;
 

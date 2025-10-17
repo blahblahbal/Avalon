@@ -1,3 +1,4 @@
+using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
 using Avalon.Projectiles.Hostile.Mechasting;
 using Avalon.Projectiles.Hostile.WallOfSteel;
 using Avalon.Projectiles.Melee;
@@ -100,14 +101,9 @@ public static class ProjectileSets
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>()
     );
 
-    public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
-        ModContent.ProjectileType<WoodenClubProj>(),
-        ModContent.ProjectileType<MarrowMasherProj>(),
-        ModContent.ProjectileType<UrchinMaceProj>(),
-        ModContent.ProjectileType<HallowedRapierProj>(),
-		ModContent.ProjectileType<HallowedRapierVis>(),
-		ModContent.ProjectileType<CraniumCrusherProj>(),
-        ModContent.ProjectileType<HellboundHalberdProj>());
+	public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
+		ModContent.ProjectileType<HallowedRapierProj>(),
+		ModContent.ProjectileType<HallowedRapierVis>());
 
     public static readonly bool[] EarthRelatedItems = ProjectileID.Sets.Factory.CreateBoolSet(
         ProjectileID.BoulderStaffOfEarth,

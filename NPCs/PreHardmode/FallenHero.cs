@@ -2,7 +2,6 @@ using System;
 using Avalon.Common;
 using Avalon.Items.Banners;
 using Avalon.Items.Vanity;
-using Avalon.Items.Weapons.Melee.PreHardmode;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
@@ -11,6 +10,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using Avalon.Items.Material;
+using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
 
 namespace Avalon.NPCs.PreHardmode;
 

@@ -1,4 +1,4 @@
-using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;
 using System;

@@ -26,7 +26,7 @@ using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
-using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;
 using Avalon.Prefixes;
 using Avalon.Reflection;
 using Avalon.Tiles;

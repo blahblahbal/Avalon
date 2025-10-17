@@ -1,5 +1,5 @@
 using Avalon.Common.Extensions;
-using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
 using Avalon.Particles;
 using Avalon.Projectiles.Melee;
 using Microsoft.Xna.Framework;

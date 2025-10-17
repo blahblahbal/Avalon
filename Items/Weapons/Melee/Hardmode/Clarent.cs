@@ -1,4 +1,4 @@
-using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Items.Weapons.Melee.PreHardmode.BarbedNets;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

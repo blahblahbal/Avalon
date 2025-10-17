@@ -1,5 +1,6 @@
 using Avalon.Common.Extensions;
-using Avalon.Items.Weapons.Melee.PreHardmode;
+using Avalon.Data.Sets;
+using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -11,6 +12,10 @@ namespace Avalon.Items.Weapons.Melee.Hardmode;
 public class CraniumCrusher : ModItem
 {
 	public const float ScaleMult = 1.35f;
+	public override void SetStaticDefaults()
+	{
+		ItemSets.Maces[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Item.DefaultToMace(ModContent.ProjectileType<Projectiles.Melee.CraniumCrusherProj>(), 128, 9.5f, ScaleMult, 30);

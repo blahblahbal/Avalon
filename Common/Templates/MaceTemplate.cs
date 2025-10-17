@@ -1,3 +1,4 @@
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -93,6 +94,7 @@ public abstract class MaceTemplate : ModProjectile
 			ProjectileID.Sets.TrailCacheLength[Projectile.type] = TrailLength;
 			ProjectileID.Sets.TrailingMode[Projectile.type] = 4;
 		}
+		ProjectileSets.TrueMeleeProjectiles[Type] = true;
 	}
 	public override void SetDefaults()
 	{

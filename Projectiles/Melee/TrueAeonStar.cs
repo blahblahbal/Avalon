@@ -1,4 +1,5 @@
 using Avalon.Dusts;
+using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

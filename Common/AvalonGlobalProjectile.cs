@@ -1,5 +1,10 @@
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
+using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
+using Avalon.Items.Weapons.Melee.PreHardmode.Sporalash;
+using Avalon.Items.Weapons.Melee.PreHardmode.TheCell;
+using Avalon.Items.Weapons.Melee.PreHardmode.UrchinMace;
+using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClub;
 using Avalon.Projectiles.Melee;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.GemTrees;
@@ -255,7 +260,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 			SoundEngine.PlaySound(SoundID.Item8, projectile.position);
 			return true;
 		}
-		if (projectile.aiStyle == 7)
+		if (projectile.aiStyle == ProjAIStyleID.Hook)
 		{
 			Vector2 mountedCenter = Main.player[projectile.owner].MountedCenter;
 			float xpos = mountedCenter.X - projectile.Center.X;
@@ -321,13 +326,13 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 	}
 	public override void PostAI(Projectile projectile)
 	{
-		if ((projectile.type != 10 && projectile.type != 145 /* && projectile.type != ModContent.ProjectileType<Projectiles.LimeSolution>()*/) || projectile.owner != Main.myPlayer)
+		if ((projectile.type != ProjectileID.PurificationPowder && projectile.type != ProjectileID.PureSpray) || projectile.owner != Main.myPlayer)
 		{
 			return;
 		}
 		int num = (int)(projectile.Center.X / 16f);
 		int num2 = (int)(projectile.Center.Y / 16f);
-		bool flag = projectile.type == 10;
+		bool flag = projectile.type == ProjectileID.PurificationPowder;
 		for (int i = num - 1; i <= num + 1; i++)
 		{
 			for (int j = num2 - 1; j <= num2 + 1; j++)
@@ -347,9 +352,9 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 	public override void AI(Projectile projectile)
 	{
 		#region fertilizer fix
-		if (projectile.aiStyle == 6)
+		if (projectile.aiStyle == ProjAIStyleID.Powder)
 		{
-			bool flag23 = projectile.type == 1019;
+			bool flag23 = projectile.type == ProjectileID.Fertilizer;
 			bool flag34 = Main.myPlayer == projectile.owner;
 			if (flag23)
 			{
@@ -454,7 +459,7 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 		if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.Drill || projectile.type == ModContent.ProjectileType<HallowedClaymore>() ||
 			projectile.type == ModContent.ProjectileType<MarrowMasherProj>() || projectile.type == ModContent.ProjectileType<CraniumCrusherProj>() ||
 			projectile.type == ModContent.ProjectileType<UrchinMaceProj>() || projectile.type == ModContent.ProjectileType<WoodenClubProj>() ||
-			((projectile.type == ModContent.ProjectileType<CaesiumMace>() || projectile.type == ModContent.ProjectileType<Sporalash>() ||
+			((projectile.type == ModContent.ProjectileType<CaesiumMace>() || projectile.type == ModContent.ProjectileType<SporalashProj>() ||
 			projectile.type == ModContent.ProjectileType<Cell>()) && projectile.ai[0] == 0) || (projectile.aiStyle == ProjAIStyleID.Flail && projectile.ai[0] == 0))
 		{
 			if (projectile.Owner().GetModPlayer<AvalonPlayer>().BloodyWhetstone)
@@ -482,10 +487,10 @@ internal class AvalonGlobalProjectile : GlobalProjectile
 
 	public override void SetStaticDefaults()
 	{
-		ProjectileID.Sets.TrailCacheLength[44] = 6;
-		ProjectileID.Sets.TrailingMode[44] = 2;
-		ProjectileID.Sets.TrailCacheLength[45] = 6;
-		ProjectileID.Sets.TrailingMode[45] = 2;
+		ProjectileID.Sets.TrailCacheLength[ProjectileID.DemonSickle] = 6;
+		ProjectileID.Sets.TrailingMode[ProjectileID.DemonSickle] = 2;
+		ProjectileID.Sets.TrailCacheLength[ProjectileID.DemonScythe] = 6;
+		ProjectileID.Sets.TrailingMode[ProjectileID.DemonScythe] = 2;
 	}
 	public static Vector2 RotateAboutOrigin(Vector2 point, float rotation)
 	{
