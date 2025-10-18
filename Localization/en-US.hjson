@@ -9729,7 +9729,11 @@ Mods: {
 
 			ShroomiteAmmunition: {
 				DisplayName: Shroomite Ammunition
-				Tooltip: ""
+				Tooltip:
+				'''
+				Can be used as a bullet, arrow, or rocket
+				Morphs into a bullet, arrow, or rocket when fired
+				'''
 			}
 
 			AquaImpact: {
