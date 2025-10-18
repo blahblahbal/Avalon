@@ -1,6 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.Shards;
-using Avalon.Items.Weapons.Ranged.PreHardmode;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

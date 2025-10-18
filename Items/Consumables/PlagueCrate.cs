@@ -1,4 +1,5 @@
 using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -39,7 +40,7 @@ public class PlagueCrate : ModItem
     {
         int[] themedDrops = new int[] {
             ModContent.ItemType<Accessories.PreHardmode.NerveNumbNecklace>(),
-            ModContent.ItemType<Weapons.Ranged.PreHardmode.Blunderblight>(),
+            ModContent.ItemType<Blunderblight>(),
             ModContent.ItemType<Weapons.Magic.PreHardmode.Smogscreen>(),
             ModContent.ItemType<Pets.SepticCell>(),
             ModContent.ItemType<TetanusChakram>(),

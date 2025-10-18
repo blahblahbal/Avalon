@@ -1,5 +1,5 @@
 using Avalon.Common;
-using Avalon.Items.Weapons.Ranged.PreHardmode;
+using Avalon.Items.Weapons.Ranged.PreHardmode.TwilightShooter;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

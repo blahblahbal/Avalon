@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Thompson;
 using Avalon.ModSupport;
 using Avalon.World.Passes;
 using Avalon.WorldGeneration.Enums;
@@ -402,7 +403,7 @@ public class GenSystem : ModSystem
                 result = ModContent.ItemType<Items.Accessories.PreHardmode.RubberGloves>();
                 break;
             case 1:
-                result = ModContent.ItemType<Items.Weapons.Ranged.PreHardmode.Thompson>();
+                result = ModContent.ItemType<Thompson>();
                 break;
             case 2:
                 result = ModContent.ItemType<Items.Accessories.PreHardmode.AnkletofAcceleration>();

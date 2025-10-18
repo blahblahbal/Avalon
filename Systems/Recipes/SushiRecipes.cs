@@ -11,13 +11,15 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
-using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
 using Avalon.Items.Weapons.Melee.PreHardmode.GoblinDagger;
 using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Thompson;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Longbow;
 
 namespace Avalon.Systems.Recipes;
 
