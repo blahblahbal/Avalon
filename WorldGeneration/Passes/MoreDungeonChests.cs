@@ -1,4 +1,3 @@
-using Avalon.Items.Weapons.Ranged.Hardmode;
 using Avalon.Tiles.Furniture;
 using Terraria;
 using Terraria.ID;
@@ -7,6 +6,7 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Microsoft.Xna.Framework;
 using Avalon.Tiles;
+using Avalon.Items.Weapons.Ranged.Hardmode.Hellrazer;
 
 namespace Avalon.WorldGeneration.Passes;
 

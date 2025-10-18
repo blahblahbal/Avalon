@@ -2,7 +2,6 @@ using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
 using Avalon.Items.Weapons.Ranged.PreHardmode.OsmiumTierLongbows;
 using Avalon.Particles;
-using Avalon.Projectiles.Ranged.Held;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;

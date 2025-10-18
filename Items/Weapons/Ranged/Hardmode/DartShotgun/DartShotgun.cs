@@ -1,3 +1,4 @@
+using Avalon;
 using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -5,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Ranged.Hardmode
+namespace Avalon.Items.Weapons.Ranged.Hardmode.DartShotgun
 {
 	public class DartShotgun : ModItem
 	{

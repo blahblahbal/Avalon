@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -6,12 +7,36 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Ranged
+namespace Avalon.Items.Weapons.Ranged.Hardmode.CrystalTomahawk
 {
-	public class CrystalTomahawk : ModProjectile
+	public class CrystalTomahawk : ModItem
 	{
+		public override void SetStaticDefaults()
+		{
+			Item.ResearchUnlockCount = 2000;
+		}
+		public override void SetDefaults()
+		{
+			Item.DefaultToThrownWeapon(ModContent.ProjectileType<CrystalTomahawkProj>(), 44, 5f, 17f, 10, width: 26, height: 26);
+			Item.rare = ItemRarityID.LightRed;
+			Item.value = Item.sellPrice(copper: 14);
+		}
+		public override void AddRecipes()
+		{
+			CreateRecipe(555)
+				.AddIngredient(ItemID.CrystalShard, 5)
+				.AddIngredient(ItemID.SoulofLight)
+				.AddTile(TileID.MythrilAnvil)
+				.Register();
+		}
+	}
+	public class CrystalTomahawkProj : ModProjectile
+	{
+		public override string Texture => ModContent.GetInstance<CrystalTomahawk>().Texture;
+		public override LocalizedText DisplayName => ModContent.GetInstance<CrystalTomahawk>().DisplayName;
 		private static Asset<Texture2D>? trailTexture;
 		public override void SetStaticDefaults()
 		{
@@ -40,7 +65,6 @@ namespace Avalon.Projectiles.Ranged
 
 			Lighting.AddLight(Projectile.Center, new Vector3(Color1.R / 255f, Color1.G / 255f, Color1.B / 255f));
 
-			//int[] Dusts = { DustID.IceTorch, DustID.HallowedTorch, DustID.WhiteTorch };
 			int[] Dusts = { DustID.BlueCrystalShard, DustID.PinkCrystalShard, DustID.PurpleCrystalShard };
 			if (Main.rand.NextBool(3))
 			{
@@ -77,7 +101,6 @@ namespace Avalon.Projectiles.Ranged
 				Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), DustsGlow[Main.rand.Next(3)], Main.rand.NextVector2Circular(12, 12), 64, default, 1f);
 				dust2.fadeIn = Main.rand.NextFloat(0, 1);
 				dust2.noGravity = true;
-				//dust2.velocity += -Projectile.oldVelocity;
 			}
 			for (int i = 0; i < 10; i++)
 			{
@@ -91,7 +114,6 @@ namespace Avalon.Projectiles.Ranged
 				{
 					Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(14, 14) * Main.rand.NextFloat(0.3f, 1f), ProjectileID.CrystalShard, Projectile.damage / 4, 0, Projectile.owner);
 				}
-				//Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage / 2, 0, Projectile.owner);
 			}
 			if (Projectile.ai[1] == 0)
 				ParticleSystem.AddParticle(new CrystalSparkle(), Projectile.Center + Vector2.Normalize(Projectile.velocity) * 20f, Vector2.Zero, default);
@@ -107,7 +129,6 @@ namespace Avalon.Projectiles.Ranged
 				dust2.fadeIn = Main.rand.NextFloat(0, 1);
 				dust2.noGravity = true;
 				dust2.velocity += -Projectile.oldVelocity * 0.5f;
-				//dust2.velocity += -Projectile.oldVelocity;
 			}
 			for (int i = 0; i < 10; i++)
 			{
@@ -116,25 +137,6 @@ namespace Avalon.Projectiles.Ranged
 				dust2.noGravity = !Main.rand.NextBool(5);
 				dust2.velocity += -Projectile.oldVelocity * 0.5f;
 			}
-			//for (int i = 0; i < 10; i++)
-			//{
-			//    Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(18, 18), DustsGlow[Main.rand.Next(3)], Main.rand.NextVector2Circular(9, 9), 64, default, 1f);
-			//    dust2.fadeIn = Main.rand.NextFloat(0, 1);
-			//    dust2.noGravity = true;
-			//    dust2.velocity += -Projectile.oldVelocity * 0.5f;
-			//}
-			//SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
-
-			//if (Projectile.velocity.X != oldVelocity.X)
-			//{
-			//    Projectile.velocity.X = -oldVelocity.X * 0.7f;
-			//}
-			//if (Projectile.velocity.Y != oldVelocity.Y)
-			//{
-			//    Projectile.velocity.Y = -oldVelocity.Y * 0.7f;
-			//}
-
-			//Projectile.penetrate--;
 			return true;
 		}
 		public override bool PreDraw(ref Color lightColor)

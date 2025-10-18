@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Ranged.Hardmode;
+namespace Avalon.Items.Weapons.Ranged.Hardmode.CaesiumCrossbow;
 
 public class CaesiumCrossbow : ModItem
 {
