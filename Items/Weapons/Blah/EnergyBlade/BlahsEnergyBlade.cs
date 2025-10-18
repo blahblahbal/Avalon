@@ -2,6 +2,7 @@ using Avalon;
 using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
+using Avalon.Items.Weapons.Blah.Staff;
 using Avalon.PlayerDrawLayers;
 using Avalon.Projectiles.Magic;
 using Microsoft.Xna.Framework;
