@@ -1,34 +1,96 @@
-using Avalon.Buffs.Minions;
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Summon;
+namespace Avalon.Items.Weapons.Summon.Hardmode.Hungry;
 
+public class HungryStaff : ModItem
+{
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
+		ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
+
+		ItemID.Sets.StaffMinionSlotsRequired[Type] = 1f;
+	}
+
+	public override void SetDefaults()
+	{
+		Item.DefaultToMinionWeapon(ModContent.ProjectileType<HungrySummon>(), ModContent.BuffType<Hungry>(), 21, 1.5f, 30);
+		Item.rare = ItemRarityID.LightRed;
+		Item.value = Item.sellPrice(0, 1);
+		Item.UseSound = SoundID.Item44;
+	}
+	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+	{
+		position = Main.MouseWorld;
+	}
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<Material.FleshyTendril>(), 14)
+			.AddTile(TileID.Anvils)
+			.Register();
+	}
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+	{
+		player.AddBuff(Item.buffType, 2);
+		var projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Main.myPlayer);
+		projectile.originalDamage = Item.damage;
+		if (player.GetModPlayer<AvalonPlayer>().FleshArmor)
+		{
+			projectile.minionSlots = 0.5f;
+		}
+		return false;
+	}
+}
+public class Hungry : ModBuff
+{
+	public override void SetStaticDefaults()
+	{
+		Main.buffNoTimeDisplay[Type] = true;
+		Main.buffNoSave[Type] = false;
+	}
+
+	public override void Update(Player player, ref int buffIndex)
+	{
+		if (player.ownedProjectileCounts[ModContent.ProjectileType<HungrySummon>()] > 0)
+		{
+			player.GetModPlayer<AvalonPlayer>().HungryMinion = true;
+		}
+		if (!player.GetModPlayer<AvalonPlayer>().HungryMinion)
+		{
+			player.DelBuff(buffIndex);
+			buffIndex--;
+		}
+		else
+		{
+			player.buffTime[buffIndex] = 18000;
+		}
+	}
+}
 public class HungrySummon : ModProjectile
 {
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 6;
-		Main.projPet[Projectile.type] = true; // Denotes that this projectile is a pet or minion
-
-		ProjectileID.Sets.MinionSacrificable[Projectile.type] = true; // This is needed so your minion can properly spawn when summoned and replaced when other minions are summoned
-																	  //ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
+		Main.projPet[Projectile.type] = true;
+		ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
 		ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
 	}
 	public override bool? CanCutTiles()
 	{
 		return false;
 	}
-
-	// This is mandatory if your minion deals contact damage (further related stuff in AI() in the Movement region)
 	public override bool MinionContactDamage()
 	{
 		return true;
@@ -50,9 +112,8 @@ public class HungrySummon : ModProjectile
 		Projectile.friendly = true;
 		Projectile.usesLocalNPCImmunity = true;
 		Projectile.localNPCHitCooldown = 30;
-		DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-		DrawOriginOffsetY = -(int)(((dims.Height / Main.projFrames[Projectile.type]) / 2) - (Projectile.Size.Y / 2));
-		//Main.projPet[projectile.type] = true;
+		DrawOffsetX = -(int)(dims.Width / 2 - Projectile.Size.X / 2);
+		DrawOriginOffsetY = -(int)(dims.Height / Main.projFrames[Projectile.type] / 2 - Projectile.Size.Y / 2);
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)
 	{
@@ -111,8 +172,8 @@ public class HungrySummon : ModProjectile
 		RotationCounter++;
 
 		bool TargetingEnemy;
-		int TargetNPC = ClassExtensions.FindClosestNPC(Projectile, 700, npc => !npc.CanBeChasedBy(Projectile.ModProjectile, false) || npc.Distance(player.Center) > 1000);
-		if ((Collision.SolidCollision(Projectile.Center - new Vector2(8), 8, 8) && Collision.SolidCollision(Projectile.position - new Vector2(32), Projectile.width + 32, Projectile.height + 32)) || Projectile.position.Distance(Projectile.oldPosition) < 1.7f)
+		int TargetNPC = Projectile.FindClosestNPC(700, npc => !npc.CanBeChasedBy(Projectile.ModProjectile, false) || npc.Distance(player.Center) > 1000);
+		if (Collision.SolidCollision(Projectile.Center - new Vector2(8), 8, 8) && Collision.SolidCollision(Projectile.position - new Vector2(32), Projectile.width + 32, Projectile.height + 32) || Projectile.position.Distance(Projectile.oldPosition) < 1.7f)
 		{
 			Projectile.tileCollide = false;
 		}
@@ -175,22 +236,9 @@ public class HungrySummon : ModProjectile
 			{
 				Projectile.velocity = Vector2.SmoothStep(Projectile.velocity + Projectile.Center.DirectionTo(TargetPos) * 0.2f, Projectile.Center.DirectionTo(TargetPos) * Projectile.velocity.Length(), 0.3f);
 			}
-			//for(int i = 0; i < Main.maxProjectiles; i++)
-			//{
-			//    if (Projectile.Hitbox.Intersects(Main.projectile[i].Hitbox) && Main.projectile[i].active && Main.projectile[i].type == Type)
-			//    {
-			//        Projectile.position -= Projectile.Center.DirectionTo(Main.projectile[i].Center) * 2;
-			//        Main.projectile[i].position -= Main.projectile[i].Center.DirectionTo(Projectile.Center) * 2;
-			//    }
-			//}
-			//if (Projectile.position.Distance(player.position) > 5000)
-			//{
-			//    Projectile.Center = player.Center;
-			//}
 
 			if (Projectile.velocity.Length() >= 7f)
 			{
-				//Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 7f;
 				Projectile.velocity = Vector2.Lerp(Vector2.Normalize(Projectile.velocity) * 7f, Projectile.velocity, 0.9f);
 			}
 			if (Projectile.velocity.Length() <= 2)
@@ -209,7 +257,6 @@ public class HungrySummon : ModProjectile
 				d2.fadeIn = 1;
 
 				Projectile.frameCounter += 2;
-				//Projectile.position += Main.npc[TargetIndex].velocity;
 				Projectile.Center = Main.npc[TargetNPC].Hitbox.ClosestPointInRect(Projectile.Center + Main.npc[TargetNPC].velocity);
 			}
 			else
@@ -218,10 +265,6 @@ public class HungrySummon : ModProjectile
 				Latched = false;
 			}
 		}
-		//if (Projectile.Center.Distance(player.Center) > 700)
-		//{
-		//    Projectile.Center = player.Center + Projectile.Center.DirectionFrom(player.Center) * 700;
-		//}
 	}
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{

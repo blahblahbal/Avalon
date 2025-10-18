@@ -11417,7 +11417,7 @@ Mods: {
 				Description: ""
 			}
 
-			Reflector: {
+			ReflectorBuff: {
 				DisplayName: Reflector
 				Description: The mirrors will reflect projectiles
 			}

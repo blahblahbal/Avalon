@@ -1,12 +1,98 @@
-using System;
+using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Summon;
+namespace Avalon.Items.Weapons.Summon.Hardmode.Gastropod;
 
+public class GastropodStaff : ModItem
+{
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+		ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
+
+		ItemID.Sets.StaffMinionSlotsRequired[Type] = 1f; // The default value is 1, but other values are supported. See the docs for more guidance. 
+	}
+	public override void SetDefaults()
+	{
+		Item.DefaultToMinionWeapon(ModContent.ProjectileType<GastrominiSummon0>(), ModContent.BuffType<Gastropod>(), 40, 4.5f, 30);
+		Item.rare = ItemRarityID.Pink;
+		Item.value = Item.sellPrice(0, 1);
+		Item.UseSound = SoundID.Item44;
+	}
+	public override void AddRecipes()
+	{
+		CreateRecipe()
+			.AddIngredient(ItemID.CrystalShard, 30)
+			.AddIngredient(ItemID.Gel, 100)
+			.AddIngredient(ItemID.SoulofLight, 20)
+			.AddIngredient(ItemID.PixieDust, 20)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+	}
+	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+	{
+		position = Main.MouseWorld;
+	}
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+	{
+		player.AddBuff(Item.buffType, 2);
+
+		switch (Main.rand.Next(4))
+		{
+			case 0:
+				type = Item.shoot;
+				break;
+			case 1:
+				type = ModContent.ProjectileType<GastrominiSummon1>();
+				break;
+			case 2:
+				type = ModContent.ProjectileType<GastrominiSummon2>();
+				break;
+			case 3:
+				type = ModContent.ProjectileType<GastrominiSummon3>();
+				break;
+		}
+
+		// Minions have to be spawned manually, then have originalDamage assigned to the damage of the summon item
+		var projectile = Projectile.NewProjectileDirect(source, position, Vector2.Zero, type, damage, knockback, Main.myPlayer);
+		projectile.originalDamage = Item.damage;
+		return false;
+	}
+}
+public class Gastropod : ModBuff
+{
+	public override void SetStaticDefaults()
+	{
+		Main.buffNoTimeDisplay[Type] = true;
+		Main.buffNoSave[Type] = true;
+	}
+
+	public override void Update(Player player, ref int buffIndex)
+	{
+		if (player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon2>()] > 0 ||
+			player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon3>()] > 0 ||
+			player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon1>()] > 0 ||
+			player.ownedProjectileCounts[ModContent.ProjectileType<GastrominiSummon0>()] > 0)
+		{
+			player.GetModPlayer<AvalonPlayer>().GastroMinion = true;
+		}
+		if (!player.GetModPlayer<AvalonPlayer>().GastroMinion)
+		{
+			player.DelBuff(buffIndex);
+			buffIndex--;
+		}
+		else
+		{
+			player.buffTime[buffIndex] = 18000;
+		}
+	}
+}
 public abstract class GastrominiSummon : ModProjectile
 {
 	public override void SetStaticDefaults()
@@ -15,7 +101,7 @@ public abstract class GastrominiSummon : ModProjectile
 		Main.projPet[Projectile.type] = true; // Denotes that this projectile is a pet or minion
 
 		ProjectileID.Sets.MinionSacrificable[Projectile.type] = true; // This is needed so your minion can properly spawn when summoned and replaced when other minions are summoned
-		//ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
+																	  //ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
 		ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
 	}
 
@@ -49,7 +135,7 @@ public abstract class GastrominiSummon : ModProjectile
 	{
 		Player player = Main.player[Projectile.owner];
 
-		AvalonPlayer.MinionRemoveCheck(player, ModContent.BuffType<Buffs.Minions.Gastropod>(), Projectile);
+		AvalonPlayer.MinionRemoveCheck(player, ModContent.BuffType<Gastropod>(), Projectile);
 
 		AvoidOwnedMinions();
 
@@ -218,7 +304,7 @@ public abstract class GastrominiSummon : ModProjectile
 				Projectile.frame = 0;
 				Projectile.frameCounter = 0;
 			}
-			Projectile.spriteDirection = (Math.Abs(Projectile.velocity.X) > 2.25f || (!target && Projectile.Center.Distance(player.Center) > 300f)) ? -Math.Sign(Projectile.velocity.X) : Projectile.spriteDirection;
+			Projectile.spriteDirection = Math.Abs(Projectile.velocity.X) > 2.25f || !target && Projectile.Center.Distance(player.Center) > 300f ? -Math.Sign(Projectile.velocity.X) : Projectile.spriteDirection;
 		}
 		else if (Projectile.localAI[0] > 0)
 		{
@@ -282,3 +368,4 @@ public class GastrominiSummon0 : GastrominiSummon { }
 public class GastrominiSummon1 : GastrominiSummon { }
 public class GastrominiSummon2 : GastrominiSummon { }
 public class GastrominiSummon3 : GastrominiSummon { }
+
