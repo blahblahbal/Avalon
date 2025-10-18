@@ -10382,6 +10382,8 @@ Mods: {
 			BismuthShortswordProj.DisplayName: Bismuth Shortsword Proj
 			SporalashProj.DisplayName: Sporalash Proj
 			NaquadahLanceProj.DisplayName: Naquadah Lance Proj
+			CanisterFire.DisplayName: Canister Fire
+			CanisterFireLinger.DisplayName: Canister Fire
 		}
 
 		NPCs: {

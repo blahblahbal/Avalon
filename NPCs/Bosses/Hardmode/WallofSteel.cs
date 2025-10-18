@@ -3,7 +3,7 @@ using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Weapons.Magic.Superhardmode;
-using Avalon.Items.Weapons.Ranged.Superhardmode;
+using Avalon.Items.Weapons.Ranged.Superhardmode.FleshBoiler;
 using Avalon.Projectiles.Hostile.WallOfSteel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

@@ -96,7 +96,7 @@ using Avalon.Items.Weapons.Ranged.PreHardmode.OreBows;
 using Avalon.Items.Weapons.Ranged.PreHardmode.OsmiumTierLongbows;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Wheezebow;
 using Avalon.Items.Weapons.Ranged.PreHardmode.WoodBows;
-using Avalon.Items.Weapons.Ranged.Superhardmode;
+using Avalon.Items.Weapons.Ranged.Superhardmode.Freezethrower;
 using Avalon.Items.Weapons.Summon.Hardmode;
 using Avalon.ModSupport.MLL.Items;
 using System.Collections.Generic;
