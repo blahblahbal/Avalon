@@ -6,7 +6,6 @@ using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Material.Bars;
-using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Items.Material.Herbs;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Accessories.PreHardmode;
@@ -18,6 +17,7 @@ using Terraria.Localization;
 using Avalon.Common;
 using Avalon.Items.Weapons.Melee.PreHardmode.OreSwords;
 using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
 
 namespace Avalon.Systems.Recipes;
 

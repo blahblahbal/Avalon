@@ -27,6 +27,7 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;
+using Avalon.Items.Weapons.Ranged.PreHardmode.EggCannon;
 using Avalon.Prefixes;
 using Avalon.Reflection;
 using Avalon.Tiles;
@@ -1813,10 +1814,10 @@ public class AvalonGlobalItem : GlobalItem
 				float num124 = velocity.Y;
 				num123 += Main.rand.Next(-30, 31) * 0.05f;
 				num124 += Main.rand.Next(-30, 31) * 0.05f;
-				if (item.type == ModContent.ItemType<Items.Weapons.Ranged.PreHardmode.EggCannon>())
+				if (item.type == ModContent.ItemType<EggCannon>())
 				{
 					Vector2 vel = new Vector2(num123, num124);
-					Projectile.NewProjectile(source, position, vel.RotatedByRandom(0.04f), ModContent.ProjectileType<Projectiles.Ranged.ExplosiveEgg>(), damage, knockback, player.whoAmI, ai2: Main.rand.NextBool(3) ? 1 : 0);
+					Projectile.NewProjectile(source, position, vel.RotatedByRandom(0.04f), ModContent.ProjectileType<ExplosiveEggShrapnel>(), damage, knockback, player.whoAmI, ai2: Main.rand.NextBool(3) ? 1 : 0);
 				}
 				else
 				{

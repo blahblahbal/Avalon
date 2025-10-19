@@ -2,7 +2,7 @@ using Avalon.Common.Extensions;
 using Avalon.Items.Accessories.Superhardmode;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Magic.Superhardmode;
-using Avalon.Items.Weapons.Ranged.Superhardmode;
+using Avalon.Items.Weapons.Ranged.Superhardmode.FleshBoiler;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;

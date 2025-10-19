@@ -33,6 +33,7 @@ using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
 using Avalon.Items.Weapons.Melee.PreHardmode.GoblinDagger;
 using Avalon.Items.Weapons.Melee.PreHardmode.SanguineKatana;
 using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Longbow;
 
 namespace Avalon.Common;
 

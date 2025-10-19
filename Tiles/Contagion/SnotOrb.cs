@@ -8,11 +8,11 @@ using Terraria.ObjectData;
 using Terraria.Audio;
 using Terraria.Chat;
 using Avalon.Items.Accessories.PreHardmode;
-using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
 
 namespace Avalon.Tiles.Contagion;
 

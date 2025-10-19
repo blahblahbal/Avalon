@@ -27,6 +27,7 @@ using ReLogic.Utilities;
 using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
 using Terraria.Localization;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Longbone;
 
 namespace Avalon.WorldGeneration.SecretSeeds
 {

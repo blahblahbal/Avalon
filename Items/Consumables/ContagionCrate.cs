@@ -1,7 +1,7 @@
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
-using Avalon.Items.Weapons.Ranged.PreHardmode;
+using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;

@@ -9,6 +9,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
+using Avalon.Items.Weapons.Summon.Hardmode.AnchorWhipworm;
 using Avalon.ModSupport.MLL.Liquids;
 using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
@@ -391,40 +392,6 @@ public class AvalonPlayer : ModPlayer
 		if (player.HasBuff(buffID) && projectile.timeLeft <= 2)
 		{
 			projectile.timeLeft = 2;
-		}
-	}
-	public void UpdatePrimeMinionStatus()
-	{
-		if (Player.ownedProjectileCounts[ModContent.ProjectileType<PrimeArmsCounter>()] < 1)
-		{
-			foreach (var projectile in Main.ActiveProjectiles)
-			{
-				if (projectile.owner == Player.whoAmI)
-				{
-					if (projectile.type == ModContent.ProjectileType<PriminiCannon>() || projectile.type == ModContent.ProjectileType<PriminiLaser>() || projectile.type == ModContent.ProjectileType<PriminiSaw>() || projectile.type == ModContent.ProjectileType<PriminiVice>())
-					{
-						projectile.Kill();
-					}
-				}
-			}
-		}
-		else if (Player.ownedProjectileCounts[ModContent.ProjectileType<PriminiCannon>()] < 1)
-		{
-			IEntitySource source = Player.GetSource_Misc("PrimeTierSwap");
-
-			Vector2 cannonPos = Player.Center + new Vector2(40f, -40f);
-			Vector2 laserPos = Player.Center + new Vector2(-40f);
-			Vector2 sawPos = Player.Center + new Vector2(-40f, 40f);
-			Vector2 vicePos = Player.Center + new Vector2(40f);
-
-			Projectile p1 = Projectile.NewProjectileDirect(source, cannonPos, Vector2.Zero, ModContent.ProjectileType<PriminiCannon>(), 0, 0f, Player.whoAmI);
-			Projectile p2 = Projectile.NewProjectileDirect(source, laserPos, Vector2.Zero, ModContent.ProjectileType<PriminiLaser>(), 0, 0f, Player.whoAmI);
-			Projectile p3 = Projectile.NewProjectileDirect(source, sawPos, Vector2.Zero, ModContent.ProjectileType<PriminiSaw>(), 0, 0f, Player.whoAmI);
-			Projectile p4 = Projectile.NewProjectileDirect(source, vicePos, Vector2.Zero, ModContent.ProjectileType<PriminiVice>(), 0, 0f, Player.whoAmI);
-			p1.rotation = p1.Center.AngleTo(Player.Center);
-			p2.rotation = p2.Center.AngleTo(Player.Center);
-			p3.rotation = p3.Center.AngleTo(Player.Center);
-			p4.rotation = p4.Center.AngleTo(Player.Center);
 		}
 	}
 	public override void Load()
@@ -2426,7 +2393,7 @@ public class AvalonPlayer : ModPlayer
 					}
 					else if (attempt.legendary && Main.hardMode && Main.rand.NextBool(2))
 					{
-						itemDrop = ModContent.ItemType<Items.Weapons.Summon.Whips.AnchorWhipworm>();
+						itemDrop = ModContent.ItemType<AnchorWhipworm>();
 					}
 					else if (attempt.uncommon && questFish == ModContent.ItemType<Items.Fish.Quest.Snotpiranha>())
 					{
