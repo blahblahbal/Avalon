@@ -22,6 +22,7 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Food;
 using Avalon.ModSupport.Thorium.Items.Placeable.Furniture.Gem;
 using SDL2;
+using System;
 
 namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
@@ -213,7 +214,10 @@ public class RecipeSystem : ModSystem
             npc.SetDefaults(i);
             if (NPCLoader.GetNPC(i) is ModNPC modnpc)
             {
-                banners.Add(modnpc.BannerItem);
+				if (modnpc.BannerItem != ItemID.None)
+				{
+					banners.Add(modnpc.BannerItem);
+				}
             }
             else
             {
