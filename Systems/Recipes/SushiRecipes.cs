@@ -8,7 +8,6 @@ using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Tile;
 using Avalon.ModSupport.Tokens;
 using Avalon.Items.Tools.PreHardmode;
-using Avalon.Items.Weapons.Magic.Hardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Terraria;
 using Terraria.ID;
@@ -24,6 +23,7 @@ using Avalon.Items.Weapons.Magic.PreHardmode.FlowerOfTheJungle;
 using Avalon.Items.Weapons.Magic.PreHardmode.FrozenLyre;
 using Avalon.Items.Weapons.Magic.PreHardmode.GlacierStaff;
 using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
+using Avalon.Items.Weapons.Magic.Hardmode.Boomlash;
 
 namespace Avalon.Systems.Recipes;
 

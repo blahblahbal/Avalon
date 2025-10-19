@@ -14,7 +14,7 @@ public class DevilsScythe : ModTile
         Main.tileLavaDeath[Type] = true;
         TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
         TileObjectData.addTile(Type);
-        RegisterItemDrop(ModContent.ItemType<Items.Weapons.Magic.Hardmode.DevilsScythe>());
+        RegisterItemDrop(ModContent.ItemType<Items.Weapons.Magic.Hardmode.DevilsScythe.DevilsScythe>());
         Main.tileLighted[Type] = true;
         AddMapEntry(new Color(170, 48, 114));
     }
@@ -32,7 +32,7 @@ public class DevilsScythe : ModTile
         Player player = Main.LocalPlayer;
         player.noThrow = 2;
         player.cursorItemIconEnabled = true;
-        player.cursorItemIconID = ModContent.ItemType<Items.Weapons.Magic.Hardmode.DevilsScythe>();
+        player.cursorItemIconID = ModContent.ItemType<Items.Weapons.Magic.Hardmode.DevilsScythe.DevilsScythe>();
     }
     //public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
     //{

@@ -7,6 +7,7 @@ using Avalon.Items.Potions.Buff;
 using System.Collections.Generic;
 using Terraria.WorldBuilding;
 using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
+using Avalon.Items.Weapons.Magic.Hardmode.Boomlash;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -1308,7 +1309,7 @@ internal class Hellcastle
                     }
                     if (loot == 1)
                     {
-                        Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Weapons.Magic.Hardmode.Boomlash>(), false);
+                        Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Boomlash>(), false);
                         Main.chest[num2].item[0].Prefix(-1);
                     }
                     if (loot == 2)

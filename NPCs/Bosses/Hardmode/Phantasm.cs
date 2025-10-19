@@ -22,6 +22,7 @@ using Avalon.Dusts;
 using Avalon.Particles;
 using static Avalon.Particles.ParticleSystem;
 using Terraria.DataStructures;
+using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
 
 namespace Avalon.NPCs.Bosses.Hardmode;
 
@@ -277,7 +278,7 @@ public partial class Phantasm : ModNPC
 	public override void ModifyNPCLoot(NPCLoot npcLoot)
 	{
 		LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-		notExpertRule.OnSuccess(ItemDropRule.OneFromOptions(1, [ModContent.ItemType<Items.Weapons.Magic.Hardmode.PhantomKnives>(), ModContent.ItemType<Items.Accessories.Hardmode.EtherealHeart>(), ModContent.ItemType<Items.Accessories.Hardmode.VampireTeeth>()]));
+		notExpertRule.OnSuccess(ItemDropRule.OneFromOptions(1, [ModContent.ItemType<PhantomKnives>(), ModContent.ItemType<Items.Accessories.Hardmode.EtherealHeart>(), ModContent.ItemType<Items.Accessories.Hardmode.VampireTeeth>()]));
 		notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<GhostintheMachine>(), 1, 3, 6));
 		npcLoot.Add(notExpertRule);
 		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PhantasmTrophy>(), 10));

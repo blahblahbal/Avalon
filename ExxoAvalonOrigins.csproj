@@ -14,6 +14,7 @@
 		<AdditionalFiles Remove="DrawMagics\**" />
 		<Compile Remove="DrawMagics\**" />
 		<EmbeddedResource Remove="DrawMagics\**" />
+		<Folder Include="Items\Weapons\Magic\Superhardmode\MagmafrostBolt\" />
 		<None Remove="DrawMagics\**" />
 		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />
 		<AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\**" />

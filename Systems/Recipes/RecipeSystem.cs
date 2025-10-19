@@ -24,6 +24,7 @@ using Avalon.ModSupport.Thorium.Items.Placeable.Furniture.Gem;
 using SDL2;
 using Avalon.Items.Weapons.Magic.PreHardmode.GemStaves;
 using System;
+using Avalon.Items.Weapons.Magic.PreHardmode.GemStaves;
 
 namespace Avalon.Systems.Recipes;
 public class RecipeSystem : ModSystem
