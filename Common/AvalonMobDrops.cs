@@ -17,7 +17,6 @@ using Avalon.ModSupport.Tokens;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.Hardmode;
-using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Hardmode;
@@ -34,6 +33,8 @@ using Avalon.Items.Weapons.Melee.PreHardmode.GoblinDagger;
 using Avalon.Items.Weapons.Melee.PreHardmode.SanguineKatana;
 using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Longbow;
+using Avalon.Items.Weapons.Magic.PreHardmode.ChaosTome;
+using Avalon.Items.Weapons.Magic.PreHardmode.BloodBarrage;
 
 namespace Avalon.Common;
 

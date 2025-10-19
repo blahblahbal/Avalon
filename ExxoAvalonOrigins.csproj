@@ -14,7 +14,6 @@
 		<AdditionalFiles Remove="DrawMagics\**" />
 		<Compile Remove="DrawMagics\**" />
 		<EmbeddedResource Remove="DrawMagics\**" />
-		<Folder Include="Projectiles\Melee\SolarSystem\" />
 		<None Remove="DrawMagics\**" />
 		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />
 		<AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\**" />
@@ -23,8 +22,6 @@
 		<None Remove="effects\PixelChange.fx" />
 		<None Remove="Items\Weapons\Magic\AquaImpact.png" />
 		<None Remove="Projectiles\Magic\AquaBlast.png" />
-		<None Remove="Projectiles\Melee\HallowedRapierProj.png" />
-		<None Remove="Projectiles\Melee\HallowedRapierVis.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Krafs.Publicizer" Version="2.3.0">

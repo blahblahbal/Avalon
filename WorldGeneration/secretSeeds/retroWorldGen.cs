@@ -15,7 +15,6 @@ using Avalon.Items.Material.Shards;
 using Avalon.Items.Placeable.Statue;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tools.PreHardmode;
-using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Tiles;
 using Avalon.Tiles.Ancient;
@@ -28,6 +27,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
 using Terraria.Localization;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Longbone;
+using Avalon.Items.Weapons.Magic.PreHardmode.FlowerOfTheJungle;
 
 namespace Avalon.WorldGeneration.SecretSeeds
 {

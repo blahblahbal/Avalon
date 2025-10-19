@@ -22,6 +22,7 @@ using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Food;
 using Avalon.ModSupport.Thorium.Items.Placeable.Furniture.Gem;
 using SDL2;
+using Avalon.Items.Weapons.Magic.PreHardmode.GemStaves;
 using System;
 
 namespace Avalon.Systems.Recipes;
@@ -201,9 +202,9 @@ public class RecipeSystem : ModSystem
             ItemID.SapphireStaff,
             ItemID.AmethystStaff,
             ItemID.DiamondStaff,
-            ModContent.ItemType<Items.Weapons.Magic.PreHardmode.PeridotStaff>(),
-            ModContent.ItemType<Items.Weapons.Magic.PreHardmode.TourmalineStaff>(),
-            ModContent.ItemType<Items.Weapons.Magic.PreHardmode.ZirconStaff>()
+            ModContent.ItemType<PeridotStaff>(),
+            ModContent.ItemType<TourmalineStaff>(),
+            ModContent.ItemType<ZirconStaff>()
         });
         RecipeGroup.RegisterGroup("Avalon:GemStaves", groupGemStaves);
 

@@ -3,6 +3,7 @@ using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Material;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode;
+using Avalon.Items.Weapons.Magic.PreHardmode.TomeoftheDistantPast;
 using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Items.Weapons.Ranged.PreHardmode.EggCannon;
 using Terraria.GameContent.ItemDropRules;

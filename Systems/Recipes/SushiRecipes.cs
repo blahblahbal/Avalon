@@ -9,7 +9,6 @@ using Avalon.Items.Placeable.Tile;
 using Avalon.ModSupport.Tokens;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Weapons.Magic.Hardmode;
-using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Terraria;
 using Terraria.ID;
@@ -20,6 +19,11 @@ using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Thompson;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Longbow;
+using Avalon.Items.Weapons.Magic.PreHardmode.ChaosTome;
+using Avalon.Items.Weapons.Magic.PreHardmode.FlowerOfTheJungle;
+using Avalon.Items.Weapons.Magic.PreHardmode.FrozenLyre;
+using Avalon.Items.Weapons.Magic.PreHardmode.GlacierStaff;
+using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
 
 namespace Avalon.Systems.Recipes;
 

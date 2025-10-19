@@ -10,9 +10,9 @@ using Terraria.Chat;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode;
-using Avalon.Items.Weapons.Magic.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
+using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
 
 namespace Avalon.Tiles.Contagion;
 
