@@ -5000,17 +5000,17 @@ Mods: {
 				Tooltip: Spreads the Contagion
 			}
 
-			AncientOrangeBrickWall: {
+			AncientOrangeBrickWallItem: {
 				DisplayName: Ancient Orange Brick Wall
 				Tooltip: ""
 			}
 
-			AncientPurpleBrickWall: {
+			AncientPurpleBrickWallItem: {
 				DisplayName: Ancient Purple Brick Wall
 				Tooltip: ""
 			}
 
-			AncientYellowBrickWall: {
+			AncientYellowBrickWallItem: {
 				DisplayName: Ancient Yellow Brick Wall
 				Tooltip: ""
 			}
@@ -9410,12 +9410,12 @@ Mods: {
 				Tooltip: ""
 			}
 
-			AncientAdamantiteBrickWall: {
+			AncientAdamantiteBrickWallItem: {
 				DisplayName: Ancient Adamantite Brick Wall
 				Tooltip: ""
 			}
 
-			AncientIronBrickWall: {
+			AncientIronBrickWallItem: {
 				DisplayName: Ancient Iron Brick Wall
 				Tooltip: ""
 			}
@@ -9663,42 +9663,42 @@ Mods: {
 				Tooltip: Unfortunately, the chest is not real
 			}
 
-			UnsafeAncientBlueBrickWall: {
+			UnsafeAncientBlueBrickWallItem: {
 				DisplayName: Unsafe Ancient Blue Brick Wall
 				Tooltip: ""
 			}
 
-			UnsafeAncientGreenBrickWall: {
+			UnsafeAncientGreenBrickWallItem: {
 				DisplayName: Unsafe Ancient Green Brick Wall
 				Tooltip: ""
 			}
 
-			UnsafeAncientPinkBrickWall: {
+			UnsafeAncientPinkBrickWallItem: {
 				DisplayName: Unsafe Ancient Pink Brick Wall
 				Tooltip: ""
 			}
 
-			UnsafeAncientHellstoneBrickWall: {
+			UnsafeAncientHellstoneBrickWallItem: {
 				DisplayName: Unsafe Ancient Hellstone Brick Wall
 				Tooltip: ""
 			}
 
-			UnsafeAncientObsidianBrickWall: {
+			UnsafeAncientObsidianBrickWallItem: {
 				DisplayName: Unsafe Ancient Obsidian Brick Wall
 				Tooltip: ""
 			}
 
-			UnsafeAncientOrangeBrickWall: {
+			UnsafeAncientOrangeBrickWallItem: {
 				DisplayName: Unsafe Ancient Orange Brick Wall
 				Tooltip: ""
 			}
 
-			UnsafeAncientPurpleBrickWall: {
+			UnsafeAncientPurpleBrickWallItem: {
 				DisplayName: Unsafe Ancient Purple Brick Wall
 				Tooltip: ""
 			}
 
-			UnsafeAncientYellowBrickWall: {
+			UnsafeAncientYellowBrickWallItem: {
 				DisplayName: Unsafe Ancient Yellow Brick Wall
 				Tooltip: ""
 			}

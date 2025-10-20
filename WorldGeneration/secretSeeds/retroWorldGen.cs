@@ -28,6 +28,10 @@ using Terraria.GameContent.Generation;
 using Terraria.Localization;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Longbone;
 using Avalon.Items.Weapons.Magic.PreHardmode.FlowerOfTheJungle;
+using Avalon.Tiles.Ancient.AncientOrangeBrick;
+using Avalon.Tiles.Ancient.AncientPurpleBrick;
+using Avalon.Tiles.Ancient.AncientYellowBrick;
+using Avalon.Tiles.Ancient.Vanilla;
 
 namespace Avalon.WorldGeneration.SecretSeeds
 {
@@ -2534,7 +2538,7 @@ namespace Avalon.WorldGeneration.SecretSeeds
 					int num300 = WorldGen.genRand.Next(Main.maxTilesY - 250, Main.maxTilesY - 5);
 					try
 					{
-						if (Main.tile[num299, num300].WallType != ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>() && Main.tile[num299, num300].WallType != ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>())
+						if (Main.tile[num299, num300].WallType != ModContent.WallType<UnsafeAncientObsidianBrickWall>() && Main.tile[num299, num300].WallType != ModContent.WallType<UnsafeAncientHellstoneBrickWall>())
 						{
 							continue;
 						}
@@ -3257,14 +3261,14 @@ namespace Avalon.WorldGeneration.SecretSeeds
 				if (Main.tile[i, num2 + 1].HasTile)
 				{
 					ushort b = (WorldGen.genRand.NextBool() ? TileID.AncientObsidianBrick : TileID.AncientHellstoneBrick);
-					ushort wall = (ushort)ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>();
+					ushort wall = (ushort)ModContent.WallType<UnsafeAncientHellstoneBrickWall>();
 					if (WorldGen.genRand.Next(5) > 0)
 					{
 						b = TileID.AncientObsidianBrick;
 					}
 					if (b == TileID.AncientObsidianBrick)
 					{
-						wall = (ushort)ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>();
+						wall = (ushort)ModContent.WallType<UnsafeAncientObsidianBrickWall>();
 					}
 					HellHouse(i, num2, b, wall);
 					i += WorldGen.genRand.Next(15, 80);
@@ -3324,7 +3328,7 @@ namespace Avalon.WorldGeneration.SecretSeeds
 		{
 			if (wall == 1)
 			{
-				wall = (ushort)ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>();
+				wall = (ushort)ModContent.WallType<UnsafeAncientObsidianBrickWall>();
 			}
 			int num = WorldGen.genRand.Next(8, 20);
 			int num2 = WorldGen.genRand.Next(1, 3);
@@ -3345,7 +3349,7 @@ namespace Avalon.WorldGeneration.SecretSeeds
 			}
 			for (int m = i - num / 2; m <= i + num / 2; m++)
 			{
-				for (num4 = j; num4 < Main.maxTilesY && ((Main.tile[m, num4].HasTile && (Main.tile[m, num4].TileType == TileID.AncientObsidianBrick || Main.tile[m, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>()); num4++)
+				for (num4 = j; num4 < Main.maxTilesY && ((Main.tile[m, num4].HasTile && (Main.tile[m, num4].TileType == TileID.AncientObsidianBrick || Main.tile[m, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<UnsafeAncientHellstoneBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<UnsafeAncientObsidianBrickWall>()); num4++)
 				{
 				}
 				int num7 = 6 + WorldGen.genRand.Next(3);
@@ -3364,12 +3368,12 @@ namespace Avalon.WorldGeneration.SecretSeeds
 			}
 			int num8 = 0;
 			int num9 = 0;
-			for (num4 = j; num4 < Main.maxTilesY && ((Main.tile[i, num4].HasTile && (Main.tile[i, num4].TileType == TileID.AncientObsidianBrick || Main.tile[i, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>()); num4++)
+			for (num4 = j; num4 < Main.maxTilesY && ((Main.tile[i, num4].HasTile && (Main.tile[i, num4].TileType == TileID.AncientObsidianBrick || Main.tile[i, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<UnsafeAncientHellstoneBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<UnsafeAncientObsidianBrickWall>()); num4++)
 			{
 			}
 			num4--;
 			num9 = num4;
-			while ((Main.tile[i, num4].HasTile && (Main.tile[i, num4].TileType == TileID.AncientObsidianBrick || Main.tile[i, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<Walls.UnsafeAncientHellstoneBrickWall>())
+			while ((Main.tile[i, num4].HasTile && (Main.tile[i, num4].TileType == TileID.AncientObsidianBrick || Main.tile[i, num4].TileType == TileID.AncientHellstoneBrick)) || Main.tile[i, num4].WallType == ModContent.WallType<UnsafeAncientObsidianBrickWall>() || Main.tile[i, num4].WallType == ModContent.WallType<UnsafeAncientHellstoneBrickWall>())
 			{
 				num4--;
 				if (!Main.tile[i, num4].HasTile || (Main.tile[i, num4].TileType != TileID.AncientObsidianBrick && Main.tile[i, num4].TileType != TileID.AncientHellstoneBrick))
@@ -3449,7 +3453,7 @@ namespace Avalon.WorldGeneration.SecretSeeds
 		{
 			if (wall == 1)
 			{
-				wall = (ushort)ModContent.WallType<Walls.UnsafeAncientObsidianBrickWall>();
+				wall = (ushort)ModContent.WallType<UnsafeAncientObsidianBrickWall>();
 			}
 			if (j > Main.maxTilesY - 40)
 			{
@@ -3504,35 +3508,35 @@ namespace Avalon.WorldGeneration.SecretSeeds
 					tileType = 679;
 					break;
 				case 3:
-					tileType = (ushort)ModContent.TileType<AncientOrangeBrick>();
+					tileType = (ushort)ModContent.TileType<AncientOrangeBrickTile>();
 					break;
 				case 4:
-					tileType = (ushort)ModContent.TileType<AncientPurpleBrick>();
+					tileType = (ushort)ModContent.TileType<AncientPurpleBrickTile>();
 					break;
 				case 5:
-					tileType = (ushort)ModContent.TileType<AncientYellowBrick>();
+					tileType = (ushort)ModContent.TileType<AncientYellowBrickTile>();
 					break;
 			}
 			if (wallType == 1)
 			{
-				wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientBlueBrickWall>();
+				wallType = (ushort)ModContent.WallType<UnsafeAncientBlueBrickWall>();
 			}
 			switch (num2)
 			{
 				case 1:
-					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientGreenBrickWall>();
+					wallType = (ushort)ModContent.WallType<UnsafeAncientGreenBrickWall>();
 					break;
 				case 2:
-					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientPinkBrickWall>();
+					wallType = (ushort)ModContent.WallType<UnsafeAncientPinkBrickWall>();
 					break;
 				case 3:
-					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientOrangeBrickWall>();
+					wallType = (ushort)ModContent.WallType<UnsafeAncientOrangeBrickWall>();
 					break;
 				case 4:
-					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientPurpleBrickWall>();
+					wallType = (ushort)ModContent.WallType<UnsafeAncientPurpleBrickWall>();
 					break;
 				case 5:
-					wallType = (ushort)ModContent.WallType<Walls.UnsafeAncientYellowBrickWall>();
+					wallType = (ushort)ModContent.WallType<UnsafeAncientYellowBrickWall>();
 					break;
 			}
 			GenVars.numDDoors = 0;
