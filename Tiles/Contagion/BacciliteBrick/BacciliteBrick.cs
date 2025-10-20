@@ -28,6 +28,7 @@ public class BacciliteBrick : ModItem
 			.Register();
 	}
 }
+[LegacyName("BacciliteBrick")]
 public class BacciliteBrickTile : ModTile
 {
 	public override void SetStaticDefaults()
