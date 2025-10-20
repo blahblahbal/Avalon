@@ -1,5 +1,6 @@
 using Avalon.Common;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.Snotsand;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Furniture.Coughwood;
 using Avalon.Tiles.Savanna;

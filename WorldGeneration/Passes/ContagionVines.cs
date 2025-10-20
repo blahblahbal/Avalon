@@ -2,6 +2,7 @@ using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Terraria;
+using Avalon.Tiles.Contagion.ContagionGrasses;
 
 namespace Avalon.WorldGeneration.Passes;
 
@@ -22,14 +23,14 @@ internal class ContagionVines : GenPass
                 {
                     Tile t = Main.tile[num586, num589];
                     t.HasTile = true;
-                    t.TileType = (ushort)ModContent.TileType<Tiles.Contagion.ContagionVines>();
+                    t.TileType = (ushort)ModContent.TileType<Tiles.Contagion.SmallPlants.ContagionVines>();
                     num587--;
                 }
                 else
                 {
                     num587 = 0;
                 }
-                if (Main.tile[num586, num589].HasTile && Main.tile[num586, num589].TileType == (ushort)ModContent.TileType<Tiles.Contagion.Ickgrass>() && !Main.tile[num586, num589].BottomSlope && WorldGen.genRand.Next(5) < 3)
+                if (Main.tile[num586, num589].HasTile && Main.tile[num586, num589].TileType == (ushort)ModContent.TileType<Ickgrass>() && !Main.tile[num586, num589].BottomSlope && WorldGen.genRand.Next(5) < 3)
                 {
                     num587 = WorldGen.genRand.Next(1, 10);
                 }

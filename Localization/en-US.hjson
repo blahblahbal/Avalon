@@ -5060,7 +5060,7 @@ Mods: {
 				Tooltip: ""
 			}
 
-			BacciliteBrickWall: {
+			BacciliteBrickWallItem: {
 				DisplayName: Baccilite Brick Wall
 				Tooltip: ""
 			}
@@ -5710,7 +5710,7 @@ Mods: {
 				Tooltip: "'Doesn't harm critters... Probably.'"
 			}
 
-			ChunkstoneWall: {
+			ChunkstoneWallItem: {
 				DisplayName: Chunkstone Wall
 				Tooltip: ""
 			}
@@ -5805,12 +5805,12 @@ Mods: {
 				Tooltip: ""
 			}
 
-			HardenedSnotsandWall: {
+			HardenedSnotsandWallItem: {
 				DisplayName: Hardened Snotsand Wall
 				Tooltip: ""
 			}
 
-			SnotsandstoneWall: {
+			SnotsandstoneWallItem: {
 				DisplayName: Snotsandstone Wall
 				Tooltip: ""
 			}
@@ -10064,6 +10064,16 @@ Mods: {
 				DisplayName: Hallowed Claymore
 				Tooltip: ""
 			}
+
+			ChunkstoneBrickWallItem: {
+				DisplayName: Chunkstone Brick Wall Item
+				Tooltip: ""
+			}
+
+			CoughwoodWallItem: {
+				DisplayName: Coughwood Wall Item
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -11959,6 +11969,11 @@ Mods: {
 			AcidDropletTile.MapEntry: Dripping Acid
 			BloodDropletTile.MapEntry: Dripping Blood
 			AlkalineJellyfishJarTile.MapEntry: Alkaline Jellyfish Jar
+
+			ContagionChestTile: {
+				MapEntry0: Mods.Avalon.Tiles.ContagionChestTile.MapEntry0
+				MapEntry1: Mods.Avalon.Tiles.ContagionChestTile.MapEntry1
+			}
 		}
 
 		Prefixes: {

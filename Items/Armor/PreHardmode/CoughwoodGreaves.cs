@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Tiles.Contagion.Coughwood;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,7 +17,7 @@ public class CoughwoodGreaves : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(1)
-			.AddIngredient(ModContent.ItemType<Placeable.Tile.Coughwood>(), 25)
+			.AddIngredient(ModContent.ItemType<Coughwood>(), 25)
 			.AddTile(TileID.WorkBenches)
 			.Register();
 	}

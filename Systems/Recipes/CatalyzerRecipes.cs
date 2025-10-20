@@ -1,11 +1,13 @@
+using Avalon.Common;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Placeable.Tile;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.Coughwood;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Avalon.Common;
 
 namespace Avalon.Systems.Recipes;
 

@@ -1,5 +1,6 @@
 using Avalon.Data.Sets;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion.SmallPlants;
 using Avalon.Walls;
 using Terraria;
 using Terraria.ID;
@@ -17,7 +18,7 @@ namespace Avalon.WorldGeneration.Passes
 
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
-            int grass = ModContent.TileType<Tiles.Contagion.ContagionShortGrass>();
+            int grass = ModContent.TileType<ContagionShortGrass>();
             for (int num244 = 0; num244 < Main.maxTilesX; num244++)
             {
                 progress.Set((double)num244 / Main.maxTilesX);

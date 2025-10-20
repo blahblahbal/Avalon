@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Avalon.Tiles.Contagion.SnotOrb;
 using Avalon.Tiles.CrystalMines;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
@@ -337,7 +338,7 @@ internal class CrystalMines
                 //}
                 if (tile.TileType == TileID.Containers || tile.TileType == TileID.Containers2 ||
                     tile.TileType == TileID.ShadowOrbs || tile.TileType == TileID.DemonAltar ||
-                    tile.TileType == ModContent.TileType<Tiles.Contagion.SnotOrb>() || tile.TileType == TileID.LihzahrdBrick || tile.TileType == TileID.BlueDungeonBrick ||
+                    tile.TileType == ModContent.TileType<SnotOrb>() || tile.TileType == TileID.LihzahrdBrick || tile.TileType == TileID.BlueDungeonBrick ||
                     tile.TileType == TileID.PinkDungeonBrick || tile.TileType == TileID.GreenDungeonBrick || //tile.TileType == ModContent.TileType<Tiles.TuhrtlBrick>() ||
                     tile.TileType == TileID.Statues || tile.TileType == ModContent.TileType<Tiles.PurpleBrick>() || tile.TileType == ModContent.TileType<Tiles.OrangeBrick>() ||
                     tile.TileType == ModContent.TileType<Tiles.CrackedOrangeBrick>() || tile.TileType == ModContent.TileType<Tiles.CrackedPurpleBrick>() ||

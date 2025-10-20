@@ -19,7 +19,7 @@ public class CoughwoodPlatform : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe(2).AddIngredient(ModContent.ItemType<Tile.Coughwood>()).Register();
-		Recipe.Create(ModContent.ItemType<Tile.Coughwood>()).AddIngredient(this, 2).Register();
+		CreateRecipe(2).AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>()).Register();
+		Recipe.Create(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>()).AddIngredient(this, 2).Register();
 	}
 }

@@ -12,6 +12,7 @@ using Mono.Cecil.Cil;
 using Terraria;
 using System.Reflection;
 using Avalon.Tiles.Savanna;
+using Avalon.Tiles.Contagion.ContagionGrasses;
 
 namespace Avalon.Hooks;
 
@@ -77,8 +78,8 @@ internal class Tropics : ModHook
     private void IL_Liquid_DelWater(ILContext il)
     {
         //Utilities.AddAlternativeIdChecks(il, TileID.JungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Tropics.TropicalGrass>())[id]);
-        Utilities.AddAlternativeIdChecks(il, TileID.CorruptJungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Contagion.ContagionJungleGrass>())[id]);
-        Utilities.AddAlternativeIdChecks(il, TileID.Grass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Tiles.Contagion.Ickgrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.CorruptJungleGrass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<ContagionJungleGrass>())[id]);
+        Utilities.AddAlternativeIdChecks(il, TileID.Grass, id => TileID.Sets.Factory.CreateBoolSet((ushort)ModContent.TileType<Ickgrass>())[id]);
     }
 
     private void IL_WorldGen_GenerateWorld(ILContext il)

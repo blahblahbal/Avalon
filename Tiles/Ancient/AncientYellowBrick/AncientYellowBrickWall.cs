@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Ancient.AncientYellowBrick;
 
+[LegacyName("AncientYellowBrickWall")]
 public class AncientYellowBrickWallItem : ModItem
 {
 	public override void SetStaticDefaults()

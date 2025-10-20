@@ -1,4 +1,6 @@
 using Avalon.Items.Placeable.Tile;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.HardenedSnotsand;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

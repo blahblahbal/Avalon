@@ -6,6 +6,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Bestiary;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
+using Avalon.Tiles.Contagion.Snotsand;
 
 namespace Avalon.NPCs.Hardmode;
 
@@ -65,7 +66,7 @@ public class SicklyVulture : ModNPC
         {
             if (Main.hardMode)
             {
-                if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 1].TileType == ModContent.TileType<Tiles.Contagion.Snotsand>())
+                if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 1].TileType == ModContent.TileType<Snotsand>())
                 {
                     return 1f;
                 }

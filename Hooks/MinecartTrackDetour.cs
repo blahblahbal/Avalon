@@ -7,6 +7,7 @@ using Terraria.WorldBuilding;
 using System;
 using System.Reflection;
 using System.Linq;
+using Avalon.Tiles.Contagion.IckyAltar;
 
 namespace Avalon.Hooks
 {
@@ -26,7 +27,7 @@ namespace Avalon.Hooks
             ModContent.TileType<Tiles.CrackedOrangeBrick>(), ModContent.TileType<Tiles.CrackedPurpleBrick>(), ModContent.TileType<Tiles.CrackedYellowBrick>(),
             ModContent.TileType<Tiles.BlastedStone>(), TileID.IceBrick, ModContent.TileType<Tiles.ImperviousBrick>(), TileID.LavaMossBlock, TileID.Containers, TileID.Containers2,
             ModContent.TileType<Tiles.Furniture.Coughwood.CoughwoodChest>(), ModContent.TileType<Tiles.Furniture.BleachedEbony.BleachedEbonyChest>(),
-            ModContent.TileType<Tiles.Furniture.HellfireChest>(), ModContent.TileType<Tiles.Contagion.IckyAltar>(), ModContent.TileType<Tiles.GemTrees.TourmalineTree>(),
+            ModContent.TileType<Tiles.Furniture.HellfireChest>(), ModContent.TileType<IckyAltar>(), ModContent.TileType<Tiles.GemTrees.TourmalineTree>(),
             ModContent.TileType<Tiles.GemTrees.PeridotTree>(), ModContent.TileType<Tiles.GemTrees.ZirconTree>(), ModContent.TileType<Tiles.Statues>(),
             ModContent.TileType<Tiles.Savanna.PlatformLeaf>(), ModContent.TileType<Tiles.GemStashes>(), ModContent.TileType<Tiles.ChunkstoneColumn>(),
             ModContent.TileType<Tiles.CrimstoneColumn>(), ModContent.TileType<Tiles.EbonstoneColumn>(), ModContent.TileType<Tiles.Savanna.TuhrtlBrick>(),

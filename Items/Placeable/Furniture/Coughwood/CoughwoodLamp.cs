@@ -18,7 +18,7 @@ public class CoughwoodLamp : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ItemID.Torch)
-			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 3)
+			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 3)
 			.AddTile(TileID.WorkBenches).Register();
 	}
 }

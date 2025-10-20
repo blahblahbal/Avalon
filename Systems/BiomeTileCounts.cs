@@ -1,5 +1,10 @@
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion.HardenedSnotsand;
+using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion.Snotsandstone;
+using Avalon.Tiles.Contagion.YellowIce;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;

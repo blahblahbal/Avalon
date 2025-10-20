@@ -18,7 +18,7 @@ public class CoughwoodPiano : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ItemID.Bone, 4)
-			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 15)
+			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 15)
 			.AddIngredient(ItemID.Book)
 			.AddTile(TileID.Sawmill).Register();
 	}

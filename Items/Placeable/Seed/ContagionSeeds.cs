@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Tiles.Contagion.ContagionGrasses;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -48,14 +49,14 @@ public class ContagionSeeds : ModItem
 		{
 			if (tile.TileType == TileID.Dirt)
 			{
-				Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Tiles.Contagion.Ickgrass>();
+				Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Ickgrass>();
 				WorldGen.SquareTileFrame(Player.tileTargetX, Player.tileTargetY, true);
 				SoundEngine.PlaySound(SoundID.Dig, player.Center);
 				return true;
 			}
 			else if (tile.TileType == TileID.Mud)
 			{
-				Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Tiles.Contagion.ContagionJungleGrass>();
+				Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<ContagionJungleGrass>();
 				WorldGen.SquareTileFrame(Player.tileTargetX, Player.tileTargetY, true);
 				SoundEngine.PlaySound(SoundID.Dig, player.Center);
 				return true;

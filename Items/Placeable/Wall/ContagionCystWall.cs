@@ -1,3 +1,4 @@
+using Avalon.Tiles.Contagion.Chunkstone;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,7 +19,7 @@ public class ContagionCystWall : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.ChunkstoneBlock>()).AddCondition(Condition.InGraveyard).AddTile(TileID.WorkBenches).Register();
-		Recipe.Create(ModContent.ItemType<Tile.ChunkstoneBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
+		CreateRecipe(4).AddIngredient(ModContent.ItemType<ChunkstoneBlock>()).AddCondition(Condition.InGraveyard).AddTile(TileID.WorkBenches).Register();
+		Recipe.Create(ModContent.ItemType<ChunkstoneBlock>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
 	}
 }

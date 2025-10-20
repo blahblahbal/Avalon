@@ -4,7 +4,8 @@ using Avalon.Items.Material;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
 using Avalon.NPCs.Hardmode;
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.ContagionChest;
+using Avalon.Tiles.Contagion.SmallPlants;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
 using Avalon.Tiles.Furniture.YellowDungeon;
@@ -30,7 +31,7 @@ public class AvalonGlobalTile : GlobalTile
 		int type = 0;
 		Tile tileSafely = Framing.GetTileSafely(X, Y);
 		if (!(tileSafely.TileType == ModContent.TileType<OrangeDungeonChest>() || tileSafely.TileType == ModContent.TileType<PurpleDungeonChest>() ||
-			tileSafely.TileType == ModContent.TileType<YellowDungeonChest>() || tileSafely.TileType == ModContent.TileType<ContagionChest>())) return false;
+			tileSafely.TileType == ModContent.TileType<YellowDungeonChest>() || tileSafely.TileType == ModContent.TileType<ContagionChestTile>())) return false;
 		int type2 = tileSafely.TileType;
 		int num2 = tileSafely.TileFrameX / 36;
 
@@ -435,7 +436,7 @@ public class AvalonGlobalTile : GlobalTile
 
         // four leaf clover drops
         if (type is TileID.CorruptPlants or TileID.JunglePlants or TileID.JunglePlants2 or TileID.CrimsonPlants or TileID.Plants or TileID.Plants2 ||
-            type == ModContent.TileType<Tiles.Contagion.ContagionShortGrass>())
+            type == ModContent.TileType<ContagionShortGrass>())
         {
             bool doRealCloverDrop = false;
             bool doFakeCloverDrop = false;

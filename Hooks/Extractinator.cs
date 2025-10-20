@@ -3,6 +3,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.Snotsandstone;
+using Avalon.Projectiles;
+using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion.HardenedSnotsand;
 
 namespace Avalon.Hooks
 {
@@ -36,11 +41,11 @@ namespace Avalon.Hooks
             itemTrader.AddOption_CyclicLoop(ItemID.MythrilBar, ItemID.OrichalcumBar, ModContent.ItemType<Items.Material.Bars.NaquadahBar>());
             itemTrader.AddOption_CyclicLoop(ItemID.AdamantiteBar, ItemID.TitaniumBar, ModContent.ItemType<Items.Material.Bars.TroxiniumBar>());
             itemTrader.AddOption_CyclicLoop(ItemID.ShadowScale, ItemID.TissueSample, ModContent.ItemType<Items.Material.Booger>());
-            itemTrader.AddOption_FromAny(ItemID.StoneBlock, ItemID.EbonstoneBlock, ItemID.CrimstoneBlock, ModContent.ItemType<Items.Placeable.Tile.ChunkstoneBlock>());
-            itemTrader.AddOption_FromAny(ItemID.SandBlock, ItemID.EbonsandBlock, ItemID.CrimsandBlock, ItemID.PearlsandBlock, ModContent.ItemType<Items.Placeable.Tile.SnotsandBlock>());
+            itemTrader.AddOption_FromAny(ItemID.StoneBlock, ItemID.EbonstoneBlock, ItemID.CrimstoneBlock, ModContent.ItemType<ChunkstoneBlock>());
+            itemTrader.AddOption_FromAny(ItemID.SandBlock, ItemID.EbonsandBlock, ItemID.CrimsandBlock, ItemID.PearlsandBlock, ModContent.ItemType<SnotsandBlock>());
             itemTrader.AddOption_FromAny(ItemID.IceBlock, ItemID.PurpleIceBlock, ItemID.RedIceBlock, ItemID.PinkIceBlock, ModContent.ItemType<Items.Placeable.Tile.YellowIceBlock>());
-            itemTrader.AddOption_FromAny(ItemID.Sandstone, ItemID.CorruptSandstone, ItemID.CrimsonSandstone, ItemID.HallowSandstone, ModContent.ItemType<Items.Placeable.Tile.SnotsandstoneBlock>());
-            itemTrader.AddOption_FromAny(ItemID.HardenedSand, ItemID.CorruptHardenedSand, ItemID.CrimsonHardenedSand, ItemID.HallowHardenedSand, ModContent.ItemType<Items.Placeable.Tile.HardenedSnotsandBlock>());
+            itemTrader.AddOption_FromAny(ItemID.Sandstone, ItemID.CorruptSandstone, ItemID.CrimsonSandstone, ItemID.HallowSandstone, ModContent.ItemType<SnotsandstoneBlock>());
+            itemTrader.AddOption_FromAny(ItemID.HardenedSand, ItemID.CorruptHardenedSand, ItemID.CrimsonHardenedSand, ItemID.HallowHardenedSand, ModContent.ItemType<HardenedSnotsandBlock>());
             return itemTrader;
         }
     }

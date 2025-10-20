@@ -19,7 +19,7 @@ public class CoughwoodClock : ModItem
 		CreateRecipe()
 			.AddRecipeGroup("IronBar", 3)
 			.AddIngredient(ItemID.Glass, 6)
-			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 10)
+			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 10)
 			.AddTile(TileID.Sawmill).Register();
 	}
 }

@@ -2,6 +2,7 @@ using Avalon.Common;
 using Avalon.Items.Weapons.Melee.Hardmode.VirulentScythe;
 using Avalon.ModSupport;
 using Avalon.ModSupport.MLL.Liquids;
+using Avalon.Tiles.Contagion.ContagionChest;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
 using Avalon.Tiles.Furniture.YellowDungeon;
@@ -290,7 +291,7 @@ public class DungeonContagionChest : ModHook
         {
             contain = ModContent.ItemType<VirulentScythe>();
             Style = 1;
-            chestTileType = (ushort)ModContent.TileType<Tiles.Contagion.ContagionChest>();
+            chestTileType = (ushort)ModContent.TileType<ContagionChestTile>();
         }
         return orig(i, j, contain, notNearOtherChests, Style, trySlope, chestTileType);
     }

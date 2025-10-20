@@ -1,5 +1,5 @@
 using Avalon.Items.Placeable.Tile;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.Snotsand;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -33,7 +33,7 @@ public abstract class SnotsandBall : ModProjectile
             }
             if (!Main.tileSolid[t.TileType] || TileID.Sets.IsATreeTrunk[t.TileType])
             {
-                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(p.X, p.Y), p.X * 16, p.Y * 16, 16, 16, ModContent.ItemType<Items.Placeable.Tile.SnotsandBlock>());
+                Item.NewItem(WorldGen.GetItemSource_FromTileBreak(p.X, p.Y), p.X * 16, p.Y * 16, 16, 16, ModContent.ItemType<SnotsandBlock>());
                 SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
             }
             if (!t.HasTile && t.TileType != TileID.MinecartTrack)
@@ -44,7 +44,7 @@ public abstract class SnotsandBall : ModProjectile
                     tBelow.Slope = SlopeType.Solid;
                 }
                 if (tBelow.IsHalfBlock) tBelow.IsHalfBlock = false;
-                WorldGen.PlaceTile(p.X, p.Y, ModContent.TileType<Tiles.Contagion.Snotsand>(), forced: true);
+                WorldGen.PlaceTile(p.X, p.Y, ModContent.TileType<Snotsand>(), forced: true);
                 WorldGen.SquareTileFrame(p.X, p.Y);
             }
         }

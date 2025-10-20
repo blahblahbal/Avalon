@@ -1,12 +1,13 @@
-using Avalon.Items.Material.Ores;
+using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Accessories.Vanity;
+using Avalon.Items.Fish;
 using Avalon.Items.Material.Bars;
+using Avalon.Items.Material.Ores;
+using Avalon.Tiles;
+using Avalon.Tiles.Contagion.ChunkstoneBrick;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Avalon.Items.Accessories.Vanity;
-using Avalon.Items.Accessories.PreHardmode;
-using Avalon.Items.Fish;
-using Avalon.Tiles;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -189,7 +190,7 @@ class EvilShrine
                                 break;
                             case 2:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<ChunkstoneBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<ChunkstoneBrickTile>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
                                 break;
@@ -400,7 +401,7 @@ class EvilShrine
                                 break;
                             case 9:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.ChunkstoneBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<ChunkstoneBrickTile>();
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = false;
                                 break;

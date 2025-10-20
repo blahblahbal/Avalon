@@ -1,3 +1,4 @@
+using Avalon.Tiles.Contagion.Chunkstone;
 using Terraria.ID;
 using Terraria.ModLoader;
 

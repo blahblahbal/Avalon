@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Ancient.Vanilla;
+[LegacyName("UnsafeAncientBlueBrickWall")]
 public class UnsafeAncientBlueBrickWallItem : ModItem
 {
 	public override string Texture => $"Terraria/Images/Item_{ItemID.AncientBlueDungeonBrickWall}";

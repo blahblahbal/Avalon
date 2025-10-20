@@ -1,11 +1,12 @@
 using Avalon.Items.Material.Herbs;
-using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Avalon.Common.Templates;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionGrasses;
 
 namespace Avalon.Tiles.Herbs;
 

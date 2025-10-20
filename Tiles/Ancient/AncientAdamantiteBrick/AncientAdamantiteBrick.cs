@@ -16,6 +16,8 @@ public class AncientAdamantiteBrick : ModItem
 		Item.DefaultToPlaceableTile(ModContent.TileType<AncientAdamantiteBrickTile>());
 	}
 }
+
+[LegacyName("AncientAdamantiteBrick")]
 public class AncientAdamantiteBrickTile : ModTile
 {
     public override void SetStaticDefaults()

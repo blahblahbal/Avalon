@@ -117,6 +117,10 @@ using Avalon.Items.Weapons.Summon.Hardmode.Gastropod;
 using Avalon.Items.Weapons.Summon.Hardmode.Hungry;
 using Avalon.Items.Weapons.Summon.Hardmode.PrimeArms;
 using Avalon.ModSupport.MLL.Items;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionChest;
+using Avalon.Tiles.Contagion.Coughwood;
+using Avalon.Tiles.Contagion.Snotsand;
 using System.Collections.Generic;
 using Terraria.ID;
 using static Terraria.ModLoader.ModContent;
@@ -1083,7 +1087,7 @@ namespace Avalon.Data.Sets
 			{ 3405, ItemType<Barfbush>() },
 			{ 3406, ItemType<BandofSlime>() },
 			{ 3407, ItemType<CoughwoodBow>() },
-			{ 3408, ItemType<CoughwoodWall>() },
+			{ 3408, ItemType<CoughwoodWallItem>() },
 			{ 3409, ItemType<CoughwoodChest>() },
 			{ 3410, ItemType<CoughwoodHammer>() },
 			{ 3411, ItemType<NobleSlimeBand>() },

@@ -8,7 +8,7 @@ using Avalon.Items.Weapons.Melee.PreHardmode.Sporalash;
 using Avalon.Items.Weapons.Melee.PreHardmode.TheCell;
 using Avalon.Items.Weapons.Melee.PreHardmode.UrchinMace;
 using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClub;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.BigPlants;
 using Avalon.Tiles.GemTrees;
 using Microsoft.Xna.Framework;
 using System;

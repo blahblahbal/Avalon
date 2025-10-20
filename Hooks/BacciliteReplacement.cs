@@ -5,6 +5,10 @@ using Avalon.Tiles.Ores;
 using Terraria.ID;
 using MonoMod.Cil;
 using Avalon.ModSupport;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion.ContagionPot;
+using Avalon.Tiles.Contagion.Snotsand;
 
 namespace Avalon.Hooks
 {
@@ -21,12 +25,12 @@ namespace Avalon.Hooks
 
         private bool On_WorldGen_PlacePot(On_WorldGen.orig_PlacePot orig, int x, int y, ushort type, int style)
         {
-            if (Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Contagion.Chunkstone>() ||
-                Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Contagion.Snotsand>() ||
-                Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Contagion.Ickgrass>())
+            if (Main.tile[x, y + 1].TileType == ModContent.TileType<Chunkstone>() ||
+                Main.tile[x, y + 1].TileType == ModContent.TileType<Snotsand>() ||
+                Main.tile[x, y + 1].TileType == ModContent.TileType<Ickgrass>())
             {
                 style = 0;
-                type = (ushort)ModContent.TileType<Tiles.Contagion.ContagionPot>();
+                type = (ushort)ModContent.TileType<ContagionPot>();
             }
             if (Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Savanna.SavannaGrass>() ||
                 Main.tile[x, y + 1].TileType == ModContent.TileType<Tiles.Savanna.Loam>())

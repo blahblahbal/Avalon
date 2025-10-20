@@ -25,6 +25,7 @@ public class AncientPurpleBrick : ModItem
 			.Register();
 	}
 }
+[LegacyName("AncientPurpleBrick")]
 public class AncientPurpleBrickTile : ModTile
 {
     public override void SetStaticDefaults()

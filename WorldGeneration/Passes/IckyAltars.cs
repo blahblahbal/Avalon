@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using ReLogic.Utilities;
+using Avalon.Tiles.Contagion.IckyAltar;
 
 namespace Avalon.WorldGeneration.Passes
 {
@@ -55,11 +56,11 @@ namespace Avalon.WorldGeneration.Passes
                     //{
                     //    style2 = ((!GenVars.crimsonLeft) ? ((num644 >= Main.maxTilesX / 2) ? 1 : 0) : ((num644 < Main.maxTilesX / 2) ? 1 : 0));
                     //}
-                    if (!WorldGen.IsTileNearby(num644, num645, ModContent.TileType<Tiles.Contagion.IckyAltar>(), 3))
+                    if (!WorldGen.IsTileNearby(num644, num645, ModContent.TileType<IckyAltar>(), 3))
                     {
-                        WorldGen.Place3x2(num644, num645, (ushort)ModContent.TileType<Tiles.Contagion.IckyAltar>(), style2);
+                        WorldGen.Place3x2(num644, num645, (ushort)ModContent.TileType<IckyAltar>(), style2);
                     }
-                    if (Main.tile[num644, num645].TileType == ModContent.TileType<Tiles.Contagion.IckyAltar>())
+                    if (Main.tile[num644, num645].TileType == ModContent.TileType<IckyAltar>())
                     {
                         break;
                     }

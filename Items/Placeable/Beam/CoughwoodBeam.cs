@@ -1,3 +1,4 @@
+using Avalon.Tiles.Contagion.Coughwood;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,7 +17,7 @@ public class CoughwoodBeam : ModItem
 	public override void AddRecipes()
 	{
 		Terraria.Recipe.Create(Type, 2)
-			.AddIngredient(ModContent.ItemType<Tile.Coughwood>())
+			.AddIngredient(ModContent.ItemType<Coughwood>())
 			.AddTile(TileID.Sawmill).Register();
 	}
 }

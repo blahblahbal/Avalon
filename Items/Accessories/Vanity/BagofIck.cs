@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Tiles.Contagion.Chunkstone;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Graphics.Shaders;
@@ -34,7 +35,7 @@ public class BagofIck : ModItem
 		Recipe.Create(Type)
 			.AddIngredient(ModContent.ItemType<Material.YuckyBit>(), 15)
 			//.AddIngredient(ModContent.ItemType<Material.Pathogen>(), 10)
-			.AddIngredient(ModContent.ItemType<Placeable.Tile.ChunkstoneBlock>(), 50)
+			.AddIngredient(ModContent.ItemType<ChunkstoneBlock>(), 50)
 			.AddIngredient(ModContent.ItemType<Material.Shards.CorruptShard>(), 5)
 			.AddTile(TileID.Hellforge)
 			.Register();

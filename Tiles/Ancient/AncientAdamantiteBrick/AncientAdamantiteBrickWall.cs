@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Ancient.AncientAdamantiteBrick;
 
+[LegacyName("AncientAdamantiteBrickWall")]
 public class AncientAdamantiteBrickWallItem : ModItem
 {
 	public override void SetStaticDefaults()

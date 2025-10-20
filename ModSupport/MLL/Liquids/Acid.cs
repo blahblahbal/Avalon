@@ -3,7 +3,7 @@ using Avalon.Common.Players;
 using Avalon.ModSupport.MLL.Buffs;
 using Avalon.ModSupport.MLL.Dusts;
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.ContagionGrasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ModLiquidLib.Hooks;

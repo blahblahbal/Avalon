@@ -18,7 +18,7 @@ public class CoughwoodCandle : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 4)
+			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 4)
 			.AddIngredient(ItemID.Torch)
 			.AddTile(TileID.WorkBenches).Register();
 	}

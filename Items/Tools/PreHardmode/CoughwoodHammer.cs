@@ -13,7 +13,7 @@ public class CoughwoodHammer : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(1)
-			.AddIngredient(ModContent.ItemType<Placeable.Tile.Coughwood>(), 8)
+			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 8)
 			.AddTile(TileID.WorkBenches)
 			.Register();
 	}

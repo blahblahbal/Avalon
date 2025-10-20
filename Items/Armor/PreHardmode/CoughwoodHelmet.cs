@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Tiles.Contagion.Coughwood;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -22,7 +23,7 @@ public class CoughwoodHelmet : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(1)
-			.AddIngredient(ModContent.ItemType<Placeable.Tile.Coughwood>(), 20)
+			.AddIngredient(ModContent.ItemType<Coughwood>(), 20)
 			.AddTile(TileID.WorkBenches)
 			.Register();
 	}

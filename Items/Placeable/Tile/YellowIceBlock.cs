@@ -1,4 +1,5 @@
 using Avalon.Items.Placeable.Furniture;
+using Avalon.Tiles.Contagion.YellowIce;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,7 +15,7 @@ public class YellowIceBlock : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Contagion.YellowIce>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<YellowIce>());
 	}
 	public override void AddRecipes()
 	{

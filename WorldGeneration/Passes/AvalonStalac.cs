@@ -3,6 +3,8 @@ using Terraria.IO;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionStalagmites;
 
 namespace Avalon.WorldGeneration.Passes
 {
@@ -19,18 +21,18 @@ namespace Avalon.WorldGeneration.Passes
                 for (int num22 = 5; num22 < Main.maxTilesY - 20; num22++)
                 {
                     // contagion stalac
-                    if (Main.tile[num19, num22 - 1].TileType == ModContent.TileType<Tiles.Contagion.Chunkstone>() && Main.tile[num19, num22 - 1].HasTile && WorldGen.genRand.NextBool(5))
+                    if (Main.tile[num19, num22 - 1].TileType == ModContent.TileType<Chunkstone>() && Main.tile[num19, num22 - 1].HasTile && WorldGen.genRand.NextBool(5))
                     {
                         if (!Main.tile[num19, num22].HasTile && !Main.tile[num19, num22 + 1].HasTile && Main.tile[num19, num22 - 1].Slope == SlopeType.Solid)
                         {
-                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>());
+                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<ContagionStalactgmites>());
                         }
                     }
-                    if (Main.tile[num19, num22 + 1].TileType == ModContent.TileType<Tiles.Contagion.Chunkstone>() && Main.tile[num19, num22 + 1].HasTile && WorldGen.genRand.NextBool(5))
+                    if (Main.tile[num19, num22 + 1].TileType == ModContent.TileType<Chunkstone>() && Main.tile[num19, num22 + 1].HasTile && WorldGen.genRand.NextBool(5))
                     {
                         if (!Main.tile[num19, num22].HasTile && !Main.tile[num19, num22 - 1].HasTile && Main.tile[num19, num22 + 1].Slope == SlopeType.Solid)
                         {
-                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<Tiles.Contagion.ContagionStalactgmites>());
+                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<ContagionStalactgmites>());
                         }
                     }
                     // blasted stone stalac

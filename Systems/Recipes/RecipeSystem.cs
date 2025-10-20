@@ -17,6 +17,7 @@ using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode.GemStaves;
 using Avalon.ModSupport.Thorium.Items.Placeable.Furniture.Gem;
+using Avalon.Tiles.Contagion.Coughwood;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;

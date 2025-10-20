@@ -1,6 +1,11 @@
 using Avalon.Common;
 using Avalon.ModSupport;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion.ContagionStalagmites;
+using Avalon.Tiles.Contagion.HardenedSnotsand;
+using Avalon.Tiles.Contagion.SmallPlants;
+using Avalon.Tiles.Contagion.Snotsandstone;
 using Avalon.WorldGeneration.Helpers;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;

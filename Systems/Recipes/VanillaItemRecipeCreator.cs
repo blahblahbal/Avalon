@@ -18,6 +18,8 @@ using Avalon.Common;
 using Avalon.Items.Weapons.Melee.PreHardmode.OreSwords;
 using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
+using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion.HardenedSnotsand;
 
 namespace Avalon.Systems.Recipes;
 

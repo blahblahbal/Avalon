@@ -19,7 +19,15 @@ using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
 using Avalon.NPCs.Critters;
 using Avalon.NPCs.Hardmode;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.BacciliteBrick;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionChest;
+using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion.HardenedSnotsand;
+using Avalon.Tiles.Contagion.IckyAltar;
+using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion.Snotsandstone;
+using Avalon.Tiles.Contagion.YellowIce;
 using Avalon.Walls;
 using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
@@ -201,12 +209,12 @@ public class ContagionAltBiome : AltBiome
 		SeedType = ModContent.ItemType<ContagionSeeds>();
 		BiomeOre = ModContent.TileType<Tiles.Ores.BacciliteOre>();
 		BiomeOreItem = ModContent.ItemType<BacciliteOre>();
-		BiomeOreBrick = ModContent.TileType<Tiles.BacciliteBrick>();
+		BiomeOreBrick = ModContent.TileType<BacciliteBrickTile>();
 		ArrowType = ModContent.ItemType<Items.Ammo.IckyArrow>();
 		AltarTile = ModContent.TileType<IckyAltar>();
 
 		BiomeChestItem = ModContent.ItemType<VirulentScythe>();
-		BiomeChestTile = ModContent.TileType<ContagionChest>();
+		BiomeChestTile = ModContent.TileType<ContagionChestTile>();
 		BiomeChestTileStyle = 1;
 		BiomeKeyItem = ModContent.ItemType<ContagionKey>();
 

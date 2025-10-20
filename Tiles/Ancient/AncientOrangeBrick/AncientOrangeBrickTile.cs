@@ -24,7 +24,7 @@ public class AncientOrangeBrick : ModItem
 			.Register();
 	}
 }
-
+[LegacyName("AncientOrangeBrick")]
 public class AncientOrangeBrickTile : ModTile
 {
     public override void SetStaticDefaults()

@@ -5,6 +5,8 @@ using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Ancient.AncientIronBrick;
 
+
+[LegacyName("AncientIronBrickWall")]
 public class AncientIronBrickWallItem : ModItem
 {
 	public override void SetStaticDefaults()

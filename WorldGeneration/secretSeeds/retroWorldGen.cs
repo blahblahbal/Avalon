@@ -8,7 +8,6 @@ using Terraria.Utilities;
 using Terraria.WorldBuilding;
 using Terraria.ID;
 using Terraria.IO;
-using Avalon.Tiles.Contagion;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Shards;
@@ -19,7 +18,6 @@ using Avalon.Items.Weapons.Ranged.PreHardmode;
 using Avalon.Tiles;
 using Avalon.Tiles.Ancient;
 using Avalon.Tiles.Ores;
-using Avalon.Walls;
 using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
 using ReLogic.Utilities;
@@ -32,6 +30,10 @@ using Avalon.Tiles.Ancient.AncientOrangeBrick;
 using Avalon.Tiles.Ancient.AncientPurpleBrick;
 using Avalon.Tiles.Ancient.AncientYellowBrick;
 using Avalon.Tiles.Ancient.Vanilla;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion.IckyAltar;
+using Avalon.Tiles.Contagion.SnotOrb;
 
 namespace Avalon.WorldGeneration.SecretSeeds
 {
@@ -1444,9 +1446,9 @@ namespace Avalon.WorldGeneration.SecretSeeds
 			}
 			if (evil == WorldEvil.Contagion)
 			{
-				stone = (ushort)ModContent.TileType<Tiles.Contagion.Chunkstone>();
-				grass = (ushort)ModContent.TileType<Tiles.Contagion.Ickgrass>();
-				orb = (ushort)ModContent.TileType<Tiles.Contagion.SnotOrb>();
+				stone = (ushort)ModContent.TileType<Chunkstone>();
+				grass = (ushort)ModContent.TileType<Ickgrass>();
+				orb = (ushort)ModContent.TileType<SnotOrb>();
 			}
 
 			for (int num169 = 0; (double)num169 < (double)Main.maxTilesX * 0.00045; num169++)
@@ -2089,7 +2091,7 @@ namespace Avalon.WorldGeneration.SecretSeeds
 			}
 			if (evil == WorldEvil.Contagion)
 			{
-				tileType = (ushort)ModContent.TileType<Tiles.Contagion.IckyAltar>();
+				tileType = (ushort)ModContent.TileType<IckyAltar>();
 			}
 
 			for (int num237 = 0; num237 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 2E-05); num237++)
@@ -5458,11 +5460,11 @@ namespace Avalon.WorldGeneration.SecretSeeds
 			}
 			if (evil == WorldEvil.Contagion)
 			{
-				stone = (ushort)ModContent.TileType<Tiles.Contagion.Chunkstone>();
+				stone = (ushort)ModContent.TileType<Chunkstone>();
 				ore = (ushort)ModContent.TileType<Tiles.Ores.BacciliteOre>();
-				orb = (ushort)ModContent.TileType<Tiles.Contagion.SnotOrb>();
-				altar = (ushort)ModContent.TileType<Tiles.Contagion.IckyAltar>();
-				stoneWall = (ushort)ModContent.WallType<Walls.ChunkstoneWall>();
+				orb = (ushort)ModContent.TileType<SnotOrb>();
+				altar = (ushort)ModContent.TileType<IckyAltar>();
+				stoneWall = (ushort)ModContent.WallType<ChunkstoneWall>();
 			}
 
 			bool flag = false;
@@ -5708,10 +5710,10 @@ namespace Avalon.WorldGeneration.SecretSeeds
 			}
 			if (evil == WorldEvil.Contagion)
 			{
-				stone = (ushort)ModContent.TileType<Tiles.Contagion.Chunkstone>();
+				stone = (ushort)ModContent.TileType<Chunkstone>();
 				ore = (ushort)ModContent.TileType<Tiles.Ores.BacciliteOre>();
-				orb = (ushort)ModContent.TileType<Tiles.Contagion.SnotOrb>();
-				stoneWall = (ushort)ModContent.WallType<Walls.ChunkstoneWall>();
+				orb = (ushort)ModContent.TileType<SnotOrb>();
+				stoneWall = (ushort)ModContent.WallType<ChunkstoneWall>();
 			}
 
 			float num = steps;
@@ -5907,7 +5909,7 @@ namespace Avalon.WorldGeneration.SecretSeeds
 			}
 			if (evil == WorldEvil.Contagion)
 			{
-				orb = (ushort)ModContent.TileType<Tiles.Contagion.SnotOrb>();
+				orb = (ushort)ModContent.TileType<SnotOrb>();
 			}
 
 			if (x < 10 || x > Main.maxTilesX - 10 || y < 10 || y > Main.maxTilesY - 10)

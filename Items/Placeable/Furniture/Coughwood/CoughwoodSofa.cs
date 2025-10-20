@@ -17,7 +17,7 @@ public class CoughwoodSofa : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 5)
+			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 5)
 			.AddIngredient(ItemID.Silk, 2)
 			.AddTile(TileID.Sawmill).Register();
 	}

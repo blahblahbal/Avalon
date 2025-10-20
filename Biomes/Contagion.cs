@@ -1,7 +1,14 @@
 using Avalon.Backgrounds;
 using Avalon.Common;
 using Avalon.Systems;
-using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion.HardenedSnotsand;
+using Avalon.Tiles.Contagion.SmallPlants;
+using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion.Snotsandstone;
+using Avalon.Tiles.Contagion.ThornyBushes;
+using Avalon.Tiles.Contagion.YellowIce;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

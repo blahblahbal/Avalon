@@ -3,15 +3,21 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Avalon.Walls;
-using Avalon.Tiles.Contagion;
 using MonoMod.Cil;
 using Terraria.IO;
 using Terraria.WorldBuilding;
 using Avalon.WorldGeneration.Enums;
 using ReLogic.Utilities;
 using System;
-using Avalon.Tiles;
 using Avalon.ModSupport;
+using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion.SmallPlants;
+using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion.YellowIce;
+using Avalon.Tiles.Contagion.Snotsandstone;
+using Avalon.Tiles.Contagion.HardenedSnotsand;
+using Avalon.Tiles.Contagion.BacciliteBrick;
 
 namespace Avalon.Hooks
 {
@@ -38,7 +44,7 @@ namespace Avalon.Hooks
 						Tile t = Main.tile[i, j];
 						ushort ttype = TileID.DemoniteBrick;
 						if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Crimson) ttype = TileID.CrimtaneBrick;
-						else if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion) ttype = (ushort)ModContent.TileType<BacciliteBrick>();
+						else if (ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion) ttype = (ushort)ModContent.TileType<BacciliteBrickTile>();
 
 						t.TileType = ttype;
 						t.HasTile = true;

@@ -1,12 +1,13 @@
 using Terraria.ModLoader;
 using Terraria.ID;
+using Avalon.Tiles.Contagion.Chunkstone;
 
 namespace Avalon.Data.Sets
 {
     internal class WallSets
     {
         public static readonly bool[] Chunkstone = WallID.Sets.Factory.CreateBoolSet(
-            ModContent.WallType<Walls.ChunkstoneWall>()
+            ModContent.WallType<ChunkstoneWall>()
         );
 
         public static readonly bool[] Hellcastle = WallID.Sets.Factory.CreateBoolSet();

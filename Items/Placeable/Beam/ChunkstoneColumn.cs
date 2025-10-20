@@ -1,3 +1,4 @@
+using Avalon.Tiles.Contagion.Chunkstone;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,7 +17,7 @@ public class ChunkstoneColumn : ModItem
 	public override void AddRecipes()
 	{
 		Terraria.Recipe.Create(Type, 2)
-			.AddIngredient(ModContent.ItemType<Tile.ChunkstoneBlock>())
+			.AddIngredient(ModContent.ItemType<ChunkstoneBlock>())
 			.AddTile(TileID.HeavyWorkBench).Register();
 	}
 }
