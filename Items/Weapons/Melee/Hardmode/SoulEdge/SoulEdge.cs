@@ -199,7 +199,6 @@ public class SoulEdgeSlash : EnergySlashTemplate
 }
 public class SoulEdgeDash : ModProjectile
 {
-	public override LocalizedText DisplayName => ModContent.GetInstance<SoulEdge>().DisplayName;
 	private const int initialTimeLeft = 20;
 	public override void SetDefaults()
 	{
@@ -270,7 +269,6 @@ public class SoulEdgeDash : ModProjectile
 }
 public class SoulEaterFriendly : ModProjectile
 {
-	public override LocalizedText DisplayName => ModContent.GetInstance<SoulEdge>().DisplayName;
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 8;

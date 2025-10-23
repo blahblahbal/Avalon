@@ -5025,7 +5025,7 @@ Mods: {
 				Tooltip: ""
 			}
 
-			ChunkstoneBrickWall: {
+			ChunkstoneBrickWallItem: {
 				DisplayName: Chunkstone Brick Wall
 				Tooltip: ""
 			}
@@ -5200,7 +5200,7 @@ Mods: {
 				Tooltip: ""
 			}
 
-			CoughwoodWall: {
+			CoughwoodWallItem: {
 				DisplayName: Coughwood Wall
 				Tooltip: ""
 			}
@@ -10064,16 +10064,6 @@ Mods: {
 				DisplayName: Hallowed Claymore
 				Tooltip: ""
 			}
-
-			ChunkstoneBrickWallItem: {
-				DisplayName: Chunkstone Brick Wall Item
-				Tooltip: ""
-			}
-
-			CoughwoodWallItem: {
-				DisplayName: Coughwood Wall Item
-				Tooltip: ""
-			}
 		}
 
 		InfoDisplays: {
@@ -10089,41 +10079,22 @@ Mods: {
 		Projectiles: {
 			SpectreSplit.DisplayName: Phantom Wrath
 			PhantomKnife.DisplayName: Phantom Knife
-			AeonBeam.DisplayName: Aeon's Eternity
-			AeonStar.DisplayName: Aeon Constellation
-			AeonExplosion.DisplayName: Aeon Constellation
-			DarklightLanceProjectile.DisplayName: Darklight Lance
+			AeonStar.DisplayName: Aeon Star
+			AeonExplosion.DisplayName: Aeon Star Explosion
+			TrueAeonStar.DisplayName: True Aeon Star
+			TrueAeonStarShard.DisplayName: True Aeon Star Shard
 			BloodshotShot.DisplayName: Bloodshot Shot
 			BloodBlob.DisplayName: Blood Blob
 			BloodyArrow.DisplayName: Bloody Arrow
-			Sporalash.DisplayName: Sporalash
-			Moonfury.DisplayName: Moonfury
 			GlacierBall.DisplayName: Glacier Ball
-			JungleFire.DisplayName: Jungle Fire
+			JungleFire.DisplayName: Jungle Flower
+			JunglePetal.DisplayName: Jungle Petal
 			IceNote.DisplayName: Ice Note
-			DesertLongswordSandstorm.DisplayName: Desert Longsword Sandstorm
 			PointingLaser.DisplayName: Pointing Laser
-			EnchantedShuriken.DisplayName: Enchanted Shuriken
-			BismuthShortsword.DisplayName: Bismuth Shortsword
-			BronzeShortsword.DisplayName: Bronze Shortsword
-			NickelShortsword.DisplayName: Nickel Shortsword
-			ZincShortsword.DisplayName: Zinc Shortsword
-			SanguineKatanaSlash.DisplayName: Sanguine Katana
-			VertexSlash.DisplayName: Vertex of Excalibur
-			AmberShard.DisplayName: Amber Shard
-			AmethystShard.DisplayName: Amethyst Shard
-			DiamondShard.DisplayName: Diamond Shard
-			EmeraldShard.DisplayName: Emerald Shard
-			PeridotShard.DisplayName: Peridot Shard
-			RubyShard.DisplayName: Ruby Shard
-			SapphireShard.DisplayName: Sapphire Shard
-			TopazShard.DisplayName: Topaz Shard
-			TourmalineShard.DisplayName: Tourmaline Shard
-			ZirconShard.DisplayName: Zircon Shard
 			PeridotBolt.DisplayName: Peridot Bolt
 			TourmalineBolt.DisplayName: Tourmaline Bolt
 			ZirconBolt.DisplayName: Zircon Bolt
-			Freezethrower.DisplayName: Freezethrower
+			FreezethrowerProj.DisplayName: Freezeflames
 			Bone1.DisplayName: Bone Rib
 			Bone2.DisplayName: Rib Cage
 			Bone3.DisplayName: Femur
@@ -10140,30 +10111,22 @@ Mods: {
 			Saturn.DisplayName: Saturn
 			Neptune.DisplayName: Neptune
 			Uranus.DisplayName: Uranus
-			CursedFlamelash.DisplayName: Cursed Flamelash
+			Pluto.DisplayName: Pluto
 			CursedFlamelashExplosion.DisplayName: Cursed Flamelash Explosion
 			DesertBeakFeather.DisplayName: Beak's Feather
 			DesertBeakSandstorm.DisplayName: Beak's Sandstorm
-			Pluto.DisplayName: Pluto
-			Boomlash.DisplayName: Boomlash
-			PossessedFlamesaw.DisplayName: Possessed Flamesaw
-			PossessedFlamesawChop.DisplayName: Possessed Flamesaw
 			CaesiumGas.DisplayName: Caesium Gas
-			PeeBullet.DisplayName: Pee Bullet
 			SnotOrb.DisplayName: Snot Orb
 			Cough.DisplayName: Cough
 			CorrosiveMucus.DisplayName: Corrosive Mucus
 			BacteriumGas.DisplayName: Bacterium Gas
 			BouncyBoogerBall.DisplayName: Bouncy Booger Ball
-			Icicle.DisplayName: Icicle
 			Olivegas.DisplayName: Olivegas
 			NapalmBall.DisplayName: Napalm Ball
 			PathogenicArrow.DisplayName: Pathogenic Arrow
 			PathogenicBullet.DisplayName: Pathogenic Bullet
 			PathogenicDart.DisplayName: Pathogenic Dart
 			PathogenDartTrail.DisplayName: Pathogen Dart
-			PurpleHaze.DisplayName: Purple Haze
-			MagmafrostBolt.DisplayName: Magmafrost Bolt
 			PhantasmalBullet.DisplayName: Phantasmal Bullet
 			SpectralBullet.DisplayName: Spectral Bullet
 			Cell.DisplayName: Cell
@@ -10171,10 +10134,7 @@ Mods: {
 			VirulentPowder.DisplayName: Virulent Powder
 			MasterSwordBeam.DisplayName: Master Sword Beam
 			ArgusLantern.DisplayName: Argus Lantern
-			GoblinDagger.DisplayName: Goblin Dagger
 			HungrySummon.DisplayName: Hungry
-			ClearCutterSlash.DisplayName: Clear Cutter Slash
-			CrystalTomahawk.DisplayName: Crystal Tomahawk
 			ChaosBolt.DisplayName: Chaos Bolt
 			Smog.DisplayName: Smog
 			GiantSnowflake.DisplayName: Giant Snowflake
@@ -10186,7 +10146,6 @@ Mods: {
 			MoonforceHeld.DisplayName: Moonforce Held
 			LongbowHeld.DisplayName: Longbow Held
 			QuantumBeam.DisplayName: Quantum Beam
-			QuantumBeam2.DisplayName: Quantum Beam2
 			PeridotHook.DisplayName: Peridot Hook
 			TourmalineHook.DisplayName: Tourmaline Hook
 			ZirconHook.DisplayName: Zircon Hook
@@ -10194,10 +10153,6 @@ Mods: {
 			SandSlash.DisplayName: Sand Slash
 			LotusLeechHeal.DisplayName: Lotus Leech Heal
 			CaesiumExplosion.DisplayName: Caesium Explosion
-			CaesiumFlail.DisplayName: Caesium Flail
-			CaesiumPike.DisplayName: Caesium Pike
-			CaesiumMace.DisplayName: Caesium Mace
-			ObsidianGlaive.DisplayName: Obsidian Glaive
 			CrystalUnityShard.DisplayName: Crystal Unity Shard
 			MushroomWall.DisplayName: Mushroom Wall
 			SporeSeed.DisplayName: Spore Seed
@@ -10207,12 +10162,9 @@ Mods: {
 			BlahMeteor.DisplayName: Blah Meteor
 			BlahStar.DisplayName: Blah Star
 			Drone.DisplayName: Drone
-			FreezeBolt.DisplayName: Freeze Bolt
 			BlahBeam.DisplayName: Blah Beam
 			Shell.DisplayName: Shell
 			Blahcket.DisplayName: Blahcket
-			TetanusChakram.DisplayName: Tetanus Chakram
-			HemorrhagingHalberd.DisplayName: Hemorrhaging Halberd
 			InfectionHook.DisplayName: Infection Hook
 			Moonphaser.DisplayName: Moonphaser
 			Rainbringer.DisplayName: Rainbringer
@@ -10220,26 +10172,22 @@ Mods: {
 			AccelerationDrill.DisplayName: Acceleration Drill
 			StasisRifleHeld.DisplayName: Stasis Rifle Held
 			StasisShot.DisplayName: Stasis Shot
-			DurataniumGlaive.DisplayName: Duratanium Glaive
-			NaquadahLance.DisplayName: Naquadah Lance
-			TroxiniumSpear.DisplayName: Troxinium Spear
 			DurataniumChainsaw.DisplayName: Duratanium Chainsaw
 			DurataniumDrill.DisplayName: Duratanium Drill
 			NaquadahChainsaw.DisplayName: Naquadah Chainsaw
 			NaquadahDrill.DisplayName: Naquadah Drill
 			TroxiniumChainsaw.DisplayName: Troxinium Chainsaw
 			TroxiniumDrill.DisplayName: Troxinium Drill
-			BlahEnergySlash.DisplayName: Blah Energy Slash
 			PathogenSmoke.DisplayName: Pathogen Smoke
 			BacteriumPet.DisplayName: Bacterium Pet
 			PlayerCough.DisplayName: Player Cough
-			Shurikerang.DisplayName: Shurikerang
 			Die.DisplayName: Die
 			Lego.DisplayName: Lego
 			Vase.DisplayName: Vase
 			Doll.DisplayName: Doll
-			SackofToys.DisplayName: Sack of Toys
 			Table.DisplayName: Table
+			Marble.DisplayName: Marble
+			RockingHorse.DisplayName: Rocking Horse
 			GastrominiSummon.DisplayName: Gastromini
 			GastrominiSummon1.DisplayName: Gastromini
 			GastrominiSummon2.DisplayName: Gastromini
@@ -10249,51 +10197,37 @@ Mods: {
 			VirulentCloudSmall.DisplayName: Virulent Cloud
 			VirulentCloudSmallWeak.DisplayName: Virulent Cloud
 			VirulentCloudWeak.DisplayName: Virulent Cloud
-			VirulentScythe.DisplayName: Virulent Scythe
 			ContagionSpray.DisplayName: Contagion Spray
 			JungleSpray.DisplayName: Jungle Spray
 			AnchorWhipwormProjectile.DisplayName: Anchor Whipworm
-			Worm.DisplayName: Worm
+			AnchorWorm.DisplayName: Anchor Worm
 			Reflector.DisplayName: Reflector
-			Marble.DisplayName: Marble
-			RockingHorse.DisplayName: Rocking Horse
 			AncientSandstorm.DisplayName: Ancient
-			AncientSandy.DisplayName: Ancient
 			SandyExplosion.DisplayName: Sandy Explosion
 			EggShrapnel.DisplayName: Egg Shrapnel
 			ShrapnelEgg.DisplayName: Shrapnel Egg
 			ExplosiveEgg.DisplayName: Explosive Egg
 			ExplosiveEggShrapnel.DisplayName: Explosive Egg Shrapnel
-			Noxious.DisplayName: Noxious
 			BloodyAmulet.DisplayName: Bloody Amulet
 			VomitWater.DisplayName: Vomit Water
-			HallowedThorn.DisplayName: Hallowed Thorn
-			HallowedThornEnd.DisplayName: Hallowed Thorn
-			SnotsandBall.DisplayName: Snotsand
 			ColdCatcherBobber.DisplayName: Cold Catcher Bobber
 			IckyArrow.DisplayName: Icky Arrow
 			EnergyLaser.DisplayName: Energy Laser
 			LongboneCurse.DisplayName: Longbone Curse
 			SnotsandSandgunProjectile.DisplayName: Snotsand Ball
+			SnotsandBallFallingProjectile.DisplayName: Snotsand Ball
 			ThrowingRock.DisplayName: Throwing Rock
-			TrueAeonStar.DisplayName: True Aeon Star
-			AnchorWorm.DisplayName: Anchor Worm
-			SoulSlash.DisplayName: Soul Slash
 			DarkMatterSpike.DisplayName: Dark Matter Spike
 			DarkMatterSpikeSpawner.DisplayName: Dark Matter Spike Spawner
 			DarkeningInk.DisplayName: Darkening Ink
 			BloodyTear.DisplayName: Bloody Tear
 			Tear.DisplayName: Tear
 			SnotsabreShot.DisplayName: Snotsabre Shot
-			RottenApple.DisplayName: Rotten Apple
-			JunglePetal.DisplayName: Jungle Petal
-			MagicGrenade.DisplayName: Magic Grenade
-			MagicGrenadeBoom.DisplayName: Magic Grenade
+			MagicGrenadeBoom.DisplayName: Magic Grenade Explosion
 			EruptionHook.DisplayName: Eruption Hook
 			OilBottle.DisplayName: Oil Bottle
 			OilExplosion.DisplayName: Oil Explosion
-			EruptionHookBoom.DisplayName: Eruption Hook Boom
-			Sunstorm.DisplayName: Sunstorm
+			EruptionHookBoom.DisplayName: Eruption Hook Explosion
 			ElectricBolt.DisplayName: Electric Bolt
 			HomingRocket.DisplayName: Homing Rocket
 			Mechastinger.DisplayName: Mechastinger
@@ -10309,39 +10243,32 @@ Mods: {
 			PoisonGasTrapStarter.DisplayName: Poison Gas
 			FireballTrap.DisplayName: Fireball
 			FireballTrapStarter.DisplayName: Fireball
+			CannonballTrap.DisplayName: Cannonball Trap
+			CannonballTrapStarter.DisplayName: Cannonball Trap
 			PrimeArmsCounter.DisplayName: Prime Arms Counter
 			PriminiCannon.DisplayName: Primini Cannon
 			PriminiLaser.DisplayName: Primini Laser
 			PriminiSaw.DisplayName: Primini Saw
 			PriminiVice.DisplayName: Primini Vice
-			CannonballTrap.DisplayName: Cannonball Trap
-			CannonballTrapStarter.DisplayName: Cannonball Trap Starter
-			HallowedClaymore.DisplayName: Hallowed Claymore
 			UltrabrightRazorbladeBullet.DisplayName: Ultrabright Razorblade Bullet
 			UltrabrightRazorbladeBulletTyphoon.DisplayName: Ultrabright Razorblade Bullet Typhoon
-			InsectoidBlade.DisplayName: Insectoid Blade
 			PestilentScythe.DisplayName: Pestilent Scythe
 			PlagueDoctor.DisplayName: Plague Doctor
 			ChrysoberylBolt.DisplayName: Chrysoberyl Bolt
 			BismuthBugleHornPro.DisplayName: Bismuth Bugle Horn
 			SunsShadowProj.DisplayName: Sun's Shadow Fireball
-			SnotsandBallFallingProjectile.DisplayName: Snotsand Ball
 			HallowedRapierProj.DisplayName: Hallowed Rapier Proj
 			HallowedRapierVis.DisplayName: Hallowed Rapier Vis
-			IcicleFerozium.DisplayName: Icicle Ferozium
+			IcicleFerozium.DisplayName: Ferozium Icicle
 			SpiritPoppy.DisplayName: Spirit Poppy
 			Sandstormer.DisplayName: Sandstormer
 			BeeBolt.DisplayName: Bee Bolt
 			CrystalSkullProj.DisplayName: Crystal Skull Light Spike
-			XanthophyteSpear.DisplayName: Xanthophyte Spear
 			XanthophyteChainsaw.DisplayName: Xanthophyte Chainsaw
 			XanthophyteDrill.DisplayName: Xanthophyte Drill
 			BoompipeShrapnel.DisplayName: Boompipe Shrapnel
 			WoSCursedFireball.DisplayName: Wo S Cursed Fireball
 			WoSLaserSmall.DisplayName: Wo S Laser Small
-			MagicCleaver.DisplayName: Magic Cleaver
-			FleshFire.DisplayName: Flesh Fire
-			FleshFireLinger.DisplayName: Flesh Fire Linger
 			ToxicFang.DisplayName: Toxic Fang
 			WoSRocket.DisplayName: Wo S Rocket
 			WoSBeegLaser.DisplayName: Wo S Beeg Laser
@@ -10355,8 +10282,7 @@ Mods: {
 			PhantomGrabber.DisplayName: Phantom Grabber
 			PhantomDeathray.DisplayName: Phantasm Deathray
 			PhantasmOrbSpawner.DisplayName: Phantasm Orb Spawner
-			SoulEaterFriendly.DisplayName: Soul Eater Friendly
-			SoulEdgeSlash.DisplayName: Soul Edge Slash
+			SoulEaterFriendly.DisplayName: Soul Eater
 			SoulEdgeDash.DisplayName: Soul Edge Dash
 			FishingRift.DisplayName: Fishing Rift
 			FishingRiftBack.DisplayName: Fishing Rift Back
@@ -10371,12 +10297,8 @@ Mods: {
 			ShroomiteRocket.DisplayName: Shroomite Rocket
 			AquaBlast.DisplayName: Aqua Blast
 			Torch.DisplayName: Torch
-			CraniumCrusherProj.DisplayName: Cranium Crusher
 			HellboundHalberdProj.DisplayName: Hellbound Halberd Mace
 			HellboundHalberdSpear.DisplayName: Hellbound Halberd Spear
-			MarrowMasherProj.DisplayName: Marrow Masher
-			UrchinMaceProj.DisplayName: Urchin Uppercutter
-			WoodenClubProj.DisplayName: Wooden Club
 			AcidBombProj.DisplayName: Acid Bomb
 			BloodBombProj.DisplayName: Blood Bomb
 			AcidRocketProj.DisplayName: Acid Rocket
@@ -10387,13 +10309,9 @@ Mods: {
 			BloodGrenadeProj.DisplayName: Blood Grenade
 			BloodMineProj.DisplayName: Blood Mine
 			BloodSnowmanRocketProj.DisplayName: Blood Snowman Rocket
-			TrueAeonStarShard.DisplayName: True Aeon Star Shard
 			OutbreakProj.DisplayName: Outbreak Tick
-			BismuthShortswordProj.DisplayName: Bismuth Shortsword Proj
-			SporalashProj.DisplayName: Sporalash Proj
-			NaquadahLanceProj.DisplayName: Naquadah Lance Proj
 			CanisterFire.DisplayName: Canister Fire
-			CanisterFireLinger.DisplayName: Canister Fire
+			CanisterFireLinger.DisplayName: Lingering Canister Fire
 		}
 
 		NPCs: {

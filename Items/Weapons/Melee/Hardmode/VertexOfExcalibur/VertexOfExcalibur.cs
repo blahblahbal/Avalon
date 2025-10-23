@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Drawing;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode.VertexOfExcalibur;
@@ -46,6 +47,7 @@ public class VertexOfExcalibur : ModItem
 public class VertexSlash : EnergySlashTemplate
 {
 	public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TheHorsemansBlade}";
+	public override LocalizedText DisplayName => ModContent.GetInstance<VertexOfExcalibur>().DisplayName;
 	public override bool PreDraw(ref Color lightColor)
 	{
 		if (Math.Abs(Projectile.ai[0]) > 0.2f)

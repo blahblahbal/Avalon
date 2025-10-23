@@ -4,6 +4,7 @@ using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.PreHardmode.Sporalash;
@@ -34,6 +35,7 @@ public class Sporalash : ModItem
 }
 public class SporalashProj : FlailTemplate
 {
+	public override LocalizedText DisplayName => ModContent.GetInstance<Sporalash>().DisplayName;
 	public override int LaunchTimeLimit => 16;
 	public override float LaunchSpeed => 18f;
 	public override float MaxLaunchLength => 600f;

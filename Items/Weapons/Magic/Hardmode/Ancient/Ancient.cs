@@ -6,6 +6,7 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Magic.Hardmode.Ancient;
@@ -67,6 +68,7 @@ public class Ancient : ModItem
 }
 public class AncientSandstorm : ModProjectile
 {
+	public override LocalizedText DisplayName => ModContent.GetInstance<Ancient>().DisplayName;
 	public override void SetStaticDefaults()
 	{
 		ProjectileID.Sets.NoLiquidDistortion[Type] = true;

@@ -34,7 +34,6 @@ public class Freezethrower : ModItem
 }
 public class FreezethrowerProj : ModProjectile
 {
-	public override LocalizedText DisplayName => ModContent.GetInstance<Freezethrower>().DisplayName;
 	public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.Flames;
 	public override void SetStaticDefaults()
 	{

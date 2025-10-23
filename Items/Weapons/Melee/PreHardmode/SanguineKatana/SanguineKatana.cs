@@ -85,6 +85,7 @@ public class SanguineKatana : ModItem
 public class SanguineKatanaSlash : EnergySlashTemplate
 {
 	public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TheHorsemansBlade}";
+	public override LocalizedText DisplayName => ModContent.GetInstance<SanguineKatana>().DisplayName;
 	public override bool PreDraw(ref Color lightColor)
 	{
 		DrawSlash(Color.Black * 0.2f, Color.Black * 0.2f, Color.Red * 0.2f, Color.Black * 0.5f, 512, 1f, MathHelper.PiOver4, -0.2f, 0, false);

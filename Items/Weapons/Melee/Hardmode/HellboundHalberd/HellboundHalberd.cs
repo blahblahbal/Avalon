@@ -92,7 +92,6 @@ public class HellboundHalberd : ModItem
 public class HellboundHalberdProj : MaceTemplate
 {
 	public override string Texture => ModContent.GetInstance<HellboundHalberd>().Texture;
-	public override LocalizedText DisplayName => ModContent.GetInstance<HellboundHalberd>().DisplayName;
 	public override float MaxRotation => MathF.PI + MathF.PI / 4f;
 	public override float? StartRotationLimit => MathHelper.PiOver2;
 	public override float SwingRadius => 104f;
@@ -158,7 +157,6 @@ public class HellboundHalberdProj : MaceTemplate
 }
 public class HellboundHalberdSpear : SpearTemplate
 {
-	public override LocalizedText DisplayName => ModContent.GetInstance<HellboundHalberd>().DisplayName;
 	protected override float HoldoutRangeMax => 230;
 	protected override float HoldoutRangeMin => 40;
 	public override bool PreDraw(ref Color lightColor)

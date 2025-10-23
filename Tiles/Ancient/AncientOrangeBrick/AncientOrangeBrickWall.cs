@@ -36,6 +36,7 @@ public class AncientOrangeBrickWall : ModWall
         DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
     }
 }
+[LegacyName("UnsafeAncientOrangeBrickWall")]
 public class UnsafeAncientOrangeBrickWallItem : ModItem
 {
 	public override string Texture => ModContent.GetInstance<AncientOrangeBrickWallItem>().Texture;

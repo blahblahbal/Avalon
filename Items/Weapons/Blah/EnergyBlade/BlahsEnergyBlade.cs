@@ -12,6 +12,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Blah.EnergyBlade;
@@ -68,6 +69,7 @@ public class BlahsEnergyBlade : ModItem
 public class BlahEnergySlash : EnergySlashTemplate
 {
 	public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TheHorsemansBlade}";
+	public override LocalizedText DisplayName => ModContent.GetInstance<BlahsEnergyBlade>().DisplayName;
 	public override void SetDefaults()
 	{
 		base.SetDefaults();

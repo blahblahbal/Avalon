@@ -2,6 +2,7 @@ using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Hardmode.NaquadahLance;
@@ -28,6 +29,7 @@ public class NaquadahLance : ModItem
 }
 public class NaquadahLanceProj : SpearTemplate
 {
+	public override LocalizedText DisplayName => ModContent.GetInstance<NaquadahLance>().DisplayName;
 	public override void SetDefaults()
 	{
 		Projectile.width = 18;

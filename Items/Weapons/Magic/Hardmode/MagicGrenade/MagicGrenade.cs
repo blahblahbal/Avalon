@@ -100,7 +100,6 @@ public class MagicGrenadeProj : ModProjectile
 public class MagicGrenadeBoom : ModProjectile
 {
 	public override string Texture => ModContent.GetInstance<MagicGrenade>().Texture;
-	public override LocalizedText DisplayName => ModContent.GetInstance<MagicGrenade>().DisplayName;
 	public override void SetDefaults()
 	{
 		Projectile.width = Projectile.height = 128;

@@ -160,6 +160,7 @@ public class HallowedThornProj : ModProjectile
 }
 public class HallowedThornEnd : ModProjectile
 {
+	public override LocalizedText DisplayName => ModContent.GetInstance<HallowedThorn>().DisplayName;
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 3;
