@@ -1,3 +1,4 @@
+using Avalon.Achievements;
 using Avalon.Common.Extensions;
 using Terraria;
 using Terraria.ID;
@@ -24,7 +25,9 @@ public class BottledLava : ModItem
 	{
 		player.AddBuff(BuffID.OnFire3, 60 * 20);
 		player.AddBuff(BuffID.OnFire, 60 * 20);
-		ExxoAvalonOrigins.Achievements?.Call("Event", "DrinkBottledLava");
+
+		ModContent.GetInstance<Ach_Fatality>().DrinkBottledLava.Complete();
+
 		return true;
 	}
 	public override void AddRecipes()

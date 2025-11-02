@@ -1,3 +1,4 @@
+using Avalon.Achievements;
 using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Avalon.Items.Material.Ores;
@@ -32,10 +33,8 @@ public class StaminaCrystal : ModItem
 		player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax += 30;
 		player.GetModPlayer<AvalonStaminaPlayer>().StatStamMax2 += 30;
 		player.GetModPlayer<AvalonStaminaPlayer>().StatStam += 30;
-		if (ExxoAvalonOrigins.Achievements != null)
-		{
-			ExxoAvalonOrigins.Achievements.Call("Event", "UseStaminaCrystal");
-		}
+
+		ModContent.GetInstance<Ach_StaminaCrystal>().ConditionFlag.Complete();
 		return true;
 	}
 	public override void AddRecipes()

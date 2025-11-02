@@ -1,12 +1,9 @@
-using Avalon.Buffs;
-using Avalon.Buffs.AdvancedBuffs;
-using Avalon.Buffs.Debuffs;
+using Avalon.Achievements;
 using Avalon.Common;
 using Avalon.Common.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Utilities;
 
 namespace Avalon.Hooks;
 
@@ -69,15 +66,12 @@ public class BuffEffects : ModHook
 		}
 		orig(self, type, time, quiet);
 
-		if (ExxoAvalonOrigins.Achievements != null)
+		if ((self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) &&
+			self.HasBuff(BuffID.CursedInferno) &&
+			(self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) &&
+			self.HasBuff(BuffID.ShadowFlame))
 		{
-			if ((self.HasBuff(BuffID.OnFire) || self.HasBuff(BuffID.OnFire3)) &&
-				self.HasBuff(BuffID.CursedInferno) &&
-				(self.HasBuff(BuffID.Frostburn) || self.HasBuff(BuffID.Frostburn2)) &&
-				self.HasBuff(BuffID.ShadowFlame))
-			{
-				ExxoAvalonOrigins.Achievements.Call("Event", "ItBurnsBurnsBurnsBurns");
-			}
+			ModContent.GetInstance<Ach_ItBurnsX4>().ConditionFlag.Complete();
 		}
 	}
 

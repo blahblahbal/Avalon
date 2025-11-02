@@ -3,9 +3,7 @@ using Avalon.Biomes;
 using Avalon.Common;
 using Avalon.Effects;
 using Avalon.Items.Accessories.Info;
-using Avalon.Items.Weapons.Melee.Hardmode;
 using Avalon.Items.Weapons.Melee.Hardmode.VertexOfExcalibur;
-using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
 using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;
 using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
@@ -81,11 +79,6 @@ public class ExxoAvalonOrigins : Mod
 	///     Gets the instance of Munchies Mod.
 	/// </summary>
 	public static readonly Mod? Munchies = ModLoader.TryGetMod("Munchies", out Mod obtainedMod) ? obtainedMod : null;
-
-	/// <summary>
-	///     Gets the instance of the TMLAchievements mod.
-	/// </summary>
-	public static readonly Mod? Achievements = ModLoader.TryGetMod("TMLAchievements", out Mod obtainedMod) ? obtainedMod : null;
 
 	/// <summary>
 	///     Gets the instance of the music mod for this mod.

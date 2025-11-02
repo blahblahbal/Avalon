@@ -1,3 +1,4 @@
+using Avalon.Achievements;
 using Avalon.Common.Extensions;
 using Terraria;
 using Terraria.Audio;
@@ -26,10 +27,9 @@ public class MartianPeaceTreaty : ModItem
 	public override bool? UseItem(Player player)
 	{
 		Main.invasionSize = 0;
-		if (ExxoAvalonOrigins.Achievements != null)
-		{
-			ExxoAvalonOrigins.Achievements.Call("Event", "FalseAlarm");
-		}
+
+		ModContent.GetInstance<Ach_FalseAlarm>().ConditionFlag.Complete();
+
 		SoundEngine.PlaySound(SoundID.Roar, player.position);
 		return true;
 	}

@@ -1,3 +1,4 @@
+using Avalon.Achievements;
 using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
@@ -915,11 +916,11 @@ public class AvalonPlayer : ModPlayer
 			Player.HasItem(ItemID.LargeEmerald) && Player.HasItem(ModContent.ItemType<LargeTourmaline>()) && Player.HasItem(ItemID.LargeSapphire) && Player.HasItem(ItemID.LargeAmethyst) &&
 			Player.HasItem(ItemID.LargeDiamond) && Player.HasItem(ModContent.ItemType<LargeZircon>()))
 		{
-			ExxoAvalonOrigins.Achievements?.Call("Event", "HaveAllLargeGems");
+			ModContent.GetInstance<Ach_Gems>().ConditionFlag.Complete();
 		}
 		if (Player.position.Y / 16 - Player.fallStart >= Main.maxTilesY / 3 * 2)
 		{
-			ExxoAvalonOrigins.Achievements?.Call("Event", "Hellevator");
+			ModContent.GetInstance<Ach_Hellevator>().ConditionFlag.Complete();
 		}
 		#endregion
 
@@ -2441,10 +2442,7 @@ public class AvalonPlayer : ModPlayer
 		#region it burns x4 achievement
 		if ((target.HasBuff(BuffID.OnFire) || target.HasBuff(BuffID.OnFire3)) && target.HasBuff(BuffID.CursedInferno) && (target.HasBuff(BuffID.Frostburn) || target.HasBuff(BuffID.Frostburn2)) && target.HasBuff(BuffID.ShadowFlame))
 		{
-			if (ExxoAvalonOrigins.Achievements != null)
-			{
-				ExxoAvalonOrigins.Achievements.Call("Event", "ItBurnsBurnsBurnsBurns");
-			}
+			ModContent.GetInstance<Ach_ItBurnsX4>().ConditionFlag.Complete();
 		}
 		#endregion
 
@@ -2490,10 +2488,7 @@ public class AvalonPlayer : ModPlayer
 		#region it burns x4 achievement
 		if ((target.HasBuff(BuffID.OnFire) || target.HasBuff(BuffID.OnFire3)) && target.HasBuff(BuffID.CursedInferno) && (target.HasBuff(BuffID.Frostburn) || target.HasBuff(BuffID.Frostburn2)) && target.HasBuff(BuffID.ShadowFlame))
 		{
-			if (ExxoAvalonOrigins.Achievements != null)
-			{
-				ExxoAvalonOrigins.Achievements.Call("Event", "ItBurnsBurnsBurnsBurns");
-			}
+			ModContent.GetInstance<Ach_ItBurnsX4>().ConditionFlag.Complete();
 		}
 		#endregion
 		if (RoseMagic && proj.DamageType == DamageClass.Magic && Main.rand.NextBool(8) && RoseMagicCooldown <= 0 && target.lifeMax > 5 && target.type != NPCID.TargetDummy)

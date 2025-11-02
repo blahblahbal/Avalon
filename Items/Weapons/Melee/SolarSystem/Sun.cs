@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Achievements;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -103,10 +104,8 @@ public class Sun : ModProjectile
 						Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position,
 							Projectile.velocity, ModContent.ProjectileType<Pluto>(), (int)(Projectile.damage * 0.65f),
 							Projectile.knockBack, ai0: 8, ai1: Projectile.whoAmI);
-						if (ExxoAvalonOrigins.Achievements != null)
-						{
-							ExxoAvalonOrigins.Achievements.Call("Event", "SolarSystemPluto");
-						}
+
+						ModContent.GetInstance<Ach_SolarSystemPluto>().ConditionFlag.Complete();
 					}
 					else
 					{

@@ -1,8 +1,9 @@
+using Avalon.Achievements;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
 
 namespace Avalon.Projectiles;
 
@@ -54,11 +55,8 @@ public class ThrowingRock : ModProjectile
                 if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Glass)
                 {
                     WorldGen.KillTile(i, j);
-                    if (ExxoAvalonOrigins.Achievements != null)
-                    {
-                        ExxoAvalonOrigins.Achievements.Call("Event", "BreakGlassWithRock");
-                    }
-                    Projectile.ai[1] = 1;
+					ModContent.GetInstance<Ach_Rock>().ConditionFlag.Complete();
+					Projectile.ai[1] = 1;
                 }
             }
         }

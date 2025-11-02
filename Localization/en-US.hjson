@@ -317,79 +317,79 @@ Mods: {
 		}
 
 		Achievements: {
-			TheFiveSword: {
-				Name: The Five Sword
+			Ach_AeonsEternity: {
+				FriendlyName: The Five Sword
 				Description: Craft Aeon's Eternity.
 			}
 
-			Unification: {
-				Name: Unification
-				Description: Craft Vertex of Excalibur, the unification of dark and light.
-			}
-
-			Boosted: {
-				Name: Boosted!
-				Description: Use a Stamina Crystal to increase your Stamina.
-			}
-
-			LuckyStiff: {
-				Name: Lucky Stiff
-				Description: Obtain a real Four Leaf Clover from breaking tall grass.
-			}
-
-			SolarSystemPluto: {
-				Name: Wait, It's Not a Planet?!
-				Description: Have Pluto show up when using the Solar System.
-			}
-
-			FalseAlarm: {
-				Name: False Alarm!
-				Description: Cancel an invasion by using either a False Treasure Map or a Goblin Retreat Order.
-			}
-
-			Safe: {
-				Name: Safe!
-				Description: Craft Guardian Boots.
-			}
-
-			Rock: {
-				Name: Vandalism
-				Description: Throw a Rock at glass to smash it into pieces.
-			}
-
-			Hellcastle: {
-				Name: Wall of Flesh's House?
-				Description: Break through the entrance to the Hellcastle, home of Phantasm.
-			}
-
-			DesertBeak: {
-				Name: Watch the talons!
-				Description: Defeat Desert Beak, the overseer of the Desert.
-			}
-
-			BacteriumPrime: {
-				Name: Sulfonamided
+			Ach_BacteriumPrime: {
+				FriendlyName: Sulfonamided
 				Description: Defeat Bacterium Prime, the Contagion's biggest threat.
 			}
 
-			Gems: {
-				Name: Massive Gems
-				Description: Have every Large Gem in your inventory at the same time.
+			Ach_DesertBeak: {
+				FriendlyName: Watch the talons!
+				Description: Defeat Desert Beak, the overseer of the Desert.
 			}
 
-			Fatality: {
-				Name: Fatality...
+			Ach_FalseAlarm: {
+				FriendlyName: False Alarm!
+				Description: Cancel an invasion by using either a False Treasure Map or a Goblin Retreat Order.
+			}
+
+			Ach_Fatality: {
+				FriendlyName: Fatality...
 				Description: Drink Bottled Lava and suffer the consequences.
 			}
 
-			Hellevator: {
-				Name: Look Out Below
+			Ach_Gems: {
+				FriendlyName: Massive Gems
+				Description: Have every Large Gem in your inventory at the same time.
+			}
+
+			Ach_Hellevator: {
+				FriendlyName: Look Out Below
 				Description: Fall all the way from the surface to the Underworld without touching the ground.
 			}
 
-			ItBurnsBurnsBurnsBurns: {
-				Name: It Burns, Burns, Burns, Burns!
+			Ach_ItBurnsX4: {
+				FriendlyName: It Burns, Burns, Burns, Burns!
 				Description: Inflict On Fire, Frostburn, Cursed Inferno, and Shadowflame on a single enemy all at once.
+			}
+
+			Ach_LuckyStiff: {
+				FriendlyName: Lucky Stiff
+				Description: Obtain a real Four Leaf Clover from breaking tall grass.
+			}
+
+			Ach_Rock: {
+				FriendlyName: Vandalism
+				Description: Throw a Rock at glass to smash it into pieces.
+			}
+
+			Ach_Safe: {
+				FriendlyName: Safe!
+				Description: Craft Guardian Boots.
+			}
+
+			Ach_SolarSystemPluto: {
+				FriendlyName: Wait, It's Not a Planet?!
+				Description: Have Pluto show up when using the Solar System.
+			}
+
+			Ach_StaminaCrystal: {
+				FriendlyName: Boosted!
+				Description: Use a Stamina Crystal to increase your Stamina.
+			}
+
+			Ach_Unification: {
+				FriendlyName: Unification
+				Description: Craft Vertex of Excalibur, the unification of dark and light.
+			}
+
+			Ach_WoFsHouse: {
+				FriendlyName: Wall of Flesh's House?
+				Description: Break through the entrance to the Hellcastle, home of Phantasm.
 			}
 		}
 
