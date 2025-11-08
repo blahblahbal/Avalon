@@ -28,6 +28,21 @@ public class DarkMatterSky : CustomSky
 	private Asset<Texture2D>? darkMatterSky;
 	private float opacity;
 	private bool skyActive;
+
+	private const float endRadius = 0.01f;
+	private const float spiralTwist = 2.5f;
+	private const float inverseSpeed = 500f;
+	private const float tauPow = 98.957726f; // tau ^ 2.5
+	private const int drawCount = 7;
+	private const int bigDrawCount = 3;
+
+	private readonly float[] radius = new float[drawCount];
+	private readonly float[] cloudRotRand = new float[drawCount];
+
+	private readonly bool[] rock = new bool[drawCount];
+	private readonly bool[] debris = new bool[drawCount];
+	private readonly float[] rockRotRand = new float[drawCount];
+	private readonly int[] cloud = new int[drawCount];
 	public override void OnLoad()
 	{
 		darkMatterSky = ModContent.Request<Texture2D>("Avalon/Backgrounds/DarkMatter/DarkMatterSky");
@@ -178,21 +193,13 @@ public class DarkMatterSky : CustomSky
 		//UnifiedRandom? currentCloudSeed = new(Main.ActiveWorldFileData.Seed);
 		FastRandom currentCloudSeed = new(Main.ActiveWorldFileData.Seed);
 
-		float endRadius = 0.01f;
-		float spiralTwist = 2.5f;
-		float inverseSpeed = 500f;
 		byte rockAlpha = (byte)Math.Clamp(255 * opacity, 0, 255);
-		float tauPow = MathF.Pow(MathF.Tau, 2.5f);
 		float time1 = (float)Main.timeForVisualEffects / inverseSpeed * ModContent.GetInstance<AvalonClientConfig>().DarkMatterVortexSpeed;
-		int drawCount = 7;
-		int bigDrawCount = 3;
 		Color color = new(244, 195, 232, 0);
 		//int debrisCount = 0;
 
 		for (float i = 0; i < MathF.Tau; i += MathF.Tau / 75f)
 		{
-			float[] radius = new float[drawCount];
-			float[] cloudRotRand = new float[drawCount];
 			for (int r = 0; r < drawCount; r++)
 			{
 				radius[r] = (r < bigDrawCount ? currentCloudSeed.NextFloat(2400f, 2700f) : currentCloudSeed.NextFloat(1920f, 3250f)) * highResScale;
@@ -200,10 +207,6 @@ public class DarkMatterSky : CustomSky
 			}
 			for (int j = 0; j < 4; j++)
 			{
-				bool[] rock = new bool[drawCount];
-				bool[] debris = new bool[drawCount];
-				float[] rockRotRand = new float[drawCount];
-				int[] cloud = new int[drawCount];
 				for (int r = 0; r < drawCount; r++)
 				{
 					rock[r] = currentCloudSeed.NextBool(7);
