@@ -18,6 +18,8 @@ public class CoughwoodDresser : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 16)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodChandelier>())
+			.Register();
 	}
 }

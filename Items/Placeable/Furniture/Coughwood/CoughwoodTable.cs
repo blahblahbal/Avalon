@@ -18,6 +18,8 @@ public class CoughwoodTable : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 8)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodSink>())
+			.Register();
 	}
 }

@@ -25,6 +25,7 @@ public class TrappedPurpleDungeonChest : ModItem
 			.AddIngredient(ModContent.ItemType<PurpleDungeonChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

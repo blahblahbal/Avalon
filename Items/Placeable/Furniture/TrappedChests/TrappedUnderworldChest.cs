@@ -24,6 +24,7 @@ public class TrappedUnderworldChest : ModItem
 			.AddIngredient(ModContent.ItemType<UnderworldChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

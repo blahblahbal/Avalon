@@ -2,14 +2,11 @@ using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
 using Avalon.Data.Sets;
-using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClub;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -22,7 +19,7 @@ public class HallowedClaymore : ModItem
 	{
 		return true;
 	}
-	public const float scaleMult = 1.35f; 
+	public const float scaleMult = 1.35f;
 	public override void SetDefaults()
 	{
 		Item.DefaultToMace(ModContent.ProjectileType<HallowedClaymoreProj>(), 160, 12f, scaleMult, 42, width: 56, height: 62);
@@ -75,7 +72,7 @@ public class HallowedClaymoreProj : MaceTemplate
 	public override float EndScaleTime => 1f / 3f;
 	public override float EndScaleMult => 1f;
 
-	public override Color? TrailColor => new Color(1f,1f,0.4f,0f);
+	public override Color? TrailColor => new Color(1f, 1f, 0.4f, 0f);
 	public override Func<float, float> EasingFunc => rot => Easings.PowInOut(rot, 5f);
 	public override int TrailLength => 8;
 
@@ -93,7 +90,7 @@ public class HallowedClaymoreProj : MaceTemplate
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				Dust d = Dust.NewDustPerfect(Vector2.Lerp(Projectile.Center, handPosition, Main.rand.NextFloat(-0.3f,0.7f)), DustID.HallowedWeapons);
+				Dust d = Dust.NewDustPerfect(Vector2.Lerp(Projectile.Center, handPosition, Main.rand.NextFloat(-0.3f, 0.7f)), DustID.HallowedWeapons);
 				d.velocity = Vector2.Normalize(offsetFromHand * dirMod).RotatedBy(MathHelper.PiOver2 * Owner.direction) * speedMultiplier * 3;
 			}
 		}

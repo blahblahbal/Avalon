@@ -15,6 +15,9 @@ public class CoughwoodWorkBench : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe().AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 10).Register();
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 10)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodTable>())
+			.Register();
 	}
 }

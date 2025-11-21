@@ -25,6 +25,8 @@ public class ResistantWoodClock : ModItem
 			.AddRecipeGroup("IronBar", 3)
 			.AddIngredient(ItemID.Glass, 6)
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 10)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<ResistantWoodChair>())
+			.Register();
 	}
 }

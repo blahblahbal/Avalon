@@ -1,3 +1,4 @@
+using Avalon.Items.Placeable.Beam;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,6 +24,8 @@ public class ResistantWoodBathtub : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 14)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodBeam>())
+			.Register();
 	}
 }

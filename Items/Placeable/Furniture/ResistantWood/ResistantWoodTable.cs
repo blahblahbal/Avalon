@@ -23,6 +23,8 @@ public class ResistantWoodTable : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 8)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodSink>())
+			.Register();
 	}
 }

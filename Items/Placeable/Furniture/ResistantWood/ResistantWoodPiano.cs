@@ -25,6 +25,8 @@ public class ResistantWoodPiano : ModItem
 			.AddIngredient(ItemID.Bone, 4)
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 15)
 			.AddIngredient(ItemID.Book)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodChest>())
+			.Register();
 	}
 }

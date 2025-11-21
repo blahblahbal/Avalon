@@ -25,6 +25,8 @@ public class ResistantWoodChandelier : ModItem
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 4)
 			.AddIngredient(ItemID.Torch, 4)
 			.AddIngredient(ItemID.Chain)
-			.AddTile(TileID.Anvils).Register();
+			.AddTile(TileID.Anvils)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<ResistantWoodCandelabra>())
+			.Register();
 	}
 }

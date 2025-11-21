@@ -19,6 +19,8 @@ public class CoughwoodSofa : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 5)
 			.AddIngredient(ItemID.Silk, 2)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodCandle>())
+			.Register();
 	}
 }

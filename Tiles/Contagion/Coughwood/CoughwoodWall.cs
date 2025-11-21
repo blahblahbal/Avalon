@@ -18,8 +18,18 @@ public class CoughwoodWallItem : ModItem
 	}
 	public override void AddRecipes()
 	{
-		CreateRecipe(4).AddIngredient(ModContent.ItemType<Coughwood>()).AddTile(TileID.WorkBenches).Register();
-		Recipe.Create(ModContent.ItemType<Coughwood>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).Register();
+		CreateRecipe(4)
+			.AddIngredient(ModContent.ItemType<Coughwood>())
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOfIndexShift(ItemID.AshWoodWall, 1)
+			.Register();
+
+		Recipe.Create(ModContent.ItemType<Coughwood>())
+			.AddIngredient(this, 4)
+			.AddTile(TileID.WorkBenches)
+			.DisableDecraft()
+			.SortAfterFirstRecipesOf(Type)
+			.Register();
 	}
 }
 

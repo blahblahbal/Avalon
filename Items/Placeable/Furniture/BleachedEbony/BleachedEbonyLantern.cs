@@ -19,6 +19,8 @@ public class BleachedEbonyLantern : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 6)
 			.AddIngredient(ItemID.Torch)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyLamp>())
+			.Register();
 	}
 }

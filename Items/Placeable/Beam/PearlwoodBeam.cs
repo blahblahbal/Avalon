@@ -17,6 +17,8 @@ public class PearlwoodBeam : ModItem
 	{
 		Terraria.Recipe.Create(Type, 2)
 			.AddIngredient(ItemID.Pearlwood)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ItemID.PearlwoodDoor)
+			.Register();
 	}
 }

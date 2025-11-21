@@ -19,6 +19,7 @@ public class CoughwoodBreastplate : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<Coughwood>(), 30)
 			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ItemID.ShadewoodBow)
 			.Register();
 	}
 }

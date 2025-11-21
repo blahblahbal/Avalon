@@ -20,6 +20,8 @@ public class BleachedEbonyPiano : ModItem
 			.AddIngredient(ItemID.Bone, 4)
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 15)
 			.AddIngredient(ItemID.Book)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonyChest>())
+			.Register();
 	}
 }

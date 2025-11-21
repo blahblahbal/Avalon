@@ -24,6 +24,8 @@ public class ResistantWoodBed : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 15)
 			.AddIngredient(ItemID.Silk, 5)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<ResistantWoodBathtub>())
+			.Register();
 	}
 }

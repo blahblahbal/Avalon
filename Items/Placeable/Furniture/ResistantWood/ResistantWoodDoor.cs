@@ -23,6 +23,8 @@ public class ResistantWoodDoor : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 6)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodClock>())
+			.Register();
 	}
 }

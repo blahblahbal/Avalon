@@ -23,6 +23,8 @@ public class ResistantWoodDresser : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 16)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<ResistantWoodChandelier>())
+			.Register();
 	}
 }

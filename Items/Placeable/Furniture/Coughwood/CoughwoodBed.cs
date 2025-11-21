@@ -1,4 +1,3 @@
-using Avalon.Tiles.Contagion.Coughwood;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -20,6 +19,8 @@ public class CoughwoodBed : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 15)
 			.AddIngredient(ItemID.Silk, 5)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodBathtub>())
+			.Register();
 	}
 }

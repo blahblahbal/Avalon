@@ -32,6 +32,7 @@
 		<PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
 
 		<Publicize Include="FNA" MemberPattern="^Microsoft.Xna.Framework.Graphics\.SpriteBatch\..*" />
+		<Publicize Include="tModLoader:Terraria.ModLoader.RecipeLoader.FirstRecipeForItem" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="Microsoft.Xna.Framework.Input.Touch">

@@ -1,3 +1,4 @@
+using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClubs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,6 +16,7 @@ public class BleachedEbonyBow : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<Placeable.Tile.BleachedEbony>(), 10)
 			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyClub>())
 			.Register();
 	}
 }

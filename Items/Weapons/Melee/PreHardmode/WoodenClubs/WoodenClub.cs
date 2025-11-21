@@ -11,7 +11,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Melee.PreHardmode.WoodenClub;
+namespace Avalon.Items.Weapons.Melee.PreHardmode.WoodenClubs;
 
 public class WoodenClub : ModItem
 {
@@ -78,7 +78,7 @@ public class WoodenClubProj : MaceTemplate
 
 	public override void EmitDust(Vector2 handPosition, float swingRadius, float rotationProgress, float easedRotationProgress)
 	{
-		if(Projectile.localAI[2] != 1 && easedRotationProgress > 0.1f)
+		if (Projectile.localAI[2] != 1 && easedRotationProgress > 0.1f)
 		{
 			Projectile.localAI[2] = 1;
 			SoundEngine.PlaySound(SoundID.Item1, Projectile.position);

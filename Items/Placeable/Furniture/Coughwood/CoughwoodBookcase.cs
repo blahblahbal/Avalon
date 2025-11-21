@@ -19,6 +19,8 @@ public class CoughwoodBookcase : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 20)
 			.AddIngredient(ItemID.Book, 10)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodBathtub>())
+			.Register();
 	}
 }

@@ -18,6 +18,8 @@ public class CoughwoodDoor : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 6)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodClock>())
+			.Register();
 	}
 }

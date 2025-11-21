@@ -23,6 +23,8 @@ public class ResistantWoodChair : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 4)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<ResistantWoodBed>())
+			.Register();
 	}
 }

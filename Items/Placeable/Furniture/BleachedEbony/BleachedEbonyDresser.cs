@@ -18,6 +18,8 @@ public class BleachedEbonyDresser : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 16)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyChandelier>())
+			.Register();
 	}
 }

@@ -19,6 +19,8 @@ public class BleachedEbonyChest : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 8)
 			.AddRecipeGroup("IronBar", 2)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonyChair>())
+			.Register();
 	}
 }

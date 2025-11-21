@@ -19,6 +19,8 @@ public class CoughwoodSink : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 6)
 			.AddIngredient(ItemID.WaterBucket)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodPiano>())
+			.Register();
 	}
 }

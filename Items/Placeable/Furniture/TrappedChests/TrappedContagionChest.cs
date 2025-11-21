@@ -25,6 +25,7 @@ public class TrappedContagionChest : ModItem
 			.AddIngredient(ModContent.ItemType<ContagionChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

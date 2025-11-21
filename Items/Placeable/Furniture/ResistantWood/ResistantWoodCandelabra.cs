@@ -24,6 +24,8 @@ public class ResistantWoodCandelabra : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 5)
 			.AddIngredient(ItemID.Torch, 3)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodBookcase>())
+			.Register();
 	}
 }

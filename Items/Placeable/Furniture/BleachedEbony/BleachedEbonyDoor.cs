@@ -18,6 +18,8 @@ public class BleachedEbonyDoor : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 6)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonyClock>())
+			.Register();
 	}
 }

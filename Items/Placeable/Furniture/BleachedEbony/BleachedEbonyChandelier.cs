@@ -20,6 +20,8 @@ public class BleachedEbonyChandelier : ModItem
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 4)
 			.AddIngredient(ItemID.Torch, 4)
 			.AddIngredient(ItemID.Chain)
-			.AddTile(TileID.Anvils).Register();
+			.AddTile(TileID.Anvils)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyCandelabra>())
+			.Register();
 	}
 }

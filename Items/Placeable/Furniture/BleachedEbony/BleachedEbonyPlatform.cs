@@ -1,4 +1,5 @@
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Placeable.Furniture.BleachedEbony;
@@ -19,7 +20,15 @@ public class BleachedEbonyPlatform : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe(2).AddIngredient(ModContent.ItemType<Tile.BleachedEbony>()).Register();
-		Recipe.Create(ModContent.ItemType<Tile.BleachedEbony>()).AddIngredient(this, 2).Register();
+		CreateRecipe(2)
+			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>())
+			.SortAfterFirstRecipesOf(ItemID.AshWoodPlatform)
+			.Register();
+
+		Recipe.Create(ModContent.ItemType<Tile.BleachedEbony>())
+			.AddIngredient(this, 2)
+			.DisableDecraft()
+			.SortAfterFirstRecipesOf(Type)
+			.Register();
 	}
 }

@@ -20,6 +20,8 @@ public class CoughwoodCandle : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 4)
 			.AddIngredient(ItemID.Torch)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodCandelabra>())
+			.Register();
 	}
 }

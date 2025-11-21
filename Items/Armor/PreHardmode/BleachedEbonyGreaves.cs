@@ -17,6 +17,7 @@ public class BleachedEbonyGreaves : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<Placeable.Tile.BleachedEbony>(), 25)
 			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonyBreastplate>())
 			.Register();
 	}
 }

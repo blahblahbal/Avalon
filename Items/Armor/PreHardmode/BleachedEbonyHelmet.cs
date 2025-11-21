@@ -23,6 +23,7 @@ public class BleachedEbonyHelmet : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<Placeable.Tile.BleachedEbony>(), 20)
 			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyBreastplate>())
 			.Register();
 	}
 	public override void UpdateArmorSet(Player player)

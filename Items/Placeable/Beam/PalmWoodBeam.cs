@@ -17,6 +17,8 @@ public class PalmWoodBeam : ModItem
 	{
 		Terraria.Recipe.Create(Type, 2)
 			.AddIngredient(ItemID.PalmWood)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ItemID.PalmWoodDoor)
+			.Register();
 	}
 }

@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Items.Tools.PreHardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,6 +18,7 @@ public class CoughwoodSword : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 7)
 			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodHammer>())
 			.Register();
 	}
 }

@@ -1,3 +1,4 @@
+using Avalon.Items.Placeable.Beam;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,6 +19,8 @@ public class BleachedEbonyBathtub : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 14)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonyBeam>())
+			.Register();
 	}
 }

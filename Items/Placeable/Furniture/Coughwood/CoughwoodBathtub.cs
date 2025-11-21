@@ -1,3 +1,4 @@
+using Avalon.Items.Placeable.Beam;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,6 +19,8 @@ public class CoughwoodBathtub : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(itemID: ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 14)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodBeam>())
+			.Register();
 	}
 }

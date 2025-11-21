@@ -25,6 +25,7 @@ public class TrappedResistantWoodChest : ModItem
 			.AddIngredient(ModContent.ItemType<ResistantWoodChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

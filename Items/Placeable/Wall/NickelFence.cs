@@ -17,7 +17,17 @@ public class NickelFence : ModItem
 	}
 	public override void AddRecipes()
 	{
-		CreateRecipe(4).AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>()).AddTile(TileID.Anvils).Register();
-		Recipe.Create(ModContent.ItemType<Material.Bars.NickelBar>()).AddIngredient(this, 4).AddTile(TileID.Anvils).Register();
+		CreateRecipe(4)
+			.AddIngredient(ModContent.ItemType<Material.Bars.NickelBar>())
+			.AddTile(TileID.Anvils)
+			.SortAfterFirstRecipesOfIndexShift(ItemID.IronFence, 1)
+			.Register();
+
+		Recipe.Create(ModContent.ItemType<Material.Bars.NickelBar>())
+			.AddIngredient(this, 4)
+			.AddTile(TileID.Anvils)
+			.DisableDecraft()
+			.SortAfterFirstRecipesOf(Type)
+			.Register();
 	}
 }

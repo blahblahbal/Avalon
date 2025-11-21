@@ -17,6 +17,8 @@ public class BleachedEbonyBeam : ModItem
 	{
 		Terraria.Recipe.Create(Type, 2)
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>())
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ItemID.ToiletRichMahogany)
+			.Register();
 	}
 }

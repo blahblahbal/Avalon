@@ -22,6 +22,7 @@ public class ResistantWoodToilet : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 6)
 			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodSofa>())
 			.Register();
 	}
 }

@@ -1,3 +1,4 @@
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,7 +18,17 @@ public class ResistantWoodFence : ModItem
 	}
 	public override void AddRecipes()
 	{
-		CreateRecipe(4).AddIngredient(ModContent.ItemType<Tile.ResistantWood>()).AddTile(TileID.WorkBenches).Register();
-		Terraria.Recipe.Create(ModContent.ItemType<Tile.ResistantWood>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
+		CreateRecipe(4)
+			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>())
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOfIndexShift(ItemID.AshWoodFence, 1)
+			.Register();
+
+		Recipe.Create(ModContent.ItemType<Tile.ResistantWood>())
+			.AddIngredient(this, 4)
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(Type)
+			.DisableDecraft()
+			.Register();
 	}
 }

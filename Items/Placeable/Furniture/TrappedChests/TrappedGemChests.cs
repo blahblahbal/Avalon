@@ -25,6 +25,7 @@ public class TrappedAmberChest : ModItem
 			.AddIngredient(ModContent.ItemType<AmberChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -49,6 +50,7 @@ public class TrappedAmethystChest : ModItem
 			.AddIngredient(ModContent.ItemType<AmethystChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -73,6 +75,7 @@ public class TrappedDiamondChest : ModItem
 			.AddIngredient(ModContent.ItemType<DiamondChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -97,6 +100,7 @@ public class TrappedEmeraldChest : ModItem
 			.AddIngredient(ModContent.ItemType<EmeraldChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -121,6 +125,7 @@ public class TrappedPeridotChest : ModItem
 			.AddIngredient(ModContent.ItemType<PeridotChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -145,6 +150,7 @@ public class TrappedRubyChest : ModItem
 			.AddIngredient(ModContent.ItemType<RubyChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -169,6 +175,7 @@ public class TrappedSapphireChest : ModItem
 			.AddIngredient(ModContent.ItemType<SapphireChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -193,6 +200,7 @@ public class TrappedTopazChest : ModItem
 			.AddIngredient(ModContent.ItemType<TopazChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -217,6 +225,7 @@ public class TrappedTourmalineChest : ModItem
 			.AddIngredient(ModContent.ItemType<TourmalineChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }
@@ -241,6 +250,7 @@ public class TrappedZirconChest : ModItem
 			.AddIngredient(ModContent.ItemType<ZirconChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

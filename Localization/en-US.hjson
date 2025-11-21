@@ -3933,7 +3933,7 @@ Mods: {
 			}
 
 			ResistantWoodBeam: {
-				DisplayName: Resistant Wood Beam
+				DisplayName: Resistant Beam
 				Tooltip: ""
 			}
 
@@ -9230,7 +9230,7 @@ Mods: {
 			}
 
 			PalmWoodBeam: {
-				DisplayName: Palm Wood Beam
+				DisplayName: Palm Beam
 				Tooltip: ""
 			}
 
@@ -10062,6 +10062,56 @@ Mods: {
 
 			HallowedClaymore: {
 				DisplayName: Hallowed Claymore
+				Tooltip: ""
+			}
+
+			AshWoodClub: {
+				DisplayName: Ash Wood Club
+				Tooltip: ""
+			}
+
+			BleachedEbonyClub: {
+				DisplayName: Bleached Ebony Club
+				Tooltip: ""
+			}
+
+			BorealWoodClub: {
+				DisplayName: Boreal Wood Club
+				Tooltip: ""
+			}
+
+			CoughwoodClub: {
+				DisplayName: Coughwood Club
+				Tooltip: ""
+			}
+
+			EbonwoodClub: {
+				DisplayName: Ebonwood Club
+				Tooltip: ""
+			}
+
+			PalmWoodClub: {
+				DisplayName: Palm Wood Club
+				Tooltip: ""
+			}
+
+			PearlwoodClub: {
+				DisplayName: Pearlwood Club
+				Tooltip: ""
+			}
+
+			ResistantWoodClub: {
+				DisplayName: Resistant Wood Club
+				Tooltip: ""
+			}
+
+			RichMahoganyClub: {
+				DisplayName: Rich Mahogany Club
+				Tooltip: ""
+			}
+
+			ShadewoodClub: {
+				DisplayName: Shadewood Club
 				Tooltip: ""
 			}
 		}

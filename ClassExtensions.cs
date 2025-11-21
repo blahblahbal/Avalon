@@ -883,6 +883,22 @@ public static class ClassExtensions
 		return projectile.DamageType == DamageClass.Melee && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.NightsEdge || projectile.type == ProjectileID.Terragrim || projectile.type == ProjectileID.Arkhalis);
 	}
 
+
+	/// <summary>
+	/// <inheritdoc cref="Recipe.SortAfterFirstRecipesOf(int)"/><br></br>
+	/// Adjusts the <see cref="Main.recipe"/> array index this recipe gets sorted after by the value provided in <paramref name="indexShift"/>.
+	/// </summary>
+	public static Recipe SortAfterFirstRecipesOfIndexShift(this Recipe recipe, int itemId, int indexShift)
+	{
+		Recipe target = Main.recipe[RecipeLoader.FirstRecipeForItem[itemId].RecipeIndex + indexShift];
+		if (target != null)
+		{
+			return recipe.SortAfter(target);
+		}
+
+		return recipe;
+	}
+
 	/// <inheritdoc cref="Utils.NextFloat(UnifiedRandom, float)"/>
 	public static float NextFloat(this ref FastRandom r, float maxValue)
 		=> r.NextFloat() * maxValue;

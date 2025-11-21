@@ -25,6 +25,7 @@ public class TrappedTuhrtlChest : ModItem
 			.AddIngredient(ModContent.ItemType<TuhrtlChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

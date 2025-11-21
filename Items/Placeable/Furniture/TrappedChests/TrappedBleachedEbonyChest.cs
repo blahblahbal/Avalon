@@ -25,6 +25,7 @@ public class TrappedBleachedEbonyChest : ModItem
 			.AddIngredient(ModContent.ItemType<BleachedEbonyChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

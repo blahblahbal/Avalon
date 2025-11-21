@@ -19,6 +19,8 @@ public class BleachedEbonyCandelabra : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 5)
 			.AddIngredient(ItemID.Torch, 3)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonyBookcase>())
+			.Register();
 	}
 }

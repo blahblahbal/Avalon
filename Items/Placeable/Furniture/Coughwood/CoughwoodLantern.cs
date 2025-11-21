@@ -19,6 +19,8 @@ public class CoughwoodLantern : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 6)
 			.AddIngredient(ItemID.Torch)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodLamp>())
+			.Register();
 	}
 }

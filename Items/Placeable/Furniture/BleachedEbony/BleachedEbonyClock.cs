@@ -20,6 +20,8 @@ public class BleachedEbonyClock : ModItem
 			.AddRecipeGroup("IronBar", 3)
 			.AddIngredient(ItemID.Glass, 6)
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 10)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyChair>())
+			.Register();
 	}
 }

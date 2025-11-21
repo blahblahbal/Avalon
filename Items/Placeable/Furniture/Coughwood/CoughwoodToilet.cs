@@ -16,6 +16,8 @@ public class CoughwoodToilet : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 6)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodSofa>())
+			.Register();
 	}
 }

@@ -19,6 +19,8 @@ public class CoughwoodChest : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 8)
 			.AddRecipeGroup("IronBar", 2)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodChair>())
+			.Register();
 	}
 }

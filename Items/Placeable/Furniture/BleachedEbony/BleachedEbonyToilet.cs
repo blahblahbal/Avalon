@@ -16,6 +16,8 @@ public class BleachedEbonyToilet : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 6)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonySofa>())
+			.Register();
 	}
 }

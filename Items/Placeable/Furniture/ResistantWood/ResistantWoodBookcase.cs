@@ -24,6 +24,8 @@ public class ResistantWoodBookcase : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 20)
 			.AddIngredient(ItemID.Book, 10)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodBathtub>())
+			.Register();
 	}
 }

@@ -15,6 +15,9 @@ public class BleachedEbonyWorkBench : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe().AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 10).Register();
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 10)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonyTable>())
+			.Register();
 	}
 }

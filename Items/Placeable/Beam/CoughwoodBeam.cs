@@ -18,6 +18,8 @@ public class CoughwoodBeam : ModItem
 	{
 		Terraria.Recipe.Create(Type, 2)
 			.AddIngredient(ModContent.ItemType<Coughwood>())
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ItemID.ToiletShadewood)
+			.Register();
 	}
 }

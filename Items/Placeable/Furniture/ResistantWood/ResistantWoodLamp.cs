@@ -24,6 +24,8 @@ public class ResistantWoodLamp : ModItem
 		CreateRecipe()
 			.AddIngredient(ItemID.Torch)
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 3)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<ResistantWoodCandle>())
+			.Register();
 	}
 }

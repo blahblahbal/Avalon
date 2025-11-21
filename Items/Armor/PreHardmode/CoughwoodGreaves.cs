@@ -19,6 +19,7 @@ public class CoughwoodGreaves : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<Coughwood>(), 25)
 			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodBreastplate>())
 			.Register();
 	}
 }

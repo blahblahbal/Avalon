@@ -19,6 +19,8 @@ public class BleachedEbonyBookcase : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 20)
 			.AddIngredient(ItemID.Book, 10)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<BleachedEbonyBathtub>())
+			.Register();
 	}
 }

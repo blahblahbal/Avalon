@@ -18,6 +18,8 @@ public class CoughwoodChair : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 4)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodBed>())
+			.Register();
 	}
 }

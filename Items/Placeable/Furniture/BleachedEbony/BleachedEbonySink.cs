@@ -19,6 +19,8 @@ public class BleachedEbonySink : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 6)
 			.AddIngredient(ItemID.WaterBucket)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyPiano>())
+			.Register();
 	}
 }

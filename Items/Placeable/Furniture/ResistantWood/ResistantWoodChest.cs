@@ -24,6 +24,8 @@ public class ResistantWoodChest : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 8)
 			.AddRecipeGroup("IronBar", 2)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodChair>())
+			.Register();
 	}
 }

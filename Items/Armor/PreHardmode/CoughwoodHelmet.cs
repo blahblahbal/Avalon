@@ -25,6 +25,7 @@ public class CoughwoodHelmet : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<Coughwood>(), 20)
 			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodBreastplate>())
 			.Register();
 	}
 	public override void UpdateArmorSet(Player player)

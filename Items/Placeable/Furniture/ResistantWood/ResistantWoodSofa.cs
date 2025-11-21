@@ -24,6 +24,8 @@ public class ResistantWoodSofa : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 5)
 			.AddIngredient(ItemID.Silk, 2)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodCandle>())
+			.Register();
 	}
 }

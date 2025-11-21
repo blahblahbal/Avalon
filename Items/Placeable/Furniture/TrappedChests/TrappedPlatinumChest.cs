@@ -24,6 +24,7 @@ public class TrappedPlatinumChest : ModItem
 			.AddIngredient(ModContent.ItemType<PlatinumChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

@@ -17,6 +17,8 @@ public class EbonwoodBeam : ModItem
 	{
 		Terraria.Recipe.Create(Type, 2)
 			.AddIngredient(ItemID.Ebonwood)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ItemID.EbonwoodDoor)
+			.Register();
 	}
 }

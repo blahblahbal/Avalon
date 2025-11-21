@@ -25,6 +25,7 @@ public class TrappedCoughwoodChest : ModItem
 			.AddIngredient(ModContent.ItemType<CoughwoodChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

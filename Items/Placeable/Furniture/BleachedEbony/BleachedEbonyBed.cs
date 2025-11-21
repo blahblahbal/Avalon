@@ -19,6 +19,8 @@ public class BleachedEbonyBed : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.BleachedEbony>(), 15)
 			.AddIngredient(ItemID.Silk, 5)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyBathtub>())
+			.Register();
 	}
 }

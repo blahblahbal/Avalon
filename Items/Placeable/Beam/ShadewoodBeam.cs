@@ -17,6 +17,8 @@ public class ShadewoodBeam : ModItem
 	{
 		Terraria.Recipe.Create(Type, 2)
 			.AddIngredient(ItemID.Shadewood)
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortBeforeFirstRecipesOf(ItemID.ShadewoodDoor)
+			.Register();
 	}
 }

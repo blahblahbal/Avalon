@@ -1,3 +1,4 @@
+using Avalon.Items.Tools.PreHardmode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,6 +16,7 @@ public class BleachedEbonySword : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<Placeable.Tile.BleachedEbony>(), 7)
 			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyHammer>())
 			.Register();
 	}
 }

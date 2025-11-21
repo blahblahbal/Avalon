@@ -25,6 +25,7 @@ public class TrappedHeartstoneChest : ModItem
 			.AddIngredient(ModContent.ItemType<HeartstoneChest>())
 			.AddIngredient(ItemID.Wire, 10)
 			.AddTile(TileID.HeavyWorkBench)
+			.SortAfterFirstRecipesOf(ItemID.Fake_AshWoodChest)
 			.Register();
 	}
 }

@@ -21,7 +21,15 @@ public class ResistantWoodPlatform : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe(2).AddIngredient(ModContent.ItemType<Tile.ResistantWood>()).Register();
-		Recipe.Create(ModContent.ItemType<Tile.ResistantWood>()).AddIngredient(this, 2).DisableDecraft().Register();
+		CreateRecipe(2)
+			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>())
+			.SortAfterFirstRecipesOf(ItemID.AshWoodPlatform)
+			.Register();
+
+		Recipe.Create(ModContent.ItemType<Tile.ResistantWood>())
+			.AddIngredient(this, 2)
+			.DisableDecraft()
+			.SortAfterFirstRecipesOf(Type)
+			.Register();
 	}
 }

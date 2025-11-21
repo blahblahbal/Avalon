@@ -24,6 +24,8 @@ public class ResistantWoodSink : ModItem
 		CreateRecipe()
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 6)
 			.AddIngredient(ItemID.WaterBucket)
-			.AddTile(TileID.WorkBenches).Register();
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<ResistantWoodPiano>())
+			.Register();
 	}
 }

@@ -18,6 +18,8 @@ public class ResistantWoodBeam : ModItem
 	{
 		Terraria.Recipe.Create(Type, 2)
 			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>())
-			.AddTile(TileID.Sawmill).Register();
+			.AddTile(TileID.Sawmill)
+			.SortAfterFirstRecipesOf(ItemID.AshWoodToilet)
+			.Register();
 	}
 }

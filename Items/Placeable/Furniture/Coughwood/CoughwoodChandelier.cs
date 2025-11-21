@@ -20,6 +20,8 @@ public class CoughwoodChandelier : ModItem
 			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 4)
 			.AddIngredient(ItemID.Torch, 4)
 			.AddIngredient(ItemID.Chain)
-			.AddTile(TileID.Anvils).Register();
+			.AddTile(TileID.Anvils)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodCandelabra>())
+			.Register();
 	}
 }

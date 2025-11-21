@@ -21,6 +21,9 @@ public class ResistantWoodWorkBench : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe().AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 10).Register();
+		CreateRecipe()
+			.AddIngredient(ModContent.ItemType<Tile.ResistantWood>(), 10)
+			.SortAfterFirstRecipesOf(ModContent.ItemType<ResistantWoodTable>())
+			.Register();
 	}
 }
