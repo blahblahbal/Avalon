@@ -8,16 +8,6 @@ LoadingTips_Default: {
 UI.WorldDescriptionEvilRandom: Let nature decide if corruption, crimson, or contagion is in your world.
 
 Mods: {
-	BiomeTitles: {
-		Title: {
-			Avalon: {
-				PhantomGardens: Phantom Gardens
-				Hellcastle: Hellcastle
-				Contagion: Contagion
-			}
-		}
-	}
-
 	AltLibrary: {
 		AltOres: {
 			CobaltAltOre: {
