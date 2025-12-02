@@ -5,15 +5,16 @@ namespace Avalon.Items.Placeable.Trap;
 
 public class TuhrtlPressurePlate : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Item.ResearchUnlockCount = 5;
-    }
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.SortingPriorityWiring[Type] = 87;
+		Item.ResearchUnlockCount = 5;
+	}
 
-    public override void SetDefaults()
-    {
-        Item.CloneDefaults(ItemID.LihzahrdPressurePlate);
-        Item.placeStyle = 0;
-        Item.createTile = ModContent.TileType<Tiles.Savanna.TuhrtlPressurePlate>();
-    }
+	public override void SetDefaults()
+	{
+		Item.CloneDefaults(ItemID.LihzahrdPressurePlate);
+		Item.placeStyle = 0;
+		Item.createTile = ModContent.TileType<Tiles.Savanna.TuhrtlPressurePlate>();
+	}
 }
