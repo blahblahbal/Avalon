@@ -151,12 +151,6 @@ public class Ickslime : ModNPC
             NPC.life = NPC.lifeMax;
             NPC.netUpdate = true;
         }
-
-        if (Main.expertMode)
-        {
-            VanillaNPCExpertChanges.SlimeJumpSpeedIncrease(NPC, 1.3f);
-            NPC.ai[1]++;
-        }
     }
     public override void FindFrame(int frameHeight)
     {

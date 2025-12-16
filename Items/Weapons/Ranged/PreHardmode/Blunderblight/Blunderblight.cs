@@ -1,7 +1,6 @@
 using Avalon;
 using Avalon.Common;
 using Avalon.Common.Extensions;
-using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -18,14 +17,6 @@ namespace Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight
 			Item.rare = ItemRarityID.Blue;
 			Item.value = Item.sellPrice(0, 1, 50);
 			Item.UseSound = SoundID.Item36;
-		}
-
-		public override void UseStyle(Player player, Rectangle heldItemFrame)
-		{
-			if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
-			{
-				UseStyles.gunStyle(player, 0.05f, 5f, 3f);
-			}
 		}
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{

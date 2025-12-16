@@ -1,4 +1,3 @@
-using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -36,7 +35,6 @@ public class MineralSlime : ModNPC
 	int WhichOre;
 	public override void AI()
 	{
-		VanillaNPCExpertChanges.SlimeJumpSpeedIncrease(NPC, 1.2f);
 		NPC.ai[0]++;
 	}
 	public override void OnSpawn(IEntitySource source)

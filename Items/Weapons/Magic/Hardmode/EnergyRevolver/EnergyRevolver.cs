@@ -28,13 +28,6 @@ public class EnergyRevolver : ModItem
 		Item.value = Item.sellPrice(0, 4);
 		Item.UseSound = LaserNoise;
 	}
-	public override void UseStyle(Player player, Rectangle heldItemFrame)
-	{
-		if (ModContent.GetInstance<Common.AvalonClientConfig>().AdditionalScreenshakes)
-		{
-			UseStyles.gunStyle(player, 0, 2);
-		}
-	}
 	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 	{
 	}
