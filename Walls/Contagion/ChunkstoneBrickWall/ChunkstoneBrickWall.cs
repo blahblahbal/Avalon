@@ -1,9 +1,10 @@
+using Avalon.Tiles.Contagion.ChunkstoneBrick;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Contagion.ChunkstoneBrick;
+namespace Avalon.Walls.Contagion.ChunkstoneBrickWall;
 [LegacyName("ChunkstoneBrickWall")]
 public class ChunkstoneBrickWallItem : ModItem
 {

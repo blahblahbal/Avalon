@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Ancient.AncientIronBrick;
+namespace Avalon.Walls.Ancient.AncientIronBrick;
 
 
 [LegacyName("AncientIronBrickWall")]
@@ -20,8 +20,8 @@ public class AncientIronBrickWallItem : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe(4).AddIngredient(ModContent.ItemType<AncientIronBrick>()).AddTile(TileID.WorkBenches).Register();
-		Recipe.Create(ModContent.ItemType<AncientIronBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
+		CreateRecipe(4).AddIngredient(ModContent.ItemType<Tiles.Ancient.AncientIronBrick.AncientIronBrick>()).AddTile(TileID.WorkBenches).Register();
+		Recipe.Create(ModContent.ItemType<Tiles.Ancient.AncientIronBrick.AncientIronBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
 	}
 }
 public class AncientIronBrickWall : ModWall

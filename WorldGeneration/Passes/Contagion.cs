@@ -8,6 +8,7 @@ using Avalon.Tiles.Contagion.SnotOrb;
 using Avalon.Tiles.Contagion.Snotsand;
 using Avalon.Tiles.Contagion.Snotsandstone;
 using Avalon.Tiles.Contagion.YellowIce;
+using Avalon.Walls.Contagion.ChunkstoneWall;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;

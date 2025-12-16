@@ -1,14 +1,9 @@
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Ancient.Vanilla
+namespace Avalon.Walls.Ancient.Vanilla
 {
 	[LegacyName("UnsafeAncientObsidianBrickWall")]
 	public class UnsafeAncientObsidianBrickWallItem : ModItem

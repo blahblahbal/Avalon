@@ -18,6 +18,9 @@ using Avalon.Tiles.Contagion.YellowIce;
 using Avalon.Tiles.Contagion.Snotsandstone;
 using Avalon.Tiles.Contagion.HardenedSnotsand;
 using Avalon.Tiles.Contagion.BacciliteBrick;
+using Avalon.Walls.Contagion.HardenedSnotsandWall;
+using Avalon.Walls.Contagion.SnotsandstoneWall;
+using Avalon.Walls.Contagion.ChunkstoneWall;
 
 namespace Avalon.Hooks
 {

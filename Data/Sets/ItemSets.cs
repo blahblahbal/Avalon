@@ -121,6 +121,7 @@ using Avalon.Tiles.Contagion.Chunkstone;
 using Avalon.Tiles.Contagion.ContagionChest;
 using Avalon.Tiles.Contagion.Coughwood;
 using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Walls.Contagion.CoughwoodWall;
 using System.Collections.Generic;
 using Terraria.ID;
 using static Terraria.ModLoader.ModContent;

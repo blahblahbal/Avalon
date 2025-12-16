@@ -1,9 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Tiles.Contagion.Coughwood;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Contagion.Coughwood;
+namespace Avalon.Walls.Contagion.CoughwoodWall;
 [LegacyName("CoughwoodWall")]
 public class CoughwoodWallItem : ModItem
 {

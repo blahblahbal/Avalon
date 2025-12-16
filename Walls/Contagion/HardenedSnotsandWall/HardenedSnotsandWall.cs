@@ -1,9 +1,10 @@
+using Avalon.Tiles.Contagion.HardenedSnotsand;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Contagion.HardenedSnotsand;
+namespace Avalon.Walls.Contagion.HardenedSnotsandWall;
 
 [LegacyName("HardenedSnotsandWall")]
 public class HardenedSnotsandWallItem : ModItem

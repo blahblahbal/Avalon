@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Ancient.AncientOrangeBrick;
+namespace Avalon.Walls.Ancient.AncientOrangeBrick;
 
 [LegacyName("AncientOrangeBrickWall")]
 public class AncientOrangeBrickWallItem : ModItem
@@ -22,7 +22,7 @@ public class AncientOrangeBrickWallItem : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(4)
-			.AddIngredient(ModContent.ItemType<AncientOrangeBrick>())
+			.AddIngredient(ModContent.ItemType<Tiles.Ancient.AncientOrangeBrick.AncientOrangeBrick>())
 			.AddTile(TileID.WorkBenches)
 			.Register();
 	}

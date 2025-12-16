@@ -1,9 +1,10 @@
+using Avalon.Tiles.Contagion.BacciliteBrick;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Contagion.BacciliteBrick;
+namespace Avalon.Walls.Contagion.BacciliteBrickWall;
 
 [LegacyName("BacciliteBrickWall")]
 public class BacciliteBrickWallItem : ModItem

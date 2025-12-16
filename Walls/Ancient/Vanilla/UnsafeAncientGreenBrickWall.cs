@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Ancient.Vanilla
+namespace Avalon.Walls.Ancient.Vanilla
 {
 	[LegacyName("UnsafeAncientGreenBrickWall")]
 	public class UnsafeAncientGreenBrickWallItem : ModItem

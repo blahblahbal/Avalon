@@ -1,10 +1,9 @@
-using Avalon.Tiles.Ancient.AncientYellowBrick;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Ancient.AncientPurpleBrick;
+namespace Avalon.Walls.Ancient.AncientPurpleBrick;
 
 [LegacyName("AncientPrupleBrickWall")]
 public class AncientPurpleBrickWallItem : ModItem
@@ -21,7 +20,7 @@ public class AncientPurpleBrickWallItem : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(4)
-			.AddIngredient(ModContent.ItemType<AncientPurpleBrick>())
+			.AddIngredient(ModContent.ItemType<Tiles.Ancient.AncientPurpleBrick.AncientPurpleBrick>())
 			.AddTile(TileID.WorkBenches)
 			.Register();
 	}

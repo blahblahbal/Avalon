@@ -29,6 +29,8 @@ using Avalon.Tiles.Contagion.Snotsand;
 using Avalon.Tiles.Contagion.Snotsandstone;
 using Avalon.Tiles.Contagion.YellowIce;
 using Avalon.Walls;
+using Avalon.Walls.Contagion.HardenedSnotsandWall;
+using Avalon.Walls.Contagion.SnotsandstoneWall;
 using Avalon.WorldGeneration.Enums;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;

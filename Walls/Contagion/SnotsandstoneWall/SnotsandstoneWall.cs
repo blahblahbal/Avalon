@@ -1,9 +1,10 @@
+using Avalon.Tiles.Contagion.Snotsandstone;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Contagion.Snotsandstone;
+namespace Avalon.Walls.Contagion.SnotsandstoneWall;
 
 [LegacyName("SnotsandstoneWall")]
 public class SnotsandstoneWallItem : ModItem

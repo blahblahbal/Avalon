@@ -1,3 +1,4 @@
+using Avalon.Walls.Ancient.AncientYellowBrick;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

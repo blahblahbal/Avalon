@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Ancient.AncientAdamantiteBrick;
+namespace Avalon.Walls.Ancient.AncientAdamantiteBrick;
 
 [LegacyName("AncientAdamantiteBrickWall")]
 public class AncientAdamantiteBrickWallItem : ModItem
@@ -20,8 +20,8 @@ public class AncientAdamantiteBrickWallItem : ModItem
 
 	public override void AddRecipes()
 	{
-		CreateRecipe(4).AddIngredient(ModContent.ItemType<AncientAdamantiteBrick>()).AddTile(TileID.WorkBenches).Register();
-		Recipe.Create(ModContent.ItemType<AncientAdamantiteBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
+		CreateRecipe(4).AddIngredient(ModContent.ItemType<Tiles.Ancient.AncientAdamantiteBrick.AncientAdamantiteBrick>()).AddTile(TileID.WorkBenches).Register();
+		Recipe.Create(ModContent.ItemType<Tiles.Ancient.AncientAdamantiteBrick.AncientAdamantiteBrick>()).AddIngredient(this, 4).AddTile(TileID.WorkBenches).DisableDecraft().Register();
 	}
 }
 public class AncientAdamantiteBrickWall : ModWall

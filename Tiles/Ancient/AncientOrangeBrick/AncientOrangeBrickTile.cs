@@ -1,4 +1,5 @@
 using Avalon.Items.Placeable.Wall;
+using Avalon.Walls.Ancient.AncientOrangeBrick;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Ancient.AncientYellowBrick;
+namespace Avalon.Walls.Ancient.AncientYellowBrick;
 
 [LegacyName("AncientYellowBrickWall")]
 public class AncientYellowBrickWallItem : ModItem
@@ -20,7 +20,7 @@ public class AncientYellowBrickWallItem : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(4)
-			.AddIngredient(ModContent.ItemType<AncientYellowBrick>())
+			.AddIngredient(ModContent.ItemType<Tiles.Ancient.AncientYellowBrick.AncientYellowBrick>())
 			.AddTile(TileID.WorkBenches)
 			.Register();
 	}

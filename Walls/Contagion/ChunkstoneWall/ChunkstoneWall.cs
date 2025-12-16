@@ -1,15 +1,11 @@
 ﻿using Avalon.Dusts;
+using Avalon.Tiles.Contagion.Chunkstone;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Tiles.Contagion.Chunkstone;
+namespace Avalon.Walls.Contagion.ChunkstoneWall;
 [LegacyName("ChunkstoneWall")]
 public class ChunkstoneWallItem : ModItem
 {
