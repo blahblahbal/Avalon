@@ -28,7 +28,11 @@ using Avalon.Tiles.Contagion.IckyAltar;
 using Avalon.Tiles.Contagion.Snotsand;
 using Avalon.Tiles.Contagion.Snotsandstone;
 using Avalon.Tiles.Contagion.YellowIce;
-using Avalon.Walls;
+using Avalon.Walls.Contagion.ContagionBoilWall;
+using Avalon.Walls.Contagion.ContagionCystWall;
+using Avalon.Walls.Contagion.ContagionGrassWall;
+using Avalon.Walls.Contagion.ContagionLumpWall;
+using Avalon.Walls.Contagion.ContagionMouldWall;
 using Avalon.Walls.Contagion.HardenedSnotsandWall;
 using Avalon.Walls.Contagion.SnotsandstoneWall;
 using Avalon.WorldGeneration.Enums;
@@ -254,7 +258,7 @@ public class ContagionAltBiome : AltBiome
 			WallID.CrimsonHardenedSand,
 			WallID.HallowHardenedSand
 		);
-		AddWallConversions<ContagionGrassWall>(
+		AddWallConversions<ContagionGrassWallUnsafe>(
 			WallID.GrassUnsafe,
 			WallID.Grass,
 			WallID.FlowerUnsafe,

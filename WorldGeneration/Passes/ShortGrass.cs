@@ -1,7 +1,7 @@
 using Avalon.Data.Sets;
 using Avalon.Tiles.Contagion.ContagionGrasses;
 using Avalon.Tiles.Contagion.SmallPlants;
-using Avalon.Walls;
+using Avalon.Walls.Contagion.ContagionGrassWall;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
@@ -35,7 +35,7 @@ namespace Avalon.WorldGeneration.Passes
                             {
                                 t.TileFrameX = 8 * 18;
                             }
-                            else if (WorldGen.genRand.NextBool(35) || (Main.tile[num244, num245 - 1].WallType == ModContent.WallType<ContagionGrassWall>()))
+                            else if (WorldGen.genRand.NextBool(35) || (Main.tile[num244, num245 - 1].WallType == ModContent.WallType<ContagionGrassWallUnsafe>()))
                             {
                                 int style = WorldGen.genRand.NextFromList(6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22);
                                 t.TileFrameX = (short)(style * 18);

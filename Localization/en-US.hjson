@@ -5185,7 +5185,7 @@ Mods: {
 				Tooltip: "[c/C39FDD:[11th Anniversary Contest Winner - sapphirephly][c/C39FDD:]]"
 			}
 
-			CoughwoodFence: {
+			CoughwoodFenceItem: {
 				DisplayName: Coughwood Fence
 				Tooltip: ""
 			}
@@ -5650,7 +5650,7 @@ Mods: {
 				Tooltip: ""
 			}
 
-			SepsisBlockWall: {
+			SepsisBlockWallItem: {
 				DisplayName: Sepsis Block Wall
 				Tooltip: ""
 			}
@@ -5705,22 +5705,22 @@ Mods: {
 				Tooltip: ""
 			}
 
-			ContagionBoilWall: {
+			ContagionBoilWallItem: {
 				DisplayName: Contagion Boil Wall
 				Tooltip: ""
 			}
 
-			ContagionCystWall: {
+			ContagionCystWallItem: {
 				DisplayName: Contagion Cyst Wall
 				Tooltip: ""
 			}
 
-			ContagionLumpWall: {
+			ContagionLumpWallItem: {
 				DisplayName: Contagion Lump Wall
 				Tooltip: ""
 			}
 
-			ContagionMouldWall: {
+			ContagionMouldWallItem: {
 				DisplayName: Contagion Mold Wall
 				Tooltip: ""
 			}
@@ -7168,7 +7168,7 @@ Mods: {
 					'''
 			}
 
-			ContagionGrassWall: {
+			ContagionGrassWallItem: {
 				DisplayName: Contagion Grass Wall
 				Tooltip: ""
 			}

@@ -17,8 +17,12 @@ using Avalon.Tiles.Contagion.YellowIce;
 using Avalon.Tiles.Herbs;
 using Avalon.Tiles.Ores;
 using Avalon.Tiles.Savanna;
-using Avalon.Walls;
 using Avalon.Walls.Contagion.ChunkstoneWall;
+using Avalon.Walls.Contagion.ContagionBoilWall;
+using Avalon.Walls.Contagion.ContagionCystWall;
+using Avalon.Walls.Contagion.ContagionGrassWall;
+using Avalon.Walls.Contagion.ContagionLumpWall;
+using Avalon.Walls.Contagion.ContagionMouldWall;
 using Avalon.Walls.Contagion.HardenedSnotsandWall;
 using Avalon.Walls.Contagion.SnotsandstoneWall;
 using Avalon.WorldGeneration.Enums;
@@ -1670,7 +1674,7 @@ public class AvalonWorld : ModSystem
 		{
 			if (Main.tile[x, y] != null)
 			{
-				if (wall == ModContent.WallType<ContagionGrassWall>())
+				if (wall == ModContent.WallType<ContagionGrassWallUnsafe>())
 				{
 					Main.tile[x, y].WallType = WallID.GrassUnsafe;
 				}
@@ -1783,7 +1787,7 @@ public class AvalonWorld : ModSystem
 		{
 			if (Main.tile[x, y] != null)
 			{
-				if (wall == ModContent.WallType<ContagionGrassWall>() || wall == WallID.CrimsonGrassUnsafe || wall == WallID.CorruptGrassUnsafe || wall == WallID.HallowedGrassUnsafe)
+				if (wall == ModContent.WallType<ContagionGrassWallUnsafe>() || wall == WallID.CrimsonGrassUnsafe || wall == WallID.CorruptGrassUnsafe || wall == WallID.HallowedGrassUnsafe)
 				{
 					Main.tile[x, y].WallType = WallID.JungleUnsafe;
 				}
@@ -1835,7 +1839,7 @@ public class AvalonWorld : ModSystem
 			{
 				if (WallID.Sets.Conversion.Grass[wall])
 				{
-					Main.tile[x, y].WallType = (ushort)ModContent.WallType<ContagionGrassWall>();
+					Main.tile[x, y].WallType = (ushort)ModContent.WallType<ContagionGrassWallUnsafe>();
 				}
 				else if (WallID.Sets.Conversion.Stone[wall])
 				{

@@ -2,7 +2,6 @@ using Avalon.Common;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using Avalon.Walls;
 using MonoMod.Cil;
 using Terraria.IO;
 using Terraria.WorldBuilding;
@@ -21,6 +20,11 @@ using Avalon.Tiles.Contagion.BacciliteBrick;
 using Avalon.Walls.Contagion.HardenedSnotsandWall;
 using Avalon.Walls.Contagion.SnotsandstoneWall;
 using Avalon.Walls.Contagion.ChunkstoneWall;
+using Avalon.Walls.Contagion.ContagionLumpWall;
+using Avalon.Walls.Contagion.ContagionMouldWall;
+using Avalon.Walls.Contagion.ContagionCystWall;
+using Avalon.Walls.Contagion.ContagionBoilWall;
+using Avalon.Walls.Contagion.ContagionGrassWall;
 
 namespace Avalon.Hooks
 {
@@ -154,7 +158,7 @@ namespace Avalon.Hooks
                             Main.tile[m, n].WallType == WallID.Grass || Main.tile[m, n].WallType == WallID.Flower ||
                             Main.tile[m, n].WallType == WallID.CorruptGrassUnsafe || Main.tile[m, n].WallType == WallID.CrimsonGrassUnsafe)
                         {
-                            Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionGrassWall>();
+                            Main.tile[m, n].WallType = (ushort)ModContent.WallType<ContagionGrassWallUnsafe>();
                         }
                         else if (Main.tile[m, n].WallType == WallID.HardenedSand)
                         {
@@ -432,7 +436,7 @@ namespace Avalon.Hooks
                             #region walls
                             if (Main.tile[m, n].WallType == WallID.GrassUnsafe || Main.tile[m, n].WallType == WallID.FlowerUnsafe ||
                             Main.tile[m, n].WallType == WallID.Grass || Main.tile[m, n].WallType == WallID.Flower ||
-                            Main.tile[m, n].WallType == WallID.CorruptGrassUnsafe || Main.tile[m, n].WallType == ModContent.WallType<ContagionGrassWall>())
+                            Main.tile[m, n].WallType == WallID.CorruptGrassUnsafe || Main.tile[m, n].WallType == ModContent.WallType<ContagionGrassWallUnsafe>())
                             {
                                 Main.tile[m, n].WallType = WallID.CrimsonGrassUnsafe;
                             }
@@ -527,7 +531,7 @@ namespace Avalon.Hooks
                             #region walls
                             if (Main.tile[m, n].WallType == WallID.GrassUnsafe || Main.tile[m, n].WallType == WallID.FlowerUnsafe ||
                             Main.tile[m, n].WallType == WallID.Grass || Main.tile[m, n].WallType == WallID.Flower ||
-                            Main.tile[m, n].WallType == ModContent.WallType<ContagionGrassWall>() || Main.tile[m, n].WallType == WallID.CrimsonGrassUnsafe)
+                            Main.tile[m, n].WallType == ModContent.WallType<ContagionGrassWallUnsafe>() || Main.tile[m, n].WallType == WallID.CrimsonGrassUnsafe)
                             {
                                 Main.tile[m, n].WallType = WallID.CorruptGrassUnsafe;
                             }

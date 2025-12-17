@@ -7,8 +7,12 @@ using Avalon.Tiles.Contagion.Snotsand;
 using Avalon.Tiles.Contagion.Snotsandstone;
 using Avalon.Tiles.Contagion.ThornyBushes;
 using Avalon.Tiles.Contagion.YellowIce;
-using Avalon.Walls;
 using Avalon.Walls.Contagion.ChunkstoneWall;
+using Avalon.Walls.Contagion.ContagionBoilWall;
+using Avalon.Walls.Contagion.ContagionCystWall;
+using Avalon.Walls.Contagion.ContagionGrassWall;
+using Avalon.Walls.Contagion.ContagionLumpWall;
+using Avalon.Walls.Contagion.ContagionMouldWall;
 using Avalon.Walls.Contagion.HardenedSnotsandWall;
 using Avalon.Walls.Contagion.SnotsandstoneWall;
 using Terraria;
@@ -74,7 +78,7 @@ public static class ConversionHelper
                     continue;
 
                 // Walls
-                _ = ConvertWall<ContagionGrassWall>(x, y, type => WallID.Sets.Conversion.Grass[type]) ||
+                _ = ConvertWall<ContagionGrassWallUnsafe>(x, y, type => WallID.Sets.Conversion.Grass[type]) ||
                     ConvertWall<ChunkstoneWall>(x, y, type => WallID.Sets.Conversion.Stone[type]) ||
                     ConvertWall<HardenedSnotsandWallUnsafe>(x, y, type => WallID.Sets.Conversion.HardenedSand[type]) ||
                     ConvertWall<SnotsandstoneWallUnsafe>(x, y, type => WallID.Sets.Conversion.Sandstone[type]) ||

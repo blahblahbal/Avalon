@@ -16,6 +16,7 @@ using Avalon.NPCs.PreHardmode;
 using Avalon.NPCs.TownNPCs;
 using Avalon.Systems;
 using Avalon.Tiles.Savanna;
+using Avalon.Walls.Contagion.ContagionGrassWall;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -305,7 +306,7 @@ public class AvalonGlobalNPC : GlobalNPC
 				shopCustomPrice = Item.buyPrice(silver: 1)
 			}, Condition.Hardmode);
 
-			shop.InsertAfter(ItemID.CrimsonGrassEcho, new Item(ModContent.ItemType<ContagionGrassWall>())
+			shop.InsertAfter(ItemID.CrimsonGrassEcho, new Item(ModContent.ItemType<ContagionGrassWallItem>())
 			{
 				shopCustomPrice = Item.buyPrice(silver: 2, copper: 50)
 			}, Condition.BloodMoon, contagion);
@@ -339,7 +340,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			{
 				entry2.AddCondition(notContagion);
 			}
-			shop.InsertAfter(ModContent.ItemType<ContagionGrassWall>(), new Item(ItemID.CorruptSeeds)
+			shop.InsertAfter(ModContent.ItemType<ContagionGrassWallItem>(), new Item(ItemID.CorruptSeeds)
 			{
 				shopCustomPrice = Item.buyPrice(silver: 5)
 			}, contagion, Condition.InGraveyard, Condition.Hardmode);
