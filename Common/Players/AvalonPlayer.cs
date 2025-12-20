@@ -14,6 +14,8 @@ using Avalon.Items.Weapons.Summon.Hardmode.AnchorWhipworm;
 using Avalon.ModSupport.MLL.Liquids;
 using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
+using Avalon.NPCs.Hardmode.Ickslime;
+using Avalon.NPCs.Hardmode.MineralSlime;
 using Avalon.Prefixes;
 using Avalon.Projectiles;
 using Avalon.Projectiles.Summon;
@@ -2054,10 +2056,10 @@ public class AvalonPlayer : ModPlayer
 			if (Player.armor[i].type == ItemID.RoyalGel)
 			{
 				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.OreSlime>()] = true;
-				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.MineralSlime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<MineralSlime>()] = true;
 				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.AmberSlime>()] = true;
 				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.InfestedAmberSlime>()] = true;
-				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.Ickslime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<Ickslime>()] = true;
 			}
 		}
 		#endregion royal gel avalon fix

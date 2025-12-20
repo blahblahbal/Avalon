@@ -1,3 +1,5 @@
+using Avalon.NPCs.Hardmode.Ickslime;
+using Avalon.NPCs.Hardmode.MineralSlime;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -47,10 +49,10 @@ public class NobleSlimeBand : ModItem
 		player.npcTypeNoAggro[667] = true;
 		player.npcTypeNoAggro[676] = true;
 		player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.OreSlime>()] = true;
-		player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.MineralSlime>()] = true;
+		player.npcTypeNoAggro[ModContent.NPCType<MineralSlime>()] = true;
 		player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.AmberSlime>()] = true;
 		player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.InfestedAmberSlime>()] = true;
-		player.npcTypeNoAggro[ModContent.NPCType<NPCs.Hardmode.Ickslime>()] = true;
+		player.npcTypeNoAggro[ModContent.NPCType<Ickslime>()] = true;
 		//player.npcTypeNoAggro[ModContent.NPCType<NPCs.DarkMatterSlime>()] = true;
 	}
 }

@@ -1,5 +1,14 @@
 using Avalon.Common;
-using Avalon.NPCs.Hardmode;
+using Avalon.NPCs.Hardmode.Blaze;
+using Avalon.NPCs.Hardmode.ContagionMimic;
+using Avalon.NPCs.Hardmode.Cougher;
+using Avalon.NPCs.Hardmode.CursedFlamer;
+using Avalon.NPCs.Hardmode.CursedScepter;
+using Avalon.NPCs.Hardmode.EctoHand;
+using Avalon.NPCs.Hardmode.Ickslime;
+using Avalon.NPCs.Hardmode.IrateBones;
+using Avalon.NPCs.Hardmode.ViralMummy;
+using Avalon.NPCs.Hardmode.Viris;
 using Avalon.NPCs.PreHardmode;
 using Avalon.Tiles;
 using Microsoft.Xna.Framework;

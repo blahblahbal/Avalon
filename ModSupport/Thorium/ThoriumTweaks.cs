@@ -31,6 +31,7 @@ using ThoriumMod.Items.ThrownItems;
 using ThoriumMod.NPCs;
 using ThoriumMod.NPCs.Depths;
 using Avalon.Items.Placeable.Crafting;
+using Avalon.NPCs.Hardmode.IrateBones;
 
 namespace Avalon.ModSupport.Thorium;
 
@@ -83,7 +84,7 @@ public class ThoriumTweaksPlayer : ModPlayer
     {
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.SkeletonRepellentBuff>()))
         {
-            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.Hardmode.IrateBones>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<IrateBones>()] = true;
         }
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.ZombieRepellentBuff>()))
         {

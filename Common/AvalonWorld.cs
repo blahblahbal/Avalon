@@ -2,6 +2,7 @@ using Avalon.Hooks;
 using Avalon.Logic;
 using Avalon.ModSupport;
 using Avalon.NPCs.Bosses.PreHardmode;
+using Avalon.NPCs.Hardmode.Hallowor;
 using Avalon.NPCs.PreHardmode;
 using Avalon.Reflection;
 using Avalon.Systems;
@@ -1084,11 +1085,11 @@ public class AvalonWorld : ModSystem
 				for (int thing2 = 0; thing2 < Main.npc.Length; thing2++)
 				{
 					NPC npc2 = Main.npc[thing2];
-					if ((npc2.type == ModContent.NPCType<NPCs.Hardmode.Hallowor>() /*|| npc2.type == ModContent.NPCType<NPCs.AegisHallowor>()*/) && npc2.active)
+					if ((npc2.type == ModContent.NPCType<Hallowor>() /*|| npc2.type == ModContent.NPCType<NPCs.AegisHallowor>()*/) && npc2.active)
 					{
 						int radius;
 						string text;
-						if (npc1.type == NPCID.Corruptor && npc2.type == ModContent.NPCType<NPCs.Hardmode.Hallowor>())
+						if (npc1.type == NPCID.Corruptor && npc2.type == ModContent.NPCType<Hallowor>())
 						{
 							radius = 2;
 							text = "Dark and light have been obliterated...";

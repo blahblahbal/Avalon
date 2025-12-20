@@ -1,10 +1,11 @@
-using Avalon.Systems;
-using Microsoft.Xna.Framework;
+using Avalon.Common;
+using Avalon.NPCs.Hardmode.Cougher;
+using Avalon.NPCs.Hardmode.Ickslime;
+using Avalon.NPCs.Hardmode.Viris;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using Avalon.Common;
 
 namespace Avalon.NPCs;
 
@@ -104,15 +105,15 @@ public class MobRift : ModNPC
                             if (p.position.Y < Main.worldSurface)
                             {
                                 int t = Main.rand.Next(2);
-                                if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Hardmode.Ickslime>());
-                                if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Hardmode.Cougher>());
+                                if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Ickslime>());
+                                if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Cougher>());
                             }
                             else if (p.ZoneRockLayerHeight)
                             {
                                 int t = Main.rand.Next(3);
-                                if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Hardmode.Ickslime>());
-                                if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Hardmode.Cougher>());
-                                if (t == 2) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Hardmode.Viris>());
+                                if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Ickslime>());
+                                if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Cougher>());
+                                if (t == 2) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Viris>());
                             }
                         }
                         else
@@ -215,12 +216,12 @@ public class MobRift : ModNPC
                             if (p.position.Y < Main.worldSurface)
                             {
                                 int t = Main.rand.Next(2);
-                                if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Hardmode.Ickslime>());
-                                if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Hardmode.Cougher>());
+                                if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Ickslime>());
+                                if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Cougher>());
                             }
                             else if (p.ZoneRockLayerHeight)
                             {
-                                NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Hardmode.Viris>());
+                                NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Viris>());
                             }
                         }
                         else

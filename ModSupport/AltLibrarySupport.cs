@@ -18,7 +18,7 @@ using Avalon.Items.Weapons.Melee.Hardmode.VirulentScythe;
 using Avalon.Items.Weapons.Melee.PreHardmode;
 using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
 using Avalon.NPCs.Critters;
-using Avalon.NPCs.Hardmode;
+using Avalon.NPCs.Hardmode.ContagionMimic;
 using Avalon.Tiles.Contagion.BacciliteBrick;
 using Avalon.Tiles.Contagion.Chunkstone;
 using Avalon.Tiles.Contagion.ContagionChest;

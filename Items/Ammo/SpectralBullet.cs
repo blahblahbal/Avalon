@@ -15,7 +15,7 @@ public class SpectralBullet : ModItem
 	public override void SetDefaults()
 	{
 		Item.DefaultToBullet(12, ModContent.ProjectileType<Projectiles.Ranged.SpectralBullet>(), 11f, 6f);
-		Item.rare = ModContent.RarityType<Rarities.QuibopsRarity>();
+		Item.rare = ModContent.RarityType<Rarities.SapphirephlyRarity>();
 		Item.value = Item.sellPrice(0, 0, 2, 40);
 	}
 	public override void AddRecipes()

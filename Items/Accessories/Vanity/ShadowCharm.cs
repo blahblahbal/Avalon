@@ -11,7 +11,7 @@ public class ShadowCharm : ModItem
 	public override void SetDefaults()
 	{
 		Item.DefaultToAccessory();
-		Item.rare = ModContent.RarityType<Rarities.QuibopsRarity>();
+		Item.rare = ModContent.RarityType<Rarities.SapphirephlyRarity>();
 		Item.value = Item.sellPrice(0, 0, 45);
 		Item.GetGlobalItem<AvalonGlobalItemInstance>().WorksInVanity = true;
 	}
