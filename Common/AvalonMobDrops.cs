@@ -64,6 +64,13 @@ public class AvalonMobDrops : GlobalNPC
 		//    var hardmodePreSuperHardmodeCondition =
 		//        new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
 
+		if (Data.Sets.NPCSets.NPCToStatue.TryGetValue(npc.type, out int value))
+		{
+			LeadingConditionRule Holding = new LeadingConditionRule(new HoldingMedusaHead());
+			Holding.OnSuccess(ItemDropRule.Common(value, 5), true);
+			npcLoot.Add(Holding);
+		}
+
 		if (npc.type is NPCID.HallowBoss)
 		{
 			npcLoot.Add(ItemDropRule.Common(ItemID.EmpressFlightBooster, 3));
