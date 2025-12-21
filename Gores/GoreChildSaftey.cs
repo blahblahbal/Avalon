@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Gores;
-public class Gores : ModSystem
+public class GoreChildSaftey : ModSystem
 {
 	public override void SetStaticDefaults()
 	{
