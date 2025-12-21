@@ -69,12 +69,12 @@ public class AvalonMobDrops : GlobalNPC
 		//    var hardmodePreSuperHardmodeCondition =
 		//        new Combine(true, null, hardModeCondition, new Invert(new Superhardmode()));
 
-		//if (Data.Sets.NPCSets.NPCToStatue.TryGetValue(npc.type, out int value))
-		//{
-		//	LeadingConditionRule Holding = new LeadingConditionRule(new HoldingMedusaHead());
-		//	Holding.OnSuccess(ItemDropRule.Common(value, 5), true);
-		//	npcLoot.Add(Holding);
-		//}
+		if (Data.Sets.NPCSets.NPCToStatue[npc.type] != -1)
+		{
+			LeadingConditionRule Holding = new LeadingConditionRule(new HoldingMedusaHead());
+			Holding.OnSuccess(ItemDropRule.Common(Data.Sets.NPCSets.NPCToStatue[npc.type], 5), true);
+			npcLoot.Add(Holding);
+		}
 
 		if (npc.type is NPCID.HallowBoss)
 		{

@@ -11,6 +11,7 @@ using Avalon.Common.Players;
 using Terraria.Localization;
 using System.IO;
 using Avalon.Common;
+using Avalon.Items.Placeable.Statue;
 
 namespace Avalon.NPCs.PreHardmode;
 
@@ -21,6 +22,7 @@ public class Bactus : ModNPC
         Main.npcFrameCount[NPC.type] = 8;
         Data.Sets.NPCSets.Wicked[NPC.type] = true;
 		Data.Sets.NPCSets.Flyer[NPC.type] = true;
+		Data.Sets.NPCSets.NPCToStatue[Type] = ModContent.ItemType<ContagionStatue>();
 	}
     public override void SetDefaults()
 	{
