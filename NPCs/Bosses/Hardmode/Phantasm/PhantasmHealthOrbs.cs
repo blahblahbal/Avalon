@@ -2,12 +2,13 @@ using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.NPCs.Bosses.Hardmode
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 {
 	public class PhantasmHealthOrbs : ModNPC
 	{
@@ -42,6 +43,9 @@ namespace Avalon.NPCs.Bosses.Hardmode
 					NPC.active = false;
 			}
 
+			NPC.ai[1]+= 0.01f;
+			NPC.velocity = Vector2.One.RotatedBy(NPC.ai[1]) * 0.4f;
+
 			foreach (Player p in Main.ActivePlayers)
 			{
 				if (p.Center.Distance(NPC.Center) < 16 * 30)
@@ -54,7 +58,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 					NPC.dontTakeDamage = true;
 				}
 			}
-
+			NPC.localAI[0] = MathHelper.Lerp(NPC.dontTakeDamage ? 0 : 1, NPC.localAI[0], 0.9f);
 			Lighting.AddLight(NPC.Center, new Vector3(0f, 1f, 1f));
 
 			if (NPC.alpha > 0)
@@ -72,10 +76,15 @@ namespace Avalon.NPCs.Bosses.Hardmode
 
 			Vector2 drawPos = NPC.position - screenPos + frameOrigin + offset;
 
-			Color color = (!NPC.dontTakeDamage ? Color.White : Color.Purple);
+			NPC target = Main.npc[(int)NPC.ai[0]];
+			// light beams
+			Texture2D beam = TextureAssets.Extra[ExtrasID.RainbowRodTrailShape].Value;
+			Main.EntitySpriteDraw(beam, drawPos, null, Color.Lerp(new Color(0.6f,0f,1f,0f), new Color(0.3f,0.7f,1f,0f), NPC.localAI[0]) * NPC.Opacity * 0.5f, NPC.Center.DirectionTo(target.Center).ToRotation(), new Vector2(0, beam.Height / 2), new Vector2(NPC.Center.Distance(target.Center) / beam.Height, 0.3f + MathF.Sin(NPC.ai[1] * 3) * 0.1f), SpriteEffects.None, 0);
+
+			Color color = Color.Lerp(Color.Purple,Color.White,NPC.localAI[0]);
 			Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * 0.3f * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale * 1.1f, SpriteEffects.None, 0);
 			Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * 0.15f * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale * 1.2f, SpriteEffects.None, 0);
-			Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * NPC.Opacity, NPC.rotation, frameOrigin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale, SpriteEffects.None, 0);
 			return false;
 		}
 		public override void FindFrame(int frameHeight)

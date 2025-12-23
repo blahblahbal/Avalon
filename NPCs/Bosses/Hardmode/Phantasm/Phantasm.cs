@@ -16,15 +16,15 @@ using Avalon.Common.Players;
 using Avalon.Common;
 using ReLogic.Content;
 using Terraria.GameContent;
-using Avalon.Projectiles.Hostile.Phantasm;
 using System.IO;
 using Avalon.Dusts;
 using Avalon.Particles;
 using static Avalon.Particles.ParticleSystem;
 using Terraria.DataStructures;
 using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
+using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
-namespace Avalon.NPCs.Bosses.Hardmode;
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm;
 
 [AutoloadBossHead]
 public partial class Phantasm : ModNPC
@@ -52,7 +52,7 @@ public partial class Phantasm : ModNPC
 		NPC.boss = NPC.noTileCollide = NPC.noGravity = true;
 		NPC.npcSlots = 100f;
 		NPC.damage = 40;
-		NPC.lifeMax = 130000;
+		NPC.lifeMax = 220000;
 		NPC.defense = 25;
 		NPC.aiStyle = -1;
 		NPC.value = 100000f;
@@ -73,7 +73,7 @@ public partial class Phantasm : ModNPC
 		Transition();
 		eyePos = NPC.Center;
 	}
-	public override void BossLoot(ref string name, ref int potionType)
+	public override void BossLoot(ref int potionType)
 	{
 		potionType = ItemID.SuperHealingPotion;
 	}
@@ -148,7 +148,7 @@ public partial class Phantasm : ModNPC
 			}
 		}
 
-		if (NPC.life <= NPC.lifeMax * 0.7f && phase < 3)
+		if (NPC.life <= NPC.lifeMax * 0.8f && phase < 3)
 		{
 			phase = 3;
 			NPC.ai[0] = -60;
@@ -156,7 +156,7 @@ public partial class Phantasm : ModNPC
 			NPC.ai[2] = 0;
 			NPC.netUpdate = true;
 		}
-		else if (NPC.life <= NPC.lifeMax * 0.3f && phase < 8 && phase != 3)
+		else if (NPC.life <= NPC.lifeMax * 0.5f && phase < 8 && phase != 3)
 		{
 			phase = 8;
 			NPC.ai[0] = -60;
@@ -236,6 +236,10 @@ public partial class Phantasm : ModNPC
 	{
 		if (NPC.life <= 0)
 		{
+			if(SoundEngine.TryGetActiveSound(beamSound, out ActiveSound sound) && sound != null && sound.IsPlaying)
+			{
+				sound.Stop();
+			}
 			for (int i = 0; i < 40; i++)
 			{
 				int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);

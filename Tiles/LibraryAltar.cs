@@ -1,5 +1,5 @@
 using Avalon.Items.Consumables;
-using Avalon.NPCs.Bosses.Hardmode;
+using Avalon.NPCs.Bosses.Hardmode.Phantasm;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

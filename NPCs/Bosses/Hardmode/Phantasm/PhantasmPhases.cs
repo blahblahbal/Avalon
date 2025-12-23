@@ -1,15 +1,17 @@
-using System;
+using Avalon.Dusts;
+using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
+using Avalon.UI;
 using Microsoft.Xna.Framework;
+using ReLogic.Utilities;
+using System;
 using Terraria;
+using Terraria.Audio;
+using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using Avalon.Projectiles.Hostile.Phantasm;
-using Terraria.Graphics.CameraModifiers;
-using Avalon.Dusts;
 
 
-namespace Avalon.NPCs.Bosses.Hardmode
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 {
 	public partial class Phantasm : ModNPC
 	{
@@ -424,9 +426,13 @@ namespace Avalon.NPCs.Bosses.Hardmode
 					{
 						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
 					}
-					Vector2 direction = Main.rand.NextVector2CircularEdge(8, 8);
-					Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, direction, ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
-					Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, direction.RotatedBy(Main.rand.NextFloat(MathHelper.PiOver2,MathHelper.Pi) * (Main.rand.NextBool()? 1 : -1)), ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
+					for(int i = 0; i < 4; i++)
+					{
+						Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, Vector2.One.RotatedBy(i * MathHelper.PiOver2) * 5, ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
+					}
+					//Vector2 direction = Main.rand.NextVector2CircularEdge(8, 8);
+					//Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, direction, ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
+					//Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, direction.RotatedBy(Main.rand.NextFloat(MathHelper.PiOver2,MathHelper.Pi) * (Main.rand.NextBool()? 1 : -1)), ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
 				}
 				SoundEngine.PlaySound(SoundID.Roar, NPC.position);
 				NPC.ai[0] = 0;
@@ -554,7 +560,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PhantomDeathray>(), 50, 1, -1, NPC.whoAmI);
 				}
 
-				SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/ScaryLaser") {Volume = 0.8f },NPC.position);
+				beamSound = SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/ScaryLaser") {Volume = 0.8f },NPC.position);
 			}
 
 			//if (NPC.ai[0] > beamStart && NPC.ai[0] % 30 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
@@ -573,6 +579,7 @@ namespace Avalon.NPCs.Bosses.Hardmode
 				NPC.netUpdate = true;
 			}
 		}
+		private SlotId beamSound = SlotId.Invalid;
 		private void Phase11_SawHandsScary2()
 		{
 			NPC.velocity += NPC.Center.DirectionTo(new Vector2(target.Center.X, MathHelper.Lerp(target.Center.Y, eyePos.Y, 0.6f))) * 0.2f;

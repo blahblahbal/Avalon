@@ -8,7 +8,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile.Phantasm;
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
 public class PhantomGrabber : SoulGrabber
 {

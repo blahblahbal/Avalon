@@ -1,3 +1,5 @@
+using Avalon;
+using Avalon.Common;
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,7 +15,7 @@ using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile.Phantasm
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles
 {
 	public class PhantomDeathray : ModProjectile
 	{
@@ -46,7 +48,7 @@ namespace Avalon.Projectiles.Hostile.Phantasm
 				Projectile.scale *= 0.9f;
 			}
 
-			if (Projectile.ai[2] == 0 && Projectile.timeLeft % 10 == 0)
+			if (Projectile.ai[2] == 0 && Projectile.timeLeft % 10 == 0 && ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
 			{
 				PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Circular(1, 1), 8f, 10f, 40, 3000f);
 				Main.instance.CameraModifiers.Add(modifier);

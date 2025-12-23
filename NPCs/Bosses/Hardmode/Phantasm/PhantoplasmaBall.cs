@@ -7,7 +7,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.NPCs.Bosses.Hardmode
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 {
 	public class PhantoplasmaBall : ModNPC
 	{

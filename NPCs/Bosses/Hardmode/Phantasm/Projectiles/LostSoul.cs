@@ -1,3 +1,4 @@
+using Avalon;
 using Avalon.Buffs.Debuffs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile.Phantasm;
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
 public class LostSoul : ModProjectile
 {

@@ -1,3 +1,4 @@
+using Avalon;
 using Avalon.Buffs.Debuffs;
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
@@ -9,23 +10,22 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile.Phantasm;
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
-public class PhantomBlade : ModProjectile
+public class Phantom : ModProjectile
 {
 	public override void SetStaticDefaults()
 	{
+		Main.projFrames[Type] = 4;
 		ProjectileID.Sets.TrailCacheLength[Type] = 8;
 		ProjectileID.Sets.TrailingMode[Type] = 2;
 	}
 	public override void SetDefaults()
 	{
-		Projectile.Size = new Vector2(32);
+		Projectile.Size = new Vector2(16);
 		Projectile.hostile = true;
 		Projectile.aiStyle = -1;
 		Projectile.tileCollide = false;
-		Projectile.timeLeft = 60 * 8;
-		Projectile.alpha = 256;
 	}
 	public override void OnHitPlayer(Player target, Player.HurtInfo info)
 	{
@@ -36,27 +36,26 @@ public class PhantomBlade : ModProjectile
 	}
 	public override void AI()
 	{
-		if(Projectile.timeLeft == 60 * 8)
+		Player player = Main.player[(int)Projectile.ai[0]];
+		Projectile.ai[1]++;
+		if (Projectile.ai[1] is > 70 and < 110)
 		{
-			SoundEngine.PlaySound(SoundID.Zombie54, Projectile.Center);
+			Projectile.velocity += Projectile.Center.DirectionTo(player.Center) * 0.7f;
 		}
-
-		if(Projectile.timeLeft < 60)
+		if (Projectile.velocity.Length() < 10 && Projectile.ai[1] > 110)
 		{
-			Projectile.alpha += 8;
+			Projectile.velocity *= 1.1f;
+			Projectile.velocity.LengthClamp(10);
 		}
+		//Projectile.velocity *= 1.01f;
+		Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.PiOver2;
+		Projectile.frameCounter++;
+		Projectile.frame = (Projectile.frameCounter / 3) % 4;
 
-		Projectile.rotation += 0.2f;
-
-		if (Projectile.alpha > 0)
-			Projectile.alpha -= 4;
-
-		Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.TwoPi / (60f * 8));
-
-		Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<PhantoplasmDust>());
-		d.noGravity = true;
-		d.velocity = Projectile.velocity;
-		d.alpha = Projectile.alpha;
+		if (Projectile.ai[1] > 120 && !Projectile.tileCollide && !Collision.SolidCollision(Projectile.position,Projectile.width,Projectile.height))
+		{
+			Projectile.tileCollide = true;
+		}
 	}
 	public override void OnKill(int timeLeft)
 	{
@@ -66,6 +65,7 @@ public class PhantomBlade : ModProjectile
 			d.noGravity = true;
 			d.velocity *= 3;
 		}
+		SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
@@ -81,9 +81,9 @@ public class PhantomBlade : ModProjectile
 			Vector2 drawPosOld = Projectile.oldPos[i] + (Projectile.Size / 2);
 			Main.EntitySpriteDraw(texture.Value, drawPosOld - Main.screenPosition, sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i / 8f)) * 0.2f, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None, 0);
 		}
-		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.3f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.1f, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.15f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.2f, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * Projectile.Opacity, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.3f, Projectile.rotation, frameOrigin, Projectile.scale * 1.1f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.15f, Projectile.rotation, frameOrigin, Projectile.scale * 1.2f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225), Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
 		return false;
 	}
 }

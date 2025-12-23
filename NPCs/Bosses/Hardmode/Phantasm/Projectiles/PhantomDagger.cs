@@ -14,8 +14,9 @@ using Avalon.Buffs.Debuffs;
 using ReLogic.Content;
 using Avalon.NPCs.Bosses.Hardmode;
 using System.Collections.Generic;
+using Avalon;
 
-namespace Avalon.Projectiles.Hostile.Phantasm;
+namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
 public class PhantomDagger : SoulDagger
 {
@@ -35,7 +36,7 @@ public class PhantomDagger : SoulDagger
 	{
 		Lighting.AddLight(Projectile.Center, new Vector3(0f, 1f, 1f) * 0.2f);
 
-		if (Main.npc[(int)Projectile.ai[0]].type != ModContent.NPCType<NPCs.Bosses.Hardmode.Phantasm>())
+		if (Main.npc[(int)Projectile.ai[0]].type != ModContent.NPCType<Phantasm>())
 		{
 			Projectile.Kill();
 			return;
@@ -67,7 +68,7 @@ public class PhantomDagger : SoulDagger
 				if(Main.myPlayer == Projectile.owner)
 				{
 					int type = ModContent.ProjectileType<LostSoul>();
-					if (phantasm.ModNPC is NPCs.Bosses.Hardmode.Phantasm tasm && tasm.phase > 8)
+					if (phantasm.ModNPC is Phantasm tasm && tasm.phase > 8)
 						type = ModContent.ProjectileType<Phantom>();
 					for (int i = 0; i < 3; i++)
 					{
