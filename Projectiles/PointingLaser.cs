@@ -1,4 +1,3 @@
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -13,6 +12,7 @@ namespace Avalon.Projectiles;
 public class PointingLaser : ModProjectile
 {
 	private static Asset<Texture2D>? LaserEnd;
+
 	public override void SetStaticDefaults()
 	{
 		LaserEnd = ModContent.Request<Texture2D>(Texture + "End");
@@ -38,6 +38,12 @@ public class PointingLaser : ModProjectile
 	{
 		return false;
 	}
+	Vector2 MousePos { get => new(Projectile.ai[0], Projectile.ai[1]); set => SetMousePosFields(value); }
+	private void SetMousePosFields(Vector2 mousePos)
+	{
+		Projectile.ai[0] = mousePos.X;
+		Projectile.ai[1] = mousePos.Y;
+	}
 	public override bool PreDraw(ref Color lightColor)
 	{
 		Player player = Main.player[Projectile.owner];
@@ -45,7 +51,7 @@ public class PointingLaser : ModProjectile
 		//float distToPlayer = playerCenter.DistanceSQ(player.GetModPlayer<AvalonPlayer>().MousePosition);
 		//float playerVelMod = (1f - Utils.Remap(distToPlayer / 2116f, 0.4f, 1f, 0f, 1f));
 		//Vector2 newPlayerVel = player.velocity * playerVelMod;
-		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
+		Vector2 mousePosClamped = Vector2.Clamp(Main.myPlayer == Projectile.owner ? Main.MouseWorld : MousePos, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
 		float length = playerCenter.Distance(mousePosClamped);
 		float rotation = playerCenter.SafeDirectionTo(mousePosClamped).ToRotation() + MathHelper.PiOver2;
 		// Draw laser
@@ -86,6 +92,11 @@ public class PointingLaser : ModProjectile
 
 	public override void AI()
 	{
+		if (Main.myPlayer == Projectile.owner)
+		{
+			MousePos = Main.MouseWorld;
+			Projectile.netUpdate = true;
+		}
 		Projectile.velocity = Vector2.Zero;
 
 		Player player = Main.player[Projectile.owner];
@@ -109,7 +120,7 @@ public class PointingLaser : ModProjectile
 		//float distToPlayer = playerCenter.DistanceSQ(player.GetModPlayer<AvalonPlayer>().MousePosition);
 		//float playerVelMod = Utils.Remap(distToPlayer / 2116f, 0.4f, 1f, 0f, 1f);
 		//Vector2 newPlayerVel = player.velocity * playerVelMod;
-		Vector2 mousePosClamped = Vector2.Clamp(player.GetModPlayer<AvalonPlayer>().MousePosition + player.velocity, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
+		Vector2 mousePosClamped = Vector2.Clamp(MousePos + player.velocity, Vector2.Zero, new Vector2(Main.maxTilesX, Main.maxTilesY) * 16f);
 		Vector2 dirToMouse = playerCenter.SafeDirectionTo(mousePosClamped) * 16f;
 		Projectile.Center = playerCenter + dirToMouse;
 		player.ChangeDir(MathF.Sign(dirToMouse.X) == -1 ? -1 : 1); // 0 or 1 both return 1, if 0 returns -1 then the rotation will be incorrect

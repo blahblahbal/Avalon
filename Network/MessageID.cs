@@ -3,7 +3,7 @@ namespace Avalon.Network;
 public enum MessageID
 {
 	ShadowTeleport = 0,
-	SyncMouse = 1,
+	//SyncMouse = 1, // deprecated, this shit flooded the network way too much, sync mouse pos manually where needed
 	SyncTime = 2,
 	SyncWiring = 3,
 	StaminaHeal = 4,

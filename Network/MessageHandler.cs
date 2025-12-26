@@ -1,4 +1,3 @@
-using Avalon.Network.Handlers;
 using System.IO;
 using Terraria.ModLoader;
 
@@ -18,9 +17,6 @@ public class MessageHandler
 		MessageID id = (MessageID)reader.ReadInt32();
 		switch (id)
 		{
-			case MessageID.SyncMouse:
-				SyncMouse.HandlePacket(reader, fromWho);
-				break;
 			//case MessageID.SyncTime:
 			//    SyncTime.HandlePacket(reader, fromWho);
 			//    break;

@@ -193,7 +193,7 @@ public class StingerProbeMinion : ModProjectile
 
 		foreach (NPC N in Main.npc)
 		{
-			if (!N.friendly && N.aiStyle == 9)
+			if (!N.friendly && N.aiStyle == NPCAIStyleID.Spell)
 			{
 				var npc = new Rectangle((int)N.position.X, (int)N.position.Y, N.width, N.height);
 				bool reflect = false, check = false;
@@ -246,7 +246,13 @@ public class StingerProbeMinion : ModProjectile
 
 		#region projectile
 
-		Vector2 dirToCursor = (player.GetModPlayer<AvalonPlayer>().MousePosition - Projectile.Center).SafeNormalize(-Vector2.UnitY);
+		if (Main.myPlayer == Projectile.owner)
+		{
+			Projectile.ai[1] = Main.MouseWorld.X;
+			Projectile.ai[2] = Main.MouseWorld.Y;
+			Projectile.netUpdate = true;
+		}
+		Vector2 dirToCursor = (new Vector2(Projectile.ai[1], Projectile.ai[2]) - Projectile.Center).SafeNormalize(-Vector2.UnitY);
 		Projectile.rotation = dirToCursor.ToRotation() + MathHelper.ToRadians(180f);
 
 		if (ProjTimer-- < 0)

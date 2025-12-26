@@ -1,6 +1,5 @@
 using Avalon;
 using Avalon.Achievements;
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -55,12 +54,14 @@ public class Sun : ModProjectile
 		writer.Write(planetSpawnTimer);
 		writer.Write(dustTimer);
 		writer.Write(dontSnapBack);
+		writer.WriteVector2(mousePosition);
 	}
 	public override void ReceiveExtraAI(BinaryReader reader)
 	{
 		planetSpawnTimer = reader.ReadInt32();
 		dustTimer = reader.ReadInt32();
 		dontSnapBack = reader.ReadBoolean();
+		mousePosition = reader.ReadVector2();
 	}
 	public override void AI()
 	{
@@ -250,7 +251,11 @@ public class Sun : ModProjectile
 			{
 				Projectile.timeLeft = 300;
 				// assign the destination as the cursor
-				mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition;
+				if (Main.myPlayer == Projectile.owner)
+				{
+					mousePosition = Main.MouseWorld;
+					Projectile.netUpdate = true;
+				}
 
 				// get the inverse melee speed - yoyos do the same thing
 				float inverseMeleeSpeed = 1 / Main.player[Projectile.owner].GetTotalAttackSpeed(DamageClass.Melee);
@@ -276,8 +281,11 @@ public class Sun : ModProjectile
 			{
 				Projectile.timeLeft = 300;
 
-
-				mousePosition = Main.player[Projectile.owner].GetModPlayer<AvalonPlayer>().MousePosition; // new Vector2(vecX, vecY);
+				if (Main.myPlayer == Projectile.owner)
+				{
+					mousePosition = Main.MouseWorld;
+					Projectile.netUpdate = true;
+				}
 				if (Projectile.Center != mousePosition)
 				{
 					Projectile.velocity = Projectile.Center.DirectionTo(mousePosition) * MathHelper.Clamp(Projectile.Center.Distance(mousePosition), 0f, 8.5f);

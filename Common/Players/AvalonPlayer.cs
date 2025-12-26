@@ -18,13 +18,11 @@ using Avalon.NPCs.Hardmode.Ickslime;
 using Avalon.NPCs.Hardmode.MineralSlime;
 using Avalon.Prefixes;
 using Avalon.Projectiles;
-using Avalon.Projectiles.Summon;
 using Avalon.Projectiles.Tools;
 using Avalon.Systems;
 using Avalon.Tiles.Savanna;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ModLiquidLib.ModLoader;
 using ModLiquidLib.Utils.LiquidContent;
 using System;
@@ -166,7 +164,7 @@ public class AvalonPlayer : ModPlayer
 	/// Fetches the position of the mouse cursor in the world, instanced per player.<br/>
 	/// Useful for making things happen near the cursor without the need for manually syncing, such as the pointing laser's beam or the solar system's sun target.<br/>
 	/// </summary>
-	public Vector2 MousePosition;
+	//public Vector2 MousePosition;
 	public float MagicCritDamage = 1f;
 	public float MeleeCritDamage = 1f;
 	public float RangedCritDamage = 1f;
@@ -2909,7 +2907,7 @@ public class AvalonPlayer : ModPlayer
 			if (damageSource.SourceNPCIndex > -1)
 			{
 				NPC npc = Main.npc[damageSource.SourceNPCIndex];
-				if (!npc.friendly && npc.aiStyle == 9)
+				if (!npc.friendly && npc.aiStyle == NPCAIStyleID.Spell)
 				{
 					if (Main.rand.NextBool(4))
 					{
@@ -2942,7 +2940,7 @@ public class AvalonPlayer : ModPlayer
 			if (damageSource.SourceNPCIndex > -1)
 			{
 				NPC npc = Main.npc[damageSource.SourceNPCIndex];
-				if (!npc.friendly && npc.aiStyle == 9)
+				if (!npc.friendly && npc.aiStyle == NPCAIStyleID.Spell)
 				{
 					if (Main.rand.NextBool(2))
 					{
@@ -3251,7 +3249,7 @@ public class AvalonPlayer : ModPlayer
 			return;
 
 		bool mounted = false;
-		if (Player.mount.Type > 0 && MountID.Sets.Cart[Player.mount.Type] && Math.Abs(Player.velocity.X) > 5f)
+		if (Player.mount.Type > MountID.Rudolph && MountID.Sets.Cart[Player.mount.Type] && Math.Abs(Player.velocity.X) > 5f)
 			mounted = true;
 
 		Vector2 vector = CollisionHooks.BrambleTiles(Player.position, Player.velocity, Player.width, Player.height);
@@ -3493,7 +3491,7 @@ public class AvalonPlayer : ModPlayer
 			if (!Player.gross && Player.position.Y > (Main.maxTilesY - 250) * 16 && Player.position.X > num - 1920f &&
 				Player.position.X < num + 1920f)
 			{
-				Player.AddBuff(37, 10);
+				Player.AddBuff(BuffID.Horrified, 10);
 				Player.gross = true;
 				//Main.PlaySound(4, (int)Main.npc[AvalonWorld.wos].position.X, (int)Main.npc[AvalonWorld.wos].position.Y, 10);
 			}
@@ -3502,7 +3500,7 @@ public class AvalonPlayer : ModPlayer
 			{
 				if (Player.position.Y < (Main.maxTilesY - 200) * 16)
 				{
-					Player.AddBuff(38, 10);
+					Player.AddBuff(BuffID.TheTongue, 10);
 				}
 
 				if (Main.npc[AvalonWorld.WallOfSteel].direction < 0)
@@ -3510,13 +3508,13 @@ public class AvalonPlayer : ModPlayer
 					if (Player.position.X + (Player.width / 2) > Main.npc[AvalonWorld.WallOfSteel].position.X +
 						(Main.npc[AvalonWorld.WallOfSteel].width / 2) + 40f)
 					{
-						Player.AddBuff(38, 10);
+						Player.AddBuff(BuffID.TheTongue, 10);
 					}
 				}
 				else if (Player.position.X + (Player.width / 2) < Main.npc[AvalonWorld.WallOfSteel].position.X +
 						 (Main.npc[AvalonWorld.WallOfSteel].width / 2) - 40f)
 				{
-					Player.AddBuff(38, 10);
+					Player.AddBuff(BuffID.TheTongue, 10);
 				}
 			}
 
@@ -3527,7 +3525,7 @@ public class AvalonPlayer : ModPlayer
 				for (int i = 0; i < 1000; i++)
 				{
 					if (Main.projectile[i].active && Main.projectile[i].owner == Main.myPlayer &&
-						Main.projectile[i].aiStyle == 7)
+						Main.projectile[i].aiStyle == ProjAIStyleID.Hook)
 					{
 						Main.projectile[i].Kill();
 					}
