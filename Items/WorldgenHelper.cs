@@ -2,6 +2,7 @@ using Avalon.Tiles;
 using Avalon.Tiles.CrystalMines;
 using Avalon.Tiles.Ores;
 using Avalon.WorldGeneration.Passes;
+using Avalon.WorldGeneration.Structures;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -45,8 +46,9 @@ public class WorldgenHelper : ModItem
 
 		if (player.ItemAnimationJustStarted)
 		{
-			bool top = WorldGen.genRand.NextBool();
-			CreateOvalCave(x, y, 20, top ? -5f : 5f, WorldGen.genRand.NextFloat(-.4f, .4f), top);
+			JonasHellcastle.Generate(x, y);
+			//bool top = WorldGen.genRand.NextBool();
+			//CreateOvalCave(x, y, 20, top ? -5f : 5f, WorldGen.genRand.NextFloat(-.4f, .4f), top);
 			//WorldGeneration.Biomes.Basalt.PlaceBasalt();
 
 			#region old junk
