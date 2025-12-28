@@ -17,7 +17,9 @@ public class SoulGrabber : ModProjectile
 	}
 	public override void SetDefaults()
     {
-        Projectile.width = 16;
+		ProjectileID.Sets.TrailCacheLength[Type] = 10;
+		ProjectileID.Sets.TrailingMode[Type] = 2;
+		Projectile.width = 16;
         Projectile.height = 16;
         Projectile.aiStyle = -1;
         Projectile.tileCollide = false;
@@ -88,19 +90,5 @@ public class SoulGrabber : ModProjectile
 		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * 0.15f * Projectile.Opacity, Projectile.rotation, frameOrigin, Projectile.scale * 1.2f, SpriteEffects.None, 0);
 		Main.EntitySpriteDraw(texture.Value, drawPos - Main.screenPosition, sourceRectangle, new Color(255, 255, 255, 225) * Projectile.Opacity, Projectile.rotation, frameOrigin, new Vector2(Projectile.scale, Projectile.scale), SpriteEffects.None, 0);
 		return false;
-
-		//Asset<Texture2D> texture = TextureAssets.Projectile[Type];
-		//      auraScale = MathHelper.Clamp(auraScale, 0f, 18.5f);
-		//      Rectangle frame = texture.Frame();
-		//      Vector2 drawPos = Projectile.Center - Main.screenPosition;
-		//      Color color = new Color(alpha, alpha, alpha, alpha);
-		//      for (int i = 1; i < 4; i++)
-		//      {
-		//          Main.EntitySpriteDraw(texture.Value, drawPos + new Vector2(Projectile.velocity.X * (-i * 3), Projectile.velocity.Y * (-i * 3)), frame, (color * (1 - (i * 0.25f))) * 0.2f * Projectile.Opacity, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 9f), Projectile.scale, SpriteEffects.None, 0);
-		//      }
-		//      Main.EntitySpriteDraw(texture.Value, drawPos, frame, color * Projectile.Opacity, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 9f), Projectile.scale, SpriteEffects.None, 0);
-		//      auraScale -= 0.01f;
-		//      Main.EntitySpriteDraw(texture.Value, drawPos, frame, color * 0.15f * Projectile.Opacity, Projectile.rotation, texture.Size() / 2f - new Vector2(0, 10f), Projectile.scale * auraScale, SpriteEffects.None, 0);
-		//      return false;
 	}
 }

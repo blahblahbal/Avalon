@@ -16,7 +16,8 @@ public enum HellcastleRoomType
 {
 	Regular,
 	Arena,
-
+	Banquet,
+	SpiralStaircase
 }
 [Flags]
 public enum RoomConnectionOnSide
@@ -81,9 +82,15 @@ public record struct HellcastleRoom
 
 		switch (type)
 		{
+			case HellcastleRoomType.Banquet:
+				Size = new Point(Main.rand.Next(8, 10) * 10, Main.rand.Next(15, 20));
+				ConnectionPoints = [
+					new HellcastleRoomConnectionPoint(new Point(Rect.Left + connectionIntendedSideOffset, Rect.Bottom - 4), RoomConnectionOnSide.Left),
+					new HellcastleRoomConnectionPoint(new Point(Rect.Right - connectionIntendedSideOffset, Rect.Bottom - 4), RoomConnectionOnSide.Right)];
+				break;
+
 			case HellcastleRoomType.Regular:
 				Size = new Point(Main.rand.Next(30, 50), Main.rand.Next(20, 30));
-
 				switch (Main.rand.Next(3))
 				{
 					case 0: // horizontal only
@@ -105,6 +112,7 @@ public record struct HellcastleRoom
 						break;
 				}
 				break;
+
 			case HellcastleRoomType.Arena:
 				Size = new Point(Main.rand.Next(80, 100), Main.rand.Next(50, 70));
 				int halfHeight = Size.Y / 2;
@@ -127,43 +135,67 @@ public record struct HellcastleRoom
 	{
 		ushort brickType = (ushort)ModContent.TileType<ImperviousBrick>();
 		ushort wallType = (ushort)ModContent.WallType<ImperviousBrickWallUnsafe>();
+		ushort lamp = (ushort)ModContent.TileType<ResistantWoodLamp>();
+		ushort table = (ushort)ModContent.TileType<ResistantWoodTable>();
+		ushort chair = (ushort)ModContent.TileType<ResistantWoodChair>();
+		ushort candle = (ushort)ModContent.TileType<ResistantWoodCandle>();
+		ushort candelabra = (ushort)ModContent.TileType<ResistantWoodCandelabra>();
+		ushort chandelier = (ushort)ModContent.TileType<ResistantWoodChandelier>();
+		ushort windowWall = WallID.RedStainedGlass;
 
-		if(beforeHallways)
-			WorldUtils.Gen(Position - new Point(10,10), new Shapes.Rectangle(Size.X + 20, Size.Y + 20), Actions.Chain(Actions.Chain(new Modifiers.SkipWalls(wallType), new Actions.PlaceWall(wallType, false), new Modifiers.Expand(2), new Actions.SetTileKeepWall(brickType))));
-
+		if (beforeHallways)
+		{
+			WorldUtils.Gen(Position - new Point(10, 10), new Shapes.Rectangle(Size.X + 20, Size.Y + 20), Actions.Chain(Actions.Chain(new Modifiers.SkipWalls(wallType), new Actions.PlaceWall(wallType, false), new Modifiers.Expand(2), new Actions.SetTileKeepWall(brickType))));
+			return;
+		}
 		switch (Type)
 		{
 			case HellcastleRoomType.Regular:
-				if (beforeHallways)
-				{
-					//WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), Actions.Chain(new Actions.PlaceWall(wallType, false), new Modifiers.Expand(1), new Actions.SetTileKeepWall(brickType, true, true)));
-				}
-				else
-				{
-					WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.ClearTile());
-				}
+				WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), new Actions.ClearTile());
 				break;
-			case HellcastleRoomType.Arena:
-				if (beforeHallways)
+
+			case HellcastleRoomType.Banquet:
+				WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), new Actions.ClearTile());
+				WorldUtils.Gen(Position + new Point(0 - 6, Size.Y), new Shapes.Rectangle(Size.X + 6, 3), Actions.Chain(new Modifiers.OnlyTiles(brickType), new Modifiers.IsTouchingAir(true), new Actions.SetTileKeepWall(TileID.AncientPinkBrick)));
+				WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.PlaceWall(windowWall));
+
+				for (int i = Size.X % 10; i < Size.X; i += 10)
 				{
-					//WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), Actions.Chain(new Actions.PlaceWall(wallType, false), new Modifiers.Expand(1), new Actions.SetTileKeepWall(brickType, true, true)));
-				}
-				else
-				{
-					WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.ClearTile());
-					int altarStandHeight = 6;
-					int altarX = Position.X + (Size.X / 2);
-					int bottomY = Position.Y + Size.Y - 4;
-					for (int i = 0; i < altarStandHeight; i++)
+					WorldUtils.Gen(Position + new Point(i, 3), new Shapes.Rectangle(1, Size.Y - 6), new Actions.PlaceWall(wallType));
+					i += 5;
+					if (WorldGen.PlaceTile(Position.X + i, Rect.Bottom - 1, table, false, true))
 					{
-						WorldUtils.Gen(new Point(altarX - 12 + i, bottomY - i), new Shapes.Rectangle(23 - (i * 2), 1), new Actions.SetTileKeepWall(brickType, true, true));
+						WorldGen.PlaceObject(Position.X + i + 5, Rect.Top, chandelier, style: Main.rand.NextBool(3)? 1 : 0);
+						WorldGen.PlaceObject(Position.X + i - 5, Rect.Top, chandelier, style: Main.rand.NextBool(3) ? 1 : 0);
+						WorldGen.PlaceObject(Position.X + i + 2, Rect.Bottom - 1, chair);
+						WorldGen.PlaceObject(Position.X + i - 2, Rect.Bottom - 1, chair, direction: 1);
+						switch (Main.rand.Next(3))
+						{
+							case 0:
+								WorldGen.PlaceTile(Position.X + i + Main.rand.Next(-1,2), Rect.Bottom - 3, candle);
+								break;
+							case 1:
+								WorldGen.PlaceTile(Position.X + i + Main.rand.Next(-1,1), Rect.Bottom - 3, candelabra);
+								break;
+						}
 					}
-					//WorldGen.PlaceTile(altarX, bottomY - altarStandHeight, TileID.DiamondGemspark, false, true);
-					WorldGen.PlaceTile(altarX - 1, bottomY - altarStandHeight, ModContent.TileType<LibraryAltar>(), false, true);
-					ushort lamp = (ushort)ModContent.TileType<ResistantWoodLamp>();
-					WorldGen.PlaceTile(altarX + 3, bottomY - altarStandHeight, lamp, false, true);
-					WorldGen.PlaceTile(altarX - 5, bottomY - altarStandHeight, lamp, false, true);
+					i -= 5;
 				}
+				
+				break;
+
+			case HellcastleRoomType.Arena:
+				WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), new Actions.ClearTile());
+				int altarStandHeight = 6;
+				int altarX = Position.X + (Size.X / 2);
+				int bottomY = Position.Y + Size.Y - 1;
+				for (int i = 0; i < altarStandHeight; i++)
+				{
+					WorldUtils.Gen(new Point(altarX - 12 + i, bottomY - i), new Shapes.Rectangle(23 - (i * 2), 1), new Actions.SetTileKeepWall(brickType, true, true));
+				}
+				WorldGen.PlaceTile(altarX - 1, bottomY - altarStandHeight, ModContent.TileType<LibraryAltar>(), false, true);
+				WorldGen.PlaceTile(altarX + 3, bottomY - altarStandHeight, lamp, false, true);
+				WorldGen.PlaceTile(altarX - 5, bottomY - altarStandHeight, lamp, false, true);
 				break;
 		}
 		// debug connection points
@@ -186,8 +218,18 @@ public class JonasHellcastle
 	{
 		//MakeTunnel(Main.LocalPlayer.Center.ToTileCoordinates(), Main.MouseWorld.ToTileCoordinates(), 3, false);
 		//return;
-		int hellcastleWidth = 400;
-		int hellcastleHeight = 260;
+		int hellcastleWidth = 700;
+		int hellcastleHeight = 300;
+		if(Main.maxTilesX > 6400)
+		{
+			hellcastleWidth = 800;
+			hellcastleHeight = 460;
+		}
+		else if(Main.maxTilesX < 6400)
+		{
+			hellcastleWidth = 750;
+			hellcastleHeight = 260;
+		}
 		Rectangle hellcastleRandomGenArea = new Rectangle(x - hellcastleWidth / 2, y - hellcastleHeight / 2, hellcastleWidth, hellcastleHeight);
 		WorldUtils.Gen(new Point(hellcastleRandomGenArea.X - 100, hellcastleRandomGenArea.Y - 100), new Shapes.Rectangle(hellcastleWidth + 200, hellcastleHeight + 200), new Actions.Clear());
 
@@ -201,7 +243,8 @@ public class JonasHellcastle
 		rooms.Add(arena);
 
 		// decide what rooms to make
-		PopulateRooms(HellcastleRoomType.Regular, 20, ref rooms, hellcastleRandomGenArea);
+		PopulateRooms(HellcastleRoomType.Banquet, 10, ref rooms, hellcastleRandomGenArea);
+		PopulateRooms(HellcastleRoomType.Regular, 30, ref rooms, hellcastleRandomGenArea);
 
 		// generate the rooms
 		for(int i = 0; i < rooms.Count; i++)
@@ -227,7 +270,7 @@ public class JonasHellcastle
 						break;
 					}
 				}
-				if (couldntGen)
+				if (couldntGen && rooms[i].Type != HellcastleRoomType.Arena)
 				{
 					rooms.RemoveAt(i);
 					i--;
@@ -249,7 +292,7 @@ public class JonasHellcastle
 	{
 		for (int i = 0; i < amount; i++)
 		{
-			HellcastleRoom room = new HellcastleRoom(HellcastleRoomType.Regular);
+			HellcastleRoom room = new HellcastleRoom(type);
 			ShuffleRoomPosition(ref room, genArea);
 			bool isOverlapping = false;
 			for (int t = 0; t < 10; t++)
@@ -290,7 +333,7 @@ public class JonasHellcastle
 	}
 	private static HellcastleHallway? TryToMakeATunnel(ref HellcastleRoom room, ref List<HellcastleRoom> rooms)
 	{
-		int tunnelWidth = Main.rand.Next(6,9);
+		int tunnelWidth = 8;//Main.rand.Next(6,9);
 		List<int> possibleStarts = new();
 		List<int> possibleEndPointIndexinRoomsList = new();
 		List<int> possibleEndsConnectPoint = new();
@@ -341,8 +384,12 @@ public class JonasHellcastle
 	{
 		if (a.InUse || b.InUse)
 			return false;
-		if (Math.Abs(a.Position.X - b.Position.X) > Math.Abs(a.Position.Y - b.Position.Y))
+		int xDif = Math.Abs(a.Position.X - b.Position.X);
+		int yDif = Math.Abs(a.Position.Y - b.Position.Y);
+		if (xDif > yDif)
 		{
+			if (xDif > 100)
+				return false;
 			if (a.Type.HasFlag(RoomConnectionOnSide.Left) && b.Type.HasFlag(RoomConnectionOnSide.Right) && a.Position.X > b.Position.X)
 			{
 				return true;
@@ -354,6 +401,8 @@ public class JonasHellcastle
 		}
 		else
 		{
+			if (yDif > 100)
+				return false;
 			if (a.Type.HasFlag(RoomConnectionOnSide.Top) && b.Type.HasFlag(RoomConnectionOnSide.Bottom) && a.Position.Y > b.Position.Y)
 			{
 				return true;
