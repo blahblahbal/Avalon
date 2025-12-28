@@ -3,6 +3,7 @@ using Avalon.Tiles.Furniture.ResistantWood;
 using Avalon.Walls;
 using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
+using ReLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -141,7 +142,7 @@ public record struct HellcastleRoom
 		ushort candle = (ushort)ModContent.TileType<ResistantWoodCandle>();
 		ushort candelabra = (ushort)ModContent.TileType<ResistantWoodCandelabra>();
 		ushort chandelier = (ushort)ModContent.TileType<ResistantWoodChandelier>();
-		ushort windowWall = WallID.RedStainedGlass;
+		ushort windowWall = WallID.RubyGemspark;
 
 		if (beforeHallways)
 		{
@@ -157,16 +158,20 @@ public record struct HellcastleRoom
 			case HellcastleRoomType.Banquet:
 				WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), new Actions.ClearTile());
 				WorldUtils.Gen(Position + new Point(0 - 6, Size.Y), new Shapes.Rectangle(Size.X + 6, 3), Actions.Chain(new Modifiers.OnlyTiles(brickType), new Modifiers.IsTouchingAir(true), new Actions.SetTileKeepWall(TileID.AncientPinkBrick)));
-				WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.PlaceWall(windowWall));
+				//WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.PlaceWall(windowWall));
 
 				for (int i = Size.X % 10; i < Size.X; i += 10)
 				{
-					WorldUtils.Gen(Position + new Point(i, 3), new Shapes.Rectangle(1, Size.Y - 6), new Actions.PlaceWall(wallType));
+					//WorldUtils.Gen(Position + new Point(i, 3), new Shapes.Rectangle(1, Size.Y - 6), new Actions.PlaceWall(wallType));
 					i += 5;
 					if (WorldGen.PlaceTile(Position.X + i, Rect.Bottom - 1, table, false, true))
 					{
-						WorldGen.PlaceObject(Position.X + i + 5, Rect.Top, chandelier, style: Main.rand.NextBool(3)? 1 : 0);
-						WorldGen.PlaceObject(Position.X + i - 5, Rect.Top, chandelier, style: Main.rand.NextBool(3) ? 1 : 0);
+						int windowHeight = Size.Y - 5;
+						WorldUtils.Gen(Position + new Point(i - 2, 2), new Shapes.Rectangle(5, windowHeight), new Actions.PlaceWall(windowWall));
+						WorldUtils.Gen(Position + new Point(i - 2, Main.rand.Next(4, windowHeight - 1)), new Shapes.Rectangle(5, 1), new Actions.PlaceWall(wallType));
+
+						WorldGen.PlaceObject(Position.X + i + 5, Rect.Top, chandelier, style: Main.rand.NextBool(3)? 0 : 1);
+						WorldGen.PlaceObject(Position.X + i - 5, Rect.Top, chandelier, style: Main.rand.NextBool(3) ? 0 : 1);
 						WorldGen.PlaceObject(Position.X + i + 2, Rect.Bottom - 1, chair);
 						WorldGen.PlaceObject(Position.X + i - 2, Rect.Bottom - 1, chair, direction: 1);
 						switch (Main.rand.Next(3))
@@ -353,7 +358,7 @@ public class JonasHellcastle
 						{
 							if (r == room || r == rooms[otherRoom])
 								continue;
-							if (Collision.CheckAABBvLineCollision(r.Position.ToVector2(), r.Size.ToVector2(), room.ConnectionPoints[startConnect].Position.ToVector2(), rooms[otherRoom].ConnectionPoints[endConnect].Position.ToVector2(), tunnelWidth - 3, ref useless))
+							if (Collision.CheckAABBvLineCollision(r.Position.ToVector2(), r.Size.ToVector2(), room.ConnectionPoints[startConnect].Position.ToVector2(), rooms[otherRoom].ConnectionPoints[endConnect].Position.ToVector2(), tunnelWidth + 3, ref useless))
 							{
 								validRoom = false;
 								break;

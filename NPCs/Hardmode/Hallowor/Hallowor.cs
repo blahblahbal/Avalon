@@ -26,6 +26,11 @@ public class Hallowor : ModNPC
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, value);
 	}
+
+	public override Color? GetAlpha(Color drawColor)
+	{
+		return NPC.GetNPCColorTintedByBuffs(new Color(1f,1f,1f,0.85f));
+	}
     public override void SetDefaults()
 	{
 		NPC.npcSlots = 1;

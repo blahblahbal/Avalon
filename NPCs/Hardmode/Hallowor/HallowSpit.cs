@@ -1,10 +1,10 @@
-using System;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using Avalon.Dusts;
 
 namespace Avalon.NPCs.Hardmode.Hallowor;
 
@@ -27,7 +27,7 @@ public class HallowSpit : ModNPC
         NPC.aiStyle = -1;
         NPC.timeLeft = 750;
         NPC.damage = 65;
-        NPC.DeathSound = SoundID.NPCDeath9;
+        NPC.DeathSound = SoundID.Item118;
         NPC.lifeMax = 1;
         NPC.hide = true;
         NPC.scale = 0.9f;
@@ -51,7 +51,7 @@ public class HallowSpit : ModNPC
             NPC.velocity.X = num158 * num160;
             NPC.velocity.Y = num159 * num160;
         }
-		Color color = Color.Lerp(new Color(1f, 0.4f, 1f, 0f), new Color(0.4f, 1f, 1f, 0f),Math.Abs(MathF.Sin((float)Main.timeForVisualEffects * 0.1f)));
+		Color color = Color.Lerp(new Color(1f, 0.4f, 1f, 0f), new Color(0.4f, 1f, 1f, 0f),Math.Abs(MathF.Sin((float)Main.timeForVisualEffects * 0.05f)));
         NPC.ai[0] += 1f;
         if (NPC.ai[0] > 3f)
         {
@@ -60,7 +60,7 @@ public class HallowSpit : ModNPC
         if (NPC.ai[0] == 2f)
         {
             NPC.position += NPC.velocity;
-            SoundEngine.PlaySound(SoundID.NPCDeath9, NPC.position);
+            SoundEngine.PlaySound(SoundID.Item105 with { MaxInstances = 5, PitchRange = (0.5f,0.75f)}, NPC.position);
             for (int num161 = 0; num161 < 20; num161++)
             {
                 int num162 = Dust.NewDust(new Vector2(NPC.position.X, NPC.position.Y + 2f), NPC.width, NPC.height, ModContent.DustType<SimpleColorableGlowyDust>(), 0f, 0f, 100, color, 1.8f);
@@ -177,4 +177,14 @@ public class HallowSpit : ModNPC
 		NPC.rotation += 0.4f * NPC.direction;
         return;
     }
+	public override void HitEffect(NPC.HitInfo hit)
+	{
+		Color color = Color.Lerp(new Color(1f, 0.4f, 1f, 0f), new Color(0.4f, 1f, 1f, 0f), Math.Abs(MathF.Sin((float)Main.timeForVisualEffects * 0.05f)));
+		for(int i = 0; i < 15; i++)
+		{
+			Dust d = Dust.NewDustPerfect(NPC.Center, ModContent.DustType<SimpleColorableGlowyDust>(), Main.rand.NextVector2Circular(3,3), 80, color, 1.3f);
+			d.fadeIn = Main.rand.NextFloat(2);
+			d.noGravity = true;
+		}
+	}
 }
