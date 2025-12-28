@@ -1,4 +1,5 @@
 ﻿using Avalon.Tiles;
+using Avalon.Tiles.Furniture.ResistantWood;
 using Avalon.Walls;
 using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
@@ -15,14 +16,15 @@ public enum HellcastleRoomType
 {
 	Regular,
 	Arena,
+
 }
 [Flags]
 public enum RoomConnectionOnSide
 {
-	Top = 0,
-	Bottom = 1,
-	Left = 2,
-	Right = 4,
+	Top = 1,
+	Bottom = 2,
+	Left = 4,
+	Right = 8,
 }
 public record struct HellcastleHallway
 {
@@ -41,17 +43,17 @@ public record struct HellcastleHallway
 		ushort brickType = (ushort)ModContent.TileType<ImperviousBrick>();
 		ushort wallType = (ushort)ModContent.WallType<ImperviousBrickWallUnsafe>();
 		int iterations = Math.Max(Math.Abs(Start.X - End.X), Math.Abs(Start.Y - End.Y));
-		for (int i = 0; i < iterations; i += 2)
+		for (int i = 0; i < iterations; i++)
 		{
 			float percent = i / (float)iterations;
-			int x = (int)Math.Round(MathHelper.Lerp(End.X, Start.X, percent)) - halfWidth;
-			int y = (int)Math.Round(MathHelper.Lerp(End.Y, Start.Y, percent)) - halfWidth;
+			int x = (int)Math.Round(MathHelper.SmoothStep(End.X, Start.X, percent)) - halfWidth;
+			int y = (int)Math.Round(MathHelper.SmoothStep(End.Y, Start.Y, percent)) - halfWidth;
 
 			if (!HollowOutInsides)
-				WorldUtils.Gen(new Point(x - 6, y - 6), new Shapes.Rectangle(Width + 12, Width + 12), Actions.Chain(new Actions.PlaceWall(wallType, false), new Modifiers.Expand(1), new Actions.SetTileKeepWall(brickType, true, true)));
+				WorldUtils.Gen(new Point(x - 6, y - 6), new Shapes.Rectangle(Width + 12, Width + 12), Actions.Chain(new Actions.PlaceWall(wallType, false), new Modifiers.Expand(1), new Actions.SetTileKeepWall(brickType)));
 			else
 			{
-				WorldUtils.Gen(new Point(x, y), new Shapes.Rectangle(Width, Width), new Actions.ClearTile(true));
+				WorldUtils.Gen(new Point(x, y), new Shapes.Rectangle(Width, Width), new Actions.ClearTile());
 			}
 		}
 	}
@@ -94,10 +96,10 @@ public record struct HellcastleRoom
 							new HellcastleRoomConnectionPoint(new Point(Main.rand.Next(Rect.Left + connectionWrongSideOffset, Rect.Right - connectionWrongSideOffset), Rect.Top + connectionIntendedSideOffset), RoomConnectionOnSide.Top),
 							new HellcastleRoomConnectionPoint(new Point(Main.rand.Next(Rect.Left + connectionWrongSideOffset, Rect.Right - connectionWrongSideOffset), Rect.Bottom - connectionIntendedSideOffset), RoomConnectionOnSide.Bottom)];
 						break;
-					case 2: // Vertical only
+					case 2: // both
 						ConnectionPoints = [
 							new HellcastleRoomConnectionPoint(new Point(Rect.Left + connectionIntendedSideOffset, Main.rand.Next(Rect.Top + connectionWrongSideOffset, Rect.Bottom - connectionWrongSideOffset)), RoomConnectionOnSide.Left),
-							new HellcastleRoomConnectionPoint(new Point(Rect.Right - connectionIntendedSideOffset, Main.rand.Next(Rect.Top+ connectionWrongSideOffset, Rect.Bottom - connectionWrongSideOffset)), RoomConnectionOnSide.Right),
+							new HellcastleRoomConnectionPoint(new Point(Rect.Right - connectionIntendedSideOffset, Main.rand.Next(Rect.Top + connectionWrongSideOffset, Rect.Bottom - connectionWrongSideOffset)), RoomConnectionOnSide.Right),
 							new HellcastleRoomConnectionPoint(new Point(Main.rand.Next(Rect.Left + connectionWrongSideOffset, Rect.Right - connectionWrongSideOffset), Rect.Top + connectionIntendedSideOffset), RoomConnectionOnSide.Top),
 							new HellcastleRoomConnectionPoint(new Point(Main.rand.Next(Rect.Left + connectionWrongSideOffset, Rect.Right - connectionWrongSideOffset), Rect.Bottom - connectionIntendedSideOffset), RoomConnectionOnSide.Bottom)];
 						break;
@@ -127,39 +129,55 @@ public record struct HellcastleRoom
 		ushort wallType = (ushort)ModContent.WallType<ImperviousBrickWallUnsafe>();
 
 		if(beforeHallways)
-			WorldUtils.Gen(Position - new Point(10,10), new Shapes.Rectangle(Size.X + 20, Size.Y + 20), Actions.Chain(Actions.Chain(new Modifiers.SkipWalls(wallType), new Actions.PlaceWall(wallType, false), new Modifiers.Expand(2), new Actions.SetTileKeepWall(brickType, true, true))));
+			WorldUtils.Gen(Position - new Point(10,10), new Shapes.Rectangle(Size.X + 20, Size.Y + 20), Actions.Chain(Actions.Chain(new Modifiers.SkipWalls(wallType), new Actions.PlaceWall(wallType, false), new Modifiers.Expand(2), new Actions.SetTileKeepWall(brickType))));
 
 		switch (Type)
 		{
 			case HellcastleRoomType.Regular:
 				if (beforeHallways)
 				{
-					WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), Actions.Chain(new Actions.PlaceWall(wallType, false), new Modifiers.Expand(1), new Actions.SetTileKeepWall(brickType, true, true)));
+					//WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), Actions.Chain(new Actions.PlaceWall(wallType, false), new Modifiers.Expand(1), new Actions.SetTileKeepWall(brickType, true, true)));
 				}
 				else
 				{
-					WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.ClearTile(true));
+					WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.ClearTile());
 				}
 				break;
 			case HellcastleRoomType.Arena:
 				if (beforeHallways)
 				{
-					WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), Actions.Chain(new Actions.PlaceWall(wallType, false), new Modifiers.Expand(1), new Actions.SetTileKeepWall(brickType, true, true)));
+					//WorldUtils.Gen(Position, new Shapes.Rectangle(Size.X, Size.Y), Actions.Chain(new Actions.PlaceWall(wallType, false), new Modifiers.Expand(1), new Actions.SetTileKeepWall(brickType, true, true)));
 				}
 				else
 				{
-					WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.ClearTile(true));
-					WorldGen.PlaceTile(Position.X + (Size.X / 2), Position.Y + Size.Y - 4, ModContent.TileType<LibraryAltar>(), false, true);
+					WorldUtils.Gen(Position + new Point(3, 3), new Shapes.Rectangle(Size.X - 6, Size.Y - 6), new Actions.ClearTile());
+					int altarStandHeight = 6;
+					int altarX = Position.X + (Size.X / 2);
+					int bottomY = Position.Y + Size.Y - 4;
+					for (int i = 0; i < altarStandHeight; i++)
+					{
+						WorldUtils.Gen(new Point(altarX - 12 + i, bottomY - i), new Shapes.Rectangle(23 - (i * 2), 1), new Actions.SetTileKeepWall(brickType, true, true));
+					}
+					//WorldGen.PlaceTile(altarX, bottomY - altarStandHeight, TileID.DiamondGemspark, false, true);
+					WorldGen.PlaceTile(altarX - 1, bottomY - altarStandHeight, ModContent.TileType<LibraryAltar>(), false, true);
+					ushort lamp = (ushort)ModContent.TileType<ResistantWoodLamp>();
+					WorldGen.PlaceTile(altarX + 3, bottomY - altarStandHeight, lamp, false, true);
+					WorldGen.PlaceTile(altarX - 5, bottomY - altarStandHeight, lamp, false, true);
 				}
 				break;
 		}
-		if (!beforeHallways)
-		{
-			for (int i = 0; i < ConnectionPoints.Length; i++)
-			{
-				WorldUtils.Gen(ConnectionPoints[i].Position, new Shapes.Rectangle(1, 1), new Actions.SetTile((ushort)(TileID.AmethystGemspark + ConnectionPoints[i].Type)));
-			}
-		}
+		// debug connection points
+		//if (!beforeHallways)
+		//{
+		//	for (int i = 0; i < ConnectionPoints.Length; i++)
+		//	{
+		//		WorldUtils.Gen(ConnectionPoints[i].Position, new Shapes.Rectangle(1, 1), new Actions.SetTile((ushort)(TileID.AmethystGemspark + ConnectionPoints[i].Type)));
+		//		if (!ConnectionPoints[i].InUse)
+		//		{
+		//			WorldUtils.Gen(ConnectionPoints[i].Position - new Point(1,1), new Shapes.Rectangle(3, 3), new Actions.SetTile((ushort)(TileID.AmethystGemspark + ConnectionPoints[i].Type)));
+		//		}
+		//	}
+		//}
 	}
 }
 public class JonasHellcastle
@@ -183,7 +201,7 @@ public class JonasHellcastle
 		rooms.Add(arena);
 
 		// decide what rooms to make
-		PopulateRooms(HellcastleRoomType.Regular, 40, ref rooms, hellcastleRandomGenArea);
+		PopulateRooms(HellcastleRoomType.Regular, 20, ref rooms, hellcastleRandomGenArea);
 
 		// generate the rooms
 		for(int i = 0; i < rooms.Count; i++)
@@ -224,6 +242,8 @@ public class JonasHellcastle
 		{
 			r.Generate(false);
 		}
+		WorldUtils.Gen(new Point(hellcastleRandomGenArea.X - 10, hellcastleRandomGenArea.Y - 10), new Shapes.Rectangle(hellcastleWidth + 20, hellcastleHeight + 20), Actions.Chain(new Modifiers.Dither(0.25f), new Actions.Smooth()));
+		WorldUtils.Gen(new Point(hellcastleRandomGenArea.X - 10, hellcastleRandomGenArea.Y - 10), new Shapes.Rectangle(hellcastleWidth + 20, hellcastleHeight + 20), new Actions.SetFrames());
 	}
 	private static void PopulateRooms(HellcastleRoomType type, int amount, ref List<HellcastleRoom> rooms, Rectangle genArea)
 	{
@@ -234,6 +254,11 @@ public class JonasHellcastle
 			bool isOverlapping = false;
 			for (int t = 0; t < 10; t++)
 			{
+				if (isOverlapping)
+				{
+					isOverlapping = false;
+					ShuffleRoomPosition(ref room, genArea);
+				}
 				foreach (HellcastleRoom r in rooms)
 				{
 					if (room.Rect.Intersects(r.Rect.Expand(6, 6)))
@@ -244,6 +269,8 @@ public class JonasHellcastle
 					if (isOverlapping)
 						break;
 				}
+				if (!isOverlapping)
+					break;
 			}
 			if (!isOverlapping)
 				rooms.Add(room);
@@ -327,11 +354,11 @@ public class JonasHellcastle
 		}
 		else
 		{
-			if (a.Type.HasFlag(RoomConnectionOnSide.Top) && b.Type.HasFlag(RoomConnectionOnSide.Bottom) && a.Position.Y < b.Position.Y)
+			if (a.Type.HasFlag(RoomConnectionOnSide.Top) && b.Type.HasFlag(RoomConnectionOnSide.Bottom) && a.Position.Y > b.Position.Y)
 			{
 				return true;
 			}
-			else if (a.Type.HasFlag(RoomConnectionOnSide.Bottom) && b.Type.HasFlag(RoomConnectionOnSide.Top) && a.Position.Y > b.Position.Y)
+			else if (a.Type.HasFlag(RoomConnectionOnSide.Bottom) && b.Type.HasFlag(RoomConnectionOnSide.Top) && a.Position.Y < b.Position.Y)
 			{
 				return true;
 			}

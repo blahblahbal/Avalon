@@ -1384,6 +1384,7 @@ namespace Avalon.Common.Templates
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleWrapLimit = 36;
 			TileObjectData.newTile.WaterDeath = WaterDeath;
+			TileObjectData.newTile.Origin = new Point16(0, 2);
 			TileObjectData.addTile(Type);
 
 			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
