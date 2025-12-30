@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile; 
+namespace Avalon.NPCs.PreHardmode.Shadlopod; 
 
 public class DarkeningInk : ModProjectile
 {
