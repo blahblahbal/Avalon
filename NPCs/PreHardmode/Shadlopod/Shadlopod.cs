@@ -12,8 +12,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.DataStructures;
+using Avalon;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.Shadlopod;
 
 public class Shadlopod : ModNPC
 {

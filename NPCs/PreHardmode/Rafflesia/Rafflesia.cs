@@ -7,8 +7,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using Avalon.NPCs.PreHardmode.Fly;
+using Avalon;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.Rafflesia;
 
 public class Rafflesia : ModNPC
 {
@@ -88,7 +90,7 @@ public class Rafflesia : ModNPC
             NPC.ai[2]++; // += 2
             int type = ModContent.NPCType<FlySmall>();
             if (Main.rand.NextBool(3))
-                type = ModContent.NPCType<Fly>();
+                type = ModContent.NPCType<Fly.Fly>();
             if (NPC.ai[2] is 18 or 48 or 78)
             {
                 int n = NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.position.Y + 8, type, Target: NPC.target);

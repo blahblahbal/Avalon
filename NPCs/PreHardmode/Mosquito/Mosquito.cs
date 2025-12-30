@@ -1,22 +1,19 @@
-using System;
+using Avalon;
 using Avalon.Items.Material;
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.IO;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Bestiary;
-using Terraria.Enums;
-using Terraria.DataStructures;
 using Terraria.Localization;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
-using Terraria.Audio;
-using System.IO;
-using Avalon.Common;
+using Terraria.ModLoader;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.Mosquito;
 
 public class Mosquito : ModNPC
 {

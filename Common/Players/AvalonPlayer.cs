@@ -16,6 +16,9 @@ using Avalon.NPCs.Bosses.Hardmode;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.NPCs.Hardmode.Ickslime;
 using Avalon.NPCs.Hardmode.MineralSlime;
+using Avalon.NPCs.PreHardmode.AmberSlime;
+using Avalon.NPCs.PreHardmode.InfestedAmberSlime;
+using Avalon.NPCs.PreHardmode.OreSlime;
 using Avalon.Prefixes;
 using Avalon.Projectiles;
 using Avalon.Projectiles.Tools;
@@ -2053,10 +2056,10 @@ public class AvalonPlayer : ModPlayer
 		{
 			if (Player.armor[i].type == ItemID.RoyalGel)
 			{
-				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.OreSlime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<OreSlime>()] = true;
 				Player.npcTypeNoAggro[ModContent.NPCType<MineralSlime>()] = true;
-				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.AmberSlime>()] = true;
-				Player.npcTypeNoAggro[ModContent.NPCType<NPCs.PreHardmode.InfestedAmberSlime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<AmberSlime>()] = true;
+				Player.npcTypeNoAggro[ModContent.NPCType<InfestedAmberSlime>()] = true;
 				Player.npcTypeNoAggro[ModContent.NPCType<Ickslime>()] = true;
 			}
 		}

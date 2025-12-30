@@ -5,11 +5,11 @@ using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
-using Avalon.NPCs.PreHardmode;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Avalon;
 using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.NPCs.PreHardmode.Bactus;
 
 namespace Avalon.Tiles.Contagion.BigPlants;
 

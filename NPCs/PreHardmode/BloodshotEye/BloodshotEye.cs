@@ -12,8 +12,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using System.IO;
+using Avalon;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.BloodshotEye;
 
 public class BloodshotEye : ModNPC
 {

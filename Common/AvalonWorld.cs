@@ -3,7 +3,7 @@ using Avalon.Logic;
 using Avalon.ModSupport;
 using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.NPCs.Hardmode.Hallowor;
-using Avalon.NPCs.PreHardmode;
+using Avalon.NPCs.PreHardmode.BoneFish;
 using Avalon.Reflection;
 using Avalon.Systems;
 using Avalon.Tiles;

@@ -12,7 +12,15 @@ using Avalon.NPCs.Hardmode.PoisonDartFrog;
 using Avalon.NPCs.Hardmode.VenusFlytrap;
 using Avalon.NPCs.Hardmode.ViralMummy;
 using Avalon.NPCs.Hardmode.Viris;
-using Avalon.NPCs.PreHardmode;
+using Avalon.NPCs.PreHardmode.AmberSlime;
+using Avalon.NPCs.PreHardmode.Bactus;
+using Avalon.NPCs.PreHardmode.InfestedAmberSlime;
+using Avalon.NPCs.PreHardmode.Mosquito;
+using Avalon.NPCs.PreHardmode.OreSlime;
+using Avalon.NPCs.PreHardmode.Pyrasite;
+using Avalon.NPCs.PreHardmode.Rafflesia;
+using Avalon.NPCs.PreHardmode.RedArowana;
+using Avalon.NPCs.PreHardmode.Shadlopod;
 using Terraria.ID;
 using Terraria.ModLoader;
 

@@ -32,6 +32,9 @@ using ThoriumMod.NPCs;
 using ThoriumMod.NPCs.Depths;
 using Avalon.Items.Placeable.Crafting;
 using Avalon.NPCs.Hardmode.IrateBones;
+using Avalon.NPCs.PreHardmode.FallenHero;
+using Avalon.NPCs.PreHardmode.Mosquito;
+using Avalon.NPCs.PreHardmode.RedArowana;
 
 namespace Avalon.ModSupport.Thorium;
 
@@ -88,20 +91,20 @@ public class ThoriumTweaksPlayer : ModPlayer
         }
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.ZombieRepellentBuff>()))
         {
-            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.FallenHero>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<FallenHero>()] = true;
         }
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.InsectRepellentBuff>()))
         {
-            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.Mosquito>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.MosquitoDroopy>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.MosquitoPainted>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.MosquitoSmall>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<Mosquito>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<MosquitoDroopy>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<MosquitoPainted>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<MosquitoSmall>()] = true;
         }
         if (Player.HasBuff(ModContent.BuffType<ThoriumMod.Buffs.FishRepellentBuff>()))
         {
             Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.Critters.ContaminatedGoldfish>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.RedArowana>()] = true;
-            Player.npcTypeNoAggro[ModContent.NPCType<Avalon.NPCs.PreHardmode.RedArowana2>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<RedArowana>()] = true;
+            Player.npcTypeNoAggro[ModContent.NPCType<RedArowana2>()] = true;
         }
     }
 }

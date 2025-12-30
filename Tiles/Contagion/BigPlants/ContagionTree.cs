@@ -1,6 +1,6 @@
 using Avalon;
 using Avalon.Dusts;
-using Avalon.NPCs.PreHardmode;
+using Avalon.NPCs.PreHardmode.Bactus;
 using Avalon.Tiles.Contagion.ContagionGrasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

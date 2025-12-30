@@ -12,8 +12,9 @@ using Terraria.Localization;
 using System.IO;
 using Avalon.Common;
 using Avalon.Items.Placeable.Statue;
+using Avalon;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.Bactus;
 
 public class Bactus : ModNPC
 {

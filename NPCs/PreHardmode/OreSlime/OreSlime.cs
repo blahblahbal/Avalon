@@ -1,3 +1,4 @@
+using Avalon;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -10,7 +11,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.OreSlime;
 
 public class OreSlime : ModNPC
 {
@@ -47,12 +48,11 @@ public class OreSlime : ModNPC
 	public override void SendExtraAI(BinaryWriter writer)
 	{
 		writer.Write(WhichOre);
-		writer.WriteRGB(OreColor[WhichOre]);
 	}
 	public override void ReceiveExtraAI(BinaryReader reader)
 	{
 		WhichOre = reader.ReadInt32();
-		NPC.color = reader.ReadRGB();
+		NPC.color = OreColor[WhichOre];
 	}
 	public override void DrawEffects(ref Color drawColor)
 	{
