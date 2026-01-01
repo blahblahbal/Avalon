@@ -1,5 +1,7 @@
+using Avalon.Common;
 using Avalon.Dusts;
 using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
+using Avalon.Particles;
 using Avalon.UI;
 using Microsoft.Xna.Framework;
 using ReLogic.Utilities;
@@ -7,6 +9,7 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Graphics.CameraModifiers;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -129,49 +132,82 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.netUpdate = true;
 			if (NPC.ai[0] > 60)
 			{
-				PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
-				Main.instance.CameraModifiers.Add(modifier);
+				if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+				{
+					PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
+					Main.instance.CameraModifiers.Add(modifier);
+				}
+				for(int i = 0; i < 10; i++)
+				{
+					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+					s.LocalPosition = NPC.Center;
+					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
+					s.Rotation = s.Velocity.ToRotation();
+					s.Scale = new Vector2(6f, 2f);
+					s.DrawVerticalAxis = false;
+					s.FadeInEnd = Main.rand.Next(3,10);
+					s.FadeOutStart = s.FadeInEnd;
+					s.FadeOutEnd = Main.rand.Next(20,40);
+					s.AdditiveAmount = 1f;
+					s.ColorTint = new Color(Main.rand.NextFloat(0.2f,0.7f), 0.9f, 1f);
+					Main.ParticleSystem_World_OverPlayers.Add(s);
+				}
+				for (int i = 0; i < 10; i++)
+				{
+					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+					s.LocalPosition = NPC.Center;
+					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
+					s.Rotation = s.Velocity.ToRotation();
+					s.Scale = new Vector2(3f, 1f);
+					s.DrawVerticalAxis = false;
+					s.FadeInEnd = Main.rand.Next(3, 5);
+					s.FadeOutStart = s.FadeInEnd;
+					s.FadeOutEnd = Main.rand.Next(10, 30);
+					s.AdditiveAmount = 1f;
+					s.ColorTint = Color.White;
+					Main.ParticleSystem_World_OverPlayers.Add(s);
+				}
 				for (int i = 0; i < 40; i++)
 				{
 					int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default, 1f);
-					Main.dust[num890].velocity *= 5f;
+					Main.dust[num890].velocity *= Main.rand.NextFloat(10f);
 					Main.dust[num890].scale = 1.5f;
 					Main.dust[num890].noGravity = true;
 					Main.dust[num890].fadeIn = 2f;
 				}
-				for (int i = 0; i < 20; i++)
-				{
-					int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num893].velocity *= 2f;
-					Main.dust[num893].scale = 1.5f;
-					Main.dust[num893].noGravity = true;
-					Main.dust[num893].fadeIn = 3f;
-				}
-				for (int i = 0; i < 40; i++)
-				{
-					int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num892].velocity *= 5f;
-					Main.dust[num892].scale = 1.5f;
-					Main.dust[num892].noGravity = true;
-					Main.dust[num892].fadeIn = 2f;
-				}
-				for (int i = 0; i < 40; i++)
-				{
-					int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num891].velocity *= 10f;
-					Main.dust[num891].scale = 1.5f;
-					Main.dust[num891].noGravity = true;
-					Main.dust[num891].fadeIn = 1.5f;
-				}
+				//for (int i = 0; i < 20; i++)
+				//{
+				//	int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num893].velocity *= 2f;
+				//	Main.dust[num893].scale = 1.5f;
+				//	Main.dust[num893].noGravity = true;
+				//	Main.dust[num893].fadeIn = 3f;
+				//}
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num892].velocity *= 5f;
+				//	Main.dust[num892].scale = 1.5f;
+				//	Main.dust[num892].noGravity = true;
+				//	Main.dust[num892].fadeIn = 2f;
+				//}
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num891].velocity *= 10f;
+				//	Main.dust[num891].scale = 1.5f;
+				//	Main.dust[num891].noGravity = true;
+				//	Main.dust[num891].fadeIn = 1.5f;
+				//}
 
-				if (Main.netMode != NetmodeID.MultiplayerClient)
-				{
-					//NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(),NPC.whoAmI,NPC.whoAmI);
-					for (int i = 0; i < 12; i++)
-					{
-						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
-					}
-				}
+				//if (Main.netMode != NetmodeID.MultiplayerClient)
+				//{
+				//	//NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(),NPC.whoAmI,NPC.whoAmI);
+				//	for (int i = 0; i < 12; i++)
+				//	{
+				//		Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
+				//	}
+				//}
 				Transition();
 				SoundEngine.PlaySound(SoundID.Roar, NPC.position);
 				NPC.ai[0] = 0;
@@ -384,49 +420,93 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.netUpdate = true;
 			if (NPC.ai[0] > 60)
 			{
-				PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
-				Main.instance.CameraModifiers.Add(modifier);
+				if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+				{
+					PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
+					Main.instance.CameraModifiers.Add(modifier);
+				}
+				for (int i = 0; i < 10; i++)
+				{
+					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+					s.LocalPosition = NPC.Center;
+					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
+					s.Rotation = s.Velocity.ToRotation();
+					s.Scale = new Vector2(6f, 2f);
+					s.DrawVerticalAxis = false;
+					s.FadeInEnd = Main.rand.Next(3, 10);
+					s.FadeOutStart = s.FadeInEnd;
+					s.FadeOutEnd = Main.rand.Next(20, 40);
+					s.AdditiveAmount = 1f;
+					s.ColorTint = new Color(1f, 0f, 0.2f);
+					Main.ParticleSystem_World_OverPlayers.Add(s);
+				}
+				for (int i = 0; i < 10; i++)
+				{
+					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+					s.LocalPosition = NPC.Center;
+					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
+					s.Rotation = s.Velocity.ToRotation();
+					s.Scale = new Vector2(3f, 1f);
+					s.DrawVerticalAxis = false;
+					s.FadeInEnd = Main.rand.Next(3, 5);
+					s.FadeOutStart = s.FadeInEnd;
+					s.FadeOutEnd = Main.rand.Next(10, 30);
+					s.AdditiveAmount = 1f;
+					s.ColorTint = new Color(Main.rand.NextFloat(0.2f, 0.7f), 0.9f, 1f);
+					Main.ParticleSystem_World_OverPlayers.Add(s);
+				}
 				for (int i = 0; i < 40; i++)
 				{
-					int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num890].velocity *= 5f;
+					int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default, 1f);
+					Main.dust[num890].velocity *= Main.rand.NextFloat(10f);
 					Main.dust[num890].scale = 1.5f;
 					Main.dust[num890].noGravity = true;
 					Main.dust[num890].fadeIn = 2f;
 				}
-				for (int i = 0; i < 20; i++)
-				{
-					int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num893].velocity *= 2f;
-					Main.dust[num893].scale = 1.5f;
-					Main.dust[num893].noGravity = true;
-					Main.dust[num893].fadeIn = 3f;
-				}
-				for (int i = 0; i < 40; i++)
-				{
-					int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num892].velocity *= 5f;
-					Main.dust[num892].scale = 1.5f;
-					Main.dust[num892].noGravity = true;
-					Main.dust[num892].fadeIn = 2f;
-				}
-				for (int i = 0; i < 40; i++)
-				{
-					int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num891].velocity *= 10f;
-					Main.dust[num891].scale = 1.5f;
-					Main.dust[num891].noGravity = true;
-					Main.dust[num891].fadeIn = 1.5f;
-				}
+
+				//PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
+				//Main.instance.CameraModifiers.Add(modifier);
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num890].velocity *= 5f;
+				//	Main.dust[num890].scale = 1.5f;
+				//	Main.dust[num890].noGravity = true;
+				//	Main.dust[num890].fadeIn = 2f;
+				//}
+				//for (int i = 0; i < 20; i++)
+				//{
+				//	int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num893].velocity *= 2f;
+				//	Main.dust[num893].scale = 1.5f;
+				//	Main.dust[num893].noGravity = true;
+				//	Main.dust[num893].fadeIn = 3f;
+				//}
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num892].velocity *= 5f;
+				//	Main.dust[num892].scale = 1.5f;
+				//	Main.dust[num892].noGravity = true;
+				//	Main.dust[num892].fadeIn = 2f;
+				//}
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num891].velocity *= 10f;
+				//	Main.dust[num891].scale = 1.5f;
+				//	Main.dust[num891].noGravity = true;
+				//	Main.dust[num891].fadeIn = 1.5f;
+				//}
 
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					//NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(), NPC.whoAmI, NPC.whoAmI,1);
-					for (int i = 0; i < 12; i++)
-					{
-						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
-					}
-					for(int i = 0; i < 4; i++)
+					//for (int i = 0; i < 12; i++)
+					//{
+					//	Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
+					//}
+					for (int i = 0; i < 4; i++)
 					{
 						Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, Vector2.One.RotatedBy(i * MathHelper.PiOver2) * 5, ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
 					}
@@ -535,10 +615,28 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				NPC.velocity *= 0.9f;
 				if (NPC.ai[0] < beamStart)
 				{
-					Vector2 vector = Main.rand.NextVector2Circular(1, 1);
-					Dust d = Dust.NewDustPerfect(NPC.Center + vector * 130,ModContent.DustType<PhantoplasmDust>(),-vector * 6, 128);
-					d.noGravity = true;
-					d.scale = 3;
+					if (Main.rand.Next(60) < NPC.ai[0] - 60) 
+					{
+						Vector2 vector = Main.rand.NextVector2Circular(1, 1);
+						Dust d = Dust.NewDustPerfect(NPC.Center + vector * 130, ModContent.DustType<PhantoplasmDust>(), -vector * 6, 128);
+						d.noGravity = true;
+						d.scale = 1;
+						vector = Main.rand.NextVector2Circular(1, 1);
+						PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+						s.LocalPosition = NPC.Center + vector * 230;
+						s.Velocity = -vector;
+						s.AccelerationPerFrame = -vector * 0.6f;
+						s.Rotation = s.Velocity.ToRotation();
+						s.Scale = new Vector2(3f, 1f);
+						s.DrawVerticalAxis = false;
+						s.FadeInEnd = Main.rand.Next(3, 10);
+						s.FadeOutStart = s.FadeInEnd;
+						s.FadeOutEnd = 30;
+						s.AdditiveAmount = 1f;
+						float whiteness = Main.rand.NextFloat(0.5f);
+						s.ColorTint = new Color(1f, whiteness, 0.2f + whiteness);
+						Main.ParticleSystem_World_OverPlayers.Add(s);
+					}
 				}
 			}
 			else

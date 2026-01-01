@@ -30,6 +30,10 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles
 			Projectile.timeLeft = 600;
 			Projectile.scale = 0.5f;
 		}
+		public override void OnHitPlayer(Player target, Player.HurtInfo info)
+		{
+			Phantasm.ApplyShadowCurse(target);
+		}
 		public override void AI()
 		{
 			NPC owner = Main.npc[(int)Projectile.ai[0]];

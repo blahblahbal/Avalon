@@ -11561,7 +11561,7 @@ Mods: {
 
 			ShadowCurse: {
 				DisplayName: Shadow Curse
-				Description: You take double damage
+				Description: Damage taken increased by {0}%
 			}
 
 			XanthophyteTree: {

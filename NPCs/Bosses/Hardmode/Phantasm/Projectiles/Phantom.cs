@@ -29,10 +29,7 @@ public class Phantom : ModProjectile
 	}
 	public override void OnHitPlayer(Player target, Player.HurtInfo info)
 	{
-		if (Main.rand.NextBool(3))
-		{
-			target.AddBuff(ModContent.BuffType<ShadowCurse>(), 60 * 5);
-		}
+		Phantasm.ApplyShadowCurse(target);
 	}
 	public override void AI()
 	{

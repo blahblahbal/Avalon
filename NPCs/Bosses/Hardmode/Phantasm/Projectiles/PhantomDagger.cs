@@ -1,20 +1,22 @@
+using Avalon;
+using Avalon.Buffs.Debuffs;
+using Avalon.Common;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Magic;
+using Avalon.NPCs.Bosses;
+using Avalon.NPCs.Bosses.Hardmode;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System.Collections.Generic;
 using Terraria;
-using Avalon.NPCs.Bosses;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
-using Avalon.Common;
-using Avalon.Buffs.Debuffs;
-using ReLogic.Content;
-using Avalon.NPCs.Bosses.Hardmode;
-using System.Collections.Generic;
-using Avalon;
 
 namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
@@ -22,10 +24,7 @@ public class PhantomDagger : SoulDagger
 {
 	public override void OnHitPlayer(Player target, Player.HurtInfo info)
 	{
-		if (Main.rand.NextBool(3))
-		{
-			target.AddBuff(ModContent.BuffType<ShadowCurse>(), 60 * 5);
-		}
+		Phantasm.ApplyShadowCurse(target);
 	}
 	public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
 	{
@@ -62,8 +61,24 @@ public class PhantomDagger : SoulDagger
 			d.velocity = new Vector2(0, Main.rand.NextFloat(10)).RotatedBy(Projectile.rotation + Main.rand.NextFloat(-0.3f, 0.3f));
 			d.noGravity = true;
 			d.alpha = 128;
-			d.scale = 2;
-			if(Projectile.timeLeft == 1)
+			d.scale = 1;
+			if (Main.rand.NextBool(3))
+			{
+				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+				s.LocalPosition = Projectile.Center;
+				s.Velocity = new Vector2(0, Main.rand.NextFloat(7.5f)).RotatedBy(Projectile.rotation + Main.rand.NextFloat(-0.3f, 0.3f));
+				s.Rotation = s.Velocity.ToRotation();
+				s.Scale = new Vector2(5f, 0.7f);
+				s.DrawVerticalAxis = false;
+				s.FadeInEnd = Main.rand.Next(3, 10);
+				s.FadeOutStart = s.FadeInEnd;
+				s.FadeOutEnd = Main.rand.Next(20, 40);
+				s.AdditiveAmount = 1f;
+				s.ColorTint = new Color(1f, 0f, 0.2f);
+				Main.ParticleSystem_World_OverPlayers.Add(s);
+			}
+
+			if (Projectile.timeLeft == 1)
 			{
 				if(Main.myPlayer == Projectile.owner)
 				{

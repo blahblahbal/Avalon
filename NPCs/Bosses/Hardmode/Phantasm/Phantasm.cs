@@ -1,28 +1,27 @@
-using System;
+using Avalon.Buffs.Debuffs;
+using Avalon.Common;
+using Avalon.Dusts;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
+using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
+using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
+using Avalon.Particles;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System.IO;
 using Terraria;
+using Terraria.Audio;
+using Terraria.Chat;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using System.Linq;
-using Terraria.Audio;
-using Terraria.Chat;
-using Terraria.GameContent.ItemDropRules;
-using Microsoft.Xna.Framework.Graphics;
-using Avalon.Common.Players;
-using Avalon.Common;
-using ReLogic.Content;
-using Terraria.GameContent;
-using System.IO;
-using Avalon.Dusts;
-using Avalon.Particles;
 using static Avalon.Particles.ParticleSystem;
-using Terraria.DataStructures;
-using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
-using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
 namespace Avalon.NPCs.Bosses.Hardmode.Phantasm;
 
@@ -224,6 +223,10 @@ public partial class Phantasm : ModNPC
 					break;
 		}
 	}
+	public static void ApplyShadowCurse(Player p)
+	{
+		p.AddBuff(ModContent.BuffType<ShadowCurse>(), 60 * 15);
+	}
 	private void Transition()
 	{
 		NPC.direction = Main.rand.NextBool() ? 1 : -1;
@@ -240,43 +243,83 @@ public partial class Phantasm : ModNPC
 			{
 				sound.Stop();
 			}
+
+			for (int i = 0; i < 20; i++)
+			{
+				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+				s.LocalPosition = NPC.Center;
+				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
+				s.Rotation = s.Velocity.ToRotation();
+				s.Scale = new Vector2(6f, 2f);
+				s.DrawVerticalAxis = false;
+				s.FadeInEnd = Main.rand.Next(3, 10);
+				s.FadeOutStart = s.FadeInEnd;
+				s.FadeOutEnd = Main.rand.Next(20, 40);
+				s.AdditiveAmount = 1f;
+				s.ColorTint = new Color(1f, 0f, 0.2f);
+				Main.ParticleSystem_World_OverPlayers.Add(s);
+			}
+			for (int i = 0; i < 20; i++)
+			{
+				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+				s.LocalPosition = NPC.Center;
+				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
+				s.Rotation = s.Velocity.ToRotation();
+				s.Scale = new Vector2(3f, 1f);
+				s.DrawVerticalAxis = false;
+				s.FadeInEnd = Main.rand.Next(3, 5);
+				s.FadeOutStart = s.FadeInEnd;
+				s.FadeOutEnd = Main.rand.Next(10, 30);
+				s.AdditiveAmount = 1f;
+				s.ColorTint = new Color(Main.rand.NextFloat(0.2f, 0.7f), 0.9f, 1f);
+				Main.ParticleSystem_World_OverPlayers.Add(s);
+			}
 			for (int i = 0; i < 40; i++)
 			{
-				int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
-				Main.dust[num890].velocity *= 5f;
+				int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default, 1f);
+				Main.dust[num890].velocity *= Main.rand.NextFloat(10f);
 				Main.dust[num890].scale = 1.5f;
 				Main.dust[num890].noGravity = true;
 				Main.dust[num890].fadeIn = 2f;
 			}
-			for (int i = 0; i < 20; i++)
-			{
-				int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
-				Main.dust[num893].velocity *= 2f;
-				Main.dust[num893].scale = 1.5f;
-				Main.dust[num893].noGravity = true;
-				Main.dust[num893].fadeIn = 3f;
-			}
-			for (int i = 0; i < 40; i++)
-			{
-				int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
-				Main.dust[num892].velocity *= 5f;
-				Main.dust[num892].scale = 1.5f;
-				Main.dust[num892].noGravity = true;
-				Main.dust[num892].fadeIn = 2f;
-			}
-			for (int i = 0; i < 40; i++)
-			{
-				int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default, 1f);
-				Main.dust[num891].velocity *= 10f;
-				Main.dust[num891].scale = 1.5f;
-				Main.dust[num891].noGravity = true;
-				Main.dust[num891].fadeIn = 1.5f;
-			}
 
-			for (int i = 0; i < 25; i++)
-			{
-				Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12,12), ModContent.ProjectileType<Phantom>(), 5, 1, -1, target.whoAmI);
-			}
+			//for (int i = 0; i < 40; i++)
+			//{
+			//	int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+			//	Main.dust[num890].velocity *= 5f;
+			//	Main.dust[num890].scale = 1.5f;
+			//	Main.dust[num890].noGravity = true;
+			//	Main.dust[num890].fadeIn = 2f;
+			//}
+			//for (int i = 0; i < 20; i++)
+			//{
+			//	int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+			//	Main.dust[num893].velocity *= 2f;
+			//	Main.dust[num893].scale = 1.5f;
+			//	Main.dust[num893].noGravity = true;
+			//	Main.dust[num893].fadeIn = 3f;
+			//}
+			//for (int i = 0; i < 40; i++)
+			//{
+			//	int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
+			//	Main.dust[num892].velocity *= 5f;
+			//	Main.dust[num892].scale = 1.5f;
+			//	Main.dust[num892].noGravity = true;
+			//	Main.dust[num892].fadeIn = 2f;
+			//}
+			//for (int i = 0; i < 40; i++)
+			//{
+			//	int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default, 1f);
+			//	Main.dust[num891].velocity *= 10f;
+			//	Main.dust[num891].scale = 1.5f;
+			//	Main.dust[num891].noGravity = true;
+			//	Main.dust[num891].fadeIn = 1.5f;
+			//}
+
+			//for (int i = 0; i < 25; i++)
+			//{
+			//	Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12,12), ModContent.ProjectileType<Phantom>(), 5, 1, -1, target.whoAmI);
+			//}
 		}
 	}
 	public override void ModifyNPCLoot(NPCLoot npcLoot)
