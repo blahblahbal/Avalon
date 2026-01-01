@@ -214,8 +214,7 @@ public class ExxoAvalonOrigins : Mod
 		if (Main.netMode == NetmodeID.Server) return;
 		if (!Main.dedServ)
 		{
-			var title = Lang.GetRandomGameTitle();
-			Platform.Get<IWindowService>().SetUnicodeTitle(Main.instance.Window, title);
+			Main.QueueMainThreadAction(delegate { Platform.Get<IWindowService>().SetUnicodeTitle(Main.instance.Window, Lang.GetRandomGameTitle()); });
 		}
 	}
 
