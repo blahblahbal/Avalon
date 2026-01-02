@@ -38,7 +38,7 @@ public class LibraryAltar : ModTile
 	public override bool RightClick(int i, int j)
 	{
 		int index = Main.LocalPlayer.FindItem(ModContent.ItemType<EctoplasmicBeacon>());
-		if (index > -1)
+		if (index > -1 && !NPC.AnyNPCs(ModContent.NPCType<Phantasm>()))
 		{
 			Main.LocalPlayer.inventory[index].stack--;
 			if (Main.LocalPlayer.inventory[index].stack <= 0)
@@ -46,8 +46,6 @@ public class LibraryAltar : ModTile
 				Main.LocalPlayer.inventory[index].SetDefaults();
 			}
 			Vector2 vector = new Point(i, j).ToWorldCoordinates();
-
-			Main.NewText(Main.tile[i, j].TileFrameY);
 
 			if (Main.tile[i, j].TileFrameY == 36)
 			{

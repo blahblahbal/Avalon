@@ -126,10 +126,8 @@ public partial class Phantasm : ModNPC
 			}
 		}
 
-		//Main.NewText(phase);
-
 		Vector2 vector = NPC.Center;
-		NPC.scale = 0.7f + (0.9f * (NPC.life / (float)NPC.lifeMax));
+		NPC.scale = Utils.Remap(NPC.life, 0, NPC.lifeMax, Main.expertMode? 0.7f : 1f, 1.6f);
 		NPC.Size = new Vector2(66 * NPC.scale);
 		NPC.Center = vector;
 
@@ -145,23 +143,6 @@ public partial class Phantasm : ModNPC
 				}
 				return;
 			}
-		}
-
-		if (NPC.life <= NPC.lifeMax * 0.8f && phase < 3)
-		{
-			phase = 3;
-			NPC.ai[0] = -60;
-			NPC.ai[1] = 0;
-			NPC.ai[2] = 0;
-			NPC.netUpdate = true;
-		}
-		else if (NPC.life <= NPC.lifeMax * 0.5f && phase < 8 && phase != 3)
-		{
-			phase = 8;
-			NPC.ai[0] = -60;
-			NPC.ai[1] = 0;
-			NPC.ai[2] = 0;
-			NPC.netUpdate = true;
 		}
 		switch (phase)
 		{
@@ -219,8 +200,11 @@ public partial class Phantasm : ModNPC
 				Phase11_SawHandsScary2();
 				break;
 			case 12:
-				Phase12_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELLISeriouslyCannotBelieveThatTheyWouldDoThatLikeReallyWhatTheHellGuysLikeComeOnWTFDudesAndDudettesAndNoneOfTheAbovesTheRenameBoxIsSoLongThatItGoesOffTheScreenWhenYouTryToRenameThisMethodWhichIsKindaFunnyIThinkInMyOpinionIDKThoughItsJustMySenseofHumorNotYoursYouAreAllowedToDisagreeAllYouWantIWontReallyCareAllThatMuchButIMIghtMentallySendNeedlesToYourMindOrSomethingLikeThatIfYouTellMeYouDisagree();
+				Phase12_Hands3();
 					break;
+			case 13:
+				Phase13_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELLISeriouslyCannotBelieveThatTheyWouldDoThatLikeReallyWhatTheHellGuysLikeComeOnWTFDudesAndDudettesAndNoneOfTheAbovesTheRenameBoxIsSoLongThatItGoesOffTheScreenWhenYouTryToRenameThisMethodWhichIsKindaFunnyIThinkInMyOpinionIDKThoughItsJustMySenseofHumorNotYoursYouAreAllowedToDisagreeAllYouWantIWontReallyCareAllThatMuchButIMIghtMentallySendNeedlesToYourMindOrSomethingLikeThatIfYouTellMeYouDisagree();
+				break;
 		}
 	}
 	public static void ApplyShadowCurse(Player p)
@@ -229,6 +213,21 @@ public partial class Phantasm : ModNPC
 	}
 	private void Transition()
 	{
+		NPC.netUpdate = true;
+		if (NPC.life <= NPC.lifeMax * 0.65f && phase < 4)
+		{
+			phase = 3;
+			NPC.ai[0] = -60;
+			NPC.ai[1] = 0;
+			NPC.ai[2] = 0;
+		}
+		else if (NPC.life <= NPC.lifeMax * 0.45f && phase < 9)
+		{
+			phase = 8;
+			NPC.ai[0] = -60;
+			NPC.ai[1] = 0;
+			NPC.ai[2] = 0;
+		}
 		NPC.direction = Main.rand.NextBool() ? 1 : -1;
 		return;
 		CombatText.NewText(NPC.Hitbox, new Color(1f,1f,1f,0f), "Phantasm!", true);
@@ -351,22 +350,16 @@ public partial class Phantasm : ModNPC
 	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
 		Asset<Texture2D> texture = TextureAssets.Npc[Type];
-		int frameHeight = texture.Value.Height / Main.npcFrameCount[NPC.type];
-		Rectangle sourceRectangle = new Rectangle(0, NPC.frame.Y, texture.Value.Width, frameHeight);
-		Vector2 frameOrigin = sourceRectangle.Size() / 2f;
-		Vector2 offset = new Vector2(NPC.width / 2 - frameOrigin.X, NPC.height - sourceRectangle.Height);
-
-		Vector2 drawPos = NPC.position - screenPos + frameOrigin + offset;
-
+		Vector2 origin = new Vector2(33, 64);
 		for (int i = 0; i < NPC.oldPos.Length; i++)
 		{
-			Vector2 drawPosOld = NPC.oldPos[i] - screenPos + frameOrigin + offset;
-			Main.EntitySpriteDraw(texture.Value, drawPosOld, sourceRectangle, new Color(255, 125, 255, 225) * (1 - (i * 0.25f)) * 0.2f * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale, SpriteEffects.None, 0);
+			Vector2 drawPosOld = NPC.oldPos[i] - screenPos + NPC.Size / 2;
+			Main.EntitySpriteDraw(texture.Value, drawPosOld, NPC.frame, new Color(255, 125, 255, 225) * (1 - (i * 0.25f)) * 0.2f * NPC.Opacity, NPC.rotation, origin, NPC.scale, SpriteEffects.None, 0);
 		}
 		Color color = (!NPC.dontTakeDamage?  Color.White : new Color(Color.Purple.R,Color.Purple.G,Color.Purple.B,Main.masterColor));
-		Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * 0.3f * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale * 1.1f, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * 0.15f * NPC.Opacity, NPC.rotation, frameOrigin, NPC.scale * 1.2f, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(texture.Value, drawPos, sourceRectangle, color * NPC.Opacity, NPC.rotation, frameOrigin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, NPC.Center - screenPos, NPC.frame, color * 0.3f * NPC.Opacity, NPC.rotation, origin, NPC.scale * 1.1f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, NPC.Center - screenPos, NPC.frame, color * 0.15f * NPC.Opacity, NPC.rotation, origin, NPC.scale * 1.2f, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, NPC.Center - screenPos, NPC.frame, color * NPC.Opacity, NPC.rotation, origin, new Vector2(NPC.scale, NPC.scale), SpriteEffects.None, 0);
 		return false;
 	}
 }

@@ -127,4 +127,26 @@ public class PhantomDagger : SoulDagger
 			Projectile.rotation = Projectile.ai[2] * rotationMultipler;
 		}
 	}
+	public override bool OnTileCollide(Vector2 oldVelocity)
+	{
+		if (Projectile.velocity != Vector2.Zero)
+		{
+			//Projectile.position += Projectile.velocity * 2;
+			SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, Projectile.position);
+			for (int i = 0; i < 15; i++)
+			{
+				Dust d2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<PhantoplasmDust>());
+				d2.noGravity = true;
+				d2.velocity *= 3;
+			}
+		}
+		Projectile.velocity = Vector2.Zero;
+
+		if (Projectile.timeLeft > 200)
+		{
+			Projectile.timeLeft = 200;
+		}
+
+		return false;
+	}
 }

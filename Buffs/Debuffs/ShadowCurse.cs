@@ -1,6 +1,7 @@
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics.Renderers;
@@ -12,9 +13,12 @@ namespace Avalon.Buffs.Debuffs;
 
 public class ShadowCurse : ModBuff
 {
+	private static Asset<Texture2D> Tex;
+	public override string Texture => $"Terraria/Images/Buff_1";
     public override void SetStaticDefaults()
     {
-        Main.debuff[Type] = true;
+		Tex = ModContent.Request<Texture2D>((GetType().Namespace + "." + Name).Replace('.', '/'));
+		Main.debuff[Type] = true;
         BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
     }
 	public override void Update(Player player, ref int buffIndex)
@@ -70,8 +74,8 @@ public class ShadowCurse : ModBuff
 	public override bool PreDraw(SpriteBatch spriteBatch, int buffIndex, ref BuffDrawParams drawParams)
 	{
 		ShadowCursePlayer p = Main.LocalPlayer.GetModPlayer<ShadowCursePlayer>();
+		drawParams.Texture = Tex.Value;
 		drawParams.SourceRectangle = new Rectangle(0,34 * p.Tier,32,32);
-		drawParams.TextPosition.Y -= 134;
 		return base.PreDraw(spriteBatch, buffIndex, ref drawParams);
 	}
 	public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
