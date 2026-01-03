@@ -1,7 +1,5 @@
 using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
-using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
-using Avalon.Projectiles.Hostile.Mechasting;
-using Avalon.Projectiles.Hostile.WallOfSteel;
+using Avalon.NPCs.Bosses.Hardmode.WallOfSteel.Projectiles;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -33,9 +31,6 @@ public static class ProjectileSets
         ProjectileID.HallowBossLastingRainbow,
         ProjectileID.HallowBossRainbowStreak,
 		ProjectileID.EyeFire,
-        ModContent.ProjectileType<ElectricBolt>(),
-        ModContent.ProjectileType<StingerLaser>(),
-        ModContent.ProjectileType<Mechastinger>(),
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrap>(),
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(),
         ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrap>(),

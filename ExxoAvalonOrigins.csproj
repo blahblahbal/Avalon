@@ -15,6 +15,11 @@
 		<Compile Remove="DrawMagics\**" />
 		<EmbeddedResource Remove="DrawMagics\**" />
 		<Folder Include="Items\Weapons\Magic\Superhardmode\MagmafrostBolt\" />
+		<Folder Include="NPCs\Bosses\Hardmode\Mechasting\Gores\" />
+		<Folder Include="NPCs\Bosses\Hardmode\WallOfSteel\Gores\" />
+		<Folder Include="NPCs\Bosses\PreHardmode\BacteriumPrime\Gores\" />
+		<Folder Include="NPCs\Bosses\PreHardmode\DesertBeak\Gores\" />
+		<Folder Include="NPCs\Bosses\PreHardmode\KingSting\Gores\" />
 		<Folder Include="NPCs\PreHardmode\Bactus\Gores\" />
 		<Folder Include="NPCs\PreHardmode\BloodshotEye\Gores\" />
 		<Folder Include="NPCs\PreHardmode\BoneFish\Gores\" />
@@ -24,7 +29,12 @@
 		<Folder Include="NPCs\PreHardmode\Rafflesia\Gores\" />
 		<Folder Include="NPCs\PreHardmode\RedArowana\Gores\" />
 		<Folder Include="NPCs\PreHardmode\Shadlopod\Gores\" />
+		<Folder Include="Projectiles\Hostile\BacteriumPrime\" />
+		<Folder Include="Projectiles\Hostile\DesertBeak\" />
+		<Folder Include="Projectiles\Hostile\KingSting\" />
+		<Folder Include="Projectiles\Hostile\Mechasting\" />
 		<Folder Include="Projectiles\Hostile\Phantasm\" />
+		<Folder Include="Projectiles\Hostile\WallOfSteel\" />
 		<None Remove="DrawMagics\**" />
 		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />
 		<AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\**" />

@@ -25,7 +25,7 @@ using Avalon.Items.Weapons.Melee.PreHardmode.SanguineKatana;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Longbow;
 using Avalon.ModSupport;
 using Avalon.ModSupport.Tokens;
-using Avalon.NPCs.Bosses.Hardmode;
+using Avalon.NPCs.Bosses.Hardmode.Mechasting;
 using Avalon.NPCs.Hardmode.BaskingSpewer;
 using Avalon.NPCs.Hardmode.ContaminatedGhoul;
 using Avalon.NPCs.Hardmode.Cougher;

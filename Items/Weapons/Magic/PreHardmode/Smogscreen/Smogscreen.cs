@@ -2,6 +2,7 @@ using Avalon;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -94,7 +95,7 @@ public class Smog : ModProjectile
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		ClassExtensions.DrawGas(Texture, lightColor, Projectile, 4, 6);
+		ClassExtensions.DrawGas(TextureAssets.Projectile[Type].Value, lightColor, Projectile, 4, 6);
 		return false;
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)

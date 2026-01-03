@@ -1,3 +1,4 @@
+using Avalon.NPCs.Bosses.PreHardmode.KingSting;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -27,7 +28,7 @@ public class WaspLarva : ModTile
 
     public override void KillMultiTile(int i, int j, int frameX, int frameY)
     {
-        NPC.SpawnOnPlayer(Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16), ModContent.NPCType<NPCs.Bosses.PreHardmode.KingSting>());
+        NPC.SpawnOnPlayer(Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16), ModContent.NPCType<KingSting>());
     }
 
     public override void AnimateTile(ref int frame, ref int frameCounter)

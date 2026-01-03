@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -107,7 +108,7 @@ public class PurpleHazeProj : ModProjectile
 
 	public override bool PreDraw(ref Color lightColor)
 	{
-		ClassExtensions.DrawGas(Texture, lightColor * 0.8f, Projectile, 4, 6);
+		ClassExtensions.DrawGas(TextureAssets.Projectile[Type].Value, lightColor * 0.8f, Projectile, 4, 6);
 		return false;
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)

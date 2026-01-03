@@ -2,7 +2,7 @@ using Avalon;
 using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
-using Avalon.Projectiles.Hostile.DesertBeak;
+using Avalon.NPCs.Bosses.PreHardmode.DesertBeak.Projectiles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;

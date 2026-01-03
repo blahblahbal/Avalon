@@ -1,6 +1,7 @@
 using Avalon.Buffs.Debuffs;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -87,7 +88,7 @@ public class PathogenDartTrail : ModProjectile
 
 	public override bool PreDraw(ref Color lightColor)
 	{
-		ClassExtensions.DrawGas(Texture, lightColor * 0.8f, Projectile, 3, 8);
+		ClassExtensions.DrawGas(TextureAssets.Projectile[Type].Value, lightColor * 0.8f, Projectile, 3, 8);
 		return false;
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)

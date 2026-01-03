@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.NPCs.Bosses.Hardmode.Mechasting;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -25,14 +26,14 @@ public class MechanicalWasp : ModItem
 
 	public override bool CanUseItem(Player player)
 	{
-		if (NPC.AnyNPCs(ModContent.NPCType<NPCs.Bosses.Hardmode.Mechasting>()) || Main.dayTime) return false;
+		if (NPC.AnyNPCs(ModContent.NPCType<Mechasting>()) || Main.dayTime) return false;
 		return true;
 	}
 
 	public override bool? UseItem(Player player)
 	{
 		SoundEngine.PlaySound(SoundID.Roar, player.position);
-		NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<NPCs.Bosses.Hardmode.Mechasting>());
+		NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<Mechasting>());
 		return true;
 	}
 

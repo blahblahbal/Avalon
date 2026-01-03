@@ -1,4 +1,4 @@
-using Avalon.NPCs.Bosses.PreHardmode;
+using Avalon.NPCs.Bosses.PreHardmode.DesertBeak;
 using Terraria.ModLoader;
 
 namespace Avalon.Achievements;

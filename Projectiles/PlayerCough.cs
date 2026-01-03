@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -24,7 +25,7 @@ namespace Avalon.Projectiles
 		}
 		public override bool PreDraw(ref Color lightColor)
 		{
-			ClassExtensions.DrawGas(Texture, lightColor * 0.8f, Projectile, 4, 6);
+			ClassExtensions.DrawGas(TextureAssets.Projectile[Type].Value, lightColor * 0.8f, Projectile, 4, 6);
 			return false;
 		}
 		public override void AI()

@@ -1,5 +1,5 @@
 using Avalon.Common.Extensions;
-using Avalon.NPCs.Bosses.PreHardmode;
+using Avalon.NPCs.Bosses.PreHardmode.DesertBeak;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -33,7 +33,7 @@ public class DesertHorn : ModItem
 	}
 	public override bool CanUseItem(Player player)
 	{
-		return !NPC.AnyNPCs(ModContent.NPCType<NPCs.Bosses.PreHardmode.DesertBeak>()) && player.ZoneDesert && Main.dayTime;
+		return !NPC.AnyNPCs(ModContent.NPCType<DesertBeak>()) && player.ZoneDesert && Main.dayTime;
 	}
 	public override void UseAnimation(Player player)
 	{

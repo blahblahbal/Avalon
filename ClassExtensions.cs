@@ -825,17 +825,15 @@ public static class ClassExtensions
 		return closest;
 	}
 
-	public static void DrawGas(string Texture, Color color, Projectile projectile, float spread, int iterations)
+	public static void DrawGas(Texture2D texture, Color color, Projectile projectile, float spread, int iterations)
 	{
-		Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-		int frameHeight = texture.Height / Main.projFrames[projectile.type];
-		Rectangle frame = new Rectangle(0, frameHeight * projectile.frame, texture.Width, frameHeight);
+		Rectangle frame = texture.Frame(1, Main.projFrames[projectile.type],0,projectile.frame);
 		Vector2 drawPos = projectile.Center - Main.screenPosition;
-		Main.EntitySpriteDraw(texture, drawPos, frame, color * projectile.Opacity, projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture, drawPos, frame, color * projectile.Opacity, projectile.rotation, frame.Size() / 2, projectile.scale, SpriteEffects.None, 0);
 
 		for (int i = 0; i < iterations; i++)
 		{
-			Main.EntitySpriteDraw(texture, drawPos + new Vector2(0, projectile.width / spread * ((float)projectile.alpha) / 128).RotatedBy(i * (MathHelper.TwoPi) / iterations), frame, color * projectile.Opacity * 0.4f, projectile.rotation + ((float)projectile.alpha / 128) * (i / 128), new Vector2(texture.Width, frameHeight) / 2, projectile.scale, SpriteEffects.FlipVertically, 0);
+			Main.EntitySpriteDraw(texture, drawPos + new Vector2(0, projectile.width / spread * ((float)projectile.alpha) / 128).RotatedBy(i * (MathHelper.TwoPi) / iterations), frame, color * projectile.Opacity * 0.4f, projectile.rotation + ((float)projectile.alpha / 128) * (i / 128), frame.Size() / 2, projectile.scale, SpriteEffects.FlipVertically, 0);
 		}
 	}
 	public static void Load<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TagCompound tag)

@@ -10,6 +10,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Placeable.Seed;
 using Avalon.Items.Placeable.Tile;
 using Avalon.ModSupport;
+using Avalon.NPCs.Bosses.Hardmode.WallOfSteel;
 using Avalon.NPCs.Hardmode.ContaminatedGhoul;
 using Avalon.NPCs.Hardmode.Cougher;
 using Avalon.NPCs.Hardmode.EctoHand;
@@ -162,7 +163,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 	IL_162:
 		num3 = num5 * 16;
-		int num7 = NPC.NewNPC(NPC.GetBossSpawnSource(Player.FindClosest(pos, 32, 32)), num2, num3, ModContent.NPCType<NPCs.Bosses.Hardmode.WallofSteel>(), 0);
+		int num7 = NPC.NewNPC(NPC.GetBossSpawnSource(Player.FindClosest(pos, 32, 32)), num2, num3, ModContent.NPCType<WallofSteel>(), 0);
 		if (Main.netMode == NetmodeID.Server && num7 < 200)
 		{
 			NetMessage.SendData(MessageID.SyncNPC, -1, -1, NetworkText.Empty, num7);

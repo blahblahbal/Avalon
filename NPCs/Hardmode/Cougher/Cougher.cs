@@ -9,6 +9,7 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -413,7 +414,7 @@ public class Cough : ModProjectile
 
 	public override bool PreDraw(ref Color lightColor)
 	{
-		ClassExtensions.DrawGas(Texture, lightColor, Projectile, -3, 8);
+		ClassExtensions.DrawGas(TextureAssets.Projectile[Type].Value, lightColor, Projectile, -3, 8);
 		return false;
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)

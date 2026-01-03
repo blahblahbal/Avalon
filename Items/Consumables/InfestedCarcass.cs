@@ -3,9 +3,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
-using Avalon.NPCs.Bosses.PreHardmode;
 using Avalon.Common.Players;
 using Avalon.Items.Material;
+using Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime;
 
 namespace Avalon.Items.Consumables;
 
